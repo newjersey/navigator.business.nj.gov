@@ -1,19 +1,23 @@
 
 # Business.NJ.gov
 
-[Business.NJ.gov](https://business.nj.gov) is being developed by the Office of Innovation, Department of State's Business Action Center and the Economic Development Authority with support from Departments and Agencies across the State. 
+[Business.NJ.gov](https://business.nj.gov) is being developed by the Office of Innovation, Department of State's Business Action Center and the Economic Development Authority with support from Departments and Agencies across the State.
 
 This site and the Governor's Business First Stop initiative are intended to simplify and streamline access to the information, resources, and services that aspiring entrepreneurs and business owners need to start, operate, and grow their business in the Garden State.
 
-We are launching Business.NJ.gov in beta and using real-time user input to iteratively improve the site and services. The site is also being developed with the support and input of business communities throughout the State. 
+We are launching Business.NJ.gov in beta and using real-time user input to iteratively improve the site and services. The site is also being developed with the support and input of business communities throughout the State.
 
 ### Built as Open Source
 
 Business.NJ.gov is an open source project that is meant to serve as a base for anyone who is looking to create an online resource for their own business community. You can find full license details at [Business.NJ.gov/license](https://business.nj.gov/license).
 
+### Launch a Copy of this Website
+
+We manage this website through Webflow. To launch your own copy of the site, visit the Webflow showcase and click "Open in Webflow": https://webflow.com/website/State-of-NJ-Business-One-Stop
+
 ### Repositories and Code
 
-The Business.NJ.gov website source code can be found at the [NewJersey/Business-Website Github Repository](https://github.com/newjersey/business-website).
+A static export of the Business.NJ.gov website source code can be found at the [NewJersey/open-business-portal Github Repository](https://github.com/newjersey/open-business-portal).
 
 ### Thank You
 
