@@ -1,0 +1,2 @@
+/dashboard			    200!	Role=admin
+/dashboard	/      	401!
