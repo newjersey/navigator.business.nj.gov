@@ -6,7 +6,13 @@
   <title>Log in | Business.NJ.gov</title>
   <script src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
+    netlifyIdentity.on('init', function(user) {
+      console.log('init');
+      if (!user) window.location = '/';
+    });
+
     netlifyIdentity.on('logout', function() {
+      console.log('logout');
       window.location = '/';
     });
   </script>
