@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/dashboard"
+  status = 200!
+  conditions = {Role = ["admin"]}
+[[redirects]]
+  from = "/dashboard"
+  to = "/"
+  status = 401!
+  conditions = {Role = ["admin"]}
+  
