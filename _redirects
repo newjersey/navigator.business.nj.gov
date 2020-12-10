@@ -1,2 +1,2 @@
-/dashboard			    200!	Role=admin
-/dashboard	/      	401!
+/dashboard/*			    200!	Role=admin
+/dashboard/*	/      	401!
