@@ -50,12 +50,15 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <script>
   document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('init', function(user) {
-    //if (!user) window.location.href = '/login/';
+    if (!user) {
+      window.location.href = '/login/';
+      return false;
+    }
     var classes = document.getElementById('main-container').className;
     document.getElementById('main-container').className = classes.replace('w-hidden-main','');
   }));
   document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('logout', function() {
-    //window.location.href = '/login/';
+    window.location.href = '/login/';
   }));
   </script>
   <script src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script>
