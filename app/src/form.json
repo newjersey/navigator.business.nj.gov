@@ -72,26 +72,36 @@
       }
     },
     "businessStructure": {
-      "type": "string",
+      "type": "object",
       "title": "What type of legal structure do you want to create for your business?",
       "description": "If you have not yet researched and determined the proper legal structure for your company, it is recommended that you consult a trusted advisor such as a lawyer or your local Small Business Development Center [link], before committing to a legal structure. You can click ‘unsure’ for now.",
-      "enum": ["LLC", "LP", "S-Corp"]
+      "properties": {
+        "businessStructure": {
+          "type": "string",
+          "enum": ["LLC", "LP", "S-Corp"]
+        }
+      }
     },
-    "locations": {
-      "type": "array",
+    "locationsa": {
+      "type": "object",
       "title": "Locations",
       "description": "Please indicate the desired Zip Code of each location, and whether or not you are interested in obtaining a liquor license. If you do not know the Zip Code yet. Type N/A.",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "number",
-            "title": "ZIP Code"
-          },
-          "license": {
-            "type": "boolean",
-            "title": "Are you intersted in getting a liquor license for this location?"
+      "properties": {
+        "locationsb": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "number",
+                "title": "ZIP Code"
+              },
+              "license": {
+                "type": "boolean",
+                "title": "Are you intersted in getting a liquor license for this location?"
+              }
+            }
           }
         }
       }

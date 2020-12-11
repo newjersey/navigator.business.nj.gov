@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-jsonschema-form-pagination": "^0.4.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
