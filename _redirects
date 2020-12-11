@@ -1,2 +1,2 @@
-/dashboard/*			          200!	Role=admin
+/dashboard/*			          200!	Role=admin,user
 /dashboard/*	/login      	302!
