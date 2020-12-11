@@ -67,7 +67,6 @@
     window.location = '/login/';
   }));;
   document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('init', function(user) {
-    console.log('test', user)
     if (!user) window.location = '/login/';
   }));;
   </script>
