@@ -60,7 +60,6 @@
       d.getElementsByTagName("head")[0].appendChild(s);
     })();
   </script>
-  <script defer src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('login', function() {
     window.location = '/dashboard/';
@@ -69,6 +68,7 @@
     if (user) window.location = '/dashboard/';
   }));;
   </script>
+  <script src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script>
 
 </head>
 

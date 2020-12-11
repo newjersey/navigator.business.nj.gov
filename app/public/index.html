@@ -46,30 +46,19 @@
     ga('send', 'pageview');
   </script>
   <script src="https://www.google.com/recaptcha/api.js" type="text/javascript"></script><!-- Start of A11yBar widget script -->
-  <script id="a11ybar" src="https://app.a11ybar.com/a11ybar.min.js?id=cbace87b-75f0-4cca-ba0e-730e6a92ca99" defer></script>
-  <!-- End of A11yBar widget script -->
-  <script src="//d.bablic.com/snippet/5e1e01c439539900018a1f28.js?version=3.9"></script>
 
-  <script id="jetboost-script" type="text/javascript">
-    window.JETBOOST_SITE_ID = "ck9yd4zg1128m0764uef50u4q";
-    (function() {
-      d = document;
-      s = d.createElement("script");
-      s.src = "https://jetboost.netlify.com/jetboost.js";
-      s.async = 1;
-      d.getElementsByTagName("head")[0].appendChild(s);
-    })();
-  </script>
-  <script defer src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <script>
-  document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('logout', function() {
-    window.location = '/login/';
-  }));;
   document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('init', function(user) {
-    if (!user) window.location = '/login/';
-  }));;
+    if (!user) window.location.href = '/login/';
+    var classes = document.getElementById('main-container').className;
+    document.getElementById('main-container').className = classes.replace('w-hidden-main','');
+  }));
+  document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('logout', function() {
+    window.location.href = '/login/';
+  }));
   </script>
+  <script src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script>
 
 </head>
 
@@ -210,7 +199,7 @@
   </div>
 
   <div class="section" style="padding: 150px 0">
-    <div class="container w-container">
+    <div id="main-container" class="container w-container w-hidden-main">
       <div data-netlify-identity-button></div>
       <h1>Dashboard</h1>
       <noscript>You need to enable JavaScript to run this app.</noscript>
