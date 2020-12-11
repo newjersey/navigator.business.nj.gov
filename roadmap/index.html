@@ -46,28 +46,27 @@
     ga('send', 'pageview');
   </script>
   <script src="https://www.google.com/recaptcha/api.js" type="text/javascript"></script><!-- Start of A11yBar widget script -->
+  <script id="a11ybar" src="https://app.a11ybar.com/a11ybar.min.js?id=cbace87b-75f0-4cca-ba0e-730e6a92ca99" defer></script>
+  <!-- End of A11yBar widget script -->
+  <script src="//d.bablic.com/snippet/5e1e01c439539900018a1f28.js?version=3.9"></script>
 
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <script id="jetboost-script" type="text/javascript">
+    window.JETBOOST_SITE_ID = "ck9yd4zg1128m0764uef50u4q";
+    (function() {
+      d = document;
+      s = d.createElement("script");
+      s.src = "https://jetboost.netlify.com/jetboost.js";
+      s.async = 1;
+      d.getElementsByTagName("head")[0].appendChild(s);
+    })();
+  </script>
   <script>
   document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('init', function(user) {
-    //if (!user) window.location.href = '/login/';
-    var classes = document.getElementById('main-container').className;
-    document.getElementById('main-container').className = classes.replace('w-hidden-main','');
-  }));
-  document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('logout', function() {
-    //window.location.href = '/login/';
+    if (!user) window.location = '/login/';
   }));
   </script>
   <script src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script>
-  <style>
-  #root > .field-object > fieldset {
-    display: none;
-  }
-  #root > .field-object > fieldset.active {
-    display: block;
-  }
-  .margin-right-sm { margin-right: .5em; }
-  </style>
+
 </head>
 
 <body>
@@ -207,11 +206,26 @@
   </div>
 
   <div class="section" style="padding: 150px 0">
-    <div id="main-container" class="container w-container w-hidden-main">
-      <div class="button w-button" data-netlify-identity-button></div>
-      <h1>Dashboard</h1>
+    <div class="container w-container">
+      <div class="button w-button w-form" style="color: white!important" data-netlify-identity-button></div>
+      <h1 id="roadmap-title">{{businessname}}’s Business Roadmap</h1>
       <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="root"></div>
+      <p>To start a Restaurant in New Jersey, you’ll need to complete the basic steps below. </p>
+      <h2>Local: Permits & Licenses</h2>
+      <ul>
+        <li>Select a Location(s) (1-2 months) </li>
+        <li>Contact your Local Health Department to Complete Permitting Requirements (varies) </li>
+        <li>Obtain Construction Permits (1-2 weeks) </li>
+        <li>Complete Food Safety Training (1 week) </li>
+        <li id="license">Obtain a Liquor License (varies) </li>
+      </ul>
+      <h2>State: Formation & Registration</h2>
+      <ul>
+        <li>Register for an Employer Identification Number (EIN) (10 minutes)  </li>
+        <li>Complete Business Formation (40 minutes) </li>
+        <li>Develop an Alternate Name (tbd) </li>
+        <li>Register for Tax Purposes (tbd) </li>
+      </ul>
     </div>
   </div>
 
@@ -257,6 +271,18 @@
       </div>
     </div>
   </footer>
+  <script>
+  (function() {
+    var data = localStorage.getItem('formData');
+    data = (data !== 'undefined') ? JSON.parse(data) : {};
+    var $title = document.querySelector('#roadmap-title');
+    var text = $title.textContent.replace('{{businessname}}', data.businessName.businessName);
+    $title.textContent =  text;
+    if (localStorage.getItem('formData').indexOf('"license":true') < 0) {
+      document.querySelector('#license').remove();
+    }
+  })();
+  </script>
 </body>
 
 </html>

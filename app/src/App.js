@@ -29,6 +29,8 @@ class App extends React.Component {
       this.setState({
         page: this.state.page + 1
       });
+    } else {
+      window.location.href = '/roadmap/';
     }
   }
 
@@ -49,6 +51,8 @@ class App extends React.Component {
     data = (data !== 'undefined') ? JSON.parse(data) : {};
     user = (user !== 'undefined') ? JSON.parse(user) : {};
     if (user && user.email) {
+      console.log(data);
+      data = data || {};
       data.user = data.user || {};
       data.user.email = user.email;
     }
@@ -61,7 +65,7 @@ class App extends React.Component {
             onError={log("errors")}
       >
         {this.state.page > 0 &&
-          <a className="btn btn-default" onClick={this.onBack.bind(this)}>Back</a>
+          <a className="btn btn-default margin-right-sm" onClick={this.onBack.bind(this)}>Back</a>
         }
         <button type="submit" className="btn btn-primary">Next</button>
       </Form>

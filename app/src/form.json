@@ -1,5 +1,5 @@
 {
-  "title": "Register your business",
+  "title": " ",
   "type": "object",
   "required": [],
   "properties": {
@@ -39,6 +39,7 @@
     },
     "businessName": {
       "type": "object",
+      "title": "",
       "description": "What do you want the Customer-facing name of your company to be? If you don’t know yet. Type ‘unsure’.",
       "faqs": [{
         "title": "What is the difference between my customer facing name and my legal name?",
@@ -46,12 +47,14 @@
       }],
       "properties": {
         "businessName": {
+          "title": " ",
           "type": "string"
         }
       }
     },
     "businessDescription": {
       "type": "object",
+      "title": "",
       "description": "In 1-2 sentences, describe the purpose of your business. This should be a brief statement about what you are setting out to accomplish, sell or produce.",
       "faqs": [{
         "title": "How is this information used?",
@@ -59,6 +62,7 @@
       }],
       "properties": {
         "businessDescription": {
+          "title": " ",
           "type": "string"
         }
       }
@@ -69,18 +73,20 @@
       "description": "If you have not yet researched and determined the proper legal structure for your company, it is recommended that you consult a trusted advisor such as a lawyer or your local Small Business Development Center [link], before committing to a legal structure. You can click ‘unsure’ for now.",
       "properties": {
         "businessStructure": {
+          "title": " ",
           "type": "string",
           "enum": ["LLC", "LP", "S-Corp"]
         }
       }
     },
-    "locationsa": {
+    "locations": {
       "type": "object",
       "title": "Locations",
       "description": "Please indicate the desired Zip Code of each location, and whether or not you are interested in obtaining a liquor license. If you do not know the Zip Code yet. Type N/A.",
       "properties": {
-        "locationsb": {
+        "locations": {
           "type": "array",
+          "title": " ",
           "minItems": 1,
           "items": {
             "type": "object",
