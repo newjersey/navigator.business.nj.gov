@@ -92,7 +92,7 @@
             "type": "object",
             "properties": {
               "title": {
-                "type": "number",
+                "type": "string",
                 "title": "ZIP Code"
               },
               "license": {
