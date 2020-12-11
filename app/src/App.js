@@ -24,8 +24,6 @@ class App extends React.Component {
   }
 
   onSubmit(submit, e) {
-    console.log('submit', this.state.page+1 < sections.length)
-
     localStorage.setItem('formData', JSON.stringify(submit.formData));
     if (this.state.page+1 < sections.length) {
       this.setState({
@@ -35,7 +33,6 @@ class App extends React.Component {
   }
 
   onBack(submit, e) {
-    console.log('back', this.state.page+1 > 0)
     localStorage.setItem('formData', JSON.stringify(submit.formData));
     if (this.state.page+1 > 0) {
       this.setState({
@@ -48,7 +45,13 @@ class App extends React.Component {
 
   render() {
     let data = localStorage.getItem('formData');
+    let user = localStorage.getItem('gotrue.user')
     data = (data !== 'undefined') ? JSON.parse(data) : {};
+    user = (user !== 'undefined') ? JSON.parse(user) : {};
+    if (user && user.email) {
+      data.user = data.user || {};
+      data.user.email = user.email;
+    }
     return (
       <Form schema={schema}
             className={`page-${this.state.page}`}
