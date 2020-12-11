@@ -61,15 +61,6 @@
     })();
   </script>
   <script defer src="https://identity-js.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-  document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('login', function() {
-    window.location = '/dashboard/';
-  }));;
-  document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('init', function(user) {
-    if (user) window.location = '/dashboard/';
-  }));;
-  </script>
-
 </head>
 
 <body>

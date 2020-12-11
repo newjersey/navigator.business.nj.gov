@@ -66,6 +66,9 @@
   document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('logout', function() {
     window.location = '/login/';
   }));;
+  document.addEventListener('DOMContentLoaded', () => netlifyIdentity.on('init', function(user) {
+    if (!user) window.location = '/login/';
+  }));;
   </script>
 
 </head>
