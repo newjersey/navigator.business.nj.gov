@@ -1,10 +1,22 @@
-import { getAllPostIds, getPostData } from '../../lib/posts'
-import Head from 'next/head'
-import utilStyles from '../../styles/utils.module.css'
-import {Date} from "../../components/date";
-import {Layout} from "../../components/layout";
+import { getAllPostIds, getPostData } from "../../lib/posts";
+import Head from "next/head";
+import utilStyles from "../../styles/utils.module.css";
+import { Date } from "../../components/date";
+import { Layout } from "../../components/layout";
+import {
+  GetStaticPaths,
+  GetStaticPathsResult,
+  GetStaticProps,
+  GetStaticPropsResult,
+} from "next";
+import { IdParam, PostData } from "../../lib/types";
+import { ReactElement } from "react";
 
-const Post = ({ postData }) => {
+interface Props {
+  postData: PostData;
+}
+
+const Post = ({ postData }: Props): ReactElement => {
   return (
     <Layout>
       <Head>
@@ -18,24 +30,28 @@ const Post = ({ postData }) => {
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </Layout>
-  )
-}
+  );
+};
 
-export const getStaticPaths = async () => {
-  const paths = getAllPostIds()
+export const getStaticPaths: GetStaticPaths = async (): Promise<
+  GetStaticPathsResult<IdParam>
+> => {
+  const paths = getAllPostIds();
   return {
     paths,
-    fallback: false
-  }
-}
+    fallback: false,
+  };
+};
 
-export const getStaticProps = async ({ params }) => {
-  const postData = await getPostData(params.id)
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}): Promise<GetStaticPropsResult<Props>> => {
+  const postData = await getPostData(params.id as string);
   return {
     props: {
-      postData
-    }
-  }
-}
+      postData,
+    },
+  };
+};
 
 export default Post;

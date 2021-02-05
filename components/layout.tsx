@@ -1,19 +1,19 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
-import {ReactElement} from "react";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "./layout.module.css";
+import utilStyles from "../styles/utils.module.css";
+import Link from "next/link";
+import { ReactElement } from "react";
 
-const name = '[Your Name]'
-export const siteTitle = 'Next.js Sample Website'
+const name = "[Your Name]";
+export const siteTitle = "Next.js Sample Website";
 
 interface Props {
-  children: React.ReactNode
-  home?: boolean
+  children: React.ReactNode;
+  home?: boolean;
 }
 
-export const Layout = ({children, home}: Props): ReactElement => {
+export const Layout = ({ children, home }: Props): ReactElement => {
   return (
     <div className={styles.container}>
       <Head>
@@ -46,8 +46,8 @@ export const Layout = ({children, home}: Props): ReactElement => {
           </>
         ) : (
           <>
-            <Link href="/">
-              <a>
+            <Link href="/" passHref>
+              <a href="/">
                 <Image
                   priority
                   src="/images/profile.jpg"
@@ -59,8 +59,10 @@ export const Layout = ({children, home}: Props): ReactElement => {
               </a>
             </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
+              <Link href="/" passHref>
+                <a href="/" className={utilStyles.colorInherit}>
+                  {name}
+                </a>
               </Link>
             </h2>
           </>
@@ -69,11 +71,11 @@ export const Layout = ({children, home}: Props): ReactElement => {
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
+          <Link href="/" passHref>
+            <a href="/">← Back to home</a>
           </Link>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
