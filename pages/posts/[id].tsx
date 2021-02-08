@@ -1,8 +1,8 @@
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Head from "next/head";
-import utilStyles from "../../styles/utils.module.css";
+import utilStyles from "../../styles/utils.module.scss";
 import { Date } from "../../components/date";
-import { Layout } from "../../components/layout";
+import { Layout } from "../../components/Layout";
 import {
   GetStaticPaths,
   GetStaticPathsResult,
@@ -11,6 +11,7 @@ import {
 } from "next";
 import { IdParam, PostData } from "../../lib/types";
 import { ReactElement } from "react";
+import { PageSkeleton } from "../../components/PageSkeleton";
 
 interface Props {
   postData: PostData;
@@ -18,18 +19,20 @@ interface Props {
 
 const Post = ({ postData }: Props): ReactElement => {
   return (
-    <Layout>
-      <Head>
-        <title>{postData.title}</title>
-      </Head>
-      <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-        <div className={utilStyles.lightText}>
-          <Date dateString={postData.date} />
-        </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </article>
-    </Layout>
+    <PageSkeleton>
+      <Layout>
+        <Head>
+          <title>{postData.title}</title>
+        </Head>
+        <article>
+          <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+          <div className={utilStyles.lightText}>
+            <Date dateString={postData.date} />
+          </div>
+          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        </article>
+      </Layout>
+    </PageSkeleton>
   );
 };
 
