@@ -15,7 +15,6 @@ export const IdentifierDefault = (): ReactElement => {
                   className="usa-identifier__logo-img"
                   src="/img/nj-logo-gray-20.png"
                   alt="the State of New Jersey logo"
-                  role="img"
                 />
               </a>
             </div>

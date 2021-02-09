@@ -13,6 +13,7 @@
     "prettier": "prettier --write . --ignore-path=./.eslintignore"
   },
   "dependencies": {
+    "@rjsf/core": "^2.4.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
@@ -20,6 +21,7 @@
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
     "jest": "^26.6.3",
+    "netlify-identity-widget": "^1.9.1",
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
+    "@types/netlify-identity-widget": "^1.9.1",
     "@types/node": "^14.14.25",
     "@types/react": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^4.14.2",

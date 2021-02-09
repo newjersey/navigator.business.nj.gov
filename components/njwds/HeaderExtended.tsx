@@ -18,7 +18,7 @@ export const HeaderExtended = (): ReactElement => {
         <nav aria-label="Primary navigation" className="usa-nav">
           <div className="usa-nav__inner">
             <button className="usa-nav__close">
-              <img src="/img/close.svg" role="img" alt="close" />
+              <img src="/img/close.svg" alt="close" />
             </button>
             <ul className="usa-nav__primary usa-accordion">
               <li className="usa-nav__primary-item">
@@ -31,19 +31,19 @@ export const HeaderExtended = (): ReactElement => {
                 </button>
                 <ul id="extended-nav-section-one" className="usa-nav__submenu">
                   <li className="usa-nav__submenu-item">
-                    <a href="#" className="">
+                    <a href="/" className="">
                       {" "}
                       Navigation link
                     </a>
                   </li>
                   <li className="usa-nav__submenu-item">
-                    <a href="#" className="">
+                    <a href="/" className="">
                       {" "}
                       Navigation link
                     </a>
                   </li>
                   <li className="usa-nav__submenu-item">
-                    <a href="#" className="">
+                    <a href="/" className="">
                       {" "}
                       Navigation link
                     </a>
@@ -60,19 +60,19 @@ export const HeaderExtended = (): ReactElement => {
                 </button>
                 <ul id="extended-nav-section-two" className="usa-nav__submenu">
                   <li className="usa-nav__submenu-item">
-                    <a href="#" className="">
+                    <a href="/" className="">
                       {" "}
                       Navigation link
                     </a>
                   </li>
                   <li className="usa-nav__submenu-item">
-                    <a href="#" className="">
+                    <a href="/" className="">
                       {" "}
                       Navigation link
                     </a>
                   </li>
                   <li className="usa-nav__submenu-item">
-                    <a href="#" className="">
+                    <a href="/" className="">
                       {" "}
                       Navigation link
                     </a>
@@ -80,7 +80,7 @@ export const HeaderExtended = (): ReactElement => {
                 </ul>
               </li>
               <li className="usa-nav__primary-item">
-                <a className="usa-nav__link" href="javascript:void(0)">
+                <a className="usa-nav__link" href="/">
                   <span>Simple link</span>
                 </a>
               </li>
@@ -88,10 +88,10 @@ export const HeaderExtended = (): ReactElement => {
             <div className="usa-nav__secondary">
               <ul className="usa-nav__secondary-links">
                 <li className="usa-nav__secondary-item">
-                  <a href="">Secondary link</a>
+                  <a href="/">Secondary link</a>
                 </li>
                 <li className="usa-nav__secondary-item">
-                  <a href="">Another secondary link</a>
+                  <a href="/">Another secondary link</a>
                 </li>
               </ul>
               <form className="usa-search usa-search--small " role="search">

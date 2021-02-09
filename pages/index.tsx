@@ -1,20 +1,16 @@
-import Head from "next/head";
-import { Layout, siteTitle } from "../components/Layout";
-import utilStyles from "../styles/utils.module.scss";
+import { Layout } from "../components/Layout";
 import Link from "next/link";
-import { GetStaticProps, GetStaticPropsResult } from "next";
-import { Date } from "../components/date";
-import { ReactElement } from "react";
-import { PostOverview } from "../lib/types";
-import { getSortedPosts } from "../lib/posts";
+import { ReactElement, useContext } from "react";
 import { Hero } from "../components/njwds/Hero";
 import { PageSkeleton } from "../components/PageSkeleton";
+import { AuthContext } from "./_app";
+import { AuthButton } from "../components/AuthButton";
+import { useRouter } from "next/router";
 
-interface Props {
-  allPosts: PostOverview[];
-}
+const Home = (): ReactElement => {
+  const { state } = useContext(AuthContext);
+  const router = useRouter();
 
-const Home = ({ allPosts }: Props): ReactElement => {
   return (
     <PageSkeleton>
       <Hero
@@ -25,54 +21,38 @@ const Home = ({ allPosts }: Props): ReactElement => {
         onClick={() => {}}
       />
       <Layout home>
-        <Head>
-          <title>{siteTitle}</title>
-        </Head>
-        <button
-          className="usa-button"
-          onClick={() => {
-            console.log("clicked");
-          }}
-        >
-          Default
-        </button>
-        <section className={utilStyles.headingMd}>
-          <p>[Your Self Introduction]</p>
-          <p>
-            (This is a sample website - you’ll be building a site like this in{" "}
-            <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-          </p>
-        </section>
-        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <h2 className={utilStyles.headingLg}>Blog</h2>
-          <ul className={utilStyles.list}>
-            {allPosts.map(({ id, date, title }) => (
-              <li className={utilStyles.listItem} key={id}>
-                <Link href={`/posts/${id}`} passHref>
-                  <a href={`/posts/${id}`}>{title}</a>
-                </Link>
-                <br />
-                <small className={utilStyles.lightText}>
-                  <Date dateString={date} />
-                </small>
-              </li>
-            ))}
-          </ul>
-        </section>
+        <h1>
+          {state.isAuthenticated
+            ? `Welcome, ${state.user.name}`
+            : "Welcome to EasyRegNJ"}
+        </h1>
+        <p>
+          The simplest way to license, form & register your business in the
+          State of NJ.
+        </p>
+        <p>
+          This tool is for prospective business owners who are ready to
+          officially form and register their business with state and local
+          officials.
+        </p>
+        <p>
+          If you are still in the ideation phase, please visit our Guidance page
+          on how to plan a new business.
+        </p>
+        <p>To start, you’ll need to create an account.</p>
+        <p>
+          Creating an account helps you easily track the progress of your
+          business.
+        </p>
+        {state.isAuthenticated && (
+          <Link href="/onboarding">
+            <button className="usa-button">Get Started</button>
+          </Link>
+        )}
+        <AuthButton onLogin={() => router.push("/onboarding")} />
       </Layout>
     </PageSkeleton>
   );
-};
-
-export const getStaticProps: GetStaticProps = async (): Promise<
-  GetStaticPropsResult<Props>
-> => {
-  const allPosts = getSortedPosts();
-  return {
-    props: {
-      allPosts,
-    },
-  };
 };
 
 export default Home;

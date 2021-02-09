@@ -1,0 +1,6 @@
+#root > .field-object {
+  display: none;
+}
+#root > .field-object.active {
+  display: block;
+}

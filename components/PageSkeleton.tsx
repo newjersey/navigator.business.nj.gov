@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 import { Banner } from "./njwds/Banner";
-import { HeaderExtended } from "./njwds/HeaderExtended";
 import { IdentifierDefault } from "./njwds/IdentifierDefault";
 
 interface Props {
