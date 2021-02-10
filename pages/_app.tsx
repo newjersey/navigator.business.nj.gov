@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import "../styles/global.scss";
 import { AppProps } from "next/app";
-import { ReactElement, useEffect, useReducer } from "react";
+import React, { Dispatch, ReactElement, useReducer, useState } from "react";
 import netlifyAuth from "../lib/auth/netlify-auth";
 import {
   AuthContextType,
   AuthReducer,
   authReducer,
 } from "../lib/auth/AuthContext";
-import React from "react";
 import { BusinessUser } from "../lib/types";
+import { useMountEffect } from "../lib/helpers";
 
 const initialState = {
   user: null,
@@ -20,10 +22,21 @@ export const AuthContext = React.createContext<AuthContextType>({
   state: initialState,
 });
 
+export interface FormContextType {
+  formData: any;
+  setFormData: Dispatch<any>;
+}
+
+export const FormContext = React.createContext<FormContextType>({
+  formData: {},
+  setFormData: () => {},
+});
+
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
+  const [formData, setFormData] = useState<any>({});
 
-  useEffect(() => {
+  useMountEffect(() => {
     netlifyAuth.initialize((user: BusinessUser) => {
       if (user) {
         dispatch({
@@ -32,7 +45,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         });
       }
     });
-  }, []);
+  });
 
   return (
     <>
@@ -44,7 +57,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       />
       <link rel="stylesheet" href="/css/styles.css" />
       <AuthContext.Provider value={{ state, dispatch }}>
-        <Component {...pageProps} />
+        <FormContext.Provider value={{ formData, setFormData }}>
+          <Component {...pageProps} />
+        </FormContext.Provider>
       </AuthContext.Provider>
     </>
   );

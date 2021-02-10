@@ -7,27 +7,15 @@ import Form, { ISubmitEvent } from "@rjsf/core";
 import schema from "../form.json";
 import { useRouter } from "next/router";
 import { JSONSchema7 } from "json-schema";
-import { onKeyPress, useMountEffect } from "../lib/helpers";
-import { AuthContext } from "./_app";
+import { onKeyPress } from "../lib/helpers";
+import { FormContext } from "./_app";
 
 const Onboarding = (): ReactElement => {
   const router = useRouter();
   const sections = Object.keys(schema.properties);
   const [page, setPage] = useState<number>(0);
-  const [formData, setFormData] = useState<any>({});
   const [uiSchema, setUiSchema] = useState<any>({});
-  const { state } = useContext(AuthContext);
-
-  useMountEffect(() => {
-      setFormData({
-        ...formData,
-        ...JSON.parse(window.localStorage.getItem("formData")),
-        user: {
-          ...JSON.parse(window.localStorage.getItem("formData")).user,
-          email: state.user.email,
-        },
-      });
-  });
+  const { formData, setFormData } = useContext(FormContext);
 
   const setActivePage = () => {
     const newUiSchema = {};
@@ -50,7 +38,6 @@ const Onboarding = (): ReactElement => {
 
   const onSubmit = (event: ISubmitEvent<any>): void => {
     setFormData(event.formData);
-    window.localStorage.setItem("formData", JSON.stringify(event.formData));
     if (page + 1 < sections.length) {
       setPage(page + 1);
     } else {

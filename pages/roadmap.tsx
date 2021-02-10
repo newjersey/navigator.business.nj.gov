@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { Layout } from "../components/Layout";
-import { useMountEffect } from "../lib/helpers";
 import Link from "next/link";
+import { FormContext } from "./_app";
 
 const Roadmap = (): ReactElement => {
-  const [formData, setFormData] = useState<any>({});
-
-  useMountEffect(() => {
-    setFormData(JSON.parse(window.localStorage.getItem("formData")));
-  });
+  const { formData } = useContext(FormContext);
 
   const getBusinessName = (): string => {
     return formData.businessName?.businessName || "";

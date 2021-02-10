@@ -1,6 +1,6 @@
 import netlifyAuth from "../lib/auth/netlify-auth";
 import { ReactElement, useContext } from "react";
-import { AuthContext } from "../pages/_app";
+import { AuthContext, FormContext } from "../pages/_app";
 import { BusinessUser } from "../lib/types";
 
 interface Props {
@@ -10,12 +10,20 @@ interface Props {
 
 export const AuthButton = (props: Props): ReactElement => {
   const { state, dispatch } = useContext(AuthContext);
+  const { formData, setFormData } = useContext(FormContext);
 
   const login = () => {
     netlifyAuth.authenticate((user: BusinessUser) => {
       dispatch({
         type: "LOGIN",
         user: user,
+      });
+      setFormData({
+        ...formData,
+        user: {
+          ...formData.user,
+          email: user.email,
+        },
       });
       if (props.onLogin) {
         props.onLogin();
@@ -29,6 +37,7 @@ export const AuthButton = (props: Props): ReactElement => {
         type: "LOGOUT",
         user: undefined,
       });
+      setFormData({});
       if (props.onLogout) {
         props.onLogout();
       }

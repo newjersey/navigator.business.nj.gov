@@ -1,29 +1,26 @@
 import { fireEvent, RenderResult } from "@testing-library/react";
 import Onboarding from "../../pages/onboarding";
 import { useRouter } from "next/router";
-import { renderWithUser } from "../helpers";
-import { generateUser } from "../factories";
-import { BusinessUser } from "../../lib/types";
+import { renderWithFormData } from "../helpers";
 
 jest.mock("next/router");
 
 describe("onboarding form", () => {
   let subject: RenderResult;
   let mockPush: jest.Mock;
-  let currentUser: BusinessUser;
 
   beforeEach(() => {
     mockPush = jest.fn();
     (useRouter as jest.Mock).mockReturnValue({
       push: mockPush,
     });
-
-    currentUser = generateUser({});
-    subject = renderWithUser(<Onboarding />, currentUser, jest.fn());
+    subject = renderWithFormData(<Onboarding />, {
+      user: { email: "ada@lovelace.org" },
+    });
   });
 
-  it("prefills email from the signed-in user", () => {
-    expect(subject.getByLabelText("Email")).toHaveValue(currentUser.email);
+  it("prefills form from context", () => {
+    expect(subject.getByLabelText("Email")).toHaveValue("ada@lovelace.org");
   });
 
   it("steps through each page of the form", () => {
