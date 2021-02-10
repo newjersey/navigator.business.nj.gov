@@ -23,7 +23,7 @@ const Home = (): ReactElement => {
       <Layout home>
         <h1>
           {state.isAuthenticated
-            ? `Welcome, ${state.user.name}`
+            ? `Welcome, ${state.user.name || state.user.email}`
             : "Welcome to EasyRegNJ"}
         </h1>
         <p>

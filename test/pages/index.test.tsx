@@ -26,5 +26,20 @@ describe("HomePage", () => {
       expect(subject.queryByText("Log out")).toBeInTheDocument();
       expect(subject.queryByText("Log in")).not.toBeInTheDocument();
     });
+
+    it("welcomes user by email if no name present", () => {
+      const subject = renderWithUser(
+        <Home />,
+        generateUser({ name: undefined, email: "ada@lovelace.org" }),
+        jest.fn()
+      );
+
+      expect(
+        subject.queryByText("Welcome, ada@lovelace.org")
+      ).toBeInTheDocument();
+      expect(subject.queryByText("Get Started")).toBeInTheDocument();
+      expect(subject.queryByText("Log out")).toBeInTheDocument();
+      expect(subject.queryByText("Log in")).not.toBeInTheDocument();
+    });
   });
 });
