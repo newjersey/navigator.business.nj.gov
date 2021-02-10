@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ReactElement, useContext, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { Layout } from "../components/Layout";
 import Form, { ISubmitEvent } from "@rjsf/core";
 import schema from "../form.json";
 import { useRouter } from "next/router";
 import { JSONSchema7 } from "json-schema";
-import { useMountEffect } from "../lib/helpers";
+import { onKeyPress, useMountEffect } from "../lib/helpers";
 import { AuthContext } from "./_app";
 
 const Onboarding = (): ReactElement => {
@@ -69,7 +69,6 @@ const Onboarding = (): ReactElement => {
     <PageSkeleton>
       <Layout>
         <h1>The onboarding form</h1>
-
         <Form
           schema={schema as JSONSchema7}
           className={`page-${page}`}
@@ -78,9 +77,17 @@ const Onboarding = (): ReactElement => {
           uiSchema={uiSchema}
         >
           {page > 0 && (
-            <button className="usa-button usa-button--outline" onClick={onBack}>
+            <div
+              tabIndex={0}
+              role="button"
+              className="usa-button usa-button--outline"
+              onClick={onBack}
+              onKeyPress={(e: React.KeyboardEvent): void => {
+                onKeyPress(e, onBack);
+              }}
+            >
               Back
-            </button>
+            </div>
           )}
           <button type="submit" className="usa-button">
             Next
