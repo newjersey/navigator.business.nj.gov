@@ -1,5 +1,5 @@
 export type BusinessUser = {
-  name: string;
+  name?: string;
   email: string;
   id: string;
 };
