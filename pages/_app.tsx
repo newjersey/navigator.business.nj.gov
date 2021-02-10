@@ -39,6 +39,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   useMountEffect(() => {
     netlifyAuth.initialize((user: BusinessUser) => {
       if (user) {
+        setFormData({
+          ...formData,
+          user: {
+            ...formData.user,
+            email: user.email,
+          },
+        });
         dispatch({
           type: "LOGIN",
           user: user,
