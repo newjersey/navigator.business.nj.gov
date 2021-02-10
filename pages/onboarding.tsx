@@ -24,7 +24,9 @@ const Onboarding = (): ReactElement => {
     } else {
       setFormData({
         ...formData,
+        ...JSON.parse(window.localStorage.getItem("formData")),
         user: {
+          ...JSON.parse(window.localStorage.getItem("formData")).user,
           email: state.user.email,
         },
       });
@@ -52,6 +54,7 @@ const Onboarding = (): ReactElement => {
 
   const onSubmit = (event: ISubmitEvent<any>): void => {
     setFormData(event.formData);
+    window.localStorage.setItem("formData", JSON.stringify(event.formData));
     if (page + 1 < sections.length) {
       setPage(page + 1);
     } else {
