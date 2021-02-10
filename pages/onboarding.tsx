@@ -19,9 +19,6 @@ const Onboarding = (): ReactElement => {
   const { state } = useContext(AuthContext);
 
   useMountEffect(() => {
-    if (!state.isAuthenticated) {
-      router.push("/");
-    } else {
       setFormData({
         ...formData,
         ...JSON.parse(window.localStorage.getItem("formData")),
@@ -30,7 +27,6 @@ const Onboarding = (): ReactElement => {
           email: state.user.email,
         },
       });
-    }
   });
 
   const setActivePage = () => {

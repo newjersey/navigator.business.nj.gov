@@ -1,0 +1,4 @@
+/onboarding/*	        200!	Role=admin,user
+/roadmap/*  	        200!	Role=admin,user
+/onboarding/*	/      	302!
+/roadmap/*	    /      	302!

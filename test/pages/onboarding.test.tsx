@@ -26,11 +26,6 @@ describe("onboarding form", () => {
     expect(subject.getByLabelText("Email")).toHaveValue(currentUser.email);
   });
 
-  it("navigates to home when user not signed in", () => {
-    subject = renderWithUser(<Onboarding />, undefined, jest.fn());
-    expect(mockPush).toHaveBeenCalledWith("/");
-  });
-
   it("steps through each page of the form", () => {
     fillText(subject.getByLabelText("First name"), "ada");
     fillText(subject.getByLabelText("Last name"), "lovelace");
