@@ -20,10 +20,7 @@ export interface AuthContextType {
 
 export type AuthReducer = Reducer<AuthState, AuthAction>;
 
-export const authReducer: AuthReducer = (
-  state: AuthState,
-  action: AuthAction
-): AuthState => {
+export const authReducer: AuthReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case "LOGIN":
       return {

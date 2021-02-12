@@ -12,6 +12,9 @@
     "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}' --fix",
     "prettier": "prettier --write . --ignore-path=./.eslintignore"
   },
+  "prettier": {
+    "printWidth": 110
+  },
   "dependencies": {
     "@rjsf/core": "^2.4.2",
     "@testing-library/jest-dom": "^5.11.9",

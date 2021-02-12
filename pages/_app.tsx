@@ -4,11 +4,7 @@ import "../styles/global.scss";
 import { AppProps } from "next/app";
 import React, { Dispatch, ReactElement, useReducer, useState } from "react";
 import netlifyAuth from "../lib/auth/netlify-auth";
-import {
-  AuthContextType,
-  AuthReducer,
-  authReducer,
-} from "../lib/auth/AuthContext";
+import { AuthContextType, AuthReducer, authReducer } from "../lib/auth/AuthContext";
 import { BusinessUser } from "../lib/types";
 import { useMountEffect } from "../lib/helpers";
 
@@ -58,10 +54,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     <>
       <script src="/js/uswds.js" />
       <script src="/js/uswds-init.js" />
-      <link
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-        rel="stylesheet"
-      />
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
       <link rel="stylesheet" href="/css/styles.css" />
       <AuthContext.Provider value={{ state, dispatch }}>
         <FormContext.Provider value={{ formData, setFormData }}>

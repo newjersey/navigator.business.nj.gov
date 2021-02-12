@@ -15,11 +15,7 @@ describe("HomePage", () => {
 
   describe("when logged in", () => {
     it("welcomes user by name", () => {
-      const subject = renderWithUser(
-        <Home />,
-        generateUser({ name: "Ada Lovelace" }),
-        jest.fn()
-      );
+      const subject = renderWithUser(<Home />, generateUser({ name: "Ada Lovelace" }), jest.fn());
 
       expect(subject.queryByText("Welcome, Ada Lovelace")).toBeInTheDocument();
       expect(subject.queryByText("Get Started")).toBeInTheDocument();
@@ -34,9 +30,7 @@ describe("HomePage", () => {
         jest.fn()
       );
 
-      expect(
-        subject.queryByText("Welcome, ada@lovelace.org")
-      ).toBeInTheDocument();
+      expect(subject.queryByText("Welcome, ada@lovelace.org")).toBeInTheDocument();
       expect(subject.queryByText("Get Started")).toBeInTheDocument();
       expect(subject.queryByText("Log out")).toBeInTheDocument();
       expect(subject.queryByText("Log in")).not.toBeInTheDocument();

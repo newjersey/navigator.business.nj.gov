@@ -13,21 +13,12 @@ export const renderWithUser = (
   dispatch: Dispatch<AuthAction>
 ): RenderResult => {
   const state: AuthState = { isAuthenticated: !!user, user: user };
-  return render(
-    <AuthContext.Provider value={{ state, dispatch }}>
-      {subject}
-    </AuthContext.Provider>
-  );
+  return render(<AuthContext.Provider value={{ state, dispatch }}>{subject}</AuthContext.Provider>);
 };
 
-export const renderWithFormData = (
-  subject: ReactElement,
-  formData?: any
-): RenderResult => {
+export const renderWithFormData = (subject: ReactElement, formData?: any): RenderResult => {
   const initialState = formData ? formData : {};
-  return render(
-    <FormDataWrapper initialState={initialState}>{subject}</FormDataWrapper>
-  );
+  return render(<FormDataWrapper initialState={initialState}>{subject}</FormDataWrapper>);
 };
 
 const FormDataWrapper = ({
@@ -38,9 +29,5 @@ const FormDataWrapper = ({
   initialState: any;
 }): ReactElement => {
   const [formData, setFormData] = useState(initialState);
-  return (
-    <FormContext.Provider value={{ formData, setFormData }}>
-      {children}
-    </FormContext.Provider>
-  );
+  return <FormContext.Provider value={{ formData, setFormData }}>{children}</FormContext.Provider>;
 };

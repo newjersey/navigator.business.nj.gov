@@ -19,12 +19,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "@typescript-eslint/eslint-plugin",
-    "jsx-a11y"
-  ],
+  "plugins": ["react", "@typescript-eslint", "@typescript-eslint/eslint-plugin", "jsx-a11y"],
   "rules": {
     "@typescript-eslint/no-empty-function": "off"
   }

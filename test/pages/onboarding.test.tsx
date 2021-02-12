@@ -28,22 +28,15 @@ describe("onboarding form", () => {
     fillText(subject.getByLabelText("Last name"), "lovelace");
 
     fireEvent.click(subject.getByText("Next"));
-    fireEvent.change(
-      subject.getByLabelText("What type of company do you want to start?"),
-      { target: { value: "restaurant" } }
-    );
+    fireEvent.change(subject.getByLabelText("What type of company do you want to start?"), {
+      target: { value: "restaurant" },
+    });
 
     fireEvent.click(subject.getByText("Next"));
-    fillText(
-      subject.getByLabelText("Business name"),
-      "Ada's cool computer company"
-    );
+    fillText(subject.getByLabelText("Business name"), "Ada's cool computer company");
 
     fireEvent.click(subject.getByText("Next"));
-    fillText(
-      subject.getByLabelText("Business description"),
-      "Selling computers"
-    );
+    fillText(subject.getByLabelText("Business description"), "Selling computers");
 
     fireEvent.click(subject.getByText("Next"));
     fireEvent.change(subject.getByLabelText("Business structure"), {

@@ -95,18 +95,10 @@ export const HeaderExtended = (): ReactElement => {
                 </li>
               </ul>
               <form className="usa-search usa-search--small " role="search">
-                <label
-                  className="usa-sr-only"
-                  htmlFor="extended-search-field-small"
-                >
+                <label className="usa-sr-only" htmlFor="extended-search-field-small">
                   Search small
                 </label>
-                <input
-                  className="usa-input"
-                  id="extended-search-field-small"
-                  type="search"
-                  name="search"
-                />
+                <input className="usa-input" id="extended-search-field-small" type="search" name="search" />
                 <button className="usa-button" type="submit">
                   <span className="usa-sr-only">Search</span>
                 </button>

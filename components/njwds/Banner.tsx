@@ -7,23 +7,15 @@ export const Banner = (): ReactElement => {
         <div className="grid-container">
           <div className="nj-banner__inner">
             <div className="grid-col-auto">
-              <img
-                className="nj-banner__header-seal"
-                src="/img/nj_state_seal.png"
-                alt="NJ flag"
-              />
+              <img className="nj-banner__header-seal" src="/img/nj_state_seal.png" alt="NJ flag" />
             </div>
             <div className="grid-col-fill">
-              <a href="https://nj.gov">
-                Official Site of the State of New Jersey
-              </a>
+              <a href="https://nj.gov">Official Site of the State of New Jersey</a>
             </div>
             <div className="grid-col-auto">
               <div className="text-white">
                 <ul>
-                  <li>
-                    Governor Phil Murphy &bull; Lt. Governor Sheila Oliver
-                  </li>
+                  <li>Governor Phil Murphy &bull; Lt. Governor Sheila Oliver</li>
                   <li>
                     <a href="https://nj.gov/subscribe/" target="_blank">
                       <svg
