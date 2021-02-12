@@ -9,8 +9,10 @@ import { FormContext } from "./_app";
 const Roadmap = (): ReactElement => {
   const { formData } = useContext(FormContext);
 
-  const getBusinessName = (): string => {
-    return formData.businessName?.businessName || "";
+  const getHeader = (): string => {
+    return formData.businessName?.businessName
+      ? `Business Roadmap for ${formData.businessName?.businessName}`
+      : "Your Business Roadmap";
   };
 
   const needsAlcoholLicense = (): boolean => {
@@ -24,7 +26,7 @@ const Roadmap = (): ReactElement => {
   return (
     <PageSkeleton>
       <Layout>
-        <h1>{`Business Roadmap for ${getBusinessName()}`}</h1>
+        <h1>{getHeader()}</h1>
         <p>
           To start a Restaurant in New Jersey, you’ll need to complete the basic
           steps below.
@@ -39,7 +41,7 @@ const Roadmap = (): ReactElement => {
           </li>
           <li>Obtain Construction Permits (1-2 weeks)</li>
           <li>Complete Food Safety Training (1 week)</li>
-          {needsAlcoholLicense() && <li>Obtain a Liquor License (varies) </li>}
+          {needsAlcoholLicense() && <li>Obtain a Liquor License (varies)</li>}
         </ul>
 
         <h2>State: Formation & Registration</h2>
