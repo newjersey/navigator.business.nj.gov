@@ -1,5 +1,5 @@
 import { User } from "netlify-identity-widget";
-import { BusinessUser } from "../types";
+import { BusinessUser } from "../types/BusinessUser";
 
 export const mapToUser = (user: User | null): BusinessUser | null => {
   if (!user) return null;

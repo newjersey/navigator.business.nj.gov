@@ -1,0 +1,76 @@
+{
+  "title": "businessForm",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "businessType": {
+      "type": "object",
+      "properties": {
+        "businessType": {
+          "type": "string",
+          "enum": ["Restaurant", "Other"]
+        }
+      }
+    },
+    "businessName": {
+      "type": "object",
+      "properties": {
+        "businessName": {
+          "type": "string"
+        }
+      }
+    },
+    "businessDescription": {
+      "type": "object",
+      "properties": {
+        "businessDescription": {
+          "type": "string"
+        }
+      }
+    },
+    "businessStructure": {
+      "type": "object",
+      "properties": {
+        "businessStructure": {
+          "type": "string",
+          "enum": ["LLC", "LP", "S-Corp"]
+        }
+      }
+    },
+    "locations": {
+      "type": "object",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "zipCode": {
+                "type": "string"
+              },
+              "license": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

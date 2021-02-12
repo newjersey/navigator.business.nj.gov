@@ -1,31 +1,35 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { Layout } from "../components/Layout";
 import Form, { ISubmitEvent } from "@rjsf/core";
-import schema from "../form.json";
+import schema from "../schemas/form.json";
+import jsonUiSchema from "../schemas/form-ui.json";
 import { useRouter } from "next/router";
 import { JSONSchema7 } from "json-schema";
 import { onKeyPress } from "../lib/helpers";
 import { FormContext } from "./_app";
+import { BusinessForm } from "../lib/types/form";
 
 const Onboarding = (): ReactElement => {
   const router = useRouter();
   const sections = Object.keys(schema.properties);
   const [page, setPage] = useState<number>(0);
-  const [uiSchema, setUiSchema] = useState<any>({});
   const { formData, setFormData } = useContext(FormContext);
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  const [uiSchema, setUiSchema] = useState<any>(jsonUiSchema);
+
   const setActivePage = () => {
-    const newUiSchema = {};
+    const newUiSchema = { ...uiSchema };
     for (const section in sections) {
       newUiSchema[sections[section]] = {
+        ...newUiSchema[sections[section]],
         classNames: "",
       };
     }
 
     newUiSchema[sections[page]] = {
+      ...newUiSchema[sections[page]],
       classNames: "active",
     };
 
@@ -36,7 +40,7 @@ const Onboarding = (): ReactElement => {
     setActivePage();
   }, [page]);
 
-  const onSubmit = (event: ISubmitEvent<any>): void => {
+  const onSubmit = (event: ISubmitEvent<BusinessForm>): void => {
     setFormData(event.formData);
     if (page + 1 < sections.length) {
       setPage(page + 1);

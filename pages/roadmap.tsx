@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ReactElement, useContext } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { Layout } from "../components/Layout";

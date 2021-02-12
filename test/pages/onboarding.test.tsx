@@ -2,6 +2,7 @@ import { fireEvent, RenderResult } from "@testing-library/react";
 import Onboarding from "../../pages/onboarding";
 import { useRouter } from "next/router";
 import { renderWithFormData } from "../helpers";
+import { generateFormData } from "../factories";
 
 jest.mock("next/router");
 
@@ -14,9 +15,12 @@ describe("onboarding form", () => {
     (useRouter as jest.Mock).mockReturnValue({
       push: mockPush,
     });
-    subject = renderWithFormData(<Onboarding />, {
-      user: { email: "ada@lovelace.org" },
-    });
+    subject = renderWithFormData(
+      <Onboarding />,
+      generateFormData({
+        user: { email: "ada@lovelace.org" },
+      })
+    );
   });
 
   it("prefills form from context", () => {

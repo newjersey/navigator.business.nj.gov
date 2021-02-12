@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import "../styles/global.scss";
 import { AppProps } from "next/app";
 import React, { Dispatch, ReactElement, useReducer, useState } from "react";
 import netlifyAuth from "../lib/auth/netlify-auth";
 import { AuthContextType, AuthReducer, authReducer } from "../lib/auth/AuthContext";
-import { BusinessUser } from "../lib/types";
+import { BusinessUser } from "../lib/types/BusinessUser";
 import { useMountEffect } from "../lib/helpers";
+import { BusinessForm } from "../lib/types/form";
 
 const initialState = {
   user: null,
@@ -19,8 +18,8 @@ export const AuthContext = React.createContext<AuthContextType>({
 });
 
 export interface FormContextType {
-  formData: any;
-  setFormData: Dispatch<any>;
+  formData: BusinessForm;
+  setFormData: Dispatch<BusinessForm>;
 }
 
 export const FormContext = React.createContext<FormContextType>({
@@ -30,7 +29,7 @@ export const FormContext = React.createContext<FormContextType>({
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<BusinessForm>({});
 
   useMountEffect(() => {
     netlifyAuth.initialize((user: BusinessUser) => {

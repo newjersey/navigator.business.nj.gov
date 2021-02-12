@@ -1,7 +1,7 @@
 import netlifyAuth from "../lib/auth/netlify-auth";
 import { ReactElement, useContext } from "react";
 import { AuthContext, FormContext } from "../pages/_app";
-import { BusinessUser } from "../lib/types";
+import { BusinessUser } from "../lib/types/BusinessUser";
 
 interface Props {
   onLogin?: () => void;
