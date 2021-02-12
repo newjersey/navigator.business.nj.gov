@@ -2,7 +2,7 @@
 name: Chore
 about: Set up a new engineering chore
 title: ''
-labels: '(:gear:)'
+labels: '(:gear: )'
 assignees: ''
 
 ---
