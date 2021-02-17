@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "next dev",
+    "dev": "next dev",
     "build": "next build",
-    "start:prod": "next start",
+    "postbuild": "next-on-netlify",
+    "start": "next start",
     "test": "jest",
     "eslint": "eslint",
     "lint": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}'",
@@ -53,6 +54,7 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "identity-obj-proxy": "^3.0.0",
+    "next-on-netlify": "^2.8.7",
     "prettier": "^2.2.1",
     "typescript": "^4.1.3"
   }
