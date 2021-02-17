@@ -38,6 +38,18 @@ jobs:
       - name: 📦 Build project
         run: npm run build --if-present
 
+      - name: 🧪 Run e2e cypress tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_TEST_USER_EMAIL: ${{ secrets.CYPRESS_TEST_USER_EMAIL }}
+          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+          CYPRESS_NETLIFY_IDENTITY_URL: ${{ secrets.CYPRESS_NETLIFY_IDENTITY_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: 🚀 Deploy to Netlify
         id: deploy-netlify
         uses: netlify/actions/cli@master

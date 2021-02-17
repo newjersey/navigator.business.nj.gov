@@ -5,11 +5,9 @@ import { Hero } from "../components/njwds/Hero";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { AuthContext } from "./_app";
 import { AuthButton } from "../components/AuthButton";
-import { useRouter } from "next/router";
 
 const Home = (): ReactElement => {
   const { state } = useContext(AuthContext);
-  const router = useRouter();
 
   return (
     <PageSkeleton>
@@ -40,7 +38,7 @@ const Home = (): ReactElement => {
             <button className="usa-button">Get Started</button>
           </Link>
         )}
-        <AuthButton onLogin={() => router.push("/onboarding")} />
+        <AuthButton />
       </Layout>
     </PageSkeleton>
   );

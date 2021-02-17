@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "business.nj.gov",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,9 @@
     "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}' --fix",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "make-schema-types": "json2ts -i schemas/form.json -o lib/types/form.d.ts",
-    "make-roadmap-types": "make_types -i lib/types/roadmaps.ts roadmaps/restaurant.json Roadmap"
+    "make-roadmap-types": "make_types -i lib/types/roadmaps.ts roadmaps/restaurant.json Roadmap",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --record false"
   },
   "prettier": {
     "printWidth": 110
@@ -45,6 +47,7 @@
     "@types/react": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
+    "cypress": "^6.5.0",
     "eslint": "^7.19.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.2.0",

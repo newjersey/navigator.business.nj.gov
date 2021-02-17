@@ -29,4 +29,4 @@ function print_success {
 }
 
 # run tests, feature tests, and push
-npm run lint && npm test && npm build && git push && print_success
+npm run lint && npm test && ./scripts/feature-tests.sh && git push && print_success

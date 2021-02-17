@@ -28,3 +28,8 @@ yarn-error.log*
 
 # Netlify build
 out_*
+
+scripts/env.sh
+
+cypress/videos
+cypress/screenshots/

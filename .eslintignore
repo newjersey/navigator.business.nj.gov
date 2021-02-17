@@ -1,3 +1,7 @@
 .next
 *.md
 public/
+out_publish/
+out_functions/
+cypress/plugins
+cypress/support
