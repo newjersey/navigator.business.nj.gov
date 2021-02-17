@@ -11,7 +11,8 @@
     "lint": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}'",
     "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}' --fix",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
-    "make-schema-types": "json2ts -i schemas/form.json -o lib/types/form.d.ts"
+    "make-schema-types": "json2ts -i schemas/form.json -o lib/types/form.d.ts",
+    "make-roadmap-types": "make_types -i lib/types/roadmaps.ts roadmaps/restaurant.json Roadmap"
   },
   "prettier": {
     "printWidth": 110
@@ -26,6 +27,8 @@
     "gray-matter": "^4.0.2",
     "jest": "^26.6.3",
     "json-schema-to-typescript": "^10.1.3",
+    "lodash.clonedeep": "^4.5.0",
+    "maketypes": "^1.1.2",
     "netlify-identity-widget": "^1.9.1",
     "next": "^10.0.0",
     "react": "17.0.1",

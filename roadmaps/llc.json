@@ -1,0 +1,85 @@
+{
+  "step_number": 3,
+  "id": "register_business",
+  "name": "Form & Register Your Business",
+  "description": "Once you have confirmed your prospective location, it’s time to officially register your business with the State. \nIn this step you are identifying and registering your desired business names, creating your legal entity, and then registering for New Jersey State taxes.",
+  "tasks": [
+    {
+      "task_number": 1,
+      "id": "search_business_name",
+      "name": "Search for Available Business Names",
+      "description": "Before registering your business at the Federal & State level, confirm that both your desired legal name and (if different) consumer facing name are available in New Jersey. ",
+      "destination": {
+        "name": "",
+        "link": "https://www.njportal.com/DOR/BusinessNameSearch/Search/BusinessName"
+      },
+      "to_complete_must_have": ["Desired Names"],
+      "after_completing_will_have": []
+    },
+    {
+      "task_number": 2,
+      "id": "register_for_ein",
+      "name": "Register for an EIN",
+      "description": "An Employer Identification Number is essentially your Social Security Number for your business. If you plan on having employees you will need an EIN number, however we recommend that most businesses obtain an EIN, so that you don't need to use your personal personal SSN on tax filings and other business registrations.",
+      "destination": {
+        "name": "",
+        "link": "https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online"
+      },
+      "to_complete_must_have": ["Available Names "],
+      "after_completing_will_have": ["EIN", "EIN Certificate"]
+    },
+    {
+      "task_number": 3,
+      "id": "form_business_entity",
+      "name": "Form your Business Entity",
+      "description": "Form the legal structure that you will operate under, and register that structure and name with the state of New Jersey.",
+      "destination": {
+        "name": "",
+        "link": "https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName"
+      },
+      "to_complete_must_have": [
+        "Desired Name",
+        "Legal Structure",
+        "NAICS code",
+        "EIN",
+        "Registered Agent",
+        "Payment Credit Card or E-Check"
+      ],
+      "after_completing_will_have": ["Entity ID", "Certificate of Standing", "Certified Copy"]
+    },
+    {
+      "task_number": 4,
+      "id": "alternate_name",
+      "name": "Register Your Alternate Name",
+      "description": "Since you want to create a name different from your legal name, you'll need to register an Alternate Name with the division of Revenue.",
+      "destination": {
+        "name": "",
+        "link": "https://www.nj.gov/treasury/revenue/altname.shtml"
+      },
+      "to_complete_must_have": ["Entity ID", "Desired Alternate Name"],
+      "after_completing_will_have": ["Alternate Name"]
+    },
+    {
+      "task_number": 5,
+      "id": "register_for_taxes",
+      "name": "Register for Tax Purposes with DORES",
+      "description": "It's time to register your business for State Taxes. Doing so will tell the state more about your business and determine what taxes your liable for.",
+      "destination": {
+        "name": "",
+        "link": "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml"
+      },
+      "to_complete_must_have": [
+        "Entity ID",
+        "NAICS code",
+        "EIN",
+        "Estimated number of employees",
+        "Estimated start date"
+      ],
+      "after_completing_will_have": [
+        "Business Registration Certficiate",
+        "NJ Tax ID",
+        "Authorization to Collect Sales Tax"
+      ]
+    }
+  ]
+}

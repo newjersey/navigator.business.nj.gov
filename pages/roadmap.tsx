@@ -1,11 +1,29 @@
-import { ReactElement, useContext } from "react";
+import { ReactElement, useContext, useState } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { Layout } from "../components/Layout";
 import Link from "next/link";
 import { FormContext } from "./_app";
+import restaurantRoadmap from "../roadmaps/restaurant.json";
+import { Roadmap } from "../lib/types/roadmaps";
+import { Step } from "../components/Step";
+import { useMountEffect } from "../lib/helpers";
+import { needsLiquorLicense } from "../lib/form-helpers/needsLiquorLicense";
+import { removeLiquorLicenseTasks } from "../lib/roadmap-builders/removeLiquorLicenseTasks";
+import cloneDeep from "lodash/cloneDeep";
+import { addLegalStructureStep } from "../lib/roadmap-builders/addLegalStructureStep";
 
-const Roadmap = (): ReactElement => {
+const RoadmapPage = (): ReactElement => {
   const { formData } = useContext(FormContext);
+  const [roadmap, setRoadmap] = useState<Roadmap>(undefined);
+
+  useMountEffect(() => {
+    let temp = cloneDeep(restaurantRoadmap);
+    if (!needsLiquorLicense(formData)) {
+      temp = removeLiquorLicenseTasks(temp);
+    }
+    temp = addLegalStructureStep(temp);
+    setRoadmap(temp);
+  });
 
   const getHeader = (): string => {
     return formData.businessName?.businessName
@@ -13,13 +31,9 @@ const Roadmap = (): ReactElement => {
       : "Your Business Roadmap";
   };
 
-  const needsAlcoholLicense = (): boolean => {
-    if (!formData.locations?.locations) {
-      return false;
-    }
-
-    return formData.locations.locations.some((it) => it.license);
-  };
+  if (!roadmap) {
+    return <></>;
+  }
 
   return (
     <PageSkeleton>
@@ -27,21 +41,10 @@ const Roadmap = (): ReactElement => {
         <h1>{getHeader()}</h1>
         <p>To start a Restaurant in New Jersey, you’ll need to complete the basic steps below.</p>
 
-        <h2>Local: Permits & Licenses</h2>
-        <ul>
-          <li>Select a Location(s) (1-2 months)</li>
-          <li>Contact your Local Health Department to Complete Permitting Requirements (varies)</li>
-          <li>Obtain Construction Permits (1-2 weeks)</li>
-          <li>Complete Food Safety Training (1 week)</li>
-          {needsAlcoholLicense() && <li>Obtain a Liquor License (varies)</li>}
-        </ul>
+        {roadmap.steps.map((step) => (
+          <Step key={step.id} step={step} />
+        ))}
 
-        <h2>State: Formation & Registration</h2>
-        <ul>
-          <li>Register for an Employer Identification Number (EIN) (10 minutes)</li>
-          <li>Complete Business Formation (40 minutes)</li>
-          <li>Develop an Alternate Name (tbd)</li>
-        </ul>
         <Link href="/onboarding">
           <button className="usa-button">Edit my data</button>
         </Link>
@@ -50,4 +53,4 @@ const Roadmap = (): ReactElement => {
   );
 };
 
-export default Roadmap;
+export default RoadmapPage;

@@ -1,0 +1,135 @@
+{
+  "steps": [
+    {
+      "step_number": 1,
+      "id": "plan_your_location",
+      "name": "Plan Your Location",
+      "description": "Before you officially form & register your business, its important to have a target location and lease in mind - that way you can form & register your business using your proposed business address. If you change the location of your restaurant after you form & register, you will need to file an ammendement to your Business Formation & Registration,",
+      "tasks": [
+        {
+          "task_number": 1,
+          "id": "identify_potential_lease",
+          "name": "Identify a potential lease",
+          "description": "Based on your business, target market and other key factors, identify a potential lease",
+          "destination": {
+            "name": "",
+            "link": ""
+          },
+          "to_complete_must_have": [],
+          "after_completing_will_have": []
+        },
+        {
+          "task_number": 2,
+          "id": "verify_zoning",
+          "name": "Verify zoning",
+          "description": "Verify that your desired building is zoned for a resturant, and that a commercial kitchen exists or can be built.",
+          "destination": {
+            "name": "City Office of Zoning",
+            "link": ""
+          },
+          "to_complete_must_have": ["Address of Potential Lease"],
+          "after_completing_will_have": []
+        },
+        {
+          "task_number": 3,
+          "id": "liquor_license_availability",
+          "name": "Confirm liquor license availability",
+          "description": "If you plan on serving liquor, verify the cost and availability of a liquor license in your area.",
+          "destination": {
+            "name": "City Clerk",
+            "link": ""
+          },
+          "to_complete_must_have": ["Address of Potential Lease"],
+          "after_completing_will_have": []
+        },
+        {
+          "task_number": 4,
+          "id": "inquire_local_permits",
+          "name": "Inquire about Local Permits Required",
+          "description": "Contact the local Dept of Health to understand future permits you will need to file for once you've signed your lease",
+          "destination": {
+            "name": "Local Department of Health",
+            "link": ""
+          },
+          "to_complete_must_have": ["Address of Potential Lease"],
+          "after_completing_will_have": []
+        }
+      ]
+    },
+    {
+      "step_number": 2,
+      "name": "Research and Prepare Your Business License",
+      "id": "business_license",
+      "description": "N/A",
+      "tasks": []
+    },
+    {
+      "step_number": 4,
+      "id": "lease_and_permits",
+      "name": "Sign Your Lease & File Local Permits",
+      "description": "You can now sign your lease and file local permits under the protection of your new legal entity and business name. ",
+      "tasks": [
+        {
+          "task_number": 1,
+          "id": "sign_lease",
+          "name": "Sign Your Lease",
+          "description": "You can now sign your lease under your official business name and corporate structure",
+          "destination": {
+            "name": "Landlord",
+            "link": ""
+          },
+          "to_complete_must_have": ["Business name", "Legal structure"],
+          "after_completing_will_have": []
+        },
+        {
+          "task_number": 2,
+          "id": "building_permit",
+          "name": "Obtain Building Permit",
+          "description": "To do any construction and most renovations, you'll need to file for a building permit with your local construction office.",
+          "destination": {
+            "name": "Form Available from DCA, submitted to Local Construction Office",
+            "link": ""
+          },
+          "to_complete_must_have": ["Business name", "Architectural Plans (if applicable)"],
+          "after_completing_will_have": ["Building Permit"]
+        },
+        {
+          "task_number": 3,
+          "id": "floor_plan_approval",
+          "name": "Get your floor plan approved by your local DOH",
+          "description": "Get your floor plan and kitchen approved by your local DOH. Afterwards you will need to schedule periodic follow-ups.",
+          "destination": {
+            "name": "Local Department of Health",
+            "link": ""
+          },
+          "to_complete_must_have": ["Business name", "Floor plans"],
+          "after_completing_will_have": []
+        },
+        {
+          "task_number": 4,
+          "id": "food_safety_course",
+          "name": "Complete Food Safety Course",
+          "description": "While not all restaurants are required to do so, many restaurants serving raw food and other delicate items must complete a Food Safety training.",
+          "destination": {
+            "name": "",
+            "link": ""
+          },
+          "to_complete_must_have": [],
+          "after_completing_will_have": ["Certficate of Completion"]
+        },
+        {
+          "task_number": 5,
+          "id": "liquor_license",
+          "name": "Obtain your Liquor License",
+          "description": "To obtain a local liquor license, contact your city clerk for availability, and ensure you meet all requirements detailed in the Alcoholic Beverage Control Handbook. ",
+          "destination": {
+            "name": "City Clerk/ABC",
+            "link": "https://www.nj.gov/oag/abc/abc-hb-eng-esp.html"
+          },
+          "to_complete_must_have": ["Completed ABC requirements"],
+          "after_completing_will_have": ["Liquor License"]
+        }
+      ]
+    }
+  ]
+}

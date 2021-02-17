@@ -34,7 +34,10 @@ describe("roadmap page", () => {
           locations: {},
         })
       );
-      expect(subject.queryByText("Obtain a Liquor License", { exact: false })).not.toBeInTheDocument();
+      expect(subject.queryByText("Obtain your Liquor License", { exact: false })).not.toBeInTheDocument();
+      expect(
+        subject.queryByText("Confirm liquor license availability", { exact: false })
+      ).not.toBeInTheDocument();
     });
 
     it("does not show liquor license step if no location includes it", () => {
@@ -44,7 +47,10 @@ describe("roadmap page", () => {
           locations: { locations: [{ license: false }] },
         })
       );
-      expect(subject.queryByText("Obtain a Liquor License", { exact: false })).not.toBeInTheDocument();
+      expect(subject.queryByText("Obtain your Liquor License", { exact: false })).not.toBeInTheDocument();
+      expect(
+        subject.queryByText("Confirm liquor license availability", { exact: false })
+      ).not.toBeInTheDocument();
     });
 
     it("shows liquor license step if any location includes it", () => {
@@ -54,7 +60,10 @@ describe("roadmap page", () => {
           locations: { locations: [{ license: true }, { license: false }] },
         })
       );
-      expect(subject.queryByText("Obtain a Liquor License", { exact: false })).toBeInTheDocument();
+      expect(subject.queryByText("Obtain your Liquor License", { exact: false })).toBeInTheDocument();
+      expect(
+        subject.queryByText("Confirm liquor license availability", { exact: false })
+      ).toBeInTheDocument();
     });
   });
 });
