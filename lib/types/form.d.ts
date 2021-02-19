@@ -10,38 +10,46 @@ export interface BusinessForm {
     firstName?: string;
     lastName?: string;
     email?: string;
-    [k: string]: unknown | undefined;
+    [k: string]: unknown;
   };
   businessType?: {
     businessType?: "Restaurant" | "Other";
-    [k: string]: unknown | undefined;
+    [k: string]: unknown;
   };
   businessName?: {
     businessName?: string;
-    [k: string]: unknown | undefined;
+    [k: string]: unknown;
   };
   businessDescription?: {
     businessDescription?: string;
-    [k: string]: unknown | undefined;
+    [k: string]: unknown;
   };
   businessStructure?: {
-    businessStructure?: "LLC" | "LP" | "S-Corp";
-    [k: string]: unknown | undefined;
+    businessStructure?:
+      | "Sole Proprietorship"
+      | "General Partnership"
+      | "Limited Partnership (LP)"
+      | "Limited Liability Partnership (LLP)"
+      | "Limited Liability Company (LLC)"
+      | "C-Corporation"
+      | "S-Corporation"
+      | "B-Corporation";
+    [k: string]: unknown;
   };
   locations?: {
     locations?: [
       {
         zipCode?: string;
         license?: boolean;
-        [k: string]: unknown | undefined;
+        [k: string]: unknown;
       },
       ...{
         zipCode?: string;
         license?: boolean;
-        [k: string]: unknown | undefined;
+        [k: string]: unknown;
       }[]
     ];
-    [k: string]: unknown | undefined;
+    [k: string]: unknown;
   };
-  [k: string]: unknown | undefined;
+  [k: string]: unknown;
 }

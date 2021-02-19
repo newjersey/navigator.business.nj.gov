@@ -1,6 +1,6 @@
-import { StepsEntity } from "../lib/types/roadmaps";
 import React, { ReactElement } from "react";
 import { Task } from "./Task";
+import { StepsEntity } from "../lib/types/Roadmap";
 
 interface Props {
   step: StepsEntity;

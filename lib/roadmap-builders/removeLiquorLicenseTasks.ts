@@ -1,4 +1,4 @@
-import { Roadmap } from "../types/roadmaps";
+import { Roadmap } from "../types/Roadmap";
 
 export const removeLiquorLicenseTasks = (roadmap: Roadmap): Roadmap => {
   const planLocationStep = roadmap.steps.find((step) => step.id === "plan_your_location");

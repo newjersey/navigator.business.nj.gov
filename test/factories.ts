@@ -1,7 +1,8 @@
 import { BusinessUser } from "../lib/types/BusinessUser";
 import { BusinessForm } from "../lib/types/form";
-import { Destination, Roadmap, StepsEntity, TasksEntity } from "../lib/types/roadmaps";
-import { ALL_STEPS, StepId } from "../lib/types/steps";
+import { Destination, Roadmap, StepsEntity, TasksEntity } from "../lib/types/Roadmap";
+import { ALL_STEPS, StepId } from "../lib/types/StepId";
+import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../lib/types/LegalStructure";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 
@@ -35,7 +36,7 @@ export const generateFormData = (overrides: Partial<BusinessForm>): BusinessForm
       ...overrides.businessDescription,
     },
     businessStructure: {
-      businessStructure: "LLC",
+      businessStructure: randomLegalStructure(),
       ...overrides.businessStructure,
     },
     locations: {
@@ -92,4 +93,9 @@ export const generateDestination = (overrides: Partial<Destination>): Destinatio
 export const randomStepId = (): StepId => {
   const randomIndex = Math.floor(Math.random() * ALL_STEPS.length);
   return ALL_STEPS[randomIndex];
+};
+
+export const randomLegalStructure = (): LegalStructure => {
+  const randomIndex = Math.floor(Math.random() * ALL_LEGAL_STRUCTURES.length);
+  return ALL_LEGAL_STRUCTURES[randomIndex];
 };

@@ -1,4 +1,4 @@
-import { StepId } from "./steps";
+import { StepId } from "./StepId";
 
 export interface Roadmap {
   steps: StepsEntity[];

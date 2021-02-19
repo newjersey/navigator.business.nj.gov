@@ -47,7 +47,16 @@
       "properties": {
         "businessStructure": {
           "type": "string",
-          "enum": ["LLC", "LP", "S-Corp"]
+          "enum": [
+            "Sole Proprietorship",
+            "General Partnership",
+            "Limited Partnership (LP)",
+            "Limited Liability Partnership (LLP)",
+            "Limited Liability Company (LLC)",
+            "C-Corporation",
+            "S-Corporation",
+            "B-Corporation"
+          ]
         }
       }
     },

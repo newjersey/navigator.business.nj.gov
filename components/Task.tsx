@@ -1,5 +1,5 @@
-import { TasksEntity } from "../lib/types/roadmaps";
 import React, { ReactElement } from "react";
+import { TasksEntity } from "../lib/types/Roadmap";
 
 interface Props {
   task: TasksEntity;

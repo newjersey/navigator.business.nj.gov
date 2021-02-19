@@ -26,6 +26,32 @@ describe("roadmap page", () => {
     expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
   });
 
+  describe("business structure", () => {
+    it("shows search business name step if structure in PublicRecordFiling group", () => {
+      subject = renderWithFormData(
+        <Roadmap />,
+        generateFormData({
+          businessStructure: { businessStructure: "Limited Liability Company (LLC)" },
+        })
+      );
+      expect(subject.queryByText("3 - Form & Register Your Business", { exact: false })).toBeInTheDocument();
+      expect(subject.queryByText("Search for Available Business Names")).toBeInTheDocument();
+      expect(subject.queryByText("Register a Trade Name")).not.toBeInTheDocument();
+    });
+
+    it("shows trade name step if structure in TradeName group", () => {
+      subject = renderWithFormData(
+        <Roadmap />,
+        generateFormData({
+          businessStructure: { businessStructure: "General Partnership" },
+        })
+      );
+      expect(subject.queryByText("3 - Form & Register Your Business", { exact: false })).toBeInTheDocument();
+      expect(subject.queryByText("Search for Available Business Names")).not.toBeInTheDocument();
+      expect(subject.queryByText("Register a Trade Name")).toBeInTheDocument();
+    });
+  });
+
   describe("liquor license", () => {
     it("does not show liquor license step if no locations", () => {
       subject = renderWithFormData(

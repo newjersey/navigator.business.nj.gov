@@ -25,7 +25,7 @@
         "name": "",
         "link": "https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online"
       },
-      "to_complete_must_have": ["Available Names "],
+      "to_complete_must_have": ["Available Names"],
       "after_completing_will_have": ["EIN", "EIN Certificate"]
     },
     {
@@ -76,7 +76,7 @@
         "Estimated start date"
       ],
       "after_completing_will_have": [
-        "Business Registration Certficiate",
+        "Business Registration Certificate",
         "NJ Tax ID",
         "Authorization to Collect Sales Tax"
       ]

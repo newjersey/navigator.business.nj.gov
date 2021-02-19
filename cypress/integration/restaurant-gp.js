@@ -1,13 +1,13 @@
 import { testUserEmail } from "../support";
 import { tryLogIn } from "../support/helpers";
 import {
+  gpStepShouldExist,
   liquorLicenseShouldExist,
   liquorLicenseShouldNotExist,
-  llcStepShouldExist,
   restaurantStepsShouldExist,
 } from "../support/steps-validators";
 
-describe("Restaurant LLC", () => {
+describe("Restaurant GP", () => {
   beforeEach(() => {
     tryLogIn();
   });
@@ -30,7 +30,7 @@ describe("Restaurant LLC", () => {
     cy.get('input[label="businessDescription"]').type("Selling useful products");
     cy.contains("Next").click();
 
-    cy.get("select#root_businessStructure_businessStructure").select("Limited Liability Company (LLC)");
+    cy.get("select#root_businessStructure_businessStructure").select("General Partnership");
     cy.contains("Next").click();
 
     cy.get('input[label="zipCode"]').type("11111");
@@ -38,7 +38,7 @@ describe("Restaurant LLC", () => {
 
     // check roadmap
     restaurantStepsShouldExist();
-    llcStepShouldExist();
+    gpStepShouldExist();
     liquorLicenseShouldNotExist();
 
     // add liquor license
@@ -53,7 +53,7 @@ describe("Restaurant LLC", () => {
 
     // check roadmap
     restaurantStepsShouldExist();
-    llcStepShouldExist();
+    gpStepShouldExist();
     liquorLicenseShouldExist();
   });
 });
