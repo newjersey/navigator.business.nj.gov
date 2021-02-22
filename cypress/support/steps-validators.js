@@ -14,6 +14,28 @@ export const restaurantStepsShouldExist = () => {
   cy.contains("Obtain Building Permit").should("exist");
   cy.contains("Get your floor plan approved by your local DOH").should("exist");
   cy.contains("Complete Food Safety Course").should("exist");
+
+  // not have ecommerce tasks
+  cy.contains("Zoning Requirements").should("not.exist");
+};
+
+export const ecommerceStepsShouldExist = () => {
+  // step 1
+  cy.contains("Plan Your Location").should("exist");
+  cy.contains("Zoning Requirements").should("exist");
+
+  // step 2
+  cy.contains("Research and Prepare Your Business License").should("exist");
+  cy.contains("Search Licenses").should("exist");
+
+  // step 4
+  cy.contains("Sign Your Lease & File Local Permits").should("exist");
+  cy.contains("Municipality Licenses").should("exist");
+
+  // not have restaurant tasks
+  cy.contains("Identify a potential lease").should("not.exist");
+  cy.contains("Verify zoning").should("not.exist");
+  cy.contains("Inquire about Local Permits Required").should("not.exist");
 };
 
 export const llcStepShouldExist = () => {

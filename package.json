@@ -14,8 +14,8 @@
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "make-schema-types": "json2ts -i schemas/form.json -o lib/types/form.d.ts",
     "make-roadmap-types": "make_types -i lib/types/Roadmap.ts roadmaps/restaurant.json Roadmap",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run --record false"
+    "cypress:open": "./scripts/check-env.sh && cypress open",
+    "cypress:run": "./scripts/check-env.sh && cypress run --record false"
   },
   "prettier": {
     "printWidth": 110

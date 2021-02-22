@@ -22,7 +22,7 @@
       "properties": {
         "businessType": {
           "type": "string",
-          "enum": ["Restaurant", "Other"]
+          "enum": ["Restaurant", "E-Commerce", "Other"]
         }
       }
     },

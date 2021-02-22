@@ -13,7 +13,7 @@ export interface BusinessForm {
     [k: string]: unknown;
   };
   businessType?: {
-    businessType?: "Restaurant" | "Other";
+    businessType?: "Restaurant" | "E-Commerce" | "Other";
     [k: string]: unknown;
   };
   businessName?: {

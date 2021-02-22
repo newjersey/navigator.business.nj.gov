@@ -26,6 +26,30 @@ describe("roadmap page", () => {
     expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
   });
 
+  describe("business type", () => {
+    it("shows restaurant steps", () => {
+      subject = renderWithFormData(
+        <Roadmap />,
+        generateFormData({
+          businessType: { businessType: "Restaurant" },
+        })
+      );
+      expect(subject.queryByText("Sign Your Lease")).toBeInTheDocument();
+      expect(subject.queryByText("Municipality Licenses")).not.toBeInTheDocument();
+    });
+
+    it("shows ecommerce steps", () => {
+      subject = renderWithFormData(
+        <Roadmap />,
+        generateFormData({
+          businessType: { businessType: "E-Commerce" },
+        })
+      );
+      expect(subject.queryByText("Municipality Licenses")).toBeInTheDocument();
+      expect(subject.queryByText("Sign Your Lease")).not.toBeInTheDocument();
+    });
+  });
+
   describe("business structure", () => {
     it("shows search business name step if structure in PublicRecordFiling group", () => {
       subject = renderWithFormData(

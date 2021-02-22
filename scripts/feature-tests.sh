@@ -8,6 +8,8 @@ kill $(lsof -i:${APP_PORT} -t)
 
 set -e
 
+./scripts/check-env.sh
+
 echo "📦 building app"
 npm run build
 
