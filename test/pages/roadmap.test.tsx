@@ -35,7 +35,10 @@ describe("roadmap page", () => {
         })
       );
       expect(subject.queryByText("Sign Your Lease")).toBeInTheDocument();
-      expect(subject.queryByText("Municipality Licenses")).not.toBeInTheDocument();
+      expect(subject.queryByText("Search Licenses")).not.toBeInTheDocument();
+      expect(
+        subject.queryByText("Register with the N.J. Division of Consumer Affairs")
+      ).not.toBeInTheDocument();
     });
 
     it("shows ecommerce steps", () => {
@@ -45,7 +48,22 @@ describe("roadmap page", () => {
           businessType: { businessType: "E-Commerce" },
         })
       );
-      expect(subject.queryByText("Municipality Licenses")).toBeInTheDocument();
+      expect(subject.queryByText("Search Licenses")).toBeInTheDocument();
+      expect(subject.queryByText("Sign Your Lease")).not.toBeInTheDocument();
+      expect(
+        subject.queryByText("Register with the N.J. Division of Consumer Affairs")
+      ).not.toBeInTheDocument();
+    });
+
+    it("shows home contractor steps", () => {
+      subject = renderWithFormData(
+        <Roadmap />,
+        generateFormData({
+          businessType: { businessType: "Home Improvement Contractor" },
+        })
+      );
+      expect(subject.queryByText("Register with the N.J. Division of Consumer Affairs")).toBeInTheDocument();
+      expect(subject.queryByText("Search Licenses")).not.toBeInTheDocument();
       expect(subject.queryByText("Sign Your Lease")).not.toBeInTheDocument();
     });
   });

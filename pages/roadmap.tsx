@@ -3,32 +3,23 @@ import { PageSkeleton } from "../components/PageSkeleton";
 import { Layout } from "../components/Layout";
 import Link from "next/link";
 import { FormContext } from "./_app";
-import restaurantRoadmap from "../roadmaps/restaurant.json";
-import ecommerceRoadmap from "../roadmaps/ecommerce.json";
 import { Step } from "../components/Step";
 import { useMountEffect } from "../lib/helpers";
 import { needsLiquorLicense } from "../lib/form-helpers/needsLiquorLicense";
 import { removeLiquorLicenseTasks } from "../lib/roadmap-builders/removeLiquorLicenseTasks";
-import cloneDeep from "lodash/cloneDeep";
 import { addLegalStructureStep } from "../lib/roadmap-builders/addLegalStructureStep";
 import { Roadmap } from "../lib/types/Roadmap";
+import { loadInitialRoadmap } from "../lib/roadmap-builders/loadInitialRoadmap";
 
 const RoadmapPage = (): ReactElement => {
   const { formData } = useContext(FormContext);
   const [roadmap, setRoadmap] = useState<Roadmap>(undefined);
 
   useMountEffect(() => {
-    let temp: Roadmap;
+    let temp = loadInitialRoadmap(formData.businessType.businessType);
 
-    if (formData.businessType.businessType === "Restaurant") {
-      temp = cloneDeep(restaurantRoadmap as Roadmap);
-
-      if (!needsLiquorLicense(formData)) {
-        temp = removeLiquorLicenseTasks(temp);
-      }
-    }
-    if (formData.businessType.businessType === "E-Commerce") {
-      temp = cloneDeep(ecommerceRoadmap as Roadmap);
+    if (!needsLiquorLicense(formData)) {
+      temp = removeLiquorLicenseTasks(temp);
     }
 
     temp = addLegalStructureStep(temp, formData.businessStructure.businessStructure);
