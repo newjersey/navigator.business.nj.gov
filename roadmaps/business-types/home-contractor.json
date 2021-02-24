@@ -1,0 +1,25 @@
+{
+  "steps": [
+    {
+      "step_number": 1,
+      "id": "plan_your_location",
+      "name": "Plan Your Location",
+      "description": "Before you officially form & register your business, its important to have a target location and lease in mind - that way you can form & register your business using your proposed business address. If you change the location of your restaurant after you form & register, you will need to file an ammendement to your Business Formation & Registration,",
+      "tasks": ["verify_zoning_office"]
+    },
+    {
+      "step_number": 2,
+      "name": "Research and Prepare Your Business License",
+      "id": "business_license",
+      "description": "All Home Improvement Contractors must register with the N.J. Division of Consumer Affairs.",
+      "tasks": ["register_consumer_affairs"]
+    },
+    {
+      "step_number": 4,
+      "id": "lease_and_permits",
+      "name": "Sign Your Lease & File Local Permits",
+      "description": "You can now sign your lease and file local permits under the protection of your new legal entity and business name. ",
+      "tasks": ["municipality_licenses"]
+    }
+  ]
+}

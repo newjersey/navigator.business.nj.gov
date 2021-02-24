@@ -1,0 +1,11 @@
+{
+  "id": "verify_zoning_restaurant",
+  "name": "Verify zoning",
+  "description": "Verify that your desired building is zoned for a restaurant, and that a commercial kitchen exists or can be built.",
+  "destination": {
+    "name": "City Office of Zoning",
+    "link": ""
+  },
+  "to_complete_must_have": ["Address of Potential Lease"],
+  "after_completing_will_have": []
+}

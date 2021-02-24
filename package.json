@@ -13,7 +13,7 @@
     "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}' --fix",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "make-schema-types": "json2ts -i schemas/form.json -o lib/types/form.d.ts",
-    "make-roadmap-types": "make_types -i lib/types/Roadmap.ts roadmaps/restaurant.json Roadmap",
+    "make-roadmap-types": "make_types -i lib/types/Roadmap.ts roadmaps/business-types/restaurant.json Roadmap",
     "cypress:open": "./scripts/check-env.sh && cypress open",
     "cypress:run": "./scripts/check-env.sh && cypress run --record false"
   },
@@ -48,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "cypress": "^6.5.0",
+    "cypress-wait-until": "^1.7.1",
     "eslint": "^7.19.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.2.0",

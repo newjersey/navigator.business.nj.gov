@@ -5,6 +5,10 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type Restaurant = "restaurant";
+export type ECommerce = "e-commerce";
+export type HomeImprovementContractor = "home-contractor";
+
 export interface BusinessForm {
   user?: {
     firstName?: string;
@@ -13,7 +17,7 @@ export interface BusinessForm {
     [k: string]: unknown;
   };
   businessType?: {
-    businessType?: "Restaurant" | "E-Commerce" | "Home Improvement Contractor" | "Other";
+    businessType?: (Restaurant | ECommerce | HomeImprovementContractor) & string;
     [k: string]: unknown;
   };
   businessName?: {

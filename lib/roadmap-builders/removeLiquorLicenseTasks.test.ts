@@ -6,14 +6,12 @@ describe("removeLiquorLicenseTasks", () => {
     const roadmap = generateRoadmap({
       steps: [
         generateStep({
-          id: "plan_your_location",
           tasks: [
             generateTask({ id: "liquor_license_availability" }),
             generateTask({ id: "something_else" }),
           ],
         }),
         generateStep({
-          id: "lease_and_permits",
           tasks: [generateTask({ id: "liquor_license" }), generateTask({ id: "another_thing" })],
         }),
       ],

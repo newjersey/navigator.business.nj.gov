@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { ReactElement } from "react";
 import { TasksEntity } from "../lib/types/Roadmap";
 
@@ -6,20 +7,13 @@ interface Props {
 }
 
 export const Task = (props: Props): ReactElement => {
-  if (props.task.id === "form_business_entity") {
-    return (
-      <>
-        <a className="usa-link" href="/tasks/form_business_entity">
-          <h4>{props.task.name}</h4>
-        </a>
-        <p>{props.task.description}</p>
-      </>
-    );
-  }
-
   return (
     <>
-      <h4>{props.task.name}</h4>
+      <Link href={`/tasks/${props.task.id}`} passHref>
+        <a href={`/tasks/${props.task.id}`} className="usa-link">
+          <h4 data-task={props.task.id}>{props.task.name}</h4>
+        </a>
+      </Link>
       <p>{props.task.description}</p>
     </>
   );

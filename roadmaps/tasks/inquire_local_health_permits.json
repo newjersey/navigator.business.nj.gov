@@ -1,0 +1,11 @@
+{
+  "id": "inquire_local_health_permits",
+  "name": "Inquire about Local Permits Required",
+  "description": "Contact the local Dept of Health to understand future permits you will need to file for once you've signed your lease",
+  "destination": {
+    "name": "Local Department of Health",
+    "link": ""
+  },
+  "to_complete_must_have": ["Address of Potential Lease"],
+  "after_completing_will_have": []
+}

@@ -2,7 +2,6 @@ import { fireEvent, RenderResult } from "@testing-library/react";
 import Onboarding from "../../pages/onboarding";
 import { useRouter } from "next/router";
 import { renderWithFormData } from "../helpers";
-import { generateFormData } from "../factories";
 
 jest.mock("next/router");
 
@@ -15,12 +14,9 @@ describe("onboarding form", () => {
     (useRouter as jest.Mock).mockReturnValue({
       push: mockPush,
     });
-    subject = renderWithFormData(
-      <Onboarding />,
-      generateFormData({
-        user: { email: "ada@lovelace.org" },
-      })
-    );
+    subject = renderWithFormData(<Onboarding />, {
+      user: { email: "ada@lovelace.org" },
+    });
   });
 
   it("prefills form from context", () => {
@@ -51,7 +47,22 @@ describe("onboarding form", () => {
     fillText(subject.getByLabelText("Zip code"), "11111");
 
     fireEvent.click(subject.getByText("Next"));
-    expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    expect(mockPush).toHaveBeenCalledWith("/roadmaps/restaurant");
+  });
+
+  it("directs to roadmap based on business type", () => {
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.change(subject.getByLabelText("What type of company do you want to start?"), {
+      target: { value: "e-commerce" },
+    });
+
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.click(subject.getByText("Next"));
+
+    expect(mockPush).toHaveBeenCalledWith("/roadmaps/e-commerce");
   });
 
   it("is able to go back", () => {

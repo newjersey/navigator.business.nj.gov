@@ -1,0 +1,11 @@
+{
+  "id": "liquor_license_availability",
+  "name": "Confirm liquor license availability",
+  "description": "If you plan on serving liquor, verify the cost and availability of a liquor license in your area.",
+  "destination": {
+    "name": "City Clerk",
+    "link": ""
+  },
+  "to_complete_must_have": ["Address of Potential Lease"],
+  "after_completing_will_have": []
+}

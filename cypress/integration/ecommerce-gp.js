@@ -5,6 +5,7 @@ import {
   gpStepShouldExist,
   liquorLicenseShouldNotExist,
 } from "../support/steps-validators";
+import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("E-Commerce GP", () => {
   beforeEach(() => {
@@ -39,5 +40,7 @@ describe("E-Commerce GP", () => {
     ecommerceStepsShouldExist();
     gpStepShouldExist();
     liquorLicenseShouldNotExist();
+
+    checkAllTaskLinks();
   });
 });

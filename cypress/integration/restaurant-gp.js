@@ -6,6 +6,7 @@ import {
   liquorLicenseShouldNotExist,
   restaurantStepsShouldExist,
 } from "../support/steps-validators";
+import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("Restaurant GP", () => {
   beforeEach(() => {
@@ -40,6 +41,7 @@ describe("Restaurant GP", () => {
     restaurantStepsShouldExist();
     gpStepShouldExist();
     liquorLicenseShouldNotExist();
+    checkAllTaskLinks();
 
     // add liquor license
     cy.get("button").contains("Edit my data").click();
@@ -55,5 +57,6 @@ describe("Restaurant GP", () => {
     restaurantStepsShouldExist();
     gpStepShouldExist();
     liquorLicenseShouldExist();
+    checkAllTaskLinks();
   });
 });

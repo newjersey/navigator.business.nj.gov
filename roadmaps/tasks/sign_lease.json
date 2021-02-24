@@ -1,0 +1,11 @@
+{
+  "id": "sign_lease",
+  "name": "Sign Your Lease",
+  "description": "You can now sign your lease under your official business name and corporate structure",
+  "destination": {
+    "name": "Landlord",
+    "link": ""
+  },
+  "to_complete_must_have": ["Business name", "Legal structure"],
+  "after_completing_will_have": []
+}

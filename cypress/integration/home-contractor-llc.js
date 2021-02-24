@@ -5,6 +5,7 @@ import {
   liquorLicenseShouldNotExist,
   llcStepShouldExist,
 } from "../support/steps-validators";
+import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("Home Improvement Contractor GP", () => {
   beforeEach(() => {
@@ -39,5 +40,6 @@ describe("Home Improvement Contractor GP", () => {
     homeContractorStepsShouldExist();
     llcStepShouldExist();
     liquorLicenseShouldNotExist();
+    checkAllTaskLinks();
   });
 });

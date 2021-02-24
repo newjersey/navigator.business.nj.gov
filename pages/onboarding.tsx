@@ -45,7 +45,7 @@ const Onboarding = (): ReactElement => {
     if (page + 1 < sections.length) {
       setPage(page + 1);
     } else {
-      router.push("/roadmap");
+      router.push(`/roadmaps/${event.formData.businessType.businessType}`);
     }
   };
 

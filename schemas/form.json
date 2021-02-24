@@ -22,7 +22,23 @@
       "properties": {
         "businessType": {
           "type": "string",
-          "enum": ["Restaurant", "E-Commerce", "Home Improvement Contractor", "Other"]
+          "anyOf": [
+            {
+              "type": "string",
+              "title": "Restaurant",
+              "enum": ["restaurant"]
+            },
+            {
+              "type": "string",
+              "title": "E-Commerce",
+              "enum": ["e-commerce"]
+            },
+            {
+              "type": "string",
+              "title": "Home Improvement Contractor",
+              "enum": ["home-contractor"]
+            }
+          ]
         }
       }
     },

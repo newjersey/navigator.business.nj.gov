@@ -1,7 +1,13 @@
 import { BusinessUser } from "../lib/types/BusinessUser";
 import { BusinessForm } from "../lib/types/form";
-import { Destination, Roadmap, StepsEntity, TasksEntity } from "../lib/types/Roadmap";
-import { ALL_STEPS, StepId } from "../lib/types/StepId";
+import {
+  Destination,
+  Roadmap,
+  RoadmapFromFile,
+  StepsEntity,
+  StepsFromFile,
+  TasksEntity,
+} from "../lib/types/Roadmap";
 import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../lib/types/LegalStructure";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
@@ -24,7 +30,7 @@ export const generateFormData = (overrides: Partial<BusinessForm>): BusinessForm
       ...overrides.user,
     },
     businessType: {
-      businessType: "Restaurant",
+      businessType: "restaurant",
       ...overrides.businessType,
     },
     businessName: {
@@ -61,7 +67,7 @@ export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
 export const generateStep = (overrides: Partial<StepsEntity>): StepsEntity => {
   return {
     step_number: randomInt(),
-    id: randomStepId(),
+    id: "some-id-" + randomInt(),
     name: "some-name-" + randomInt(),
     description: "some-description-" + randomInt(),
     tasks: [generateTask({})],
@@ -82,17 +88,30 @@ export const generateTask = (overrides: Partial<TasksEntity>): TasksEntity => {
   };
 };
 
+export const generateRoadmapFromFile = (overrides: Partial<RoadmapFromFile>): RoadmapFromFile => {
+  return {
+    steps: [generateStepFromFile({})],
+    ...overrides,
+  };
+};
+
+export const generateStepFromFile = (overrides: Partial<StepsFromFile>): StepsFromFile => {
+  return {
+    step_number: randomInt(),
+    id: "some-id-" + randomInt(),
+    name: "some-name-" + randomInt(),
+    description: "some-description-" + randomInt(),
+    tasks: ["some-task-id-" + randomInt()],
+    ...overrides,
+  };
+};
+
 export const generateDestination = (overrides: Partial<Destination>): Destination => {
   return {
     name: "some-name-" + randomInt(),
     link: "some-link-" + randomInt(),
     ...overrides,
   };
-};
-
-export const randomStepId = (): StepId => {
-  const randomIndex = Math.floor(Math.random() * ALL_STEPS.length);
-  return ALL_STEPS[randomIndex];
 };
 
 export const randomLegalStructure = (): LegalStructure => {

@@ -5,6 +5,7 @@ import {
   liquorLicenseShouldNotExist,
   llcStepShouldExist,
 } from "../support/steps-validators";
+import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("E-Commerce LLC", () => {
   beforeEach(() => {
@@ -39,5 +40,6 @@ describe("E-Commerce LLC", () => {
     ecommerceStepsShouldExist();
     llcStepShouldExist();
     liquorLicenseShouldNotExist();
+    checkAllTaskLinks();
   });
 });

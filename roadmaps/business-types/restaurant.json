@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "step_number": 1,
+      "id": "plan_your_location",
+      "name": "Plan Your Location",
+      "description": "Before you officially form & register your business, its important to have a target location and lease in mind - that way you can form & register your business using your proposed business address. If you change the location of your restaurant after you form & register, you will need to file an ammendement to your Business Formation & Registration,",
+      "tasks": [
+        "identify_potential_lease",
+        "verify_zoning_restaurant",
+        "liquor_license_availability",
+        "inquire_local_health_permits"
+      ]
+    },
+    {
+      "step_number": 2,
+      "name": "Research and Prepare Your Business License",
+      "id": "business_license",
+      "description": "N/A",
+      "tasks": []
+    },
+    {
+      "step_number": 4,
+      "id": "lease_and_permits",
+      "name": "Sign Your Lease & File Local Permits",
+      "description": "You can now sign your lease and file local permits under the protection of your new legal entity and business name. ",
+      "tasks": [
+        "sign_lease",
+        "building_permit",
+        "floor_plan_approval_doh",
+        "food_safety_course",
+        "liquor_license"
+      ]
+    }
+  ]
+}

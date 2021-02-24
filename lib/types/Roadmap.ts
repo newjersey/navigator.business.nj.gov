@@ -1,11 +1,20 @@
-import { StepId } from "./StepId";
+export interface RoadmapFromFile {
+  steps: StepsFromFile[];
+}
+export interface StepsFromFile {
+  step_number: number;
+  id: string;
+  name: string;
+  description: string;
+  tasks: string[];
+}
 
 export interface Roadmap {
   steps: StepsEntity[];
 }
 export interface StepsEntity {
   step_number: number;
-  id: StepId;
+  id: string;
   name: string;
   description: string;
   tasks: TasksEntity[];
@@ -23,3 +32,5 @@ export interface Destination {
   name: string;
   link: string;
 }
+
+export type TasksLookup = Record<string, TasksEntity>;

@@ -1,0 +1,11 @@
+{
+  "id": "municipality_licenses",
+  "name": "Municipality Licenses",
+  "description": "Check with your municipality to see if there are any other licenses you should be aware of.",
+  "destination": {
+    "name": "City Clerk",
+    "link": ""
+  },
+  "to_complete_must_have": [],
+  "after_completing_will_have": []
+}
