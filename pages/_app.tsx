@@ -7,6 +7,11 @@ import { BusinessUser } from "../lib/types/BusinessUser";
 import { useMountEffect } from "../lib/helpers";
 import { BusinessForm } from "../lib/types/form";
 
+import awsExports from "../aws-exports";
+import {Amplify} from "aws-amplify";
+
+Amplify.configure({...awsExports, ssr: true });
+
 const initialState = {
   user: null,
   isAuthenticated: false,
