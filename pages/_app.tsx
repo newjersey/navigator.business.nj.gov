@@ -4,7 +4,7 @@ import React, {Dispatch, ReactElement, useReducer, useState} from "react";
 import {AuthContextType, AuthReducer, authReducer} from "../lib/auth/AuthContext";
 import {BusinessForm} from "../lib/types/form";
 
-import awsExports from "../aws-exports";
+import awsExports from "../src/aws-exports";
 import {Amplify} from "aws-amplify";
 import {useMountEffect} from "../lib/helpers";
 
