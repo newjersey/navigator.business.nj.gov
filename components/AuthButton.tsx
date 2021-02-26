@@ -1,5 +1,5 @@
-import {ReactElement, useContext} from "react";
-import {AuthContext} from "../pages/_app";
+import { ReactElement, useContext } from "react";
+import { AuthContext } from "../pages/_app";
 
 interface Props {
   onLogin?: () => void;

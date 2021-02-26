@@ -1,16 +1,15 @@
-import {testUserEmail} from "../support";
+import { testUserEmail } from "../support";
 import {
   gpStepShouldExist,
   homeContractorStepsShouldExist,
   liquorLicenseShouldNotExist,
 } from "../support/steps-validators";
-import {checkAllTaskLinks} from "../support/tasks-validators";
+import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("Home Improvement Contractor GP", () => {
-
   beforeEach(() => {
-    cy.visit('/')
-  })
+    cy.visit("/");
+  });
 
   it("enters user info and shows the roadmap", () => {
     cy.contains("Get Started").click();

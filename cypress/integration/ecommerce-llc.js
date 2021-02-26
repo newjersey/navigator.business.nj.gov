@@ -7,10 +7,9 @@ import {
 import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("E-Commerce LLC", () => {
-
   beforeEach(() => {
-    cy.visit('/')
-  })
+    cy.visit("/");
+  });
 
   it("enters user info and shows the roadmap", () => {
     cy.contains("Get Started").click();

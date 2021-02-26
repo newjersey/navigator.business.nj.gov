@@ -1,14 +1,14 @@
 import "../styles/global.scss";
-import {AppProps} from "next/app";
-import React, {Dispatch, ReactElement, useReducer, useState} from "react";
-import {AuthContextType, AuthReducer, authReducer} from "../lib/auth/AuthContext";
-import {BusinessForm} from "../lib/types/form";
+import { AppProps } from "next/app";
+import React, { Dispatch, ReactElement, useReducer, useState } from "react";
+import { AuthContextType, AuthReducer, authReducer } from "../lib/auth/AuthContext";
+import { BusinessForm } from "../lib/types/form";
 
 import awsExports from "../src/aws-exports";
-import {Amplify} from "aws-amplify";
-import {useMountEffect} from "../lib/helpers";
+import { Amplify } from "aws-amplify";
+import { useMountEffect } from "../lib/helpers";
 
-Amplify.configure({...awsExports, ssr: true });
+Amplify.configure({ ...awsExports, ssr: true });
 
 const initialState = {
   user: { email: "test.user@example.com", id: "12345" },
@@ -42,7 +42,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         email: state.user.email,
       },
     });
-  })
+  });
 
   return (
     <>
