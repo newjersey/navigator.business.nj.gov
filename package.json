@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "next-on-netlify",
     "start": "next start",
     "test": "jest",
     "eslint": "eslint",
@@ -14,8 +13,8 @@
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "make-schema-types": "json2ts -i schemas/form.json -o lib/types/form.d.ts",
     "make-roadmap-types": "make_types -i lib/types/Roadmap.ts roadmaps/business-types/restaurant.json Roadmap",
-    "cypress:open": "./scripts/check-env.sh && cypress open",
-    "cypress:run": "./scripts/check-env.sh && cypress run --record false"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --record false"
   },
   "prettier": {
     "printWidth": 110
@@ -33,7 +32,6 @@
     "json-schema-to-typescript": "^10.1.3",
     "lodash.clonedeep": "^4.5.0",
     "maketypes": "^1.1.2",
-    "netlify-identity-widget": "^1.9.1",
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -43,7 +41,6 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
-    "@types/netlify-identity-widget": "^1.9.1",
     "@types/node": "^14.14.25",
     "@types/react": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
@@ -59,7 +56,6 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "identity-obj-proxy": "^3.0.0",
-    "next-on-netlify": "^2.8.7",
     "prettier": "^2.2.1",
     "typescript": "^4.1.3"
   }

@@ -1,5 +1,4 @@
 import { testUserEmail } from "../support";
-import { tryLogIn } from "../support/helpers";
 import {
   ecommerceStepsShouldExist,
   gpStepShouldExist,
@@ -8,9 +7,10 @@ import {
 import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("E-Commerce GP", () => {
+
   beforeEach(() => {
-    tryLogIn();
-  });
+    cy.visit('/')
+  })
 
   it("enters user info and shows the roadmap", () => {
     cy.contains("Get Started").click();

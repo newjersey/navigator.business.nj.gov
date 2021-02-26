@@ -1,17 +1,17 @@
-import { testUserEmail } from "../support";
-import { tryLogIn } from "../support/helpers";
+import {testUserEmail} from "../support";
 import {
   liquorLicenseShouldExist,
   liquorLicenseShouldNotExist,
   llcStepShouldExist,
   restaurantStepsShouldExist,
 } from "../support/steps-validators";
-import { checkAllTaskLinks } from "../support/tasks-validators";
+import {checkAllTaskLinks} from "../support/tasks-validators";
 
 describe("Restaurant LLC", () => {
+
   beforeEach(() => {
-    tryLogIn();
-  });
+    cy.visit('/')
+  })
 
   it("enters user info and shows the roadmap", () => {
     cy.contains("Get Started").click();

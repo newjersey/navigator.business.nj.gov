@@ -19,6 +19,4 @@ import "./commands";
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
-export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");
-export const netlifyIdentityUrl = Cypress.env("NETLIFY_IDENTITY_URL");
+export const testUserEmail = 'test.user@example.com';

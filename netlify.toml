@@ -1,4 +1,0 @@
-[build]
-  command   = ""
-  functions = "out_functions"
-  publish   = "out_publish"

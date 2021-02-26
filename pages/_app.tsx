@@ -1,20 +1,18 @@
 import "../styles/global.scss";
-import { AppProps } from "next/app";
-import React, { Dispatch, ReactElement, useReducer, useState } from "react";
-import netlifyAuth from "../lib/auth/netlify-auth";
-import { AuthContextType, AuthReducer, authReducer } from "../lib/auth/AuthContext";
-import { BusinessUser } from "../lib/types/BusinessUser";
-import { useMountEffect } from "../lib/helpers";
-import { BusinessForm } from "../lib/types/form";
+import {AppProps} from "next/app";
+import React, {Dispatch, ReactElement, useReducer, useState} from "react";
+import {AuthContextType, AuthReducer, authReducer} from "../lib/auth/AuthContext";
+import {BusinessForm} from "../lib/types/form";
 
 import awsExports from "../aws-exports";
 import {Amplify} from "aws-amplify";
+import {useMountEffect} from "../lib/helpers";
 
 Amplify.configure({...awsExports, ssr: true });
 
 const initialState = {
-  user: null,
-  isAuthenticated: false,
+  user: { email: "test.user@example.com", id: "12345" },
+  isAuthenticated: true,
 };
 
 export const AuthContext = React.createContext<AuthContextType>({
@@ -37,22 +35,14 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [formData, setFormData] = useState<BusinessForm>({});
 
   useMountEffect(() => {
-    netlifyAuth.initialize((user: BusinessUser) => {
-      if (user) {
-        setFormData({
-          ...formData,
-          user: {
-            ...formData.user,
-            email: user.email,
-          },
-        });
-        dispatch({
-          type: "LOGIN",
-          user: user,
-        });
-      }
+    setFormData({
+      ...formData,
+      user: {
+        ...formData.user,
+        email: state.user.email,
+      },
     });
-  });
+  })
 
   return (
     <>
