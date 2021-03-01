@@ -17,6 +17,7 @@ while ! echo exit | nc localhost ${APP_PORT}; do sleep 1; done
 
 echo "🌟 app started"
 
+source ./scripts/env.sh
 npm run cypress:run -- --config baseUrl=http://localhost:${APP_PORT}
 
 set +e

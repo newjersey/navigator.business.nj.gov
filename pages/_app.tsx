@@ -1,18 +1,17 @@
 import "../styles/global.scss";
 import { AppProps } from "next/app";
-import React, { Dispatch, ReactElement, useReducer, useState } from "react";
+import React, { Dispatch, ReactElement, useEffect, useReducer, useState } from "react";
 import { AuthContextType, AuthReducer, authReducer } from "../lib/auth/AuthContext";
 import { BusinessForm } from "../lib/types/form";
 
 import awsExports from "../src/aws-exports";
 import { Amplify } from "aws-amplify";
-import { useMountEffect } from "../lib/helpers";
 
 Amplify.configure({ ...awsExports, ssr: true });
 
 const initialState = {
-  user: { email: "test.user@example.com", id: "12345" },
-  isAuthenticated: true,
+  user: undefined,
+  isAuthenticated: false,
 };
 
 export const AuthContext = React.createContext<AuthContextType>({
@@ -34,15 +33,17 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [formData, setFormData] = useState<BusinessForm>({});
 
-  useMountEffect(() => {
-    setFormData({
-      ...formData,
-      user: {
-        ...formData.user,
-        email: state.user.email,
-      },
-    });
-  });
+  useEffect(() => {
+    if (state.user) {
+      setFormData({
+        ...formData,
+        user: {
+          ...formData.user,
+          email: state.user.email,
+        },
+      });
+    }
+  }, [state.user]);
 
   return (
     <>

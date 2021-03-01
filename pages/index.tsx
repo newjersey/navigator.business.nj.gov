@@ -1,6 +1,6 @@
 import { Layout } from "../components/Layout";
 import Link from "next/link";
-import { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext } from "react";
 import { Hero } from "../components/njwds/Hero";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { AuthContext } from "./_app";

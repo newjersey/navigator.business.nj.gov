@@ -1,24 +1,22 @@
 import { ReactElement, useContext } from "react";
 import { AuthContext } from "../pages/_app";
+import { Auth } from "@aws-amplify/auth";
+import { useRouter } from "next/router";
 
-interface Props {
-  onLogin?: () => void;
-  onLogout?: () => void;
-}
-
-export const AuthButton = (props: Props): ReactElement => {
-  const { state } = useContext(AuthContext);
+export const AuthButton = (): ReactElement => {
+  const { state, dispatch } = useContext(AuthContext);
+  const router = useRouter();
 
   const login = () => {
-    if (props.onLogin) {
-      props.onLogin();
-    }
+    router.push("/signin");
   };
 
-  const logout = () => {
-    if (props.onLogout) {
-      props.onLogout();
-    }
+  const logout = async () => {
+    await Auth.signOut();
+    dispatch({
+      type: "LOGOUT",
+      user: undefined,
+    });
   };
 
   const loginButton = () => (

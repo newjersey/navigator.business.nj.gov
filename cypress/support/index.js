@@ -19,4 +19,5 @@ import "./commands";
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-export const testUserEmail = 'test.user@example.com';
+export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
+export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");

@@ -9,7 +9,7 @@ import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("Restaurant GP", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.loginByCognitoApi();
   });
 
   it("enters user info and shows the roadmap", () => {

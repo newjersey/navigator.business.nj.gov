@@ -8,7 +8,7 @@ import { checkAllTaskLinks } from "../support/tasks-validators";
 
 describe("E-Commerce LLC", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.loginByCognitoApi();
   });
 
   it("enters user info and shows the roadmap", () => {
