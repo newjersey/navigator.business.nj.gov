@@ -56,6 +56,11 @@ jobs:
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_TEST_USER_EMAIL: ${{ secrets.CYPRESS_TEST_USER_EMAIL }}
+          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+          CYPRESS_AWS_COGNITO_IDENTITY_POOL_ID: ${{ secrets.CYPRESS_AWS_COGNITO_IDENTITY_POOL_ID }}
+          CYPRESS_AWS_USER_POOLS_ID: ${{ secrets.CYPRESS_AWS_USER_POOLS_ID }}
+          CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID: ${{ secrets.CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🚀 Deploy to AWS Amplify
