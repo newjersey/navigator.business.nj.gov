@@ -52,3 +52,13 @@ amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
+
+# serverless backend
+
+# package directories
+backend/node_modules
+backend/jspm_packages
+# Serverless directories
+backend/.serverless
+# Webpack directories
+backend/.webpack

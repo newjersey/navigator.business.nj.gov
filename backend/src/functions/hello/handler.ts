@@ -1,16 +1,21 @@
-import 'source-map-support/register';
+import * as serverless from 'serverless-http';
+import * as express from 'express';
+import {Request, Response} from "express";
+import * as bodyParser from "body-parser";
 
-import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway';
-import { formatJSONResponse } from '@libs/apiGateway';
-import { middyfy } from '@libs/lambda';
+const app = express();
+app.use(bodyParser.json());
 
-import schema from './schema';
+app.get('/message', (_req: Request, res: Response) => {
+  res.send({ message: 'This is message route' });
+});
 
-const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
-  return formatJSONResponse({
-    message: `Hello ${event.body.name}, welcome to the exciting Serverless world!`,
-    event,
-  });
-}
+app.post('/message', (req: Request, res: Response) => {
+  res.send({ message: `Hello ${req.body.name}` });
+});
 
-export const main = middyfy(hello);
+app.use((_req: Request, res: Response) => {
+  res.send({ message: 'Server is running' });
+});
+
+export const hello = serverless(app);
