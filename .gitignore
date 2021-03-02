@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+web/node_modules
 /.pnp
 .pnp.js
 
@@ -9,15 +9,14 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+web/.next/
+web/out/
 
 # production
-/build
+web/build
 
 # misc
 .DS_Store
-.env*
 
 # debug
 npm-debug.log*
@@ -27,12 +26,12 @@ yarn-error.log*
 .idea/
 
 # Netlify build
-out_*
+web/out_*
 
 scripts/env.sh
 
-cypress/videos
-cypress/screenshots/
+web/cypress/videos
+web/cypress/screenshots/
 
 #amplify
 amplify/\#current-cloud-backend
@@ -46,6 +45,7 @@ build/
 dist/
 node_modules/
 aws-exports.js
+web/aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json
 amplify-build-config.json
@@ -53,12 +53,9 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 
-# serverless backend
-
-# package directories
-backend/node_modules
-backend/jspm_packages
-# Serverless directories
-backend/.serverless
-# Webpack directories
-backend/.webpack
+# serverless api backend
+api/node_modules
+api/jspm_packages
+api/.serverless
+api/.webpack
+api/.dynamodb

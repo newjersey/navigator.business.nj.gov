@@ -18,7 +18,7 @@ jobs:
         with:
           path: |
             **/node_modules
-            ${{ github.workspace }}/.next/cache
+            ${{ github.workspace }}/web/.next/cache
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Use Node.js 14.x
@@ -37,24 +37,34 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
 
-      - name: 🧰 Install dependencies
-        run: npm install
+      - name: 🧰 Install web dependencies
+        run: npm --prefix=web install
+      - name: 🧰 Install api dependencies
+        run: npm prefix=api install
 
-      - name: 🧹 Run lint
-        run: npm run lint
+      - name: 🧹 Run web lint
+        run: npm --prefix=web run lint
+      - name: 🧹 Run api lint
+        run: npm --prefix=api run lint
 
-      - name: 🧪 Run tests
-        run: npm run test
+      - name: 🧪 Run web tests
+        run: npm --prefix=web run test
+      - name: 🧪 Run API tests
+        run: npm --prefix=api run test
 
-      - name: 📦 Build project
-        run: npm run build --if-present
+      - name: 📦 Build project for feature tests
+        run: npm --prefix=web run build --if-present
+        env:
+          API_BASE_URL: http://localhost:5000
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
         with:
-          start: npm start
+          start: npm --prefix=web start, npm --prefix=api start
+          wait-on: 'http://localhost:3000, http://localhost:5000, http://localhost:8000'
           record: true
         env:
+          CYPRESS_API_BASE_URL: http://localhost:5000
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_TEST_USER_EMAIL: ${{ secrets.CYPRESS_TEST_USER_EMAIL }}
           CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
@@ -63,12 +73,26 @@ jobs:
           CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID: ${{ secrets.CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🚀 Deploy to AWS Amplify
+      - name: 📦 Build project for deployment
+        run: npm --prefix=web run build --if-present
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL_AWS_DEV }}
+
+      - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1
         with:
           amplify_command: publish
           amplify_env: dev
           amplify_cli_version: "4.41.2"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+
+      - name: 🚀 Deploy api with serverless
+        uses: serverless/github-action@master
+        with:
+          args: deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

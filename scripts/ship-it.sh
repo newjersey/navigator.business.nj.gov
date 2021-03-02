@@ -5,7 +5,8 @@ cd $(git rev-parse --show-toplevel)
 set -e
 
 # format files
-npm run prettier
+npm --prefix=web run prettier
+npm --prefix=api run prettier
 
 # check if uncommited changes
 changed_files=$(git status --porcelain | wc -l)
@@ -29,4 +30,4 @@ function print_success {
 }
 
 # run tests, feature tests, and push
-npm run lint && npm test && ./scripts/feature-tests.sh && git push && print_success
+npm --prefix=web run lint && npm --prefix=web run lint && ./scripts/test.sh && ./scripts/feature-tests.sh && git push && print_success

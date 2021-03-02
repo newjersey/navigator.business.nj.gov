@@ -2,27 +2,38 @@
 
 cd $(git rev-parse --show-toplevel)
 
-APP_PORT=3001
+WEB_PORT=3001
+API_PORT=5001
+DYNAMO_PORT=8001
+API_BASE_URL=http://localhost:${API_PORT}/dev
 
-kill $(lsof -i:${APP_PORT} -t)
+kill $(lsof -i:${WEB_PORT} -t)
+kill $(lsof -i:${API_PORT} -t)
+kill $(lsof -i:${DYNAMO_PORT} -t)
 
 set -e
 
-echo "📦 building app"
-npm run build
+echo "📦 building webapp"
+API_BASE_URL=${API_BASE_URL} npm --prefix=web run build
 
-echo "🚀 starting app"
-npm start -- --port=${APP_PORT} &
-while ! echo exit | nc localhost ${APP_PORT}; do sleep 1; done
+echo "🚀 starting webapp"
+ npm --prefix=web start -- --port=${WEB_PORT} &
+while ! echo exit | nc localhost ${WEB_PORT}; do sleep 1; done
+
+echo "🚀 starting api"
+API_PORT=${API_PORT} DYNAMO_PORT=${DYNAMO_PORT} npm --prefix=api start &
+while ! echo exit | nc localhost ${API_PORT}; do sleep 1; done
 
 echo "🌟 app started"
 
 source ./scripts/env.sh
-npm run cypress:run -- --config baseUrl=http://localhost:${APP_PORT}
+CYPRESS_API_BASE_URL=${API_BASE_URL} npm --prefix=web run cypress:run -- --config baseUrl=http://localhost:${WEB_PORT}
 
 set +e
 
-kill $(lsof -i:${APP_PORT} -t)
+kill $(lsof -i:${WEB_PORT} -t)
+kill $(lsof -i:${API_PORT} -t)
+kill $(lsof -i:${DYNAMO_PORT} -t)
 
 echo "   __            _                                             _"
 echo "  / _| ___  __ _| |_ _   _ _ __ ___  ___   _ __   __ _ ___ ___| |"
