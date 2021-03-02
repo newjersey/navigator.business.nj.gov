@@ -20,7 +20,7 @@ const SigninPage = (): ReactElement => {
     return {
       name: undefined,
       email: cognitoUser.attributes.email,
-      id: cognitoUser.username,
+      id: cognitoUser.attributes.sub,
     };
   };
 
