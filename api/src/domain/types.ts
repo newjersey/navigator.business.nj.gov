@@ -11,7 +11,7 @@ export interface UserData {
   formProgress: FormProgress;
 }
 
-export type FormProgress = "UNSTARTED" | "IN-PROGRESS" | "COMPLETED";
+export type FormProgress = "UNSTARTED" | "COMPLETED";
 
 export type BusinessUser = {
   name?: string;

@@ -66,19 +66,6 @@ describe("AuthHelper", () => {
       expect(mockApi.getUserData).toHaveBeenCalledWith("123");
     });
 
-    it("if user form progress is in-progress, pushes to homepage", async () => {
-      mockApi.getUserData.mockResolvedValue(
-        generateUserData({
-          formProgress: "IN-PROGRESS",
-        })
-      );
-      const user = generateUser({ id: "123" });
-      mockSession.getCurrentUser.mockResolvedValue(user);
-      await onSignIn(mockPush, mockDispatch);
-      expect(mockPush).toHaveBeenCalledWith("/");
-      expect(mockApi.getUserData).toHaveBeenCalledWith("123");
-    });
-
     it("if user does not exist, post new user data", async () => {
       const user = generateUser({ id: "123" });
       mockApi.getUserData.mockRejectedValue(undefined);

@@ -115,6 +115,34 @@ describe("onboarding form", () => {
     expect(mockPush).toHaveBeenCalledWith("/roadmaps/e-commerce");
   });
 
+  it("updates when onboarding form has been finished", () => {
+    const initialUserData = generateUserData({});
+    const mockUpdate = jest.fn();
+    mockUseUserData.mockReturnValue(
+      generateUseUserDataResponse({
+        userData: initialUserData,
+        update: mockUpdate,
+      })
+    );
+    subject = render(<Onboarding />);
+
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.change(subject.getByLabelText("What type of company do you want to start?"), {
+      target: { value: "e-commerce" },
+    });
+
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.click(subject.getByText("Next"));
+    fireEvent.click(subject.getByText("Next"));
+
+    expect(mockUpdate).toHaveBeenLastCalledWith({
+      ...initialUserData,
+      formProgress: "COMPLETED",
+    });
+  });
+
   it("is able to go back", () => {
     mockUseUserData.mockImplementation(createStatefulMock());
     subject = render(<Onboarding />);

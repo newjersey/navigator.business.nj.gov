@@ -42,13 +42,18 @@ const Onboarding = (): ReactElement => {
   }, [page]);
 
   const onSubmit = (event: ISubmitEvent<BusinessForm>): void => {
-    update({
-      ...userData,
-      formData: event.formData,
-    });
     if (page + 1 < sections.length) {
       setPage(page + 1);
+      update({
+        ...userData,
+        formData: event.formData,
+      });
     } else {
+      update({
+        ...userData,
+        formData: event.formData,
+        formProgress: "COMPLETED",
+      });
       router.push(getRoadmapUrl(event.formData));
     }
   };

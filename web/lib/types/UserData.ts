@@ -7,7 +7,7 @@ export interface UserData {
   formProgress: FormProgress;
 }
 
-export type FormProgress = "UNSTARTED" | "IN-PROGRESS" | "COMPLETED";
+export type FormProgress = "UNSTARTED" | "COMPLETED";
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
