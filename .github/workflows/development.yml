@@ -72,7 +72,7 @@ jobs:
         with:
           working-directory: web
           start: npm start, npm --prefix=../api start
-          wait-on: 'http://localhost:3000, http://localhost:5000/dev'
+          wait-on: 'http://localhost:3000, http://localhost:5000/dev/health'
           record: true
         env:
           CYPRESS_API_BASE_URL: http://localhost:5000/dev

@@ -27,4 +27,8 @@ const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 app.use(bodyParser.json({ strict: false }));
 app.use(routerFactory(userDataClient));
 
+app.get("/health", (_req, res) => {
+  res.send("Alive");
+});
+
 export const handler = serverless(app);
