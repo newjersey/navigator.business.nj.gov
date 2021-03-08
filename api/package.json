@@ -8,7 +8,8 @@
     "test": "jest",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "lint": "eslint --max-warnings 0 '*/**/*.{js,ts}'",
-    "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts}' --fix"
+    "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts}' --fix",
+    "install-dynamo-local": "sls dynamodb install"
   },
   "engines": {
     "node": ">=14.15.0"
