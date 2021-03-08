@@ -4,9 +4,11 @@ import bodyParser from "body-parser";
 import AWS from "aws-sdk";
 import { routerFactory } from "../../api/router";
 import { DynamoUserDataClient } from "../../db/DynamoUserDataClient";
+import cors from "cors";
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const IS_OFFLINE = process.env.IS_OFFLINE;
 let dynamoDb: AWS.DynamoDB.DocumentClient;
