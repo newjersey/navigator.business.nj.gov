@@ -40,7 +40,7 @@ jobs:
       - name: 🧰 Install web dependencies
         run: npm --prefix=web install
       - name: 🧰 Install api dependencies
-        run: npm prefix=api install
+        run: npm --prefix=api install
 
       - name: 🧹 Run web lint
         run: npm --prefix=web run lint
@@ -60,7 +60,8 @@ jobs:
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
         with:
-          start: npm --prefix=web start, npm --prefix=api start
+          working-directory: web
+          start: npm start, npm --prefix=../api start
           wait-on: 'http://localhost:3000, http://localhost:5000, http://localhost:8000'
           record: true
         env:
@@ -81,6 +82,7 @@ jobs:
       - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1
         with:
+          working-directory: web
           amplify_command: publish
           amplify_env: dev
           amplify_cli_version: "4.41.2"
@@ -92,6 +94,7 @@ jobs:
       - name: 🚀 Deploy api with serverless
         uses: serverless/github-action@master
         with:
+          working-directory: api
           args: deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
