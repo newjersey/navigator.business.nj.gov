@@ -19,8 +19,6 @@ const Home = (): ReactElement => {
         onClick={() => {}}
       />
       <Layout home>
-        <h1>the next api basurl says: {process.env.API_BASE_URL}</h1>
-
         <h1>
           {state.isAuthenticated ? `Welcome, ${state.user.name || state.user.email}` : "Welcome to EasyRegNJ"}
         </h1>
