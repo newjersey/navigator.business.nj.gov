@@ -97,3 +97,21 @@ Cypress.Commands.add('loginByCognitoApi', () => {
       .then(() => cy.visit('/'))
   })
 })
+
+Cypress.Commands.add('resetUserData', () => {
+  Auth.currentSession().then((currentSession) => {
+    const userId = currentSession.getIdToken().decodePayload().sub
+    cy.request('POST', `${Cypress.env("API_BASE_URL")}/users`, {
+      user: {
+        email: testUserEmail,
+        id: userId
+      },
+      formData: {
+        user: {
+          email: testUserEmail
+        }
+      },
+      formProgress: "UNSTARTED"
+    })
+  })
+})

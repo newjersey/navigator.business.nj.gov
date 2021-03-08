@@ -12,6 +12,10 @@ describe("Restaurant GP", () => {
     cy.loginByCognitoApi();
   });
 
+  afterEach(() => {
+    cy.resetUserData();
+  });
+
   it("enters user info and shows the roadmap", () => {
     cy.contains("Get Started").click();
 
