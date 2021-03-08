@@ -1,5 +1,5 @@
 {
-  "name": "business.nj.gov-api",
+  "name": "businessnjgov-api",
   "version": "1.0.0",
   "main": "serverless.ts",
   "scripts": {

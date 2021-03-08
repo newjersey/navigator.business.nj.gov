@@ -9,7 +9,7 @@ const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 
 const serverlessConfiguration: AWS = {
-  service: "business.nj.gov-api",
+  service: "businessnjgov-api",
   frameworkVersion: "2",
   custom: {
     webpack: {
