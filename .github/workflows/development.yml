@@ -26,10 +26,15 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Set up JDK
+      - name: Set up JDK for dynamodb-local
         uses: actions/setup-java@v1
         with:
           java-version: 13
+
+      - name: Install Serverless Framework
+        run: npm install -g serverless
+      - name: Serverless Authentication
+        run: sls config credentials --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY}}
 
       - name: configure amplify
         uses: ambientlight/amplify-cli-action@0.2.1
@@ -96,11 +101,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
-
-      - name: Install Serverless Framework
-        run: npm install -g serverless
-      - name: Serverless Authentication
-        run: sls config credentials --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY}}
 
       - name: 🚀 Deploy api with serverless
         run: serverless deploy --verbose --stage dev --region us-east-1
