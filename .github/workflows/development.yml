@@ -87,6 +87,7 @@ jobs:
           amplify_env: dev
           amplify_cli_version: "4.41.2"
         env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL_AWS_DEV }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1

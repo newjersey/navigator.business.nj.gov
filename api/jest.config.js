@@ -1,5 +1,4 @@
 module.exports = {
+  ...require("jest-dynalite/jest-preset"),
   ...require("ts-jest/jest-preset"),
-  ...require("@shelf/jest-dynamodb/jest-preset"),
-  testEnvironment: "node",
 };
