@@ -26,6 +26,11 @@ jobs:
         with:
           node-version: 14.x
 
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 13
+
       - name: configure amplify
         uses: ambientlight/amplify-cli-action@0.2.1
         with:
