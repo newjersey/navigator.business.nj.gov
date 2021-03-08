@@ -14,7 +14,6 @@ const SigninPage = (): ReactElement => {
   const [alreadySignedIn, setAlreadySignedIn] = useState(false);
 
   const handleAuthStateChange = (state: AuthState) => {
-    console.log(state);
     if (state === AuthState.SignedIn && !alreadySignedIn) {
       setAlreadySignedIn(true);
       onSignIn(router.push, dispatch);
