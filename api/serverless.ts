@@ -20,8 +20,8 @@ const serverlessConfiguration: AWS = {
     dynamodb: {
       start: {
         migrate: true,
+        port: dynamoOfflinePort,
       },
-      httpPort: dynamoOfflinePort,
       stages: [stage],
     },
     "serverless-offline": {

@@ -4,12 +4,14 @@ cd $(git rev-parse --show-toplevel)
 
 WEB_PORT=3001
 API_PORT=5001
+LAMBDA_PORT=5051
 DYNAMO_PORT=8001
 API_BASE_URL=http://localhost:${API_PORT}/dev
 
 kill $(lsof -i:${WEB_PORT} -t)
 kill $(lsof -i:${API_PORT} -t)
 kill $(lsof -i:${DYNAMO_PORT} -t)
+kill $(lsof -i:${LAMBDA_PORT} -t)
 
 set -e
 
@@ -21,7 +23,7 @@ echo "🚀 starting webapp"
 while ! echo exit | nc localhost ${WEB_PORT}; do sleep 1; done
 
 echo "🚀 starting api"
-API_PORT=${API_PORT} DYNAMO_PORT=${DYNAMO_PORT} npm --prefix=api start &
+API_PORT=${API_PORT} DYNAMO_PORT=${DYNAMO_PORT} LAMBDA_PORT=${LAMBDA_PORT} npm --prefix=api start &
 while ! echo exit | nc localhost ${API_PORT}; do sleep 1; done
 
 echo "🌟 app started"
@@ -34,6 +36,7 @@ set +e
 kill $(lsof -i:${WEB_PORT} -t)
 kill $(lsof -i:${API_PORT} -t)
 kill $(lsof -i:${DYNAMO_PORT} -t)
+kill $(lsof -i:${LAMBDA_PORT} -t)
 
 echo "   __            _                                             _"
 echo "  / _| ___  __ _| |_ _   _ _ __ ___  ___   _ __   __ _ ___ ___| |"

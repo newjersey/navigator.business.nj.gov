@@ -11,11 +11,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const IS_OFFLINE = process.env.IS_OFFLINE;
+const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
 let dynamoDb: AWS.DynamoDB.DocumentClient;
 if (IS_OFFLINE === "true") {
   dynamoDb = new AWS.DynamoDB.DocumentClient({
     region: "localhost",
-    endpoint: "http://localhost:8000",
+    endpoint: `http://localhost:${DYNAMO_OFFLINE_PORT}`,
   });
 } else {
   dynamoDb = new AWS.DynamoDB.DocumentClient();

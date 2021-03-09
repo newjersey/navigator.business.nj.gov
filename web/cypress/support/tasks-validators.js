@@ -17,11 +17,11 @@ export const checkAllTaskLinks = () => {
     ids.forEach((id) => {
       cy.get(`[data-task=${id}]`).then(($el) => {
         cy.wrap($el).click();
-        cy.contains("My cool business").should('not.exist')
+        cy.contains("My cool business's Roadmap").should('not.exist')
         cy.contains($el.text()).should('exist')
         cy.contains("← Back to Roadmap").click();
       })
     })
   })
-  cy.waitUntil(() => cy.contains("My cool business"))
+  cy.waitUntil(() => cy.contains("My cool business's Roadmap"))
 }
