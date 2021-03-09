@@ -70,6 +70,7 @@ describe("roadmap page", () => {
       steps: [
         generateStep({
           name: "step1",
+          timeEstimate: "1-2 weeks",
           tasks: [generateTask({ name: "task1" }), generateTask({ name: "task2" })],
         }),
         generateStep({
@@ -82,6 +83,7 @@ describe("roadmap page", () => {
     const subject = render(<RoadmapPage roadmap={roadmap} allTasks={randomTasks} />);
 
     expect(subject.queryByText("step1", { exact: false })).toBeInTheDocument();
+    expect(subject.queryByText("1-2 weeks")).toBeInTheDocument();
     expect(subject.queryByText("task1")).toBeInTheDocument();
     expect(subject.queryByText("task2")).toBeInTheDocument();
 

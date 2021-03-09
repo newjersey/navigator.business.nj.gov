@@ -5,6 +5,7 @@ export interface StepsFromFile {
   step_number: number;
   id: string;
   name: string;
+  timeEstimate: string;
   description: string;
   tasks: string[];
 }
@@ -12,13 +13,16 @@ export interface StepsFromFile {
 export interface Roadmap {
   steps: StepsEntity[];
 }
+
 export interface StepsEntity {
   step_number: number;
   id: string;
   name: string;
+  timeEstimate: string;
   description: string;
   tasks: TasksEntity[];
 }
+
 export interface TasksEntity {
   task_number: number;
   id: string;
