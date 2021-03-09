@@ -93,4 +93,14 @@ describe("addLegalStructureStep", () => {
       assertSteps(addLegalStructureStep(roadmap, "Sole Proprietorship", allLegalStructureTasks));
     });
   });
+
+  describe("for unset LegalStructure", () => {
+    it("shows generic step", () => {
+      const roadmap = generateRoadmap({ steps: [] });
+
+      const newRoadmap = addLegalStructureStep(roadmap, undefined, allLegalStructureTasks);
+      expect(newRoadmap.steps[0].tasks.map((it) => it.id)).toEqual([]);
+      expect(newRoadmap.steps[0].description).toEqual("Input your legal entity structure to view tasks");
+    });
+  });
 });

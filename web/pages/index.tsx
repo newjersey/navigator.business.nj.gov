@@ -1,10 +1,10 @@
-import { Layout } from "../components/Layout";
 import Link from "next/link";
 import React, { ReactElement, useContext } from "react";
 import { Hero } from "../components/njwds/Hero";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { AuthContext } from "./_app";
 import { AuthButton } from "../components/AuthButton";
+import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
 
 const Home = (): ReactElement => {
   const { state } = useContext(AuthContext);
@@ -18,7 +18,7 @@ const Home = (): ReactElement => {
         callToActionText="Try the Startup Guide"
         onClick={() => {}}
       />
-      <Layout home>
+      <SinglePageLayout>
         <h1>
           {state.isAuthenticated ? `Welcome, ${state.user.name || state.user.email}` : "Welcome to EasyRegNJ"}
         </h1>
@@ -39,7 +39,7 @@ const Home = (): ReactElement => {
           </Link>
         )}
         <AuthButton />
-      </Layout>
+      </SinglePageLayout>
     </PageSkeleton>
   );
 };

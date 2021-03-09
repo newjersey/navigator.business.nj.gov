@@ -2,6 +2,7 @@ import { LegalStructure } from "../types/LegalStructure";
 import { Roadmap, StepsEntity, StepsFromFile, TasksLookup } from "../types/Roadmap";
 import publicRecordFilingStructure from "../../roadmaps/steps/form-and-register-public-record-filing.json";
 import tradeNameStructure from "../../roadmaps/steps/form-and-register-trade-name.json";
+import unsetStructure from "../../roadmaps/steps/form-and-register-unset.json";
 
 const TradeNameGroup: LegalStructure[] = ["General Partnership", "Sole Proprietorship"];
 
@@ -22,7 +23,7 @@ const getStepByLegalStructure = (legalStructure: LegalStructure, allTasks: Tasks
   } else if (TradeNameGroup.includes(legalStructure)) {
     step = tradeNameStructure as StepsFromFile;
   } else {
-    throw new Error();
+    step = unsetStructure as StepsFromFile;
   }
 
   return {

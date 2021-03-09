@@ -1,6 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
-import { Layout } from "../components/Layout";
 import Form, { ISubmitEvent } from "@rjsf/core";
 import schema from "../schemas/form.json";
 import jsonUiSchema from "../schemas/form-ui.json";
@@ -10,6 +9,7 @@ import { onKeyPress } from "../lib/helpers";
 import { BusinessForm } from "../lib/types/form";
 import { useUserData } from "../lib/data/useUserData";
 import { getRoadmapUrl } from "../lib/form-helpers/getRoadmapUrl";
+import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
 
 const Onboarding = (): ReactElement => {
   const router = useRouter();
@@ -70,7 +70,7 @@ const Onboarding = (): ReactElement => {
 
   return (
     <PageSkeleton>
-      <Layout>
+      <SinglePageLayout>
         <h1>The onboarding form</h1>
         <Form
           schema={schema as JSONSchema7}
@@ -96,7 +96,7 @@ const Onboarding = (): ReactElement => {
             Next
           </button>
         </Form>
-      </Layout>
+      </SinglePageLayout>
     </PageSkeleton>
   );
 };

@@ -10,6 +10,7 @@ import RoadmapPage from "../../pages/roadmaps/[type]";
 import { allLegalStructureTasks } from "../../lib/roadmap-builders/addLegalStructureStep.test";
 import * as useUserModule from "../../lib/data/useUserData";
 import { render } from "@testing-library/react";
+import { BusinessForm } from "../../lib/types/form";
 
 jest.mock("../../lib/data/useUserData", () => ({
   useUserData: jest.fn(),
@@ -25,33 +26,43 @@ describe("roadmap page", () => {
     mockUseUserData.mockReturnValue(generateUseUserDataResponse({}));
   });
 
-  it("shows the business name from form data", () => {
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        userData: generateUserData({
-          formData: generateFormData({
-            businessName: { businessName: "My cool business" },
-          }),
-        }),
-      })
-    );
-    const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
-    expect(subject.getByText("Business Roadmap for My cool business")).toBeInTheDocument();
-  });
+  describe("business information", () => {
+    it("shows the business name from form data", () => {
+      useMockFormData({ businessName: { businessName: "My cool business" } });
+      const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
+      expect(subject.getByText("My cool business's Roadmap")).toBeInTheDocument();
+    });
 
-  it("shows default title if no business name present", async () => {
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        userData: generateUserData({
-          formData: generateFormData({
-            businessName: { businessName: undefined },
-          }),
-        }),
-      })
-    );
-    const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
+    it("shows placeholder if no business name present", async () => {
+      useMockFormData({ businessName: { businessName: undefined } });
+      const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
+      expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
+      expect(subject.getByText("Not set")).toBeInTheDocument();
+    });
 
-    expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
+    it("shows the business industry from form data", () => {
+      useMockFormData({ businessType: { businessType: "e-commerce" } });
+      const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
+      expect(subject.getByText("e-commerce")).toBeInTheDocument();
+    });
+
+    it("shows placeholder if no business industry present", async () => {
+      useMockFormData({ businessType: { businessType: undefined } });
+      const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
+      expect(subject.getByText("Not set")).toBeInTheDocument();
+    });
+
+    it("shows the business structure from form data", () => {
+      useMockFormData({ businessStructure: { businessStructure: "Limited Liability Company (LLC)" } });
+      const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
+      expect(subject.getByText("Limited Liability Company (LLC)")).toBeInTheDocument();
+    });
+
+    it("shows placeholder if no business structure present", async () => {
+      useMockFormData({ businessStructure: { businessStructure: undefined } });
+      const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
+      expect(subject.getByText("Not set")).toBeInTheDocument();
+    });
   });
 
   it("shows steps and tasks from roadmap prop", () => {
@@ -80,15 +91,9 @@ describe("roadmap page", () => {
 
   describe("business structure", () => {
     it("shows search business name step if structure in PublicRecordFiling group", () => {
-      mockUseUserData.mockReturnValue(
-        generateUseUserDataResponse({
-          userData: generateUserData({
-            formData: generateFormData({
-              businessStructure: { businessStructure: "Limited Liability Company (LLC)" },
-            }),
-          }),
-        })
-      );
+      useMockFormData({
+        businessStructure: { businessStructure: "Limited Liability Company (LLC)" },
+      });
       const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={allLegalStructureTasks} />);
       expect(subject.queryByText("Form & Register Your Business", { exact: false })).toBeInTheDocument();
       expect(subject.queryByText("search_business_name")).toBeInTheDocument();
@@ -96,15 +101,9 @@ describe("roadmap page", () => {
     });
 
     it("shows trade name step if structure in TradeName group", () => {
-      mockUseUserData.mockReturnValue(
-        generateUseUserDataResponse({
-          userData: generateUserData({
-            formData: generateFormData({
-              businessStructure: { businessStructure: "General Partnership" },
-            }),
-          }),
-        })
-      );
+      useMockFormData({
+        businessStructure: { businessStructure: "General Partnership" },
+      });
       const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={allLegalStructureTasks} />);
 
       expect(subject.queryByText("Form & Register Your Business", { exact: false })).toBeInTheDocument();
@@ -116,15 +115,9 @@ describe("roadmap page", () => {
   describe("liquor license", () => {
     describe("when the roadmap does not have liquor license steps", () => {
       it("does not show liquor license step even when any location includes it", () => {
-        mockUseUserData.mockReturnValue(
-          generateUseUserDataResponse({
-            userData: generateUserData({
-              formData: generateFormData({
-                locations: { locations: [{ license: true }, { license: false }] },
-              }),
-            }),
-          })
-        );
+        useMockFormData({
+          locations: { locations: [{ license: true }, { license: false }] },
+        });
         const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
         expect(subject.queryByText("Obtain your Liquor License", { exact: false })).not.toBeInTheDocument();
         expect(
@@ -150,15 +143,9 @@ describe("roadmap page", () => {
       });
 
       it("removes liquor license tasks if no locations", () => {
-        mockUseUserData.mockReturnValue(
-          generateUseUserDataResponse({
-            userData: generateUserData({
-              formData: generateFormData({
-                locations: {},
-              }),
-            }),
-          })
-        );
+        useMockFormData({
+          locations: {},
+        });
         const subject = render(<RoadmapPage roadmap={roadmapWithLiquorSteps} allTasks={randomTasks} />);
         expect(subject.queryByText("Other task", { exact: false })).toBeInTheDocument();
         expect(subject.queryByText("Obtain your Liquor License", { exact: false })).not.toBeInTheDocument();
@@ -168,15 +155,9 @@ describe("roadmap page", () => {
       });
 
       it("removes liquor license tasks if no location includes it", () => {
-        mockUseUserData.mockReturnValue(
-          generateUseUserDataResponse({
-            userData: generateUserData({
-              formData: generateFormData({
-                locations: { locations: [{ license: false }] },
-              }),
-            }),
-          })
-        );
+        useMockFormData({
+          locations: { locations: [{ license: false }] },
+        });
         const subject = render(<RoadmapPage roadmap={roadmapWithLiquorSteps} allTasks={randomTasks} />);
 
         expect(subject.queryByText("Other task", { exact: false })).toBeInTheDocument();
@@ -187,15 +168,9 @@ describe("roadmap page", () => {
       });
 
       it("keeps liquor license tasks if any location includes it", () => {
-        mockUseUserData.mockReturnValue(
-          generateUseUserDataResponse({
-            userData: generateUserData({
-              formData: generateFormData({
-                locations: { locations: [{ license: true }, { license: false }] },
-              }),
-            }),
-          })
-        );
+        useMockFormData({
+          locations: { locations: [{ license: true }, { license: false }] },
+        });
         const subject = render(<RoadmapPage roadmap={roadmapWithLiquorSteps} allTasks={randomTasks} />);
 
         expect(subject.queryByText("Obtain your Liquor License", { exact: false })).toBeInTheDocument();
@@ -205,4 +180,14 @@ describe("roadmap page", () => {
       });
     });
   });
+
+  const useMockFormData = (formData: Partial<BusinessForm>): void => {
+    mockUseUserData.mockReturnValue(
+      generateUseUserDataResponse({
+        userData: generateUserData({
+          formData: generateFormData(formData),
+        }),
+      })
+    );
+  };
 });

@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 import { Banner } from "./njwds/Banner";
-import { IdentifierDefault } from "./njwds/IdentifierDefault";
 
 interface Props {
   children: React.ReactNode;
@@ -12,7 +11,6 @@ export const PageSkeleton = (props: Props): ReactElement => {
     <>
       <Banner />
       {props.children}
-      <IdentifierDefault />
     </>
   );
 };

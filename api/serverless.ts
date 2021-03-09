@@ -5,6 +5,7 @@ import express from "./src/functions/express";
 const stage = process.env.STAGE || "dev";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5000;
+const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 
@@ -25,6 +26,7 @@ const serverlessConfiguration: AWS = {
     },
     "serverless-offline": {
       httpPort: offlinePort,
+      lambdaPort: offlineLambdaPort,
     },
   },
   plugins: ["serverless-webpack", "serverless-dynamodb-local", "serverless-offline"],

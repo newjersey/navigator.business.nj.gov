@@ -1,0 +1,17 @@
+.step-label {
+  margin-top: 1rem !important;
+  margin-left: 3rem;
+  font-size: 1.06rem !important;
+
+  @media all and (min-width: $sm) {
+    margin-left: 1.5rem;
+  }
+}
+
+.roadmap-content {
+  margin-left: 3rem;
+
+  @media all and (min-width: $sm) {
+    margin-left: 0;
+  }
+}
