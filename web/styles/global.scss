@@ -1,12 +1,14 @@
 $xs: 30em; //mobile-lg + up (480px)
 $sm: 40em; //tablet + up (640px)
-$md: 50em;
+$md: 50em; //big tablet (800px)
 $lg: 64em; //desktop and up (1024px)
 
 @import "flex";
 @import "onboarding.module";
 @import "roadmap.module";
-@import "vertical-step.module";
+@import "njwds-overrides/vertical-step";
+@import "njwds-overrides/left-sidebar";
+@import "njwds-overrides/default";
 
 html,
 body {
@@ -23,11 +25,6 @@ body {
 img {
   max-width: 100%;
   display: block;
-}
-
-.usa-prose > p,
-p {
-  max-width: unset !important;
 }
 
 .text-sm {
