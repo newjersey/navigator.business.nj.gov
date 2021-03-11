@@ -2,10 +2,9 @@ import React, { Dispatch, ReactElement } from "react";
 import { AuthAction, AuthState } from "../lib/auth/AuthContext";
 import { render, RenderResult } from "@testing-library/react";
 import { AuthContext } from "../pages/_app";
-import { BusinessUser } from "../lib/types/BusinessUser";
-import { UserData } from "../lib/types/UserData";
 import { UseUserDataResponse } from "../lib/data/useUserData";
 import { generateUserData } from "./factories";
+import { BusinessUser, UserData } from "../lib/types/types";
 
 export const renderWithUser = (
   subject: ReactElement,

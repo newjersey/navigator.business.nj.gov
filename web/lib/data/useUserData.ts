@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import * as api from "../api-client/apiClient";
-import { UserData } from "../types/UserData";
+import { UserData } from "../types/types";
 import { useContext } from "react";
 import { AuthContext } from "../../pages/_app";
 import { postUserData } from "../api-client/apiClient";

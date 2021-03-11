@@ -1,5 +1,5 @@
-import { LegalStructure } from "../types/LegalStructure";
-import { Roadmap, StepsEntity, StepsFromFile, TasksLookup } from "../types/Roadmap";
+import { LegalStructure } from "../types/types";
+import { Roadmap, Step, StepFromFile, TaskLookup } from "../types/types";
 import publicRecordFilingStructure from "../../roadmaps/steps/form-and-register-public-record-filing.json";
 import tradeNameStructure from "../../roadmaps/steps/form-and-register-trade-name.json";
 import unsetStructure from "../../roadmaps/steps/form-and-register-unset.json";
@@ -15,15 +15,15 @@ const PublicRecordFilingGroup: LegalStructure[] = [
   "B-Corporation",
 ];
 
-const getStepByLegalStructure = (legalStructure: LegalStructure, allTasks: TasksLookup): StepsEntity => {
+const getStepByLegalStructure = (legalStructure: LegalStructure, allTasks: TaskLookup): Step => {
   let step;
 
   if (PublicRecordFilingGroup.includes(legalStructure)) {
-    step = publicRecordFilingStructure as StepsFromFile;
+    step = publicRecordFilingStructure as StepFromFile;
   } else if (TradeNameGroup.includes(legalStructure)) {
-    step = tradeNameStructure as StepsFromFile;
+    step = tradeNameStructure as StepFromFile;
   } else {
-    step = unsetStructure as StepsFromFile;
+    step = unsetStructure as StepFromFile;
   }
 
   return {
@@ -35,7 +35,7 @@ const getStepByLegalStructure = (legalStructure: LegalStructure, allTasks: Tasks
 export const addLegalStructureStep = (
   roadmap: Roadmap,
   legalStructure: LegalStructure,
-  allTasks: TasksLookup
+  allTasks: TaskLookup
 ): Roadmap => {
   const stepsEntity = getStepByLegalStructure(legalStructure, allTasks);
   roadmap.steps.push(stepsEntity);

@@ -1,6 +1,6 @@
 import { generateRoadmap, generateStep, generateTask } from "../../test/factories";
 import { addLegalStructureStep } from "./addLegalStructureStep";
-import { Roadmap } from "../types/Roadmap";
+import { Roadmap } from "../types/types";
 
 export const allLegalStructureTasks = {
   search_business_name: generateTask({ id: "search_business_name", name: "search_business_name" }),

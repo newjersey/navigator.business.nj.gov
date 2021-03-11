@@ -2,14 +2,14 @@ import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, GetStaticPropsRes
 import React, { ReactElement } from "react";
 import { PageSkeleton } from "../../components/PageSkeleton";
 import { getAllTaskIds, getTaskById, TaskIdParam } from "../../lib/static/loadTasks";
-import { TasksEntity } from "../../lib/types/Roadmap";
+import { Task } from "../../lib/types/types";
 import Link from "next/link";
 import { SidebarPageLayout } from "../../components/njwds-extended/SidebarPageLayout";
 import { useUserData } from "../../lib/data/useUserData";
 import { getRoadmapUrl } from "../../lib/form-helpers/getRoadmapUrl";
 
 interface Props {
-  task: TasksEntity;
+  task: Task;
 }
 
 const TaskPage = (props: Props): ReactElement => {

@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, GetStaticPropsResult } from "next";
 import cloneDeep from "lodash/cloneDeep";
 import { getAllRoadmapTypes, getRoadmapByType, RoadmapTypeParam } from "../../lib/static/loadRoadmaps";
-import { Roadmap, TasksLookup } from "../../lib/types/Roadmap";
+import { Roadmap, TaskLookup } from "../../lib/types/types";
 import { removeLiquorLicenseTasks } from "../../lib/roadmap-builders/removeLiquorLicenseTasks";
 import { PageSkeleton } from "../../components/PageSkeleton";
 import { needsLiquorLicense } from "../../lib/form-helpers/needsLiquorLicense";
@@ -15,7 +15,7 @@ import { GreyCallout } from "../../components/njwds-extended/GreyCallout";
 
 interface Props {
   roadmap: Roadmap;
-  allTasks: TasksLookup;
+  allTasks: TaskLookup;
 }
 
 const RoadmapPage = (props: Props): ReactElement => {

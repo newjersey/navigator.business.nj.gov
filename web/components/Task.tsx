@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import { TasksEntity } from "../lib/types/Roadmap";
+import * as types from "../lib/types/types";
 
 interface Props {
-  task: TasksEntity;
+  task: types.Task;
 }
 
 export const Task = (props: Props): ReactElement => {

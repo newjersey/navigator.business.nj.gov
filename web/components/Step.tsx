@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
 import { Task } from "./Task";
-import { StepsEntity } from "../lib/types/Roadmap";
+import * as types from "../lib/types/types";
 import { VerticalStepIndicator } from "./njwds-extended/VerticalStepIndicator";
 
 interface Props {
-  step: StepsEntity;
+  step: types.Step;
   last: boolean;
 }
 

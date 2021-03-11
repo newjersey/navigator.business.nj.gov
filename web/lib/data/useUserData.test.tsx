@@ -1,6 +1,6 @@
 import { useUserData, UseUserDataResponse } from "./useUserData";
 import { generateUseUserDataResponse, renderWithUser } from "../../test/helpers";
-import { BusinessUser } from "../types/BusinessUser";
+import { BusinessUser } from "../types/types";
 import * as api from "../api-client/apiClient";
 import { generateUser, generateUserData } from "../../test/factories";
 import { act } from "@testing-library/react";

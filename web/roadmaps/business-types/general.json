@@ -6,7 +6,7 @@
       "name": "Plan Your Location",
       "timeEstimate": "1-2 months",
       "description": "Before you officially form & register your business, its important to have a target location and lease in mind - that way you can form & register your business using your proposed business address. If you change the location of your restaurant after you form & register, you will need to file an amendement to your Business Formation & Registration,",
-      "tasks": ["verify_zoning_office"]
+      "tasks": []
     },
     {
       "step_number": 2,
@@ -14,7 +14,7 @@
       "name": "Research and Prepare Your Business License",
       "timeEstimate": "6-10 weeks",
       "description": "",
-      "tasks": ["search_licenses"]
+      "tasks": []
     },
     {
       "step_number": 4,
@@ -22,7 +22,7 @@
       "name": "Sign Your Lease & File Local Permits",
       "timeEstimate": "1-2 months",
       "description": "You can now sign your lease and file local permits under the protection of your new legal entity and business name. ",
-      "tasks": ["municipality_licenses"]
+      "tasks": []
     }
   ]
 }

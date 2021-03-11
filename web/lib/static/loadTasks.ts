@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { TasksEntity, TasksLookup } from "../types/Roadmap";
+import { Task, TaskLookup } from "../types/types";
 
 export type PathParams<P> = { params: P; locale?: string };
 export type TaskIdParam = {
@@ -21,7 +21,7 @@ export const getAllTaskIds = (): PathParams<TaskIdParam>[] => {
   });
 };
 
-export const getTasksLookup = (): TasksLookup => {
+export const getTasksLookup = (): TaskLookup => {
   const fileNames = fs.readdirSync(path.join(roadmapsDir, "tasks"));
   const tasksKeyedById = {};
 
@@ -29,13 +29,13 @@ export const getTasksLookup = (): TasksLookup => {
     const taskId = fileName.replace(/\.json$/, "");
     tasksKeyedById[taskId] = JSON.parse(
       fs.readFileSync(path.join(roadmapsDir, "tasks", fileName), "utf8")
-    ) as TasksEntity;
+    ) as Task;
   });
 
   return tasksKeyedById;
 };
 
-export const getTaskById = (id: string): TasksEntity => {
+export const getTaskById = (id: string): Task => {
   const fullPath = path.join(roadmapsDir, "tasks", `${id}.json`);
-  return JSON.parse(fs.readFileSync(fullPath, "utf8")) as TasksEntity;
+  return JSON.parse(fs.readFileSync(fullPath, "utf8")) as Task;
 };

@@ -1,15 +1,16 @@
-import { BusinessUser } from "../lib/types/BusinessUser";
 import { BusinessForm } from "../lib/types/form";
 import {
+  ALL_LEGAL_STRUCTURES,
+  BusinessUser,
   Destination,
+  LegalStructure,
   Roadmap,
   RoadmapFromFile,
-  StepsEntity,
-  StepsFromFile,
-  TasksEntity,
-} from "../lib/types/Roadmap";
-import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../lib/types/LegalStructure";
-import { UserData } from "../lib/types/UserData";
+  Step,
+  StepFromFile,
+  Task,
+  UserData,
+} from "../lib/types/types";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 
@@ -74,7 +75,7 @@ export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
   };
 };
 
-export const generateStep = (overrides: Partial<StepsEntity>): StepsEntity => {
+export const generateStep = (overrides: Partial<Step>): Step => {
   return {
     step_number: randomInt(),
     id: "some-id-" + randomInt(),
@@ -86,7 +87,7 @@ export const generateStep = (overrides: Partial<StepsEntity>): StepsEntity => {
   };
 };
 
-export const generateTask = (overrides: Partial<TasksEntity>): TasksEntity => {
+export const generateTask = (overrides: Partial<Task>): Task => {
   return {
     task_number: randomInt(),
     id: "some-id-" + randomInt(),
@@ -106,7 +107,7 @@ export const generateRoadmapFromFile = (overrides: Partial<RoadmapFromFile>): Ro
   };
 };
 
-export const generateStepFromFile = (overrides: Partial<StepsFromFile>): StepsFromFile => {
+export const generateStepFromFile = (overrides: Partial<StepFromFile>): StepFromFile => {
   return {
     step_number: randomInt(),
     id: "some-id-" + randomInt(),

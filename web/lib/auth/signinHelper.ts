@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
 import * as api from "../api-client/apiClient";
-import { createEmptyUserData } from "../types/UserData";
+import { createEmptyUserData } from "../types/types";
 import { getRoadmapUrl } from "../form-helpers/getRoadmapUrl";
 
 export const onSignIn = async (

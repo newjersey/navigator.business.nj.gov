@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserData } from "../types/UserData";
+import { UserData } from "../types/types";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 export const getUserData = (id: string): Promise<UserData> => {

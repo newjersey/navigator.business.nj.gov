@@ -1,4 +1,4 @@
-import { Roadmap } from "../types/Roadmap";
+import { Roadmap } from "../types/types";
 
 export const removeLiquorLicenseTasks = (roadmap: Roadmap): Roadmap => {
   const stepsWithRemoved = roadmap.steps.map((step) => {

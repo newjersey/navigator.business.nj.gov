@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Roadmap, RoadmapFromFile } from "../types/Roadmap";
+import { Roadmap, RoadmapFromFile } from "../types/types";
 import { getTaskById } from "./loadTasks";
 
 export type PathParams<P> = { params: P; locale?: string };
