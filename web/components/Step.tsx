@@ -10,19 +10,19 @@ interface Props {
 
 export const Step = (props: Props): ReactElement => {
   return (
-    <div className="grid-row margin-top-2">
+    <div className="grid-row margin-top-3">
       <div className="tablet:grid-col-3 margin-right-4">
         <div className="fdr usa-prose">
           <VerticalStepIndicator number={props.step.step_number} last={props.last} />
           <div className="step-label">
-            <h2 className="margin-top-0 text-reg">{props.step.name}</h2>
+            <h2 className="margin-0 text-reg line-height-body-5">{props.step.name}</h2>
             <div className="text-sm text-base-dark">{props.step.timeEstimate}</div>
           </div>
         </div>
       </div>
 
       <div className="tablet:grid-col-8 roadmap-content">
-        <p className="margin-top-2">{props.step.description}</p>
+        <p>{props.step.description}</p>
         <ul>
           {props.step.tasks.map((task) => (
             <Task key={task.id} task={task} />

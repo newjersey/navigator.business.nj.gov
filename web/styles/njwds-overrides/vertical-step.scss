@@ -16,11 +16,20 @@
   text-align: center;
   top: calc((2.5rem - 0.5rem) / -2);
   z-index: 100;
-  margin-top: 1.5rem;
   font-size: 22px;
 
   @media all and (min-width: $sm) {
     margin-top: 0;
+  }
+}
+
+.usa-step-indicator {
+  margin-bottom: 0 !important;
+}
+
+@media all and (min-width: $sm) {
+  .usa-step-indicator--counters .usa-step-indicator__segment-label {
+    margin-top: 0 !important;
   }
 }
 
@@ -36,7 +45,6 @@
   height: 30rem !important;
   width: 0.5rem;
   left: calc(((2.5rem - 0.5rem) / 2));
-  margin-top: 1.5rem;
   z-index: 90;
 
   @media all and (min-width: $sm) {

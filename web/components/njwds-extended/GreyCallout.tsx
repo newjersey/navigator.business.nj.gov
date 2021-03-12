@@ -12,7 +12,7 @@ interface Link {
 
 export const GreyCallout = (props: Props): ReactElement => {
   return (
-    <div className="text-sm fdr padding-3 bg-base-lightest border-base-lighter border-1px">
+    <div className="margin-top-3 text-sm fdr padding-3 bg-base-lightest border-base-lighter border-1px">
       <div>{props.children}</div>
       {props.link && (
         <div className="mla">

@@ -80,19 +80,21 @@ const RoadmapPage = (props: Props): ReactElement => {
           need to do at a glance. Once you’re ready we’ll start to walk you through the process.
         </p>
 
-        <GreyCallout link={{ text: "Edit", href: "/onboarding" }}>
-          <div>
-            <div>
-              Business Name: <strong>{getBusinessName()}</strong>
-            </div>
-            <div>
-              Industry: <strong>{getIndustry()}</strong>
-            </div>
-            <div>
-              Legal Entity: <strong>{getLegalEntity()}</strong>
-            </div>
-          </div>
-        </GreyCallout>
+        <div>
+          <GreyCallout link={{ text: "Edit", href: "/onboarding" }}>
+            <>
+              <div>
+                Business Name: <strong>{getBusinessName()}</strong>
+              </div>
+              <div>
+                Industry: <strong>{getIndustry()}</strong>
+              </div>
+              <div>
+                Legal Entity: <strong>{getLegalEntity()}</strong>
+              </div>
+            </>
+          </GreyCallout>
+        </div>
 
         {roadmap.steps.map((step, index) => (
           <Step key={step.id} step={step} last={index === roadmap.steps.length - 1} />
