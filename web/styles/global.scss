@@ -10,21 +10,8 @@ $lg: 64em; //desktop and up (1024px)
 @import "njwds-overrides/left-sidebar";
 @import "njwds-overrides/default";
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  line-height: 1.6;
-  font-size: 18px;
-}
-
 * {
   box-sizing: border-box;
-}
-
-img {
-  max-width: 100%;
-  display: block;
 }
 
 .text-sm {

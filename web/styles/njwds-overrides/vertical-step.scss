@@ -17,6 +17,7 @@
   top: calc((2.5rem - 0.5rem) / -2);
   z-index: 100;
   margin-top: 1.5rem;
+  font-size: 22px;
 
   @media all and (min-width: $sm) {
     margin-top: 0;

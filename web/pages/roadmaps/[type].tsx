@@ -45,7 +45,7 @@ const RoadmapPage = (props: Props): ReactElement => {
 
   const getHeader = (): string => {
     return userData.formData.businessName?.businessName
-      ? `${userData.formData.businessName?.businessName}'s Roadmap`
+      ? `Business Roadmap for ${userData.formData.businessName?.businessName}`
       : "Your Business Roadmap";
   };
 
@@ -75,7 +75,7 @@ const RoadmapPage = (props: Props): ReactElement => {
     <PageSkeleton>
       <SinglePageLayout>
         <h1 className="red">{getHeader()}</h1>
-        <p className="allow-long">
+        <p className="allow-long usa-intro">
           To start your business in New Jersey, you’ll need to complete the basic steps below. Here’s what you
           need to do at a glance. Once you’re ready we’ll start to walk you through the process.
         </p>

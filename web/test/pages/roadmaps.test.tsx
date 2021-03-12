@@ -30,7 +30,7 @@ describe("roadmap page", () => {
     it("shows the business name from form data", () => {
       useMockFormData({ businessName: { businessName: "My cool business" } });
       const subject = render(<RoadmapPage roadmap={randomRoadmap} allTasks={randomTasks} />);
-      expect(subject.getByText("My cool business's Roadmap")).toBeInTheDocument();
+      expect(subject.getByText("Business Roadmap for My cool business")).toBeInTheDocument();
     });
 
     it("shows placeholder if no business name present", async () => {
