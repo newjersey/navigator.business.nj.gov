@@ -30,12 +30,12 @@ describe("onboarding form", () => {
     mockUseUserData.mockImplementation(createStatefulMock(userData));
     subject = render(<Onboarding />);
 
-    expect(subject.getByLabelText("Email")).toHaveValue(userData.formData.user.email);
-    expect(subject.getByLabelText("First name")).toHaveValue(userData.formData.user.firstName);
-    expect(subject.getByLabelText("Last name")).toHaveValue(userData.formData.user.lastName);
+    expect(subject.getByLabelText("Email")).toHaveValue(userData.formData.user?.email);
+    expect(subject.getByLabelText("First name")).toHaveValue(userData.formData.user?.firstName);
+    expect(subject.getByLabelText("Last name")).toHaveValue(userData.formData.user?.lastName);
     fireEvent.click(subject.getByText("Next"));
     expect(subject.getByLabelText("What type of company do you want to start?")).toHaveValue(
-      userData.formData.businessType.businessType
+      userData.formData.businessType?.businessType
     );
   });
 
@@ -66,7 +66,7 @@ describe("onboarding form", () => {
     fillText(subject.getByLabelText("Zip code"), "11111");
 
     fireEvent.click(subject.getByText("Next"));
-    expect(mockPush).toHaveBeenCalledWith("/roadmaps/restaurant");
+    expect(mockPush).toHaveBeenCalledWith("/roadmap");
   });
 
   it("updates the user data after each page", () => {
@@ -95,24 +95,6 @@ describe("onboarding form", () => {
         },
       },
     });
-  });
-
-  it("directs to roadmap based on business type", () => {
-    mockUseUserData.mockImplementation(createStatefulMock());
-    subject = render(<Onboarding />);
-
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.change(subject.getByLabelText("What type of company do you want to start?"), {
-      target: { value: "e-commerce" },
-    });
-
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Next"));
-
-    expect(mockPush).toHaveBeenCalledWith("/roadmaps/e-commerce");
   });
 
   it("updates when onboarding form has been finished", () => {

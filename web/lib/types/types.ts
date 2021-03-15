@@ -1,4 +1,4 @@
-import { BusinessForm } from "./form";
+import { BusinessForm, ECommerce, HomeImprovementContractor, Restaurant } from "./form";
 
 export interface UserData {
   user: BusinessUser;
@@ -20,7 +20,10 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
   };
 };
 
+export type BusinessType = Restaurant | ECommerce | HomeImprovementContractor;
+
 export interface RoadmapFromFile {
+  type: BusinessType;
   steps: StepFromFile[];
 }
 export interface StepFromFile {
@@ -33,6 +36,7 @@ export interface StepFromFile {
 }
 
 export interface Roadmap {
+  type: BusinessType;
   steps: Step[];
 }
 
@@ -58,8 +62,6 @@ export interface Destination {
   name: string;
   link: string;
 }
-
-export type TaskLookup = Record<string, Task>;
 
 export type LegalStructure =
   | "Sole Proprietorship"

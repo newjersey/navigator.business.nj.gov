@@ -20,7 +20,9 @@ const Home = (): ReactElement => {
       />
       <SinglePageLayout>
         <h1>
-          {state.isAuthenticated ? `Welcome, ${state.user.name || state.user.email}` : "Welcome to EasyRegNJ"}
+          {state.isAuthenticated
+            ? `Welcome, ${state.user?.name || state.user?.email}`
+            : "Welcome to EasyRegNJ"}
         </h1>
         <p>The simplest way to license, form & register your business in the State of New Jersey.</p>
         <p>

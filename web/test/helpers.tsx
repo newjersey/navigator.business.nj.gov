@@ -17,10 +17,12 @@ export const renderWithUser = (
 
 export const createStatefulMock = (initialValue?: UserData) => {
   return (): UseUserDataResponse => {
-    const [userData, setUserData] = React.useState<UserData>(initialValue || generateUserData({}));
+    const [userData, setUserData] = React.useState<UserData | undefined>(
+      initialValue || generateUserData({})
+    );
     return {
       userData: userData,
-      update: (data: UserData) => {
+      update: (data: UserData | undefined) => {
         setUserData(data);
         return Promise.resolve();
       },

@@ -12,7 +12,7 @@ jest.mock("../api-client/apiClient", () => ({
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("useUserData", () => {
-  const setupHook = (currentUser: BusinessUser): UseUserDataResponse => {
+  const setupHook = (currentUser: BusinessUser | undefined): UseUserDataResponse => {
     const returnVal = generateUseUserDataResponse({});
     function TestComponent() {
       Object.assign(returnVal, useUserData());
@@ -30,13 +30,14 @@ describe("useUserData", () => {
   });
 
   describe("when there is a current user", () => {
-    const currentUser = generateUser({});
     it("uses user id to get user data", () => {
+      const currentUser = generateUser({});
       setupHook(currentUser);
       expect(mockApi.getUserData).toHaveBeenCalledWith(currentUser.id);
     });
 
     it("posts new user data when calling update", async () => {
+      const currentUser = generateUser({});
       const { update } = setupHook(currentUser);
       const newUserData = generateUserData({});
       await act(() => update(newUserData));

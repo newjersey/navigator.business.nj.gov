@@ -1,27 +1,21 @@
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, GetStaticPropsResult } from "next";
+import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import React, { ReactElement } from "react";
 import { PageSkeleton } from "../../components/PageSkeleton";
 import { getAllTaskIds, getTaskById, TaskIdParam } from "../../lib/static/loadTasks";
 import { Task } from "../../lib/types/types";
 import Link from "next/link";
 import { SidebarPageLayout } from "../../components/njwds-extended/SidebarPageLayout";
-import { useUserData } from "../../lib/data/useUserData";
-import { getRoadmapUrl } from "../../lib/form-helpers/getRoadmapUrl";
 
 interface Props {
   task: Task;
 }
 
 const TaskPage = (props: Props): ReactElement => {
-  const { userData } = useUserData();
-
-  const roadmapUrl = userData ? getRoadmapUrl(userData.formData) : "/";
-
   const sidebar = <></>;
 
   const backButton = (
-    <Link href={roadmapUrl} passHref>
-      <a href={roadmapUrl}>← Back to Roadmap</a>
+    <Link href="/roadmap" passHref>
+      <a href="/roadmap">← Back to Roadmap</a>
     </Link>
   );
 
@@ -69,7 +63,7 @@ const TaskPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsResult<TaskIdParam>> => {
+export const getStaticPaths = async (): Promise<GetStaticPathsResult<TaskIdParam>> => {
   const paths = getAllTaskIds();
   return {
     paths,
@@ -77,7 +71,7 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<GetStaticPathsRe
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps = async ({
   params,
 }: {
   params: TaskIdParam;

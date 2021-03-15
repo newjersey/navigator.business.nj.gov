@@ -70,6 +70,7 @@ export const generateFormData = (overrides: Partial<BusinessForm>): BusinessForm
 
 export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
   return {
+    type: "restaurant",
     steps: [generateStep({})],
     ...overrides,
   };
@@ -102,6 +103,7 @@ export const generateTask = (overrides: Partial<Task>): Task => {
 
 export const generateRoadmapFromFile = (overrides: Partial<RoadmapFromFile>): RoadmapFromFile => {
   return {
+    type: "restaurant",
     steps: [generateStepFromFile({})],
     ...overrides,
   };

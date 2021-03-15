@@ -8,7 +8,6 @@ import { JSONSchema7 } from "json-schema";
 import { onKeyPress } from "../lib/helpers";
 import { BusinessForm } from "../lib/types/form";
 import { useUserData } from "../lib/data/useUserData";
-import { getRoadmapUrl } from "../lib/form-helpers/getRoadmapUrl";
 import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
 
 const Onboarding = (): ReactElement => {
@@ -42,6 +41,7 @@ const Onboarding = (): ReactElement => {
   }, [page]);
 
   const onSubmit = (event: ISubmitEvent<BusinessForm>): void => {
+    if (!userData) return;
     if (page + 1 < sections.length) {
       setPage(page + 1);
       update({
@@ -54,7 +54,7 @@ const Onboarding = (): ReactElement => {
         formData: event.formData,
         formProgress: "COMPLETED",
       });
-      router.push(getRoadmapUrl(event.formData));
+      router.push("/roadmap");
     }
   };
 
