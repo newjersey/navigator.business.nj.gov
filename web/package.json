@@ -13,7 +13,6 @@
     "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}' --fix",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "make-schema-types": "json2ts -i schemas/form.json -o lib/types/form.d.ts && cp lib/types/form.d.ts ../api/src/domain",
-    "make-roadmap-types": "make_types -i lib/types/Roadmap.ts roadmaps/business-types/restaurant.json Roadmap",
     "cypress:open": "../scripts/check-env.sh && cypress open",
     "cypress:run": "../scripts/check-env.sh && cypress run --record false"
   },
