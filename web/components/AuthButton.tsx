@@ -14,7 +14,7 @@ export const AuthButton = (): ReactElement => {
 
   const logout = async () => {
     await Auth.signOut();
-    onSignOut(dispatch);
+    onSignOut(router.push, dispatch);
   };
 
   const loginButton = () => (

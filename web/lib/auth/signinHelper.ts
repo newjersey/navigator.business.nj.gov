@@ -30,7 +30,8 @@ export const onSignIn = async (
     });
 };
 
-export const onSignOut = (dispatch: Dispatch<AuthAction>): void => {
+export const onSignOut = (push: (url: string) => Promise<boolean>, dispatch: Dispatch<AuthAction>): void => {
+  push("/");
   dispatch({
     type: "LOGOUT",
     user: undefined,

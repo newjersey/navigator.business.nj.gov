@@ -18,7 +18,7 @@ const SigninPage = (): ReactElement => {
       setAlreadySignedIn(true);
       onSignIn(router.push, dispatch);
     } else if (state === AuthState.SignedOut) {
-      onSignOut(dispatch);
+      onSignOut(router.push, dispatch);
     }
   };
 

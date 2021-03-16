@@ -5,6 +5,7 @@ import { Step } from "../components/Step";
 import { GreyCallout } from "../components/njwds-extended/GreyCallout";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { useRoadmap } from "../lib/data/useRoadmap";
+import { AuthButton } from "../components/AuthButton";
 
 const RoadmapPage = (): ReactElement => {
   const { userData, isLoading } = useUserData();
@@ -40,6 +41,9 @@ const RoadmapPage = (): ReactElement => {
   return (
     <PageSkeleton>
       <SinglePageLayout>
+        <div className="float-right">
+          <AuthButton />
+        </div>
         <h1 className="red">{getHeader()}</h1>
         <p className="allow-long usa-intro">
           To start your business in New Jersey, you’ll need to complete the basic steps below. Here’s what you

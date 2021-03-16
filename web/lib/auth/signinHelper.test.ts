@@ -86,12 +86,13 @@ describe("AuthHelper", () => {
 
   describe("onSignOut", () => {
     it("dispatches a logout with undefined user", () => {
-      onSignOut(mockDispatch);
+      onSignOut(mockPush, mockDispatch);
 
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGOUT",
         user: undefined,
       });
+      expect(mockPush).toHaveBeenCalledWith("/");
     });
   });
 });

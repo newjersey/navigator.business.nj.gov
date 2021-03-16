@@ -1,13 +1,23 @@
 import Link from "next/link";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Hero } from "../components/njwds/Hero";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { AuthContext } from "./_app";
 import { AuthButton } from "../components/AuthButton";
 import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
+import { useRouter } from "next/router";
+import { useUserData } from "../lib/data/useUserData";
 
 const Home = (): ReactElement => {
   const { state } = useContext(AuthContext);
+  const { userData } = useUserData();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (userData?.formProgress === "COMPLETED") {
+      router.push("/roadmap");
+    }
+  }, [userData]);
 
   return (
     <PageSkeleton>
