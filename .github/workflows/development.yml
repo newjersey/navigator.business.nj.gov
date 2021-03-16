@@ -62,27 +62,27 @@ jobs:
       - name: 🧪 Run API tests
         run: npm --prefix=api run test
 
-#      - name: 📦 Build project for feature tests
-#        run: npm --prefix=web run build --if-present && npm --prefix=api run install-dynamo-local
-#        env:
-#          API_BASE_URL: http://localhost:5000/dev
-#
-#      - name: 🧪 Run e2e cypress tests
-#        uses: cypress-io/github-action@v2
-#        with:
-#          working-directory: web
-#          start: npm start, npm --prefix=../api start
-#          wait-on: 'http://localhost:3000, http://localhost:5000/dev/health'
-#          record: true
-#        env:
-#          CYPRESS_API_BASE_URL: http://localhost:5000/dev
-#          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-#          CYPRESS_TEST_USER_EMAIL: ${{ secrets.CYPRESS_TEST_USER_EMAIL }}
-#          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
-#          CYPRESS_AWS_COGNITO_IDENTITY_POOL_ID: ${{ secrets.CYPRESS_AWS_COGNITO_IDENTITY_POOL_ID }}
-#          CYPRESS_AWS_USER_POOLS_ID: ${{ secrets.CYPRESS_AWS_USER_POOLS_ID }}
-#          CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID: ${{ secrets.CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID }}
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 📦 Build project for feature tests
+        run: npm --prefix=web run build --if-present && npm --prefix=api run install-dynamo-local
+        env:
+          API_BASE_URL: http://localhost:5000/dev
+
+      - name: 🧪 Run e2e cypress tests
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: web
+          start: npm start, npm --prefix=../api start
+          wait-on: 'http://localhost:3000, http://localhost:5000/dev/health'
+          record: true
+        env:
+          CYPRESS_API_BASE_URL: http://localhost:5000/dev
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_TEST_USER_EMAIL: ${{ secrets.CYPRESS_TEST_USER_EMAIL }}
+          CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
+          CYPRESS_AWS_COGNITO_IDENTITY_POOL_ID: ${{ secrets.CYPRESS_AWS_COGNITO_IDENTITY_POOL_ID }}
+          CYPRESS_AWS_USER_POOLS_ID: ${{ secrets.CYPRESS_AWS_USER_POOLS_ID }}
+          CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID: ${{ secrets.CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1

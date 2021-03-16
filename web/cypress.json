@@ -1,5 +1,6 @@
 {
   "baseUrl": "http://localhost:3000",
   "projectId": "o9nvo8",
-  "defaultCommandTimeout": 10000
+  "defaultCommandTimeout": 10000,
+  "viewportWidth": 1025
 }
