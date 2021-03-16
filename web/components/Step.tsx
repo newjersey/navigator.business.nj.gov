@@ -15,8 +15,8 @@ export const Step = (props: Props): ReactElement => {
         <div className="fdr usa-prose">
           <VerticalStepIndicator number={props.step.step_number} last={props.last} />
           <div className="step-label">
-            <h2 className="margin-0 text-reg line-height-body-5">{props.step.name}</h2>
-            <div className="text-sm text-base-dark">{props.step.timeEstimate}</div>
+            <h2 className="margin-0 font-sans-sm line-height-body-5 weight-unset">{props.step.name}</h2>
+            <div className="font-sans-3xs text-base-dark">{props.step.timeEstimate}</div>
           </div>
         </div>
       </div>

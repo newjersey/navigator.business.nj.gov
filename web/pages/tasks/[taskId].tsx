@@ -5,13 +5,14 @@ import { getAllTaskIds, getTaskById, TaskIdParam } from "../../lib/static/loadTa
 import { Task } from "../../lib/types/types";
 import Link from "next/link";
 import { SidebarPageLayout } from "../../components/njwds-extended/SidebarPageLayout";
+import { MiniRoadmap } from "../../components/MiniRoadmap";
 
 interface Props {
   task: Task;
 }
 
 const TaskPage = (props: Props): ReactElement => {
-  const sidebar = <></>;
+  const sidebar = <MiniRoadmap activeTaskId={props.task.id} />;
 
   const backButton = (
     <Link href="/roadmap" passHref>

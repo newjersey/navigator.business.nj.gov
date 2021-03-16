@@ -1,9 +1,10 @@
 .step-label {
   margin-left: 3rem;
-  font-size: 1.06rem !important;
+  font-size: 0.88rem !important;
   line-height: 1.6;
 
   @media all and (min-width: $sm) {
+    font-size: 1.06rem !important;
     margin-left: 1.5rem;
   }
 }

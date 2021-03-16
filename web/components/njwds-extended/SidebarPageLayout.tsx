@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
-import { useMediaQuery } from "react-responsive";
-import { PageSizes } from "../../lib/PageSizes";
+import { MediaQueries } from "../../lib/PageSizes";
+import { useMediaQuery } from "@material-ui/core";
 
 interface Props {
   children: React.ReactNode;
@@ -9,9 +9,7 @@ interface Props {
 }
 
 export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): ReactElement => {
-  const isLargeScreen = useMediaQuery({
-    query: `(min-device-width: ${PageSizes.lg})`,
-  });
+  const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
 
   return (
     <>
@@ -22,7 +20,7 @@ export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): Rea
       <div className="usa-section">
         <div className="grid-container">
           <div className="grid-row grid-gap">
-            <div className="usa-layout-docs__sidenav desktop:grid-col-3">
+            <div className="usa-layout-docs__sidenav desktop:grid-col-4">
               <nav aria-label="Secondary navigation" className="usa-nav">
                 <button className="usa-nav__close fdr fac fjc">
                   <img src="/img/close.svg" alt="close" />
@@ -34,7 +32,7 @@ export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): Rea
               </nav>
             </div>
 
-            <main className="usa-layout-docs__main desktop:grid-col-9 usa-layout-docs">
+            <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs">
               {!isLargeScreen && <div className="padding-top-2 padding-bottom-2 usa-prose">{backButton}</div>}
               <div className="border-1px border-base-lighter padding-3 usa-prose minh-40">{children}</div>
             </main>

@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 interface Props {
   number: number;
   last: boolean;
+  active?: boolean;
 }
 
 export const VerticalStepIndicator = (props: Props): ReactElement => {
@@ -12,7 +13,9 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
         <li
           className={` vertical ${
             props.last ? "no-line" : ""
-          } usa-step-indicator__segment usa-step-indicator__segment--complete`}
+          } usa-step-indicator__segment usa-step-indicator__segment--${
+            props.active ? "current" : "complete"
+          }`}
           data-num={props.number}
         >
           <span className="usa-step-indicator__segment-label"></span>

@@ -1,16 +1,23 @@
 import { render, RenderResult } from "@testing-library/react";
 import { generateTask } from "../factories";
 import TaskPage from "../../pages/tasks/[taskId]";
-import * as reactResponsive from "react-responsive";
+import { useMediaQuery } from "@material-ui/core";
 
-jest.mock("react-responsive");
-const mockMediaQuery = (reactResponsive as jest.Mocked<typeof reactResponsive>).useMediaQuery;
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+function mockMaterialUI() {
+  const original = jest.requireActual("@material-ui/core");
+  return {
+    ...original,
+    useMediaQuery: jest.fn(),
+  };
+}
+jest.mock("@material-ui/core", () => mockMaterialUI());
+const setLargeScreen = (): void => {
+  (useMediaQuery as jest.Mock).mockImplementation(() => true);
+};
 
 describe("task page", () => {
   let subject: RenderResult;
-  const setLargeScreen = () => {
-    mockMediaQuery.mockReturnValue(true);
-  };
 
   beforeEach(() => {
     setLargeScreen();
