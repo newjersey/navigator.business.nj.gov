@@ -15,7 +15,7 @@ const Home = (): ReactElement => {
 
   useEffect(() => {
     if (userData?.formProgress === "COMPLETED") {
-      router.push("/roadmap");
+      router.replace("/roadmap");
     }
   }, [userData]);
 

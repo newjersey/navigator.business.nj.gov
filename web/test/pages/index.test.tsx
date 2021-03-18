@@ -18,6 +18,7 @@ describe("HomePage", () => {
     mockPush = jest.fn();
     (useRouter as jest.Mock).mockReturnValue({
       push: mockPush,
+      replace: mockPush,
     });
     mockUseUserData.mockReturnValue(generateUseUserDataResponse({}));
   });
