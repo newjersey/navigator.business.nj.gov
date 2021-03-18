@@ -1,17 +1,18 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 interface Props {
   children: string;
+  className?: string;
 }
 
 export const Icon = (props: Props): ReactElement => {
-  const styles = {
-    background: `url(/img/${props.children}.svg) no-repeat center/.84375ex 1.35ex`,
-    fontSize: "2rem",
-    display: "inline-block",
-    padding: ".5rem",
-    height: "1rem",
-  };
-
-  return <div className="icon" style={styles} />;
+  return (
+    <svg
+      className={`usa-icon ${props.className ? props.className : ""}`}
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+      dangerouslySetInnerHTML={{ __html: `<use xlink:href="/img/sprite.svg#${props.children}"></use>` }}
+    />
+  );
 };

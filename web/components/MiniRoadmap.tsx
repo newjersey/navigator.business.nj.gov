@@ -59,10 +59,8 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                   {step.name}
                 </h2>
                 <div className="padding-right-1 padding-left-1 mla">
-                  <Icon>
-                    {openSteps.includes(step.id)
-                      ? "angle-arrow-up-primary-hover"
-                      : "angle-arrow-down-primary-hover"}
+                  <Icon className="font-sans-lg">
+                    {openSteps.includes(step.id) ? "expand_less" : "expand_more"}
                   </Icon>
                 </div>
               </div>

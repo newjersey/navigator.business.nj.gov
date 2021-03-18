@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { MediaQueries } from "../../lib/PageSizes";
 import { useMediaQuery } from "@material-ui/core";
+import { Icon } from "../njwds/Icon";
 
 interface Props {
   children: React.ReactNode;
@@ -13,9 +14,9 @@ export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): Rea
 
   return (
     <>
-      <div className="usa-overlay"></div>
+      <div className="usa-overlay" />
       <button className="usa-menu-btn">
-        <img src="/img/usa-icons/menu.svg" alt="menu" />
+        <Icon className="font-sans-xl">menu</Icon>
       </button>
       <div className="usa-section">
         <div className="grid-container">
@@ -23,7 +24,7 @@ export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): Rea
             <div className="usa-layout-docs__sidenav desktop:grid-col-4">
               <nav aria-label="Secondary navigation" className="usa-nav">
                 <button className="usa-nav__close fdr fac fjc">
-                  <img src="/img/close.svg" alt="close" />
+                  <Icon className="font-sans-xl">close</Icon>
                 </button>
                 {isLargeScreen && (
                   <div className="padding-top-2 padding-bottom-2 usa-prose">{backButton}</div>
