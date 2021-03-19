@@ -49,7 +49,7 @@ const TaskPage = (props: Props): ReactElement => {
         )}
 
         {props.task.destination.name && (
-          <div className="padding-2 border-base-lighter border-1px">
+          <div className="padding-2 border-base-lighter border-1px font-body-2xs">
             Destination: <strong>{props.task.destination.name}</strong>
           </div>
         )}

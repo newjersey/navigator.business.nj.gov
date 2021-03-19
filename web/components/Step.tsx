@@ -12,8 +12,10 @@ export const Step = (props: Props): ReactElement => {
   return (
     <div className="grid-row margin-top-3">
       <div className="tablet:grid-col-3 margin-right-4">
-        <div className="fdr usa-prose">
-          <VerticalStepIndicator number={props.step.step_number} last={props.last} />
+        <div className="fdr">
+          <div className="margin-top-2">
+            <VerticalStepIndicator number={props.step.step_number} last={props.last} />
+          </div>
           <div className="step-label">
             <h2 className="margin-0 font-sans-sm line-height-body-5 weight-unset">{props.step.name}</h2>
             <div className="font-sans-3xs text-base-dark">{props.step.timeEstimate}</div>

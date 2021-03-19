@@ -44,7 +44,7 @@ const RoadmapPage = (): ReactElement => {
         <div className="float-right">
           <AuthButton />
         </div>
-        <h1 className="red">{getHeader()}</h1>
+        <h1>{getHeader()}</h1>
         <p className="allow-long usa-intro">
           To start your business in New Jersey, you’ll need to complete the basic steps below. Here’s what you
           need to do at a glance. Once you’re ready we’ll start to walk you through the process.

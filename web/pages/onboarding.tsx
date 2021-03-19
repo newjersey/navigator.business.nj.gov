@@ -74,7 +74,7 @@ const Onboarding = (): ReactElement => {
         <h1>The onboarding form</h1>
         <Form
           schema={schema as JSONSchema7}
-          className={`page-${page}`}
+          className={`page-${page} usa-form`}
           onSubmit={onSubmit}
           formData={userData.formData}
           uiSchema={uiSchema}

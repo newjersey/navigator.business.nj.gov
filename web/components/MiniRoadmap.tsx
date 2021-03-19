@@ -39,7 +39,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     <nav>
       {roadmap?.steps.map((step) => (
         <div key={step.id}>
-          <div className="fdr fac usa-prose margin-top-2 margin-bottom-2">
+          <div className="fdr fac margin-top-2 margin-bottom-1">
             <VerticalStepIndicator
               number={step.step_number}
               last={isLast(step.id)}
@@ -53,14 +53,14 @@ export const MiniRoadmap = (props: Props): ReactElement => {
             >
               <div className=" step-label sm fdr fjc fac">
                 <h2
-                  className={`margin-0 font-sans-sm line-height-body-2 ${
+                  className={`margin-0 font-body-xs line-height-body-2 text-ink ${
                     step.id === activeStepId ? "text-primary-dark" : "weight-unset"
                   }`}
                 >
                   {step.name}
                 </h2>
                 <div className="padding-right-1 padding-left-1 mla">
-                  <Icon className="font-sans-lg">
+                  <Icon className="font-sans-lg text-ink">
                     {openSteps.includes(step.id) ? "expand_less" : "expand_more"}
                   </Icon>
                 </div>
