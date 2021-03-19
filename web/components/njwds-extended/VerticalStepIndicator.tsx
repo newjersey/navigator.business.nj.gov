@@ -4,11 +4,14 @@ interface Props {
   number: number;
   last: boolean;
   active?: boolean;
+  small?: boolean;
 }
 
 export const VerticalStepIndicator = (props: Props): ReactElement => {
+  const sm = props.small ? "-sm" : "";
+
   return (
-    <div className="usa-step-indicator usa-step-indicator--counters" aria-label="progress">
+    <div className={`usa-step-indicator usa-step-indicator--counters${sm}`} aria-label="progress">
       <ol className="usa-step-indicator__segments vertical">
         <li
           className={` vertical ${

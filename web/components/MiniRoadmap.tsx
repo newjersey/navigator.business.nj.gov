@@ -44,13 +44,14 @@ export const MiniRoadmap = (props: Props): ReactElement => {
               number={step.step_number}
               last={isLast(step.id)}
               active={step.id === activeStepId}
+              small={true}
             />
             <button
               className="usa-button--unstyled width-100"
               onClick={() => toggleStep(step.id)}
               aria-expanded={openSteps.includes(step.id)}
             >
-              <div className=" step-label fdr fjc fac">
+              <div className=" step-label sm fdr fjc fac">
                 <h2
                   className={`margin-0 font-sans-sm line-height-body-2 ${
                     step.id === activeStepId ? "text-primary-dark" : "weight-unset"
@@ -66,7 +67,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
               </div>
             </button>
           </div>
-          <div className="margin-left-6 font-sans-xs">
+          <div className="margin-left-5 font-sans-xs">
             {openSteps.includes(step.id) &&
               step.tasks.map((task) => (
                 <MiniRoadmapTask key={task.id} task={task} active={task.id === props.activeTaskId} />
@@ -77,7 +78,3 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     </nav>
   );
 };
-
-/*{step.tasks.map((task) => (
-                <MiniRoadmapTask key={task.id} task={task} active={task.id === props.activeTaskId}/>
-              ))}*/

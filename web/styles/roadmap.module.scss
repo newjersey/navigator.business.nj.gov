@@ -3,9 +3,17 @@
   font-size: 0.88rem !important;
   line-height: 1.6;
 
+  &.sm {
+    margin-left: 2.5rem;
+  }
+
   @media all and (min-width: $sm) {
     font-size: 1.06rem !important;
     margin-left: 1.5rem;
+
+    &.sm {
+      margin-left: 0.5rem;
+    }
   }
 }
 

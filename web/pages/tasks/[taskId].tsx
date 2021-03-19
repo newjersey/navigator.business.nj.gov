@@ -23,7 +23,7 @@ const TaskPage = (props: Props): ReactElement => {
   return (
     <PageSkeleton>
       <SidebarPageLayout sidebar={sidebar} backButton={backButton}>
-        <h1>{props.task.name}</h1>
+        <h2>{props.task.name}</h2>
         <p>{props.task.description}</p>
 
         {props.task.to_complete_must_have.length > 0 && (
@@ -49,15 +49,17 @@ const TaskPage = (props: Props): ReactElement => {
         )}
 
         {props.task.destination.name && (
-          <div className="padding-2 border-base-lightest border-1px">
+          <div className="padding-2 border-base-lighter border-1px">
             Destination: <strong>{props.task.destination.name}</strong>
           </div>
         )}
 
         {props.task.destination.link && (
-          <Link href={props.task.destination.link}>
-            <button className="usa-button float-right">Start Application</button>
-          </Link>
+          <div className="fdr">
+            <Link href={props.task.destination.link}>
+              <button className="usa-button mla margin-top-4 margin-bottom-8">Start Application</button>
+            </Link>
+          </div>
         )}
       </SidebarPageLayout>
     </PageSkeleton>
