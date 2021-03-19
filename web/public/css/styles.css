@@ -59,7 +59,7 @@
 
 .usa-prose>table,
 .usa-table {
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     border-collapse: collapse;
     border-spacing: 0;
@@ -224,7 +224,7 @@
 .width-mobile .usa-table--stacked-header tr td:first-child,
 .width-mobile .usa-table--stacked-header tr th:first-child {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.06rem;
+    font-size: 1.2rem;
     line-height: 1.1;
     background-color: #e6e6e6;
     color: #1b1b1b;
@@ -664,7 +664,7 @@ body {
 
 .usa-button {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: .9;
     color: #fff;
     background-color: #538200;
@@ -1042,7 +1042,7 @@ img {
 .usa-select,
 .usa-textarea {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.3
 }
 
@@ -1150,7 +1150,7 @@ img {
 .usa-label,
 .usa-legend {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.3;
     display: block;
     font-weight: 400;
@@ -3858,7 +3858,7 @@ button.usa-combo-box__toggle-list:focus {
     .usa-table--stacked-header tr td:first-child,
     .usa-table--stacked-header tr th:first-child {
         font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-        font-size: 1.06rem;
+        font-size: 1.2rem;
         line-height: 1.1;
         background-color: #e6e6e6;
         color: #1b1b1b;
@@ -3890,7 +3890,7 @@ button.usa-combo-box__toggle-list:focus {
     padding-left: .5rem;
     padding-right: .5rem;
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem
+    font-size: 1.06rem
 }
 
 .usa-paragraph {
@@ -4106,7 +4106,7 @@ p+* {
 }
 
 .usa-prose {
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5
 }
 
@@ -4131,7 +4131,7 @@ p+* {
 
 .usa-prose>h4,
 .usa-prose>h5 {
-    font-size: 1.06rem
+    font-size: 1.2rem
 }
 
 .usa-prose>h5 {
@@ -4228,7 +4228,7 @@ p+* {
     .usa-prose>.usa-table--stacked-header tr td:first-child,
     .usa-prose>.usa-table--stacked-header tr th:first-child {
         font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-        font-size: 1.06rem;
+        font-size: 1.2rem;
         line-height: 1.1;
         background-color: #e6e6e6;
         color: #1b1b1b;
@@ -4247,7 +4247,7 @@ p+* {
     margin: 0;
     padding: 0;
     width: 100%;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5
 }
 
@@ -4282,7 +4282,7 @@ p+* {
 .usa-accordion__heading,
 .usa-prose .usa-accordion__heading {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: .9;
     margin: 0
 }
@@ -4376,7 +4376,7 @@ p+* {
 
 .usa-alert {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     background-color: #f0f0f0;
     background-position: 1.75rem .75rem;
@@ -4814,7 +4814,7 @@ p+* {
 
 .usa-banner {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     background-color: #1b1b1b
 }
@@ -4828,7 +4828,7 @@ p+* {
 
 .usa-banner .usa-accordion {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5
 }
 
@@ -5592,7 +5592,7 @@ p+* {
 
 .usa-card__container {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     background-color: #fff;
     border-width: 2px;
@@ -5854,7 +5854,7 @@ p+* {
     list-style-type: none;
     padding-left: 0;
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5
 }
 
@@ -5924,7 +5924,7 @@ p+* {
 
 .usa-collection__heading {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.2rem;
     line-height: 1.3;
     margin-bottom: 0;
     margin-top: 0
@@ -6008,7 +6008,7 @@ p+* {
 
 .usa-footer {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     overflow: hidden
 }
@@ -6427,7 +6427,7 @@ p+* {
 }
 
 .usa-footer--big .usa-footer__primary-link {
-    font-size: 1.06rem;
+    font-size: 1.2rem;
     font-weight: 700;
     line-height: 1.1;
     margin: 0
@@ -6502,7 +6502,7 @@ p+* {
 }
 
 .usa-form {
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.3
 }
 
@@ -6578,7 +6578,7 @@ p+* {
 }
 
 .usa-graphic-list {
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5
 }
 
@@ -6628,7 +6628,7 @@ p+* {
 
 .usa-header {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     z-index: 300
 }
@@ -6960,7 +6960,7 @@ html.usa-js-loading .usa-nav__submenu {
 
 .usa-hero {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     padding-bottom: 2rem;
     padding-top: 2rem;
@@ -7151,7 +7151,7 @@ html.usa-js-loading .usa-nav__submenu {
 
 .usa-nav {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: .9
 }
 
@@ -7189,7 +7189,7 @@ html.usa-js-loading .usa-nav__submenu {
 
 .usa-nav .usa-accordion {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: .9
 }
 
@@ -7612,7 +7612,7 @@ html.usa-js-loading .usa-nav__submenu {
 .usa-process-list,
 .usa-prose .usa-process-list {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     margin-bottom: 0;
     margin-top: 0;
@@ -7780,7 +7780,7 @@ html.usa-js-loading .usa-nav__submenu {
 .usa-step-indicator__heading {
     color: #1b1b1b;
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.2rem;
     font-weight: 700;
     margin: 1rem 0 0
 }
@@ -7952,7 +7952,7 @@ html.usa-js-loading .usa-nav__submenu {
 
 .usa-search {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     position: relative
 }
@@ -8344,7 +8344,7 @@ input[type=search] {
 
 .usa-skipnav {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     text-decoration: underline;
     background: 0 0;
@@ -8385,7 +8385,7 @@ input[type=search] {
 
 .usa-summary-box {
     font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-    font-size: 1.13rem;
+    font-size: 1.06rem;
     line-height: 1.5;
     color: #1b1b1b;
     background-color: #e7f6f8;
@@ -10580,7 +10580,7 @@ input[type=search] {
 }
 
 .font-mono-md {
-    font-size: 1.01rem
+    font-size: 1.07rem
 }
 
 .font-mono-lg {
@@ -10616,7 +10616,7 @@ input[type=search] {
 }
 
 .font-sans-md {
-    font-size: 1.13rem
+    font-size: 1.2rem
 }
 
 .font-sans-lg {
@@ -10652,7 +10652,7 @@ input[type=search] {
 }
 
 .font-serif-md {
-    font-size: 1.04rem
+    font-size: 1.1rem
 }
 
 .font-serif-lg {
@@ -10688,7 +10688,7 @@ input[type=search] {
 }
 
 .font-heading-md {
-    font-size: 1.13rem
+    font-size: 1.2rem
 }
 
 .font-heading-lg {
@@ -10724,7 +10724,7 @@ input[type=search] {
 }
 
 .font-body-md {
-    font-size: 1.13rem
+    font-size: 1.2rem
 }
 
 .font-body-lg {
@@ -10760,7 +10760,7 @@ input[type=search] {
 }
 
 .font-code-md {
-    font-size: 1.01rem
+    font-size: 1.07rem
 }
 
 .font-code-lg {
@@ -10796,7 +10796,7 @@ input[type=search] {
 }
 
 .font-alt-md {
-    font-size: 1.04rem
+    font-size: 1.1rem
 }
 
 .font-alt-lg {
@@ -10832,7 +10832,7 @@ input[type=search] {
 }
 
 .font-ui-md {
-    font-size: 1.13rem
+    font-size: 1.2rem
 }
 
 .font-ui-lg {
@@ -15092,7 +15092,7 @@ input[type=search] {
         font-size: .95rem
     }
     .mobile-lg\:font-mono-md {
-        font-size: 1.01rem
+        font-size: 1.07rem
     }
     .mobile-lg\:font-mono-lg {
         font-size: 1.31rem
@@ -15119,7 +15119,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .mobile-lg\:font-sans-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .mobile-lg\:font-sans-lg {
         font-size: 1.46rem
@@ -15146,7 +15146,7 @@ input[type=search] {
         font-size: .98rem
     }
     .mobile-lg\:font-serif-md {
-        font-size: 1.04rem
+        font-size: 1.1rem
     }
     .mobile-lg\:font-serif-lg {
         font-size: 1.34rem
@@ -15173,7 +15173,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .mobile-lg\:font-heading-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .mobile-lg\:font-heading-lg {
         font-size: 1.46rem
@@ -15200,7 +15200,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .mobile-lg\:font-body-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .mobile-lg\:font-body-lg {
         font-size: 1.46rem
@@ -15227,7 +15227,7 @@ input[type=search] {
         font-size: .95rem
     }
     .mobile-lg\:font-code-md {
-        font-size: 1.01rem
+        font-size: 1.07rem
     }
     .mobile-lg\:font-code-lg {
         font-size: 1.31rem
@@ -15254,7 +15254,7 @@ input[type=search] {
         font-size: .98rem
     }
     .mobile-lg\:font-alt-md {
-        font-size: 1.04rem
+        font-size: 1.1rem
     }
     .mobile-lg\:font-alt-lg {
         font-size: 1.34rem
@@ -15281,7 +15281,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .mobile-lg\:font-ui-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .mobile-lg\:font-ui-lg {
         font-size: 1.46rem
@@ -17373,7 +17373,7 @@ input[type=search] {
         font-size: .95rem
     }
     .tablet\:font-mono-md {
-        font-size: 1.01rem
+        font-size: 1.07rem
     }
     .tablet\:font-mono-lg {
         font-size: 1.31rem
@@ -17400,7 +17400,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .tablet\:font-sans-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .tablet\:font-sans-lg {
         font-size: 1.46rem
@@ -17427,7 +17427,7 @@ input[type=search] {
         font-size: .98rem
     }
     .tablet\:font-serif-md {
-        font-size: 1.04rem
+        font-size: 1.1rem
     }
     .tablet\:font-serif-lg {
         font-size: 1.34rem
@@ -17454,7 +17454,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .tablet\:font-heading-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .tablet\:font-heading-lg {
         font-size: 1.46rem
@@ -17481,7 +17481,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .tablet\:font-body-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .tablet\:font-body-lg {
         font-size: 1.46rem
@@ -17508,7 +17508,7 @@ input[type=search] {
         font-size: .95rem
     }
     .tablet\:font-code-md {
-        font-size: 1.01rem
+        font-size: 1.07rem
     }
     .tablet\:font-code-lg {
         font-size: 1.31rem
@@ -17535,7 +17535,7 @@ input[type=search] {
         font-size: .98rem
     }
     .tablet\:font-alt-md {
-        font-size: 1.04rem
+        font-size: 1.1rem
     }
     .tablet\:font-alt-lg {
         font-size: 1.34rem
@@ -17562,7 +17562,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .tablet\:font-ui-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .tablet\:font-ui-lg {
         font-size: 1.46rem
@@ -19654,7 +19654,7 @@ input[type=search] {
         font-size: .95rem
     }
     .desktop\:font-mono-md {
-        font-size: 1.01rem
+        font-size: 1.07rem
     }
     .desktop\:font-mono-lg {
         font-size: 1.31rem
@@ -19681,7 +19681,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .desktop\:font-sans-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .desktop\:font-sans-lg {
         font-size: 1.46rem
@@ -19708,7 +19708,7 @@ input[type=search] {
         font-size: .98rem
     }
     .desktop\:font-serif-md {
-        font-size: 1.04rem
+        font-size: 1.1rem
     }
     .desktop\:font-serif-lg {
         font-size: 1.34rem
@@ -19735,7 +19735,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .desktop\:font-heading-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .desktop\:font-heading-lg {
         font-size: 1.46rem
@@ -19762,7 +19762,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .desktop\:font-body-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .desktop\:font-body-lg {
         font-size: 1.46rem
@@ -19789,7 +19789,7 @@ input[type=search] {
         font-size: .95rem
     }
     .desktop\:font-code-md {
-        font-size: 1.01rem
+        font-size: 1.07rem
     }
     .desktop\:font-code-lg {
         font-size: 1.31rem
@@ -19816,7 +19816,7 @@ input[type=search] {
         font-size: .98rem
     }
     .desktop\:font-alt-md {
-        font-size: 1.04rem
+        font-size: 1.1rem
     }
     .desktop\:font-alt-lg {
         font-size: 1.34rem
@@ -19843,7 +19843,7 @@ input[type=search] {
         font-size: 1.06rem
     }
     .desktop\:font-ui-md {
-        font-size: 1.13rem
+        font-size: 1.2rem
     }
     .desktop\:font-ui-lg {
         font-size: 1.46rem
