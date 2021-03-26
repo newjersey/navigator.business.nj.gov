@@ -42,12 +42,12 @@ describe("Roadmap", () => {
     cy.contains("Legal Entity: General Partnership").should("exist");
 
     // step 1
-    cy.contains("Plan Your Location").should("exist");
-    cy.contains("Zoning Requirements").should("exist");
+    cy.contains("Create a Business Plan").should("exist");
+    cy.contains("Executive Summary").should("exist");
 
     // step 2
-    cy.contains("Research and Prepare Your Business License").should("exist");
-    cy.contains("Search Licenses").should("exist");
+    cy.contains("Due Diligence").should("exist");
+    cy.contains("Research Potential Insurance Needs").should("exist");
 
     // step 3 - GP
     cy.contains("Form & Register Your Business").should("exist");
@@ -56,15 +56,17 @@ describe("Roadmap", () => {
     cy.contains("Register for Tax Purposes with DORES").should("exist");
 
     // step 4
-    cy.contains("Sign Your Lease & File Local Permits").should("exist");
-    cy.contains("Municipality Licenses").should("exist");
+    cy.contains("Sign Your Lease and File Licenses & Local Permits").should("exist");
 
     // tasks screen
-    cy.contains("Zoning Requirements").click();
+    cy.contains("Register a Trade Name").click();
     cy.contains("Business Roadmap for Beesapple's").should("not.exist");
-    cy.contains("Destination: City Office of Zoning").should("exist");
+    cy.contains("Destination: County Clerk").should("exist");
 
     // tasks mini-nav
+    cy.contains("Due Diligence").click();
+    cy.contains("Research Potential Insurance Needs").click();
+
     cy.contains("Form & Register Your Business").click();
     cy.contains("Register for an EIN").click();
     cy.contains("Start Application").should("exist");
@@ -93,7 +95,7 @@ describe("Roadmap", () => {
     cy.contains("Legal Entity: General Partnership").should("exist");
 
     // step 1
-    cy.contains("Plan Your Location").should("exist");
+    cy.contains("Check and Plan Local Site Requirements").should("exist");
     cy.contains("Identify a potential lease").should("exist");
   });
 });

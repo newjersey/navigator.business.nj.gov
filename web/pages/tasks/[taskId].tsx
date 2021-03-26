@@ -6,6 +6,7 @@ import { Task } from "../../lib/types/types";
 import Link from "next/link";
 import { SidebarPageLayout } from "../../components/njwds-extended/SidebarPageLayout";
 import { MiniRoadmap } from "../../components/MiniRoadmap";
+import { useRoadmap } from "../../lib/data/useRoadmap";
 
 interface Props {
   task: Task;
@@ -13,6 +14,7 @@ interface Props {
 
 const TaskPage = (props: Props): ReactElement => {
   const sidebar = <MiniRoadmap activeTaskId={props.task.id} />;
+  const { roadmap } = useRoadmap();
 
   const backButton = (
     <Link href="/roadmap" passHref>
@@ -20,11 +22,22 @@ const TaskPage = (props: Props): ReactElement => {
     </Link>
   );
 
+  const getDescription = (): string => {
+    const stepInRoadmap = roadmap?.steps.find((step) => step.tasks.find((task) => task.id === props.task.id));
+    const taskInRoadmap = stepInRoadmap?.tasks.find((task) => task.id === props.task.id);
+
+    if (taskInRoadmap && taskInRoadmap.description !== props.task.description) {
+      return taskInRoadmap.description;
+    }
+
+    return props.task.description;
+  };
+
   return (
     <PageSkeleton>
       <SidebarPageLayout sidebar={sidebar} backButton={backButton}>
         <h2>{props.task.name}</h2>
-        <p>{props.task.description}</p>
+        <p>{getDescription()}</p>
 
         {props.task.to_complete_must_have.length > 0 && (
           <>

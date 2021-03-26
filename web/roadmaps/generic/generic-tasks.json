@@ -1,0 +1,47 @@
+[
+  {
+    "step": "create_business_plan",
+    "weight": 1,
+    "task": "executive_summary"
+  },
+  {
+    "step": "create_business_plan",
+    "weight": 2,
+    "task": "introduction"
+  },
+  {
+    "step": "create_business_plan",
+    "weight": 3,
+    "task": "business_description"
+  },
+  {
+    "step": "create_business_plan",
+    "weight": 4,
+    "task": "market_analysis"
+  },
+  {
+    "step": "create_business_plan",
+    "weight": 5,
+    "task": "organization_and_management"
+  },
+  {
+    "step": "create_business_plan",
+    "weight": 6,
+    "task": "marketing_and_sales"
+  },
+  {
+    "step": "create_business_plan",
+    "weight": 7,
+    "task": "finances"
+  },
+  {
+    "step": "create_business_plan",
+    "weight": 8,
+    "task": "appendix"
+  },
+  {
+    "step": "due_diligence",
+    "weight": 10,
+    "task": "research_insurance_needs"
+  }
+]

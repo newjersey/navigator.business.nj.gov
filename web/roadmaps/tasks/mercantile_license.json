@@ -1,0 +1,11 @@
+{
+  "id": "mercantile_license",
+  "name": "Mercantile License",
+  "description": "A mercantile license helps municipalities track businesses in their area. Not all municipalities will require mercantile license, to find out if you need a license go to municipal clerk.",
+  "destination": {
+    "name": "depends on municipality",
+    "link": ""
+  },
+  "to_complete_must_have": ["depends on municipality"],
+  "after_completing_will_have": ["Mercantile License"]
+}

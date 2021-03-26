@@ -1,0 +1,11 @@
+{
+  "id": "appendix",
+  "name": "Appendix and Supporting Documents",
+  "description": "Include additional documents that support your plan.",
+  "destination": {
+    "name": "",
+    "link": ""
+  },
+  "to_complete_must_have": [],
+  "after_completing_will_have": []
+}

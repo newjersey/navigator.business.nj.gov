@@ -20,7 +20,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
   };
 };
 
-export type BusinessType = Restaurant | ECommerce | HomeImprovementContractor;
+export type BusinessType = Restaurant | ECommerce | HomeImprovementContractor | "generic";
 
 export interface RoadmapFromFile {
   type: BusinessType;
@@ -40,6 +40,47 @@ export interface Roadmap {
   steps: Step[];
 }
 
+export interface RoadmapBuilder {
+  steps: StepBuilder[];
+}
+
+export interface StepBuilder {
+  step_number: number;
+  id: string;
+  name: string;
+  timeEstimate: string;
+  description: string;
+  tasks: TaskBuilder[];
+}
+
+export interface TaskBuilder {
+  id: string;
+  weight: number;
+}
+
+export interface GenericStep {
+  step_number: number;
+  id: string;
+  name: string;
+  timeEstimate: string;
+  description: string;
+}
+
+export interface TaskStepLink {
+  step: string;
+  weight: number;
+  task: string;
+}
+
+export type TaskModificationType = "description_replace";
+
+export interface TaskModification {
+  step: string;
+  task: string;
+  type: TaskModificationType;
+  content: string;
+}
+
 export interface Step {
   step_number: number;
   id: string;
@@ -50,7 +91,6 @@ export interface Step {
 }
 
 export interface Task {
-  task_number: number;
   id: string;
   name: string;
   description: string;

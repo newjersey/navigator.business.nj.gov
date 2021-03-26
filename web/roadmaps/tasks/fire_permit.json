@@ -1,0 +1,11 @@
+{
+  "id": "fire_permit",
+  "name": "Fire Permit",
+  "description": "Requirements vary by town, this should be completed by shop owner.",
+  "destination": {
+    "name": "Local govt or building office",
+    "link": ""
+  },
+  "to_complete_must_have": ["Certificate of Occupancy"],
+  "after_completing_will_have": ["Permit or letter from town"]
+}

@@ -90,7 +90,6 @@ export const generateStep = (overrides: Partial<Step>): Step => {
 
 export const generateTask = (overrides: Partial<Task>): Task => {
   return {
-    task_number: randomInt(),
     id: "some-id-" + randomInt(),
     name: "some-name-" + randomInt(),
     description: "some-description-" + randomInt(),

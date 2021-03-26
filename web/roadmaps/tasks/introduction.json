@@ -1,0 +1,11 @@
+{
+  "id": "introduction",
+  "name": "Introduction",
+  "description": "Provide a high level overview of your business, how it will be structured and what your goals are for your business.",
+  "destination": {
+    "name": "",
+    "link": ""
+  },
+  "to_complete_must_have": [],
+  "after_completing_will_have": []
+}

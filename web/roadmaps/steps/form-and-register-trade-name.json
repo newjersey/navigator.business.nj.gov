@@ -1,8 +1,0 @@
-{
-  "step_number": 3,
-  "id": "register_business",
-  "name": "Form & Register Your Business",
-  "timeEstimate": "2–10 weeks",
-  "description": "Once you have confirmed your prospective location, it’s time to officially register your business with the State. \nIn this step you are identifying and registering your desired business names, creating your legal entity, and then registering for New Jersey State taxes.",
-  "tasks": ["register_trade_name", "register_for_ein", "register_for_taxes"]
-}

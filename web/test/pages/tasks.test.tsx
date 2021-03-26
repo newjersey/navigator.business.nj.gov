@@ -1,7 +1,14 @@
 import { render, RenderResult } from "@testing-library/react";
-import { generateTask } from "../factories";
 import TaskPage from "../../pages/tasks/[taskId]";
 import { useMediaQuery } from "@material-ui/core";
+
+import * as useRoadmapModule from "../../lib/data/useRoadmap";
+import { generateRoadmap, generateStep, generateTask } from "../factories";
+
+jest.mock("../../lib/data/useRoadmap", () => ({
+  useRoadmap: jest.fn(),
+}));
+const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 function mockMaterialUI() {
@@ -12,6 +19,7 @@ function mockMaterialUI() {
   };
 }
 jest.mock("@material-ui/core", () => mockMaterialUI());
+
 const setLargeScreen = (): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => true);
 };
@@ -21,6 +29,7 @@ describe("task page", () => {
 
   beforeEach(() => {
     setLargeScreen();
+    mockUseRoadmap.mockReturnValue({ roadmap: undefined });
   });
 
   it("shows the task details", () => {
@@ -81,5 +90,31 @@ describe("task page", () => {
     subject = render(<TaskPage task={task} />);
     expect(subject.queryByText("To complete this step, you must have:")).not.toBeInTheDocument();
     expect(subject.queryByText("After you complete this step, you will have:")).not.toBeInTheDocument();
+  });
+
+  it("shows updated text if different from static content", () => {
+    const task = generateTask({
+      id: "123",
+      description: "original task description",
+    });
+
+    mockUseRoadmap.mockReturnValue({
+      roadmap: generateRoadmap({
+        steps: [
+          generateStep({
+            tasks: [
+              generateTask({
+                id: "123",
+                description: "a whole brand new description",
+              }),
+            ],
+          }),
+        ],
+      }),
+    });
+
+    subject = render(<TaskPage task={task} />);
+    expect(subject.queryByText("original task description")).not.toBeInTheDocument();
+    expect(subject.queryByText("a whole brand new description")).toBeInTheDocument();
   });
 });

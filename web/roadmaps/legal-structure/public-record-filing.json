@@ -1,0 +1,27 @@
+[
+  {
+    "step": "register_business",
+    "weight": 1,
+    "task": "search_business_name"
+  },
+  {
+    "step": "register_business",
+    "weight": 2,
+    "task": "register_for_ein"
+  },
+  {
+    "step": "register_business",
+    "weight": 3,
+    "task": "form_business_entity"
+  },
+  {
+    "step": "register_business",
+    "weight": 4,
+    "task": "alternate_name"
+  },
+  {
+    "step": "register_business",
+    "weight": 5,
+    "task": "register_for_taxes"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "step": "register_business",
+    "weight": 1,
+    "task": "register_trade_name"
+  },
+  {
+    "step": "register_business",
+    "weight": 2,
+    "task": "register_for_ein"
+  },
+  {
+    "step": "register_business",
+    "weight": 3,
+    "task": "register_for_taxes"
+  }
+]

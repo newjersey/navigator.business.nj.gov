@@ -1,0 +1,12 @@
+[
+  {
+    "step": "lease_and_permits",
+    "weight": 100,
+    "task": "floor_plan_approval_doh"
+  },
+  {
+    "step": "lease_and_permits",
+    "weight": 100,
+    "task": "food_safety_course"
+  }
+]
