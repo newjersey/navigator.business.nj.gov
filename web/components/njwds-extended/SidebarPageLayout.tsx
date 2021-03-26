@@ -15,9 +15,18 @@ export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): Rea
   return (
     <>
       <div className="usa-overlay" />
-      <button className="usa-menu-btn">
-        <Icon className="font-sans-xl">menu</Icon>
-      </button>
+      {!isLargeScreen && (
+        <div className="usa-nav-container">
+          <div className="usa-navbar">
+            <button className="usa-menu-btn">
+              <Icon className="font-sans-xl">menu</Icon>
+            </button>
+            <div className="usa-logo">
+              <em className="usa-logo__text">Business Roadmap</em>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="usa-section">
         <div className="grid-container">
           <div className="grid-row grid-gap">
