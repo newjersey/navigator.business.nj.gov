@@ -1,7 +1,7 @@
 [
   {
-    "step": "due_diligence",
-    "task": "research_insurance_needs",
+    "step": "due-diligence",
+    "task": "research-insurance-needs",
     "type": "description_replace",
     "content": "Home contractors need to register with the NJ Department of Consumer Affairs. In order to complete this registration, you must have commercial general liability insurance in a minimum amount of $500,000 per occurrence. We recommend looking for potential insurance policies before selecting one. "
   }

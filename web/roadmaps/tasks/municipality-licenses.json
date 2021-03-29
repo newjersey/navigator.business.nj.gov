@@ -1,5 +1,5 @@
 {
-  "id": "municipality_licenses",
+  "id": "municipality-licenses",
   "name": "Municipality Licenses",
   "description": "Check with your municipality to see if there are any other licenses you should be aware of.",
   "destination": {

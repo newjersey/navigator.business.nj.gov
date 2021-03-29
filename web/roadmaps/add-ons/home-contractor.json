@@ -1,7 +1,7 @@
 [
   {
-    "step": "lease_and_permits",
+    "step": "lease-and-permits",
     "weight": 100,
-    "task": "register_consumer_affairs"
+    "task": "register-consumer-affairs"
   }
 ]

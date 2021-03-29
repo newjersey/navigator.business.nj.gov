@@ -1,27 +1,27 @@
 [
   {
-    "step": "register_business",
+    "step": "register-business",
     "weight": 1,
-    "task": "search_business_name"
+    "task": "search-business-name"
   },
   {
-    "step": "register_business",
+    "step": "register-business",
     "weight": 2,
-    "task": "register_for_ein"
+    "task": "register-for-ein"
   },
   {
-    "step": "register_business",
+    "step": "register-business",
     "weight": 3,
-    "task": "form_business_entity"
+    "task": "form-business-entity"
   },
   {
-    "step": "register_business",
+    "step": "register-business",
     "weight": 4,
-    "task": "alternate_name"
+    "task": "alternate-name"
   },
   {
-    "step": "register_business",
+    "step": "register-business",
     "weight": 5,
-    "task": "register_for_taxes"
+    "task": "register-for-taxes"
   }
 ]

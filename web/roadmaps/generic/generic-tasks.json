@@ -1,47 +1,47 @@
 [
   {
-    "step": "create_business_plan",
+    "step": "create-business-plan",
     "weight": 1,
-    "task": "executive_summary"
+    "task": "executive-summary"
   },
   {
-    "step": "create_business_plan",
+    "step": "create-business-plan",
     "weight": 2,
     "task": "introduction"
   },
   {
-    "step": "create_business_plan",
+    "step": "create-business-plan",
     "weight": 3,
-    "task": "business_description"
+    "task": "business-description"
   },
   {
-    "step": "create_business_plan",
+    "step": "create-business-plan",
     "weight": 4,
-    "task": "market_analysis"
+    "task": "market-analysis"
   },
   {
-    "step": "create_business_plan",
+    "step": "create-business-plan",
     "weight": 5,
-    "task": "organization_and_management"
+    "task": "organization-and-management"
   },
   {
-    "step": "create_business_plan",
+    "step": "create-business-plan",
     "weight": 6,
-    "task": "marketing_and_sales"
+    "task": "marketing-and-sales"
   },
   {
-    "step": "create_business_plan",
+    "step": "create-business-plan",
     "weight": 7,
     "task": "finances"
   },
   {
-    "step": "create_business_plan",
+    "step": "create-business-plan",
     "weight": 8,
     "task": "appendix"
   },
   {
-    "step": "due_diligence",
+    "step": "due-diligence",
     "weight": 10,
-    "task": "research_insurance_needs"
+    "task": "research-insurance-needs"
   }
 ]

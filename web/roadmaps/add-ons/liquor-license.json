@@ -1,12 +1,12 @@
 [
   {
-    "step": "due_diligence",
+    "step": "due-diligence",
     "weight": 100,
-    "task": "liquor_license_availability"
+    "task": "liquor-license-availability"
   },
   {
-    "step": "lease_and_permits",
+    "step": "lease-and-permits",
     "weight": 100,
-    "task": "liquor_license"
+    "task": "liquor-license"
   }
 ]

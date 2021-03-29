@@ -21,11 +21,11 @@ describe("buildRoadmap", () => {
   it("orders tasks by weight", async () => {
     const formData = generateFormData({ businessType: { businessType: "home-contractor" } });
     const roadmap = await buildRoadmap(formData);
-    const dueDiligenceTasks = getTasksByStepId(roadmap, "due_diligence");
+    const dueDiligenceTasks = getTasksByStepId(roadmap, "due-diligence");
     expect(dueDiligenceTasks).toEqual([
-      "identify_potential_lease", // weight: 1
-      "check_site_requirements", // weight: 2
-      "research_insurance_needs", // weight: 10
+      "identify-potential-lease", // weight: 1
+      "check-site-requirements", // weight: 2
+      "research-insurance-needs", // weight: 10
     ]);
   });
 
@@ -38,17 +38,17 @@ describe("buildRoadmap", () => {
 
     it("adds restaurant specific tasks", () => {
       expect(roadmap.type).toEqual("restaurant");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("floor_plan_approval_doh");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("food_safety_course");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("floor-plan-approval-doh");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("food-safety-course");
     });
 
     it("adds physical location tasks", () => {
-      expect(getTasksByStepId(roadmap, "due_diligence")).toContain("identify_potential_lease");
-      expect(getTasksByStepId(roadmap, "due_diligence")).toContain("check_site_requirements");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("sign_lease");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("certificate_of_occupancy");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("fire_permit");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("mercantile_license");
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("identify-potential-lease");
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("fire-permit");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("mercantile-license");
     });
 
     describe("liquor license", () => {
@@ -59,8 +59,8 @@ describe("buildRoadmap", () => {
         });
         roadmap = await buildRoadmap(formData);
 
-        expect(getTasksByStepId(roadmap, "due_diligence")).not.toContain("liquor_license_availability");
-        expect(getTasksByStepId(roadmap, "lease_and_permits")).not.toContain("liquor_license");
+        expect(getTasksByStepId(roadmap, "due-diligence")).not.toContain("liquor-license-availability");
+        expect(getTasksByStepId(roadmap, "lease-and-permits")).not.toContain("liquor-license");
       });
 
       it("adds liquor license tasks if any location includes it", async () => {
@@ -70,8 +70,8 @@ describe("buildRoadmap", () => {
         });
         roadmap = await buildRoadmap(formData);
 
-        expect(getTasksByStepId(roadmap, "due_diligence")).toContain("liquor_license_availability");
-        expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("liquor_license");
+        expect(getTasksByStepId(roadmap, "due-diligence")).toContain("liquor-license-availability");
+        expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("liquor-license");
       });
     });
   });
@@ -97,21 +97,21 @@ describe("buildRoadmap", () => {
 
     it("adds home contractor specific tasks", () => {
       expect(roadmap.type).toEqual("home-contractor");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("register_consumer_affairs");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("register-consumer-affairs");
     });
 
     it("adds physical location tasks", () => {
-      expect(getTasksByStepId(roadmap, "due_diligence")).toContain("identify_potential_lease");
-      expect(getTasksByStepId(roadmap, "due_diligence")).toContain("check_site_requirements");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("sign_lease");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("certificate_of_occupancy");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("fire_permit");
-      expect(getTasksByStepId(roadmap, "lease_and_permits")).toContain("mercantile_license");
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("identify-potential-lease");
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("fire-permit");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("mercantile-license");
     });
 
     it("modifies the text for insurance needs", () => {
-      const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due_diligence")!;
-      const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "research_insurance_needs")!;
+      const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
+      const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "research-insurance-needs")!;
       expect(insuranceNeeds.description).toContain("Home contractors need to");
     });
   });
@@ -123,16 +123,16 @@ describe("buildRoadmap", () => {
       });
       const roadmap = await buildRoadmap(formData);
       expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
-      expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("search_business_name");
-      expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("register_trade_name");
+      expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("search-business-name");
+      expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("register-trade-name");
     });
 
     it("adds trade name tasks if structure in TradeName group", async () => {
       const formData = generateFormData({ businessStructure: { businessStructure: "General Partnership" } });
       const roadmap = await buildRoadmap(formData);
       expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
-      expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("search_business_name");
-      expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("register_trade_name");
+      expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("search-business-name");
+      expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("register-trade-name");
     });
   });
 });

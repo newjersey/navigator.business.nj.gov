@@ -1,32 +1,32 @@
 [
   {
-    "step": "due_diligence",
+    "step": "due-diligence",
     "weight": 1,
-    "task": "identify_potential_lease"
+    "task": "identify-potential-lease"
   },
   {
-    "step": "due_diligence",
+    "step": "due-diligence",
     "weight": 2,
-    "task": "check_site_requirements"
+    "task": "check-site-requirements"
   },
   {
-    "step": "lease_and_permits",
+    "step": "lease-and-permits",
     "weight": 1,
-    "task": "sign_lease"
+    "task": "sign-lease"
   },
   {
-    "step": "lease_and_permits",
+    "step": "lease-and-permits",
     "weight": 4,
-    "task": "certificate_of_occupancy"
+    "task": "certificate-of-occupancy"
   },
   {
-    "step": "lease_and_permits",
+    "step": "lease-and-permits",
     "weight": 5,
-    "task": "fire_permit"
+    "task": "fire-permit"
   },
   {
-    "step": "lease_and_permits",
+    "step": "lease-and-permits",
     "weight": 6,
-    "task": "mercantile_license"
+    "task": "mercantile-license"
   }
 ]

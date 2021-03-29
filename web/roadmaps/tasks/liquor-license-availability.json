@@ -1,5 +1,5 @@
 {
-  "id": "liquor_license_availability",
+  "id": "liquor-license-availability",
   "name": "Confirm liquor license availability",
   "description": "If you plan on serving liquor, verify the cost and availability of a liquor license in your area.",
   "destination": {
