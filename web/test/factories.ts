@@ -5,9 +5,7 @@ import {
   Destination,
   LegalStructure,
   Roadmap,
-  RoadmapFromFile,
   Step,
-  StepFromFile,
   Task,
   UserData,
 } from "../lib/types/types";
@@ -96,26 +94,6 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     destination: generateDestination({}),
     to_complete_must_have: ["some-to-complete-" + randomInt()],
     after_completing_will_have: ["some-after-comleting-" + randomInt()],
-    ...overrides,
-  };
-};
-
-export const generateRoadmapFromFile = (overrides: Partial<RoadmapFromFile>): RoadmapFromFile => {
-  return {
-    type: "restaurant",
-    steps: [generateStepFromFile({})],
-    ...overrides,
-  };
-};
-
-export const generateStepFromFile = (overrides: Partial<StepFromFile>): StepFromFile => {
-  return {
-    step_number: randomInt(),
-    id: "some-id-" + randomInt(),
-    name: "some-name-" + randomInt(),
-    timeEstimate: "some-time-estimate-" + randomInt(),
-    description: "some-description-" + randomInt(),
-    tasks: ["some-task-id-" + randomInt()],
     ...overrides,
   };
 };

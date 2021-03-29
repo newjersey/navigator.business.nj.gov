@@ -8,13 +8,13 @@ import {
   Task,
   TaskBuilder,
   TaskModification,
-  TaskStepLink,
+  AddOn,
 } from "../types/types";
-import genericTaskLinks from "../../roadmaps/generic/generic-tasks.json";
+import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
 import genericRoadmap from "../../roadmaps/generic/generic.json";
 
-const importTaskStepLinks = async (relativePath: string): Promise<TaskStepLink[]> => {
-  return (await import(`../../roadmaps/${relativePath}.json`)).default as TaskStepLink[];
+const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
+  return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
 };
 
 const importModification = async (relativePath: string): Promise<TaskModification[]> => {
@@ -45,34 +45,28 @@ export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => 
     })),
   };
 
-  roadmapBuilder = addTasksFromLink(roadmapBuilder, genericTaskLinks);
+  roadmapBuilder = addTasksFromAddOn(roadmapBuilder, genericTaskAddOns);
 
   if (formData.businessType?.businessType === "restaurant") {
-    roadmapBuilder = addTasksFromLink(roadmapBuilder, await importTaskStepLinks("industry/restaurant"));
-    roadmapBuilder = addTasksFromLink(roadmapBuilder, await importTaskStepLinks("add-ons/physical-location"));
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/restaurant"));
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
     if (needsLiquorLicense(formData)) {
-      roadmapBuilder = addTasksFromLink(roadmapBuilder, await importTaskStepLinks("add-ons/liquor-license"));
+      roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/liquor-license"));
     }
   }
 
   if (formData.businessType?.businessType === "home-contractor") {
-    roadmapBuilder = addTasksFromLink(roadmapBuilder, await importTaskStepLinks("industry/home-contractor"));
-    roadmapBuilder = addTasksFromLink(roadmapBuilder, await importTaskStepLinks("add-ons/physical-location"));
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/home-contractor"));
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
   }
 
   if (formData.businessStructure?.businessStructure) {
     if (PublicRecordFilingGroup.includes(formData.businessStructure?.businessStructure)) {
-      roadmapBuilder = addTasksFromLink(
-        roadmapBuilder,
-        await importTaskStepLinks("legal-structure/public-record-filing")
-      );
+      roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/public-record-filing"));
     }
 
     if (TradeNameGroup.includes(formData.businessStructure?.businessStructure)) {
-      roadmapBuilder = addTasksFromLink(
-        roadmapBuilder,
-        await importTaskStepLinks("legal-structure/trade-name")
-      );
+      roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/trade-name"));
     }
   }
 
@@ -88,20 +82,20 @@ export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => 
   };
 
   if (formData.businessType?.businessType === "home-contractor") {
-    roadmap = modifyTasks(roadmap, await importModification("industry/home-contractor"));
+    roadmap = modifyTasks(roadmap, await importModification("home-contractor"));
   }
 
   return roadmap;
 };
 
-const addTasksFromLink = (roadmap: RoadmapBuilder, taskLinks: TaskStepLink[]): RoadmapBuilder => {
-  taskLinks.forEach((taskLink) => {
-    const step = roadmap.steps.find((step) => step.id === taskLink.step);
+const addTasksFromAddOn = (roadmap: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
+  addOns.forEach((addOn) => {
+    const step = roadmap.steps.find((step) => step.id === addOn.step);
     if (!step) {
       return;
     }
 
-    step.tasks = [...step.tasks, { id: taskLink.task, weight: taskLink.weight }];
+    step.tasks = [...step.tasks, { id: addOn.task, weight: addOn.weight }];
   });
 
   return roadmap;

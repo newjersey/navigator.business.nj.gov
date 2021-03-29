@@ -22,19 +22,6 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
 
 export type BusinessType = Restaurant | ECommerce | HomeImprovementContractor | "generic";
 
-export interface RoadmapFromFile {
-  type: BusinessType;
-  steps: StepFromFile[];
-}
-export interface StepFromFile {
-  step_number: number;
-  id: string;
-  name: string;
-  timeEstimate: string;
-  description: string;
-  tasks: string[];
-}
-
 export interface Roadmap {
   type: BusinessType;
   steps: Step[];
@@ -66,7 +53,7 @@ export interface GenericStep {
   description: string;
 }
 
-export interface TaskStepLink {
+export interface AddOn {
   step: string;
   weight: number;
   task: string;

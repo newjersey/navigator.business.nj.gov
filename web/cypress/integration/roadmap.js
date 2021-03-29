@@ -66,10 +66,7 @@ describe("Roadmap", () => {
     // tasks mini-nav
     cy.contains("Due Diligence").click();
     cy.contains("Research Potential Insurance Needs").click();
-
-    cy.contains("Form & Register Your Business").click();
-    cy.contains("Register for an EIN").click();
-    cy.contains("Start Application").should("exist");
+    cy.contains("You may consider obtaining insurance for your business").should("exist");
 
     cy.contains("← Back to Roadmap").click();
 
