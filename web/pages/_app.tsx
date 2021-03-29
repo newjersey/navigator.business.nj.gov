@@ -49,6 +49,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <script src="/js/uswds.js" />
       <script src="/js/uswds-init.js" />
       <link rel="stylesheet" href="/css/styles.css" />
+      <script src="/intercom/settings.js" />
+      <script src="/intercom/init.js" />
 
       <AuthContext.Provider value={{ state, dispatch }}>
         <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
