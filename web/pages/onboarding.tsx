@@ -43,11 +43,11 @@ const Onboarding = (): ReactElement => {
   const onSubmit = (event: ISubmitEvent<BusinessForm>): void => {
     if (!userData) return;
     if (page + 1 < sections.length) {
-      setPage(page + 1);
       update({
         ...userData,
         formData: event.formData,
       });
+      setPage(page + 1);
     } else {
       update({
         ...userData,
