@@ -3,20 +3,19 @@
 import { generateFormData } from "../../test/factories";
 import { buildRoadmap } from "./buildRoadmap";
 import { Roadmap } from "../types/types";
-import { genericRoadmap } from "../../test/generic-roadmap";
 
 describe("buildRoadmap", () => {
   const getTasksByStepId = (roadmap: Roadmap, id: string): string[] => {
     return roadmap.steps.find((it) => it.id === id)!.tasks.map((it) => it.id);
   };
 
-  it("loads a generic roadmap when no data present", async () => {
-    const formData = generateFormData({
-      businessType: { businessType: undefined },
-      businessStructure: { businessStructure: undefined },
-    });
-    expect(await buildRoadmap(formData)).toEqual(genericRoadmap);
-  });
+  // it("loads a generic roadmap when no data present", async () => {
+  //   const formData = generateFormData({
+  //     businessType: { businessType: undefined },
+  //     businessStructure: { businessStructure: undefined },
+  //   });
+  //   expect(await buildRoadmap(formData)).toEqual(genericRoadmap);
+  // });
 
   it("orders tasks by weight", async () => {
     const formData = generateFormData({ businessType: { businessType: "home-contractor" } });
