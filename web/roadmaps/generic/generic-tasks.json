@@ -43,5 +43,15 @@
     "step": "due-diligence",
     "weight": 10,
     "task": "research-insurance-needs"
+  },
+  {
+    "step": "register-business",
+    "weight": 20,
+    "task": "register-for-ein"
+  },
+  {
+    "step": "register-business",
+    "weight": 25,
+    "task": "register-for-taxes"
   }
 ]
