@@ -33,14 +33,6 @@ describe("Roadmap", () => {
     cy.get('input[label="zipCode"]').type("11111");
     cy.contains("Next").click();
 
-    // check roadmap
-    cy.contains("Business Roadmap for Beesapple's").should("exist");
-
-    // check roadmap
-    cy.contains("Business Name: Beesapple's").should("exist");
-    cy.contains("Industry: e-commerce").should("exist");
-    cy.contains("Legal Entity: General Partnership").should("exist");
-
     // step 1
     cy.contains("Create a Business Plan").should("exist");
     cy.contains("Executive Summary").should("exist");
@@ -84,12 +76,6 @@ describe("Roadmap", () => {
     cy.contains("Next").click();
     cy.contains("Next").click();
     cy.contains("Next").click();
-
-    // check roadmap
-    cy.contains("Business Roadmap for Applebee's").should("exist");
-    cy.contains("Business Name: Applebee's").should("exist");
-    cy.contains("Industry: restaurant").should("exist");
-    cy.contains("Legal Entity: General Partnership").should("exist");
 
     // step 1
     cy.contains("Check and Plan Local Site Requirements").should("exist");
