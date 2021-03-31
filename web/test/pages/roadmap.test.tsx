@@ -95,6 +95,39 @@ describe("roadmap page", () => {
     expect(subject.queryByText("task3")).toBeInTheDocument();
   });
 
+  it("shows task progress tag", () => {
+    useMockRoadmap({
+      steps: [
+        generateStep({
+          name: "step1",
+          timeEstimate: "1-2 weeks",
+          tasks: [generateTask({ id: "task1", name: "task1" }), generateTask({ id: "task2", name: "task2" })],
+        }),
+        generateStep({
+          name: "step2",
+          tasks: [generateTask({ id: "task3", name: "task3" })],
+        }),
+      ],
+    });
+
+    mockUseUserData.mockReturnValue(
+      generateUseUserDataResponse({
+        userData: generateUserData({
+          taskProgress: {
+            task1: "IN_PROGRESS",
+            task2: "COMPLETED",
+          },
+        }),
+      })
+    );
+
+    const subject = render(<RoadmapPage />);
+
+    expect(subject.queryByText("In-progress")).toBeInTheDocument();
+    expect(subject.queryByText("Completed")).toBeInTheDocument();
+    expect(subject.queryByText("Not started")).toBeInTheDocument();
+  });
+
   const useMockFormData = (formData: Partial<BusinessForm>): void => {
     mockUseUserData.mockReturnValue(
       generateUseUserDataResponse({

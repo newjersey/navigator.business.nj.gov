@@ -1,14 +1,22 @@
-import { render, RenderResult } from "@testing-library/react";
+import { fireEvent, render, RenderResult } from "@testing-library/react";
 import TaskPage from "../../pages/tasks/[taskId]";
 import { useMediaQuery } from "@material-ui/core";
 
 import * as useRoadmapModule from "../../lib/data/useRoadmap";
-import { generateRoadmap, generateStep, generateTask } from "../factories";
+import * as useUserDataModule from "../../lib/data/useUserData";
+import { generateRoadmap, generateStep, generateTask, generateUserData } from "../factories";
+import { generateUseUserDataResponse } from "../helpers";
+import { TaskProgress } from "../../lib/types/types";
 
 jest.mock("../../lib/data/useRoadmap", () => ({
   useRoadmap: jest.fn(),
 }));
 const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
+
+jest.mock("../../lib/data/useUserData", () => ({
+  useUserData: jest.fn(),
+}));
+const mockUseUserData = (useUserDataModule as jest.Mocked<typeof useUserDataModule>).useUserData;
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 function mockMaterialUI() {
@@ -30,6 +38,7 @@ describe("task page", () => {
   beforeEach(() => {
     setLargeScreen();
     mockUseRoadmap.mockReturnValue({ roadmap: undefined });
+    mockUseUserData.mockReturnValue(generateUseUserDataResponse({}));
   });
 
   it("shows the task details", () => {
@@ -116,5 +125,50 @@ describe("task page", () => {
     subject = render(<TaskPage task={task} />);
     expect(subject.queryByText("original task description")).not.toBeInTheDocument();
     expect(subject.queryByText("a whole brand new description")).toBeInTheDocument();
+  });
+
+  it("displays Not Started status when user data does not contain status", () => {
+    mockUseUserData.mockReturnValue(
+      generateUseUserDataResponse({ userData: generateUserData({ taskProgress: {} }) })
+    );
+    subject = render(<TaskPage task={generateTask({})} />);
+
+    expect(subject.getAllByText("Not started")[0]).toBeVisible();
+  });
+
+  it("displays task status from user data", () => {
+    const taskId = "123";
+    const taskProgress: Record<string, TaskProgress> = {
+      "some-id": "COMPLETED",
+      [taskId]: "IN_PROGRESS",
+    };
+    mockUseUserData.mockReturnValue(
+      generateUseUserDataResponse({ userData: generateUserData({ taskProgress }) })
+    );
+    subject = render(<TaskPage task={generateTask({ id: taskId })} />);
+
+    expect(subject.getAllByText("In-progress")[0]).toBeVisible();
+  });
+
+  it("updates task status when progress is selected", () => {
+    const taskId = "123";
+    const taskProgress: Record<string, TaskProgress> = {
+      "some-id": "COMPLETED",
+    };
+    const update = jest.fn();
+    const userData = generateUserData({ taskProgress });
+    mockUseUserData.mockReturnValue(generateUseUserDataResponse({ userData, update }));
+    subject = render(<TaskPage task={generateTask({ id: taskId })} />);
+
+    fireEvent.click(subject.getAllByText("Not started")[0]);
+    fireEvent.click(subject.getByText("In-progress"));
+    expect(subject.getAllByText("In-progress")[0]).toBeVisible();
+    expect(update).toHaveBeenCalledWith({
+      ...userData,
+      taskProgress: {
+        "some-id": "COMPLETED",
+        [taskId]: "IN_PROGRESS",
+      },
+    });
   });
 });

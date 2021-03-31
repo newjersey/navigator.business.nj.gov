@@ -2,11 +2,13 @@ import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import React, { ReactElement } from "react";
 import { PageSkeleton } from "../../components/PageSkeleton";
 import { getAllTaskIds, getTaskById, TaskIdParam } from "../../lib/static/loadTasks";
-import { Task } from "../../lib/types/types";
+import { Task, TaskProgress } from "../../lib/types/types";
 import Link from "next/link";
 import { SidebarPageLayout } from "../../components/njwds-extended/SidebarPageLayout";
 import { MiniRoadmap } from "../../components/MiniRoadmap";
 import { useRoadmap } from "../../lib/data/useRoadmap";
+import { TaskProgressDropdown } from "../../components/TaskProgressDropdown";
+import { useUserData } from "../../lib/data/useUserData";
 
 interface Props {
   task: Task;
@@ -15,6 +17,7 @@ interface Props {
 const TaskPage = (props: Props): ReactElement => {
   const sidebar = <MiniRoadmap activeTaskId={props.task.id} />;
   const { roadmap } = useRoadmap();
+  const { userData, update } = useUserData();
 
   const backButton = (
     <Link href="/roadmap" passHref>
@@ -33,10 +36,30 @@ const TaskPage = (props: Props): ReactElement => {
     return props.task.description;
   };
 
+  const updateTaskProgress = (newValue: TaskProgress): void => {
+    if (!userData) return;
+    update({
+      ...userData,
+      taskProgress: { ...userData?.taskProgress, [props.task.id]: newValue },
+    });
+  };
+
   return (
     <PageSkeleton>
       <SidebarPageLayout sidebar={sidebar} backButton={backButton}>
-        <h2>{props.task.name}</h2>
+        <div className="grid-container padding-0">
+          <div className="grid-row grid-gap">
+            <div className="tablet:grid-col-9">
+              <h2 className="margin-top-0">{props.task.name}</h2>
+            </div>
+            <div className="tablet:grid-col-3">
+              <TaskProgressDropdown
+                onSelect={updateTaskProgress}
+                initialValue={userData?.taskProgress ? userData.taskProgress[props.task.id] : undefined}
+              />
+            </div>
+          </div>
+        </div>
         <p>{getDescription()}</p>
 
         {props.task.to_complete_must_have.length > 0 && (

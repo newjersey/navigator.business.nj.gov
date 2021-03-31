@@ -4,9 +4,12 @@ export interface UserData {
   user: BusinessUser;
   formData: BusinessForm;
   formProgress: FormProgress;
+  taskProgress: Record<string, TaskProgress>;
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
+
+export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
@@ -17,6 +20,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       },
     },
     formProgress: "UNSTARTED",
+    taskProgress: {},
   };
 };
 
@@ -85,6 +89,7 @@ export interface Task {
   to_complete_must_have: string[];
   after_completing_will_have: string[];
 }
+
 export interface Destination {
   name: string;
   link: string;
