@@ -1,17 +1,7 @@
 [
   {
     "step": "register-business",
-    "weight": 1,
+    "weight": 18,
     "task": "register-trade-name"
-  },
-  {
-    "step": "register-business",
-    "weight": 2,
-    "task": "register-for-ein"
-  },
-  {
-    "step": "register-business",
-    "weight": 3,
-    "task": "register-for-taxes"
   }
 ]
