@@ -28,6 +28,16 @@ describe("buildRoadmap", () => {
     ]);
   });
 
+  it("removes step 5 if it has no tasks", async () => {
+    const formData = generateFormData({
+      businessType: { businessType: undefined },
+      businessStructure: { businessStructure: undefined },
+    });
+    const roadmap = await buildRoadmap(formData);
+    expect(roadmap.steps).toHaveLength(4);
+    expect(roadmap.steps.find((step) => step.id === "inspection-requirements")).toBeUndefined();
+  });
+
   describe("restaurant", () => {
     let roadmap: Roadmap;
     beforeEach(async () => {
@@ -112,6 +122,37 @@ describe("buildRoadmap", () => {
       const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
       const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "research-insurance-needs")!;
       expect(insuranceNeeds.description).toContain("Home contractors need to");
+    });
+  });
+
+  describe("cosmetology", () => {
+    let roadmap: Roadmap;
+    beforeEach(async () => {
+      const formData = generateFormData({ businessType: { businessType: "cosmetology" } });
+      roadmap = await buildRoadmap(formData);
+    });
+
+    it("adds cosmetology specific tasks", () => {
+      expect(roadmap.type).toEqual("cosmetology");
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-suitability");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("apply-for-shop-license");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("individual-staff-licenses");
+      expect(getTasksByStepId(roadmap, "inspection-requirements")).toContain("board-inspection");
+    });
+
+    it("adds physical location tasks", () => {
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("identify-potential-lease");
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("fire-permit");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("mercantile-license");
+    });
+
+    it("modifies the text for local site requirements", () => {
+      const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
+      const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "check-site-requirements")!;
+      expect(insuranceNeeds.description).toContain("Board of Cosmetology");
     });
   });
 

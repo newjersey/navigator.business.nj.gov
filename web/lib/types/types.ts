@@ -1,4 +1,4 @@
-import { BusinessForm, ECommerce, HomeImprovementContractor, Restaurant } from "./form";
+import { BusinessForm, Cosmetology, ECommerce, HomeImprovementContractor, Restaurant } from "./form";
 
 export interface UserData {
   user: BusinessUser;
@@ -24,7 +24,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
   };
 };
 
-export type BusinessType = Restaurant | ECommerce | HomeImprovementContractor | "generic";
+export type BusinessType = Restaurant | ECommerce | HomeImprovementContractor | Cosmetology | "generic";
 
 export interface Roadmap {
   type: BusinessType;

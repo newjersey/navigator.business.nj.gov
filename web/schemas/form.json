@@ -37,6 +37,11 @@
               "type": "string",
               "title": "Home Improvement Contractor",
               "enum": ["home-contractor"]
+            },
+            {
+              "type": "string",
+              "title": "Cosmetology",
+              "enum": ["cosmetology"]
             }
           ]
         }

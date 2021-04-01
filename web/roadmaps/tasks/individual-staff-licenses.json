@@ -6,10 +6,6 @@
     "name": "New Jersey Department of Consumer Affairs",
     "link": "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
   },
-  "to_complete_must_have": [
-    "Name and address of the school that provided license training"
-  ],
-  "after_completing_will_have": [
-    "License"
-  ]
+  "to_complete_must_have": ["Name and address of the school that provided license training"],
+  "after_completing_will_have": ["License"]
 }

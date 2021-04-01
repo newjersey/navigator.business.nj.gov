@@ -8,6 +8,7 @@
 export type Restaurant = "restaurant";
 export type ECommerce = "e-commerce";
 export type HomeImprovementContractor = "home-contractor";
+export type Cosmetology = "cosmetology";
 
 export interface BusinessForm {
   user?: {
@@ -17,7 +18,7 @@ export interface BusinessForm {
     [k: string]: unknown;
   };
   businessType?: {
-    businessType?: (Restaurant | ECommerce | HomeImprovementContractor) & string;
+    businessType?: (Restaurant | ECommerce | HomeImprovementContractor | Cosmetology) & string;
     [k: string]: unknown;
   };
   businessName?: {

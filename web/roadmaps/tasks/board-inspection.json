@@ -6,10 +6,6 @@
     "name": "Check the Board of Cosmetology's Site Regulations",
     "link": "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
   },
-  "to_complete_must_have": [
-    "The board will contact shop to schedule the inspection date and time."
-  ],
-  "after_completing_will_have": [
-    "Satisfactory shop inspection."
-  ]
+  "to_complete_must_have": ["The board will contact shop to schedule the inspection date and time."],
+  "after_completing_will_have": ["Satisfactory shop inspection."]
 }

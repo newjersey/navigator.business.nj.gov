@@ -7,9 +7,13 @@
     "link": "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
   },
   "to_complete_must_have": [
-    "legal structure, business address, opening date, date available for inspection, fire permit, license number of all practitioners, Certificate of Occupancy. A full check list is on the application: https://www.njconsumeraffairs.gov/cos/Applications/Application-for-a-License-to-Operate-a-New-Shop-Relocate-a-Shop-or-to-Transfer-Ownership-of-a-Shop.pdf"
+    "Legal Structure",
+    "Business Address",
+    "Opening Date",
+    "Date Available for Inspection",
+    "Fire Permit",
+    "License Number of all practitioners",
+    "Certificate of Occupancy"
   ],
-  "after_completing_will_have": [
-    "<License>"
-  ]
+  "after_completing_will_have": ["License"]
 }

@@ -6,10 +6,6 @@
     "name": "Check the Board of Cosmetology's Site Regulations",
     "link": "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
   },
-  "to_complete_must_have": [
-    "Identified potential locations"
-  ],
-  "after_completing_will_have": [
-    "Floor plan of the tenant fit-out at your location, drawn to scale."
-  ]
+  "to_complete_must_have": ["Identified potential locations"],
+  "after_completing_will_have": ["Floor plan of the tenant fit-out at your location, drawn to scale."]
 }

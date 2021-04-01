@@ -11,7 +11,7 @@ import {
   AddOn,
 } from "../types/types";
 import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
-import genericRoadmap from "../../roadmaps/generic/generic.json";
+import steps from "../../roadmaps/steps.json";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
@@ -38,8 +38,7 @@ const PublicRecordFilingGroup: LegalStructure[] = [
 
 export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => {
   let roadmapBuilder: RoadmapBuilder = {
-    ...genericRoadmap,
-    steps: genericRoadmap.steps.map((step: GenericStep) => ({
+    steps: steps.map((step: GenericStep) => ({
       ...step,
       tasks: [],
     })),
@@ -60,6 +59,11 @@ export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => 
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
   }
 
+  if (formData.businessType?.businessType === "cosmetology") {
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/cosmetology"));
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
+  }
+
   if (formData.businessStructure?.businessStructure) {
     if (PublicRecordFilingGroup.includes(formData.businessStructure?.businessStructure)) {
       roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/public-record-filing"));
@@ -68,6 +72,10 @@ export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => 
     if (TradeNameGroup.includes(formData.businessStructure?.businessStructure)) {
       roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/trade-name"));
     }
+  }
+
+  if (step5hasNoTasks(roadmapBuilder)) {
+    roadmapBuilder.steps = roadmapBuilder.steps.filter((step) => step.id !== "inspection-requirements");
   }
 
   let roadmap: Roadmap = {
@@ -85,7 +93,19 @@ export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => 
     roadmap = modifyTasks(roadmap, await importModification("home-contractor"));
   }
 
+  if (formData.businessType?.businessType === "cosmetology") {
+    roadmap = modifyTasks(roadmap, await importModification("cosmetology"));
+  }
+
   return roadmap;
+};
+
+const step5hasNoTasks = (roadmap: RoadmapBuilder): boolean => {
+  const step5 = roadmap.steps.find((step) => step.id === "inspection-requirements");
+  if (!step5) {
+    return false;
+  }
+  return step5.tasks.length === 0;
 };
 
 const addTasksFromAddOn = (roadmap: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
