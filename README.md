@@ -137,6 +137,33 @@ abstractions and types defined in `src/domain`. The `src/db` folder contains the
 of the interfaces in the domain. The top-level Express app is responsible for wiring the DynamoDB implementation into the router
 or anything that has a DB dependency. We use [jest-dynalite](https://github.com/freshollie/jest-dynalite) as a testing helper to mock out DynamoDB for testing.
 
+### Database schema & migrations
+
+DynamoDB isn't strongly schema'd, but we do expect objects of a certain structure to be returned to the frontend when we request user data. Sometimes we'll be changing the data structure and we need the database to be able to account for and understand this.
+
+We solve this by using **document versioning** and running **migrations** on individual documents as we retrieve them from storage. The documents are stored with a schema version number (which is stripped before sending to the frontend). On a get request for a document, if its version is out-of-date with the most recent, we run a series of migrations on it to map the data to the current structure. We then save that new document in the current version, and return it to the frontend.
+
+Reasons for this approach:
+- zero-downtime for the database anytime we change document schema
+- managed only in code, no need to handle AWS lambdas and streams to make a migration happen
+
+Notes about this approach:
+- in the database itself, various documents will be structured differently, as they will only be migrated when they are accessed. This isn't a concern if the documents are only ever accessed through the DB client layer, which performs the migrations as it accesses them
+
+#### Adding a new migration
+
+If you want to change the structure of the `UserData` object, here's how:
+
+1. **Create a new file** in `api/src/db/migrations` and name it `v{X}_descriptionHere.ts` where `{X}` is replaced by the next successive version.
+
+2. **Create a new type** in the file and name it `v{X}UserData` that defines the new structure of your new UserData type
+
+3. **Create a migration function** in the file with type signature `(v{X-1}UserData) => v{X}UserData` and in here, define the way that the previous version of the object should be mapped to the new structure. Test it.
+
+4. **Add the migration function to the list** of functions in `api/src/db/migrations/migrations.ts`. Make sure it's in order at its proper index. Do **NOT** skip versions because the index of this array must match the index that it is migrating from. ie, `migrate_v4_to_v5` must be at index 4 of this array.
+
+5. **Change the types** in `types.ts` for `UserData` (and `factories` and anywhere else needed) to reflect the newest version of the type to the rest of the code.
+
 ## Ports
 
 |                    | local dev & CI feature tests | local feature tests | unit tests |

@@ -5,10 +5,13 @@ export interface UserDataClient {
   put: (userData: UserData) => Promise<UserData>;
 }
 
+export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+
 export interface UserData {
   user: BusinessUser;
   formData: BusinessForm;
   formProgress: FormProgress;
+  taskProgress: Record<string, TaskProgress>;
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";

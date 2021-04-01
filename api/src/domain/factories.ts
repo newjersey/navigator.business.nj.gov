@@ -17,6 +17,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     user: generateUser({}),
     formData: generateFormData({}),
     formProgress: "UNSTARTED",
+    taskProgress: {},
     ...overrides,
   };
 };
