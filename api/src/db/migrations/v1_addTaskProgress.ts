@@ -1,6 +1,6 @@
 import { BusinessUser, FormProgress, TaskProgress } from "../../domain/types";
-import { BusinessForm } from "../../domain/form";
 import { v0UserData } from "./v0_userData";
+import { BusinessForm } from "./migrated-types";
 
 export interface v1UserData {
   user: BusinessUser;

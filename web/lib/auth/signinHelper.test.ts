@@ -76,10 +76,11 @@ describe("AuthHelper", () => {
       await onSignIn(mockPush, mockDispatch);
       expect(mockApi.getUserData).toHaveBeenCalledWith("123");
       expect(mockApi.postUserData.mock.calls[0][0].user).toEqual(user);
-      expect(mockApi.postUserData.mock.calls[0][0].formData.user?.email).toEqual(user.email);
-      expect(mockApi.postUserData.mock.calls[0][0].formData.user?.firstName).toEqual(undefined);
-      expect(mockApi.postUserData.mock.calls[0][0].formData.user?.lastName).toEqual(undefined);
-      expect(mockApi.postUserData.mock.calls[0][0].formData.businessType).toEqual(undefined);
+      expect(mockApi.postUserData.mock.calls[0][0].onboardingData).toEqual({
+        businessName: "",
+        industry: "generic",
+        legalStructure: undefined,
+      });
       expect(mockPush).toHaveBeenCalledWith("/");
     });
   });

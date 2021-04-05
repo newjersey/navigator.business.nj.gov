@@ -9,14 +9,14 @@ export const useRoadmap = (): { roadmap: Roadmap | undefined } => {
   const { userData } = useUserData();
 
   const refreshRoadmap = async () => {
-    if (userData?.formData) {
-      setRoadmap(await buildRoadmap(userData.formData));
+    if (userData?.onboardingData) {
+      setRoadmap(await buildRoadmap(userData.onboardingData));
     }
   };
 
   useEffect(() => {
     refreshRoadmap();
-  }, [userData?.formData]);
+  }, [userData?.onboardingData]);
 
   return { roadmap };
 };

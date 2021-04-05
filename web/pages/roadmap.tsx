@@ -12,30 +12,26 @@ const RoadmapPage = (): ReactElement => {
   const { roadmap } = useRoadmap();
 
   const getHeader = (): string => {
-    return userData?.formData.businessName?.businessName
-      ? `Business Roadmap for ${userData.formData.businessName?.businessName}`
+    return userData?.onboardingData.businessName
+      ? `Business Roadmap for ${userData.onboardingData.businessName}`
       : "Your Business Roadmap";
   };
 
   const getBusinessName = (): string => {
     if (isLoading) return "Loading...";
-    return userData?.formData.businessName?.businessName
-      ? userData.formData.businessName?.businessName
-      : "Not set";
+    return userData?.onboardingData.businessName ? userData.onboardingData.businessName : "Not set";
   };
 
   const getIndustry = (): string => {
     if (isLoading) return "Loading...";
-    return userData?.formData.businessType?.businessType
-      ? userData.formData.businessType?.businessType
+    return userData?.onboardingData.industry && userData?.onboardingData.industry !== "generic"
+      ? userData.onboardingData.industry
       : "Not set";
   };
 
-  const getLegalEntity = (): string => {
+  const getLegalStructure = (): string => {
     if (isLoading) return "Loading...";
-    return userData?.formData.businessStructure?.businessStructure
-      ? userData.formData.businessStructure?.businessStructure
-      : "Not set";
+    return userData?.onboardingData.legalStructure ? userData.onboardingData.legalStructure : "Not set";
   };
 
   return (
@@ -59,7 +55,7 @@ const RoadmapPage = (): ReactElement => {
                 Industry: <strong>{getIndustry()}</strong>
               </div>
               <div>
-                Legal Entity: <strong>{getLegalEntity()}</strong>
+                Legal Entity: <strong>{getLegalStructure()}</strong>
               </div>
             </>
           </GreyCallout>

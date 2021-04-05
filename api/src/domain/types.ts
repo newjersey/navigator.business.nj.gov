@@ -1,5 +1,3 @@
-import { BusinessForm } from "./form";
-
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   put: (userData: UserData) => Promise<UserData>;
@@ -9,10 +7,18 @@ export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export interface UserData {
   user: BusinessUser;
-  formData: BusinessForm;
+  onboardingData: OnboardingData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
 }
+
+export interface OnboardingData {
+  businessName: string;
+  industry: Industry;
+  legalStructure: LegalStructure | undefined;
+}
+
+export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 

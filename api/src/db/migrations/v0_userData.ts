@@ -1,5 +1,5 @@
-import { BusinessForm } from "../../domain/form";
 import { BusinessUser, FormProgress } from "../../domain/types";
+import { BusinessForm } from "./migrated-types";
 
 export interface v0UserData {
   user: BusinessUser;

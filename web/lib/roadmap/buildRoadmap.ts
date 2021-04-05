@@ -1,14 +1,13 @@
-import { BusinessForm } from "../types/form";
 import {
-  BusinessType,
+  AddOn,
   GenericStep,
   LegalStructure,
+  OnboardingData,
   Roadmap,
   RoadmapBuilder,
   Task,
   TaskBuilder,
   TaskModification,
-  AddOn,
 } from "../types/types";
 import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
 import steps from "../../roadmaps/steps.json";
@@ -36,7 +35,7 @@ const PublicRecordFilingGroup: LegalStructure[] = [
   "B-Corporation",
 ];
 
-export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => {
+export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {
   let roadmapBuilder: RoadmapBuilder = {
     steps: steps.map((step: GenericStep) => ({
       ...step,
@@ -46,30 +45,27 @@ export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => 
 
   roadmapBuilder = addTasksFromAddOn(roadmapBuilder, genericTaskAddOns);
 
-  if (formData.businessType?.businessType === "restaurant") {
+  if (onboardingData.industry === "restaurant") {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/restaurant"));
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
-    if (needsLiquorLicense(formData)) {
-      roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/liquor-license"));
-    }
   }
 
-  if (formData.businessType?.businessType === "home-contractor") {
+  if (onboardingData.industry === "home-contractor") {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/home-contractor"));
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
   }
 
-  if (formData.businessType?.businessType === "cosmetology") {
+  if (onboardingData.industry === "cosmetology") {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/cosmetology"));
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
   }
 
-  if (formData.businessStructure?.businessStructure) {
-    if (PublicRecordFilingGroup.includes(formData.businessStructure?.businessStructure)) {
+  if (onboardingData.legalStructure) {
+    if (PublicRecordFilingGroup.includes(onboardingData.legalStructure)) {
       roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/public-record-filing"));
     }
 
-    if (TradeNameGroup.includes(formData.businessStructure?.businessStructure)) {
+    if (TradeNameGroup.includes(onboardingData.legalStructure)) {
       roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/trade-name"));
     }
   }
@@ -80,7 +76,7 @@ export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => 
 
   let roadmap: Roadmap = {
     ...roadmapBuilder,
-    type: formData.businessType?.businessType || ("generic" as BusinessType),
+    type: onboardingData.industry,
     steps: await Promise.all(
       roadmapBuilder.steps.map(async (step) => ({
         ...step,
@@ -89,11 +85,11 @@ export const buildRoadmap = async (formData: BusinessForm): Promise<Roadmap> => 
     ),
   };
 
-  if (formData.businessType?.businessType === "home-contractor") {
+  if (onboardingData.industry === "home-contractor") {
     roadmap = modifyTasks(roadmap, await importModification("home-contractor"));
   }
 
-  if (formData.businessType?.businessType === "cosmetology") {
+  if (onboardingData.industry === "cosmetology") {
     roadmap = modifyTasks(roadmap, await importModification("cosmetology"));
   }
 
@@ -143,12 +139,4 @@ const modifyTasks = (roadmap: Roadmap, modifications: TaskModification[]): Roadm
 
 const getTaskByIdAsync = async (id: string): Promise<Task> => {
   return (await import(`../../roadmaps/tasks/${id}.json`)).default as Task;
-};
-
-const needsLiquorLicense = (formData: BusinessForm): boolean => {
-  if (!formData.locations?.locations) {
-    return false;
-  }
-
-  return formData.locations.locations.some((it) => it.license);
 };

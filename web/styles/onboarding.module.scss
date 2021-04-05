@@ -1,6 +1,6 @@
-#root > .field-object {
+.page {
   display: none;
 }
-#root > .field-object.active {
+.page.active {
   display: block;
 }

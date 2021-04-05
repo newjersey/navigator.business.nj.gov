@@ -1,8 +1,6 @@
-import { BusinessForm, Cosmetology, ECommerce, HomeImprovementContractor, Restaurant } from "./form";
-
 export interface UserData {
   user: BusinessUser;
-  formData: BusinessForm;
+  onboardingData: OnboardingData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
 }
@@ -14,20 +12,30 @@ export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
     user: user,
-    formData: {
-      user: {
-        email: user.email,
-      },
-    },
+    onboardingData: createEmptyOnboardingData(),
     formProgress: "UNSTARTED",
     taskProgress: {},
   };
 };
 
-export type BusinessType = Restaurant | ECommerce | HomeImprovementContractor | Cosmetology | "generic";
+export const createEmptyOnboardingData = (): OnboardingData => {
+  return {
+    businessName: "",
+    industry: "generic",
+    legalStructure: undefined,
+  };
+};
+
+export interface OnboardingData {
+  businessName: string;
+  industry: Industry;
+  legalStructure: LegalStructure | undefined;
+}
+
+export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
 
 export interface Roadmap {
-  type: BusinessType;
+  type: Industry;
   steps: Step[];
 }
 

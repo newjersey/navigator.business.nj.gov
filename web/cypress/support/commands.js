@@ -28,6 +28,7 @@ import 'cypress-wait-until';
 
 import Amplify, { Auth } from 'aws-amplify'
 import {testUserEmail, testUserPassword} from "./index";
+import {createEmptyOnboardingData, createEmptyUserData} from "../../lib/types/types";
 
 const awsConfig = {
   "aws_project_region": "us-east-1",
@@ -82,18 +83,10 @@ Cypress.Commands.add('loginByCognitoApi', () => {
     log.snapshot('after')
     log.end()
 
-    cy.request('POST', `${Cypress.env("API_BASE_URL")}/users`, {
-      user: {
+    cy.request('POST', `${Cypress.env("API_BASE_URL")}/users`, createEmptyUserData({
         email: testUserEmail,
         id: cognitoResponse.attributes.sub
-      },
-      formData: {
-        user: {
-          email: testUserEmail
-        }
-      },
-      formProgress: "UNSTARTED"
-    })
+      }))
       .then(() => cy.visit('/'))
   })
 })
@@ -101,17 +94,9 @@ Cypress.Commands.add('loginByCognitoApi', () => {
 Cypress.Commands.add('resetUserData', () => {
   Auth.currentSession().then((currentSession) => {
     const userId = currentSession.getIdToken().decodePayload().sub
-    cy.request('POST', `${Cypress.env("API_BASE_URL")}/users`, {
-      user: {
-        email: testUserEmail,
-        id: userId
-      },
-      formData: {
-        user: {
-          email: testUserEmail
-        }
-      },
-      formProgress: "UNSTARTED"
-    })
+    cy.request('POST', `${Cypress.env("API_BASE_URL")}/users`, createEmptyUserData({
+      email: testUserEmail,
+      id: userId
+    }))
   })
 })

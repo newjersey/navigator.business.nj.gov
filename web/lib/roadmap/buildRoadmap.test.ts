@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { generateFormData } from "../../test/factories";
 import { buildRoadmap } from "./buildRoadmap";
 import { Roadmap } from "../types/types";
+import { generateOnboardingData } from "../../test/factories";
 
 describe("buildRoadmap", () => {
   const getTasksByStepId = (roadmap: Roadmap, id: string): string[] => {
@@ -10,16 +10,16 @@ describe("buildRoadmap", () => {
   };
 
   // it("loads a generic roadmap when no data present", async () => {
-  //   const formData = generateFormData({
+  //   const onboardingData = generateFormData({
   //     businessType: { businessType: undefined },
   //     businessStructure: { businessStructure: undefined },
   //   });
-  //   expect(await buildRoadmap(formData)).toEqual(genericRoadmap);
+  //   expect(await buildRoadmap(onboardingData)).toEqual(genericRoadmap);
   // });
 
   it("orders tasks by weight", async () => {
-    const formData = generateFormData({ businessType: { businessType: "home-contractor" } });
-    const roadmap = await buildRoadmap(formData);
+    const onboardingData = generateOnboardingData({ industry: "home-contractor" });
+    const roadmap = await buildRoadmap(onboardingData);
     const dueDiligenceTasks = getTasksByStepId(roadmap, "due-diligence");
     expect(dueDiligenceTasks).toEqual([
       "identify-potential-lease", // weight: 1
@@ -29,11 +29,11 @@ describe("buildRoadmap", () => {
   });
 
   it("removes step 5 if it has no tasks", async () => {
-    const formData = generateFormData({
-      businessType: { businessType: undefined },
-      businessStructure: { businessStructure: undefined },
+    const onboardingData = generateOnboardingData({
+      industry: "generic",
+      legalStructure: undefined,
     });
-    const roadmap = await buildRoadmap(formData);
+    const roadmap = await buildRoadmap(onboardingData);
     expect(roadmap.steps).toHaveLength(4);
     expect(roadmap.steps.find((step) => step.id === "inspection-requirements")).toBeUndefined();
   });
@@ -41,8 +41,8 @@ describe("buildRoadmap", () => {
   describe("restaurant", () => {
     let roadmap: Roadmap;
     beforeEach(async () => {
-      const formData = generateFormData({ businessType: { businessType: "restaurant" } });
-      roadmap = await buildRoadmap(formData);
+      const onboardingData = generateOnboardingData({ industry: "restaurant" });
+      roadmap = await buildRoadmap(onboardingData);
     });
 
     it("adds restaurant specific tasks", () => {
@@ -59,37 +59,13 @@ describe("buildRoadmap", () => {
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("fire-permit");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("mercantile-license");
     });
-
-    describe("liquor license", () => {
-      it("does not add liquor license tasks if no location includes it", async () => {
-        const formData = generateFormData({
-          businessType: { businessType: "restaurant" },
-          locations: { locations: [{ license: false }] },
-        });
-        roadmap = await buildRoadmap(formData);
-
-        expect(getTasksByStepId(roadmap, "due-diligence")).not.toContain("liquor-license-availability");
-        expect(getTasksByStepId(roadmap, "lease-and-permits")).not.toContain("liquor-license");
-      });
-
-      it("adds liquor license tasks if any location includes it", async () => {
-        const formData = generateFormData({
-          businessType: { businessType: "restaurant" },
-          locations: { locations: [{ license: true }, { license: false }] },
-        });
-        roadmap = await buildRoadmap(formData);
-
-        expect(getTasksByStepId(roadmap, "due-diligence")).toContain("liquor-license-availability");
-        expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("liquor-license");
-      });
-    });
   });
 
   describe("e-commerce", () => {
     let roadmap: Roadmap;
     beforeEach(async () => {
-      const formData = generateFormData({ businessType: { businessType: "e-commerce" } });
-      roadmap = await buildRoadmap(formData);
+      const onboardingData = generateOnboardingData({ industry: "e-commerce" });
+      roadmap = await buildRoadmap(onboardingData);
     });
 
     it("adds e-commerce specific type", () => {
@@ -100,8 +76,8 @@ describe("buildRoadmap", () => {
   describe("home contractor", () => {
     let roadmap: Roadmap;
     beforeEach(async () => {
-      const formData = generateFormData({ businessType: { businessType: "home-contractor" } });
-      roadmap = await buildRoadmap(formData);
+      const onboardingData = generateOnboardingData({ industry: "home-contractor" });
+      roadmap = await buildRoadmap(onboardingData);
     });
 
     it("adds home contractor specific tasks", () => {
@@ -128,8 +104,8 @@ describe("buildRoadmap", () => {
   describe("cosmetology", () => {
     let roadmap: Roadmap;
     beforeEach(async () => {
-      const formData = generateFormData({ businessType: { businessType: "cosmetology" } });
-      roadmap = await buildRoadmap(formData);
+      const onboardingData = generateOnboardingData({ industry: "cosmetology" });
+      roadmap = await buildRoadmap(onboardingData);
     });
 
     it("adds cosmetology specific tasks", () => {
@@ -158,18 +134,16 @@ describe("buildRoadmap", () => {
 
   describe("business structure", () => {
     it("adds search business name tasks if structure in PublicRecordFiling group", async () => {
-      const formData = generateFormData({
-        businessStructure: { businessStructure: "Limited Liability Company (LLC)" },
-      });
-      const roadmap = await buildRoadmap(formData);
+      const onboardingData = generateOnboardingData({ legalStructure: "Limited Liability Company (LLC)" });
+      const roadmap = await buildRoadmap(onboardingData);
       expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
       expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("search-business-name");
       expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("register-trade-name");
     });
 
     it("adds trade name tasks if structure in TradeName group", async () => {
-      const formData = generateFormData({ businessStructure: { businessStructure: "General Partnership" } });
-      const roadmap = await buildRoadmap(formData);
+      const onboardingData = generateOnboardingData({ legalStructure: "General Partnership" });
+      const roadmap = await buildRoadmap(onboardingData);
       expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
       expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("search-business-name");
       expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("register-trade-name");

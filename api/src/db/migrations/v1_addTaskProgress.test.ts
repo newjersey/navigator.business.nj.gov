@@ -1,6 +1,7 @@
 import { v0UserData } from "./v0_userData";
-import { generateFormData, generateUser } from "../../domain/factories";
+import { generateUser } from "../../domain/factories";
 import { migrate_v0_to_v1 } from "./v1_addTaskProgress";
+import { generateFormData } from "./migrated-types";
 
 describe("migrate_v0_to_v1", () => {
   it("adds version and empty task progress object", () => {

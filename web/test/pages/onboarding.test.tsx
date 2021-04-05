@@ -1,10 +1,11 @@
-import { fireEvent, render, RenderResult } from "@testing-library/react";
+import { fireEvent, render, RenderResult, within } from "@testing-library/react";
 import Onboarding from "../../pages/onboarding";
 import { useRouter } from "next/router";
 import React from "react";
 import * as useUserModule from "../../lib/data/useUserData";
-import { generateUserData } from "../factories";
+import { generateOnboardingData, generateUserData } from "../factories";
 import { createStatefulMock, generateUseUserDataResponse } from "../helpers";
+import { Industry, LegalStructure, OnboardingData } from "../../lib/types/types";
 
 jest.mock("next/router");
 
@@ -26,50 +27,24 @@ describe("onboarding form", () => {
   });
 
   it("prefills form from existing user data", () => {
-    const userData = generateUserData({});
+    const userData = generateUserData({
+      onboardingData: generateOnboardingData({
+        businessName: "Applebees",
+        industry: "cosmetology",
+        legalStructure: "B-Corporation",
+      }),
+    });
     mockUseUserData.mockImplementation(createStatefulMock(userData));
     subject = render(<Onboarding />);
 
-    expect(subject.getByLabelText("Email")).toHaveValue(userData.formData.user?.email);
-    expect(subject.getByLabelText("First name")).toHaveValue(userData.formData.user?.firstName);
-    expect(subject.getByLabelText("Last name")).toHaveValue(userData.formData.user?.lastName);
-    fireEvent.click(subject.getByText("Next"));
-    expect(subject.getByLabelText("What type of company do you want to start?")).toHaveValue(
-      userData.formData.businessType?.businessType
-    );
+    expect(getFormValues().businessName).toEqual("Applebees");
+    clickNext();
+    expect(getFormValues().industry).toEqual("cosmetology");
+    clickNext();
+    expect(getFormValues().legalStructure).toEqual("B-Corporation");
   });
 
-  it("steps through each page of the form", () => {
-    mockUseUserData.mockImplementation(createStatefulMock());
-    subject = render(<Onboarding />);
-
-    fillText(subject.getByLabelText("First name"), "ada");
-    fillText(subject.getByLabelText("Last name"), "lovelace");
-
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.change(subject.getByLabelText("What type of company do you want to start?"), {
-      target: { value: "restaurant" },
-    });
-
-    fireEvent.click(subject.getByText("Next"));
-    fillText(subject.getByLabelText("Business name"), "Ada's cool computer company");
-
-    fireEvent.click(subject.getByText("Next"));
-    fillText(subject.getByLabelText("Business description"), "Selling computers");
-
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.change(subject.getByLabelText("Business structure"), {
-      target: { value: "LLC" },
-    });
-
-    fireEvent.click(subject.getByText("Next"));
-    fillText(subject.getByLabelText("Zip code"), "11111");
-
-    fireEvent.click(subject.getByText("Next"));
-    expect(mockPush).toHaveBeenCalledWith("/roadmap");
-  });
-
-  it("updates the user data after each page", () => {
+  it("updates the user data after each form page", () => {
     const initialUserData = generateUserData({});
     const mockUpdate = jest.fn();
     mockUseUserData.mockReturnValue(
@@ -80,63 +55,84 @@ describe("onboarding form", () => {
     );
     subject = render(<Onboarding />);
 
-    fillText(subject.getByLabelText("First name"), "ada");
-    fillText(subject.getByLabelText("Last name"), "lovelace");
-    fireEvent.click(subject.getByText("Next"));
+    fillText("Business name", "Cool Computers");
+    clickNext();
 
-    expect(mockUpdate).toHaveBeenCalledWith({
+    expect(mockUpdate).toHaveBeenLastCalledWith({
       ...initialUserData,
-      formData: {
-        ...initialUserData.formData,
-        user: {
-          ...initialUserData.formData.user,
-          firstName: "ada",
-          lastName: "lovelace",
-        },
+      onboardingData: {
+        ...initialUserData.onboardingData,
+        businessName: "Cool Computers",
       },
     });
-  });
 
-  it("updates when onboarding form has been finished", () => {
-    const initialUserData = generateUserData({});
-    const mockUpdate = jest.fn();
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        userData: initialUserData,
-        update: mockUpdate,
-      })
-    );
-    subject = render(<Onboarding />);
+    select("Industry", "E-Commerce");
+    clickNext();
 
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.change(subject.getByLabelText("What type of company do you want to start?"), {
-      target: { value: "e-commerce" },
+    expect(mockUpdate).toHaveBeenLastCalledWith({
+      ...initialUserData,
+      onboardingData: {
+        ...initialUserData.onboardingData,
+        businessName: "Cool Computers",
+        industry: "e-commerce",
+      },
     });
 
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Next"));
+    select("Legal structure", "General Partnership");
+    clickNext();
 
     expect(mockUpdate).toHaveBeenLastCalledWith({
       ...initialUserData,
       formProgress: "COMPLETED",
+      onboardingData: {
+        ...initialUserData.onboardingData,
+        businessName: "Cool Computers",
+        industry: "e-commerce",
+        legalStructure: "General Partnership",
+      },
     });
+
+    expect(mockPush).toHaveBeenCalledWith("/roadmap");
   });
 
   it("is able to go back", () => {
     mockUseUserData.mockImplementation(createStatefulMock());
     subject = render(<Onboarding />);
 
-    fillText(subject.getByLabelText("First name"), "ada");
-    fireEvent.click(subject.getByText("Next"));
-    fireEvent.click(subject.getByText("Back"));
-
-    expect(subject.getByLabelText("First name")).toHaveValue("ada");
+    fillText("Business name", "Cool Computers");
+    clickNext();
+    clickBack();
+    expect(getFormValues().businessName).toEqual("Cool Computers");
   });
 
-  const fillText = (element: HTMLElement, text: string) => {
-    fireEvent.change(element, { target: { value: text } });
+  const fillText = (label: string, value: string) => {
+    fireEvent.change(subject.getByLabelText(label), { target: { value: value } });
+  };
+
+  const select = (label: string, value: string) => {
+    fireEvent.mouseDown(subject.getByLabelText(label));
+    const listbox = within(subject.getByRole("listbox"));
+    fireEvent.click(listbox.getByText(value));
+  };
+
+  const clickNext = (): void => {
+    fireEvent.click(subject.getAllByText("Next")[0]);
+  };
+
+  const clickBack = (): void => {
+    fireEvent.click(subject.getAllByText("Back")[0]);
+  };
+
+  const getFormValues = (): OnboardingData => {
+    const businessName = (subject.getByLabelText("Business name") as HTMLInputElement).value;
+    const industry = (subject.getByTestId("industry") as HTMLInputElement).value as Industry;
+    const legalStructure = (subject.getByTestId("legal-structure") as HTMLInputElement)
+      .value as LegalStructure;
+
+    return {
+      businessName,
+      industry,
+      legalStructure,
+    };
   };
 });

@@ -13,25 +13,15 @@ describe("Roadmap", () => {
   it("enters user info and shows the roadmap", () => {
     cy.contains("Get Started").click();
 
-    // onboarding form
-    cy.get('input[label="firstName"]').type("Ada");
-    cy.get('input[label="lastName"]').type("Lovelace");
-    cy.get('input[label="email"]').should("have.value", testUserEmail);
+    cy.get('input[aria-label="Business name"]').type("Beesapple's");
     clickNext();
 
-    cy.get("select#root_businessType_businessType").select("E-Commerce");
+    cy.get('[aria-label="Industry"]').click();
+    cy.get('[data-value="e-commerce"]').click();
     clickNext();
 
-    cy.get('input[label="businessName"]').type("Beesapple's");
-    clickNext();
-
-    cy.get('input[label="businessDescription"]').type("Selling useful products");
-    clickNext();
-
-    cy.get("select#root_businessStructure_businessStructure").select("General Partnership");
-    clickNext();
-
-    cy.get('input[label="zipCode"]').type("11111");
+    cy.get('[aria-label="Legal structure"]').click();
+    cy.get('[data-value="General Partnership"]').click();
     clickNext();
 
     // check roadmap
@@ -73,15 +63,13 @@ describe("Roadmap", () => {
 
     // editing data
     cy.contains("Edit").click();
+
+    cy.get('input[aria-label="Business name"]').clear();
+    cy.get('input[aria-label="Business name"]').type("Applebee's");
     clickNext();
 
-    cy.get("select#root_businessType_businessType").select("Restaurant");
-    clickNext();
-
-    cy.get('input[label="businessName"]').clear();
-    cy.get('input[label="businessName"]').type("Applebee's");
-    clickNext();
-    clickNext();
+    cy.get('[aria-label="Industry"]').click();
+    cy.get('[data-value="restaurant"]').click();
     clickNext();
     clickNext();
 
@@ -98,6 +86,6 @@ describe("Roadmap", () => {
 });
 
 const clickNext = () => {
-  cy.contains("Next").click();
+  cy.contains("Next").click({ force: true });
   cy.wait(200);
 };
