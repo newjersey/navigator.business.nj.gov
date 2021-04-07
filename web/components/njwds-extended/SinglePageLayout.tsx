@@ -1,17 +1,19 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
+import { MobilePageTitle } from "../njwds/MobilePageTitle";
+import { SingleColumnContainer } from "../njwds/SingleColumnContainer";
 
 interface Props {
   children: React.ReactNode;
+  mobilePageTitle?: ReactElement;
 }
 
-export const SinglePageLayout = ({ children }: Props): ReactElement => {
+export const SinglePageLayout = (props: Props): ReactElement => {
   return (
-    <div className="usa-section">
-      <div className="grid-container">
-        <div className="grid-row grid-gap">
-          <main className="desktop:grid-col-12 usa-prose">{children}</main>
-        </div>
-      </div>
-    </div>
+    <>
+      <MobilePageTitle>{props.mobilePageTitle}</MobilePageTitle>
+      <main className="usa-section">
+        <SingleColumnContainer>{props.children}</SingleColumnContainer>
+      </main>
+    </>
   );
 };

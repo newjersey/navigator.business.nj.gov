@@ -116,18 +116,18 @@ describe("onboarding form", () => {
   };
 
   const clickNext = (): void => {
-    fireEvent.click(subject.getAllByText("Next")[0]);
+    fireEvent.click(subject.getByText("Next"));
   };
 
   const clickBack = (): void => {
-    fireEvent.click(subject.getAllByText("Back")[0]);
+    fireEvent.click(subject.getByText("Back"));
   };
 
   const getFormValues = (): OnboardingData => {
-    const businessName = (subject.getByLabelText("Business name") as HTMLInputElement).value;
-    const industry = (subject.getByTestId("industry") as HTMLInputElement).value as Industry;
-    const legalStructure = (subject.getByTestId("legal-structure") as HTMLInputElement)
-      .value as LegalStructure;
+    const businessName = (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
+    const industry = (subject.queryByTestId("industry") as HTMLInputElement)?.value as Industry;
+    const legalStructure = (subject.queryByTestId("legal-structure") as HTMLInputElement)
+      ?.value as LegalStructure;
 
     return {
       businessName,

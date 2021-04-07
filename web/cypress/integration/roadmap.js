@@ -1,5 +1,4 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { testUserEmail } from "../support";
 
 describe("Roadmap", () => {
   beforeEach(() => {
