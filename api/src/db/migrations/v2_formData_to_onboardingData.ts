@@ -1,4 +1,4 @@
-import { BusinessUser, FormProgress, OnboardingData, TaskProgress } from "../../domain/types";
+import { BusinessUser, FormProgress, Industry, OnboardingData, TaskProgress } from "../../domain/types";
 import { v1UserData } from "./v1_addTaskProgress";
 
 export interface v2UserData {
@@ -11,12 +11,24 @@ export interface v2UserData {
 
 export const migrate_v1_to_v2 = (v1Data: v1UserData): v2UserData => {
   const { formData, ...rest } = v1Data;
+  let businessName = "";
+  if (formData.businessName && formData.businessName.businessName) {
+    businessName = formData.businessName.businessName;
+  }
+  let industry = "generic";
+  if (formData.businessType && formData.businessType.businessType) {
+    industry = formData.businessType.businessType;
+  }
+  let legalStructure = undefined;
+  if (formData.businessStructure && formData.businessStructure.businessStructure) {
+    legalStructure = formData.businessStructure.businessStructure;
+  }
   return {
     ...rest,
     onboardingData: {
-      businessName: formData.businessName?.businessName || "",
-      industry: formData.businessType?.businessType || "generic",
-      legalStructure: formData.businessStructure?.businessStructure,
+      businessName,
+      industry: industry as Industry,
+      legalStructure,
     },
     version: 2,
   };
