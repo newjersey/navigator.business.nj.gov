@@ -46,13 +46,13 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         <Icon>unfold_more</Icon>
       </Button>
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={close}>
-        <MenuItem onClick={() => handleSelect("NOT_STARTED")}>
+        <MenuItem onClick={() => handleSelect("NOT_STARTED")} selected={value === "NOT_STARTED"}>
           <TagNotStarted />
         </MenuItem>
-        <MenuItem onClick={() => handleSelect("IN_PROGRESS")}>
+        <MenuItem onClick={() => handleSelect("IN_PROGRESS")} selected={value === "IN_PROGRESS"}>
           <TagInProgress />
         </MenuItem>
-        <MenuItem onClick={() => handleSelect("COMPLETED")}>
+        <MenuItem onClick={() => handleSelect("COMPLETED")} selected={value === "COMPLETED"}>
           <TagCompleted />
         </MenuItem>
       </Menu>
