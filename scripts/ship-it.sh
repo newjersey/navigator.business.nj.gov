@@ -29,5 +29,8 @@ function print_success {
   echo "                                                                      "
 }
 
+npm --prefix=web run fences
+npm --prefix=api run fences
+
 # run tests, feature tests, and push
 npm --prefix=web run lint && npm --prefix=web run lint && ./scripts/test.sh && ./scripts/feature-tests.sh && git push && print_success

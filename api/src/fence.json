@@ -1,0 +1,4 @@
+{
+  "tags": ["api"],
+  "dependencies": ["express", "cors", "supertest", "body-parser", "aws-sdk", "serverless-http"]
+}

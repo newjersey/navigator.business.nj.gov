@@ -7,7 +7,10 @@ import AWS from "aws-sdk";
 import { UserDataClient } from "../domain/types";
 import { DynamoUserDataClient } from "./DynamoUserDataClient";
 
-const dbConfig = require("../../jest-dynalite-config");
+// references jest-dynalite-config values
+const dbConfig = {
+  tableName: "users-table-test",
+};
 
 jest.mock("./migrations/migrations", () => ({
   Migrations: [migrate_v0_to_v1, migrate_v1_to_v2],
@@ -21,15 +24,12 @@ describe("DynamoUserDataClient Migrations", () => {
     region: "local",
   };
 
-  // TODO: this will break if we add more tables
-  const tableName = dbConfig.tables[0].TableName;
-
   let client: AWS.DynamoDB.DocumentClient;
   let dynamoUserDataClient: UserDataClient;
 
   beforeEach(async () => {
     client = new AWS.DynamoDB.DocumentClient(config);
-    dynamoUserDataClient = DynamoUserDataClient(client, tableName);
+    dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName);
     await insertOldData();
   });
 
@@ -105,7 +105,7 @@ describe("DynamoUserDataClient Migrations", () => {
 
   const insertOldData = async () => {
     const makeParams = (data: any) => ({
-      TableName: tableName,
+      TableName: dbConfig.tableName,
       Item: {
         userId: data.user.id,
         data: { ...data },
@@ -119,7 +119,7 @@ describe("DynamoUserDataClient Migrations", () => {
 
   const getDbItem = async (id: string): Promise<any> => {
     const params = {
-      TableName: tableName,
+      TableName: dbConfig.tableName,
       Key: {
         userId: id,
       },

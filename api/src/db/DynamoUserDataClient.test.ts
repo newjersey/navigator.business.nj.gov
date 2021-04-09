@@ -3,8 +3,10 @@ import { UserDataClient } from "../domain/types";
 import { DynamoUserDataClient } from "./DynamoUserDataClient";
 import { generateUser, generateUserData } from "../domain/factories";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const dbConfig = require("../../jest-dynalite-config");
+// references jest-dynalite-config values
+const dbConfig = {
+  tableName: "users-table-test",
+};
 
 describe("DynamoUserDataClient", () => {
   const config = {
@@ -19,8 +21,7 @@ describe("DynamoUserDataClient", () => {
   beforeEach(() => {
     client = new AWS.DynamoDB.DocumentClient(config);
 
-    // TODO: this will break if we add more tables
-    dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tables[0].TableName);
+    dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName);
   });
 
   it("gets inserted items", async () => {

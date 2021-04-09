@@ -1,0 +1,4 @@
+{
+  "tags": ["db"],
+  "imports": ["domain"]
+}

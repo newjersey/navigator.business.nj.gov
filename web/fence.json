@@ -1,0 +1,22 @@
+{
+  "tags": ["web"],
+  "dependencies": [
+    "react",
+    "react-dom",
+    "react-dom/test-utils",
+    "@testing-library/react",
+    "@testing-library/jest-dom/extend-expect",
+    "@material-ui/core",
+    "axios",
+    "react-swipeable-views",
+    "next",
+    "next/router",
+    "next/link",
+    "next/app",
+    "@aws-amplify/auth",
+    "@aws-amplify/ui-react",
+    "@aws-amplify/ui-components",
+    "aws-amplify",
+    "swr"
+  ]
+}
