@@ -6,6 +6,7 @@ import { GreyCallout } from "../components/njwds-extended/GreyCallout";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { useRoadmap } from "../lib/data/useRoadmap";
 import { AuthButton } from "../components/AuthButton";
+import { IndustryLookup } from "../display-content/industry";
 
 const RoadmapPage = (): ReactElement => {
   const { userData, isLoading } = useUserData();
@@ -25,7 +26,7 @@ const RoadmapPage = (): ReactElement => {
   const getIndustry = (): string => {
     if (isLoading) return "Loading...";
     return userData?.onboardingData.industry && userData?.onboardingData.industry !== "generic"
-      ? userData.onboardingData.industry
+      ? IndustryLookup[userData.onboardingData.industry]
       : "Not set";
   };
 

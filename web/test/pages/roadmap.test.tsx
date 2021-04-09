@@ -43,10 +43,10 @@ describe("roadmap page", () => {
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });
 
-    it("shows the industry from onboarding data", () => {
-      useMockOnboardingData({ industry: "e-commerce" });
+    it("shows the human-readable industry from onboarding data", () => {
+      useMockOnboardingData({ industry: "home-contractor" });
       const subject = render(<RoadmapPage />);
-      expect(subject.getByText("e-commerce")).toBeInTheDocument();
+      expect(subject.getByText("Home-Improvement Contractor")).toBeInTheDocument();
     });
 
     it("shows placeholder if no industry present", async () => {
@@ -62,7 +62,7 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no business structure present", async () => {
-      useMockOnboardingData({ legalStructure: undefined });
+      useMockOnboardingData({ legalStructure: undefined, industry: "restaurant" });
       const subject = render(<RoadmapPage />);
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });

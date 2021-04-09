@@ -28,7 +28,7 @@ describe("Roadmap", () => {
 
     // check roadmap
     cy.contains("Business Name: Beesapple's").should("exist");
-    cy.contains("Industry: e-commerce").should("exist");
+    cy.contains("Industry: E-Commerce").should("exist");
     cy.contains("Legal Entity: General Partnership").should("exist");
 
     // step 1
@@ -75,7 +75,7 @@ describe("Roadmap", () => {
     // check roadmap
     cy.contains("Business Roadmap for Applebee's").should("exist");
     cy.contains("Business Name: Applebee's").should("exist");
-    cy.contains("Industry: restaurant").should("exist");
+    cy.contains("Industry: Restaurant").should("exist");
     cy.contains("Legal Entity: General Partnership").should("exist");
 
     // step 1

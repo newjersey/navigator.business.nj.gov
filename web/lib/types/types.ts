@@ -6,7 +6,6 @@ export interface UserData {
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
-
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
@@ -31,8 +30,6 @@ export interface OnboardingData {
   industry: Industry;
   legalStructure: LegalStructure | undefined;
 }
-
-export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
 
 export interface Roadmap {
   type: Industry;
@@ -102,6 +99,16 @@ export interface Destination {
   name: string;
   link: string;
 }
+
+export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
+
+export const ALL_INDUSTRIES: Industry[] = [
+  "restaurant",
+  "e-commerce",
+  "home-contractor",
+  "cosmetology",
+  "generic",
+];
 
 export type LegalStructure =
   | "Sole Proprietorship"

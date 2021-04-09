@@ -3,6 +3,7 @@ import { createStyles, FormControl, makeStyles, MenuItem, Select } from "@materi
 import { OnboardingButtonGroup } from "./OnboardingButtonGroup";
 import { OnboardingContext } from "../../pages/onboarding";
 import { Industry } from "../../lib/types/types";
+import { IndustryLookup } from "../../display-content/industry";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -43,10 +44,10 @@ export const OnboardingIndustry = (): ReactElement => {
             }}
           >
             <MenuItem value="generic">&nbsp;</MenuItem>
-            <MenuItem value="restaurant">Restaurant</MenuItem>
-            <MenuItem value="home-contractor">Home-Improvement Contractor</MenuItem>
-            <MenuItem value="e-commerce">E-Commerce</MenuItem>
-            <MenuItem value="cosmetology">Cosmetology</MenuItem>
+            <MenuItem value="restaurant">{IndustryLookup["restaurant"]}</MenuItem>
+            <MenuItem value="home-contractor">{IndustryLookup["home-contractor"]}</MenuItem>
+            <MenuItem value="e-commerce">{IndustryLookup["e-commerce"]}</MenuItem>
+            <MenuItem value="cosmetology">{IndustryLookup["cosmetology"]}</MenuItem>
           </Select>
         </FormControl>
       </div>

@@ -80,10 +80,10 @@ More environment variables are needed for Cypress feature tests than for actuall
 need access to AWS credentials to make Cognito API calls. These variables are expected by the feature test runner to exist in
 a file called `./scripts/env.sh` which should not be checked into source control.
 
-### Schemas
+### UI Display Content
 
-The `./web/schemas` folder holds the [react-jsonschema-form](https://github.com/rjsf-team/react-jsonschema-form) schema for our
-onboarding form. The task `npm run make-schema-types` compiles this into a TypeScript type system for use in our code.
+The `./web/display-content` folder holds files that define the user text for:
+- `industry.ts` - how industry names looks
 
 ### Roadmaps
 
