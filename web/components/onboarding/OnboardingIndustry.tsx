@@ -3,7 +3,7 @@ import { createStyles, FormControl, makeStyles, MenuItem, Select } from "@materi
 import { OnboardingButtonGroup } from "./OnboardingButtonGroup";
 import { OnboardingContext } from "../../pages/onboarding";
 import { Industry } from "../../lib/types/types";
-import { IndustryLookup } from "../../display-content/industry";
+import { IndustryLookup } from "../../display-content/IndustryLookup";
 
 const useStyles = makeStyles(() =>
   createStyles({

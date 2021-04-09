@@ -18,8 +18,6 @@ export interface OnboardingData {
   legalStructure: LegalStructure | undefined;
 }
 
-export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
-
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 
 export type BusinessUser = {
@@ -28,23 +26,32 @@ export type BusinessUser = {
   id: string;
 };
 
+export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
+export const ALL_INDUSTRIES: Industry[] = [
+  "restaurant",
+  "e-commerce",
+  "home-contractor",
+  "cosmetology",
+  "generic",
+];
+
 export type LegalStructure =
-  | "Sole Proprietorship"
-  | "General Partnership"
-  | "Limited Partnership (LP)"
-  | "Limited Liability Partnership (LLP)"
-  | "Limited Liability Company (LLC)"
-  | "C-Corporation"
-  | "S-Corporation"
-  | "B-Corporation";
+  | "sole-proprietorship"
+  | "general-partnership"
+  | "limited-partnership"
+  | "limited-liability-partnership"
+  | "limited-liability-company"
+  | "c-corporation"
+  | "s-corporation"
+  | "b-corporation";
 
 export const ALL_LEGAL_STRUCTURES: LegalStructure[] = [
-  "Sole Proprietorship",
-  "General Partnership",
-  "Limited Partnership (LP)",
-  "Limited Liability Partnership (LLP)",
-  "Limited Liability Company (LLC)",
-  "C-Corporation",
-  "S-Corporation",
-  "B-Corporation",
+  "sole-proprietorship",
+  "general-partnership",
+  "limited-partnership",
+  "limited-liability-partnership",
+  "limited-liability-company",
+  "c-corporation",
+  "s-corporation",
+  "b-corporation",
 ];

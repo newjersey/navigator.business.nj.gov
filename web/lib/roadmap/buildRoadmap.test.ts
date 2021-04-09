@@ -134,7 +134,7 @@ describe("buildRoadmap", () => {
 
   describe("business structure", () => {
     it("adds search business name tasks if structure in PublicRecordFiling group", async () => {
-      const onboardingData = generateOnboardingData({ legalStructure: "Limited Liability Company (LLC)" });
+      const onboardingData = generateOnboardingData({ legalStructure: "limited-liability-company" });
       const roadmap = await buildRoadmap(onboardingData);
       expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
       expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("search-business-name");
@@ -142,7 +142,7 @@ describe("buildRoadmap", () => {
     });
 
     it("adds trade name tasks if structure in TradeName group", async () => {
-      const onboardingData = generateOnboardingData({ legalStructure: "General Partnership" });
+      const onboardingData = generateOnboardingData({ legalStructure: "general-partnership" });
       const roadmap = await buildRoadmap(onboardingData);
       expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
       expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("search-business-name");

@@ -2,7 +2,8 @@ import React, { ReactElement, useContext } from "react";
 import { createStyles, FormControl, makeStyles, MenuItem, Select } from "@material-ui/core";
 import { OnboardingButtonGroup } from "./OnboardingButtonGroup";
 import { OnboardingContext } from "../../pages/onboarding";
-import { LegalStructure } from "../../lib/types/types";
+import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../../lib/types/types";
+import { LegalStructureLookup } from "../../display-content/LegalStructureLookup";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -39,16 +40,11 @@ export const OnboardingLegalStructure = (): ReactElement => {
             }}
           >
             <MenuItem value="">&nbsp;</MenuItem>
-            <MenuItem value="Sole Proprietorship">Sole Proprietorship</MenuItem>
-            <MenuItem value="General Partnership">General Partnership</MenuItem>
-            <MenuItem value="Limited Partnership (LP)">Limited Partnership (LP)</MenuItem>
-            <MenuItem value="Limited Liability Partnership (LLP)">
-              Limited Liability Partnership (LLP)
-            </MenuItem>
-            <MenuItem value="Limited Liability Company (LLC)">Limited Liability Company (LLC)</MenuItem>
-            <MenuItem value="C-Corporation">C-Corporation</MenuItem>
-            <MenuItem value="S-Corporation">S-Corporation</MenuItem>
-            <MenuItem value="B-Corporation">B-Corporation</MenuItem>
+            {ALL_LEGAL_STRUCTURES.map((legalStructure) => (
+              <MenuItem key={legalStructure} value={legalStructure}>
+                {LegalStructureLookup[legalStructure]}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </div>

@@ -31,7 +31,7 @@ describe("onboarding form", () => {
       onboardingData: generateOnboardingData({
         businessName: "Applebees",
         industry: "cosmetology",
-        legalStructure: "B-Corporation",
+        legalStructure: "b-corporation",
       }),
     });
     mockUseUserData.mockImplementation(createStatefulMock(userData));
@@ -41,7 +41,7 @@ describe("onboarding form", () => {
     clickNext();
     expect(getFormValues().industry).toEqual("cosmetology");
     clickNext();
-    expect(getFormValues().legalStructure).toEqual("B-Corporation");
+    expect(getFormValues().legalStructure).toEqual("b-corporation");
   });
 
   it("updates the user data after each form page", () => {
@@ -88,7 +88,7 @@ describe("onboarding form", () => {
         ...initialUserData.onboardingData,
         businessName: "Cool Computers",
         industry: "e-commerce",
-        legalStructure: "General Partnership",
+        legalStructure: "general-partnership",
       },
     });
 

@@ -20,7 +20,7 @@ describe("Roadmap", () => {
     clickNext();
 
     cy.get('[aria-label="Legal structure"]').click();
-    cy.get('[data-value="General Partnership"]').click();
+    cy.get('[data-value="general-partnership"]').click();
     clickNext();
 
     // check roadmap

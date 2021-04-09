@@ -55,8 +55,8 @@ describe("roadmap page", () => {
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });
 
-    it("shows the legal structure from onboarding data", () => {
-      useMockOnboardingData({ legalStructure: "Limited Liability Company (LLC)" });
+    it("shows the human-readable legal structure from onboarding data", () => {
+      useMockOnboardingData({ legalStructure: "limited-liability-company" });
       const subject = render(<RoadmapPage />);
       expect(subject.getByText("Limited Liability Company (LLC)")).toBeInTheDocument();
     });

@@ -6,7 +6,8 @@ import { GreyCallout } from "../components/njwds-extended/GreyCallout";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { useRoadmap } from "../lib/data/useRoadmap";
 import { AuthButton } from "../components/AuthButton";
-import { IndustryLookup } from "../display-content/industry";
+import { IndustryLookup } from "../display-content/IndustryLookup";
+import { LegalStructureLookup } from "../display-content/LegalStructureLookup";
 
 const RoadmapPage = (): ReactElement => {
   const { userData, isLoading } = useUserData();
@@ -32,7 +33,9 @@ const RoadmapPage = (): ReactElement => {
 
   const getLegalStructure = (): string => {
     if (isLoading) return "Loading...";
-    return userData?.onboardingData.legalStructure ? userData.onboardingData.legalStructure : "Not set";
+    return userData?.onboardingData.legalStructure
+      ? LegalStructureLookup[userData.onboardingData.legalStructure]
+      : "Not set";
   };
 
   return (

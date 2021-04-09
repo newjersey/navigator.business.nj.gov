@@ -1,5 +1,12 @@
-import { ALL_LEGAL_STRUCTURES, BusinessUser, LegalStructure, OnboardingData, UserData } from "./types";
-import { ALL_INDUSTRIES, Industry } from "../../../web/lib/types/types";
+import {
+  ALL_INDUSTRIES,
+  ALL_LEGAL_STRUCTURES,
+  BusinessUser,
+  Industry,
+  LegalStructure,
+  OnboardingData,
+  UserData,
+} from "./types";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 

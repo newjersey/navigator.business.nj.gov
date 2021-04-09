@@ -1,11 +1,11 @@
-import { BusinessUser, FormProgress, Industry, OnboardingData, TaskProgress } from "../../domain/types";
 import { v1UserData } from "./v1_addTaskProgress";
+import { randomInt } from "./migrations";
 
 export interface v2UserData {
-  user: BusinessUser;
-  onboardingData: OnboardingData;
-  formProgress: FormProgress;
-  taskProgress: Record<string, TaskProgress>;
+  user: v2BusinessUser;
+  onboardingData: v2OnboardingData;
+  formProgress: v2FormProgress;
+  taskProgress: Record<string, v2TaskProgress>;
   version: number;
 }
 
@@ -27,65 +27,58 @@ export const migrate_v1_to_v2 = (v1Data: v1UserData): v2UserData => {
     ...rest,
     onboardingData: {
       businessName,
-      industry: industry as Industry,
+      industry: industry as v2Industry,
       legalStructure,
     },
     version: 2,
   };
 };
 
-// below - old BusinessForm data type
+// ---------------- v2 types ----------------
 
-export type Restaurant = "restaurant";
-export type ECommerce = "e-commerce";
-export type HomeImprovementContractor = "home-contractor";
-export type Cosmetology = "cosmetology";
+type v2TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
-export interface BusinessForm {
-  user?: {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    [k: string]: unknown;
-  };
-  businessType?: {
-    businessType?: (Restaurant | ECommerce | HomeImprovementContractor | Cosmetology) & string;
-    [k: string]: unknown;
-  };
-  businessName?: {
-    businessName?: string;
-    [k: string]: unknown;
-  };
-  businessDescription?: {
-    businessDescription?: string;
-    [k: string]: unknown;
-  };
-  businessStructure?: {
-    businessStructure?:
-      | "Sole Proprietorship"
-      | "General Partnership"
-      | "Limited Partnership (LP)"
-      | "Limited Liability Partnership (LLP)"
-      | "Limited Liability Company (LLC)"
-      | "C-Corporation"
-      | "S-Corporation"
-      | "B-Corporation";
-    [k: string]: unknown;
-  };
-  locations?: {
-    locations?: [
-      {
-        zipCode?: string;
-        license?: boolean;
-        [k: string]: unknown;
-      },
-      ...{
-        zipCode?: string;
-        license?: boolean;
-        [k: string]: unknown;
-      }[]
-    ];
-    [k: string]: unknown;
-  };
-  [k: string]: unknown;
+type v2FormProgress = "UNSTARTED" | "COMPLETED";
+
+type v2BusinessUser = {
+  name?: string;
+  email: string;
+  id: string;
+};
+
+interface v2OnboardingData {
+  businessName: string;
+  industry: v2Industry;
+  legalStructure: v2LegalStructure | undefined;
 }
+
+type v2Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
+export type v2LegalStructure =
+  | "Sole Proprietorship"
+  | "General Partnership"
+  | "Limited Partnership (LP)"
+  | "Limited Liability Partnership (LLP)"
+  | "Limited Liability Company (LLC)"
+  | "C-Corporation"
+  | "S-Corporation"
+  | "B-Corporation";
+
+// ---------------- v2 factories ----------------
+
+export const generateV2OnboardingData = (overrides: Partial<v2OnboardingData>): v2OnboardingData => {
+  return {
+    businessName: "some-business-name-" + randomInt(),
+    industry: "restaurant",
+    legalStructure: "Sole Proprietorship",
+    ...overrides,
+  };
+};
+
+export const generateV2User = (overrides: Partial<v2BusinessUser>): v2BusinessUser => {
+  return {
+    name: "some-name-" + randomInt(),
+    email: `some-email-${randomInt()}@example.com`,
+    id: "some-id-" + randomInt(),
+    ...overrides,
+  };
+};

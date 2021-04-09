@@ -83,7 +83,8 @@ a file called `./scripts/env.sh` which should not be checked into source control
 ### UI Display Content
 
 The `./web/display-content` folder holds files that define the user text for:
-- `industry.ts` - how industry names looks
+- `IndustryLookup.ts` - how industry names are displayed
+- `LegalStructureLookup.ts` - how legal structure names are displayed   
 
 ### Roadmaps
 

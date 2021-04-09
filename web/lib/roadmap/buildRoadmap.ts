@@ -24,15 +24,15 @@ const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
   return taskA.weight > taskB.weight ? 1 : -1;
 };
 
-const TradeNameGroup: LegalStructure[] = ["General Partnership", "Sole Proprietorship"];
+const TradeNameGroup: LegalStructure[] = ["general-partnership", "sole-proprietorship"];
 
 const PublicRecordFilingGroup: LegalStructure[] = [
-  "Limited Partnership (LP)",
-  "Limited Liability Partnership (LLP)",
-  "Limited Liability Company (LLC)",
-  "C-Corporation",
-  "S-Corporation",
-  "B-Corporation",
+  "limited-partnership",
+  "limited-liability-partnership",
+  "limited-liability-company",
+  "c-corporation",
+  "s-corporation",
+  "b-corporation",
 ];
 
 export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {
