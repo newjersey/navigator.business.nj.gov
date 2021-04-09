@@ -30,8 +30,8 @@ export const OnboardingIndustry = (): ReactElement => {
 
   return (
     <form onSubmit={onSubmit} className="usa-prose">
-      <h3>Business Industry</h3>
-      <p>Which business industry can best describe your company?</p>
+      <h3>{state.displayContent.industry.title}</h3>
+      <p>{state.displayContent.industry.description}</p>
       <div className="form-input">
         <FormControl variant="outlined" className={classes.formControl}>
           <Select

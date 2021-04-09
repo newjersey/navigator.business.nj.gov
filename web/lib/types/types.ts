@@ -31,6 +31,45 @@ export interface OnboardingData {
   legalStructure: LegalStructure | undefined;
 }
 
+export type OnboardingDisplayContent = {
+  welcome: WelcomeDisplayContent;
+  businessName: FieldDisplayContent;
+  industry: FieldDisplayContent;
+  legalStructure: FieldDisplayContent;
+};
+
+export type WelcomeDisplayContent = {
+  header: string;
+  subheader: string;
+};
+
+export type FieldDisplayContent = {
+  title: string;
+  description: string;
+  placeholder?: string;
+};
+
+export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
+  return {
+    welcome: {
+      header: "",
+      subheader: "",
+    },
+    businessName: {
+      title: "",
+      description: "",
+    },
+    industry: {
+      title: "",
+      description: "",
+    },
+    legalStructure: {
+      title: "",
+      description: "",
+    },
+  };
+};
+
 export interface Roadmap {
   type: Industry;
   steps: Step[];

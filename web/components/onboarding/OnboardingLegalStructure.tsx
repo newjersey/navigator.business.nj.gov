@@ -26,8 +26,8 @@ export const OnboardingLegalStructure = (): ReactElement => {
 
   return (
     <form onSubmit={onSubmit} className="usa-prose">
-      <h3>Legal Structure</h3>
-      <p>Which legal structure can best describe your company?</p>
+      <h3>{state.displayContent.legalStructure.title}</h3>
+      <p>{state.displayContent.legalStructure.description}</p>
       <div className="form-input">
         <FormControl variant="outlined" className={classes.formControl}>
           <Select

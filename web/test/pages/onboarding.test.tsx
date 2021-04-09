@@ -5,7 +5,12 @@ import React from "react";
 import * as useUserModule from "../../lib/data/useUserData";
 import { generateOnboardingData, generateUserData } from "../factories";
 import { createStatefulMock, generateUseUserDataResponse } from "../helpers";
-import { Industry, LegalStructure, OnboardingData } from "../../lib/types/types";
+import {
+  createEmptyOnboardingDisplayContent,
+  Industry,
+  LegalStructure,
+  OnboardingData,
+} from "../../lib/types/types";
 
 jest.mock("next/router");
 
@@ -35,7 +40,7 @@ describe("onboarding form", () => {
       }),
     });
     mockUseUserData.mockImplementation(createStatefulMock(userData));
-    subject = render(<Onboarding />);
+    subject = render(<Onboarding displayContent={createEmptyOnboardingDisplayContent()} />);
 
     expect(getFormValues().businessName).toEqual("Applebees");
     clickNext();
@@ -53,7 +58,7 @@ describe("onboarding form", () => {
         update: mockUpdate,
       })
     );
-    subject = render(<Onboarding />);
+    subject = render(<Onboarding displayContent={createEmptyOnboardingDisplayContent()} />);
 
     fillText("Business name", "Cool Computers");
     clickNext();
@@ -97,7 +102,7 @@ describe("onboarding form", () => {
 
   it("is able to go back", () => {
     mockUseUserData.mockImplementation(createStatefulMock());
-    subject = render(<Onboarding />);
+    subject = render(<Onboarding displayContent={createEmptyOnboardingDisplayContent()} />);
 
     fillText("Business name", "Cool Computers");
     clickNext();

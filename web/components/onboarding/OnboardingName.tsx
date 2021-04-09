@@ -15,21 +15,11 @@ export const OnboardingBusinessName = (): ReactElement => {
 
   return (
     <div className="usa-prose">
-      <h3>Hi there! Let’s get your business started.</h3>
-      <p className="usa-intro">
-        So you're considering opening up a business, how exciting! We're thrilled to be here and make this
-        process as seamless as possible. Please fill out the following questions so we can provide you with
-        your unique business registration roadmap. This roadmap will guide you through the business
-        registration process. At the end of this process you should have registered your business with the
-        state, obtained an EIN with the federal government and applied for potential municipal and state
-        licenses.
-      </p>
+      <h3>{state.displayContent.welcome.header}</h3>
+      <p className="usa-intro">{state.displayContent.welcome.subheader}</p>
       <form onSubmit={onSubmit} className="usa-prose">
-        <h3>Business Name</h3>
-        <p>
-          Have you thought of a name for your business? If you had a name in mind, first we'll need to check
-          if that name is available.
-        </p>
+        <h3>{state.displayContent.businessName.title}</h3>
+        <p>{state.displayContent.businessName.description}</p>
         <div className="form-input">
           <TextField
             value={state.onboardingData.businessName}
@@ -37,6 +27,7 @@ export const OnboardingBusinessName = (): ReactElement => {
             variant="outlined"
             size="small"
             fullWidth
+            placeholder={state.displayContent.businessName.placeholder}
             inputProps={{
               "aria-label": "Business name",
             }}

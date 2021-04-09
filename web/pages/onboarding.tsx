@@ -2,7 +2,12 @@ import React, { FormEvent, ReactElement, useEffect, useState } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { useRouter } from "next/router";
 import { useUserData } from "../lib/data/useUserData";
-import { createEmptyOnboardingData, OnboardingData } from "../lib/types/types";
+import {
+  createEmptyOnboardingData,
+  createEmptyOnboardingDisplayContent,
+  OnboardingData,
+  OnboardingDisplayContent,
+} from "../lib/types/types";
 import { useMediaQuery } from "@material-ui/core";
 import { MediaQueries } from "../lib/PageSizes";
 import SwipeableViews from "react-swipeable-views";
@@ -11,10 +16,17 @@ import { MobilePageTitle } from "../components/njwds/MobilePageTitle";
 import { OnboardingBusinessName } from "../components/onboarding/OnboardingName";
 import { OnboardingIndustry } from "../components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "../components/onboarding/OnboardingLegalStructure";
+import { GetStaticPropsResult } from "next";
+import { getOnboardingDisplayContent } from "../lib/static/loadOnboardingDisplayContent";
+
+interface Props {
+  displayContent: OnboardingDisplayContent;
+}
 
 interface OnboardingState {
   page: number;
   onboardingData: OnboardingData;
+  displayContent: OnboardingDisplayContent;
 }
 
 interface OnboardingContextType {
@@ -28,13 +40,14 @@ export const OnboardingContext = React.createContext<OnboardingContextType>({
   state: {
     page: 1,
     onboardingData: createEmptyOnboardingData(),
+    displayContent: createEmptyOnboardingDisplayContent(),
   },
   setOnboardingData: () => {},
   onBack: () => {},
   onSubmit: () => {},
 });
 
-const Onboarding = (): ReactElement => {
+const Onboarding = (props: Props): ReactElement => {
   const PAGES = 3;
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
@@ -88,7 +101,12 @@ const Onboarding = (): ReactElement => {
 
   return (
     <OnboardingContext.Provider
-      value={{ state: { page, onboardingData }, setOnboardingData, onBack, onSubmit }}
+      value={{
+        state: { page, onboardingData, displayContent: props.displayContent },
+        setOnboardingData,
+        onBack,
+        onSubmit,
+      }}
     >
       <PageSkeleton>
         <MobilePageTitle>{header()}</MobilePageTitle>
@@ -111,6 +129,14 @@ const Onboarding = (): ReactElement => {
       </PageSkeleton>
     </OnboardingContext.Provider>
   );
+};
+
+export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+  return {
+    props: {
+      displayContent: getOnboardingDisplayContent(),
+    },
+  };
 };
 
 export default Onboarding;

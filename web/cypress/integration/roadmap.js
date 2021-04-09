@@ -86,5 +86,5 @@ describe("Roadmap", () => {
 
 const clickNext = () => {
   cy.contains("Next").click({ force: true });
-  cy.wait(200);
+  cy.wait(500);
 };
