@@ -37,7 +37,7 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no business name present", async () => {
-      useMockOnboardingData({ businessName: "" });
+      useMockOnboardingData({ businessName: "", industry: "restaurant", legalStructure: "b-corporation" });
       const subject = render(<RoadmapPage />);
       expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
       expect(subject.getByText("Not set")).toBeInTheDocument();
@@ -50,7 +50,7 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no industry present", async () => {
-      useMockOnboardingData({ industry: "generic" });
+      useMockOnboardingData({ industry: "generic", legalStructure: "b-corporation" });
       const subject = render(<RoadmapPage />);
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });

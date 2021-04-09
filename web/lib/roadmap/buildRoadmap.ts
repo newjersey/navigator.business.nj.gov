@@ -71,7 +71,7 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
   }
 
   if (step5hasNoTasks(roadmapBuilder)) {
-    roadmapBuilder.steps = roadmapBuilder.steps.filter((step) => step.id !== "inspection-requirements");
+    removeStep5(roadmapBuilder);
   }
 
   let roadmap: Roadmap = {
@@ -102,6 +102,11 @@ const step5hasNoTasks = (roadmap: RoadmapBuilder): boolean => {
     return false;
   }
   return step5.tasks.length === 0;
+};
+
+const removeStep5 = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {
+  roadmapBuilder.steps = roadmapBuilder.steps.filter((step) => step.id !== "inspection-requirements");
+  return roadmapBuilder;
 };
 
 const addTasksFromAddOn = (roadmap: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
