@@ -14,29 +14,25 @@ export const OnboardingBusinessName = (): ReactElement => {
   };
 
   return (
-    <div className="usa-prose">
-      <h3>{state.displayContent.welcome.header}</h3>
-      <p className="usa-intro">{state.displayContent.welcome.subheader}</p>
-      <form onSubmit={onSubmit} className="usa-prose">
-        <h3>{state.displayContent.businessName.title}</h3>
-        <p>{state.displayContent.businessName.description}</p>
-        <div className="form-input">
-          <TextField
-            value={state.onboardingData.businessName}
-            onChange={handleBusinessName}
-            variant="outlined"
-            size="small"
-            fullWidth
-            placeholder={state.displayContent.businessName.placeholder}
-            inputProps={{
-              "aria-label": "Business name",
-            }}
-          />
-        </div>
+    <form onSubmit={onSubmit} className="usa-prose">
+      <h3>{state.displayContent.businessName.title}</h3>
+      <p>{state.displayContent.businessName.description}</p>
+      <div className="form-input">
+        <TextField
+          value={state.onboardingData.businessName}
+          onChange={handleBusinessName}
+          variant="outlined"
+          size="small"
+          fullWidth
+          placeholder={state.displayContent.businessName.placeholder}
+          inputProps={{
+            "aria-label": "Business name",
+          }}
+        />
+      </div>
 
-        <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
-        <OnboardingButtonGroup />
-      </form>
-    </div>
+      <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
+      <OnboardingButtonGroup />
+    </form>
   );
 };

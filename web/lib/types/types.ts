@@ -32,15 +32,9 @@ export interface OnboardingData {
 }
 
 export type OnboardingDisplayContent = {
-  welcome: WelcomeDisplayContent;
   businessName: FieldDisplayContent;
   industry: FieldDisplayContent;
   legalStructure: FieldDisplayContent;
-};
-
-export type WelcomeDisplayContent = {
-  header: string;
-  subheader: string;
 };
 
 export type FieldDisplayContent = {
@@ -51,10 +45,6 @@ export type FieldDisplayContent = {
 
 export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
   return {
-    welcome: {
-      header: "",
-      subheader: "",
-    },
     businessName: {
       title: "",
       description: "",

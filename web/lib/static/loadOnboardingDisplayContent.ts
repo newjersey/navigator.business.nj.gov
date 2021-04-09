@@ -1,13 +1,10 @@
 import fs from "fs";
 import path from "path";
-import { FieldDisplayContent, OnboardingDisplayContent, WelcomeDisplayContent } from "../types/types";
+import { FieldDisplayContent, OnboardingDisplayContent } from "../types/types";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
 
 export const getOnboardingDisplayContent = (): OnboardingDisplayContent => {
-  const welcomePath = path.join(displayContentDir, "onboarding", "welcome.json");
-  const welcome = JSON.parse(fs.readFileSync(welcomePath, "utf8")) as WelcomeDisplayContent;
-
   const businessNamePath = path.join(displayContentDir, "onboarding", "business-name.json");
   const businessName = JSON.parse(fs.readFileSync(businessNamePath, "utf8")) as FieldDisplayContent;
 
@@ -18,7 +15,6 @@ export const getOnboardingDisplayContent = (): OnboardingDisplayContent => {
   const legalStructure = JSON.parse(fs.readFileSync(legalStructurePath, "utf8")) as FieldDisplayContent;
 
   return {
-    welcome,
     businessName,
     industry,
     legalStructure,
