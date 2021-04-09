@@ -95,10 +95,6 @@ const Onboarding = (props: Props): ReactElement => {
     </>
   );
 
-  if (!userData) {
-    return <></>;
-  }
-
   return (
     <OnboardingContext.Provider
       value={{
