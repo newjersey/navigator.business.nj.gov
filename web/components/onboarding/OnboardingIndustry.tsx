@@ -1,6 +1,5 @@
 import React, { ReactElement, useContext } from "react";
 import { createStyles, FormControl, makeStyles, MenuItem, Select } from "@material-ui/core";
-import { OnboardingButtonGroup } from "./OnboardingButtonGroup";
 import { OnboardingContext } from "../../pages/onboarding";
 import { Industry } from "../../lib/types/types";
 import { IndustryLookup } from "../../display-content/IndustryLookup";
@@ -15,7 +14,7 @@ const useStyles = makeStyles(() =>
 
 export const OnboardingIndustry = (): ReactElement => {
   const classes = useStyles();
-  const { state, setOnboardingData, onSubmit } = useContext(OnboardingContext);
+  const { state, setOnboardingData } = useContext(OnboardingContext);
 
   const handleIndustry = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     let industry: Industry = "generic";
@@ -29,7 +28,7 @@ export const OnboardingIndustry = (): ReactElement => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="usa-prose">
+    <>
       <h3>{state.displayContent.industry.title}</h3>
       <p>{state.displayContent.industry.description}</p>
       <div className="form-input">
@@ -51,8 +50,6 @@ export const OnboardingIndustry = (): ReactElement => {
           </Select>
         </FormControl>
       </div>
-      <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
-      <OnboardingButtonGroup />
-    </form>
+    </>
   );
 };

@@ -61,7 +61,7 @@ describe("Roadmap", () => {
     cy.contains("← Back to Roadmap").click();
 
     // editing data
-    cy.contains("Edit").click();
+    clickEdit();
 
     cy.get('input[aria-label="Business name"]').clear();
     cy.get('input[aria-label="Business name"]').type("Applebee's");
@@ -86,5 +86,10 @@ describe("Roadmap", () => {
 
 const clickNext = () => {
   cy.contains("Next").click({ force: true });
+  cy.wait(500);
+};
+
+const clickEdit = () => {
+  cy.contains("Edit").click();
   cy.wait(500);
 };

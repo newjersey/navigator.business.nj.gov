@@ -1,6 +1,5 @@
 import React, { ReactElement, useContext } from "react";
 import { createStyles, FormControl, makeStyles, MenuItem, Select } from "@material-ui/core";
-import { OnboardingButtonGroup } from "./OnboardingButtonGroup";
 import { OnboardingContext } from "../../pages/onboarding";
 import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../../lib/types/types";
 import { LegalStructureLookup } from "../../display-content/LegalStructureLookup";
@@ -15,7 +14,7 @@ const useStyles = makeStyles(() =>
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const classes = useStyles();
-  const { state, setOnboardingData, onSubmit } = useContext(OnboardingContext);
+  const { state, setOnboardingData } = useContext(OnboardingContext);
 
   const handleLegalStructure = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     setOnboardingData({
@@ -25,7 +24,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="usa-prose">
+    <>
       <h3>{state.displayContent.legalStructure.title}</h3>
       <p>{state.displayContent.legalStructure.description}</p>
       <div className="form-input">
@@ -48,8 +47,6 @@ export const OnboardingLegalStructure = (): ReactElement => {
           </Select>
         </FormControl>
       </div>
-      <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
-      <OnboardingButtonGroup />
-    </form>
+    </>
   );
 };

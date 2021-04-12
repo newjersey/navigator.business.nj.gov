@@ -1,4 +1,4 @@
-import React, { FormEvent, ReactElement, useEffect, useState } from "react";
+import React, { FormEvent, ReactElement, ReactNode, useEffect, useState } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { useRouter } from "next/router";
 import { useUserData } from "../lib/data/useUserData";
@@ -18,6 +18,7 @@ import { OnboardingIndustry } from "../components/onboarding/OnboardingIndustry"
 import { OnboardingLegalStructure } from "../components/onboarding/OnboardingLegalStructure";
 import { GetStaticPropsResult } from "next";
 import { getOnboardingDisplayContent } from "../lib/static/loadOnboardingDisplayContent";
+import { OnboardingButtonGroup } from "../components/onboarding/OnboardingButtonGroup";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -33,7 +34,6 @@ interface OnboardingContextType {
   state: OnboardingState;
   setOnboardingData: (onboardingData: OnboardingData) => void;
   onBack: () => void;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 export const OnboardingContext = React.createContext<OnboardingContextType>({
@@ -44,7 +44,6 @@ export const OnboardingContext = React.createContext<OnboardingContextType>({
   },
   setOnboardingData: () => {},
   onBack: () => {},
-  onSubmit: () => {},
 });
 
 const Onboarding = (props: Props): ReactElement => {
@@ -61,22 +60,22 @@ const Onboarding = (props: Props): ReactElement => {
     }
   }, [userData]);
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
     if (page + 1 <= PAGES) {
-      update({
+      await update({
         ...userData,
         onboardingData,
       });
       setPage(page + 1);
     } else {
-      update({
+      await update({
         ...userData,
         onboardingData,
         formProgress: "COMPLETED",
       });
-      router.push("/roadmap");
+      await router.push("/roadmap");
     }
   };
 
@@ -95,13 +94,22 @@ const Onboarding = (props: Props): ReactElement => {
     </>
   );
 
+  const asOnboardingPage = (page: ReactNode) => (
+    <SingleColumnContainer>
+      <form onSubmit={onSubmit} className="usa-prose">
+        {page}
+        <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
+        <OnboardingButtonGroup />
+      </form>
+    </SingleColumnContainer>
+  );
+
   return (
     <OnboardingContext.Provider
       value={{
         state: { page, onboardingData, displayContent: props.displayContent },
         setOnboardingData,
         onBack,
-        onSubmit,
       }}
     >
       <PageSkeleton>
@@ -111,15 +119,9 @@ const Onboarding = (props: Props): ReactElement => {
             {isLargeScreen && <h2 className="padding-bottom-4">{header()}</h2>}
           </SingleColumnContainer>
           <SwipeableViews index={page - 1} disabled={true}>
-            <SingleColumnContainer>
-              <OnboardingBusinessName />
-            </SingleColumnContainer>
-            <SingleColumnContainer>
-              <OnboardingIndustry />
-            </SingleColumnContainer>
-            <SingleColumnContainer>
-              <OnboardingLegalStructure />
-            </SingleColumnContainer>
+            {asOnboardingPage(<OnboardingBusinessName />)}
+            {asOnboardingPage(<OnboardingIndustry />)}
+            {asOnboardingPage(<OnboardingLegalStructure />)}
           </SwipeableViews>
         </main>
       </PageSkeleton>
