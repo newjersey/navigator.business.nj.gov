@@ -2,10 +2,9 @@
   "id": "register-for-ein",
   "name": "Register for an EIN",
   "description": "An Employer Identification Number is essentially your Social Security Number for your business. If you plan on having employees you will need an EIN number, however we recommend that most businesses obtain an EIN, so that you don't need to use your personal personal SSN on tax filings and other business registrations.",
-  "destination": {
-    "name": "",
-    "link": "https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online"
-  },
+  "destinationText": "",
+  "callToActionLink": "https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online",
+  "callToActionText": "",
   "to_complete_must_have": ["Available Names"],
   "after_completing_will_have": ["EIN", "EIN Certificate"]
 }

@@ -2,10 +2,9 @@
   "id": "alternate-name",
   "name": "Register Your Alternate Name",
   "description": "Since you want to create a name different from your legal name, you'll need to register an Alternate Name with the division of Revenue.",
-  "destination": {
-    "name": "",
-    "link": "https://www.nj.gov/treasury/revenue/altname.shtml"
-  },
+  "destinationText": "",
+  "callToActionLink": "https://www.nj.gov/treasury/revenue/altname.shtml",
+  "callToActionText": "",
   "to_complete_must_have": ["Entity ID", "Desired Alternate Name"],
   "after_completing_will_have": ["Alternate Name"]
 }

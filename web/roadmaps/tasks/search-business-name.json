@@ -2,10 +2,9 @@
   "id": "search-business-name",
   "name": "Search for Available Business Names",
   "description": "Before registering your business at the Federal & State level, confirm that both your desired legal name and (if different) consumer facing name are available in New Jersey. ",
-  "destination": {
-    "name": "",
-    "link": "https://www.njportal.com/DOR/BusinessNameSearch/Search/BusinessName"
-  },
+  "destinationText": "",
+  "callToActionLink": "https://www.njportal.com/DOR/BusinessNameSearch/Search/BusinessName",
+  "callToActionText": "",
   "to_complete_must_have": ["Desired Names"],
   "after_completing_will_have": []
 }

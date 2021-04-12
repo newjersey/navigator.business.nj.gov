@@ -45,10 +45,9 @@ describe("task page", () => {
     const task = generateTask({
       name: "complete a tax form",
       description: "fill out your tax form",
-      destination: {
-        name: "city clerk",
-        link: "www.example.com",
-      },
+      destinationText: "city clerk",
+      callToActionLink: "www.example.com",
+      callToActionText: "Submit The Form Here",
       to_complete_must_have: ["tax number", "patience"],
       after_completing_will_have: ["paid your taxes", "sense of satisfaction"],
     });
@@ -61,29 +60,34 @@ describe("task page", () => {
     expect(subject.getByText("paid your taxes")).toBeInTheDocument();
     expect(subject.getByText("sense of satisfaction")).toBeInTheDocument();
     expect(subject.getByText("city clerk")).toBeInTheDocument();
-    expect(subject.getByText("Start Application")).toBeInTheDocument();
+    expect(subject.getByText("Submit The Form Here")).toBeInTheDocument();
 
     expect(subject.queryByText("Back to Roadmap", { exact: false })).toBeInTheDocument();
   });
 
   it("does not show button if no link available", () => {
     const task = generateTask({
-      destination: {
-        name: "city clerk",
-        link: "",
-      },
+      callToActionText: "Submit it Here",
+      callToActionLink: "",
     });
 
     subject = render(<TaskPage task={task} />);
-    expect(subject.queryByText("Start Application")).not.toBeInTheDocument();
+    expect(subject.queryByText("Submit it Here")).not.toBeInTheDocument();
+  });
+
+  it("shows default text if call to action has link but no text", () => {
+    const task = generateTask({
+      callToActionText: "",
+      callToActionLink: "www.example.com",
+    });
+
+    subject = render(<TaskPage task={task} />);
+    expect(subject.getByText("Start Application")).toBeInTheDocument();
   });
 
   it("does not show destination if no destination name available", () => {
     const task = generateTask({
-      destination: {
-        name: "",
-        link: "whatever",
-      },
+      destinationText: "",
     });
 
     subject = render(<TaskPage task={task} />);

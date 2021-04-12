@@ -2,10 +2,9 @@
   "id": "register-for-taxes",
   "name": "Register for Tax Purposes with DORES",
   "description": "It's time to register your business for State Taxes. Doing so will tell the state more about your business and determine what taxes your liable for.",
-  "destination": {
-    "name": "",
-    "link": "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml"
-  },
+  "destinationText": "",
+  "callToActionLink": "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml",
+  "callToActionText": "",
   "to_complete_must_have": [
     "Entity ID",
     "NAICS code",

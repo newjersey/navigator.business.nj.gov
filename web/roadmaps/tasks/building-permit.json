@@ -2,10 +2,9 @@
   "id": "building-permit",
   "name": "Obtain Building Permit",
   "description": "To do any construction and most renovations, you'll need to file for a building permit with your local construction office.",
-  "destination": {
-    "name": "Form Available from DCA, submitted to Local Construction Office",
-    "link": ""
-  },
+  "destinationText": "Form Available from DCA, submitted to Local Construction Office",
+  "callToActionLink": "",
+  "callToActionText": "",
   "to_complete_must_have": ["Business name", "Architectural Plans (if applicable)"],
   "after_completing_will_have": ["Building Permit"]
 }

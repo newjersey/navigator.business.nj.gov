@@ -2,10 +2,9 @@
   "id": "search-licenses",
   "name": "Search Licenses",
   "description": "E-Commerce businesses generally do not require a specific state license unless you are selling a regulated product or service. You can search fo licenses here:",
-  "destination": {
-    "name": "",
-    "link": "https://business.nj.gov/licensing-and-certification-guide"
-  },
+  "destinationText": "",
+  "callToActionLink": "https://business.nj.gov/licensing-and-certification-guide",
+  "callToActionText": "",
   "to_complete_must_have": [],
   "after_completing_will_have": []
 }

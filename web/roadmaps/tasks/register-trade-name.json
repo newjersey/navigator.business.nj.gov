@@ -2,10 +2,9 @@
   "id": "register-trade-name",
   "name": "Register a Trade Name",
   "description": "If a General Partnership or Proprietorship would like to use a consumer facing business name, other than a personal name, they can register a trade name with their county clerk.",
-  "destination": {
-    "name": "County Clerk",
-    "link": ""
-  },
+  "destinationText": "County Clerk",
+  "callToActionLink": "",
+  "callToActionText": "",
   "to_complete_must_have": ["Desired Business Name"],
   "after_completing_will_have": ["Trade Name"]
 }

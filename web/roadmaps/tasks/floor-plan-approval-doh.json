@@ -2,10 +2,9 @@
   "id": "floor-plan-approval-doh",
   "name": "Get your floor plan approved by your local DOH",
   "description": "Get your floor plan and kitchen approved by your local DOH. Afterwards you will need to schedule periodic follow-ups.",
-  "destination": {
-    "name": "Local Department of Health",
-    "link": ""
-  },
+  "destinationText": "Local Department of Health",
+  "callToActionLink": "",
+  "callToActionText": "",
   "to_complete_must_have": ["Business name", "Floor plans"],
   "after_completing_will_have": []
 }

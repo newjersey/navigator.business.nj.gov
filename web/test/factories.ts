@@ -2,7 +2,6 @@ import {
   ALL_INDUSTRIES,
   ALL_LEGAL_STRUCTURES,
   BusinessUser,
-  Destination,
   Industry,
   LegalStructure,
   OnboardingData,
@@ -67,17 +66,11 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     id: "some-id-" + randomInt(),
     name: "some-name-" + randomInt(),
     description: "some-description-" + randomInt(),
-    destination: generateDestination({}),
+    destinationText: "some-destination-" + randomInt(),
+    callToActionLink: "some-link-" + randomInt(),
+    callToActionText: "some-call-to-action-" + randomInt(),
     to_complete_must_have: ["some-to-complete-" + randomInt()],
-    after_completing_will_have: ["some-after-comleting-" + randomInt()],
-    ...overrides,
-  };
-};
-
-export const generateDestination = (overrides: Partial<Destination>): Destination => {
-  return {
-    name: "some-name-" + randomInt(),
-    link: "some-link-" + randomInt(),
+    after_completing_will_have: ["some-after-completing-" + randomInt()],
     ...overrides,
   };
 };

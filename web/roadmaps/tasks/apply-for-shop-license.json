@@ -2,10 +2,9 @@
   "id": "apply-for-shop-license",
   "name": "Apply for a Shop License",
   "description": "The State Board of Cosmetology and Hairstyling requires that new shops, relocated shops, or shops that have transferred ownership obtain a license with the Department of Consumer Affairs.",
-  "destination": {
-    "name": "",
-    "link": "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
-  },
+  "destinationText": "",
+  "callToActionLink": "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx",
+  "callToActionText": "",
   "to_complete_must_have": [
     "Legal Structure",
     "Business Address",

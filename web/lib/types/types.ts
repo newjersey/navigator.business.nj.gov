@@ -119,14 +119,11 @@ export interface Task {
   id: string;
   name: string;
   description: string;
-  destination: Destination;
+  destinationText: string;
+  callToActionLink: string;
+  callToActionText: string;
   to_complete_must_have: string[];
   after_completing_will_have: string[];
-}
-
-export interface Destination {
-  name: string;
-  link: string;
 }
 
 export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";

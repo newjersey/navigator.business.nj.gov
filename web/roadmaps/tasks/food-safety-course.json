@@ -2,10 +2,9 @@
   "id": "food-safety-course",
   "name": "Complete Food Safety Course",
   "description": "While not all restaurants are required to do so, many restaurants serving raw food and other delicate items must complete a Food Safety training.",
-  "destination": {
-    "name": "",
-    "link": ""
-  },
+  "destinationText": "",
+  "callToActionLink": "",
+  "callToActionText": "",
   "to_complete_must_have": [],
   "after_completing_will_have": ["Certficate of Completion"]
 }

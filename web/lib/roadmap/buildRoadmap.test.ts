@@ -9,13 +9,12 @@ describe("buildRoadmap", () => {
     return roadmap.steps.find((it) => it.id === id)!.tasks.map((it) => it.id);
   };
 
-  // it("loads a generic roadmap when no data present", async () => {
-  //   const onboardingData = generateFormData({
-  //     businessType: { businessType: undefined },
-  //     businessStructure: { businessStructure: undefined },
-  //   });
-  //   expect(await buildRoadmap(onboardingData)).toEqual(genericRoadmap);
-  // });
+  it("loads a generic roadmap when no industry data present", async () => {
+    const onboardingData = generateOnboardingData({
+      industry: "generic",
+    });
+    expect((await buildRoadmap(onboardingData)).type).toEqual("generic");
+  });
 
   it("orders tasks by weight", async () => {
     const onboardingData = generateOnboardingData({ industry: "home-contractor" });

@@ -2,10 +2,9 @@
   "id": "board-inspection",
   "name": "Board Inspection",
   "description": "To complete your requirements as a cosmetology business, an inspector from the Division's Enforcement Bureau will visit the shop location to determine compliance with cosmetology shop regulations. This visit will be scheduled after you complete your shop's application license.",
-  "destination": {
-    "name": "",
-    "link": "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
-  },
+  "destinationText": "",
+  "callToActionLink": "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf",
+  "callToActionText": "",
   "to_complete_must_have": ["The board will contact shop to schedule the inspection date and time."],
   "after_completing_will_have": ["Satisfactory shop inspection."]
 }

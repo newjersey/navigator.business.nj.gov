@@ -84,16 +84,18 @@ const TaskPage = (props: Props): ReactElement => {
           </>
         )}
 
-        {props.task.destination.name && (
+        {props.task.destinationText && (
           <div className="padding-2 border-base-lighter border-1px font-body-2xs">
-            Destination: <strong>{props.task.destination.name}</strong>
+            Destination: <strong>{props.task.destinationText}</strong>
           </div>
         )}
 
-        {props.task.destination.link && (
+        {props.task.callToActionLink && (
           <div className="fdr">
-            <Link href={props.task.destination.link}>
-              <button className="usa-button mla margin-top-4 margin-bottom-8">Start Application</button>
+            <Link href={props.task.callToActionLink}>
+              <button className="usa-button mla margin-top-4 margin-bottom-8">
+                {props.task.callToActionText || "Start Application"}
+              </button>
             </Link>
           </div>
         )}
