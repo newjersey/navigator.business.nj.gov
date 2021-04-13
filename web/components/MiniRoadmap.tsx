@@ -56,6 +56,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                   className={`margin-0 font-body-xs line-height-body-2 text-ink ${
                     step.id === activeStepId ? "text-primary-dark" : "weight-unset"
                   }`}
+                  data-step={step.id}
                 >
                   {step.name}
                 </h2>

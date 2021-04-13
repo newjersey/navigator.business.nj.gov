@@ -10,7 +10,7 @@ describe("Roadmap", () => {
   });
 
   it("enters user info and shows the roadmap", () => {
-    cy.contains("Get Started").click();
+    cy.get("[data-get-started]").click();
 
     cy.get('input[aria-label="Business name"]').type("Beesapple's");
     clickNext();
@@ -24,41 +24,37 @@ describe("Roadmap", () => {
     clickNext();
 
     // check roadmap
-    cy.contains("Business Roadmap for Beesapple's").should("exist");
-
-    // check roadmap
-    cy.contains("Business Name: Beesapple's").should("exist");
-    cy.contains("Industry: E-Commerce").should("exist");
-    cy.contains("Legal Entity: General Partnership").should("exist");
+    cy.get('[data-business-name="Beesapple\'s"]').should("exist");
+    cy.get('[data-industry="e-commerce"]').should("exist");
+    cy.get('[data-legal-structure="general-partnership"]').should("exist");
 
     // step 1
-    cy.contains("Create a Business Plan").should("exist");
-    cy.contains("Executive Summary").should("exist");
+    cy.get('[data-step="create-business-plan"]').should("exist");
+    cy.get('[data-task="executive-summary"]').should("exist");
 
     // step 2
-    cy.contains("Due Diligence").should("exist");
-    cy.contains("Research Potential Insurance Needs").should("exist");
+    cy.get('[data-step="due-diligence"]').should("exist");
+    cy.get('[data-task="research-insurance-needs"]').should("exist");
 
     // step 3 - GP
-    cy.contains("Form & Register Your Business").should("exist");
-    cy.contains("Register a Trade Name").should("exist");
-    cy.contains("Register for an EIN").should("exist");
-    cy.contains("Register for Tax Purposes with DORES").should("exist");
+    cy.get('[data-step="register-business"]').should("exist");
+    cy.get('[data-task="register-trade-name"]').should("exist");
 
     // step 4
-    cy.contains("Sign Your Lease and File Licenses & Local Permits").should("exist");
+    cy.get('[data-step="lease-and-permits"]').should("exist");
 
     // tasks screen
-    cy.contains("Register a Trade Name").click();
-    cy.contains("Business Roadmap for Beesapple's").should("not.exist");
-    cy.contains("Destination: County Clerk").should("exist");
+    cy.get('[data-task="register-trade-name"]').click();
+    cy.get('[data-business-name="Beesapple\'s"]').should("not.exist");
+    cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
-    cy.contains("Due Diligence").click();
-    cy.contains("Research Potential Insurance Needs").click();
-    cy.contains("You may consider obtaining insurance for your business").should("exist");
+    cy.get('[data-step="due-diligence"]').click();
+    cy.get('[data-task="research-insurance-needs"]').click();
 
-    cy.contains("← Back to Roadmap").click();
+    cy.get('[data-task-id="register-trade-name"]').should("not.exist");
+    cy.get('[data-task-id="research-insurance-needs"]').should("exist");
+    cy.get("[data-back-to-roadmap]").click();
 
     // editing data
     clickEdit();
@@ -73,23 +69,21 @@ describe("Roadmap", () => {
     clickNext();
 
     // check roadmap
-    cy.contains("Business Roadmap for Applebee's").should("exist");
-    cy.contains("Business Name: Applebee's").should("exist");
-    cy.contains("Industry: Restaurant").should("exist");
-    cy.contains("Legal Entity: General Partnership").should("exist");
+    cy.get('[data-business-name="Applebee\'s"]').should("exist");
+    cy.get('[data-industry="restaurant"]').should("exist");
+    cy.get('[data-legal-structure="general-partnership"]').should("exist");
 
-    // step 1
-    cy.contains("Check and Plan Local Site Requirements").should("exist");
-    cy.contains("Identify a potential lease").should("exist");
+    cy.get('[data-task="check-site-requirements"]').should("exist");
+    cy.get('[data-task="food-safety-course"]').should("exist");
   });
 });
 
 const clickNext = () => {
-  cy.contains("Next").click({ force: true });
+  cy.get("[data-next]:visible").click({ force: true });
   cy.wait(500);
 };
 
 const clickEdit = () => {
-  cy.contains("Edit").click();
+  cy.get("[data-grey-callout-link]").click();
   cy.wait(500);
 };

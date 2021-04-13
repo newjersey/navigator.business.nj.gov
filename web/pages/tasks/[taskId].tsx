@@ -21,7 +21,9 @@ const TaskPage = (props: Props): ReactElement => {
 
   const backButton = (
     <Link href="/roadmap" passHref>
-      <a href="/roadmap">← Back to Roadmap</a>
+      <a href="/roadmap" data-back-to-roadmap>
+        ← Back to Roadmap
+      </a>
     </Link>
   );
 
@@ -50,7 +52,9 @@ const TaskPage = (props: Props): ReactElement => {
         <div className="grid-container padding-0">
           <div className="grid-row grid-gap">
             <div className="tablet:grid-col-9">
-              <h2 className="margin-top-0">{props.task.name}</h2>
+              <h2 className="margin-top-0" data-task-id={props.task.id}>
+                {props.task.name}
+              </h2>
             </div>
             <div className="tablet:grid-col-3">
               <TaskProgressDropdown

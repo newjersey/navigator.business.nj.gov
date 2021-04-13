@@ -52,14 +52,14 @@ const RoadmapPage = (): ReactElement => {
         <div>
           <GreyCallout link={{ text: "Edit", href: "/onboarding" }}>
             <>
-              <div>
+              <div data-business-name={userData?.onboardingData.businessName}>
                 Business Name: <strong>{getBusinessName()}</strong>
               </div>
-              <div>
+              <div data-industry={userData?.onboardingData.industry}>
                 Industry: <strong>{getIndustry()}</strong>
               </div>
-              <div>
-                Legal Entity: <strong>{getLegalStructure()}</strong>
+              <div data-legal-structure={userData?.onboardingData.legalStructure}>
+                Legal Structure: <strong>{getLegalStructure()}</strong>
               </div>
             </>
           </GreyCallout>

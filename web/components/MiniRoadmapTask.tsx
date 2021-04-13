@@ -14,6 +14,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
         className={`usa-button--unstyled width-100 padding-1 cursor-pointer hover:bg-base-lightest line-height-body-2 fdr fac font-body-3xs text-ink ${
           props.active ? "bg-base-lightest bg-chevron text-primary-dark text-bold" : ""
         }`}
+        data-task={props.task.id}
       >
         <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
         {props.task.name}

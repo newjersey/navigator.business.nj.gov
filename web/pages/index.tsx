@@ -47,7 +47,9 @@ const Home = (): ReactElement => {
         <p>Creating an account helps you easily track the progress of your business.</p>
         {state.isAuthenticated && (
           <Link href="/onboarding">
-            <button className="usa-button">Get Started</button>
+            <button className="usa-button" data-get-started={true}>
+              Get Started
+            </button>
           </Link>
         )}
         <AuthButton />

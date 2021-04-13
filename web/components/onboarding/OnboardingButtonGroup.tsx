@@ -20,7 +20,7 @@ export const OnboardingButtonGroup = (): ReactElement => {
           Back
         </div>
       )}
-      <button type="submit" className="usa-button margin-right-0">
+      <button type="submit" className="usa-button margin-right-0" data-next={true}>
         Next
       </button>
     </div>
