@@ -1,6 +1,6 @@
 {
   "id": "register-for-taxes",
-  "name": "Register for Tax Purposes with DORES",
+  "name": "Register for Taxes",
   "description": "It's time to register your business for State Taxes. Doing so will tell the state more about your business and determine what taxes your liable for.",
   "destinationText": "",
   "callToActionLink": "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml",
