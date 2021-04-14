@@ -25,6 +25,12 @@ and backend, and it will globally install serverless and amplify-cli. It will al
 ./scripts/install.sh
 ```
 
+In order for the web frontend tests to pass and for it to be able to run locally, it **needs to have Amplify locally configured** such that the `web/aws-exports.js` file exists. This can be done by running:
+
+```shell
+ampify checkout env dev
+```
+
 ### Run tests
 
 We use jest for unit tests, on both the frontend. Run all tests with:

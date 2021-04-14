@@ -5,6 +5,7 @@
   "scripts": {
     "start": "sls offline start",
     "deploy": "sls deploy",
+    "build": "sls package",
     "test": "jest",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "lint": "eslint --max-warnings 0 '*/**/*.{js,ts}'",

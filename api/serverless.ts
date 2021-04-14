@@ -35,20 +35,24 @@ const serverlessConfiguration: AWS = {
     runtime: "nodejs12.x",
     stage: stage,
     region: region,
-    iamRoleStatements: [
-      {
-        Effect: "Allow",
-        Action: [
-          "dynamodb:Query",
-          "dynamodb:Scan",
-          "dynamodb:GetItem",
-          "dynamodb:PutItem",
-          "dynamodb:UpdateItem",
-          "dynamodb:DeleteItem",
+    iam: {
+      role: {
+        statements: [
+          {
+            Effect: "Allow",
+            Action: [
+              "dynamodb:Query",
+              "dynamodb:Scan",
+              "dynamodb:GetItem",
+              "dynamodb:PutItem",
+              "dynamodb:UpdateItem",
+              "dynamodb:DeleteItem",
+            ],
+            Resource: `arn:aws:dynamodb:${region}:*:table/${usersTable}`,
+          },
         ],
-        Resource: `arn:aws:dynamodb:${region}:*:table/${usersTable}`,
       },
-    ],
+    },
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
