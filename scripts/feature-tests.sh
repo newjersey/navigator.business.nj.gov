@@ -15,6 +15,8 @@ kill $(lsof -i:${LAMBDA_PORT} -t)
 
 set -e
 
+source ./scripts/env.sh
+
 echo "📦 building webapp"
 API_BASE_URL=${API_BASE_URL} npm --prefix=web run build
 
@@ -28,7 +30,6 @@ while ! echo exit | nc localhost ${API_PORT}; do sleep 1; done
 
 echo "🌟 app started"
 
-source ./scripts/env.sh
 CYPRESS_API_BASE_URL=${API_BASE_URL} npm --prefix=web run cypress:run -- --config baseUrl=http://localhost:${WEB_PORT}
 
 set +e

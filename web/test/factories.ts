@@ -4,6 +4,7 @@ import {
   BusinessUser,
   Industry,
   LegalStructure,
+  Municipality,
   OnboardingData,
   Roadmap,
   Step,
@@ -37,6 +38,17 @@ export const generateOnboardingData = (overrides: Partial<OnboardingData>): Onbo
     businessName: "some-business-name-" + randomInt(),
     industry: randomIndustry(),
     legalStructure: randomLegalStructure(),
+    municipality: generateMunicipality({}),
+    ...overrides,
+  };
+};
+
+export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {
+  return {
+    displayName: "some-display-name-" + randomInt(),
+    name: "some-name-" + randomInt(),
+    county: "some-county-" + randomInt(),
+    id: "some-id-" + randomInt(),
     ...overrides,
   };
 };

@@ -38,6 +38,13 @@ const RoadmapPage = (): ReactElement => {
       : "Not set";
   };
 
+  const getMunicipality = (): string => {
+    if (isLoading) return "Loading...";
+    return userData?.onboardingData.municipality
+      ? userData.onboardingData.municipality.displayName
+      : "Not set";
+  };
+
   return (
     <PageSkeleton>
       <SinglePageLayout>
@@ -60,6 +67,9 @@ const RoadmapPage = (): ReactElement => {
               </div>
               <div data-legal-structure={userData?.onboardingData.legalStructure}>
                 Legal Structure: <strong>{getLegalStructure()}</strong>
+              </div>
+              <div data-municipality={userData?.onboardingData.municipality?.name}>
+                Location: <strong>{getMunicipality()}</strong>
               </div>
             </>
           </GreyCallout>

@@ -21,7 +21,6 @@ export const OnboardingBusinessName = (): ReactElement => {
           value={state.onboardingData.businessName}
           onChange={handleBusinessName}
           variant="outlined"
-          size="small"
           fullWidth
           placeholder={state.displayContent.businessName.placeholder}
           inputProps={{

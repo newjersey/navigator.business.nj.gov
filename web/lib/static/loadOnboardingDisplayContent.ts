@@ -14,9 +14,13 @@ export const getOnboardingDisplayContent = (): OnboardingDisplayContent => {
   const legalStructurePath = path.join(displayContentDir, "onboarding", "legal-structure.json");
   const legalStructure = JSON.parse(fs.readFileSync(legalStructurePath, "utf8")) as FieldDisplayContent;
 
+  const municipalityPath = path.join(displayContentDir, "onboarding", "municipality.json");
+  const municipality = JSON.parse(fs.readFileSync(municipalityPath, "utf8")) as FieldDisplayContent;
+
   return {
     businessName,
     industry,
     legalStructure,
+    municipality,
   };
 };

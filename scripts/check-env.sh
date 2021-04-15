@@ -44,3 +44,21 @@ then
       echo ""
       exit 1
 fi
+
+if [ -z "$AIRTABLE_API_KEY" ]
+then
+      echo "----------------------"
+      echo "AIRTABLE_API_KEY not set!!"
+      echo "----------------------"
+      echo ""
+      exit 1
+fi
+
+if [ -z "$AIRTABLE_BASE_ID" ]
+then
+      echo "----------------------"
+      echo "AIRTABLE_BASE_ID not set!!"
+      echo "----------------------"
+      echo ""
+      exit 1
+fi

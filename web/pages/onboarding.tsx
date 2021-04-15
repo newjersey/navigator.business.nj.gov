@@ -5,6 +5,7 @@ import { useUserData } from "../lib/data/useUserData";
 import {
   createEmptyOnboardingData,
   createEmptyOnboardingDisplayContent,
+  Municipality,
   OnboardingData,
   OnboardingDisplayContent,
 } from "../lib/types/types";
@@ -19,15 +20,19 @@ import { OnboardingLegalStructure } from "../components/onboarding/OnboardingLeg
 import { GetStaticPropsResult } from "next";
 import { getOnboardingDisplayContent } from "../lib/static/loadOnboardingDisplayContent";
 import { OnboardingButtonGroup } from "../components/onboarding/OnboardingButtonGroup";
+import { getAllMunicipalities } from "../lib/static/loadMunicipalities";
+import { OnboardingMunicipality } from "../components/onboarding/OnboardingMunicipality";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
+  municipalities: Municipality[];
 }
 
 interface OnboardingState {
   page: number;
   onboardingData: OnboardingData;
   displayContent: OnboardingDisplayContent;
+  municipalities: Municipality[];
 }
 
 interface OnboardingContextType {
@@ -41,13 +46,14 @@ export const OnboardingContext = React.createContext<OnboardingContextType>({
     page: 1,
     onboardingData: createEmptyOnboardingData(),
     displayContent: createEmptyOnboardingDisplayContent(),
+    municipalities: [],
   },
   setOnboardingData: () => {},
   onBack: () => {},
 });
 
 const Onboarding = (props: Props): ReactElement => {
-  const PAGES = 3;
+  const PAGES = 4;
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
   const [onboardingData, setOnboardingData] = useState<OnboardingData>(createEmptyOnboardingData());
@@ -107,7 +113,12 @@ const Onboarding = (props: Props): ReactElement => {
   return (
     <OnboardingContext.Provider
       value={{
-        state: { page, onboardingData, displayContent: props.displayContent },
+        state: {
+          page,
+          onboardingData,
+          displayContent: props.displayContent,
+          municipalities: props.municipalities,
+        },
         setOnboardingData,
         onBack,
       }}
@@ -122,6 +133,7 @@ const Onboarding = (props: Props): ReactElement => {
             {asOnboardingPage(<OnboardingBusinessName />)}
             {asOnboardingPage(<OnboardingIndustry />)}
             {asOnboardingPage(<OnboardingLegalStructure />)}
+            {asOnboardingPage(<OnboardingMunicipality />)}
           </SwipeableViews>
         </main>
       </PageSkeleton>
@@ -130,9 +142,12 @@ const Onboarding = (props: Props): ReactElement => {
 };
 
 export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+  const municipalities = await getAllMunicipalities();
+
   return {
     props: {
       displayContent: getOnboardingDisplayContent(),
+      municipalities,
     },
   };
 };

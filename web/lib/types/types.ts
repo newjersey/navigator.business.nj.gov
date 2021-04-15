@@ -22,6 +22,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     businessName: "",
     industry: "generic",
     legalStructure: undefined,
+    municipality: undefined,
   };
 };
 
@@ -29,18 +30,27 @@ export interface OnboardingData {
   businessName: string;
   industry: Industry;
   legalStructure: LegalStructure | undefined;
+  municipality: Municipality | undefined;
 }
 
 export type OnboardingDisplayContent = {
   businessName: FieldDisplayContent;
   industry: FieldDisplayContent;
   legalStructure: FieldDisplayContent;
+  municipality: FieldDisplayContent;
 };
 
 export type FieldDisplayContent = {
   title: string;
   description: string;
   placeholder?: string;
+};
+
+export type Municipality = {
+  name: string;
+  displayName: string;
+  county: string;
+  id: string;
 };
 
 export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
@@ -54,6 +64,10 @@ export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent 
       description: "",
     },
     legalStructure: {
+      title: "",
+      description: "",
+    },
+    municipality: {
       title: "",
       description: "",
     },

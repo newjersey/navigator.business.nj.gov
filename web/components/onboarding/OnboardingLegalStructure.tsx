@@ -1,19 +1,10 @@
 import React, { ReactElement, useContext } from "react";
-import { createStyles, FormControl, makeStyles, MenuItem, Select } from "@material-ui/core";
+import { FormControl, MenuItem, Select } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
 import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../../lib/types/types";
 import { LegalStructureLookup } from "../../display-content/LegalStructureLookup";
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    formControl: {
-      minWidth: "20rem",
-    },
-  })
-);
-
 export const OnboardingLegalStructure = (): ReactElement => {
-  const classes = useStyles();
   const { state, setOnboardingData } = useContext(OnboardingContext);
 
   const handleLegalStructure = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
@@ -28,7 +19,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
       <h3>{state.displayContent.legalStructure.title}</h3>
       <p>{state.displayContent.legalStructure.description}</p>
       <div className="form-input">
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl variant="outlined" fullWidth>
           <Select
             fullWidth
             value={state.onboardingData.legalStructure || ""}

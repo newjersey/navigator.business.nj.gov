@@ -69,6 +69,8 @@ jobs:
         run: npm --prefix=web run build --if-present && npm --prefix=api run install-dynamo-local
         env:
           API_BASE_URL: http://localhost:5000/dev
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
@@ -143,6 +145,8 @@ jobs:
           amplify_cli_version: "4.41.2"
         env:
           API_BASE_URL: ${{ secrets.API_BASE_URL_AWS_DEV }}
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
@@ -203,6 +207,8 @@ jobs:
           amplify_cli_version: "4.41.2"
         env:
           API_BASE_URL: ${{ secrets.API_BASE_URL_AWS_STAGING }}
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1

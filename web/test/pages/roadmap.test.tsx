@@ -1,5 +1,6 @@
 import { generateUseUserDataResponse } from "../helpers";
 import {
+  generateMunicipality,
   generateOnboardingData,
   generateRoadmap,
   generateStep,
@@ -50,7 +51,11 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no industry present", async () => {
-      useMockOnboardingData({ industry: "generic", legalStructure: "b-corporation" });
+      useMockOnboardingData({
+        industry: "generic",
+        legalStructure: "b-corporation",
+        municipality: generateMunicipality({}),
+      });
       const subject = render(<RoadmapPage />);
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });
@@ -62,7 +67,29 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no business structure present", async () => {
-      useMockOnboardingData({ legalStructure: undefined, industry: "restaurant" });
+      useMockOnboardingData({
+        legalStructure: undefined,
+        industry: "restaurant",
+        municipality: generateMunicipality({}),
+      });
+      const subject = render(<RoadmapPage />);
+      expect(subject.getByText("Not set")).toBeInTheDocument();
+    });
+
+    it("shows the display municipality from onboarding data", () => {
+      useMockOnboardingData({
+        municipality: generateMunicipality({ displayName: "Franklin (Hunterdon County)" }),
+      });
+      const subject = render(<RoadmapPage />);
+      expect(subject.getByText("Franklin (Hunterdon County)")).toBeInTheDocument();
+    });
+
+    it("shows placeholder if no municipality present", async () => {
+      useMockOnboardingData({
+        legalStructure: "b-corporation",
+        industry: "restaurant",
+        municipality: undefined,
+      });
       const subject = render(<RoadmapPage />);
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });

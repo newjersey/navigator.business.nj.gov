@@ -1,4 +1,5 @@
 import { v2LegalStructure, v2UserData } from "./v2_formData_to_onboardingData";
+import { randomInt } from "./migrations";
 
 export interface v3UserData {
   user: v3BusinessUser;
@@ -61,3 +62,21 @@ type v3LegalStructure =
   | "b-corporation";
 
 // ---------------- v3 factories ----------------
+
+export const generateV3OnboardingData = (overrides: Partial<v3OnboardingData>): v3OnboardingData => {
+  return {
+    businessName: "some-business-name-" + randomInt(),
+    industry: "restaurant",
+    legalStructure: "sole-proprietorship",
+    ...overrides,
+  };
+};
+
+export const generateV3User = (overrides: Partial<v3BusinessUser>): v3BusinessUser => {
+  return {
+    name: "some-name-" + randomInt(),
+    email: `some-email-${randomInt()}@example.com`,
+    id: "some-id-" + randomInt(),
+    ...overrides,
+  };
+};

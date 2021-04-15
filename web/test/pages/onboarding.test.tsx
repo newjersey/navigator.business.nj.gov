@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import {
   act,
   fireEvent,
@@ -10,14 +12,9 @@ import Onboarding from "../../pages/onboarding";
 import { useRouter } from "next/router";
 import React from "react";
 import * as useUserModule from "../../lib/data/useUserData";
-import { generateOnboardingData, generateUserData } from "../factories";
+import { generateMunicipality, generateOnboardingData, generateUserData } from "../factories";
 import { generateUseUserDataResponse } from "../helpers";
-import {
-  createEmptyOnboardingDisplayContent,
-  Industry,
-  LegalStructure,
-  OnboardingData,
-} from "../../lib/types/types";
+import { createEmptyOnboardingDisplayContent, Industry, LegalStructure } from "../../lib/types/types";
 
 jest.mock("next/router");
 
@@ -44,6 +41,9 @@ describe("onboarding form", () => {
         businessName: "Applebees",
         industry: "cosmetology",
         legalStructure: "b-corporation",
+        municipality: generateMunicipality({
+          displayName: "Newark",
+        }),
       }),
     });
 
@@ -54,15 +54,20 @@ describe("onboarding form", () => {
       })
     );
 
-    subject = render(<Onboarding displayContent={createEmptyOnboardingDisplayContent()} />);
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
 
-    expect(getFormValues().businessName).toEqual("Applebees");
+    expect(getBusinessNameValue()).toEqual("Applebees");
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 3"));
-    expect(getFormValues().industry).toEqual("cosmetology");
+    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 4"));
+    expect(getIndustryValue()).toEqual("cosmetology");
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 2 of 3"));
-    expect(getFormValues().legalStructure).toEqual("b-corporation");
+    await waitForElementToBeRemoved(() => subject.getByText("Step 2 of 4"));
+    expect(getLegalStructureValue()).toEqual("b-corporation");
+    clickNext();
+    await waitForElementToBeRemoved(() => subject.getByText("Step 3 of 4"));
+    expect(getMunicipalityValue()).toEqual("Newark");
   });
 
   it("updates the user data after each form page", async () => {
@@ -77,11 +82,18 @@ describe("onboarding form", () => {
       })
     );
 
-    subject = render(<Onboarding displayContent={createEmptyOnboardingDisplayContent()} />);
+    const newark = generateMunicipality({ displayName: "Newark" });
+
+    subject = render(
+      <Onboarding
+        displayContent={createEmptyOnboardingDisplayContent()}
+        municipalities={[newark, initialUserData.onboardingData.municipality!]}
+      />
+    );
 
     fillText("Business name", "Cool Computers");
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 3"));
+    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 4"));
     expect(mockUpdate).toHaveBeenLastCalledWith({
       ...initialUserData,
       onboardingData: {
@@ -92,7 +104,7 @@ describe("onboarding form", () => {
 
     select("Industry", "E-Commerce");
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 2 of 3"));
+    await waitForElementToBeRemoved(() => subject.getByText("Step 2 of 4"));
     expect(mockUpdate).toHaveBeenLastCalledWith({
       ...initialUserData,
       onboardingData: {
@@ -104,6 +116,19 @@ describe("onboarding form", () => {
 
     select("Legal structure", "General Partnership");
     clickNext();
+    await waitForElementToBeRemoved(() => subject.getByText("Step 3 of 4"));
+    expect(mockUpdate).toHaveBeenLastCalledWith({
+      ...initialUserData,
+      onboardingData: {
+        ...initialUserData.onboardingData,
+        businessName: "Cool Computers",
+        industry: "e-commerce",
+        legalStructure: "general-partnership",
+      },
+    });
+
+    select("Location", "Newark");
+    clickNext();
     await act(() => promise);
     expect(mockUpdate).toHaveBeenLastCalledWith({
       ...initialUserData,
@@ -113,6 +138,7 @@ describe("onboarding form", () => {
         businessName: "Cool Computers",
         industry: "e-commerce",
         legalStructure: "general-partnership",
+        municipality: newark,
       },
     });
     expect(mockPush).toHaveBeenCalledWith("/roadmap");
@@ -124,11 +150,13 @@ describe("onboarding form", () => {
         update: jest.fn().mockResolvedValue({}),
       })
     );
-    subject = render(<Onboarding displayContent={createEmptyOnboardingDisplayContent()} />);
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
 
     fillText("Business name", "Cool Computers");
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 3"));
+    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 4"));
 
     clickBack();
     expect(subject.queryByLabelText("Business name")).toBeVisible();
@@ -152,16 +180,15 @@ describe("onboarding form", () => {
     fireEvent.click(subject.getAllByText("Back")[0]);
   };
 
-  const getFormValues = (): OnboardingData => {
-    const businessName = (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
-    const industry = (subject.queryByTestId("industry") as HTMLInputElement)?.value as Industry;
-    const legalStructure = (subject.queryByTestId("legal-structure") as HTMLInputElement)
-      ?.value as LegalStructure;
+  const getBusinessNameValue = (): string =>
+    (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
 
-    return {
-      businessName,
-      industry,
-      legalStructure,
-    };
-  };
+  const getIndustryValue = (): Industry =>
+    (subject.queryByTestId("industry") as HTMLInputElement)?.value as Industry;
+
+  const getLegalStructureValue = (): LegalStructure =>
+    (subject.queryByTestId("legal-structure") as HTMLInputElement)?.value as LegalStructure;
+
+  const getMunicipalityValue = (): string =>
+    (subject.queryByTestId("municipality") as HTMLInputElement)?.value;
 });

@@ -23,10 +23,15 @@ describe("Roadmap", () => {
     cy.get('[data-value="general-partnership"]').click();
     clickNext();
 
+    cy.get('[aria-label="Location"]').click();
+    cy.contains("Absecon").click();
+    clickNext();
+
     // check roadmap
     cy.get('[data-business-name="Beesapple\'s"]').should("exist");
     cy.get('[data-industry="e-commerce"]').should("exist");
     cy.get('[data-legal-structure="general-partnership"]').should("exist");
+    cy.get('[data-municipality="Absecon"]').should("exist");
 
     // step 1
     cy.get('[data-step="create-business-plan"]').should("exist");
@@ -67,11 +72,13 @@ describe("Roadmap", () => {
     cy.get('[data-value="restaurant"]').click();
     clickNext();
     clickNext();
+    clickNext();
 
     // check roadmap
     cy.get('[data-business-name="Applebee\'s"]').should("exist");
     cy.get('[data-industry="restaurant"]').should("exist");
     cy.get('[data-legal-structure="general-partnership"]').should("exist");
+    cy.get('[data-municipality="Absecon"]').should("exist");
 
     cy.get('[data-task="check-site-requirements"]').should("exist");
     cy.get('[data-task="food-safety-course"]').should("exist");
