@@ -15,8 +15,6 @@ kill $(lsof -i:${LAMBDA_PORT} -t)
 
 set -e
 
-source ./scripts/env.sh
-
 echo "📦 building webapp"
 API_BASE_URL=${API_BASE_URL} npm --prefix=web run build
 

@@ -31,6 +31,8 @@ In order for the web frontend tests to pass and for it to be able to run locally
 ampify checkout env dev
 ```
 
+Additionally, before you can run locally, you will need to create a `web/.env` that includes all the values laid out in the `web/.env-template` file.
+
 ### Run tests
 
 We use jest for unit tests, on both the frontend. Run all tests with:
@@ -73,18 +75,13 @@ instead of a manual copying process.
 
 ### Environment variables
 
-For Nextjs, environment variables are inserted at build time. In `./web/next.config.js`, the environment variables that the code 
-will have access to are set up for the Next framework by pulling them in from the environment. This works because the system that is
-building the Nextjs code (GitHub Actions workflow) has access to these variables via GitHub secrets during that build step.
+For Nextjs, environment variables are inserted at build time. In `./web/next.config.js`, the environment variables that the code will have access to are set up for the Next framework by pulling them in from the environment. This works because the system that is building the Nextjs code (GitHub Actions workflow) has access to these variables via GitHub secrets during that build step.
 
-**Important** - this means that any time you build the app, the system building it (your local terminal, say) needs to have these
-environment variables set as well, or else they will not get set for the build app.
+**Important** - this means that any time you build the app, the system building it (your local terminal, say) needs to have these environment variables set as well, or else they will not get set for the build app.
 
 For jest testing, the value that will be used for the environment variables is set in `./web/setupTests.js`.
 
-More environment variables are needed for Cypress feature tests than for actually running the app, since the Cypress tests
-need access to AWS credentials to make Cognito API calls. These variables are expected by the feature test runner to exist in
-a file called `./scripts/env.sh` which should not be checked into source control.
+For running (and testing) the app locally in development mode, it needs environment variables locally as well. These should be provided via a `web/.env` file which should *not* be checked into source control. There exists a file `web/.env-template` which provides a blank template to show what variables should be included. This *is* checked into source control and should be updated any time new frontend variables are added.
 
 ### UI Display Content
 

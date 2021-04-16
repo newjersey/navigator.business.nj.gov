@@ -28,7 +28,7 @@ yarn-error.log*
 # Netlify build
 web/out_*
 
-scripts/env.sh
+web/.env
 
 web/cypress/videos
 web/cypress/screenshots/
