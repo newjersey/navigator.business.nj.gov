@@ -1,6 +1,5 @@
 import fs from "fs";
-import { generateTask } from "../../test/factories";
-import { getAllTaskIds, getTaskById } from "./loadTasks";
+import { loadAllTaskIds } from "./loadTasks";
 
 jest.mock("fs");
 
@@ -15,25 +14,14 @@ describe("loadTasks", () => {
     mockedFs = fs as jest.Mocked<typeof fs>;
   });
 
-  describe("getAllTaskIds", () => {
+  describe("loadAllTaskIds", () => {
     it("returns a list of task ids from directory structure", () => {
-      mockReadDirReturn(["task1.json", "task2.json"]);
-
-      const allTaskIds = getAllTaskIds();
+      mockReadDirReturn(["task1.md", "task2.md"]);
+      const allTaskIds = loadAllTaskIds();
       expect(allTaskIds).toHaveLength(2);
       expect(allTaskIds).toEqual(
         expect.arrayContaining([{ params: { taskId: "task1" } }, { params: { taskId: "task2" } }])
       );
-    });
-  });
-
-  describe("getTaskById", () => {
-    it("returns task entity", () => {
-      const task1 = generateTask({ id: "task1" });
-
-      mockedFs.readFileSync.mockReturnValueOnce(JSON.stringify(task1));
-
-      expect(getTaskById("task1")).toEqual(task1);
     });
   });
 

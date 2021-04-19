@@ -1,7 +1,7 @@
 import React, { FormEvent, ReactElement, ReactNode, useEffect, useState } from "react";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { useRouter } from "next/router";
-import { useUserData } from "../lib/data/useUserData";
+import { useUserData } from "../lib/data-hooks/useUserData";
 import {
   createEmptyOnboardingData,
   createEmptyOnboardingDisplayContent,

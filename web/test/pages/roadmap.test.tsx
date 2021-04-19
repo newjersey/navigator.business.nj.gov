@@ -7,18 +7,18 @@ import {
   generateTask,
   generateUserData,
 } from "../factories";
-import * as useUserModule from "../../lib/data/useUserData";
-import * as useRoadmapModule from "../../lib/data/useRoadmap";
+import * as useUserModule from "../../lib/data-hooks/useUserData";
+import * as useRoadmapModule from "../../lib/data-hooks/useRoadmap";
 import { render } from "@testing-library/react";
 import RoadmapPage from "../../pages/roadmap";
 import { OnboardingData, Roadmap } from "../../lib/types/types";
 
-jest.mock("../../lib/data/useUserData", () => ({
+jest.mock("../../lib/data-hooks/useUserData", () => ({
   useUserData: jest.fn(),
 }));
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
-jest.mock("../../lib/data/useRoadmap", () => ({
+jest.mock("../../lib/data-hooks/useRoadmap", () => ({
   useRoadmap: jest.fn(),
 }));
 const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;

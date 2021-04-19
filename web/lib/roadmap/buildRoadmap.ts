@@ -11,6 +11,7 @@ import {
 } from "../types/types";
 import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
 import steps from "../../roadmaps/steps.json";
+import axios from "axios";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
@@ -53,11 +54,13 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
   if (onboardingData.industry === "home-contractor") {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/home-contractor"));
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
+    roadmapBuilder = modifyTasks(roadmapBuilder, await importModification("home-contractor"));
   }
 
   if (onboardingData.industry === "cosmetology") {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/cosmetology"));
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
+    roadmapBuilder = modifyTasks(roadmapBuilder, await importModification("cosmetology"));
   }
 
   if (onboardingData.legalStructure) {
@@ -74,26 +77,16 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
     removeStep5(roadmapBuilder);
   }
 
-  let roadmap: Roadmap = {
+  return {
     ...roadmapBuilder,
     type: onboardingData.industry,
     steps: await Promise.all(
       roadmapBuilder.steps.map(async (step) => ({
         ...step,
-        tasks: await Promise.all(step.tasks.sort(orderByWeight).map((task) => getTaskByIdAsync(task.id))),
+        tasks: await Promise.all(step.tasks.sort(orderByWeight).map((task) => getTaskById(task.id))),
       }))
     ),
   };
-
-  if (onboardingData.industry === "home-contractor") {
-    roadmap = modifyTasks(roadmap, await importModification("home-contractor"));
-  }
-
-  if (onboardingData.industry === "cosmetology") {
-    roadmap = modifyTasks(roadmap, await importModification("cosmetology"));
-  }
-
-  return roadmap;
 };
 
 const step5hasNoTasks = (roadmap: RoadmapBuilder): boolean => {
@@ -122,26 +115,23 @@ const addTasksFromAddOn = (roadmap: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
   return roadmap;
 };
 
-const modifyTasks = (roadmap: Roadmap, modifications: TaskModification[]): Roadmap => {
+const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[]): RoadmapBuilder => {
   modifications.forEach((modification) => {
     const step = roadmap.steps.find((step) => step.id === modification.step);
     if (!step) {
       return;
     }
 
-    const task = step.tasks.find((task) => task.id === modification.task);
+    const task = step.tasks.find((task) => task.id === modification.taskToReplace);
     if (!task) {
       return;
     }
-
-    if (modification.type === "description_replace") {
-      task.description = modification.content;
-    }
+    task.id = modification.replaceWith;
   });
 
   return roadmap;
 };
 
-const getTaskByIdAsync = async (id: string): Promise<Task> => {
-  return (await import(`../../roadmaps/tasks/${id}.json`)).default as Task;
+const getTaskById = async (id: string): Promise<Task> => {
+  return (await axios.get(`/api/tasks/${id}`)).data;
 };

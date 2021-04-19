@@ -1,11 +1,11 @@
 import { fireEvent, render, RenderResult } from "@testing-library/react";
 import { MiniRoadmap } from "./MiniRoadmap";
 
-import * as useRoadmapModule from "../lib/data/useRoadmap";
+import * as useRoadmapModule from "../lib/data-hooks/useRoadmap";
 import { Roadmap } from "../lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "../test/factories";
 
-jest.mock("../lib/data/useRoadmap", () => ({
+jest.mock("../lib/data-hooks/useRoadmap", () => ({
   useRoadmap: jest.fn(),
 }));
 const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;

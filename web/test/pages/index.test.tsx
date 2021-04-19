@@ -2,10 +2,10 @@ import Home from "../../pages";
 import { generateUseUserDataResponse, renderWithUser } from "../helpers";
 import { generateUser, generateUserData } from "../factories";
 import { useRouter } from "next/router";
-import * as useUserModule from "../../lib/data/useUserData";
+import * as useUserModule from "../../lib/data-hooks/useUserData";
 
 jest.mock("next/router");
-jest.mock("../../lib/data/useUserData", () => ({
+jest.mock("../../lib/data-hooks/useUserData", () => ({
   useUserData: jest.fn(),
 }));
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;

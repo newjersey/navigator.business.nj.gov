@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { useRoadmap } from "../lib/data/useRoadmap";
+import { useRoadmap } from "../lib/data-hooks/useRoadmap";
 import { VerticalStepIndicator } from "./njwds-extended/VerticalStepIndicator";
 import { MiniRoadmapTask } from "./MiniRoadmapTask";
 import { Icon } from "./njwds/Icon";

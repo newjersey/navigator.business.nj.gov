@@ -1,14 +1,14 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import React, { ReactElement } from "react";
 import { PageSkeleton } from "../../components/PageSkeleton";
-import { getAllTaskIds, getTaskById, TaskIdParam } from "../../lib/static/loadTasks";
+import { loadAllTaskIds, loadTaskById, TaskIdParam } from "../../lib/static/loadTasks";
 import { Task, TaskProgress } from "../../lib/types/types";
 import Link from "next/link";
 import { SidebarPageLayout } from "../../components/njwds-extended/SidebarPageLayout";
 import { MiniRoadmap } from "../../components/MiniRoadmap";
-import { useRoadmap } from "../../lib/data/useRoadmap";
+import { useRoadmap } from "../../lib/data-hooks/useRoadmap";
 import { TaskProgressDropdown } from "../../components/TaskProgressDropdown";
-import { useUserData } from "../../lib/data/useUserData";
+import { useUserData } from "../../lib/data-hooks/useUserData";
 
 interface Props {
   task: Task;
@@ -27,15 +27,15 @@ const TaskPage = (props: Props): ReactElement => {
     </Link>
   );
 
-  const getDescription = (): string => {
+  const contentHtmlWithModifications = (): string => {
     const stepInRoadmap = roadmap?.steps.find((step) => step.tasks.find((task) => task.id === props.task.id));
     const taskInRoadmap = stepInRoadmap?.tasks.find((task) => task.id === props.task.id);
 
-    if (taskInRoadmap && taskInRoadmap.description !== props.task.description) {
-      return taskInRoadmap.description;
+    if (taskInRoadmap && taskInRoadmap.contentHtml !== props.task.contentHtml) {
+      return taskInRoadmap.contentHtml;
     }
 
-    return props.task.description;
+    return props.task.contentHtml;
   };
 
   const updateTaskProgress = (newValue: TaskProgress): void => {
@@ -64,29 +64,7 @@ const TaskPage = (props: Props): ReactElement => {
             </div>
           </div>
         </div>
-        <p>{getDescription()}</p>
-
-        {props.task.to_complete_must_have.length > 0 && (
-          <>
-            <p>To complete this step, you must have:</p>
-            <ul>
-              {props.task.to_complete_must_have.map((it) => (
-                <li key={it}>{it}</li>
-              ))}
-            </ul>
-          </>
-        )}
-
-        {props.task.after_completing_will_have.length > 0 && (
-          <>
-            <p>After you complete this step, you will have:</p>
-            <ul>
-              {props.task.after_completing_will_have.map((it) => (
-                <li key={it}>{it}</li>
-              ))}
-            </ul>
-          </>
-        )}
+        <div dangerouslySetInnerHTML={{ __html: contentHtmlWithModifications() }} />
 
         {props.task.destinationText && (
           <div className="padding-2 border-base-lighter border-1px font-body-2xs">
@@ -109,7 +87,7 @@ const TaskPage = (props: Props): ReactElement => {
 };
 
 export const getStaticPaths = async (): Promise<GetStaticPathsResult<TaskIdParam>> => {
-  const paths = getAllTaskIds();
+  const paths = loadAllTaskIds();
   return {
     paths,
     fallback: false,
@@ -123,7 +101,7 @@ export const getStaticProps = async ({
 }): Promise<GetStaticPropsResult<Props>> => {
   return {
     props: {
-      task: getTaskById(params.taskId),
+      task: await loadTaskById(params.taskId),
     },
   };
 };

@@ -6,7 +6,7 @@ import { AuthContext } from "./_app";
 import { AuthButton } from "../components/AuthButton";
 import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
 import { useRouter } from "next/router";
-import { useUserData } from "../lib/data/useUserData";
+import { useUserData } from "../lib/data-hooks/useUserData";
 
 const Home = (): ReactElement => {
   const { state } = useContext(AuthContext);

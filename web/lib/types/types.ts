@@ -111,13 +111,10 @@ export interface AddOn {
   task: string;
 }
 
-export type TaskModificationType = "description_replace";
-
 export interface TaskModification {
   step: string;
-  task: string;
-  type: TaskModificationType;
-  content: string;
+  taskToReplace: string;
+  replaceWith: string;
 }
 
 export interface Step {
@@ -129,15 +126,18 @@ export interface Step {
   tasks: Task[];
 }
 
+export interface TaskOverview {
+  id: string;
+  name: string;
+}
+
 export interface Task {
   id: string;
   name: string;
-  description: string;
   destinationText: string;
   callToActionLink: string;
   callToActionText: string;
-  to_complete_must_have: string[];
-  after_completing_will_have: string[];
+  contentHtml: string;
 }
 
 export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";

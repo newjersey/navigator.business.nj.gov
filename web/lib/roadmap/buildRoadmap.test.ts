@@ -3,8 +3,22 @@
 import { buildRoadmap } from "./buildRoadmap";
 import { Roadmap } from "../types/types";
 import { generateOnboardingData } from "../../test/factories";
+import axios from "axios";
+import { getTaskById } from "../getTaskById";
+
+jest.mock("axios");
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe("buildRoadmap", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    mockAxios.get.mockImplementation(async (url: string) => {
+      const segments = url.split("/");
+      const id = segments[segments.length - 1];
+      return Promise.resolve({ data: await getTaskById(id) });
+    });
+  });
+
   const getTasksByStepId = (roadmap: Roadmap, id: string): string[] => {
     return roadmap.steps.find((it) => it.id === id)!.tasks.map((it) => it.id);
   };
@@ -96,7 +110,7 @@ describe("buildRoadmap", () => {
     it("modifies the text for insurance needs", () => {
       const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
       const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "research-insurance-needs")!;
-      expect(insuranceNeeds.description).toContain("Home contractors need to");
+      expect(insuranceNeeds.contentHtml).toContain("Home contractors need to");
     });
   });
 
@@ -127,7 +141,7 @@ describe("buildRoadmap", () => {
     it("modifies the text for local site requirements", () => {
       const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
       const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "check-site-requirements")!;
-      expect(insuranceNeeds.description).toContain("Board of Cosmetology");
+      expect(insuranceNeeds.contentHtml).toContain("Board of Cosmetology");
     });
   });
 

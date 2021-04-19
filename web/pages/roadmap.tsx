@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
-import { useUserData } from "../lib/data/useUserData";
+import { useUserData } from "../lib/data-hooks/useUserData";
 import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
 import { Step } from "../components/Step";
 import { GreyCallout } from "../components/njwds-extended/GreyCallout";
 import { PageSkeleton } from "../components/PageSkeleton";
-import { useRoadmap } from "../lib/data/useRoadmap";
+import { useRoadmap } from "../lib/data-hooks/useRoadmap";
 import { AuthButton } from "../components/AuthButton";
 import { IndustryLookup } from "../display-content/IndustryLookup";
 import { LegalStructureLookup } from "../display-content/LegalStructureLookup";

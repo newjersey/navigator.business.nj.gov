@@ -11,14 +11,14 @@ import {
 import Onboarding from "../../pages/onboarding";
 import { useRouter } from "next/router";
 import React from "react";
-import * as useUserModule from "../../lib/data/useUserData";
+import * as useUserModule from "../../lib/data-hooks/useUserData";
 import { generateMunicipality, generateOnboardingData, generateUserData } from "../factories";
 import { generateUseUserDataResponse } from "../helpers";
 import { createEmptyOnboardingDisplayContent, Industry, LegalStructure } from "../../lib/types/types";
 
 jest.mock("next/router");
 
-jest.mock("../../lib/data/useUserData", () => ({
+jest.mock("../../lib/data-hooks/useUserData", () => ({
   useUserData: jest.fn(),
 }));
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
