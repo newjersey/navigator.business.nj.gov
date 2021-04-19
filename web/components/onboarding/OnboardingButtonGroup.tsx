@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext } from "react";
-import { onKeyPress } from "../../lib/helpers";
 import { OnboardingContext } from "../../pages/onboarding";
+import { onKeyPress } from "../../lib/utils/helpers";
 
 export const OnboardingButtonGroup = (): ReactElement => {
   const { state, onBack } = useContext(OnboardingContext);

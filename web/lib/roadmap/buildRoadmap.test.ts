@@ -3,22 +3,8 @@
 import { buildRoadmap } from "./buildRoadmap";
 import { Roadmap } from "../types/types";
 import { generateOnboardingData } from "../../test/factories";
-import axios from "axios";
-import { getTaskById } from "../getTaskById";
-
-jest.mock("axios");
-const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe("buildRoadmap", () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-    mockAxios.get.mockImplementation(async (url: string) => {
-      const segments = url.split("/");
-      const id = segments[segments.length - 1];
-      return Promise.resolve({ data: await getTaskById(id) });
-    });
-  });
-
   const getTasksByStepId = (roadmap: Roadmap, id: string): string[] => {
     return roadmap.steps.find((it) => it.id === id)!.tasks.map((it) => it.id);
   };

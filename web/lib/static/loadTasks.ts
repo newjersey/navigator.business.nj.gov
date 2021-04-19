@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { Task } from "../types/types";
-import { getTaskById } from "../getTaskById";
+import { convertTaskMdToTask } from "../utils/convertTaskMdToTask";
 
 export type PathParams<P> = { params: P; locale?: string };
 export type TaskIdParam = {
@@ -23,5 +23,8 @@ export const loadAllTaskIds = (): PathParams<TaskIdParam>[] => {
 };
 
 export const loadTaskById = async (id: string): Promise<Task> => {
-  return getTaskById(id);
+  const roadmapsDir = path.join(process.cwd(), "roadmaps");
+  const fullPath = path.join(roadmapsDir, "tasks", `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  return convertTaskMdToTask(fileContents);
 };

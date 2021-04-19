@@ -5,9 +5,9 @@ import { AuthContextType, AuthReducer, authReducer } from "../lib/auth/AuthConte
 
 import awsExports from "../aws-exports";
 import { Amplify } from "aws-amplify";
-import { useMountEffect } from "../lib/helpers";
 import { getCurrentUser } from "../lib/auth/sessionHelper";
 import { Roadmap } from "../lib/types/types";
+import { useMountEffect } from "../lib/utils/helpers";
 
 Amplify.configure({ ...awsExports, ssr: true });
 
