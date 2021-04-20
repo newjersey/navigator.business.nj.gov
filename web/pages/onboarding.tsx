@@ -20,7 +20,7 @@ import { OnboardingLegalStructure } from "../components/onboarding/OnboardingLeg
 import { GetStaticPropsResult } from "next";
 import { getOnboardingDisplayContent } from "../lib/static/loadOnboardingDisplayContent";
 import { OnboardingButtonGroup } from "../components/onboarding/OnboardingButtonGroup";
-import { getAllMunicipalities } from "../lib/static/loadMunicipalities";
+import { loadAllMunicipalities } from "../lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "../components/onboarding/OnboardingMunicipality";
 
 interface Props {
@@ -142,7 +142,7 @@ const Onboarding = (props: Props): ReactElement => {
 };
 
 export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-  const municipalities = await getAllMunicipalities();
+  const municipalities = await loadAllMunicipalities();
 
   return {
     props: {

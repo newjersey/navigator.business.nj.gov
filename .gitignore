@@ -29,6 +29,7 @@ yarn-error.log*
 web/out_*
 
 web/.env
+api/.env
 
 web/cypress/videos
 web/cypress/screenshots/

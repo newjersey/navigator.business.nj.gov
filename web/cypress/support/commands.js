@@ -83,7 +83,7 @@ Cypress.Commands.add('loginByCognitoApi', () => {
     log.snapshot('after')
     log.end()
 
-    cy.request('POST', `${Cypress.env("API_BASE_URL")}/users`, createEmptyUserData({
+    cy.request('POST', `${Cypress.env("API_BASE_URL")}/api/users`, createEmptyUserData({
         email: testUserEmail,
         id: cognitoResponse.attributes.sub
       }))
@@ -94,7 +94,7 @@ Cypress.Commands.add('loginByCognitoApi', () => {
 Cypress.Commands.add('resetUserData', () => {
   Auth.currentSession().then((currentSession) => {
     const userId = currentSession.getIdToken().decodePayload().sub
-    cy.request('POST', `${Cypress.env("API_BASE_URL")}/users`, createEmptyUserData({
+    cy.request('POST', `${Cypress.env("API_BASE_URL")}/api/users`, createEmptyUserData({
       email: testUserEmail,
       id: userId
     }))

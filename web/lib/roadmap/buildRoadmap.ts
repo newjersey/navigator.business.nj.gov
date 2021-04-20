@@ -12,6 +12,7 @@ import {
 import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
 import steps from "../../roadmaps/steps.json";
 import { convertTaskMdToTask } from "../utils/convertTaskMdToTask";
+import * as api from "../api-client/apiClient";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
@@ -73,11 +74,15 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
     }
   }
 
+  if (onboardingData.municipality) {
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/municipality"));
+  }
+
   if (step5hasNoTasks(roadmapBuilder)) {
     removeStep5(roadmapBuilder);
   }
 
-  return {
+  let roadmap = {
     ...roadmapBuilder,
     type: onboardingData.industry,
     steps: await Promise.all(
@@ -87,6 +92,12 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
       }))
     ),
   };
+
+  if (onboardingData.municipality) {
+    roadmap = await addMunicipalitySpecificData(roadmap, onboardingData.municipality.id);
+  }
+
+  return roadmap;
 };
 
 const step5hasNoTasks = (roadmap: RoadmapBuilder): boolean => {
@@ -100,6 +111,23 @@ const step5hasNoTasks = (roadmap: RoadmapBuilder): boolean => {
 const removeStep5 = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {
   roadmapBuilder.steps = roadmapBuilder.steps.filter((step) => step.id !== "inspection-requirements");
   return roadmapBuilder;
+};
+
+const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: string): Promise<Roadmap> => {
+  const step = roadmap.steps.find((step) => step.id === "lease-and-permits");
+  if (!step) {
+    return roadmap;
+  }
+  const task = step.tasks.find((task) => task.id === "check-local-requirements");
+  if (!task) {
+    return roadmap;
+  }
+
+  const municipality = await api.getMunicipality(municipalityId);
+  task.destinationText = municipality.townDisplayName;
+  task.callToActionLink = municipality.townWebsite;
+  task.callToActionText = `Visit the website for ${municipality.townName}`;
+  return roadmap;
 };
 
 const addTasksFromAddOn = (roadmap: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
@@ -117,12 +145,7 @@ const addTasksFromAddOn = (roadmap: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
 
 const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[]): RoadmapBuilder => {
   modifications.forEach((modification) => {
-    const step = roadmap.steps.find((step) => step.id === modification.step);
-    if (!step) {
-      return;
-    }
-
-    const task = step.tasks.find((task) => task.id === modification.taskToReplace);
+    const task = findTaskInRoadmapById(roadmap, modification.step, modification.taskToReplace);
     if (!task) {
       return;
     }
@@ -130,6 +153,19 @@ const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[])
   });
 
   return roadmap;
+};
+
+const findTaskInRoadmapById = (
+  roadmapBuilder: RoadmapBuilder,
+  stepId: string,
+  taskId: string
+): TaskBuilder | undefined => {
+  const step = roadmapBuilder.steps.find((step) => step.id === stepId);
+  if (!step) {
+    return;
+  }
+
+  return step.tasks.find((task) => task.id === taskId);
 };
 
 const getTaskById = async (id: string): Promise<Task> => {

@@ -53,6 +53,18 @@ export type Municipality = {
   id: string;
 };
 
+export type MunicipalityDetail = {
+  id: string;
+  townName: string;
+  townDisplayName: string;
+  townWebsite: string;
+  countyId: string;
+  countyName: string;
+  countyClerkPhone: string;
+  countyClerkWebsite: string;
+  countyWebsite: string;
+};
+
 export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
   return {
     businessName: {

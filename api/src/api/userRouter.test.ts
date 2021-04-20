@@ -1,11 +1,11 @@
 import request from "supertest";
 import express, { Express } from "express";
 import bodyParser from "body-parser";
-import { routerFactory } from "./router";
+import { userRouterFactory } from "./userRouter";
 import { UserDataClient } from "../domain/types";
 import { generateUserData } from "../domain/factories";
 
-describe("router", () => {
+describe("userRouter", () => {
   let app: Express;
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
@@ -17,7 +17,7 @@ describe("router", () => {
     };
     app = express();
     app.use(bodyParser.json());
-    app.use(routerFactory(stubUserDataClient));
+    app.use(userRouterFactory(stubUserDataClient));
   });
 
   afterAll(async () => {

@@ -1,12 +1,12 @@
 import { Municipality } from "../types/types";
-import { AirtableMunicipality, selectAll } from "../airtable/airtableClient";
+import * as api from "../api-client/apiClient";
 
-export const getAllMunicipalities = async (): Promise<Municipality[]> => {
-  const municipalities = await selectAll<AirtableMunicipality>("Municipalities", "Grid view");
+export const loadAllMunicipalities = async (): Promise<Municipality[]> => {
+  const municipalities = await api.getMunicipalities();
   return municipalities.map((municipality) => ({
-    displayName: municipality["Town Name"],
+    displayName: municipality.townDisplayName,
     id: municipality.id,
-    name: municipality.Municipality,
-    county: municipality["County Name"][0],
+    name: municipality.townName,
+    county: municipality.countyName,
   }));
 };

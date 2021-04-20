@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { UserData, UserDataClient } from "../domain/types";
 
-export const routerFactory = (userDataClient: UserDataClient): Router => {
+export const userRouterFactory = (userDataClient: UserDataClient): Router => {
   const router = Router();
 
   router.get("/users/:userId", (req, res) => {

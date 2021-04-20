@@ -10,6 +10,7 @@ const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 
 const serverlessConfiguration: AWS = {
+  useDotenv: true,
   service: "businessnjgov-api",
   frameworkVersion: "2",
   custom: {

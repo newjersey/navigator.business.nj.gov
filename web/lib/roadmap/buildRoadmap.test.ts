@@ -2,12 +2,27 @@
 
 import { buildRoadmap } from "./buildRoadmap";
 import { Roadmap } from "../types/types";
-import { generateOnboardingData } from "../../test/factories";
+import {
+  generateMunicipality,
+  generateMunicipalityDetail,
+  generateOnboardingData,
+} from "../../test/factories";
+import * as api from "../api-client/apiClient";
+
+jest.mock("../api-client/apiClient", () => ({
+  getMunicipalities: jest.fn(),
+  getMunicipality: jest.fn(),
+}));
+const mockApi = api as jest.Mocked<typeof api>;
 
 describe("buildRoadmap", () => {
   const getTasksByStepId = (roadmap: Roadmap, id: string): string[] => {
     return roadmap.steps.find((it) => it.id === id)!.tasks.map((it) => it.id);
   };
+
+  beforeEach(() => {
+    mockApi.getMunicipality.mockResolvedValue(generateMunicipalityDetail({}));
+  });
 
   it("loads a generic roadmap when no industry data present", async () => {
     const onboardingData = generateOnboardingData({
@@ -136,16 +151,51 @@ describe("buildRoadmap", () => {
       const onboardingData = generateOnboardingData({ legalStructure: "limited-liability-company" });
       const roadmap = await buildRoadmap(onboardingData);
       expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
-      expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("search-business-name");
-      expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("register-trade-name");
+      expect(getTasksByStepId(roadmap, "register-business")).toContain("search-business-name");
+      expect(getTasksByStepId(roadmap, "register-business")).not.toContain("register-trade-name");
     });
 
     it("adds trade name tasks if structure in TradeName group", async () => {
       const onboardingData = generateOnboardingData({ legalStructure: "general-partnership" });
       const roadmap = await buildRoadmap(onboardingData);
       expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
-      expect(roadmap?.steps[2].tasks.map((it) => it.id)).not.toContain("search-business-name");
-      expect(roadmap?.steps[2].tasks.map((it) => it.id)).toContain("register-trade-name");
+      expect(getTasksByStepId(roadmap, "register-business")).not.toContain("search-business-name");
+      expect(getTasksByStepId(roadmap, "register-business")).toContain("register-trade-name");
+    });
+  });
+
+  describe("municipality", () => {
+    it("adds municipality task when user has selected a municipality", async () => {
+      const onboardingData = generateOnboardingData({ municipality: generateMunicipality({}) });
+      const roadmap = await buildRoadmap(onboardingData);
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("check-local-requirements");
+    });
+
+    it("has no municipality task when user has not selected a municipality", async () => {
+      const onboardingData = generateOnboardingData({});
+      onboardingData.municipality = undefined;
+      const roadmap = await buildRoadmap(onboardingData);
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).not.toContain("check-local-requirements");
+    });
+
+    it("adds destination and callToAction from the user municipality", async () => {
+      mockApi.getMunicipality.mockResolvedValue(
+        generateMunicipalityDetail({
+          id: "123",
+          townWebsite: "www.cooltown.com",
+          townName: "Cool Town",
+          townDisplayName: "Cool Town (NJ)",
+        })
+      );
+
+      const onboardingData = generateOnboardingData({ municipality: generateMunicipality({ id: "1234" }) });
+      const roadmap = await buildRoadmap(onboardingData);
+      const municipalityTask = roadmap.steps
+        .find((it) => it.id === "lease-and-permits")!
+        .tasks.find((it) => it.id === "check-local-requirements")!;
+      expect(municipalityTask.callToActionLink).toEqual("www.cooltown.com");
+      expect(municipalityTask.callToActionText).toEqual("Visit the website for Cool Town");
+      expect(municipalityTask.destinationText).toEqual("Cool Town (NJ)");
     });
   });
 });

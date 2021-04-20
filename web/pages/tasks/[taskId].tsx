@@ -27,15 +27,17 @@ const TaskPage = (props: Props): ReactElement => {
     </Link>
   );
 
-  const contentHtmlWithModifications = (): string => {
+  const getTaskFromRoadmap = (): Task | undefined => {
     const stepInRoadmap = roadmap?.steps.find((step) => step.tasks.find((task) => task.id === props.task.id));
-    const taskInRoadmap = stepInRoadmap?.tasks.find((task) => task.id === props.task.id);
+    return stepInRoadmap?.tasks.find((task) => task.id === props.task.id);
+  };
 
-    if (taskInRoadmap && taskInRoadmap.contentHtml !== props.task.contentHtml) {
-      return taskInRoadmap.contentHtml;
+  const getModifiedTaskContent = (field: keyof Task): string => {
+    const taskInRoadmap = getTaskFromRoadmap();
+    if (taskInRoadmap && taskInRoadmap[field] !== props.task[field]) {
+      return taskInRoadmap[field];
     }
-
-    return props.task.contentHtml;
+    return props.task[field];
   };
 
   const updateTaskProgress = (newValue: TaskProgress): void => {
@@ -64,19 +66,19 @@ const TaskPage = (props: Props): ReactElement => {
             </div>
           </div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: contentHtmlWithModifications() }} />
+        <div dangerouslySetInnerHTML={{ __html: getModifiedTaskContent("contentHtml") }} />
 
-        {props.task.destinationText && (
-          <div className="padding-2 border-base-lighter border-1px font-body-2xs">
-            Destination: <strong>{props.task.destinationText}</strong>
+        {getModifiedTaskContent("destinationText") && (
+          <div className="padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
+            Destination: <strong>{getModifiedTaskContent("destinationText")}</strong>
           </div>
         )}
 
-        {props.task.callToActionLink && (
+        {getModifiedTaskContent("callToActionLink") && (
           <div className="fdr">
-            <Link href={props.task.callToActionLink}>
+            <Link href={getModifiedTaskContent("callToActionLink")}>
               <button className="usa-button mla margin-top-4 margin-bottom-8">
-                {props.task.callToActionText || "Start Application"}
+                {getModifiedTaskContent("callToActionText") || "Start Application"}
               </button>
             </Link>
           </div>

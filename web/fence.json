@@ -19,7 +19,6 @@
     "aws-amplify",
     "swr",
     "@material-ui/lab",
-    "airtable",
     "gray-matter",
     "remark",
     "remark-html"

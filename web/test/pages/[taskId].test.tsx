@@ -6,7 +6,7 @@ import * as useRoadmapModule from "../../lib/data-hooks/useRoadmap";
 import * as useUserDataModule from "../../lib/data-hooks/useUserData";
 import { generateRoadmap, generateStep, generateTask, generateUserData } from "../factories";
 import { generateUseUserDataResponse } from "../helpers";
-import { TaskProgress } from "../../lib/types/types";
+import { Task, TaskProgress } from "../../lib/types/types";
 
 jest.mock("../../lib/data-hooks/useRoadmap", () => ({
   useRoadmap: jest.fn(),
@@ -26,6 +26,7 @@ function mockMaterialUI() {
     useMediaQuery: jest.fn(),
   };
 }
+
 jest.mock("@material-ui/core", () => mockMaterialUI());
 
 const setLargeScreen = (): void => {
@@ -92,27 +93,29 @@ describe("task page", () => {
   it("shows updated content if different from static content", () => {
     const task = generateTask({
       id: "123",
-      contentHtml: "original task description",
+      contentHtml: "original description",
+      destinationText: "original destination",
+      callToActionText: "original call to action",
     });
 
-    mockUseRoadmap.mockReturnValue({
-      roadmap: generateRoadmap({
-        steps: [
-          generateStep({
-            tasks: [
-              generateTask({
-                id: "123",
-                contentHtml: "a whole brand new description",
-              }),
-            ],
-          }),
-        ],
-      }),
-    });
+    mockTaskInRoadmap(
+      generateTask({
+        id: "123",
+        contentHtml: "a whole brand new description",
+        destinationText: "a whole brand new destination",
+        callToActionText: "a whole brand new call to action",
+      })
+    );
 
     subject = render(<TaskPage task={task} />);
-    expect(subject.queryByText("original task description")).not.toBeInTheDocument();
+    expect(subject.queryByText("original description")).not.toBeInTheDocument();
     expect(subject.queryByText("a whole brand new description")).toBeInTheDocument();
+
+    expect(subject.queryByText("original destination")).not.toBeInTheDocument();
+    expect(subject.queryByText("a whole brand new destination")).toBeInTheDocument();
+
+    expect(subject.queryByText("original call to action")).not.toBeInTheDocument();
+    expect(subject.queryByText("a whole brand new call to action")).toBeInTheDocument();
   });
 
   it("displays Not Started status when user data does not contain status", () => {
@@ -159,4 +162,16 @@ describe("task page", () => {
       },
     });
   });
+
+  const mockTaskInRoadmap = (task: Task): void => {
+    mockUseRoadmap.mockReturnValue({
+      roadmap: generateRoadmap({
+        steps: [
+          generateStep({
+            tasks: [task],
+          }),
+        ],
+      }),
+    });
+  };
 });

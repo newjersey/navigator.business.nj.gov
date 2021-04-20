@@ -14,19 +14,19 @@ describe("apiClient", () => {
     const userData = generateUserData({});
     mockAxios.get.mockResolvedValue({ data: userData });
     expect(await getUserData("123")).toEqual(userData);
-    expect(mockAxios.get).toHaveBeenCalledWith("/users/123");
+    expect(mockAxios.get).toHaveBeenCalledWith("/api/users/123");
   });
 
   it("posts user data by id", async () => {
     const userData = generateUserData({ user: generateUser({ id: "456" }) });
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postUserData(userData)).toEqual(userData);
-    expect(mockAxios.post).toHaveBeenCalledWith("/users", userData);
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/users", userData);
   });
 
   it("gets generic data", async () => {
     mockAxios.get.mockResolvedValue({ data: { value: "something" } });
     expect(await get("/some/url")).toEqual({ value: "something" });
-    expect(mockAxios.get).toHaveBeenCalledWith("/some/url");
+    expect(mockAxios.get).toHaveBeenCalledWith("/api/some/url");
   });
 });

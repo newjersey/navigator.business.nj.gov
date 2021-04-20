@@ -2,9 +2,11 @@ import serverless from "serverless-http";
 import express from "express";
 import bodyParser from "body-parser";
 import AWS from "aws-sdk";
-import { routerFactory } from "../../api/router";
+import { userRouterFactory } from "../../api/userRouter";
 import { DynamoUserDataClient } from "../../db/DynamoUserDataClient";
 import cors from "cors";
+import { municipalityRouterFactory } from "../../api/municipalityRouter";
+import { AirtableMunicipalityClient } from "../../airtable/AirtableMunicipalityClient";
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,10 +25,16 @@ if (IS_OFFLINE === "true") {
 }
 
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
+
+const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
+const airtableBaseId = process.env.AIRTABLE_BASE_ID || "";
+
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
+const airtableClient = AirtableMunicipalityClient(airtableApiKey, airtableBaseId);
 
 app.use(bodyParser.json({ strict: false }));
-app.use(routerFactory(userDataClient));
+app.use("/api", userRouterFactory(userDataClient));
+app.use("/api", municipalityRouterFactory(airtableClient));
 
 app.get("/health", (_req, res) => {
   res.send("Alive");

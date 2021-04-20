@@ -3,6 +3,11 @@ export interface UserDataClient {
   put: (userData: UserData) => Promise<UserData>;
 }
 
+export interface MunicipalityClient {
+  findAll: () => Promise<MunicipalityDetail[]>;
+  findOne: (id: string) => Promise<MunicipalityDetail>;
+}
+
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export interface UserData {
@@ -16,7 +21,27 @@ export interface OnboardingData {
   businessName: string;
   industry: Industry;
   legalStructure: LegalStructure | undefined;
+  municipality: Municipality | undefined;
 }
+
+export type Municipality = {
+  name: string;
+  displayName: string;
+  county: string;
+  id: string;
+};
+
+export type MunicipalityDetail = {
+  id: string;
+  townName: string;
+  townDisplayName: string;
+  townWebsite: string;
+  countyId: string;
+  countyName: string;
+  countyClerkPhone: string;
+  countyClerkWebsite: string;
+  countyWebsite: string;
+};
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 
