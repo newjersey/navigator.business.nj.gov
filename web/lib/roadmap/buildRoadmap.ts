@@ -74,10 +74,6 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
     }
   }
 
-  if (onboardingData.municipality) {
-    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/municipality"));
-  }
-
   if (step5hasNoTasks(roadmapBuilder)) {
     removeStep5(roadmapBuilder);
   }

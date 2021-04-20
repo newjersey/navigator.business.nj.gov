@@ -1,7 +1,7 @@
 ---
 id: "check-local-requirements"
 name: "Check with your town for any local requirements"
-destinationText: "adsfadsfasdf"
+destinationText: ""
 callToActionLink: ""
 callToActionText: ""
 ---
@@ -26,5 +26,3 @@ To complete this step, you need:
 
 After you complete this step, you will have:
 - A list of local requirements that are specific to your business.
-
-Click the button below to visit your local government website to confirm their business requirements and learn more about local resources for your business.

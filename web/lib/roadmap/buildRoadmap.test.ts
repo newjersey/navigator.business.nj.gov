@@ -165,19 +165,6 @@ describe("buildRoadmap", () => {
   });
 
   describe("municipality", () => {
-    it("adds municipality task when user has selected a municipality", async () => {
-      const onboardingData = generateOnboardingData({ municipality: generateMunicipality({}) });
-      const roadmap = await buildRoadmap(onboardingData);
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("check-local-requirements");
-    });
-
-    it("has no municipality task when user has not selected a municipality", async () => {
-      const onboardingData = generateOnboardingData({});
-      onboardingData.municipality = undefined;
-      const roadmap = await buildRoadmap(onboardingData);
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).not.toContain("check-local-requirements");
-    });
-
     it("adds destination and callToAction from the user municipality", async () => {
       mockApi.getMunicipality.mockResolvedValue(
         generateMunicipalityDetail({
