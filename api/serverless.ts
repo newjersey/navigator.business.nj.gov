@@ -6,6 +6,8 @@ const stage = process.env.STAGE || "dev";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5000;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
+const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
+const airtableBaseId = process.env.AIRTABLE_BASE_ID || "";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 
@@ -61,6 +63,8 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       USERS_TABLE: usersTable,
+      AIRTABLE_API_KEY: airtableApiKey,
+      AIRTABLE_BASE_ID: airtableBaseId,
     },
     lambdaHashingVersion: "20201221",
   },

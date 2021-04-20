@@ -87,10 +87,10 @@ describe("Roadmap", () => {
 
 const clickNext = () => {
   cy.get("[data-next]:visible").click({ force: true });
-  cy.wait(500);
+  cy.wait(600);
 };
 
 const clickEdit = () => {
   cy.get("[data-grey-callout-link]").click();
-  cy.wait(500);
+  cy.wait(600);
 };
