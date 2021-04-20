@@ -65,16 +65,12 @@ jobs:
       - name: 🧪 Run API tests
         run: npm --prefix=api run test
 
-      - name: 📽️ Run local api
-        run: npm --prefix=api run install-dynamo-local && npm --prefix=api start
-        env:
-          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-
       - name: 📦 Build project for feature tests
-        run: npm --prefix=web run build --if-present
+        run: npm --prefix=api run install-dynamo-local && npm --prefix=api start & npm --prefix=web run build --if-present
         env:
           API_BASE_URL: http://localhost:5000/dev
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
