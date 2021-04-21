@@ -53,9 +53,11 @@ export const OnboardingMunicipality = (): ReactElement => {
 
   return (
     <>
-      <h3>{state.displayContent.municipality.title}</h3>
-      <p>{state.displayContent.municipality.description}</p>
-      <div className="form-input">
+      <div
+        className="usa-prose"
+        dangerouslySetInnerHTML={{ __html: state.displayContent.municipality.contentHtml }}
+      />
+      <div className="form-input margin-top-2">
         <Autocomplete
           options={state.municipalities}
           getOptionLabel={(municipality: Municipality) => municipality.displayName}

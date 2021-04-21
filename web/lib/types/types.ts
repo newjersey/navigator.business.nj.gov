@@ -41,8 +41,7 @@ export type OnboardingDisplayContent = {
 };
 
 export type FieldDisplayContent = {
-  title: string;
-  description: string;
+  contentHtml: string;
   placeholder?: string;
 };
 
@@ -68,20 +67,16 @@ export type MunicipalityDetail = {
 export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
   return {
     businessName: {
-      title: "",
-      description: "",
+      contentHtml: "",
     },
     industry: {
-      title: "",
-      description: "",
+      contentHtml: "",
     },
     legalStructure: {
-      title: "",
-      description: "",
+      contentHtml: "",
     },
     municipality: {
-      title: "",
-      description: "",
+      contentHtml: "",
     },
   };
 };

@@ -1,21 +1,31 @@
 import fs from "fs";
 import path from "path";
-import { FieldDisplayContent, OnboardingDisplayContent } from "../types/types";
+import { OnboardingDisplayContent } from "../types/types";
+import { convertFieldDisplayContentMd } from "../utils/markdownConverter";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
 
-export const getOnboardingDisplayContent = (): OnboardingDisplayContent => {
-  const businessNamePath = path.join(displayContentDir, "onboarding", "business-name.json");
-  const businessName = JSON.parse(fs.readFileSync(businessNamePath, "utf8")) as FieldDisplayContent;
+export const loadOnboardingDisplayContent = async (): Promise<OnboardingDisplayContent> => {
+  const businessNameContents = fs.readFileSync(
+    path.join(displayContentDir, "onboarding", "business-name.md"),
+    "utf8"
+  );
+  const businessName = await convertFieldDisplayContentMd(businessNameContents);
 
-  const industryPath = path.join(displayContentDir, "onboarding", "industry.json");
-  const industry = JSON.parse(fs.readFileSync(industryPath, "utf8")) as FieldDisplayContent;
+  const industryContents = fs.readFileSync(path.join(displayContentDir, "onboarding", "industry.md"), "utf8");
+  const industry = await convertFieldDisplayContentMd(industryContents);
 
-  const legalStructurePath = path.join(displayContentDir, "onboarding", "legal-structure.json");
-  const legalStructure = JSON.parse(fs.readFileSync(legalStructurePath, "utf8")) as FieldDisplayContent;
+  const legalStructureContents = fs.readFileSync(
+    path.join(displayContentDir, "onboarding", "legal-structure.md"),
+    "utf8"
+  );
+  const legalStructure = await convertFieldDisplayContentMd(legalStructureContents);
 
-  const municipalityPath = path.join(displayContentDir, "onboarding", "municipality.json");
-  const municipality = JSON.parse(fs.readFileSync(municipalityPath, "utf8")) as FieldDisplayContent;
+  const municipalityContents = fs.readFileSync(
+    path.join(displayContentDir, "onboarding", "municipality.md"),
+    "utf8"
+  );
+  const municipality = await convertFieldDisplayContentMd(municipalityContents);
 
   return {
     businessName,

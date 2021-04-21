@@ -18,7 +18,7 @@ import { OnboardingBusinessName } from "../components/onboarding/OnboardingName"
 import { OnboardingIndustry } from "../components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "../components/onboarding/OnboardingLegalStructure";
 import { GetStaticPropsResult } from "next";
-import { getOnboardingDisplayContent } from "../lib/static/loadOnboardingDisplayContent";
+import { loadOnboardingDisplayContent } from "../lib/static/loadOnboardingDisplayContent";
 import { OnboardingButtonGroup } from "../components/onboarding/OnboardingButtonGroup";
 import { loadAllMunicipalities } from "../lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "../components/onboarding/OnboardingMunicipality";
@@ -146,7 +146,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
 
   return {
     props: {
-      displayContent: getOnboardingDisplayContent(),
+      displayContent: await loadOnboardingDisplayContent(),
       municipalities,
     },
   };

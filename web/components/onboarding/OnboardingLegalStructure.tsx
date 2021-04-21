@@ -16,9 +16,11 @@ export const OnboardingLegalStructure = (): ReactElement => {
 
   return (
     <>
-      <h3>{state.displayContent.legalStructure.title}</h3>
-      <p>{state.displayContent.legalStructure.description}</p>
-      <div className="form-input">
+      <div
+        className="usa-prose"
+        dangerouslySetInnerHTML={{ __html: state.displayContent.legalStructure.contentHtml }}
+      />
+      <div className="form-input margin-top-2">
         <FormControl variant="outlined" fullWidth>
           <Select
             fullWidth

@@ -26,19 +26,14 @@ describe("loadTasks", () => {
   });
 
   describe("getTaskById", () => {
-    let mockedFs: jest.Mocked<typeof fs>;
-
-    beforeEach(() => {
-      mockedFs = fs as jest.Mocked<typeof fs>;
-    });
     it("returns task entity from markdown", async () => {
       const taskMd =
         "---\n" +
-        '"id": "some-id"\n' +
-        '"name": "Some Task Name"\n' +
-        '"destinationText": ""\n' +
-        '"callToActionLink": "www.example.com"\n' +
-        '"callToActionText": ""\n' +
+        'id: "some-id"\n' +
+        'name: "Some Task Name"\n' +
+        'destinationText: ""\n' +
+        'callToActionLink: "www.example.com"\n' +
+        'callToActionText: ""\n' +
         "---\n" +
         "\n" +
         "# I am a header\n" +

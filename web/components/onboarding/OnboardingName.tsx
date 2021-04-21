@@ -14,9 +14,11 @@ export const OnboardingBusinessName = (): ReactElement => {
 
   return (
     <>
-      <h3>{state.displayContent.businessName.title}</h3>
-      <p>{state.displayContent.businessName.description}</p>
-      <div className="form-input">
+      <div
+        className="usa-prose"
+        dangerouslySetInnerHTML={{ __html: state.displayContent.businessName.contentHtml }}
+      />
+      <div className="form-input margin-top-2">
         <TextField
           value={state.onboardingData.businessName}
           onChange={handleBusinessName}

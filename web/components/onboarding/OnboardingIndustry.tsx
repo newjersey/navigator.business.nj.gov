@@ -20,9 +20,11 @@ export const OnboardingIndustry = (): ReactElement => {
 
   return (
     <>
-      <h3>{state.displayContent.industry.title}</h3>
-      <p>{state.displayContent.industry.description}</p>
-      <div className="form-input">
+      <div
+        className="usa-prose"
+        dangerouslySetInnerHTML={{ __html: state.displayContent.industry.contentHtml }}
+      />
+      <div className="form-input margin-top-2">
         <FormControl variant="outlined" fullWidth>
           <Select
             fullWidth

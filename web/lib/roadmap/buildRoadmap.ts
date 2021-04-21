@@ -11,8 +11,8 @@ import {
 } from "../types/types";
 import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
 import steps from "../../roadmaps/steps.json";
-import { convertTaskMdToTask } from "../utils/convertTaskMdToTask";
 import * as api from "../api-client/apiClient";
+import { convertTaskMd } from "../utils/markdownConverter";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
@@ -166,5 +166,5 @@ const findTaskInRoadmapById = (
 
 const getTaskById = async (id: string): Promise<Task> => {
   const file = await import(`../../roadmaps/tasks/${id}.md`);
-  return convertTaskMdToTask(file.default);
+  return convertTaskMd(file.default);
 };
