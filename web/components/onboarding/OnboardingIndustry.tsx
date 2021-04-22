@@ -1,9 +1,11 @@
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, ReactNode, useContext } from "react";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
 import { Industry } from "../../lib/types/types";
 import { IndustryLookup } from "../../display-content/IndustryLookup";
 import { Content } from "../Content";
+import { MenuOptionUnselected } from "../MenuOptionUnselected";
+import { MenuOptionSelected } from "../MenuOptionSelected";
 
 export const OnboardingIndustry = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -19,6 +21,13 @@ export const OnboardingIndustry = (): ReactElement => {
     });
   };
 
+  const renderOption = (industry: Industry): ReactElement =>
+    state.onboardingData.industry === industry ? (
+      <MenuOptionSelected>{IndustryLookup[industry]}</MenuOptionSelected>
+    ) : (
+      <MenuOptionUnselected>{IndustryLookup[industry]}</MenuOptionUnselected>
+    );
+
   return (
     <>
       <Content>{state.displayContent.industry.contentMd}</Content>
@@ -32,12 +41,15 @@ export const OnboardingIndustry = (): ReactElement => {
               "aria-label": "Industry",
               "data-testid": "industry",
             }}
+            renderValue={(value: unknown): ReactNode => (
+              <MenuOptionUnselected>{IndustryLookup[value as Industry]}</MenuOptionUnselected>
+            )}
           >
-            <MenuItem value="generic">&nbsp;</MenuItem>
-            <MenuItem value="restaurant">{IndustryLookup["restaurant"]}</MenuItem>
-            <MenuItem value="home-contractor">{IndustryLookup["home-contractor"]}</MenuItem>
-            <MenuItem value="e-commerce">{IndustryLookup["e-commerce"]}</MenuItem>
-            <MenuItem value="cosmetology">{IndustryLookup["cosmetology"]}</MenuItem>
+            <MenuItem value="generic">{renderOption("generic")}</MenuItem>
+            <MenuItem value="restaurant">{renderOption("restaurant")}</MenuItem>
+            <MenuItem value="home-contractor">{renderOption("home-contractor")}</MenuItem>
+            <MenuItem value="e-commerce">{renderOption("e-commerce")}</MenuItem>
+            <MenuItem value="cosmetology">{renderOption("cosmetology")}</MenuItem>
           </Select>
         </FormControl>
       </div>

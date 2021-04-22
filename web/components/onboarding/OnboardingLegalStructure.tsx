@@ -1,9 +1,11 @@
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, ReactNode, useContext } from "react";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
 import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../../lib/types/types";
 import { LegalStructureLookup } from "../../display-content/LegalStructureLookup";
 import { Content } from "../Content";
+import { MenuOptionSelected } from "../MenuOptionSelected";
+import { MenuOptionUnselected } from "../MenuOptionUnselected";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -14,6 +16,13 @@ export const OnboardingLegalStructure = (): ReactElement => {
       legalStructure: (event.target.value as LegalStructure) || undefined,
     });
   };
+
+  const renderOption = (legalStructure: LegalStructure): ReactElement =>
+    state.onboardingData.legalStructure === legalStructure ? (
+      <MenuOptionSelected>{LegalStructureLookup[legalStructure]}</MenuOptionSelected>
+    ) : (
+      <MenuOptionUnselected>{LegalStructureLookup[legalStructure]}</MenuOptionUnselected>
+    );
 
   return (
     <>
@@ -28,11 +37,14 @@ export const OnboardingLegalStructure = (): ReactElement => {
               "aria-label": "Legal structure",
               "data-testid": "legal-structure",
             }}
+            renderValue={(value: unknown): ReactNode => (
+              <MenuOptionUnselected>{LegalStructureLookup[value as LegalStructure]}</MenuOptionUnselected>
+            )}
           >
             <MenuItem value="">&nbsp;</MenuItem>
             {ALL_LEGAL_STRUCTURES.map((legalStructure) => (
               <MenuItem key={legalStructure} value={legalStructure}>
-                {LegalStructureLookup[legalStructure]}
+                {renderOption(legalStructure)}
               </MenuItem>
             ))}
           </Select>

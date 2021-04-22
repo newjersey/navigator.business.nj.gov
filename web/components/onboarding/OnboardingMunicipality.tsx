@@ -3,8 +3,9 @@ import { TextField } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
 import { Autocomplete } from "@material-ui/lab";
 import { Municipality } from "../../lib/types/types";
-import { Icon } from "../njwds/Icon";
 import { Content } from "../Content";
+import { MenuOptionSelected } from "../MenuOptionSelected";
+import { MenuOptionUnselected } from "../MenuOptionUnselected";
 
 export const OnboardingMunicipality = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -17,22 +18,6 @@ export const OnboardingMunicipality = (): ReactElement => {
       municipality: value || undefined,
     });
   };
-
-  const selectedOption = (option: Municipality) => (
-    <>
-      <span className="padding-right-05">
-        <Icon>check</Icon>
-      </span>
-      <span className="text-bold">{option.displayName}</span>
-    </>
-  );
-
-  const unselectedOption = (option: Municipality) => (
-    <>
-      <span className="padding-right-2">&nbsp;</span>
-      {splitAndBoldSearchText(option.displayName)}
-    </>
-  );
 
   const splitAndBoldSearchText = (displayName: string): ReactElement => {
     const index = displayName.toLowerCase().indexOf(searchText.toLowerCase());
@@ -63,9 +48,11 @@ export const OnboardingMunicipality = (): ReactElement => {
           value={state.onboardingData.municipality || null}
           onChange={handleMunicipality}
           renderOption={(option) =>
-            state.onboardingData.municipality?.id === option.id
-              ? selectedOption(option)
-              : unselectedOption(option)
+            state.onboardingData.municipality?.id === option.id ? (
+              <MenuOptionSelected>{option.displayName}</MenuOptionSelected>
+            ) : (
+              <MenuOptionUnselected>{splitAndBoldSearchText(option.displayName)}</MenuOptionUnselected>
+            )
           }
           renderInput={(params) => (
             <TextField
