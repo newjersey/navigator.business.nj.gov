@@ -3,6 +3,7 @@ import { FormControl, MenuItem, Select } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
 import { Industry } from "../../lib/types/types";
 import { IndustryLookup } from "../../display-content/IndustryLookup";
+import { Content } from "../Content";
 
 export const OnboardingIndustry = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -20,10 +21,7 @@ export const OnboardingIndustry = (): ReactElement => {
 
   return (
     <>
-      <div
-        className="usa-prose"
-        dangerouslySetInnerHTML={{ __html: state.displayContent.industry.contentHtml }}
-      />
+      <Content>{state.displayContent.industry.contentMd}</Content>
       <div className="form-input margin-top-2">
         <FormControl variant="outlined" fullWidth>
           <Select

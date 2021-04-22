@@ -9,6 +9,7 @@ import { MiniRoadmap } from "../../components/MiniRoadmap";
 import { useRoadmap } from "../../lib/data-hooks/useRoadmap";
 import { TaskProgressDropdown } from "../../components/TaskProgressDropdown";
 import { useUserData } from "../../lib/data-hooks/useUserData";
+import { Content } from "../../components/Content";
 
 interface Props {
   task: Task;
@@ -66,7 +67,7 @@ const TaskPage = (props: Props): ReactElement => {
             </div>
           </div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: getModifiedTaskContent("contentHtml") }} />
+        <Content>{getModifiedTaskContent("contentMd")}</Content>
 
         {getModifiedTaskContent("destinationText") && (
           <div className="padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">

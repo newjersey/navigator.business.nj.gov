@@ -41,7 +41,7 @@ export type OnboardingDisplayContent = {
 };
 
 export type FieldDisplayContent = {
-  contentHtml: string;
+  contentMd: string;
   placeholder?: string;
 };
 
@@ -67,16 +67,16 @@ export type MunicipalityDetail = {
 export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
   return {
     businessName: {
-      contentHtml: "",
+      contentMd: "",
     },
     industry: {
-      contentHtml: "",
+      contentMd: "",
     },
     legalStructure: {
-      contentHtml: "",
+      contentMd: "",
     },
     municipality: {
-      contentHtml: "",
+      contentMd: "",
     },
   };
 };
@@ -144,7 +144,7 @@ export interface Task {
   destinationText: string;
   callToActionLink: string;
   callToActionText: string;
-  contentHtml: string;
+  contentMd: string;
 }
 
 export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";

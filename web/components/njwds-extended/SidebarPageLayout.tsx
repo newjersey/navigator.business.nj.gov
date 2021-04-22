@@ -31,7 +31,7 @@ export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): Rea
         <div className="grid-container">
           <div className="grid-row grid-gap">
             <div className="usa-layout-docs__sidenav desktop:grid-col-4">
-              <nav aria-label="Secondary navigation" className="usa-nav">
+              <nav aria-label="Secondary navigation" className="usa-nav left">
                 <button className="usa-nav__close fdr fac fjc">
                   <Icon className="font-sans-xl">close</Icon>
                 </button>

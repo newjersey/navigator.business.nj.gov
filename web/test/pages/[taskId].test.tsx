@@ -45,7 +45,7 @@ describe("task page", () => {
   it("shows the task details", () => {
     const task = generateTask({
       name: "complete a tax form",
-      contentHtml: "<h2>fill out your tax form</h2><p>it has to get done</p>",
+      contentMd: "## fill out your tax form\n\nit has to get done",
       destinationText: "city clerk",
       callToActionLink: "www.example.com",
       callToActionText: "Submit The Form Here",
@@ -93,7 +93,7 @@ describe("task page", () => {
   it("shows updated content if different from static content", () => {
     const task = generateTask({
       id: "123",
-      contentHtml: "original description",
+      contentMd: "original description",
       destinationText: "original destination",
       callToActionText: "original call to action",
     });
@@ -101,7 +101,7 @@ describe("task page", () => {
     mockTaskInRoadmap(
       generateTask({
         id: "123",
-        contentHtml: "a whole brand new description",
+        contentMd: "a whole brand new description",
         destinationText: "a whole brand new destination",
         callToActionText: "a whole brand new call to action",
       })

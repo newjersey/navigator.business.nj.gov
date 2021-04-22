@@ -8,6 +8,7 @@ import { Amplify } from "aws-amplify";
 import { getCurrentUser } from "../lib/auth/sessionHelper";
 import { Roadmap } from "../lib/types/types";
 import { useMountEffect } from "../lib/utils/helpers";
+import { ContextualInfoPanel } from "../components/ContextualInfoPanel";
 
 Amplify.configure({ ...awsExports, ssr: true });
 
@@ -31,9 +32,20 @@ export const RoadmapContext = React.createContext<RoadmapContextType>({
   setRoadmap: () => {},
 });
 
+export interface ContextualInfoContextType {
+  contextualInfoMd: string;
+  setContextualInfoMd: (contextualInfoMd: string) => void;
+}
+
+export const ContextualInfoContext = React.createContext<ContextualInfoContextType>({
+  contextualInfoMd: "",
+  setContextualInfoMd: () => {},
+});
+
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
+  const [contextualInfoMd, setContextualInfoMd] = useState<string>("");
 
   useMountEffect(() => {
     getCurrentUser().then((currentUser) => {
@@ -53,9 +65,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <script src="/intercom/init.js" />
 
       <AuthContext.Provider value={{ state, dispatch }}>
-        <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-          <Component {...pageProps} />
-        </RoadmapContext.Provider>
+        <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
+          <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+            <ContextualInfoPanel />
+            <Component {...pageProps} />
+          </RoadmapContext.Provider>
+        </ContextualInfoContext.Provider>
       </AuthContext.Provider>
     </>
   );

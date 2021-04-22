@@ -96,7 +96,7 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     destinationText: "some-destination-" + randomInt(),
     callToActionLink: "some-link-" + randomInt(),
     callToActionText: "some-call-to-action-" + randomInt(),
-    contentHtml: "some-content-html-" + randomInt(),
+    contentMd: "some-content-md-" + randomInt(),
     ...overrides,
   };
 };

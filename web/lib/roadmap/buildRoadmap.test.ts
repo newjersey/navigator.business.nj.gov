@@ -111,7 +111,7 @@ describe("buildRoadmap", () => {
     it("modifies the text for insurance needs", () => {
       const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
       const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "research-insurance-needs")!;
-      expect(insuranceNeeds.contentHtml).toContain("Home contractors need to");
+      expect(insuranceNeeds.contentMd).toContain("Home contractors need to");
     });
   });
 
@@ -142,7 +142,7 @@ describe("buildRoadmap", () => {
     it("modifies the text for local site requirements", () => {
       const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
       const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "check-site-requirements")!;
-      expect(insuranceNeeds.contentHtml).toContain("Board of Cosmetology");
+      expect(insuranceNeeds.contentMd).toContain("Board of Cosmetology");
     });
   });
 

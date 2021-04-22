@@ -28,7 +28,7 @@ describe("loadOnboardingDisplayContent", () => {
 
     expect((await loadOnboardingDisplayContent()).municipality).toEqual({
       placeholder: "Fill me in",
-      contentHtml: "<h3>I am a header</h3>\n<p>I am a description</p>\n",
+      contentMd: "\n### I am a header\n\nI am a description",
     });
   });
 
@@ -40,7 +40,7 @@ describe("loadOnboardingDisplayContent", () => {
 
     expect((await loadOnboardingDisplayContent()).municipality).toEqual({
       placeholder: undefined,
-      contentHtml: "<h3>I am a header</h3>\n<p>I am a description</p>\n",
+      contentMd: "\n### I am a header\n\nI am a description",
     });
   });
 });

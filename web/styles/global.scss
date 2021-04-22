@@ -6,6 +6,7 @@ $lg: 64em; //desktop and up (1024px)
 @import "flex";
 @import "onboarding.module";
 @import "roadmap.module";
+@import "contextual-info";
 @import "njwds-overrides/vertical-step";
 @import "njwds-overrides/left-sidebar";
 @import "njwds-overrides/overrides";
@@ -43,4 +44,11 @@ $lg: 64em; //desktop and up (1024px)
     background-image: linear-gradient(-45deg, white 20px, transparent 20px),
       linear-gradient(-135deg, white 20px, transparent 20px);
   }
+}
+
+.dotted-underline {
+  text-decoration: underline;
+  text-decoration-width: 2px;
+  text-decoration-thickness: 2px;
+  text-decoration-style: dotted;
 }

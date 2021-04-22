@@ -1,6 +1,7 @@
 import React, { ChangeEvent, ReactElement, useContext } from "react";
 import { TextField } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
+import { Content } from "../Content";
 
 export const OnboardingBusinessName = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -14,10 +15,7 @@ export const OnboardingBusinessName = (): ReactElement => {
 
   return (
     <>
-      <div
-        className="usa-prose"
-        dangerouslySetInnerHTML={{ __html: state.displayContent.businessName.contentHtml }}
-      />
+      <Content>{state.displayContent.businessName.contentMd}</Content>
       <div className="form-input margin-top-2">
         <TextField
           value={state.onboardingData.businessName}

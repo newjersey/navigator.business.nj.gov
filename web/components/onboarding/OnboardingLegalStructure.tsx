@@ -3,6 +3,7 @@ import { FormControl, MenuItem, Select } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
 import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../../lib/types/types";
 import { LegalStructureLookup } from "../../display-content/LegalStructureLookup";
+import { Content } from "../Content";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -16,10 +17,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
 
   return (
     <>
-      <div
-        className="usa-prose"
-        dangerouslySetInnerHTML={{ __html: state.displayContent.legalStructure.contentHtml }}
-      />
+      <Content>{state.displayContent.legalStructure.contentMd}</Content>
       <div className="form-input margin-top-2">
         <FormControl variant="outlined" fullWidth>
           <Select

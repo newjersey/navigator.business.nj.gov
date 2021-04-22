@@ -4,6 +4,7 @@ import { OnboardingContext } from "../../pages/onboarding";
 import { Autocomplete } from "@material-ui/lab";
 import { Municipality } from "../../lib/types/types";
 import { Icon } from "../njwds/Icon";
+import { Content } from "../Content";
 
 export const OnboardingMunicipality = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -53,10 +54,7 @@ export const OnboardingMunicipality = (): ReactElement => {
 
   return (
     <>
-      <div
-        className="usa-prose"
-        dangerouslySetInnerHTML={{ __html: state.displayContent.municipality.contentHtml }}
-      />
+      <Content>{state.displayContent.municipality.contentMd}</Content>
       <div className="form-input margin-top-2">
         <Autocomplete
           options={state.municipalities}

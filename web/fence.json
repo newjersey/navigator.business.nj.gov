@@ -21,6 +21,7 @@
     "@material-ui/lab",
     "gray-matter",
     "remark",
-    "remark-html"
+    "remark-html",
+    "remark-react"
   ]
 }

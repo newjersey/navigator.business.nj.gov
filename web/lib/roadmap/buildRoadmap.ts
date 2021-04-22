@@ -5,14 +5,13 @@ import {
   OnboardingData,
   Roadmap,
   RoadmapBuilder,
-  Task,
   TaskBuilder,
   TaskModification,
 } from "../types/types";
 import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
 import steps from "../../roadmaps/steps.json";
 import * as api from "../api-client/apiClient";
-import { convertTaskMd } from "../utils/markdownConverter";
+import { fetchTaskById } from "../async-content-fetchers/fetchTaskById";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
@@ -84,7 +83,7 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
     steps: await Promise.all(
       roadmapBuilder.steps.map(async (step) => ({
         ...step,
-        tasks: await Promise.all(step.tasks.sort(orderByWeight).map((task) => getTaskById(task.id))),
+        tasks: await Promise.all(step.tasks.sort(orderByWeight).map((task) => fetchTaskById(task.id))),
       }))
     ),
   };
@@ -162,9 +161,4 @@ const findTaskInRoadmapById = (
   }
 
   return step.tasks.find((task) => task.id === taskId);
-};
-
-const getTaskById = async (id: string): Promise<Task> => {
-  const file = await import(`../../roadmaps/tasks/${id}.md`);
-  return convertTaskMd(file.default);
 };

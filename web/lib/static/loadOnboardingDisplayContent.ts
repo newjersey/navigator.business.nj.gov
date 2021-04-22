@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { OnboardingDisplayContent } from "../types/types";
-import { convertFieldDisplayContentMd } from "../utils/markdownConverter";
+import { convertFieldDisplayContentMd } from "../utils/markdownReader";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
 

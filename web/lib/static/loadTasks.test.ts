@@ -48,7 +48,7 @@ describe("loadTasks", () => {
         destinationText: "",
         callToActionLink: "www.example.com",
         callToActionText: "",
-        contentHtml: "<h1>I am a header</h1>\n<p>I am a text content</p>\n",
+        contentMd: "\n# I am a header\n\nI am a text content",
       });
     });
   });

@@ -1,16 +1,12 @@
 import { FieldDisplayContent, Task } from "../types/types";
 import matter from "gray-matter";
-import remark from "remark";
-import html from "remark-html";
 
 export const convertTaskMd = async (taskMdContents: string): Promise<Task> => {
   const matterResult = matter(taskMdContents);
   const taskGrayMatter = matterResult.data as TaskGrayMatter;
 
-  const processedContent = await remark().use(html).process(matterResult.content);
-
   return {
-    contentHtml: processedContent.toString(),
+    contentMd: matterResult.content,
     ...taskGrayMatter,
   };
 };
@@ -19,12 +15,15 @@ export const convertFieldDisplayContentMd = async (fieldMdContents: string): Pro
   const matterResult = matter(fieldMdContents);
   const grayMatter = matterResult.data as FieldDisplayGrayMatter;
 
-  const processedContent = await remark().use(html).process(matterResult.content);
-
   return {
-    contentHtml: processedContent.toString(),
+    contentMd: matterResult.content,
     ...grayMatter,
   };
+};
+
+export const getMarkdownContent = (fileContents: string): string => {
+  const matterResult = matter(fileContents);
+  return matterResult.content;
 };
 
 type TaskGrayMatter = {

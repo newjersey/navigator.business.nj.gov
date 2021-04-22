@@ -16,7 +16,7 @@
 }
 
 @media all and (max-width: 63.99em) {
-  .usa-nav {
+  .usa-nav.left {
     left: 0;
     bottom: 0;
     top: 0;
@@ -30,7 +30,7 @@
     width: 15rem;
     z-index: 500;
   }
-  .usa-nav.is-visible {
+  .usa-nav.left.is-visible {
     -webkit-animation: slidein-right 0.3s ease-in-out !important;
     animation: slidein-right 0.3s ease-in-out !important;
     display: flex;
