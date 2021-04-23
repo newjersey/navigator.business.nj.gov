@@ -77,8 +77,13 @@ const TaskPage = (props: Props): ReactElement => {
 
         {getModifiedTaskContent("callToActionLink") && (
           <div className="fdr">
-            <a href={getModifiedTaskContent("callToActionLink")} target="_blank" rel="noreferrer noopener">
-              <button className="usa-button mla margin-top-4 margin-bottom-8">
+            <a
+              href={getModifiedTaskContent("callToActionLink")}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mla margin-top-4 margin-bottom-8"
+            >
+              <button className="usa-button">
                 {getModifiedTaskContent("callToActionText") || "Start Application"}
               </button>
             </a>
