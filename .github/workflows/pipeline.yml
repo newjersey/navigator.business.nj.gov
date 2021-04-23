@@ -3,7 +3,7 @@ name: Pipeline
 on:
   push:
     branches:
-      - dashboard
+      - main
 
 jobs:
   build-and-test:
