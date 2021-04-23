@@ -1,0 +1,17 @@
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+}
+
+.onboarding-form.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+
+.onboarding-form.is-visible {
+  visibility: visible;
+  opacity: 1;
+}

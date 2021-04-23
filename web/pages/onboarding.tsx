@@ -52,7 +52,7 @@ export const OnboardingContext = React.createContext<OnboardingContextType>({
   onBack: () => {},
 });
 
-const Onboarding = (props: Props): ReactElement => {
+const OnboardingPage = (props: Props): ReactElement => {
   const PAGES = 4;
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
@@ -100,15 +100,18 @@ const Onboarding = (props: Props): ReactElement => {
     </>
   );
 
-  const asOnboardingPage = (page: ReactNode) => (
-    <SingleColumnContainer>
-      <form onSubmit={onSubmit} className="usa-prose">
-        {page}
-        <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
-        <OnboardingButtonGroup />
-      </form>
-    </SingleColumnContainer>
-  );
+  const asOnboardingPage = (onboardingPage: ReactNode, index: number) => {
+    const isVisible = page === index ? "is-visible" : "hidden";
+    return (
+      <SingleColumnContainer>
+        <form onSubmit={onSubmit} className={`usa-prose onboarding-form ${isVisible}`}>
+          {onboardingPage}
+          <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
+          <OnboardingButtonGroup />
+        </form>
+      </SingleColumnContainer>
+    );
+  };
 
   return (
     <OnboardingContext.Provider
@@ -130,10 +133,10 @@ const Onboarding = (props: Props): ReactElement => {
             {isLargeScreen && <h2 className="padding-bottom-4">{header()}</h2>}
           </SingleColumnContainer>
           <SwipeableViews index={page - 1} disabled={true}>
-            {asOnboardingPage(<OnboardingBusinessName />)}
-            {asOnboardingPage(<OnboardingIndustry />)}
-            {asOnboardingPage(<OnboardingLegalStructure />)}
-            {asOnboardingPage(<OnboardingMunicipality />)}
+            {asOnboardingPage(<OnboardingBusinessName />, 1)}
+            {asOnboardingPage(<OnboardingIndustry />, 2)}
+            {asOnboardingPage(<OnboardingLegalStructure />, 3)}
+            {asOnboardingPage(<OnboardingMunicipality />, 4)}
           </SwipeableViews>
         </main>
       </PageSkeleton>
@@ -152,4 +155,4 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
   };
 };
 
-export default Onboarding;
+export default OnboardingPage;

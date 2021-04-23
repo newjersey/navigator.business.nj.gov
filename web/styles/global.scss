@@ -4,8 +4,8 @@ $md: 50em; //big tablet (800px)
 $lg: 64em; //desktop and up (1024px)
 
 @import "flex";
-@import "onboarding.module";
-@import "roadmap.module";
+@import "onboarding";
+@import "roadmap";
 @import "contextual-info";
 @import "left-nav";
 @import "njwds-overrides/vertical-step";
