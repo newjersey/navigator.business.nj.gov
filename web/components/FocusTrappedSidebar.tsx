@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { onEscape, useMountEffect } from "../lib/utils/helpers";
+import FocusTrap from "focus-trap-react";
 
 interface Props {
   children: React.ReactNode;
@@ -19,5 +20,5 @@ export const FocusTrappedSidebar = ({ children, close, isOpen }: Props): ReactEl
     };
   });
 
-  return isOpen ? <>{children}</> : <></>;
+  return isOpen ? <FocusTrap>{children}</FocusTrap> : <></>;
 };

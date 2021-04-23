@@ -22,6 +22,7 @@
     "gray-matter",
     "remark",
     "remark-html",
-    "remark-react"
+    "remark-react",
+    "focus-trap-react"
   ]
 }
