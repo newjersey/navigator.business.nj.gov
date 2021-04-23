@@ -1,27 +1,11 @@
-import React, { ReactElement, useContext, useEffect } from "react";
+import React, { ReactElement, useContext } from "react";
 import { Icon } from "./njwds/Icon";
 import { ContextualInfoContext } from "../pages/_app";
 import { Content } from "./Content";
+import { FocusTrappedSidebar } from "./FocusTrappedSidebar";
 
 export const ContextualInfoPanel = (): ReactElement => {
   const { contextualInfoMd, setContextualInfoMd } = useContext(ContextualInfoContext);
-  const closeButton = React.createRef<HTMLButtonElement>();
-  const panel = React.createRef<HTMLDivElement>();
-
-  useEffect(() => {
-    setFocus();
-    if (panel.current) {
-      panel.current.addEventListener("transitionend", () => {
-        setFocus();
-      });
-    }
-  }, [contextualInfoMd]);
-
-  const setFocus = () => {
-    if (contextualInfoMd && closeButton.current) {
-      closeButton.current.focus();
-    }
-  };
 
   const close = () => {
     setContextualInfoMd("");
@@ -37,12 +21,14 @@ export const ContextualInfoPanel = (): ReactElement => {
         data-testid="overlay"
         className={`info-overlay ${isVisible()}`}
       />
-      <aside ref={panel} data-testid="info-panel" className={`info-panel ${isVisible()}`}>
-        <button ref={closeButton} className="fdr fac fjc info-panel-close" onClick={close}>
-          <Icon className="font-sans-xl">close</Icon>
-        </button>
-        <Content>{contextualInfoMd}</Content>
-      </aside>
+      <FocusTrappedSidebar close={close} isOpen={!!isVisible()}>
+        <aside data-testid="info-panel" className={`info-panel ${isVisible()}`}>
+          <button className="fdr fac fjc info-panel-close" onClick={close}>
+            <Icon className="font-sans-xl">close</Icon>
+          </button>
+          <Content>{contextualInfoMd}</Content>
+        </aside>
+      </FocusTrappedSidebar>
     </>
   );
 };

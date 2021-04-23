@@ -36,7 +36,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   };
 
   return (
-    <nav>
+    <div>
       {roadmap?.steps.map((step) => (
         <div key={step.id}>
           <div className="fdr fac margin-top-2 margin-bottom-1">
@@ -76,6 +76,6 @@ export const MiniRoadmap = (props: Props): ReactElement => {
           </div>
         </div>
       ))}
-    </nav>
+    </div>
   );
 };

@@ -15,18 +15,18 @@
 
   @media all and (min-width: $sm) {
     width: 30rem;
+
+    &.is-visible {
+      -webkit-animation: slidein-left-30 0.3s ease-in-out;
+      animation: slidein-left-30 0.3s ease-in-out;
+    }
   }
 }
 
 .info-panel.is-visible {
-  -webkit-animation: slidein-left 0.3s ease-in-out;
-  animation: slidein-left 0.3s ease-in-out;
+  -webkit-animation: slidein-left-20 0.3s ease-in-out;
+  animation: slidein-left-20 0.3s ease-in-out;
   display: flex;
-}
-
-.info-panel.is-visible:not(:focus-within) {
-  background-color: #e7f6f9; // slightly different, to trigger transition
-  transition: background-color 0.01s;
 }
 
 .info-panel-close {
@@ -64,4 +64,40 @@
 .info-overlay.is-visible {
   opacity: 0.2;
   visibility: visible;
+}
+
+@-webkit-keyframes slidein-left-20 {
+  0% {
+    transform: translateX(20rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slidein-left-20 {
+  0% {
+    transform: translateX(20rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes slidein-left-30 {
+  0% {
+    transform: translateX(30rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slidein-left-30 {
+  0% {
+    transform: translateX(30rem);
+  }
+  to {
+    transform: translateX(0);
+  }
 }

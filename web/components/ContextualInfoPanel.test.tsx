@@ -21,7 +21,7 @@ describe("<ContextualInfoPanel />", () => {
 
   const expectToBeClosed = (subject: RenderResult) => {
     expect(subject.getByTestId("overlay").className).not.toContain("is-visible");
-    expect(subject.getByTestId("info-panel").className).not.toContain("is-visible");
+    expect(subject.queryByTestId("info-panel")).not.toBeInTheDocument();
   };
 
   const expectToBeOpen = (subject: RenderResult) => {

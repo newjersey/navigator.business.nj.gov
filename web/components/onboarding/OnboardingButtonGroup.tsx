@@ -1,24 +1,20 @@
 import React, { ReactElement, useContext } from "react";
 import { OnboardingContext } from "../../pages/onboarding";
-import { onKeyPress } from "../../lib/utils/helpers";
 
 export const OnboardingButtonGroup = (): ReactElement => {
   const { state, onBack } = useContext(OnboardingContext);
 
+  const back = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onBack();
+  };
+
   return (
     <div className="float-right fdr">
       {state.page > 1 && (
-        <div
-          tabIndex={0}
-          role="button"
-          className="usa-button usa-button--outline"
-          onClick={onBack}
-          onKeyPress={(e: React.KeyboardEvent): void => {
-            onKeyPress(e, onBack);
-          }}
-        >
+        <button className="usa-button usa-button--outline" onClick={back}>
           Back
-        </div>
+        </button>
       )}
       <button type="submit" className="usa-button margin-right-0" data-next={true}>
         Next

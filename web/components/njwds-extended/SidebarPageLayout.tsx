@@ -1,7 +1,8 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { MediaQueries } from "../../lib/PageSizes";
 import { useMediaQuery } from "@material-ui/core";
 import { Icon } from "../njwds/Icon";
+import { FocusTrappedSidebar } from "../FocusTrappedSidebar";
 
 interface Props {
   children: React.ReactNode;
@@ -11,14 +12,30 @@ interface Props {
 
 export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+
+  const isVisible = () => (sidebarIsOpen ? "is-visible" : "");
+
+  const nav = () => (
+    <nav aria-label="Secondary navigation" className={`left-nav ${isVisible()}`}>
+      <button className="left-nav-close fdr fac fjc" onClick={() => setSidebarIsOpen(false)}>
+        <Icon className="font-sans-xl">close</Icon>
+      </button>
+      {isLargeScreen && <div className="padding-top-2 padding-bottom-2 usa-prose">{backButton}</div>}
+      {sidebar}
+    </nav>
+  );
+
+  const open = () => setSidebarIsOpen(true);
+  const close = () => setSidebarIsOpen(false);
 
   return (
     <>
-      <div className="usa-overlay" />
+      <div aria-hidden="true" onClick={close} className={`left-nav-overlay ${isVisible()}`} />
       {!isLargeScreen && (
         <div className="usa-nav-container">
           <div className="usa-navbar">
-            <button className="usa-menu-btn">
+            <button className="left-nav-menu-button radius-0" onClick={open}>
               <Icon className="font-sans-xl">menu</Icon>
             </button>
             <div className="usa-logo">
@@ -31,15 +48,13 @@ export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): Rea
         <div className="grid-container">
           <div className="grid-row grid-gap">
             <div className="usa-layout-docs__sidenav desktop:grid-col-4">
-              <nav aria-label="Secondary navigation" className="usa-nav left">
-                <button className="usa-nav__close fdr fac fjc">
-                  <Icon className="font-sans-xl">close</Icon>
-                </button>
-                {isLargeScreen && (
-                  <div className="padding-top-2 padding-bottom-2 usa-prose">{backButton}</div>
-                )}
-                {sidebar}
-              </nav>
+              {isLargeScreen ? (
+                nav()
+              ) : (
+                <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
+                  {nav()}
+                </FocusTrappedSidebar>
+              )}
             </div>
 
             <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs">
