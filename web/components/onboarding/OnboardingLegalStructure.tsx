@@ -37,9 +37,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
               "aria-label": "Legal structure",
               "data-testid": "legal-structure",
             }}
-            renderValue={(value: unknown): ReactNode => (
-              <MenuOptionUnselected>{LegalStructureLookup[value as LegalStructure]}</MenuOptionUnselected>
-            )}
+            renderValue={(value: unknown): ReactNode => <>{LegalStructureLookup[value as LegalStructure]}</>}
           >
             <MenuItem value="">&nbsp;</MenuItem>
             {ALL_LEGAL_STRUCTURES.map((legalStructure) => (

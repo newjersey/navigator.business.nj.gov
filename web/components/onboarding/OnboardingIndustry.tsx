@@ -41,9 +41,7 @@ export const OnboardingIndustry = (): ReactElement => {
               "aria-label": "Industry",
               "data-testid": "industry",
             }}
-            renderValue={(value: unknown): ReactNode => (
-              <MenuOptionUnselected>{IndustryLookup[value as Industry]}</MenuOptionUnselected>
-            )}
+            renderValue={(value: unknown): ReactNode => <>{IndustryLookup[value as Industry]}</>}
           >
             <MenuItem value="generic">{renderOption("generic")}</MenuItem>
             <MenuItem value="restaurant">{renderOption("restaurant")}</MenuItem>
