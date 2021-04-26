@@ -1,6 +1,11 @@
 import fs from "fs";
 import path from "path";
-import { OnboardingDisplayContent, RoadmapDisplayContent } from "../types/types";
+import {
+  ALL_LEGAL_STRUCTURES,
+  LegalStructure,
+  OnboardingDisplayContent,
+  RoadmapDisplayContent,
+} from "../types/types";
 import { convertFieldDisplayContentMd, getMarkdownContent } from "../utils/markdownReader";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
@@ -27,11 +32,33 @@ export const loadOnboardingDisplayContent = async (): Promise<OnboardingDisplayC
   );
   const municipality = await convertFieldDisplayContentMd(municipalityContents);
 
+  const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES.reduce(
+    (acc, legalStructure) => {
+      const fileContents = fs.readFileSync(
+        path.join(displayContentDir, "onboarding", "legal-structure", `${legalStructure}.md`),
+        "utf8"
+      );
+      acc[legalStructure] = getMarkdownContent(fileContents);
+      return acc;
+    },
+    {
+      "sole-proprietorship": "",
+      "general-partnership": "",
+      "limited-partnership": "",
+      "limited-liability-partnership": "",
+      "limited-liability-company": "",
+      "c-corporation": "",
+      "s-corporation": "",
+      "b-corporation": "",
+    }
+  );
+
   return {
     businessName,
     industry,
     legalStructure,
     municipality,
+    legalStructureOptionContent,
   };
 };
 

@@ -1,11 +1,9 @@
-import React, { ReactElement, ReactNode, useContext } from "react";
-import { FormControl, MenuItem, Select } from "@material-ui/core";
+import React, { ReactElement, useContext } from "react";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
 import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../../lib/types/types";
-import { LegalStructureLookup } from "../../display-content/LegalStructureLookup";
 import { Content } from "../Content";
-import { MenuOptionSelected } from "../MenuOptionSelected";
-import { MenuOptionUnselected } from "../MenuOptionUnselected";
+import { LegalStructureLookup } from "../../display-content/LegalStructureLookup";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -17,35 +15,35 @@ export const OnboardingLegalStructure = (): ReactElement => {
     });
   };
 
-  const renderOption = (legalStructure: LegalStructure): ReactElement =>
-    state.onboardingData.legalStructure === legalStructure ? (
-      <MenuOptionSelected>{LegalStructureLookup[legalStructure]}</MenuOptionSelected>
-    ) : (
-      <MenuOptionUnselected>{LegalStructureLookup[legalStructure]}</MenuOptionUnselected>
-    );
+  const makeLabel = (legalStructure: LegalStructure) => (
+    <div className="margin-bottom-2 margin-top-1" data-value={legalStructure}>
+      <b>{LegalStructureLookup[legalStructure]}</b>
+      <Content>{state.displayContent.legalStructureOptionContent[legalStructure]}</Content>
+    </div>
+  );
 
   return (
     <>
       <Content>{state.displayContent.legalStructure.contentMd}</Content>
-      <div className="form-input margin-top-2">
+      <div className="form-input-wide margin-top-3">
         <FormControl variant="outlined" fullWidth>
-          <Select
-            fullWidth
+          <RadioGroup
+            aria-label="Legal structure"
+            name="legal-structure"
             value={state.onboardingData.legalStructure || ""}
             onChange={handleLegalStructure}
-            inputProps={{
-              "aria-label": "Legal structure",
-              "data-testid": "legal-structure",
-            }}
-            renderValue={(value: unknown): ReactNode => <>{LegalStructureLookup[value as LegalStructure]}</>}
           >
-            <MenuItem value="">&nbsp;</MenuItem>
             {ALL_LEGAL_STRUCTURES.map((legalStructure) => (
-              <MenuItem key={legalStructure} value={legalStructure}>
-                {renderOption(legalStructure)}
-              </MenuItem>
+              <FormControlLabel
+                style={{ alignItems: "flex-start" }}
+                labelPlacement="end"
+                key={legalStructure}
+                value={legalStructure}
+                control={<Radio color="primary" />}
+                label={makeLabel(legalStructure)}
+              />
             ))}
-          </Select>
+          </RadioGroup>
         </FormControl>
       </div>
     </>

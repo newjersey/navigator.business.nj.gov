@@ -114,7 +114,7 @@ describe("onboarding form", () => {
       },
     });
 
-    select("Legal structure", "General Partnership");
+    chooseRadio("General Partnership");
     clickNext();
     await waitForElementToBeRemoved(() => subject.getByText("Step 3 of 4"));
     expect(mockUpdate).toHaveBeenLastCalledWith({
@@ -172,6 +172,10 @@ describe("onboarding form", () => {
     fireEvent.click(listbox.getByText(value));
   };
 
+  const chooseRadio = (value: string) => {
+    fireEvent.click(subject.getByText(value));
+  };
+
   const clickNext = (): void => {
     fireEvent.click(subject.getAllByText("Next")[0]);
   };
@@ -186,8 +190,10 @@ describe("onboarding form", () => {
   const getIndustryValue = (): Industry =>
     (subject.queryByTestId("industry") as HTMLInputElement)?.value as Industry;
 
-  const getLegalStructureValue = (): LegalStructure =>
-    (subject.queryByTestId("legal-structure") as HTMLInputElement)?.value as LegalStructure;
+  const getLegalStructureValue = (): LegalStructure => {
+    const checked = subject.container.querySelector(".Mui-checked input") as HTMLInputElement;
+    return checked.value as LegalStructure;
+  };
 
   const getMunicipalityValue = (): string =>
     (subject.queryByTestId("municipality") as HTMLInputElement)?.value;

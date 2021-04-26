@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const Content = (props: Props): ReactElement => {
-  return remark()
+  const markdown = remark()
     .use(remark2react, {
       remarkReactComponents: {
         code: ContextualInfoLink,
@@ -19,6 +19,8 @@ export const Content = (props: Props): ReactElement => {
       },
     })
     .processSync(props.children).result as ReactElement;
+
+  return <div className="usa-prose">{markdown}</div>;
 };
 
 const ExternalLink = ({ children, href }: { children: string[]; href: string }): ReactElement => {

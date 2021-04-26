@@ -1,0 +1,1 @@
+Similar to an LP but the general partners have limited liability as well.

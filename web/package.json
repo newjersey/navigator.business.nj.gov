@@ -7,7 +7,7 @@
     "build": "next build",
     "postbuild": "next export",
     "start": "next start",
-    "test": "jest",
+    "test": "DEBUG_PRINT_LIMIT=50000 jest",
     "eslint": "eslint",
     "lint": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}'",
     "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}' --fix",

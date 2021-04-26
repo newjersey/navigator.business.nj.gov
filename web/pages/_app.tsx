@@ -9,6 +9,7 @@ import { getCurrentUser } from "../lib/auth/sessionHelper";
 import { Roadmap } from "../lib/types/types";
 import { useMountEffect } from "../lib/utils/helpers";
 import { ContextualInfoPanel } from "../components/ContextualInfoPanel";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
 Amplify.configure({ ...awsExports, ssr: true });
 
@@ -42,6 +43,23 @@ export const ContextualInfoContext = React.createContext<ContextualInfoContextTy
   setContextualInfoMd: () => {},
 });
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#7fb135",
+      main: "#538200",
+      dark: "#243413",
+      contrastText: "#f0f0f0",
+    },
+    secondary: {
+      light: "#73b3e7",
+      main: "#2378c3",
+      dark: "#162e51",
+      contrastText: "#f0f0f0",
+    },
+  },
+});
+
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
@@ -64,14 +82,16 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <script src="/intercom/settings.js" />
       <script src="/intercom/init.js" />
 
-      <AuthContext.Provider value={{ state, dispatch }}>
-        <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
-          <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-            <ContextualInfoPanel />
-            <Component {...pageProps} />
-          </RoadmapContext.Provider>
-        </ContextualInfoContext.Provider>
-      </AuthContext.Provider>
+      <ThemeProvider theme={theme}>
+        <AuthContext.Provider value={{ state, dispatch }}>
+          <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
+            <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+              <ContextualInfoPanel />
+              <Component {...pageProps} />
+            </RoadmapContext.Provider>
+          </ContextualInfoContext.Provider>
+        </AuthContext.Provider>
+      </ThemeProvider>
     </>
   );
 };

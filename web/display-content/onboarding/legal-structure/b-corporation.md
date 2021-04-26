@@ -1,0 +1,1 @@
+A B-Corporation has a description.

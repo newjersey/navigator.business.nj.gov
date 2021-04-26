@@ -1,5 +1,6 @@
 import fs from "fs";
 import { loadOnboardingDisplayContent, loadRoadmapDisplayContent } from "./loadDisplayContent";
+import { ALL_LEGAL_STRUCTURES } from "../types/types";
 
 jest.mock("fs");
 
@@ -11,6 +12,7 @@ describe("loadDisplayContent", () => {
   let mockedFs: jest.Mocked<typeof fs>;
 
   beforeEach(() => {
+    jest.resetAllMocks();
     mockedFs = fs as jest.Mocked<typeof fs>;
   });
 
@@ -44,11 +46,25 @@ describe("loadDisplayContent", () => {
         contentMd: "\n### I am a header\n\nI am a description",
       });
     });
+
+    it("loads content for each legal structure option", async () => {
+      mockedFs.readFileSync.mockReturnValue("### I am a header\n\nI am a description");
+
+      expect((await loadOnboardingDisplayContent()).legalStructureOptionContent["s-corporation"]).toEqual(
+        "### I am a header\n\nI am a description"
+      );
+      const allFilePaths = mockedFs.readFileSync.mock.calls.map(
+        (args) => (args[0] as string).split("onboarding")[1]
+      );
+      for (const legalStructure of ALL_LEGAL_STRUCTURES) {
+        expect(allFilePaths).toContain(`/legal-structure/${legalStructure}.md`);
+      }
+    });
   });
 
   describe("loadRoadmapDisplayContent", () => {
     it("returns roadmap content from markdown", async () => {
-      const roadmapContentMd = "### I am a header\n" + "\n" + "I am a description";
+      const roadmapContentMd = "### I am a header\n\nI am a description";
 
       mockedFs.readFileSync.mockReturnValue(roadmapContentMd);
       expect((await loadRoadmapDisplayContent()).contentMd).toEqual(

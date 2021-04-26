@@ -38,6 +38,7 @@ export type OnboardingDisplayContent = {
   industry: FieldDisplayContent;
   legalStructure: FieldDisplayContent;
   municipality: FieldDisplayContent;
+  legalStructureOptionContent: Record<LegalStructure, string>;
 };
 
 export type FieldDisplayContent = {
@@ -81,6 +82,16 @@ export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent 
     },
     municipality: {
       contentMd: "",
+    },
+    legalStructureOptionContent: {
+      "sole-proprietorship": "",
+      "general-partnership": "",
+      "limited-partnership": "",
+      "limited-liability-partnership": "",
+      "limited-liability-company": "",
+      "c-corporation": "",
+      "s-corporation": "",
+      "b-corporation": "",
     },
   };
 };

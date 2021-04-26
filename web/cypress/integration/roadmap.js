@@ -19,7 +19,6 @@ describe("Roadmap", () => {
     cy.get('[data-value="e-commerce"]').click();
     clickNext();
 
-    cy.get('[aria-label="Legal structure"]').click();
     cy.get('[data-value="general-partnership"]').click();
     clickNext();
 
