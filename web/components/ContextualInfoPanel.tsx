@@ -23,7 +23,7 @@ export const ContextualInfoPanel = (): ReactElement => {
       />
       <FocusTrappedSidebar close={close} isOpen={!!isVisible()}>
         <aside data-testid="info-panel" className={`info-panel ${isVisible()}`}>
-          <button className="fdr fac fjc info-panel-close" onClick={close}>
+          <button className="fdr fac fjc info-panel-close cursor-pointer" onClick={close}>
             <Icon className="font-sans-xl">close</Icon>
           </button>
           <Content>{contextualInfoMd}</Content>

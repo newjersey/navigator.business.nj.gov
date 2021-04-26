@@ -20,5 +20,5 @@ export const FocusTrappedSidebar = ({ children, close, isOpen }: Props): ReactEl
     };
   });
 
-  return isOpen ? <FocusTrap>{children}</FocusTrap> : <></>;
+  return isOpen ? <FocusTrap focusTrapOptions={{ allowOutsideClick: true }}>{children}</FocusTrap> : <></>;
 };
