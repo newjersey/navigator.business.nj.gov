@@ -8,3 +8,6 @@ export const onEscape = (e: KeyboardEvent, handler: () => void): void => {
     handler();
   }
 };
+
+export const templateEval = (template: string, args: Record<string, string>): string =>
+  template.replace(/\${(\w+)}/g, (_, v) => args[v]);

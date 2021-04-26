@@ -1,5 +1,6 @@
 import React, { ReactElement, useContext } from "react";
 import { OnboardingContext } from "../../pages/onboarding";
+import { OnboardingDefaults } from "../../display-content/onboarding/OnboardingDefaults";
 
 export const OnboardingButtonGroup = (): ReactElement => {
   const { state, onBack } = useContext(OnboardingContext);
@@ -13,11 +14,11 @@ export const OnboardingButtonGroup = (): ReactElement => {
     <div className="float-right fdr">
       {state.page > 1 && (
         <button className="usa-button usa-button--outline" onClick={back}>
-          Back
+          {OnboardingDefaults.backButtonText}
         </button>
       )}
       <button type="submit" className="usa-button margin-right-0" data-next={true}>
-        Next
+        {OnboardingDefaults.nextButtonText}
       </button>
     </div>
   );

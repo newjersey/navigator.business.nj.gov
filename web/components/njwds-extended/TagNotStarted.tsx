@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
+import { TaskProgressLookup } from "../../display-content/TaskProgressLookup";
 
 export const TagNotStarted = (): ReactElement => {
-  return <span className="usa-tag bg-base-lighter text-base">Not started</span>;
+  return <span className="usa-tag bg-base-lighter text-base">{TaskProgressLookup.NOT_STARTED}</span>;
 };

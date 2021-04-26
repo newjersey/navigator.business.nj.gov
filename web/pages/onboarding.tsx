@@ -18,10 +18,12 @@ import { OnboardingBusinessName } from "../components/onboarding/OnboardingName"
 import { OnboardingIndustry } from "../components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "../components/onboarding/OnboardingLegalStructure";
 import { GetStaticPropsResult } from "next";
-import { loadOnboardingDisplayContent } from "../lib/static/loadOnboardingDisplayContent";
 import { OnboardingButtonGroup } from "../components/onboarding/OnboardingButtonGroup";
 import { loadAllMunicipalities } from "../lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "../components/onboarding/OnboardingMunicipality";
+import { OnboardingDefaults } from "../display-content/onboarding/OnboardingDefaults";
+import { templateEval } from "../lib/utils/helpers";
+import { loadOnboardingDisplayContent } from "../lib/static/loadDisplayContent";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -93,9 +95,12 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const header = () => (
     <>
-      Onboarding{" "}
+      {OnboardingDefaults.pageTitle}{" "}
       <span className="weight-400">
-        Step {page} of {PAGES}
+        {templateEval(OnboardingDefaults.stepXofYTemplate, {
+          currentPage: page.toString(),
+          totalPages: PAGES.toString(),
+        })}
       </span>
     </>
   );

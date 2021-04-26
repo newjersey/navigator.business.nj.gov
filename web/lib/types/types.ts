@@ -45,6 +45,10 @@ export type FieldDisplayContent = {
   placeholder?: string;
 };
 
+export type RoadmapDisplayContent = {
+  contentMd: string;
+};
+
 export type Municipality = {
   name: string;
   displayName: string;

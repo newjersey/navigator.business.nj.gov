@@ -10,6 +10,7 @@ import { useRoadmap } from "../../lib/data-hooks/useRoadmap";
 import { TaskProgressDropdown } from "../../components/TaskProgressDropdown";
 import { useUserData } from "../../lib/data-hooks/useUserData";
 import { Content } from "../../components/Content";
+import { TaskDefaults } from "../../display-content/tasks/TaskDefaults";
 
 interface Props {
   task: Task;
@@ -23,7 +24,7 @@ const TaskPage = (props: Props): ReactElement => {
   const backButton = (
     <Link href="/roadmap" passHref>
       <a href="/roadmap" data-back-to-roadmap>
-        ← Back to Roadmap
+        {TaskDefaults.backToRoadmapText}
       </a>
     </Link>
   );
@@ -51,7 +52,7 @@ const TaskPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton>
-      <SidebarPageLayout sidebar={sidebar} backButton={backButton}>
+      <SidebarPageLayout sidebar={sidebar} backButton={backButton} pageTitle={TaskDefaults.pageTitle}>
         <div className="grid-container padding-0">
           <div className="grid-row grid-gap">
             <div className="tablet:grid-col-9">
@@ -71,7 +72,7 @@ const TaskPage = (props: Props): ReactElement => {
 
         {getModifiedTaskContent("destinationText") && (
           <div className="padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
-            Destination: <strong>{getModifiedTaskContent("destinationText")}</strong>
+            {TaskDefaults.destinationLabel}: <strong>{getModifiedTaskContent("destinationText")}</strong>
           </div>
         )}
 
@@ -84,7 +85,7 @@ const TaskPage = (props: Props): ReactElement => {
               className="mla margin-top-4 margin-bottom-8"
             >
               <button className="usa-button">
-                {getModifiedTaskContent("callToActionText") || "Start Application"}
+                {getModifiedTaskContent("callToActionText") || TaskDefaults.defaultCallToActionText}
               </button>
             </a>
           </div>

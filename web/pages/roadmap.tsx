@@ -8,41 +8,55 @@ import { useRoadmap } from "../lib/data-hooks/useRoadmap";
 import { AuthButton } from "../components/AuthButton";
 import { IndustryLookup } from "../display-content/IndustryLookup";
 import { LegalStructureLookup } from "../display-content/LegalStructureLookup";
+import { RoadmapDefaults } from "../display-content/roadmap/RoadmapDefaults";
+import { templateEval } from "../lib/utils/helpers";
+import { GetStaticPropsResult } from "next";
+import { RoadmapDisplayContent } from "../lib/types/types";
+import { loadRoadmapDisplayContent } from "../lib/static/loadDisplayContent";
+import { Content } from "../components/Content";
 
-const RoadmapPage = (): ReactElement => {
+interface Props {
+  displayContent: RoadmapDisplayContent;
+}
+
+const RoadmapPage = (props: Props): ReactElement => {
   const { userData, isLoading } = useUserData();
   const { roadmap } = useRoadmap();
 
   const getHeader = (): string => {
     return userData?.onboardingData.businessName
-      ? `Business Roadmap for ${userData.onboardingData.businessName}`
-      : "Your Business Roadmap";
+      ? templateEval(RoadmapDefaults.roadmapTitleTemplate, {
+          businessName: userData.onboardingData.businessName,
+        })
+      : RoadmapDefaults.roadmapTitleNotSet;
   };
 
   const getBusinessName = (): string => {
-    if (isLoading) return "Loading...";
-    return userData?.onboardingData.businessName ? userData.onboardingData.businessName : "Not set";
+    if (isLoading) return RoadmapDefaults.loadingText;
+    return userData?.onboardingData.businessName
+      ? userData.onboardingData.businessName
+      : RoadmapDefaults.greyBoxNotSetText;
   };
 
   const getIndustry = (): string => {
-    if (isLoading) return "Loading...";
+    if (isLoading) return RoadmapDefaults.loadingText;
     return userData?.onboardingData.industry && userData?.onboardingData.industry !== "generic"
       ? IndustryLookup[userData.onboardingData.industry]
-      : "Not set";
+      : RoadmapDefaults.greyBoxNotSetText;
   };
 
   const getLegalStructure = (): string => {
-    if (isLoading) return "Loading...";
+    if (isLoading) return RoadmapDefaults.loadingText;
     return userData?.onboardingData.legalStructure
       ? LegalStructureLookup[userData.onboardingData.legalStructure]
-      : "Not set";
+      : RoadmapDefaults.greyBoxNotSetText;
   };
 
   const getMunicipality = (): string => {
-    if (isLoading) return "Loading...";
+    if (isLoading) return RoadmapDefaults.loadingText;
     return userData?.onboardingData.municipality
       ? userData.onboardingData.municipality.displayName
-      : "Not set";
+      : RoadmapDefaults.greyBoxNotSetText;
   };
 
   return (
@@ -52,24 +66,23 @@ const RoadmapPage = (): ReactElement => {
           <AuthButton />
         </div>
         <h1>{getHeader()}</h1>
-        <p className="allow-long usa-intro">
-          To start your business in New Jersey, you’ll need to complete the basic steps below. Here’s what you
-          need to do at a glance. Once you’re ready we’ll start to walk you through the process.
-        </p>
+        <div className="allow-long usa-intro">
+          <Content>{props.displayContent.contentMd}</Content>
+        </div>
         <div>
-          <GreyCallout link={{ text: "Edit", href: "/onboarding" }}>
+          <GreyCallout link={{ text: RoadmapDefaults.greyBoxEditText, href: "/onboarding" }}>
             <>
               <div data-business-name={userData?.onboardingData.businessName}>
-                Business Name: <strong>{getBusinessName()}</strong>
+                {RoadmapDefaults.greyBoxBusinessNameText}: <strong>{getBusinessName()}</strong>
               </div>
               <div data-industry={userData?.onboardingData.industry}>
-                Industry: <strong>{getIndustry()}</strong>
+                {RoadmapDefaults.greyBoxIndustryText}: <strong>{getIndustry()}</strong>
               </div>
               <div data-legal-structure={userData?.onboardingData.legalStructure}>
-                Legal Structure: <strong>{getLegalStructure()}</strong>
+                {RoadmapDefaults.greyBoxLegalStructureText}: <strong>{getLegalStructure()}</strong>
               </div>
               <div data-municipality={userData?.onboardingData.municipality?.name}>
-                Location: <strong>{getMunicipality()}</strong>
+                {RoadmapDefaults.greyBoxMunicipalityText}: <strong>{getMunicipality()}</strong>
               </div>
             </>
           </GreyCallout>
@@ -81,6 +94,14 @@ const RoadmapPage = (): ReactElement => {
       </SinglePageLayout>
     </PageSkeleton>
   );
+};
+
+export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+  return {
+    props: {
+      displayContent: await loadRoadmapDisplayContent(),
+    },
+  };
 };
 
 export default RoadmapPage;

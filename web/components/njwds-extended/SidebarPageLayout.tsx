@@ -8,9 +8,10 @@ interface Props {
   children: React.ReactNode;
   sidebar: ReactElement;
   backButton?: ReactElement;
+  pageTitle: string;
 }
 
-export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): ReactElement => {
+export const SidebarPageLayout = ({ children, sidebar, backButton, pageTitle }: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
@@ -39,7 +40,7 @@ export const SidebarPageLayout = ({ children, sidebar, backButton }: Props): Rea
               <Icon className="font-sans-xl">menu</Icon>
             </button>
             <div className="usa-logo">
-              <em className="usa-logo__text">Business Roadmap</em>
+              <em className="usa-logo__text">{pageTitle}</em>
             </div>
           </div>
         </div>

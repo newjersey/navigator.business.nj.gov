@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { OnboardingDisplayContent } from "../types/types";
-import { convertFieldDisplayContentMd } from "../utils/markdownReader";
+import { OnboardingDisplayContent, RoadmapDisplayContent } from "../types/types";
+import { convertFieldDisplayContentMd, getMarkdownContent } from "../utils/markdownReader";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
 
@@ -32,5 +32,13 @@ export const loadOnboardingDisplayContent = async (): Promise<OnboardingDisplayC
     industry,
     legalStructure,
     municipality,
+  };
+};
+
+export const loadRoadmapDisplayContent = async (): Promise<RoadmapDisplayContent> => {
+  const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
+
+  return {
+    contentMd: getMarkdownContent(roadmapContents),
   };
 };

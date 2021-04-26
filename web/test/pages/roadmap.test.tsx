@@ -9,7 +9,7 @@ import {
 } from "../factories";
 import * as useUserModule from "../../lib/data-hooks/useUserData";
 import * as useRoadmapModule from "../../lib/data-hooks/useRoadmap";
-import { render } from "@testing-library/react";
+import { render, RenderResult } from "@testing-library/react";
 import RoadmapPage from "../../pages/roadmap";
 import { OnboardingData, Roadmap } from "../../lib/types/types";
 
@@ -30,23 +30,27 @@ describe("roadmap page", () => {
     mockUseRoadmap.mockReturnValue({ roadmap: generateRoadmap({}) });
   });
 
+  const renderRoadmapPage = (): RenderResult => {
+    return render(<RoadmapPage displayContent={{ contentMd: "" }} />);
+  };
+
   describe("business information", () => {
     it("shows the business name from onboarding data", () => {
       useMockOnboardingData({ businessName: "My cool business" });
-      const subject = render(<RoadmapPage />);
+      const subject = render(<RoadmapPage displayContent={{ contentMd: "" }} />);
       expect(subject.getByText("Business Roadmap for My cool business")).toBeInTheDocument();
     });
 
     it("shows placeholder if no business name present", async () => {
       useMockOnboardingData({ businessName: "", industry: "restaurant", legalStructure: "b-corporation" });
-      const subject = render(<RoadmapPage />);
+      const subject = renderRoadmapPage();
       expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });
 
     it("shows the human-readable industry from onboarding data", () => {
       useMockOnboardingData({ industry: "home-contractor" });
-      const subject = render(<RoadmapPage />);
+      const subject = renderRoadmapPage();
       expect(subject.getByText("Home-Improvement Contractor")).toBeInTheDocument();
     });
 
@@ -56,13 +60,13 @@ describe("roadmap page", () => {
         legalStructure: "b-corporation",
         municipality: generateMunicipality({}),
       });
-      const subject = render(<RoadmapPage />);
+      const subject = renderRoadmapPage();
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });
 
     it("shows the human-readable legal structure from onboarding data", () => {
       useMockOnboardingData({ legalStructure: "limited-liability-company" });
-      const subject = render(<RoadmapPage />);
+      const subject = renderRoadmapPage();
       expect(subject.getByText("Limited Liability Company (LLC)")).toBeInTheDocument();
     });
 
@@ -72,7 +76,7 @@ describe("roadmap page", () => {
         industry: "restaurant",
         municipality: generateMunicipality({}),
       });
-      const subject = render(<RoadmapPage />);
+      const subject = renderRoadmapPage();
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });
 
@@ -80,7 +84,7 @@ describe("roadmap page", () => {
       useMockOnboardingData({
         municipality: generateMunicipality({ displayName: "Franklin (Hunterdon County)" }),
       });
-      const subject = render(<RoadmapPage />);
+      const subject = renderRoadmapPage();
       expect(subject.getByText("Franklin (Hunterdon County)")).toBeInTheDocument();
     });
 
@@ -90,7 +94,7 @@ describe("roadmap page", () => {
         industry: "restaurant",
         municipality: undefined,
       });
-      const subject = render(<RoadmapPage />);
+      const subject = renderRoadmapPage();
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });
   });
@@ -110,7 +114,7 @@ describe("roadmap page", () => {
       ],
     });
 
-    const subject = render(<RoadmapPage />);
+    const subject = renderRoadmapPage();
 
     expect(subject.queryByText("step1", { exact: false })).toBeInTheDocument();
     expect(subject.queryByText("1-2 weeks")).toBeInTheDocument();
@@ -147,7 +151,7 @@ describe("roadmap page", () => {
       })
     );
 
-    const subject = render(<RoadmapPage />);
+    const subject = renderRoadmapPage();
 
     expect(subject.queryByText("In-progress")).toBeInTheDocument();
     expect(subject.queryByText("Completed")).toBeInTheDocument();
