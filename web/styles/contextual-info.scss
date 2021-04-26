@@ -11,7 +11,7 @@
   padding: 1rem;
   z-index: 500;
   background-color: #e7f6f8;
-  width: 20rem;
+  width: 60vw;
 
   @media all and (min-width: $sm) {
     width: 30rem;
@@ -24,8 +24,8 @@
 }
 
 .info-panel.is-visible {
-  -webkit-animation: slidein-left-20 0.3s ease-in-out;
-  animation: slidein-left-20 0.3s ease-in-out;
+  -webkit-animation: slidein-left-60vw 0.3s ease-in-out;
+  animation: slidein-left-60vw 0.3s ease-in-out;
   display: flex;
 }
 
@@ -66,18 +66,18 @@
   visibility: visible;
 }
 
-@-webkit-keyframes slidein-left-20 {
+@-webkit-keyframes slidein-left-60vw {
   0% {
-    transform: translateX(20rem);
+    transform: translateX(60vw);
   }
   to {
     transform: translateX(0);
   }
 }
 
-@keyframes slidein-left-20 {
+@keyframes slidein-left-60vw {
   0% {
-    transform: translateX(20rem);
+    transform: translateX(60vw);
   }
   to {
     transform: translateX(0);
