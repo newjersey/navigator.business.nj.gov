@@ -46,9 +46,8 @@ $lg: 64em; //desktop and up (1024px)
   }
 }
 
-.dotted-underline {
-  text-decoration: underline;
-  text-decoration-width: 2px;
-  text-decoration-thickness: 2px;
-  text-decoration-style: dotted;
+.dashed-underline {
+  padding-bottom: 1px;
+  border-bottom-width: 2px;
+  border-bottom-style: dashed;
 }

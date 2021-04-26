@@ -23,7 +23,7 @@ export const ContextualInfoLink = ({ children }: { children: string[] }): ReactE
   return (
     <>
       <button className="usa-button--unstyled cursor-pointer" onClick={setContext}>
-        <span className="dotted-underline">{displayText}</span>
+        <span className="dashed-underline border-primary">{displayText}</span>
       </button>
     </>
   );
