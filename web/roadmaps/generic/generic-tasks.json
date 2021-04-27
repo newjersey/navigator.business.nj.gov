@@ -2,42 +2,7 @@
   {
     "step": "create-business-plan",
     "weight": 1,
-    "task": "executive-summary"
-  },
-  {
-    "step": "create-business-plan",
-    "weight": 2,
-    "task": "introduction"
-  },
-  {
-    "step": "create-business-plan",
-    "weight": 3,
-    "task": "business-description"
-  },
-  {
-    "step": "create-business-plan",
-    "weight": 4,
-    "task": "market-analysis"
-  },
-  {
-    "step": "create-business-plan",
-    "weight": 5,
-    "task": "organization-and-management"
-  },
-  {
-    "step": "create-business-plan",
-    "weight": 6,
-    "task": "marketing-and-sales"
-  },
-  {
-    "step": "create-business-plan",
-    "weight": 7,
-    "task": "finances"
-  },
-  {
-    "step": "create-business-plan",
-    "weight": 8,
-    "task": "appendix"
+    "task": "business-plan"
   },
   {
     "step": "due-diligence",
