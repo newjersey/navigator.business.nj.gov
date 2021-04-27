@@ -44,6 +44,21 @@ export const ContextualInfoContext = React.createContext<ContextualInfoContextTy
 });
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      "Public Sans Web",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "Segoe UI",
+      "Roboto",
+      "Helvetica",
+      "Arial",
+      "sans-serif",
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+    ].join(","),
+  },
   palette: {
     primary: {
       light: "#7fb135",
