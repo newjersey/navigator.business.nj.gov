@@ -40,3 +40,13 @@ hr {
     max-width: 43.75rem;
   }
 }
+
+.usa-section {
+  padding-top: 0 !important;
+}
+
+@media all and (min-width: $lg) {
+  .usa-section {
+    padding-top: 4rem !important;
+  }
+}

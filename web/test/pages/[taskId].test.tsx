@@ -1,7 +1,6 @@
 import { fireEvent, render, RenderResult } from "@testing-library/react";
 import TaskPage from "../../pages/tasks/[taskId]";
 import { useMediaQuery } from "@material-ui/core";
-
 import * as useRoadmapModule from "../../lib/data-hooks/useRoadmap";
 import * as useUserDataModule from "../../lib/data-hooks/useUserData";
 import { generateRoadmap, generateStep, generateTask, generateUserData } from "../factories";

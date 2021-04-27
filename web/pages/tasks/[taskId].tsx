@@ -11,6 +11,7 @@ import { TaskProgressDropdown } from "../../components/TaskProgressDropdown";
 import { useUserData } from "../../lib/data-hooks/useUserData";
 import { Content } from "../../components/Content";
 import { TaskDefaults } from "../../display-content/tasks/TaskDefaults";
+import { Icon } from "../../components/njwds/Icon";
 
 interface Props {
   task: Task;
@@ -23,8 +24,8 @@ const TaskPage = (props: Props): ReactElement => {
 
   const backButton = (
     <Link href="/roadmap" passHref>
-      <a href="/roadmap" data-back-to-roadmap>
-        {TaskDefaults.backToRoadmapText}
+      <a href="/roadmap" data-back-to-roadmap className="fdr fac">
+        <Icon>arrow_back</Icon> {TaskDefaults.backToRoadmapText}
       </a>
     </Link>
   );
@@ -53,10 +54,10 @@ const TaskPage = (props: Props): ReactElement => {
   return (
     <PageSkeleton>
       <SidebarPageLayout sidebar={sidebar} backButton={backButton} pageTitle={TaskDefaults.pageTitle}>
-        <div className="grid-container padding-0">
+        <div className="grid-container padding-0 margin-bottom-1">
           <div className="grid-row grid-gap">
             <div className="tablet:grid-col-9">
-              <h2 className="margin-top-0" data-task-id={props.task.id}>
+              <h2 className="margin-top-0 margin-bottom-0" data-task-id={props.task.id}>
                 {props.task.name}
               </h2>
             </div>
