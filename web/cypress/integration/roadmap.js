@@ -34,13 +34,13 @@ describe("Roadmap", () => {
 
     // step 1
     cy.get('[data-step="create-business-plan"]').should("exist");
-    cy.get('[data-task="executive-summary"]').should("exist");
+    cy.get('[data-task="business-plan"]').should("exist");
 
     // step 2
     cy.get('[data-step="due-diligence"]').should("exist");
     cy.get('[data-task="research-insurance-needs"]').should("exist");
 
-    // step 3 - GP
+    // step 3
     cy.get('[data-step="register-business"]').should("exist");
     cy.get('[data-task="register-trade-name"]').should("exist");
 
