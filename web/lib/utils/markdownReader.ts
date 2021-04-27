@@ -29,7 +29,6 @@ export const getMarkdownContent = (fileContents: string): string => {
 type TaskGrayMatter = {
   id: string;
   name: string;
-  destinationText: string;
   callToActionLink: string;
   callToActionText: string;
 };

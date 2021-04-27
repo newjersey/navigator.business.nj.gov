@@ -1,7 +1,6 @@
 ---
 id: "board-inspection"
 name: "Board Inspection"
-destinationText: ""
 callToActionLink: "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
 callToActionText: ""
 ---

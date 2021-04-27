@@ -71,12 +71,6 @@ const TaskPage = (props: Props): ReactElement => {
         </div>
         <Content>{getModifiedTaskContent("contentMd")}</Content>
 
-        {getModifiedTaskContent("destinationText") && (
-          <div className="padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
-            {TaskDefaults.destinationLabel}: <strong>{getModifiedTaskContent("destinationText")}</strong>
-          </div>
-        )}
-
         {getModifiedTaskContent("callToActionLink") && (
           <div className="fdr">
             <a

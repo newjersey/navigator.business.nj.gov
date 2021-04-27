@@ -1,7 +1,6 @@
 ---
 id: "register-for-ein"
 name: "Register for an EIN"
-destinationText: ""
 callToActionLink: "https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online"
 callToActionText: ""
 ---

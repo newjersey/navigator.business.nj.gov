@@ -1,7 +1,6 @@
 ---
 id: "food-safety-course"
 name: "Complete Food Safety Course"
-destinationText: ""
 callToActionLink: ""
 callToActionText: ""
 ---

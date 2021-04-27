@@ -1,7 +1,6 @@
 ---
 id: "register-trade-name"
 name: "Register a Trade Name"
-destinationText: "County Clerk"
 callToActionLink: ""
 callToActionText: ""
 ---
@@ -13,3 +12,7 @@ To complete this step, you must have:
 
 After you complete this step, you will have:
 - Trade Name
+
+||
+|---|
+| **Destination**: County Clerk |

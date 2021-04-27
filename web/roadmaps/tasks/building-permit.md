@@ -1,7 +1,6 @@
 ---
 id: "building-permit"
 name: "Obtain Building Permit"
-destinationText: "Form Available from DCA, submitted to Local Construction Office"
 callToActionLink: ""
 callToActionText: ""
 ---
@@ -14,3 +13,7 @@ To complete this step, you must have:
 
 After you complete this step, you will have:
 - Building Permit
+
+||
+|---|
+| **Destination**: Form Available from DCA, submitted to Local Construction Office |

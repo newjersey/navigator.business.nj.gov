@@ -1,7 +1,6 @@
 ---
 id: "mercantile-license"
 name: "Mercantile License"
-destinationText: "Depends on municipality"
 callToActionLink: ""
 callToActionText: ""
 ---
@@ -13,3 +12,7 @@ To complete this step, you must have:
 
 After you complete this step, you will have:
 - Mercantile License
+
+||
+|---|
+| **Destination**: Depends on municipality |

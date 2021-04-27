@@ -16,6 +16,12 @@ export const Content = (props: Props): ReactElement => {
       remarkReactComponents: {
         code: ContextualInfoLink,
         a: ExternalLink,
+        table: OutlineBox,
+        thead: Unformatted,
+        tr: Unformatted,
+        th: Unformatted,
+        td: Unformatted,
+        tbody: Unformatted,
       },
     })
     .processSync(props.children).result as ReactElement;
@@ -29,5 +35,15 @@ const ExternalLink = ({ children, href }: { children: string[]; href: string }):
       {children[0]}
       <Icon className="">launch</Icon>
     </a>
+  );
+};
+
+const Unformatted = ({ children }: { children: string[] }): ReactElement => <div>{children}</div>;
+
+const OutlineBox = ({ children }: { children: string[] }): ReactElement => {
+  return (
+    <div className="text-normal padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
+      {children}
+    </div>
   );
 };

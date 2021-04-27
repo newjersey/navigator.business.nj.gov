@@ -44,8 +44,14 @@ describe("task page", () => {
   it("shows the task details", () => {
     const task = generateTask({
       name: "complete a tax form",
-      contentMd: "## fill out your tax form\n\nit has to get done",
-      destinationText: "city clerk",
+      contentMd:
+        "## fill out your tax form\n" +
+        "\n" +
+        "it has to get done\n" +
+        "\n" +
+        "||\n" +
+        "|---|\n" +
+        "| destination: city clerk |\n",
       callToActionLink: "www.example.com",
       callToActionText: "Submit The Form Here",
     });
@@ -54,7 +60,7 @@ describe("task page", () => {
     expect(subject.getByText("complete a tax form")).toBeInTheDocument();
     expect(subject.getByText("fill out your tax form")).toBeInTheDocument();
     expect(subject.getByText("it has to get done")).toBeInTheDocument();
-    expect(subject.getByText("city clerk")).toBeInTheDocument();
+    expect(subject.getByText("destination: city clerk")).toBeInTheDocument();
     expect(subject.getByText("Submit The Form Here")).toBeInTheDocument();
 
     expect(subject.queryByText("Back to Roadmap", { exact: false })).toBeInTheDocument();
@@ -80,20 +86,10 @@ describe("task page", () => {
     expect(subject.getByText("Start Application")).toBeInTheDocument();
   });
 
-  it("does not show destination if no destination name available", () => {
-    const task = generateTask({
-      destinationText: "",
-    });
-
-    subject = render(<TaskPage task={task} />);
-    expect(subject.queryByText("Destination:", { exact: false })).not.toBeInTheDocument();
-  });
-
-  it("shows updated content if different from static content", () => {
+  it("shows updated call-to-action if different from static content", () => {
     const task = generateTask({
       id: "123",
       contentMd: "original description",
-      destinationText: "original destination",
       callToActionText: "original call to action",
     });
 
@@ -101,7 +97,6 @@ describe("task page", () => {
       generateTask({
         id: "123",
         contentMd: "a whole brand new description",
-        destinationText: "a whole brand new destination",
         callToActionText: "a whole brand new call to action",
       })
     );
@@ -109,9 +104,6 @@ describe("task page", () => {
     subject = render(<TaskPage task={task} />);
     expect(subject.queryByText("original description")).not.toBeInTheDocument();
     expect(subject.queryByText("a whole brand new description")).toBeInTheDocument();
-
-    expect(subject.queryByText("original destination")).not.toBeInTheDocument();
-    expect(subject.queryByText("a whole brand new destination")).toBeInTheDocument();
 
     expect(subject.queryByText("original call to action")).not.toBeInTheDocument();
     expect(subject.queryByText("a whole brand new call to action")).toBeInTheDocument();

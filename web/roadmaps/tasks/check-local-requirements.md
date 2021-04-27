@@ -1,7 +1,6 @@
 ---
 id: "check-local-requirements"
 name: "Check with your town for any local requirements"
-destinationText: ""
 callToActionLink: ""
 callToActionText: ""
 ---

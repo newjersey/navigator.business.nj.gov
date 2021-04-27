@@ -1,7 +1,6 @@
 ---
 id: "certificate-of-occupancy"
 name: "Certificate of Occupancy/Approval"
-destinationText: "Local govt or building office"
 callToActionLink: ""
 callToActionText: ""
 ---
@@ -13,3 +12,7 @@ To complete this step, you must have:
 
 After you complete this step, you will have:
 - Certificate of Occupancy, Temporary Certificate of Occupancy, or Letter issued by the town
+
+||
+|---|
+| **Destination**: Local govt or building office |

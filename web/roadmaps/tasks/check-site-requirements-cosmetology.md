@@ -1,7 +1,6 @@
 ---
 id: "check-site-requirements"
 name: "Check and Plan Local Site Requirements"
-destinationText: "City Office of Zoning and County Clerk"
 callToActionLink: ""
 callToActionText: ""
 ---
@@ -10,3 +9,7 @@ To open or relocate a shop location, you may need to verify the zoning for comme
         
 To complete this step, you must have:
 - Potential Address
+
+||
+|---|
+| **Destination**: City Office of Zoning and County Clerk |

@@ -31,7 +31,6 @@ describe("loadTasks", () => {
         "---\n" +
         'id: "some-id"\n' +
         'name: "Some Task Name"\n' +
-        'destinationText: ""\n' +
         'callToActionLink: "www.example.com"\n' +
         'callToActionText: ""\n' +
         "---\n" +
@@ -45,7 +44,6 @@ describe("loadTasks", () => {
       expect(await loadTaskById("some-id")).toEqual({
         id: "some-id",
         name: "Some Task Name",
-        destinationText: "",
         callToActionLink: "www.example.com",
         callToActionText: "",
         contentMd: "\n# I am a header\n\nI am a text content",

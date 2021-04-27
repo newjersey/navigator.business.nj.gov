@@ -1,7 +1,6 @@
 ---
 id: "search-licenses"
 name: "Search Licenses"
-destinationText: ""
 callToActionLink: "https://business.nj.gov/licensing-and-certification-guide"
 callToActionText: ""
 ---

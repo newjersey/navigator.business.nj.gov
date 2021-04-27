@@ -1,7 +1,6 @@
 ---
 id: "check-site-suitability"
 name: "Check Site Suitability"
-destinationText: ""
 callToActionLink: "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
 callToActionText: "Read the Requirements"
 ---

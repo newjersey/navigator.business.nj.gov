@@ -1,7 +1,6 @@
 ---
 id: "liquor-license"
 name: "Obtain your Liquor License"
-destinationText: "City Clerk/ABC"
 callToActionLink: "https://www.nj.gov/oag/abc/abc-hb-eng-esp.html"
 callToActionText: ""
 ---
@@ -13,3 +12,7 @@ To complete this step, you must have:
 
 After you complete this step, you will have:
 - Liquor License
+
+||
+|---|
+| **Destination**: City Clerk/ABC |

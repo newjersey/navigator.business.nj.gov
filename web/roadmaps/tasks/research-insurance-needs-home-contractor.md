@@ -1,7 +1,6 @@
 ---
 id: "research-insurance-needs"
 name: "Research Potential Insurance Needs"
-destinationText: ""
 callToActionLink: ""
 callToActionText: ""
 ---

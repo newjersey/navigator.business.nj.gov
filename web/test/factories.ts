@@ -93,7 +93,6 @@ export const generateTask = (overrides: Partial<Task>): Task => {
   return {
     id: "some-id-" + randomInt(),
     name: "some-name-" + randomInt(),
-    destinationText: "some-destination-" + randomInt(),
     callToActionLink: "some-link-" + randomInt(),
     callToActionText: "some-call-to-action-" + randomInt(),
     contentMd: "some-content-md-" + randomInt(),

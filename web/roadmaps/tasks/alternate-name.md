@@ -1,7 +1,6 @@
 ---
 id: "alternate-name"
 name: "Register Your Alternate Name"
-destinationText: ""
 callToActionLink: "https://www.nj.gov/treasury/revenue/altname.shtml"
 callToActionText: ""
 ---

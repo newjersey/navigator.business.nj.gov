@@ -1,7 +1,6 @@
 ---
 id: "apply-for-shop-license"
 name: "Apply for a Shop License"
-destinationText: ""
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: ""
 ---

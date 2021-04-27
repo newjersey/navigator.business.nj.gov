@@ -156,7 +156,6 @@ export interface TaskOverview {
 export interface Task {
   id: string;
   name: string;
-  destinationText: string;
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;

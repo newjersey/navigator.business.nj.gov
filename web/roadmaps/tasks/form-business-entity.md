@@ -1,7 +1,6 @@
 ---
 id: "form-business-entity"
 name: "Form your Business Entity"
-destinationText: ""
 callToActionLink: "https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName"
 callToActionText: ""
 ---

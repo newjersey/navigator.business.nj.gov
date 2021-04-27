@@ -165,7 +165,7 @@ describe("buildRoadmap", () => {
   });
 
   describe("municipality", () => {
-    it("adds destination and callToAction from the user municipality", async () => {
+    it("adds callToAction from the user municipality", async () => {
       mockApi.getMunicipality.mockResolvedValue(
         generateMunicipalityDetail({
           id: "123",
@@ -182,7 +182,6 @@ describe("buildRoadmap", () => {
         .tasks.find((it) => it.id === "check-local-requirements")!;
       expect(municipalityTask.callToActionLink).toEqual("www.cooltown.com");
       expect(municipalityTask.callToActionText).toEqual("Visit the website for Cool Town");
-      expect(municipalityTask.destinationText).toEqual("Cool Town (NJ)");
     });
   });
 });

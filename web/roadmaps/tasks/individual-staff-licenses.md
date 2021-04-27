@@ -1,7 +1,6 @@
 ---
 id: "individual-staff-licenses"
 name: "Individual Staff Licenses"
-destinationText: ""
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: ""
 ---

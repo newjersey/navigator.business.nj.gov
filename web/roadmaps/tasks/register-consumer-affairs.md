@@ -1,7 +1,6 @@
 ---
 id: "register-consumer-affairs"
 name: "Register with the N.J. Division of Consumer Affairs"
-destinationText: ""
 callToActionLink: "https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf"
 callToActionText: ""
 ---

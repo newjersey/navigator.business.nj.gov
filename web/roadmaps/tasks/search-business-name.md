@@ -1,7 +1,6 @@
 ---
 id: "search-business-name"
 name: "Search for Available Business Names"
-destinationText: ""
 callToActionLink: "https://www.njportal.com/DOR/BusinessNameSearch/Search/BusinessName"
 callToActionText: ""
 ---

@@ -119,7 +119,6 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
   }
 
   const municipality = await api.getMunicipality(municipalityId);
-  task.destinationText = municipality.townDisplayName;
   task.callToActionLink = municipality.townWebsite;
   task.callToActionText = `Visit the website for ${municipality.townName}`;
   return roadmap;
