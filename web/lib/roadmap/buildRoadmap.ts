@@ -12,6 +12,7 @@ import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
 import steps from "../../roadmaps/steps.json";
 import * as api from "../api-client/apiClient";
 import { fetchTaskById } from "../async-content-fetchers/fetchTaskById";
+import { templateEval } from "../utils/helpers";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
@@ -119,8 +120,16 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
   }
 
   const municipality = await api.getMunicipality(municipalityId);
-  task.callToActionLink = municipality.townWebsite;
-  task.callToActionText = `Visit the website for ${municipality.townName}`;
+  task.callToActionLink = templateEval(task.callToActionLink, {
+    municipalityWebsite: municipality.townWebsite,
+  });
+  task.callToActionText = templateEval(task.callToActionText, { municipality: municipality.townName });
+  task.contentMd = templateEval(task.contentMd, {
+    municipality: municipality.townName,
+    county: municipality.countyName,
+    countyClerkPhone: municipality.countyClerkPhone,
+    countyClerkWebsite: municipality.countyClerkWebsite,
+  });
   return roadmap;
 };
 

@@ -1,8 +1,8 @@
 ---
 id: "check-local-requirements"
 name: "Check with your town for any local requirements"
-callToActionLink: ""
-callToActionText: ""
+callToActionLink: "${municipalityWebsite}"
+callToActionText: "Visit the website for ${municipality}"
 ---
 
 The process for starting a new business varies for each city or town. But don’t worry, we’ve included a list of common tasks. Be sure to contact your local government to confirm requirements for your business.
@@ -25,3 +25,10 @@ To complete this step, you need:
 
 After you complete this step, you will have:
 - A list of local requirements that are specific to your business.
+
+||
+|---|
+| **Municipality:** ${municipality} |
+| **County:** ${county} |
+| **County Clerk:** ${countyClerkPhone} |
+| [Visit County Clerk Website](${countyClerkWebsite}) |

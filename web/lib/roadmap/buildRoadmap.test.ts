@@ -183,5 +183,32 @@ describe("buildRoadmap", () => {
       expect(municipalityTask.callToActionLink).toEqual("www.cooltown.com");
       expect(municipalityTask.callToActionText).toEqual("Visit the website for Cool Town");
     });
+
+    it("replaces placeholder text", async () => {
+      mockApi.getMunicipality.mockResolvedValue(
+        generateMunicipalityDetail({
+          id: "123",
+          townWebsite: "www.cooltown.com",
+          townName: "Cool Town",
+          townDisplayName: "Cool Town (NJ)",
+          countyName: "Bergen County",
+          countyClerkPhone: "555-1234",
+          countyClerkWebsite: "www.example.com/clerk",
+        })
+      );
+
+      const onboardingData = generateOnboardingData({ municipality: generateMunicipality({ id: "1234" }) });
+      const roadmap = await buildRoadmap(onboardingData);
+      const municipalityTask = roadmap.steps
+        .find((it) => it.id === "lease-and-permits")!
+        .tasks.find((it) => it.id === "check-local-requirements")!;
+
+      expect(municipalityTask.callToActionLink).toContain("www.cooltown.com");
+      expect(municipalityTask.callToActionText).toContain("Cool Town");
+      expect(municipalityTask.contentMd).toContain("Cool Town");
+      expect(municipalityTask.contentMd).toContain("Bergen County");
+      expect(municipalityTask.contentMd).toContain("555-1234");
+      expect(municipalityTask.contentMd).toContain("www.example.com/clerk");
+    });
   });
 });
