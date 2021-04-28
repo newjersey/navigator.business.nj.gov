@@ -4,7 +4,7 @@ name: "Writing Your Business Plan"
 callToActionLink: ""
 callToActionText: ""
 ---
-You should consider the following items when drafting your business plan. Learn more about resources that can help you with your business plan.
+You should consider the following items when drafting your business plan. `Learn more about resources that can help you with your business plan.|business-plan-resources`
 
 **Executive Summary**
 The executive summary is the first (and sometimes only) part of your business plan that people will read. The executive summary should provide information about your business and incorporate the highlights of the below sections. Ultimately, you want to leave the readers with a strong understanding of what your business is and why it will be successful.
