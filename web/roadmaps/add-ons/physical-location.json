@@ -18,15 +18,5 @@
     "step": "lease-and-permits",
     "weight": 4,
     "task": "certificate-of-occupancy"
-  },
-  {
-    "step": "lease-and-permits",
-    "weight": 5,
-    "task": "fire-permit"
-  },
-  {
-    "step": "lease-and-permits",
-    "weight": 6,
-    "task": "mercantile-license"
   }
 ]
