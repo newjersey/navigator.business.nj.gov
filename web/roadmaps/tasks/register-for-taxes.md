@@ -1,6 +1,6 @@
 ---
 id: "register-for-taxes"
-name: "Register for Taxes"
+name: "Register for NJ Taxes"
 callToActionLink: "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml"
 callToActionText: ""
 ---
