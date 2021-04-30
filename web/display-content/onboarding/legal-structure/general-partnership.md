@@ -1,1 +1,1 @@
-The most basic type of business to establish. You alone own the company and are responsible for its assets and liabilities.
+In a general partnership two or more people share ownership of a single business and are jointly responsible for its assets and liabilities.
