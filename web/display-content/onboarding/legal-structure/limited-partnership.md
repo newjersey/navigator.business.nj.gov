@@ -1,1 +1,1 @@
-Have both limited and general partners. The general partners own and operate the business, while the limited partners invest in the business but have limited liability.
+Limited Partnerships have general partners who own and operate the business, and limited partners who invest in the business but have limited liability and oversight. 
