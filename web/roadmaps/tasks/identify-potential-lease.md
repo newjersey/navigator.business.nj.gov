@@ -1,6 +1,6 @@
 ---
 id: "identify-potential-lease"
-name: "Identify a potential lease"
+name: "Identify a Lease"
 callToActionLink: "https://www.nj.gov/treasury/revenue/altname.shtml"
 callToActionText: ""
 ---
