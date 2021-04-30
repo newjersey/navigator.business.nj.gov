@@ -1,1 +1,1 @@
-An LLC is a hybrid between a corporation and a partnership. This default short description should be in 1 or 2 sentences. `Learn more|llc`
+An LLC is one of the most common legal structures. In an LLC, there can be one or multiple owners, and they are not personally liable for the company's debts. `Learn more|llc`
