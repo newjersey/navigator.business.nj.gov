@@ -1,6 +1,6 @@
 ---
 id: "check-local-requirements"
-name: "Check with your town for any local requirements"
+name: "Comply with local laws"
 callToActionLink: "${municipalityWebsite}"
 callToActionText: "Visit the website for ${municipality}"
 ---
@@ -9,7 +9,7 @@ The process for starting a new business varies for each city or town. But don’
 
 ### The following requirements are common in most towns and cities:
 
-**Zoning Permits/Approval**: Be sure to check with your local zoning official to ensure your intended property is permitted for your business. *More information can be found in Step 2.*
+**Zoning Permits/Approval**: Be sure to check with your local zoning official to ensure your intended business use is permitted for your property.
 
 **Renovation/Construction and Building Permits**: A Certificate of Occupancy is required by most townships. The certificate is issued after a local inspection to ensure the building meets the requirements for the business you intend to operate. If you plan to do construction, or change the use of your building, you may need a construction permit as well. Some municipalities may require a fire permit and burglar alarm system. *Check with your local Building Department.*
 
