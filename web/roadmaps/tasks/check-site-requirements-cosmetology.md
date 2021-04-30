@@ -1,6 +1,6 @@
 ---
 id: "check-site-requirements"
-name: "Check and Plan Local Site Requirements"
+name: "Review Local Site Requirements"
 callToActionLink: ""
 callToActionText: ""
 ---
