@@ -9,20 +9,20 @@
   {
     "step_number": 2,
     "id": "due-diligence",
-    "name": "Due Diligence",
+    "name": "Ready",
     "timeEstimate": "1–2 months",
     "description": "Before you officially form & register your business, it's important to have a target location and lease in mind - that way you can form & register your business using your proposed business address. If you change the location of your business after you form & register, you will need to file an amendment to your Business Formation & Registration"
   },
   {
     "step_number": 3,
     "id": "register-business",
-    "name": "Form & Register Your Business",
+    "name": "Set",
     "timeEstimate": "1–2 months",
     "description": "Once you have confirmed your prospective location, it’s time to officially register your business with the State. \nIn this step you are identifying and registering your desired business names, creating your legal entity, and then registering for New Jersey State taxes."
   },
   {
     "step_number": 4,
-    "id": "lease-and-permits",
+    "id": "Go",
     "name": "Sign Your Lease and File Licenses & Local Permits",
     "timeEstimate": "1–2 months",
     "description": "You can now sign your lease and file local permits under the protection of your new legal entity and business name."
@@ -30,7 +30,7 @@
   {
     "step_number": 5,
     "id": "inspection-requirements",
-    "name": "Open and Meet Inspection Requirements",
+    "name": "Don't Close",
     "timeEstimate": "1–2 months",
     "description": "Once your business is up and running there are a few last municipal requirements to check on."
   }
