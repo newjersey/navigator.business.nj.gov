@@ -1,1 +1,1 @@
-The most basic type of business to establish. You alone own the company and are responsible for its assets and liabilities.
+In a sole proprietorship you alone own the company and are responsible for its assets and liabilities.
