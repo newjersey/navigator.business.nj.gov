@@ -1,1 +1,1 @@
-Similar to an LP but the general partners have limited liability as well.
+Limited Liability Partnerships have general partners who own and operate the business, and limited partners who invest in the business, both types of partners have limited liability. 
