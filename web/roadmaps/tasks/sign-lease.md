@@ -13,4 +13,4 @@ To complete this step, you must have:
 
 ||
 |---|
-| **Destination**: Landlord |
+| **Next Step**: Contact your landlord to sign your lease |
