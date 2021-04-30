@@ -1,1 +1,1 @@
-An S-Corporation (S-Corp) is similar to a C-Corporation except that the business is This default short description should be in 1 or 2 sentences.
+In a S-Corporation, owners are not personally liable for the company’s debts, they have different tax structures from LLCs, and can payout dividends to shareholders.
