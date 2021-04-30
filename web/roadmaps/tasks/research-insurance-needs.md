@@ -1,6 +1,6 @@
 ---
 id: "research-insurance-needs"
-name: "Research Potential Insurance Needs"
+name: "Research Insurance Needs"
 callToActionLink: ""
 callToActionText: ""
 ---
