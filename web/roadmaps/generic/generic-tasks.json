@@ -23,5 +23,10 @@
     "step": "lease-and-permits",
     "weight": 2,
     "task": "check-local-requirements"
-  }
+  },
+  {
+   "step": "lease-and-permits",
+   "weight": 3,
+   "task": "fire-permit"
+ }
 ]
