@@ -28,4 +28,4 @@ A B-Corporation (Benefit Corporation or B-Corp) is a new business structure in t
 **Limited Partnership (LP) and Limited Liability Partnership (LLP)**
 Limited Partnerships have both limited and general partners. The general partners own and operate the business, while the limited partners invest in the business but have limited liability and thus limited input in its management. Limited liability partnerships are similar to an LP, but in an LLP even the general partners have limited liability – e.g., they are not responsible for the malpractice of the other partners. These business types are not usually used for retail or service businesses. ‍
 
-Visit the IRS website or contact the [Business Action Center](https://nj.gov/state/bac/) for more information on business structures.
+Visit the IRS website or contact the [Business Action Center](https://nj.gov/state/bac/) for more information on legal structures.
