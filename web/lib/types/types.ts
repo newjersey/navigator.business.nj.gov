@@ -163,14 +163,6 @@ export interface Task {
 
 export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
 
-export const ALL_INDUSTRIES: Industry[] = [
-  "restaurant",
-  "e-commerce",
-  "home-contractor",
-  "cosmetology",
-  "generic",
-];
-
 export type LegalStructure =
   | "sole-proprietorship"
   | "general-partnership"
@@ -180,17 +172,6 @@ export type LegalStructure =
   | "c-corporation"
   | "s-corporation"
   | "b-corporation";
-
-export const ALL_LEGAL_STRUCTURES: LegalStructure[] = [
-  "sole-proprietorship",
-  "general-partnership",
-  "limited-partnership",
-  "limited-liability-partnership",
-  "limited-liability-company",
-  "c-corporation",
-  "s-corporation",
-  "b-corporation",
-];
 
 export type BusinessUser = {
   name?: string;

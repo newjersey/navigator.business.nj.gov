@@ -1,9 +1,12 @@
 import React, { ReactElement, useContext } from "react";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import { OnboardingContext } from "../../pages/onboarding";
-import { ALL_LEGAL_STRUCTURES, LegalStructure } from "../../lib/types/types";
+import { LegalStructure } from "../../lib/types/types";
 import { Content } from "../Content";
-import { LegalStructureLookup } from "../../display-content/LegalStructureLookup";
+import {
+  ALL_LEGAL_STRUCTURES_ORDERED,
+  LegalStructureLookup,
+} from "../../display-content/LegalStructureLookup";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -33,7 +36,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
             value={state.onboardingData.legalStructure || ""}
             onChange={handleLegalStructure}
           >
-            {ALL_LEGAL_STRUCTURES.map((legalStructure) => (
+            {ALL_LEGAL_STRUCTURES_ORDERED.map((legalStructure) => (
               <FormControlLabel
                 style={{ alignItems: "flex-start" }}
                 labelPlacement="end"

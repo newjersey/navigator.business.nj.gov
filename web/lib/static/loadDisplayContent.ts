@@ -1,12 +1,8 @@
 import fs from "fs";
 import path from "path";
-import {
-  ALL_LEGAL_STRUCTURES,
-  LegalStructure,
-  OnboardingDisplayContent,
-  RoadmapDisplayContent,
-} from "../types/types";
+import { LegalStructure, OnboardingDisplayContent, RoadmapDisplayContent } from "../types/types";
 import { convertFieldDisplayContentMd, getMarkdownContent } from "../utils/markdownReader";
+import { ALL_LEGAL_STRUCTURES_ORDERED } from "../../display-content/LegalStructureLookup";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
 
@@ -32,7 +28,7 @@ export const loadOnboardingDisplayContent = async (): Promise<OnboardingDisplayC
   );
   const municipality = await convertFieldDisplayContentMd(municipalityContents);
 
-  const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES.reduce(
+  const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES_ORDERED.reduce(
     (acc, legalStructure) => {
       const fileContents = fs.readFileSync(
         path.join(displayContentDir, "onboarding", "legal-structure", `${legalStructure}.md`),

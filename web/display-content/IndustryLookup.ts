@@ -7,3 +7,11 @@ export const IndustryLookup: Record<Industry, string> = {
   cosmetology: "Cosmetology",
   generic: "",
 };
+
+export const ALL_INDUSTRIES_ORDERED: Industry[] = [
+  "restaurant",
+  "e-commerce",
+  "home-contractor",
+  "cosmetology",
+  "generic",
+];

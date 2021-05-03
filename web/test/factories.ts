@@ -1,6 +1,4 @@
 import {
-  ALL_INDUSTRIES,
-  ALL_LEGAL_STRUCTURES,
   BusinessUser,
   Industry,
   LegalStructure,
@@ -12,6 +10,8 @@ import {
   Task,
   UserData,
 } from "../lib/types/types";
+import { ALL_LEGAL_STRUCTURES_ORDERED } from "../display-content/LegalStructureLookup";
+import { ALL_INDUSTRIES_ORDERED } from "../display-content/IndustryLookup";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 
@@ -101,11 +101,11 @@ export const generateTask = (overrides: Partial<Task>): Task => {
 };
 
 export const randomLegalStructure = (): LegalStructure => {
-  const randomIndex = Math.floor(Math.random() * ALL_LEGAL_STRUCTURES.length);
-  return ALL_LEGAL_STRUCTURES[randomIndex];
+  const randomIndex = Math.floor(Math.random() * ALL_LEGAL_STRUCTURES_ORDERED.length);
+  return ALL_LEGAL_STRUCTURES_ORDERED[randomIndex];
 };
 
 export const randomIndustry = (): Industry => {
-  const randomIndex = Math.floor(Math.random() * ALL_INDUSTRIES.length);
-  return ALL_INDUSTRIES[randomIndex];
+  const randomIndex = Math.floor(Math.random() * ALL_INDUSTRIES_ORDERED.length);
+  return ALL_INDUSTRIES_ORDERED[randomIndex];
 };
