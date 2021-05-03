@@ -1,6 +1,6 @@
 ---
 id: "check-local-requirements"
-name: "Comply with local laws"
+name: "Comply with Local Laws"
 callToActionLink: "${municipalityWebsite}"
 callToActionText: "Visit the website for ${municipality}"
 ---
