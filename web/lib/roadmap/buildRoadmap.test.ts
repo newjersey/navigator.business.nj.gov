@@ -70,8 +70,6 @@ describe("buildRoadmap", () => {
       expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("fire-permit");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("mercantile-license");
     });
   });
 
@@ -104,8 +102,6 @@ describe("buildRoadmap", () => {
       expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("fire-permit");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("mercantile-license");
     });
 
     it("modifies the text for insurance needs", () => {
@@ -135,8 +131,6 @@ describe("buildRoadmap", () => {
       expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("fire-permit");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("mercantile-license");
     });
 
     it("modifies the text for local site requirements", () => {
@@ -150,7 +144,6 @@ describe("buildRoadmap", () => {
     it("adds search business name tasks if structure in PublicRecordFiling group", async () => {
       const onboardingData = generateOnboardingData({ legalStructure: "limited-liability-company" });
       const roadmap = await buildRoadmap(onboardingData);
-      expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
       expect(getTasksByStepId(roadmap, "register-business")).toContain("search-business-name");
       expect(getTasksByStepId(roadmap, "register-business")).not.toContain("register-trade-name");
     });
@@ -158,7 +151,6 @@ describe("buildRoadmap", () => {
     it("adds trade name tasks if structure in TradeName group", async () => {
       const onboardingData = generateOnboardingData({ legalStructure: "general-partnership" });
       const roadmap = await buildRoadmap(onboardingData);
-      expect(roadmap?.steps.map((it) => it.name)).toContain("Form & Register Your Business");
       expect(getTasksByStepId(roadmap, "register-business")).not.toContain("search-business-name");
       expect(getTasksByStepId(roadmap, "register-business")).toContain("register-trade-name");
     });
