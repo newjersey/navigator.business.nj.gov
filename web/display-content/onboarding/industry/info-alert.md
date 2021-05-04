@@ -1,0 +1,1 @@
+We currently have industry specific roadmaps for Restaurants, Cosmetology, Home Contractors and Online Businesses. All other industries we are able to provide a generic checklist that is not industry specific. We are working hard to make sure we can provide unique roadmaps for every industry.

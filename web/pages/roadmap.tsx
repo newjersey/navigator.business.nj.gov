@@ -41,7 +41,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   const getIndustry = (): string => {
     if (isLoading) return RoadmapDefaults.loadingText;
     return userData?.onboardingData.industry && userData?.onboardingData.industry !== "generic"
-      ? IndustryLookup[userData.onboardingData.industry]
+      ? IndustryLookup[userData.onboardingData.industry].primaryText
       : RoadmapDefaults.greyBoxNotSetText;
   };
 

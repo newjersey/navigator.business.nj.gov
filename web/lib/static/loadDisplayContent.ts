@@ -28,6 +28,12 @@ export const loadOnboardingDisplayContent = async (): Promise<OnboardingDisplayC
   );
   const municipality = await convertFieldDisplayContentMd(municipalityContents);
 
+  const industryInfoAlertContents = fs.readFileSync(
+    path.join(displayContentDir, "onboarding", "industry", "info-alert.md"),
+    "utf8"
+  );
+  const industryInfoAlert = await getMarkdownContent(industryInfoAlertContents);
+
   const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES_ORDERED.reduce(
     (acc, legalStructure) => {
       const fileContents = fs.readFileSync(
@@ -55,6 +61,7 @@ export const loadOnboardingDisplayContent = async (): Promise<OnboardingDisplayC
     legalStructure,
     municipality,
     legalStructureOptionContent,
+    industryInfoAlert,
   };
 };
 
