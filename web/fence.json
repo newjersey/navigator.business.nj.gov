@@ -8,7 +8,7 @@
     "@testing-library/jest-dom/extend-expect",
     "@material-ui/core",
     "axios",
-    "react-swipeable-views",
+    "react-transition-group",
     "next",
     "next/router",
     "next/link",

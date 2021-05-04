@@ -11,7 +11,6 @@ import {
 } from "../lib/types/types";
 import { useMediaQuery } from "@material-ui/core";
 import { MediaQueries } from "../lib/PageSizes";
-import SwipeableViews from "react-swipeable-views";
 import { SingleColumnContainer } from "../components/njwds/SingleColumnContainer";
 import { MobilePageTitle } from "../components/njwds/MobilePageTitle";
 import { OnboardingBusinessName } from "../components/onboarding/OnboardingName";
@@ -24,6 +23,7 @@ import { OnboardingMunicipality } from "../components/onboarding/OnboardingMunic
 import { OnboardingDefaults } from "../display-content/onboarding/OnboardingDefaults";
 import { templateEval } from "../lib/utils/helpers";
 import { loadOnboardingDisplayContent } from "../lib/static/loadDisplayContent";
+import { CSSTransition } from "react-transition-group";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -57,7 +57,7 @@ export const OnboardingContext = React.createContext<OnboardingContextType>({
 const OnboardingPage = (props: Props): ReactElement => {
   const PAGES = 4;
   const router = useRouter();
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
   const [onboardingData, setOnboardingData] = useState<OnboardingData>(createEmptyOnboardingData());
   const { userData, update } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
@@ -71,12 +71,15 @@ const OnboardingPage = (props: Props): ReactElement => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
-    if (page + 1 <= PAGES) {
+    if (page.current + 1 <= PAGES) {
       await update({
         ...userData,
         onboardingData,
       });
-      setPage(page + 1);
+      setPage({
+        current: page.current + 1,
+        previous: page.current,
+      });
     } else {
       await update({
         ...userData,
@@ -88,8 +91,11 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   const onBack = () => {
-    if (page + 1 > 0) {
-      setPage(page - 1);
+    if (page.current + 1 > 0) {
+      setPage({
+        current: page.current - 1,
+        previous: page.current,
+      });
     }
   };
 
@@ -98,31 +104,36 @@ const OnboardingPage = (props: Props): ReactElement => {
       {OnboardingDefaults.pageTitle}{" "}
       <span className="weight-400">
         {templateEval(OnboardingDefaults.stepXofYTemplate, {
-          currentPage: page.toString(),
+          currentPage: page.current.toString(),
           totalPages: PAGES.toString(),
         })}
       </span>
     </>
   );
 
-  const asOnboardingPage = (onboardingPage: ReactNode, index: number) => {
-    const isVisible = page === index ? "is-visible" : "hidden";
-    return (
-      <SingleColumnContainer>
-        <form onSubmit={onSubmit} className={`usa-prose onboarding-form ${isVisible}`}>
-          {onboardingPage}
-          <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
-          <OnboardingButtonGroup />
-        </form>
-      </SingleColumnContainer>
-    );
+  const asOnboardingPage = (onboardingPage: ReactNode) => (
+    <SingleColumnContainer>
+      <form onSubmit={onSubmit} className={`usa-prose onboarding-form`}>
+        {onboardingPage}
+        <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
+        <OnboardingButtonGroup />
+      </form>
+    </SingleColumnContainer>
+  );
+
+  const getAnimation = (): string => {
+    return page.previous < page.current ? "slide" : "slide-back";
+  };
+
+  const getTimeout = (slidePage: number): number => {
+    return slidePage === page.previous ? 100 : 300;
   };
 
   return (
     <OnboardingContext.Provider
       value={{
         state: {
-          page,
+          page: page.current,
           onboardingData,
           displayContent: props.displayContent,
           municipalities: props.municipalities,
@@ -137,12 +148,41 @@ const OnboardingPage = (props: Props): ReactElement => {
           <SingleColumnContainer>
             {isLargeScreen && <h2 className="padding-bottom-4">{header()}</h2>}
           </SingleColumnContainer>
-          <SwipeableViews index={page - 1} disabled={true}>
-            {asOnboardingPage(<OnboardingBusinessName />, 1)}
-            {asOnboardingPage(<OnboardingIndustry />, 2)}
-            {asOnboardingPage(<OnboardingLegalStructure />, 3)}
-            {asOnboardingPage(<OnboardingMunicipality />, 4)}
-          </SwipeableViews>
+
+          <div className="slide-container">
+            <CSSTransition
+              in={page.current === 1}
+              unmountOnExit
+              timeout={getTimeout(1)}
+              classNames={`width-100 ${getAnimation()}`}
+            >
+              {asOnboardingPage(<OnboardingBusinessName />)}
+            </CSSTransition>
+            <CSSTransition
+              in={page.current === 2}
+              unmountOnExit
+              timeout={getTimeout(2)}
+              classNames={`width-100 ${getAnimation()}`}
+            >
+              {asOnboardingPage(<OnboardingIndustry />)}
+            </CSSTransition>
+            <CSSTransition
+              in={page.current === 3}
+              unmountOnExit
+              timeout={getTimeout(3)}
+              classNames={`width-100 ${getAnimation()}`}
+            >
+              {asOnboardingPage(<OnboardingLegalStructure />)}
+            </CSSTransition>
+            <CSSTransition
+              in={page.current === 4}
+              unmountOnExit
+              timeout={getTimeout(4)}
+              classNames={`width-100 ${getAnimation()}`}
+            >
+              {asOnboardingPage(<OnboardingMunicipality />)}
+            </CSSTransition>
+          </div>
         </main>
       </PageSkeleton>
     </OnboardingContext.Provider>

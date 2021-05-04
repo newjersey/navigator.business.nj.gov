@@ -1,17 +1,67 @@
-.page {
-  display: none;
-}
-.page.active {
-  display: block;
+.slide-container {
+  display: flex;
 }
 
-.onboarding-form.hidden {
-  visibility: hidden;
+.slide-appear {
   opacity: 0;
-  transition: visibility 0.5s, opacity 0.5s linear;
+  transform: translateX(500px);
 }
 
-.onboarding-form.is-visible {
-  visibility: visible;
+.slide-appear-done {
   opacity: 1;
+  transition: all 200ms ease-out 50ms;
+  transform: translateX(0);
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translateX(500px);
+}
+
+.slide-enter-active {
+  opacity: 1;
+  transition: all 200ms ease-out 50ms;
+  transform: translateX(0);
+}
+
+.slide-exit {
+  opacity: 1;
+}
+
+.slide-exit-active {
+  opacity: 0;
+  transition: all 100ms ease-in;
+  transform: translateX(-500px);
+}
+
+.slide-back-appear {
+  opacity: 0;
+  transform: translateX(-500px);
+}
+
+.slide-back-appear-done {
+  opacity: 1;
+  transition: all 200ms ease-out 50ms;
+  transform: translateX(0);
+}
+
+.slide-back-enter {
+  opacity: 0;
+  transform: translateX(-500px);
+}
+
+.slide-back-enter-active {
+  opacity: 1;
+  transition: all 200ms ease-out 50ms;
+  transform: translateX(0);
+}
+
+.slide-back-exit {
+  opacity: 1;
+}
+
+.slide-back-exit-active {
+  opacity: 0;
+  transition: all 100ms ease-in;
+  transform: translateX(500px);
 }
