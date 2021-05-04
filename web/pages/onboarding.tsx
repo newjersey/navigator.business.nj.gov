@@ -113,7 +113,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const asOnboardingPage = (onboardingPage: ReactNode) => (
     <SingleColumnContainer>
-      <form onSubmit={onSubmit} className={`usa-prose onboarding-form`}>
+      <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
         {onboardingPage}
         <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
         <OnboardingButtonGroup />

@@ -1,5 +1,6 @@
 .slide-container {
   display: flex;
+  overflow-x: hidden;
 }
 
 .slide-appear {
@@ -33,6 +34,8 @@
   transition: all 100ms ease-in;
   transform: translateX(-500px);
 }
+
+// --- slide-back
 
 .slide-back-appear {
   opacity: 0;
