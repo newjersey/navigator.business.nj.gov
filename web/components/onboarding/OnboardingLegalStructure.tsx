@@ -21,7 +21,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
   const makeLabel = (legalStructure: LegalStructure) => (
     <div className="margin-bottom-2 margin-top-1" data-value={legalStructure}>
       <b>{LegalStructureLookup[legalStructure]}</b>
-      <Content>{state.displayContent.legalStructureOptionContent[legalStructure]}</Content>
+      <Content>{state.displayContent.legalStructure.optionContent[legalStructure]}</Content>
     </div>
   );
 
@@ -41,6 +41,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
                 style={{ alignItems: "flex-start" }}
                 labelPlacement="end"
                 key={legalStructure}
+                data-testid={legalStructure}
                 value={legalStructure}
                 control={<Radio color="primary" />}
                 label={makeLabel(legalStructure)}

@@ -17,7 +17,7 @@ describe("loadDisplayContent", () => {
   });
 
   describe("loadOnboardingDisplayContent", () => {
-    it("returns onboarding content from markdown", async () => {
+    it("returns onboarding content from markdown", () => {
       const onboardingDisplayMd =
         "---\n" +
         'placeholder: "Fill me in"\n' +
@@ -29,28 +29,16 @@ describe("loadDisplayContent", () => {
 
       mockedFs.readFileSync.mockReturnValue(onboardingDisplayMd);
 
-      expect((await loadOnboardingDisplayContent()).municipality).toEqual({
+      expect(loadOnboardingDisplayContent().municipality).toEqual({
         placeholder: "Fill me in",
         contentMd: "\n### I am a header\n\nI am a description",
       });
     });
 
-    it("returns onboarding content with no placeholder from markdown", async () => {
-      const onboardingDisplayMd =
-        "---\n" + "---\n" + "\n" + "### I am a header\n" + "\n" + "I am a description";
-
-      mockedFs.readFileSync.mockReturnValue(onboardingDisplayMd);
-
-      expect((await loadOnboardingDisplayContent()).municipality).toEqual({
-        placeholder: undefined,
-        contentMd: "\n### I am a header\n\nI am a description",
-      });
-    });
-
-    it("loads content for each legal structure option", async () => {
+    it("loads content for each legal structure option", () => {
       mockedFs.readFileSync.mockReturnValue("### I am a header\n\nI am a description");
 
-      expect((await loadOnboardingDisplayContent()).legalStructureOptionContent["s-corporation"]).toEqual(
+      expect(loadOnboardingDisplayContent().legalStructure.optionContent["s-corporation"]).toEqual(
         "### I am a header\n\nI am a description"
       );
       const allFilePaths = mockedFs.readFileSync.mock.calls.map(
@@ -63,13 +51,11 @@ describe("loadDisplayContent", () => {
   });
 
   describe("loadRoadmapDisplayContent", () => {
-    it("returns roadmap content from markdown", async () => {
+    it("returns roadmap content from markdown", () => {
       const roadmapContentMd = "### I am a header\n\nI am a description";
 
       mockedFs.readFileSync.mockReturnValue(roadmapContentMd);
-      expect((await loadRoadmapDisplayContent()).contentMd).toEqual(
-        "### I am a header\n\nI am a description"
-      );
+      expect(loadRoadmapDisplayContent().contentMd).toEqual("### I am a header\n\nI am a description");
     });
   });
 });

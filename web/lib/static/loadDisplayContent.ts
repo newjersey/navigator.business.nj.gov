@@ -1,46 +1,25 @@
 import fs from "fs";
 import path from "path";
 import { LegalStructure, OnboardingDisplayContent, RoadmapDisplayContent } from "../types/types";
-import { convertFieldDisplayContentMd, getMarkdownContent } from "../utils/markdownReader";
+import { getMarkdown } from "../utils/markdownReader";
 import { ALL_LEGAL_STRUCTURES_ORDERED } from "../../display-content/LegalStructureLookup";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
 
-export const loadOnboardingDisplayContent = async (): Promise<OnboardingDisplayContent> => {
-  const businessNameContents = fs.readFileSync(
-    path.join(displayContentDir, "onboarding", "business-name.md"),
-    "utf8"
-  );
-  const businessName = await convertFieldDisplayContentMd(businessNameContents);
+const loadFile = (filename: string): string =>
+  fs.readFileSync(path.join(displayContentDir, "onboarding", filename), "utf8");
 
-  const industryContents = fs.readFileSync(path.join(displayContentDir, "onboarding", "industry.md"), "utf8");
-  const industry = await convertFieldDisplayContentMd(industryContents);
-
-  const legalStructureContents = fs.readFileSync(
-    path.join(displayContentDir, "onboarding", "legal-structure.md"),
-    "utf8"
-  );
-  const legalStructure = await convertFieldDisplayContentMd(legalStructureContents);
-
-  const municipalityContents = fs.readFileSync(
-    path.join(displayContentDir, "onboarding", "municipality.md"),
-    "utf8"
-  );
-  const municipality = await convertFieldDisplayContentMd(municipalityContents);
-
-  const industryInfoAlertContents = fs.readFileSync(
-    path.join(displayContentDir, "onboarding", "industry", "info-alert.md"),
-    "utf8"
-  );
-  const industryInfoAlert = await getMarkdownContent(industryInfoAlertContents);
+export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
+  const businessName = getMarkdown(loadFile("business-name.md"));
+  const industry = getMarkdown(loadFile("industry.md"));
+  const legalStructure = getMarkdown(loadFile("legal-structure.md"));
+  const municipality = getMarkdown(loadFile("municipality.md"));
+  const industryInfoAlert = getMarkdown(loadFile("industry/info-alert.md"));
+  const specificHomeContractor = getMarkdown(loadFile("industry/industry-specific/home-contractor.md"));
 
   const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES_ORDERED.reduce(
     (acc, legalStructure) => {
-      const fileContents = fs.readFileSync(
-        path.join(displayContentDir, "onboarding", "legal-structure", `${legalStructure}.md`),
-        "utf8"
-      );
-      acc[legalStructure] = getMarkdownContent(fileContents);
+      acc[legalStructure] = getMarkdown(loadFile(`legal-structure/${legalStructure}.md`)).content;
       return acc;
     },
     {
@@ -56,19 +35,35 @@ export const loadOnboardingDisplayContent = async (): Promise<OnboardingDisplayC
   );
 
   return {
-    businessName,
-    industry,
-    legalStructure,
-    municipality,
-    legalStructureOptionContent,
-    industryInfoAlert,
+    businessName: {
+      contentMd: businessName.content,
+      ...(businessName.grayMatter as FieldGrayMatter),
+    },
+    industry: {
+      contentMd: industry.content,
+      infoAlertMd: industryInfoAlert.content,
+      specificHomeContractorMd: specificHomeContractor.content,
+      ...(industry.grayMatter as FieldGrayMatter),
+    },
+    legalStructure: {
+      contentMd: legalStructure.content,
+      optionContent: legalStructureOptionContent,
+    },
+    municipality: {
+      contentMd: municipality.content,
+      ...(municipality.grayMatter as FieldGrayMatter),
+    },
   };
 };
 
-export const loadRoadmapDisplayContent = async (): Promise<RoadmapDisplayContent> => {
+export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
   const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
 
   return {
-    contentMd: getMarkdownContent(roadmapContents),
+    contentMd: getMarkdown(roadmapContents).content,
   };
+};
+
+type FieldGrayMatter = {
+  placeholder: string;
 };

@@ -19,7 +19,7 @@ export interface UserData {
 
 export interface OnboardingData {
   businessName: string;
-  industry: Industry;
+  industry: Industry | undefined;
   legalStructure: LegalStructure | undefined;
   municipality: Municipality | undefined;
 }

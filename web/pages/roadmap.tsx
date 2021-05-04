@@ -99,7 +99,7 @@ const RoadmapPage = (props: Props): ReactElement => {
 export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
   return {
     props: {
-      displayContent: await loadRoadmapDisplayContent(),
+      displayContent: loadRoadmapDisplayContent(),
     },
   };
 };

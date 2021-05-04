@@ -194,7 +194,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
 
   return {
     props: {
-      displayContent: await loadOnboardingDisplayContent(),
+      displayContent: loadOnboardingDisplayContent(),
       municipalities,
     },
   };

@@ -15,7 +15,7 @@ jest.mock("../api-client/apiClient", () => ({
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
-describe("AuthHelper", () => {
+describe("SigninHelper", () => {
   let mockPush: jest.Mock;
   let mockDispatch: jest.Mock;
 
@@ -78,8 +78,9 @@ describe("AuthHelper", () => {
       expect(mockApi.postUserData.mock.calls[0][0].user).toEqual(user);
       expect(mockApi.postUserData.mock.calls[0][0].onboardingData).toEqual({
         businessName: "",
-        industry: "generic",
+        industry: undefined,
         legalStructure: undefined,
+        municipality: undefined,
       });
       expect(mockPush).toHaveBeenCalledWith("/");
     });

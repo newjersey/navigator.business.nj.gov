@@ -12,9 +12,14 @@ import Onboarding from "../../pages/onboarding";
 import { useRouter } from "next/router";
 import React from "react";
 import * as useUserModule from "../../lib/data-hooks/useUserData";
-import { generateMunicipality, generateOnboardingData, generateUserData } from "../factories";
+import { generateMunicipality, generateOnboardingData, generateUser, generateUserData } from "../factories";
 import { generateUseUserDataResponse } from "../helpers";
-import { createEmptyOnboardingDisplayContent, Industry, LegalStructure } from "../../lib/types/types";
+import {
+  createEmptyOnboardingDisplayContent,
+  createEmptyUserData,
+  Industry,
+  LegalStructure,
+} from "../../lib/types/types";
 
 jest.mock("next/router");
 
@@ -26,6 +31,7 @@ const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).use
 describe("onboarding form", () => {
   let subject: RenderResult;
   let mockPush: jest.Mock;
+  let mockUpdate: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -33,6 +39,14 @@ describe("onboarding form", () => {
     (useRouter as jest.Mock).mockReturnValue({
       push: mockPush,
     });
+
+    mockUpdate = jest.fn().mockResolvedValue({});
+    mockUseUserData.mockReturnValue(
+      generateUseUserDataResponse({
+        userData: createEmptyUserData(generateUser({})),
+        update: mockUpdate,
+      })
+    );
   });
 
   it("prefills form from existing user data", async () => {
@@ -57,16 +71,15 @@ describe("onboarding form", () => {
     subject = render(
       <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
     );
-
     expect(getBusinessNameValue()).toEqual("Applebees");
-    clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 4"));
+
+    await visitStep2();
     expect(getIndustryValue()).toEqual("cosmetology");
-    clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 2 of 4"));
+
+    await visitStep3();
     expect(getLegalStructureValue()).toEqual("b-corporation");
-    clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 3 of 4"));
+
+    await visitStep4();
     expect(getMunicipalityValue()).toEqual("Newark");
   });
 
@@ -92,8 +105,7 @@ describe("onboarding form", () => {
     );
 
     fillText("Business name", "Cool Computers");
-    clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 4"));
+    await visitStep2();
     expect(mockUpdate).toHaveBeenLastCalledWith({
       ...initialUserData,
       onboardingData: {
@@ -102,9 +114,8 @@ describe("onboarding form", () => {
       },
     });
 
-    select("Industry", "E-Commerce");
-    clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 2 of 4"));
+    selectByValue("Industry", "e-commerce");
+    await visitStep3();
     expect(mockUpdate).toHaveBeenLastCalledWith({
       ...initialUserData,
       onboardingData: {
@@ -114,9 +125,8 @@ describe("onboarding form", () => {
       },
     });
 
-    chooseRadio("General Partnership");
-    clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 3 of 4"));
+    chooseRadio("general-partnership");
+    await visitStep4();
     expect(mockUpdate).toHaveBeenLastCalledWith({
       ...initialUserData,
       onboardingData: {
@@ -127,7 +137,7 @@ describe("onboarding form", () => {
       },
     });
 
-    select("Location", "Newark");
+    selectByText("Location", "Newark");
     clickNext();
     await act(() => promise);
     expect(mockUpdate).toHaveBeenLastCalledWith({
@@ -145,35 +155,46 @@ describe("onboarding form", () => {
   });
 
   it("is able to go back", async () => {
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        update: jest.fn().mockResolvedValue({}),
-      })
-    );
     subject = render(
       <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
     );
 
     fillText("Business name", "Cool Computers");
-    clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 4"));
-
+    await visitStep2();
     clickBack();
     expect(subject.queryByLabelText("Business name")).toBeVisible();
+  });
+
+  it("displays industry-specific content for home contractors when selected", async () => {
+    const displayContent = createEmptyOnboardingDisplayContent();
+    displayContent.industry.specificHomeContractorMd = "Learn more about home contractors!";
+
+    subject = render(<Onboarding displayContent={displayContent} municipalities={[]} />);
+    await visitStep2();
+
+    expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
+    selectByValue("Industry", "home-contractor");
+    expect(subject.queryByText("Learn more about home contractors!")).toBeInTheDocument();
   });
 
   const fillText = (label: string, value: string) => {
     fireEvent.change(subject.getByLabelText(label), { target: { value: value } });
   };
 
-  const select = (label: string, value: string) => {
+  const selectByValue = (label: string, value: string) => {
+    fireEvent.mouseDown(subject.getByLabelText(label));
+    const listbox = within(subject.getByRole("listbox"));
+    fireEvent.click(listbox.getByTestId(value));
+  };
+
+  const selectByText = (label: string, value: string) => {
     fireEvent.mouseDown(subject.getByLabelText(label));
     const listbox = within(subject.getByRole("listbox"));
     fireEvent.click(listbox.getByText(value));
   };
 
   const chooseRadio = (value: string) => {
-    fireEvent.click(subject.getByText(value));
+    fireEvent.click(subject.getByTestId(value));
   };
 
   const clickNext = (): void => {
@@ -197,4 +218,19 @@ describe("onboarding form", () => {
 
   const getMunicipalityValue = (): string =>
     (subject.queryByTestId("municipality") as HTMLInputElement)?.value;
+
+  const visitStep2 = async () => {
+    clickNext();
+    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 4"));
+  };
+
+  const visitStep3 = async () => {
+    clickNext();
+    await waitForElementToBeRemoved(() => subject.getByText("Step 2 of 4"));
+  };
+
+  const visitStep4 = async () => {
+    clickNext();
+    await waitForElementToBeRemoved(() => subject.getByText("Step 3 of 4"));
+  };
 });

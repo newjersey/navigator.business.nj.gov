@@ -37,34 +37,58 @@ export const OnboardingIndustry = (): ReactElement => {
       </div>
     );
 
+  const renderValue = (value: unknown): ReactNode => {
+    if (value === "placeholder") {
+      return <span className="text-base">{state.displayContent.industry.placeholder}</span>;
+    }
+
+    return <>{IndustryLookup[value as Industry].primaryText}</>;
+  };
+
   return (
     <>
       <Content>{state.displayContent.industry.contentMd}</Content>
       <Alert variant="info" slim className="margin-bottom-4">
-        <Content>{state.displayContent.industryInfoAlert}</Content>
+        <Content>{state.displayContent.industry.infoAlertMd}</Content>
       </Alert>
       <div className="form-input margin-top-2">
         <FormControl variant="outlined" fullWidth>
           <Select
             fullWidth
-            value={state.onboardingData.industry || "generic"}
+            value={state.onboardingData.industry || "placeholder"}
             onChange={handleIndustry}
             inputProps={{
               "aria-label": "Industry",
               "data-testid": "industry",
             }}
-            renderValue={(value: unknown): ReactNode => <>{IndustryLookup[value as Industry].primaryText}</>}
+            renderValue={renderValue}
           >
-            <MenuItem value="restaurant">{renderOption("restaurant")}</MenuItem>
-            <MenuItem value="home-contractor">{renderOption("home-contractor")}</MenuItem>
-            <MenuItem value="e-commerce">{renderOption("e-commerce")}</MenuItem>
-            <MenuItem value="cosmetology">{renderOption("cosmetology")}</MenuItem>
+            <MenuItem value="restaurant" data-testid="restaurant">
+              {renderOption("restaurant")}
+            </MenuItem>
+            <MenuItem value="home-contractor" data-testid="home-contractor">
+              {renderOption("home-contractor")}
+            </MenuItem>
+            <MenuItem value="e-commerce" data-testid="e-commerce">
+              {renderOption("e-commerce")}
+            </MenuItem>
+            <MenuItem value="cosmetology" data-testid="cosmetology">
+              {renderOption("cosmetology")}
+            </MenuItem>
             <ListSubheader>
               <Divider light />
             </ListSubheader>
-            <MenuItem value="generic">{renderOption("generic")}</MenuItem>
+            <MenuItem value="generic" data-testid="generic">
+              {renderOption("generic")}
+            </MenuItem>
           </Select>
         </FormControl>
+
+        {state.onboardingData.industry === "home-contractor" && (
+          <div className="margin-top-2">
+            <Content>{state.displayContent.industry.specificHomeContractorMd}</Content>
+          </div>
+        )}
       </div>
     </>
   );

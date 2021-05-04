@@ -20,7 +20,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
 export const createEmptyOnboardingData = (): OnboardingData => {
   return {
     businessName: "",
-    industry: "generic",
+    industry: undefined,
     legalStructure: undefined,
     municipality: undefined,
   };
@@ -28,18 +28,30 @@ export const createEmptyOnboardingData = (): OnboardingData => {
 
 export interface OnboardingData {
   businessName: string;
-  industry: Industry;
+  industry: Industry | undefined;
   legalStructure: LegalStructure | undefined;
   municipality: Municipality | undefined;
 }
 
 export type OnboardingDisplayContent = {
-  businessName: FieldDisplayContent;
-  industry: FieldDisplayContent;
-  legalStructure: FieldDisplayContent;
-  municipality: FieldDisplayContent;
-  legalStructureOptionContent: Record<LegalStructure, string>;
-  industryInfoAlert: string;
+  businessName: {
+    contentMd: string;
+    placeholder: string;
+  };
+  industry: {
+    contentMd: string;
+    placeholder: string;
+    infoAlertMd: string;
+    specificHomeContractorMd: string;
+  };
+  legalStructure: {
+    contentMd: string;
+    optionContent: Record<LegalStructure, string>;
+  };
+  municipality: {
+    contentMd: string;
+    placeholder: string;
+  };
 };
 
 export type FieldDisplayContent = {
@@ -73,28 +85,32 @@ export type MunicipalityDetail = {
 export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
   return {
     businessName: {
-      contentMd: "",
+      contentMd: "string",
+      placeholder: "string",
     },
     industry: {
-      contentMd: "",
+      contentMd: "string",
+      placeholder: "string",
+      infoAlertMd: "string",
+      specificHomeContractorMd: "string",
     },
     legalStructure: {
-      contentMd: "",
+      contentMd: "string",
+      optionContent: {
+        "sole-proprietorship": "",
+        "general-partnership": "",
+        "limited-partnership": "",
+        "limited-liability-partnership": "",
+        "limited-liability-company": "",
+        "c-corporation": "",
+        "s-corporation": "",
+        "b-corporation": "",
+      },
     },
     municipality: {
-      contentMd: "",
+      contentMd: "string",
+      placeholder: "string",
     },
-    legalStructureOptionContent: {
-      "sole-proprietorship": "",
-      "general-partnership": "",
-      "limited-partnership": "",
-      "limited-liability-partnership": "",
-      "limited-liability-company": "",
-      "c-corporation": "",
-      "s-corporation": "",
-      "b-corporation": "",
-    },
-    industryInfoAlert: "",
   };
 };
 

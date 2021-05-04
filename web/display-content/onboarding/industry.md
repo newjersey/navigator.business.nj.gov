@@ -1,4 +1,5 @@
 ---
+placeholder: "Select an industry"
 ---
 
 ### Industry

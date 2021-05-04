@@ -80,7 +80,7 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
 
   let roadmap = {
     ...roadmapBuilder,
-    type: onboardingData.industry,
+    type: onboardingData.industry || "generic",
     steps: await Promise.all(
       roadmapBuilder.steps.map(async (step) => ({
         ...step,
