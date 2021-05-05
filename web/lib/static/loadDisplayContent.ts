@@ -16,6 +16,7 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
   const municipality = getMarkdown(loadFile("municipality.md"));
   const industryInfoAlert = getMarkdown(loadFile("industry/info-alert.md"));
   const specificHomeContractor = getMarkdown(loadFile("industry/industry-specific/home-contractor.md"));
+  const specificLiquor = getMarkdown(loadFile("industry/industry-specific/liquor.md"));
 
   const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES_ORDERED.reduce(
     (acc, legalStructure) => {
@@ -43,6 +44,11 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
       contentMd: industry.content,
       infoAlertMd: industryInfoAlert.content,
       specificHomeContractorMd: specificHomeContractor.content,
+      specificLiquorQuestion: {
+        contentMd: specificLiquor.content,
+        radioButtonYesText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonYesText,
+        radioButtonNoText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonNoText,
+      },
       ...(industry.grayMatter as FieldGrayMatter),
     },
     legalStructure: {
@@ -66,4 +72,9 @@ export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
 
 type FieldGrayMatter = {
   placeholder: string;
+};
+
+type RadioGrayMatter = {
+  radioButtonYesText: string;
+  radioButtonNoText: string;
 };

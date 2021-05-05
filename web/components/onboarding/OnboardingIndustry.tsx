@@ -7,6 +7,8 @@ import { Content } from "../Content";
 import { MenuOptionUnselected } from "../MenuOptionUnselected";
 import { MenuOptionSelected } from "../MenuOptionSelected";
 import { Alert } from "../njwds/Alert";
+import { OnboardingLiquorLicense } from "./OnboardingLiquorLicense";
+import { isLiquorLicenseApplicable } from "../../lib/domain-logic/isLiquorLicenseApplicable";
 
 export const OnboardingIndustry = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -18,6 +20,7 @@ export const OnboardingIndustry = (): ReactElement => {
     }
     setOnboardingData({
       ...state.onboardingData,
+      liquorLicense: isLiquorLicenseApplicable(industry) ? state.onboardingData.liquorLicense : false,
       industry,
     });
   };
@@ -38,7 +41,7 @@ export const OnboardingIndustry = (): ReactElement => {
     );
 
   const renderValue = (value: unknown): ReactNode => {
-    if (value === "placeholder") {
+    if (value === "") {
       return <span className="text-base">{state.displayContent.industry.placeholder}</span>;
     }
 
@@ -55,7 +58,8 @@ export const OnboardingIndustry = (): ReactElement => {
         <FormControl variant="outlined" fullWidth>
           <Select
             fullWidth
-            value={state.onboardingData.industry || "placeholder"}
+            displayEmpty
+            value={state.onboardingData.industry || ""}
             onChange={handleIndustry}
             inputProps={{
               "aria-label": "Industry",
@@ -85,8 +89,14 @@ export const OnboardingIndustry = (): ReactElement => {
         </FormControl>
 
         {state.onboardingData.industry === "home-contractor" && (
-          <div className="margin-top-2">
+          <div className="margin-top-3">
             <Content>{state.displayContent.industry.specificHomeContractorMd}</Content>
+          </div>
+        )}
+
+        {isLiquorLicenseApplicable(state.onboardingData.industry) && (
+          <div className="margin-top-3">
+            <OnboardingLiquorLicense />
           </div>
         )}
       </div>

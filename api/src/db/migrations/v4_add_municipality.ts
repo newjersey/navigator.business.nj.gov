@@ -1,4 +1,5 @@
 import { v3UserData } from "./v3_change_LegalStructure";
+import { randomInt } from "./migrations";
 
 export interface v4UserData {
   user: v4BusinessUser;
@@ -56,3 +57,27 @@ type v4LegalStructure =
   | "b-corporation";
 
 // ---------------- v4 factories ----------------
+
+export const generateV4User = (overrides: Partial<v4BusinessUser>): v4BusinessUser => {
+  return {
+    name: "some-name-" + randomInt(),
+    email: `some-email-${randomInt()}@example.com`,
+    id: "some-id-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateV4OnboardingData = (overrides: Partial<v4OnboardingData>): v4OnboardingData => {
+  return {
+    businessName: "some-business-name-" + randomInt(),
+    industry: "restaurant",
+    legalStructure: "sole-proprietorship",
+    municipality: {
+      name: "some-name-" + randomInt(),
+      displayName: "some-display-name-" + randomInt(),
+      county: "some-county-" + randomInt(),
+      id: "some-id-" + randomInt(),
+    },
+    ...overrides,
+  };
+};

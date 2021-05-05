@@ -22,6 +22,7 @@ export interface OnboardingData {
   industry: Industry | undefined;
   legalStructure: LegalStructure | undefined;
   municipality: Municipality | undefined;
+  liquorLicense: boolean;
 }
 
 export type Municipality = {

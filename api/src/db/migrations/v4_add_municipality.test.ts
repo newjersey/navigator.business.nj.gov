@@ -11,7 +11,7 @@ describe("migrate_v3_to_v4", () => {
   it("adds undefined municipality", () => {
     const onboardingData = generateV3OnboardingData({});
 
-    const v3: v3UserData = { user, onboardingData, formProgress, taskProgress, version: 2 };
+    const v3: v3UserData = { user, onboardingData, formProgress, taskProgress, version: 3 };
 
     expect(migrate_v3_to_v4(v3)).toEqual({
       user,

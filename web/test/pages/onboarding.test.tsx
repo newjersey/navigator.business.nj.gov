@@ -19,6 +19,7 @@ import {
   createEmptyUserData,
   Industry,
   LegalStructure,
+  UserData,
 } from "../../lib/types/types";
 
 jest.mock("next/router");
@@ -32,6 +33,7 @@ describe("onboarding form", () => {
   let subject: RenderResult;
   let mockPush: jest.Mock;
   let mockUpdate: jest.Mock;
+  let emptyUserData: UserData;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -40,10 +42,11 @@ describe("onboarding form", () => {
       push: mockPush,
     });
 
+    emptyUserData = createEmptyUserData(generateUser({}));
     mockUpdate = jest.fn().mockResolvedValue({});
     mockUseUserData.mockReturnValue(
       generateUseUserDataResponse({
-        userData: createEmptyUserData(generateUser({})),
+        userData: emptyUserData,
         update: mockUpdate,
       })
     );
@@ -122,6 +125,7 @@ describe("onboarding form", () => {
         ...initialUserData.onboardingData,
         businessName: "Cool Computers",
         industry: "e-commerce",
+        liquorLicense: false,
       },
     });
 
@@ -133,6 +137,7 @@ describe("onboarding form", () => {
         ...initialUserData.onboardingData,
         businessName: "Cool Computers",
         industry: "e-commerce",
+        liquorLicense: false,
         legalStructure: "general-partnership",
       },
     });
@@ -147,6 +152,7 @@ describe("onboarding form", () => {
         ...initialUserData.onboardingData,
         businessName: "Cool Computers",
         industry: "e-commerce",
+        liquorLicense: false,
         legalStructure: "general-partnership",
         municipality: newark,
       },
@@ -175,6 +181,56 @@ describe("onboarding form", () => {
     expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
     selectByValue("Industry", "home-contractor");
     expect(subject.queryByText("Learn more about home contractors!")).toBeInTheDocument();
+    selectByValue("Industry", "e-commerce");
+    expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
+  });
+
+  it("displays liquor license question for restaurants when selected", async () => {
+    const displayContent = createEmptyOnboardingDisplayContent();
+    displayContent.industry.specificLiquorQuestion = {
+      contentMd: "Do you need a liquor license?",
+      radioButtonYesText: "Yeah",
+      radioButtonNoText: "Nah",
+    };
+
+    subject = render(<Onboarding displayContent={displayContent} municipalities={[]} />);
+    await visitStep2();
+
+    expect(subject.queryByText("Do you need a liquor license?")).not.toBeInTheDocument();
+    selectByValue("Industry", "restaurant");
+    expect(subject.queryByText("Do you need a liquor license?")).toBeInTheDocument();
+    chooseRadio("true");
+    await visitStep3();
+
+    expect(mockUpdate).toHaveBeenLastCalledWith({
+      ...emptyUserData,
+      onboardingData: {
+        ...emptyUserData.onboardingData,
+        industry: "restaurant",
+        liquorLicense: true,
+      },
+    });
+  });
+
+  it("sets liquor license back to false if they select a different industry", async () => {
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    await visitStep2();
+    selectByValue("Industry", "restaurant");
+    chooseRadio("true");
+
+    selectByValue("Industry", "e-commerce");
+    await visitStep3();
+
+    expect(mockUpdate).toHaveBeenLastCalledWith({
+      ...emptyUserData,
+      onboardingData: {
+        ...emptyUserData.onboardingData,
+        industry: "e-commerce",
+        liquorLicense: false,
+      },
+    });
   });
 
   const fillText = (label: string, value: string) => {

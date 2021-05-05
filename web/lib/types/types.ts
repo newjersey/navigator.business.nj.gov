@@ -23,6 +23,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     industry: undefined,
     legalStructure: undefined,
     municipality: undefined,
+    liquorLicense: false,
   };
 };
 
@@ -31,6 +32,7 @@ export interface OnboardingData {
   industry: Industry | undefined;
   legalStructure: LegalStructure | undefined;
   municipality: Municipality | undefined;
+  liquorLicense: boolean;
 }
 
 export type OnboardingDisplayContent = {
@@ -43,6 +45,11 @@ export type OnboardingDisplayContent = {
     placeholder: string;
     infoAlertMd: string;
     specificHomeContractorMd: string;
+    specificLiquorQuestion: {
+      contentMd: string;
+      radioButtonYesText: string;
+      radioButtonNoText: string;
+    };
   };
   legalStructure: {
     contentMd: string;
@@ -54,9 +61,41 @@ export type OnboardingDisplayContent = {
   };
 };
 
-export type FieldDisplayContent = {
-  contentMd: string;
-  placeholder?: string;
+export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
+  return {
+    businessName: {
+      contentMd: "",
+      placeholder: "",
+    },
+    industry: {
+      contentMd: "",
+      placeholder: "",
+      infoAlertMd: "",
+      specificHomeContractorMd: "",
+      specificLiquorQuestion: {
+        contentMd: "",
+        radioButtonYesText: "",
+        radioButtonNoText: "",
+      },
+    },
+    legalStructure: {
+      contentMd: "",
+      optionContent: {
+        "sole-proprietorship": "",
+        "general-partnership": "",
+        "limited-partnership": "",
+        "limited-liability-partnership": "",
+        "limited-liability-company": "",
+        "c-corporation": "",
+        "s-corporation": "",
+        "b-corporation": "",
+      },
+    },
+    municipality: {
+      contentMd: "",
+      placeholder: "",
+    },
+  };
 };
 
 export type RoadmapDisplayContent = {
@@ -80,38 +119,6 @@ export type MunicipalityDetail = {
   countyClerkPhone: string;
   countyClerkWebsite: string;
   countyWebsite: string;
-};
-
-export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
-  return {
-    businessName: {
-      contentMd: "string",
-      placeholder: "string",
-    },
-    industry: {
-      contentMd: "string",
-      placeholder: "string",
-      infoAlertMd: "string",
-      specificHomeContractorMd: "string",
-    },
-    legalStructure: {
-      contentMd: "string",
-      optionContent: {
-        "sole-proprietorship": "",
-        "general-partnership": "",
-        "limited-partnership": "",
-        "limited-liability-partnership": "",
-        "limited-liability-company": "",
-        "c-corporation": "",
-        "s-corporation": "",
-        "b-corporation": "",
-      },
-    },
-    municipality: {
-      contentMd: "string",
-      placeholder: "string",
-    },
-  };
 };
 
 export interface Roadmap {

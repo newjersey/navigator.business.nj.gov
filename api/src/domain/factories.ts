@@ -37,6 +37,7 @@ export const generateOnboardingData = (overrides: Partial<OnboardingData>): Onbo
     industry: randomIndustry(),
     legalStructure: randomLegalStructure(),
     municipality: generateMunicipality({}),
+    liquorLicense: randomBool(),
     ...overrides,
   };
 };
@@ -74,4 +75,8 @@ export const randomLegalStructure = (): LegalStructure => {
 export const randomIndustry = (): Industry => {
   const randomIndex = Math.floor(Math.random() * ALL_INDUSTRIES.length);
   return ALL_INDUSTRIES[randomIndex];
+};
+
+export const randomBool = (): boolean => {
+  return !!Math.round(Math.random());
 };
