@@ -7,6 +7,6 @@
   {
     "step": "lease-and-permits",
     "weight": 100,
-    "task": "liquor-license"
+    "task": "liquor-license-obtain"
   }
 ]

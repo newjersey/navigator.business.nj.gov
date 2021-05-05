@@ -74,6 +74,10 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
     }
   }
 
+  if (onboardingData.liquorLicense) {
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/liquor-license"));
+  }
+
   if (step5hasNoTasks(roadmapBuilder)) {
     removeStep5(roadmapBuilder);
   }
@@ -91,6 +95,8 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
 
   if (onboardingData.municipality) {
     roadmap = await addMunicipalitySpecificData(roadmap, onboardingData.municipality.id);
+  } else {
+    roadmap = cleanupMunicipalitySpecificData(roadmap);
   }
 
   return roadmap;
@@ -110,26 +116,43 @@ const removeStep5 = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {
 };
 
 const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: string): Promise<Roadmap> => {
-  const step = roadmap.steps.find((step) => step.id === "lease-and-permits");
-  if (!step) {
-    return roadmap;
-  }
-  const task = step.tasks.find((task) => task.id === "check-local-requirements");
-  if (!task) {
-    return roadmap;
-  }
-
   const municipality = await api.getMunicipality(municipalityId);
-  task.callToActionLink = templateEval(task.callToActionLink, {
+  const evalValues = {
     municipalityWebsite: municipality.townWebsite,
-  });
-  task.callToActionText = templateEval(task.callToActionText, { municipality: municipality.townName });
-  task.contentMd = templateEval(task.contentMd, {
     municipality: municipality.townName,
     county: municipality.countyName,
     countyClerkPhone: municipality.countyClerkPhone,
     countyClerkWebsite: municipality.countyClerkWebsite,
+  };
+
+  roadmap.steps.forEach((step) => {
+    step.tasks.forEach((task) => {
+      task.callToActionLink = templateEval(task.callToActionLink, evalValues);
+      task.callToActionText = templateEval(task.callToActionText, evalValues);
+      task.contentMd = templateEval(task.contentMd, evalValues);
+    });
   });
+
+  return roadmap;
+};
+
+const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
+  const evalValues = {
+    municipalityWebsite: "",
+    municipality: "",
+    county: "",
+    countyClerkPhone: "",
+    countyClerkWebsite: "",
+  };
+
+  roadmap.steps.forEach((step) => {
+    step.tasks.forEach((task) => {
+      task.callToActionLink = templateEval(task.callToActionLink, evalValues);
+      task.callToActionText = templateEval(task.callToActionText, evalValues);
+      task.contentMd = templateEval(task.contentMd, evalValues);
+    });
+  });
+
   return roadmap;
 };
 

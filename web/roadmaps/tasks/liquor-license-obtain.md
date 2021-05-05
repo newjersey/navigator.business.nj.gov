@@ -1,8 +1,8 @@
 ---
-id: "liquor-license"
+id: "liquor-license-obtain"
 name: "Obtain your Liquor License"
-callToActionLink: "https://www.nj.gov/oag/abc/abc-hb-eng-esp.html"
-callToActionText: ""
+callToActionLink: "${countyClerkWebsite}"
+callToActionText: "Visit County Clerk Website"
 ---
 
 To obtain a local liquor license, contact your city clerk for availability, and ensure you meet all requirements detailed in the Alcoholic Beverage Control Handbook.
@@ -15,4 +15,4 @@ After you complete this step, you will have:
 
 ||
 |---|
-| **Destination**: City Clerk/ABC |
+| **Next Step**: Check with your County Clerk |

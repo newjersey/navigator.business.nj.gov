@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { buildRoadmap } from "./buildRoadmap";
-import { Roadmap } from "../types/types";
+import { Roadmap, Task } from "../types/types";
 import {
   generateMunicipality,
   generateMunicipalityDetail,
@@ -18,6 +18,10 @@ const mockApi = api as jest.Mocked<typeof api>;
 describe("buildRoadmap", () => {
   const getTasksByStepId = (roadmap: Roadmap, id: string): string[] => {
     return roadmap.steps.find((it) => it.id === id)!.tasks.map((it) => it.id);
+  };
+
+  const getTaskById = (roadmap: Roadmap, id: string): Task => {
+    return roadmap.steps.flatMap((step) => step.tasks).find((task: Task) => task.id === id)!;
   };
 
   beforeEach(() => {
@@ -189,11 +193,9 @@ describe("buildRoadmap", () => {
         })
       );
 
-      const onboardingData = generateOnboardingData({ municipality: generateMunicipality({ id: "1234" }) });
+      const onboardingData = generateOnboardingData({ municipality: generateMunicipality({ id: "123" }) });
       const roadmap = await buildRoadmap(onboardingData);
-      const municipalityTask = roadmap.steps
-        .find((it) => it.id === "lease-and-permits")!
-        .tasks.find((it) => it.id === "check-local-requirements")!;
+      const municipalityTask = getTaskById(roadmap, "check-local-requirements");
 
       expect(municipalityTask.callToActionLink).toContain("www.cooltown.com");
       expect(municipalityTask.callToActionText).toContain("Cool Town");
@@ -201,6 +203,53 @@ describe("buildRoadmap", () => {
       expect(municipalityTask.contentMd).toContain("Bergen County");
       expect(municipalityTask.contentMd).toContain("555-1234");
       expect(municipalityTask.contentMd).toContain("www.example.com/clerk");
+    });
+  });
+
+  describe("liquor license", () => {
+    it("adds liquor license tasks when liquorLicense is true", async () => {
+      const onboardingData = generateOnboardingData({ liquorLicense: true });
+      const roadmap = await buildRoadmap(onboardingData);
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("liquor-license-availability");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("liquor-license-obtain");
+    });
+
+    it("does not add liquor license tasks when liquorLicense is false", async () => {
+      const onboardingData = generateOnboardingData({ liquorLicense: false });
+      const roadmap = await buildRoadmap(onboardingData);
+      expect(getTasksByStepId(roadmap, "due-diligence")).not.toContain("liquor-license-availability");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).not.toContain("liquor-license-obtain");
+    });
+
+    it("replaces placeholder text", async () => {
+      mockApi.getMunicipality.mockResolvedValue(
+        generateMunicipalityDetail({
+          id: "123",
+          countyClerkWebsite: "www.example.com/clerk",
+        })
+      );
+
+      const onboardingData = generateOnboardingData({
+        liquorLicense: true,
+        municipality: generateMunicipality({ id: "123" }),
+      });
+      const roadmap = await buildRoadmap(onboardingData);
+      const liquorAvailabilityTask = getTaskById(roadmap, "liquor-license-availability");
+      const liquorObtainTask = getTaskById(roadmap, "liquor-license-obtain");
+
+      expect(liquorAvailabilityTask.callToActionLink).toEqual("www.example.com/clerk");
+      expect(liquorObtainTask.callToActionLink).toEqual("www.example.com/clerk");
+    });
+
+    it("removes call to action when missing municipality", async () => {
+      const onboardingData = generateOnboardingData({ liquorLicense: true });
+      onboardingData.municipality = undefined;
+      const roadmap = await buildRoadmap(onboardingData);
+
+      const liquorAvailabilityTask = getTaskById(roadmap, "liquor-license-availability");
+      const liquorObtainTask = getTaskById(roadmap, "liquor-license-obtain");
+      expect(liquorAvailabilityTask.callToActionLink).toEqual("");
+      expect(liquorObtainTask.callToActionLink).toEqual("");
     });
   });
 });
