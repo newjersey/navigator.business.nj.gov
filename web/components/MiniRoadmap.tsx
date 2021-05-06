@@ -38,13 +38,14 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   return (
     <div>
       {roadmap?.steps.map((step) => (
-        <div key={step.id}>
+        <div key={step.id} id={`vertical-content-${step.step_number}`}>
           <div className="fdr fac margin-top-2 margin-bottom-1">
             <VerticalStepIndicator
               number={step.step_number}
               last={isLast(step.id)}
               active={step.id === activeStepId}
               small={true}
+              key={openSteps.join(",")}
             />
             <button
               className="usa-button--unstyled width-100"

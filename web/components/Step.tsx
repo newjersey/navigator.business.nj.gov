@@ -10,7 +10,7 @@ interface Props {
 
 export const Step = (props: Props): ReactElement => {
   return (
-    <div className="grid-row margin-top-3">
+    <div className="grid-row margin-top-3" id={`vertical-content-${props.step.step_number}`}>
       <div className="tablet:grid-col-3 margin-right-4">
         <div className="fdr">
           <div className="margin-top-2">

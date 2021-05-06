@@ -52,36 +52,50 @@
   content: attr(data-num) !important;
 }
 
-/* start vertical bars */
+.vertical-bar,
+.vertical-bar-sm {
+  position: absolute;
+  height: 30rem;
+  z-index: 90;
 
-.usa-step-indicator--counters-sm {
-  .usa-step-indicator__segment--complete.vertical:after,
-  .usa-step-indicator__segment--current.vertical:after {
-    height: 30rem !important;
-    width: 0.25rem;
-    left: calc(((1.5rem - 0.25rem) / 2));
-    z-index: 90;
-
-    @media all and (min-width: $sm) {
-      margin-top: 0;
-    }
+  @media all and (min-width: $sm) {
+    margin-top: 0;
   }
 }
 
-.usa-step-indicator--counters {
-  .usa-step-indicator__segment--complete.vertical:after,
-  .usa-step-indicator__segment--current.vertical:after {
-    height: 30rem !important;
-    width: 0.5rem;
-    left: calc(((2.5rem - 0.5rem) / 2));
-    z-index: 90;
+.vertical-bar-sm {
+  width: 0.25rem;
+  left: calc(((4rem + 0.25rem) / 2)); // for mobile sidebar
 
-    @media all and (min-width: $sm) {
-      margin-top: 0;
-    }
+  @media all and (min-width: $lg) {
+    left: calc(((3rem + 0.25rem) / 2)); // for desktop sidebar
   }
 }
 
+.vertical-bar {
+  width: 0.5rem;
+  left: calc(((2.5rem - 0.5rem) / 2));
+
+  @media all and (min-width: $sm) {
+    margin-top: 0;
+  }
+}
+
+.vertical-bar.complete,
+.vertical-bar-sm.complete {
+  background-color: #243413;
+}
+
+.vertical-bar.current,
+.vertical-bar-sm.current {
+  background-color: #538200;
+}
+
+// override and remove default vertical
+.usa-step-indicator__segment--complete.vertical:after,
+.usa-step-indicator__segment--current.vertical:after {
+  display: none !important;
+}
 @media (min-width: $sm) {
   .usa-step-indicator--counters .usa-step-indicator__segment,
   .usa-step-indicator--counters-sm .usa-step-indicator__segment {
@@ -89,18 +103,6 @@
     margin-bottom: 0 !important;
   }
 }
-
-.usa-step-indicator__segment--complete.vertical:last-child:after,
-.usa-step-indicator__segment--current.vertical:last-child:after {
-  display: block !important;
-}
-
-.usa-step-indicator__segment--complete.vertical.no-line:after,
-.usa-step-indicator__segment--current.vertical.no-line:after {
-  background-color: white;
-}
-
-/* end vertical bars */
 
 .substep-unchecked:before {
   border-radius: 99rem;
