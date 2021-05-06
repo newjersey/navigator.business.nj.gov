@@ -1,37 +1,18 @@
-import { generateUseUserDataResponse } from "../helpers";
-import {
-  generateMunicipality,
-  generateOnboardingData,
-  generateRoadmap,
-  generateStep,
-  generateTask,
-  generateUserData,
-} from "../factories";
-import * as useUserModule from "../../lib/data-hooks/useUserData";
-import * as useRoadmapModule from "../../lib/data-hooks/useRoadmap";
+import { generateMunicipality, generateStep, generateTask } from "../factories";
 import { render, RenderResult } from "@testing-library/react";
 import RoadmapPage from "../../pages/roadmap";
-import { OnboardingData, Roadmap } from "../../lib/types/types";
+import { useMockOnboardingData, useMockUserData } from "../mock/mockUseUserData";
+import { useMockRoadmap } from "../mock/mockUseRoadmap";
 
-jest.mock("../../lib/auth/useAuthProtectedPage", () => ({
-  useAuthProtectedPage: jest.fn(),
-}));
-
-jest.mock("../../lib/data-hooks/useUserData", () => ({
-  useUserData: jest.fn(),
-}));
-const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
-
-jest.mock("../../lib/data-hooks/useRoadmap", () => ({
-  useRoadmap: jest.fn(),
-}));
-const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
+jest.mock("../../lib/auth/useAuthProtectedPage");
+jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("../../lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("roadmap page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    mockUseUserData.mockReturnValue(generateUseUserDataResponse({}));
-    mockUseRoadmap.mockReturnValue({ roadmap: generateRoadmap({}) });
+    useMockUserData({});
+    useMockRoadmap({});
   });
 
   const renderRoadmapPage = (): RenderResult => {
@@ -41,7 +22,7 @@ describe("roadmap page", () => {
   describe("business information", () => {
     it("shows the business name from onboarding data", () => {
       useMockOnboardingData({ businessName: "My cool business" });
-      const subject = render(<RoadmapPage displayContent={{ contentMd: "" }} />);
+      const subject = renderRoadmapPage();
       expect(subject.getByText("Business Roadmap for My cool business")).toBeInTheDocument();
     });
 
@@ -144,16 +125,12 @@ describe("roadmap page", () => {
       ],
     });
 
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        userData: generateUserData({
-          taskProgress: {
-            task1: "IN_PROGRESS",
-            task2: "COMPLETED",
-          },
-        }),
-      })
-    );
+    useMockUserData({
+      taskProgress: {
+        task1: "IN_PROGRESS",
+        task2: "COMPLETED",
+      },
+    });
 
     const subject = renderRoadmapPage();
 
@@ -161,18 +138,4 @@ describe("roadmap page", () => {
     expect(subject.queryByText("Completed")).toBeInTheDocument();
     expect(subject.queryByText("Not started")).toBeInTheDocument();
   });
-
-  const useMockOnboardingData = (onboardingData: Partial<OnboardingData>): void => {
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        userData: generateUserData({
-          onboardingData: generateOnboardingData(onboardingData),
-        }),
-      })
-    );
-  };
-
-  const useMockRoadmap = (roadmap: Partial<Roadmap>): void => {
-    mockUseRoadmap.mockReturnValue({ roadmap: generateRoadmap(roadmap) });
-  };
 });

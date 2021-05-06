@@ -1,26 +1,17 @@
 import Home from "../../pages";
-import { generateUseUserDataResponse, renderWithUser } from "../helpers";
-import { generateUser, generateUserData } from "../factories";
-import { useRouter } from "next/router";
-import * as useUserModule from "../../lib/data-hooks/useUserData";
+import { renderWithUser } from "../helpers";
+import { generateUser } from "../factories";
+import { useMockUserData } from "../mock/mockUseUserData";
+import { mockPush, useMockRouter } from "../mock/mockRouter";
 
 jest.mock("next/router");
-jest.mock("../../lib/data-hooks/useUserData", () => ({
-  useUserData: jest.fn(),
-}));
-const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
+jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("HomePage", () => {
-  let mockPush: jest.Mock;
-
   beforeEach(() => {
     jest.resetAllMocks();
-    mockPush = jest.fn();
-    (useRouter as jest.Mock).mockReturnValue({
-      push: mockPush,
-      replace: mockPush,
-    });
-    mockUseUserData.mockReturnValue(generateUseUserDataResponse({}));
+    useMockRouter({});
+    useMockUserData({});
   });
 
   describe("when not logged in", () => {
@@ -59,11 +50,7 @@ describe("HomePage", () => {
 
   describe("when user has completed onboarding flow", () => {
     it("redirects to roadmap page", () => {
-      mockUseUserData.mockReturnValue(
-        generateUseUserDataResponse({
-          userData: generateUserData({ formProgress: "COMPLETED" }),
-        })
-      );
+      useMockUserData({ formProgress: "COMPLETED" });
       renderWithUser(<Home />, generateUser({ name: "Ada Lovelace" }), jest.fn());
       expect(mockPush).toHaveBeenCalledWith("/roadmap");
     });

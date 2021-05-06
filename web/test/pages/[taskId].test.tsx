@@ -1,36 +1,23 @@
 import { fireEvent, render, RenderResult } from "@testing-library/react";
 import TaskPage from "../../pages/tasks/[taskId]";
 import { useMediaQuery } from "@material-ui/core";
-import * as useRoadmapModule from "../../lib/data-hooks/useRoadmap";
-import * as useUserDataModule from "../../lib/data-hooks/useUserData";
-import { generateRoadmap, generateStep, generateTask, generateUserData } from "../factories";
-import { generateUseUserDataResponse } from "../helpers";
-import { Task, TaskProgress } from "../../lib/types/types";
+import { generateTask, generateUserData } from "../factories";
+import { TaskProgress } from "../../lib/types/types";
+import { mockUpdate, useMockUserData } from "../mock/mockUseUserData";
+import { useMockRoadmap, useMockRoadmapTask } from "../mock/mockUseRoadmap";
+import * as materialUi from "@material-ui/core";
 
-jest.mock("../../lib/data-hooks/useRoadmap", () => ({
-  useRoadmap: jest.fn(),
-}));
-const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
-
-jest.mock("../../lib/auth/useAuthProtectedPage", () => ({
-  useAuthProtectedPage: jest.fn(),
-}));
-
-jest.mock("../../lib/data-hooks/useUserData", () => ({
-  useUserData: jest.fn(),
-}));
-const mockUseUserData = (useUserDataModule as jest.Mocked<typeof useUserDataModule>).useUserData;
-
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-function mockMaterialUI() {
-  const original = jest.requireActual("@material-ui/core");
+function mockMaterialUI(): typeof materialUi {
   return {
-    ...original,
+    ...jest.requireActual("@material-ui/core"),
     useMediaQuery: jest.fn(),
   };
 }
 
 jest.mock("@material-ui/core", () => mockMaterialUI());
+jest.mock("../../lib/auth/useAuthProtectedPage");
+jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("../../lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const setLargeScreen = (): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => true);
@@ -41,8 +28,8 @@ describe("task page", () => {
 
   beforeEach(() => {
     setLargeScreen();
-    mockUseRoadmap.mockReturnValue({ roadmap: undefined });
-    mockUseUserData.mockReturnValue(generateUseUserDataResponse({}));
+    useMockRoadmap({});
+    useMockUserData({});
   });
 
   it("shows the task details", () => {
@@ -97,13 +84,11 @@ describe("task page", () => {
       callToActionText: "original call to action",
     });
 
-    mockTaskInRoadmap(
-      generateTask({
-        id: "123",
-        contentMd: "a whole brand new description",
-        callToActionText: "a whole brand new call to action",
-      })
-    );
+    useMockRoadmapTask({
+      id: "123",
+      contentMd: "a whole brand new description",
+      callToActionText: "a whole brand new call to action",
+    });
 
     subject = render(<TaskPage task={task} />);
     expect(subject.queryByText("original description")).not.toBeInTheDocument();
@@ -114,9 +99,7 @@ describe("task page", () => {
   });
 
   it("displays Not Started status when user data does not contain status", () => {
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({ userData: generateUserData({ taskProgress: {} }) })
-    );
+    useMockUserData({ taskProgress: {} });
     subject = render(<TaskPage task={generateTask({})} />);
 
     expect(subject.getAllByText("Not started")[0]).toBeVisible();
@@ -128,9 +111,7 @@ describe("task page", () => {
       "some-id": "COMPLETED",
       [taskId]: "IN_PROGRESS",
     };
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({ userData: generateUserData({ taskProgress }) })
-    );
+    useMockUserData({ taskProgress });
     subject = render(<TaskPage task={generateTask({ id: taskId })} />);
 
     expect(subject.getAllByText("In-progress")[0]).toBeVisible();
@@ -141,15 +122,15 @@ describe("task page", () => {
     const taskProgress: Record<string, TaskProgress> = {
       "some-id": "COMPLETED",
     };
-    const update = jest.fn();
+
     const userData = generateUserData({ taskProgress });
-    mockUseUserData.mockReturnValue(generateUseUserDataResponse({ userData, update }));
+    useMockUserData(userData);
     subject = render(<TaskPage task={generateTask({ id: taskId })} />);
 
     fireEvent.click(subject.getAllByText("Not started")[0]);
     fireEvent.click(subject.getByText("In-progress"));
     expect(subject.getAllByText("In-progress")[0]).toBeVisible();
-    expect(update).toHaveBeenCalledWith({
+    expect(mockUpdate).toHaveBeenCalledWith({
       ...userData,
       taskProgress: {
         "some-id": "COMPLETED",
@@ -157,16 +138,4 @@ describe("task page", () => {
       },
     });
   });
-
-  const mockTaskInRoadmap = (task: Task): void => {
-    mockUseRoadmap.mockReturnValue({
-      roadmap: generateRoadmap({
-        steps: [
-          generateStep({
-            tasks: [task],
-          }),
-        ],
-      }),
-    });
-  };
 });

@@ -9,11 +9,8 @@ import {
   within,
 } from "@testing-library/react";
 import Onboarding from "../../pages/onboarding";
-import { useRouter } from "next/router";
 import React from "react";
-import * as useUserModule from "../../lib/data-hooks/useUserData";
 import { generateMunicipality, generateOnboardingData, generateUser, generateUserData } from "../factories";
-import { generateUseUserDataResponse } from "../helpers";
 import {
   createEmptyOnboardingDisplayContent,
   createEmptyUserData,
@@ -21,39 +18,24 @@ import {
   LegalStructure,
   UserData,
 } from "../../lib/types/types";
+import * as mockUseUserData from "../mock/mockUseUserData";
+import * as mockRouter from "../mock/mockRouter";
+import { mockUpdate, useMockUserData } from "../mock/mockUseUserData";
+import { useMockRouter } from "../mock/mockRouter";
 
 jest.mock("next/router");
-
-jest.mock("../../lib/auth/useAuthProtectedPage", () => ({
-  useAuthProtectedPage: jest.fn(),
-}));
-
-jest.mock("../../lib/data-hooks/useUserData", () => ({
-  useUserData: jest.fn(),
-}));
-const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
+jest.mock("../../lib/auth/useAuthProtectedPage");
+jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("onboarding form", () => {
   let subject: RenderResult;
-  let mockPush: jest.Mock;
-  let mockUpdate: jest.Mock;
   let emptyUserData: UserData;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    mockPush = jest.fn();
-    (useRouter as jest.Mock).mockReturnValue({
-      push: mockPush,
-    });
-
     emptyUserData = createEmptyUserData(generateUser({}));
-    mockUpdate = jest.fn().mockResolvedValue({});
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        userData: emptyUserData,
-        update: mockUpdate,
-      })
-    );
+    useMockUserData(emptyUserData);
+    useMockRouter({});
   });
 
   it("prefills form from existing user data", async () => {
@@ -68,12 +50,7 @@ describe("onboarding form", () => {
       }),
     });
 
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        userData,
-        update: jest.fn().mockResolvedValue({}),
-      })
-    );
+    useMockUserData(userData);
 
     subject = render(
       <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
@@ -93,14 +70,8 @@ describe("onboarding form", () => {
   it("updates the user data after each form page", async () => {
     const initialUserData = generateUserData({});
     const promise = Promise.resolve();
-    const mockUpdate = jest.fn(() => promise);
-
-    mockUseUserData.mockReturnValue(
-      generateUseUserDataResponse({
-        userData: initialUserData,
-        update: mockUpdate,
-      })
-    );
+    mockUpdate.mockReturnValue(promise);
+    useMockUserData(initialUserData);
 
     const newark = generateMunicipality({ displayName: "Newark" });
 
@@ -161,7 +132,7 @@ describe("onboarding form", () => {
         municipality: newark,
       },
     });
-    expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap");
   });
 
   it("is able to go back", async () => {
@@ -206,7 +177,7 @@ describe("onboarding form", () => {
     chooseRadio("true");
     await visitStep3();
 
-    expect(mockUpdate).toHaveBeenLastCalledWith({
+    expect(mockUseUserData.mockUpdate).toHaveBeenLastCalledWith({
       ...emptyUserData,
       onboardingData: {
         ...emptyUserData.onboardingData,
@@ -227,7 +198,7 @@ describe("onboarding form", () => {
     selectByValue("Industry", "e-commerce");
     await visitStep3();
 
-    expect(mockUpdate).toHaveBeenLastCalledWith({
+    expect(mockUseUserData.mockUpdate).toHaveBeenLastCalledWith({
       ...emptyUserData,
       onboardingData: {
         ...emptyUserData.onboardingData,

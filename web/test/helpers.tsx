@@ -31,7 +31,7 @@ export const generateUseUserDataResponse = (
   overrides: Partial<UseUserDataResponse>
 ): UseUserDataResponse => ({
   userData: generateUserData({}),
-  update: jest.fn(),
+  update: jest.fn().mockResolvedValue({}),
   isError: false,
   isLoading: false,
   ...overrides,
