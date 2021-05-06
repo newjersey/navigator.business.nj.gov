@@ -14,12 +14,14 @@ import { GetStaticPropsResult } from "next";
 import { RoadmapDisplayContent } from "../lib/types/types";
 import { loadRoadmapDisplayContent } from "../lib/static/loadDisplayContent";
 import { Content } from "../components/Content";
+import { useAuthProtectedPage } from "../lib/auth/useAuthProtectedPage";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
 }
 
 const RoadmapPage = (props: Props): ReactElement => {
+  useAuthProtectedPage();
   const { userData, isLoading } = useUserData();
   const { roadmap } = useRoadmap();
 

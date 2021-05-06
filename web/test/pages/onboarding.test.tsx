@@ -24,6 +24,10 @@ import {
 
 jest.mock("next/router");
 
+jest.mock("../../lib/auth/useAuthProtectedPage", () => ({
+  useAuthProtectedPage: jest.fn(),
+}));
+
 jest.mock("../../lib/data-hooks/useUserData", () => ({
   useUserData: jest.fn(),
 }));

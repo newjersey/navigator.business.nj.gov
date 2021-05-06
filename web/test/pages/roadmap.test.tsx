@@ -13,6 +13,10 @@ import { render, RenderResult } from "@testing-library/react";
 import RoadmapPage from "../../pages/roadmap";
 import { OnboardingData, Roadmap } from "../../lib/types/types";
 
+jest.mock("../../lib/auth/useAuthProtectedPage", () => ({
+  useAuthProtectedPage: jest.fn(),
+}));
+
 jest.mock("../../lib/data-hooks/useUserData", () => ({
   useUserData: jest.fn(),
 }));

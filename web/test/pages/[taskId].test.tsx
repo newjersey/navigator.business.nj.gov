@@ -12,6 +12,10 @@ jest.mock("../../lib/data-hooks/useRoadmap", () => ({
 }));
 const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
 
+jest.mock("../../lib/auth/useAuthProtectedPage", () => ({
+  useAuthProtectedPage: jest.fn(),
+}));
+
 jest.mock("../../lib/data-hooks/useUserData", () => ({
   useUserData: jest.fn(),
 }));

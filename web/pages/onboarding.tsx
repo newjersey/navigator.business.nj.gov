@@ -24,6 +24,7 @@ import { OnboardingDefaults } from "../display-content/onboarding/OnboardingDefa
 import { templateEval } from "../lib/utils/helpers";
 import { loadOnboardingDisplayContent } from "../lib/static/loadDisplayContent";
 import { CSSTransition } from "react-transition-group";
+import { useAuthProtectedPage } from "../lib/auth/useAuthProtectedPage";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -55,6 +56,8 @@ export const OnboardingContext = React.createContext<OnboardingContextType>({
 });
 
 const OnboardingPage = (props: Props): ReactElement => {
+  useAuthProtectedPage();
+
   const PAGES = 4;
   const router = useRouter();
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });

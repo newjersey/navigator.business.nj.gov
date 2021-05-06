@@ -12,12 +12,14 @@ import { useUserData } from "../../lib/data-hooks/useUserData";
 import { Content } from "../../components/Content";
 import { TaskDefaults } from "../../display-content/tasks/TaskDefaults";
 import { Icon } from "../../components/njwds/Icon";
+import { useAuthProtectedPage } from "../../lib/auth/useAuthProtectedPage";
 
 interface Props {
   task: Task;
 }
 
 const TaskPage = (props: Props): ReactElement => {
+  useAuthProtectedPage();
   const sidebar = <MiniRoadmap activeTaskId={props.task.id} />;
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
