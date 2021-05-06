@@ -61,7 +61,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                 >
                   {step.name}
                 </h2>
-                <div className="padding-right-1 padding-left-1 mla">
+                <div className="padding-right-1 padding-left-1 mla fdc fac">
                   <Icon className="font-sans-lg text-ink">
                     {openSteps.includes(step.id) ? "expand_less" : "expand_more"}
                   </Icon>

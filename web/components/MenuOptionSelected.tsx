@@ -16,8 +16,7 @@ export const MenuOptionSelected = (props: Props): ReactElement => (
     </div>
     {props.secondaryText && (
       <div className="font-body-3xs text-base-dark">
-        <span className="padding-right-2">&nbsp;</span>
-        <span className="text-bold">{props.secondaryText}</span>
+        <span className="text-bold padding-left-205">{props.secondaryText}</span>
       </div>
     )}
   </div>

@@ -8,13 +8,11 @@ interface Props {
 export const MenuOptionUnselected = (props: Props): ReactElement => (
   <div className="fdc">
     <div>
-      <span className="padding-right-2">&nbsp;</span>
-      {props.children}
+      <span className="padding-left-205">{props.children}</span>
     </div>
     {props.secondaryText && (
       <div className="font-body-3xs text-base-dark">
-        <span className="padding-right-2">&nbsp;</span>
-        {props.secondaryText}
+        <span className="padding-left-205">{props.secondaryText}</span>
       </div>
     )}
   </div>
