@@ -1,30 +1,30 @@
 import React, { FormEvent, ReactElement, ReactNode, useEffect, useState } from "react";
-import { PageSkeleton } from "../components/PageSkeleton";
 import { useRouter } from "next/router";
-import { useUserData } from "../lib/data-hooks/useUserData";
+import { useMediaQuery } from "@material-ui/core";
+import { CSSTransition } from "react-transition-group";
+import { GetStaticPropsResult } from "next";
+import { PageSkeleton } from "@/components/PageSkeleton";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   createEmptyOnboardingData,
   createEmptyOnboardingDisplayContent,
   Municipality,
   OnboardingData,
   OnboardingDisplayContent,
-} from "../lib/types/types";
-import { useMediaQuery } from "@material-ui/core";
-import { MediaQueries } from "../lib/PageSizes";
-import { SingleColumnContainer } from "../components/njwds/SingleColumnContainer";
-import { MobilePageTitle } from "../components/njwds/MobilePageTitle";
-import { OnboardingBusinessName } from "../components/onboarding/OnboardingName";
-import { OnboardingIndustry } from "../components/onboarding/OnboardingIndustry";
-import { OnboardingLegalStructure } from "../components/onboarding/OnboardingLegalStructure";
-import { GetStaticPropsResult } from "next";
-import { OnboardingButtonGroup } from "../components/onboarding/OnboardingButtonGroup";
-import { loadAllMunicipalities } from "../lib/static/loadMunicipalities";
-import { OnboardingMunicipality } from "../components/onboarding/OnboardingMunicipality";
-import { OnboardingDefaults } from "../display-content/onboarding/OnboardingDefaults";
-import { templateEval } from "../lib/utils/helpers";
-import { loadOnboardingDisplayContent } from "../lib/static/loadDisplayContent";
-import { CSSTransition } from "react-transition-group";
-import { useAuthProtectedPage } from "../lib/auth/useAuthProtectedPage";
+} from "@/lib/types/types";
+import { MediaQueries } from "@/lib/PageSizes";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { MobilePageTitle } from "@/components/njwds/MobilePageTitle";
+import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
+import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
+import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
+import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
+import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
+import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
+import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { templateEval } from "@/lib/utils/helpers";
+import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
+import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 
 interface Props {
   displayContent: OnboardingDisplayContent;

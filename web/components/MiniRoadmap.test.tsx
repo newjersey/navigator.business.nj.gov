@@ -1,14 +1,10 @@
 import { fireEvent, render, RenderResult } from "@testing-library/react";
 import { MiniRoadmap } from "./MiniRoadmap";
 
-import * as useRoadmapModule from "../lib/data-hooks/useRoadmap";
-import { Roadmap } from "../lib/types/types";
-import { generateRoadmap, generateStep, generateTask } from "../test/factories";
+import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 
-jest.mock("../lib/data-hooks/useRoadmap", () => ({
-  useRoadmap: jest.fn(),
-}));
-const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("<MiniRoadmap />", () => {
   let subject: RenderResult;
@@ -41,8 +37,4 @@ describe("<MiniRoadmap />", () => {
     expect(subject.queryByText("task2")).not.toBeInTheDocument();
     expect(subject.queryByText("task1")).not.toBeInTheDocument();
   });
-
-  const useMockRoadmap = (roadmap: Partial<Roadmap>): void => {
-    mockUseRoadmap.mockReturnValue({ roadmap: generateRoadmap(roadmap) });
-  };
 });

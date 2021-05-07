@@ -1,5 +1,5 @@
-import { Municipality } from "../types/types";
-import * as api from "../api-client/apiClient";
+import { Municipality } from "@/lib/types/types";
+import * as api from "@/lib/api-client/apiClient";
 
 export const loadAllMunicipalities = async (): Promise<Municipality[]> => {
   const municipalities = await api.getMunicipalities();

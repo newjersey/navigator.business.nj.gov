@@ -9,9 +9,9 @@ import {
   Step,
   Task,
   UserData,
-} from "../lib/types/types";
-import { ALL_LEGAL_STRUCTURES_ORDERED } from "../display-content/LegalStructureLookup";
-import { ALL_INDUSTRIES_ORDERED } from "../display-content/IndustryLookup";
+} from "@/lib/types/types";
+import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
+import { ALL_INDUSTRIES_ORDERED } from "@/display-content/IndustryLookup";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 

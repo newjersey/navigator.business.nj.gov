@@ -1,11 +1,11 @@
 import { useUserData, UseUserDataResponse } from "./useUserData";
-import { generateUseUserDataResponse, renderWithUser } from "../../test/helpers";
-import { BusinessUser } from "../types/types";
-import * as api from "../api-client/apiClient";
-import { generateUser, generateUserData } from "../../test/factories";
+import { generateUseUserDataResponse, renderWithUser } from "@/test/helpers";
+import { BusinessUser } from "@/lib/types/types";
+import * as api from "@/lib/api-client/apiClient";
+import { generateUser, generateUserData } from "@/test/factories";
 import { act } from "@testing-library/react";
 
-jest.mock("../api-client/apiClient", () => ({
+jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
   postUserData: jest.fn(),
 }));

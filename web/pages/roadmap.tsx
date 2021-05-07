@@ -1,20 +1,20 @@
 import React, { ReactElement } from "react";
-import { useUserData } from "../lib/data-hooks/useUserData";
-import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
-import { Step } from "../components/Step";
-import { GreyCallout } from "../components/njwds-extended/GreyCallout";
-import { PageSkeleton } from "../components/PageSkeleton";
-import { useRoadmap } from "../lib/data-hooks/useRoadmap";
-import { AuthButton } from "../components/AuthButton";
-import { IndustryLookup } from "../display-content/IndustryLookup";
-import { LegalStructureLookup } from "../display-content/LegalStructureLookup";
-import { RoadmapDefaults } from "../display-content/roadmap/RoadmapDefaults";
-import { templateEval } from "../lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
-import { RoadmapDisplayContent } from "../lib/types/types";
-import { loadRoadmapDisplayContent } from "../lib/static/loadDisplayContent";
-import { Content } from "../components/Content";
-import { useAuthProtectedPage } from "../lib/auth/useAuthProtectedPage";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
+import { Step } from "@/components/Step";
+import { GreyCallout } from "@/components/njwds-extended/GreyCallout";
+import { PageSkeleton } from "@/components/PageSkeleton";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { AuthButton } from "@/components/AuthButton";
+import { IndustryLookup } from "@/display-content/IndustryLookup";
+import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
+import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { templateEval } from "@/lib/utils/helpers";
+import { RoadmapDisplayContent } from "@/lib/types/types";
+import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
+import { Content } from "@/components/Content";
+import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 
 interface Props {
   displayContent: RoadmapDisplayContent;

@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { onEscape, useMountEffect } from "../lib/utils/helpers";
+import { onEscape, useMountEffect } from "@/lib/utils/helpers";
 import FocusTrap from "focus-trap-react";
 
 interface Props {

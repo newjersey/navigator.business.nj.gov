@@ -1,11 +1,11 @@
 import { fireEvent, render, RenderResult } from "@testing-library/react";
-import TaskPage from "../../pages/tasks/[taskId]";
 import { useMediaQuery } from "@material-ui/core";
-import { generateTask, generateUserData } from "../factories";
-import { TaskProgress } from "../../lib/types/types";
-import { mockUpdate, useMockUserData } from "../mock/mockUseUserData";
-import { useMockRoadmap, useMockRoadmapTask } from "../mock/mockUseRoadmap";
 import * as materialUi from "@material-ui/core";
+import TaskPage from "@/pages/tasks/[taskId]";
+import { TaskProgress } from "@/lib/types/types";
+import { generateTask, generateUserData } from "@/test/factories";
+import { mockUpdate, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -15,9 +15,9 @@ function mockMaterialUI(): typeof materialUi {
 }
 
 jest.mock("@material-ui/core", () => mockMaterialUI());
-jest.mock("../../lib/auth/useAuthProtectedPage");
-jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("../../lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/auth/useAuthProtectedPage");
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const setLargeScreen = (): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => true);

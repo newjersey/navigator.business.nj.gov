@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import Link from "next/link";
-import { Task } from "../lib/types/types";
+import { Task } from "@/lib/types/types";
 
 interface Props {
   task: Task;

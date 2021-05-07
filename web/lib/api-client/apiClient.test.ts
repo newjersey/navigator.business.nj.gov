@@ -1,5 +1,5 @@
 import axios from "axios";
-import { generateUser, generateUserData } from "../../test/factories";
+import { generateUser, generateUserData } from "@/test/factories";
 import { get, getUserData, postUserData } from "./apiClient";
 
 jest.mock("axios");

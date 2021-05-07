@@ -1,4 +1,4 @@
-import { Icon } from "./njwds/Icon";
+import { Icon } from "@/components/njwds/Icon";
 import React, { ReactElement, ReactNode } from "react";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { Dispatch, Reducer } from "react";
-import { BusinessUser } from "../types/types";
+import { BusinessUser } from "@/lib/types/types";
 
 export type UserActionType = "LOGIN" | "LOGOUT";
 

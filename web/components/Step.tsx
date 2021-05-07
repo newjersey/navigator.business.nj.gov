@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
-import { Task } from "./Task";
-import * as types from "../lib/types/types";
-import { VerticalStepIndicator } from "./njwds-extended/VerticalStepIndicator";
+import { Task } from "@/components/Task";
+import * as types from "@/lib/types/types";
+import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 
 interface Props {
   step: types.Step;

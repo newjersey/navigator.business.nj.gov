@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import * as types from "../lib/types/types";
-import { useUserData } from "../lib/data-hooks/useUserData";
-import { TaskProgressTagLookup } from "./TaskProgressTagLookup";
+import * as types from "@/lib/types/types";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 
 interface Props {
   task: types.Task;

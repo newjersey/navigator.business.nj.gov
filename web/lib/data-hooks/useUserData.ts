@@ -1,9 +1,9 @@
 import useSWR from "swr";
-import * as api from "../api-client/apiClient";
-import { postUserData } from "../api-client/apiClient";
-import { UserData } from "../types/types";
 import { useContext } from "react";
-import { AuthContext } from "../../pages/_app";
+import * as api from "@/lib/api-client/apiClient";
+import { postUserData } from "@/lib/api-client/apiClient";
+import { UserData } from "@/lib/types/types";
+import { AuthContext } from "@/pages/_app";
 
 export const useUserData = (): UseUserDataResponse => {
   const { state } = useContext(AuthContext);

@@ -1,4 +1,4 @@
-import { renderWithContextualInfo } from "../test/helpers";
+import { renderWithContextualInfo } from "@/test/helpers";
 import { ContextualInfoPanel } from "./ContextualInfoPanel";
 import { RenderResult } from "@testing-library/react";
 

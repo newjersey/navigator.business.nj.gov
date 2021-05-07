@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useMediaQuery } from "@material-ui/core";
-import { MediaQueries } from "../../lib/PageSizes";
+import { MediaQueries } from "@/lib/PageSizes";
 
 interface Props {
   children?: ReactElement;

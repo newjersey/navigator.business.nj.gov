@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ReactElement, useContext } from "react";
 import { TextField } from "@material-ui/core";
-import { OnboardingContext } from "../../pages/onboarding";
-import { Content } from "../Content";
+import { OnboardingContext } from "@/pages/onboarding";
+import { Content } from "@/components/Content";
 
 export const OnboardingBusinessName = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);

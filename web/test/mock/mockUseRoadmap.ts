@@ -1,6 +1,6 @@
-import * as useRoadmapModule from "../../lib/data-hooks/useRoadmap";
-import { Roadmap, Task } from "../../lib/types/types";
-import { generateRoadmap, generateStep, generateTask } from "../factories";
+import * as useRoadmapModule from "@/lib/data-hooks/useRoadmap";
+import { Roadmap, Task } from "@/lib/types/types";
+import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 
 const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
 

@@ -1,8 +1,8 @@
 import React, { ReactElement, useState } from "react";
-import { MediaQueries } from "../../lib/PageSizes";
+import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@material-ui/core";
-import { Icon } from "../njwds/Icon";
-import { FocusTrappedSidebar } from "../FocusTrappedSidebar";
+import { Icon } from "@/components/njwds/Icon";
+import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 
 interface Props {
   children: React.ReactNode;

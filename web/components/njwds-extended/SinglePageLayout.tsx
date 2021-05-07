@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
-import { MobilePageTitle } from "../njwds/MobilePageTitle";
-import { SingleColumnContainer } from "../njwds/SingleColumnContainer";
+import { MobilePageTitle } from "@/components/njwds/MobilePageTitle";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 
 interface Props {
   children: React.ReactNode;

@@ -1,12 +1,12 @@
-import { generateMunicipality, generateStep, generateTask } from "../factories";
 import { render, RenderResult } from "@testing-library/react";
-import RoadmapPage from "../../pages/roadmap";
-import { useMockOnboardingData, useMockUserData } from "../mock/mockUseUserData";
-import { useMockRoadmap } from "../mock/mockUseRoadmap";
+import RoadmapPage from "@/pages/roadmap";
+import { generateMunicipality, generateStep, generateTask } from "@/test/factories";
+import { useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 
-jest.mock("../../lib/auth/useAuthProtectedPage");
-jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("../../lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/auth/useAuthProtectedPage");
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("roadmap page", () => {
   beforeEach(() => {

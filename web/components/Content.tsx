@@ -3,8 +3,8 @@ import remark from "remark";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import remark2react from "remark-react";
-import { ContextualInfoLink } from "./ContextualInfoLink";
-import { Icon } from "./njwds/Icon";
+import { ContextualInfoLink } from "@/components/ContextualInfoLink";
+import { Icon } from "@/components/njwds/Icon";
 
 interface Props {
   children: string;

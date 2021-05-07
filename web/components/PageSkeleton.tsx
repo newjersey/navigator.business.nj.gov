@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Banner } from "./njwds/Banner";
+import { Banner } from "@/components/njwds/Banner";
 
 interface Props {
   children: React.ReactNode;

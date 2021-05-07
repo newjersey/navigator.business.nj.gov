@@ -1,12 +1,9 @@
 import React, { ReactElement, useContext } from "react";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
-import { OnboardingContext } from "../../pages/onboarding";
-import { LegalStructure } from "../../lib/types/types";
-import { Content } from "../Content";
-import {
-  ALL_LEGAL_STRUCTURES_ORDERED,
-  LegalStructureLookup,
-} from "../../display-content/LegalStructureLookup";
+import { OnboardingContext } from "@/pages/onboarding";
+import { LegalStructure } from "@/lib/types/types";
+import { Content } from "@/components/Content";
+import { ALL_LEGAL_STRUCTURES_ORDERED, LegalStructureLookup } from "@/display-content/LegalStructureLookup";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);

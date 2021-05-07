@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { Task } from "../types/types";
-import { convertTaskMd } from "../utils/markdownReader";
+import { Task } from "@/lib/types/types";
+import { convertTaskMd } from "@/lib/utils/markdownReader";
 
 export type PathParams<P> = { params: P; locale?: string };
 export type TaskIdParam = {

@@ -1,6 +1,6 @@
 import fs from "fs";
 import { loadOnboardingDisplayContent, loadRoadmapDisplayContent } from "./loadDisplayContent";
-import { ALL_LEGAL_STRUCTURES_ORDERED } from "../../display-content/LegalStructureLookup";
+import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
 
 jest.mock("fs");
 

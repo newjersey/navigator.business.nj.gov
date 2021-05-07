@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React, { ReactElement, useContext, useEffect } from "react";
-import { Hero } from "../components/njwds/Hero";
-import { PageSkeleton } from "../components/PageSkeleton";
-import { AuthContext } from "./_app";
-import { AuthButton } from "../components/AuthButton";
-import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
 import { useRouter } from "next/router";
-import { useUserData } from "../lib/data-hooks/useUserData";
-import { IsAuthenticated } from "../lib/auth/AuthContext";
+import { AuthContext } from "./_app";
+import { Hero } from "@/components/njwds/Hero";
+import { PageSkeleton } from "@/components/PageSkeleton";
+import { AuthButton } from "@/components/AuthButton";
+import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 
 const Home = (): ReactElement => {
   const { state } = useContext(AuthContext);

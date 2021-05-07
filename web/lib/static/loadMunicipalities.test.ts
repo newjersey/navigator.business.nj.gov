@@ -1,8 +1,8 @@
 import { loadAllMunicipalities } from "./loadMunicipalities";
-import * as api from "../api-client/apiClient";
-import { generateMunicipalityDetail } from "../../test/factories";
+import * as api from "@/lib/api-client/apiClient";
+import { generateMunicipalityDetail } from "@/test/factories";
 
-jest.mock("../api-client/apiClient", () => ({
+jest.mock("@/lib/api-client/apiClient", () => ({
   getMunicipalities: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;

@@ -1,14 +1,14 @@
 import React, { ReactElement, ReactNode, useContext } from "react";
 import { Divider, FormControl, ListSubheader, MenuItem, Select } from "@material-ui/core";
-import { OnboardingContext } from "../../pages/onboarding";
-import { Industry } from "../../lib/types/types";
-import { IndustryLookup } from "../../display-content/IndustryLookup";
-import { Content } from "../Content";
-import { MenuOptionUnselected } from "../MenuOptionUnselected";
-import { MenuOptionSelected } from "../MenuOptionSelected";
-import { Alert } from "../njwds/Alert";
-import { OnboardingLiquorLicense } from "./OnboardingLiquorLicense";
-import { isLiquorLicenseApplicable } from "../../lib/domain-logic/isLiquorLicenseApplicable";
+import { OnboardingContext } from "@/pages/onboarding";
+import { Industry } from "@/lib/types/types";
+import { IndustryLookup } from "@/display-content/IndustryLookup";
+import { Content } from "@/components/Content";
+import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { MenuOptionSelected } from "@/components/MenuOptionSelected";
+import { Alert } from "@/components/njwds/Alert";
+import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
+import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 
 export const OnboardingIndustry = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);

@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { TaskProgressLookup } from "../../display-content/TaskProgressLookup";
+import { TaskProgressLookup } from "@/display-content/TaskProgressLookup";
 
 export const TagNotStarted = (): ReactElement => {
   return (

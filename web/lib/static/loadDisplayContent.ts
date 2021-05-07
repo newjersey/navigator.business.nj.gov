@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { LegalStructure, OnboardingDisplayContent, RoadmapDisplayContent } from "../types/types";
-import { getMarkdown } from "../utils/markdownReader";
-import { ALL_LEGAL_STRUCTURES_ORDERED } from "../../display-content/LegalStructureLookup";
+import { LegalStructure, OnboardingDisplayContent, RoadmapDisplayContent } from "@/lib/types/types";
+import { getMarkdown } from "@/lib/utils/markdownReader";
+import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
 

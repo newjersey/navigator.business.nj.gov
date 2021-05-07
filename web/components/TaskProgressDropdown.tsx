@@ -1,11 +1,11 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { Button, createStyles, makeStyles, Menu, MenuItem } from "@material-ui/core";
-import { TaskProgress } from "../lib/types/types";
-import { Icon } from "./njwds/Icon";
-import { TagInProgress } from "./njwds-extended/TagInProgress";
-import { TagCompleted } from "./njwds-extended/TagCompleted";
-import { TagNotStarted } from "./njwds-extended/TagNotStarted";
-import { TaskProgressTagLookup } from "./TaskProgressTagLookup";
+import { TaskProgress } from "@/lib/types/types";
+import { Icon } from "@/components/njwds/Icon";
+import { TagInProgress } from "@/components/njwds-extended/TagInProgress";
+import { TagCompleted } from "@/components/njwds-extended/TagCompleted";
+import { TagNotStarted } from "@/components/njwds-extended/TagNotStarted";
+import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 
 const useStyles = makeStyles(() =>
   createStyles({

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React, { ReactElement, useContext, useState } from "react";
-import { AuthContext } from "./_app";
 import { useRouter } from "next/router";
-import { onSignIn, onSignOut } from "../lib/auth/signinHelper";
 import { AuthState } from "@aws-amplify/ui-components";
 import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
+import { AuthContext } from "./_app";
+import { onSignIn, onSignOut } from "@/lib/auth/signinHelper";
 
 const SigninPage = (): ReactElement => {
   const { dispatch } = useContext(AuthContext);

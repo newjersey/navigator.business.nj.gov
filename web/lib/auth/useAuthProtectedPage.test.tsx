@@ -1,4 +1,4 @@
-import { renderWithUser } from "../../test/helpers";
+import { renderWithUser } from "@/test/helpers";
 import { useRouter } from "next/router";
 import { useAuthProtectedPage } from "./useAuthProtectedPage";
 import { IsAuthenticated } from "./AuthContext";

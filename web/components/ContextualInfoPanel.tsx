@@ -1,8 +1,8 @@
 import React, { ReactElement, useContext } from "react";
-import { Icon } from "./njwds/Icon";
-import { ContextualInfoContext } from "../pages/_app";
-import { Content } from "./Content";
-import { FocusTrappedSidebar } from "./FocusTrappedSidebar";
+import { Icon } from "@/components/njwds/Icon";
+import { ContextualInfoContext } from "@/pages/_app";
+import { Content } from "@/components/Content";
+import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 
 export const ContextualInfoPanel = (): ReactElement => {
   const { contextualInfoMd, setContextualInfoMd } = useContext(ContextualInfoContext);

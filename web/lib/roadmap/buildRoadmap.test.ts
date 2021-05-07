@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { buildRoadmap } from "./buildRoadmap";
-import { Roadmap, Task } from "../types/types";
-import {
-  generateMunicipality,
-  generateMunicipalityDetail,
-  generateOnboardingData,
-} from "../../test/factories";
-import * as api from "../api-client/apiClient";
+import { Roadmap, Task } from "@/lib/types/types";
+import { generateMunicipality, generateMunicipalityDetail, generateOnboardingData } from "@/test/factories";
+import * as api from "@/lib/api-client/apiClient";
 
-jest.mock("../api-client/apiClient", () => ({
+jest.mock("@/lib/api-client/apiClient", () => ({
   getMunicipalities: jest.fn(),
   getMunicipality: jest.fn(),
 }));

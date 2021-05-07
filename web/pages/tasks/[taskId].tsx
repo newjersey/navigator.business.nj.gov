@@ -1,18 +1,18 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import React, { ReactElement } from "react";
-import { PageSkeleton } from "../../components/PageSkeleton";
-import { loadAllTaskIds, loadTaskById, TaskIdParam } from "../../lib/static/loadTasks";
-import { Task, TaskProgress } from "../../lib/types/types";
 import Link from "next/link";
-import { SidebarPageLayout } from "../../components/njwds-extended/SidebarPageLayout";
-import { MiniRoadmap } from "../../components/MiniRoadmap";
-import { useRoadmap } from "../../lib/data-hooks/useRoadmap";
-import { TaskProgressDropdown } from "../../components/TaskProgressDropdown";
-import { useUserData } from "../../lib/data-hooks/useUserData";
-import { Content } from "../../components/Content";
-import { TaskDefaults } from "../../display-content/tasks/TaskDefaults";
-import { Icon } from "../../components/njwds/Icon";
-import { useAuthProtectedPage } from "../../lib/auth/useAuthProtectedPage";
+import { PageSkeleton } from "@/components/PageSkeleton";
+import { loadAllTaskIds, loadTaskById, TaskIdParam } from "@/lib/static/loadTasks";
+import { Task, TaskProgress } from "@/lib/types/types";
+import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
+import { MiniRoadmap } from "@/components/MiniRoadmap";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Content } from "@/components/Content";
+import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { Icon } from "@/components/njwds/Icon";
+import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 
 interface Props {
   task: Task;

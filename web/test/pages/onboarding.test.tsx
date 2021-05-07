@@ -8,24 +8,29 @@ import {
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
-import Onboarding from "../../pages/onboarding";
 import React from "react";
-import { generateMunicipality, generateOnboardingData, generateUser, generateUserData } from "../factories";
+import Onboarding from "@/pages/onboarding";
+import {
+  generateMunicipality,
+  generateOnboardingData,
+  generateUser,
+  generateUserData,
+} from "@/test/factories";
 import {
   createEmptyOnboardingDisplayContent,
   createEmptyUserData,
   Industry,
   LegalStructure,
   UserData,
-} from "../../lib/types/types";
-import * as mockUseUserData from "../mock/mockUseUserData";
-import * as mockRouter from "../mock/mockRouter";
-import { mockUpdate, useMockUserData } from "../mock/mockUseUserData";
-import { useMockRouter } from "../mock/mockRouter";
+} from "@/lib/types/types";
+import * as mockUseUserData from "@/test/mock/mockUseUserData";
+import * as mockRouter from "@/test/mock/mockRouter";
+import { mockUpdate, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockRouter } from "@/test/mock/mockRouter";
 
 jest.mock("next/router");
-jest.mock("../../lib/auth/useAuthProtectedPage");
-jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/auth/useAuthProtectedPage");
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("onboarding form", () => {
   let subject: RenderResult;

@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { useMountEffect, useOnWindowResize } from "../../lib/utils/helpers";
+import { useMountEffect, useOnWindowResize } from "@/lib/utils/helpers";
 
 interface Props {
   number: number;

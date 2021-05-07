@@ -1,7 +1,7 @@
-import { Roadmap } from "../types/types";
+import { Roadmap } from "@/lib/types/types";
 import { useContext, useEffect } from "react";
-import { RoadmapContext } from "../../pages/_app";
-import { buildRoadmap } from "../roadmap/buildRoadmap";
+import { RoadmapContext } from "@/pages/_app";
+import { buildRoadmap } from "@/lib/roadmap/buildRoadmap";
 import { useUserData } from "./useUserData";
 
 export const useRoadmap = (): { roadmap: Roadmap | undefined } => {

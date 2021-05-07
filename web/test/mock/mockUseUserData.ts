@@ -1,8 +1,8 @@
-import * as useUserModule from "../../lib/data-hooks/useUserData";
-import { UseUserDataResponse } from "../../lib/data-hooks/useUserData";
-import { generateUseUserDataResponse } from "../helpers";
-import { OnboardingData, UserData } from "../../lib/types/types";
-import { generateOnboardingData, generateUserData } from "../factories";
+import * as useUserModule from "@/lib/data-hooks/useUserData";
+import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
+import { OnboardingData, UserData } from "@/lib/types/types";
+import { generateUseUserDataResponse } from "@/test/helpers";
+import { generateOnboardingData, generateUserData } from "@/test/factories";
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 export const mockUpdate = jest.fn().mockResolvedValue({});

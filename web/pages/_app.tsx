@@ -1,15 +1,14 @@
 import "../styles/global.scss";
 import { AppProps } from "next/app";
 import React, { ReactElement, useReducer, useState } from "react";
-import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "../lib/auth/AuthContext";
-
-import awsExports from "../aws-exports";
-import { Amplify } from "aws-amplify";
-import { getCurrentUser } from "../lib/auth/sessionHelper";
-import { Roadmap } from "../lib/types/types";
-import { useMountEffect } from "../lib/utils/helpers";
-import { ContextualInfoPanel } from "../components/ContextualInfoPanel";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { Amplify } from "aws-amplify";
+import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
+import awsExports from "../aws-exports";
+import { getCurrentUser } from "@/lib/auth/sessionHelper";
+import { Roadmap } from "@/lib/types/types";
+import { useMountEffect } from "@/lib/utils/helpers";
+import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 
 Amplify.configure({ ...awsExports, ssr: true });
 

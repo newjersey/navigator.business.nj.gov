@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
-import * as api from "../api-client/apiClient";
+import * as api from "@/lib/api-client/apiClient";
 import { createEmptyUserData } from "../types/types";
 
 export const onSignIn = async (

@@ -1,4 +1,4 @@
-import { BusinessUser } from "../types/types";
+import { BusinessUser } from "@/lib/types/types";
 import { Auth } from "@aws-amplify/auth";
 
 type CognitoIdPayload = {

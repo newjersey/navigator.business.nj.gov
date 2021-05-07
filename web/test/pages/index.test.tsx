@@ -1,12 +1,12 @@
-import Home from "../../pages";
-import { renderWithUser } from "../helpers";
-import { generateUser } from "../factories";
-import { useMockUserData } from "../mock/mockUseUserData";
-import { mockPush, useMockRouter } from "../mock/mockRouter";
-import { IsAuthenticated } from "../../lib/auth/AuthContext";
+import Home from "@/pages/index";
+import { renderWithUser } from "@/test/helpers";
+import { generateUser } from "@/test/factories";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 
 jest.mock("next/router");
-jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("HomePage", () => {
   beforeEach(() => {

@@ -1,9 +1,9 @@
 import { ReactElement, useContext } from "react";
-import { AuthContext } from "../pages/_app";
+import { AuthContext } from "@/pages/_app";
 import { Auth } from "@aws-amplify/auth";
 import { useRouter } from "next/router";
-import { onSignOut } from "../lib/auth/signinHelper";
-import { IsAuthenticated } from "../lib/auth/AuthContext";
+import { onSignOut } from "@/lib/auth/signinHelper";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 
 export const AuthButton = (): ReactElement => {
   const { state, dispatch } = useContext(AuthContext);

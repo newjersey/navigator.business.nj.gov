@@ -1,4 +1,4 @@
-import { Task } from "../types/types";
+import { Task } from "@/lib/types/types";
 import matter from "gray-matter";
 
 export const convertTaskMd = (taskMdContents: string): Task => {

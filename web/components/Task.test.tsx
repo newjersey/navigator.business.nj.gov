@@ -1,5 +1,5 @@
 import { Task } from "./Task";
-import { generateTask } from "../test/factories";
+import { generateTask } from "@/test/factories";
 import { render } from "@testing-library/react";
 
 describe("<Task />", () => {

@@ -7,12 +7,12 @@ import {
   RoadmapBuilder,
   TaskBuilder,
   TaskModification,
-} from "../types/types";
-import genericTaskAddOns from "../../roadmaps/generic/generic-tasks.json";
-import steps from "../../roadmaps/steps.json";
-import * as api from "../api-client/apiClient";
-import { fetchTaskById } from "../async-content-fetchers/fetchTaskById";
-import { templateEval } from "../utils/helpers";
+} from "@/lib/types/types";
+import genericTaskAddOns from "@/roadmaps/generic/generic-tasks.json";
+import steps from "@/roadmaps/steps.json";
+import * as api from "@/lib/api-client/apiClient";
+import { fetchTaskById } from "@/lib/async-content-fetchers/fetchTaskById";
+import { templateEval } from "@/lib/utils/helpers";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];

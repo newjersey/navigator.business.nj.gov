@@ -1,11 +1,11 @@
 import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 import { TextField } from "@material-ui/core";
-import { OnboardingContext } from "../../pages/onboarding";
+import { OnboardingContext } from "@/pages/onboarding";
 import { Autocomplete } from "@material-ui/lab";
-import { Municipality } from "../../lib/types/types";
-import { Content } from "../Content";
-import { MenuOptionSelected } from "../MenuOptionSelected";
-import { MenuOptionUnselected } from "../MenuOptionUnselected";
+import { Municipality } from "@/lib/types/types";
+import { Content } from "@/components/Content";
+import { MenuOptionSelected } from "@/components/MenuOptionSelected";
+import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 
 export const OnboardingMunicipality = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
