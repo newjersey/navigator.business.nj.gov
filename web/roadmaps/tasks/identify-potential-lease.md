@@ -13,4 +13,6 @@ Finding a great location for your business is a critical step to set your busine
 
 - **ADA Compliance:** Commercial spaces are required to be accessible to people with disabilities ("ADA compliant"). Ask your landlord if the space is ADA compliant and discuss who will be responsible for any costs that are associated with accessibility upgrades and/or litigation should a lawsuit be filed. You may also consider having a Certified Access Specialist (CAS) to inspect the property and identify what changes are necessary to make the property ADA compliant.
 
-Next Step: | 
+||
+|---|
+| **Next Step**: City Office of Zoning and County Clerk |
