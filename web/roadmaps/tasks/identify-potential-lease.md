@@ -11,8 +11,9 @@ Finding a great location for your business is a critical step to set your busine
 
 - **Tenant Improvements:** Most spaces will require some rennovation to meet your business needs. You may be able to negotiate Tenant Improvements (or "TIs") with your landlord. Tenant Improvements can take the form of an allowance to help make improvements to the space, free rent, or the landlord may agree to make the changes themselves.
 
-- **ADA Compliance:** Commercial spaces are required to be accessible to people with disabilities ("ADA compliant"). Ask your landlord if the space is ADA compliant and discuss who will be responsible for any costs that are associated with accessibility upgrades and/or litigation should a lawsuit be filed. You may also consider having a Certified Access Specialist (CAS) to inspect the property and identify what changes are necessary to make the property ADA compliant.
+- **ADA Compliance:** Commercial spaces are required to be accessible to people with disabilities ("ADA compliant"). Ask your landlord if the space is `ADA compliant|business-plan-resources`
+ and discuss who will be responsible for any costs that are associated with accessibility upgrades and/or litigation should a lawsuit be filed. You may also consider having a Certified Access Specialist (CAS) to inspect the property and identify what changes are necessary to make the property ADA compliant.
 
 ||
 |---|
-| **Next Step**: City Office of Zoning and County Clerk |
+| **Next Step**: Under Construction|
