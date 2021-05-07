@@ -1,5 +1,5 @@
 import React, { Dispatch, ReactElement } from "react";
-import { AuthAction, AuthState } from "../lib/auth/AuthContext";
+import { AuthAction, AuthState, IsAuthenticated } from "../lib/auth/AuthContext";
 import { render, RenderResult } from "@testing-library/react";
 import { AuthContext, ContextualInfoContext } from "../pages/_app";
 import { UseUserDataResponse } from "../lib/data-hooks/useUserData";
@@ -8,10 +8,16 @@ import { BusinessUser } from "../lib/types/types";
 
 export const renderWithUser = (
   subject: ReactElement,
-  user: BusinessUser | undefined,
-  dispatch: Dispatch<AuthAction>
+  context: {
+    user?: BusinessUser;
+    dispatch?: Dispatch<AuthAction>;
+    isAuthenticated?: IsAuthenticated;
+  }
 ): RenderResult => {
-  const state: AuthState = { isAuthenticated: !!user, user: user };
+  const isAuthenticated =
+    context.isAuthenticated || (context.user ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
+  const dispatch = context.dispatch || jest.fn();
+  const state: AuthState = { isAuthenticated, user: context.user };
   return render(<AuthContext.Provider value={{ state, dispatch }}>{subject}</AuthContext.Provider>);
 };
 

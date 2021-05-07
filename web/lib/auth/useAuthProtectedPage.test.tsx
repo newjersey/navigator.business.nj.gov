@@ -1,8 +1,7 @@
 import { renderWithUser } from "../../test/helpers";
-import { BusinessUser } from "../types/types";
-import { generateUser } from "../../test/factories";
 import { useRouter } from "next/router";
 import { useAuthProtectedPage } from "./useAuthProtectedPage";
+import { IsAuthenticated } from "./AuthContext";
 
 jest.mock("next/router");
 
@@ -18,22 +17,26 @@ describe("useAuthProtectedPage", () => {
     });
   });
 
-  const setupHookWithUser = (currentUser: BusinessUser | undefined): void => {
+  const setupHookWithAuth = (isAuth: IsAuthenticated): void => {
     function TestComponent() {
       useAuthProtectedPage();
       return null;
     }
-    renderWithUser(<TestComponent />, currentUser, jest.fn());
+    renderWithUser(<TestComponent />, { isAuthenticated: isAuth });
   };
 
   it("redirects to homepage when user is not authed", () => {
-    setupHookWithUser(undefined);
+    setupHookWithAuth(IsAuthenticated.FALSE);
     expect(mockPush).toHaveBeenCalledWith("/");
   });
 
   it("does nothing when user is authed", () => {
-    const currentUser = generateUser({});
-    setupHookWithUser(currentUser);
+    setupHookWithAuth(IsAuthenticated.TRUE);
+    expect(mockPush).not.toHaveBeenCalled();
+  });
+
+  it("does nothing when we havent loaded auth state yet", () => {
+    setupHookWithAuth(IsAuthenticated.UNKNOWN);
     expect(mockPush).not.toHaveBeenCalled();
   });
 });

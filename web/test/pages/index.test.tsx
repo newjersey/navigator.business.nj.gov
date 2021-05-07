@@ -3,6 +3,7 @@ import { renderWithUser } from "../helpers";
 import { generateUser } from "../factories";
 import { useMockUserData } from "../mock/mockUseUserData";
 import { mockPush, useMockRouter } from "../mock/mockRouter";
+import { IsAuthenticated } from "../../lib/auth/AuthContext";
 
 jest.mock("next/router");
 jest.mock("../../lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -16,7 +17,7 @@ describe("HomePage", () => {
 
   describe("when not logged in", () => {
     it("displays welcome text", () => {
-      const subject = renderWithUser(<Home />, undefined, jest.fn());
+      const subject = renderWithUser(<Home />, { isAuthenticated: IsAuthenticated.FALSE });
 
       expect(subject.queryByText("Welcome to EasyRegNJ")).toBeInTheDocument();
       expect(subject.queryByText("Log in")).toBeInTheDocument();
@@ -26,7 +27,7 @@ describe("HomePage", () => {
 
   describe("when logged in", () => {
     it("welcomes user by name", () => {
-      const subject = renderWithUser(<Home />, generateUser({ name: "Ada Lovelace" }), jest.fn());
+      const subject = renderWithUser(<Home />, { user: generateUser({ name: "Ada Lovelace" }) });
 
       expect(subject.queryByText("Welcome, Ada Lovelace")).toBeInTheDocument();
       expect(subject.queryByText("Get Started")).toBeInTheDocument();
@@ -35,11 +36,9 @@ describe("HomePage", () => {
     });
 
     it("welcomes user by email if no name present", () => {
-      const subject = renderWithUser(
-        <Home />,
-        generateUser({ name: undefined, email: "ada@lovelace.org" }),
-        jest.fn()
-      );
+      const subject = renderWithUser(<Home />, {
+        user: generateUser({ name: undefined, email: "ada@lovelace.org" }),
+      });
 
       expect(subject.queryByText("Welcome, ada@lovelace.org")).toBeInTheDocument();
       expect(subject.queryByText("Get Started")).toBeInTheDocument();
@@ -51,7 +50,7 @@ describe("HomePage", () => {
   describe("when user has completed onboarding flow", () => {
     it("redirects to roadmap page", () => {
       useMockUserData({ formProgress: "COMPLETED" });
-      renderWithUser(<Home />, generateUser({ name: "Ada Lovelace" }), jest.fn());
+      renderWithUser(<Home />, { user: generateUser({ name: "Ada Lovelace" }) });
       expect(mockPush).toHaveBeenCalledWith("/roadmap");
     });
   });

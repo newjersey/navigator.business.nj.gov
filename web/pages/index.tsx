@@ -7,6 +7,7 @@ import { AuthButton } from "../components/AuthButton";
 import { SinglePageLayout } from "../components/njwds-extended/SinglePageLayout";
 import { useRouter } from "next/router";
 import { useUserData } from "../lib/data-hooks/useUserData";
+import { IsAuthenticated } from "../lib/auth/AuthContext";
 
 const Home = (): ReactElement => {
   const { state } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const Home = (): ReactElement => {
       />
       <SinglePageLayout>
         <h1>
-          {state.isAuthenticated
+          {state.isAuthenticated === IsAuthenticated.TRUE
             ? `Welcome, ${state.user?.name || state.user?.email}`
             : "Welcome to EasyRegNJ"}
         </h1>
@@ -45,7 +46,7 @@ const Home = (): ReactElement => {
         </p>
         <p>To start, you’ll need to create an account.</p>
         <p>Creating an account helps you easily track the progress of your business.</p>
-        {state.isAuthenticated && (
+        {state.isAuthenticated == IsAuthenticated.TRUE && (
           <Link href="/onboarding">
             <button className="usa-button" data-get-started={true}>
               Get Started

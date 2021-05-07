@@ -1,7 +1,7 @@
 import "../styles/global.scss";
 import { AppProps } from "next/app";
 import React, { ReactElement, useReducer, useState } from "react";
-import { AuthContextType, AuthReducer, authReducer } from "../lib/auth/AuthContext";
+import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "../lib/auth/AuthContext";
 
 import awsExports from "../aws-exports";
 import { Amplify } from "aws-amplify";
@@ -15,7 +15,7 @@ Amplify.configure({ ...awsExports, ssr: true });
 
 const initialState = {
   user: undefined,
-  isAuthenticated: false,
+  isAuthenticated: IsAuthenticated.UNKNOWN,
 };
 
 export const AuthContext = React.createContext<AuthContextType>({
@@ -81,12 +81,19 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [contextualInfoMd, setContextualInfoMd] = useState<string>("");
 
   useMountEffect(() => {
-    getCurrentUser().then((currentUser) => {
-      dispatch({
-        type: "LOGIN",
-        user: currentUser,
+    getCurrentUser()
+      .then((currentUser) => {
+        dispatch({
+          type: "LOGIN",
+          user: currentUser,
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: "LOGOUT",
+          user: undefined,
+        });
       });
-    });
   });
 
   return (

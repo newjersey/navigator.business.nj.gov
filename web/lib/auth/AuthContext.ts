@@ -3,9 +3,15 @@ import { BusinessUser } from "../types/types";
 
 export type UserActionType = "LOGIN" | "LOGOUT";
 
+export enum IsAuthenticated {
+  TRUE = "TRUE",
+  FALSE = "FALSE",
+  UNKNOWN = "UNKNOWN",
+}
+
 export interface AuthState {
   user: BusinessUser | undefined;
-  isAuthenticated: boolean;
+  isAuthenticated: IsAuthenticated;
 }
 
 export interface AuthAction {
@@ -25,12 +31,12 @@ export const authReducer: AuthReducer = (state: AuthState, action: AuthAction): 
     case "LOGIN":
       return {
         user: action.user,
-        isAuthenticated: true,
+        isAuthenticated: IsAuthenticated.TRUE,
       };
     case "LOGOUT":
       return {
         user: undefined,
-        isAuthenticated: false,
+        isAuthenticated: IsAuthenticated.FALSE,
       };
   }
 };

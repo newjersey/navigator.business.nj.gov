@@ -18,7 +18,7 @@ describe("useUserData", () => {
       Object.assign(returnVal, useUserData());
       return null;
     }
-    renderWithUser(<TestComponent />, currentUser, jest.fn());
+    renderWithUser(<TestComponent />, { user: currentUser });
     return returnVal;
   };
 
