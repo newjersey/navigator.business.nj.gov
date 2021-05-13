@@ -1,4 +1,4 @@
-## The Americans with Disabilities Act (ADA) Compliance
+## The Americans with Disabilities Act (ADA)
 
 The Americans with Disabilities Act (ADA) is a Federal civil rights law designed to ensure equal access, full inclusion and participation for people with disabilities or impairments. Under the law, people with disabilities are entitled to full and equal access to places of public accommodation, transportation carriers, lodging places, recreation and amusement facilities, and other business establishments where the general public is invited.
 
