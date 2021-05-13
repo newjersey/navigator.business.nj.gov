@@ -5,15 +5,10 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Finding a great location for your business is a critical step to set your business up for success. When you look for a lease, you may want to consider:
+If you're looking for a location for your business, there are a few things to keep in mind as you're looking for that perfect space:
 
-- **Location:** Consider locating your business where it can most effectively reach and serve your target customer base. There are several online tools, such as [PolicyMap](https://www.policymap.com/) and [Living Atlas](https://livingatlas.arcgis.com/en/home/) that you can use to conduct a demographic analysis to help you identify the best neighborhood to reach your target market.
-
-- **Tenant Improvements:** Most spaces will require some rennovation to meet your business needs. You may be able to negotiate Tenant Improvements (or "TIs") with your landlord. Tenant Improvements can take the form of an allowance to help make improvements to the space, free rent, or the landlord may agree to make the changes themselves.
-
-- **ADA Compliance:** Commercial spaces are required to be accessible to people with disabilities ("ADA compliant"). Ask your landlord if the space is `ADA compliant|business-plan-resources`
- and discuss who will be responsible for any costs that are associated with accessibility upgrades and/or litigation should a lawsuit be filed. You may also consider having a Certified Access Specialist (CAS) to inspect the property and identify what changes are necessary to make the property ADA compliant.
-
-||
-|---|
-| **Next Step**: Under Construction|
+1) `**Demographics:**|demographics` Consider locating your business where it can most effectively reach and serve your target customer base. 
+2) `**ADA Compliance:**|ada-compliant` Ensure your space meets acessiblity requirements established by the federal government. 
+3) `**Tenant Improvements:**|tenant-improvements` Identify and discuss tenant improvements prior to signing your lease.
+4) `**Zoning:**|zoning` Consult with the local government's zoning office to determine the suitability of the site. 
+5) `**Building Permits:**|building-permits` Check if you need a building permit with your local government's Building Department before starting any renovations.
