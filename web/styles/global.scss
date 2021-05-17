@@ -31,6 +31,14 @@ $lg: 64em; //desktop and up (1024px)
   font-weight: unset;
 }
 
+.weight-inherit {
+  font-weight: inherit !important;
+}
+
+.style-inherit {
+  font-style: inherit !important;
+}
+
 .weight-400 {
   font-weight: 400;
 }
