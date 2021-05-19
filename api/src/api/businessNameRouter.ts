@@ -9,7 +9,7 @@ export const businessNameRouterFactory = (businessNameRepo: BusinessNameRepo): R
       .search((req.query as BusinessQueryParams).query)
       .then((similarNames: string[]) => {
         const status = similarNames.length > 0 ? "UNAVAILABLE" : "AVAILABLE";
-        res.json({ status, similarNames });
+        res.json({ status, similarNames: similarNames.slice(0, 10) });
       })
       .catch((error) => {
         res.status(500).json({ error });

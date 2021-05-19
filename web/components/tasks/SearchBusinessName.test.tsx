@@ -43,8 +43,8 @@ describe("<SearchBusinessName />", () => {
     subject = render(<SearchBusinessName />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
-    expect(subject.queryByTestId("available-text")).toBeInTheDocument();
-    expect(subject.queryByTestId("unavailable-text")).not.toBeInTheDocument();
+    expect(availableTextExists()).toBe(true);
+    expect(unavailableTextExists()).toBe(false);
   });
 
   it("updates the business name in roadmap", async () => {
@@ -56,7 +56,7 @@ describe("<SearchBusinessName />", () => {
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
 
-    fireEvent.click(subject.getByTestId("update-name"));
+    fireEvent.click(updateNameButton());
     expect(mockUpdate).toHaveBeenCalledWith({
       ...userData,
       onboardingData: {
@@ -66,12 +66,29 @@ describe("<SearchBusinessName />", () => {
     });
   });
 
+  it("removes the update button when clicked and resets when new search is performed", async () => {
+    useMockUserData(generateUserData({}));
+    subject = render(<SearchBusinessName />);
+    fillText("Pizza Joint");
+    await searchAndGetValue({ status: "AVAILABLE" });
+    fireEvent.click(updateNameButton());
+
+    expect(updateNameButtonExists()).toBe(false);
+    expect(nameHasBeenUpdatedTextExists()).toBe(true);
+
+    fillText("Pizza Joint 2");
+    await searchAndGetValue({ status: "AVAILABLE" });
+
+    expect(updateNameButtonExists()).toBe(true);
+    expect(nameHasBeenUpdatedTextExists()).toBe(false);
+  });
+
   it("shows unavailable text if name is not available", async () => {
     subject = render(<SearchBusinessName />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "UNAVAILABLE" });
-    expect(subject.queryByTestId("available-text")).not.toBeInTheDocument();
-    expect(subject.queryByTestId("unavailable-text")).toBeInTheDocument();
+    expect(availableTextExists()).toBe(false);
+    expect(unavailableTextExists()).toBe(true);
   });
 
   it("shows similar unavailable names when not available", async () => {
@@ -82,17 +99,24 @@ describe("<SearchBusinessName />", () => {
     expect(subject.queryByText("Pizzapizza")).toBeInTheDocument();
   });
 
-  const getSearchValue = (): string =>
-    (subject.queryByLabelText("Search business name") as HTMLInputElement)?.value;
+  const getSearchValue = (): string => (inputField() as HTMLInputElement)?.value;
 
   const fillText = (value: string) => {
-    fireEvent.change(subject.getByLabelText("Search business name"), { target: { value: value } });
+    fireEvent.change(inputField(), { target: { value: value } });
   };
 
   const searchAndGetValue = async (nameAvailability: Partial<NameAvailability>): Promise<void> => {
     const returnedPromise = Promise.resolve(generateNameAvailability(nameAvailability));
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
-    fireEvent.click(subject.getByTestId("search-availability"));
+    fireEvent.click(searchButton());
     await act(() => returnedPromise);
   };
+
+  const searchButton = () => subject.getByTestId("search-availability");
+  const inputField = () => subject.getByLabelText("Search business name");
+  const updateNameButton = () => subject.getByTestId("update-name");
+  const availableTextExists = () => subject.queryByTestId("available-text") !== null;
+  const unavailableTextExists = () => subject.queryByTestId("unavailable-text") !== null;
+  const updateNameButtonExists = () => subject.queryByTestId("update-name") !== null;
+  const nameHasBeenUpdatedTextExists = () => subject.queryByTestId("name-has-been-updated") !== null;
 });

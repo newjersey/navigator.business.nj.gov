@@ -6,9 +6,11 @@ import * as api from "@/lib/api-client/apiClient";
 import { NameAvailability } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 
 export const SearchBusinessName = (): ReactElement => {
   const [name, setName] = useState<string>("");
+  const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
   const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
   const { userData, update } = useUserData();
 
@@ -19,6 +21,7 @@ export const SearchBusinessName = (): ReactElement => {
   const searchBusinessName = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const result = await api.searchBusinessName(name);
+    setUpdateButtonClicked(false);
     setNameAvailability(result);
   };
 
@@ -30,6 +33,7 @@ export const SearchBusinessName = (): ReactElement => {
 
   const updateBusinessName = (): void => {
     if (!userData) return;
+    setUpdateButtonClicked(true);
     const newUserData = {
       ...userData,
       onboardingData: {
@@ -44,13 +48,22 @@ export const SearchBusinessName = (): ReactElement => {
     return (
       <div data-testid="available-text" className="margin-top-2">
         <p className="font-body-2xs text-primary">{SearchBusinessNamesDefaults.availableText}</p>
-        <button
-          onClick={updateBusinessName}
-          data-testid="update-name"
-          className="usa-button usa-button--unstyled font-body-2xs"
-        >
-          <span className="text-underline">{SearchBusinessNamesDefaults.updateButtonText}</span>
-        </button>
+        {updateButtonClicked ? (
+          <div className="font-body-2xs text-primary margin-top-05" data-testid="name-has-been-updated">
+            <span className="padding-right-05">
+              <Icon>check</Icon>
+            </span>
+            <span>{SearchBusinessNamesDefaults.nameHasBeenUpdatedText}</span>
+          </div>
+        ) : (
+          <button
+            onClick={updateBusinessName}
+            data-testid="update-name"
+            className="usa-button usa-button--unstyled font-body-2xs"
+          >
+            <span className="text-underline">{SearchBusinessNamesDefaults.updateButtonText}</span>
+          </button>
+        )}
         <Alert variant="info" slim className="margin-bottom-4">
           <Content>{SearchBusinessNamesDefaults.officialCheckText}</Content>
           <a

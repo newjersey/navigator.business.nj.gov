@@ -47,6 +47,14 @@ describe("businessNameRouter", () => {
     expect(stubBusinessNameRepo.search).toHaveBeenCalledWith("apple bee's");
   });
 
+  it("limits similar names to 10", async () => {
+    stubBusinessNameRepo.search.mockResolvedValue(Array(11).fill("A"));
+    const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
+    expect(response.status).toEqual(200);
+    expect(response.body.similarNames).toHaveLength(10);
+    expect(stubBusinessNameRepo.search).toHaveBeenCalledWith("apple bee's");
+  });
+
   it("returns 500 if name search errors", async () => {
     stubBusinessNameRepo.search.mockRejectedValue({});
     const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
