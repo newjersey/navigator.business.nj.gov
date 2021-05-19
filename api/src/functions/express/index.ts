@@ -8,10 +8,6 @@ export default {
         method: "ANY",
         path: "/{proxy+}",
       },
-      https: {
-        method: "ANY",
-        path: "/{proxy+}",
-      },
     },
   ],
 };

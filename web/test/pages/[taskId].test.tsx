@@ -138,4 +138,10 @@ describe("task page", () => {
       },
     });
   });
+
+  it("loads special content for search-available-names", () => {
+    subject = render(<TaskPage task={generateTask({ id: "search-business-name" })} />);
+    const searchInputField = subject.getByLabelText("Search business name") as HTMLInputElement;
+    expect(searchInputField).toBeInTheDocument();
+  });
 });

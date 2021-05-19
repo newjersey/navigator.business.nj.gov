@@ -8,6 +8,21 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: businessci
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
       - name: 🛒 Checkout code
         uses: actions/checkout@v2
@@ -55,6 +70,9 @@ jobs:
       - name: 🧰 Install api dependencies
         run: npm --prefix=api install
 
+      - name: 🔧 Migrate postgres
+        run: npm --prefix=api run db-migrate up -- -e ci
+
       - name: 🧹 Run web lint
         run: npm --prefix=web run lint
       - name: 🧹 Run api lint
@@ -64,13 +82,25 @@ jobs:
         run: npm --prefix=web run test
       - name: 🧪 Run API tests
         run: npm --prefix=api run test
+        env:
+          DB_NAME_CI: businessci
+          DB_PASSWORD_CI: postgres
+          SKIP_DB_SETUP: true
 
-      - name: 📦 Build project for feature tests
+      - name: 🔧 Seed postgres for e2e tests
+        run: ./scripts/seed-business-names.sh $DB_NAME
+        env:
+          DB_NAME: businessci
+          PGPASSWORD: postgres
+
+      - name: 🔧 Build project for e2e tests
         run: npm --prefix=api run install-dynamo-local && npm --prefix=api start & npm --prefix=web run build --if-present
         env:
           API_BASE_URL: http://localhost:5000/dev
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          DB_NAME: businessci
+          DB_PASSWORD: postgres
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
@@ -144,6 +174,11 @@ jobs:
           STAGE: dev
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          DB_USER: ${{ secrets.DB_USER_DEV }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD_DEV }}
+          DB_NAME: ${{ secrets.DB_NAME_DEV }}
+          DB_HOST: ${{ secrets.DB_HOST_DEV }}
+          DB_ENV: aws-dev
 
       - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1
@@ -206,6 +241,11 @@ jobs:
           STAGE: staging
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          DB_USER: ${{ secrets.DB_USER_STAGING }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD_STAGING }}
+          DB_NAME: ${{ secrets.DB_NAME_STAGING }}
+          DB_HOST: ${{ secrets.DB_HOST_STAGING }}
+          DB_ENV: aws-staging
 
       - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1

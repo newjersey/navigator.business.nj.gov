@@ -3,6 +3,13 @@ export interface UserDataClient {
   put: (userData: UserData) => Promise<UserData>;
 }
 
+export interface BusinessNameRepo {
+  search: (name: string) => Promise<string[]>;
+  save: (name: string) => Promise<void>;
+  disconnect: () => Promise<void>;
+  deleteAll: () => Promise<void>;
+}
+
 export interface MunicipalityClient {
   findAll: () => Promise<MunicipalityDetail[]>;
   findOne: (id: string) => Promise<MunicipalityDetail>;

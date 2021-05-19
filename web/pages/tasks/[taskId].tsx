@@ -13,6 +13,7 @@ import { Content } from "@/components/Content";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import { Icon } from "@/components/njwds/Icon";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 
 interface Props {
   task: Task;
@@ -72,6 +73,8 @@ const TaskPage = (props: Props): ReactElement => {
           </div>
         </div>
         <Content>{getModifiedTaskContent("contentMd")}</Content>
+
+        {props.task.id === "search-business-name" && <SearchBusinessName />}
 
         {getModifiedTaskContent("callToActionLink") && (
           <div className="fdr">

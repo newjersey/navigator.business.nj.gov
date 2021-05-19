@@ -213,3 +213,8 @@ export interface AuthenticationHelper {
   onSignIn: () => Promise<void>;
   onSignOut: () => void;
 }
+
+export type NameAvailability = {
+  status: "AVAILABLE" | "UNAVAILABLE";
+  similarNames: string[];
+};

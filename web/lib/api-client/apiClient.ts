@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MunicipalityDetail, UserData } from "@/lib/types/types";
+import { MunicipalityDetail, NameAvailability, UserData } from "@/lib/types/types";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 export const getUserData = (id: string): Promise<UserData> => {
@@ -12,6 +12,10 @@ export const getMunicipalities = (): Promise<MunicipalityDetail[]> => {
 
 export const getMunicipality = (id: string): Promise<MunicipalityDetail> => {
   return get(`/municipalities/${id}`);
+};
+
+export const searchBusinessName = (name: string): Promise<NameAvailability> => {
+  return get(`/business-name-availability?query=${name}`);
 };
 
 export const postUserData = (userData: UserData): Promise<UserData> => {

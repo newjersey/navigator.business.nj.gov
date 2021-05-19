@@ -61,3 +61,14 @@
 .vam {
   vertical-align: middle;
 }
+
+.fg1 {
+  flex-grow: 1;
+}
+
+.fww-tablet {
+  flex-wrap: wrap;
+  @media all and (min-width: $md) {
+    flex-wrap: nowrap;
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "dev": {
+    "driver": "pg",
+    "host": "localhost",
+    "user": "postgres",
+    "password": "",
+    "database": "businesslocal"
+  },
+  "test": {
+    "driver": "pg",
+    "host": "localhost",
+    "user": "postgres",
+    "password": "",
+    "database": "businesstest"
+  },
+  "ci": {
+    "driver": "pg",
+    "host": "localhost",
+    "user": "postgres",
+    "password": "postgres",
+    "database": "businessci"
+  },
+  "aws-dev": {
+    "driver": "pg",
+    "host": { "ENV": "DB_HOST" },
+    "user": { "ENV": "DB_USER" },
+    "password": { "ENV": "DB_PASSWORD" },
+    "database": { "ENV": "DB_NAME" }
+  },
+  "aws-staging": {
+    "driver": "pg",
+    "host": { "ENV": "DB_HOST" },
+    "user": { "ENV": "DB_USER" },
+    "password": { "ENV": "DB_PASSWORD" },
+    "database": { "ENV": "DB_NAME" }
+  }
+}

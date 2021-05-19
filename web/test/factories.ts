@@ -4,6 +4,7 @@ import {
   LegalStructure,
   Municipality,
   MunicipalityDetail,
+  NameAvailability,
   OnboardingData,
   Roadmap,
   Step,
@@ -97,6 +98,14 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     callToActionLink: "some-link-" + randomInt(),
     callToActionText: "some-call-to-action-" + randomInt(),
     contentMd: "some-content-md-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateNameAvailability = (overrides: Partial<NameAvailability>): NameAvailability => {
+  return {
+    status: "UNAVAILABLE",
+    similarNames: ["some-name-" + randomInt()],
     ...overrides,
   };
 };

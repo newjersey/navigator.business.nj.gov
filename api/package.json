@@ -11,7 +11,8 @@
     "lint": "eslint --max-warnings 0 '*/**/*.{js,ts}'",
     "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts}' --fix",
     "install-dynamo-local": "sls dynamodb install",
-    "fences": "gf"
+    "fences": "gf",
+    "db-migrate": "db-migrate"
   },
   "engines": {
     "node": ">=14.15.0"
@@ -26,7 +27,11 @@
     "aws-lambda": "^1.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "db-migrate": "^0.11.12",
+    "db-migrate-pg": "^1.2.2",
     "express": "^4.17.1",
+    "knex": "^0.95.5",
+    "pg": "^8.6.0",
     "serverless-http": "^2.7.0",
     "serverless-offline": "^6.8.0",
     "source-map-support": "^0.5.19"
@@ -35,10 +40,12 @@
     "@serverless/typescript": "^2.23.0",
     "@types/aws-lambda": "^8.10.71",
     "@types/cors": "^2.8.10",
+    "@types/db-migrate-pg": "^0.0.8",
     "@types/express": "^4.17.11",
     "@types/jasmine": "^3.6.4",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
+    "@types/pg": "^7.14.11",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",

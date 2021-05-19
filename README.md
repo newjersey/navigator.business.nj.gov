@@ -31,7 +31,32 @@ In order for the web frontend tests to pass and for it to be able to run locally
 ampify checkout env dev
 ```
 
-Additionally, before you can run locally, you will need to create a `web/.env` that includes all the values laid out in the `web/.env-template` file.
+### Local env
+
+Before you can run locally, you will need to:
+- create a `web/.env` that includes all the values laid out in the `web/.env-template` file.
+- create a `api/.env` that includes all the values laid out in the `api/.env-template` file.
+
+### Database setup
+
+For right now, we need a local Postgres database for part of the API functionality.
+
+Make sure you have Postgres installed locally.
+
+Then, create the database (name `businesslocal`, user `postgres`, no password): 
+```shell script
+psql -c 'create database businesslocal;' -U postgres
+```
+
+Run database migrations:
+```shell script
+npm prefix=api run db-migrate up
+```
+
+Seed the database with some business names
+```shell script
+./scripts/seed-business-names.sh
+```
 
 ### Run tests
 
@@ -132,7 +157,7 @@ We use serverless to deploy. If you do this locally, your local serverless CLI n
 
 Locally, it uses `serverless-offline` and `serverless-dynamodb-local` to run and simulate the AWS environment.  Everything AWS and serverless is configured in `./api/serverless.ts`.
 
-We use serverless to deploy an Express app. The app itself is defined in `src/functions/app.ts` and is mostly a regular Express app,
+We use serverless to deploy an Express app. The app itself is defined in `src/functions/migrate.ts` and is mostly a regular Express app,
 except it wraps its export in `serverless` to become a handler. Then, `src/functions/index.ts` defines the config structure that 
 proxies all routes through to be handled by the Express routing system.
 

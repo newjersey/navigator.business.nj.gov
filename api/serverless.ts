@@ -8,6 +8,10 @@ const offlinePort = process.env.API_PORT || 5000;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
 const airtableBaseId = process.env.AIRTABLE_BASE_ID || "";
+const dbUser = process.env.DB_USER || "";
+const dbPassword = process.env.DB_PASSWORD || "";
+const dbHost = process.env.DB_HOST || "";
+const dbName = process.env.DB_NAME || "";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 
@@ -18,7 +22,9 @@ const serverlessConfiguration: AWS = {
   custom: {
     webpack: {
       webpackConfig: "./webpack.config.js",
-      includeModules: true,
+      includeModules: {
+        forceInclude: ["pg"],
+      },
     },
     dynamodb: {
       start: {
@@ -65,6 +71,10 @@ const serverlessConfiguration: AWS = {
       USERS_TABLE: usersTable,
       AIRTABLE_API_KEY: airtableApiKey,
       AIRTABLE_BASE_ID: airtableBaseId,
+      DB_USER: dbUser,
+      DB_PASSWORD: dbPassword,
+      DB_NAME: dbName,
+      DB_HOST: dbHost,
     },
     lambdaHashingVersion: "20201221",
   },

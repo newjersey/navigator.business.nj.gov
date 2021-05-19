@@ -1,16 +1,16 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
+import { clickEdit, clickNext } from "../support/helpers";
+
 describe("Roadmap", () => {
   beforeEach(() => {
-    cy.loginByCognitoApi();
-  });
-
-  afterEach(() => {
     cy.resetUserData();
+    cy.loginByCognitoApi();
   });
 
   it("enters user info and shows the roadmap", () => {
     cy.get("[data-get-started]").click();
+    cy.wait(1000); // wait for onboarding animation
 
     cy.get('input[aria-label="Business name"]').type("Beesapple's");
     clickNext();
@@ -84,13 +84,3 @@ describe("Roadmap", () => {
     cy.get('[data-task="food-safety-course"]').should("exist");
   });
 });
-
-const clickNext = () => {
-  cy.get("[data-next]:visible").click({ force: true });
-  cy.wait(1000); // wait for onboarding animation
-};
-
-const clickEdit = () => {
-  cy.get("[data-grey-callout-link]").click();
-  cy.wait(1000); // wait for onboarding animation
-};
