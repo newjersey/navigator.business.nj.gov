@@ -9,7 +9,7 @@ If you've decided on the your shop's location, now is a good time to check what 
         
 1) **Fire Prevention Permits:** Talk to your Fire Prevention Bureau or Fire Department to make sure your space is meeting requirements, like working sprinklers, extinguishers and signage).
 2) **Store Signage:** Speak to your local Zoning Office to make sure the signage your proposing is permitted, and the Department of Buildings/Consutruction for the construction and build out of the sign.
-3) 5. **`Construction Permits:|construction-permits`** Check if you need a building permit with your local government's Building Department before starting any renovations. _`How to get a construction permit?|uniform-construction-code`_
+3) **`Construction Permits:|construction-permits`** Check if you need a building permit with your local government's Building Department before starting any renovations. _`How to get a construction permit?|uniform-construction-code`_
 4) **`Certificate of Occupancy/Approval:|certificate-occupancy`** If you needed a construction permit for your renovation, you may need to meet with the Department of Buildings/Consutruction to obtain a Certificate that indicates that your space is safe for occupancy.
        
  
