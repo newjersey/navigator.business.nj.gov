@@ -4,6 +4,15 @@ name: "Writing Your Business Plan"
 callToActionLink: ""
 callToActionText: ""
 ---
+
+An effective business plan serves as a roadmap for your business and the decisions you make along the way, and help you to obtain financing, build relationships and attract good employees. While some businesses skip this step, it The Federal government and State of New Jersey offer additional services that can help you write a business plan. These include:
+
+    The U.S. Small Business Administration provides a Business Plan Tool, which provides a step-by-step process to update the status of your business plan.
+    New Jersey Small Business Development Centers: NJSBDC has regional offices that cover every county in New Jersey. They provide free (taxpayer supported) assistance to entrepreneurs and can help you write a business plan.
+    SCORE: Score also offers assistance to NJ entrepreneurs. SCORE is staffed by volunteers, and each chapter has a less formalized process than NJSBDC.
+    Women’s Center for Entrepreneurship (Northern New Jersey): The WCE services northern New Jersey and can help you write a business plan. The WCE's services are not strictly for women entrepreneurs.
+    Latin American Economic Development Association (Southern New Jersey): LAEDA services southern New Jersey and can help you write a business plan. LAEDA's services are not strictly for Latin American entrepreneurs.
+    Union County Economic Development Corporation: The UCEDC provides free classes and paid business mentoring services and can help you create a business plan.
 You should consider the following items when drafting your business plan. `Learn more about resources that can help you with your business plan.|business-plan-resources`
 
 **Executive Summary**
