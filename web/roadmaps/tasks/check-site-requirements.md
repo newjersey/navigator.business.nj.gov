@@ -5,16 +5,17 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-You've decided on the your shop's location, now it's identify any local permitting requirements. If you dont do this now, it may result in delays and unneessary costs. Below are common items you may need local government approval for:
+If you've decided on the your shop's location, now is a good time to check what requirements your local government has. We recommend you do this at the outset because it may result in delays and unneessary costs if done later. Below are common items you may need local government approval for:
         
-1) **Store Signage:** Speak to your local Zoning Office to make sure the signage your proposing is permitted, and the Department of Buildings for the construction and build out of the sign.
-2) **Fire Prevention Permits:** Speak to your Fire Prevention Bureau or Fire Department to make sure your space is meeting requirements (such as working sprinklers, extinguishers and signage).
-3) **`Certificate of Occupancy/Approval:|certificate-occupancy`**  If you got a construction permit for your renovation, it will need final approval to confirm it safe for occupancy. You get thsi from DOB. Says meets UCC requirements inspected and approved by DOB, now cleared to occupy. safe to occupy
+1) **Fire Prevention Permits:** Talk to your Fire Prevention Bureau or Fire Department to make sure your space is meeting requirements, like working sprinklers, extinguishers and signage).
+2) **Store Signage:** Speak to your local Zoning Office to make sure the signage your proposing is permitted, and the Department of Buildings/Consutruction for the construction and build out of the sign.
+3) 5. **`Construction Permits:|construction-permits`** Check if you need a building permit with your local government's Building Department before starting any renovations. _`How to get a construction permit?|uniform-construction-code`_
+4) **`Certificate of Occupancy/Approval:|certificate-occupancy`** If you needed a construction permit for your renovation, you may need to meet with the Department of Buildings/Consutruction to obtain a Certificate that indicates that your space is safe for occupancy.
        
  
-To complete this step, you must have:
+To complete this step, you must know:
 - Potential Address
 
 ||
 |---|
-| **Next Steps**: Talk to your Local Zoning  and County Clerk |
+| **Next Steps**: Check with your local government offices to see what local requirements apply to you.|
