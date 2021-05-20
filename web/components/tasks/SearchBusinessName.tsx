@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, ReactElement, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { FormControl, TextField } from "@material-ui/core";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNamesDefaults } from "@/display-content/tasks/search-business-names/SearchBusinessNamesDefaults";
@@ -7,6 +7,7 @@ import { NameAvailability } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 
 export const SearchBusinessName = (): ReactElement => {
   const [name, setName] = useState<string>("");
@@ -25,11 +26,10 @@ export const SearchBusinessName = (): ReactElement => {
     setNameAvailability(result);
   };
 
-  useEffect(() => {
-    if (userData) {
-      setName(userData.onboardingData.businessName);
-    }
-  }, [userData]);
+  useMountEffectWhenDefined(() => {
+    if (!userData) return;
+    setName(userData.onboardingData.businessName);
+  }, userData);
 
   const updateBusinessName = (): void => {
     if (!userData) return;
