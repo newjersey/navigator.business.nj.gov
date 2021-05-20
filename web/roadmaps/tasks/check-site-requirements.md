@@ -1,12 +1,17 @@
 ---
 id: "check-site-requirements"
-name: "Review Local Site Requirements"
+name: "Identify Local Requirements"
 callToActionLink: ""
 callToActionText: ""
 ---
 
-To open or relocate a shop location, you may need to verify the zoning for [commercial] use, obtain a certificate of occupancy/approval, obtain any fire permits or get health department approvals. Before deciding on a location, make sure to look into the feasibility of the site with your local government. Failure to do so could result in delays or unnecessary expenses.
+You've decided on the your shop's location, now it's identify any local permitting requirements. If you dont do this now, it may result in delays and unneessary costs. Below are common items you may need local government approval for:
         
+1) **Store Signage:** Speak to your local department of buildings to see if any signnage your propsing needs approval
+2) **Fire Permits:** 
+3) **`Certificate of Occupancy/Approval:|certificate-occupancy`** Speak to 
+       
+ 
 To complete this step, you must have:
 - Potential Address
 
