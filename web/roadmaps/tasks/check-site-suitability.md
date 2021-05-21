@@ -12,3 +12,4 @@ To complete this step, you must have:
 
 After you complete this step, you will have:
 - Floor plan of the tenant fit-out at your location, drawn to scale.
+
