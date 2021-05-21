@@ -1,14 +1,17 @@
 ---
 id: "check-site-requirements"
-name: "Review Local Site Requirements"
-callToActionLink: ""
-callToActionText: ""
+name: "Check Site Suitability"
+callToActionLink: "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
+callToActionText: "Read the Requirements"
 ---
-        
-To open or relocate a shop location, you may need to verify the zoning for commercial use, obtain a certificate of occupancy or approval, obtain any fire permits or get health department approvals. Before deciding on a location, make sure to look into the feasibility of the site. Proof of a Certificate of Occupancy and a fire permit will be required to obtain a shop license with the New Jersey Department of Consumer Affairs' Board of Cosmetology.
-        
+
+Before selecting a location, verify that the site meets the Department of Consumer Affairs' Board of Cosmetology licensing guidelines. The Board will review your floorplan during the application review process to determine if a site meets board requirements, including considerations around bathroom access and an area designated for cleaning implements and tools, among other items.
+
 To complete this step, you must have:
-- Potential Address
+- Identified potential locations
+
+After you complete this step, you will have:
+- Floor plan of the tenant fit-out at your location, drawn to scale.
 
 ||
 |---|
