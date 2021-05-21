@@ -306,11 +306,11 @@ describe("onboarding form", () => {
   };
 
   const clickNext = (): void => {
-    fireEvent.click(subject.getAllByText("Next")[0]);
+    fireEvent.click(subject.getAllByTestId("next")[0]);
   };
 
   const clickBack = (): void => {
-    fireEvent.click(subject.getAllByText("Back")[0]);
+    fireEvent.click(subject.getAllByTestId("back")[0]);
   };
 
   const getBusinessNameValue = (): string =>

@@ -13,11 +13,11 @@ export const OnboardingButtonGroup = (): ReactElement => {
   return (
     <div className="float-right fdr margin-bottom-8">
       {state.page > 1 && (
-        <button className="usa-button usa-button--outline" onClick={back}>
+        <button className="usa-button usa-button--outline" onClick={back} data-testid="back">
           {OnboardingDefaults.backButtonText}
         </button>
       )}
-      <button type="submit" className="usa-button margin-right-0" data-next={true}>
+      <button type="submit" className="usa-button margin-right-0" data-testid="next">
         {OnboardingDefaults.nextButtonText}
       </button>
     </div>

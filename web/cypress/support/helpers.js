@@ -1,5 +1,5 @@
 export const clickNext = () => {
-  cy.get("[data-next]:visible").click({ force: true });
+  cy.get('[data-testid="next"]:visible').click({ force: true });
   cy.wait(1000); // wait for onboarding animation
 };
 
