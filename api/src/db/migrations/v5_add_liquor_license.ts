@@ -1,4 +1,5 @@
 import { v4UserData } from "./v4_add_municipality";
+import {randomInt} from "./migrations";
 
 export interface v5UserData {
   user: v5BusinessUser;
@@ -57,3 +58,28 @@ type v5LegalStructure =
   | "b-corporation";
 
 // ---------------- v5 factories ----------------
+
+export const generateV5User = (overrides: Partial<v5BusinessUser>): v5BusinessUser => {
+  return {
+    name: "some-name-" + randomInt(),
+    email: `some-email-${randomInt()}@example.com`,
+    id: "some-id-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateV5OnboardingData = (overrides: Partial<v5OnboardingData>): v5OnboardingData => {
+  return {
+    businessName: "some-business-name-" + randomInt(),
+    industry: "restaurant",
+    legalStructure: "sole-proprietorship",
+    municipality: {
+      name: "some-name-" + randomInt(),
+      displayName: "some-display-name-" + randomInt(),
+      county: "some-county-" + randomInt(),
+      id: "some-id-" + randomInt(),
+    },
+    liquorLicense: true,
+    ...overrides,
+  };
+};

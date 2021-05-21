@@ -55,7 +55,7 @@ describe("buildRoadmap", () => {
   describe("restaurant", () => {
     let roadmap: Roadmap;
     beforeEach(async () => {
-      const onboardingData = generateOnboardingData({ industry: "restaurant" });
+      const onboardingData = generateOnboardingData({ industry: "restaurant", homeBasedBusiness: false });
       roadmap = await buildRoadmap(onboardingData);
     });
 
@@ -63,13 +63,6 @@ describe("buildRoadmap", () => {
       expect(roadmap.type).toEqual("restaurant");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("floor-plan-approval-doh");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("food-safety-course");
-    });
-
-    it("adds physical location tasks", () => {
-      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("identify-potential-lease");
-      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
     });
   });
 
@@ -97,24 +90,16 @@ describe("buildRoadmap", () => {
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("register-consumer-affairs");
     });
 
-    it("adds physical location tasks", () => {
-      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("identify-potential-lease");
-      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
-    });
-
     it("modifies the text for insurance needs", () => {
-      const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
-      const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "research-insurance-needs")!;
-      expect(insuranceNeeds.contentMd).toContain("Home contractors need to");
+      const insuranceNeedsTask = getTaskById(roadmap, "research-insurance-needs");
+      expect(insuranceNeedsTask.contentMd).toContain("Home contractors");
     });
   });
 
   describe("cosmetology", () => {
     let roadmap: Roadmap;
     beforeEach(async () => {
-      const onboardingData = generateOnboardingData({ industry: "cosmetology" });
+      const onboardingData = generateOnboardingData({ industry: "cosmetology", homeBasedBusiness: false });
       roadmap = await buildRoadmap(onboardingData);
     });
 
@@ -126,17 +111,9 @@ describe("buildRoadmap", () => {
       expect(getTasksByStepId(roadmap, "inspection-requirements")).toContain("board-inspection");
     });
 
-    it("adds physical location tasks", () => {
-      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("identify-potential-lease");
-      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
-      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
-    });
-
-    it("modifies the text for local site requirements", () => {
-      const dueDiligenceStep = roadmap.steps.find((it) => it.id === "due-diligence")!;
-      const insuranceNeeds = dueDiligenceStep.tasks.find((it) => it.id === "check-site-requirements")!;
-      expect(insuranceNeeds.contentMd).toContain("Board of Cosmetology");
+    it("modifies the text for site requirements task", () => {
+      const siteTask = getTaskById(roadmap, "check-site-requirements");
+      expect(siteTask.contentMd).toContain("Consumer Affairs");
     });
   });
 
@@ -169,9 +146,8 @@ describe("buildRoadmap", () => {
 
       const onboardingData = generateOnboardingData({ municipality: generateMunicipality({ id: "1234" }) });
       const roadmap = await buildRoadmap(onboardingData);
-      const municipalityTask = roadmap.steps
-        .find((it) => it.id === "lease-and-permits")!
-        .tasks.find((it) => it.id === "check-local-requirements")!;
+
+      const municipalityTask = getTaskById(roadmap, "check-local-requirements");
       expect(municipalityTask.callToActionLink).toEqual("www.cooltown.com");
       expect(municipalityTask.callToActionText).toEqual("Visit the website for Cool Town");
     });
@@ -199,6 +175,28 @@ describe("buildRoadmap", () => {
       expect(municipalityTask.contentMd).toContain("Bergen County");
       expect(municipalityTask.contentMd).toContain("555-1234");
       expect(municipalityTask.contentMd).toContain("www.example.com/clerk");
+    });
+  });
+
+  describe("home based business", () => {
+    it("adds physical location tasks when homeBasedBusiness is false", async () => {
+      const onboardingData = generateOnboardingData({ homeBasedBusiness: false });
+      const roadmap = await buildRoadmap(onboardingData);
+
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("identify-potential-lease");
+      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("certificate-of-occupancy");
+    });
+
+    it("does not add physical location tasks when homeBasedBusiness is true", async () => {
+      const onboardingData = generateOnboardingData({ homeBasedBusiness: true });
+      const roadmap = await buildRoadmap(onboardingData);
+
+      expect(getTasksByStepId(roadmap, "due-diligence")).not.toContain("identify-potential-lease");
+      expect(getTasksByStepId(roadmap, "due-diligence")).not.toContain("check-site-requirements");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).not.toContain("sign-lease");
+      expect(getTasksByStepId(roadmap, "lease-and-permits")).not.toContain("certificate-of-occupancy");
     });
   });
 

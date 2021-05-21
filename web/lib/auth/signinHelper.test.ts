@@ -81,6 +81,7 @@ describe("SigninHelper", () => {
         legalStructure: undefined,
         municipality: undefined,
         liquorLicense: false,
+        homeBasedBusiness: false,
       });
       expect(mockPush).toHaveBeenCalledWith("/");
     });

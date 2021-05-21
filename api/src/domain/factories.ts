@@ -38,6 +38,7 @@ export const generateOnboardingData = (overrides: Partial<OnboardingData>): Onbo
     legalStructure: randomLegalStructure(),
     municipality: generateMunicipality({}),
     liquorLicense: false,
+    homeBasedBusiness: false,
     ...overrides,
   };
 };

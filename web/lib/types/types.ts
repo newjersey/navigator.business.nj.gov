@@ -24,6 +24,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     legalStructure: undefined,
     municipality: undefined,
     liquorLicense: false,
+    homeBasedBusiness: false,
   };
 };
 
@@ -33,6 +34,7 @@ export interface OnboardingData {
   legalStructure: LegalStructure | undefined;
   municipality: Municipality | undefined;
   liquorLicense: boolean;
+  homeBasedBusiness: boolean;
 }
 
 export type OnboardingDisplayContent = {
@@ -46,6 +48,11 @@ export type OnboardingDisplayContent = {
     infoAlertMd: string;
     specificHomeContractorMd: string;
     specificLiquorQuestion: {
+      contentMd: string;
+      radioButtonYesText: string;
+      radioButtonNoText: string;
+    };
+    specificHomeBasedBusinessQuestion: {
       contentMd: string;
       radioButtonYesText: string;
       radioButtonNoText: string;
@@ -73,6 +80,11 @@ export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent 
       infoAlertMd: "",
       specificHomeContractorMd: "",
       specificLiquorQuestion: {
+        contentMd: "",
+        radioButtonYesText: "",
+        radioButtonNoText: "",
+      },
+      specificHomeBasedBusinessQuestion: {
         contentMd: "",
         radioButtonYesText: "",
         radioButtonNoText: "",

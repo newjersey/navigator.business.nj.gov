@@ -17,6 +17,7 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
   const industryInfoAlert = getMarkdown(loadFile("industry/info-alert.md"));
   const specificHomeContractor = getMarkdown(loadFile("industry/industry-specific/home-contractor.md"));
   const specificLiquor = getMarkdown(loadFile("industry/industry-specific/liquor.md"));
+  const specificHomeBased = getMarkdown(loadFile("municipality/home-based-business.md"));
 
   const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES_ORDERED.reduce(
     (acc, legalStructure) => {
@@ -48,6 +49,11 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
         contentMd: specificLiquor.content,
         radioButtonYesText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonYesText,
         radioButtonNoText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonNoText,
+      },
+      specificHomeBasedBusinessQuestion: {
+        contentMd: specificHomeBased.content,
+        radioButtonYesText: (specificHomeBased.grayMatter as RadioGrayMatter).radioButtonYesText,
+        radioButtonNoText: (specificHomeBased.grayMatter as RadioGrayMatter).radioButtonNoText,
       },
       ...(industry.grayMatter as FieldGrayMatter),
     },

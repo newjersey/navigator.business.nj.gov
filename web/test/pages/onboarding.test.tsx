@@ -27,6 +27,7 @@ import * as mockUseUserData from "@/test/mock/mockUseUserData";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockUpdate, useMockUserData } from "@/test/mock/mockUseUserData";
 import { useMockRouter } from "@/test/mock/mockRouter";
+import { getLastCalledWith } from "@/test/helpers";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -192,6 +193,51 @@ describe("onboarding form", () => {
     });
   });
 
+  it("displays home-based business question for applicable industries on municipality page", async () => {
+    const displayContent = createEmptyOnboardingDisplayContent();
+    const promise = Promise.resolve();
+    mockUpdate.mockReturnValue(promise);
+    const newark = generateMunicipality({ displayName: "Newark" });
+
+    displayContent.industry.specificHomeBasedBusinessQuestion = {
+      contentMd: "Are you a home-based business?",
+      radioButtonYesText: "Yeah",
+      radioButtonNoText: "Nah",
+    };
+
+    subject = render(<Onboarding displayContent={displayContent} municipalities={[newark]} />);
+    await visitStep2();
+
+    selectByValue("Industry", "home-contractor");
+    await visitStep3();
+    chooseRadio("general-partnership");
+    await visitStep4();
+    selectByText("Location", "Newark");
+
+    expect(subject.queryByText("Are you a home-based business?")).toBeInTheDocument();
+    chooseRadio("true");
+
+    clickNext();
+    await act(() => promise);
+
+    const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
+    expect(updatedUserData.onboardingData.homeBasedBusiness).toEqual(true);
+  });
+
+  it("does not display home-based business question for non-applicable industries", async () => {
+    const displayContent = createEmptyOnboardingDisplayContent();
+    displayContent.industry.specificHomeBasedBusinessQuestion.contentMd = "Are you a home-based business?";
+
+    subject = render(<Onboarding displayContent={displayContent} municipalities={[]} />);
+    await visitStep2();
+    selectByValue("Industry", "restaurant");
+    await visitStep3();
+    chooseRadio("general-partnership");
+    await visitStep4();
+
+    expect(subject.queryByText("Are you a home-based business?")).not.toBeInTheDocument();
+  });
+
   it("sets liquor license back to false if they select a different industry", async () => {
     subject = render(
       <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
@@ -209,6 +255,32 @@ describe("onboarding form", () => {
         ...emptyUserData.onboardingData,
         industry: "e-commerce",
         liquorLicense: false,
+      },
+    });
+  });
+
+  it("sets home-based business back to false if they select a different industry", async () => {
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    await visitStep2();
+    selectByValue("Industry", "home-contractor");
+    await visitStep3();
+    await visitStep4();
+    chooseRadio("true");
+
+    clickBack();
+    clickBack();
+
+    selectByValue("Industry", "restaurant");
+    await visitStep3();
+
+    expect(mockUseUserData.mockUpdate).toHaveBeenLastCalledWith({
+      ...emptyUserData,
+      onboardingData: {
+        ...emptyUserData.onboardingData,
+        industry: "restaurant",
+        homeBasedBusiness: false,
       },
     });
   });

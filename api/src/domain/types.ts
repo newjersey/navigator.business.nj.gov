@@ -30,6 +30,7 @@ export interface OnboardingData {
   legalStructure: LegalStructure | undefined;
   municipality: Municipality | undefined;
   liquorLicense: boolean;
+  homeBasedBusiness: boolean;
 }
 
 export type Municipality = {

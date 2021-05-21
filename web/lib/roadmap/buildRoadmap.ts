@@ -47,20 +47,25 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
 
   roadmapBuilder = addTasksFromAddOn(roadmapBuilder, genericTaskAddOns);
 
+  if (onboardingData.liquorLicense) {
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/liquor-license"));
+  }
+
+  if (!onboardingData.homeBasedBusiness) {
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
+  }
+
   if (onboardingData.industry === "restaurant") {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/restaurant"));
-    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
   }
 
   if (onboardingData.industry === "home-contractor") {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/home-contractor"));
-    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
     roadmapBuilder = modifyTasks(roadmapBuilder, await importModification("home-contractor"));
   }
 
   if (onboardingData.industry === "cosmetology") {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/cosmetology"));
-    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
     roadmapBuilder = modifyTasks(roadmapBuilder, await importModification("cosmetology"));
   }
 
@@ -72,10 +77,6 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
     if (TradeNameGroup.includes(onboardingData.legalStructure)) {
       roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/trade-name"));
     }
-  }
-
-  if (onboardingData.liquorLicense) {
-    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/liquor-license"));
   }
 
   if (step5hasNoTasks(roadmapBuilder)) {

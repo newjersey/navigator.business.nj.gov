@@ -42,3 +42,8 @@ export const generateUseUserDataResponse = (
   isLoading: false,
   ...overrides,
 });
+
+export const getLastCalledWith = (fn: jest.Mock): unknown[] => {
+  const lastIndex = fn.mock.calls.length - 1;
+  return fn.mock.calls[lastIndex];
+};

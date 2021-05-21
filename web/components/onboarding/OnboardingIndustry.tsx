@@ -9,6 +9,7 @@ import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { Alert } from "@/components/njwds/Alert";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
+import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 
 export const OnboardingIndustry = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -21,6 +22,9 @@ export const OnboardingIndustry = (): ReactElement => {
     setOnboardingData({
       ...state.onboardingData,
       liquorLicense: isLiquorLicenseApplicable(industry) ? state.onboardingData.liquorLicense : false,
+      homeBasedBusiness: isHomeBasedBusinessApplicable(industry)
+        ? state.onboardingData.homeBasedBusiness
+        : false,
       industry,
     });
   };

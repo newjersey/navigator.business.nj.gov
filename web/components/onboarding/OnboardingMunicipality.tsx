@@ -6,6 +6,8 @@ import { Municipality } from "@/lib/types/types";
 import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
+import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 
 export const OnboardingMunicipality = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -73,6 +75,12 @@ export const OnboardingMunicipality = (): ReactElement => {
           clearOnEscape
           autoHighlight
         />
+
+        {isHomeBasedBusinessApplicable(state.onboardingData.industry) && (
+          <div className="margin-top-3">
+            <OnboardingHomeBasedBusiness />
+          </div>
+        )}
       </div>
     </>
   );
