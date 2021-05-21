@@ -1,15 +1,16 @@
 ---
 id: "check-site-suitability"
-name: "Check Site Suitability"
+name: "Evaluating Your Location"
 callToActionLink: "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
 callToActionText: "Read the Requirements"
 ---
 
-Before selecting a location, verify that the site meets the Department of Consumer Affairs' Board of Cosmetology licensing guidelines. The Board will review your floorplan during the application review process to determine if a site meets board requirements, including considerations around bathroom access and an area designated for cleaning implements and tools, among other items.
+If you're looking for a location for your business, there are a few things to keep in mind as you're looking for that perfect space:
 
-To complete this step, you must have:
-- Identified potential locations
+1. **`Demographics:|demographics`** Consider locating your business where it can most effectively reach and serve your target customer base.
+3. **`Tenant Improvements:|tenant-improvements`** Verify that the site meets the Department of Consumer Affairs' Board of Cosmetology licensing guidelines. The Board will review your floorplan during the application review process to determine if a site meets board requirements, including considerations around bathroom access and an area designated for cleaning implements and tools, among other items. Identify and discuss tenant improvements prior to signing your lease, make sure to consider federal requirements for `ADA compliance.|ada`
+4. **`Zoning:|zoning`** Consult with the local government's Zoning Office to determine the suitability of the site
 
-After you complete this step, you will have:
-- Floor plan of the tenant fit-out at your location, drawn to scale.
-
+||
+|---|
+| **Next Steps**: Speak to your local government's Zoning Office.|
