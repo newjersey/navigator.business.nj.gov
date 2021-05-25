@@ -5,7 +5,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-If you've decided on the your shop's location, now is a good time to check what requirements your local government has. We recommend you do this at the outset because it may result in delays and unneessary costs if done later. Below are common items you may need local government approval for:
+If you've decided on the your shop's location, now is a good time to check what requirements your local government has. We recommend you do this at the outset because it may result in delays and unneessary costs if done later. When you speak to your local offices, be sure to ask about other permit requirements and the expected approval timeline. Below are common items you may need local government approval for:
         
 1) **Fire Prevention Permits:** Talk to your Fire Prevention Bureau or Fire Department to make sure your space is meeting requirements, like working sprinklers, extinguishers and signage).
 2) **Store Signage:** Speak to your local Zoning Office to make sure the signage your proposing is permitted, and the Buildings/Consutruction Department for the construction and build out of the sign.
