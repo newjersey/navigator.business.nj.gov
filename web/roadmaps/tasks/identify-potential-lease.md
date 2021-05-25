@@ -1,6 +1,6 @@
 ---
 id: "identify-potential-lease"
-name: "Evaluating your location"
+name: "Evaluate Your Location"
 callToActionLink: ""
 callToActionText: ""
 ---
