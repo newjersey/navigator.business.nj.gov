@@ -92,7 +92,7 @@ describe("buildRoadmap", () => {
 
     it("modifies the text for insurance needs", () => {
       const insuranceNeedsTask = getTaskById(roadmap, "research-insurance-needs");
-      expect(insuranceNeedsTask.contentMd).toContain("Home contractors");
+      expect(insuranceNeedsTask.contentMd).toContain("Commercial");
     });
   });
 
