@@ -12,6 +12,9 @@ The New Jersey Department of Consumer Affairs require you to obtain and show a f
 3) **`Construction Permits:|construction-permits`** Check if you need a building permit with your local government's Building Department before starting any renovations. If you want to know more about your Building/Construction Department safety requirements, read through the [Uniform Construction Code](https://nj.gov/dca/divisions/codes/codreg/ucc.html).
 4) **`Certificate of Occupancy/Approval:|certificate-occupancy`** If you needed a construction permit for your renovation, you may need to meet with the  Buildings/Construction Department to obtain a Certificate that indicates that your space is safe for occupancy. **_This is required by the Department of Consumer Affairs to recieve a shop license**
 
+To complete this step, you must know:
+- Potential Address
+
 ||
 |---|
-| **Destination**: City Office of Zoning and County Clerk |
+| **Next Step**: City Office of Zoning and County Clerk |
