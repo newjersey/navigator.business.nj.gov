@@ -1,6 +1,6 @@
 ---
 id: "check-site-suitability"
-name: "Evaluating Your Location"
+name: "Evaluate Your Location"
 callToActionLink: ""
 callToActionText: ""
 ---
