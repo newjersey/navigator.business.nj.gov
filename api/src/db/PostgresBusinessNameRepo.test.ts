@@ -16,8 +16,8 @@ describe("PostgresBusinessNameRepo", () => {
     await businessNameRepo.deleteAll();
   });
 
-  afterAll(async () => {
-    await businessNameRepo.deleteAll();
+  afterEach(async () => {
+    await businessNameRepo.disconnect();
   });
 
   describe("search", () => {
@@ -40,9 +40,5 @@ describe("PostgresBusinessNameRepo", () => {
       expect(pinelists.length).toEqual(2);
       expect(pinelists).toEqual(expect.arrayContaining(["Applebees", "apple Farm"]));
     });
-  });
-
-  afterAll(async () => {
-    await businessNameRepo.disconnect();
   });
 });

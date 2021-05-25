@@ -6,8 +6,8 @@ export const searchBusinessNameFactory = (businessNameRepo: BusinessNameRepo): S
       .makeLowerCase()
       .removeBusinessDesignators()
       .removeArticles()
-      .trimPunctuation()
-      .value.trim();
+      .trim()
+      .trimPunctuation().value;
 
     const similarNames = await businessNameRepo.search(searchName);
 
@@ -43,17 +43,16 @@ const nameManipulator = (initial: string) => ({
     return this;
   },
   trimPunctuation: function () {
-    const startsOrEndsWithPunctuation = new RegExp(
-      '^[@?.",#!$%^*;:{}+<>=-_`~()]|[@?.",#!$%^*;:{}+<>=-_`~()]$'
-    );
-    while (startsOrEndsWithPunctuation.test(this.value)) {
-      this.value = this.value.replace(startsOrEndsWithPunctuation, "");
-    }
-    this.value = this.value.replace(/[@?.",/#!$%^*;:{}+<>=\-_`~()]/g, "");
+    const startsOrEndsWithPunctuation = /^[@?.",#!$%^*;:{}+<>=-_`~()]+|[@?.",#!$%^*;:{}+<>=-_`~()]+$/g;
+    this.value = this.value.replace(startsOrEndsWithPunctuation, "");
     return this;
   },
   stripWhitespace: function () {
     this.value = this.value.replace(/\s+/g, "");
+    return this;
+  },
+  trim: function () {
+    this.value = this.value.trim();
     return this;
   },
   removeArticles: function () {
