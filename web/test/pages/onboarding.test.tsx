@@ -74,7 +74,7 @@ describe("onboarding form", () => {
   });
 
   it("updates the user data after each form page", async () => {
-    const initialUserData = generateUserData({});
+    const initialUserData = createEmptyUserData(generateUser({}));
     const promise = Promise.resolve();
     mockUpdate.mockReturnValue(promise);
     useMockUserData(initialUserData);
@@ -82,10 +82,7 @@ describe("onboarding form", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
 
     subject = render(
-      <Onboarding
-        displayContent={createEmptyOnboardingDisplayContent()}
-        municipalities={[newark, initialUserData.onboardingData.municipality!]}
-      />
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[newark]} />
     );
 
     fillText("Business name", "Cool Computers");
@@ -261,6 +258,7 @@ describe("onboarding form", () => {
 
   describe("updates to industry affecting home-based business", () => {
     beforeEach(() => {
+      useMockUserData(createEmptyUserData(generateUser({})));
       subject = render(
         <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
       );
