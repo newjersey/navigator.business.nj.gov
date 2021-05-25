@@ -19,12 +19,23 @@ export const OnboardingIndustry = (): ReactElement => {
     if (event.target.value) {
       industry = event.target.value as Industry;
     }
+
+    let homeBasedBusiness = true;
+    if (!isHomeBasedBusinessApplicable(industry)) {
+      homeBasedBusiness = false;
+    } else {
+      const wasHomeBasedBusinessPreviouslyApplicable = isHomeBasedBusinessApplicable(
+        state.onboardingData.industry
+      );
+      if (wasHomeBasedBusinessPreviouslyApplicable) {
+        homeBasedBusiness = state.onboardingData.homeBasedBusiness;
+      }
+    }
+
     setOnboardingData({
       ...state.onboardingData,
       liquorLicense: isLiquorLicenseApplicable(industry) ? state.onboardingData.liquorLicense : false,
-      homeBasedBusiness: isHomeBasedBusinessApplicable(industry)
-        ? state.onboardingData.homeBasedBusiness
-        : false,
+      homeBasedBusiness,
       industry,
     });
   };

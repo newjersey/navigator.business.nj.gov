@@ -106,7 +106,7 @@ describe("onboarding form", () => {
         ...initialUserData.onboardingData,
         businessName: "Cool Computers",
         industry: "e-commerce",
-        liquorLicense: false,
+        homeBasedBusiness: true,
       },
     });
 
@@ -118,7 +118,7 @@ describe("onboarding form", () => {
         ...initialUserData.onboardingData,
         businessName: "Cool Computers",
         industry: "e-commerce",
-        liquorLicense: false,
+        homeBasedBusiness: true,
         legalStructure: "general-partnership",
       },
     });
@@ -133,7 +133,7 @@ describe("onboarding form", () => {
         ...initialUserData.onboardingData,
         businessName: "Cool Computers",
         industry: "e-commerce",
-        liquorLicense: false,
+        homeBasedBusiness: true,
         legalStructure: "general-partnership",
         municipality: newark,
       },
@@ -246,43 +246,70 @@ describe("onboarding form", () => {
     selectByValue("Industry", "restaurant");
     chooseRadio("true");
 
-    selectByValue("Industry", "e-commerce");
+    selectByValue("Industry", "cosmetology");
     await visitStep3();
 
     expect(mockUseUserData.mockUpdate).toHaveBeenLastCalledWith({
       ...emptyUserData,
       onboardingData: {
         ...emptyUserData.onboardingData,
-        industry: "e-commerce",
+        industry: "cosmetology",
         liquorLicense: false,
       },
     });
   });
 
-  it("sets home-based business back to false if they select a different industry", async () => {
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
-    await visitStep2();
-    selectByValue("Industry", "home-contractor");
-    await visitStep3();
-    await visitStep4();
-    chooseRadio("true");
-
-    clickBack();
-    clickBack();
-
-    selectByValue("Industry", "restaurant");
-    await visitStep3();
-
-    expect(mockUseUserData.mockUpdate).toHaveBeenLastCalledWith({
-      ...emptyUserData,
-      onboardingData: {
-        ...emptyUserData.onboardingData,
-        industry: "restaurant",
-        homeBasedBusiness: false,
-      },
+  describe("updates to industry affecting home-based business", () => {
+    beforeEach(() => {
+      subject = render(
+        <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+      );
     });
+
+    it("sets home-based business back to false if they select a non-applicable industry", async () => {
+      await selectInitialIndustry("home-contractor");
+      expect(homeBasedBusinessValue()).toEqual(true);
+      await reselectNewIndustry("restaurant");
+      expect(homeBasedBusinessValue()).toEqual(false);
+    });
+
+    it("sets home-based business back to true if they select an applicable industry", async () => {
+      await selectInitialIndustry("restaurant");
+      expect(homeBasedBusinessValue()).toEqual(false);
+      await reselectNewIndustry("e-commerce");
+      expect(homeBasedBusinessValue()).toEqual(true);
+    });
+
+    it("keeps home-based business value if they select a different but still applicable industry", async () => {
+      await selectInitialIndustry("e-commerce");
+      expect(homeBasedBusinessValue()).toEqual(true);
+      await selectHomeBasedBusiness("false");
+      await reselectNewIndustry("home-contractor");
+      expect(homeBasedBusinessValue()).toEqual(false);
+    });
+
+    const selectInitialIndustry = async (industry: string): Promise<void> => {
+      await visitStep2();
+      selectByValue("Industry", industry);
+      await visitStep3();
+    };
+
+    const selectHomeBasedBusiness = async (value: string): Promise<void> => {
+      await visitStep4();
+      chooseRadio(value);
+      clickBack();
+    };
+
+    const reselectNewIndustry = async (industry: string): Promise<void> => {
+      clickBack();
+      selectByValue("Industry", industry);
+      await visitStep3();
+    };
+
+    const homeBasedBusinessValue = (): boolean => {
+      const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
+      return updatedUserData.onboardingData.homeBasedBusiness;
+    };
   });
 
   const fillText = (label: string, value: string) => {
