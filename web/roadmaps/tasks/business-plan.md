@@ -1,6 +1,6 @@
 ---
 id: "business-plan"
-name: "Writing Your Business Plan"
+name: "Write Your Business Plan"
 callToActionLink: ""
 callToActionText: ""
 ---
