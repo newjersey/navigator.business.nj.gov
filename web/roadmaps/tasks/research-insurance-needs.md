@@ -12,3 +12,7 @@ You may consider obtaining insurance for your business, now is a good time to st
 3) **Motor vehicle insurance** - If your company will own or use any vehciles, consider purhcasing motor vehicle insurance.
 
 To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Often times, the best way to find a broker is through word of mouth.
+
+||
+|---|
+| **Next Steps**: Research insurance needs.|
