@@ -15,7 +15,7 @@ export const getMunicipality = (id: string): Promise<MunicipalityDetail> => {
 };
 
 export const searchBusinessName = (name: string): Promise<NameAvailability> => {
-  return get(`/business-name-availability?query=${name}`);
+  return get(`/business-name-availability?query=${encodeURIComponent(name)}`);
 };
 
 export const postUserData = (userData: UserData): Promise<UserData> => {

@@ -15,6 +15,13 @@ export interface MunicipalityClient {
   findOne: (id: string) => Promise<MunicipalityDetail>;
 }
 
+export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
+
+export type NameAvailability = {
+  status: "AVAILABLE" | "UNAVAILABLE";
+  similarNames: string[];
+};
+
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export interface UserData {

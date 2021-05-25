@@ -30,6 +30,16 @@ describe("PostgresBusinessNameRepo", () => {
       expect(pinelists.length).toEqual(2);
       expect(pinelists).toEqual(expect.arrayContaining(["applebees", "apple farm"]));
     });
+
+    it("ignores casing", async () => {
+      await businessNameRepo.save("Applebees");
+      await businessNameRepo.save("apple Farm");
+      await businessNameRepo.save("someTHing else");
+
+      const pinelists = await businessNameRepo.search("apple");
+      expect(pinelists.length).toEqual(2);
+      expect(pinelists).toEqual(expect.arrayContaining(["Applebees", "apple Farm"]));
+    });
   });
 
   afterAll(async () => {

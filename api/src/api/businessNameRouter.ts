@@ -1,15 +1,13 @@
 import { Router } from "express";
-import { BusinessNameRepo } from "../domain/types";
+import { NameAvailability, SearchBusinessName } from "../domain/types";
 
-export const businessNameRouterFactory = (businessNameRepo: BusinessNameRepo): Router => {
+export const businessNameRouterFactory = (searchBusinessName: SearchBusinessName): Router => {
   const router = Router();
 
   router.get("/business-name-availability", (req, res) => {
-    businessNameRepo
-      .search((req.query as BusinessQueryParams).query)
-      .then((similarNames: string[]) => {
-        const status = similarNames.length > 0 ? "UNAVAILABLE" : "AVAILABLE";
-        res.json({ status, similarNames: similarNames.slice(0, 10) });
+    searchBusinessName((req.query as BusinessQueryParams).query)
+      .then((result: NameAvailability) => {
+        res.json(result);
       })
       .catch((error) => {
         res.status(500).json({ error });
