@@ -17,4 +17,4 @@ To complete this step, you must know:
 
 ||
 |---|
-| **Next Step**: City Office of Zoning and County Clerk |
+| **Next Steps**: Check with your local government offices to see what local requirements apply to you.|
