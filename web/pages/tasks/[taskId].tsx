@@ -57,7 +57,7 @@ const TaskPage = (props: Props): ReactElement => {
   return (
     <PageSkeleton>
       <SidebarPageLayout sidebar={sidebar} backButton={backButton} pageTitle={TaskDefaults.pageTitle}>
-        <div className="grid-container padding-0 margin-bottom-1">
+        <div className="grid-container padding-0 margin-bottom-2">
           <div className="grid-row grid-gap">
             <div className="tablet:grid-col-9">
               <h2 className="margin-top-0 margin-bottom-0" data-task-id={props.task.id}>

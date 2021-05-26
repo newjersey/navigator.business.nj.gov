@@ -104,13 +104,13 @@ export const OnboardingIndustry = (): ReactElement => {
         </FormControl>
 
         {state.onboardingData.industry === "home-contractor" && (
-          <div className="margin-top-3">
+          <div className="margin-top-2">
             <Content>{state.displayContent.industry.specificHomeContractorMd}</Content>
           </div>
         )}
 
         {isLiquorLicenseApplicable(state.onboardingData.industry) && (
-          <div className="margin-top-3">
+          <div className="margin-top-4">
             <OnboardingLiquorLicense />
           </div>
         )}
