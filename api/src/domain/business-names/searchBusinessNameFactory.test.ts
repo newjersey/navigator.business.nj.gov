@@ -18,7 +18,7 @@ describe("searchBusinessNames", () => {
 
   it("removes articles, designators, trailing punctuation before searching", async () => {
     stubBusinessNameRepo.search.mockResolvedValue([]);
-    await searchBusinessName("the ()my c-o-o-l a business,,, llc");
+    await searchBusinessName("the ()my c-o-o-l a business,,, llc.");
     expect(stubBusinessNameRepo.search).toHaveBeenCalledWith("my c-o-o-l business");
   });
 

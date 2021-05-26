@@ -6,7 +6,6 @@ export const searchBusinessNameFactory = (businessNameRepo: BusinessNameRepo): S
       .makeLowerCase()
       .removeBusinessDesignators()
       .removeArticles()
-      .trim()
       .trimPunctuation().value;
 
     if (!searchName) {
@@ -47,16 +46,12 @@ const nameManipulator = (initial: string) => ({
     return this;
   },
   trimPunctuation: function () {
-    const startsOrEndsWithPunctuation = /^[@?.",#!$%^*;:{}+<>=-_`~()]+|[@?.",#!$%^*;:{}+<>=-_`~()]+$/g;
+    const startsOrEndsWithPunctuation = /^[\s@?.",#!$%^*;:{}+<>=-_`~()]+|[\s@?.",#!$%^*;:{}+<>=-_`~()]+$/g;
     this.value = this.value.replace(startsOrEndsWithPunctuation, "");
     return this;
   },
   stripWhitespace: function () {
     this.value = this.value.replace(/\s+/g, "");
-    return this;
-  },
-  trim: function () {
-    this.value = this.value.trim();
     return this;
   },
   removeArticles: function () {
