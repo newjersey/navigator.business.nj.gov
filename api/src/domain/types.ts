@@ -10,11 +10,6 @@ export interface BusinessNameRepo {
   deleteAll: () => Promise<void>;
 }
 
-export interface MunicipalityClient {
-  findAll: () => Promise<MunicipalityDetail[]>;
-  findOne: (id: string) => Promise<MunicipalityDetail>;
-}
-
 export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
 
 export type NameAvailability = {
@@ -45,18 +40,6 @@ export type Municipality = {
   displayName: string;
   county: string;
   id: string;
-};
-
-export type MunicipalityDetail = {
-  id: string;
-  townName: string;
-  townDisplayName: string;
-  townWebsite: string;
-  countyId: string;
-  countyName: string;
-  countyClerkPhone: string;
-  countyClerkWebsite: string;
-  countyWebsite: string;
 };
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";

@@ -3,13 +3,13 @@
 import { buildRoadmap } from "./buildRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import { generateMunicipality, generateMunicipalityDetail, generateOnboardingData } from "@/test/factories";
-import * as api from "@/lib/api-client/apiClient";
+import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalityById";
 
-jest.mock("@/lib/api-client/apiClient", () => ({
-  getMunicipalities: jest.fn(),
-  getMunicipality: jest.fn(),
+jest.mock("@/lib/async-content-fetchers/fetchMunicipalityById", () => ({
+  fetchMunicipalityById: jest.fn(),
 }));
-const mockApi = api as jest.Mocked<typeof api>;
+const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMunicipality>)
+  .fetchMunicipalityById;
 
 describe("buildRoadmap", () => {
   const getTasksByStepId = (roadmap: Roadmap, id: string): string[] => {
@@ -21,7 +21,7 @@ describe("buildRoadmap", () => {
   };
 
   beforeEach(() => {
-    mockApi.getMunicipality.mockResolvedValue(generateMunicipalityDetail({}));
+    mockFetchMunicipality.mockResolvedValue(generateMunicipalityDetail({}));
   });
 
   it("loads a generic roadmap when no industry data present", async () => {
@@ -135,7 +135,7 @@ describe("buildRoadmap", () => {
 
   describe("municipality", () => {
     it("adds callToAction from the user municipality", async () => {
-      mockApi.getMunicipality.mockResolvedValue(
+      mockFetchMunicipality.mockResolvedValue(
         generateMunicipalityDetail({
           id: "123",
           townWebsite: "www.cooltown.com",
@@ -153,7 +153,7 @@ describe("buildRoadmap", () => {
     });
 
     it("replaces placeholder text", async () => {
-      mockApi.getMunicipality.mockResolvedValue(
+      mockFetchMunicipality.mockResolvedValue(
         generateMunicipalityDetail({
           id: "123",
           townWebsite: "www.cooltown.com",
@@ -216,7 +216,7 @@ describe("buildRoadmap", () => {
     });
 
     it("replaces placeholder text", async () => {
-      mockApi.getMunicipality.mockResolvedValue(
+      mockFetchMunicipality.mockResolvedValue(
         generateMunicipalityDetail({
           id: "123",
           countyClerkWebsite: "www.example.com/clerk",

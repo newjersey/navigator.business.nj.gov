@@ -23,7 +23,6 @@
   "dependencies": {
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
-    "airtable": "^0.11.0",
     "aws-lambda": "^1.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

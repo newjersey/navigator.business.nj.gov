@@ -1,14 +1,4 @@
 {
   "tags": ["api"],
-  "dependencies": [
-    "express",
-    "cors",
-    "supertest",
-    "body-parser",
-    "aws-sdk",
-    "serverless-http",
-    "airtable",
-    "airtable/lib/airtable_base",
-    "knex"
-  ]
+  "dependencies": ["express", "cors", "supertest", "body-parser", "aws-sdk", "serverless-http", "knex"]
 }

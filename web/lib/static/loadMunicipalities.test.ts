@@ -1,30 +1,44 @@
 import { loadAllMunicipalities } from "./loadMunicipalities";
-import * as api from "@/lib/api-client/apiClient";
 import { generateMunicipalityDetail } from "@/test/factories";
+import fs from "fs";
 
-jest.mock("@/lib/api-client/apiClient", () => ({
-  getMunicipalities: jest.fn(),
+jest.mock("fs");
+
+jest.mock("process", () => ({
+  cwd: () => "/test",
 }));
-const mockApi = api as jest.Mocked<typeof api>;
 
 describe("loadMunicipalities", () => {
-  describe("loadAllMunicipalities", () => {
-    it("returns a list of municipality objects", async () => {
-      const municipality = generateMunicipalityDetail({
-        id: "123",
-        countyName: "Bergen",
-        townDisplayName: "Newark (Bergen County)",
-        townName: "Newark",
-      });
-      mockApi.getMunicipalities.mockResolvedValue([municipality, generateMunicipalityDetail({})]);
-      const municipalities = await loadAllMunicipalities();
-      expect(municipalities).toHaveLength(2);
-      expect(municipalities[0]).toEqual({
-        name: "Newark",
-        displayName: "Newark (Bergen County)",
-        county: "Bergen",
-        id: "123",
-      });
+  let mockedFs: jest.Mocked<typeof fs>;
+
+  beforeEach(() => {
+    mockedFs = fs as jest.Mocked<typeof fs>;
+  });
+
+  it("returns a list of municipality objects", async () => {
+    const municipality1 = generateMunicipalityDetail({
+      id: "123",
+      countyName: "Bergen",
+      townDisplayName: "Newark (Bergen County)",
+      townName: "Newark",
+    });
+
+    const municipality2 = generateMunicipalityDetail({});
+
+    const json = JSON.stringify({
+      [municipality1.id]: municipality1,
+      [municipality2.id]: municipality2,
+    });
+
+    mockedFs.readFileSync.mockReturnValue(json);
+
+    const municipalities = await loadAllMunicipalities();
+    expect(municipalities).toHaveLength(2);
+    expect(municipalities[0]).toEqual({
+      name: "Newark",
+      displayName: "Newark (Bergen County)",
+      county: "Bergen",
+      id: "123",
     });
   });
 });

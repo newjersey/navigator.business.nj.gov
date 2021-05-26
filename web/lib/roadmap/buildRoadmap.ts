@@ -10,9 +10,9 @@ import {
 } from "@/lib/types/types";
 import genericTaskAddOns from "@/roadmaps/generic/generic-tasks.json";
 import steps from "@/roadmaps/steps.json";
-import * as api from "@/lib/api-client/apiClient";
 import { fetchTaskById } from "@/lib/async-content-fetchers/fetchTaskById";
 import { templateEval } from "@/lib/utils/helpers";
+import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
@@ -117,7 +117,7 @@ const removeStep5 = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {
 };
 
 const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: string): Promise<Roadmap> => {
-  const municipality = await api.getMunicipality(municipalityId);
+  const municipality = await fetchMunicipalityById(municipalityId);
   const evalValues = {
     municipalityWebsite: municipality.townWebsite,
     municipality: municipality.townName,

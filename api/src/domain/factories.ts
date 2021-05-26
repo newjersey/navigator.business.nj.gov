@@ -5,7 +5,6 @@ import {
   Industry,
   LegalStructure,
   Municipality,
-  MunicipalityDetail,
   OnboardingData,
   UserData,
 } from "./types";
@@ -49,21 +48,6 @@ export const generateMunicipality = (overrides: Partial<Municipality>): Municipa
     name: "some-name-" + randomInt(),
     county: "some-county-" + randomInt(),
     id: "some-id-" + randomInt(),
-    ...overrides,
-  };
-};
-
-export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail>): MunicipalityDetail => {
-  return {
-    id: "some-id-" + randomInt(),
-    townName: "some-town-name-" + randomInt(),
-    countyId: "some-county-id-" + randomInt(),
-    townDisplayName: "some-town-display-name-" + randomInt(),
-    townWebsite: "some-town-website-" + randomInt(),
-    countyName: "some-county-name-" + randomInt(),
-    countyClerkPhone: "some-phone-" + randomInt(),
-    countyClerkWebsite: "some-clerk-webpage-" + randomInt(),
-    countyWebsite: "some-county-website-" + randomInt(),
     ...overrides,
   };
 };

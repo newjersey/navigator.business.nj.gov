@@ -97,8 +97,6 @@ jobs:
         run: npm --prefix=api run install-dynamo-local && npm --prefix=api start & npm --prefix=web run build --if-present
         env:
           API_BASE_URL: http://localhost:5000/dev
-          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
           DB_NAME: businessci
           DB_PASSWORD: postgres
 
@@ -172,8 +170,6 @@ jobs:
         working-directory: ./api
         env:
           STAGE: dev
-          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
           DB_USER: ${{ secrets.DB_USER_DEV }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD_DEV }}
           DB_NAME: ${{ secrets.DB_NAME_DEV }}
@@ -239,8 +235,6 @@ jobs:
         working-directory: ./api
         env:
           STAGE: staging
-          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
           DB_USER: ${{ secrets.DB_USER_STAGING }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD_STAGING }}
           DB_NAME: ${{ secrets.DB_NAME_STAGING }}
