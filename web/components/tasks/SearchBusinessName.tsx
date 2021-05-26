@@ -7,11 +7,14 @@ import { NameAvailability } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 
 export const SearchBusinessName = (): ReactElement => {
   const [name, setName] = useState<string>("");
+  const [nameDisplayedInResults, setNameDisplayedInResults] = useState<string>("");
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
   const { userData, update } = useUserData();
 
@@ -21,7 +24,12 @@ export const SearchBusinessName = (): ReactElement => {
 
   const searchBusinessName = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
+    setIsLoading(true);
+    setNameAvailability(undefined);
     const result = await api.searchBusinessName(name);
+
+    setNameDisplayedInResults(name);
+    setIsLoading(false);
     setUpdateButtonClicked(false);
     setNameAvailability(result);
   };
@@ -47,7 +55,9 @@ export const SearchBusinessName = (): ReactElement => {
   const showAvailable = (): ReactElement => {
     return (
       <div data-testid="available-text" className="margin-top-2">
-        <p className="font-body-2xs text-primary">{SearchBusinessNamesDefaults.availableText}</p>
+        <p className="font-body-2xs text-primary">
+          {templateEval(SearchBusinessNamesDefaults.availableText, { name: nameDisplayedInResults })}
+        </p>
         {updateButtonClicked ? (
           <div className="font-body-2xs text-primary margin-top-05" data-testid="name-has-been-updated">
             <span className="padding-right-05">
@@ -83,7 +93,9 @@ export const SearchBusinessName = (): ReactElement => {
   const showUnavailable = (): ReactElement => {
     return (
       <div data-testid="unavailable-text" className="margin-top-2">
-        <p className="font-body-2xs text-red">{SearchBusinessNamesDefaults.unavailableText}</p>
+        <p className="font-body-2xs text-red">
+          {templateEval(SearchBusinessNamesDefaults.unavailableText, { name: nameDisplayedInResults })}
+        </p>
         <p className="font-body-2xs text-red margin-bottom-1">
           {SearchBusinessNamesDefaults.similarUnavailableNamesText}
         </p>
@@ -118,14 +130,16 @@ export const SearchBusinessName = (): ReactElement => {
           </div>
           <div className="tablet:grid-col-4">
             <FormControl margin="dense" className="">
-              <button
+              <LoadingButton
+                onClick={() => {}}
+                loading={isLoading}
+                outline={true}
+                className="text-no-wrap"
                 type="submit"
                 data-testid="search-availability"
-                className="usa-button usa-button--outline text-no-wrap"
-                onClick={() => {}}
               >
                 {SearchBusinessNamesDefaults.searchButtonText}
-              </button>
+              </LoadingButton>
             </FormControl>
           </div>
         </div>

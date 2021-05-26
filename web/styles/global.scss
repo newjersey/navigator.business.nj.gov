@@ -59,3 +59,17 @@ $lg: 64em; //desktop and up (1024px)
   border-bottom-width: 2px;
   border-bottom-style: dashed;
 }
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.visibility-visible {
+  visibility: visible;
+}
+
+.spinner-overlay {
+  position: absolute;
+  z-index: 100;
+  margin-left: -40%;
+}

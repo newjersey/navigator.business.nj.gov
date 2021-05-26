@@ -1,9 +1,9 @@
 export const SearchBusinessNamesDefaults: Record<string, string> = {
   placeholderText: "Type potential business name",
   searchButtonText: "Check Availability",
-  unavailableText: "Sorry, that name isn’t available. Try another name.",
+  unavailableText: 'Sorry, "${name}" isn’t available. Try another name.',
   similarUnavailableNamesText: "Here are similar business names that are already taken:",
-  availableText: "Looks like your name might be available!",
+  availableText: 'Looks like "${name}" might be available!',
   updateButtonText: "Update the name on your roadmap with this one",
   nameHasBeenUpdatedText: "Your business name has been updated",
   officialCheckButtonText: "Official Name Check",
