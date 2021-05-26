@@ -70,10 +70,8 @@ export const SearchBusinessName = (): ReactElement => {
   };
 
   const badInputAlert = (): ReactElement => (
-    <div data-testid="bad-input-alert">
-      <Alert variant="warning" slim className="margin-bottom-4">
-        <Content>{SearchBusinessNamesDefaults.badInputAlertText}</Content>
-      </Alert>
+    <div data-testid="bad-input-alert" className="text-orange">
+      {SearchBusinessNamesDefaults.badInputAlertText}
     </div>
   );
 
