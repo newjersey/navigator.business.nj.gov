@@ -99,6 +99,26 @@ describe("<SearchBusinessName />", () => {
     expect(subject.queryByText("Pizzapizza")).toBeInTheDocument();
   });
 
+  it("shows message if user searches empty name", async () => {
+    subject = render(<SearchBusinessName />);
+    fillText("");
+    fireEvent.click(searchButton());
+    expect(subject.queryByTestId("bad-input-alert")).toBeInTheDocument();
+    fillText("anything");
+    await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
+    expect(subject.queryByTestId("bad-input-alert")).not.toBeInTheDocument();
+  });
+
+  it("shows message if search returns 400", async () => {
+    subject = render(<SearchBusinessName />);
+    fillText("LLC");
+    await searchAndReject();
+    expect(subject.queryByTestId("bad-input-alert")).toBeInTheDocument();
+    fillText("anything");
+    await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
+    expect(subject.queryByTestId("bad-input-alert")).not.toBeInTheDocument();
+  });
+
   const getSearchValue = (): string => (inputField() as HTMLInputElement)?.value;
 
   const fillText = (value: string) => {
@@ -110,6 +130,13 @@ describe("<SearchBusinessName />", () => {
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
     fireEvent.click(searchButton());
     await act(() => returnedPromise);
+  };
+
+  const searchAndReject = async (): Promise<void> => {
+    const returnedPromise = Promise.reject(400);
+    mockApi.searchBusinessName.mockReturnValue(returnedPromise);
+    fireEvent.click(searchButton());
+    await act(() => returnedPromise.catch(() => {}));
   };
 
   const searchButton = () => subject.getByTestId("search-availability");

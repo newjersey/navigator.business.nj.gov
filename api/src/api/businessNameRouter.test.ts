@@ -33,6 +33,12 @@ describe("businessNameRouter", () => {
     expect(stubSearchBusinessName).toHaveBeenCalledWith("apple bee's");
   });
 
+  it("returns 400 if name search returns BAD_INPUT", async () => {
+    stubSearchBusinessName.mockRejectedValue("BAD_INPUT");
+    const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
+    expect(response.status).toEqual(400);
+  });
+
   it("returns 500 if name search errors", async () => {
     stubSearchBusinessName.mockRejectedValue({});
     const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);

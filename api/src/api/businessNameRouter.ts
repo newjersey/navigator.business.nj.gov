@@ -10,7 +10,11 @@ export const businessNameRouterFactory = (searchBusinessName: SearchBusinessName
         res.json(result);
       })
       .catch((error) => {
-        res.status(500).json({ error });
+        if (error === "BAD_INPUT") {
+          res.status(400).json({ error });
+        } else {
+          res.status(500).json({ error });
+        }
       });
   });
 

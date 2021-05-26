@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { MunicipalityDetail, NameAvailability, UserData } from "@/lib/types/types";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -23,5 +23,10 @@ export const postUserData = (userData: UserData): Promise<UserData> => {
 };
 
 export const get = <T>(url: string): Promise<T> => {
-  return axios.get(`${apiBaseUrl}/api${url}`).then((response) => response.data);
+  return axios
+    .get(`${apiBaseUrl}/api${url}`)
+    .then((response) => response.data)
+    .catch((error: AxiosError) => {
+      return Promise.reject(error.response?.status);
+    });
 };

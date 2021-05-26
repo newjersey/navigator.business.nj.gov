@@ -35,6 +35,10 @@ describe("searchBusinessNames", () => {
     expect(nameAvailability.similarNames).toHaveLength(10);
   });
 
+  it("rejects if the search name becomes essentially empty", async () => {
+    await expect(searchBusinessName("LLC.")).rejects.toEqual("BAD_INPUT");
+  });
+
   describe("ignores punctuation differences", () => {
     const testValues = ["my-cool-business", "my cool, business", "my: cool business", 'my "cool" business'];
     for (const value of testValues) {

@@ -10,4 +10,5 @@ export const SearchBusinessNamesDefaults: Record<string, string> = {
   officialCheckButtonLink: "https://www.njportal.com/DOR/BusinessNameSearch/Search/BusinessName",
   officialCheckText:
     "Do an official check with the New Jersey Division of Revenue and Enterprise Services to confirm your name is legally clear to use. Once confirmed, you can reserve the name and form your business.",
+  badInputAlertText: "Sorry, that isn't a valid search input",
 };

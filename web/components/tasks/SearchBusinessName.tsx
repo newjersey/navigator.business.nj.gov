@@ -15,6 +15,7 @@ export const SearchBusinessName = (): ReactElement => {
   const [nameDisplayedInResults, setNameDisplayedInResults] = useState<string>("");
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showBadInputAlert, setShowBadInputAlert] = useState<boolean>(false);
   const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
   const { userData, update } = useUserData();
 
@@ -24,14 +25,30 @@ export const SearchBusinessName = (): ReactElement => {
 
   const searchBusinessName = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    setIsLoading(true);
     setNameAvailability(undefined);
-    const result = await api.searchBusinessName(name);
-
-    setNameDisplayedInResults(name);
-    setIsLoading(false);
     setUpdateButtonClicked(false);
-    setNameAvailability(result);
+
+    if (!name) {
+      setShowBadInputAlert(true);
+      return;
+    }
+
+    setShowBadInputAlert(false);
+    setIsLoading(true);
+
+    api
+      .searchBusinessName(name)
+      .then((result: NameAvailability) => {
+        setNameDisplayedInResults(name);
+        setIsLoading(false);
+        setNameAvailability(result);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        if (error === 400) {
+          setShowBadInputAlert(true);
+        }
+      });
   };
 
   useMountEffectWhenDefined(() => {
@@ -52,9 +69,17 @@ export const SearchBusinessName = (): ReactElement => {
     update(newUserData);
   };
 
+  const badInputAlert = (): ReactElement => (
+    <div data-testid="bad-input-alert">
+      <Alert variant="warning" slim className="margin-bottom-4">
+        <Content>{SearchBusinessNamesDefaults.badInputAlertText}</Content>
+      </Alert>
+    </div>
+  );
+
   const showAvailable = (): ReactElement => {
     return (
-      <div data-testid="available-text" className="margin-top-2">
+      <div data-testid="available-text">
         <p className="font-body-2xs text-primary">
           {templateEval(SearchBusinessNamesDefaults.availableText, { name: nameDisplayedInResults })}
         </p>
@@ -92,7 +117,7 @@ export const SearchBusinessName = (): ReactElement => {
 
   const showUnavailable = (): ReactElement => {
     return (
-      <div data-testid="unavailable-text" className="margin-top-2">
+      <div data-testid="unavailable-text">
         <p className="font-body-2xs text-red">
           {templateEval(SearchBusinessNamesDefaults.unavailableText, { name: nameDisplayedInResults })}
         </p>
@@ -144,8 +169,11 @@ export const SearchBusinessName = (): ReactElement => {
           </div>
         </div>
       </form>
-      {nameAvailability?.status === "AVAILABLE" && showAvailable()}
-      {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
+      <div className="margin-top-2">
+        {showBadInputAlert && badInputAlert()}
+        {nameAvailability?.status === "AVAILABLE" && showAvailable()}
+        {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
+      </div>
     </>
   );
 };

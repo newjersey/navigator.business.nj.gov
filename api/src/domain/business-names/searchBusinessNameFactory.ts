@@ -9,6 +9,10 @@ export const searchBusinessNameFactory = (businessNameRepo: BusinessNameRepo): S
       .trim()
       .trimPunctuation().value;
 
+    if (!searchName) {
+      return Promise.reject("BAD_INPUT");
+    }
+
     const similarNames = await businessNameRepo.search(searchName);
 
     const adjustedName = cleanName(name);
