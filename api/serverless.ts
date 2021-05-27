@@ -10,6 +10,7 @@ const dbUser = process.env.DB_USER || "";
 const dbPassword = process.env.DB_PASSWORD || "";
 const dbHost = process.env.DB_HOST || "";
 const dbName = process.env.DB_NAME || "";
+const cognitoArn = process.env.COGNITO_ARN || "";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 
@@ -74,7 +75,7 @@ const serverlessConfiguration: AWS = {
     },
     lambdaHashingVersion: "20201221",
   },
-  functions: { express },
+  functions: { express: express(cognitoArn) },
   resources: {
     Resources: {
       UsersDynamoDBTable: {

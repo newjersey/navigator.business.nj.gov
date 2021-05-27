@@ -17,7 +17,7 @@ type CognitoIdPayload = {
 
 export const getCurrentToken = async (): Promise<string> => {
   const cognitoSession = await Auth.currentSession();
-  return cognitoSession.getAccessToken().getJwtToken();
+  return cognitoSession.getIdToken().getJwtToken();
 };
 
 export const getCurrentUser = async (): Promise<BusinessUser> => {

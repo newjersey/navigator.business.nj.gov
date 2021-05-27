@@ -105,7 +105,7 @@ jobs:
         with:
           working-directory: web
           start: npm start
-          wait-on: 'http://localhost:3000, http://localhost:5000/dev/health'
+          wait-on: 'http://localhost:3000'
           record: true
         env:
           CYPRESS_API_BASE_URL: http://localhost:5000/dev
@@ -175,6 +175,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME_DEV }}
           DB_HOST: ${{ secrets.DB_HOST_DEV }}
           DB_ENV: aws-dev
+          COGNITO_ARN: ${{ secrets.COGNITO_ARN_DEV }}
 
       - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1
@@ -240,6 +241,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME_STAGING }}
           DB_HOST: ${{ secrets.DB_HOST_STAGING }}
           DB_ENV: aws-staging
+          COGNITO_ARN: ${{ secrets.COGNITO_ARN_STAGING }}
 
       - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1
