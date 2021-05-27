@@ -1,4 +1,4 @@
 ---
 ---
 
-`Learn more about what activities qualify as a home-contractor|home-contractors-activities`
+`Learn more about what activities qualify as a Home Improvement Contractor|home-contractors-activities`
