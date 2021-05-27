@@ -4,34 +4,34 @@
     "id": "create-business-plan",
     "name": "Create a Business Plan",
     "timeEstimate": "1–2 weeks",
-    "description": "Writing a business plan is an important first step to getting your business up and running. An effective business plan will serve as a roadmap for your business and the decisions you make along the way, and help you to obtain financing, build relationships, attract good employees, and boost your confidence as a business owner.\n\nThe structure of a business plan may vary depending on your business and needs, but it often incorporates the sections below:"
+    "description": "Writing a business plan is an important first step to getting your business up and running. An effective business plan will serve as a roadmap for the decisions you need to make, helping you obtain financing, build relationships, attract good employees, and boost your confidence as a business owner."
   },
   {
     "step_number": 2,
     "id": "due-diligence",
     "name": "Prepare for Industry Specific Rules",
     "timeEstimate": "1–2 months",
-    "description": "Before you officially form & register your business, it's important to have a target location and lease in mind - that way you can form & register your business using your proposed business address. If you change the location of your business after you form & register, you will need to file an amendment to your Business Formation & Registration"
+    "description": "Before you officially form and register your business, it’s important to have a target location and lease in mind, so you can create your business for your specific address. If you change the location of your business after, you will need to file an amendment to your business formation and registration."
   },
   {
     "step_number": 3,
     "id": "register-business",
     "name": "Register with the State and Federal Government",
     "timeEstimate": "1–2 months",
-    "description": "Once you have confirmed your prospective location, it’s time to officially register your business with the State. \nIn this step you are identifying and registering your desired business names, creating your legal entity, and then registering for New Jersey State taxes."
+    "description": "Once you’ve confirmed your prospective location, it’s time to officially register with the State. In this step you’ll identify your desired business name, create your legal entity, and register for New Jersey State taxes."
   },
   {
     "step_number": 4,
     "id": "lease-and-permits",
     "name": "Comply with Local Laws and Industry Licenses",
     "timeEstimate": "1–2 months",
-    "description": "You can now sign your lease and file local permits under the protection of your new legal entity and business name."
+    "description": "After registering, you’ll sign your lease and file local permits under the protection of your new legal entity and business name."
   },
   {
     "step_number": 5,
     "id": "inspection-requirements",
     "name": "Meet Inspection Requirements",
     "timeEstimate": "1–2 months",
-    "description": "Once your business is up and running there are a few last municipal requirements to check on."
+    "description": "Once your business is up and running, there are a few last municipal requirements to check on."
   }
 ]
