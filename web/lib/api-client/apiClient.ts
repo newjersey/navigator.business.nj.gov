@@ -29,6 +29,6 @@ export const get = async <T>(url: string): Promise<T> => {
 const authConfig = async (): Promise<AxiosRequestConfig> => {
   const token = await getCurrentToken();
   return {
-    headers: { Authorization: token },
+    headers: { Authorization: `Bearer ${token}` },
   };
 };

@@ -1,4 +1,13 @@
 {
   "tags": ["api"],
-  "dependencies": ["express", "cors", "supertest", "body-parser", "aws-sdk", "serverless-http", "knex"]
+  "dependencies": [
+    "express",
+    "cors",
+    "supertest",
+    "body-parser",
+    "aws-sdk",
+    "serverless-http",
+    "knex",
+    "jsonwebtoken"
+  ]
 }

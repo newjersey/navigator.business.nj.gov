@@ -19,7 +19,7 @@ describe("apiClient", () => {
     mockAxios.get.mockResolvedValue({ data: userData });
     expect(await getUserData("123")).toEqual(userData);
     expect(mockAxios.get).toHaveBeenCalledWith("/api/users/123", {
-      headers: { Authorization: "some-token" },
+      headers: { Authorization: "Bearer some-token" },
     });
   });
 
@@ -28,13 +28,15 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postUserData(userData)).toEqual(userData);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/users", userData, {
-      headers: { Authorization: "some-token" },
+      headers: { Authorization: "Bearer some-token" },
     });
   });
 
   it("gets generic data", async () => {
     mockAxios.get.mockResolvedValue({ data: { value: "something" } });
     expect(await get("/some/url")).toEqual({ value: "something" });
-    expect(mockAxios.get).toHaveBeenCalledWith("/api/some/url", { headers: { Authorization: "some-token" } });
+    expect(mockAxios.get).toHaveBeenCalledWith("/api/some/url", {
+      headers: { Authorization: "Bearer some-token" },
+    });
   });
 });

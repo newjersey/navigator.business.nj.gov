@@ -83,20 +83,34 @@ Cypress.Commands.add('loginByCognitoApi', () => {
     log.snapshot('after')
     log.end()
 
-    cy.request('POST', `${Cypress.env("API_BASE_URL")}/api/users`, createEmptyUserData({
+    cy.request({
+      method: 'POST',
+      url: `${Cypress.env("API_BASE_URL")}/api/users`,
+      body: createEmptyUserData({
         email: testUserEmail,
         id: cognitoResponse.attributes.sub
-      }))
-      .then(() => cy.visit('/'))
+      }),
+      auth: {
+        'bearer': cognitoResponse.signInUserSession.idToken.jwtToken
+      }
+    })
+    .then(() => cy.visit('/'))
   })
 })
 
 Cypress.Commands.add('resetUserData', () => {
   Auth.currentSession().then((currentSession) => {
     const userId = currentSession.getIdToken().decodePayload().sub
-    cy.request('POST', `${Cypress.env("API_BASE_URL")}/api/users`, createEmptyUserData({
-      email: testUserEmail,
-      id: userId
-    }))
+    cy.request({
+      method: 'POST',
+      url: `${Cypress.env("API_BASE_URL")}/api/users`,
+      body: createEmptyUserData({
+        email: testUserEmail,
+        id: userId
+      }),
+      auth: {
+        'bearer': currentSession.getIdToken().getJwtToken()
+      }
+    })
   })
 })
