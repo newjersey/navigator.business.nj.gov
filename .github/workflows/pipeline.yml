@@ -177,6 +177,10 @@ jobs:
           DB_ENV: aws-dev
           COGNITO_ARN: ${{ secrets.COGNITO_ARN_DEV }}
 
+      - name: 🦋 run database migrations
+        run: serverless invoke -f migrate --stage dev --region us-east-1
+        working-directory: ./api
+
       - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1
         with:
@@ -242,6 +246,10 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST_STAGING }}
           DB_ENV: aws-staging
           COGNITO_ARN: ${{ secrets.COGNITO_ARN_STAGING }}
+
+      - name: 🦋 run database migrations
+        run: serverless invoke -f migrate --stage staging --region us-east-1
+        working-directory: ./api
 
       - name: 🚀 Deploy web to AWS Amplify
         uses: ambientlight/amplify-cli-action@0.2.1

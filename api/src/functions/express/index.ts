@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { handlerPath } from "@libs/handlerResolver";
+import { FnType } from "@functions/index";
 
-export default (cognitoArn: string): any => ({
+export default (cognitoArn: string): FnType => ({
   handler: `${handlerPath(__dirname)}/app.handler`,
   events: [
     {

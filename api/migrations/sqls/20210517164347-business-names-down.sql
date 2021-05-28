@@ -1,1 +1,1 @@
-drop table businesses;
+drop table businessnames;

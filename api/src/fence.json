@@ -8,6 +8,11 @@
     "aws-sdk",
     "serverless-http",
     "knex",
-    "jsonwebtoken"
+    "jsonwebtoken",
+    "@serverless/typescript",
+    "db-migrate",
+    "@middy/core",
+    "@middy/http-json-body-parser",
+    "aws-lambda"
   ]
 }

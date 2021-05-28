@@ -1,3 +1,3 @@
-create table businesses (
+create table businessnames (
    name text not null
 );

@@ -1,6 +1,7 @@
 import type { AWS } from "@serverless/typescript";
 
 import express from "./src/functions/express";
+import migrate from "./src/functions/migrate";
 
 const stage = process.env.STAGE || "dev";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
@@ -11,8 +12,10 @@ const dbPassword = process.env.DB_PASSWORD || "";
 const dbHost = process.env.DB_HOST || "";
 const dbName = process.env.DB_NAME || "";
 const cognitoArn = process.env.COGNITO_ARN || "";
+const dbPort = "5432";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
+const databaseUrl = `postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -22,7 +25,7 @@ const serverlessConfiguration: AWS = {
     webpack: {
       webpackConfig: "./webpack.config.js",
       includeModules: {
-        forceInclude: ["pg"],
+        forceInclude: ["pg", "db-migrate", "db-migrate-pg"],
       },
     },
     dynamodb: {
@@ -75,7 +78,10 @@ const serverlessConfiguration: AWS = {
     },
     lambdaHashingVersion: "20201221",
   },
-  functions: { express: express(cognitoArn) },
+  functions: {
+    express: express(cognitoArn),
+    migrate: migrate(databaseUrl),
+  },
   resources: {
     Resources: {
       UsersDynamoDBTable: {
