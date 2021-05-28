@@ -5,7 +5,7 @@ callToActionLink: "https://www.state.nj.us/treasury/revenue/gettingregistered.sh
 callToActionText: "Register Your Business for Taxes"
 ---
 
-It's time to register your business for State Taxes. Doing so will tell the state more about your business and determine what taxes your liable for.
+It's time to register your business for State taxes. Doing so will tell the State more about your business and determine what taxes your liable for.
 
 To complete this step, you must have:
 - Entity ID
