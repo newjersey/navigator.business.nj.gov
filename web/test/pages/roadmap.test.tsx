@@ -3,6 +3,7 @@ import RoadmapPage from "@/pages/roadmap";
 import { generateMunicipality, generateStep, generateTask } from "@/test/factories";
 import { useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { IndustryLookup } from "@/display-content/IndustryLookup";
 
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -36,7 +37,8 @@ describe("roadmap page", () => {
     it("shows the human-readable industry from onboarding data", () => {
       useMockOnboardingData({ industry: "home-contractor" });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("Home-Improvement Contractor")).toBeInTheDocument();
+      const expectedValue = IndustryLookup["home-contractor"].primaryText;
+      expect(subject.getByText(expectedValue)).toBeInTheDocument();
     });
 
     it("shows placeholder if no industry present", async () => {
