@@ -11,7 +11,7 @@ export const PostgresBusinessNameRepo = (connection: Knex.PgConnectionConfig | s
     connection: connection,
   });
 
-  const tableName = "businesses";
+  const tableName = "businessnames";
 
   const search = (name: string): Promise<string[]> => {
     return kdb(tableName)
