@@ -17,4 +17,4 @@ To complete this step, you must know:
 
 ||
 |---|
-| **Next Steps**: Check with your local government offices to see what local requirements apply to you.|
+| **Next Step:** Check with your local government offices to see what local requirements apply to you.|
