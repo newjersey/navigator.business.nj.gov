@@ -1,6 +1,6 @@
 ---
 id: "check-site-requirements"
-name: "Identify Local Requirements"
+name: "Determine Site Requirements"
 callToActionLink: ""
 callToActionText: ""
 ---
