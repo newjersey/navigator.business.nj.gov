@@ -11,7 +11,7 @@ export const IndustryLookup: Record<Industry, IndustryOption> = {
     secondaryText: "Food Services and Drinking Places",
   },
   "home-contractor": {
-    primaryText: "Home-Improvement Contractor",
+    primaryText: "Home Improvement Contractor",
     secondaryText: "Construction of Buildings",
   },
   "e-commerce": {
