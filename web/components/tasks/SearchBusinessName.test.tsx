@@ -2,10 +2,17 @@ import { mockUpdate, useMockOnboardingData, useMockUserData } from "@/test/mock/
 import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import * as api from "@/lib/api-client/apiClient";
-import { generateNameAvailability, generateOnboardingData, generateUserData } from "@/test/factories";
+import {
+  generateNameAvailability,
+  generateOnboardingData,
+  generateTask,
+  generateUserData,
+} from "@/test/factories";
 import { NameAvailability } from "@/lib/types/types";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   searchBusinessName: jest.fn(),
 }));
@@ -17,30 +24,31 @@ describe("<SearchBusinessName />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockUserData({});
+    useMockRoadmap({});
   });
 
   it("pre-fills the text field with the business name entered in onboarding", () => {
     useMockOnboardingData({ businessName: "Best Pizza" });
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     expect(getSearchValue()).toEqual("Best Pizza");
   });
 
   it("types a new potential name", () => {
     useMockOnboardingData({ businessName: "Best Pizza" });
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("My other new name");
     expect(getSearchValue()).toEqual("My other new name");
   });
 
   it("checks availability of typed name", async () => {
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({});
     expect(mockApi.searchBusinessName).toHaveBeenCalledWith("Pizza Joint");
   });
 
   it("shows available text if name is available", async () => {
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
     expect(availableTextExists()).toBe(true);
@@ -52,7 +60,7 @@ describe("<SearchBusinessName />", () => {
       onboardingData: generateOnboardingData({ businessName: "Best Pizza" }),
     });
     useMockUserData(userData);
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
 
@@ -68,7 +76,7 @@ describe("<SearchBusinessName />", () => {
 
   it("removes the update button when clicked and resets when new search is performed", async () => {
     useMockUserData(generateUserData({}));
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
     fireEvent.click(updateNameButton());
@@ -84,7 +92,7 @@ describe("<SearchBusinessName />", () => {
   });
 
   it("shows unavailable text if name is not available", async () => {
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(availableTextExists()).toBe(false);
@@ -92,7 +100,7 @@ describe("<SearchBusinessName />", () => {
   });
 
   it("shows similar unavailable names when not available", async () => {
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "UNAVAILABLE", similarNames: ["Rusty's Pizza", "Pizzapizza"] });
     expect(subject.queryByText("Rusty's Pizza")).toBeInTheDocument();
@@ -100,7 +108,7 @@ describe("<SearchBusinessName />", () => {
   });
 
   it("shows message if user searches empty name", async () => {
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("");
     fireEvent.click(searchButton());
     expect(subject.queryByTestId("bad-input-alert")).toBeInTheDocument();
@@ -110,7 +118,7 @@ describe("<SearchBusinessName />", () => {
   });
 
   it("shows message if search returns 400", async () => {
-    subject = render(<SearchBusinessName />);
+    subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("LLC");
     await searchAndReject();
     expect(subject.queryByTestId("bad-input-alert")).toBeInTheDocument();

@@ -3,14 +3,20 @@ import { FormControl, TextField } from "@material-ui/core";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNamesDefaults } from "@/display-content/tasks/search-business-names/SearchBusinessNamesDefaults";
 import * as api from "@/lib/api-client/apiClient";
-import { NameAvailability } from "@/lib/types/types";
+import { NameAvailability, Task } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
+import { TaskHeader } from "@/components/TaskHeader";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 
-export const SearchBusinessName = (): ReactElement => {
+interface Props {
+  task: Task;
+}
+
+export const SearchBusinessName = (props: Props): ReactElement => {
   const [name, setName] = useState<string>("");
   const [nameDisplayedInResults, setNameDisplayedInResults] = useState<string>("");
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
@@ -18,6 +24,7 @@ export const SearchBusinessName = (): ReactElement => {
   const [showBadInputAlert, setShowBadInputAlert] = useState<boolean>(false);
   const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
   const { userData, update } = useUserData();
+  const { roadmap } = useRoadmap();
 
   const handleName = (event: ChangeEvent<HTMLInputElement>): void => {
     setName(event.target.value);
@@ -136,6 +143,9 @@ export const SearchBusinessName = (): ReactElement => {
 
   return (
     <>
+      <TaskHeader task={props.task} />
+      <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+
       <form onSubmit={searchBusinessName} className={`usa-prose grid-container padding-0`}>
         <div className="grid-row grid-gap-1">
           <div className="tablet:grid-col-8">
