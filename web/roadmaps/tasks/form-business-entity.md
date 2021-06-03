@@ -13,7 +13,7 @@ To complete this step, you must have:
 - NAICS code (optional)
 - EIN (optional)
 - Business Description
-- Business Address
+- Business Address (this may be a home address if you are a home-based business)
 - Registered Agent
 - Payment Credit Card or E-Check
 
