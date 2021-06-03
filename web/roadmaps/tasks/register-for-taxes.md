@@ -8,7 +8,7 @@ callToActionText: "Register Your Business for Taxes"
 It's time to register your business for State taxes. Doing so will tell the State more about your business and determine what taxes your liable for.
 
 To complete this step, you must have:
-- Entity ID
+- Entity ID (not required for general partnership or sole proprietorship)
 - NAICS code
 - EIN
 - Estimated number of employees
