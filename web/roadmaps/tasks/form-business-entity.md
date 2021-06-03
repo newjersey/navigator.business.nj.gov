@@ -19,5 +19,6 @@ To complete this step, you must have:
 
 After you complete this step, you will have:
 - Entity ID
-- Certificate of Standing
-- Certified Copy
+- Certificate of Formation /Incorporation
+- Certified copy of Certificate of Fromation /Incorporation document (Optional with additional fee)
+- Certificate of Good Standing (Optional with additional fee) A document that verfies that you are in good standing with the Department of Revenue. It indicates that you are up to date with your coporate records. It does NOT indicate that you are in good standing with your taxes, that document is called a Tax Clearance Certificate.
