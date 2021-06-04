@@ -5,14 +5,13 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-You need to obtain Commercial general liability insurance to complete your business registration. Insurance will protect your company's assets should you be held liable for an incident. It's best to speak with an insurance broker/agent to identify your insurance needs. A few common types of insurance businesses obtain:
+You need to obtain Commercial general liability insurance to complete your business registration. Insurance will protect your business' assets should you be held liable for an incident. It's best to speak with an insurance broker to identify your insurance needs. A few common types of insurance businesses obtain:
 
-1. **Commercial general liability insurance:** This protects your company from liability._In order to complete your registration with The Department of Consumer Affairs, you must show a certificate of insurance at a minimum amount of $500,000 per occurrence._
-2. **[Workmans comp insurance:](https://www.nj.gov/labor/wc/employer/require/insure_index.html)** Workers' compensation provides medical treatment, wage replacement and permanent disability compensation to employees who suffer job-related injuries or illnesses, and death benefits to dependents of workers who have died as a result of their employment. The State requires this insurance if you have any full time employees. This is not required for owners of an LLC, but is required for stockholders in a corporation.
-3. **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance.
+1. **Commerical general liablity insurance:** Research your business'needs for coverage, the amount of coverage you need changes by industry and business size. _**In order to complete your registration with The Department of Consumer Affairs, you must show a certificate of insurance at a minimum amount of $500,000 per occurrence.**_
+2. **Workmans compensation insurance:** Find a `workmans comp insurance|workmans-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation.
+3. **Motor vehicle insurance:** If your company will own or use any vehciles, consider purhcasing motor vehicle insurance.
 
 To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Often times, the best way to find a broker is through word of mouth.
 
-||
-|---|
-| **Next Step:** Research insurance needs|
+After you complete this task, you will have:
+- identified an insurance policy for your business
