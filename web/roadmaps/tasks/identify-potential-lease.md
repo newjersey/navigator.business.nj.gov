@@ -7,10 +7,9 @@ callToActionText: ""
 
 If you're looking for a location for your business, there are a few things to keep in mind as you're looking for that perfect space:
 
-1. **`Demographics:|demographics`** Consider locating your business where it can most effectively reach and serve your target customer base.
-3. **`Tenant Improvements:|tenant-improvements`** Identify and discuss tenant improvements prior to signing your lease, make sure to consider federal requirements for `ADA compliance.|ada`
-4. **`Zoning:|zoning`** Consult with the local government's Zoning Office to determine the suitability of the site
+1. **Demographics Considerations:** Research where to locate your businesses to most effectively reach and serve your target customer base. [Find tools to help you with your research](https://business.nj.gov/pages/additional-site-selection-research).
+2. **Tenant Improvements:** Identify any repairs, renovations, or construction the site may need, make sure to consider federal requirements for `ADA compliance.|ada`. [Learn more about what to consider when selecting a site](https://business.nj.gov/pages/additional-site-selection-research).
+3. **Zoning** Consult with the local government's Zoning Office to determine the suitability of the site. [Find out how zoning my impact your site selection](https://business.nj.gov/pages/choose-a-location).
 
-||
-|---|
-| **Next Steps**: Speak to your local government's Zoning Office.|
+After you complete this task, you will have:
+- found a viable shop location.
