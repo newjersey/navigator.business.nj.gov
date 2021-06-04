@@ -14,6 +14,5 @@ Your `business plan|business-plan` acts as roadmap for your business and can hel
 5. **[The Latin American Economic Development Association of Southern New Jersey](http://www.laeda.com/)** offers support to all entrepnuers.
 6. **[Union County Economic Development Corporation](https://ucedc.com/)** provides free classes and paid business mentoring services.
 
-||
-|---|
-| **Next Step:** Write your business plan.|
+After you complete this task, you will have:
+- your business plan
