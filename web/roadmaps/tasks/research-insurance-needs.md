@@ -11,4 +11,5 @@ You may consider obtaining insurance for your business. Insurance will protect y
 2. **Workmans comp insurance:** Find a `workmans comp insurance|workmans-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation.
 3. **Motor vehicle insurance:** If your company will own or use any vehciles, consider purhcasing motor vehicle insurance.
 
-You've completed this step when you've identified an insurance policy for your business.
+After you complete this task, you will have:
+- identified an insurance policy for your business
