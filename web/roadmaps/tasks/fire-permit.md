@@ -14,5 +14,5 @@ Now that you signed your lease, and determined site requirements, it's time to o
 
 After you complete this step, you will have:
 - Zoning approval (if applicable)
-- Fire prevention and/or sign permits (if applicable)
-- Certificate of Occupancy or Approval        
+- Fire prevention and/or sign permits (required by the Deperatment of Consumer Affairs)
+- Certificate of Occupancy or Approval (required by Deperatment of Consumer Affairs)       
