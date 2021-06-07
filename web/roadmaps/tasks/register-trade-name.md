@@ -5,13 +5,13 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-If a General Partnership or Proprietorship would like to use a consumer facing business name, other than a personal name, they can register a trade name with their county clerk.
+If you would like to use a consumer facing business name, other than your personal name, you can register a trade name with their county clerk.
         
-To complete this step, you must have:
-- Desired Business Name
+To complete this task, you must have:
+- Desired trade name
 
-After you complete this step, you will have:
-- Trade Name
+After you complete this task, you will have:
+- Registered trade name
 
 ||
 |---|
