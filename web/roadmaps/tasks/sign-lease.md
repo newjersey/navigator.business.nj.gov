@@ -11,4 +11,4 @@ Now that you've completed step 3 in your roadmap, you can sign your lease under 
 3. **Tenant Improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease.
         
 After you complete this task, you will have:
-- A signed lease.
+- A signed lease
