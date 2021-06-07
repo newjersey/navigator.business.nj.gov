@@ -5,10 +5,7 @@ callToActionLink: "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Boar
 callToActionText: ""
 ---
 
-To complete your requirements as a cosmetology business, an inspector from the Division's Enforcement Bureau will visit the shop location to determine compliance with cosmetology shop regulations. This visit will be scheduled after you complete your shop's application license.
-        
-To complete this step, you must have:
-- The board will contact shop to schedule the inspection date and time.
+To complete your requirements as a cosmetology business, an inspector from the Division's Enforcement Bureau will visit the shop location to determine compliance with cosmetology shop regulations. The Board will contact your shop to schedule an inspection after your shop license is complete.
 
-After you complete this step, you will have:
+After you complete this task, you will have:
 - Satisfactory shop inspection.
