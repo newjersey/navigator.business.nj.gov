@@ -1,16 +1,11 @@
 ---
 id: "floor-plan-approval-doh"
-name: "Get your floor plan approved by your local DOH"
+name: "Get floor plan approval with the local Department of Health"
 callToActionLink: ""
 callToActionText: ""
 ---
 
-Get your floor plan and kitchen approved by your local DOH. Afterwards you will need to schedule periodic follow-ups.
+Once you have complete step 3 in your roadmap and have a site for your restaurant, create a floor plan. Contact your local Department of Health to have your floor plan and kitchen approved. You will need to schedule periodic follow-ups.
         
-To complete this step, you must have:
-- Business name
-- Floor plans
-
-||
-|---|
-| **Destination**: Local Department of Health |
+After you complete this task, you will have:
+- Approval from the local Department of Health
