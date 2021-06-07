@@ -17,4 +17,4 @@ To complete this step, you must have:
 - Certificate of Occupancy or Authority
 
 After you complete this step, you will have:
-- License
+- Shop License
