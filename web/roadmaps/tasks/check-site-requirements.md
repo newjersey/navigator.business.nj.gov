@@ -13,6 +13,6 @@ If you've decided on the your shop's location, now is a good time to check your 
 4. **Certificate of Occupancy/Approval:** If you need a construction permit for your renovation, you may need to meet with the Buildings/Construction Department to obtain a `Certificate of Occupancy or Approval|certificate-occupancy` that indicates that your space is safe for occupancy. 
        
 After you complete this task, you will know:
-- what permits your local government requires
-- what you need to do to meet those requirements 
-- how long it will take to get any permits or certificates
+- What permits your local government requires,
+- What you need to do to meet those requirements, and 
+- How long it will take to get any permits or certificates.
