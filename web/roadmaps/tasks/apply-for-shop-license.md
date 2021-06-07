@@ -1,6 +1,6 @@
 ---
 id: "apply-for-shop-license"
-name: "Apply for a Shop License"
+name: "Apply for a Shop License with the N.J. Division of Consumer Affairs"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: "Apply for Your Shop License"
 ---
