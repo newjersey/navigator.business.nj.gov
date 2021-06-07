@@ -12,7 +12,7 @@ Now that you signed your lease, and determined site requirements, it's time to o
 3. **Sign Permits:** Obtain signage approvals from your local Building Department, Department of Community Affairs, or Zoning Office.
 4. **Certificate of Occupancy/Approval:** If you've completed site renovations, it's time to obtain a `Certificate of Occupancy or Approval|certificate-occupancy` from your local Buildings/Construction Department.
 
-After you complete this step, you will have:
+After you complete this task, you will have:
 - Zoning approval (if applicable)
 - Fire prevention and/or sign permits (if applicable)
 - Certificate of Occupancy or Approval
