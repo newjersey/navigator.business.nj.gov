@@ -7,18 +7,18 @@ callToActionText: "Form Your Business"
 
 Form the legal structure that you will operate under, and register that structure and name with the state of New Jersey.
         
-To complete this step, you must have:
-- Available Business Name
-- Legal Structure
-- NAICS code (optional)
+To complete this task, you must have:
+- Available business name
+- Legal structure
+- `NAICS code|naics` (optional)
 - EIN (optional)
-- Business Description
-- Business Address (this may be a home address if you are a home-based business)
-- Registered Agent
-- Payment Credit Card or E-Check
+- Business description
+- Business address (this may be a home address if you are a home-based business)
+- `Registered agent|registered-agent`
+- Payment credit card or E-check
 
-After you complete this step, you will have:
+After you complete this task, you will have:
 - Entity ID
 - Certificate of Formation /Incorporation
-- Certified copy of Certificate of Fromation /Incorporation document (Optional with additional fee)
-- Certificate of Good Standing (Optional with additional fee) A document that verfies that you are in good standing with the Department of Revenue. It indicates that you are up to date with your coporate records. It does NOT indicate that you are in good standing with your taxes, that document is called a Tax Clearance Certificate.
+- Certified copy of Certificate of Formation /Incorporation document (Optional with additional fee)
+- `Certificate of Good Standing|good-standing` (Optional with additional fee) 
