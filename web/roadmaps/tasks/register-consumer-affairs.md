@@ -14,4 +14,4 @@ To complete this task, you must have:
 - Pay a fee of $110.00
 
 After you complete this task, you will have:
-- New Jersey Hompe Improvement Contractor number
+- New Jersey Home Improvement Contractor number
