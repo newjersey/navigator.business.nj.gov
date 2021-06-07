@@ -7,9 +7,9 @@ callToActionText: "Get Your EIN Certificate"
 
 An `Employer Identification Number|ein` is essentially your Social Security Number for your business. We recommend that most businesses obtain an EIN, so that you don't need to use your personal personal SSN on tax filings and other business registrations. If you plan on having employees you will need an EIN number.
         
-To complete this step, you must have:
-- Identified an Available Company Names
+To complete this task, you must have:
+- Identified an available business name
 
-After you complete this step, you will have:
+After you complete this task, you will have:
 - EIN
 - EIN Certificate
