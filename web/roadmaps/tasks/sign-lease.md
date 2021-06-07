@@ -15,5 +15,5 @@ Make sure your lease terms take into account:
 2. **Lease length:** `Determine your ideal lease length|lease-considerations`.
 3. **Tenant Improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease.
         
-You've completed this task when you have:
+After you complete this task, you will have:
 - A signed lease.
