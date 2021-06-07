@@ -15,4 +15,4 @@ Your `business plan|business-plan` acts as roadmap for your business and can hel
 6. **[Union County Economic Development Corporation](https://ucedc.com/)** provides free classes and paid business mentoring services.
 
 After you complete this task, you will have:
-- your business plan
+- Your business plan.
