@@ -1,6 +1,6 @@
 ---
 id: "register-consumer-affairs"
-name: "Register with the N.J. Division of Consumer Affairs"
+name: "Obtain your NJHIC number with the N.J. Division of Consumer Affairs"
 callToActionLink: "https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf"
 callToActionText: "Obtain Your NJHIC Number"
 ---
@@ -14,4 +14,4 @@ To complete this task, you must have:
 - Pay a fee of $110.00
 
 After you complete this task, you will have:
-- New Jersey Home Improvement Contractor number
+- New Jersey Home Improvement Contractor (NJHIC) number
