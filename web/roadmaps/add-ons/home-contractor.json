@@ -1,5 +1,10 @@
 [
   {
+    "step": "due-diligence",
+    "taskToReplace": "research-insurance-needs",
+    "replaceWith": "research-insurance-needs-home-contractor"
+  },
+  {
     "step": "lease-and-permits",
     "weight": 100,
     "task": "register-consumer-affairs"
