@@ -7,7 +7,7 @@
   {
     "step": "due-diligence",
     "weight": 10,
-    "task": "industry-specific-research"
+    "task": "reseller"
   },
   {
     "step": "register-business",
