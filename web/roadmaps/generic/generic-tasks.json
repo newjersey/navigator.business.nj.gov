@@ -7,7 +7,7 @@
   {
     "step": "due-diligence",
     "weight": 10,
-    "task": "research-insurance-needs"
+    "task": "industry-specific-research"
   },
   {
     "step": "register-business",
@@ -18,6 +18,11 @@
     "step": "register-business",
     "weight": 25,
     "task": "register-for-taxes"
+  },
+  {
+    "step": "lease-and-permits",
+    "weight": 10,
+    "task": "research-insurance-needs"
   },
   {
     "step": "lease-and-permits",
