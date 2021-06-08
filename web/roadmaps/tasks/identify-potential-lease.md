@@ -12,4 +12,4 @@ If you're looking for a location for your business, there are a few things to ke
 3. **Zoning:** Consult with the local government's Zoning Office to determine if the site is suitabile for your business. [Find out how zoning may impact your site selection](https://business.nj.gov/pages/choose-a-location).
 
 After you complete this task, you will have:
-- Found a viable shop location.
+- Found a viable shop location
