@@ -1,6 +1,6 @@
 ---
 id: "liquor-license-availability"
-name: "Confirm liquor license availability"
+name: "Confirm Liquor License Availability"
 callToActionLink: "${countyClerkWebsite}"
 callToActionText: "Visit County Clerk Website"
 ---
