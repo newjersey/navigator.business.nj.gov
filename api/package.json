@@ -12,7 +12,9 @@
     "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts}' --fix",
     "install-dynamo-local": "sls dynamodb install",
     "fences": "gf",
-    "db-migrate": "db-migrate"
+    "db-migrate": "db-migrate",
+    "start:wiremock": "wiremock --root-dir ./wiremock --port 9000",
+    "start:wiremock:with-port": "wiremock --root-dir ./wiremock"
   },
   "engines": {
     "node": ">=14.15.0"
@@ -24,6 +26,7 @@
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
     "aws-lambda": "^1.0.6",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "db-migrate": "^0.11.12",
@@ -72,6 +75,7 @@
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "typescript": "^4.3.2",
     "webpack": "^5.38.0",
-    "webpack-node-externals": "^2.5.2"
+    "webpack-node-externals": "^2.5.2",
+    "wiremock": "^2.28.1"
   }
 }

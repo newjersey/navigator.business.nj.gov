@@ -8,6 +8,8 @@ $lg: 64em; //desktop and up (1024px)
 @import "roadmap";
 @import "contextual-info";
 @import "left-nav";
+@import "tabs";
+@import "license-status";
 @import "njwds-overrides/vertical-step";
 @import "njwds-overrides/overrides";
 
@@ -44,7 +46,7 @@ $lg: 64em; //desktop and up (1024px)
 }
 
 .width-100 {
-  width: 100%;
+  width: 100% !important;
 }
 
 .bg-chevron {

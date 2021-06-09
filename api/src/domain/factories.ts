@@ -4,7 +4,11 @@ import {
   BusinessUser,
   Industry,
   LegalStructure,
+  LicenseEntity,
+  LicenseSearchCriteria,
+  LicenseStatusItem,
   Municipality,
+  NameAndAddress,
   OnboardingData,
   UserData,
 } from "./types";
@@ -26,6 +30,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     onboardingData: generateOnboardingData({}),
     formProgress: "UNSTARTED",
     taskProgress: {},
+    licenseSearchData: undefined,
     ...overrides,
   };
 };
@@ -48,6 +53,58 @@ export const generateMunicipality = (overrides: Partial<Municipality>): Municipa
     name: "some-name-" + randomInt(),
     county: "some-county-" + randomInt(),
     id: "some-id-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
+  return {
+    title: "some-title-" + randomInt(),
+    status: "ACTIVE",
+    ...overrides,
+  };
+};
+
+export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): NameAndAddress => {
+  return {
+    name: "some-name-" + randomInt(),
+    addressLine1: "some-address-1-" + randomInt(),
+    addressLine2: "some-address-2-" + randomInt(),
+    zipCode: "some-zipcode-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateLicenseSearchCriteria = (
+  overrides: Partial<LicenseSearchCriteria>
+): LicenseSearchCriteria => {
+  return {
+    name: "some-name-" + randomInt(),
+    addressLine1: "some-address-1-" + randomInt(),
+    addressLine2: "some-address-2-" + randomInt(),
+    zipCode: "some-zipcode-" + randomInt(),
+    licenseType: "some-license-type-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateLicenseEntity = (overrides: Partial<LicenseEntity>): LicenseEntity => {
+  return {
+    fullName: "some-name-" + randomInt(),
+    addressLine1: "some-address-" + randomInt(),
+    addressCity: "some-city-" + randomInt(),
+    addressState: "some-state-" + randomInt(),
+    addressCounty: "some-county-" + randomInt(),
+    addressZipCode: "some-zipcode-" + randomInt(),
+    professionName: "some-profession-" + randomInt(),
+    licenseType: "some-license-type" + randomInt(),
+    applicationNumber: "some-application-number-" + randomInt(),
+    licenseNumber: "some-license-number-" + randomInt(),
+    licenseStatus: "Active",
+    issueDate: "20080404 000000.000" + randomInt(),
+    expirationDate: "20091231 000000.000" + randomInt(),
+    checklistItem: "some-item-" + randomInt(),
+    checkoffStatus: "Completed",
     ...overrides,
   };
 };

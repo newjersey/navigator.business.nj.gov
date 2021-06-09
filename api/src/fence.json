@@ -13,6 +13,7 @@
     "db-migrate",
     "@middy/core",
     "@middy/http-json-body-parser",
-    "aws-lambda"
+    "aws-lambda",
+    "axios"
   ]
 }

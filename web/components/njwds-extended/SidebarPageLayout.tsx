@@ -60,7 +60,7 @@ export const SidebarPageLayout = ({ children, sidebar, backButton, pageTitle }: 
 
             <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs">
               {!isLargeScreen && <div className="padding-top-2 padding-bottom-2 usa-prose">{backButton}</div>}
-              <div className="border-1px border-base-light padding-3 usa-prose minh-40">{children}</div>
+              <div className="border-1px border-base-light usa-prose minh-40 fdc">{children}</div>
             </main>
           </div>
         </div>

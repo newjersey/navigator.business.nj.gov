@@ -3,6 +3,7 @@ export interface UserData {
   onboardingData: OnboardingData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
+  licenseSearchData: LicenseSearchData | undefined;
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
@@ -14,6 +15,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     onboardingData: createEmptyOnboardingData(),
     formProgress: "UNSTARTED",
     taskProgress: {},
+    licenseSearchData: undefined,
   };
 };
 
@@ -35,6 +37,11 @@ export interface OnboardingData {
   municipality: Municipality | undefined;
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
+}
+
+export interface LicenseSearchData {
+  nameAndAddress: NameAndAddress;
+  completedSearch: boolean;
 }
 
 export type OnboardingDisplayContent = {
@@ -230,3 +237,29 @@ export type NameAvailability = {
   status: "AVAILABLE" | "UNAVAILABLE";
   similarNames: string[];
 };
+
+export type NameAndAddress = {
+  name: string;
+  addressLine1: string;
+  addressLine2: string;
+  zipCode: string;
+};
+
+export const createEmptyNameAndAddress = (): NameAndAddress => ({
+  name: "",
+  addressLine1: "",
+  addressLine2: "",
+  zipCode: "",
+});
+
+export type LicenseStatusItem = {
+  title: string;
+  status: LicenseStatus;
+};
+
+export type LicenseStatusResult = {
+  status: LicenseStatus;
+  checklistItems: LicenseStatusItem[];
+};
+
+export type LicenseStatus = "ACTIVE" | "PENDING";

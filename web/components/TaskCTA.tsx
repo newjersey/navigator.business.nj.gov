@@ -1,31 +1,25 @@
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import React, { ReactElement } from "react";
-import { getModifiedTaskContent } from "@/lib/utils/helpers";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { Task } from "@/lib/types/types";
 
 interface Props {
-  task: Task;
+  link: string;
+  text?: string;
 }
 
 export const TaskCTA = (props: Props): ReactElement => {
-  const { roadmap } = useRoadmap();
-  const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
-  const callToActionText = getModifiedTaskContent(roadmap, props.task, "callToActionText");
-
-  if (!callToActionLink) {
+  if (!props.link) {
     return <></>;
   }
 
   return (
     <div className="fdr">
       <a
-        href={callToActionLink}
+        href={props.link}
         target="_blank"
         rel="noreferrer noopener"
         className="mla margin-top-4 margin-bottom-8"
       >
-        <button className="usa-button">{callToActionText || TaskDefaults.defaultCallToActionText}</button>
+        <button className="usa-button">{props.text || TaskDefaults.defaultCallToActionText}</button>
       </a>
     </div>
   );

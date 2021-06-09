@@ -2,7 +2,7 @@ import { fireEvent, render, RenderResult } from "@testing-library/react";
 import { useMediaQuery } from "@material-ui/core";
 import * as materialUi from "@material-ui/core";
 import TaskPage from "@/pages/tasks/[taskId]";
-import { TaskProgress } from "@/lib/types/types";
+import { Task, TaskProgress } from "@/lib/types/types";
 import { generateTask, generateUserData } from "@/test/factories";
 import { mockUpdate, useMockUserData } from "@/test/mock/mockUseUserData";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
@@ -22,6 +22,8 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const setLargeScreen = (): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => true);
 };
+
+const renderPage = (task: Task): RenderResult => render(<TaskPage task={task} />);
 
 describe("task page", () => {
   let subject: RenderResult;
@@ -47,7 +49,7 @@ describe("task page", () => {
       callToActionText: "Submit The Form Here",
     });
 
-    subject = render(<TaskPage task={task} />);
+    subject = renderPage(task);
     expect(subject.getByText("complete a tax form")).toBeInTheDocument();
     expect(subject.getByText("fill out your tax form")).toBeInTheDocument();
     expect(subject.getByText("it has to get done")).toBeInTheDocument();
@@ -63,7 +65,7 @@ describe("task page", () => {
       callToActionLink: "",
     });
 
-    subject = render(<TaskPage task={task} />);
+    subject = renderPage(task);
     expect(subject.queryByText("Submit it Here")).not.toBeInTheDocument();
   });
 
@@ -73,7 +75,7 @@ describe("task page", () => {
       callToActionLink: "www.example.com",
     });
 
-    subject = render(<TaskPage task={task} />);
+    subject = renderPage(task);
     expect(subject.getByText("Start Application")).toBeInTheDocument();
   });
 
@@ -90,7 +92,7 @@ describe("task page", () => {
       callToActionText: "a whole brand new call to action",
     });
 
-    subject = render(<TaskPage task={task} />);
+    subject = renderPage(task);
     expect(subject.queryByText("original description")).not.toBeInTheDocument();
     expect(subject.queryByText("a whole brand new description")).toBeInTheDocument();
 
@@ -100,7 +102,7 @@ describe("task page", () => {
 
   it("displays Not Started status when user data does not contain status", () => {
     useMockUserData({ taskProgress: {} });
-    subject = render(<TaskPage task={generateTask({})} />);
+    subject = renderPage(generateTask({}));
 
     expect(subject.getAllByText("Not started")[0]).toBeVisible();
   });
@@ -112,7 +114,7 @@ describe("task page", () => {
       [taskId]: "IN_PROGRESS",
     };
     useMockUserData({ taskProgress });
-    subject = render(<TaskPage task={generateTask({ id: taskId })} />);
+    subject = renderPage(generateTask({ id: taskId }));
 
     expect(subject.getAllByText("In-progress")[0]).toBeVisible();
   });
@@ -125,7 +127,7 @@ describe("task page", () => {
 
     const userData = generateUserData({ taskProgress });
     useMockUserData(userData);
-    subject = render(<TaskPage task={generateTask({ id: taskId })} />);
+    subject = renderPage(generateTask({ id: taskId }));
 
     fireEvent.click(subject.getAllByText("Not started")[0]);
     fireEvent.click(subject.getByText("In-progress"));
@@ -139,9 +141,21 @@ describe("task page", () => {
     });
   });
 
-  it("loads special content for search-available-names", () => {
-    subject = render(<TaskPage task={generateTask({ id: "search-business-name" })} />);
+  it("loads Search Business Names task screen for search-available-names", () => {
+    subject = renderPage(generateTask({ id: "search-business-name" }));
     const searchInputField = subject.getByLabelText("Search business name") as HTMLInputElement;
     expect(searchInputField).toBeInTheDocument();
+  });
+
+  it("loads License task screen for apply-for-shop-license", () => {
+    useMockUserData({ licenseSearchData: undefined });
+    subject = renderPage(generateTask({ id: "apply-for-shop-license" }));
+    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
+  it("loads License task screen for register-consumer-affairs", () => {
+    useMockUserData({ licenseSearchData: undefined });
+    subject = renderPage(generateTask({ id: "register-consumer-affairs" }));
+    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 });

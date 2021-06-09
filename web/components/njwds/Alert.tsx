@@ -6,18 +6,23 @@ interface Props {
   slim?: boolean;
   noIcon?: boolean;
   className?: string;
+  // All other props
+  [x: string]: unknown;
 }
 
 type AlertVariant = "info" | "success" | "warning" | "error";
 
 export const Alert = (props: Props): ReactElement => {
-  const variantClass = `usa-alert--${props.variant}` || "";
-  const slimClass = props.slim ? "usa-alert--slim" : "";
-  const noIconClass = props.noIcon ? "usa-alert--no-icon" : "";
+  const { variant, children, slim, noIcon, className, ...rest } = props;
+  const variantClass = `usa-alert--${variant}` || "";
+  const slimClass = slim ? "usa-alert--slim" : "";
+  const noIconClass = noIcon ? "usa-alert--no-icon" : "";
 
   return (
-    <div className={`usa-alert ${variantClass} ${slimClass} ${noIconClass} ${props.className || ""}`}>
-      <div className="usa-alert__body usa-prose">{props.children}</div>
+    <div className={`usa-alert ${variantClass} ${slimClass} ${noIconClass} ${className || ""}`} {...rest}>
+      <div className="usa-alert__body">
+        <div className="usa-alert__text">{children}</div>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { generateUser, generateUserData } from "@/test/factories";
-import { get, getUserData, postUserData } from "./apiClient";
+import { generateNameAndAddress, generateUser, generateUserData } from "@/test/factories";
+import { checkLicenseStatus, get, getUserData, postUserData } from "./apiClient";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -38,5 +38,21 @@ describe("apiClient", () => {
     expect(mockAxios.get).toHaveBeenCalledWith("/api/some/url", {
       headers: { Authorization: "Bearer some-token" },
     });
+  });
+
+  it("posts license status by looking up license type for industry", async () => {
+    mockAxios.post.mockResolvedValue({ data: {} });
+    const nameAndAddress = generateNameAndAddress({});
+    await checkLicenseStatus(nameAndAddress, "home-contractor");
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/license-status",
+      {
+        ...nameAndAddress,
+        licenseType: "Home Improvement Contractors",
+      },
+      {
+        headers: { Authorization: "Bearer some-token" },
+      }
+    );
   });
 });

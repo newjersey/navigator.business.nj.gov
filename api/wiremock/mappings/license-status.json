@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/ws/getLicenseStatus"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "license-status-response.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

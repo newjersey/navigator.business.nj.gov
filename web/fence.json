@@ -23,6 +23,7 @@
     "remark",
     "remark-html",
     "remark-react",
-    "focus-trap-react"
+    "focus-trap-react",
+    "react-tabs"
   ]
 }

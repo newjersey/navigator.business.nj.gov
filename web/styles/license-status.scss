@@ -1,0 +1,33 @@
+.gradient-blue {
+  background: linear-gradient(180deg, #fff 0%, #e7f6f8 50%, #b9d4dd 100%);
+}
+
+.gradient-green {
+  background: linear-gradient(180deg, #fff 0%, #e7f8e9 50%, #b9ddbb 100%);
+}
+
+.receipt-box {
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0px 24px 16px rgba(0, 0, 0, 0.1);
+
+  @media all and (min-width: $sm) {
+    width: 450px;
+  }
+}
+
+.bg-info-lighter {
+  background-color: #e7f6f8;
+}
+
+.bg-success-lighter {
+  background-color: #ecf3ec;
+}
+
+.text-success {
+  color: #00a91c;
+}
+
+.border-success {
+  border-color: #00a91c !important;
+}

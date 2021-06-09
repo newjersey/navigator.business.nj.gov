@@ -2,8 +2,11 @@ import {
   BusinessUser,
   Industry,
   LegalStructure,
+  LicenseStatusItem,
+  LicenseStatusResult,
   Municipality,
   MunicipalityDetail,
+  NameAndAddress,
   NameAvailability,
   OnboardingData,
   Roadmap,
@@ -31,6 +34,10 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     onboardingData: generateOnboardingData({}),
     formProgress: "UNSTARTED",
     taskProgress: {},
+    licenseSearchData: {
+      completedSearch: false,
+      nameAndAddress: generateNameAndAddress({}),
+    },
     ...overrides,
   };
 };
@@ -107,6 +114,32 @@ export const generateNameAvailability = (overrides: Partial<NameAvailability>): 
   return {
     status: "UNAVAILABLE",
     similarNames: ["some-name-" + randomInt()],
+    ...overrides,
+  };
+};
+
+export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): NameAndAddress => {
+  return {
+    name: "some-name-" + randomInt(),
+    addressLine1: "some-address-1-" + randomInt(),
+    addressLine2: "some-address-2-" + randomInt(),
+    zipCode: "some-zipcode-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
+  return {
+    title: "some-title-" + randomInt(),
+    status: "ACTIVE",
+    ...overrides,
+  };
+};
+
+export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResult>): LicenseStatusResult => {
+  return {
+    status: "PENDING",
+    checklistItems: [generateLicenseStatusItem({})],
     ...overrides,
   };
 };

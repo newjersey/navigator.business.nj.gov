@@ -12,6 +12,7 @@ const dbPassword = process.env.DB_PASSWORD || "";
 const dbHost = process.env.DB_HOST || "";
 const dbName = process.env.DB_NAME || "";
 const cognitoArn = process.env.COGNITO_ARN || "";
+const useFakeLicenseClient = process.env.USE_FAKE_LICENSE_CLIENT || "";
 const dbPort = "5432";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
@@ -75,6 +76,7 @@ const serverlessConfiguration: AWS = {
       DB_PASSWORD: dbPassword,
       DB_NAME: dbName,
       DB_HOST: dbHost,
+      USE_FAKE_LICENSE_CLIENT: useFakeLicenseClient,
     },
     lambdaHashingVersion: "20201221",
   },

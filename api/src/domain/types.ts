@@ -10,7 +10,62 @@ export interface BusinessNameRepo {
   deleteAll: () => Promise<void>;
 }
 
+export interface LicenseStatusClient {
+  search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
+}
+
 export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
+export type SearchLicenseStatus = (nameAndAddress: LicenseSearchCriteria) => Promise<LicenseStatusResult>;
+
+export type NameAndAddress = {
+  name: string;
+  addressLine1: string;
+  addressLine2: string;
+  zipCode: string;
+};
+
+export interface LicenseSearchData {
+  nameAndAddress: NameAndAddress;
+  completedSearch: boolean;
+}
+
+export type LicenseSearchCriteria = {
+  name: string;
+  addressLine1: string;
+  addressLine2: string;
+  zipCode: string;
+  licenseType: string;
+};
+
+export type LicenseStatusResult = {
+  status: LicenseStatus;
+  checklistItems: LicenseStatusItem[];
+};
+
+export type LicenseStatusItem = {
+  title: string;
+  status: LicenseStatus;
+};
+
+export type LicenseEntity = {
+  fullName: string;
+  addressLine1: string;
+  addressCity: string;
+  addressState: string;
+  addressCounty: string;
+  addressZipCode: string;
+  professionName: string;
+  licenseType: string;
+  applicationNumber: string;
+  licenseNumber: string;
+  licenseStatus: "Active" | "Pending" | "Expired";
+  issueDate: string;
+  expirationDate: string;
+  checklistItem: string;
+  checkoffStatus: "Completed" | "Unchecked" | "Not Applicable";
+};
+
+export type LicenseStatus = "ACTIVE" | "PENDING";
 
 export type NameAvailability = {
   status: "AVAILABLE" | "UNAVAILABLE";
@@ -24,6 +79,7 @@ export interface UserData {
   onboardingData: OnboardingData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
+  licenseSearchData: LicenseSearchData | undefined;
 }
 
 export interface OnboardingData {
