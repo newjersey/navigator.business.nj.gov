@@ -1,5 +1,5 @@
 ---
-id: "research-insurance-needs"
+id: "reseller"
 name: "Decide if You Will be a Reseller"
 callToActionLink: ""
 callToActionText: ""

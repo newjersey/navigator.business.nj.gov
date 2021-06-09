@@ -1,8 +1,8 @@
 [
   {
     "step": "due-diligence",
-    "taskToReplace": "research-insurance-needs",
-    "replaceWith": "research-insurance-needs-home-contractor"
+    "weight": 100,
+    "task": "research-insurance-needs-home-contractor"
   },
   {
     "step": "lease-and-permits",

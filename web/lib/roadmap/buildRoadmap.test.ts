@@ -38,7 +38,8 @@ describe("buildRoadmap", () => {
     expect(dueDiligenceTasks).toEqual([
       "identify-potential-lease", // weight: 1
       "check-site-requirements", // weight: 2
-      "research-insurance-needs", // weight: 10
+      "reseller", // weight: 10
+      "research-insurance-needs-home-contractor", // weight: 10
     ]);
   });
 
@@ -92,7 +93,7 @@ describe("buildRoadmap", () => {
 
     it("modifies the text for insurance needs", () => {
       const insuranceNeedsTask = getTaskById(roadmap, "research-insurance-needs");
-      expect(insuranceNeedsTask.contentMd).toContain("Commercial");
+      expect(insuranceNeedsTask.contentMd).toContain("contractor");
     });
   });
 
