@@ -20,5 +20,5 @@ To complete this task, you must have:
 After you complete this task, you will have:
 - Entity ID
 - Certificate of Formation /Incorporation
-- Certified copy of Certificate of Formation /Incorporation document (Optional with additional fee)
-- `Certificate of Good Standing|good-standing` (Optional with additional fee) 
+- Certified copy of Certificate of Formation /Incorporation document (optional with additional fee)
+- `Certificate of Good Standing|good-standing` (optional with additional fee) 
