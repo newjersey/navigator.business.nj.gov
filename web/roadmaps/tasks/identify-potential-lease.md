@@ -5,7 +5,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-If you're looking for a location for your business, there are a few things to keep in mind as you're looking for that perfect space:
+If you're looking for a location for your business, there are a few things to keep in mind as you decide on that perfect space:
 
 1. **Demographics Considerations:** Research where to locate your businesses to most effectively reach and serve your target customer base. [Find tools to help you with your research](https://business.nj.gov/pages/additional-site-selection-research).
 2. **Tenant Improvements:** Identify any repairs, renovations, or construction the site may need, make sure to consider federal requirements for `ADA compliance|ada`. [Learn more about what to consider when selecting a site](https://business.nj.gov/pages/additional-site-selection-research).
