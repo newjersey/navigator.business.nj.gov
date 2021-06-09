@@ -1,6 +1,6 @@
 ---
 id: "certificate-of-occupancy"
-name: "Verify Site Safe for Occupancy"
+name: "Verify Site is Safe for Occupancy"
 callToActionLink: ""
 callToActionText: ""
 ---
