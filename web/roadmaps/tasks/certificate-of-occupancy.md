@@ -11,5 +11,5 @@ Now that you signed your lease, and finished site approvals, it's time to have y
 2. **Certificate of Occupancy/Approval:** If you've completed site renovations, it's time to obtain a `Certificate of Occupancy or Approval|certificate-occupancy` from your local Buildings/Construction Department.
 
 After you complete this task, you will have:
-- Fire prevention and/or sign permits (if applicable)
+- Fire prevention
 - Certificate of Occupancy or Approval
