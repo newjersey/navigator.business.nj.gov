@@ -94,7 +94,7 @@ jobs:
           PGPASSWORD: postgres
 
       - name: 🔧 Build project for e2e tests
-        run: npm --prefix=api run install-dynamo-local && npm --prefix=api start & npm --prefix=web run build --if-present
+        run: npm --prefix=api run install-dynamo-local && npm --prefix=api start & npm --prefix=api start:wiremock & npm --prefix=web run build --if-present
         env:
           API_BASE_URL: http://localhost:5000/dev
           DB_NAME: businessci
