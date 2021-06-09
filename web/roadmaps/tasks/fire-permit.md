@@ -1,6 +1,6 @@
 ---
 id: "fire-permit"
-name: "Validate Site is Safe"
+name: "Verify Site Safe for Occupancy"
 callToActionLink: ""
 callToActionText: ""
 ---
