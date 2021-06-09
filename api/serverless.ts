@@ -17,6 +17,14 @@ const dbPort = "5432";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 const databaseUrl = `postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
+const securityGroupId = process.env.VPC_SECURITY_GROUP_ID || "";
+const subnetId1 = process.env.VPC_SUBNET_ID_1 || "";
+const subnetId2 = process.env.VPC_SUBNET_ID_2 || "";
+
+const vpcConfig = {
+  securityGroupIds: [securityGroupId],
+  subnetIds: [subnetId1, subnetId2],
+};
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -86,8 +94,8 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: "20201221",
   },
   functions: {
-    express: express(cognitoArn),
-    migrate: migrate(databaseUrl),
+    express: express(cognitoArn, vpcConfig),
+    migrate: migrate(databaseUrl, vpcConfig),
   },
   resources: {
     Resources: {

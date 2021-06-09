@@ -1,7 +1,7 @@
 import { handlerPath } from "@libs/handlerResolver";
 import { FnType } from "@functions/index";
 
-export default (cognitoArn: string): FnType => ({
+export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
   handler: `${handlerPath(__dirname)}/app.handler`,
   events: [
     {
@@ -15,4 +15,5 @@ export default (cognitoArn: string): FnType => ({
       },
     },
   ],
+  vpc: vpcConfig,
 });
