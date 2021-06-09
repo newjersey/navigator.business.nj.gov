@@ -237,10 +237,10 @@ jobs:
         run: npm --prefix=api install
 
       - name: 🚀 Deploy api with serverless
-        run: serverless deploy --verbose --stage dev --region us-east-1
+        run: serverless deploy --verbose --stage develop --region us-east-1
         working-directory: ./api
         env:
-          STAGE: dev
+          STAGE: develop
           DB_USER: ${{ secrets.DB_USER_DEVELOP }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD_DEVELOP }}
           DB_NAME: ${{ secrets.DB_NAME_DEVELOP }}
