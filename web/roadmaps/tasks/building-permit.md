@@ -1,21 +1,17 @@
 ---
 id: "building-permit"
-name: "Obtain Building Permit"
+name: "Obtain Permit for Construction or Change of Use"
 callToActionLink: ""
 callToActionText: ""
 ---
 
-To do any construction and most renovations, you'll need to file for a building permit with your local construction office.
+Now that you signed your lease and determined site requirements, it's time to obtain permits that allow you to change the use of your site, or do renovations. Not all businesses may need to complete these tasks, but if you're making changes to the use and layout of the site, your local government may require one if not all of the following:
+      
+1. **Zoning Permits/Approval:** If you changed the use of your site, make sure to obtain approval from your local Zoning Office.
+2. **Sign Permits:** Obtain signage approvals from your local Building Department, Department of Community Affairs, or Zoning Office.
+3. **Construction Permits:** Get a building/construction permit with your local government's Building Department before starting any renovations. If you haven't already, [find out if you need a construction permit](https://business.nj.gov/pages/building-permits-and-inspections).
 
-3. **Construction Permits:** Check if you need a building/construction permit with your local government's Building Department before starting any renovations. [Find out if you need a construction permit](https://business.nj.gov/pages/building-permits-and-inspections).
-
-To complete this step, you must have:
-- Business name
-- Architectural Plans (if applicable)
-
-After you complete this step, you will have:
-- Building Permit
-
-||
-|---|
-| **Destination**: Form Available from DCA, submitted to Local Construction Office |
+After you complete this task, you will have:
+- Zoning approval (if applicable)
+- Consutrction permits (if applicable)
+- Sign permits (if applicable)
