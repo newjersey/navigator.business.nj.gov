@@ -15,6 +15,5 @@ To complete this task, you must have:
 - Estimated start date
 
 After you complete this task, you will have:
-- Certificate of Formation
 - NJ Tax ID
 - Authorization to Collect Sales Tax
