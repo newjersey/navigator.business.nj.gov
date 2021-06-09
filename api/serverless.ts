@@ -62,6 +62,11 @@ const serverlessConfiguration: AWS = {
             ],
             Resource: `arn:aws:dynamodb:${region}:*:table/${usersTable}`,
           },
+          {
+            Effect: "Allow",
+            Action: ["s3:GetObject"],
+            Resource: "arn:aws:s3:::*/*",
+          },
         ],
       },
     },
