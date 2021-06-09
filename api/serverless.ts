@@ -21,10 +21,13 @@ const securityGroupId = process.env.VPC_SECURITY_GROUP_ID || "";
 const subnetId1 = process.env.VPC_SUBNET_ID_1 || "";
 const subnetId2 = process.env.VPC_SUBNET_ID_2 || "";
 
-const vpcConfig = {
-  securityGroupIds: [securityGroupId],
-  subnetIds: [subnetId1, subnetId2],
-};
+let vpcConfig = undefined;
+if (securityGroupId && subnetId1 && subnetId2) {
+  vpcConfig = {
+    securityGroupIds: [securityGroupId],
+    subnetIds: [subnetId1, subnetId2],
+  };
+}
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
