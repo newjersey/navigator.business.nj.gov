@@ -200,7 +200,7 @@ jobs:
 
   deploy-staging:
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: deploy-dev
     environment:
       name: staging
     steps:
