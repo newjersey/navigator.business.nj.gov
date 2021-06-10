@@ -150,77 +150,6 @@ jobs:
           amplify_env: dev
           amplify_cli_version: "4.41.2"
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
-
-      - name: 🧰 Install Serverless Framework
-        run: npm install -g serverless
-
-      - name: 🔧 Serverless Authentication
-        run: sls config credentials --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY}}
-
-      - name: 🧰 Install web dependencies
-        run: npm --prefix=web install
-      - name: 🧰 Install api dependencies
-        run: npm --prefix=api install
-
-      - name: 🚀 Deploy api with serverless
-        run: serverless deploy --verbose --stage dev --region us-east-1
-        working-directory: ./api
-        env:
-          STAGE: dev
-          DB_USER: ${{ secrets.DB_USER_DEV }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD_DEV }}
-          DB_NAME: ${{ secrets.DB_NAME_DEV }}
-          DB_HOST: ${{ secrets.DB_HOST_DEV }}
-          DB_ENV: aws-dev
-          COGNITO_ARN: ${{ secrets.COGNITO_ARN_DEV }}
-          USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
-
-      - name: 🦋 run database migrations
-        run: serverless invoke -f migrate --stage dev --region us-east-1
-        working-directory: ./api
-
-      - name: 🚀 Deploy web to AWS Amplify
-        uses: ambientlight/amplify-cli-action@0.2.1
-        with:
-          amplify_command: publish
-          amplify_env: dev
-          amplify_cli_version: "4.41.2"
-        env:
-          API_BASE_URL: ${{ secrets.API_BASE_URL_AWS_DEV }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
-
-  deploy-innov-develop:
-    runs-on: ubuntu-latest
-    needs: build-and-test
-    environment:
-      name: develop
-    steps:
-      - name: 📦 Download source package
-        uses: actions/download-artifact@v2
-        with:
-          name: source-${{ github.sha }}
-          path: ${{ github.workspace }}
-
-      - name: 📦 Untar source package
-        run: tar -xvf source-${{ github.sha }}.tar
-
-      - name: 🔧 Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - name: 🔧 Configure Amplify
-        uses: ambientlight/amplify-cli-action@0.2.1
-        with:
-          amplify_command: configure
-          amplify_env: develop
-          amplify_cli_version: "4.41.2"
-        env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
@@ -241,15 +170,16 @@ jobs:
         working-directory: ./api
         env:
           STAGE: develop
-          DB_USER: ${{ secrets.DB_USER_DEVELOP }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD_DEVELOP }}
-          DB_NAME: ${{ secrets.DB_NAME_DEVELOP }}
-          DB_HOST: ${{ secrets.DB_HOST_DEVELOP }}
+          DB_USER: ${{ secrets.DB_USER_DEV }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD_DEV }}
+          DB_NAME: ${{ secrets.DB_NAME_DEV }}
+          DB_HOST: ${{ secrets.DB_HOST_DEV }}
           DB_ENV: aws-dev
-          COGNITO_ARN: ${{ secrets.COGNITO_ARN_DEVELOP }}
+          COGNITO_ARN: ${{ secrets.COGNITO_ARN_DEV }}
           VPC_SECURITY_GROUP_ID: ${{ secrets.VPC_SECURITY_GROUP_ID }}
           VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1 }}
           VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2 }}
+          USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
 
       - name: 🦋 run database migrations
         run: serverless invoke -f migrate --stage develop --region us-east-1
@@ -259,80 +189,10 @@ jobs:
         uses: ambientlight/amplify-cli-action@0.2.1
         with:
           amplify_command: publish
-          amplify_env: develop
+          amplify_env: dev
           amplify_cli_version: "4.41.2"
         env:
-          API_BASE_URL: ${{ secrets.API_BASE_URL_AWS_DEVELOP }}
+          API_BASE_URL: ${{ secrets.API_BASE_URL_AWS_DEV }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
-          AWS_REGION: us-east-1
-
-  deploy-staging:
-    runs-on: ubuntu-latest
-    needs: deploy-dev
-    environment:
-      name: staging
-    steps:
-      - name: 📦 Download source package
-        uses: actions/download-artifact@v2
-        with:
-          name: source-${{ github.sha }}
-          path: ${{ github.workspace }}
-
-      - name: 📦 Untar source package
-        run: tar -xvf source-${{ github.sha }}.tar
-
-      - name: 🔧 Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - name: 🔧 Configure Amplify
-        uses: ambientlight/amplify-cli-action@0.2.1
-        with:
-          amplify_command: configure
-          amplify_env: staging
-          amplify_cli_version: "4.41.2"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
-
-      - name: 🧰 Install Serverless Framework
-        run: npm install -g serverless
-
-      - name: 🔧 Serverless Authentication
-        run: sls config credentials --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY}}
-
-      - name: 🧰 Install web dependencies
-        run: npm --prefix=web install
-      - name: 🧰 Install api dependencies
-        run: npm --prefix=api install
-
-      - name: 🚀 Deploy api with serverless
-        run: serverless deploy --verbose --stage staging --region us-east-1
-        working-directory: ./api
-        env:
-          STAGE: staging
-          DB_USER: ${{ secrets.DB_USER_STAGING }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD_STAGING }}
-          DB_NAME: ${{ secrets.DB_NAME_STAGING }}
-          DB_HOST: ${{ secrets.DB_HOST_STAGING }}
-          DB_ENV: aws-staging
-          COGNITO_ARN: ${{ secrets.COGNITO_ARN_STAGING }}
-
-      - name: 🦋 run database migrations
-        run: serverless invoke -f migrate --stage staging --region us-east-1
-        working-directory: ./api
-
-      - name: 🚀 Deploy web to AWS Amplify
-        uses: ambientlight/amplify-cli-action@0.2.1
-        with:
-          amplify_command: publish
-          amplify_env: staging
-          amplify_cli_version: "4.41.2"
-        env:
-          API_BASE_URL: ${{ secrets.API_BASE_URL_AWS_STAGING }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1

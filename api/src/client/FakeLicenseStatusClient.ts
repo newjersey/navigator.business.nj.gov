@@ -6,7 +6,7 @@ export const FakeLicenseStatusClient = (): LicenseStatusClient => {
     const S3 = new AWS.S3();
     try {
       const data = await S3.getObject({
-        Bucket: "data-fixtures",
+        Bucket: "data-fixture",
         Key: "license-status-response.json",
       }).promise();
       0;
