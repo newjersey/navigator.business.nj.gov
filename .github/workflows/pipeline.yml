@@ -30,7 +30,7 @@ jobs:
       - name: 📦 Tar files
         run: tar -cvf source-${{ github.sha }}.tar .
 
-      - name: 📬 Caching
+      - name: 📬 Caching`
         uses: actions/cache@v2
         with:
           path: |
@@ -47,7 +47,7 @@ jobs:
         uses: ambientlight/amplify-cli-action@0.2.1
         with:
           amplify_command: configure
-          amplify_env: develop
+          amplify_env: dev
           amplify_cli_version: "4.41.2"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
