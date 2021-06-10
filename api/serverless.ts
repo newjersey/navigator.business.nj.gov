@@ -20,6 +20,7 @@ const databaseUrl = `postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${db
 const securityGroupId = process.env.VPC_SECURITY_GROUP_ID || "";
 const subnetId1 = process.env.VPC_SUBNET_ID_1 || "";
 const subnetId2 = process.env.VPC_SUBNET_ID_2 || "";
+const vpcId = process.env.VPC_ID || "";
 
 let vpcConfig = undefined;
 if (securityGroupId && subnetId1 && subnetId2) {
@@ -122,6 +123,22 @@ const serverlessConfiguration: AWS = {
             WriteCapacityUnits: 1,
           },
           TableName: usersTable,
+        },
+      },
+      VPCEndpointForDynamo: {
+        Type: "AWS::EC2::VPCEndpoint",
+        Properties: {
+          ServiceName: `com.amazonaws.${region}.dynamodb`,
+          VpcEndpointType: "Gateway",
+          VpcId: vpcId,
+        },
+      },
+      VPCEndpointForS3: {
+        Type: "AWS::EC2::VPCEndpoint",
+        Properties: {
+          ServiceName: `com.amazonaws.${region}.s3`,
+          VpcEndpointType: "Gateway",
+          VpcId: vpcId,
         },
       },
     },

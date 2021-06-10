@@ -9,7 +9,6 @@ export const FakeLicenseStatusClient = (): LicenseStatusClient => {
         Bucket: "data-fixture",
         Key: "license-status-response.json",
       }).promise();
-      0;
       if (!data.Body) {
         return Promise.reject();
       }
