@@ -49,6 +49,10 @@ $lg: 64em; //desktop and up (1024px)
   width: 100% !important;
 }
 
+.width-auto {
+  width: auto !important;
+}
+
 .bg-chevron {
   @media all and (min-width: $sm) {
     background-image: linear-gradient(-45deg, white 20px, transparent 20px),

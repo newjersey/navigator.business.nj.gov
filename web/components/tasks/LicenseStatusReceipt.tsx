@@ -88,7 +88,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
       <p className="margin-x-3 margin-bottom-3">{LicenseScreenDefaults.foundText}</p>
 
       <div className={`${theme.gradient} fg1 fdr fjc`}>
-        <div className="receipt-box">
+        <div className="receipt-box padding-bottom-10">
           <div
             className={`${theme.bgColor} ${theme.borderColor} padding-3 border-top-2px font-body-md text-bold fdr fac`}
             data-testid={`permit-${props.status}`}
@@ -103,7 +103,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
               <button
                 data-testid="edit-button"
                 onClick={props.onEdit}
-                className="usa-button usa-button--unstyled mla font-body-2xs underline"
+                className="usa-button usa-button--unstyled mla font-body-2xs underline width-auto"
               >
                 {LicenseScreenDefaults.editButtonText}
               </button>
