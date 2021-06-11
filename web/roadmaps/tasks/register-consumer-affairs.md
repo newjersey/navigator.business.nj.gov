@@ -1,6 +1,6 @@
 ---
 id: "register-consumer-affairs"
-name: "Obtain your NJHIC number with the N.J. Division of Consumer Affairs"
+name: "Obtain Your NJHIC Number with the N.J. Division of Consumer Affairs"
 callToActionLink: "https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf"
 callToActionText: "Obtain Your NJHIC Number"
 ---
