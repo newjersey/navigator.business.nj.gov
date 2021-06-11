@@ -1,6 +1,6 @@
 ---
 id: "reseller"
-name: "Decide if You Will be a Reseller"
+name: "Decide If You Will Be a Reseller"
 callToActionLink: ""
 callToActionText: ""
 ---
