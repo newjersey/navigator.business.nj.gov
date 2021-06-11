@@ -14,4 +14,4 @@ Now that you signed your lease and determined site requirements, it's time to ob
 After you complete this task, you will have:
 - Zoning approval
 - Sign permits
-- - Consutrction permits/site build out
+- Consutrction permits/site build out
