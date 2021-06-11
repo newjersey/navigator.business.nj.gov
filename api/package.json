@@ -14,7 +14,9 @@
     "fences": "gf",
     "db-migrate": "db-migrate",
     "start:wiremock": "wiremock --root-dir ./wiremock --port 9000",
-    "start:wiremock:with-port": "wiremock --root-dir ./wiremock"
+    "start:wiremock:with-port": "wiremock --root-dir ./wiremock",
+    "sls": "serverless",
+    "serverless": "serverless"
   },
   "engines": {
     "node": ">=14.15.0"
