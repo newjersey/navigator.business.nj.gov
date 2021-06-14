@@ -2,7 +2,7 @@
 id: "alternate-name"
 name: "Register Your Alternate Name"
 callToActionLink: "https://www.nj.gov/treasury/revenue/altname.shtml"
-callToActionText: "Apply for Your Alternate Name"
+callToActionText: "Apply for My Alternate Name"
 ---
 
 You may decide to get an alternate business name(s). Some businesses do this if they want to have different business names under the same legal structure. If you decide to have an alternate name, it must be registered with the New Jersey Division of Revenue.
