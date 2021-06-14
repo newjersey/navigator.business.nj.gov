@@ -1,8 +1,8 @@
 ---
 id: "register-consumer-affairs"
-name: "Obtain Your NJHIC Number with the N.J. Division of Consumer Affairs"
+name: "Obtain Your License Number"
 callToActionLink: "https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf"
-callToActionText: "Obtain Your NJHIC Number"
+callToActionText: "Obtain Your Contractor Number"
 ---
 
 All home improvement contractors, whether operating as an individual or as a corporate entity must register with the New Jersey Division of Consumer Affairs. By registering you are also committing to follow regulations and guidelines set out in the [Contractor's Registration Act](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf). 
@@ -14,4 +14,4 @@ To complete this task, you must have:
 - Pay a fee of $110.00
 
 After you complete this task, you will have:
-- New Jersey Home Improvement Contractor (NJHIC) number
+- A New Jersey Home Improvement Contractor (NJHIC) number
