@@ -5,13 +5,13 @@ callToActionLink: "https://www.njportal.com/DOR/BusinessFormation/CompanyInforma
 callToActionText: "Form Your Business"
 ---
 
-Form the legal structure that you will operate under, and register that structure and name with the state of New Jersey.
+Form the `legal structure|legal-structure-learn-more` that you will operate under, and register that structure and name with the state of New Jersey.
         
 To complete this task, you must have:
 - Available business name
 - Legal structure
 - `NAICS code|naics` (optional)
-- EIN (optional)
+- `EIN|ein` (optional)
 - Business description
 - Business address (this may be a home address if you are a home-based business)
 - `Registered agent|registered-agent`
