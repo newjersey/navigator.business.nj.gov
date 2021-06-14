@@ -2,7 +2,7 @@
 id: "register-for-taxes"
 name: "Register for Taxes with the N.J. Division of Revenue"
 callToActionLink: "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml"
-callToActionText: "Register Your Business for Taxes"
+callToActionText: "Register My Business for Taxes"
 ---
 
 It's time to register your business for State taxes. Doing so will tell the State more about your business and determine what taxes you're liable for.
@@ -10,7 +10,7 @@ It's time to register your business for State taxes. Doing so will tell the Stat
 To complete this task, you must have:
 - Entity ID (not required for general partnership or sole proprietorship)
 - `NAICS code|naics`
-- EIN
+- `EIN|ein`
 - Estimated number of employees
 - Estimated start date
 
