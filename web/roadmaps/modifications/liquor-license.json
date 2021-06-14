@@ -1,0 +1,7 @@
+[
+  {
+    "step": "inspection-requirements",
+    "taskToReplace": "check-local-requirements",
+    "replaceWith": "check-local-requirements-liquor"
+  }
+]

@@ -3,10 +3,5 @@
     "step": "due-diligence",
     "weight": 100,
     "task": "liquor-license-availability"
-  },
-  {
-    "step": "lease-and-permits",
-    "weight": 100,
-    "task": "liquor-license-obtain"
   }
 ]

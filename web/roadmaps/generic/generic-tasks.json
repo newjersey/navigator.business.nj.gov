@@ -23,10 +23,5 @@
     "step": "lease-and-permits",
     "weight": 10,
     "task": "research-insurance-needs"
-  },
-  {
-    "step": "lease-and-permits",
-    "weight": 2,
-    "task": "check-local-requirements"
   }
 ]

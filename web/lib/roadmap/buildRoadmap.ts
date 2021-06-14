@@ -47,12 +47,13 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
 
   roadmapBuilder = addTasksFromAddOn(roadmapBuilder, genericTaskAddOns);
 
-  if (onboardingData.liquorLicense) {
-    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/liquor-license"));
-  }
-
   if (!onboardingData.homeBasedBusiness) {
     roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/physical-location"));
+  }
+
+  if (onboardingData.liquorLicense) {
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/liquor-license"));
+    roadmapBuilder = modifyTasks(roadmapBuilder, await importModification("liquor-license"));
   }
 
   if (onboardingData.industry === "restaurant") {

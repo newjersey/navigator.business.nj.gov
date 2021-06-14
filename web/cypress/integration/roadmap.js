@@ -22,6 +22,7 @@ describe("Roadmap", () => {
     cy.get('[data-value="general-partnership"]').click();
     clickNext();
 
+    cy.get('input[type="radio"][value="false"]').check();
     cy.get('[aria-label="Location"]').click();
     cy.contains("Absecon").click();
     clickNext();
@@ -53,7 +54,7 @@ describe("Roadmap", () => {
     cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
-    cy.get('[data-step="lease-and-permits"]').click();
+    cy.get('[data-step="inspection-requirements"]').click();
     cy.get('[data-task="check-local-requirements"]').click();
     cy.get('[data-task-id="register-trade-name"]').should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");

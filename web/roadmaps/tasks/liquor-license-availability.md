@@ -9,4 +9,4 @@ Once you've found a site for your business, contact your local Clerk's office to
 
 After you complete this task, you will have:
 - met all requirements in the ABC Handbook
-- learned about the availablity, cost, and timeline required to obtain a liquor license
+- learned about the availability, cost, and timeline required to obtain a liquor license

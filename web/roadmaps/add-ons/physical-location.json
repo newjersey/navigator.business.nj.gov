@@ -15,8 +15,23 @@
     "task": "sign-lease"
   },
   {
-    "step": "lease-and-permits",
+    "step": "inspection-requirements",
     "weight": 4,
     "task": "certificate-of-occupancy"
+  },
+  {
+    "step": "inspection-requirements",
+    "weight": 2,
+    "task": "check-local-requirements"
+  },
+  {
+    "step": "lease-and-permits",
+    "weight": 2,
+    "task": "building-permit"
+  },
+  {
+    "step": "lease-and-permits",
+    "weight": 2,
+    "task": "zoning"
   }
 ]

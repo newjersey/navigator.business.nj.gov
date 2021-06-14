@@ -1,5 +1,5 @@
 ---
-id: "fire-permit"
+id: "certificate-of-occupancy"
 name: "Obtain Certificate of Occupancy"
 callToActionLink: ""
 callToActionText: ""

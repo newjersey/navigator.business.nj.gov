@@ -5,7 +5,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-While not all restaurants are required to do so, many restaurants serving raw food and other delicate items must complete a food safety training. Your local govenrment may require you to have a Food Safety Manager Certifiaction training. There are several organizaitons that offer [resources and training programs to help you get your certification.](https://www.state.nj.us/health/ceohs/documents/food-drug-safety/fmc_reminder_letter.pdf)
+While not all restaurants are required to do so, many restaurants serving raw food and other delicate items must complete a food safety training. Your local government may require you to have a Food Safety Manager Certification training. There are several organizations that offer [resources and training programs to help you get your certification.](https://www.state.nj.us/health/ceohs/documents/food-drug-safety/fmc_reminder_letter.pdf)
         
 After you complete this task, you will have:
 - A Certificate of Completion

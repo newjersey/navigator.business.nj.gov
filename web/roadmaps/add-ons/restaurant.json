@@ -1,11 +1,11 @@
 [
   {
-    "step": "lease-and-permits",
+    "step": "inspection-requirements",
     "weight": 100,
     "task": "floor-plan-approval-doh"
   },
   {
-    "step": "lease-and-permits",
+    "step": "inspection-requirements",
     "weight": 100,
     "task": "food-safety-course"
   }

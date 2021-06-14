@@ -3,5 +3,10 @@
     "step": "due-diligence",
     "taskToReplace": "check-site-requirements",
     "replaceWith": "check-site-requirements-cosmetology"
+  },
+  {
+    "step": "inspection-requirements",
+    "taskToReplace": "certificate-of-occupancy",
+    "replaceWith": "certificate-of-occupancy-cosmetology"
   }
 ]

@@ -5,12 +5,12 @@
     "task": "check-site-suitability"
   },
   {
-    "step": "lease-and-permits",
+    "step": "inspection-requirements",
     "weight": 8,
     "task": "apply-for-shop-license"
   },
   {
-    "step": "lease-and-permits",
+    "step": "inspection-requirements",
     "weight": 8,
     "task": "individual-staff-licenses"
   },
