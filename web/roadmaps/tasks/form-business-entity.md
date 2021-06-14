@@ -2,7 +2,7 @@
 id: "form-business-entity"
 name: "Form Your Business Entity"
 callToActionLink: "https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName"
-callToActionText: "Form Your Business"
+callToActionText: "Form My Business"
 ---
 
 Form the `legal structure|legal-structure-learn-more` that you will operate under, and register that structure and name with the state of New Jersey.
