@@ -2,7 +2,7 @@
 id: "register-consumer-affairs"
 name: "Obtain Your License Number"
 callToActionLink: "https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf"
-callToActionText: "Obtain Your Contractor Number"
+callToActionText: "Obtain My Contractor Number"
 ---
 
 All home improvement contractors, whether operating as an individual or as a corporate entity must register with the New Jersey Division of Consumer Affairs. By registering you are also committing to follow regulations and guidelines set out in the [Contractor's Registration Act](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf). 
