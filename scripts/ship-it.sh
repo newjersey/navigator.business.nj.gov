@@ -33,4 +33,4 @@ npm --prefix=web run fences
 npm --prefix=api run fences
 
 # run tests, feature tests, and push
-npm --prefix=web run lint && npm --prefix=web run lint && ./scripts/test.sh && ./scripts/feature-tests.sh && git push && print_success
+npm --prefix=web run lint && npm --prefix=api run lint && ./scripts/test.sh && ./scripts/feature-tests.sh && git push && print_success
