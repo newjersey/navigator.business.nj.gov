@@ -26,7 +26,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
   const [showErrorAlert, setShowErrorAlert] = useState<ErrorAlertType>("NONE");
   const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
-  const { userData, update } = useUserData();
+  const { userData } = useUserData();
 
   const allFieldsHaveValues = (nameAndAddress: NameAndAddress) => {
     return nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode;
@@ -54,29 +54,13 @@ export const LicenseTask = (props: Props): ReactElement => {
       return;
     }
 
-    await update({
-      ...userData,
-      licenseSearchData: {
-        completedSearch: false,
-        nameAndAddress,
-      },
-    });
-
     api
       .checkLicenseStatus(nameAndAddress, userData.onboardingData.industry)
-      .then(async (result: LicenseStatusResult) => {
-        update({
-          ...userData,
-          licenseSearchData: {
-            completedSearch: true,
-            nameAndAddress,
-          },
-        }).finally(() => {
-          setLicenseStatusResult(result);
-          setShowErrorAlert("NONE");
-        });
+      .then((result: LicenseStatusResult) => {
+        setLicenseStatusResult(result);
+        setShowErrorAlert("NONE");
       })
-      .catch(async () => {
+      .catch(() => {
         setShowErrorAlert("NOT_FOUND");
       });
   };

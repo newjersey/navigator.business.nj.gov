@@ -61,7 +61,7 @@ const userHandler = userHandlerFactory(userDataClient);
 app.use(bodyParser.json({ strict: false }));
 app.use("/api", userRouterFactory(userHandler));
 app.use("/api", businessNameRouterFactory(searchBusinessName));
-app.use("/api", licenseStatusRouterFactory(searchLicenseStatus));
+app.use("/api", licenseStatusRouterFactory(searchLicenseStatus, userHandler));
 
 app.get("/health", (_req, res) => {
   res.send("Alive");

@@ -1,4 +1,4 @@
-import { mockUpdate, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { act, fireEvent, render, RenderResult, waitForElementToBeRemoved } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
 import {
@@ -28,7 +28,6 @@ describe("<LicenseTask />", () => {
     jest.resetAllMocks();
     useMockUserData(initialUserData);
     useMockRoadmap({});
-    mockUpdate.mockResolvedValue({});
   });
 
   describe("starting tab", () => {
@@ -143,19 +142,6 @@ describe("<LicenseTask />", () => {
       },
       "home-contractor"
     );
-
-    expect(mockUpdate).toHaveBeenCalledWith({
-      ...userData,
-      licenseSearchData: {
-        completedSearch: true,
-        nameAndAddress: {
-          name: "My Cool Nail Salon",
-          addressLine1: "123 Main St",
-          addressLine2: "Suite 1",
-          zipCode: "12345",
-        },
-      },
-    });
   });
 
   it("fills and saves form values when failed", async () => {
@@ -171,19 +157,6 @@ describe("<LicenseTask />", () => {
 
     fireEvent.submit(subject.getByTestId("check-status-submit"));
     await act(() => returnedPromise.catch(() => {}));
-
-    expect(mockUpdate).toHaveBeenCalledWith({
-      ...initialUserData,
-      licenseSearchData: {
-        completedSearch: false,
-        nameAndAddress: {
-          name: "My Cool Nail Salon",
-          addressLine1: "123 Main St",
-          addressLine2: "Suite 1",
-          zipCode: "12345",
-        },
-      },
-    });
   });
 
   it("displays error alert when license status cannot be found", async () => {
