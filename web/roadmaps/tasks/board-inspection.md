@@ -1,6 +1,6 @@
 ---
 id: "board-inspection"
-name: "Board Inspection"
+name: "Pass Your Site Inspection"
 callToActionLink: "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
 callToActionText: "Prepare My Business for Inspection"
 ---
