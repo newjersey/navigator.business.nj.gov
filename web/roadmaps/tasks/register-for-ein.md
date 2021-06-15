@@ -5,7 +5,7 @@ callToActionLink: "https://www.irs.gov/businesses/small-businesses-self-employed
 callToActionText: "Get My EIN Certificate"
 ---
 
-An `Employer Identification Number (EIN)|ein` is essentially your Social Security Number for your business. We recommend that most businesses obtain an EIN, so that you don't need to use your personal personal SSN on tax filings and other business registrations. If you plan on having employees you will need an EIN number.
+An `Employer Identification Number (EIN)|ein` is essentially your Social Security Number for your business. We recommend that most businesses obtain an EIN from the IRS so that you don't need to use your personal personal SSN on tax filings and other business registrations. If you plan on having employees you will need an EIN number. The form you use to file an EIN is often referred to as SS-4.
         
 To complete this task, you must have:
 - Identified an available business name
