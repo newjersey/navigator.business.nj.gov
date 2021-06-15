@@ -1,22 +1,17 @@
 [
   {
-    "step": "due-diligence",
-    "weight": 5,
-    "task": "check-site-suitability"
-  },
-  {
     "step": "inspection-requirements",
     "weight": 8,
     "task": "apply-for-shop-license"
   },
   {
     "step": "inspection-requirements",
-    "weight": 8,
+    "weight": 9,
     "task": "individual-staff-licenses"
   },
   {
     "step": "inspection-requirements",
-    "weight": 5,
+    "weight": 10,
     "task": "board-inspection"
   }
 ]
