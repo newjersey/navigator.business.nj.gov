@@ -1,6 +1,6 @@
 ---
 id: "zoning"
-name: "Zoning"
+name: "Get Zoning Approval"
 callToActionLink: ""
 callToActionText: ""
 ---
