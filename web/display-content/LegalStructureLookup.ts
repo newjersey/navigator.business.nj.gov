@@ -8,7 +8,6 @@ export const LegalStructureLookup: Record<LegalStructure, string> = {
   "limited-liability-company": "Limited Liability Company (LLC)",
   "c-corporation": "C-Corporation",
   "s-corporation": "S-Corporation",
-  "b-corporation": "B-Corporation",
 };
 
 export const ALL_LEGAL_STRUCTURES_ORDERED: LegalStructure[] = [
@@ -17,7 +16,6 @@ export const ALL_LEGAL_STRUCTURES_ORDERED: LegalStructure[] = [
   "sole-proprietorship",
   "general-partnership",
   "c-corporation",
-  "b-corporation",
   "limited-partnership",
   "limited-liability-partnership",
 ];

@@ -8,14 +8,14 @@ import { ALL_LEGAL_STRUCTURES_ORDERED, LegalStructureLookup } from "@/display-co
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
 
-  const handleLegalStructure = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleLegalStructure = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
     setOnboardingData({
       ...state.onboardingData,
       legalStructure: (event.target.value as LegalStructure) || undefined,
     });
   };
 
-  const makeLabel = (legalStructure: LegalStructure) => (
+  const makeLabel = (legalStructure: LegalStructure): ReactElement => (
     <div className="margin-bottom-2 margin-top-1" data-value={legalStructure}>
       <b>{LegalStructureLookup[legalStructure]}</b>
       <Content>{state.displayContent.legalStructure.optionContent[legalStructure]}</Content>

@@ -1,3 +1,4 @@
+import { randomInt } from "./migrations";
 import { v6UserData } from "./v6_add_home_based_business";
 
 export interface v7UserData {
@@ -69,3 +70,29 @@ type v7LicenseSearchData = {
 
 
 // ---------------- v7 factories ----------------
+
+export const generateV7User = (overrides: Partial<v7BusinessUser>): v7BusinessUser => {
+  return {
+    name: "some-name-" + randomInt(),
+    email: `some-email-${randomInt()}@example.com`,
+    id: "some-id-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateV7OnboardingData = (overrides: Partial<v7OnboardingData>): v7OnboardingData => {
+  return {
+    businessName: "some-business-name-" + randomInt(),
+    industry: "restaurant",
+    legalStructure: "sole-proprietorship",
+    municipality: {
+      name: "some-name-" + randomInt(),
+      displayName: "some-display-name-" + randomInt(),
+      county: "some-county-" + randomInt(),
+      id: "some-id-" + randomInt(),
+    },
+    liquorLicense: true,
+    homeBasedBusiness: true,
+    ...overrides,
+  };
+};

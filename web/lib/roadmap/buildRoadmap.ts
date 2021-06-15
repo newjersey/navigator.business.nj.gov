@@ -34,7 +34,6 @@ const PublicRecordFilingGroup: LegalStructure[] = [
   "limited-liability-company",
   "c-corporation",
   "s-corporation",
-  "b-corporation",
 ];
 
 export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {

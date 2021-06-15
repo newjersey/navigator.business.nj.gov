@@ -28,7 +28,7 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no business name present", async () => {
-      useMockOnboardingData({ businessName: "", industry: "restaurant", legalStructure: "b-corporation" });
+      useMockOnboardingData({ businessName: "", industry: "restaurant", legalStructure: "c-corporation" });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
       expect(subject.getByText("Not set")).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe("roadmap page", () => {
     it("shows placeholder if no industry present", async () => {
       useMockOnboardingData({
         industry: "generic",
-        legalStructure: "b-corporation",
+        legalStructure: "c-corporation",
         municipality: generateMunicipality({}),
       });
       const subject = renderRoadmapPage();
@@ -77,7 +77,7 @@ describe("roadmap page", () => {
 
     it("shows placeholder if no municipality present", async () => {
       useMockOnboardingData({
-        legalStructure: "b-corporation",
+        legalStructure: "c-corporation",
         industry: "restaurant",
         municipality: undefined,
       });

@@ -49,7 +49,7 @@ describe("onboarding form", () => {
       onboardingData: generateOnboardingData({
         businessName: "Applebees",
         industry: "cosmetology",
-        legalStructure: "b-corporation",
+        legalStructure: "c-corporation",
         municipality: generateMunicipality({
           displayName: "Newark",
         }),
@@ -67,7 +67,7 @@ describe("onboarding form", () => {
     expect(getIndustryValue()).toEqual("cosmetology");
 
     await visitStep3();
-    expect(getLegalStructureValue()).toEqual("b-corporation");
+    expect(getLegalStructureValue()).toEqual("c-corporation");
 
     await visitStep4();
     expect(getMunicipalityValue()).toEqual("Newark");

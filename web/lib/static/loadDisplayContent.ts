@@ -32,7 +32,6 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
       "limited-liability-company": "",
       "c-corporation": "",
       "s-corporation": "",
-      "b-corporation": "",
     }
   );
 
