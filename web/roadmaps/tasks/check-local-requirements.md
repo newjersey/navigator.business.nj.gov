@@ -5,12 +5,12 @@ callToActionLink: "${municipalityWebsite}"
 callToActionText: "Visit the website for ${municipality}"
 ---
 
-Now that your business is ready to operate, it's time to obtain your mercantile license. Below are common local laws to consider obtaining.
+Now that your business is ready to operate, it's time to obtain your mercantile license. A mercantile license helps your local government track businesses in the area. Not all municipalities will require mercantile license, you will want to check with your local clerk's office.
 
-1. **Mercantile License:** Check with your town Clerk if you need a mercantile license. Some cities and towns require this, it helps municipalities track businesses in the area.
+1. **Mercantile License:** Obtain your mercantile license as required by your local government.
 
 After you complete this task, you will have:
-- Obtained your mercantile licese
+- A mercantile licese
 
 ||
 |---|
