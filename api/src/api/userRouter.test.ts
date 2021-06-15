@@ -2,9 +2,9 @@ import request from "supertest";
 import express, { Express } from "express";
 import bodyParser from "body-parser";
 import { userRouterFactory } from "./userRouter";
-import { UserDataClient } from "../domain/types";
 import { generateUser, generateUserData } from "../domain/factories";
 import jwt from "jsonwebtoken";
+import { UserHandler } from "../domain/types";
 
 jest.mock("jsonwebtoken", () => ({
   decode: jest.fn(),
@@ -14,16 +14,17 @@ const mockJwt = jwt as jest.Mocked<typeof jwt>;
 describe("userRouter", () => {
   let app: Express;
 
-  let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubUserHandler: jest.Mocked<UserHandler>;
 
   beforeEach(async () => {
-    stubUserDataClient = {
+    stubUserHandler = {
       get: jest.fn(),
       put: jest.fn(),
+      update: jest.fn(),
     };
     app = express();
     app.use(bodyParser.json());
-    app.use(userRouterFactory(stubUserDataClient));
+    app.use(userRouterFactory(stubUserHandler));
   });
 
   afterAll(async () => {
@@ -33,7 +34,7 @@ describe("userRouter", () => {
   describe("GET", () => {
     it("gets user with id", async () => {
       const userData = generateUserData({});
-      stubUserDataClient.get.mockResolvedValue(userData);
+      stubUserHandler.get.mockResolvedValue(userData);
       mockJwt.decode.mockReturnValue({ sub: "123" });
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
@@ -47,12 +48,12 @@ describe("userRouter", () => {
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer other-user-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
-      expect(stubUserDataClient.get).not.toHaveBeenCalled();
+      expect(stubUserHandler.get).not.toHaveBeenCalled();
       expect(response.status).toEqual(403);
     });
 
     it("returns a 500 when user get fails", async () => {
-      stubUserDataClient.get.mockRejectedValue("error");
+      stubUserHandler.get.mockRejectedValue("error");
 
       mockJwt.decode.mockReturnValue({ sub: "123" });
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -66,7 +67,7 @@ describe("userRouter", () => {
     it("puts user data", async () => {
       mockJwt.decode.mockReturnValue({ sub: "123" });
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
-      stubUserDataClient.put.mockResolvedValue(userData);
+      stubUserHandler.put.mockResolvedValue(userData);
 
       const response = await request(app)
         .post(`/users`)
@@ -88,7 +89,7 @@ describe("userRouter", () => {
         .set("Authorization", "Bearer other-user-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
-      expect(stubUserDataClient.put).not.toHaveBeenCalled();
+      expect(stubUserHandler.put).not.toHaveBeenCalled();
       expect(response.status).toEqual(403);
     });
 
@@ -96,7 +97,7 @@ describe("userRouter", () => {
       mockJwt.decode.mockReturnValue({ sub: "123" });
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
 
-      stubUserDataClient.put.mockRejectedValue("error");
+      stubUserHandler.put.mockRejectedValue("error");
       const response = await request(app)
         .post(`/users`)
         .send(userData)

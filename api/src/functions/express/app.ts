@@ -13,6 +13,7 @@ import { searchLicenseStatusFactory } from "../../domain/license-status/searchLi
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
 import { LicenseStatusClient } from "../../domain/types";
 import { FakeLicenseStatusClient } from "../../client/FakeLicenseStatusClient";
+import { userHandlerFactory } from "../../domain/user/userHandlerFactory";
 
 const app = express();
 app.use(bodyParser.json());
@@ -55,9 +56,10 @@ const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 const businessNameRepo = PostgresBusinessNameRepo(connection);
 const searchBusinessName = searchBusinessNameFactory(businessNameRepo);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
+const userHandler = userHandlerFactory(userDataClient);
 
 app.use(bodyParser.json({ strict: false }));
-app.use("/api", userRouterFactory(userDataClient));
+app.use("/api", userRouterFactory(userHandler));
 app.use("/api", businessNameRouterFactory(searchBusinessName));
 app.use("/api", licenseStatusRouterFactory(searchLicenseStatus));
 

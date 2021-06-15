@@ -1,5 +1,5 @@
 import { Request, Router } from "express";
-import { UserData, UserDataClient } from "../domain/types";
+import { UserData, UserHandler } from "../domain/types";
 import jwt from "jsonwebtoken";
 
 const getTokenFromHeader = (req: Request): string => {
@@ -13,17 +13,19 @@ type CognitoJWTPayload = {
   sub: string;
 };
 
-export const userRouterFactory = (userDataClient: UserDataClient): Router => {
+export const getSignedInUserId = (req: Request): string =>
+  (jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload).sub;
+
+export const userRouterFactory = (userHandler: UserHandler): Router => {
   const router = Router();
 
   router.get("/users/:userId", (req, res) => {
-    const signedInUserId = (jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload).sub;
-    if (signedInUserId !== req.params.userId) {
+    if (getSignedInUserId(req) !== req.params.userId) {
       res.status(403).json();
       return;
     }
 
-    userDataClient
+    userHandler
       .get(req.params.userId)
       .then((result: UserData) => {
         res.json(result);
@@ -34,14 +36,13 @@ export const userRouterFactory = (userDataClient: UserDataClient): Router => {
   });
 
   router.post("/users", (req, res) => {
-    const signedInUserId = (jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload).sub;
     const postedUserBodyId = (req.body as UserData).user.id;
-    if (signedInUserId !== postedUserBodyId) {
+    if (getSignedInUserId(req) !== postedUserBodyId) {
       res.status(403).json();
       return;
     }
 
-    userDataClient
+    userHandler
       .put(req.body)
       .then((result: UserData) => {
         res.json(result);

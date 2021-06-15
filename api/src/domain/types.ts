@@ -17,6 +17,12 @@ export interface LicenseStatusClient {
 export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
 export type SearchLicenseStatus = (nameAndAddress: LicenseSearchCriteria) => Promise<LicenseStatusResult>;
 
+export interface UserHandler {
+  get: (userId: string) => Promise<UserData>;
+  put: (userData: UserData) => Promise<UserData>;
+  update: (userId: string, update: Partial<UserData>) => Promise<UserData>;
+}
+
 export type NameAndAddress = {
   name: string;
   addressLine1: string;

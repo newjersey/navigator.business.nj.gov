@@ -12,6 +12,7 @@ import {
   OnboardingData,
   UserData,
 } from "./types";
+import { LicenseSearchData } from "../../../web/lib/types/types";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 
@@ -105,6 +106,14 @@ export const generateLicenseEntity = (overrides: Partial<LicenseEntity>): Licens
     expirationDate: "20091231 000000.000" + randomInt(),
     checklistItem: "some-item-" + randomInt(),
     checkoffStatus: "Completed",
+    ...overrides,
+  };
+};
+
+export const generateLicenseSearchData = (overrides: Partial<LicenseSearchData>): LicenseSearchData => {
+  return {
+    nameAndAddress: generateNameAndAddress({}),
+    completedSearch: false,
     ...overrides,
   };
 };
