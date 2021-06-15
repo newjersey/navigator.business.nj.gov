@@ -1,5 +1,5 @@
 export const OnboardingDefaults: Record<string, string> = {
-  pageTitle: "Tell us your...",
+  pageTitle: "Tell Us Your…",
   nextButtonText: "Next",
   backButtonText: "Back",
   stepXofYTemplate: "Step ${currentPage} of ${totalPages}",
