@@ -25,10 +25,20 @@ and backend, and it will globally install serverless and amplify-cli. It will al
 ./scripts/install.sh
 ```
 
-In order for the web frontend tests to pass and for it to be able to run locally, it **needs to have Amplify locally configured** such that the `web/aws-exports.js` file exists. This can be done by running:
+In order for the web frontend tests to pass and for it to be able to run locally, it **needs to have Amplify locally configured** such that the `web/aws-exports.js` file exists. This can be done by running and using the project's Amplify AWS credentials when prompted.
 
 ```shell
-ampify checkout env dev
+amplify configure
+```
+
+```shell
+amplify env checkout dev
+```
+
+Additionally, serverless needs to be configured with our AWS account. Run this with our AWS access credentials:
+
+```shell
+sls config credentials -- --provider aws --key AWS_KEY --secret AWS_SECRET_KEY
 ```
 
 ### Local env
@@ -41,7 +51,7 @@ Before you can run locally, you will need to:
 
 For right now, we need a local Postgres database for part of the API functionality.
 
-Make sure you have Postgres installed locally.
+Make sure you have Postgres installed locally (recommend using brew for a Mac)
 
 Then, create the database (name `businesslocal`, user `postgres`, no password): 
 ```shell script
@@ -71,6 +81,26 @@ Run Cypress feature tests using:
 ```shell
 ./scripts/feature-tests.sh
 ```
+
+### Running locally
+
+Start the backend:
+```shell
+npm --prefix=api run start
+```
+
+Start the frontend
+
+```shell
+npm --prefix=web run dev
+```
+
+Start wiremock (for mocking external dependencies locally)
+
+```shell
+npm --prefix=api run start:wiremock
+```
+
 
 ### Deploying
 
