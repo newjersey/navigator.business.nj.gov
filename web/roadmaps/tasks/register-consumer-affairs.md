@@ -1,6 +1,6 @@
 ---
 id: "register-consumer-affairs"
-name: "Obtain Your License Number"
+name: "Obtain Your Home Improvement Contractor License"
 callToActionLink: "https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf"
 callToActionText: "Obtain My Contractor Number"
 ---
