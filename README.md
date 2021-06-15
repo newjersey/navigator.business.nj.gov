@@ -60,7 +60,7 @@ psql -c 'create database businesslocal;' -U postgres
 
 Run database migrations:
 ```shell script
-npm prefix=api run db-migrate up
+npm --prefix=api run db-migrate up
 ```
 
 Seed the database with some business names
