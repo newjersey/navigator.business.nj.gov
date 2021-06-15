@@ -36,8 +36,8 @@ describe("buildRoadmap", () => {
     const roadmap = await buildRoadmap(onboardingData);
     const dueDiligenceTasks = getTasksByStepId(roadmap, "due-diligence");
     expect(dueDiligenceTasks).toEqual([
-      "identify-potential-lease", // weight: 1
-      "check-site-requirements", // weight: 2
+      "check-site-suitability", // weight: 2
+      "check-site-requirements",
       "reseller", // weight: 10
       "research-insurance-needs-home-contractor", // weight: 10
     ]);
@@ -109,7 +109,6 @@ describe("buildRoadmap", () => {
 
     it("adds cosmetology specific tasks", () => {
       expect(roadmap.type).toEqual("cosmetology");
-      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-suitability");
       expect(getTasksByStepId(roadmap, "inspection-requirements")).toContain("apply-for-shop-license");
       expect(getTasksByStepId(roadmap, "inspection-requirements")).toContain("individual-staff-licenses");
       expect(getTasksByStepId(roadmap, "inspection-requirements")).toContain("board-inspection");
@@ -187,7 +186,6 @@ describe("buildRoadmap", () => {
       const onboardingData = generateOnboardingData({ homeBasedBusiness: false });
       const roadmap = await buildRoadmap(onboardingData);
 
-      expect(getTasksByStepId(roadmap, "due-diligence")).toContain("identify-potential-lease");
       expect(getTasksByStepId(roadmap, "due-diligence")).toContain("check-site-requirements");
       expect(getTasksByStepId(roadmap, "lease-and-permits")).toContain("sign-lease");
       expect(getTasksByStepId(roadmap, "inspection-requirements")).toContain("certificate-of-occupancy");
