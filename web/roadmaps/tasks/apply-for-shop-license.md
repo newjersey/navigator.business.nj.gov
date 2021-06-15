@@ -18,4 +18,4 @@ To complete this task, you must have:
 - Floor plan
 
 After you complete this task, you will have:
-- A shop license
+- A completed application which is needed before your site is inspected
