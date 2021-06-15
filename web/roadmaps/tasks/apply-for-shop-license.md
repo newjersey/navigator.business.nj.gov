@@ -15,6 +15,7 @@ To complete this task, you must have:
 - Fire prevention permit 
 - License number of all practitioners 
 - `Certificate of Occupancy or Authority|certificate-occupancy`
+- Floor plan
 
 After you complete this task, you will have:
 - A shop license
