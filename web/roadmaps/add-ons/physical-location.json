@@ -26,7 +26,7 @@
   },
   {
     "step": "lease-and-permits",
-    "weight": 2,
+    "weight": 3,
     "task": "building-permit"
   },
   {
