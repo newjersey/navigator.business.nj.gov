@@ -4,6 +4,7 @@ name: "Determine Site Requirements"
 callToActionLink: ""
 callToActionText: ""
 ---
+Now that you have a site for your business, you need to ensure that your site complies with local requirments. 
 
 The New Jersey Division of Consumer Affairs requires you to obtain and show a fire permit and Certificate of Occupancy or Approval prior to applying for a shop license. You will need to obtain the fire permit and Certificate from your local government. To prevent any unexpected delays, speak to your local government now to understand their expectations and timeline for review and approval. Below are additional information and permits to consider obtaining:
         
