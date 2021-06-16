@@ -13,6 +13,6 @@ The New Jersey Division of Consumer Affairs requires you to obtain and show a fi
 4. **Certificate of Occupancy/Approval:** If you need a construction permit for your renovation, you may need to meet with the Building/Construction Department to obtain a `Certificate of Occupancy or Approval|certificate-occupancy` that indicates that your space is safe for occupancy. ***This is required by the Department of Consumer Affairs to recieve a shop license.***
        
 After you complete this task, you will know:
-- what permits your local government requires
-- what you need to do to meet those requirements
-- how long it will take to get any permits or certificates
+- What permits your local government requires
+- What you need to do to meet those requirements
+- How long it will take to get any permits or certificates
