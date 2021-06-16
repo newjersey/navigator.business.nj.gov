@@ -5,7 +5,7 @@ callToActionLink: "https://www.njportal.com/DOR/BusinessFormation/CompanyInforma
 callToActionText: "Form My Business"
 ---
 
-Form the `legal structure|legal-structure-learn-more` that you will operate under, and register that structure and name with the state of New Jersey.
+Form the `legal structure|legal-structure-learn-more` that you will operate under, and register that structure and name with the New Jersey Division of Revenue and Enterprise Services.
         
 To complete this task, you must have:
 - Available business name
