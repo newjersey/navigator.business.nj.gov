@@ -5,7 +5,9 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Now that you signed your lease and determined site requirements, it's time to obtain permits that allow you to build or renovate your site. Not all businesses may need to complete these tasks, it varies by city and town, but if you're making changes to the use and layout of the site, your local government may require one if not all of the following:
+Now that you signed your lease, it's time to obtain permits that allow you to build or renovate your site. 
+
+If you are planning to renovate your site, this task may apply to you. Consider completing the following activities before starting any renovation or construction:
       
 1. **Site Drawings:** Hire an architect to create site drawings that meet your business needs and budget.
 2. **Utilities:** Work with your local government on any utility or water approvals you may need.
