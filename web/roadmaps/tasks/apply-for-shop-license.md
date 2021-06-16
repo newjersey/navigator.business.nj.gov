@@ -18,5 +18,5 @@ To complete this application, you must have:
 - `Certificate of Occupancy or Authority|certificate-occupancy`
 - Floor plan
 
-After you complete this application, you will have:
+After you complete this task, you will have:
 - A completed shop license application
