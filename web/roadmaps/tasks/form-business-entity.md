@@ -4,10 +4,11 @@ name: "Form Your Business Entity"
 callToActionLink: "https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName"
 callToActionText: "Form My Business"
 ---
+Now that you have found an available business name, you can form your business.
 
 Form the `legal structure|legal-structure-learn-more` that you will operate under, and register that structure and name with the New Jersey Division of Revenue and Enterprise Services.
         
-To complete this task, you must have:
+To complete this application, you must have:
 - Available business name
 - Legal structure
 - `NAICS code|naics` (optional)
