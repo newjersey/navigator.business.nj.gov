@@ -7,8 +7,6 @@ callToActionText: "Visit the website for ${municipality}"
 
 Now that your business is ready to operate, it's time to obtain your mercantile license. A mercantile license helps your local government track businesses in the area. Not all municipalities will require mercantile license, you will want to check with your local clerk's office.
 
-1. **Mercantile License:** Obtain your mercantile license as required by your local government.
-
 After you complete this task, you will have:
 - A mercantile licese
 
