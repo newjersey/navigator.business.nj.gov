@@ -18,7 +18,7 @@ To complete this task, you must have:
 - Payment credit card or E-check
 
 After you complete this task, you will have:
-- Entity ID
+- `Entity ID|entity-id`
 - Certificate of Formation /Incorporation
 - Certified copy of Certificate of Formation /Incorporation document (optional with additional fee)
 - `Certificate of Good Standing|good-standing` (optional with additional fee) 
