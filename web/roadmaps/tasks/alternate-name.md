@@ -1,6 +1,6 @@
 ---
 id: "alternate-name"
-name: "Consider Registering Your Alternate Name"
+name: "Consider Registering An Alternate Name"
 callToActionLink: "https://www.nj.gov/treasury/revenue/altname.shtml"
 callToActionText: "Apply for My Alternate Name"
 ---
