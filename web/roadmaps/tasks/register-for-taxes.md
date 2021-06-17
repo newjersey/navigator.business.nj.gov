@@ -2,7 +2,7 @@
 id: "register-for-taxes"
 name: "Register for Taxes"
 callToActionLink: "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml"
-callToActionText: "Register My Business for Taxes"
+callToActionText: "Register My Business for State Taxes"
 ---
 Now that you formed your business, you need to file for taxes with the State.
 
