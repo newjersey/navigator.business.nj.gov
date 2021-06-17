@@ -15,7 +15,9 @@ export interface LicenseStatusClient {
 }
 
 export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
-export type SearchLicenseStatus = (nameAndAddress: LicenseSearchCriteria) => Promise<LicenseStatusResult>;
+export type SearchLicenseStatus = (
+  licenseSearchCriteria: LicenseSearchCriteria
+) => Promise<LicenseStatusResult>;
 
 export interface UserHandler {
   get: (userId: string) => Promise<UserData>;
@@ -30,9 +32,12 @@ export type NameAndAddress = {
   zipCode: string;
 };
 
-export interface LicenseSearchData {
+export interface LicenseData {
   nameAndAddress: NameAndAddress;
   completedSearch: boolean;
+  lastCheckedStatus: string;
+  status: LicenseStatus;
+  items: LicenseStatusItem[];
 }
 
 export type LicenseSearchCriteria = {
@@ -71,7 +76,7 @@ export type LicenseEntity = {
   checkoffStatus: "Completed" | "Unchecked" | "Not Applicable";
 };
 
-export type LicenseStatus = "ACTIVE" | "PENDING";
+export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
 export type NameAvailability = {
   status: "AVAILABLE" | "UNAVAILABLE";
@@ -85,7 +90,7 @@ export interface UserData {
   onboardingData: OnboardingData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
-  licenseSearchData: LicenseSearchData | undefined;
+  licenseData: LicenseData | undefined;
 }
 
 export interface OnboardingData {

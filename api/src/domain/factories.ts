@@ -4,15 +4,17 @@ import {
   BusinessUser,
   Industry,
   LegalStructure,
+  LicenseData,
   LicenseEntity,
   LicenseSearchCriteria,
   LicenseStatusItem,
+  LicenseStatusResult,
   Municipality,
   NameAndAddress,
   OnboardingData,
   UserData,
 } from "./types";
-import { LicenseSearchData } from "../../../web/lib/types/types";
+import dayjs from "dayjs";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 
@@ -31,7 +33,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     onboardingData: generateOnboardingData({}),
     formProgress: "UNSTARTED",
     taskProgress: {},
-    licenseSearchData: undefined,
+    licenseData: generateLicenseData({}),
     ...overrides,
   };
 };
@@ -62,6 +64,14 @@ export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>)
   return {
     title: "some-title-" + randomInt(),
     status: "ACTIVE",
+    ...overrides,
+  };
+};
+
+export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResult>): LicenseStatusResult => {
+  return {
+    status: "PENDING",
+    checklistItems: [generateLicenseStatusItem({})],
     ...overrides,
   };
 };
@@ -110,10 +120,13 @@ export const generateLicenseEntity = (overrides: Partial<LicenseEntity>): Licens
   };
 };
 
-export const generateLicenseSearchData = (overrides: Partial<LicenseSearchData>): LicenseSearchData => {
+export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseData => {
   return {
     nameAndAddress: generateNameAndAddress({}),
-    completedSearch: false,
+    completedSearch: true,
+    items: [generateLicenseStatusItem({})],
+    status: "PENDING",
+    lastCheckedStatus: dayjs().toISOString(),
     ...overrides,
   };
 };

@@ -6,6 +6,7 @@ import {
   UserHandler,
 } from "../domain/types";
 import { getSignedInUserId } from "./userRouter";
+import dayjs from "dayjs";
 
 export const licenseStatusRouterFactory = (
   searchLicenseStatus: SearchLicenseStatus,
@@ -23,9 +24,13 @@ export const licenseStatusRouterFactory = (
       zipCode: body.zipCode,
     };
 
+    const userData = await userHandler.get(userId);
     await userHandler.update(userId, {
-      licenseSearchData: {
-        nameAndAddress,
+      licenseData: {
+        status: userData.licenseData?.status || "UNKNOWN",
+        items: userData.licenseData?.items || [],
+        lastCheckedStatus: userData.licenseData?.lastCheckedStatus || dayjs(0).toISOString(),
+        nameAndAddress: nameAndAddress,
         completedSearch: false,
       },
     });
@@ -33,8 +38,11 @@ export const licenseStatusRouterFactory = (
     searchLicenseStatus(req.body as LicenseSearchCriteria)
       .then(async (result: LicenseStatusResult) => {
         await userHandler.update(userId, {
-          licenseSearchData: {
-            nameAndAddress,
+          licenseData: {
+            status: result.status,
+            items: result.checklistItems,
+            lastCheckedStatus: dayjs().toISOString(),
+            nameAndAddress: nameAndAddress,
             completedSearch: true,
           },
         });

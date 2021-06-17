@@ -1,4 +1,5 @@
-import { v7UserData } from "./v7_add_license_data";
+import {v7UserData} from "./v7_add_license_data";
+import {randomInt} from "./migrations";
 
 export interface v8UserData {
   user: v8BusinessUser;
@@ -12,7 +13,7 @@ export interface v8UserData {
 export const migrate_v7_to_v8 = (v7Data: v7UserData): v8UserData => {
 
   let newLegalStructure;
-  if(v7Data.onboardingData.legalStructure === "b-corporation"){
+  if (v7Data.onboardingData.legalStructure === "b-corporation") {
     newLegalStructure = undefined;
   } else {
     newLegalStructure = v7Data.onboardingData.legalStructure;
@@ -72,10 +73,55 @@ type v8NameAndAddress = {
   zipCode: string;
 }
 
-type v8LicenseSearchData = {
+export type v8LicenseSearchData = {
   nameAndAddress: v8NameAndAddress;
   completedSearch: boolean;
 }
 
 
 // ---------------- v8 factories ----------------
+
+
+export const generateV8User = (overrides: Partial<v8BusinessUser>): v8BusinessUser => {
+  return {
+    name: "some-name-" + randomInt(),
+    email: `some-email-${randomInt()}@example.com`,
+    id: "some-id-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generateV8OnboardingData = (overrides: Partial<v8OnboardingData>): v8OnboardingData => {
+  return {
+    businessName: "some-business-name-" + randomInt(),
+    industry: "restaurant",
+    legalStructure: "sole-proprietorship",
+    municipality: {
+      name: "some-name-" + randomInt(),
+      displayName: "some-display-name-" + randomInt(),
+      county: "some-county-" + randomInt(),
+      id: "some-id-" + randomInt(),
+    },
+    liquorLicense: true,
+    homeBasedBusiness: true,
+    ...overrides,
+  };
+};
+
+export const generateV8LicenseSearchData = (overrides: Partial<v8LicenseSearchData>): v8LicenseSearchData => {
+  return {
+    nameAndAddress: generateV8NameAndAddress({}),
+    completedSearch: false,
+    ...overrides
+  }
+}
+
+export const generateV8NameAndAddress = (overrides: Partial<v8NameAndAddress>): v8NameAndAddress => {
+  return {
+    name: "some-name-" + randomInt(),
+    addressLine1: "some-address-1-" + randomInt(),
+    addressLine2: "some-address-2-" + randomInt(),
+    zipCode: "some-zipcode-" + randomInt(),
+    ...overrides,
+  };
+};
