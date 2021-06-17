@@ -1,6 +1,6 @@
 ---
 id: "apply-for-shop-license"
-name: "Apply for a Cosmetology Shop License from the New Jersey Division of Consumer Affairs"
+name: "Apply for a Cosmetology Shop License"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: "Apply for My Cosmetology Shop License"
 ---
