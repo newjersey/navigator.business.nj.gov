@@ -1,6 +1,6 @@
 ---
 id: "zoning"
-name: "Get Zoning and Sign Permits?"
+name: "Get Zoning and Sign Permits if Required"
 callToActionLink: ""
 callToActionText: ""
 ---
@@ -11,6 +11,6 @@ Not all business need zoning or sign permits. If you are changing the use of you
 1. **Zoning Permits/Approval:** Obtain zoning approval from your local Zoning Office.
 2. **Sign Permits:** Obtain signage approvals from your local Building/Construction Department, Department of Community Affairs, or Zoning Office.
 
-After you complete this task, you will have:
+After you complete this task (if applicable), you will have:
 - Zoning approval
 - Sign permits
