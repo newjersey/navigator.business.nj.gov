@@ -1,8 +1,8 @@
 ---
 id: "board-inspection"
 name: "Pass Your Site Inspection"
-callToActionLink: "https://www.njconsumeraffairs.gov/regulations/Chapter-28-Board-of-Cosmetology-and-Hairstyling.pdf"
-callToActionText: "Prepare My Business for Inspection"
+callToActionLink: ""
+callToActionText: ""
 ---
 
 Now that the Division of Consumer Affairs reviwed your shop license application and confirmed all materials were submitted, you need to have the site inspected. 
