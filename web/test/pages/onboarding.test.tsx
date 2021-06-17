@@ -354,16 +354,16 @@ describe("onboarding form", () => {
 
   const visitStep2 = async () => {
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 1 of 4"));
+    await waitForElementToBeRemoved(() => subject.getByTestId("step-1"));
   };
 
   const visitStep3 = async () => {
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 2 of 4"));
+    await waitForElementToBeRemoved(() => subject.getByTestId("step-2"));
   };
 
   const visitStep4 = async () => {
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByText("Step 3 of 4"));
+    await waitForElementToBeRemoved(() => subject.getByTestId("step-3"));
   };
 });

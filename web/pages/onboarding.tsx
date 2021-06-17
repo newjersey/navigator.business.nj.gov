@@ -105,7 +105,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const header = () => (
     <>
       {OnboardingDefaults.pageTitle}{" "}
-      <span className="weight-400">
+      <span className="weight-400" data-testid={`step-${page.current.toString()}`}>
         {templateEval(OnboardingDefaults.stepXofYTemplate, {
           currentPage: page.current.toString(),
           totalPages: PAGES.toString(),

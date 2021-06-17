@@ -152,7 +152,7 @@ describe("buildRoadmap", () => {
 
       const municipalityTask = getTaskById(roadmap, "check-local-requirements");
       expect(municipalityTask.callToActionLink).toEqual("www.cooltown.com");
-      expect(municipalityTask.callToActionText).toEqual("Visit the website for Cool Town");
+      expect(municipalityTask.callToActionText).toEqual("Visit the Cool Town Website");
     });
 
     it("replaces placeholder text", async () => {
@@ -175,7 +175,6 @@ describe("buildRoadmap", () => {
       expect(municipalityTask.callToActionLink).toContain("www.cooltown.com");
       expect(municipalityTask.callToActionText).toContain("Cool Town");
       expect(municipalityTask.contentMd).toContain("Cool Town");
-      expect(municipalityTask.contentMd).toContain("Bergen County");
       expect(municipalityTask.contentMd).toContain("555-1234");
       expect(municipalityTask.contentMd).toContain("www.example.com/clerk");
     });

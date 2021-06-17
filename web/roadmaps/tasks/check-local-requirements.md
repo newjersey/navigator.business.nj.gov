@@ -4,7 +4,7 @@ name: "Get Your Mercantile License if Required"
 callToActionLink: "${municipalityWebsite}"
 callToActionText: "Visit the ${municipality} Website"
 ---
-Prior to opening, you may need to get a mercantile license. A mercantile license helps your local government track businesses in the area. Not all cities and towns require a mercantile license, you will want to check your local ordinace or contact your local clerk's office.
+Prior to opening, you may need to get a mercantile license. A mercantile license helps your local government track businesses in the area. Not all cities and towns require a mercantile license, you will want to check your local ordinance or contact your local clerk's office.
 
 You can find your city or town clerk through either your [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
 
