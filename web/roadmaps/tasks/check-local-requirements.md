@@ -1,17 +1,12 @@
 ---
 id: "check-local-requirements"
-name: "Get Your Mercantile License"
+name: "Get Your Mercantile License if Required"
 callToActionLink: "${municipalityWebsite}"
-callToActionText: "Visit the website for ${municipality}"
+callToActionText: "Visit the ${municipality} Website"
 ---
-A mercantile license helps your local government track businesses in the area. Not all municipalities will require mercantile license, you will want to check with your local clerk's office.
+Prior to opening, you may need to get a mercantile license. A mercantile license helps your local government track businesses in the area. Not all cities and towns require a mercantile license, you will want to check your local ordinace or contact your local clerk's office.
 
-After you complete this task, you will have:
-- A Mercantile Licese
+You can find your city or town clerk through either your [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
 
-||
-|---|
-| **Local government:** ${municipality} |
-| **County:** ${county} |
-| **County Clerk:** ${countyClerkPhone} |
-| [Visit County Clerk Website](${countyClerkWebsite}) |
+After you complete this task (if applicable), you will have:
+- A Mercantile License
