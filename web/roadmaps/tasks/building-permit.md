@@ -16,7 +16,7 @@ If you are planning to renovate your site, this task may apply to you. Consider 
 
 Once you have all the necessary drawings, approvals, and contractors in place, you are in a good position to get your construction or renovation started!
  
-After you complete this task, you will have:
+After you complete this task (if applicable), you will have:
 - Site drawings
 - Utility approvals
 - Consutrction permits
