@@ -1,6 +1,6 @@
 ---
 id: "zoning"
-name: "Get Zoning and Sign Permits if Required"
+name: "Obtain Zoning and Sign Permits if Required"
 callToActionLink: ""
 callToActionText: ""
 ---
