@@ -1,2 +1,1 @@
-Businesses that select Some Other Industry recieve a quick and easy step-by-step guide to get your business started, the guide may not contain industry specific requirements. We are able to provide industry specific requirements for restaurants, cosmetology shops, home improvement contractors, and online businesses.
-
+Whatever business you're starting, we offer a comprehensive step-by-step guide to get your business started. If you're starting a restaurant, cosmetology shop, home improvement contractor, or online business, you'll get industry-specific information too. We're be adding more and more industries soon.
