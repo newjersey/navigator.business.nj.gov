@@ -1,6 +1,6 @@
 ---
 id: "building-permit"
-name: "Prepare for Site Renovation (if applicable)"
+name: "Prepare for Site Renovation If Applicable"
 callToActionLink: ""
 callToActionText: ""
 ---
@@ -21,4 +21,3 @@ After you complete this task (if applicable), you will have:
 - Utility approvals
 - Consutrction permits
 - Contractors for build out
-
