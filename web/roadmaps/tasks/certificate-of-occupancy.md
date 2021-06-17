@@ -1,6 +1,6 @@
 ---
 id: "certificate-of-occupancy"
-name: "Verify Site Is Safe for Occupancy"
+name: "Obtain Site Safety Permits"
 callToActionLink: ""
 callToActionText: ""
 ---
