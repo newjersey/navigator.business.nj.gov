@@ -10,4 +10,4 @@ As a home improvement contractor, the State requires that you have insurance for
 Look back at your Research Insurance Needs task to see what other insurance policies you might want to consider.
 
 After you complete this task, you will have:
-- Received a Certificate of Insurance
+- Certificate of Insurance
