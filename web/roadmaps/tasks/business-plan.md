@@ -14,7 +14,5 @@ Your [business plan](https://business.nj.gov/pages/create-a-business-plan) acts 
 5. **[The Latin American Economic Development Association of Southern New Jersey](http://www.laeda.com/)** offers support to all entrepreneurs.
 6. **[Union County Economic Development Corporation](https://ucedc.com/)** provides free classes and paid business mentoring services.
 
-After you complete this task, you will know:
-- Who your target demographic is and how to market your goods or services to them
-- How your business operates, including staff or materials required
-- What your revenue model is, and how you will finance your business
+After you complete this task, you will have:
+- A business plan that outlines your target audience, business operations, and revenue model
