@@ -8,7 +8,7 @@ A reseller is a business that chooses to resell items or services sold by anothe
 
 If you are the final seller of the goods and services, you need to collect sales tax from the buyer. Whichever entity sells goods or services to the ultimate buyer is responsible for collecting and filing the sales tax. You will be asked about this when you register for taxes.  
 
-After you complete this task (if applicable), you will have:
+After you complete this task, you will have:
 - Determined if your business will resell goods or services
 - Completed the Resale Certificate
 - Shared the Certificate with applicable businesses
