@@ -11,6 +11,6 @@ To complete this task, you must have:
 - Desired trade name
 
 After you complete this task, you will have:
-- Registered trade name
+- A registered trade name
 
 
