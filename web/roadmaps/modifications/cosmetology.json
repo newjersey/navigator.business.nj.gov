@@ -8,5 +8,10 @@
     "step": "inspection-requirements",
     "taskToReplace": "certificate-of-occupancy",
     "replaceWith": "certificate-of-occupancy-cosmetology"
-  }
+  },
+  {
+    "step": "inspection-requirements",
+    "taskToReplace": "identify-potential-lease",
+    "replaceWith": "check-site-suitability"
+  }  
 ]
