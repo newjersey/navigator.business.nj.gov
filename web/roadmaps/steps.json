@@ -4,34 +4,34 @@
     "id": "create-business-plan",
     "name": "Plan Your Business",
     "timeEstimate": "1–2 months",
-    "description": "Writing a business plan is an important first step to get your business up and running. An effective business plan will serve as a roadmap for the decisions you need to make, helping you obtain financing, build relationships, attract good employees, and boost your confidence as a business owner."
+    "description": "Have a strong business plan in place to guide your business to success."
   },
   {
     "step_number": 2,
     "id": "due-diligence",
-    "name": "Before Creating Your Business",
+    "name": "Get Ready to Legalize Your Business",
     "timeEstimate": "1–2 months",
-    "description": "Before you officially form and register your business, it’s important to research and prepare for any location or industry specific permits or requirements. Doing this before you actually register your business can save you time and money later."
+    "description": "Research the timeline and costs associated with starting your business to prevent delays and unexpected costs."
   },
   {
     "step_number": 3,
     "id": "register-business",
     "name": "Register and Form Your Business",
     "timeEstimate": "1 month",
-    "description": "Once you’ve confirmed your business location, it’s time to officially register with the State. In this step you’ll identify your desired business name, create your legal entity, and register for New Jersey State taxes."
+    "description": "Get your business legally recognized by the State and federal government to comply with laws."
   },
   {
     "step_number": 4,
     "id": "lease-and-permits",
     "name": "After Registering Your Business",
     "timeEstimate": "1–3 months",
-    "description": "After registering your business, you can legally sign agreements in your business’s name. You may choose to do this for your lease and/or insurance policy. You now also have the information you need to apply for local permits or industry site-specific requirements."
+    "description": "Enter insurance and/or location agreements in your business’ name to protect your business and you personally."
   },
   {
     "step_number": 5,
     "id": "inspection-requirements",
     "name": "Before Opening Your Site",
     "timeEstimate": "1–3 months",
-    "description": "Once your business is up and running, your business will be inspected by local and/or State government to ensure that there are safe conditions for workers and customers."
+    "description": "Obtain industry specific approvals or inspections to make sure you’re in compliance with State or local laws."
   }
 ]
