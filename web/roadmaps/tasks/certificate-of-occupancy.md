@@ -11,5 +11,5 @@ It's time to have your local government verify that your site is safe for custom
 2. **Certificate of Occupancy/Approval:** If you've completed site renovations, it's time to obtain a `Certificate of Occupancy or Approval|certificate-occupancy` from your local Building/Construction Department.
 
 After you complete this task, you will have:
-- Fire prevention
-- Certificate of Occupancy or Approval
+- A fire prevention permit
+- A Certificate of Occupancy or Approval
