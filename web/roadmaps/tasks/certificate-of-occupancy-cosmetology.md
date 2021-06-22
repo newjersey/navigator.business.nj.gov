@@ -11,5 +11,5 @@ Now that you signed your lease, and renovated your site, it's time to obtain app
 2. **Certificate of Occupancy/Approval:** If you've completed site construction/renovations, it's time to obtain a Certificate of Occupancy or Approval from your local Buildings/Construction Department. ***Remember, to apply for your shop license, you will need to submit this Certificate to the Division of Consumer Affairs.***
 
 After you complete this task, you will have:
-- Fire prevention permits 
-- Certificate of Occupancy or Approval      
+- A fire prevention permit 
+- A Certificate of Occupancy or Approval      
