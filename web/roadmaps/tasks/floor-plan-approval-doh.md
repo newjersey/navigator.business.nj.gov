@@ -5,9 +5,12 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Now that you've registered and formed your business, signed your lease, and createed a floor plan you are ready to get local approval. 
+Now that you've registered and formed your business, and signed your lease, you are ready to get local approval. 
 
 Contact your local Department of Health to have your floor plan and kitchen approved. You will need to schedule periodic follow-ups.
-        
+
+To obtain this approval, you must have:
+- A floor plan
+
 After you complete this task, you will have:
 - Approval from your local Department of Health
