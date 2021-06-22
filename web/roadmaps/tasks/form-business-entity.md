@@ -16,7 +16,7 @@ To complete this application, you must have:
 - Business description
 - Business address (this may be a home address if you are a home-based business)
 - `Registered agent|registered-agent`
-- Payment credit card or E-check
+- Credit card or E-check payment
 
 After you complete this task, you will have:
 - `Entity ID|entity-id`
