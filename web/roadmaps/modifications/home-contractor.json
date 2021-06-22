@@ -3,10 +3,5 @@
     "step": "lease-and-permits",
     "taskToReplace": "research-insurance-needs",
     "replaceWith": "get-insurance-hic"
-  },
-  {
-    "step": "due-diligence",
-    "taskToReplace": "identify-potential-lease",
-    "replaceWith": "check-site-suitability"
   }
 ]
