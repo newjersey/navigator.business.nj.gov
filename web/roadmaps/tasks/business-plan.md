@@ -5,7 +5,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Data shows that businesses with a plan are more successful. Your [business plan](https://business.nj.gov/pages/create-a-business-plan) guides your business and helps you make decisions around operations, staffing, marketing, and financing. There are numerous national and local organizations that can help you write your business plan for free, below are a few:
+Data shows that businesses with a plan are more successful. Your [business plan](https://business.nj.gov/pages/create-a-business-plan) guides your business and helps you make decisions around operations, staffing, marketing, and financing. Find out what information comprises a business plan. There are numerous national and local organizations that can help you write your business plan for free, below are a few:
 
 1. **The U.S. Small Business Administration**'s [Business Plan Tool](https://www.sba.gov/business-guide/plan-your-business/write-your-business-plan) provides a step-by-step process to update the status of your business plan.
 2. **[The New Jersey Small Business Development Center](https://njsbdc.com/)** regional offices are in every county and offer one-on-one support.
@@ -15,4 +15,4 @@ Data shows that businesses with a plan are more successful. Your [business plan]
 6. **[Union County Economic Development Corporation](https://ucedc.com/)** provides free classes and paid business mentoring services.
 
 After you complete this task, you will have:
-- A business plan to help you make informed business decisions
+- A business plan to help you make informed decisions for this roadmap
