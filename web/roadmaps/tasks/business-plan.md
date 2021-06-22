@@ -15,4 +15,4 @@ Data shows that businesses with a plan are more successful. Your [business plan]
 6. **[Union County Economic Development Corporation](https://ucedc.com/)** provides free classes and paid business mentoring services.
 
 After you complete this task, you will have:
-- A business plan to make informed business decisions
+- A business plan to help you make informed business decisions
