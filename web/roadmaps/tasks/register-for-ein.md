@@ -12,5 +12,5 @@ To complete this application, you must have:
 - Identified an available business name
 
 After you complete this task, you will have:
-- EIN
-- EIN Certificate
+- An EIN
+- An EIN Certificate (the document indicating your EIN)
