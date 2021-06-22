@@ -11,7 +11,7 @@ To complete this application, you must have:
 - A completed application
 - The disclosure statement page of the application completed
 - A Certificate of Insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
-- Paid a fee of $110.00
+- A fee of $110.00 fully paid
 
 After you complete this task, you will have:
 - A New Jersey Home Improvement Contractor (NJHIC) number
