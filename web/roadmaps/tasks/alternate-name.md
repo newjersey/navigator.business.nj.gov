@@ -13,4 +13,4 @@ To complete this application, you must have:
 - Desired alternate name
 
 After you complete this task, you will have:
-- Registered alternate name
+- A registered alternate name
