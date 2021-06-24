@@ -13,5 +13,5 @@
     "step": "inspection-requirements",
     "taskToReplace": "identify-potential-lease",
     "replaceWith": "check-site-suitability"
-  }  
+  }
 ]
