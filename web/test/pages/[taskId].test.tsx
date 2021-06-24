@@ -116,7 +116,7 @@ describe("task page", () => {
     useMockUserData({ taskProgress });
     subject = renderPage(generateTask({ id: taskId }));
 
-    expect(subject.getAllByText("In-progress")[0]).toBeVisible();
+    expect(subject.getAllByText("In progress")[0]).toBeVisible();
   });
 
   it("updates task status when progress is selected", () => {
@@ -130,8 +130,8 @@ describe("task page", () => {
     subject = renderPage(generateTask({ id: taskId }));
 
     fireEvent.click(subject.getAllByText("Not started")[0]);
-    fireEvent.click(subject.getByText("In-progress"));
-    expect(subject.getAllByText("In-progress")[0]).toBeVisible();
+    fireEvent.click(subject.getByText("In progress"));
+    expect(subject.getAllByText("In progress")[0]).toBeVisible();
     expect(mockUpdate).toHaveBeenCalledWith({
       ...userData,
       taskProgress: {

@@ -136,7 +136,7 @@ describe("roadmap page", () => {
 
     const subject = renderRoadmapPage();
 
-    expect(subject.queryByText("In-progress")).toBeInTheDocument();
+    expect(subject.queryByText("In progress")).toBeInTheDocument();
     expect(subject.queryByText("Completed")).toBeInTheDocument();
     expect(subject.queryByText("Not started")).toBeInTheDocument();
   });
