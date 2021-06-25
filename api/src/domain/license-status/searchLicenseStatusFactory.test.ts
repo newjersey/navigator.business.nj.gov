@@ -1,6 +1,6 @@
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 import { searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
-import { generateLicenseEntity, generateLicenseSearchCriteria } from "../factories";
+import { generateLicenseEntity, generateNameAndAddress } from "../factories";
 
 describe("searchLicenseStatus", () => {
   let stubLicenseStatusClient: jest.Mocked<LicenseStatusClient>;
@@ -16,12 +16,11 @@ describe("searchLicenseStatus", () => {
 
   it("searches for license status on name, zipcode, and license type", async () => {
     stubLicenseStatusClient.search.mockResolvedValue([]);
-    const searchCriteria = generateLicenseSearchCriteria({
+    const nameAndAddress = generateNameAndAddress({
       name: "Crystal",
-      licenseType: "Home improvement",
       zipCode: "12345",
     });
-    await expect(searchLicenseStatus(searchCriteria)).rejects.toEqual("NO MATCH");
+    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual("NO MATCH");
     expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("Crystal", "12345", "Home improvement");
   });
 
@@ -45,11 +44,11 @@ describe("searchLicenseStatus", () => {
       }),
     ]);
 
-    const searchCriteria = generateLicenseSearchCriteria({
+    const nameAndAddress = generateNameAndAddress({
       addressLine1: "1234 Main St",
     });
 
-    const result = await searchLicenseStatus(searchCriteria);
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
     expect(result.status).toEqual("PENDING");
     expect(result.checklistItems).toEqual(
       expect.arrayContaining([
@@ -83,11 +82,11 @@ describe("searchLicenseStatus", () => {
       }),
     ]);
 
-    const searchCriteria = generateLicenseSearchCriteria({
+    const nameAndAddress = generateNameAndAddress({
       addressLine1: "1234 Main St",
     });
 
-    const result = await searchLicenseStatus(searchCriteria);
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
     expect(result.checklistItems).toEqual([
       {
         title: "Item 2",
@@ -112,11 +111,11 @@ describe("searchLicenseStatus", () => {
       }),
     ]);
 
-    const searchCriteria = generateLicenseSearchCriteria({
+    const nameAndAddress = generateNameAndAddress({
       addressLine1: "1234 Main St",
     });
 
-    const result = await searchLicenseStatus(searchCriteria);
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
     expect(result.checklistItems).toEqual(
       expect.arrayContaining([
         {
@@ -147,11 +146,11 @@ describe("searchLicenseStatus", () => {
       }),
     ]);
 
-    const searchCriteria = generateLicenseSearchCriteria({
+    const nameAndAddress = generateNameAndAddress({
       addressLine1: "1234 Main St",
     });
 
-    const result = await searchLicenseStatus(searchCriteria);
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
     expect(result.checklistItems).toEqual([
       {
         title: "Item 1",
@@ -163,7 +162,7 @@ describe("searchLicenseStatus", () => {
   it("rejects when no result matches the address", async () => {
     stubLicenseStatusClient.search.mockResolvedValue([generateLicenseEntity({}), generateLicenseEntity({})]);
 
-    const searchCriteria = generateLicenseSearchCriteria({});
-    await expect(searchLicenseStatus(searchCriteria)).rejects.toEqual("NO MATCH");
+    const nameAndAddress = generateNameAndAddress({});
+    await expect(searchLicenseStatus(nameAndAddress, "")).rejects.toEqual("NO MATCH");
   });
 });

@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import { Industry, LicenseStatusResult, NameAndAddress, NameAvailability, UserData } from "@/lib/types/types";
+import { NameAndAddress, NameAvailability, UserData } from "@/lib/types/types";
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
-import { convertIndustryToLicenseType } from "@/lib/utils/convertIndustryToLicenseType";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 export const getUserData = (id: string): Promise<UserData> => {
@@ -16,14 +15,8 @@ export const searchBusinessName = (name: string): Promise<NameAvailability> => {
   return get(`/business-name-availability?query=${encodeURIComponent(name)}`);
 };
 
-export const checkLicenseStatus = (
-  nameAndAddress: NameAndAddress,
-  industry: Industry
-): Promise<LicenseStatusResult> => {
-  return post(`/license-status`, {
-    ...nameAndAddress,
-    licenseType: convertIndustryToLicenseType(industry),
-  });
+export const checkLicenseStatus = (nameAndAddress: NameAndAddress): Promise<UserData> => {
+  return post(`/license-status`, nameAndAddress);
 };
 
 export const get = async <T>(url: string): Promise<T> => {

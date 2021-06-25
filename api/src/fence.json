@@ -14,6 +14,7 @@
     "@middy/core",
     "@middy/http-json-body-parser",
     "aws-lambda",
-    "axios"
+    "axios",
+    "dayjs"
   ]
 }

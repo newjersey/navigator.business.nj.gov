@@ -66,8 +66,8 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   };
 
   const getOneLineAddress = (): string => {
-    if (!userData || !userData.licenseSearchData) return "";
-    const { nameAndAddress } = userData.licenseSearchData;
+    if (!userData || !userData.licenseData) return "";
+    const { nameAndAddress } = userData.licenseData;
 
     const secondLineAddress = nameAndAddress.addressLine2 ? ` ${nameAndAddress.addressLine2}` : "";
 
@@ -102,7 +102,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
           </div>
           <div className="margin-3 font-body-2xs">
             <div className="fdr">
-              <div className="text-bold">{userData?.licenseSearchData?.nameAndAddress.name}</div>
+              <div className="text-bold">{userData?.licenseData?.nameAndAddress.name}</div>
               <button
                 data-testid="edit-button"
                 onClick={props.onEdit}

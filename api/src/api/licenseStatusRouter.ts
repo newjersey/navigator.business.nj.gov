@@ -1,60 +1,25 @@
 import { Router } from "express";
-import {
-  LicenseSearchCriteria,
-  LicenseStatusResult,
-  SearchLicenseStatus,
-  UserHandler,
-} from "../domain/types";
+import { NameAndAddress, UpdateLicenseStatus, UserData } from "../domain/types";
 import { getSignedInUserId } from "./userRouter";
-import dayjs from "dayjs";
 
-export const licenseStatusRouterFactory = (
-  searchLicenseStatus: SearchLicenseStatus,
-  userHandler: UserHandler
-): Router => {
+export const licenseStatusRouterFactory = (updateLicenseStatus: UpdateLicenseStatus): Router => {
   const router = Router();
 
   router.post("/license-status", async (req, res) => {
     const userId = getSignedInUserId(req);
-    const body = req.body as LicenseSearchCriteria;
-    const nameAndAddress = {
-      name: body.name,
-      addressLine1: body.addressLine1,
-      addressLine2: body.addressLine2,
-      zipCode: body.zipCode,
-    };
+    const nameAndAddress = req.body as NameAndAddress;
 
-    const userData = await userHandler.get(userId);
-    await userHandler.update(userId, {
-      licenseData: {
-        status: userData.licenseData?.status || "UNKNOWN",
-        items: userData.licenseData?.items || [],
-        lastCheckedStatus: userData.licenseData?.lastCheckedStatus || dayjs(0).toISOString(),
-        nameAndAddress: nameAndAddress,
-        completedSearch: false,
-      },
-    });
+    updateLicenseStatus(userId, nameAndAddress)
+      .then((updatedUserData: UserData) => {
+        if (!updatedUserData.licenseData || updatedUserData.licenseData.status === "UNKNOWN") {
+          res.status(500).json();
+          return;
+        }
 
-    searchLicenseStatus(req.body as LicenseSearchCriteria)
-      .then(async (result: LicenseStatusResult) => {
-        await userHandler.update(userId, {
-          licenseData: {
-            status: result.status,
-            items: result.checklistItems,
-            lastCheckedStatus: dayjs().toISOString(),
-            nameAndAddress: nameAndAddress,
-            completedSearch: true,
-          },
-        });
-
-        res.json(result);
+        res.json(updatedUserData);
       })
       .catch((error) => {
-        if (error === "BAD_INPUT") {
-          res.status(400).json({ error });
-        } else {
-          res.status(500).json({ error });
-        }
+        res.status(500).json({ error });
       });
   });
 

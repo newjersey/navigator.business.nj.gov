@@ -2,7 +2,7 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { Content } from "@/components/Content";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import React, { ReactElement, useState } from "react";
-import { LicenseStatusResult, NameAndAddress, Task } from "@/lib/types/types";
+import { LicenseStatusResult, NameAndAddress, Task, UserData } from "@/lib/types/types";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
@@ -26,7 +26,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
   const [showErrorAlert, setShowErrorAlert] = useState<ErrorAlertType>("NONE");
   const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
-  const { userData } = useUserData();
+  const { userData, update } = useUserData();
 
   const allFieldsHaveValues = (nameAndAddress: NameAndAddress) => {
     return nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode;
@@ -34,11 +34,14 @@ export const LicenseTask = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
-    if (userData.licenseSearchData) {
+    if (userData.licenseData) {
       setTabIndex(STATUS_TAB_INDEX);
     }
-    if (userData.licenseSearchData?.completedSearch) {
-      onSubmit(userData.licenseSearchData.nameAndAddress);
+    if (userData.licenseData?.completedSearch) {
+      setLicenseStatusResult({
+        status: userData.licenseData.status,
+        checklistItems: userData.licenseData.items,
+      });
     }
   }, userData);
 
@@ -55,20 +58,27 @@ export const LicenseTask = (props: Props): ReactElement => {
     }
 
     api
-      .checkLicenseStatus(nameAndAddress, userData.onboardingData.industry)
-      .then((result: LicenseStatusResult) => {
-        setLicenseStatusResult(result);
+      .checkLicenseStatus(nameAndAddress)
+      .then((result: UserData) => {
+        if (!result.licenseData) return;
+        setLicenseStatusResult({
+          status: result.licenseData.status,
+          checklistItems: result.licenseData.items,
+        });
         setShowErrorAlert("NONE");
       })
       .catch(() => {
         setShowErrorAlert("NOT_FOUND");
+      })
+      .finally(async () => {
+        update(await api.getUserData(userData.user.id));
       });
   };
 
   return (
     <div className="margin-top-3 fdc fg1">
       <div className="margin-x-3">
-        <TaskHeader task={props.task} />
+        <TaskHeader task={props.task} tooltipText={LicenseScreenDefaults.tooltipText} />
       </div>
 
       <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>

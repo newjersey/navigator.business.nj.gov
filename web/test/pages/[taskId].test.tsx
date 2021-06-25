@@ -148,13 +148,13 @@ describe("task page", () => {
   });
 
   it("loads License task screen for apply-for-shop-license", () => {
-    useMockUserData({ licenseSearchData: undefined });
+    useMockUserData({ licenseData: undefined });
     subject = renderPage(generateTask({ id: "apply-for-shop-license" }));
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for register-consumer-affairs", () => {
-    useMockUserData({ licenseSearchData: undefined });
+    useMockUserData({ licenseData: undefined });
     subject = renderPage(generateTask({ id: "register-consumer-affairs" }));
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });

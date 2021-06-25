@@ -2,9 +2,13 @@ import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
 import React, { ReactElement } from "react";
 import { Task, TaskProgress } from "@/lib/types/types";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { Icon } from "@/components/njwds/Icon";
+import { ArrowTooltip } from "@/components/ArrowTooltip";
 
 interface Props {
   task: Task;
+  tooltipText?: string;
 }
 
 export const TaskHeader = (props: Props): ReactElement => {
@@ -18,6 +22,28 @@ export const TaskHeader = (props: Props): ReactElement => {
     });
   };
 
+  const renderProgress = (): ReactElement => {
+    let currentTaskProgress: TaskProgress = "NOT_STARTED";
+    if (userData?.taskProgress && userData.taskProgress[props.task.id]) {
+      currentTaskProgress = userData.taskProgress[props.task.id];
+    }
+
+    if (props.tooltipText) {
+      return (
+        <div className="fdr">
+          {TaskProgressTagLookup[currentTaskProgress]}
+          <ArrowTooltip title={props.tooltipText}>
+            <div className="fdr fac margin-left-05" data-testid="automatic-status-info-tooltip">
+              <Icon>help_outline</Icon>
+            </div>
+          </ArrowTooltip>
+        </div>
+      );
+    } else {
+      return <TaskProgressDropdown onSelect={updateTaskProgress} initialValue={currentTaskProgress} />;
+    }
+  };
+
   return (
     <div className="grid-container padding-0 margin-bottom-2">
       <div className="grid-row grid-gap">
@@ -26,12 +52,7 @@ export const TaskHeader = (props: Props): ReactElement => {
             {props.task.name}
           </h2>
         </div>
-        <div className="tablet:grid-col-3">
-          <TaskProgressDropdown
-            onSelect={updateTaskProgress}
-            initialValue={userData?.taskProgress ? userData.taskProgress[props.task.id] : undefined}
-          />
-        </div>
+        <div className="tablet:grid-col-3">{renderProgress()}</div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { Request, Router } from "express";
-import { UserData, UserHandler } from "../domain/types";
+import { UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
 import jwt from "jsonwebtoken";
+import dayjs from "dayjs";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -16,7 +17,10 @@ type CognitoJWTPayload = {
 export const getSignedInUserId = (req: Request): string =>
   (jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload).sub;
 
-export const userRouterFactory = (userHandler: UserHandler): Router => {
+export const userRouterFactory = (
+  userDataClient: UserDataClient,
+  updateLicenseStatus: UpdateLicenseStatus
+): Router => {
   const router = Router();
 
   router.get("/users/:userId", (req, res) => {
@@ -25,10 +29,20 @@ export const userRouterFactory = (userHandler: UserHandler): Router => {
       return;
     }
 
-    userHandler
+    userDataClient
       .get(req.params.userId)
-      .then((result: UserData) => {
-        res.json(result);
+      .then(async (userData: UserData) => {
+        if (userData.licenseData && shouldCheckLicense(userData)) {
+          updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress)
+            .then((updatedUserData) => {
+              res.json(updatedUserData);
+            })
+            .catch(() => {
+              res.json(userData);
+            });
+        } else {
+          res.json(userData);
+        }
       })
       .catch((error) => {
         res.status(500).json({ error });
@@ -42,7 +56,7 @@ export const userRouterFactory = (userHandler: UserHandler): Router => {
       return;
     }
 
-    userHandler
+    userDataClient
       .put(req.body)
       .then((result: UserData) => {
         res.json(result);
@@ -51,6 +65,14 @@ export const userRouterFactory = (userHandler: UserHandler): Router => {
         res.status(500).json({ error });
       });
   });
+
+  const shouldCheckLicense = (userData: UserData): boolean =>
+    userData.onboardingData.industry !== undefined &&
+    userData.licenseData !== undefined &&
+    hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus);
+
+  const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>
+    dayjs(lastCheckedDate).isBefore(dayjs().subtract(1, "hour"));
 
   return router;
 };

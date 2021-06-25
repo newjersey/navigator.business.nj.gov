@@ -2,9 +2,15 @@ import request from "supertest";
 import express, { Express } from "express";
 import bodyParser from "body-parser";
 import { userRouterFactory } from "./userRouter";
-import { generateUser, generateUserData } from "../domain/factories";
+import {
+  generateLicenseData,
+  generateOnboardingData,
+  generateUser,
+  generateUserData,
+} from "../domain/factories";
 import jwt from "jsonwebtoken";
-import { UserHandler } from "../domain/types";
+import { UserDataClient } from "../domain/types";
+import dayjs from "dayjs";
 
 jest.mock("jsonwebtoken", () => ({
   decode: jest.fn(),
@@ -14,17 +20,18 @@ const mockJwt = jwt as jest.Mocked<typeof jwt>;
 describe("userRouter", () => {
   let app: Express;
 
-  let stubUserHandler: jest.Mocked<UserHandler>;
+  let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubUpdateLicenseStatus: jest.Mock;
 
   beforeEach(async () => {
-    stubUserHandler = {
+    stubUserDataClient = {
       get: jest.fn(),
       put: jest.fn(),
-      update: jest.fn(),
     };
+    stubUpdateLicenseStatus = jest.fn();
     app = express();
     app.use(bodyParser.json());
-    app.use(userRouterFactory(stubUserHandler));
+    app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus));
   });
 
   afterAll(async () => {
@@ -34,7 +41,7 @@ describe("userRouter", () => {
   describe("GET", () => {
     it("gets user with id", async () => {
       const userData = generateUserData({});
-      stubUserHandler.get.mockResolvedValue(userData);
+      stubUserDataClient.get.mockResolvedValue(userData);
       mockJwt.decode.mockReturnValue({ sub: "123" });
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
@@ -48,12 +55,12 @@ describe("userRouter", () => {
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer other-user-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
-      expect(stubUserHandler.get).not.toHaveBeenCalled();
+      expect(stubUserDataClient.get).not.toHaveBeenCalled();
       expect(response.status).toEqual(403);
     });
 
     it("returns a 500 when user get fails", async () => {
-      stubUserHandler.get.mockRejectedValue("error");
+      stubUserDataClient.get.mockRejectedValue("error");
 
       mockJwt.decode.mockReturnValue({ sub: "123" });
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -61,13 +68,70 @@ describe("userRouter", () => {
       expect(response.status).toEqual(500);
       expect(response.body).toEqual({ error: "error" });
     });
+
+    describe("updating license status", () => {
+      it("does not update license if licenseData is undefined", async () => {
+        const userData = generateUserData({ licenseData: undefined });
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
+      });
+
+      it("does not update license if licenseData lastCheckedDate is within the last hour", async () => {
+        const userData = generateUserData({
+          licenseData: generateLicenseData({
+            lastCheckedStatus: dayjs().subtract(1, "hour").add(1, "minute").toISOString(),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
+      });
+
+      it("updates and returns user if licenseData lastCheckedDate is older than last hour", async () => {
+        const userData = generateUserData({
+          onboardingData: generateOnboardingData({
+            industry: "home-contractor",
+          }),
+          licenseData: generateLicenseData({
+            lastCheckedStatus: dayjs().subtract(1, "hour").subtract(1, "minute").toISOString(),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+        const updatedUserData = generateUserData({});
+        stubUpdateLicenseStatus.mockResolvedValue(updatedUserData);
+
+        const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).toHaveBeenCalled();
+        expect(result.body).toEqual(updatedUserData);
+      });
+
+      it("returns the non-updated user if the update license fails", async () => {
+        const userData = generateUserData({
+          onboardingData: generateOnboardingData({
+            industry: "home-contractor",
+          }),
+          licenseData: generateLicenseData({
+            lastCheckedStatus: dayjs().subtract(1, "hour").subtract(1, "minute").toISOString(),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUpdateLicenseStatus.mockRejectedValue({});
+
+        const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateLicenseStatus).toHaveBeenCalled();
+        expect(result.body).toEqual(userData);
+      });
+    });
   });
 
   describe("POST", () => {
     it("puts user data", async () => {
       mockJwt.decode.mockReturnValue({ sub: "123" });
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
-      stubUserHandler.put.mockResolvedValue(userData);
+      stubUserDataClient.put.mockResolvedValue(userData);
 
       const response = await request(app)
         .post(`/users`)
@@ -89,7 +153,7 @@ describe("userRouter", () => {
         .set("Authorization", "Bearer other-user-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
-      expect(stubUserHandler.put).not.toHaveBeenCalled();
+      expect(stubUserDataClient.put).not.toHaveBeenCalled();
       expect(response.status).toEqual(403);
     });
 
@@ -97,7 +161,7 @@ describe("userRouter", () => {
       mockJwt.decode.mockReturnValue({ sub: "123" });
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
 
-      stubUserHandler.put.mockRejectedValue("error");
+      stubUserDataClient.put.mockRejectedValue("error");
       const response = await request(app)
         .post(`/users`)
         .send(userData)

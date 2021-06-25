@@ -24,6 +24,7 @@
     "remark-html",
     "remark-react",
     "focus-trap-react",
-    "react-tabs"
+    "react-tabs",
+    "dayjs"
   ]
 }

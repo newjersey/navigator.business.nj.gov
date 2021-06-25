@@ -40,19 +40,12 @@ describe("apiClient", () => {
     });
   });
 
-  it("posts license status by looking up license type for industry", async () => {
+  it("posts license status", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const nameAndAddress = generateNameAndAddress({});
-    await checkLicenseStatus(nameAndAddress, "home-contractor");
-    expect(mockAxios.post).toHaveBeenCalledWith(
-      "/api/license-status",
-      {
-        ...nameAndAddress,
-        licenseType: "Home Improvement Contractors",
-      },
-      {
-        headers: { Authorization: "Bearer some-token" },
-      }
-    );
+    await checkLicenseStatus(nameAndAddress);
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/license-status", nameAndAddress, {
+      headers: { Authorization: "Bearer some-token" },
+    });
   });
 });

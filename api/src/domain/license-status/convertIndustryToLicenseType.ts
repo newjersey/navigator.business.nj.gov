@@ -1,6 +1,6 @@
 import { Industry } from "../types";
 
-export const convertIndustryToLicenseType = (industry: Industry): string => {
+export const convertIndustryToLicenseType = (industry: Industry | undefined): string => {
   if (industry === "home-contractor") {
     return "Home Improvement Contractors";
   }

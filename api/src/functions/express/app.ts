@@ -13,7 +13,7 @@ import { searchLicenseStatusFactory } from "../../domain/license-status/searchLi
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
 import { LicenseStatusClient } from "../../domain/types";
 import { FakeLicenseStatusClient } from "../../client/FakeLicenseStatusClient";
-import { userHandlerFactory } from "../../domain/user/userHandlerFactory";
+import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 
 const app = express();
 app.use(bodyParser.json());
@@ -56,12 +56,12 @@ const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 const businessNameRepo = PostgresBusinessNameRepo(connection);
 const searchBusinessName = searchBusinessNameFactory(businessNameRepo);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
-const userHandler = userHandlerFactory(userDataClient);
+const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 
 app.use(bodyParser.json({ strict: false }));
-app.use("/api", userRouterFactory(userHandler));
+app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus));
 app.use("/api", businessNameRouterFactory(searchBusinessName));
-app.use("/api", licenseStatusRouterFactory(searchLicenseStatus, userHandler));
+app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 
 app.get("/health", (_req, res) => {
   res.send("Alive");

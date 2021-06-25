@@ -6,7 +6,6 @@ import {
   LegalStructure,
   LicenseData,
   LicenseEntity,
-  LicenseSearchCriteria,
   LicenseStatusItem,
   LicenseStatusResult,
   Municipality,
@@ -82,19 +81,6 @@ export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): Name
     addressLine1: "some-address-1-" + randomInt(),
     addressLine2: "some-address-2-" + randomInt(),
     zipCode: "some-zipcode-" + randomInt(),
-    ...overrides,
-  };
-};
-
-export const generateLicenseSearchCriteria = (
-  overrides: Partial<LicenseSearchCriteria>
-): LicenseSearchCriteria => {
-  return {
-    name: "some-name-" + randomInt(),
-    addressLine1: "some-address-1-" + randomInt(),
-    addressLine2: "some-address-2-" + randomInt(),
-    zipCode: "some-zipcode-" + randomInt(),
-    licenseType: "some-license-type-" + randomInt(),
     ...overrides,
   };
 };

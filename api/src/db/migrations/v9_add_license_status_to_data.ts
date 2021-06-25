@@ -1,4 +1,3 @@
-import {LicenseStatus} from "../../domain/types";
 import {v8UserData} from "./v8_remove_bcorp";
 import dayjs from "dayjs";
 
@@ -86,7 +85,7 @@ type v9LicenseData = {
 
 export type v9LicenseStatusItem = {
   title: string;
-  status: LicenseStatus;
+  status: v9LicenseStatus;
 };
 
 export type v9LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN";

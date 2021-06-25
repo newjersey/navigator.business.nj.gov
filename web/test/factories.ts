@@ -2,6 +2,7 @@ import {
   BusinessUser,
   Industry,
   LegalStructure,
+  LicenseData,
   LicenseStatusItem,
   LicenseStatusResult,
   Municipality,
@@ -16,6 +17,7 @@ import {
 } from "@/lib/types/types";
 import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
 import { ALL_INDUSTRIES_ORDERED } from "@/display-content/IndustryLookup";
+import dayjs from "dayjs";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 
@@ -34,10 +36,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     onboardingData: generateOnboardingData({}),
     formProgress: "UNSTARTED",
     taskProgress: {},
-    licenseSearchData: {
-      completedSearch: false,
-      nameAndAddress: generateNameAndAddress({}),
-    },
+    licenseData: generateLicenseData({}),
     ...overrides,
   };
 };
@@ -140,6 +139,17 @@ export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResu
   return {
     status: "PENDING",
     checklistItems: [generateLicenseStatusItem({})],
+    ...overrides,
+  };
+};
+
+export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseData => {
+  return {
+    nameAndAddress: generateNameAndAddress({}),
+    completedSearch: false,
+    items: [generateLicenseStatusItem({})],
+    status: "PENDING",
+    lastCheckedStatus: dayjs().toISOString(),
     ...overrides,
   };
 };

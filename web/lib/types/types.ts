@@ -3,7 +3,7 @@ export interface UserData {
   onboardingData: OnboardingData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
-  licenseSearchData: LicenseSearchData | undefined;
+  licenseData: LicenseData | undefined;
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
@@ -15,7 +15,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     onboardingData: createEmptyOnboardingData(),
     formProgress: "UNSTARTED",
     taskProgress: {},
-    licenseSearchData: undefined,
+    licenseData: undefined,
   };
 };
 
@@ -39,9 +39,12 @@ export interface OnboardingData {
   homeBasedBusiness: boolean;
 }
 
-export interface LicenseSearchData {
+export interface LicenseData {
   nameAndAddress: NameAndAddress;
   completedSearch: boolean;
+  lastCheckedStatus: string;
+  status: LicenseStatus;
+  items: LicenseStatusItem[];
 }
 
 export type OnboardingDisplayContent = {
@@ -260,4 +263,4 @@ export type LicenseStatusResult = {
   checklistItems: LicenseStatusItem[];
 };
 
-export type LicenseStatus = "ACTIVE" | "PENDING";
+export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN";

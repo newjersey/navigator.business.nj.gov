@@ -19,8 +19,8 @@ export const CheckStatus = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (!userData) return;
 
-    if (userData.licenseSearchData) {
-      setFormValues(userData.licenseSearchData.nameAndAddress);
+    if (userData.licenseData) {
+      setFormValues(userData.licenseData.nameAndAddress);
     } else {
       setFormValues({
         ...formValues,

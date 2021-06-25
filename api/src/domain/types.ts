@@ -16,14 +16,10 @@ export interface LicenseStatusClient {
 
 export type SearchBusinessName = (name: string) => Promise<NameAvailability>;
 export type SearchLicenseStatus = (
-  licenseSearchCriteria: LicenseSearchCriteria
+  nameAndAddress: NameAndAddress,
+  licenseType: string
 ) => Promise<LicenseStatusResult>;
-
-export interface UserHandler {
-  get: (userId: string) => Promise<UserData>;
-  put: (userData: UserData) => Promise<UserData>;
-  update: (userId: string, update: Partial<UserData>) => Promise<UserData>;
-}
+export type UpdateLicenseStatus = (userId: string, nameAndAddress: NameAndAddress) => Promise<UserData>;
 
 export type NameAndAddress = {
   name: string;
@@ -39,14 +35,6 @@ export interface LicenseData {
   status: LicenseStatus;
   items: LicenseStatusItem[];
 }
-
-export type LicenseSearchCriteria = {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
-  licenseType: string;
-};
 
 export type LicenseStatusResult = {
   status: LicenseStatus;

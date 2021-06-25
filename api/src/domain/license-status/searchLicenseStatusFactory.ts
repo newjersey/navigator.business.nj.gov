@@ -1,21 +1,21 @@
 import {
-  LicenseSearchCriteria,
   LicenseStatusClient,
   LicenseStatusItem,
   LicenseStatusResult,
+  NameAndAddress,
   SearchLicenseStatus,
 } from "../types";
 
 export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusClient): SearchLicenseStatus => {
-  return async (searchCriteria: LicenseSearchCriteria): Promise<LicenseStatusResult> => {
+  return async (nameAndAddress: NameAndAddress, licenseType: string): Promise<LicenseStatusResult> => {
     const entities = await licenseStatusClient.search(
-      searchCriteria.name,
-      searchCriteria.zipCode,
-      searchCriteria.licenseType
+      nameAndAddress.name,
+      nameAndAddress.zipCode,
+      licenseType
     );
 
     const match = entities.find(
-      (it) => it.addressLine1 === searchCriteria.addressLine1 && it.licenseStatus !== "Expired"
+      (it) => it.addressLine1 === nameAndAddress.addressLine1 && it.licenseStatus !== "Expired"
     );
 
     if (!match) {
