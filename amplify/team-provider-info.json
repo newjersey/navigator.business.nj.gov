@@ -70,5 +70,29 @@
         }
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-businessnjgov-prod-94544-authRole",
+      "UnauthRoleArn": "arn:aws:iam::360364660870:role/amplify-businessnjgov-prod-94544-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::360364660870:role/amplify-businessnjgov-prod-94544-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-businessnjgov-prod-94544-deployment",
+      "UnauthRoleName": "amplify-businessnjgov-prod-94544-unauthRole",
+      "StackName": "amplify-businessnjgov-prod-94544",
+      "StackId": "arn:aws:cloudformation:us-east-1:360364660870:stack/amplify-businessnjgov-prod-94544/236f3470-d817-11eb-a2d8-0ed4f058f52d",
+      "AmplifyAppId": "d1fxpe8xsdfr62"
+    },
+    "categories": {
+      "auth": {
+        "businessnjgovc204e009": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1fxpe8xsdfr62",
+          "type": "manual"
+        }
+      }
+    }
   }
 }
