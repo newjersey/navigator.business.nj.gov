@@ -59,14 +59,14 @@ jobs:
           AWS_REGION: us-east-1
           AMPLIFY_ENV: dev
 
-      - name: 🔧 Serverless Authentication
-        run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
-        working-directory: api
-
       - name: 🧰 Install web dependencies
         run: npm --prefix=web install
       - name: 🧰 Install api dependencies
         run: npm --prefix=api install
+
+      - name: 🔧 Serverless Authentication
+        run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
+        working-directory: api
 
       - name: 🔧 Migrate postgres
         run: npm --prefix=api run db-migrate up -- -e ci
@@ -160,14 +160,14 @@ jobs:
           AWS_REGION: us-east-1
           AMPLIFY_ENV: dev
 
-      - name: 🔧 Serverless Authentication
-        run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
-        working-directory: api
-
       - name: 🧰 Install web dependencies
         run: npm --prefix=web install
       - name: 🧰 Install api dependencies
         run: npm --prefix=api install
+
+      - name: 🔧 Serverless Authentication
+        run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
+        working-directory: api
 
       - name: 🚀 Deploy api with serverless
         run: npm run serverless deploy -- --verbose --stage develop --region us-east-1
@@ -238,15 +238,15 @@ jobs:
           AWS_REGION: us-east-1
           AMPLIFY_ENV: staging
 
-      - name: 🔧 Serverless Authentication
-        run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
-        working-directory: api
-
       - name: 🧰 Install web dependencies
         run: npm --prefix=web install
       - name: 🧰 Install api dependencies
         run: npm --prefix=api install
 
+      - name: 🔧 Serverless Authentication
+        run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
+        working-directory: api
+        
       - name: 🚀 Deploy api with serverless
         run: npm run serverless deploy -- --verbose --stage staging --region us-east-1
         working-directory: ./api
