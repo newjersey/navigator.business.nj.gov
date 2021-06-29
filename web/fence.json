@@ -16,6 +16,7 @@
     "@aws-amplify/auth",
     "@aws-amplify/ui-react",
     "@aws-amplify/ui-components",
+    "@aws-amplify/core",
     "aws-amplify",
     "swr",
     "@material-ui/lab",

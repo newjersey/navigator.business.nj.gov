@@ -97,6 +97,8 @@ jobs:
           API_BASE_URL: http://localhost:5000/dev
           DB_NAME: businessci
           DB_PASSWORD: postgres
+          AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
+          LANDING_PAGE_URL: http://localhost:3000/
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
@@ -198,6 +200,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
           AMPLIFY_ENV: dev
+          AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
+          LANDING_PAGE_URL: http://localhost:3000/
 
   deploy-staging:
     runs-on: ubuntu-latest
@@ -276,6 +280,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
           AMPLIFY_ENV: staging
+          AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_STAGING }}
+          LANDING_PAGE_URL: http://localhost:3000/
 
   deploy-prod:
     runs-on: ubuntu-latest
@@ -354,3 +360,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
           AMPLIFY_ENV: prod
+          AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_PROD }}
+          LANDING_PAGE_URL: http://localhost:3000/

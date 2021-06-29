@@ -9,8 +9,10 @@ export const AuthButton = (): ReactElement => {
   const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
 
-  const login = () => {
-    router.push("/signin");
+  const login = async () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    await Auth.federatedSignIn({ provider: "myNJ" });
   };
 
   const logout = async () => {
