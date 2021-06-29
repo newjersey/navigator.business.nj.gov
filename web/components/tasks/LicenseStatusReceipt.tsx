@@ -16,6 +16,7 @@ type PermitTheme = {
   textColor: string;
   borderColor: string;
   iconColor: string;
+  headerIconColor: string;
 };
 
 const pendingPermitTheme: PermitTheme = {
@@ -24,6 +25,7 @@ const pendingPermitTheme: PermitTheme = {
   textColor: "text-cyan",
   borderColor: "border-cyan",
   iconColor: "text-base-lighter",
+  headerIconColor: "text-cyan",
 };
 
 const activePermitTheme: PermitTheme = {
@@ -32,6 +34,7 @@ const activePermitTheme: PermitTheme = {
   textColor: "text-success",
   borderColor: "border-success",
   iconColor: "text-success",
+  headerIconColor: "text-success",
 };
 
 export const LicenseStatusReceipt = (props: Props): ReactElement => {
@@ -96,8 +99,8 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
             className={`${theme.bgColor} ${theme.borderColor} padding-3 border-top-2px font-body-md text-bold fdr fac`}
             data-testid={`permit-${props.status}`}
           >
-            <span className="padding-right-05">{LicenseScreenDefaults.permitStatusText}</span>
-            <Icon className={`${theme.iconColor} usa-icon--size-3`}>{getIcon(props.status)}</Icon>
+            <span className="padding-right-1">{LicenseScreenDefaults.permitStatusText}</span>
+            <Icon className={`${theme.headerIconColor} usa-icon--size-3`}>{getIcon(props.status)}</Icon>
             <span className={`${theme.textColor} padding-left-05 text-uppercase`}>{getText()}</span>
           </div>
           <div className="margin-3 font-body-2xs">

@@ -8,6 +8,7 @@ const useStylesBootstrap = makeStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.black,
     fontSize: "1em",
+    padding: ".5em .75em",
   },
 }));
 
