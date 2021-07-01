@@ -187,6 +187,7 @@ jobs:
           VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2 }}
           VPC_ID: ${{ secrets.VPC_ID }}
           USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
+          LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_DEV }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage develop --region us-east-1
@@ -267,6 +268,7 @@ jobs:
           VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2 }}
           VPC_ID: ${{ secrets.VPC_ID }}
           USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
+          LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_STAGING }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage staging --region us-east-1
@@ -347,6 +349,7 @@ jobs:
           VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2_PROD }}
           VPC_ID: ${{ secrets.VPC_ID }}
           USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
+          LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_PROD }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage prod --region us-east-1
