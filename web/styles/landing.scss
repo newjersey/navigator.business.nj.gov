@@ -1,0 +1,370 @@
+.header {
+  padding-top: 2rem;
+  padding-right: 6rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.gradient-bg {
+  background-image: none !important;
+  background: linear-gradient(#fff, #fff, #ecf3ec) !important;
+}
+
+.no-bg {
+  background: none !important;
+}
+
+.dark-font {
+  color: #1b1b1b !important;
+}
+
+.large-font {
+  font-size: 3rem !important;
+}
+
+.med-font {
+  font-size: 1.5rem !important;
+}
+
+.text-align {
+  text-align: center;
+}
+
+.hero-image {
+  margin: auto;
+}
+
+.hero-header {
+  color: #5c5c5c;
+  font-weight: 400;
+}
+
+.bold-font {
+  font-weight: 700;
+}
+
+.no-max-width {
+  max-width: none !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0rem !important;
+}
+
+.landsection-2-bg {
+  background: #ecf3ec url(/img/Bg-wavy-white@2x.png) bottom center no-repeat;
+  background-size: auto;
+  height: auto;
+}
+
+.float-content {
+  position: absolute;
+  background-color: #ecf3ec;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.landsection2-heading-alt {
+  display: block;
+}
+
+.landsection2-image {
+  width: 70%;
+
+  margin: auto;
+}
+
+.small-font {
+  font-size: 1.375rem;
+}
+
+.no-top-bottom-margin {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+
+.padding-bottom-40 {
+  padding-bottom: 2.5rem;
+}
+
+.padding-20 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.landsection2-icons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.landsection2-icon {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  font-size: 1rem;
+  color: #466c04;
+
+  align-items: center;
+
+  width: 9.375rem;
+}
+.landsection2-icon img {
+  width: 3.75rem;
+}
+
+.divider {
+  height: 5rem;
+}
+
+.font-32 {
+  font-size: 2rem !important;
+}
+
+.display-block {
+  display: block;
+}
+
+@media only screen and (min-width: 640px) {
+  .keep-flex-column {
+    flex-direction: column !important;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .display-inline-lscreen {
+    display: inline !important;
+  }
+  .landsection-2-header {
+    padding-left: 4rem !important;
+    padding-right: 4rem !important;
+    line-height: 2.35rem;
+  }
+
+  .card-container-nj-style {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .card-padding {
+    padding-bottom: 0rem;
+  }
+
+  .card-media-padding {
+    padding-bottom: 2rem !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .hero-header {
+    display: none;
+  }
+
+  .keep-flex-column {
+    flex-direction: row !important;
+  }
+
+  .flex-desktop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .flex-order-1 {
+    order: 1;
+  }
+  .flex-order-2 {
+    order: 2;
+  }
+
+  .text-desktop {
+    text-align: left !important;
+  }
+
+  .display-desktop {
+    display: block !important;
+  }
+
+  .text-desktop {
+    width: 22.6875rem;
+    text-align: left;
+  }
+
+  .left-buttton {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .top-padding-5 {
+    padding-top: 5rem !important;
+  }
+
+  .height-34 {
+    height: 34rem;
+  }
+
+  .grid-desktop {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 6.25rem);
+    grid-gap: 0.3125rem;
+  }
+
+  .fixed-width {
+    width: 29.1875rem;
+  }
+
+  .img-desktop {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 3;
+    max-width: 27.5rem !important;
+    margin-left: auto !important;
+    margin-right: 0.625rem !important;
+  }
+
+  .p-desktop {
+    margin-right: auto !important;
+    width: 29.1875rem;
+  }
+
+  .icon-container-desktop {
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 3;
+    margin-top: 6rem;
+    width: 29.1875rem;
+  }
+
+  .contain-bg {
+    background-size: contain;
+  }
+
+  .desktop-wh {
+    width: 19.225rem !important;
+    height: 39.375rem !important;
+  }
+
+  .padding-top-1 {
+    padding-top: 1rem !important;
+  }
+
+  .no-padding-lr {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+  }
+
+  .padding-bottom-none {
+    padding-bottom: 0rem !important;
+  }
+
+  .padding-bottom-2 {
+    padding-bottom: 2.1rem !important;
+  }
+
+  .padding-bottom-5 {
+    padding-bottom: 5.3rem !important;
+  }
+
+  .display-inline-desktop {
+    display: inline !important;
+  }
+
+  .no-padding-top {
+    padding-top: 0rem !important;
+  }
+
+  .padding-header {
+    padding-right: 2rem !important;
+  }
+}
+
+.white-background {
+  background-color: white !important;
+}
+
+.img-width-250 {
+  width: 15.625rem;
+}
+
+.items-align-center {
+  align-items: center;
+}
+
+.top-padding {
+  padding-top: 6rem;
+}
+
+.line-height {
+  line-height: 2.5rem;
+}
+
+.dark-green-text {
+  color: #538200;
+}
+
+.lr-margin {
+  margin-left: 2rem !important;
+  margin-right: 2rem !important;
+}
+
+.padding-top-4 {
+  padding-top: 4rem;
+}
+
+.card-padding {
+  padding-top: 0.2rem !important;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.card-footer-padding {
+  padding-bottom: 2rem !important;
+}
+
+.card-media-padding {
+  padding-bottom: 4rem;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.card-container-nj-style {
+  border-top: 0.5rem solid #538200 !important;
+  border-left: none !important;
+  border-bottom: none !important;
+  border-right: none !important;
+  margin: 2rem !important;
+  box-shadow: 0 0.0625rem 0.125rem rgb(0 0 0 / 4%), 0 0.125rem 0.25rem rgb(0 0 0 / 4%),
+    0 0.25rem 0.5rem rgb(0 0 0 / 4%), 0 0.5rem 1rem rgb(0 0 0 / 4%), 0 1rem 2rem rgb(0 0 0 / 4%),
+    0 2rem 3rem rgb(0 0 0 / 4%);
+  padding-top: 2rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  padding-bottom: 0rem !important;
+  border-radius: 0 !important;
+}
+
+.greenDividerCenter {
+  height: 5rem;
+  width: 20rem;
+  position: relative;
+  border-top: 0.125rem solid #7fb135;
+  margin: auto;
+}
+
+.legalMessage {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.legalMessage p {
+  font-size: 1rem;
+  text-align: center;
+}

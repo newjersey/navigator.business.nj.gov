@@ -9,7 +9,7 @@ describe("search business name", () => {
   });
 
   it("searches available names", () => {
-    cy.get("[data-get-started]").click();
+    cy.get("[data-hero-button]").click();
     cy.wait(1000); // wait for onboarding animation
 
     cy.get('input[aria-label="Business name"]').type("Aculyst");

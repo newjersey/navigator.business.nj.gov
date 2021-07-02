@@ -9,7 +9,7 @@ describe("Roadmap", () => {
   });
 
   it("enters user info and shows the roadmap", () => {
-    cy.get("[data-get-started]").click();
+    cy.get("[data-hero-button]").click();
     cy.wait(1000); // wait for onboarding animation
 
     cy.get('input[aria-label="Business name"]').type("Beesapple's");
