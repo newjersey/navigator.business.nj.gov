@@ -3,6 +3,7 @@ import { FnType } from "@functions/index";
 
 export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
   handler: `${handlerPath(__dirname)}/app.handler`,
+  timeout: 66,
   events: [
     {
       http: {

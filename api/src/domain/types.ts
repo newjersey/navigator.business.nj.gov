@@ -10,6 +10,10 @@ export interface BusinessNameRepo {
   deleteAll: () => Promise<void>;
 }
 
+export interface BusinessNameClient {
+  search: (name: string) => Promise<string[]>;
+}
+
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
 }

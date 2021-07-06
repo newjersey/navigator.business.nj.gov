@@ -1,36 +1,31 @@
-import { BusinessNameRepo, SearchBusinessName } from "../types";
+import { BusinessNameClient, SearchBusinessName } from "../types";
 import { searchBusinessNameFactory } from "./searchBusinessNameFactory";
 
 describe("searchBusinessNames", () => {
-  let stubBusinessNameRepo: jest.Mocked<BusinessNameRepo>;
+  let stubBusinessNameClient: jest.Mocked<BusinessNameClient>;
   let searchBusinessName: SearchBusinessName;
 
   beforeEach(() => {
-    stubBusinessNameRepo = {
-      search: jest.fn(),
-      save: jest.fn(),
-      deleteAll: jest.fn(),
-      disconnect: jest.fn(),
-    };
+    stubBusinessNameClient = { search: jest.fn() };
 
-    searchBusinessName = searchBusinessNameFactory(stubBusinessNameRepo);
+    searchBusinessName = searchBusinessNameFactory(stubBusinessNameClient);
   });
 
   it("removes articles, designators, trailing punctuation before searching", async () => {
-    stubBusinessNameRepo.search.mockResolvedValue([]);
+    stubBusinessNameClient.search.mockResolvedValue([]);
     await searchBusinessName("the ()my c-o-o-l a business,,, llc.");
-    expect(stubBusinessNameRepo.search).toHaveBeenCalledWith("my c-o-o-l business");
+    expect(stubBusinessNameClient.search).toHaveBeenCalledWith("my c-o-o-l business");
   });
 
   it("is unavailable when names are identical and returns similar names", async () => {
-    stubBusinessNameRepo.search.mockResolvedValue(["my cool business"]);
+    stubBusinessNameClient.search.mockResolvedValue(["my cool business"]);
     const nameAvailability = await searchBusinessName("my cool business");
     expect(nameAvailability.status).toEqual("UNAVAILABLE");
     expect(nameAvailability.similarNames).toEqual(["my cool business"]);
   });
 
   it("limits similar names to max 10", async () => {
-    stubBusinessNameRepo.search.mockResolvedValue(Array(11).fill("my cool business"));
+    stubBusinessNameClient.search.mockResolvedValue(Array(11).fill("my cool business"));
     const nameAvailability = await searchBusinessName("my cool business");
     expect(nameAvailability.similarNames).toHaveLength(10);
   });
@@ -43,7 +38,7 @@ describe("searchBusinessNames", () => {
     const testValues = ["my-cool-business", "my cool, business", "my: cool business", 'my "cool" business'];
     for (const value of testValues) {
       it(`is unavailable for ${value}`, async () => {
-        stubBusinessNameRepo.search.mockResolvedValue([value]);
+        stubBusinessNameClient.search.mockResolvedValue([value]);
         expect((await searchBusinessName("my cool business")).status).toEqual("UNAVAILABLE");
       });
     }
@@ -53,7 +48,7 @@ describe("searchBusinessNames", () => {
     const testValues = ["mycool business", "my  cool business"];
     for (const value of testValues) {
       it(`is unavailable for ${value}`, async () => {
-        stubBusinessNameRepo.search.mockResolvedValue([value]);
+        stubBusinessNameClient.search.mockResolvedValue([value]);
         expect((await searchBusinessName("my cool business")).status).toEqual("UNAVAILABLE");
       });
     }
@@ -63,7 +58,7 @@ describe("searchBusinessNames", () => {
     const testValues = ["a my cool business", "my the cool business", "my cool business an"];
     for (const value of testValues) {
       it(`is unavailable for ${value}`, async () => {
-        stubBusinessNameRepo.search.mockResolvedValue([value]);
+        stubBusinessNameClient.search.mockResolvedValue([value]);
         expect((await searchBusinessName("my cool business")).status).toEqual("UNAVAILABLE");
       });
     }
@@ -79,7 +74,7 @@ describe("searchBusinessNames", () => {
     ];
     for (const value of testValues) {
       it(`is unavailable for ${value}`, async () => {
-        stubBusinessNameRepo.search.mockResolvedValue([value]);
+        stubBusinessNameClient.search.mockResolvedValue([value]);
         expect((await searchBusinessName("my cool business")).status).toEqual("UNAVAILABLE");
       });
     }
@@ -89,7 +84,7 @@ describe("searchBusinessNames", () => {
     const testValues = ["my cool business LLC", "my COOL business", "The my cool business"];
     for (const value of testValues) {
       it(`is unavailable for ${value}`, async () => {
-        stubBusinessNameRepo.search.mockResolvedValue([value]);
+        stubBusinessNameClient.search.mockResolvedValue([value]);
         expect((await searchBusinessName("my cool business")).status).toEqual("UNAVAILABLE");
       });
     }

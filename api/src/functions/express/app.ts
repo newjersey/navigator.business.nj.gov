@@ -6,26 +6,17 @@ import { userRouterFactory } from "../../api/userRouter";
 import { DynamoUserDataClient } from "../../db/DynamoUserDataClient";
 import cors from "cors";
 import { businessNameRouterFactory } from "../../api/businessNameRouter";
-import { PostgresBusinessNameRepo } from "../../db/PostgresBusinessNameRepo";
 import { searchBusinessNameFactory } from "../../domain/business-names/searchBusinessNameFactory";
 import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
 import { searchLicenseStatusFactory } from "../../domain/license-status/searchLicenseStatusFactory";
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
-import { LicenseStatusClient, LicenseStatusResult, NameAndAddress } from "../../domain/types";
-import { FakeLicenseStatusClient } from "../../client/FakeLicenseStatusClient";
+import { LicenseStatusResult, NameAndAddress } from "../../domain/types";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
+import { WebserviceBusinessNameClient } from "../../client/WebserviceBusinessNameClient";
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-
-const connection = {
-  user: process.env.DB_USER || "postgres",
-  host: process.env.DB_HOST || "localhost",
-  database: process.env.DB_NAME || "businesslocal",
-  password: process.env.DB_PASSWORD || "",
-  port: 5432,
-};
 
 const IS_OFFLINE = process.env.IS_OFFLINE; // set by serverless-offline
 
@@ -40,21 +31,16 @@ if (IS_OFFLINE === "true") {
   dynamoDb = new AWS.DynamoDB.DocumentClient();
 }
 
-// feature flag for license status
-const USE_FAKE_LICENSE_CLIENT = process.env.USE_FAKE_LICENSE_CLIENT;
-let licenseStatusClient: LicenseStatusClient;
-if (USE_FAKE_LICENSE_CLIENT === "true") {
-  licenseStatusClient = FakeLicenseStatusClient();
-} else {
-  const LICENSE_STATUS_BASE_URL = process.env.LICENSE_STATUS_BASE_URL || "http://localhost:9000";
-  licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL);
-}
+const LICENSE_STATUS_BASE_URL = process.env.LICENSE_STATUS_BASE_URL || "http://localhost:9000";
+const licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL);
+
+const BUSINESS_NAME_BASE_URL = process.env.BUSINESS_NAME_BASE_URL || "http://localhost:9000";
+const businessNameClient = WebserviceBusinessNameClient(BUSINESS_NAME_BASE_URL);
 
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 
-const businessNameRepo = PostgresBusinessNameRepo(connection);
-const searchBusinessName = searchBusinessNameFactory(businessNameRepo);
+const searchBusinessName = searchBusinessNameFactory(businessNameClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 

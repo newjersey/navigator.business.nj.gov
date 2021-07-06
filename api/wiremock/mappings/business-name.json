@@ -1,11 +1,11 @@
 {
   "request": {
     "method": "POST",
-    "url": "/ws/simple/queryLicenseStatus"
+    "url": "/ws/simple/queryBusinessName"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "license-status-response.json",
+    "bodyFileName": "business-name-response.json",
     "headers": {
       "Content-Type": "text/json"
     }

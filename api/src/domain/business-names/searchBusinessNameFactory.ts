@@ -1,6 +1,6 @@
-import { BusinessNameRepo, NameAvailability, SearchBusinessName } from "../types";
+import { BusinessNameClient, NameAvailability, SearchBusinessName } from "../types";
 
-export const searchBusinessNameFactory = (businessNameRepo: BusinessNameRepo): SearchBusinessName => {
+export const searchBusinessNameFactory = (businessNameClient: BusinessNameClient): SearchBusinessName => {
   return async (name: string): Promise<NameAvailability> => {
     const searchName = nameManipulator(name)
       .makeLowerCase()
@@ -12,7 +12,7 @@ export const searchBusinessNameFactory = (businessNameRepo: BusinessNameRepo): S
       return Promise.reject("BAD_INPUT");
     }
 
-    const similarNames = await businessNameRepo.search(searchName);
+    const similarNames = await businessNameClient.search(searchName);
 
     const adjustedName = cleanName(name);
     const adjustedSimilar = similarNames.map(cleanName);

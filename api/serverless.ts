@@ -14,6 +14,7 @@ const dbName = process.env.DB_NAME || "";
 const cognitoArn = process.env.COGNITO_ARN || "";
 const useFakeLicenseClient = process.env.USE_FAKE_LICENSE_CLIENT || "";
 const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
+const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
 const dbPort = "5432";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
@@ -96,6 +97,7 @@ const serverlessConfiguration: AWS = {
       DB_HOST: dbHost,
       USE_FAKE_LICENSE_CLIENT: useFakeLicenseClient,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
+      BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
     },
     lambdaHashingVersion: "20201221",
   },

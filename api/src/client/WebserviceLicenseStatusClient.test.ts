@@ -18,7 +18,7 @@ describe("WebserviceLicenseStatusClient", () => {
     const entities = [generateLicenseEntity({})];
     mockAxios.post.mockResolvedValue({ data: entities });
     expect(await client.search("some-name", "12345", "some-license-type")).toEqual(entities);
-    expect(mockAxios.post).toHaveBeenCalledWith("www.example.com/ws/getLicenseStatus", {
+    expect(mockAxios.post).toHaveBeenCalledWith("www.example.com/ws/simple/queryLicenseStatus", {
       zipCode: "12345",
       businessName: "some-name",
       licenseType: "some-license-type",
