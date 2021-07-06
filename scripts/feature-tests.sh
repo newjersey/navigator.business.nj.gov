@@ -33,7 +33,9 @@ export API_PORT=${API_PORT}
 export DYNAMO_PORT=${DYNAMO_PORT}
 export LAMBDA_PORT=${LAMBDA_PORT}
 export DB_NAME=${DB_NAME}
-LICENSE_STATUS_BASE_URL=http://localhost:${WIREMOCK_PORT}  npm --prefix=api start &
+export LICENSE_STATUS_BASE_URL=http://localhost:${WIREMOCK_PORT}
+export BUSINESS_NAME_BASE_URL=http://localhost:${WIREMOCK_PORT}
+npm --prefix=api start &
 while ! echo exit | nc localhost ${API_PORT}; do sleep 1; done
 
 # need to start api before building webapp so that it can query for municipalities
