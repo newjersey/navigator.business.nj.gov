@@ -21,13 +21,13 @@ export const AuthButton = (): ReactElement => {
   };
 
   const loginButton = () => (
-    <button className="usa-button" onClick={login}>
+    <button className="usa-button usa-button--outline auth-button" onClick={login}>
       Log in
     </button>
   );
 
   const logoutButton = () => (
-    <button className="usa-button usa-button--outline" onClick={logout}>
+    <button className="usa-button usa-button--outline auth-button" onClick={logout}>
       Log out
     </button>
   );
