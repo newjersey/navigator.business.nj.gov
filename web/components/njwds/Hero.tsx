@@ -11,7 +11,7 @@ interface Props {
 
 export const Hero = (props: Props): ReactElement => {
   return (
-    <section className="usa-hero gradient-bg top-padding top-padding-5" aria-label="Introduction">
+    <section className="usa-hero gradient-bg top-padding top-padding-5 padding-bottom-10 " aria-label="Introduction">
       <div className="grid-container text-align flex-desktop">
         <h1 className="hero-header med-font">
           Welcome to <span className="bold-font"> MyBizNJ! </span>
@@ -20,8 +20,8 @@ export const Hero = (props: Props): ReactElement => {
           <img src="/img/Hero-img.svg" alt="Hero People" />
         </div>
         <div className="usa-hero__callout no-bg no-max-width flex-order-1">
-          <h1 className="usa-hero__heading large-font dark-font text-desktop">
-            <span className="usa-hero__heading--alt dark-font display-inline-lscreen display-desktop">
+          <h1 className="usa-hero__heading large-font text-primary-darker text-desktop">
+            <span className="usa-hero__heading--alt text-primary-darker display-inline-lscreen display-desktop">
               {props.calloutText}
             </span>
             {props.subCalloutText}
