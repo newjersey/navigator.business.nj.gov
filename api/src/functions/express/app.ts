@@ -11,7 +11,7 @@ import { searchBusinessNameFactory } from "../../domain/business-names/searchBus
 import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
 import { searchLicenseStatusFactory } from "../../domain/license-status/searchLicenseStatusFactory";
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
-import { LicenseStatusClient } from "../../domain/types";
+import { LicenseStatusClient, LicenseStatusResult, NameAndAddress } from "../../domain/types";
 import { FakeLicenseStatusClient } from "../../client/FakeLicenseStatusClient";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 
@@ -65,6 +65,19 @@ app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 
 app.get("/health", (_req, res) => {
   res.send("Alive");
+});
+
+// DELETE ME WHEN THE TESTING WORK IS COMPLETED
+app.post("/api/test-license-status", async (req, res) => {
+  const nameAndAddress = req.body as NameAndAddress;
+
+  searchLicenseStatus(nameAndAddress, "Home Improvement Contractors")
+    .then((result: LicenseStatusResult) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
 });
 
 export const handler = serverless(app);
