@@ -1,9 +1,20 @@
-.header {
-  padding-top: 2rem;
-  padding-right: 6rem;
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+.auth-button {
+  border-radius: 0.25rem !important;
+  font-size: 1.38rem !important;
+  padding: 1rem 1.5rem !important;
+  box-shadow: inset 0 0 0 3px hsl(82, 100%, 25%) !important;
+}
+
+.auth-button:hover {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 3px #466c04 !important;
+  color: #466c04;
+}
+
+.auth-button:active {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 3px #243413 !important;
+  color: #243413;
 }
 
 .gradient-bg {
@@ -129,6 +140,10 @@
 
 .display-block {
   display: block;
+}
+
+.display-inline-block {
+  display: inline-block;
 }
 
 @media only screen and (min-width: 640px) {
@@ -281,6 +296,10 @@
 
   .padding-header {
     padding-right: 2rem !important;
+  }
+
+  .display-flex-desktop {
+    display: flex !important;
   }
 }
 

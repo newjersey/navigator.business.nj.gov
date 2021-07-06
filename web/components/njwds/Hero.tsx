@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { AuthButton } from "@/components/AuthButton";
 
 interface Props {
   calloutText: string;
@@ -25,14 +26,19 @@ export const Hero = (props: Props): ReactElement => {
             </span>
             {props.subCalloutText}
           </h1>
-          <p className="dark-font med-font p-width p-padding text-desktop">{props.supportingText}</p>
-          <button
-            className="usa-button usa-button--big left-buttton"
-            onClick={props.onClick}
-            data-hero-button
-          >
-            {props.callToActionText}
-          </button>
+          <p className="dark-font med-font p-width p-padding text-desktop margin-bottom-4">
+            {props.supportingText}
+          </p>
+          <div className="display-inline-block display-flex-desktop">
+            <button
+              className="usa-button usa-button--big left-buttton margin-right-205"
+              onClick={props.onClick}
+              data-hero-button
+            >
+              {props.callToActionText}
+            </button>
+            <AuthButton />
+          </div>
         </div>
       </div>
     </section>

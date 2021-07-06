@@ -3,7 +3,6 @@ import React, { ReactElement, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { AuthButton } from "@/components/AuthButton";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 
@@ -19,12 +18,6 @@ const Home = (): ReactElement => {
 
   return (
     <PageSkeleton>
-      <div className="header padding-header">
-        <div className="auth-button">
-          <AuthButton />
-        </div>
-      </div>
-
       <Hero
         calloutText="Your Business,"
         subCalloutText=" Your Guide"
