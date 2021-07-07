@@ -5,6 +5,7 @@ import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { LandingPage } from "@/display-content/LandingPage";
 
 const Home = (): ReactElement => {
   const { userData } = useUserData();
@@ -19,10 +20,10 @@ const Home = (): ReactElement => {
   return (
     <PageSkeleton>
       <Hero
-        calloutText="Your Business,"
-        subCalloutText=" Your Guide"
-        supportingText="Get your free, personalized roadmap to start your new business in New Jersey."
-        callToActionText="Get started"
+        calloutText={LandingPage.heroCalloutFirstLineText}
+        subCalloutText={LandingPage.heroCalloutSecondLineText}
+        supportingText={LandingPage.heroSupportingText}
+        callToActionText={LandingPage.herocallToActionText}
         onClick={() => {
           router.push("/onboarding");
         }}
@@ -31,9 +32,12 @@ const Home = (): ReactElement => {
       <div className="landsection-2 landsection-2-bg height-34 contain-bg">
         <div className="landsection-2-content grid-desktop">
           <h1 className="landsection-2-header text-align-center no-top-bottom-margin padding-bottom-40 fixed-width no-padding-lr">
-            Starting a business in New
-            <span className="landsection2-heading-alt display-inline-lscreen"> Jersey has never been </span>
-            <span className="landsection2-heading-alt">faster or easier!</span>
+            {LandingPage.section2HeaderFirstLineText}
+            <span className="landsection2-heading-alt display-inline-lscreen">
+              {" "}
+              {LandingPage.section2HeaderSecondLineText}{" "}
+            </span>
+            <span className="landsection2-heading-alt">{LandingPage.section2HeaderThirdLineText}</span>
           </h1>
 
           <div className="landsection2-image img-desktop">
@@ -41,22 +45,21 @@ const Home = (): ReactElement => {
           </div>
 
           <p className="small-font text-align-center padding-20 p-desktop">
-            We will give you a step-by-step guide to help get your business up and running. We’ll ask you a
-            few onboarding questions, be prepared to tell us your business’:
+            {LandingPage.section2SupportingText}
           </p>
 
           <div className="landsection2-icons-container icon-container-desktop">
             <div className="landsection2-icon">
               <img src="../img/Icon-legal-structure.svg" alt="Legal Structure Icon" />
-              <p>Legal Structure</p>
+              <p>{LandingPage.section2Icon1Text}</p>
             </div>
             <div className="landsection2-icon">
               <img src="../img/Icon-industry.svg" alt="Industry Icon" />
-              <p>Industry</p>
+              <p>{LandingPage.section2Icon2Text}</p>
             </div>
             <div className="landsection2-icon">
               <img src="../img/Icon-Location.svg" alt="Location Icon" />
-              <p>Location</p>
+              <p>{LandingPage.section2Icon3Text}</p>
             </div>
           </div>
         </div>
@@ -64,8 +67,10 @@ const Home = (): ReactElement => {
 
       <SinglePageLayout>
         <h1 className="text-align-center font-32 top-padding line-height no-padding-top">
-          Not Starting Your
-          <span className="display-block display-inline-lscreen display-inline-desktop"> Business?</span>
+          {LandingPage.section3HeaderFirstLineText}
+          <span className="display-block display-inline-lscreen display-inline-desktop">
+            {LandingPage.section3HeaderSecondLineText}
+          </span>
         </h1>
 
         <ul className="usa-card-group keep-flex-column">
@@ -73,16 +78,16 @@ const Home = (): ReactElement => {
             <div className="usa-card__container items-align-center lr-margin card-container-nj-style desktop-wh">
               <header className="usa-card__header padding-top-4 padding-top-1">
                 <h2 className="usa-card__heading dark-green-text text-align-center">
-                  Explore Business.NJ.gov
+                  {LandingPage.column1Header}
                 </h2>
               </header>
               <div className="usa-card__body text-align-center card-padding no-padding-lr padding-bottom-5">
-                <p>Visit our website with more resources to start, operate, and grow your business.</p>
+                <p>{LandingPage.column1SupportingText}</p>
               </div>
 
               <div className="usa-card__footer card-footer-padding">
                 <Link href="https://business.nj.gov/">
-                  <button className="usa-button usa-button--outline">Visit the Site</button>
+                  <button className="usa-button usa-button--outline">{LandingPage.column1Button}</button>
                 </Link>
               </div>
 
@@ -98,19 +103,16 @@ const Home = (): ReactElement => {
             <div className="usa-card__container items-align-center lr-margin card-container-nj-style desktop-wh">
               <header className="usa-card__header padding-top-4 padding-top-1">
                 <h2 className="usa-card__heading dark-green-text text-align-center ">
-                  Sign Up for Our Newsletter
+                  {LandingPage.column2Header}
                 </h2>
               </header>
               <div className="usa-card__body text-align-center card-padding no-padding-lr padding-bottom-2">
-                <p>
-                  Already a registered business and want to know the lastest grants and regulations likely to
-                  affect your business? Join our weekly newsletter.
-                </p>
+                <p>{LandingPage.column2SupportingText}</p>
               </div>
 
               <div className="usa-card__footer card-footer-padding">
                 <Link href="https://business.nj.gov/newsletter-signup">
-                  <button className="usa-button usa-button--outline">Sign Up</button>
+                  <button className="usa-button usa-button--outline">{LandingPage.column2Button}</button>
                 </Link>
               </div>
 
@@ -126,18 +128,17 @@ const Home = (): ReactElement => {
             <div className="usa-card__container items-align-center lr-margin card-container-nj-style desktop-wh">
               <header className="usa-card__header padding-top-4 padding-top-1">
                 <h2 className="usa-card__heading dark-green-text text-align-center">
-                  Chat with a New Jersey Representative
+                  {LandingPage.column3Header}
                 </h2>
               </header>
               <div className="usa-card__body text-align-center card-padding no-padding-lr padding-bottom-12">
-                <p>
-                  Local representatives are available 9a.m-5p.m, Monday - Friday to help you with any business
-                  challenge. 9a.m.-5p.m. eastern time.
-                </p>
+                <p>{LandingPage.column3SupportingText}</p>
               </div>
 
               <div className="usa-card__footer card-footer-padding">
-                <button className="usa-button usa-button--outline intercom-button">Start chatting</button>
+                <button className="usa-button usa-button--outline intercom-button">
+                  {LandingPage.column3Button}
+                </button>
               </div>
 
               <div className="usa-card__media usa-card__media--inset card-media-padding">
@@ -155,12 +156,7 @@ const Home = (): ReactElement => {
         <div className="greenDividerCenter"></div>
 
         <div className="legalMessage">
-          <p>
-            The informations shared through MyBizNJ is a guide and should not take the place of legal or tax
-            advice. We recommend the consultation of a lawyer, accountant, and an insurance agent when forming
-            a business. You can also seek additional support by contacting your local Small Business
-            Development Center.
-          </p>
+          <p>{LandingPage.legalMessageText}</p>
         </div>
       </SinglePageLayout>
       <div className="usa-identifier">
