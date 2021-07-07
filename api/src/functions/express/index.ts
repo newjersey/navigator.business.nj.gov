@@ -3,15 +3,8 @@ import { FnType } from "@functions/index";
 
 export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
   handler: `${handlerPath(__dirname)}/app.handler`,
-  timeout: 66,
+  timeout: 30,
   events: [
-    {
-      http: {
-        method: "ANY",
-        path: "/api/test-license-status", // DELETE ME WHEN TESTING WORK DONE
-        cors: true,
-      },
-    },
     {
       http: {
         method: "ANY",

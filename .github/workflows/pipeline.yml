@@ -172,10 +172,10 @@ jobs:
         working-directory: api
 
       - name: 🚀 Deploy api with serverless
-        run: npm run serverless deploy -- --verbose --stage develop --region us-east-1
+        run: npm run serverless deploy -- --verbose --stage dev --region us-east-1
         working-directory: ./api
         env:
-          STAGE: develop
+          STAGE: dev
           DB_USER: ${{ secrets.DB_USER_DEV }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD_DEV }}
           DB_NAME: ${{ secrets.DB_NAME_DEV }}
@@ -190,7 +190,7 @@ jobs:
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_DEV }}
 
       - name: 🦋 run database migrations
-        run: npm run serverless invoke -- -f migrate --stage develop --region us-east-1
+        run: npm run serverless invoke -- -f migrate --stage dev --region us-east-1
         working-directory: ./api
 
       - name: 🚀 Deploy web to AWS Amplify

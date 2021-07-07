@@ -4,7 +4,6 @@ import axios, { AxiosError } from "axios";
 export const WebserviceLicenseStatusClient = (baseUrl: string): LicenseStatusClient => {
   const search = (name: string, zipCode: string, licenseType: string): Promise<LicenseEntity[]> => {
     const url = `${baseUrl}/ws/simple/queryLicenseStatus`;
-    console.log("requesting", url);
     return axios
       .post(url, {
         zipCode: zipCode,
