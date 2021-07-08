@@ -1,0 +1,19 @@
+.grey-bg {
+  background: #e5e5e5;
+}
+
+.align-justify {
+  text-align: justify;
+}
+
+.legal-footer-roadmap-mobile {
+  width: 95%;
+  margin: auto;
+}
+
+@media only screen and (min-width: 1024px) {
+  .legal-footer-roadmap {
+    width: 69%;
+    margin: auto;
+  }
+}

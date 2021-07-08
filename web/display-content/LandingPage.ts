@@ -24,6 +24,4 @@ export const LandingPage: Record<string, string> = {
   column3SupportingText:
     "Local representatives are available 9a.m-5p.m, Monday - Friday to help you with any business challenge. 9a.m.-5p.m. eastern time.",
   column3Button: "Start chatting",
-  legalMessageText:
-    "This information is supplied as a guide and is not a substitute for legal or professional advice. It is the responsibility of the business owner to comply with all local, county, and state regulations even if they are not listed here. For no-cost assistance with your business, use the live chat to speak with a Business Advocate based in New Jersey.",
 };

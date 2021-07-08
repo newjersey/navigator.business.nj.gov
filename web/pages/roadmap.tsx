@@ -15,6 +15,7 @@ import { RoadmapDisplayContent } from "@/lib/types/types";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { Content } from "@/components/Content";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { LegalMessage } from "@/display-content/FooterLegalMessage";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -94,6 +95,11 @@ const RoadmapPage = (props: Props): ReactElement => {
             <Step key={step.id} step={step} last={index === roadmap.steps.length - 1} />
           ))}
       </SinglePageLayout>
+      <div className="grey-bg align-justify">
+        <div className="display-flex fjc fac padding-2 line-height-body-2 legal-footer-roadmap legal-footer-roadmap-mobile">
+          <p>{LegalMessage.legalMessageText}</p>{" "}
+        </div>
+      </div>
     </PageSkeleton>
   );
 };

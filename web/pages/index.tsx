@@ -6,6 +6,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LandingPage } from "@/display-content/LandingPage";
+import { LegalMessage } from "@/display-content/FooterLegalMessage";
 
 const Home = (): ReactElement => {
   const { userData } = useUserData();
@@ -152,13 +153,12 @@ const Home = (): ReactElement => {
             </div>
           </li>
         </ul>
-
         <div className="greenDividerCenter"></div>
-
         <div className="legalMessage">
-          <p>{LandingPage.legalMessageText}</p>
+          <p>{LegalMessage.legalMessageText}</p>
         </div>
       </SinglePageLayout>
+
       <div className="usa-identifier">
         <section
           className="usa-identifier__section usa-identifier__section--masthead"
