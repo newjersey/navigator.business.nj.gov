@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, createStyles, makeStyles } from "@material-ui/core";
 import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -7,12 +7,22 @@ import { createEmptyNameAndAddress, NameAndAddress } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
 import { ErrorAlertType } from "@/components/tasks/LicenseTask";
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    disabledTextField: {
+      background: "#e6e6e6",
+      color: "#1b1b1b",
+    },
+  })
+);
+
 interface Props {
   onSubmit: (nameAndAddress: NameAndAddress) => void;
   showErrorAlert: ErrorAlertType;
 }
 
 export const CheckStatus = (props: Props): ReactElement => {
+  const classes = useStyles();
   const [formValues, setFormValues] = useState<NameAndAddress>(createEmptyNameAndAddress());
   const { userData } = useUserData();
 
@@ -133,6 +143,8 @@ export const CheckStatus = (props: Props): ReactElement => {
                 id: "state",
                 "data-testid": "state",
               }}
+              disabled
+              className={`${classes.disabledTextField}`}
             />
           </div>
         </div>
