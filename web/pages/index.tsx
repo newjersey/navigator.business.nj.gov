@@ -6,12 +6,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LandingPage } from "@/display-content/LandingPage";
-<<<<<<< HEAD
 import { LegalMessage } from "@/display-content/FooterLegalMessage";
-=======
-
-
->>>>>>> [#154] made text editable
 
 const Home = (): ReactElement => {
   const { userData } = useUserData();
@@ -23,7 +18,7 @@ const Home = (): ReactElement => {
     }
   }, [userData]);
 
-// {LandingPage.heroCalloutFirstLineText}
+  // {LandingPage.heroCalloutFirstLineText}
 
   return (
     <PageSkeleton>
@@ -41,14 +36,10 @@ const Home = (): ReactElement => {
         <div className="landsection-2-content grid-desktop">
           <h1 className="landsection-2-header text-align-center no-top-bottom-margin padding-bottom-40 fixed-width no-padding-lr">
             {LandingPage.section2HeaderFirstLineText}
-<<<<<<< HEAD
             <span className="landsection2-heading-alt display-inline-lscreen">
               {" "}
               {LandingPage.section2HeaderSecondLineText}{" "}
             </span>
-=======
-            <span className="landsection2-heading-alt display-inline-lscreen"> {LandingPage.section2HeaderSecondLineText} </span>
->>>>>>> [#154] made text editable
             <span className="landsection2-heading-alt">{LandingPage.section2HeaderThirdLineText}</span>
           </h1>
 
@@ -80,13 +71,9 @@ const Home = (): ReactElement => {
       <SinglePageLayout>
         <h1 className="text-align-center font-32 top-padding line-height no-padding-top">
           {LandingPage.section3HeaderFirstLineText}
-<<<<<<< HEAD
           <span className="display-block display-inline-lscreen display-inline-desktop">
             {LandingPage.section3HeaderSecondLineText}
           </span>
-=======
-          <span className="display-block display-inline-lscreen display-inline-desktop">{LandingPage.section3HeaderSecondLineText}</span>
->>>>>>> [#154] made text editable
         </h1>
 
         <ul className="usa-card-group keep-flex-column">
@@ -119,21 +106,11 @@ const Home = (): ReactElement => {
             <div className="usa-card__container items-align-center lr-margin card-container-nj-style desktop-wh">
               <header className="usa-card__header padding-top-4 padding-top-1">
                 <h2 className="usa-card__heading dark-green-text text-align-center ">
-<<<<<<< HEAD
                   {LandingPage.column2Header}
                 </h2>
               </header>
               <div className="usa-card__body text-align-center card-padding no-padding-lr padding-bottom-2">
                 <p>{LandingPage.column2SupportingText}</p>
-=======
-                {LandingPage.column2Header}
-                </h2>
-              </header>
-              <div className="usa-card__body text-align-center card-padding no-padding-lr padding-bottom-2">
-                <p>
-                {LandingPage.column2SupportingText}
-                </p>
->>>>>>> [#154] made text editable
               </div>
 
               <div className="usa-card__footer card-footer-padding">
@@ -154,7 +131,6 @@ const Home = (): ReactElement => {
             <div className="usa-card__container items-align-center lr-margin card-container-nj-style desktop-wh">
               <header className="usa-card__header padding-top-4 padding-top-1">
                 <h2 className="usa-card__heading dark-green-text text-align-center">
-<<<<<<< HEAD
                   {LandingPage.column3Header}
                 </h2>
               </header>
@@ -166,19 +142,6 @@ const Home = (): ReactElement => {
                 <button className="usa-button usa-button--outline intercom-button">
                   {LandingPage.column3Button}
                 </button>
-=======
-                {LandingPage.column3Header}
-                </h2>
-              </header>
-              <div className="usa-card__body text-align-center card-padding no-padding-lr padding-bottom-12">
-                <p>
-                {LandingPage.column3SupportingText}
-                </p>
-              </div>
-
-              <div className="usa-card__footer card-footer-padding">
-                <button className="usa-button usa-button--outline intercom-button">{LandingPage.column3Button}</button>
->>>>>>> [#154] made text editable
               </div>
 
               <div className="usa-card__media usa-card__media--inset card-media-padding">
@@ -194,13 +157,7 @@ const Home = (): ReactElement => {
         </ul>
         <div className="greenDividerCenter"></div>
         <div className="legalMessage">
-<<<<<<< HEAD
           <p>{LegalMessage.legalMessageText}</p>
-=======
-          <p>
-            {LandingPage.legalMessageText}
-          </p>
->>>>>>> [#154] made text editable
         </div>
       </SinglePageLayout>
 

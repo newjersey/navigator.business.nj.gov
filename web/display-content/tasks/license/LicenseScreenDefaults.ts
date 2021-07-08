@@ -25,5 +25,5 @@ export const LicenseScreenDefaults: Record<string, string> = {
   pendingPermitStatusText: "Pending",
   activePermitStatusText: "Active",
   tooltipText:
-    'Your license status will update automatically after the Division of Consumer Affairs has received your application and you enter your identifying information into the “Check Status” tab below.',
+    "Your license status will update automatically after the Division of Consumer Affairs has received your application and you enter your identifying information into the “Check Status” tab below.",
 };
