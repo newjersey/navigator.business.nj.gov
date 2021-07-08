@@ -13,11 +13,11 @@ export const LicenseScreenDefaults: Record<string, string> = {
   address1Placeholder: "Type your address",
   address2Label: "Business Address Line 2 (Optional)",
   address2Placeholder: "Type your address",
-  zipCodeLabel: "Zip code",
-  zipCodePlaceholder: "Type your zip code",
+  zipCodeLabel: "ZIP Code",
+  zipCodePlaceholder: "Type your ZIP Code",
   stateLabel: "State",
   submitText: "Submit",
-  errorText: "We cannot find your application.",
+  errorText: "We cannot find your application. Please check the information you’ve entered.",
   fieldsRequiredText: "Please fill in all non-optional fields",
   foundText: "Great, we’ve found your application! Please check the details below.",
   permitStatusText: "Permit Status:",
@@ -25,5 +25,5 @@ export const LicenseScreenDefaults: Record<string, string> = {
   pendingPermitStatusText: "Pending",
   activePermitStatusText: "Active",
   tooltipText:
-    'Your license application status will update automatically after the Division of Consumer Affairs has received your application and you enter your identifying information into the "Check Status" tab below.',
+    'Your license status will update automatically after the Division of Consumer Affairs has received your application and you enter your identifying information into the “Check Status” tab below.',
 };
