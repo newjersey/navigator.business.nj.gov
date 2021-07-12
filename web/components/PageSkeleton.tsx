@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { Banner } from "@/components/njwds/Banner";
 import { BetaBar } from "@/components/BetaBar";
+import { InnovFooter } from "@/components/InnovFooter";
 
 interface Props {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
       <Banner />
       <BetaBar />
       {props.children}
+      <InnovFooter />
     </>
   );
 };
