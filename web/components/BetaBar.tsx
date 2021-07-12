@@ -8,7 +8,12 @@ export const BetaBar = (): ReactElement => {
         <span className="usa-tag bg-base-yellow font-size-75 text-bold text-accent-warm">
           {Beta.betaIconText}
         </span>
-        <span className="margin-x-05">{Beta.betaMainText}</span>
+        <span className="margin-x-05">
+          {Beta.betaMainText}
+          <a href={Beta.betaFormLink} target="_blank">
+            {Beta.betaFormText}
+          </a>
+        </span>
       </div>
     </div>
   );
