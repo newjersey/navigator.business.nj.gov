@@ -11,7 +11,11 @@ const useStyles = makeStyles(() =>
   createStyles({
     disabledTextField: {
       background: "#e6e6e6",
-      color: "#1b1b1b",
+    },
+    zipCodeField: {
+      "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
+        display: "none",
+      },
     },
   })
 );
@@ -128,7 +132,9 @@ export const CheckStatus = (props: Props): ReactElement => {
               inputProps={{
                 id: "zipcode",
                 "data-testid": "zipcode",
+                type: "number",
               }}
+              className={`${classes.zipCodeField}`}
             />
           </div>
           <div className="flex-half padding-left-1">
@@ -142,6 +148,9 @@ export const CheckStatus = (props: Props): ReactElement => {
               inputProps={{
                 id: "state",
                 "data-testid": "state",
+                style: {
+                  color: "#1b1b1b",
+                },
               }}
               disabled
               className={`${classes.disabledTextField}`}
