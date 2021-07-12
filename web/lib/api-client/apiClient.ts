@@ -1,5 +1,11 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import { NameAndAddress, NameAvailability, UserData } from "@/lib/types/types";
+import {
+  NameAndAddress,
+  NameAvailability,
+  SelfRegRequest,
+  SelfRegResponse,
+  UserData,
+} from "@/lib/types/types";
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -17,6 +23,15 @@ export const searchBusinessName = (name: string): Promise<NameAvailability> => {
 
 export const checkLicenseStatus = (nameAndAddress: NameAndAddress): Promise<UserData> => {
   return post(`/license-status`, nameAndAddress);
+};
+
+export const postSelfReg = (selfRegRequest: SelfRegRequest): Promise<SelfRegResponse> => {
+  return axios
+    .post(`${apiBaseUrl}/api/self-reg`, selfRegRequest)
+    .then((response) => response.data)
+    .catch((error: AxiosError) => {
+      return Promise.reject(error.response?.status);
+    });
 };
 
 export const get = async <T>(url: string): Promise<T> => {

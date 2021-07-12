@@ -2,7 +2,6 @@ import { Dispatch } from "react";
 import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
 import * as api from "@/lib/api-client/apiClient";
-import { createEmptyUserData } from "../types/types";
 
 export const onSignIn = async (
   push: (url: string) => Promise<boolean>,
@@ -24,10 +23,6 @@ export const onSignIn = async (
         push("/");
       }
     })
-    .catch(async () => {
-      await api.postUserData(createEmptyUserData(user));
-      push("/");
-    });
 };
 
 export const onSignOut = (push: (url: string) => Promise<boolean>, dispatch: Dispatch<AuthAction>): void => {

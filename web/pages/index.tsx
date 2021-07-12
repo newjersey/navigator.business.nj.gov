@@ -28,7 +28,7 @@ const Home = (): ReactElement => {
         supportingText={LandingPage.heroSupportingText}
         callToActionText={LandingPage.herocallToActionText}
         onClick={() => {
-          router.push("/onboarding");
+          router.push("/signup");
         }}
       />
 

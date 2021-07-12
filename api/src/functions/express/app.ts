@@ -12,6 +12,9 @@ import { searchLicenseStatusFactory } from "../../domain/license-status/searchLi
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 import { WebserviceBusinessNameClient } from "../../client/WebserviceBusinessNameClient";
+import { selfRegRouterFactory } from "../../api/selfRegRouter";
+import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
+import https from "https";
 
 const app = express();
 app.use(bodyParser.json());
@@ -43,10 +46,27 @@ const searchBusinessName = searchBusinessNameFactory(businessNameClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 
+const multilinedKey = (process.env.MYNJ_CERT_KEY || "").replace(/\\n/g, String.fromCharCode(10));
+const multilinedCert = (process.env.MYNJ_CERT || "").replace(/\\n/g, String.fromCharCode(10));
+
+const myNJCertHttpsAgent = new https.Agent({
+  cert: multilinedCert,
+  key: multilinedKey,
+  passphrase: process.env.MYNJ_CERT_PASSPHRASE || "",
+});
+
+const myNJSelfRegClient = MyNJSelfRegClientFactory({
+  serviceToken: process.env.MYNJ_SERVICE_TOKEN || "",
+  roleName: process.env.MYNJ_ROLE_NAME || "",
+  serviceUrl: process.env.MYNJ_SERVICE_URL || "",
+  httpsAgent: myNJCertHttpsAgent,
+});
+
 app.use(bodyParser.json({ strict: false }));
 app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus));
 app.use("/api", businessNameRouterFactory(searchBusinessName));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
+app.use("/api", selfRegRouterFactory(userDataClient, myNJSelfRegClient));
 
 app.get("/health", (_req, res) => {
   res.send("Alive");

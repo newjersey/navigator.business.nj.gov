@@ -27,6 +27,7 @@ describe("userRouter", () => {
     stubUserDataClient = {
       get: jest.fn(),
       put: jest.fn(),
+      findByEmail: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
     app = express();

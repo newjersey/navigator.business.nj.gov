@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+        <ns2:grantResponse xmlns:ns2="http://my.state.nj.us/">
+            <return>
+                <Success>true</Success>
+                <AuthID>123456</AuthID>
+                <AuthURL>
+                    https://myt1.state.nj.us/signup/SignupLinked?oid=some-stuff-here
+                </AuthURL>
+            </return>
+        </ns2:grantResponse>
+    </S:Body>
+</S:Envelope>

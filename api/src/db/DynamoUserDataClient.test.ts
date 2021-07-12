@@ -32,4 +32,13 @@ describe("DynamoUserDataClient", () => {
 
     expect(await dynamoUserDataClient.get("some-id")).toEqual(userData);
   });
+
+  it("finds a user by email", async () => {
+    expect(await dynamoUserDataClient.findByEmail("email@example.com")).toBeUndefined();
+
+    const userData = generateUserData({ user: generateUser({ email: "email@example.com" }) });
+    await dynamoUserDataClient.put(userData);
+
+    expect(await dynamoUserDataClient.findByEmail("email@example.com")).toEqual(userData);
+  });
 });

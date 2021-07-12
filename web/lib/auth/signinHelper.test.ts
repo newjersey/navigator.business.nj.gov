@@ -64,27 +64,6 @@ describe("SigninHelper", () => {
       expect(mockPush).toHaveBeenCalledWith("/");
       expect(mockApi.getUserData).toHaveBeenCalledWith("123");
     });
-
-    it("if user does not exist, post new user data", async () => {
-      const user = generateUser({ id: "123" });
-      mockApi.getUserData.mockRejectedValue(undefined);
-      mockApi.postUserData.mockResolvedValue(generateUserData({ user: user }));
-
-      mockSession.getCurrentUser.mockResolvedValue(user);
-
-      await onSignIn(mockPush, mockDispatch);
-      expect(mockApi.getUserData).toHaveBeenCalledWith("123");
-      expect(mockApi.postUserData.mock.calls[0][0].user).toEqual(user);
-      expect(mockApi.postUserData.mock.calls[0][0].onboardingData).toEqual({
-        businessName: "",
-        industry: undefined,
-        legalStructure: undefined,
-        municipality: undefined,
-        liquorLicense: false,
-        homeBasedBusiness: false,
-      });
-      expect(mockPush).toHaveBeenCalledWith("/");
-    });
   });
 
   describe("onSignOut", () => {

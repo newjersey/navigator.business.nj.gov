@@ -11,6 +11,7 @@ import {
   Municipality,
   NameAndAddress,
   OnboardingData,
+  SelfRegResponse,
   UserData,
 } from "./types";
 import dayjs from "dayjs";
@@ -113,6 +114,14 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     items: [generateLicenseStatusItem({})],
     status: "PENDING",
     lastCheckedStatus: dayjs().toISOString(),
+    ...overrides,
+  };
+};
+
+export const generateSelfRegResponse = (overrides: Partial<SelfRegResponse>): SelfRegResponse => {
+  return {
+    myNJUserKey: "some-mynj-key-" + randomInt(),
+    authRedirectURL: "some-redirect-url-" + randomInt(),
     ...overrides,
   };
 };

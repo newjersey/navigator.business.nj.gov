@@ -24,6 +24,7 @@ describe("updateLicenseStatus", () => {
     stubUserDataClient = {
       get: jest.fn(),
       put: jest.fn(),
+      findByEmail: jest.fn(),
     };
     updateLicenseStatus = updateLicenseStatusFactory(stubUserDataClient, stubSearchLicenseStatus);
 

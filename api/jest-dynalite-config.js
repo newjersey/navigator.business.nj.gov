@@ -6,11 +6,33 @@ module.exports = {
           AttributeName: "userId",
           AttributeType: "S",
         },
+        {
+          AttributeName: "email",
+          AttributeType: "S",
+        },
       ],
       KeySchema: [
         {
           AttributeName: "userId",
           KeyType: "HASH",
+        },
+      ],
+      GlobalSecondaryIndexes: [
+        {
+          IndexName: "EmailIndex",
+          KeySchema: [
+            {
+              AttributeName: "email",
+              KeyType: "HASH",
+            },
+          ],
+          Projection: {
+            ProjectionType: "ALL",
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
         },
       ],
       ProvisionedThroughput: {

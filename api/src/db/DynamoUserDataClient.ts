@@ -18,6 +18,30 @@ export const DynamoUserDataClient = (db: AWS.DynamoDB.DocumentClient, tableName:
     return userData;
   };
 
+  const findByEmail = (email: string): Promise<UserData | undefined> => {
+    const params = {
+      TableName: tableName,
+      IndexName: "EmailIndex",
+      KeyConditionExpression: "email = :email",
+      ExpressionAttributeValues: {
+        ":email": email,
+      },
+    };
+    return db
+      .query(params)
+      .promise()
+      .then(async (result) => {
+        if (!result.Items || result.Items.length !== 1) {
+          return Promise.resolve(undefined);
+        }
+        return await doMigration(result.Items[0].data);
+      })
+      .catch((error) => {
+        console.log(error);
+        return Promise.reject("Not found");
+      });
+  };
+
   const get = (userId: string): Promise<UserData> => {
     const params = {
       TableName: tableName,
@@ -44,6 +68,7 @@ export const DynamoUserDataClient = (db: AWS.DynamoDB.DocumentClient, tableName:
       TableName: tableName,
       Item: {
         userId: userData.user.id,
+        email: userData.user.email,
         data: {
           ...userData,
           version: CURRENT_VERSION,
@@ -65,5 +90,6 @@ export const DynamoUserDataClient = (db: AWS.DynamoDB.DocumentClient, tableName:
   return {
     get,
     put,
+    findByEmail,
   };
 };

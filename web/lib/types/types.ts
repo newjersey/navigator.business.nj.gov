@@ -264,3 +264,13 @@ export type LicenseStatusResult = {
 };
 
 export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+
+export type SelfRegResponse = {
+  authRedirectURL: string;
+};
+
+export type SelfRegRequest = {
+  name: string;
+  email: string;
+  confirmEmail: string;
+};

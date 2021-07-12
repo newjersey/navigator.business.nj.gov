@@ -188,6 +188,12 @@ jobs:
           VPC_ID: ${{ secrets.VPC_ID }}
           USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_DEV }}
+          MYNJ_CERT: ${{ secrets.MYNJ_CERT_DEV }}
+          MYNJ_CERT_KEY: ${{ secrets.MYNJ_CERT_KEY_DEV }}
+          MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_DEV }}
+          MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_DEV }}
+          MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_DEV }}
+          MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage dev --region us-east-1
@@ -269,6 +275,11 @@ jobs:
           VPC_ID: ${{ secrets.VPC_ID }}
           USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_STAGING }}
+          MYNJ_CERT: ${{ secrets.MYNJ_CERT_STAGING }}
+          MYNJ_CERT_KEY: ${{ secrets.MYNJ_CERT_KEY_STAGING }}
+          MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_STAGING }}
+          MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_STAGING }}
+          MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_STAGING }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage staging --region us-east-1
@@ -350,6 +361,11 @@ jobs:
           VPC_ID: ${{ secrets.VPC_ID }}
           USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_PROD }}
+          MYNJ_CERT: ${{ secrets.MYNJ_CERT_PROD }}
+          MYNJ_CERT_KEY: ${{ secrets.MYNJ_CERT_KEY_PROD }}
+          MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_PROD }}
+          MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_PROD }}
+          MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_PROD }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage prod --region us-east-1

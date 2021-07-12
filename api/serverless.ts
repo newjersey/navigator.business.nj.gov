@@ -24,6 +24,13 @@ const subnetId1 = process.env.VPC_SUBNET_ID_1 || "";
 const subnetId2 = process.env.VPC_SUBNET_ID_2 || "";
 const vpcId = process.env.VPC_ID || "";
 
+const myNJCert = process.env.MYNJ_CERT || "";
+const myNJCertKey = process.env.MYNJ_CERT_KEY || "";
+const myNJCertPassphrase = process.env.MYNJ_CERT_PASSPHRASE || "";
+const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
+const myNJRoleName = process.env.MYNJ_ROLE_NAME || "";
+const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
+
 let vpcConfig = undefined;
 if (securityGroupId && subnetId1 && subnetId2) {
   vpcConfig = {
@@ -98,6 +105,12 @@ const serverlessConfiguration: AWS = {
       USE_FAKE_LICENSE_CLIENT: useFakeLicenseClient,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
+      MYNJ_SERVICE_TOKEN: myNJServiceToken,
+      MYNJ_ROLE_NAME: myNJRoleName,
+      MYNJ_SERVICE_URL: myNJServiceUrl,
+      MYNJ_CERT: myNJCert,
+      MYNJ_CERT_KEY: myNJCertKey,
+      MYNJ_CERT_PASSPHRASE: myNJCertPassphrase,
     },
     lambdaHashingVersion: "20201221",
   },
@@ -115,11 +128,33 @@ const serverlessConfiguration: AWS = {
               AttributeName: "userId",
               AttributeType: "S",
             },
+            {
+              AttributeName: "email",
+              AttributeType: "S",
+            },
           ],
           KeySchema: [
             {
               AttributeName: "userId",
               KeyType: "HASH",
+            },
+          ],
+          GlobalSecondaryIndexes: [
+            {
+              IndexName: "EmailIndex",
+              KeySchema: [
+                {
+                  AttributeName: "email",
+                  KeyType: "HASH",
+                },
+              ],
+              Projection: {
+                ProjectionType: "ALL",
+              },
+              ProvisionedThroughput: {
+                ReadCapacityUnits: 1,
+                WriteCapacityUnits: 1,
+              },
             },
           ],
           ProvisionedThroughput: {
