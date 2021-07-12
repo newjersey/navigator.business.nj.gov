@@ -30,6 +30,7 @@ const myNJCertPassphrase = process.env.MYNJ_CERT_PASSPHRASE || "";
 const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
 const myNJRoleName = process.env.MYNJ_ROLE_NAME || "";
 const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
+const awsSecretId = process.env.AWS_SECRET_ID || "";
 
 let vpcConfig = undefined;
 if (securityGroupId && subnetId1 && subnetId2) {
@@ -81,12 +82,20 @@ const serverlessConfiguration: AWS = {
               "dynamodb:UpdateItem",
               "dynamodb:DeleteItem",
             ],
-            Resource: `arn:aws:dynamodb:${region}:*:table/${usersTable}`,
+            Resource: [
+              `arn:aws:dynamodb:${region}:*:table/${usersTable}`,
+              `arn:aws:dynamodb:${region}:*:table/${usersTable}/index/*`,
+            ],
           },
           {
             Effect: "Allow",
             Action: ["s3:GetObject"],
             Resource: "arn:aws:s3:::*/*",
+          },
+          {
+            Effect: "Allow",
+            Action: ["secretsmanager:GetSecretValue"],
+            Resource: `arn:aws:secretsmanager:${region}:*:secret:*`,
           },
         ],
       },
@@ -111,6 +120,7 @@ const serverlessConfiguration: AWS = {
       MYNJ_CERT: myNJCert,
       MYNJ_CERT_KEY: myNJCertKey,
       MYNJ_CERT_PASSPHRASE: myNJCertPassphrase,
+      AWS_SECRET_ID: awsSecretId,
     },
     lambdaHashingVersion: "20201221",
   },

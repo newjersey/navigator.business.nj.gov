@@ -2,23 +2,18 @@ import axios from "axios";
 import { SelfRegClient } from "../domain/types";
 import { MyNJSelfRegClientFactory } from "./MyNJSelfRegClient";
 import { generateUser } from "../domain/factories";
-import * as https from "https";
 
 jest.mock("axios");
 
 describe("MyNJSelfRegClient", () => {
   let mockedAxios: jest.Mock;
   let client: SelfRegClient;
-  const httpsAgent = new https.Agent({
-    cert: "some-cert-string",
-    key: "some-key-string",
-  });
 
   const config = {
     serviceToken: "some-service-token",
     roleName: "some-role-name",
     serviceUrl: "some-service-url",
-    httpsAgent: httpsAgent,
+    getCertHttpsAgent: jest.fn(),
   };
 
   beforeEach(() => {
@@ -52,7 +47,7 @@ describe("MyNJSelfRegClient", () => {
       url: config.serviceUrl,
       data: expectedBody,
       headers: { "Content-Type": "text/xml;encoding=UTF-8" },
-      httpsAgent: httpsAgent,
+      httpsAgent: undefined,
     });
   });
 
@@ -74,7 +69,7 @@ describe("MyNJSelfRegClient", () => {
       url: config.serviceUrl,
       data: expectedBody,
       headers: { "Content-Type": "text/xml;encoding=UTF-8" },
-      httpsAgent: httpsAgent,
+      httpsAgent: undefined,
     });
   });
 

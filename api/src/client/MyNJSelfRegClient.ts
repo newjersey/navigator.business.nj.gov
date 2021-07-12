@@ -1,5 +1,4 @@
-import { BusinessUser, SelfRegClient, SelfRegResponse } from "../domain/types";
-import * as https from "https";
+import { BusinessUser, GetCertHttpsAgent, SelfRegClient, SelfRegResponse } from "../domain/types";
 import axios from "axios";
 import xml2js from "xml2js";
 
@@ -7,7 +6,7 @@ type MyNJConfig = {
   serviceToken: string;
   roleName: string;
   serviceUrl: string;
-  httpsAgent: https.Agent;
+  getCertHttpsAgent: GetCertHttpsAgent;
 };
 
 export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
@@ -19,20 +18,23 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
     return makeRequest(createGrantBody(user), "GRANT");
   };
 
-  const makeRequest = (body: string, type: "GRANT" | "RESUME"): Promise<SelfRegResponse> => {
+  const makeRequest = async (body: string, type: "GRANT" | "RESUME"): Promise<SelfRegResponse> => {
     const headers = {
       "Content-Type": "text/xml;encoding=UTF-8",
     };
+
+    const httpsAgent = await config.getCertHttpsAgent();
 
     return axios({
       method: "post",
       url: config.serviceUrl,
       data: body,
       headers: headers,
-      httpsAgent: config.httpsAgent,
+      httpsAgent: httpsAgent,
     })
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);
+        console.log(response);
 
         const xmlResponseName = type === "GRANT" ? "ns2:grantResponse" : "ns2:resumeResponse";
         const xmlResponseObj = response["S:Envelope"]["S:Body"][0][xmlResponseName][0]["return"][0];

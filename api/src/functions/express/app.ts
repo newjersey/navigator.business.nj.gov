@@ -15,6 +15,7 @@ import { WebserviceBusinessNameClient } from "../../client/WebserviceBusinessNam
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
 import https from "https";
+import { getMyNJCertsFactory } from "../../client/getMyNJCerts";
 
 const app = express();
 app.use(bodyParser.json());
@@ -46,20 +47,25 @@ const searchBusinessName = searchBusinessNameFactory(businessNameClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 
+const awsSecretId = process.env.AWS_SECRET_ID || "";
 const multilinedKey = (process.env.MYNJ_CERT_KEY || "").replace(/\\n/g, String.fromCharCode(10));
 const multilinedCert = (process.env.MYNJ_CERT || "").replace(/\\n/g, String.fromCharCode(10));
+const certPassphrase = process.env.MYNJ_CERT_PASSPHRASE || "";
 
-const myNJCertHttpsAgent = new https.Agent({
-  cert: multilinedCert,
-  key: multilinedKey,
-  passphrase: process.env.MYNJ_CERT_PASSPHRASE || "",
-});
+const createAgent = (): Promise<https.Agent> =>
+  Promise.resolve(
+    new https.Agent({
+      cert: multilinedCert,
+      key: multilinedKey,
+      passphrase: certPassphrase,
+    })
+  );
 
 const myNJSelfRegClient = MyNJSelfRegClientFactory({
   serviceToken: process.env.MYNJ_SERVICE_TOKEN || "",
   roleName: process.env.MYNJ_ROLE_NAME || "",
   serviceUrl: process.env.MYNJ_SERVICE_URL || "",
-  httpsAgent: myNJCertHttpsAgent,
+  getCertHttpsAgent: multilinedKey ? createAgent : getMyNJCertsFactory(awsSecretId, certPassphrase),
 });
 
 app.use(bodyParser.json({ strict: false }));

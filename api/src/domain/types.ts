@@ -1,3 +1,5 @@
+import * as https from "https";
+
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
@@ -35,6 +37,7 @@ export type SearchLicenseStatus = (
   licenseType: string
 ) => Promise<LicenseStatusResult>;
 export type UpdateLicenseStatus = (userId: string, nameAndAddress: NameAndAddress) => Promise<UserData>;
+export type GetCertHttpsAgent = () => Promise<https.Agent>;
 
 export type NameAndAddress = {
   name: string;
