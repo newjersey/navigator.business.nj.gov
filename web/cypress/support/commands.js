@@ -94,7 +94,7 @@ Cypress.Commands.add('loginByCognitoApi', () => {
         'bearer': cognitoResponse.signInUserSession.idToken.jwtToken
       }
     })
-    .then(() => cy.visit('/'))
+    .then(() => cy.visit('/onboarding'))
   })
 })
 

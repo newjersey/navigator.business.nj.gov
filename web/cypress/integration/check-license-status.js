@@ -9,7 +9,6 @@ describe("search business name", () => {
   });
 
   it("searches and checks license status", () => {
-    cy.get("[data-hero-button]").click();
     cy.wait(1000); // wait for onboarding animation
 
     cy.get('input[aria-label="Business name"]').type("Aculyst");
