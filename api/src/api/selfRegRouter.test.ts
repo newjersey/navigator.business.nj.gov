@@ -85,6 +85,15 @@ describe("selfRegRouter", () => {
           expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
           expect(response.status).toEqual(500);
         });
+
+        it("returns a 409 error when auth resume returns DUPLICATE_SIGNUP", async () => {
+          stubUserDataClient.findByEmail.mockResolvedValue(stubRecordWithMyNJKey);
+          stubSelfRegClient.resume.mockRejectedValue("DUPLICATE_SIGNUP");
+
+          const response = await sendRequest();
+          expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
+          expect(response.status).toEqual(409);
+        });
       });
 
       describe("when record DOES NOT have a myNJ key", () => {
@@ -120,6 +129,16 @@ describe("selfRegRouter", () => {
           expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
           expect(stubUserDataClient.put).not.toHaveBeenCalled();
           expect(response.status).toEqual(500);
+        });
+
+        it("returns a 409 error when auth grant returns DUPLICATE_SIGNUP", async () => {
+          stubUserDataClient.findByEmail.mockResolvedValue(stubRecordNoKey);
+          stubSelfRegClient.grant.mockRejectedValue("DUPLICATE_SIGNUP");
+
+          const response = await sendRequest();
+          expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
+          expect(stubUserDataClient.put).not.toHaveBeenCalled();
+          expect(response.status).toEqual(409);
         });
       });
     });
@@ -179,6 +198,21 @@ describe("selfRegRouter", () => {
 
         const response = await sendRequest();
         expect(response.status).toEqual(500);
+      });
+
+      it("returns a 409 error when auth grant returns DUPLICATE_SIGNUP", async () => {
+        const emptyUserData = createEmptyUserData({
+          myNJUserKey: undefined,
+          email: email,
+          id: stubUuid,
+          name: "",
+        });
+
+        stubUserDataClient.put.mockResolvedValue(emptyUserData);
+        stubSelfRegClient.grant.mockRejectedValue("DUPLICATE_SIGNUP");
+
+        const response = await sendRequest();
+        expect(response.status).toEqual(409);
       });
     });
 

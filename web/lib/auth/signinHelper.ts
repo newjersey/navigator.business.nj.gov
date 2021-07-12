@@ -14,15 +14,13 @@ export const onSignIn = async (
     user: user,
   });
 
-  return api
-    .getUserData(user.id)
-    .then((userData) => {
-      if (userData.formProgress === "COMPLETED") {
-        push("/roadmap");
-      } else {
-        push("/");
-      }
-    })
+  return api.getUserData(user.id).then((userData) => {
+    if (userData.formProgress === "COMPLETED") {
+      push("/roadmap");
+    } else {
+      push("/");
+    }
+  });
 };
 
 export const onSignOut = (push: (url: string) => Promise<boolean>, dispatch: Dispatch<AuthAction>): void => {

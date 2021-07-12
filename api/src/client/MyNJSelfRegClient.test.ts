@@ -95,6 +95,20 @@ describe("MyNJSelfRegClient", () => {
       myNJUserKey: "",
     });
   });
+
+  it("returns a DUPLICATE_SIGNUP error", async () => {
+    mockedAxios.mockRejectedValue(["E1048 Cannot update accepted record"]);
+    await expect(client.resume("some-id")).rejects.toEqual("DUPLICATE_SIGNUP");
+
+    mockedAxios.mockRejectedValue(["E1017 This would duplicate an existing authorization"]);
+    await expect(client.resume("some-id")).rejects.toEqual("DUPLICATE_SIGNUP");
+
+    mockedAxios.mockRejectedValue(["E1059 This would duplicate an existing key"]);
+    await expect(client.resume("some-id")).rejects.toEqual("DUPLICATE_SIGNUP");
+
+    mockedAxios.mockRejectedValue(["E2109 This would duplicate an existing authorization"]);
+    await expect(client.resume("some-id")).rejects.toEqual("DUPLICATE_SIGNUP");
+  });
 });
 
 const grantSuccessReponse =

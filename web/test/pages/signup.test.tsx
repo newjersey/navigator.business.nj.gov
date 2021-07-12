@@ -98,6 +98,21 @@ describe("signup page", () => {
     expect(mockApi.postSelfReg).toHaveBeenCalled();
   });
 
+  it("shows the user an error message if myNJ returns an duplicate_signup error", async () => {
+    renderPage();
+    expect(subject.queryByTestId("error-alert-DUPLICATE_SIGNUP")).not.toBeInTheDocument();
+
+    const rejectedPromise = Promise.reject(409);
+    mockApi.postSelfReg.mockReturnValue(rejectedPromise);
+
+    fillText("Some Name", "name");
+    fillText("some-email@example.com", "email");
+    fillText("some-email@example.com", "confirm-email");
+    clickSubmit();
+    await act(() => rejectedPromise.catch(() => {}));
+    expect(subject.queryByTestId("error-alert-DUPLICATE_SIGNUP")).toBeInTheDocument();
+  });
+
   it("shows the user an error message if myNJ returns an error", async () => {
     renderPage();
     expect(subject.queryByTestId("error-alert-GENERIC")).not.toBeInTheDocument();

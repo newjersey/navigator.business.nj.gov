@@ -8,5 +8,6 @@ export const SelfRegDefaults: Record<string, string> = {
   submitButtonText: "Submit",
   errorTextEmailsNotMatching: "Please enter matching emails.",
   errorTextRequiredFields: "Please fill in all field",
+  errorTextDuplicateSignup: "This email is already registered, please login instead",
   errorTextGeneric: "Something went wrong, please try again later.",
 };

@@ -9,10 +9,11 @@ import { Alert } from "@/components/njwds/Alert";
 import { AuthContext } from "@/pages/_app";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 
-type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "GENERIC";
+type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "DUPLICATE_SIGNUP" | "GENERIC";
 const SelfRegErrorLookup: Record<SelfRegError, string> = {
   EMAILS_DO_NOT_MATCH: SelfRegDefaults.errorTextEmailsNotMatching,
   REQUIRED_FIELDS: SelfRegDefaults.errorTextRequiredFields,
+  DUPLICATE_SIGNUP: SelfRegDefaults.errorTextDuplicateSignup,
   GENERIC: SelfRegDefaults.errorTextGeneric,
 };
 
@@ -60,6 +61,8 @@ const SignUpPage = (): ReactElement => {
       .catch((errorCode) => {
         if (errorCode === 400) {
           setError("EMAILS_DO_NOT_MATCH");
+        } else if (errorCode === 409) {
+          setError("DUPLICATE_SIGNUP");
         } else {
           setError("GENERIC");
         }

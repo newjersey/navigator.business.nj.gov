@@ -193,7 +193,7 @@ jobs:
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_DEV }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_DEV }}
           MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_DEV }}
-          MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE }}
+          MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_DEV }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage dev --region us-east-1
@@ -280,6 +280,7 @@ jobs:
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_STAGING }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_STAGING }}
           MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_STAGING }}
+          MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_STAGING }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage staging --region us-east-1
@@ -366,6 +367,7 @@ jobs:
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_PROD }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_PROD }}
           MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_PROD }}
+          MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_PROD }}
 
       - name: 🦋 run database migrations
         run: npm run serverless invoke -- -f migrate --stage prod --region us-east-1
