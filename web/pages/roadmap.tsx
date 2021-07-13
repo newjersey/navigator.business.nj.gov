@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import { GetStaticPropsResult } from "next";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
@@ -10,7 +10,7 @@ import { AuthButton } from "@/components/AuthButton";
 import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
-import { templateEval } from "@/lib/utils/helpers";
+import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { RoadmapDisplayContent } from "@/lib/types/types";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { Content } from "@/components/Content";
@@ -28,13 +28,13 @@ const RoadmapPage = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const router = useRouter();
 
-  useEffect(() => {
+  useMountEffectWhenDefined(() => {
     (async () => {
       if (userData?.formProgress !== "COMPLETED") {
         await router.replace("/onboarding");
       }
     })();
-  }, [userData]);
+  }, userData);
 
   const getHeader = (): string => {
     return userData?.onboardingData.businessName
