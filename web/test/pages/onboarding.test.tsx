@@ -44,6 +44,41 @@ describe("onboarding form", () => {
     useMockRouter({});
   });
 
+  it("changes url pathname every time a user goes to a different page", async () => {
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    expect(subject.getByTestId("step-1"));
+
+    await visitStep2();
+    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
+    expect(subject.getByTestId("step-2"));
+
+    await visitStep3();
+    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
+    expect(subject.getByTestId("step-3"));
+
+    await visitStep4();
+    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
+    expect(subject.getByTestId("step-4"));
+  });
+
+  it("displays the specific page when directly visited by a user", async () => {
+    useMockRouter({ isReady: true, query: { page: "3" } });
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    expect(subject.getByTestId("step-3"));
+  });
+
+  it("displays page one when a user goes to /onboarding", async () => {
+    mockRouter.mockQuery.mockReturnValue({});
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    expect(subject.getByTestId("step-1"));
+  });
+
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({
       onboardingData: generateOnboardingData({
