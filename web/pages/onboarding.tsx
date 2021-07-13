@@ -22,7 +22,7 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
-import { templateEval } from "@/lib/utils/helpers";
+import { templateEval, useMountEffect } from "@/lib/utils/helpers";
 import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 
@@ -71,6 +71,33 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   }, [userData]);
 
+  useEffect(() => {
+    if (!router.isReady) return;
+    const queryPage = Number(router.query.page);
+    if (isNaN(queryPage)) {
+      const startPage = 1;
+      setPage({
+        current: startPage,
+        previous: startPage,
+      });
+      router.push(
+        {
+          query: { page: startPage },
+        },
+        undefined,
+        { shallow: true }
+      );
+    } else if (queryPage <= PAGES) {
+      const queryPagePrevious = queryPage - 1;
+      setPage({
+        current: queryPage,
+        previous: queryPagePrevious,
+      });
+    } else {
+      router.push("/onboarding?page=1");
+    }
+  }, [router.isReady]);
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
@@ -79,10 +106,20 @@ const OnboardingPage = (props: Props): ReactElement => {
         ...userData,
         onboardingData,
       });
+      const nextCurrentPage = page.current + 1;
       setPage({
-        current: page.current + 1,
+        current: nextCurrentPage,
         previous: page.current,
       });
+      router.push(
+        {
+          query: {
+            page: nextCurrentPage,
+          },
+        },
+        undefined,
+        { shallow: true }
+      );
     } else {
       await update({
         ...userData,
@@ -95,10 +132,20 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const onBack = () => {
     if (page.current + 1 > 0) {
+      const previousPage = page.current - 1;
       setPage({
-        current: page.current - 1,
+        current: previousPage,
         previous: page.current,
       });
+      router.push(
+        {
+          query: {
+            page: previousPage,
+          },
+        },
+        undefined,
+        { shallow: true }
+      );
     }
   };
 

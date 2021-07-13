@@ -1,11 +1,13 @@
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 
 export const mockPush = jest.fn().mockResolvedValue({});
+export const mockQuery = jest.fn().mockResolvedValue({});
 
-export const useMockRouter = (overrides: Partial<{ push: () => void; replace: () => void }>): void => {
+export const useMockRouter = (overrides: Partial<Router>): void => {
   (useRouter as jest.Mock).mockReturnValue({
     push: mockPush,
     replace: mockPush,
+    query: mockQuery,
     ...overrides,
   });
 };
