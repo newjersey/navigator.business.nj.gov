@@ -1,5 +1,5 @@
 import { Request, Router } from "express";
-import { UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
+import { createEmptyUserData, UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 
@@ -12,10 +12,14 @@ const getTokenFromHeader = (req: Request): string => {
 
 type CognitoJWTPayload = {
   sub: string;
+  "custom:myNJUserKey": string;
+  email: string;
 };
 
-export const getSignedInUserId = (req: Request): string =>
-  (jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload).sub;
+export const getSignedInUserId = (req: Request): string => {
+  const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+  return signedInUser["custom:myNJUserKey"] || signedInUser.sub;
+};
 
 export const userRouterFactory = (
   userDataClient: UserDataClient,
@@ -45,7 +49,26 @@ export const userRouterFactory = (
         }
       })
       .catch((error) => {
-        res.status(500).json({ error });
+        // TODO: remove this once self-reg is in place
+        if (error === "Not found") {
+          const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+          const emptyUserData = createEmptyUserData({
+            myNJUserKey: signedInUser["custom:myNJUserKey"],
+            email: signedInUser.email,
+            id: signedInUser["custom:myNJUserKey"],
+            name: "",
+          });
+          userDataClient
+            .put(emptyUserData)
+            .then((result) => {
+              res.json(result);
+            })
+            .catch(() => {
+              res.status(500).json({ error });
+            });
+        } else {
+          res.status(500).json({ error });
+        }
       });
   });
 

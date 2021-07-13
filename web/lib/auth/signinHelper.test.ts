@@ -36,34 +36,6 @@ describe("SigninHelper", () => {
         user: user,
       });
     });
-
-    it("if user form progress is completed, pushes to roadmap", async () => {
-      mockApi.getUserData.mockResolvedValue(
-        generateUserData({
-          formProgress: "COMPLETED",
-        })
-      );
-      const user = generateUser({ id: "123" });
-      mockSession.getCurrentUser.mockResolvedValue(user);
-
-      await onSignIn(mockPush, mockDispatch);
-
-      expect(mockPush).toHaveBeenCalledWith("/roadmap");
-      expect(mockApi.getUserData).toHaveBeenCalledWith("123");
-    });
-
-    it("if user form progress is unstarted, pushes to homepage", async () => {
-      mockApi.getUserData.mockResolvedValue(
-        generateUserData({
-          formProgress: "UNSTARTED",
-        })
-      );
-      const user = generateUser({ id: "123" });
-      mockSession.getCurrentUser.mockResolvedValue(user);
-      await onSignIn(mockPush, mockDispatch);
-      expect(mockPush).toHaveBeenCalledWith("/");
-      expect(mockApi.getUserData).toHaveBeenCalledWith("123");
-    });
   });
 
   describe("onSignOut", () => {

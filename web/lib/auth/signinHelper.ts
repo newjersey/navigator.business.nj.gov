@@ -1,7 +1,6 @@
 import { Dispatch } from "react";
 import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
-import * as api from "@/lib/api-client/apiClient";
 
 export const onSignIn = async (
   push: (url: string) => Promise<boolean>,
@@ -12,14 +11,6 @@ export const onSignIn = async (
   dispatch({
     type: "LOGIN",
     user: user,
-  });
-
-  return api.getUserData(user.id).then((userData) => {
-    if (userData.formProgress === "COMPLETED") {
-      push("/roadmap");
-    } else {
-      push("/");
-    }
   });
 };
 

@@ -13,6 +13,7 @@ type CognitoIdPayload = {
   iss: string;
   sub: string;
   token_use: string;
+  "custom:myNJUserKey": string;
 };
 
 export const getCurrentToken = async (): Promise<string> => {
@@ -29,7 +30,7 @@ export const getCurrentUser = async (): Promise<BusinessUser> => {
 const cognitoPayloadToBusinessUser = (cognitoPayload: CognitoIdPayload): BusinessUser => {
   return {
     name: undefined,
-    id: cognitoPayload.sub,
+    id: cognitoPayload["custom:myNJUserKey"] || cognitoPayload.sub,
     email: cognitoPayload.email,
   };
 };

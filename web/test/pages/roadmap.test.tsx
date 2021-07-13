@@ -1,10 +1,12 @@
 import { render, RenderResult } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
-import { generateMunicipality, generateStep, generateTask } from "@/test/factories";
+import { generateMunicipality, generateStep, generateTask, generateUserData } from "@/test/factories";
 import { useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { IndustryLookup } from "@/display-content/IndustryLookup";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 
+jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -14,11 +16,18 @@ describe("roadmap page", () => {
     jest.resetAllMocks();
     useMockUserData({});
     useMockRoadmap({});
+    useMockRouter({});
   });
 
   const renderRoadmapPage = (): RenderResult => {
     return render(<RoadmapPage displayContent={{ contentMd: "" }} />);
   };
+
+  it("redirects to onboarding if user not finished onboarding", () => {
+    renderRoadmapPage();
+    useMockUserData(generateUserData({ formProgress: "UNSTARTED" }));
+    expect(mockPush).toHaveBeenCalledWith("/onboarding");
+  });
 
   describe("business information", () => {
     it("shows the business name from onboarding data", () => {

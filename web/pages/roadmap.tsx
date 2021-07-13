@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { GetStaticPropsResult } from "next";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
@@ -16,6 +16,7 @@ import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { Content } from "@/components/Content";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { LegalMessage } from "@/display-content/FooterLegalMessage";
+import { useRouter } from "next/router";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -25,6 +26,15 @@ const RoadmapPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
   const { userData, isLoading } = useUserData();
   const { roadmap } = useRoadmap();
+  const router = useRouter();
+
+  useEffect(() => {
+    (async () => {
+      if (userData?.formProgress !== "COMPLETED") {
+        await router.replace("/onboarding");
+      }
+    })();
+  }, [userData]);
 
   const getHeader = (): string => {
     return userData?.onboardingData.businessName

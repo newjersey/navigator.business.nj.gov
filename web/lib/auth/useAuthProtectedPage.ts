@@ -7,8 +7,10 @@ export const useAuthProtectedPage = (): void => {
   const { state } = useContext(AuthContext);
   const router = useRouter();
   useEffect(() => {
-    if (state.isAuthenticated === IsAuthenticated.FALSE) {
-      router.replace("/");
-    }
+    (async () => {
+      if (state.isAuthenticated === IsAuthenticated.FALSE) {
+        await router.replace("/");
+      }
+    })();
   }, [state]);
 };
