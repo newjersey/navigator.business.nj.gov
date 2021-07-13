@@ -5,17 +5,17 @@ import { Icon } from "@/components/njwds/Icon";
 export const InnovFooter = (): ReactElement => {
   return (
     <div className="usa-identifier">
-      <div className="display-flex flex-column margin-x-auto fac padding-top-2 footer-custom-desktop">
+      <div className="display-flex flex-column margin-x-auto fac padding-top-105 footer-custom">
         <section
           className="usa-identifier__section usa-identifier__section--usagov "
-          aria-label="U.S. government information and services"
+          aria-label="New Jersey Office of Innovation information and services"
         >
           <div className="usa-identifier__container">
-            <p className="footer-container footer-container-mobile">
+            <p className="footer-container">
               <span>
                 <a
                   href={Footer.linkOne}
-                  className="usa-identifier__required-link padding-right-1 footerLinkCustom"
+                  className="usa-identifier__required-link padding-right-1 footer-link-custom"
                   target="_blank"
                 >
                   {Footer.linkOneText}
@@ -24,7 +24,7 @@ export const InnovFooter = (): ReactElement => {
               <span>
                 <a
                   href={Footer.linkTwo}
-                  className="usa-identifier__required-link padding-x-1 footerLinkCustom"
+                  className="usa-identifier__required-link padding-x-1 footer-link-custom"
                   target="_blank"
                 >
                   {Footer.linkTwoText}
@@ -33,7 +33,7 @@ export const InnovFooter = (): ReactElement => {
               <span>
                 <a
                   href={Footer.linkThree}
-                  className="usa-identifier__required-link usa-link padding-left-1 footerLinkCustom"
+                  className="usa-identifier__required-link padding-left-1 footer-link-custom"
                   target="_blank"
                 >
                   {Footer.linkThreeText}
@@ -41,43 +41,49 @@ export const InnovFooter = (): ReactElement => {
               </span>
             </p>
 
-            <p className="footer-divider-top margin-y-2"></p>
-            <p className="footer-container footer-container-mobile margin-top-1">
+            <p className="footer-container footer-divider-top padding-y-105 footer-divider-bottom">
               <span className="padding-right-1">
                 {Footer.officeTextOne}
-                <Icon className="heartCustom">favorite</Icon>
+                <Icon className="heart-custom">favorite</Icon>
                 {Footer.officeTextTwo}
-                <a href={Footer.officeLink} target="_blank" className="footerLinkCustom">
+                <a
+                  href={Footer.officeLink}
+                  target="_blank"
+                  className="usa-identifier__required-link footer-link-custom"
+                >
                   {Footer.officeLinkText}
                 </a>
               </span>
 
               <span className="padding-left-1 display-block-mobile display-inline-desktop">
                 {Footer.creditText}
-                <a href={Footer.creditLink} target="_blank" className="footerLinkCustom">
+                <a
+                  href={Footer.creditLink}
+                  target="_blank"
+                  className="usa-identifier__required-link footer-link-custom"
+                >
                   {Footer.creditLinkText}
                 </a>
               </span>
             </p>
-            <p className="footer-divider-bottom"></p>
           </div>
         </section>
 
         <section
           className="usa-identifier__section usa-identifier__section--masthead"
-          aria-label="Agency links"
+          aria-label="Office of Innovation links"
         >
-          <div className="usa-identifier__container display-flex flex-column fac footer-container-desktop">
-            <div className="usa-identifier__identity" aria-label="Agency description">
+          <div className="usa-identifier__container display-flex flex-column fac footer-container-external">
+            <div className="usa-identifier__identity" aria-label="Office of Innovation Description">
               <p className="usa-identifier__identity-domain"></p>
-              <p className="usa-identifier__identity-disclaimer footerTextCustom">
+              <p className="usa-identifier__identity-disclaimer footer-text-custom">
                 {Footer.officeExternalText}
               </p>
             </div>
 
             <div className="usa-identifier__logos margin-right-none">
               <a href={Footer.gitHubLink} className="usa-identifier__logo" target="_blank">
-                <Icon className="githubCustom margin-top-1">github</Icon>
+                <Icon className="github-custom margin-top-1">github</Icon>
               </a>
             </div>
           </div>

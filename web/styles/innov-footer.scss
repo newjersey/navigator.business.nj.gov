@@ -1,36 +1,44 @@
-.footerLinkCustom {
+.footer-link-custom {
   color: #7fb135 !important;
   font-weight: 400 !important;
+  text-decoration: none;
 }
 
-.footerTextCustom {
+.footer-link-custom:focus {
+  text-decoration: underline;
+}
+
+.footer-link-custom:hover {
+  text-decoration: underline;
+}
+
+.footer-link-custom:active {
+  text-decoration: underline;
+}
+
+.footer-text-custom {
   font-weight: 400 !important;
 }
 
-.githubCustom {
+.github-custom {
   color: #e6e6e6;
-  width: 40px !important;
-  height: 40px !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
 }
 
-.heartCustom {
+.heart-custom {
   color: #dd3534;
 }
 
-.footerCustom {
+.footer-custom {
   max-width: 64rem;
-}
-
-.margin-x-auto {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .margin-right-none {
   margin-right: 0rem !important;
 }
 
-.footer-container-mobile {
+.footer-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,42 +50,41 @@
 
 .footer-divider-top {
   border-top: 1px solid #757575;
-  width: 26rem;
 }
 
 .footer-divider-bottom {
   border-bottom: 1px solid #757575;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: $lg) {
   .footer-container span:not(:first-child) {
     border-left: 1px solid #757575;
   }
 
   .footer-divider-top {
     border-top: 1px solid #757575;
-    width: 34.375rem;
   }
 
   .footer-container {
     display: flex;
-    flex-direction: row !important;
+    flex-direction: row;
   }
-  .footer-container-desktop {
+  .footer-container-external {
     display: flex;
-    flex-direction: column !important;
+    flex-direction: column;
     align-items: flex-end !important;
   }
-  .footer-custom-desktop {
+  .footer-custom {
     display: flex;
     flex-direction: row !important;
-    justify-content: space-between !important;
+    justify-content: space-between;
     max-width: 64rem;
   }
   .display-inline-desktop {
-    display: inline !important;
+    display: inline;
   }
   .footer-divider-bottom {
-    display: none;
+    border-bottom: 0rem;
+    padding-bottom: 0.25rem !important;
   }
 }
