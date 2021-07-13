@@ -10,7 +10,7 @@ export const BetaBar = (): ReactElement => {
         </span>
         <span className="margin-x-05">
           {Beta.betaMainText}
-          <a href={Beta.betaFormLink} target="_blank">
+          <a className="usa-link" href={Beta.betaFormLink} target="_blank">
             {Beta.betaFormText}
           </a>
         </span>
