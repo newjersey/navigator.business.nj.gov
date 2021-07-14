@@ -83,7 +83,10 @@ export const InnovFooter = (): ReactElement => {
 
             <div className="usa-identifier__logos margin-right-none">
               <a href={Footer.gitHubLink} className="usa-identifier__logo" target="_blank">
-                <Icon className="github-custom margin-top-1">github</Icon>
+                <Icon className="icon-custom margin-top-1">github</Icon>
+              </a>
+              <a href={Footer.twitterLink} className="usa-identifier__logo" target="_blank">
+                <Icon className="icon-custom margin-top-1">twitter</Icon>
               </a>
             </div>
           </div>

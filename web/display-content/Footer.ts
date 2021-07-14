@@ -10,8 +10,9 @@ export const Footer: Record<string, string> = {
   officeLinkText: "Office of Innovation",
   officeLink: "https://innovation.nj.gov/",
   creditText: " Powered by ",
-  creditLinkText: "Open Source Code",
+  creditLinkText: "Open Source",
   creditLink: "https://business.nj.gov/license-and-copyright-notice",
   officeExternalText: "Follow us on:",
   gitHubLink: "https://github.com/newjersey",
+  twitterLink: "https://twitter.com/i/lists/1148625562895826945",
 };
