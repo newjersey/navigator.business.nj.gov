@@ -48,19 +48,19 @@ describe("onboarding form", () => {
     subject = render(
       <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
     );
-    expect(subject.getByTestId("step-1"));
+    expect(subject.getByTestId("step-1")).toBeInTheDocument();
 
     await visitStep2();
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-2"));
+    expect(subject.getByTestId("step-2")).toBeInTheDocument();
 
     await visitStep3();
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-3"));
+    expect(subject.getByTestId("step-3")).toBeInTheDocument();
 
     await visitStep4();
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-4"));
+    expect(subject.getByTestId("step-4")).toBeInTheDocument();
   });
 
   it("displays the specific page when directly visited by a user", async () => {
@@ -68,7 +68,7 @@ describe("onboarding form", () => {
     subject = render(
       <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
     );
-    expect(subject.getByTestId("step-3"));
+    expect(subject.getByTestId("step-3")).toBeInTheDocument();
   });
 
   it("displays page one when a user goes to /onboarding", async () => {
@@ -76,8 +76,26 @@ describe("onboarding form", () => {
     subject = render(
       <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
     );
-    expect(subject.getByTestId("step-1"));
+    expect(subject.getByTestId("step-1")).toBeInTheDocument();
   });
+
+  it("pushes to page one when a user visits a page number above the valid page range", async () => {
+    useMockRouter({ isReady: true, query: { page: "5" } });
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    expect(subject.getByTestId("step-1")).toBeInTheDocument();
+  }
+  )
+
+  it("pushes to page one when a user visits a page number below the valid page range", async () => {
+    useMockRouter({ isReady: true, query: { page: "0" } });
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    expect(subject.getByTestId("step-1")).toBeInTheDocument();
+  }
+  )
 
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({

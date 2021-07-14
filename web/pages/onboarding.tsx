@@ -71,6 +71,16 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   }, [userData]);
 
+  const queryShallowPush = (page: number) => (
+      router.push(
+        {
+          query: { page: page },
+        },
+        undefined,
+        { shallow: true }
+      )
+  ); 
+
   useEffect(() => {
     if (!router.isReady) return;
     const queryPage = Number(router.query.page);
@@ -80,14 +90,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         current: startPage,
         previous: startPage,
       });
-      router.push(
-        {
-          query: { page: startPage },
-        },
-        undefined,
-        { shallow: true }
-      );
-    } else if (queryPage <= PAGES) {
+      queryShallowPush(startPage);
+    } else if (queryPage <= PAGES && queryPage > 0) {
       const queryPagePrevious = queryPage - 1;
       setPage({
         current: queryPage,
@@ -97,6 +101,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       router.push("/onboarding?page=1");
     }
   }, [router.isReady]);
+
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
@@ -111,15 +116,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         current: nextCurrentPage,
         previous: page.current,
       });
-      router.push(
-        {
-          query: {
-            page: nextCurrentPage,
-          },
-        },
-        undefined,
-        { shallow: true }
-      );
+      queryShallowPush(nextCurrentPage);
     } else {
       await update({
         ...userData,
@@ -137,15 +134,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         current: previousPage,
         previous: page.current,
       });
-      router.push(
-        {
-          query: {
-            page: previousPage,
-          },
-        },
-        undefined,
-        { shallow: true }
-      );
+      queryShallowPush(previousPage);
     }
   };
 
