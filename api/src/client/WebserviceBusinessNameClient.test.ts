@@ -21,4 +21,9 @@ describe("WebserviceBusinessNameClient", () => {
       businessName: "name",
     });
   });
+
+  it("returns empty list if data is empty", async () => {
+    mockAxios.post.mockResolvedValue({ data: "" });
+    expect(await client.search("name")).toEqual([]);
+  });
 });
