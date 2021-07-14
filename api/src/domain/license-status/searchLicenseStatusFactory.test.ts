@@ -1,4 +1,4 @@
-import { LicenseStatusClient, SearchLicenseStatus } from "../types";
+import { LicenseStatusClient, LicenseStatusResult, SearchLicenseStatus } from "../types";
 import { searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
 import { generateLicenseEntity, generateNameAndAddress } from "../factories";
 
@@ -21,7 +21,17 @@ describe("searchLicenseStatus", () => {
       zipCode: "12345",
     });
     await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual("NO MATCH");
-    expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("Crystal", "12345", "Home improvement");
+    expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345", "Home improvement");
+  });
+
+  it("removes leading/trailing space and business designators from search name", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([]);
+    const nameAndAddress = generateNameAndAddress({
+      name: " Crystal, LLC   ",
+      zipCode: "12345",
+    });
+    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual("NO MATCH");
+    expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345", "Home improvement");
   });
 
   it("returns the status license items with matching address line 1", async () => {
@@ -93,6 +103,41 @@ describe("searchLicenseStatus", () => {
         status: "ACTIVE",
       },
     ]);
+  });
+
+  describe("detailed address matching logic", () => {
+    const entityWithAddress = (address: string) =>
+      generateLicenseEntity({
+        checkoffStatus: "Completed",
+        licenseStatus: "Active",
+        addressLine1: address,
+      });
+
+    const queryWithAddress = async (address: string): Promise<LicenseStatusResult> =>
+      await searchLicenseStatus(
+        generateNameAndAddress({
+          addressLine1: address,
+        }),
+        "Home improvement"
+      );
+
+    it("matches on address ignoring spaces and non-alphanumeric characters", async () => {
+      stubLicenseStatusClient.search.mockResolvedValue([entityWithAddress(" 123    Main St.  ! ")]);
+
+      expect((await queryWithAddress("123 Main St")).status).toEqual("ACTIVE");
+    });
+
+    it("matches on address ignoring casing", async () => {
+      stubLicenseStatusClient.search.mockResolvedValue([entityWithAddress(" 123 MAIN ST ")]);
+
+      expect((await queryWithAddress("123 Main st")).status).toEqual("ACTIVE");
+    });
+
+    it("matches on address*", async () => {
+      stubLicenseStatusClient.search.mockResolvedValue([entityWithAddress("123 MAIN ST, UNIT C")]);
+
+      expect((await queryWithAddress("123 main st")).status).toEqual("ACTIVE");
+    });
   });
 
   it("maps Completed to ACTIVE and Unchecked to PENDING", async () => {

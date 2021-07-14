@@ -5,17 +5,21 @@ import {
   NameAndAddress,
   SearchLicenseStatus,
 } from "../types";
+import { inputManipulator } from "../inputManipulator";
 
 export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusClient): SearchLicenseStatus => {
   return async (nameAndAddress: NameAndAddress, licenseType: string): Promise<LicenseStatusResult> => {
-    const entities = await licenseStatusClient.search(
-      nameAndAddress.name,
-      nameAndAddress.zipCode,
-      licenseType
-    );
+    const searchName = inputManipulator(nameAndAddress.name)
+      .makeLowerCase()
+      .removeBusinessDesignators()
+      .trimPunctuation().value;
+
+    const entities = await licenseStatusClient.search(searchName, nameAndAddress.zipCode, licenseType);
 
     const match = entities.find(
-      (it) => it.addressLine1 === nameAndAddress.addressLine1 && it.licenseStatus !== "Expired"
+      (it) =>
+        cleanAddress(it.addressLine1).startsWith(cleanAddress(nameAndAddress.addressLine1)) &&
+        it.licenseStatus !== "Expired"
     );
 
     if (!match) {
@@ -36,3 +40,6 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
     };
   };
 };
+
+export const cleanAddress = (value: string): string =>
+  inputManipulator(value).makeLowerCase().stripPunctuation().stripWhitespace().value;
