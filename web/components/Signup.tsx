@@ -1,7 +1,5 @@
-import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
-import { PageSkeleton } from "@/components/PageSkeleton";
 import React, { ChangeEvent, ReactElement, useContext, useEffect, useState } from "react";
-import { TextField } from "@material-ui/core";
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@material-ui/core";
 import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useRouter } from "next/router";
 import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
@@ -17,7 +15,12 @@ const SelfRegErrorLookup: Record<SelfRegError, string> = {
   GENERIC: SelfRegDefaults.errorTextGeneric,
 };
 
-const SignUpPage = (): ReactElement => {
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const Signup = (props: Props): ReactElement => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [confirmEmail, setConfirmEmail] = useState<string>("");
@@ -30,6 +33,11 @@ const SignUpPage = (): ReactElement => {
       router.replace("/roadmap");
     }
   }, [state]);
+
+  const onClose = (): void => {
+    setError(undefined);
+    props.onClose();
+  };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setName(event.target.value);
@@ -72,7 +80,7 @@ const SignUpPage = (): ReactElement => {
   const showAlert = (): ReactElement => {
     if (error) {
       return (
-        <Alert data-testid={`error-alert-${error}`} slim variant="error">
+        <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
           {SelfRegErrorLookup[error]}
         </Alert>
       );
@@ -82,59 +90,76 @@ const SignUpPage = (): ReactElement => {
   };
 
   return (
-    <PageSkeleton>
-      <SinglePageLayout>
-        {showAlert()}
-        <div className="margin-top-2">
-          <label htmlFor="name">{SelfRegDefaults.nameFieldLabel}</label>
-          <TextField
-            value={name}
-            onChange={handleNameChange}
-            variant="outlined"
-            fullWidth
-            placeholder={SelfRegDefaults.nameFieldPlaceholder}
-            inputProps={{
-              id: "name",
-              "data-testid": "name",
-            }}
-          />
+    <Dialog
+      fullWidth={true}
+      maxWidth="md"
+      open={props.isOpen}
+      onClose={onClose}
+      aria-labelledby="signup-modal"
+    >
+      <DialogTitle id="signup-modal">
+        <div className="padding-top-1 padding-x-2 text-bold font-body-xl">
+          {SelfRegDefaults.signupTitleText}
         </div>
-        <div className="margin-top-2">
-          <label htmlFor="email">{SelfRegDefaults.emailFieldLabel}</label>
-          <TextField
-            value={email}
-            onChange={handleEmailChange}
-            variant="outlined"
-            fullWidth
-            placeholder={SelfRegDefaults.emailFieldPlaceholder}
-            inputProps={{
-              id: "email",
-              "data-testid": "email",
-            }}
-          />
+      </DialogTitle>
+      <DialogContent>
+        <div className="padding-2">
+          <p className="padding-bottom-1">{SelfRegDefaults.signupDescriptionText}</p>
+          {showAlert()}
+          <div className="margin-top-2">
+            <label htmlFor="name">{SelfRegDefaults.nameFieldLabel}</label>
+            <TextField
+              value={name}
+              onChange={handleNameChange}
+              variant="outlined"
+              fullWidth
+              placeholder={SelfRegDefaults.nameFieldPlaceholder}
+              inputProps={{
+                id: "name",
+                "data-testid": "name",
+              }}
+            />
+          </div>
+          <div className="margin-top-2">
+            <label htmlFor="email">{SelfRegDefaults.emailFieldLabel}</label>
+            <TextField
+              value={email}
+              onChange={handleEmailChange}
+              variant="outlined"
+              fullWidth
+              placeholder={SelfRegDefaults.emailFieldPlaceholder}
+              inputProps={{
+                id: "email",
+                "data-testid": "email",
+              }}
+            />
+          </div>
+          <div className="margin-top-2">
+            <label htmlFor="confirm-email">{SelfRegDefaults.confirmEmailFieldLabel}</label>
+            <TextField
+              value={confirmEmail}
+              onChange={handleConfirmEmailChange}
+              variant="outlined"
+              fullWidth
+              placeholder={SelfRegDefaults.confirmEmailFieldPlaceholder}
+              inputProps={{
+                id: "confirm-email",
+                "data-testid": "confirm-email",
+              }}
+            />
+          </div>
         </div>
-        <div className="margin-top-2">
-          <label htmlFor="confirm-email">{SelfRegDefaults.confirmEmailFieldLabel}</label>
-          <TextField
-            value={confirmEmail}
-            onChange={handleConfirmEmailChange}
-            variant="outlined"
-            fullWidth
-            placeholder={SelfRegDefaults.confirmEmailFieldPlaceholder}
-            inputProps={{
-              id: "confirm-email",
-              "data-testid": "confirm-email",
-            }}
-          />
-        </div>
-        <div className="margin-top-2">
+      </DialogContent>
+      <DialogActions>
+        <div className="padding-3">
+          <button className="usa-button usa-button--outline" onClick={onClose}>
+            {SelfRegDefaults.closeButtonText}
+          </button>
           <button className="usa-button" onClick={submitSelfReg} data-testid="submit-selfreg">
             {SelfRegDefaults.submitButtonText}
           </button>
         </div>
-      </SinglePageLayout>
-    </PageSkeleton>
+      </DialogActions>
+    </Dialog>
   );
 };
-
-export default SignUpPage;

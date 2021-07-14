@@ -1,13 +1,16 @@
 export const SelfRegDefaults: Record<string, string> = {
+  signupTitleText: "Create account",
+  signupDescriptionText: "Please provide your information below to get started creating your account",
   nameFieldLabel: "Full name",
   nameFieldPlaceholder: "Type your full name",
   emailFieldLabel: "Email",
   emailFieldPlaceholder: "Type your email",
   confirmEmailFieldLabel: "Confirm email",
   confirmEmailFieldPlaceholder: "Type your email again",
-  submitButtonText: "Submit",
+  submitButtonText: "Create",
+  closeButtonText: "Cancel",
   errorTextEmailsNotMatching: "Please enter matching emails.",
-  errorTextRequiredFields: "Please fill in all field",
+  errorTextRequiredFields: "Please fill in all fields",
   errorTextDuplicateSignup: "This email is already registered, please login instead",
   errorTextGeneric: "Something went wrong, please try again later.",
 };

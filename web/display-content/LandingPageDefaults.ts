@@ -1,4 +1,4 @@
-export const LandingPage: Record<string, string> = {
+export const LandingPageDefaults: Record<string, string> = {
   heroCalloutFirstLineText: "Your Business,",
   heroCalloutSecondLineText: " Your Guide",
   heroSupportingText: "Get your free, personalized roadmap to start your new business in New Jersey.",

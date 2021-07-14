@@ -1,17 +1,17 @@
 import { act, fireEvent, RenderResult } from "@testing-library/react";
-import SignUpPage from "@/pages/signup";
 import * as api from "@/lib/api-client/apiClient";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { renderWithUser } from "@/test/helpers";
 import { generateUser } from "@/test/factories";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { Signup } from "@/components/Signup";
 
 jest.mock("next/router");
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
-describe("signup page", () => {
+describe("<Signup />", () => {
   let subject: RenderResult;
 
   beforeEach(() => {
@@ -21,11 +21,13 @@ describe("signup page", () => {
   });
 
   const renderPage = (): void => {
-    subject = renderWithUser(<SignUpPage />, { isAuthenticated: IsAuthenticated.FALSE });
+    subject = renderWithUser(<Signup isOpen={true} onClose={jest.fn()} />, {
+      isAuthenticated: IsAuthenticated.FALSE,
+    });
   };
 
   it("redirects to roadmap page if user already signed in", () => {
-    subject = renderWithUser(<SignUpPage />, { user: generateUser({}) });
+    subject = renderWithUser(<Signup isOpen={true} onClose={jest.fn()} />, { user: generateUser({}) });
     expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap");
   });
 
