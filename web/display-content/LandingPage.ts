@@ -12,7 +12,7 @@ export const LandingPage: Record<string, string> = {
   section2Icon2Text: "Industry",
   section2Icon3Text: "Location",
   section3HeaderFirstLineText: "Not Starting A",
-  section3HeaderSecondLineText: " Business Today?",
+  section3HeaderSecondLineText: " New Business?",
   column1Header: "Explore Business.NJ.gov",
   column1SupportingText: "Visit our website with more resources to start, operate, and grow your business.",
   column1Button: "Visit the Site",
