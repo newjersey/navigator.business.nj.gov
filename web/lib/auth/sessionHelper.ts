@@ -14,6 +14,16 @@ type CognitoIdPayload = {
   sub: string;
   token_use: string;
   "custom:myNJUserKey": string;
+  identities: CognitoIdentityPayload[] | undefined;
+};
+
+type CognitoIdentityPayload = {
+  dateCreated: string;
+  issuer: string;
+  primary: string;
+  providerName: string;
+  providerType: string;
+  userId: string;
 };
 
 export const getCurrentToken = async (): Promise<string> => {
@@ -28,9 +38,10 @@ export const getCurrentUser = async (): Promise<BusinessUser> => {
 };
 
 const cognitoPayloadToBusinessUser = (cognitoPayload: CognitoIdPayload): BusinessUser => {
+  const myNJIdentityPayload = cognitoPayload.identities?.find((it) => it.providerName === "myNJ");
   return {
     name: undefined,
-    id: cognitoPayload["custom:myNJUserKey"] || cognitoPayload.sub,
+    id: myNJIdentityPayload?.userId || cognitoPayload.sub,
     email: cognitoPayload.email,
   };
 };

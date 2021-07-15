@@ -14,11 +14,22 @@ type CognitoJWTPayload = {
   sub: string;
   "custom:myNJUserKey": string;
   email: string;
+  identities: CognitoIdentityPayload[] | undefined;
+};
+
+type CognitoIdentityPayload = {
+  dateCreated: string;
+  issuer: string;
+  primary: string;
+  providerName: string;
+  providerType: string;
+  userId: string;
 };
 
 export const getSignedInUserId = (req: Request): string => {
   const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
-  return signedInUser["custom:myNJUserKey"] || signedInUser.sub;
+  const myNJIdentityPayload = signedInUser.identities?.find((it) => it.providerName === "myNJ");
+  return myNJIdentityPayload?.userId || signedInUser.sub;
 };
 
 export const userRouterFactory = (
@@ -28,7 +39,8 @@ export const userRouterFactory = (
   const router = Router();
 
   router.get("/users/:userId", (req, res) => {
-    if (getSignedInUserId(req) !== req.params.userId) {
+    const signedInUserId = getSignedInUserId(req);
+    if (signedInUserId !== req.params.userId) {
       res.status(403).json();
       return;
     }
@@ -53,9 +65,9 @@ export const userRouterFactory = (
         if (error === "Not found") {
           const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
           const emptyUserData = createEmptyUserData({
-            myNJUserKey: signedInUser["custom:myNJUserKey"],
+            myNJUserKey: signedInUserId,
             email: signedInUser.email,
-            id: signedInUser["custom:myNJUserKey"],
+            id: signedInUserId,
             name: "",
           });
           userDataClient

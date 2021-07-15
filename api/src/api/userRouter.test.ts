@@ -35,6 +35,22 @@ describe("userRouter", () => {
     app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus));
   });
 
+  const cognitoPayload = ({ id }: { id: string }) => ({
+    sub: "some-sub",
+    "custom:myNJUserKey": undefined,
+    email: "some-eamail",
+    identities: [
+      {
+        dateCreated: "some-date",
+        issuer: "some-issuer",
+        primary: "some-primary",
+        providerName: "myNJ",
+        providerType: "some-provider-type",
+        userId: id,
+      },
+    ],
+  });
+
   afterAll(async () => {
     await new Promise((resolve) => setTimeout(resolve, 500));
   });
@@ -43,7 +59,7 @@ describe("userRouter", () => {
     it("gets user with id", async () => {
       const userData = generateUserData({});
       stubUserDataClient.get.mockResolvedValue(userData);
-      mockJwt.decode.mockReturnValue({ "custom:myNJUserKey": "123" });
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
@@ -52,7 +68,7 @@ describe("userRouter", () => {
     });
 
     it("returns a 403 when user JWT does not match user ID", async () => {
-      mockJwt.decode.mockReturnValue({ "custom:myNJUserKey": "other-user-id" });
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "other-user-id" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer other-user-token");
 
       expect(mockJwt.decode).toHaveBeenCalledWith("other-user-token");
@@ -63,7 +79,7 @@ describe("userRouter", () => {
     it("returns a 500 when user get fails", async () => {
       stubUserDataClient.get.mockRejectedValue("error");
 
-      mockJwt.decode.mockReturnValue({ "custom:myNJUserKey": "123" });
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
       expect(response.status).toEqual(500);
@@ -130,7 +146,7 @@ describe("userRouter", () => {
 
   describe("POST", () => {
     it("puts user data", async () => {
-      mockJwt.decode.mockReturnValue({ "custom:myNJUserKey": "123" });
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
       stubUserDataClient.put.mockResolvedValue(userData);
 
@@ -145,7 +161,7 @@ describe("userRouter", () => {
     });
 
     it("returns a 403 when user JWT does not match user ID", async () => {
-      mockJwt.decode.mockReturnValue({ "custom:myNJUserKey": "other-user-id" });
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "other-user-id" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
 
       const response = await request(app)
@@ -159,7 +175,7 @@ describe("userRouter", () => {
     });
 
     it("returns a 500 when user put fails", async () => {
-      mockJwt.decode.mockReturnValue({ "custom:myNJUserKey": "123" });
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
 
       stubUserDataClient.put.mockRejectedValue("error");
