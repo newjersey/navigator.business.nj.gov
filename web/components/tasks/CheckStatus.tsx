@@ -6,6 +6,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createEmptyNameAndAddress, NameAndAddress } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
 import { ErrorAlertType } from "@/components/tasks/LicenseTask";
+import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -23,6 +24,7 @@ const useStyles = makeStyles(() =>
 interface Props {
   onSubmit: (nameAndAddress: NameAndAddress) => void;
   showErrorAlert: ErrorAlertType;
+  isLoading: boolean;
 }
 
 export const CheckStatus = (props: Props): ReactElement => {
@@ -158,13 +160,15 @@ export const CheckStatus = (props: Props): ReactElement => {
           </div>
         </div>
         <div className="fdr">
-          <button
+          <LoadingButton
             type="submit"
-            className="usa-button mla margin-top-4 margin-bottom-8"
+            children={LicenseScreenDefaults.submitText}
+            onClick={() => {}}
+            loading={props.isLoading}
+            className={"usa-button mla margin-top-4 margin-bottom-8"}
+            outline={true}
             data-testid="check-status-submit"
-          >
-            {LicenseScreenDefaults.submitText}
-          </button>
+          />
         </div>
       </form>
     </>

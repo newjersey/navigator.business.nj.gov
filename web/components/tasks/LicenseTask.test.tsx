@@ -203,6 +203,46 @@ describe("<LicenseTask />", () => {
       await waitForElementToBeRemoved(() => subject.queryByTestId("error-alert-fields-required"));
       expect(mockApi.checkLicenseStatus).toHaveBeenCalled();
     });
+
+    it("displays the loading spinner while request is being made", async () => {
+      useMockUserData(generateUserData({}));
+
+      const returnedPromise = Promise.resolve(generateUserData({}));
+      mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
+      subject = renderTask();
+
+      fillText("business-name", "My Cool Nail Salon");
+      fillText("address-1", "123 Main St");
+      fillText("zipcode", "12345");
+
+      expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+
+      fireEvent.submit(subject.getByTestId("check-status-submit"));
+      expect(subject.queryByTestId("loading-spinner")).toBeInTheDocument();
+      await act(() => returnedPromise);
+
+      expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+    });
+
+    it("displays the loading spinner while failed request is being made", async () => {
+      useMockUserData(generateUserData({}));
+
+      const returnedPromise = Promise.reject(404);
+      mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
+      subject = renderTask();
+
+      fillText("business-name", "My Cool Nail Salon");
+      fillText("address-1", "123 Main St");
+      fillText("zipcode", "12345");
+
+      expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+
+      fireEvent.submit(subject.getByTestId("check-status-submit"));
+      expect(subject.queryByTestId("loading-spinner")).toBeInTheDocument();
+      await act(() => returnedPromise.catch(() => {}));
+
+      expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+    });
   });
 
   describe("receipt screen", () => {

@@ -20,13 +20,13 @@ export const LoadingButton = (props: Props): ReactElement => {
 
   return (
     <button
-      className={`usa-button ${showButtonClass} ${className} ${showDisabledClass}`}
+      className={`usa-button position-relative ${showButtonClass} ${className} ${showDisabledClass}`}
       onClick={onClick}
       {...rest}
     >
       <span className={showInvisibleClass}>{children}</span>
       {loading && (
-        <span className="spinner-overlay">
+        <span className="spinner-overlay" data-testid="loading-spinner">
           <CircularProgress size={14} />
         </span>
       )}

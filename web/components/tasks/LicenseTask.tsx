@@ -26,6 +26,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
   const [showErrorAlert, setShowErrorAlert] = useState<ErrorAlertType>("NONE");
   const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
 
   const allFieldsHaveValues = (nameAndAddress: NameAndAddress) => {
@@ -49,7 +50,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     setLicenseStatusResult(undefined);
   };
 
-  const onSubmit = async (nameAndAddress: NameAndAddress) => {
+  const onSubmit = (nameAndAddress: NameAndAddress): void => {
     if (!userData || !userData.onboardingData.industry) return;
 
     if (!allFieldsHaveValues(nameAndAddress)) {
@@ -57,6 +58,7 @@ export const LicenseTask = (props: Props): ReactElement => {
       return;
     }
 
+    setIsLoading(true);
     api
       .checkLicenseStatus(nameAndAddress)
       .then((result: UserData) => {
@@ -72,6 +74,7 @@ export const LicenseTask = (props: Props): ReactElement => {
       })
       .finally(async () => {
         update(await api.getUserData(userData.user.id));
+        setIsLoading(false);
       });
   };
 
@@ -132,7 +135,7 @@ export const LicenseTask = (props: Props): ReactElement => {
               />
             ) : (
               <div className="margin-3">
-                <CheckStatus onSubmit={onSubmit} showErrorAlert={showErrorAlert} />
+                <CheckStatus onSubmit={onSubmit} showErrorAlert={showErrorAlert} isLoading={isLoading} />
               </div>
             )}
           </div>
