@@ -26,6 +26,7 @@
     "remark-react",
     "focus-trap-react",
     "react-tabs",
-    "dayjs"
+    "dayjs",
+    "next-seo"
   ]
 }

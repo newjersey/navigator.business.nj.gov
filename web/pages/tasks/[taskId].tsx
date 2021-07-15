@@ -16,6 +16,7 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { TaskCTA } from "@/components/TaskCTA";
 import { getModifiedTaskContent, rswitch } from "@/lib/utils/helpers";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
+import { NextSeo } from "next-seo";
 
 interface Props {
   task: Task;
@@ -35,29 +36,32 @@ const TaskPage = (props: Props): ReactElement => {
   );
 
   return (
-    <PageSkeleton>
-      <SidebarPageLayout sidebar={sidebar} backButton={backButton} pageTitle={TaskDefaults.pageTitle}>
-        {rswitch(props.task.id, {
-          "search-business-name": (
-            <div className="margin-3">
-              <SearchBusinessName task={props.task} />
-            </div>
-          ),
-          "apply-for-shop-license": <LicenseTask task={props.task} />,
-          "register-consumer-affairs": <LicenseTask task={props.task} />,
-          default: (
-            <div className="margin-3">
-              <TaskHeader task={props.task} />
-              <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
-              <TaskCTA
-                link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
-                text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
-              />
-            </div>
-          ),
-        })}
-      </SidebarPageLayout>
-    </PageSkeleton>
+    <>
+      <NextSeo title={`Business.NJ.gov Dashboard - ${props.task.name}`} />
+      <PageSkeleton>
+        <SidebarPageLayout sidebar={sidebar} backButton={backButton} pageTitle={TaskDefaults.pageTitle}>
+          {rswitch(props.task.id, {
+            "search-business-name": (
+              <div className="margin-3">
+                <SearchBusinessName task={props.task} />
+              </div>
+            ),
+            "apply-for-shop-license": <LicenseTask task={props.task} />,
+            "register-consumer-affairs": <LicenseTask task={props.task} />,
+            default: (
+              <div className="margin-3">
+                <TaskHeader task={props.task} />
+                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+                <TaskCTA
+                  link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
+                  text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
+                />
+              </div>
+            ),
+          })}
+        </SidebarPageLayout>
+      </PageSkeleton>
+    </>
   );
 };
 

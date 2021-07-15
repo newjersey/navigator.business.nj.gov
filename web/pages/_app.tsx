@@ -13,6 +13,8 @@ import { Hub } from "aws-amplify";
 import { onSignIn } from "@/lib/auth/signinHelper";
 import { useRouter } from "next/router";
 import { HubCapsule } from "@aws-amplify/core";
+import { DefaultSeo } from "next-seo";
+import SEO from "../next-seo.config";
 
 Amplify.configure({
   ...awsExports,
@@ -145,7 +147,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <link rel="stylesheet" href="/css/styles.css" />
       <script src="/intercom/settings.js" />
       <script src="/intercom/init.js" />
-
+      <DefaultSeo {...SEO} />
       <ThemeProvider theme={theme}>
         <AuthContext.Provider value={{ state, dispatch }}>
           <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
