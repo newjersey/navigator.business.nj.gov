@@ -57,6 +57,7 @@ describe("onboarding form", () => {
     await visitStep3();
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
     expect(subject.getByTestId("step-3")).toBeInTheDocument();
+    chooseRadio("general-partnership");
 
     await visitStep4();
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
@@ -187,6 +188,44 @@ describe("onboarding form", () => {
       },
     });
     expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap");
+  });
+
+  it("prevents user from moving after Step 3 if you have not selected a legal structure", async () => {
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    await visitStep2();
+    await visitStep3();
+    clickNext();
+    expect(subject.getByTestId("step-3")).toBeInTheDocument();
+    expect(subject.getByTestId("error-alert-REQUIRED")).toBeInTheDocument();
+    chooseRadio("general-partnership");
+    await visitStep4();
+    expect(subject.queryByTestId("error-alert-REQUIRED")).not.toBeInTheDocument();
+  });
+
+  it("prevents user from moving after Step 4 if you have not selected a location", async () => {
+    const promise = Promise.resolve();
+    mockUpdate.mockReturnValue(promise);
+
+    const newark = generateMunicipality({ displayName: "Newark" });
+
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[newark]} />
+    );
+
+    await visitStep2();
+    await visitStep3();
+    chooseRadio("general-partnership");
+    await visitStep4();
+    clickNext();
+    expect(subject.getByTestId("step-4")).toBeInTheDocument();
+    expect(subject.getByTestId("error-alert-REQUIRED")).toBeInTheDocument();
+    selectByText("Location", "Newark");
+
+    clickNext();
+    await act(() => promise);
+    expect(subject.queryByTestId("error-alert-REQUIRED")).not.toBeInTheDocument();
   });
 
   it("is able to go back", async () => {
@@ -341,6 +380,7 @@ describe("onboarding form", () => {
       await visitStep2();
       selectByValue("Industry", industry);
       await visitStep3();
+      chooseRadio("general-partnership");
     };
 
     const selectHomeBasedBusiness = async (value: string): Promise<void> => {

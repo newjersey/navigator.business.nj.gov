@@ -25,6 +25,7 @@ import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefau
 import { templateEval } from "@/lib/utils/helpers";
 import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { Alert } from "@/components/njwds/Alert";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -55,6 +56,11 @@ export const OnboardingContext = React.createContext<OnboardingContextType>({
   onBack: () => {},
 });
 
+type OnboardingError = "REQUIRED";
+const OnboardingErrorLookup: Record<OnboardingError, string> = {
+  REQUIRED: OnboardingDefaults.errorTextRequired,
+};
+
 const OnboardingPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
 
@@ -62,6 +68,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const router = useRouter();
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
   const [onboardingData, setOnboardingData] = useState<OnboardingData>(createEmptyOnboardingData());
+  const [error, setError] = useState<OnboardingError | undefined>(undefined);
   const { userData, update } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
 
@@ -104,6 +111,16 @@ const OnboardingPage = (props: Props): ReactElement => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
+
+    if (
+      (page.current === 3 && !onboardingData.legalStructure) ||
+      (page.current === 4 && !onboardingData.municipality)
+    ) {
+      setError("REQUIRED");
+      return;
+    }
+
+    setError(undefined);
     if (page.current + 1 <= PAGES) {
       await update({
         ...userData,
@@ -184,6 +201,11 @@ const OnboardingPage = (props: Props): ReactElement => {
         <main className="usa-section">
           <SingleColumnContainer>
             {isLargeScreen && <h2 className="padding-bottom-4">{header()}</h2>}
+            {error && (
+              <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
+                {OnboardingErrorLookup[error]}
+              </Alert>
+            )}
           </SingleColumnContainer>
 
           <div className="slide-container">

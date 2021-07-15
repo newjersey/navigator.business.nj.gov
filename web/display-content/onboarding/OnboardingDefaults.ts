@@ -3,4 +3,5 @@ export const OnboardingDefaults: Record<string, string> = {
   nextButtonText: "Next",
   backButtonText: "Back",
   stepXofYTemplate: "(step ${currentPage} of ${totalPages})",
+  errorTextRequired: "Please provide a value",
 };
