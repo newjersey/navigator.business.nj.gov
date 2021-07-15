@@ -1,11 +1,9 @@
-import React, { ChangeEvent, ReactElement, useContext, useEffect, useState } from "react";
+import React, { ChangeEvent, ReactElement, useState } from "react";
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@material-ui/core";
 import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useRouter } from "next/router";
 import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
 import { Alert } from "@/components/njwds/Alert";
-import { AuthContext } from "@/pages/_app";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 
 type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "DUPLICATE_SIGNUP" | "GENERIC";
 const SelfRegErrorLookup: Record<SelfRegError, string> = {
@@ -26,13 +24,6 @@ export const Signup = (props: Props): ReactElement => {
   const [confirmEmail, setConfirmEmail] = useState<string>("");
   const [error, setError] = useState<SelfRegError | undefined>(undefined);
   const router = useRouter();
-
-  const { state } = useContext(AuthContext);
-  useEffect(() => {
-    if (state.isAuthenticated === IsAuthenticated.TRUE) {
-      router.replace("/roadmap");
-    }
-  }, [state]);
 
   const onClose = (): void => {
     setError(undefined);

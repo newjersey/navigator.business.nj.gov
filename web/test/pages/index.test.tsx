@@ -14,11 +14,15 @@ describe("HomePage", () => {
     useMockUserData({});
   });
 
-  describe("when user has completed onboarding flow", () => {
-    it("redirects to roadmap page", () => {
-      useMockUserData({ formProgress: "COMPLETED" });
-      renderWithUser(<Home />, { user: generateUser({ name: "Ada Lovelace" }) });
-      expect(mockPush).toHaveBeenCalledWith("/roadmap");
-    });
+  it("redirects to roadmap page when user has completed onboarding flow", () => {
+    useMockUserData({ formProgress: "COMPLETED" });
+    renderWithUser(<Home />, { user: generateUser({}) });
+    expect(mockPush).toHaveBeenCalledWith("/roadmap");
+  });
+
+  it("redirects to onboarding page when user has not completed onboarding flow", () => {
+    useMockUserData({ formProgress: "UNSTARTED" });
+    renderWithUser(<Home />, { user: generateUser({}) });
+    expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 });

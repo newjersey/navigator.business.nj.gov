@@ -1,10 +1,7 @@
-import { act, fireEvent, RenderResult } from "@testing-library/react";
+import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
-import * as mockRouter from "@/test/mock/mockRouter";
+import { mockPush } from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { renderWithUser } from "@/test/helpers";
-import { generateUser } from "@/test/factories";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Signup } from "@/components/Signup";
 
 jest.mock("next/router");
@@ -21,15 +18,8 @@ describe("<Signup />", () => {
   });
 
   const renderPage = (): void => {
-    subject = renderWithUser(<Signup isOpen={true} onClose={jest.fn()} />, {
-      isAuthenticated: IsAuthenticated.FALSE,
-    });
+    subject = render(<Signup isOpen={true} onClose={jest.fn()} />);
   };
-
-  it("redirects to roadmap page if user already signed in", () => {
-    subject = renderWithUser(<Signup isOpen={true} onClose={jest.fn()} />, { user: generateUser({}) });
-    expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap");
-  });
 
   it("collects name, email, and confirm email fields and submits to api", () => {
     renderPage();
@@ -51,7 +41,7 @@ describe("<Signup />", () => {
     fillText("some-email@example.com", "confirm-email");
     mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "www.example.com" });
 
-    mockRouter.mockPush.mockImplementation((newUrl: string): void => {
+    mockPush.mockImplementation((newUrl: string): void => {
       expect(newUrl).toEqual("www.example.com");
       done();
     });

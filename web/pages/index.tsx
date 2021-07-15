@@ -17,6 +17,8 @@ const Home = (): ReactElement => {
   useEffect(() => {
     if (userData?.formProgress === "COMPLETED") {
       router.replace("/roadmap");
+    } else if (userData?.formProgress === "UNSTARTED") {
+      router.replace("/onboarding");
     }
   }, [userData]);
 
