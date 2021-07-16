@@ -228,6 +228,19 @@ describe("onboarding form", () => {
     expect(subject.queryByTestId("error-alert-REQUIRED")).not.toBeInTheDocument();
   });
 
+  it("removes required fields error when user goes back", async () => {
+    subject = render(
+      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+    );
+    await visitStep2();
+    await visitStep3();
+    clickNext();
+    expect(subject.getByTestId("step-3")).toBeInTheDocument();
+    expect(subject.getByTestId("error-alert-REQUIRED")).toBeInTheDocument();
+    clickBack();
+    expect(subject.queryByTestId("error-alert-REQUIRED")).not.toBeInTheDocument();
+  });
+
   it("is able to go back", async () => {
     subject = render(
       <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />

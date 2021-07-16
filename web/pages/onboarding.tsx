@@ -144,6 +144,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const onBack = () => {
     if (page.current + 1 > 0) {
+      setError(undefined);
       const previousPage = page.current - 1;
       setPage({
         current: previousPage,
