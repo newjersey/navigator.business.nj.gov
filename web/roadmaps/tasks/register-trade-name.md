@@ -1,8 +1,8 @@
 ---
 id: "register-trade-name"
 name: "Register a Trade Name"
-callToActionLink: ""
-callToActionText: ""
+callToActionLink: "${municipalityWebsite}"
+callToActionText: "Visit the ${municipality} Website"
 ---
 
 If you would like to use a consumer-facing business name, other than your personal name, you can register a trade name with your county clerk.
