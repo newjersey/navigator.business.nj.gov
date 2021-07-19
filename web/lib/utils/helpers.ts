@@ -55,3 +55,7 @@ export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T })
     return cases.default;
   }
 };
+
+export const scrollToTop = (): void => {
+  window.scrollTo(0, 0);
+};

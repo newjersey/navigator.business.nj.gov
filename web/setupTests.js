@@ -7,3 +7,4 @@ process.env.API_BASE_URL = "";
 global.fetch = window.fetch = fetch;
 global.Request = window.Request = fetch.Request;
 global.Response = window.Response = fetch.Response;
+global.scrollTo = jest.fn();

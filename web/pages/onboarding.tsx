@@ -22,7 +22,7 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
-import { templateEval } from "@/lib/utils/helpers";
+import { scrollToTop, templateEval } from "@/lib/utils/helpers";
 import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { Alert } from "@/components/njwds/Alert";
@@ -117,6 +117,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       (page.current === 4 && !onboardingData.municipality)
     ) {
       setError("REQUIRED");
+      scrollToTop();
       return;
     }
 
