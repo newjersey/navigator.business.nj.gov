@@ -3,5 +3,5 @@ export const OnboardingDefaults: Record<string, string> = {
   nextButtonText: "Next",
   backButtonText: "Back",
   stepXofYTemplate: "(step ${currentPage} of ${totalPages})",
-  errorTextRequired: "Please select a city or town to create your business roadmap.",
+  errorTextRequired: "Please select an option.",
 };
