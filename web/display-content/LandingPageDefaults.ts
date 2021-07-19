@@ -16,12 +16,21 @@ export const LandingPageDefaults: Record<string, string> = {
   column1Header: "Explore Business.NJ.gov",
   column1SupportingText: "Visit our website with more resources to start, operate, and grow your business.",
   column1Button: "Visit the Site",
+  column1ButtonLink: "https://business.nj.gov/",
+  column1Image: "../img/Not-Starting-1-visit-site.svg",
+  column1ImageAlt: "Visit Business.NJ.gov site icon",
   column2Header: "Sign Up for Our Newsletter",
   column2SupportingText:
     "Already a registered business and want to know the lastest grants and regulations likely to affect your business? Join our weekly newsletter.",
   column2Button: "Sign Up",
+  column2ButtonLink: "https://business.nj.gov/newsletter-signup",
+  column2Image: "../img/Not-Starting-2-newsletter.svg",
+  column2ImageAlt: "Sign up for our newsletter icon",
   column3Header: "Chat with a New Jersey Representative",
   column3SupportingText:
     "Local representatives are available 9a.m-5p.m, Monday - Friday to help you with any business challenge. 9a.m.-5p.m. eastern time.",
   column3Button: "Start chatting",
+  column3ButtonLink: "",
+  column3Image: "../img/Not-Starting-3-chat.svg",
+  column3ImageAlt: "Chat with a New Jersey representative icon",
 };
