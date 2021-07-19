@@ -15,7 +15,7 @@ const Home = (): ReactElement => {
   const [signupIsOpen, setSignupIsOpen] = React.useState<boolean>(false);
 
   useEffect(() => {
-    if (userData?.formProgress === "COMPLETED") {
+    if (userData?.formProgress === "COMPLETED" || userData?.formProgress === undefined) {
       router.replace("/roadmap");
     } else if (userData?.formProgress === "UNSTARTED") {
       router.replace("/onboarding");

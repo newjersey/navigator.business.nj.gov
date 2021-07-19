@@ -25,4 +25,10 @@ describe("HomePage", () => {
     renderWithUser(<Home />, { user: generateUser({}) });
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
+
+  it("redirects to onboarding page when it is unknown if user has completed onboarding flow or not", () => {
+    useMockUserData({ formProgress: undefined });
+    renderWithUser(<Home />, { user: generateUser({}) });
+    expect(mockPush).toHaveBeenCalledWith("/roadmap");
+  });
 });
