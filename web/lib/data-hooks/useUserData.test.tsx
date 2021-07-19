@@ -1,9 +1,9 @@
 import { useUserData, UseUserDataResponse } from "./useUserData";
-import { generateUseUserDataResponse, renderWithUser } from "@/test/helpers";
+import { generateUseUserDataResponse, withUser } from "@/test/helpers";
 import { BusinessUser } from "@/lib/types/types";
 import * as api from "@/lib/api-client/apiClient";
 import { generateUser, generateUserData } from "@/test/factories";
-import { act } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
@@ -26,7 +26,7 @@ describe("useUserData", () => {
         </>
       );
     }
-    renderWithUser(<TestComponent />, { user: currentUser });
+    render(withUser(<TestComponent />, { user: currentUser }));
     return returnVal;
   };
 

@@ -1,7 +1,8 @@
-import { renderWithUser } from "@/test/helpers";
+import { withUser } from "@/test/helpers";
 import { useRouter } from "next/router";
 import { useAuthProtectedPage } from "./useAuthProtectedPage";
 import { IsAuthenticated } from "./AuthContext";
+import { render } from "@testing-library/react";
 
 jest.mock("next/router");
 
@@ -22,7 +23,7 @@ describe("useAuthProtectedPage", () => {
       useAuthProtectedPage();
       return null;
     }
-    renderWithUser(<TestComponent />, { isAuthenticated: isAuth });
+    render(withUser(<TestComponent />, { isAuthenticated: isAuth }));
   };
 
   it("redirects to homepage when user is not authed", () => {

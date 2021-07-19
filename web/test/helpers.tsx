@@ -1,32 +1,31 @@
 import React, { Dispatch, ReactElement } from "react";
-import { render, RenderResult } from "@testing-library/react";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { AuthContext, ContextualInfoContext } from "@/pages/_app";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser } from "@/lib/types/types";
 
-export const renderWithUser = (
+export const withUser = (
   subject: ReactElement,
   context: {
     user?: BusinessUser;
     dispatch?: Dispatch<AuthAction>;
     isAuthenticated?: IsAuthenticated;
   }
-): RenderResult => {
+): ReactElement => {
   const isAuthenticated =
     context.isAuthenticated || (context.user ? IsAuthenticated.TRUE : IsAuthenticated.FALSE);
   const dispatch = context.dispatch || jest.fn();
   const state: AuthState = { isAuthenticated, user: context.user };
-  return render(<AuthContext.Provider value={{ state, dispatch }}>{subject}</AuthContext.Provider>);
+  return <AuthContext.Provider value={{ state, dispatch }}>{subject}</AuthContext.Provider>;
 };
 
-export const renderWithContextualInfo = (
+export const withContextualInfo = (
   subject: ReactElement,
   contextualInfoMd: string,
   setContextualInfoMd: (contextualInfoMd: string) => void
-): RenderResult => {
-  return render(
+): ReactElement => {
+  return (
     <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
       {subject}
     </ContextualInfoContext.Provider>

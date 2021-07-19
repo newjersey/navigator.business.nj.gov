@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { ContextualInfoLink } from "./ContextualInfoLink";
-import { renderWithContextualInfo } from "@/test/helpers";
+import { withContextualInfo } from "@/test/helpers";
 import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchContextualInfo";
 
 jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({
@@ -23,10 +23,12 @@ describe("<ContextualInfoLink />", () => {
   it("sets the contextual info context when clicked", async () => {
     mockFetchContextualInfo.mockResolvedValue("some markdown content");
     const setContent = jest.fn();
-    const subject = renderWithContextualInfo(
-      <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
-      "",
-      setContent
+    const subject = render(
+      withContextualInfo(
+        <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
+        "",
+        setContent
+      )
     );
     fireEvent.click(subject.getByText("legal structure"));
     await waitFor(() => expect(setContent).toHaveBeenCalledWith("some markdown content"));
@@ -35,10 +37,12 @@ describe("<ContextualInfoLink />", () => {
   it("caches the content so it does not fetch again", async () => {
     mockFetchContextualInfo.mockResolvedValue("some markdown content");
     const setContent = jest.fn();
-    const subject = renderWithContextualInfo(
-      <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
-      "",
-      setContent
+    const subject = render(
+      withContextualInfo(
+        <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
+        "",
+        setContent
+      )
     );
     fireEvent.click(subject.getByText("legal structure"));
     await waitFor(() => expect(setContent).toHaveBeenCalledWith("some markdown content"));

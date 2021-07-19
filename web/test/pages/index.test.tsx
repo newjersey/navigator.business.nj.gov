@@ -1,8 +1,9 @@
 import Home from "@/pages/index";
-import { renderWithUser } from "@/test/helpers";
+import { withUser } from "@/test/helpers";
 import { generateUser } from "@/test/factories";
 import { useMockUserData, setMockUserDataResponse } from "@/test/mock/mockUseUserData";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { render } from "@testing-library/react";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -16,19 +17,18 @@ describe("HomePage", () => {
 
   it("redirects to roadmap page when user has completed onboarding flow", () => {
     useMockUserData({ formProgress: "COMPLETED" });
-    renderWithUser(<Home />, { user: generateUser({}) });
+    render(withUser(<Home />, { user: generateUser({}) }));
     expect(mockPush).toHaveBeenCalledWith("/roadmap");
   });
 
   it("redirects to onboarding page when user has not completed onboarding flow", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
-    renderWithUser(<Home />, { user: generateUser({}) });
+    render(withUser(<Home />, { user: generateUser({}) }));
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 
   it("redirects to onboarding page when there is an error with retrieving the user's data", () => {
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
-    renderWithUser(<Home />, { user: generateUser({}) });
-    expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    render(withUser(<Home />, { user: generateUser({}) }));    expect(mockPush).toHaveBeenCalledWith("/roadmap");
   });
 });
