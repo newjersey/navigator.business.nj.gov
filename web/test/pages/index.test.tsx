@@ -1,7 +1,7 @@
 import Home from "@/pages/index";
 import { renderWithUser } from "@/test/helpers";
 import { generateUser } from "@/test/factories";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockUserData, setMockUserDataResponse } from "@/test/mock/mockUseUserData";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 
 jest.mock("next/router");
@@ -26,8 +26,8 @@ describe("HomePage", () => {
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 
-  it("redirects to onboarding page when it is unknown if user has completed onboarding flow or not", () => {
-    useMockUserData({ formProgress: undefined });
+  it("redirects to onboarding page when there is an error with retrieving the user's data", () => {
+    setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
     renderWithUser(<Home />, { user: generateUser({}) });
     expect(mockPush).toHaveBeenCalledWith("/roadmap");
   });
