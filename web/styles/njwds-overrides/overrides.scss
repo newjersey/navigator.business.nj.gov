@@ -58,3 +58,7 @@ hr {
 .minw-30 {
   min-width: 30rem;
 }
+
+.usa-alert--error {
+  background-image: url(/img/usa-icons/warning.svg), linear-gradient(transparent, transparent) !important;
+}

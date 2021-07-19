@@ -1,6 +1,6 @@
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
-import { OnboardingData, UserData } from "@/lib/types/types";
+import { OnboardingData, UserData, UserDataError } from "@/lib/types/types";
 import { generateUseUserDataResponse } from "@/test/helpers";
 import { generateOnboardingData, generateUserData } from "@/test/factories";
 
@@ -9,6 +9,10 @@ export const mockUpdate = jest.fn().mockResolvedValue({});
 
 export const useMockUserData = (overrides: Partial<UserData>): void => {
   set({ userData: generateUserData(overrides) });
+};
+
+export const useMockUserDataError = (error: UserDataError): void => {
+  set({ error });
 };
 
 export const useMockOnboardingData = (onboardingData: Partial<OnboardingData>): void => {

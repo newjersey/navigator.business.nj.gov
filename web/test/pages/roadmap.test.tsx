@@ -1,7 +1,7 @@
 import { render, RenderResult } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
 import { generateMunicipality, generateStep, generateTask, generateUserData } from "@/test/factories";
-import { useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockOnboardingData, useMockUserData, useMockUserDataError } from "@/test/mock/mockUseUserData";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -92,6 +92,18 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Not set")).toBeInTheDocument();
+    });
+
+    it("shows business info box if error is CACHED_ONLY", () => {
+      useMockUserDataError("CACHED_ONLY");
+      const subject = renderRoadmapPage();
+      expect(subject.queryByTestId("grey-callout-link")).toBeInTheDocument();
+    });
+
+    it("does not show business info box if error is NO_DATA", () => {
+      useMockUserDataError("NO_DATA");
+      const subject = renderRoadmapPage();
+      expect(subject.queryByTestId("grey-callout-link")).not.toBeInTheDocument();
     });
   });
 

@@ -16,7 +16,7 @@ export const GreyCallout = (props: Props): ReactElement => {
       <div>{props.children}</div>
       {props.link && (
         <div className="mla font-body-sm">
-          <a href={props.link.href} data-grey-callout-link={true}>
+          <a href={props.link.href} data-testid="grey-callout-link">
             {props.link.text}
           </a>
         </div>

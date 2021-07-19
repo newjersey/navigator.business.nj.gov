@@ -26,6 +26,7 @@ import { scrollToTop, templateEval } from "@/lib/utils/helpers";
 import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { Alert } from "@/components/njwds/Alert";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -208,6 +209,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                 {OnboardingErrorLookup[error]}
               </Alert>
             )}
+            <UserDataErrorAlert />
           </SingleColumnContainer>
 
           <div className="slide-container">

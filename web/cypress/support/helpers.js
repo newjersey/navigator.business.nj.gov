@@ -5,6 +5,6 @@ export const clickNext = () => {
 };
 
 export const clickEdit = () => {
-  cy.get("[data-grey-callout-link]").click();
+  cy.get('[data-testid="grey-callout-link"]').click();
   cy.wait(1000); // wait for onboarding animation
 };

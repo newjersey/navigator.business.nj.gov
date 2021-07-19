@@ -38,7 +38,7 @@ export const generateUseUserDataResponse = (
 ): UseUserDataResponse => ({
   userData: generateUserData({}),
   update: jest.fn().mockResolvedValue({}),
-  isError: false,
+  error: undefined,
   isLoading: false,
   ...overrides,
 });

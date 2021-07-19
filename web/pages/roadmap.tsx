@@ -17,6 +17,7 @@ import { Content } from "@/components/Content";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { LegalMessage } from "@/display-content/FooterLegalMessage";
 import { useRouter } from "next/router";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -24,7 +25,7 @@ interface Props {
 
 const RoadmapPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
-  const { userData, isLoading } = useUserData();
+  const { userData, isLoading, error } = useUserData();
   const { roadmap } = useRoadmap();
   const router = useRouter();
 
@@ -75,31 +76,36 @@ const RoadmapPage = (props: Props): ReactElement => {
   return (
     <PageSkeleton>
       <SinglePageLayout>
-        <div className="float-right">
+        <div className="float-right padding-top-2">
           <AuthButton />
         </div>
         <h1>{getHeader()}</h1>
-        <div className="allow-long usa-intro">
-          <Content>{props.displayContent.contentMd}</Content>
-        </div>
-        <div>
-          <GreyCallout link={{ text: RoadmapDefaults.greyBoxEditText, href: "/onboarding" }}>
-            <>
-              <div data-business-name={userData?.onboardingData.businessName}>
-                {RoadmapDefaults.greyBoxBusinessNameText}: <strong>{getBusinessName()}</strong>
-              </div>
-              <div data-industry={userData?.onboardingData.industry}>
-                {RoadmapDefaults.greyBoxIndustryText}: <strong>{getIndustry()}</strong>
-              </div>
-              <div data-legal-structure={userData?.onboardingData.legalStructure}>
-                {RoadmapDefaults.greyBoxLegalStructureText}: <strong>{getLegalStructure()}</strong>
-              </div>
-              <div data-municipality={userData?.onboardingData.municipality?.name}>
-                {RoadmapDefaults.greyBoxMunicipalityText}: <strong>{getMunicipality()}</strong>
-              </div>
-            </>
-          </GreyCallout>
-        </div>
+        <UserDataErrorAlert />
+        {(!error || error !== "NO_DATA") && (
+          <>
+            <div className="allow-long usa-intro">
+              <Content>{props.displayContent.contentMd}</Content>
+            </div>
+            <div>
+              <GreyCallout link={{ text: RoadmapDefaults.greyBoxEditText, href: "/onboarding" }}>
+                <>
+                  <div data-business-name={userData?.onboardingData.businessName}>
+                    {RoadmapDefaults.greyBoxBusinessNameText}: <strong>{getBusinessName()}</strong>
+                  </div>
+                  <div data-industry={userData?.onboardingData.industry}>
+                    {RoadmapDefaults.greyBoxIndustryText}: <strong>{getIndustry()}</strong>
+                  </div>
+                  <div data-legal-structure={userData?.onboardingData.legalStructure}>
+                    {RoadmapDefaults.greyBoxLegalStructureText}: <strong>{getLegalStructure()}</strong>
+                  </div>
+                  <div data-municipality={userData?.onboardingData.municipality?.name}>
+                    {RoadmapDefaults.greyBoxMunicipalityText}: <strong>{getMunicipality()}</strong>
+                  </div>
+                </>
+              </GreyCallout>
+            </div>
+          </>
+        )}
         {roadmap &&
           roadmap.steps.map((step, index) => (
             <Step key={step.id} step={step} last={index === roadmap.steps.length - 1} />

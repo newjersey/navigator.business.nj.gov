@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { useContext } from "react";
 import * as api from "@/lib/api-client/apiClient";
 import { postUserData } from "@/lib/api-client/apiClient";
-import { UserData } from "@/lib/types/types";
+import { UserData, UserDataError } from "@/lib/types/types";
 import { AuthContext } from "@/pages/_app";
 
 export const useUserData = (): UseUserDataResponse => {
@@ -17,10 +17,17 @@ export const useUserData = (): UseUserDataResponse => {
     }
   };
 
+  let userDataError: UserDataError | undefined = undefined;
+  if (error && data) {
+    userDataError = "CACHED_ONLY";
+  } else if (error && !data) {
+    userDataError = "NO_DATA";
+  }
+
   return {
     userData: data as UserData,
     isLoading: !error && !data,
-    isError: error,
+    error: userDataError,
     update: update,
   };
 };
@@ -28,6 +35,6 @@ export const useUserData = (): UseUserDataResponse => {
 export type UseUserDataResponse = {
   userData: UserData | undefined;
   isLoading: boolean;
-  isError: boolean;
+  error: UserDataError | undefined;
   update: (newUserData: UserData | undefined) => Promise<void>;
 };
