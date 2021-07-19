@@ -8,22 +8,22 @@ const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).use
 export const mockUpdate = jest.fn().mockResolvedValue({});
 
 export const useMockUserData = (overrides: Partial<UserData>): void => {
-  set({ userData: generateUserData(overrides) });
+  setMockUserDataResponse({ userData: generateUserData(overrides) });
 };
 
 export const useMockUserDataError = (error: UserDataError): void => {
-  set({ error });
+  setMockUserDataResponse({ error });
 };
 
 export const useMockOnboardingData = (onboardingData: Partial<OnboardingData>): void => {
-  set({
+  setMockUserDataResponse({
     userData: generateUserData({
       onboardingData: generateOnboardingData(onboardingData),
     }),
   });
 };
 
-const set = (overrides: Partial<UseUserDataResponse>): void => {
+export const setMockUserDataResponse = (overrides: Partial<UseUserDataResponse>): void => {
   mockUseUserData.mockReturnValue(
     generateUseUserDataResponse({
       update: mockUpdate,

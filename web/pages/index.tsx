@@ -10,15 +10,17 @@ import { Signup } from "@/components/Signup";
 import { Card } from "@/components/njwds-extended/Card";
 
 const Home = (): ReactElement => {
-  const { userData } = useUserData();
+  const { userData, error } = useUserData();
   const router = useRouter();
   const [signupIsOpen, setSignupIsOpen] = React.useState<boolean>(false);
 
   useEffect(() => {
-    if (userData?.formProgress === "COMPLETED" || userData?.formProgress === undefined) {
+    if (userData?.formProgress === "COMPLETED") {
       router.replace("/roadmap");
     } else if (userData?.formProgress === "UNSTARTED") {
       router.replace("/onboarding");
+    } else if (userData === undefined && error != undefined) {
+      router.replace("/roadmap");
     }
   }, [userData]);
 
