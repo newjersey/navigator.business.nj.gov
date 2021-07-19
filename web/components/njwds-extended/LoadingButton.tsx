@@ -7,12 +7,13 @@ interface Props {
   loading: boolean;
   className: string;
   outline?: boolean;
+  marginClass?: string;
   // All other props
   [x: string]: unknown;
 }
 
 export const LoadingButton = (props: Props): ReactElement => {
-  const { children, onClick, loading, className, outline, ...rest } = props;
+  const { children, onClick, loading, className, outline, marginClass, ...rest } = props;
   const disabledClass = outline ? "usa-button--outline-disabled" : "usa-button--disabled";
   const showButtonClass = outline ? "usa-button--outline" : "";
   const showInvisibleClass = loading ? "visibility-hidden" : "visibility-visible";
@@ -26,7 +27,7 @@ export const LoadingButton = (props: Props): ReactElement => {
     >
       <span className={showInvisibleClass}>{children}</span>
       {loading && (
-        <span className="spinner-overlay" data-testid="loading-spinner">
+        <span className={`spinner-overlay ${marginClass || ""}`} data-testid="loading-spinner">
           <CircularProgress size={14} />
         </span>
       )}
