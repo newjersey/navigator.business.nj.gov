@@ -111,20 +111,30 @@ describe("<SearchBusinessName />", () => {
     subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("");
     fireEvent.click(searchButton());
-    expect(subject.queryByTestId("bad-input-alert")).toBeInTheDocument();
+    expect(subject.queryByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
     fillText("anything");
     await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
-    expect(subject.queryByTestId("bad-input-alert")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("error-alert-BAD_INPUT")).not.toBeInTheDocument();
   });
 
   it("shows message if search returns 400", async () => {
     subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("LLC");
     await searchAndReject();
-    expect(subject.queryByTestId("bad-input-alert")).toBeInTheDocument();
+    expect(subject.queryByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
     fillText("anything");
     await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
-    expect(subject.queryByTestId("bad-input-alert")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("error-alert-BAD_INPUT")).not.toBeInTheDocument();
+  });
+
+  it("shows error if search fails", async () => {
+    subject = render(<SearchBusinessName task={generateTask({})} />);
+    fillText("whatever");
+    await searchAndFail();
+    expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
+    fillText("anything");
+    await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
+    expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
   });
 
   const getSearchValue = (): string => (inputField() as HTMLInputElement)?.value;
@@ -142,6 +152,13 @@ describe("<SearchBusinessName />", () => {
 
   const searchAndReject = async (): Promise<void> => {
     const returnedPromise = Promise.reject(400);
+    mockApi.searchBusinessName.mockReturnValue(returnedPromise);
+    fireEvent.click(searchButton());
+    await act(() => returnedPromise.catch(() => {}));
+  };
+
+  const searchAndFail = async (): Promise<void> => {
+    const returnedPromise = Promise.reject(500);
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
     fireEvent.click(searchButton());
     await act(() => returnedPromise.catch(() => {}));

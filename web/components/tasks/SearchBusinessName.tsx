@@ -16,12 +16,18 @@ interface Props {
   task: Task;
 }
 
+type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
+const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
+  BAD_INPUT: SearchBusinessNamesDefaults.errorTextBadInput,
+  SEARCH_FAILED: SearchBusinessNamesDefaults.errorTextSearchFailed,
+};
+
 export const SearchBusinessName = (props: Props): ReactElement => {
   const [name, setName] = useState<string>("");
   const [nameDisplayedInResults, setNameDisplayedInResults] = useState<string>("");
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showBadInputAlert, setShowBadInputAlert] = useState<boolean>(false);
+  const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
   const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
   const { userData, update } = useUserData();
   const { roadmap } = useRoadmap();
@@ -36,11 +42,11 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     setUpdateButtonClicked(false);
 
     if (!name) {
-      setShowBadInputAlert(true);
+      setError("BAD_INPUT");
       return;
     }
 
-    setShowBadInputAlert(false);
+    setError(undefined);
     setIsLoading(true);
 
     api
@@ -53,7 +59,9 @@ export const SearchBusinessName = (props: Props): ReactElement => {
       .catch((error) => {
         setIsLoading(false);
         if (error === 400) {
-          setShowBadInputAlert(true);
+          setError("BAD_INPUT");
+        } else {
+          setError("SEARCH_FAILED");
         }
       });
   };
@@ -76,11 +84,22 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     update(newUserData);
   };
 
-  const badInputAlert = (): ReactElement => (
-    <div data-testid="bad-input-alert" className="text-orange">
-      {SearchBusinessNamesDefaults.badInputAlertText}
-    </div>
-  );
+  const showErrorAlert = (): ReactElement => {
+    if (!error) return <></>;
+    else if (error === "BAD_INPUT") {
+      return (
+        <div data-testid={`error-alert-${error}`} className="text-orange">
+          {SearchBusinessNameErrorLookup[error]}
+        </div>
+      );
+    } else {
+      return (
+        <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
+          {SearchBusinessNameErrorLookup[error]}
+        </Alert>
+      );
+    }
+  };
 
   const showAvailable = (): ReactElement => {
     return (
@@ -178,7 +197,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
         </div>
       </form>
       <div className="margin-top-2">
-        {showBadInputAlert && badInputAlert()}
+        {showErrorAlert()}
         {nameAvailability?.status === "AVAILABLE" && showAvailable()}
         {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
       </div>
