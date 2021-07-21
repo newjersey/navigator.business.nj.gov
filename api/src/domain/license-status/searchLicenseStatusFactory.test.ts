@@ -34,14 +34,21 @@ describe("searchLicenseStatus", () => {
     expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345", "Home improvement");
   });
 
-  it("returns the status license items with matching address line 1", async () => {
+  it("returns the status license items from most recent application with matching address", async () => {
     stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "SOME OLDER APPLICATION NUMBER",
+        checklistItem: "OLDER APPLICATION",
+        issueDate: "20080404 000000.000"
+      }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
         applicationNumber: "12345",
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
         licenseStatus: "Pending",
+        issueDate: "20210404 000000.000"
       }),
       generateLicenseEntity({
         addressLine1: "SOMETHING ELSE",
@@ -51,6 +58,7 @@ describe("searchLicenseStatus", () => {
         applicationNumber: "12345",
         checklistItem: "Item 2",
         checkoffStatus: "Completed",
+        issueDate: "20210404 000000.000"
       }),
     ]);
 
@@ -74,21 +82,27 @@ describe("searchLicenseStatus", () => {
     );
   });
 
-  it("returns the license items with matching address line 1 that is not Expired", async () => {
+ it("returns an expired license if that's the most recent application", async () => {
     stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "SOME OLDER ACTIVE APPLICATION NUMBER",
+        checklistItem: "OLDER ACTIVE APPLICATION",
+        issueDate: "20080404 000000.000"
+      }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
         applicationNumber: "12345",
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
         licenseStatus: "Expired",
+        issueDate: "20210404 000000.000"
       }),
       generateLicenseEntity({
-        addressLine1: "1234 Main St",
-        applicationNumber: "45678",
+        applicationNumber: "12345",
         checklistItem: "Item 2",
         checkoffStatus: "Completed",
-        licenseStatus: "Active",
+        issueDate: "20210404 000000.000"
       }),
     ]);
 
@@ -97,13 +111,67 @@ describe("searchLicenseStatus", () => {
     });
 
     const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
-    expect(result.checklistItems).toEqual([
-      {
-        title: "Item 2",
-        status: "ACTIVE",
-      },
+    expect(result.status).toEqual("EXPIRED");
+    expect(result.checklistItems).toEqual(
+      expect.arrayContaining([
+        {
+          title: "Item 1",
+          status: "ACTIVE",
+        },
+        {
+          title: "Item 2",
+          status: "ACTIVE",
+        },
+      ])
+    ); 
+  } );
+
+  it("returns a license if it doesn't have an issue date", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+     generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "SOME APPLICATION NUMBER WITHOUT AN ISSUE DATE",
+        checklistItem: "ACTIVE APPLICATION WITHOUT AN ISSUE DATE",
+        issueDate: undefined
+      }), 
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "12345",
+        checklistItem: "Item 1",
+        checkoffStatus: "Completed",
+        licenseStatus: "Expired",
+        issueDate: undefined,
+        dateThisStatus: "20200405 000000.000"
+      }),
+      generateLicenseEntity({
+        applicationNumber: "12345",
+        checklistItem: "Item 2",
+        checkoffStatus: "Completed",
+        issueDate: undefined,
+        dateThisStatus: "20200405 000000.000"
+      }),
     ]);
-  });
+
+    const nameAndAddress = generateNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
+    expect(result.status).toEqual("EXPIRED");
+    expect(result.checklistItems).toEqual(
+      expect.arrayContaining([
+        {
+          title: "Item 1",
+          status: "ACTIVE",
+        },
+        {
+          title: "Item 2",
+          status: "ACTIVE",
+        },
+      ])
+    ); 
+  } );
+
 
   describe("detailed address matching logic", () => {
     const entityWithAddress = (address: string) =>

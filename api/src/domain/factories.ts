@@ -103,6 +103,7 @@ export const generateLicenseEntity = (overrides: Partial<LicenseEntity>): Licens
     expirationDate: "20091231 000000.000" + randomInt(),
     checklistItem: "some-item-" + randomInt(),
     checkoffStatus: "Completed",
+    dateThisStatus:  "20100430 000000.000" + randomInt(),
     ...overrides,
   };
 };
