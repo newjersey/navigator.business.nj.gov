@@ -5,6 +5,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { Icon } from "@/components/njwds/Icon";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 
 interface Props {
   task: Task;
@@ -54,6 +55,7 @@ export const TaskHeader = (props: Props): ReactElement => {
         </div>
         <div className="tablet:grid-col-3">{renderProgress()}</div>
       </div>
+      <UserDataErrorAlert />
     </div>
   );
 };

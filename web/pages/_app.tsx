@@ -6,7 +6,7 @@ import { Amplify } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import awsExports from "../aws-exports";
 import { getCurrentUser } from "@/lib/auth/sessionHelper";
-import { Roadmap } from "@/lib/types/types";
+import { Roadmap, UserDataError } from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { Hub } from "aws-amplify";
@@ -58,6 +58,16 @@ export const ContextualInfoContext = React.createContext<ContextualInfoContextTy
   setContextualInfoMd: () => {},
 });
 
+export interface UserDataErrorContextType {
+  userDataError: UserDataError | undefined;
+  setUserDataError: (userDataError: UserDataError | undefined) => void;
+}
+
+export const UserDataErrorContext = React.createContext<UserDataErrorContextType>({
+  userDataError: undefined,
+  setUserDataError: () => {},
+});
+
 const theme = createMuiTheme({
   typography: {
     fontFamily: [
@@ -94,6 +104,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
   const [contextualInfoMd, setContextualInfoMd] = useState<string>("");
+  const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);
   const router = useRouter();
 
   const listener = (data: HubCapsule): void => {
@@ -148,14 +159,17 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <script src="/intercom/settings.js" />
       <script src="/intercom/init.js" />
       <DefaultSeo {...SEO} />
+
       <ThemeProvider theme={theme}>
         <AuthContext.Provider value={{ state, dispatch }}>
-          <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
-            <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-              <ContextualInfoPanel />
-              <Component {...pageProps} />
-            </RoadmapContext.Provider>
-          </ContextualInfoContext.Provider>
+          <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
+            <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
+              <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+                <ContextualInfoPanel />
+                <Component {...pageProps} />
+              </RoadmapContext.Provider>
+            </ContextualInfoContext.Provider>
+          </UserDataErrorContext.Provider>
         </AuthContext.Provider>
       </ThemeProvider>
     </>

@@ -33,7 +33,7 @@ jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
-describe("onboarding form", () => {
+describe("onboarding", () => {
   let subject: RenderResult;
   let emptyUserData: UserData;
 
@@ -42,6 +42,7 @@ describe("onboarding form", () => {
     emptyUserData = createEmptyUserData(generateUser({}));
     useMockUserData(emptyUserData);
     useMockRouter({});
+    mockUpdate.mockResolvedValue({});
   });
 
   it("changes url pathname every time a user goes to a different page", async () => {

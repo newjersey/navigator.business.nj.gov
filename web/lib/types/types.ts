@@ -9,7 +9,7 @@ export interface UserData {
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
-export type UserDataError = "NO_DATA" | "CACHED_ONLY";
+export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {

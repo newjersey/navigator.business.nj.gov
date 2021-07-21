@@ -1,4 +1,4 @@
-import { withUser } from "@/test/helpers";
+import { withAuth } from "@/test/helpers";
 import { useRouter } from "next/router";
 import { useAuthProtectedPage } from "./useAuthProtectedPage";
 import { IsAuthenticated } from "./AuthContext";
@@ -23,7 +23,7 @@ describe("useAuthProtectedPage", () => {
       useAuthProtectedPage();
       return null;
     }
-    render(withUser(<TestComponent />, { isAuthenticated: isAuth }));
+    render(withAuth(<TestComponent />, { isAuthenticated: isAuth }));
   };
 
   it("redirects to homepage when user is not authed", () => {

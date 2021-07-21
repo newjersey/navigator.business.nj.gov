@@ -124,23 +124,18 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     setError(undefined);
     if (page.current + 1 <= PAGES) {
-      await update({
-        ...userData,
-        onboardingData,
+      update({ ...userData, onboardingData }).then(() => {
+        const nextCurrentPage = page.current + 1;
+        setPage({
+          current: nextCurrentPage,
+          previous: page.current,
+        });
+        queryShallowPush(nextCurrentPage);
       });
-      const nextCurrentPage = page.current + 1;
-      setPage({
-        current: nextCurrentPage,
-        previous: page.current,
-      });
-      queryShallowPush(nextCurrentPage);
     } else {
-      await update({
-        ...userData,
-        onboardingData,
-        formProgress: "COMPLETED",
+      update({ ...userData, onboardingData, formProgress: "COMPLETED" }).then(async () => {
+        await router.push("/roadmap");
       });
-      await router.push("/roadmap");
     }
   };
 

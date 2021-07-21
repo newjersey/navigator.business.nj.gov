@@ -1,5 +1,5 @@
 import { useUserData, UseUserDataResponse } from "./useUserData";
-import { generateUseUserDataResponse, withUser } from "@/test/helpers";
+import { generateUseUserDataResponse, withAuth, withUserDataError } from "@/test/helpers";
 import { BusinessUser } from "@/lib/types/types";
 import * as api from "@/lib/api-client/apiClient";
 import { generateUser, generateUserData } from "@/test/factories";
@@ -12,21 +12,20 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("useUserData", () => {
+  let mockSetError: jest.Mock;
+
   beforeEach(() => {
     jest.resetAllMocks();
+    mockSetError = jest.fn();
   });
 
   const setupHook = (currentUser: BusinessUser | undefined): UseUserDataResponse => {
     const returnVal = generateUseUserDataResponse({});
     function TestComponent() {
       Object.assign(returnVal, useUserData());
-      return (
-        <>
-          <div data-testid={`error-${returnVal.error}`} />
-        </>
-      );
+      return null;
     }
-    render(withUser(<TestComponent />, { user: currentUser }));
+    render(withUserDataError(withAuth(<TestComponent />, { user: currentUser }), undefined, mockSetError));
     return returnVal;
   };
 
@@ -54,7 +53,7 @@ describe("useUserData", () => {
       expect(mockApi.postUserData).toHaveBeenCalledWith(newUserData);
     });
 
-    it("returns NO_DATA error when api call fails with no cache", async () => {
+    it("sets error to NO_DATA when api call fails with no cache", async () => {
       const currentUser = generateUser({});
       const rejectedPromise = Promise.reject(500);
       mockApi.getUserData.mockReturnValue(rejectedPromise);
@@ -62,11 +61,11 @@ describe("useUserData", () => {
 
       await act(() => rejectedPromise.catch(() => {}));
 
-      expect(result.error).toEqual("NO_DATA");
+      expect(mockSetError).toHaveBeenCalledWith("NO_DATA");
       expect(result.userData).toEqual(undefined);
     });
 
-    it("returns CACHED_ONLY error when api call fails with cache", async () => {
+    it("sets error to CACHED_ONLY error when api call fails with cache", async () => {
       const currentUser = generateUser({});
 
       const resolvedPromise = Promise.resolve(generateUserData({}));
@@ -84,8 +83,24 @@ describe("useUserData", () => {
       const result = setupHook(currentUser);
       await act(() => rejectedPromise.catch(() => {}));
 
-      expect(result.error).toEqual("CACHED_ONLY");
+      expect(mockSetError).toHaveBeenCalledWith("CACHED_ONLY");
       expect(result.userData).toEqual(newUserData);
+    });
+
+    it("sets error to UPDATE_FAILED error when update function rejects", async () => {
+      const currentUser = generateUser({});
+      const rejectedPromise = Promise.reject(400);
+      const resolvedPromise = Promise.resolve(generateUserData({}));
+
+      mockApi.getUserData.mockReturnValue(resolvedPromise);
+      mockApi.postUserData.mockReturnValue(rejectedPromise);
+
+      const { update } = setupHook(currentUser);
+      const newUserData = generateUserData({});
+      update(newUserData).catch(() => {});
+      await act(() => rejectedPromise.catch(() => {}));
+
+      expect(mockSetError).toHaveBeenCalledWith("UPDATE_FAILED");
     });
   });
 });

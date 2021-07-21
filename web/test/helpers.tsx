@@ -1,11 +1,11 @@
 import React, { Dispatch, ReactElement } from "react";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { AuthContext, ContextualInfoContext } from "@/pages/_app";
+import { AuthContext, ContextualInfoContext, UserDataErrorContext } from "@/pages/_app";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
-import { BusinessUser } from "@/lib/types/types";
+import { BusinessUser, UserDataError } from "@/lib/types/types";
 
-export const withUser = (
+export const withAuth = (
   subject: ReactElement,
   context: {
     user?: BusinessUser;
@@ -29,6 +29,18 @@ export const withContextualInfo = (
     <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
       {subject}
     </ContextualInfoContext.Provider>
+  );
+};
+
+export const withUserDataError = (
+  subject: ReactElement,
+  userDataError: UserDataError | undefined,
+  setUserDataError?: (userDataError: UserDataError | undefined) => void
+): ReactElement => {
+  return (
+    <UserDataErrorContext.Provider value={{ userDataError, setUserDataError: setUserDataError || jest.fn() }}>
+      {subject}
+    </UserDataErrorContext.Provider>
   );
 };
 
