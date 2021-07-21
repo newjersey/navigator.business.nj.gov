@@ -61,7 +61,7 @@ export type LicenseStatusResult = {
 
 export type LicenseStatusItem = {
   title: string;
-  status: LicenseStatus;
+  status: CheckoffStatus;
 };
 
 export type LicenseEntity = {
@@ -75,14 +75,18 @@ export type LicenseEntity = {
   licenseType: string;
   applicationNumber: string;
   licenseNumber: string;
-  licenseStatus: "Active" | "Pending" | "Expired";
+  licenseStatus: string;
   issueDate: string;
   expirationDate: string;
   checklistItem: string;
   checkoffStatus: "Completed" | "Unchecked" | "Not Applicable";
+  dateThisStatus: string;
 };
 
-export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+export type CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+
+export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN" | "EXPIRED" | "BARRED" | "OUT_OF_BUSINESS" | 
+"REINSTATEMENT_PENDING" | "CLOSED" | "DELETED" | "DENIED" | "VOLUNTARY_SURRENDER" | "WITHDRAWN";
 
 export type NameAvailability = {
   status: "AVAILABLE" | "UNAVAILABLE";

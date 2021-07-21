@@ -1,4 +1,4 @@
-import { LicenseStatus, LicenseStatusItem } from "@/lib/types/types";
+import { LicenseStatus, CheckoffStatus, LicenseStatusItem } from "@/lib/types/types";
 import React, { ReactElement, useEffect, useState } from "react";
 import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
 import { Icon } from "@/components/njwds/Icon";
@@ -37,6 +37,15 @@ const activePermitTheme: PermitTheme = {
   headerIconColor: "text-success",
 };
 
+const grayPermitTheme: PermitTheme = {
+  gradient: "gradient-grey",
+  bgColor: "bg-gray-5",
+  textColor: "text-gray-50",
+  borderColor: "border-gray-50",
+  iconColor: "text-gray-50",
+  headerIconColor:"text-gray-50"
+};
+
 export const LicenseStatusReceipt = (props: Props): ReactElement => {
   const [theme, setTheme] = useState<PermitTheme>(pendingPermitTheme);
   const { userData } = useUserData();
@@ -44,26 +53,47 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   useEffect(() => {
     if (props.status === "ACTIVE") {
       setTheme(activePermitTheme);
+      console.log(props.status);
     }
-    if (props.status === "PENDING") {
+    else if (props.status === "PENDING") {
       setTheme(pendingPermitTheme);
+    } else {
+      setTheme(grayPermitTheme);
     }
   }, [props.status]);
 
   const getText = (): string => {
-    if (props.status === "ACTIVE") {
-      return LicenseScreenDefaults.activePermitStatusText;
-    } else if (props.status === "PENDING") {
-      return LicenseScreenDefaults.pendingPermitStatusText;
-    }
-    return "";
-  };
+    return props.status === "ACTIVE" ? LicenseScreenDefaults.activePermitStatusText
+    : props.status === "PENDING" ? LicenseScreenDefaults.pendingPermitStatusText
+    : props.status === "EXPIRED" ? LicenseScreenDefaults.expiredPermitStatusText
+    : props.status === "BARRED" ? LicenseScreenDefaults.barredPermitStatusText
+    : props.status === "OUT_OF_BUSINESS" ? LicenseScreenDefaults.outOfBusinessPermitStatusText
+    : props.status === "REINSTATEMENT_PENDING" ? LicenseScreenDefaults.reinstatementPendingPermitStatusText
+    : props.status === "CLOSED" ? LicenseScreenDefaults.closedPermitStatusText
+    : props.status === "DELETED" ? LicenseScreenDefaults.deletedPermitStatusText
+    : props.status === "DENIED" ? LicenseScreenDefaults.deniedPermitStatusText
+    : props.status === "VOLUNTARY_SURRENDER" ? LicenseScreenDefaults.voluntarySurrenderPermitStatusText
+    : props.status === "WITHDRAWN" ? LicenseScreenDefaults.withdrawnPermitStatusText
+    : ""
+  }
 
   const getIcon = (status: LicenseStatus): string => {
     if (status === "ACTIVE") {
       return "check";
     } else if (status === "PENDING") {
       return "schedule";
+    } else if (
+      status === "EXPIRED" 
+      || status === "BARRED" 
+      || status === "OUT_OF_BUSINESS" 
+      || status === "REINSTATEMENT_PENDING" 
+      || status === "CLOSED" 
+      || status === "DELETED" 
+      || status === "DENIED" 
+      || status === "VOLUNTARY_SURRENDER" 
+      || status === "WITHDRAWN"
+    ) {
+      return "warning";
     }
     return "";
   };
@@ -79,7 +109,9 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
 
   const receiptItem = (item: LicenseStatusItem, index: number): ReactElement => {
     const border = index !== 0 ? "border-top-1px border-base-light" : "";
-    const iconColor = item.status === "ACTIVE" ? activePermitTheme.iconColor : pendingPermitTheme.iconColor;
+    const iconColor = item.status === "ACTIVE" ? activePermitTheme.iconColor 
+    : item.status === "PENDING" ? pendingPermitTheme.iconColor
+    : grayPermitTheme.iconColor
 
     return (
       <div className="padding-x-3 fdr fac width-100" data-testid={`item-${item.status}`} key={index}>

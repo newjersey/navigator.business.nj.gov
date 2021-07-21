@@ -265,7 +265,10 @@ export type LicenseStatusResult = {
   checklistItems: LicenseStatusItem[];
 };
 
-export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+export type CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+
+export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN" | "EXPIRED" | "BARRED" | "OUT_OF_BUSINESS" | 
+"REINSTATEMENT_PENDING" | "CLOSED" | "DELETED" | "DENIED" | "VOLUNTARY_SURRENDER" | "WITHDRAWN";
 
 export type SelfRegResponse = {
   authRedirectURL: string;

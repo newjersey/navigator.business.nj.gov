@@ -25,6 +25,15 @@ export const LicenseScreenDefaults: Record<string, string> = {
   editButtonText: "Edit",
   pendingPermitStatusText: "Pending",
   activePermitStatusText: "Active",
+  expiredPermitStatusText: "Expired",
+  barredPermitStatusText: "Barred",
+  outOfBusinessPermitStatusText: "Out of Business",
+  reinstatementPendingPermitStatusText: "Reinstatement Pending",
+  closedPermitStatusText: "Closed",
+  deletedPermitStatusText: "Deleted",
+  deniedPermitStatusText: "Denied",
+  voluntarySurrenderPermitStatusText: "Voluntary Surrender",
+  withdrawnPermitStatusText: "Withdrawn",
   tooltipText:
     "Your license status will update automatically after the Division of Consumer Affairs has received your application and you enter your identifying information into the “Check Status” tab below.",
 };
