@@ -20,7 +20,7 @@ describe("searchLicenseStatus", () => {
       name: "Crystal",
       zipCode: "12345",
     });
-    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual("NO MATCH");
+    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual("NO_MATCH");
     expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345", "Home improvement");
   });
 
@@ -30,7 +30,7 @@ describe("searchLicenseStatus", () => {
       name: " Crystal, LLC   ",
       zipCode: "12345",
     });
-    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual("NO MATCH");
+    await expect(searchLicenseStatus(nameAndAddress, "Home improvement")).rejects.toEqual("NO_MATCH");
     expect(stubLicenseStatusClient.search).toHaveBeenCalledWith("crystal", "12345", "Home improvement");
   });
 
@@ -204,10 +204,17 @@ describe("searchLicenseStatus", () => {
     ]);
   });
 
-  it("rejects when no result matches the address", async () => {
+  it("rejects with NO_MATCH when no result matches the address", async () => {
     stubLicenseStatusClient.search.mockResolvedValue([generateLicenseEntity({}), generateLicenseEntity({})]);
 
     const nameAndAddress = generateNameAndAddress({});
-    await expect(searchLicenseStatus(nameAndAddress, "")).rejects.toEqual("NO MATCH");
+    await expect(searchLicenseStatus(nameAndAddress, "")).rejects.toEqual("NO_MATCH");
+  });
+
+  it("rejects when search fails", async () => {
+    stubLicenseStatusClient.search.mockRejectedValue("some api error");
+
+    const nameAndAddress = generateNameAndAddress({});
+    await expect(searchLicenseStatus(nameAndAddress, "")).rejects.toEqual("some api error");
   });
 });

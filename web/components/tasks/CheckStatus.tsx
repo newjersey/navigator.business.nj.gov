@@ -5,8 +5,9 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createEmptyNameAndAddress, NameAndAddress } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
-import { ErrorAlertType } from "@/components/tasks/LicenseTask";
+import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
+import { SearchBusinessNamesDefaults } from "@/display-content/tasks/search-business-names/SearchBusinessNamesDefaults";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -23,9 +24,15 @@ const useStyles = makeStyles(() =>
 
 interface Props {
   onSubmit: (nameAndAddress: NameAndAddress) => void;
-  showErrorAlert: ErrorAlertType;
+  error: LicenseSearchError | undefined;
   isLoading: boolean;
 }
+
+const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
+  NOT_FOUND: LicenseScreenDefaults.errorTextNotFound,
+  FIELDS_REQUIRED: LicenseScreenDefaults.errorTextFieldsRequired,
+  SEARCH_FAILED: SearchBusinessNamesDefaults.errorTextSearchFailed,
+};
 
 export const CheckStatus = (props: Props): ReactElement => {
   const classes = useStyles();
@@ -57,22 +64,13 @@ export const CheckStatus = (props: Props): ReactElement => {
     });
   };
 
-  const getErrorAlert = (): ReactElement | undefined => {
-    if (props.showErrorAlert === "FIELDS_REQUIRED") {
-      return (
-        <Alert data-testid={`error-alert-fields-required`} slim variant="error">
-          {LicenseScreenDefaults.fieldsRequiredText}
-        </Alert>
-      );
-    }
-
-    if (props.showErrorAlert === "NOT_FOUND") {
-      return (
-        <Alert data-testid={`error-alert-not-found`} slim variant="error">
-          {LicenseScreenDefaults.errorText}
-        </Alert>
-      );
-    }
+  const getErrorAlert = (): ReactElement => {
+    if (!props.error) return <></>;
+    return (
+      <Alert data-testid={`error-alert-${props.error}`} slim variant="error" className="margin-y-2">
+        {LicenseSearchErrorLookup[props.error]}
+      </Alert>
+    );
   };
 
   return (

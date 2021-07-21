@@ -172,27 +172,52 @@ describe("<LicenseTask />", () => {
     it("displays error alert when license status cannot be found", async () => {
       useMockUserData({});
       subject = renderTask();
-      expect(subject.queryByTestId("error-alert-not-found")).not.toBeInTheDocument();
+      expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
 
-      const returnedPromise = Promise.reject(404);
-      mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
-
+      const rejectedPromise = Promise.reject(404);
+      mockApi.checkLicenseStatus.mockReturnValue(rejectedPromise);
       fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => returnedPromise.catch(() => {}));
+      await act(() => rejectedPromise.catch(() => {}));
 
-      expect(subject.queryByTestId("error-alert-not-found")).toBeInTheDocument();
-      expect(subject.queryByTestId("error-alert-fields-required")).not.toBeInTheDocument();
+      expect(subject.queryByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
+
+      const resolvedPromise = Promise.resolve(generateUserData({}));
+      mockApi.checkLicenseStatus.mockReturnValue(resolvedPromise);
+      fireEvent.submit(subject.getByTestId("check-status-submit"));
+      await act(() => resolvedPromise.catch(() => {}));
+
+      expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
+    });
+
+    it("displays error alert when license status search fails", async () => {
+      useMockUserData({});
+      subject = renderTask();
+      expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+
+      const rejectedPromise = Promise.reject(500);
+      mockApi.checkLicenseStatus.mockReturnValue(rejectedPromise);
+      fireEvent.submit(subject.getByTestId("check-status-submit"));
+      await act(() => rejectedPromise.catch(() => {}));
+
+      expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
+
+      const resolvedPromise = Promise.resolve(generateUserData({}));
+      mockApi.checkLicenseStatus.mockReturnValue(resolvedPromise);
+      fireEvent.submit(subject.getByTestId("check-status-submit"));
+      await act(() => resolvedPromise.catch(() => {}));
+
+      expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
     });
 
     it("displays error alert when some information is missing", async () => {
       useMockUserData({});
       subject = renderTask();
-      expect(subject.queryByTestId("error-alert-fields-required")).not.toBeInTheDocument();
+      expect(subject.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
 
       fillText("business-name", "");
       fireEvent.submit(subject.getByTestId("check-status-submit"));
 
-      expect(subject.queryByTestId("error-alert-fields-required")).toBeInTheDocument();
+      expect(subject.queryByTestId("error-alert-FIELDS_REQUIRED")).toBeInTheDocument();
       expect(subject.queryByTestId("error-alert-not-found")).not.toBeInTheDocument();
       expect(mockApi.checkLicenseStatus).not.toHaveBeenCalled();
 
@@ -200,7 +225,7 @@ describe("<LicenseTask />", () => {
       mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
       fireEvent.submit(subject.getByTestId("check-status-submit"));
 
-      await waitForElementToBeRemoved(() => subject.queryByTestId("error-alert-fields-required"));
+      await waitForElementToBeRemoved(() => subject.queryByTestId("error-alert-FIELDS_REQUIRED"));
       expect(mockApi.checkLicenseStatus).toHaveBeenCalled();
     });
 

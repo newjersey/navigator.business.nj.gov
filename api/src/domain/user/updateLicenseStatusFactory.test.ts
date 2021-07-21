@@ -77,8 +77,8 @@ describe("updateLicenseStatus", () => {
     expect(stubUserDataClient.put).toHaveBeenCalledWith(resultUserData);
   });
 
-  it("updates the user license data when search fails", async () => {
-    stubSearchLicenseStatus.mockRejectedValue("NOT FOUND");
+  it("updates the license task status to NOT_STARTED & user license data when NO MATCH", async () => {
+    stubSearchLicenseStatus.mockRejectedValue("NO_MATCH");
     const resultUserData = await updateLicenseStatus("some-id", nameAndAddress);
 
     expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
@@ -89,16 +89,16 @@ describe("updateLicenseStatus", () => {
     expect(resultUserData.licenseData?.status).toEqual("UNKNOWN");
     expect(resultUserData.licenseData?.items).toEqual([]);
 
+    expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("NOT_STARTED");
+    expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("NOT_STARTED");
+
     expect(stubUserDataClient.put).toHaveBeenCalledWith(resultUserData);
   });
 
-  it("updates the license task status to NOT_STARTED when license not found", async () => {
-    stubSearchLicenseStatus.mockRejectedValue("NO MATCH");
-
-    const resultUserData = await updateLicenseStatus("some-id", nameAndAddress);
-
-    expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("NOT_STARTED");
-    expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("NOT_STARTED");
+  it("rejects and still updates user license data when generic error", async () => {
+    stubSearchLicenseStatus.mockRejectedValue("some-error");
+    await expect(updateLicenseStatus("some-id", nameAndAddress)).rejects.toEqual("some-error");
+    expect(stubUserDataClient.put).toHaveBeenCalled();
   });
 
   it("updates the license task status to IN_PROGRESS when license is pending", async () => {

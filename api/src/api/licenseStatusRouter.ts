@@ -12,7 +12,7 @@ export const licenseStatusRouterFactory = (updateLicenseStatus: UpdateLicenseSta
     updateLicenseStatus(userId, nameAndAddress)
       .then((updatedUserData: UserData) => {
         if (!updatedUserData.licenseData || updatedUserData.licenseData.status === "UNKNOWN") {
-          res.status(500).json();
+          res.status(404).json();
           return;
         }
 

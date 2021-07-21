@@ -23,7 +23,7 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
     );
 
     if (!match) {
-      return Promise.reject("NO MATCH");
+      return Promise.reject("NO_MATCH");
     }
 
     const items: LicenseStatusItem[] = entities

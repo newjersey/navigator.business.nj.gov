@@ -51,7 +51,7 @@ describe("licenseStatusRouter", () => {
     expect(stubUpdateLicenseStatus).toHaveBeenCalledWith("some-id", nameAndAddress);
   });
 
-  it("returns 500 if license status is unknown", async () => {
+  it("returns 404 if license status is unknown", async () => {
     const licenseData = generateLicenseData({
       items: [],
       status: "UNKNOWN",
@@ -60,7 +60,7 @@ describe("licenseStatusRouter", () => {
     stubUpdateLicenseStatus.mockResolvedValue(userData);
 
     const response = await request(app).post(`/license-status`).send(generateNameAndAddress({}));
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(404);
   });
 
   it("returns 500 if license search errors", async () => {

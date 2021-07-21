@@ -66,15 +66,27 @@ export const updateLicenseStatusFactory = (
           completed: true,
         });
       })
-      .catch(() => {
-        return update({
-          userData: userData,
-          nameAndAddress: nameAndAddress,
-          taskStatus: "NOT_STARTED",
-          licenseStatus: "UNKNOWN",
-          items: [],
-          completed: false,
-        });
+      .catch(async (error) => {
+        if (error === "NO_MATCH") {
+          return update({
+            userData: userData,
+            nameAndAddress: nameAndAddress,
+            taskStatus: "NOT_STARTED",
+            licenseStatus: "UNKNOWN",
+            items: [],
+            completed: false,
+          });
+        } else {
+          await update({
+            userData: userData,
+            nameAndAddress: nameAndAddress,
+            taskStatus: "NOT_STARTED",
+            licenseStatus: "UNKNOWN",
+            items: [],
+            completed: false,
+          });
+          return Promise.reject(error);
+        }
       });
   };
 };

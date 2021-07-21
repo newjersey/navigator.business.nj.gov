@@ -2,7 +2,7 @@
 
 import { clickNext } from "../support/helpers";
 
-describe("search business name", () => {
+describe("check license status", () => {
   beforeEach(() => {
     cy.resetUserData();
     cy.loginByCognitoApi();
@@ -37,12 +37,12 @@ describe("search business name", () => {
     cy.get('input[data-testid="zipcode"]').type("12345");
     cy.get('button[data-testid="check-status-submit"]').click();
 
-    cy.get('[data-testid="error-alert-fields-required"]').should("exist");
+    cy.get('[data-testid="error-alert-FIELDS_REQUIRED"]').should("exist");
 
     cy.get('input[data-testid="address-1"]').type("123 Main Street");
     cy.get('button[data-testid="check-status-submit"]').click();
 
-    cy.get('[data-testid="error-alert-not-found"]').should("exist");
+    cy.get('[data-testid="error-alert-NOT_FOUND"]').should("exist");
 
     // re-load page, come back to same page
     cy.visit("/tasks/register-consumer-affairs");

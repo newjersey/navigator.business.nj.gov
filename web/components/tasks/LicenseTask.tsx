@@ -18,13 +18,13 @@ interface Props {
 const APPLICATION_TAB_INDEX = 0;
 const STATUS_TAB_INDEX = 1;
 
-export type ErrorAlertType = "NONE" | "NOT_FOUND" | "FIELDS_REQUIRED";
+export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
 export const LicenseTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const callToActionLink = getModifiedTaskContent(roadmap, props.task, "callToActionLink");
   const [tabIndex, setTabIndex] = useState(APPLICATION_TAB_INDEX);
-  const [showErrorAlert, setShowErrorAlert] = useState<ErrorAlertType>("NONE");
+  const [error, setError] = useState<LicenseSearchError | undefined>(undefined);
   const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
@@ -54,7 +54,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     if (!userData || !userData.onboardingData.industry) return;
 
     if (!allFieldsHaveValues(nameAndAddress)) {
-      setShowErrorAlert("FIELDS_REQUIRED");
+      setError("FIELDS_REQUIRED");
       return;
     }
 
@@ -67,10 +67,14 @@ export const LicenseTask = (props: Props): ReactElement => {
           status: result.licenseData.status,
           checklistItems: result.licenseData.items,
         });
-        setShowErrorAlert("NONE");
+        setError(undefined);
       })
-      .catch(() => {
-        setShowErrorAlert("NOT_FOUND");
+      .catch((errorCode) => {
+        if (errorCode === 404) {
+          setError("NOT_FOUND");
+        } else {
+          setError("SEARCH_FAILED");
+        }
       })
       .finally(async () => {
         update(await api.getUserData(userData.user.id));
@@ -135,7 +139,7 @@ export const LicenseTask = (props: Props): ReactElement => {
               />
             ) : (
               <div className="margin-3">
-                <CheckStatus onSubmit={onSubmit} showErrorAlert={showErrorAlert} isLoading={isLoading} />
+                <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
               </div>
             )}
           </div>
