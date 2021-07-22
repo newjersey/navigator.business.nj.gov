@@ -1,4 +1,4 @@
-import { LicenseStatus, CheckoffStatus, LicenseStatusItem } from "@/lib/types/types";
+import { LicenseStatus, LicenseStatusItem } from "@/lib/types/types";
 import React, { ReactElement, useEffect, useState } from "react";
 import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
 import { Icon } from "@/components/njwds/Icon";
@@ -38,12 +38,27 @@ const activePermitTheme: PermitTheme = {
 };
 
 const grayPermitTheme: PermitTheme = {
-  gradient: "gradient-grey",
+  gradient: "gradient-gray",
   bgColor: "bg-gray-5",
   textColor: "text-gray-50",
   borderColor: "border-gray-50",
   iconColor: "text-gray-50",
-  headerIconColor:"text-gray-50"
+  headerIconColor: "text-gray-50",
+};
+
+const LicenseStatusLookup: Record<LicenseStatus, string> = {
+  ACTIVE: LicenseScreenDefaults.activePermitStatusText,
+  PENDING: LicenseScreenDefaults.pendingPermitStatusText,
+  EXPIRED: LicenseScreenDefaults.expiredPermitStatusText,
+  BARRED: LicenseScreenDefaults.barredPermitStatusText,
+  OUT_OF_BUSINESS: LicenseScreenDefaults.outOfBusinessPermitStatusText,
+  REINSTATEMENT_PENDING: LicenseScreenDefaults.reinstatementPendingPermitStatusText,
+  CLOSED: LicenseScreenDefaults.closedPermitStatusText,
+  DELETED: LicenseScreenDefaults.deletedPermitStatusText,
+  DENIED: LicenseScreenDefaults.deniedPermitStatusText,
+  VOLUNTARY_SURRENDER: LicenseScreenDefaults.voluntarySurrenderPermitStatusText,
+  WITHDRAWN: LicenseScreenDefaults.withdrawnPermitStatusText,
+  UNKNOWN: "",
 };
 
 export const LicenseStatusReceipt = (props: Props): ReactElement => {
@@ -53,9 +68,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   useEffect(() => {
     if (props.status === "ACTIVE") {
       setTheme(activePermitTheme);
-      console.log(props.status);
-    }
-    else if (props.status === "PENDING") {
+    } else if (props.status === "PENDING") {
       setTheme(pendingPermitTheme);
     } else {
       setTheme(grayPermitTheme);
@@ -63,39 +76,17 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   }, [props.status]);
 
   const getText = (): string => {
-    return props.status === "ACTIVE" ? LicenseScreenDefaults.activePermitStatusText
-    : props.status === "PENDING" ? LicenseScreenDefaults.pendingPermitStatusText
-    : props.status === "EXPIRED" ? LicenseScreenDefaults.expiredPermitStatusText
-    : props.status === "BARRED" ? LicenseScreenDefaults.barredPermitStatusText
-    : props.status === "OUT_OF_BUSINESS" ? LicenseScreenDefaults.outOfBusinessPermitStatusText
-    : props.status === "REINSTATEMENT_PENDING" ? LicenseScreenDefaults.reinstatementPendingPermitStatusText
-    : props.status === "CLOSED" ? LicenseScreenDefaults.closedPermitStatusText
-    : props.status === "DELETED" ? LicenseScreenDefaults.deletedPermitStatusText
-    : props.status === "DENIED" ? LicenseScreenDefaults.deniedPermitStatusText
-    : props.status === "VOLUNTARY_SURRENDER" ? LicenseScreenDefaults.voluntarySurrenderPermitStatusText
-    : props.status === "WITHDRAWN" ? LicenseScreenDefaults.withdrawnPermitStatusText
-    : ""
-  }
+    return LicenseStatusLookup[props.status];
+  };
 
   const getIcon = (status: LicenseStatus): string => {
     if (status === "ACTIVE") {
       return "check";
     } else if (status === "PENDING") {
       return "schedule";
-    } else if (
-      status === "EXPIRED" 
-      || status === "BARRED" 
-      || status === "OUT_OF_BUSINESS" 
-      || status === "REINSTATEMENT_PENDING" 
-      || status === "CLOSED" 
-      || status === "DELETED" 
-      || status === "DENIED" 
-      || status === "VOLUNTARY_SURRENDER" 
-      || status === "WITHDRAWN"
-    ) {
+    } else {
       return "warning";
     }
-    return "";
   };
 
   const getOneLineAddress = (): string => {
@@ -109,9 +100,12 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
 
   const receiptItem = (item: LicenseStatusItem, index: number): ReactElement => {
     const border = index !== 0 ? "border-top-1px border-base-light" : "";
-    const iconColor = item.status === "ACTIVE" ? activePermitTheme.iconColor 
-    : item.status === "PENDING" ? pendingPermitTheme.iconColor
-    : grayPermitTheme.iconColor
+    const iconColor =
+      item.status === "ACTIVE"
+        ? activePermitTheme.iconColor
+        : item.status === "PENDING"
+        ? pendingPermitTheme.iconColor
+        : grayPermitTheme.iconColor;
 
     return (
       <div className="padding-x-3 fdr fac width-100" data-testid={`item-${item.status}`} key={index}>

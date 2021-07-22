@@ -85,8 +85,19 @@ export type LicenseEntity = {
 
 export type CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
-export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN" | "EXPIRED" | "BARRED" | "OUT_OF_BUSINESS" | 
-"REINSTATEMENT_PENDING" | "CLOSED" | "DELETED" | "DENIED" | "VOLUNTARY_SURRENDER" | "WITHDRAWN";
+export type LicenseStatus =
+  | "ACTIVE"
+  | "PENDING"
+  | "UNKNOWN"
+  | "EXPIRED"
+  | "BARRED"
+  | "OUT_OF_BUSINESS"
+  | "REINSTATEMENT_PENDING"
+  | "CLOSED"
+  | "DELETED"
+  | "DENIED"
+  | "VOLUNTARY_SURRENDER"
+  | "WITHDRAWN";
 
 export type NameAvailability = {
   status: "AVAILABLE" | "UNAVAILABLE";

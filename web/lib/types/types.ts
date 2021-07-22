@@ -257,7 +257,7 @@ export const createEmptyNameAndAddress = (): NameAndAddress => ({
 
 export type LicenseStatusItem = {
   title: string;
-  status: LicenseStatus;
+  status: CheckoffStatus;
 };
 
 export type LicenseStatusResult = {
@@ -267,8 +267,19 @@ export type LicenseStatusResult = {
 
 export type CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
-export type LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN" | "EXPIRED" | "BARRED" | "OUT_OF_BUSINESS" | 
-"REINSTATEMENT_PENDING" | "CLOSED" | "DELETED" | "DENIED" | "VOLUNTARY_SURRENDER" | "WITHDRAWN";
+export type LicenseStatus =
+  | "ACTIVE"
+  | "PENDING"
+  | "UNKNOWN"
+  | "EXPIRED"
+  | "BARRED"
+  | "OUT_OF_BUSINESS"
+  | "REINSTATEMENT_PENDING"
+  | "CLOSED"
+  | "DELETED"
+  | "DENIED"
+  | "VOLUNTARY_SURRENDER"
+  | "WITHDRAWN";
 
 export type SelfRegResponse = {
   authRedirectURL: string;

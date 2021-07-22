@@ -40,7 +40,7 @@ describe("searchLicenseStatus", () => {
         addressLine1: "1234 Main St",
         applicationNumber: "SOME OLDER APPLICATION NUMBER",
         checklistItem: "OLDER APPLICATION",
-        issueDate: "20080404 000000.000"
+        issueDate: "20080404 000000.000",
       }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
@@ -48,7 +48,7 @@ describe("searchLicenseStatus", () => {
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
         licenseStatus: "Pending",
-        issueDate: "20210404 000000.000"
+        issueDate: "20210404 000000.000",
       }),
       generateLicenseEntity({
         addressLine1: "SOMETHING ELSE",
@@ -58,7 +58,7 @@ describe("searchLicenseStatus", () => {
         applicationNumber: "12345",
         checklistItem: "Item 2",
         checkoffStatus: "Completed",
-        issueDate: "20210404 000000.000"
+        issueDate: "20210404 000000.000",
       }),
     ]);
 
@@ -82,13 +82,13 @@ describe("searchLicenseStatus", () => {
     );
   });
 
- it("returns an expired license if that's the most recent application", async () => {
+  it("returns an expired license if that's the most recent application", async () => {
     stubLicenseStatusClient.search.mockResolvedValue([
       generateLicenseEntity({
         addressLine1: "1234 Main St",
         applicationNumber: "SOME OLDER ACTIVE APPLICATION NUMBER",
         checklistItem: "OLDER ACTIVE APPLICATION",
-        issueDate: "20080404 000000.000"
+        issueDate: "20080404 000000.000",
       }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
@@ -96,13 +96,13 @@ describe("searchLicenseStatus", () => {
         checklistItem: "Item 1",
         checkoffStatus: "Completed",
         licenseStatus: "Expired",
-        issueDate: "20210404 000000.000"
+        issueDate: "20210404 000000.000",
       }),
       generateLicenseEntity({
         applicationNumber: "12345",
         checklistItem: "Item 2",
         checkoffStatus: "Completed",
-        issueDate: "20210404 000000.000"
+        issueDate: "20210404 000000.000",
       }),
     ]);
 
@@ -123,17 +123,17 @@ describe("searchLicenseStatus", () => {
           status: "ACTIVE",
         },
       ])
-    ); 
-  } );
+    );
+  });
 
-  it("returns a license if it doesn't have an issue date", async () => {
+  it("uses dateThisStatus as the date of an entity if issueDate is undefined", async () => {
     stubLicenseStatusClient.search.mockResolvedValue([
-     generateLicenseEntity({
+      generateLicenseEntity({
         addressLine1: "1234 Main St",
-        applicationNumber: "SOME APPLICATION NUMBER WITHOUT AN ISSUE DATE",
-        checklistItem: "ACTIVE APPLICATION WITHOUT AN ISSUE DATE",
-        issueDate: undefined
-      }), 
+        applicationNumber: "SOME OLDER APPLICATION NUMBER WITH AN ISSUE DATE",
+        checklistItem: "ACTIVE OLDER APPLICATION WITH AN ISSUE DATE",
+        issueDate: "20180327 000000.000",
+      }),
       generateLicenseEntity({
         addressLine1: "1234 Main St",
         applicationNumber: "12345",
@@ -141,14 +141,8 @@ describe("searchLicenseStatus", () => {
         checkoffStatus: "Completed",
         licenseStatus: "Expired",
         issueDate: undefined,
-        dateThisStatus: "20200405 000000.000"
-      }),
-      generateLicenseEntity({
-        applicationNumber: "12345",
-        checklistItem: "Item 2",
-        checkoffStatus: "Completed",
-        issueDate: undefined,
-        dateThisStatus: "20200405 000000.000"
+        dateThisStatus: "20210405 000000.000",
+        expirationDate: undefined,
       }),
     ]);
 
@@ -164,14 +158,45 @@ describe("searchLicenseStatus", () => {
           title: "Item 1",
           status: "ACTIVE",
         },
+      ])
+    );
+  });
+
+  it("uses expirationDate as the date of an entity if issueDate and dateThisStatus are undefined", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "SOME OLDER APPLICATION NUMBER WITH AN ISSUE DATE",
+        checklistItem: "ACTIVE OLDER APPLICATION WITH AN ISSUE DATE",
+        issueDate: "20210327 000000.000",
+      }),
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "12345",
+        checklistItem: "Item 1",
+        checkoffStatus: "Completed",
+        licenseStatus: "Expired",
+        issueDate: undefined,
+        dateThisStatus: undefined,
+        expirationDate: "20210505 000000.000",
+      }),
+    ]);
+
+    const nameAndAddress = generateNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
+    expect(result.status).toEqual("EXPIRED");
+    expect(result.checklistItems).toEqual(
+      expect.arrayContaining([
         {
-          title: "Item 2",
+          title: "Item 1",
           status: "ACTIVE",
         },
       ])
-    ); 
-  } );
-
+    );
+  });
 
   describe("detailed address matching logic", () => {
     const entityWithAddress = (address: string) =>
