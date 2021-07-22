@@ -84,21 +84,22 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     update(newUserData);
   };
 
+  const showBadInputError = (): ReactElement => {
+    if (error !== "BAD_INPUT") return <></>;
+    return (
+      <div data-testid={`error-alert-${error}`} className="text-orange">
+        {SearchBusinessNameErrorLookup[error]}
+      </div>
+    );
+  };
+
   const showErrorAlert = (): ReactElement => {
-    if (!error) return <></>;
-    else if (error === "BAD_INPUT") {
-      return (
-        <div data-testid={`error-alert-${error}`} className="text-orange">
-          {SearchBusinessNameErrorLookup[error]}
-        </div>
-      );
-    } else {
-      return (
-        <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
-          {SearchBusinessNameErrorLookup[error]}
-        </Alert>
-      );
-    }
+    if (!error || error === "BAD_INPUT") return <></>;
+    return (
+      <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
+        {SearchBusinessNameErrorLookup[error]}
+      </Alert>
+    );
   };
 
   const showAvailable = (): ReactElement => {
@@ -163,6 +164,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
   return (
     <>
       <TaskHeader task={props.task} />
+      {showErrorAlert()}
       <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
 
       <form onSubmit={searchBusinessName} className={`usa-prose grid-container padding-0`}>
@@ -197,7 +199,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
         </div>
       </form>
       <div className="margin-top-2">
-        {showErrorAlert()}
+        {showBadInputError()}
         {nameAvailability?.status === "AVAILABLE" && showAvailable()}
         {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
       </div>
