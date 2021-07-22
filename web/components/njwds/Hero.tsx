@@ -16,9 +16,6 @@ export const Hero = (props: Props): ReactElement => {
       aria-label="Introduction"
     >
       <div className="grid-container text-center flex-r-desktop">
-        <h1 className="hero-header med-font">
-          Welcome to <span className="text-bold"> MyBizNJ! </span>
-        </h1>
         <div className="margin-auto flex-order-2">
           <img src="/img/Hero-img.svg" alt="Hero People" />
         </div>
