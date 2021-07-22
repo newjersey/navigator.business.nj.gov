@@ -163,7 +163,7 @@ export const CheckStatus = (props: Props): ReactElement => {
             children={LicenseScreenDefaults.submitText}
             onClick={() => {}}
             loading={props.isLoading}
-            className="usa-button mla margin-top-4 margin-bottom-8 spinner-margin-36"
+            className="usa-button mla margin-top-4 margin-bottom-8"
             outline={true}
             data-testid="check-status-submit"
             marginClass="spinner-margin-36"
