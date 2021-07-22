@@ -1,6 +1,6 @@
 import { withAuth } from "@/test/helpers";
 import { useRouter } from "next/router";
-import { useAuthProtectedPage } from "./useAuthProtectedPage";
+import { useAuthProtectedPage, useUnauthedOnlyPage } from "./useAuthProtectedPage";
 import { IsAuthenticated } from "./AuthContext";
 import { render } from "@testing-library/react";
 
@@ -18,26 +18,45 @@ describe("useAuthProtectedPage", () => {
     });
   });
 
-  const setupHookWithAuth = (isAuth: IsAuthenticated): void => {
+  const setupHookWithAuth = (hook: () => void, isAuth: IsAuthenticated): void => {
     function TestComponent() {
-      useAuthProtectedPage();
+      hook();
       return null;
     }
     render(withAuth(<TestComponent />, { isAuthenticated: isAuth }));
   };
 
-  it("redirects to homepage when user is not authed", () => {
-    setupHookWithAuth(IsAuthenticated.FALSE);
-    expect(mockPush).toHaveBeenCalledWith("/");
+  describe("useAuthProtectedPage", () => {
+    it("redirects to homepage when user is not authed", () => {
+      setupHookWithAuth(useAuthProtectedPage, IsAuthenticated.FALSE);
+      expect(mockPush).toHaveBeenCalledWith("/");
+    });
+
+    it("does nothing when user is authed", () => {
+      setupHookWithAuth(useAuthProtectedPage, IsAuthenticated.TRUE);
+      expect(mockPush).not.toHaveBeenCalled();
+    });
+
+    it("does nothing when we havent loaded auth state yet", () => {
+      setupHookWithAuth(useAuthProtectedPage, IsAuthenticated.UNKNOWN);
+      expect(mockPush).not.toHaveBeenCalled();
+    });
   });
 
-  it("does nothing when user is authed", () => {
-    setupHookWithAuth(IsAuthenticated.TRUE);
-    expect(mockPush).not.toHaveBeenCalled();
-  });
+  describe("useUnauthedOnlyPage", () => {
+    it("redirects to homepage when user IS authed", () => {
+      setupHookWithAuth(useUnauthedOnlyPage, IsAuthenticated.TRUE);
+      expect(mockPush).toHaveBeenCalledWith("/");
+    });
 
-  it("does nothing when we havent loaded auth state yet", () => {
-    setupHookWithAuth(IsAuthenticated.UNKNOWN);
-    expect(mockPush).not.toHaveBeenCalled();
+    it("does nothing when user is NOT authed", () => {
+      setupHookWithAuth(useUnauthedOnlyPage, IsAuthenticated.FALSE);
+      expect(mockPush).not.toHaveBeenCalled();
+    });
+
+    it("does nothing when we haven't loaded auth state yet", () => {
+      setupHookWithAuth(useUnauthedOnlyPage, IsAuthenticated.UNKNOWN);
+      expect(mockPush).not.toHaveBeenCalled();
+    });
   });
 });

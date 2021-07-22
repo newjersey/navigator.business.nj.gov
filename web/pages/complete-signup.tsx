@@ -1,0 +1,41 @@
+import Home from "@/pages/index";
+import { Dialog, DialogContent, DialogTitle } from "@material-ui/core";
+import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
+import React, { ReactElement } from "react";
+import { useUnauthedOnlyPage } from "@/lib/auth/useAuthProtectedPage";
+import { useMountEffect } from "@/lib/utils/helpers";
+import { triggerSignIn } from "@/lib/auth/sessionHelper";
+
+const CompleteSignup = (): ReactElement => {
+  useUnauthedOnlyPage();
+
+  useMountEffect(async () => {
+    await triggerSignIn();
+  });
+
+  return (
+    <>
+      <Home />
+      <Dialog
+        fullWidth={true}
+        maxWidth="md"
+        open={true}
+        onClose={() => {}}
+        aria-labelledby="complete-signup-modal"
+      >
+        <DialogTitle id="complete-signup-modal">
+          <div className="padding-top-1 padding-x-2 text-bold font-body-xl">
+            {SelfRegDefaults.completeSignupTitleText}
+          </div>
+        </DialogTitle>
+        <DialogContent>
+          <div className="padding-2">
+            <p className="padding-bottom-1">{SelfRegDefaults.completeSignupDescriptionText}</p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
+
+export default CompleteSignup;

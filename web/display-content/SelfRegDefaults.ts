@@ -13,4 +13,6 @@ export const SelfRegDefaults: Record<string, string> = {
   errorTextRequiredFields: "Please fill in all fields",
   errorTextDuplicateSignup: "This email is already registered, please login instead",
   errorTextGeneric: "Something went wrong, please try again later.",
+  completeSignupTitleText: "Completing signup",
+  completeSignupDescriptionText: "Please wait, finishing your signup request...",
 };

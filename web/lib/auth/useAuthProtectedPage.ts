@@ -14,3 +14,15 @@ export const useAuthProtectedPage = (): void => {
     })();
   }, [state]);
 };
+
+export const useUnauthedOnlyPage = (): void => {
+  const { state } = useContext(AuthContext);
+  const router = useRouter();
+  useEffect(() => {
+    (async () => {
+      if (state.isAuthenticated === IsAuthenticated.TRUE) {
+        await router.replace("/");
+      }
+    })();
+  }, [state]);
+};

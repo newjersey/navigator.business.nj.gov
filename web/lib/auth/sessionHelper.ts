@@ -26,6 +26,16 @@ type CognitoIdentityPayload = {
   userId: string;
 };
 
+export const triggerSignOut = async (): Promise<void> => {
+  await Auth.signOut();
+};
+
+export const triggerSignIn = async (): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  await Auth.federatedSignIn({ provider: "myNJ" });
+};
+
 export const getCurrentToken = async (): Promise<string> => {
   const cognitoSession = await Auth.currentSession();
   return cognitoSession.getIdToken().getJwtToken();
