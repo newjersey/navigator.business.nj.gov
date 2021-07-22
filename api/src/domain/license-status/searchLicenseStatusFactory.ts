@@ -1,4 +1,5 @@
 import {
+  LicenseEntity,
   LicenseStatusClient,
   LicenseStatusItem,
   LicenseStatusResult,
@@ -6,9 +7,7 @@ import {
   SearchLicenseStatus,
 } from "../types";
 import { inputManipulator } from "../inputManipulator";
-import dayjs from 'dayjs';
-import minMax from 'dayjs/plugin/minMax';
-
+import dayjs from "dayjs";
 
 export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusClient): SearchLicenseStatus => {
   return async (nameAndAddress: NameAndAddress, licenseType: string): Promise<LicenseStatusResult> => {
@@ -19,50 +18,15 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
 
     const entities = await licenseStatusClient.search(searchName, nameAndAddress.zipCode, licenseType);
  
-    const allMatchingAddressesArray = entities.filter(
-      (it) => cleanAddress(it.addressLine1).startsWith(cleanAddress(nameAndAddress.addressLine1))
+  const allMatchingAddressesArray = entities.filter(
+    (it) => cleanAddress(it.addressLine1).startsWith(cleanAddress(nameAndAddress.addressLine1))
     )
 
-    const datesArray = allMatchingAddressesArray.map(
-      (it) => {
-        if (it.issueDate) {
-          return dayjs(it.issueDate, "YYYYMMDD X")
-        }
-        else if (it.dateThisStatus) {
-          return dayjs(it.dateThisStatus, "YYYYMMDD X")
-        }
-        else {
-          return dayjs(it.expirationDate, "YYYYMMDD X")
-        }
-      }
-    )
-
-   dayjs.extend(minMax);
-    const mostRecentDate = dayjs.max(datesArray);
-    
-    const match = allMatchingAddressesArray.filter(
-      (it) => {
-        if (it.issueDate) {
-          var d = dayjs(it.issueDate, "YYYYMMDD X")
-        }
-        else if (it.dateThisStatus) {
-          var d = dayjs(it.dateThisStatus, "YYYYMMDD X")
-        }
-        else {
-          var d = dayjs(it.expirationDate, "YYYYMMDD X")
-        }
-        return d.valueOf() == mostRecentDate.valueOf();
-      })[0];
-
-
-<<<<<<< HEAD
-    if (!match) {
-      return Promise.reject("NO_MATCH");
-=======
-  if (!match) {
-      return Promise.reject("NO MATCH");
->>>>>>> [#182] show additional license types on license Task screen
+    if (allMatchingAddressesArray.length === 0) {
+        return Promise.reject("NO_MATCH");
     }
+
+    const match = allMatchingAddressesArray.reduce((a,b) => getDate(a) > getDate(b) ? a : b)
 
     const items: LicenseStatusItem[] = entities
       .filter((it) => it.applicationNumber === match.applicationNumber)
@@ -92,3 +56,15 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
 
 export const cleanAddress = (value: string): string =>
   inputManipulator(value).makeLowerCase().stripPunctuation().stripWhitespace().value;
+
+  export const getDate = (entity: LicenseEntity) => { 
+    if (entity.issueDate) {
+      return dayjs(entity.issueDate, "YYYYMMDD X")
+    }
+    else if (entity.dateThisStatus) {
+      return dayjs(entity.dateThisStatus, "YYYYMMDD X")
+    } 
+    else {
+      return dayjs(entity.expirationDate, "YYYYMMDD X")
+    }
+  }

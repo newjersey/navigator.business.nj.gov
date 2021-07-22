@@ -257,7 +257,7 @@ export const createEmptyNameAndAddress = (): NameAndAddress => ({
 
 export type LicenseStatusItem = {
   title: string;
-  status: LicenseStatus;
+  status: CheckoffStatus;
 };
 
 export type LicenseStatusResult = {

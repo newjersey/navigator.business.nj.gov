@@ -126,13 +126,13 @@ describe("searchLicenseStatus", () => {
     ); 
   } );
 
-  it("returns a license if it doesn't have an issue date", async () => {
+  it("uses dateThisStatus as the date of an entity if issueDate is undefined", async () => {
     stubLicenseStatusClient.search.mockResolvedValue([
      generateLicenseEntity({
         addressLine1: "1234 Main St",
-        applicationNumber: "SOME APPLICATION NUMBER WITHOUT AN ISSUE DATE",
-        checklistItem: "ACTIVE APPLICATION WITHOUT AN ISSUE DATE",
-        issueDate: undefined
+        applicationNumber: "SOME OLDER APPLICATION NUMBER WITH AN ISSUE DATE",
+        checklistItem: "ACTIVE OLDER APPLICATION WITH AN ISSUE DATE",
+        issueDate: "20180327 000000.000"
       }), 
       generateLicenseEntity({
         addressLine1: "1234 Main St",
@@ -141,14 +141,8 @@ describe("searchLicenseStatus", () => {
         checkoffStatus: "Completed",
         licenseStatus: "Expired",
         issueDate: undefined,
-        dateThisStatus: "20200405 000000.000"
-      }),
-      generateLicenseEntity({
-        applicationNumber: "12345",
-        checklistItem: "Item 2",
-        checkoffStatus: "Completed",
-        issueDate: undefined,
-        dateThisStatus: "20200405 000000.000"
+        dateThisStatus: "20210405 000000.000",
+        expirationDate: undefined
       }),
     ]);
 
@@ -164,8 +158,40 @@ describe("searchLicenseStatus", () => {
           title: "Item 1",
           status: "ACTIVE",
         },
+      ])
+    ); 
+  } );
+
+  it("uses expirationDate as the date of an entity if issueDate is undefined", async () => {
+    stubLicenseStatusClient.search.mockResolvedValue([
+     generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "SOME OLDER APPLICATION NUMBER WITH AN ISSUE DATE",
+        checklistItem: "ACTIVE OLDER APPLICATION WITH AN ISSUE DATE",
+        issueDate: "20210327 000000.000"
+      }), 
+      generateLicenseEntity({
+        addressLine1: "1234 Main St",
+        applicationNumber: "12345",
+        checklistItem: "Item 1",
+        checkoffStatus: "Completed",
+        licenseStatus: "Expired",
+        issueDate: undefined,
+        dateThisStatus: undefined,
+        expirationDate: "20210505 000000.000"
+      }),
+    ]);
+
+    const nameAndAddress = generateNameAndAddress({
+      addressLine1: "1234 Main St",
+    });
+
+    const result = await searchLicenseStatus(nameAndAddress, "Home improvement");
+    expect(result.status).toEqual("EXPIRED");
+    expect(result.checklistItems).toEqual(
+      expect.arrayContaining([
         {
-          title: "Item 2",
+          title: "Item 1",
           status: "ACTIVE",
         },
       ])
