@@ -34,6 +34,22 @@ describe("<Signup />", () => {
     });
   });
 
+  it("shows loading spinner while request is being processed", async () => {
+    renderPage();
+    fillText("Some Name", "name");
+    fillText("some-email@example.com", "email");
+    fillText("some-email@example.com", "confirm-email");
+
+    const returnedPromise = Promise.resolve({ authRedirectURL: "www.example.com" });
+    mockApi.postSelfReg.mockReturnValue(returnedPromise);
+
+    expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+    clickSubmit();
+    expect(subject.queryByTestId("loading-spinner")).toBeInTheDocument();
+    await act(() => returnedPromise);
+    expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+  });
+
   it("redirects the user to the url returned by the api", (done) => {
     renderPage();
     fillText("Some Name", "name");

@@ -4,6 +4,7 @@ import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useRouter } from "next/router";
 import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
 import { Alert } from "@/components/njwds/Alert";
+import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 
 type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "DUPLICATE_SIGNUP" | "GENERIC";
 const SelfRegErrorLookup: Record<SelfRegError, string> = {
@@ -22,6 +23,7 @@ export const Signup = (props: Props): ReactElement => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [confirmEmail, setConfirmEmail] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<SelfRegError | undefined>(undefined);
   const router = useRouter();
 
@@ -52,6 +54,7 @@ export const Signup = (props: Props): ReactElement => {
       return;
     }
     setError(undefined);
+    setIsLoading(true);
 
     postSelfReg({ email: email, confirmEmail: confirmEmail, name: name })
       .then(async (response) => {
@@ -65,6 +68,9 @@ export const Signup = (props: Props): ReactElement => {
         } else {
           setError("GENERIC");
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -146,9 +152,14 @@ export const Signup = (props: Props): ReactElement => {
           <button className="usa-button usa-button--outline" onClick={onClose}>
             {SelfRegDefaults.closeButtonText}
           </button>
-          <button className="usa-button" onClick={submitSelfReg} data-testid="submit-selfreg">
-            {SelfRegDefaults.submitButtonText}
-          </button>
+          <LoadingButton
+            type="submit"
+            children={SelfRegDefaults.submitButtonText}
+            onClick={submitSelfReg}
+            loading={isLoading}
+            marginClass="spinner-margin-36"
+            data-testid="submit-selfreg"
+          />
         </div>
       </DialogActions>
     </Dialog>

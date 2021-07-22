@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
   onClick: () => void;
   loading: boolean;
-  className: string;
+  className?: string;
   outline?: boolean;
   marginClass?: string;
   // All other props
