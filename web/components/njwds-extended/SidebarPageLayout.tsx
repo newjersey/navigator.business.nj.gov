@@ -3,6 +3,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@material-ui/core";
 import { Icon } from "@/components/njwds/Icon";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   children: React.ReactNode;
@@ -19,7 +20,13 @@ export const SidebarPageLayout = ({ children, sidebar, backButton, pageTitle }: 
 
   const nav = () => (
     <nav aria-label="Secondary navigation" className={`left-nav ${isVisible()}`}>
-      <button className="left-nav-close fdr fac fjc" onClick={() => setSidebarIsOpen(false)}>
+      <button
+        className="left-nav-close fdr fac fjc"
+        onClick={() => {
+          analytics.event.mobile_menu_close_button.click.close_mobile_menu();
+          close();
+        }}
+      >
         <Icon className="font-sans-xl">close</Icon>
       </button>
       {isLargeScreen && <div className="padding-top-2 padding-bottom-2 usa-prose">{backButton}</div>}
@@ -32,11 +39,24 @@ export const SidebarPageLayout = ({ children, sidebar, backButton, pageTitle }: 
 
   return (
     <>
-      <div aria-hidden="true" onClick={close} className={`left-nav-overlay ${isVisible()}`} />
+      <div
+        className={`left-nav-overlay ${isVisible()}`}
+        aria-hidden="true"
+        onClick={() => {
+          analytics.event.mobile_menu.click_outside.close_mobile_menu();
+          close();
+        }}
+      />
       {!isLargeScreen && (
         <div className="usa-nav-container">
           <div className="usa-navbar">
-            <button className="left-nav-menu-button radius-0" onClick={open}>
+            <button
+              className="left-nav-menu-button radius-0"
+              onClick={() => {
+                analytics.event.mobile_hamburger_icon.click.open_mobile_menu();
+                open();
+              }}
+            >
               <Icon className="font-sans-xl">menu</Icon>
             </button>
             <div className="usa-logo">

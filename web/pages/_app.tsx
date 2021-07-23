@@ -1,6 +1,6 @@
 import "../styles/global.scss";
 import { AppProps } from "next/app";
-import React, { ReactElement, useReducer, useState } from "react";
+import React, { ReactElement, useEffect, useReducer, useState } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { Amplify } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { HubCapsule } from "@aws-amplify/core";
 import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
+import analytics from "@/lib/utils/analytics";
 
 Amplify.configure({
   ...awsExports,
@@ -107,6 +108,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);
   const router = useRouter();
 
+  const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || "";
+
   const listener = (data: HubCapsule): void => {
     switch (data.payload.event) {
       case "signIn":
@@ -151,8 +154,37 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       });
   });
 
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      analytics.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`} />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || []; 
+        function gtag(){window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${GOOGLE_ANALYTICS_ID}', { 
+          'send_page_view': false,
+          'custom_map': {
+            'dimension1': 'Industry',
+            'dimension2': 'Municipality',
+            'dimension3': 'Legal Structure',
+            'dimension4': 'Liquor License',
+            'dimension5': 'Home_Based Business'
+          }
+        });`,
+        }}
+      />
+
       <script src="/js/uswds.js" />
       <script src="/js/uswds-init.js" />
       <link rel="stylesheet" href="/css/styles.css" />

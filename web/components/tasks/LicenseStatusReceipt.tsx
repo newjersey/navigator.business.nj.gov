@@ -3,6 +3,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
 import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   items: LicenseStatusItem[];
@@ -134,7 +135,10 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
               <div className="text-bold">{userData?.licenseData?.nameAndAddress.name}</div>
               <button
                 data-testid="edit-button"
-                onClick={props.onEdit}
+                onClick={() => {
+                  analytics.event.task_status_checklist_edit_button.click.edit_address_form();
+                  props.onEdit();
+                }}
                 className="usa-button usa-button--unstyled mla font-body-2xs underline width-auto"
               >
                 {LicenseScreenDefaults.editButtonText}

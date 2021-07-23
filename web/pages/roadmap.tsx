@@ -18,6 +18,7 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { LegalMessage } from "@/display-content/FooterLegalMessage";
 import { useRouter } from "next/router";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -87,7 +88,15 @@ const RoadmapPage = (props: Props): ReactElement => {
               <Content>{props.displayContent.contentMd}</Content>
             </div>
             <div>
-              <GreyCallout link={{ text: RoadmapDefaults.greyBoxEditText, href: "/onboarding" }}>
+              <GreyCallout
+                link={{
+                  text: RoadmapDefaults.greyBoxEditText,
+                  href: "/onboarding",
+                  onClick: () => {
+                    analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
+                  },
+                }}
+              >
                 <>
                   <div data-business-name={userData?.onboardingData.businessName}>
                     {RoadmapDefaults.greyBoxBusinessNameText}: <strong>{getBusinessName()}</strong>

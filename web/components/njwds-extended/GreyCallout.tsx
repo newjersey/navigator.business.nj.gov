@@ -8,6 +8,7 @@ interface Props {
 interface Link {
   text: string;
   href: string;
+  onClick?: () => void;
 }
 
 export const GreyCallout = (props: Props): ReactElement => {
@@ -16,7 +17,7 @@ export const GreyCallout = (props: Props): ReactElement => {
       <div>{props.children}</div>
       {props.link && (
         <div className="mla font-body-sm">
-          <a href={props.link.href} data-testid="grey-callout-link">
+          <a href={props.link.href} onClick={props.link.onClick} data-testid="grey-callout-link">
             {props.link.text}
           </a>
         </div>

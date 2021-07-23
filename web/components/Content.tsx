@@ -5,6 +5,7 @@ import remark from "remark";
 import remark2react from "remark-react";
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { Icon } from "@/components/njwds/Icon";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   children: string;
@@ -31,7 +32,12 @@ export const Content = (props: Props): ReactElement => {
 
 const ExternalLink = ({ children, href }: { children: string[]; href: string }): ReactElement => {
   return (
-    <a href={href} target="_blank" rel="noreferrer noopener">
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      onClick={analytics.event.external_link.click.open_external_website}
+    >
       {children[0]}
       <Icon className="">launch</Icon>
     </a>

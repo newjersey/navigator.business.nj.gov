@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 import * as types from "@/lib/types/types";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   task: types.Task;
@@ -16,7 +17,12 @@ export const Task = (props: Props): ReactElement => {
   return (
     <li>
       <Link href={`/tasks/${props.task.id}`} passHref>
-        <a href={`/tasks/${props.task.id}`} className="usa-link" data-task={props.task.id}>
+        <a
+          onClick={() => analytics.event.roadmap_task_title.click.go_to_task}
+          href={`/tasks/${props.task.id}`}
+          className="usa-link"
+          data-task={props.task.id}
+        >
           {props.task.name}
         </a>
       </Link>

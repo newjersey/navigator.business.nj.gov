@@ -3,6 +3,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 import { MiniRoadmapTask } from "@/components/MiniRoadmapTask";
 import { Icon } from "@/components/njwds/Icon";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   activeTaskId: string;
@@ -24,6 +25,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   }, [props.activeTaskId, roadmap]);
 
   const toggleStep = (stepId: string): void => {
+    analytics.event.task_mini_roadmap_step.click.expand_contract();
     if (openSteps.includes(stepId)) {
       setOpenSteps(openSteps.filter((id) => id !== stepId));
     } else {

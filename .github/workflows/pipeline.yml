@@ -209,6 +209,7 @@ jobs:
           AMPLIFY_ENV: dev
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
           LANDING_PAGE_URL: ${{ secrets.LANDING_PAGE_URL_DEV }}
+          GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
 
   deploy-staging:
     runs-on: ubuntu-latest
@@ -296,6 +297,7 @@ jobs:
           AMPLIFY_ENV: staging
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_STAGING }}
           LANDING_PAGE_URL: ${{ secrets.LANDING_PAGE_URL_STAGING }}
+          GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
 
   deploy-prod:
     runs-on: ubuntu-latest
@@ -383,3 +385,4 @@ jobs:
           AMPLIFY_ENV: prod
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_PROD }}
           LANDING_PAGE_URL: ${{ secrets.LANDING_PAGE_URL_PROD }}
+          GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}

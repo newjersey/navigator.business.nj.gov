@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignOut, triggerSignIn } from "@/lib/auth/sessionHelper";
+import analytics from "@/lib/utils/analytics";
 
 export const AuthButton = (): ReactElement => {
   const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
 
   const logout = async () => {
+    analytics.event.roadmap_logout_button.click.log_out();
     await triggerSignOut();
     onSignOut(router.push, dispatch);
   };

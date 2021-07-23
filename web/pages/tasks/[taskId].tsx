@@ -17,6 +17,7 @@ import { TaskCTA } from "@/components/TaskCTA";
 import { getModifiedTaskContent, rswitch } from "@/lib/utils/helpers";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NextSeo } from "next-seo";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   task: Task;
@@ -29,7 +30,12 @@ const TaskPage = (props: Props): ReactElement => {
 
   const backButton = (
     <Link href="/roadmap" passHref>
-      <a href="/roadmap" data-back-to-roadmap className="fdr fac">
+      <a
+        href="/roadmap"
+        data-back-to-roadmap
+        className="fdr fac"
+        onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
+      >
         <Icon>arrow_back</Icon> {TaskDefaults.backToRoadmapText}
       </a>
     </Link>

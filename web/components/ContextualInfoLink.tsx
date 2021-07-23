@@ -1,6 +1,7 @@
 import React, { ReactElement, useContext, useState } from "react";
 import { ContextualInfoContext } from "@/pages/_app";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
+import analytics from "@/lib/utils/analytics";
 
 export const ContextualInfoLink = ({ children }: { children: string[] }): ReactElement => {
   const { setContextualInfoMd } = useContext(ContextualInfoContext);
@@ -11,6 +12,8 @@ export const ContextualInfoLink = ({ children }: { children: string[] }): ReactE
 
   const setContext = async (event: React.MouseEvent) => {
     event.preventDefault();
+    analytics.event.contextual_link.click.view_sidebar();
+
     if (cachedContent) {
       setContextualInfoMd(cachedContent);
     } else {

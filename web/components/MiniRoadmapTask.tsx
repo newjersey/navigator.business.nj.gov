@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import Link from "next/link";
 import { Task } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   task: Task;
@@ -15,6 +16,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
           props.active ? "bg-base-lightest bg-chevron text-primary-dark text-bold" : ""
         }`}
         data-task={props.task.id}
+        onClick={analytics.event.task_mini_roadmap_task.click.go_to_task}
       >
         <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
         {props.task.name}

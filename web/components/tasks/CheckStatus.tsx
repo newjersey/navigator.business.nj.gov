@@ -8,6 +8,7 @@ import { Alert } from "@/components/njwds/Alert";
 import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 import { SearchBusinessNamesDefaults } from "@/display-content/tasks/search-business-names/SearchBusinessNamesDefaults";
+import analytics from "@/lib/utils/analytics";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -54,6 +55,7 @@ export const CheckStatus = (props: Props): ReactElement => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    analytics.event.task_address_form.submit.submitted_address_form();
     props.onSubmit(formValues);
   };
 

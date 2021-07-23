@@ -8,3 +8,4 @@ global.fetch = window.fetch = fetch;
 global.Request = window.Request = fetch.Request;
 global.Response = window.Response = fetch.Response;
 global.scrollTo = jest.fn();
+global.gtag = jest.fn();

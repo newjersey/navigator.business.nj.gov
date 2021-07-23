@@ -10,6 +10,7 @@ import { CheckStatus } from "@/components/tasks/CheckStatus";
 import * as api from "@/lib/api-client/apiClient";
 import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 
 interface Props {
   task: Task;
@@ -46,6 +47,16 @@ export const LicenseTask = (props: Props): ReactElement => {
     }
   }, userData);
 
+  const onSelectTab = (index: number): void => {
+    if (index === APPLICATION_TAB_INDEX) {
+      analytics.event.task_tab_start_application.click.view_application_tab();
+    } else if (index === STATUS_TAB_INDEX) {
+      analytics.event.task_tab_check_status.click.view_status_tab();
+    }
+
+    setTabIndex(index);
+  };
+
   const onEdit = () => {
     setLicenseStatusResult(undefined);
   };
@@ -62,6 +73,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     api
       .checkLicenseStatus(nameAndAddress)
       .then((result: UserData) => {
+        analytics.event.task_address_form.response.success_application_found();
         if (!result.licenseData) return;
         setLicenseStatusResult({
           status: result.licenseData.status,
@@ -71,6 +83,7 @@ export const LicenseTask = (props: Props): ReactElement => {
       })
       .catch((errorCode) => {
         if (errorCode === 404) {
+          analytics.event.task_address_form.response.fail_application_not_found();
           setError("NOT_FOUND");
         } else {
           setError("SEARCH_FAILED");
@@ -88,7 +101,7 @@ export const LicenseTask = (props: Props): ReactElement => {
         <TaskHeader task={props.task} tooltipText={LicenseScreenDefaults.tooltipText} />
       </div>
 
-      <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+      <Tabs selectedIndex={tabIndex} onSelect={onSelectTab}>
         <div className="margin-x-3">
           <TabList>
             <Tab>{LicenseScreenDefaults.tab1Text}</Tab>
@@ -115,7 +128,10 @@ export const LicenseTask = (props: Props): ReactElement => {
                 </button>
               </a>
               <button
-                onClick={() => setTabIndex(STATUS_TAB_INDEX)}
+                onClick={() => {
+                  analytics.event.task_button_i_already_submitted.click.view_status_tab();
+                  setTabIndex(STATUS_TAB_INDEX);
+                }}
                 className="usa-button usa-button--outline width-100"
                 data-testid="cta-secondary"
               >

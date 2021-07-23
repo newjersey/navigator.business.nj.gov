@@ -6,6 +6,7 @@ import { TagInProgress } from "@/components/njwds-extended/TagInProgress";
 import { TagCompleted } from "@/components/njwds-extended/TagCompleted";
 import { TagNotStarted } from "@/components/njwds-extended/TagNotStarted";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import analytics from "@/lib/utils/analytics";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,6 +31,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
   }, [props.initialValue]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    analytics.event.task_status.click.dropdown_appears();
     setAnchorEl(event.currentTarget);
   };
 
@@ -38,6 +40,18 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
   };
 
   const handleSelect = (newValue: TaskProgress): void => {
+    switch (newValue) {
+      case "NOT_STARTED":
+        analytics.event.task_status_dropdown.click_not_started.selected_not_started_status();
+        break;
+      case "IN_PROGRESS":
+        analytics.event.task_status_dropdown.click_in_progress.selected_in_progress_status();
+        break;
+      case "COMPLETED":
+        analytics.event.task_status_dropdown.click_completed.selected_completed_status();
+        break;
+    }
+
     setValue(newValue);
     props.onSelect(newValue);
     close();
