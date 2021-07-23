@@ -1,5 +1,5 @@
-import {v7UserData} from "./v7_add_license_data";
-import {randomInt} from "./migrations";
+import { v7UserData } from "./v7_add_license_data";
+import { randomInt } from "./migrations";
 
 export interface v8UserData {
   user: v8BusinessUser;
@@ -11,7 +11,6 @@ export interface v8UserData {
 }
 
 export const migrate_v7_to_v8 = (v7Data: v7UserData): v8UserData => {
-
   let newLegalStructure;
   if (v7Data.onboardingData.legalStructure === "b-corporation") {
     newLegalStructure = undefined;
@@ -25,7 +24,7 @@ export const migrate_v7_to_v8 = (v7Data: v7UserData): v8UserData => {
       ...v7Data.onboardingData,
       legalStructure: newLegalStructure,
     },
-    version: 8
+    version: 8,
   };
 };
 
@@ -71,16 +70,14 @@ type v8NameAndAddress = {
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
-}
+};
 
 export type v8LicenseSearchData = {
   nameAndAddress: v8NameAndAddress;
   completedSearch: boolean;
-}
-
+};
 
 // ---------------- v8 factories ----------------
-
 
 export const generateV8User = (overrides: Partial<v8BusinessUser>): v8BusinessUser => {
   return {
@@ -112,9 +109,9 @@ export const generateV8LicenseSearchData = (overrides: Partial<v8LicenseSearchDa
   return {
     nameAndAddress: generateV8NameAndAddress({}),
     completedSearch: false,
-    ...overrides
-  }
-}
+    ...overrides,
+  };
+};
 
 export const generateV8NameAndAddress = (overrides: Partial<v8NameAndAddress>): v8NameAndAddress => {
   return {

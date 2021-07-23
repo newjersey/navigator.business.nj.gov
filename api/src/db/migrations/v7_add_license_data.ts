@@ -14,7 +14,7 @@ export const migrate_v6_to_v7 = (v6Data: v6UserData): v7UserData => {
   return {
     ...v6Data,
     licenseSearchData: undefined,
-    version: 7
+    version: 7,
   };
 };
 
@@ -61,13 +61,12 @@ type v7NameAndAddress = {
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
-}
+};
 
 type v7LicenseSearchData = {
   nameAndAddress: v7NameAndAddress;
   completedSearch: boolean;
-}
-
+};
 
 // ---------------- v7 factories ----------------
 

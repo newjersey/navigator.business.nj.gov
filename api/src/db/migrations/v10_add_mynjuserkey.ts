@@ -1,4 +1,4 @@
-import {v9UserData} from "./v9_add_license_status_to_data";
+import { v9UserData } from "./v9_add_license_status_to_data";
 
 export interface v10UserData {
   user: v10BusinessUser;
@@ -16,7 +16,7 @@ export const migrate_v9_to_v10 = (v9Data: v9UserData): v10UserData => {
       ...v9Data.user,
       myNJUserKey: undefined,
     },
-    version: 10
+    version: 10,
   };
 };
 
@@ -63,7 +63,7 @@ type v10NameAndAddress = {
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
-}
+};
 
 type v10LicenseData = {
   nameAndAddress: v10NameAndAddress;
@@ -71,7 +71,7 @@ type v10LicenseData = {
   lastCheckedStatus: string;
   status: v10LicenseStatus;
   items: v10LicenseStatusItem[];
-}
+};
 
 export type v10LicenseStatusItem = {
   title: string;
@@ -79,6 +79,5 @@ export type v10LicenseStatusItem = {
 };
 
 export type v10LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
-
 
 // ---------------- v10 factories ----------------

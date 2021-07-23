@@ -1,4 +1,4 @@
-import {v5UserData} from "./v5_add_liquor_license";
+import { v5UserData } from "./v5_add_liquor_license";
 
 export interface v6UserData {
   user: v6BusinessUser;
@@ -13,7 +13,7 @@ export const migrate_v5_to_v6 = (v5Data: v5UserData): v6UserData => {
     ...v5Data,
     onboardingData: {
       ...v5Data.onboardingData,
-      homeBasedBusiness: false
+      homeBasedBusiness: false,
     },
     version: 6,
   };

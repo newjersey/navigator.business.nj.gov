@@ -1,5 +1,5 @@
 import { v4UserData } from "./v4_add_municipality";
-import {randomInt} from "./migrations";
+import { randomInt } from "./migrations";
 
 export interface v5UserData {
   user: v5BusinessUser;

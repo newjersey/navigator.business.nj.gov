@@ -1,4 +1,4 @@
-import {v8UserData} from "./v8_remove_bcorp";
+import { v8UserData } from "./v8_remove_bcorp";
 import dayjs from "dayjs";
 
 export interface v9UserData {
@@ -11,7 +11,7 @@ export interface v9UserData {
 }
 
 export const migrate_v8_to_v9 = (v8Data: v8UserData): v9UserData => {
-  let licenseData: v9LicenseData | undefined
+  let licenseData: v9LicenseData | undefined;
   if (!v8Data.licenseSearchData) {
     licenseData = undefined;
   } else {
@@ -20,14 +20,14 @@ export const migrate_v8_to_v9 = (v8Data: v8UserData): v9UserData => {
       completedSearch: v8Data.licenseSearchData.completedSearch,
       lastCheckedStatus: dayjs(0).toISOString(),
       status: "UNKNOWN",
-      items: []
-    }
+      items: [],
+    };
   }
 
   return {
     ...v8Data,
     licenseData,
-    version: 9
+    version: 9,
   };
 };
 
@@ -73,7 +73,7 @@ type v9NameAndAddress = {
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
-}
+};
 
 type v9LicenseData = {
   nameAndAddress: v9NameAndAddress;
@@ -81,7 +81,7 @@ type v9LicenseData = {
   lastCheckedStatus: string;
   status: v9LicenseStatus;
   items: v9LicenseStatusItem[];
-}
+};
 
 export type v9LicenseStatusItem = {
   title: string;
@@ -89,6 +89,5 @@ export type v9LicenseStatusItem = {
 };
 
 export type v9LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
-
 
 // ---------------- v9 factories ----------------

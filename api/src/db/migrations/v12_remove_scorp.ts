@@ -10,9 +10,8 @@ export interface v12UserData {
 }
 
 export const migrate_v11_to_v12 = (v11Data: v11UserData): v12UserData => {
-
   let newLegalStructure;
-  if(v11Data.onboardingData.legalStructure === "s-corporation"){
+  if (v11Data.onboardingData.legalStructure === "s-corporation") {
     newLegalStructure = undefined;
   } else {
     newLegalStructure = v11Data.onboardingData.legalStructure;
@@ -24,10 +23,9 @@ export const migrate_v11_to_v12 = (v11Data: v11UserData): v12UserData => {
       ...v11Data.onboardingData,
       legalStructure: newLegalStructure,
     },
-    version: 12
+    version: 12,
   };
 };
-
 
 // ---------------- v12 types ----------------
 
@@ -65,13 +63,13 @@ type v12LegalStructure =
   | "limited-liability-partnership"
   | "limited-liability-company"
   | "c-corporation";
-  
+
 type v12NameAndAddress = {
   name: string;
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
-}
+};
 
 type v12LicenseData = {
   nameAndAddress: v12NameAndAddress;
@@ -79,7 +77,7 @@ type v12LicenseData = {
   lastCheckedStatus: string;
   status: v12LicenseStatus;
   items: v12LicenseStatusItem[];
-}
+};
 
 export type v12LicenseStatusItem = {
   title: string;
@@ -88,9 +86,18 @@ export type v12LicenseStatusItem = {
 
 export type v12CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
-export type v12LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN" | "EXPIRED" | "BARRED" | "OUT_OF_BUSINESS" | 
-"REINSTATEMENT_PENDING" | "CLOSED" | "DELETED" | "DENIED" | "VOLUNTARY_SURRENDER" | "WITHDRAWN";
-
-
+export type v12LicenseStatus =
+  | "ACTIVE"
+  | "PENDING"
+  | "UNKNOWN"
+  | "EXPIRED"
+  | "BARRED"
+  | "OUT_OF_BUSINESS"
+  | "REINSTATEMENT_PENDING"
+  | "CLOSED"
+  | "DELETED"
+  | "DENIED"
+  | "VOLUNTARY_SURRENDER"
+  | "WITHDRAWN";
 
 // ---------------- v12 factories ----------------

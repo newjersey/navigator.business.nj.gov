@@ -13,7 +13,7 @@ export interface v11UserData {
 export const migrate_v10_to_v11 = (v10Data: v10UserData): v11UserData => {
   return {
     ...v10Data,
-    version: 11
+    version: 11,
   };
 };
 
@@ -60,7 +60,7 @@ type v11NameAndAddress = {
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
-}
+};
 
 type v11LicenseData = {
   nameAndAddress: v11NameAndAddress;
@@ -68,7 +68,7 @@ type v11LicenseData = {
   lastCheckedStatus: string;
   status: v11LicenseStatus;
   items: v11LicenseStatusItem[];
-}
+};
 
 export type v11LicenseStatusItem = {
   title: string;
@@ -77,13 +77,21 @@ export type v11LicenseStatusItem = {
 
 export type v11CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
-export type v11LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN" | "EXPIRED" | "BARRED" | "OUT_OF_BUSINESS" | 
-"REINSTATEMENT_PENDING" | "CLOSED" | "DELETED" | "DENIED" | "VOLUNTARY_SURRENDER" | "WITHDRAWN";
-
-
+export type v11LicenseStatus =
+  | "ACTIVE"
+  | "PENDING"
+  | "UNKNOWN"
+  | "EXPIRED"
+  | "BARRED"
+  | "OUT_OF_BUSINESS"
+  | "REINSTATEMENT_PENDING"
+  | "CLOSED"
+  | "DELETED"
+  | "DENIED"
+  | "VOLUNTARY_SURRENDER"
+  | "WITHDRAWN";
 
 // ---------------- v11 factories ----------------
-
 
 export const generatev11User = (overrides: Partial<v11BusinessUser>): v11BusinessUser => {
   return {
