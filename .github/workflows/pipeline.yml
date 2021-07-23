@@ -8,20 +8,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:12
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: businessci
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
 
     steps:
       - name: 🛒 Checkout code
@@ -68,9 +54,6 @@ jobs:
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
         working-directory: api
 
-      - name: 🔧 Migrate postgres
-        run: npm --prefix=api run db-migrate up -- -e ci
-
       - name: 🧹 Run web lint
         run: npm --prefix=web run lint
       - name: 🧹 Run api lint
@@ -80,23 +63,11 @@ jobs:
         run: npm --prefix=web run test
       - name: 🧪 Run API tests
         run: npm --prefix=api run test
-        env:
-          DB_NAME_CI: businessci
-          DB_PASSWORD_CI: postgres
-          SKIP_DB_SETUP: true
-
-      - name: 🔧 Seed postgres for e2e tests
-        run: ./scripts/seed-business-names.sh $DB_NAME
-        env:
-          DB_NAME: businessci
-          PGPASSWORD: postgres
 
       - name: 🔧 Build project for e2e tests
         run: npm --prefix=api run install-dynamo-local && npm --prefix=api start & npm --prefix=api run start:wiremock & npm --prefix=web run build --if-present
         env:
           API_BASE_URL: http://localhost:5000/dev
-          DB_NAME: businessci
-          DB_PASSWORD: postgres
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
           LANDING_PAGE_URL: http://localhost:3000/
 
@@ -176,11 +147,6 @@ jobs:
         working-directory: ./api
         env:
           STAGE: dev
-          DB_USER: ${{ secrets.DB_USER_DEV }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD_DEV }}
-          DB_NAME: ${{ secrets.DB_NAME_DEV }}
-          DB_HOST: ${{ secrets.DB_HOST_DEV }}
-          DB_ENV: aws-dev
           COGNITO_ARN: ${{ secrets.COGNITO_ARN_DEV }}
           VPC_SECURITY_GROUP_ID: ${{ secrets.VPC_SECURITY_GROUP_ID }}
           VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1 }}
@@ -194,10 +160,6 @@ jobs:
           MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_DEV }}
           BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_DEV }}
           AWS_SECRET_ID: MYNJ_CERTS_DEV
-
-      - name: 🦋 run database migrations
-        run: npm run serverless invoke -- -f migrate --stage dev --region us-east-1
-        working-directory: ./api
 
       - name: 🚀 Deploy web to AWS Amplify
         run: ./scripts/amplify-ci/publish.sh
@@ -264,11 +226,6 @@ jobs:
         working-directory: ./api
         env:
           STAGE: staging
-          DB_USER: ${{ secrets.DB_USER_STAGING }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD_STAGING }}
-          DB_NAME: ${{ secrets.DB_NAME_STAGING }}
-          DB_HOST: ${{ secrets.DB_HOST_STAGING }}
-          DB_ENV: aws-staging
           COGNITO_ARN: ${{ secrets.COGNITO_ARN_STAGING }}
           VPC_SECURITY_GROUP_ID: ${{ secrets.VPC_SECURITY_GROUP_ID }}
           VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1 }}
@@ -282,10 +239,6 @@ jobs:
           MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_STAGING }}
           BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_STAGING }}
           AWS_SECRET_ID: MYNJ_CERTS_STAGING
-
-      - name: 🦋 run database migrations
-        run: npm run serverless invoke -- -f migrate --stage staging --region us-east-1
-        working-directory: ./api
 
       - name: 🚀 Deploy web to AWS Amplify
         run: ./scripts/amplify-ci/publish.sh
@@ -352,11 +305,6 @@ jobs:
         working-directory: ./api
         env:
           STAGE: prod
-          DB_USER: ${{ secrets.DB_USER_PROD }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD_PROD }}
-          DB_NAME: ${{ secrets.DB_NAME_PROD }}
-          DB_HOST: ${{ secrets.DB_HOST_PROD }}
-          DB_ENV: aws-prod
           COGNITO_ARN: ${{ secrets.COGNITO_ARN_PROD }}
           VPC_SECURITY_GROUP_ID: ${{ secrets.VPC_SECURITY_GROUP_ID_PROD }}
           VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1_PROD }}
@@ -370,10 +318,6 @@ jobs:
           MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_PROD }}
           BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_PROD }}
           AWS_SECRET_ID: MYNJ_CERTS_PROD
-
-      - name: 🦋 run database migrations
-        run: npm run serverless invoke -- -f migrate --stage prod --region us-east-1
-        working-directory: ./api
 
       - name: 🚀 Deploy web to AWS Amplify
         run: ./scripts/amplify-ci/publish.sh

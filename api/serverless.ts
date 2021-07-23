@@ -1,24 +1,17 @@
 import type { AWS } from "@serverless/typescript";
 
 import express from "./src/functions/express";
-import migrate from "./src/functions/migrate";
 
 const stage = process.env.STAGE || "dev";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5000;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
-const dbUser = process.env.DB_USER || "";
-const dbPassword = process.env.DB_PASSWORD || "";
-const dbHost = process.env.DB_HOST || "";
-const dbName = process.env.DB_NAME || "";
 const cognitoArn = process.env.COGNITO_ARN || "";
 const useFakeLicenseClient = process.env.USE_FAKE_LICENSE_CLIENT || "";
 const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
 const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
-const dbPort = "5432";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
-const databaseUrl = `postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
 const securityGroupId = process.env.VPC_SECURITY_GROUP_ID || "";
 const subnetId1 = process.env.VPC_SUBNET_ID_1 || "";
 const subnetId2 = process.env.VPC_SUBNET_ID_2 || "";
@@ -47,9 +40,6 @@ const serverlessConfiguration: AWS = {
   custom: {
     webpack: {
       webpackConfig: "./webpack.config.js",
-      includeModules: {
-        forceInclude: ["pg", "db-migrate", "db-migrate-pg"],
-      },
     },
     dynamodb: {
       start: {
@@ -107,10 +97,6 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       USERS_TABLE: usersTable,
-      DB_USER: dbUser,
-      DB_PASSWORD: dbPassword,
-      DB_NAME: dbName,
-      DB_HOST: dbHost,
       USE_FAKE_LICENSE_CLIENT: useFakeLicenseClient,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
@@ -126,7 +112,6 @@ const serverlessConfiguration: AWS = {
   },
   functions: {
     express: express(cognitoArn, vpcConfig),
-    migrate: migrate(databaseUrl, vpcConfig),
   },
   resources: {
     Resources: {

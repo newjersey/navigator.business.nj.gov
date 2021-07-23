@@ -7,7 +7,6 @@ API_PORT=5001
 LAMBDA_PORT=5051
 DYNAMO_PORT=8001
 WIREMOCK_PORT=9001
-DB_NAME=businesstest
 API_BASE_URL=http://localhost:${API_PORT}/dev
 
 kill $(lsof -i:${WEB_PORT} -t)
@@ -18,12 +17,6 @@ kill $(lsof -i:${WIREMOCK_PORT} -t)
 
 set -e
 
-# setup test postgres & seed it
-psql -c "drop database if exists ${DB_NAME};" -U postgres -h localhost -p 5432
-psql -c "create database ${DB_NAME};" -U postgres -h localhost -p 5432
-npm --prefix=api run db-migrate up -- -e test
-./scripts/seed-business-names.sh $DB_NAME
-
 echo "🚀 starting wiremock"
 npm --prefix=api run start:wiremock:with-port -- --port ${WIREMOCK_PORT} &
 while ! echo exit | nc localhost ${WIREMOCK_PORT}; do sleep 1; done
@@ -32,7 +25,6 @@ echo "🚀 starting api"
 export API_PORT=${API_PORT}
 export DYNAMO_PORT=${DYNAMO_PORT}
 export LAMBDA_PORT=${LAMBDA_PORT}
-export DB_NAME=${DB_NAME}
 export LICENSE_STATUS_BASE_URL=http://localhost:${WIREMOCK_PORT}
 export BUSINESS_NAME_BASE_URL=http://localhost:${WIREMOCK_PORT}
 npm --prefix=api start &
@@ -51,8 +43,6 @@ echo "🌟 app started"
 CYPRESS_API_BASE_URL=${API_BASE_URL} npm --prefix=web run cypress:run -- --config baseUrl=http://localhost:${WEB_PORT}
 
 set +e
-
-psql -c "drop database if exists ${DB_NAME};" -U postgres -h localhost -p 5432
 
 kill $(lsof -i:${WEB_PORT} -t)
 kill $(lsof -i:${API_PORT} -t)

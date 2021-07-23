@@ -8,8 +8,5 @@ jspm_packages
 # Webpack directories
 .webpack
 
-# db migrations
-migrations
-
 src/setupTests.js
 src/teardownTests.js

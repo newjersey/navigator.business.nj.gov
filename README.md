@@ -47,27 +47,6 @@ Before you can run locally, you will need to:
 - create a `web/.env` that includes all the values laid out in the `web/.env-template` file.
 - create a `api/.env` that includes all the values laid out in the `api/.env-template` file.
 
-### Database setup
-
-For right now, we need a local Postgres database for part of the API functionality.
-
-Make sure you have Postgres installed locally (recommend using brew for a Mac)
-
-Then, create the database (name `businesslocal`, user `postgres`, no password): 
-```shell script
-psql -c 'create database businesslocal;' -U postgres
-```
-
-Run database migrations:
-```shell script
-npm --prefix=api run db-migrate up
-```
-
-Seed the database with some business names
-```shell script
-./scripts/seed-business-names.sh
-```
-
 ### Run tests
 
 We use jest for unit tests, on both the frontend. Run all tests with:
