@@ -175,8 +175,7 @@ export type LegalStructure =
   | "limited-partnership"
   | "limited-liability-partnership"
   | "limited-liability-company"
-  | "c-corporation"
-  | "s-corporation";
+  | "c-corporation";
 
 export const ALL_LEGAL_STRUCTURES: LegalStructure[] = [
   "sole-proprietorship",
@@ -185,5 +184,4 @@ export const ALL_LEGAL_STRUCTURES: LegalStructure[] = [
   "limited-liability-partnership",
   "limited-liability-company",
   "c-corporation",
-  "s-corporation",
 ];

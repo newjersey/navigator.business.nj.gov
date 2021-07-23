@@ -111,7 +111,6 @@ export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent 
         "limited-liability-partnership": "",
         "limited-liability-company": "",
         "c-corporation": "",
-        "s-corporation": "",
       },
     },
     municipality: {
@@ -217,8 +216,7 @@ export type LegalStructure =
   | "limited-partnership"
   | "limited-liability-partnership"
   | "limited-liability-company"
-  | "c-corporation"
-  | "s-corporation";
+  | "c-corporation";
 
 export type BusinessUser = {
   name?: string;

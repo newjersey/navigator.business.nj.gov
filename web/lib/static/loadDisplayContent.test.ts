@@ -38,7 +38,7 @@ describe("loadDisplayContent", () => {
     it("loads content for each legal structure option", () => {
       mockedFs.readFileSync.mockReturnValue("### I am a header\n\nI am a description");
 
-      expect(loadOnboardingDisplayContent().legalStructure.optionContent["s-corporation"]).toEqual(
+      expect(loadOnboardingDisplayContent().legalStructure.optionContent["c-corporation"]).toEqual(
         "### I am a header\n\nI am a description"
       );
       const allFilePaths = mockedFs.readFileSync.mock.calls.map(

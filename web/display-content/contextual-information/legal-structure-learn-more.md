@@ -10,9 +10,6 @@ Some types of legal structures are easier to set up than others. For instance, f
 **Limited Liability Company**
 An Limited Liability Company (LLC) is a hybrid between a corporation and a partnership. Similar to a C-Corporation, business owners in an LLC are not responsible for the debt of the company. In other words, they have limited liability. However, unlike a corporation, the business does not file separate taxes. Instead, each partner (called members) includes their profits on their personal tax return.
 
-**S-Corporation**
-An S-Corporation (S-Corp) is similar to a C-Corporation except that the business is not taxed separately from the owners. S-Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. The owners, called shareholders, avoid the double taxation of a C-Corp, but the business is limited to 100 shareholders and has only one class of stock
-
 **Sole Proprietorship**
 A sole proprietorship is the most basic type of business to establish. You alone own the company and are responsible for its assets and liabilities.
 

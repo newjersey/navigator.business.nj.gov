@@ -1,4 +1,5 @@
 import { v10UserData } from "./v10_add_mynjuserkey";
+import { randomInt } from "./migrations";
 
 export interface v11UserData {
   user: v11BusinessUser;
@@ -82,3 +83,30 @@ export type v11LicenseStatus = "ACTIVE" | "PENDING" | "UNKNOWN" | "EXPIRED" | "B
 
 
 // ---------------- v11 factories ----------------
+
+
+export const generatev11User = (overrides: Partial<v11BusinessUser>): v11BusinessUser => {
+  return {
+    name: "some-name-" + randomInt(),
+    email: `some-email-${randomInt()}@example.com`,
+    id: "some-id-" + randomInt(),
+    ...overrides,
+  };
+};
+
+export const generatev11OnboardingData = (overrides: Partial<v11OnboardingData>): v11OnboardingData => {
+  return {
+    businessName: "some-business-name-" + randomInt(),
+    industry: "restaurant",
+    legalStructure: "sole-proprietorship",
+    municipality: {
+      name: "some-name-" + randomInt(),
+      displayName: "some-display-name-" + randomInt(),
+      county: "some-county-" + randomInt(),
+      id: "some-id-" + randomInt(),
+    },
+    liquorLicense: true,
+    homeBasedBusiness: true,
+    ...overrides,
+  };
+};
