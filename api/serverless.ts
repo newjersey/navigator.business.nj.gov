@@ -40,6 +40,7 @@ const serverlessConfiguration: AWS = {
   custom: {
     webpack: {
       webpackConfig: "./webpack.config.js",
+      includeModules: true,
     },
     dynamodb: {
       start: {
