@@ -8,8 +8,6 @@ This line is only required if you are specifying `TS_NODE_PROJECT` for whatever 
  */
 // delete process.env.TS_NODE_PROJECT;
 
-const CopyPlugin = require("copy-webpack-plugin");
-
 module.exports = {
   context: __dirname,
   mode: slsw.lib.webpack.isLocal ? "development" : "production",
@@ -55,9 +53,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CopyPlugin({
-      patterns: [{ from: "migrations/**/*" }],
-    }),
-  ],
+  plugins: [],
 };
