@@ -99,18 +99,20 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
     return `${nameAndAddress.addressLine1}${secondLineAddress}, ${nameAndAddress.zipCode} NJ`;
   };
 
+  const getIconColor = (item: LicenseStatusItem): string => {
+    if (props.status === "ACTIVE" || props.status === "PENDING") {
+      return item.status === "ACTIVE" ? activePermitTheme.iconColor : pendingPermitTheme.iconColor;
+    } else {
+      return item.status === "ACTIVE" ? grayPermitTheme.iconColor : pendingPermitTheme.iconColor;
+    }
+  };
+
   const receiptItem = (item: LicenseStatusItem, index: number): ReactElement => {
     const border = index !== 0 ? "border-top-1px border-base-light" : "";
-    const iconColor =
-      item.status === "ACTIVE"
-        ? activePermitTheme.iconColor
-        : item.status === "PENDING"
-        ? pendingPermitTheme.iconColor
-        : grayPermitTheme.iconColor;
 
     return (
       <div className="padding-x-3 fdr fac width-100" data-testid={`item-${item.status}`} key={index}>
-        <Icon className={`${iconColor} usa-icon--size-3`}>{getIcon(item.status)}</Icon>
+        <Icon className={`${getIconColor(item)} usa-icon--size-3`}>{getIcon(item.status)}</Icon>
         <span className={`margin-left-2 padding-y-1 fg1 receipt-item ${border}`}>{item.title}</span>
       </div>
     );
