@@ -24,4 +24,9 @@ describe("WebserviceLicenseStatusClient", () => {
       licenseType: "some-license-type",
     });
   });
+
+  it("returns empty list if data is empty", async () => {
+    mockAxios.post.mockResolvedValue({ data: "" });
+    expect(await client.search("name", "11111", "some-type")).toEqual([]);
+  });
 });

@@ -12,7 +12,7 @@ export const WebserviceLicenseStatusClient = (baseUrl: string): LicenseStatusCli
       })
       .then((response) => {
         console.log("got response", response);
-        return response.data;
+        return response.data || [];
       })
       .catch((error: AxiosError) => {
         console.log("got error", error);
