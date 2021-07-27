@@ -1,0 +1,7 @@
+[
+  {
+    "step": "inspection-requirements",
+    "weight": 10,
+    "task": "search-licenses"
+  }
+]

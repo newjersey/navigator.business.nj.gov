@@ -68,6 +68,14 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
     roadmapBuilder = modifyTasks(roadmapBuilder, await importModification("cosmetology"));
   }
 
+  if (onboardingData.industry === "e-commerce") {
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/e-commerce"));
+  }
+
+  if (onboardingData.industry === "generic" || onboardingData.industry === undefined) {
+    roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/another-industry"));
+  }
+
   if (onboardingData.legalStructure) {
     if (PublicRecordFilingGroup.includes(onboardingData.legalStructure)) {
       roadmapBuilder = addTasksFromAddOn(roadmapBuilder, await importAddOns("add-ons/public-record-filing"));
