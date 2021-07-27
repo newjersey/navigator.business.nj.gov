@@ -1,5 +1,6 @@
 ---
 id: "food-safety-course"
+urlSlug: "food-safety-course"
 name: "Complete Food Safety Course"
 callToActionLink: ""
 callToActionText: ""

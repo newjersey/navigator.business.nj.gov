@@ -1,5 +1,6 @@
 ---
 id: "search-licenses"
+urlSlug: "search-licenses"
 name: "Search Licenses"
 callToActionLink: "https://business.nj.gov/licensing-and-certification-guide"
 callToActionText: "Search Licenses"

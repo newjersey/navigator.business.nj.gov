@@ -1,5 +1,6 @@
 ---
 id: "building-permit"
+urlSlug: "building-permit"
 name: "Prepare for Site Renovation If Applicable"
 callToActionLink: ""
 callToActionText: ""

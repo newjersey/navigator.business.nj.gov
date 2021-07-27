@@ -1,5 +1,6 @@
 ---
 id: "sign-lease"
+urlSlug: "sign-lease"
 name: "Sign Your Lease"
 callToActionLink: ""
 callToActionText: ""

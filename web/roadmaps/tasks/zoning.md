@@ -1,5 +1,6 @@
 ---
 id: "zoning"
+urlSlug: "zoning"
 name: "Obtain Zoning and Sign Permits If Required"
 callToActionLink: ""
 callToActionText: ""

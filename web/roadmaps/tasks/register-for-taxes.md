@@ -1,5 +1,6 @@
 ---
 id: "register-for-taxes"
+urlSlug: "register-for-taxes"
 name: "Register for State Taxes"
 callToActionLink: "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml"
 callToActionText: "Register My Business for State Taxes"

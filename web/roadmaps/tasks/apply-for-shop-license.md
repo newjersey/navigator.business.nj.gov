@@ -1,5 +1,6 @@
 ---
 id: "apply-for-shop-license"
+urlSlug: "apply-for-shop-license"
 name: "Apply for a Cosmetology Shop License"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: "Apply for My Cosmetology Shop License"

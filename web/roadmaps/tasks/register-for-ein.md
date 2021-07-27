@@ -1,5 +1,6 @@
 ---
 id: "register-for-ein"
+urlSlug: "register-for-ein"
 name: "Get Your EIN from the IRS"
 callToActionLink: "https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online"
 callToActionText: "Get My EIN Certificate"

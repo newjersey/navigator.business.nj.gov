@@ -1,5 +1,6 @@
 ---
 id: "certificate-of-occupancy"
+urlSlug: "certificate-of-occupancy"
 name: "Obtain Site Safety Permits"
 callToActionLink: ""
 callToActionText: ""

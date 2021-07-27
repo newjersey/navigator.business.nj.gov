@@ -1,5 +1,6 @@
 ---
 id: "reseller"
+urlSlug: "reseller"
 name: "Decide If You Will Be a Reseller"
 callToActionLink: ""
 callToActionText: ""

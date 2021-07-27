@@ -1,5 +1,6 @@
 ---
 id: "floor-plan-approval-doh"
+urlSlug: "floor-plan-approval-doh"
 name: "Get Your Floor Plan Approved"
 callToActionLink: ""
 callToActionText: ""

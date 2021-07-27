@@ -1,5 +1,6 @@
 ---
 id: "business-plan"
+urlSlug: "business-plan"
 name: "Write Your Business Plan"
 callToActionLink: ""
 callToActionText: ""

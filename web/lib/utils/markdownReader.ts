@@ -23,6 +23,7 @@ export const getMarkdown = (mdContents: string): MarkdownResult => {
 type TaskGrayMatter = {
   id: string;
   name: string;
+  urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
 };

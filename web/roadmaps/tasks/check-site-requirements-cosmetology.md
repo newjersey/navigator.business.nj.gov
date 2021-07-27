@@ -1,5 +1,6 @@
 ---
 id: "check-site-requirements"
+urlSlug: "check-site-requirements"
 name: "Determine Site Requirements"
 callToActionLink: ""
 callToActionText: ""

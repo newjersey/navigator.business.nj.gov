@@ -1,5 +1,6 @@
 ---
 id: "board-inspection"
+urlSlug: "site-inspection"
 name: "Pass Your Site Inspection"
 callToActionLink: ""
 callToActionText: ""

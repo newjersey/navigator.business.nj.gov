@@ -2,7 +2,7 @@ import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import React, { ReactElement } from "react";
 import Link from "next/link";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { loadAllTaskIds, loadTaskById, TaskIdParam } from "@/lib/static/loadTasks";
+import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task } from "@/lib/types/types";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { MiniRoadmap } from "@/components/MiniRoadmap";
@@ -71,22 +71,18 @@ const TaskPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticPaths = async (): Promise<GetStaticPathsResult<TaskIdParam>> => {
-  const paths = loadAllTaskIds();
+export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
+  const paths = loadAllTaskUrlSlugs();
   return {
     paths,
     fallback: false,
   };
 };
 
-export const getStaticProps = async ({
-  params,
-}: {
-  params: TaskIdParam;
-}): Promise<GetStaticPropsResult<Props>> => {
+export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      task: await loadTaskById(params.taskId),
+      task: loadTaskByUrlSlug(params.urlSlug),
     },
   };
 };

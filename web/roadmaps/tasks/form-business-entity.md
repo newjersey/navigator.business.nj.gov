@@ -1,5 +1,6 @@
 ---
 id: "form-business-entity"
+urlSlug: "form-business-entity"
 name: "Form Your Business Entity"
 callToActionLink: "https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName"
 callToActionText: "Form My Business"

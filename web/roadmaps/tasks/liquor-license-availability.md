@@ -1,5 +1,6 @@
 ---
 id: "liquor-license-availability"
+urlSlug: "liquor-license-availability"
 name: "Confirm Liquor License Availability"
 callToActionLink: "${countyClerkWebsite}"
 callToActionText: "Visit My County Clerk's Website"

@@ -1,5 +1,6 @@
 ---
 id: "check-local-requirements"
+urlSlug: "check-local-requirements"
 name: "Get Your Mercantile License If Your Town Requires It"
 callToActionLink: "${municipalityWebsite}"
 callToActionText: "Visit the ${municipality} Website"

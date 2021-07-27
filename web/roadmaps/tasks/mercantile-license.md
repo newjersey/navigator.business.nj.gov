@@ -1,5 +1,6 @@
 ---
 id: "mercantile-license"
+urlSlug: "mercantile-license"
 name: "Mercantile License"
 callToActionLink: ""
 callToActionText: ""

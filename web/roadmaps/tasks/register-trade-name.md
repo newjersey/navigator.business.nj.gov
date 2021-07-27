@@ -1,5 +1,6 @@
 ---
 id: "register-trade-name"
+urlSlug: "register-trade-name"
 name: "Register a Trade Name"
 callToActionLink: "${countyClerkWebsite}"
 callToActionText: "Visit My County Clerk's Website"

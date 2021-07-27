@@ -16,10 +16,10 @@ export const Task = (props: Props): ReactElement => {
 
   return (
     <li>
-      <Link href={`/tasks/${props.task.id}`} passHref>
+      <Link href={`/tasks/${props.task.urlSlug}`} passHref>
         <a
           onClick={() => analytics.event.roadmap_task_title.click.go_to_task}
-          href={`/tasks/${props.task.id}`}
+          href={`/tasks/${props.task.urlSlug}`}
           className="usa-link"
           data-task={props.task.id}
         >

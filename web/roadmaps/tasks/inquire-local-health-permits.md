@@ -1,5 +1,6 @@
 ---
 id: "inquire-local-health-permits"
+urlSlug: "inquire-local-health-permits"
 name: "Inquire about Local Permits Required"
 callToActionLink: ""
 callToActionText: ""

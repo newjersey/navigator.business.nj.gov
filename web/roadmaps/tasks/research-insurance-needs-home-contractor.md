@@ -1,5 +1,6 @@
 ---
 id: "research-insurance-needs-home-contractor"
+urlSlug: "research-insurance-needs-home-contractor"
 name: "Research Insurance Needs"
 callToActionLink: ""
 callToActionText: ""

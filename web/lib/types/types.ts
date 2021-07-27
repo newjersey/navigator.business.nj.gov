@@ -203,6 +203,7 @@ export interface TaskOverview {
 export interface Task {
   id: string;
   name: string;
+  urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;

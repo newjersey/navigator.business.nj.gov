@@ -1,5 +1,6 @@
 ---
 id: "individual-staff-licenses"
+urlSlug: "individual-staff-licenses"
 name: "Get Your Indvidual License and Ensure Your Staff Have Licenses"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: "Apply for A Cosemtology License"

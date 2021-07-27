@@ -1,7 +1,7 @@
 import { fireEvent, render, RenderResult } from "@testing-library/react";
 import { useMediaQuery } from "@material-ui/core";
 import * as materialUi from "@material-ui/core";
-import TaskPage from "@/pages/tasks/[taskId]";
+import TaskPage from "@/pages/tasks/[urlSlug]";
 import { Task, TaskProgress } from "@/lib/types/types";
 import { generateTask, generateUserData } from "@/test/factories";
 import { mockUpdate, useMockUserData } from "@/test/mock/mockUseUserData";

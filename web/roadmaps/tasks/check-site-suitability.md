@@ -1,5 +1,6 @@
 ---
 id: "check-site-suitability"
+urlSlug: "check-site-suitability"
 name: "Evaluate Your Location"
 callToActionLink: ""
 callToActionText: ""
