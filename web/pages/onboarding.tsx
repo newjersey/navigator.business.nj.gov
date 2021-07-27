@@ -58,9 +58,10 @@ export const OnboardingContext = React.createContext<OnboardingContextType>({
   onBack: () => {},
 });
 
-type OnboardingError = "REQUIRED";
+type OnboardingError = "REQUIRED_LEGAL" | "REQUIRED_MUNICIPALITY";
 const OnboardingErrorLookup: Record<OnboardingError, string> = {
-  REQUIRED: OnboardingDefaults.errorTextRequired,
+  REQUIRED_LEGAL: OnboardingDefaults.errorTextRequiredLegal,
+  REQUIRED_MUNICIPALITY: OnboardingDefaults.errorTextRequiredMunicipality,
 };
 
 const OnboardingPage = (props: Props): ReactElement => {
@@ -114,11 +115,13 @@ const OnboardingPage = (props: Props): ReactElement => {
     event.preventDefault();
     if (!userData) return;
 
-    if (
-      (page.current === 3 && !onboardingData.legalStructure) ||
-      (page.current === 4 && !onboardingData.municipality)
-    ) {
-      setError("REQUIRED");
+    if (page.current === 3 && !onboardingData.legalStructure) {
+      setError("REQUIRED_LEGAL");
+      scrollToTop();
+      return;
+    }
+    if (page.current === 4 && !onboardingData.municipality) {
+      setError("REQUIRED_MUNICIPALITY");
       scrollToTop();
       return;
     }

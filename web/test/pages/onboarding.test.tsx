@@ -199,10 +199,10 @@ describe("onboarding", () => {
     await visitStep3();
     clickNext();
     expect(subject.getByTestId("step-3")).toBeInTheDocument();
-    expect(subject.getByTestId("error-alert-REQUIRED")).toBeInTheDocument();
+    expect(subject.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
     chooseRadio("general-partnership");
     await visitStep4();
-    expect(subject.queryByTestId("error-alert-REQUIRED")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("error-alert-REQUIRED_MUNICIPALITY")).not.toBeInTheDocument();
   });
 
   it("prevents user from moving after Step 4 if you have not selected a location", async () => {
@@ -221,12 +221,12 @@ describe("onboarding", () => {
     await visitStep4();
     clickNext();
     expect(subject.getByTestId("step-4")).toBeInTheDocument();
-    expect(subject.getByTestId("error-alert-REQUIRED")).toBeInTheDocument();
+    expect(subject.getByTestId("error-alert-REQUIRED_MUNICIPALITY")).toBeInTheDocument();
     selectByText("Location", "Newark");
 
     clickNext();
     await act(() => promise);
-    expect(subject.queryByTestId("error-alert-REQUIRED")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("error-alert-REQUIRED_MUNICIPALITY")).not.toBeInTheDocument();
   });
 
   it("removes required fields error when user goes back", async () => {
@@ -237,9 +237,9 @@ describe("onboarding", () => {
     await visitStep3();
     clickNext();
     expect(subject.getByTestId("step-3")).toBeInTheDocument();
-    expect(subject.getByTestId("error-alert-REQUIRED")).toBeInTheDocument();
+    expect(subject.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
     clickBack();
-    expect(subject.queryByTestId("error-alert-REQUIRED")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("error-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
   });
 
   it("is able to go back", async () => {
