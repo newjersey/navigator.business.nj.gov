@@ -107,7 +107,7 @@ describe("userRouter", () => {
         expect(stubUpdateLicenseStatus).not.toHaveBeenCalled();
       });
 
-      it("updates and returns user if licenseData lastCheckedDate is older than last hour", async () => {
+      it("updates user in the background if licenseData lastCheckedDate is older than last hour", async () => {
         const userData = generateUserData({
           onboardingData: generateOnboardingData({
             industry: "home-contractor",
@@ -119,23 +119,6 @@ describe("userRouter", () => {
         stubUserDataClient.get.mockResolvedValue(userData);
         const updatedUserData = generateUserData({});
         stubUpdateLicenseStatus.mockResolvedValue(updatedUserData);
-
-        const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
-        expect(stubUpdateLicenseStatus).toHaveBeenCalled();
-        expect(result.body).toEqual(updatedUserData);
-      });
-
-      it("returns the non-updated user if the update license fails", async () => {
-        const userData = generateUserData({
-          onboardingData: generateOnboardingData({
-            industry: "home-contractor",
-          }),
-          licenseData: generateLicenseData({
-            lastCheckedStatus: dayjs().subtract(1, "hour").subtract(1, "minute").toISOString(),
-          }),
-        });
-        stubUserDataClient.get.mockResolvedValue(userData);
-        stubUpdateLicenseStatus.mockRejectedValue({});
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();

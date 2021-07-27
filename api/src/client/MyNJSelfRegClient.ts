@@ -34,7 +34,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
     })
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);
-        console.log(response);
+        console.log(JSON.stringify(response));
 
         const xmlResponseName = type === "GRANT" ? "ns2:grantResponse" : "ns2:resumeResponse";
         const xmlResponseObj = response["S:Envelope"]["S:Body"][0][xmlResponseName][0]["return"][0];

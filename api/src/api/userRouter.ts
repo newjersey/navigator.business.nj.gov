@@ -47,18 +47,11 @@ export const userRouterFactory = (
 
     userDataClient
       .get(req.params.userId)
-      .then(async (userData: UserData) => {
+      .then((userData: UserData) => {
         if (userData.licenseData && shouldCheckLicense(userData)) {
-          updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress)
-            .then((updatedUserData) => {
-              res.json(updatedUserData);
-            })
-            .catch(() => {
-              res.json(userData);
-            });
-        } else {
-          res.json(userData);
+          updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
         }
+        res.json(userData);
       })
       .catch((error) => {
         // TODO: remove this once self-reg is in place
