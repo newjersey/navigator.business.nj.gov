@@ -57,7 +57,7 @@ const RoadmapPage = (props: Props): ReactElement => {
     if (isLoading) return RoadmapDefaults.loadingText;
     return userData?.onboardingData.industry && userData?.onboardingData.industry !== "generic"
       ? IndustryLookup[userData.onboardingData.industry].primaryText
-      : RoadmapDefaults.greyBoxNotSetText;
+      : RoadmapDefaults.greyBoxSomeOtherIndustryText;
   };
 
   const getLegalStructure = (): string => {

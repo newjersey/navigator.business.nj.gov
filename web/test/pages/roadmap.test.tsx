@@ -57,7 +57,7 @@ describe("roadmap page", () => {
         municipality: generateMunicipality({}),
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("Not set")).toBeInTheDocument();
+      expect(subject.getByText("X")).toBeInTheDocument();
     });
 
     it("shows the human-readable legal structure from onboarding data", () => {
