@@ -122,7 +122,13 @@ const RoadmapPage = (props: Props): ReactElement => {
       </SinglePageLayout>
       <div className="grey-bg align-justify">
         <div className="display-flex fjc fac padding-2 line-height-body-2 legal-footer-roadmap legal-footer-roadmap-mobile">
-          <p>{LegalMessage.legalMessageText}</p>{" "}
+          <p>
+            {LegalMessage.legalMessageTextOne}
+            <button className="usa-link intercom-button clear-button">
+              {LegalMessage.legalMessageLegalChat}
+            </button>
+            {LegalMessage.legalMessageTextTwo}
+          </p>{" "}
         </div>
       </div>
     </PageSkeleton>

@@ -113,7 +113,13 @@ const Home = (): ReactElement => {
         </ul>
         <div className="green-divider-center"></div>
         <div className="legal-message">
-          <p>{LegalMessage.legalMessageText}</p>
+          <p>
+            {LegalMessage.legalMessageTextOne}
+            <button className="usa-link intercom-button clear-button">
+              {LegalMessage.legalMessageLegalChat}
+            </button>
+            {LegalMessage.legalMessageTextTwo}
+          </p>
         </div>
       </SinglePageLayout>
     </PageSkeleton>
