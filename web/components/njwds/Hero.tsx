@@ -17,7 +17,7 @@ export const Hero = (props: Props): ReactElement => {
     >
       <div className="grid-container text-center flex-r-desktop">
         <div className="margin-auto flex-order-2">
-          <img src="/img/Hero-img.svg" alt="Hero People" />
+          <img src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
         </div>
         <div className="usa-hero__callout no-bg no-max-width flex-order-1 max-width">
           <h1 className="usa-hero__heading large-font text-primary-darker text-left-desktop">
