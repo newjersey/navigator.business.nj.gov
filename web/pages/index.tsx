@@ -5,7 +5,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LandingPageDefaults } from "@/display-content/LandingPageDefaults";
-import { LegalMessage } from "@/display-content/FooterLegalMessage";
+import { LegalMessageDefaults } from "@/display-content/LegalMessageDefaults";
 import { Signup } from "@/components/Signup";
 import { Card } from "@/components/njwds-extended/Card";
 
@@ -114,11 +114,11 @@ const Home = (): ReactElement => {
         <div className="green-divider-center"></div>
         <div className="legal-message">
           <p>
-            {LegalMessage.legalMessageTextOne}
+            {LegalMessageDefaults.legalMessageTextOne}
             <button className="usa-link intercom-button clear-button">
-              {LegalMessage.legalMessageLegalChat}
+              {LegalMessageDefaults.legalMessageLegalChat}
             </button>
-            {LegalMessage.legalMessageTextTwo}
+            {LegalMessageDefaults.legalMessageTextTwo}
           </p>
         </div>
       </SinglePageLayout>

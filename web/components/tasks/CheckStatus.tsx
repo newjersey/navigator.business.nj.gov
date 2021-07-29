@@ -69,7 +69,7 @@ export const CheckStatus = (props: Props): ReactElement => {
   const getErrorAlert = (): ReactElement => {
     if (!props.error) return <></>;
     return (
-      <Alert data-testid={`error-alert-${props.error}`} slim variant="error" className="margin-y-2">
+      <Alert data-testid={`error-alert-${props.error}`} slim variant="error" className="margin-y-2 no-margin-top">
         {LicenseSearchErrorLookup[props.error]}
       </Alert>
     );

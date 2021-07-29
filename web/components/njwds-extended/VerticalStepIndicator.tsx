@@ -14,16 +14,20 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
   const resizeVerticalBarToContent = () => {
     const content = document.getElementById(`vertical-content-${props.number}`);
     if (content) {
-      const height = content.offsetHeight;
+       const height = content.offsetHeight;
+     /*  setTimeout(
+        ()=>{height}, 2500
+      ) */
       const verticalBar = document.getElementById(`vertical-bar-${props.number}`);
       if (verticalBar) {
         verticalBar.style.height = `${height}px`;
       }
     }
   };
-
   useMountEffect(resizeVerticalBarToContent);
+  console.log("mounted")
   useOnWindowResize(resizeVerticalBarToContent);
+  console.log("resized")
 
   return (
     <div className={`usa-step-indicator usa-step-indicator--counters${sm}`} aria-label="progress">

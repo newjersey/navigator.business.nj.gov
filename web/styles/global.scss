@@ -96,3 +96,15 @@ $lg: 64em; //desktop and up (1024px)
   border-color: transparent;
   cursor: pointer;
 }
+.usa-link:visited,
+.usa-prose>a:visited {
+  color: #243413 !important;
+}
+
+.fit-screen-content {
+  min-height: calc(100vh - 15.625rem);
+}
+
+.no-margin-top {
+  margin-top: 0rem !important;
+}

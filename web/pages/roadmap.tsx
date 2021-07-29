@@ -75,7 +75,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   };
 
   return (
-    <PageSkeleton>
+    <PageSkeleton showLegalMessage={true}>
       <SinglePageLayout>
         <div className="float-right padding-top-2">
           <AuthButton />
@@ -120,17 +120,6 @@ const RoadmapPage = (props: Props): ReactElement => {
             <Step key={step.id} step={step} last={index === roadmap.steps.length - 1} />
           ))}
       </SinglePageLayout>
-      <div className="grey-bg align-justify">
-        <div className="display-flex fjc fac padding-2 line-height-body-2 legal-footer-roadmap legal-footer-roadmap-mobile">
-          <p>
-            {LegalMessage.legalMessageTextOne}
-            <button className="usa-link intercom-button clear-button">
-              {LegalMessage.legalMessageLegalChat}
-            </button>
-            {LegalMessage.legalMessageTextTwo}
-          </p>{" "}
-        </div>
-      </div>
     </PageSkeleton>
   );
 };
