@@ -5,9 +5,9 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LandingPageDefaults } from "@/display-content/LandingPageDefaults";
-import { LegalMessage } from "@/display-content/FooterLegalMessage";
 import { Signup } from "@/components/Signup";
 import { Card } from "@/components/njwds-extended/Card";
+import { LegalMessage } from "@/components/LegalMessage";
 
 const Home = (): ReactElement => {
   const { userData, error } = useUserData();
@@ -112,14 +112,8 @@ const Home = (): ReactElement => {
           />
         </ul>
         <div className="green-divider-center"></div>
-        <div className="legal-message">
-          <p>
-            {LegalMessage.legalMessageTextOne}
-            <button className="usa-link intercom-button clear-button">
-              {LegalMessage.legalMessageLegalChat}
-            </button>
-            {LegalMessage.legalMessageTextTwo}
-          </p>
+        <div className="margin-x-3 margin-bottom-8 text-center">
+          <LegalMessage />
         </div>
       </SinglePageLayout>
     </PageSkeleton>

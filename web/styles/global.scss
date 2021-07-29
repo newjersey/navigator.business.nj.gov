@@ -13,7 +13,6 @@ $lg: 64em; //desktop and up (1024px)
 @import "njwds-overrides/vertical-step";
 @import "njwds-overrides/overrides";
 @import "landing";
-@import "legal-footer";
 @import "beta-bar";
 @import "innov-footer";
 
@@ -95,4 +94,16 @@ $lg: 64em; //desktop and up (1024px)
   border-width: 0px;
   border-color: transparent;
   cursor: pointer;
+}
+.usa-link:visited,
+.usa-prose > a:visited {
+  color: #243413 !important;
+}
+
+.fit-screen-content {
+  min-height: calc(100vh - 15.625rem);
+}
+
+.no-margin-top {
+  margin-top: 0rem !important;
 }

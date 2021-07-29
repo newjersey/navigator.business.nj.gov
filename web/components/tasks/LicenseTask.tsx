@@ -146,19 +146,19 @@ export const LicenseTask = (props: Props): ReactElement => {
           </div>
         </TabPanel>
         <TabPanel>
-          <div className="margin-top-3 fdc fg1">
-            {licenseStatusResult ? (
+          {licenseStatusResult ? (
+            <div className="margin-top-3 fdc fg1">
               <LicenseStatusReceipt
                 status={licenseStatusResult.status}
                 items={licenseStatusResult.checklistItems}
                 onEdit={onEdit}
               />
-            ) : (
-              <div className="margin-3">
-                <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
-              </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="margin-3">
+              <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
+            </div>
+          )}
         </TabPanel>
       </Tabs>
     </div>

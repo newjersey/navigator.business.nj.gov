@@ -21,7 +21,6 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
       }
     }
   };
-
   useMountEffect(resizeVerticalBarToContent);
   useOnWindowResize(resizeVerticalBarToContent);
 
