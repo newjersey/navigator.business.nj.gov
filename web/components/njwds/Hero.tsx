@@ -29,7 +29,7 @@ export const Hero = (props: Props): ReactElement => {
           <p className="text-gray-90 med-font text-left-desktop margin-bottom-4">{props.supportingText}</p>
           <div className="display-inline-block display-flex-desktop">
             <button
-              className="usa-button usa-button--big margin-right-205"
+              className="usa-button usa-button--big margin-right-205 margin-bottom-2"
               onClick={props.onClick}
               data-hero-button
             >

@@ -17,7 +17,7 @@ export const AuthButton = (): ReactElement => {
   };
 
   const loginButton = () => (
-    <button className="usa-button usa-button--outline auth-button" onClick={triggerSignIn}>
+    <button className="usa-button usa-button--outline auth-button margin-bottom-2" onClick={triggerSignIn}>
       Log in
     </button>
   );
