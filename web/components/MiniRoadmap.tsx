@@ -4,6 +4,10 @@ import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepI
 import { MiniRoadmapTask } from "@/components/MiniRoadmapTask";
 import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Step } from "@/lib/types/types";
+import {isStepCompleted} from "@/lib/utils/helpers";
+
 
 interface Props {
   activeTaskId: string;
@@ -13,6 +17,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const [activeStepId, setActiveStepId] = useState<string | undefined>(getActiveStepId());
   const [openSteps, setOpenSteps] = useState<string[]>([]);
+  const { userData } = useUserData();
 
   function getActiveStepId(): string | undefined {
     return roadmap?.steps.find((step) => step.tasks.map((it) => it.id).includes(props.activeTaskId))?.id;
@@ -38,17 +43,21 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   };
 
   return (
+
     <div>
       {roadmap?.steps.map((step) => (
         <div key={step.id} id={`vertical-content-${step.step_number}`}>
           <div className="fdr fac margin-top-2 margin-bottom-1">
+    
             <VerticalStepIndicator
               number={step.step_number}
               last={isLast(step.id)}
               active={step.id === activeStepId}
               small={true}
+              completed={isStepCompleted(step, userData)}
               key={openSteps.join(",")}
             />
+        
             <button
               className="usa-button--unstyled width-100"
               onClick={() => toggleStep(step.id)}

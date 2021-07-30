@@ -1,11 +1,13 @@
 import React, { ReactElement } from "react";
 import { useMountEffect, useOnWindowResize } from "@/lib/utils/helpers";
+import { Icon } from "@/components/njwds/Icon";
 
 interface Props {
   number: number;
   last: boolean;
   active?: boolean;
   small?: boolean;
+  completed?: boolean;
 }
 
 export const VerticalStepIndicator = (props: Props): ReactElement => {
@@ -31,7 +33,7 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
           className={` vertical usa-step-indicator__segment usa-step-indicator__segment--${
             props.active ? "current" : "complete"
           }`}
-          data-num={props.number}
+          data-num={props.completed ? "✓" : props.number}
         >
           <span className="usa-step-indicator__segment-label" />
         </li>
