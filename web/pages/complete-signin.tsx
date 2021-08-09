@@ -6,7 +6,7 @@ import { useUnauthedOnlyPage } from "@/lib/auth/useAuthProtectedPage";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 
-const CompleteSignup = (): ReactElement => {
+const CompleteSignin = (): ReactElement => {
   useUnauthedOnlyPage();
 
   useMountEffect(async () => {
@@ -21,9 +21,9 @@ const CompleteSignup = (): ReactElement => {
         maxWidth="md"
         open={true}
         onClose={() => {}}
-        aria-labelledby="complete-signup-modal"
+        aria-labelledby="complete-signin-modal"
       >
-        <DialogTitle id="complete-signup-modal">
+        <DialogTitle id="complete-signin-modal">
           <div className="padding-top-1 padding-x-2 text-bold font-body-xl">
             {SelfRegDefaults.completeSignupTitleText}
           </div>
@@ -38,4 +38,4 @@ const CompleteSignup = (): ReactElement => {
   );
 };
 
-export default CompleteSignup;
+export default CompleteSignin;

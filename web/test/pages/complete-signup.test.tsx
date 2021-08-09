@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import * as sessionHelper from "@/lib/auth/sessionHelper";
-import CompleteSignup from "@/pages/complete-signup";
+import CompleteSignin from "@/pages/complete-signin";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
@@ -12,7 +12,7 @@ describe("CompleteSignup Page", () => {
   });
 
   it("triggers a signin on mount", () => {
-    render(<CompleteSignup />);
+    render(<CompleteSignin />);
     expect(mockSessionHelper.triggerSignIn).toHaveBeenCalled();
   });
 });
