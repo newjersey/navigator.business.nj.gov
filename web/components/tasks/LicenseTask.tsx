@@ -118,7 +118,13 @@ export const LicenseTask = (props: Props): ReactElement => {
                 rel="noreferrer noopener"
                 className="margin-bottom-2"
               >
-                <button className="usa-button width-100" data-testid="cta-primary">
+                <button
+                  onClick={() => {
+                    analytics.event.task_primary_call_to_action.click.open_external_website();
+                  }}
+                  className="usa-button width-100"
+                  data-testid="cta-primary"
+                >
                   <div className="fdc">
                     <div>{LicenseScreenDefaults.primaryCTAFirstLineText}</div>
                     <div className="font-body-3xs margin-top-05">

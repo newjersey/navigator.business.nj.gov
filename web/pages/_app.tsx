@@ -155,14 +155,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   });
 
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      analytics.pageview(url);
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
+    analytics.pageview(router.asPath);
+  }, [router.asPath]);
 
   return (
     <>

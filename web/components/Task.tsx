@@ -18,7 +18,7 @@ export const Task = (props: Props): ReactElement => {
     <li>
       <Link href={`/tasks/${props.task.urlSlug}`} passHref>
         <a
-          onClick={() => analytics.event.roadmap_task_title.click.go_to_task}
+          onClick={() => analytics.event.roadmap_task_title.click.go_to_task()}
           href={`/tasks/${props.task.urlSlug}`}
           className="usa-link"
           data-task={props.task.id}
