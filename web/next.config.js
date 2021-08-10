@@ -14,13 +14,4 @@ module.exports = {
 
     return config;
   },
-  async redirects() {
-    return [
-      {
-        source: "/complete-signup",
-        destination: "/complete-signin",
-        permanent: false,
-      },
-    ];
-  },
 };

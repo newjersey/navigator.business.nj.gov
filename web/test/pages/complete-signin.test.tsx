@@ -6,7 +6,7 @@ jest.mock("next/router");
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
 
-describe("CompleteSignup Page", () => {
+describe("CompleteSignin Page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
