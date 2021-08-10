@@ -16,10 +16,10 @@ export const Hero = (props: Props): ReactElement => {
       aria-label="Introduction"
     >
       <div className="grid-container text-center flex-r-desktop">
-        <div className="margin-auto flex-order-2">
+        <div className="margin-auto flex-order-2 flex-larger">
           <img src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
         </div>
-        <div className="usa-hero__callout no-bg no-max-width flex-order-1 max-width">
+        <div className="usa-hero__callout no-bg no-max-width flex-order-1 max-width flex-smaller no-padding-right">
           <h1 className="usa-hero__heading large-font text-primary-darker text-left-desktop">
             <span className="usa-hero__heading--alt text-primary-darker display-inline display-block">
               {props.calloutText}

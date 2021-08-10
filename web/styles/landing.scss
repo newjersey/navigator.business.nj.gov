@@ -27,7 +27,7 @@
 }
 
 .large-font {
-  font-size: 3rem !important;
+  font-size: 3.1rem !important;
 }
 
 .med-font {
@@ -142,6 +142,10 @@
 }
 
 @media only screen and (min-width: $lg) {
+  .no-padding-right {
+    padding-right: 0rem !important;
+  }
+
   .hero-header {
     display: none;
   }
@@ -312,4 +316,12 @@
   position: relative;
   border-top: 0.125rem solid #7fb135;
   margin: auto;
+}
+
+.flex-larger {
+  flex: 1.68 1 0;
+}
+
+.flex-smaller {
+  flex: 1 1 0;
 }
