@@ -2,6 +2,8 @@ import React, { ReactElement } from "react";
 import Link from "next/link";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Icon } from "@/components/njwds/Icon";
 
 interface Props {
   task: Task;
@@ -9,6 +11,9 @@ interface Props {
 }
 
 export const MiniRoadmapTask = (props: Props): ReactElement => {
+  const { userData } = useUserData();
+  const taskProgress = (userData?.taskProgress && userData.taskProgress[props.task.id]) || "NOT_STARTED";
+
   return (
     <Link href={`/tasks/${props.task.urlSlug}`} passHref>
       <button
@@ -18,7 +23,11 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
         data-task={props.task.id}
         onClick={analytics.event.task_mini_roadmap_task.click.go_to_task}
       >
-        <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
+        {taskProgress === "COMPLETED" ? (
+          <Icon className="margin-right-1 font-body-md checked-task">check_circle</Icon>
+        ) : (
+          <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
+        )}
         {props.task.name}
       </button>
     </Link>

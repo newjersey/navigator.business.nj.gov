@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Roadmap, Task } from "@/lib/types/types";
+import { Roadmap, Step, Task, UserData } from "@/lib/types/types";
 
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);
 
@@ -58,4 +58,11 @@ export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T })
 
 export const scrollToTop = (): void => {
   window.scrollTo(0, 0);
+};
+
+export const isStepCompleted = (step: Step, userData: UserData | undefined): boolean => {
+  return step.tasks.every((it) => {
+    const taskProgress = (userData?.taskProgress && userData.taskProgress[it.id]) || "NOT_STARTED";
+    return taskProgress === "COMPLETED";
+  });
 };
