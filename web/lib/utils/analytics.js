@@ -18,19 +18,19 @@ export default {
 
   dimensions: {
     industry: (value) => {
-      window.gtag("set", "industry_dimension", { Industry: value });
+      window.gtag("set", "dimension1", value);
     },
     municipality: (value) => {
-      window.gtag("set", "municipality_dimension", { Municipality: value });
+      window.gtag("set", "dimension2", value);
     },
     legalStructure: (value) => {
-      window.gtag("set", "legal_structure_dimension", { "Legal Structure": value });
+      window.gtag("set", "dimension3", value);
     },
     liquorLicense: (value) => {
-      window.gtag("set", "liquor_license_dimension", { "Liquor License": value });
+      window.gtag("set", "dimension4", value);
     },
     homeBasedBusiness: (value) => {
-      window.gtag("set", "home_based_business_dimension", { "Home_Based Business": value });
+      window.gtag("set", "dimension5", value);
     },
   },
 

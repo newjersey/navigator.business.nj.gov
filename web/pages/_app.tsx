@@ -173,7 +173,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
             'dimension2': 'Municipality',
             'dimension3': 'Legal Structure',
             'dimension4': 'Liquor License',
-            'dimension5': 'Home_Based Business'
+            'dimension5': 'Home-Based Business'
           }
         });`,
         }}

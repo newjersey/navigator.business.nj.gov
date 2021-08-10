@@ -27,7 +27,7 @@ import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { Alert } from "@/components/njwds/Alert";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import analytics from "@/lib/utils/analytics";
+import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -125,7 +125,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       scrollToTop();
       return;
     }
-    setAnalyticsDimensions();
+    setAnalyticsDimensions(onboardingData);
 
     setError(undefined);
     if (page.current + 1 <= PAGES) {
@@ -154,14 +154,6 @@ const OnboardingPage = (props: Props): ReactElement => {
       });
       queryShallowPush(previousPage);
     }
-  };
-
-  const setAnalyticsDimensions = (): void => {
-    analytics.dimensions.industry(onboardingData.industry);
-    analytics.dimensions.municipality(onboardingData.municipality);
-    analytics.dimensions.legalStructure(onboardingData.legalStructure);
-    analytics.dimensions.liquorLicense(onboardingData.liquorLicense);
-    analytics.dimensions.homeBasedBusiness(onboardingData.homeBasedBusiness);
   };
 
   const header = () => (
