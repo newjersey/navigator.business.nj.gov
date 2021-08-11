@@ -107,3 +107,19 @@ $lg: 64em; //desktop and up (1024px)
 .no-margin-top {
   margin-top: 0rem !important;
 }
+
+.usa-nav-container.scrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.scrolled-transition {
+  transition: top 500ms ease-in;
+  z-index: 9999;
+}
+
+.scrolled-padding {
+  padding-top: 3rem !important;
+}
