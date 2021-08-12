@@ -10,9 +10,9 @@ import {
 } from "@/lib/types/types";
 import genericTaskAddOns from "@/roadmaps/generic/generic-tasks.json";
 import steps from "@/roadmaps/steps.json";
-import { fetchTaskById } from "@/lib/async-content-fetchers/fetchTaskById";
 import { templateEval } from "@/lib/utils/helpers";
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
+import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 
 const importAddOns = async (relativePath: string): Promise<AddOn[]> => {
   return (await import(`../../roadmaps/${relativePath}.json`)).default as AddOn[];
@@ -96,7 +96,9 @@ export const buildRoadmap = async (onboardingData: OnboardingData): Promise<Road
     steps: await Promise.all(
       roadmapBuilder.steps.map(async (step) => ({
         ...step,
-        tasks: await Promise.all(step.tasks.sort(orderByWeight).map((task) => fetchTaskById(task.id))),
+        tasks: await Promise.all(
+          step.tasks.sort(orderByWeight).map((task) => fetchTaskByFilename(task.filename))
+        ),
       }))
     ),
   };
@@ -171,7 +173,7 @@ const addTasksFromAddOn = (roadmap: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
       return;
     }
 
-    step.tasks = [...step.tasks, { id: addOn.task, weight: addOn.weight }];
+    step.tasks = [...step.tasks, { filename: addOn.task, weight: addOn.weight }];
   });
 
   return roadmap;
@@ -179,25 +181,25 @@ const addTasksFromAddOn = (roadmap: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
 
 const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[]): RoadmapBuilder => {
   modifications.forEach((modification) => {
-    const task = findTaskInRoadmapById(roadmap, modification.step, modification.taskToReplace);
+    const task = findTaskInRoadmapByFilename(roadmap, modification.step, modification.taskToReplaceFilename);
     if (!task) {
       return;
     }
-    task.id = modification.replaceWith;
+    task.filename = modification.replaceWithFilename;
   });
 
   return roadmap;
 };
 
-const findTaskInRoadmapById = (
+const findTaskInRoadmapByFilename = (
   roadmapBuilder: RoadmapBuilder,
   stepId: string,
-  taskId: string
+  taskFilename: string
 ): TaskBuilder | undefined => {
   const step = roadmapBuilder.steps.find((step) => step.id === stepId);
   if (!step) {
     return;
   }
 
-  return step.tasks.find((task) => task.id === taskId);
+  return step.tasks.find((task) => task.filename === taskFilename);
 };

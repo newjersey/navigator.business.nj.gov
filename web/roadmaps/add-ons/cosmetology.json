@@ -12,6 +12,6 @@
   {
     "step": "inspection-requirements",
     "weight": 10,
-    "task": "board-inspection"
+    "task": "site-inspection"
   }
 ]

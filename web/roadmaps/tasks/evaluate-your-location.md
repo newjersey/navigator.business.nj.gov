@@ -1,6 +1,6 @@
 ---
 id: "identify-potential-lease"
-urlSlug: "identify-potential-lease"
+urlSlug: "evaluate-your-location"
 name: "Evaluate Your Location"
 callToActionLink: ""
 callToActionText: ""

@@ -2,7 +2,7 @@
   {
     "step": "due-diligence",
     "weight": 1,
-    "task": "identify-potential-lease"
+    "task": "evaluate-your-location"
   },
   {
     "step": "due-diligence",
@@ -17,12 +17,12 @@
   {
     "step": "inspection-requirements",
     "weight": 4,
-    "task": "certificate-of-occupancy"
+    "task": "site-safety-permits"
   },
   {
     "step": "inspection-requirements",
     "weight": 2,
-    "task": "check-local-requirements"
+    "task": "town-mercantile-license"
   },
   {
     "step": "lease-and-permits",

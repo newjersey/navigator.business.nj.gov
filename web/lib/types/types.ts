@@ -162,7 +162,7 @@ export interface StepBuilder {
 }
 
 export interface TaskBuilder {
-  id: string;
+  filename: string;
   weight: number;
 }
 
@@ -182,8 +182,8 @@ export interface AddOn {
 
 export interface TaskModification {
   step: string;
-  taskToReplace: string;
-  replaceWith: string;
+  taskToReplaceFilename: string;
+  replaceWithFilename: string;
 }
 
 export interface Step {
@@ -193,11 +193,6 @@ export interface Step {
   timeEstimate: string;
   description: string;
   tasks: Task[];
-}
-
-export interface TaskOverview {
-  id: string;
-  name: string;
 }
 
 export interface Task {

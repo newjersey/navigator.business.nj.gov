@@ -1,17 +1,17 @@
 [
   {
     "step": "due-diligence",
-    "taskToReplace": "check-site-requirements",
-    "replaceWith": "check-site-requirements-cosmetology"
+    "taskToReplaceFilename": "check-site-requirements",
+    "replaceWithFilename": "check-site-requirements-cosmetology"
   },
   {
     "step": "inspection-requirements",
-    "taskToReplace": "certificate-of-occupancy",
-    "replaceWith": "certificate-of-occupancy-cosmetology"
+    "taskToReplaceFilename": "site-safety-permits",
+    "replaceWithFilename": "site-safety-permits-cosmetology"
   },
   {
-    "step": "inspection-requirements",
-    "taskToReplace": "identify-potential-lease",
-    "replaceWith": "check-site-suitability"
+    "step": "due-diligence",
+    "taskToReplaceFilename": "evaluate-your-location",
+    "replaceWithFilename": "evaluate-your-location-cosmetology"
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "step": "lease-and-permits",
-    "taskToReplace": "research-insurance-needs",
-    "replaceWith": "get-insurance-hic"
+    "taskToReplaceFilename": "get-insurance",
+    "replaceWithFilename": "get-insurance-hic"
   }
 ]

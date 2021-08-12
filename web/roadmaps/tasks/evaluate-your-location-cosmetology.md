@@ -1,6 +1,6 @@
 ---
-id: "check-site-suitability"
-urlSlug: "check-site-suitability"
+id: "identify-potential-lease"
+urlSlug: "evaluate-your-location"
 name: "Evaluate Your Location"
 callToActionLink: ""
 callToActionText: ""

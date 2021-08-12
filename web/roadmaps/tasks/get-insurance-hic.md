@@ -1,6 +1,6 @@
 ---
 id: "research-insurance-needs"
-urlSlug: "research-insurance-needs"
+urlSlug: "get-insurance"
 name: "Get an Insurance Policy"
 callToActionLink: ""
 callToActionText: ""
