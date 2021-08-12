@@ -6,6 +6,8 @@ import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { Icon } from "@/components/njwds/Icon";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { getModifiedTaskContent } from "@/lib/utils/helpers";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 
 interface Props {
   task: Task;
@@ -14,6 +16,7 @@ interface Props {
 
 export const TaskHeader = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
+  const { roadmap } = useRoadmap();
 
   const updateTaskProgress = (newValue: TaskProgress): void => {
     if (!userData) return;
@@ -50,7 +53,7 @@ export const TaskHeader = (props: Props): ReactElement => {
       <div className="grid-row grid-gap">
         <div className="tablet:grid-col-9">
           <h2 className="margin-top-0 margin-bottom-0" data-task-id={props.task.id}>
-            {props.task.name}
+            {getModifiedTaskContent(roadmap, props.task, "name")}
           </h2>
         </div>
         <div className="tablet:grid-col-3">{renderProgress()}</div>

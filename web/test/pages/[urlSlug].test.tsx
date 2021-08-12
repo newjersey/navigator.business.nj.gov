@@ -79,15 +79,17 @@ describe("task page", () => {
     expect(subject.getByText("Start Application")).toBeInTheDocument();
   });
 
-  it("shows updated call-to-action if different from static content", () => {
+  it("shows updated content if different from static content", () => {
     const task = generateTask({
       id: "123",
+      name: "original name",
       contentMd: "original description",
       callToActionText: "original call to action",
     });
 
     useMockRoadmapTask({
       id: "123",
+      name: "a whole brand new name",
       contentMd: "a whole brand new description",
       callToActionText: "a whole brand new call to action",
     });
@@ -98,6 +100,9 @@ describe("task page", () => {
 
     expect(subject.queryByText("original call to action")).not.toBeInTheDocument();
     expect(subject.queryByText("a whole brand new call to action")).toBeInTheDocument();
+
+    expect(subject.queryByText("original name")).not.toBeInTheDocument();
+    expect(subject.queryAllByText("a whole brand new name")).toHaveLength(2);
   });
 
   it("displays Not Started status when user data does not contain status", () => {
