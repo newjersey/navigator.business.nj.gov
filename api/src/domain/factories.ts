@@ -46,6 +46,7 @@ export const generateOnboardingData = (overrides: Partial<OnboardingData>): Onbo
     municipality: generateMunicipality({}),
     liquorLicense: false,
     homeBasedBusiness: false,
+    constructionRenovationPlan: undefined,
     ...overrides,
   };
 };

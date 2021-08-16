@@ -1,11 +1,12 @@
-import { fireEvent, render, RenderResult } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import { useMediaQuery } from "@material-ui/core";
 import * as materialUi from "@material-ui/core";
 import TaskPage from "@/pages/tasks/[urlSlug]";
-import { Task, TaskProgress } from "@/lib/types/types";
+import { Task, TaskProgress, UserData } from "@/lib/types/types";
 import { generateTask, generateUserData } from "@/test/factories";
-import { mockUpdate, useMockUserData } from "@/test/mock/mockUseUserData";
+import { mockUpdate, useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { getLastCalledWith } from "@/test/helpers";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -29,6 +30,7 @@ describe("task page", () => {
   let subject: RenderResult;
 
   beforeEach(() => {
+    jest.resetAllMocks();
     setLargeScreen();
     useMockRoadmap({});
     useMockUserData({});
@@ -162,5 +164,47 @@ describe("task page", () => {
     useMockUserData({ licenseData: undefined });
     subject = renderPage(generateTask({ id: "register-consumer-affairs" }));
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
+  it("displays a radio button for mercantile license task screen", async () => {
+    subject = renderPage(generateTask({ id: "check-local-requirements" }));
+    await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
+    expect(subject.getByTestId("construction-renovation-radio-btn")).toBeInTheDocument();
+  });
+
+  it("displays construction content when userdata = true and updates from radio button click", async () => {
+    useMockOnboardingData({ constructionRenovationPlan: true });
+    subject = renderPage(generateTask({ id: "check-local-requirements" }));
+    await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
+    expect(subject.getByTestId("construction-renovation-content")).toBeInTheDocument();
+    expect(subject.queryByTestId("construction-renovation-no-action-content")).not.toBeInTheDocument();
+
+    fireEvent.click(subject.getByTestId("construction-radio-false"));
+    const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
+    expect(updatedUserData.onboardingData.constructionRenovationPlan).toBe(false);
+  });
+
+  it("hides construction content when userdata = undefined and updates from radio button click", async () => {
+    useMockOnboardingData({ constructionRenovationPlan: undefined });
+    subject = renderPage(generateTask({ id: "check-local-requirements" }));
+    await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
+    expect(subject.queryByTestId("construction-renovation-content")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("construction-renovation-no-action-content")).not.toBeInTheDocument();
+
+    fireEvent.click(subject.getByTestId("construction-radio-true"));
+    const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
+    expect(updatedUserData.onboardingData.constructionRenovationPlan).toBe(true);
+  });
+
+  it("displays no work needed content when userdata = false and updates from radio button click", async () => {
+    useMockOnboardingData({ constructionRenovationPlan: false });
+    subject = renderPage(generateTask({ id: "check-local-requirements" }));
+    await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
+    expect(subject.queryByTestId("construction-renovation-no-action-content")).toBeInTheDocument();
+    expect(subject.queryByTestId("construction-renovation-content")).not.toBeInTheDocument();
+
+    fireEvent.click(subject.getByTestId("construction-radio-true"));
+    const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
+    expect(updatedUserData.onboardingData.constructionRenovationPlan).toBe(true);
   });
 });

@@ -12,6 +12,7 @@ import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 import { migrate_v9_to_v10 } from "./v10_add_mynjuserkey";
 import { migrate_v10_to_v11 } from "./v11_change_license_statuses";
 import { migrate_v11_to_v12 } from "./v12_remove_scorp";
+import { migrate_v12_to_v13 } from "./v13_add_constructionRenovationPlan";
 
 export type MigrationFunction = (data: any) => any;
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
@@ -29,6 +30,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v9_to_v10,
   migrate_v10_to_v11,
   migrate_v11_to_v12,
+  migrate_v12_to_v13,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

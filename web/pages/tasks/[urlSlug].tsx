@@ -18,6 +18,7 @@ import { getModifiedTaskContent, rswitch } from "@/lib/utils/helpers";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NextSeo } from "next-seo";
 import analytics from "@/lib/utils/analytics";
+import { TownMercantileLicenseTask } from "@/components/tasks/TownMercantileLicenseTask";
 
 interface Props {
   task: Task;
@@ -54,6 +55,11 @@ const TaskPage = (props: Props): ReactElement => {
             ),
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
+            "check-local-requirements": (
+              <div className="margin-3">
+                <TownMercantileLicenseTask task={props.task} />
+              </div>
+            ),
             default: (
               <div className="margin-3">
                 <TaskHeader task={props.task} />

@@ -114,6 +114,7 @@ export interface OnboardingData {
   municipality: Municipality | undefined;
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
+  constructionRenovationPlan: boolean | undefined;
 }
 
 export type Municipality = {
@@ -150,6 +151,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     municipality: undefined,
     liquorLicense: false,
     homeBasedBusiness: false,
+    constructionRenovationPlan: undefined,
   };
 };
 

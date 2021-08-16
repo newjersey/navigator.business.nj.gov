@@ -29,6 +29,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     municipality: undefined,
     liquorLicense: false,
     homeBasedBusiness: false,
+    constructionRenovationPlan: undefined,
   };
 };
 
@@ -39,6 +40,7 @@ export interface OnboardingData {
   municipality: Municipality | undefined;
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
+  constructionRenovationPlan: boolean | undefined;
 }
 
 export interface LicenseData {
@@ -202,6 +204,14 @@ export interface Task {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
+}
+
+export interface PostOnboarding {
+  question: string;
+  contentMd: string;
+  radioYes: string;
+  radioNo: string;
+  radioNoContent: string;
 }
 
 export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
