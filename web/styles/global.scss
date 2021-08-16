@@ -15,6 +15,7 @@ $lg: 64em; //desktop and up (1024px)
 @import "landing";
 @import "beta-bar";
 @import "innov-footer";
+@import "nav-bar";
 
 * {
   box-sizing: border-box;
@@ -115,9 +116,16 @@ $lg: 64em; //desktop and up (1024px)
   right: 0;
 }
 
+.scrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .scrolled-transition {
   transition: top 500ms ease-in;
-  z-index: 9999;
+  z-index: 300;
 }
 
 .scrolled-padding {
