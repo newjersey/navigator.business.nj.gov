@@ -18,6 +18,12 @@ We deploy using **GitHub Actions** for CI/CD.
 
 You will need `npm` and Node installed, and also Java (for `serverless-dynamodb-local`)
 
+### Software Requirement
+- [Node 14](https://nodejs.org/en/download/)
+- [Java 16 JDK](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html)
+- [Python 3.9](https://www.python.org/downloads/)
+- [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) using "Visual C++ build tools" workload - **Windows Only**
+
 Clone the code and navigate to the root of this repository. This script will install all npm packages for both the frontend
 and backend, and it will globally install serverless and amplify-cli. It will also set up serverless's local DynamoDB.
 
