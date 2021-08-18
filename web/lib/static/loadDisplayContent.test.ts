@@ -1,6 +1,7 @@
 import fs from "fs";
 import { loadOnboardingDisplayContent, loadRoadmapDisplayContent } from "./loadDisplayContent";
 import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
+import { getPathSeparator } from "@/test/helpers";
 
 jest.mock("fs");
 
@@ -44,8 +45,9 @@ describe("loadDisplayContent", () => {
       const allFilePaths = mockedFs.readFileSync.mock.calls.map(
         (args) => (args[0] as string).split("onboarding")[1]
       );
+      const pathSeparator = getPathSeparator();
       for (const legalStructure of ALL_LEGAL_STRUCTURES_ORDERED) {
-        expect(allFilePaths).toContain(`/legal-structure/${legalStructure}.md`);
+        expect(allFilePaths).toContain(`${pathSeparator}legal-structure${pathSeparator}${legalStructure}.md`);
       }
     });
   });

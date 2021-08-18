@@ -4,6 +4,7 @@ import { AuthContext, ContextualInfoContext, UserDataErrorContext } from "@/page
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, UserDataError } from "@/lib/types/types";
+import os from "os";
 
 export const withAuth = (
   subject: ReactElement,
@@ -58,3 +59,12 @@ export const getLastCalledWith = (fn: jest.Mock): unknown[] => {
   const lastIndex = fn.mock.calls.length - 1;
   return fn.mock.calls[lastIndex];
 };
+
+export const getPathSeparator = (): string => {
+  const isWin = (os.platform() === 'win32');
+  if (isWin) {
+    return "\\";
+  }
+
+  return "/";
+}
