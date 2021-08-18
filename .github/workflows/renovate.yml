@@ -3,7 +3,7 @@ name: Renovate
 on:
   push:
     branches:
-      - renovate*
+      - renovate/*
 
 jobs:
   build-and-test:
