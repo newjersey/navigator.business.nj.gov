@@ -1,5 +1,78 @@
 {
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePrefixes": [
+        "cypress"
+      ],
+      "groupName": "cypress"
+    },
+    {
+      "matchPackageNames": [
+        "@types/jest",
+        "ts-jest"
+      ],
+      "matchPackagePrefixes": [
+        "jest"
+      ],
+      "groupName": "jest"
+    },
+    {
+      "matchPackageNames": [
+        "@types/eslint",
+        "babel-eslint"
+      ],
+      "matchPackagePrefixes": [
+        "@typescript-eslint/",
+        "eslint"
+      ],
+      "groupName": "linting"
+    },
+    {
+      "matchPackagePrefixes": [
+        "@middy"
+      ],
+      "groupName": "middy"
+    },
+    {
+      "matchPackageNames": [
+        "@types/react",
+        "@types/react-tabs",
+        "focus-trap-react"
+      ],
+      "matchPackagePrefixes": [
+        "react"
+      ],
+      "groupName": "react"
+    },
+    {
+      "matchPackageNames": [
+        "@serverless/typescript"
+      ],
+      "matchPackagePrefixes": [
+        "serverless"
+      ],
+      "groupName": "serverless"
+    },
+    {
+      "matchPackagePrefixes": [
+        "@testing-library"
+      ],
+      "groupName": "testing-library"
+    },
+    {
+      "matchPackageNames": [
+        "@types/copy-webpack-plugin",
+        "@types/webpack-node-externals",
+        "copy-webpack-plugin",
+        "tsconfig-paths-webpack-plugin"
+      ],
+      "matchPackagePrefixes": [
+        "webpack"
+      ],
+      "groupName": "webpack"
+    }
   ]
 }
