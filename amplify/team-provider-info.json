@@ -1,28 +1,4 @@
 {
-  "develop": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-businessnjgov-develop-142425-authRole",
-      "UnauthRoleArn": "arn:aws:iam::360364660870:role/amplify-businessnjgov-develop-142425-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::360364660870:role/amplify-businessnjgov-develop-142425-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-businessnjgov-develop-142425-deployment",
-      "UnauthRoleName": "amplify-businessnjgov-develop-142425-unauthRole",
-      "StackName": "amplify-businessnjgov-develop-142425",
-      "StackId": "arn:aws:cloudformation:us-east-1:360364660870:stack/amplify-businessnjgov-develop-142425/1f669370-b286-11eb-878d-0e3208ac72b1",
-      "AmplifyAppId": "d1fxpe8xsdfr62"
-    },
-    "categories": {
-      "auth": {
-        "businessnjgovc204e009": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d1fxpe8xsdfr62",
-          "type": "manual"
-        }
-      }
-    }
-  },
   "dev": {
     "awscloudformation": {
       "AuthRoleName": "amplify-businessnjgov-dev-135936-authRole",
