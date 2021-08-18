@@ -44,7 +44,7 @@ const TaskPage = (props: Props): ReactElement => {
 
   return (
     <>
-      <NextSeo title={`Business.NJ.gov Dashboard - ${props.task.name}`} />
+      <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
       <PageSkeleton>
         <SidebarPageLayout sidebar={sidebar} backButton={backButton} pageTitle={TaskDefaults.pageTitle}>
           {rswitch(props.task.id, {

@@ -17,6 +17,11 @@
   color: #243413;
 }
 
+.card-group-margin-custom {
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
 .gradient-bg {
   background-image: none !important;
   background: linear-gradient(#fff, #fff, #ecf3ec) !important;
@@ -105,6 +110,12 @@
 .font-32 {
   font-size: 2rem !important;
 }
+
+.display-flex-custom {
+  display: flex !important;
+  justify-content: center;
+}
+
 @media only screen and (min-width: $xs) {
   .display-block {
     display: block;
@@ -138,6 +149,15 @@
 
   .card-media-padding {
     padding-bottom: 2rem !important;
+  }
+}
+
+@media only screen and (max-width: $sm) {
+  .hero-header-custom {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    white-space: nowrap;
   }
 }
 
@@ -214,11 +234,6 @@
     background-size: contain;
   }
 
-  .card-wh {
-    width: 19.225rem !important;
-    height: 39.375rem !important;
-  }
-
   .padding-top-1 {
     padding-top: 1rem !important;
   }
@@ -248,8 +263,9 @@
     padding-right: 2rem !important;
   }
 
-  .display-flex-desktop {
+  .display-flex-custom {
     display: flex !important;
+    justify-content: start;
   }
 }
 
@@ -295,7 +311,6 @@
   border-left: none !important;
   border-bottom: none !important;
   border-right: none !important;
-  margin: 2rem !important;
   box-shadow: 0 0.0625rem 0.125rem rgb(0 0 0 / 4%), 0 0.125rem 0.25rem rgb(0 0 0 / 4%),
     0 0.25rem 0.5rem rgb(0 0 0 / 4%), 0 0.5rem 1rem rgb(0 0 0 / 4%), 0 1rem 2rem rgb(0 0 0 / 4%),
     0 2rem 3rem rgb(0 0 0 / 4%);

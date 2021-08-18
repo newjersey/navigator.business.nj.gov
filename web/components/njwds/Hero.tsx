@@ -17,16 +17,16 @@ export const Hero = (props: Props): ReactElement => {
           <img src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
         </div>
         <div className="usa-hero__callout no-bg no-max-width flex-order-1 max-width flex-smaller no-padding-x">
-          <h1 className="usa-hero__heading large-font text-primary-darker text-left-desktop">
+          <h1 className="usa-hero__heading large-font text-primary-darker text-left-desktop hero-header-custom">
             <span className="usa-hero__heading--alt text-primary-darker display-inline display-block">
               {props.calloutText}
             </span>
             {props.subCalloutText}
           </h1>
           <p className="text-gray-90 med-font text-left-desktop margin-bottom-4">{props.supportingText}</p>
-          <div className="display-inline-block display-flex-desktop">
+          <div className="display-inline-block display-flex-custom">
             <button
-              className="usa-button usa-button--big margin-right-205 margin-bottom-2"
+              className="usa-button usa-button--big margin-right-205 margin-bottom-2 text-no-wrap"
               onClick={props.onClick}
               data-hero-button
             >

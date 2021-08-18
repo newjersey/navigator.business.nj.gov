@@ -81,7 +81,7 @@ const Home = (): ReactElement => {
           </span>
         </h1>
 
-        <ul className="usa-card-group flex-direction">
+        <ul className="usa-card-group flex-direction card-group-margin-custom">
           <Card
             headerText={LandingPageDefaults.column1Header}
             mainText={LandingPageDefaults.column1SupportingText}

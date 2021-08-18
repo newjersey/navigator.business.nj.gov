@@ -33,10 +33,14 @@ export const NavBarLanding = (): ReactElement => {
         <div className="desktop:grid-col-12 usa-prose">
           <header className="flex fac fjb">
             <div className="flex-custom">
-              <img className="padding-top-1" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+              <img
+                className="padding-top-1 logo-max-width"
+                src="/img/Navigator-logo@2x.png"
+                alt="Business.NJ.Gov Navigator"
+              />
             </div>
             <div className="margin-left-auto flex fac">
-              <span className="white-space-no-wrap padding-right-1">
+              <span className="white-space-no-wrap padding-x-105">
                 <button
                   onClick={triggerSignIn}
                   className="usa-link text-primary text-bold font-heading-sm text-decoration-none cursor-pointer clear-button"

@@ -27,6 +27,18 @@
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+@media (max-width: $sm) {
+  .nav-padding-x {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+}
+
+@media (min-width: $xs) {
+  .logo-max-width {
+    max-width: 16.5rem;
+  }
+}
 @media (min-width: $lg) {
   .nav-padding-x {
     padding-left: 1rem;

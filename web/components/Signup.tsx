@@ -148,7 +148,7 @@ export const Signup = (props: Props): ReactElement => {
         </div>
       </DialogContent>
       <DialogActions>
-        <div className="padding-3">
+        <div className="padding-3 flex">
           <button className="usa-button usa-button--outline" onClick={onClose}>
             {SelfRegDefaults.closeButtonText}
           </button>
