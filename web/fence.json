@@ -27,6 +27,7 @@
     "focus-trap-react",
     "react-tabs",
     "dayjs",
-    "next-seo"
+    "next-seo",
+    "@jest/types"
   ]
 }
