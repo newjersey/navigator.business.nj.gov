@@ -1,0 +1,90 @@
+version: "3.8"
+
+services:
+  dynamodb-local:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: "dynamodb-local"
+    volumes:
+      - db_data:/home/dynamodblocal/data
+    working_dir: /home/dynamodblocal
+    ports:
+      - "8000:8000"
+    user: root
+  dynamodb-maint:
+    depends_on:
+      - "dynamodb-local"
+    links:
+      - "dynamodb-local"
+    environment:
+      - AWS_PROFILE=nj-default
+    volumes:
+      - ~/.aws/credentials:/root/.aws/credentials:ro
+      - type: bind
+        source: ./api/dynamodb-schema.json
+        target: /dynamodb-schema.json
+    image: amazon/aws-cli
+    command: dynamodb create-table --cli-input-json file:///dynamodb-schema.json --endpoint-url http://dynamodb-local:8000 --region us-east-1
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin
+    links:
+      - "dynamodb-local"
+    ports:
+      - 8001:8001
+    environment:
+      - DYNAMO_ENDPOINT=http://dynamodb-local:8000
+  wiremock:
+    image: node:14.17-slim
+    volumes:
+      - ./api:/api
+      - wiremock_modules:/root/.jdeploy
+      - api_node_modules:/api/node_modules
+    ports:
+      - "9000:9000"
+    working_dir: /api
+    command: bash -c "npm install && npm run start:wiremock"
+  api:
+    depends_on:
+      - wiremock
+      - "dynamodb-local"
+    links:
+      - wiremock
+      - "dynamodb-local"
+    image: node:14.17-slim
+    volumes:
+      - ~/.aws/credentials:/root/.aws/credentials:ro
+      - ./api:/api
+      - ./scripts:/scripts
+      - api_node_modules:/api/node_modules
+    ports:
+      - "5000:5000"
+    working_dir: /api
+    environment:
+      - AWS_PROFILE=nj-default
+      - IS_DOCKER=true
+    command: bash -c "npx wait-on tcp:wiremock:9000 && npm run start"
+    # this is waiting on wiremock as the npm installation for the api folder is executed there.
+  web:
+    depends_on:
+      - api
+    image: node:14.17-slim
+    stdin_open: true
+    links:
+      - api
+    volumes:
+      - ./web:/web
+      - web_node_modules:/web/node_modules
+      - /web/.next
+      - ./scripts:/scripts
+      - npm_logs:/root/.npm/_logs
+    ports:
+      - "3000:3000"
+    working_dir: /web
+    command: bash -c "npm install --no-optional && npm run dev"
+volumes:
+  npm_logs: {}
+  db_data: {}
+  next_data: {}
+  web_node_modules: {}
+  api_node_modules: {}
+  wiremock_modules: {}

@@ -21,23 +21,31 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const IS_OFFLINE = process.env.IS_OFFLINE; // set by serverless-offline
+const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
+
+const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
 
 const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
 let dynamoDb: AWS.DynamoDB.DocumentClient;
-if (IS_OFFLINE === "true") {
+if (IS_OFFLINE) {
+  let dynamoDbEndpoint = "localhost";
+  if (IS_DOCKER) {
+    dynamoDbEndpoint = "dynamodb-local";
+  }
   dynamoDb = new AWS.DynamoDB.DocumentClient({
     region: "localhost",
-    endpoint: `http://localhost:${DYNAMO_OFFLINE_PORT}`,
+    endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
   });
 } else {
   dynamoDb = new AWS.DynamoDB.DocumentClient();
 }
 
-const LICENSE_STATUS_BASE_URL = process.env.LICENSE_STATUS_BASE_URL || "http://localhost:9000";
+const LICENSE_STATUS_BASE_URL =
+  process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL);
 
-const BUSINESS_NAME_BASE_URL = process.env.BUSINESS_NAME_BASE_URL || "http://localhost:9000";
+const BUSINESS_NAME_BASE_URL =
+  process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const businessNameClient = WebserviceBusinessNameClient(BUSINESS_NAME_BASE_URL);
 
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
