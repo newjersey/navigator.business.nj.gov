@@ -1,4 +1,6 @@
 export const NavDefaults: Record<string, string> = {
-  itemOneText: "Log in",
-  itemTwoText: "Register",
+  logInButton: "Log in",
+  registerButton: "Register",
+  logoutButton: "Log out",
+  myNJAccountText: "myNewJersey account",
 };

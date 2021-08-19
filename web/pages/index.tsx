@@ -8,7 +8,7 @@ import { LandingPageDefaults } from "@/display-content/LandingPageDefaults";
 import { Signup } from "@/components/Signup";
 import { Card } from "@/components/njwds-extended/Card";
 import { LegalMessage } from "@/components/LegalMessage";
-import { NavBarLanding } from "@/components/NavBarLanding";
+import { NavBar } from "@/components/NavBar";
 
 const Home = (): ReactElement => {
   const { userData, error } = useUserData();
@@ -27,7 +27,7 @@ const Home = (): ReactElement => {
 
   return (
     <PageSkeleton>
-      <NavBarLanding />
+      <NavBar landingPage={true} />
       <Hero
         calloutText={LandingPageDefaults.heroCalloutFirstLineText}
         subCalloutText={LandingPageDefaults.heroCalloutSecondLineText}

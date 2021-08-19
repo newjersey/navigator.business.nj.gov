@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Roadmap, Step, Task, UserData } from "@/lib/types/types";
+import { NavDefaults } from "@/display-content/NavDefaults";
 
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);
 
@@ -65,4 +66,12 @@ export const isStepCompleted = (step: Step, userData: UserData | undefined): boo
     const taskProgress = (userData?.taskProgress && userData.taskProgress[it.id]) || "NOT_STARTED";
     return taskProgress === "COMPLETED";
   });
+};
+
+export const getUserNameOrEmailIfUserNameIsUndefinedFromUserData = (
+  userData: UserData | undefined
+): string => {
+  if (userData === undefined) return NavDefaults.myNJAccountText;
+  else if (userData.user.name) return userData.user.name;
+  else return userData.user.email;
 };

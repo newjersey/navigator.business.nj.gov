@@ -128,6 +128,10 @@ $lg: 64em; //desktop and up (1024px)
   z-index: 300;
 }
 
-.scrolled-padding {
+.scrolled-padding-2rem {
+  padding-top: 2rem !important;
+}
+
+.scrolled-padding-3rem {
   padding-top: 3rem !important;
 }
