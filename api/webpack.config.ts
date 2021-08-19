@@ -1,7 +1,7 @@
-const path = require("path");
-const slsw = require("serverless-webpack");
-const nodeExternals = require("webpack-node-externals");
-const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+import path from "path";
+import slsw from "serverless-webpack";
+import nodeExternals from "webpack-node-externals";
+import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 
 /*
 This line is only required if you are specifying `TS_NODE_PROJECT` for whatever reason.
