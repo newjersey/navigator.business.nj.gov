@@ -6,7 +6,6 @@ import { Step } from "@/components/Step";
 import { GreyCallout } from "@/components/njwds-extended/GreyCallout";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { AuthButton } from "@/components/AuthButton";
 import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
@@ -19,6 +18,7 @@ import { useRouter } from "next/router";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import analytics from "@/lib/utils/analytics";
 import { CircularProgress } from "@material-ui/core";
+import { NavBar } from "@/components/NavBar";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -76,6 +76,7 @@ const RoadmapPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton showLegalMessage={true}>
+      <NavBar />
       {!userData || userData?.formProgress !== "COMPLETED" ? (
         <SinglePageLayout>
           <div className="fdr fjc fac">
@@ -85,9 +86,6 @@ const RoadmapPage = (props: Props): ReactElement => {
         </SinglePageLayout>
       ) : (
         <SinglePageLayout>
-          <div className="float-right padding-top-2">
-            <AuthButton />
-          </div>
           <h1>{getHeader()}</h1>
           <UserDataErrorAlert />
           {(!error || error !== "NO_DATA") && (

@@ -5,8 +5,13 @@ import { onSignOut } from "@/lib/auth/signinHelper";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignOut, triggerSignIn } from "@/lib/auth/sessionHelper";
 import analytics from "@/lib/utils/analytics";
+import { NavDefaults } from "@/display-content/NavDefaults";
 
-export const AuthButton = (): ReactElement => {
+interface Props {
+  className?: string;
+}
+
+export const AuthButton = (props?: Props): ReactElement => {
   const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
 
@@ -21,13 +26,20 @@ export const AuthButton = (): ReactElement => {
       className="usa-button usa-button--outline auth-button margin-bottom-2 text-no-wrap"
       onClick={triggerSignIn}
     >
-      Log in
+      {NavDefaults.logInButton}
     </button>
   );
 
   const logoutButton = () => (
-    <button className="usa-button usa-button--outline auth-button" onClick={logout}>
-      Log out
+    <button
+      className={`${
+        props?.className
+          ? props.className
+          : "usa-button usa-button--outline auth-button margin-bottom-2 text-no-wrap"
+      }`}
+      onClick={logout}
+    >
+      {NavDefaults.logoutButton}
     </button>
   );
 

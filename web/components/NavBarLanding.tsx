@@ -1,27 +1,15 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { NavDefaults } from "@/display-content/NavDefaults";
+import React, { ReactElement } from "react";
 import { Signup } from "@/components/Signup";
+import { NavDefaults } from "@/display-content/NavDefaults";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@material-ui/core";
 
-export const NavBarLanding = (): ReactElement => {
-  const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+type Props = {
+  isLargeScreen: boolean;
+  scrolled: boolean;
+};
+
+export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement => {
   const [signupIsOpen, setSignupIsOpen] = React.useState<boolean>(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  const handleScroll = () => {
-    const offset = window.scrollY;
-    if (offset > 108) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-  });
 
   return (
     <div
@@ -46,7 +34,7 @@ export const NavBarLanding = (): ReactElement => {
                   className="usa-link text-primary text-bold font-heading-sm text-decoration-none cursor-pointer clear-button"
                 >
                   {" "}
-                  {NavDefaults.itemOneText}
+                  {NavDefaults.logInButton}
                 </button>
               </span>
               <span className="white-space-no-wrap nav-padding-x">
@@ -56,7 +44,7 @@ export const NavBarLanding = (): ReactElement => {
                   }}
                   className="usa-link text-primary text-bold font-heading-sm text-decoration-none cursor-pointer clear-button"
                 >
-                  {NavDefaults.itemTwoText}
+                  {NavDefaults.registerButton}
                 </button>{" "}
               </span>
             </div>

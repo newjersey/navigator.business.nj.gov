@@ -7,6 +7,7 @@ module.exports = {
     REDIRECT_URL: process.env.REDIRECT_URL,
     GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
     COGNITO_WEB_CLIENT_ID: process.env.COGNITO_WEB_CLIENT_ID,
+    MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
   },
   webpack: (config) => {
     config.module.rules.push({

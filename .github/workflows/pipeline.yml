@@ -71,6 +71,7 @@ jobs:
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
           REDIRECT_URL: http://localhost:3000/
           COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
@@ -174,6 +175,7 @@ jobs:
           REDIRECT_URL: ${{ secrets.REDIRECT_URL_DEV }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
           COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
+          MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
 
   deploy-staging:
     runs-on: ubuntu-latest
@@ -254,6 +256,7 @@ jobs:
           REDIRECT_URL: ${{ secrets.REDIRECT_URL_STAGING }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
           COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_STAGING }}
+          MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
 
   deploy-prod:
     runs-on: ubuntu-latest
@@ -334,3 +337,4 @@ jobs:
           REDIRECT_URL: ${{ secrets.REDIRECT_URL_PROD }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
           COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_PROD }}
+          MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop
