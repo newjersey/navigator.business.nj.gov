@@ -1,7 +1,9 @@
 import type { AWS } from "@serverless/typescript";
 
 import express from "./src/functions/express";
+import dynamoDbSchema from "./dynamodb-schema.json";
 
+const isDocker = process.env.IS_DOCKER == "true" || false; // set in docker-compose
 const stage = process.env.STAGE || "dev";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5000;
@@ -50,11 +52,12 @@ const serverlessConfiguration: AWS = {
       stages: [stage],
     },
     "serverless-offline": {
+      host: isDocker ? "0.0.0.0" : "localhost",
       httpPort: offlinePort,
       lambdaPort: offlineLambdaPort,
     },
   },
-  plugins: ["serverless-webpack", "serverless-dynamodb-local", "serverless-offline"],
+  plugins: ["serverless-webpack", ...(isDocker ? [] : ["serverless-dynamodb-local"]), "serverless-offline"],
   provider: {
     name: "aws",
     runtime: "nodejs14.x",
@@ -119,44 +122,7 @@ const serverlessConfiguration: AWS = {
       UsersDynamoDBTable: {
         Type: "AWS::DynamoDB::Table",
         Properties: {
-          AttributeDefinitions: [
-            {
-              AttributeName: "userId",
-              AttributeType: "S",
-            },
-            {
-              AttributeName: "email",
-              AttributeType: "S",
-            },
-          ],
-          KeySchema: [
-            {
-              AttributeName: "userId",
-              KeyType: "HASH",
-            },
-          ],
-          GlobalSecondaryIndexes: [
-            {
-              IndexName: "EmailIndex",
-              KeySchema: [
-                {
-                  AttributeName: "email",
-                  KeyType: "HASH",
-                },
-              ],
-              Projection: {
-                ProjectionType: "ALL",
-              },
-              ProvisionedThroughput: {
-                ReadCapacityUnits: 1,
-                WriteCapacityUnits: 1,
-              },
-            },
-          ],
-          ProvisionedThroughput: {
-            ReadCapacityUnits: 1,
-            WriteCapacityUnits: 1,
-          },
+          ...dynamoDbSchema,
           TableName: usersTable,
         },
       },
