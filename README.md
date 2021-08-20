@@ -24,11 +24,11 @@ You will need `npm` and Node installed, and also Java (for `serverless-dynamodb-
 - [Python 3.9](https://www.python.org/downloads/)
 - [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) using "Visual C++ build tools" workload - **Windows Only**
 
-Clone the code and navigate to the root of this repository. This script will install all npm packages for both the frontend
-and backend, and it will globally install serverless and amplify-cli. It will also set up serverless's local DynamoDB.
+Clone the code and navigate to the root of this repository. Running **npm install** at the root will install all npm packages for both the frontend
+and backend. It will also set up serverless's local DynamoDB.
 
 ```shell
-./scripts/install.sh
+npm install
 ```
 
 In order for the web frontend tests to pass and for it to be able to run locally, it **needs to have Amplify locally configured** such that the `web/aws-exports.js` file exists. This can be done by running and using the project's Amplify AWS credentials when prompted.
@@ -95,7 +95,7 @@ Use ship-it to run prettier, linting, and tests before pushing:
 ./scripts/ship-it.sh
 ```
 
-The GitHub actions CI/CD (which is configured in `.github/development.yml`) will pick up the job and deploy to Amplify.
+The GitHub actions CI/CD (which is configured in `.github/workflows/pipeline.yml`) will pick up the job and deploy to Amplify for commits to the main branch.
 
 ## Frontend deep-dive
 
