@@ -8,15 +8,16 @@ export const useRoadmap = (): { roadmap: Roadmap | undefined } => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
   const { userData } = useUserData();
 
+  //Refactor out of hooks
   const refreshRoadmap = async () => {
-    if (userData?.onboardingData) {
+    if (userData?.formProgress === "COMPLETED") {
       setRoadmap(await buildRoadmap(userData.onboardingData));
     }
   };
-
+  //Refactor out of hooks
   useEffect(() => {
     refreshRoadmap();
-  }, [userData?.onboardingData]);
+  }, [userData, userData?.onboardingData]);
 
   return { roadmap };
 };
