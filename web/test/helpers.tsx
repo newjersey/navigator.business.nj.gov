@@ -61,10 +61,10 @@ export const getLastCalledWith = (fn: jest.Mock): unknown[] => {
 };
 
 export const getPathSeparator = (): string => {
-  const isWin = (os.platform() === 'win32');
+  const isWin = os.platform() === "win32";
   if (isWin) {
     return "\\";
   }
 
   return "/";
-}
+};

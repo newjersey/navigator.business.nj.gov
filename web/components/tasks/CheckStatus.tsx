@@ -16,9 +16,10 @@ const useStyles = makeStyles(() =>
       background: "#e6e6e6",
     },
     zipCodeField: {
-      "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
-        display: "none",
-      },
+      "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+        {
+          display: "none",
+        },
     },
   })
 );
@@ -59,12 +60,14 @@ export const CheckStatus = (props: Props): ReactElement => {
     props.onSubmit(formValues);
   };
 
-  const handleChange = (key: keyof NameAndAddress) => (event: ChangeEvent<HTMLInputElement>): void => {
-    setFormValues({
-      ...formValues,
-      [key]: event.target.value,
-    });
-  };
+  const handleChange =
+    (key: keyof NameAndAddress) =>
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      setFormValues({
+        ...formValues,
+        [key]: event.target.value,
+      });
+    };
 
   const getErrorAlert = (): ReactElement => {
     if (!props.error) return <></>;
