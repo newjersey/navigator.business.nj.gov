@@ -1,16 +1,16 @@
 {
   "name": "business.nj.gov",
   "version": "0.1.0",
-  "private": true,
+  "private": "true",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "postbuild": "next export",
     "start": "next start",
-    "test": "DEBUG_PRINT_LIMIT=50000 jest",
+    "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
     "eslint": "eslint",
-    "lint": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}'",
-    "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts,tsx}' --fix",
+    "lint": "cross-env-shell eslint --max-warnings 0 '*/**/*.{js,ts,tsx}'",
+    "lint:fix": "cross-env-shell eslint --max-warnings 0 '*/**/*.{js,ts,tsx}' --fix",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record false",
@@ -18,7 +18,8 @@
     "airtable:dump": "node scripts/airtableDump.js"
   },
   "prettier": {
-    "printWidth": 110
+    "printWidth": 110,
+    "endOfLine": "auto"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "1.2.10",
@@ -58,6 +59,7 @@
     "@types/react-tabs": "2.3.3",
     "@typescript-eslint/eslint-plugin": "4.29.2",
     "@typescript-eslint/parser": "4.29.2",
+    "cross-env": "7.0.3",
     "cypress": "6.9.1",
     "cypress-dotenv": "1.2.2",
     "cypress-wait-until": "1.7.1",
@@ -76,6 +78,7 @@
     "jest-raw-loader": "1.0.1",
     "node-fetch": "2.6.1",
     "prettier": "2.3.2",
+    "ts-node": "9.1.1",
     "typescript": "4.3.5"
   }
 }

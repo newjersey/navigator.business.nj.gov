@@ -2,6 +2,9 @@
 
 cd $(git rev-parse --show-toplevel)
 
+shopt -s expand_aliases
+alias nc='npx nc'
+
 WEB_PORT=3001
 API_PORT=5001
 LAMBDA_PORT=5051
@@ -9,11 +12,11 @@ DYNAMO_PORT=8001
 WIREMOCK_PORT=9001
 API_BASE_URL=http://localhost:${API_PORT}/dev
 
-kill $(lsof -i:${WEB_PORT} -t)
-kill $(lsof -i:${API_PORT} -t)
-kill $(lsof -i:${DYNAMO_PORT} -t)
-kill $(lsof -i:${LAMBDA_PORT} -t)
-kill $(lsof -i:${WIREMOCK_PORT} -t)
+npx kill-port ${WEB_PORT}
+npx kill-port ${API_PORT}
+npx kill-port ${DYNAMO_PORT}
+npx kill-port ${LAMBDA_PORT}
+npx kill-port ${WIREMOCK_PORT}
 
 set -e
 
@@ -44,10 +47,10 @@ CYPRESS_API_BASE_URL=${API_BASE_URL} npm --prefix=web run cypress:run -- --confi
 
 set +e
 
-kill $(lsof -i:${WEB_PORT} -t)
-kill $(lsof -i:${API_PORT} -t)
-kill $(lsof -i:${DYNAMO_PORT} -t)
-kill $(lsof -i:${LAMBDA_PORT} -t)
+npx kill-port ${WEB_PORT}
+npx kill-port ${API_PORT}
+npx kill-port ${DYNAMO_PORT}
+npx kill-port ${LAMBDA_PORT}
 
 echo "   __            _                                             _"
 echo "  / _| ___  __ _| |_ _   _ _ __ ___  ___   _ __   __ _ ___ ___| |"
