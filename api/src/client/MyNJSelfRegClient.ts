@@ -1,6 +1,7 @@
 import { BusinessUser, GetCertHttpsAgent, SelfRegClient, SelfRegResponse } from "../domain/types";
 import axios from "axios";
 import xml2js from "xml2js";
+import { LogWriter } from "../libs/logWriter";
 
 type MyNJConfig = {
   serviceToken: string;
@@ -10,6 +11,7 @@ type MyNJConfig = {
 };
 
 export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
+  const logWriter = LogWriter("us-east-1", "NavigatorWebService", "MyNJSelfRegistration");
   const resume = (myNJUserKey: string): Promise<SelfRegResponse> => {
     return makeRequest(createResumeBody(myNJUserKey), "RESUME");
   };
@@ -34,7 +36,9 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
     })
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);
-        console.log(JSON.stringify(response));
+        logWriter.LogInfo(
+          `Search - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
+        );
 
         const xmlResponseName = type === "GRANT" ? "ns2:grantResponse" : "ns2:resumeResponse";
         const xmlResponseObj = response["S:Envelope"]["S:Body"][0][xmlResponseName][0]["return"][0];
@@ -54,7 +58,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
         };
       })
       .catch((error) => {
-        console.log("got mynj error", error);
+        logWriter.LogError("Registration - Error", error);
 
         const myNJDuplicateErrors = ["E1048", "E1017", "E1059", "E2109"];
         if (error.length > 0 && myNJDuplicateErrors.includes(error[0].split(" ")[0])) {

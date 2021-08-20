@@ -4,6 +4,7 @@ import { LicenseStatusClient } from "../domain/types";
 import { WebserviceLicenseStatusClient } from "./WebserviceLicenseStatusClient";
 
 jest.mock("axios");
+jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe("WebserviceLicenseStatusClient", () => {

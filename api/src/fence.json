@@ -16,6 +16,8 @@
     "axios",
     "dayjs",
     "uuid",
-    "xml2js"
+    "xml2js",
+    "winston",
+    "winston-cloudwatch"
   ]
 }
