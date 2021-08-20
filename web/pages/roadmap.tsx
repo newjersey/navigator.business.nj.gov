@@ -18,6 +18,7 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRouter } from "next/router";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import analytics from "@/lib/utils/analytics";
+import { CircularProgress } from "@material-ui/core";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -75,50 +76,59 @@ const RoadmapPage = (props: Props): ReactElement => {
 
   return (
     <PageSkeleton showLegalMessage={true}>
-      <SinglePageLayout>
-        <div className="float-right padding-top-2">
-          <AuthButton />
-        </div>
-        <h1>{getHeader()}</h1>
-        <UserDataErrorAlert />
-        {(!error || error !== "NO_DATA") && (
-          <>
-            <div className="allow-long usa-intro">
-              <Content>{props.displayContent.contentMd}</Content>
-            </div>
-            <div>
-              <GreyCallout
-                link={{
-                  text: RoadmapDefaults.greyBoxEditText,
-                  href: "/onboarding",
-                  onClick: () => {
-                    analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
-                  },
-                }}
-              >
-                <>
-                  <div data-business-name={userData?.onboardingData.businessName}>
-                    {RoadmapDefaults.greyBoxBusinessNameText}: <strong>{getBusinessName()}</strong>
-                  </div>
-                  <div data-industry={userData?.onboardingData.industry}>
-                    {RoadmapDefaults.greyBoxIndustryText}: <strong>{getIndustry()}</strong>
-                  </div>
-                  <div data-legal-structure={userData?.onboardingData.legalStructure}>
-                    {RoadmapDefaults.greyBoxLegalStructureText}: <strong>{getLegalStructure()}</strong>
-                  </div>
-                  <div data-municipality={userData?.onboardingData.municipality?.name}>
-                    {RoadmapDefaults.greyBoxMunicipalityText}: <strong>{getMunicipality()}</strong>
-                  </div>
-                </>
-              </GreyCallout>
-            </div>
-          </>
-        )}
-        {roadmap &&
-          roadmap.steps.map((step, index) => (
-            <Step key={step.id} step={step} last={index === roadmap.steps.length - 1} />
-          ))}
-      </SinglePageLayout>
+      {!userData || userData?.formProgress !== "COMPLETED" ? (
+        <SinglePageLayout>
+          <div className="fdr fjc fac">
+            <CircularProgress />
+            <h3 className="margin-left-2">Loading...</h3>
+          </div>
+        </SinglePageLayout>
+      ) : (
+        <SinglePageLayout>
+          <div className="float-right padding-top-2">
+            <AuthButton />
+          </div>
+          <h1>{getHeader()}</h1>
+          <UserDataErrorAlert />
+          {(!error || error !== "NO_DATA") && (
+            <>
+              <div className="allow-long usa-intro">
+                <Content>{props.displayContent.contentMd}</Content>
+              </div>
+              <div>
+                <GreyCallout
+                  link={{
+                    text: RoadmapDefaults.greyBoxEditText,
+                    href: "/onboarding",
+                    onClick: () => {
+                      analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
+                    },
+                  }}
+                >
+                  <>
+                    <div data-business-name={userData?.onboardingData.businessName}>
+                      {RoadmapDefaults.greyBoxBusinessNameText}: <strong>{getBusinessName()}</strong>
+                    </div>
+                    <div data-industry={userData?.onboardingData.industry}>
+                      {RoadmapDefaults.greyBoxIndustryText}: <strong>{getIndustry()}</strong>
+                    </div>
+                    <div data-legal-structure={userData?.onboardingData.legalStructure}>
+                      {RoadmapDefaults.greyBoxLegalStructureText}: <strong>{getLegalStructure()}</strong>
+                    </div>
+                    <div data-municipality={userData?.onboardingData.municipality?.name}>
+                      {RoadmapDefaults.greyBoxMunicipalityText}: <strong>{getMunicipality()}</strong>
+                    </div>
+                  </>
+                </GreyCallout>
+              </div>
+            </>
+          )}
+          {roadmap &&
+            roadmap.steps.map((step, index) => (
+              <Step key={step.id} step={step} last={index === roadmap.steps.length - 1} />
+            ))}
+        </SinglePageLayout>
+      )}
     </PageSkeleton>
   );
 };

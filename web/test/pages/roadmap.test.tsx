@@ -1,10 +1,16 @@
 import { render, RenderResult } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
-import { generateMunicipality, generateStep, generateTask, generateUserData } from "@/test/factories";
-import { useMockOnboardingData, useMockUserData, useMockUserDataError } from "@/test/mock/mockUseUserData";
+import { generateMunicipality, generateStep, generateTask } from "@/test/factories";
+import {
+  setMockUserDataResponse,
+  useMockOnboardingData,
+  useMockUserData,
+  useMockUserDataError,
+} from "@/test/mock/mockUseUserData";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -22,10 +28,21 @@ describe("roadmap page", () => {
   const renderRoadmapPage = (): RenderResult => {
     return render(<RoadmapPage displayContent={{ contentMd: "" }} />);
   };
-
+  it("shows loading page if page has not loaded yet", () => {
+    setMockUserDataResponse({ userData: undefined });
+    const subject = renderRoadmapPage();
+    expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
+    expect(subject.queryByText(RoadmapDefaults.roadmapTitleNotSet)).toBeNull();
+  });
+  it("shows loading page if user not finished onboarding", () => {
+    useMockUserData({ formProgress: "UNSTARTED" });
+    const subject = renderRoadmapPage();
+    expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
+    expect(subject.queryByText(RoadmapDefaults.roadmapTitleNotSet)).toBeNull();
+  });
   it("redirects to onboarding if user not finished onboarding", () => {
+    useMockUserData({ formProgress: "UNSTARTED" });
     renderRoadmapPage();
-    useMockUserData(generateUserData({ formProgress: "UNSTARTED" }));
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 

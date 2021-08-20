@@ -34,7 +34,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
   return {
     user: generateUser({}),
     onboardingData: generateOnboardingData({}),
-    formProgress: "UNSTARTED",
+    formProgress: "COMPLETED",
     taskProgress: {},
     licenseData: generateLicenseData({}),
     ...overrides,
