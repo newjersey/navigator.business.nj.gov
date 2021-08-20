@@ -1,7 +1,7 @@
 import "../styles/global.scss";
 import { AppProps } from "next/app";
 import React, { ReactElement, useEffect, useReducer, useState } from "react";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Amplify } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import awsExports from "../aws-exports";
@@ -69,7 +69,7 @@ export const UserDataErrorContext = React.createContext<UserDataErrorContextType
   setUserDataError: () => {},
 });
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     fontFamily: [
       "Public Sans Web",
