@@ -1,9 +1,9 @@
-name: Renovate
+name: Build and Test
 
 on:
   push:
     branches:
-      - renovate/*
+      - '!main'
 
 jobs:
   build-and-test:
