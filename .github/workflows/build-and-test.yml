@@ -25,14 +25,18 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: 🔧 Use Node.js 14.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 14.x
 
       - name: 🔧 Set up JDK for dynamodb-local
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 13
+
+      - name: 🧰 Install npm dependencies
+        run: npm install
 
       - name: 🧰 Install Amplify CLI
         run: npm install -g @aws-amplify/cli
@@ -45,19 +49,15 @@ jobs:
           AWS_REGION: us-east-1
           AMPLIFY_ENV: dev
 
-      - name: 🧰 Install web dependencies
-        run: npm --prefix=web install
-      - name: 🧰 Install api dependencies
-        run: npm --prefix=api install
-
       - name: 🔧 Serverless Authentication
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
         working-directory: api
 
-      - name: 🧹 Run web lint
-        run: npm --prefix=web run lint
-      - name: 🧹 Run api lint
-        run: npm --prefix=api run lint
+      - name: 🧹 Run lint
+        run: npm run lint
+
+      - name: 🧹 Run prettier
+        run: npm run prettier:check
 
       - name: 🧪 Run web tests
         run: npm --prefix=web run test
