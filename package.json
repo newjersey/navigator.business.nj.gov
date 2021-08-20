@@ -1,0 +1,32 @@
+{
+  "name": "business.nj.gov-root",
+  "version": "1.0.0",
+  "description": "This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/business.nj.gov#businessnjgov)",
+  "main": "index.js",
+  "private": "true",
+  "devDependencies": {
+    "@aws-amplify/cli": "5.3.0",
+    "cross-env": "7.0.3",
+    "kill-port": "1.6.1",
+    "lerna": "4.0.0",
+    "nc": "1.0.3"
+  },
+  "scripts": {
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
+    "postinstall": "lerna bootstrap --force-local",
+    "prettier": "lerna run prettier",
+    "start:dev": "lerna run  --stream dev",
+    "test": "lerna run --stream test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newjersey/business.nj.gov.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/newjersey/business.nj.gov/issues"
+  },
+  "homepage": "https://github.com/newjersey/business.nj.gov#readme"
+}

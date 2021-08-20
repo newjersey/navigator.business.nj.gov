@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-kill $(lsof -i:8001 -t)
+npx kill-port 8001
 
 set -e
 npm --prefix=api test

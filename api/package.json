@@ -2,15 +2,18 @@
   "name": "businessnjgov-api",
   "version": "1.0.0",
   "main": "serverless.ts",
+  "private": "true",
   "scripts": {
     "start": "sls offline start",
+    "dev": "npm run start",
     "deploy": "sls deploy",
     "build": "sls package",
     "test": "jest",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
-    "lint": "eslint --max-warnings 0 '*/**/*.{js,ts}'",
-    "lint:fix": "eslint --max-warnings 0 '*/**/*.{js,ts}' --fix",
+    "lint": "cross-env-shell eslint --max-warnings 0 '*/**/*.{js,ts}'",
+    "lint:fix": "cross-env-shell eslint --max-warnings 0 '*/**/*.{js,ts}' --fix",
     "install-dynamo-local": "sls dynamodb install",
+    "postinstall": "npm run install-dynamo-local",
     "fences": "gf",
     "start:wiremock": "wiremock --root-dir ./wiremock --port 9000",
     "start:wiremock:with-port": "wiremock --root-dir ./wiremock",
@@ -21,7 +24,8 @@
     "node": ">=14.15.0"
   },
   "prettier": {
-    "printWidth": 110
+    "printWidth": 110,
+    "endOfLine": "auto"
   },
   "dependencies": {
     "@middy/core": "1.5.2",
@@ -51,11 +55,13 @@
     "@types/node": "14.17.10",
     "@types/supertest": "2.0.11",
     "@types/uuid": "8.3.1",
+    "@types/webpack-node-externals": "^2.5.2",
     "@types/xml2js": "0.4.9",
     "@typescript-eslint/eslint-plugin": "4.29.2",
     "@typescript-eslint/parser": "4.29.2",
     "aws-sdk": "2.972.0",
     "copy-webpack-plugin": "8.1.1",
+    "cross-env": "7.0.3",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "good-fences": "0.10.0",
