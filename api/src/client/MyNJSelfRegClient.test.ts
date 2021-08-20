@@ -4,6 +4,7 @@ import { MyNJSelfRegClientFactory } from "./MyNJSelfRegClient";
 import { generateUser } from "../domain/factories";
 
 jest.mock("axios");
+jest.mock("winston");
 
 describe("MyNJSelfRegClient", () => {
   let mockedAxios: jest.Mock;

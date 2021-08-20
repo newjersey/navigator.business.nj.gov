@@ -3,6 +3,7 @@ import { BusinessNameClient } from "../domain/types";
 import { WebserviceBusinessNameClient } from "./WebserviceBusinessNameClient";
 
 jest.mock("axios");
+jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe("WebserviceBusinessNameClient", () => {

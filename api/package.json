@@ -42,6 +42,8 @@
     "serverless-offline": "8.0.0",
     "source-map-support": "0.5.19",
     "uuid": "8.3.2",
+    "winston": "3.3.3",
+    "winston-cloudwatch": "3.0.1",
     "xml2js": "0.4.23"
   },
   "devDependencies": {
