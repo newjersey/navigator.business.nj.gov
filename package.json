@@ -12,10 +12,11 @@
     "nc": "1.0.3"
   },
   "scripts": {
-    "lint": "lerna run lint",
+    "lint": "lerna run --stream lint",
     "lint:fix": "lerna run lint:fix",
     "postinstall": "lerna bootstrap --force-local",
-    "prettier": "lerna run prettier",
+    "prettier": "lerna run --stream prettier",
+    "prettier:check": "lerna run --stream prettier:check",
     "start:dev": "lerna run  --stream dev",
     "test": "lerna run --stream test"
   },

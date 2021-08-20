@@ -10,6 +10,7 @@
     "build": "sls package",
     "test": "jest",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
+    "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "lint": "eslint . --max-warnings 0 --ext .js,.ts",
     "lint:fix": "eslint . --max-warnings 0 --ext .js,.ts --fix",
     "install-dynamo-local": "sls dynamodb install",
