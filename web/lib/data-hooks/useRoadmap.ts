@@ -1,23 +1,25 @@
 import { Roadmap } from "@/lib/types/types";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { RoadmapContext } from "@/pages/_app";
 import { buildRoadmap } from "@/lib/roadmap/buildRoadmap";
 import { useUserData } from "./useUserData";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 
 export const useRoadmap = (): { roadmap: Roadmap | undefined } => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
   const { userData } = useUserData();
 
-  //Refactor out of hooks
-  const refreshRoadmap = async () => {
+  useMountEffectWhenDefined(() => {
+    if (!roadmap) {
+      buildAndSetRoadmap();
+    }
+  }, userData);
+
+  const buildAndSetRoadmap = async () => {
     if (userData?.formProgress === "COMPLETED") {
       setRoadmap(await buildRoadmap(userData.onboardingData));
     }
   };
-  //Refactor out of hooks
-  useEffect(() => {
-    refreshRoadmap();
-  }, [userData, userData?.onboardingData]);
 
   return { roadmap };
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Roadmap, Step, Task, UserData } from "@/lib/types/types";
 
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);
@@ -12,10 +12,10 @@ export const useOnWindowResize = (fun: () => void): void =>
   });
 
 export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unknown | undefined): void => {
-  const [effectOccurred, setEffectOccurred] = useState<boolean>(false);
+  const effectOccurred = useRef<boolean>(false);
   useEffect(() => {
-    if (thingToBeDefined && !effectOccurred) {
-      setEffectOccurred(true);
+    if (thingToBeDefined && !effectOccurred.current) {
+      effectOccurred.current = true;
       fun();
     }
   }, [thingToBeDefined]);

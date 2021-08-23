@@ -127,6 +127,8 @@ const removeStep5 = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {
 
 const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: string): Promise<Roadmap> => {
   const municipality = await fetchMunicipalityById(municipalityId);
+  if (!municipality) return roadmap;
+
   const evalValues = {
     municipalityWebsite: municipality.townWebsite,
     municipality: municipality.townName,

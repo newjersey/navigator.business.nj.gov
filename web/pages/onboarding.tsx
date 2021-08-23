@@ -1,4 +1,4 @@
-import React, { FormEvent, ReactElement, ReactNode, useEffect, useState } from "react";
+import React, { FormEvent, ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
@@ -28,6 +28,8 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { Alert } from "@/components/njwds/Alert";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
+import { buildRoadmap } from "@/lib/roadmap/buildRoadmap";
+import { RoadmapContext } from "@/pages/_app";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -66,6 +68,7 @@ const OnboardingErrorLookup: Record<OnboardingError, string> = {
 
 const OnboardingPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
+  const { setRoadmap } = useContext(RoadmapContext);
 
   const PAGES = 4;
   const router = useRouter();
@@ -125,9 +128,12 @@ const OnboardingPage = (props: Props): ReactElement => {
       scrollToTop();
       return;
     }
-    setAnalyticsDimensions(onboardingData);
 
+    setAnalyticsDimensions(onboardingData);
     setError(undefined);
+
+    setRoadmap(await buildRoadmap(onboardingData));
+
     if (page.current + 1 <= PAGES) {
       update({ ...userData, onboardingData }).then(() => {
         const nextCurrentPage = page.current + 1;

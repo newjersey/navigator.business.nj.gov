@@ -1,9 +1,9 @@
 import React, { Dispatch, ReactElement } from "react";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { AuthContext, ContextualInfoContext, UserDataErrorContext } from "@/pages/_app";
+import { AuthContext, ContextualInfoContext, RoadmapContext, UserDataErrorContext } from "@/pages/_app";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
-import { BusinessUser, UserDataError } from "@/lib/types/types";
+import { BusinessUser, Roadmap, UserDataError } from "@/lib/types/types";
 import os from "os";
 
 export const withAuth = (
@@ -42,6 +42,18 @@ export const withUserDataError = (
     <UserDataErrorContext.Provider value={{ userDataError, setUserDataError: setUserDataError || jest.fn() }}>
       {subject}
     </UserDataErrorContext.Provider>
+  );
+};
+
+export const withRoadmap = (
+  subject: ReactElement,
+  roadmap: Roadmap | undefined,
+  setRoadmap?: (roadmap: Roadmap | undefined) => void
+): ReactElement => {
+  return (
+    <RoadmapContext.Provider value={{ roadmap, setRoadmap: setRoadmap || jest.fn() }}>
+      {subject}
+    </RoadmapContext.Provider>
   );
 };
 

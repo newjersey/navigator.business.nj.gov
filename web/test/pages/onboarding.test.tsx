@@ -21,13 +21,14 @@ import {
   createEmptyUserData,
   Industry,
   LegalStructure,
+  Roadmap,
   UserData,
 } from "@/lib/types/types";
 import * as mockUseUserData from "@/test/mock/mockUseUserData";
 import * as mockRouter from "@/test/mock/mockRouter";
-import { mockUpdate, useMockUserData } from "@/test/mock/mockUseUserData";
+import { mockUpdate, useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { getLastCalledWith } from "@/test/helpers";
+import { getLastCalledWith, withRoadmap } from "@/test/helpers";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -189,6 +190,37 @@ describe("onboarding", () => {
       },
     });
     expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap");
+  });
+
+  it("builds and sets roadmap after each step", async () => {
+    const onboardingData = generateOnboardingData({});
+    useMockOnboardingData(onboardingData);
+    const promise = Promise.resolve();
+    mockUpdate.mockReturnValue(promise);
+
+    const mockSetRoadmap = jest.fn();
+
+    subject = render(
+      withRoadmap(
+        <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />,
+        undefined,
+        mockSetRoadmap
+      )
+    );
+
+    await visitStep2();
+    expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
+    await visitStep3();
+    expect(mockSetRoadmap).toHaveBeenCalledTimes(2);
+    await visitStep4();
+    expect(mockSetRoadmap).toHaveBeenCalledTimes(3);
+
+    clickNext();
+    await act(() => promise);
+
+    expect(mockSetRoadmap).toHaveBeenCalledTimes(4);
+    const builtRoadmap = getLastCalledWith(mockSetRoadmap)[0] as Roadmap;
+    expect(builtRoadmap.type).toEqual(onboardingData.industry);
   });
 
   it("prevents user from moving after Step 3 if you have not selected a legal structure", async () => {
