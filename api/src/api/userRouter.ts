@@ -1,5 +1,5 @@
 import { Request, Router } from "express";
-import { createEmptyUserData, UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
+import { UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
@@ -55,23 +55,8 @@ export const userRouterFactory = (
         res.json(userData);
       })
       .catch((error) => {
-        // TODO: remove this once self-reg is in place
         if (error === "Not found") {
-          const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
-          const emptyUserData = createEmptyUserData({
-            myNJUserKey: signedInUserId,
-            email: signedInUser.email,
-            id: signedInUserId,
-            name: "",
-          });
-          userDataClient
-            .put(emptyUserData)
-            .then((result) => {
-              res.json(result);
-            })
-            .catch(() => {
-              res.status(500).json({ error });
-            });
+          res.status(404).json({ error });
         } else {
           res.status(500).json({ error });
         }
