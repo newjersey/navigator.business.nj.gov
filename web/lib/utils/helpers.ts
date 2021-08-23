@@ -18,7 +18,7 @@ export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unk
       effectOccurred.current = true;
       fun();
     }
-  }, [thingToBeDefined]);
+  }, [!!thingToBeDefined]);
 };
 
 export const onEscape = (e: KeyboardEvent, handler: () => void): void => {

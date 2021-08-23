@@ -25,7 +25,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     const activeStep = getActiveStepId();
     setActiveStepId(activeStep);
     setOpenSteps(activeStep ? [activeStep] : []);
-  }, [props.activeTaskId, roadmap]);
+  }, [props.activeTaskId, !!roadmap]);
 
   const toggleStep = (stepId: string): void => {
     analytics.event.task_mini_roadmap_step.click.expand_contract();

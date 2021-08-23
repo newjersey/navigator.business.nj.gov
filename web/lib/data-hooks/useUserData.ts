@@ -18,7 +18,7 @@ export const useUserData = (): UseUserDataResponse => {
     } else if (!error && userDataError !== "UPDATE_FAILED") {
       setUserDataError(undefined);
     }
-  }, [userDataError, data, error]);
+  }, [userDataError, JSON.stringify(data), error]);
 
   const update = async (newUserData: UserData | undefined): Promise<void> => {
     if (newUserData) {
