@@ -12,7 +12,7 @@ export const useAuthProtectedPage = (): void => {
         await router.replace("/");
       }
     })();
-  }, [state.isAuthenticated]);
+  }, [router, state.isAuthenticated]);
 };
 
 export const useUnauthedOnlyPage = (): void => {
@@ -24,5 +24,5 @@ export const useUnauthedOnlyPage = (): void => {
         await router.replace("/");
       }
     })();
-  }, [state.isAuthenticated]);
+  }, [router, state.isAuthenticated]);
 };

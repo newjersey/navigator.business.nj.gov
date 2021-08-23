@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, useContext, useState } from "react";
+import React, { ReactElement, ReactNode, createContext, useContext, useState } from "react";
 import { UserData } from "@/lib/types/types";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { getLastCalledWith } from "@/test/helpers";
@@ -36,7 +36,7 @@ interface StatefulUserDataContextType {
   update: (userData: UserData | undefined) => Promise<void>;
 }
 
-export const StatefulUserDataContext = React.createContext<StatefulUserDataContextType>({
+export const StatefulUserDataContext = createContext<StatefulUserDataContextType>({
   userData: undefined,
   update: () => Promise.resolve(),
 });

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { Signup } from "@/components/Signup";
 import { NavDefaults } from "@/display-content/NavDefaults";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement => {
-  const [signupIsOpen, setSignupIsOpen] = React.useState<boolean>(false);
+  const [signupIsOpen, setSignupIsOpen] = useState<boolean>(false);
 
   return (
     <div

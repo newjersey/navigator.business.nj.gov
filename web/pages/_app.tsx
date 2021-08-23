@@ -1,6 +1,6 @@
 import "../styles/global.scss";
 import { AppProps } from "next/app";
-import React, { ReactElement, useEffect, useReducer, useState } from "react";
+import React, { ReactElement, createContext, useEffect, useReducer, useState } from "react";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Amplify, Hub } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -13,8 +13,10 @@ import { onSignIn } from "@/lib/auth/signinHelper";
 import { useRouter } from "next/router";
 import { HubCapsule } from "@aws-amplify/core";
 import { DefaultSeo } from "next-seo";
+import Script from "next/script";
 import SEO from "../next-seo.config";
 import analytics from "@/lib/utils/analytics";
+import "../public/css/styles.css";
 
 Amplify.configure({
   ...awsExports,
@@ -36,7 +38,7 @@ const initialState = {
   isAuthenticated: IsAuthenticated.UNKNOWN,
 };
 
-export const AuthContext = React.createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
   dispatch: () => {},
   state: initialState,
 });
@@ -46,7 +48,7 @@ export interface RoadmapContextType {
   setRoadmap: (roadmap: Roadmap | undefined) => void;
 }
 
-export const RoadmapContext = React.createContext<RoadmapContextType>({
+export const RoadmapContext = createContext<RoadmapContextType>({
   roadmap: undefined,
   setRoadmap: () => {},
 });
@@ -56,7 +58,7 @@ export interface ContextualInfoContextType {
   setContextualInfoMd: (contextualInfoMd: string) => void;
 }
 
-export const ContextualInfoContext = React.createContext<ContextualInfoContextType>({
+export const ContextualInfoContext = createContext<ContextualInfoContextType>({
   contextualInfoMd: "",
   setContextualInfoMd: () => {},
 });
@@ -66,7 +68,7 @@ export interface UserDataErrorContextType {
   setUserDataError: (userDataError: UserDataError | undefined) => void;
 }
 
-export const UserDataErrorContext = React.createContext<UserDataErrorContextType>({
+export const UserDataErrorContext = createContext<UserDataErrorContextType>({
   userDataError: undefined,
   setUserDataError: () => {},
 });
@@ -181,11 +183,10 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         }}
       />
 
-      <script src="/js/uswds.js" />
-      <script src="/js/uswds-init.js" />
-      <link rel="stylesheet" href="/css/styles.css" />
-      <script src="/intercom/settings.js" />
-      <script src="/intercom/init.js" />
+      <Script src="/js/uswds.js" />
+      <Script src="/js/uswds-init.js" />
+      <Script src="/intercom/settings.js" />
+      <Script src="/intercom/init.js" />
       <DefaultSeo {...SEO} />
 
       <ThemeProvider theme={theme}>

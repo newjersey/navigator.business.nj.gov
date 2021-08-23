@@ -17,7 +17,7 @@ export const Banner = (): ReactElement => {
                 <ul>
                   <li>Governor Phil Murphy &bull; Lt. Governor Sheila Oliver</li>
                   <li>
-                    <a href="https://nj.gov/subscribe/" target="_blank">
+                    <a href="https://nj.gov/subscribe/" target="_blank" rel="noreferrer">
                       <svg
                         className="usa-icon bottom-neg-2px margin-right-05"
                         aria-hidden="true"

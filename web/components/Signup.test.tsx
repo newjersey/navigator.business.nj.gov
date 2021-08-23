@@ -1,7 +1,6 @@
 import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
-import { mockPush } from "@/test/mock/mockRouter";
-import { useMockRouter } from "@/test/mock/mockRouter";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { Signup } from "@/components/Signup";
 
 jest.mock("next/router");

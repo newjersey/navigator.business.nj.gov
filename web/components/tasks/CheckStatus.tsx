@@ -170,14 +170,15 @@ export const CheckStatus = (props: Props): ReactElement => {
         <div className="fdr">
           <LoadingButton
             type="submit"
-            children={LicenseScreenDefaults.submitText}
             onClick={() => {}}
             loading={props.isLoading}
             className="usa-button mla margin-top-4 margin-bottom-8"
             outline={true}
             data-testid="check-status-submit"
             marginClass="spinner-margin-36"
-          />
+          >
+            {LicenseScreenDefaults.submitText}
+          </LoadingButton>
         </div>
       </form>
     </>

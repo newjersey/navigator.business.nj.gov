@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -13,7 +13,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 const Home = (): ReactElement => {
   const { userData, error } = useUserData();
   const router = useRouter();
-  const [signupIsOpen, setSignupIsOpen] = React.useState<boolean>(false);
+  const [signupIsOpen, setSignupIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (userData?.formProgress === "COMPLETED") {
@@ -23,7 +23,7 @@ const Home = (): ReactElement => {
     } else if (userData === undefined && error != undefined) {
       router.replace("/roadmap");
     }
-  }, [userData]);
+  }, [userData, error, router]);
 
   return (
     <PageSkeleton>
