@@ -32,7 +32,7 @@ jobs:
       - name: 🔧 Set up JDK for dynamodb-local
         uses: actions/setup-java@v2
         with:
-          distribution: 'zulu'
+          distribution: "zulu"
           java-version: 13
 
       - name: 🧰 Install npm dependencies
@@ -55,7 +55,7 @@ jobs:
 
       - name: 🧹 Run lint
         run: npm run lint
-      
+
       - name: 🧹 Run prettier
         run: npm run prettier:check
 
@@ -69,14 +69,14 @@ jobs:
         env:
           API_BASE_URL: http://localhost:5000/dev
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
-          LANDING_PAGE_URL: http://localhost:3000/
+          REDIRECT_URL: http://localhost:3000/
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
         with:
           working-directory: web
           start: npm start
-          wait-on: 'http://localhost:3000'
+          wait-on: "http://localhost:3000"
           record: true
         env:
           CYPRESS_API_BASE_URL: http://localhost:5000/dev
@@ -170,7 +170,7 @@ jobs:
           AWS_REGION: us-east-1
           AMPLIFY_ENV: dev
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
-          LANDING_PAGE_URL: ${{ secrets.LANDING_PAGE_URL_DEV }}
+          REDIRECT_URL: ${{ secrets.REDIRECT_URL_DEV }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
 
   deploy-staging:
@@ -249,7 +249,7 @@ jobs:
           AWS_REGION: us-east-1
           AMPLIFY_ENV: staging
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_STAGING }}
-          LANDING_PAGE_URL: ${{ secrets.LANDING_PAGE_URL_STAGING }}
+          REDIRECT_URL: ${{ secrets.REDIRECT_URL_STAGING }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
 
   deploy-prod:
@@ -328,5 +328,5 @@ jobs:
           AWS_REGION: us-east-1
           AMPLIFY_ENV: prod
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_PROD }}
-          LANDING_PAGE_URL: ${{ secrets.LANDING_PAGE_URL_PROD }}
+          REDIRECT_URL: ${{ secrets.REDIRECT_URL_PROD }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}

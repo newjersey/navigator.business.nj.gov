@@ -22,8 +22,8 @@ Amplify.configure({
   oauth: {
     domain: process.env.AUTH_DOMAIN,
     scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
-    redirectSignIn: process.env.LANDING_PAGE_URL,
-    redirectSignOut: process.env.LANDING_PAGE_URL,
+    redirectSignIn: process.env.REDIRECT_URL,
+    redirectSignOut: process.env.REDIRECT_URL,
     responseType: "token",
   },
 });

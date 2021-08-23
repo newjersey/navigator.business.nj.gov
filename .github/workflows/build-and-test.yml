@@ -32,7 +32,7 @@ jobs:
       - name: 🔧 Set up JDK for dynamodb-local
         uses: actions/setup-java@v2
         with:
-          distribution: 'zulu'
+          distribution: "zulu"
           java-version: 13
 
       - name: 🧰 Install npm dependencies
@@ -69,14 +69,14 @@ jobs:
         env:
           API_BASE_URL: http://localhost:5000/dev
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
-          LANDING_PAGE_URL: http://localhost:3000/
+          REDIRECT_URL: http://localhost:3000/
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
         with:
           working-directory: web
           start: npm start
-          wait-on: 'http://localhost:3000'
+          wait-on: "http://localhost:3000"
           record: true
         env:
           CYPRESS_API_BASE_URL: http://localhost:5000/dev
