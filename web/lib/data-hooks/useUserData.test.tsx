@@ -68,20 +68,16 @@ describe("useUserData", () => {
     it("sets error to CACHED_ONLY error when api call fails with cache", async () => {
       const currentUser = generateUser({});
 
-      const resolvedPromise = Promise.resolve(generateUserData({}));
-      mockApi.getUserData.mockReturnValue(resolvedPromise);
+      mockApi.getUserData.mockResolvedValue(generateUserData({}));
       const { update } = setupHook(currentUser);
-      await act(() => resolvedPromise);
 
-      const rejectedPromise = Promise.reject(500);
-      mockApi.getUserData.mockReturnValue(rejectedPromise);
+      mockApi.getUserData.mockRejectedValue(500);
 
       const newUserData = generateUserData({});
       mockApi.postUserData.mockResolvedValue(newUserData);
-      update(newUserData);
+      await act(() => update(newUserData));
 
       const result = setupHook(currentUser);
-      await act(() => rejectedPromise.catch(() => {}));
 
       expect(mockSetError).toHaveBeenCalledWith("CACHED_ONLY");
       expect(result.userData).toEqual(newUserData);
@@ -89,17 +85,12 @@ describe("useUserData", () => {
 
     it("sets error to UPDATE_FAILED error when update function rejects", async () => {
       const currentUser = generateUser({});
-      const rejectedPromise = Promise.reject(400);
-      const resolvedPromise = Promise.resolve(generateUserData({}));
-
-      mockApi.getUserData.mockReturnValue(resolvedPromise);
-      mockApi.postUserData.mockReturnValue(rejectedPromise);
+      mockApi.getUserData.mockResolvedValue(generateUserData({}));
+      mockApi.postUserData.mockRejectedValue(400);
 
       const { update } = setupHook(currentUser);
       const newUserData = generateUserData({});
-      update(newUserData).catch(() => {});
-      await act(() => rejectedPromise.catch(() => {}));
-
+      await act(() => update(newUserData).catch(() => {}));
       expect(mockSetError).toHaveBeenCalledWith("UPDATE_FAILED");
     });
   });
