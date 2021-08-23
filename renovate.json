@@ -15,7 +15,8 @@
     {
       "matchPackageNames": [
         "@types/jest",
-        "ts-jest"
+        "ts-jest",
+        "babel-jest"
       ],
       "matchPackagePrefixes": [
         "jest"
