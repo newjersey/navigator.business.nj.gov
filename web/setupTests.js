@@ -10,3 +10,10 @@ global.Request = window.Request = fetch.Request;
 global.Response = window.Response = fetch.Response;
 global.scrollTo = jest.fn();
 global.gtag = jest.fn();
+
+global.console.warn = (message) => {
+  throw message;
+};
+global.console.error = (message) => {
+  throw message;
+};
