@@ -37,7 +37,7 @@ export const Card = (props: Props): ReactElement => {
         </div>
 
         <div className="usa-card__footer card-footer-padding">
-          <Link href={link}>
+          <Link href={link} passHref>
             <button className={`usa-button usa-button--outline ${buttonClassName || ""}`}>
               {buttonText}
             </button>

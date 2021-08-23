@@ -21,7 +21,7 @@ export const NavSideBarUserSettings = (): ReactElement => {
             </span>
             <ul id="basic-nav-section-one" className="usa-nav__submenu padding-left-4">
               <li className="usa-nav__submenu-item">
-                <Link href={process.env.MYNJ_PROFILE_LINK || ""}>
+                <Link href={process.env.MYNJ_PROFILE_LINK || ""} passHref>
                   <button id="left-nav-button-padding-left-0" className="cursor-pointer">
                     {NavDefaults.myNJAccountText}
                   </button>

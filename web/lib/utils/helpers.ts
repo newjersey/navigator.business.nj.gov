@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Roadmap, Step, Task, UserData } from "@/lib/types/types";
 import { NavDefaults } from "@/display-content/NavDefaults";
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);
 
 export const useOnWindowResize = (fun: () => void): void =>
@@ -19,7 +20,7 @@ export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unk
       effectOccurred.current = true;
       fun();
     }
-  }, [!!thingToBeDefined]);
+  }, [thingToBeDefined, fun]);
 };
 
 export const onEscape = (e: KeyboardEvent, handler: () => void): void => {

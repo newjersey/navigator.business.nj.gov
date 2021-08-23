@@ -12,6 +12,7 @@
     "next",
     "next/router",
     "next/link",
+    "next/script",
     "next/app",
     "@aws-amplify/auth",
     "@aws-amplify/ui-react",

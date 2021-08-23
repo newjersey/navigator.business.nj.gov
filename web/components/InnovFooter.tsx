@@ -17,6 +17,7 @@ export const InnovFooter = (): ReactElement => {
                   href={Footer.linkOne}
                   className="usa-identifier__required-link padding-right-1 footer-link-custom"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   {Footer.linkOneText}
                 </a>
@@ -26,6 +27,7 @@ export const InnovFooter = (): ReactElement => {
                   href={Footer.linkTwo}
                   className="usa-identifier__required-link padding-x-1 footer-link-custom"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   {Footer.linkTwoText}
                 </a>
@@ -35,6 +37,7 @@ export const InnovFooter = (): ReactElement => {
                   href={Footer.linkThree}
                   className="usa-identifier__required-link padding-left-1 footer-link-custom"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   {Footer.linkThreeText}
                 </a>
@@ -50,6 +53,7 @@ export const InnovFooter = (): ReactElement => {
                   href={Footer.officeLink}
                   target="_blank"
                   className="usa-identifier__required-link footer-link-custom"
+                  rel="noreferrer"
                 >
                   {Footer.officeLinkText}
                 </a>
@@ -61,6 +65,7 @@ export const InnovFooter = (): ReactElement => {
                   href={Footer.creditLink}
                   target="_blank"
                   className="usa-identifier__required-link footer-link-custom"
+                  rel="noreferrer"
                 >
                   {Footer.creditLinkText}
                 </a>
@@ -82,10 +87,10 @@ export const InnovFooter = (): ReactElement => {
             </div>
 
             <div className="usa-identifier__logos margin-right-none">
-              <a href={Footer.gitHubLink} className="usa-identifier__logo" target="_blank">
+              <a href={Footer.gitHubLink} className="usa-identifier__logo" target="_blank" rel="noreferrer">
                 <Icon className="icon-custom margin-top-1">github</Icon>
               </a>
-              <a href={Footer.twitterLink} className="usa-identifier__logo" target="_blank">
+              <a href={Footer.twitterLink} className="usa-identifier__logo" target="_blank" rel="noreferrer">
                 <Icon className="icon-custom margin-top-1">twitter</Icon>
               </a>
             </div>

@@ -1,4 +1,13 @@
-import React, { FormEvent, ReactElement, ReactNode, useContext, useEffect, useState } from "react";
+import React, {
+  FormEvent,
+  ReactElement,
+  ReactNode,
+  createContext,
+  useContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
@@ -49,7 +58,7 @@ interface OnboardingContextType {
   onBack: () => void;
 }
 
-export const OnboardingContext = React.createContext<OnboardingContextType>({
+export const OnboardingContext = createContext<OnboardingContextType>({
   state: {
     page: 1,
     onboardingData: createEmptyOnboardingData(),
@@ -84,14 +93,17 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   }, [userData]);
 
-  const queryShallowPush = (page: number) =>
-    router.push(
-      {
-        query: { page: page },
-      },
-      undefined,
-      { shallow: true }
-    );
+  const queryShallowPush = useCallback(
+    (page: number) =>
+      router.push(
+        {
+          query: { page: page },
+        },
+        undefined,
+        { shallow: true }
+      ),
+    [router]
+  );
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -112,7 +124,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     } else {
       router.push("/onboarding?page=1");
     }
-  }, [router.isReady]);
+  }, [router.isReady, router, queryShallowPush]);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();

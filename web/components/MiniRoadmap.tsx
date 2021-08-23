@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 import { MiniRoadmapTask } from "@/components/MiniRoadmapTask";
@@ -13,19 +13,20 @@ interface Props {
 
 export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
+  const getActiveStepId = useCallback(
+    () => roadmap?.steps.find((step) => step.tasks.map((it) => it.id).includes(props.activeTaskId))?.id,
+    [props.activeTaskId, roadmap?.steps]
+  );
   const [activeStepId, setActiveStepId] = useState<string | undefined>(getActiveStepId());
   const [openSteps, setOpenSteps] = useState<string[]>([]);
   const { userData } = useUserData();
-
-  function getActiveStepId(): string | undefined {
-    return roadmap?.steps.find((step) => step.tasks.map((it) => it.id).includes(props.activeTaskId))?.id;
-  }
+  const roadmapExists = !!roadmap;
 
   useEffect(() => {
     const activeStep = getActiveStepId();
     setActiveStepId(activeStep);
     setOpenSteps(activeStep ? [activeStep] : []);
-  }, [props.activeTaskId, !!roadmap]);
+  }, [props.activeTaskId, roadmapExists, getActiveStepId]);
 
   const toggleStep = (stepId: string): void => {
     analytics.event.task_mini_roadmap_step.click.expand_contract();

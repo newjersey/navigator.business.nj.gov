@@ -154,12 +154,13 @@ export const Signup = (props: Props): ReactElement => {
           </button>
           <LoadingButton
             type="submit"
-            children={SelfRegDefaults.submitButtonText}
             onClick={submitSelfReg}
             loading={isLoading}
             marginClass="spinner-margin-36"
             data-testid="submit-selfreg"
-          />
+          >
+            {SelfRegDefaults.submitButtonText}
+          </LoadingButton>
         </div>
       </DialogActions>
     </Dialog>

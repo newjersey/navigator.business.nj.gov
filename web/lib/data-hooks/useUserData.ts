@@ -10,15 +10,17 @@ export const useUserData = (): UseUserDataResponse => {
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
   const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData);
 
+  const dataExists = !!data;
+
   useEffect(() => {
-    if (error && data) {
+    if (error && dataExists) {
       setUserDataError("CACHED_ONLY");
-    } else if (error && !data) {
+    } else if (error && !dataExists) {
       setUserDataError("NO_DATA");
     } else if (!error && userDataError !== "UPDATE_FAILED") {
       setUserDataError(undefined);
     }
-  }, [userDataError, JSON.stringify(data), error]);
+  }, [userDataError, dataExists, error, setUserDataError]);
 
   const update = async (newUserData: UserData | undefined): Promise<void> => {
     if (newUserData) {
