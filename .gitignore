@@ -60,3 +60,6 @@ api/jspm_packages
 api/.serverless
 api/.webpack
 api/.dynamodb
+
+# IDE settings
+.vscode
