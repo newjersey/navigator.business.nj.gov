@@ -2,6 +2,7 @@ import { Request, Router } from "express";
 import { createEmptyUserData, UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
+import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -95,8 +96,8 @@ export const userRouterFactory = (
   });
 
   const shouldCheckLicense = (userData: UserData): boolean =>
-    userData.onboardingData.industry !== undefined &&
     userData.licenseData !== undefined &&
+    industryHasALicenseType(userData.onboardingData.industry) &&
     hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus);
 
   const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>

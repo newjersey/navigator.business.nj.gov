@@ -10,3 +10,7 @@ export const convertIndustryToLicenseType = (industry: Industry | undefined): st
 
   throw `${industry} does not have a license type`;
 };
+
+export const industryHasALicenseType = (industry: Industry | undefined): boolean => {
+  return industry === "cosmetology" || industry === "home-contractor";
+};
