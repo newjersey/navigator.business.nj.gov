@@ -1,6 +1,9 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    "prConcurrentLimit:10",
+    "stabilityDays:5",
+    "prCreation:not-pending"
   ],
   "packageRules": [
     {
