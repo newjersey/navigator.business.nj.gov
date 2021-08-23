@@ -67,6 +67,14 @@ describe("userRouter", () => {
       expect(response.body).toEqual(userData);
     });
 
+    it("returns a 404 when a user isn't registered", async () => {
+      stubUserDataClient.get.mockImplementation(() => Promise.reject("Not found"));
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+      expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
+      expect(response.status).toEqual(404);
+    });
+
     it("returns a 403 when user JWT does not match user ID", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "other-user-id" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer other-user-token");
