@@ -1,17 +1,17 @@
-import { Request, Router } from "express";
-import { UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
+import { Request, Response, Router } from "express";
+import { createEmptyUserData, UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
-import { offlineAutoReg } from "./selfRegRouter";
-export const getTokenFromHeader = (req: Request): string => {
+
+const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
     return req.headers.authorization.split(" ")[1];
   }
   throw new Error("Auth header missing");
 };
 
-export type CognitoJWTPayload = {
+type CognitoJWTPayload = {
   sub: string;
   "custom:myNJUserKey": string;
   email: string;
@@ -57,7 +57,7 @@ export const userRouterFactory = (
       .catch((error) => {
         if (error === "Not found") {
           if (process.env.IS_OFFLINE) {
-            offlineAutoReg(req, res, userDataClient, signedInUserId);
+            saveEmptyUserData(req, res, signedInUserId);
           } else {
             res.status(404).json({ error });
           }
@@ -91,6 +91,24 @@ export const userRouterFactory = (
 
   const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>
     dayjs(lastCheckedDate).isBefore(dayjs().subtract(1, "hour"));
+
+  const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
+    const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+    const emptyUserData = createEmptyUserData({
+      myNJUserKey: signedInUserId,
+      email: signedInUser.email,
+      id: signedInUserId,
+      name: "Test User",
+    });
+    userDataClient
+      .put(emptyUserData)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
+  };
 
   return router;
 };

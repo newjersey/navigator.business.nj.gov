@@ -1,8 +1,7 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import { createEmptyUserData, SelfRegClient, UserData, UserDataClient } from "../domain/types";
 import { v4 as uuidv4 } from "uuid";
-import jwt from "jsonwebtoken";
-import { getTokenFromHeader, CognitoJWTPayload } from "./userRouter";
+
 export const selfRegRouterFactory = (
   userDataClient: UserDataClient,
   selfRegClient: SelfRegClient
@@ -60,29 +59,4 @@ export const selfRegRouterFactory = (
   };
 
   return router;
-};
-
-// Auto Register users, used in the local development environment
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const offlineAutoReg = async (
-  req: Request,
-  res: Response,
-  userDataClient: UserDataClient,
-  signedInUserId: string
-) => {
-  const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
-  const emptyUserData = createEmptyUserData({
-    myNJUserKey: signedInUserId,
-    email: signedInUser.email,
-    id: signedInUserId,
-    name: "",
-  });
-  userDataClient
-    .put(emptyUserData)
-    .then((result) => {
-      res.json(result);
-    })
-    .catch((error) => {
-      res.status(500).json({ error });
-    });
 };
