@@ -1,12 +1,15 @@
 import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
-import { useMediaQuery } from "@material-ui/core";
 import * as materialUi from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
 import TaskPage from "@/pages/tasks/[urlSlug]";
 import { Task, TaskProgress, UserData } from "@/lib/types/types";
-import { generateTask, generateUserData } from "@/test/factories";
-import { mockUpdate, useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { generateOnboardingData, generateTask, generateUserData } from "@/test/factories";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import { getLastCalledWith } from "@/test/helpers";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -24,7 +27,12 @@ const setLargeScreen = (): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => true);
 };
 
-const renderPage = (task: Task): RenderResult => render(<TaskPage task={task} />);
+const renderPage = (task: Task, initialUserData?: UserData): RenderResult =>
+  render(
+    <WithStatefulUserData initialUserData={initialUserData}>
+      <TaskPage task={task} />
+    </WithStatefulUserData>
+  );
 
 describe("task page", () => {
   let subject: RenderResult;
@@ -33,7 +41,7 @@ describe("task page", () => {
     jest.resetAllMocks();
     setLargeScreen();
     useMockRoadmap({});
-    useMockUserData({});
+    setupStatefulUserDataContext();
   });
 
   it("shows the task details", () => {
@@ -108,8 +116,7 @@ describe("task page", () => {
   });
 
   it("displays Not Started status when user data does not contain status", () => {
-    useMockUserData({ taskProgress: {} });
-    subject = renderPage(generateTask({}));
+    subject = renderPage(generateTask({}), generateUserData({ taskProgress: {} }));
 
     expect(subject.getAllByText("Not started")[0]).toBeVisible();
   });
@@ -120,9 +127,7 @@ describe("task page", () => {
       "some-id": "COMPLETED",
       [taskId]: "IN_PROGRESS",
     };
-    useMockUserData({ taskProgress });
-    subject = renderPage(generateTask({ id: taskId }));
-
+    subject = renderPage(generateTask({ id: taskId }), generateUserData({ taskProgress }));
     expect(subject.getAllByText("In progress")[0]).toBeVisible();
   });
 
@@ -132,19 +137,14 @@ describe("task page", () => {
       "some-id": "COMPLETED",
     };
 
-    const userData = generateUserData({ taskProgress });
-    useMockUserData(userData);
-    subject = renderPage(generateTask({ id: taskId }));
+    subject = renderPage(generateTask({ id: taskId }), generateUserData({ taskProgress }));
 
     fireEvent.click(subject.getAllByText("Not started")[0]);
     fireEvent.click(subject.getByText("In progress"));
     expect(subject.getAllByText("In progress")[0]).toBeVisible();
-    expect(mockUpdate).toHaveBeenCalledWith({
-      ...userData,
-      taskProgress: {
-        "some-id": "COMPLETED",
-        [taskId]: "IN_PROGRESS",
-      },
+    expect(currentUserData().taskProgress).toEqual({
+      "some-id": "COMPLETED",
+      [taskId]: "IN_PROGRESS",
     });
   });
 
@@ -155,14 +155,18 @@ describe("task page", () => {
   });
 
   it("loads License task screen for apply-for-shop-license", () => {
-    useMockUserData({ licenseData: undefined });
-    subject = renderPage(generateTask({ id: "apply-for-shop-license" }));
+    subject = renderPage(
+      generateTask({ id: "apply-for-shop-license" }),
+      generateUserData({ licenseData: undefined })
+    );
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for register-consumer-affairs", () => {
-    useMockUserData({ licenseData: undefined });
-    subject = renderPage(generateTask({ id: "register-consumer-affairs" }));
+    subject = renderPage(
+      generateTask({ id: "register-consumer-affairs" }),
+      generateUserData({ licenseData: undefined })
+    );
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
@@ -172,39 +176,24 @@ describe("task page", () => {
     expect(subject.getByTestId("construction-renovation-radio-btn")).toBeInTheDocument();
   });
 
-  it("displays construction content when userdata = true and updates from radio button click", async () => {
-    useMockOnboardingData({ constructionRenovationPlan: true });
-    subject = renderPage(generateTask({ id: "check-local-requirements" }));
+  it("toggles radio button for construction content", async () => {
+    const initialUserData = generateUserData({
+      onboardingData: generateOnboardingData({ constructionRenovationPlan: undefined }),
+    });
+    subject = renderPage(generateTask({ id: "check-local-requirements" }), initialUserData);
+
     await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
-    expect(subject.getByTestId("construction-renovation-content")).toBeInTheDocument();
     expect(subject.queryByTestId("construction-renovation-no-action-content")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("construction-renovation-content")).not.toBeInTheDocument();
+
+    fireEvent.click(subject.getByTestId("construction-radio-true"));
+    expect(subject.queryByTestId("construction-renovation-no-action-content")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("construction-renovation-content")).toBeInTheDocument();
+    expect(currentUserData().onboardingData.constructionRenovationPlan).toBe(true);
 
     fireEvent.click(subject.getByTestId("construction-radio-false"));
-    const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
-    expect(updatedUserData.onboardingData.constructionRenovationPlan).toBe(false);
-  });
-
-  it("hides construction content when userdata = undefined and updates from radio button click", async () => {
-    useMockOnboardingData({ constructionRenovationPlan: undefined });
-    subject = renderPage(generateTask({ id: "check-local-requirements" }));
-    await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
-    expect(subject.queryByTestId("construction-renovation-content")).not.toBeInTheDocument();
-    expect(subject.queryByTestId("construction-renovation-no-action-content")).not.toBeInTheDocument();
-
-    fireEvent.click(subject.getByTestId("construction-radio-true"));
-    const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
-    expect(updatedUserData.onboardingData.constructionRenovationPlan).toBe(true);
-  });
-
-  it("displays no work needed content when userdata = false and updates from radio button click", async () => {
-    useMockOnboardingData({ constructionRenovationPlan: false });
-    subject = renderPage(generateTask({ id: "check-local-requirements" }));
-    await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
     expect(subject.queryByTestId("construction-renovation-no-action-content")).toBeInTheDocument();
     expect(subject.queryByTestId("construction-renovation-content")).not.toBeInTheDocument();
-
-    fireEvent.click(subject.getByTestId("construction-radio-true"));
-    const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
-    expect(updatedUserData.onboardingData.constructionRenovationPlan).toBe(true);
+    expect(currentUserData().onboardingData.constructionRenovationPlan).toBe(false);
   });
 });

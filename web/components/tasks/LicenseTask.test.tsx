@@ -1,5 +1,12 @@
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { act, fireEvent, render, RenderResult, waitForElementToBeRemoved } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  RenderResult,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
 import {
   generateLicenseData,
@@ -20,7 +27,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 describe("<LicenseTask />", () => {
   let subject: RenderResult;
   const task = generateTask({});
-  const initialUserData = generateUserData({ licenseData: undefined });
+  const initialUserData = generateUserData({ licenseData: generateLicenseData({}) });
 
   const renderTask = (): RenderResult => render(<LicenseTask task={task} />);
 
@@ -46,11 +53,13 @@ describe("<LicenseTask />", () => {
 
   describe("starting tab", () => {
     it("shows content on first tab", () => {
+      useMockUserData({ licenseData: undefined });
       subject = renderTask();
       expect(subject.getByText(task.contentMd)).toBeInTheDocument();
     });
 
-    it("starts on application tab when no licenseSearch data and visits status tab by clicking secondary button", () => {
+    it("starts on application tab when no licenseData and visits status tab by clicking secondary button", () => {
+      useMockUserData({ licenseData: undefined });
       subject = renderTask();
       expect(subject.queryByTestId("business-name")).not.toBeInTheDocument();
 
@@ -129,13 +138,7 @@ describe("<LicenseTask />", () => {
     });
 
     it("fills and saves form values and submits license status search with industry", async () => {
-      const userData = generateUserData({
-        onboardingData: generateOnboardingData({ industry: "home-contractor" }),
-      });
-      useMockUserData(userData);
-
-      const returnedPromise = Promise.resolve(generateUserData({}));
-      mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
+      mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
       subject = renderTask();
 
       fillText("business-name", "My Cool Nail Salon");
@@ -144,73 +147,44 @@ describe("<LicenseTask />", () => {
       fillText("zipcode", "12345");
 
       fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => returnedPromise);
 
-      expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith({
-        name: "My Cool Nail Salon",
-        addressLine1: "123 Main St",
-        addressLine2: "Suite 1",
-        zipCode: "12345",
-      });
-    });
-
-    it("fills and saves form values when failed", async () => {
-      const returnedPromise = Promise.reject();
-      mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
-      subject = renderTask();
-
-      fireEvent.click(subject.getByTestId("cta-secondary"));
-      fillText("business-name", "My Cool Nail Salon");
-      fillText("address-1", "123 Main St");
-      fillText("address-2", "Suite 1");
-      fillText("zipcode", "12345");
-
-      fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => returnedPromise.catch(() => {}));
+      await waitFor(() =>
+        expect(mockApi.checkLicenseStatus).toHaveBeenCalledWith({
+          name: "My Cool Nail Salon",
+          addressLine1: "123 Main St",
+          addressLine2: "Suite 1",
+          zipCode: "12345",
+        })
+      );
     });
 
     it("displays error alert when license status cannot be found", async () => {
-      useMockUserData({});
       subject = renderTask();
       expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
 
-      const rejectedPromise = Promise.reject(404);
-      mockApi.checkLicenseStatus.mockReturnValue(rejectedPromise);
+      mockApi.checkLicenseStatus.mockRejectedValue(404);
       fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => rejectedPromise.catch(() => {}));
+      await waitFor(() => expect(subject.queryByTestId("error-alert-NOT_FOUND")).toBeInTheDocument());
 
-      expect(subject.queryByTestId("error-alert-NOT_FOUND")).toBeInTheDocument();
-
-      const resolvedPromise = Promise.resolve(generateUserData({}));
-      mockApi.checkLicenseStatus.mockReturnValue(resolvedPromise);
+      mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
       fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => resolvedPromise.catch(() => {}));
-
-      expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
+      await waitFor(() => expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument());
     });
 
     it("displays error alert when license status search fails", async () => {
-      useMockUserData({});
       subject = renderTask();
       expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
 
-      const rejectedPromise = Promise.reject(500);
-      mockApi.checkLicenseStatus.mockReturnValue(rejectedPromise);
+      mockApi.checkLicenseStatus.mockRejectedValue(500);
       fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => rejectedPromise.catch(() => {}));
+      await waitFor(() => expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument());
 
-      expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
-
-      const resolvedPromise = Promise.resolve(generateUserData({}));
-      mockApi.checkLicenseStatus.mockReturnValue(resolvedPromise);
+      mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
       fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => resolvedPromise.catch(() => {}));
-
-      expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+      await waitFor(() => expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument());
     });
 
     it("displays error alert when some information is missing", async () => {
-      useMockUserData({});
       subject = renderTask();
       expect(subject.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
 
@@ -230,8 +204,6 @@ describe("<LicenseTask />", () => {
     });
 
     it("displays the loading spinner while request is being made", async () => {
-      useMockUserData(generateUserData({}));
-
       const returnedPromise = Promise.resolve(generateUserData({}));
       mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
       subject = renderTask();
@@ -250,8 +222,6 @@ describe("<LicenseTask />", () => {
     });
 
     it("displays the loading spinner while failed request is being made", async () => {
-      useMockUserData(generateUserData({}));
-
       const returnedPromise = Promise.reject(404);
       mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
       subject = renderTask();
@@ -265,17 +235,15 @@ describe("<LicenseTask />", () => {
       fireEvent.submit(subject.getByTestId("check-status-submit"));
       expect(subject.queryByTestId("loading-spinner")).toBeInTheDocument();
       await act(() => returnedPromise.catch(() => {}));
-
       expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
     });
   });
 
   describe("receipt screen", () => {
     it("displays license status results when it is found", async () => {
-      useMockUserData({});
       subject = renderTask();
 
-      const returnedPromise = Promise.resolve(
+      mockApi.checkLicenseStatus.mockResolvedValue(
         generateUserData({
           licenseData: generateLicenseData({
             items: [
@@ -285,12 +253,9 @@ describe("<LicenseTask />", () => {
           }),
         })
       );
-      mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
 
       fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => returnedPromise);
-
-      expect(subject.getByText("application fee")).toBeInTheDocument();
+      await waitFor(() => expect(subject.getByText("application fee")).toBeInTheDocument());
       expect(subject.getByText("board approval")).toBeInTheDocument();
       expect(subject.getByTestId("permit-PENDING")).toBeInTheDocument();
       expect(subject.getByTestId("item-PENDING")).toBeInTheDocument();
@@ -317,17 +282,13 @@ describe("<LicenseTask />", () => {
     });
 
     it("edits info on receipt screen", async () => {
-      useMockUserData({});
       subject = renderTask();
 
       fillText("business-name", "Some business");
-      const returnedPromise = Promise.resolve(generateUserData({}));
-      mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
+      mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
 
       fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await act(() => returnedPromise);
-
-      fireEvent.click(subject.getByTestId("edit-button"));
+      await waitFor(() => fireEvent.click(subject.getByTestId("edit-button")));
       fillText("business-name", "Some Other Business");
     });
   });

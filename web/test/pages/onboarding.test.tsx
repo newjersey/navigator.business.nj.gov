@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import {
-  act,
   fireEvent,
   render,
   RenderResult,
+  waitFor,
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
@@ -21,14 +19,19 @@ import {
   createEmptyUserData,
   Industry,
   LegalStructure,
+  Municipality,
+  OnboardingDisplayContent,
   Roadmap,
   UserData,
 } from "@/lib/types/types";
-import * as mockUseUserData from "@/test/mock/mockUseUserData";
 import * as mockRouter from "@/test/mock/mockRouter";
-import { mockUpdate, useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { getLastCalledWith, withRoadmap } from "@/test/helpers";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -41,15 +44,31 @@ describe("onboarding", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     emptyUserData = createEmptyUserData(generateUser({}));
-    useMockUserData(emptyUserData);
     useMockRouter({});
-    mockUpdate.mockResolvedValue({});
+    setupStatefulUserDataContext();
   });
 
-  it("changes url pathname every time a user goes to a different page", async () => {
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+  const renderPage = ({
+    municipalities,
+    displayContent,
+    userData,
+  }: {
+    municipalities?: Municipality[];
+    displayContent?: OnboardingDisplayContent;
+    userData?: UserData;
+  }): RenderResult => {
+    return render(
+      <WithStatefulUserData initialUserData={userData || emptyUserData}>
+        <Onboarding
+          displayContent={displayContent || createEmptyOnboardingDisplayContent()}
+          municipalities={municipalities || []}
+        />
+      </WithStatefulUserData>
     );
+  };
+
+  it("changes url pathname every time a user goes to a different page", async () => {
+    subject = renderPage({});
     expect(subject.getByTestId("step-1")).toBeInTheDocument();
 
     await visitStep2();
@@ -68,33 +87,25 @@ describe("onboarding", () => {
 
   it("displays the specific page when directly visited by a user", async () => {
     useMockRouter({ isReady: true, query: { page: "3" } });
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
+    subject = renderPage({});
     expect(subject.getByTestId("step-3")).toBeInTheDocument();
   });
 
   it("displays page one when a user goes to /onboarding", async () => {
     mockRouter.mockQuery.mockReturnValue({});
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
+    subject = renderPage({});
     expect(subject.getByTestId("step-1")).toBeInTheDocument();
   });
 
   it("pushes to page one when a user visits a page number above the valid page range", async () => {
     useMockRouter({ isReady: true, query: { page: "5" } });
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
+    subject = renderPage({});
     expect(subject.getByTestId("step-1")).toBeInTheDocument();
   });
 
   it("pushes to page one when a user visits a page number below the valid page range", async () => {
     useMockRouter({ isReady: true, query: { page: "0" } });
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
+    subject = renderPage({});
     expect(subject.getByTestId("step-1")).toBeInTheDocument();
   });
 
@@ -110,11 +121,7 @@ describe("onboarding", () => {
       }),
     });
 
-    useMockUserData(userData);
-
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
+    subject = renderPage({ userData });
     expect(getBusinessNameValue()).toEqual("Applebees");
 
     await visitStep2();
@@ -129,55 +136,26 @@ describe("onboarding", () => {
 
   it("updates the user data after each form page", async () => {
     const initialUserData = createEmptyUserData(generateUser({}));
-    const promise = Promise.resolve();
-    mockUpdate.mockReturnValue(promise);
-    useMockUserData(initialUserData);
-
     const newark = generateMunicipality({ displayName: "Newark" });
-
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[newark]} />
-    );
+    subject = renderPage({ userData: initialUserData, municipalities: [newark] });
 
     fillText("Business name", "Cool Computers");
     await visitStep2();
-    expect(mockUpdate).toHaveBeenLastCalledWith({
-      ...initialUserData,
-      onboardingData: {
-        ...initialUserData.onboardingData,
-        businessName: "Cool Computers",
-      },
-    });
+    expect(currentUserData().onboardingData.businessName).toEqual("Cool Computers");
 
     selectByValue("Industry", "e-commerce");
     await visitStep3();
-    expect(mockUpdate).toHaveBeenLastCalledWith({
-      ...initialUserData,
-      onboardingData: {
-        ...initialUserData.onboardingData,
-        businessName: "Cool Computers",
-        industry: "e-commerce",
-        homeBasedBusiness: true,
-      },
-    });
+    expect(currentUserData().onboardingData.industry).toEqual("e-commerce");
+    expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
 
     chooseRadio("general-partnership");
     await visitStep4();
-    expect(mockUpdate).toHaveBeenLastCalledWith({
-      ...initialUserData,
-      onboardingData: {
-        ...initialUserData.onboardingData,
-        businessName: "Cool Computers",
-        industry: "e-commerce",
-        homeBasedBusiness: true,
-        legalStructure: "general-partnership",
-      },
-    });
+    expect(currentUserData().onboardingData.legalStructure).toEqual("general-partnership");
 
     selectByText("Location", "Newark");
     clickNext();
-    await act(() => promise);
-    expect(mockUpdate).toHaveBeenLastCalledWith({
+    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+    expect(currentUserData()).toEqual({
       ...initialUserData,
       formProgress: "COMPLETED",
       onboardingData: {
@@ -189,20 +167,17 @@ describe("onboarding", () => {
         municipality: newark,
       },
     });
-    expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap");
   });
 
   it("builds and sets roadmap after each step", async () => {
     const onboardingData = generateOnboardingData({});
-    useMockOnboardingData(onboardingData);
-    const promise = Promise.resolve();
-    mockUpdate.mockReturnValue(promise);
-
     const mockSetRoadmap = jest.fn();
 
     subject = render(
       withRoadmap(
-        <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />,
+        <WithStatefulUserData initialUserData={generateUserData({ onboardingData })}>
+          <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+        </WithStatefulUserData>,
         undefined,
         mockSetRoadmap
       )
@@ -216,17 +191,13 @@ describe("onboarding", () => {
     expect(mockSetRoadmap).toHaveBeenCalledTimes(3);
 
     clickNext();
-    await act(() => promise);
-
-    expect(mockSetRoadmap).toHaveBeenCalledTimes(4);
+    await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(4));
     const builtRoadmap = getLastCalledWith(mockSetRoadmap)[0] as Roadmap;
     expect(builtRoadmap.type).toEqual(onboardingData.industry);
   });
 
   it("prevents user from moving after Step 3 if you have not selected a legal structure", async () => {
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
+    subject = renderPage({});
     await visitStep2();
     await visitStep3();
     clickNext();
@@ -238,14 +209,8 @@ describe("onboarding", () => {
   });
 
   it("prevents user from moving after Step 4 if you have not selected a location", async () => {
-    const promise = Promise.resolve();
-    mockUpdate.mockReturnValue(promise);
-
     const newark = generateMunicipality({ displayName: "Newark" });
-
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[newark]} />
-    );
+    subject = renderPage({ municipalities: [newark] });
 
     await visitStep2();
     await visitStep3();
@@ -255,16 +220,14 @@ describe("onboarding", () => {
     expect(subject.getByTestId("step-4")).toBeInTheDocument();
     expect(subject.getByTestId("error-alert-REQUIRED_MUNICIPALITY")).toBeInTheDocument();
     selectByText("Location", "Newark");
-
     clickNext();
-    await act(() => promise);
-    expect(subject.queryByTestId("error-alert-REQUIRED_MUNICIPALITY")).not.toBeInTheDocument();
+    await waitFor(() =>
+      expect(subject.queryByTestId("error-alert-REQUIRED_MUNICIPALITY")).not.toBeInTheDocument()
+    );
   });
 
   it("removes required fields error when user goes back", async () => {
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
+    subject = renderPage({});
     await visitStep2();
     await visitStep3();
     clickNext();
@@ -275,10 +238,7 @@ describe("onboarding", () => {
   });
 
   it("is able to go back", async () => {
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
-
+    subject = renderPage({});
     fillText("Business name", "Cool Computers");
     await visitStep2();
     clickBack();
@@ -289,7 +249,7 @@ describe("onboarding", () => {
     const displayContent = createEmptyOnboardingDisplayContent();
     displayContent.industry.specificHomeContractorMd = "Learn more about home contractors!";
 
-    subject = render(<Onboarding displayContent={displayContent} municipalities={[]} />);
+    subject = renderPage({ displayContent });
     await visitStep2();
 
     expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
@@ -307,7 +267,7 @@ describe("onboarding", () => {
       radioButtonNoText: "Nah",
     };
 
-    subject = render(<Onboarding displayContent={displayContent} municipalities={[]} />);
+    subject = renderPage({ displayContent });
     await visitStep2();
 
     expect(subject.queryByText("Do you need a liquor license?")).not.toBeInTheDocument();
@@ -316,21 +276,12 @@ describe("onboarding", () => {
     chooseRadio("true");
     await visitStep3();
 
-    expect(mockUseUserData.mockUpdate).toHaveBeenLastCalledWith({
-      ...emptyUserData,
-      onboardingData: {
-        ...emptyUserData.onboardingData,
-        industry: "restaurant",
-        liquorLicense: true,
-      },
-    });
+    expect(currentUserData().onboardingData.liquorLicense).toEqual(true);
   });
 
   it("displays home-based business question for applicable industries on municipality page", async () => {
-    const displayContent = createEmptyOnboardingDisplayContent();
-    const promise = Promise.resolve();
-    mockUpdate.mockReturnValue(promise);
     const newark = generateMunicipality({ displayName: "Newark" });
+    const displayContent = createEmptyOnboardingDisplayContent();
 
     displayContent.industry.specificHomeBasedBusinessQuestion = {
       contentMd: "Are you a home-based business?",
@@ -338,9 +289,8 @@ describe("onboarding", () => {
       radioButtonNoText: "Nah",
     };
 
-    subject = render(<Onboarding displayContent={displayContent} municipalities={[newark]} />);
+    subject = renderPage({ displayContent, municipalities: [newark] });
     await visitStep2();
-
     selectByValue("Industry", "home-contractor");
     await visitStep3();
     chooseRadio("general-partnership");
@@ -351,17 +301,14 @@ describe("onboarding", () => {
     chooseRadio("true");
 
     clickNext();
-    await act(() => promise);
-
-    const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
-    expect(updatedUserData.onboardingData.homeBasedBusiness).toEqual(true);
+    await waitFor(() => expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true));
   });
 
   it("does not display home-based business question for non-applicable industries", async () => {
     const displayContent = createEmptyOnboardingDisplayContent();
     displayContent.industry.specificHomeBasedBusinessQuestion.contentMd = "Are you a home-based business?";
 
-    subject = render(<Onboarding displayContent={displayContent} municipalities={[]} />);
+    subject = renderPage({ displayContent });
     await visitStep2();
     selectByValue("Industry", "restaurant");
     await visitStep3();
@@ -372,54 +319,43 @@ describe("onboarding", () => {
   });
 
   it("sets liquor license back to false if they select a different industry", async () => {
-    subject = render(
-      <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-    );
+    subject = renderPage({});
     await visitStep2();
     selectByValue("Industry", "restaurant");
     chooseRadio("true");
+    await visitStep3();
+    expect(currentUserData().onboardingData.liquorLicense).toEqual(true);
 
+    clickBack();
     selectByValue("Industry", "cosmetology");
     await visitStep3();
-
-    expect(mockUseUserData.mockUpdate).toHaveBeenLastCalledWith({
-      ...emptyUserData,
-      onboardingData: {
-        ...emptyUserData.onboardingData,
-        industry: "cosmetology",
-        liquorLicense: false,
-      },
-    });
+    expect(currentUserData().onboardingData.liquorLicense).toEqual(false);
   });
 
   describe("updates to industry affecting home-based business", () => {
-    beforeEach(() => {
-      useMockUserData(createEmptyUserData(generateUser({})));
-      subject = render(
-        <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
-      );
-    });
-
     it("sets home-based business back to false if they select a non-applicable industry", async () => {
+      subject = renderPage({});
       await selectInitialIndustry("home-contractor");
-      expect(homeBasedBusinessValue()).toEqual(true);
+      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
       await reselectNewIndustry("restaurant");
-      expect(homeBasedBusinessValue()).toEqual(false);
+      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(false);
     });
 
     it("sets home-based business back to true if they select an applicable industry", async () => {
+      subject = renderPage({});
       await selectInitialIndustry("restaurant");
-      expect(homeBasedBusinessValue()).toEqual(false);
+      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(false);
       await reselectNewIndustry("e-commerce");
-      expect(homeBasedBusinessValue()).toEqual(true);
+      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
     });
 
     it("keeps home-based business value if they select a different but still applicable industry", async () => {
+      subject = renderPage({});
       await selectInitialIndustry("e-commerce");
-      expect(homeBasedBusinessValue()).toEqual(true);
+      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
       await selectHomeBasedBusiness("false");
       await reselectNewIndustry("home-contractor");
-      expect(homeBasedBusinessValue()).toEqual(false);
+      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(false);
     });
 
     const selectInitialIndustry = async (industry: string): Promise<void> => {
@@ -439,11 +375,6 @@ describe("onboarding", () => {
       clickBack();
       selectByValue("Industry", industry);
       await visitStep3();
-    };
-
-    const homeBasedBusinessValue = (): boolean => {
-      const updatedUserData = getLastCalledWith(mockUpdate)[0] as UserData;
-      return updatedUserData.onboardingData.homeBasedBusiness;
     };
   });
 

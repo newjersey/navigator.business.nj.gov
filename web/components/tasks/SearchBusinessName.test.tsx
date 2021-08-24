@@ -1,4 +1,4 @@
-import { mockUpdate, useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import * as api from "@/lib/api-client/apiClient";
@@ -10,6 +10,11 @@ import {
 } from "@/test/factories";
 import { NameAvailability } from "@/lib/types/types";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -59,23 +64,22 @@ describe("<SearchBusinessName />", () => {
     const userData = generateUserData({
       onboardingData: generateOnboardingData({ businessName: "Best Pizza" }),
     });
-    useMockUserData(userData);
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+
+    setupStatefulUserDataContext();
+    subject = render(
+      <WithStatefulUserData initialUserData={userData}>
+        <SearchBusinessName task={generateTask({})} />)
+      </WithStatefulUserData>
+    );
+
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
 
     fireEvent.click(updateNameButton());
-    expect(mockUpdate).toHaveBeenCalledWith({
-      ...userData,
-      onboardingData: {
-        ...userData.onboardingData,
-        businessName: "Pizza Joint",
-      },
-    });
+    expect(currentUserData().onboardingData.businessName).toEqual("Pizza Joint");
   });
 
   it("removes the update button when clicked and resets when new search is performed", async () => {
-    useMockUserData(generateUserData({}));
     subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
