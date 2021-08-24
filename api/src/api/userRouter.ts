@@ -1,17 +1,17 @@
 import { Request, Router } from "express";
-import { createEmptyUserData, UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
+import { UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
-
-const getTokenFromHeader = (req: Request): string => {
+import { offlineAutoReg } from "./selfRegRouter";
+export const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
     return req.headers.authorization.split(" ")[1];
   }
   throw new Error("Auth header missing");
 };
 
-type CognitoJWTPayload = {
+export type CognitoJWTPayload = {
   sub: string;
   "custom:myNJUserKey": string;
   email: string;
@@ -57,21 +57,7 @@ export const userRouterFactory = (
       .catch((error) => {
         if (error === "Not found") {
           if (process.env.IS_OFFLINE) {
-            const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
-            const emptyUserData = createEmptyUserData({
-              myNJUserKey: signedInUserId,
-              email: signedInUser.email,
-              id: signedInUserId,
-              name: "",
-            });
-            userDataClient
-              .put(emptyUserData)
-              .then((result) => {
-                res.json(result);
-              })
-              .catch(() => {
-                res.status(500).json({ error });
-              });
+            offlineAutoReg(req, res, userDataClient, signedInUserId);
           } else {
             res.status(404).json({ error });
           }
