@@ -1,5 +1,6 @@
 import { BusinessUser } from "@/lib/types/types";
 import { Auth } from "@aws-amplify/auth";
+import axios, { AxiosResponse } from "axios";
 
 type CognitoIdPayload = {
   aud: string;
@@ -24,6 +25,21 @@ type CognitoIdentityPayload = {
   providerName: string;
   providerType: string;
   userId: string;
+};
+
+type CognitoRefreshAuthResult = {
+  AuthenticationResult: {
+    AccessToken: string;
+    ExpiresIn: number;
+    IdToken: string;
+    TokenType: string;
+  };
+};
+
+type CognitoRefreshAuth = {
+  token: string;
+  expires_at: number;
+  identity_id: string;
 };
 
 export const triggerSignOut = async (): Promise<void> => {
@@ -54,4 +70,31 @@ const cognitoPayloadToBusinessUser = (cognitoPayload: CognitoIdPayload): Busines
     id: myNJIdentityPayload?.userId || cognitoPayload.sub,
     email: cognitoPayload.email,
   };
+};
+
+export const refreshToken = async (): Promise<CognitoRefreshAuth> => {
+  const cognitoSession = await Auth.currentSession();
+  const token = cognitoSession.getRefreshToken().getToken();
+  return axios
+    .post(
+      "https://cognito-idp.us-east-1.amazonaws.com/",
+      {
+        ClientId: process.env.COGNITO_WEB_CLIENT_ID,
+        AuthFlow: "REFRESH_TOKEN_AUTH",
+        AuthParameters: { REFRESH_TOKEN: token },
+      },
+      {
+        headers: {
+          "X-Amz-Target": "AWSCognitoIdentityProviderService.InitiateAuth",
+          "Content-Type": "application/x-amz-json-1.1",
+        },
+      }
+    )
+    .then((response: AxiosResponse<CognitoRefreshAuthResult>) => {
+      return {
+        token: response.data.AuthenticationResult.AccessToken,
+        expires_at: response.data.AuthenticationResult.ExpiresIn,
+        identity_id: response.data.AuthenticationResult.IdToken,
+      };
+    });
 };

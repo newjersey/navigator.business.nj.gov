@@ -70,6 +70,7 @@ jobs:
           API_BASE_URL: http://localhost:5000/dev
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
           REDIRECT_URL: http://localhost:3000/
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
@@ -172,6 +173,7 @@ jobs:
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
           REDIRECT_URL: ${{ secrets.REDIRECT_URL_DEV }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
 
   deploy-staging:
     runs-on: ubuntu-latest
@@ -251,6 +253,7 @@ jobs:
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_STAGING }}
           REDIRECT_URL: ${{ secrets.REDIRECT_URL_STAGING }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_STAGING }}
 
   deploy-prod:
     runs-on: ubuntu-latest
@@ -330,3 +333,4 @@ jobs:
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_PROD }}
           REDIRECT_URL: ${{ secrets.REDIRECT_URL_PROD }}
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_PROD }}

@@ -6,6 +6,7 @@ module.exports = {
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
     REDIRECT_URL: process.env.REDIRECT_URL,
     GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
+    COGNITO_WEB_CLIENT_ID: process.env.COGNITO_WEB_CLIENT_ID,
   },
   webpack: (config) => {
     config.module.rules.push({

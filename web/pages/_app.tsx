@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Amplify, Hub } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import awsExports from "../aws-exports";
-import { getCurrentUser } from "@/lib/auth/sessionHelper";
+import { getCurrentUser, refreshToken } from "@/lib/auth/sessionHelper";
 import { Roadmap, UserDataError } from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
@@ -24,7 +24,10 @@ Amplify.configure({
     scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
     redirectSignIn: process.env.REDIRECT_URL,
     redirectSignOut: process.env.REDIRECT_URL,
-    responseType: "token",
+    responseType: "code",
+  },
+  refreshHandlers: {
+    myNJ: refreshToken,
   },
 });
 
