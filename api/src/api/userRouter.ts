@@ -1,5 +1,5 @@
 import { Request, Router } from "express";
-import { UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
+import { createEmptyUserData, UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
@@ -56,7 +56,25 @@ export const userRouterFactory = (
       })
       .catch((error) => {
         if (error === "Not found") {
-          res.status(404).json({ error });
+          if (process.env.IS_OFFLINE) {
+            const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+            const emptyUserData = createEmptyUserData({
+              myNJUserKey: signedInUserId,
+              email: signedInUser.email,
+              id: signedInUserId,
+              name: "",
+            });
+            userDataClient
+              .put(emptyUserData)
+              .then((result) => {
+                res.json(result);
+              })
+              .catch(() => {
+                res.status(500).json({ error });
+              });
+          } else {
+            res.status(404).json({ error });
+          }
         } else {
           res.status(500).json({ error });
         }
