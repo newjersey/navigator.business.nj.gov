@@ -2,8 +2,9 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@material-ui/core";
 import { NavBarLanding } from "@/components/navbar/NavBarLanding";
-import { NavBarLoggedIn } from "@/components/navbar/NavBarLoggedIn";
+import { NavBarLoggedInMobile } from "@/components/navbar/NavBarLoggedInMobile";
 import { Task } from "@/lib/types/types";
+import { NavBarLoggedInDesktop } from "@/components/navbar/NavBarLoggedInDesktop";
 
 type Props = {
   landingPage?: boolean;
@@ -40,9 +41,11 @@ export const NavBar = (props: Props): ReactElement => {
         </>
       )}
 
-      {!landingPage && (
+      {!landingPage && isLargeScreen && <NavBarLoggedInDesktop />}
+
+      {!landingPage && !isLargeScreen && (
         <>
-          <NavBarLoggedIn scrolled={scrolled} isLargeScreen={isLargeScreen} task={task} />
+          <NavBarLoggedInMobile scrolled={scrolled} task={task} />
           <div className={!isLargeScreen && scrolled ? "scrolled-padding-3rem" : ""} />
         </>
       )}
