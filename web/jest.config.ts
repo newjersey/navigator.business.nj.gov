@@ -3,6 +3,7 @@ import type { Config } from "@jest/types";
 export default async (): Promise<Config.InitialOptions> => {
   return {
     setupFilesAfterEnv: ["./setupTests.js"],
+    testEnvironment: "jsdom",
     testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
     moduleNameMapper: {
       "\\.(scss|sass|css)$": "identity-obj-proxy",
