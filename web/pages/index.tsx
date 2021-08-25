@@ -74,7 +74,7 @@ const Home = (): ReactElement => {
       </div>
 
       <SinglePageLayout>
-        <h1 className="text-center font-32 padding-top-8 line-height-205 no-padding-top">
+        <h1 className="text-center font-32 padding-top-9 desktop:padding-top-2 line-height-205">
           {LandingPageDefaults.section3HeaderFirstLineText}
           <span className="display-block display-inline">
             {LandingPageDefaults.section3HeaderSecondLineText}

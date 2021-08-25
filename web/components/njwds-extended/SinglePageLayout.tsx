@@ -11,7 +11,7 @@ export const SinglePageLayout = (props: Props): ReactElement => {
   return (
     <>
       <MobilePageTitle>{props.mobilePageTitle}</MobilePageTitle>
-      <main className="usa-section padding-bottom-15">
+      <main className="usa-section padding-top-0 desktop:padding-top-6 padding-bottom-15">
         <SingleColumnContainer>{props.children}</SingleColumnContainer>
       </main>
     </>

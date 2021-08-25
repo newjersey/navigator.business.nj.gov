@@ -28,7 +28,7 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
         }}
       />
       <div
-        className={`width-100 padding-y-05 usa-navbar margin-bottom-9 ${
+        className={`width-100 padding-y-05 usa-navbar ${
           scrolled ? "scrolled scrolled-transition bg-white" : ""
         }`}
       >

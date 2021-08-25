@@ -18,7 +18,7 @@ const backButton = (
     <a
       href="/roadmap"
       data-back-to-roadmap
-      className="fdr fac"
+      className="usa-link fdr fac margin-top-3 margin-bottom-3 desktop:margin-top-0 desktop:margin-bottom-7"
       onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
     >
       <Icon>arrow_back</Icon> {TaskDefaults.backToRoadmapText}
@@ -31,19 +31,20 @@ export const SidebarPageLayout = ({ children, task }: Props): ReactElement => {
 
   return (
     <>
-      <div className={`usa-section`}>
+      <div className={`usa-section padding-top-0 desktop:padding-top-6`}>
         <div className="grid-container">
           <div className="grid-row grid-gap">
             <div className="usa-layout-docs__sidenav desktop:grid-col-4">
               {isLargeScreen && (
-                <nav aria-label="Secondary navigation" className={`left-nav`}>
-                  <div className="padding-top-2 padding-bottom-2 usa-prose">{backButton}</div>
+                <nav aria-label="Secondary navigation">
+                  {" "}
+                  {backButton}
                   <MiniRoadmap activeTaskId={task.id} />
                 </nav>
               )}
             </div>
             <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs">
-              {!isLargeScreen && <div className="padding-top-2 padding-bottom-2 usa-prose">{backButton}</div>}
+              {!isLargeScreen && <div>{backButton}</div>}
               <div className="border-1px border-base-light usa-prose minh-40 fdc">{children}</div>
             </main>
           </div>

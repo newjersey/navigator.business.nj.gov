@@ -219,7 +219,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     >
       <PageSkeleton>
         <MobilePageTitle>{header()}</MobilePageTitle>
-        <main className="usa-section">
+        <main className="usa-section padding-top-0 desktop:padding-top-8">
           <SingleColumnContainer>
             {isLargeScreen && <h2 className="padding-bottom-4">{header()}</h2>}
             {error && (
