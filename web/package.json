@@ -32,11 +32,11 @@
     "@testing-library/user-event": "13.2.1",
     "airtable": "0.11.1",
     "aws-amplify": "3.4.3",
-    "babel-jest": "26.6.3",
+    "babel-jest": "27.0.6",
     "date-fns": "2.23.0",
     "focus-trap-react": "8.7.1",
     "gray-matter": "4.0.3",
-    "jest": "26.6.3",
+    "jest": "27.0.6",
     "lodash.clonedeep": "4.5.0",
     "maketypes": "1.1.2",
     "next": "11.1.0",
@@ -53,7 +53,7 @@
     "swr": "0.5.7"
   },
   "devDependencies": {
-    "@types/jest": "26.0.24",
+    "@types/jest": "27.0.1",
     "@types/node": "14.17.11",
     "@types/react": "17.0.19",
     "@types/react-swipeable-views": "0.13.1",
