@@ -5,6 +5,7 @@
   "stabilityDays": 2,
   "prConcurrentLimit": 10,
   "prCreation": "not-pending",
+  "labels": ["renovate"],
   "packageRules": [
     {
       "matchPackagePrefixes": [
