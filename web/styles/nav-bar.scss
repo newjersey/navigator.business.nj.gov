@@ -2,10 +2,6 @@
   flex: 1 1 100%;
 }
 
-.white-space-no-wrap {
-  white-space: nowrap;
-}
-
 .nav-padding-x {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -13,10 +9,6 @@
 
 .layer-top {
   z-index: 400;
-}
-
-.cursor-pointer {
-  cursor: pointer;
 }
 
 .text-decoration-none {
@@ -34,8 +26,8 @@
 
 @media (max-width: $sm) {
   .nav-padding-x {
-    padding-left: 0rem;
-    padding-right: 0rem;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -47,6 +39,6 @@
 @media (min-width: $lg) {
   .nav-padding-x {
     padding-left: 1rem;
-    padding-right: 0rem;
+    padding-right: 0;
   }
 }

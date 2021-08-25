@@ -14,7 +14,7 @@ import { getModifiedTaskContent, rswitch } from "@/lib/utils/helpers";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NextSeo } from "next-seo";
 import { TownMercantileLicenseTask } from "@/components/tasks/TownMercantileLicenseTask";
-import { NavBar } from "@/components/NavBar";
+import { NavBar } from "@/components/navbar/NavBar";
 
 interface Props {
   task: Task;

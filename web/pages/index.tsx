@@ -8,7 +8,7 @@ import { LandingPageDefaults } from "@/display-content/LandingPageDefaults";
 import { Signup } from "@/components/Signup";
 import { Card } from "@/components/njwds-extended/Card";
 import { LegalMessage } from "@/components/LegalMessage";
-import { NavBar } from "@/components/NavBar";
+import { NavBar } from "@/components/navbar/NavBar";
 
 const Home = (): ReactElement => {
   const { userData, error } = useUserData();

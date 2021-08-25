@@ -1,14 +1,12 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@material-ui/core";
-import { NavBarLanding } from "@/components/NavBarLanding";
-import { NavBarLoggedIn } from "@/components/NavBarLoggedIn";
+import { NavBarLanding } from "@/components/navbar/NavBarLanding";
+import { NavBarLoggedIn } from "@/components/navbar/NavBarLoggedIn";
 import { Task } from "@/lib/types/types";
 
 type Props = {
   landingPage?: boolean;
-  roadmap?: boolean;
-  urlSlug?: boolean;
   task?: Task;
 };
 
@@ -38,14 +36,14 @@ export const NavBar = (props: Props): ReactElement => {
       {landingPage && (
         <>
           <NavBarLanding isLargeScreen={isLargeScreen} scrolled={scrolled} />
-          <div className={!isLargeScreen && scrolled ? "scrolled-padding-3rem" : ""}></div>
+          <div className={!isLargeScreen && scrolled ? "scrolled-padding-3rem" : ""} />
         </>
       )}
 
       {!landingPage && (
         <>
           <NavBarLoggedIn scrolled={scrolled} isLargeScreen={isLargeScreen} task={task} />
-          <div className={!isLargeScreen && scrolled ? "scrolled-padding-3rem" : ""}></div>
+          <div className={!isLargeScreen && scrolled ? "scrolled-padding-3rem" : ""} />
         </>
       )}
     </>

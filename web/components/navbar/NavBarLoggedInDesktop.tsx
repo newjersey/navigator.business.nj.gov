@@ -2,11 +2,11 @@ import React, { ReactElement } from "react";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthButton } from "@/components/AuthButton";
-import { getUserNameOrEmailIfUserNameIsUndefinedFromUserData } from "@/lib/utils/helpers";
+import { getUserNameOrEmail } from "@/lib/utils/helpers";
 
 export const NavBarLoggedInDesktop = (): ReactElement => {
   const { userData } = useUserData();
-  const userName = getUserNameOrEmailIfUserNameIsUndefinedFromUserData(userData);
+  const userName = getUserNameOrEmail(userData);
 
   return (
     <div className="grid-container">
@@ -17,7 +17,7 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
               <img className="padding-top-1" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
             </div>
             <div className="margin-left-auto flex fac">
-              <span className="white-space-no-wrap padding-right-1">
+              <span className="text-no-wrap padding-right-1">
                 <span>
                   <div className="usa-link text-primary text-bold font-heading-sm text-decoration-none cursor-pointer clear-button flex fac">
                     <Icon className="margin-right-1 usa-icon--size-4">account_circle</Icon>
@@ -25,7 +25,7 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
                   </div>
                 </span>
               </span>
-              <span className="white-space-no-wrap nav-padding-x">
+              <span className="text-no-wrap nav-padding-x">
                 <AuthButton className="usa-link text-primary text-bold font-heading-sm text-decoration-none cursor-pointer clear-button" />
               </span>
             </div>

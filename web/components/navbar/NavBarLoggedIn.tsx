@@ -1,9 +1,9 @@
 import React, { ReactElement, useState } from "react";
 import analytics from "@/lib/utils/analytics";
 import { Icon } from "@/components/njwds/Icon";
-import { FocusTrappedSidebar } from "./FocusTrappedSidebar";
+import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { NavBarLoggedInDesktop } from "./NavBarLoggedInDesktop";
-import { NavSideBarUserSettings } from "@/components/NavSideBarUserSettings";
+import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettings";
 import { MiniRoadmap } from "@/components/MiniRoadmap";
 import { Task } from "@/lib/types/types";
 
@@ -38,6 +38,7 @@ export const NavBarLoggedIn = ({ scrolled, isLargeScreen, task }: Props): ReactE
           >
             <button
               className="left-nav-menu-button radius-0"
+              data-testid="nav-menu-open"
               onClick={() => {
                 analytics.event.mobile_hamburger_icon.click.open_mobile_menu();
                 open();

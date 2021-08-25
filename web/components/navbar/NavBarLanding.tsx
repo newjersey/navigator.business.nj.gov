@@ -28,7 +28,7 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
               />
             </div>
             <div className="margin-left-auto flex fac">
-              <span className="white-space-no-wrap padding-x-105">
+              <span className="text-no-wrap padding-x-105">
                 <button
                   onClick={triggerSignIn}
                   className="usa-link text-primary text-bold font-heading-sm text-decoration-none cursor-pointer clear-button"
@@ -37,7 +37,7 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
                   {NavDefaults.logInButton}
                 </button>
               </span>
-              <span className="white-space-no-wrap nav-padding-x">
+              <span className="text-no-wrap nav-padding-x">
                 <button
                   onClick={() => {
                     setSignupIsOpen(true);

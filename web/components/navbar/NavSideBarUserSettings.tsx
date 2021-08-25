@@ -4,11 +4,11 @@ import { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthButton } from "@/components/AuthButton";
 import Link from "next/link";
-import { getUserNameOrEmailIfUserNameIsUndefinedFromUserData } from "@/lib/utils/helpers";
+import { getUserNameOrEmail } from "@/lib/utils/helpers";
 
 export const NavSideBarUserSettings = (): ReactElement => {
   const { userData } = useUserData();
-  const userName = getUserNameOrEmailIfUserNameIsUndefinedFromUserData(userData);
+  const userName = getUserNameOrEmail(userData);
 
   return (
     <>

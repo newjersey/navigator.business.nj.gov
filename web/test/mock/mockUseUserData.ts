@@ -10,6 +10,10 @@ export const useMockUserData = (overrides: Partial<UserData>): void => {
   setMockUserDataResponse({ userData: generateUserData(overrides) });
 };
 
+export const useUndefinedUserData = (): void => {
+  setMockUserDataResponse({ userData: undefined });
+};
+
 export const useMockUserDataError = (error: UserDataError): void => {
   setMockUserDataResponse({ error });
 };

@@ -68,10 +68,8 @@ export const isStepCompleted = (step: Step, userData: UserData | undefined): boo
   });
 };
 
-export const getUserNameOrEmailIfUserNameIsUndefinedFromUserData = (
-  userData: UserData | undefined
-): string => {
-  if (userData === undefined) return NavDefaults.myNJAccountText;
-  else if (userData.user.name) return userData.user.name;
-  else return userData.user.email;
+export const getUserNameOrEmail = (userData: UserData | undefined): string => {
+  if (userData?.user.name) return userData.user.name;
+  else if (userData?.user.email) return userData.user.email;
+  else return NavDefaults.myNJAccountText;
 };
