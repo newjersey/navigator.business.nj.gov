@@ -65,11 +65,7 @@
 
 .vertical-bar-sm {
   width: 0.25rem;
-  left: calc(((4rem + 0.25rem) / 2)); // for mobile sidebar
-
-  @media all and (min-width: $lg) {
-    left: calc(((3rem + 0.25rem) / 2)); // for desktop sidebar
-  }
+  left: calc(((3rem + 0.25rem) / 2));
 }
 
 .vertical-bar {

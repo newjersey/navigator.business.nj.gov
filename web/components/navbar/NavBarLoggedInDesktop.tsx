@@ -14,7 +14,7 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
         <div className="desktop:grid-col-12 usa-prose">
           <header className="flex fac fjb">
             <div className="flex-custom">
-              <img className="padding-top-1" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+              <img className="margin-y-105" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
             </div>
             <div className="margin-left-auto flex fac">
               <span className="text-no-wrap padding-right-1">

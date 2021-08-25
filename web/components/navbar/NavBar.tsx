@@ -37,7 +37,7 @@ export const NavBar = (props: Props): ReactElement => {
       {landingPage && (
         <>
           <NavBarLanding isLargeScreen={isLargeScreen} scrolled={scrolled} />
-          <div className={!isLargeScreen && scrolled ? "scrolled-padding-3rem" : ""} />
+          <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />
         </>
       )}
 
@@ -46,7 +46,7 @@ export const NavBar = (props: Props): ReactElement => {
       {!landingPage && !isLargeScreen && (
         <>
           <NavBarLoggedInMobile scrolled={scrolled} task={task} />
-          <div className={!isLargeScreen && scrolled ? "scrolled-padding-3rem" : ""} />
+          <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />
         </>
       )}
     </>
