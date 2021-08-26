@@ -5,22 +5,16 @@
     "jest": true
   },
   "settings": {
-    "import/resolver": {
-      "typescript": {}
-    },
     "react": {
       "version": "detect"
     }
   },
   "extends": [
     "eslint:recommended",
-    //"airbnb",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:cypress/recommended",
     "plugin:@next/next/recommended",
-    "plugin:import/recommended",
-    "plugin:import/typescript",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
@@ -35,7 +29,7 @@
     "sourceType": "module",
     "tsconfigRootDir": "."
   },
-  "plugins": ["react", "@typescript-eslint", "@typescript-eslint/eslint-plugin", "jsx-a11y", "import"],
+  "plugins": ["react", "@typescript-eslint", "@typescript-eslint/eslint-plugin", "jsx-a11y"],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
     "@next/next/no-img-element": "off",

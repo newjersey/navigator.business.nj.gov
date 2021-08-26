@@ -4,9 +4,10 @@ cd $(git rev-parse --show-toplevel)
 
 set -e
 
+npm run typecheck
+
 # format files
-npm --prefix=web run prettier
-npm --prefix=api run prettier
+npm run prettier
 
 # check if uncommited changes
 changed_files=$(git status --porcelain | wc -l)

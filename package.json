@@ -18,7 +18,8 @@
     "prettier": "lerna run --stream prettier",
     "prettier:check": "lerna run --stream prettier:check",
     "start:dev": "lerna run  --stream dev",
-    "test": "lerna run --stream test"
+    "test": "lerna run --stream test",
+    "typecheck": "lerna run --stream typecheck"
   },
   "repository": {
     "type": "git",

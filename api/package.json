@@ -19,7 +19,8 @@
     "start:wiremock": "wiremock --root-dir ./wiremock --port 9000",
     "start:wiremock:with-port": "wiremock --root-dir ./wiremock",
     "sls": "serverless",
-    "serverless": "serverless"
+    "serverless": "serverless",
+    "typecheck": "tsc --noemit"
   },
   "engines": {
     "node": ">=14.17.5"
