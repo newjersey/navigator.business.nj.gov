@@ -53,6 +53,9 @@ jobs:
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
         working-directory: api
 
+      - name: 🧹 Run typechecking
+        run: npm run typecheck
+
       - name: 🧹 Run lint
         run: npm run lint
 
