@@ -13,8 +13,8 @@ import { TaskCTA } from "@/components/TaskCTA";
 import { getModifiedTaskContent, rswitch } from "@/lib/utils/helpers";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NextSeo } from "next-seo";
-import { TownMercantileLicenseTask } from "@/components/tasks/TownMercantileLicenseTask";
 import { NavBar } from "@/components/navbar/NavBar";
+import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 
 interface Props {
   task: Task;
@@ -39,15 +39,20 @@ const TaskPage = (props: Props): ReactElement => {
             ),
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
-            "check-local-requirements": (
-              <div className="margin-3">
-                <TownMercantileLicenseTask task={props.task} />
-              </div>
-            ),
             default: (
               <div className="margin-3">
                 <TaskHeader task={props.task} />
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+                {props.task.postOnboardingQuestion &&
+                  rswitch(props.task.postOnboardingQuestion, {
+                    "construction-renovation": (
+                      <RadioQuestion
+                        id="construction-renovation"
+                        onboardingKey="constructionRenovationPlan"
+                      />
+                    ),
+                    default: <></>,
+                  })}
                 <TaskCTA
                   link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
                   text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}

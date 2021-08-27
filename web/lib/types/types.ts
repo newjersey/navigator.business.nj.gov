@@ -204,6 +204,7 @@ export interface Task {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
+  postOnboardingQuestion: string;
 }
 
 export interface PostOnboarding {

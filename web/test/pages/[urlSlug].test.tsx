@@ -170,30 +170,33 @@ describe("task page", () => {
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
-  it("displays a radio button for mercantile license task screen", async () => {
-    subject = renderPage(generateTask({ id: "check-local-requirements" }));
-    await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
-    expect(subject.getByTestId("construction-renovation-radio-btn")).toBeInTheDocument();
+  it("loads construction post-onboarding question for task that includes it", async () => {
+    subject = renderPage(generateTask({ postOnboardingQuestion: "construction-renovation" }));
+    await waitFor(() => expect(subject.getByTestId("construction-renovation")).toBeInTheDocument());
+    expect(subject.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
   });
 
-  it("toggles radio button for construction content", async () => {
+  it("toggles radio button for post-onboarding question", async () => {
     const initialUserData = generateUserData({
       onboardingData: generateOnboardingData({ constructionRenovationPlan: undefined }),
     });
-    subject = renderPage(generateTask({ id: "check-local-requirements" }), initialUserData);
+    subject = renderPage(
+      generateTask({ postOnboardingQuestion: "construction-renovation" }),
+      initialUserData
+    );
 
-    await waitFor(() => expect(subject.getByTestId("construction-radio-question")).toBeInTheDocument());
-    expect(subject.queryByTestId("construction-renovation-no-action-content")).not.toBeInTheDocument();
-    expect(subject.queryByTestId("construction-renovation-content")).not.toBeInTheDocument();
+    await waitFor(() => expect(subject.getByTestId("construction-renovation")).toBeInTheDocument());
+    expect(subject.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
 
-    fireEvent.click(subject.getByTestId("construction-radio-true"));
-    expect(subject.queryByTestId("construction-renovation-no-action-content")).not.toBeInTheDocument();
-    expect(subject.queryByTestId("construction-renovation-content")).toBeInTheDocument();
+    fireEvent.click(subject.getByTestId("post-onboarding-radio-true"));
+    expect(subject.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("post-onboarding-true-content")).toBeInTheDocument();
     expect(currentUserData().onboardingData.constructionRenovationPlan).toBe(true);
 
-    fireEvent.click(subject.getByTestId("construction-radio-false"));
-    expect(subject.queryByTestId("construction-renovation-no-action-content")).toBeInTheDocument();
-    expect(subject.queryByTestId("construction-renovation-content")).not.toBeInTheDocument();
+    fireEvent.click(subject.getByTestId("post-onboarding-radio-false"));
+    expect(subject.queryByTestId("post-onboarding-false-content")).toBeInTheDocument();
+    expect(subject.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
     expect(currentUserData().onboardingData.constructionRenovationPlan).toBe(false);
   });
 });

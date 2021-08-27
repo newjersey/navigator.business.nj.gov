@@ -26,6 +26,7 @@ type TaskGrayMatter = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
+  postOnboardingQuestion: string;
 };
 
 type MarkdownResult = {
