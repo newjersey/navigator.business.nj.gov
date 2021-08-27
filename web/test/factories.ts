@@ -107,6 +107,7 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     callToActionLink: `some-link-${randomInt()}`,
     callToActionText: `some-call-to-action-${randomInt()}`,
     contentMd: `some-content-md-${randomInt()}`,
+    postOnboardingQuestion: `some-post-onboarding-${randomInt()}`,
     ...overrides,
   };
 };
