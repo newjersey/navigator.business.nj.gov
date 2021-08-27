@@ -30,8 +30,6 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@middy/core": "1.5.2",
-    "@middy/http-json-body-parser": "1.5.2",
     "aws-lambda": "1.0.6",
     "axios": "0.21.1",
     "body-parser": "1.19.0",

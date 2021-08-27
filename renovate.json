@@ -36,12 +36,6 @@
       "groupName": "linting"
     },
     {
-      "matchPackagePrefixes": [
-        "@middy"
-      ],
-      "groupName": "middy"
-    },
-    {
       "matchPackageNames": [
         "@types/react",
         "@types/react-tabs",
