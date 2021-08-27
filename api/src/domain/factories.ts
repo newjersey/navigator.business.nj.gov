@@ -20,9 +20,9 @@ export const randomInt = (): number => Math.floor(Math.random() * Math.floor(100
 
 export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
   return {
-    name: "some-name-" + randomInt(),
+    name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
-    id: "some-id-" + randomInt(),
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };
@@ -40,7 +40,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
 
 export const generateOnboardingData = (overrides: Partial<OnboardingData>): OnboardingData => {
   return {
-    businessName: "some-business-name-" + randomInt(),
+    businessName: `some-business-name-${randomInt()}`,
     industry: randomIndustry(),
     legalStructure: randomLegalStructure(),
     municipality: generateMunicipality({}),
@@ -53,17 +53,17 @@ export const generateOnboardingData = (overrides: Partial<OnboardingData>): Onbo
 
 export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {
   return {
-    displayName: "some-display-name-" + randomInt(),
-    name: "some-name-" + randomInt(),
-    county: "some-county-" + randomInt(),
-    id: "some-id-" + randomInt(),
+    displayName: `some-display-name-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    county: `some-county-${randomInt()}`,
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };
 
 export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
   return {
-    title: "some-title-" + randomInt(),
+    title: `some-title-${randomInt()}`,
     status: "ACTIVE",
     ...overrides,
   };
@@ -79,32 +79,32 @@ export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResu
 
 export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): NameAndAddress => {
   return {
-    name: "some-name-" + randomInt(),
-    addressLine1: "some-address-1-" + randomInt(),
-    addressLine2: "some-address-2-" + randomInt(),
-    zipCode: "some-zipcode-" + randomInt(),
+    name: `some-name-${randomInt()}`,
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    zipCode: `some-zipcode-${randomInt()}`,
     ...overrides,
   };
 };
 
 export const generateLicenseEntity = (overrides: Partial<LicenseEntity>): LicenseEntity => {
   return {
-    fullName: "some-name-" + randomInt(),
-    addressLine1: "some-address-" + randomInt(),
-    addressCity: "some-city-" + randomInt(),
-    addressState: "some-state-" + randomInt(),
-    addressCounty: "some-county-" + randomInt(),
-    addressZipCode: "some-zipcode-" + randomInt(),
-    professionName: "some-profession-" + randomInt(),
-    licenseType: "some-license-type" + randomInt(),
-    applicationNumber: "some-application-number-" + randomInt(),
-    licenseNumber: "some-license-number-" + randomInt(),
+    fullName: `some-name-${randomInt()}`,
+    addressLine1: `some-address-${randomInt()}`,
+    addressCity: `some-city-${randomInt()}`,
+    addressState: `some-state-${randomInt()}`,
+    addressCounty: `some-county-${randomInt()}`,
+    addressZipCode: `some-zipcode-${randomInt()}`,
+    professionName: `some-profession-${randomInt()}`,
+    licenseType: `some-license-type${randomInt()}`,
+    applicationNumber: `some-application-number-${randomInt()}`,
+    licenseNumber: `some-license-number-${randomInt()}`,
     licenseStatus: "Active",
-    issueDate: "20080404 000000.000" + randomInt(),
-    expirationDate: "20091231 000000.000" + randomInt(),
-    checklistItem: "some-item-" + randomInt(),
+    issueDate: `20080404 000000.000${randomInt()}`,
+    expirationDate: `20091231 000000.000${randomInt()}`,
+    checklistItem: `some-item-${randomInt()}`,
     checkoffStatus: "Completed",
-    dateThisStatus: "20100430 000000.000" + randomInt(),
+    dateThisStatus: `20100430 000000.000${randomInt()}`,
     ...overrides,
   };
 };
@@ -122,8 +122,8 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
 
 export const generateSelfRegResponse = (overrides: Partial<SelfRegResponse>): SelfRegResponse => {
   return {
-    myNJUserKey: "some-mynj-key-" + randomInt(),
-    authRedirectURL: "some-redirect-url-" + randomInt(),
+    myNJUserKey: `some-mynj-key-${randomInt()}`,
+    authRedirectURL: `some-redirect-url-${randomInt()}`,
     ...overrides,
   };
 };

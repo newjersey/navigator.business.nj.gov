@@ -65,7 +65,7 @@ type v3LegalStructure =
 
 export const generateV3OnboardingData = (overrides: Partial<v3OnboardingData>): v3OnboardingData => {
   return {
-    businessName: "some-business-name-" + randomInt(),
+    businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",
     legalStructure: "sole-proprietorship",
     ...overrides,
@@ -74,9 +74,9 @@ export const generateV3OnboardingData = (overrides: Partial<v3OnboardingData>): 
 
 export const generateV3User = (overrides: Partial<v3BusinessUser>): v3BusinessUser => {
   return {
-    name: "some-name-" + randomInt(),
+    name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
-    id: "some-id-" + randomInt(),
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };

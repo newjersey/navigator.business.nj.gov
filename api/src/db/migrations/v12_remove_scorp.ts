@@ -104,23 +104,23 @@ export type v12LicenseStatus =
 // ---------------- v12 factories ----------------
 export const generatev12User = (overrides: Partial<v12BusinessUser>): v12BusinessUser => {
   return {
-    name: "some-name-" + randomInt(),
+    name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
-    id: "some-id-" + randomInt(),
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };
 
 export const generatev12OnboardingData = (overrides: Partial<v12OnboardingData>): v12OnboardingData => {
   return {
-    businessName: "some-business-name-" + randomInt(),
+    businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",
     legalStructure: "sole-proprietorship",
     municipality: {
-      name: "some-name-" + randomInt(),
-      displayName: "some-display-name-" + randomInt(),
-      county: "some-county-" + randomInt(),
-      id: "some-id-" + randomInt(),
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     homeBasedBusiness: true,

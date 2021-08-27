@@ -75,9 +75,9 @@ interface v0BusinessForm {
 export const generateV0FormData = (overrides: Partial<v0BusinessForm>): v0BusinessForm => {
   return {
     user: {
-      firstName: "some-firstname-" + randomInt(),
-      lastName: "some-lastname-" + randomInt(),
-      email: "some-email-" + randomInt(),
+      firstName: `some-firstname-${randomInt()}`,
+      lastName: `some-lastname-${randomInt()}`,
+      email: `some-email-${randomInt()}`,
       ...overrides.user,
     },
     businessType: {
@@ -85,11 +85,11 @@ export const generateV0FormData = (overrides: Partial<v0BusinessForm>): v0Busine
       ...overrides.businessType,
     },
     businessName: {
-      businessName: "some-business-name-" + randomInt(),
+      businessName: `some-business-name-${randomInt()}`,
       ...overrides.businessName,
     },
     businessDescription: {
-      businessDescription: "some-description-" + randomInt(),
+      businessDescription: `some-description-${randomInt()}`,
       ...overrides.businessDescription,
     },
     businessStructure: {
@@ -99,7 +99,7 @@ export const generateV0FormData = (overrides: Partial<v0BusinessForm>): v0Busine
     locations: {
       locations: [
         {
-          zipCode: "some-zipcode-" + randomInt(),
+          zipCode: `some-zipcode-${randomInt()}`,
           license: false,
         },
       ],
@@ -110,9 +110,9 @@ export const generateV0FormData = (overrides: Partial<v0BusinessForm>): v0Busine
 
 export const generateV0User = (overrides: Partial<v0BusinessUser>): v0BusinessUser => {
   return {
-    name: "some-name-" + randomInt(),
+    name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
-    id: "some-id-" + randomInt(),
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };

@@ -81,23 +81,23 @@ export type v8LicenseSearchData = {
 
 export const generateV8User = (overrides: Partial<v8BusinessUser>): v8BusinessUser => {
   return {
-    name: "some-name-" + randomInt(),
+    name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
-    id: "some-id-" + randomInt(),
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };
 
 export const generateV8OnboardingData = (overrides: Partial<v8OnboardingData>): v8OnboardingData => {
   return {
-    businessName: "some-business-name-" + randomInt(),
+    businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",
     legalStructure: "sole-proprietorship",
     municipality: {
-      name: "some-name-" + randomInt(),
-      displayName: "some-display-name-" + randomInt(),
-      county: "some-county-" + randomInt(),
-      id: "some-id-" + randomInt(),
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
     },
     liquorLicense: true,
     homeBasedBusiness: true,
@@ -115,10 +115,10 @@ export const generateV8LicenseSearchData = (overrides: Partial<v8LicenseSearchDa
 
 export const generateV8NameAndAddress = (overrides: Partial<v8NameAndAddress>): v8NameAndAddress => {
   return {
-    name: "some-name-" + randomInt(),
-    addressLine1: "some-address-1-" + randomInt(),
-    addressLine2: "some-address-2-" + randomInt(),
-    zipCode: "some-zipcode-" + randomInt(),
+    name: `some-name-${randomInt()}`,
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    zipCode: `some-zipcode-${randomInt()}`,
     ...overrides,
   };
 };

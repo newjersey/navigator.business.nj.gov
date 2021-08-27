@@ -46,5 +46,5 @@ export const inputManipulator = (initial: string): any => ({
 
 const removeWords = (value: string, words: string[]): string => {
   const regexString = words.join("|");
-  return value.replace(new RegExp("\\b(" + regexString + ")\\b", "gi"), " ").replace(/\s{2,}/g, " ");
+  return value.replace(new RegExp(`\\b(${regexString})\\b`, "gi"), " ").replace(/\s{2,}/g, " ");
 };

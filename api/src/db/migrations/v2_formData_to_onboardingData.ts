@@ -67,7 +67,7 @@ export type v2LegalStructure =
 
 export const generateV2OnboardingData = (overrides: Partial<v2OnboardingData>): v2OnboardingData => {
   return {
-    businessName: "some-business-name-" + randomInt(),
+    businessName: `some-business-name-${randomInt()}`,
     industry: "restaurant",
     legalStructure: "Sole Proprietorship",
     ...overrides,
@@ -76,9 +76,9 @@ export const generateV2OnboardingData = (overrides: Partial<v2OnboardingData>): 
 
 export const generateV2User = (overrides: Partial<v2BusinessUser>): v2BusinessUser => {
   return {
-    name: "some-name-" + randomInt(),
+    name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
-    id: "some-id-" + randomInt(),
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };

@@ -87,9 +87,9 @@ interface v1BusinessForm {
 
 export const generateV1User = (overrides: Partial<v1BusinessUser>): v1BusinessUser => {
   return {
-    name: "some-name-" + randomInt(),
+    name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
-    id: "some-id-" + randomInt(),
+    id: `some-id-${randomInt()}`,
     ...overrides,
   };
 };
@@ -97,9 +97,9 @@ export const generateV1User = (overrides: Partial<v1BusinessUser>): v1BusinessUs
 export const generateV1FormData = (overrides: Partial<v1BusinessForm>): v1BusinessForm => {
   return {
     user: {
-      firstName: "some-firstname-" + randomInt(),
-      lastName: "some-lastname-" + randomInt(),
-      email: "some-email-" + randomInt(),
+      firstName: `some-firstname-${randomInt()}`,
+      lastName: `some-lastname-${randomInt()}`,
+      email: `some-email-${randomInt()}`,
       ...overrides.user,
     },
     businessType: {
@@ -107,11 +107,11 @@ export const generateV1FormData = (overrides: Partial<v1BusinessForm>): v1Busine
       ...overrides.businessType,
     },
     businessName: {
-      businessName: "some-business-name-" + randomInt(),
+      businessName: `some-business-name-${randomInt()}`,
       ...overrides.businessName,
     },
     businessDescription: {
-      businessDescription: "some-description-" + randomInt(),
+      businessDescription: `some-description-${randomInt()}`,
       ...overrides.businessDescription,
     },
     businessStructure: {
@@ -121,7 +121,7 @@ export const generateV1FormData = (overrides: Partial<v1BusinessForm>): v1Busine
     locations: {
       locations: [
         {
-          zipCode: "some-zipcode-" + randomInt(),
+          zipCode: `some-zipcode-${randomInt()}`,
           license: false,
         },
       ],
