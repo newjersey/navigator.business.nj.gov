@@ -21,6 +21,9 @@
     "test": "lerna run --stream test",
     "typecheck": "lerna run --stream typecheck"
   },
+  "engines": {
+    "node": ">=14.17.5"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/newjersey/business.nj.gov.git"
