@@ -8,10 +8,5 @@
     "step": "register-business",
     "weight": 21,
     "task": "form-business-entity"
-  },
-  {
-    "step": "register-business",
-    "weight": 22,
-    "task": "alternate-name"
   }
 ]
