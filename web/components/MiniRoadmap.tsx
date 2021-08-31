@@ -9,6 +9,7 @@ import { isStepCompleted } from "@/lib/utils/helpers";
 
 interface Props {
   activeTaskId: string;
+  onTaskClick?: () => void;
 }
 
 export const MiniRoadmap = (props: Props): ReactElement => {
@@ -79,7 +80,12 @@ export const MiniRoadmap = (props: Props): ReactElement => {
           <div className="margin-left-5 font-sans-xs">
             {openSteps.includes(step.id) &&
               step.tasks.map((task) => (
-                <MiniRoadmapTask key={task.id} task={task} active={task.id === props.activeTaskId} />
+                <MiniRoadmapTask
+                  key={task.id}
+                  task={task}
+                  active={task.id === props.activeTaskId}
+                  onTaskClick={props.onTaskClick}
+                />
               ))}
           </div>
         </div>

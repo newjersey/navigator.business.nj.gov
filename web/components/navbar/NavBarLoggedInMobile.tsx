@@ -57,7 +57,7 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
           >
             <Icon className="font-sans-xl">close</Icon>
           </button>
-          {task && <MiniRoadmap activeTaskId={task.id} />}
+          {task && <MiniRoadmap activeTaskId={task.id} onTaskClick={close} />}
           <NavSideBarUserSettings />
         </nav>
       </FocusTrappedSidebar>
