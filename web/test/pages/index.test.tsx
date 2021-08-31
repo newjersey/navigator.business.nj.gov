@@ -4,6 +4,8 @@ import { generateUser } from "@/test/factories";
 import { useMockUserData, setMockUserDataResponse } from "@/test/mock/mockUseUserData";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -31,5 +33,17 @@ describe("HomePage", () => {
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
     render(withAuth(<Home />, { user: generateUser({}) }));
     expect(mockPush).toHaveBeenCalledWith("/roadmap");
+  });
+  it("opens the modal with signUp = true in the querystring", () => {
+    useMockRouter({ isReady: true, query: { signUp: "true" } });
+    setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
+    const page = render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
+    expect(page.getByText(SelfRegDefaults.signupTitleText)).toBeInTheDocument();
+  });
+  it("does not open the modal with signUp = false in the querystrings", () => {
+    useMockRouter({ isReady: true, query: { signUp: "false" } });
+    setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
+    const page = render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
+    expect(page.queryByText(SelfRegDefaults.signupTitleText)).not.toBeInTheDocument();
   });
 });
