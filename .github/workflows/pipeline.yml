@@ -157,7 +157,6 @@ jobs:
           VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1 }}
           VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2 }}
           VPC_ID: ${{ secrets.VPC_ID }}
-          USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_DEV }}
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_DEV }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_DEV }}
@@ -238,7 +237,6 @@ jobs:
           VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1 }}
           VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2 }}
           VPC_ID: ${{ secrets.VPC_ID }}
-          USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_STAGING }}
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_STAGING }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_STAGING }}
@@ -319,7 +317,6 @@ jobs:
           VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1_PROD }}
           VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2_PROD }}
           VPC_ID: ${{ secrets.VPC_ID }}
-          USE_FAKE_LICENSE_CLIENT: ${{ secrets.USE_FAKE_LICENSE_CLIENT }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_PROD }}
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_PROD }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_PROD }}

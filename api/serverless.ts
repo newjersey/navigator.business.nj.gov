@@ -9,7 +9,6 @@ const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5000;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
 const cognitoArn = process.env.COGNITO_ARN || "";
-const useFakeLicenseClient = process.env.USE_FAKE_LICENSE_CLIENT || "";
 const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
 const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
 const region = "us-east-1";
@@ -101,7 +100,6 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       USERS_TABLE: usersTable,
-      USE_FAKE_LICENSE_CLIENT: useFakeLicenseClient,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
       MYNJ_SERVICE_TOKEN: myNJServiceToken,
