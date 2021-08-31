@@ -6,6 +6,7 @@ import { NavDefaults } from "@/display-content/NavDefaults";
 import { useUndefinedUserData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { generateRoadmap, generateStep, generateTask, generateUser } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { ReactNode } from "react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -17,6 +18,11 @@ function mockMaterialUI(): typeof materialUi {
 jest.mock("@material-ui/core", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("next/link", () => {
+  return ({ children }: { children: ReactNode }) => {
+    return children;
+  };
+});
 
 const setLargeScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
@@ -101,6 +107,19 @@ describe("<NavBar />", () => {
       useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
       const subject = renderMobileTaskNav();
       expect(subject.queryByText("step1")).toBeInTheDocument();
+    });
+
+    it("hide mini-roadmap on-click", () => {
+      useMockUserData({});
+      useMockRoadmap(
+        generateRoadmap({
+          steps: [generateStep({ name: "step1", tasks: [generateTask({ name: "task1" })] })],
+        })
+      );
+      const subject = renderMobileTaskNav();
+      fireEvent.click(subject.getByText("step1"));
+      fireEvent.click(subject.getByText("task1"));
+      expect(subject.queryByText("task1")).not.toBeInTheDocument();
     });
   });
 });

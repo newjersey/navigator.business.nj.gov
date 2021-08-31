@@ -8,6 +8,7 @@ import { Icon } from "@/components/njwds/Icon";
 interface Props {
   task: Task;
   active: boolean;
+  onTaskClick?: () => void;
 }
 
 export const MiniRoadmapTask = (props: Props): ReactElement => {
@@ -21,7 +22,10 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
           props.active ? "bg-base-lightest bg-chevron text-primary-dark text-bold" : ""
         }`}
         data-task={props.task.id}
-        onClick={analytics.event.task_mini_roadmap_task.click.go_to_task}
+        onClick={() => {
+          analytics.event.task_mini_roadmap_task.click.go_to_task;
+          props.onTaskClick && props.onTaskClick();
+        }}
       >
         {taskProgress === "COMPLETED" ? (
           <Icon className="margin-right-1 font-body-md checked-task">check_circle</Icon>
