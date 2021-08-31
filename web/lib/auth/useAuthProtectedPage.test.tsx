@@ -1,21 +1,15 @@
 import { withAuth } from "@/test/helpers";
-import { useRouter } from "next/router";
-import { useAuthProtectedPage, useUnauthedOnlyPage } from "./useAuthProtectedPage";
-import { IsAuthenticated } from "./AuthContext";
+import { useAuthProtectedPage, useUnauthedOnlyPage, signInSamlError } from "@/lib/auth/useAuthProtectedPage";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { render } from "@testing-library/react";
+import { useMockRouter, mockPush } from "@/test/mock/mockRouter";
 
 jest.mock("next/router");
 
 describe("useAuthProtectedPage", () => {
-  let mockPush: jest.Mock;
-
   beforeEach(() => {
     jest.resetAllMocks();
-    mockPush = jest.fn();
-    (useRouter as jest.Mock).mockReturnValue({
-      push: mockPush,
-      replace: mockPush,
-    });
+    useMockRouter({ isReady: true, asPath: "" });
   });
 
   const setupHookWithAuth = (hook: () => void, isAuth: IsAuthenticated): void => {
@@ -29,9 +23,19 @@ describe("useAuthProtectedPage", () => {
   describe("useAuthProtectedPage", () => {
     it("redirects to homepage when user is not authed", () => {
       setupHookWithAuth(useAuthProtectedPage, IsAuthenticated.FALSE);
-      expect(mockPush).toHaveBeenCalledWith("/");
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: "/",
+        query: {},
+      });
     });
-
+    it("redirects to homepage when user is not authed", () => {
+      useMockRouter({ isReady: true, asPath: signInSamlError });
+      setupHookWithAuth(useAuthProtectedPage, IsAuthenticated.FALSE);
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: "/",
+        query: { signUp: "true" },
+      });
+    });
     it("does nothing when user is authed", () => {
       setupHookWithAuth(useAuthProtectedPage, IsAuthenticated.TRUE);
       expect(mockPush).not.toHaveBeenCalled();

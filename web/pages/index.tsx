@@ -25,6 +25,11 @@ const Home = (): ReactElement => {
     }
   }, [userData, error, router]);
 
+  useEffect(() => {
+    if (!router.isReady || !router.query.signUp) return;
+    setSignupIsOpen(router.query.signUp === "true");
+  }, [router.isReady, router.query]);
+
   return (
     <PageSkeleton>
       <NavBar landingPage={true} />
