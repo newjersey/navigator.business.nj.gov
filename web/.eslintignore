@@ -6,6 +6,7 @@ out_functions/
 out/
 cypress/plugins
 cypress/support
+display-content/
 
 amplify/#current-cloud-backend/
 amplify/.config/local-*
