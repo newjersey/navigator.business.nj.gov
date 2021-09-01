@@ -32,7 +32,7 @@
     "@testing-library/react": "12.0.0",
     "@testing-library/user-event": "13.2.1",
     "airtable": "0.11.1",
-    "aws-amplify": "3.4.3",
+    "aws-amplify": "4.2.5",
     "babel-jest": "27.1.0",
     "date-fns": "2.23.0",
     "focus-trap-react": "8.7.1",
