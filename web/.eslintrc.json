@@ -34,6 +34,7 @@
     "@typescript-eslint/no-empty-function": "off",
     "@next/next/no-img-element": "off",
     "@next/next/no-html-link-for-pages": "off",
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "react/jsx-uses-react": 1
   }
 }
