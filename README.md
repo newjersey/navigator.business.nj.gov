@@ -31,14 +31,14 @@ and backend. It will also set up serverless's local DynamoDB.
 npm install
 ```
 
-In order for the web frontend tests to pass and for it to be able to run locally, it **needs to have Amplify locally configured** such that the `web/aws-exports.js` file exists. This can be done by running and using the project's Amplify AWS credentials when prompted.
+In order for the web frontend tests to pass and for it to be able to run locally, it **needs to have Amplify locally configured** such that the `web/aws-exports.js` file exists. This can be done by running and using the project's Amplify AWS credentials when prompted. These commands should be run from the root of the project.
 
 ```shell
-amplify configure
+aws configure
 ```
 
 ```shell
-amplify env checkout dev
+amplify init
 ```
 
 Additionally, serverless needs to be configured with our AWS account. Run this with our AWS access credentials:
