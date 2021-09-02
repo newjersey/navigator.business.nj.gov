@@ -25,6 +25,28 @@ const TaskPage = (props: Props): ReactElement => {
 
   const { roadmap } = useRoadmap();
 
+  const getPostOnboardingQuestion = (): ReactElement => {
+    if (!props.task.postOnboardingQuestion) return <></>;
+    return rswitch(props.task.postOnboardingQuestion, {
+      "construction-renovation": (
+        <RadioQuestion id="construction-renovation" onboardingKey="constructionRenovationPlan" />
+      ),
+      default: <></>,
+    });
+  };
+
+  const getTaskContent = (): ReactElement => {
+    const content = getModifiedTaskContent(roadmap, props.task, "contentMd");
+    const [beforeQuestion, afterQuestion] = content.split("{postOnboardingQuestion}");
+    return (
+      <>
+        <Content>{beforeQuestion}</Content>
+        {getPostOnboardingQuestion()}
+        <Content>{afterQuestion}</Content>
+      </>
+    );
+  };
+
   return (
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
@@ -42,17 +64,7 @@ const TaskPage = (props: Props): ReactElement => {
             default: (
               <div className="margin-3">
                 <TaskHeader task={props.task} />
-                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
-                {props.task.postOnboardingQuestion &&
-                  rswitch(props.task.postOnboardingQuestion, {
-                    "construction-renovation": (
-                      <RadioQuestion
-                        id="construction-renovation"
-                        onboardingKey="constructionRenovationPlan"
-                      />
-                    ),
-                    default: <></>,
-                  })}
+                {getTaskContent()}
                 <TaskCTA
                   link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
                   text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}

@@ -170,10 +170,31 @@ describe("task page", () => {
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
-  it("loads construction post-onboarding question for task that includes it", async () => {
-    subject = renderPage(generateTask({ postOnboardingQuestion: "construction-renovation" }));
+  it("loads construction post-onboarding question for task in template body", async () => {
+    subject = renderPage(
+      generateTask({
+        postOnboardingQuestion: "construction-renovation",
+        contentMd: "some content\n\n${postOnboardingQuestion}\n\nmore content",
+      })
+    );
     await waitFor(() => expect(subject.getByTestId("construction-renovation")).toBeInTheDocument());
     expect(subject.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
+    expect(subject.getByText("some content")).toBeInTheDocument();
+    expect(subject.getByText("more content")).toBeInTheDocument();
+    expect(subject.queryByText("${postOnboardingQuestion}")).not.toBeInTheDocument();
+  });
+
+  it("loads post-onboarding question for task at the bottom if not in template body", async () => {
+    subject = renderPage(
+      generateTask({
+        postOnboardingQuestion: "construction-renovation",
+        contentMd: "some content\n\nmore content",
+      })
+    );
+    await waitFor(() => expect(subject.getByTestId("construction-renovation")).toBeInTheDocument());
+    expect(subject.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
+    expect(subject.getByText("some content")).toBeInTheDocument();
+    expect(subject.getByText("more content")).toBeInTheDocument();
   });
 
   it("toggles radio button for post-onboarding question", async () => {
