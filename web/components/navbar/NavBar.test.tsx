@@ -1,12 +1,13 @@
 import * as materialUi from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 import { NavBar } from "@/components/navbar/NavBar";
-import { fireEvent, render, RenderResult } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import { NavDefaults } from "@/display-content/NavDefaults";
 import { useUndefinedUserData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { generateRoadmap, generateStep, generateTask, generateUser } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { ReactNode } from "react";
+import userEvent from "@testing-library/user-event";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -68,6 +69,38 @@ describe("<NavBar />", () => {
     };
 
     displaysUserNameOrEmail(renderDesktopNav);
+
+    it("displays a closed dropdown menu on the NavBar", () => {
+      const user = { name: "John Smith", email: "test@example.com" };
+
+      useMockUserData({
+        user: generateUser(user),
+      });
+      const subject = renderDesktopNav();
+      const menuEl = subject.getByText(user.name);
+      expect(menuEl).toBeInTheDocument();
+      expect(subject.queryByText(NavDefaults.logoutButton)).not.toBeInTheDocument();
+      expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeInTheDocument();
+    });
+
+    it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
+      const user = { name: "John Smith", email: "test@example.com" };
+      useMockUserData({
+        user: generateUser(user),
+      });
+      const subject = renderDesktopNav();
+      const menuEl = subject.getByText(user.name);
+
+      userEvent.click(menuEl);
+      expect(subject.getByText(NavDefaults.logoutButton)).toBeInTheDocument();
+      expect(subject.getByText(NavDefaults.myNJAccountText)).toBeInTheDocument();
+
+      userEvent.click(menuEl);
+      await waitFor(() => {
+        expect(subject.queryByText(NavDefaults.logoutButton)).not.toBeInTheDocument();
+        expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeInTheDocument();
+      });
+    });
   });
 
   describe("mobile - roadmap navbar", () => {

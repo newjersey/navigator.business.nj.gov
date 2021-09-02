@@ -32,6 +32,7 @@ export const AuthButton = (props?: Props): ReactElement => {
 
   const logoutButton = () => (
     <button
+      data-log-out-button
       className={`${
         props?.className
           ? props.className
