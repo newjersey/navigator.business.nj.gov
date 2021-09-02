@@ -1,0 +1,12 @@
+[
+  {
+    "step": "step-2",
+    "weight": 3,
+    "task": "tea-task-1"
+  },
+  {
+    "step": "step-3",
+    "weight": 3,
+    "task": "tea-task-2"
+  }
+]

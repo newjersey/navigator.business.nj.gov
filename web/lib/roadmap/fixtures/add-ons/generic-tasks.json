@@ -1,0 +1,22 @@
+[
+  {
+    "step": "step-1",
+    "weight": 1,
+    "task": "generic-task-1"
+  },
+  {
+    "step": "step-2",
+    "weight": 1,
+    "task": "generic-task-2"
+  },
+  {
+    "step": "step-3",
+    "weight": 1,
+    "task": "generic-task-3"
+  },
+  {
+    "step": "step-4",
+    "weight": 1,
+    "task": "generic-task-4"
+  }
+]

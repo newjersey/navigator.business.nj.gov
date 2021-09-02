@@ -146,46 +146,7 @@ export type MunicipalityDetail = {
 };
 
 export interface Roadmap {
-  type: Industry;
   steps: Step[];
-}
-
-export interface RoadmapBuilder {
-  steps: StepBuilder[];
-}
-
-export interface StepBuilder {
-  step_number: number;
-  id: string;
-  name: string;
-  timeEstimate: string;
-  description: string;
-  tasks: TaskBuilder[];
-}
-
-export interface TaskBuilder {
-  filename: string;
-  weight: number;
-}
-
-export interface GenericStep {
-  step_number: number;
-  id: string;
-  name: string;
-  timeEstimate: string;
-  description: string;
-}
-
-export interface AddOn {
-  step: string;
-  weight: number;
-  task: string;
-}
-
-export interface TaskModification {
-  step: string;
-  taskToReplaceFilename: string;
-  replaceWithFilename: string;
 }
 
 export interface Step {
@@ -204,7 +165,7 @@ export interface Task {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
-  postOnboardingQuestion: string;
+  postOnboardingQuestion?: string;
 }
 
 export interface PostOnboarding {

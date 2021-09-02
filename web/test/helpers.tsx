@@ -67,7 +67,7 @@ export const generateUseUserDataResponse = (
   ...overrides,
 });
 
-export const getLastCalledWith = (fn: jest.Mock): unknown[] => {
+export const getLastCalledWith = <T, R>(fn: jest.MockInstance<T, R[]>): R[] => {
   const lastIndex = fn.mock.calls.length - 1;
   return fn.mock.calls[lastIndex];
 };

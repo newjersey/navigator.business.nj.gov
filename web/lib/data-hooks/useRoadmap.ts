@@ -1,9 +1,9 @@
 import { Roadmap } from "@/lib/types/types";
 import { useContext } from "react";
 import { RoadmapContext } from "@/pages/_app";
-import { buildRoadmap } from "@/lib/roadmap/buildRoadmap";
 import { useUserData } from "./useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 
 export const useRoadmap = (): { roadmap: Roadmap | undefined } => {
   const { roadmap, setRoadmap } = useContext(RoadmapContext);
@@ -17,7 +17,7 @@ export const useRoadmap = (): { roadmap: Roadmap | undefined } => {
 
   const buildAndSetRoadmap = async () => {
     if (userData?.formProgress === "COMPLETED") {
-      setRoadmap(await buildRoadmap(userData.onboardingData));
+      setRoadmap(await buildUserRoadmap(userData.onboardingData));
     }
   };
 
