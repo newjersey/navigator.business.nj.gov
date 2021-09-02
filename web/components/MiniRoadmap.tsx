@@ -14,71 +14,72 @@ interface Props {
 
 export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const getActiveStepId = useCallback(
-    () => roadmap?.steps.find((step) => step.tasks.map((it) => it.id).includes(props.activeTaskId))?.id,
+  const getActiveStepNumber = useCallback(
+    () =>
+      roadmap?.steps.find((step) => step.tasks.map((it) => it.id).includes(props.activeTaskId))?.step_number,
     [props.activeTaskId, roadmap?.steps]
   );
-  const [activeStepId, setActiveStepId] = useState<string | undefined>(getActiveStepId());
-  const [openSteps, setOpenSteps] = useState<string[]>([]);
+  const [activeStepNumber, setActiveStepNumber] = useState<number | undefined>(getActiveStepNumber());
+  const [openSteps, setOpenSteps] = useState<number[]>([]);
   const { userData } = useUserData();
   const roadmapExists = !!roadmap;
 
   useEffect(() => {
-    const activeStep = getActiveStepId();
-    setActiveStepId(activeStep);
+    const activeStep = getActiveStepNumber();
+    setActiveStepNumber(activeStep);
     setOpenSteps(activeStep ? [activeStep] : []);
-  }, [props.activeTaskId, roadmapExists, getActiveStepId]);
+  }, [props.activeTaskId, roadmapExists, getActiveStepNumber]);
 
-  const toggleStep = (stepId: string): void => {
+  const toggleStep = (stepNumber: number): void => {
     analytics.event.task_mini_roadmap_step.click.expand_contract();
-    if (openSteps.includes(stepId)) {
-      setOpenSteps(openSteps.filter((id) => id !== stepId));
+    if (openSteps.includes(stepNumber)) {
+      setOpenSteps(openSteps.filter((number) => number !== stepNumber));
     } else {
-      setOpenSteps([...openSteps, stepId]);
+      setOpenSteps([...openSteps, stepNumber]);
     }
   };
 
-  const isLast = (stepId: string) => {
-    return roadmap?.steps[roadmap?.steps.length - 1].id === stepId;
+  const isLast = (stepNumber: number) => {
+    return roadmap?.steps[roadmap?.steps.length - 1].step_number === stepNumber;
   };
 
   return (
     <div>
       {roadmap?.steps.map((step) => (
-        <div key={step.id} id={`vertical-content-${step.step_number}`}>
+        <div key={step.step_number} id={`vertical-content-${step.step_number}`}>
           <div className="fdr fac margin-top-2 margin-bottom-1">
             <VerticalStepIndicator
               number={step.step_number}
-              last={isLast(step.id)}
-              active={step.id === activeStepId}
+              last={isLast(step.step_number)}
+              active={step.step_number === activeStepNumber}
               small={true}
               completed={isStepCompleted(step, userData)}
               key={openSteps.join(",")}
             />
             <button
               className="usa-button--unstyled width-100"
-              onClick={() => toggleStep(step.id)}
-              aria-expanded={openSteps.includes(step.id)}
+              onClick={() => toggleStep(step.step_number)}
+              aria-expanded={openSteps.includes(step.step_number)}
             >
               <div className=" step-label sm fdr fjc fac">
                 <h2
                   className={`margin-0 font-body-xs line-height-body-2 text-ink ${
-                    step.id === activeStepId ? "text-primary-dark" : "weight-unset"
+                    step.step_number === activeStepNumber ? "text-primary-dark" : "weight-unset"
                   }`}
-                  data-step={step.id}
+                  data-step={step.step_number}
                 >
                   {step.name}
                 </h2>
                 <div className="padding-right-1 padding-left-1 mla fdc fac">
                   <Icon className="font-sans-lg text-ink">
-                    {openSteps.includes(step.id) ? "expand_less" : "expand_more"}
+                    {openSteps.includes(step.step_number) ? "expand_less" : "expand_more"}
                   </Icon>
                 </div>
               </div>
             </button>
           </div>
           <div className="margin-left-5 font-sans-xs">
-            {openSteps.includes(step.id) &&
+            {openSteps.includes(step.step_number) &&
               step.tasks.map((task) => (
                 <MiniRoadmapTask
                   key={task.id}

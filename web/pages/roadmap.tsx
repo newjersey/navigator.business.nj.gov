@@ -124,7 +124,7 @@ const RoadmapPage = (props: Props): ReactElement => {
             )}
             {roadmap &&
               roadmap.steps.map((step, index) => (
-                <Step key={step.id} step={step} last={index === roadmap.steps.length - 1} />
+                <Step key={step.step_number} step={step} last={index === roadmap.steps.length - 1} />
               ))}
           </SinglePageLayout>
         </div>

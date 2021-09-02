@@ -1,35 +1,30 @@
 [
   {
     "step_number": 1,
-    "id": "create-business-plan",
     "name": "Plan Your Business",
     "timeEstimate": "1 month",
     "description": "Have a strong business plan in place to make later decisions and filings easier and more predictable."
   },
   {
     "step_number": 2,
-    "id": "due-diligence",
     "name": "Make a Few Decisions",
     "timeEstimate": "1–2 months",
     "description": "Research the timeline and costs associated with the specifics of starting your business to prevent delays and unexpected costs."
   },
   {
     "step_number": 3,
-    "id": "register-business",
     "name": "Register and Form Your Business",
     "timeEstimate": "1 month",
     "description": "Get legally recognized by the State and federal government so you can start acting on behalf of your business."
   },
   {
     "step_number": 4,
-    "id": "lease-and-permits",
     "name": "After Registering Your Business",
     "timeEstimate": "1–3 months",
     "description": "Enter insurance and/or location agreements in your business’ name to protect both you and your business legally."
   },
   {
     "step_number": 5,
-    "id": "inspection-requirements",
     "name": "Before Opening Your Site",
     "timeEstimate": "1–3 months",
     "description": "Obtain industry-specific approvals or inspections to make sure you’re in compliance with State or local laws before opening."

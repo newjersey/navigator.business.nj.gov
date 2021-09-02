@@ -33,19 +33,19 @@ describe("Roadmap", () => {
     cy.get('[data-municipality="Absecon"]').should("exist");
 
     // step 1
-    cy.get('[data-step="create-business-plan"]').should("exist");
+    cy.get('[data-step="1"]').should("exist");
     cy.get('[data-task="business-plan"]').should("exist");
 
     // step 2
-    cy.get('[data-step="due-diligence"]').should("exist");
+    cy.get('[data-step="2"]').should("exist");
     cy.get('[data-task="research-insurance-needs"]').should("exist");
 
     // step 3
-    cy.get('[data-step="register-business"]').should("exist");
+    cy.get('[data-step="3"]').should("exist");
     cy.get('[data-task="register-trade-name"]').should("exist");
 
     // step 4
-    cy.get('[data-step="lease-and-permits"]').should("exist");
+    cy.get('[data-step="4"]').should("exist");
 
     // tasks screen
     cy.get('[data-task="register-trade-name"]').click();
@@ -53,7 +53,7 @@ describe("Roadmap", () => {
     cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
-    cy.get('[data-step="inspection-requirements"]').click();
+    cy.get('[data-step="5"]').click();
     cy.get('[data-task="check-local-requirements"]').click();
     cy.get('[data-task-id="register-trade-name"]').should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");

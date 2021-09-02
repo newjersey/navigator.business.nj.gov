@@ -1,11 +1,11 @@
 [
   {
-    "step": "due-diligence",
+    "step": 2,
     "weight": 100,
     "task": "research-insurance-needs-home-contractor"
   },
   {
-    "step": "inspection-requirements",
+    "step": 5,
     "weight": 100,
     "task": "register-consumer-affairs"
   }

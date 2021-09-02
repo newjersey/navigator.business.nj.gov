@@ -1,36 +1,36 @@
 [
   {
-    "step": "due-diligence",
+    "step": 2,
     "weight": 1,
     "task": "evaluate-your-location"
   },
   {
-    "step": "due-diligence",
+    "step": 2,
     "weight": 2,
     "task": "check-site-requirements"
   },
   {
-    "step": "lease-and-permits",
+    "step": 4,
     "weight": 1,
     "task": "sign-lease"
   },
   {
-    "step": "inspection-requirements",
+    "step": 5,
     "weight": 4,
     "task": "site-safety-permits"
   },
   {
-    "step": "inspection-requirements",
+    "step": 5,
     "weight": 2,
     "task": "town-mercantile-license"
   },
   {
-    "step": "lease-and-permits",
+    "step": 4,
     "weight": 3,
     "task": "building-permit"
   },
   {
-    "step": "lease-and-permits",
+    "step": 4,
     "weight": 2,
     "task": "zoning"
   }

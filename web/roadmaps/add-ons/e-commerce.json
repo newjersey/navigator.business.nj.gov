@@ -1,6 +1,6 @@
 [
   {
-    "step": "inspection-requirements",
+    "step": 5,
     "weight": 10,
     "task": "search-licenses"
   }

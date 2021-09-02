@@ -1,11 +1,11 @@
 [
   {
-    "step": "step-1",
+    "step": 1,
     "weight": 0,
     "task": "weighted-task-0"
   },
   {
-    "step": "step-1",
+    "step": 1,
     "weight": 10,
     "task": "weighted-task-10"
   }

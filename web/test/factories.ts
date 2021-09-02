@@ -89,7 +89,6 @@ export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
 export const generateStep = (overrides: Partial<Step>): Step => {
   return {
     step_number: randomInt(),
-    id: `some-id-${randomInt()}`,
     name: `some-name-${randomInt()}`,
     timeEstimate: `some-time-estimate-${randomInt()}`,
     description: `some-description-${randomInt()}`,

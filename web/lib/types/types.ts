@@ -151,7 +151,6 @@ export interface Roadmap {
 
 export interface Step {
   step_number: number;
-  id: string;
   name: string;
   timeEstimate: string;
   description: string;

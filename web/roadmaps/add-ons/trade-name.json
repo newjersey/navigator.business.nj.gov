@@ -1,6 +1,6 @@
 [
   {
-    "step": "register-business",
+    "step": 3,
     "weight": 18,
     "task": "register-trade-name"
   }

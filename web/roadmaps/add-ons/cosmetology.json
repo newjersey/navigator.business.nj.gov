@@ -1,16 +1,16 @@
 [
   {
-    "step": "inspection-requirements",
+    "step": 5,
     "weight": 8,
     "task": "apply-for-shop-license"
   },
   {
-    "step": "inspection-requirements",
+    "step": 5,
     "weight": 9,
     "task": "individual-staff-licenses"
   },
   {
-    "step": "inspection-requirements",
+    "step": 5,
     "weight": 10,
     "task": "site-inspection"
   }

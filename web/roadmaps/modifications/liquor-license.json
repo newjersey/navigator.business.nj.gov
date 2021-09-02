@@ -1,6 +1,5 @@
 [
   {
-    "step": "inspection-requirements",
     "taskToReplaceFilename": "town-mercantile-license",
     "replaceWithFilename": "town-mercantile-license-liquor"
   }

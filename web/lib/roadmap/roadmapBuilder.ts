@@ -75,7 +75,7 @@ const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
 
 const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
   addOns.forEach((addOn) => {
-    const step = builder.steps.find((step) => step.id === addOn.step);
+    const step = builder.steps.find((step) => step.step_number === addOn.step);
     if (!step) {
       return;
     }
@@ -88,7 +88,7 @@ const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
 
 const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[]): RoadmapBuilder => {
   modifications.forEach((modification) => {
-    const task = findTaskInRoadmapByFilename(roadmap, modification.step, modification.taskToReplaceFilename);
+    const task = findTaskInRoadmapByFilename(roadmap, modification.taskToReplaceFilename);
     if (!task) {
       return;
     }
@@ -100,15 +100,12 @@ const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[])
 
 const findTaskInRoadmapByFilename = (
   roadmapBuilder: RoadmapBuilder,
-  stepId: string,
   taskFilename: string
 ): TaskBuilder | undefined => {
-  const step = roadmapBuilder.steps.find((step) => step.id === stepId);
-  if (!step) {
-    return;
+  for (const step of roadmapBuilder.steps) {
+    const found = step.tasks.find((task) => task.filename === taskFilename);
+    if (found) return found;
   }
-
-  return step.tasks.find((task) => task.filename === taskFilename);
 };
 
 const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap> => {
@@ -161,13 +158,12 @@ interface GenericStep {
 }
 
 interface AddOn {
-  step: string;
+  step: number;
   weight: number;
   task: string;
 }
 
 interface TaskModification {
-  step: string;
   taskToReplaceFilename: string;
   replaceWithFilename: string;
 }

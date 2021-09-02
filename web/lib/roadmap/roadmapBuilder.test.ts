@@ -76,7 +76,6 @@ const expectedGenericRoadmap: Roadmap = {
   steps: [
     {
       step_number: 1,
-      id: "step-1",
       name: "Step 1 Name",
       timeEstimate: "1 month",
       description: "Step 1 description",
@@ -93,7 +92,6 @@ const expectedGenericRoadmap: Roadmap = {
     },
     {
       step_number: 2,
-      id: "step-2",
       name: "Step 2 Name",
       timeEstimate: "2 months",
       description: "Step 2 description",
@@ -110,7 +108,6 @@ const expectedGenericRoadmap: Roadmap = {
     },
     {
       step_number: 3,
-      id: "step-3",
       name: "Step 3 Name",
       timeEstimate: "3 months",
       description: "Step 3 description",
@@ -127,7 +124,6 @@ const expectedGenericRoadmap: Roadmap = {
     },
     {
       step_number: 4,
-      id: "step-4",
       name: "Step 4 Name",
       timeEstimate: "4 months",
       description: "Step 4 description",

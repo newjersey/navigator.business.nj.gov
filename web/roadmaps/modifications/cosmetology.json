@@ -1,16 +1,13 @@
 [
   {
-    "step": "due-diligence",
     "taskToReplaceFilename": "check-site-requirements",
     "replaceWithFilename": "check-site-requirements-cosmetology"
   },
   {
-    "step": "inspection-requirements",
     "taskToReplaceFilename": "site-safety-permits",
     "replaceWithFilename": "site-safety-permits-cosmetology"
   },
   {
-    "step": "due-diligence",
     "taskToReplaceFilename": "evaluate-your-location",
     "replaceWithFilename": "evaluate-your-location-cosmetology"
   }
