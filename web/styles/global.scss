@@ -96,6 +96,11 @@ $lg: 64em; //desktop and up (1024px)
   border-color: transparent;
   cursor: pointer;
 }
+
+.override-text-base {
+  color: #757575 !important;
+}
+
 .usa-link:visited,
 .usa-prose > a:visited {
   color: #243413 !important;

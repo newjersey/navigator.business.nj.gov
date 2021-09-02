@@ -103,6 +103,11 @@ const theme = createTheme({
       contrastText: "#f0f0f0",
     },
   },
+  props: {
+    MuiPaper: {
+      elevation: 8,
+    },
+  },
 });
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {

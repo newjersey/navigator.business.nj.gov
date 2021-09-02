@@ -3,7 +3,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthButton } from "@/components/AuthButton";
-import Link from "next/link";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 
 export const NavSideBarUserSettings = (): ReactElement => {
@@ -11,29 +10,44 @@ export const NavSideBarUserSettings = (): ReactElement => {
   const userName = getUserNameOrEmail(userData);
 
   return (
-    <>
-      <div aria-label="Primary navigation">
-        <ul className="usa-nav__primary usa-accordion">
-          <li className="usa-nav__primary-item">
-            <span className="text-primary text-bold font-heading-sm flex fac margin-y-05">
-              <Icon className="margin-right-1 usa-icon--size-4">account_circle</Icon>
-              <span className="text-no-wrap">{userName}</span>
-            </span>
-            <ul id="basic-nav-section-one" className="usa-nav__submenu padding-left-4">
-              <li className="usa-nav__submenu-item">
-                <Link href={process.env.MYNJ_PROFILE_LINK || ""} passHref>
-                  <button id="left-nav-button-padding-left-0" className="cursor-pointer">
-                    {NavDefaults.myNJAccountText}
-                  </button>
-                </Link>
-              </li>
-              <li className="usa-nav__submenu-item">
-                <AuthButton className={"cursor-pointer"} />
-              </li>
-            </ul>
-          </li>
-        </ul>
+    <div className="usa-accordion">
+      <h2 className="usa-accordion__heading">
+        <hr className="bg-base-lighter margin-top-3" />
+        <button
+          data-open-user-settings
+          data-testid="openSettingsBtn"
+          className="usa-accordion__button nav-bar-override-usa-accordion__button"
+          aria-expanded="false"
+          aria-controls="a1"
+        >
+          {" "}
+          <span className="text-primary flex flex-align-center">
+            {" "}
+            <Icon className="margin-right-1 usa-icon--size-4">account_circle</Icon>
+            <span>{userName}</span>
+          </span>
+        </button>
+      </h2>
+      <div
+        id="a1"
+        className="usa-accordion__content nav-bar-override-usa-accordion__content"
+        data-testid="hidden-content"
+        hidden={true}
+      >
+        <div className="margin-left-2">
+          <a
+            data-my-nj-profile-link
+            target="_blank"
+            rel="noreferrer"
+            className={`text-no-underline override-text-base`}
+            href={process.env.MYNJ_PROFILE_LINK || ""}
+          >
+            {NavDefaults.myNJAccountText}
+          </a>
+          <hr className="bg-base-lighter" />
+          <AuthButton className="clear-button text-base text-left" />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
