@@ -112,5 +112,5 @@ Cypress.Commands.add('resetUserData', () => {
         'bearer': currentSession.getIdToken().getJwtToken()
       }
     })
-  })
+  }).catch((err) => console.log(err))
 })
