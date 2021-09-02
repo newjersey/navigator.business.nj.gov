@@ -8,7 +8,20 @@ describe("roadmapBuilder", () => {
       modifications: [],
     });
 
-    expect(roadmap).toEqual(expectedGenericRoadmap);
+    const roadmapNormalized = {
+      ...roadmap,
+      steps: roadmap.steps.map((step) => {
+        return {
+          ...step,
+          tasks: step.tasks.map((task) => ({
+            ...task,
+            contentMd: task.contentMd.replace(/(\r\n|\r)/g, "\n"),
+          })),
+        };
+      }),
+    };
+
+    expect(roadmapNormalized).toEqual(expectedGenericRoadmap);
   });
 
   it("adds tasks from multiple add-ons", async () => {
