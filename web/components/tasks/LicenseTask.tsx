@@ -102,7 +102,7 @@ export const LicenseTask = (props: Props): ReactElement => {
       </div>
 
       <Tabs selectedIndex={tabIndex} onSelect={onSelectTab}>
-        <div className="margin-x-3">
+        <div className="margin-left-3 mobile-lg:margin-right-3">
           <TabList>
             <Tab>{LicenseScreenDefaults.tab1Text}</Tab>
             <Tab>{LicenseScreenDefaults.tab2Text}</Tab>
