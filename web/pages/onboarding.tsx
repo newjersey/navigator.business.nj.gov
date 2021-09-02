@@ -37,8 +37,8 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { Alert } from "@/components/njwds/Alert";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { buildRoadmap } from "@/lib/roadmap/buildRoadmap";
 import { RoadmapContext } from "@/pages/_app";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -144,7 +144,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     setAnalyticsDimensions(onboardingData);
     setError(undefined);
 
-    setRoadmap(await buildRoadmap(onboardingData));
+    setRoadmap(await buildUserRoadmap(onboardingData));
 
     if (page.current + 1 <= PAGES) {
       update({ ...userData, onboardingData }).then(() => {

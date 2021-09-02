@@ -45,9 +45,9 @@ export const getModifiedTaskContent = (
 ): string => {
   const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
   if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {
-    return taskInRoadmap[field];
+    return taskInRoadmap[field] || "";
   }
-  return task[field];
+  return task[field] || "";
 };
 
 export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T }): T => {

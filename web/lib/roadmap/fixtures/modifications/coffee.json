@@ -1,0 +1,12 @@
+[
+  {
+    "step": "step-4",
+    "taskToReplaceFilename": "generic-task-4",
+    "replaceWithFilename": "coffee-task-4"
+  },
+  {
+    "step": "step-3",
+    "taskToReplaceFilename": "generic-task-3",
+    "replaceWithFilename": "coffee-task-3"
+  }
+]

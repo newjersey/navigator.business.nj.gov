@@ -21,12 +21,11 @@ import {
   LegalStructure,
   Municipality,
   OnboardingDisplayContent,
-  Roadmap,
   UserData,
 } from "@/lib/types/types";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { getLastCalledWith, withRoadmap } from "@/test/helpers";
+import { withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -36,6 +35,7 @@ import {
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 
 describe("onboarding", () => {
   let subject: RenderResult;
@@ -192,8 +192,6 @@ describe("onboarding", () => {
 
     clickNext();
     await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(4));
-    const builtRoadmap = getLastCalledWith(mockSetRoadmap)[0] as Roadmap;
-    expect(builtRoadmap.type).toEqual(onboardingData.industry);
   });
 
   it("prevents user from moving after Step 3 if you have not selected a legal structure", async () => {

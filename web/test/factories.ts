@@ -81,7 +81,6 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
 
 export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
   return {
-    type: randomIndustry(),
     steps: [generateStep({})],
     ...overrides,
   };
