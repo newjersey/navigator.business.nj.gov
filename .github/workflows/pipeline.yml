@@ -147,16 +147,23 @@ jobs:
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
         working-directory: api
 
+      - name: 🔧 Retrieve AWS configuration
+        uses: Bardavon-Health/actions-aws-ssm-params-to-env@v1.2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
+          AWS_DEFAULT_REGION: us-east-1
+        with:
+          ssm-path: /config/dev
+          prefix: 'AWS_'
+          decryption: true
+
       - name: 🚀 Deploy api with serverless
         run: npm run serverless deploy -- --verbose --stage dev --region us-east-1
         working-directory: ./api
         env:
           STAGE: dev
           COGNITO_ARN: ${{ secrets.COGNITO_ARN_DEV }}
-          VPC_SECURITY_GROUP_ID: ${{ secrets.VPC_SECURITY_GROUP_ID }}
-          VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1 }}
-          VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2 }}
-          VPC_ID: ${{ secrets.VPC_ID }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_DEV }}
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_DEV }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_DEV }}
@@ -227,16 +234,23 @@ jobs:
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
         working-directory: api
 
+      - name: 🔧 Retrieve AWS configuration
+        uses: Bardavon-Health/actions-aws-ssm-params-to-env@v1.2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
+          AWS_DEFAULT_REGION: us-east-1
+        with:
+          ssm-path: /config/dev
+          prefix: 'AWS_'
+          decryption: true
+
       - name: 🚀 Deploy api with serverless
         run: npm run serverless deploy -- --verbose --stage staging --region us-east-1
         working-directory: ./api
         env:
           STAGE: staging
           COGNITO_ARN: ${{ secrets.COGNITO_ARN_STAGING }}
-          VPC_SECURITY_GROUP_ID: ${{ secrets.VPC_SECURITY_GROUP_ID }}
-          VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1 }}
-          VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2 }}
-          VPC_ID: ${{ secrets.VPC_ID }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_STAGING }}
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_STAGING }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_STAGING }}
@@ -307,16 +321,23 @@ jobs:
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
         working-directory: api
 
+      - name: 🔧 Retrieve AWS configuration
+        uses: Bardavon-Health/actions-aws-ssm-params-to-env@v1.2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
+          AWS_DEFAULT_REGION: us-east-1
+        with:
+          ssm-path: /config/prod
+          prefix: 'AWS_'
+          decryption: true
+
       - name: 🚀 Deploy api with serverless
         run: npm run serverless deploy -- --verbose --stage prod --region us-east-1
         working-directory: ./api
         env:
           STAGE: prod
           COGNITO_ARN: ${{ secrets.COGNITO_ARN_PROD }}
-          VPC_SECURITY_GROUP_ID: ${{ secrets.VPC_SECURITY_GROUP_ID_PROD }}
-          VPC_SUBNET_ID_1: ${{ secrets.VPC_SUBNET_ID_1_PROD }}
-          VPC_SUBNET_ID_2: ${{ secrets.VPC_SUBNET_ID_2_PROD }}
-          VPC_ID: ${{ secrets.VPC_ID }}
           LICENSE_STATUS_BASE_URL: ${{ secrets.LICENSE_STATUS_BASE_URL_PROD }}
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_PROD }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_PROD }}

@@ -13,10 +13,10 @@ const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
 const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
-const securityGroupId = process.env.VPC_SECURITY_GROUP_ID || "";
-const subnetId1 = process.env.VPC_SUBNET_ID_1 || "";
-const subnetId2 = process.env.VPC_SUBNET_ID_2 || "";
-const vpcId = process.env.VPC_ID || "";
+const securityGroupId = process.env.AWS_SECURITY_GROUP || "";
+const subnetId1 = process.env.AWS_SUBNET_01 || "";
+const subnetId2 = process.env.AWS_SUBNET_02 || "";
+const vpcId = process.env.AWS_VPC || "";
 
 const myNJCert = process.env.MYNJ_CERT || "";
 const myNJCertKey = process.env.MYNJ_CERT_KEY || "";
