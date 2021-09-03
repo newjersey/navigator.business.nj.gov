@@ -39,7 +39,7 @@ jobs:
         run: npm install
 
       - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli
+        run: npm install -g @aws-amplify/cli@5.3.1
 
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
