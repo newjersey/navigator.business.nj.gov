@@ -87,10 +87,22 @@ export const InnovFooter = (): ReactElement => {
             </div>
 
             <div className="usa-identifier__logos margin-right-none">
-              <a href={Footer.gitHubLink} className="usa-identifier__logo" target="_blank" rel="noreferrer">
+              <a
+                href={Footer.gitHubLink}
+                className="usa-identifier__logo"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+              >
                 <Icon className="icon-custom margin-top-1">github</Icon>
               </a>
-              <a href={Footer.twitterLink} className="usa-identifier__logo" target="_blank" rel="noreferrer">
+              <a
+                href={Footer.twitterLink}
+                className="usa-identifier__logo"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Twitter"
+              >
                 <Icon className="icon-custom margin-top-1">twitter</Icon>
               </a>
             </div>

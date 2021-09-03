@@ -37,6 +37,7 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
           className="left-nav-menu-button radius-0"
           data-hamburger
           data-testid="nav-menu-open"
+          aria-label="open menu"
           onClick={() => {
             analytics.event.mobile_hamburger_icon.click.open_mobile_menu();
             open();
