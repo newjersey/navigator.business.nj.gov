@@ -21,7 +21,12 @@ const backButton = (
       className="usa-link fdr fac margin-top-3 margin-bottom-3 desktop:margin-top-0 desktop:margin-bottom-7"
       onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
     >
-      <Icon>arrow_back</Icon> {TaskDefaults.backToRoadmapText}
+      <div className="circle-3 border-2px">
+        <Icon className="margin-2px">arrow_back</Icon>
+      </div>
+      <div className="margin-left-2 margin-y-auto text-primary font-sans-xs">
+        {TaskDefaults.backToRoadmapText}
+      </div>
     </a>
   </Link>
 );
