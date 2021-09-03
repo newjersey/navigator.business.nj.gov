@@ -1,5 +1,6 @@
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
+import { EOL } from "os";
 
 describe("roadmapBuilder", () => {
   it("builds a generic roadmap with generic tasks only, and removes empty step 5", async () => {
@@ -8,20 +9,7 @@ describe("roadmapBuilder", () => {
       modifications: [],
     });
 
-    const roadmapNormalized = {
-      ...roadmap,
-      steps: roadmap.steps.map((step) => {
-        return {
-          ...step,
-          tasks: step.tasks.map((task) => ({
-            ...task,
-            contentMd: task.contentMd.replace(/(\r\n|\r)/g, "\n"),
-          })),
-        };
-      }),
-    };
-
-    expect(roadmapNormalized).toEqual(expectedGenericRoadmap);
+    expect(roadmap).toEqual(expectedGenericRoadmap);
   });
 
   it("adds tasks from multiple add-ons", async () => {
@@ -99,7 +87,7 @@ const expectedGenericRoadmap: Roadmap = {
           urlSlug: "generic-task-1-url-slug",
           callToActionLink: "www.generic-task-1.com",
           callToActionText: "Generic Task 1 CTA",
-          contentMd: "\nGeneric Task 1 Contents\n",
+          contentMd: `${EOL}Generic Task 1 Contents${EOL}`,
         },
       ],
     },
@@ -115,7 +103,7 @@ const expectedGenericRoadmap: Roadmap = {
           urlSlug: "generic-task-2-url-slug",
           callToActionLink: "www.generic-task-2.com",
           callToActionText: "Generic Task 2 CTA",
-          contentMd: "\nGeneric Task 2 Contents\n",
+          contentMd: `${EOL}Generic Task 2 Contents${EOL}`,
         },
       ],
     },
@@ -131,7 +119,7 @@ const expectedGenericRoadmap: Roadmap = {
           urlSlug: "generic-task-3-url-slug",
           callToActionLink: "www.generic-task-3.com",
           callToActionText: "Generic Task 3 CTA",
-          contentMd: "\nGeneric Task 3 Contents\n",
+          contentMd: `${EOL}Generic Task 3 Contents${EOL}`,
         },
       ],
     },
@@ -147,7 +135,7 @@ const expectedGenericRoadmap: Roadmap = {
           urlSlug: "generic-task-4-url-slug",
           callToActionLink: "www.generic-task-4.com",
           callToActionText: "Generic Task 4 CTA",
-          contentMd: "\nGeneric Task 4 Contents\n",
+          contentMd: `${EOL}Generic Task 4 Contents${EOL}`,
         },
       ],
     },
