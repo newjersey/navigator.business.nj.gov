@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { Button, createStyles, makeStyles, Menu, MenuItem } from "@material-ui/core";
+import { Button, createStyles, makeStyles, Menu, MenuItem, Paper, Snackbar } from "@material-ui/core";
 import { TaskProgress } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
 import { TagInProgress } from "@/components/njwds-extended/TagInProgress";
@@ -7,6 +7,8 @@ import { TagCompleted } from "@/components/njwds-extended/TagCompleted";
 import { TagNotStarted } from "@/components/njwds-extended/TagNotStarted";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import analytics from "@/lib/utils/analytics";
+import { Alert } from "@/components/njwds/Alert";
+import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -25,6 +27,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [value, setValue] = useState<TaskProgress>(props.initialValue || "NOT_STARTED");
+  const [successToastIsOpen, setSuccessToastIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setValue(props.initialValue || "NOT_STARTED");
@@ -53,12 +56,35 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
     }
 
     setValue(newValue);
+    setSuccessToastIsOpen(true);
     props.onSelect(newValue);
     close();
   };
 
   return (
     <div className="margin-left-neg-1">
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={successToastIsOpen}
+        onClose={() => setSuccessToastIsOpen(false)}
+        autoHideDuration={5000}
+        disableWindowBlurListener={true}
+        ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
+      >
+        <div>
+          <Paper>
+            <Alert
+              slim
+              rounded
+              variant="success"
+              className="margin-y-2"
+              heading={TaskDefaults.taskProgressSuccessToastHeader}
+            >
+              {TaskDefaults.taskProgressSuccessToastBody}
+            </Alert>
+          </Paper>
+        </div>
+      </Snackbar>
       <Button
         style={{ whiteSpace: "nowrap" }}
         aria-controls="simple-menu"

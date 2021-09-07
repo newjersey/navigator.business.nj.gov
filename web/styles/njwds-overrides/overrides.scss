@@ -52,3 +52,8 @@ hr {
 .usa-alert--error {
   background-image: url(/img/usa-icons/warning.svg), linear-gradient(transparent, transparent) !important;
 }
+
+.usa-alert.radius-md::before {
+  border-bottom-left-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+}
