@@ -16,7 +16,6 @@ const usersTable = `users-table-${stage}`;
 const securityGroupId = process.env.AWS_SECURITY_GROUP || "";
 const subnetId1 = process.env.AWS_SUBNET_01 || "";
 const subnetId2 = process.env.AWS_SUBNET_02 || "";
-const vpcId = process.env.AWS_VPC || "";
 
 const myNJCert = process.env.MYNJ_CERT || "";
 const myNJCertKey = process.env.MYNJ_CERT_KEY || "";
@@ -122,22 +121,6 @@ const serverlessConfiguration: AWS = {
         Properties: {
           ...dynamoDbSchema,
           TableName: usersTable,
-        },
-      },
-      VPCEndpointForDynamo: {
-        Type: "AWS::EC2::VPCEndpoint",
-        Properties: {
-          ServiceName: `com.amazonaws.${region}.dynamodb`,
-          VpcEndpointType: "Gateway",
-          VpcId: vpcId,
-        },
-      },
-      VPCEndpointForS3: {
-        Type: "AWS::EC2::VPCEndpoint",
-        Properties: {
-          ServiceName: `com.amazonaws.${region}.s3`,
-          VpcEndpointType: "Gateway",
-          VpcId: vpcId,
         },
       },
     },
