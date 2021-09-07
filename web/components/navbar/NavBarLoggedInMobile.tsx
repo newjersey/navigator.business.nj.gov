@@ -15,12 +15,11 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const open = () => setSidebarIsOpen(true);
   const close = () => setSidebarIsOpen(false);
-  const isVisible = () => (sidebarIsOpen ? "is-visible" : "");
 
   return (
     <>
       <div
-        className={`left-nav-overlay ${isVisible()}`}
+        className={`left-nav-overlay ${sidebarIsOpen ? "is-visible" : ""}`}
         aria-hidden="true"
         onClick={() => {
           analytics.event.mobile_menu.click_outside.close_mobile_menu();
@@ -53,8 +52,12 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
           )}
         </div>
       </nav>
-      <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
-        <nav aria-label="Secondary navigation" className={`left-nav ${isVisible()}`}>
+      <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen} delayTime={500}>
+        <nav
+          aria-label="Secondary navigation"
+          className={`left-nav ${sidebarIsOpen ? "is-visible" : "is-hidden"} `}
+          data-testid="nav-sidebar-menu"
+        >
           <button
             className="left-nav-close fdr fac fjc"
             onClick={() => {
