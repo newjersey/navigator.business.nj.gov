@@ -4,7 +4,7 @@ export const SearchBusinessNamesDefaults: Record<string, string> = {
   unavailableText: 'Sorry, "${name}" isn’t available. Try another name.',
   similarUnavailableNamesText: "Here are similar business names that are already taken:",
   availableText:
-    'Looks like "${name}" might be available! To reserve this name, apply for your EIN number and form a business entity.',
+    'Looks like "${name}" might be available! To reserve this name, apply for your EIN number and form your business entity.',
   updateButtonText: "Update the name on your roadmap with this one",
   nameHasBeenUpdatedText: "Your business name has been updated",
   officialCheckButtonText: "Official Name Check",
