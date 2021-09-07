@@ -4,4 +4,6 @@ export const TaskDefaults: Record<string, string> = {
   pageTitle: "Business Roadmap",
   taskProgressSuccessToastHeader: "Success!",
   taskProgressSuccessToastBody: "Your task status has been updated.",
+  nextTaskButtonText: "Next",
+  previousTaskButtonText: "Previous",
 };

@@ -1,5 +1,5 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useMemo } from "react";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task } from "@/lib/types/types";
@@ -10,11 +10,14 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { TaskHeader } from "@/components/TaskHeader";
 import { TaskCTA } from "@/components/TaskCTA";
-import { getModifiedTaskContent, rswitch } from "@/lib/utils/helpers";
+import { getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NextSeo } from "next-seo";
 import { NavBar } from "@/components/navbar/NavBar";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
+import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { useRouter } from "next/router";
+import { Icon } from "@/components/njwds/Icon";
 
 interface Props {
   task: Task;
@@ -23,7 +26,43 @@ interface Props {
 const TaskPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
 
+  const router = useRouter();
+
   const { roadmap } = useRoadmap();
+  const UrlSlugPosition = useMemo(() => {
+    const arrayOfTasks = getUrlSlugs(roadmap);
+    const currentUrlSlugIndex = arrayOfTasks.indexOf(props.task.urlSlug);
+    const previousUrlSlug = arrayOfTasks[currentUrlSlugIndex - 1];
+    const nextUrlSlug = arrayOfTasks[currentUrlSlugIndex + 1];
+    return { previousUrlSlug, nextUrlSlug };
+  }, [props.task.urlSlug, roadmap]);
+
+  const nextAndPreviousButtons = (): ReactElement => (
+    <div className="flex flex-row margin-top-2 padding-right-1">
+      {UrlSlugPosition.previousUrlSlug && (
+        <button
+          className="flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105"
+          onClick={() => router.push(`/tasks/${UrlSlugPosition.previousUrlSlug}`)}
+        >
+          <div className="flex padding-y-1 flex-justify-center">
+            <Icon className="usa-icon--size-4 position-absolute left-2 bottom-105">navigate_before</Icon>
+            <span> {TaskDefaults.previousTaskButtonText}</span>
+          </div>
+        </button>
+      )}
+      {UrlSlugPosition.nextUrlSlug && (
+        <button
+          className="flex-half usa-button usa-button--outline padding-y-105"
+          onClick={() => router.push(`/tasks/${UrlSlugPosition.nextUrlSlug}`)}
+        >
+          <div className="flex padding-y-1 flex-justify-center">
+            <span>{TaskDefaults.nextTaskButtonText}</span>
+            <Icon className="usa-icon--size-4 position-absolute right-2 bottom-105">navigate_next</Icon>
+          </div>
+        </button>
+      )}
+    </div>
+  );
 
   const getPostOnboardingQuestion = (): ReactElement => {
     if (!props.task.postOnboardingQuestion) return <></>;
@@ -52,7 +91,7 @@ const TaskPage = (props: Props): ReactElement => {
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
       <PageSkeleton>
         <NavBar task={props.task} />
-        <SidebarPageLayout task={props.task}>
+        <SidebarPageLayout task={props.task} belowOutlineBoxComponent={nextAndPreviousButtons()}>
           {rswitch(props.task.id, {
             "search-business-name": (
               <div className="margin-3">

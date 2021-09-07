@@ -37,7 +37,6 @@ const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task 
   const stepInRoadmap = roadmap?.steps.find((step) => step.tasks.find((task) => task.id === taskId));
   return stepInRoadmap?.tasks.find((task) => task.id === taskId);
 };
-
 export const getModifiedTaskContent = (
   roadmap: Roadmap | undefined,
   task: Task,
@@ -73,4 +72,13 @@ export const getUserNameOrEmail = (userData: UserData | undefined): string => {
   if (userData?.user.name) return userData.user.name;
   else if (userData?.user.email) return userData.user.email;
   else return NavDefaults.myNJAccountText;
+};
+
+export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
+  if (!roadmap) return [];
+  const { steps } = roadmap;
+  return steps.reduce((acc: string[], currStep: Step) => {
+    const { tasks } = currStep;
+    return [...acc, ...tasks.map((task) => task.urlSlug)];
+  }, []);
 };

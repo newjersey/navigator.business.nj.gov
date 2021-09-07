@@ -11,6 +11,7 @@ import { Task } from "@/lib/types/types";
 interface Props {
   children: React.ReactNode;
   task: Task;
+  belowOutlineBoxComponent?: React.ReactNode;
 }
 
 const backButton = (
@@ -31,7 +32,7 @@ const backButton = (
   </Link>
 );
 
-export const SidebarPageLayout = ({ children, task }: Props): ReactElement => {
+export const SidebarPageLayout = ({ children, task, belowOutlineBoxComponent }: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
 
   return (
@@ -51,6 +52,7 @@ export const SidebarPageLayout = ({ children, task }: Props): ReactElement => {
             <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs">
               {!isLargeScreen && <div>{backButton}</div>}
               <div className="border-1px border-base-light usa-prose minh-40 fdc">{children}</div>
+              {belowOutlineBoxComponent}
             </main>
           </div>
         </div>
