@@ -4,21 +4,11 @@ import { Icon } from "@/components/njwds/Icon";
 import { AuthButton } from "@/components/AuthButton";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { NavDefaults } from "@/display-content/NavDefaults";
-import { ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles(() => {
-  return {
-    paper: {
-      padding: "8px 0px",
-    },
-  };
-});
+import { ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from "@material-ui/core";
 
 export const NavBarLoggedInDesktop = (): ReactElement => {
   const { userData } = useUserData();
   const userName = getUserNameOrEmail(userData);
-
-  const classes = useStyles();
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
@@ -44,7 +34,7 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
 
   const prevOpen = useRef(open);
   useEffect(() => {
-    if (null !== anchorRef.current && prevOpen.current === true && open === false) {
+    if (null !== anchorRef.current && prevOpen.current && !open) {
       anchorRef.current.focus();
     }
 
@@ -78,23 +68,21 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
                     transformOrigin: placement === "bottom" ? "center top" : "center bottom",
                   }}
                 >
-                  <Paper className={classes.paper}>
+                  <Paper>
                     <ClickAwayListener onClickAway={handleClose}>
                       <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                         <MenuItem onClick={handleClose}>
-                          {" "}
                           <a
                             target="_blank"
                             rel="noreferrer"
-                            className={`font-sans-3xs text-bold text-no-underline`}
+                            className="text-no-underline font-body-2xs text-bold"
                             href={process.env.MYNJ_PROFILE_LINK || ""}
                           >
                             {NavDefaults.myNJAccountText}
                           </a>
                         </MenuItem>
                         <MenuItem onClick={handleClose}>
-                          {" "}
-                          <AuthButton className="clear-button font-sans-3xs text-primary text-bold text-left" />
+                          <AuthButton className="clear-button font-body-2xs text-primary text-bold text-left" />
                         </MenuItem>
                       </MenuList>
                     </ClickAwayListener>
