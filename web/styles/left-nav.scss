@@ -1,17 +1,34 @@
 @-webkit-keyframes slidein-right {
   0% {
-    transform: translateX(-20rem);
+    -webkit-transform: translateX(-100%);
   }
-  to {
-    transform: translateX(0);
+  100% {
+    -webkit-transform: translateX(0);
   }
 }
 @keyframes slidein-right {
   0% {
-    transform: translateX(-20rem);
+    transform: translateX(-100%);
   }
-  to {
+  100% {
     transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes slideout-left {
+  0% {
+    -webkit-transform: translateX(0%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+@keyframes slideout-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 
@@ -23,7 +40,7 @@
     position: fixed;
     background: #fff;
     border-left: 0;
-    display: none;
+    display: flex;
     flex-direction: column;
     overflow-y: auto;
     padding: 1rem;
@@ -31,10 +48,15 @@
     z-index: 500;
   }
   .left-nav.is-visible {
-    -webkit-animation: slidein-right 0.3s ease-in-out !important;
-    animation: slidein-right 0.3s ease-in-out !important;
-    display: flex;
+    -webkit-animation: slidein-right 0.5s forwards;
+    animation: slidein-right 0.5s forwards;
   }
+
+  .left-nav.is-hidden {
+    -webkit-animation: slideout-left 0.5s forwards;
+    animation: slideout-left 0.5s forwards;
+  }
+
   .left-nav-close {
     -moz-osx-font-smoothing: auto;
     -webkit-font-smoothing: subpixel-antialiased;

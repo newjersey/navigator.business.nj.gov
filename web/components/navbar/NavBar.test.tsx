@@ -1,7 +1,7 @@
 import * as materialUi from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 import { NavBar } from "@/components/navbar/NavBar";
-import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import { NavDefaults } from "@/display-content/NavDefaults";
 import { useUndefinedUserData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { generateRoadmap, generateStep, generateTask, generateUser } from "@/test/factories";
@@ -142,7 +142,7 @@ describe("<NavBar />", () => {
       expect(subject.queryByText("step1")).toBeInTheDocument();
     });
 
-    it("hide mini-roadmap on-click", () => {
+    it("hide sidebar nav on-click", async () => {
       useMockUserData({});
       useMockRoadmap(
         generateRoadmap({
@@ -152,7 +152,10 @@ describe("<NavBar />", () => {
       const subject = renderMobileTaskNav();
       fireEvent.click(subject.getByText("step1"));
       fireEvent.click(subject.getByText("task1"));
+
+      await waitForElementToBeRemoved(() => subject.queryByTestId("nav-sidebar-menu"));
       expect(subject.queryByText("task1")).not.toBeInTheDocument();
+      expect(subject.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
     });
   });
 });
