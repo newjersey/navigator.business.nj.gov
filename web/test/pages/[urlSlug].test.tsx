@@ -3,13 +3,15 @@ import * as materialUi from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 import TaskPage from "@/pages/tasks/[urlSlug]";
 import { Task, TaskProgress, UserData } from "@/lib/types/types";
-import { generateOnboardingData, generateTask, generateUserData } from "@/test/factories";
+import { generateOnboardingData, generateStep, generateTask, generateUserData } from "@/test/factories";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -20,6 +22,7 @@ function mockMaterialUI(): typeof materialUi {
 
 jest.mock("@material-ui/core", () => mockMaterialUI());
 jest.mock("@/lib/auth/useAuthProtectedPage");
+jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
@@ -41,6 +44,7 @@ describe("task page", () => {
     jest.resetAllMocks();
     setLargeScreen();
     useMockRoadmap({});
+    useMockRouter({});
     setupStatefulUserDataContext();
   });
 
@@ -219,5 +223,54 @@ describe("task page", () => {
     expect(subject.queryByTestId("post-onboarding-false-content")).toBeInTheDocument();
     expect(subject.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
     expect(currentUserData().onboardingData.constructionRenovationPlan).toBe(false);
+  });
+
+  describe("next and previous task buttons", () => {
+    const taskOne = generateTask({ urlSlug: "task-1" });
+    const taskTwo = generateTask({ urlSlug: "task-2" });
+    const taskThree = generateTask({ urlSlug: "task-3" });
+
+    beforeEach(() => {
+      useMockRoadmap({
+        steps: [
+          generateStep({
+            tasks: [taskOne],
+          }),
+          generateStep({
+            tasks: [taskTwo],
+          }),
+          generateStep({
+            tasks: [taskThree],
+          }),
+        ],
+      });
+    });
+
+    it("renders only Next Task button for first task", async () => {
+      subject = renderPage(taskOne);
+      expect(subject.getByText(TaskDefaults.nextTaskButtonText)).toBeInTheDocument();
+      expect(subject.queryByText(TaskDefaults.previousTaskButtonText)).not.toBeInTheDocument();
+    });
+
+    it("renders only Previous Task button at last task", async () => {
+      subject = renderPage(taskThree);
+      expect(subject.queryByText(TaskDefaults.nextTaskButtonText)).not.toBeInTheDocument();
+      expect(subject.getByText(TaskDefaults.previousTaskButtonText)).toBeInTheDocument();
+    });
+
+    it("renders both Next and Previous buttons for task in the middle", async () => {
+      subject = renderPage(taskTwo);
+      expect(subject.getByText(TaskDefaults.nextTaskButtonText)).toBeInTheDocument();
+      expect(subject.getByText(TaskDefaults.previousTaskButtonText)).toBeInTheDocument();
+    });
+
+    it("links to next and previous tasks", () => {
+      subject = renderPage(taskTwo);
+      fireEvent.click(subject.getByText(TaskDefaults.nextTaskButtonText));
+      expect(mockPush).toHaveBeenCalledWith("/tasks/task-3");
+
+      fireEvent.click(subject.getByText(TaskDefaults.previousTaskButtonText));
+      expect(mockPush).toHaveBeenCalledWith("/tasks/task-1");
+    });
   });
 });
