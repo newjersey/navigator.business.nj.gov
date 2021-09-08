@@ -29,20 +29,21 @@ const TaskPage = (props: Props): ReactElement => {
   const router = useRouter();
 
   const { roadmap } = useRoadmap();
-  const UrlSlugPosition = useMemo(() => {
+  const { previousUrlSlug, nextUrlSlug } = useMemo(() => {
     const arrayOfTasks = getUrlSlugs(roadmap);
     const currentUrlSlugIndex = arrayOfTasks.indexOf(props.task.urlSlug);
-    const previousUrlSlug = arrayOfTasks[currentUrlSlugIndex - 1];
-    const nextUrlSlug = arrayOfTasks[currentUrlSlugIndex + 1];
-    return { previousUrlSlug, nextUrlSlug };
+    return {
+      previousUrlSlug: arrayOfTasks[currentUrlSlugIndex - 1],
+      nextUrlSlug: arrayOfTasks[currentUrlSlugIndex + 1],
+    };
   }, [props.task.urlSlug, roadmap]);
 
   const nextAndPreviousButtons = (): ReactElement => (
     <div className="flex flex-row margin-top-2 padding-right-1">
-      {UrlSlugPosition.previousUrlSlug && (
+      {previousUrlSlug && (
         <button
           className="flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105"
-          onClick={() => router.push(`/tasks/${UrlSlugPosition.previousUrlSlug}`)}
+          onClick={() => router.push(`/tasks/${previousUrlSlug}`)}
         >
           <div className="flex padding-y-1 flex-justify-center">
             <Icon className="usa-icon--size-4 position-absolute left-2 bottom-105">navigate_before</Icon>
@@ -50,10 +51,10 @@ const TaskPage = (props: Props): ReactElement => {
           </div>
         </button>
       )}
-      {UrlSlugPosition.nextUrlSlug && (
+      {nextUrlSlug && (
         <button
           className="flex-half usa-button usa-button--outline padding-y-105"
-          onClick={() => router.push(`/tasks/${UrlSlugPosition.nextUrlSlug}`)}
+          onClick={() => router.push(`/tasks/${nextUrlSlug}`)}
         >
           <div className="flex padding-y-1 flex-justify-center">
             <span>{TaskDefaults.nextTaskButtonText}</span>
