@@ -87,14 +87,20 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
       </Snackbar>
       <Button
         style={{ whiteSpace: "nowrap" }}
-        aria-controls="simple-menu"
+        aria-controls="task-progress-status-menu"
         aria-haspopup="true"
         onClick={handleClick}
       >
         {TaskProgressTagLookup[value]}
         <Icon>unfold_more</Icon>
       </Button>
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={close}>
+      <Menu
+        id="task-progress-status-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={close}
+      >
         <MenuItem
           className={`margin-left-neg-1 ${classes.menuItem}`}
           onClick={() => handleSelect("NOT_STARTED")}

@@ -27,22 +27,22 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
 
   return (
     <div className={`usa-step-indicator usa-step-indicator--counters${sm}`} aria-label="progress">
-      <ol className="usa-step-indicator__segments vertical">
-        <li
+      <div className="usa-step-indicator__segments vertical">
+        <div
           className={` vertical usa-step-indicator__segment usa-step-indicator__segment--${
             props.active ? "current" : "complete"
           }`}
           data-num={props.completed ? "✓" : props.number}
         >
           <span className="usa-step-indicator__segment-label" />
-        </li>
+        </div>
         {!props.last && (
           <div
             className={`vertical-bar${sm} ${props.active ? "current" : "complete"}`}
             id={`vertical-bar-${props.number}`}
           />
         )}
-      </ol>
+      </div>
     </div>
   );
 };
