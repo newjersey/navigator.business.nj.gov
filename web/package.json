@@ -48,7 +48,7 @@
     "react-tabs": "3.2.2",
     "react-transition-group": "4.4.2",
     "remark": "12.0.1",
-    "remark-html": "12.0.0",
+    "remark-html": "13.0.2",
     "remark-react": "8.0.0",
     "sass": "1.39.0",
     "swr": "1.0.0"
