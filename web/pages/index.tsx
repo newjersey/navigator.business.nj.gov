@@ -31,7 +31,7 @@ const Home = (): ReactElement => {
   }, [router.isReady, router.query]);
 
   return (
-    <PageSkeleton>
+    <PageSkeleton home={true}>
       <NavBar landingPage={true} />
       <Hero
         calloutText={LandingPageDefaults.heroCalloutFirstLineText}

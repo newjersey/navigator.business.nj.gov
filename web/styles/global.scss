@@ -132,3 +132,19 @@ $lg: 64em; //desktop and up (1024px)
   transition: top 500ms ease-in;
   z-index: 300;
 }
+
+.skip-link {
+  background: #fff;
+  font-weight: 700;
+  left: 50%;
+  padding: 0.25rem;
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+  z-index: 99999;
+}
+
+.skip-link:focus,
+.skip-link:focus-within {
+  transform: translateY(0%);
+}
