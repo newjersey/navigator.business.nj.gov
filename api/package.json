@@ -71,7 +71,7 @@
     "jest": "27.1.0",
     "jest-dynalite": "3.4.1",
     "json-schema-to-ts": "1.6.4",
-    "prettier": "2.3.2",
+    "prettier": "2.4.0",
     "serverless": "2.57.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-webpack": "5.5.3",
