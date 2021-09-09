@@ -14,6 +14,11 @@ interface Props {
 export const PageSkeleton = (props: Props): ReactElement => {
   return (
     <>
+      {!props.home && (
+        <a className="skip-link" href="#main">
+          Skip to main content
+        </a>
+      )}
       <Banner />
       <BetaBar />
       <div className="fit-screen-content">{props.children}</div>

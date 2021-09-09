@@ -49,7 +49,7 @@ export const SidebarPageLayout = ({ children, task, belowOutlineBoxComponent }: 
                 </nav>
               )}
             </div>
-            <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs">
+            <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs" id="main">
               {!isLargeScreen && <div>{backButton}</div>}
               <div className="border-1px border-base-light usa-prose minh-40 fdc">{children}</div>
               {belowOutlineBoxComponent}
