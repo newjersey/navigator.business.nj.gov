@@ -60,6 +60,7 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
         >
           <button
             className="left-nav-close fdr fac fjc"
+            aria-label="close menu"
             onClick={() => {
               analytics.event.mobile_menu_close_button.click.close_mobile_menu();
               close();

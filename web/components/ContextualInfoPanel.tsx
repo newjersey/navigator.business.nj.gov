@@ -29,6 +29,7 @@ export const ContextualInfoPanel = (): ReactElement => {
         <aside data-testid="info-panel" className={`info-panel ${isVisible()}`}>
           <button
             className="fdr fac fjc info-panel-close cursor-pointer"
+            aria-label="close panel"
             onClick={() => {
               analytics.event.contextual_sidebar_close_button.click.close_contextual_sidebar();
               close();

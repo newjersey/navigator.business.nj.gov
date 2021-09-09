@@ -79,7 +79,7 @@ export const InnovFooter = (): ReactElement => {
           aria-label="Office of Innovation links"
         >
           <div className="usa-identifier__container display-flex flex-column fac footer-container-external">
-            <div className="usa-identifier__identity" aria-label="Office of Innovation Description">
+            <div className="usa-identifier__identity">
               <p className="usa-identifier__identity-domain"></p>
               <p className="usa-identifier__identity-disclaimer footer-text-custom">
                 {Footer.officeExternalText}

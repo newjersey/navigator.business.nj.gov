@@ -26,13 +26,14 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
   useOnWindowResize(resizeVerticalBarToContent);
 
   return (
-    <div className={`usa-step-indicator usa-step-indicator--counters${sm}`} aria-label="progress">
+    <div className={`usa-step-indicator usa-step-indicator--counters${sm}`}>
       <div className="usa-step-indicator__segments vertical">
         <div
           className={` vertical usa-step-indicator__segment usa-step-indicator__segment--${
             props.active ? "current" : "complete"
           }`}
           data-num={props.completed ? "✓" : props.number}
+          aria-label={`Step ${props.number}`}
         >
           <span className="usa-step-indicator__segment-label" />
         </div>

@@ -18,7 +18,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
       <BetaBar />
       <div className="fit-screen-content">{props.children}</div>
       {props.showLegalMessage && (
-        <div className="bg-base-lighter text-justify">
+        <div className="bg-base-lighter text-justify" role="banner">
           <SingleColumnContainer>
             <div className="padding-y-2 line-height-body-2">
               <LegalMessage />
