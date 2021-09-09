@@ -2,20 +2,17 @@ import type { AWS } from "@serverless/typescript";
 
 import express from "./src/functions/express";
 import dynamoDbSchema from "./dynamodb-schema.json";
+import { env } from "process";
 
 const isDocker = process.env.IS_DOCKER == "true" || false; // set in docker-compose
 const stage = process.env.STAGE || "dev";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5000;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
-const cognitoArn = process.env.COGNITO_ARN || "";
 const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
 const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
-const securityGroupId = process.env.AWS_SECURITY_GROUP || "";
-const subnetId1 = process.env.AWS_SUBNET_01 || "";
-const subnetId2 = process.env.AWS_SUBNET_02 || "";
 
 const disableAuth = process.env.DISABLE_AUTH ?? "";
 
@@ -26,14 +23,6 @@ const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
 const myNJRoleName = process.env.MYNJ_ROLE_NAME || "";
 const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
 const awsSecretId = process.env.AWS_SECRET_ID || "";
-
-let vpcConfig = undefined;
-if (securityGroupId && subnetId1 && subnetId2) {
-  vpcConfig = {
-    securityGroupIds: [securityGroupId],
-    subnetIds: [subnetId1, subnetId2],
-  };
-}
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -51,13 +40,28 @@ const serverlessConfiguration: AWS = {
       },
       stages: [stage],
     },
+    "serverless-offline-ssm": {
+      stages: ["offline"],
+    },
     "serverless-offline": {
       host: isDocker ? "0.0.0.0" : "localhost",
       httpPort: offlinePort,
       lambdaPort: offlineLambdaPort,
     },
+    config: {
+      dev: "${ssm:/config/dev}",
+      staging: "${ssm:/config/staging}",
+      prod: "${ssm:/config/prod}",
+    },
+    stage: stage,
   },
-  plugins: ["serverless-webpack", ...(isDocker ? [] : ["serverless-dynamodb-local"]), "serverless-offline"],
+  plugins: [
+    "serverless-webpack",
+    ...(isDocker ? [] : ["serverless-dynamodb-local"]),
+    "serverless-offline-ssm",
+    "serverless-offline",
+  ],
+  variablesResolutionMode: "20210326",
   provider: {
     name: "aws",
     runtime: "nodejs14.x",
@@ -115,7 +119,19 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: "20201221",
   },
   functions: {
-    express: express(cognitoArn, vpcConfig, disableAuth),
+    express: express(
+      "${self:custom.config.${self:custom.stage}.COGNITO_ARN}",
+      env.CI
+        ? {
+            securityGroupIds: ["${self:custom.config.${self:custom.stage}.SECURITY_GROUP}"],
+            subnetIds: [
+              "${self:custom.config.${self:custom.stage}.SUBNET_01}",
+              "${self:custom.config.${self:custom.stage}.SUBNET_02}",
+            ],
+          }
+        : undefined,
+      disableAuth
+    ),
   },
   resources: {
     Resources: {
