@@ -345,6 +345,7 @@ jobs:
           MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_PROD }}
           BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_PROD }}
           AWS_SECRET_ID: MYNJ_CERTS_PROD
+          DISABLE_AUTH: ${{ secrets.DISABLE_AUTH_PROD }}
 
       - name: 🚀 Deploy web to AWS Amplify
         run: ./scripts/amplify-ci/publish.sh
@@ -359,3 +360,4 @@ jobs:
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
           COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_PROD }}
           MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop
+          DISABLE_AUTH: ${{ secrets.DISABLE_AUTH_PROD }}
