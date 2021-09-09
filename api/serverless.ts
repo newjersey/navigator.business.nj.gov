@@ -17,6 +17,8 @@ const securityGroupId = process.env.AWS_SECURITY_GROUP || "";
 const subnetId1 = process.env.AWS_SUBNET_01 || "";
 const subnetId2 = process.env.AWS_SUBNET_02 || "";
 
+const disableAuth = process.env.DISABLE_AUTH ?? "";
+
 const myNJCert = process.env.MYNJ_CERT || "";
 const myNJCertKey = process.env.MYNJ_CERT_KEY || "";
 const myNJCertPassphrase = process.env.MYNJ_CERT_PASSPHRASE || "";
@@ -108,6 +110,7 @@ const serverlessConfiguration: AWS = {
       MYNJ_CERT_KEY: myNJCertKey,
       MYNJ_CERT_PASSPHRASE: myNJCertPassphrase,
       AWS_SECRET_ID: awsSecretId,
+      DISABLE_AUTH: disableAuth,
     },
     lambdaHashingVersion: "20201221",
   },
