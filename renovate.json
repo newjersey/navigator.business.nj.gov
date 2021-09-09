@@ -57,7 +57,7 @@
         "@types/copy-webpack-plugin",
         "@types/webpack-node-externals",
         "copy-webpack-plugin",
-        "tsconfig-paths-webpack-plugin"
+        "tsconfig-paths-webpack-plugin",
         "@serverless/typescript"
       ],
       "matchPackagePrefixes": [
