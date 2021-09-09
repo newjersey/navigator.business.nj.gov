@@ -47,15 +47,6 @@
       "groupName": "react"
     },
     {
-      "matchPackageNames": [
-        "@serverless/typescript"
-      ],
-      "matchPackagePrefixes": [
-        "serverless"
-      ],
-      "groupName": "serverless"
-    },
-    {
       "matchPackagePrefixes": [
         "@testing-library"
       ],
@@ -67,11 +58,13 @@
         "@types/webpack-node-externals",
         "copy-webpack-plugin",
         "tsconfig-paths-webpack-plugin"
+        "@serverless/typescript"
       ],
       "matchPackagePrefixes": [
+        "serverless",
         "webpack"
       ],
-      "groupName": "webpack"
+      "groupName": "serverless-and-webpack"
     }
   ]
 }
