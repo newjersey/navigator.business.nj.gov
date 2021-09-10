@@ -9,6 +9,8 @@ npm run typecheck
 # format files
 npm run prettier
 
+npm --prefix=web run spellcheck
+
 # check if uncommited changes
 changed_files=$(git status --porcelain | wc -l)
 if [ $changed_files -ne 0 ]; then
