@@ -1,7 +1,7 @@
 import { handlerPath } from "@libs/handlerResolver";
 import { FnType } from "@functions/index";
 
-export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
+export default (cognitoArn: string, vpcConfig: FnType["vpc"], disableAuth: string): FnType => ({
   handler: `${handlerPath(__dirname)}/app.handler`,
   timeout: 30,
   events: [
@@ -16,9 +16,11 @@ export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
       http: {
         method: "ANY",
         path: "/{proxy+}",
-        authorizer: {
-          arn: cognitoArn,
-        },
+        authorizer: disableAuth
+          ? undefined
+          : {
+              arn: cognitoArn,
+            },
         cors: true,
       },
     },

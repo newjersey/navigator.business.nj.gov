@@ -115,7 +115,7 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: "20201221",
   },
   functions: {
-    express: express(cognitoArn, vpcConfig),
+    express: express(cognitoArn, vpcConfig, disableAuth),
   },
   resources: {
     Resources: {
