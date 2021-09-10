@@ -40,28 +40,26 @@ const TaskPage = (props: Props): ReactElement => {
 
   const nextAndPreviousButtons = (): ReactElement => (
     <div className="flex flex-row margin-top-2 padding-right-1">
-      {previousUrlSlug && (
-        <button
-          className="flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105"
-          onClick={() => router.push(`/tasks/${previousUrlSlug}`)}
-        >
-          <div className="flex padding-y-1 flex-justify-center">
-            <Icon className="usa-icon--size-4 position-absolute left-2 bottom-105">navigate_before</Icon>
-            <span> {TaskDefaults.previousTaskButtonText}</span>
-          </div>
-        </button>
-      )}
-      {nextUrlSlug && (
-        <button
-          className="flex-half usa-button usa-button--outline padding-y-105"
-          onClick={() => router.push(`/tasks/${nextUrlSlug}`)}
-        >
-          <div className="flex padding-y-1 flex-justify-center">
-            <span>{TaskDefaults.nextTaskButtonText}</span>
-            <Icon className="usa-icon--size-4 position-absolute right-2 bottom-105">navigate_next</Icon>
-          </div>
-        </button>
-      )}
+      <button
+        className="flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105"
+        style={{ visibility: previousUrlSlug ? "visible" : "hidden" }}
+        onClick={() => router.push(`/tasks/${previousUrlSlug}`)}
+      >
+        <div className="flex padding-y-1 flex-justify-center">
+          <Icon className="usa-icon--size-4 position-absolute left-2 bottom-105">navigate_before</Icon>
+          <span> {TaskDefaults.previousTaskButtonText}</span>
+        </div>
+      </button>
+      <button
+        className="flex-half usa-button usa-button--outline padding-y-105"
+        style={{ visibility: nextUrlSlug ? "visible" : "hidden" }}
+        onClick={() => router.push(`/tasks/${nextUrlSlug}`)}
+      >
+        <div className="flex padding-y-1 flex-justify-center">
+          <span>{TaskDefaults.nextTaskButtonText}</span>
+          <Icon className="usa-icon--size-4 position-absolute right-2 bottom-105">navigate_next</Icon>
+        </div>
+      </button>
     </div>
   );
 

@@ -249,12 +249,12 @@ describe("task page", () => {
     it("renders only Next Task button for first task", async () => {
       subject = renderPage(taskOne);
       expect(subject.getByText(TaskDefaults.nextTaskButtonText)).toBeInTheDocument();
-      expect(subject.queryByText(TaskDefaults.previousTaskButtonText)).not.toBeInTheDocument();
+      expect(subject.queryByText(TaskDefaults.previousTaskButtonText)).not.toBeVisible();
     });
 
     it("renders only Previous Task button at last task", async () => {
       subject = renderPage(taskThree);
-      expect(subject.queryByText(TaskDefaults.nextTaskButtonText)).not.toBeInTheDocument();
+      expect(subject.queryByText(TaskDefaults.nextTaskButtonText)).not.toBeVisible();
       expect(subject.getByText(TaskDefaults.previousTaskButtonText)).toBeInTheDocument();
     });
 
