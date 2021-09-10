@@ -9,7 +9,7 @@ interface Props {
   delayTime?: number;
 }
 
-export const FocusTrappedSidebar = ({ children, close, isOpen, delayTime = 0 }: Props): ReactElement => {
+export const FocusTrappedSidebar = ({ children, close, isOpen, delayTime = 300 }: Props): ReactElement => {
   const [showDiv, setShowDiv] = useState(false);
 
   useEffect(() => {
