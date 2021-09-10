@@ -52,7 +52,7 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
           )}
         </div>
       </nav>
-      <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen} delayTime={500}>
+      <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
         <nav
           aria-label="Secondary navigation"
           className={`left-nav ${sidebarIsOpen ? "is-visible" : "is-hidden"} `}

@@ -46,15 +46,16 @@
     padding: 1rem;
     width: 20rem;
     z-index: 500;
-  }
-  .left-nav.is-visible {
-    -webkit-animation: slidein-right 0.5s forwards;
-    animation: slidein-right 0.5s forwards;
-  }
 
-  .left-nav.is-hidden {
-    -webkit-animation: slideout-left 0.5s forwards;
-    animation: slideout-left 0.5s forwards;
+    &.is-visible {
+      -webkit-animation: slidein-right 0.3s forwards;
+      animation: slidein-right 0.3s forwards;
+    }
+
+    &.is-hidden {
+      -webkit-animation: slideout-left 0.3s forwards;
+      animation: slideout-left 0.3s forwards;
+    }
   }
 
   .left-nav-close {
@@ -86,10 +87,11 @@
     transition: opacity 0.2s ease-in-out;
     visibility: hidden;
     z-index: 400;
-  }
-  .left-nav-overlay.is-visible {
-    opacity: 0.2;
-    visibility: visible;
+
+    &.is-visible {
+      opacity: 0.2;
+      visibility: visible;
+    }
   }
   .left-nav-menu-button {
     -moz-osx-font-smoothing: auto;
