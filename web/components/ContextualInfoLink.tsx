@@ -27,6 +27,7 @@ export const ContextualInfoLink = ({ children }: { children: string[] }): ReactE
     <>
       <button
         className="usa-button--unstyled cursor-pointer weight-inherit style-inherit"
+        data-contextual-info-id={contextualInfoId}
         onClick={setContext}
       >
         <span className="dashed-underline border-primary line-height-body-5">{displayText}</span>

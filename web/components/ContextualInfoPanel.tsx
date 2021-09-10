@@ -26,7 +26,10 @@ export const ContextualInfoPanel = (): ReactElement => {
         className={`info-overlay ${isVisible()}`}
       />
       <FocusTrappedSidebar close={close} isOpen={!!isVisible()}>
-        <aside data-testid="info-panel" className={`info-panel ${isVisible()}`}>
+        <aside
+          data-testid="info-panel"
+          className={`info-panel ${contextualInfoMd ? "is-visible" : "is-hidden"}`}
+        >
           <button
             className="fdr fac fjc info-panel-close cursor-pointer"
             aria-label="close panel"
