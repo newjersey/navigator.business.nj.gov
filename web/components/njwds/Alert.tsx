@@ -20,10 +20,12 @@ export const Alert = (props: Props): ReactElement => {
   const slimClass = slim ? "usa-alert--slim" : "";
   const noIconClass = noIcon ? "usa-alert--no-icon" : "";
   const roundedClass = rounded ? "radius-md" : "";
+  const alertRole = variant === "error" ? { role: "alert" } : {};
 
   return (
     <div
       className={`usa-alert ${roundedClass} ${variantClass} ${slimClass} ${noIconClass} ${className || ""}`}
+      {...alertRole}
       {...rest}
     >
       <div className="usa-alert__body">
