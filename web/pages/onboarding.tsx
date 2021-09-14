@@ -7,6 +7,7 @@ import React, {
   useCallback,
   useEffect,
   useState,
+  useRef,
 } from "react";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "@material-ui/core";
@@ -39,6 +40,7 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { RoadmapContext } from "@/pages/_app";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
+import { NextSeo } from "next-seo";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -86,6 +88,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [error, setError] = useState<OnboardingError | undefined>(undefined);
   const { userData, update } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (userData) {
@@ -133,11 +136,13 @@ const OnboardingPage = (props: Props): ReactElement => {
     if (page.current === 3 && !onboardingData.legalStructure) {
       setError("REQUIRED_LEGAL");
       scrollToTop();
+      headerRef.current?.focus();
       return;
     }
     if (page.current === 4 && !onboardingData.municipality) {
       setError("REQUIRED_MUNICIPALITY");
       scrollToTop();
+      headerRef.current?.focus();
       return;
     }
 
@@ -154,6 +159,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           previous: page.current,
         });
         queryShallowPush(nextCurrentPage);
+        headerRef.current?.focus();
       });
     } else {
       update({ ...userData, onboardingData, formProgress: "COMPLETED" }).then(async () => {
@@ -171,11 +177,12 @@ const OnboardingPage = (props: Props): ReactElement => {
         previous: page.current,
       });
       queryShallowPush(previousPage);
+      headerRef.current?.focus();
     }
   };
 
   const header = () => (
-    <>
+    <div tabIndex={-1} ref={headerRef}>
       {OnboardingDefaults.pageTitle}{" "}
       <span className="weight-400" data-testid={`step-${page.current.toString()}`}>
         {templateEval(OnboardingDefaults.stepXofYTemplate, {
@@ -183,14 +190,14 @@ const OnboardingPage = (props: Props): ReactElement => {
           totalPages: PAGES.toString(),
         })}
       </span>
-    </>
+    </div>
   );
 
   const asOnboardingPage = (onboardingPage: ReactNode) => (
     <SingleColumnContainer>
       <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
         {onboardingPage}
-        <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" />
+        <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
         <OnboardingButtonGroup />
       </form>
     </SingleColumnContainer>
@@ -217,9 +224,18 @@ const OnboardingPage = (props: Props): ReactElement => {
         onBack,
       }}
     >
+      <NextSeo
+        title={`Business.NJ.gov Navigator - ${OnboardingDefaults.pageTitle} ${templateEval(
+          OnboardingDefaults.stepXofYTemplate,
+          {
+            currentPage: page.current.toString(),
+            totalPages: PAGES.toString(),
+          }
+        )} `}
+      />
       <PageSkeleton>
-        <MobilePageTitle>{header()}</MobilePageTitle>
         <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
+          <MobilePageTitle>{header()}</MobilePageTitle>
           <SingleColumnContainer>
             {isLargeScreen && <h2 className="padding-bottom-4">{header()}</h2>}
             {error && (

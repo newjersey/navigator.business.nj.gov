@@ -14,7 +14,9 @@ export const MobilePageTitle = (props: Props): ReactElement => {
         <div className="usa-nav-container">
           <div className="usa-navbar">
             <div className="usa-logo">
-              <em className="usa-logo__text">{props.children}</em>
+              <em className="usa-logo__text" aria-level={2} role="heading">
+                {props.children}
+              </em>
             </div>
           </div>
         </div>
