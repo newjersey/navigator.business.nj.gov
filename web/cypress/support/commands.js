@@ -28,7 +28,7 @@ import 'cypress-wait-until';
 
 import Amplify, { Auth } from 'aws-amplify'
 import {testUserEmail, testUserPassword} from "./index";
-import {createEmptyOnboardingData, createEmptyUserData} from "../../lib/types/types";
+import { createEmptyUserData} from "../../lib/types/types";
 
 const awsConfig = {
   "aws_project_region": "us-east-1",

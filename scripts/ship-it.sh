@@ -6,6 +6,8 @@ set -e
 
 npm run typecheck
 
+npm run --prefix=web typecheck:cypress
+
 # format files
 npm run prettier
 

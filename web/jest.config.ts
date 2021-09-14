@@ -4,7 +4,7 @@ export default async (): Promise<Config.InitialOptions> => {
   return {
     setupFilesAfterEnv: ["./setupTests.js"],
     testEnvironment: "jsdom",
-    testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
+    testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
     moduleNameMapper: {
       "\\.(scss|sass|css)$": "identity-obj-proxy",
       "@/components/(.*)": "<rootDir>/components/$1",
