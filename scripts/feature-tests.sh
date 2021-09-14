@@ -51,6 +51,7 @@ npx kill-port ${WEB_PORT}
 npx kill-port ${API_PORT}
 npx kill-port ${DYNAMO_PORT}
 npx kill-port ${LAMBDA_PORT}
+npx kill-port ${WIREMOCK_PORT}
 
 echo "   __            _                                             _"
 echo "  / _| ___  __ _| |_ _   _ _ __ ___  ___   _ __   __ _ ___ ___| |"
