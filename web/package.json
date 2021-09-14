@@ -18,6 +18,7 @@
     "cypress:run": "cypress run --record false",
     "fences": "gf",
     "typecheck": "tsc --noemit",
+    "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
     "airtable:dump": "node scripts/airtableDump.js"
   },
   "prettier": {

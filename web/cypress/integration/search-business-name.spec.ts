@@ -1,5 +1,4 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-
 import { clickNext } from "../support/helpers";
 
 describe("search business name", () => {

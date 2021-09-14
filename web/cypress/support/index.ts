@@ -12,12 +12,18 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+/// <reference types="cypress" />
 
-// Import commands.js using ES2015 syntax:
 import "./commands";
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
 export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
 export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Cypress {
+    interface Chainable {
+      loginByCognitoApi(): void;
+      resetUserData(): void;
+    }
+  }
+}

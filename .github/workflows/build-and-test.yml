@@ -60,6 +60,9 @@ jobs:
       - name: 🧹 Run typechecking
         run: npm run typecheck
 
+      - name: 🧹 Run cypress typechecking
+        run: npm run --prefix=web typecheck:cypress
+
       - name: 🧹 Run lint
         run: npm run lint
 

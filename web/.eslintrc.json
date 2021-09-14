@@ -29,7 +29,7 @@
     "sourceType": "module",
     "tsconfigRootDir": "."
   },
-  "plugins": ["react", "@typescript-eslint", "@typescript-eslint/eslint-plugin", "jsx-a11y"],
+  "plugins": ["react", "@typescript-eslint", "@typescript-eslint/eslint-plugin", "jsx-a11y", "cypress"],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
     "@next/next/no-img-element": "off",
