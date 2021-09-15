@@ -53,7 +53,7 @@
     "remark-html": "13.0.2",
     "remark-react": "8.0.0",
     "sass": "1.39.2",
-    "swr": "1.0.0"
+    "swr": "1.0.1"
   },
   "devDependencies": {
     "@types/jest": "27.0.1",
