@@ -15,6 +15,7 @@
 /// <reference types="cypress" />
 
 import "./commands";
+import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./helpers";
 export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
 export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");
 
@@ -24,6 +25,8 @@ declare global {
     interface Chainable {
       loginByCognitoApi(): void;
       resetUserData(): void;
+      lighthouse(lighthouseThresholds?: LighthouseThresholds, lighthouseConfig?: LighthouseConfig): void;
+      pa11y(thresholds?: Pa11yThresholds): void;
     }
   }
 }
