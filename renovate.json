@@ -2,7 +2,7 @@
   "extends": [
     "config:base"
   ],
-  "stabilityDays": 5,
+  "stabilityDays": 3,
   "prConcurrentLimit": 10,
   "prCreation": "not-pending",
   "labels": ["renovate"],
