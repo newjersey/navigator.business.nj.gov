@@ -2,28 +2,50 @@ import React, { ReactElement } from "react";
 import { useMountEffect, useOnWindowResize } from "@/lib/utils/helpers";
 
 interface Props {
-  number: number;
+  stepNumber: number;
+  visualIndex?: number;
   last: boolean;
   active?: boolean;
   small?: boolean;
   completed?: boolean;
+  isOpen?: boolean;
 }
 
 export const VerticalStepIndicator = (props: Props): ReactElement => {
   const sm = props.small ? "-sm" : "";
+  const isOpen = props.isOpen || false;
 
   const resizeVerticalBarToContent = () => {
-    const content = document.getElementById(`vertical-content-${props.number}`);
-    if (content) {
-      const height = content.offsetHeight;
-      const verticalBar = document.getElementById(`vertical-bar-${props.number}`);
-      if (verticalBar) {
-        verticalBar.style.height = `${height}px`;
-      }
+    const content = document.getElementById(`vertical-content-${props.stepNumber}`);
+    if (!content) return;
+    const height = content.offsetHeight;
+
+    const verticalBar = document.getElementById(`vertical-bar-${props.stepNumber}`);
+    if (!verticalBar) return;
+
+    if (props.last) {
+      const marginStyle = getComputedStyle(content);
+      const margin = parseInt(marginStyle.marginTop) + parseInt(marginStyle.marginBottom);
+      const newHeight = height - margin;
+      verticalBar.style.height = `${newHeight}px`;
+    } else {
+      verticalBar.style.height = `${height}px`;
     }
   };
   useMountEffect(resizeVerticalBarToContent);
   useOnWindowResize(resizeVerticalBarToContent);
+
+  const getTrailingBar = () => {
+    if (props.small && props.last && !isOpen) {
+      return <></>;
+    }
+    return (
+      <div
+        className={`vertical-bar${sm} ${props.active ? "current" : "complete"}`}
+        id={`vertical-bar-${props.stepNumber}`}
+      />
+    );
+  };
 
   return (
     <div className={`usa-step-indicator usa-step-indicator--counters${sm}`}>
@@ -32,17 +54,12 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
           className={` vertical usa-step-indicator__segment usa-step-indicator__segment--${
             props.active ? "current" : "complete"
           }`}
-          data-num={props.completed ? "✓" : props.number}
-          aria-label={`Step ${props.number}`}
+          data-num={props.completed ? "✓" : props.visualIndex || props.stepNumber}
+          aria-label={`Step ${props.visualIndex || props.stepNumber}`}
         >
           <span className="usa-step-indicator__segment-label" />
         </div>
-        {!props.last && (
-          <div
-            className={`vertical-bar${sm} ${props.active ? "current" : "complete"}`}
-            id={`vertical-bar-${props.number}`}
-          />
-        )}
+        {getTrailingBar()}
       </div>
     </div>
   );

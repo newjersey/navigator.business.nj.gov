@@ -11,6 +11,7 @@ import {
   NameAvailability,
   OnboardingData,
   Roadmap,
+  SectionType,
   Step,
   Task,
   UserData,
@@ -20,6 +21,11 @@ import { ALL_INDUSTRIES_ORDERED } from "@/display-content/IndustryLookup";
 import dayjs from "dayjs";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
+
+export const generateSectionType = (): SectionType => {
+  const num = randomInt();
+  return num % 2 ? "PLAN" : "START";
+};
 
 export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
   return {
@@ -93,6 +99,7 @@ export const generateStep = (overrides: Partial<Step>): Step => {
     timeEstimate: `some-time-estimate-${randomInt()}`,
     description: `some-description-${randomInt()}`,
     tasks: [generateTask({})],
+    section: generateSectionType(),
     ...overrides,
   };
 };

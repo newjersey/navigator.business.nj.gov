@@ -78,6 +78,7 @@ const expectedGenericRoadmap: Roadmap = {
     {
       step_number: 1,
       name: "Step 1 Name",
+      section: "PLAN",
       timeEstimate: "1 month",
       description: "Step 1 description",
       tasks: [
@@ -94,6 +95,7 @@ const expectedGenericRoadmap: Roadmap = {
     {
       step_number: 2,
       name: "Step 2 Name",
+      section: "PLAN",
       timeEstimate: "2 months",
       description: "Step 2 description",
       tasks: [
@@ -110,6 +112,7 @@ const expectedGenericRoadmap: Roadmap = {
     {
       step_number: 3,
       name: "Step 3 Name",
+      section: "START",
       timeEstimate: "3 months",
       description: "Step 3 description",
       tasks: [
@@ -127,6 +130,7 @@ const expectedGenericRoadmap: Roadmap = {
       step_number: 4,
       name: "Step 4 Name",
       timeEstimate: "4 months",
+      section: "START",
       description: "Step 4 description",
       tasks: [
         {

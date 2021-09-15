@@ -149,12 +149,14 @@ export interface Roadmap {
   steps: Step[];
 }
 
+export type SectionType = "PLAN" | "START";
 export interface Step {
   step_number: number;
   name: string;
   timeEstimate: string;
   description: string;
   tasks: Task[];
+  section: SectionType;
 }
 
 export interface Task {

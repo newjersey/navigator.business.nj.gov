@@ -6,6 +6,8 @@ import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/utils/helpers";
+import { SectionType } from "@/lib/types/types";
+import { SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 
 interface Props {
   activeTaskId: string;
@@ -39,58 +41,76 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     }
   };
 
-  const isLast = (stepNumber: number) => {
-    return roadmap?.steps[roadmap?.steps.length - 1].step_number === stepNumber;
+  const getSection = (sectionType: SectionType) => {
+    const sectionName = sectionType.toLowerCase();
+    const publicName = SectionDefaults[sectionType];
+    return (
+      <div data-testid={`section-${sectionName}`}>
+        <h3 className="flex flex-align-center margin-left-neg-05">
+          <img src={`/img/section-header-${sectionName}.svg`} alt={publicName} height={32} />{" "}
+          <span className="padding-left-105">{publicName}</span>
+        </h3>
+        {roadmap?.steps
+          .filter((step) => step.section === sectionType)
+          .map((step, index, array) => (
+            <div key={step.step_number} id={`vertical-content-${step.step_number}`}>
+              <div className="fdr fac margin-top-2 margin-bottom-1">
+                <VerticalStepIndicator
+                  stepNumber={step.step_number}
+                  visualIndex={index + 1}
+                  last={index === array.length - 1}
+                  isOpen={openSteps.includes(step.step_number)}
+                  active={step.step_number === activeStepNumber}
+                  small={true}
+                  completed={isStepCompleted(step, userData)}
+                  key={openSteps.join(",")}
+                />
+                <button
+                  className="usa-button--unstyled width-100"
+                  onClick={() => toggleStep(step.step_number)}
+                  aria-expanded={openSteps.includes(step.step_number)}
+                >
+                  <div className=" step-label sm fdr fjc fac">
+                    <h2
+                      className={`margin-0 font-body-xs line-height-body-2 text-ink ${
+                        step.step_number === activeStepNumber ? "text-primary-dark" : "weight-unset"
+                      }`}
+                      data-step={step.step_number}
+                    >
+                      {step.name}
+                    </h2>
+                    <div className="padding-right-1 padding-left-1 mla fdc fac">
+                      <Icon className="font-sans-lg text-ink">
+                        {openSteps.includes(step.step_number) ? "expand_less" : "expand_more"}
+                      </Icon>
+                    </div>
+                  </div>
+                </button>
+              </div>
+              <div className="margin-left-5 font-sans-xs">
+                {openSteps.includes(step.step_number) &&
+                  step.tasks.map((task) => (
+                    <MiniRoadmapTask
+                      key={task.id}
+                      task={task}
+                      active={task.id === props.activeTaskId}
+                      onTaskClick={props.onTaskClick}
+                    />
+                  ))}
+              </div>
+            </div>
+          ))}
+      </div>
+    );
   };
 
   return (
-    <div>
-      {roadmap?.steps.map((step) => (
-        <div key={step.step_number} id={`vertical-content-${step.step_number}`}>
-          <div className="fdr fac margin-top-2 margin-bottom-1">
-            <VerticalStepIndicator
-              number={step.step_number}
-              last={isLast(step.step_number)}
-              active={step.step_number === activeStepNumber}
-              small={true}
-              completed={isStepCompleted(step, userData)}
-              key={openSteps.join(",")}
-            />
-            <button
-              className="usa-button--unstyled width-100"
-              onClick={() => toggleStep(step.step_number)}
-              aria-expanded={openSteps.includes(step.step_number)}
-            >
-              <div className=" step-label sm fdr fjc fac">
-                <h2
-                  className={`margin-0 font-body-xs line-height-body-2 text-ink ${
-                    step.step_number === activeStepNumber ? "text-primary-dark" : "weight-unset"
-                  }`}
-                  data-step={step.step_number}
-                >
-                  {step.name}
-                </h2>
-                <div className="padding-right-1 padding-left-1 mla fdc fac">
-                  <Icon className="font-sans-lg text-ink">
-                    {openSteps.includes(step.step_number) ? "expand_less" : "expand_more"}
-                  </Icon>
-                </div>
-              </div>
-            </button>
-          </div>
-          <div className="margin-left-5 font-sans-xs">
-            {openSteps.includes(step.step_number) &&
-              step.tasks.map((task) => (
-                <MiniRoadmapTask
-                  key={task.id}
-                  task={task}
-                  active={task.id === props.activeTaskId}
-                  onTaskClick={props.onTaskClick}
-                />
-              ))}
-          </div>
-        </div>
-      ))}
-    </div>
+    <>
+      {getSection("PLAN")}
+      <div>
+        <hr className="margin-top-5 margin-bottom-3 bg-base-lighter" />
+      </div>
+      {getSection("START")}
+    </>
   );
 };

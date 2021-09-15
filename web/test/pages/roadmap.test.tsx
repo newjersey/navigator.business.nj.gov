@@ -1,4 +1,4 @@
-import { render, RenderResult } from "@testing-library/react";
+import { render, RenderResult, within } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
 import { generateMunicipality, generateStep, generateTask } from "@/test/factories";
 import {
@@ -28,6 +28,7 @@ describe("roadmap page", () => {
   const renderRoadmapPage = (): RenderResult => {
     return render(<RoadmapPage displayContent={{ contentMd: "" }} />);
   };
+
   it("shows loading page if page has not loaded yet", () => {
     setMockUserDataResponse({ userData: undefined });
     const subject = renderRoadmapPage();
@@ -177,5 +178,44 @@ describe("roadmap page", () => {
     expect(subject.queryByText("In progress")).toBeInTheDocument();
     expect(subject.queryByText("Completed")).toBeInTheDocument();
     expect(subject.queryByText("Not started")).toBeInTheDocument();
+  });
+
+  it("displays each step under associated section", () => {
+    useMockRoadmap({
+      steps: [
+        generateStep({
+          name: "step1",
+          section: "PLAN",
+        }),
+        generateStep({
+          name: "step2",
+          section: "START",
+        }),
+        generateStep({
+          name: "step3",
+          section: "PLAN",
+        }),
+        generateStep({
+          name: "step4",
+          section: "START",
+        }),
+      ],
+    });
+
+    const subject = renderRoadmapPage();
+
+    const sectionPlan = subject.getByTestId("section-plan");
+
+    expect(within(sectionPlan).getByText("step1")).toBeInTheDocument();
+    expect(within(sectionPlan).getByText("step3")).toBeInTheDocument();
+    expect(within(sectionPlan).queryByText("step2")).not.toBeInTheDocument();
+    expect(within(sectionPlan).queryByText("step4")).not.toBeInTheDocument();
+
+    const sectionStart = subject.getByTestId("section-start");
+
+    expect(within(sectionStart).queryByText("step1")).not.toBeInTheDocument();
+    expect(within(sectionStart).queryByText("step3")).not.toBeInTheDocument();
+    expect(within(sectionStart).getByText("step2")).toBeInTheDocument();
+    expect(within(sectionStart).getByText("step4")).toBeInTheDocument();
   });
 });

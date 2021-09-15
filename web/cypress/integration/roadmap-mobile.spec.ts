@@ -55,6 +55,7 @@ describe("Roadmap", () => {
     cy.get("[data-log-out-button]").should("not.be.visible");
     cy.get("[data-open-user-settings]").click();
     cy.get("[data-my-nj-profile-link]").should("be.visible");
+    cy.get("[data-log-out-button]").scrollIntoView();
     cy.get("[data-log-out-button]").should("be.visible");
     cy.get("[data-open-user-settings]").click();
     cy.get("[data-my-nj-profile-link]").should("not.be.visible");

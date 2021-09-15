@@ -1,4 +1,4 @@
-import { Roadmap } from "@/lib/types/types";
+import { Roadmap, SectionType } from "@/lib/types/types";
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 
 export const buildRoadmap = async ({
@@ -140,6 +140,7 @@ interface StepBuilder {
   id: string;
   name: string;
   timeEstimate: string;
+  section: SectionType;
   description: string;
   tasks: TaskBuilder[];
 }
@@ -153,6 +154,7 @@ interface GenericStep {
   step_number: number;
   id: string;
   name: string;
+  section: SectionType;
   timeEstimate: string;
   description: string;
 }
