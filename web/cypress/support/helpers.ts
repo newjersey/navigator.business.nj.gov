@@ -10,7 +10,13 @@ export const clickEdit = (): void => {
   cy.wait(1000); // wait for onboarding animation
 };
 
-export const completeOnboarding = (businessName: string, industry: string, companyType: string, homeBased = true,city = "Absecon"): void => {
+export const completeOnboarding = (
+  businessName: string,
+  industry: string,
+  companyType: string,
+  homeBased = true,
+  city = "Absecon"
+): void => {
   cy.wait(1000); // wait for onboarding animation
 
   cy.get('input[aria-label="Business name"]').type(businessName);
@@ -32,4 +38,45 @@ export const completeOnboarding = (businessName: string, industry: string, compa
   cy.get('[aria-label="Location"]').click();
   cy.contains(city).click();
   clickNext();
+};
+
+export const lighthouseDesktopConfig: LighthouseConfig = {
+  formFactor: "desktop",
+  screenEmulation: {
+    disabled: true,
+  },
+};
+
+export const defaultPa11yThresholds: Pa11yThresholds = {
+  ignore: [
+    "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail",
+    "page-has-heading-one",
+    "color-contrast",
+    "landmark-no-duplicate-banner",
+    "landmark-unique"
+  ],
+  runners: [
+    'axe',
+    'htmlcs'
+]
+};
+
+export interface LighthouseThresholds {
+  accessibility: number;
+  "best-practices": number;
+  performance: number;
+  seo: number;
+  pwa: number;
+}
+
+export interface LighthouseConfig {
+  formFactor: "desktop";
+  screenEmulation?: {
+    disabled: boolean;
+  };
+}
+
+export interface Pa11yThresholds {
+  ignore?: string[]
+  runners?: string[]
 }

@@ -43,7 +43,7 @@ while ! echo exit | nc localhost ${WEB_PORT}; do sleep 1; done
 
 echo "🌟 app started"
 
-CYPRESS_API_BASE_URL=${API_BASE_URL} npm --prefix=web run cypress:run -- --config baseUrl=http://localhost:${WEB_PORT}
+CYPRESS_API_BASE_URL=${API_BASE_URL} npm --prefix=web run cypress:run -- --browser=chrome --config baseUrl=http://localhost:${WEB_PORT}
 
 set +e
 

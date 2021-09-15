@@ -74,18 +74,71 @@ jobs:
       - name: 🧪 Run API tests
         run: npm --prefix=api run test
 
+      - name: 📦 Publish source-code artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: source-${{ github.sha }}
+          path: ./source-${{ github.sha }}.tar
+
+  cypress-run:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.17.0-chrome91-ff89
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: 📬 Caching
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+            ${{ github.workspace }}/web/.next/cache
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: 🔧 Use Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: 🔧 Set up JDK for dynamodb-local
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: 13
+
+      - name: 🧰 Install npm dependencies
+        run: npm install
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
+          AWS_REGION: us-east-1
+
+      - name: 🧰 Install Amplify CLI
+        run: npm install -g @aws-amplify/cli@5.5.0
+
+      - name: 🔧 Configure Amplify
+        run: ./scripts/amplify-ci/configure.sh
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
+          AWS_REGION: us-east-1
+          AMPLIFY_ENV: dev
+
+      - name: 🔧 Serverless Authentication
+        run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
+        working-directory: api
+
       - name: 🔧 Build project for e2e tests
         run: npm --prefix=api run install-dynamo-local && npm --prefix=api start & npm --prefix=api run start:wiremock & npm --prefix=web run build --if-present
         env:
           API_BASE_URL: http://localhost:5000/dev
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
           REDIRECT_URL: http://localhost:3000/
-          COGNITO_WEB_CLIENT_ID: ${{ secrets.COGNITO_WEB_CLIENT_ID_DEV }}
-          MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
 
       - name: 🧪 Run e2e cypress tests
         uses: cypress-io/github-action@v2
         with:
+          browser: chrome
           working-directory: web
           start: npm start
           wait-on: "http://localhost:3000"
@@ -100,15 +153,11 @@ jobs:
           CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID: ${{ secrets.CYPRESS_AWS_USER_POOLS_WEB_CLIENT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 📦 Publish source-code artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: source-${{ github.sha }}
-          path: ./source-${{ github.sha }}.tar
-
   deploy-dev:
     runs-on: ubuntu-latest
-    needs: build-and-test
+    needs: 
+      - build-and-test
+      - cypress-run
     environment:
       name: dev
     steps:

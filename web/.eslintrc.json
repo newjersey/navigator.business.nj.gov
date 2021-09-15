@@ -35,6 +35,7 @@
     "@next/next/no-img-element": "off",
     "@next/next/no-html-link-for-pages": "off",
     "prefer-template": "error",
-    "react/jsx-uses-react": 1
+    "react/jsx-uses-react": 1,
+    "@next/next/no-document-import-in-page": 0
   }
 }
