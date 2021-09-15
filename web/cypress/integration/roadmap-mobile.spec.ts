@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { clickEdit, clickNext } from "../support/helpers";
+import { clickEdit, clickNext, completeOnboarding } from "../support/helpers";
 
 describe("Roadmap", () => {
   beforeEach(() => {
@@ -9,29 +9,11 @@ describe("Roadmap", () => {
     cy.viewport("iphone-5");
   });
 
-  const onboarding = () => {
-    cy.wait(1000); // wait for onboarding animation
-
-    cy.get('input[aria-label="Business name"]').type("Beesapple's");
-    clickNext();
-
-    cy.get('[aria-label="Industry"]').click();
-    cy.get('[data-value="e-commerce"]').click();
-    clickNext();
-
-    cy.get('[data-value="general-partnership"]').click();
-    clickNext();
-
-    cy.get('input[type="radio"][value="false"]').check();
-    cy.get('[aria-label="Location"]').click();
-    cy.contains("Absecon").click();
-    clickNext();
-
-    cy.url().should("contain", "/roadmap");
-  };
   it("enters user info and shows the roadmap", () => {
     // onboarding
-    onboarding();
+    completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
+
+    cy.url().should("contain", "/roadmap");
 
     // check roadmap
     cy.get('[data-business-name="Beesapple\'s"]').should("exist");
@@ -136,7 +118,7 @@ describe("Roadmap", () => {
 
   it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
     // onboarding
-    onboarding();
+    completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
 
     // roadmap
     cy.get('[data-task="register-for-ein"]').click();

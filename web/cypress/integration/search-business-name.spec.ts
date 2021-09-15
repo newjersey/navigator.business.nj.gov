@@ -1,5 +1,5 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { clickNext } from "../support/helpers";
+import { completeOnboarding } from "../support/helpers";
 
 describe("search business name", () => {
   beforeEach(() => {
@@ -8,21 +8,7 @@ describe("search business name", () => {
   });
 
   it("searches available names", () => {
-    cy.wait(1000); // wait for onboarding animation
-
-    cy.get('input[aria-label="Business name"]').type("Aculyst");
-    clickNext();
-
-    cy.get('[aria-label="Industry"]').click();
-    cy.get('[data-value="e-commerce"]').click();
-    clickNext();
-
-    cy.get('[data-value="limited-liability-company"]').click();
-    clickNext();
-
-    cy.get('[aria-label="Location"]').click();
-    cy.contains("Absecon").click();
-    clickNext();
+    completeOnboarding("Aculyst", "e-commerce", "limited-liability-company");
 
     // roadmap business name
     cy.get('[data-business-name="Aculyst"]').should("exist");

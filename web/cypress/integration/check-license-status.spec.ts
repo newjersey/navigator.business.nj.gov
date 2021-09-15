@@ -1,5 +1,5 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { clickNext } from "../support/helpers";
+import { completeOnboarding } from "../support/helpers";
 
 describe("check license status", () => {
   beforeEach(() => {
@@ -8,21 +8,7 @@ describe("check license status", () => {
   });
 
   it("searches and checks license status", () => {
-    cy.wait(1000); // wait for onboarding animation
-
-    cy.get('input[aria-label="Business name"]').type("Aculyst");
-    clickNext();
-
-    cy.get('[aria-label="Industry"]').click();
-    cy.get('[data-value="home-contractor"]').click(); // need to be HIC for the task ID to work
-    clickNext();
-
-    cy.get('[data-value="limited-liability-company"]').click();
-    clickNext();
-
-    cy.get('[aria-label="Location"]').click();
-    cy.contains("Absecon").click();
-    clickNext();
+    completeOnboarding("Aculyst", "home-contractor", "limited-liability-company");
 
     // roadmap business name
     cy.get('[data-business-name="Aculyst"]').should("exist");
