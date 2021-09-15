@@ -9,7 +9,7 @@ describe("Roadmap", () => {
     cy.viewport("iphone-5");
   });
 
-  it("enters user info and shows the roadmap", () => {
+  const onboarding = () => {
     cy.wait(1000); // wait for onboarding animation
 
     cy.get('input[aria-label="Business name"]').type("Beesapple's");
@@ -26,6 +26,12 @@ describe("Roadmap", () => {
     cy.get('[aria-label="Location"]').click();
     cy.contains("Absecon").click();
     clickNext();
+
+    cy.url().should("contain", "/roadmap");
+  };
+  it("enters user info and shows the roadmap", () => {
+    // onboarding
+    onboarding();
 
     // check roadmap
     cy.get('[data-business-name="Beesapple\'s"]').should("exist");
@@ -95,5 +101,50 @@ describe("Roadmap", () => {
 
     cy.get('[data-task="check-site-requirements"]').should("exist");
     cy.get('[data-task="food-safety-course"]').should("exist");
+  });
+
+  it("open and closes contextual info panel on onboarding screens", () => {
+    cy.wait(1000); // wait for onboarding animation
+
+    cy.get('input[aria-label="Business name"]').type("Beesapple's");
+    clickNext();
+
+    cy.get('[aria-label="Industry"]').click();
+    cy.get('[data-value="home-contractor"]').click();
+    cy.get('[data-contextual-info-id="home-contractors-activities"]').click();
+    cy.get('[data-testid="info-panel"]').should("exist");
+    cy.get('[aria-label="close panel"]').click();
+    cy.get('[data-testid="info-panel"]').should("not.exist");
+    clickNext();
+
+    cy.get('[data-contextual-info-id="legal-structure-learn-more"]').click();
+    cy.get('[data-testid="info-panel"]').should("exist");
+    cy.get('[aria-label="close panel"]').click();
+    cy.get('[data-testid="info-panel"]').should("not.exist");
+    cy.get('[data-contextual-info-id="llc"]').click();
+    cy.get('[data-testid="info-panel"]').should("exist");
+    cy.get('[aria-label="close panel"]').click();
+    cy.get('[data-testid="info-panel"]').should("not.exist");
+    cy.get('[data-value="general-partnership"]').click();
+    clickNext();
+
+    cy.get('input[type="radio"][value="false"]').check();
+    cy.get('[aria-label="Location"]').click();
+    cy.contains("Absecon").click();
+    clickNext();
+  });
+
+  it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
+    // onboarding
+    onboarding();
+
+    // roadmap
+    cy.get('[data-task="register-for-ein"]').click();
+    cy.get('[data-contextual-info-id="ein"]').should("exist");
+    cy.get('[data-contextual-info-id="ein"]').click();
+
+    cy.get('[data-testid="info-panel"]').should("exist");
+    cy.get('[aria-label="close panel"]').click();
+    cy.get('[data-testid="info-panel"]').should("not.exist");
   });
 });
