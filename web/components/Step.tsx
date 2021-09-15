@@ -7,6 +7,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 
 interface Props {
   step: types.Step;
+  visualIndex: number;
   last: boolean;
 }
 
@@ -19,7 +20,8 @@ export const Step = (props: Props): ReactElement => {
         <div className="fdr">
           <div className="margin-top-2">
             <VerticalStepIndicator
-              number={props.step.step_number}
+              visualIndex={props.visualIndex}
+              stepNumber={props.step.step_number}
               last={props.last}
               completed={isStepCompleted(props.step, userData)}
             />
