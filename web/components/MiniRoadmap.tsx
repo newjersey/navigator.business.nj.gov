@@ -46,18 +46,17 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     const publicName = SectionDefaults[sectionType];
     return (
       <div data-testid={`section-${sectionName}`}>
-        <h3 className="flex flex-align-center margin-left-neg-05">
+        <h3 className="flex flex-align-center margin-left-neg-05 margin-top-0">
           <img src={`/img/section-header-${sectionName}.svg`} alt={publicName} height={32} />{" "}
           <span className="padding-left-105">{publicName}</span>
         </h3>
         {roadmap?.steps
           .filter((step) => step.section === sectionType)
           .map((step, index, array) => (
-            <div key={step.step_number} id={`vertical-content-${step.step_number}`}>
-              <div className="fdr fac margin-top-2 margin-bottom-1">
+            <div key={step.step_number} id={`vertical-content-${step.step_number}`} className="margin-top-2">
+              <div className="fdr fac">
                 <VerticalStepIndicator
                   stepNumber={step.step_number}
-                  visualIndex={index + 1}
                   last={index === array.length - 1}
                   isOpen={openSteps.includes(step.step_number)}
                   active={step.step_number === activeStepNumber}
@@ -108,7 +107,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     <>
       {getSection("PLAN")}
       <div>
-        <hr className="margin-top-5 margin-bottom-3 bg-base-lighter" />
+        <hr className="margin-y-4 bg-base-lighter" />
       </div>
       {getSection("START")}
     </>

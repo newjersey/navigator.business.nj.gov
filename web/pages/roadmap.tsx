@@ -87,12 +87,7 @@ const RoadmapPage = (props: Props): ReactElement => {
           roadmap.steps
             .filter((step) => step.section === sectionType)
             .map((step, index, array) => (
-              <Step
-                key={step.step_number}
-                step={step}
-                visualIndex={index + 1}
-                last={index === array.length - 1}
-              />
+              <Step key={step.step_number} step={step} last={index === array.length - 1} />
             ))}
       </div>
     );
@@ -146,8 +141,8 @@ const RoadmapPage = (props: Props): ReactElement => {
                 </div>
               </>
             )}
-            {getSection("PLAN")}
-            <hr className="margin-top-6 margin-bottom-4 bg-base" />
+            <div className="margin-top-6">{getSection("PLAN")}</div>
+            <hr className="margin-y-6 bg-base-lighter" />
             {getSection("START")}
           </SinglePageLayout>
         </div>
