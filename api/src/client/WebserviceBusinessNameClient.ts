@@ -13,7 +13,7 @@ export const WebserviceBusinessNameClient = (baseUrl: string): BusinessNameClien
       })
       .then((response) => {
         logWriter.LogInfo(
-          `Search - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
+          `Business Name Search - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
         );
         return response.data || [];
       })

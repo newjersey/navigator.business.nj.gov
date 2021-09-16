@@ -37,7 +37,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);
         logWriter.LogInfo(
-          `Search - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
+          `myNJ Self-Reg - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
         );
 
         const xmlResponseName = type === "GRANT" ? "ns2:grantResponse" : "ns2:resumeResponse";

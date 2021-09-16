@@ -17,7 +17,7 @@ export const WebserviceLicenseStatusClient = (baseUrl: string): LicenseStatusCli
       })
       .then((response) => {
         logWriter.LogInfo(
-          `Search - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
+          `License Status Search - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
         );
         return response.data || [];
       })
