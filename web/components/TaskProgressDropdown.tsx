@@ -73,13 +73,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
       >
         <div>
           <Paper>
-            <Alert
-              slim
-              rounded
-              variant="success"
-              className="margin-y-2"
-              heading={TaskDefaults.taskProgressSuccessToastHeader}
-            >
+            <Alert slim rounded variant="success" className="margin-y-2">
               {TaskDefaults.taskProgressSuccessToastBody}
             </Alert>
           </Paper>
