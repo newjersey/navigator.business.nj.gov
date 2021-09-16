@@ -2,6 +2,7 @@
 
 import {
   clickNext,
+  clickTask,
   completeOnboarding,
   defaultPa11yThresholds,
   lighthouseDesktopConfig,
@@ -91,6 +92,33 @@ describe("Performance and Accessability", () => {
 
       cy.lighthouse(undefined, lighthouseDesktopConfig);
       cy.pa11y(defaultPa11yThresholds);
+    });
+    describe("Plan", () => {
+      describe("Plan Your Business", () => {
+        describe("Write Your Business Plan", () => {
+          it("should pass the audits", () => {
+            completeOnboarding("Donut Shop", "e-commerce", "general-partnership", false);
+            clickTask("business-plan");
+
+            cy.lighthouse(undefined, lighthouseDesktopConfig);
+            cy.pa11y(defaultPa11yThresholds);
+          });
+        });
+        describe("Write Your Business Plan", () => {
+          const urlSlugs = ["evaluate-your-location", "check-site-requirements", "reseller"];
+          urlSlugs.forEach((slug) => {
+            describe(slug, () => {
+              it("should pass the audits", () => {
+                completeOnboarding("Donut Shop", "e-commerce", "general-partnership", false);
+                clickTask(slug);
+
+                cy.lighthouse(undefined, lighthouseDesktopConfig);
+                cy.pa11y(defaultPa11yThresholds);
+              });
+            });
+          });
+        });
+      });
     });
   });
 });

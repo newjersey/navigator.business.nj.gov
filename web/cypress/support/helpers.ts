@@ -10,6 +10,12 @@ export const clickEdit = (): void => {
   cy.wait(1000); // wait for onboarding animation
 };
 
+export const clickTask = (taskId: string): void => {
+  const taskValue = `[data-task="${taskId}"]`;
+  cy.get(taskValue).click({ force: true });
+  cy.wait(1000);
+};
+
 export const completeOnboarding = (
   businessName: string,
   industry: string,
@@ -53,12 +59,9 @@ export const defaultPa11yThresholds: Pa11yThresholds = {
     "page-has-heading-one",
     "color-contrast",
     "landmark-no-duplicate-banner",
-    "landmark-unique"
+    "landmark-unique",
   ],
-  runners: [
-    'axe',
-    'htmlcs'
-]
+  runners: ["axe", "htmlcs"],
 };
 
 export interface LighthouseThresholds {
@@ -77,6 +80,6 @@ export interface LighthouseConfig {
 }
 
 export interface Pa11yThresholds {
-  ignore?: string[]
-  runners?: string[]
+  ignore?: string[];
+  runners?: string[];
 }
