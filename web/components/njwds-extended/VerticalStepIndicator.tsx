@@ -3,7 +3,6 @@ import { useMountEffect, useOnWindowResize } from "@/lib/utils/helpers";
 
 interface Props {
   stepNumber: number;
-  visualIndex?: number;
   last: boolean;
   active?: boolean;
   small?: boolean;
@@ -54,8 +53,8 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
           className={` vertical usa-step-indicator__segment usa-step-indicator__segment--${
             props.active ? "current" : "complete"
           }`}
-          data-num={props.completed ? "✓" : props.visualIndex || props.stepNumber}
-          aria-label={`Step ${props.visualIndex || props.stepNumber}`}
+          data-num={props.completed ? "✓" : props.stepNumber}
+          aria-label={`Step ${props.stepNumber}`}
         >
           <span className="usa-step-indicator__segment-label" />
         </div>
