@@ -4,7 +4,7 @@ import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextua
 import analytics from "@/lib/utils/analytics";
 
 export const ContextualInfoLink = ({ children }: { children: string[] }): ReactElement => {
-  const { setContextualInfoMd } = useContext(ContextualInfoContext);
+  const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
   const [cachedContent, setCachedContent] = useState<string>("");
 
   const displayText = children[0].split("|")[0];
@@ -15,11 +15,11 @@ export const ContextualInfoLink = ({ children }: { children: string[] }): ReactE
     analytics.event.contextual_link.click.view_sidebar();
 
     if (cachedContent) {
-      setContextualInfoMd(cachedContent);
+      setContextualInfo({ ...contextualInfo, isVisible: true, markdown: cachedContent });
     } else {
-      const contextualInfoMd = await fetchContextualInfo(contextualInfoId);
-      setCachedContent(contextualInfoMd);
-      setContextualInfoMd(contextualInfoMd);
+      const content = await fetchContextualInfo(contextualInfoId);
+      setCachedContent(content);
+      setContextualInfo({ ...contextualInfo, isVisible: true, markdown: content });
     }
   };
 

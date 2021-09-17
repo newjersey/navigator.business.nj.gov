@@ -1,6 +1,12 @@
-import React, { Dispatch, ReactElement } from "react";
+import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { AuthContext, ContextualInfoContext, RoadmapContext, UserDataErrorContext } from "@/pages/_app";
+import {
+  AuthContext,
+  ContextualInfoContext,
+  RoadmapContext,
+  UserDataErrorContext,
+  ContextualInfo,
+} from "@/pages/_app";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, Roadmap, UserDataError } from "@/lib/types/types";
@@ -23,11 +29,11 @@ export const withAuth = (
 
 export const withContextualInfo = (
   subject: ReactElement,
-  contextualInfoMd: string,
-  setContextualInfoMd: (contextualInfoMd: string) => void
+  contextualInfo: ContextualInfo,
+  setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>
 ): ReactElement => {
   return (
-    <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
+    <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
       {subject}
     </ContextualInfoContext.Provider>
   );
