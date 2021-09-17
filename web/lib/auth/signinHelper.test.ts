@@ -5,6 +5,7 @@ import * as api from "@/lib/api-client/apiClient";
 
 jest.mock("./sessionHelper", () => ({
   getCurrentUser: jest.fn(),
+  triggerSignOut: jest.fn().mockResolvedValue({}),
 }));
 const mockSession = session as jest.Mocked<typeof session>;
 
@@ -39,9 +40,10 @@ describe("SigninHelper", () => {
   });
 
   describe("onSignOut", () => {
-    it("dispatches a logout with undefined user", () => {
-      onSignOut(mockPush, mockDispatch);
+    it("dispatches a logout with undefined user", async () => {
+      await onSignOut(mockPush, mockDispatch);
 
+      expect(mockSession.triggerSignOut).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGOUT",
         user: undefined,

@@ -3,6 +3,8 @@ import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
 import * as api from "@/lib/api-client/apiClient";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
+import analytics from "@/lib/utils/analytics";
+import { triggerSignOut } from "./sessionHelper";
 
 export const onSignIn = async (
   push: (url: string) => Promise<boolean>,
@@ -19,7 +21,12 @@ export const onSignIn = async (
   setAnalyticsDimensions(userData.onboardingData);
 };
 
-export const onSignOut = (push: (url: string) => Promise<boolean>, dispatch: Dispatch<AuthAction>): void => {
+export const onSignOut = async (
+  push: (url: string) => Promise<boolean>,
+  dispatch: Dispatch<AuthAction>
+): Promise<void> => {
+  analytics.event.roadmap_logout_button.click.log_out();
+  await triggerSignOut();
   push("/");
   dispatch({
     type: "LOGOUT",

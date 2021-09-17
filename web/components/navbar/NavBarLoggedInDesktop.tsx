@@ -1,20 +1,35 @@
-import React, { ReactElement, useState, useRef, useEffect } from "react";
+import React, { ReactElement, useState, useRef, useEffect, useContext } from "react";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Icon } from "@/components/njwds/Icon";
-import { AuthButton } from "@/components/AuthButton";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { NavDefaults } from "@/display-content/NavDefaults";
 import { ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from "@material-ui/core";
+import { AuthContext } from "@/pages/_app";
+import { useRouter } from "next/router";
+import { onSignOut } from "@/lib/auth/signinHelper";
 
 export const NavBarLoggedInDesktop = (): ReactElement => {
   const { userData } = useUserData();
+  const { dispatch } = useContext(AuthContext);
+  const router = useRouter();
+
   const userName = getUserNameOrEmail(userData);
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
-  const handleToggle = () => {
+  const toggleDropdown = (): void => {
     setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleProfileClick = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
+    window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
+    handleClose(event);
+  };
+
+  const handleLogoutClick = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
+    onSignOut(router.push, dispatch);
+    handleClose(event);
   };
 
   const handleClose = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
@@ -52,7 +67,7 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
               ref={anchorRef}
               aria-controls={open ? "menu-list-grow" : undefined}
               aria-haspopup="true"
-              onClick={handleToggle}
+              onClick={toggleDropdown}
             >
               <div className="text-bold text-primary flex flex-align-center">
                 <Icon className="usa-icon--size-4 margin-right-1">account_circle</Icon>
@@ -71,18 +86,15 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
                   <Paper>
                     <ClickAwayListener onClickAway={handleClose}>
                       <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                        <MenuItem onClick={handleClose}>
-                          <a
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-no-underline font-body-2xs text-bold"
-                            href={process.env.MYNJ_PROFILE_LINK || ""}
-                          >
+                        <MenuItem onClick={handleProfileClick}>
+                          <button className="clear-button font-body-2xs text-bold text-primary">
                             {NavDefaults.myNJAccountText}
-                          </a>
+                          </button>
                         </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                          <AuthButton className="clear-button font-body-2xs text-primary text-bold text-left" />
+                        <MenuItem onClick={handleLogoutClick}>
+                          <button className="clear-button font-body-2xs text-bold text-primary">
+                            {NavDefaults.logoutButton}
+                          </button>
                         </MenuItem>
                       </MenuList>
                     </ClickAwayListener>
