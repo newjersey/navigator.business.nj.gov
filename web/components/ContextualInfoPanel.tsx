@@ -1,18 +1,26 @@
 import React, { ReactElement, useContext } from "react";
 import { Icon } from "@/components/njwds/Icon";
-import { ContextualInfoContext } from "@/pages/_app";
+import { ContextualInfo, ContextualInfoContext } from "@/pages/_app";
 import { Content } from "@/components/Content";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import analytics from "@/lib/utils/analytics";
 
 export const ContextualInfoPanel = (): ReactElement => {
-  const { contextualInfoMd, setContextualInfoMd } = useContext(ContextualInfoContext);
+  const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
 
   const close = () => {
-    setContextualInfoMd("");
-  };
+    setContextualInfo((prevContextualInfo: ContextualInfo) => ({
+      ...prevContextualInfo,
+      isVisible: false,
+    }));
 
-  const isVisible = () => (contextualInfoMd ? "is-visible" : "");
+    setTimeout(() => {
+      setContextualInfo((prevContextualInfo: ContextualInfo) => ({
+        ...prevContextualInfo,
+        markdown: "",
+      }));
+    }, 300);
+  };
 
   return (
     <>
@@ -23,12 +31,12 @@ export const ContextualInfoPanel = (): ReactElement => {
           close();
         }}
         data-testid="overlay"
-        className={`info-overlay ${isVisible()}`}
+        className={`info-overlay ${contextualInfo.isVisible ? "is-visible" : ""}`}
       />
-      <FocusTrappedSidebar close={close} isOpen={!!isVisible()}>
+      <FocusTrappedSidebar close={close} isOpen={contextualInfo.isVisible}>
         <aside
           data-testid="info-panel"
-          className={`info-panel ${contextualInfoMd ? "is-visible" : "is-hidden"}`}
+          className={`info-panel ${contextualInfo.isVisible ? "is-visible" : "is-hidden"}`}
         >
           <button
             className="fdr fac fjc info-panel-close cursor-pointer"
@@ -40,7 +48,7 @@ export const ContextualInfoPanel = (): ReactElement => {
           >
             <Icon className="font-sans-xl">close</Icon>
           </button>
-          <Content>{contextualInfoMd}</Content>
+          <Content>{contextualInfo.markdown}</Content>
         </aside>
       </FocusTrappedSidebar>
     </>

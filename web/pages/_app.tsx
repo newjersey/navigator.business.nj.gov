@@ -1,6 +1,14 @@
 import "../styles/global.scss";
 import { AppProps } from "next/app";
-import React, { ReactElement, createContext, useEffect, useReducer, useState } from "react";
+import React, {
+  ReactElement,
+  createContext,
+  useEffect,
+  useReducer,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Amplify, Hub } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -53,14 +61,22 @@ export const RoadmapContext = createContext<RoadmapContextType>({
   setRoadmap: () => {},
 });
 
+export interface ContextualInfo {
+  isVisible: boolean;
+  markdown: string;
+}
+
 export interface ContextualInfoContextType {
-  contextualInfoMd: string;
-  setContextualInfoMd: (contextualInfoMd: string) => void;
+  contextualInfo: ContextualInfo;
+  setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>;
 }
 
 export const ContextualInfoContext = createContext<ContextualInfoContextType>({
-  contextualInfoMd: "",
-  setContextualInfoMd: () => {},
+  contextualInfo: {
+    isVisible: false,
+    markdown: "",
+  },
+  setContextualInfo: () => {},
 });
 
 export interface UserDataErrorContextType {
@@ -113,7 +129,10 @@ const theme = createTheme({
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
-  const [contextualInfoMd, setContextualInfoMd] = useState<string>("");
+  const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
+    isVisible: false,
+    markdown: "",
+  });
   const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);
   const router = useRouter();
 
@@ -197,7 +216,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <ThemeProvider theme={theme}>
         <AuthContext.Provider value={{ state, dispatch }}>
           <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-            <ContextualInfoContext.Provider value={{ contextualInfoMd, setContextualInfoMd }}>
+            <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
               <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
                 <ContextualInfoPanel />
                 <Component {...pageProps} />

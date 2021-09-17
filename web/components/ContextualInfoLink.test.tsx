@@ -26,12 +26,14 @@ describe("<ContextualInfoLink />", () => {
     const subject = render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
-        "",
+        { isVisible: false, markdown: "" },
         setContent
       )
     );
     fireEvent.click(subject.getByText("legal structure"));
-    await waitFor(() => expect(setContent).toHaveBeenCalledWith("some markdown content"));
+    await waitFor(() =>
+      expect(setContent).toHaveBeenCalledWith({ isVisible: true, markdown: "some markdown content" })
+    );
   });
 
   it("caches the content so it does not fetch again", async () => {
@@ -40,12 +42,14 @@ describe("<ContextualInfoLink />", () => {
     const subject = render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
-        "",
+        { isVisible: false, markdown: "" },
         setContent
       )
     );
     fireEvent.click(subject.getByText("legal structure"));
-    await waitFor(() => expect(setContent).toHaveBeenCalledWith("some markdown content"));
+    await waitFor(() =>
+      expect(setContent).toHaveBeenCalledWith({ isVisible: true, markdown: "some markdown content" })
+    );
     fireEvent.click(subject.getByText("legal structure"));
     expect(mockFetchContextualInfo).toHaveBeenCalledTimes(1);
   });
