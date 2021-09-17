@@ -137,6 +137,7 @@ const serverlessConfiguration: AWS = {
     Resources: {
       UsersDynamoDBTable: {
         Type: "AWS::DynamoDB::Table",
+        DeletionPolicy: "Retain",
         Properties: {
           ...dynamoDbSchema,
           TableName: usersTable,
