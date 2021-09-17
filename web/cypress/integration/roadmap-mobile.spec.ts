@@ -2,7 +2,7 @@
 
 import { clickEdit, clickNext, completeOnboarding } from "../support/helpers";
 
-describe("Roadmap", () => {
+describe("Roadmap [feature] [all]", () => {
   beforeEach(() => {
     cy.resetUserData();
     cy.loginByCognitoApi();

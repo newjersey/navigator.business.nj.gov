@@ -1,7 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 import { completeOnboarding } from "../support/helpers";
 
-describe("check license status", () => {
+describe("check license status [feature] [all]", () => {
   beforeEach(() => {
     cy.resetUserData();
     cy.loginByCognitoApi();

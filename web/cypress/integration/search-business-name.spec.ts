@@ -1,7 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 import { completeOnboarding } from "../support/helpers";
 
-describe("search business name", () => {
+describe("search business name [feature] [all]", () => {
   beforeEach(() => {
     cy.resetUserData();
     cy.loginByCognitoApi();

@@ -19,9 +19,31 @@ import { LighthouseConfig, LighthouseThresholds, Pa11yThresholds } from "./helpe
 export const testUserEmail = Cypress.env("TEST_USER_EMAIL");
 export const testUserPassword = Cypress.env("TEST_USER_PASSWORD");
 
+beforeEach(function () {
+  let testSuite = Cypress.env("SUITE");
+  if (!testSuite) {
+    testSuite = "all";
+  }
+
+  const testName = Cypress.mocha.getRunner().test.fullTitle();
+  testSuite = `[${testSuite}]`;
+  if (!testName.includes(testSuite)) {
+    this.skip();
+  }
+});
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
+    interface Cypress {
+      mocha: {
+        getRunner: () => {
+          test: {
+            fullTitle: () => string;
+          };
+        };
+      };
+    }
     interface Chainable {
       loginByCognitoApi(): void;
       resetUserData(): void;
