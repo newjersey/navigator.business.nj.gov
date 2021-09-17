@@ -157,7 +157,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
       - build-and-test
-      - cypress-run
+      # - cypress-run
     environment:
       name: dev
     steps:
