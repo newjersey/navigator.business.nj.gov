@@ -97,7 +97,7 @@ describe("Performance and Accessability", () => {
       describe("Plan Your Business", () => {
         describe("Write Your Business Plan", () => {
           it("should pass the audits", () => {
-            completeOnboarding("Donut Shop", "e-commerce", "general-partnership", false);
+            completeOnboarding("Donut Shop", "cosmetology", "general-partnership");
             clickTask("business-plan");
 
             cy.lighthouse(undefined, lighthouseDesktopConfig);
@@ -105,11 +105,11 @@ describe("Performance and Accessability", () => {
           });
         });
         describe("Write Your Business Plan", () => {
-          const urlSlugs = ["evaluate-your-location", "check-site-requirements", "reseller"];
+          const urlSlugs = ["identify-potential-lease", "check-site-requirements", "reseller"];
           urlSlugs.forEach((slug) => {
             describe(slug, () => {
               it("should pass the audits", () => {
-                completeOnboarding("Donut Shop", "e-commerce", "general-partnership", false);
+                completeOnboarding("Donut Shop", "cosmetology", "general-partnership");
                 clickTask(slug);
 
                 cy.lighthouse(undefined, lighthouseDesktopConfig);
