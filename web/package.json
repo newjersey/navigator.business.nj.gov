@@ -16,7 +16,7 @@
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record false",
-    "cypress:run:feature": "cypress run --record false --env Suite=feature",
+    "cypress:run:feature": "cypress run --record false --env SUITE=feature",
     "fences": "gf",
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
