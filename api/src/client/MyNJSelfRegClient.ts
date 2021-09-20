@@ -24,6 +24,13 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
       "Content-Type": "text/xml;encoding=UTF-8",
     };
 
+    console.log({
+      method: "post",
+      url: config.serviceUrl,
+      data: body,
+      headers: headers,
+    });
+
     return axios({
       method: "post",
       url: config.serviceUrl,
@@ -32,6 +39,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
     })
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);
+        console.log("response", response);
         logWriter.LogInfo(
           `myNJ Self-Reg - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
         );
@@ -54,6 +62,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
         };
       })
       .catch((error) => {
+        console.log("error", error);
         logWriter.LogError("Registration - Error", error);
 
         const myNJDuplicateErrors = ["E1048", "E1017", "E1059", "E2109"];
