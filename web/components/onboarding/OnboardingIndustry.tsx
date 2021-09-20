@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode, useContext } from "react";
 import { Divider, FormControl, ListSubheader, MenuItem, Select } from "@material-ui/core";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Industry } from "@/lib/types/types";
-import { IndustryLookup } from "@/display-content/IndustryLookup";
+import { ALL_INDUSTRIES_ORDERED, IndustryLookup } from "@/display-content/IndustryLookup";
 import { Content } from "@/components/Content";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
@@ -82,18 +82,11 @@ export const OnboardingIndustry = (): ReactElement => {
             }}
             renderValue={renderValue}
           >
-            <MenuItem value="restaurant" data-testid="restaurant">
-              {renderOption("restaurant")}
-            </MenuItem>
-            <MenuItem value="home-contractor" data-testid="home-contractor">
-              {renderOption("home-contractor")}
-            </MenuItem>
-            <MenuItem value="e-commerce" data-testid="e-commerce">
-              {renderOption("e-commerce")}
-            </MenuItem>
-            <MenuItem value="cosmetology" data-testid="cosmetology">
-              {renderOption("cosmetology")}
-            </MenuItem>
+            {ALL_INDUSTRIES_ORDERED.filter((industry) => industry !== "generic").map((industry) => (
+              <MenuItem key={industry} value={industry} data-testid={industry}>
+                {renderOption(industry)}
+              </MenuItem>
+            ))}
             <ListSubheader>
               <Divider light />
             </ListSubheader>

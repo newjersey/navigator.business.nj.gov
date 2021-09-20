@@ -1,4 +1,4 @@
-import { Industry } from "../lib/types/types";
+import { Industry } from "@/lib/types/types";
 
 type IndustryOption = {
   primaryText: string;
@@ -18,6 +18,10 @@ export const IndustryLookup: Record<Industry, IndustryOption> = {
     primaryText: "E-Commerce",
     secondaryText: "Selling or reselling goods or services on the internet",
   },
+  "cleaning-aid": {
+    primaryText: "Cleaning Aid",
+    secondaryText: "Offering services and aid related to cleaning",
+  },
   cosmetology: {
     primaryText: "Cosmetology",
     secondaryText: "Offering hair, nail, or skin related services",
@@ -33,5 +37,6 @@ export const ALL_INDUSTRIES_ORDERED: Industry[] = [
   "home-contractor",
   "e-commerce",
   "restaurant",
+  "cleaning-aid",
   "generic",
 ];

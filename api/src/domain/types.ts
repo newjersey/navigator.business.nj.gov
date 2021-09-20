@@ -155,12 +155,19 @@ export const createEmptyOnboardingData = (): OnboardingData => {
   };
 };
 
-export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
+export type Industry =
+  | "restaurant"
+  | "e-commerce"
+  | "home-contractor"
+  | "cosmetology"
+  | "cleaning-aid"
+  | "generic";
 export const ALL_INDUSTRIES: Industry[] = [
   "restaurant",
   "e-commerce",
   "home-contractor",
   "cosmetology",
+  "cleaning-aid",
   "generic",
 ];
 

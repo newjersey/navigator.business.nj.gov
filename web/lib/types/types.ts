@@ -177,7 +177,13 @@ export interface PostOnboarding {
   radioNoContent: string;
 }
 
-export type Industry = "restaurant" | "e-commerce" | "home-contractor" | "cosmetology" | "generic";
+export type Industry =
+  | "restaurant"
+  | "e-commerce"
+  | "home-contractor"
+  | "cosmetology"
+  | "cleaning-aid"
+  | "generic";
 
 export type LegalStructure =
   | "sole-proprietorship"
