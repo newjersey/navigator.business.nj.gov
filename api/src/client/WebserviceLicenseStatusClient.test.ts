@@ -1,3 +1,4 @@
+import { LogWriter, LogWriterType } from "../libs/logWriter";
 import axios from "axios";
 import { generateLicenseEntity } from "../domain/factories";
 import { LicenseStatusClient } from "../domain/types";
@@ -9,9 +10,11 @@ const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe("WebserviceLicenseStatusClient", () => {
   let client: LicenseStatusClient;
+  let logger: LogWriterType;
 
   beforeEach(() => {
-    client = WebserviceLicenseStatusClient("www.example.com");
+    logger = LogWriter("us-test-1", "NavigatorWebService", "SearchApis");
+    client = WebserviceLicenseStatusClient("www.example.com", logger);
     jest.resetAllMocks();
   });
 

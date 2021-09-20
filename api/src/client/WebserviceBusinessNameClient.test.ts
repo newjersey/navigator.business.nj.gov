@@ -1,3 +1,4 @@
+import { LogWriter, LogWriterType } from "../libs/logWriter";
 import axios from "axios";
 import { BusinessNameClient } from "../domain/types";
 import { WebserviceBusinessNameClient } from "./WebserviceBusinessNameClient";
@@ -8,9 +9,11 @@ const mockAxios = axios as jest.Mocked<typeof axios>;
 
 describe("WebserviceBusinessNameClient", () => {
   let client: BusinessNameClient;
+  let logger: LogWriterType;
 
   beforeEach(() => {
-    client = WebserviceBusinessNameClient("www.example.com");
+    logger = LogWriter("us-test-1", "NavigatorWebService", "SearchApis");
+    client = WebserviceBusinessNameClient("www.example.com", logger);
     jest.resetAllMocks();
   });
 

@@ -1,9 +1,11 @@
 import { BusinessNameClient } from "../domain/types";
 import axios, { AxiosError } from "axios";
-import { LogWriter } from "../libs/logWriter";
+import { LogWriterType } from "../libs/logWriter";
 
-export const WebserviceBusinessNameClient = (baseUrl: string): BusinessNameClient => {
-  const logWriter = LogWriter("us-east-1", "NavigatorWebService", "BusinessNameSearch");
+export const WebserviceBusinessNameClient = (
+  baseUrl: string,
+  logWriter: LogWriterType
+): BusinessNameClient => {
   const search = (name: string): Promise<string[]> => {
     const url = `${baseUrl}/ws/simple/queryBusinessName`;
     logWriter.LogInfo(`Business Name Search - Request Sent. url: ${url}. Name: ${name}`);

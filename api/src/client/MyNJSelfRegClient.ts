@@ -1,7 +1,7 @@
 import { BusinessUser, SelfRegClient, SelfRegResponse } from "../domain/types";
 import axios from "axios";
 import xml2js from "xml2js";
-import { LogWriter } from "../libs/logWriter";
+import { LogWriterType } from "../libs/logWriter";
 
 type MyNJConfig = {
   serviceToken: string;
@@ -9,8 +9,7 @@ type MyNJConfig = {
   serviceUrl: string;
 };
 
-export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
-  const logWriter = LogWriter("us-east-1", "NavigatorWebService", "MyNJSelfRegistration");
+export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWriterType): SelfRegClient => {
   const resume = (myNJUserKey: string): Promise<SelfRegResponse> => {
     return makeRequest(createResumeBody(myNJUserKey), "RESUME");
   };
