@@ -161,13 +161,16 @@ export type Industry =
   | "home-contractor"
   | "cosmetology"
   | "cleaning-aid"
+  | "retail"
   | "generic";
+
 export const ALL_INDUSTRIES: Industry[] = [
   "restaurant",
   "e-commerce",
   "home-contractor",
   "cosmetology",
   "cleaning-aid",
+  "retail",
   "generic",
 ];
 

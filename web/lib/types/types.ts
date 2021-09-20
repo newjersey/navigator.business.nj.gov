@@ -183,6 +183,7 @@ export type Industry =
   | "home-contractor"
   | "cosmetology"
   | "cleaning-aid"
+  | "retail"
   | "generic";
 
 export type LegalStructure =
