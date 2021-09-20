@@ -2,6 +2,7 @@ import axios from "axios";
 import { SelfRegClient } from "../domain/types";
 import { MyNJSelfRegClientFactory } from "./MyNJSelfRegClient";
 import { generateUser } from "../domain/factories";
+import { LogWriter, LogWriterType } from "../libs/logWriter";
 
 jest.mock("axios");
 jest.mock("winston");
@@ -9,6 +10,7 @@ jest.mock("winston");
 describe("MyNJSelfRegClient", () => {
   let mockedAxios: jest.Mock;
   let client: SelfRegClient;
+  let logger: LogWriterType;
 
   const config = {
     serviceToken: "some-service-token",
@@ -19,8 +21,9 @@ describe("MyNJSelfRegClient", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
+    logger = LogWriter("us-test-1", "NavigatorWebService", "SearchApis");
     mockedAxios = axios as unknown as jest.Mock;
-    client = MyNJSelfRegClientFactory(config);
+    client = MyNJSelfRegClientFactory(config, logger);
     mockedAxios.mockRejectedValue({});
   });
 

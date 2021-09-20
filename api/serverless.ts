@@ -73,6 +73,7 @@ const serverlessConfiguration: AWS = {
     region: region,
     iam: {
       role: {
+        managedPolicies: ["arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"],
         statements: [
           {
             Effect: "Allow",
@@ -115,8 +116,10 @@ const serverlessConfiguration: AWS = {
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_URL: myNJServiceUrl,
       DISABLE_AUTH: disableAuth,
+      STAGE: stage,
     },
     lambdaHashingVersion: "20201221",
+    logRetentionInDays: 180,
   },
   functions: {
     express: express(

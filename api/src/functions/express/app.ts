@@ -14,13 +14,13 @@ import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatu
 import { WebserviceBusinessNameClient } from "../../client/WebserviceBusinessNameClient";
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
+import { LogWriter } from "@libs/logWriter";
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
 const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
-
 const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
 
 const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
@@ -38,13 +38,16 @@ if (IS_OFFLINE) {
   dynamoDb = new AWS.DynamoDB.DocumentClient();
 }
 
+const STAGE = process.env.STAGE || "local";
+const logger = LogWriter("us-east-1", `NavigatorWebService/${STAGE}`, "SearchApis");
+
 const LICENSE_STATUS_BASE_URL =
   process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
-const licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL);
+const licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_URL, logger);
 
 const BUSINESS_NAME_BASE_URL =
   process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
-const businessNameClient = WebserviceBusinessNameClient(BUSINESS_NAME_BASE_URL);
+const businessNameClient = WebserviceBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
 
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
@@ -53,11 +56,14 @@ const searchBusinessName = searchBusinessNameFactory(businessNameClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 
-const myNJSelfRegClient = MyNJSelfRegClientFactory({
-  serviceToken: process.env.MYNJ_SERVICE_TOKEN || "",
-  roleName: process.env.MYNJ_ROLE_NAME || "",
-  serviceUrl: process.env.MYNJ_SERVICE_URL || "",
-});
+const myNJSelfRegClient = MyNJSelfRegClientFactory(
+  {
+    serviceToken: process.env.MYNJ_SERVICE_TOKEN || "",
+    roleName: process.env.MYNJ_ROLE_NAME || "",
+    serviceUrl: process.env.MYNJ_SERVICE_URL || "",
+  },
+  logger
+);
 
 app.use(bodyParser.json({ strict: false }));
 app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus));
