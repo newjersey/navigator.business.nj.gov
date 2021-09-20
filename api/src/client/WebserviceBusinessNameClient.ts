@@ -6,7 +6,7 @@ export const WebserviceBusinessNameClient = (baseUrl: string): BusinessNameClien
   const logWriter = LogWriter("us-east-1", "NavigatorWebService", "BusinessNameSearch");
   const search = (name: string): Promise<string[]> => {
     const url = `${baseUrl}/ws/simple/queryBusinessName`;
-    logWriter.LogInfo(`Search - Request Sent. url: ${url}. Name: ${name}`);
+    logWriter.LogInfo(`Business Name Search - Request Sent. url: ${url}. Name: ${name}`);
     return axios
       .post(url, {
         businessName: name,
@@ -18,7 +18,7 @@ export const WebserviceBusinessNameClient = (baseUrl: string): BusinessNameClien
         return response.data || [];
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError("Search - Error", error);
+        logWriter.LogError("Business Name Search - Error", error);
         return Promise.reject(error.response?.status);
       });
   };

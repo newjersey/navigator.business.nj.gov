@@ -7,7 +7,7 @@ export const WebserviceLicenseStatusClient = (baseUrl: string): LicenseStatusCli
   const search = (name: string, zipCode: string, licenseType: string): Promise<LicenseEntity[]> => {
     const url = `${baseUrl}/ws/simple/queryLicenseStatus`;
     logWriter.LogInfo(
-      `Search - Request Sent. url: ${url}. Business Name: ${name}. License Type: ${licenseType}. ZipCode${zipCode}`
+      `License Status Search - Request Sent. url: ${url}. Business Name: ${name}. License Type: ${licenseType}. ZipCode${zipCode}`
     );
     return axios
       .post(url, {
@@ -22,7 +22,7 @@ export const WebserviceLicenseStatusClient = (baseUrl: string): LicenseStatusCli
         return response.data || [];
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError("Search - Error", error);
+        logWriter.LogError("License Status Search - Error", error);
         return Promise.reject(error.response?.status);
       });
   };
