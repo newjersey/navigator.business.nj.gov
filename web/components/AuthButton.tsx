@@ -43,6 +43,6 @@ export const AuthButton = (props?: Props): ReactElement => {
     case IsAuthenticated.TRUE:
       return logoutButton();
     case IsAuthenticated.UNKNOWN:
-      return logoutButton();
+      return loginButton();
   }
 };
