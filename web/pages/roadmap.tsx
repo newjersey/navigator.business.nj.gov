@@ -141,9 +141,20 @@ const RoadmapPage = (props: Props): ReactElement => {
                 </div>
               </>
             )}
-            <div className="margin-top-6">{getSection("PLAN")}</div>
-            <hr className="margin-y-6 bg-base-lighter" />
-            {getSection("START")}
+            <div className="margin-top-6">
+              {!roadmap ? (
+                <div className="fdr fjc fac">
+                  <CircularProgress />
+                  <h3 className="margin-left-2">Loading...</h3>
+                </div>
+              ) : (
+                <>
+                  {getSection("PLAN")}
+                  <hr className="margin-y-6 bg-base-lighter" />
+                  {getSection("START")}
+                </>
+              )}
+            </div>
           </SinglePageLayout>
         </div>
       )}

@@ -7,7 +7,7 @@ import {
   useMockUserData,
   useMockUserDataError,
 } from "@/test/mock/mockUseUserData";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
@@ -35,12 +35,22 @@ describe("roadmap page", () => {
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
     expect(subject.queryByText(RoadmapDefaults.roadmapTitleNotSet)).toBeNull();
   });
+
   it("shows loading page if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     const subject = renderRoadmapPage();
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
     expect(subject.queryByText(RoadmapDefaults.roadmapTitleNotSet)).toBeNull();
   });
+
+  it("shows user data and loading spinner when user data loaded but not roadmap", () => {
+    useMockOnboardingData({ businessName: "Some Cool Name" });
+    setMockRoadmapResponse(undefined);
+    const subject = renderRoadmapPage();
+    expect(subject.getByText("Business Roadmap for Some Cool Name")).toBeInTheDocument();
+    expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
+  });
+
   it("redirects to onboarding if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     renderRoadmapPage();

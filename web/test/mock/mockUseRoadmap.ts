@@ -5,9 +5,11 @@ import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
 
 export const useMockRoadmap = (overrides: Partial<Roadmap>): void => {
-  mockUseRoadmap.mockReturnValue({
-    roadmap: generateRoadmap(overrides),
-  });
+  setMockRoadmapResponse(generateRoadmap(overrides));
+};
+
+export const setMockRoadmapResponse = (roadmap: Roadmap | undefined): void => {
+  mockUseRoadmap.mockReturnValue({ roadmap });
 };
 
 export const useMockRoadmapTask = (overrides: Partial<Task>): void => {
