@@ -19,7 +19,6 @@ const disableAuth = process.env.DISABLE_AUTH ?? "";
 const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
 const myNJRoleName = process.env.MYNJ_ROLE_NAME || "";
 const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
-const awsSecretId = process.env.AWS_SECRET_ID || "";
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -107,7 +106,6 @@ const serverlessConfiguration: AWS = {
       MYNJ_SERVICE_TOKEN: myNJServiceToken,
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_URL: myNJServiceUrl,
-      AWS_SECRET_ID: awsSecretId,
       DISABLE_AUTH: disableAuth,
     },
     lambdaHashingVersion: "20201221",

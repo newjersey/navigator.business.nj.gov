@@ -215,9 +215,7 @@ jobs:
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_DEV }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_DEV }}
           MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_DEV }}
-          MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_DEV }}
           BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_DEV }}
-          AWS_SECRET_ID: MYNJ_CERTS_DEV
 
       - name: 🚀 Deploy web to AWS Amplify
         run: ./scripts/amplify-ci/publish.sh
@@ -296,9 +294,7 @@ jobs:
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_STAGING }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_STAGING }}
           MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_STAGING }}
-          MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_STAGING }}
           BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_STAGING }}
-          AWS_SECRET_ID: MYNJ_CERTS_STAGING
 
       - name: 🚀 Deploy web to AWS Amplify
         run: ./scripts/amplify-ci/publish.sh
@@ -375,9 +371,7 @@ jobs:
           MYNJ_SERVICE_TOKEN: ${{ secrets.MYNJ_SERVICE_TOKEN_PROD }}
           MYNJ_ROLE_NAME: ${{ secrets.MYNJ_ROLE_NAME_PROD }}
           MYNJ_SERVICE_URL: ${{ secrets.MYNJ_SERVICE_URL_PROD }}
-          MYNJ_CERT_PASSPHRASE: ${{ secrets.MYNJ_CERT_PASSPHRASE_PROD }}
           BUSINESS_NAME_BASE_URL: ${{ secrets.BUSINESS_NAME_BASE_URL_PROD }}
-          AWS_SECRET_ID: MYNJ_CERTS_PROD
           DISABLE_AUTH: ${{ secrets.DISABLE_AUTH_PROD }}
 
       - name: 🚀 Deploy web to AWS Amplify
