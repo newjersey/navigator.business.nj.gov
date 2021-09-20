@@ -1,4 +1,4 @@
-import { BusinessUser, GetCertHttpsAgent, SelfRegClient, SelfRegResponse } from "../domain/types";
+import { BusinessUser, SelfRegClient, SelfRegResponse } from "../domain/types";
 import axios from "axios";
 import xml2js from "xml2js";
 import { LogWriter } from "../libs/logWriter";
@@ -7,7 +7,6 @@ type MyNJConfig = {
   serviceToken: string;
   roleName: string;
   serviceUrl: string;
-  getCertHttpsAgent: GetCertHttpsAgent;
 };
 
 export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
@@ -25,14 +24,11 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig): SelfRegClient => {
       "Content-Type": "text/xml;encoding=UTF-8",
     };
 
-    const httpsAgent = await config.getCertHttpsAgent();
-
     return axios({
       method: "post",
       url: config.serviceUrl,
       data: body,
       headers: headers,
-      httpsAgent: httpsAgent,
     })
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);

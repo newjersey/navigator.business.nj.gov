@@ -16,9 +16,6 @@ const usersTable = `users-table-${stage}`;
 
 const disableAuth = process.env.DISABLE_AUTH ?? "";
 
-const myNJCert = process.env.MYNJ_CERT || "";
-const myNJCertKey = process.env.MYNJ_CERT_KEY || "";
-const myNJCertPassphrase = process.env.MYNJ_CERT_PASSPHRASE || "";
 const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
 const myNJRoleName = process.env.MYNJ_ROLE_NAME || "";
 const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
@@ -110,9 +107,6 @@ const serverlessConfiguration: AWS = {
       MYNJ_SERVICE_TOKEN: myNJServiceToken,
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_URL: myNJServiceUrl,
-      MYNJ_CERT: myNJCert,
-      MYNJ_CERT_KEY: myNJCertKey,
-      MYNJ_CERT_PASSPHRASE: myNJCertPassphrase,
       AWS_SECRET_ID: awsSecretId,
       DISABLE_AUTH: disableAuth,
     },
