@@ -45,9 +45,10 @@ const TaskPage = (props: Props): ReactElement => {
         style={{ visibility: previousUrlSlug ? "visible" : "hidden" }}
         onClick={() => router.push(`/tasks/${previousUrlSlug}`)}
       >
-        <div className="flex padding-y-1 flex-justify-center">
-          <Icon className="usa-icon--size-4 position-absolute left-2 bottom-105">navigate_before</Icon>
-          <span> {TaskDefaults.previousTaskButtonText}</span>
+        <div className="flex flex-justify">
+          <Icon className="usa-icon--size-4">navigate_before</Icon>
+          <span className="flex-align-self-center"> {TaskDefaults.previousTaskButtonText}</span>
+          <Icon className="usa-icon--size-4 visibility-hidden"> </Icon>
         </div>
       </button>
       <button
@@ -55,9 +56,10 @@ const TaskPage = (props: Props): ReactElement => {
         style={{ visibility: nextUrlSlug ? "visible" : "hidden" }}
         onClick={() => router.push(`/tasks/${nextUrlSlug}`)}
       >
-        <div className="flex padding-y-1 flex-justify-center">
-          <span>{TaskDefaults.nextTaskButtonText}</span>
-          <Icon className="usa-icon--size-4 position-absolute right-2 bottom-105">navigate_next</Icon>
+        <div className="flex flex-justify">
+          <Icon className="usa-icon--size-4 visibility-hidden"> </Icon>
+          <span className="flex-align-self-center">{TaskDefaults.nextTaskButtonText}</span>
+          <Icon className="usa-icon--size-4">navigate_next</Icon>
         </div>
       </button>
     </div>
