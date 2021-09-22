@@ -14,6 +14,7 @@ import {
   SectionType,
   Step,
   Task,
+  TaskLink,
   UserData,
 } from "@/lib/types/types";
 import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
@@ -113,6 +114,15 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     callToActionText: `some-call-to-action-${randomInt()}`,
     contentMd: `some-content-md-${randomInt()}`,
     postOnboardingQuestion: `some-post-onboarding-${randomInt()}`,
+    unlockedBy: [generateTaskLink({})],
+    ...overrides,
+  };
+};
+
+export const generateTaskLink = (overrides: Partial<TaskLink>): TaskLink => {
+  return {
+    name: `some-name-${randomInt()}`,
+    urlSlug: `some-urlSlug-${randomInt()}`,
     ...overrides,
   };
 };

@@ -37,10 +37,11 @@ const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task 
   const stepInRoadmap = roadmap?.steps.find((step) => step.tasks.find((task) => task.id === taskId));
   return stepInRoadmap?.tasks.find((task) => task.id === taskId);
 };
+
 export const getModifiedTaskContent = (
   roadmap: Roadmap | undefined,
   task: Task,
-  field: keyof Task
+  field: Exclude<keyof Task, "unlockedBy">
 ): string => {
   const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
   if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {

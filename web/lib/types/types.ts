@@ -167,7 +167,17 @@ export interface Task {
   callToActionText: string;
   contentMd: string;
   postOnboardingQuestion?: string;
+  unlockedBy: TaskLink[];
 }
+
+export interface TaskLink {
+  name: string;
+  urlSlug: string;
+}
+
+export type TaskDependencies = {
+  [filename: string]: string[];
+};
 
 export interface PostOnboarding {
   question: string;

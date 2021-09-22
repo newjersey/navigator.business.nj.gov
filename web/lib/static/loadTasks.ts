@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Task } from "@/lib/types/types";
+import { Task, TaskDependencies, TaskLink } from "@/lib/types/types";
 import { convertTaskMd } from "@/lib/utils/markdownReader";
 
 export type PathParams<P> = { params: P; locale?: string };
@@ -14,10 +14,9 @@ export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
   const fileNames = fs.readdirSync(path.join(roadmapsDir, "tasks"));
 
   return fileNames.map((fileName) => {
-    const task = loadTaskByFileName(fileName);
     return {
       params: {
-        urlSlug: task.urlSlug,
+        urlSlug: loadUrlSlugByFilename(fileName),
       },
     };
   });
@@ -26,8 +25,7 @@ export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
 export const loadTaskByUrlSlug = (urlSlug: string): Task => {
   const fileNames = fs.readdirSync(path.join(roadmapsDir, "tasks"));
   const matchingFileName = fileNames.find((fileName) => {
-    const task = loadTaskByFileName(fileName);
-    return urlSlug === task.urlSlug;
+    return urlSlug === loadUrlSlugByFilename(fileName);
   });
   if (!matchingFileName) {
     throw `Task with urlSlug ${urlSlug} not found`;
@@ -35,8 +33,39 @@ export const loadTaskByUrlSlug = (urlSlug: string): Task => {
   return loadTaskByFileName(matchingFileName);
 };
 
+const loadUrlSlugByFilename = (fileName: string): string => {
+  const fullPath = path.join(roadmapsDir, "tasks", `${fileName}`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  return convertTaskMd(fileContents).urlSlug;
+};
+
 const loadTaskByFileName = (fileName: string): Task => {
   const fullPath = path.join(roadmapsDir, "tasks", `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
-  return convertTaskMd(fileContents);
+
+  const dependencies = JSON.parse(
+    fs.readFileSync(path.join(roadmapsDir, "task-dependencies.json"), "utf8")
+  ) as TaskDependencies;
+
+  const taskWithoutLinks = convertTaskMd(fileContents);
+  const fileNameWithoutMd = fileName.split(".md")[0];
+  const unlockedByTaskLinks = (dependencies[fileNameWithoutMd] || []).map((dependencyFileName) =>
+    loadTaskLinkByFilename(`${dependencyFileName}.md`)
+  );
+
+  return {
+    ...taskWithoutLinks,
+    unlockedBy: unlockedByTaskLinks,
+  };
+};
+
+const loadTaskLinkByFilename = (fileName: string): TaskLink => {
+  const fullPath = path.join(roadmapsDir, "tasks", `${fileName}`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const taskWithoutLinks = convertTaskMd(fileContents);
+
+  return {
+    name: taskWithoutLinks.name,
+    urlSlug: taskWithoutLinks.urlSlug,
+  };
 };

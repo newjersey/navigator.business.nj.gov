@@ -11,6 +11,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
+import { UnlockedBy } from "./UnlockedBy";
 
 interface Props {
   task: Task;
@@ -110,6 +111,7 @@ export const LicenseTask = (props: Props): ReactElement => {
         </div>
         <TabPanel>
           <div className="margin-3 height-full">
+            <UnlockedBy taskLinks={props.task.unlockedBy} />
             <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
             <div className="fdc margin-top-4">
               <a

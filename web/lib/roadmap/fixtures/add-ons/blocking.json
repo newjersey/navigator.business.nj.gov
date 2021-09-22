@@ -1,0 +1,17 @@
+[
+  {
+    "step": 1,
+    "weight": 1,
+    "task": "blocked-task"
+  },
+  {
+    "step": 1,
+    "weight": 1,
+    "task": "blocking-task-1"
+  },
+  {
+    "step": 1,
+    "weight": 1,
+    "task": "blocking-task-2"
+  }
+]
