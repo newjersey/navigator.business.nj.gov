@@ -18,10 +18,12 @@ export const LogWriter = (region: string, groupName: string, logStream: string):
   );
 
   const LogError = (message: string, details?: AxiosError): void => {
+    console.log("ERROR:", message, details);
     winston.error(message, details);
   };
 
   const LogInfo = (message: string): void => {
+    console.log("INFO:", message);
     winston.info(message);
   };
 
