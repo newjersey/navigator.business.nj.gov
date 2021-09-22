@@ -45,9 +45,16 @@ const serverlessConfiguration: AWS = {
       lambdaPort: offlineLambdaPort,
     },
     config: {
-      dev: "${ssm:/config/dev}",
-      staging: "${ssm:/config/staging}",
-      prod: "${ssm:/config/prod}",
+      application: {
+        dev: "${ssm:/config/dev/application}",
+        staging: "${ssm:/config/staging/application}",
+        prod: "${ssm:/config/prod/application}",
+      },
+      infrastructure: {
+        dev: "${ssm:/config/dev}",
+        staging: "${ssm:/config/staging}",
+        prod: "${ssm:/config/prod}",
+      },
     },
     stage: stage,
   },
@@ -112,13 +119,13 @@ const serverlessConfiguration: AWS = {
   },
   functions: {
     express: express(
-      "${self:custom.config.${self:custom.stage}.COGNITO_ARN}",
+      "${self:custom.config.application.${self:custom.stage}.COGNITO_ARN}",
       env.CI
         ? {
-            securityGroupIds: ["${self:custom.config.${self:custom.stage}.SECURITY_GROUP}"],
+            securityGroupIds: ["${self:custom.config.infrastructure.${self:custom.stage}.SECURITY_GROUP}"],
             subnetIds: [
-              "${self:custom.config.${self:custom.stage}.SUBNET_01}",
-              "${self:custom.config.${self:custom.stage}.SUBNET_02}",
+              "${self:custom.config.infrastructure.${self:custom.stage}.SUBNET_01}",
+              "${self:custom.config.infrastructure.${self:custom.stage}.SUBNET_02}",
             ],
           }
         : undefined,
