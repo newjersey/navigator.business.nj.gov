@@ -71,6 +71,19 @@ describe("roadmapBuilder", () => {
 
     expect(roadmap.steps[4].tasks.map((it) => it.id)).toEqual(["mocha-task-5-id"]);
   });
+
+  it("adds unlockedBy to tasks from dependencies file", async () => {
+    const roadmap = await buildRoadmap({
+      addOns: ["blocking"],
+      modifications: [],
+    });
+
+    const blockedTask = roadmap.steps[0].tasks.find((it) => it.id === "blocked-id");
+    expect(blockedTask?.unlockedBy).toEqual([
+      { name: "Blocking Task 1", urlSlug: "blocking-task-1-url-slug" },
+      { name: "Blocking Task 2", urlSlug: "blocking-task-2-url-slug" },
+    ]);
+  });
 });
 
 const expectedGenericRoadmap: Roadmap = {
@@ -89,6 +102,7 @@ const expectedGenericRoadmap: Roadmap = {
           callToActionLink: "www.generic-task-1.com",
           callToActionText: "Generic Task 1 CTA",
           contentMd: `${EOL}Generic Task 1 Contents${EOL}`,
+          unlockedBy: [],
         },
       ],
     },
@@ -106,6 +120,7 @@ const expectedGenericRoadmap: Roadmap = {
           callToActionLink: "www.generic-task-2.com",
           callToActionText: "Generic Task 2 CTA",
           contentMd: `${EOL}Generic Task 2 Contents${EOL}`,
+          unlockedBy: [],
         },
       ],
     },
@@ -123,6 +138,7 @@ const expectedGenericRoadmap: Roadmap = {
           callToActionLink: "www.generic-task-3.com",
           callToActionText: "Generic Task 3 CTA",
           contentMd: `${EOL}Generic Task 3 Contents${EOL}`,
+          unlockedBy: [],
         },
       ],
     },
@@ -140,6 +156,7 @@ const expectedGenericRoadmap: Roadmap = {
           callToActionLink: "www.generic-task-4.com",
           callToActionText: "Generic Task 4 CTA",
           contentMd: `${EOL}Generic Task 4 Contents${EOL}`,
+          unlockedBy: [],
         },
       ],
     },

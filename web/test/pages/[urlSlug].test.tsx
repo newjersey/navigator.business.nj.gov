@@ -3,7 +3,13 @@ import * as materialUi from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 import TaskPage from "@/pages/tasks/[urlSlug]";
 import { Task, TaskProgress, UserData } from "@/lib/types/types";
-import { generateOnboardingData, generateStep, generateTask, generateUserData } from "@/test/factories";
+import {
+  generateOnboardingData,
+  generateStep,
+  generateTask,
+  generateTaskLink,
+  generateUserData,
+} from "@/test/factories";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
@@ -233,15 +239,9 @@ describe("task page", () => {
     beforeEach(() => {
       useMockRoadmap({
         steps: [
-          generateStep({
-            tasks: [taskOne],
-          }),
-          generateStep({
-            tasks: [taskTwo],
-          }),
-          generateStep({
-            tasks: [taskThree],
-          }),
+          generateStep({ tasks: [taskOne] }),
+          generateStep({ tasks: [taskTwo] }),
+          generateStep({ tasks: [taskThree] }),
         ],
       });
     });
@@ -271,6 +271,78 @@ describe("task page", () => {
 
       fireEvent.click(subject.getByText(TaskDefaults.previousTaskButtonText));
       expect(mockPush).toHaveBeenCalledWith("/tasks/task-1");
+    });
+  });
+
+  describe("locked and unlocked tasks", () => {
+    beforeEach(() => {
+      useMockRoadmap({
+        steps: [
+          generateStep({
+            tasks: [generateTask({ urlSlug: "do-this-first" }), generateTask({ urlSlug: "also-this-one" })],
+          }),
+        ],
+      });
+    });
+
+    it("does not show an alert when this task is has nothing that unlocks it", () => {
+      subject = renderPage(generateTask({ unlockedBy: [] }));
+      expect(subject.queryByText(TaskDefaults.unlockedBySingular, { exact: false })).not.toBeInTheDocument();
+      expect(subject.queryByText(TaskDefaults.unlockedByPlural, { exact: false })).not.toBeInTheDocument();
+    });
+
+    it("shows an alert with link when this task is unlocked by one other task", () => {
+      subject = renderPage(
+        generateTask({ unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })] })
+      );
+      expect(subject.queryByText(TaskDefaults.unlockedByPlural, { exact: false })).not.toBeInTheDocument();
+      expect(subject.queryByText(TaskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
+      expect(subject.queryByText("Do this first", { exact: false })).toBeInTheDocument();
+      expect(subject.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
+        "do-this-first"
+      );
+    });
+
+    it("shows an alert with links when this task is unlocked by several other tasks", () => {
+      subject = renderPage(
+        generateTask({
+          unlockedBy: [
+            generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" }),
+            generateTaskLink({ name: "Also this one", urlSlug: "also-this-one" }),
+          ],
+        })
+      );
+
+      expect(subject.queryByText(TaskDefaults.unlockedByPlural, { exact: false })).toBeInTheDocument();
+      expect(subject.queryByText(TaskDefaults.unlockedBySingular, { exact: false })).not.toBeInTheDocument();
+      expect(subject.queryByText("Do this first", { exact: false })).toBeInTheDocument();
+      expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();
+      expect(subject.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
+        "do-this-first"
+      );
+      expect(subject.getByText("Also this one", { exact: false }).getAttribute("href")).toEqual(
+        "also-this-one"
+      );
+    });
+
+    it("does not include tasks that are not on your roadmap", () => {
+      useMockRoadmap({
+        steps: [
+          generateStep({ tasks: [generateTask({ urlSlug: "task-1" }), generateTask({ urlSlug: "task-2" })] }),
+        ],
+      });
+
+      subject = renderPage(
+        generateTask({
+          unlockedBy: [
+            generateTaskLink({ name: "Task 1", urlSlug: "task-1" }),
+            generateTaskLink({ name: "NOT ON ROADMAP TASK", urlSlug: "not-on-roadmap-task" }),
+          ],
+        })
+      );
+
+      expect(subject.queryByText("Task 1", { exact: false })).toBeInTheDocument();
+      expect(subject.queryByText("NOT ON ROADMAP TASK", { exact: false })).not.toBeInTheDocument();
     });
   });
 });

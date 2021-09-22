@@ -18,6 +18,7 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import { useRouter } from "next/router";
 import { Icon } from "@/components/njwds/Icon";
+import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 
 interface Props {
   task: Task;
@@ -102,6 +103,7 @@ const TaskPage = (props: Props): ReactElement => {
             default: (
               <div className="margin-3">
                 <TaskHeader task={props.task} />
+                <UnlockedBy taskLinks={props.task.unlockedBy} />
                 {getTaskContent()}
                 <TaskCTA
                   link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}

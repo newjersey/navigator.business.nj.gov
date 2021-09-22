@@ -11,6 +11,7 @@ import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from 
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 import { TaskHeader } from "@/components/TaskHeader";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 
 interface Props {
   task: Task;
@@ -164,6 +165,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
   return (
     <>
       <TaskHeader task={props.task} />
+      <UnlockedBy taskLinks={props.task.unlockedBy} />
       {showErrorAlert()}
       <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
 

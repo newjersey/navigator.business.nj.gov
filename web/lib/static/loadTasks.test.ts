@@ -76,11 +76,30 @@ describe("loadTasks", () => {
         "\n" +
         "I am a text content2";
 
-      mockReadDirReturn(["task1.md", "task2.md"]);
+      const taskMd3 =
+        "---\n" +
+        'id: "some-id-3"\n' +
+        'name: "Some Task Name3"\n' +
+        'urlSlug: "some-url-slug-3"\n' +
+        'callToActionLink: "www.example3.com"\n' +
+        'callToActionText: ""\n' +
+        "---\n" +
+        "\n" +
+        "# I am a header3\n" +
+        "\n" +
+        "I am a text content3";
+
+      const dependencyFile = JSON.stringify({
+        task2: ["task3"],
+      });
+
+      mockReadDirReturn(["task1.md", "task2.md", "task3.md"]);
       mockedFs.readFileSync
-        .mockReturnValueOnce(taskMd1)
-        .mockReturnValueOnce(taskMd2)
-        .mockReturnValueOnce(taskMd2);
+        .mockReturnValueOnce(taskMd1) // read first file in list
+        .mockReturnValueOnce(taskMd2) // read second file in list
+        .mockReturnValueOnce(taskMd2) // read file once we found the match
+        .mockReturnValueOnce(dependencyFile) // read dependency file
+        .mockReturnValueOnce(taskMd3); // read dependency task file
 
       expect(loadTaskByUrlSlug("some-url-slug-2")).toEqual({
         id: "some-id-2",
@@ -89,6 +108,7 @@ describe("loadTasks", () => {
         callToActionLink: "www.example2.com",
         callToActionText: "",
         contentMd: "\n# I am a header2\n\nI am a text content2",
+        unlockedBy: [{ name: "Some Task Name3", urlSlug: "some-url-slug-3" }],
       });
     });
   });
