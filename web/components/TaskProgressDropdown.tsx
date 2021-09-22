@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { Button, createStyles, makeStyles, Menu, MenuItem, Paper, Snackbar } from "@material-ui/core";
+import { Button, createStyles, makeStyles, Menu, MenuItem, Paper, Snackbar, Slide } from "@material-ui/core";
 import { TaskProgress } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
 import { TagInProgress } from "@/components/njwds-extended/TagInProgress";
@@ -67,17 +67,16 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={successToastIsOpen}
         onClose={() => setSuccessToastIsOpen(false)}
-        autoHideDuration={5000}
+        autoHideDuration={3000}
+        TransitionComponent={Slide}
         disableWindowBlurListener={true}
         ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
       >
-        <div>
-          <Paper>
-            <Alert slim rounded variant="success" className="margin-y-2">
-              {TaskDefaults.taskProgressSuccessToastBody}
-            </Alert>
-          </Paper>
-        </div>
+        <Paper>
+          <Alert slim rounded variant="success">
+            {TaskDefaults.taskProgressSuccessToastBody}
+          </Alert>
+        </Paper>
       </Snackbar>
       <Button
         style={{ whiteSpace: "nowrap" }}
