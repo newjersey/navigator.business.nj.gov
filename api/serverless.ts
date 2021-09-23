@@ -5,7 +5,7 @@ import dynamoDbSchema from "./dynamodb-schema.json";
 import { env } from "process";
 
 const isDocker = process.env.IS_DOCKER == "true" || false; // set in docker-compose
-const stage = process.env.STAGE || "dev";
+const stage = process.env.STAGE || "local";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5000;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
@@ -13,6 +13,7 @@ const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
 const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
+const ssmLocation = stage === "local" ? "dev" : stage;
 
 const disableAuth = process.env.DISABLE_AUTH ?? "";
 
@@ -56,7 +57,7 @@ const serverlessConfiguration: AWS = {
         prod: "${ssm:/config/prod}",
       },
     },
-    stage: stage,
+    ssmLocation: ssmLocation,
   },
   plugins: [
     "serverless-webpack",
@@ -119,20 +120,25 @@ const serverlessConfiguration: AWS = {
   },
   functions: {
     express: express(
-      "${self:custom.config.application.${self:custom.stage}.COGNITO_ARN}",
+      "${self:custom.config.application.${self:custom.ssmLocation}.COGNITO_ARN}",
       env.CI
         ? {
-            securityGroupIds: ["${self:custom.config.infrastructure.${self:custom.stage}.SECURITY_GROUP}"],
+            securityGroupIds: [
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SECURITY_GROUP}",
+            ],
             subnetIds: [
-              "${self:custom.config.infrastructure.${self:custom.stage}.SUBNET_01}",
-              "${self:custom.config.infrastructure.${self:custom.stage}.SUBNET_02}",
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_01}",
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_02}",
             ],
           }
         : undefined,
       disableAuth
     ),
   },
-  resources: {
+};
+
+if (!env.CI || stage === "local") {
+  serverlessConfiguration.resources = {
     Resources: {
       UsersDynamoDBTable: {
         Type: "AWS::DynamoDB::Table",
@@ -143,7 +149,7 @@ const serverlessConfiguration: AWS = {
         },
       },
     },
-  },
-};
+  };
+}
 
 module.exports = serverlessConfiguration;
