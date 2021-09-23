@@ -131,7 +131,7 @@ jobs:
       - name: 🔧 Build project for e2e tests
         run: npm --prefix=api run install-dynamo-local && npm --prefix=api start & npm --prefix=api run start:wiremock & npm --prefix=web run build --if-present
         env:
-          API_BASE_URL: http://localhost:5000/dev
+          API_BASE_URL: http://localhost:5000/local
           AUTH_DOMAIN: ${{ secrets.COGNITO_AUTH_DOMAIN_DEV }}
           REDIRECT_URL: http://localhost:3000/
 
@@ -144,7 +144,7 @@ jobs:
           wait-on: "http://localhost:3000"
           record: true
         env:
-          CYPRESS_API_BASE_URL: http://localhost:5000/dev
+          CYPRESS_API_BASE_URL: http://localhost:5000/local
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_TEST_USER_EMAIL: ${{ secrets.CYPRESS_TEST_USER_EMAIL }}
           CYPRESS_TEST_USER_PASSWORD: ${{ secrets.CYPRESS_TEST_USER_PASSWORD }}
