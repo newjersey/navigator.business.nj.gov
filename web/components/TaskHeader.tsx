@@ -49,16 +49,12 @@ export const TaskHeader = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="grid-container padding-0 margin-bottom-2">
-      <div className="grid-row grid-gap">
-        <div className="tablet:grid-col-9">
-          <h2 className="margin-top-0 margin-bottom-0" data-task-id={props.task.id}>
-            {getModifiedTaskContent(roadmap, props.task, "name")}
-          </h2>
-        </div>
-        <div className="tablet:grid-col-3">{renderProgress()}</div>
-      </div>
+    <>
+      <h2 className="margin-top-0 margin-bottom-2" data-task-id={props.task.id}>
+        {getModifiedTaskContent(roadmap, props.task, "name")}
+      </h2>
+      <div className="margin-top-0 margin-bottom-2">{renderProgress()}</div>
       <UserDataErrorAlert />
-    </div>
+    </>
   );
 };
