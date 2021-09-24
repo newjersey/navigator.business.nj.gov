@@ -3,7 +3,7 @@ import analytics from "@/lib/utils/analytics";
 import { Icon } from "@/components/njwds/Icon";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettings";
-import { MiniRoadmap } from "@/components/MiniRoadmap";
+import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { Task } from "@/lib/types/types";
 import { NavDefaults } from "@/display-content/NavDefaults";
 interface Props {

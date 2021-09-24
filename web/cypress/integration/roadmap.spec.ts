@@ -21,6 +21,10 @@ describe("Roadmap [feature] [all]", () => {
     cy.get('[data-municipality="Absecon"]').should("exist");
 
     // step 1
+    cy.get('[id="plan-content"]').should("be.visible");
+    cy.get('[id="plan-header"]').click({ force: true });
+    cy.get('[id="plan-content"]').should("not.be.visible");
+    cy.get('[id="plan-header"]').click({ force: true });
     cy.get('[data-step="1"]').should("exist");
     cy.get('[data-task="business-plan"]').should("exist");
 
@@ -29,6 +33,10 @@ describe("Roadmap [feature] [all]", () => {
     cy.get('[data-task="research-insurance-needs"]').should("exist");
 
     // step 3
+    cy.get('[id="start-content"]').should("be.visible");
+    cy.get('[id="start-header"]').click({ force: true });
+    cy.get('[id="start-content"]').should("not.be.visible");
+    cy.get('[id="start-header"]').click({ force: true });
     cy.get('[data-step="3"]').should("exist");
     cy.get('[data-task="register-trade-name"]').should("exist");
 
@@ -36,18 +44,18 @@ describe("Roadmap [feature] [all]", () => {
     cy.get('[data-step="4"]').should("exist");
 
     // tasks screen
-    cy.get('[data-task="register-trade-name"]').click();
+    cy.get('[data-task="register-trade-name"]').click({ force: true });
     cy.get('[data-business-name="Beesapple\'s"]').should("not.exist");
     cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
-    cy.get('[data-step="5"]').click();
-    cy.get('[data-task="check-local-requirements"]').click();
+    cy.get('[data-step="5"]').click({ force: true });
+    cy.get('[data-task="check-local-requirements"]').click({ force: true });
     cy.get('[data-task-id="register-trade-name"]').should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.contains("Absecon").should("exist");
 
-    cy.get("[data-back-to-roadmap]").click();
+    cy.get("[data-back-to-roadmap]").click({ force: true });
 
     // editing data
     clickEdit();
@@ -56,8 +64,8 @@ describe("Roadmap [feature] [all]", () => {
     cy.get('input[aria-label="Business name"]').type("Applebee's");
     clickNext();
 
-    cy.get('[aria-label="Industry"]').click();
-    cy.get('[data-value="restaurant"]').click();
+    cy.get('[aria-label="Industry"]').click({ force: true });
+    cy.get('[data-value="restaurant"]').click({ force: true });
     clickNext();
     clickNext();
     clickNext();
@@ -79,27 +87,27 @@ describe("Roadmap [feature] [all]", () => {
     cy.get('input[aria-label="Business name"]').type("Beesapple's");
     clickNext();
 
-    cy.get('[aria-label="Industry"]').click();
-    cy.get('[data-value="home-contractor"]').click();
-    cy.get('[data-contextual-info-id="home-contractors-activities"]').click();
+    cy.get('[aria-label="Industry"]').click({ force: true });
+    cy.get('[data-value="home-contractor"]').click({ force: true });
+    cy.get('[data-contextual-info-id="home-contractors-activities"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
-    cy.get('[aria-label="close panel"]').click();
+    cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
     clickNext();
 
-    cy.get('[data-contextual-info-id="legal-structure-learn-more"]').click();
+    cy.get('[data-contextual-info-id="legal-structure-learn-more"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
-    cy.get('[aria-label="close panel"]').click();
+    cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
-    cy.get('[data-contextual-info-id="llc"]').click();
+    cy.get('[data-contextual-info-id="llc"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
-    cy.get('[aria-label="close panel"]').click();
+    cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
-    cy.get('[data-value="general-partnership"]').click();
+    cy.get('[data-value="general-partnership"]').click({ force: true });
     clickNext();
 
-    cy.get('[aria-label="Location"]').click();
-    cy.contains("Absecon").click();
+    cy.get('[aria-label="Location"]').click({ force: true });
+    cy.contains("Absecon").click({ force: true });
     cy.get('input[type="radio"][value="false"]').check();
     clickNext();
   });
@@ -109,12 +117,13 @@ describe("Roadmap [feature] [all]", () => {
     completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
 
     // roadmap
-    cy.get('[data-task="register-for-ein"]').click();
+    cy.url().should("contain", "/roadmap");
+    cy.get('[data-task="register-for-ein"]').click({ force: true });
     cy.get('[data-contextual-info-id="ein"]').should("exist");
-    cy.get('[data-contextual-info-id="ein"]').click();
+    cy.get('[data-contextual-info-id="ein"]').click({ force: true });
 
     cy.get('[data-testid="info-panel"]').should("exist");
-    cy.get('[aria-label="close panel"]').click();
+    cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
   });
 });

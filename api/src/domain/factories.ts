@@ -11,6 +11,7 @@ import {
   Municipality,
   NameAndAddress,
   OnboardingData,
+  Preferences,
   SelfRegResponse,
   UserData,
 } from "./types";
@@ -34,6 +35,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     formProgress: "UNSTARTED",
     taskProgress: {},
     licenseData: generateLicenseData({}),
+    preferences: generatePreferences(),
     ...overrides,
   };
 };
@@ -117,6 +119,13 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     status: "PENDING",
     lastCheckedStatus: dayjs().toISOString(),
     ...overrides,
+  };
+};
+
+export const generatePreferences = (): Preferences => {
+  return {
+    roadmapOpenSections: ["PLAN", "START"],
+    roadmapOpenSteps: [],
   };
 };
 

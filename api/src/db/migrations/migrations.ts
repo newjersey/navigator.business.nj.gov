@@ -15,6 +15,7 @@ import { migrate_v11_to_v12 } from "./v12_remove_scorp";
 import { migrate_v12_to_v13 } from "./v13_add_constructionRenovationPlan";
 import { migrate_v13_to_v14 } from "./v14_add_cleaning_aid_industry";
 import { migrate_v14_to_v15 } from "./v15_add_retail_industry";
+import { migrate_v15_to_v16 } from "./v16_add_user_preferences";
 
 export type MigrationFunction = (data: any) => any;
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
@@ -35,6 +36,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v12_to_v13,
   migrate_v13_to_v14,
   migrate_v14_to_v15,
+  migrate_v15_to_v16,
 ];
 
 export const CURRENT_VERSION = Migrations.length;
