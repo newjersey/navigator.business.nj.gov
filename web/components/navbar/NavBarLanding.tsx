@@ -1,7 +1,9 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useContext, useState } from "react";
 import { Signup } from "@/components/Signup";
 import { NavDefaults } from "@/display-content/NavDefaults";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { AuthContext } from "@/pages/_app";
 
 type Props = {
   isLargeScreen: boolean;
@@ -10,6 +12,18 @@ type Props = {
 
 export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement => {
   const [signupIsOpen, setSignupIsOpen] = useState<boolean>(false);
+  const { state } = useContext(AuthContext);
+
+  const getLoginButtonText = (): string => {
+    switch (state.isAuthenticated) {
+      case IsAuthenticated.FALSE:
+        return NavDefaults.logInButton;
+      case IsAuthenticated.TRUE:
+        return NavDefaults.logoutButton;
+      case IsAuthenticated.UNKNOWN:
+        return NavDefaults.logInButton;
+    }
+  };
 
   return (
     <div
@@ -34,7 +48,7 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
                   className="usa-link text-bold font-heading-sm text-no-underline clear-button"
                 >
                   {" "}
-                  {NavDefaults.logInButton}
+                  {getLoginButtonText()}
                 </button>
               </span>
               <span className="text-no-wrap nav-padding-x">
