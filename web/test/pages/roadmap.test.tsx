@@ -1,6 +1,12 @@
-import { render, RenderResult, within } from "@testing-library/react";
+import { fireEvent, render, RenderResult, within } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
-import { generateMunicipality, generateStep, generateTask } from "@/test/factories";
+import {
+  generateMunicipality,
+  generateStep,
+  generateTask,
+  generatePreferences,
+  generateUserData,
+} from "@/test/factories";
 import {
   setMockUserDataResponse,
   useMockOnboardingData,
@@ -11,6 +17,11 @@ import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadm
 import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -227,5 +238,103 @@ describe("roadmap page", () => {
     expect(within(sectionStart).queryByText("step3")).not.toBeInTheDocument();
     expect(within(sectionStart).getByText("step2")).toBeInTheDocument();
     expect(within(sectionStart).getByText("step4")).toBeInTheDocument();
+  });
+
+  describe("roadmap sections", () => {
+    beforeEach(() => {
+      useMockRoadmap({
+        steps: [
+          generateStep({
+            name: "step1",
+            section: "PLAN",
+            tasks: [generateTask({ id: "task1" })],
+          }),
+          generateStep({
+            name: "step2",
+            section: "START",
+            tasks: [generateTask({ id: "task2" })],
+          }),
+        ],
+      });
+    });
+    it("displays sections based on userData preferences", () => {
+      useMockUserData({
+        preferences: generatePreferences({
+          roadmapOpenSections: ["PLAN", "START"],
+        }),
+      });
+
+      const subject = renderRoadmapPage();
+
+      const sectionStart = subject.getByTestId("section-start");
+      const sectionPlan = subject.getByTestId("section-plan");
+
+      expect(within(sectionStart).getByText("step2")).toBeVisible();
+      expect(within(sectionPlan).getByText("step1")).toBeVisible();
+    });
+
+    it("expands start section only", () => {
+      useMockUserData({
+        preferences: generatePreferences({
+          roadmapOpenSections: ["START"],
+        }),
+      });
+
+      const subject = renderRoadmapPage();
+
+      const sectionStart = subject.getByTestId("section-start");
+      const sectionPlan = subject.getByTestId("section-plan");
+
+      expect(within(sectionStart).getByText("step2")).toBeVisible();
+      expect(within(sectionPlan).getByText("step1")).not.toBeVisible();
+    });
+
+    it("expands plan section only", () => {
+      useMockUserData({
+        preferences: generatePreferences({
+          roadmapOpenSections: ["PLAN"],
+        }),
+      });
+
+      const subject = renderRoadmapPage();
+
+      const sectionStart = subject.getByTestId("section-start");
+      const sectionPlan = subject.getByTestId("section-plan");
+
+      expect(within(sectionStart).getByText("step2")).not.toBeVisible();
+      expect(within(sectionPlan).getByText("step1")).toBeVisible();
+    });
+
+    it("updates userData preferences", async () => {
+      const userData = generateUserData({
+        preferences: generatePreferences({
+          roadmapOpenSections: ["PLAN", "START"],
+        }),
+      });
+
+      setupStatefulUserDataContext();
+      const subject = render(
+        <WithStatefulUserData initialUserData={userData}>
+          <RoadmapPage displayContent={{ contentMd: "" }} />
+        </WithStatefulUserData>
+      );
+
+      const sectionPlan = subject.container.querySelector("#plan-header");
+      const sectionStart = subject.container.querySelector("#start-header");
+
+      expect(sectionPlan).toBeInTheDocument();
+      expect(sectionStart).toBeInTheDocument();
+      fireEvent.click(sectionPlan as Element);
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
+      fireEvent.click(sectionPlan as Element);
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START", "PLAN"]);
+      fireEvent.click(sectionStart as Element);
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["PLAN"]);
+      fireEvent.click(sectionPlan as Element);
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
+      fireEvent.click(sectionPlan as Element);
+      fireEvent.click(sectionStart as Element);
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["PLAN", "START"]);
+    });
   });
 });

@@ -11,6 +11,8 @@ export const clickEdit = (): void => {
 };
 
 export const clickTask = (taskId: string): void => {
+  cy.get('[id="plan-header"]').click();
+  cy.get('[id="start-header"]').click();
   const taskValue = `[data-task="${taskId}"]`;
   cy.get(taskValue).click({ force: true });
   cy.wait(1000);

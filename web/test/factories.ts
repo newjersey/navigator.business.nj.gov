@@ -10,6 +10,7 @@ import {
   NameAndAddress,
   NameAvailability,
   OnboardingData,
+  Preferences,
   Roadmap,
   SectionType,
   Step,
@@ -44,6 +45,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     formProgress: "COMPLETED",
     taskProgress: {},
     licenseData: generateLicenseData({}),
+    preferences: generatePreferences({}),
     ...overrides,
   };
 };
@@ -82,6 +84,14 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
     countyClerkPhone: `some-phone-${randomInt()}`,
     countyClerkWebsite: `some-clerk-webpage-${randomInt()}`,
     countyWebsite: `some-county-website-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generatePreferences = (overrides: Partial<Preferences>): Preferences => {
+  return {
+    roadmapOpenSections: ["PLAN", "START"],
+    roadmapOpenSteps: [],
     ...overrides,
   };
 };

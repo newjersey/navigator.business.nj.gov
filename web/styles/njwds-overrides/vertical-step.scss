@@ -55,7 +55,7 @@
 .vertical-bar,
 .vertical-bar-sm {
   position: absolute;
-  height: 30rem;
+  height: 0rem;
   z-index: 90;
 
   @media all and (min-width: $sm) {
@@ -65,7 +65,7 @@
 
 .vertical-bar-sm {
   width: 0.25rem;
-  left: calc(((3rem + 0.25rem) / 2));
+  left: calc((1.5rem + (0.5rem / 2)) / 2);
 }
 
 .vertical-bar {

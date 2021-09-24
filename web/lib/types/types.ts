@@ -4,6 +4,7 @@ export interface UserData {
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
   licenseData: LicenseData | undefined;
+  preferences: Preferences;
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
@@ -18,8 +19,17 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     formProgress: "UNSTARTED",
     taskProgress: {},
     licenseData: undefined,
+    preferences: {
+      roadmapOpenSections: ["PLAN", "START"],
+      roadmapOpenSteps: [],
+    },
   };
 };
+
+export interface Preferences {
+  roadmapOpenSections: SectionType[];
+  roadmapOpenSteps: number[];
+}
 
 export const createEmptyOnboardingData = (): OnboardingData => {
   return {

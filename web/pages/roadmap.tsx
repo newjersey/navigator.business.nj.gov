@@ -2,15 +2,13 @@ import React, { ReactElement } from "react";
 import { GetStaticPropsResult } from "next";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
-import { Step } from "@/components/Step";
 import { GreyCallout } from "@/components/njwds-extended/GreyCallout";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
-import { RoadmapDefaults, SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { RoadmapDisplayContent, SectionType } from "@/lib/types/types";
+import { RoadmapDisplayContent } from "@/lib/types/types";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { Content } from "@/components/Content";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
@@ -19,6 +17,7 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import analytics from "@/lib/utils/analytics";
 import { CircularProgress } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";
+import { RoadmapBySections } from "@/components/roadmap/RoadmapBySections";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -27,7 +26,6 @@ interface Props {
 const RoadmapPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
   const { userData, isLoading, error } = useUserData();
-  const { roadmap } = useRoadmap();
   const router = useRouter();
 
   useMountEffectWhenDefined(() => {
@@ -72,25 +70,6 @@ const RoadmapPage = (props: Props): ReactElement => {
     return userData?.onboardingData.municipality
       ? userData.onboardingData.municipality.displayName
       : RoadmapDefaults.greyBoxNotSetText;
-  };
-
-  const getSection = (sectionType: SectionType) => {
-    const sectionName = sectionType.toLowerCase();
-    const publicName = SectionDefaults[sectionType];
-    return (
-      <div data-testid={`section-${sectionName}`} className="tablet:padding-left-3">
-        <h2 className="flex flex-align-center">
-          <img src={`/img/section-header-${sectionName}.svg`} alt={publicName} />{" "}
-          <span className="padding-left-205">{publicName}</span>
-        </h2>
-        {roadmap &&
-          roadmap.steps
-            .filter((step) => step.section === sectionType)
-            .map((step, index, array) => (
-              <Step key={step.step_number} step={step} last={index === array.length - 1} />
-            ))}
-      </div>
-    );
   };
 
   return (
@@ -141,20 +120,7 @@ const RoadmapPage = (props: Props): ReactElement => {
                 </div>
               </>
             )}
-            <div className="margin-top-6">
-              {!roadmap ? (
-                <div className="fdr fjc fac">
-                  <CircularProgress />
-                  <div className="margin-left-2 h3-element">Loading...</div>
-                </div>
-              ) : (
-                <>
-                  {getSection("PLAN")}
-                  <hr className="margin-y-6 bg-base-lighter" />
-                  {getSection("START")}
-                </>
-              )}
-            </div>
+            <RoadmapBySections />
           </SinglePageLayout>
         </div>
       )}

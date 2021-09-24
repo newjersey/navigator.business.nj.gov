@@ -14,9 +14,14 @@ export const Step = (props: Props): ReactElement => {
   const { userData } = useUserData();
 
   return (
-    <div className="grid-row margin-top-3" id={`vertical-content-${props.step.step_number}`}>
+    <div
+      className={`grid-row margin-top-3 tablet:margin-left-3 padding-left-2px ${
+        props.last ? "margin-bottom-1" : ""
+      }`}
+      id={`vertical-content-${props.step.step_number}`}
+    >
       <div className="tablet:grid-col-3 margin-right-4">
-        <div className="fdr">
+        <div className="flex flex-row">
           <div className="margin-top-2">
             <VerticalStepIndicator
               stepNumber={props.step.step_number}
@@ -25,12 +30,12 @@ export const Step = (props: Props): ReactElement => {
             />
           </div>
           <div className="step-label">
-            <h2
+            <h3
               className="margin-0 font-sans-sm line-height-body-5 weight-unset"
               data-step={props.step.step_number}
             >
               {props.step.name}
-            </h2>
+            </h3>
             <div className="font-sans-3xs text-base-dark">{props.step.timeEstimate}</div>
           </div>
         </div>

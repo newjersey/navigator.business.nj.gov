@@ -5,7 +5,7 @@ import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import Link from "next/link";
-import { MiniRoadmap } from "@/components/MiniRoadmap";
+import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { Task } from "@/lib/types/types";
 
 interface Props {

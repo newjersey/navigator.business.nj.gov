@@ -130,6 +130,26 @@ const theme = createTheme({
         elevation: 8,
       },
     },
+    MuiAccordion: {
+      defaultProps: {
+        disableGutters: true,
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: { padding: "0px" },
+        content: {
+          margin: "0px",
+        },
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          padding: "0px",
+        },
+      },
+    },
   },
 });
 

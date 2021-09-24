@@ -1,5 +1,5 @@
 import { useEffect, useRef, ReactElement } from "react";
-import { Roadmap, Step, Task, UserData } from "@/lib/types/types";
+import { Roadmap, Step, Task, UserData, SectionType } from "@/lib/types/types";
 import { NavDefaults } from "@/display-content/NavDefaults";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,4 +97,59 @@ export const setHeaderRole = (
   };
 
   return createElement;
+};
+
+export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => {
+  if (!roadmap) return [];
+  const { steps } = roadmap;
+  const sections: SectionType[] = [];
+  steps.forEach((step) => {
+    sections.push(step.section);
+  });
+  return [...new Set(sections)];
+};
+
+export const handleAccordionStateChange = async (
+  sectionType: SectionType,
+  expanded: boolean | undefined,
+  userData: UserData | undefined,
+  update: (newUserData: UserData | undefined) => Promise<void>
+): Promise<void> => {
+  const roadmapOpenSections = userData?.preferences.roadmapOpenSections;
+  if (!roadmapOpenSections) return;
+
+  if (expanded) {
+    const newUserData = {
+      ...userData,
+      preferences: {
+        ...userData.preferences,
+        roadmapOpenSections: roadmapOpenSections?.filter(
+          (roadmapOpenSection) => roadmapOpenSection !== sectionType
+        ),
+      },
+    };
+
+    await update(newUserData);
+  } else {
+    const newUserData = {
+      ...userData,
+      preferences: {
+        ...userData?.preferences,
+        roadmapOpenSections: [...userData?.preferences.roadmapOpenSections, sectionType],
+      },
+    };
+
+    await update(newUserData);
+  }
+};
+
+export const createRoadmapSections = (
+  roadmapSections: SectionType[],
+  userData: UserData | undefined,
+  getSection: (sectionName: SectionType, openStatus: boolean | undefined) => JSX.Element
+): JSX.Element[] => {
+  return roadmapSections.map((sectionName) => {
+    const openStatus = userData?.preferences.roadmapOpenSections.includes(sectionName);
+    return getSection(sectionName, openStatus);
+  });
 };

@@ -56,7 +56,7 @@ describe("Performance and Accessability [all]", () => {
         cy.pa11y(defaultPa11yThresholds);
       });
     });
-    describe("Step 3", () => {
+    describe("Step 4", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
 

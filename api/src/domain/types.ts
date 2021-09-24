@@ -14,6 +14,8 @@ export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
 }
 
+export type SectionType = "PLAN" | "START";
+
 export interface SelfRegClient {
   grant: (user: BusinessUser) => Promise<SelfRegResponse>;
   resume: (authID: string) => Promise<SelfRegResponse>;
@@ -105,6 +107,12 @@ export interface UserData {
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
   licenseData: LicenseData | undefined;
+  preferences: Preferences;
+}
+
+export interface Preferences {
+  roadmapOpenSections: SectionType[];
+  roadmapOpenSteps: number[];
 }
 
 export interface OnboardingData {
@@ -140,6 +148,10 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     formProgress: "UNSTARTED",
     taskProgress: {},
     licenseData: undefined,
+    preferences: {
+      roadmapOpenSections: ["PLAN", "START"],
+      roadmapOpenSteps: [],
+    },
   };
 };
 

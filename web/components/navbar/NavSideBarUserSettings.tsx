@@ -12,7 +12,6 @@ export const NavSideBarUserSettings = (): ReactElement => {
   return (
     <div className="usa-accordion">
       <h2 className="usa-accordion__heading">
-        <hr className="bg-base-lighter margin-top-3" />
         <button
           data-open-user-settings
           data-testid="openSettingsBtn"

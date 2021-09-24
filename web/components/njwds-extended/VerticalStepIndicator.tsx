@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
-import { useMountEffect, useOnWindowResize } from "@/lib/utils/helpers";
+import React, { ReactElement, useEffect } from "react";
+import { useOnWindowResize } from "@/lib/utils/helpers";
 
 interface Props {
   stepNumber: number;
@@ -24,14 +24,14 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
 
     if (props.last) {
       const marginStyle = getComputedStyle(content);
-      const margin = parseInt(marginStyle.marginTop) + parseInt(marginStyle.marginBottom);
-      const newHeight = height - margin;
+      const newHeight = height - parseInt(marginStyle.marginTop);
       verticalBar.style.height = `${newHeight}px`;
     } else {
       verticalBar.style.height = `${height}px`;
     }
   };
-  useMountEffect(resizeVerticalBarToContent);
+
+  useEffect(resizeVerticalBarToContent, [props.isOpen, props.last, props.stepNumber]);
   useOnWindowResize(resizeVerticalBarToContent);
 
   const getTrailingBar = () => {
