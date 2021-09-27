@@ -1,7 +1,7 @@
 import React, { ReactElement, useContext } from "react";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 export const OnboardingLiquorLicense = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);

@@ -7,6 +7,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
+import { ThemeProvider, createTheme } from "@mui/material";
 import * as api from "@/lib/api-client/apiClient";
 import {
   generateLicenseData,
@@ -29,7 +30,12 @@ describe("<LicenseTask />", () => {
   const task = generateTask({});
   const initialUserData = generateUserData({ licenseData: generateLicenseData({}) });
 
-  const renderTask = (): RenderResult => render(<LicenseTask task={task} />);
+  const renderTask = (): RenderResult =>
+    render(
+      <ThemeProvider theme={createTheme()}>
+        <LicenseTask task={task} />
+      </ThemeProvider>
+    );
 
   beforeEach(() => {
     jest.resetAllMocks();

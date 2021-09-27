@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from "react";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 
 interface Props {
   children: ReactNode;

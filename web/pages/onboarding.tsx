@@ -10,7 +10,7 @@ import React, {
   useRef,
 } from "react";
 import { useRouter } from "next/router";
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
 import { GetStaticPropsResult } from "next";
 import { PageSkeleton } from "@/components/PageSkeleton";

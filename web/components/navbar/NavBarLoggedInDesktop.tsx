@@ -3,7 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Icon } from "@/components/njwds/Icon";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { NavDefaults } from "@/display-content/NavDefaults";
-import { ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from "@material-ui/core";
+import { ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from "@mui/material";
 import { AuthContext } from "@/pages/_app";
 import { useRouter } from "next/router";
 import { onSignOut } from "@/lib/auth/signinHelper";
@@ -32,7 +32,9 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
     handleClose(event);
   };
 
-  const handleClose = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
+  const handleClose = (
+    event: MouseEvent | TouchEvent | React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>
+  ): void => {
     if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;
     }
@@ -52,7 +54,6 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
     if (null !== anchorRef.current && prevOpen.current && !open) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
 

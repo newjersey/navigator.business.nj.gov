@@ -1,5 +1,5 @@
-import * as materialUi from "@material-ui/core";
-import { useMediaQuery } from "@material-ui/core";
+import * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";
 import { fireEvent, render, RenderResult, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import { NavDefaults } from "@/display-content/NavDefaults";
@@ -11,12 +11,12 @@ import userEvent from "@testing-library/user-event";
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@material-ui/core"),
+    ...jest.requireActual("@mui/material"),
     useMediaQuery: jest.fn(),
   };
 }
 
-jest.mock("@material-ui/core", () => mockMaterialUI());
+jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/link", () => {

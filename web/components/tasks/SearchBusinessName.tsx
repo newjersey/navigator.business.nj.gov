@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
-import { FormControl, TextField } from "@material-ui/core";
+import { FormControl, TextField } from "@mui/material";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNamesDefaults } from "@/display-content/tasks/search-business-names/SearchBusinessNamesDefaults";
 import * as api from "@/lib/api-client/apiClient";

@@ -1,9 +1,9 @@
 import { Municipality } from "@/lib/types/types";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
-import { TextField } from "@material-ui/core";
+import { createFilterOptions, TextField } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useState } from "react";
-import { Autocomplete } from "@material-ui/lab";
+import { Autocomplete } from "@mui/material";
 
 interface Props {
   municipalities: Municipality[];
@@ -37,21 +37,27 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       return <>{displayName}</>;
     }
   };
-
+  const filterOptions = createFilterOptions({
+    matchFrom: "start",
+    stringify: (option: Municipality) => option.displayName,
+  });
   return (
     <Autocomplete
       options={props.municipalities}
+      filterOptions={filterOptions}
       getOptionLabel={(municipality: Municipality) => municipality.displayName}
-      getOptionSelected={(option: Municipality, value: Municipality) => option.id === value.id}
+      isOptionEqualToValue={(option: Municipality, value: Municipality) => option.id === value.id}
       value={props.value || null}
       onChange={handleMunicipality}
-      renderOption={(option) =>
-        props.value?.id === option.id ? (
-          <MenuOptionSelected>{option.displayName}</MenuOptionSelected>
-        ) : (
-          <MenuOptionUnselected>{splitAndBoldSearchText(option.displayName)}</MenuOptionUnselected>
-        )
-      }
+      renderOption={(props, option, { selected }) => (
+        <li {...props}>
+          {selected ? (
+            <MenuOptionSelected>{option.displayName}</MenuOptionSelected>
+          ) : (
+            <MenuOptionUnselected>{splitAndBoldSearchText(option.displayName)}</MenuOptionUnselected>
+          )}
+        </li>
+      )}
       renderInput={(params) => (
         <TextField
           {...params}

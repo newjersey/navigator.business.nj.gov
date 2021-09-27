@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext } from "react";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { OnboardingContext } from "@/pages/onboarding";
 import { LegalStructure } from "@/lib/types/types";
 import { Content } from "@/components/Content";

@@ -1,5 +1,7 @@
 import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
-import { TextField, createStyles, makeStyles } from "@material-ui/core";
+import { TextField } from "@mui/material";
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
 import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";

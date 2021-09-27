@@ -9,7 +9,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider, Theme, StyledEngineProvider } from "@mui/material";
 import { Amplify, Hub } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import awsExports from "../aws-exports";
@@ -25,6 +25,11 @@ import Script from "next/script";
 import SEO from "../next-seo.config";
 import analytics from "@/lib/utils/analytics";
 import "../public/css/styles.css";
+
+declare module "@mui/styles/defaultTheme" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 Amplify.configure({
   ...awsExports,
@@ -119,9 +124,11 @@ const theme = createTheme({
       contrastText: "#f0f0f0",
     },
   },
-  props: {
+  components: {
     MuiPaper: {
-      elevation: 8,
+      styleOverrides: {
+        elevation: 8,
+      },
     },
   },
 });
@@ -192,18 +199,18 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <script
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || []; 
-        function gtag(){window.dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${GOOGLE_ANALYTICS_ID}', { 
-          'send_page_view': false,
-          'custom_map': {
-            'dimension1': 'Industry',
-            'dimension2': 'Municipality',
-            'dimension3': 'Legal Structure',
-            'dimension4': 'Liquor License',
-            'dimension5': 'Home-Based Business'
-          }
-        });`,
+      function gtag(){window.dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${GOOGLE_ANALYTICS_ID}', { 
+        'send_page_view': false,
+        'custom_map': {
+          'dimension1': 'Industry',
+          'dimension2': 'Municipality',
+          'dimension3': 'Legal Structure',
+          'dimension4': 'Liquor License',
+          'dimension5': 'Home-Based Business'
+        }
+      });`,
         }}
       />
 
@@ -213,18 +220,20 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <Script src="/intercom/init.js" />
       <DefaultSeo {...SEO} />
 
-      <ThemeProvider theme={theme}>
-        <AuthContext.Provider value={{ state, dispatch }}>
-          <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-            <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-              <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-                <ContextualInfoPanel />
-                <Component {...pageProps} />
-              </RoadmapContext.Provider>
-            </ContextualInfoContext.Provider>
-          </UserDataErrorContext.Provider>
-        </AuthContext.Provider>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <AuthContext.Provider value={{ state, dispatch }}>
+            <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
+              <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
+                <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+                  <ContextualInfoPanel />
+                  <Component {...pageProps} />
+                </RoadmapContext.Provider>
+              </ContextualInfoContext.Provider>
+            </UserDataErrorContext.Provider>
+          </AuthContext.Provider>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </>
   );
 };
