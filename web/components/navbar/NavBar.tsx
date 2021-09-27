@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from "@mui/material";
 import { NavBarLanding } from "@/components/navbar/NavBarLanding";
 import { NavBarLoggedInMobile } from "@/components/navbar/NavBarLoggedInMobile";
 import { Task } from "@/lib/types/types";

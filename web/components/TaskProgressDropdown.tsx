@@ -1,5 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { Button, createStyles, makeStyles, Menu, MenuItem, Paper, Snackbar, Slide } from "@material-ui/core";
+import { Button, Menu, MenuItem, Paper, Snackbar, Slide } from "@mui/material";
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
 import { TaskProgress } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
 import { TagInProgress } from "@/components/njwds-extended/TagInProgress";

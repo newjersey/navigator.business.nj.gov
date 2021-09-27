@@ -1,6 +1,6 @@
 import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
-import * as materialUi from "@material-ui/core";
-import { useMediaQuery } from "@material-ui/core";
+import * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import TaskPage from "@/pages/tasks/[urlSlug]";
 import { Task, TaskProgress, UserData } from "@/lib/types/types";
 import {
@@ -21,12 +21,12 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 
 function mockMaterialUI(): typeof materialUi {
   return {
-    ...jest.requireActual("@material-ui/core"),
+    ...jest.requireActual("@mui/material"),
     useMediaQuery: jest.fn(),
   };
 }
 
-jest.mock("@material-ui/core", () => mockMaterialUI());
+jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -38,9 +38,11 @@ const setLargeScreen = (): void => {
 
 const renderPage = (task: Task, initialUserData?: UserData): RenderResult =>
   render(
-    <WithStatefulUserData initialUserData={initialUserData}>
-      <TaskPage task={task} />
-    </WithStatefulUserData>
+    <materialUi.ThemeProvider theme={materialUi.createTheme()}>
+      <WithStatefulUserData initialUserData={initialUserData}>
+        <TaskPage task={task} />
+      </WithStatefulUserData>
+    </materialUi.ThemeProvider>
   );
 
 describe("task page", () => {

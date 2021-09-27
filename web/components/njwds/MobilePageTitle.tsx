@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from "@mui/material";
 import { MediaQueries } from "@/lib/PageSizes";
 
 interface Props {

@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode, useContext } from "react";
-import { Divider, FormControl, ListSubheader, MenuItem, Select } from "@material-ui/core";
+import { Divider, FormControl, ListSubheader, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Industry } from "@/lib/types/types";
 import { ALL_INDUSTRIES_ORDERED, IndustryLookup } from "@/display-content/IndustryLookup";
@@ -14,7 +14,7 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 export const OnboardingIndustry = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
 
-  const handleIndustry = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleIndustry = (event: SelectChangeEvent) => {
     let industry: Industry = "generic";
     if (event.target.value) {
       industry = event.target.value as Industry;

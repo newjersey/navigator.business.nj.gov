@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ReactElement, useState } from "react";
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@material-ui/core";
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useRouter } from "next/router";
 import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";

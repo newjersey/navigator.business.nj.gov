@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { Content } from "@/components/Content";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { OnboardingData, PostOnboarding } from "@/lib/types/types";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { fetchPostOnboarding } from "@/lib/async-content-fetchers/fetchPostOnboarding";

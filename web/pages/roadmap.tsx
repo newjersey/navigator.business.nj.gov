@@ -17,7 +17,7 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRouter } from "next/router";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import analytics from "@/lib/utils/analytics";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";
 
 interface Props {

@@ -1,5 +1,5 @@
 import Home from "@/pages/index";
-import { Dialog, DialogContent, DialogTitle } from "@material-ui/core";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
 import React, { ReactElement } from "react";
 import { useUnauthedOnlyPage } from "@/lib/auth/useAuthProtectedPage";
