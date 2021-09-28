@@ -9,6 +9,7 @@ import analytics from "@/lib/utils/analytics";
 
 interface Props {
   children: string;
+  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
 }
 
 export const Content = (props: Props): ReactElement => {
@@ -23,6 +24,7 @@ export const Content = (props: Props): ReactElement => {
         th: Unformatted,
         td: Unformatted,
         tbody: Unformatted,
+        ...props.overrides,
       },
     })
     .processSync(props.children).result as ReactElement;

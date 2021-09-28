@@ -10,6 +10,7 @@ import { Alert } from "@/components/njwds/Alert";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
+import { setHeaderRole } from "@/lib/utils/helpers";
 
 export const OnboardingIndustry = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -63,9 +64,11 @@ export const OnboardingIndustry = (): ReactElement => {
     return <>{IndustryLookup[value as Industry].primaryText}</>;
   };
 
+  const headerLevelTwo = setHeaderRole(2, "h2-element");
+
   return (
     <>
-      <Content>{state.displayContent.industry.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.industry.contentMd}</Content>
       <Alert variant="info" slim className="margin-bottom-4">
         <Content>{state.displayContent.industry.infoAlertMd}</Content>
       </Alert>
