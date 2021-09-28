@@ -8,7 +8,7 @@ describe("Logger", () => {
   let logger: LogWriterType;
 
   beforeEach(() => {
-    logger = LogWriter("us-test-1", "test", "test");
+    logger = LogWriter("test", "test", "us-test-1");
     jest.resetAllMocks();
   });
 

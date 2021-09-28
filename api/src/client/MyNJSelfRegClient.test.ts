@@ -21,7 +21,7 @@ describe("MyNJSelfRegClient", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    logger = LogWriter("us-test-1", "NavigatorWebService", "SearchApis");
+    logger = LogWriter("NavigatorWebService", "SearchApis", "us-test-1");
     mockedAxios = axios as unknown as jest.Mock;
     client = MyNJSelfRegClientFactory(config, logger);
     mockedAxios.mockRejectedValue({});

@@ -8,14 +8,14 @@ export interface LogWriterType {
   LogInfo(message: string): void;
 }
 
-export const LogWriter = (region: string, groupName: string, logStream: string): LogWriterType => {
+export const LogWriter = (groupName: string, logStream: string, region?: string): LogWriterType => {
   const logger = winston.add(
     new WinstonCloudWatch({
       level: "silly",
       name: `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`,
       logGroupName: `/${groupName}/${logStream}`,
       logStreamName: `${logStream}-${dayjs().format("YYYYMMDD")}`,
-      awsRegion: region,
+      awsRegion: region || process.env.AWS_REGION,
       retentionInDays: 180,
     })
   );
