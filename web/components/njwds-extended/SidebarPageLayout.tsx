@@ -40,7 +40,12 @@ export const SidebarPageLayout = ({ children, task, belowOutlineBoxComponent }: 
       <div className={`usa-section padding-top-0 desktop:padding-top-6`}>
         <div className="grid-container">
           <div className="grid-row grid-gap">
-            <div className="usa-layout-docs__sidenav desktop:grid-col-4">
+            <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs" id="main">
+              {!isLargeScreen && <div>{backButton}</div>}
+              <div className="border-1px border-base-light usa-prose minh-40 fdc">{children}</div>
+              {belowOutlineBoxComponent}
+            </main>
+            <div className="usa-layout-docs__sidenav desktop:grid-col-4 order-first">
               {isLargeScreen && (
                 <nav aria-label="Secondary navigation">
                   {" "}
@@ -49,11 +54,6 @@ export const SidebarPageLayout = ({ children, task, belowOutlineBoxComponent }: 
                 </nav>
               )}
             </div>
-            <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs" id="main">
-              {!isLargeScreen && <div>{backButton}</div>}
-              <div className="border-1px border-base-light usa-prose minh-40 fdc">{children}</div>
-              {belowOutlineBoxComponent}
-            </main>
           </div>
         </div>
       </div>

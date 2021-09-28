@@ -148,3 +148,32 @@ $lg: 64em; //desktop and up (1024px)
 .skip-link:focus-within {
   transform: translateY(0%);
 }
+
+.h1-element {
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.h2-element {
+  font-weight: 700;
+  font-size: 1.38rem;
+  line-height: 1.2;
+}
+
+.h2-element-usa-prose-override {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+.h3-element {
+  font-weight: bold;
+  font-size: 1.17rem;
+  line-height: 1.15;
+}
+
+.h3-element-usa-prose-override {
+  font-weight: bold;
+  font-size: 1.17rem;
+  line-height: 1.6;
+}

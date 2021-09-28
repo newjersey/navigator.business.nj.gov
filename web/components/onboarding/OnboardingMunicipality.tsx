@@ -5,6 +5,7 @@ import { Content } from "@/components/Content";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { MunicipalityDropdown } from "@/components/MunicipalityDropdown";
+import { setHeaderRole } from "@/lib/utils/helpers";
 
 export const OnboardingMunicipality = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -16,9 +17,11 @@ export const OnboardingMunicipality = (): ReactElement => {
     });
   };
 
+  const headerLevelTwo = setHeaderRole(2, "h2-element");
+
   return (
     <>
-      <Content>{state.displayContent.municipality.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.municipality.contentMd}</Content>
       <div className="form-input margin-top-2">
         <MunicipalityDropdown
           municipalities={state.municipalities}

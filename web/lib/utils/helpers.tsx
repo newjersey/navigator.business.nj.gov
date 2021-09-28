@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ReactElement } from "react";
 import { Roadmap, Step, Task, UserData } from "@/lib/types/types";
 import { NavDefaults } from "@/display-content/NavDefaults";
 
@@ -50,7 +50,7 @@ export const getModifiedTaskContent = (
   return task[field] || "";
 };
 
-export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T }): T => {
+export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }): T => {
   if (cases[param]) {
     return cases[param];
   } else {
@@ -82,4 +82,19 @@ export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
     const { tasks } = currStep;
     return [...acc, ...tasks.map((task) => task.urlSlug)];
   }, []);
+};
+
+export const setHeaderRole = (
+  ariaLevel: number,
+  classProperties?: string
+): (({ children }: { children: string[] }) => ReactElement) => {
+  const createElement = ({ children }: { children: string[] }): ReactElement => {
+    return (
+      <div role="heading" aria-level={ariaLevel} className={classProperties ? classProperties : ""}>
+        {children}
+      </div>
+    );
+  };
+
+  return createElement;
 };

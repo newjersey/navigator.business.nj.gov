@@ -46,10 +46,10 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     const publicName = SectionDefaults[sectionType];
     return (
       <div data-testid={`section-${sectionName}`}>
-        <h3 className="flex flex-align-center margin-left-neg-05 margin-top-0">
+        <h2 className="flex flex-align-center margin-left-neg-05 margin-top-0">
           <img src={`/img/section-header-${sectionName}.svg`} alt={publicName} height={32} />{" "}
           <span className="padding-left-105">{publicName}</span>
-        </h3>
+        </h2>
         {roadmap?.steps
           .filter((step) => step.section === sectionType)
           .map((step, index, array) => (
@@ -70,14 +70,14 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                   aria-expanded={openSteps.includes(step.step_number)}
                 >
                   <div className=" step-label sm fdr fjc fac">
-                    <h2
+                    <h3
                       className={`margin-0 font-body-xs line-height-body-2 text-ink ${
                         step.step_number === activeStepNumber ? "text-primary-dark" : "weight-unset"
                       }`}
                       data-step={step.step_number}
                     >
                       {step.name}
-                    </h2>
+                    </h3>
                     <div className="padding-right-1 padding-left-1 mla fdc fac">
                       <Icon className="font-sans-lg text-ink">
                         {openSteps.includes(step.step_number) ? "expand_less" : "expand_more"}

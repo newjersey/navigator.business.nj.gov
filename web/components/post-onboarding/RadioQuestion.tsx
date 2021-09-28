@@ -41,7 +41,14 @@ export const RadioQuestion = (props: Props): ReactElement => {
     <>
       {onboardingQuestion.question && (
         <>
-          <h3 data-testid={props.id}>{onboardingQuestion.question}</h3>
+          <div
+            role="heading"
+            aria-level={2}
+            data-testid={props.id}
+            className="h3-element-usa-prose-override margin-y-205"
+          >
+            {onboardingQuestion.question}
+          </div>
           <FormControl variant="outlined" fullWidth>
             <RadioGroup
               aria-label={onboardingQuestion.question}

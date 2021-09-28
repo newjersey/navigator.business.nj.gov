@@ -4,6 +4,7 @@ import { OnboardingContext } from "@/pages/onboarding";
 import { LegalStructure } from "@/lib/types/types";
 import { Content } from "@/components/Content";
 import { ALL_LEGAL_STRUCTURES_ORDERED, LegalStructureLookup } from "@/display-content/LegalStructureLookup";
+import { setHeaderRole } from "@/lib/utils/helpers";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -22,9 +23,11 @@ export const OnboardingLegalStructure = (): ReactElement => {
     </div>
   );
 
+  const headerLevelTwo = setHeaderRole(2, "h2-element");
+
   return (
     <>
-      <Content>{state.displayContent.legalStructure.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.legalStructure.contentMd}</Content>
       <div className="form-input-wide margin-top-3">
         <FormControl variant="outlined" fullWidth>
           <RadioGroup

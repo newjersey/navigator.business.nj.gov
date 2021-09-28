@@ -24,7 +24,6 @@ import {
 } from "@/lib/types/types";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { MobilePageTitle } from "@/components/njwds/MobilePageTitle";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
@@ -182,7 +181,14 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   const header = () => (
-    <div tabIndex={-1} ref={headerRef}>
+    <div
+      ref={headerRef}
+      role="heading"
+      aria-level={1}
+      className={`margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4 ${
+        isLargeScreen ? "h1-element" : "h2-element font-heading-xl"
+      }`}
+    >
       {OnboardingDefaults.pageTitle}{" "}
       <span className="weight-400" data-testid={`step-${page.current.toString()}`}>
         {templateEval(OnboardingDefaults.stepXofYTemplate, {
@@ -235,9 +241,9 @@ const OnboardingPage = (props: Props): ReactElement => {
       />
       <PageSkeleton>
         <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
-          <MobilePageTitle>{header()}</MobilePageTitle>
           <SingleColumnContainer>
-            {isLargeScreen && <h2 className="padding-bottom-4">{header()}</h2>}
+            {header()}
+            {!isLargeScreen && <hr className="bg-base-lighter" />}
             {error && (
               <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
                 {OnboardingErrorLookup[error]}
