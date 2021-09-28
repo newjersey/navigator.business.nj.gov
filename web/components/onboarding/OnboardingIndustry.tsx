@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode, useContext } from "react";
-import { Divider, FormControl, ListSubheader, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { Divider, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Industry } from "@/lib/types/types";
 import { ALL_INDUSTRIES_ORDERED, IndustryLookup } from "@/display-content/IndustryLookup";
@@ -82,17 +82,15 @@ export const OnboardingIndustry = (): ReactElement => {
             }}
             renderValue={renderValue}
           >
+            <MenuItem value="generic" data-testid="generic">
+              {renderOption("generic")}
+            </MenuItem>
+            <Divider light />
             {ALL_INDUSTRIES_ORDERED.filter((industry) => industry !== "generic").map((industry) => (
               <MenuItem key={industry} value={industry} data-testid={industry}>
                 {renderOption(industry)}
               </MenuItem>
             ))}
-            <ListSubheader>
-              <Divider light />
-            </ListSubheader>
-            <MenuItem value="generic" data-testid="generic">
-              {renderOption("generic")}
-            </MenuItem>
           </Select>
         </FormControl>
 

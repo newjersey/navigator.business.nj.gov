@@ -1,4 +1,5 @@
 import { Industry } from "@/lib/types/types";
+import orderBy from "lodash.orderby";
 
 type IndustryOption = {
   primaryText: string;
@@ -36,7 +37,7 @@ export const IndustryLookup: Record<Industry, IndustryOption> = {
   },
 };
 
-export const ALL_INDUSTRIES_ORDERED: Industry[] = [
+export const ALL_INDUSTRIES_ORDERED: Industry[] = orderBy([
   "cosmetology",
   "home-contractor",
   "e-commerce",
@@ -44,4 +45,4 @@ export const ALL_INDUSTRIES_ORDERED: Industry[] = [
   "cleaning-aid",
   "retail",
   "generic",
-];
+], (industry) => {return industry});
