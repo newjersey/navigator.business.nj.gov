@@ -44,7 +44,6 @@
     "focus-trap-react": "8.7.1",
     "gray-matter": "4.0.3",
     "jest": "27.2.1",
-    "lodash.clonedeep": "4.5.0",
     "lodash.orderby": "^4.6.0",
     "maketypes": "1.1.2",
     "next": "11.1.2",
