@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { Button, Menu, MenuItem, Paper, Snackbar, Slide } from "@mui/material";
+import { Button, Menu, MenuItem, Paper, Snackbar } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
 import { TaskProgress } from "@/lib/types/types";
@@ -70,7 +70,6 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         open={successToastIsOpen}
         onClose={() => setSuccessToastIsOpen(false)}
         autoHideDuration={3000}
-        TransitionComponent={Slide}
         disableWindowBlurListener={true}
         ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
       >
