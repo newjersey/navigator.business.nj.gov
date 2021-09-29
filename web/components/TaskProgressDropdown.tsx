@@ -94,6 +94,14 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={close}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
       >
         <MenuItem
           className={`margin-left-neg-1 ${classes.menuItem}`}
