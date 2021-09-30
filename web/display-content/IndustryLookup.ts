@@ -32,8 +32,8 @@ export const IndustryLookup: Record<Industry, IndustryOption> = {
     secondaryText: "Offering hair, nail, or skin related services",
   },
   generic: {
-    primaryText: "Some other industry",
-    secondaryText: "Select this option if you don’t see anything related to your industry",
+    primaryText: "Any Other Business Type",
+    secondaryText: "Select this if you don’t see your specific industry",
   },
 };
 
