@@ -12,6 +12,7 @@
     "nc": "1.0.3"
   },
   "scripts": {
+    "fences": "lerna run --stream fences",
     "lint": "lerna run --stream lint",
     "lint:fix": "lerna run lint:fix",
     "postinstall": "lerna bootstrap --force-local",
