@@ -43,7 +43,7 @@ jobs:
           AWS_REGION: us-east-1
 
       - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.0.1
+        run: npm install -g @aws-amplify/cli@6.1.0
 
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
