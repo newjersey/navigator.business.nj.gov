@@ -177,3 +177,12 @@ $lg: 64em; //desktop and up (1024px)
   font-size: 1.17rem;
   line-height: 1.6;
 }
+
+.usa-link-hover-override:hover {
+  .icon-green-bg-color-hover {
+    background-color: #466c04;
+  }
+  .text-green-color-hover {
+    color: #466c04;
+  }
+}
