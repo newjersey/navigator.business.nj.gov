@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: "zulu"
-          java-version: 13
+          java-version: 16
 
       - name: 🧰 Install npm dependencies
         run: npm install
@@ -104,7 +104,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: "zulu"
-          java-version: 13
+          java-version: 16
 
       - name: 🧰 Install npm dependencies
         run: npm install
