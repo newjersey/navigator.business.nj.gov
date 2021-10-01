@@ -171,6 +171,7 @@ export interface Step {
 
 export interface Task {
   id: string;
+  filename: string;
   name: string;
   urlSlug: string;
   callToActionLink: string;
@@ -178,11 +179,13 @@ export interface Task {
   contentMd: string;
   postOnboardingQuestion?: string;
   unlockedBy: TaskLink[];
+  unlocks: TaskLink[];
 }
 
 export interface TaskLink {
   name: string;
   urlSlug: string;
+  filename: string;
 }
 
 export type TaskDependencies = {

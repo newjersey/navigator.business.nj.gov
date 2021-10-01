@@ -50,22 +50,30 @@ const loadTaskByFileName = (fileName: string): Task => {
   const taskWithoutLinks = convertTaskMd(fileContents);
   const fileNameWithoutMd = fileName.split(".md")[0];
   const unlockedByTaskLinks = (dependencies[fileNameWithoutMd] || []).map((dependencyFileName) =>
-    loadTaskLinkByFilename(`${dependencyFileName}.md`)
+    loadTaskLinkByFilename(dependencyFileName)
   );
+
+  const unlocksFilenames = Object.keys(dependencies).filter((filename) =>
+    dependencies[filename].includes(fileNameWithoutMd)
+  );
+  const unlocksTaskLinks = unlocksFilenames.map((fileName) => loadTaskLinkByFilename(fileName));
 
   return {
     ...taskWithoutLinks,
     unlockedBy: unlockedByTaskLinks,
+    unlocks: unlocksTaskLinks,
+    filename: fileNameWithoutMd,
   };
 };
 
 const loadTaskLinkByFilename = (fileName: string): TaskLink => {
-  const fullPath = path.join(roadmapsDir, "tasks", `${fileName}`);
+  const fullPath = path.join(roadmapsDir, "tasks", `${fileName}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const taskWithoutLinks = convertTaskMd(fileContents);
 
   return {
     name: taskWithoutLinks.name,
     urlSlug: taskWithoutLinks.urlSlug,
+    filename: fileName,
   };
 };

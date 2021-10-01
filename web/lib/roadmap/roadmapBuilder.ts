@@ -1,4 +1,4 @@
-import { Roadmap, SectionType } from "@/lib/types/types";
+import { Roadmap, SectionType, Step } from "@/lib/types/types";
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 
 export const buildRoadmap = async ({
@@ -109,7 +109,7 @@ const findTaskInRoadmapByFilename = (
 };
 
 const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap> => {
-  return {
+  const roadmap = {
     steps: await Promise.all(
       roadmapBuilder.steps.map(async (step) => ({
         ...step,
@@ -118,6 +118,23 @@ const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap
         ),
       }))
     ),
+  };
+
+  const allFilenames = roadmap.steps.reduce(
+    (acc: string[], currStep: Step) => [...acc, ...currStep.tasks.map((task) => task.filename)],
+    []
+  );
+
+  return {
+    ...roadmap,
+    steps: roadmap.steps.map((step) => ({
+      ...step,
+      tasks: step.tasks.map((task) => ({
+        ...task,
+        unlocks: task.unlocks.filter((it) => allFilenames.includes(it.filename)),
+        unlockedBy: task.unlockedBy.filter((it) => allFilenames.includes(it.filename)),
+      })),
+    })),
   };
 };
 

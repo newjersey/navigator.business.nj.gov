@@ -119,12 +119,14 @@ export const generateTask = (overrides: Partial<Task>): Task => {
   return {
     id: `some-id-${randomInt()}`,
     name: `some-name-${randomInt()}`,
+    filename: `some-filename-${randomInt()}`,
     urlSlug: `some-urlSlug-${randomInt()}`,
     callToActionLink: `some-link-${randomInt()}`,
     callToActionText: `some-call-to-action-${randomInt()}`,
     contentMd: `some-content-md-${randomInt()}`,
     postOnboardingQuestion: `some-post-onboarding-${randomInt()}`,
     unlockedBy: [generateTaskLink({})],
+    unlocks: [generateTaskLink({})],
     ...overrides,
   };
 };
@@ -133,6 +135,7 @@ export const generateTaskLink = (overrides: Partial<TaskLink>): TaskLink => {
   return {
     name: `some-name-${randomInt()}`,
     urlSlug: `some-urlSlug-${randomInt()}`,
+    filename: `some-filename-${randomInt()}`,
     ...overrides,
   };
 };

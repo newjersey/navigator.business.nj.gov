@@ -7,9 +7,18 @@ export const fetchTaskByFilename = async (filename: string): Promise<Task> => {
   const dependencies = await fetchDependenciesFile();
   const unlockedByTaskLinks = await Promise.all((dependencies[filename] || []).map(fetchTaskLinkByFilename));
 
+  const unlocksFilenames = Object.keys(dependencies).filter((depFilename) =>
+    dependencies[depFilename].includes(filename)
+  );
+  const unlocksTaskLinks = await Promise.all(
+    unlocksFilenames.map((depFilename) => fetchTaskLinkByFilename(depFilename))
+  );
+
   return {
     ...taskWithoutLinks,
     unlockedBy: unlockedByTaskLinks,
+    unlocks: unlocksTaskLinks,
+    filename: filename,
   };
 };
 
@@ -18,6 +27,7 @@ export const fetchTaskLinkByFilename = async (filename: string): Promise<TaskLin
   return {
     name: taskWithoutLinks.name,
     urlSlug: taskWithoutLinks.urlSlug,
+    filename: filename,
   };
 };
 

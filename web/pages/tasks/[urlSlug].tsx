@@ -18,7 +18,9 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import { useRouter } from "next/router";
 import { Icon } from "@/components/njwds/Icon";
+import { Unlocks } from "@/components/tasks/Unlocks";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 
 interface Props {
   task: Task;
@@ -38,6 +40,7 @@ const TaskPage = (props: Props): ReactElement => {
       nextUrlSlug: arrayOfTasks[currentUrlSlugIndex + 1],
     };
   }, [props.task.urlSlug, roadmap]);
+  const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
 
   const nextAndPreviousButtons = (): ReactElement => (
     <div className="flex flex-row margin-top-2 padding-right-1">
@@ -105,8 +108,9 @@ const TaskPage = (props: Props): ReactElement => {
             default: (
               <div className="margin-3">
                 <TaskHeader task={props.task} />
-                <UnlockedBy taskLinks={props.task.unlockedBy} />
+                <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
                 {getTaskContent()}
+                <Unlocks taskLinks={taskFromRoadmap?.unlocks || []} isLoading={!taskFromRoadmap} />
                 <TaskCTA
                   link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
                   text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}

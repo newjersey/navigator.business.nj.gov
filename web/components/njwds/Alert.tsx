@@ -12,7 +12,7 @@ interface Props {
   [x: string]: unknown;
 }
 
-type AlertVariant = "info" | "success" | "warning" | "error";
+export type AlertVariant = "info" | "success" | "warning" | "error";
 
 export const Alert = (props: Props): ReactElement => {
   const { variant, children, slim, noIcon, className, heading, rounded, ...rest } = props;

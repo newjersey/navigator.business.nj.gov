@@ -3,5 +3,6 @@
   "form-business-entity": ["search-business-name", "register-for-ein"],
   "register-for-taxes": ["form-business-entity"],
   "sign-lease": ["form-business-entity", "register-for-taxes"],
-  "get-insurance": ["form-business-entity", "register-for-taxes"]
+  "get-insurance": ["form-business-entity", "register-for-taxes"],
+  "get-insurance-hic": ["form-business-entity", "register-for-taxes"]
 }

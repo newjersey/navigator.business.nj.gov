@@ -12,6 +12,8 @@ import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 import { TaskHeader } from "@/components/TaskHeader";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { Unlocks } from "@/components/tasks/Unlocks";
+import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 
 interface Props {
   task: Task;
@@ -32,6 +34,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
   const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
   const { userData, update } = useUserData();
   const { roadmap } = useRoadmap();
+  const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
 
   const handleName = (event: ChangeEvent<HTMLInputElement>): void => {
     setName(event.target.value);
@@ -165,7 +168,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
   return (
     <>
       <TaskHeader task={props.task} />
-      <UnlockedBy taskLinks={props.task.unlockedBy} />
+      <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
       {showErrorAlert()}
       <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
 
@@ -205,6 +208,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
         {nameAvailability?.status === "AVAILABLE" && showAvailable()}
         {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
       </div>
+      <Unlocks taskLinks={taskFromRoadmap?.unlocks || []} isLoading={!taskFromRoadmap} />
     </>
   );
 };
