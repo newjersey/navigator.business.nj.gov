@@ -42,9 +42,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
 
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.1.0
-
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
         env:
@@ -116,9 +113,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
 
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@5.5.0
-
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
         env:
@@ -185,8 +179,12 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.1.0
+      - name: 🧰 Install npm dependencies
+        run: npm install
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
+          AWS_REGION: us-east-1
 
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
@@ -195,15 +193,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
           AMPLIFY_ENV: dev
-
-      - name: 🧰 Install web dependencies
-        run: npm --prefix=web install
-      - name: 🧰 Install api dependencies
-        run: npm --prefix=api install
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
-          AWS_REGION: us-east-1
 
       - name: 🔧 Serverless Authentication
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
@@ -264,8 +253,12 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.1.0
+      - name: 🧰 Install npm dependencies
+        run: npm install
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
+          AWS_REGION: us-east-1
 
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
@@ -274,15 +267,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
           AMPLIFY_ENV: staging
-
-      - name: 🧰 Install web dependencies
-        run: npm --prefix=web install
-      - name: 🧰 Install api dependencies
-        run: npm --prefix=api install
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
-          AWS_REGION: us-east-1
 
       - name: 🔧 Serverless Authentication
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
@@ -341,8 +325,12 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.1.0
+      - name: 🧰 Install npm dependencies
+        run: npm install
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
+          AWS_REGION: us-east-1
 
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
@@ -351,15 +339,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
           AMPLIFY_ENV: prod
-
-      - name: 🧰 Install web dependencies
-        run: npm --prefix=web install
-      - name: 🧰 Install api dependencies
-        run: npm --prefix=api install
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_INNOV }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
-          AWS_REGION: us-east-1
 
       - name: 🔧 Serverless Authentication
         run: npm run serverless config credentials -- --provider aws --key ${{secrets.AWS_ACCESS_KEY_ID_INNOV}} --secret ${{secrets.AWS_SECRET_ACCESS_KEY_INNOV}}
