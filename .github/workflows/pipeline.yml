@@ -42,9 +42,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
 
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.1.0
-
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
         env:
@@ -116,9 +113,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_INNOV }}
           AWS_REGION: us-east-1
 
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@5.5.0
-
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
         env:
@@ -184,9 +178,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.1.0
 
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
@@ -264,9 +255,6 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.1.0
-
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
         env:
@@ -340,9 +328,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-
-      - name: 🧰 Install Amplify CLI
-        run: npm install -g @aws-amplify/cli@6.1.0
 
       - name: 🔧 Configure Amplify
         run: ./scripts/amplify-ci/configure.sh
