@@ -91,6 +91,7 @@ describe("loadTasks", () => {
 
       const dependencyFile = JSON.stringify({
         task2: ["task3"],
+        task1: ["task2"],
       });
 
       mockReadDirReturn(["task1.md", "task2.md", "task3.md"]);
@@ -99,16 +100,19 @@ describe("loadTasks", () => {
         .mockReturnValueOnce(taskMd2) // read second file in list
         .mockReturnValueOnce(taskMd2) // read file once we found the match
         .mockReturnValueOnce(dependencyFile) // read dependency file
-        .mockReturnValueOnce(taskMd3); // read dependency task file
+        .mockReturnValueOnce(taskMd3) // read unlocked-by task file
+        .mockReturnValueOnce(taskMd1); // read unlocking task file
 
       expect(loadTaskByUrlSlug("some-url-slug-2")).toEqual({
         id: "some-id-2",
         name: "Some Task Name2",
+        filename: "task2",
         urlSlug: "some-url-slug-2",
         callToActionLink: "www.example2.com",
         callToActionText: "",
         contentMd: "\n# I am a header2\n\nI am a text content2",
-        unlockedBy: [{ name: "Some Task Name3", urlSlug: "some-url-slug-3" }],
+        unlockedBy: [{ name: "Some Task Name3", urlSlug: "some-url-slug-3", filename: "task3" }],
+        unlocks: [{ name: "Some Task Name1", urlSlug: "some-url-slug-1", filename: "task1" }],
       });
     });
   });

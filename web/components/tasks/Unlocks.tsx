@@ -8,13 +8,13 @@ interface Props {
   isLoading: boolean;
 }
 
-export const UnlockedBy = (props: Props): ReactElement => (
+export const Unlocks = (props: Props): ReactElement => (
   <UnlockingAlert
     taskLinks={props.taskLinks}
-    variant="warning"
-    singularText={TaskDefaults.unlockedBySingular}
-    pluralText={TaskDefaults.unlockedByPlural}
-    className="margin-bottom-3"
+    variant="info"
+    singularText={TaskDefaults.unlocksAlertSingular}
+    pluralText={TaskDefaults.unlocksAlertPlural}
+    className="margin-top-3 margin-bottom-3"
     isLoading={props.isLoading}
   />
 );

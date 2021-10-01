@@ -33,7 +33,7 @@ export const onEscape = (e: KeyboardEvent, handler: () => void): void => {
 export const templateEval = (template: string, args: Record<string, string>): string =>
   template.replace(/\${(\w+)}/g, (_, v) => args[v]);
 
-const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined => {
+export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined => {
   const stepInRoadmap = roadmap?.steps.find((step) => step.tasks.find((task) => task.id === taskId));
   return stepInRoadmap?.tasks.find((task) => task.id === taskId);
 };
@@ -41,7 +41,7 @@ const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task 
 export const getModifiedTaskContent = (
   roadmap: Roadmap | undefined,
   task: Task,
-  field: Exclude<keyof Task, "unlockedBy">
+  field: Exclude<keyof Task, "unlockedBy" | "unlocks">
 ): string => {
   const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
   if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {

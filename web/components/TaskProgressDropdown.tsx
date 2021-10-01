@@ -1,5 +1,4 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { Button, Menu, MenuItem, Paper, Snackbar } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
 import { TaskProgress } from "@/lib/types/types";
@@ -9,8 +8,9 @@ import { TagCompleted } from "@/components/njwds-extended/TagCompleted";
 import { TagNotStarted } from "@/components/njwds-extended/TagNotStarted";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import analytics from "@/lib/utils/analytics";
-import { Alert } from "@/components/njwds/Alert";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { ToastAlert } from "./njwds-extended/ToastAlert";
+import { Button, Menu, MenuItem } from "@mui/material";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -65,20 +65,9 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
 
   return (
     <div className="margin-left-neg-1">
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={successToastIsOpen}
-        onClose={() => setSuccessToastIsOpen(false)}
-        autoHideDuration={3000}
-        disableWindowBlurListener={true}
-        ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
-      >
-        <Paper>
-          <Alert slim rounded variant="success">
-            {TaskDefaults.taskProgressSuccessToastBody}
-          </Alert>
-        </Paper>
-      </Snackbar>
+      <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
+        {TaskDefaults.taskProgressSuccessToastBody}
+      </ToastAlert>
       <Button
         style={{ whiteSpace: "nowrap" }}
         aria-controls="task-progress-status-menu"
