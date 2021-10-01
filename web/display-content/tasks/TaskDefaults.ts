@@ -5,6 +5,6 @@ export const TaskDefaults: Record<string, string> = {
   taskProgressSuccessToastBody: "Your task status has been updated.",
   nextTaskButtonText: "Next",
   previousTaskButtonText: "Previous",
-  unlockedBySingular: "To begin this task, we recommend that you first complete the task:",
-  unlockedByPlural: "To begin this task, we recommend that you first complete these tasks:"
+  unlockedBySingular: "Before starting this task, we recommend that you take a look at this one:",
+  unlockedByPlural: "Before starting this task, we recommend you take a look at these:"
 };
