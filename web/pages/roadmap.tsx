@@ -18,6 +18,7 @@ import analytics from "@/lib/utils/analytics";
 import { CircularProgress } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";
 import { RoadmapBySections } from "@/components/roadmap/RoadmapBySections";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -27,6 +28,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
   const { userData, isLoading, error } = useUserData();
   const router = useRouter();
+  const { roadmap } = useRoadmap();
 
   useMountEffectWhenDefined(() => {
     (async () => {
@@ -120,7 +122,18 @@ const RoadmapPage = (props: Props): ReactElement => {
                 </div>
               </>
             )}
-            <RoadmapBySections />
+            <div className="margin-top-3">
+              {!roadmap ? (
+                <div className="fdr fjc fac">
+                  <CircularProgress />
+                  <h3 className="margin-left-2">Loading...</h3>
+                </div>
+              ) : (
+                <>
+                  <RoadmapBySections />
+                </>
+              )}
+            </div>
           </SinglePageLayout>
         </div>
       )}

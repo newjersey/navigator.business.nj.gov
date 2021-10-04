@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { createRoadmapSections, getSectionNames, handleAccordionStateChange } from "@/lib/utils/helpers";
-import { CircularProgress, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import { Step } from "@/components/Step";
 import { SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { SectionType } from "@/lib/types/types";
@@ -47,16 +47,5 @@ export const RoadmapBySections = (): ReactElement => {
     );
   };
 
-  return (
-    <div className="margin-top-3">
-      {!roadmap ? (
-        <div className="fdr fjc fac">
-          <CircularProgress />
-          <h3 className="margin-left-2">Loading...</h3>
-        </div>
-      ) : (
-        createRoadmapSections(roadmapSections, userData, getSection)
-      )}
-    </div>
-  );
+  return <>{createRoadmapSections(roadmapSections, userData, getSection)}</>;
 };
