@@ -68,9 +68,21 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
 
 export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
   const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
+  const datepickerContent = fs.readFileSync(
+    path.join(displayContentDir, "roadmap", "operate", "date-of-formation-form.md"),
+    "utf8"
+  );
+  const annualFilingContent = fs.readFileSync(
+    path.join(displayContentDir, "roadmap", "operate", "annual-filing.md"),
+    "utf8"
+  );
 
   return {
     contentMd: getMarkdown(roadmapContents).content,
+    operateDisplayContent: {
+      dateOfFormationMd: getMarkdown(datepickerContent).content,
+      annualFilingMd: getMarkdown(annualFilingContent).content,
+    },
   };
 };
 

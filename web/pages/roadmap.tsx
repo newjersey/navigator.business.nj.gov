@@ -19,6 +19,7 @@ import { CircularProgress } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";
 import { RoadmapBySections } from "@/components/roadmap/RoadmapBySections";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { OperateSection } from "@/components/roadmap/OperateSection";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -126,11 +127,12 @@ const RoadmapPage = (props: Props): ReactElement => {
               {!roadmap ? (
                 <div className="fdr fjc fac">
                   <CircularProgress />
-                  <h3 className="margin-left-2">Loading...</h3>
+                  <div className="margin-left-2 h3-element">Loading...</div>
                 </div>
               ) : (
                 <>
                   <RoadmapBySections />
+                  <OperateSection displayContent={props.displayContent.operateDisplayContent} />
                 </>
               )}
             </div>

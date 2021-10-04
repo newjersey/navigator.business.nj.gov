@@ -33,6 +33,8 @@
     "react-tabs",
     "dayjs",
     "next-seo",
-    "@jest/types"
+    "@jest/types",
+    "@mui/lab/AdapterDayjs",
+    "dayjs/plugin/advancedFormat"
   ]
 }

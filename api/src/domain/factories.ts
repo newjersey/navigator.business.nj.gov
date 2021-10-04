@@ -13,6 +13,7 @@ import {
   OnboardingData,
   Preferences,
   SelfRegResponse,
+  TaxFiling,
   UserData,
 } from "./types";
 import dayjs from "dayjs";
@@ -36,6 +37,15 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     taskProgress: {},
     licenseData: generateLicenseData({}),
     preferences: generatePreferences(),
+    taxFilings: [generateTaxFiling({})],
+    ...overrides,
+  };
+};
+
+export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
+  return {
+    identifier: `some-identifier-${randomInt()}`,
+    dueDate: dayjs().format("YYYY-MM-DD"),
     ...overrides,
   };
 };
@@ -49,6 +59,7 @@ export const generateOnboardingData = (overrides: Partial<OnboardingData>): Onbo
     liquorLicense: false,
     homeBasedBusiness: false,
     constructionRenovationPlan: undefined,
+    dateOfFormation: dayjs().format("YYYY-MM"),
     ...overrides,
   };
 };
