@@ -9,5 +9,10 @@
     "best-practices": 90,
     "seo": 90,
     "pwa": 0
+  },
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "cypress/results/web-tests-[hash].xml",
+    "toConsole": true
   }
 }

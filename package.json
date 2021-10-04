@@ -20,6 +20,7 @@
     "prettier:check": "lerna run --stream prettier:check",
     "start:dev": "lerna run  --stream dev",
     "test": "lerna run --stream test",
+    "test:ci": "lerna run --stream test:ci",
     "typecheck": "lerna run --stream typecheck"
   },
   "engines": {

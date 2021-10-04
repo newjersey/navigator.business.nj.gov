@@ -32,6 +32,7 @@ web/.env
 api/.env
 
 web/cypress/videos
+web/cypress/results
 web/cypress/screenshots/
 
 #amplify

@@ -8,6 +8,7 @@
     "postbuild": "next export",
     "start": "next start",
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
+    "test:ci": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest --reporters=jest-junit --outputFile=../reports/test_results/web-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../reports/coverage/web/",
     "eslint": "eslint",
     "lint": "eslint . --max-warnings 0",
     "spellcheck": "cspell **/*.md",
@@ -42,7 +43,6 @@
     "date-fns": "2.24.0",
     "focus-trap-react": "8.8.1",
     "gray-matter": "4.0.3",
-    "jest": "27.2.4",
     "lodash.orderby": "4.6.0",
     "next": "11.1.2",
     "next-seo": "4.28.1",
@@ -83,10 +83,16 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "good-fences": "1.0.0",
     "identity-obj-proxy": "3.0.0",
+    "jest": "27.2.4",
+    "jest-junit": "13.0.0",
     "jest-raw-loader": "1.0.1",
     "node-fetch": "2.6.5",
     "prettier": "2.4.1",
     "ts-node": "10.2.1",
     "typescript": "4.4.3"
+  },
+  "jest-junit": {
+    "outputDirectory": "../reports/test_results",
+    "uniqueOutputName": "true"
   }
 }
