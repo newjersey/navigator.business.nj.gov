@@ -1,0 +1,114 @@
+version: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@1.29.0
+
+executors:
+  with-chrome:
+    docker:
+      - image: 'cypress/browsers:node14.17.0-chrome91-ff89'
+    resource_class: large
+    environment: 
+      API_BASE_URL: http://localhost:5000/local
+      REDIRECT_URL: http://localhost:3000/
+      CYPRESS_API_BASE_URL: http://localhost:5000/local
+
+commands:
+  configure:
+    steps:  
+      - run:
+          name: Install Tools
+          command: |
+            apt update
+            apt install -y openjdk-11-jdk-headless
+      - checkout
+      - restore_cache:
+          keys:
+            - v3-npm-deps-{{ checksum "package-lock.json" }}
+            - v3-npm-deps-
+      - run: 
+          name: Install npm packages
+          command: npm install --unsafe-perm
+      - run: 
+          name: Configure Amplify
+          command: ./scripts/amplify-ci/configure.sh
+      - run: 
+          name: Configure Serverless
+          command: npm run --prefix=api serverless config credentials -- --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
+  code-quality:
+    steps: 
+      - run: 
+          name: Run Typecheck
+          command: npm run typecheck
+      - run: 
+          name: Run Cypress Typecheck
+          command: npm run --prefix=web typecheck:cypress
+      - run: 
+          name: Run Prettier
+          command: npm run prettier
+      - run: 
+          name: Run Linting
+          command: npm run lint
+      - run: 
+          name: Run Fences
+          command: npm run fences
+      - run: 
+          name: Run Web Unit Tests
+          command: npm run --prefix=web test:ci
+      - run: 
+          name: Run API Unit Tests
+          command: npm run --prefix=api test:ci
+
+jobs:
+  build:
+    docker:
+      - image: node:14.18.0-buster
+    resource_class: large
+    steps:
+      - configure
+      - code-quality
+      - save_cache:
+          key: v3-npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+            - web/node_modules
+            - api/node_modules
+      - store_test_results:
+          path: reports/test_results
+
+workflows:
+  build-and-test:
+    jobs:
+      - build:
+          filters:
+            branches:
+             ignore:
+              - main
+      - cypress/install:
+          executor: with-chrome
+          post-install: 
+            - run: ./scripts/amplify-ci/configure.sh
+            - run: apt update
+            - run: apt install -y openjdk-11-jdk-headless
+          filters:
+            branches:
+             ignore:
+              - main
+      - cypress/run:
+          executor: with-chrome
+          browser: chrome
+          working_directory: web
+          build: apt update && apt install -y openjdk-11-jdk-headless && npm run build --if-present
+          record: false
+          start: npm --prefix=../api start & npm --prefix=../api run start:wiremock & npm start
+          attach-workspace: true
+          post-steps:
+            - store_test_results:
+                path: web/cypress/results
+          requires: 
+          - cypress/install
+          store_artifacts: true
+          filters:
+            branches:
+             ignore:
+              - main
