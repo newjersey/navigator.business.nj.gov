@@ -23,12 +23,14 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
       "Content-Type": "text/xml;encoding=UTF-8",
     };
 
-    console.log({
-      method: "post",
-      url: config.serviceUrl,
-      data: body,
-      headers: headers,
-    });
+    if (process.env.NODE_ENV !== "test") {
+      console.log({
+        method: "post",
+        url: config.serviceUrl,
+        data: body,
+        headers: headers,
+      });
+    }
 
     return axios({
       method: "post",
@@ -38,7 +40,9 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
     })
       .then(async (xmlResponse) => {
         const response = await xml2js.parseStringPromise(xmlResponse.data);
-        console.log("response", response);
+        if (process.env.NODE_ENV !== "test") {
+          console.log("response", response);
+        }
         logWriter.LogInfo(
           `myNJ Self-Reg - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
         );
@@ -61,7 +65,9 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
         };
       })
       .catch((error) => {
-        console.log("error", error);
+        if (process.env.NODE_ENV !== "test") {
+          console.log("error", error);
+        }
         logWriter.LogError("Registration - Error", error);
 
         const myNJDuplicateErrors = ["E1048", "E1017", "E1059", "E2109"];
