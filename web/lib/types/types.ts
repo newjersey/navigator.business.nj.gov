@@ -184,6 +184,7 @@ export interface Task {
 
 export interface TaskLink {
   name: string;
+  id: string;
   urlSlug: string;
   filename: string;
 }

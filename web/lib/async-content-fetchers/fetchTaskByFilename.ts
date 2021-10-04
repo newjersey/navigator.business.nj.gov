@@ -28,6 +28,7 @@ export const fetchTaskLinkByFilename = async (filename: string): Promise<TaskLin
     name: taskWithoutLinks.name,
     urlSlug: taskWithoutLinks.urlSlug,
     filename: filename,
+    id: taskWithoutLinks.id,
   };
 };
 

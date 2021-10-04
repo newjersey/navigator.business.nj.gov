@@ -80,22 +80,28 @@ describe("roadmapBuilder", () => {
 
     const blockedTask = roadmap.steps[0].tasks.find((it) => it.id === "blocked-id");
     expect(blockedTask?.unlockedBy).toEqual([
-      { name: "Blocking Task 2", urlSlug: "blocking-task-2-url-slug", filename: "blocking-task-2" },
+      {
+        name: "Blocking Task 2",
+        urlSlug: "blocking-task-2-url-slug",
+        filename: "blocking-task-2",
+        id: "blocking-task-2-id",
+      },
       {
         name: "Blocking Task 1 Duplicate",
         urlSlug: "blocking-task-1-url-slug",
         filename: "blocking-task-1-duplicate",
+        id: "blocking-task-1-id",
       },
     ]);
 
     const blockingTask1 = roadmap.steps[0].tasks.find((it) => it.id === "blocking-task-1-id");
     expect(blockingTask1?.unlocks).toEqual([
-      { name: "Blocked Task", urlSlug: "blocked-url-slug", filename: "blocked-task" },
+      { name: "Blocked Task", urlSlug: "blocked-url-slug", filename: "blocked-task", id: "blocked-id" },
     ]);
 
     const blockingTask2 = roadmap.steps[0].tasks.find((it) => it.id === "blocking-task-2-id");
     expect(blockingTask2?.unlocks).toEqual([
-      { name: "Blocked Task", urlSlug: "blocked-url-slug", filename: "blocked-task" },
+      { name: "Blocked Task", urlSlug: "blocked-url-slug", filename: "blocked-task", id: "blocked-id" },
     ]);
   });
 });

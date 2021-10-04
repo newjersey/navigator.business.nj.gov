@@ -134,6 +134,7 @@ export const generateTask = (overrides: Partial<Task>): Task => {
 export const generateTaskLink = (overrides: Partial<TaskLink>): TaskLink => {
   return {
     name: `some-name-${randomInt()}`,
+    id: `some-id-${randomInt()}`,
     urlSlug: `some-urlSlug-${randomInt()}`,
     filename: `some-filename-${randomInt()}`,
     ...overrides,

@@ -111,8 +111,12 @@ describe("loadTasks", () => {
         callToActionLink: "www.example2.com",
         callToActionText: "",
         contentMd: "\n# I am a header2\n\nI am a text content2",
-        unlockedBy: [{ name: "Some Task Name3", urlSlug: "some-url-slug-3", filename: "task3" }],
-        unlocks: [{ name: "Some Task Name1", urlSlug: "some-url-slug-1", filename: "task1" }],
+        unlockedBy: [
+          { name: "Some Task Name3", urlSlug: "some-url-slug-3", filename: "task3", id: "some-id-3" },
+        ],
+        unlocks: [
+          { name: "Some Task Name1", urlSlug: "some-url-slug-1", filename: "task1", id: "some-id-1" },
+        ],
       });
     });
   });

@@ -75,5 +75,6 @@ const loadTaskLinkByFilename = (fileName: string): TaskLink => {
     name: taskWithoutLinks.name,
     urlSlug: taskWithoutLinks.urlSlug,
     filename: fileName,
+    id: taskWithoutLinks.id,
   };
 };

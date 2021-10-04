@@ -18,6 +18,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -344,6 +345,24 @@ describe("task page", () => {
       );
 
       expect(subject.queryByText("NOT ON ROADMAP TASK", { exact: false })).not.toBeInTheDocument();
+    });
+
+    it("removes a task from the unlocked-by alert when its status is completed", () => {
+      const task = generateTask({
+        unlockedBy: [
+          generateTaskLink({ name: "Do this first", urlSlug: "do-this-first", id: "do-this-first" }),
+          generateTaskLink({ name: "Also this one", urlSlug: "also-this-one" }),
+        ],
+      });
+
+      useMockUserData(generateUserData({ taskProgress: { "do-this-first": "COMPLETED" } }));
+      useMockRoadmapWithTask(task);
+      subject = renderPage(task);
+
+      expect(subject.queryByText(TaskDefaults.unlockedByPlural, { exact: false })).not.toBeInTheDocument();
+      expect(subject.queryByText(TaskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
+      expect(subject.queryByText("Do this first", { exact: false })).not.toBeInTheDocument();
+      expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();
     });
   });
 

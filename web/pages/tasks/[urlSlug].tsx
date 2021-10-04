@@ -21,6 +21,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { Unlocks } from "@/components/tasks/Unlocks";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 
 interface Props {
   task: Task;
@@ -30,7 +31,7 @@ const TaskPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
 
   const router = useRouter();
-
+  const { userData } = useUserData();
   const { roadmap } = useRoadmap();
   const { previousUrlSlug, nextUrlSlug } = useMemo(() => {
     const arrayOfTasks = getUrlSlugs(roadmap);
@@ -41,6 +42,14 @@ const TaskPage = (props: Props): ReactElement => {
     };
   }, [props.task.urlSlug, roadmap]);
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
+
+  const getUnlockedBy = (): ReactElement => {
+    const unlockedByTaskLinks = taskFromRoadmap
+      ? taskFromRoadmap.unlockedBy.filter((it) => userData?.taskProgress[it.id] !== "COMPLETED")
+      : [];
+
+    return <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />;
+  };
 
   const nextAndPreviousButtons = (): ReactElement => (
     <div className="flex flex-row margin-top-2 padding-right-1">
@@ -108,7 +117,7 @@ const TaskPage = (props: Props): ReactElement => {
             default: (
               <div className="margin-3">
                 <TaskHeader task={props.task} />
-                <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
+                {getUnlockedBy()}
                 {getTaskContent()}
                 <Unlocks taskLinks={taskFromRoadmap?.unlocks || []} isLoading={!taskFromRoadmap} />
                 <TaskCTA
