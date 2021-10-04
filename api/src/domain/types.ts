@@ -14,7 +14,7 @@ export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
 }
 
-export type SectionType = "PLAN" | "START";
+export type SectionType = "PLAN" | "START" | "OPERATE";
 
 export interface SelfRegClient {
   grant: (user: BusinessUser) => Promise<SelfRegResponse>;
@@ -108,7 +108,13 @@ export interface UserData {
   taskProgress: Record<string, TaskProgress>;
   licenseData: LicenseData | undefined;
   preferences: Preferences;
+  taxFilings: TaxFiling[];
 }
+
+export type TaxFiling = {
+  identifier: string;
+  dueDate: string;
+};
 
 export interface Preferences {
   roadmapOpenSections: SectionType[];
@@ -123,6 +129,7 @@ export interface OnboardingData {
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
   constructionRenovationPlan: boolean | undefined;
+  dateOfFormation: string | undefined;
 }
 
 export type Municipality = {
@@ -152,6 +159,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       roadmapOpenSections: ["PLAN", "START"],
       roadmapOpenSteps: [],
     },
+    taxFilings: [],
   };
 };
 
@@ -164,6 +172,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     liquorLicense: false,
     homeBasedBusiness: false,
     constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
   };
 };
 

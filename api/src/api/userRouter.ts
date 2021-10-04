@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 import { generateUser } from "../domain/factories";
+import { calculateNextAnnualFilingDate } from "../domain/calculateNextAnnualFilingDate";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -70,14 +71,23 @@ export const userRouterFactory = (
   });
 
   router.post("/users", (req, res) => {
-    const postedUserBodyId = (req.body as UserData).user.id;
+    let userData = req.body as UserData;
+    const postedUserBodyId = userData.user.id;
     if (getSignedInUserId(req) !== postedUserBodyId) {
       res.status(403).json();
       return;
     }
 
+    if (userData.onboardingData.dateOfFormation) {
+      const annualFilingDate = calculateNextAnnualFilingDate(userData.onboardingData.dateOfFormation);
+      userData = {
+        ...userData,
+        taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: annualFilingDate }],
+      };
+    }
+
     userDataClient
-      .put(req.body)
+      .put(userData)
       .then((result: UserData) => {
         res.json(result);
       })

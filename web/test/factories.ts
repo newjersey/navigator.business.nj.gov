@@ -16,6 +16,7 @@ import {
   Step,
   Task,
   TaskLink,
+  TaxFiling,
   UserData,
 } from "@/lib/types/types";
 import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
@@ -46,6 +47,15 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     taskProgress: {},
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
+    taxFilings: [generateTaxFiling({})],
+    ...overrides,
+  };
+};
+
+export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
+  return {
+    identifier: `some-identifier-${randomInt()}`,
+    dueDate: dayjs().format("YYYY-MM-DD"),
     ...overrides,
   };
 };
@@ -59,6 +69,7 @@ export const generateOnboardingData = (overrides: Partial<OnboardingData>): Onbo
     liquorLicense: false,
     homeBasedBusiness: false,
     constructionRenovationPlan: undefined,
+    dateOfFormation: dayjs().format("YYYY-MM"),
     ...overrides,
   };
 };

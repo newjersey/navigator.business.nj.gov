@@ -151,6 +151,42 @@ describe("userRouter", () => {
       expect(response.body).toEqual(userData);
     });
 
+    it("calculates new annual filing date and updates it for dateOfFormation", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const postedUserData = generateUserData({
+        user: generateUser({ id: "123" }),
+        onboardingData: generateOnboardingData({ dateOfFormation: "2021-03-01" }),
+        taxFilings: [],
+      });
+
+      stubUserDataClient.put.mockResolvedValue(postedUserData);
+
+      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...postedUserData,
+        taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
+      });
+    });
+
+    it("calculates new annual filing date and overrides it if needed", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const postedUserData = generateUserData({
+        user: generateUser({ id: "123" }),
+        onboardingData: generateOnboardingData({ dateOfFormation: "2021-03-01" }),
+        taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
+      });
+
+      stubUserDataClient.put.mockResolvedValue(postedUserData);
+
+      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...postedUserData,
+        taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
+      });
+    });
+
     it("returns a 403 when user JWT does not match user ID", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "other-user-id" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });

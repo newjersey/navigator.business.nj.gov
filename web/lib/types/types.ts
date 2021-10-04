@@ -5,7 +5,13 @@ export interface UserData {
   taskProgress: Record<string, TaskProgress>;
   licenseData: LicenseData | undefined;
   preferences: Preferences;
+  taxFilings: TaxFiling[];
 }
+
+export type TaxFiling = {
+  identifier: string;
+  dueDate: string;
+};
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
@@ -23,6 +29,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       roadmapOpenSections: ["PLAN", "START"],
       roadmapOpenSteps: [],
     },
+    taxFilings: [],
   };
 };
 
@@ -40,6 +47,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     liquorLicense: false,
     homeBasedBusiness: false,
     constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
   };
 };
 
@@ -51,6 +59,7 @@ export interface OnboardingData {
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
   constructionRenovationPlan: boolean | undefined;
+  dateOfFormation: string | undefined;
 }
 
 export interface LicenseData {
@@ -60,6 +69,11 @@ export interface LicenseData {
   status: LicenseStatus;
   items: LicenseStatusItem[];
 }
+
+export type OperateDisplayContent = {
+  dateOfFormationMd: string;
+  annualFilingMd: string;
+};
 
 export type OnboardingDisplayContent = {
   businessName: {
@@ -134,6 +148,7 @@ export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent 
 
 export type RoadmapDisplayContent = {
   contentMd: string;
+  operateDisplayContent: OperateDisplayContent;
 };
 
 export type Municipality = {
@@ -159,7 +174,7 @@ export interface Roadmap {
   steps: Step[];
 }
 
-export type SectionType = "PLAN" | "START";
+export type SectionType = "PLAN" | "START" | "OPERATE";
 export interface Step {
   step_number: number;
   name: string;

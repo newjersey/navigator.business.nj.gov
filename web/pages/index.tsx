@@ -49,7 +49,9 @@ const Home = (): ReactElement => {
         <div className="grid-custom">
           <h1 className="l2-header-custom text-center margin-y-0 padding-bottom-40 fixed-width no-padding-lr display-block">
             {LandingPageDefaults.section2HeaderFirstLineText}
-            <span className="display-inline">{LandingPageDefaults.section2HeaderSecondLineText}</span>
+            <span className="display-inline-override">
+              {LandingPageDefaults.section2HeaderSecondLineText}
+            </span>
             <span>{LandingPageDefaults.section2HeaderThirdLineText}</span>
           </h1>
 
@@ -81,7 +83,7 @@ const Home = (): ReactElement => {
       <SinglePageLayout>
         <h1 className="text-center font-32 padding-top-9 desktop:padding-top-2 line-height-205">
           {LandingPageDefaults.section3HeaderFirstLineText}
-          <span className="display-block display-inline">
+          <span className="display-block display-inline-override">
             {LandingPageDefaults.section3HeaderSecondLineText}
           </span>
         </h1>

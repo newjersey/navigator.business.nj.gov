@@ -18,7 +18,7 @@ export const Hero = (props: Props): ReactElement => {
         </div>
         <div className="usa-hero__callout no-bg no-max-width flex-order-1 max-width flex-smaller no-padding-x">
           <h1 className="usa-hero__heading large-font text-primary-darker text-left-desktop hero-header-custom">
-            <span className="usa-hero__heading--alt text-primary-darker display-inline display-block">
+            <span className="usa-hero__heading--alt text-primary-darker display-inline-override display-block">
               {props.calloutText}
             </span>
             {props.subCalloutText}

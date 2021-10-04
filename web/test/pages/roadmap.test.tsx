@@ -1,4 +1,4 @@
-import { fireEvent, render, RenderResult, within } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
@@ -22,6 +22,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { UserData } from "@/lib/types/types";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -37,7 +38,14 @@ describe("roadmap page", () => {
   });
 
   const renderRoadmapPage = (): RenderResult => {
-    return render(<RoadmapPage displayContent={{ contentMd: "" }} />);
+    return render(
+      <RoadmapPage
+        displayContent={{
+          contentMd: "",
+          operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
+        }}
+      />
+    );
   };
 
   it("shows loading page if page has not loaded yet", () => {
@@ -257,84 +265,110 @@ describe("roadmap page", () => {
         ],
       });
     });
+
+    const statefulRender = (userData: UserData): RenderResult => {
+      setupStatefulUserDataContext();
+      return render(
+        <WithStatefulUserData initialUserData={userData}>
+          <RoadmapPage
+            displayContent={{
+              contentMd: "",
+              operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
+            }}
+          />
+        </WithStatefulUserData>
+      );
+    };
+
     it("displays sections based on userData preferences", () => {
       useMockUserData({
         preferences: generatePreferences({
-          roadmapOpenSections: ["PLAN", "START"],
+          roadmapOpenSections: ["PLAN", "START", "OPERATE"],
         }),
+        taxFilings: [],
       });
 
       const subject = renderRoadmapPage();
 
       const sectionStart = subject.getByTestId("section-start");
       const sectionPlan = subject.getByTestId("section-plan");
+      const sectionOperate = subject.getByTestId("section-operate");
 
       expect(within(sectionStart).getByText("step2")).toBeVisible();
       expect(within(sectionPlan).getByText("step1")).toBeVisible();
+      expect(within(sectionOperate).getByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeVisible();
     });
 
-    it("expands start section only", () => {
-      useMockUserData({
-        preferences: generatePreferences({
-          roadmapOpenSections: ["START"],
-        }),
+    it("expands and collapses the plan, start and operate accordions", async () => {
+      const subject = statefulRender(
+        generateUserData({
+          preferences: generatePreferences({
+            roadmapOpenSections: [],
+          }),
+          taxFilings: [],
+        })
+      );
+
+      expect(within(subject.getByTestId("section-plan")).getByText("step1")).not.toBeVisible();
+      expect(within(subject.getByTestId("section-start")).getByText("step2")).not.toBeVisible();
+      expect(
+        within(subject.getByTestId("section-operate")).getByText(RoadmapDefaults.operateDateSubmitButtonText)
+      ).not.toBeVisible();
+
+      fireEvent.click(subject.getByTestId("plan-header"));
+      fireEvent.click(subject.getByTestId("start-header"));
+      fireEvent.click(subject.getByTestId("operate-header"));
+
+      await waitFor(() => {
+        expect(within(subject.getByTestId("section-plan")).getByText("step1")).toBeVisible();
+        expect(within(subject.getByTestId("section-start")).getByText("step2")).toBeVisible();
+        expect(
+          within(subject.getByTestId("section-operate")).getByText(
+            RoadmapDefaults.operateDateSubmitButtonText
+          )
+        ).toBeVisible();
       });
 
-      const subject = renderRoadmapPage();
+      fireEvent.click(subject.getByTestId("plan-header"));
+      fireEvent.click(subject.getByTestId("start-header"));
+      fireEvent.click(subject.getByTestId("operate-header"));
 
-      const sectionStart = subject.getByTestId("section-start");
-      const sectionPlan = subject.getByTestId("section-plan");
-
-      expect(within(sectionStart).getByText("step2")).toBeVisible();
-      expect(within(sectionPlan).getByText("step1")).not.toBeVisible();
-    });
-
-    it("expands plan section only", () => {
-      useMockUserData({
-        preferences: generatePreferences({
-          roadmapOpenSections: ["PLAN"],
-        }),
+      await waitFor(() => {
+        expect(within(subject.getByTestId("section-plan")).getByText("step1")).not.toBeVisible();
+        expect(within(subject.getByTestId("section-start")).getByText("step2")).not.toBeVisible();
+        expect(
+          within(subject.getByTestId("section-operate")).getByText(
+            RoadmapDefaults.operateDateSubmitButtonText
+          )
+        ).not.toBeVisible();
       });
-
-      const subject = renderRoadmapPage();
-
-      const sectionStart = subject.getByTestId("section-start");
-      const sectionPlan = subject.getByTestId("section-plan");
-
-      expect(within(sectionStart).getByText("step2")).not.toBeVisible();
-      expect(within(sectionPlan).getByText("step1")).toBeVisible();
     });
 
     it("updates userData preferences", async () => {
-      const userData = generateUserData({
-        preferences: generatePreferences({
-          roadmapOpenSections: ["PLAN", "START"],
-        }),
-      });
-
-      setupStatefulUserDataContext();
-      const subject = render(
-        <WithStatefulUserData initialUserData={userData}>
-          <RoadmapPage displayContent={{ contentMd: "" }} />
-        </WithStatefulUserData>
+      const subject = statefulRender(
+        generateUserData({
+          preferences: generatePreferences({
+            roadmapOpenSections: ["PLAN", "START", "OPERATE"],
+          }),
+        })
       );
 
-      const sectionPlan = subject.container.querySelector("#plan-header");
-      const sectionStart = subject.container.querySelector("#start-header");
+      const sectionPlan = subject.getByTestId("plan-header");
+      const sectionStart = subject.getByTestId("start-header");
+      const sectionOperate = subject.getByTestId("operate-header");
 
       expect(sectionPlan).toBeInTheDocument();
       expect(sectionStart).toBeInTheDocument();
-      fireEvent.click(sectionPlan as Element);
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
-      fireEvent.click(sectionPlan as Element);
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START", "PLAN"]);
-      fireEvent.click(sectionStart as Element);
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["PLAN"]);
-      fireEvent.click(sectionPlan as Element);
+      fireEvent.click(sectionPlan);
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START", "OPERATE"]);
+      fireEvent.click(sectionStart);
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["OPERATE"]);
+      fireEvent.click(sectionOperate);
       expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
-      fireEvent.click(sectionPlan as Element);
-      fireEvent.click(sectionStart as Element);
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["PLAN", "START"]);
+      fireEvent.click(sectionPlan);
+      fireEvent.click(sectionStart);
+      fireEvent.click(sectionOperate);
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["PLAN", "START", "OPERATE"]);
     });
   });
 });

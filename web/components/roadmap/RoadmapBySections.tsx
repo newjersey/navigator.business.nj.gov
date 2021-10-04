@@ -27,6 +27,7 @@ export const RoadmapBySections = (): ReactElement => {
             expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
             aria-controls={`${sectionName}-content`}
             id={`${sectionName}-header`}
+            data-testid={`${sectionName}-header`}
           >
             <h2 className="flex flex-align-center margin-top-3 margin-bottom-2 tablet:margin-left-3">
               <img src={`/img/section-header-${sectionName}.svg`} alt="section" />{" "}
