@@ -3,7 +3,7 @@
     "config:base"
   ],
   "stabilityDays": 3,
-  "prConcurrentLimit": 10,
+  "prConcurrentLimit": 15,
   "prCreation": "not-pending",
   "labels": ["renovate"],
   "packageRules": [
