@@ -34,7 +34,7 @@ services:
     environment:
       - DYNAMO_ENDPOINT=http://dynamodb-local:8000
   wiremock:
-    image: node:14.18-slim
+    image: node:16.10-slim
     volumes:
       - ./api:/api
       - wiremock_modules:/root/.jdeploy
@@ -50,7 +50,7 @@ services:
     links:
       - wiremock
       - "dynamodb-local"
-    image: node:14.18-slim
+    image: node:16.10-slim
     volumes:
       - ~/.aws/credentials:/root/.aws/credentials:ro
       - ./api:/api
@@ -67,7 +67,7 @@ services:
   web:
     depends_on:
       - api
-    image: node:14.18-slim
+    image: node:16.10-slim
     stdin_open: true
     links:
       - api
