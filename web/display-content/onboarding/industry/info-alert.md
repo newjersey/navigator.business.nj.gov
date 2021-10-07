@@ -1,1 +1,0 @@
-Whatever business you're starting, we offer a comprehensive step-by-step guide to get your business started. If you're starting a restaurant, cosmetology shop, home improvement contractor, or online business, you'll get industry-specific information too. We'll be adding more and more industries soon.

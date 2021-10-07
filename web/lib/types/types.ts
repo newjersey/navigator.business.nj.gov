@@ -83,7 +83,6 @@ export type OnboardingDisplayContent = {
   industry: {
     contentMd: string;
     placeholder: string;
-    infoAlertMd: string;
     specificHomeContractorMd: string;
     specificLiquorQuestion: {
       contentMd: string;
@@ -115,7 +114,6 @@ export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent 
     industry: {
       contentMd: "",
       placeholder: "",
-      infoAlertMd: "",
       specificHomeContractorMd: "",
       specificLiquorQuestion: {
         contentMd: "",

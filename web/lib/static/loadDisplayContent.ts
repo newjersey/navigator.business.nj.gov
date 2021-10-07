@@ -14,7 +14,6 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
   const industry = getMarkdown(loadFile("industry.md"));
   const legalStructure = getMarkdown(loadFile("legal-structure.md"));
   const municipality = getMarkdown(loadFile("municipality.md"));
-  const industryInfoAlert = getMarkdown(loadFile("industry/info-alert.md"));
   const specificHomeContractor = getMarkdown(loadFile("industry/industry-specific/home-contractor.md"));
   const specificLiquor = getMarkdown(loadFile("industry/industry-specific/liquor.md"));
   const specificHomeBased = getMarkdown(loadFile("municipality/home-based-business.md"));
@@ -41,7 +40,6 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
     },
     industry: {
       contentMd: industry.content,
-      infoAlertMd: industryInfoAlert.content,
       specificHomeContractorMd: specificHomeContractor.content,
       specificLiquorQuestion: {
         contentMd: specificLiquor.content,

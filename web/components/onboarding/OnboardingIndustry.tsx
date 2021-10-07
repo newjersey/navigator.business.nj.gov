@@ -6,7 +6,6 @@ import { ALL_INDUSTRIES_ORDERED, IndustryLookup } from "@/display-content/Indust
 import { Content } from "@/components/Content";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
-import { Alert } from "@/components/njwds/Alert";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
@@ -69,9 +68,6 @@ export const OnboardingIndustry = (): ReactElement => {
   return (
     <>
       <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.industry.contentMd}</Content>
-      <Alert variant="info" slim className="margin-bottom-4">
-        <Content>{state.displayContent.industry.infoAlertMd}</Content>
-      </Alert>
       <div className="form-input margin-top-2">
         <FormControl variant="outlined" fullWidth>
           <Select
