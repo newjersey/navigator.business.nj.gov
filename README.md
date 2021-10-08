@@ -2,6 +2,8 @@
 
 This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/business.nj.gov#businessnjgov)
 
+[![CircleCI](https://circleci.com/gh/newjersey/business.nj.gov/tree/main.svg?style=svg)](https://circleci.com/gh/newjersey/business.nj.gov/tree/main)
+
 ## Architecture
 
 Everything is **TypeScript**.
