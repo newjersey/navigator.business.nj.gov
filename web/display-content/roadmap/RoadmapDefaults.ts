@@ -12,7 +12,7 @@ export const RoadmapDefaults: Record<string, string> = {
   roadmapTitleTemplate: "Business Roadmap for ${businessName}",
   loadingText: "Loading...",
   operateDateSubmitButtonText: "Submit",
-  nextAnnualFilingText: "Your Next Annual Report is due on:",
+  nextAnnualFilingText: "Your next Annual Report is due on:",
   dateOfFormationEditText: "Edit Date",
   dateOfFormationErrorText: "Invalid Date",
   calendarFilingDueDateLabel: "Due",
