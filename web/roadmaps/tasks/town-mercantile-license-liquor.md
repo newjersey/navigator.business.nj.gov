@@ -5,10 +5,7 @@ name: "Get Your Liquor and Mercantile License"
 callToActionLink: "${municipalityWebsite}"
 callToActionText: "Visit the ${municipality} Website"
 ---
-
-Now that you confirmed liquor license availability, registered your business, and signed your lease, it's time to obtain your liquor license and mercantile license. 
-
-A mercantile license helps your local government track businesses in the area. Not all cities and towns require a mercantile license, you will want to check your local ordinance or contact your local clerk's office. Below is a list of items to work with your local clerk's office on.
+It's time to obtain your liquor license and mercantile license. A mercantile license helps your local government track businesses in the area. Not all cities and towns require a mercantile license, you will want to check your local ordinance or contact your local clerk's office. Below is a list of items to work with your local clerk's office on.
 
 You can find your city or town clerk through either the [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) (which is different from your city/town clerk) at ${countyClerkPhone}.
 
