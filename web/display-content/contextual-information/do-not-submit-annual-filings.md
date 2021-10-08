@@ -1,3 +1,3 @@
-### What happens if I don't submit my annual filings?
+### Failure to Submit An Annual Filing
 
-It's probably not great.
+If you do not submit your annual filing, your business can be closed, and your business name can be released for another businesses' use.
