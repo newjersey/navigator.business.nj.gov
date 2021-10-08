@@ -21,6 +21,7 @@ import {
   Municipality,
   OnboardingData,
   OnboardingDisplayContent,
+  OnboardingError,
 } from "@/lib/types/types";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
@@ -31,7 +32,7 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
-import { scrollToTop, templateEval } from "@/lib/utils/helpers";
+import { OnboardingErrorLookup, scrollToTop, templateEval } from "@/lib/utils/helpers";
 import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { Alert } from "@/components/njwds/Alert";
@@ -47,7 +48,7 @@ interface Props {
 }
 
 interface OnboardingState {
-  page: number;
+  page?: number;
   onboardingData: OnboardingData;
   displayContent: OnboardingDisplayContent;
   municipalities: Municipality[];
@@ -69,12 +70,6 @@ export const OnboardingContext = createContext<OnboardingContextType>({
   setOnboardingData: () => {},
   onBack: () => {},
 });
-
-type OnboardingError = "REQUIRED_LEGAL" | "REQUIRED_MUNICIPALITY";
-const OnboardingErrorLookup: Record<OnboardingError, string> = {
-  REQUIRED_LEGAL: OnboardingDefaults.errorTextRequiredLegal,
-  REQUIRED_MUNICIPALITY: OnboardingDefaults.errorTextRequiredMunicipality,
-};
 
 const OnboardingPage = (props: Props): ReactElement => {
   useAuthProtectedPage();

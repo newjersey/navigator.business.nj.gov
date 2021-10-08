@@ -62,6 +62,7 @@ export interface OnboardingData {
   dateOfFormation: string | undefined;
 }
 
+export type OnboardingError = "REQUIRED_LEGAL" | "REQUIRED_MUNICIPALITY";
 export interface LicenseData {
   nameAndAddress: NameAndAddress;
   completedSearch: boolean;

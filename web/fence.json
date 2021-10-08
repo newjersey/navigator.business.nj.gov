@@ -11,6 +11,7 @@
     "@mui/styles/*",
     "axios",
     "react-transition-group",
+    "fast-deep-equal/es6/react",
     "next",
     "next/router",
     "next/link",

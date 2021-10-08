@@ -2,6 +2,7 @@ import React, { ReactElement, useContext } from "react";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { setHeaderRole } from "@/lib/utils/helpers";
 
 export const OnboardingHomeBasedBusiness = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
@@ -13,9 +14,13 @@ export const OnboardingHomeBasedBusiness = (): ReactElement => {
     });
   };
 
+  const header = setHeaderRole(3, "h3-element");
+
   return (
     <>
-      <Content>{state.displayContent.industry.specificHomeBasedBusinessQuestion.contentMd}</Content>
+      <Content overrides={{ h3: header }}>
+        {state.displayContent.industry.specificHomeBasedBusinessQuestion.contentMd}
+      </Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label="Home-based Business"
