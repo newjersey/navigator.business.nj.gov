@@ -4,6 +4,6 @@
   "register-for-taxes": ["form-business-entity"],
   "sign-lease": ["form-business-entity", "register-for-taxes"],
   "get-insurance": ["form-business-entity", "register-for-taxes"],
-  "get-insurance-hic": ["form-business-entity", "register-for-taxes"]
+  "get-insurance-hic": ["form-business-entity", "register-for-taxes"],
   "floor-plan-approval-doh": ["form-business-entity", "sign-lease"]
 }
