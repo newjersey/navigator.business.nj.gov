@@ -10,6 +10,7 @@ import dayjs, { Dayjs } from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { OperateDisplayContent } from "@/lib/types/types";
 import { Content } from "../Content";
+import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
 dayjs.extend(advancedFormat);
 
 interface Props {
@@ -122,6 +123,8 @@ export const OperateSection = (props: Props): ReactElement => {
             </button>
           </div>
         </div>
+
+        <FilingsCalendar taxFilings={userData.taxFilings} />
       </div>
     );
   };

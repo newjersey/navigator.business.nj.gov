@@ -186,3 +186,21 @@ $lg: 64em; //desktop and up (1024px)
     color: #466c04;
   }
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+table,
+th,
+td {
+  border: 2px solid #a9aeb1;
+}
+
+td {
+  height: 15rem;
+  vertical-align: top;
+  padding: 1rem;
+}

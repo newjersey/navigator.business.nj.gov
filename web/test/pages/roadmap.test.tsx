@@ -23,6 +23,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { UserData } from "@/lib/types/types";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -39,12 +40,14 @@ describe("roadmap page", () => {
 
   const renderRoadmapPage = (): RenderResult => {
     return render(
-      <RoadmapPage
-        displayContent={{
-          contentMd: "",
-          operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
-        }}
-      />
+      <ThemeProvider theme={createTheme()}>
+        <RoadmapPage
+          displayContent={{
+            contentMd: "",
+            operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
+          }}
+        />
+      </ThemeProvider>
     );
   };
 
@@ -269,14 +272,16 @@ describe("roadmap page", () => {
     const statefulRender = (userData: UserData): RenderResult => {
       setupStatefulUserDataContext();
       return render(
-        <WithStatefulUserData initialUserData={userData}>
-          <RoadmapPage
-            displayContent={{
-              contentMd: "",
-              operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
-            }}
-          />
-        </WithStatefulUserData>
+        <ThemeProvider theme={createTheme()}>
+          <WithStatefulUserData initialUserData={userData}>
+            <RoadmapPage
+              displayContent={{
+                contentMd: "",
+                operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
+              }}
+            />
+          </WithStatefulUserData>
+        </ThemeProvider>
       );
     };
 
