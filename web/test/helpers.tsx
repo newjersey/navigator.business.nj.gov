@@ -11,6 +11,7 @@ import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, Roadmap, UserDataError } from "@/lib/types/types";
 import os from "os";
+import { RenderResult } from "@testing-library/react";
 
 export const withAuth = (
   subject: ReactElement,
@@ -85,4 +86,22 @@ export const getPathSeparator = (): string => {
   }
 
   return "/";
+};
+
+export const getByTextAcrossElements = (subject: RenderResult, text: string): HTMLElement => {
+  return subject.getByText((content, node) => {
+    if (!node) throw "html node does not exist";
+    const hasText = (node: Element) => node.textContent === text;
+    const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as HTMLElement));
+    return hasText(node) && childrenDontHaveText;
+  });
+};
+
+export const queryByTextAcrossElements = (subject: RenderResult, text: string): HTMLElement | null => {
+  return subject.queryByText((content, node) => {
+    if (!node) throw "html node does not exist";
+    const hasText = (node: Element) => node.textContent === text;
+    const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as HTMLElement));
+    return hasText(node) && childrenDontHaveText;
+  });
 };
