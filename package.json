@@ -14,7 +14,7 @@
     "fences": "lerna run --stream fences",
     "lint": "lerna run --stream lint",
     "lint:fix": "lerna run lint:fix",
-    "preinstall": "npm install -g @aws-amplify/cli@6.0.1",
+    "preinstall": "npm install -g @aws-amplify/cli@6.2.1",
     "postinstall": "lerna bootstrap --force-local",
     "prettier": "lerna run --stream prettier",
     "prettier:check": "lerna run --stream prettier:check",
