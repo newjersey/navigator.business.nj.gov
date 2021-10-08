@@ -5,5 +5,4 @@ name: "Search Licenses"
 callToActionLink: "https://business.nj.gov/licensing-and-certification-guide"
 callToActionText: "Search Licenses"
 ---
-
-After you've registered and formed your business, you can search for licenses and apply to any that are relevant to your industry. Some businesses do not require a specific state license unless they sell a regulated product or service.
+You can search for licenses and apply to any that are relevant to your industry. Some businesses do not require a specific state license unless they sell a regulated product or service.
