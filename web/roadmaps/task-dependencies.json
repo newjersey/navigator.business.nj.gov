@@ -5,5 +5,9 @@
   "sign-lease": ["form-business-entity", "register-for-taxes"],
   "get-insurance": ["form-business-entity", "register-for-taxes"],
   "get-insurance-hic": ["form-business-entity", "register-for-taxes"],
-  "floor-plan-approval-doh": ["form-business-entity", "sign-lease"]
+  "floor-plan-approval-doh": ["form-business-entity", "sign-lease"],
+  "search-licenses": ["form-business-entity", "register-for-taxes"],
+  "site-safety-permits-cosmetology": ["sign-lease", "building-permit"],
+  "town-mercantile-license-liquor": ["register-for-taxes", "sign-lease", "liquor-license-availability"],
+  "zoning": ["sign-lease"]
 }
