@@ -143,7 +143,7 @@ export const OperateSection = (props: Props): ReactElement => {
           data-testid="operate-header"
         >
           <h2 className="flex flex-align-center margin-top-3 margin-bottom-2 tablet:margin-left-3">
-            <img src={`/img/section-header-operate.svg`} alt="section" />{" "}
+            <img className="height-5" src={`/img/section-header-operate.svg`} alt="section" />{" "}
             <span className="padding-left-205">{SectionDefaults.OPERATE}</span>
           </h2>
         </AccordionSummary>

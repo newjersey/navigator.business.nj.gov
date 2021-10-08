@@ -30,7 +30,7 @@ export const RoadmapBySections = (): ReactElement => {
             data-testid={`${sectionName}-header`}
           >
             <h2 className="flex flex-align-center margin-top-3 margin-bottom-2 tablet:margin-left-3">
-              <img src={`/img/section-header-${sectionName}.svg`} alt="section" />{" "}
+              <img className="height-5" src={`/img/section-header-${sectionName}.svg`} alt="section" />{" "}
               <span className="padding-left-205">{publicName}</span>
             </h2>
           </AccordionSummary>
