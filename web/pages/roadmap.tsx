@@ -99,7 +99,7 @@ const RoadmapPage = (props: Props): ReactElement => {
                   <GreyCallout
                     link={{
                       text: RoadmapDefaults.greyBoxEditText,
-                      href: "/onboarding",
+                      href: "/profile",
                       onClick: () => {
                         analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
                       },

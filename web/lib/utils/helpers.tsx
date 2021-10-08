@@ -1,6 +1,7 @@
 import { useEffect, useRef, ReactElement } from "react";
-import { Roadmap, Step, Task, UserData, SectionType } from "@/lib/types/types";
+import { Roadmap, Step, Task, UserData, SectionType, OnboardingError } from "@/lib/types/types";
 import { NavDefaults } from "@/display-content/NavDefaults";
+import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);
@@ -67,6 +68,11 @@ export const isStepCompleted = (step: Step, userData: UserData | undefined): boo
     const taskProgress = (userData?.taskProgress && userData.taskProgress[it.id]) || "NOT_STARTED";
     return taskProgress === "COMPLETED";
   });
+};
+
+export const OnboardingErrorLookup: Record<OnboardingError, string> = {
+  REQUIRED_LEGAL: OnboardingDefaults.errorTextRequiredLegal,
+  REQUIRED_MUNICIPALITY: OnboardingDefaults.errorTextRequiredMunicipality,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {

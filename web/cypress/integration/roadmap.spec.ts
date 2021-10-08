@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { clickEdit, clickNext, completeOnboarding } from "../support/helpers";
+import { clickEdit, clickNext, clickSave, clickToastLink, completeOnboarding } from "../support/helpers";
 
 describe("Roadmap [feature] [all]", () => {
   beforeEach(() => {
@@ -57,24 +57,26 @@ describe("Roadmap [feature] [all]", () => {
 
     cy.get("[data-back-to-roadmap]").click({ force: true });
 
-    // editing data
+    // editing data in the Profile page
     clickEdit();
 
     cy.get('input[aria-label="Business name"]').clear();
     cy.get('input[aria-label="Business name"]').type("Applebee's");
-    clickNext();
-
     cy.get('[aria-label="Industry"]').click({ force: true });
     cy.get('[data-value="restaurant"]').click({ force: true });
-    clickNext();
-    clickNext();
-    clickNext();
+    cy.get('[aria-label="Legal structure"]').click({ force: true });
+    cy.get('[data-value="limited-liability-company"]').click({ force: true });
+    cy.get('[aria-label="Location"]').click({ force: true });
+    cy.contains("Allendale").click({ force: true });
+
+    clickSave();
+    clickToastLink();
 
     // check roadmap
     cy.get('[data-business-name="Applebee\'s"]').should("exist");
     cy.get('[data-industry="restaurant"]').should("exist");
-    cy.get('[data-legal-structure="general-partnership"]').should("exist");
-    cy.get('[data-municipality="Absecon"]').should("exist");
+    cy.get('[data-legal-structure="limited-liability-company"]').should("exist");
+    cy.get('[data-municipality="Allendale"]').should("exist");
 
     cy.get('[data-task="check-site-requirements"]').should("exist");
     cy.get('[data-task="food-safety-course"]').should("exist");

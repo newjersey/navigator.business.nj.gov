@@ -12,7 +12,7 @@ export const OnboardingButtonGroup = (): ReactElement => {
 
   return (
     <div className="float-right fdr margin-bottom-8">
-      {state.page > 1 && (
+      {(state.page || 1) > 1 && (
         <button className="usa-button usa-button--outline" onClick={back} data-testid="back">
           {OnboardingDefaults.backButtonText}
         </button>

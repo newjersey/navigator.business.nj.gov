@@ -5,6 +5,19 @@ export const clickNext = (): void => {
   cy.wait(1000); // wait for onboarding animation
 };
 
+/* eslint-disable cypress/no-unnecessary-waiting */
+export const clickSave = (): void => {
+  cy.wait(300);
+  cy.get('[data-testid="save"]:visible').click({ force: true });
+  cy.wait(1000); // wait for onboarding animation
+};
+
+export const clickToastLink = (): void => {
+  cy.wait(300);
+  cy.get('[data-testid="toast-link"]:visible').click({ force: true });
+  cy.wait(1000); // wait for onboarding animation
+};
+
 export const clickEdit = (): void => {
   cy.get('[data-testid="grey-callout-link"]').click();
   cy.wait(1000); // wait for onboarding animation
