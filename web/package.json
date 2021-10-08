@@ -40,7 +40,7 @@
     "airtable": "0.11.1",
     "aws-amplify": "4.2.9",
     "babel-jest": "27.2.4",
-    "date-fns": "2.24.0",
+    "date-fns": "2.25.0",
     "focus-trap-react": "8.8.1",
     "dayjs": "1.10.7",
     "gray-matter": "4.0.3",
