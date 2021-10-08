@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   cypress: cypress-io/cypress@1.29.0
+  vulnerability-checker: whitesource/vulnerability-checker@19.10.1
 
 executors:
   with-chrome:
@@ -24,8 +25,7 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v3-npm-deps-{{ checksum "package-lock.json" }}
-            - v3-npm-deps-
+            - v4-npm-deps-{{ checksum "package-lock.json" }}
       - run: 
           name: Install npm packages
           command: npm install --unsafe-perm
@@ -35,6 +35,7 @@ commands:
       - run: 
           name: Configure Serverless
           command: npm run --prefix=api serverless config credentials -- --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
+
   code-quality:
     steps: 
       - run: 
@@ -59,6 +60,69 @@ commands:
           name: Run API Unit Tests
           command: npm run --prefix=api test:ci
 
+  deploy-serverless:
+    steps:
+      - run:
+          name: Deploy Serverless
+          command: npm run --prefix=api serverless deploy -- --verbose --stage ${STAGE} --region us-east-1
+
+  deploy-amplify:
+    steps:
+      - run: 
+          name: Deploy Amplify
+          command: ./scripts/amplify-ci/publish.sh
+
+  set-dev-env-vars:
+    steps:
+      - run: 
+          name: Set Environment Variables
+          command: |
+            echo 'export API_BASE_URL=$API_BASE_URL_AWS_DEV' >> $BASH_ENV
+            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_DEV' >> $BASH_ENV
+            echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_DEV' >> $BASH_ENV
+            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
+            echo 'export LICENSE_STATUS_BASE_URL=$LICENSE_STATUS_BASE_URL_DEV' >> $BASH_ENV
+            echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_DEV' >> $BASH_ENV
+            echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_DEV' >> $BASH_ENV
+            echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_DEV' >> $BASH_ENV
+            echo 'export REDIRECT_URL=$REDIRECT_URL_DEV' >> $BASH_ENV
+
+  set-staging-env-vars:
+    steps:
+      - run: 
+          name: Set Environment Variables
+          command: |
+            echo 'export API_BASE_URL=$API_BASE_URL_AWS_STAGING' >> $BASH_ENV
+            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_STAGING' >> $BASH_ENV
+            echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_STAGING' >> $BASH_ENV
+            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_STAGING' >> $BASH_ENV
+            echo 'export LICENSE_STATUS_BASE_URL=$LICENSE_STATUS_BASE_URL_STAGING' >> $BASH_ENV
+            echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_STAGING' >> $BASH_ENV
+            echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_STAGING' >> $BASH_ENV
+            echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_STAGING' >> $BASH_ENV
+            echo 'export REDIRECT_URL=$REDIRECT_URL_STAGING' >> $BASH_ENV
+
+  set-prod-env-vars:
+    steps:
+      - run: 
+          name: Set Environment Variables
+          command: |
+            echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
+            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD' >> $BASH_ENV
+            echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_PROD' >> $BASH_ENV
+            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_PROD' >> $BASH_ENV
+            echo 'export LICENSE_STATUS_BASE_URL=$LICENSE_STATUS_BASE_URL_PROD' >> $BASH_ENV
+            echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_PROD' >> $BASH_ENV
+            echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_PROD' >> $BASH_ENV
+            echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_PROD' >> $BASH_ENV
+            echo 'export REDIRECT_URL=$REDIRECT_URL_PROD' >> $BASH_ENV
+
+  deploy:
+    steps:
+      - configure
+      - deploy-serverless
+      - deploy-amplify
+
 jobs:
   build:
     docker:
@@ -68,15 +132,128 @@ jobs:
       - configure
       - code-quality
       - save_cache:
-          key: v3-npm-deps-{{ checksum "package-lock.json" }}
+          key: v4-npm-deps-{{ checksum "package-lock.json" }}
           paths:
-            - node_modules
-            - web/node_modules
-            - api/node_modules
+            - ./node_modules
+            - ./web/node_modules
+            - ./api/node_modules
       - store_test_results:
           path: reports/test_results
 
+  deploy-dev:
+    docker:
+      - image: node:14.18.0-buster
+    steps:
+      - set-dev-env-vars
+      - deploy
+    environment:
+      STAGE: dev
+      AMPLIFY_ENV: dev
+      MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
+
+  deploy-staging:
+    docker:
+      - image: node:14.18.0-buster
+    steps:
+      - set-staging-env-vars
+      - deploy
+    environment:
+      STAGE: staging
+      AMPLIFY_ENV: staging
+      MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
+
+  deploy-production:
+    docker:
+      - image: node:14.18.0-buster
+    steps:
+      - set-prod-env-vars
+      - deploy
+    environment:
+      STAGE: prod
+      AMPLIFY_ENV: prod
+      MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop
+
 workflows:
+  release-pipeline:
+     jobs: 
+      - build:
+          filters:
+            branches:
+             only:
+              - main
+      - deploy-dev:
+          name: dev-deploy
+          filters:
+            branches:
+             only:
+              - main
+          requires: 
+          - build
+      - vulnerability-checker/scan: 
+          filters:
+            branches:
+             only:
+              - main
+      - staging-hold:
+          type: approval
+          requires:
+            - dev-deploy
+            - cypress/run
+            - vulnerability-checker/scan
+          filters:
+            branches:
+             only:
+              - main
+      - deploy-staging:
+          name: staging-deploy
+          filters:
+            branches:
+             only:
+              - main
+          requires: 
+          - staging-hold
+      - production-hold:
+          type: approval
+          requires:
+            - staging-deploy
+      - deploy-production:
+          name: production-deploy
+          filters:
+            branches:
+             only:
+              - main
+          requires: 
+          - production-hold
+      - cypress/install:
+          executor: with-chrome
+          post-install: 
+            - run: ./scripts/amplify-ci/configure.sh
+            - run: apt update
+            - run: apt install -y openjdk-11-jdk-headless
+          filters:
+            branches:
+             only:
+              - main
+      - cypress/run:
+          executor: with-chrome
+          browser: chrome
+          working_directory: web
+          build: apt update && apt install -y openjdk-11-jdk-headless && npm run build --if-present
+          record: false
+          start: npm --prefix=../api start & npm --prefix=../api run start:wiremock & npm start
+          attach-workspace: true
+          post-steps:
+            - store_test_results:
+                path: web/cypress/results
+          requires: 
+          - cypress/install
+          store_artifacts: true
+          filters:
+            branches:
+             only:
+              - main
+
+
   build-and-test:
     jobs:
       - build:
