@@ -396,7 +396,6 @@ describe("task page", () => {
       });
       useMockRoadmapWithTask(task);
       subject = renderPage(task);
-      expect(subject.queryByText(TaskDefaults.unlocksAlertPlural, { exact: false })).not.toBeInTheDocument();
       expect(subject.queryByText(TaskDefaults.unlocksAlertSingular, { exact: false })).toBeInTheDocument();
       expect(subject.queryByText("Do this next", { exact: false })).toBeInTheDocument();
       expect(subject.getByText("Do this next", { exact: false }).getAttribute("href")).toEqual(
@@ -416,9 +415,6 @@ describe("task page", () => {
       subject = renderPage(task);
 
       expect(subject.queryByText(TaskDefaults.unlocksAlertPlural, { exact: false })).toBeInTheDocument();
-      expect(
-        subject.queryByText(TaskDefaults.unlocksAlertSingular, { exact: false })
-      ).not.toBeInTheDocument();
       expect(subject.queryByText("Do this next", { exact: false })).toBeInTheDocument();
       expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();
       expect(subject.getByText("Do this next", { exact: false }).getAttribute("href")).toEqual(
