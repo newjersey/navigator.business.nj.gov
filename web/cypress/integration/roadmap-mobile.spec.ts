@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { clickEdit, clickNext, completeOnboarding } from "../support/helpers";
+import { clickBack, clickEdit, clickNext, clickSave, completeOnboarding } from "../support/helpers";
 
 describe("Roadmap [feature] [all]", () => {
   beforeEach(() => {
@@ -81,13 +81,11 @@ describe("Roadmap [feature] [all]", () => {
 
     cy.get('input[aria-label="Business name"]').clear();
     cy.get('input[aria-label="Business name"]').type("Applebee's");
-    clickNext();
 
     cy.get('[aria-label="Industry"]').click({ force: true });
     cy.get('[data-value="restaurant"]').click({ force: true });
-    clickNext();
-    clickNext();
-    clickNext();
+    clickSave();
+    clickBack();
 
     // check roadmap
     cy.get('[data-business-name="Applebee\'s"]').should("exist");

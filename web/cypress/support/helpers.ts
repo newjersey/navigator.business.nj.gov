@@ -12,6 +12,13 @@ export const clickSave = (): void => {
   cy.wait(1000); // wait for onboarding animation
 };
 
+/* eslint-disable cypress/no-unnecessary-waiting */
+export const clickBack = (): void => {
+  cy.wait(300);
+  cy.get('[data-testid="back"]:visible').click({ force: true });
+  cy.wait(1000); // wait for onboarding animation
+};
+
 export const clickToastLink = (): void => {
   cy.wait(300);
   cy.get('[data-testid="toast-link"]:visible').click({ force: true });
