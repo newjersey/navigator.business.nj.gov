@@ -84,7 +84,7 @@ export const OnboardingIndustry = (): ReactElement => {
             <MenuItem value="generic" data-testid="generic">
               {renderOption("generic")}
             </MenuItem>
-            <Divider light />
+            <Divider style={{ background: "#e6e6e6" }} />
             {ALL_INDUSTRIES_ORDERED.filter((industry) => industry !== "generic").map((industry) => (
               <MenuItem key={industry} value={industry} data-testid={industry}>
                 {renderOption(industry)}
