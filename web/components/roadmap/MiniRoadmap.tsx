@@ -5,11 +5,8 @@ import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
 import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createRoadmapSections, handleAccordionStateChange, isStepCompleted } from "@/lib/utils/helpers";
-import { SectionType } from "@/lib/types/types";
-import { SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { getSectionNames } from "@/lib/utils/helpers";
+import { getSectionNames, isStepCompleted } from "@/lib/utils/helpers";
+import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 
 interface Props {
   activeTaskId: string;
@@ -25,9 +22,8 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   );
   const [activeStepNumber, setActiveStepNumber] = useState<number | undefined>(getActiveStepNumber());
   const [openSteps, setOpenSteps] = useState<number[]>([]);
-  const { userData, update } = useUserData();
+  const { userData } = useUserData();
   const roadmapExists = !!roadmap;
-  const roadmapSections = getSectionNames(roadmap);
 
   useEffect(() => {
     const activeStep = getActiveStepNumber();
@@ -44,86 +40,61 @@ export const MiniRoadmap = (props: Props): ReactElement => {
     }
   };
 
-  const getSection = (sectionType: SectionType, openAccordion: boolean | undefined) => {
-    const sectionName = sectionType.toLowerCase();
-    const publicName = SectionDefaults[sectionType];
-    return (
-      <div key={sectionName} data-testid={`section-${sectionName}`}>
-        <Accordion
-          elevation={0}
-          onChange={() => handleAccordionStateChange(sectionType, openAccordion, userData, update)}
-          expanded={openAccordion}
-        >
-          <AccordionSummary
-            expandIcon={<Icon className="usa-icon--size-3 text-ink">expand_more</Icon>}
-            aria-controls={`${sectionName}-content`}
-            id={`${sectionName}-header`}
-          >
-            <h2 className="flex flex-align-center margin-y-2">
-              <img src={`/img/section-header-${sectionName}.svg`} alt="section" height={32} />{" "}
-              <span className="padding-left-105">{publicName}</span>
-            </h2>
-          </AccordionSummary>
-          <AccordionDetails>
-            {roadmap?.steps
-              .filter((step) => step.section === sectionType)
-              .map((step, index, array) => (
-                <div
-                  key={step.step_number}
-                  id={`vertical-content-${step.step_number}`}
-                  className="margin-y-2"
-                >
-                  <div className="fdr fac padding-left-05">
-                    <VerticalStepIndicator
-                      stepNumber={step.step_number}
-                      last={index === array.length - 1}
-                      isOpen={openSteps.includes(step.step_number)}
-                      active={step.step_number === activeStepNumber}
-                      small={true}
-                      completed={isStepCompleted(step, userData)}
-                      key={openSteps.join(",")}
-                    />
-                    <button
-                      className="usa-button--unstyled width-100"
-                      onClick={() => toggleStep(step.step_number)}
-                      aria-expanded={openSteps.includes(step.step_number)}
-                    >
-                      <div className=" step-label sm fdr fjc fac">
-                        <h3
-                          className={`margin-0 font-body-xs line-height-body-2 text-ink ${
-                            step.step_number === activeStepNumber ? "text-primary-dark" : "weight-unset"
-                          }`}
-                          data-step={step.step_number}
-                        >
-                          {step.name}
-                        </h3>
-                        <div className="mla fdc fac">
-                          <Icon className="usa-icon--size-3 text-ink">
-                            {openSteps.includes(step.step_number) ? "expand_less" : "expand_more"}
-                          </Icon>
-                        </div>
+  return (
+    <>
+      {getSectionNames(roadmap).map((section) => (
+        <SectionAccordion key={section} sectionType={section} mini={true}>
+          {roadmap?.steps
+            .filter((step) => step.section === section)
+            .map((step, index, array) => (
+              <div key={step.step_number} id={`vertical-content-${step.step_number}`} className="margin-y-2">
+                <div className="fdr fac padding-left-05">
+                  <VerticalStepIndicator
+                    stepNumber={step.step_number}
+                    last={index === array.length - 1}
+                    isOpen={openSteps.includes(step.step_number)}
+                    active={step.step_number === activeStepNumber}
+                    small={true}
+                    completed={isStepCompleted(step, userData)}
+                    key={openSteps.join(",")}
+                  />
+                  <button
+                    className="usa-button--unstyled width-100"
+                    onClick={() => toggleStep(step.step_number)}
+                    aria-expanded={openSteps.includes(step.step_number)}
+                  >
+                    <div className=" step-label sm fdr fjc fac">
+                      <h3
+                        className={`margin-0 font-body-xs line-height-body-2 text-ink ${
+                          step.step_number === activeStepNumber ? "text-primary-dark" : "weight-unset"
+                        }`}
+                        data-step={step.step_number}
+                      >
+                        {step.name}
+                      </h3>
+                      <div className="mla fdc fac">
+                        <Icon className="usa-icon--size-3 text-ink">
+                          {openSteps.includes(step.step_number) ? "expand_less" : "expand_more"}
+                        </Icon>
                       </div>
-                    </button>
-                  </div>
-                  <div className="margin-left-5 font-sans-xs">
-                    {openSteps.includes(step.step_number) &&
-                      step.tasks.map((task) => (
-                        <MiniRoadmapTask
-                          key={task.id}
-                          task={task}
-                          active={task.id === props.activeTaskId}
-                          onTaskClick={props.onTaskClick}
-                        />
-                      ))}
-                  </div>
+                    </div>
+                  </button>
                 </div>
-              ))}
-          </AccordionDetails>
-        </Accordion>
-        <hr className="margin-y-2 bg-base-lighter" />
-      </div>
-    );
-  };
-
-  return <>{createRoadmapSections(roadmapSections, userData, getSection)}</>;
+                <div className="margin-left-5 font-sans-xs">
+                  {openSteps.includes(step.step_number) &&
+                    step.tasks.map((task) => (
+                      <MiniRoadmapTask
+                        key={task.id}
+                        task={task}
+                        active={task.id === props.activeTaskId}
+                        onTaskClick={props.onTaskClick}
+                      />
+                    ))}
+                </div>
+              </div>
+            ))}
+        </SectionAccordion>
+      ))}
+    </>
+  );
 };

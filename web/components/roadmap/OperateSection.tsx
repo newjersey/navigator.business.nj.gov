@@ -1,9 +1,7 @@
 import React, { ReactElement, useEffect } from "react";
-import { Accordion, AccordionSummary, AccordionDetails, TextField } from "@mui/material";
-import { handleAccordionStateChange } from "@/lib/utils/helpers";
+import { TextField } from "@mui/material";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { RoadmapDefaults, SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
-import { Icon } from "@/components/njwds/Icon";
+import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
@@ -11,6 +9,8 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import { OperateDisplayContent } from "@/lib/types/types";
 import { Content } from "../Content";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
+import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
+
 dayjs.extend(advancedFormat);
 
 interface Props {
@@ -23,7 +23,6 @@ export const OperateSection = (props: Props): ReactElement => {
   const [showError, setShowError] = React.useState<boolean>(false);
 
   const { userData, update } = useUserData();
-  const isOpen = userData?.preferences.roadmapOpenSections.includes("OPERATE");
 
   useEffect(
     function showFilingsWhenTheyExist() {
@@ -121,28 +120,8 @@ export const OperateSection = (props: Props): ReactElement => {
   };
 
   return (
-    <div data-testid="section-operate">
-      <Accordion
-        elevation={0}
-        expanded={isOpen}
-        onChange={() => handleAccordionStateChange("OPERATE", isOpen, userData, update)}
-      >
-        <AccordionSummary
-          expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
-          aria-controls="operate-content"
-          id="operate-header"
-          data-testid="operate-header"
-        >
-          <h2 className="flex flex-align-center margin-top-3 margin-bottom-2 tablet:margin-left-3">
-            <img className="height-5" src={`/img/section-header-operate.svg`} alt="section" />{" "}
-            <span className="padding-left-205">{SectionDefaults.OPERATE}</span>
-          </h2>
-        </AccordionSummary>
-        <AccordionDetails>
-          <div className="margin-y-3">{showDatepicker ? renderDatepicker() : renderFilings()}</div>
-        </AccordionDetails>
-      </Accordion>
-      <hr className="margin-y-3 bg-base-lighter" />
-    </div>
+    <SectionAccordion sectionType="OPERATE">
+      <div className="margin-y-3">{showDatepicker ? renderDatepicker() : renderFilings()}</div>
+    </SectionAccordion>
   );
 };

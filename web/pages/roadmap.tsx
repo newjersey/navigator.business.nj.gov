@@ -7,7 +7,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
-import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { RoadmapDisplayContent } from "@/lib/types/types";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { Content } from "@/components/Content";
@@ -17,9 +17,10 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import analytics from "@/lib/utils/analytics";
 import { CircularProgress } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";
-import { RoadmapBySections } from "@/components/roadmap/RoadmapBySections";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { OperateSection } from "@/components/roadmap/OperateSection";
+import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
+import { Step } from "@/components/Step";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -131,7 +132,15 @@ const RoadmapPage = (props: Props): ReactElement => {
                 </div>
               ) : (
                 <>
-                  <RoadmapBySections />
+                  {getSectionNames(roadmap).map((section) => (
+                    <SectionAccordion key={section} sectionType={section}>
+                      {roadmap.steps
+                        .filter((step) => step.section === section)
+                        .map((step, index, array) => (
+                          <Step key={step.step_number} step={step} last={index === array.length - 1} />
+                        ))}
+                    </SectionAccordion>
+                  ))}
                   <OperateSection displayContent={props.displayContent.operateDisplayContent} />
                 </>
               )}
