@@ -18,7 +18,7 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import { useRouter } from "next/router";
 import { Icon } from "@/components/njwds/Icon";
-import { Unlocks } from "@/components/tasks/Unlocks";
+//import { Unlocks } from "@/components/tasks/Unlocks";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -119,7 +119,9 @@ const TaskPage = (props: Props): ReactElement => {
                 <TaskHeader task={props.task} />
                 {getUnlockedBy()}
                 {getTaskContent()}
+                {/* restore when #470 is decided
                 <Unlocks taskLinks={taskFromRoadmap?.unlocks || []} isLoading={!taskFromRoadmap} />
+                */}
                 <TaskCTA
                   link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
                   text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
