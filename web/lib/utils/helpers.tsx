@@ -115,40 +115,6 @@ export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => 
   return [...new Set(sections)];
 };
 
-export const handleAccordionStateChange = async (
-  sectionType: SectionType,
-  expanded: boolean | undefined,
-  userData: UserData | undefined,
-  update: (newUserData: UserData | undefined) => Promise<void>
-): Promise<void> => {
-  const roadmapOpenSections = userData?.preferences.roadmapOpenSections;
-  if (!roadmapOpenSections) return;
-
-  if (expanded) {
-    const newUserData = {
-      ...userData,
-      preferences: {
-        ...userData.preferences,
-        roadmapOpenSections: roadmapOpenSections?.filter(
-          (roadmapOpenSection) => roadmapOpenSection !== sectionType
-        ),
-      },
-    };
-
-    await update(newUserData);
-  } else {
-    const newUserData = {
-      ...userData,
-      preferences: {
-        ...userData?.preferences,
-        roadmapOpenSections: [...userData?.preferences.roadmapOpenSections, sectionType],
-      },
-    };
-
-    await update(newUserData);
-  }
-};
-
 export const createRoadmapSections = (
   roadmapSections: SectionType[],
   userData: UserData | undefined,
