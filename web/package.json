@@ -70,7 +70,7 @@
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "cross-env": "7.0.3",
-    "cspell": "5.11.1",
+    "cspell": "5.12.3",
     "cypress": "8.5.0",
     "cypress-audit": "1.0.0",
     "cypress-dotenv": "2.0.0",
