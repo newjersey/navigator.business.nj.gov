@@ -28,7 +28,7 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@aws-amplify/ui-react": "1.2.19",
+    "@aws-amplify/ui-react": "1.2.20",
     "@emotion/react": "11.4.1",
     "@emotion/styled": "11.3.0",
     "@mui/lab": "5.0.0-alpha.49",
