@@ -11,7 +11,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { Unlocks } from "@/components/tasks/Unlocks";
+//import { Unlocks } from "@/components/tasks/Unlocks";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 
@@ -116,7 +116,9 @@ export const LicenseTask = (props: Props): ReactElement => {
           <div className="margin-3 height-full">
             <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
             <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+            {/* restore when #470 is decided
             <Unlocks taskLinks={taskFromRoadmap?.unlocks || []} isLoading={!taskFromRoadmap} />
+            */}
             <div className="fdc margin-top-4">
               <a
                 href={callToActionLink}
