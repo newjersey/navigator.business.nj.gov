@@ -45,10 +45,7 @@ export const NavSideBarUserSettings = (): ReactElement => {
             {NavDefaults.myNJAccountText}
           </a>
           <hr className="bg-base-lighter" />
-          <Link
-            href="/profile"
-            passHref
-          >
+          <Link href="/profile" passHref>
             <a href="/profile" className="text-no-underline override-text-base">
               {NavDefaults.profileLinkText}
             </a>
