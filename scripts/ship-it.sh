@@ -4,6 +4,7 @@ cd $(git rev-parse --show-toplevel)
 
 set -e
 
+./scripts/lint-fence-spell.sh
 # check if uncommited changes
 changed_files=$(git status --porcelain | wc -l)
 if [ $changed_files -ne 0 ]; then
@@ -26,4 +27,4 @@ function print_success {
 }
 
 # run tests, feature tests, and push
- ./scripts/pre-commit.sh && ./scripts/feature-tests.sh && git push "$@" && print_success
+ ./scripts/test.sh && ./scripts/feature-tests.sh && git push "$@" && print_success
