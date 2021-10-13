@@ -62,7 +62,7 @@ commands:
 jobs:
   build:
     docker:
-      - image: node:14.18.0-buster
+      - image: node:14.18.1-buster
     resource_class: large
     steps:
       - configure
