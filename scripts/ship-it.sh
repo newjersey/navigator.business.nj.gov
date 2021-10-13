@@ -4,15 +4,6 @@ cd $(git rev-parse --show-toplevel)
 
 set -e
 
-npm run typecheck
-
-npm run --prefix=web typecheck:cypress
-
-# format files
-npm run prettier
-
-npm --prefix=web run spellcheck
-
 # check if uncommited changes
 changed_files=$(git status --porcelain | wc -l)
 if [ $changed_files -ne 0 ]; then
@@ -34,8 +25,5 @@ function print_success {
   echo "                                                                      "
 }
 
-npm --prefix=web run fences
-npm --prefix=api run fences
-
 # run tests, feature tests, and push
-npm --prefix=web run lint && npm --prefix=api run lint && ./scripts/test.sh && ./scripts/feature-tests.sh && git push && print_success
+ ./scripts/pre-commit.sh && ./scripts/feature-tests.sh && git push "$@" && print_success
