@@ -102,29 +102,20 @@ export const OperateSection = (props: Props): ReactElement => {
   );
 
   const renderFilings = (): ReactElement => {
-    if (!userData || userData.taxFilings.length === 0) return <></>;
-    const annualFilingDueDate = userData.taxFilings[0].dueDate;
-    const formattedDate = dayjs(annualFilingDueDate, "YYYY-MM-DD").format("MMMM Do, YYYY");
-
     return (
       <div className="tablet:margin-x-3">
         <Content key="annualFilingMd">{props.displayContent.annualFilingMd}</Content>
-        <div className="padding-2 margin-top-4 border-base-lighter border-1px radius-md">
-          <div className="display-inline tablet:display-block tablet:display-flex tablet:flex-column tablet:flex-justify">
-            <div className="display-inline tablet:display-block">
-              <div className="text-bold tablet:display-inline">{RoadmapDefaults.nextAnnualFilingText}</div>
-              <span className="tablet:margin-left-1"> {formattedDate}</span>
-            </div>
-            <button
-              className="usa-button usa-button--unstyled underline display-inline width-auto margin-left-2 tablet:margin-left-0"
-              onClick={() => setShowDatepicker(true)}
-            >
-              {RoadmapDefaults.dateOfFormationEditText}
-            </button>
-          </div>
-        </div>
+        <p>
+          {RoadmapDefaults.dateOfFormationHelperText}{" "}
+          <button
+            className="usa-button usa-button--unstyled underline display-inline width-auto margin-left-2 tablet:margin-left-0"
+            onClick={() => setShowDatepicker(true)}
+          >
+            {RoadmapDefaults.dateOfFormationEditText}
+          </button>
+        </p>
 
-        <FilingsCalendar taxFilings={userData.taxFilings} />
+        <FilingsCalendar taxFilings={userData?.taxFilings || []} />
       </div>
     );
   };

@@ -50,14 +50,14 @@ describe("<OperateSection />", () => {
     useMockOnboardingData({ dateOfFormation: undefined });
     const subject = renderSection(<OperateSection displayContent={emptyContent} />);
     expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeInTheDocument();
-    expect(subject.queryByText(RoadmapDefaults.nextAnnualFilingText)).not.toBeInTheDocument();
+    expect(subject.queryByText(RoadmapDefaults.calendarHeader)).not.toBeInTheDocument();
   });
 
-  it("renders annual filing date when dateOfFormation is defined", () => {
+  it("renders calendar when dateOfFormation is defined", () => {
     useMockOnboardingData({ dateOfFormation: "2020-01-01" });
     const subject = renderSection(<OperateSection displayContent={emptyContent} />);
     expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).not.toBeInTheDocument();
-    expect(subject.queryByText(RoadmapDefaults.nextAnnualFilingText)).toBeInTheDocument();
+    expect(subject.queryByText(RoadmapDefaults.calendarHeader)).toBeInTheDocument();
   });
 
   it("updates date of formation to the first day of the provided month and year", () => {
@@ -76,20 +76,6 @@ describe("<OperateSection />", () => {
     expect(currentUserData().onboardingData.dateOfFormation).toEqual(`${currentMonthAndYear}-01`);
   });
 
-  it("displays next annual tax date from userData when dateOfFormation has been provided", () => {
-    const annualFiling = generateTaxFiling({ dueDate: "2021-10-31" });
-    const onboardingData = generateOnboardingData({
-      dateOfFormation: "2020-10-01",
-    });
-    useMockUserData({
-      onboardingData: onboardingData,
-      taxFilings: [annualFiling],
-    });
-
-    const subject = renderSection(<OperateSection displayContent={emptyContent} />);
-    expect(subject.getByText("October 31st, 2021")).toBeInTheDocument();
-  });
-
   it("brings back the datepicker when edit button is clicked", () => {
     const onboardingData = generateOnboardingData({
       dateOfFormation: "2020-04-01",
@@ -100,10 +86,10 @@ describe("<OperateSection />", () => {
     });
 
     const subject = renderSection(<OperateSection displayContent={emptyContent} />);
-    expect(subject.queryByText(RoadmapDefaults.nextAnnualFilingText)).toBeInTheDocument();
+    expect(subject.queryByText(RoadmapDefaults.calendarHeader)).toBeInTheDocument();
     fireEvent.click(subject.getByText(RoadmapDefaults.dateOfFormationEditText));
 
-    expect(subject.queryByText(RoadmapDefaults.nextAnnualFilingText)).not.toBeInTheDocument();
+    expect(subject.queryByText(RoadmapDefaults.calendarHeader)).not.toBeInTheDocument();
     expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeInTheDocument();
     expect((subject.getByTestId("date-textfield") as HTMLInputElement).value).toEqual("04/2020");
   });
