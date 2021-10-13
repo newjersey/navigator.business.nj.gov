@@ -1,9 +1,10 @@
 import { NavDefaults } from "@/display-content/NavDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthButton } from "@/components/AuthButton";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
+import Link from "next/link";
 
 export const NavSideBarUserSettings = (): ReactElement => {
   const { userData } = useUserData();
@@ -43,6 +44,15 @@ export const NavSideBarUserSettings = (): ReactElement => {
           >
             {NavDefaults.myNJAccountText}
           </a>
+          <hr className="bg-base-lighter" />
+          <Link
+            href="/profile"
+            passHref
+          >
+            <a href="/profile" className="text-no-underline override-text-base">
+              {NavDefaults.profileLinkText}
+            </a>
+          </Link>
           <hr className="bg-base-lighter" />
           <AuthButton className="clear-button text-base text-left" />
         </div>

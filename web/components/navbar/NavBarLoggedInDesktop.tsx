@@ -92,6 +92,11 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
                             {NavDefaults.myNJAccountText}
                           </button>
                         </MenuItem>
+                        <MenuItem onClick={() => router.push('/profile')}>
+                          <button className="clear-button font-body-2xs text-bold text-primary">
+                            {NavDefaults.profileLinkText}
+                          </button>
+                        </MenuItem>
                         <MenuItem onClick={handleLogoutClick}>
                           <button className="clear-button font-body-2xs text-bold text-primary">
                             {NavDefaults.logoutButton}

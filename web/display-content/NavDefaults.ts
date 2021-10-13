@@ -4,4 +4,5 @@ export const NavDefaults: Record<string, string> = {
   logoutButton: "Log out",
   myNJAccountText: "myNewJersey account",
   taskPageNavBarHeading: "Business Roadmap",
+  profileLinkText: "Business Profile"
 };
