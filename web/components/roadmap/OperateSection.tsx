@@ -60,7 +60,7 @@ export const OperateSection = (props: Props): ReactElement => {
   const renderDatepicker = (): ReactElement => (
     <div className="padding-x-3 padding-top-3 padding-bottom-105 border-base-lighter border-1px radius-md">
       <Content key="dateOfFormationMd">{props.displayContent.dateOfFormationMd}</Content>
-      <div className="tablet:display-flex tablet:flex-row tablet:flex-justify margin-top-2">
+      <div className="mobile-lg:display-flex mobile-lg:flex-row mobile-lg:flex-justify margin-top-2">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             views={["year", "month"]}
@@ -91,7 +91,7 @@ export const OperateSection = (props: Props): ReactElement => {
           />
         </LocalizationProvider>
         <button
-          className="usa-button mla height-5 margin-top-4 tablet:margin-top-0"
+          className="usa-button mla height-5 margin-top-2 mobile-lg:margin-top-0"
           onClick={submitBusinessFormationDate}
         >
           {RoadmapDefaults.operateDateSubmitButtonText}
@@ -107,7 +107,7 @@ export const OperateSection = (props: Props): ReactElement => {
         <p>
           {RoadmapDefaults.dateOfFormationHelperText}{" "}
           <button
-            className="usa-button usa-button--unstyled underline display-inline width-auto margin-left-2 tablet:margin-left-0"
+            className="usa-button usa-button--unstyled underline"
             onClick={() => setShowDatepicker(true)}
           >
             {RoadmapDefaults.dateOfFormationEditText}
