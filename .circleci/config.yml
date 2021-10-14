@@ -1,18 +1,7 @@
 version: 2.1
 
 orbs:
-  cypress: cypress-io/cypress@1.29.0
   vulnerability-checker: whitesource/vulnerability-checker@19.10.1
-
-executors:
-  with-chrome:
-    docker:
-      - image: 'cypress/browsers:node14.17.0-chrome91-ff89'
-    resource_class: large
-    environment: 
-      API_BASE_URL: http://localhost:5000/local
-      REDIRECT_URL: http://localhost:3000/
-      CYPRESS_API_BASE_URL: http://localhost:5000/local
 
 commands:
   configure:
@@ -25,7 +14,8 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v6-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+            - v7-npm-deploy-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+            - v7-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
       - run: 
           name: Install npm packages
           command: npm install --unsafe-perm
@@ -63,13 +53,25 @@ commands:
   store-cache:
     steps:
       - save_cache:
-          key: v6-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+          key: v7-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+          paths:
+            - ./node_modules
+            - ./web/node_modules
+            - ./api/node_modules
+            - /usr/local/lib/node_modules/npm/node_modules
+            - /root/.cache/Cypress
+
+  store-deploy-cache:
+    steps:
+      - save_cache:
+          key: v7-npm-deploy-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
           paths:
             - ./node_modules
             - ./web/node_modules
             - ./web/.next/cache
             - ./api/node_modules
             - /usr/local/lib/node_modules/npm/node_modules
+            - /root/.cache/Cypress
 
   deploy-serverless:
     steps:
@@ -134,6 +136,18 @@ commands:
       - deploy-serverless
       - deploy-amplify
 
+  install-chrome:
+    steps: 
+      - run: 
+          name: Install Chrome
+          command: |
+            cat \<< EOF > /etc/apt/sources.list.d/google-chrome.list 
+            deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main 
+            EOF
+            wget -O- https://dl.google.com/linux/linux_signing_key.pub |gpg --dearmor > /etc/apt/trusted.gpg.d/google.gpg
+            apt update
+            apt install -y google-chrome-stable
+
 jobs:
   build:
     docker:
@@ -142,6 +156,7 @@ jobs:
     steps:
       - configure
       - code-quality
+      - store-cache
       - store_test_results:
           path: reports/test_results
 
@@ -151,7 +166,7 @@ jobs:
     steps:
       - set-dev-env-vars
       - deploy
-      - store-cache
+      - store-deploy-cache
     environment:
       STAGE: dev
       AMPLIFY_ENV: dev
@@ -179,6 +194,33 @@ jobs:
       AMPLIFY_ENV: prod
       MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop
 
+  cypress-tests:
+    docker:
+      - image: node:14.18.1-buster
+    resource_class: large
+    steps:
+      - configure
+      - install-chrome
+      - run:
+          name: Install Additional Tools
+          command: apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+      - run: npm run --prefix=web build --if-present
+      - run:
+          name: Start services
+          command: npm --prefix=api start & npm --prefix=api run start:wiremock & npm --prefix=web start
+          background: true
+      - run:
+          name: Run Tests
+          command: npm run cypress:run -- --browser=chrome
+          working_directory: web
+      - store-deploy-cache
+    environment: 
+      API_BASE_URL: http://localhost:5000/local
+      REDIRECT_URL: http://localhost:3000/
+      CYPRESS_API_BASE_URL: http://localhost:5000/local
+
+
+
 workflows:
   release-pipeline:
      jobs: 
@@ -204,7 +246,7 @@ workflows:
           type: approval
           requires:
             - dev-deploy
-            - cypress/run
+            - cypress-tests
             - vulnerability-checker/scan
           filters:
             branches:
@@ -230,30 +272,7 @@ workflows:
               - main
           requires: 
           - production-hold
-      - cypress/install:
-          executor: with-chrome
-          post-install: 
-            - run: ./scripts/amplify-ci/configure.sh
-            - run: apt update
-            - run: apt install -y openjdk-11-jdk-headless
-          filters:
-            branches:
-             only:
-              - main
-      - cypress/run:
-          executor: with-chrome
-          browser: chrome
-          working_directory: web
-          build: apt update && apt install -y openjdk-11-jdk-headless && npm run build --if-present
-          record: true
-          start: npm --prefix=../api start & npm --prefix=../api run start:wiremock & npm start
-          attach-workspace: true
-          post-steps:
-            - store_test_results:
-                path: web/cypress/results
-          requires: 
-          - cypress/install
-          store_artifacts: true
+      - cypress-tests:
           filters:
             branches:
              only:
@@ -267,30 +286,7 @@ workflows:
             branches:
              ignore:
               - main
-      - cypress/install:
-          executor: with-chrome
-          post-install: 
-            - run: ./scripts/amplify-ci/configure.sh
-            - run: apt update
-            - run: apt install -y openjdk-11-jdk-headless
-          filters:
-            branches:
-             ignore:
-              - main
-      - cypress/run:
-          executor: with-chrome
-          browser: chrome
-          working_directory: web
-          build: apt update && apt install -y openjdk-11-jdk-headless && npm run build --if-present
-          record: false
-          start: npm --prefix=../api start & npm --prefix=../api run start:wiremock & npm start
-          attach-workspace: true
-          post-steps:
-            - store_test_results:
-                path: web/cypress/results
-          requires: 
-          - cypress/install
-          store_artifacts: true
+      - cypress-tests:
           filters:
             branches:
              ignore:
