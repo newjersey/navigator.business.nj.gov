@@ -25,7 +25,7 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v4-npm-deps-{{ checksum "package-lock.json" }}
+            - v4-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
       - run: 
           name: Install npm packages
           command: npm install --unsafe-perm
@@ -132,11 +132,12 @@ jobs:
       - configure
       - code-quality
       - save_cache:
-          key: v4-npm-deps-{{ checksum "package-lock.json" }}
+          key: v4-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
           paths:
             - ./node_modules
             - ./web/node_modules
             - ./api/node_modules
+            - /usr/local/lib/node_modules/npm/node_modules
       - store_test_results:
           path: reports/test_results
 
