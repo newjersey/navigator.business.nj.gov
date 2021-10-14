@@ -157,5 +157,22 @@ describe("<NavBar />", () => {
       expect(subject.queryByText("task1")).not.toBeInTheDocument();
       expect(subject.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
     });
+
+    it("opens and closes user profile links", async () => {
+      useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
+      const subject = renderMobileTaskNav();
+      expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeVisible();
+      expect(subject.queryByText(NavDefaults.profileLinkText)).not.toBeVisible();
+
+      fireEvent.click(subject.getByText("Grace Hopper"));
+      expect(subject.queryByText(NavDefaults.myNJAccountText)).toBeVisible();
+      expect(subject.queryByText(NavDefaults.profileLinkText)).toBeVisible();
+
+      fireEvent.click(subject.getByText("Grace Hopper"));
+      await waitFor(() => {
+        expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeVisible();
+        expect(subject.queryByText(NavDefaults.profileLinkText)).not.toBeVisible();
+      });
+    });
   });
 });

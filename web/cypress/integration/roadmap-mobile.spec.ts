@@ -61,22 +61,8 @@ describe("Roadmap [feature] [all]", () => {
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.contains("Absecon").should("exist");
 
-    // task mini-nav - open and close user settings
-    cy.get("[data-hamburger]").click({ force: true });
-    cy.get("[data-my-nj-profile-link]").should("not.be.visible");
-    cy.get("[data-log-out-button]").should("not.be.visible");
-    cy.get("[data-open-user-settings]").click({ force: true });
-    cy.get("[data-my-nj-profile-link]").should("be.visible");
-    cy.get("[data-log-out-button]").scrollIntoView();
-    cy.get("[data-log-out-button]").should("be.visible");
-    cy.get("[data-open-user-settings]").click({ force: true });
-    cy.get("[data-my-nj-profile-link]").should("not.be.visible");
-    cy.get("[data-log-out-button]").should("not.be.visible");
-    cy.get('[data-step="4"]').click({ force: true });
-    cy.get("[data-task='sign-lease']").click({ force: true });
-    cy.get("[data-back-to-roadmap]").click({ force: true });
-
     // editing data
+    cy.get("[data-back-to-roadmap]").click({ force: true });
     clickEdit();
 
     cy.get('input[aria-label="Business name"]').clear();

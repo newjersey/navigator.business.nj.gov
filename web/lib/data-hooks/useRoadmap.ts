@@ -1,7 +1,7 @@
 import { Roadmap } from "@/lib/types/types";
 import { useContext } from "react";
 import { RoadmapContext } from "@/pages/_app";
-import { useUserData } from "./useUserData";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 
