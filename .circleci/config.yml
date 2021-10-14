@@ -239,7 +239,7 @@ workflows:
           browser: chrome
           working_directory: web
           build: apt update && apt install -y openjdk-11-jdk-headless && npm run build --if-present
-          record: false
+          record: true
           start: npm --prefix=../api start & npm --prefix=../api run start:wiremock & npm start
           attach-workspace: true
           post-steps:
