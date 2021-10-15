@@ -6,6 +6,7 @@ export const isHomeBasedBusinessApplicable = (industry: Industry | undefined): b
     industry === "home-contractor" ||
     industry === "e-commerce" ||
     industry === "retail" ||
-    industry === "cleaning-aid"
+    industry === "cleaning-aid" ||
+    industry === "employment-agency"
   );
 };

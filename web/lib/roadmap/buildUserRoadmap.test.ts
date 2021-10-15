@@ -108,6 +108,11 @@ describe("buildUserRoadmap", () => {
       expectOnlyIndustry("food-truck", getLastCalledWith(mockRoadmapBuilder)[0]);
     });
 
+    it("adds employment agency industry and modifications", async () => {
+      await buildUserRoadmap(generateOnboardingData({ industry: "employment-agency" }));
+      expectOnlyIndustry("employment-agency", getLastCalledWith(mockRoadmapBuilder)[0]);
+    });
+
     it("adds another-industry add-on when industry is generic", async () => {
       await buildUserRoadmap(generateOnboardingData({ industry: "generic" }));
       const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];

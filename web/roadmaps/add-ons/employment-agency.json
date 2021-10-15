@@ -1,0 +1,12 @@
+[
+  {
+    "step": 2,
+    "weight": 10,
+    "task": "understand-license-requirements"
+  },
+  {
+    "step": 5,
+    "weight": 10,
+    "task": "search-licenses"
+  }
+]

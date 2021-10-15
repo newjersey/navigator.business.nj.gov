@@ -257,6 +257,20 @@ describe("onboarding", () => {
     expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
   });
 
+  it("displays industry-specific content for employment agency when selected", async () => {
+    const displayContent = createEmptyOnboardingDisplayContent();
+    displayContent.industry.specificEmploymentAgencyMd = "Learn more about employment agencies!";
+
+    subject = renderPage({ displayContent });
+    await visitStep2();
+
+    expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
+    selectByValue("Industry", "employment-agency");
+    expect(subject.queryByText("Learn more about employment agencies!")).toBeInTheDocument();
+    selectByValue("Industry", "e-commerce");
+    expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
+  });
+
   it("displays liquor license question for restaurants when selected", async () => {
     const displayContent = createEmptyOnboardingDisplayContent();
     displayContent.industry.specificLiquorQuestion = {

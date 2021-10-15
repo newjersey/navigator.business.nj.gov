@@ -15,6 +15,7 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
   const legalStructure = getMarkdown(loadFile("legal-structure.md"));
   const municipality = getMarkdown(loadFile("municipality.md"));
   const specificHomeContractor = getMarkdown(loadFile("industry/industry-specific/home-contractor.md"));
+  const specificEmploymentAgency = getMarkdown(loadFile("industry/industry-specific/employment-agency.md"));
   const specificLiquor = getMarkdown(loadFile("industry/industry-specific/liquor.md"));
   const specificHomeBased = getMarkdown(loadFile("municipality/home-based-business.md"));
 
@@ -41,6 +42,7 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
     industry: {
       contentMd: industry.content,
       specificHomeContractorMd: specificHomeContractor.content,
+      specificEmploymentAgencyMd: specificEmploymentAgency.content,
       specificLiquorQuestion: {
         contentMd: specificLiquor.content,
         radioButtonYesText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonYesText,

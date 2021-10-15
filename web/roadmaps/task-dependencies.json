@@ -7,6 +7,7 @@
   "get-insurance-hic": ["form-business-entity", "register-for-taxes"],
   "floor-plan-approval-doh": ["form-business-entity", "sign-lease"],
   "search-licenses": ["form-business-entity", "register-for-taxes"],
+  "search-licenses-employment-agency": ["form-business-entity"],
   "site-safety-permits-cosmetology": ["sign-lease", "building-permit"],
   "town-mercantile-license-liquor": ["register-for-taxes", "sign-lease", "liquor-license-availability"],
   "zoning": ["sign-lease"]

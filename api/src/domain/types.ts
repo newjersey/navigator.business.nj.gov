@@ -184,6 +184,7 @@ export type Industry =
   | "cleaning-aid"
   | "retail"
   | "food-truck"
+  | "employment-agency"
   | "generic";
 
 export const ALL_INDUSTRIES: Industry[] = [
@@ -194,6 +195,7 @@ export const ALL_INDUSTRIES: Industry[] = [
   "cleaning-aid",
   "retail",
   "food-truck",
+  "employment-agency",
   "generic",
 ];
 
