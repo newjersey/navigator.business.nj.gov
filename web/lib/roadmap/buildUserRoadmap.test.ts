@@ -35,6 +35,11 @@ describe("buildUserRoadmap", () => {
       await buildUserRoadmap(generateOnboardingData({ homeBasedBusiness: true }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("physical-location");
     });
+
+    it("does not add physical-location add-on if industry is food-truck", async () => {
+      await buildUserRoadmap(generateOnboardingData({ industry: "food-truck" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("physical-location");
+    });
   });
 
   describe("legal structure", () => {
@@ -96,6 +101,11 @@ describe("buildUserRoadmap", () => {
     it("adds retail industry and modifications", async () => {
       await buildUserRoadmap(generateOnboardingData({ industry: "retail" }));
       expectOnlyIndustry("retail", getLastCalledWith(mockRoadmapBuilder)[0]);
+    });
+
+    it("adds food-truck industry and modifications", async () => {
+      await buildUserRoadmap(generateOnboardingData({ industry: "food-truck" }));
+      expectOnlyIndustry("food-truck", getLastCalledWith(mockRoadmapBuilder)[0]);
     });
 
     it("adds another-industry add-on when industry is generic", async () => {

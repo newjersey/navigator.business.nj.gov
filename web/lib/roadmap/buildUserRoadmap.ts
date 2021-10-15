@@ -16,7 +16,7 @@ export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<
   const addOns = [];
   const modifications = [];
 
-  if (!onboardingData.homeBasedBusiness) {
+  if (!onboardingData.homeBasedBusiness && onboardingData.industry !== "food-truck") {
     addOns.push("physical-location");
   }
 

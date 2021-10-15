@@ -1,0 +1,10 @@
+[
+  {
+    "taskToReplaceFilename": "zoning",
+    "replaceWithFilename": "zoning-food-truck"
+  },
+  {
+    "taskToReplaceFilename": "sign-lease",
+    "replaceWithFilename": "sign-lease-food-truck"
+  }
+]

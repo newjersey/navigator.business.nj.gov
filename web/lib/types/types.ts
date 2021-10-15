@@ -222,7 +222,19 @@ export type Industry =
   | "cosmetology"
   | "cleaning-aid"
   | "retail"
+  | "food-truck"
   | "generic";
+
+export const ALL_INDUSTRIES: Industry[] = [
+  "restaurant",
+  "e-commerce",
+  "home-contractor",
+  "cosmetology",
+  "cleaning-aid",
+  "retail",
+  "food-truck",
+  "generic",
+];
 
 export type LegalStructure =
   | "sole-proprietorship"
