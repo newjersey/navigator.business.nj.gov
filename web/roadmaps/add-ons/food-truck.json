@@ -20,6 +20,11 @@
     "task": "food-safety-course"
   },
   {
+    "step": 4,
+    "weight": 3,
+    "task": "sign-lease"
+  },
+  {
     "step": 5,
     "weight": 2,
     "task": "town-mercantile-license"
