@@ -5183,8 +5183,8 @@
   "recx9Z7dPvCxKRL9R": {
     "id": "recx9Z7dPvCxKRL9R",
     "townName": "Springfield",
-    "townDisplayName": "Springfield (Union County)",
-    "townWebsite": "http://www.springfield-nj.us/",
+    "townDisplayName": "Springfield (Burlington County)",
+    "townWebsite": "http://www.springfieldtownshipnj.org/",
     "countyId": "recEa5NUoM4oUc7jZ",
     "countyName": "Burlington",
     "countyClerkPhone": "(609) 265-5122",
@@ -5194,7 +5194,7 @@
   "recBGUBlvJ94HpeIe": {
     "id": "recBGUBlvJ94HpeIe",
     "townName": "Springfield",
-    "townDisplayName": "Springfield (Union County2)",
+    "townDisplayName": "Springfield (Union County)",
     "townWebsite": "http://www.springfield-nj.us/",
     "countyId": "recz11YLnT3zufGyO",
     "countyName": "Union",
