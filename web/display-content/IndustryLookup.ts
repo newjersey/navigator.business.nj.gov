@@ -23,6 +23,11 @@ export const IndustryLookup: Record<Industry, IndustryOption> = {
     primaryText: "Cleaning Aid",
     secondaryText: "Offering services and aid related to cleaning",
   },
+  "employment-agency": {
+    primaryText: "Employment Agency",
+    secondaryText:
+      "A business contracted to hire and staff employees for other companies.",
+  },
   "food-truck": {
     primaryText: "Food Truck",
     secondaryText:

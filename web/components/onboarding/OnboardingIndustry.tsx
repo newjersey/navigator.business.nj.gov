@@ -99,6 +99,12 @@ export const OnboardingIndustry = (): ReactElement => {
           </div>
         )}
 
+        {state.onboardingData.industry === "employment-agency" && (
+          <div className="margin-top-2">
+            <Content>{state.displayContent.industry.specificEmploymentAgencyMd}</Content>
+          </div>
+        )}
+
         {isLiquorLicenseApplicable(state.onboardingData.industry) && (
           <div className="margin-top-4">
             <OnboardingLiquorLicense />

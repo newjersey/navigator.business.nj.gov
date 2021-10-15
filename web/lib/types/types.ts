@@ -85,6 +85,7 @@ export type OnboardingDisplayContent = {
     contentMd: string;
     placeholder: string;
     specificHomeContractorMd: string;
+    specificEmploymentAgencyMd: string;
     specificLiquorQuestion: {
       contentMd: string;
       radioButtonYesText: string;
@@ -116,6 +117,7 @@ export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent 
       contentMd: "",
       placeholder: "",
       specificHomeContractorMd: "",
+      specificEmploymentAgencyMd: "",
       specificLiquorQuestion: {
         contentMd: "",
         radioButtonYesText: "",
@@ -223,6 +225,7 @@ export type Industry =
   | "cleaning-aid"
   | "retail"
   | "food-truck"
+  | "employment-agency"
   | "generic";
 
 export const ALL_INDUSTRIES: Industry[] = [
@@ -233,6 +236,7 @@ export const ALL_INDUSTRIES: Industry[] = [
   "cleaning-aid",
   "retail",
   "food-truck",
+  "employment-agency",
   "generic",
 ];
 
