@@ -9,6 +9,7 @@ module.exports = {
     COGNITO_WEB_CLIENT_ID: process.env.COGNITO_WEB_CLIENT_ID,
     MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
     DISABLE_AUTH: process.env.DISABLE_AUTH,
+    FEATURE_DISABLE_OPERATE: process.env.FEATURE_DISABLE_OPERATE,
   },
   webpack: (config) => {
     config.module.rules.push({

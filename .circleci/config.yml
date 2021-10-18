@@ -129,6 +129,7 @@ commands:
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_PROD' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_PROD' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_PROD' >> $BASH_ENV
+            echo 'export FEATURE_DISABLE_OPERATE=$FEATURE_DISABLE_OPERATE_PROD' >> $BASH_ENV
 
   deploy:
     steps:
