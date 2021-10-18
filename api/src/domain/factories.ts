@@ -1,8 +1,6 @@
 import {
-  ALL_INDUSTRIES,
   ALL_LEGAL_STRUCTURES,
   BusinessUser,
-  Industry,
   LegalStructure,
   LicenseData,
   LicenseEntity,
@@ -16,6 +14,7 @@ import {
   TaxFiling,
   UserData,
 } from "./types";
+import { Industries, Industry } from "@shared/industry";
 import dayjs from "dayjs";
 
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
@@ -53,7 +52,7 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
 export const generateOnboardingData = (overrides: Partial<OnboardingData>): OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
-    industry: randomIndustry(),
+    industryId: randomIndustry().id,
     legalStructure: randomLegalStructure(),
     municipality: generateMunicipality({}),
     liquorLicense: false,
@@ -154,6 +153,6 @@ export const randomLegalStructure = (): LegalStructure => {
 };
 
 export const randomIndustry = (): Industry => {
-  const randomIndex = Math.floor(Math.random() * ALL_INDUSTRIES.length);
-  return ALL_INDUSTRIES[randomIndex];
+  const randomIndex = Math.floor(Math.random() * Industries.length);
+  return Industries[randomIndex];
 };

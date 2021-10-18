@@ -17,6 +17,20 @@ module.exports = {
       use: "raw-loader",
     });
 
+    config.module.rules.push({
+      test: /\.(ts)x?$/,
+      use: [
+        {
+          loader: "ts-loader",
+          options: {
+            transpileOnly: true,
+            experimentalWatchApi: true,
+            onlyCompileBundledFiles: true,
+          },
+        },
+      ],
+    });
+
     return config;
   },
 };

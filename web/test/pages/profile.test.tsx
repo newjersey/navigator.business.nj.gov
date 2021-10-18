@@ -17,7 +17,6 @@ import {
 import {
   createEmptyOnboardingDisplayContent,
   createEmptyUserData,
-  Industry,
   LegalStructure,
   Municipality,
   OnboardingDisplayContent,
@@ -79,7 +78,7 @@ describe("profile", () => {
     const userData = generateUserData({
       onboardingData: generateOnboardingData({
         businessName: "Applebees",
-        industry: "cosmetology",
+        industryId: "cosmetology",
         legalStructure: "c-corporation",
         municipality: generateMunicipality({
           displayName: "Newark",
@@ -124,7 +123,7 @@ describe("profile", () => {
         onboardingData: {
           ...initialUserData.onboardingData,
           businessName: "Cool Computers",
-          industry: "e-commerce",
+          industryId: "e-commerce",
           homeBasedBusiness: true,
           legalStructure: "general-partnership",
           municipality: newark,
@@ -222,8 +221,7 @@ describe("profile", () => {
   const getBusinessNameValue = (): string =>
     (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
 
-  const getIndustryValue = (): Industry =>
-    (subject.queryByTestId("industry") as HTMLInputElement)?.value as Industry;
+  const getIndustryValue = (): string => (subject.queryByTestId("industryid") as HTMLInputElement)?.value;
 
   const getMunicipalityValue = (): string =>
     (subject.queryByTestId("municipality") as HTMLInputElement)?.value;

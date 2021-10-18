@@ -1,5 +1,5 @@
-import { Industry } from "@/lib/types/types";
+import { LookupIndustryById } from "@/shared/industry";
 
-export const isLiquorLicenseApplicable = (industry: Industry | undefined): boolean => {
-  return industry === "restaurant";
+export const isLiquorLicenseApplicable = (industryId: string | undefined): boolean => {
+  return LookupIndustryById(industryId)?.isLiquorLicenseApplicable ?? false;
 };

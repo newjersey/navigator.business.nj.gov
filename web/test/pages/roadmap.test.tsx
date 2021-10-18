@@ -8,10 +8,10 @@ import {
   useMockUserDataError,
 } from "@/test/mock/mockUseUserData";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { LookupIndustryById } from "@/shared/industry";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -75,22 +75,22 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no business name present", async () => {
-      useMockOnboardingData({ businessName: "", industry: "restaurant", legalStructure: "c-corporation" });
+      useMockOnboardingData({ businessName: "", industryId: "restaurant", legalStructure: "c-corporation" });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
       expect(subject.getByText("Not set")).toBeInTheDocument();
     });
 
     it("shows the human-readable industry from onboarding data", () => {
-      useMockOnboardingData({ industry: "home-contractor" });
+      useMockOnboardingData({ industryId: "home-contractor" });
       const subject = renderRoadmapPage();
-      const expectedValue = IndustryLookup["home-contractor"].primaryText;
+      const expectedValue = LookupIndustryById("home-contractor").name;
       expect(subject.getByText(expectedValue)).toBeInTheDocument();
     });
 
     it("shows placeholder if no industry present", async () => {
       useMockOnboardingData({
-        industry: "generic",
+        industryId: "generic",
         legalStructure: "c-corporation",
         municipality: generateMunicipality({}),
       });
@@ -107,7 +107,7 @@ describe("roadmap page", () => {
     it("shows placeholder if no business structure present", async () => {
       useMockOnboardingData({
         legalStructure: undefined,
-        industry: "restaurant",
+        industryId: "restaurant",
         municipality: generateMunicipality({}),
       });
       const subject = renderRoadmapPage();
@@ -125,7 +125,7 @@ describe("roadmap page", () => {
     it("shows placeholder if no municipality present", async () => {
       useMockOnboardingData({
         legalStructure: "c-corporation",
-        industry: "restaurant",
+        industryId: "restaurant",
         municipality: undefined,
       });
       const subject = renderRoadmapPage();

@@ -30,7 +30,7 @@ describe("updateLicenseStatus", () => {
 
     userData = generateUserData({
       onboardingData: generateOnboardingData({
-        industry: "home-contractor",
+        industryId: "home-contractor",
       }),
       licenseData: generateLicenseData({
         lastCheckedStatus: dayjs().subtract(1, "hour").subtract(1, "minute").toISOString(),

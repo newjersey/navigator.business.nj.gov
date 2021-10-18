@@ -36,6 +36,7 @@
     "next-seo",
     "@jest/types",
     "@mui/lab/AdapterDayjs",
-    "dayjs/plugin/advancedFormat"
+    "dayjs/plugin/advancedFormat",
+    "@/shared/industry"
   ]
 }

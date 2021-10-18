@@ -17,7 +17,6 @@ import {
 import {
   createEmptyOnboardingDisplayContent,
   createEmptyUserData,
-  Industry,
   LegalStructure,
   Municipality,
   OnboardingDisplayContent,
@@ -113,7 +112,7 @@ describe("onboarding", () => {
     const userData = generateUserData({
       onboardingData: generateOnboardingData({
         businessName: "Applebees",
-        industry: "cosmetology",
+        industryId: "cosmetology",
         legalStructure: "c-corporation",
         municipality: generateMunicipality({
           displayName: "Newark",
@@ -145,7 +144,7 @@ describe("onboarding", () => {
 
     selectByValue("Industry", "e-commerce");
     await visitStep3();
-    expect(currentUserData().onboardingData.industry).toEqual("e-commerce");
+    expect(currentUserData().onboardingData.industryId).toEqual("e-commerce");
     expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
 
     chooseRadio("general-partnership");
@@ -161,7 +160,7 @@ describe("onboarding", () => {
       onboardingData: {
         ...initialUserData.onboardingData,
         businessName: "Cool Computers",
-        industry: "e-commerce",
+        industryId: "e-commerce",
         homeBasedBusiness: true,
         legalStructure: "general-partnership",
         municipality: newark,
@@ -421,8 +420,7 @@ describe("onboarding", () => {
   const getBusinessNameValue = (): string =>
     (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
 
-  const getIndustryValue = (): Industry =>
-    (subject.queryByTestId("industry") as HTMLInputElement)?.value as Industry;
+  const getIndustryValue = (): string => (subject.queryByTestId("industryid") as HTMLInputElement)?.value;
 
   const getLegalStructureValue = (): LegalStructure => {
     const checked = subject.container.querySelector(".Mui-checked input") as HTMLInputElement;

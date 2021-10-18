@@ -30,7 +30,7 @@ export const OnboardingMunicipality = (): ReactElement => {
           placeholderText={state.displayContent.municipality.placeholder}
         />
 
-        {isHomeBasedBusinessApplicable(state.onboardingData.industry) && (
+        {isHomeBasedBusinessApplicable(state.onboardingData.industryId) && (
           <div className="margin-top-3">
             <OnboardingHomeBasedBusiness />
           </div>
