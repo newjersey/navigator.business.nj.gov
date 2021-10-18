@@ -31,6 +31,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   const { userData, isLoading, error } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
+  const featureDisableOperate = process.env.FEATURE_DISABLE_OPERATE ?? false;
 
   useMountEffectWhenDefined(() => {
     (async () => {
@@ -141,7 +142,9 @@ const RoadmapPage = (props: Props): ReactElement => {
                         ))}
                     </SectionAccordion>
                   ))}
-                  <OperateSection displayContent={props.displayContent.operateDisplayContent} />
+                  {!featureDisableOperate &&
+                    <OperateSection displayContent={props.displayContent.operateDisplayContent} />
+                  }
                 </>
               )}
             </div>
