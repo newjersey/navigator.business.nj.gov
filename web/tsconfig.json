@@ -20,7 +20,8 @@
       "@/lib/*": ["lib/*"],
       "@/test/*": ["test/*"],
       "@/pages/*": ["pages/*"],
-      "@/roadmaps/*": ["roadmaps/*"]
+      "@/roadmaps/*": ["roadmaps/*"],
+      "@/shared/*": ["../shared/src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

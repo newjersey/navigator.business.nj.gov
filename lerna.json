@@ -1,6 +1,7 @@
 {
   "packages": [
     "api",
+    "shared",
     "web"
   ],
   "version": "0.0.0"

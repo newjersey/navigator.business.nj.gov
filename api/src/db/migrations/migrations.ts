@@ -19,6 +19,7 @@ import { migrate_v15_to_v16 } from "./v16_add_user_preferences";
 import { migrate_v16_to_v17 } from "./v17_add_operate_section";
 import { migrate_v17_to_v18 } from "./v18_add_foodtruck_roadmap";
 import { migrate_v18_to_v19 } from "./v19_add_employment_agency_roadmap";
+import { migrate_v19_to_v20 } from "./v20_switch_industry_to_id";
 
 export type MigrationFunction = (data: any) => any;
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
@@ -43,6 +44,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v16_to_v17,
   migrate_v17_to_v18,
   migrate_v18_to_v19,
+  migrate_v19_to_v20,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

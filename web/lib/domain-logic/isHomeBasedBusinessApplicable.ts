@@ -1,12 +1,5 @@
-import { Industry } from "@/lib/types/types";
+import { LookupIndustryById } from "@/shared/industry";
 
-export const isHomeBasedBusinessApplicable = (industry: Industry | undefined): boolean => {
-  return (
-    industry === "generic" ||
-    industry === "home-contractor" ||
-    industry === "e-commerce" ||
-    industry === "retail" ||
-    industry === "cleaning-aid" ||
-    industry === "employment-agency"
-  );
+export const isHomeBasedBusinessApplicable = (industryId: string | undefined): boolean => {
+  return LookupIndustryById(industryId)?.canBeHomeBased ?? false;
 };

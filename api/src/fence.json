@@ -16,6 +16,7 @@
     "uuid",
     "xml2js",
     "winston",
-    "winston-cloudwatch"
+    "winston-cloudwatch",
+    "@shared/industry"
   ]
 }

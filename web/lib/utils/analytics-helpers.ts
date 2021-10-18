@@ -2,7 +2,7 @@ import analytics from "@/lib/utils/analytics";
 import { OnboardingData } from "@/lib/types/types";
 
 export const setAnalyticsDimensions = (onboardingData: OnboardingData): void => {
-  analytics.dimensions.industry(onboardingData.industry);
+  analytics.dimensions.industry(onboardingData.industryId);
   analytics.dimensions.municipality(onboardingData.municipality?.displayName);
   analytics.dimensions.legalStructure(onboardingData.legalStructure);
   analytics.dimensions.liquorLicense(onboardingData.liquorLicense ? "true" : "false");

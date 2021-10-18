@@ -4,7 +4,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { GreyCallout } from "@/components/njwds-extended/GreyCallout";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { IndustryLookup } from "@/display-content/IndustryLookup";
 import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -21,6 +20,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { OperateSection } from "@/components/roadmap/OperateSection";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
+import { LookupIndustryById } from "@/shared/industry";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -58,8 +58,8 @@ const RoadmapPage = (props: Props): ReactElement => {
 
   const getIndustry = (): string => {
     if (isLoading) return RoadmapDefaults.loadingText;
-    return userData?.onboardingData.industry && userData?.onboardingData.industry !== "generic"
-      ? IndustryLookup[userData.onboardingData.industry].primaryText
+    return userData?.onboardingData.industryId && userData?.onboardingData.industryId !== "generic"
+      ? LookupIndustryById(userData.onboardingData.industryId).name
       : RoadmapDefaults.greyBoxSomeOtherIndustryText;
   };
 
@@ -111,7 +111,7 @@ const RoadmapPage = (props: Props): ReactElement => {
                       <div data-business-name={userData?.onboardingData.businessName}>
                         {RoadmapDefaults.greyBoxBusinessNameText}: <strong>{getBusinessName()}</strong>
                       </div>
-                      <div data-industry={userData?.onboardingData.industry}>
+                      <div data-industry={userData?.onboardingData.industryId}>
                         {RoadmapDefaults.greyBoxIndustryText}: <strong>{getIndustry()}</strong>
                       </div>
                       <div data-legal-structure={userData?.onboardingData.legalStructure}>
@@ -142,9 +142,9 @@ const RoadmapPage = (props: Props): ReactElement => {
                         ))}
                     </SectionAccordion>
                   ))}
-                  {!featureDisableOperate &&
+                  {!featureDisableOperate && (
                     <OperateSection displayContent={props.displayContent.operateDisplayContent} />
-                  }
+                  )}
                 </>
               )}
             </div>

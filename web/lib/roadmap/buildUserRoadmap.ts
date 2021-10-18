@@ -16,7 +16,7 @@ export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<
   const addOns = [];
   const modifications = [];
 
-  if (!onboardingData.homeBasedBusiness && onboardingData.industry !== "food-truck") {
+  if (!onboardingData.homeBasedBusiness && onboardingData.industryId !== "food-truck") {
     addOns.push("physical-location");
   }
 
@@ -33,11 +33,11 @@ export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<
     }
   }
 
-  if (!onboardingData.industry || onboardingData.industry === "generic") {
+  if (!onboardingData.industryId || onboardingData.industryId === "generic") {
     addOns.push("another-industry");
   } else {
-    addOns.push(onboardingData.industry);
-    modifications.push(onboardingData.industry);
+    addOns.push(onboardingData.industryId);
+    modifications.push(onboardingData.industryId);
   }
 
   let roadmap = await buildRoadmap({ addOns, modifications });

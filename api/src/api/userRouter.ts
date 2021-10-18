@@ -98,7 +98,7 @@ export const userRouterFactory = (
 
   const shouldCheckLicense = (userData: UserData): boolean =>
     userData.licenseData !== undefined &&
-    industryHasALicenseType(userData.onboardingData.industry) &&
+    industryHasALicenseType(userData.onboardingData.industryId) &&
     hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus);
 
   const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>

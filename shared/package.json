@@ -1,0 +1,32 @@
+{
+  "name": "businessnjgov-shared",
+  "version": "1.0.0",
+  "private": "true",
+  "description": "A shared library for the business.nj.gov navigator",
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --max-warnings 0 --fix",
+    "prettier": "prettier --write . --ignore-path=./.eslintignore",
+    "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
+    "test": "jest",
+    "test:ci": "jest --reporters=jest-junit --outputFile=../reports/test_results/api-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../reports/coverage/api/",
+    "typecheck": "tsc --noemit"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.15.4",
+    "@types/jest": "27.0.2",
+    "@types/node": "14.17.22",
+    "@typescript-eslint/eslint-plugin": "4.33.0",
+    "@typescript-eslint/parser": "4.33.0",
+    "cross-env": "7.0.3",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
+    "jest": "27.2.5",
+    "jest-junit": "13.0.0",
+    "prettier": "2.4.1",
+    "ts-jest": "27.0.5",
+    "ts-node": "10.3.0",
+    "tsconfig-paths": "3.11.0",
+    "typescript": "4.4.4"
+  }
+}

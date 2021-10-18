@@ -118,7 +118,7 @@ describe("userRouter", () => {
       it("updates user in the background if licenseData lastCheckedDate is older than last hour", async () => {
         const userData = generateUserData({
           onboardingData: generateOnboardingData({
-            industry: "home-contractor",
+            industryId: "home-contractor",
           }),
           licenseData: generateLicenseData({
             lastCheckedStatus: dayjs().subtract(1, "hour").subtract(1, "minute").toISOString(),

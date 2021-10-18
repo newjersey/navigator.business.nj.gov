@@ -1,16 +1,14 @@
-import { Industry } from "../types";
+import { LookupIndustryById } from "@shared/industry";
 
-export const convertIndustryToLicenseType = (industry: Industry | undefined): string => {
-  if (industry === "home-contractor") {
-    return "Home Improvement Contractors";
-  }
-  if (industry === "cosmetology") {
-    return "Cosmetology and Hairstyling";
+export const convertIndustryToLicenseType = (industryId: string | undefined): string => {
+  const industry = LookupIndustryById(industryId);
+  if (industry?.licenseType) {
+    return industry.licenseType;
   }
 
   throw `${industry} does not have a license type`;
 };
 
-export const industryHasALicenseType = (industry: Industry | undefined): boolean => {
-  return industry === "cosmetology" || industry === "home-contractor";
+export const industryHasALicenseType = (industryId: string | undefined): boolean => {
+  return LookupIndustryById(industryId)?.licenseType !== undefined ?? false;
 };

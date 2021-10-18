@@ -41,7 +41,7 @@ export interface Preferences {
 export const createEmptyOnboardingData = (): OnboardingData => {
   return {
     businessName: "",
-    industry: undefined,
+    industryId: undefined,
     legalStructure: undefined,
     municipality: undefined,
     liquorLicense: false,
@@ -53,7 +53,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
 
 export interface OnboardingData {
   businessName: string;
-  industry: Industry | undefined;
+  industryId: string | undefined;
   legalStructure: LegalStructure | undefined;
   municipality: Municipality | undefined;
   liquorLicense: boolean;
@@ -216,29 +216,6 @@ export interface PostOnboarding {
   radioNo: string;
   radioNoContent: string;
 }
-
-export type Industry =
-  | "restaurant"
-  | "e-commerce"
-  | "home-contractor"
-  | "cosmetology"
-  | "cleaning-aid"
-  | "retail"
-  | "food-truck"
-  | "employment-agency"
-  | "generic";
-
-export const ALL_INDUSTRIES: Industry[] = [
-  "restaurant",
-  "e-commerce",
-  "home-contractor",
-  "cosmetology",
-  "cleaning-aid",
-  "retail",
-  "food-truck",
-  "employment-agency",
-  "generic",
-];
 
 export type LegalStructure =
   | "sole-proprietorship"
