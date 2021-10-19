@@ -101,10 +101,6 @@ describe("Roadmap [feature] [all]", () => {
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
-    cy.get('[data-contextual-info-id="llc"]').click({ force: true });
-    cy.get('[data-testid="info-panel"]').should("exist");
-    cy.get('[aria-label="close panel"]').click({ force: true });
-    cy.get('[data-testid="info-panel"]').should("not.exist");
     cy.get('[data-value="general-partnership"]').click({ force: true });
     clickNext();
 
