@@ -54,6 +54,13 @@
     },
     {
       "matchPackageNames": [
+        "@types/jasmine",
+        "jasmine"
+      ],
+      "groupName": "jasmine"
+    },
+    {
+      "matchPackageNames": [
         "@types/copy-webpack-plugin",
         "@types/webpack-node-externals",
         "copy-webpack-plugin",
