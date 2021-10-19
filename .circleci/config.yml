@@ -40,6 +40,9 @@ commands:
       - run: 
           name: Run Linting
           command: npm run lint
+      - run:
+          name: Run Spell Checker
+          command: npm --prefix=web run spellcheck
       - run: 
           name: Run Fences
           command: npm run fences
