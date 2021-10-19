@@ -5,7 +5,7 @@ name: "Register for State Taxes and Employer Purposes"
 callToActionLink: "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml"
 callToActionText: "Register My Business for State Taxes"
 ---
-It's time to register your business for State taxes with the Division of Revenue and Enterprise Services. Doing so will tell the State more about your business and determine what taxes and employer contributions you're liable for. The form you will be filing for this task is often referred to as NJ-Reg. Registering your business with the State gives you access to `certifcations and services|tax-services`.
+It's time to register your business for State taxes with the Division of Revenue and Enterprise Services. Doing so will tell the State more about your business and determine what taxes and employer contributions you're liable for. The form you will be filing for this task is often referred to as NJ-Reg.
 
 To complete this application, you must have:
 - `Entity ID|entity-id` (not required for general partnership or sole proprietorship)
