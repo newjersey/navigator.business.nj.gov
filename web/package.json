@@ -56,7 +56,7 @@
     "remark": "12.0.1",
     "remark-html": "13.0.2",
     "remark-react": "8.0.0",
-    "sass": "1.42.1",
+    "sass": "1.43.2",
     "swr": "1.0.1"
   },
   "devDependencies": {
