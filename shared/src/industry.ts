@@ -44,8 +44,7 @@ export const Industries: Industry[] = [
   {
     id: "home-contractor",
     name: "Home Improvement Contractor",
-    description:
-      "Repairing or renovating residential or non-commercial properties",
+    description: "Repairing or renovating residential or non-commercial properties",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     licenseType: "Home Improvement Contractors",
@@ -83,8 +82,7 @@ export const Industries: Industry[] = [
   {
     id: "employment-agency",
     name: "Employment Agency",
-    description:
-      "A business contracted to hire and staff employees for other companies.",
+    description: "A business contracted to hire and staff employees for other companies.",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
   },

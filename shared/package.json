@@ -12,6 +12,10 @@
     "test:ci": "jest --reporters=jest-junit --outputFile=../reports/test_results/api-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../reports/coverage/api/",
     "typecheck": "tsc --noemit"
   },
+  "prettier": {
+    "printWidth": 110,
+    "endOfLine": "auto"
+  },
   "devDependencies": {
     "@babel/runtime": "7.15.4",
     "@types/jest": "27.0.2",
