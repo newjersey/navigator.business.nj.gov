@@ -47,6 +47,9 @@ commands:
           name: Run Fences
           command: npm run fences
       - run: 
+          name: Run Shared Unit Tests
+          command: npm run --prefix=shared test:ci
+      - run: 
           name: Run Web Unit Tests
           command: npm run --prefix=web test:ci
       - run: 

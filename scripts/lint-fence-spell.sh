@@ -17,5 +17,6 @@ npm --prefix=web run fences
 npm --prefix=api run fences
 
 # run tests, feature tests, and push
+npm --prefix=shared run lint
 npm --prefix=web run lint
 npm --prefix=api run lint
