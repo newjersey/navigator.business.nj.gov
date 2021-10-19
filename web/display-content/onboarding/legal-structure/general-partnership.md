@@ -1,1 +1,1 @@
-In a general partnership two or more people share ownership of a single business and are jointly responsible for its assets and liabilities.
+In a general partnership two or more people share ownership of a single business and are jointly responsible for its assets and liabilities. [Learn morea bout general partnerships](https://business.nj.gov/pages/general-partnership).
