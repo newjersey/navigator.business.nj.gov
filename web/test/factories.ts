@@ -59,7 +59,10 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   };
 };
 
-export const generateOnboardingData = (overrides: Partial<OnboardingData>, isMobileLocation?: boolean): OnboardingData => {
+export const generateOnboardingData = (
+  overrides: Partial<OnboardingData>,
+  isMobileLocation?: boolean
+): OnboardingData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industryId: randomIndustry(isMobileLocation).id,
@@ -202,7 +205,7 @@ export const randomLegalStructure = (): LegalStructure => {
 };
 
 export const randomIndustry = (isMobileLocation = false): Industry => {
-  const filteredIndustries = Industries.filter(x => x.isMobileLocation === isMobileLocation)
+  const filteredIndustries = Industries.filter((x) => x.isMobileLocation === isMobileLocation);
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
 };

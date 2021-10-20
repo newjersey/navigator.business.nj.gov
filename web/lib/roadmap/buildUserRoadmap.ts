@@ -16,7 +16,7 @@ const PublicRecordFilingGroup: LegalStructure[] = [
 export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {
   const addOns = [];
   const modifications = [];
-  const industry = LookupIndustryById(onboardingData.industryId)
+  const industry = LookupIndustryById(onboardingData.industryId);
 
   if (!onboardingData.homeBasedBusiness && !industry.isMobileLocation) {
     addOns.push("physical-location");
