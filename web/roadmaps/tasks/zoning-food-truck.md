@@ -1,7 +1,7 @@
 ---
 id: "zoning"
 urlSlug: "zoning"
-name: "Zoning and Overnight Parking"
+name: "Obtain Zoning and Overnight Parking Approval If Required"
 callToActionLink: ""
 callToActionText: ""
 ---
