@@ -5,6 +5,7 @@ export interface Industry {
   canBeHomeBased: boolean;
   isLiquorLicenseApplicable: boolean;
   licenseType?: string;
+  isMobileLocation: boolean;
 }
 
 export const LookupIndustryById = (id: string | undefined): Industry => {
@@ -15,6 +16,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       description: "",
       canBeHomeBased: false,
       isLiquorLicenseApplicable: false,
+      isMobileLocation: false
     }
   );
 };
@@ -26,6 +28,7 @@ export const Industries: Industry[] = [
     description: "Select this if you don’t see your specific industry",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
+    isMobileLocation: false
   },
   {
     id: "restaurant",
@@ -33,6 +36,7 @@ export const Industries: Industry[] = [
     description: "Providing food to patrons",
     canBeHomeBased: false,
     isLiquorLicenseApplicable: true,
+    isMobileLocation: false
   },
   {
     id: "e-commerce",
@@ -40,6 +44,7 @@ export const Industries: Industry[] = [
     description: "Selling or reselling goods or services on the internet",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
+    isMobileLocation: false
   },
   {
     id: "home-contractor",
@@ -48,6 +53,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     licenseType: "Home Improvement Contractors",
+    isMobileLocation: false
   },
   {
     id: "cosmetology",
@@ -56,6 +62,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: false,
     isLiquorLicenseApplicable: false,
     licenseType: "Cosmetology and Hairstyling",
+    isMobileLocation: false
   },
   {
     id: "cleaning-aid",
@@ -63,6 +70,7 @@ export const Industries: Industry[] = [
     description: "Offering services and aid related to cleaning",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
+    isMobileLocation: false
   },
   {
     id: "retail",
@@ -70,6 +78,7 @@ export const Industries: Industry[] = [
     description: "Selling or reselling goods",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
+    isMobileLocation: false
   },
   {
     id: "food-truck",
@@ -78,6 +87,7 @@ export const Industries: Industry[] = [
       "A vehicle where food or beverages are transported, stored or prepared for sale at temporary locations.",
     canBeHomeBased: false,
     isLiquorLicenseApplicable: false,
+    isMobileLocation: true
   },
   {
     id: "employment-agency",
@@ -85,5 +95,6 @@ export const Industries: Industry[] = [
     description: "A business contracted to hire and staff employees for other companies.",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
+    isMobileLocation: false
   },
 ];

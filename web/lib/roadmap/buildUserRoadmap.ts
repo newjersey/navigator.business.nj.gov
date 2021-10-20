@@ -2,6 +2,7 @@ import { LegalStructure, OnboardingData, Roadmap } from "@/lib/types/types";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { templateEval } from "@/lib/utils/helpers";
+import { LookupIndustryById } from "@/shared/industry";
 
 const TradeNameGroup: LegalStructure[] = ["general-partnership", "sole-proprietorship"];
 
@@ -15,8 +16,9 @@ const PublicRecordFilingGroup: LegalStructure[] = [
 export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {
   const addOns = [];
   const modifications = [];
+  const industry = LookupIndustryById(onboardingData.industryId)
 
-  if (!onboardingData.homeBasedBusiness && onboardingData.industryId !== "food-truck") {
+  if (!onboardingData.homeBasedBusiness && !industry.isMobileLocation) {
     addOns.push("physical-location");
   }
 
