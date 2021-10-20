@@ -5,7 +5,7 @@ orbs:
 
 commands:
   configure:
-    steps:  
+    steps:
       - run:
           name: Install Tools
           command: |
@@ -16,43 +16,43 @@ commands:
           keys:
             - v7-npm-deploy-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
             - v7-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-      - run: 
+      - run:
           name: Install npm packages
           command: npm install --unsafe-perm
-      - run: 
+      - run:
           name: Configure Amplify
           command: ./scripts/amplify-ci/configure.sh
-      - run: 
+      - run:
           name: Configure Serverless
           command: npm run --prefix=api serverless config credentials -- --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
 
   code-quality:
-    steps: 
-      - run: 
+    steps:
+      - run:
           name: Run Typecheck
           command: npm run typecheck
-      - run: 
+      - run:
           name: Run Cypress Typecheck
           command: npm run --prefix=web typecheck:cypress
-      - run: 
+      - run:
           name: Run Prettier
           command: npm run prettier
-      - run: 
+      - run:
           name: Run Linting
           command: npm run lint
       - run:
           name: Run Spell Checker
           command: npm --prefix=web run spellcheck
-      - run: 
+      - run:
           name: Run Fences
           command: npm run fences
-      - run: 
+      - run:
           name: Run Shared Unit Tests
           command: npm run --prefix=shared test:ci
-      - run: 
+      - run:
           name: Run Web Unit Tests
           command: npm run --prefix=web test:ci
-      - run: 
+      - run:
           name: Run API Unit Tests
           command: npm run --prefix=api test:ci
 
@@ -113,13 +113,13 @@ commands:
 
   deploy-amplify:
     steps:
-      - run: 
+      - run:
           name: Deploy Amplify
           command: ./scripts/amplify-ci/publish.sh
 
   set-dev-env-vars:
     steps:
-      - run: 
+      - run:
           name: Set Environment Variables
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_DEV' >> $BASH_ENV
@@ -134,7 +134,7 @@ commands:
 
   set-staging-env-vars:
     steps:
-      - run: 
+      - run:
           name: Set Environment Variables
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_STAGING' >> $BASH_ENV
@@ -149,7 +149,7 @@ commands:
 
   set-prod-env-vars:
     steps:
-      - run: 
+      - run:
           name: Set Environment Variables
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
@@ -170,8 +170,8 @@ commands:
       - deploy-amplify
 
   install-chrome:
-    steps: 
-      - run: 
+    steps:
+      - run:
           name: Install Chrome
           command: |
             cat \<< EOF > /etc/apt/sources.list.d/google-chrome.list 
@@ -241,34 +241,32 @@ jobs:
       - perform-cypress-tests:
           enable-dashboard: << parameters.enable-dashboard >>
       - store-deploy-cache
-    environment: 
+    environment:
       API_BASE_URL: http://localhost:5000/local
       REDIRECT_URL: http://localhost:3000/
       CYPRESS_API_BASE_URL: http://localhost:5000/local
 
-
-
 workflows:
   release-pipeline:
-     jobs: 
+    jobs:
       - build:
           filters:
             branches:
-             only:
-              - main
+              only:
+                - main
       - deploy-dev:
           name: dev-deploy
           filters:
             branches:
-             only:
-              - main
-          requires: 
-          - build
-      - vulnerability-checker/scan: 
+              only:
+                - main
+          requires:
+            - build
+      - vulnerability-checker/scan:
           filters:
             branches:
-             only:
-              - main
+              only:
+                - main
       - staging-hold:
           type: approval
           requires:
@@ -277,16 +275,16 @@ workflows:
             - vulnerability-checker/scan
           filters:
             branches:
-             only:
-              - main
+              only:
+                - main
       - deploy-staging:
           name: staging-deploy
           filters:
             branches:
-             only:
-              - main
-          requires: 
-          - staging-hold
+              only:
+                - main
+          requires:
+            - staging-hold
       - production-hold:
           type: approval
           requires:
@@ -295,29 +293,28 @@ workflows:
           name: production-deploy
           filters:
             branches:
-             only:
-              - main
-          requires: 
-          - production-hold
+              only:
+                - main
+          requires:
+            - production-hold
       - cypress-tests:
           name: cypress-tests
           enable-dashboard: true
           filters:
             branches:
-             only:
-              - main
-
+              only:
+                - main
 
   build-and-test:
     jobs:
       - build:
           filters:
             branches:
-             ignore:
-              - main
+              ignore:
+                - main
       - cypress-tests:
           name: cypress-tests
           filters:
             branches:
-             ignore:
-              - main
+              ignore:
+                - main

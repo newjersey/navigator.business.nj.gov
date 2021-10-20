@@ -1,0 +1,34 @@
+web/.next
+amplify
+*.md
+web/public/
+web/out_publish/
+web/out_functions/
+web/out/
+web/cypress/plugins
+web/cypress/support
+web/display-content/
+node_modules
+
+web/amplify/#current-cloud-backend/
+web/amplify/.config/local-*
+web/amplify/logs
+web/amplify/mock-data
+web/amplify/backend/amplify-meta.json
+web/amplify/backend/awscloudformation
+web/amplify/backend/.temp
+web/aws-exports.js
+web/awsconfiguration.json
+web/amplifyconfiguration.json
+web/amplify-build-config.json
+web/amplify-gradle-config.json
+web/amplifytools.xcconfig
+
+# Serverless directories
+api/.serverless
+
+# Webpack directories
+api/.webpack
+
+api/src/setupTests.js
+api/src/teardownTests.js
