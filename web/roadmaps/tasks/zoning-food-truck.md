@@ -5,7 +5,7 @@ name: "Zoning and Overnight Parking"
 callToActionLink: ""
 callToActionText: ""
 ---
-Your local government may have licensing or zoning requirements. Check with the zoning office at the location where you’re interested in parking your food truck. You will need to do this for every location where you intend to operate your business. The truck can be stored wherever the local zoning ordinance allows for the overnight storage of the vehicle. 
+Your local government may have zoning requirements. Check with the Zoning Office about the location(s) where you’re interested in parking your food truck for sale of goods and services, as well as, where you plan to park the vehicle for overnight storage. You will need to do this for every location where you intend to operate your business.
 
 **Before parking a truck in a residential neighborhood, be sure to check with your local government's zoning officer**
 
