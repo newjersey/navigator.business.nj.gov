@@ -56,6 +56,32 @@ commands:
           name: Run API Unit Tests
           command: npm run --prefix=api test:ci
 
+  perform-cypress-tests:
+    parameters:
+      enable-dashboard:
+        type: boolean
+    steps:
+      - run:
+          name: Install Additional Tools
+          command: apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+      - run: npm run --prefix=web build --if-present
+      - run:
+          name: Start services
+          command: npm --prefix=api start & npm --prefix=api run start:wiremock & npm --prefix=web start
+          background: true
+      - run:
+          name: Run Tests
+          command: npm run cypress:run -- --browser=chrome --record=<< parameters.enable-dashboard >>
+          working_directory: web
+      - store_test_results:
+          path: web/cypress/results
+      - store_artifacts:
+          name: Store Cypress Screenshots
+          path: web/cypress/screenshots
+      - store_artifacts:
+          name: Store Cypress Videos
+          path: web/cypress/videos
+
   store-cache:
     steps:
       - save_cache:
@@ -202,24 +228,18 @@ jobs:
       MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop
 
   cypress-tests:
+    parameters:
+      enable-dashboard:
+        type: boolean
+        default: false
     docker:
       - image: node:14.18.1-buster
     resource_class: large
     steps:
       - configure
       - install-chrome
-      - run:
-          name: Install Additional Tools
-          command: apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-      - run: npm run --prefix=web build --if-present
-      - run:
-          name: Start services
-          command: npm --prefix=api start & npm --prefix=api run start:wiremock & npm --prefix=web start
-          background: true
-      - run:
-          name: Run Tests
-          command: npm run cypress:run -- --browser=chrome
-          working_directory: web
+      - perform-cypress-tests:
+          enable-dashboard: << parameters.enable-dashboard >>
       - store-deploy-cache
     environment: 
       API_BASE_URL: http://localhost:5000/local
@@ -280,6 +300,7 @@ workflows:
           requires: 
           - production-hold
       - cypress-tests:
+          enable-dashboard: true
           filters:
             branches:
              only:
