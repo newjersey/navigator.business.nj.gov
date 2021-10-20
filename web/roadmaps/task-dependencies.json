@@ -11,6 +11,6 @@
   "site-safety-permits-cosmetology": ["sign-lease", "building-permit"],
   "town-mercantile-license-liquor": ["register-for-taxes", "sign-lease", "liquor-license-availability"],
   "zoning": ["sign-lease"],
-  "sign-lease-food-truck": ["form-business-entity", "register-for-taxes"]
+  "sign-lease-food-truck": ["form-business-entity", "register-for-taxes"],
   "apply-for-food-truck-license":["form-business-entity", "register-for-taxes"]
 }
