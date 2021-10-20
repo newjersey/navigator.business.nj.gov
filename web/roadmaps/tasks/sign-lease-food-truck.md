@@ -1,7 +1,7 @@
 ---
 id: "sign-lease"
 urlSlug: "sign-lease"
-name: "Sign your location contract"
+name: "Sign Your Location Contract"
 callToActionLink: ""
 callToActionText: ""
 ---
