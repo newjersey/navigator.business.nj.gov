@@ -11,5 +11,5 @@ export const TaskDefaults: Record<string, string> = {
   unlocksToastPlural: "The following tasks have been unlocked:",
   unlocksAlertSingular: "Upon completion of this task, you’ll be in good shape to:",
   unlocksAlertPlural: "Upon completion of this task, you’ll be in good shape to:",
-  loadingTaskDependencies: "Loading task dependencies…"
+  loadingTaskDependencies: "Loading task dependencies..."
 };
