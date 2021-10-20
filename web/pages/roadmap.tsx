@@ -7,7 +7,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { RoadmapDisplayContent } from "@/lib/types/types";
+import { FilingReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { Content } from "@/components/Content";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
@@ -21,9 +21,11 @@ import { OperateSection } from "@/components/roadmap/OperateSection";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
 import { LookupIndustryById } from "@/shared/industry";
+import { loadFilingsReferences } from "@/lib/static/loadFilings";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
+  filingsReferences: Record<string, FilingReference>;
 }
 
 const RoadmapPage = (props: Props): ReactElement => {
@@ -143,7 +145,10 @@ const RoadmapPage = (props: Props): ReactElement => {
                     </SectionAccordion>
                   ))}
                   {!featureDisableOperate && (
-                    <OperateSection displayContent={props.displayContent.operateDisplayContent} />
+                    <OperateSection
+                      displayContent={props.displayContent.operateDisplayContent}
+                      filingsReferences={props.filingsReferences}
+                    />
                   )}
                 </>
               )}
@@ -159,6 +164,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
   return {
     props: {
       displayContent: loadRoadmapDisplayContent(),
+      filingsReferences: loadFilingsReferences(),
     },
   };
 };

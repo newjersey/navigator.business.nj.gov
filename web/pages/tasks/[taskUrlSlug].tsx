@@ -2,7 +2,7 @@ import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import React, { ReactElement, useMemo } from "react";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
-import { Task } from "@/lib/types/types";
+import { FilingReference, Task } from "@/lib/types/types";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { Content } from "@/components/Content";
@@ -22,9 +22,11 @@ import { Icon } from "@/components/njwds/Icon";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { loadFilingsReferences } from "@/lib/static/loadFilings";
 
 interface Props {
   task: Task;
+  filingsReferences: Record<string, FilingReference>;
 }
 
 const TaskPage = (props: Props): ReactElement => {
@@ -104,8 +106,12 @@ const TaskPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
       <PageSkeleton>
-        <NavBar task={props.task} />
-        <SidebarPageLayout task={props.task} belowOutlineBoxComponent={nextAndPreviousButtons()}>
+        <NavBar task={props.task} sideBar={true} filingsReferences={props.filingsReferences} />
+        <SidebarPageLayout
+          task={props.task}
+          belowOutlineBoxComponent={nextAndPreviousButtons()}
+          filingsReferences={props.filingsReferences}
+        >
           {rswitch(props.task.id, {
             "search-business-name": (
               <div className="margin-3">
@@ -146,7 +152,8 @@ export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
 export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetStaticPropsResult<Props> => {
   return {
     props: {
-      task: loadTaskByUrlSlug(params.urlSlug),
+      task: loadTaskByUrlSlug(params.taskUrlSlug),
+      filingsReferences: loadFilingsReferences(),
     },
   };
 };

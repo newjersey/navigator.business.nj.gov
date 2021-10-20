@@ -8,6 +8,8 @@ import { generateRoadmap, generateStep, generateTask, generateUser } from "@/tes
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { ReactNode } from "react";
 import userEvent from "@testing-library/user-event";
+import { SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { FilingReference } from "@/lib/types/types";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -34,9 +36,11 @@ describe("<NavBar />", () => {
     jest.resetAllMocks();
   });
 
-  describe("landing page navbar", () => {
+  describe("navbar - used when user is on landing page", () => {
     it("displays landing page navbar when prop is passed", () => {
-      const subject = render(<NavBar landingPage={true} />);
+      const subject = render(
+        <NavBar landingPage={true} task={undefined} sideBar={false} filingsReferences={{}} />
+      );
       expect(subject.getByText(NavDefaults.registerButton)).toBeInTheDocument();
     });
   });
@@ -62,10 +66,10 @@ describe("<NavBar />", () => {
     });
   };
 
-  describe("desktop - task and roadmap navbar", () => {
+  describe("desktop navbar", () => {
     const renderDesktopNav = (): RenderResult => {
       setLargeScreen(true);
-      return render(<NavBar landingPage={false} />);
+      return render(<NavBar landingPage={false} task={undefined} sideBar={false} filingsReferences={{}} />);
     };
 
     displaysUserNameOrEmail(renderDesktopNav);
@@ -103,10 +107,12 @@ describe("<NavBar />", () => {
     });
   });
 
-  describe("mobile - roadmap navbar", () => {
+  describe("mobile navbar - doesn't render roadmap within drawer", () => {
     const renderMobileRoadmapNav = (): RenderResult => {
       setLargeScreen(false);
-      const subject = render(<NavBar landingPage={false} task={undefined} />);
+      const subject = render(
+        <NavBar landingPage={false} task={undefined} sideBar={false} filingsReferences={{}} />
+      );
       fireEvent.click(subject.getByTestId("nav-menu-open"));
       return subject;
     };
@@ -119,16 +125,33 @@ describe("<NavBar />", () => {
       const subject = renderMobileRoadmapNav();
       expect(subject.queryByText("step1")).not.toBeInTheDocument();
     });
+
+    it("does not display operate section", () => {
+      useMockUserData({});
+      const subject = renderMobileRoadmapNav();
+      const sectionName = SectionDefaults.OPERATE.toLowerCase();
+      expect(subject.queryByTestId(`section-${sectionName}`)).not.toBeInTheDocument();
+    });
   });
 
-  describe("mobile - task navbar", () => {
+  describe("mobile navbar - renders roadmap within drawer", () => {
     beforeEach(() => {
       useMockRoadmap({});
     });
 
     const renderMobileTaskNav = (): RenderResult => {
       setLargeScreen(false);
-      const subject = render(<NavBar landingPage={false} task={generateTask({})} />);
+
+      const filingRef: Record<string, FilingReference> = {
+        "some-tax-filing-identifier-1": {
+          name: "some-filing-name-1",
+          urlSlug: "some-urlSlug-1",
+        },
+      };
+
+      const subject = render(
+        <NavBar landingPage={false} task={generateTask({})} sideBar={true} filingsReferences={filingRef} />
+      );
       fireEvent.click(subject.getByTestId("nav-menu-open"));
       return subject;
     };
@@ -142,7 +165,7 @@ describe("<NavBar />", () => {
       expect(subject.queryByText("step1")).toBeInTheDocument();
     });
 
-    it("hide sidebar nav on-click", async () => {
+    it("hide drawer when mini-roadmap task is clicked", async () => {
       useMockUserData({});
       useMockRoadmap(
         generateRoadmap({
@@ -173,6 +196,25 @@ describe("<NavBar />", () => {
         expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeVisible();
         expect(subject.queryByText(NavDefaults.profileLinkText)).not.toBeVisible();
       });
+    });
+
+    it("displays the operate section within the drawer", () => {
+      useMockUserData({});
+      const subject = renderMobileTaskNav();
+      const sectionName = SectionDefaults.OPERATE.toLowerCase();
+      expect(subject.getByTestId(`section-${sectionName}`)).toBeInTheDocument();
+      expect(subject.getByTestId("some-filing-name-1")).toBeInTheDocument();
+    });
+
+    it("hide drawer when filings task is clicked", async () => {
+      useMockUserData({});
+
+      const subject = renderMobileTaskNav();
+      fireEvent.click(subject.getByTestId("some-filing-name-1"));
+
+      await waitForElementToBeRemoved(() => subject.queryByTestId("nav-sidebar-menu"));
+      expect(subject.queryByText("some-filing-name-1")).not.toBeInTheDocument();
+      expect(subject.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
     });
   });
 });

@@ -41,8 +41,8 @@ describe("loadTasks", () => {
       expect(allTaskUrlSlugs).toHaveLength(2);
       expect(allTaskUrlSlugs).toEqual(
         expect.arrayContaining([
-          { params: { urlSlug: "some-url-slug-1" } },
-          { params: { urlSlug: "some-url-slug-2" } },
+          { params: { taskUrlSlug: "some-url-slug-1" } },
+          { params: { taskUrlSlug: "some-url-slug-2" } },
         ])
       );
     });

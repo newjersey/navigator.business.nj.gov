@@ -1,16 +1,17 @@
 import React, { ReactElement } from "react";
 import { getCurrentDate } from "@/lib/utils/getCurrentDate";
-import { TaxFiling } from "@/lib/types/types";
+import { FilingReference, TaxFiling } from "@/lib/types/types";
 import dayjs from "dayjs";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
-import { TaxFilingNameLookup } from "@/display-content/roadmap/operate/TaxFilingNameLookup";
 import { Icon } from "@/components/njwds/Icon";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { useMediaQuery } from "@mui/material";
 import { MediaQueries } from "@/lib/PageSizes";
+import Link from "next/link";
 
 interface Props {
   taxFilings: TaxFiling[];
+  filingsReferences: Record<string, FilingReference>;
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {
@@ -33,16 +34,30 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           <span className="text-bold">{date.format("MMM")}</span> <span>{date.format("YYYY")}</span>
         </div>
         <div>
-          {thisMonthFilings.map((filing) => (
-            <div key={filing.identifier} className="usa-tag bg-secondary-lighter text-secondary-darker">
-              <span className="text-bold text-uppercase">
-                {RoadmapDefaults.calendarFilingDueDateLabel}{" "}
-                {dayjs(filing.dueDate, "YYYY-MM-DD").format("M/D")}
-              </span>
-              {" - "}
-              <span className="text-no-uppercase">{TaxFilingNameLookup[filing.identifier]}</span>
-            </div>
-          ))}
+          {thisMonthFilings
+            .filter((filing) => props.filingsReferences[filing.identifier])
+            .map((filing) => (
+              <div key={filing.identifier} className="line-height-1">
+                <Link href={`filings/${props.filingsReferences[filing.identifier].urlSlug}`}>
+                  <a
+                    href={`filings/${props.filingsReferences[filing.identifier].urlSlug}`}
+                    data-testid={filing.identifier.toLowerCase()}
+                    className="usa-link text-secondary-darker text-secondary-darker:hover"
+                  >
+                    <div className="text-no-underline usa-tag bg-secondary-lighter text-secondary-darker tag-secondary-color-hover">
+                      <span className="text-bold text-uppercase">
+                        {RoadmapDefaults.calendarFilingDueDateLabel}{" "}
+                        {dayjs(filing.dueDate, "YYYY-MM-DD").format("M/D")}
+                      </span>
+                      {" - "}
+                      <span className="text-no-uppercase">
+                        {props.filingsReferences[filing.identifier].name}
+                      </span>
+                    </div>
+                  </a>
+                </Link>
+              </div>
+            ))}
         </div>
       </div>
     );

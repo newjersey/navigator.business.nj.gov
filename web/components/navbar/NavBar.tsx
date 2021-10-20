@@ -3,12 +3,14 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { NavBarLanding } from "@/components/navbar/NavBarLanding";
 import { NavBarLoggedInMobile } from "@/components/navbar/NavBarLoggedInMobile";
-import { Task } from "@/lib/types/types";
+import { FilingReference, Task } from "@/lib/types/types";
 import { NavBarLoggedInDesktop } from "@/components/navbar/NavBarLoggedInDesktop";
 
 type Props = {
   landingPage?: boolean;
   task?: Task;
+  sideBar?: boolean;
+  filingsReferences?: Record<string, FilingReference>;
 };
 
 export const NavBar = (props: Props): ReactElement => {
@@ -45,7 +47,12 @@ export const NavBar = (props: Props): ReactElement => {
 
       {!landingPage && !isLargeScreen && (
         <>
-          <NavBarLoggedInMobile scrolled={scrolled} task={task} />
+          <NavBarLoggedInMobile
+            scrolled={scrolled}
+            task={task}
+            sideBar={props.sideBar}
+            filingsReferences={props.filingsReferences}
+          />
           <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />
         </>
       )}

@@ -9,17 +9,19 @@ import { getSectionNames, isStepCompleted } from "@/lib/utils/helpers";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 
 interface Props {
-  activeTaskId: string;
+  activeTaskId?: string | undefined;
   onTaskClick?: () => void;
 }
 
 export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const getActiveStepNumber = useCallback(
-    () =>
-      roadmap?.steps.find((step) => step.tasks.map((it) => it.id).includes(props.activeTaskId))?.step_number,
-    [props.activeTaskId, roadmap?.steps]
-  );
+  const getActiveStepNumber = useCallback(() => {
+    if (!props.activeTaskId) return undefined;
+    return roadmap?.steps.find((step) => {
+      const currTask = step.tasks.map((it) => it.id);
+      if (props.activeTaskId) return currTask.includes(props.activeTaskId);
+    })?.step_number;
+  }, [props.activeTaskId, roadmap?.steps]);
   const [activeStepNumber, setActiveStepNumber] = useState<number | undefined>(getActiveStepNumber());
   const [openSteps, setOpenSteps] = useState<number[]>([]);
   const { userData } = useUserData();

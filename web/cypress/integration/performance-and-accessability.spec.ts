@@ -93,7 +93,7 @@ describe("Performance and Accessability [all]", () => {
       cy.lighthouse(undefined, lighthouseDesktopConfig);
       cy.pa11y(defaultPa11yThresholds);
     });
-    describe("Plan", () => {
+    describe("Tasks", () => {
       describe("Plan Your Business", () => {
         describe("Write Your Business Plan", () => {
           it("should pass the audits", () => {
