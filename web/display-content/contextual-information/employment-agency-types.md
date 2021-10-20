@@ -13,4 +13,4 @@ New Jersey’s Division of Consumer Affairs regulates employment agency services
 * Resume Services/Agents
 * Temporary Help Service Firms
  
-Licenses are issued based on criteria such as the type of services offered and the type of personnel to be placed by your business (e.g., Nurses, Accountants, Administrative Assistants, etc.). Learn more about [Employment and Personnel Services licenses](https://www.njconsumeraffairs.gov/epservices).
+[Employment and Personnel Services licenses](https://www.njconsumeraffairs.gov/epservices) are issued based on criteria such as the type of services offered and the type of personnel to be placed by your business (e.g., Nurses, Accountants, Administrative Assistants, etc.). 
