@@ -1,6 +1,6 @@
 ---
-id: "individual-staff-licenses"
-urlSlug: "individual-staff-licenses"
+id: "individual-staff-licenses-cosmetology"
+urlSlug: "individual-staff-licenses-cosmetology"
 name: "Get Your Individual License and Ensure Your Staff Have Licenses"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: "Apply for A Cosmetology License"

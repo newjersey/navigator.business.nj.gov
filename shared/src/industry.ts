@@ -97,4 +97,11 @@ export const Industries: Industry[] = [
     isLiquorLicenseApplicable: false,
     isMobileLocation: false
   },
+  {
+    id: "homemaker-home-health-aide",
+    name: "Homemaker-Home Health Aide",
+    description: "Agency: A business staffing licensed personnel to provide home health care services",
+    canBeHomeBased: true,
+    isLiquorLicenseApplicable: false,
+  },
 ];

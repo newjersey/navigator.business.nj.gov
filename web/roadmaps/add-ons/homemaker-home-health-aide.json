@@ -1,0 +1,12 @@
+[
+  {
+    "step": 5,
+    "weight": 20,
+    "task": "home-health-aide-license"
+  },
+  {
+    "step": 5,
+    "weight": 30,
+    "task": "individual-staff-licenses-health-aide"
+  }
+]
