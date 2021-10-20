@@ -209,6 +209,21 @@ export type TaskDependencies = {
   [filename: string]: string[];
 };
 
+export interface Filing {
+  id: string;
+  filename: string;
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  contentMd: string;
+}
+
+export type FilingReference = {
+  name: string;
+  urlSlug: string;
+};
+
 export interface PostOnboarding {
   question: string;
   contentMd: string;

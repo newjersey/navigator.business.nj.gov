@@ -16,7 +16,8 @@ export const RoadmapDefaults: Record<string, string> = {
   dateOfFormationErrorText: "Invalid Date",
   calendarFilingDueDateLabel: "Due",
   calendarHeader: "Next 12 Months",
-  calendarTooltip: "This is your personalized calendar of upcoming of taxes and filings that the New Jersey Department of Treasury has identified. Click on any item to learn about the filing and how you can comply.",
+  calendarTooltip:
+    "This is your personalized calendar of upcoming of taxes and filings that the New Jersey Department of Treasury has identified. Click on any item to learn about the filing and how you can comply.",
   dateOfFormationHelperText: "Your annual report is based on your business formation date.",
 };
 

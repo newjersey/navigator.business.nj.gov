@@ -1,7 +1,7 @@
 import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import TaskPage from "@/pages/tasks/[urlSlug]";
+import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import { Task, TaskProgress, UserData } from "@/lib/types/types";
 import {
   generateOnboardingData,
@@ -41,7 +41,7 @@ const renderPage = (task: Task, initialUserData?: UserData): RenderResult =>
   render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
-        <TaskPage task={task} />
+        <TaskPage task={task} filingsReferences={{}} />
       </WithStatefulUserData>
     </materialUi.ThemeProvider>
   );

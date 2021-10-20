@@ -6,7 +6,7 @@ import { DatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import { OperateDisplayContent } from "@/lib/types/types";
+import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
 import { Content } from "../Content";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
@@ -15,6 +15,7 @@ dayjs.extend(advancedFormat);
 
 interface Props {
   displayContent: OperateDisplayContent;
+  filingsReferences: Record<string, FilingReference>;
 }
 
 export const OperateSection = (props: Props): ReactElement => {
@@ -84,7 +85,7 @@ export const OperateSection = (props: Props): ReactElement => {
                 helperText={showError ? RoadmapDefaults.dateOfFormationErrorText : " "}
                 inputProps={{
                   ...params.inputProps,
-                  "data-testid": "date-textfield",
+                  "data-testid": "date-of-formation-textfield",
                 }}
               />
             )}
@@ -93,6 +94,7 @@ export const OperateSection = (props: Props): ReactElement => {
         <button
           className="usa-button mla height-5 margin-top-2 mobile-lg:margin-top-0"
           onClick={submitBusinessFormationDate}
+          data-testid="date-of-formation-submit-button"
         >
           {RoadmapDefaults.operateDateSubmitButtonText}
         </button>
@@ -114,7 +116,10 @@ export const OperateSection = (props: Props): ReactElement => {
           </button>
         </p>
 
-        <FilingsCalendar taxFilings={userData?.taxFilings || []} />
+        <FilingsCalendar
+          taxFilings={userData?.taxFilings || []}
+          filingsReferences={props.filingsReferences}
+        />
       </div>
     );
   };

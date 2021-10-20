@@ -21,7 +21,8 @@
       "@/test/*": ["test/*"],
       "@/pages/*": ["pages/*"],
       "@/roadmaps/*": ["roadmaps/*"],
-      "@/shared/*": ["../shared/src/*"]
+      "@/shared/*": ["../shared/src/*"],
+      "@/filings/*": ["filings/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

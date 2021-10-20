@@ -1,6 +1,7 @@
 import matter from "gray-matter";
+import { Filing } from "@/lib/types/types";
 
-export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks => {
+export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks | Filing => {
   const matterResult = matter(taskMdContents);
   const taskGrayMatter = matterResult.data as TaskGrayMatter;
 
@@ -33,7 +34,7 @@ type MarkdownResult = {
   grayMatter: unknown;
 };
 
-type TaskWithoutLinks = {
+export type TaskWithoutLinks = {
   id: string;
   name: string;
   urlSlug: string;

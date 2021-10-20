@@ -1,6 +1,6 @@
 import { fireEvent, render, RenderResult, within } from "@testing-library/react";
 import { OperateSection } from "@/components/roadmap/OperateSection";
-import { useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   generateOnboardingData,
   generatePreferences,
@@ -14,10 +14,9 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import dayjs from "dayjs";
-import { OperateDisplayContent } from "@/lib/types/types";
+import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
 import { getByTextAcrossElements, queryByTextAcrossElements } from "@/test/helpers";
 import { useMockDate } from "@/test/mock/useMockDate";
-import { TaxFilingNameLookup } from "@/display-content/roadmap/operate/TaxFilingNameLookup";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { ReactNode } from "react";
 
@@ -28,6 +27,8 @@ const emptyContent: OperateDisplayContent = {
   dateOfFormationMd: "",
   annualFilingMd: "",
 };
+
+const emptyFilings: Record<string, FilingReference> = {};
 
 describe("<OperateSection />", () => {
   beforeEach(() => {
@@ -47,26 +48,43 @@ describe("<OperateSection />", () => {
   };
 
   it("renders datepicker when dateOfFormation is undefined", () => {
-    useMockOnboardingData({ dateOfFormation: undefined });
-    const subject = renderSection(<OperateSection displayContent={emptyContent} />);
+    const subject = renderSection(
+      <OperateSection displayContent={emptyContent} filingsReferences={emptyFilings} />
+    );
     expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeInTheDocument();
     expect(subject.queryByText(RoadmapDefaults.calendarHeader)).not.toBeInTheDocument();
   });
 
   it("renders calendar when dateOfFormation is defined", () => {
-    useMockOnboardingData({ dateOfFormation: "2020-01-01" });
-    const subject = renderSection(<OperateSection displayContent={emptyContent} />);
+    useMockDate("2021-11-01");
+
+    useMockUserData({
+      onboardingData: generateOnboardingData({ dateOfFormation: "2020-01-01" }),
+      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
+    });
+
+    const filingRef: Record<string, FilingReference> = {
+      "some-tax-filing-identifier-1": {
+        name: "some-name-1",
+        urlSlug: "some-urlSlug-1",
+      },
+    };
+
+    const subject = renderSection(
+      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+    );
     expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).not.toBeInTheDocument();
     expect(subject.queryByText(RoadmapDefaults.calendarHeader)).toBeInTheDocument();
   });
 
   it("updates date of formation to the first day of the provided month and year", () => {
     const initialUserData = generateUserData({
+      taxFilings: [],
       onboardingData: generateOnboardingData({ dateOfFormation: undefined }),
     });
     const subject = renderSection(
       <WithStatefulUserData initialUserData={initialUserData}>
-        <OperateSection displayContent={emptyContent} />
+        <OperateSection displayContent={emptyContent} filingsReferences={emptyFilings} />
       </WithStatefulUserData>
     );
 
@@ -77,31 +95,49 @@ describe("<OperateSection />", () => {
   });
 
   it("brings back the datepicker when edit button is clicked", () => {
-    const onboardingData = generateOnboardingData({
-      dateOfFormation: "2020-04-01",
-    });
+    useMockDate("2021-11-01");
+
     useMockUserData({
-      onboardingData: onboardingData,
-      taxFilings: [generateTaxFiling({})],
+      onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
+      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
     });
 
-    const subject = renderSection(<OperateSection displayContent={emptyContent} />);
+    const filingRef: Record<string, FilingReference> = {
+      "some-tax-filing-identifier-1": {
+        name: "some-name-1",
+        urlSlug: "some-urlSlug-1",
+      },
+    };
+
+    const subject = renderSection(
+      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+    );
     expect(subject.queryByText(RoadmapDefaults.calendarHeader)).toBeInTheDocument();
     fireEvent.click(subject.getByText(RoadmapDefaults.dateOfFormationEditText));
 
     expect(subject.queryByText(RoadmapDefaults.calendarHeader)).not.toBeInTheDocument();
     expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeInTheDocument();
-    expect((subject.getByTestId("date-textfield") as HTMLInputElement).value).toEqual("04/2020");
+    expect((subject.getByTestId("date-of-formation-textfield") as HTMLInputElement).value).toEqual("04/2020");
   });
 
   it("displays next 12 months in calendar, starting in october", () => {
     useMockDate("2021-10-01");
+
     useMockUserData({
       onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
-      taxFilings: [generateTaxFiling({})],
+      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
     });
 
-    const subject = renderSection(<OperateSection displayContent={emptyContent} />);
+    const filingRef: Record<string, FilingReference> = {
+      "some-tax-filing-identifier-1": {
+        name: "some-name-1",
+        urlSlug: "some-urlSlug-1",
+      },
+    };
+
+    const subject = renderSection(
+      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+    );
     expect(getByTextAcrossElements(subject, "Oct 2021")).toBeInTheDocument();
     expect(getByTextAcrossElements(subject, "Nov 2021")).toBeInTheDocument();
     expect(getByTextAcrossElements(subject, "Dec 2021")).toBeInTheDocument();
@@ -121,12 +157,22 @@ describe("<OperateSection />", () => {
 
   it("displays next 12 months in calendar, starting in november", () => {
     useMockDate("2021-11-01");
+
     useMockUserData({
       onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
-      taxFilings: [generateTaxFiling({})],
+      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
     });
 
-    const subject = renderSection(<OperateSection displayContent={emptyContent} />);
+    const filingRef: Record<string, FilingReference> = {
+      "some-tax-filing-identifier-1": {
+        name: "some-name-1",
+        urlSlug: "some-urlSlug-1",
+      },
+    };
+
+    const subject = renderSection(
+      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+    );
     expect(getByTextAcrossElements(subject, "Nov 2021")).toBeInTheDocument();
     expect(getByTextAcrossElements(subject, "Oct 2022")).toBeInTheDocument();
 
@@ -136,19 +182,28 @@ describe("<OperateSection />", () => {
 
   it("displays the annual filing within the correct month", () => {
     useMockDate("2021-11-01");
+
     useMockUserData({
       onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
-      taxFilings: [generateTaxFiling({ identifier: "ANNUAL_FILING", dueDate: "2022-04-30" })],
+      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1", dueDate: "2022-04-30" })],
     });
 
-    const subject = renderSection(<OperateSection displayContent={emptyContent} />);
+    const filingRef: Record<string, FilingReference> = {
+      "some-tax-filing-identifier-1": {
+        name: "some-name-1",
+        urlSlug: "some-urlSlug-1",
+      },
+    };
+
+    const subject = renderSection(
+      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+    );
     const nextAnnualFilingMonth = subject.getByTestId("Apr 2022");
+
     expect(
       within(nextAnnualFilingMonth).getByText(RoadmapDefaults.calendarFilingDueDateLabel, { exact: false })
     ).toBeInTheDocument();
-    expect(
-      within(nextAnnualFilingMonth).getByText(TaxFilingNameLookup["ANNUAL_FILING"], { exact: false })
-    ).toBeInTheDocument();
+    expect(within(nextAnnualFilingMonth).getByText("some-name-1", { exact: false })).toBeInTheDocument();
     expect(within(nextAnnualFilingMonth).getByText("4/30", { exact: false })).toBeInTheDocument();
   });
 });

@@ -1,6 +1,13 @@
 import { render, RenderResult, within } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
-import { generateMunicipality, generatePreferences, generateStep, generateTask } from "@/test/factories";
+import {
+  generateMunicipality,
+  generateOnboardingData,
+  generatePreferences,
+  generateStep,
+  generateTask,
+  generateTaxFiling,
+} from "@/test/factories";
 import {
   setMockUserDataResponse,
   useMockOnboardingData,
@@ -12,11 +19,15 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { LookupIndustryById } from "@/shared/industry";
+import dayjs from "dayjs";
+import { FilingReference } from "@/lib/types/types";
+import { useMockDate } from "../mock/useMockDate";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
 
 describe("roadmap page", () => {
   beforeEach(() => {
@@ -24,12 +35,14 @@ describe("roadmap page", () => {
     useMockUserData({});
     useMockRoadmap({});
     useMockRouter({});
+    useMockDate("2021-10-01");
   });
 
   const renderRoadmapPage = (): RenderResult => {
     return render(
       <ThemeProvider theme={createTheme()}>
         <RoadmapPage
+          filingsReferences={{} as Record<string, FilingReference>}
           displayContent={{
             contentMd: "",
             operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
@@ -263,5 +276,55 @@ describe("roadmap page", () => {
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
     expect(within(sectionOperate).getByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeVisible();
+  });
+  it("renders the annual report link when business formation date is known", () => {
+    useMockDate("2021-11-01");
+
+    useMockRoadmap({
+      steps: [
+        generateStep({ name: "step1", section: "PLAN" }),
+        generateStep({ name: "step2", section: "START" }),
+      ],
+    });
+
+    useMockUserData({
+      onboardingData: generateOnboardingData({ dateOfFormation: "2005-11-01" }),
+      preferences: generatePreferences({
+        roadmapOpenSections: ["OPERATE"],
+      }),
+      taxFilings: [
+        generateTaxFiling({
+          identifier: "some-tax-filing-identifier-1",
+          dueDate: "2021-11-30",
+        }),
+      ],
+    });
+
+    const filingRef: Record<string, FilingReference> = {
+      "some-tax-filing-identifier-1": {
+        name: "some-name-1",
+        urlSlug: "some-urlSlug-1",
+      },
+    };
+
+    const renderRoadmapPage = (): RenderResult => {
+      return render(
+        <ThemeProvider theme={createTheme()}>
+          <RoadmapPage
+            filingsReferences={filingRef}
+            displayContent={{
+              contentMd: "",
+              operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
+            }}
+          />
+        </ThemeProvider>
+      );
+    };
+
+    const subject = renderRoadmapPage();
+    const annualReportLink = subject.getByTestId("some-tax-filing-identifier-1");
+    const currMonth = subject.getByTestId(dayjs().format("Nov 2021"));
+    expect(currMonth).toContainElement(annualReportLink);
+    expect(annualReportLink).toHaveAttribute("href", "filings/some-urlSlug-1");
   });
 });
