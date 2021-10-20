@@ -1,7 +1,7 @@
 export const LandingPageDefaults: Record<string, string> = {
   heroCalloutFirstLineText: "Your Business,",
-  heroCalloutSecondLineText: " Your Guide",
-  heroSupportingText: "Get your free, personalized roadmap to start your new business in New Jersey.",
+  heroCalloutSecondLineText: "Your Way",
+  heroSupportingText: "Get your free, personalized checklist to start your new business in New Jersey.",
   herocallToActionText: "Get started",
   section2HeaderFirstLineText: "Starting a business in New",
   section2HeaderSecondLineText: " Jersey has never been ",
