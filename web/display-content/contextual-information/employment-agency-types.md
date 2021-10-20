@@ -1,7 +1,7 @@
 ---
 ---
-## Employment Agencies
-New Jersey’s Division of Consumer Affairs regulates Employment Agency services and divides them into several categories:
+## Employment and Personnel Services
+New Jersey’s Division of Consumer Affairs regulates employment agency services and divides them into several categories:
 * Career Consulting Firms
 * Career Counseling Firms/Agents
 * Consulting Firms (Headhunters)
@@ -13,4 +13,4 @@ New Jersey’s Division of Consumer Affairs regulates Employment Agency services
 * Resume Services/Agents
 * Temporary Help Service Firms
  
-Licenses are issued based on criteria such as the type of services offered and the type of personnel to be placed by your business (e.g., Nurses, Accountants, Administrative Assistants, etc.). You can learn more about these license requirements at [New Jersey’s Division of Consumer Affairs](https://www.njconsumeraffairs.gov/epservices).
+Licenses are issued based on criteria such as the type of services offered and the type of personnel to be placed by your business (e.g., Nurses, Accountants, Administrative Assistants, etc.). Learn more about [Employment and Personnel Services licenses](https://www.njconsumeraffairs.gov/epservices).
