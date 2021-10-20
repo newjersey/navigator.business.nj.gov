@@ -1,4 +1,4 @@
 ---
 ---
 
-`Learn what professions are considered an employment agency.|employment-agency-types`
+Learn about other `employment and personnel industries|employment-agency-types`.
