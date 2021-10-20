@@ -7,7 +7,7 @@ export const LandingPageDefaults: Record<string, string> = {
   section2HeaderSecondLineText: " Jersey has never been ",
   section2HeaderThirdLineText: "faster or easier!",
   section2SupportingText:
-    "The Navigator provides you with a free, personalized checklist of the forms and licenses you need to get your business up and running. To get started, you will create an account with the State, and answer a few questions, be prepared to tell us your:",
+    "We'll give you a step-by-step guide on the forms and licenses you need to get your business up and running. To get started, you will create an account, and answer a few questions, be prepared to tell us your:",
   section2Icon1Text: "Legal Structure",
   section2Icon2Text: "Industry",
   section2Icon3Text: "Location",
