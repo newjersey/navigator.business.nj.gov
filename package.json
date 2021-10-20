@@ -7,20 +7,27 @@
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
+    "@typescript-eslint/eslint-plugin": "4.33.0",
+    "@typescript-eslint/parser": "4.33.0",
     "cross-env": "7.0.3",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
     "husky": "7.0.2",
     "kill-port": "1.6.1",
     "lerna": "4.0.0",
-    "nc": "git+https://github.com/dsueltenfuss/nc.git"
+    "lint-staged": "11.2.3",
+    "nc": "git+https://github.com/dsueltenfuss/nc.git",
+    "prettier": "2.4.1"
   },
   "scripts": {
     "fences": "lerna run --stream fences",
     "lint": "lerna run --stream lint",
     "lint:fix": "lerna run lint:fix",
+    "lint:staged": "lint-staged",
     "postinstall": "lerna bootstrap --force-local",
     "preinstall": "npm install -g @aws-amplify/cli@6.2.1",
     "prepare": "husky install",
-    "prettier": "lerna run --stream prettier",
+    "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "lerna run --stream prettier:check",
     "start:dev": "lerna run  --stream dev",
     "test": "lerna run --stream test",
@@ -39,5 +46,13 @@
   "bugs": {
     "url": "https://github.com/newjersey/business.nj.gov/issues"
   },
-  "homepage": "https://github.com/newjersey/business.nj.gov#readme"
+  "homepage": "https://github.com/newjersey/business.nj.gov#readme",
+  "lint-staged": {
+    "*.{js,ts,tsx}": "eslint --fix",
+    "*.{js,ts,tsx,css,md}": "prettier --write"
+  },
+  "prettier": {
+    "printWidth": 110,
+    "endOfLine": "auto"
+  }
 }

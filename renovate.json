@@ -1,62 +1,35 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "stabilityDays": 3,
   "prConcurrentLimit": 15,
   "prCreation": "not-pending",
   "labels": ["renovate"],
   "packageRules": [
     {
-      "matchPackagePrefixes": [
-        "cypress"
-      ],
+      "matchPackagePrefixes": ["cypress"],
       "groupName": "cypress"
     },
     {
-      "matchPackageNames": [
-        "@types/jest",
-        "ts-jest",
-        "babel-jest"
-      ],
-      "matchPackagePrefixes": [
-        "jest"
-      ],
+      "matchPackageNames": ["@types/jest", "ts-jest", "babel-jest"],
+      "matchPackagePrefixes": ["jest"],
       "groupName": "jest"
     },
     {
-      "matchPackageNames": [
-        "@types/eslint",
-        "babel-eslint"
-      ],
-      "matchPackagePrefixes": [
-        "@typescript-eslint/",
-        "eslint"
-      ],
+      "matchPackageNames": ["@types/eslint", "babel-eslint"],
+      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "groupName": "linting"
     },
     {
-      "matchPackageNames": [
-        "@types/react",
-        "@types/react-tabs",
-        "focus-trap-react"
-      ],
-      "matchPackagePrefixes": [
-        "react"
-      ],
+      "matchPackageNames": ["@types/react", "@types/react-tabs", "focus-trap-react"],
+      "matchPackagePrefixes": ["react"],
       "groupName": "react"
     },
     {
-      "matchPackagePrefixes": [
-        "@testing-library"
-      ],
+      "matchPackagePrefixes": ["@testing-library"],
       "groupName": "testing-library"
     },
     {
-      "matchPackageNames": [
-        "@types/jasmine",
-        "jasmine"
-      ],
+      "matchPackageNames": ["@types/jasmine", "jasmine"],
       "groupName": "jasmine"
     },
     {
@@ -67,10 +40,7 @@
         "tsconfig-paths-webpack-plugin",
         "@serverless/typescript"
       ],
-      "matchPackagePrefixes": [
-        "serverless",
-        "webpack"
-      ],
+      "matchPackagePrefixes": ["serverless", "webpack"],
       "groupName": "serverless-and-webpack"
     }
   ]

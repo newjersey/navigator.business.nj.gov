@@ -1,8 +1,4 @@
 {
-  "packages": [
-    "api",
-    "shared",
-    "web"
-  ],
+  "packages": ["api", "shared", "web"],
   "version": "0.0.0"
 }
