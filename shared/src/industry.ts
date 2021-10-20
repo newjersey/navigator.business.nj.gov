@@ -67,7 +67,7 @@ export const Industries: Industry[] = [
   {
     id: "cleaning-aid",
     name: "Cleaning Aid",
-    description: "Offering services and aid related to cleaning",
+    description: "Offering cleaning services",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
@@ -84,7 +84,7 @@ export const Industries: Industry[] = [
     id: "food-truck",
     name: "Food Truck",
     description:
-      "A vehicle where food or beverages are transported, stored or prepared for sale at temporary locations.",
+      "A vehicle where food or beverages are transported, stored, or prepared for sale at temporary locations",
     canBeHomeBased: false,
     isLiquorLicenseApplicable: false,
     isMobileLocation: true,
@@ -92,15 +92,15 @@ export const Industries: Industry[] = [
   {
     id: "employment-agency",
     name: "Employment Agency",
-    description: "A business contracted to hire and staff employees for other companies.",
+    description: "A business that finds employment for a job seeker and employees for employers",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
   },
   {
     id: "homemaker-home-health-aide",
-    name: "Homemaker-Home Health Aide",
-    description: "Agency: A business staffing licensed personnel to provide home health care services",
+    name: "Home Health Aide",
+    description: "A business staffing licensed personnel to provide home health care services",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
