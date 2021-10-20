@@ -300,6 +300,7 @@ workflows:
           requires: 
           - production-hold
       - cypress-tests:
+          name: cypress-tests
           enable-dashboard: true
           filters:
             branches:
@@ -315,6 +316,7 @@ workflows:
              ignore:
               - main
       - cypress-tests:
+          name: cypress-tests
           filters:
             branches:
              ignore:
