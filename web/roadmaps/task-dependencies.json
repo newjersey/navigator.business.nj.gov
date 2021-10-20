@@ -6,6 +6,8 @@
   "get-insurance": ["form-business-entity", "register-for-taxes"],
   "get-insurance-hic": ["form-business-entity", "register-for-taxes"],
   "floor-plan-approval-doh": ["form-business-entity", "sign-lease"],
+  "home-health-aide-license": ["form-business-entity", "register-for-taxes"],
+  "individual-staff-licenses-health-aide": ["form-business-entity", "home-health-aide-license"],
   "search-licenses": ["form-business-entity", "register-for-taxes"],
   "search-licenses-employment-agency": ["form-business-entity"],
   "site-safety-permits-cosmetology": ["sign-lease", "building-permit"],
