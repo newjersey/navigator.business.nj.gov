@@ -5,11 +5,10 @@ name: "Understand License Requirements"
 callToActionLink: ""
 callToActionText: ""
 ---
-New Jersey’s Division of Consumer Affairs issues licenses and registrations to businesses that offer employment and staffing services to job seekers and other businesses.
+Your employment agency needs to apply for licenses and registration with the New Jersey Division of Consumer Affairs' Employment and Personnel Services. There are several different types of licenses, in order to decide the right licenses for your business, you need to decide:
  
-To identify the license relevant to your business, you will need to know:
-1. **Services:** Determine which professional services will be offered by your business (e.g., clerical, accounting, etc.)
-2. **Staff:** Identify which professional groups will be placed by your business (e.g., Administrative, Accountants, etc.)
+1. **Services:** Determine which professional services will be offered by your business (i.e., clerical, accounting, etc.)
+2. **Staff:** Identify which professional groups will be placed by your business (i.e., administrative, accountants, etc.)
 3. **Placement Terms:** Determine if your business will offer a one-time placement or temporary placement services
 4. **Fees:** Determine the party responsible for the cost of the placement fee
 
