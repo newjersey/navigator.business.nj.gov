@@ -14,24 +14,30 @@ interface Props {
 export const PageSkeleton = (props: Props): ReactElement => {
   return (
     <>
-      {!props.home && (
-        <a className="skip-link" href="#main">
-          Skip to main content
-        </a>
-      )}
-      <Banner />
-      <BetaBar />
+      <section aria-label="Official government website">
+        {!props.home && (
+          <div>
+            <a className="skip-link" href="#main">
+              Skip to main content
+            </a>
+          </div>
+        )}
+        <Banner />
+        <BetaBar />
+      </section>
       <div className="fit-screen-content">{props.children}</div>
-      {props.showLegalMessage && (
-        <div className="bg-base-lighter text-justify" role="banner">
-          <SingleColumnContainer>
-            <div className="padding-y-2 line-height-body-2">
-              <LegalMessage />
-            </div>
-          </SingleColumnContainer>
-        </div>
-      )}
-      <InnovFooter />
+      <footer>
+        {props.showLegalMessage && (
+          <div className="bg-base-lighter text-justify">
+            <SingleColumnContainer>
+              <div className="padding-y-2 line-height-body-2">
+                <LegalMessage />
+              </div>
+            </SingleColumnContainer>
+          </div>
+        )}
+        <InnovFooter />
+      </footer>
     </>
   );
 };

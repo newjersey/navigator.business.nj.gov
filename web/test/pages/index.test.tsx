@@ -46,4 +46,11 @@ describe("HomePage", () => {
     const page = render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
     expect(page.queryByText(SelfRegDefaults.signupTitleText)).not.toBeInTheDocument();
   });
+
+  it("renders one main element on the index page", () => {
+    const subject = render(<Home />);
+    expect(subject.getByTestId("main")).toBeInTheDocument();
+    expect(subject.getByTestId("SPL-div-ele")).toBeInTheDocument();
+    expect(subject.queryByTestId("SPL-main-ele")).not.toBeInTheDocument();
+  });
 });

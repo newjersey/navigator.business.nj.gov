@@ -58,59 +58,57 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
   }, [open]);
 
   return (
-    <>
-      <nav className="grid-container">
-        <div className="display-flex flex-row flex-justify flex-align-center height-8">
-          <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
-          <div className="z-100">
-            <button
-              className="clear-button"
-              ref={anchorRef}
-              aria-controls={open ? "menu-list-grow" : undefined}
-              aria-haspopup="true"
-              onClick={toggleDropdown}
-            >
-              <div className="text-bold text-primary flex flex-align-center">
-                <Icon className="usa-icon--size-4 margin-right-1">account_circle</Icon>
-                <div>{userName}</div>
-                <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
-              </div>
-            </button>
-            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin: placement === "bottom" ? "center top" : "center bottom",
-                  }}
-                >
-                  <Paper>
-                    <ClickAwayListener onClickAway={handleClose}>
-                      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                        <MenuItem onClick={handleProfileClick}>
-                          <button className="clear-button font-body-2xs text-bold text-primary">
-                            {NavDefaults.myNJAccountText}
-                          </button>
-                        </MenuItem>
-                        <MenuItem onClick={() => router.push("/profile")}>
-                          <button className="clear-button font-body-2xs text-bold text-primary">
-                            {NavDefaults.profileLinkText}
-                          </button>
-                        </MenuItem>
-                        <MenuItem onClick={handleLogoutClick}>
-                          <button className="clear-button font-body-2xs text-bold text-primary">
-                            {NavDefaults.logoutButton}
-                          </button>
-                        </MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </div>
+    <nav aria-label="Primary" className="grid-container">
+      <div className="display-flex flex-row flex-justify flex-align-center height-8">
+        <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+        <div className="z-100">
+          <button
+            className="clear-button"
+            ref={anchorRef}
+            aria-controls={open ? "menu-list-grow" : undefined}
+            aria-haspopup="true"
+            onClick={toggleDropdown}
+          >
+            <div className="text-bold text-primary flex flex-align-center">
+              <Icon className="usa-icon--size-4 margin-right-1">account_circle</Icon>
+              <div>{userName}</div>
+              <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
+            </div>
+          </button>
+          <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin: placement === "bottom" ? "center top" : "center bottom",
+                }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                      <MenuItem onClick={handleProfileClick}>
+                        <button className="clear-button font-body-2xs text-bold text-primary">
+                          {NavDefaults.myNJAccountText}
+                        </button>
+                      </MenuItem>
+                      <MenuItem onClick={() => router.push("/profile")}>
+                        <button className="clear-button font-body-2xs text-bold text-primary">
+                          {NavDefaults.profileLinkText}
+                        </button>
+                      </MenuItem>
+                      <MenuItem onClick={handleLogoutClick}>
+                        <button className="clear-button font-body-2xs text-bold text-primary">
+                          {NavDefaults.logoutButton}
+                        </button>
+                      </MenuItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 };

@@ -62,11 +62,14 @@ export const SectionAccordion = (props: Props): ReactElement => {
         >
           <h2 className={`flex flex-align-center margin-y-2 ${headerClasses}`}>
             <img
+              role="presentation"
               className={sectionIconClasses}
+              alt=""
               src={`/img/section-header-${sectionName}.svg`}
-              alt="section"
             />{" "}
-            <span>{SectionDefaults[props.sectionType]}</span>
+            <div className="inline" aria-label={`Section ${sectionName}`}>
+              {SectionDefaults[props.sectionType]}
+            </div>
           </h2>
         </AccordionSummary>
         <AccordionDetails>{props.children}</AccordionDetails>

@@ -47,7 +47,7 @@ export const SidebarPageLayout = ({ children, task, belowOutlineBoxComponent }: 
             </main>
             <div className="usa-layout-docs__sidenav desktop:grid-col-4 order-first">
               {isLargeScreen && (
-                <nav aria-label="Secondary navigation">
+                <nav aria-label="Secondary">
                   {" "}
                   {backButton}
                   <MiniRoadmap activeTaskId={task.id} />

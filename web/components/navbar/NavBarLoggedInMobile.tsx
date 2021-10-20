@@ -27,7 +27,7 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
         }}
       />
       <nav
-        aria-label="Primary Navigation"
+        aria-label="Primary"
         className={`width-100 padding-y-05 usa-navbar ${
           scrolled ? "scrolled scrolled-transition bg-white" : ""
         }`}
@@ -54,7 +54,7 @@ export const NavBarLoggedInMobile = ({ scrolled, task }: Props): ReactElement =>
       </nav>
       <FocusTrappedSidebar close={close} isOpen={sidebarIsOpen}>
         <nav
-          aria-label="Secondary navigation"
+          aria-label="Secondary"
           className={`left-nav ${sidebarIsOpen ? "is-visible" : "is-hidden"} `}
           data-testid="nav-sidebar-menu"
         >
