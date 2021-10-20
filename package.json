@@ -5,7 +5,10 @@
   "main": "index.js",
   "private": "true",
   "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
     "cross-env": "7.0.3",
+    "husky": "7.0.2",
     "kill-port": "1.6.1",
     "lerna": "4.0.0",
     "nc": "git+https://github.com/dsueltenfuss/nc.git"
@@ -14,8 +17,9 @@
     "fences": "lerna run --stream fences",
     "lint": "lerna run --stream lint",
     "lint:fix": "lerna run lint:fix",
-    "preinstall": "npm install -g @aws-amplify/cli@6.2.1",
     "postinstall": "lerna bootstrap --force-local",
+    "preinstall": "npm install -g @aws-amplify/cli@6.2.1",
+    "prepare": "husky install",
     "prettier": "lerna run --stream prettier",
     "prettier:check": "lerna run --stream prettier:check",
     "start:dev": "lerna run  --stream dev",
