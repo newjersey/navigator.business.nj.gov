@@ -9,7 +9,7 @@
   "home-health-aide-license": ["form-business-entity", "register-for-taxes"],
   "individual-staff-licenses-health-aide": ["form-business-entity", "home-health-aide-license"],
   "search-licenses": ["form-business-entity", "register-for-taxes"],
-  "search-licenses-employment-agency": ["form-business-entity"],
+  "search-licenses-employment-agency": ["form-business-entity", "register-for-taxes"],
   "site-safety-permits-cosmetology": ["sign-lease", "building-permit"],
   "town-mercantile-license-liquor": ["register-for-taxes", "sign-lease", "liquor-license-availability"],
   "zoning": ["sign-lease"],
