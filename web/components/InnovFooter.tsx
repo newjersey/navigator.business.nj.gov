@@ -76,7 +76,7 @@ export const InnovFooter = (): ReactElement => {
 
         <section
           className="usa-identifier__section usa-identifier__section--masthead"
-          aria-label="Office of Innovation links"
+          aria-label="Social media"
         >
           <div className="usa-identifier__container display-flex flex-column fac footer-container-external">
             <div className="usa-identifier__identity">

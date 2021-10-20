@@ -36,6 +36,7 @@ export const ContextualInfoPanel = (): ReactElement => {
       <FocusTrappedSidebar close={close} isOpen={contextualInfo.isVisible}>
         <aside
           data-testid="info-panel"
+          aria-label="Additional Information Panel"
           className={`info-panel ${contextualInfo.isVisible ? "is-visible" : "is-hidden"}`}
         >
           <button

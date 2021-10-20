@@ -187,10 +187,12 @@ const ProfilePage = (props: Props): ReactElement => {
           </SingleColumnContainer>
 
           <div className="margin-top-6 desktop:margin-top-0">
-            <SinglePageLayout>
+            <SinglePageLayout wrappedWithMain={false}>
               <UserDataErrorAlert />
               <SingleColumnContainer>
-                <h2>{ProfileDefaults.pageTitle}</h2>
+                <div role="heading" aria-level={1} className="h1-element">
+                  {ProfileDefaults.pageTitle}
+                </div>
                 <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <OnboardingBusinessName />

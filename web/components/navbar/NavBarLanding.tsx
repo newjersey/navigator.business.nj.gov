@@ -26,14 +26,15 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
   };
 
   return (
-    <div
+    <nav
+      aria-label="Primary"
       className={`grid-container width-100 padding-top-05 ${
         !isLargeScreen && scrolled ? "scrolled scrolled-transition bg-white-transparent" : ""
       }`}
     >
       <div className="grid-row grid-gap">
         <div className="desktop:grid-col-12 usa-prose">
-          <header className="flex fac fjb">
+          <div className="flex fac fjb">
             <div className="flex-custom">
               <img
                 className="padding-top-1 logo-max-width"
@@ -63,9 +64,9 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
               </span>
             </div>
             <Signup isOpen={signupIsOpen} onClose={() => setSignupIsOpen(false)} />
-          </header>
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };

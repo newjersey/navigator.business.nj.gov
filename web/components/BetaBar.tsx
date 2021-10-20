@@ -3,7 +3,7 @@ import { Beta } from "@/display-content/Beta";
 
 export const BetaBar = (): ReactElement => {
   return (
-    <div className="beta-bar" role="banner">
+    <div className="beta-bar">
       <div className="fdr fac fjc margin-auto width-full padding-y-2">
         <span className="usa-tag bg-base-yellow font-size-75 text-bold text-accent-warm">
           {Beta.betaIconText}

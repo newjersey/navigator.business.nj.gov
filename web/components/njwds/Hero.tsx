@@ -11,7 +11,7 @@ interface Props {
 
 export const Hero = (props: Props): ReactElement => {
   return (
-    <section className="usa-hero gradient-bg padding-top-12 padding-bottom-10" aria-label="Introduction">
+    <div className="usa-hero gradient-bg padding-top-12 padding-bottom-10">
       <div className="grid-container text-center flex-r-desktop">
         <div className="margin-auto flex-order-2 flex-larger">
           <img src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
@@ -36,6 +36,6 @@ export const Hero = (props: Props): ReactElement => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };

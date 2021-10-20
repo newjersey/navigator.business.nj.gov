@@ -2,8 +2,8 @@ import { ReactElement } from "react";
 
 export const Banner = (): ReactElement => {
   return (
-    <section className="nj-banner" aria-label="Official government website">
-      <header className="nj-banner__header">
+    <div className="nj-banner">
+      <div className="nj-banner__header">
         <div className="grid-container">
           <div className="nj-banner__inner">
             <div className="grid-col-auto">
@@ -34,7 +34,7 @@ export const Banner = (): ReactElement => {
             </div>
           </div>
         </div>
-      </header>
-    </section>
+      </div>
+    </div>
   );
 };

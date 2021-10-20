@@ -29,9 +29,9 @@ export const Card = (props: Props): ReactElement => {
   return (
     <li className="usa-card usa-card--header-first tablet:grid-col">
       <div className="usa-card__container flex-align-center card-container-nj-style">
-        <header className="usa-card__header padding-top-8 padding-top-1">
-          <h2 className="usa-card__heading text-green text-center ">{headerText}</h2>
-        </header>
+        <div className="usa-card__header padding-top-8 padding-top-1">
+          <h3 className="usa-card__heading text-green text-center ">{headerText}</h3>
+        </div>
         <div className={`usa-card__body text-center card-padding no-padding-x ${mainTextClassName || ""}`}>
           <p>{mainText}</p>
         </div>
