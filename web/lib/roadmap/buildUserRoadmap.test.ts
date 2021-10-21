@@ -10,6 +10,7 @@ import {
 import { getLastCalledWith } from "@/test/helpers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalityById";
+import { Industries } from "@/shared/industry";
 
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
@@ -73,44 +74,11 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("industry", () => {
-    it("adds cosmetology industry and modifications", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "cosmetology" }));
-      expectOnlyIndustry("cosmetology", getLastCalledWith(mockRoadmapBuilder)[0]);
-    });
-
-    it("adds restaurant industry and modifications", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "restaurant" }));
-      expectOnlyIndustry("restaurant", getLastCalledWith(mockRoadmapBuilder)[0]);
-    });
-
-    it("adds home-contractor industry and modifications", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "home-contractor" }));
-      expectOnlyIndustry("home-contractor", getLastCalledWith(mockRoadmapBuilder)[0]);
-    });
-
-    it("adds e-commerce industry and modifications", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "e-commerce" }));
-      expectOnlyIndustry("e-commerce", getLastCalledWith(mockRoadmapBuilder)[0]);
-    });
-
-    it("adds cleaning aid industry and modifications", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "cleaning-aid" }));
-      expectOnlyIndustry("cleaning-aid", getLastCalledWith(mockRoadmapBuilder)[0]);
-    });
-
-    it("adds retail industry and modifications", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "retail" }));
-      expectOnlyIndustry("retail", getLastCalledWith(mockRoadmapBuilder)[0]);
-    });
-
-    it("adds food-truck industry and modifications", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "food-truck" }));
-      expectOnlyIndustry("food-truck", getLastCalledWith(mockRoadmapBuilder)[0]);
-    });
-
-    it("adds employment agency industry and modifications", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "employment-agency" }));
-      expectOnlyIndustry("employment-agency", getLastCalledWith(mockRoadmapBuilder)[0]);
+    Industries.filter((x) => x.id !== "generic").forEach((industry) => {
+      it(`adds ${industry.name} industry and modifications`, async () => {
+        await buildUserRoadmap(generateOnboardingData({ industryId: industry.id }));
+        expectOnlyIndustry(industry.id, getLastCalledWith(mockRoadmapBuilder)[0]);
+      });
     });
 
     it("adds another-industry add-on when industry is generic", async () => {
