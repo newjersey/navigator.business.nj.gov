@@ -35,6 +35,7 @@ import { RoadmapContext } from "@/pages/_app";
 import { Alert } from "@/components/njwds/Alert";
 import { NavBar } from "@/components/navbar/NavBar";
 import { OnboardingErrorLookup } from "@/lib/utils/helpers";
+import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -65,6 +66,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const [error, setError] = useState<OnboardingError | undefined>(undefined);
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
 
   const setOnboardingData = (value: OnboardingData): void => {
@@ -96,12 +98,14 @@ const ProfilePage = (props: Props): ReactElement => {
       setError("REQUIRED_MUNICIPALITY");
       return;
     }
+    setIsLoading(true);
     setError(undefined);
     setAnalyticsDimensions(onboardingData);
 
     setRoadmap(await buildUserRoadmap(onboardingData));
 
     update({ ...userData, onboardingData, formProgress: "COMPLETED" }).then(async () => {
+      setIsLoading(false);
       setAlert("SUCCESS");
     });
   };
@@ -215,9 +219,15 @@ const ProfilePage = (props: Props): ReactElement => {
                     >
                       {ProfileDefaults.backButtonText}
                     </button>
-                    <button type="submit" className="usa-button margin-right-0" data-testid="save">
+                    <LoadingButton
+                      onClick={() => {}}
+                      loading={isLoading}
+                      className="usa-button margin-right-0"
+                      type="submit"
+                      data-testid="save"
+                    >
                       {ProfileDefaults.saveButtonText}
-                    </button>
+                    </LoadingButton>
                   </div>
                 </form>
               </SingleColumnContainer>
