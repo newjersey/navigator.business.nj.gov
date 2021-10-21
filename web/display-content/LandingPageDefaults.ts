@@ -7,7 +7,7 @@ export const LandingPageDefaults: Record<string, string> = {
   section2HeaderSecondLineText: " Jersey has never been ",
   section2HeaderThirdLineText: "faster or easier!",
   section2SupportingText:
-    "Get your step-by-step guide to help your business get up and running. We’ll ask you a few onboarding questions, be prepared to tell us your business’:",
+    "Get your step-by-step guide to help your business get up and running. We’ll ask you a few onboarding questions; be prepared to tell us your:",
   section2Icon1Text: "Legal Structure",
   section2Icon2Text: "Industry",
   section2Icon3Text: "Location",
@@ -28,7 +28,7 @@ export const LandingPageDefaults: Record<string, string> = {
   column2ImageAlt: "Sign up for our newsletter icon",
   column3Header: "Chat with a New Jersey Representative",
   column3SupportingText:
-    "Local representatives are available 9a.m-5p.m, Monday - Friday to help you with any business challenge. 9a.m.-5p.m. eastern time.",
+    "Local experts are available 9 a.m–5 p.m Eastern Time, Monday through Friday, to help you with any business challenge.",
   column3Button: "Start chatting",
   column3ButtonLink: "",
   column3Image: "../img/Not-Starting-3-chat.svg",
