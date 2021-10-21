@@ -11,6 +11,7 @@ import analytics from "@/lib/utils/analytics";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import { ToastAlert } from "./njwds-extended/ToastAlert";
 import { Button, Menu, MenuItem } from "@mui/material";
+import { TaskProgressLookup } from "@/display-content/TaskProgressLookup";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -73,6 +74,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         aria-controls="task-progress-status-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        aria-label={`Status of the current task is ${TaskProgressLookup[value].toLowerCase()}`}
       >
         {TaskProgressTagLookup[value]}
         <Icon>unfold_more</Icon>
