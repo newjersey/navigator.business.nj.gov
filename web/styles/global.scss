@@ -81,8 +81,10 @@ $lg: 64em; //desktop and up (1024px)
 .spinner-overlay {
   position: absolute;
   z-index: 100;
-  width: auto;
-  margin-left: -42%;
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
 }
 
 .spinner-margin-36 {
