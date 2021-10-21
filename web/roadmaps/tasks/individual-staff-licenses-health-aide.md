@@ -6,7 +6,7 @@ callToActionLink: "https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: "Apply or Verify a CHHA License"
 ---
 
-Your staff will need individual home health aide licenses. The New Jersey Divison of Consumer Affairs' Board of Nursing [maintains standards for home health aide education and training programs](https://www.njconsumeraffairs.gov/nur/Pages/default.aspx), and keeps a registry of all individuals who have successfully completed them. 
+Your staff will need individual home health aide licenses. The New Jersey Division of Consumer Affairs' Board of Nursing [maintains standards for home health aide education and training programs](https://www.njconsumeraffairs.gov/nur/Pages/default.aspx), and keeps a registry of all individuals who have successfully completed them. 
  
 All applicants who wish to become a Certified Homemaker-Home Health Aide (CHHA) must apply online for initial certification with the Board of Nursing and pass a criminal background check prior to beginning employment as a CHHA. 
  
