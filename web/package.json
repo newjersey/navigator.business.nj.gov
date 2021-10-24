@@ -64,7 +64,7 @@
     "@types/jest": "27.0.2",
     "@types/lodash.orderby": "4.6.6",
     "@types/node": "14.17.22",
-    "@types/react": "17.0.30",
+    "@types/react": "17.0.32",
     "@types/react-swipeable-views": "0.13.1",
     "@types/react-tabs": "2.3.3",
     "@types/react-transition-group": "4.4.4",
