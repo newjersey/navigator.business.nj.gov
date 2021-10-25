@@ -17,7 +17,7 @@ export const Content = (props: Props): ReactElement => {
     .use(remark2react, {
       remarkReactComponents: {
         code: ContextualInfoLink,
-        a: ExternalLink,
+        a: Link,
         table: OutlineBox,
         thead: Unformatted,
         tr: Unformatted,
@@ -30,6 +30,13 @@ export const Content = (props: Props): ReactElement => {
     .processSync(props.children).result as ReactElement;
 
   return <div className="usa-prose">{markdown}</div>;
+};
+
+const Link = ({ children, href }: { children: string[]; href: string }): ReactElement => {
+  if (/^https?:\/\/(.*)/.test(href)) {
+    return <ExternalLink href={href}>{children}</ExternalLink>;
+  }
+  return <a href={href}>{children[0]}</a>;
 };
 
 const ExternalLink = ({ children, href }: { children: string[]; href: string }): ReactElement => {
