@@ -1,4 +1,4 @@
-# Business.NJ.Gov Dashboardz
+# Business.NJ.Gov Dashboard
 
 This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/business.nj.gov#businessnjgov)
 
