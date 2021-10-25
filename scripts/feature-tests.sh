@@ -21,7 +21,7 @@ npx kill-port ${WIREMOCK_PORT}
 set -e
 
 echo "🚀 starting wiremock"
-npm --prefix=api run start:wiremock:with-port -- --port ${WIREMOCK_PORT} &
+yarn workspace @businessnjgovnavigator/api start:wiremock:with-port --port ${WIREMOCK_PORT} &
 while ! echo exit | nc localhost ${WIREMOCK_PORT}; do sleep 1; done
 
 echo "🚀 starting api"
@@ -30,20 +30,20 @@ export DYNAMO_PORT=${DYNAMO_PORT}
 export LAMBDA_PORT=${LAMBDA_PORT}
 export LICENSE_STATUS_BASE_URL=http://localhost:${WIREMOCK_PORT}
 export BUSINESS_NAME_BASE_URL=http://localhost:${WIREMOCK_PORT}
-npm --prefix=api start &
+yarn workspace @businessnjgovnavigator/api start &
 while ! echo exit | nc localhost ${API_PORT}; do sleep 1; done
 
 # need to start api before building webapp so that it can query for municipalities
 echo "📦 building webapp"
-API_BASE_URL=${API_BASE_URL} npm --prefix=web run build
+API_BASE_URL=${API_BASE_URL} yarn workspace @businessnjgovnavigator/web build
 
 echo "🚀 starting webapp"
-npm --prefix=web start -- --port=${WEB_PORT} &
+yarn workspace @businessnjgovnavigator/web start --port=${WEB_PORT} &
 while ! echo exit | nc localhost ${WEB_PORT}; do sleep 1; done
 
 echo "🌟 app started"
 
-CYPRESS_API_BASE_URL=${API_BASE_URL} npm --prefix=web run cypress:run:feature -- --browser=chrome --config baseUrl=http://localhost:${WEB_PORT}
+CYPRESS_API_BASE_URL=${API_BASE_URL} yarn workspace @businessnjgovnavigator/web cypress:run:feature --browser=chrome --config baseUrl=http://localhost:${WEB_PORT}
 
 set +e
 

@@ -14,47 +14,47 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v7-npm-deploy-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
-            - v7-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+            - v2-yarn-deploy-deps-{{ checksum "yarn.lock" }}
+            - v2-yarn-deps-{{ checksum "yarn.lock" }}
       - run:
-          name: Install npm packages
-          command: npm install --unsafe-perm
+          name: Install yarn packages
+          command: yarn install
       - run:
           name: Configure Amplify
           command: ./scripts/amplify-ci/configure.sh
       - run:
           name: Configure Serverless
-          command: npm run --prefix=api serverless config credentials -- --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
+          command: yarn workspace @businessnjgovnavigator/api serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
 
   code-quality:
     steps:
       - run:
           name: Run Typecheck
-          command: npm run typecheck
+          command: yarn typecheck
       - run:
           name: Run Cypress Typecheck
-          command: npm run --prefix=web typecheck:cypress
+          command: yarn workspace @businessnjgovnavigator/web typecheck:cypress
       - run:
           name: Run Prettier
-          command: npm run prettier
+          command: yarn prettier
       - run:
           name: Run Linting
-          command: npm run lint
+          command: yarn lint
       - run:
           name: Run Spell Checker
-          command: npm --prefix=web run spellcheck
+          command: yarn workspace @businessnjgovnavigator/web run spellcheck
       - run:
           name: Run Fences
-          command: npm run fences
+          command: yarn fences
       - run:
           name: Run Shared Unit Tests
-          command: npm run --prefix=shared test:ci
+          command: yarn workspace @businessnjgovnavigator/shared test:ci
       - run:
           name: Run Web Unit Tests
-          command: npm run --prefix=web test:ci
+          command: yarn workspace @businessnjgovnavigator/web test:ci
       - run:
           name: Run API Unit Tests
-          command: npm run --prefix=api test:ci
+          command: yarn workspace @businessnjgovnavigator/api test:ci
 
   perform-cypress-tests:
     parameters:
@@ -64,14 +64,14 @@ commands:
       - run:
           name: Install Additional Tools
           command: apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-      - run: npm run --prefix=web build --if-present
+      - run: yarn workspace @businessnjgovnavigator/web build
       - run:
           name: Start services
-          command: npm --prefix=api start & npm --prefix=api run start:wiremock & npm --prefix=web start
+          command: yarn workspace @businessnjgovnavigator/api start & yarn workspace @businessnjgovnavigator/api start:wiremock & yarn workspace @businessnjgovnavigator/web start
           background: true
       - run:
           name: Run Tests
-          command: npm run cypress:run -- --browser=chrome --record=<< parameters.enable-dashboard >>
+          command: yarn cypress:run --browser=chrome --record=<< parameters.enable-dashboard >>
           working_directory: web
       - store_test_results:
           path: web/cypress/results
@@ -85,23 +85,19 @@ commands:
   store-cache:
     steps:
       - save_cache:
-          key: v7-npm-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+          key: v2-yarn-deps-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
-            - ./web/node_modules
-            - ./api/node_modules
+            - ./.yarn/cache
             - /usr/local/lib/node_modules/npm/node_modules
             - /root/.cache/Cypress
 
   store-deploy-cache:
     steps:
       - save_cache:
-          key: v7-npm-deploy-deps-{{ checksum "package-lock.json" }}-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+          key: v2-yarn-deploy-deps-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
-            - ./web/node_modules
+            - ./.yarn/cache
             - ./web/.next/cache
-            - ./api/node_modules
             - /usr/local/lib/node_modules/npm/node_modules
             - /root/.cache/Cypress
 
@@ -109,7 +105,7 @@ commands:
     steps:
       - run:
           name: Deploy Serverless
-          command: npm run --prefix=api serverless deploy -- --verbose --stage ${STAGE} --region us-east-1
+          command: yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE} --region us-east-1
 
   deploy-amplify:
     steps:

@@ -2,7 +2,7 @@
   "name": "@businessnjgovnavigator/api",
   "version": "1.0.0",
   "main": "serverless.ts",
-  "private": "true",
+  "private": true,
   "scripts": {
     "build": "sls package",
     "deploy": "sls deploy",
@@ -11,7 +11,6 @@
     "install-dynamo-local": "sls dynamodb install",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
-    "postinstall": "npm run install-dynamo-local",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "serverless": "serverless",
@@ -24,7 +23,7 @@
     "typecheck": "tsc --noemit"
   },
   "engines": {
-    "node": ">=14.17.5"
+    "node": ">=14.18.1"
   },
   "prettier": {
     "printWidth": 110,
@@ -38,13 +37,13 @@
     "dayjs": "1.10.7",
     "express": "4.17.1",
     "jsonwebtoken": "8.5.1",
+    "lorem-ipsum": "2.0.4",
     "serverless-http": "2.7.0",
     "serverless-offline": "8.2.0",
     "uuid": "8.3.2",
     "winston": "3.3.3",
     "winston-cloudwatch": "3.1.1",
-    "xml2js": "0.4.23",
-    "lorem-ipsum": "^2.0.4"
+    "xml2js": "0.4.23"
   },
   "devDependencies": {
     "@serverless/typescript": "2.63.0",
@@ -76,6 +75,7 @@
     "serverless": "2.64.1",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "5.2.0",
+    "serverless-plugin-monorepo": "^0.10.0",
     "serverless-webpack": "5.5.5",
     "supertest": "6.1.6",
     "ts-jest": "27.0.7",

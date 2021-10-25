@@ -19,19 +19,20 @@ We deploy using **GitHub Actions** for CI/CD.
 
 ## Development
 
-You will need `npm` and Node installed, and also Java (for `serverless-dynamodb-local`)
+You will need `yarn`, `npm` and Node installed, and also Java (for `serverless-dynamodb-local`)
 
 ### Software Requirement
+
 - [Node 14](https://nodejs.org/en/download/)
 - [Java 16 JDK](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html)
 - [Python 3.9](https://www.python.org/downloads/)
 - [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) using "Visual C++ build tools" workload - **Windows Only**
 
-Clone the code and navigate to the root of this repository. Running **npm install** at the root will install all npm packages for both the frontend
+Clone the code and navigate to the root of this repository. Running **yarn** at the root will install all yarn packages for both the frontend
 and backend. It will also set up serverless's local DynamoDB.
 
 ```shell
-npm install
+yarn
 ```
 
 In order for the web frontend tests to pass and for it to be able to run locally, it **needs to have Amplify locally configured** such that the `web/aws-exports.js` file exists. This can be done by running and using the project's Amplify AWS credentials when prompted. These commands should be run from the root of the project.
@@ -53,6 +54,7 @@ sls config credentials -- --provider aws --key AWS_KEY --secret AWS_SECRET_KEY
 ### Local env
 
 Before you can run locally, you will need to:
+
 - create a `web/.env` that includes all the values laid out in the `web/.env-template` file.
 - create a `api/.env` that includes all the values laid out in the `api/.env-template` file.
 
@@ -64,7 +66,7 @@ We use jest for unit tests, on both the frontend. Run all tests with:
 ./scripts/test.sh
 ```
 
-Run Cypress feature tests using: 
+Run Cypress feature tests using:
 
 ```shell
 ./scripts/feature-tests.sh
@@ -73,22 +75,22 @@ Run Cypress feature tests using:
 ### Running locally
 
 Start the backend:
+
 ```shell
-npm --prefix=api run start
+yarn workspace @businessnjgovnavigator/api start
 ```
 
 Start the frontend
 
 ```shell
-npm --prefix=web run dev
+yarn workspace @businessnjgovnavigator/web dev
 ```
 
 Start wiremock (for mocking external dependencies locally)
 
 ```shell
-npm --prefix=api run start:wiremock
+yarn workspace @businessnjgovnavigator/api start:wiremock
 ```
-
 
 ### Deploying
 
@@ -124,13 +126,14 @@ For Nextjs, environment variables are inserted at build time. In `./web/next.con
 
 For jest testing, the value that will be used for the environment variables is set in `./web/setupTests.js`.
 
-For running (and testing) the app locally in development mode, it needs environment variables locally as well. These should be provided via a `web/.env` file which should *not* be checked into source control. There exists a file `web/.env-template` which provides a blank template to show what variables should be included. This *is* checked into source control and should be updated any time new frontend variables are added.
+For running (and testing) the app locally in development mode, it needs environment variables locally as well. These should be provided via a `web/.env` file which should _not_ be checked into source control. There exists a file `web/.env-template` which provides a blank template to show what variables should be included. This _is_ checked into source control and should be updated any time new frontend variables are added.
 
 ### UI Display Content
 
 The `./web/display-content` folder holds files that define the user text for:
+
 - `IndustryLookup.ts` - how industry names are displayed
-- `LegalStructureLookup.ts` - how legal structure names are displayed   
+- `LegalStructureLookup.ts` - how legal structure names are displayed
 
 ### Roadmaps
 
@@ -138,7 +141,7 @@ In the `./web/roadmaps` directory, we have JSON files containing the static cont
 
 ### Static Rendering
 
-We try to statically render the pages as much as possible, to take advantage of SEO.  Right now, the `/tasks/[taskId]` pages 
+We try to statically render the pages as much as possible, to take advantage of SEO. Right now, the `/tasks/[taskId]` pages
 get their content through fully server-side rendering at build time. The methods used for static rendering are in `./web/lib/static` -
 because they cannot be used for dynamic rendering.
 
@@ -147,16 +150,18 @@ The roadmap is not static, and is generated on-the-fly based on user data in the
 ### Authentication
 
 Amazon Cognito has a way of tightly coupling itself to code dependencies, which is not great. It's somewhat isolated right now:
+
 - `/signin` page uses the AWS Cognito components to render a sign-in page.
 - `AuthButton` makes use of Cognito's sign-out feature
 - `sessionHelper' is a wrapper around most Cognito Auth features.
 
 For the rest of the app, we use our domain representation of authentication to abstract Cognito away from this:
+
 - `AuthContext` provides the current user state to any component that requires it, and is the canonical representation of whether
-the app is signed-in or signed-out.
-- `signinHelper` is an abstraction of the business logic for what happens when a user signs in (redirects, etc) and should be 
-triggered after auth actions regardless of authentication provider.
-  
+  the app is signed-in or signed-out.
+- `signinHelper` is an abstraction of the business logic for what happens when a user signs in (redirects, etc) and should be
+  triggered after auth actions regardless of authentication provider.
+
 We also configure Cognito authentication programmatically in the Cypress `loginByCognitoApi` command.
 
 ### useSWR
@@ -173,10 +178,10 @@ with AWS Lambdas.
 
 We use serverless to deploy. If you do this locally, your local serverless CLI needs to be configured with AWS credentials.
 
-Locally, it uses `serverless-offline` and `serverless-dynamodb-local` to run and simulate the AWS environment.  Everything AWS and serverless is configured in `./api/serverless.ts`.
+Locally, it uses `serverless-offline` and `serverless-dynamodb-local` to run and simulate the AWS environment. Everything AWS and serverless is configured in `./api/serverless.ts`.
 
 We use serverless to deploy an Express app. The app itself is defined in `src/functions/migrate.ts` and is mostly a regular Express app,
-except it wraps its export in `serverless` to become a handler. Then, `src/functions/index.ts` defines the config structure that 
+except it wraps its export in `serverless` to become a handler. Then, `src/functions/index.ts` defines the config structure that
 proxies all routes through to be handled by the Express routing system.
 
 The rest of the code is regular hexagonal Express structure. the `src/api` folder contains route definitions, and depends on
@@ -191,10 +196,12 @@ DynamoDB isn't strongly schema'd, but we do expect objects of a certain structur
 We solve this by using **document versioning** and running **migrations** on individual documents as we retrieve them from storage. The documents are stored with a schema version number (which is stripped before sending to the frontend). On a get request for a document, if its version is out-of-date with the most recent, we run a series of migrations on it to map the data to the current structure. We then save that new document in the current version, and return it to the frontend.
 
 Reasons for this approach:
+
 - zero-downtime for the database anytime we change document schema
 - managed only in code, no need to handle AWS lambdas and streams to make a migration happen
 
 Notes about this approach:
+
 - in the database itself, various documents will be structured differently, as they will only be migrated when they are accessed. This isn't a concern if the documents are only ever accessed through the DB client layer, which performs the migrations as it accesses them
 
 #### Adding a new migration
@@ -214,12 +221,12 @@ If you want to change the structure of the `UserData` object, here's how:
 ## Ports
 
 |                    | local dev & CI feature tests | local feature tests | unit tests |
-| -------------      | --------- | ------------- | ---------- |
-| Nextjs frontend    | 3000      | 3001          |            |
-| Serverless backend | 5000      | 5001          |            |
-| DynamoDB           | 8000      | 8001          |            |
-| Lambda port        | 5050      | 5051          |            |
-| Dynalite local     |           |               | 8002       |
+| ------------------ | ---------------------------- | ------------------- | ---------- |
+| Nextjs frontend    | 3000                         | 3001                |            |
+| Serverless backend | 5000                         | 5001                |            |
+| DynamoDB           | 8000                         | 8001                |            |
+| Lambda port        | 5050                         | 5051                |            |
+| Dynalite local     |                              |                     | 8002       |
 
 ## Business.NJ.Gov
 
@@ -248,7 +255,6 @@ Business.NJ.gov is made possible by building on the work and creativity of the C
 ### Suggestions, Feedback and Contributions
 
 Please reach out or leave feedback for us at [Business.NJ.gov/feedback](https://business.nj.gov/feedback). You can also open a Github pull request or issue. If you want to get in touch with the Office of Innovation team, please email us at team@innovation.nj.gov.
-
 
 ### Join the Office of Innovation!
 

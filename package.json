@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/business.nj.gov#businessnjgov)",
   "main": "index.js",
-  "private": "true",
+  "private": true,
   "devDependencies": {
     "@commitlint/cli": "13.2.1",
     "@commitlint/config-conventional": "13.2.0",
@@ -24,7 +24,7 @@
     "lint": "lerna run --stream lint",
     "lint:fix": "lerna run lint:fix",
     "lint:staged": "lint-staged",
-    "postinstall": "lerna bootstrap --force-local",
+    "postinstall": "yarn workspace @businessnjgovnavigator/api install-dynamo-local",
     "preinstall": "npm install -g @aws-amplify/cli@6.2.1",
     "prepare": "husky install",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
@@ -34,8 +34,15 @@
     "test:ci": "lerna run --stream test:ci",
     "typecheck": "lerna run --stream typecheck"
   },
+  "workspaces": {
+    "packages": [
+      "api",
+      "shared",
+      "web"
+    ]
+  },
   "engines": {
-    "node": ">=14.17.5"
+    "node": ">=14.18.1"
   },
   "repository": {
     "type": "git",
@@ -54,5 +61,9 @@
   "prettier": {
     "printWidth": 110,
     "endOfLine": "auto"
+  },
+  "packageManager": "yarn@3.0.2",
+  "dependencies": {
+    "@aws-amplify/cli": "6.2.1"
   }
 }

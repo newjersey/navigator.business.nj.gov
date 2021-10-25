@@ -60,6 +60,7 @@ const serverlessConfiguration: AWS = {
     ssmLocation: ssmLocation,
   },
   plugins: [
+    "serverless-plugin-monorepo",
     "serverless-webpack",
     ...(isDocker ? [] : ["serverless-dynamodb-local"]),
     "serverless-offline-ssm",
