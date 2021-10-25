@@ -41,6 +41,7 @@ export const SidebarPageLayout = ({
   filingsReferences,
 }: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+  const featureDisableOperate = process.env.FEATURE_DISABLE_OPERATE ?? false;
 
   return (
     <>
@@ -58,7 +59,7 @@ export const SidebarPageLayout = ({
                   {" "}
                   {backButton}
                   <MiniRoadmap activeTaskId={task?.id} />
-                  {filingsReferences && (
+                  {!featureDisableOperate && filingsReferences && (
                     <SectionAccordion sectionType={"OPERATE" as SectionType} mini={true}>
                       <div className="margin-y-2"></div>
                       {Object.keys(filingsReferences).map((filing) => (
