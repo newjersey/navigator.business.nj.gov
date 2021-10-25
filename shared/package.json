@@ -1,8 +1,8 @@
 {
   "name": "@businessnjgovnavigator/shared",
   "version": "1.0.0",
-  "private": "true",
   "description": "A shared library for the business.nj.gov navigator",
+  "private": true,
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",

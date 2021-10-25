@@ -4,19 +4,19 @@ cd $(git rev-parse --show-toplevel)
 
 set -e
 
-npm run typecheck
+yarn typecheck
 
-npm run --prefix=web typecheck:cypress
+yarn workspace @businessnjgovnavigator/web typecheck:cypress
 
 # format files
-npm run prettier
+yarn prettier
 
-npm --prefix=web run spellcheck
+yarn workspace @businessnjgovnavigator/web spellcheck
 
-npm --prefix=web run fences
-npm --prefix=api run fences
+yarn workspace @businessnjgovnavigator/web fences
+yarn workspace @businessnjgovnavigator/api fences
 
 # run tests, feature tests, and push
-npm --prefix=shared run lint
-npm --prefix=web run lint
-npm --prefix=api run lint
+yarn workspace @businessnjgovnavigator/shared lint
+yarn workspace @businessnjgovnavigator/web lint
+yarn workspace @businessnjgovnavigator/api lint

@@ -3,5 +3,6 @@
 npx kill-port 8001
 
 set -e
-npm --prefix=api test
-npm --prefix=web test
+yarn workspace @businessnjgovnavigator/api test
+yarn workspace @businessnjgovnavigator/web test
+yarn workspace @businessnjgovnavigator/shared test

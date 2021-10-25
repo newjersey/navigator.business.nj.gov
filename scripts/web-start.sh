@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-npm --prefix=web run dev
+yarn workspace @businessnjgovnavigator/web dev
