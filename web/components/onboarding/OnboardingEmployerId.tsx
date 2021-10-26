@@ -1,6 +1,7 @@
 import { ProfileFields, ProfileFieldErrorMap } from "@/lib/types/types";
 import React, { ReactElement, FocusEvent } from "react";
 import { OnboardingField } from "./OnboardingField";
+import { displayAsEin } from "@/lib/utils/displayAsEin";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -19,14 +20,6 @@ export const OnboardingEmployerId = (props: Props): ReactElement => {
 
   const dataFormat = (value: string): string => value.replace(/[^0-9]/g, "");
 
-  const regex = (value: string): string => {
-    const words = dataFormat(value).split("");
-    if (words.length > 2) {
-      words.splice(2, 0, "-");
-    }
-    return words.join("");
-  };
-
   return (
     <OnboardingField
       fieldName={fieldName}
@@ -36,7 +29,7 @@ export const OnboardingEmployerId = (props: Props): ReactElement => {
       error={props.fieldStates[fieldName].invalid}
       validationText="Must be 9 digits long"
       valueFilter={dataFormat}
-      visualFilter={regex}
+      visualFilter={displayAsEin}
       fieldOptions={{
         inputProps: { inputMode: "numeric", maxLength: "10" },
       }}

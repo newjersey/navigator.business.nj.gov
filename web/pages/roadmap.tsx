@@ -2,9 +2,7 @@ import React, { ReactElement } from "react";
 import { GetStaticPropsResult } from "next";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
-import { GreyCallout } from "@/components/njwds-extended/GreyCallout";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { FilingReference, RoadmapDisplayContent } from "@/lib/types/types";
@@ -13,15 +11,14 @@ import { Content } from "@/components/Content";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRouter } from "next/router";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import analytics from "@/lib/utils/analytics";
 import { CircularProgress } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { OperateSection } from "@/components/roadmap/OperateSection";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
-import { LookupIndustryById } from "@/shared/industry";
 import { loadFilingsReferences } from "@/lib/static/loadFilings";
+import { MiniProfile } from "@/components/roadmap/MiniProfile";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -30,7 +27,7 @@ interface Props {
 
 const RoadmapPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
-  const { userData, isLoading, error } = useUserData();
+  const { userData, error } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const featureDisableOperate = process.env.FEATURE_DISABLE_OPERATE ?? false;
@@ -49,34 +46,6 @@ const RoadmapPage = (props: Props): ReactElement => {
           businessName: userData.onboardingData.businessName,
         })
       : RoadmapDefaults.roadmapTitleNotSet;
-  };
-
-  const getBusinessName = (): string => {
-    if (isLoading) return RoadmapDefaults.loadingText;
-    return userData?.onboardingData.businessName
-      ? userData.onboardingData.businessName
-      : RoadmapDefaults.greyBoxNotSetText;
-  };
-
-  const getIndustry = (): string => {
-    if (isLoading) return RoadmapDefaults.loadingText;
-    return userData?.onboardingData.industryId && userData?.onboardingData.industryId !== "generic"
-      ? LookupIndustryById(userData.onboardingData.industryId).name
-      : RoadmapDefaults.greyBoxSomeOtherIndustryText;
-  };
-
-  const getLegalStructure = (): string => {
-    if (isLoading) return RoadmapDefaults.loadingText;
-    return userData?.onboardingData.legalStructure
-      ? LegalStructureLookup[userData.onboardingData.legalStructure]
-      : RoadmapDefaults.greyBoxNotSetText;
-  };
-
-  const getMunicipality = (): string => {
-    if (isLoading) return RoadmapDefaults.loadingText;
-    return userData?.onboardingData.municipality
-      ? userData.onboardingData.municipality.displayName
-      : RoadmapDefaults.greyBoxNotSetText;
   };
 
   return (
@@ -99,32 +68,7 @@ const RoadmapPage = (props: Props): ReactElement => {
                 <div className="allow-long usa-intro">
                   <Content>{props.displayContent.contentMd}</Content>
                 </div>
-                <div>
-                  <GreyCallout
-                    link={{
-                      text: RoadmapDefaults.greyBoxEditText,
-                      href: "/profile",
-                      onClick: () => {
-                        analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
-                      },
-                    }}
-                  >
-                    <>
-                      <div data-business-name={userData?.onboardingData.businessName}>
-                        {RoadmapDefaults.greyBoxBusinessNameText}: <strong>{getBusinessName()}</strong>
-                      </div>
-                      <div data-industry={userData?.onboardingData.industryId}>
-                        {RoadmapDefaults.greyBoxIndustryText}: <strong>{getIndustry()}</strong>
-                      </div>
-                      <div data-legal-structure={userData?.onboardingData.legalStructure}>
-                        {RoadmapDefaults.greyBoxLegalStructureText}: <strong>{getLegalStructure()}</strong>
-                      </div>
-                      <div data-municipality={userData?.onboardingData.municipality?.name}>
-                        {RoadmapDefaults.greyBoxMunicipalityText}: <strong>{getMunicipality()}</strong>
-                      </div>
-                    </>
-                  </GreyCallout>
-                </div>
+                <MiniProfile onboardingData={userData.onboardingData} />
               </>
             )}
             <div className="margin-top-3">
