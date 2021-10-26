@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build": "sls package",
+    "clean": "rimraf .serverless .webpack",
     "deploy": "sls deploy",
     "dev": "npm run start",
     "fences": "gf",
@@ -72,6 +73,7 @@
     "jest-dynalite": "3.4.4",
     "jest-junit": "13.0.0",
     "prettier": "2.4.1",
+    "rimraf": "3.0.2",
     "serverless": "2.64.1",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "5.2.0",

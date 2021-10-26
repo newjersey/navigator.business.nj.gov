@@ -4,6 +4,24 @@
   "description": "This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
+  "scripts": {
+    "build": "lerna run --stream build",
+    "clean": "lerna run --stream clean",
+    "fences": "lerna run --stream fences",
+    "lint": "lerna run --stream lint",
+    "lint:fix": "lerna run lint:fix",
+    "lint:staged": "lint-staged",
+    "postinstall": "yarn workspace @businessnjgovnavigator/api install-dynamo-local",
+    "preinstall": "npm install -g @aws-amplify/cli@6.3.1",
+    "prepare": "husky install",
+    "prettier": "prettier --write . --ignore-path=./.eslintignore",
+    "prettier:check": "lerna run --stream prettier:check",
+    "start:dev": "lerna run  --stream dev",
+    "sync:deps": "yarnw-sync-deps --fix",
+    "test": "lerna run --stream test",
+    "test:ci": "lerna run --stream test:ci",
+    "typecheck": "lerna run --stream typecheck"
+  },
   "dependencies": {
     "@aws-amplify/ui-react": "1.2.21",
     "@emotion/react": "11.5.0",
@@ -106,6 +124,7 @@
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "node-fetch": "2.6.5",
     "prettier": "2.4.1",
+    "rimraf": "3.0.2",
     "serverless": "2.64.1",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "5.2.0",
@@ -122,22 +141,6 @@
     "webpack-node-externals": "3.0.0",
     "wiremock": "2.29.0",
     "yarn-workspace-sync-deps": "0.3.2"
-  },
-  "scripts": {
-    "fences": "lerna run --stream fences",
-    "lint": "lerna run --stream lint",
-    "lint:fix": "lerna run lint:fix",
-    "lint:staged": "lint-staged",
-    "postinstall": "yarn workspace @businessnjgovnavigator/api install-dynamo-local",
-    "preinstall": "npm install -g @aws-amplify/cli@6.3.1",
-    "prepare": "husky install",
-    "prettier": "prettier --write . --ignore-path=./.eslintignore",
-    "prettier:check": "lerna run --stream prettier:check",
-    "start:dev": "lerna run  --stream dev",
-    "sync:deps": "yarnw-sync-deps --fix",
-    "test": "lerna run --stream test",
-    "test:ci": "lerna run --stream test:ci",
-    "typecheck": "lerna run --stream typecheck"
   },
   "workspaces": {
     "packages": [

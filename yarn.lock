@@ -2158,6 +2158,7 @@ __metadata:
     jsonwebtoken: 8.5.1
     lorem-ipsum: 2.0.4
     prettier: 2.4.1
+    rimraf: 3.0.2
     serverless: 2.64.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
@@ -2277,6 +2278,7 @@ __metadata:
     remark: 12.0.1
     remark-html: 13.0.2
     remark-react: 8.0.0
+    rimraf: 3.0.2
     sass: 1.43.3
     serverless: 2.64.1
     serverless-dynamodb-local: 0.2.40
@@ -2319,6 +2321,7 @@ __metadata:
     jest: 27.3.1
     jest-junit: 13.0.0
     prettier: 2.4.1
+    rimraf: 3.0.2
     ts-jest: 27.0.7
     ts-node: 10.4.0
     tsconfig-paths: 3.11.0
@@ -2392,6 +2395,7 @@ __metadata:
     remark: 12.0.1
     remark-html: 13.0.2
     remark-react: 8.0.0
+    rimraf: 3.0.2
     sass: 1.43.3
     swr: 1.0.1
     ts-jest: 27.0.7
@@ -19980,7 +19984,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^3.0.0, rimraf@npm:^3.0.2":
+"rimraf@npm:3.0.2, rimraf@npm:^3.0.0, rimraf@npm:^3.0.2":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
   dependencies:

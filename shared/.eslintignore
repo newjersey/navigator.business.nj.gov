@@ -1,5 +1,4 @@
 # package directories
 node_modules
 
-src/setupTests.js
-src/teardownTests.js
+lib
