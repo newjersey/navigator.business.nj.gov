@@ -9,7 +9,7 @@ import { NavBarLoggedInDesktop } from "@/components/navbar/NavBarLoggedInDesktop
 type Props = {
   landingPage?: boolean;
   task?: Task;
-  sideBar?: boolean;
+  sideBarPageLayout?: boolean;
   filingsReferences?: Record<string, FilingReference>;
 };
 
@@ -50,7 +50,7 @@ export const NavBar = (props: Props): ReactElement => {
           <NavBarLoggedInMobile
             scrolled={scrolled}
             task={task}
-            sideBar={props.sideBar}
+            sideBarPageLayout={props.sideBarPageLayout}
             filingsReferences={props.filingsReferences}
           />
           <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />

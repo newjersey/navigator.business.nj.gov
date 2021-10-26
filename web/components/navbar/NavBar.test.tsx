@@ -10,6 +10,7 @@ import { ReactNode } from "react";
 import userEvent from "@testing-library/user-event";
 import { SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { FilingReference } from "@/lib/types/types";
+import { useMockRouter } from "@/test/mock/mockRouter";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -18,6 +19,7 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
+jest.mock("next/router");
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -39,7 +41,7 @@ describe("<NavBar />", () => {
   describe("navbar - used when user is on landing page", () => {
     it("displays landing page navbar when prop is passed", () => {
       const subject = render(
-        <NavBar landingPage={true} task={undefined} sideBar={false} filingsReferences={{}} />
+        <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} filingsReferences={{}} />
       );
       expect(subject.getByText(NavDefaults.registerButton)).toBeInTheDocument();
     });
@@ -69,7 +71,9 @@ describe("<NavBar />", () => {
   describe("desktop navbar", () => {
     const renderDesktopNav = (): RenderResult => {
       setLargeScreen(true);
-      return render(<NavBar landingPage={false} task={undefined} sideBar={false} filingsReferences={{}} />);
+      return render(
+        <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} filingsReferences={{}} />
+      );
     };
 
     displaysUserNameOrEmail(renderDesktopNav);
@@ -111,7 +115,7 @@ describe("<NavBar />", () => {
     const renderMobileRoadmapNav = (): RenderResult => {
       setLargeScreen(false);
       const subject = render(
-        <NavBar landingPage={false} task={undefined} sideBar={false} filingsReferences={{}} />
+        <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} filingsReferences={{}} />
       );
       fireEvent.click(subject.getByTestId("nav-menu-open"));
       return subject;
@@ -136,6 +140,7 @@ describe("<NavBar />", () => {
 
   describe("mobile navbar - renders roadmap within drawer", () => {
     beforeEach(() => {
+      useMockRouter({});
       useMockRoadmap({});
     });
 
@@ -150,7 +155,12 @@ describe("<NavBar />", () => {
       };
 
       const subject = render(
-        <NavBar landingPage={false} task={generateTask({})} sideBar={true} filingsReferences={filingRef} />
+        <NavBar
+          landingPage={false}
+          task={generateTask({})}
+          sideBarPageLayout={true}
+          filingsReferences={filingRef}
+        />
       );
       fireEvent.click(subject.getByTestId("nav-menu-open"));
       return subject;

@@ -4,18 +4,22 @@ import { Icon } from "@/components/njwds/Icon";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettings";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { FilingReference, SectionType, Task } from "@/lib/types/types";
+import { FilingReference, Task } from "@/lib/types/types";
 import { NavDefaults } from "@/display-content/NavDefaults";
-import { SectionAccordion } from "../roadmap/SectionAccordion";
-import Link from "next/link";
+import { MiniOperateSection } from "../roadmap/MiniOperateSection";
 interface Props {
   scrolled: boolean;
   task?: Task;
-  sideBar?: boolean;
+  sideBarPageLayout?: boolean;
   filingsReferences?: Record<string, FilingReference>;
 }
 
-export const NavBarLoggedInMobile = ({ scrolled, task, sideBar, filingsReferences }: Props): ReactElement => {
+export const NavBarLoggedInMobile = ({
+  scrolled,
+  task,
+  sideBarPageLayout,
+  filingsReferences,
+}: Props): ReactElement => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const open = () => setSidebarIsOpen(true);
   const close = () => setSidebarIsOpen(false);
@@ -49,7 +53,7 @@ export const NavBarLoggedInMobile = ({ scrolled, task, sideBar, filingsReference
           <Icon className="font-sans-xl">menu</Icon>
         </button>
         <div className={`usa-logo ${scrolled ? "bg-white" : ""} navigator-logo-mobile`}>
-          {sideBar ? (
+          {sideBarPageLayout ? (
             <div className="text-bold">{NavDefaults.taskPageNavBarHeading}</div>
           ) : (
             <img src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
@@ -72,24 +76,9 @@ export const NavBarLoggedInMobile = ({ scrolled, task, sideBar, filingsReference
           >
             <Icon className="font-sans-xl">close</Icon>
           </button>
-          {sideBar && <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />}
-          {sideBar && filingsReferences && (
-            <SectionAccordion sectionType={"OPERATE" as SectionType} mini={true}>
-              <div className="margin-y-2"></div>
-              {Object.keys(filingsReferences).map((filing) => (
-                <div key={filingsReferences[filing].name}>
-                  <Link href={`/filings/${filingsReferences[filing].urlSlug}`} passHref>
-                    <button
-                      data-testid={filingsReferences[filing].name}
-                      onClick={close}
-                      className="usa-link text-bold font-heading-sm text-no-underline clear-button"
-                    >
-                      {filingsReferences[filing].name}
-                    </button>
-                  </Link>
-                </div>
-              ))}
-            </SectionAccordion>
+          {sideBarPageLayout && <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />}
+          {sideBarPageLayout && filingsReferences && (
+            <MiniOperateSection filingsReferences={filingsReferences} onClose={close} />
           )}
           <NavSideBarUserSettings />
         </nav>

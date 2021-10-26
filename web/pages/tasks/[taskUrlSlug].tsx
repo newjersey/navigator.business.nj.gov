@@ -106,7 +106,7 @@ const TaskPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
       <PageSkeleton>
-        <NavBar task={props.task} sideBar={true} filingsReferences={props.filingsReferences} />
+        <NavBar task={props.task} sideBarPageLayout={true} filingsReferences={props.filingsReferences} />
         <SidebarPageLayout
           task={props.task}
           belowOutlineBoxComponent={nextAndPreviousButtons()}

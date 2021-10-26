@@ -230,3 +230,20 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.operate-bullet:before {
+  border-radius: 99rem;
+  background-color: #243413;
+  content: "";
+  height: 0.5rem;
+  width: 0.5rem;
+  margin-left: 8px;
+  margin-right: 20px;
+  box-sizing: border-box;
+  font-feature-settings: "tnum" 1, "kern" 1;
+  display: inline-block;
+}
+
+.operate-bullet.active:before {
+  background-color: #466c04;
+}
