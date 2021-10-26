@@ -11,6 +11,7 @@ import {
   OnboardingData,
   Preferences,
   Roadmap,
+  SectionCompletion,
   SectionType,
   Step,
   Task,
@@ -21,6 +22,7 @@ import {
 import { Industry, Industries } from "@/shared/industry";
 import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
 import dayjs from "dayjs";
+import { getSectionNames } from "@/lib/utils/helpers";
 
 import { LoremIpsum } from "lorem-ipsum";
 
@@ -134,6 +136,20 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
 export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
   return {
     steps: [generateStep({})],
+    ...overrides,
+  };
+};
+
+export const generateSectionCompletion = (
+  roadmap: Partial<Roadmap>,
+  overrides: Partial<SectionCompletion>
+): SectionCompletion => {
+  const sectionNames = getSectionNames(roadmap as Roadmap);
+  return {
+    ...sectionNames.reduce((accumulator, currentValue: SectionType) => {
+      accumulator[currentValue] = false;
+      return accumulator;
+    }, {} as SectionCompletion),
     ...overrides,
   };
 };

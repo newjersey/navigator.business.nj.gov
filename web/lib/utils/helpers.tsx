@@ -1,5 +1,15 @@
 import { useEffect, useRef, ReactElement } from "react";
-import { Roadmap, Step, Task, UserData, SectionType, OnboardingError } from "@/lib/types/types";
+import {
+  Roadmap,
+  Step,
+  Task,
+  UserData,
+  SectionType,
+  OnboardingError,
+  SectionCompletion,
+  Preferences,
+  sectionNames,
+} from "@/lib/types/types";
 import { NavDefaults } from "@/display-content/NavDefaults";
 import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
 
@@ -34,9 +44,45 @@ export const onEscape = (e: KeyboardEvent, handler: () => void): void => {
 export const templateEval = (template: string, args: Record<string, string>): string =>
   template.replace(/\${(\w+)}/g, (_, v) => args[v]);
 
-export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined => {
-  const stepInRoadmap = roadmap?.steps.find((step) => step.tasks.find((task) => task.id === taskId));
-  return stepInRoadmap?.tasks.find((task) => task.id === taskId);
+export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined =>
+  stepInRoadmap(roadmap, taskId)?.tasks.find((task) => task.id === taskId);
+
+export const getSectionCompletion = (
+  roadmap: Roadmap | undefined,
+  userData: UserData | undefined
+): SectionCompletion => {
+  if (!roadmap || !userData) {
+    return {} as SectionCompletion;
+  }
+  const taskMap = sectionsToTasksMap(roadmap) as Record<SectionType, Task[]>;
+  return sectionNames.reduce((accumulator, currentValue: SectionType) => {
+    accumulator[currentValue] =
+      taskMap[currentValue]?.every((task: Task) => userData.taskProgress[task.id] === "COMPLETED") ?? false;
+    return accumulator;
+  }, {} as SectionCompletion);
+};
+interface SectionPosition {
+  current: SectionType;
+  next: SectionType | undefined;
+}
+
+export const getSectionPositions = (
+  sectionCompletion: SectionCompletion,
+  roadmap: Roadmap,
+  taskId: string
+): SectionPosition => {
+  const currentSection = stepInRoadmap(roadmap, taskId)?.section as SectionType;
+  const nextSection = sectionNames
+    .slice(sectionNames.indexOf(currentSection))
+    .find((currentValue: SectionType) => !sectionCompletion[currentValue]);
+  return { current: currentSection, next: nextSection };
+};
+
+export const setPreferencesCloseSection = (preferences: Preferences, current: SectionType): Preferences => {
+  return {
+    ...preferences,
+    roadmapOpenSections: preferences.roadmapOpenSections.filter((currentValue) => currentValue !== current),
+  } as Preferences;
 };
 
 export const getModifiedTaskContent = (
@@ -133,3 +179,11 @@ export const camelCaseToSentence = (text: string): string => {
     .toLowerCase();
   return spacedCase.charAt(0).toUpperCase() + spacedCase.slice(1);
 };
+const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, Task[]> | undefined =>
+  roadmap?.steps.reduce((accumulator, currentValue: Step) => {
+    accumulator[currentValue.section] = [...(accumulator[currentValue.section] || []), ...currentValue.tasks];
+    return accumulator;
+  }, {} as Record<SectionType, Task[]>);
+
+const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | undefined =>
+  roadmap?.steps.find((step) => step.tasks.find((task) => task.id === taskId));

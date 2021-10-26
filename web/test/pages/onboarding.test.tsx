@@ -178,6 +178,7 @@ describe("onboarding", () => {
           <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
         </WithStatefulUserData>,
         undefined,
+        undefined,
         mockSetRoadmap
       )
     );

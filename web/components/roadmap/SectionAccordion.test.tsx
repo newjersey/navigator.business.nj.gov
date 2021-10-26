@@ -1,4 +1,10 @@
-import { generatePreferences, generateUserData } from "@/test/factories";
+import {
+  generatePreferences,
+  generateRoadmap,
+  generateSectionCompletion,
+  generateStep,
+  generateUserData,
+} from "@/test/factories";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import {
   currentUserData,
@@ -7,12 +13,15 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { SectionType, UserData } from "@/lib/types/types";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("<SectionAccordion />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockRoadmap({});
   });
 
   const statefulRender = (type: SectionType, userData: UserData): RenderResult => {
@@ -66,5 +75,13 @@ describe("<SectionAccordion />", () => {
     expect(currentUserData().preferences.roadmapOpenSections).toEqual(
       expect.arrayContaining(["PLAN", "START", "OPERATE"])
     );
+  });
+
+  it("checks completed section logo given section status", async () => {
+    const roadmap = generateRoadmap({ steps: [generateStep({ section: "PLAN" })] });
+    const sectionCompletion = generateSectionCompletion(roadmap, { PLAN: true });
+    useMockRoadmap(roadmap, sectionCompletion);
+    const subject = statefulRender("PLAN", generateUserData({}));
+    expect(subject.getByTestId("completed-plan-section-img")).toBeVisible();
   });
 });

@@ -1,12 +1,16 @@
-import { Roadmap } from "@/lib/types/types";
+import { Roadmap, SectionCompletion } from "@/lib/types/types";
 import { useContext } from "react";
 import { RoadmapContext } from "@/pages/_app";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getSectionCompletion, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 
-export const useRoadmap = (): { roadmap: Roadmap | undefined } => {
-  const { roadmap, setRoadmap } = useContext(RoadmapContext);
+export const useRoadmap = (): {
+  roadmap: Roadmap | undefined;
+  sectionCompletion: SectionCompletion | undefined;
+  updateStatus: (sectionCompletion?: SectionCompletion) => Promise<SectionCompletion>;
+} => {
+  const { roadmap, sectionCompletion, setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const { userData } = useUserData();
 
   useMountEffectWhenDefined(() => {
@@ -17,9 +21,17 @@ export const useRoadmap = (): { roadmap: Roadmap | undefined } => {
 
   const buildAndSetRoadmap = async () => {
     if (userData?.formProgress === "COMPLETED") {
-      setRoadmap(await buildUserRoadmap(userData.onboardingData));
+      const roadmap = await buildUserRoadmap(userData.onboardingData);
+      setRoadmap(roadmap);
+      setSectionCompletion(getSectionCompletion(roadmap, userData));
     }
   };
 
-  return { roadmap };
+  const updateStatus = async (sectionCompletion?: SectionCompletion) => {
+    const _roadmapStatus = sectionCompletion ?? getSectionCompletion(roadmap, userData);
+    setSectionCompletion(_roadmapStatus);
+    return _roadmapStatus;
+  };
+
+  return { roadmap, sectionCompletion, updateStatus };
 };

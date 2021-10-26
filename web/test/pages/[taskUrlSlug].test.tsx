@@ -5,6 +5,7 @@ import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import { Task, TaskProgress, UserData } from "@/lib/types/types";
 import {
   generateOnboardingData,
+  generatePreferences,
   generateStep,
   generateTask,
   generateTaskLink,
@@ -19,6 +20,7 @@ import {
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { RoadmapDefaults, SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -158,6 +160,62 @@ describe("task page", () => {
     expect(currentUserData().taskProgress).toEqual({
       "some-id": "COMPLETED",
       [taskId]: "IN_PROGRESS",
+    });
+  });
+
+  describe("task status updates", () => {
+    let taskProgress: Record<string, TaskProgress>;
+    beforeEach(() => {
+      const planTaskId = "123";
+      const sectionTaskId = "124";
+
+      taskProgress = {
+        [planTaskId]: "NOT_STARTED",
+        [sectionTaskId]: "COMPLETED",
+      };
+      const planTask = generateTask({ id: planTaskId });
+
+      const userData = generateUserData({
+        taskProgress,
+        preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
+      });
+
+      useMockRoadmap({
+        steps: [
+          generateStep({ tasks: [planTask], section: "PLAN" }),
+          generateStep({ tasks: [generateTask({ id: sectionTaskId })], section: "START" }),
+        ],
+      });
+
+      subject = renderPage(planTask, userData);
+
+      changeTaskNotStartedToCompleted();
+
+      taskProgress[planTaskId] = "COMPLETED";
+
+      expect(currentUserData().taskProgress).toEqual(taskProgress);
+    });
+
+    it("show modal upon section completion", async () => {
+      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
+      const link = subject.queryByText(
+        `${SectionDefaults["OPERATE"]} ${RoadmapDefaults.congratulatorModalLinkText}`
+      );
+      expect(link).toBeVisible();
+      fireEvent.click(link as HTMLElement);
+      expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    });
+
+    describe("operate feature flag check", () => {
+      beforeAll(() => {
+        process.env = Object.assign(process.env, { FEATURE_DISABLE_OPERATE: true });
+      });
+      it("hides operate text on modal with feature flag", () => {
+        expect(subject.getByText(`${RoadmapDefaults.congratulatorModalHeader}`)).toBeVisible();
+        expect(
+          subject.queryByText(`${SectionDefaults["OPERATE"]} ${RoadmapDefaults.congratulatorModalLinkText}`)
+        ).not.toBeInTheDocument();
+      });
     });
   });
 
@@ -448,4 +506,10 @@ describe("task page", () => {
       expect(subject.queryAllByText(TaskDefaults.loadingTaskDependencies)).toHaveLength(1);
     });
   });
+
+  const changeTaskNotStartedToCompleted = (): void => {
+    fireEvent.click(subject.getAllByText("Not started")[0]);
+    fireEvent.click(subject.getByText("Completed"));
+    expect(subject.getAllByText("Completed")[0]).toBeVisible();
+  };
 });
