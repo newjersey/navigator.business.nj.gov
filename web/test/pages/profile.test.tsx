@@ -158,6 +158,7 @@ describe("profile", () => {
           <Profile displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
         </WithStatefulUserData>,
         undefined,
+        undefined,
         mockSetRoadmap
       )
     );

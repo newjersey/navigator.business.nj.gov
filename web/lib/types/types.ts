@@ -234,7 +234,16 @@ export interface Roadmap {
   steps: Step[];
 }
 
-export type SectionType = "PLAN" | "START" | "OPERATE";
+export interface RoadmapStatus {
+  sectionCompletion: SectionCompletion;
+}
+
+export type SectionCompletion = Record<SectionType, boolean>;
+
+export const sectionNames = ["PLAN", "START", "OPERATE"] as const;
+
+export type SectionType = typeof sectionNames[number];
+
 export interface Step {
   step_number: number;
   name: string;

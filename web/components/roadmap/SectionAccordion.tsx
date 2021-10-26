@@ -4,6 +4,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SectionType } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
 import { SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 
 interface Props {
   sectionType: SectionType;
@@ -13,7 +14,7 @@ interface Props {
 
 export const SectionAccordion = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
-
+  const { sectionCompletion } = useRoadmap();
   const dropdownIconClasses = props.mini ? "usa-icon--size-3 text-ink" : "usa-icon--size-5 margin-x-1";
   const headerClasses = props.mini ? "" : "margin-top-3 tablet:margin-left-3";
   const sectionIconClasses = props.mini ? "height-4 padding-right-105" : "height-5 padding-right-205";
@@ -21,6 +22,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
 
   const sectionName = props.sectionType.toLowerCase();
   const isOpen = userData?.preferences.roadmapOpenSections.includes(props.sectionType);
+  const isCompleted = sectionCompletion ? sectionCompletion[props.sectionType] : false;
 
   const handleAccordionStateChange = async (): Promise<void> => {
     const roadmapOpenSections = userData?.preferences.roadmapOpenSections;
@@ -64,8 +66,9 @@ export const SectionAccordion = (props: Props): ReactElement => {
             <img
               role="presentation"
               className={sectionIconClasses}
+              src={isCompleted ? `/img/section-complete.svg` : `/img/section-header-${sectionName}.svg`}
               alt=""
-              src={`/img/section-header-${sectionName}.svg`}
+              data-testid={`${isCompleted ? "completed" : "regular"}-${sectionName}-section-img`}
             />{" "}
             <div className="inline" aria-label={`Section ${sectionName}`}>
               {SectionDefaults[props.sectionType]}

@@ -1,13 +1,19 @@
 import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
-import React, { ReactElement } from "react";
-import { Task, TaskProgress } from "@/lib/types/types";
+import React, { useState, ReactElement } from "react";
+import { SectionType, Task, TaskProgress } from "@/lib/types/types";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { Icon } from "@/components/njwds/Icon";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { getModifiedTaskContent } from "@/lib/utils/helpers";
+import {
+  setPreferencesCloseSection,
+  getModifiedTaskContent,
+  getSectionPositions,
+  getSectionCompletion,
+} from "@/lib/utils/helpers";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { CongratulatoryDialog } from "./CongratulatoryDialog";
 
 interface Props {
   task: Task;
@@ -16,13 +22,38 @@ interface Props {
 
 export const TaskHeader = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
-  const { roadmap } = useRoadmap();
+  const { roadmap, sectionCompletion, updateStatus } = useRoadmap();
+  const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
+  const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
+
+  const handleDialogClose = (): void => {
+    setDialogIsOpen(false);
+  };
 
   const updateTaskProgress = (newValue: TaskProgress): void => {
-    if (!userData) return;
-    update({
+    if (!userData || !roadmap || !sectionCompletion) return;
+    const updatedUserData = {
       ...userData,
       taskProgress: { ...userData?.taskProgress, [props.task.id]: newValue },
+    };
+    const updatedSectionCompletion = getSectionCompletion(roadmap, updatedUserData);
+    const currentSectionPositions = getSectionPositions(updatedSectionCompletion, roadmap, props.task.id);
+
+    let preferences = updatedUserData.preferences;
+
+    const sectionStatusHasChanged =
+      updatedSectionCompletion[currentSectionPositions.current] !==
+      sectionCompletion[currentSectionPositions.current];
+
+    if (sectionStatusHasChanged && updatedSectionCompletion[currentSectionPositions.current]) {
+      setNextSection(currentSectionPositions.next);
+      setDialogIsOpen(true);
+      preferences = setPreferencesCloseSection(updatedUserData.preferences, currentSectionPositions.current);
+    }
+    updateStatus(updatedSectionCompletion);
+    update({
+      ...updatedUserData,
+      preferences,
     });
   };
 
@@ -60,6 +91,11 @@ export const TaskHeader = (props: Props): ReactElement => {
       </div>
       <div className="margin-top-0 margin-bottom-2">{renderProgress()}</div>
       <UserDataErrorAlert />
+      <CongratulatoryDialog
+        nextSectionType={nextSection}
+        handleClose={handleDialogClose}
+        open={dialogIsOpen}
+      />
     </>
   );
 };

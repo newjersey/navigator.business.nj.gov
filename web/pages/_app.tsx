@@ -14,7 +14,7 @@ import { Amplify, Hub } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import awsExports from "../aws-exports";
 import { getCurrentUser, refreshToken } from "@/lib/auth/sessionHelper";
-import { Roadmap, UserDataError } from "@/lib/types/types";
+import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { onSignIn } from "@/lib/auth/signinHelper";
@@ -58,12 +58,16 @@ export const AuthContext = createContext<AuthContextType>({
 
 export interface RoadmapContextType {
   roadmap: Roadmap | undefined;
+  sectionCompletion: SectionCompletion | undefined;
   setRoadmap: (roadmap: Roadmap | undefined) => void;
+  setSectionCompletion: (sectionCompletion: SectionCompletion | undefined) => void;
 }
 
 export const RoadmapContext = createContext<RoadmapContextType>({
   roadmap: undefined,
+  sectionCompletion: undefined,
   setRoadmap: () => {},
+  setSectionCompletion: () => {},
 });
 
 export interface ContextualInfo {
@@ -156,6 +160,7 @@ const theme = createTheme({
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
+  const [sectionCompletion, setSectionCompletion] = useState<SectionCompletion | undefined>(undefined);
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
     markdown: "",
@@ -245,7 +250,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           <AuthContext.Provider value={{ state, dispatch }}>
             <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
               <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-                <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+                <RoadmapContext.Provider
+                  value={{ roadmap, setRoadmap, sectionCompletion, setSectionCompletion }}
+                >
                   <ContextualInfoPanel />
                   <Component {...pageProps} />
                 </RoadmapContext.Provider>

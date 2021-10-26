@@ -19,9 +19,11 @@ import { getByTextAcrossElements, queryByTextAcrossElements } from "@/test/helpe
 import { useMockDate } from "@/test/mock/useMockDate";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { ReactNode } from "react";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const emptyContent: OperateDisplayContent = {
   dateOfFormationMd: "",
@@ -39,7 +41,7 @@ describe("<OperateSection />", () => {
         roadmapOpenSections: ["OPERATE"],
       }),
     });
-
+    useMockRoadmap({});
     setupStatefulUserDataContext();
   });
 

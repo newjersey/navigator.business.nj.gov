@@ -9,7 +9,7 @@ import {
 } from "@/pages/_app";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
-import { BusinessUser, Roadmap, UserDataError } from "@/lib/types/types";
+import { BusinessUser, Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import os from "os";
 import { RenderResult } from "@testing-library/react";
 
@@ -55,10 +55,19 @@ export const withUserDataError = (
 export const withRoadmap = (
   subject: ReactElement,
   roadmap: Roadmap | undefined,
-  setRoadmap?: (roadmap: Roadmap | undefined) => void
+  sectionCompletion: SectionCompletion | undefined,
+  setRoadmap?: (roadmap: Roadmap | undefined) => void,
+  setSectionCompletion?: (sectionCompletion: SectionCompletion | undefined) => void
 ): ReactElement => {
   return (
-    <RoadmapContext.Provider value={{ roadmap, setRoadmap: setRoadmap || jest.fn() }}>
+    <RoadmapContext.Provider
+      value={{
+        roadmap,
+        sectionCompletion,
+        setRoadmap: setRoadmap || jest.fn(),
+        setSectionCompletion: setSectionCompletion || jest.fn(),
+      }}
+    >
       {subject}
     </RoadmapContext.Provider>
   );
