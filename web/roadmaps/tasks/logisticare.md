@@ -2,20 +2,23 @@
 id: "logisiticare"
 urlSlug: "logisiticare"
 name: "Register Your Vehicle "
-callToActionLink: "https://www.nj.gov/mvc/vehicles/reginitial.htm"
-callToActionText: "Obtain or Renew Your Vehicle Registration"
+callToActionLink: "https://www.logisticare.com/sfapplication"
+callToActionText: "Apply to Be a Transportation Provider with Logisticare"
 ---
-You should ensure your vehicle is properly registered as a passenger vehicle with the State of New Jersey prior to providing non-medical transportation services. 
-
-To complete this application, you must have:
-* [An appointment](https://telegov.njportal.com/njmvc/AppointmentWizard) with the NJ Motor Vehicle Commission
-* Vehicle Title 
-* Driver’s license or other ID 
-* New Jersey insurance card or company name & policy number
-* Completed [Vehicle Registration Application Form](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf) (Form BA-49)
-* Power of attorney if someone other than the purchaser is signing the documents
-* Lien holder information and financing statement if the vehicle is leased or financed.
-* [Application for Certificate of Ownership](https://www.nj.gov/mvc/pdf/about/ISM_SS-7.pdf), if the vehicle is registered in another state
-
+Some non-medical transportation companies choose to bill medicaid for their services. If you are considering billing medicaid, you will need to become a transportation provider with New Jersey’s non-medical transportation broker, `Logisticare|logisticare`. 
+ 
+To complete this application, you must have: 
+* Business name
+* NJ Tax ID 
+* Start Date
+* Business address (referred to as physical address in application)
+* Dispatch software used, if any
+* Copy of your W-9
+* The names and contact information of anyone with more than 5% ownership of the company
+* Vehicle insurance information
+* Dispatch communications information
+* Service area
+* Service hours
+ 
 After you complete this task, you will have:
-* A current and valid vehicle registration
+* Specific billing information for your transportation business
