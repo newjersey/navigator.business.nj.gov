@@ -3,6 +3,7 @@ $sm: 40em; //tablet + up (640px)
 $md: 50em; //big tablet (800px)
 $lg: 64em; //desktop and up (1024px)
 
+@import "colors";
 @import "flex";
 @import "onboarding";
 @import "roadmap";
