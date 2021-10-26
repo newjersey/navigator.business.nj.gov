@@ -6,8 +6,8 @@ import analytics from "@/lib/utils/analytics";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import Link from "next/link";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { FilingReference, SectionType, Task } from "@/lib/types/types";
-import { SectionAccordion } from "../roadmap/SectionAccordion";
+import { FilingReference, Task } from "@/lib/types/types";
+import { MiniOperateSection } from "../roadmap/MiniOperateSection";
 
 interface Props {
   children: React.ReactNode;
@@ -41,7 +41,6 @@ export const SidebarPageLayout = ({
   filingsReferences,
 }: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
-  const featureDisableOperate = process.env.FEATURE_DISABLE_OPERATE ?? false;
 
   return (
     <>
@@ -59,23 +58,7 @@ export const SidebarPageLayout = ({
                   {" "}
                   {backButton}
                   <MiniRoadmap activeTaskId={task?.id} />
-                  {!featureDisableOperate && filingsReferences && (
-                    <SectionAccordion sectionType={"OPERATE" as SectionType} mini={true}>
-                      <div className="margin-y-2"></div>
-                      {Object.keys(filingsReferences).map((filing) => (
-                        <div key={filingsReferences[filing].name}>
-                          <Link href={`/filings/${filingsReferences[filing].urlSlug}`} passHref>
-                            <button
-                              data-testid={filingsReferences[filing].name}
-                              className="usa-link text-bold font-heading-sm text-no-underline clear-button"
-                            >
-                              {filingsReferences[filing].name}
-                            </button>
-                          </Link>
-                        </div>
-                      ))}
-                    </SectionAccordion>
-                  )}
+                  {filingsReferences && <MiniOperateSection filingsReferences={filingsReferences} />}
                 </nav>
               )}
             </div>

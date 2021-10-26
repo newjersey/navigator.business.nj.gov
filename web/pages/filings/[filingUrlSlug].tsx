@@ -33,7 +33,7 @@ const FilingPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.filing.name}`} />
       <PageSkeleton>
-        <NavBar sideBar={true} filingsReferences={props.filingsReferences} />
+        <NavBar sideBarPageLayout={true} filingsReferences={props.filingsReferences} />
         <SidebarPageLayout filingsReferences={props.filingsReferences}>
           <div className="margin-3">
             <div
