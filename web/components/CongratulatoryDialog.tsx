@@ -57,7 +57,7 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
           <img
             src={`/img/congratulations.svg`}
             alt="section"
-            style={{ margin: "33px 225px 56px", width: "98px", height: "99px" }}
+            style={{ marginTop: "33px", marginBottom: "33px", width: "98px", height: "99px" }}
           />
           <div style={{ fontWeight: 700, fontSize: "26px", lineHeight: "30.55px" }}>
             {RoadmapDefaults.congratulatorModalTitle}
