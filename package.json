@@ -64,6 +64,6 @@
   },
   "packageManager": "yarn@3.0.2",
   "dependencies": {
-    "@aws-amplify/cli": "6.2.1"
+    "@aws-amplify/cli": "6.3.1"
   }
 }
