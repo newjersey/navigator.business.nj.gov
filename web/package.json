@@ -92,7 +92,7 @@
     "jest-dom": "4.0.0",
     "jest-junit": "13.0.0",
     "jest-raw-loader": "1.0.1",
-    "node-fetch": "2.6.5",
+    "node-fetch": "3.0.0",
     "prettier": "2.4.1",
     "ts-jest": "27.0.7",
     "ts-loader": "9.2.6",
