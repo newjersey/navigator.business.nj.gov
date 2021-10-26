@@ -80,6 +80,10 @@ describe("profile", () => {
         businessName: "Applebees",
         industryId: "cosmetology",
         legalStructure: "c-corporation",
+        entityId: "1234567890",
+        employerId: "123456789",
+        taxId: "123456790",
+        notes: "whats appppppp",
         municipality: generateMunicipality({
           displayName: "Newark",
         }),
@@ -94,6 +98,10 @@ describe("profile", () => {
     expect(getLegalStructureValue()).toEqual("c-corporation");
 
     expect(getMunicipalityValue()).toEqual("Newark");
+    expect(getEmployerIdValue()).toEqual("12-3456789");
+    expect(getEntityIdValue()).toEqual("1234567890");
+    expect(getTaxIdValue()).toEqual("123456790");
+    expect(getNotesValue()).toEqual("whats appppppp");
   });
 
   it("user is able to save and stays on the page", async () => {
@@ -113,7 +121,11 @@ describe("profile", () => {
     fillText("Business name", "Cool Computers");
     selectByText("Location", newark.displayName);
     selectByValue("Industry", "e-commerce");
-    selectByValue("Legal structure", "general-partnership");
+    selectByValue("Legal structure", "c-corporation");
+    fillText("Entity id", "0234567890");
+    fillText("Tax id", "023456790");
+    fillText("Employer id", "02-3456780");
+    fillText("Notes", "whats appppppp");
     clickSave();
     await waitFor(() => expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument());
     await waitFor(() =>
@@ -125,8 +137,12 @@ describe("profile", () => {
           businessName: "Cool Computers",
           industryId: "e-commerce",
           homeBasedBusiness: true,
-          legalStructure: "general-partnership",
+          legalStructure: "c-corporation",
           municipality: newark,
+          taxId: "023456790",
+          entityId: "0234567890",
+          employerId: "023456780",
+          notes: "whats appppppp",
         },
       })
     );
@@ -160,6 +176,25 @@ describe("profile", () => {
     await waitFor(() =>
       expect(subject.queryByTestId("error-alert-REQUIRED_MUNICIPALITY")).not.toBeInTheDocument()
     );
+  });
+
+  it("entity-id field existing depends on legal structure", async () => {
+    const userData = generateUserData({
+      onboardingData: generateOnboardingData({
+        legalStructure: "general-partnership",
+      }),
+    });
+    subject = renderPage({ userData });
+    expect(subject.queryByLabelText("Entity id")).not.toBeInTheDocument();
+  });
+
+  it("prevents user from saving if they have not correctly modified validated fields", async () => {
+    subject = renderPage({});
+    fillText("Employer id", "123490");
+    fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
+    clickSave();
+    expect(subject.container.querySelector("#employerId-helper-text") as HTMLElement).toBeInTheDocument();
+    await waitFor(() => expect(subject.queryByTestId("toast-alert-SUCCESS")).not.toBeInTheDocument());
   });
 
   it("user is able to go back to roadmap", async () => {
@@ -220,6 +255,15 @@ describe("profile", () => {
 
   const getBusinessNameValue = (): string =>
     (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
+
+  const getEntityIdValue = (): string => (subject.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+
+  const getNotesValue = (): string => (subject.queryByLabelText("Notes") as HTMLInputElement)?.value;
+
+  const getTaxIdValue = (): string => (subject.queryByLabelText("Tax id") as HTMLInputElement)?.value;
+
+  const getEmployerIdValue = (): string =>
+    (subject.queryByLabelText("Employer id") as HTMLInputElement)?.value;
 
   const getIndustryValue = (): string => (subject.queryByTestId("industryid") as HTMLInputElement)?.value;
 

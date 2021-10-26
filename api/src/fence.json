@@ -11,6 +11,7 @@
     "jsonwebtoken",
     "@serverless/typescript",
     "aws-lambda",
+    "lorem-ipsum",
     "axios",
     "dayjs",
     "uuid",

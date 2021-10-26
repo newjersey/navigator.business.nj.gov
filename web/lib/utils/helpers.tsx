@@ -125,3 +125,11 @@ export const createRoadmapSections = (
     return getSection(sectionName, openStatus);
   });
 };
+
+export const camelCaseToSentence = (text: string): string => {
+  const spacedCase = text
+    .split(/(?=[A-Z])/)
+    .join(" ")
+    .toLowerCase();
+  return spacedCase.charAt(0).toUpperCase() + spacedCase.slice(1);
+};

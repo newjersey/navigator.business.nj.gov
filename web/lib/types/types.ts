@@ -38,17 +38,23 @@ export interface Preferences {
   roadmapOpenSteps: number[];
 }
 
+const emptyOnboardingData = {
+  businessName: "",
+  industryId: undefined,
+  legalStructure: undefined,
+  municipality: undefined,
+  liquorLicense: false,
+  homeBasedBusiness: false,
+  constructionRenovationPlan: undefined,
+  dateOfFormation: undefined,
+  entityId: undefined,
+  employerId: undefined,
+  taxId: undefined,
+  notes: "",
+} as OnboardingData;
+
 export const createEmptyOnboardingData = (): OnboardingData => {
-  return {
-    businessName: "",
-    industryId: undefined,
-    legalStructure: undefined,
-    municipality: undefined,
-    liquorLicense: false,
-    homeBasedBusiness: false,
-    constructionRenovationPlan: undefined,
-    dateOfFormation: undefined,
-  };
+  return emptyOnboardingData;
 };
 
 export interface OnboardingData {
@@ -60,6 +66,10 @@ export interface OnboardingData {
   homeBasedBusiness: boolean;
   constructionRenovationPlan: boolean | undefined;
   dateOfFormation: string | undefined;
+  entityId: string | undefined;
+  employerId: string | undefined;
+  taxId: string | undefined;
+  notes: string;
 }
 
 export type OnboardingError = "REQUIRED_LEGAL" | "REQUIRED_MUNICIPALITY";
@@ -105,47 +115,96 @@ export type OnboardingDisplayContent = {
     contentMd: string;
     placeholder: string;
   };
-};
-
-export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
-  return {
-    businessName: {
-      contentMd: "",
-      placeholder: "",
-    },
-    industry: {
-      contentMd: "",
-      placeholder: "",
-      specificHomeContractorMd: "",
-      specificEmploymentAgencyMd: "",
-      specificLiquorQuestion: {
-        contentMd: "",
-        radioButtonYesText: "",
-        radioButtonNoText: "",
-      },
-      specificHomeBasedBusinessQuestion: {
-        contentMd: "",
-        radioButtonYesText: "",
-        radioButtonNoText: "",
-      },
-    },
-    legalStructure: {
-      contentMd: "",
-      optionContent: {
-        "sole-proprietorship": "",
-        "general-partnership": "",
-        "limited-partnership": "",
-        "limited-liability-partnership": "",
-        "limited-liability-company": "",
-        "c-corporation": "",
-      },
-    },
-    municipality: {
-      contentMd: "",
-      placeholder: "",
-    },
+  notes: {
+    contentMd: string;
+  };
+  taxId: {
+    contentMd: string;
+  };
+  employerId: {
+    contentMd: string;
+  };
+  entityId: {
+    contentMd: string;
   };
 };
+
+const emptyOnboardingDisplayContent = {
+  businessName: {
+    contentMd: "",
+    placeholder: "",
+  },
+  industry: {
+    contentMd: "",
+    placeholder: "",
+    specificHomeContractorMd: "",
+    specificEmploymentAgencyMd: "",
+    specificLiquorQuestion: {
+      contentMd: "",
+      radioButtonYesText: "",
+      radioButtonNoText: "",
+    },
+    specificHomeBasedBusinessQuestion: {
+      contentMd: "",
+      radioButtonYesText: "",
+      radioButtonNoText: "",
+    },
+  },
+  legalStructure: {
+    contentMd: "",
+    optionContent: {
+      "sole-proprietorship": "",
+      "general-partnership": "",
+      "limited-partnership": "",
+      "limited-liability-partnership": "",
+      "limited-liability-company": "",
+      "c-corporation": "",
+    },
+  },
+  municipality: {
+    contentMd: "",
+    placeholder: "",
+  },
+  notes: {
+    contentMd: "",
+  },
+  taxId: {
+    contentMd: "",
+  },
+  employerId: {
+    contentMd: "",
+  },
+  entityId: {
+    contentMd: "",
+  },
+} as OnboardingDisplayContent;
+
+export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
+  return emptyOnboardingDisplayContent;
+};
+
+export type ProfileFields = keyof OnboardingData & keyof OnboardingDisplayContent;
+const onboardingDisplayContentFields = Object.keys(
+  emptyOnboardingDisplayContent
+) as (keyof OnboardingDisplayContent)[];
+
+const onboardingDataFields = Object.keys(emptyOnboardingData) as (keyof OnboardingData)[];
+
+export const profileFields = [
+  ...new Set([...onboardingDisplayContentFields, ...onboardingDataFields]),
+] as ProfileFields[];
+
+type ProfileFieldStatus = {
+  invalid: boolean;
+  focus: boolean;
+};
+export type ProfileFieldErrorMap = Record<ProfileFields, ProfileFieldStatus>;
+
+export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
+  profileFields.reduce((p, c: ProfileFields) => {
+    p[c] = { invalid: false, focus: false };
+    return p;
+  }, {} as ProfileFieldErrorMap);
 
 export type RoadmapDisplayContent = {
   contentMd: string;
@@ -310,3 +369,5 @@ export type SelfRegRequest = {
   email: string;
   confirmEmail: string;
 };
+
+export const TradeNameGroup: LegalStructure[] = ["general-partnership", "sole-proprietorship"];
