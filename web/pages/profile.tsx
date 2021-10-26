@@ -55,7 +55,7 @@ interface AlertProps {
   header?: string;
   link?: string;
 }
-type OnboardingStatus = "SUCCESS";
+type OnboardingStatus = "SUCCESS" | "ERROR";
 
 const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
   SUCCESS: {
@@ -63,6 +63,11 @@ const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
     header: ProfileDefaults.successTextHeader,
     link: ProfileDefaults.successTextLink,
     variant: "success",
+  },
+  ERROR: {
+    body: ProfileDefaults.errorTextBody,
+    header: ProfileDefaults.errorTextHeader,
+    variant: "error",
   },
 };
 
@@ -114,6 +119,7 @@ const ProfilePage = (props: Props): ReactElement => {
       if (!onboardingData.municipality) {
         setError("REQUIRED_MUNICIPALITY");
       }
+      setAlert("ERROR");
       return;
     }
 
@@ -195,12 +201,14 @@ const ProfilePage = (props: Props): ReactElement => {
                 </div>
                 <div className="padding-top-05">
                   {OnboardingStatusLookup[alert].body}
-                  <Link href="/roadmap">
-                    <a href="/roadmap" data-testid={`toast-link`}>
-                      {" "}
-                      {OnboardingStatusLookup[alert].link}
-                    </a>
-                  </Link>
+                  {OnboardingStatusLookup[alert] && (
+                    <Link href="/roadmap">
+                      <a href="/roadmap" data-testid={`toast-link`}>
+                        {" "}
+                        {OnboardingStatusLookup[alert].link}
+                      </a>
+                    </Link>
+                  )}
                 </div>
               </ToastAlert>
             )}
