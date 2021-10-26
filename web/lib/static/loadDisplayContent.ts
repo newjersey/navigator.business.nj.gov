@@ -18,6 +18,10 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
   const specificEmploymentAgency = getMarkdown(loadFile("industry/industry-specific/employment-agency.md"));
   const specificLiquor = getMarkdown(loadFile("industry/industry-specific/liquor.md"));
   const specificHomeBased = getMarkdown(loadFile("municipality/home-based-business.md"));
+  const employerId = getMarkdown(loadFile("employer-id.md"));
+  const entityId = getMarkdown(loadFile("entity-id.md"));
+  const notes = getMarkdown(loadFile("notes.md"));
+  const taxId = getMarkdown(loadFile("tax-id.md"));
 
   const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES_ORDERED.reduce(
     (acc, legalStructure) => {
@@ -62,6 +66,22 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
     municipality: {
       contentMd: municipality.content,
       ...(municipality.grayMatter as FieldGrayMatter),
+    },
+    employerId: {
+      contentMd: employerId.content,
+      ...(employerId.grayMatter as FieldGrayMatter),
+    },
+    entityId: {
+      contentMd: entityId.content,
+      ...(entityId.grayMatter as FieldGrayMatter),
+    },
+    notes: {
+      contentMd: notes.content,
+      ...(notes.grayMatter as FieldGrayMatter),
+    },
+    taxId: {
+      contentMd: taxId.content,
+      ...(taxId.grayMatter as FieldGrayMatter),
     },
   };
 };

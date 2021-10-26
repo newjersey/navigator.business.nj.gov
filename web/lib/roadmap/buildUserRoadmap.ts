@@ -1,10 +1,8 @@
-import { LegalStructure, OnboardingData, Roadmap } from "@/lib/types/types";
+import { LegalStructure, OnboardingData, Roadmap, TradeNameGroup } from "@/lib/types/types";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { templateEval } from "@/lib/utils/helpers";
 import { LookupIndustryById } from "@/shared/industry";
-
-const TradeNameGroup: LegalStructure[] = ["general-partnership", "sole-proprietorship"];
 
 const PublicRecordFilingGroup: LegalStructure[] = [
   "limited-partnership",

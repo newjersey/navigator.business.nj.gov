@@ -130,6 +130,10 @@ export interface OnboardingData {
   homeBasedBusiness: boolean;
   constructionRenovationPlan: boolean | undefined;
   dateOfFormation: string | undefined;
+  entityId: string | undefined;
+  employerId: string | undefined;
+  taxId: string | undefined;
+  notes: string;
 }
 
 export type Municipality = {
@@ -173,6 +177,10 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     homeBasedBusiness: false,
     constructionRenovationPlan: undefined,
     dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
   };
 };
 

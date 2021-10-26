@@ -12,13 +12,15 @@ import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 import {
   createEmptyOnboardingData,
+  createProfileFieldErrorMap,
   Municipality,
   OnboardingData,
   OnboardingDisplayContent,
   OnboardingError,
+  ProfileFieldErrorMap,
+  ProfileFields,
 } from "@/lib/types/types";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ProfileDefaults } from "@/display-content/ProfileDefaults";
@@ -36,6 +38,11 @@ import { Alert } from "@/components/njwds/Alert";
 import { NavBar } from "@/components/navbar/NavBar";
 import { OnboardingErrorLookup } from "@/lib/utils/helpers";
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
+import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
+import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
+import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
+import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
+import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 
 interface Props {
   displayContent: OnboardingDisplayContent;
@@ -49,6 +56,7 @@ interface AlertProps {
   link?: string;
 }
 type OnboardingStatus = "SUCCESS";
+
 const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
   SUCCESS: {
     body: ProfileDefaults.successTextBody,
@@ -65,6 +73,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const [error, setError] = useState<OnboardingError | undefined>(undefined);
+  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
@@ -82,6 +91,10 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   }, [userData]);
 
+  const onValidation = (field: ProfileFields, invalid: boolean) => {
+    setFieldStates({ ...fieldStates, [field]: { invalid } });
+  };
+
   const onBack = () => {
     if (!userData) return;
     if (!deepEqual(onboardingData, userData.onboardingData)) {
@@ -94,16 +107,20 @@ const ProfilePage = (props: Props): ReactElement => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
-    if (!onboardingData.municipality) {
-      setError("REQUIRED_MUNICIPALITY");
+    if (
+      Object.keys(fieldStates).some((k) => fieldStates[k as ProfileFields].invalid) ||
+      !onboardingData.municipality
+    ) {
+      if (!onboardingData.municipality) {
+        setError("REQUIRED_MUNICIPALITY");
+      }
       return;
     }
+
     setIsLoading(true);
     setError(undefined);
     setAnalyticsDimensions(onboardingData);
-
     setRoadmap(await buildUserRoadmap(onboardingData));
-
     update({ ...userData, onboardingData, formProgress: "COMPLETED" }).then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");
@@ -206,11 +223,25 @@ const ProfilePage = (props: Props): ReactElement => {
                   <OnboardingLegalStructure />
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   {error && error === "REQUIRED_MUNICIPALITY" && (
-                    <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
+                    <Alert
+                      data-testid={`error-alert-REQUIRED_MUNICIPALITY`}
+                      slim
+                      variant="error"
+                      className="margin-y-2"
+                    >
                       {OnboardingErrorLookup[error]}
                     </Alert>
                   )}
                   <OnboardingMunicipality />
+                  <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                  <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} />
+                  <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                  <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates}>
+                    <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                  </OnboardingEntityId>
+                  <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} />
+                  <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                  <OnboardingNotes />
                   <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
                   <div className="float-right fdr">
                     <button

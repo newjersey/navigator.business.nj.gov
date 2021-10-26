@@ -22,7 +22,25 @@ import { Industry, Industries } from "@/shared/industry";
 import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
 import dayjs from "dayjs";
 
-export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
+import { LoremIpsum } from "lorem-ipsum";
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4,
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 4,
+  },
+});
+
+export const getRandomParagraph = (paragraphs = 3): string => lorem.generateParagraphs(paragraphs);
+
+export const randomInt = (length = 8): number =>
+  Math.floor(
+    Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1)
+  );
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -72,6 +90,10 @@ export const generateOnboardingData = (
     homeBasedBusiness: false,
     constructionRenovationPlan: undefined,
     dateOfFormation: dayjs().format("YYYY-MM"),
+    entityId: randomInt(10).toString(),
+    employerId: randomInt(9).toString(),
+    taxId: randomInt(9).toString(),
+    notes: getRandomParagraph(),
     ...overrides,
   };
 };

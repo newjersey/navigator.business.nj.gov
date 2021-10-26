@@ -17,6 +17,7 @@
     "next/link",
     "next/script",
     "next/app",
+    "lorem-ipsum",
     "lodash.orderby",
     "next/document",
     "@aws-amplify/auth",
