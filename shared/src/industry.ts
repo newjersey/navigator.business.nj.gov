@@ -113,4 +113,12 @@ export const Industries: Industry[] = [
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
   },
+  {
+    id: "non-medical-transport",
+    name: "Non-Medical Transport",
+    description: "The transportation of an individual with medical needs",
+    canBeHomeBased: true,
+    isLiquorLicenseApplicable: false,
+    isMobileLocation: false,
+  },
 ];
