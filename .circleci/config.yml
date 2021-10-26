@@ -4,7 +4,7 @@ orbs:
   vulnerability-checker: whitesource/vulnerability-checker@19.10.1
 
 commands:
-  configure:
+  configure-and-build:
     steps:
       - run:
           name: Install Tools
@@ -25,6 +25,9 @@ commands:
       - run:
           name: Configure Serverless
           command: yarn workspace @businessnjgovnavigator/api serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
+      - run:
+          name: Build
+          command: yarn build
 
   code-quality:
     steps:
@@ -64,7 +67,6 @@ commands:
       - run:
           name: Install Additional Tools
           command: apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-      - run: yarn workspace @businessnjgovnavigator/web build
       - run:
           name: Start services
           command: yarn workspace @businessnjgovnavigator/api start & yarn workspace @businessnjgovnavigator/api start:wiremock & yarn workspace @businessnjgovnavigator/web start
@@ -161,7 +163,7 @@ commands:
 
   deploy:
     steps:
-      - configure
+      - configure-and-build
       - deploy-serverless
       - deploy-amplify
 
@@ -183,7 +185,7 @@ jobs:
       - image: node:14.18.1-buster
     resource_class: large
     steps:
-      - configure
+      - configure-and-build
       - code-quality
       - store-cache
       - store_test_results:
@@ -232,7 +234,7 @@ jobs:
       - image: node:14.18.1-buster
     resource_class: large
     steps:
-      - configure
+      - configure-and-build
       - install-chrome
       - perform-cypress-tests:
           enable-dashboard: << parameters.enable-dashboard >>

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "lib": ["ESNext"],
+    "declaration": true,
     "moduleResolution": "node",
     "removeComments": true,
     "sourceMap": true,
