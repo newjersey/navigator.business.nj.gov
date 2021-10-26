@@ -1,15 +1,8 @@
-import { LegalStructure, OnboardingData, Roadmap, TradeNameGroup } from "@/lib/types/types";
+import { OnboardingData, PublicRecordFilingGroup, Roadmap, TradeNameGroup } from "@/lib/types/types";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { templateEval } from "@/lib/utils/helpers";
 import { LookupIndustryById } from "@/shared/industry";
-
-const PublicRecordFilingGroup: LegalStructure[] = [
-  "limited-partnership",
-  "limited-liability-partnership",
-  "limited-liability-company",
-  "c-corporation",
-];
 
 export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {
   const addOns = [];

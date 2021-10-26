@@ -1,4 +1,4 @@
-import { render, RenderResult, within } from "@testing-library/react";
+import { fireEvent, render, RenderResult, within } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
@@ -17,17 +17,30 @@ import {
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { LookupIndustryById } from "@/shared/industry";
 import dayjs from "dayjs";
 import { FilingReference } from "@/lib/types/types";
 import { useMockDate } from "../mock/useMockDate";
+import * as materialUi from "@mui/material";
 
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
+
+jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
+
+const setMobileScreen = (value: boolean): void => {
+  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+};
 
 describe("roadmap page", () => {
   beforeEach(() => {
@@ -36,6 +49,7 @@ describe("roadmap page", () => {
     useMockRoadmap({});
     useMockRouter({});
     useMockDate("2021-10-01");
+    setMobileScreen(false);
   });
 
   const renderRoadmapPage = (): RenderResult => {
@@ -143,6 +157,101 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Not set")).toBeInTheDocument();
+    });
+
+    it("shows entity id if present", () => {
+      useMockOnboardingData({
+        entityId: "1234567890",
+        legalStructure: "limited-liability-company",
+      });
+      const subject = renderRoadmapPage();
+      expect(subject.getByText("1234567890")).toBeInTheDocument();
+    });
+
+    it("does not show entity id for Trade Name legal structure even if present", () => {
+      useMockOnboardingData({
+        legalStructure: "sole-proprietorship",
+        entityId: "1234567890",
+      });
+      const subject = renderRoadmapPage();
+      expect(subject.queryByText("1234567890")).not.toBeInTheDocument();
+    });
+
+    it("shows EIN with hyphen if present", () => {
+      useMockOnboardingData({
+        employerId: "123456789",
+      });
+      const subject = renderRoadmapPage();
+      expect(subject.getByText("12-3456789")).toBeInTheDocument();
+    });
+
+    it("shows new jersey tax id if present", () => {
+      useMockOnboardingData({
+        taxId: "123456789",
+      });
+      const subject = renderRoadmapPage();
+      expect(subject.getByText("123456789")).toBeInTheDocument();
+    });
+
+    it("shows notes if present", () => {
+      useMockOnboardingData({
+        notes: "some notes",
+      });
+      const subject = renderRoadmapPage();
+      expect(subject.getByText("some notes")).toBeInTheDocument();
+    });
+
+    it("does not show empty fields for ein, entity id, nj tax id, notes", () => {
+      useMockOnboardingData({
+        entityId: undefined,
+        employerId: undefined,
+        taxId: undefined,
+        notes: undefined,
+      });
+      const subject = renderRoadmapPage();
+      expect(subject.queryByText(RoadmapDefaults.greyBoxEINText)).not.toBeInTheDocument();
+      expect(subject.queryByText(RoadmapDefaults.greyBoxEntityIdText)).not.toBeInTheDocument();
+      expect(subject.queryByText(RoadmapDefaults.greyBoxTaxIdText)).not.toBeInTheDocument();
+      expect(subject.queryByText(RoadmapDefaults.greyBoxNotesText)).not.toBeInTheDocument();
+    });
+
+    it("shows more/less for mobile", () => {
+      setMobileScreen(true);
+      useMockOnboardingData({
+        businessName: "some name",
+        legalStructure: "c-corporation",
+        industryId: "restaurant",
+        municipality: generateMunicipality({ displayName: "Franklin" }),
+        entityId: "123456790",
+        employerId: "9876543210",
+        taxId: "111111111",
+        notes: "some notes",
+      });
+      const subject = renderRoadmapPage();
+      expect(subject.queryByText("some name")).toBeInTheDocument();
+      expect(subject.queryByText("C-Corporation")).toBeInTheDocument();
+      expect(subject.queryByText("Franklin")).toBeInTheDocument();
+      expect(subject.queryByText("Restaurant")).toBeInTheDocument();
+      expect(subject.queryByText("123456790")).not.toBeInTheDocument();
+      expect(subject.queryByText("98-76543210")).not.toBeInTheDocument();
+      expect(subject.queryByText("111111111")).not.toBeInTheDocument();
+      expect(subject.queryByText("some notes")).not.toBeInTheDocument();
+
+      fireEvent.click(subject.getByText(RoadmapDefaults.greyBoxViewMoreText));
+      expect(subject.queryByText("some name")).toBeInTheDocument();
+      expect(subject.queryByText("C-Corporation")).toBeInTheDocument();
+      expect(subject.queryByText("Franklin")).toBeInTheDocument();
+      expect(subject.queryByText("Restaurant")).toBeInTheDocument();
+      expect(subject.queryByText("123456790")).toBeInTheDocument();
+      expect(subject.queryByText("98-76543210")).toBeInTheDocument();
+      expect(subject.queryByText("111111111")).toBeInTheDocument();
+      expect(subject.queryByText("some notes")).toBeInTheDocument();
+
+      fireEvent.click(subject.getByText(RoadmapDefaults.greyBoxViewLessText));
+      expect(subject.queryByText("123456790")).not.toBeInTheDocument();
+      expect(subject.queryByText("98-76543210")).not.toBeInTheDocument();
+      expect(subject.queryByText("111111111")).not.toBeInTheDocument();
+      expect(subject.queryByText("some notes")).not.toBeInTheDocument();
     });
 
     it("shows business info box if error is CACHED_ONLY", () => {

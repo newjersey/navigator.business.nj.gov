@@ -224,3 +224,9 @@ td {
   vertical-align: top;
   padding: 1rem;
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -380,3 +380,9 @@ export type SelfRegRequest = {
 };
 
 export const TradeNameGroup: LegalStructure[] = ["general-partnership", "sole-proprietorship"];
+export const PublicRecordFilingGroup: LegalStructure[] = [
+  "limited-partnership",
+  "limited-liability-partnership",
+  "limited-liability-company",
+  "c-corporation",
+];
