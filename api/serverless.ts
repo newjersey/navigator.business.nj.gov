@@ -16,6 +16,7 @@ const usersTable = `users-table-${stage}`;
 const ssmLocation = stage === "local" ? "dev" : stage;
 
 const disableAuth = process.env.DISABLE_AUTH ?? "";
+const adminPassword = process.env.ADMIN_PASSWORD ?? "";
 
 const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
 const myNJRoleName = process.env.MYNJ_ROLE_NAME || "";
@@ -117,6 +118,7 @@ const serverlessConfiguration: AWS = {
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_URL: myNJServiceUrl,
       DISABLE_AUTH: disableAuth,
+      ADMIN_PASSWORD: adminPassword,
       STAGE: stage,
     },
     lambdaHashingVersion: "20201221",
