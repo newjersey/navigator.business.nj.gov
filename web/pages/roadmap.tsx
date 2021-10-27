@@ -7,7 +7,7 @@ import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { FilingReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
-import { Content } from "@/components/Content";
+import { Content, ContentNonProse } from "@/components/Content";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRouter } from "next/router";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
@@ -88,11 +88,15 @@ const RoadmapPage = (props: Props): ReactElement => {
                         ))}
                     </SectionAccordion>
                   ))}
-                  {!featureDisableOperate && (
+                  {!featureDisableOperate ? (
                     <OperateSection
                       displayContent={props.displayContent.operateDisplayContent}
                       filingsReferences={props.filingsReferences}
                     />
+                  ) : (
+                    <div className="margin-top-6 font-body-2xs text-center">
+                      <ContentNonProse>{RoadmapDefaults.operateComplianceText}</ContentNonProse>
+                    </div>
                   )}
                 </>
               )}

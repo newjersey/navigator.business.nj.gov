@@ -13,6 +13,14 @@ interface Props {
 }
 
 export const Content = (props: Props): ReactElement => {
+  return (
+    <div className="usa-prose">
+      <ContentNonProse>{props.children}</ContentNonProse>
+    </div>
+  );
+};
+
+export const ContentNonProse = (props: Props): ReactElement => {
   const markdown = remark()
     .use(remark2react, {
       remarkReactComponents: {
@@ -29,7 +37,7 @@ export const Content = (props: Props): ReactElement => {
     })
     .processSync(props.children).result as ReactElement;
 
-  return <div className="usa-prose">{markdown}</div>;
+  return <>{markdown}</>;
 };
 
 const Link = ({ children, href }: { children: string[]; href: string }): ReactElement => {

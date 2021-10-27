@@ -29,8 +29,8 @@ export const RoadmapDefaults: Record<string, string> = {
   congratulatorModalTitle: "You did it!",
   congratulatorModalHeader: "You reached a crucial milestone as a business.",
   congratulatorModalBody: "You can now start your",
-  congratulatorModalLinkText: "tasks."
-
+  congratulatorModalLinkText: "tasks.",
+  operateComplianceText: "After you've started your business, you must stay in compliance with the State. Visit [Premier Business Services](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) to register."
 };
 
 export const SectionDefaults: Record<SectionType, string> = {
