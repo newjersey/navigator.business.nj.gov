@@ -193,7 +193,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
                 onClick={() => {}}
                 loading={isLoading}
                 outline={true}
-                className="text-no-wrap"
+                className="text-no-wrap padding-y-205"
                 type="submit"
                 data-testid="search-availability"
               >
