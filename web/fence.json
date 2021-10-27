@@ -38,6 +38,6 @@
     "@jest/types",
     "@mui/lab/AdapterDayjs",
     "dayjs/plugin/advancedFormat",
-    "@/shared/industry"
+    "@businessnjgovnavigator/shared"
   ]
 }

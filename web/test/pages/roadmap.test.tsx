@@ -18,7 +18,7 @@ import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadm
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { LookupIndustryById } from "@/shared/industry";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import { FilingReference } from "@/lib/types/types";
 import { useMockDate } from "../mock/useMockDate";

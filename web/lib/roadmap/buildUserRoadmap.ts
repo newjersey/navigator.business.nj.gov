@@ -2,7 +2,7 @@ import { OnboardingData, PublicRecordFilingGroup, Roadmap, TradeNameGroup } from
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { templateEval } from "@/lib/utils/helpers";
-import { LookupIndustryById } from "@/shared/industry";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 
 export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {
   const addOns = [];

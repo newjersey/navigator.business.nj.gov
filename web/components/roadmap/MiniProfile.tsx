@@ -3,7 +3,7 @@ import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import analytics from "@/lib/utils/analytics";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { OnboardingData } from "@/lib/types/types";
-import { LookupIndustryById } from "@/shared/industry";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMediaQuery } from "@mui/material";
