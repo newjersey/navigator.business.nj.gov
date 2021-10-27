@@ -40,5 +40,9 @@
     "ts-node": "10.4.0",
     "tsconfig-paths": "3.11.0",
     "typescript": "4.4.4"
+  },
+  "jest-junit": {
+    "outputDirectory": "../reports/test_results",
+    "uniqueOutputName": "true"
   }
 }
