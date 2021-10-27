@@ -20,6 +20,9 @@ npx kill-port ${WIREMOCK_PORT}
 
 set -e
 
+echo "🚀 build shared library"
+yarn workspace @businessnjgovnavigator/shared build
+
 echo "🚀 starting wiremock"
 yarn workspace @businessnjgovnavigator/api start:wiremock:with-port --port ${WIREMOCK_PORT} &
 while ! echo exit | nc localhost ${WIREMOCK_PORT}; do sleep 1; done
