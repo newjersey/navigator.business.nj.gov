@@ -2141,7 +2141,7 @@ __metadata:
     "@typescript-eslint/parser": 4.33.0
     aws-lambda: 1.0.6
     aws-sdk: 2.996.0
-    axios: 0.21.4
+    axios: 0.24.0
     body-parser: 1.19.0
     copy-webpack-plugin: 9.0.1
     cors: 2.8.5
@@ -2224,7 +2224,7 @@ __metadata:
     aws-amplify: 4.2.9
     aws-lambda: 1.0.6
     aws-sdk: 2.996.0
-    axios: 0.21.4
+    axios: 0.24.0
     babel-jest: 27.3.1
     body-parser: 1.19.0
     copy-webpack-plugin: 9.0.1
@@ -7392,6 +7392,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:0.24.0":
+  version: 0.24.0
+  resolution: "axios@npm:0.24.0"
+  dependencies:
+    follow-redirects: ^1.14.4
+  checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^2.2.0":
   version: 2.2.0
   resolution: "axobject-query@npm:2.2.0"
@@ -11848,7 +11857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.14.0":
+"follow-redirects@npm:^1.14.0, follow-redirects@npm:^1.14.4":
   version: 1.14.4
   resolution: "follow-redirects@npm:1.14.4"
   peerDependenciesMeta:
