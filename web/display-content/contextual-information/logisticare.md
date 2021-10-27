@@ -1,6 +1,6 @@
 ### Logisticare
 
-Logisticare is a broker contracted with the State of New Jersey to handle non-medical transportation, and the only company cleared to bill Medicaid. Their initial application process is done online and will require:
+Logisticare is a broker contracted with the State of New Jersey to handle non-medical transportation and the only company cleared to bill Medicaid. Their initial application process is done online and will require:
 * Your contact information and business name
 * City/Region
 * Number of vehicles in your fleet
