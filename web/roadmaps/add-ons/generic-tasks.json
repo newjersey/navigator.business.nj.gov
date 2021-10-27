@@ -5,11 +5,6 @@
     "task": "business-plan"
   },
   {
-    "step": 2,
-    "weight": 10,
-    "task": "reseller"
-  },
-  {
     "step": 3,
     "weight": 20,
     "task": "register-for-ein"

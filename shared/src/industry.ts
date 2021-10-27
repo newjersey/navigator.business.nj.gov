@@ -6,6 +6,7 @@ export interface Industry {
   isLiquorLicenseApplicable: boolean;
   licenseType?: string;
   isMobileLocation: boolean;
+  canBeReseller: boolean;
 }
 
 export const LookupIndustryById = (id: string | undefined): Industry => {
@@ -17,6 +18,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       canBeHomeBased: false,
       isLiquorLicenseApplicable: false,
       isMobileLocation: false,
+      canBeReseller: true,
     }
   );
 };
@@ -29,6 +31,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "restaurant",
@@ -37,6 +40,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: false,
     isLiquorLicenseApplicable: true,
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "e-commerce",
@@ -45,6 +49,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "home-contractor",
@@ -54,6 +59,7 @@ export const Industries: Industry[] = [
     isLiquorLicenseApplicable: false,
     licenseType: "Home Improvement Contractors",
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "cosmetology",
@@ -63,6 +69,7 @@ export const Industries: Industry[] = [
     isLiquorLicenseApplicable: false,
     licenseType: "Cosmetology and Hairstyling",
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "cleaning-aid",
@@ -71,6 +78,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "retail",
@@ -79,6 +87,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "food-truck",
@@ -88,6 +97,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: false,
     isLiquorLicenseApplicable: false,
     isMobileLocation: true,
+    canBeReseller: true,
   },
   {
     id: "employment-agency",
@@ -96,6 +106,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "homemaker-home-health-aide",
@@ -104,6 +115,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "janitorial-services",
@@ -112,6 +124,7 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
+    canBeReseller: true,
   },
   {
     id: "non-medical-transport",
@@ -120,5 +133,6 @@ export const Industries: Industry[] = [
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
+    canBeReseller: false,
   },
 ];

@@ -18,6 +18,10 @@ export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<
     modifications.push("liquor-license");
   }
 
+  if (industry.canBeReseller) {
+    addOns.push("reseller");
+  }
+
   if (onboardingData.legalStructure) {
     if (PublicRecordFilingGroup.includes(onboardingData.legalStructure)) {
       addOns.push("public-record-filing");
