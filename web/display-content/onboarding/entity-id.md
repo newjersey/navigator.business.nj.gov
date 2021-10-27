@@ -1,3 +1,3 @@
 ## Entity ID
 
-To find this number, `please use this guide|entity-id`.
+Get help finding your `Entity ID|entity-id`.
