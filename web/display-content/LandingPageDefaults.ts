@@ -7,7 +7,7 @@ export const LandingPageDefaults: Record<string, string> = {
   section2HeaderSecondLineText: " Jersey has never been ",
   section2HeaderThirdLineText: "faster or easier!",
   section2SupportingText:
-    "Get your step-by-step guide to help your business get up and running. We’ll ask you a few onboarding questions; be prepared to tell us your:",
+    "Learn what forms and licenses you need to start your business and avoid fines. We’ll ask you a few onboarding questions; be prepared to tell us your:",
   section2Icon1Text: "Legal Structure",
   section2Icon2Text: "Industry",
   section2Icon3Text: "Location",
