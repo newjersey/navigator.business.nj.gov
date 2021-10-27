@@ -176,13 +176,13 @@ interface GenericStep {
   description: string;
 }
 
-interface AddOn {
+export interface AddOn {
   step: number;
   weight: number;
   task: string;
 }
 
-interface TaskModification {
+export interface TaskModification {
   taskToReplaceFilename: string;
   replaceWithFilename: string;
 }

@@ -105,7 +105,7 @@ export const Industries: Industry[] = [
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
   },
-    {
+  {
     id: "janitorial-services",
     name: "Janitorial Services",
     description: "Commercial or residential property cleaning, maintenance, and management services",

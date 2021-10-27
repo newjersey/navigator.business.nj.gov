@@ -71,6 +71,14 @@ app.use("/api", businessNameRouterFactory(searchBusinessName));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, myNJSelfRegClient));
 
+app.post("/api/mgmt/auth", (req, res) => {
+  if (req.body.password === process.env.ADMIN_PASSWORD) {
+    res.status(200).send();
+  } else {
+    res.status(401).send();
+  }
+});
+
 app.get("/health", (_req, res) => {
   res.send("Alive");
 });
