@@ -2,16 +2,16 @@
   {
     "step": 2,
     "weight": 1,
-    "task": "determine-payment-structure"
+    "task": "payment-structure-non-medical-trans"
   },
     {
     "step": 4,
     "weight": 2,
-    "task": "vehicle-registration"
+    "task": "register-vehicle"
   },
     {
     "step": 4,
     "weight": 3,
-    "task": "logisiticare"
+    "task": "logisticare"
   }
 ]
