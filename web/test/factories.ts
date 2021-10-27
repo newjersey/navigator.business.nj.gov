@@ -19,7 +19,7 @@ import {
   TaxFiling,
   UserData,
 } from "@/lib/types/types";
-import { Industry, Industries } from "@/shared/industry";
+import { Industry, Industries } from "@businessnjgovnavigator/shared";
 import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
 import dayjs from "dayjs";
 import { getSectionNames } from "@/lib/utils/helpers";

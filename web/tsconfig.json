@@ -21,7 +21,7 @@
       "@/test/*": ["test/*"],
       "@/pages/*": ["pages/*"],
       "@/roadmaps/*": ["roadmaps/*"],
-      "@/shared/*": ["../shared/src/*"],
+      "@businessnjgovnavigator/shared/*": ["../shared/lib/*"],
       "@/filings/*": ["filings/*"]
     },
     "types": ["@types/testing-library__jest-dom", "@types/jest", "jest", "node"]

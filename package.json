@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@aws-amplify/ui-react": "1.2.21",
+    "@businessnjgovnavigator/shared": "*",
     "@emotion/react": "11.5.0",
     "@emotion/styled": "11.3.0",
     "@mui/lab": "5.0.0-alpha.51",
@@ -67,6 +68,7 @@
   "devDependencies": {
     "@babel/preset-typescript": "7.15.0",
     "@babel/runtime": "7.15.4",
+    "@businessnjgovnavigator/shared": "*",
     "@commitlint/cli": "13.2.1",
     "@commitlint/config-conventional": "13.2.0",
     "@serverless/typescript": "2.63.0",

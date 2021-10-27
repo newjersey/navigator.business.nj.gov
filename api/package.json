@@ -47,6 +47,7 @@
     "xml2js": "0.4.23"
   },
   "devDependencies": {
+    "@businessnjgovnavigator/shared": "*",
     "@serverless/typescript": "2.63.0",
     "@types/aws-lambda": "8.10.84",
     "@types/copy-webpack-plugin": "8.0.1",

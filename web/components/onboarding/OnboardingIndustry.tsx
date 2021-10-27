@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode, useContext } from "react";
 import { Divider, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { OnboardingContext } from "@/pages/onboarding";
-import { Industries, Industry, LookupIndustryById } from "@/shared/industry";
+import { Industries, Industry, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { Content } from "@/components/Content";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";

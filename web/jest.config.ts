@@ -18,7 +18,7 @@ export default async (): Promise<Config.InitialOptions> => {
       "@/test/(.*)": "<rootDir>/test/$1",
       "@/pages/(.*)": "<rootDir>/pages/$1",
       "@/roadmaps/(.*)": "<rootDir>/roadmaps/$1",
-      "@/shared/(.*)": "<rootDir>/../shared/src/$1",
+      "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/$1",
     },
     preset: "ts-jest",
     transform: {
