@@ -15,4 +15,5 @@
   "zoning": ["sign-lease"],
   "sign-lease-food-truck": ["form-business-entity", "register-for-taxes"],
   "apply-for-food-truck-license": ["form-business-entity", "register-for-taxes"]
+  "logisticare-non-med-trans": ["form-business-entity", "register-for-taxes", "register-vehicle"]
 }
