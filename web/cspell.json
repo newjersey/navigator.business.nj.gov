@@ -1,6 +1,6 @@
 {
   "version": "0.2",
   "language": "en",
-  "words": ["NAICS", "NJHIC", "roadmap", "HVAC", "Landuse", "NJSTART", "CHHA", "Logisticare"],
+  "words": ["NAICS", "NJHIC", "roadmap", "HVAC", "Landuse", "NJSTART", "CHHA", "logisticare"],
   "ignorePaths": ["node_modules/**", "out/**"]
 }
