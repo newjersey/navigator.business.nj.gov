@@ -200,11 +200,10 @@ const ProfilePage = (props: Props): ReactElement => {
                   {OnboardingStatusLookup[alert].header}
                 </div>
                 <div className="padding-top-05">
-                  {OnboardingStatusLookup[alert].body}
+                  {OnboardingStatusLookup[alert].body}{" "}
                   {OnboardingStatusLookup[alert] && (
                     <Link href="/roadmap">
                       <a href="/roadmap" data-testid={`toast-link`}>
-                        {" "}
                         {OnboardingStatusLookup[alert].link}
                       </a>
                     </Link>
