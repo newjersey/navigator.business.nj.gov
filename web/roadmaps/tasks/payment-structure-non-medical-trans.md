@@ -2,8 +2,6 @@
 id: "determine-payment-structure"
 urlSlug: "payment-structure"
 name: "Determine Your Payment Structure"
-callToActionLink: ""
-callToActionText: ""
 ---
 
 As a non-medical transport company, you may want to consider one or a combination of the following payment structures:

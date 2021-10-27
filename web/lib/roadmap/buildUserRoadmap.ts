@@ -74,8 +74,12 @@ const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
 const applyMunicipalityEval = (roadmap: Roadmap, evalValues: Record<string, string>): Roadmap => {
   roadmap.steps.forEach((step) => {
     step.tasks.forEach((task) => {
-      task.callToActionLink = templateEval(task.callToActionLink, evalValues);
-      task.callToActionText = templateEval(task.callToActionText, evalValues);
+      if (task.callToActionLink) {
+        task.callToActionLink = templateEval(task.callToActionLink, evalValues);
+      }
+      if (task.callToActionText) {
+        task.callToActionText = templateEval(task.callToActionText, evalValues);
+      }
       task.contentMd = templateEval(task.contentMd, evalValues);
     });
   });
