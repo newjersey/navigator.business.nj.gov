@@ -43,6 +43,18 @@ describe("buildUserRoadmap", () => {
     });
   });
 
+  describe("reseller tasks", () => {
+    it("adds reseller task if canBeReseller is true", async () => {
+      await buildUserRoadmap(generateOnboardingData({ industryId: "food-truck" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("reseller");
+    });
+
+    it("does not add reseller task if canBeReseller is false", async () => {
+      await buildUserRoadmap(generateOnboardingData({ industryId: "non-medical-transport" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("reseller");
+    });
+  });
+
   describe("legal structure", () => {
     it("adds public-record-filing for Public Record Filing legal structures", async () => {
       await buildUserRoadmap(generateOnboardingData({ legalStructure: "limited-partnership" }));
