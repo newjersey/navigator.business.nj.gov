@@ -1630,7 +1630,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.12.3, @babel/core@npm:^7.7.2, @babel/core@npm:^7.7.5":
+"@babel/core@npm:7.15.8, @babel/core@npm:^7.1.0, @babel/core@npm:^7.12.3, @babel/core@npm:^7.7.2, @babel/core@npm:^7.7.5":
   version: 7.15.8
   resolution: "@babel/core@npm:7.15.8"
   dependencies:
@@ -2189,6 +2189,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
     "@aws-amplify/ui-react": 1.2.21
+    "@babel/core": 7.15.8
     "@babel/preset-typescript": 7.15.0
     "@babel/runtime": 7.15.4
     "@businessnjgovnavigator/shared": "*"
@@ -2200,6 +2201,7 @@ __metadata:
     "@mui/material": 5.0.6
     "@mui/styles": 5.0.2
     "@serverless/typescript": 2.64.1
+    "@testing-library/dom": ^8.10.1
     "@testing-library/jest-dom": 5.14.1
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
@@ -2272,6 +2274,7 @@ __metadata:
     next-seo: 4.28.1
     node-fetch: 2.6.5
     prettier: 2.4.1
+    prop-types: ^15.7.2
     raw-loader: 4.0.2
     react: 17.0.2
     react-dom: 17.0.2
@@ -2336,6 +2339,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
     "@aws-amplify/ui-react": 1.2.21
+    "@babel/core": 7.15.8
     "@babel/preset-typescript": 7.15.0
     "@businessnjgovnavigator/shared": "*"
     "@emotion/react": 11.5.0
@@ -2343,6 +2347,7 @@ __metadata:
     "@mui/lab": 5.0.0-alpha.53
     "@mui/material": 5.0.6
     "@mui/styles": 5.0.2
+    "@testing-library/dom": ^8.10.1
     "@testing-library/jest-dom": 5.14.1
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
@@ -2390,6 +2395,7 @@ __metadata:
     next-seo: 4.28.1
     node-fetch: 2.6.5
     prettier: 2.4.1
+    prop-types: ^15.7.2
     raw-loader: 4.0.2
     react: 17.0.2
     react-dom: 17.0.2
@@ -2405,6 +2411,7 @@ __metadata:
     ts-loader: 9.2.6
     ts-node: 10.4.0
     typescript: 4.4.4
+    webpack: 5.60.0
   languageName: unknown
   linkType: soft
 
@@ -5596,7 +5603,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^8.0.0":
+"@testing-library/dom@npm:^8.0.0, @testing-library/dom@npm:^8.10.1":
   version: 8.10.1
   resolution: "@testing-library/dom@npm:8.10.1"
   dependencies:
