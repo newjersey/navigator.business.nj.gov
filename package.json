@@ -128,7 +128,7 @@
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "node-fetch": "2.6.5",
     "prettier": "2.4.1",
-    "prop-types": "^15.7.2",
+    "prop-types": "15.7.2",
     "rimraf": "3.0.2",
     "serverless": "2.64.1",
     "serverless-dynamodb-local": "0.2.40",
