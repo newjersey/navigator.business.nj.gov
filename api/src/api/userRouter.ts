@@ -3,7 +3,6 @@ import { createEmptyUserData, UpdateLicenseStatus, UserData, UserDataClient } fr
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
-import { generateUser } from "../domain/factories";
 import { calculateNextAnnualFilingDate } from "../domain/calculateNextAnnualFilingDate";
 
 const getTokenFromHeader = (req: Request): string => {
@@ -30,7 +29,6 @@ type CognitoIdentityPayload = {
 };
 
 export const getSignedInUserId = (req: Request): string => {
-  if (process.env.DISABLE_AUTH) return "1234567890";
   const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
   const myNJIdentityPayload = signedInUser.identities?.find((it) => it.providerName === "myNJ");
   return myNJIdentityPayload?.userId || signedInUser.sub;
@@ -59,7 +57,7 @@ export const userRouterFactory = (
       })
       .catch((error) => {
         if (error === "Not found") {
-          if (process.env.IS_OFFLINE || process.env.DISABLE_AUTH) {
+          if (process.env.IS_OFFLINE) {
             saveEmptyUserData(req, res, signedInUserId);
           } else {
             res.status(404).json({ error });
@@ -105,9 +103,7 @@ export const userRouterFactory = (
     dayjs(lastCheckedDate).isBefore(dayjs().subtract(1, "hour"));
 
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
-    const signedInUser = process.env.DISABLE_AUTH
-      ? generateUser({ id: "1234567890" })
-      : (jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload);
+    const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
     const emptyUserData = createEmptyUserData({
       myNJUserKey: signedInUserId,
       email: signedInUser.email,

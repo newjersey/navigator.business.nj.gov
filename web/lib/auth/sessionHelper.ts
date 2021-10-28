@@ -1,7 +1,6 @@
 import { BusinessUser } from "@/lib/types/types";
 import { Auth } from "@aws-amplify/auth";
 import axios, { AxiosResponse } from "axios";
-import { generateUser } from "@/test/factories";
 
 type CognitoIdPayload = {
   aud: string;
@@ -44,25 +43,21 @@ type CognitoRefreshAuth = {
 };
 
 export const triggerSignOut = async (): Promise<void> => {
-  if (process.env.DISABLE_AUTH) return;
   await Auth.signOut();
 };
 
 export const triggerSignIn = async (): Promise<void> => {
-  if (process.env.DISABLE_AUTH) return;
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   await Auth.federatedSignIn({ provider: "myNJ" });
 };
 
 export const getCurrentToken = async (): Promise<string> => {
-  if (process.env.DISABLE_AUTH) return "";
   const cognitoSession = await Auth.currentSession();
   return cognitoSession.getIdToken().getJwtToken();
 };
 
 export const getCurrentUser = async (): Promise<BusinessUser> => {
-  if (process.env.DISABLE_AUTH) return generateUser({ id: "1234567890" });
   const cognitoSession = await Auth.currentSession();
   const cognitoPayload = cognitoSession.getIdToken().decodePayload() as CognitoIdPayload;
   return cognitoPayloadToBusinessUser(cognitoPayload);
@@ -78,7 +73,6 @@ const cognitoPayloadToBusinessUser = (cognitoPayload: CognitoIdPayload): Busines
 };
 
 export const refreshToken = async (): Promise<CognitoRefreshAuth> => {
-  if (process.env.DISABLE_AUTH) return { token: "", expires_at: 0, identity_id: "" };
   const cognitoSession = await Auth.currentSession();
   const token = cognitoSession.getRefreshToken().getToken();
   return axios
