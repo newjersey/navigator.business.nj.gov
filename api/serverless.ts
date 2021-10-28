@@ -15,7 +15,6 @@ const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 const ssmLocation = stage === "local" ? "dev" : stage;
 
-const disableAuth = process.env.DISABLE_AUTH ?? "";
 const adminPassword = process.env.ADMIN_PASSWORD ?? "";
 
 const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
@@ -117,7 +116,6 @@ const serverlessConfiguration: AWS = {
       MYNJ_SERVICE_TOKEN: myNJServiceToken,
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_URL: myNJServiceUrl,
-      DISABLE_AUTH: disableAuth,
       ADMIN_PASSWORD: adminPassword,
       STAGE: stage,
     },
@@ -137,8 +135,7 @@ const serverlessConfiguration: AWS = {
               "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_02}",
             ],
           }
-        : undefined,
-      disableAuth
+        : undefined
     ),
   },
 };
