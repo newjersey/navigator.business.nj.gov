@@ -1,7 +1,7 @@
 ---
 id: "logisticare"
 urlSlug: "logisticare"
-name: "Register Your Vehicle "
+name: "Apply for Logisticare if Applicable"
 callToActionLink: "https://www.logisticare.com/sfapplication"
 callToActionText: "Apply to Be a Transportation Provider with Logisticare"
 ---
