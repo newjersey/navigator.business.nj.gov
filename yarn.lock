@@ -2125,6 +2125,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/api@workspace:api"
   dependencies:
     "@businessnjgovnavigator/shared": "*"
+    "@jest/types": 27.2.5
     "@serverless/typescript": 2.64.1
     "@types/aws-lambda": 8.10.84
     "@types/copy-webpack-plugin": 8.0.1
@@ -2197,9 +2198,12 @@ __metadata:
     "@commitlint/config-conventional": 13.2.0
     "@emotion/react": 11.5.0
     "@emotion/styled": 11.3.0
+    "@jest/types": 27.2.5
     "@mui/lab": 5.0.0-alpha.53
     "@mui/material": 5.0.6
     "@mui/styles": 5.0.2
+    "@next/env": 12.0.1
+    "@next/eslint-plugin-next": 12.0.1
     "@serverless/typescript": 2.64.1
     "@testing-library/dom": 8.10.1
     "@testing-library/jest-dom": 5.14.1
@@ -2316,6 +2320,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/shared@workspace:shared"
   dependencies:
     "@babel/runtime": 7.15.4
+    "@jest/types": 27.2.5
     "@types/jest": 27.0.2
     "@types/node": 14.17.32
     "@typescript-eslint/eslint-plugin": 4.33.0
@@ -2344,9 +2349,12 @@ __metadata:
     "@businessnjgovnavigator/shared": "*"
     "@emotion/react": 11.5.0
     "@emotion/styled": 11.3.0
+    "@jest/types": 27.2.5
     "@mui/lab": 5.0.0-alpha.53
     "@mui/material": 5.0.6
     "@mui/styles": 5.0.2
+    "@next/env": 12.0.1
+    "@next/eslint-plugin-next": 12.0.1
     "@testing-library/dom": 8.10.1
     "@testing-library/jest-dom": 5.14.1
     "@testing-library/react": 12.1.2
@@ -2363,6 +2371,7 @@ __metadata:
     "@typescript-eslint/parser": 4.33.0
     airtable: 0.11.1
     aws-amplify: 4.2.9
+    axios: 0.24.0
     babel-jest: 27.3.1
     cross-env: 7.0.3
     cspell: 5.12.3
@@ -3746,7 +3755,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:^27.2.5":
+"@jest/types@npm:27.2.5, @jest/types@npm:^27.2.5":
   version: 27.2.5
   resolution: "@jest/types@npm:27.2.5"
   dependencies:
@@ -4806,12 +4815,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/env@npm:12.0.1":
+  version: 12.0.1
+  resolution: "@next/env@npm:12.0.1"
+  checksum: 396fb1068456a6b160a9daeec27684bd2e5d75eb3497f17d36dfa5c670b47b5248c9441e96e5f45ca1496dce38fc55ef47836dfeba257125c085f0a237adc062
+  languageName: node
+  linkType: hard
+
 "@next/eslint-plugin-next@npm:11.1.2":
   version: 11.1.2
   resolution: "@next/eslint-plugin-next@npm:11.1.2"
   dependencies:
     glob: 7.1.7
   checksum: 93e43795588875c083335b76858ece4a02f0a3818f32d7e01e76ad8204fd22758201815753e47d08c86020bd2fddf3425f5a80835cb57a2b31ab26b13a7f0960
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:12.0.1":
+  version: 12.0.1
+  resolution: "@next/eslint-plugin-next@npm:12.0.1"
+  dependencies:
+    glob: 7.1.7
+  checksum: 41d45cd98b4f8e8a15cc24ebe9ff7a28dc40fb39abccf021136343ef66273405b7a978ac731549d08a015012014790b586c7ff3a436ca9f1e0830d036bfc4004
   languageName: node
   linkType: hard
 
