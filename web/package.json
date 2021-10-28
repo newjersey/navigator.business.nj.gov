@@ -62,7 +62,7 @@
   "devDependencies": {
     "@babel/core": "7.15.8",
     "@babel/preset-typescript": "7.15.0",
-    "@testing-library/dom": "^8.10.1",
+    "@testing-library/dom": "8.10.1",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
@@ -98,7 +98,7 @@
     "jest-raw-loader": "1.0.1",
     "node-fetch": "2.6.5",
     "prettier": "2.4.1",
-    "prop-types": "^15.7.2",
+    "prop-types": "15.7.2",
     "rimraf": "3.0.2",
     "ts-jest": "27.0.7",
     "ts-loader": "9.2.6",
