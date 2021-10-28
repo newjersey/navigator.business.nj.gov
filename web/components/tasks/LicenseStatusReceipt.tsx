@@ -119,7 +119,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="fdc fg1 overflow-y-hidden">
+    <div className="fdc fg1 overflow-y-hidden margin-top-3">
       <p className="margin-x-3 margin-bottom-3">{LicenseScreenDefaults.foundText}</p>
 
       <div className={`${theme.gradient} fg1 fdr fjc`}>

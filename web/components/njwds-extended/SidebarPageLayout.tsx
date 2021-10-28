@@ -49,7 +49,7 @@ export const SidebarPageLayout = ({
           <div className="grid-row grid-gap">
             <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs" id="main">
               {!isLargeScreen && <div>{backButton}</div>}
-              <div className="border-1px border-base-light usa-prose minh-40 fdc">{children}</div>
+              <div className="border-1px border-base-light usa-prose minh-40 padding-3">{children}</div>
               {belowOutlineBoxComponent}
             </main>
             <div className="usa-layout-docs__sidenav desktop:grid-col-4 order-first">

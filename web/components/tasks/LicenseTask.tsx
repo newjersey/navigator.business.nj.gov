@@ -100,78 +100,66 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="margin-top-3 fdc fg1">
-      <div className="margin-x-3">
-        <TaskHeader task={props.task} tooltipText={LicenseScreenDefaults.tooltipText} />
-      </div>
+    <div className="flex flex-column">
+      <TaskHeader task={props.task} tooltipText={LicenseScreenDefaults.tooltipText} />
 
       <Tabs selectedIndex={tabIndex} onSelect={onSelectTab}>
-        <div className="margin-left-3 mobile-lg:margin-right-3">
-          <TabList>
-            <Tab>{LicenseScreenDefaults.tab1Text}</Tab>
-            <Tab>{LicenseScreenDefaults.tab2Text}</Tab>
-          </TabList>
-        </div>
+        <TabList>
+          <Tab>{LicenseScreenDefaults.tab1Text}</Tab>
+          <Tab>{LicenseScreenDefaults.tab2Text}</Tab>
+        </TabList>
+
         <TabPanel>
-          <div className="margin-3 height-full">
+          <div className="margin-top-3">
             <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
             <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
             {/* restore when #470 is decided
             <Unlocks taskLinks={taskFromRoadmap?.unlocks || []} isLoading={!taskFromRoadmap} />
             */}
-            <div className="fdc margin-top-4">
-              <a
-                href={callToActionLink}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="margin-bottom-2"
-              >
-                <button
-                  onClick={() => {
-                    analytics.event.task_primary_call_to_action.click.open_external_website();
-                  }}
-                  className="usa-button width-100"
-                  data-testid="cta-primary"
-                >
-                  <div className="fdc">
-                    <div>{LicenseScreenDefaults.primaryCTAFirstLineText}</div>
-                    <div className="font-body-3xs margin-top-05">
-                      {LicenseScreenDefaults.primaryCTASecondLineText}
-                    </div>
-                  </div>
-                </button>
-              </a>
+          </div>
+          <div className="flex flex-column margin-top-4 margin-bottom-1">
+            <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
               <button
                 onClick={() => {
-                  analytics.event.task_button_i_already_submitted.click.view_status_tab();
-                  setTabIndex(STATUS_TAB_INDEX);
+                  analytics.event.task_primary_call_to_action.click.open_external_website();
                 }}
-                className="usa-button usa-button--outline width-100"
-                data-testid="cta-secondary"
+                className="usa-button width-100 margin-bottom-2"
+                data-testid="cta-primary"
               >
-                <div className="fdc">
-                  <div>{LicenseScreenDefaults.secondaryCTAFirstLineText}</div>
+                <div className="flex flex-column">
+                  <div>{LicenseScreenDefaults.primaryCTAFirstLineText}</div>
                   <div className="font-body-3xs margin-top-05">
-                    {LicenseScreenDefaults.secondaryCTASecondLineText}
+                    {LicenseScreenDefaults.primaryCTASecondLineText}
                   </div>
                 </div>
               </button>
-            </div>
+            </a>
+            <button
+              onClick={() => {
+                analytics.event.task_button_i_already_submitted.click.view_status_tab();
+                setTabIndex(STATUS_TAB_INDEX);
+              }}
+              className="usa-button usa-button--outline width-100"
+              data-testid="cta-secondary"
+            >
+              <div className="flex flex-column">
+                <div>{LicenseScreenDefaults.secondaryCTAFirstLineText}</div>
+                <div className="font-body-3xs margin-top-05">
+                  {LicenseScreenDefaults.secondaryCTASecondLineText}
+                </div>
+              </div>
+            </button>
           </div>
         </TabPanel>
         <TabPanel>
           {licenseStatusResult ? (
-            <div className="margin-top-3 fdc fg1">
-              <LicenseStatusReceipt
-                status={licenseStatusResult.status}
-                items={licenseStatusResult.checklistItems}
-                onEdit={onEdit}
-              />
-            </div>
+            <LicenseStatusReceipt
+              status={licenseStatusResult.status}
+              items={licenseStatusResult.checklistItems}
+              onEdit={onEdit}
+            />
           ) : (
-            <div className="margin-3">
-              <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
-            </div>
+            <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
           )}
         </TabPanel>
       </Tabs>

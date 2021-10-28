@@ -113,21 +113,19 @@ const TaskPage = (props: Props): ReactElement => {
           filingsReferences={props.filingsReferences}
         >
           {rswitch(props.task.id, {
-            "search-business-name": (
-              <div className="margin-3">
-                <SearchBusinessName task={props.task} />
-              </div>
-            ),
+            "search-business-name": <SearchBusinessName task={props.task} />,
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
             default: (
-              <div className="margin-3">
-                <TaskHeader task={props.task} />
-                {getUnlockedBy()}
-                {getTaskContent()}
-                {/* restore when #470 is decided
+              <div className="flex flex-column space-between minh-37">
+                <div>
+                  <TaskHeader task={props.task} />
+                  {getUnlockedBy()}
+                  {getTaskContent()}
+                  {/* restore when #470 is decided
                 <Unlocks taskLinks={taskFromRoadmap?.unlocks || []} isLoading={!taskFromRoadmap} />
                 */}
+                </div>
                 <TaskCTA
                   link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
                   text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}

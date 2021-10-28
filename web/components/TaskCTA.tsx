@@ -13,20 +13,13 @@ export const TaskCTA = (props: Props): ReactElement => {
   }
 
   return (
-    <div className="fdr">
-      <a
-        href={props.link}
-        target="_blank"
-        rel="noreferrer noopener"
-        className="mla margin-top-4 margin-bottom-8"
+    <a href={props.link} target="_blank" rel="noreferrer noopener" className="margin-left-auto">
+      <button
+        className="usa-button margin-top-4 margin-bottom-1 margin-right-0"
+        onClick={analytics.event.task_primary_call_to_action.click.open_external_website}
       >
-        <button
-          className="usa-button"
-          onClick={analytics.event.task_primary_call_to_action.click.open_external_website}
-        >
-          {props.text || TaskDefaults.defaultCallToActionText}
-        </button>
-      </a>
-    </div>
+        {props.text || TaskDefaults.defaultCallToActionText}
+      </button>
+    </a>
   );
 };

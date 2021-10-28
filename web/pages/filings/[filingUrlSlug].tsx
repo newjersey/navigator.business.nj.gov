@@ -35,21 +35,23 @@ const FilingPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar sideBarPageLayout={true} filingsReferences={props.filingsReferences} />
         <SidebarPageLayout filingsReferences={props.filingsReferences}>
-          <div className="margin-3">
-            <div
-              role="heading"
-              aria-level={1}
-              className="margin-top-0 margin-bottom-2 h2-element-usa-prose-override"
-            >
-              {props.filing.name}
-            </div>
-            <div className="margin-bottom-4" data-testid="due-date">
-              <span className="usa-tag bg-white border text-gray-70 text-bold">
-                {FilingDefaults.tagContentBeforeDueDate} <span className="text-normal">{dueDate}</span>
-              </span>
-            </div>
+          <div className="flex flex-column space-between minh-37">
+            <div>
+              <div
+                role="heading"
+                aria-level={1}
+                className="margin-top-0 margin-bottom-2 h2-element-usa-prose-override"
+              >
+                {props.filing.name}
+              </div>
+              <div className="margin-bottom-4" data-testid="due-date">
+                <span className="usa-tag bg-white border text-gray-70 text-bold">
+                  {FilingDefaults.tagContentBeforeDueDate} <span className="text-normal">{dueDate}</span>
+                </span>
+              </div>
 
-            <Content>{props.filing.contentMd}</Content>
+              <Content>{props.filing.contentMd}</Content>
+            </div>
             <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
           </div>
         </SidebarPageLayout>
