@@ -88,7 +88,7 @@ export const CheckStatus = (props: Props): ReactElement => {
   return (
     <>
       {getErrorAlert()}
-      <p className="margin-bottom-4">{LicenseScreenDefaults.checkStatusText}</p>
+      <p className="margin-bottom-4 margin-top-3">{LicenseScreenDefaults.checkStatusText}</p>
       <form onSubmit={onSubmit}>
         <div className="margin-bottom-2">
           <label htmlFor="business-name">{LicenseScreenDefaults.businessNameLabel}</label>
@@ -169,12 +169,12 @@ export const CheckStatus = (props: Props): ReactElement => {
             />
           </div>
         </div>
-        <div className="fdr">
+        <div className="flex flex-row">
           <LoadingButton
             type="submit"
             onClick={() => {}}
             loading={props.isLoading}
-            className="usa-button mla margin-top-4 margin-bottom-8"
+            className="usa-button mla margin-top-4 margin-bottom-1 margin-right-0"
             outline={true}
             data-testid="check-status-submit"
             marginClass="spinner-margin-36"
