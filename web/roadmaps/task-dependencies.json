@@ -16,5 +16,5 @@
   "sign-lease-food-truck": ["form-business-entity", "register-for-taxes"],
   "apply-for-food-truck-license": ["form-business-entity", "register-for-taxes"],
   "logisticare": ["form-business-entity", "register-for-taxes", "register-vehicle"],
-  "search-licenses-retail": ["form-business-entity", "register-for-taxes"],
+  "search-licenses-retail": ["form-business-entity", "register-for-taxes"]
 }
