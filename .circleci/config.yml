@@ -16,6 +16,8 @@ commands:
           keys:
             - v2-yarn-deploy-deps-{{ checksum "yarn.lock" }}
             - v2-yarn-deps-{{ checksum "yarn.lock" }}
+            - v2-yarn-deploy-deps-
+            - v2-yarn-deps-
       - run:
           name: Install yarn packages
           command: yarn install
