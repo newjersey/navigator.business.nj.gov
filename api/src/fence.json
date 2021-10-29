@@ -19,6 +19,7 @@
     "winston",
     "winston-cloudwatch",
     "@shared/industry",
-    "@shared/legalStructure"
+    "@shared/legalStructure",
+    "@shared/municipality"
   ]
 }

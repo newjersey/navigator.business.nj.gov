@@ -18,7 +18,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   createEmptyOnboardingData,
   createEmptyOnboardingDisplayContent,
-  Municipality,
   OnboardingData,
   OnboardingDisplayContent,
   OnboardingError,
@@ -41,6 +40,7 @@ import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { RoadmapContext } from "@/pages/_app";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { NextSeo } from "next-seo";
+import { Municipality } from "@businessnjgovnavigator/shared";
 
 interface Props {
   displayContent: OnboardingDisplayContent;

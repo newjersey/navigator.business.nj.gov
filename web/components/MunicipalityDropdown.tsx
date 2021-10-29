@@ -1,4 +1,4 @@
-import { Municipality } from "@/lib/types/types";
+import { Municipality } from "@businessnjgovnavigator/shared";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { createFilterOptions, TextField } from "@mui/material";

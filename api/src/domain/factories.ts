@@ -4,7 +4,6 @@ import {
   LicenseEntity,
   LicenseStatusItem,
   LicenseStatusResult,
-  Municipality,
   NameAndAddress,
   OnboardingData,
   Preferences,
@@ -16,6 +15,7 @@ import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import dayjs from "dayjs";
 import { LoremIpsum } from "lorem-ipsum";
+import { Municipality } from "@shared/municipality";
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
