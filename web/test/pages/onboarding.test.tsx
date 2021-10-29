@@ -252,8 +252,11 @@ describe("onboarding", () => {
     expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
     selectByValue("Industry", "home-contractor");
     expect(subject.queryByText("Learn more about home contractors!")).toBeInTheDocument();
-    selectByValue("Industry", "e-commerce");
-    expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
+
+    await waitFor(() => {
+      selectByValue("Industry", "e-commerce");
+      expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
+    });
   });
 
   it("displays industry-specific content for employment agency when selected", async () => {
@@ -266,8 +269,11 @@ describe("onboarding", () => {
     expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
     selectByValue("Industry", "employment-agency");
     expect(subject.queryByText("Learn more about employment agencies!")).toBeInTheDocument();
-    selectByValue("Industry", "e-commerce");
-    expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
+
+    await waitFor(() => {
+      selectByValue("Industry", "e-commerce");
+      expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
+    });
   });
 
   it("displays liquor license question for restaurants when selected", async () => {

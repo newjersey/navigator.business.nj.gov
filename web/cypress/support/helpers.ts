@@ -51,7 +51,7 @@ export const completeOnboarding = (
   clickNext();
 
   const industryValue = `[data-value="${industry}"]`;
-  cy.get('[aria-label="Industry"]').click();
+  cy.get('[id="Industry"]').click();
   cy.get(industryValue).click(); // need to be HIC for the task ID to work
   clickNext();
 
