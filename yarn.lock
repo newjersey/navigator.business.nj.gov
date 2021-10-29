@@ -2134,7 +2134,7 @@ __metadata:
     "@types/jasmine": 3.10.1
     "@types/jest": 27.0.2
     "@types/jsonwebtoken": 8.5.5
-    "@types/node": 14.17.32
+    "@types/node": 16.11.6
     "@types/supertest": 2.0.11
     "@types/uuid": 8.3.1
     "@types/webpack-node-externals": 2.5.3
@@ -2217,7 +2217,7 @@ __metadata:
     "@types/jest": 27.0.2
     "@types/jsonwebtoken": 8.5.5
     "@types/lodash.orderby": 4.6.6
-    "@types/node": 14.17.32
+    "@types/node": 16.11.6
     "@types/react": 17.0.33
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.3
@@ -2322,7 +2322,7 @@ __metadata:
     "@babel/runtime": 7.15.4
     "@jest/types": 27.2.5
     "@types/jest": 27.0.2
-    "@types/node": 14.17.32
+    "@types/node": 16.11.6
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
     cross-env: 7.0.3
@@ -2361,7 +2361,7 @@ __metadata:
     "@testing-library/user-event": 13.5.0
     "@types/jest": 27.0.2
     "@types/lodash.orderby": 4.6.6
-    "@types/node": 14.17.32
+    "@types/node": 16.11.6
     "@types/react": 17.0.33
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.3
@@ -6052,7 +6052,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.17.32, @types/node@npm:>=8.0.0 <15, @types/node@npm:^14.14.31":
+"@types/node@npm:16.11.6":
+  version: 16.11.6
+  resolution: "@types/node@npm:16.11.6"
+  checksum: 6e19634766ff589d3d2f361c2196b671f8f133cdadc5ad347a621c360d8994b6c4fbccfb2ad9c60c588c593831a96497c9c6b77d2b7e91be723384b94f6368e7
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:>=8.0.0 <15, @types/node@npm:^14.14.31":
   version: 14.17.32
   resolution: "@types/node@npm:14.17.32"
   checksum: c3ec45db5d8ca6ed80bcc2fe3cd9f15c1518d43cf048dd5444d1fcbe308d302a42721cb3f19548ac2e7b8b7db4f7f6cd4bf9ed58ab1d30a0bf61758350edd9d5
