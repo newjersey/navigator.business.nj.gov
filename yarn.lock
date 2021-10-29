@@ -183,27 +183,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-components@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@aws-amplify/ui-components@npm:1.9.1"
+"@aws-amplify/ui-components@npm:1.9.2":
+  version: 1.9.2
+  resolution: "@aws-amplify/ui-components@npm:1.9.2"
   dependencies:
     qrcode: ^1.4.4
     uuid: ^8.2.0
   peerDependencies:
     aws-amplify: 3.x.x || 4.x.x
-  checksum: ea92c39ee9d5721c9e0ae63856ed9f613f255c684ed58c876938826a55c3ed4d25804cfb26d491442c5337b6810ac02feed018d72521928702b212c0e56c1cf0
+  checksum: 4d60ff386f0aa5e40b0ecef68fdf00152a9f669f255d33e7b19e1ec6a00ec96b0781478e31479cfccae8fbf5ec44ee3fb029520a639e65fa26792d2dab25380a
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-react@npm:1.2.21":
-  version: 1.2.21
-  resolution: "@aws-amplify/ui-react@npm:1.2.21"
+"@aws-amplify/ui-react@npm:1.2.22":
+  version: 1.2.22
+  resolution: "@aws-amplify/ui-react@npm:1.2.22"
   dependencies:
-    "@aws-amplify/ui-components": 1.9.1
+    "@aws-amplify/ui-components": 1.9.2
   peerDependencies:
     react: ">= 16.7.0"
     react-dom: ">= 16.7.0"
-  checksum: cf01a735dc59ad9b81469572dbdc74f33716bdbd0ce6b85f4b41da304e542fb4fc0efe0c487a2caf0ccc2aea891a6bc114ead7c42a037fb934a83846a0c9b80e
+  checksum: f7cce5706a68dcf8e9a55e3d8550d82288bc8c09f31debd52caec2c7abb7d39685a81d1c97f9bbad6a567f5355fbb01e58d36450d2fbfc23c9700470865acba2
   languageName: node
   linkType: hard
 
@@ -2142,7 +2142,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
     aws-lambda: 1.0.6
-    aws-sdk: 2.1015.0
+    aws-sdk: 2.1017.0
     axios: 0.24.0
     body-parser: 1.19.0
     copy-webpack-plugin: 9.0.1
@@ -2152,7 +2152,7 @@ __metadata:
     eslint: 7.32.0
     eslint-config-prettier: 8.3.0
     express: 4.17.1
-    good-fences: 1.0.0
+    good-fences: 1.0.1
     jasmine: 3.10.0
     jest: 27.3.1
     jest-dynalite: 3.4.4
@@ -2176,7 +2176,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 3.5.1
     typescript: 4.4.4
     uuid: 8.3.2
-    webpack: 5.60.0
+    webpack: 5.61.0
     webpack-node-externals: 3.0.0
     winston: 3.3.3
     winston-cloudwatch: 3.1.1
@@ -2189,7 +2189,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/ui-react": 1.2.21
+    "@aws-amplify/ui-react": 1.2.22
     "@babel/core": 7.15.8
     "@babel/preset-typescript": 7.15.0
     "@babel/runtime": 7.15.4
@@ -2232,7 +2232,7 @@ __metadata:
     airtable: 0.11.1
     aws-amplify: 4.2.9
     aws-lambda: 1.0.6
-    aws-sdk: 2.1015.0
+    aws-sdk: 2.1017.0
     axios: 0.24.0
     babel-jest: 27.3.1
     body-parser: 1.19.0
@@ -2257,7 +2257,7 @@ __metadata:
     express: 4.17.1
     fast-deep-equal: 3.1.3
     focus-trap-react: 8.8.2
-    good-fences: 1.0.0
+    good-fences: 1.0.1
     gray-matter: 4.0.3
     husky: 7.0.4
     identity-obj-proxy: 3.0.0
@@ -2282,7 +2282,7 @@ __metadata:
     raw-loader: 4.0.2
     react: 17.0.2
     react-dom: 17.0.2
-    react-tabs: 3.2.2
+    react-tabs: 3.2.3
     react-transition-group: 4.4.2
     remark: 12.0.1
     remark-html: 13.0.2
@@ -2305,7 +2305,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 3.5.1
     typescript: 4.4.4
     uuid: 8.3.2
-    webpack: 5.60.0
+    webpack: 5.61.0
     webpack-node-externals: 3.0.0
     winston: 3.3.3
     winston-cloudwatch: 3.1.1
@@ -2343,7 +2343,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/ui-react": 1.2.21
+    "@aws-amplify/ui-react": 1.2.22
     "@babel/core": 7.15.8
     "@babel/preset-typescript": 7.15.0
     "@businessnjgovnavigator/shared": "*"
@@ -2391,7 +2391,7 @@ __metadata:
     eslint-plugin-react-hooks: 4.2.0
     fast-deep-equal: 3.1.3
     focus-trap-react: 8.8.2
-    good-fences: 1.0.0
+    good-fences: 1.0.1
     gray-matter: 4.0.3
     identity-obj-proxy: 3.0.0
     jest: 27.3.1
@@ -2408,7 +2408,7 @@ __metadata:
     raw-loader: 4.0.2
     react: 17.0.2
     react-dom: 17.0.2
-    react-tabs: 3.2.2
+    react-tabs: 3.2.3
     react-transition-group: 4.4.2
     remark: 12.0.1
     remark-html: 13.0.2
@@ -2420,7 +2420,7 @@ __metadata:
     ts-loader: 9.2.6
     ts-node: 10.4.0
     typescript: 4.4.4
-    webpack: 5.60.0
+    webpack: 5.61.0
   languageName: unknown
   linkType: soft
 
@@ -7353,7 +7353,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:*, aws-sdk@npm:2.1015.0, aws-sdk@npm:^2.1011.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.834.0":
+"aws-sdk@npm:*, aws-sdk@npm:^2.1011.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.834.0":
   version: 2.1015.0
   resolution: "aws-sdk@npm:2.1015.0"
   dependencies:
@@ -7367,6 +7367,23 @@ __metadata:
     uuid: 3.3.2
     xml2js: 0.4.19
   checksum: 6b1dd2a6b23886e0398f6c996e55a8efbbb35385a92ef9be0e90f59e7d9e69e9c08632342fb9dbbb4d366cd8333e975289333ee061a1c8c35c807fadf7c6ff6b
+  languageName: node
+  linkType: hard
+
+"aws-sdk@npm:2.1017.0":
+  version: 2.1017.0
+  resolution: "aws-sdk@npm:2.1017.0"
+  dependencies:
+    buffer: 4.9.2
+    events: 1.1.1
+    ieee754: 1.1.13
+    jmespath: 0.15.0
+    querystring: 0.2.0
+    sax: 1.2.1
+    url: 0.10.3
+    uuid: 3.3.2
+    xml2js: 0.4.19
+  checksum: dda1a7e1a1acdaa14ac7b167fccafa31ed440d391b722b776dd910c87bb3e86942ed59cd9623eb2d41da886718d378a15fb8f210a5173a9e5ed0ee8fdbfb9819
   languageName: node
   linkType: hard
 
@@ -12488,9 +12505,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"good-fences@npm:1.0.0":
-  version: 1.0.0
-  resolution: "good-fences@npm:1.0.0"
+"good-fences@npm:1.0.1":
+  version: 1.0.1
+  resolution: "good-fences@npm:1.0.1"
   dependencies:
     cli-progress: ^3.9.0
     commander: ^7.2.0
@@ -12503,7 +12520,7 @@ __metadata:
   bin:
     gf: bin/good-fences
     good-fences: bin/good-fences
-  checksum: 7fcf8d40f8a88a862fb574a75e632eb96ef6c6f83dcaecbf646c0011eba5c1581c8d139604d00b3d0a041da766152fb95a6c0707de9d0bcb3c95af36ee4b95dd
+  checksum: 1c0380fb3e0f0f195c8645d3788e6f4df23c002a7db884d0fe5232e9534dbb530e9c0fd11e73fe60005d604fd2d428f8a77e1c07135b10ad5758c345d9a3df5b
   languageName: node
   linkType: hard
 
@@ -19347,15 +19364,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-tabs@npm:3.2.2":
-  version: 3.2.2
-  resolution: "react-tabs@npm:3.2.2"
+"react-tabs@npm:3.2.3":
+  version: 3.2.3
+  resolution: "react-tabs@npm:3.2.3"
   dependencies:
     clsx: ^1.1.0
     prop-types: ^15.5.0
   peerDependencies:
     react: ^16.3.0 || ^17.0.0-0
-  checksum: e408cf6ad3454f3bf5745d6712d4e3ad5c5855167797f3d05c880b9154f9fb5c578eb2599082b40305b4d2596890f8721dc4f18898fca0d17a3c519323974388
+  checksum: 9fd8a577f2705f3c8049606b9a3dfd01a0d589fa2ac741b3f6b365e454bcb52b9dfb2088417ea369693202496a960ce0e2655d4c050b6a98cf98cbec9c2f77bd
   languageName: node
   linkType: hard
 
@@ -23123,7 +23140,44 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.60.0, webpack@npm:^5, webpack@npm:^5.1.0":
+"webpack@npm:5.61.0":
+  version: 5.61.0
+  resolution: "webpack@npm:5.61.0"
+  dependencies:
+    "@types/eslint-scope": ^3.7.0
+    "@types/estree": ^0.0.50
+    "@webassemblyjs/ast": 1.11.1
+    "@webassemblyjs/wasm-edit": 1.11.1
+    "@webassemblyjs/wasm-parser": 1.11.1
+    acorn: ^8.4.1
+    acorn-import-assertions: ^1.7.6
+    browserslist: ^4.14.5
+    chrome-trace-event: ^1.0.2
+    enhanced-resolve: ^5.8.3
+    es-module-lexer: ^0.9.0
+    eslint-scope: 5.1.1
+    events: ^3.2.0
+    glob-to-regexp: ^0.4.1
+    graceful-fs: ^4.2.4
+    json-parse-better-errors: ^1.0.2
+    loader-runner: ^4.2.0
+    mime-types: ^2.1.27
+    neo-async: ^2.6.2
+    schema-utils: ^3.1.0
+    tapable: ^2.1.1
+    terser-webpack-plugin: ^5.1.3
+    watchpack: ^2.2.0
+    webpack-sources: ^3.2.0
+  peerDependenciesMeta:
+    webpack-cli:
+      optional: true
+  bin:
+    webpack: bin/webpack.js
+  checksum: 442958ec48645c9e612a2628a815c411cbc18289b5cc7b3d1b5d0f8e5b41606ed225decf4f3684edc365e6390867bded244d20387c70fbb630c0ac08443c34c8
+  languageName: node
+  linkType: hard
+
+"webpack@npm:^5, webpack@npm:^5.1.0":
   version: 5.60.0
   resolution: "webpack@npm:5.60.0"
   dependencies:
