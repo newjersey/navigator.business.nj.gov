@@ -1,8 +1,8 @@
-import { OnboardingData, PublicRecordFilingGroup, Roadmap, TradeNameGroup } from "@/lib/types/types";
+import { OnboardingData, Roadmap } from "@/lib/types/types";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { templateEval } from "@/lib/utils/helpers";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 
 export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {
   const addOns = [];
@@ -22,10 +22,10 @@ export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<
     addOns.push("reseller");
   }
 
-  if (onboardingData.legalStructure) {
-    if (PublicRecordFilingGroup.includes(onboardingData.legalStructure)) {
+  if (onboardingData.legalStructureId) {
+    if (LookupLegalStructureById(onboardingData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing");
-    } else if (TradeNameGroup.includes(onboardingData.legalStructure)) {
+    } else if (LookupLegalStructureById(onboardingData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
     }
   }

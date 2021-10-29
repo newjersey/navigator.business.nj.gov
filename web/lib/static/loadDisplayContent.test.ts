@@ -1,6 +1,6 @@
 import fs from "fs";
 import { loadOnboardingDisplayContent, loadRoadmapDisplayContent } from "./loadDisplayContent";
-import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
+import { LegalStructures } from "@businessnjgovnavigator/shared";
 import { getPathSeparator } from "@/test/helpers";
 
 jest.mock("fs");
@@ -46,8 +46,10 @@ describe("loadDisplayContent", () => {
         (args) => (args[0] as string).split("onboarding")[1]
       );
       const pathSeparator = getPathSeparator();
-      for (const legalStructure of ALL_LEGAL_STRUCTURES_ORDERED) {
-        expect(allFilePaths).toContain(`${pathSeparator}legal-structure${pathSeparator}${legalStructure}.md`);
+      for (const legalStructure of LegalStructures) {
+        expect(allFilePaths).toContain(
+          `${pathSeparator}legal-structure${pathSeparator}${legalStructure.id}.md`
+        );
       }
     });
   });

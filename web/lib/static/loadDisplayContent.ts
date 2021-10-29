@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { LegalStructure, OnboardingDisplayContent, RoadmapDisplayContent } from "@/lib/types/types";
+import { OnboardingDisplayContent, RoadmapDisplayContent } from "@/lib/types/types";
+import { LegalStructures } from "@businessnjgovnavigator/shared";
 import { getMarkdown } from "@/lib/utils/markdownReader";
-import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
 
 const displayContentDir = path.join(process.cwd(), "display-content");
 
@@ -23,20 +23,12 @@ export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
   const notes = getMarkdown(loadFile("notes.md"));
   const taxId = getMarkdown(loadFile("tax-id.md"));
 
-  const legalStructureOptionContent: Record<LegalStructure, string> = ALL_LEGAL_STRUCTURES_ORDERED.reduce(
-    (acc, legalStructure) => {
-      acc[legalStructure] = getMarkdown(loadFile(`legal-structure/${legalStructure}.md`)).content;
-      return acc;
-    },
-    {
-      "sole-proprietorship": "",
-      "general-partnership": "",
-      "limited-partnership": "",
-      "limited-liability-partnership": "",
-      "limited-liability-company": "",
-      "c-corporation": "",
-    }
-  );
+  const legalStructureOptionContent: Record<string, string> = {};
+  LegalStructures.forEach((legalStructure) => {
+    legalStructureOptionContent[legalStructure.id] = getMarkdown(
+      loadFile(`legal-structure/${legalStructure.id}.md`)
+    ).content;
+  });
 
   return {
     businessName: {

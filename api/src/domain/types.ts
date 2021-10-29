@@ -124,7 +124,7 @@ export interface Preferences {
 export interface OnboardingData {
   businessName: string;
   industryId: string | undefined;
-  legalStructure: LegalStructure | undefined;
+  legalStructureId: string | undefined;
   municipality: Municipality | undefined;
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
@@ -171,7 +171,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
   return {
     businessName: "",
     industryId: undefined,
-    legalStructure: undefined,
+    legalStructureId: undefined,
     municipality: undefined,
     liquorLicense: false,
     homeBasedBusiness: false,
@@ -183,20 +183,3 @@ export const createEmptyOnboardingData = (): OnboardingData => {
     notes: "",
   };
 };
-
-export type LegalStructure =
-  | "sole-proprietorship"
-  | "general-partnership"
-  | "limited-partnership"
-  | "limited-liability-partnership"
-  | "limited-liability-company"
-  | "c-corporation";
-
-export const ALL_LEGAL_STRUCTURES: LegalStructure[] = [
-  "sole-proprietorship",
-  "general-partnership",
-  "limited-partnership",
-  "limited-liability-partnership",
-  "limited-liability-company",
-  "c-corporation",
-];

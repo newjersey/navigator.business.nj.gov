@@ -127,7 +127,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     event.preventDefault();
     if (!userData) return;
 
-    if (page.current === 3 && !onboardingData.legalStructure) {
+    if (page.current === 3 && !onboardingData.legalStructureId) {
       setError("REQUIRED_LEGAL");
       scrollToTop();
       headerRef.current?.focus();

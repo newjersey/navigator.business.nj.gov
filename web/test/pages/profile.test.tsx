@@ -17,7 +17,6 @@ import {
 import {
   createEmptyOnboardingDisplayContent,
   createEmptyUserData,
-  LegalStructure,
   Municipality,
   OnboardingDisplayContent,
   UserData,
@@ -79,7 +78,7 @@ describe("profile", () => {
       onboardingData: generateOnboardingData({
         businessName: "Applebees",
         industryId: "cosmetology",
-        legalStructure: "c-corporation",
+        legalStructureId: "c-corporation",
         entityId: "1234567890",
         employerId: "123456789",
         taxId: "123456790",
@@ -137,7 +136,7 @@ describe("profile", () => {
           businessName: "Cool Computers",
           industryId: "e-commerce",
           homeBasedBusiness: true,
-          legalStructure: "c-corporation",
+          legalStructureId: "c-corporation",
           municipality: newark,
           taxId: "023456790",
           entityId: "0234567890",
@@ -182,7 +181,7 @@ describe("profile", () => {
   it("entity-id field existing depends on legal structure", async () => {
     const userData = generateUserData({
       onboardingData: generateOnboardingData({
-        legalStructure: "general-partnership",
+        legalStructureId: "general-partnership",
       }),
     });
     subject = renderPage({ userData });
@@ -271,6 +270,6 @@ describe("profile", () => {
   const getMunicipalityValue = (): string =>
     (subject.queryByTestId("municipality") as HTMLInputElement)?.value;
 
-  const getLegalStructureValue = (): LegalStructure =>
-    (subject.queryByTestId("legal-structure") as HTMLInputElement)?.value as LegalStructure;
+  const getLegalStructureValue = (): string =>
+    (subject.queryByTestId("legal-structure") as HTMLInputElement)?.value;
 });

@@ -1,7 +1,5 @@
 import {
-  ALL_LEGAL_STRUCTURES,
   BusinessUser,
-  LegalStructure,
   LicenseData,
   LicenseEntity,
   LicenseStatusItem,
@@ -15,6 +13,7 @@ import {
   UserData,
 } from "./types";
 import { Industries, Industry } from "@shared/industry";
+import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import dayjs from "dayjs";
 import { LoremIpsum } from "lorem-ipsum";
 
@@ -67,7 +66,7 @@ export const generateOnboardingData = (overrides: Partial<OnboardingData>): Onbo
   return {
     businessName: `some-business-name-${randomInt()}`,
     industryId: randomIndustry().id,
-    legalStructure: randomLegalStructure(),
+    legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
     liquorLicense: false,
     homeBasedBusiness: false,
@@ -166,8 +165,8 @@ export const generateSelfRegResponse = (overrides: Partial<SelfRegResponse>): Se
 };
 
 export const randomLegalStructure = (): LegalStructure => {
-  const randomIndex = Math.floor(Math.random() * ALL_LEGAL_STRUCTURES.length);
-  return ALL_LEGAL_STRUCTURES[randomIndex];
+  const randomIndex = Math.floor(Math.random() * LegalStructures.length);
+  return LegalStructures[randomIndex];
 };
 
 export const randomIndustry = (): Industry => {

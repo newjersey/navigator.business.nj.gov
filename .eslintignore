@@ -32,3 +32,6 @@ api/.webpack
 
 api/src/setupTests.js
 api/src/teardownTests.js
+
+.yarn
+.vscode
