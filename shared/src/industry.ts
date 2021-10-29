@@ -135,4 +135,14 @@ export const Industries: Industry[] = [
     isMobileLocation: false,
     canBeReseller: false,
   },
+  
+  {
+    id: "auto-body-repair",
+    name: "Auto-Body Repair",
+    description: "A facility for the repair and restoration of vehicles",
+    canBeHomeBased: false,
+    isLiquorLicenseApplicable: false,
+    isMobileLocation: false,
+    canBeReseller: true,
+  },
 ];
