@@ -5,6 +5,9 @@ describe("Industry Tests", () => {
     expect(Industries.length).toBeGreaterThan(0);
   });
   Industries.forEach((i) => {
+    it(`${i.id} has an id`, () => {
+      expect(i.id.length).toBeGreaterThan(0);
+    });
     it(`${i.id} has a name`, () => {
       expect(i.name.length).toBeGreaterThan(0);
     });

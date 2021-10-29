@@ -17,7 +17,6 @@ import {
 import {
   createEmptyOnboardingDisplayContent,
   createEmptyUserData,
-  LegalStructure,
   Municipality,
   OnboardingDisplayContent,
   UserData,
@@ -113,7 +112,7 @@ describe("onboarding", () => {
       onboardingData: generateOnboardingData({
         businessName: "Applebees",
         industryId: "cosmetology",
-        legalStructure: "c-corporation",
+        legalStructureId: "c-corporation",
         municipality: generateMunicipality({
           displayName: "Newark",
         }),
@@ -149,7 +148,7 @@ describe("onboarding", () => {
 
     chooseRadio("general-partnership");
     await visitStep4();
-    expect(currentUserData().onboardingData.legalStructure).toEqual("general-partnership");
+    expect(currentUserData().onboardingData.legalStructureId).toEqual("general-partnership");
 
     selectByText("Location", "Newark");
     clickNext();
@@ -162,7 +161,7 @@ describe("onboarding", () => {
         businessName: "Cool Computers",
         industryId: "e-commerce",
         homeBasedBusiness: true,
-        legalStructure: "general-partnership",
+        legalStructureId: "general-partnership",
         municipality: newark,
       },
     });
@@ -423,9 +422,9 @@ describe("onboarding", () => {
 
   const getIndustryValue = (): string => (subject.queryByTestId("industryid") as HTMLInputElement)?.value;
 
-  const getLegalStructureValue = (): LegalStructure => {
+  const getLegalStructureValue = (): string => {
     const checked = subject.container.querySelector(".Mui-checked input") as HTMLInputElement;
-    return checked.value as LegalStructure;
+    return checked.value as string;
   };
 
   const getMunicipalityValue = (): string =>

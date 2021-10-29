@@ -1,4 +1,4 @@
-import { TradeNameGroup, LegalStructure } from "@/lib/types/types";
+import { LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 
-export const isEntityIdApplicable = (legalStructure: LegalStructure | undefined): boolean =>
-  legalStructure ? !TradeNameGroup.includes(legalStructure) : false;
+export const isEntityIdApplicable = (legalStructureId: string | undefined): boolean =>
+  legalStructureId ? !LookupLegalStructureById(legalStructureId).hasTradeName : false;

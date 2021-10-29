@@ -128,13 +128,6 @@ For jest testing, the value that will be used for the environment variables is s
 
 For running (and testing) the app locally in development mode, it needs environment variables locally as well. These should be provided via a `web/.env` file which should _not_ be checked into source control. There exists a file `web/.env-template` which provides a blank template to show what variables should be included. This _is_ checked into source control and should be updated any time new frontend variables are added.
 
-### UI Display Content
-
-The `./web/display-content` folder holds files that define the user text for:
-
-- `IndustryLookup.ts` - how industry names are displayed
-- `LegalStructureLookup.ts` - how legal structure names are displayed
-
 ### Roadmaps
 
 In the `./web/roadmaps` directory, we have JSON files containing the static content defining tasks and steps for different roadmaps.

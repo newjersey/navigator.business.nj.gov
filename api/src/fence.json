@@ -18,6 +18,7 @@
     "xml2js",
     "winston",
     "winston-cloudwatch",
-    "@shared/industry"
+    "@shared/industry",
+    "@shared/legalStructure"
   ]
 }

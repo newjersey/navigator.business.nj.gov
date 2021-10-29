@@ -3,8 +3,7 @@ import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import analytics from "@/lib/utils/analytics";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { OnboardingData } from "@/lib/types/types";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
-import { LegalStructureLookup } from "@/display-content/LegalStructureLookup";
+import { LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMediaQuery } from "@mui/material";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -39,8 +38,8 @@ export const MiniProfile = (props: Props): ReactElement => {
 
   const getLegalStructure = (): string => {
     if (isLoading) return RoadmapDefaults.loadingText;
-    return props.onboardingData.legalStructure
-      ? LegalStructureLookup[props.onboardingData.legalStructure]
+    return props.onboardingData.legalStructureId
+      ? LookupLegalStructureById(props.onboardingData.legalStructureId).name
       : RoadmapDefaults.greyBoxNotSetText;
   };
 
@@ -74,7 +73,7 @@ export const MiniProfile = (props: Props): ReactElement => {
             <div data-industry={props.onboardingData.industryId}>
               <strong>{RoadmapDefaults.greyBoxIndustryText}:</strong> {getIndustry()}
             </div>
-            <div data-legal-structure={props.onboardingData.legalStructure}>
+            <div data-legal-structure={props.onboardingData.legalStructureId}>
               <strong>{RoadmapDefaults.greyBoxLegalStructureText}:</strong> {getLegalStructure()}
             </div>
             <div data-municipality={props.onboardingData.municipality?.name}>
@@ -90,7 +89,7 @@ export const MiniProfile = (props: Props): ReactElement => {
                   {displayAsEin(props.onboardingData.employerId)}
                 </div>
               )}
-              {props.onboardingData.entityId && isEntityIdApplicable(props.onboardingData.legalStructure) && (
+              {props.onboardingData.entityId && isEntityIdApplicable(props.onboardingData.legalStructureId) && (
                 <div>
                   <strong>{RoadmapDefaults.greyBoxEntityIdText}:</strong> {props.onboardingData.entityId}
                 </div>

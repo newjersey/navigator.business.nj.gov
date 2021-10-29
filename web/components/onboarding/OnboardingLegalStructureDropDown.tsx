@@ -3,32 +3,39 @@ import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material"
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { OnboardingContext } from "@/pages/onboarding";
-import { LegalStructure } from "@/lib/types/types";
 import { Content } from "@/components/Content";
-import { ALL_LEGAL_STRUCTURES_ORDERED, LegalStructureLookup } from "@/display-content/LegalStructureLookup";
+import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import { setHeaderRole } from "@/lib/utils/helpers";
+import orderBy from "lodash.orderby";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
+
+  const LegalStructuresOrdered: LegalStructure[] = orderBy(
+    LegalStructures,
+    (legalStructure: LegalStructure) => {
+      return legalStructure.name;
+    }
+  );
 
   const handleLegalStructure = (event: SelectChangeEvent) => {
     if (event.target.value) {
       setOnboardingData({
         ...state.onboardingData,
-        legalStructure: event.target.value as LegalStructure,
+        legalStructureId: event.target.value,
       });
     }
   };
 
-  const renderOption = (LegalStructure: LegalStructure): ReactElement => (
+  const renderOption = (legalStructureId: string): ReactElement => (
     <div className="padding-top-1 padding-bottom-1">
-      {state.onboardingData.legalStructure === LegalStructure ? (
-        <MenuOptionSelected secondaryText={LegalStructureLookup[LegalStructure]}>
-          {LegalStructureLookup[LegalStructure]}
+      {state.onboardingData.legalStructureId === legalStructureId ? (
+        <MenuOptionSelected secondaryText={LookupLegalStructureById(legalStructureId).name}>
+          {LookupLegalStructureById(legalStructureId).name}
         </MenuOptionSelected>
       ) : (
-        <MenuOptionUnselected secondaryText={LegalStructureLookup[LegalStructure]}>
-          {LegalStructureLookup[LegalStructure]}
+        <MenuOptionUnselected secondaryText={LookupLegalStructureById(legalStructureId).name}>
+          {LookupLegalStructureById(legalStructureId).name}
         </MenuOptionUnselected>
       )}
     </div>
@@ -39,7 +46,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
       return <span className="text-base">{state.displayContent.legalStructure.contentMd}</span>;
     }
 
-    return <>{LegalStructureLookup[value as LegalStructure]}</>;
+    return <>{LookupLegalStructureById(value as string).name}</>;
   };
 
   const headerLevelTwo = setHeaderRole(2, "h2-element");
@@ -52,7 +59,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
           <Select
             fullWidth
             displayEmpty
-            value={state.onboardingData.legalStructure || ""}
+            value={state.onboardingData.legalStructureId || ""}
             onChange={handleLegalStructure}
             name="legal-structure"
             inputProps={{
@@ -61,9 +68,9 @@ export const OnboardingLegalStructure = (): ReactElement => {
             }}
             renderValue={renderValue}
           >
-            {ALL_LEGAL_STRUCTURES_ORDERED.map((legalStructure) => (
-              <MenuItem key={legalStructure} value={legalStructure} data-testid={legalStructure}>
-                {renderOption(legalStructure)}
+            {LegalStructuresOrdered.map((legalStructure) => (
+              <MenuItem key={legalStructure.id} value={legalStructure.id} data-testid={legalStructure.id}>
+                {renderOption(legalStructure.id)}
               </MenuItem>
             ))}
           </Select>

@@ -102,7 +102,11 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no business name present", async () => {
-      useMockOnboardingData({ businessName: "", industryId: "restaurant", legalStructure: "c-corporation" });
+      useMockOnboardingData({
+        businessName: "",
+        industryId: "restaurant",
+        legalStructureId: "c-corporation",
+      });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
       expect(subject.getByText("Not set")).toBeInTheDocument();
@@ -118,7 +122,7 @@ describe("roadmap page", () => {
     it("shows placeholder if no industry present", async () => {
       useMockOnboardingData({
         industryId: "generic",
-        legalStructure: "c-corporation",
+        legalStructureId: "c-corporation",
         municipality: generateMunicipality({}),
       });
       const subject = renderRoadmapPage();
@@ -126,14 +130,14 @@ describe("roadmap page", () => {
     });
 
     it("shows the human-readable legal structure from onboarding data", () => {
-      useMockOnboardingData({ legalStructure: "limited-liability-company" });
+      useMockOnboardingData({ legalStructureId: "limited-liability-company" });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Limited Liability Company (LLC)")).toBeInTheDocument();
     });
 
     it("shows placeholder if no business structure present", async () => {
       useMockOnboardingData({
-        legalStructure: undefined,
+        legalStructureId: undefined,
         industryId: "restaurant",
         municipality: generateMunicipality({}),
       });
@@ -151,7 +155,7 @@ describe("roadmap page", () => {
 
     it("shows placeholder if no municipality present", async () => {
       useMockOnboardingData({
-        legalStructure: "c-corporation",
+        legalStructureId: "c-corporation",
         industryId: "restaurant",
         municipality: undefined,
       });
@@ -162,7 +166,7 @@ describe("roadmap page", () => {
     it("shows entity id if present", () => {
       useMockOnboardingData({
         entityId: "1234567890",
-        legalStructure: "limited-liability-company",
+        legalStructureId: "limited-liability-company",
       });
       const subject = renderRoadmapPage();
       expect(subject.getByText("1234567890")).toBeInTheDocument();
@@ -170,7 +174,7 @@ describe("roadmap page", () => {
 
     it("does not show entity id for Trade Name legal structure even if present", () => {
       useMockOnboardingData({
-        legalStructure: "sole-proprietorship",
+        legalStructureId: "sole-proprietorship",
         entityId: "1234567890",
       });
       const subject = renderRoadmapPage();
@@ -219,7 +223,7 @@ describe("roadmap page", () => {
       setMobileScreen(true);
       useMockOnboardingData({
         businessName: "some name",
-        legalStructure: "c-corporation",
+        legalStructureId: "c-corporation",
         industryId: "restaurant",
         municipality: generateMunicipality({ displayName: "Franklin" }),
         entityId: "123456790",

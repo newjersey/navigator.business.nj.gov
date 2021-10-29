@@ -41,7 +41,7 @@ export interface Preferences {
 const emptyOnboardingData = {
   businessName: "",
   industryId: undefined,
-  legalStructure: undefined,
+  legalStructureId: undefined,
   municipality: undefined,
   liquorLicense: false,
   homeBasedBusiness: false,
@@ -60,7 +60,7 @@ export const createEmptyOnboardingData = (): OnboardingData => {
 export interface OnboardingData {
   businessName: string;
   industryId: string | undefined;
-  legalStructure: LegalStructure | undefined;
+  legalStructureId: string | undefined;
   municipality: Municipality | undefined;
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
@@ -109,7 +109,7 @@ export type OnboardingDisplayContent = {
   };
   legalStructure: {
     contentMd: string;
-    optionContent: Record<LegalStructure, string>;
+    optionContent: Record<string, string>;
   };
   municipality: {
     contentMd: string;
@@ -300,14 +300,6 @@ export interface PostOnboarding {
   radioNoContent: string;
 }
 
-export type LegalStructure =
-  | "sole-proprietorship"
-  | "general-partnership"
-  | "limited-partnership"
-  | "limited-liability-partnership"
-  | "limited-liability-company"
-  | "c-corporation";
-
 export type BusinessUser = {
   name?: string;
   email: string;
@@ -378,11 +370,3 @@ export type SelfRegRequest = {
   email: string;
   confirmEmail: string;
 };
-
-export const TradeNameGroup: LegalStructure[] = ["general-partnership", "sole-proprietorship"];
-export const PublicRecordFilingGroup: LegalStructure[] = [
-  "limited-partnership",
-  "limited-liability-partnership",
-  "limited-liability-company",
-  "c-corporation",
-];

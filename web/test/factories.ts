@@ -1,6 +1,5 @@
 import {
   BusinessUser,
-  LegalStructure,
   LicenseData,
   LicenseStatusItem,
   LicenseStatusResult,
@@ -19,8 +18,7 @@ import {
   TaxFiling,
   UserData,
 } from "@/lib/types/types";
-import { Industry, Industries } from "@businessnjgovnavigator/shared";
-import { ALL_LEGAL_STRUCTURES_ORDERED } from "@/display-content/LegalStructureLookup";
+import { Industry, Industries, LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import { getSectionNames } from "@/lib/utils/helpers";
 
@@ -86,7 +84,7 @@ export const generateOnboardingData = (
   return {
     businessName: `some-business-name-${randomInt()}`,
     industryId: randomIndustry(isMobileLocation).id,
-    legalStructure: randomLegalStructure(),
+    legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
     liquorLicense: false,
     homeBasedBusiness: false,
@@ -238,8 +236,8 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
 };
 
 export const randomLegalStructure = (): LegalStructure => {
-  const randomIndex = Math.floor(Math.random() * ALL_LEGAL_STRUCTURES_ORDERED.length);
-  return ALL_LEGAL_STRUCTURES_ORDERED[randomIndex];
+  const randomIndex = Math.floor(Math.random() * LegalStructures.length);
+  return LegalStructures[randomIndex];
 };
 
 export const randomIndustry = (isMobileLocation = false): Industry => {

@@ -57,29 +57,29 @@ describe("buildUserRoadmap", () => {
 
   describe("legal structure", () => {
     it("adds public-record-filing for Public Record Filing legal structures", async () => {
-      await buildUserRoadmap(generateOnboardingData({ legalStructure: "limited-partnership" }));
+      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "limited-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
 
-      await buildUserRoadmap(generateOnboardingData({ legalStructure: "limited-liability-partnership" }));
+      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "limited-liability-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
 
-      await buildUserRoadmap(generateOnboardingData({ legalStructure: "limited-liability-company" }));
+      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "limited-liability-company" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
 
-      await buildUserRoadmap(generateOnboardingData({ legalStructure: "c-corporation" }));
+      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "c-corporation" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
     });
 
     it("adds trade-name for Trade Name legal structures", async () => {
-      await buildUserRoadmap(generateOnboardingData({ legalStructure: "general-partnership" }));
+      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "general-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
 
-      await buildUserRoadmap(generateOnboardingData({ legalStructure: "sole-proprietorship" }));
+      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "sole-proprietorship" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
     });
