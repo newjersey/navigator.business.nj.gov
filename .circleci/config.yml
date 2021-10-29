@@ -63,6 +63,8 @@ commands:
     parameters:
       enable-dashboard:
         type: boolean
+      suite:
+        type: string
     steps:
       - run:
           name: Install Additional Tools
@@ -73,7 +75,7 @@ commands:
           background: true
       - run:
           name: Run Tests
-          command: yarn cypress:run --browser=chrome --record=<< parameters.enable-dashboard >>
+          command: yarn cypress:run --browser=chrome --record=<< parameters.enable-dashboard >> --env SUITE=<< parameters.suite >>
           working_directory: web
       - store_test_results:
           path: web/cypress/results
@@ -230,6 +232,8 @@ jobs:
       enable-dashboard:
         type: boolean
         default: false
+      suite:
+        type: string
     docker:
       - image: node:14.18.1-buster
     resource_class: large
@@ -238,6 +242,7 @@ jobs:
       - install-chrome
       - perform-cypress-tests:
           enable-dashboard: << parameters.enable-dashboard >>
+          suite: << parameters.suite >>
       - store-deploy-cache
     environment:
       API_BASE_URL: http://localhost:5000/local
@@ -269,7 +274,8 @@ workflows:
           type: approval
           requires:
             - dev-deploy
-            - cypress-tests
+            - Cypress Tests - Group 1
+            - Cypress Tests - Group 2
             - vulnerability-checker/scan
           filters:
             branches:
@@ -296,8 +302,17 @@ workflows:
           requires:
             - production-hold
       - cypress-tests:
-          name: cypress-tests
+          name: Cypress Tests - Group 1
           enable-dashboard: true
+          suite: group1
+          filters:
+            branches:
+              only:
+                - main
+      - cypress-tests:
+          name: Cypress Tests - Group 2
+          enable-dashboard: true
+          suite: group2
           filters:
             branches:
               only:
@@ -311,7 +326,15 @@ workflows:
               ignore:
                 - main
       - cypress-tests:
-          name: cypress-tests
+          name: Cypress Tests - Group 1
+          suite: group1
+          filters:
+            branches:
+              ignore:
+                - main
+      - cypress-tests:
+          name: Cypress Tests - Group 2
+          suite: group2
           filters:
             branches:
               ignore:

@@ -8,7 +8,7 @@ import {
   lighthouseDesktopConfig,
 } from "../support/helpers";
 
-describe("Performance and Accessability [all]", () => {
+describe("Performance and Accessability [all] [group1]", () => {
   beforeEach(() => {
     cy.resetUserData();
     cy.loginByCognitoApi();

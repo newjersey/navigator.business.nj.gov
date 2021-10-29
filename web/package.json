@@ -9,6 +9,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record false",
     "cypress:run:feature": "cypress run --record false --env SUITE=feature",
+    "cypress:run:ci": "cypress run --record false --env SUITE=ci",
     "dev": "next dev",
     "eslint": "eslint",
     "fences": "gf",
