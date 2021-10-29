@@ -12,4 +12,4 @@ If your business will offer spray paint services to vehicles, you must speak wit
 * Wetlands, Existing Flood Hazard Areas: related to potential disturbances caused by your business
 * Right to Know: due to what is being stored on the site
  
-Find out if you are eligible for a spray paint booth permit termination.
+Find out if you are eligible for a `spray paint booth permit termination|spray-paint-booth-termination`
