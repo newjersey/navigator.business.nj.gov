@@ -17,7 +17,6 @@ import {
 import {
   createEmptyOnboardingDisplayContent,
   createEmptyUserData,
-  Municipality,
   OnboardingDisplayContent,
   UserData,
 } from "@/lib/types/types";
@@ -30,6 +29,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { ProfileDefaults } from "@/display-content/ProfileDefaults";
+import { Municipality } from "@businessnjgovnavigator/shared";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");

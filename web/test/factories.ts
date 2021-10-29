@@ -3,8 +3,6 @@ import {
   LicenseData,
   LicenseStatusItem,
   LicenseStatusResult,
-  Municipality,
-  MunicipalityDetail,
   NameAndAddress,
   NameAvailability,
   OnboardingData,
@@ -18,7 +16,14 @@ import {
   TaxFiling,
   UserData,
 } from "@/lib/types/types";
-import { Industry, Industries, LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
+import {
+  Industry,
+  Industries,
+  LegalStructure,
+  LegalStructures,
+  Municipality,
+  MunicipalityDetail,
+} from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import { getSectionNames } from "@/lib/utils/helpers";
 

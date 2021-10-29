@@ -1,11 +1,11 @@
 import React, { ReactElement, useContext } from "react";
 import { OnboardingContext } from "@/pages/onboarding";
-import { Municipality } from "@/lib/types/types";
 import { Content } from "@/components/Content";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { MunicipalityDropdown } from "@/components/MunicipalityDropdown";
 import { setHeaderRole } from "@/lib/utils/helpers";
+import { Municipality } from "@businessnjgovnavigator/shared";
 
 export const OnboardingMunicipality = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);

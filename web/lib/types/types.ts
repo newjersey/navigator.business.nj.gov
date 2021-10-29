@@ -1,3 +1,5 @@
+import { Municipality } from "@businessnjgovnavigator/shared";
+
 export interface UserData {
   user: BusinessUser;
   onboardingData: OnboardingData;
@@ -209,25 +211,6 @@ export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
 export type RoadmapDisplayContent = {
   contentMd: string;
   operateDisplayContent: OperateDisplayContent;
-};
-
-export type Municipality = {
-  name: string;
-  displayName: string;
-  county: string;
-  id: string;
-};
-
-export type MunicipalityDetail = {
-  id: string;
-  townName: string;
-  townDisplayName: string;
-  townWebsite: string;
-  countyId: string;
-  countyName: string;
-  countyClerkPhone: string;
-  countyClerkWebsite: string;
-  countyWebsite: string;
 };
 
 export interface Roadmap {

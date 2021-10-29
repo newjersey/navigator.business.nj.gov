@@ -1,4 +1,5 @@
 import * as https from "https";
+import { Municipality } from "@shared/municipality";
 
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
@@ -135,13 +136,6 @@ export interface OnboardingData {
   taxId: string | undefined;
   notes: string;
 }
-
-export type Municipality = {
-  name: string;
-  displayName: string;
-  county: string;
-  id: string;
-};
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 
