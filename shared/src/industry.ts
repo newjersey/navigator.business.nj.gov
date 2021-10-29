@@ -83,7 +83,7 @@ export const Industries: Industry[] = [
   {
     id: "retail",
     name: "Retail",
-    description: "Selling or reselling goods",
+    description: "Selling or reselling goods in a brick and mortar location outside of your home",
     canBeHomeBased: true,
     isLiquorLicenseApplicable: false,
     isMobileLocation: false,
