@@ -5,7 +5,7 @@ name: "Register Your Vehicle "
 callToActionLink: "https://www.nj.gov/mvc/vehicles/reginitial.htm"
 callToActionText: "Obtain or Renew Your Vehicle Registration"
 ---
-You should ensure your vehicle is properly registered as a passenger vehicle with the State of New Jersey prior to providing non-medical transportation services. 
+You should ensure your vehicle is properly registered as a passenger vehicle with the New Jersey Motor Vehicle Commission. 
 
 To complete this application, you must have:
 * [An appointment](https://telegov.njportal.com/njmvc/AppointmentWizard) with the NJ Motor Vehicle Commission
