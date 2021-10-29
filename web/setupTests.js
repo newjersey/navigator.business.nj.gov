@@ -1,13 +1,8 @@
 /* eslint-disable no-undef */
-import "@testing-library/jest-dom";
-
-import fetch from "node-fetch";
+require("@testing-library/jest-dom");
 
 process.env.API_BASE_URL = "";
 
-global.fetch = window.fetch = fetch;
-global.Request = window.Request = fetch.Request;
-global.Response = window.Response = fetch.Response;
 global.scrollTo = jest.fn();
 global.gtag = jest.fn();
 
