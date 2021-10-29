@@ -62,7 +62,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
 
     cy.get('input[aria-label="Business name"]').clear();
     cy.get('input[aria-label="Business name"]').type("Applebee's");
-    cy.get('[aria-label="Industry"]').click({ force: true });
+    cy.get('[id="Industry"]').click({ force: true });
     cy.get('[data-value="restaurant"]').click({ force: true });
     cy.get('[aria-label="Legal structure"]').click({ force: true });
     cy.get('[data-value="limited-liability-company"]').click({ force: true });
@@ -89,7 +89,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('input[aria-label="Business name"]').type("Beesapple's");
     clickNext();
 
-    cy.get('[aria-label="Industry"]').click({ force: true });
+    cy.get('[id="Industry"]').click({ force: true });
     cy.get('[data-value="home-contractor"]').click({ force: true });
     cy.get('[data-contextual-info-id="home-contractors-activities"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");

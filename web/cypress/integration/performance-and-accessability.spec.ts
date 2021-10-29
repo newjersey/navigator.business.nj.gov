@@ -32,7 +32,7 @@ describe("Performance and Accessability [all] [group1]", () => {
         cy.get('input[aria-label="Business name"]').type("Beesapple's");
         clickNext();
 
-        cy.get('[aria-label="Industry"]').click();
+        cy.get('[id="Industry"]').click();
         cy.get('[data-value="e-commerce"]').click();
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
@@ -46,7 +46,7 @@ describe("Performance and Accessability [all] [group1]", () => {
         cy.get('input[aria-label="Business name"]').type("Beesapple's");
         clickNext();
 
-        cy.get('[aria-label="Industry"]').click();
+        cy.get('[id="Industry"]').click();
         cy.get('[data-value="e-commerce"]').click();
         clickNext();
 
@@ -63,7 +63,7 @@ describe("Performance and Accessability [all] [group1]", () => {
         cy.get('input[aria-label="Business name"]').type("Beesapple's");
         clickNext();
 
-        cy.get('[aria-label="Industry"]').click();
+        cy.get('[id="Industry"]').click();
         cy.get('[data-value="e-commerce"]').click();
         clickNext();
 

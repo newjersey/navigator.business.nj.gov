@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode, useContext } from "react";
-import { Divider, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Industries, Industry, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { Content } from "@/components/Content";
@@ -13,6 +13,7 @@ import orderBy from "lodash.orderby";
 
 export const OnboardingIndustry = (): ReactElement => {
   const { state, setOnboardingData } = useContext(OnboardingContext);
+  const [open, setOpen] = React.useState(false);
 
   const handleIndustry = (event: SelectChangeEvent) => {
     let industry = "generic";
@@ -82,22 +83,26 @@ export const OnboardingIndustry = (): ReactElement => {
     <>
       <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.industry.contentMd}</Content>
       <div className="form-input margin-top-2">
-        <FormControl variant="outlined" fullWidth>
+        <FormControl fullWidth>
+          <InputLabel id="industry-label" className="visibility-hidden">
+            Industry
+          </InputLabel>
           <Select
-            fullWidth
+            labelId="industry-label"
+            id="Industry"
             displayEmpty
             value={state.onboardingData.industryId || ""}
             onChange={handleIndustry}
-            inputProps={{
-              "aria-label": "Industry",
-              "data-testid": "industryid",
-            }}
+            open={open}
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+            inputProps={{ "data-testid": "industryid" }}
             renderValue={renderValue}
           >
             <MenuItem value="generic" data-testid="generic">
               {renderOption("generic")}
             </MenuItem>
-            <Divider style={{ background: "#e6e6e6" }} />
+            <Divider aria-hidden="true" style={{ background: "#e6e6e6" }} />
             {IndustriesOrdered.filter((industry) => industry.id !== "generic").map((industry) => (
               <MenuItem key={industry.id} value={industry.id} data-testid={industry.id}>
                 {renderOption(industry)}
