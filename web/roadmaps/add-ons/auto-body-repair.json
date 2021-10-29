@@ -1,1 +1,12 @@
-[]
+[
+{
+    "step": 4,
+    "weight": 50,
+    "task": "auto-body-repair-license"
+  },
+  {
+    "step": 4,
+    "weight": 60,
+    "task": "spray-paint-booth-permit-auto-body-repair"
+  }
+]
