@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  vulnerability-checker: whitesource/vulnerability-checker@19.10.1
-
 commands:
   configure-and-build:
     steps:
@@ -267,18 +264,12 @@ workflows:
                 - main
           requires:
             - build
-      - vulnerability-checker/scan:
-          filters:
-            branches:
-              only:
-                - main
       - staging-hold:
           type: approval
           requires:
             - dev-deploy
             - Cypress Tests - Group 1
             - Cypress Tests - Group 2
-            - vulnerability-checker/scan
           filters:
             branches:
               only:
