@@ -5,6 +5,8 @@
   "prCreation": "not-pending",
   "labels": ["renovate"],
   "ignorePaths": [".yarn"],
+  "postUpdateOptions": ["yarnDedupeHighest"],
+  "lockFileMaintenance": { "enabled": true },
   "packageRules": [
     {
       "matchPackagePrefixes": ["cypress"],
