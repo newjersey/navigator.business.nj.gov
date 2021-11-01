@@ -38,6 +38,7 @@ export const AuthContext = createContext<AuthContextType>({
   dispatch: () => {},
   state: initialState,
 });
+AuthContext.displayName = "Authenication";
 
 export interface RoadmapContextType {
   roadmap: Roadmap | undefined;
@@ -52,6 +53,7 @@ export const RoadmapContext = createContext<RoadmapContextType>({
   setRoadmap: () => {},
   setSectionCompletion: () => {},
 });
+RoadmapContext.displayName = "Roadmap";
 
 export interface ContextualInfo {
   isVisible: boolean;
@@ -70,6 +72,7 @@ export const ContextualInfoContext = createContext<ContextualInfoContextType>({
   },
   setContextualInfo: () => {},
 });
+ContextualInfoContext.displayName = "Contextual Info";
 
 export interface UserDataErrorContextType {
   userDataError: UserDataError | undefined;
@@ -80,6 +83,7 @@ export const UserDataErrorContext = createContext<UserDataErrorContextType>({
   userDataError: undefined,
   setUserDataError: () => {},
 });
+UserDataErrorContext.displayName = "User Data Error";
 
 const theme = createTheme({
   typography: {
