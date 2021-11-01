@@ -24,8 +24,12 @@
       "groupName": "linting"
     },
     {
-      "matchPackageNames": ["@types/node"],
-      "major": { "enabled": false }
+      "matchPackageNames": [ "@types/node" ]
+    },
+    {
+      "matchPackageNames": [ "@types/node" ],
+      "matchUpdateTypes": [ "major" ],
+      "enabled": false
     },
     {
       "matchPackageNames": ["@types/react", "@types/react-tabs", "focus-trap-react"],
