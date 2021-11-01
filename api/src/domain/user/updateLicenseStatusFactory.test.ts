@@ -4,7 +4,7 @@ import {
   generateLicenseStatusItem,
   generateLicenseStatusResult,
   generateNameAndAddress,
-  generateOnboardingData,
+  generateProfileData,
   generateUserData,
 } from "../factories";
 import dayjs from "dayjs";
@@ -29,7 +29,7 @@ describe("updateLicenseStatus", () => {
     updateLicenseStatus = updateLicenseStatusFactory(stubUserDataClient, stubSearchLicenseStatus);
 
     userData = generateUserData({
-      onboardingData: generateOnboardingData({
+      profileData: generateProfileData({
         industryId: "home-contractor",
       }),
       licenseData: generateLicenseData({

@@ -2,7 +2,7 @@ import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
 import {
   generateMunicipality,
   generateMunicipalityDetail,
-  generateOnboardingData,
+  generateProfileData,
   generateRoadmap,
   generateStep,
   generateTask,
@@ -28,58 +28,58 @@ describe("buildUserRoadmap", () => {
 
   describe("home-based business", () => {
     it("adds physical-location add-on if home-based business is false", async () => {
-      await buildUserRoadmap(generateOnboardingData({ homeBasedBusiness: false }));
+      await buildUserRoadmap(generateProfileData({ homeBasedBusiness: false }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("physical-location");
     });
 
     it("does not add physical-location add-on if home-based business is true", async () => {
-      await buildUserRoadmap(generateOnboardingData({ homeBasedBusiness: true }));
+      await buildUserRoadmap(generateProfileData({ homeBasedBusiness: true }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("physical-location");
     });
 
     it("does not add physical-location add-on if industry is food-truck", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "food-truck" }));
+      await buildUserRoadmap(generateProfileData({ industryId: "food-truck" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("physical-location");
     });
   });
 
   describe("reseller tasks", () => {
     it("adds reseller task if canBeReseller is true", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "food-truck" }));
+      await buildUserRoadmap(generateProfileData({ industryId: "food-truck" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("reseller");
     });
 
     it("does not add reseller task if canBeReseller is false", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "non-medical-transport" }));
+      await buildUserRoadmap(generateProfileData({ industryId: "non-medical-transport" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("reseller");
     });
   });
 
   describe("legal structure", () => {
     it("adds public-record-filing for Public Record Filing legal structures", async () => {
-      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "limited-partnership" }));
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
 
-      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "limited-liability-partnership" }));
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
 
-      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "limited-liability-company" }));
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
 
-      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "c-corporation" }));
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "c-corporation" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
     });
 
     it("adds trade-name for Trade Name legal structures", async () => {
-      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "general-partnership" }));
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "general-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
 
-      await buildUserRoadmap(generateOnboardingData({ legalStructureId: "sole-proprietorship" }));
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "sole-proprietorship" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
     });
@@ -88,13 +88,13 @@ describe("buildUserRoadmap", () => {
   describe("industry", () => {
     Industries.filter((x) => x.id !== "generic").forEach((industry) => {
       it(`adds ${industry.name} industry and modifications`, async () => {
-        await buildUserRoadmap(generateOnboardingData({ industryId: industry.id }));
+        await buildUserRoadmap(generateProfileData({ industryId: industry.id }));
         expectOnlyIndustry(industry.id, getLastCalledWith(mockRoadmapBuilder)[0]);
       });
     });
 
     it("adds another-industry add-on when industry is generic", async () => {
-      await buildUserRoadmap(generateOnboardingData({ industryId: "generic" }));
+      await buildUserRoadmap(generateProfileData({ industryId: "generic" }));
       const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
       expect(lastCalledWith.addOns).toContain("another-industry");
       expect(lastCalledWith.addOns).not.toContain("restaurant");
@@ -134,13 +134,13 @@ describe("buildUserRoadmap", () => {
 
   describe("liquor license", () => {
     it("adds liquor-license add-on and modification if is true", async () => {
-      await buildUserRoadmap(generateOnboardingData({ liquorLicense: true }));
+      await buildUserRoadmap(generateProfileData({ liquorLicense: true }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("liquor-license");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].modifications).toContain("liquor-license");
     });
 
     it("does not add liquor-license add-on and modification if is true", async () => {
-      await buildUserRoadmap(generateOnboardingData({ liquorLicense: false }));
+      await buildUserRoadmap(generateProfileData({ liquorLicense: false }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("liquor-license");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].modifications).not.toContain("liquor-license");
     });
@@ -178,7 +178,7 @@ describe("buildUserRoadmap", () => {
         })
       );
 
-      const onboardingData = generateOnboardingData({ municipality: generateMunicipality({ id: "1234" }) });
+      const onboardingData = generateProfileData({ municipality: generateMunicipality({ id: "1234" }) });
       const roadmap = await buildUserRoadmap(onboardingData);
 
       const municipalityTask = roadmap.steps[0].tasks[0];
@@ -211,7 +211,7 @@ describe("buildUserRoadmap", () => {
         })
       );
 
-      const onboardingData = generateOnboardingData({ municipality: undefined });
+      const onboardingData = generateProfileData({ municipality: undefined });
       const roadmap = await buildUserRoadmap(onboardingData);
 
       const municipalityTask = roadmap.steps[0].tasks[0];

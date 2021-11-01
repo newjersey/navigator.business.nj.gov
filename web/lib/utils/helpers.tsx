@@ -5,7 +5,7 @@ import {
   Task,
   UserData,
   SectionType,
-  OnboardingError,
+  ProfileError,
   SectionCompletion,
   Preferences,
   sectionNames,
@@ -116,7 +116,7 @@ export const isStepCompleted = (step: Step, userData: UserData | undefined): boo
   });
 };
 
-export const OnboardingErrorLookup: Record<OnboardingError, string> = {
+export const OnboardingErrorLookup: Record<ProfileError, string> = {
   REQUIRED_LEGAL: OnboardingDefaults.errorTextRequiredLegal,
   REQUIRED_MUNICIPALITY: OnboardingDefaults.errorTextRequiredMunicipality,
 };

@@ -41,9 +41,9 @@ const RoadmapPage = (props: Props): ReactElement => {
   }, userData);
 
   const getHeader = (): string => {
-    return userData?.onboardingData.businessName
+    return userData?.profileData.businessName
       ? templateEval(RoadmapDefaults.roadmapTitleTemplate, {
-          businessName: userData.onboardingData.businessName,
+          businessName: userData.profileData.businessName,
         })
       : RoadmapDefaults.roadmapTitleNotSet;
   };
@@ -68,7 +68,7 @@ const RoadmapPage = (props: Props): ReactElement => {
                 <div className="allow-long usa-intro">
                   <Content>{props.displayContent.contentMd}</Content>
                 </div>
-                <MiniProfile onboardingData={userData.onboardingData} />
+                <MiniProfile profileData={userData.profileData} />
               </>
             )}
             <div className="margin-top-3">

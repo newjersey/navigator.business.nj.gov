@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import { userRouterFactory } from "./userRouter";
 import {
   generateLicenseData,
-  generateOnboardingData,
+  generateProfileData,
   generateUser,
   generateUserData,
 } from "../domain/factories";
@@ -117,7 +117,7 @@ describe("userRouter", () => {
 
       it("updates user in the background if licenseData lastCheckedDate is older than last hour", async () => {
         const userData = generateUserData({
-          onboardingData: generateOnboardingData({
+          profileData: generateProfileData({
             industryId: "home-contractor",
           }),
           licenseData: generateLicenseData({
@@ -155,7 +155,7 @@ describe("userRouter", () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
-        onboardingData: generateOnboardingData({ dateOfFormation: "2021-03-01" }),
+        profileData: generateProfileData({ dateOfFormation: "2021-03-01" }),
         taxFilings: [],
       });
 
@@ -173,7 +173,7 @@ describe("userRouter", () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
-        onboardingData: generateOnboardingData({ dateOfFormation: "2021-03-01" }),
+        profileData: generateProfileData({ dateOfFormation: "2021-03-01" }),
         taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
       });
 

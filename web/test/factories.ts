@@ -5,7 +5,7 @@ import {
   LicenseStatusResult,
   NameAndAddress,
   NameAvailability,
-  OnboardingData,
+  ProfileData,
   Preferences,
   Roadmap,
   SectionCompletion,
@@ -64,7 +64,7 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
 export const generateUserData = (overrides: Partial<UserData>): UserData => {
   return {
     user: generateUser({}),
-    onboardingData: generateOnboardingData({}),
+    profileData: generateProfileData({}),
     formProgress: "COMPLETED",
     taskProgress: {},
     licenseData: generateLicenseData({}),
@@ -82,10 +82,10 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   };
 };
 
-export const generateOnboardingData = (
-  overrides: Partial<OnboardingData>,
+export const generateProfileData = (
+  overrides: Partial<ProfileData>,
   isMobileLocation?: boolean
-): OnboardingData => {
+): ProfileData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
     industryId: randomIndustry(isMobileLocation).id,

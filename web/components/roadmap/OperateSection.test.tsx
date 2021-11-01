@@ -2,7 +2,7 @@ import { fireEvent, render, RenderResult, within } from "@testing-library/react"
 import { OperateSection } from "@/components/roadmap/OperateSection";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
-  generateOnboardingData,
+  generateProfileData,
   generatePreferences,
   generateTaxFiling,
   generateUserData,
@@ -61,7 +61,7 @@ describe("<OperateSection />", () => {
     useMockDate("2021-11-01");
 
     useMockUserData({
-      onboardingData: generateOnboardingData({ dateOfFormation: "2020-01-01" }),
+      profileData: generateProfileData({ dateOfFormation: "2020-01-01" }),
       taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
     });
 
@@ -82,7 +82,7 @@ describe("<OperateSection />", () => {
   it("updates date of formation to the first day of the provided month and year", () => {
     const initialUserData = generateUserData({
       taxFilings: [],
-      onboardingData: generateOnboardingData({ dateOfFormation: undefined }),
+      profileData: generateProfileData({ dateOfFormation: undefined }),
     });
     const subject = renderSection(
       <WithStatefulUserData initialUserData={initialUserData}>
@@ -93,14 +93,14 @@ describe("<OperateSection />", () => {
     fireEvent.click(subject.getByText(RoadmapDefaults.operateDateSubmitButtonText));
     const currentMonthAndYear = dayjs().format("YYYY-MM");
 
-    expect(currentUserData().onboardingData.dateOfFormation).toEqual(`${currentMonthAndYear}-01`);
+    expect(currentUserData().profileData.dateOfFormation).toEqual(`${currentMonthAndYear}-01`);
   });
 
   it("brings back the datepicker when edit button is clicked", () => {
     useMockDate("2021-11-01");
 
     useMockUserData({
-      onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
+      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
       taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
     });
 
@@ -126,7 +126,7 @@ describe("<OperateSection />", () => {
     useMockDate("2021-10-01");
 
     useMockUserData({
-      onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
+      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
       taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
     });
 
@@ -161,7 +161,7 @@ describe("<OperateSection />", () => {
     useMockDate("2021-11-01");
 
     useMockUserData({
-      onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
+      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
       taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
     });
 
@@ -186,7 +186,7 @@ describe("<OperateSection />", () => {
     useMockDate("2021-11-01");
 
     useMockUserData({
-      onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
+      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
       taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1", dueDate: "2022-04-30" })],
     });
 

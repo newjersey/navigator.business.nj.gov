@@ -104,7 +104,7 @@ export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export interface UserData {
   user: BusinessUser;
-  onboardingData: OnboardingData;
+  profileData: ProfileData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
   licenseData: LicenseData | undefined;
@@ -122,7 +122,7 @@ export interface Preferences {
   roadmapOpenSteps: number[];
 }
 
-export interface OnboardingData {
+export interface ProfileData {
   businessName: string;
   industryId: string | undefined;
   legalStructureId: string | undefined;
@@ -149,7 +149,7 @@ export type BusinessUser = {
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
     user: user,
-    onboardingData: createEmptyOnboardingData(),
+    profileData: createEmptyProfileData(),
     formProgress: "UNSTARTED",
     taskProgress: {},
     licenseData: undefined,
@@ -161,7 +161,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
   };
 };
 
-export const createEmptyOnboardingData = (): OnboardingData => {
+export const createEmptyProfileData = (): ProfileData => {
   return {
     businessName: "",
     industryId: undefined,

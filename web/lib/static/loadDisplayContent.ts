@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { OnboardingDisplayContent, RoadmapDisplayContent } from "@/lib/types/types";
+import { ProfileDisplayContent, RoadmapDisplayContent } from "@/lib/types/types";
 import { LegalStructures } from "@businessnjgovnavigator/shared";
 import { getMarkdown } from "@/lib/utils/markdownReader";
 
@@ -9,7 +9,7 @@ const displayContentDir = path.join(process.cwd(), "display-content");
 const loadFile = (filename: string): string =>
   fs.readFileSync(path.join(displayContentDir, "onboarding", filename), "utf8");
 
-export const loadOnboardingDisplayContent = (): OnboardingDisplayContent => {
+export const loadProfileDisplayContent = (): ProfileDisplayContent => {
   const businessName = getMarkdown(loadFile("business-name.md"));
   const industry = getMarkdown(loadFile("industry.md"));
   const legalStructure = getMarkdown(loadFile("legal-structure.md"));

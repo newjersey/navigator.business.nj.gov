@@ -10,14 +10,14 @@ import React from "react";
 import Profile from "@/pages/profile";
 import {
   generateMunicipality,
-  generateOnboardingData,
+  generateProfileData as generateProfileData,
   generateUser,
   generateUserData,
 } from "@/test/factories";
 import {
-  createEmptyOnboardingDisplayContent,
+  createEmptyProfileDisplayContent as createEmptyProfileDisplayContent,
   createEmptyUserData,
-  OnboardingDisplayContent,
+  ProfileDisplayContent,
   UserData,
 } from "@/lib/types/types";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -51,22 +51,21 @@ describe("profile", () => {
     userData,
   }: {
     municipalities?: Municipality[];
-    displayContent?: OnboardingDisplayContent;
+    displayContent?: ProfileDisplayContent;
     userData?: UserData;
   }): RenderResult => {
     const genericTown =
-      userData && userData.onboardingData.municipality
-        ? userData.onboardingData.municipality
+      userData && userData.profileData.municipality
+        ? userData.profileData.municipality
         : generateMunicipality({ displayName: "GenericTown" });
     return render(
       <WithStatefulUserData
         initialUserData={
-          userData ||
-          generateUserData({ onboardingData: generateOnboardingData({ municipality: genericTown }) })
+          userData || generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
         }
       >
         <Profile
-          displayContent={displayContent || createEmptyOnboardingDisplayContent()}
+          displayContent={displayContent || createEmptyProfileDisplayContent()}
           municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]}
         />
       </WithStatefulUserData>
@@ -75,7 +74,7 @@ describe("profile", () => {
 
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({
-      onboardingData: generateOnboardingData({
+      profileData: generateProfileData({
         businessName: "Applebees",
         industryId: "cosmetology",
         legalStructureId: "c-corporation",
@@ -131,8 +130,8 @@ describe("profile", () => {
       expect(currentUserData()).toEqual({
         ...initialUserData,
         formProgress: "COMPLETED",
-        onboardingData: {
-          ...initialUserData.onboardingData,
+        profileData: {
+          ...initialUserData.profileData,
           businessName: "Cool Computers",
           industryId: "e-commerce",
           homeBasedBusiness: true,
@@ -148,13 +147,13 @@ describe("profile", () => {
   });
 
   it("builds and sets roadmap on save", async () => {
-    const onboardingData = generateOnboardingData({});
+    const profileData = generateProfileData({});
     const mockSetRoadmap = jest.fn();
 
     subject = render(
       withRoadmap(
-        <WithStatefulUserData initialUserData={generateUserData({ onboardingData })}>
-          <Profile displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+        <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
+          <Profile displayContent={createEmptyProfileDisplayContent()} municipalities={[]} />
         </WithStatefulUserData>,
         undefined,
         undefined,
@@ -180,7 +179,7 @@ describe("profile", () => {
 
   it("entity-id field existing depends on legal structure", async () => {
     const userData = generateUserData({
-      onboardingData: generateOnboardingData({
+      profileData: generateProfileData({
         legalStructureId: "general-partnership",
       }),
     });

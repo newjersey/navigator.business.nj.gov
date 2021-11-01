@@ -4,11 +4,11 @@ import { Content } from "@/components/Content";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 export const OnboardingLiquorLicense = (): ReactElement => {
-  const { state, setOnboardingData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(OnboardingContext);
 
   const handleLiquorLicenseSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    setOnboardingData({
-      ...state.onboardingData,
+    setProfileData({
+      ...state.profileData,
       liquorLicense: event.target.value === "true",
     });
   };
@@ -20,7 +20,7 @@ export const OnboardingLiquorLicense = (): ReactElement => {
         <RadioGroup
           aria-label="Liquor License"
           name="liquor-license"
-          value={state.onboardingData.liquorLicense}
+          value={state.profileData.liquorLicense}
           onChange={handleLiquorLicenseSelection}
           row
         >

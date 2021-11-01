@@ -18,7 +18,7 @@ export const onSignIn = async (
   });
 
   const userData = await api.getUserData(user.id);
-  setAnalyticsDimensions(userData.onboardingData);
+  setAnalyticsDimensions(userData.profileData);
 };
 
 export const onSignOut = async (

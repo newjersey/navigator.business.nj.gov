@@ -12,7 +12,7 @@ import { setHeaderRole } from "@/lib/utils/helpers";
 import orderBy from "lodash.orderby";
 
 export const OnboardingIndustry = (): ReactElement => {
-  const { state, setOnboardingData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(OnboardingContext);
   const [open, setOpen] = React.useState(false);
 
   const handleIndustry = (event: SelectChangeEvent) => {
@@ -26,16 +26,16 @@ export const OnboardingIndustry = (): ReactElement => {
       homeBasedBusiness = false;
     } else {
       const wasHomeBasedBusinessPreviouslyApplicable = isHomeBasedBusinessApplicable(
-        state.onboardingData.industryId
+        state.profileData.industryId
       );
       if (wasHomeBasedBusinessPreviouslyApplicable) {
-        homeBasedBusiness = state.onboardingData.homeBasedBusiness;
+        homeBasedBusiness = state.profileData.homeBasedBusiness;
       }
     }
 
-    setOnboardingData({
-      ...state.onboardingData,
-      liquorLicense: isLiquorLicenseApplicable(industry) ? state.onboardingData.liquorLicense : false,
+    setProfileData({
+      ...state.profileData,
+      liquorLicense: isLiquorLicenseApplicable(industry) ? state.profileData.liquorLicense : false,
       homeBasedBusiness,
       industryId: industry,
     });
@@ -47,7 +47,7 @@ export const OnboardingIndustry = (): ReactElement => {
 
     if (!industryRecord) throw "Industry is undefined";
 
-    return state.onboardingData.industryId === industryRecord.id ? (
+    return state.profileData.industryId === industryRecord.id ? (
       <div className="padding-top-1 padding-bottom-1">
         <MenuOptionSelected secondaryText={industryRecord.description}>
           {industryRecord.name}
@@ -91,7 +91,7 @@ export const OnboardingIndustry = (): ReactElement => {
             labelId="industry-label"
             id="Industry"
             displayEmpty
-            value={state.onboardingData.industryId || ""}
+            value={state.profileData.industryId || ""}
             onChange={handleIndustry}
             open={open}
             onClose={() => setOpen(false)}
@@ -111,19 +111,19 @@ export const OnboardingIndustry = (): ReactElement => {
           </Select>
         </FormControl>
 
-        {state.onboardingData.industryId === "home-contractor" && (
+        {state.profileData.industryId === "home-contractor" && (
           <div className="margin-top-2">
             <Content>{state.displayContent.industry.specificHomeContractorMd}</Content>
           </div>
         )}
 
-        {state.onboardingData.industryId === "employment-agency" && (
+        {state.profileData.industryId === "employment-agency" && (
           <div className="margin-top-2">
             <Content>{state.displayContent.industry.specificEmploymentAgencyMd}</Content>
           </div>
         )}
 
-        {isLiquorLicenseApplicable(state.onboardingData.industryId) && (
+        {isLiquorLicenseApplicable(state.profileData.industryId) && (
           <div className="margin-top-4">
             <OnboardingLiquorLicense />
           </div>

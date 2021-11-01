@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
 import analytics from "@/lib/utils/analytics";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
-import { OnboardingData } from "@/lib/types/types";
+import { ProfileData } from "@/lib/types/types";
 import { LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMediaQuery } from "@mui/material";
@@ -10,7 +10,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 
 interface Props {
-  onboardingData: OnboardingData;
+  profileData: ProfileData;
 }
 
 export const MiniProfile = (props: Props): ReactElement => {
@@ -24,29 +24,29 @@ export const MiniProfile = (props: Props): ReactElement => {
 
   const getBusinessName = (): string => {
     if (isLoading) return RoadmapDefaults.loadingText;
-    return props.onboardingData.businessName
-      ? props.onboardingData.businessName
+    return props.profileData.businessName
+      ? props.profileData.businessName
       : RoadmapDefaults.greyBoxNotSetText;
   };
 
   const getIndustry = (): string => {
     if (isLoading) return RoadmapDefaults.loadingText;
-    return props.onboardingData.industryId && props.onboardingData.industryId !== "generic"
-      ? LookupIndustryById(props.onboardingData.industryId).name
+    return props.profileData.industryId && props.profileData.industryId !== "generic"
+      ? LookupIndustryById(props.profileData.industryId).name
       : RoadmapDefaults.greyBoxSomeOtherIndustryText;
   };
 
   const getLegalStructure = (): string => {
     if (isLoading) return RoadmapDefaults.loadingText;
-    return props.onboardingData.legalStructureId
-      ? LookupLegalStructureById(props.onboardingData.legalStructureId).name
+    return props.profileData.legalStructureId
+      ? LookupLegalStructureById(props.profileData.legalStructureId).name
       : RoadmapDefaults.greyBoxNotSetText;
   };
 
   const getMunicipality = (): string => {
     if (isLoading) return RoadmapDefaults.loadingText;
-    return props.onboardingData.municipality
-      ? props.onboardingData.municipality.displayName
+    return props.profileData.municipality
+      ? props.profileData.municipality.displayName
       : RoadmapDefaults.greyBoxNotSetText;
   };
 
@@ -67,41 +67,41 @@ export const MiniProfile = (props: Props): ReactElement => {
       <div>
         <div className="grid-row grid-gap">
           <div className="tablet:grid-col-6">
-            <div data-business-name={props.onboardingData.businessName}>
+            <div data-business-name={props.profileData.businessName}>
               <strong>{RoadmapDefaults.greyBoxBusinessNameText}:</strong> {getBusinessName()}
             </div>
-            <div data-industry={props.onboardingData.industryId}>
+            <div data-industry={props.profileData.industryId}>
               <strong>{RoadmapDefaults.greyBoxIndustryText}:</strong> {getIndustry()}
             </div>
-            <div data-legal-structure={props.onboardingData.legalStructureId}>
+            <div data-legal-structure={props.profileData.legalStructureId}>
               <strong>{RoadmapDefaults.greyBoxLegalStructureText}:</strong> {getLegalStructure()}
             </div>
-            <div data-municipality={props.onboardingData.municipality?.name}>
+            <div data-municipality={props.profileData.municipality?.name}>
               <strong>{RoadmapDefaults.greyBoxMunicipalityText}:</strong> {getMunicipality()}
             </div>
           </div>
 
           {showingAll && (
             <div className={`tablet:grid-col-6 ${isMobile ? "margin-top-1" : ""}`}>
-              {props.onboardingData.employerId && (
+              {props.profileData.employerId && (
                 <div>
                   <strong>{RoadmapDefaults.greyBoxEINText}:</strong>{" "}
-                  {displayAsEin(props.onboardingData.employerId)}
+                  {displayAsEin(props.profileData.employerId)}
                 </div>
               )}
-              {props.onboardingData.entityId && isEntityIdApplicable(props.onboardingData.legalStructureId) && (
+              {props.profileData.entityId && isEntityIdApplicable(props.profileData.legalStructureId) && (
                 <div>
-                  <strong>{RoadmapDefaults.greyBoxEntityIdText}:</strong> {props.onboardingData.entityId}
+                  <strong>{RoadmapDefaults.greyBoxEntityIdText}:</strong> {props.profileData.entityId}
                 </div>
               )}
-              {props.onboardingData.taxId && (
+              {props.profileData.taxId && (
                 <div>
-                  <strong>{RoadmapDefaults.greyBoxTaxIdText}:</strong> {props.onboardingData.taxId}
+                  <strong>{RoadmapDefaults.greyBoxTaxIdText}:</strong> {props.profileData.taxId}
                 </div>
               )}
-              {props.onboardingData.notes && (
+              {props.profileData.notes && (
                 <div className="truncate">
-                  <strong>{RoadmapDefaults.greyBoxNotesText}:</strong> {props.onboardingData.notes}
+                  <strong>{RoadmapDefaults.greyBoxNotesText}:</strong> {props.profileData.notes}
                 </div>
               )}
             </div>

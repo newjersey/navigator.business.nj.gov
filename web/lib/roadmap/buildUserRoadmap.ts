@@ -1,19 +1,19 @@
-import { OnboardingData, Roadmap } from "@/lib/types/types";
+import { ProfileData, Roadmap } from "@/lib/types/types";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { templateEval } from "@/lib/utils/helpers";
 import { LookupIndustryById, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 
-export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<Roadmap> => {
+export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   const addOns = [];
   const modifications = [];
-  const industry = LookupIndustryById(onboardingData.industryId);
+  const industry = LookupIndustryById(profileData.industryId);
 
-  if (!onboardingData.homeBasedBusiness && !industry.isMobileLocation) {
+  if (!profileData.homeBasedBusiness && !industry.isMobileLocation) {
     addOns.push("physical-location");
   }
 
-  if (onboardingData.liquorLicense) {
+  if (profileData.liquorLicense) {
     addOns.push("liquor-license");
     modifications.push("liquor-license");
   }
@@ -22,25 +22,25 @@ export const buildUserRoadmap = async (onboardingData: OnboardingData): Promise<
     addOns.push("reseller");
   }
 
-  if (onboardingData.legalStructureId) {
-    if (LookupLegalStructureById(onboardingData.legalStructureId).requiresPublicFiling) {
+  if (profileData.legalStructureId) {
+    if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing");
-    } else if (LookupLegalStructureById(onboardingData.legalStructureId).hasTradeName) {
+    } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
     }
   }
 
-  if (!onboardingData.industryId || onboardingData.industryId === "generic") {
+  if (!profileData.industryId || profileData.industryId === "generic") {
     addOns.push("another-industry");
   } else {
-    addOns.push(onboardingData.industryId);
-    modifications.push(onboardingData.industryId);
+    addOns.push(profileData.industryId);
+    modifications.push(profileData.industryId);
   }
 
   let roadmap = await buildRoadmap({ addOns, modifications });
 
-  if (onboardingData.municipality) {
-    roadmap = await addMunicipalitySpecificData(roadmap, onboardingData.municipality.id);
+  if (profileData.municipality) {
+    roadmap = await addMunicipalitySpecificData(roadmap, profileData.municipality.id);
   } else {
     roadmap = cleanupMunicipalitySpecificData(roadmap);
   }

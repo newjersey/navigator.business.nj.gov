@@ -72,7 +72,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
-    setName(userData.onboardingData.businessName);
+    setName(userData.profileData.businessName);
   }, userData);
 
   const updateBusinessName = (): void => {
@@ -80,8 +80,8 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     setUpdateButtonClicked(true);
     const newUserData = {
       ...userData,
-      onboardingData: {
-        ...userData.onboardingData,
+      profileData: {
+        ...userData.profileData,
         businessName: name,
       },
     };
