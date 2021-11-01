@@ -128,7 +128,6 @@
     "lerna": "4.0.0",
     "lint-staged": "11.2.6",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
-    "node-fetch": "2.6.5",
     "prettier": "2.4.1",
     "prop-types": "15.7.2",
     "rimraf": "3.0.2",

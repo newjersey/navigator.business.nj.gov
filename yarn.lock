@@ -2275,7 +2275,6 @@ __metadata:
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     next: 11.1.2
     next-seo: 4.28.1
-    node-fetch: 2.6.5
     prettier: 2.4.1
     prop-types: 15.7.2
     raw-loader: 4.0.2
@@ -2400,7 +2399,6 @@ __metadata:
     lorem-ipsum: 2.0.4
     next: 11.1.2
     next-seo: 4.28.1
-    node-fetch: 2.6.5
     prettier: 2.4.1
     prop-types: 15.7.2
     raw-loader: 4.0.2
@@ -17148,7 +17146,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.5, node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.5":
+"node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.5":
   version: 2.6.5
   resolution: "node-fetch@npm:2.6.5"
   dependencies:
