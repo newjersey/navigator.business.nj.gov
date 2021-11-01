@@ -1,5 +1,5 @@
 import fs from "fs";
-import { loadOnboardingDisplayContent, loadRoadmapDisplayContent } from "./loadDisplayContent";
+import { loadProfileDisplayContent, loadRoadmapDisplayContent } from "./loadDisplayContent";
 import { LegalStructures } from "@businessnjgovnavigator/shared";
 import { getPathSeparator } from "@/test/helpers";
 
@@ -30,7 +30,7 @@ describe("loadDisplayContent", () => {
 
       mockedFs.readFileSync.mockReturnValue(onboardingDisplayMd);
 
-      expect(loadOnboardingDisplayContent().municipality).toEqual({
+      expect(loadProfileDisplayContent().municipality).toEqual({
         placeholder: "Fill me in",
         contentMd: "\n### I am a header\n\nI am a description",
       });
@@ -39,7 +39,7 @@ describe("loadDisplayContent", () => {
     it("loads content for each legal structure option", () => {
       mockedFs.readFileSync.mockReturnValue("### I am a header\n\nI am a description");
 
-      expect(loadOnboardingDisplayContent().legalStructure.optionContent["c-corporation"]).toEqual(
+      expect(loadProfileDisplayContent().legalStructure.optionContent["c-corporation"]).toEqual(
         "### I am a header\n\nI am a description"
       );
       const allFilePaths = mockedFs.readFileSync.mock.calls.map(

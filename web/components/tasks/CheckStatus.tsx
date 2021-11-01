@@ -51,7 +51,7 @@ export const CheckStatus = (props: Props): ReactElement => {
     } else {
       setFormValues({
         ...formValues,
-        name: userData.onboardingData.businessName,
+        name: userData.profileData.businessName,
       });
     }
   }, userData);

@@ -21,7 +21,7 @@ export const useRoadmap = (): {
 
   const buildAndSetRoadmap = async () => {
     if (userData?.formProgress === "COMPLETED") {
-      const roadmap = await buildUserRoadmap(userData.onboardingData);
+      const roadmap = await buildUserRoadmap(userData.profileData);
       setRoadmap(roadmap);
       setSectionCompletion(getSectionCompletion(roadmap, userData));
     }

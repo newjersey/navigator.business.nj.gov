@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { useMockUserData } from "../mock/mockUseUserData";
-import { generateOnboardingData, generateTaxFiling } from "../factories";
+import { generateProfileData, generateTaxFiling } from "../factories";
 import { useMockDate } from "../mock/useMockDate";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -18,7 +18,7 @@ describe("filing page", () => {
     useMockDate("2021-11-01");
 
     useMockUserData({
-      onboardingData: generateOnboardingData({ dateOfFormation: "2020-04-01" }),
+      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
       taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1", dueDate: "2022-04-30" })],
     });
 

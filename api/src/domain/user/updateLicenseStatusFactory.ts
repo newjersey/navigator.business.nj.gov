@@ -46,7 +46,7 @@ export const updateLicenseStatusFactory = (
 
   return async (userId: string, nameAndAddress: NameAndAddress): Promise<UserData> => {
     const userData = await userDataClient.get(userId);
-    const licenseType = convertIndustryToLicenseType(userData.onboardingData.industryId);
+    const licenseType = convertIndustryToLicenseType(userData.profileData.industryId);
 
     return searchLicenseStatus(nameAndAddress, licenseType)
       .then((licenseStatusResult: LicenseStatusResult) => {

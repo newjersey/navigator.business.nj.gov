@@ -2,7 +2,7 @@ import { Municipality } from "@businessnjgovnavigator/shared";
 
 export interface UserData {
   user: BusinessUser;
-  onboardingData: OnboardingData;
+  profileData: ProfileData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
   licenseData: LicenseData | undefined;
@@ -23,7 +23,7 @@ export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
     user: user,
-    onboardingData: createEmptyOnboardingData(),
+    profileData: createEmptyProfileData(),
     formProgress: "UNSTARTED",
     taskProgress: {},
     licenseData: undefined,
@@ -40,7 +40,7 @@ export interface Preferences {
   roadmapOpenSteps: number[];
 }
 
-const emptyOnboardingData = {
+const emptyProfileData = {
   businessName: "",
   industryId: undefined,
   legalStructureId: undefined,
@@ -53,13 +53,13 @@ const emptyOnboardingData = {
   employerId: undefined,
   taxId: undefined,
   notes: "",
-} as OnboardingData;
+} as ProfileData;
 
-export const createEmptyOnboardingData = (): OnboardingData => {
-  return emptyOnboardingData;
+export const createEmptyProfileData = (): ProfileData => {
+  return emptyProfileData;
 };
 
-export interface OnboardingData {
+export interface ProfileData {
   businessName: string;
   industryId: string | undefined;
   legalStructureId: string | undefined;
@@ -74,7 +74,7 @@ export interface OnboardingData {
   notes: string;
 }
 
-export type OnboardingError = "REQUIRED_LEGAL" | "REQUIRED_MUNICIPALITY";
+export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_MUNICIPALITY";
 export interface LicenseData {
   nameAndAddress: NameAndAddress;
   completedSearch: boolean;
@@ -88,7 +88,7 @@ export type OperateDisplayContent = {
   annualFilingMd: string;
 };
 
-export type OnboardingDisplayContent = {
+export type ProfileDisplayContent = {
   businessName: {
     contentMd: string;
     placeholder: string;
@@ -131,7 +131,7 @@ export type OnboardingDisplayContent = {
   };
 };
 
-const emptyOnboardingDisplayContent = {
+const emptyProfileDisplayContent = {
   businessName: {
     contentMd: "",
     placeholder: "",
@@ -179,21 +179,21 @@ const emptyOnboardingDisplayContent = {
   entityId: {
     contentMd: "",
   },
-} as OnboardingDisplayContent;
+} as ProfileDisplayContent;
 
-export const createEmptyOnboardingDisplayContent = (): OnboardingDisplayContent => {
-  return emptyOnboardingDisplayContent;
+export const createEmptyProfileDisplayContent = (): ProfileDisplayContent => {
+  return emptyProfileDisplayContent;
 };
 
-export type ProfileFields = keyof OnboardingData & keyof OnboardingDisplayContent;
-const onboardingDisplayContentFields = Object.keys(
-  emptyOnboardingDisplayContent
-) as (keyof OnboardingDisplayContent)[];
+export type ProfileFields = keyof ProfileData & keyof ProfileDisplayContent;
+const profileDisplayContentFields = Object.keys(
+  emptyProfileDisplayContent
+) as (keyof ProfileDisplayContent)[];
 
-const onboardingDataFields = Object.keys(emptyOnboardingData) as (keyof OnboardingData)[];
+const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 
 export const profileFields = [
-  ...new Set([...onboardingDisplayContentFields, ...onboardingDataFields]),
+  ...new Set([...profileDisplayContentFields, ...onboardingDataFields]),
 ] as ProfileFields[];
 
 type ProfileFieldStatus = {

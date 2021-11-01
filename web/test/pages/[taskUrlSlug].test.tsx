@@ -4,7 +4,7 @@ import { useMediaQuery } from "@mui/material";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import { Task, TaskProgress, UserData } from "@/lib/types/types";
 import {
-  generateOnboardingData,
+  generateProfileData,
   generatePreferences,
   generateStep,
   generateTask,
@@ -270,7 +270,7 @@ describe("task page", () => {
 
   it("toggles radio button for post-onboarding question", async () => {
     const initialUserData = generateUserData({
-      onboardingData: generateOnboardingData({ constructionRenovationPlan: undefined }),
+      profileData: generateProfileData({ constructionRenovationPlan: undefined }),
     });
     subject = renderPage(
       generateTask({ postOnboardingQuestion: "construction-renovation" }),
@@ -284,12 +284,12 @@ describe("task page", () => {
     fireEvent.click(subject.getByTestId("post-onboarding-radio-true"));
     expect(subject.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
     expect(subject.queryByTestId("post-onboarding-true-content")).toBeInTheDocument();
-    expect(currentUserData().onboardingData.constructionRenovationPlan).toBe(true);
+    expect(currentUserData().profileData.constructionRenovationPlan).toBe(true);
 
     fireEvent.click(subject.getByTestId("post-onboarding-radio-false"));
     expect(subject.queryByTestId("post-onboarding-false-content")).toBeInTheDocument();
     expect(subject.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
-    expect(currentUserData().onboardingData.constructionRenovationPlan).toBe(false);
+    expect(currentUserData().profileData.constructionRenovationPlan).toBe(false);
   });
 
   describe("next and previous task buttons", () => {

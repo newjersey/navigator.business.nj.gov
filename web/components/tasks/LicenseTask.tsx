@@ -66,7 +66,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   const onSubmit = (nameAndAddress: NameAndAddress): void => {
-    if (!userData || !userData.onboardingData.industryId) return;
+    if (!userData || !userData.profileData.industryId) return;
 
     if (!allFieldsHaveValues(nameAndAddress)) {
       setError("FIELDS_REQUIRED");

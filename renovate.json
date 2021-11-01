@@ -24,11 +24,11 @@
       "groupName": "linting"
     },
     {
-      "matchPackageNames": [ "@types/node" ]
+      "matchPackageNames": ["@types/node"]
     },
     {
-      "matchPackageNames": [ "@types/node" ],
-      "matchUpdateTypes": [ "major" ],
+      "matchPackageNames": ["@types/node"],
+      "matchUpdateTypes": ["major"],
       "enabled": false
     },
     {

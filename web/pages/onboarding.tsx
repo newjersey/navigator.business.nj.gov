@@ -16,11 +16,11 @@ import { GetStaticPropsResult } from "next";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
-  createEmptyOnboardingData,
-  createEmptyOnboardingDisplayContent,
-  OnboardingData,
-  OnboardingDisplayContent,
-  OnboardingError,
+  createEmptyProfileData,
+  createEmptyProfileDisplayContent,
+  ProfileData,
+  ProfileDisplayContent,
+  ProfileError,
 } from "@/lib/types/types";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
@@ -32,7 +32,7 @@ import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
 import { OnboardingErrorLookup, scrollToTop, templateEval } from "@/lib/utils/helpers";
-import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { Alert } from "@/components/njwds/Alert";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
@@ -43,31 +43,31 @@ import { NextSeo } from "next-seo";
 import { Municipality } from "@businessnjgovnavigator/shared";
 
 interface Props {
-  displayContent: OnboardingDisplayContent;
+  displayContent: ProfileDisplayContent;
   municipalities: Municipality[];
 }
 
 interface OnboardingState {
   page?: number;
-  onboardingData: OnboardingData;
-  displayContent: OnboardingDisplayContent;
+  profileData: ProfileData;
+  displayContent: ProfileDisplayContent;
   municipalities: Municipality[];
 }
 
 interface OnboardingContextType {
   state: OnboardingState;
-  setOnboardingData: (onboardingData: OnboardingData) => void;
+  setProfileData: (profileData: ProfileData) => void;
   onBack: () => void;
 }
 
 export const OnboardingContext = createContext<OnboardingContextType>({
   state: {
     page: 1,
-    onboardingData: createEmptyOnboardingData(),
-    displayContent: createEmptyOnboardingDisplayContent(),
+    profileData: createEmptyProfileData(),
+    displayContent: createEmptyProfileDisplayContent(),
     municipalities: [],
   },
-  setOnboardingData: () => {},
+  setProfileData: () => {},
   onBack: () => {},
 });
 
@@ -78,15 +78,15 @@ const OnboardingPage = (props: Props): ReactElement => {
   const PAGES = 4;
   const router = useRouter();
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
-  const [onboardingData, setOnboardingData] = useState<OnboardingData>(createEmptyOnboardingData());
-  const [error, setError] = useState<OnboardingError | undefined>(undefined);
+  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [error, setError] = useState<ProfileError | undefined>(undefined);
   const { userData, update } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (userData) {
-      setOnboardingData(userData.onboardingData);
+      setProfileData(userData.profileData);
     }
   }, [userData]);
 
@@ -127,26 +127,26 @@ const OnboardingPage = (props: Props): ReactElement => {
     event.preventDefault();
     if (!userData) return;
 
-    if (page.current === 3 && !onboardingData.legalStructureId) {
+    if (page.current === 3 && !profileData.legalStructureId) {
       setError("REQUIRED_LEGAL");
       scrollToTop();
       headerRef.current?.focus();
       return;
     }
-    if (page.current === 4 && !onboardingData.municipality) {
+    if (page.current === 4 && !profileData.municipality) {
       setError("REQUIRED_MUNICIPALITY");
       scrollToTop();
       headerRef.current?.focus();
       return;
     }
 
-    setAnalyticsDimensions(onboardingData);
+    setAnalyticsDimensions(profileData);
     setError(undefined);
 
-    setRoadmap(await buildUserRoadmap(onboardingData));
+    setRoadmap(await buildUserRoadmap(profileData));
 
     if (page.current + 1 <= PAGES) {
-      update({ ...userData, onboardingData }).then(() => {
+      update({ ...userData, profileData: profileData }).then(() => {
         const nextCurrentPage = page.current + 1;
         setPage({
           current: nextCurrentPage,
@@ -156,7 +156,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         headerRef.current?.focus();
       });
     } else {
-      update({ ...userData, onboardingData, formProgress: "COMPLETED" }).then(async () => {
+      update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
         await router.push("/roadmap");
       });
     }
@@ -217,11 +217,11 @@ const OnboardingPage = (props: Props): ReactElement => {
       value={{
         state: {
           page: page.current,
-          onboardingData,
+          profileData: profileData,
           displayContent: props.displayContent,
           municipalities: props.municipalities,
         },
-        setOnboardingData,
+        setProfileData,
         onBack,
       }}
     >
@@ -292,7 +292,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
 
   return {
     props: {
-      displayContent: loadOnboardingDisplayContent(),
+      displayContent: loadProfileDisplayContent(),
       municipalities,
     },
   };

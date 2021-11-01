@@ -13,11 +13,11 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import {
-  createEmptyOnboardingData,
+  createEmptyProfileData,
   createProfileFieldErrorMap,
-  OnboardingData,
-  OnboardingDisplayContent,
-  OnboardingError,
+  ProfileData,
+  ProfileDisplayContent,
+  ProfileError,
   ProfileFieldErrorMap,
   ProfileFields,
 } from "@/lib/types/types";
@@ -26,7 +26,7 @@ import { ProfileDefaults } from "@/display-content/ProfileDefaults";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { OnboardingContext } from "@/pages/onboarding";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { loadOnboardingDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
@@ -45,7 +45,7 @@ import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 import { Municipality } from "@businessnjgovnavigator/shared";
 
 interface Props {
-  displayContent: OnboardingDisplayContent;
+  displayContent: ProfileDisplayContent;
   municipalities: Municipality[];
 }
 
@@ -74,25 +74,25 @@ const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
 const ProfilePage = (props: Props): ReactElement => {
   useAuthProtectedPage();
   const { setRoadmap } = useContext(RoadmapContext);
-  const [onboardingData, _setOnboardingData] = useState<OnboardingData>(createEmptyOnboardingData());
+  const [profileData, _setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const [error, setError] = useState<OnboardingError | undefined>(undefined);
+  const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
 
-  const setOnboardingData = (value: OnboardingData): void => {
+  const setProfileData = (value: ProfileData): void => {
     if (value.municipality) {
       setError(undefined);
     }
-    _setOnboardingData(value);
+    _setProfileData(value);
   };
 
   useEffect(() => {
     if (userData) {
-      setOnboardingData(userData.onboardingData);
+      setProfileData(userData.profileData);
     }
   }, [userData]);
 
@@ -102,7 +102,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const onBack = () => {
     if (!userData) return;
-    if (!deepEqual(onboardingData, userData.onboardingData)) {
+    if (!deepEqual(profileData, userData.profileData)) {
       setEscapeModal(true);
     } else {
       router.replace("/roadmap");
@@ -114,9 +114,9 @@ const ProfilePage = (props: Props): ReactElement => {
     if (!userData) return;
     if (
       Object.keys(fieldStates).some((k) => fieldStates[k as ProfileFields].invalid) ||
-      !onboardingData.municipality
+      !profileData.municipality
     ) {
-      if (!onboardingData.municipality) {
+      if (!profileData.municipality) {
         setError("REQUIRED_MUNICIPALITY");
       }
       setAlert("ERROR");
@@ -125,9 +125,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
     setIsLoading(true);
     setError(undefined);
-    setAnalyticsDimensions(onboardingData);
-    setRoadmap(await buildUserRoadmap(onboardingData));
-    update({ ...userData, onboardingData, formProgress: "COMPLETED" }).then(async () => {
+    setAnalyticsDimensions(profileData);
+    setRoadmap(await buildUserRoadmap(profileData));
+    update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");
     });
@@ -137,11 +137,11 @@ const ProfilePage = (props: Props): ReactElement => {
     <OnboardingContext.Provider
       value={{
         state: {
-          onboardingData,
+          profileData: profileData,
           displayContent: props.displayContent,
           municipalities: props.municipalities,
         },
-        setOnboardingData,
+        setProfileData,
         onBack,
       }}
     >
@@ -284,7 +284,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
 
   return {
     props: {
-      displayContent: loadOnboardingDisplayContent(),
+      displayContent: loadProfileDisplayContent(),
       municipalities,
     },
   };

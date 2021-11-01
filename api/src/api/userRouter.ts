@@ -76,8 +76,8 @@ export const userRouterFactory = (
       return;
     }
 
-    if (userData.onboardingData.dateOfFormation) {
-      const annualFilingDate = calculateNextAnnualFilingDate(userData.onboardingData.dateOfFormation);
+    if (userData.profileData.dateOfFormation) {
+      const annualFilingDate = calculateNextAnnualFilingDate(userData.profileData.dateOfFormation);
       userData = {
         ...userData,
         taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: annualFilingDate }],
@@ -96,7 +96,7 @@ export const userRouterFactory = (
 
   const shouldCheckLicense = (userData: UserData): boolean =>
     userData.licenseData !== undefined &&
-    industryHasALicenseType(userData.onboardingData.industryId) &&
+    industryHasALicenseType(userData.profileData.industryId) &&
     hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus);
 
   const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>

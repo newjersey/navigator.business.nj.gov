@@ -5,11 +5,11 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import { setHeaderRole } from "@/lib/utils/helpers";
 
 export const OnboardingHomeBasedBusiness = (): ReactElement => {
-  const { state, setOnboardingData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(OnboardingContext);
 
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    setOnboardingData({
-      ...state.onboardingData,
+    setProfileData({
+      ...state.profileData,
       homeBasedBusiness: event.target.value === "true",
     });
   };
@@ -25,7 +25,7 @@ export const OnboardingHomeBasedBusiness = (): ReactElement => {
         <RadioGroup
           aria-label="Home-based Business"
           name="home-based-business"
-          value={state.onboardingData.homeBasedBusiness}
+          value={state.profileData.homeBasedBusiness}
           onChange={handleSelection}
           row
         >

@@ -1,8 +1,8 @@
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
-import { OnboardingData, UserData, UserDataError } from "@/lib/types/types";
+import { ProfileData, UserData, UserDataError } from "@/lib/types/types";
 import { generateUseUserDataResponse } from "@/test/helpers";
-import { generateOnboardingData, generateUserData } from "@/test/factories";
+import { generateProfileData, generateUserData } from "@/test/factories";
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
@@ -18,10 +18,10 @@ export const useMockUserDataError = (error: UserDataError): void => {
   setMockUserDataResponse({ error });
 };
 
-export const useMockOnboardingData = (onboardingData: Partial<OnboardingData>): void => {
+export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
   setMockUserDataResponse({
     userData: generateUserData({
-      onboardingData: generateOnboardingData(onboardingData),
+      profileData: generateProfileData(profileData),
     }),
   });
 };

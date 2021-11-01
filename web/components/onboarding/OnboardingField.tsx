@@ -3,7 +3,7 @@ import { TextField, TextFieldProps } from "@mui/material";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
 import { camelCaseToSentence, setHeaderRole } from "@/lib/utils/helpers";
-import { OnboardingData, ProfileFields } from "@/lib/types/types";
+import { ProfileData, ProfileFields } from "@/lib/types/types";
 
 interface Props {
   fieldName: ProfileFields;
@@ -18,28 +18,27 @@ interface Props {
 }
 
 export const OnboardingField = (props: Props): ReactElement => {
-  const { state, setOnboardingData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(OnboardingContext);
   const headerRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     props.handleChange && props.handleChange();
     const value = props.valueFilter ? props.valueFilter(event.target.value) : event.target.value;
-    const onboardingData = { ...state.onboardingData } as Record<
-      keyof OnboardingData,
-      keyof OnboardingData[keyof OnboardingData]
+    const profileData = { ...state.profileData } as Record<
+      keyof ProfileData,
+      keyof ProfileData[keyof ProfileData]
     >;
-    onboardingData[props.fieldName as keyof OnboardingData] =
-      value as keyof OnboardingData[keyof OnboardingData];
-    setOnboardingData({
-      ...onboardingData,
+    profileData[props.fieldName as keyof ProfileData] = value as keyof ProfileData[keyof ProfileData];
+    setProfileData({
+      ...profileData,
     });
   };
 
   const headerLevelTwo = setHeaderRole(2, "h2-element");
 
   const value = props.visualFilter
-    ? props.visualFilter((state.onboardingData[props.fieldName] as string) ?? "")
-    : state.onboardingData[props.fieldName];
+    ? props.visualFilter((state.profileData[props.fieldName] as string) ?? "")
+    : state.profileData[props.fieldName];
 
   return (
     <div ref={headerRef}>

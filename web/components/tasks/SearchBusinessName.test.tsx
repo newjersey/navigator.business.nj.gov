@@ -1,10 +1,10 @@
-import { useMockOnboardingData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import * as api from "@/lib/api-client/apiClient";
 import {
   generateNameAvailability,
-  generateOnboardingData,
+  generateProfileData,
   generateTask,
   generateUserData,
 } from "@/test/factories";
@@ -33,13 +33,13 @@ describe("<SearchBusinessName />", () => {
   });
 
   it("pre-fills the text field with the business name entered in onboarding", () => {
-    useMockOnboardingData({ businessName: "Best Pizza" });
+    useMockProfileData({ businessName: "Best Pizza" });
     subject = render(<SearchBusinessName task={generateTask({})} />);
     expect(getSearchValue()).toEqual("Best Pizza");
   });
 
   it("types a new potential name", () => {
-    useMockOnboardingData({ businessName: "Best Pizza" });
+    useMockProfileData({ businessName: "Best Pizza" });
     subject = render(<SearchBusinessName task={generateTask({})} />);
     fillText("My other new name");
     expect(getSearchValue()).toEqual("My other new name");
@@ -62,7 +62,7 @@ describe("<SearchBusinessName />", () => {
 
   it("updates the business name in roadmap", async () => {
     const userData = generateUserData({
-      onboardingData: generateOnboardingData({ businessName: "Best Pizza" }),
+      profileData: generateProfileData({ businessName: "Best Pizza" }),
     });
 
     setupStatefulUserDataContext();
@@ -76,7 +76,7 @@ describe("<SearchBusinessName />", () => {
     await searchAndGetValue({ status: "AVAILABLE" });
 
     fireEvent.click(updateNameButton());
-    expect(currentUserData().onboardingData.businessName).toEqual("Pizza Joint");
+    expect(currentUserData().profileData.businessName).toEqual("Pizza Joint");
   });
 
   it("removes the update button when clicked and resets when new search is performed", async () => {

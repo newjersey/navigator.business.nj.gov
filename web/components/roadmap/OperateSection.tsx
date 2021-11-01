@@ -27,20 +27,20 @@ export const OperateSection = (props: Props): ReactElement => {
 
   useEffect(
     function showFilingsWhenTheyExist() {
-      if (userData && userData.onboardingData.dateOfFormation && userData.taxFilings.length > 0) {
+      if (userData && userData.profileData.dateOfFormation && userData.taxFilings.length > 0) {
         setShowDatepicker(false);
       }
     },
-    [setShowDatepicker, userData, userData?.taxFilings.length, userData?.onboardingData.dateOfFormation]
+    [setShowDatepicker, userData, userData?.taxFilings.length, userData?.profileData.dateOfFormation]
   );
 
   useEffect(
     function setDatepickerValueToUserValue() {
-      if (userData?.onboardingData.dateOfFormation) {
-        setDateValue(dayjs(userData?.onboardingData.dateOfFormation, "YYYY-MM-DD"));
+      if (userData?.profileData.dateOfFormation) {
+        setDateValue(dayjs(userData?.profileData.dateOfFormation, "YYYY-MM-DD"));
       }
     },
-    [userData?.onboardingData.dateOfFormation, showDatepicker]
+    [userData?.profileData.dateOfFormation, showDatepicker]
   );
 
   const submitBusinessFormationDate = () => {
@@ -50,8 +50,8 @@ export const OperateSection = (props: Props): ReactElement => {
 
     update({
       ...userData,
-      onboardingData: {
-        ...userData.onboardingData,
+      profileData: {
+        ...userData.profileData,
         dateOfFormation: dateValue.startOf("month").format("YYYY-MM-DD"),
       },
       taxFilings: [],

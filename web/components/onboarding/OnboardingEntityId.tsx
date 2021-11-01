@@ -13,7 +13,7 @@ export const OnboardingEntityId = (props: Props): ReactElement => {
   const { state } = useContext(OnboardingContext);
   const fieldName = "entityId";
 
-  if (!isEntityIdApplicable(state.onboardingData.legalStructureId)) {
+  if (!isEntityIdApplicable(state.profileData.legalStructureId)) {
     return <></>;
   }
 

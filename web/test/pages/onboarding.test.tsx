@@ -10,14 +10,14 @@ import React from "react";
 import Onboarding from "@/pages/onboarding";
 import {
   generateMunicipality,
-  generateOnboardingData,
+  generateProfileData as generateProfileData,
   generateUser,
   generateUserData,
 } from "@/test/factories";
 import {
-  createEmptyOnboardingDisplayContent,
+  createEmptyProfileDisplayContent as createEmptyProfileDisplayContent,
   createEmptyUserData,
-  OnboardingDisplayContent,
+  ProfileDisplayContent,
   UserData,
 } from "@/lib/types/types";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -52,13 +52,13 @@ describe("onboarding", () => {
     userData,
   }: {
     municipalities?: Municipality[];
-    displayContent?: OnboardingDisplayContent;
+    displayContent?: ProfileDisplayContent;
     userData?: UserData;
   }): RenderResult => {
     return render(
       <WithStatefulUserData initialUserData={userData || emptyUserData}>
         <Onboarding
-          displayContent={displayContent || createEmptyOnboardingDisplayContent()}
+          displayContent={displayContent || createEmptyProfileDisplayContent()}
           municipalities={municipalities || []}
         />
       </WithStatefulUserData>
@@ -109,7 +109,7 @@ describe("onboarding", () => {
 
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({
-      onboardingData: generateOnboardingData({
+      profileData: generateProfileData({
         businessName: "Applebees",
         industryId: "cosmetology",
         legalStructureId: "c-corporation",
@@ -139,16 +139,16 @@ describe("onboarding", () => {
 
     fillText("Business name", "Cool Computers");
     await visitStep2();
-    expect(currentUserData().onboardingData.businessName).toEqual("Cool Computers");
+    expect(currentUserData().profileData.businessName).toEqual("Cool Computers");
 
     selectByValue("Industry", "e-commerce");
     await visitStep3();
-    expect(currentUserData().onboardingData.industryId).toEqual("e-commerce");
-    expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
+    expect(currentUserData().profileData.industryId).toEqual("e-commerce");
+    expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
 
     chooseRadio("general-partnership");
     await visitStep4();
-    expect(currentUserData().onboardingData.legalStructureId).toEqual("general-partnership");
+    expect(currentUserData().profileData.legalStructureId).toEqual("general-partnership");
 
     selectByText("Location", "Newark");
     clickNext();
@@ -156,8 +156,8 @@ describe("onboarding", () => {
     expect(currentUserData()).toEqual({
       ...initialUserData,
       formProgress: "COMPLETED",
-      onboardingData: {
-        ...initialUserData.onboardingData,
+      profileData: {
+        ...initialUserData.profileData,
         businessName: "Cool Computers",
         industryId: "e-commerce",
         homeBasedBusiness: true,
@@ -168,13 +168,13 @@ describe("onboarding", () => {
   });
 
   it("builds and sets roadmap after each step", async () => {
-    const onboardingData = generateOnboardingData({});
+    const profileData = generateProfileData({});
     const mockSetRoadmap = jest.fn();
 
     subject = render(
       withRoadmap(
-        <WithStatefulUserData initialUserData={generateUserData({ onboardingData })}>
-          <Onboarding displayContent={createEmptyOnboardingDisplayContent()} municipalities={[]} />
+        <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
+          <Onboarding displayContent={createEmptyProfileDisplayContent()} municipalities={[]} />
         </WithStatefulUserData>,
         undefined,
         undefined,
@@ -243,7 +243,7 @@ describe("onboarding", () => {
   });
 
   it("displays industry-specific content for home contractors when selected", async () => {
-    const displayContent = createEmptyOnboardingDisplayContent();
+    const displayContent = createEmptyProfileDisplayContent();
     displayContent.industry.specificHomeContractorMd = "Learn more about home contractors!";
 
     subject = renderPage({ displayContent });
@@ -260,7 +260,7 @@ describe("onboarding", () => {
   });
 
   it("displays industry-specific content for employment agency when selected", async () => {
-    const displayContent = createEmptyOnboardingDisplayContent();
+    const displayContent = createEmptyProfileDisplayContent();
     displayContent.industry.specificEmploymentAgencyMd = "Learn more about employment agencies!";
 
     subject = renderPage({ displayContent });
@@ -277,7 +277,7 @@ describe("onboarding", () => {
   });
 
   it("displays liquor license question for restaurants when selected", async () => {
-    const displayContent = createEmptyOnboardingDisplayContent();
+    const displayContent = createEmptyProfileDisplayContent();
     displayContent.industry.specificLiquorQuestion = {
       contentMd: "Do you need a liquor license?",
       radioButtonYesText: "Yeah",
@@ -293,12 +293,12 @@ describe("onboarding", () => {
     chooseRadio("true");
     await visitStep3();
 
-    expect(currentUserData().onboardingData.liquorLicense).toEqual(true);
+    expect(currentUserData().profileData.liquorLicense).toEqual(true);
   });
 
   it("displays home-based business question for applicable industries on municipality page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const displayContent = createEmptyOnboardingDisplayContent();
+    const displayContent = createEmptyProfileDisplayContent();
 
     displayContent.industry.specificHomeBasedBusinessQuestion = {
       contentMd: "Are you a home-based business?",
@@ -318,11 +318,11 @@ describe("onboarding", () => {
     chooseRadio("true");
 
     clickNext();
-    await waitFor(() => expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true));
+    await waitFor(() => expect(currentUserData().profileData.homeBasedBusiness).toEqual(true));
   });
 
   it("does not display home-based business question for non-applicable industries", async () => {
-    const displayContent = createEmptyOnboardingDisplayContent();
+    const displayContent = createEmptyProfileDisplayContent();
     displayContent.industry.specificHomeBasedBusinessQuestion.contentMd = "Are you a home-based business?";
 
     subject = renderPage({ displayContent });
@@ -341,38 +341,38 @@ describe("onboarding", () => {
     selectByValue("Industry", "restaurant");
     chooseRadio("true");
     await visitStep3();
-    expect(currentUserData().onboardingData.liquorLicense).toEqual(true);
+    expect(currentUserData().profileData.liquorLicense).toEqual(true);
 
     clickBack();
     selectByValue("Industry", "cosmetology");
     await visitStep3();
-    expect(currentUserData().onboardingData.liquorLicense).toEqual(false);
+    expect(currentUserData().profileData.liquorLicense).toEqual(false);
   });
 
   describe("updates to industry affecting home-based business", () => {
     it("sets home-based business back to false if they select a non-applicable industry", async () => {
       subject = renderPage({});
       await selectInitialIndustry("home-contractor");
-      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
       await reselectNewIndustry("restaurant");
-      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(false);
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
     });
 
     it("sets home-based business back to true if they select an applicable industry", async () => {
       subject = renderPage({});
       await selectInitialIndustry("restaurant");
-      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(false);
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
       await reselectNewIndustry("e-commerce");
-      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
     });
 
     it("keeps home-based business value if they select a different but still applicable industry", async () => {
       subject = renderPage({});
       await selectInitialIndustry("e-commerce");
-      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(true);
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
       await selectHomeBasedBusiness("false");
       await reselectNewIndustry("home-contractor");
-      expect(currentUserData().onboardingData.homeBasedBusiness).toEqual(false);
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
     });
 
     const selectInitialIndustry = async (industry: string): Promise<void> => {

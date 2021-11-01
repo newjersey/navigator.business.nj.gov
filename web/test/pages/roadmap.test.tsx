@@ -2,7 +2,7 @@ import { fireEvent, render, RenderResult, within } from "@testing-library/react"
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
-  generateOnboardingData,
+  generateProfileData,
   generatePreferences,
   generateStep,
   generateTask,
@@ -10,7 +10,7 @@ import {
 } from "@/test/factories";
 import {
   setMockUserDataResponse,
-  useMockOnboardingData,
+  useMockProfileData,
   useMockUserData,
   useMockUserDataError,
 } from "@/test/mock/mockUseUserData";
@@ -81,7 +81,7 @@ describe("roadmap page", () => {
   });
 
   it("shows user data and loading spinner when user data loaded but not roadmap", () => {
-    useMockOnboardingData({ businessName: "Some Cool Name" });
+    useMockProfileData({ businessName: "Some Cool Name" });
     setMockRoadmapResponse(undefined);
     const subject = renderRoadmapPage();
     expect(subject.getByText("Business Roadmap for Some Cool Name")).toBeInTheDocument();
@@ -96,13 +96,13 @@ describe("roadmap page", () => {
 
   describe("business information", () => {
     it("shows the business name from onboarding data", () => {
-      useMockOnboardingData({ businessName: "My cool business" });
+      useMockProfileData({ businessName: "My cool business" });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Business Roadmap for My cool business")).toBeInTheDocument();
     });
 
     it("shows placeholder if no business name present", async () => {
-      useMockOnboardingData({
+      useMockProfileData({
         businessName: "",
         industryId: "restaurant",
         legalStructureId: "c-corporation",
@@ -113,14 +113,14 @@ describe("roadmap page", () => {
     });
 
     it("shows the human-readable industry from onboarding data", () => {
-      useMockOnboardingData({ industryId: "home-contractor" });
+      useMockProfileData({ industryId: "home-contractor" });
       const subject = renderRoadmapPage();
       const expectedValue = LookupIndustryById("home-contractor").name;
       expect(subject.getByText(expectedValue)).toBeInTheDocument();
     });
 
     it("shows placeholder if no industry present", async () => {
-      useMockOnboardingData({
+      useMockProfileData({
         industryId: "generic",
         legalStructureId: "c-corporation",
         municipality: generateMunicipality({}),
@@ -130,13 +130,13 @@ describe("roadmap page", () => {
     });
 
     it("shows the human-readable legal structure from onboarding data", () => {
-      useMockOnboardingData({ legalStructureId: "limited-liability-company" });
+      useMockProfileData({ legalStructureId: "limited-liability-company" });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Limited Liability Company (LLC)")).toBeInTheDocument();
     });
 
     it("shows placeholder if no business structure present", async () => {
-      useMockOnboardingData({
+      useMockProfileData({
         legalStructureId: undefined,
         industryId: "restaurant",
         municipality: generateMunicipality({}),
@@ -146,7 +146,7 @@ describe("roadmap page", () => {
     });
 
     it("shows the display municipality from onboarding data", () => {
-      useMockOnboardingData({
+      useMockProfileData({
         municipality: generateMunicipality({ displayName: "Franklin (Hunterdon County)" }),
       });
       const subject = renderRoadmapPage();
@@ -154,7 +154,7 @@ describe("roadmap page", () => {
     });
 
     it("shows placeholder if no municipality present", async () => {
-      useMockOnboardingData({
+      useMockProfileData({
         legalStructureId: "c-corporation",
         industryId: "restaurant",
         municipality: undefined,
@@ -164,7 +164,7 @@ describe("roadmap page", () => {
     });
 
     it("shows entity id if present", () => {
-      useMockOnboardingData({
+      useMockProfileData({
         entityId: "1234567890",
         legalStructureId: "limited-liability-company",
       });
@@ -173,7 +173,7 @@ describe("roadmap page", () => {
     });
 
     it("does not show entity id for Trade Name legal structure even if present", () => {
-      useMockOnboardingData({
+      useMockProfileData({
         legalStructureId: "sole-proprietorship",
         entityId: "1234567890",
       });
@@ -182,7 +182,7 @@ describe("roadmap page", () => {
     });
 
     it("shows EIN with hyphen if present", () => {
-      useMockOnboardingData({
+      useMockProfileData({
         employerId: "123456789",
       });
       const subject = renderRoadmapPage();
@@ -190,7 +190,7 @@ describe("roadmap page", () => {
     });
 
     it("shows new jersey tax id if present", () => {
-      useMockOnboardingData({
+      useMockProfileData({
         taxId: "123456789",
       });
       const subject = renderRoadmapPage();
@@ -198,7 +198,7 @@ describe("roadmap page", () => {
     });
 
     it("shows notes if present", () => {
-      useMockOnboardingData({
+      useMockProfileData({
         notes: "some notes",
       });
       const subject = renderRoadmapPage();
@@ -206,7 +206,7 @@ describe("roadmap page", () => {
     });
 
     it("does not show empty fields for ein, entity id, nj tax id, notes", () => {
-      useMockOnboardingData({
+      useMockProfileData({
         entityId: undefined,
         employerId: undefined,
         taxId: undefined,
@@ -221,7 +221,7 @@ describe("roadmap page", () => {
 
     it("shows more/less for mobile", () => {
       setMobileScreen(true);
-      useMockOnboardingData({
+      useMockProfileData({
         businessName: "some name",
         legalStructureId: "c-corporation",
         industryId: "restaurant",
@@ -401,7 +401,7 @@ describe("roadmap page", () => {
     });
 
     useMockUserData({
-      onboardingData: generateOnboardingData({ dateOfFormation: "2005-11-01" }),
+      profileData: generateProfileData({ dateOfFormation: "2005-11-01" }),
       preferences: generatePreferences({
         roadmapOpenSections: ["OPERATE"],
       }),

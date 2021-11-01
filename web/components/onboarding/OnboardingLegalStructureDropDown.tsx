@@ -9,7 +9,7 @@ import { setHeaderRole } from "@/lib/utils/helpers";
 import orderBy from "lodash.orderby";
 
 export const OnboardingLegalStructure = (): ReactElement => {
-  const { state, setOnboardingData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(OnboardingContext);
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
@@ -20,8 +20,8 @@ export const OnboardingLegalStructure = (): ReactElement => {
 
   const handleLegalStructure = (event: SelectChangeEvent) => {
     if (event.target.value) {
-      setOnboardingData({
-        ...state.onboardingData,
+      setProfileData({
+        ...state.profileData,
         legalStructureId: event.target.value,
       });
     }
@@ -29,7 +29,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
 
   const renderOption = (legalStructureId: string): ReactElement => (
     <div className="padding-top-1 padding-bottom-1">
-      {state.onboardingData.legalStructureId === legalStructureId ? (
+      {state.profileData.legalStructureId === legalStructureId ? (
         <MenuOptionSelected secondaryText={LookupLegalStructureById(legalStructureId).name}>
           {LookupLegalStructureById(legalStructureId).name}
         </MenuOptionSelected>
@@ -59,7 +59,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
           <Select
             fullWidth
             displayEmpty
-            value={state.onboardingData.legalStructureId || ""}
+            value={state.profileData.legalStructureId || ""}
             onChange={handleLegalStructure}
             name="legal-structure"
             inputProps={{

@@ -8,11 +8,11 @@ import { setHeaderRole } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
 
 export const OnboardingMunicipality = (): ReactElement => {
-  const { state, setOnboardingData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(OnboardingContext);
 
   const onSelect = (value: Municipality | undefined): void => {
-    setOnboardingData({
-      ...state.onboardingData,
+    setProfileData({
+      ...state.profileData,
       municipality: value,
     });
   };
@@ -25,12 +25,12 @@ export const OnboardingMunicipality = (): ReactElement => {
       <div className="form-input margin-top-2">
         <MunicipalityDropdown
           municipalities={state.municipalities}
-          value={state.onboardingData.municipality}
+          value={state.profileData.municipality}
           onSelect={onSelect}
           placeholderText={state.displayContent.municipality.placeholder}
         />
 
-        {isHomeBasedBusinessApplicable(state.onboardingData.industryId) && (
+        {isHomeBasedBusinessApplicable(state.profileData.industryId) && (
           <div className="margin-top-3">
             <OnboardingHomeBasedBusiness />
           </div>

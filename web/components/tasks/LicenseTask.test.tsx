@@ -13,7 +13,7 @@ import {
   generateLicenseData,
   generateLicenseStatusItem,
   generateNameAndAddress,
-  generateOnboardingData,
+  generateProfileData,
   generateTask,
   generateUserData,
 } from "@/test/factories";
@@ -128,7 +128,7 @@ describe("<LicenseTask />", () => {
 
     it("fills name from user data when no licenseData", () => {
       useMockUserData({
-        onboardingData: generateOnboardingData({
+        profileData: generateProfileData({
           businessName: "Applebees",
         }),
         licenseData: undefined,
