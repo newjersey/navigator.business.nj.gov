@@ -135,7 +135,7 @@ export const Industries: Industry[] = [
     isMobileLocation: false,
     canBeReseller: false,
   },
-  
+
   {
     id: "auto-body-repair",
     name: "Auto-Body Repair",
