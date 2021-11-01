@@ -24,7 +24,7 @@
     "endOfLine": "auto"
   },
   "devDependencies": {
-    "@babel/runtime": "7.15.4",
+    "@babel/runtime": "7.16.0",
     "@jest/types": "27.2.5",
     "@types/jest": "27.0.2",
     "@types/node": "14.17.32",
