@@ -121,7 +121,6 @@
     "identity-obj-proxy": "3.0.0",
     "jasmine": "3.10.0",
     "jest": "27.3.1",
-    "jest-dom": "4.0.0",
     "jest-dynalite": "3.4.4",
     "jest-junit": "13.0.0",
     "jest-raw-loader": "1.0.1",

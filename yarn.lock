@@ -2263,7 +2263,6 @@ __metadata:
     identity-obj-proxy: 3.0.0
     jasmine: 3.10.0
     jest: 27.3.1
-    jest-dom: 4.0.0
     jest-dynalite: 3.4.4
     jest-junit: 13.0.0
     jest-raw-loader: 1.0.1
@@ -2395,7 +2394,6 @@ __metadata:
     gray-matter: 4.0.3
     identity-obj-proxy: 3.0.0
     jest: 27.3.1
-    jest-dom: 4.0.0
     jest-junit: 13.0.0
     jest-raw-loader: 1.0.1
     lodash.orderby: 4.6.0
@@ -14294,13 +14292,6 @@ __metadata:
   dependencies:
     detect-newline: ^3.0.0
   checksum: 6d68b9f2bef76e0bde06a8e6d13a7e1d2fc67f61a8fa8a089727198e565510aef852a0a089c3c4157b00a82597f792fa83c8480499203978ef38d8cd6578bea0
-  languageName: node
-  linkType: hard
-
-"jest-dom@npm:4.0.0":
-  version: 4.0.0
-  resolution: "jest-dom@npm:4.0.0"
-  checksum: d65b87a1973c0cec83179d60b755784a5215ff221fdb508486545ed739ba26c1d5bf51f00d73ca4791482a30d96e962396b170f0a4fa7176074159ec2317c946
   languageName: node
   linkType: hard
 
