@@ -9,7 +9,7 @@ export const RoadmapDefaults: Record<string, string> = {
   greyBoxEntityIdText: "Entity ID",
   greyBoxTaxIdText: "NJ Tax ID",
   greyBoxNotesText: "Notes",
-  greyBoxEditText: "Go to Profile",
+  greyBoxEditText: "View/Edit Profile",
   greyBoxHeaderText: "Business Profile",
   greyBoxNotSetText: "Not set",
   greyBoxSomeOtherIndustryText: "X",
