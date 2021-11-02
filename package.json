@@ -32,7 +32,7 @@
     "@mui/styles": "5.0.2",
     "@next/env": "12.0.1",
     "airtable": "0.11.1",
-    "aws-amplify": "4.2.9",
+    "aws-amplify": "4.3.4",
     "aws-lambda": "1.0.6",
     "axios": "0.24.0",
     "babel-jest": "27.3.1",
