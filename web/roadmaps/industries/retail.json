@@ -1,0 +1,15 @@
+{
+  "addOns": [
+    {
+      "step": 5,
+      "weight": 10,
+      "task": "search-licenses"
+    }
+  ],
+  "modifications": [
+    {
+      "taskToReplaceFilename": "search-licenses",
+      "replaceWithFilename": "search-licenses-retail"
+    }
+  ]
+}

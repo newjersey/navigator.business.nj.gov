@@ -1,0 +1,26 @@
+{
+  "addOns": [
+    {
+      "step": 1,
+      "weight": 2,
+      "task": "coffee-task-1"
+    },
+    {
+      "step": 2,
+      "weight": 2,
+      "task": "coffee-task-2"
+    }
+  ],
+  "modifications": [
+    {
+      "step": 4,
+      "taskToReplaceFilename": "generic-task-4",
+      "replaceWithFilename": "coffee-task-4"
+    },
+    {
+      "step": 3,
+      "taskToReplaceFilename": "generic-task-3",
+      "replaceWithFilename": "coffee-task-3"
+    }
+  ]
+}

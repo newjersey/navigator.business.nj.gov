@@ -30,14 +30,12 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     }
   }
 
-  if (!profileData.industryId || profileData.industryId === "generic") {
-    addOns.push("another-industry");
-  } else {
-    addOns.push(profileData.industryId);
-    modifications.push(profileData.industryId);
-  }
+  const industryId =
+    !profileData.industryId || profileData.industryId === "generic"
+      ? "another-industry"
+      : profileData.industryId;
 
-  let roadmap = await buildRoadmap({ addOns, modifications });
+  let roadmap = await buildRoadmap({ industryId, addOns, modifications });
 
   if (profileData.municipality) {
     roadmap = await addMunicipalitySpecificData(roadmap, profileData.municipality.id);

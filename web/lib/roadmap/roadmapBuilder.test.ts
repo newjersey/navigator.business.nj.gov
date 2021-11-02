@@ -5,6 +5,7 @@ import { EOL } from "os";
 describe("roadmapBuilder", () => {
   it("builds a generic roadmap with generic tasks only, and removes empty step 5", async () => {
     const roadmap = await buildRoadmap({
+      industryId: "empty",
       addOns: [],
       modifications: [],
     });
@@ -14,7 +15,8 @@ describe("roadmapBuilder", () => {
 
   it("adds tasks from multiple add-ons", async () => {
     const roadmap = await buildRoadmap({
-      addOns: ["coffee", "tea"],
+      industryId: "coffee",
+      addOns: ["tea"],
       modifications: [],
     });
 
@@ -27,14 +29,15 @@ describe("roadmapBuilder", () => {
     );
 
     expect(roadmap.steps[2].tasks.map((it) => it.id)).toEqual(
-      expect.arrayContaining(["generic-task-3-id", "tea-task-2-id"])
+      expect.arrayContaining(["coffee-task-3-id", "tea-task-2-id"])
     );
   });
 
   it("applies modifications to tasks after add-ons", async () => {
     const roadmap = await buildRoadmap({
-      addOns: ["coffee"],
-      modifications: ["coffee"],
+      industryId: "coffee",
+      addOns: [],
+      modifications: [],
     });
 
     expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(
@@ -52,6 +55,7 @@ describe("roadmapBuilder", () => {
 
   it("orders tasks in a step by weight", async () => {
     const roadmap = await buildRoadmap({
+      industryId: "empty",
       addOns: ["weighted"],
       modifications: [],
     });
@@ -65,6 +69,7 @@ describe("roadmapBuilder", () => {
 
   it("includes step 5 if it has tasks", async () => {
     const roadmap = await buildRoadmap({
+      industryId: "empty",
       addOns: ["mocha"],
       modifications: [],
     });
@@ -74,6 +79,7 @@ describe("roadmapBuilder", () => {
 
   it("adds unlockedBy and unlocking to tasks from dependencies file without duplicate url-slugs", async () => {
     const roadmap = await buildRoadmap({
+      industryId: "empty",
       addOns: ["blocking"],
       modifications: [],
     });
