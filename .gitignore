@@ -68,3 +68,5 @@ api/.dynamodb
 .vscode
 
 shared/lib
+
+tsconfig.tsbuildinfo
