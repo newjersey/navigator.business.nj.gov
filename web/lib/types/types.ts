@@ -74,7 +74,7 @@ export interface ProfileData {
   notes: string;
 }
 
-export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_MUNICIPALITY";
+export type ProfileError = "REQUIRED_LEGAL";
 export interface LicenseData {
   nameAndAddress: NameAndAddress;
   completedSearch: boolean;
@@ -196,15 +196,16 @@ export const profileFields = [
   ...new Set([...profileDisplayContentFields, ...onboardingDataFields]),
 ] as ProfileFields[];
 
+export type OnboardingStatus = "SUCCESS" | "ERROR";
+
 type ProfileFieldStatus = {
   invalid: boolean;
-  focus: boolean;
 };
 export type ProfileFieldErrorMap = Record<ProfileFields, ProfileFieldStatus>;
 
 export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
   profileFields.reduce((p, c: ProfileFields) => {
-    p[c] = { invalid: false, focus: false };
+    p[c] = { invalid: false };
     return p;
   }, {} as ProfileFieldErrorMap);
 

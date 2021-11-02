@@ -18,9 +18,13 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   createEmptyProfileData,
   createEmptyProfileDisplayContent,
+  createProfileFieldErrorMap,
+  OnboardingStatus,
   ProfileData,
   ProfileDisplayContent,
   ProfileError,
+  ProfileFieldErrorMap,
+  ProfileFields,
 } from "@/lib/types/types";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
@@ -31,16 +35,23 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
-import { OnboardingErrorLookup, scrollToTop, templateEval } from "@/lib/utils/helpers";
+import {
+  OnboardingErrorLookup,
+  OnboardingStatusLookup,
+  scrollToTop,
+  templateEval,
+} from "@/lib/utils/helpers";
 import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { Alert } from "@/components/njwds/Alert";
+import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { RoadmapContext } from "@/pages/_app";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { NextSeo } from "next-seo";
 import { Municipality } from "@businessnjgovnavigator/shared";
+import Link from "next/link";
 
 interface Props {
   displayContent: ProfileDisplayContent;
@@ -80,9 +91,15 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [error, setError] = useState<ProfileError | undefined>(undefined);
+  const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const { userData, update } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
+  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
+
+  const onValidation = (field: ProfileFields, invalid: boolean) => {
+    setFieldStates({ ...fieldStates, [field]: { invalid } });
+  };
 
   useEffect(() => {
     if (userData) {
@@ -134,13 +151,15 @@ const OnboardingPage = (props: Props): ReactElement => {
       return;
     }
     if (page.current === 4 && !profileData.municipality) {
-      setError("REQUIRED_MUNICIPALITY");
+      setAlert("ERROR");
+      setFieldStates({ ...fieldStates, municipality: { invalid: true } });
       scrollToTop();
       headerRef.current?.focus();
       return;
     }
 
     setAnalyticsDimensions(profileData);
+    setAlert(undefined);
     setError(undefined);
 
     setRoadmap(await buildUserRoadmap(profileData));
@@ -164,6 +183,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const onBack = () => {
     if (page.current + 1 > 0) {
+      setAlert(undefined);
       setError(undefined);
       const previousPage = page.current - 1;
       setPage({
@@ -244,6 +264,28 @@ const OnboardingPage = (props: Props): ReactElement => {
                 {OnboardingErrorLookup[error]}
               </Alert>
             )}
+            {alert && (
+              <ToastAlert
+                variant={OnboardingStatusLookup[alert].variant}
+                isOpen={alert !== undefined}
+                close={() => setAlert(undefined)}
+              >
+                <div data-testid={`toast-alert-${alert}`} className="h3-element">
+                  {OnboardingStatusLookup[alert].header}
+                </div>
+                <div className="padding-top-05">
+                  {OnboardingStatusLookup[alert].body}{" "}
+                  {OnboardingStatusLookup[alert] && (
+                    <Link href="/roadmap">
+                      <a href="/roadmap" data-testid={`toast-link`}>
+                        {OnboardingStatusLookup[alert].link}
+                      </a>
+                    </Link>
+                  )}
+                </div>
+              </ToastAlert>
+            )}
+
             <UserDataErrorAlert />
           </SingleColumnContainer>
 
@@ -278,7 +320,9 @@ const OnboardingPage = (props: Props): ReactElement => {
               timeout={getTimeout(4)}
               classNames={`width-100 ${getAnimation()}`}
             >
-              {asOnboardingPage(<OnboardingMunicipality />)}
+              {asOnboardingPage(
+                <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+              )}
             </CSSTransition>
           </div>
         </main>

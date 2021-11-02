@@ -202,7 +202,7 @@ describe("onboarding", () => {
     expect(subject.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
     chooseRadio("general-partnership");
     await visitStep4();
-    expect(subject.queryByTestId("error-alert-REQUIRED_MUNICIPALITY")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("error-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
   });
 
   it("prevents user from moving after Step 4 if you have not selected a location", async () => {
@@ -215,12 +215,11 @@ describe("onboarding", () => {
     await visitStep4();
     clickNext();
     expect(subject.getByTestId("step-4")).toBeInTheDocument();
-    expect(subject.getByTestId("error-alert-REQUIRED_MUNICIPALITY")).toBeInTheDocument();
+    expect(subject.container.querySelector("#municipality-helper-text") as HTMLElement).toBeInTheDocument();
+    await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
     selectByText("Location", "Newark");
     clickNext();
-    await waitFor(() =>
-      expect(subject.queryByTestId("error-alert-REQUIRED_MUNICIPALITY")).not.toBeInTheDocument()
-    );
+    await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument());
   });
 
   it("removes required fields error when user goes back", async () => {

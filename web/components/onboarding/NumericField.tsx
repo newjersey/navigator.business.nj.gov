@@ -1,6 +1,8 @@
 import { ProfileFields } from "@/lib/types/types";
 import React, { FocusEvent, ReactElement } from "react";
 import { OnboardingField } from "@/components/onboarding/OnboardingField";
+import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { templateEval } from "@/lib/utils/helpers";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -25,7 +27,9 @@ export const NumericField = (props: Props): ReactElement => {
       onValidation={onValidation}
       validationLabel="Error"
       error={props.invalid}
-      validationText={`Must be ${props.length} digits long`}
+      validationText={templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
+        length: props.length.toString(),
+      })}
       visualFilter={regex}
       handleChange={handleChange}
       fieldOptions={{

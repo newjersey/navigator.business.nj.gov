@@ -2,20 +2,32 @@ import { Municipality } from "@businessnjgovnavigator/shared";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { createFilterOptions, TextField } from "@mui/material";
-import React, { ChangeEvent, ReactElement, useState } from "react";
+import React, { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 import { Autocomplete } from "@mui/material";
+import { ProfileFields } from "@/lib/types/types";
 
 interface Props {
+  fieldName: ProfileFields;
   municipalities: Municipality[];
   value: Municipality | undefined;
   onSelect: (value: Municipality | undefined) => void;
   placeholderText: string;
+  handleChange?: () => void;
+  onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
+  error?: boolean;
+  validationText?: string;
+  validationLabel?: string;
 }
 
 export const MunicipalityDropdown = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
 
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    props.handleChange && props.handleChange();
+    setSearchText(event.target.value);
+  };
   const handleMunicipality = (event: ChangeEvent<unknown>, value: Municipality | null) => {
+    props.handleChange && props.handleChange();
     setSearchText(value ? value.displayName : "");
     props.onSelect(value || undefined);
   };
@@ -49,6 +61,8 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       isOptionEqualToValue={(option: Municipality, value: Municipality) => option.id === value.id}
       value={props.value || null}
       onChange={handleMunicipality}
+      onBlur={props.onValidation}
+      onSubmit={props.onValidation}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           {selected ? (
@@ -61,15 +75,20 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       renderInput={(params) => (
         <TextField
           {...params}
+          id={props.fieldName}
           inputProps={{
             "aria-label": "Location",
-            "data-testid": "municipality",
+            "data-testid": props.fieldName,
             ...params.inputProps,
           }}
           value={searchText}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => setSearchText(event.target.value)}
+          onChange={handleChange}
+          onSubmit={props.onValidation}
           variant="outlined"
           placeholder={props.placeholderText}
+          error={props.error}
+          label={props.error && (props.validationLabel ?? "")}
+          helperText={props.error && (props.validationText ?? "")}
         />
       )}
       fullWidth

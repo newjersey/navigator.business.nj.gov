@@ -169,11 +169,15 @@ describe("profile", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     subject = renderPage({ municipalities: [newark] });
     fillText("Location", "");
+    fireEvent.blur(subject.getByLabelText("Location"));
     clickSave();
-    expect(subject.getByTestId("error-alert-REQUIRED_MUNICIPALITY")).toBeInTheDocument();
+    expect(subject.container.querySelector("#municipality-helper-text") as HTMLElement).toBeInTheDocument();
+    await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
     selectByText("Location", newark.displayName);
     await waitFor(() =>
-      expect(subject.queryByTestId("error-alert-REQUIRED_MUNICIPALITY")).not.toBeInTheDocument()
+      expect(
+        subject.container.querySelector("#municipality-helper-text") as HTMLElement
+      ).not.toBeInTheDocument()
     );
   });
 
@@ -193,7 +197,7 @@ describe("profile", () => {
     fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
     clickSave();
     expect(subject.container.querySelector("#employerId-helper-text") as HTMLElement).toBeInTheDocument();
-    await waitFor(() => expect(subject.queryByTestId("toast-alert-SUCCESS")).not.toBeInTheDocument());
+    await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
   });
 
   it("user is able to go back to roadmap", async () => {
