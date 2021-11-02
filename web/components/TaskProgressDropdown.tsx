@@ -3,15 +3,13 @@ import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
 import { TaskProgress } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
-import { TagInProgress } from "@/components/njwds-extended/TagInProgress";
-import { TagCompleted } from "@/components/njwds-extended/TagCompleted";
-import { TagNotStarted } from "@/components/njwds-extended/TagNotStarted";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import analytics from "@/lib/utils/analytics";
 import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
 import { ToastAlert } from "./njwds-extended/ToastAlert";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { TaskProgressLookup } from "@/display-content/TaskProgressLookup";
+import { Tag } from "./njwds-extended/Tag";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -99,21 +97,27 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           onClick={() => handleSelect("NOT_STARTED")}
           selected={value === "NOT_STARTED"}
         >
-          <TagNotStarted />
+          <Tag tagVariant="base" dataTestid="NOT_STARTED">
+            {TaskProgressLookup.NOT_STARTED}
+          </Tag>
         </MenuItem>
         <MenuItem
           className={`margin-left-neg-1 ${classes.menuItem}`}
           onClick={() => handleSelect("IN_PROGRESS")}
           selected={value === "IN_PROGRESS"}
         >
-          <TagInProgress />
+          <Tag tagVariant="info" dataTestid="IN_PROGRESS">
+            {TaskProgressLookup.IN_PROGRESS}
+          </Tag>
         </MenuItem>
         <MenuItem
           className={`margin-left-neg-1 ${classes.menuItem}`}
           onClick={() => handleSelect("COMPLETED")}
           selected={value === "COMPLETED"}
         >
-          <TagCompleted />
+          <Tag tagVariant="primary" dataTestid="COMPLETED">
+            {TaskProgressLookup.COMPLETED}
+          </Tag>
         </MenuItem>
       </Menu>
     </div>

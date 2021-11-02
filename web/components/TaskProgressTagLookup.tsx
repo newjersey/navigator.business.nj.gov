@@ -1,11 +1,22 @@
 import { TaskProgress } from "@/lib/types/types";
 import React, { ReactElement } from "react";
-import { TagNotStarted } from "@/components/njwds-extended/TagNotStarted";
-import { TagInProgress } from "@/components/njwds-extended/TagInProgress";
-import { TagCompleted } from "@/components/njwds-extended/TagCompleted";
+import { Tag } from "./njwds-extended/Tag";
+import { TaskProgressLookup } from "@/display-content/TaskProgressLookup";
 
 export const TaskProgressTagLookup: Record<TaskProgress, ReactElement> = {
-  NOT_STARTED: <TagNotStarted />,
-  IN_PROGRESS: <TagInProgress />,
-  COMPLETED: <TagCompleted />,
+  NOT_STARTED: (
+    <Tag tagVariant="base" dataTestid="NOT_STARTED">
+      {TaskProgressLookup.NOT_STARTED}
+    </Tag>
+  ),
+  IN_PROGRESS: (
+    <Tag tagVariant="info" dataTestid="IN_PROGRESS">
+      {TaskProgressLookup.IN_PROGRESS}
+    </Tag>
+  ),
+  COMPLETED: (
+    <Tag tagVariant="primary" dataTestid="COMPLETED">
+      {TaskProgressLookup.COMPLETED}
+    </Tag>
+  ),
 };
