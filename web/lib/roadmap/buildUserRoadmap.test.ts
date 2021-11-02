@@ -96,7 +96,7 @@ describe("buildUserRoadmap", () => {
     it("adds another-industry add-on when industry is generic", async () => {
       await buildUserRoadmap(generateProfileData({ industryId: "generic" }));
       const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-      expect(lastCalledWith.addOns).toContain("another-industry");
+      expect(lastCalledWith.industryId).toBe("another-industry");
       expect(lastCalledWith.addOns).not.toContain("restaurant");
       expect(lastCalledWith.addOns).not.toContain("cosmetology");
       expect(lastCalledWith.addOns).not.toContain("e-commerce");
@@ -110,20 +110,11 @@ describe("buildUserRoadmap", () => {
 
     const expectOnlyIndustry = (
       industry: string,
-      lastCalledWith: { addOns: string[]; modifications: string[] }
+      lastCalledWith: { industryId: string; addOns: string[]; modifications: string[] }
     ): void => {
-      const industries = [
-        "cosmetology",
-        "e-commerce",
-        "restaurant",
-        "home-contractor",
-        "cleaning-aid",
-        "another-industry",
-      ];
-      const shouldNotContainIndustries = industries.filter((it) => it !== industry);
+      const shouldNotContainIndustries = Industries.filter((it) => it.id !== industry);
 
-      expect(lastCalledWith.addOns).toContain(industry);
-      expect(lastCalledWith.modifications).toContain(industry);
+      expect(lastCalledWith.industryId).toBe(industry);
 
       for (const shouldNotContainIndustry of shouldNotContainIndustries) {
         expect(lastCalledWith.addOns).not.toContain(shouldNotContainIndustry);

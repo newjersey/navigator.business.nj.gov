@@ -2,9 +2,11 @@ import { Roadmap, SectionType, Step } from "@/lib/types/types";
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 
 export const buildRoadmap = async ({
+  industryId,
   addOns,
   modifications,
 }: {
+  industryId: string;
   addOns: string[];
   modifications: string[];
 }): Promise<Roadmap> => {
@@ -15,14 +17,29 @@ export const buildRoadmap = async ({
     })),
   };
 
-  roadmapBuilder = await applyAddOns(roadmapBuilder, ["generic-tasks", ...addOns]);
-  roadmapBuilder = await applyModifications(roadmapBuilder, modifications);
+  roadmapBuilder = await generateIndustryRoadmap(roadmapBuilder, industryId, addOns, modifications);
 
   if (lastStepHasNoTasks(roadmapBuilder)) {
     roadmapBuilder = removeLastStep(roadmapBuilder);
   }
 
   return convertToRoadmap(roadmapBuilder);
+};
+
+const generateIndustryRoadmap = async (
+  builder: RoadmapBuilder,
+  industryId: string,
+  addOns: string[],
+  modifications: string[]
+): Promise<RoadmapBuilder> => {
+  const industryRoadmap: IndustryRoadmap = await importRoadmap(industryId);
+
+  addTasksFromAddOn(builder, industryRoadmap.addOns);
+  await applyAddOns(builder, ["generic-tasks", ...addOns]);
+  await applyModifications(builder, modifications);
+  modifyTasks(builder, industryRoadmap.modifications);
+
+  return builder;
 };
 
 const applyAddOns = async (builder: RoadmapBuilder, addOnFilenames: string[]): Promise<RoadmapBuilder> => {
@@ -42,6 +59,13 @@ const applyModifications = async (
   }
 
   return builder;
+};
+
+const importRoadmap = async (industryId: string): Promise<IndustryRoadmap> => {
+  if (process.env.NODE_ENV === "test") {
+    return (await import(`@/lib/roadmap/fixtures/industries/${industryId}.json`)).default as IndustryRoadmap;
+  }
+  return (await import(`../../roadmaps/industries/${industryId}.json`)).default as IndustryRoadmap;
 };
 
 const importGenericSteps = async (): Promise<GenericStep[]> => {
@@ -185,4 +209,9 @@ export interface AddOn {
 export interface TaskModification {
   taskToReplaceFilename: string;
   replaceWithFilename: string;
+}
+
+export interface IndustryRoadmap {
+  addOns: AddOn[];
+  modifications: TaskModification[];
 }
