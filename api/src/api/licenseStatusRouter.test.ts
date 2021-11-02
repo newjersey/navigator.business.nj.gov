@@ -9,7 +9,7 @@ import {
   generateLicenseStatusItem,
   generateNameAndAddress,
   generateUserData,
-} from "../domain/factories";
+} from "../../test/factories";
 import { getSignedInUserId } from "./userRouter";
 
 jest.mock("./userRouter", () => ({

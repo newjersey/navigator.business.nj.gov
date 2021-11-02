@@ -14,8 +14,8 @@
     "types": ["node", "jest"],
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.test.ts"],
-  "exclude": ["node_modules/**/*", ".vscode/**/*"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules/**/*", ".vscode/**/*", "src/**/*.test.ts"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   }

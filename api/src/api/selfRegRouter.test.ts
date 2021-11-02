@@ -2,7 +2,7 @@ import request from "supertest";
 import express, { Express } from "express";
 import bodyParser from "body-parser";
 import { createEmptyUserData, SelfRegClient, UserDataClient } from "../domain/types";
-import { generateSelfRegResponse, generateUser, generateUserData } from "../domain/factories";
+import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
 import { selfRegRouterFactory } from "./selfRegRouter";
 import uuid from "uuid";
 

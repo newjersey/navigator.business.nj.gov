@@ -7,7 +7,7 @@ import {
   generateProfileData,
   generateUser,
   generateUserData,
-} from "../domain/factories";
+} from "../../test/factories";
 import jwt from "jsonwebtoken";
 import { UserDataClient } from "../domain/types";
 import dayjs from "dayjs";

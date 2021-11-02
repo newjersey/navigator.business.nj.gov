@@ -1,6 +1,6 @@
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 import axios from "axios";
-import { generateLicenseEntity } from "../domain/factories";
+import { generateLicenseEntity } from "../../test/factories";
 import { LicenseStatusClient } from "../domain/types";
 import { WebserviceLicenseStatusClient } from "./WebserviceLicenseStatusClient";
 
