@@ -30,6 +30,8 @@
     "endOfLine": "auto"
   },
   "dependencies": {
+    "@aws-amplify/auth": "4.3.4",
+    "@aws-amplify/core": "4.3.4",
     "@aws-amplify/ui-react": "1.2.22",
     "@businessnjgovnavigator/shared": "*",
     "@emotion/react": "11.5.0",
@@ -39,7 +41,6 @@
     "@mui/styles": "5.0.2",
     "@next/env": "12.0.1",
     "airtable": "0.11.1",
-    "aws-amplify": "4.2.9",
     "axios": "0.24.0",
     "babel-jest": "27.3.1",
     "date-fns": "2.25.0",

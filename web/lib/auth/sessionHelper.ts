@@ -1,5 +1,6 @@
 import { BusinessUser } from "@/lib/types/types";
 import { Auth } from "@aws-amplify/auth";
+import awsExports from "../../aws-exports";
 import axios, { AxiosResponse } from "axios";
 
 type CognitoIdPayload = {
@@ -42,6 +43,23 @@ type CognitoRefreshAuth = {
   identity_id: string;
 };
 
+export const configureAmplify = (): void => {
+  Auth.configure({
+    ...awsExports,
+    ssr: true,
+    oauth: {
+      domain: process.env.AUTH_DOMAIN,
+      scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
+      redirectSignIn: process.env.REDIRECT_URL,
+      redirectSignOut: process.env.REDIRECT_URL,
+      responseType: "code",
+    },
+    refreshHandlers: {
+      myNJ: refreshToken,
+    },
+  });
+};
+
 export const triggerSignOut = async (): Promise<void> => {
   await Auth.signOut();
 };
@@ -49,7 +67,8 @@ export const triggerSignOut = async (): Promise<void> => {
 export const triggerSignIn = async (): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  await Auth.federatedSignIn({ provider: "myNJ" });
+  configureAmplify();
+  await Auth.federatedSignIn({ customProvider: "myNJ" });
 };
 
 export const getCurrentToken = async (): Promise<string> => {
@@ -58,6 +77,7 @@ export const getCurrentToken = async (): Promise<string> => {
 };
 
 export const getCurrentUser = async (): Promise<BusinessUser> => {
+  configureAmplify();
   const cognitoSession = await Auth.currentSession();
   const cognitoPayload = cognitoSession.getIdToken().decodePayload() as CognitoIdPayload;
   return cognitoPayloadToBusinessUser(cognitoPayload);

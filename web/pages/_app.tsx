@@ -10,16 +10,14 @@ import React, {
   SetStateAction,
 } from "react";
 import { createTheme, ThemeProvider, Theme, StyledEngineProvider } from "@mui/material";
-import { Amplify, Hub } from "aws-amplify";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
-import awsExports from "../aws-exports";
-import { getCurrentUser, refreshToken } from "@/lib/auth/sessionHelper";
+import { getCurrentUser } from "@/lib/auth/sessionHelper";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { onSignIn } from "@/lib/auth/signinHelper";
 import { useRouter } from "next/router";
-import { HubCapsule } from "@aws-amplify/core";
+import { Hub, HubCapsule } from "@aws-amplify/core";
 import { DefaultSeo } from "next-seo";
 import Script from "next/script";
 import SEO from "../next-seo.config";
@@ -30,21 +28,6 @@ declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
-
-Amplify.configure({
-  ...awsExports,
-  ssr: true,
-  oauth: {
-    domain: process.env.AUTH_DOMAIN,
-    scope: ["email", "profile", "openid", "aws.cognito.signin.user.admin"],
-    redirectSignIn: process.env.REDIRECT_URL,
-    redirectSignOut: process.env.REDIRECT_URL,
-    responseType: "code",
-  },
-  refreshHandlers: {
-    myNJ: refreshToken,
-  },
-});
 
 const initialState = {
   user: undefined,
