@@ -10,7 +10,7 @@ import {
   SelfRegResponse,
   TaxFiling,
   UserData,
-} from "./types";
+} from "../src/domain/types";
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import dayjs from "dayjs";

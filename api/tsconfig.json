@@ -13,8 +13,8 @@
     "types": ["node", "jest"],
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.test.ts", "serverless.ts"],
-  "exclude": ["node_modules/**/*", ".serverless/**/*", ".webpack/**/*", "_warmup/**/*", ".vscode/**/*"],
+  "include": ["src/**/*.ts", "serverless.ts"],
+  "exclude": ["node_modules/**/*", ".serverless/**/*", ".webpack/**/*", "_warmup/**/*", ".vscode/**/*",  "test/factories.ts", "src/**/*.test.ts",],
   "ts-node": {
     "require": ["tsconfig-paths/register"],
     "moduleTypes": {

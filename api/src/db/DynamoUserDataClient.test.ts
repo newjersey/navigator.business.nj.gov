@@ -1,7 +1,7 @@
 import AWS from "aws-sdk";
 import { UserDataClient } from "../domain/types";
 import { DynamoUserDataClient } from "./DynamoUserDataClient";
-import { generateUser, generateUserData } from "../domain/factories";
+import { generateUser, generateUserData } from "../../test/factories";
 
 // references jest-dynalite-config values
 const dbConfig = {

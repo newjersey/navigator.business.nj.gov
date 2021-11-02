@@ -6,7 +6,7 @@ import {
   generateNameAndAddress,
   generateProfileData,
   generateUserData,
-} from "../factories";
+} from "../../../test/factories";
 import dayjs from "dayjs";
 import { updateLicenseStatusFactory } from "./updateLicenseStatusFactory";
 

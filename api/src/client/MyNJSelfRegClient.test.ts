@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SelfRegClient } from "../domain/types";
 import { MyNJSelfRegClientFactory } from "./MyNJSelfRegClient";
-import { generateUser } from "../domain/factories";
+import { generateUser } from "../../test/factories";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 
 jest.mock("axios");
