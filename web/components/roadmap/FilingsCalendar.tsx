@@ -8,6 +8,7 @@ import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { useMediaQuery } from "@mui/material";
 import { MediaQueries } from "@/lib/PageSizes";
 import Link from "next/link";
+import { Tag } from "../njwds-extended/Tag";
 
 interface Props {
   taxFilings: TaxFiling[];
@@ -42,10 +43,15 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                   <a
                     href={`filings/${props.filingsReferences[filing.identifier].urlSlug}`}
                     data-testid={filing.identifier.toLowerCase()}
-                    className="usa-link text-secondary-darker text-secondary-darker:hover"
+                    className="usa-link text-secondary-darker text-secondary-darker:hover text-no-underline"
                   >
-                    <div className="text-no-underline usa-tag bg-secondary-lighter text-secondary-darker tag-secondary-color-hover">
-                      <span className="text-bold text-uppercase">
+                    <Tag
+                      textWrap={true}
+                      tagVariant="info"
+                      className="accent-cool-hover-override width-full display-block width-auto"
+                    >
+                      {" "}
+                      <span className="text-bold text-uppercase ">
                         {RoadmapDefaults.calendarFilingDueDateLabel}{" "}
                         {dayjs(filing.dueDate, "YYYY-MM-DD").format("M/D")}
                       </span>
@@ -53,7 +59,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                       <span className="text-no-uppercase">
                         {props.filingsReferences[filing.identifier].name}
                       </span>
-                    </div>
+                    </Tag>
                   </a>
                 </Link>
               </div>

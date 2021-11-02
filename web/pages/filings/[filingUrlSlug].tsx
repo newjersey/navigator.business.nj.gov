@@ -17,6 +17,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import dayjs from "dayjs";
 import { FilingDefaults } from "@/display-content/FilingDefaults";
+import { Tag } from "@/components/njwds-extended/Tag";
 
 interface Props {
   filing: Filing;
@@ -45,11 +46,10 @@ const FilingPage = (props: Props): ReactElement => {
                 {props.filing.name}
               </div>
               <div className="margin-bottom-4" data-testid="due-date">
-                <span className="usa-tag bg-white border text-gray-70 text-bold">
-                  {FilingDefaults.tagContentBeforeDueDate} <span className="text-normal">{dueDate}</span>
-                </span>
+                <Tag tagVariant="noBgColorWithBorder" className="text-bold">
+                  {FilingDefaults.tagContentBeforeDueDate} {dueDate}
+                </Tag>
               </div>
-
               <Content>{props.filing.contentMd}</Content>
             </div>
             <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />

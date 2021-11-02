@@ -199,8 +199,8 @@ $lg: 64em; //desktop and up (1024px)
   }
 }
 
-.tag-secondary-color-hover:hover {
-  background-color: #73b3e7;
+.accent-cool-hover-override:hover {
+  background-color: $accent-cool !important;
 }
 
 .line-height-1 {
