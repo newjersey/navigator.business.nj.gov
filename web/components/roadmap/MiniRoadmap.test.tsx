@@ -1,7 +1,12 @@
-import { fireEvent, render, RenderResult, within } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import { MiniRoadmap } from "./MiniRoadmap";
-import { generatePreferences, generateStep, generateTask } from "@/test/factories";
+import { generatePreferences, generateStep, generateTask, generateUserData } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -13,6 +18,7 @@ const renderMiniRoadMap = (taskId: string): RenderResult => {
 
 describe("<MiniRoadmap />", () => {
   beforeEach(() => {
+    jest.resetAllMocks();
     useMockRoadmap({
       steps: [
         generateStep({
@@ -104,5 +110,80 @@ describe("<MiniRoadmap />", () => {
 
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
+  });
+
+  const renderStatefulMiniRoadMap = (taskId: string, userData = generateUserData({})): RenderResult => {
+    setupStatefulUserDataContext();
+    return render(
+      <WithStatefulUserData initialUserData={userData}>
+        <MiniRoadmap activeTaskId={taskId} />;
+      </WithStatefulUserData>
+    );
+  };
+
+  describe("User Step State Preferences", () => {
+    const userData = generateUserData({
+      preferences: generatePreferences({
+        roadmapOpenSections: ["PLAN", "START"],
+        roadmapOpenSteps: [2],
+      }),
+    });
+    beforeEach(() => {
+      useMockRoadmap({
+        steps: [
+          generateStep({
+            name: "step1",
+            step_number: 1,
+            section: "PLAN",
+            tasks: [generateTask({ name: "task1", id: "task1" })],
+          }),
+          generateStep({
+            name: "step2",
+            step_number: 2,
+            section: "START",
+            tasks: [generateTask({ name: "task2", id: "task2" })],
+          }),
+        ],
+      });
+    });
+
+    it("display open step based on userData preferences", async () => {
+      useMockUserData(userData);
+      const subject = renderMiniRoadMap("task1");
+      expect(subject.getByText("task2")).toBeInTheDocument();
+    });
+
+    it("display closed step based on userData preferences", async () => {
+      useMockUserData(userData);
+      const subject = renderMiniRoadMap("task2");
+      expect(subject.queryByText("task1")).not.toBeInTheDocument();
+    });
+
+    it("adds step to userData openSteps when step is active", async () => {
+      const subject = renderStatefulMiniRoadMap("task1", userData);
+      expect(subject.getByText("task1")).toBeInTheDocument();
+      await waitFor(() =>
+        expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]))
+      );
+    });
+
+    it("adds step to userData openSteps when step is clicked", async () => {
+      const subject = renderStatefulMiniRoadMap("task2", userData);
+      expect(subject.queryByText("task1")).not.toBeInTheDocument();
+      fireEvent.click(subject.getByText("step1"));
+      expect(subject.getByText("task1")).toBeInTheDocument();
+      expect(subject.getByText("task2")).toBeInTheDocument();
+      await waitFor(() =>
+        expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]))
+      );
+    });
+    it("removes active step from userData openSteps when active step is clicked", async () => {
+      const subject = renderStatefulMiniRoadMap("task1", userData);
+      fireEvent.click(subject.getByText("step1"));
+      expect(subject.queryByText("task1")).not.toBeInTheDocument();
+      await waitFor(() =>
+        expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([2]))
+      );
+    });
   });
 });

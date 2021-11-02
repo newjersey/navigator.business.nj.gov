@@ -131,7 +131,7 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
 export const generatePreferences = (overrides: Partial<Preferences>): Preferences => {
   return {
     roadmapOpenSections: ["PLAN", "START"],
-    roadmapOpenSteps: [],
+    roadmapOpenSteps: [randomInt()],
     ...overrides,
   };
 };
