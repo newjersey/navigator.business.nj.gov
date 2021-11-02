@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 module.exports = {
-  target: "serverless",
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
