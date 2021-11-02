@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 yarn lint:staged
 yarn sync:deps
-git add .
+git add **/package.json package.json
