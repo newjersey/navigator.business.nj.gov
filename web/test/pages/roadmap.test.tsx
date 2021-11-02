@@ -98,6 +98,7 @@ describe("roadmap page", () => {
     it("shows the business name from onboarding data", () => {
       useMockProfileData({ businessName: "My cool business" });
       const subject = renderRoadmapPage();
+      expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent("My cool business");
       expect(subject.getByText("Business Roadmap for My cool business")).toBeInTheDocument();
     });
 
@@ -108,15 +109,16 @@ describe("roadmap page", () => {
         legalStructureId: "c-corporation",
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("Your Business Roadmap")).toBeInTheDocument();
-      expect(subject.getByText("Not set")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent(
+        RoadmapDefaults.greyBoxNotSetText
+      );
     });
 
     it("shows the human-readable industry from onboarding data", () => {
       useMockProfileData({ industryId: "home-contractor" });
       const subject = renderRoadmapPage();
       const expectedValue = LookupIndustryById("home-contractor").name;
-      expect(subject.getByText(expectedValue)).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-industryId")).toHaveTextContent(expectedValue);
     });
 
     it("shows placeholder if no industry present", async () => {
@@ -126,13 +128,17 @@ describe("roadmap page", () => {
         municipality: generateMunicipality({}),
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("X")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-industryId")).toHaveTextContent(
+        RoadmapDefaults.greyBoxNotSetText
+      );
     });
 
     it("shows the human-readable legal structure from onboarding data", () => {
       useMockProfileData({ legalStructureId: "limited-liability-company" });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("Limited Liability Company (LLC)")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
+        "Limited Liability Company (LLC)"
+      );
     });
 
     it("shows placeholder if no business structure present", async () => {
@@ -143,6 +149,9 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByText("Not set")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
+        RoadmapDefaults.greyBoxNotSetText
+      );
     });
 
     it("shows the display municipality from onboarding data", () => {
@@ -150,7 +159,7 @@ describe("roadmap page", () => {
         municipality: generateMunicipality({ displayName: "Franklin (Hunterdon County)" }),
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("Franklin (Hunterdon County)")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-location")).toHaveTextContent("Franklin (Hunterdon County)");
     });
 
     it("shows placeholder if no municipality present", async () => {
@@ -160,7 +169,9 @@ describe("roadmap page", () => {
         municipality: undefined,
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("Not set")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-location")).toHaveTextContent(
+        RoadmapDefaults.greyBoxNotSetText
+      );
     });
 
     it("shows entity id if present", () => {
@@ -169,7 +180,7 @@ describe("roadmap page", () => {
         legalStructureId: "limited-liability-company",
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("1234567890")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-entityId")).toHaveTextContent("1234567890");
     });
 
     it("does not show entity id for Trade Name legal structure even if present", () => {
@@ -178,7 +189,7 @@ describe("roadmap page", () => {
         entityId: "1234567890",
       });
       const subject = renderRoadmapPage();
-      expect(subject.queryByText("1234567890")).not.toBeInTheDocument();
+      expect(subject.queryByTestId("mini-profile-entityId")).not.toBeInTheDocument();
     });
 
     it("shows EIN with hyphen if present", () => {
@@ -186,7 +197,7 @@ describe("roadmap page", () => {
         employerId: "123456789",
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("12-3456789")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-employerId")).toHaveTextContent("12-3456789");
     });
 
     it("shows new jersey tax id if present", () => {
@@ -194,7 +205,7 @@ describe("roadmap page", () => {
         taxId: "123456789",
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("123456789")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-taxId")).toHaveTextContent("123456789");
     });
 
     it("shows notes if present", () => {
@@ -202,10 +213,10 @@ describe("roadmap page", () => {
         notes: "some notes",
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByText("some notes")).toBeInTheDocument();
+      expect(subject.getByTestId("mini-profile-notes")).toHaveTextContent("some notes");
     });
 
-    it("does not show empty fields for ein, entity id, nj tax id, notes", () => {
+    it("shows placeholder for ein, nj tax id, notes", () => {
       useMockProfileData({
         entityId: undefined,
         employerId: undefined,
@@ -213,10 +224,16 @@ describe("roadmap page", () => {
         notes: undefined,
       });
       const subject = renderRoadmapPage();
-      expect(subject.queryByText(RoadmapDefaults.greyBoxEINText)).not.toBeInTheDocument();
-      expect(subject.queryByText(RoadmapDefaults.greyBoxEntityIdText)).not.toBeInTheDocument();
-      expect(subject.queryByText(RoadmapDefaults.greyBoxTaxIdText)).not.toBeInTheDocument();
-      expect(subject.queryByText(RoadmapDefaults.greyBoxNotesText)).not.toBeInTheDocument();
+
+      expect(subject.getByTestId("mini-profile-employerId")).toHaveTextContent(
+        RoadmapDefaults.greyBoxNotEnteredText
+      );
+      expect(subject.getByTestId("mini-profile-taxId")).toHaveTextContent(
+        RoadmapDefaults.greyBoxNotEnteredText
+      );
+      expect(subject.getByTestId("mini-profile-notes")).toHaveTextContent(
+        RoadmapDefaults.greyBoxNotEnteredText
+      );
     });
 
     it("shows more/less for mobile", () => {

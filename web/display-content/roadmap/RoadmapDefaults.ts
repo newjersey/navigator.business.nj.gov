@@ -12,7 +12,7 @@ export const RoadmapDefaults: Record<string, string> = {
   greyBoxEditText: "View/Edit Profile",
   greyBoxHeaderText: "Business Profile",
   greyBoxNotSetText: "Not set",
-  greyBoxSomeOtherIndustryText: "X",
+  greyBoxNotEnteredText: "Not entered",
   greyBoxViewMoreText: "View More",
   greyBoxViewLessText: "View Less",
   roadmapTitleNotSet: "Your Business Roadmap",
@@ -30,7 +30,8 @@ export const RoadmapDefaults: Record<string, string> = {
   congratulatorModalHeader: "You reached a crucial milestone as a business.",
   congratulatorModalBody: "You can now start your",
   congratulatorModalLinkText: "tasks.",
-  operateComplianceText: "After you've started your business, you must stay in compliance with the State. Visit [Premier Business Services](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) to register."
+  operateComplianceText:
+    "After you've started your business, you must stay in compliance with the State. Visit [Premier Business Services](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) to register.",
 };
 
 export const SectionDefaults: Record<SectionType, string> = {
