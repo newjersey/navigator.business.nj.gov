@@ -5,4 +5,5 @@ export const OnboardingDefaults: Record<string, string> = {
   stepXofYTemplate: "(Step ${currentPage} of ${totalPages})",
   errorTextRequiredLegal: "Please select a legal structure.",
   errorTextRequiredMunicipality: "Please select a location.",
+  errorTextMinimumNumericField: "Must be ${length} digits long.",
 };

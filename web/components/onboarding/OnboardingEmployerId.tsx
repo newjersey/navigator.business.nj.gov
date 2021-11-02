@@ -2,6 +2,8 @@ import { ProfileFields, ProfileFieldErrorMap } from "@/lib/types/types";
 import React, { ReactElement, FocusEvent } from "react";
 import { OnboardingField } from "./OnboardingField";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
+import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { templateEval } from "@/lib/utils/helpers";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -27,7 +29,9 @@ export const OnboardingEmployerId = (props: Props): ReactElement => {
       handleChange={handleChange}
       validationLabel="Error"
       error={props.fieldStates[fieldName].invalid}
-      validationText="Must be 9 digits long"
+      validationText={templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
+        length: "10",
+      })}
       valueFilter={dataFormat}
       visualFilter={displayAsEin}
       fieldOptions={{

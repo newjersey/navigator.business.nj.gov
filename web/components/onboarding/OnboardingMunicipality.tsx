@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, FocusEvent } from "react";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
@@ -6,9 +6,25 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 import { MunicipalityDropdown } from "@/components/MunicipalityDropdown";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
+import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
 
-export const OnboardingMunicipality = (): ReactElement => {
+interface Props {
+  onValidation: (field: ProfileFields, invalid: boolean) => void;
+  fieldStates: ProfileFieldErrorMap;
+}
+
+export const OnboardingMunicipality = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(OnboardingContext);
+
+  const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
+    const valid = event.target.value.length > 0;
+    props.onValidation(fieldName, !valid);
+  };
+
+  const handleChange = (): void => props.onValidation(fieldName, false);
+
+  const fieldName = "municipality";
 
   const onSelect = (value: Municipality | undefined): void => {
     setProfileData({
@@ -25,6 +41,12 @@ export const OnboardingMunicipality = (): ReactElement => {
       <div className="form-input margin-top-2">
         <MunicipalityDropdown
           municipalities={state.municipalities}
+          onValidation={onValidation}
+          fieldName={fieldName}
+          error={props.fieldStates[fieldName].invalid}
+          validationLabel="Error"
+          validationText={OnboardingDefaults.errorTextRequiredMunicipality}
+          handleChange={handleChange}
           value={state.profileData.municipality}
           onSelect={onSelect}
           placeholderText={state.displayContent.municipality.placeholder}

@@ -17,9 +17,9 @@ import {
   createProfileFieldErrorMap,
   ProfileData,
   ProfileDisplayContent,
-  ProfileError,
   ProfileFieldErrorMap,
   ProfileFields,
+  OnboardingStatus,
 } from "@/lib/types/types";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ProfileDefaults } from "@/display-content/ProfileDefaults";
@@ -33,9 +33,7 @@ import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunici
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { RoadmapContext } from "@/pages/_app";
-import { Alert } from "@/components/njwds/Alert";
 import { NavBar } from "@/components/navbar/NavBar";
-import { OnboardingErrorLookup } from "@/lib/utils/helpers";
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
@@ -43,52 +41,23 @@ import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 import { Municipality } from "@businessnjgovnavigator/shared";
+import { OnboardingStatusLookup } from "@/lib/utils/helpers";
 
 interface Props {
   displayContent: ProfileDisplayContent;
   municipalities: Municipality[];
 }
 
-interface AlertProps {
-  variant: "success" | "warning" | "error";
-  body: string;
-  header?: string;
-  link?: string;
-}
-type OnboardingStatus = "SUCCESS" | "ERROR";
-
-const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
-  SUCCESS: {
-    body: ProfileDefaults.successTextBody,
-    header: ProfileDefaults.successTextHeader,
-    link: ProfileDefaults.successTextLink,
-    variant: "success",
-  },
-  ERROR: {
-    body: ProfileDefaults.errorTextBody,
-    header: ProfileDefaults.errorTextHeader,
-    variant: "error",
-  },
-};
-
 const ProfilePage = (props: Props): ReactElement => {
   useAuthProtectedPage();
   const { setRoadmap } = useContext(RoadmapContext);
-  const [profileData, _setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
-
-  const setProfileData = (value: ProfileData): void => {
-    if (value.municipality) {
-      setError(undefined);
-    }
-    _setProfileData(value);
-  };
 
   useEffect(() => {
     if (userData) {
@@ -112,19 +81,11 @@ const ProfilePage = (props: Props): ReactElement => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
-    if (
-      Object.keys(fieldStates).some((k) => fieldStates[k as ProfileFields].invalid) ||
-      !profileData.municipality
-    ) {
-      if (!profileData.municipality) {
-        setError("REQUIRED_MUNICIPALITY");
-      }
+    if (Object.keys(fieldStates).some((k) => fieldStates[k as ProfileFields].invalid)) {
       setAlert("ERROR");
       return;
     }
-
     setIsLoading(true);
-    setError(undefined);
     setAnalyticsDimensions(profileData);
     setRoadmap(await buildUserRoadmap(profileData));
     update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
@@ -216,7 +177,6 @@ const ProfilePage = (props: Props): ReactElement => {
 
           <div className="margin-top-6 desktop:margin-top-0">
             <SinglePageLayout wrappedWithMain={false}>
-              <UserDataErrorAlert />
               <SingleColumnContainer>
                 <div role="heading" aria-level={1} className="h1-element">
                   {ProfileDefaults.pageTitle}
@@ -229,17 +189,7 @@ const ProfilePage = (props: Props): ReactElement => {
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <OnboardingLegalStructure />
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
-                  {error && error === "REQUIRED_MUNICIPALITY" && (
-                    <Alert
-                      data-testid={`error-alert-REQUIRED_MUNICIPALITY`}
-                      slim
-                      variant="error"
-                      className="margin-y-2"
-                    >
-                      {OnboardingErrorLookup[error]}
-                    </Alert>
-                  )}
-                  <OnboardingMunicipality />
+                  <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
                   <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
                   <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} />
                   <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />

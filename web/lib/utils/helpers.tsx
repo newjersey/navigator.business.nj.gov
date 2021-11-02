@@ -5,12 +5,14 @@ import {
   Task,
   UserData,
   SectionType,
-  ProfileError,
   SectionCompletion,
   Preferences,
   sectionNames,
+  OnboardingStatus,
+  ProfileError,
 } from "@/lib/types/types";
 import { NavDefaults } from "@/display-content/NavDefaults";
+import { ProfileDefaults } from "@/display-content/ProfileDefaults";
 import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,9 +118,29 @@ export const isStepCompleted = (step: Step, userData: UserData | undefined): boo
   });
 };
 
+interface AlertProps {
+  variant: "success" | "warning" | "error";
+  body: string;
+  header?: string;
+  link?: string;
+}
+
+export const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
+  SUCCESS: {
+    body: ProfileDefaults.successTextBody,
+    header: ProfileDefaults.successTextHeader,
+    link: ProfileDefaults.successTextLink,
+    variant: "success",
+  },
+  ERROR: {
+    body: ProfileDefaults.errorTextBody,
+    header: ProfileDefaults.errorTextHeader,
+    variant: "error",
+  },
+};
+
 export const OnboardingErrorLookup: Record<ProfileError, string> = {
   REQUIRED_LEGAL: OnboardingDefaults.errorTextRequiredLegal,
-  REQUIRED_MUNICIPALITY: OnboardingDefaults.errorTextRequiredMunicipality,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {
