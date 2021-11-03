@@ -1351,8 +1351,8 @@ __metadata:
     "@mui/lab": 5.0.0-alpha.53
     "@mui/material": 5.0.6
     "@mui/styles": 5.0.2
-    "@next/env": 12.0.1
-    "@next/eslint-plugin-next": 12.0.1
+    "@next/env": 12.0.2
+    "@next/eslint-plugin-next": 12.0.2
     "@serverless/typescript": 2.64.1
     "@testing-library/dom": 8.10.1
     "@testing-library/jest-dom": 5.15.0
@@ -1501,8 +1501,8 @@ __metadata:
     "@mui/lab": 5.0.0-alpha.53
     "@mui/material": 5.0.6
     "@mui/styles": 5.0.2
-    "@next/env": 12.0.1
-    "@next/eslint-plugin-next": 12.0.1
+    "@next/env": 12.0.2
+    "@next/eslint-plugin-next": 12.0.2
     "@testing-library/dom": 8.10.1
     "@testing-library/jest-dom": 5.15.0
     "@testing-library/react": 12.1.2
@@ -3969,13 +3969,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:12.0.1":
-  version: 12.0.1
-  resolution: "@next/env@npm:12.0.1"
-  checksum: 396fb1068456a6b160a9daeec27684bd2e5d75eb3497f17d36dfa5c670b47b5248c9441e96e5f45ca1496dce38fc55ef47836dfeba257125c085f0a237adc062
-  languageName: node
-  linkType: hard
-
 "@next/env@npm:12.0.2":
   version: 12.0.2
   resolution: "@next/env@npm:12.0.2"
@@ -3992,12 +3985,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:12.0.1":
-  version: 12.0.1
-  resolution: "@next/eslint-plugin-next@npm:12.0.1"
+"@next/eslint-plugin-next@npm:12.0.2":
+  version: 12.0.2
+  resolution: "@next/eslint-plugin-next@npm:12.0.2"
   dependencies:
     glob: 7.1.7
-  checksum: 41d45cd98b4f8e8a15cc24ebe9ff7a28dc40fb39abccf021136343ef66273405b7a978ac731549d08a015012014790b586c7ff3a436ca9f1e0830d036bfc4004
+  checksum: 1b776d475ac31b52ffb77ddbc9542f6811d856ec647c91af9ee4540d0a7716174bcd8de0e83e4ed9f6ae7f3ca78771f85b45c7eed30540a5c4f43cb1cadb82ca
   languageName: node
   linkType: hard
 
