@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { useMockUserData } from "../mock/mockUseUserData";
-import { generateProfileData, generateTaxFiling } from "../factories";
+import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "../factories";
 import { useMockDate } from "../mock/useMockDate";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -15,16 +15,21 @@ describe("filing page", () => {
     jest.resetAllMocks();
   });
 
-  it("shows the filing details and due date", () => {
+  it("shows the filing details and correct due date", () => {
     useMockDate("2021-11-01");
 
     useMockUserData({
       profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
-      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1", dueDate: "2022-04-30" })],
+      taxFilingData: generateTaxFilingData({
+        filings: [
+          generateTaxFiling({}),
+          generateTaxFiling({ identifier: "filing-identifier-1", dueDate: "2022-04-30" }),
+        ],
+      }),
     });
 
     const filing = {
-      id: "id-1",
+      id: "filing-identifier-1",
       filename: "filename-1",
       name: "filing-name-1",
       urlSlug: "url-slug-1",

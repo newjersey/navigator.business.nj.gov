@@ -15,6 +15,10 @@ export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
 }
 
+export interface TaxFilingClient {
+  fetchForEntityId: (entityId: string) => Promise<TaxFilingData>;
+}
+
 export type SectionType = "PLAN" | "START" | "OPERATE";
 
 export interface SelfRegClient {
@@ -109,8 +113,15 @@ export interface UserData {
   taskProgress: Record<string, TaskProgress>;
   licenseData: LicenseData | undefined;
   preferences: Preferences;
-  taxFilings: TaxFiling[];
+  taxFilingData: TaxFilingData;
 }
+
+export type TaxFilingData = {
+  entityIdStatus: EntityIdStatus;
+  filings: TaxFiling[];
+};
+
+export type EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
 
 export type TaxFiling = {
   identifier: string;
@@ -157,7 +168,10 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       roadmapOpenSections: ["PLAN", "START"],
       roadmapOpenSteps: [],
     },
-    taxFilings: [],
+    taxFilingData: {
+      entityIdStatus: "UNKNOWN",
+      filings: [],
+    },
   };
 };
 

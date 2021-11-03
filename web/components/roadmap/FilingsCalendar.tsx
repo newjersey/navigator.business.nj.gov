@@ -25,9 +25,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       textColor = "text-green";
     }
 
-    const thisMonthFilings = props.taxFilings.filter(
-      (it) => dayjs(it.dueDate, "YYYY-MM-DD").month() === date.month()
-    );
+    const thisMonthFilings = props.taxFilings
+      .filter((it) => dayjs(it.dueDate, "YYYY-MM-DD").month() === date.month())
+      .sort((a, b) => (dayjs(a.dueDate, "YYYY-MM-DD").isBefore(dayjs(b.dueDate, "YYYY-MM-DD")) ? -1 : 1));
 
     return (
       <div data-testid={date.format("MMM YYYY")}>
@@ -38,7 +38,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           {thisMonthFilings
             .filter((filing) => props.filingsReferences[filing.identifier])
             .map((filing) => (
-              <div key={filing.identifier} className="line-height-1">
+              <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
                 <Link href={`filings/${props.filingsReferences[filing.identifier].urlSlug}`}>
                   <a
                     href={`filings/${props.filingsReferences[filing.identifier].urlSlug}`}

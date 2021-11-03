@@ -15,6 +15,7 @@ import {
   TaskLink,
   TaxFiling,
   UserData,
+  TaxFilingData,
 } from "@/lib/types/types";
 import {
   Industry,
@@ -54,7 +55,15 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     taskProgress: {},
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
-    taxFilings: [generateTaxFiling({})],
+    taxFilingData: generateTaxFilingData({}),
+    ...overrides,
+  };
+};
+
+export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
+  return {
+    entityIdStatus: "UNKNOWN",
+    filings: [generateTaxFiling({})],
     ...overrides,
   };
 };

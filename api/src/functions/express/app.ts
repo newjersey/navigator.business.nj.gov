@@ -15,6 +15,7 @@ import { WebserviceBusinessNameClient } from "../../client/WebserviceBusinessNam
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
 import { LogWriter } from "@libs/logWriter";
+import { FakeTaxFilingClient } from "../../client/FakeTaxFilingClient";
 
 const app = express();
 app.use(bodyParser.json());
@@ -56,6 +57,8 @@ const searchBusinessName = searchBusinessNameFactory(businessNameClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 
+const taxFilingClient = FakeTaxFilingClient();
+
 const myNJSelfRegClient = MyNJSelfRegClientFactory(
   {
     serviceToken: process.env.MYNJ_SERVICE_TOKEN || "",
@@ -66,7 +69,7 @@ const myNJSelfRegClient = MyNJSelfRegClientFactory(
 );
 
 app.use(bodyParser.json({ strict: false }));
-app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus));
+app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus, taxFilingClient));
 app.use("/api", businessNameRouterFactory(searchBusinessName));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, myNJSelfRegClient));
@@ -80,7 +83,7 @@ app.post("/api/mgmt/auth", (req, res) => {
 });
 
 app.get("/health", (_req, res) => {
-  res.send("Alive");
+  res.status(500).send("Alive");
 });
 
 export const handler = serverless(app);

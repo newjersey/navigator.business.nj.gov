@@ -18,11 +18,11 @@ export const RoadmapDefaults: Record<string, string> = {
   roadmapTitleNotSet: "Your Business Roadmap",
   roadmapTitleTemplate: "Business Roadmap for ${businessName}",
   loadingText: "Loading...",
-  operateDateSubmitButtonText: "Submit",
+  operateFormSubmitButtonText: "Submit",
   dateOfFormationEditText: "Edit your business formation date.",
   dateOfFormationErrorText: "Invalid Date",
   calendarFilingDueDateLabel: "Due",
-  calendarHeader: "Next 12 Months",
+  calendarHeader: "My Filing Calendar",
   calendarTooltip:
     "This is your personalized calendar of upcoming of taxes and filings that the New Jersey Department of Treasury has identified. Click on any item to learn about the filing and how you can comply.",
   dateOfFormationHelperText: "Your annual report is based on your business formation date.",
