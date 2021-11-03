@@ -10,6 +10,7 @@ import {
   SelfRegResponse,
   TaxFiling,
   UserData,
+  TaxFilingData,
 } from "../src/domain/types";
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
@@ -32,6 +33,7 @@ export const randomInt = (length = 8): number =>
   Math.floor(
     Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1)
   );
+
 export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
@@ -49,7 +51,15 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     taskProgress: {},
     licenseData: generateLicenseData({}),
     preferences: generatePreferences(),
-    taxFilings: [generateTaxFiling({})],
+    taxFilingData: generateTaxFilingData({}),
+    ...overrides,
+  };
+};
+
+export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
+  return {
+    entityIdStatus: "UNKNOWN",
+    filings: [generateTaxFiling({})],
     ...overrides,
   };
 };

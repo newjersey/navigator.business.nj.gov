@@ -28,7 +28,8 @@ const FilingPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
 
   const { userData } = useUserData();
-  const dueDate = dayjs(userData?.taxFilings[0].dueDate).format("MM/DD/YYYY");
+  const matchingFiling = userData?.taxFilingData.filings.find((it) => it.identifier === props.filing.id);
+  const dueDate = matchingFiling ? dayjs(matchingFiling.dueDate).format("MM/DD/YYYY") : "";
 
   return (
     <>

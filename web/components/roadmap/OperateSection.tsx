@@ -1,15 +1,12 @@
 import React, { ReactElement, useEffect } from "react";
-import { TextField } from "@mui/material";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
-import { DatePicker, LocalizationProvider } from "@mui/lab";
-import AdapterDayjs from "@mui/lab/AdapterDayjs";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
 import { Content } from "../Content";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
+import { OperateEntityIdForm } from "@/components/roadmap/OperateEntityIdForm";
 
 dayjs.extend(advancedFormat);
 
@@ -19,105 +16,36 @@ interface Props {
 }
 
 export const OperateSection = (props: Props): ReactElement => {
-  const [dateValue, setDateValue] = React.useState<Dayjs>(dayjs());
-  const [showDatepicker, setShowDatepicker] = React.useState<boolean>(true);
-  const [showError, setShowError] = React.useState<boolean>(false);
+  const [showEntityIdForm, setShowEntityIdForm] = React.useState<boolean>(true);
 
-  const { userData, update } = useUserData();
+  const { userData } = useUserData();
 
   useEffect(
     function showFilingsWhenTheyExist() {
-      if (userData && userData.profileData.dateOfFormation && userData.taxFilings.length > 0) {
-        setShowDatepicker(false);
+      if (
+        userData &&
+        userData.profileData.entityId &&
+        userData.taxFilingData.entityIdStatus === "EXISTS_AND_REGISTERED"
+      ) {
+        setShowEntityIdForm(false);
       }
     },
-    [setShowDatepicker, userData, userData?.taxFilings.length, userData?.profileData.dateOfFormation]
+    [setShowEntityIdForm, userData, userData?.taxFilingData.entityIdStatus, userData?.profileData.entityId]
   );
 
-  useEffect(
-    function setDatepickerValueToUserValue() {
-      if (userData?.profileData.dateOfFormation) {
-        setDateValue(dayjs(userData?.profileData.dateOfFormation, "YYYY-MM-DD"));
-      }
-    },
-    [userData?.profileData.dateOfFormation, showDatepicker]
-  );
-
-  const submitBusinessFormationDate = () => {
-    if (!userData) return;
-
-    if (!dateValue || !dateValue.isValid() || showError) return;
-
-    update({
-      ...userData,
-      profileData: {
-        ...userData.profileData,
-        dateOfFormation: dateValue.startOf("month").format("YYYY-MM-DD"),
-      },
-      taxFilings: [],
-    });
-  };
-
-  const renderDatepicker = (): ReactElement => (
+  const renderEntityIdForm = (): ReactElement => (
     <div className="padding-x-3 padding-top-3 padding-bottom-105 border-base-lighter border-1px radius-md">
-      <Content key="dateOfFormationMd">{props.displayContent.dateOfFormationMd}</Content>
-      <div className="mobile-lg:display-flex mobile-lg:flex-row mobile-lg:flex-justify margin-top-2">
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            views={["year", "month"]}
-            label=""
-            minDate={dayjs("1970-01-01")}
-            maxDate={dayjs()}
-            value={dateValue}
-            inputFormat={"MM/YYYY"}
-            onChange={(newValue: Dayjs | null): void => {
-              if (newValue) {
-                setDateValue(newValue);
-              }
-            }}
-            onError={(hasError: string | null) => {
-              setShowError(!!hasError);
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="standard"
-                helperText={showError ? RoadmapDefaults.dateOfFormationErrorText : " "}
-                inputProps={{
-                  ...params.inputProps,
-                  "data-testid": "date-of-formation-textfield",
-                }}
-              />
-            )}
-          />
-        </LocalizationProvider>
-        <button
-          className="usa-button mla height-5 margin-top-2 mobile-lg:margin-top-0"
-          onClick={submitBusinessFormationDate}
-          data-testid="date-of-formation-submit-button"
-        >
-          {RoadmapDefaults.operateDateSubmitButtonText}
-        </button>
-      </div>
+      <Content>{props.displayContent.entityIdMd}</Content>
+      <OperateEntityIdForm displayContent={props.displayContent} />
     </div>
   );
 
   const renderFilings = (): ReactElement => {
     return (
       <div className="tablet:margin-x-3">
-        <Content key="annualFilingMd">{props.displayContent.annualFilingMd}</Content>
-        <p>
-          {RoadmapDefaults.dateOfFormationHelperText}{" "}
-          <button
-            className="usa-button usa-button--unstyled underline"
-            onClick={() => setShowDatepicker(true)}
-          >
-            {RoadmapDefaults.dateOfFormationEditText}
-          </button>
-        </p>
-
+        <Content key="annualFilingMd">{props.displayContent.filingCalendarMd}</Content>
         <FilingsCalendar
-          taxFilings={userData?.taxFilings || []}
+          taxFilings={userData?.taxFilingData.filings || []}
           filingsReferences={props.filingsReferences}
         />
       </div>
@@ -126,7 +54,7 @@ export const OperateSection = (props: Props): ReactElement => {
 
   return (
     <SectionAccordion sectionType="OPERATE">
-      <div className="margin-y-3">{showDatepicker ? renderDatepicker() : renderFilings()}</div>
+      <div className="margin-y-3">{showEntityIdForm ? renderEntityIdForm() : renderFilings()}</div>
     </SectionAccordion>
   );
 };

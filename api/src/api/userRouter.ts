@@ -1,9 +1,14 @@
 import { Request, Response, Router } from "express";
-import { createEmptyUserData, UpdateLicenseStatus, UserData, UserDataClient } from "../domain/types";
+import {
+  createEmptyUserData,
+  TaxFilingClient,
+  UpdateLicenseStatus,
+  UserData,
+  UserDataClient,
+} from "../domain/types";
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
-import { calculateNextAnnualFilingDate } from "../domain/calculateNextAnnualFilingDate";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -36,7 +41,8 @@ export const getSignedInUserId = (req: Request): string => {
 
 export const userRouterFactory = (
   userDataClient: UserDataClient,
-  updateLicenseStatus: UpdateLicenseStatus
+  updateLicenseStatus: UpdateLicenseStatus,
+  taxFilingClient: TaxFilingClient
 ): Router => {
   const router = Router();
 
@@ -68,7 +74,7 @@ export const userRouterFactory = (
       });
   });
 
-  router.post("/users", (req, res) => {
+  router.post("/users", async (req, res) => {
     let userData = req.body as UserData;
     const postedUserBodyId = userData.user.id;
     if (getSignedInUserId(req) !== postedUserBodyId) {
@@ -76,11 +82,16 @@ export const userRouterFactory = (
       return;
     }
 
-    if (userData.profileData.dateOfFormation) {
-      const annualFilingDate = calculateNextAnnualFilingDate(userData.profileData.dateOfFormation);
+    if (userData.profileData.entityId) {
+      const taxFilingData = await taxFilingClient.fetchForEntityId(userData.profileData.entityId);
+      userData = { ...userData, taxFilingData };
+    } else {
       userData = {
         ...userData,
-        taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: annualFilingDate }],
+        taxFilingData: {
+          entityIdStatus: "UNKNOWN",
+          filings: [],
+        },
       };
     }
 

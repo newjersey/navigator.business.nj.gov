@@ -5,11 +5,13 @@ import { userRouterFactory } from "./userRouter";
 import {
   generateLicenseData,
   generateProfileData,
+  generateTaxFiling,
+  generateTaxFilingData,
   generateUser,
   generateUserData,
 } from "../../test/factories";
 import jwt from "jsonwebtoken";
-import { UserDataClient } from "../domain/types";
+import { EntityIdStatus, TaxFilingClient, UserDataClient } from "../domain/types";
 import dayjs from "dayjs";
 
 jest.mock("jsonwebtoken", () => ({
@@ -21,6 +23,7 @@ describe("userRouter", () => {
   let app: Express;
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubTaxFilingClient: jest.Mocked<TaxFilingClient>;
   let stubUpdateLicenseStatus: jest.Mock;
 
   beforeEach(async () => {
@@ -30,9 +33,12 @@ describe("userRouter", () => {
       findByEmail: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
+    stubTaxFilingClient = {
+      fetchForEntityId: jest.fn(),
+    };
     app = express();
     app.use(bodyParser.json());
-    app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus));
+    app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus, stubTaxFilingClient));
   });
 
   const cognitoPayload = ({ id }: { id: string }) => ({
@@ -151,39 +157,49 @@ describe("userRouter", () => {
       expect(response.body).toEqual(userData);
     });
 
-    it("calculates new annual filing date and updates it for dateOfFormation", async () => {
+    it("fetches new entity ID status and updates taxFilingData", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
-        profileData: generateProfileData({ dateOfFormation: "2021-03-01" }),
-        taxFilings: [],
+        profileData: generateProfileData({ entityId: "1234567890" }),
+        taxFilingData: generateTaxFilingData({ entityIdStatus: "UNKNOWN", filings: [] }),
       });
 
-      stubUserDataClient.put.mockResolvedValue(postedUserData);
+      const stubFilingData = {
+        entityIdStatus: "EXISTS_AND_REGISTERED" as EntityIdStatus,
+        filings: [generateTaxFiling({})],
+      };
+
+      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
+      stubTaxFilingClient.fetchForEntityId.mockResolvedValue(stubFilingData);
 
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
+      expect(stubTaxFilingClient.fetchForEntityId).toHaveBeenCalledWith("1234567890");
       expect(stubUserDataClient.put).toHaveBeenCalledWith({
         ...postedUserData,
-        taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
+        taxFilingData: stubFilingData,
       });
     });
 
-    it("calculates new annual filing date and overrides it if needed", async () => {
+    it("does not fetch data and overwrites taxFilingData if entity ID is empty", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
-        profileData: generateProfileData({ dateOfFormation: "2021-03-01" }),
-        taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
+        profileData: generateProfileData({ entityId: "" }),
+        taxFilingData: generateTaxFilingData({ entityIdStatus: "EXISTS_AND_REGISTERED", filings: [] }),
       });
 
-      stubUserDataClient.put.mockResolvedValue(postedUserData);
-
+      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
+      expect(stubTaxFilingClient.fetchForEntityId).not.toHaveBeenCalled();
       expect(stubUserDataClient.put).toHaveBeenCalledWith({
         ...postedUserData,
-        taxFilings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
+        taxFilingData: {
+          entityIdStatus: "UNKNOWN",
+          filings: [],
+        },
       });
     });
 

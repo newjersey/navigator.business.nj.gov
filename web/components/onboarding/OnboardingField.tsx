@@ -42,8 +42,14 @@ export const OnboardingField = (props: Props): ReactElement => {
 
   return (
     <div ref={headerRef}>
-      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent[props.fieldName].contentMd}</Content>
-      <div className="form-input margin-top-2">
+      {state.displayContent[props.fieldName].contentMd && (
+        <div className="margin-bottom-2">
+          <Content overrides={{ h2: headerLevelTwo }}>
+            {state.displayContent[props.fieldName].contentMd}
+          </Content>
+        </div>
+      )}
+      <div className="form-input">
         <TextField
           value={value ?? ""}
           id={props.fieldName}

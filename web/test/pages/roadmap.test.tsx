@@ -7,6 +7,7 @@ import {
   generateStep,
   generateTask,
   generateTaxFiling,
+  generateTaxFilingData,
 } from "@/test/factories";
 import {
   setMockUserDataResponse,
@@ -42,6 +43,16 @@ const setMobileScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
+const emptyDisplayContent = {
+  contentMd: "",
+  operateDisplayContent: {
+    filingCalendarMd: "",
+    entityIdErrorNotFoundMd: "",
+    entityIdErrorNotRegisteredMd: "",
+    entityIdMd: "",
+  },
+};
+
 describe("roadmap page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -57,10 +68,7 @@ describe("roadmap page", () => {
       <ThemeProvider theme={createTheme()}>
         <RoadmapPage
           filingsReferences={{} as Record<string, FilingReference>}
-          displayContent={{
-            contentMd: "",
-            operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
-          }}
+          displayContent={emptyDisplayContent}
         />
       </ThemeProvider>
     );
@@ -394,7 +402,7 @@ describe("roadmap page", () => {
       preferences: generatePreferences({
         roadmapOpenSections: ["PLAN", "START", "OPERATE"],
       }),
-      taxFilings: [],
+      taxFilingData: generateTaxFilingData({ entityIdStatus: "UNKNOWN" }),
     });
 
     const subject = renderRoadmapPage();
@@ -405,9 +413,10 @@ describe("roadmap page", () => {
 
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
-    expect(within(sectionOperate).getByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeVisible();
+    expect(within(sectionOperate).getByText(RoadmapDefaults.operateFormSubmitButtonText)).toBeVisible();
   });
-  it("renders the annual report link when business formation date is known", () => {
+
+  it("renders the calendar when entity ID is validated", () => {
     useMockDate("2021-11-01");
 
     useMockRoadmap({
@@ -422,12 +431,15 @@ describe("roadmap page", () => {
       preferences: generatePreferences({
         roadmapOpenSections: ["OPERATE"],
       }),
-      taxFilings: [
-        generateTaxFiling({
-          identifier: "some-tax-filing-identifier-1",
-          dueDate: "2021-11-30",
-        }),
-      ],
+      taxFilingData: generateTaxFilingData({
+        entityIdStatus: "EXISTS_AND_REGISTERED",
+        filings: [
+          generateTaxFiling({
+            identifier: "some-tax-filing-identifier-1",
+            dueDate: "2021-11-30",
+          }),
+        ],
+      }),
     });
 
     const filingRef: Record<string, FilingReference> = {
@@ -440,13 +452,7 @@ describe("roadmap page", () => {
     const renderRoadmapPage = (): RenderResult => {
       return render(
         <ThemeProvider theme={createTheme()}>
-          <RoadmapPage
-            filingsReferences={filingRef}
-            displayContent={{
-              contentMd: "",
-              operateDisplayContent: { dateOfFormationMd: "", annualFilingMd: "" },
-            }}
-          />
+          <RoadmapPage filingsReferences={filingRef} displayContent={emptyDisplayContent} />
         </ThemeProvider>
       );
     };

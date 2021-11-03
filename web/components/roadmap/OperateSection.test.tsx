@@ -2,9 +2,10 @@ import { fireEvent, render, RenderResult, within } from "@testing-library/react"
 import { OperateSection } from "@/components/roadmap/OperateSection";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
-  generateProfileData,
   generatePreferences,
+  generateProfileData,
   generateTaxFiling,
+  generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
 import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
@@ -13,8 +14,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import dayjs from "dayjs";
-import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
+import { EntityIdStatus, FilingReference, OperateDisplayContent, UserData } from "@/lib/types/types";
 import { getByTextAcrossElements, queryByTextAcrossElements } from "@/test/helpers";
 import { useMockDate } from "@/test/mock/useMockDate";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -26,8 +26,10 @@ jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const emptyContent: OperateDisplayContent = {
-  dateOfFormationMd: "",
-  annualFilingMd: "",
+  entityIdMd: "",
+  filingCalendarMd: "",
+  entityIdErrorNotRegisteredMd: "ENTITY ID NOT REGISTERED",
+  entityIdErrorNotFoundMd: "ENTITY ID NOT FOUND",
 };
 
 const emptyFilings: Record<string, FilingReference> = {};
@@ -35,7 +37,6 @@ const emptyFilings: Record<string, FilingReference> = {};
 describe("<OperateSection />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockDate("2021-10-01");
     useMockUserData({
       preferences: generatePreferences({
         roadmapOpenSections: ["OPERATE"],
@@ -49,163 +50,234 @@ describe("<OperateSection />", () => {
     return render(<ThemeProvider theme={createTheme()}>{element}</ThemeProvider>);
   };
 
-  it("renders datepicker when dateOfFormation is undefined", () => {
-    const subject = renderSection(
-      <OperateSection displayContent={emptyContent} filingsReferences={emptyFilings} />
-    );
-    expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeInTheDocument();
-    expect(subject.queryByText(RoadmapDefaults.calendarHeader)).not.toBeInTheDocument();
-  });
-
-  it("renders calendar when dateOfFormation is defined", () => {
-    useMockDate("2021-11-01");
-
-    useMockUserData({
-      profileData: generateProfileData({ dateOfFormation: "2020-01-01" }),
-      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
-    });
-
-    const filingRef: Record<string, FilingReference> = {
-      "some-tax-filing-identifier-1": {
-        name: "some-name-1",
-        urlSlug: "some-urlSlug-1",
-      },
-    };
-
-    const subject = renderSection(
-      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
-    );
-    expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).not.toBeInTheDocument();
-    expect(subject.queryByText(RoadmapDefaults.calendarHeader)).toBeInTheDocument();
-  });
-
-  it("updates date of formation to the first day of the provided month and year", () => {
-    const initialUserData = generateUserData({
-      taxFilings: [],
-      profileData: generateProfileData({ dateOfFormation: undefined }),
-    });
-    const subject = renderSection(
-      <WithStatefulUserData initialUserData={initialUserData}>
+  const statefulRender = (initialData: UserData = generateUserData({})): RenderResult => {
+    return renderSection(
+      <WithStatefulUserData initialUserData={initialData}>
         <OperateSection displayContent={emptyContent} filingsReferences={emptyFilings} />
       </WithStatefulUserData>
     );
+  };
 
-    fireEvent.click(subject.getByText(RoadmapDefaults.operateDateSubmitButtonText));
-    const currentMonthAndYear = dayjs().format("YYYY-MM");
+  describe("entity id form", () => {
+    const renderWithEntityIdStatus = (status: EntityIdStatus): RenderResult => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useMockUserData({
+        taxFilingData: generateTaxFilingData({
+          entityIdStatus: status,
+          filings: [],
+        }),
+      });
 
-    expect(currentUserData().profileData.dateOfFormation).toEqual(`${currentMonthAndYear}-01`);
-  });
-
-  it("brings back the datepicker when edit button is clicked", () => {
-    useMockDate("2021-11-01");
-
-    useMockUserData({
-      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
-      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
-    });
-
-    const filingRef: Record<string, FilingReference> = {
-      "some-tax-filing-identifier-1": {
-        name: "some-name-1",
-        urlSlug: "some-urlSlug-1",
-      },
+      return renderSection(<OperateSection displayContent={emptyContent} filingsReferences={emptyFilings} />);
     };
 
-    const subject = renderSection(
-      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
-    );
-    expect(subject.queryByText(RoadmapDefaults.calendarHeader)).toBeInTheDocument();
-    fireEvent.click(subject.getByText(RoadmapDefaults.dateOfFormationEditText));
+    describe("when to show form", () => {
+      it("shows form when entity ID status is UNKNOWN", () => {
+        const subject = renderWithEntityIdStatus("UNKNOWN");
+        expect(subject.getByLabelText("Entity id")).toBeInTheDocument();
+      });
 
-    expect(subject.queryByText(RoadmapDefaults.calendarHeader)).not.toBeInTheDocument();
-    expect(subject.queryByText(RoadmapDefaults.operateDateSubmitButtonText)).toBeInTheDocument();
-    expect((subject.getByTestId("date-of-formation-textfield") as HTMLInputElement).value).toEqual("04/2020");
-  });
+      it("shows form when entity ID status is NOT_FOUND", () => {
+        const subject = renderWithEntityIdStatus("NOT_FOUND");
+        expect(subject.getByLabelText("Entity id")).toBeInTheDocument();
+      });
 
-  it("displays next 12 months in calendar, starting in october", () => {
-    useMockDate("2021-10-01");
+      it("shows form when entity ID status is EXISTS_NOT_REGISTERED", () => {
+        const subject = renderWithEntityIdStatus("EXISTS_NOT_REGISTERED");
+        expect(subject.getByLabelText("Entity id")).toBeInTheDocument();
+      });
 
-    useMockUserData({
-      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
-      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
+      it("does not show form when entity ID status is EXISTS_AND_REGISTERED", () => {
+        useMockDate("2021-10-01");
+        const subject = renderWithEntityIdStatus("EXISTS_AND_REGISTERED");
+        expect(subject.queryByLabelText("Entity id")).not.toBeInTheDocument();
+      });
     });
 
-    const filingRef: Record<string, FilingReference> = {
-      "some-tax-filing-identifier-1": {
-        name: "some-name-1",
-        urlSlug: "some-urlSlug-1",
-      },
-    };
-
-    const subject = renderSection(
-      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
-    );
-    expect(getByTextAcrossElements(subject, "Oct 2021")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Nov 2021")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Dec 2021")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Jan 2022")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Feb 2022")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Mar 2022")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Apr 2022")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "May 2022")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Jun 2022")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Jul 2022")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Aug 2022")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Sep 2022")).toBeInTheDocument();
-
-    expect(queryByTextAcrossElements(subject, "Sep 2021")).not.toBeInTheDocument();
-    expect(queryByTextAcrossElements(subject, "Oct 2022")).not.toBeInTheDocument();
-  });
-
-  it("displays next 12 months in calendar, starting in november", () => {
-    useMockDate("2021-11-01");
-
-    useMockUserData({
-      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
-      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
+    const emptyEntityIdData = generateUserData({
+      profileData: generateProfileData({
+        entityId: undefined,
+      }),
+      taxFilingData: generateTaxFilingData({
+        entityIdStatus: "UNKNOWN",
+        filings: [],
+      }),
     });
 
-    const filingRef: Record<string, FilingReference> = {
-      "some-tax-filing-identifier-1": {
-        name: "some-name-1",
-        urlSlug: "some-urlSlug-1",
-      },
-    };
+    it("enters and submits entity id if it does not exist", () => {
+      const subject = statefulRender(emptyEntityIdData);
 
-    const subject = renderSection(
-      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
-    );
-    expect(getByTextAcrossElements(subject, "Nov 2021")).toBeInTheDocument();
-    expect(getByTextAcrossElements(subject, "Oct 2022")).toBeInTheDocument();
+      fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "1234567890" } });
+      fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
 
-    expect(queryByTextAcrossElements(subject, "Oct 2021")).not.toBeInTheDocument();
-    expect(queryByTextAcrossElements(subject, "Nov 2022")).not.toBeInTheDocument();
-  });
-
-  it("displays the annual filing within the correct month", () => {
-    useMockDate("2021-11-01");
-
-    useMockUserData({
-      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
-      taxFilings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1", dueDate: "2022-04-30" })],
+      expect(currentUserData().profileData.entityId).toEqual("1234567890");
     });
 
-    const filingRef: Record<string, FilingReference> = {
-      "some-tax-filing-identifier-1": {
-        name: "some-name-1",
-        urlSlug: "some-urlSlug-1",
-      },
-    };
+    it("overwrites existing taxFilingData with new entity ID", () => {
+      const existingData = generateUserData({
+        profileData: generateProfileData({ entityId: "1111111111" }),
+        taxFilingData: generateTaxFilingData({
+          entityIdStatus: "EXISTS_NOT_REGISTERED",
+          filings: [generateTaxFiling({})],
+        }),
+      });
+      const subject = statefulRender(existingData);
 
-    const subject = renderSection(
-      <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
-    );
-    const nextAnnualFilingMonth = subject.getByTestId("Apr 2022");
+      fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "1234567890" } });
+      fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
 
-    expect(
-      within(nextAnnualFilingMonth).getByText(RoadmapDefaults.calendarFilingDueDateLabel, { exact: false })
-    ).toBeInTheDocument();
-    expect(within(nextAnnualFilingMonth).getByText("some-name-1", { exact: false })).toBeInTheDocument();
-    expect(within(nextAnnualFilingMonth).getByText("4/30", { exact: false })).toBeInTheDocument();
+      expect(currentUserData().profileData.entityId).toEqual("1234567890");
+      expect(currentUserData().taxFilingData.entityIdStatus).toEqual("UNKNOWN");
+      expect(currentUserData().taxFilingData.filings).toEqual([]);
+    });
+
+    it("does not submit if entity ID is invalid", () => {
+      const subject = statefulRender(emptyEntityIdData);
+
+      fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "1234567890" } });
+      fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
+
+      fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "12345" } });
+      fireEvent.blur(subject.getByLabelText("Entity id"));
+      fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
+
+      expect(currentUserData().profileData.entityId).toEqual("1234567890");
+    });
+
+    it("displays error text if submitted entity ID does not exist", () => {
+      const subject = renderWithEntityIdStatus("NOT_FOUND");
+      expect(subject.getByText("ENTITY ID NOT FOUND")).toBeInTheDocument();
+    });
+
+    it("displays error text if submitted entity ID is not registered for taxes", () => {
+      const subject = renderWithEntityIdStatus("EXISTS_NOT_REGISTERED");
+      expect(subject.getByText("ENTITY ID NOT REGISTERED")).toBeInTheDocument();
+    });
+  });
+
+  describe("calendar view", () => {
+    it("displays next 12 months in calendar, starting in october", () => {
+      useMockDate("2021-10-01");
+
+      useMockUserData({
+        profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
+        taxFilingData: generateTaxFilingData({
+          entityIdStatus: "EXISTS_AND_REGISTERED",
+          filings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
+        }),
+      });
+
+      const filingRef: Record<string, FilingReference> = {
+        "some-tax-filing-identifier-1": {
+          name: "some-name-1",
+          urlSlug: "some-urlSlug-1",
+        },
+      };
+
+      const subject = renderSection(
+        <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+      );
+      expect(getByTextAcrossElements(subject, "Oct 2021")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Nov 2021")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Dec 2021")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Jan 2022")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Feb 2022")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Mar 2022")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Apr 2022")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "May 2022")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Jun 2022")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Jul 2022")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Aug 2022")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Sep 2022")).toBeInTheDocument();
+
+      expect(queryByTextAcrossElements(subject, "Sep 2021")).not.toBeInTheDocument();
+      expect(queryByTextAcrossElements(subject, "Oct 2022")).not.toBeInTheDocument();
+    });
+
+    it("displays next 12 months in calendar, starting in november", () => {
+      useMockDate("2021-11-01");
+
+      useMockUserData({
+        profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
+        taxFilingData: generateTaxFilingData({
+          entityIdStatus: "EXISTS_AND_REGISTERED",
+          filings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1" })],
+        }),
+      });
+
+      const filingRef: Record<string, FilingReference> = {
+        "some-tax-filing-identifier-1": {
+          name: "some-name-1",
+          urlSlug: "some-urlSlug-1",
+        },
+      };
+
+      const subject = renderSection(
+        <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+      );
+      expect(getByTextAcrossElements(subject, "Nov 2021")).toBeInTheDocument();
+      expect(getByTextAcrossElements(subject, "Oct 2022")).toBeInTheDocument();
+
+      expect(queryByTextAcrossElements(subject, "Oct 2021")).not.toBeInTheDocument();
+      expect(queryByTextAcrossElements(subject, "Nov 2022")).not.toBeInTheDocument();
+    });
+
+    it("displays the annual filing within the correct month", () => {
+      useMockDate("2021-11-01");
+
+      useMockUserData({
+        profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
+        taxFilingData: generateTaxFilingData({
+          entityIdStatus: "EXISTS_AND_REGISTERED",
+          filings: [generateTaxFiling({ identifier: "some-tax-filing-identifier-1", dueDate: "2022-04-30" })],
+        }),
+      });
+
+      const filingRef: Record<string, FilingReference> = {
+        "some-tax-filing-identifier-1": {
+          name: "some-name-1",
+          urlSlug: "some-urlSlug-1",
+        },
+      };
+
+      const subject = renderSection(
+        <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+      );
+      const nextAnnualFilingMonth = subject.getByTestId("Apr 2022");
+
+      expect(
+        within(nextAnnualFilingMonth).getByText(RoadmapDefaults.calendarFilingDueDateLabel, { exact: false })
+      ).toBeInTheDocument();
+      expect(within(nextAnnualFilingMonth).getByText("some-name-1", { exact: false })).toBeInTheDocument();
+      expect(within(nextAnnualFilingMonth).getByText("4/30", { exact: false })).toBeInTheDocument();
+    });
+
+    it("displays filings within a month in chronological order", () => {
+      useMockDate("2021-11-01");
+
+      useMockUserData({
+        profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
+        taxFilingData: generateTaxFilingData({
+          entityIdStatus: "EXISTS_AND_REGISTERED",
+          filings: [
+            generateTaxFiling({ identifier: "later-filing", dueDate: "2022-04-30" }),
+            generateTaxFiling({ identifier: "early-filing", dueDate: "2022-04-01" }),
+          ],
+        }),
+      });
+
+      const filingRef: Record<string, FilingReference> = {
+        "later-filing": { name: "Later Filing", urlSlug: "" },
+        "early-filing": { name: "Early Filing", urlSlug: "" },
+      };
+
+      const subject = renderSection(
+        <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+      );
+
+      const filingsInOrderOnPage = subject.getAllByTestId("filing").map((it) => it.textContent);
+      expect(filingsInOrderOnPage[0]).toContain("Early Filing");
+      expect(filingsInOrderOnPage[1]).toContain("Later Filing");
+    });
   });
 });

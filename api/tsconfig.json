@@ -14,7 +14,15 @@
     "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "serverless.ts"],
-  "exclude": ["node_modules/**/*", ".serverless/**/*", ".webpack/**/*", "_warmup/**/*", ".vscode/**/*",  "test/factories.ts", "src/**/*.test.ts",],
+  "exclude": [
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*",
+    "test/factories.ts",
+    "src/**/*.test.ts"
+  ],
   "ts-node": {
     "require": ["tsconfig-paths/register"],
     "moduleTypes": {
