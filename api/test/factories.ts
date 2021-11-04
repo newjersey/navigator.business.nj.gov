@@ -14,19 +14,7 @@ import {
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import dayjs from "dayjs";
-import { LoremIpsum } from "lorem-ipsum";
 import { Municipality } from "@shared/municipality";
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4,
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4,
-  },
-});
 
 export const randomInt = (length = 8): number =>
   Math.floor(
@@ -75,7 +63,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
     taxId: randomInt(9).toString(),
-    notes: lorem.generateParagraphs(3),
+    notes: `some-notes-${randomInt()}`,
     ...overrides,
   };
 };

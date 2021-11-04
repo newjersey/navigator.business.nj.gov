@@ -27,21 +27,6 @@ import {
 import dayjs from "dayjs";
 import { getSectionNames } from "@/lib/utils/helpers";
 
-import { LoremIpsum } from "lorem-ipsum";
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4,
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4,
-  },
-});
-
-export const getRandomParagraph = (paragraphs = 3): string => lorem.generateParagraphs(paragraphs);
-
 export const randomInt = (length = 8): number =>
   Math.floor(
     Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1)
@@ -98,7 +83,7 @@ export const generateProfileData = (
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
     taxId: randomInt(9).toString(),
-    notes: getRandomParagraph(),
+    notes: `some-notes-${randomInt()}`,
     ...overrides,
   };
 };
