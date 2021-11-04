@@ -4,7 +4,7 @@ import https from "https";
 
 export const getMyNJCertsFactory = (awsSecretId: string, passphrase: string): GetCertHttpsAgent => {
   return async (): Promise<https.Agent> => {
-    const secretsManager = new AWS.SecretsManager({ region: "us-east-1" });
+    const secretsManager = new AWS.SecretsManager({ region: process.env.AWS_REGION });
     try {
       let multilinedCert = "";
       let multilinedKey = "";
