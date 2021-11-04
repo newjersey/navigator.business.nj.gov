@@ -8,6 +8,7 @@ web/out/
 web/cypress/plugins
 web/cypress/support
 web/display-content/
+web/stories
 node_modules
 
 web/amplify/#current-cloud-backend/
