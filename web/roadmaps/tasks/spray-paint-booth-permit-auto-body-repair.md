@@ -15,4 +15,4 @@ If your business will offer spray paint services to vehicles, you must speak wit
 
 Find out if your `spray paint booth doesn't require a permit|spray-paint-booth-termination`.
 
-Contact DEP's Office of Permitting and Project Navigation at (609)292-3600 for additional guidance on your permiting needs.
+Contact DEP's Office of Permitting and Project Navigation at (609)292-3600 for additional guidance on your permitting needs.
