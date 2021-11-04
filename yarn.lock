@@ -1300,8 +1300,8 @@ __metadata:
     "@next/env": 12.0.2
     "@next/eslint-plugin-next": 12.0.2
     "@serverless/typescript": 2.64.1
-    "@swc/core": ^1.2.106
-    "@swc/jest": ^0.2.5
+    "@swc/core": 1.2.106
+    "@swc/jest": 0.2.5
     "@testing-library/dom": 8.10.1
     "@testing-library/jest-dom": 5.15.0
     "@testing-library/react": 12.1.2
@@ -1448,8 +1448,8 @@ __metadata:
     "@mui/styles": 5.0.2
     "@next/env": 12.0.2
     "@next/eslint-plugin-next": 12.0.2
-    "@swc/core": ^1.2.106
-    "@swc/jest": ^0.2.5
+    "@swc/core": 1.2.106
+    "@swc/jest": 0.2.5
     "@testing-library/dom": 8.10.1
     "@testing-library/jest-dom": 5.15.0
     "@testing-library/react": 12.1.2
@@ -4807,7 +4807,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.2.106":
+"@swc/core@npm:1.2.106":
   version: 1.2.106
   resolution: "@swc/core@npm:1.2.106"
   dependencies:
@@ -4853,7 +4853,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/jest@npm:^0.2.5":
+"@swc/jest@npm:0.2.5":
   version: 0.2.5
   resolution: "@swc/jest@npm:0.2.5"
   peerDependencies:
