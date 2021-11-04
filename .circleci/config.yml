@@ -194,7 +194,7 @@ jobs:
 
   deploy-dev:
     docker:
-      - image: node:14.18.0-buster
+      - image: node:14.18.1-buster
     steps:
       - set-dev-env-vars
       - deploy
@@ -206,7 +206,7 @@ jobs:
 
   deploy-staging:
     docker:
-      - image: node:14.18.0-buster
+      - image: node:14.18.1-buster
     steps:
       - set-staging-env-vars
       - deploy
@@ -217,7 +217,7 @@ jobs:
 
   deploy-production:
     docker:
-      - image: node:14.18.0-buster
+      - image: node:14.18.1-buster
     steps:
       - set-prod-env-vars
       - deploy
@@ -251,7 +251,72 @@ jobs:
 workflows:
   release-pipeline:
     jobs:
+      - staging-hold:
+          type: approval
+          filters:
+            branches:
+              only:
+                - /^release-.*/
+      - deploy-staging:
+          name: staging-deploy
+          filters:
+            branches:
+              only:
+                - /^release-.*/
+          requires:
+            - staging-hold
+      - production-hold:
+          type: approval
+          filters:
+            branches:
+              only:
+                - /^release-.*/
+          requires:
+            - staging-deploy
+      - deploy-production:
+          name: production-deploy
+          filters:
+            branches:
+              only:
+                - /^release-.*/
+          requires:
+            - production-hold
+
+  build-and-test:
+    jobs:
       - build:
+          filters:
+            branches:
+              ignore:
+                - /^release-.*/
+      - cypress-tests:
+          name: Cypress Tests - Group 1
+          suite: group1
+          filters:
+            branches:
+              ignore:
+                - main
+                - /^release-.*/
+      - cypress-tests:
+          name: Cypress Tests - Group 2
+          suite: group2
+          filters:
+            branches:
+              ignore:
+                - main
+                - /^release-.*/
+      - cypress-tests:
+          name: Cypress Tests - Group 1
+          enable-dashboard: true
+          suite: group1
+          filters:
+            branches:
+              only:
+                - main
+      - cypress-tests:
+          name: Cypress Tests - Group 2
+          enable-dashboard: true
+          suite: group2
           filters:
             branches:
               only:
@@ -264,71 +329,3 @@ workflows:
                 - main
           requires:
             - build
-      - staging-hold:
-          type: approval
-          requires:
-            - dev-deploy
-            - Cypress Tests - Group 1
-            - Cypress Tests - Group 2
-          filters:
-            branches:
-              only:
-                - main
-      - deploy-staging:
-          name: staging-deploy
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - staging-hold
-      - production-hold:
-          type: approval
-          requires:
-            - staging-deploy
-      - deploy-production:
-          name: production-deploy
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - production-hold
-      - cypress-tests:
-          name: Cypress Tests - Group 1
-          enable-dashboard: true
-          suite: group1
-          filters:
-            branches:
-              only:
-                - main
-      - cypress-tests:
-          name: Cypress Tests - Group 2
-          enable-dashboard: true
-          suite: group2
-          filters:
-            branches:
-              only:
-                - main
-
-  build-and-test:
-    jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - main
-      - cypress-tests:
-          name: Cypress Tests - Group 1
-          suite: group1
-          filters:
-            branches:
-              ignore:
-                - main
-      - cypress-tests:
-          name: Cypress Tests - Group 2
-          suite: group2
-          filters:
-            branches:
-              ignore:
-                - main
