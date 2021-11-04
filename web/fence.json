@@ -37,6 +37,7 @@
     "@jest/types",
     "@mui/lab/AdapterDayjs",
     "dayjs/plugin/advancedFormat",
-    "@businessnjgovnavigator/shared"
+    "@businessnjgovnavigator/shared",
+    "broken-link-checker"
   ]
 }

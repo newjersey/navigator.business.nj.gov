@@ -9,6 +9,7 @@ module.exports = {
     MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
     FEATURE_DISABLE_OPERATE: process.env.FEATURE_DISABLE_OPERATE,
   },
+  staticPageGenerationTimeout: 120,
   webpack: (config) => {
     config.module.rules.push({
       test: /\.md$/,

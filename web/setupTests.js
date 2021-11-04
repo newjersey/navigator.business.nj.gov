@@ -2,6 +2,7 @@
 require("@testing-library/jest-dom");
 
 process.env.API_BASE_URL = "";
+process.env.REDIRECT_URL = "http://www.example.com";
 
 global.scrollTo = jest.fn();
 global.gtag = jest.fn();

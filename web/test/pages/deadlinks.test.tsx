@@ -8,7 +8,9 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 describe("Deadlinks page", () => {
   it("displays content when password is successful", async () => {
-    const subject = render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} />);
+    const subject = render(
+      <DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} deadLinks={{}} />
+    );
     expect(subject.queryByText("task1")).not.toBeInTheDocument();
     expect(subject.queryByText("info1")).not.toBeInTheDocument();
 
@@ -23,7 +25,9 @@ describe("Deadlinks page", () => {
   });
 
   it("hides content when password is unsuccessful", () => {
-    const subject = render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} />);
+    const subject = render(
+      <DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} deadLinks={{}} />
+    );
     expect(subject.queryByText("task1")).not.toBeInTheDocument();
     expect(subject.queryByText("info1")).not.toBeInTheDocument();
 
