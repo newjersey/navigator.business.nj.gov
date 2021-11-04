@@ -1,0 +1,20 @@
+{
+  "addOns": [
+    {
+      "step": 2,
+      "weight": 100,
+      "task": "research-insurance-needs-home-contractor"
+    },
+    {
+      "step": 5,
+      "weight": 100,
+      "task": "register-consumer-affairs"
+    }
+  ],
+  "modifications": [
+    {
+      "taskToReplaceFilename": "get-insurance",
+      "replaceWithFilename": "get-insurance-hic"
+    }
+  ]
+}

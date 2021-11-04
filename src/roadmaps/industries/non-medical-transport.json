@@ -1,0 +1,20 @@
+{
+  "addOns": [
+    {
+      "step": 2,
+      "weight": 1,
+      "task": "payment-structure-non-medical-trans"
+    },
+    {
+      "step": 4,
+      "weight": 2,
+      "task": "register-vehicle"
+    },
+    {
+      "step": 4,
+      "weight": 3,
+      "task": "logisticare"
+    }
+  ],
+  "modifications": []
+}

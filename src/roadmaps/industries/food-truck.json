@@ -1,0 +1,44 @@
+{
+  "addOns": [
+    {
+      "step": 2,
+      "weight": 1,
+      "task": "evaluate-your-location"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "apply-for-food-truck-license"
+    },
+    {
+      "step": 4,
+      "weight": 2,
+      "task": "zoning"
+    },
+    {
+      "step": 5,
+      "weight": 100,
+      "task": "food-safety-course"
+    },
+    {
+      "step": 4,
+      "weight": 3,
+      "task": "sign-lease"
+    },
+    {
+      "step": 5,
+      "weight": 2,
+      "task": "town-mercantile-license"
+    }
+  ],
+  "modifications": [
+    {
+      "taskToReplaceFilename": "zoning",
+      "replaceWithFilename": "zoning-food-truck"
+    },
+    {
+      "taskToReplaceFilename": "sign-lease",
+      "replaceWithFilename": "sign-lease-food-truck"
+    }
+  ]
+}

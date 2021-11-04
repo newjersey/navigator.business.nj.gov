@@ -1,0 +1,22 @@
+{
+  "name": "@businessnjgovnavigator/content",
+  "version": "1.0.0",
+  "description": "A content library for the business.nj.gov navigator",
+  "private": true,
+  "main": "src",
+  "scripts": {
+    "prettier": "prettier --write . --ignore-path=./.eslintignore",
+    "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
+    "spellcheck": "cspell **/*.md -c ../cspell.json"
+  },
+  "prettier": {
+    "printWidth": 110,
+    "endOfLine": "auto"
+  },
+  "devDependencies": {
+    "@types/node": "14.17.32",
+    "cross-env": "7.0.3",
+    "cspell": "5.12.6",
+    "prettier": "2.4.1"
+  }
+}
