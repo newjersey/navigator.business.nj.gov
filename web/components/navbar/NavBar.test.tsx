@@ -1,3 +1,4 @@
+import React from "react";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";

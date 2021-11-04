@@ -1,3 +1,4 @@
+import React from "react";
 import { render } from "@testing-library/react";
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import CompleteSignin from "@/pages/complete-signin";

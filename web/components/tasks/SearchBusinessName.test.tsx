@@ -1,3 +1,4 @@
+import React from "react";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";

@@ -1,3 +1,4 @@
+import React from "react";
 import { useUserData, UseUserDataResponse } from "./useUserData";
 import { generateUseUserDataResponse, withAuth, withUserDataError } from "@/test/helpers";
 import { BusinessUser } from "@/lib/types/types";

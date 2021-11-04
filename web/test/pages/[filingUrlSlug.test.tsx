@@ -1,3 +1,4 @@
+import React from "react";
 import { render } from "@testing-library/react";
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { useMockUserData } from "../mock/mockUseUserData";

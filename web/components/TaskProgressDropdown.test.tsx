@@ -1,3 +1,4 @@
+import React from "react";
 import { TaskProgressDropdown } from "./TaskProgressDropdown";
 import { fireEvent, render } from "@testing-library/react";
 import { TaskProgressLookup } from "@/display-content/TaskProgressLookup";

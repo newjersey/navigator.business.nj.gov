@@ -1,3 +1,4 @@
+import React from "react";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import { MiniRoadmap } from "./MiniRoadmap";
 import { generatePreferences, generateStep, generateTask, generateUserData } from "@/test/factories";

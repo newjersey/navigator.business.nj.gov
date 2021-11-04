@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 type TagVariant = "primary" | "base" | "info" | "error" | "accent-warm" | "noBgColor" | "noBgColorWithBorder";
 

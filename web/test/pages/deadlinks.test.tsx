@@ -1,3 +1,4 @@
+import React from "react";
 import DeadLinksPage from "@/pages/mgmt/deadlinks";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";

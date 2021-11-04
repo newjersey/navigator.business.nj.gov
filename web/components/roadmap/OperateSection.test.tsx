@@ -18,7 +18,7 @@ import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
 import { getByTextAcrossElements, queryByTextAcrossElements } from "@/test/helpers";
 import { useMockDate } from "@/test/mock/useMockDate";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

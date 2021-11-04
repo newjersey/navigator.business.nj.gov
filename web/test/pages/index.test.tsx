@@ -1,3 +1,4 @@
+import React from "react";
 import Home from "@/pages/index";
 import { withAuth } from "@/test/helpers";
 import { generateUser } from "@/test/factories";

@@ -1,3 +1,4 @@
+import React from "react";
 import { fireEvent, render, RenderResult, within } from "@testing-library/react";
 import RoadmapPage from "@/pages/roadmap";
 import {
