@@ -1,8 +1,8 @@
 import React from "react";
 import { TaskProgressDropdown } from "./TaskProgressDropdown";
 import { fireEvent, render } from "@testing-library/react";
-import { TaskProgressLookup } from "@/display-content/TaskProgressLookup";
-import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { TaskProgressLookup } from "@/display-defaults/TaskProgressLookup";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 
 describe("<TaskProgressDropdown />", () => {
   const notStartedText = TaskProgressLookup.NOT_STARTED;

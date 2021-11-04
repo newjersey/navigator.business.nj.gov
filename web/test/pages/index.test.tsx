@@ -6,7 +6,7 @@ import { useMockUserData, setMockUserDataResponse } from "@/test/mock/mockUseUse
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
+import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

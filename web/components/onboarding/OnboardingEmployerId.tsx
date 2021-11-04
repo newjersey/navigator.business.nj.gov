@@ -2,7 +2,7 @@ import { ProfileFields, ProfileFieldErrorMap } from "@/lib/types/types";
 import React, { ReactElement, FocusEvent } from "react";
 import { OnboardingField } from "./OnboardingField";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
-import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { templateEval } from "@/lib/utils/helpers";
 
 interface Props {

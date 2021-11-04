@@ -10,7 +10,7 @@ export type FilingUrlSlugParam = {
   filingUrlSlug: string;
 };
 
-const filingsDir = path.join(process.cwd(), "filings");
+const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
 
 export const loadAllFilingUrlSlugs = (): PathParams<FilingUrlSlugParam>[] => {
   const fileNames = fs.readdirSync(filingsDir);

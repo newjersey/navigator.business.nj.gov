@@ -22,7 +22,7 @@ import {
   OnboardingStatus,
 } from "@/lib/types/types";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ProfileDefaults } from "@/display-content/ProfileDefaults";
+import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { OnboardingContext } from "@/pages/onboarding";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";

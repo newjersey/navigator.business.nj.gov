@@ -1,6 +1,6 @@
 import React, { FormEvent, ReactElement, useEffect, useState } from "react";
 import { NumericField } from "@/components/onboarding/NumericField";
-import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { OnboardingContext } from "@/pages/onboarding";
 import {

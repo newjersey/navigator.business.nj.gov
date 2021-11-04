@@ -1,6 +1,6 @@
 import { LicenseStatus, LicenseStatusItem } from "@/lib/types/types";
 import React, { ReactElement, useEffect, useState } from "react";
-import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
+import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";

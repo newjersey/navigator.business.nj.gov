@@ -48,7 +48,7 @@ commands:
           command: yarn lint
       - run:
           name: Run Spell Checker
-          command: yarn workspace @businessnjgovnavigator/web run spellcheck
+          command: yarn run spellcheck
       - run:
           name: Run Fences
           command: yarn fences

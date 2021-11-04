@@ -34,7 +34,7 @@ import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLega
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
-import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import {
   OnboardingErrorLookup,
   OnboardingStatusLookup,

@@ -1,4 +1,4 @@
-import { NavDefaults } from "@/display-content/NavDefaults";
+import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import React, { ReactElement, useState } from "react";
 import { Icon } from "@/components/njwds/Icon";

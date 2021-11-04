@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import analytics from "@/lib/utils/analytics";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { ProfileData } from "@/lib/types/types";

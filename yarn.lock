@@ -2395,6 +2395,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@businessnjgovnavigator/content@workspace:content":
+  version: 0.0.0-use.local
+  resolution: "@businessnjgovnavigator/content@workspace:content"
+  dependencies:
+    "@types/node": 14.17.32
+    cross-env: 7.0.3
+    cspell: 5.12.4
+    prettier: 2.4.1
+  languageName: unknown
+  linkType: soft
+
 "@businessnjgovnavigator/root@workspace:.":
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."

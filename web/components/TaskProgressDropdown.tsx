@@ -5,10 +5,10 @@ import { TaskProgress } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import analytics from "@/lib/utils/analytics";
-import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { ToastAlert } from "./njwds-extended/ToastAlert";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { TaskProgressLookup } from "@/display-content/TaskProgressLookup";
+import { TaskProgressLookup } from "@/display-defaults/TaskProgressLookup";
 import { Tag } from "./njwds-extended/Tag";
 
 const useStyles = makeStyles(() =>

@@ -6,14 +6,14 @@ import matter from "gray-matter";
 import { AddOn, IndustryRoadmap, TaskModification } from "@/lib/roadmap/roadmapBuilder";
 import { HtmlUrlChecker } from "broken-link-checker";
 
-const roadmapsDir = path.join(process.cwd(), "roadmaps");
-const displayContentDir = path.join(process.cwd(), "display-content");
-const filingsDir = path.join(process.cwd(), "filings");
+const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
+const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
+const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
 const tasksDir = path.join(roadmapsDir, "tasks");
 const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
 const modificationsDir = path.join(roadmapsDir, "modifications");
-const contextualInfoDir = path.join(process.cwd(), "display-content", "contextual-information");
+const contextualInfoDir = path.join(displayContentDir, "contextual-information");
 
 type Filenames = {
   tasks: string[];

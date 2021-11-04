@@ -28,7 +28,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { ProfileDefaults } from "@/display-content/ProfileDefaults";
+import { ProfileDefaults } from "@/display-defaults//ProfileDefaults";
 import { Municipality } from "@businessnjgovnavigator/shared";
 
 jest.mock("next/router");

@@ -39,6 +39,7 @@
     "dayjs/plugin/advancedFormat",
     "@businessnjgovnavigator/shared",
     "broken-link-checker",
-    "@storybook/react"
+    "@storybook/react",
+    "@businessnjgovnavigator/content/roadmaps/task-dependencies.json"
   ]
 }

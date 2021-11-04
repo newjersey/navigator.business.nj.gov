@@ -8,7 +8,7 @@ import {
   generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
-import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import {
   currentUserData,
   setupStatefulUserDataContext,

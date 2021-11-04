@@ -16,7 +16,7 @@ import { NextSeo } from "next-seo";
 import { NavBar } from "@/components/navbar/NavBar";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import dayjs from "dayjs";
-import { FilingDefaults } from "@/display-content/FilingDefaults";
+import { FilingDefaults } from "@/display-defaults/FilingDefaults";
 import { Tag } from "@/components/njwds-extended/Tag";
 
 interface Props {

@@ -3,7 +3,7 @@ import React, { ReactElement, ReactNode } from "react";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SectionType } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
-import { SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 
 interface Props {

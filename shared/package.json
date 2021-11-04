@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "A shared library for the business.nj.gov navigator",
   "private": true,
-  "main": "lib/index.js",
+  "main": "lib/shared/src/index.js",
   "files": [
     "lib"
   ],
-  "typings": "./lib/index.d.ts",
+  "typings": "./lib/shared/src/index.d.ts",
   "scripts": {
     "build": "tsc --build",
     "clean": "rimraf lib",

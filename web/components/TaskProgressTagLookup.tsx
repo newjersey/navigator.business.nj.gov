@@ -1,7 +1,7 @@
 import { TaskProgress } from "@/lib/types/types";
 import React, { ReactElement } from "react";
 import { Tag } from "./njwds-extended/Tag";
-import { TaskProgressLookup } from "@/display-content/TaskProgressLookup";
+import { TaskProgressLookup } from "@/display-defaults/TaskProgressLookup";
 
 export const TaskProgressTagLookup: Record<TaskProgress, ReactElement> = {
   NOT_STARTED: (
