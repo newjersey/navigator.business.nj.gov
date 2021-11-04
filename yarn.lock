@@ -1308,7 +1308,7 @@ __metadata:
     lorem-ipsum: 2.0.4
     prettier: 2.4.1
     rimraf: 3.0.2
-    serverless: 2.64.1
+    serverless: 2.65.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.2.0
@@ -1435,7 +1435,7 @@ __metadata:
     remark-react: 8.0.0
     rimraf: 3.0.2
     sass: 1.43.4
-    serverless: 2.64.1
+    serverless: 2.65.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.2.0
@@ -4459,7 +4459,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/cli@npm:^1.5.2":
+"@serverless/cli@npm:^1.5.3":
   version: 1.5.3
   resolution: "@serverless/cli@npm:1.5.3"
   dependencies:
@@ -4490,9 +4490,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/components@npm:^3.17.1":
-  version: 3.17.1
-  resolution: "@serverless/components@npm:3.17.1"
+"@serverless/components@npm:^3.17.2":
+  version: 3.17.2
+  resolution: "@serverless/components@npm:3.17.2"
   dependencies:
     "@serverless/platform-client": ^4.2.2
     "@serverless/platform-client-china": ^2.2.0
@@ -4525,7 +4525,7 @@ __metadata:
     uuid: ^8.3.2
   bin:
     components: bin/bin
-  checksum: 78e324e8e00818029f45fd795a0bf1c959b5fdf53e3e9aa28852e209429581a366106a2be077ca2d18b620993da2db6a462aa4194245b54c7632613b4f834010
+  checksum: 0b4677aebb5f54c2f28a1cd7d0c3ec4e88126665ac9ee75e91470c711faf0ef635a752341b41dd3f6cfe704e95fa87940c574807ba4793c1eb827ce6e510db89
   languageName: node
   linkType: hard
 
@@ -4542,13 +4542,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/dashboard-plugin@npm:^5.5.0":
-  version: 5.5.0
-  resolution: "@serverless/dashboard-plugin@npm:5.5.0"
+"@serverless/dashboard-plugin@npm:^5.5.1":
+  version: 5.5.1
+  resolution: "@serverless/dashboard-plugin@npm:5.5.1"
   dependencies:
     "@serverless/event-mocks": ^1.1.1
     "@serverless/platform-client": ^4.3.0
-    "@serverless/utils": ^5.18.0
+    "@serverless/utils": ^5.20.0
     chalk: ^4.1.2
     child-process-ext: ^2.1.1
     chokidar: ^3.5.2
@@ -4561,13 +4561,13 @@ __metadata:
     memoizee: ^0.4.15
     ncjsm: ^4.2.0
     node-dir: ^0.1.17
-    node-fetch: ^2.6.5
+    node-fetch: ^2.6.6
     open: ^7.4.2
     semver: ^7.3.5
-    simple-git: ^2.46.0
+    simple-git: ^2.47.0
     uuid: ^8.3.2
     yamljs: ^0.3.0
-  checksum: 2b4d7f0ae7dedcd9914000d3798339056b00418b37230eeb6b456cb9471148d44d0ca5f26055479f82f75a94ee27b7d34a644deda91ebc698e4aa15ca5a2c05f
+  checksum: b2cbdad0d9f9a0661ba69f648ee46b0bdc7148d682cf723f40715b8513941ccf889d5e3aa0378fbb40b0d25cb7afcb47ed83df90bc37c2fecf830dd51d85db2f
   languageName: node
   linkType: hard
 
@@ -4699,9 +4699,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/utils@npm:^5.18.0, @serverless/utils@npm:^5.19.0":
-  version: 5.19.0
-  resolution: "@serverless/utils@npm:5.19.0"
+"@serverless/utils@npm:^5.20.0":
+  version: 5.20.0
+  resolution: "@serverless/utils@npm:5.20.0"
   dependencies:
     archive-type: ^4.0.0
     chalk: ^4.1.2
@@ -4722,7 +4722,7 @@ __metadata:
     jwt-decode: ^3.1.2
     lodash: ^4.17.21
     log: ^6.3.1
-    log-node: ^8.0.1
+    log-node: ^8.0.2
     make-dir: ^3.1.0
     memoizee: ^0.4.15
     ncjsm: ^4.2.0
@@ -4732,7 +4732,7 @@ __metadata:
     uni-global: ^1.0.0
     uuid: ^8.3.2
     write-file-atomic: ^3.0.3
-  checksum: 75530af200decfb333e665090d155205e250135bcc6bb0d7d1cbdafc0d9ccd76df3820da21419e6462a963d4d4417d4e21ee7708f3b064b04178ccc0e5abf189
+  checksum: 066e0e3f313cc5c6bd22b7e8cd064fed5daefd5bd6b0ed515ff0467b608342ee9f8e37d8b59fae45180ce966659d3b0e9bf40806bd02695adb1734884ce6ef52
   languageName: node
   linkType: hard
 
@@ -6470,7 +6470,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:*, aws-sdk@npm:2.1019.0, aws-sdk@npm:^2.1011.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.834.0":
+"aws-sdk@npm:*, aws-sdk@npm:^2.1021.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.834.0":
+  version: 2.1021.0
+  resolution: "aws-sdk@npm:2.1021.0"
+  dependencies:
+    buffer: 4.9.2
+    events: 1.1.1
+    ieee754: 1.1.13
+    jmespath: 0.15.0
+    querystring: 0.2.0
+    sax: 1.2.1
+    url: 0.10.3
+    uuid: 3.3.2
+    xml2js: 0.4.19
+  checksum: 057bb0cc7571bfb3e66f7dfc437d369e2abb8af966bfc02f8ccff74a4dec98768cfe8b4eac9179c93d8d9a5986362289f298b31fcb9addeda8d2432736a1ab15
+  languageName: node
+  linkType: hard
+
+"aws-sdk@npm:2.1019.0":
   version: 2.1019.0
   resolution: "aws-sdk@npm:2.1019.0"
   dependencies:
@@ -10741,7 +10758,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"filesize@npm:^8.0.3":
+"filesize@npm:^8.0.6":
   version: 8.0.6
   resolution: "filesize@npm:8.0.6"
   checksum: a16d7bd88c943ff55185559eabd4e9779d531b281a39a4a884659fd6f58bd29c20337ad7d58dc5492477df484bb9579a7ca6ad77e57a25908a51f8224790aaa3
@@ -14833,7 +14850,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"log-node@npm:^8.0.1":
+"log-node@npm:^8.0.2":
   version: 8.0.2
   resolution: "log-node@npm:8.0.2"
   dependencies:
@@ -16047,7 +16064,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.5":
+"node-fetch@npm:^2.6.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.6":
   version: 2.6.6
   resolution: "node-fetch@npm:2.6.6"
   dependencies:
@@ -19130,19 +19147,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:2.64.1":
-  version: 2.64.1
-  resolution: "serverless@npm:2.64.1"
+"serverless@npm:2.65.0":
+  version: 2.65.0
+  resolution: "serverless@npm:2.65.0"
   dependencies:
-    "@serverless/cli": ^1.5.2
-    "@serverless/components": ^3.17.1
-    "@serverless/dashboard-plugin": ^5.5.0
+    "@serverless/cli": ^1.5.3
+    "@serverless/components": ^3.17.2
+    "@serverless/dashboard-plugin": ^5.5.1
     "@serverless/platform-client": ^4.3.0
-    "@serverless/utils": ^5.19.0
+    "@serverless/utils": ^5.20.0
     ajv: ^6.12.6
     ajv-keywords: ^3.5.2
     archiver: ^5.3.0
-    aws-sdk: ^2.1011.0
+    aws-sdk: ^2.1021.0
     bluebird: ^3.7.2
     boxen: ^5.1.2
     cachedir: ^2.3.0
@@ -19158,7 +19175,7 @@ __metadata:
     essentials: ^1.1.1
     ext: ^1.6.0
     fastest-levenshtein: ^1.0.12
-    filesize: ^8.0.3
+    filesize: ^8.0.6
     fs-extra: ^9.1.0
     get-stdin: ^8.0.0
     globby: ^11.0.4
@@ -19174,7 +19191,7 @@ __metadata:
     memoizee: ^0.4.15
     micromatch: ^4.0.4
     ncjsm: ^4.2.0
-    node-fetch: ^2.6.5
+    node-fetch: ^2.6.6
     object-hash: ^2.2.0
     path2: ^0.1.0
     process-utils: ^4.0.0
@@ -19193,7 +19210,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: cde81b6ed7c3f8d8c009ddb2453517d1c3ea06a59d527e908fc7d89d5fe9228318d86d65a4fc4d62de99b72b7dc30dbf494f759cc7a06b30f1d6fc8f0e7884d6
+  checksum: 4b87f3a34c7c187e075c79f8a0bb8ab634b67f0ddbb46e2f0f4be669cb8904a5b074dbeed30e45f5a35c5b3aa4992614512062376c7c9a9ee32e4eb2e6815b12
   languageName: node
   linkType: hard
 
@@ -19350,7 +19367,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-git@npm:^2.46.0":
+"simple-git@npm:^2.47.0":
   version: 2.47.0
   resolution: "simple-git@npm:2.47.0"
   dependencies:
