@@ -2,7 +2,7 @@ import React, { ChangeEvent, ReactElement, useState } from "react";
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useRouter } from "next/router";
-import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
+import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { Alert } from "@/components/njwds/Alert";
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 

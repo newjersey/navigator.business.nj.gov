@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { FormControl, TextField } from "@mui/material";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { SearchBusinessNamesDefaults } from "@/display-content/tasks/search-business-names/SearchBusinessNamesDefaults";
+import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";
 import * as api from "@/lib/api-client/apiClient";
 import { NameAvailability, Task } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";

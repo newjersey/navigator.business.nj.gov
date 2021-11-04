@@ -1,4 +1,4 @@
-import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import React, { ReactElement } from "react";
 import analytics from "@/lib/utils/analytics";
 

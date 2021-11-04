@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { NavDefaults } from "@/display-content/NavDefaults";
+import { NavDefaults } from "@/display-defaults/NavDefaults";
 
 interface Props {
   className?: string;

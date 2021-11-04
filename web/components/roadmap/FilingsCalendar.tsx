@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { getCurrentDate } from "@/lib/utils/getCurrentDate";
 import { FilingReference, TaxFiling } from "@/lib/types/types";
 import dayjs from "dayjs";
-import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { Icon } from "@/components/njwds/Icon";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { useMediaQuery } from "@mui/material";

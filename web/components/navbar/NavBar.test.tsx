@@ -3,13 +3,13 @@ import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { NavBar } from "@/components/navbar/NavBar";
 import { fireEvent, render, RenderResult, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
-import { NavDefaults } from "@/display-content/NavDefaults";
+import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { useUndefinedUserData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { generateRoadmap, generateStep, generateTask, generateUser } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { ReactNode } from "react";
 import userEvent from "@testing-library/user-event";
-import { SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { FilingReference } from "@/lib/types/types";
 import { useMockRouter } from "@/test/mock/mockRouter";
 

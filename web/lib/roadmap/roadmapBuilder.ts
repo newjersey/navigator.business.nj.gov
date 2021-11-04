@@ -65,15 +65,16 @@ const importRoadmap = async (industryId: string): Promise<IndustryRoadmap> => {
   if (process.env.NODE_ENV === "test") {
     return (await import(`@/lib/roadmap/fixtures/industries/${industryId}.json`)).default as IndustryRoadmap;
   }
-  return (await import(`../../roadmaps/industries/${industryId}.json`)).default as IndustryRoadmap;
+  return (await import(`@businessnjgovnavigator/content/roadmaps/industries/${industryId}.json`))
+    .default as IndustryRoadmap;
 };
 
 const importGenericSteps = async (): Promise<GenericStep[]> => {
   if (process.env.NODE_ENV === "test") {
-    return (await import(`@/lib/roadmap/fixtures/steps.json`)).default as GenericStep[];
+    return (await import(`@/lib/roadmap/fixtures/steps.json`)).steps as GenericStep[];
   }
 
-  return (await import(`../../roadmaps/steps.json`)).default as GenericStep[];
+  return (await import(`@businessnjgovnavigator/content/roadmaps/steps.json`)).steps as GenericStep[];
 };
 
 const importAddOn = async (relativePath: string): Promise<AddOn[]> => {
@@ -81,7 +82,8 @@ const importAddOn = async (relativePath: string): Promise<AddOn[]> => {
     return (await import(`@/lib/roadmap/fixtures/add-ons/${relativePath}.json`)).default as AddOn[];
   }
 
-  return (await import(`../../roadmaps/add-ons/${relativePath}.json`)).default as AddOn[];
+  return (await import(`@businessnjgovnavigator/content/roadmaps/add-ons/${relativePath}.json`))
+    .default as AddOn[];
 };
 
 const importModification = async (relativePath: string): Promise<TaskModification[]> => {
@@ -90,7 +92,8 @@ const importModification = async (relativePath: string): Promise<TaskModificatio
       .default as TaskModification[];
   }
 
-  return (await import(`../../roadmaps/modifications/${relativePath}.json`)).default as TaskModification[];
+  return (await import(`@businessnjgovnavigator/content/roadmaps/modifications/${relativePath}.json`))
+    .default as TaskModification[];
 };
 
 const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {

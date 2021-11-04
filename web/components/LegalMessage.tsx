@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { LegalMessageDefaults } from "@/display-content/LegalMessageDefaults";
+import { LegalMessageDefaults } from "@/display-defaults/LegalMessageDefaults";
 
 export const LegalMessage = (): ReactElement => {
   return (

@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { Dialog, DialogContent } from "@mui/material";
 import { SectionType } from "@/lib/types/types";
-import { SectionDefaults, RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { SectionDefaults, RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { IconButton } from "@mui/material";
 import { Icon } from "./njwds/Icon";
 import { useRouter } from "next/router";

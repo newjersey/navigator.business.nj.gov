@@ -7,7 +7,7 @@ import { MunicipalityDropdown } from "@/components/MunicipalityDropdown";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

@@ -15,7 +15,7 @@ import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NextSeo } from "next-seo";
 import { NavBar } from "@/components/navbar/NavBar";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
-import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { useRouter } from "next/router";
 import { Icon } from "@/components/njwds/Icon";
 //import { Unlocks } from "@/components/tasks/Unlocks";

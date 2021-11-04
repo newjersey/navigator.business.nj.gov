@@ -1,7 +1,7 @@
 import { ProfileFields } from "@/lib/types/types";
 import React, { FocusEvent, ReactElement } from "react";
 import { OnboardingField } from "@/components/onboarding/OnboardingField";
-import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { templateEval } from "@/lib/utils/helpers";
 
 interface Props {

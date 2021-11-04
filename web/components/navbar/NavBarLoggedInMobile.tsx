@@ -5,7 +5,7 @@ import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettings";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { FilingReference, Task } from "@/lib/types/types";
-import { NavDefaults } from "@/display-content/NavDefaults";
+import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { MiniOperateSection } from "../roadmap/MiniOperateSection";
 interface Props {
   scrolled: boolean;

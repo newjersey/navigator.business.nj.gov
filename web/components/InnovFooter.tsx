@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Footer } from "@/display-content/Footer";
+import { Footer } from "@/display-defaults/Footer";
 import { Icon } from "@/components/njwds/Icon";
 
 export const InnovFooter = (): ReactElement => {

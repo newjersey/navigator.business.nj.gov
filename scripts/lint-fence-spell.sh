@@ -11,7 +11,7 @@ yarn workspace @businessnjgovnavigator/web typecheck:cypress
 # format files
 yarn prettier
 
-yarn workspace @businessnjgovnavigator/web spellcheck
+yarn spellcheck
 
 yarn workspace @businessnjgovnavigator/web fences
 yarn workspace @businessnjgovnavigator/api fences

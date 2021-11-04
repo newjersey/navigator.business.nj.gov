@@ -1,6 +1,6 @@
 import Home from "@/pages/index";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import { SelfRegDefaults } from "@/display-content/SelfRegDefaults";
+import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import React, { ReactElement } from "react";
 import { useUnauthedOnlyPage } from "@/lib/auth/useAuthProtectedPage";
 import { useMountEffect } from "@/lib/utils/helpers";

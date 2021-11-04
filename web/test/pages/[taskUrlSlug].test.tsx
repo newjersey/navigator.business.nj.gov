@@ -18,10 +18,10 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { RoadmapDefaults, SectionDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { RoadmapDefaults, SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 
 function mockMaterialUI(): typeof materialUi {
   return {

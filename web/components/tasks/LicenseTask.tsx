@@ -4,7 +4,7 @@ import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/h
 import React, { ReactElement, useState } from "react";
 import { LicenseStatusResult, NameAndAddress, Task, UserData } from "@/lib/types/types";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
+import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { CheckStatus } from "@/components/tasks/CheckStatus";
 import * as api from "@/lib/api-client/apiClient";

@@ -7,8 +7,8 @@ web/out_functions/
 web/out/
 web/cypress/plugins
 web/cypress/support
-web/display-content/
 web/stories
+web/display-defaults/
 node_modules
 
 web/amplify/#current-cloud-backend/

@@ -37,7 +37,7 @@ const fetchDependenciesFile = async (): Promise<TaskDependencies> => {
   if (process.env.NODE_ENV === "test") {
     file = await import(`@/lib/roadmap/fixtures/task-dependencies.json`);
   } else {
-    file = await import(`@/roadmaps/task-dependencies.json`);
+    file = await import(`@businessnjgovnavigator/content/roadmaps/task-dependencies.json`);
   }
   return file.default;
 };
@@ -47,7 +47,7 @@ const fetchTaskFile = async (filename: string): Promise<string> => {
   if (process.env.NODE_ENV === "test") {
     file = await import(`@/lib/roadmap/fixtures/tasks/${filename}.md`);
   } else {
-    file = await import(`@/roadmaps/tasks/${filename}.md`);
+    file = await import(`@businessnjgovnavigator/content/roadmaps/tasks/${filename}.md`);
   }
   return file.default;
 };

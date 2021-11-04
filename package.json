@@ -17,6 +17,7 @@
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "lerna run --stream prettier:check",
     "start:dev": "lerna run  --stream dev",
+    "spellcheck": "lerna run --stream spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "lerna run --stream test",
     "test:ci": "lerna run --stream test:ci",
@@ -168,6 +169,7 @@
   "workspaces": {
     "packages": [
       "api",
+      "content",
       "shared",
       "web"
     ]

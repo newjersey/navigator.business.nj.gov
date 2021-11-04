@@ -11,9 +11,9 @@ import {
   OnboardingStatus,
   ProfileError,
 } from "@/lib/types/types";
-import { NavDefaults } from "@/display-content/NavDefaults";
-import { ProfileDefaults } from "@/display-content/ProfileDefaults";
-import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { NavDefaults } from "@/display-defaults/NavDefaults";
+import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);

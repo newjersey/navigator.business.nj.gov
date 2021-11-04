@@ -3,7 +3,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
-import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import Link from "next/link";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { FilingReference, Task } from "@/lib/types/types";

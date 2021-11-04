@@ -2,14 +2,14 @@ import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
-import { LicenseScreenDefaults } from "@/display-content/tasks/license/LicenseScreenDefaults";
+import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createEmptyNameAndAddress, NameAndAddress } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
 import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
-import { SearchBusinessNamesDefaults } from "@/display-content/tasks/search-business-names/SearchBusinessNamesDefaults";
+import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";
 import analytics from "@/lib/utils/analytics";
 
 const useStyles = makeStyles(() =>

@@ -9,7 +9,7 @@ export type TaskUrlSlugParam = {
   taskUrlSlug: string;
 };
 
-const roadmapsDir = path.join(process.cwd(), "roadmaps");
+const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
 
 export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
   const directory = path.join(roadmapsDir, "tasks");

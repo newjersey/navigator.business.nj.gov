@@ -4,7 +4,7 @@ import { ProfileDisplayContent, RoadmapDisplayContent } from "@/lib/types/types"
 import { LegalStructures } from "@businessnjgovnavigator/shared";
 import { getMarkdown } from "@/lib/utils/markdownReader";
 
-const displayContentDir = path.join(process.cwd(), "display-content");
+const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
 
 const loadFile = (filename: string): string =>
   fs.readFileSync(path.join(displayContentDir, "onboarding", filename), "utf8");

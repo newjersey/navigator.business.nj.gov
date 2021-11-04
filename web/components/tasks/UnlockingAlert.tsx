@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { Alert, AlertVariant } from "@/components/njwds/Alert";
 import { TaskLink } from "@/lib/types/types";
-import { TaskDefaults } from "@/display-content/tasks/TaskDefaults";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 
 interface Props {
   taskLinks: TaskLink[];

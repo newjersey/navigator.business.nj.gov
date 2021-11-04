@@ -3,7 +3,7 @@ import { GetStaticPropsResult } from "next";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { RoadmapDefaults } from "@/display-content/roadmap/RoadmapDefaults";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { FilingReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";

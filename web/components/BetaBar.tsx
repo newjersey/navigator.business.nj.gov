@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Beta } from "@/display-content/Beta";
+import { Beta } from "@/display-defaults/Beta";
 import { Tag } from "@/components/njwds-extended/Tag";
 
 export const BetaBar = (): ReactElement => {

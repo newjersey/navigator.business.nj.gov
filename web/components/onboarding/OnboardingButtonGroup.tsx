@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext } from "react";
 import { OnboardingContext } from "@/pages/onboarding";
-import { OnboardingDefaults } from "@/display-content/onboarding/OnboardingDefaults";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 
 export const OnboardingButtonGroup = (): ReactElement => {
   const { state, onBack } = useContext(OnboardingContext);

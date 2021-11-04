@@ -2,7 +2,7 @@ import React, { ReactElement, useState, useRef, useEffect, useContext } from "re
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Icon } from "@/components/njwds/Icon";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import { NavDefaults } from "@/display-content/NavDefaults";
+import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from "@mui/material";
 import { AuthContext } from "@/pages/_app";
 import { useRouter } from "next/router";
