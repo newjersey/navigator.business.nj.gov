@@ -1,3 +1,4 @@
+import React from "react";
 import { withAuth } from "@/test/helpers";
 import { useAuthProtectedPage, useUnauthedOnlyPage, signInSamlError } from "@/lib/auth/useAuthProtectedPage";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";

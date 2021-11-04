@@ -2,11 +2,6 @@ import type { Config } from "@jest/types";
 
 export default async (): Promise<Config.InitialOptions> => {
   return {
-    globals: {
-      "ts-jest": {
-        babelConfig: true,
-      },
-    },
     setupFilesAfterEnv: ["./setupTests.js"],
     testEnvironment: "jsdom",
     testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
@@ -20,10 +15,10 @@ export default async (): Promise<Config.InitialOptions> => {
       "@/roadmaps/(.*)": "<rootDir>/roadmaps/$1",
       "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/$1",
     },
-    preset: "ts-jest",
+    //preset: "ts-jest",
     transform: {
       "\\.md$": "jest-raw-loader",
-      "\\.[jt]sx?$": "babel-jest",
+      "\\.[jt]sx?$": "@swc/jest",
     },
   };
 };

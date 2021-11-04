@@ -1,3 +1,4 @@
+import React from "react";
 import { Content } from "@/components/Content";
 import { render } from "@testing-library/react";
 

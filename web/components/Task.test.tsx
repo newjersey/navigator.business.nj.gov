@@ -1,3 +1,4 @@
+import React from "react";
 import { Task } from "./Task";
 import { generateTask } from "@/test/factories";
 import { render } from "@testing-library/react";
