@@ -108,7 +108,7 @@ commands:
     steps:
       - run:
           name: Deploy Serverless
-          command: yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE} --region us-east-1
+          command: yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE} --region ${AWS_REGION}
 
   deploy-amplify:
     steps:

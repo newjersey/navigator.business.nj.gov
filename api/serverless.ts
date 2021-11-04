@@ -117,6 +117,7 @@ const serverlessConfiguration: AWS = {
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_URL: myNJServiceUrl,
       ADMIN_PASSWORD: adminPassword,
+      AWS_REGION: region,
       STAGE: stage,
     },
     lambdaHashingVersion: "20201221",
