@@ -38,6 +38,7 @@
     "@mui/lab/AdapterDayjs",
     "dayjs/plugin/advancedFormat",
     "@businessnjgovnavigator/shared",
-    "broken-link-checker"
+    "broken-link-checker",
+    "@storybook/react"
   ]
 }
