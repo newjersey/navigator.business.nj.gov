@@ -1,6 +1,6 @@
 ## Spray Paint Booth Permit Termination
 
-Your Spray Paint Booth may not need a permit from the New Jersey Departmment of Environmental Protection if:
+Your Spray Paint Booth may not need a permit from the New Jersey Department of Environmental Protection if:
 1. Your coating application will never exceed ½ a gallon per hour, and 
 2. Your spray booth will not contain a heating device with a rating of 1,000,000 BTU/hr or greater.
  
