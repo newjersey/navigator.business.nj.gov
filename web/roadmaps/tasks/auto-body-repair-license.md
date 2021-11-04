@@ -11,7 +11,7 @@ To file your application you will need:
 * A `Certificate of Occupancy|certificate-occupancy`
 * Written approval by the local clerk or Zoning Office confirming that the location has been approved
 * A `New Jersey Certificate of Authority for sales tax|certificate-authority-sales-tax`
-* `EIN|ein` 
+* An `EIN|ein` 
 * [Fingerprint request notification form](https://www.state.nj.us/mvcbiz/pdf/Business_Licenses/Fingerprint_Request_Notification_Form.pdf)
 * Color photographs of each officer at the shop
 * Color photographs of the facility displaying the advertised sign
