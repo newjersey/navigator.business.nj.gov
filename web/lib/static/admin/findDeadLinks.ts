@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import path from "path";
 import fs from "fs";
 import matter from "gray-matter";
 import { AddOn, IndustryRoadmap, TaskModification } from "@/lib/roadmap/roadmapBuilder";
+import { HtmlUrlChecker } from "broken-link-checker";
 
 const roadmapsDir = path.join(process.cwd(), "roadmaps");
 const displayContentDir = path.join(process.cwd(), "display-content");
+const filingsDir = path.join(process.cwd(), "filings");
 const tasksDir = path.join(roadmapsDir, "tasks");
 const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
@@ -14,6 +18,7 @@ const contextualInfoDir = path.join(process.cwd(), "display-content", "contextua
 type Filenames = {
   tasks: string[];
   industries: string[];
+  filings: string[];
   addOns: string[];
   modifications: string[];
   contextualInfos: string[];
@@ -47,6 +52,7 @@ const getFlattenedFilenames = (dir: string): string[] => {
 const getFilenames = (): Filenames => ({
   tasks: fs.readdirSync(tasksDir),
   industries: fs.readdirSync(industriesDir),
+  filings: fs.readdirSync(filingsDir),
   addOns: fs.readdirSync(addOnsDir),
   modifications: fs.readdirSync(modificationsDir),
   contextualInfos: fs.readdirSync(contextualInfoDir),
@@ -136,6 +142,64 @@ export const findDeadTasks = async (): Promise<string[]> => {
     }
   }
   return deadTasks;
+};
+
+export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
+  const filenames = getFilenames();
+  const pages = [
+    "/onboarding?page=1",
+    "/onboarding?page=2",
+    "/onboarding?page=3",
+    "/onboarding?page=4",
+    "/profile",
+    "/roadmap",
+    ...filenames.tasks.map((it) => `/tasks/${it.split(".md")[0]}`),
+    ...filenames.filings.map((it) => `/filings/${it.split(".md")[0]}`),
+  ];
+
+  const deadLinks = pages.reduce((acc, cur) => {
+    acc[cur] = [];
+    return acc;
+  }, {} as Record<string, string[]>);
+
+  const pagePromises = [];
+
+  const templateEvals = [
+    "municipalityWebsite",
+    "municipality",
+    "county",
+    "countyClerkPhone",
+    "countyClerkWebsite",
+  ];
+
+  const isTemplateLink = (url: string): boolean => {
+    return url.startsWith("$") && templateEvals.some((it) => url.includes(it));
+  };
+
+  for (const page of pages) {
+    const promise = new Promise((resolve) => {
+      const htmlUrlChecker = new HtmlUrlChecker(
+        {},
+        {
+          link: (result: any) => {
+            if (result.broken && !isTemplateLink(result.url.original)) {
+              deadLinks[page].push(result.url.original);
+            }
+          },
+          end: () => {
+            resolve({});
+          },
+        }
+      );
+      const url = new URL(process.env.REDIRECT_URL || "");
+      htmlUrlChecker.enqueue(`${url.origin}${page}`, {});
+    });
+
+    pagePromises.push(promise);
+  }
+
+  await Promise.all(pagePromises);
+  return deadLinks;
 };
 
 export const findDeadContextualInfo = async (): Promise<string[]> => {

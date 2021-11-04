@@ -3,7 +3,7 @@ import { GetStaticPropsResult } from "next";
 
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 import { TextField } from "@mui/material";
 import * as apiClient from "@/lib/api-client/apiClient";
 import { NextSeo } from "next-seo";
@@ -11,6 +11,7 @@ import { NextSeo } from "next-seo";
 interface Props {
   deadTasks: string[];
   deadContextualInfo: string[];
+  deadLinks: Record<string, string[]>;
 }
 
 const DeadLinksPage = (props: Props): ReactElement => {
@@ -71,6 +72,21 @@ const DeadLinksPage = (props: Props): ReactElement => {
           <li key={i}>{info}</li>
         ))}
       </ul>
+      <h2>Potentially broken links:</h2>
+      {Object.keys(props.deadLinks).map((page, i) => (
+        <div key={i}>
+          {props.deadLinks[page].length > 0 && (
+            <>
+              <h4>Page: {page}</h4>
+              <ul>
+                {props.deadLinks[page].map((link, i) => (
+                  <li key={i}>{link}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      ))}
     </>
   );
 
@@ -89,6 +105,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
     props: {
       deadTasks: await findDeadTasks(),
       deadContextualInfo: await findDeadContextualInfo(),
+      deadLinks: await findDeadLinks(),
     },
   };
 };

@@ -25,8 +25,12 @@ commands:
           name: Configure Serverless
           command: yarn workspace @businessnjgovnavigator/api serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
       - run:
+          name: Set Environment Variables
+          command: echo 'export REDIRECT_URL=$REDIRECT_URL_DEV' >> $BASH_ENV
+      - run:
           name: Build
           command: yarn build
+          
 
   code-quality:
     steps:

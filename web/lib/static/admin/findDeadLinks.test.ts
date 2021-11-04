@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import fs from "fs";
-import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import { Options } from "broken-link-checker";
 
 jest.mock("fs");
-
 jest.mock("process", () => ({
   cwd: () => "/test",
 }));
@@ -15,11 +16,14 @@ describe("findDeadLinks", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     mockedFs = fs as jest.Mocked<typeof fs>;
+
     mockedFs.readdirSync
       // @ts-ignore
       .mockReturnValueOnce(["task1.md", "task2.md", "dead-task.md"])
       // @ts-ignore
       .mockReturnValueOnce(["industry1.json"])
+      // @ts-ignore
+      .mockReturnValueOnce(["filing1.md"])
       // @ts-ignore
       .mockReturnValueOnce(["addon1.json", "addon2.json"])
       // @ts-ignore
@@ -76,4 +80,48 @@ describe("findDeadLinks", () => {
       expect(await findDeadContextualInfo()).toEqual(["dead-info.md"]);
     });
   });
+
+  describe("findDeadLinks", () => {
+    it("finds dead links on every page", async () => {
+      expect(await findDeadLinks()).toEqual({
+        "/tasks/task1": ["http://www.example.com"],
+        "/tasks/task2": [],
+        "/tasks/dead-task": [],
+        "/filings/filing1": [],
+        "/onboarding?page=1": [],
+        "/onboarding?page=2": [],
+        "/onboarding?page=3": [],
+        "/onboarding?page=4": [],
+        "/profile": [],
+        "/roadmap": [],
+      });
+    });
+  });
 });
+
+jest.mock("broken-link-checker", () => ({
+  HtmlUrlChecker: function SpyHtmlUrlChecker(
+    options: Options,
+    handlers: {
+      link?: ((result: any) => void) | undefined;
+      end?: (() => void) | undefined;
+    }
+  ) {
+    const enqueue = (pageUrl: any): any => {
+      if (!handlers.link || !handlers.end) return;
+      if (pageUrl.includes("task1")) {
+        handlers.link({
+          url: { original: "http://www.example.com" },
+          broken: true,
+        });
+      } else {
+        handlers.link({
+          url: { original: "" },
+          broken: false,
+        });
+      }
+      handlers.end();
+    };
+    return { enqueue };
+  },
+}));
