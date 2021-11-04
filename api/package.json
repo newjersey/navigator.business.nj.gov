@@ -74,7 +74,7 @@
     "jest-junit": "13.0.0",
     "prettier": "2.4.1",
     "rimraf": "3.0.2",
-    "serverless": "2.64.1",
+    "serverless": "2.65.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline": "8.2.0",
     "serverless-offline-ssm": "5.2.0",
