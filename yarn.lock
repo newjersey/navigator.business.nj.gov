@@ -1307,7 +1307,7 @@ __metadata:
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
     "@types/aws-lambda": 8.10.85
-    "@types/broken-link-checker": ^0.7.1
+    "@types/broken-link-checker": 0.7.1
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
     "@types/express": 4.17.13
@@ -1333,7 +1333,7 @@ __metadata:
     axios: 0.24.0
     babel-jest: 27.3.1
     body-parser: 1.19.0
-    broken-link-checker: ^0.7.8
+    broken-link-checker: 0.7.8
     copy-webpack-plugin: 9.0.1
     cors: 2.8.5
     cross-env: 7.0.3
@@ -1456,7 +1456,7 @@ __metadata:
     "@testing-library/jest-dom": 5.15.0
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
-    "@types/broken-link-checker": ^0.7.1
+    "@types/broken-link-checker": 0.7.1
     "@types/jest": 27.0.2
     "@types/lodash.orderby": 4.6.6
     "@types/node": 14.17.32
@@ -1470,7 +1470,7 @@ __metadata:
     airtable: 0.11.1
     axios: 0.24.0
     babel-jest: 27.3.1
-    broken-link-checker: ^0.7.8
+    broken-link-checker: 0.7.8
     cross-env: 7.0.3
     cspell: 5.12.4
     cypress: 8.7.0
@@ -5060,7 +5060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/broken-link-checker@npm:^0.7.1":
+"@types/broken-link-checker@npm:0.7.1":
   version: 0.7.1
   resolution: "@types/broken-link-checker@npm:0.7.1"
   checksum: a9736a1d191cc6a3d0707a9c00a0c1d1244e1cc2a9b51060804df93c1774b87a664d2ad025d5565e67571a151982e290d028a06cb46e04b1af404f6b4a35402d
@@ -7046,7 +7046,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"broken-link-checker@npm:^0.7.8":
+"broken-link-checker@npm:0.7.8":
   version: 0.7.8
   resolution: "broken-link-checker@npm:0.7.8"
   dependencies:
