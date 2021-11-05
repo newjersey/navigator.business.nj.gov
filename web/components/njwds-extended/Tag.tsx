@@ -1,17 +1,19 @@
 import React, { ReactElement } from "react";
 
-type TagVariant = "primary" | "base" | "info" | "error" | "accent-warm" | "noBgColor" | "noBgColorWithBorder";
+type TagVariant = "primary" | "base" | "info" | "error" | "accent" | "noBg" | "baseDark";
 
 interface Props {
   tagVariant: TagVariant;
   children: React.ReactNode;
-  className?: string;
   dataTestid?: string;
   textWrap?: boolean;
+  bold?: boolean;
+  hover?: boolean;
 }
 
 export const Tag = (props: Props): ReactElement => {
   let styling = "";
+  let hoverStyling = "";
 
   switch (props.tagVariant) {
     case "primary":
@@ -26,22 +28,28 @@ export const Tag = (props: Props): ReactElement => {
     case "error":
       styling = "bg-error-lighter text-error-dark";
       break;
-    case "accent-warm":
+    case "accent":
       styling = "bg-accent-warm-lighter text-accent-warm-darker";
       break;
-    case "noBgColor":
+    case "noBg":
       styling = "bg-white text-base";
       break;
-    case "noBgColorWithBorder":
+    case "baseDark":
       styling = "bg-white text-base-dark border";
+      break;
+  }
+
+  switch (props.hover) {
+    case props.tagVariant === "info":
+      hoverStyling = "accent-cool-hover-override";
       break;
   }
 
   return (
     <span
-      className={`usa-tag font-sans-2xs padding-y-05 ${
-        props.textWrap ? "text-wrap" : "text-no-wrap"
-      } ${styling} ${props.className || ""} `}
+      className={`usa-tag font-sans-2xs padding-y-05 width-full width-auto ${
+        props.textWrap ? "text-wrap display-block" : "text-no-wrap"
+      } ${styling} ${hoverStyling} ${props.bold ? "text-bold" : ""}`}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
     >
       {props.children}
