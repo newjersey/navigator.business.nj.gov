@@ -15,7 +15,7 @@ The backend is an **Express** Node app deployed as an **AWS Lambda** function us
 
 The app uses **AWS Cognito** (through Amplify) to handle authentication, for now.
 
-We deploy using **GitHub Actions** for CI/CD.
+We deploy using **[CircleCI](https://app.circleci.com/pipelines/github/newjersey/business.nj.gov)** for CI/CD.
 
 ## Development
 
@@ -100,7 +100,7 @@ Use ship-it to run prettier, linting, and tests before pushing:
 ./scripts/ship-it.sh
 ```
 
-The GitHub actions CI/CD (which is configured in `.github/workflows/pipeline.yml`) will pick up the job and deploy to Amplify for commits to the main branch.
+The CircleCI CI/CD (which is configured in `.circleci/config.yml`) will pick up the job and deploy to Amplify for commits to the main branch.
 
 ## Frontend deep-dive
 
