@@ -9,6 +9,19 @@ import uuid from "uuid";
 jest.mock("uuid", () => ({ v4: jest.fn() }));
 const mockUuid = uuid as jest.Mocked<typeof uuid>;
 
+function mockCrypto() {
+  return {
+    ...jest.requireActual("crypto"),
+    createHmac: jest.fn(() => ({
+      update: jest.fn(() => ({
+        digest: jest.fn(() => "hashed-mynj-result"),
+      })),
+    })),
+  };
+}
+
+jest.mock("crypto", () => mockCrypto());
+
 describe("selfRegRouter", () => {
   let app: Express;
 
@@ -99,7 +112,7 @@ describe("selfRegRouter", () => {
       describe("when record DOES NOT have a myNJ key", () => {
         const stubRecordNoKey = generateUserData({ user: generateUser({ myNJUserKey: undefined }) });
 
-        it("calls auth grant with user info & returns the auth redirect URL & saves myNJ key on success", async () => {
+        it("calls auth grant with user info & returns the auth redirect URL & saves myNJ key / hash on success", async () => {
           stubUserDataClient.findByEmail.mockResolvedValue(stubRecordNoKey);
           const selfRegResponse = generateSelfRegResponse({});
           stubSelfRegClient.grant.mockResolvedValue(selfRegResponse);
@@ -113,6 +126,7 @@ describe("selfRegRouter", () => {
             user: {
               ...stubRecordNoKey.user,
               myNJUserKey: selfRegResponse.myNJUserKey,
+              intercomHash: "hashed-mynj-result",
             },
           };
           expect(stubUserDataClient.put).toHaveBeenCalledWith(newUserWithKey);
@@ -171,6 +185,7 @@ describe("selfRegRouter", () => {
           user: {
             ...emptyUserData.user,
             myNJUserKey: selfRegResponse.myNJUserKey,
+            intercomHash: "hashed-mynj-result",
           },
         };
         expect(stubUserDataClient.put).toHaveBeenCalledWith(newUserWithKey);

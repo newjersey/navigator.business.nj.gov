@@ -20,6 +20,7 @@ const adminPassword = process.env.ADMIN_PASSWORD ?? "";
 const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
 const myNJRoleName = process.env.MYNJ_ROLE_NAME || "";
 const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
+const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -118,6 +119,7 @@ const serverlessConfiguration: AWS = {
       MYNJ_SERVICE_URL: myNJServiceUrl,
       ADMIN_PASSWORD: adminPassword,
       STAGE: stage,
+      INTERCOM_HASH_SECRET: intercomHashSecret,
     },
     lambdaHashingVersion: "20201221",
     logRetentionInDays: 180,

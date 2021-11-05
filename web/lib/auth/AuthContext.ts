@@ -1,7 +1,7 @@
 import { Dispatch, Reducer } from "react";
 import { BusinessUser } from "@/lib/types/types";
 
-export type UserActionType = "LOGIN" | "LOGOUT";
+export type UserActionType = "LOGIN" | "LOGOUT" | "UPDATE_USER";
 
 export enum IsAuthenticated {
   TRUE = "TRUE",
@@ -37,6 +37,11 @@ export const authReducer: AuthReducer = (state: AuthState, action: AuthAction): 
       return {
         user: undefined,
         isAuthenticated: IsAuthenticated.FALSE,
+      };
+    case "UPDATE_USER":
+      return {
+        user: action.user,
+        isAuthenticated: IsAuthenticated.TRUE,
       };
   }
 };

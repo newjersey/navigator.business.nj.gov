@@ -1,4 +1,6 @@
 import { v23UserData } from "./v23_rename_onboardingData_to_profileData";
+import { randomInt } from "./migrations";
+import dayjs from "dayjs";
 
 export interface v24UserData {
   user: v24BusinessUser;
@@ -112,3 +114,35 @@ export type v24LicenseStatus =
 export type v24SectionType = "PLAN" | "START" | "OPERATE";
 
 // ---------------- v24 factories ----------------
+
+export const generatev24User = (overrides: Partial<v24BusinessUser>): v24BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generatev24ProfileData = (overrides: Partial<v24ProfileData>): v24ProfileData => {
+  return {
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: `some-industry-${randomInt()}`,
+    legalStructureId: `some-legalstructure-${randomInt()}`,
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: false,
+    homeBasedBusiness: false,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: dayjs().format("YYYY-MM"),
+    entityId: "",
+    employerId: "",
+    taxId: "",
+    notes: `some-notes-${randomInt()}`,
+    ...overrides,
+  };
+};

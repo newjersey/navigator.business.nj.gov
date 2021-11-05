@@ -300,6 +300,8 @@ export type BusinessUser = {
   name?: string;
   email: string;
   id: string;
+  myNJUserKey?: string;
+  intercomHash?: string;
 };
 
 export interface SessionHelper {

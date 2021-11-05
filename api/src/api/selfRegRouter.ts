@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createEmptyUserData, SelfRegClient, UserData, UserDataClient } from "../domain/types";
 import { v4 as uuidv4 } from "uuid";
+import { createHmac } from "crypto";
 
 export const selfRegRouterFactory = (
   userDataClient: UserDataClient,
@@ -49,11 +50,14 @@ export const selfRegRouterFactory = (
   });
 
   const updateMyNJKey = (userData: UserData, myNJUserKey: string): Promise<UserData> => {
+    const hmac = createHmac("sha256", "a secret");
+    const hash = hmac.update(myNJUserKey).digest("hex");
     return userDataClient.put({
       ...userData,
       user: {
         ...userData.user,
         myNJUserKey: myNJUserKey,
+        intercomHash: hash,
       },
     });
   };

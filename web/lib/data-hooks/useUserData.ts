@@ -6,11 +6,25 @@ import { UserData, UserDataError } from "@/lib/types/types";
 import { AuthContext, UserDataErrorContext } from "@/pages/_app";
 
 export const useUserData = (): UseUserDataResponse => {
-  const { state } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
   const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData);
 
   const dataExists = !!data;
+
+  useEffect(() => {
+    if (!data || !state.user) return;
+    dispatch({
+      type: "UPDATE_USER",
+      user: {
+        ...state.user,
+        name: data.user.name,
+        myNJUserKey: data.user.myNJUserKey,
+        intercomHash: data.user.intercomHash,
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataExists]);
 
   useEffect(() => {
     if (error && dataExists) {
