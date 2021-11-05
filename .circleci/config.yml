@@ -239,7 +239,6 @@ jobs:
         type: string
     docker:
       - image: node:14.18.1-buster
-    resource_class: large
     steps:
       - configure-and-build
       - install-chrome
