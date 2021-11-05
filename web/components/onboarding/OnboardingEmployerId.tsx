@@ -27,7 +27,6 @@ export const OnboardingEmployerId = (props: Props): ReactElement => {
       fieldName={fieldName}
       onValidation={onValidation}
       handleChange={handleChange}
-      validationLabel="Error"
       error={props.fieldStates[fieldName].invalid}
       validationText={templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
         length: "10",

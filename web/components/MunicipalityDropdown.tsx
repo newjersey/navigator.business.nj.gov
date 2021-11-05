@@ -87,7 +87,6 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
           variant="outlined"
           placeholder={props.placeholderText}
           error={props.error}
-          label={props.error && (props.validationLabel ?? "")}
           helperText={props.error && (props.validationText ?? "")}
         />
       )}

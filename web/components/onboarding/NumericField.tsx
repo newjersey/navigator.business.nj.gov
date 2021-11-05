@@ -25,7 +25,6 @@ export const NumericField = (props: Props): ReactElement => {
     <OnboardingField
       fieldName={props.fieldName}
       onValidation={onValidation}
-      validationLabel="Error"
       error={props.invalid}
       validationText={templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
         length: props.length.toString(),

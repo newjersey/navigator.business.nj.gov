@@ -14,7 +14,6 @@ interface Props {
   handleChange?: () => void;
   error?: boolean;
   validationText?: string;
-  validationLabel?: string;
 }
 
 export const OnboardingField = (props: Props): ReactElement => {
@@ -51,7 +50,6 @@ export const OnboardingField = (props: Props): ReactElement => {
           onBlur={props.onValidation}
           onSubmit={props.onValidation}
           error={props.error}
-          label={props.error && (props.validationLabel ?? "")}
           helperText={props.error && (props.validationText ?? "")}
           variant="outlined"
           fullWidth
