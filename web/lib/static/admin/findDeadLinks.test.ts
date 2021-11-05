@@ -19,6 +19,8 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["task1.md", "task2.md", "dead-task.md"])
       // @ts-ignore
+      .mockReturnValueOnce(["industry1.json"])
+      // @ts-ignore
       .mockReturnValueOnce(["addon1.json", "addon2.json"])
       // @ts-ignore
       .mockReturnValueOnce(["mod1.json", "mod2.json"])
@@ -32,6 +34,7 @@ describe("findDeadLinks", () => {
     const task1 = "Task 1 contents";
     const task2 = "Task 2 contents with `contextual info|info1` in it";
     const deadTask = "Dead task contents";
+    const industry1 = '{"addOns":[],"modifications":[]}';
     const addOn1 = '[{"step": 1, "weight": 1, "task": "task1"}]';
     const addOn2 = "[]";
     const mod1 = '[{"step": 1, "taskToReplaceFilename": "something","replaceWithFilename": "task2"}]';
@@ -48,6 +51,7 @@ describe("findDeadLinks", () => {
       .mockReturnValueOnce(task1)
       .mockReturnValueOnce(task2)
       .mockReturnValueOnce(deadTask)
+      .mockReturnValueOnce(industry1)
       .mockReturnValueOnce(addOn1)
       .mockReturnValueOnce(addOn2)
       .mockReturnValueOnce(mod1)

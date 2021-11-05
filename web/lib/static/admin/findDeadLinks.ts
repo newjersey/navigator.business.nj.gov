@@ -1,17 +1,19 @@
 import path from "path";
 import fs from "fs";
 import matter from "gray-matter";
-import { AddOn, TaskModification } from "@/lib/roadmap/roadmapBuilder";
+import { AddOn, IndustryRoadmap, TaskModification } from "@/lib/roadmap/roadmapBuilder";
 
 const roadmapsDir = path.join(process.cwd(), "roadmaps");
 const displayContentDir = path.join(process.cwd(), "display-content");
 const tasksDir = path.join(roadmapsDir, "tasks");
+const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
 const modificationsDir = path.join(roadmapsDir, "modifications");
 const contextualInfoDir = path.join(process.cwd(), "display-content", "contextual-information");
 
 type Filenames = {
   tasks: string[];
+  industries: string[];
   addOns: string[];
   modifications: string[];
   contextualInfos: string[];
@@ -20,6 +22,7 @@ type Filenames = {
 
 type FileContents = {
   tasks: string[];
+  industries: Array<IndustryRoadmap>;
   addOns: Array<AddOn[]>;
   modifications: Array<TaskModification[]>;
   contextualInfos: string[];
@@ -43,6 +46,7 @@ const getFlattenedFilenames = (dir: string): string[] => {
 
 const getFilenames = (): Filenames => ({
   tasks: fs.readdirSync(tasksDir),
+  industries: fs.readdirSync(industriesDir),
   addOns: fs.readdirSync(addOnsDir),
   modifications: fs.readdirSync(modificationsDir),
   contextualInfos: fs.readdirSync(contextualInfoDir),
@@ -52,6 +56,9 @@ const getFilenames = (): Filenames => ({
 const getContents = (filenames: Filenames): FileContents => ({
   tasks: filenames.tasks.map(
     (it) => matter(fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")).content
+  ),
+  industries: filenames.industries.map(
+    (it) => JSON.parse(fs.readFileSync(path.join(roadmapsDir, "industries", it), "utf8")) as IndustryRoadmap
   ),
   addOns: filenames.addOns.map(
     (it) => JSON.parse(fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")) as AddOn[]
@@ -87,6 +94,20 @@ const isReferencedInARoadmap = async (filename: string, contents: FileContents):
   let containedInAnAddOn = false;
   let containedInAModification = false;
   const filenameWithoutMd = filename.split(".md")[0];
+
+  for (const industry of contents.industries) {
+    if (industry.addOns.some((it) => it.task === filenameWithoutMd)) {
+      containedInAnAddOn = true;
+      break;
+    }
+  }
+
+  for (const industry of contents.industries) {
+    if (industry.modifications.some((it) => it.replaceWithFilename === filenameWithoutMd)) {
+      containedInAModification = true;
+      break;
+    }
+  }
 
   for (const addOn of contents.addOns) {
     if (addOn.some((it) => it.task === filenameWithoutMd)) {
