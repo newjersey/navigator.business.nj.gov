@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 import { GetStaticPropsResult } from "next";
 
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -16,6 +16,12 @@ interface Props {
 const DeadLinksPage = (props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>): void => {
+    if (event.code === "Enter") {
+      onSubmit();
+    }
+  };
 
   const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
@@ -39,6 +45,7 @@ const DeadLinksPage = (props: Props): ReactElement => {
         type="password"
         value={password}
         onChange={handlePasswordInput}
+        onKeyPress={handleKeyPress}
         inputProps={{
           id: "password",
         }}
