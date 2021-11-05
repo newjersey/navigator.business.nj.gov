@@ -30,7 +30,6 @@ commands:
       - run:
           name: Build
           command: yarn build
-          
 
   code-quality:
     steps:

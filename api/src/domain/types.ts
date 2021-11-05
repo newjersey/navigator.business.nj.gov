@@ -155,6 +155,7 @@ export type BusinessUser = {
   email: string;
   id: string;
   myNJUserKey?: string;
+  intercomHash?: string;
 };
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
