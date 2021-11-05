@@ -5,7 +5,7 @@ import { Tag } from "@/components/njwds-extended/Tag";
 export const BetaBar = (): ReactElement => {
   return (
     <div className="display-flex flex-justify-center flex-align-center bg-base-lightest font-sans-xs minh-3 margin-auto width-full padding-y-2">
-      <Tag tagVariant="accent-warm" className="text-bold">
+      <Tag tagVariant="accent" bold={true}>
         {Beta.betaIconText}
       </Tag>
       <span className="margin-left-05">

@@ -47,7 +47,7 @@ const FilingPage = (props: Props): ReactElement => {
                 {props.filing.name}
               </div>
               <div className="margin-bottom-4" data-testid="due-date">
-                <Tag tagVariant="noBgColorWithBorder" className="text-bold">
+                <Tag tagVariant="baseDark" bold={true}>
                   {FilingDefaults.tagContentBeforeDueDate} {dueDate}
                 </Tag>
               </div>
