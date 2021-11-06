@@ -80,7 +80,7 @@
     "@storybook/react": "6.3.12",
     "@swc/core": "1.2.106",
     "@swc/jest": "0.2.5",
-    "@testing-library/dom": "8.10.1",
+    "@testing-library/dom": "8.11.0",
     "@testing-library/jest-dom": "5.15.0",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
