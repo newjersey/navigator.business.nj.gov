@@ -2440,7 +2440,7 @@ __metadata:
     "@storybook/react": 6.3.12
     "@swc/core": 1.2.106
     "@swc/jest": 0.2.5
-    "@testing-library/dom": 8.10.1
+    "@testing-library/dom": 8.11.0
     "@testing-library/jest-dom": 5.15.0
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
@@ -2605,7 +2605,7 @@ __metadata:
     "@storybook/react": 6.3.12
     "@swc/core": 1.2.106
     "@swc/jest": 0.2.5
-    "@testing-library/dom": 8.10.1
+    "@testing-library/dom": 8.11.0
     "@testing-library/jest-dom": 5.15.0
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
@@ -7727,23 +7727,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:8.10.1":
-  version: 8.10.1
-  resolution: "@testing-library/dom@npm:8.10.1"
-  dependencies:
-    "@babel/code-frame": ^7.10.4
-    "@babel/runtime": ^7.12.5
-    "@types/aria-query": ^4.2.0
-    aria-query: ^5.0.0
-    chalk: ^4.1.0
-    dom-accessibility-api: ^0.5.9
-    lz-string: ^1.4.4
-    pretty-format: ^27.0.2
-  checksum: c11da16d981d4479fa18b2e90a62d2c19871da414016a4f80136394cf35e833ca4de4b56a64225f6bd5d3a13842176236d3508d217e3858c5e2ef35a3f391d5b
-  languageName: node
-  linkType: hard
-
-"@testing-library/dom@npm:^8.0.0":
+"@testing-library/dom@npm:8.11.0, @testing-library/dom@npm:^8.0.0":
   version: 8.11.0
   resolution: "@testing-library/dom@npm:8.11.0"
   dependencies:
