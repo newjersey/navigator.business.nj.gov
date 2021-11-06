@@ -2342,7 +2342,7 @@ __metadata:
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
     "@types/express": 4.17.13
-    "@types/jasmine": 3.10.1
+    "@types/jasmine": 3.10.2
     "@types/jest": 27.0.2
     "@types/jsonwebtoken": 8.5.5
     "@types/node": 14.17.32
@@ -2449,7 +2449,7 @@ __metadata:
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
     "@types/express": 4.17.13
-    "@types/jasmine": 3.10.1
+    "@types/jasmine": 3.10.2
     "@types/jest": 27.0.2
     "@types/jsonwebtoken": 8.5.5
     "@types/lodash.orderby": 4.6.6
@@ -8135,10 +8135,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jasmine@npm:3.10.1":
-  version: 3.10.1
-  resolution: "@types/jasmine@npm:3.10.1"
-  checksum: 55d0868792f1904c16b7d4fa38a2c2484e45f84c097e48a3ad78efaa27e34d1c50e5ba3891d99e4b4a092f938c72078ede686c8a146692e2c132beef8e2d7f42
+"@types/jasmine@npm:3.10.2":
+  version: 3.10.2
+  resolution: "@types/jasmine@npm:3.10.2"
+  checksum: e00906a1129973f1b9c0807eddf959e3c07f1b8a13c3db646fc4c9b8fe44bcbb5196008bb090abb4fecbbb9ed9f09b693245e178e998e927973dec9abd57af51
   languageName: node
   linkType: hard
 
