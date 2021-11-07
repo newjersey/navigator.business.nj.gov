@@ -97,7 +97,7 @@
     "@typescript-eslint/parser": "4.33.0",
     "babel-loader": "8.2.3",
     "cross-env": "7.0.3",
-    "cspell": "5.12.4",
+    "cspell": "5.12.6",
     "css-loader": "5.2.6",
     "cypress": "8.7.0",
     "cypress-audit": "1.1.0",
