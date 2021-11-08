@@ -45,7 +45,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
         ...userData,
         preferences: {
           ...userData?.preferences,
-          roadmapOpenSections: [...userData?.preferences.roadmapOpenSections, props.sectionType],
+          roadmapOpenSections: [...roadmapOpenSections, props.sectionType],
         },
       };
 

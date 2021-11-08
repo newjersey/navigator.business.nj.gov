@@ -37,7 +37,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
         }
         await update(updateSteps(openSteps?.filter((openStep) => openStep !== stepNumber)));
       } else {
-        await update(updateSteps([...userData?.preferences.roadmapOpenSteps, stepNumber]));
+        await update(updateSteps([...openSteps, stepNumber]));
       }
     },
     [update, userData]
