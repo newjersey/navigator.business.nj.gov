@@ -229,17 +229,21 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <Script src="/js/uswds.js" />
       <Script src="/js/uswds-init.js" />
       {state.user?.myNJUserKey && (
-        <Script
-          src="/intercom/settings.js"
-          data-user-id={state.user?.myNJUserKey}
-          data-user-hash={state.user?.intercomHash}
-          strategy="lazyOnload"
-        />
+        <>
+          <Script
+            src="/intercom/settings.js"
+            data-user-id={state.user?.myNJUserKey}
+            data-user-hash={state.user?.intercomHash}
+          />
+          <Script src="/intercom/init.js" />
+        </>
       )}
       {state.isAuthenticated === IsAuthenticated.FALSE && (
-        <Script src="/intercom/settings.js" strategy="lazyOnload" />
+        <>
+          <Script src="/intercom/settings.js" />
+          <Script src="/intercom/init.js" />
+        </>
       )}
-      <Script src="/intercom/init.js" />
       <DefaultSeo {...SEO} />
 
       <StyledEngineProvider injectFirst>
