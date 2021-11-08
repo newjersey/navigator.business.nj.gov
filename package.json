@@ -120,7 +120,7 @@
     "copy-webpack-plugin": "9.0.1",
     "cross-env": "7.0.3",
     "cspell": "5.12.6",
-    "css-loader": "5.2.6",
+    "css-loader": "6.5.1",
     "cypress": "8.7.0",
     "cypress-audit": "1.1.0",
     "cypress-dotenv": "2.0.0",

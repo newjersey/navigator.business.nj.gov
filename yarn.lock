@@ -2477,7 +2477,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     cspell: 5.12.6
-    css-loader: 5.2.6
+    css-loader: 6.5.1
     cypress: 8.7.0
     cypress-audit: 1.1.0
     cypress-dotenv: 2.0.0
@@ -2627,7 +2627,7 @@ __metadata:
     broken-link-checker: 0.7.8
     cross-env: 7.0.3
     cspell: 5.12.6
-    css-loader: 5.2.6
+    css-loader: 6.5.1
     cypress: 8.7.0
     cypress-audit: 1.1.0
     cypress-dotenv: 2.0.0
@@ -12923,23 +12923,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:5.2.6":
-  version: 5.2.6
-  resolution: "css-loader@npm:5.2.6"
+"css-loader@npm:6.5.1":
+  version: 6.5.1
+  resolution: "css-loader@npm:6.5.1"
   dependencies:
     icss-utils: ^5.1.0
-    loader-utils: ^2.0.0
     postcss: ^8.2.15
     postcss-modules-extract-imports: ^3.0.0
     postcss-modules-local-by-default: ^4.0.0
     postcss-modules-scope: ^3.0.0
     postcss-modules-values: ^4.0.0
     postcss-value-parser: ^4.1.0
-    schema-utils: ^3.0.0
     semver: ^7.3.5
   peerDependencies:
-    webpack: ^4.27.0 || ^5.0.0
-  checksum: 993354a24887724712dc1320abba5c1c4f7a4fdc6cfd64d160a0706218d6eeb241dbf4cea0694cd2752f7c3626b543efdd9993d12f4bb5b75f33e9c4da155e10
+    webpack: ^5.0.0
+  checksum: 5a3bedecb468038f09673d25c32d8db5b0baa6c38820253c54ce4c56c27a2250d5d5b4bace77dd5e20ba0a569604eb759362bab4e3128e7db2229e40857d4aca
   languageName: node
   linkType: hard
 
