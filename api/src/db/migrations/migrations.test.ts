@@ -1,10 +1,9 @@
 import fs from "fs";
 import { Migrations } from "./migrations";
-import path from "path";
 
 describe("migrations", () => {
   it("has every migration file in the migrations list", () => {
-    const fileNames = fs.readdirSync(path.join(process.cwd(), "src", "db", "migrations"));
+    const fileNames = fs.readdirSync(__dirname);
     const allMigrations = Migrations.map((it) => it.name); // all names in the form "migrate_vX_to_vY"
     const allMigrationsAsFinalVersion = allMigrations.map((it) => it.match(/to_v[0-9]*/)?.[0].substr(3));
     const allMigrationVersionsFromFiles = fileNames
