@@ -84,7 +84,7 @@
 
 .vertical-bar.current,
 .vertical-bar-sm.current {
-  background-color: #538200;
+  background-color: $primary;
 }
 
 // override and remove default vertical
@@ -124,7 +124,7 @@
 }
 
 .substep-unchecked.active:before {
-  border: 2px solid #538200;
+  border: 2px solid $primary;
 }
 
 .checked-task {

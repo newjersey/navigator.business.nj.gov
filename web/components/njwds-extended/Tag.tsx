@@ -35,7 +35,7 @@ export const Tag = (props: Props): ReactElement => {
       styling = "bg-white text-base";
       break;
     case "baseDark":
-      styling = "bg-white text-base-dark border";
+      styling = "bg-white text-base-dark border usa-tag-padding-override";
       break;
   }
 

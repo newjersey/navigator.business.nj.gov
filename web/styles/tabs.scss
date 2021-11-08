@@ -38,7 +38,7 @@
 .react-tabs__tab--selected {
   background: #fff;
   border-color: #e6e6e6;
-  color: #538200;
+  color: $primary;
 
   &:before {
     content: "";
@@ -47,7 +47,7 @@
     width: calc(100% + 4px);
     top: -2px;
     left: -2px;
-    background: #538200;
+    background: $primary;
   }
 }
 
