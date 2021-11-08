@@ -1,11 +1,4 @@
-import {
-  fireEvent,
-  render,
-  RenderResult,
-  waitFor,
-  waitForElementToBeRemoved,
-  within,
-} from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import React from "react";
 import Profile from "@/pages/profile";
 import {
@@ -108,7 +101,6 @@ describe("profile", () => {
     clickSave();
     await waitFor(() => expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument());
     await waitFor(() => expect(currentUserData()));
-    await waitForElementToBeRemoved(() => subject.getByTestId("toast-alert-SUCCESS"), { timeout: 3000 });
     fillText("Business name", "Cool Computers2");
   });
 
