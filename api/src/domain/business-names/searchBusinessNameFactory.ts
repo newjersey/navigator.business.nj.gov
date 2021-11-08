@@ -18,7 +18,7 @@ export const searchBusinessNameFactory = (businessNameClient: BusinessNameClient
     const adjustedName = cleanBusinessName(name);
     const adjustedSimilar = similarNames.map(cleanBusinessName);
 
-    if (adjustedSimilar.includes(adjustedName)) {
+    if (adjustedSimilar.some((it) => it.includes(adjustedName))) {
       return {
         status: "UNAVAILABLE",
         similarNames: similarNames.slice(0, 10),

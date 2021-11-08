@@ -24,6 +24,13 @@ describe("searchBusinessNames", () => {
     expect(nameAvailability.similarNames).toEqual(["my cool business"]);
   });
 
+  it("is unavailable when names contain the searched name", async () => {
+    stubBusinessNameClient.search.mockResolvedValue(["191 RENTALS AND STORAGE LLC"]);
+    const nameAvailability = await searchBusinessName("191 rentals");
+    expect(nameAvailability.status).toEqual("UNAVAILABLE");
+    expect(nameAvailability.similarNames).toEqual(["191 RENTALS AND STORAGE LLC"]);
+  });
+
   it("limits similar names to max 10", async () => {
     stubBusinessNameClient.search.mockResolvedValue(Array(11).fill("my cool business"));
     const nameAvailability = await searchBusinessName("my cool business");
