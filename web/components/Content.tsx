@@ -50,6 +50,7 @@ const Link = ({ children, href }: { children: string[]; href: string }): ReactEl
 const ExternalLink = ({ children, href }: { children: string[]; href: string }): ReactElement => {
   return (
     <a
+      className="usa-link"
       href={href}
       target="_blank"
       rel="noreferrer noopener"

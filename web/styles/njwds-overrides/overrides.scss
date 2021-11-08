@@ -10,8 +10,34 @@
   min-height: 37rem;
 }
 
-.usa-link {
+.minw-30 {
+  min-width: 30rem;
+}
+
+.usa-alert__text a,
+.usa-link,
+.usa-prose > a {
   color: $primary !important;
+}
+
+.usa-link:visited,
+.usa-prose > a:visited {
+  color: $primary !important;
+}
+
+.usa-link:focus,
+.usa-prose > a:focus {
+  outline: 0.25rem solid $primary !important;
+}
+
+.usa-link:hover,
+.usa-prose > a:hover {
+  color: $primary-dark !important;
+}
+
+.usa-link:active,
+.usa-prose > a:active {
+  color: $primary-darker !important;
 }
 
 .usa-prose > p,
@@ -51,17 +77,4 @@ hr {
   .form-input-wide {
     max-width: 43.75rem;
   }
-}
-
-.minw-30 {
-  min-width: 30rem;
-}
-
-.usa-alert--error {
-  background-image: url(/img/usa-icons/warning.svg), linear-gradient(transparent, transparent) !important;
-}
-
-.usa-alert.radius-md::before {
-  border-bottom-left-radius: 0.25rem;
-  border-top-left-radius: 0.25rem;
 }

@@ -100,6 +100,7 @@ export const MiniProfile = (props: Props): ReactElement => {
         <h2 className="margin-top-0 display-inline margin-right-2">{RoadmapDefaults.greyBoxHeaderText}</h2>
         <span className="mla font-body-sm">
           <a
+            className="usa-link"
             href="/profile"
             onClick={() => analytics.event.roadmap_profile_edit_button.click.return_to_onboarding()}
             data-testid="grey-callout-link"
