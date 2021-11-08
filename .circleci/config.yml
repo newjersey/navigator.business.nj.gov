@@ -25,9 +25,6 @@ commands:
           name: Configure Serverless
           command: yarn workspace @businessnjgovnavigator/api serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
       - run:
-          name: Set Environment Variables
-          command: echo 'export REDIRECT_URL=$REDIRECT_URL_DEV' >> $BASH_ENV
-      - run:
           name: Build
           command: yarn build
 
@@ -116,7 +113,7 @@ commands:
   set-dev-env-vars:
     steps:
       - run:
-          name: Set Environment Variables
+          name: Set Development Environment Variables
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_DEV' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_DEV' >> $BASH_ENV
@@ -128,10 +125,19 @@ commands:
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_DEV' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_DEV' >> $BASH_ENV
 
+  set-cypress-env-vars:
+    steps:
+      - run:
+          name: Set Cypress Environment Variables
+          command: |
+            echo 'export API_BASE_URL=http://localhost:5000/local' >> $BASH_ENV
+            echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
+            
+
   set-staging-env-vars:
     steps:
       - run:
-          name: Set Environment Variables
+          name: Set Staging Environment Variables
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_STAGING' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_STAGING' >> $BASH_ENV
@@ -146,7 +152,7 @@ commands:
   set-prod-env-vars:
     steps:
       - run:
-          name: Set Environment Variables
+          name: Set Production Environment Variables
           command: |
             echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD' >> $BASH_ENV
@@ -183,6 +189,7 @@ jobs:
       - image: node:14.18.1-buster
     resource_class: large
     steps:
+      - set-dev-env-vars
       - configure-and-build
       - code-quality
       - store-cache
@@ -236,6 +243,7 @@ jobs:
     docker:
       - image: node:14.18.1-buster
     steps:
+      - set-cypress-env-vars
       - configure-and-build
       - install-chrome
       - perform-cypress-tests:
@@ -243,8 +251,6 @@ jobs:
           suite: << parameters.suite >>
       - store-deploy-cache
     environment:
-      API_BASE_URL: http://localhost:5000/local
-      REDIRECT_URL: http://localhost:3000/
       CYPRESS_API_BASE_URL: http://localhost:5000/local
 
 workflows:
