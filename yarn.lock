@@ -2337,7 +2337,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 27.2.5
-    "@serverless/typescript": 2.64.1
+    "@serverless/typescript": 2.65.0
     "@types/aws-lambda": 8.10.85
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
@@ -2386,7 +2386,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 3.5.1
     typescript: 4.4.4
     uuid: 8.3.2
-    webpack: 5.61.0
+    webpack: 5.62.1
     webpack-node-externals: 3.0.0
     winston: 3.3.3
     winston-cloudwatch: 3.1.1
@@ -2427,7 +2427,7 @@ __metadata:
     "@mui/styles": 5.0.2
     "@next/env": 12.0.3
     "@next/eslint-plugin-next": 12.0.3
-    "@serverless/typescript": 2.64.1
+    "@serverless/typescript": 2.65.0
     "@storybook/addon-a11y": 6.3.12
     "@storybook/addon-actions": 6.3.12
     "@storybook/addon-docs": 6.3.12
@@ -2543,7 +2543,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 3.5.1
     typescript: 4.4.4
     uuid: 8.3.2
-    webpack: 5.61.0
+    webpack: 5.62.1
     webpack-node-externals: 3.0.0
     winston: 3.3.3
     winston-cloudwatch: 3.1.1
@@ -2672,7 +2672,7 @@ __metadata:
     ts-loader: 9.2.6
     ts-node: 10.4.0
     typescript: 4.4.4
-    webpack: 5.61.0
+    webpack: 5.62.1
   languageName: unknown
   linkType: soft
 
@@ -5341,15 +5341,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:12.0.2":
-  version: 12.0.2
-  resolution: "@next/eslint-plugin-next@npm:12.0.2"
-  dependencies:
-    glob: 7.1.7
-  checksum: 1b776d475ac31b52ffb77ddbc9542f6811d856ec647c91af9ee4540d0a7716174bcd8de0e83e4ed9f6ae7f3ca78771f85b45c7eed30540a5c4f43cb1cadb82ca
-  languageName: node
-  linkType: hard
-
 "@next/eslint-plugin-next@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/eslint-plugin-next@npm:12.0.3"
@@ -6065,10 +6056,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:2.64.1":
-  version: 2.64.1
-  resolution: "@serverless/typescript@npm:2.64.1"
-  checksum: 2d0bcc91ce7a27f4bff280a07249b414c17983f84beb477d5bb23c3525f12c1945de2b76c43e35e8e3bb6a85b1d9ba821a6c40339a9f517b8661a4fe9b4d732c
+"@serverless/typescript@npm:2.65.0":
+  version: 2.65.0
+  resolution: "@serverless/typescript@npm:2.65.0"
+  checksum: 299bcfc69719272b3ff6c42c3cbb9b10561b78772e0ab1958daea79f710628ff58a7dfc87234ed7b4a17ba791ef4911d43866b2848e63a0c22aaa51d2a7f7e27
   languageName: node
   linkType: hard
 
@@ -30257,44 +30248,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.61.0":
-  version: 5.61.0
-  resolution: "webpack@npm:5.61.0"
-  dependencies:
-    "@types/eslint-scope": ^3.7.0
-    "@types/estree": ^0.0.50
-    "@webassemblyjs/ast": 1.11.1
-    "@webassemblyjs/wasm-edit": 1.11.1
-    "@webassemblyjs/wasm-parser": 1.11.1
-    acorn: ^8.4.1
-    acorn-import-assertions: ^1.7.6
-    browserslist: ^4.14.5
-    chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.8.3
-    es-module-lexer: ^0.9.0
-    eslint-scope: 5.1.1
-    events: ^3.2.0
-    glob-to-regexp: ^0.4.1
-    graceful-fs: ^4.2.4
-    json-parse-better-errors: ^1.0.2
-    loader-runner: ^4.2.0
-    mime-types: ^2.1.27
-    neo-async: ^2.6.2
-    schema-utils: ^3.1.0
-    tapable: ^2.1.1
-    terser-webpack-plugin: ^5.1.3
-    watchpack: ^2.2.0
-    webpack-sources: ^3.2.0
-  peerDependenciesMeta:
-    webpack-cli:
-      optional: true
-  bin:
-    webpack: bin/webpack.js
-  checksum: 442958ec48645c9e612a2628a815c411cbc18289b5cc7b3d1b5d0f8e5b41606ed225decf4f3684edc365e6390867bded244d20387c70fbb630c0ac08443c34c8
-  languageName: node
-  linkType: hard
-
-"webpack@npm:^5, webpack@npm:^5.1.0, webpack@npm:^5.9.0":
+"webpack@npm:5.62.1, webpack@npm:^5, webpack@npm:^5.1.0, webpack@npm:^5.9.0":
   version: 5.62.1
   resolution: "webpack@npm:5.62.1"
   dependencies:
