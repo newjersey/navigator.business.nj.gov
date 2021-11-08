@@ -568,9 +568,9 @@ __metadata:
   linkType: hard
 
 "@aws-sdk/types@npm:^3.1.0":
-  version: 3.38.0
-  resolution: "@aws-sdk/types@npm:3.38.0"
-  checksum: 8ae0447e0f8ef6349bd867e8633256759e6a0aabec1bec9310690b7a9015b4a468e3a79642e580868baf07604dea0c5718ae5befaa5b8d1bb24db0daafc34ab6
+  version: 3.40.0
+  resolution: "@aws-sdk/types@npm:3.40.0"
+  checksum: 4ff073a21c6f3e75520e5100f58effab236cb79704e3e0cfc3c8c9531bd8b331c84e25a9615b64df2854f8ea7901658a16b3dabfe77e3d21bb25b4e685e117f1
   languageName: node
   linkType: hard
 
@@ -7559,85 +7559,85 @@ __metadata:
   linkType: hard
 
 "@swc/core-android-arm64@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-android-arm64@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-android-arm64@npm:1.2.107"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
 "@swc/core-darwin-arm64@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-darwin-arm64@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-darwin-arm64@npm:1.2.107"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
 "@swc/core-darwin-x64@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-darwin-x64@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-darwin-x64@npm:1.2.107"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
 "@swc/core-freebsd-x64@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-freebsd-x64@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-freebsd-x64@npm:1.2.107"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
 "@swc/core-linux-arm-gnueabihf@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.2.107"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
 "@swc/core-linux-arm64-gnu@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.2.107"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
 "@swc/core-linux-arm64-musl@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-linux-arm64-musl@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-linux-arm64-musl@npm:1.2.107"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
 "@swc/core-linux-x64-gnu@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-linux-x64-gnu@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-linux-x64-gnu@npm:1.2.107"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
 "@swc/core-linux-x64-musl@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-linux-x64-musl@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-linux-x64-musl@npm:1.2.107"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
 "@swc/core-win32-arm64-msvc@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.2.107"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
 "@swc/core-win32-ia32-msvc@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.2.107"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
 "@swc/core-win32-x64-msvc@npm:^1.2.106":
-  version: 1.2.106
-  resolution: "@swc/core-win32-x64-msvc@npm:1.2.106"
+  version: 1.2.107
+  resolution: "@swc/core-win32-x64-msvc@npm:1.2.107"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -10047,8 +10047,8 @@ __metadata:
   linkType: hard
 
 "aws-sdk@npm:*, aws-sdk@npm:^2.1021.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.834.0":
-  version: 2.1022.0
-  resolution: "aws-sdk@npm:2.1022.0"
+  version: 2.1023.0
+  resolution: "aws-sdk@npm:2.1023.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -10059,7 +10059,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: 48a5a6fb89eafb5790af0ec897d79dbc60395f844ec89e3f371db244c2596ea8e689430c65f4008bf198f1090b5d24fcdcbeaf236a56847be688a98d65f4d724
+  checksum: bbc5612afe6f3f43fba195e904c145e516494089b49f78d915c0bb332f9fe31d17add22a011e6f3844969a40774b8f6aaf20a3215a5363fee41bfab064d51d44
   languageName: node
   linkType: hard
 
@@ -14176,9 +14176,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.3.723, electron-to-chromium@npm:^1.3.886":
-  version: 1.3.889
-  resolution: "electron-to-chromium@npm:1.3.889"
-  checksum: c0c034ef51153ea0ab72780d8c142d75acbc82b7f0538212bff5621c63f853582b919f0870311b9a9b36abf1d00dfe10664c98ca6fc286210bfaf694f1ab1680
+  version: 1.3.890
+  resolution: "electron-to-chromium@npm:1.3.890"
+  checksum: 1ac87137ba1a317660fdf9292edfa5de33b6d24d15954d88b3f7ca109087f0ae8d088fc56fda724234af5d14d6a9ece62963dfec580e685026f9f1afb68e7bf5
   languageName: node
   linkType: hard
 
@@ -30289,8 +30289,8 @@ __metadata:
   linkType: hard
 
 "webpack@npm:^5, webpack@npm:^5.1.0, webpack@npm:^5.9.0":
-  version: 5.62.0
-  resolution: "webpack@npm:5.62.0"
+  version: 5.62.1
+  resolution: "webpack@npm:5.62.1"
   dependencies:
     "@types/eslint-scope": ^3.7.0
     "@types/estree": ^0.0.50
@@ -30321,7 +30321,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 0f11cc9977b03bbe0e2a0682a99767ed520ea92927f3bb83421866829d3bea08bfbf220fde7126291324f2c60bf9a055065db3dc757767fc6958055c2825e688
+  checksum: 85d9bc7e9b4a0d59420831b1cffaed771818a7abbff3e25215246df6c5abe7806eeee8ca28b15f2dd3b34f64b05586dc138a3b181ce99d1887370301c4ce7e2e
   languageName: node
   linkType: hard
 
