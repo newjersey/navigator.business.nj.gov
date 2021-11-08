@@ -36,3 +36,4 @@ api/src/teardownTests.js
 
 .yarn
 .vscode
+reports

@@ -52,14 +52,8 @@ commands:
           name: Run Fences
           command: yarn fences
       - run:
-          name: Run Shared Unit Tests
-          command: yarn workspace @businessnjgovnavigator/shared test:ci
-      - run:
-          name: Run Web Unit Tests
-          command: yarn workspace @businessnjgovnavigator/web test:ci
-      - run:
-          name: Run API Unit Tests
-          command: yarn workspace @businessnjgovnavigator/api test:ci
+          name: Run Unit Tests
+          command: yarn test:ci
 
   perform-cypress-tests:
     parameters:
@@ -194,6 +188,9 @@ jobs:
       - store-cache
       - store_test_results:
           path: reports/test_results
+      - store_artifacts:
+          name: Store Jest Coverage
+          path: reports/coverage
 
   deploy-dev:
     docker:

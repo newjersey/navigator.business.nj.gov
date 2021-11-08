@@ -19,8 +19,8 @@
     "start:dev": "lerna run  --stream dev",
     "spellcheck": "lerna run --stream spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
-    "test": "lerna run --stream test",
-    "test:ci": "lerna run --stream test:ci",
+    "test": "jest --projects api shared web",
+    "test:ci": "jest --reporters=jest-junit --reporters=default --outputFile=../reports/test_results/all-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../reports/coverage/all/ --projects api shared web",
     "typecheck": "lerna run --stream typecheck"
   },
   "dependencies": {
@@ -196,6 +196,10 @@
   "prettier": {
     "printWidth": 110,
     "endOfLine": "auto"
+  },
+  "jest-junit": {
+    "outputDirectory": "./reports/test_results",
+    "uniqueOutputName": "true"
   },
   "packageManager": "yarn@3.1.0"
 }

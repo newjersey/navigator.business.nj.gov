@@ -16,7 +16,7 @@
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "test": "jest",
-    "test:ci": "jest --reporters=jest-junit --outputFile=../reports/test_results/api-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../reports/coverage/api/",
+    "test:ci": "jest --reporters=jest-junit --outputFile=../reports/test_results/shared-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../reports/coverage/shared/",
     "typecheck": "tsc --noemit"
   },
   "prettier": {
