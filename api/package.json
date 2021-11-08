@@ -7,7 +7,7 @@
     "build": "sls package",
     "clean": "rimraf .serverless .webpack",
     "deploy": "sls deploy",
-    "dev": "npm run start",
+    "dev": "yarn wiremock --root-dir ./wiremock --port 9000 & yarn start",
     "fences": "gf",
     "install-dynamo-local": "sls dynamodb install",
     "lint": "eslint . --max-warnings 0",

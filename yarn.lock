@@ -5341,15 +5341,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:12.0.2":
-  version: 12.0.2
-  resolution: "@next/eslint-plugin-next@npm:12.0.2"
-  dependencies:
-    glob: 7.1.7
-  checksum: 1b776d475ac31b52ffb77ddbc9542f6811d856ec647c91af9ee4540d0a7716174bcd8de0e83e4ed9f6ae7f3ca78771f85b45c7eed30540a5c4f43cb1cadb82ca
-  languageName: node
-  linkType: hard
-
 "@next/eslint-plugin-next@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/eslint-plugin-next@npm:12.0.3"

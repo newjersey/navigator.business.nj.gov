@@ -74,22 +74,10 @@ Run Cypress feature tests using:
 
 ### Running locally
 
-Start the backend:
+Start the services:
 
 ```shell
-yarn workspace @businessnjgovnavigator/api start
-```
-
-Start the frontend
-
-```shell
-yarn workspace @businessnjgovnavigator/web dev
-```
-
-Start wiremock (for mocking external dependencies locally)
-
-```shell
-yarn workspace @businessnjgovnavigator/api start:wiremock
+yarn start:dev
 ```
 
 ### Deploying
