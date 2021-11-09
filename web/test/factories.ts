@@ -13,9 +13,7 @@ import {
   Step,
   Task,
   TaskLink,
-  TaxFiling,
   UserData,
-  TaxFilingData,
 } from "@/lib/types/types";
 import {
   Industry,
@@ -24,6 +22,8 @@ import {
   LegalStructures,
   Municipality,
   MunicipalityDetail,
+  TaxFiling,
+  TaxFilingData,
 } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import { getSectionNames } from "@/lib/utils/helpers";

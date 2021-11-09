@@ -11,7 +11,8 @@ import {
   generateUserData,
 } from "../../test/factories";
 import jwt from "jsonwebtoken";
-import { EntityIdStatus, TaxFilingClient, UserDataClient } from "../domain/types";
+import { TaxFilingClient, UserDataClient } from "../domain/types";
+import { EntityIdStatus } from "@shared/taxFiling";
 import dayjs from "dayjs";
 
 jest.mock("jsonwebtoken", () => ({

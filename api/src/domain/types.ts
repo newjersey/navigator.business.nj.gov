@@ -1,5 +1,6 @@
 import * as https from "https";
 import { Municipality } from "@shared/municipality";
+import { TaxFilingData } from "@shared/taxFiling";
 
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
@@ -115,18 +116,6 @@ export interface UserData {
   preferences: Preferences;
   taxFilingData: TaxFilingData;
 }
-
-export type TaxFilingData = {
-  entityIdStatus: EntityIdStatus;
-  filings: TaxFiling[];
-};
-
-export type EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
-
-export type TaxFiling = {
-  identifier: string;
-  dueDate: string;
-};
 
 export interface Preferences {
   roadmapOpenSections: SectionType[];

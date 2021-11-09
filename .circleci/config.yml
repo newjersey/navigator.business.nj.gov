@@ -132,7 +132,6 @@ commands:
           command: |
             echo 'export API_BASE_URL=http://localhost:5000/local' >> $BASH_ENV
             echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
-            
 
   set-staging-env-vars:
     steps:

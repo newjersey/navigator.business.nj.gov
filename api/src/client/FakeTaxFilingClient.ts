@@ -1,4 +1,5 @@
-import { TaxFiling, TaxFilingClient, TaxFilingData } from "../domain/types";
+import { TaxFilingClient } from "../domain/types";
+import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import dayjs from "dayjs";
 
 export const FakeTaxFilingClient = (): TaxFilingClient => {

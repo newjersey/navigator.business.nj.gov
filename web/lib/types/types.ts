@@ -1,4 +1,4 @@
-import { Municipality } from "@businessnjgovnavigator/shared";
+import { Municipality, TaxFilingData } from "@businessnjgovnavigator/shared";
 
 export interface UserData {
   user: BusinessUser;
@@ -9,18 +9,6 @@ export interface UserData {
   preferences: Preferences;
   taxFilingData: TaxFilingData;
 }
-
-export type TaxFilingData = {
-  entityIdStatus: EntityIdStatus;
-  filings: TaxFiling[];
-};
-
-export type EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
-
-export type TaxFiling = {
-  identifier: string;
-  dueDate: string;
-};
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";

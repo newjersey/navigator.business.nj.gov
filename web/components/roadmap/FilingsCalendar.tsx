@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { getCurrentDate } from "@/lib/utils/getCurrentDate";
-import { FilingReference, TaxFiling } from "@/lib/types/types";
+import { FilingReference } from "@/lib/types/types";
+import { TaxFiling } from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { Icon } from "@/components/njwds/Icon";

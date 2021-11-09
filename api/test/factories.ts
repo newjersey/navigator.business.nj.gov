@@ -8,12 +8,11 @@ import {
   ProfileData,
   Preferences,
   SelfRegResponse,
-  TaxFiling,
   UserData,
-  TaxFilingData,
 } from "../src/domain/types";
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
+import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import dayjs from "dayjs";
 import { Municipality } from "@shared/municipality";
 

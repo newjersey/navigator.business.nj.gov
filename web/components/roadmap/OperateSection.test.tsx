@@ -14,7 +14,8 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { EntityIdStatus, FilingReference, OperateDisplayContent, UserData } from "@/lib/types/types";
+import { FilingReference, OperateDisplayContent, UserData } from "@/lib/types/types";
+import { EntityIdStatus } from "@businessnjgovnavigator/shared";
 import { getByTextAcrossElements, queryByTextAcrossElements } from "@/test/helpers";
 import { useMockDate } from "@/test/mock/useMockDate";
 import { createTheme, ThemeProvider } from "@mui/material";
