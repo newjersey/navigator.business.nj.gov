@@ -54,6 +54,10 @@
       ],
       "matchPackagePrefixes": ["serverless", "webpack"],
       "groupName": "serverless-and-webpack"
+    },
+    {
+      "matchPackagePrefixes": ["@storybook"],
+      "groupName": "storybook"
     }
   ]
 }
