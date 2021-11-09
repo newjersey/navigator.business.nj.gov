@@ -46,7 +46,11 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                     data-testid={filing.identifier.toLowerCase()}
                     className="usa-link text-secondary-darker text-secondary-darker:hover text-no-underline"
                   >
-                    <Tag textWrap={true} tagVariant="info" hover={true}>
+                    <Tag
+                      textWrap={true}
+                      tagVariant={filing.identifier === "ANNUAL_FILING" ? "info" : "accent"}
+                      hover={true}
+                    >
                       <span className="text-bold text-uppercase ">
                         {RoadmapDefaults.calendarFilingDueDateLabel}{" "}
                         {dayjs(filing.dueDate, "YYYY-MM-DD").format("M/D")}

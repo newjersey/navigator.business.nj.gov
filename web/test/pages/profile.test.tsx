@@ -100,7 +100,7 @@ describe("profile", () => {
     fillText("Business name", "Cool Computers");
     clickSave();
     await waitFor(() => expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument());
-    await waitFor(() => expect(currentUserData()));
+    expect(currentUserData().profileData.businessName).toEqual("Cool Computers");
     fillText("Business name", "Cool Computers2");
   });
 
@@ -118,24 +118,22 @@ describe("profile", () => {
     fillText("Notes", "whats appppppp");
     clickSave();
     await waitFor(() => expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument());
-    await waitFor(() =>
-      expect(currentUserData()).toEqual({
-        ...initialUserData,
-        formProgress: "COMPLETED",
-        profileData: {
-          ...initialUserData.profileData,
-          businessName: "Cool Computers",
-          industryId: "e-commerce",
-          homeBasedBusiness: true,
-          legalStructureId: "c-corporation",
-          municipality: newark,
-          taxId: "023456790",
-          entityId: "0234567890",
-          employerId: "023456780",
-          notes: "whats appppppp",
-        },
-      })
-    );
+    expect(currentUserData()).toEqual({
+      ...initialUserData,
+      formProgress: "COMPLETED",
+      profileData: {
+        ...initialUserData.profileData,
+        businessName: "Cool Computers",
+        industryId: "e-commerce",
+        homeBasedBusiness: true,
+        legalStructureId: "c-corporation",
+        municipality: newark,
+        taxId: "023456790",
+        entityId: "0234567890",
+        employerId: "023456780",
+        notes: "whats appppppp",
+      },
+    });
   });
 
   it("builds and sets roadmap on save", async () => {
