@@ -5,7 +5,7 @@ export const SearchBusinessNamesDefaults: Record<string, string> = {
   similarUnavailableNamesText: "Here are similar business names that are already taken:",
   availableText:
     'It looks like "${name}" might be available, but you should next do an offical name check using the button below.',
-  updateButtonText: "Update the name on your roadmap with this one.",
+  updateButtonText: "Update the name on your Roadmap with this one",
   nameHasBeenUpdatedText: "Your business name has been updated",
   officialCheckButtonText: "Official Name Check",
   officialCheckButtonLink: "https://www.njportal.com/DOR/BusinessNameSearch/Search/BusinessName",
