@@ -2,6 +2,7 @@ import type { Config } from "@jest/types";
 
 export default async (): Promise<Config.InitialOptions> => {
   return {
+    coverageReporters: ["json-summary", "text", "lcov"],
     setupFilesAfterEnv: ["./setupTests.js"],
     testEnvironment: "jsdom",
     testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
@@ -14,7 +15,6 @@ export default async (): Promise<Config.InitialOptions> => {
       "@/pages/(.*)": "<rootDir>/pages/$1",
       "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/shared/src/$1",
     },
-    //preset: "ts-jest",
     transform: {
       "\\.md$": "jest-raw-loader",
       "\\.[jt]sx?$": "@swc/jest",
