@@ -21,7 +21,7 @@
     "spellcheck": "cspell **/*.md",
     "start": "next start",
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
-    "test:ci": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest --reporters=jest-junit --outputFile=../reports/test_results/web-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../reports/coverage/web/",
+    "test:ci": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest --reporters=jest-junit --outputFile=../coverage/test_results/web-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/web/",
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
     "storybook": "start-storybook -p 6006",
@@ -128,7 +128,7 @@
     "webpack": "5.62.1"
   },
   "jest-junit": {
-    "outputDirectory": "../reports/test_results",
+    "outputDirectory": "../coverage/test_results",
     "uniqueOutputName": "true"
   }
 }

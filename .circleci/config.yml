@@ -193,10 +193,10 @@ jobs:
       - code-quality
       - store-cache
       - store_test_results:
-          path: reports/test_results
+          path: coverage/test_results
       - store_artifacts:
           name: Store Jest Coverage
-          path: reports/coverage
+          path: coverage
 
   deploy-dev:
     docker:

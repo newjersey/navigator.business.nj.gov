@@ -20,7 +20,7 @@
     "spellcheck": "lerna run --stream spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest --projects api shared web",
-    "test:ci": "jest --reporters=jest-junit --outputFile=../reports/test_results/all-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../reports/coverage/all/ --projects api shared web",
+    "test:ci": "jest --reporters=jest-junit --outputFile=../coverage/test_results/all-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
     "typecheck": "lerna run --stream typecheck"
   },
   "dependencies": {
@@ -198,7 +198,7 @@
     "endOfLine": "auto"
   },
   "jest-junit": {
-    "outputDirectory": "./reports/test_results",
+    "outputDirectory": "./coverage/test_results",
     "uniqueOutputName": "true"
   },
   "packageManager": "yarn@3.1.0"
