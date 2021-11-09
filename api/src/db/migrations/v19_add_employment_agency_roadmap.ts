@@ -1,3 +1,4 @@
+import { randomInt } from "./migrations";
 import { v18UserData } from "./v18_add_foodtruck_roadmap";
 
 export interface v19UserData {
@@ -116,3 +117,30 @@ export type v19LicenseStatus =
 export type v19SectionType = "PLAN" | "START" | "OPERATE";
 
 // ---------------- v19 factories ----------------
+export const generatev19User = (overrides: Partial<v19BusinessUser>): v19BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generatev19OnboardingData = (overrides: Partial<v19OnboardingData>): v19OnboardingData => {
+  return {
+    businessName: `some-business-name-${randomInt()}`,
+    industry: "restaurant",
+    legalStructure: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    homeBasedBusiness: true,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    ...overrides,
+  };
+};

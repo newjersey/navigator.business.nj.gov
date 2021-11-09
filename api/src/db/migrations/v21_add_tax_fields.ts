@@ -1,3 +1,4 @@
+import { randomInt } from "./migrations";
 import { v20UserData } from "./v20_switch_industry_to_id";
 
 export interface v21UserData {
@@ -116,3 +117,34 @@ export type v21LicenseStatus =
 export type v21SectionType = "PLAN" | "START" | "OPERATE";
 
 // ---------------- v21 factories ----------------
+export const generatev21User = (overrides: Partial<v21BusinessUser>): v21BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generatev21OnboardingData = (overrides: Partial<v21OnboardingData>): v21OnboardingData => {
+  return {
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructure: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    homeBasedBusiness: true,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    ...overrides,
+  };
+};

@@ -1,3 +1,4 @@
+import { randomInt } from "./migrations";
 import { v21UserData } from "./v21_add_tax_fields";
 
 export interface v22UserData {
@@ -109,3 +110,34 @@ export type v22LicenseStatus =
 export type v22SectionType = "PLAN" | "START" | "OPERATE";
 
 // ---------------- v22 factories ----------------
+export const generatev22User = (overrides: Partial<v22BusinessUser>): v22BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generatev22OnboardingData = (overrides: Partial<v22OnboardingData>): v22OnboardingData => {
+  return {
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    homeBasedBusiness: true,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    ...overrides,
+  };
+};
