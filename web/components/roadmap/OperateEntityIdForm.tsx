@@ -49,6 +49,10 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
       return;
     }
 
+    if (!userData.profileData.entityId) {
+      setIsValid(false);
+    }
+
     update({
       ...userData,
       profileData,

@@ -145,6 +145,17 @@ describe("<OperateSection />", () => {
       expect(currentUserData().profileData.entityId).toEqual("1234567890");
     });
 
+    it("displays error if field is empty when submitted", () => {
+      const subject = statefulRender(emptyEntityIdData);
+
+      fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
+      expect(subject.container.querySelector("#entityId-helper-text") as HTMLElement).toBeInTheDocument();
+
+      fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "1234567890" } });
+      fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
+      expect(currentUserData().profileData.entityId).toEqual("1234567890");
+    });
+
     it("displays error text if submitted entity ID does not exist", () => {
       const subject = renderWithEntityIdStatus("NOT_FOUND");
       expect(subject.getByText("ENTITY ID NOT FOUND")).toBeInTheDocument();
