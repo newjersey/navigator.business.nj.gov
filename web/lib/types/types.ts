@@ -46,7 +46,6 @@ const emptyProfileData = {
   liquorLicense: false,
   homeBasedBusiness: false,
   constructionRenovationPlan: undefined,
-  dateOfFormation: undefined,
   entityId: undefined,
   employerId: undefined,
   taxId: undefined,
@@ -65,7 +64,6 @@ export interface ProfileData {
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
   constructionRenovationPlan: boolean | undefined;
-  dateOfFormation: string | undefined;
   entityId: string | undefined;
   employerId: string | undefined;
   taxId: string | undefined;

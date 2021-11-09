@@ -428,7 +428,7 @@ describe("roadmap page", () => {
     });
 
     useMockUserData({
-      profileData: generateProfileData({ dateOfFormation: "2005-11-01" }),
+      profileData: generateProfileData({}),
       preferences: generatePreferences({
         roadmapOpenSections: ["OPERATE"],
       }),

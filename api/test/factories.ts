@@ -68,7 +68,6 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     liquorLicense: false,
     homeBasedBusiness: false,
     constructionRenovationPlan: undefined,
-    dateOfFormation: dayjs().format("YYYY-MM"),
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
     taxId: randomInt(9).toString(),

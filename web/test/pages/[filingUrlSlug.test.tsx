@@ -19,8 +19,9 @@ describe("filing page", () => {
     useMockDate("2021-11-01");
 
     useMockUserData({
-      profileData: generateProfileData({ dateOfFormation: "2020-04-01" }),
+      profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
+        entityIdStatus: "EXISTS_AND_REGISTERED",
         filings: [
           generateTaxFiling({}),
           generateTaxFiling({ identifier: "filing-identifier-1", dueDate: "2022-04-30" }),
