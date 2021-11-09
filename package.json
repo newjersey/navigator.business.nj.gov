@@ -148,7 +148,7 @@
     "prettier": "2.4.1",
     "prop-types": "15.7.2",
     "rimraf": "3.0.2",
-    "sass-loader": "10.2.0",
+    "sass-loader": "12.3.0",
     "serverless": "2.65.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "5.2.0",
