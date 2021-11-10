@@ -78,6 +78,8 @@
     "@jest/types": "27.2.5",
     "@mdx-js/react": "1.6.22",
     "@next/eslint-plugin-next": "12.0.3",
+    "@semantic-release/changelog": "6.0.1",
+    "@semantic-release/git": "10.0.1",
     "@serverless/typescript": "2.65.0",
     "@storybook/addon-a11y": "6.3.12",
     "@storybook/addon-actions": "6.3.12",
@@ -149,6 +151,7 @@
     "prop-types": "15.7.2",
     "rimraf": "3.0.2",
     "sass-loader": "12.3.0",
+    "semantic-release": "18.0.0",
     "serverless": "2.65.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "5.2.0",
@@ -200,6 +203,35 @@
   "jest-junit": {
     "outputDirectory": "./coverage/test_results",
     "uniqueOutputName": "true"
+  },
+  "release": {
+    "baseBranch": "main",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "parserOpts": {
+          "noteKeywords": [
+            "BREAKING CHANGE",
+            "BREAKING CHANGES"
+          ]
+        }
+      },
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "angular"
+        }
+      ],
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/github",
+        {
+          "successComment": false
+        }
+      ],
+      "@semantic-release/git"
+    ]
   },
   "packageManager": "yarn@3.1.0"
 }
