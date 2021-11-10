@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/newjersey/business.nj.gov/compare/v1.0.0...v1.0.1) (2021-11-10)
+
+
+### Bug Fixes
+
+* [[#760](https://github.com/newjersey/business.nj.gov/issues/760)] additional script for intercom identity ([bbf7c06](https://github.com/newjersey/business.nj.gov/commit/bbf7c06f95bbcaccad19e33298eccb10bdbe1ade))
+
+
 # 1.0.0 (2021-11-10)
 
 
