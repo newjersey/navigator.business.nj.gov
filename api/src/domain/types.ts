@@ -1,4 +1,5 @@
 import * as https from "https";
+import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
 import { Municipality } from "@shared/municipality";
 import { TaxFilingData } from "@shared/taxFiling";
 
@@ -55,16 +56,6 @@ export interface LicenseData {
   items: LicenseStatusItem[];
 }
 
-export type LicenseStatusResult = {
-  status: LicenseStatus;
-  checklistItems: LicenseStatusItem[];
-};
-
-export type LicenseStatusItem = {
-  title: string;
-  status: CheckoffStatus;
-};
-
 export type LicenseEntity = {
   fullName: string;
   addressLine1: string;
@@ -83,22 +74,6 @@ export type LicenseEntity = {
   checkoffStatus: "Completed" | "Unchecked" | "Not Applicable";
   dateThisStatus: string;
 };
-
-export type CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
-
-export type LicenseStatus =
-  | "ACTIVE"
-  | "PENDING"
-  | "UNKNOWN"
-  | "EXPIRED"
-  | "BARRED"
-  | "OUT_OF_BUSINESS"
-  | "REINSTATEMENT_PENDING"
-  | "CLOSED"
-  | "DELETED"
-  | "DENIED"
-  | "VOLUNTARY_SURRENDER"
-  | "WITHDRAWN";
 
 export type NameAvailability = {
   status: "AVAILABLE" | "UNAVAILABLE";

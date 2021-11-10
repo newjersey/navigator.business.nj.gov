@@ -1,4 +1,4 @@
-import { LicenseStatus, LicenseStatusItem } from "@/lib/types/types";
+import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared";
 import React, { ReactElement, useEffect, useState } from "react";
 import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { Icon } from "@/components/njwds/Icon";

@@ -208,7 +208,6 @@ commands:
             git status
             gh pr create --fill --base main --head $CIRCLE_BRANCH
 
-
 jobs:
   build:
     docker:
@@ -315,8 +314,8 @@ workflows:
       - prepare-release:
           filters:
             branches:
-              only: 
-                 - /^release-.*/
+              only:
+                - /^release-.*/
           requires:
             - production-hold
       - deploy-production:

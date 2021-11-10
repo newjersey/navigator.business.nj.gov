@@ -1,8 +1,6 @@
 import {
   BusinessUser,
   LicenseData,
-  LicenseStatusItem,
-  LicenseStatusResult,
   NameAndAddress,
   NameAvailability,
   ProfileData,
@@ -20,6 +18,8 @@ import {
   Industries,
   LegalStructure,
   LegalStructures,
+  LicenseStatusItem,
+  LicenseStatusResult,
   Municipality,
   MunicipalityDetail,
   TaxFiling,

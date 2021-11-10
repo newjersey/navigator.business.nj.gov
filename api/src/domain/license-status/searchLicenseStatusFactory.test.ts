@@ -1,6 +1,7 @@
-import { LicenseStatusClient, LicenseStatusResult, SearchLicenseStatus } from "../types";
+import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 import { searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
 import { generateLicenseEntity, generateNameAndAddress } from "../../../test/factories";
+import { LicenseStatusResult } from "@shared/licenseStatus";
 
 describe("searchLicenseStatus", () => {
   let stubLicenseStatusClient: jest.Mocked<LicenseStatusClient>;
