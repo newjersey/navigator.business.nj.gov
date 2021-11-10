@@ -7,6 +7,7 @@ import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { FilingReference, Task } from "@/lib/types/types";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { MiniOperateSection } from "../roadmap/MiniOperateSection";
+import Link from "next/link";
 interface Props {
   scrolled: boolean;
   task?: Task;
@@ -56,7 +57,11 @@ export const NavBarLoggedInMobile = ({
           {sideBarPageLayout ? (
             <div className="text-bold">{NavDefaults.taskPageNavBarHeading}</div>
           ) : (
-            <img src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+            <Link href="/roadmap" passHref>
+              <a href="/roadmap">
+                <img src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+              </a>
+            </Link>
           )}
         </div>
       </nav>
