@@ -18,7 +18,7 @@
     "postbuild": "yarn next export",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
-    "spellcheck": "cspell **/*.md",
+    "spellcheck": "cspell **/*.md -c ../cspell.json",
     "start": "next start",
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
     "test:ci": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest --reporters=jest-junit --outputFile=../coverage/test_results/web-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/web/",
