@@ -2,8 +2,6 @@ import {
   BusinessUser,
   LicenseData,
   LicenseEntity,
-  LicenseStatusItem,
-  LicenseStatusResult,
   NameAndAddress,
   ProfileData,
   Preferences,
@@ -12,6 +10,7 @@ import {
 } from "../src/domain/types";
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
+import { LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
 import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import dayjs from "dayjs";
 import { Municipality } from "@shared/municipality";

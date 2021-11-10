@@ -1,4 +1,9 @@
-import { Municipality, TaxFilingData } from "@businessnjgovnavigator/shared";
+import {
+  LicenseStatus,
+  LicenseStatusItem,
+  Municipality,
+  TaxFilingData,
+} from "@businessnjgovnavigator/shared";
 
 export interface UserData {
   user: BusinessUser;
@@ -318,32 +323,6 @@ export const createEmptyNameAndAddress = (): NameAndAddress => ({
   addressLine2: "",
   zipCode: "",
 });
-
-export type LicenseStatusItem = {
-  title: string;
-  status: CheckoffStatus;
-};
-
-export type LicenseStatusResult = {
-  status: LicenseStatus;
-  checklistItems: LicenseStatusItem[];
-};
-
-export type CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
-
-export type LicenseStatus =
-  | "ACTIVE"
-  | "PENDING"
-  | "UNKNOWN"
-  | "EXPIRED"
-  | "BARRED"
-  | "OUT_OF_BUSINESS"
-  | "REINSTATEMENT_PENDING"
-  | "CLOSED"
-  | "DELETED"
-  | "DENIED"
-  | "VOLUNTARY_SURRENDER"
-  | "WITHDRAWN";
 
 export type SelfRegResponse = {
   authRedirectURL: string;

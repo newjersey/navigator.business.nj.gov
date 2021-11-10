@@ -20,6 +20,7 @@
     "@shared/industry",
     "@shared/legalStructure",
     "@shared/municipality",
-    "@shared/taxFiling"
+    "@shared/taxFiling",
+    "@shared/licenseStatus"
   ]
 }
