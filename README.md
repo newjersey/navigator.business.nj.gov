@@ -4,6 +4,7 @@ This is the development repository for the work-in-progress business dashboard f
 
 [![CircleCI](https://circleci.com/gh/newjersey/business.nj.gov/tree/main.svg?style=svg)](https://circleci.com/gh/newjersey/business.nj.gov/tree/main)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![semantic-release](https://img.shields.io/badge/semantic-release-e10079.svg?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 ## Architecture
 
