@@ -111,11 +111,6 @@
   font-size: 2rem !important;
 }
 
-.display-flex-custom {
-  display: flex !important;
-  justify-content: center;
-}
-
 @media only screen and (min-width: $xs) {
   .display-block {
     display: block;
@@ -261,11 +256,6 @@
 
   .padding-header {
     padding-right: 2rem !important;
-  }
-
-  .display-flex-custom {
-    display: flex !important;
-    justify-content: flex-start;
   }
 }
 

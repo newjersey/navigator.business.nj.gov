@@ -7,7 +7,7 @@ import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import analytics from "@/lib/utils/analytics";
 import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { ToastAlert } from "./njwds-extended/ToastAlert";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
 import { TaskProgressLookup } from "@/display-defaults/TaskProgressLookup";
 import { Tag } from "./njwds-extended/Tag";
 
@@ -67,7 +67,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
       <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
         {TaskDefaults.taskProgressSuccessToastBody}
       </ToastAlert>
-      <Button
+      <MuiButton
         style={{ whiteSpace: "nowrap" }}
         aria-controls="task-progress-status-menu"
         aria-haspopup="true"
@@ -76,7 +76,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
       >
         {TaskProgressTagLookup[value]}
         <Icon>unfold_more</Icon>
-      </Button>
+      </MuiButton>
       <Menu
         id="task-progress-status-menu"
         anchorEl={anchorEl}

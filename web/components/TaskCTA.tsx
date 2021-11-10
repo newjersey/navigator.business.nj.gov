@@ -1,6 +1,7 @@
 import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import React, { ReactElement } from "react";
 import analytics from "@/lib/utils/analytics";
+import { Button } from "./njwds-extended/Button";
 
 interface Props {
   link: string;
@@ -14,12 +15,15 @@ export const TaskCTA = (props: Props): ReactElement => {
 
   return (
     <a href={props.link} target="_blank" rel="noreferrer noopener" className="margin-left-auto">
-      <button
-        className="usa-button margin-top-4 margin-bottom-1 margin-right-0"
-        onClick={analytics.event.task_primary_call_to_action.click.open_external_website}
-      >
-        {props.text || TaskDefaults.defaultCallToActionText}
-      </button>
+      <div className="margin-top-4 margin-bottom-1">
+        <Button
+          style="primary"
+          noRightMargin
+          onClick={analytics.event.task_primary_call_to_action.click.open_external_website}
+        >
+          {props.text || TaskDefaults.defaultCallToActionText}
+        </Button>
+      </div>
     </a>
   );
 };

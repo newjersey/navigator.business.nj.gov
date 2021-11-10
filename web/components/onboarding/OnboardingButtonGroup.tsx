@@ -1,25 +1,26 @@
 import React, { ReactElement, useContext } from "react";
 import { OnboardingContext } from "@/pages/onboarding";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { Button } from "../njwds-extended/Button";
 
 export const OnboardingButtonGroup = (): ReactElement => {
   const { state, onBack } = useContext(OnboardingContext);
 
-  const back = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const back = (event: React.MouseEvent) => {
+    event.preventDefault();
     onBack();
   };
 
   return (
     <div className="float-right fdr margin-bottom-8">
       {(state.page || 1) > 1 && (
-        <button className="usa-button usa-button--outline" onClick={back} data-testid="back">
+        <Button style="secondary" onClick={back} dataTestid="back">
           {OnboardingDefaults.backButtonText}
-        </button>
+        </Button>
       )}
-      <button type="submit" className="usa-button margin-right-0" data-testid="next">
+      <Button style="primary" dataTestid="next" typeSubmit noRightMargin>
         {OnboardingDefaults.nextButtonText}
-      </button>
+      </Button>
     </div>
   );
 };
