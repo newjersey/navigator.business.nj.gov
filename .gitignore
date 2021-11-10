@@ -70,3 +70,4 @@ api/.dynamodb
 shared/lib
 
 tsconfig.tsbuildinfo
+aws_config_file_path.json

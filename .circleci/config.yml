@@ -1,13 +1,8 @@
 version: 2.1
 
 commands:
-  configure-and-build:
+  bootstrap-code:
     steps:
-      - run:
-          name: Install Tools
-          command: |
-            apt update
-            apt install -y openjdk-11-jdk-headless
       - checkout
       - restore_cache:
           keys:
@@ -18,12 +13,25 @@ commands:
       - run:
           name: Install yarn packages
           command: yarn install
+
+  configure:
+    steps:
+      - run:
+          name: Install Tools
+          command: |
+            apt update
+            apt install -y openjdk-11-jdk-headless
+      - bootstrap-code
       - run:
           name: Configure Amplify
           command: ./scripts/amplify-ci/configure.sh
       - run:
           name: Configure Serverless
           command: yarn workspace @businessnjgovnavigator/api serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
+
+  configure-and-build:
+    steps:
+      - configure
       - run:
           name: Build
           command: yarn build
@@ -182,6 +190,25 @@ commands:
             apt update
             apt install -y google-chrome-stable
 
+  generate-release-notes:
+    steps:
+      - run:
+          name: Install Github CLI
+          command: |
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            apt update
+            apt -y install gh
+      - run:
+          name: Generate Release Notes
+          command: yarn semantic-release --branches $CIRCLE_BRANCH
+      - run:
+          name: Create PR to main
+          command: |
+            git status
+            gh pr create --fill --base main --head $CIRCLE_BRANCH
+
+
 jobs:
   build:
     docker:
@@ -197,6 +224,14 @@ jobs:
       - store_artifacts:
           name: Store Jest Coverage
           path: coverage
+
+  prepare-release:
+    docker:
+      - image: node:14.18.1-buster
+    resource_class: small
+    steps:
+      - bootstrap-code
+      - generate-release-notes
 
   deploy-dev:
     docker:
@@ -255,12 +290,19 @@ jobs:
 workflows:
   release-pipeline:
     jobs:
+      - prepare-release:
+          filters:
+            branches:
+              only: 
+                 - /^release-.*/
       - staging-hold:
           type: approval
           filters:
             branches:
               only:
                 - /^release-.*/
+          requires:
+            - prepare-release
       - deploy-staging:
           name: staging-deploy
           filters:
