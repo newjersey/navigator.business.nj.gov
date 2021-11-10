@@ -49,8 +49,8 @@
     },
     {
       "id": "cleaning-aid",
-      "name": "Cleaning Aid",
-      "description": "Offering cleaning services",
+      "name": "Cleaning Service",
+      "description": "Providing commercial or residential cleaning services",
       "canBeHomeBased": true,
       "isLiquorLicenseApplicable": false,
       "isMobileLocation": false,
