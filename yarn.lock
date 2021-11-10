@@ -2352,7 +2352,7 @@ __metadata:
     "@types/xml2js": 0.4.9
     "@typescript-eslint/eslint-plugin": 5.3.1
     "@typescript-eslint/parser": 5.3.1
-    aws-lambda: 1.0.6
+    aws-lambda: 1.0.7
     aws-sdk: 2.1019.0
     axios: 0.24.0
     body-parser: 1.19.0
@@ -2468,7 +2468,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.3.1
     "@typescript-eslint/parser": 5.3.1
     airtable: 0.11.1
-    aws-lambda: 1.0.6
+    aws-lambda: 1.0.7
     aws-sdk: 2.1019.0
     axios: 0.24.0
     babel-jest: 27.3.1
@@ -10349,34 +10349,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-lambda@npm:1.0.6":
-  version: 1.0.6
-  resolution: "aws-lambda@npm:1.0.6"
+"aws-lambda@npm:1.0.7":
+  version: 1.0.7
+  resolution: "aws-lambda@npm:1.0.7"
   dependencies:
-    aws-sdk: "*"
+    aws-sdk: ^2.814.0
     commander: ^3.0.2
-    js-yaml: ^3.13.1
+    js-yaml: ^3.14.1
     watchpack: ^2.0.0-beta.10
   bin:
-    lambda: ./bin/lambda
-  checksum: ec9e1cf07269b632e641d83378fa293b78ec066b5cd5d5d60a062e4414aafa868f314b63c4b2a0efa7f85d0b2a555409bf70f2e9b62b63d3ee6ca28051b25138
-  languageName: node
-  linkType: hard
-
-"aws-sdk@npm:*, aws-sdk@npm:^2.1021.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.834.0":
-  version: 2.1023.0
-  resolution: "aws-sdk@npm:2.1023.0"
-  dependencies:
-    buffer: 4.9.2
-    events: 1.1.1
-    ieee754: 1.1.13
-    jmespath: 0.15.0
-    querystring: 0.2.0
-    sax: 1.2.1
-    url: 0.10.3
-    uuid: 3.3.2
-    xml2js: 0.4.19
-  checksum: bbc5612afe6f3f43fba195e904c145e516494089b49f78d915c0bb332f9fe31d17add22a011e6f3844969a40774b8f6aaf20a3215a5363fee41bfab064d51d44
+    lambda: bin/lambda
+  checksum: 11316e87b5c4fc36e6bd0495742a3c0ed13befc9527a7b251a58180d141d9afd68b684f37aeb3b53d117d3c2f96747eace31826b683543f1edddc03f392865fd
   languageName: node
   linkType: hard
 
@@ -10394,6 +10377,23 @@ __metadata:
     uuid: 3.3.2
     xml2js: 0.4.19
   checksum: e87af9a761547c3e2beb6d400a165f90939e256df091b8761099a689a9a2aeeb9b92e7e0a93ea0db413e7050387bb0580edb0edafa35541d439f7b2a1803f2c1
+  languageName: node
+  linkType: hard
+
+"aws-sdk@npm:^2.1021.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0, aws-sdk@npm:^2.834.0":
+  version: 2.1025.0
+  resolution: "aws-sdk@npm:2.1025.0"
+  dependencies:
+    buffer: 4.9.2
+    events: 1.1.1
+    ieee754: 1.1.13
+    jmespath: 0.15.0
+    querystring: 0.2.0
+    sax: 1.2.1
+    url: 0.10.3
+    uuid: 3.3.2
+    xml2js: 0.4.19
+  checksum: 72b4bfe209859ad58379c59e61f389533f89f995f7e2b8f3f21ec86dcd705c16368c82f65f8838900532c6afb4384bf1d1b0a62c765cbdc8a7363970706a2b5f
   languageName: node
   linkType: hard
 
