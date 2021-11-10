@@ -8,6 +8,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMediaQuery } from "@mui/material";
 import { MediaQueries } from "@/lib/PageSizes";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
+import { Button } from "../njwds-extended/Button";
 
 interface Props {
   profileData: ProfileData;
@@ -110,7 +111,7 @@ export const MiniProfile = (props: Props): ReactElement => {
         </span>
       </div>
       <div>
-        <div className="grid-row grid-gap">
+        <div className="grid-row grid-gap margin-bottom-2">
           <div className="tablet:grid-col-6">
             <div data-testid="mini-profile-businessName" data-business-name={props.profileData.businessName}>
               <strong>{RoadmapDefaults.greyBoxBusinessNameText}:</strong> {getBusinessName()}
@@ -150,12 +151,9 @@ export const MiniProfile = (props: Props): ReactElement => {
         </div>
 
         {isMobile && (
-          <button
-            className="usa-button usa-button--unstyled underline font-body-2xs margin-top-2"
-            onClick={() => setShowingAll(!showingAll)}
-          >
+          <Button style="tertiary" underline smallText onClick={() => setShowingAll(!showingAll)}>
             {showingAll ? RoadmapDefaults.greyBoxViewLessText : RoadmapDefaults.greyBoxViewMoreText}
-          </button>
+          </Button>
         )}
       </div>
     </div>
