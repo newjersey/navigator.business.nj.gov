@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/newjersey/business.nj.gov/compare/v1.1.0...v1.1.1) (2021-11-11)
+
+
+### Bug Fixes
+
+* **deps:** upgrade dependencies to the latest version ([8ace195](https://github.com/newjersey/business.nj.gov/commit/8ace195172181e196d7d91416871d1e06dfe7d69))
+
 # [1.1.0](https://github.com/newjersey/business.nj.gov/compare/v1.0.1...v1.1.0) (2021-11-11)
 
 
