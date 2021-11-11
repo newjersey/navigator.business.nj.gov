@@ -2345,7 +2345,7 @@ __metadata:
     "@types/jasmine": 3.10.2
     "@types/jest": 27.0.2
     "@types/jsonwebtoken": 8.5.5
-    "@types/node": 14.17.32
+    "@types/node": 14.17.33
     "@types/supertest": 2.0.11
     "@types/uuid": 8.3.1
     "@types/webpack-node-externals": 2.5.3
@@ -2353,7 +2353,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.3.1
     "@typescript-eslint/parser": 5.3.1
     aws-lambda: 1.0.7
-    aws-sdk: 2.1019.0
+    aws-sdk: 2.1026.0
     axios: 0.24.0
     body-parser: 1.19.0
     copy-webpack-plugin: 9.0.1
@@ -2399,7 +2399,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 14.17.32
+    "@types/node": 14.17.33
     cross-env: 7.0.3
     cspell: 5.12.6
     prettier: 2.4.1
@@ -2443,7 +2443,7 @@ __metadata:
     "@storybook/storybook-deployer": 2.8.10
     "@swc/core": 1.2.107
     "@swc/jest": 0.2.5
-    "@testing-library/dom": 8.11.0
+    "@testing-library/dom": 8.11.1
     "@testing-library/jest-dom": 5.15.0
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
@@ -2456,7 +2456,7 @@ __metadata:
     "@types/jest": 27.0.2
     "@types/jsonwebtoken": 8.5.5
     "@types/lodash.orderby": 4.6.6
-    "@types/node": 14.17.32
+    "@types/node": 14.17.33
     "@types/react": 17.0.34
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.3
@@ -2470,7 +2470,7 @@ __metadata:
     "@typescript-eslint/parser": 5.3.1
     airtable: 0.11.1
     aws-lambda: 1.0.7
-    aws-sdk: 2.1019.0
+    aws-sdk: 2.1026.0
     axios: 0.24.0
     babel-jest: 27.3.1
     babel-loader: 8.2.3
@@ -2564,7 +2564,7 @@ __metadata:
     "@babel/runtime": 7.16.0
     "@jest/types": 27.2.5
     "@types/jest": 27.0.2
-    "@types/node": 14.17.32
+    "@types/node": 14.17.33
     "@typescript-eslint/eslint-plugin": 5.3.1
     "@typescript-eslint/parser": 5.3.1
     cross-env: 7.0.3
@@ -2610,14 +2610,14 @@ __metadata:
     "@storybook/storybook-deployer": 2.8.10
     "@swc/core": 1.2.107
     "@swc/jest": 0.2.5
-    "@testing-library/dom": 8.11.0
+    "@testing-library/dom": 8.11.1
     "@testing-library/jest-dom": 5.15.0
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
     "@types/broken-link-checker": 0.7.1
     "@types/jest": 27.0.2
     "@types/lodash.orderby": 4.6.6
-    "@types/node": 14.17.32
+    "@types/node": 14.17.33
     "@types/react": 17.0.34
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.3
@@ -7994,7 +7994,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:8.11.0, @testing-library/dom@npm:^8.0.0":
+"@testing-library/dom@npm:8.11.1":
+  version: 8.11.1
+  resolution: "@testing-library/dom@npm:8.11.1"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/runtime": ^7.12.5
+    "@types/aria-query": ^4.2.0
+    aria-query: ^5.0.0
+    chalk: ^4.1.0
+    dom-accessibility-api: ^0.5.9
+    lz-string: ^1.4.4
+    pretty-format: ^27.0.2
+  checksum: 082104b104def94db071fe35f967124c52d387d995a61327cd60ed39c310126f4cde2fa51054c37977cd3a2082311795417413506ad1a14df1010bd1cbb02bc5
+  languageName: node
+  linkType: hard
+
+"@testing-library/dom@npm:^8.0.0":
   version: 8.11.0
   resolution: "@testing-library/dom@npm:8.11.0"
   dependencies:
@@ -8530,7 +8546,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.17.32, @types/node@npm:>=8.0.0 <15, @types/node@npm:^14.0.10, @types/node@npm:^14.14.31":
+"@types/node@npm:14.17.33":
+  version: 14.17.33
+  resolution: "@types/node@npm:14.17.33"
+  checksum: 47ee8d5a398f84b376023f03b83e43a71f1bf617d1014d34c0af24b0332b42e7b392c967c20bfb907fb37971993035e3b25c47a1678c745c5d122d8205ba5a19
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:>=8.0.0 <15, @types/node@npm:^14.0.10, @types/node@npm:^14.14.31":
   version: 14.17.32
   resolution: "@types/node@npm:14.17.32"
   checksum: c3ec45db5d8ca6ed80bcc2fe3cd9f15c1518d43cf048dd5444d1fcbe308d302a42721cb3f19548ac2e7b8b7db4f7f6cd4bf9ed58ab1d30a0bf61758350edd9d5
@@ -10381,9 +10404,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:2.1019.0":
-  version: 2.1019.0
-  resolution: "aws-sdk@npm:2.1019.0"
+"aws-sdk@npm:2.1026.0":
+  version: 2.1026.0
+  resolution: "aws-sdk@npm:2.1026.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -10394,7 +10417,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: e87af9a761547c3e2beb6d400a165f90939e256df091b8761099a689a9a2aeeb9b92e7e0a93ea0db413e7050387bb0580edb0edafa35541d439f7b2a1803f2c1
+  checksum: 3ac323624e94948fc64bd7ff4854f70d02dbae6e3fc98a665bbf9b9f71b89d21709d7d5998810a41decee5c8162e2d5a81568762a590f942ae4eb8f173d68b42
   languageName: node
   linkType: hard
 

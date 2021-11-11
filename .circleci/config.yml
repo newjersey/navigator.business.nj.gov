@@ -179,9 +179,9 @@ commands:
       - deploy-amplify
 
   deploy-storybook:
-    steps: 
+    steps:
       - install-awscli
-      - run: 
+      - run:
           name: Deploy Storybook
           command: yarn workspace @businessnjgovnavigator/web deploy:storybook --bucket-path $STORYBOOK_S3_BUCKET  --aws-profile=NONE
 
