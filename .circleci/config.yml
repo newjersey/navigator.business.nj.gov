@@ -311,13 +311,13 @@ workflows:
           filters:
             branches:
               only:
-                - release
+                - /^release-.*/
       - deploy-staging:
           name: staging-deploy
           filters:
             branches:
               only:
-                - release
+                - /^release-.*/
           requires:
             - staging-hold
       - production-hold:
@@ -325,14 +325,14 @@ workflows:
           filters:
             branches:
               only:
-                - release
+                - /^release-.*/
           requires:
             - staging-deploy
       - prepare-release:
           filters:
             branches:
               only:
-                - release
+                - /^release-.*/
           requires:
             - production-hold
       - deploy-production:
@@ -340,7 +340,7 @@ workflows:
           filters:
             branches:
               only:
-                - release
+                - /^release-.*/
           requires:
             - prepare-release
 
@@ -350,7 +350,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - release
+                - /^release-.*/
       - cypress-tests:
           name: Cypress Tests - Group 1
           suite: group1
@@ -358,7 +358,7 @@ workflows:
             branches:
               ignore:
                 - main
-                - release
+                - /^release-.*/
       - cypress-tests:
           name: Cypress Tests - Group 2
           suite: group2
@@ -366,7 +366,7 @@ workflows:
             branches:
               ignore:
                 - main
-                - release
+                - /^release-.*/
       - cypress-tests:
           name: Cypress Tests - Group 1
           enable-dashboard: true
