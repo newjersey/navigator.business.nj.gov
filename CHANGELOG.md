@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/newjersey/business.nj.gov/compare/v1.0.1...v1.1.0) (2021-11-11)
+
+
+### Bug Fixes
+
+* [[#760](https://github.com/newjersey/business.nj.gov/issues/760)] additional script for intercom identity ([c521524](https://github.com/newjersey/business.nj.gov/commit/c5215249da5eddd1ee9d496d2f9569a3be1d9ae8))
+* [[#760](https://github.com/newjersey/business.nj.gov/issues/760)] re-init after loading intercom identity ([81f2b63](https://github.com/newjersey/business.nj.gov/commit/81f2b63dfb0a2e90bb10a22a9dcae84e589c2b0e))
+* moved context-info into content folder ([d283ece](https://github.com/newjersey/business.nj.gov/commit/d283ece65465fa898e5ec144c3f12bc8a33686e7))
+
+
+### Features
+
+* [[#885](https://github.com/newjersey/business.nj.gov/issues/885)] implement links for the application logo ([da25712](https://github.com/newjersey/business.nj.gov/commit/da25712562285ba16b1532f3c883bc7d747c4ae4))
+
 ## [1.0.1](https://github.com/newjersey/business.nj.gov/compare/v1.0.0...v1.0.1) (2021-11-10)
 
 
