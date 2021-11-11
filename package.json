@@ -1,7 +1,7 @@
 {
   "name": "@businessnjgovnavigator/root",
   "version": "1.1.1",
-  "description": "This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/business.nj.gov#businessnjgov)",
+  "description": "This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -185,14 +185,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/newjersey/business.nj.gov.git"
+    "url": "git+https://github.com/newjersey/navigator.business.nj.gov.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/newjersey/business.nj.gov/issues"
+    "url": "https://github.com/newjersey/navigator.business.nj.gov/issues"
   },
-  "homepage": "https://github.com/newjersey/business.nj.gov#readme",
+  "homepage": "https://github.com/newjersey/navigator.business.nj.gov#readme",
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --fix ",
     "*.{js,ts,tsx,css,md}": "prettier --write"
