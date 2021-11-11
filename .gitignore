@@ -36,6 +36,7 @@ api/.env
 web/cypress/videos
 web/cypress/results
 web/cypress/screenshots/
+web/.storybook/build
 
 #amplify
 amplify/\#current-cloud-backend

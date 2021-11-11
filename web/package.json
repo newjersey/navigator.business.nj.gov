@@ -5,11 +5,13 @@
   "scripts": {
     "airtable:dump": "node scripts/airtableDump.js",
     "build": "yarn next build",
+    "build-storybook": "build-storybook",
     "clean": "rimraf .next",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record false",
     "cypress:run:feature": "cypress run --record false --env SUITE=feature",
     "cypress:run:ci": "cypress run --record false --env SUITE=ci",
+    "deploy:storybook": "storybook-to-aws-s3 --out=.storybook/build",
     "dev": "next dev",
     "eslint": "eslint",
     "fences": "gf",
@@ -20,12 +22,11 @@
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "spellcheck": "cspell **/*.md -c ../cspell.json",
     "start": "next start",
+    "storybook": "start-storybook -p 6006",
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
     "test:ci": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest --reporters=jest-junit --outputFile=../coverage/test_results/web-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/web/",
     "typecheck": "tsc --noemit",
-    "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json"
   },
   "prettier": {
     "printWidth": 110,
@@ -78,6 +79,7 @@
     "@storybook/manager-webpack5": "6.3.12",
     "@storybook/preset-scss": "1.0.3",
     "@storybook/react": "6.3.12",
+    "@storybook/storybook-deployer": "2.8.10",
     "@swc/core": "1.2.107",
     "@swc/jest": "0.2.5",
     "@testing-library/dom": "8.11.0",
