@@ -4,6 +4,7 @@ import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { AuthContext } from "@/pages/_app";
+import { Button } from "../njwds-extended/Button";
 
 type Props = {
   isLargeScreen: boolean;
@@ -44,23 +45,20 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
             </div>
             <div className="margin-left-auto flex fac">
               <span className="text-no-wrap padding-x-105">
-                <button
-                  onClick={triggerSignIn}
-                  className="usa-link text-bold font-heading-sm text-no-underline clear-button"
-                >
-                  {" "}
+                <Button style="tertiary" textBold onClick={triggerSignIn}>
                   {getLoginButtonText()}
-                </button>
+                </Button>
               </span>
               <span className="text-no-wrap nav-padding-x">
-                <button
+                <Button
+                  style="tertiary"
+                  textBold
                   onClick={() => {
                     setSignupIsOpen(true);
                   }}
-                  className="usa-link text-bold font-heading-sm text-no-underline clear-button"
                 >
                   {NavDefaults.registerButton}
-                </button>{" "}
+                </Button>
               </span>
             </div>
             <Signup isOpen={signupIsOpen} onClose={() => setSignupIsOpen(false)} />

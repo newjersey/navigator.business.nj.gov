@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { Alert } from "@/components/njwds/Alert";
 import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
+import { Button } from "./njwds-extended/Button";
 
 type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "DUPLICATE_SIGNUP" | "GENERIC";
 const SelfRegErrorLookup: Record<SelfRegError, string> = {
@@ -149,9 +150,9 @@ export const Signup = (props: Props): ReactElement => {
       </DialogContent>
       <DialogActions>
         <div className="padding-3 flex">
-          <button className="usa-button usa-button--outline" onClick={onClose}>
+          <Button style="secondary" onClick={onClose}>
             {SelfRegDefaults.closeButtonText}
-          </button>
+          </Button>
           <LoadingButton
             type="submit"
             onClick={submitSelfReg}

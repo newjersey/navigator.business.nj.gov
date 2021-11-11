@@ -7,6 +7,7 @@ import { ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from "@mui
 import { AuthContext } from "@/pages/_app";
 import { useRouter } from "next/router";
 import { onSignOut } from "@/lib/auth/signinHelper";
+import Link from "next/link";
 
 export const NavBarLoggedInDesktop = (): ReactElement => {
   const { userData } = useUserData();
@@ -60,7 +61,11 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
   return (
     <nav aria-label="Primary" className="grid-container">
       <div className="display-flex flex-row flex-justify flex-align-center height-8">
-        <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+        <Link href="/roadmap" passHref>
+          <a href="/roadmap">
+            <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+          </a>
+        </Link>
         <div className="z-100">
           <button
             className="clear-button"

@@ -91,13 +91,13 @@ describe("Roadmap [feature] [all] [group1]", () => {
 
     cy.get('[id="Industry"]').click({ force: true });
     cy.get('[data-value="home-contractor"]').click({ force: true });
-    cy.get('[data-contextual-info-id="home-contractors-activities"]').click({ force: true });
+    cy.get('[data-testid="home-contractors-activities"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
     clickNext();
 
-    cy.get('[data-contextual-info-id="legal-structure-learn-more"]').click({ force: true });
+    cy.get('[data-testid="legal-structure-learn-more"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
@@ -117,8 +117,8 @@ describe("Roadmap [feature] [all] [group1]", () => {
     // roadmap
     cy.url().should("contain", "/roadmap");
     cy.get('[data-task="register-for-ein"]').click({ force: true });
-    cy.get('[data-contextual-info-id="ein"]').should("exist");
-    cy.get('[data-contextual-info-id="ein"]').click({ force: true });
+    cy.get('[data-testid="ein"]').should("exist");
+    cy.get('[data-testid="ein"]').click({ force: true });
 
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });

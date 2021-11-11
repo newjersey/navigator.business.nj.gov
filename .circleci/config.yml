@@ -178,6 +178,13 @@ commands:
       - deploy-serverless
       - deploy-amplify
 
+  deploy-storybook:
+    steps: 
+      - install-awscli
+      - run: 
+          name: Deploy Storybook
+          command: yarn workspace @businessnjgovnavigator/web deploy:storybook --bucket-path $STORYBOOK_S3_BUCKET  --aws-profile=NONE
+
   install-chrome:
     steps:
       - run:
@@ -189,6 +196,15 @@ commands:
             wget -O- https://dl.google.com/linux/linux_signing_key.pub |gpg --dearmor > /etc/apt/trusted.gpg.d/google.gpg
             apt update
             apt install -y google-chrome-stable
+
+  install-awscli:
+    steps:
+      - run:
+          name: Install AWS CLI
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            ./aws/install
 
   generate-release-notes:
     steps:
@@ -238,6 +254,7 @@ jobs:
     steps:
       - set-dev-env-vars
       - deploy
+      - deploy-storybook
       - store-deploy-cache
     environment:
       STAGE: dev
