@@ -18,5 +18,5 @@ export const SelfRegDefaults: Record<string, string> = {
   newsletterCheckboxLabel:
     "I want to receive the Business.NJ.gov newsletter that shares pertinent regulations and resources relevant for my business",
   userTestingCheckboxLabel:
-    "I am willing to be contacted to provide feedback on the Business.NJ.gov Navigator",
+    "I am willing to be contacted to provide feedback on Business.NJ.gov",
 };
