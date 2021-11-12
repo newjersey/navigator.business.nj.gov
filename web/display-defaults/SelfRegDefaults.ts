@@ -16,7 +16,7 @@ export const SelfRegDefaults: Record<string, string> = {
   completeSigninTitleText: "Completing signing you in",
   completeSigninDescriptionText: "Please wait, finishing your request...",
   newsletterCheckboxLabel:
-    "I want to receive the Business.NJ.gov newsletter that shares pertinent regulations and resources relevant for my business",
+    "I want to receive the Business.NJ.gov newsletter and recieve information likely to affect my business.",
   userTestingCheckboxLabel:
     "I am willing to be contacted to provide feedback on Business.NJ.gov",
 };
