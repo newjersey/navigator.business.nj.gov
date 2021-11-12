@@ -43,6 +43,8 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
+    receiveNewsletter: true,
+    userTesting: true,
     ...overrides,
   };
 };

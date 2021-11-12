@@ -3,6 +3,8 @@ import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import * as api from "@/lib/api-client/apiClient";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { Signup } from "@/components/Signup";
+import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
+import { SelfRegResponse } from "@/lib/types/types";
 
 jest.mock("next/router");
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
@@ -21,33 +23,61 @@ describe("<Signup />", () => {
     subject = render(<Signup isOpen={true} onClose={jest.fn()} />);
   };
 
-  it("collects name, email, and confirm email fields and submits to api", async () => {
+  const renderAndFillForm = (name: string, email: string): Promise<SelfRegResponse> => {
     renderPage();
 
     const returnedPromise = Promise.resolve({ authRedirectURL: "www.example.com" });
     mockApi.postSelfReg.mockReturnValue(returnedPromise);
 
-    fillText("Some Name", "name");
-    fillText("some-email@example.com", "email");
-    fillText("some-email@example.com", "confirm-email");
+    fillText(name, "name");
+    fillText(email, "email");
+    fillText(email, "confirm-email");
+    return returnedPromise;
+  };
+
+  it("collects name, email, and confirm email fields and submits to api", async () => {
+    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
     clickSubmit();
     await act(() => returnedPromise);
     expect(mockApi.postSelfReg).toHaveBeenCalledWith({
       email: "some-email@example.com",
       confirmEmail: "some-email@example.com",
       name: "Some Name",
+      receiveNewsletter: true,
+      userTesting: true,
+    });
+  });
+
+  it("allows a user to uncheck to opt out of newsletter", async () => {
+    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
+    fireEvent.click(subject.getByLabelText(SelfRegDefaults.newsletterCheckboxLabel));
+    clickSubmit();
+    await act(() => returnedPromise);
+    expect(mockApi.postSelfReg).toHaveBeenCalledWith({
+      email: "some-email@example.com",
+      confirmEmail: "some-email@example.com",
+      name: "Some Name",
+      receiveNewsletter: false,
+      userTesting: true,
+    });
+  });
+
+  it("allows a user to uncheck to opt out of user testing", async () => {
+    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
+    fireEvent.click(subject.getByLabelText(SelfRegDefaults.userTestingCheckboxLabel));
+    clickSubmit();
+    await act(() => returnedPromise);
+    expect(mockApi.postSelfReg).toHaveBeenCalledWith({
+      email: "some-email@example.com",
+      confirmEmail: "some-email@example.com",
+      name: "Some Name",
+      receiveNewsletter: true,
+      userTesting: false,
     });
   });
 
   it("shows loading spinner while request is being processed", async () => {
-    renderPage();
-    fillText("Some Name", "name");
-    fillText("some-email@example.com", "email");
-    fillText("some-email@example.com", "confirm-email");
-
-    const returnedPromise = Promise.resolve({ authRedirectURL: "www.example.com" });
-    mockApi.postSelfReg.mockReturnValue(returnedPromise);
-
+    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
     expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
     clickSubmit();
     expect(subject.queryByTestId("loading-spinner")).toBeInTheDocument();
@@ -56,15 +86,9 @@ describe("<Signup />", () => {
   });
 
   it("redirects the user to the url returned by the api", async () => {
-    renderPage();
-    fillText("Some Name", "name");
-    fillText("some-email@example.com", "email");
-    fillText("some-email@example.com", "confirm-email");
-    const resolvedPromise = Promise.resolve({ authRedirectURL: "www.example.com" });
-    mockApi.postSelfReg.mockReturnValue(resolvedPromise);
-
+    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
     clickSubmit();
-    await act(() => resolvedPromise);
+    await act(() => returnedPromise);
     expect(mockPush).toHaveBeenCalledWith("www.example.com");
   });
 

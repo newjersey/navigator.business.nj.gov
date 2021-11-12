@@ -117,6 +117,8 @@ export type BusinessUser = {
   name?: string;
   email: string;
   id: string;
+  receiveNewsletter: boolean;
+  userTesting: boolean;
   myNJUserKey?: string;
   intercomHash?: string;
 };

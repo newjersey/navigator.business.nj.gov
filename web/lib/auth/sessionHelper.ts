@@ -89,6 +89,8 @@ const cognitoPayloadToBusinessUser = (cognitoPayload: CognitoIdPayload): Busines
     name: undefined,
     id: myNJIdentityPayload?.userId || cognitoPayload.sub,
     email: cognitoPayload.email,
+    userTesting: false,
+    receiveNewsletter: false,
   };
 };
 
