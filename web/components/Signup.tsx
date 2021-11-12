@@ -1,5 +1,14 @@
 import React, { ChangeEvent, ReactElement, useState } from "react";
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import {
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+} from "@mui/material";
 import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useRouter } from "next/router";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
@@ -23,6 +32,8 @@ interface Props {
 export const Signup = (props: Props): ReactElement => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [newsletterChecked, setNewsletterChecked] = React.useState(true);
+  const [userTestingChecked, setUserTestingChecked] = React.useState(true);
   const [confirmEmail, setConfirmEmail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<SelfRegError | undefined>(undefined);
@@ -57,7 +68,13 @@ export const Signup = (props: Props): ReactElement => {
     setError(undefined);
     setIsLoading(true);
 
-    postSelfReg({ email: email, confirmEmail: confirmEmail, name: name })
+    postSelfReg({
+      email,
+      confirmEmail,
+      name,
+      userTesting: userTestingChecked,
+      receiveNewsletter: newsletterChecked,
+    })
       .then(async (response) => {
         await router.replace(response.authRedirectURL);
       })
@@ -96,12 +113,12 @@ export const Signup = (props: Props): ReactElement => {
       aria-labelledby="signup-modal"
     >
       <DialogTitle id="signup-modal">
-        <div className="padding-top-1 padding-x-2 text-bold font-body-xl">
+        <div className="padding-top-1 text-bold tablet:padding-x-2 tablet:font-body-xl mobile-lg:font-body-lg">
           {SelfRegDefaults.signupTitleText}
         </div>
       </DialogTitle>
       <DialogContent>
-        <div className="padding-2">
+        <div className="tablet:padding-2">
           <p className="padding-bottom-1">{SelfRegDefaults.signupDescriptionText}</p>
           {showAlert()}
           <div className="margin-top-2">
@@ -132,7 +149,7 @@ export const Signup = (props: Props): ReactElement => {
               }}
             />
           </div>
-          <div className="margin-top-2">
+          <div className="margin-y-2">
             <label htmlFor="confirm-email">{SelfRegDefaults.confirmEmailFieldLabel}</label>
             <TextField
               value={confirmEmail}
@@ -146,6 +163,32 @@ export const Signup = (props: Props): ReactElement => {
               }}
             />
           </div>
+          <FormGroup>
+            <FormControlLabel
+              style={{ display: "table" }}
+              label={SelfRegDefaults.newsletterCheckboxLabel}
+              control={
+                <div style={{ display: "table-cell", width: "42px" }}>
+                  <Checkbox
+                    checked={newsletterChecked}
+                    onChange={(event) => setNewsletterChecked(event.target.checked)}
+                  />
+                </div>
+              }
+            />
+            <FormControlLabel
+              style={{ display: "table" }}
+              label={SelfRegDefaults.userTestingCheckboxLabel}
+              control={
+                <div style={{ display: "table-cell", width: "42px" }}>
+                  <Checkbox
+                    checked={userTestingChecked}
+                    onChange={(event) => setUserTestingChecked(event.target.checked)}
+                  />
+                </div>
+              }
+            />
+          </FormGroup>
         </div>
       </DialogContent>
       <DialogActions>

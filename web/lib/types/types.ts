@@ -291,6 +291,8 @@ export type BusinessUser = {
   name?: string;
   email: string;
   id: string;
+  receiveNewsletter: boolean;
+  userTesting: boolean;
   myNJUserKey?: string;
   intercomHash?: string;
 };
@@ -332,4 +334,6 @@ export type SelfRegRequest = {
   name: string;
   email: string;
   confirmEmail: string;
+  receiveNewsletter: boolean;
+  userTesting: boolean;
 };

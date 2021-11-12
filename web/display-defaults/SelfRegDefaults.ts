@@ -15,4 +15,8 @@ export const SelfRegDefaults: Record<string, string> = {
   errorTextGeneric: "Something went wrong, please try again later.",
   completeSigninTitleText: "Completing signing you in",
   completeSigninDescriptionText: "Please wait, finishing your request...",
+  newsletterCheckboxLabel:
+    "I want to receive the Business.NJ.gov newsletter that shares pertinent regulations and resources relevant for my business",
+  userTestingCheckboxLabel:
+    "I am willing to be contacted to provide feedback on the Business.NJ.gov Navigator",
 };

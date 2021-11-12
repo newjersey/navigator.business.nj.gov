@@ -120,6 +120,8 @@ export const userRouterFactory = (
       email: signedInUser.email,
       id: signedInUserId,
       name: "Test User",
+      receiveNewsletter: true,
+      userTesting: true,
     });
     userDataClient
       .put(emptyUserData)

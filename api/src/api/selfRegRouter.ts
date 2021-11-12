@@ -25,6 +25,8 @@ export const selfRegRouterFactory = (
           email: email,
           id: uuidv4(),
           name: name,
+          receiveNewsletter: req.body.receiveNewsletter,
+          userTesting: req.body.userTesting,
         });
 
         await userDataClient.put(emptyUserData);

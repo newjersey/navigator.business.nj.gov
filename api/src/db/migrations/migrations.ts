@@ -26,6 +26,7 @@ import { migrate_v22_to_v23 } from "./v23_rename_onboardingData_to_profileData";
 import { migrate_v23_to_v24 } from "./v24_restructure_tax_filings";
 import { migrate_v24_to_v25 } from "./v25_add_intercom_hash_to_user";
 import { migrate_v25_to_v26 } from "./v26_remove_dateofformation";
+import { migrate_v26_to_v27 } from "./v27_add_registration_optouts";
 
 export type MigrationFunction = (data: any) => any;
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
@@ -57,6 +58,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v23_to_v24,
   migrate_v24_to_v25,
   migrate_v25_to_v26,
+  migrate_v26_to_v27,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

@@ -66,6 +66,8 @@ describe("selfRegRouter", () => {
         email: email,
         confirmEmail: email,
         name: name,
+        receiveNewsletter: true,
+        userTesting: true,
       });
 
     it("fetches user data from database via email", async () => {
@@ -170,6 +172,8 @@ describe("selfRegRouter", () => {
           email: email,
           id: stubUuid,
           name: name,
+          receiveNewsletter: true,
+          userTesting: true,
         });
         stubUserDataClient.put.mockResolvedValue(emptyUserData);
 
@@ -206,6 +210,8 @@ describe("selfRegRouter", () => {
           email: email,
           id: stubUuid,
           name: "",
+          receiveNewsletter: true,
+          userTesting: true,
         });
 
         stubUserDataClient.put.mockResolvedValue(emptyUserData);
@@ -221,6 +227,8 @@ describe("selfRegRouter", () => {
           email: email,
           id: stubUuid,
           name: "",
+          receiveNewsletter: true,
+          userTesting: true,
         });
 
         stubUserDataClient.put.mockResolvedValue(emptyUserData);
