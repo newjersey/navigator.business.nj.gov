@@ -6,7 +6,31 @@ import {
   completeOnboarding,
   defaultPa11yThresholds,
   lighthouseDesktopConfig,
+  lighthouseMobileConfig,
 } from "../support/helpers";
+
+describe("Performance and Accessability - Landing Page [all] [group2]", () => {
+  describe("Desktop", () => {
+    it("should pass the audits", () => {
+      cy.visit("/");
+      cy.wait(1000); // wait for onboarding animation
+
+      cy.lighthouse(undefined, lighthouseDesktopConfig);
+      cy.pa11y(defaultPa11yThresholds);
+    });
+  });
+
+  describe("Mobile", () => {
+    it("should pass the audits", () => {
+      cy.viewport("iphone-5");
+      cy.visit("/");
+      cy.wait(1000); // wait for onboarding animation
+
+      cy.lighthouse(undefined, lighthouseMobileConfig);
+      cy.pa11y(defaultPa11yThresholds);
+    });
+  });
+});
 
 describe("Performance and Accessability [all] [group1]", () => {
   beforeEach(() => {

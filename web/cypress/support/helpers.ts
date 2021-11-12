@@ -75,6 +75,13 @@ export const lighthouseDesktopConfig: LighthouseConfig = {
   },
 };
 
+export const lighthouseMobileConfig: LighthouseConfig = {
+  formFactor: "mobile",
+  screenEmulation: {
+    disabled: true,
+  },
+};
+
 export const defaultPa11yThresholds: Pa11yThresholds = {
   ignore: [
     "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail",
@@ -94,7 +101,7 @@ export interface LighthouseThresholds {
 }
 
 export interface LighthouseConfig {
-  formFactor: "desktop";
+  formFactor: "desktop" | "mobile";
   screenEmulation?: {
     disabled: boolean;
   };
