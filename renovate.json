@@ -58,6 +58,10 @@
     {
       "matchPackagePrefixes": ["@storybook"],
       "groupName": "storybook"
+    },
+    {
+      "matchPackagePrefixes": ["@aws-amplify"],
+      "groupName": "aws-amplify"
     }
   ]
 }
