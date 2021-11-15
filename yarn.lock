@@ -15,30 +15,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:4.3.12":
-  version: 4.3.12
-  resolution: "@aws-amplify/auth@npm:4.3.12"
+"@aws-amplify/auth@npm:4.3.14":
+  version: 4.3.14
+  resolution: "@aws-amplify/auth@npm:4.3.14"
   dependencies:
-    "@aws-amplify/cache": 4.0.24
-    "@aws-amplify/core": 4.3.4
-    amazon-cognito-identity-js: 5.2.2
+    "@aws-amplify/cache": 4.0.26
+    "@aws-amplify/core": 4.3.6
+    amazon-cognito-identity-js: 5.2.3
     crypto-js: ^4.1.1
-  checksum: b344f93e01decc35ecf64745808aabe7402069196408603290f62b4188a534f2b740259453bde695975101ec6fdf45a5f9db3c9337ba15b7afa01ef92443f62c
+  checksum: 55333c7e77547316a9556a2320126160acf38cf6e24f4612b14f6ef52059002a69479bee92c7f7d297075ce41280e34fccf0608bf4caf456538304bd1627632a
   languageName: node
   linkType: hard
 
-"@aws-amplify/cache@npm:4.0.24":
-  version: 4.0.24
-  resolution: "@aws-amplify/cache@npm:4.0.24"
+"@aws-amplify/cache@npm:4.0.26":
+  version: 4.0.26
+  resolution: "@aws-amplify/cache@npm:4.0.26"
   dependencies:
-    "@aws-amplify/core": 4.3.4
-  checksum: 6cddf0051e4278272ee1dcaba5c9b8b0e19ff5c34d02b447d7b32ef430a48ddec3a37c403cc0e420d2b7676b42d51375885c45875eabc99a0cbf92c4c025a0a6
+    "@aws-amplify/core": 4.3.6
+  checksum: 4b0d3185abc03fa821763487d0c53b6eda96bd5ae37a7266f62b7f2fa6228e41c9bebfdeca917af63ff8ff8f66bb3349914b8e39d5145ac49c73f1a10ac591ac
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:4.3.4":
-  version: 4.3.4
-  resolution: "@aws-amplify/core@npm:4.3.4"
+"@aws-amplify/core@npm:4.3.6":
+  version: 4.3.6
+  resolution: "@aws-amplify/core@npm:4.3.6"
   dependencies:
     "@aws-crypto/sha256-js": 1.0.0-alpha.0
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
@@ -48,31 +48,31 @@ __metadata:
     "@aws-sdk/util-hex-encoding": 3.6.1
     universal-cookie: ^4.0.4
     zen-observable-ts: 0.8.19
-  checksum: 5838e20a5a74b6df11e1866fb7ff09ed0d471d94aa27143de439cabd602e626974bf8f1cd9ff1ce86019aa82b80beb062b83cb3e305cdb76dce8d27d24003c0f
+  checksum: 016d7db940b5142b4e0d0d8576cb3fea8a2b07c456231d4fc31e49b5a8f219b2d8e87f6692e50affe4789528fe6c19d43573d1a342d340ff81f6dcf613ed50fb
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-components@npm:1.9.2":
-  version: 1.9.2
-  resolution: "@aws-amplify/ui-components@npm:1.9.2"
+"@aws-amplify/ui-components@npm:1.9.4":
+  version: 1.9.4
+  resolution: "@aws-amplify/ui-components@npm:1.9.4"
   dependencies:
     qrcode: ^1.4.4
     uuid: ^8.2.0
   peerDependencies:
     aws-amplify: 3.x.x || 4.x.x
-  checksum: 4d60ff386f0aa5e40b0ecef68fdf00152a9f669f255d33e7b19e1ec6a00ec96b0781478e31479cfccae8fbf5ec44ee3fb029520a639e65fa26792d2dab25380a
+  checksum: 4e2a7ae66d7a54980e3b293d8c13bbd783a383b1c652a62f47f12638dc101ce5d4df2628e1cfa31fa3f8354a83cf2df08beff35700b53020e1899411ffb61f35
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-react@npm:1.2.22":
-  version: 1.2.22
-  resolution: "@aws-amplify/ui-react@npm:1.2.22"
+"@aws-amplify/ui-react@npm:1.2.24":
+  version: 1.2.24
+  resolution: "@aws-amplify/ui-react@npm:1.2.24"
   dependencies:
-    "@aws-amplify/ui-components": 1.9.2
+    "@aws-amplify/ui-components": 1.9.4
   peerDependencies:
     react: ">= 16.7.0"
     react-dom: ">= 16.7.0"
-  checksum: f7cce5706a68dcf8e9a55e3d8550d82288bc8c09f31debd52caec2c7abb7d39685a81d1c97f9bbad6a567f5355fbb01e58d36450d2fbfc23c9700470865acba2
+  checksum: b3ad891946ffa35dc9d3fbe18ff3bd45ddfbf29ebb5ba8e4ea2eb3790db89ad766493915322de5add81ba5ef9fed13f57ddcff436d3fb6d104c1641e8d25cfcd
   languageName: node
   linkType: hard
 
@@ -2419,9 +2419,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 4.3.12
-    "@aws-amplify/core": 4.3.4
-    "@aws-amplify/ui-react": 1.2.22
+    "@aws-amplify/auth": 4.3.14
+    "@aws-amplify/core": 4.3.6
+    "@aws-amplify/ui-react": 1.2.24
     "@babel/core": 7.16.0
     "@babel/runtime": 7.16.0
     "@businessnjgovnavigator/shared": "*"
@@ -2594,9 +2594,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 4.3.12
-    "@aws-amplify/core": 4.3.4
-    "@aws-amplify/ui-react": 1.2.22
+    "@aws-amplify/auth": 4.3.14
+    "@aws-amplify/core": 4.3.6
+    "@aws-amplify/ui-react": 1.2.24
     "@babel/core": 7.16.0
     "@businessnjgovnavigator/shared": "*"
     "@emotion/react": 11.5.0
@@ -9694,16 +9694,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"amazon-cognito-identity-js@npm:5.2.2":
-  version: 5.2.2
-  resolution: "amazon-cognito-identity-js@npm:5.2.2"
+"amazon-cognito-identity-js@npm:5.2.3":
+  version: 5.2.3
+  resolution: "amazon-cognito-identity-js@npm:5.2.3"
   dependencies:
     buffer: 4.9.2
     crypto-js: ^4.1.1
     fast-base64-decode: ^1.0.0
     isomorphic-unfetch: ^3.0.0
     js-cookie: ^2.2.1
-  checksum: ee0937e91018695395035be312456d09a281ca48a77db7b9a561c5bc166637cb3b94f853b895c6897aeb353320ef7f72e8d8c32854290ae7d36e486a20783afe
+  checksum: dd97e0375a7c7fcfec0d640fe0f1cd8a2f66e38a65f7d28edafcd94354e0fdea855bca84dd0da4e28195c934882e90447d28d1c7469143333faa4adf4503b28a
   languageName: node
   linkType: hard
 
