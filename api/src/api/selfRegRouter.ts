@@ -52,7 +52,7 @@ export const selfRegRouterFactory = (
   });
 
   const updateMyNJKey = (userData: UserData, myNJUserKey: string): Promise<UserData> => {
-    const hmac = createHmac("sha256", "a secret");
+    const hmac = createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "");
     const hash = hmac.update(myNJUserKey).digest("hex");
     return userDataClient.put({
       ...userData,
