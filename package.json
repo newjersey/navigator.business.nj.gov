@@ -24,7 +24,7 @@
     "typecheck": "lerna run --stream typecheck"
   },
   "dependencies": {
-    "@aws-amplify/auth": "4.3.12",
+    "@aws-amplify/auth": "4.3.14",
     "@aws-amplify/core": "4.3.4",
     "@aws-amplify/ui-react": "1.2.22",
     "@businessnjgovnavigator/shared": "*",
