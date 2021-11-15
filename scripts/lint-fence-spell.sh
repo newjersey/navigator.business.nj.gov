@@ -4,6 +4,8 @@ cd $(git rev-parse --show-toplevel)
 
 set -e
 
+yarn build
+
 yarn typecheck
 
 yarn workspace @businessnjgovnavigator/web typecheck:cypress
