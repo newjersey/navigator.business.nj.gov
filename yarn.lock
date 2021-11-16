@@ -2353,7 +2353,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.3.1
     "@typescript-eslint/parser": 5.3.1
     aws-lambda: 1.0.7
-    aws-sdk: 2.1026.0
+    aws-sdk: 2.1030.0
     axios: 0.24.0
     body-parser: 1.19.0
     copy-webpack-plugin: 9.0.1
@@ -2470,7 +2470,7 @@ __metadata:
     "@typescript-eslint/parser": 5.3.1
     airtable: 0.11.1
     aws-lambda: 1.0.7
-    aws-sdk: 2.1026.0
+    aws-sdk: 2.1030.0
     axios: 0.24.0
     babel-jest: 27.3.1
     babel-loader: 8.2.3
@@ -10381,9 +10381,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:2.1026.0, aws-sdk@npm:^2.1021.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0, aws-sdk@npm:^2.834.0":
-  version: 2.1026.0
-  resolution: "aws-sdk@npm:2.1026.0"
+"aws-sdk@npm:2.1030.0, aws-sdk@npm:^2.1021.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0, aws-sdk@npm:^2.834.0":
+  version: 2.1030.0
+  resolution: "aws-sdk@npm:2.1030.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -10394,7 +10394,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: 3ac323624e94948fc64bd7ff4854f70d02dbae6e3fc98a665bbf9b9f71b89d21709d7d5998810a41decee5c8162e2d5a81568762a590f942ae4eb8f173d68b42
+  checksum: 2f76127444fb00f64e7a7988d477d7842270e85af33d68faf011eda0e37d355c1566fa458b0eee6b1cdb17b3d0676f83a541bdaa4236ff4bc89e6f13218b0f18
   languageName: node
   linkType: hard
 
