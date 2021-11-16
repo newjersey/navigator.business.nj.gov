@@ -62,7 +62,7 @@
     "@types/xml2js": "0.4.9",
     "@typescript-eslint/eslint-plugin": "5.3.1",
     "@typescript-eslint/parser": "5.3.1",
-    "aws-sdk": "2.1026.0",
+    "aws-sdk": "2.1030.0",
     "copy-webpack-plugin": "9.0.1",
     "cross-env": "7.0.3",
     "eslint": "8.2.0",
