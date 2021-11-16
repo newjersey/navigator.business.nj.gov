@@ -6,7 +6,7 @@
     "airtable:dump": "node scripts/airtableDump.js",
     "build": "yarn next build",
     "build-storybook": "build-storybook",
-    "clean": "rimraf .next",
+    "clean": "rimraf .next public/vendor",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --record false",
     "cypress:run:feature": "cypress run --record false --env SUITE=feature",
@@ -20,6 +20,7 @@
     "postbuild": "yarn next export",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
+    "run:napa": "napa",
     "spellcheck": "cspell **/*.md -c ../cspell.json",
     "start": "next start",
     "storybook": "start-storybook -p 6006",
@@ -98,6 +99,8 @@
     "@typescript-eslint/eslint-plugin": "5.3.1",
     "@typescript-eslint/parser": "5.3.1",
     "babel-loader": "8.2.3",
+    "clean-webpack-plugin": "4.0.0",
+    "copy-webpack-plugin": "9.0.1",
     "cross-env": "7.0.3",
     "cspell": "5.12.6",
     "css-loader": "6.5.1",
@@ -118,6 +121,7 @@
     "jest": "27.3.1",
     "jest-junit": "13.0.0",
     "jest-raw-loader": "1.0.1",
+    "napa": "3.0.0",
     "prettier": "2.4.1",
     "prop-types": "15.7.2",
     "rimraf": "3.0.2",
@@ -128,6 +132,9 @@
     "ts-node": "10.4.0",
     "typescript": "4.4.4",
     "webpack": "5.62.1"
+  },
+  "napa": {
+    "njwds": "newjersey/njwds#bb0039c66a6d7a5cf7ff38e3b8a8fede63e3a4f1"
   },
   "jest-junit": {
     "outputDirectory": "../coverage/test_results",

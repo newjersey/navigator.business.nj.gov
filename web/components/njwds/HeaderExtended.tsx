@@ -18,7 +18,7 @@ export const HeaderExtended = (): ReactElement => {
         <nav aria-label="Primary navigation" className="usa-nav">
           <div className="usa-nav__inner">
             <button className="usa-nav__close">
-              <img src="/img/close.svg" alt="close" />
+              <img src="/vendor/img/close.svg" alt="close" />
             </button>
             <ul className="usa-nav__primary usa-accordion">
               <li className="usa-nav__primary-item">

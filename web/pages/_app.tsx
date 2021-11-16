@@ -22,7 +22,7 @@ import { DefaultSeo } from "next-seo";
 import Script from "next/script";
 import SEO from "../next-seo.config";
 import analytics from "@/lib/utils/analytics";
-import "../public/css/styles.css";
+import "njwds/dist/css/styles.css";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

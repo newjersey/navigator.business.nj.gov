@@ -1,4 +1,4 @@
-require("../public/css/styles.css");
+require("njwds/dist/css/styles.css");
 require("../styles/global.scss");
 
 export const parameters = {

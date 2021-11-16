@@ -1,4 +1,5 @@
 const path = require("path");
+const images = require("njwds/dist/img");
 
 module.exports = {
   stories: ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -17,6 +18,7 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       "/img": path.resolve(__dirname, "../public/img"),
+      "/vendor/img": images,
     };
     return config;
   },

@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
+const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
@@ -29,6 +32,25 @@ module.exports = {
         },
       ],
     });
+
+    config.plugins.push(
+      new CleanWebpackPlugin({
+        dry: false,
+        cleanOnceBeforeBuildPatterns: ["../public/vendor"],
+        dangerouslyAllowCleanPatternsOutsideProject: true,
+      })
+    );
+
+    config.plugins.push(
+      new CopyPlugin({
+        patterns: [
+          {
+            from: "node_modules/njwds/dist/img",
+            to: "../public/vendor/img",
+          },
+        ],
+      })
+    );
 
     return config;
   },

@@ -37,6 +37,7 @@ web/cypress/videos
 web/cypress/results
 web/cypress/screenshots/
 web/.storybook/build
+web/public/vendor
 
 #amplify
 amplify/\#current-cloud-backend

@@ -88,6 +88,7 @@ export const defaultPa11yThresholds: Pa11yThresholds = {
     "color-contrast",
     "landmark-no-duplicate-banner",
     "landmark-unique",
+    "aria-allowed-attr",
   ],
   runners: ["axe", "htmlcs"],
 };
