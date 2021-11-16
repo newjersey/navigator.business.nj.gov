@@ -1,6 +1,6 @@
 export const SelfRegDefaults: Record<string, string> = {
   signupTitleText: "Create account",
-  signupDescriptionText: "We register businesses with myNewJersey (myNJ), a secure login platform run by the State of New Jersey. With your myNJ login, you can use the Navigator along with any other State-run online service you have registered for. Please provide your contact information below.",
+  signupDescriptionText: "You'll register for the Business.NJ.gov Navigator with myNewJersey, a secure login platform run by the State of New Jersey. You may have a myNewJersey account already, or you can create one now. Either way, provide your name and email to get started.",
   nameFieldLabel: "Full name",
   nameFieldPlaceholder: "Type your full name",
   emailFieldLabel: "Email",
