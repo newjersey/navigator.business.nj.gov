@@ -7,7 +7,7 @@ export const Banner = (): ReactElement => {
         <div className="grid-container">
           <div className="nj-banner__inner">
             <div className="grid-col-auto">
-              <img className="nj-banner__header-seal" src="/img/nj_state_seal.png" alt="NJ flag" />
+              <img className="nj-banner__header-seal" src="/vendor/img/nj_state_seal.png" alt="NJ flag" />
             </div>
             <div className="grid-col-fill">
               <a href="https://nj.gov">Official Site of the State of New Jersey</a>
@@ -24,7 +24,7 @@ export const Banner = (): ReactElement => {
                         focusable="false"
                         role="img"
                       >
-                        <use xlinkHref="/img/sprite.svg#mail"></use>
+                        <use xlinkHref="/vendor/img/sprite.svg#mail"></use>
                       </svg>
                       Get Updates
                     </a>

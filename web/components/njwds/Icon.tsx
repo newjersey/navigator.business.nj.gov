@@ -12,7 +12,9 @@ export const Icon = (props: Props): ReactElement => {
       aria-hidden="true"
       focusable="false"
       role="img"
-      dangerouslySetInnerHTML={{ __html: `<use xlink:href="/img/sprite.svg#${props.children}"></use>` }}
+      dangerouslySetInnerHTML={{
+        __html: `<use xlink:href="/vendor/img/sprite.svg#${props.children}"></use>`,
+      }}
     />
   );
 };

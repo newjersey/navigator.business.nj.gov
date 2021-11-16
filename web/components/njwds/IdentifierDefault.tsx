@@ -13,7 +13,7 @@ export const IdentifierDefault = (): ReactElement => {
               <a href="https://nj.gov" className="usa-identifier__logo">
                 <img
                   className="usa-identifier__logo-img"
-                  src="/img/nj-logo-gray-20.png"
+                  src="/vendor/img/nj-logo-gray-20.png"
                   alt="the State of New Jersey logo"
                 />
               </a>
