@@ -12,7 +12,7 @@
     "lint:fix": "lerna run lint:fix",
     "lint:staged": "lint-staged",
     "postinstall": "yarn workspace @businessnjgovnavigator/api install-dynamo-local && yarn workspace @businessnjgovnavigator/web run:napa",
-    "preinstall": "npm install -g @aws-amplify/cli@6.3.1",
+    "preinstall": "npm install -g @aws-amplify/cli@7.3.6",
     "prepare": "husky install",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "lerna run --stream prettier:check",
