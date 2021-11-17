@@ -21,6 +21,7 @@
     "@shared/legalStructure",
     "@shared/municipality",
     "@shared/taxFiling",
-    "@shared/licenseStatus"
+    "@shared/licenseStatus",
+    "@shared/profileData"
   ]
 }

@@ -3,7 +3,8 @@ import { TextField, TextFieldProps } from "@mui/material";
 import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
 import { camelCaseToSentence, setHeaderRole } from "@/lib/utils/helpers";
-import { ProfileData, ProfileFields } from "@/lib/types/types";
+import { ProfileFields } from "@/lib/types/types";
+import { ProfileData } from "@businessnjgovnavigator/shared/";
 
 interface Props {
   fieldName: ProfileFields;

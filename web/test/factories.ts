@@ -3,7 +3,6 @@ import {
   LicenseData,
   NameAndAddress,
   NameAvailability,
-  ProfileData,
   Preferences,
   Roadmap,
   SectionCompletion,
@@ -22,6 +21,7 @@ import {
   LicenseStatusResult,
   Municipality,
   MunicipalityDetail,
+  ProfileData,
   TaxFiling,
   TaxFilingData,
 } from "@businessnjgovnavigator/shared";

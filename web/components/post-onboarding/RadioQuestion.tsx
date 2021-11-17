@@ -1,7 +1,8 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { Content } from "@/components/Content";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { ProfileData, PostOnboarding } from "@/lib/types/types";
+import { PostOnboarding } from "@/lib/types/types";
+import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { fetchPostOnboarding } from "@/lib/async-content-fetchers/fetchPostOnboarding";
 

@@ -1,6 +1,6 @@
 import * as https from "https";
 import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
-import { Municipality } from "@shared/municipality";
+import { ProfileData } from "@shared/profileData";
 import { TaxFilingData } from "@shared/taxFiling";
 
 export interface UserDataClient {
@@ -95,20 +95,6 @@ export interface UserData {
 export interface Preferences {
   roadmapOpenSections: SectionType[];
   roadmapOpenSteps: number[];
-}
-
-export interface ProfileData {
-  businessName: string;
-  industryId: string | undefined;
-  legalStructureId: string | undefined;
-  municipality: Municipality | undefined;
-  liquorLicense: boolean;
-  homeBasedBusiness: boolean;
-  constructionRenovationPlan: boolean | undefined;
-  entityId: string | undefined;
-  employerId: string | undefined;
-  taxId: string | undefined;
-  notes: string;
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";

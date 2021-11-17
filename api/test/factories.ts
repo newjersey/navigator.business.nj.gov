@@ -3,7 +3,6 @@ import {
   LicenseData,
   LicenseEntity,
   NameAndAddress,
-  ProfileData,
   Preferences,
   SelfRegResponse,
   UserData,
@@ -11,6 +10,7 @@ import {
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import { LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
+import { ProfileData } from "@shared/profileData";
 import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import dayjs from "dayjs";
 import { Municipality } from "@shared/municipality";

@@ -1,5 +1,5 @@
 import analytics from "@/lib/utils/analytics";
-import { ProfileData } from "@/lib/types/types";
+import { ProfileData } from "@businessnjgovnavigator/shared/";
 
 export const setAnalyticsDimensions = (profileData: ProfileData): void => {
   analytics.dimensions.industry(profileData.industryId);

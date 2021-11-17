@@ -1,9 +1,4 @@
-import {
-  LicenseStatus,
-  LicenseStatusItem,
-  Municipality,
-  TaxFilingData,
-} from "@businessnjgovnavigator/shared";
+import { LicenseStatus, LicenseStatusItem, ProfileData, TaxFilingData } from "@businessnjgovnavigator/shared";
 
 export interface UserData {
   user: BusinessUser;
@@ -60,20 +55,6 @@ const emptyProfileData = {
 export const createEmptyProfileData = (): ProfileData => {
   return emptyProfileData;
 };
-
-export interface ProfileData {
-  businessName: string;
-  industryId: string | undefined;
-  legalStructureId: string | undefined;
-  municipality: Municipality | undefined;
-  liquorLicense: boolean;
-  homeBasedBusiness: boolean;
-  constructionRenovationPlan: boolean | undefined;
-  entityId: string | undefined;
-  employerId: string | undefined;
-  taxId: string | undefined;
-  notes: string;
-}
 
 export type ProfileError = "REQUIRED_LEGAL";
 export interface LicenseData {

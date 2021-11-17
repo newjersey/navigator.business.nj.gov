@@ -20,7 +20,6 @@ import {
   createEmptyProfileDisplayContent,
   createProfileFieldErrorMap,
   OnboardingStatus,
-  ProfileData,
   ProfileDisplayContent,
   ProfileError,
   ProfileFieldErrorMap,
@@ -50,7 +49,7 @@ import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { RoadmapContext } from "@/pages/_app";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { NextSeo } from "next-seo";
-import { Municipality } from "@businessnjgovnavigator/shared";
+import { Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import Link from "next/link";
 
 interface Props {
