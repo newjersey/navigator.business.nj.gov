@@ -7,9 +7,9 @@ import {
   createEmptyProfileData,
   createEmptyProfileDisplayContent,
   OperateDisplayContent,
-  ProfileData,
   ProfileFields,
 } from "@/lib/types/types";
+import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { Alert } from "@/components/njwds/Alert";
 import { Content } from "../Content";
 

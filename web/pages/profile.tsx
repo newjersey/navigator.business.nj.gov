@@ -15,7 +15,6 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import {
   createEmptyProfileData,
   createProfileFieldErrorMap,
-  ProfileData,
   ProfileDisplayContent,
   ProfileFieldErrorMap,
   ProfileFields,
@@ -40,7 +39,7 @@ import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
-import { Municipality } from "@businessnjgovnavigator/shared";
+import { Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import { OnboardingStatusLookup } from "@/lib/utils/helpers";
 
 interface Props {
