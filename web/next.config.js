@@ -2,7 +2,10 @@
 /* eslint-disable no-undef */
 const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+module.exports = withBundleAnalyzer({
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
@@ -54,4 +57,4 @@ module.exports = {
 
     return config;
   },
-};
+});
