@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.1.1...v1.2.0) (2021-11-17)
+
+
+### Bug Fixes
+
+* **deps:** update aws-amplify ([333c42a](https://github.com/newjersey/navigator.business.nj.gov/commit/333c42a9fdd79b4c9ec469f03856a274c36b1824))
+* **deps:** update emotion monorepo to v11.6.0 ([3381c8d](https://github.com/newjersey/navigator.business.nj.gov/commit/3381c8d16201080544f3987df1961b43cc770a79))
+* **deps:** update material-ui monorepo ([b3b1b40](https://github.com/newjersey/navigator.business.nj.gov/commit/b3b1b405ff0b166fed9b0b51d5d7b07444933ecc))
+* use env var for intercom hash ([05adbe6](https://github.com/newjersey/navigator.business.nj.gov/commit/05adbe68f470afae5b42e6210188f57b72aba3f1))
+
+
+### Features
+
+* [[#925](https://github.com/newjersey/navigator.business.nj.gov/issues/925)] add checkboxes to opt-out of newsletter and user testing ([f5e2ff0](https://github.com/newjersey/navigator.business.nj.gov/commit/f5e2ff06cc22a45c55750b9a41612421b03f89fa))
+
 ## [1.1.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.1.0...v1.1.1) (2021-11-11)
 
 ### Bug Fixes
