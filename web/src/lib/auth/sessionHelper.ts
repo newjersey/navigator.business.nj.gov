@@ -1,6 +1,6 @@
 import { BusinessUser } from "@/lib/types/types";
 import { Auth } from "@aws-amplify/auth";
-import awsExports from "../../aws-exports";
+import awsExports from "../../../aws-exports";
 import axios, { AxiosResponse } from "axios";
 
 type CognitoIdPayload = {

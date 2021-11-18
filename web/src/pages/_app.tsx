@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 import { Hub, HubCapsule } from "@aws-amplify/core";
 import { DefaultSeo } from "next-seo";
 import Script from "next/script";
-import SEO from "../next-seo.config";
+import SEO from "../../next-seo.config";
 import analytics from "@/lib/utils/analytics";
 import "njwds/dist/css/styles.css";
 

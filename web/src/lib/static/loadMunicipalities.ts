@@ -2,7 +2,7 @@ import { Municipality, MunicipalityDetail } from "@businessnjgovnavigator/shared
 import fs from "fs";
 import path from "path";
 
-const recordsDir = path.join(process.cwd(), "lib/static/records");
+const recordsDir = path.join(process.cwd(), "src/lib/static/records");
 
 export const loadAllMunicipalities = async (): Promise<Municipality[]> => {
   const fullPath = path.join(recordsDir, "municipalities.json");
