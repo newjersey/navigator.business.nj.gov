@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
-import { Tag } from "../components/njwds-extended/Tag";
+import { Tag } from "../src/components/njwds-extended/Tag";
 
 export default {
   title: "Components/Tag",

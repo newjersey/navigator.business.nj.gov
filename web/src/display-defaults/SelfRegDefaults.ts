@@ -1,6 +1,7 @@
 export const SelfRegDefaults: Record<string, string> = {
   signupTitleText: "Create account",
-  signupDescriptionText: "You'll register for the Business.NJ.gov Navigator with myNewJersey, a secure login platform run by the State of New Jersey. You may have a myNewJersey account already, or you can create one now. Either way, provide your name and email to get started.",
+  signupDescriptionText:
+    "You'll register for the Business.NJ.gov Navigator with myNewJersey, a secure login platform run by the State of New Jersey. You may have a myNewJersey account already, or you can create one now. Either way, provide your name and email to get started.",
   nameFieldLabel: "Full name",
   nameFieldPlaceholder: "Type your full name",
   emailFieldLabel: "Email",
@@ -17,6 +18,5 @@ export const SelfRegDefaults: Record<string, string> = {
   completeSigninDescriptionText: "Please wait, finishing your request...",
   newsletterCheckboxLabel:
     "I want to receive the Business.NJ.gov newsletter and receive information likely to affect my business.",
-  userTestingCheckboxLabel:
-    "I am willing to be contacted to provide feedback on Business.NJ.gov.",
+  userTestingCheckboxLabel: "I am willing to be contacted to provide feedback on Business.NJ.gov.",
 };

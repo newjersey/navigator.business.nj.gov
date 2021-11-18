@@ -15,11 +15,11 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/display-defaults/*": ["display-defaults/*"],
-      "@/lib/*": ["lib/*"],
+      "@/components/*": ["src/components/*"],
+      "@/display-defaults/*": ["src/display-defaults/*"],
+      "@/lib/*": ["src/lib/*"],
       "@/test/*": ["test/*"],
-      "@/pages/*": ["pages/*"],
+      "@/pages/*": ["src/pages/*"],
       "@businessnjgovnavigator/shared/*": ["../shared/lib/shared/src/*"],
       "@businessnjgovnavigator/content/*": ["../content/src/*"]
     },

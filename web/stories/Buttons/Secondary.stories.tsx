@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
-import { Button } from "../../components/njwds-extended/Button";
+import { Button } from "../../src/components/njwds-extended/Button";
 
 export default {
   title: "Components/Button/Secondary",

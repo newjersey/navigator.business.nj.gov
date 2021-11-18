@@ -28,7 +28,7 @@ import "cypress-wait-until";
 
 import { Auth } from "@aws-amplify/auth";
 import { testUserEmail, testUserPassword } from "./index";
-import { createEmptyUserData } from "../../lib/types/types";
+import { createEmptyUserData } from "../../src/lib/types/types";
 import "cypress-audit/commands";
 
 Auth.configure({
