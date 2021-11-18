@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "lerna run --stream build",
+    "build": "yarn verify:node && lerna run --stream build",
+    "build:clean": "yarn clean && yarn build",
     "clean": "lerna run --stream clean",
     "fences": "lerna run --stream fences",
     "lint": "lerna run --stream lint",
@@ -21,7 +22,8 @@
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest --projects api shared web",
     "test:ci": "jest --reporters=jest-junit --outputFile=../coverage/test_results/all-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
-    "typecheck": "lerna run --stream typecheck"
+    "typecheck": "lerna run --stream typecheck",
+    "verify:node": "check-node-version --node $(cat .nvmrc) --npm 6.14"
   },
   "dependencies": {
     "@aws-amplify/auth": "4.3.14",
@@ -118,6 +120,8 @@
     "@typescript-eslint/parser": "5.4.0",
     "aws-sdk": "2.1030.0",
     "babel-loader": "8.2.3",
+    "cat": "0.2.0",
+    "check-node-version": "4.2.1",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "9.0.1",
     "cross-env": "7.0.3",
