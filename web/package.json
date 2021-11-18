@@ -134,7 +134,7 @@
     "webpack": "5.62.1"
   },
   "napa": {
-    "njwds": "newjersey/njwds#bb0039c66a6d7a5cf7ff38e3b8a8fede63e3a4f1"
+    "njwds": "newjersey/njwds#gh-pages"
   },
   "napa-config": {
     "cache": false
