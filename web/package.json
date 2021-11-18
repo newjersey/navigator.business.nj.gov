@@ -136,6 +136,9 @@
   "napa": {
     "njwds": "newjersey/njwds#bb0039c66a6d7a5cf7ff38e3b8a8fede63e3a4f1"
   },
+  "napa-config": {
+    "cache": false
+  },
   "jest-junit": {
     "outputDirectory": "../coverage/test_results",
     "uniqueOutputName": "true"
