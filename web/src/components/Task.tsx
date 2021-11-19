@@ -16,6 +16,7 @@ export const Task = (props: Props): ReactElement => {
 
   return (
     <li>
+      <span className="margin-right-205">{TaskProgressTagLookup[taskProgress]}</span>
       <Link href={`/tasks/${props.task.urlSlug}`} passHref>
         <a
           onClick={() => analytics.event.roadmap_task_title.click.go_to_task()}
@@ -26,7 +27,6 @@ export const Task = (props: Props): ReactElement => {
           {props.task.name}
         </a>
       </Link>
-      <span className="margin-left-1">{TaskProgressTagLookup[taskProgress]}</span>
     </li>
   );
 };
