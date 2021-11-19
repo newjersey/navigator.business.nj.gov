@@ -1,0 +1,22 @@
+[
+  {
+    "step": 1,
+    "weight": 1,
+    "task": "business-plan"
+  },
+  {
+    "step": 3,
+    "weight": 20,
+    "task": "register-for-ein"
+  },
+  {
+    "step": 3,
+    "weight": 25,
+    "task": "register-for-taxes"
+  },
+  {
+    "step": 4,
+    "weight": 10,
+    "task": "get-insurance"
+  }
+]
