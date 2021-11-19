@@ -1,0 +1,138 @@
+backend:
+  name: github
+  repo: newjersey/business.nj.gov
+  branch: submodule # Branch to update (optional; defaults to master)
+media_folder: public/img
+public_folder: img
+collections:
+  - name: "settings"
+    label: "Roadmap Settings"
+    delete: false
+    files:
+      - label: "Steps"
+        name: "steps"
+        file: "content/src/roadmaps/steps.json"
+        fields:
+          - label: steps
+            name: steps
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Section
+                name: section
+                widget: select
+                options: ["PLAN", "START"]
+              - label: Time Estimate
+                name: timeEstimate
+                widget: string
+              - label: Description
+                name: description
+                widget: string
+              - label: Number
+                name: step_number
+                widget: number
+                min: 0
+                value_type: int
+      - label: "Industries"
+        name: "industries"
+        file: "content/src/industry.json"
+        editor:
+          preview: false
+        fields:
+          - label: Industries
+            name: industries
+            widget: list
+            summary: "{{id}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Description
+                name: description
+                widget: string
+              - label: Home Based
+                name: canBeHomeBased
+                widget: boolean
+              - label: Liquor License
+                name: isLiquorLicenseApplicable
+                widget: boolean
+              - label: Mobile Location
+                name: isMobileLocation
+                widget: boolean
+              - label: Reseller
+                name: canBeReseller
+                widget: boolean
+              - label: Id
+                name: id
+                widget: string
+
+  - name: "roadmaps"
+    label: "Industry Modifications"
+    folder: "content/src/roadmaps/industries"
+    slug: "{{filename}}"
+    extension: "json"
+    create: true
+    delete: false
+    format: "json"
+    summary: "{{filename}}"
+    editor:
+      preview: false
+    fields:
+      - label: Additional Tasks
+        name: addOns
+        widget: list
+        summary: "{{task}}"
+        fields:
+          - label: Step
+            name: step
+            widget: relation
+            collection: "settings"
+            searchFields: ["steps.*.name"]
+            valueField: "steps.*.step_number"
+            displayFields: ["steps.*.name"]
+          - label: Weight
+            name: weight
+            widget: number
+          - label: Task
+            name: task
+            widget: "relation"
+            collection: "tasks"
+            searchFields: ["{{filename}}"]
+            valueField: "{{filename}}"
+            displayFields: ["{{filename}}"]
+      - label: Task Overrides
+        name: modifications
+        widget: list
+        summary: "{{taskToReplaceFilename}}"
+        fields:
+          - label: Task To Replace
+            name: taskToReplaceFilename
+            widget: "relation"
+            collection: "tasks"
+            searchFields: ["{{filename}}"]
+            valueField: "{{filename}}"
+            displayFields: ["{{filename}}"]
+          - label: Task
+            name: replaceWithFilename
+            widget: "relation"
+            collection: "tasks"
+            searchFields: ["{{filename}}"]
+            valueField: "{{filename}}"
+            displayFields: ["{{filename}}"]
+  - name: "tasks"
+    label: "Tasks"
+    folder: "content/src/roadmaps/tasks"
+    summary: "{{name}} - [{{filename}}]"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug", name: "urlSlug", widget: "string" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }

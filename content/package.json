@@ -7,7 +7,7 @@
   "scripts": {
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
-    "spellcheck": "cspell **/*.md -c ../cspell.json"
+    "spellcheck": "cspell **/*.md -c ./cspell.json"
   },
   "prettier": {
     "printWidth": 110,
