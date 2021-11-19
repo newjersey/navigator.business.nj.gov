@@ -97,7 +97,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           onClick={() => handleSelect("NOT_STARTED")}
           selected={value === "NOT_STARTED"}
         >
-          <Tag tagVariant="base" dataTestid="NOT_STARTED">
+          <Tag tagVariant="base" dataTestid="NOT_STARTED" fixedWidth>
             {TaskProgressLookup.NOT_STARTED}
           </Tag>
         </MenuItem>
@@ -106,7 +106,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           onClick={() => handleSelect("IN_PROGRESS")}
           selected={value === "IN_PROGRESS"}
         >
-          <Tag tagVariant="info" dataTestid="IN_PROGRESS">
+          <Tag tagVariant="info" dataTestid="IN_PROGRESS" fixedWidth>
             {TaskProgressLookup.IN_PROGRESS}
           </Tag>
         </MenuItem>
@@ -115,7 +115,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           onClick={() => handleSelect("COMPLETED")}
           selected={value === "COMPLETED"}
         >
-          <Tag tagVariant="primary" dataTestid="COMPLETED">
+          <Tag tagVariant="primary" dataTestid="COMPLETED" fixedWidth>
             {TaskProgressLookup.COMPLETED}
           </Tag>
         </MenuItem>
