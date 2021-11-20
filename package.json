@@ -125,7 +125,7 @@
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "9.0.1",
     "cross-env": "7.0.3",
-    "cspell": "5.12.6",
+    "cspell": "5.13.0",
     "css-loader": "6.5.1",
     "cypress": "9.0.0",
     "cypress-audit": "1.1.0",
