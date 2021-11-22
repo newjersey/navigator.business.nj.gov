@@ -42,7 +42,7 @@ export const Step = (props: Props): ReactElement => {
       </div>
 
       <div className="tablet:grid-col-8 roadmap-content">
-        <p>{props.step.description}</p>
+        <p className="margin-bottom-205">{props.step.description}</p>
         <ul className="usa-list usa-list--unstyled">
           {props.step.tasks.map((task) => (
             <Task key={task.id} task={task} />

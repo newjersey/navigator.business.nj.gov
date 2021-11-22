@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-primary-lighter text-primary-dark text-bold"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-primary-lighter text-primary-dark text-bold"
       >
         Primary Test
       </span>
@@ -14,7 +14,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-primary-lighter text-primary-dark text-bold"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-primary-lighter text-primary-dark text-bold"
     >
       Primary Test
     </span>
@@ -79,7 +79,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-wrap display-block bg-primary-lighter text-primary-dark"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-wrap display-block bg-primary-lighter text-primary-dark"
       >
         Primary Test with a really really really really long child
       </span>
@@ -87,7 +87,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-wrap display-block bg-primary-lighter text-primary-dark"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-wrap display-block bg-primary-lighter text-primary-dark"
     >
       Primary Test with a really really really really long child
     </span>
@@ -152,7 +152,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-primary-lighter text-primary-dark"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-primary-lighter text-primary-dark"
       >
         Primary Test
       </span>
@@ -160,7 +160,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-primary-lighter text-primary-dark"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-primary-lighter text-primary-dark"
     >
       Primary Test
     </span>
@@ -225,7 +225,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-accent-warm-lighter text-accent-warm-darker"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-accent-warm-lighter text-accent-warm-darker"
       >
         Accent Test
       </span>
@@ -233,7 +233,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-accent-warm-lighter text-accent-warm-darker"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-accent-warm-lighter text-accent-warm-darker"
     >
       Accent Test
     </span>
@@ -298,7 +298,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-base-lighter text-base-dark"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-base-lighter text-base-dark"
       >
         Base Test
       </span>
@@ -306,7 +306,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-base-lighter text-base-dark"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-base-lighter text-base-dark"
     >
       Base Test
     </span>
@@ -371,7 +371,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-white text-base-dark border usa-tag-padding-override"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-white text-base-dark border usa-tag-padding-override"
       >
         BaseDark Test
       </span>
@@ -379,7 +379,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-white text-base-dark border usa-tag-padding-override"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-white text-base-dark border usa-tag-padding-override"
     >
       BaseDark Test
     </span>
@@ -444,7 +444,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-error-lighter text-error-dark"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-error-lighter text-error-dark"
       >
         Error Test
       </span>
@@ -452,7 +452,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-error-lighter text-error-dark"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-error-lighter text-error-dark"
     >
       Error Test
     </span>
@@ -517,7 +517,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-info-lighter text-info-darker"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-info-lighter text-info-darker"
       >
         Info Test
       </span>
@@ -525,7 +525,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-info-lighter text-info-darker"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-info-lighter text-info-darker"
     >
       Info Test
     </span>
@@ -590,7 +590,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-info-lighter text-info-darker accent-cool-hover-override"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-info-lighter text-info-darker accent-cool-hover-override"
       >
         Info with hover Test
       </span>
@@ -598,7 +598,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-info-lighter text-info-darker accent-cool-hover-override"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-info-lighter text-info-darker accent-cool-hover-override"
     >
       Info with hover Test
     </span>
@@ -663,7 +663,7 @@ Object {
   "baseElement": <body>
     <div>
       <span
-        class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-white text-base"
+        class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-white text-base"
       >
         NoBg Test
       </span>
@@ -671,7 +671,7 @@ Object {
   </body>,
   "container": <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-05 width-full width-auto text-no-wrap bg-white text-base"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-white text-base"
     >
       NoBg Test
     </span>

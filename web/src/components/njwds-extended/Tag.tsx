@@ -48,7 +48,7 @@ export const Tag = (props: Props): ReactElement => {
 
   return (
     <span
-      className={`usa-tag font-sans-2xs padding-y-05 width-full width-auto${
+      className={`usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2${
         props.textWrap ? " text-wrap display-block" : " text-no-wrap"
       }${styling}${hoverStyling}${props.bold ? " text-bold" : ""}${
         props.fixedWidth ? " tag-fixed-width display-inline-block" : ""
