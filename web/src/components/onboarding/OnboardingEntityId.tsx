@@ -6,14 +6,15 @@ import { NumericField } from "@/components/onboarding/NumericField";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
-  children: ReactNode;
+  children?: ReactNode;
   fieldStates: ProfileFieldErrorMap;
+  existingBusiness?: boolean;
 }
 export const OnboardingEntityId = (props: Props): ReactElement => {
   const { state } = useContext(OnboardingContext);
   const fieldName = "entityId";
 
-  if (!isEntityIdApplicable(state.profileData.legalStructureId)) {
+  if (!isEntityIdApplicable(state.profileData.legalStructureId) && !props.existingBusiness) {
     return <></>;
   }
 

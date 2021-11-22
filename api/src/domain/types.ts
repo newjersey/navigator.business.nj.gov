@@ -129,6 +129,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
 
 export const createEmptyProfileData = (): ProfileData => {
   return {
+    hasExistingBusiness: undefined,
     businessName: "",
     industryId: undefined,
     legalStructureId: undefined,

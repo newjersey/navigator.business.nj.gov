@@ -38,7 +38,8 @@ export interface Preferences {
   roadmapOpenSteps: number[];
 }
 
-const emptyProfileData = {
+const emptyProfileData: ProfileData = {
+  hasExistingBusiness: undefined,
   businessName: "",
   industryId: undefined,
   legalStructureId: undefined,
@@ -50,13 +51,14 @@ const emptyProfileData = {
   employerId: undefined,
   taxId: undefined,
   notes: "",
-} as ProfileData;
+};
 
 export const createEmptyProfileData = (): ProfileData => {
   return emptyProfileData;
 };
 
-export type ProfileError = "REQUIRED_LEGAL";
+export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS";
+
 export interface LicenseData {
   nameAndAddress: NameAndAddress;
   completedSearch: boolean;
@@ -73,6 +75,7 @@ export type OperateDisplayContent = {
 };
 
 export type ProfileDisplayContent = {
+  hasExistingBusiness: { contentMd: string; radioButtonYesText: string; radioButtonNoText: string };
   businessName: {
     contentMd: string;
     placeholder: string;
@@ -116,6 +119,7 @@ export type ProfileDisplayContent = {
 };
 
 const emptyProfileDisplayContent = {
+  hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
   businessName: {
     contentMd: "",
     placeholder: "",

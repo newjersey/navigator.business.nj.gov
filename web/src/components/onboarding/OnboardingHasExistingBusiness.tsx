@@ -4,13 +4,13 @@ import { Content } from "@/components/Content";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { setHeaderRole } from "@/lib/utils/helpers";
 
-export const OnboardingHomeBasedBusiness = (): ReactElement => {
+export const OnboardingHasExistingBusiness = (): ReactElement => {
   const { state, setProfileData } = useContext(OnboardingContext);
 
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     setProfileData({
       ...state.profileData,
-      homeBasedBusiness: event.target.value === "true",
+      hasExistingBusiness: event.target.value === "true",
     });
   };
 
@@ -18,32 +18,30 @@ export const OnboardingHomeBasedBusiness = (): ReactElement => {
 
   return (
     <>
-      <Content overrides={{ h3: header }}>
-        {state.displayContent.industry.specificHomeBasedBusinessQuestion.contentMd}
-      </Content>
+      <Content overrides={{ h3: header }}>{state.displayContent.hasExistingBusiness.contentMd}</Content>
       <FormControl fullWidth>
         <RadioGroup
-          aria-label="Home-based Business"
-          name="home-based-business"
-          value={state.profileData.homeBasedBusiness}
+          aria-label="Has Existing Business"
+          name="has-existing-business"
+          value={state.profileData.hasExistingBusiness ?? ""}
           onChange={handleSelection}
           row
         >
           <FormControlLabel
             style={{ marginRight: "3rem" }}
             labelPlacement="end"
-            data-testid="home-based-business-true"
+            data-testid="has-existing-business-true"
             value={true}
             control={<Radio color="primary" />}
-            label={state.displayContent.industry.specificHomeBasedBusinessQuestion.radioButtonYesText}
+            label={state.displayContent.hasExistingBusiness.radioButtonYesText}
           />
           <FormControlLabel
             style={{ marginRight: "3rem" }}
             labelPlacement="end"
-            data-testid="home-based-business-false"
+            data-testid="has-existing-business-false"
             value={false}
             control={<Radio color="primary" />}
-            label={state.displayContent.industry.specificHomeBasedBusinessQuestion.radioButtonNoText}
+            label={state.displayContent.hasExistingBusiness.radioButtonNoText}
           />
         </RadioGroup>
       </FormControl>

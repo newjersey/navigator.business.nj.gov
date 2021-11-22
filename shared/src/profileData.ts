@@ -1,6 +1,7 @@
 import { Municipality } from "./municipality";
 
 export interface ProfileData {
+  hasExistingBusiness: boolean | undefined;
   businessName: string;
   industryId: string | undefined;
   legalStructureId: string | undefined;

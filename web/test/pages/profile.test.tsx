@@ -23,6 +23,8 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { ProfileDefaults } from "@/display-defaults//ProfileDefaults";
 import { Municipality } from "@businessnjgovnavigator/shared";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { templateEval } from "@/lib/utils/helpers";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -161,13 +163,11 @@ describe("profile", () => {
     fillText("Location", "");
     fireEvent.blur(subject.getByLabelText("Location"));
     clickSave();
-    expect(subject.container.querySelector("#municipality-helper-text") as HTMLElement).toBeInTheDocument();
+    expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
     await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
     selectByText("Location", newark.displayName);
     await waitFor(() =>
-      expect(
-        subject.container.querySelector("#municipality-helper-text") as HTMLElement
-      ).not.toBeInTheDocument()
+      expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).not.toBeInTheDocument()
     );
   });
 
@@ -186,8 +186,12 @@ describe("profile", () => {
     fillText("Employer id", "123490");
     fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
     clickSave();
-    expect(subject.container.querySelector("#employerId-helper-text") as HTMLElement).toBeInTheDocument();
-    await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
+    await waitFor(() => {
+      expect(
+        subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "10" }))
+      ).toBeInTheDocument();
+      expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    });
   });
 
   it("user is able to go back to roadmap", async () => {

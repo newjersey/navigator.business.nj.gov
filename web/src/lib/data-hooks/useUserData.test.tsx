@@ -66,24 +66,6 @@ describe("useUserData", () => {
       expect(result.userData).toEqual(undefined);
     });
 
-    it("sets error to CACHED_ONLY error when api call fails with cache", async () => {
-      const currentUser = generateUser({});
-
-      mockApi.getUserData.mockResolvedValue(generateUserData({}));
-      const { update } = setupHook(currentUser);
-
-      mockApi.getUserData.mockRejectedValue(500);
-
-      const newUserData = generateUserData({});
-      mockApi.postUserData.mockResolvedValue(newUserData);
-      await act(() => update(newUserData));
-
-      const result = setupHook(currentUser);
-
-      expect(mockSetError).toHaveBeenCalledWith("CACHED_ONLY");
-      expect(result.userData).toEqual(newUserData);
-    });
-
     it("sets error to UPDATE_FAILED error when update function rejects", async () => {
       const currentUser = generateUser({});
       mockApi.getUserData.mockResolvedValue(generateUserData({}));

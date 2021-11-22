@@ -86,6 +86,9 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.wait(1000); // wait for onboarding animation
 
     // onboarding
+    cy.get('input[type="radio"][value="false"]').check();
+    clickNext();
+
     cy.get('input[aria-label="Business name"]').type("Beesapple's");
     clickNext();
 

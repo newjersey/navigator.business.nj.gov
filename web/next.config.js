@@ -14,6 +14,7 @@ module.exports = withBundleAnalyzer({
     COGNITO_WEB_CLIENT_ID: process.env.COGNITO_WEB_CLIENT_ID,
     MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
     FEATURE_DISABLE_OPERATE: process.env.FEATURE_DISABLE_OPERATE,
+    FEATURE_DISABLE_OSCAR_ONBOARDING: process.env.FEATURE_DISABLE_OSCAR_ONBOARDING,
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {

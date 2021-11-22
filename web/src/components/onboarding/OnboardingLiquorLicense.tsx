@@ -27,7 +27,7 @@ export const OnboardingLiquorLicense = (): ReactElement => {
           <FormControlLabel
             style={{ marginRight: "3rem" }}
             labelPlacement="end"
-            data-testid="true"
+            data-testid="liquor-license-true"
             value={true}
             control={<Radio color="primary" />}
             label={state.displayContent.industry.specificLiquorQuestion.radioButtonYesText}
@@ -35,7 +35,7 @@ export const OnboardingLiquorLicense = (): ReactElement => {
           <FormControlLabel
             style={{ marginRight: "3rem" }}
             labelPlacement="end"
-            data-testid="false"
+            data-testid="liquor-license-false"
             value={false}
             control={<Radio color="primary" />}
             label={state.displayContent.industry.specificLiquorQuestion.radioButtonNoText}
