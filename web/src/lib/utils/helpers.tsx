@@ -210,3 +210,21 @@ const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, T
 
 const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | undefined =>
   roadmap?.steps.find((step) => step.tasks.find((task) => task.id === taskId));
+
+export const splitAndBoldSearchText = (displayText: string, searchText: string): ReactElement => {
+  const index = displayText.toLowerCase().indexOf(searchText.toLowerCase());
+  if (index >= 0) {
+    const prefixText = displayText.substr(0, index);
+    const toBold = displayText.substr(index, searchText.length);
+    const afterText = displayText.substr(index + searchText.length);
+    return (
+      <span style={{ whiteSpace: "pre-wrap" }}>
+        {prefixText}
+        <span className="text-bold">{toBold}</span>
+        {afterText}
+      </span>
+    );
+  } else {
+    return <>{displayText}</>;
+  }
+};

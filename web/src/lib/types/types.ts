@@ -174,6 +174,7 @@ export const createEmptyProfileDisplayContent = (): ProfileDisplayContent => {
 };
 
 export type ProfileFields = keyof ProfileData & keyof ProfileDisplayContent;
+
 const profileDisplayContentFields = Object.keys(
   emptyProfileDisplayContent
 ) as (keyof ProfileDisplayContent)[];
@@ -189,6 +190,7 @@ export type OnboardingStatus = "SUCCESS" | "ERROR";
 type ProfileFieldStatus = {
   invalid: boolean;
 };
+
 export type ProfileFieldErrorMap = Record<ProfileFields, ProfileFieldStatus>;
 
 export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>

@@ -12,6 +12,7 @@ import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withS
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { templateEval } from "@/lib/utils/helpers";
 import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -207,7 +208,7 @@ describe("onboarding - owning a business", () => {
 
     await page.visitStep3();
     expect(page.getBusinessNameValue()).toEqual("Applebees");
-    expect(page.getIndustryValue()).toEqual("cosmetology");
+    expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
 
     await page.visitStep4();
     expect(page.getMunicipalityValue()).toEqual("Newark");

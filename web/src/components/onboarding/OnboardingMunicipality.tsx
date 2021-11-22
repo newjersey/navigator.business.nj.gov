@@ -3,11 +3,11 @@ import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { MunicipalityDropdown } from "@/components/MunicipalityDropdown";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
