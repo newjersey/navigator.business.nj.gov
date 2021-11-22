@@ -57,7 +57,7 @@ export const OnboardingField = (props: Props): ReactElement => {
           onBlur={props.onValidation}
           onSubmit={props.onValidation}
           error={props.error}
-          helperText={props.error && (props.validationText ?? "")}
+          helperText={props.error ? props.validationText ?? " " : " "}
           variant="outlined"
           fullWidth
           // eslint-disable-next-line @typescript-eslint/no-explicit-any

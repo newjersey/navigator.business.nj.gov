@@ -10,6 +10,7 @@ const loadFile = (filename: string): string =>
   fs.readFileSync(path.join(displayContentDir, "onboarding", filename), "utf8");
 
 export const loadProfileDisplayContent = (): ProfileDisplayContent => {
+  const hasExistingBusiness = getMarkdown(loadFile("has-existing-business.md"));
   const businessName = getMarkdown(loadFile("business-name.md"));
   const industry = getMarkdown(loadFile("industry.md"));
   const legalStructure = getMarkdown(loadFile("legal-structure.md"));
@@ -31,6 +32,11 @@ export const loadProfileDisplayContent = (): ProfileDisplayContent => {
   });
 
   return {
+    hasExistingBusiness: {
+      contentMd: hasExistingBusiness.content,
+      radioButtonYesText: (hasExistingBusiness.grayMatter as RadioGrayMatter).radioButtonYesText,
+      radioButtonNoText: (hasExistingBusiness.grayMatter as RadioGrayMatter).radioButtonNoText,
+    },
     businessName: {
       contentMd: businessName.content,
       ...(businessName.grayMatter as FieldGrayMatter),

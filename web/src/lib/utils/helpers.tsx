@@ -141,6 +141,7 @@ export const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
 
 export const OnboardingErrorLookup: Record<ProfileError, string> = {
   REQUIRED_LEGAL: OnboardingDefaults.errorTextRequiredLegal,
+  REQUIRED_EXISTING_BUSINESS: OnboardingDefaults.errorTextRequiredExistingBusiness,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {

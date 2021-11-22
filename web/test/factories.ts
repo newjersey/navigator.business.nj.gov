@@ -83,6 +83,7 @@ export const generateProfileData = (
   isMobileLocation?: boolean
 ): ProfileData => {
   return {
+    hasExistingBusiness: false,
     businessName: `some-business-name-${randomInt()}`,
     industryId: randomIndustry(isMobileLocation).id,
     legalStructureId: randomLegalStructure().id,

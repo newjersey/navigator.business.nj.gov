@@ -86,6 +86,9 @@ describe("Roadmap [feature] [all] [group1]", () => {
   it("open and closes contextual info panel on onboarding screens", () => {
     cy.wait(1000); // wait for onboarding animation
 
+    cy.get('input[type="radio"][value="false"]').check();
+    clickNext();
+
     cy.get('input[aria-label="Business name"]').type("Beesapple's");
     clickNext();
 

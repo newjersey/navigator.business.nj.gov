@@ -47,6 +47,10 @@ export const completeOnboarding = (
 ): void => {
   cy.wait(1000); // wait for onboarding animation
 
+  // check 'starting a business'
+  cy.get('input[type="radio"][value="false"]').check();
+  clickNext();
+
   cy.get('input[aria-label="Business name"]').type(businessName);
   clickNext();
 

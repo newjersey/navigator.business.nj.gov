@@ -38,11 +38,10 @@ export const useUserData = (): UseUserDataResponse => {
 
   const update = async (newUserData: UserData | undefined): Promise<void> => {
     if (newUserData) {
-      mutate(newUserData, false);
+      await mutate(newUserData, false);
       return postUserData(newUserData)
         .then(() => {
           setUserDataError(undefined);
-          mutate(newUserData);
         })
         .catch(() => {
           setUserDataError("UPDATE_FAILED");

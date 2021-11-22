@@ -1,13 +1,13 @@
 import React, {
   FormEvent,
   ReactElement,
-  ReactNode,
   createContext,
   useContext,
   useCallback,
   useEffect,
   useState,
   useRef,
+  useMemo,
 } from "react";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "@mui/material";
@@ -27,12 +27,8 @@ import {
 } from "@/lib/types/types";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
-import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
-import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import {
   OnboardingErrorLookup,
@@ -51,6 +47,7 @@ import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { NextSeo } from "next-seo";
 import { Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import Link from "next/link";
+import { FlowType, getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 
 interface Props {
   displayContent: ProfileDisplayContent;
@@ -85,7 +82,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
   const { setRoadmap } = useContext(RoadmapContext);
 
-  const PAGES = 4;
   const router = useRouter();
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
@@ -95,76 +91,120 @@ const OnboardingPage = (props: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
+  const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
+  const hasHandledRouting = useRef<boolean>(false);
 
-  const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates({ ...fieldStates, [field]: { invalid } });
-  };
+  const shouldDisableOscarFlow = process.env.FEATURE_DISABLE_OSCAR_ONBOARDING === "true";
+
+  const onValidation = useCallback(
+    (field: ProfileFields, invalid: boolean): void => {
+      setFieldStates({ ...fieldStates, [field]: { invalid } });
+    },
+    [setFieldStates, fieldStates]
+  );
+
+  const onboardingFlows = useMemo(() => {
+    const onboardingFlows = getOnboardingFlows(profileData, onValidation, fieldStates);
+    if (shouldDisableOscarFlow) {
+      return {
+        STARTING: { pages: onboardingFlows.STARTING.pages.slice(1) },
+        OWNING: { pages: onboardingFlows.OWNING.pages.slice(1) },
+      };
+    }
+    return onboardingFlows;
+  }, [profileData, onValidation, fieldStates, shouldDisableOscarFlow]);
 
   useEffect(() => {
     if (userData) {
       setProfileData(userData.profileData);
+      if (!shouldDisableOscarFlow) {
+        setCurrentFlow(userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
+      }
     }
-  }, [userData]);
+  }, [userData, shouldDisableOscarFlow, setProfileData]);
 
   const queryShallowPush = useCallback(
-    (page: number) =>
-      router.push(
-        {
-          query: { page: page },
-        },
-        undefined,
-        { shallow: true }
-      ),
+    (page: number) => router.push({ query: { page: page } }, undefined, { shallow: true }),
     [router]
   );
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady || !userData || hasHandledRouting.current) return;
+
     const queryPage = Number(router.query.page);
-    if (isNaN(queryPage)) {
-      const startPage = 1;
-      setPage({
-        current: startPage,
-        previous: startPage,
-      });
-      queryShallowPush(startPage);
-    } else if (queryPage <= PAGES && queryPage > 0) {
-      const queryPagePrevious = queryPage - 1;
-      setPage({
-        current: queryPage,
-        previous: queryPagePrevious,
-      });
+
+    const hasAnsweredExistingBusiness = userData.profileData.hasExistingBusiness !== undefined;
+    const currentFlowInUserData = userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+    const requestedPageIsInRange =
+      queryPage <= onboardingFlows[currentFlowInUserData].pages.length && queryPage > 0;
+
+    if (hasAnsweredExistingBusiness && requestedPageIsInRange) {
+      setPage({ current: queryPage, previous: queryPage - 1 });
     } else {
-      router.push("/onboarding?page=1");
+      setPage({ current: 1, previous: 1 });
+      queryShallowPush(1);
     }
-  }, [router.isReady, router, queryShallowPush]);
+
+    hasHandledRouting.current = true;
+  }, [router.isReady, router.query.page, userData, onboardingFlows, queryShallowPush, hasHandledRouting]);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
 
-    if (page.current === 3 && !profileData.legalStructureId) {
-      setError("REQUIRED_LEGAL");
-      scrollToTop();
-      headerRef.current?.focus();
-      return;
-    }
-    if (page.current === 4 && !profileData.municipality) {
-      setAlert("ERROR");
-      setFieldStates({ ...fieldStates, municipality: { invalid: true } });
+    const currentPageFlow = onboardingFlows[currentFlow].pages[page.current - 1];
+    if (!currentPageFlow.testIsValid()) {
+      if (currentPageFlow.bannerErrorToSet) {
+        setError(currentPageFlow.bannerErrorToSet);
+      } else if (currentPageFlow.inlineErrorField) {
+        setAlert("ERROR");
+        onValidation(currentPageFlow.inlineErrorField, true);
+      }
       scrollToTop();
       headerRef.current?.focus();
       return;
     }
 
-    setAnalyticsDimensions(profileData);
+    let newProfileData = profileData;
+    if (shouldDisableOscarFlow) {
+      newProfileData = {
+        ...profileData,
+        hasExistingBusiness: false,
+      };
+      setProfileData(newProfileData);
+    } else {
+      const hasExistingBusinessChanged =
+        profileData.hasExistingBusiness !== userData.profileData.hasExistingBusiness;
+
+      if (page.current === 1 && hasExistingBusinessChanged) {
+        newProfileData = {
+          businessName: profileData.businessName,
+          industryId: profileData.industryId,
+          homeBasedBusiness: profileData.homeBasedBusiness,
+          liquorLicense: profileData.liquorLicense,
+          municipality: profileData.municipality,
+          hasExistingBusiness: profileData.hasExistingBusiness,
+          legalStructureId: undefined,
+          entityId: undefined,
+          constructionRenovationPlan: undefined,
+          employerId: undefined,
+          taxId: undefined,
+          notes: "",
+        };
+
+        setProfileData(newProfileData);
+        setCurrentFlow(profileData.hasExistingBusiness ? "OWNING" : "STARTING");
+      }
+    }
+
+    setAnalyticsDimensions(newProfileData);
     setAlert(undefined);
     setError(undefined);
 
-    setRoadmap(await buildUserRoadmap(profileData));
+    setRoadmap(await buildUserRoadmap(newProfileData));
 
-    if (page.current + 1 <= PAGES) {
-      update({ ...userData, profileData: profileData }).then(() => {
+    if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
+      update({ ...userData, profileData: newProfileData }).then(() => {
         const nextCurrentPage = page.current + 1;
         setPage({
           current: nextCurrentPage,
@@ -174,7 +214,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         headerRef.current?.focus();
       });
     } else {
-      update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
+      update({ ...userData, profileData: newProfileData, formProgress: "COMPLETED" }).then(async () => {
         await router.push("/roadmap");
       });
     }
@@ -194,6 +234,19 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   };
 
+  const evalHeaderStepsTemplate = (): string => {
+    if (page.current === 1 && !shouldDisableOscarFlow) {
+      return templateEval(OnboardingDefaults.stepOneTemplate, {
+        currentPage: page.current.toString(),
+      });
+    } else {
+      return templateEval(OnboardingDefaults.stepXofYTemplate, {
+        currentPage: page.current.toString(),
+        totalPages: onboardingFlows[currentFlow].pages.length.toString(),
+      });
+    }
+  };
+
   const header = () => (
     <div
       ref={headerRef}
@@ -205,22 +258,9 @@ const OnboardingPage = (props: Props): ReactElement => {
     >
       {OnboardingDefaults.pageTitle}{" "}
       <span className="weight-400" data-testid={`step-${page.current.toString()}`}>
-        {templateEval(OnboardingDefaults.stepXofYTemplate, {
-          currentPage: page.current.toString(),
-          totalPages: PAGES.toString(),
-        })}
+        {evalHeaderStepsTemplate()}
       </span>
     </div>
-  );
-
-  const asOnboardingPage = (onboardingPage: ReactNode) => (
-    <SingleColumnContainer>
-      <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
-        {onboardingPage}
-        <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
-        <OnboardingButtonGroup />
-      </form>
-    </SingleColumnContainer>
   );
 
   const getAnimation = (): string => {
@@ -245,13 +285,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }}
     >
       <NextSeo
-        title={`Business.NJ.gov Navigator - ${OnboardingDefaults.pageTitle} ${templateEval(
-          OnboardingDefaults.stepXofYTemplate,
-          {
-            currentPage: page.current.toString(),
-            totalPages: PAGES.toString(),
-          }
-        )} `}
+        title={`Business.NJ.gov Navigator - ${OnboardingDefaults.pageTitle} ${evalHeaderStepsTemplate()} `}
       />
       <PageSkeleton>
         <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
@@ -287,42 +321,24 @@ const OnboardingPage = (props: Props): ReactElement => {
 
             <UserDataErrorAlert />
           </SingleColumnContainer>
-
           <div className="slide-container">
-            <CSSTransition
-              in={page.current === 1}
-              unmountOnExit
-              timeout={getTimeout(1)}
-              classNames={`width-100 ${getAnimation()}`}
-            >
-              {asOnboardingPage(<OnboardingBusinessName />)}
-            </CSSTransition>
-            <CSSTransition
-              in={page.current === 2}
-              unmountOnExit
-              timeout={getTimeout(2)}
-              classNames={`width-100 ${getAnimation()}`}
-            >
-              {asOnboardingPage(<OnboardingIndustry />)}
-            </CSSTransition>
-            <CSSTransition
-              in={page.current === 3}
-              unmountOnExit
-              timeout={getTimeout(3)}
-              classNames={`width-100 ${getAnimation()}`}
-            >
-              {asOnboardingPage(<OnboardingLegalStructure />)}
-            </CSSTransition>
-            <CSSTransition
-              in={page.current === 4}
-              unmountOnExit
-              timeout={getTimeout(4)}
-              classNames={`width-100 ${getAnimation()}`}
-            >
-              {asOnboardingPage(
-                <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
-              )}
-            </CSSTransition>
+            {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => (
+              <CSSTransition
+                key={index}
+                in={page.current === index + 1}
+                unmountOnExit
+                timeout={getTimeout(index + 1)}
+                classNames={`width-100 ${getAnimation()}`}
+              >
+                <SingleColumnContainer>
+                  <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+                    {onboardingPage.component}
+                    <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                    <OnboardingButtonGroup />
+                  </form>
+                </SingleColumnContainer>
+              </CSSTransition>
+            ))}
           </div>
         </main>
       </PageSkeleton>

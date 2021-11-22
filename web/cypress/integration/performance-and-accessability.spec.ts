@@ -38,12 +38,12 @@ describe("Performance and Accessability [all] [group1]", () => {
     cy.loginByCognitoApi();
   });
 
-  describe("Onboarding", () => {
+  describe("Onboarding - starting flow", () => {
     describe("Step 1", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
 
-        cy.get('input[aria-label="Business name"]').type("Beesapple's");
+        cy.get('input[type="radio"][value="false"]').check();
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -53,11 +53,10 @@ describe("Performance and Accessability [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
 
-        cy.get('input[aria-label="Business name"]').type("Beesapple's");
+        cy.get('input[type="radio"][value="false"]').check();
         clickNext();
 
-        cy.get('[id="Industry"]').click();
-        cy.get('[data-value="e-commerce"]').click();
+        cy.get('input[aria-label="Business name"]').type("Beesapple's");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -67,6 +66,26 @@ describe("Performance and Accessability [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
 
+        cy.get('input[type="radio"][value="false"]').check();
+        clickNext();
+
+        cy.get('input[aria-label="Business name"]').type("Beesapple's");
+        clickNext();
+
+        cy.get('[id="Industry"]').click();
+        cy.get('[data-value="e-commerce"]').click();
+
+        cy.lighthouse(undefined, lighthouseDesktopConfig);
+        cy.pa11y(defaultPa11yThresholds);
+      });
+    });
+    describe("Step 4", () => {
+      it("should pass the audits", () => {
+        cy.wait(1000); // wait for onboarding animation
+
+        cy.get('input[type="radio"][value="false"]').check();
+        clickNext();
+
         cy.get('input[aria-label="Business name"]').type("Beesapple's");
         clickNext();
 
@@ -80,9 +99,12 @@ describe("Performance and Accessability [all] [group1]", () => {
         cy.pa11y(defaultPa11yThresholds);
       });
     });
-    describe("Step 4", () => {
+    describe("Step 5", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
+
+        cy.get('input[type="radio"][value="false"]').check();
+        clickNext();
 
         cy.get('input[aria-label="Business name"]').type("Beesapple's");
         clickNext();
@@ -92,6 +114,75 @@ describe("Performance and Accessability [all] [group1]", () => {
         clickNext();
 
         cy.get('[data-value="general-partnership"]').click();
+        clickNext();
+
+        cy.get('input[type="radio"][value="false"]').check();
+        cy.get('[aria-label="Location"]').click();
+        cy.contains("Absecon").click();
+
+        cy.lighthouse(undefined, lighthouseDesktopConfig);
+        cy.pa11y(defaultPa11yThresholds);
+      });
+    });
+  });
+
+  describe("Onboarding - owning flow", () => {
+    describe("Step 1", () => {
+      it("should pass the audits", () => {
+        cy.wait(1000); // wait for onboarding animation
+
+        cy.get('input[type="radio"][value="true"]').check();
+
+        cy.lighthouse(undefined, lighthouseDesktopConfig);
+        cy.pa11y(defaultPa11yThresholds);
+      });
+    });
+    describe("Step 2", () => {
+      it("should pass the audits", () => {
+        cy.wait(1000); // wait for onboarding animation
+
+        cy.get('input[type="radio"][value="true"]').check();
+        clickNext();
+
+        cy.get('input[aria-label="Entity id"]').type("1234567890");
+
+        cy.lighthouse(undefined, lighthouseDesktopConfig);
+        cy.pa11y(defaultPa11yThresholds);
+      });
+    });
+    describe("Step 3", () => {
+      it("should pass the audits", () => {
+        cy.wait(1000); // wait for onboarding animation
+
+        cy.get('input[type="radio"][value="true"]').check();
+        clickNext();
+
+        cy.get('input[aria-label="Entity id"]').type("1234567890");
+        clickNext();
+
+        cy.get('input[aria-label="Business name"]').type("Beesapple's");
+
+        cy.get('[id="Industry"]').click();
+        cy.get('[data-value="e-commerce"]').click();
+
+        cy.lighthouse(undefined, lighthouseDesktopConfig);
+        cy.pa11y(defaultPa11yThresholds);
+      });
+    });
+    describe("Step 4", () => {
+      it("should pass the audits", () => {
+        cy.wait(1000); // wait for onboarding animation
+
+        cy.get('input[type="radio"][value="true"]').check();
+        clickNext();
+
+        cy.get('input[aria-label="Entity id"]').type("1234567890");
+        clickNext();
+
+        cy.get('input[aria-label="Business name"]').type("Beesapple's");
+
+        cy.get('[id="Industry"]').click();
+        cy.get('[data-value="e-commerce"]').click();
         clickNext();
 
         cy.get('input[type="radio"][value="false"]').check();
