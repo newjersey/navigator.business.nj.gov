@@ -20,7 +20,7 @@
     },
     {
       "id": "e-commerce",
-      "name": "E-Commerce",
+      "name": "E-Commerce - Online Sales",
       "description": "Selling or reselling goods or services on the internet",
       "canBeHomeBased": true,
       "isLiquorLicenseApplicable": false,
@@ -110,7 +110,6 @@
       "isMobileLocation": false,
       "canBeReseller": false
     },
-
     {
       "id": "auto-body-repair",
       "name": "Auto-Body Repair",
