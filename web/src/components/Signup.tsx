@@ -200,7 +200,6 @@ export const Signup = (props: Props): ReactElement => {
             type="submit"
             onClick={submitSelfReg}
             loading={isLoading}
-            marginClass="spinner-margin-36"
             data-testid="submit-selfreg"
           >
             {SelfRegDefaults.submitButtonText}

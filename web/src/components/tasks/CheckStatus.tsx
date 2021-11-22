@@ -177,7 +177,6 @@ export const CheckStatus = (props: Props): ReactElement => {
             className="usa-button mla margin-top-4 margin-bottom-1 margin-right-0"
             outline={true}
             data-testid="check-status-submit"
-            marginClass="spinner-margin-36"
           >
             {LicenseScreenDefaults.submitText}
           </LoadingButton>

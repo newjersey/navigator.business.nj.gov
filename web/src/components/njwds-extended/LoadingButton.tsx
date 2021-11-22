@@ -27,9 +27,9 @@ export const LoadingButton = (props: Props): ReactElement => {
     >
       <span className={showInvisibleClass}>{children}</span>
       {loading && (
-        <span className={`spinner-overlay ${marginClass || ""}`} data-testid="loading-spinner">
-          <CircularProgress size={14} />
-        </span>
+        <div className={`spinner-overlay ${marginClass || ""}`} data-testid="loading-spinner">
+          <CircularProgress size={24} thickness={10} />
+        </div>
       )}
     </button>
   );
