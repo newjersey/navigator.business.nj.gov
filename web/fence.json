@@ -41,6 +41,8 @@
     "broken-link-checker",
     "@storybook/react",
     "@businessnjgovnavigator/content/roadmaps/task-dependencies.json",
-    "storybook-addon-designs"
+    "storybook-addon-designs",
+    "next/dynamic",
+    "netlify-cms-app"
   ]
 }
