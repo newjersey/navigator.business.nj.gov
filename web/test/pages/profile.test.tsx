@@ -22,7 +22,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { ProfileDefaults } from "@/display-defaults//ProfileDefaults";
-import { Municipality } from "@businessnjgovnavigator/shared";
+import { LookupIndustryById, Municipality } from "@businessnjgovnavigator/shared";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { templateEval } from "@/lib/utils/helpers";
 
@@ -86,7 +86,7 @@ describe("profile", () => {
     subject = renderPage({ userData });
     expect(getBusinessNameValue()).toEqual("Applebees");
 
-    expect(getIndustryValue()).toEqual("cosmetology");
+    expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
 
     expect(getLegalStructureValue()).toEqual("c-corporation");
 

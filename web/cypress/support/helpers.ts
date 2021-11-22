@@ -1,3 +1,5 @@
+import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+
 /* eslint-disable cypress/no-unnecessary-waiting */
 export const clickNext = (): void => {
   cy.wait(300);
@@ -54,9 +56,9 @@ export const completeOnboarding = (
   cy.get('input[aria-label="Business name"]').type(businessName);
   clickNext();
 
-  const industryValue = `[data-value="${industry}"]`;
-  cy.get('[id="Industry"]').click();
-  cy.get(industryValue).click(); // need to be HIC for the task ID to work
+  const industryValue = LookupIndustryById(industry).name;
+  cy.get('[aria-label="Industry"]').click();
+  cy.contains(industryValue).click();
   clickNext();
 
   const companyTypeValue = `[data-value="${companyType}"]`;

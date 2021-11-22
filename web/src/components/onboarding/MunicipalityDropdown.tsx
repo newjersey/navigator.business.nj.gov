@@ -5,6 +5,7 @@ import { createFilterOptions, TextField } from "@mui/material";
 import React, { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 import { Autocomplete } from "@mui/material";
 import { ProfileFields } from "@/lib/types/types";
+import { splitAndBoldSearchText } from "@/lib/utils/helpers";
 
 interface Props {
   fieldName: ProfileFields;
@@ -26,33 +27,18 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
     props.handleChange && props.handleChange();
     setSearchText(event.target.value);
   };
+
   const handleMunicipality = (event: ChangeEvent<unknown>, value: Municipality | null) => {
     props.handleChange && props.handleChange();
     setSearchText(value ? value.displayName : "");
     props.onSelect(value || undefined);
   };
 
-  const splitAndBoldSearchText = (displayName: string): ReactElement => {
-    const index = displayName.toLowerCase().indexOf(searchText.toLowerCase());
-    if (index >= 0) {
-      const prefixText = displayName.substr(0, index);
-      const toBold = displayName.substr(index, searchText.length);
-      const afterText = displayName.substr(index + searchText.length);
-      return (
-        <span style={{ whiteSpace: "pre-wrap" }}>
-          {prefixText}
-          <span className="text-bold">{toBold}</span>
-          {afterText}
-        </span>
-      );
-    } else {
-      return <>{displayName}</>;
-    }
-  };
   const filterOptions = createFilterOptions({
     matchFrom: "start",
     stringify: (option: Municipality) => option.displayName,
   });
+
   return (
     <Autocomplete
       options={props.municipalities}
@@ -68,7 +54,9 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
           {selected ? (
             <MenuOptionSelected>{option.displayName}</MenuOptionSelected>
           ) : (
-            <MenuOptionUnselected>{splitAndBoldSearchText(option.displayName)}</MenuOptionUnselected>
+            <MenuOptionUnselected>
+              {splitAndBoldSearchText(option.displayName, searchText)}
+            </MenuOptionUnselected>
           )}
         </li>
       )}
@@ -87,7 +75,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
           variant="outlined"
           placeholder={props.placeholderText}
           error={props.error}
-          helperText={props.error ? props.validationText ?? " " : " "}
+          helperText={props.error && (props.validationText ?? "")}
         />
       )}
       fullWidth
