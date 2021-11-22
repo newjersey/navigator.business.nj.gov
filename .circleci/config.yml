@@ -369,6 +369,14 @@ workflows:
                 - main
                 - /^release-.*/
       - cypress-tests:
+          name: Cypress Tests - Group 3
+          suite: group3
+          filters:
+            branches:
+              ignore:
+                - main
+                - /^release-.*/
+      - cypress-tests:
           name: Cypress Tests - Group 1
           enable-dashboard: true
           suite: group1
@@ -380,6 +388,14 @@ workflows:
           name: Cypress Tests - Group 2
           enable-dashboard: true
           suite: group2
+          filters:
+            branches:
+              only:
+                - main
+      - cypress-tests:
+          name: Cypress Tests - Group 3
+          enable-dashboard: true
+          suite: group3
           filters:
             branches:
               only:
