@@ -32,7 +32,7 @@ describe("Performance and Accessability - Landing Page [all] [group2]", () => {
   });
 });
 
-describe("Performance and Accessability [all] [group1]", () => {
+describe("Performance and Accessability - Onboarding [all] [group1]", () => {
   beforeEach(() => {
     cy.resetUserData();
     cy.loginByCognitoApi();
@@ -194,7 +194,13 @@ describe("Performance and Accessability [all] [group1]", () => {
       });
     });
   });
+});
 
+describe("Performance and Accessability - Roadmap [all] [group3]", () => {
+  beforeEach(() => {
+    cy.resetUserData();
+    cy.loginByCognitoApi();
+  });
   describe("Roadmap", () => {
     it("should pass the audits", () => {
       completeOnboarding("Smith Works", "e-commerce", "general-partnership");
