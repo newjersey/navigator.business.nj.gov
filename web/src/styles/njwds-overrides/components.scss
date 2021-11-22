@@ -2,8 +2,8 @@
   padding: 3px 7px;
 }
 
-.usa-alert--error {
-  background-image: url(/vendor/img/usa-icons/warning.svg), linear-gradient(transparent, transparent) !important;
+.usa-alert--error::before {
+  mask: url(/vendor/img/usa-icons/warning.svg) no-repeat center !important;
 }
 
 .usa-alert.radius-md::before {
