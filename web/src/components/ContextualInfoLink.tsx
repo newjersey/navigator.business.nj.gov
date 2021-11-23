@@ -2,7 +2,6 @@ import React, { ReactElement, useContext, useState } from "react";
 import { ContextualInfoContext } from "@/pages/_app";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
 import analytics from "@/lib/utils/analytics";
-import { Button } from "./njwds-extended/Button";
 
 export const ContextualInfoLink = ({ children }: { children: string[] }): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
@@ -25,10 +24,12 @@ export const ContextualInfoLink = ({ children }: { children: string[] }): ReactE
   };
 
   return (
-    <>
-      <Button style="tertiary" onClick={setContext} dataTestid={contextualInfoId}>
-        <span className="dashed-underline border-primary line-height-body-5">{displayText}</span>
-      </Button>
-    </>
+    <button
+      className="usa-button--unstyled cursor-pointer weight-inherit style-inherit"
+      data-testid={contextualInfoId}
+      onClick={setContext}
+    >
+      <span className="dashed-underline border-primary line-height-body-5">{displayText}</span>
+    </button>
   );
 };
