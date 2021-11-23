@@ -1,3 +1,3 @@
-## Entity ID
+## Entity ID (If You Have One)
 
-Get help finding your `Entity ID|entity-id`.
+If your business has a 10-digit New Jersey Entity ID, enter it here. If you aren't sure if you have one or what it is, don't worry! You can leave this blank for now. (You can also get help finding your `Entity ID|entity-id`.)
