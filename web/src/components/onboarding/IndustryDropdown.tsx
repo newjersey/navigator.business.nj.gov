@@ -50,7 +50,7 @@ export const IndustryDropdown = (): ReactElement => {
 
   const filterOptions = createFilterOptions({
     matchFrom: "any",
-    stringify: (option: Industry) => `${option.name} ${option.description}`,
+    stringify: (option: Industry) => `${option.name} ${option.description} ${option.additionalSearchTerms}`,
   });
 
   return (

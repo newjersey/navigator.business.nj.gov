@@ -25,7 +25,8 @@
       "canBeHomeBased": true,
       "isLiquorLicenseApplicable": false,
       "isMobileLocation": false,
-      "canBeReseller": true
+      "canBeReseller": true,
+      "additionalSearchTerms": "ecommerce"
     },
     {
       "id": "home-contractor",
@@ -118,7 +119,8 @@
       "canBeHomeBased": false,
       "isLiquorLicenseApplicable": false,
       "isMobileLocation": false,
-      "canBeReseller": true
+      "canBeReseller": true,
+      "additionalSearchTerms": "car"
     }
   ]
 }

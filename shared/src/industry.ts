@@ -9,6 +9,7 @@ export interface Industry {
   licenseType?: string;
   isMobileLocation: boolean;
   canBeReseller: boolean;
+  additionalSearchTerms?: string;
 }
 
 export const LookupIndustryById = (id: string | undefined): Industry => {
