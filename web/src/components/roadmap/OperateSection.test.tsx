@@ -12,6 +12,7 @@ import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import {
   currentUserData,
   setupStatefulUserDataContext,
+  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { FilingReference, OperateDisplayContent, UserData } from "@/lib/types/types";
@@ -134,17 +135,21 @@ describe("<OperateSection />", () => {
       expect(currentUserData().taxFilingData.filings).toEqual([]);
     });
 
-    it("does not submit if entity ID is invalid", () => {
-      const subject = statefulRender(emptyEntityIdData);
-
-      fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "1234567890" } });
-      fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
+    it("does not submit if entity ID is invalid", async () => {
+      const subject = statefulRender(
+        generateUserData({
+          profileData: generateProfileData({ entityId: "123456789" }),
+          taxFilingData: generateTaxFilingData({
+            entityIdStatus: "UNKNOWN",
+            filings: [],
+          }),
+        })
+      );
 
       fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "12345" } });
       fireEvent.blur(subject.getByLabelText("Entity id"));
       fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
-
-      expect(currentUserData().profileData.entityId).toEqual("1234567890");
+      expect(userDataWasNotUpdated()).toEqual(true);
     });
 
     it("displays error if field is empty when submitted", () => {
