@@ -33,7 +33,6 @@ import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { RoadmapContext } from "@/pages/_app";
 import { NavBar } from "@/components/navbar/NavBar";
-import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
@@ -41,6 +40,7 @@ import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 import { Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import { OnboardingStatusLookup } from "@/lib/utils/helpers";
+import { Button } from "@/components/njwds-extended/Button";
 
 interface Props {
   displayContent: ProfileDisplayContent;
@@ -208,15 +208,16 @@ const ProfilePage = (props: Props): ReactElement => {
                     >
                       {ProfileDefaults.backButtonText}
                     </button>
-                    <LoadingButton
+                    <Button
+                      style="primary"
+                      typeSubmit
                       onClick={() => {}}
+                      noRightMargin
+                      dataTestid="save"
                       loading={isLoading}
-                      className="usa-button margin-right-0"
-                      type="submit"
-                      data-testid="save"
                     >
                       {ProfileDefaults.saveButtonText}
-                    </LoadingButton>
+                    </Button>
                   </div>
                 </form>
               </SingleColumnContainer>

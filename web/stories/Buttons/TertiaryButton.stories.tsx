@@ -41,11 +41,3 @@ TertiaryUnderline.args = {
   children: "button",
   underline: true,
 };
-
-export const TertiaryWithSmallText = Template.bind({});
-
-TertiaryWithSmallText.args = {
-  style: "tertiary",
-  children: "button",
-  smallText: true,
-};
