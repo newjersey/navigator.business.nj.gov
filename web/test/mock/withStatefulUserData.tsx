@@ -9,6 +9,10 @@ export const currentUserData = (): UserData => {
   return getLastCalledWith(updateSpy)[0] as UserData;
 };
 
+export const userDataWasNotUpdated = (): boolean => {
+  return getLastCalledWith(updateSpy) === undefined;
+};
+
 export const WithStatefulUserData = ({
   children,
   initialUserData,

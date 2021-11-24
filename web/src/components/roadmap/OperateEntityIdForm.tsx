@@ -11,8 +11,8 @@ import {
 } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { Alert } from "@/components/njwds/Alert";
-import { Content } from "../Content";
-import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
+import { Content } from "@/components/Content";
+import { Button } from "@/components/njwds-extended/Button";
 
 interface Props {
   displayContent: OperateDisplayContent;
@@ -100,14 +100,11 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
             fieldName="entityId"
             length={10}
           />
-          <LoadingButton
-            type="submit"
-            onClick={() => {}}
-            loading={isLoading}
-            className="usa-button mla height-5 margin-top-2 mobile-lg:margin-top-0"
-          >
-            {RoadmapDefaults.operateFormSubmitButtonText}
-          </LoadingButton>
+          <div className="mla height-5 margin-top-2 mobile-lg:margin-top-0">
+            <Button style="primary" typeSubmit loading={isLoading}>
+              {RoadmapDefaults.operateFormSubmitButtonText}
+            </Button>
+          </div>
         </form>
         {errorMd && (
           <Alert
