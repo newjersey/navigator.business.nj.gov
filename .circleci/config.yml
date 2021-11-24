@@ -132,6 +132,8 @@ commands:
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_DEV' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_DEV' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_DEV' >> $BASH_ENV
+            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -155,6 +157,8 @@ commands:
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_STAGING' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_STAGING' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_STAGING' >> $BASH_ENV
+            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_STAGING' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_STAGING' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -172,6 +176,8 @@ commands:
             echo 'export REDIRECT_URL=$REDIRECT_URL_PROD' >> $BASH_ENV
             echo 'export FEATURE_DISABLE_OPERATE=$FEATURE_DISABLE_OPERATE_PROD' >> $BASH_ENV
             echo 'export FEATURE_DISABLE_OSCAR_ONBOARDING=$FEATURE_DISABLE_OSCAR_ONBOARDING_PROD' >> $BASH_ENV
+            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PROD' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PROD' >> $BASH_ENV
 
   deploy:
     steps:
