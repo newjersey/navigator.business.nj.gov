@@ -14,6 +14,8 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
   const sm = props.small ? "-sm" : "";
   const isOpen = props.isOpen || false;
 
+  const verticalHeight = document.getElementById(`vertical-content-${props.stepNumber}`)?.offsetHeight;
+
   const resizeVerticalBarToContent = () => {
     const content = document.getElementById(`vertical-content-${props.stepNumber}`);
     if (!content) return;
@@ -31,7 +33,7 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
     }
   };
 
-  useEffect(resizeVerticalBarToContent, [props.isOpen, props.last, props.stepNumber]);
+  useEffect(resizeVerticalBarToContent, [props.isOpen, props.last, props.stepNumber, verticalHeight]);
   useOnWindowResize(resizeVerticalBarToContent);
 
   const getTrailingBar = () => {
