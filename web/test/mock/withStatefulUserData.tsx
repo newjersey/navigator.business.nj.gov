@@ -52,6 +52,7 @@ export const setupStatefulUserDataContext = (): void => {
       isLoading: false,
       error: undefined,
       update: update,
+      refresh: jest.fn(),
     };
   });
 };

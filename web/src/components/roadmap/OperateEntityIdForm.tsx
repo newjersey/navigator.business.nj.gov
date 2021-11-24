@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const OperateEntityIdForm = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
+  const { userData, update, refresh } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMd, setErrorMd] = React.useState<string>("");
@@ -45,15 +45,13 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    if (!userData || !isValid) {
+
+    if (!userData || !isValid || !profileData.entityId) {
+      setIsValid(false);
       return;
     }
 
-    if (!userData.profileData.entityId) {
-      setIsValid(false);
-    }
-
-    update({
+    await update({
       ...userData,
       profileData,
       taxFilingData: {
@@ -62,6 +60,8 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
         filings: [],
       },
     });
+
+    await refresh();
   };
 
   return (

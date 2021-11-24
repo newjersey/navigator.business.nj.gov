@@ -80,6 +80,7 @@ export const generateUseUserDataResponse = (
   update: jest.fn().mockResolvedValue({}),
   error: undefined,
   isLoading: false,
+  refresh: jest.fn().mockResolvedValue({}),
   ...overrides,
 });
 
