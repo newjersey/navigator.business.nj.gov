@@ -61,18 +61,6 @@ const serverlessConfiguration: AWS = {
       httpPort: offlinePort,
       lambdaPort: offlineLambdaPort,
     },
-    config: {
-      application: {
-        dev: "${ssm:/config/dev/application}",
-        staging: "${ssm:/config/staging/application}",
-        prod: "${ssm:/config/prod/application}",
-      },
-      infrastructure: {
-        dev: "${ssm:/config/dev}",
-        staging: "${ssm:/config/staging}",
-        prod: "${ssm:/config/prod}",
-      },
-    },
     ssmLocation: ssmLocation,
   },
   plugins: [
@@ -151,7 +139,65 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: "20201221",
     logRetentionInDays: 180,
   },
-  functions: {
+  functions: {},
+};
+
+if (stage === "dev" || stage === "local") {
+  serverlessConfiguration.custom = {
+    ...serverlessConfiguration.custom,
+    config: {
+      application: "${ssm:/config/application}",
+      infrastructure: "${ssm:/config/infrastructure}",
+    },
+  };
+
+  serverlessConfiguration.functions = {
+    ...serverlessConfiguration.functions,
+    express: express(
+      "${self:custom.config.application.COGNITO_ARN}",
+      env.CI
+        ? {
+            securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+            subnetIds: [
+              "${self:custom.config.infrastructure.SUBNET_01}",
+              "${self:custom.config.infrastructure.SUBNET_02}",
+            ],
+          }
+        : undefined
+    ),
+    govDelivery: updateExternalStatus(
+      env.CI
+        ? {
+            securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+            subnetIds: [
+              "${self:custom.config.infrastructure.SUBNET_01}",
+              "${self:custom.config.infrastructure.SUBNET_02}",
+            ],
+          }
+        : undefined
+    ),
+  };
+}
+
+if (stage !== "dev" && stage !== "local") {
+  serverlessConfiguration.custom = {
+    ...serverlessConfiguration.custom,
+    config: {
+      application: {
+        dev: "${ssm:/config/dev/application}",
+        staging: "${ssm:/config/staging/application}",
+        prod: "${ssm:/config/prod/application}",
+      },
+      infrastructure: {
+        dev: "${ssm:/config/dev}",
+        staging: "${ssm:/config/staging}",
+        prod: "${ssm:/config/prod}",
+      },
+    },
+  };
+
+  serverlessConfiguration.functions = {
+    ...serverlessConfiguration.functions,
     express: express(
       "${self:custom.config.application.${self:custom.ssmLocation}.COGNITO_ARN}",
       env.CI
@@ -179,8 +225,8 @@ const serverlessConfiguration: AWS = {
           }
         : undefined
     ),
-  },
-};
+  };
+}
 
 if (stage === "dev") {
   serverlessConfiguration.functions = {
@@ -188,12 +234,10 @@ if (stage === "dev") {
     githubOauth2: githubOauth2(
       env.CI
         ? {
-            securityGroupIds: [
-              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SECURITY_GROUP}",
-            ],
+            securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
             subnetIds: [
-              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_01}",
-              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_02}",
+              "${self:custom.config.infrastructure.SUBNET_01}",
+              "${self:custom.config.infrastructure.SUBNET_02}",
             ],
           }
         : undefined

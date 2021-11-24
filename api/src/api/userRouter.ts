@@ -68,7 +68,7 @@ export const userRouterFactory = (
       })
       .catch((error) => {
         if (error === "Not found") {
-          if (process.env.IS_OFFLINE) {
+          if (process.env.IS_OFFLINE || process.env.STAGE === "dev") {
             saveEmptyUserData(req, res, signedInUserId);
           } else {
             res.status(404).json({ error });

@@ -24,19 +24,18 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import "cypress-wait-until";
-
 import { Auth } from "@aws-amplify/auth";
-import { testUserEmail, testUserPassword } from "./index";
-import { createEmptyUserData } from "../../../shared/src/userData";
 import "cypress-audit/commands";
+import "cypress-wait-until";
+import { createEmptyUserData } from "../../../shared/src/userData";
+import { testUserEmail, testUserPassword } from "./index";
 
 Auth.configure({
-  aws_project_region: "us-east-1",
-  aws_cognito_identity_pool_id: Cypress.env("AWS_COGNITO_IDENTITY_POOL_ID"),
-  aws_cognito_region: "us-east-1",
-  aws_user_pools_id: Cypress.env("AWS_USER_POOLS_ID"),
-  aws_user_pools_web_client_id: Cypress.env("AWS_USER_POOLS_WEB_CLIENT_ID"),
+  identityPoolRegion: "us-east-1",
+  identityPoolId: Cypress.env("AWS_COGNITO_IDENTITY_POOL_ID_NEW"),
+  region: "us-east-1",
+  userPoolId: Cypress.env("AWS_USER_POOLS_ID_NEW"),
+  userPoolWebClientId: Cypress.env("AWS_USER_POOLS_WEB_CLIENT_ID_NEW"),
   oauth: {},
 });
 

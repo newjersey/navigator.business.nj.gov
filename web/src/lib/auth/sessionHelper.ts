@@ -1,7 +1,6 @@
 import { Auth } from "@aws-amplify/auth";
 import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosResponse } from "axios";
-import awsExports from "../../../aws-exports";
 
 type CognitoIdPayload = {
   aud: string;
@@ -45,7 +44,11 @@ type CognitoRefreshAuth = {
 
 export const configureAmplify = (): void => {
   Auth.configure({
-    ...awsExports,
+    identityPoolRegion: process.env.AWS_REGION,
+    identityPoolId: process.env.COGNITO_IDENTITY_POOL_ID,
+    region: process.env.AWS_REGION,
+    userPoolId: process.env.COGNITO_USER_POOL_ID,
+    userPoolWebClientId: process.env.COGNITO_WEB_CLIENT_ID,
     ssr: true,
     oauth: {
       domain: process.env.AUTH_DOMAIN,
