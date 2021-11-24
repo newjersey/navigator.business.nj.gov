@@ -54,6 +54,17 @@ describe("useUserData", () => {
       expect(mockApi.postUserData).toHaveBeenCalledWith(newUserData);
     });
 
+    it("updates data from api when calling refresh", async () => {
+      const currentUser = generateUser({});
+
+      const { refresh } = setupHook(currentUser);
+      const newUserData = generateUserData({});
+      mockApi.getUserData.mockResolvedValue(newUserData);
+      await act(() => refresh());
+
+      expect(mockApi.getUserData).toHaveBeenCalled();
+    });
+
     it("sets error to NO_DATA when api call fails with no cache", async () => {
       const currentUser = generateUser({});
       const rejectedPromise = Promise.reject(500);

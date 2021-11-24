@@ -21,6 +21,8 @@ import { useMockDate } from "@/test/mock/useMockDate";
 import { createTheme, ThemeProvider } from "@mui/material";
 import React, { ReactNode } from "react";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { templateEval } from "@/lib/utils/helpers";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
@@ -147,12 +149,21 @@ describe("<OperateSection />", () => {
 
     it("displays error if field is empty when submitted", () => {
       const subject = statefulRender(emptyEntityIdData);
+      expect(
+        subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "10" }))
+      ).not.toBeInTheDocument();
 
       fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
-      expect(subject.container.querySelector("#entityId-helper-text") as HTMLElement).toBeInTheDocument();
+      expect(
+        subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "10" }))
+      ).toBeInTheDocument();
 
       fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "1234567890" } });
       fireEvent.submit(subject.getByText(RoadmapDefaults.operateFormSubmitButtonText));
+
+      expect(
+        subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "10" }))
+      ).not.toBeInTheDocument();
       expect(currentUserData().profileData.entityId).toEqual("1234567890");
     });
 

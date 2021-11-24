@@ -50,11 +50,16 @@ export const useUserData = (): UseUserDataResponse => {
     }
   };
 
+  const refresh = async (): Promise<void> => {
+    await mutate();
+  };
+
   return {
     userData: data as UserData,
     isLoading: !error && !data,
     error: userDataError,
     update: update,
+    refresh: refresh,
   };
 };
 
@@ -63,4 +68,5 @@ export type UseUserDataResponse = {
   isLoading: boolean;
   error: UserDataError | undefined;
   update: (newUserData: UserData | undefined) => Promise<void>;
+  refresh: () => Promise<void>;
 };
