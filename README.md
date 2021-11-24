@@ -36,14 +36,8 @@ and backend. It will also set up serverless's local DynamoDB.
 yarn
 ```
 
-In order for the web frontend tests to pass and for it to be able to run locally, it **needs to have Amplify locally configured** such that the `web/aws-exports.js` file exists. This can be done by running and using the project's Amplify AWS credentials when prompted. These commands should be run from the root of the project.
-
 ```shell
 aws configure
-```
-
-```shell
-amplify init
 ```
 
 Additionally, serverless needs to be configured with our AWS account. Run this with our AWS access credentials:
@@ -97,9 +91,7 @@ The frontend code lives in `./web`.
 
 When running locally, the `./scripts/start-web.sh` will execute `npm run dev` for local hot-refreshing of nextjs.
 In production, we run `npm run build` which will execute `next build` and `next export`. This allows nextjs to build
-all our pages and pre-render what it can. The export puts the final files in `./web/out` directory, which is served by Amplify.
-
-This deployment process for Amplify is configured in `amplify/.config/project-config.json`.
+all our pages and pre-render what it can. The export puts the final files in `./web/out` directory, which is served via a Docker Container.
 
 ### Styles
 

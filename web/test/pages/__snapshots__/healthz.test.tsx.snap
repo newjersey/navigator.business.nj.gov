@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HealthzPage renders correctly 1`] = `
+<body>
+  <div>
+    Application is healthy
+  </div>
+</body>
+`;

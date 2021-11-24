@@ -12,7 +12,7 @@
     "lint": "lerna run --stream lint",
     "lint:fix": "lerna run lint:fix",
     "lint:staged": "lint-staged",
-    "preinstall": "npm install -g @aws-amplify/cli@7.6.7",
+    "prepare": "husky install",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier --check . --ignore-path=./.eslintignore",
     "start:dev": "lerna run  --stream dev",
