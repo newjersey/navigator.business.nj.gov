@@ -12,6 +12,7 @@ import {
 import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { Alert } from "@/components/njwds/Alert";
 import { Content } from "../Content";
+import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 
 interface Props {
   displayContent: OperateDisplayContent;
@@ -21,11 +22,16 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
   const { userData, update, refresh } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [isValid, setIsValid] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMd, setErrorMd] = React.useState<string>("");
 
   useEffect(() => {
     if (userData) {
       setProfileData(userData.profileData);
+    }
+
+    if (userData?.taxFilingData.entityIdStatus !== "UNKNOWN") {
+      setIsLoading(false);
     }
   }, [userData, setProfileData]);
 
@@ -50,6 +56,8 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
       setIsValid(false);
       return;
     }
+
+    setIsLoading(true);
 
     await update({
       ...userData,
@@ -92,9 +100,14 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
             fieldName="entityId"
             length={10}
           />
-          <button className="usa-button mla height-5 margin-top-2 mobile-lg:margin-top-0" type="submit">
+          <LoadingButton
+            type="submit"
+            onClick={() => {}}
+            loading={isLoading}
+            className="usa-button mla height-5 margin-top-2 mobile-lg:margin-top-0"
+          >
             {RoadmapDefaults.operateFormSubmitButtonText}
-          </button>
+          </LoadingButton>
         </form>
         {errorMd && (
           <Alert
