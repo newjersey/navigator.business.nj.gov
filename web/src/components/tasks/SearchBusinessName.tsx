@@ -8,12 +8,12 @@ import { Alert } from "@/components/njwds/Alert";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
 import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 import { TaskHeader } from "@/components/TaskHeader";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 //import { Unlocks } from "@/components/tasks/Unlocks";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
+import { Button } from "../njwds-extended/Button";
 
 interface Props {
   task: Task;
@@ -189,16 +189,15 @@ export const SearchBusinessName = (props: Props): ReactElement => {
           </div>
           <div className="tablet:grid-col-4">
             <FormControl margin="dense" className="">
-              <LoadingButton
+              <Button
+                style="secondary-input-field-height"
                 onClick={() => {}}
                 loading={isLoading}
-                outline={true}
-                className="text-no-wrap padding-y-205"
-                type="submit"
-                data-testid="search-availability"
+                typeSubmit
+                dataTestid="search-availability"
               >
                 {SearchBusinessNamesDefaults.searchButtonText}
-              </LoadingButton>
+              </Button>
             </FormControl>
           </div>
         </div>

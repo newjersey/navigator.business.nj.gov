@@ -34,10 +34,9 @@ PrimaryWithNoMargins.args = {
   noRightMargin: true,
 };
 
-export const PrimaryDisabled = Template.bind({});
+export const PrimaryInputFieldHeight = Template.bind({});
 
-PrimaryDisabled.args = {
-  style: "primary",
+PrimaryInputFieldHeight.args = {
+  style: "primary-input-field-height",
   children: "button",
-  disabled: true,
 };

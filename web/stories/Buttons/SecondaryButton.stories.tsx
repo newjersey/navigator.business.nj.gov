@@ -34,10 +34,9 @@ SecondaryWithNoMargins.args = {
   noRightMargin: true,
 };
 
-export const SecondaryDisabled = Template.bind({});
+export const SecondaryInputFieldHeight = Template.bind({});
 
-SecondaryDisabled.args = {
-  style: "secondary",
+SecondaryInputFieldHeight.args = {
+  style: "secondary-input-field-height",
   children: "button",
-  disabled: true,
 };

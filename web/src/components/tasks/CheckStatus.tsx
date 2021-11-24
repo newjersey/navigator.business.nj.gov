@@ -8,9 +8,9 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createEmptyNameAndAddress, NameAndAddress } from "@/lib/types/types";
 import { Alert } from "@/components/njwds/Alert";
 import { LicenseSearchError } from "@/components/tasks/LicenseTask";
-import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";
 import analytics from "@/lib/utils/analytics";
+import { Button } from "../njwds-extended/Button";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -170,16 +170,18 @@ export const CheckStatus = (props: Props): ReactElement => {
           </div>
         </div>
         <div className="flex flex-row">
-          <LoadingButton
-            type="submit"
-            onClick={() => {}}
-            loading={props.isLoading}
-            className="usa-button mla margin-top-4 margin-bottom-1 margin-right-0"
-            outline={true}
-            data-testid="check-status-submit"
-          >
-            {LicenseScreenDefaults.submitText}
-          </LoadingButton>
+          <div className="mla margin-top-4">
+            <Button
+              style="secondary"
+              typeSubmit
+              noRightMargin
+              onClick={() => {}}
+              loading={props.isLoading}
+              dataTestid="check-status-submit"
+            >
+              {LicenseScreenDefaults.submitText}
+            </Button>
+          </div>
         </div>
       </form>
     </>

@@ -13,7 +13,6 @@ import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useRouter } from "next/router";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { Alert } from "@/components/njwds/Alert";
-import { LoadingButton } from "@/components/njwds-extended/LoadingButton";
 import { Button } from "./njwds-extended/Button";
 
 type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "DUPLICATE_SIGNUP" | "GENERIC";
@@ -196,14 +195,15 @@ export const Signup = (props: Props): ReactElement => {
           <Button style="secondary" onClick={onClose}>
             {SelfRegDefaults.closeButtonText}
           </Button>
-          <LoadingButton
-            type="submit"
-            onClick={submitSelfReg}
+          <Button
+            typeSubmit
+            style="primary"
             loading={isLoading}
-            data-testid="submit-selfreg"
+            onClick={submitSelfReg}
+            dataTestid="submit-selfreg"
           >
             {SelfRegDefaults.submitButtonText}
-          </LoadingButton>
+          </Button>
         </div>
       </DialogActions>
     </Dialog>
