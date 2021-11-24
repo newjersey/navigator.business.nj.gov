@@ -13,14 +13,14 @@ interface Props {
 
 export const Task = (props: Props): ReactElement => {
   const { userData } = useUserData();
-  const isTabletScreen = useMediaQuery(MediaQueries.tabletAndUp);
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const taskProgress = (userData?.taskProgress && userData.taskProgress[props.task.id]) || "NOT_STARTED";
 
   return (
     <li className="margin-0">
-      <div className={`line-height-sans-2 flex ${isTabletScreen ? "margin-bottom-2" : "margin-bottom-1"}`}>
-        {isTabletScreen && <span className="margin-right-205">{TaskProgressTagLookup[taskProgress]}</span>}
+      <div className={`line-height-sans-2 flex ${isTabletAndUp ? "margin-bottom-2" : "margin-bottom-1"}`}>
+        {isTabletAndUp && <span className="margin-right-205">{TaskProgressTagLookup[taskProgress]}</span>}
         <Link href={`/tasks/${props.task.urlSlug}`} passHref>
           <a
             onClick={() => analytics.event.roadmap_task_title.click.go_to_task()}
@@ -32,7 +32,7 @@ export const Task = (props: Props): ReactElement => {
           </a>
         </Link>
       </div>
-      {!isTabletScreen && <div className="margin-bottom-2">{TaskProgressTagLookup[taskProgress]}</div>}
+      {!isTabletAndUp && <div className="margin-bottom-2">{TaskProgressTagLookup[taskProgress]}</div>}
     </li>
   );
 };
