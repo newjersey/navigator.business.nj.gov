@@ -134,7 +134,8 @@ export const MiniProfile = (props: Props): ReactElement => {
               <div data-testid="mini-profile-employerId">
                 <strong>{RoadmapDefaults.greyBoxEINText}:</strong> {getEin()}
               </div>
-              {isEntityIdApplicable(props.profileData.legalStructureId) && (
+              {(isEntityIdApplicable(props.profileData.legalStructureId) ||
+                props.profileData.hasExistingBusiness) && (
                 <div data-testid="mini-profile-entityId">
                   <strong>{RoadmapDefaults.greyBoxEntityIdText}:</strong> {getEntityId()}
                 </div>
