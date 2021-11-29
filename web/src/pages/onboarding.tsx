@@ -153,16 +153,20 @@ const OnboardingPage = (props: Props): ReactElement => {
     if (!userData) return;
 
     const currentPageFlow = onboardingFlows[currentFlow].pages[page.current - 1];
-    if (!currentPageFlow.testIsValid()) {
-      if (currentPageFlow.bannerErrorToSet) {
-        setError(currentPageFlow.bannerErrorToSet);
-      } else if (currentPageFlow.inlineErrorField) {
+    const errorMap = currentPageFlow.getErrorMap();
+    if (errorMap) {
+      if (errorMap.banner && errorMap.banner.some((error) => !error.valid)) {
+        setError(errorMap.banner.find((error) => !error.valid)?.name);
+        scrollToTop();
+        headerRef.current?.focus();
+        return;
+      } else if (errorMap.inline && errorMap.inline.some((error) => !error.valid)) {
         setAlert("ERROR");
-        onValidation(currentPageFlow.inlineErrorField, true);
+        onValidation(errorMap.inline.find((error) => !error.valid)?.name as ProfileFields, true);
+        scrollToTop();
+        headerRef.current?.focus();
+        return;
       }
-      scrollToTop();
-      headerRef.current?.focus();
-      return;
     }
 
     let newProfileData = profileData;

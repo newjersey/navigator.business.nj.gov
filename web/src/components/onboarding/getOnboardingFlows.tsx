@@ -11,12 +11,14 @@ import { ProfileData } from "@businessnjgovnavigator/shared";
 export type OnboardingFlow = {
   pages: {
     component: ReactNode;
-    testIsValid: () => boolean;
-    bannerErrorToSet: ProfileError | undefined;
-    inlineErrorField: ProfileFields | undefined;
+    getErrorMap: () => ErrorFieldMap | undefined;
   }[];
 };
 
+export type ErrorFieldMap = {
+  inline?: [{ name: ProfileFields; valid: boolean }];
+  banner?: [{ name: ProfileError; valid: boolean }];
+};
 export type FlowType = "OWNING" | "STARTING";
 
 export const getOnboardingFlows = (
@@ -28,15 +30,15 @@ export const getOnboardingFlows = (
     pages: [
       {
         component: <OnboardingHasExistingBusiness />,
-        testIsValid: () => profileData.hasExistingBusiness !== undefined,
-        bannerErrorToSet: "REQUIRED_EXISTING_BUSINESS",
-        inlineErrorField: undefined,
+        getErrorMap: () => ({
+          banner: [
+            { name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.hasExistingBusiness !== undefined },
+          ],
+        }),
       },
       {
         component: <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} />,
-        testIsValid: () => !fieldStates.entityId.invalid,
-        bannerErrorToSet: undefined,
-        inlineErrorField: "entityId",
+        getErrorMap: () => ({ inline: [{ name: "entityId", valid: !fieldStates.entityId.invalid }] }),
       },
       {
         component: (
@@ -46,15 +48,11 @@ export const getOnboardingFlows = (
             <OnboardingIndustry />
           </>
         ),
-        testIsValid: () => !!profileData.businessName,
-        bannerErrorToSet: undefined,
-        inlineErrorField: "businessName",
+        getErrorMap: () => ({ inline: [{ name: "businessName", valid: !!profileData.businessName }] }),
       },
       {
         component: <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />,
-        testIsValid: () => !!profileData.municipality,
-        bannerErrorToSet: undefined,
-        inlineErrorField: "municipality",
+        getErrorMap: () => ({ inline: [{ name: "municipality", valid: !!profileData.municipality }] }),
       },
     ],
   },
@@ -62,33 +60,31 @@ export const getOnboardingFlows = (
     pages: [
       {
         component: <OnboardingHasExistingBusiness />,
-        testIsValid: () => profileData.hasExistingBusiness !== undefined,
-        bannerErrorToSet: "REQUIRED_EXISTING_BUSINESS",
-        inlineErrorField: undefined,
+        getErrorMap: () => ({
+          banner: [
+            { name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.hasExistingBusiness !== undefined },
+          ],
+        }),
       },
       {
         component: <OnboardingBusinessName />,
-        testIsValid: () => true,
-        bannerErrorToSet: undefined,
-        inlineErrorField: undefined,
+        getErrorMap: () => undefined,
       },
       {
         component: <OnboardingIndustry />,
-        testIsValid: () => true,
-        bannerErrorToSet: undefined,
-        inlineErrorField: undefined,
+        getErrorMap: () => undefined,
       },
       {
         component: <OnboardingLegalStructure />,
-        testIsValid: () => profileData.legalStructureId !== undefined,
-        bannerErrorToSet: "REQUIRED_LEGAL",
-        inlineErrorField: undefined,
+        getErrorMap: () => ({
+          banner: [{ name: "REQUIRED_LEGAL", valid: profileData.legalStructureId !== undefined }],
+        }),
       },
       {
         component: <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />,
-        testIsValid: () => profileData.municipality !== undefined,
-        bannerErrorToSet: undefined,
-        inlineErrorField: "municipality",
+        getErrorMap: () => ({
+          inline: [{ name: "municipality", valid: profileData.municipality !== undefined }],
+        }),
       },
     ],
   },
