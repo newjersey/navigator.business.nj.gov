@@ -76,11 +76,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-react@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@aws-amplify/ui-react@npm:2.0.0"
+"@aws-amplify/ui-react@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@aws-amplify/ui-react@npm:2.1.1"
   dependencies:
-    "@aws-amplify/ui": 3.0.0
+    "@aws-amplify/ui": 3.0.2
     "@aws-amplify/ui-react-v1": "npm:@aws-amplify/ui-react@1.2.9"
     "@radix-ui/react-accordion": ^0.1.1
     "@radix-ui/react-dropdown-menu": ^0.1.1
@@ -99,20 +99,20 @@ __metadata:
     aws-amplify: 3.x.x || 4.x.x
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: e66efcdbc31b2304662f21caa46cccadd49cb9e533da867d72c83a3a7958bbfc03d4f79e236e75ab362e4c27e4e121eef0b1770b4819c571c2901ca289d2b22d
+  checksum: b3fbb9dfc9b99a77b07d88a1b4e2f681a7b61fc07da7998962c7b827053f61f4298ab1cef2d89359e1c025596af628dc80bbaa27a8da8ce737cee27e39dabbca
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui@npm:3.0.0":
-  version: 3.0.0
-  resolution: "@aws-amplify/ui@npm:3.0.0"
+"@aws-amplify/ui@npm:3.0.2":
+  version: 3.0.2
+  resolution: "@aws-amplify/ui@npm:3.0.2"
   dependencies:
     lodash: ^4.17.21
     style-dictionary: ^3.0.1
     xstate: ^4.20.1
   peerDependencies:
     aws-amplify: 3.x.x || 4.x.x
-  checksum: 65b7fc9d05944b4aabea421cfd7cdbfd22418d33ea8b29ad9fa3effdbba17c57f376b3ba82d5dc39bad1bdd74bd69ef2e817c5a9003504cf874d2dc912b6f228
+  checksum: b91ff17f5be7171e31124ce62ccb8f444ceac13cf7cc660ec94edb4ee2774e3b5aff37e39d720e8ec784e3d6df5f871fce36f6b70f9501bdf2d44610a32eef8f
   languageName: node
   linkType: hard
 
@@ -2452,7 +2452,7 @@ __metadata:
   dependencies:
     "@aws-amplify/auth": 4.3.16
     "@aws-amplify/core": 4.3.8
-    "@aws-amplify/ui-react": 2.0.0
+    "@aws-amplify/ui-react": 2.1.1
     "@babel/core": 7.16.0
     "@babel/runtime": 7.16.3
     "@businessnjgovnavigator/shared": "*"
@@ -2632,7 +2632,7 @@ __metadata:
   dependencies:
     "@aws-amplify/auth": 4.3.16
     "@aws-amplify/core": 4.3.8
-    "@aws-amplify/ui-react": 2.0.0
+    "@aws-amplify/ui-react": 2.1.1
     "@babel/core": 7.16.0
     "@businessnjgovnavigator/shared": "*"
     "@emotion/react": 11.7.0
