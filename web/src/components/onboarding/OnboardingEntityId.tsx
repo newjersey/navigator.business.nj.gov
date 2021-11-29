@@ -8,13 +8,12 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   children?: ReactNode;
   fieldStates: ProfileFieldErrorMap;
-  existingBusiness?: boolean;
 }
 export const OnboardingEntityId = (props: Props): ReactElement => {
   const { state } = useContext(OnboardingContext);
   const fieldName = "entityId";
 
-  if (!isEntityIdApplicable(state.profileData.legalStructureId) && !props.existingBusiness) {
+  if (!isEntityIdApplicable(state.profileData.legalStructureId) && !state.profileData.hasExistingBusiness) {
     return <></>;
   }
 

@@ -33,9 +33,7 @@ export const getOnboardingFlows = (
         inlineErrorField: undefined,
       },
       {
-        component: (
-          <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} existingBusiness />
-        ),
+        component: <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} />,
         testIsValid: () => !fieldStates.entityId.invalid,
         bannerErrorToSet: undefined,
         inlineErrorField: "entityId",
