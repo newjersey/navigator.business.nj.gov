@@ -141,5 +141,6 @@ export const createEmptyProfileData = (): ProfileData => {
     employerId: undefined,
     taxId: undefined,
     notes: "",
+    certificationIds: [],
   };
 };
