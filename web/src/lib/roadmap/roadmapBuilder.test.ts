@@ -5,7 +5,7 @@ import { EOL } from "os";
 describe("roadmapBuilder", () => {
   it("builds a generic roadmap with generic tasks only, and removes empty step 5", async () => {
     const roadmap = await buildRoadmap({
-      industryId: "empty",
+      industryId: "standard",
       addOns: [],
       modifications: [],
     });
@@ -55,7 +55,7 @@ describe("roadmapBuilder", () => {
 
   it("orders tasks in a step by weight", async () => {
     const roadmap = await buildRoadmap({
-      industryId: "empty",
+      industryId: "standard",
       addOns: ["weighted"],
       modifications: [],
     });
@@ -69,7 +69,7 @@ describe("roadmapBuilder", () => {
 
   it("includes step 5 if it has tasks", async () => {
     const roadmap = await buildRoadmap({
-      industryId: "empty",
+      industryId: "standard",
       addOns: ["mocha"],
       modifications: [],
     });
@@ -79,7 +79,7 @@ describe("roadmapBuilder", () => {
 
   it("adds unlockedBy and unlocking to tasks from dependencies file without duplicate url-slugs", async () => {
     const roadmap = await buildRoadmap({
-      industryId: "empty",
+      industryId: "standard",
       addOns: ["blocking"],
       modifications: [],
     });

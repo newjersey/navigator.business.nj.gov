@@ -34,8 +34,8 @@ const generateIndustryRoadmap = async (
 ): Promise<RoadmapBuilder> => {
   const industryRoadmap: IndustryRoadmap = await importRoadmap(industryId);
 
-  addTasksFromAddOn(builder, industryRoadmap.addOns);
-  await applyAddOns(builder, ["generic-tasks", ...addOns]);
+  addTasksFromAddOn(builder, industryRoadmap.roadmapSteps);
+  await applyAddOns(builder, [...addOns]);
   await applyModifications(builder, modifications);
   modifyTasks(builder, industryRoadmap.modifications);
 
@@ -215,6 +215,6 @@ export interface TaskModification {
 }
 
 export interface IndustryRoadmap {
-  addOns: AddOn[];
+  roadmapSteps: AddOn[];
   modifications: TaskModification[];
 }

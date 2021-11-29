@@ -102,7 +102,7 @@ const isReferencedInARoadmap = async (filename: string, contents: FileContents):
   const filenameWithoutMd = filename.split(".md")[0];
 
   for (const industry of contents.industries) {
-    if (industry.addOns.some((it) => it.task === filenameWithoutMd)) {
+    if (industry.roadmapSteps.some((it) => it.task === filenameWithoutMd)) {
       containedInAnAddOn = true;
       break;
     }

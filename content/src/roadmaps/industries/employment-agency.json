@@ -1,20 +1,35 @@
 {
-  "addOns": [
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
     {
       "step": 2,
       "weight": 10,
       "task": "understand-license-requirements-employment-agency"
     },
     {
+      "step": 3,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "get-insurance"
+    },
+    {
       "step": 5,
       "weight": 10,
-      "task": "search-licenses"
+      "task": "search-licenses-employment-agency"
     }
   ],
-  "modifications": [
-    {
-      "taskToReplaceFilename": "search-licenses",
-      "replaceWithFilename": "search-licenses-employment-agency"
-    }
-  ]
+  "modifications": []
 }

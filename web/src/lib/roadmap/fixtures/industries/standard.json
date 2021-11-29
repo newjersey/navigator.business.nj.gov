@@ -1,0 +1,25 @@
+{
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "generic-task-1"
+    },
+    {
+      "step": 2,
+      "weight": 1,
+      "task": "generic-task-2"
+    },
+    {
+      "step": 3,
+      "weight": 1,
+      "task": "generic-task-3"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "generic-task-4"
+    }
+  ],
+  "modifications": []
+}
