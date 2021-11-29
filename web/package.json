@@ -121,7 +121,7 @@
     "jest-junit": "13.0.0",
     "jest-raw-loader": "1.0.1",
     "napa": "3.0.0",
-    "prettier": "2.4.1",
+    "prettier": "2.5.0",
     "prop-types": "15.7.2",
     "raw-loader": "4.0.2",
     "rimraf": "3.0.2",

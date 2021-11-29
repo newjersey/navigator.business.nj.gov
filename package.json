@@ -153,7 +153,7 @@
     "lint-staged": "12.1.2",
     "napa": "3.0.0",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
-    "prettier": "2.4.1",
+    "prettier": "2.5.0",
     "prop-types": "15.7.2",
     "raw-loader": "4.0.2",
     "rimraf": "3.0.2",
