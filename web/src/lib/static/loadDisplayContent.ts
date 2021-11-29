@@ -23,6 +23,7 @@ export const loadProfileDisplayContent = (): ProfileDisplayContent => {
   const entityId = getMarkdown(loadFile("entity-id.md"));
   const notes = getMarkdown(loadFile("notes.md"));
   const taxId = getMarkdown(loadFile("tax-id.md"));
+  const certifications = getMarkdown(loadFile("certifications.md"));
 
   const legalStructureOptionContent: Record<string, string> = {};
   LegalStructures.forEach((legalStructure) => {
@@ -80,6 +81,10 @@ export const loadProfileDisplayContent = (): ProfileDisplayContent => {
     taxId: {
       contentMd: taxId.content,
       ...(taxId.grayMatter as FieldGrayMatter),
+    },
+    certifications: {
+      contentMd: certifications.content,
+      ...(certifications.grayMatter as FieldGrayMatter),
     },
   };
 };

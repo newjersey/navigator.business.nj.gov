@@ -85,6 +85,8 @@ describe("onboarding - owning a business", () => {
     expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
 
     page.selectByText("Location", "Newark");
+    page.selectByValue("Certifications", "veteran-owned");
+    page.selectByValue("Certifications", "small-business-enterprise");
     page.clickNext();
     await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
     expect(currentUserData()).toEqual({
@@ -99,6 +101,7 @@ describe("onboarding - owning a business", () => {
         legalStructureId: undefined,
         municipality: newark,
         entityId: "1234567890",
+        certificationIds: ["veteran-owned", "small-business-enterprise"],
       },
     });
   });

@@ -7,6 +7,7 @@ import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLega
 import React, { ReactNode } from "react";
 import { ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared";
+import { OnboardingCertifications } from "@/components/onboarding/OnboardingCertifications";
 
 export type OnboardingFlow = {
   pages: {
@@ -51,7 +52,13 @@ export const getOnboardingFlows = (
         getErrorMap: () => ({ inline: [{ name: "businessName", valid: !!profileData.businessName }] }),
       },
       {
-        component: <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />,
+        component: (
+          <>
+            <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+            <div className="margin-top-4" />
+            <OnboardingCertifications />
+          </>
+        ),
         getErrorMap: () => ({ inline: [{ name: "municipality", valid: !!profileData.municipality }] }),
       },
     ],

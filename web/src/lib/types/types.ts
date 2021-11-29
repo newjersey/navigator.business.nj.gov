@@ -51,6 +51,7 @@ const emptyProfileData: ProfileData = {
   employerId: undefined,
   taxId: undefined,
   notes: "",
+  certificationIds: [],
 };
 
 export const createEmptyProfileData = (): ProfileData => {
@@ -116,9 +117,13 @@ export type ProfileDisplayContent = {
   entityId: {
     contentMd: string;
   };
+  certifications: {
+    contentMd: string;
+    placeholder: string;
+  };
 };
 
-const emptyProfileDisplayContent = {
+const emptyProfileDisplayContent: ProfileDisplayContent = {
   hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
   businessName: {
     contentMd: "",
@@ -167,7 +172,11 @@ const emptyProfileDisplayContent = {
   entityId: {
     contentMd: "",
   },
-} as ProfileDisplayContent;
+  certifications: {
+    contentMd: "",
+    placeholder: "",
+  },
+};
 
 export const createEmptyProfileDisplayContent = (): ProfileDisplayContent => {
   return emptyProfileDisplayContent;
@@ -181,7 +190,7 @@ const profileDisplayContentFields = Object.keys(
 
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 
-export const profileFields = [
+export const profileFields: ProfileFields[] = [
   ...new Set([...profileDisplayContentFields, ...onboardingDataFields]),
 ] as ProfileFields[];
 

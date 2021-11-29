@@ -142,6 +142,7 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
+      certificationIds: [],
     });
   });
 
@@ -158,6 +159,7 @@ describe("onboarding - shared", () => {
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep4();
     page.selectByText("Location", "Newark");
+    page.selectByValue("Certifications", "veteran-owned");
 
     page.clickBack();
     page.clickBack();
@@ -178,6 +180,7 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
+      certificationIds: [],
     });
   });
 
@@ -194,6 +197,7 @@ describe("onboarding - shared", () => {
     page.selectByValue("Industry", "restaurant");
     await page.visitStep4();
     page.selectByText("Location", "Newark");
+    page.selectByValue("Certifications", "veteran-owned");
 
     page.clickBack();
     page.clickBack();
@@ -212,6 +216,7 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
+      certificationIds: ["veteran-owned"],
     });
   });
 
