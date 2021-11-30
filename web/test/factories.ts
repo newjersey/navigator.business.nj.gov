@@ -177,7 +177,6 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     contentMd: `some-content-md-${randomInt()}`,
     postOnboardingQuestion: `some-post-onboarding-${randomInt()}`,
     unlockedBy: [generateTaskLink({})],
-    unlocks: [generateTaskLink({})],
     ...overrides,
   };
 };

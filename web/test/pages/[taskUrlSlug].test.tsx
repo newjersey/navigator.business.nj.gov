@@ -12,7 +12,7 @@ import {
   generateTaskLink,
   generateUserData,
 } from "@/test/factories";
-import { setMockRoadmapResponse, useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -350,7 +350,7 @@ describe("task page", () => {
       });
     };
 
-    it("does not show an alert when this task has nothing that unlocks it", () => {
+    it("does not show an alert when this task has nothing that it is unlocked by", () => {
       const task = generateTask({ unlockedBy: [] });
       useMockRoadmapWithTask(task);
       subject = renderPage(task);
@@ -422,89 +422,6 @@ describe("task page", () => {
       expect(subject.queryByText(TaskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
       expect(subject.queryByText("Do this first", { exact: false })).not.toBeInTheDocument();
       expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();
-    });
-  });
-
-  describe("unlocking tasks", () => {
-    /*const doThisNextTask = generateTask({ urlSlug: "do-this-next" });
-    const alsoThisOneTask = generateTask({ urlSlug: "also-this-one" });
-
-    const useMockRoadmapWithTask = (task: Task): void => {
-      useMockRoadmap({
-        steps: [
-          generateStep({
-            tasks: [task, doThisNextTask, alsoThisOneTask],
-          }),
-        ],
-      });
-    };
-
-    it("does not show an alert when this task has nothing that it unlocks", () => {
-      const task = generateTask({ unlocks: [] });
-      useMockRoadmapWithTask(task);
-      subject = renderPage(task);
-      expect(
-        subject.queryByText(TaskDefaults.unlocksAlertSingular, { exact: false })
-      ).not.toBeInTheDocument();
-      expect(subject.queryByText(TaskDefaults.unlocksAlertPlural, { exact: false })).not.toBeInTheDocument();
-    });
-
-    it("shows an alert with link when this task unlocks one other task", () => {
-      const task = generateTask({
-        unlocks: [generateTaskLink({ name: "Do this next", urlSlug: "do-this-next" })],
-      });
-      useMockRoadmapWithTask(task);
-      subject = renderPage(task);
-      expect(subject.queryByText(TaskDefaults.unlocksAlertSingular, { exact: false })).toBeInTheDocument();
-      expect(subject.queryByText("Do this next", { exact: false })).toBeInTheDocument();
-      expect(subject.getByText("Do this next", { exact: false }).getAttribute("href")).toEqual(
-        "do-this-next"
-      );
-    });
-
-    it("shows an alert with links when this task unlocks several other tasks", () => {
-      const task = generateTask({
-        unlocks: [
-          generateTaskLink({ name: "Do this next", urlSlug: "do-this-next" }),
-          generateTaskLink({ name: "Also this one", urlSlug: "also-this-one" }),
-        ],
-      });
-
-      useMockRoadmapWithTask(task);
-      subject = renderPage(task);
-
-      expect(subject.queryByText(TaskDefaults.unlocksAlertPlural, { exact: false })).toBeInTheDocument();
-      expect(subject.queryByText("Do this next", { exact: false })).toBeInTheDocument();
-      expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();
-      expect(subject.getByText("Do this next", { exact: false }).getAttribute("href")).toEqual(
-        "do-this-next"
-      );
-      expect(subject.getByText("Also this one", { exact: false }).getAttribute("href")).toEqual(
-        "also-this-one"
-      );
-    });*/
-
-    it("ignores unlocking tasks on on the page's default task", () => {
-      subject = renderPage(
-        generateTask({
-          id: "this-task",
-          unlocks: [generateTaskLink({ name: "NOT ON ROADMAP TASK" })],
-        })
-      );
-
-      expect(subject.queryByText("NOT ON ROADMAP TASK", { exact: false })).not.toBeInTheDocument();
-    });
-
-    it("shows Loading text when roadmap is undefined", () => {
-      const task = generateTask({
-        unlocks: [generateTaskLink({})],
-        unlockedBy: [generateTaskLink({})],
-      });
-
-      setMockRoadmapResponse(undefined);
-      subject = renderPage(task);
-
-      expect(subject.queryAllByText(TaskDefaults.loadingTaskDependencies)).toHaveLength(1);
     });
   });
 

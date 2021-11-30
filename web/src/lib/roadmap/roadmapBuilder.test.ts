@@ -77,7 +77,7 @@ describe("roadmapBuilder", () => {
     expect(roadmap.steps[4].tasks.map((it) => it.id)).toEqual(["mocha-task-5-id"]);
   });
 
-  it("adds unlockedBy and unlocking to tasks from dependencies file without duplicate url-slugs", async () => {
+  it("adds unlockedBy to tasks from dependencies file without duplicate url-slugs", async () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
       addOns: ["blocking"],
@@ -98,16 +98,6 @@ describe("roadmapBuilder", () => {
         filename: "blocking-task-1-duplicate",
         id: "blocking-task-1-id",
       },
-    ]);
-
-    const blockingTask1 = roadmap.steps[0].tasks.find((it) => it.id === "blocking-task-1-id");
-    expect(blockingTask1?.unlocks).toEqual([
-      { name: "Blocked Task", urlSlug: "blocked-url-slug", filename: "blocked-task", id: "blocked-id" },
-    ]);
-
-    const blockingTask2 = roadmap.steps[0].tasks.find((it) => it.id === "blocking-task-2-id");
-    expect(blockingTask2?.unlocks).toEqual([
-      { name: "Blocked Task", urlSlug: "blocked-url-slug", filename: "blocked-task", id: "blocked-id" },
     ]);
   });
 });
@@ -130,7 +120,6 @@ const expectedGenericRoadmap: Roadmap = {
           callToActionText: "Generic Task 1 CTA",
           contentMd: `${EOL}Generic Task 1 Contents${EOL}`,
           unlockedBy: [],
-          unlocks: [],
         },
       ],
     },
@@ -150,7 +139,6 @@ const expectedGenericRoadmap: Roadmap = {
           callToActionText: "Generic Task 2 CTA",
           contentMd: `${EOL}Generic Task 2 Contents${EOL}`,
           unlockedBy: [],
-          unlocks: [],
         },
       ],
     },
@@ -170,7 +158,6 @@ const expectedGenericRoadmap: Roadmap = {
           callToActionText: "Generic Task 3 CTA",
           contentMd: `${EOL}Generic Task 3 Contents${EOL}`,
           unlockedBy: [],
-          unlocks: [],
         },
       ],
     },
@@ -190,7 +177,6 @@ const expectedGenericRoadmap: Roadmap = {
           callToActionText: "Generic Task 4 CTA",
           contentMd: `${EOL}Generic Task 4 Contents${EOL}`,
           unlockedBy: [],
-          unlocks: [],
         },
       ],
     },

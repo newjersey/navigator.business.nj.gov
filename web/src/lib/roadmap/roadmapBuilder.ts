@@ -158,7 +158,6 @@ const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap
       ...step,
       tasks: step.tasks.map((task) => ({
         ...task,
-        unlocks: task.unlocks.filter((it) => allFilenames.includes(it.filename)),
         unlockedBy: task.unlockedBy.filter((it) => allFilenames.includes(it.filename)),
       })),
     })),

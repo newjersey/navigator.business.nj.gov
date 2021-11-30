@@ -11,7 +11,6 @@ import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from 
 import { TaskHeader } from "@/components/TaskHeader";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-//import { Unlocks } from "@/components/tasks/Unlocks";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { Button } from "../njwds-extended/Button";
 
@@ -207,9 +206,6 @@ export const SearchBusinessName = (props: Props): ReactElement => {
         {nameAvailability?.status === "AVAILABLE" && showAvailable()}
         {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
       </div>
-      {/* restore when #470 is decided
-      <Unlocks taskLinks={taskFromRoadmap?.unlocks || []} isLoading={!taskFromRoadmap} />
-      */}
     </>
   );
 };

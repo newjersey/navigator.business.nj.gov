@@ -246,7 +246,6 @@ export interface Task {
   contentMd: string;
   postOnboardingQuestion?: string;
   unlockedBy: TaskLink[];
-  unlocks: TaskLink[];
 }
 
 export interface TaskLink {
