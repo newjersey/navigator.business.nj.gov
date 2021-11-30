@@ -1,3 +1,37 @@
+# [1.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.2.0...v1.3.0) (2021-11-30)
+
+
+### Bug Fixes
+
+* [[#1008](https://github.com/newjersey/navigator.business.nj.gov/issues/1008)] removed repeating warning icons ([608244f](https://github.com/newjersey/navigator.business.nj.gov/commit/608244f85367d74dae252d653b3e56d711464931))
+* [[#1031](https://github.com/newjersey/navigator.business.nj.gov/issues/1031)] resize vertical line on roadmap ([9e0c525](https://github.com/newjersey/navigator.business.nj.gov/commit/9e0c525abaf148e76a4f76d6c81caf8d2aea21aa))
+* [[#1036](https://github.com/newjersey/navigator.business.nj.gov/issues/1036)] [[#1038](https://github.com/newjersey/navigator.business.nj.gov/issues/1038)] fix update & validate on entity-id operate form ([3dc57b8](https://github.com/newjersey/navigator.business.nj.gov/commit/3dc57b8f7f1d0249e6210e548fd9be8fd08efe0d))
+* [[#1038](https://github.com/newjersey/navigator.business.nj.gov/issues/1038)] add spinner to operate entity ID button ([d8580ee](https://github.com/newjersey/navigator.business.nj.gov/commit/d8580eecdf738c6139938f2c48c2f2a7d75f54c8))
+* [[#1040](https://github.com/newjersey/navigator.business.nj.gov/issues/1040)] ensure contextual info links render inline ([c3f2af5](https://github.com/newjersey/navigator.business.nj.gov/commit/c3f2af5002e6061b7570b8072d640841f861772d))
+* [[#974](https://github.com/newjersey/navigator.business.nj.gov/issues/974)] migrate njwds to a node module ([7cbf7fb](https://github.com/newjersey/navigator.business.nj.gov/commit/7cbf7fb5a9042ed762deb9e882509534d28f04e6))
+* **deps:** update aws-amplify ([cd74f97](https://github.com/newjersey/navigator.business.nj.gov/commit/cd74f97b78272f7f10c3509c8ea598435cf8bc08))
+* **deps:** update dependency @aws-amplify/ui-react to v2 ([4a43ba9](https://github.com/newjersey/navigator.business.nj.gov/commit/4a43ba97a5eed5d113196934adb6821e0fc46894))
+* **deps:** update dependency @aws-amplify/ui-react to v2.1.1 ([34efb2f](https://github.com/newjersey/navigator.business.nj.gov/commit/34efb2fcde773c4e81ac76b1ccbb3e9917cc1c23))
+* **deps:** update dependency @emotion/react to v11.7.0 ([54b7ba5](https://github.com/newjersey/navigator.business.nj.gov/commit/54b7ba5cecdd5fd4a5bc1c0678501f5da6351413))
+* **deps:** update material-ui monorepo ([7b6b487](https://github.com/newjersey/navigator.business.nj.gov/commit/7b6b487764e40e3929ca799cad2e4a616e6dd3fa))
+* **deps:** update material-ui monorepo ([c372d51](https://github.com/newjersey/navigator.business.nj.gov/commit/c372d51a60246a2ed6c0caa41667c059c300d3ae))
+* **deps:** update nextjs monorepo to v12.0.4 ([5f105f6](https://github.com/newjersey/navigator.business.nj.gov/commit/5f105f686febffc3c430d38c94b8e26923506eb4))
+* **deps:** upgrade typescript related packages ([a0b7199](https://github.com/newjersey/navigator.business.nj.gov/commit/a0b719927316f41bd78c646b5e29cdfa35bc0d44))
+* **deps:** upgrade typescript to the latest version ([0fb2fc6](https://github.com/newjersey/navigator.business.nj.gov/commit/0fb2fc6ead1798e6f73e2f72e70ea0680ade28da))
+
+
+### Features
+
+* [[#1035](https://github.com/newjersey/navigator.business.nj.gov/issues/1035)] add the ability to filter industries by additional words ([b385fa8](https://github.com/newjersey/navigator.business.nj.gov/commit/b385fa8e5fb64844c238e0b3ec6182642cc3f143))
+* [[#879](https://github.com/newjersey/navigator.business.nj.gov/issues/879)] add owning-a-business onboarding flow, controlled by feature flag ([edbc6ac](https://github.com/newjersey/navigator.business.nj.gov/commit/edbc6acfbc6b89f9ee8dda7032611d69f97d0c3d))
+* [[#879](https://github.com/newjersey/navigator.business.nj.gov/issues/879)] always show entity ID field in profile for Oscar users ([ffcf520](https://github.com/newjersey/navigator.business.nj.gov/commit/ffcf520790b5999b9669fd7ca75f43c05a9c661a))
+* [[#879](https://github.com/newjersey/navigator.business.nj.gov/issues/879)] show entity ID in mini-profile for oscar ([f61978b](https://github.com/newjersey/navigator.business.nj.gov/commit/f61978b978fd80442f4a2f5dfcd4800e6fee89a1))
+* [[#884](https://github.com/newjersey/navigator.business.nj.gov/issues/884)] industry dropdown as autocomplete typeahead ([52818db](https://github.com/newjersey/navigator.business.nj.gov/commit/52818dbc56caa85a4faf163910636a8074b27149))
+* [[#886](https://github.com/newjersey/navigator.business.nj.gov/issues/886)] left align task status on roadmap ([d688c75](https://github.com/newjersey/navigator.business.nj.gov/commit/d688c75c05fd323b9f542be71b46249c1189b046))
+* [[#886](https://github.com/newjersey/navigator.business.nj.gov/issues/886)] reposition task status on roadmap for mobile ([dec9617](https://github.com/newjersey/navigator.business.nj.gov/commit/dec96172225373fe8a093030131329541ef6ecc8))
+* [[#907](https://github.com/newjersey/navigator.business.nj.gov/issues/907)] fixed thickness and position of circular progress on button ([1aa469b](https://github.com/newjersey/navigator.business.nj.gov/commit/1aa469b037170ec104f099a4e9b1dd2596587640))
+* integrate the netlify cms module ([7599e3e](https://github.com/newjersey/navigator.business.nj.gov/commit/7599e3edbf1d29060f9d833c8e9bd131b844dc45))
+
 # [1.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.1.1...v1.2.0) (2021-11-17)
 
 
