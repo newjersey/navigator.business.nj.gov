@@ -86,6 +86,8 @@ Cypress.Commands.add("loginByCognitoApi", () => {
       body: createEmptyUserData({
         email: testUserEmail,
         id: cognitoResponse.attributes.sub,
+        receiveNewsletter: true,
+        externalStatus: {},
       }),
       auth: {
         bearer: cognitoResponse.signInUserSession.idToken.jwtToken,
@@ -104,6 +106,8 @@ Cypress.Commands.add("resetUserData", () => {
         body: createEmptyUserData({
           email: testUserEmail,
           id: userId,
+          receiveNewsletter: true,
+          externalStatus: {},
         }),
         auth: {
           bearer: currentSession.getIdToken().getJwtToken(),

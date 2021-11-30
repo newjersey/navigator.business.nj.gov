@@ -1,6 +1,8 @@
 import type { AWS } from "@serverless/typescript";
 
 import express from "./src/functions/express";
+import updateExternalStatus from "./src/functions/updateExternalStatus";
+
 import dynamoDbSchema from "./dynamodb-schema.json";
 import { env } from "process";
 
@@ -11,6 +13,10 @@ const offlinePort = process.env.API_PORT || 5000;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
 const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
 const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
+const govDeliveryBaseUrl = process.env.GOV_DELIVERY_BASE_URL || "";
+const govDeliveryTopic = process.env.GOV_DELIVERY_TOPIC || "";
+const govDeliveryApiKey = process.env.GOV_DELIVERY_API_KEY || "";
+const govDeliveryQuestionId = process.env.GOV_DELIVERY_URL_QUESTION_ID || "";
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
 const ssmLocation = stage === "local" ? "dev" : stage;
@@ -114,6 +120,10 @@ const serverlessConfiguration: AWS = {
       USERS_TABLE: usersTable,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
+      GOV_DELIVERY_BASE_URL: govDeliveryBaseUrl,
+      GOV_DELIVERY_TOPIC: govDeliveryTopic,
+      GOV_DELIVERY_API_KEY: govDeliveryApiKey,
+      GOV_DELIVERY_URL_QUESTION_ID: govDeliveryQuestionId,
       MYNJ_SERVICE_TOKEN: myNJServiceToken,
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_URL: myNJServiceUrl,
@@ -127,6 +137,19 @@ const serverlessConfiguration: AWS = {
   functions: {
     express: express(
       "${self:custom.config.application.${self:custom.ssmLocation}.COGNITO_ARN}",
+      env.CI
+        ? {
+            securityGroupIds: [
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SECURITY_GROUP}",
+            ],
+            subnetIds: [
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_01}",
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_02}",
+            ],
+          }
+        : undefined
+    ),
+    govDelivery: updateExternalStatus(
       env.CI
         ? {
             securityGroupIds: [

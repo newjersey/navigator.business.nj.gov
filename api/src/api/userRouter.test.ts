@@ -11,7 +11,7 @@ import {
   generateUserData,
 } from "../../test/factories";
 import jwt from "jsonwebtoken";
-import { TaxFilingClient, UserDataClient } from "../domain/types";
+import { TaxFilingClient, UserDataClient, AddNewsletter } from "../domain/types";
 import { EntityIdStatus } from "@shared/taxFiling";
 import dayjs from "dayjs";
 
@@ -25,6 +25,7 @@ describe("userRouter", () => {
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
   let stubTaxFilingClient: jest.Mocked<TaxFilingClient>;
+  let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
   let stubUpdateLicenseStatus: jest.Mock;
 
   beforeEach(async () => {
@@ -34,12 +35,15 @@ describe("userRouter", () => {
       findByEmail: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
+    stubAddNewsletter = jest.fn();
     stubTaxFilingClient = {
       fetchForEntityId: jest.fn(),
     };
     app = express();
     app.use(bodyParser.json());
-    app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus, stubTaxFilingClient));
+    app.use(
+      userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus, stubTaxFilingClient, stubAddNewsletter)
+    );
   });
 
   const cognitoPayload = ({ id }: { id: string }) => ({
@@ -102,6 +106,9 @@ describe("userRouter", () => {
     });
 
     describe("updating license status", () => {
+      beforeEach(async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      });
       it("does not update license if licenseData is undefined", async () => {
         const userData = generateUserData({ licenseData: undefined });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -230,6 +237,17 @@ describe("userRouter", () => {
 
       expect(response.status).toEqual(500);
       expect(response.body).toEqual({ error: "error" });
+    });
+
+    it("adds newsletter to externalStatus if receiveNewsletter is true", async () => {
+      const userData = generateUserData({
+        user: generateUser({ id: "123", externalStatus: {} }),
+      });
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
+
+      await request(app).post(`/users`).send(userData).set("Authorization", "Bearer user-123-token");
+      expect(stubAddNewsletter).toHaveBeenCalled();
     });
   });
 });

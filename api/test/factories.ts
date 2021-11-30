@@ -1,8 +1,11 @@
 import {
   BusinessUser,
+  ExternalStatus,
   LicenseData,
   LicenseEntity,
   NameAndAddress,
+  newsletterStatusList,
+  NewsletterStatus,
   Preferences,
   SelfRegResponse,
   UserData,
@@ -25,6 +28,7 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
     id: `some-id-${randomInt()}`,
+    externalStatus: generateExternalStatus({}),
     receiveNewsletter: true,
     userTesting: true,
     ...overrides,
@@ -172,4 +176,25 @@ export const randomLegalStructure = (): LegalStructure => {
 export const randomIndustry = (): Industry => {
   const randomIndex = Math.floor(Math.random() * Industries.length);
   return Industries[randomIndex];
+};
+
+export const randomNewsletterStatus = (failed = !!(randomInt() % 2)): NewsletterStatus => {
+  const status = failed
+    ? newsletterStatusList.filter((i) => i.includes("ERROR"))
+    : newsletterStatusList.filter((i) => !i.includes("ERROR"));
+  const randomIndex = Math.floor(Math.random() * status.length);
+  return status[randomIndex];
+};
+
+export const generateExternalStatus = (
+  overrides: Partial<ExternalStatus>,
+  failed = !!(randomInt() % 2)
+): ExternalStatus => {
+  return {
+    newsletter: {
+      success: !failed,
+      status: randomNewsletterStatus(failed),
+    },
+    ...overrides,
+  };
 };

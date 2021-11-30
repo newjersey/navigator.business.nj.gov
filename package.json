@@ -18,6 +18,7 @@
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "lerna run --stream prettier:check",
     "start:dev": "lerna run  --stream dev",
+    "invokeNewsletter": "lerna run  --stream invokeNewsletter",
     "spellcheck": "lerna run --stream spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest --projects api shared web",
