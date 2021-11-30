@@ -254,6 +254,7 @@ jobs:
       - image: node:14.18.1-buster
     resource_class: small
     steps:
+      - set-prod-env-vars
       - bootstrap-code
       - generate-release-notes
 
