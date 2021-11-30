@@ -127,4 +127,18 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
   });
+
+  it("user data is updated if opted into newsletter", () => {
+    cy.intercept("POST", "/local/api/users").as("new-user");
+    completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
+    cy.wait("@new-user").then((event) => {
+      expect(event.request.body.user.externalStatus).to.deep.equal({
+        newsletter: {
+          status: "SUCCESS",
+          success: true,
+        },
+      });
+    });
+    cy.url().should("contain", "/roadmap");
+  });
 });

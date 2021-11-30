@@ -288,10 +288,30 @@ export interface PostOnboarding {
   radioNoContent: string;
 }
 
+export const newsletterStatusList = [
+  "SUCCESS",
+  "EMAIL_ERROR",
+  "TOPIC_ERROR",
+  "RESPONSE_ERROR",
+  "QUESTION_WARNING",
+] as const;
+
+export type NewsletterStatus = typeof newsletterStatusList[number];
+
+export interface NewsletterResponse {
+  success: boolean;
+  status: NewsletterStatus;
+}
+
+export type ExternalStatus = {
+  newsletter?: NewsletterResponse;
+};
+
 export type BusinessUser = {
   name?: string;
   email: string;
   id: string;
+  externalStatus: ExternalStatus;
   receiveNewsletter: boolean;
   userTesting: boolean;
   myNJUserKey?: string;

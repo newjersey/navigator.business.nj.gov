@@ -8,10 +8,19 @@ export interface UserDataClient {
   findByEmail: (email: string) => Promise<UserData | undefined>;
   put: (userData: UserData) => Promise<UserData>;
 }
-
+export interface UserDataQlClient {
+  search: (statement: string) => Promise<UserData[]>;
+  getNeedNewsletterUsers: () => Promise<UserData[]>;
+}
 export interface BusinessNameClient {
   search: (name: string) => Promise<string[]>;
 }
+
+export interface NewsletterClient {
+  add: (email: string) => Promise<NewsletterResponse>;
+}
+
+export type AddNewsletter = (userData: UserData) => Promise<UserData>;
 
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
@@ -99,10 +108,32 @@ export interface Preferences {
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 
+export const newsletterStatusList = [
+  "SUCCESS",
+  "EMAIL_ERROR",
+  "TOPIC_ERROR",
+  "RESPONSE_ERROR",
+  "RESPONSE_FAIL",
+  "RESPONSE_WARNING",
+  "QUESTION_WARNING",
+] as const;
+
+export type NewsletterStatus = typeof newsletterStatusList[number];
+
+export interface NewsletterResponse {
+  success: boolean;
+  status: NewsletterStatus;
+}
+
+export type ExternalStatus = {
+  newsletter?: NewsletterResponse;
+};
+
 export type BusinessUser = {
   name?: string;
   email: string;
   id: string;
+  externalStatus: ExternalStatus;
   receiveNewsletter: boolean;
   userTesting: boolean;
   myNJUserKey?: string;

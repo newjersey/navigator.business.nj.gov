@@ -172,6 +172,7 @@ describe("selfRegRouter", () => {
           email: email,
           id: stubUuid,
           name: name,
+          externalStatus: {},
           receiveNewsletter: true,
           userTesting: true,
         });
@@ -210,6 +211,7 @@ describe("selfRegRouter", () => {
           email: email,
           id: stubUuid,
           name: "",
+          externalStatus: {},
           receiveNewsletter: true,
           userTesting: true,
         });
@@ -227,6 +229,7 @@ describe("selfRegRouter", () => {
           email: email,
           id: stubUuid,
           name: "",
+          externalStatus: {},
           receiveNewsletter: true,
           userTesting: true,
         });

@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/api/add_script_subscription?.*"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "newsletter-govdelivery.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

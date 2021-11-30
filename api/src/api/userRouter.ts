@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import {
+  AddNewsletter,
   createEmptyUserData,
   TaxFilingClient,
   UpdateLicenseStatus,
@@ -9,6 +10,7 @@ import {
 import jwt from "jsonwebtoken";
 import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
+import { shouldAddToNewsletter } from "../domain/newsletter/addNewsletterFactory";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -42,7 +44,8 @@ export const getSignedInUserId = (req: Request): string => {
 export const userRouterFactory = (
   userDataClient: UserDataClient,
   updateLicenseStatus: UpdateLicenseStatus,
-  taxFilingClient: TaxFilingClient
+  taxFilingClient: TaxFilingClient,
+  addNewsletter: AddNewsletter
 ): Router => {
   const router = Router();
 
@@ -94,7 +97,9 @@ export const userRouterFactory = (
         },
       };
     }
-
+    if (shouldAddToNewsletter(userData)) {
+      addNewsletter(userData);
+    }
     userDataClient
       .put(userData)
       .then((result: UserData) => {
@@ -120,6 +125,7 @@ export const userRouterFactory = (
       email: signedInUser.email,
       id: signedInUserId,
       name: "Test User",
+      externalStatus: {},
       receiveNewsletter: true,
       userTesting: true,
     });

@@ -25,6 +25,7 @@ export const selfRegRouterFactory = (
           email: email,
           id: uuidv4(),
           name: name,
+          externalStatus: {},
           receiveNewsletter: req.body.receiveNewsletter,
           userTesting: req.body.userTesting,
         });

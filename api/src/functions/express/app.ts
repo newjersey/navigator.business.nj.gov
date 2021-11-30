@@ -12,10 +12,12 @@ import { searchLicenseStatusFactory } from "../../domain/license-status/searchLi
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 import { WebserviceBusinessNameClient } from "../../client/WebserviceBusinessNameClient";
+import { GovDeliveryNewsletterClient } from "../../client/GovDeliveryNewsletterClient";
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
 import { LogWriter } from "@libs/logWriter";
 import { FakeTaxFilingClient } from "../../client/FakeTaxFilingClient";
+import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 
 const app = express();
 app.use(bodyParser.json());
@@ -49,10 +51,26 @@ const licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_UR
 const BUSINESS_NAME_BASE_URL =
   process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const businessNameClient = WebserviceBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
+const GOV_DELIVERY_BASE_URL =
+  process.env.GOV_DELIVERY_BASE_URL ||
+  (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.govdelivery.com");
+const GOV_DELIVERY_API_KEY = process.env.GOV_DELIVERY_API_KEY || "testkey";
+const GOV_DELIVERY_TOPIC = process.env.GOV_DELIVERY_TOPIC || "NJGOV_17";
+const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID || "q_86783";
+
+const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
+  baseUrl: GOV_DELIVERY_BASE_URL,
+  topic: GOV_DELIVERY_TOPIC,
+  apiKey: GOV_DELIVERY_API_KEY,
+  logWriter: logger,
+  siteUrl: "navigator.business.nj.gov",
+  urlQuestion: GOV_DELIVERY_URL_QUESTION_ID,
+});
 
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 
+const addGovDeliveryNewsletter = addNewsletterFactory(userDataClient, govDeliveryNewsletterClient);
 const searchBusinessName = searchBusinessNameFactory(businessNameClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
@@ -69,7 +87,10 @@ const myNJSelfRegClient = MyNJSelfRegClientFactory(
 );
 
 app.use(bodyParser.json({ strict: false }));
-app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus, taxFilingClient));
+app.use(
+  "/api",
+  userRouterFactory(userDataClient, updateLicenseStatus, taxFilingClient, addGovDeliveryNewsletter)
+);
 app.use("/api", businessNameRouterFactory(searchBusinessName));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, myNJSelfRegClient));
