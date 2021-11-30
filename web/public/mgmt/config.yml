@@ -77,7 +77,7 @@ collections:
                 widget: string
 
   - name: "roadmaps"
-    label: "Industry Modifications"
+    label: "Industry Roadmaps"
     folder: "content/src/roadmaps/industries"
     slug: "{{filename}}"
     extension: "json"
@@ -88,12 +88,12 @@ collections:
     editor:
       preview: false
     fields:
-      - label: Additional Tasks
-        name: addOns
+      - label: Roadmap Steps
+        name: roadmapSteps
         widget: list
-        summary: "{{task}}"
+        summary: "Step {{step}} - {{task}}"
         fields:
-          - label: Step
+          - label: Roadmap Step
             name: step
             widget: relation
             collection: "settings"
