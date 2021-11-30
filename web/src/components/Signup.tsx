@@ -7,6 +7,7 @@ import {
   DialogTitle,
   FormControlLabel,
   FormGroup,
+  IconButton,
   TextField,
 } from "@mui/material";
 import { postSelfReg } from "@/lib/api-client/apiClient";
@@ -14,6 +15,7 @@ import { useRouter } from "next/router";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { Alert } from "@/components/njwds/Alert";
 import { Button } from "./njwds-extended/Button";
+import { Icon } from "@/components/njwds/Icon";
 
 type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "DUPLICATE_SIGNUP" | "GENERIC";
 const SelfRegErrorLookup: Record<SelfRegError, string> = {
@@ -117,6 +119,18 @@ export const Signup = (props: Props): ReactElement => {
         </div>
       </DialogTitle>
       <DialogContent>
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <Icon className="usa-icon--size-4">close</Icon>
+        </IconButton>
         <div className="tablet:padding-2">
           <p className="padding-bottom-1">{SelfRegDefaults.signupDescriptionText}</p>
           {showAlert()}
