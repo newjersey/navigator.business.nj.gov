@@ -84,6 +84,7 @@ describe("onboarding - owning a business", () => {
     expect(currentUserData().profileData.industryId).toEqual("e-commerce");
     expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
 
+    page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Certifications", "veteran-owned");
     page.selectByValue("Certifications", "small-business-enterprise");
@@ -102,6 +103,7 @@ describe("onboarding - owning a business", () => {
         municipality: newark,
         entityId: "1234567890",
         certificationIds: ["veteran-owned", "small-business-enterprise"],
+        existingEmployees: "1234567",
       },
     });
   });
@@ -176,6 +178,7 @@ describe("onboarding - owning a business", () => {
     await page.visitStep3();
     page.fillText("Business name", "A business");
     await page.visitStep4();
+    page.fillText("Existing employees", "1234567");
     page.clickNext();
     await waitFor(() => {
       expect(subject.getByTestId("step-4")).toBeInTheDocument();
@@ -188,6 +191,34 @@ describe("onboarding - owning a business", () => {
       expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).not.toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
     });
+  });
+
+  it("prevents user from moving after Step 4 if you have not entered number of employees", async () => {
+    const initialUserData = createEmptyUserData(generateUser({}));
+    const newark = generateMunicipality({ displayName: "Newark" });
+    const { subject, page } = renderPage({
+      userData: initialUserData,
+      municipalities: [newark],
+    });
+
+    page.chooseRadio("has-existing-business-true");
+    await page.visitStep2();
+    await page.visitStep3();
+    page.fillText("Business name", "A business");
+
+    await page.visitStep4();
+    expect(subject.getByTestId("step-4")).toBeInTheDocument();
+    page.selectByText("Location", "Newark");
+    page.clickNext();
+
+    await waitFor(() => {
+      subject.getByText(OnboardingDefaults.errorTextRequiredExistingEmployees);
+      expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    });
+
+    page.fillText("Existing employees", "123");
+    page.clickNext();
+    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
   });
 
   it("prefills form from existing user data", async () => {

@@ -29,6 +29,7 @@ import { migrate_v25_to_v26 } from "./v26_remove_dateofformation";
 import { migrate_v26_to_v27 } from "./v27_add_registration_optouts";
 import { migrate_v27_to_v28 } from "./v28_add_hasExistingBusiness_to_profile";
 import { migrate_v28_to_v29 } from "./v29_add_certifications_profile";
+import { migrate_v29_to_v30 } from "./v30_add_existingEmployees";
 
 export type MigrationFunction = (data: any) => any;
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
@@ -63,6 +64,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v26_to_v27,
   migrate_v27_to_v28,
   migrate_v28_to_v29,
+  migrate_v29_to_v30,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

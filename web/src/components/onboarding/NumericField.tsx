@@ -8,12 +8,19 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   invalid: boolean;
   fieldName: ProfileFields;
-  length: number;
+  validationText?: string;
+  maxLength: number;
+  minLength?: number;
 }
 
 export const NumericField = (props: Props): ReactElement => {
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-    const valid = event.target.value.length === props.length || event.target.value.length === 0;
+    const userInput = event.target.value.length;
+
+    const valid = props.minLength
+      ? userInput >= props.minLength && userInput <= props.maxLength
+      : userInput === props.maxLength || userInput === 0;
+
     props.onValidation(props.fieldName, !valid);
   };
 
@@ -23,16 +30,21 @@ export const NumericField = (props: Props): ReactElement => {
 
   return (
     <OnboardingField
+      valueFilter={regex}
       fieldName={props.fieldName}
       onValidation={onValidation}
       error={props.invalid}
-      validationText={templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
-        length: props.length.toString(),
-      })}
+      validationText={
+        props.validationText
+          ? props.validationText
+          : templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
+              length: props.maxLength.toString(),
+            })
+      }
       visualFilter={regex}
       handleChange={handleChange}
       fieldOptions={{
-        inputProps: { inputMode: "numeric", maxLength: props.length },
+        inputProps: { inputMode: "numeric", maxLength: props.maxLength },
       }}
     />
   );
