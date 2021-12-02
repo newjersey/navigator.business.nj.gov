@@ -195,6 +195,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           taxId: undefined,
           notes: "",
           certificationIds: [],
+          existingEmployees: undefined,
         };
 
         setProfileData(newProfileData);

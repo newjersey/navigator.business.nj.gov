@@ -8,6 +8,7 @@ import React, { ReactNode } from "react";
 import { ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { OnboardingCertifications } from "@/components/onboarding/OnboardingCertifications";
+import { OnboardingExistingEmployees } from "./OnboardingExistingEmployees";
 
 export type OnboardingFlow = {
   pages: {
@@ -17,8 +18,8 @@ export type OnboardingFlow = {
 };
 
 export type ErrorFieldMap = {
-  inline?: [{ name: ProfileFields; valid: boolean }];
-  banner?: [{ name: ProfileError; valid: boolean }];
+  inline?: { name: ProfileFields; valid: boolean }[];
+  banner?: { name: ProfileError; valid: boolean }[];
 };
 export type FlowType = "OWNING" | "STARTING";
 
@@ -45,7 +46,7 @@ export const getOnboardingFlows = (
         component: (
           <>
             <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
-            <div className="margin-top-4" />
+            <div className="margin-top-205" />
             <OnboardingIndustry />
           </>
         ),
@@ -54,12 +55,22 @@ export const getOnboardingFlows = (
       {
         component: (
           <>
+            <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
+            <div className="margin-top-205" />
             <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
-            <div className="margin-top-4" />
+            <div className="margin-top-205" />
             <OnboardingCertifications />
           </>
         ),
-        getErrorMap: () => ({ inline: [{ name: "municipality", valid: !!profileData.municipality }] }),
+        getErrorMap: () => ({
+          inline: [
+            {
+              name: "existingEmployees",
+              valid: profileData.existingEmployees !== undefined,
+            },
+            { name: "municipality", valid: !!profileData.municipality },
+          ],
+        }),
       },
     ],
   },

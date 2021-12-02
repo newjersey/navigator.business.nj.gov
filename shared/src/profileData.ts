@@ -14,6 +14,7 @@ export interface ProfileData {
   taxId: string | undefined;
   notes: string;
   certificationIds: string[];
+  existingEmployees: string | undefined;
 }
 
 export interface Certification {

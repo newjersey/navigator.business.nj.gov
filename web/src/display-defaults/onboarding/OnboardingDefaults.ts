@@ -9,4 +9,5 @@ export const OnboardingDefaults: Record<string, string> = {
   errorTextRequiredMunicipality: "Please select a location.",
   errorTextRequiredExistingBusiness: "Please select whether you have an existing business.",
   errorTextMinimumNumericField: "Must be ${length} digits long.",
+  errorTextRequiredExistingEmployees: "Please enter number of employees",
 };

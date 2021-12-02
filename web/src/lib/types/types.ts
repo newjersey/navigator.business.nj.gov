@@ -52,6 +52,7 @@ const emptyProfileData: ProfileData = {
   taxId: undefined,
   notes: "",
   certificationIds: [],
+  existingEmployees: undefined,
 };
 
 export const createEmptyProfileData = (): ProfileData => {
@@ -117,7 +118,8 @@ export type ProfileDisplayContent = {
   entityId: {
     contentMd: string;
   };
-  certifications: {
+  certifications: { contentMd: string; placeholder: string };
+  existingEmployees: {
     contentMd: string;
     placeholder: string;
   };
@@ -176,7 +178,11 @@ const emptyProfileDisplayContent: ProfileDisplayContent = {
     contentMd: "",
     placeholder: "",
   },
-};
+  existingEmployees: {
+    contentMd: "",
+    placeholder: "",
+  },
+} as ProfileDisplayContent;
 
 export const createEmptyProfileDisplayContent = (): ProfileDisplayContent => {
   return emptyProfileDisplayContent;

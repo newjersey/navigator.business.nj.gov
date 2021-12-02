@@ -15,7 +15,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
       onValidation={props.onValidation}
       invalid={props.fieldStates[fieldName].invalid}
       fieldName={fieldName}
-      length={9}
+      maxLength={9}
     />
   );
 };
