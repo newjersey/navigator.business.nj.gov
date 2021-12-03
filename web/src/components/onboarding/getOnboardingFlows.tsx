@@ -66,7 +66,7 @@ export const getOnboardingFlows = (
           inline: [
             {
               name: "existingEmployees",
-              valid: profileData.existingEmployees !== undefined,
+              valid: !!profileData.existingEmployees,
             },
             { name: "municipality", valid: !!profileData.municipality },
           ],
