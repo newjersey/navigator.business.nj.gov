@@ -45,7 +45,7 @@ export const OnboardingCertifications = (): ReactElement => {
             {Certifications.map((cert) => (
               <MenuItem key={cert.id} value={cert.id} data-testid={cert.id}>
                 <Checkbox checked={state.profileData.certificationIds.indexOf(cert.id) > -1} />
-                <ListItemText primary={cert.name} />
+                <ListItemText className="text-wrap" primary={cert.name} />
               </MenuItem>
             ))}
           </Select>

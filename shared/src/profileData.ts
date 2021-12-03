@@ -56,8 +56,4 @@ export const Certifications: Certification[] = [
     id: "disadvantaged-business-enterprise",
     name: "Disadvantaged Business Enterprise (DBE)",
   },
-  {
-    id: "service-disabled-veteran-owned",
-    name: "Service Disabled Veteran Owned Small Business (SDVOSB)",
-  },
 ];
