@@ -17,7 +17,7 @@ To complete this application, you must have:
 - Completed [Vehicle Registration Application Form](https://www.nj.gov/mvc/pdf/vehicles/BA-49.pdf) (Form BA-49)
 - Power of attorney if someone other than the purchaser is signing the documents
 - Lien holder information and financing statement if the vehicle is leased or financed.
-- [Application for Certificate of Ownership](https://https://www.state.nj.us/mvc/pdf/vehicles/luxtaxapp.pdf), if the vehicle is registered in another state
+- [Application for Certificate of Ownership](https://www.state.nj.us/mvc/pdf/vehicles/luxtaxapp.pdf), if the vehicle is registered in another state
 
 After you complete this task, you will have:
 
