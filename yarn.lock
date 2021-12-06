@@ -2557,7 +2557,7 @@ __metadata:
     lodash.orderby: 4.6.0
     napa: 3.0.0
     nc: "git+https://github.com/dsueltenfuss/nc.git"
-    netlify-cms-app: 2.15.59
+    netlify-cms-app: 2.15.60
     next: 12.0.4
     next-seo: 4.28.1
     prettier: 2.5.0
@@ -2704,7 +2704,7 @@ __metadata:
     jest-raw-loader: 1.0.1
     lodash.orderby: 4.6.0
     napa: 3.0.0
-    netlify-cms-app: 2.15.59
+    netlify-cms-app: 2.15.60
     next: 12.0.4
     next-seo: 4.28.1
     prettier: 2.5.0
@@ -24714,9 +24714,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-app@npm:2.15.59":
-  version: 2.15.59
-  resolution: "netlify-cms-app@npm:2.15.59"
+"netlify-cms-app@npm:2.15.60":
+  version: 2.15.60
+  resolution: "netlify-cms-app@npm:2.15.60"
   dependencies:
     "@emotion/core": ^10.0.35
     "@emotion/styled": ^10.0.27
@@ -24731,12 +24731,12 @@ __metadata:
     netlify-cms-backend-gitlab: ^2.12.0
     netlify-cms-backend-proxy: ^1.2.3
     netlify-cms-backend-test: ^2.11.3
-    netlify-cms-core: ^2.54.0
+    netlify-cms-core: ^2.54.1
     netlify-cms-editor-component-image: ^2.7.0
     netlify-cms-lib-auth: ^2.4.2
     netlify-cms-lib-util: ^2.14.0
     netlify-cms-lib-widgets: ^1.7.0
-    netlify-cms-locales: ^1.38.0
+    netlify-cms-locales: ^1.38.1
     netlify-cms-ui-default: ^2.15.3
     netlify-cms-widget-boolean: ^2.4.1
     netlify-cms-widget-code: ^1.3.3
@@ -24760,7 +24760,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: c405c03e857b8b39ff0ae2f7ad7f469fd354457b59a57fb0416aff42427a8214c7ab273263e7696b74e3d48785f0b01594e08690b41df4e28f07cd9f3e92b53d
+  checksum: 9fca08985cc3099406caf2fead8d4d7d07d95b8aad25e0eb32590e1f9748d3ccd8aa5e5b8bce20829a4bfd00dfeb9c9212fbe73525aae7a5fa72ac3deef729a0
   languageName: node
   linkType: hard
 
@@ -24906,7 +24906,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-core@npm:^2.54.0":
+"netlify-cms-core@npm:^2.54.1":
   version: 2.54.1
   resolution: "netlify-cms-core@npm:2.54.1"
   dependencies:
@@ -25022,7 +25022,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-locales@npm:^1.38.0":
+"netlify-cms-locales@npm:^1.38.1":
   version: 1.38.1
   resolution: "netlify-cms-locales@npm:1.38.1"
   checksum: e15a397110854fc9d8eca780feec3ccb6e3a3b82e42a4f1ef709b361af70165b3d79847cb0c32ab4f848477ba1e3ddebf07a239b5688896364a9dfece5e7dfe6
