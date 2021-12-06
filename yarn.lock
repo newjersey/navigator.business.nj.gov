@@ -2377,7 +2377,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 27.4.0
-    "@serverless/typescript": 2.67.0
+    "@serverless/typescript": 2.68.0
     "@types/aws-lambda": 8.10.85
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
@@ -2411,12 +2411,12 @@ __metadata:
     jsonwebtoken: 8.5.1
     prettier: 2.5.0
     rimraf: 3.0.2
-    serverless: 2.67.0
+    serverless: 2.68.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.3.1
     serverless-offline-ssm: 5.2.0
-    serverless-plugin-monorepo: 0.10.0
+    serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.0
     supertest: 6.1.6
     ts-jest: 27.0.7
@@ -2470,7 +2470,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.0.4
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 2.67.0
+    "@serverless/typescript": 2.68.0
     "@storybook/addon-a11y": 6.4.0
     "@storybook/addon-actions": 6.4.0
     "@storybook/addon-docs": 6.4.0
@@ -2574,12 +2574,12 @@ __metadata:
     sass: 1.43.5
     sass-loader: 12.3.0
     semantic-release: 18.0.1
-    serverless: 2.67.0
+    serverless: 2.68.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.3.1
     serverless-offline-ssm: 5.2.0
-    serverless-plugin-monorepo: 0.10.0
+    serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.0
     storybook-addon-designs: 6.2.0
     style-loader: 3.3.1
@@ -6891,10 +6891,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:2.67.0":
-  version: 2.67.0
-  resolution: "@serverless/typescript@npm:2.67.0"
-  checksum: a4137e739d6f08427e0768d2a62590f6bd029e536c89d9cd4cdd29608a7d5f5250eddc967932babb01b77dd592d3bb1daae1f371b0a40ac0134e511e9c0134db
+"@serverless/typescript@npm:2.68.0":
+  version: 2.68.0
+  resolution: "@serverless/typescript@npm:2.68.0"
+  checksum: 362836c540acb39f1c6e6e6de5249a369c9a723b0e4238736993504f6360bf08b9a7c83d3c00ed84e3dc636bf82667fded9ce7f822cced9ecf4a6f2be63b1f90
   languageName: node
   linkType: hard
 
@@ -11213,7 +11213,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1036.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0":
+"aws-sdk@npm:^2.1036.0, aws-sdk@npm:^2.1041.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0":
   version: 2.1043.0
   resolution: "aws-sdk@npm:2.1043.0"
   dependencies:
@@ -31129,14 +31129,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-plugin-monorepo@npm:0.10.0":
-  version: 0.10.0
-  resolution: "serverless-plugin-monorepo@npm:0.10.0"
+"serverless-plugin-monorepo@npm:0.11.0":
+  version: 0.11.0
+  resolution: "serverless-plugin-monorepo@npm:0.11.0"
   dependencies:
     fs-extra: ^9.0.1
   peerDependencies:
-    serverless: 1.x
-  checksum: 2525f32ec3b62ec4c29768f611ffe47183abb5fa95aea02844d213899b4d53dea1b726afccf94960d631317607e6ba7964a686edbcdaf74e0cc5829181934e02
+    serverless: 1 || 2 || 3
+  checksum: 420198ef282babc105461d83c898f6704024d6a951145c3e51468218a3c1452a6ab07f75b0a99a47a132ed3edb0741b5dc814a07ae7689b4b300c2d3ed16c0b7
   languageName: node
   linkType: hard
 
@@ -31162,9 +31162,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:2.67.0":
-  version: 2.67.0
-  resolution: "serverless@npm:2.67.0"
+"serverless@npm:2.68.0":
+  version: 2.68.0
+  resolution: "serverless@npm:2.68.0"
   dependencies:
     "@serverless/cli": ^1.5.3
     "@serverless/components": ^3.18.1
@@ -31174,7 +31174,7 @@ __metadata:
     ajv: ^6.12.6
     ajv-keywords: ^3.5.2
     archiver: ^5.3.0
-    aws-sdk: ^2.1036.0
+    aws-sdk: ^2.1041.0
     bluebird: ^3.7.2
     boxen: ^5.1.2
     cachedir: ^2.3.0
@@ -31225,7 +31225,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 2511ebe844a17dad0195ff2299f33001a6e7f49b4803cc5770017cc13aa66dd6a847ce4ba6c5d0435d387d52b086235a86bf2d6922814a998d2ca9fc4145779f
+  checksum: 93cc25f616e567c80ae9464bef9a3e8361f28948230ed46aaa559d0d2651d3217cd7add5722b3c0879b6c982ac95da08e34fff1ebca47301c5357321eaa54999
   languageName: node
   linkType: hard
 
