@@ -2430,7 +2430,7 @@ __metadata:
     webpack-node-externals: 3.0.0
     winston: 3.3.3
     winston-cloudwatch: 3.1.1
-    wiremock: 2.29.0
+    wiremock: 2.32.0
     xml2js: 0.4.23
   languageName: unknown
   linkType: soft
@@ -2596,7 +2596,7 @@ __metadata:
     webpack-node-externals: 3.0.0
     winston: 3.3.3
     winston-cloudwatch: 3.1.1
-    wiremock: 2.29.0
+    wiremock: 2.32.0
     xml2js: 0.4.23
     yarn-workspace-sync-deps: 0.3.2
   languageName: unknown
@@ -26309,6 +26309,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"npm-java-runner@npm:^0.0.17":
+  version: 0.0.17
+  resolution: "npm-java-runner@npm:0.0.17"
+  dependencies:
+    path: ^0.12.7
+  checksum: d580c750771991ec9f204fbd9d8b242c59f8d17688b8b9aa0c53a4384e82cbcc0855c381dbdaae1cb1e7b92dddd3d968d625a0803b042c8d77585abb9b5e0948
+  languageName: node
+  linkType: hard
+
 "npm-lifecycle@npm:^3.1.5":
   version: 3.1.5
   resolution: "npm-lifecycle@npm:3.1.5"
@@ -27775,6 +27784,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path@npm:^0.12.7":
+  version: 0.12.7
+  resolution: "path@npm:0.12.7"
+  dependencies:
+    process: ^0.11.1
+    util: ^0.10.3
+  checksum: 5dedb71e78fc008fcba797defc0b4e1cf06c1f18e0a631e03ba5bb505136f587ff017afc14f9a3d481cbe77aeedff7dc0c1d2ce4d820c1ebf3c4281ca49423a1
+  languageName: node
+  linkType: hard
+
 "pathval@npm:^1.1.1":
   version: 1.1.1
   resolution: "pathval@npm:1.1.1"
@@ -28356,7 +28375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"process@npm:0.11.10, process@npm:^0.11.10":
+"process@npm:0.11.10, process@npm:^0.11.1, process@npm:^0.11.10":
   version: 0.11.10
   resolution: "process@npm:0.11.10"
   checksum: bfcce49814f7d172a6e6a14d5fa3ac92cc3d0c3b9feb1279774708a719e19acd673995226351a082a9ae99978254e320ccda4240ddc474ba31a76c79491ca7c3
@@ -31725,19 +31744,6 @@ __metadata:
   version: 1.7.3
   resolution: "shell-quote@npm:1.7.3"
   checksum: aca58e73a3a5d933d02e0bdddedc53ee14f7c2ec264f97ac915b9d4482d077a38e422aa664631d60a672cd3cdb4054eb2e6c0303f54882453dacb6483e482d34
-  languageName: node
-  linkType: hard
-
-"shelljs@npm:^0.7.5":
-  version: 0.7.8
-  resolution: "shelljs@npm:0.7.8"
-  dependencies:
-    glob: ^7.0.0
-    interpret: ^1.0.0
-    rechoir: ^0.6.2
-  bin:
-    shjs: ./bin/shjs
-  checksum: f50764180e385077a771bdfe58f9a5dc34ebd512a859bd79282fe4d9ec61703ab9a88367aa280eff424ed90c86ae20e64b5560978b3098af543c4daa6e12ec22
   languageName: node
   linkType: hard
 
@@ -35203,6 +35209,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"util@npm:^0.10.3":
+  version: 0.10.4
+  resolution: "util@npm:0.10.4"
+  dependencies:
+    inherits: 2.0.3
+  checksum: 913f9a90d05a60e91f91af01b8bd37e06bca4cc02d7b49e01089f9d5b78be2fffd61fb1a41b517de7238c5fc7337fa939c62d1fb4eb82e014894c7bee6637aaf
+  languageName: node
+  linkType: hard
+
 "util@npm:^0.11.0":
   version: 0.11.1
   resolution: "util@npm:0.11.1"
@@ -35986,14 +36001,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wiremock@npm:2.29.0":
-  version: 2.29.0
-  resolution: "wiremock@npm:2.29.0"
+"wiremock@npm:2.32.0":
+  version: 2.32.0
+  resolution: "wiremock@npm:2.32.0"
   dependencies:
-    shelljs: ^0.7.5
+    npm-java-runner: ^0.0.17
   bin:
-    wiremock: jdeploy-bundle/jdeploy.js
-  checksum: 8ed51ee65931a17d4316513e415fe49d0c63bbf5c1c58708b87e6d70c5a6ee90b865c0d6d7c8af91f114c10977569be3247c9cf81e0cb760ac58e188870d43c9
+    wiremock: index.js
+  checksum: 3ca2c7222b3028c5dd3a00e8a4ede005f1ed0c2a75acdb2da52927539a94f3ab016c8d729457159efe1c67ef5f795be23867a2d93caa841ed0ed155e9d90d474
   languageName: node
   linkType: hard
 
