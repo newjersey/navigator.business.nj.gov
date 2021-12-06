@@ -27,7 +27,7 @@
     "@babel/runtime": "7.16.3",
     "@jest/types": "27.4.0",
     "@types/jest": "27.0.3",
-    "@types/node": "14.17.34",
+    "@types/node": "14.18.0",
     "@typescript-eslint/eslint-plugin": "5.5.0",
     "@typescript-eslint/parser": "5.5.0",
     "cross-env": "7.0.3",
