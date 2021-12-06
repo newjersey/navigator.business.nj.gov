@@ -1,3 +1,20 @@
+# [1.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.3.0...v1.4.0) (2021-12-06)
+
+
+### Bug Fixes
+
+* [[#947](https://github.com/newjersey/navigator.business.nj.gov/issues/947)] corrected existing employees field validation issue ([a7f564f](https://github.com/newjersey/navigator.business.nj.gov/commit/a7f564fb50f348680d275ed96227c38f93e4ad51))
+* [[#948](https://github.com/newjersey/navigator.business.nj.gov/issues/948)] wrap text & remove SDVOB ([cde6a5b](https://github.com/newjersey/navigator.business.nj.gov/commit/cde6a5b6516622863160243f20d827afed2bf8ba))
+* update the netlify config for the updated roadmap config ([6141db5](https://github.com/newjersey/navigator.business.nj.gov/commit/6141db55ce3f20359ad3f7a4aa732fc2bba083c4))
+
+
+### Features
+
+* [[#947](https://github.com/newjersey/navigator.business.nj.gov/issues/947)] existing employees field added to onboarding ([ec4b3f7](https://github.com/newjersey/navigator.business.nj.gov/commit/ec4b3f70749fcb07e615ffcb39168b0df6f0f88d))
+* [[#948](https://github.com/newjersey/navigator.business.nj.gov/issues/948)] add certifications multiselect to oscar onboarding ([17a6479](https://github.com/newjersey/navigator.business.nj.gov/commit/17a6479722f73157c27591f6c9c2d77aa07b97ed))
+* [[#979](https://github.com/newjersey/navigator.business.nj.gov/issues/979)] add close icon to signup dialog ([99aca45](https://github.com/newjersey/navigator.business.nj.gov/commit/99aca45084af2ff2b1267fe2d9db62b103a6c0c0))
+* remove the generic roadmap config, and set it up explicitly for each industry ([c2eb9e0](https://github.com/newjersey/navigator.business.nj.gov/commit/c2eb9e06c5c22b5297c49150b397a5a482794e93))
+
 # [1.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.2.0...v1.3.0) (2021-11-30)
 
 
