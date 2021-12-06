@@ -14,7 +14,7 @@
       "groupName": "cypress"
     },
     {
-      "matchPackageNames": ["@types/jest", "ts-jest", "babel-jest"],
+      "matchPackageNames": ["@types/jest", "ts-jest", "babel-jest", "@jest/types"],
       "matchPackagePrefixes": ["jest"],
       "groupName": "jest"
     },
