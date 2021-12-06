@@ -22,6 +22,7 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
 
   const LogError = async (message: string, details?: AxiosError): Promise<void> => {
     try {
+      console.error(`${message} - ${JSON.stringify(details?.toJSON())}`);
       winston.error(message, details);
       await FlushLog();
     } catch (ex) {
@@ -33,6 +34,7 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
 
   const LogInfo = async (message: string): Promise<void> => {
     try {
+      console.info(message);
       winston.info(message);
       await FlushLog();
     } catch (ex) {
