@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@businessnjgovnavigator/shared": "*",
-    "@jest/types": "27.4.0",
+    "@jest/types": "27.4.2",
     "@serverless/typescript": "2.67.0",
     "@types/aws-lambda": "8.10.85",
     "@types/copy-webpack-plugin": "8.0.1",
