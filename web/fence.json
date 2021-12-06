@@ -43,6 +43,7 @@
     "@businessnjgovnavigator/content/roadmaps/task-dependencies.json",
     "storybook-addon-designs",
     "next/dynamic",
-    "netlify-cms-app"
+    "netlify-cms-app",
+    "path"
   ]
 }
