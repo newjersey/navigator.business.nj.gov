@@ -1,6 +1,6 @@
 import { RoadmapDefaults, SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
-import { Task, TaskProgress } from "@/lib/types/types";
+import { createEmptyTaskDisplayContent, Task, TaskProgress } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
   generatePreferences,
@@ -45,7 +45,7 @@ const renderPage = (task: Task, initialUserData?: UserData): RenderResult =>
   render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
-        <TaskPage task={task} filingsReferences={{}} />
+        <TaskPage task={task} filingsReferences={{}} displayContent={createEmptyTaskDisplayContent()} />
       </WithStatefulUserData>
     </materialUi.ThemeProvider>
   );

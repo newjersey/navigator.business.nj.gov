@@ -1,5 +1,6 @@
 export * from "./businessUser";
 export * from "./certification";
+export * from "./formationData";
 export * from "./industry";
 export * from "./legalStructure";
 export * from "./license";

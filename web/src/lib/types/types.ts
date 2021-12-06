@@ -1,6 +1,5 @@
 import { BusinessUser, emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 
-export type FormProgress = "UNSTARTED" | "COMPLETED";
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
@@ -19,12 +18,14 @@ export type OperateDisplayContent = {
   entityIdErrorNotRegisteredMd: string;
 };
 
+type TextFieldContent = {
+  contentMd: string;
+  placeholder: string;
+};
+
 export type ProfileDisplayContent = {
   hasExistingBusiness: { contentMd: string; radioButtonYesText: string; radioButtonNoText: string };
-  businessName: {
-    contentMd: string;
-    placeholder: string;
-  };
+  businessName: TextFieldContent;
   industry: {
     contentMd: string;
     placeholder: string;
@@ -67,6 +68,97 @@ export type ProfileDisplayContent = {
     placeholder: string;
   };
 };
+
+export type FormationDisplayContent = {
+  businessSuffix: TextFieldContent;
+  businessStartDate: {
+    contentMd: string;
+  };
+  businessAddressLine1: TextFieldContent;
+  businessAddressLine2: TextFieldContent;
+  businessAddressState: TextFieldContent;
+  businessAddressZipCode: TextFieldContent;
+  agentNumberOrManual: {
+    contentMd: string;
+    radioButtonNumberText: string;
+    radioButtonManualText: string;
+  };
+  agentNumber: TextFieldContent;
+  agentName: TextFieldContent;
+  agentEmail: TextFieldContent;
+  agentOfficeAddressLine1: TextFieldContent;
+  agentOfficeAddressLine2: TextFieldContent;
+  agentOfficeAddressCity: TextFieldContent;
+  agentOfficeAddressState: TextFieldContent;
+  agentOfficeAddressZipCode: TextFieldContent;
+};
+
+export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
+  formationDisplayContent: createEmptyFormationDisplayContent(),
+});
+
+export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
+  businessSuffix: {
+    contentMd: "",
+    placeholder: "",
+  },
+  businessStartDate: {
+    contentMd: "",
+  },
+  businessAddressLine1: {
+    contentMd: "",
+    placeholder: "",
+  },
+  businessAddressLine2: {
+    contentMd: "",
+    placeholder: "",
+  },
+  businessAddressState: {
+    contentMd: "",
+    placeholder: "",
+  },
+  businessAddressZipCode: {
+    contentMd: "",
+    placeholder: "",
+  },
+  agentNumberOrManual: {
+    contentMd: "",
+    radioButtonNumberText: "",
+    radioButtonManualText: "",
+  },
+  agentNumber: {
+    contentMd: "",
+    placeholder: "",
+  },
+  agentName: {
+    contentMd: "",
+    placeholder: "",
+  },
+  agentEmail: {
+    contentMd: "",
+    placeholder: "",
+  },
+  agentOfficeAddressLine1: {
+    contentMd: "",
+    placeholder: "",
+  },
+  agentOfficeAddressLine2: {
+    contentMd: "",
+    placeholder: "",
+  },
+  agentOfficeAddressCity: {
+    contentMd: "",
+    placeholder: "",
+  },
+  agentOfficeAddressState: {
+    contentMd: "",
+    placeholder: "",
+  },
+  agentOfficeAddressZipCode: {
+    contentMd: "",
+    placeholder: "",
+  },
+});
 
 const emptyProfileDisplayContent: ProfileDisplayContent = {
   hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
@@ -160,6 +252,10 @@ export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
 export type RoadmapDisplayContent = {
   contentMd: string;
   operateDisplayContent: OperateDisplayContent;
+};
+
+export type TasksDisplayContent = {
+  formationDisplayContent: FormationDisplayContent;
 };
 
 export interface Roadmap {
