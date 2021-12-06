@@ -6,6 +6,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
+import { BusinessFormation } from "@/components/tasks/BusinessFormation";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -14,9 +15,10 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadFilingsReferences } from "@/lib/static/loadFilings";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
-import { FilingReference, Task } from "@/lib/types/types";
+import { FilingReference, Task, TasksDisplayContent } from "@/lib/types/types";
 import { getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -26,6 +28,7 @@ import React, { ReactElement, useMemo } from "react";
 interface Props {
   task: Task;
   filingsReferences: Record<string, FilingReference>;
+  displayContent: TasksDisplayContent;
 }
 
 const TaskPage = (props: Props): ReactElement => {
@@ -101,6 +104,27 @@ const TaskPage = (props: Props): ReactElement => {
     );
   };
 
+  const businessFormationFeatureFlag = (): ReactElement => {
+    if (process.env.FEATURE_DISABLE_FORMATION === "true")
+      return (
+        <div className="flex flex-column space-between minh-37">
+          <div>
+            <TaskHeader task={props.task} />
+            {getUnlockedBy()}
+            {getTaskContent()}
+          </div>
+          <TaskCTA
+            link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
+            text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
+          />
+        </div>
+      );
+
+    return (
+      <BusinessFormation task={props.task} displayContent={props.displayContent.formationDisplayContent} />
+    );
+  };
+
   return (
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
@@ -115,6 +139,7 @@ const TaskPage = (props: Props): ReactElement => {
             "search-business-name": <SearchBusinessName task={props.task} />,
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
+            "form-business-entity": businessFormationFeatureFlag(),
             default: (
               <div className="flex flex-column space-between minh-37">
                 <div>
@@ -148,6 +173,7 @@ export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetSta
     props: {
       task: loadTaskByUrlSlug(params.taskUrlSlug),
       filingsReferences: loadFilingsReferences(),
+      displayContent: loadTasksDisplayContent(),
     },
   };
 };

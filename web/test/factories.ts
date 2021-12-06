@@ -59,6 +59,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
+    formationData: undefined, // Placeholder
     ...overrides,
   };
 };

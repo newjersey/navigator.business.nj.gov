@@ -1,0 +1,17 @@
+export const BusinessFormationDefaults: Record<string, string> = {
+  notSetBusinessNameText: "Not set",
+  submitButtonText: "Submit",
+  businessNameLabel: "Business Name:",
+  legalStructureLabel: "Legal Structure:",
+  updateYourProfileDisplayText: "${value}, if this is incorrect, ${link}.",
+  updateYourProfileLinkText: "update your profile",
+  startDateErrorText: "Invalid Date",
+  businessAddressLine1ErrorText: "Address is required",
+  businessAddressCityLabel: "City",
+  notSetBusinessAddressCityLabel: "Not set",
+  agentNumberErrorText: "Agent number is required",
+  agentNameErrorText: "Agent name is required",
+  agentEmailErrorText: "Agent email is required",
+  agentOfficeAddressLine1ErrorText: "Agent office address is required",
+  agentOfficeAddressCityErrorText: "Agent office city is required",
+};

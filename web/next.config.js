@@ -15,6 +15,7 @@ module.exports = withBundleAnalyzer({
     MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
     FEATURE_DISABLE_OPERATE: process.env.FEATURE_DISABLE_OPERATE,
     FEATURE_DISABLE_OSCAR_ONBOARDING: process.env.FEATURE_DISABLE_OSCAR_ONBOARDING,
+    FEATURE_DISABLE_FORMATION: process.env.FEATURE_DISABLE_FORMATION,
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {
