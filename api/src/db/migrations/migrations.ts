@@ -66,7 +66,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v27_to_v28,
   migrate_v28_to_v29,
   migrate_v29_to_v30,
-  migrate_v30_to_v31
+  migrate_v30_to_v31,
 ];
 
 export const CURRENT_VERSION = Migrations.length;
