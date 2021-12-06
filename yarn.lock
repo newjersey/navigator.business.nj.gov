@@ -2385,7 +2385,7 @@ __metadata:
     "@types/jasmine": 3.10.2
     "@types/jest": 27.0.3
     "@types/jsonwebtoken": 8.5.6
-    "@types/node": 14.17.34
+    "@types/node": 14.18.0
     "@types/supertest": 2.0.11
     "@types/uuid": 8.3.3
     "@types/webpack-node-externals": 2.5.3
@@ -2439,7 +2439,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 14.17.34
+    "@types/node": 14.18.0
     cross-env: 7.0.3
     cspell: 5.13.1
     prettier: 2.5.0
@@ -2497,7 +2497,7 @@ __metadata:
     "@types/jest": 27.0.3
     "@types/jsonwebtoken": 8.5.6
     "@types/lodash.orderby": 4.6.6
-    "@types/node": 14.17.34
+    "@types/node": 14.18.0
     "@types/react": 17.0.37
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.3
@@ -2609,7 +2609,7 @@ __metadata:
     "@babel/runtime": 7.16.3
     "@jest/types": 27.4.0
     "@types/jest": 27.0.3
-    "@types/node": 14.17.34
+    "@types/node": 14.18.0
     "@typescript-eslint/eslint-plugin": 5.5.0
     "@typescript-eslint/parser": 5.5.0
     cross-env: 7.0.3
@@ -2663,7 +2663,7 @@ __metadata:
     "@types/broken-link-checker": 0.7.1
     "@types/jest": 27.0.3
     "@types/lodash.orderby": 4.6.6
-    "@types/node": 14.17.34
+    "@types/node": 14.18.0
     "@types/react": 17.0.37
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.3
@@ -9024,14 +9024,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.17.34":
-  version: 14.17.34
-  resolution: "@types/node@npm:14.17.34"
-  checksum: 803a7532b6998aca6aa1b3e6239f280e82612d4f641d38fbf08962c905ea9d1b278b2f09d396beac5120a4e68f33d7467298b197f2f00150ec1dcd546de02a89
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:>=8.0.0 <15, @types/node@npm:^14.0.10, @types/node@npm:^14.14.31":
+"@types/node@npm:14.18.0, @types/node@npm:>=8.0.0 <15, @types/node@npm:^14.0.10, @types/node@npm:^14.14.31":
   version: 14.18.0
   resolution: "@types/node@npm:14.18.0"
   checksum: b120c26fe5f30bc358e861db8d7e401e419d14bd9dd25c022f3c2ea8b0b429d4c9efd77ad5d6d2a8bde61702a6786fb74d409f1b2cbb61c79133e2a65aab4fb1
