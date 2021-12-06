@@ -2584,7 +2584,7 @@ __metadata:
     storybook-addon-designs: 6.2.0
     style-loader: 3.3.1
     supertest: 6.1.6
-    swr: 1.0.1
+    swr: 1.1.0
     ts-jest: 27.0.7
     ts-loader: 9.2.6
     ts-node: 10.4.0
@@ -2721,7 +2721,7 @@ __metadata:
     sass: 1.43.5
     sass-loader: 12.3.0
     style-loader: 3.3.1
-    swr: 1.0.1
+    swr: 1.1.0
     ts-jest: 27.0.7
     ts-loader: 9.2.6
     ts-node: 10.4.0
@@ -15070,13 +15070,6 @@ __metadata:
   version: 2.3.1
   resolution: "deprecation@npm:2.3.1"
   checksum: f56a05e182c2c195071385455956b0c4106fe14e36245b00c689ceef8e8ab639235176a96977ba7c74afb173317fac2e0ec6ec7a1c6d1e6eaa401c586c714132
-  languageName: node
-  linkType: hard
-
-"dequal@npm:2.0.2":
-  version: 2.0.2
-  resolution: "dequal@npm:2.0.2"
-  checksum: 86c7a2c59f7b0797ed397c74b5fcdb744e48fc19440b70ad6ac59f57550a96b0faef3f1cfd5760ec5e6d3f7cb101f634f1f80db4e727b1dc8389bf62d977c0a0
   languageName: node
   linkType: hard
 
@@ -32886,14 +32879,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swr@npm:1.0.1":
-  version: 1.0.1
-  resolution: "swr@npm:1.0.1"
-  dependencies:
-    dequal: 2.0.2
+"swr@npm:1.1.0":
+  version: 1.1.0
+  resolution: "swr@npm:1.1.0"
   peerDependencies:
-    react: ^16.11.0 || ^17.0.0
-  checksum: 8aaa10c4c65cb9b46a143a52ac2728111fc8af96e83781df1f7b7d56aa027ef720b7feb230658616e479f224f684d4cbc5d2ca3265c40f95a3140dbdba801061
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0
+  checksum: ee878b7a5dce6a8c866e9e56125168e732678e27be9211c5d32505e940c6b67ecf841c81badfba72eff82f126b18bcdadbb24211dcebeb440bd2bc67df37e29e
   languageName: node
   linkType: hard
 
