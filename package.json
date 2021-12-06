@@ -63,7 +63,7 @@
     "remark-react": "8.0.0",
     "serverless-http": "2.7.0",
     "serverless-offline": "8.3.1",
-    "swr": "1.0.1",
+    "swr": "1.1.0",
     "uuid": "8.3.2",
     "winston": "3.3.3",
     "winston-cloudwatch": "3.1.1",
