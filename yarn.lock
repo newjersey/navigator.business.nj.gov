@@ -15,30 +15,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:4.3.16":
-  version: 4.3.16
-  resolution: "@aws-amplify/auth@npm:4.3.16"
+"@aws-amplify/auth@npm:4.3.18":
+  version: 4.3.18
+  resolution: "@aws-amplify/auth@npm:4.3.18"
   dependencies:
-    "@aws-amplify/cache": 4.0.28
-    "@aws-amplify/core": 4.3.8
+    "@aws-amplify/cache": 4.0.30
+    "@aws-amplify/core": 4.3.10
     amazon-cognito-identity-js: 5.2.3
     crypto-js: ^4.1.1
-  checksum: 343cef20e1adc97b5734d0bcbb85545b43a0904ddf87a7a1a0e3c73fdb9bf7c01f5865f8a918f6d14a91c7a22d451323bcc3d3718e250ddece2d7162d55ff1c1
+  checksum: 00dd7abce285f9584a028599670638c00d6c4a403f648545c8b7ed92fea8eae4e3708170c1d92a16cd996fbdb69dfd8151e7191fc55c16b15d6d4fd22a87b084
   languageName: node
   linkType: hard
 
-"@aws-amplify/cache@npm:4.0.28":
-  version: 4.0.28
-  resolution: "@aws-amplify/cache@npm:4.0.28"
+"@aws-amplify/cache@npm:4.0.30":
+  version: 4.0.30
+  resolution: "@aws-amplify/cache@npm:4.0.30"
   dependencies:
-    "@aws-amplify/core": 4.3.8
-  checksum: 7cd49c91fede6aa1ca9217ddb5cdee7e26db18195dadb632b079a0e1c9ed75113d66b0a54ab35cfe8fca6cfc42a5e3da2ec5b4161a31f8dd9756eb2372497462
+    "@aws-amplify/core": 4.3.10
+  checksum: 1bd929c64ba7e47554e086340be98e360a85d6e0fed20ea2bcd9443675051e895010046f683fd2425518dd91d22905aa8fceca283819d08e5f474b3bdf0631e5
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:4.3.8":
-  version: 4.3.8
-  resolution: "@aws-amplify/core@npm:4.3.8"
+"@aws-amplify/core@npm:4.3.10":
+  version: 4.3.10
+  resolution: "@aws-amplify/core@npm:4.3.10"
   dependencies:
     "@aws-crypto/sha256-js": 1.0.0-alpha.0
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
@@ -48,7 +48,7 @@ __metadata:
     "@aws-sdk/util-hex-encoding": 3.6.1
     universal-cookie: ^4.0.4
     zen-observable-ts: 0.8.19
-  checksum: 92cdd2683baca1b4d8716db13c424ff975b9d33c3441ebc82b04757cb0b6128617464a6dc3edc22bfaf432877f7921328d276231f10fab0b7d1993be05f018bb
+  checksum: 77b7fe62d84edef27505da81a796e61d41c563beee8f129e96d2e37a533e476f2ce446c3ac93fb186d63c8704338109069d8e9a2fc26f2c5e72ee2b36f53c73b
   languageName: node
   linkType: hard
 
@@ -76,11 +76,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-react@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@aws-amplify/ui-react@npm:2.1.1"
+"@aws-amplify/ui-react@npm:2.1.2":
+  version: 2.1.2
+  resolution: "@aws-amplify/ui-react@npm:2.1.2"
   dependencies:
-    "@aws-amplify/ui": 3.0.2
+    "@aws-amplify/ui": 3.0.3
     "@aws-amplify/ui-react-v1": "npm:@aws-amplify/ui-react@1.2.9"
     "@radix-ui/react-accordion": ^0.1.1
     "@radix-ui/react-dropdown-menu": ^0.1.1
@@ -99,20 +99,20 @@ __metadata:
     aws-amplify: 3.x.x || 4.x.x
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: b3fbb9dfc9b99a77b07d88a1b4e2f681a7b61fc07da7998962c7b827053f61f4298ab1cef2d89359e1c025596af628dc80bbaa27a8da8ce737cee27e39dabbca
+  checksum: b9155fbfa803cc57e1977a55e6018dca516d0c13bbd587cbfe79e01220d3d722f940cb4d721ec535ba32da17a87a4a74f65553f81c6570885bae2101fd3c3c87
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@aws-amplify/ui@npm:3.0.2"
+"@aws-amplify/ui@npm:3.0.3":
+  version: 3.0.3
+  resolution: "@aws-amplify/ui@npm:3.0.3"
   dependencies:
     lodash: ^4.17.21
     style-dictionary: ^3.0.1
     xstate: ^4.20.1
   peerDependencies:
     aws-amplify: 3.x.x || 4.x.x
-  checksum: b91ff17f5be7171e31124ce62ccb8f444ceac13cf7cc660ec94edb4ee2774e3b5aff37e39d720e8ec784e3d6df5f871fce36f6b70f9501bdf2d44610a32eef8f
+  checksum: a891d4369f56814231157fdf145a3536102f8ea0cb36ef25d6cbfce1bee38e1e10819154c68b40f83f6ef15b6811d94bddb1af0eb376e1da73d6d9bba6c0737f
   languageName: node
   linkType: hard
 
@@ -2450,9 +2450,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 4.3.16
-    "@aws-amplify/core": 4.3.8
-    "@aws-amplify/ui-react": 2.1.1
+    "@aws-amplify/auth": 4.3.18
+    "@aws-amplify/core": 4.3.10
+    "@aws-amplify/ui-react": 2.1.2
     "@babel/core": 7.16.0
     "@babel/runtime": 7.16.3
     "@businessnjgovnavigator/shared": "*"
@@ -2630,9 +2630,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 4.3.16
-    "@aws-amplify/core": 4.3.8
-    "@aws-amplify/ui-react": 2.1.1
+    "@aws-amplify/auth": 4.3.18
+    "@aws-amplify/core": 4.3.10
+    "@aws-amplify/ui-react": 2.1.2
     "@babel/core": 7.16.0
     "@businessnjgovnavigator/shared": "*"
     "@emotion/react": 11.7.0
