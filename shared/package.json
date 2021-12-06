@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.16.3",
-    "@jest/types": "27.4.0",
+    "@jest/types": "27.4.2",
     "@types/jest": "27.0.3",
     "@types/node": "14.18.0",
     "@typescript-eslint/eslint-plugin": "5.5.0",
@@ -33,11 +33,11 @@
     "cross-env": "7.0.3",
     "eslint": "8.3.0",
     "eslint-config-prettier": "8.3.0",
-    "jest": "27.4.0",
+    "jest": "27.4.3",
     "jest-junit": "13.0.0",
     "prettier": "2.5.0",
     "rimraf": "3.0.2",
-    "ts-jest": "27.0.7",
+    "ts-jest": "27.1.0",
     "ts-node": "10.4.0",
     "tsconfig-paths": "3.12.0",
     "typescript": "4.5.2"
