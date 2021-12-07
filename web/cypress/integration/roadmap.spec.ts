@@ -132,12 +132,15 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.intercept("POST", "/local/api/users").as("new-user");
     completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
     cy.wait("@new-user").then((event) => {
-      expect(event.request.body.user.externalStatus).to.deep.equal({
+      console.log(`Received: ${event.request.body.user.externalStatus}`);
+      const expected = {
         newsletter: {
           status: "SUCCESS",
           success: true,
         },
-      });
+      };
+      console.log(`Expected: ${expected}`);
+      expect(event.request.body.user.externalStatus).to.deep.equal(expected);
     });
     cy.url().should("contain", "/roadmap");
   });
