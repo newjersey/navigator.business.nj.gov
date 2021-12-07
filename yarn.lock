@@ -2525,7 +2525,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 5.13.1
     css-loader: 6.5.1
-    cypress: 9.1.0
+    cypress: 9.1.1
     cypress-audit: 1.1.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
@@ -2681,7 +2681,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 5.13.1
     css-loader: 6.5.1
-    cypress: 9.1.0
+    cypress: 9.1.1
     cypress-audit: 1.1.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
@@ -3243,7 +3243,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^2.88.7":
+"@cypress/request@npm:^2.88.10":
   version: 2.88.10
   resolution: "@cypress/request@npm:2.88.10"
   dependencies:
@@ -14506,11 +14506,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:9.1.0":
-  version: 9.1.0
-  resolution: "cypress@npm:9.1.0"
+"cypress@npm:9.1.1":
+  version: 9.1.1
+  resolution: "cypress@npm:9.1.1"
   dependencies:
-    "@cypress/request": ^2.88.7
+    "@cypress/request": ^2.88.10
     "@cypress/xvfb": ^1.2.4
     "@types/node": ^14.14.31
     "@types/sinonjs__fake-timers": ^6.0.2
@@ -14553,7 +14553,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 37f2cd704d9e67c4b525e2e8a723f82b0e0eb573cd276fa6460d86ce665cf2a53fd490a4a0ca79394694ba0d91306a03194479089b57457fdc6b9cb9e9747b54
+  checksum: fe8619a7f012b20dd1239275de019a78393bbbec39d21a3a9a1f44add27596f689db36d4f753db4b517838337cd4610d35cc2d7c45f22b93abfb67c16bb55f66
   languageName: node
   linkType: hard
 
