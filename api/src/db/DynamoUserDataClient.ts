@@ -29,11 +29,19 @@ export const DynamoQlUserDataClient = (db: AWS.DynamoDB, tableName: string): Use
     const statement = `SELECT data FROM "${tableName}" WHERE data["user"].receiveNewsletter = true and (data["user"].externalStatus.newsletter is missing or data["user"].externalStatus.newsletter.success = false)`;
     return search(statement);
   };
+
+  const getNeedToAddToUserTestingUsers = () => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["user"].userTesting = true and (data["user"].externalStatus.userTesting is missing or data["user"].externalStatus.userTesting.success = false)`;
+    return search(statement);
+  };
+
   return {
     search,
     getNeedNewsletterUsers,
+    getNeedToAddToUserTestingUsers,
   };
 };
+
 export const DynamoUserDataClient = (db: AWS.DynamoDB.DocumentClient, tableName: string): UserDataClient => {
   const doMigration = async (data: any): Promise<UserData> => {
     const migratedData = migrateUserData(data);

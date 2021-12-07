@@ -1,18 +1,18 @@
-import { AddNewsletter, NewsletterClient, UserData, UserDataClient } from "../types";
+import { AddToUserTesting, UserData, UserDataClient, UserTestingClient } from "../types";
 
-export const addNewsletterFactory = (
+export const addToUserTestingFactory = (
   userDataClient: UserDataClient,
-  newsletterClient: NewsletterClient
-): AddNewsletter => {
+  userTestingClient: UserTestingClient
+): AddToUserTesting => {
   return async (userData: UserData): Promise<UserData> => {
-    const newsletter = await newsletterClient.add(userData.user.email);
+    const userTesting = await userTestingClient.add(userData.user);
     const user: UserData = {
       ...userData,
       user: {
         ...userData.user,
         externalStatus: {
           ...userData.user.externalStatus,
-          newsletter,
+          userTesting,
         },
       },
     };

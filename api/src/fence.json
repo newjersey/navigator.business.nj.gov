@@ -17,6 +17,7 @@
     "xml2js",
     "winston",
     "winston-cloudwatch",
+    "airtable",
     "@shared/industry",
     "@shared/legalStructure",
     "@shared/municipality",

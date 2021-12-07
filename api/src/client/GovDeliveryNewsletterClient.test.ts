@@ -45,6 +45,7 @@ describe("GovDeliveryNewsletterClient", () => {
       params: { e: "testuser@xyz.com", t: "123", k: "key1234", q_1234: "navigator.com" },
     });
   });
+
   // The endpoint accepts both standard JSON and a stringified json objects wrapped in parentheses, as per GovDelivery api spec.
   it("queries the webservice endpoint with passed data in parentheses", async () => {
     const returnedData = generateGovDeliveryResponse({}, false);
@@ -75,6 +76,7 @@ describe("GovDeliveryNewsletterClient", () => {
     mockAxios.get.mockResolvedValue({ data: response });
     expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "RESPONSE_ERROR" });
   });
+
   it("returns TOPIC_ERROR if the user was created but the request was unsuccessful as they were not able to be added to the topic", async () => {
     const response = {
       errors: { email: ["Unable to subscribe test@evotest.govdelivery.com to topic NJTHING"] },
@@ -85,6 +87,7 @@ describe("GovDeliveryNewsletterClient", () => {
     mockAxios.get.mockResolvedValue({ data: response });
     expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "TOPIC_ERROR" });
   });
+
   it("it returns QUESTION_WARNING if the user request is successful, they were created, and added to a topic, but their question is not updated", async () => {
     const response = {
       errors: { email: ["Unable update responses for test@sink.govdelivery.com"] },
