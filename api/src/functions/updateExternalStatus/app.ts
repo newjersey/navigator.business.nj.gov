@@ -6,6 +6,9 @@ import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory
 import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 
 import { LogWriter } from "@libs/logWriter";
+import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
+import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
+import { addToUserTestingBatch } from "../../domain/user-testing/addToUserTestingBatch";
 
 export default async function handler() {
   const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
@@ -41,6 +44,13 @@ export default async function handler() {
   const GOV_DELIVERY_API_KEY = process.env.GOV_DELIVERY_API_KEY || "tempkey";
   const GOV_DELIVERY_TOPIC = process.env.GOV_DELIVERY_TOPIC || "NJGOV_1";
   const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID || "q_86783";
+
+  const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || "";
+  const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
+  const AIRTABLE_BASE_URL =
+    process.env.AIRTABLE_BASE_URL ||
+    (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
+
   const newsletterGovDeliveryClient = GovDeliveryNewsletterClient({
     baseUrl: GOV_DELIVERY_BASE_URL,
     topic: GOV_DELIVERY_TOPIC,
@@ -49,6 +59,19 @@ export default async function handler() {
     siteUrl: "navigator.business.nj.gov",
     urlQuestion: GOV_DELIVERY_URL_QUESTION_ID,
   });
+
+  const airtableUserTestingClient = AirtableUserTestingClient(
+    {
+      apiKey: AIRTABLE_API_KEY,
+      baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
+      baseUrl: AIRTABLE_BASE_URL,
+    },
+    logger
+  );
+
   const addNewsletter = addNewsletterFactory(dbClient, newsletterGovDeliveryClient);
+  const addToAirtableUserTesting = addToUserTestingFactory(dbClient, airtableUserTestingClient);
+
   await addNewsletterBatch(addNewsletter, qlClient);
+  await addToUserTestingBatch(addToAirtableUserTesting, qlClient);
 }

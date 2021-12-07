@@ -18,6 +18,8 @@ import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
 import { LogWriter } from "@libs/logWriter";
 import { FakeTaxFilingClient } from "../../client/FakeTaxFilingClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
+import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
+import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
 
 const app = express();
 app.use(bodyParser.json());
@@ -51,11 +53,18 @@ const licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_UR
 const BUSINESS_NAME_BASE_URL =
   process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const businessNameClient = WebserviceBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
+
 const GOV_DELIVERY_BASE_URL =
   process.env.GOV_DELIVERY_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 const GOV_DELIVERY_API_KEY = process.env.GOV_DELIVERY_API_KEY || "testkey";
 const GOV_DELIVERY_TOPIC = process.env.GOV_DELIVERY_TOPIC || "NJGOV_17";
 const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID;
+
+const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || "AIRTABLE_API_KEY";
+const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "TEST_BASE_ID";
+const AIRTABLE_BASE_URL =
+  process.env.AIRTABLE_BASE_URL ||
+  (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
 
 const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   baseUrl: GOV_DELIVERY_BASE_URL,
@@ -66,10 +75,20 @@ const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   urlQuestion: GOV_DELIVERY_URL_QUESTION_ID,
 });
 
+const airtableUserTestingClient = AirtableUserTestingClient(
+  {
+    apiKey: AIRTABLE_API_KEY,
+    baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
+    baseUrl: AIRTABLE_BASE_URL,
+  },
+  logger
+);
+
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 
 const addGovDeliveryNewsletter = addNewsletterFactory(userDataClient, govDeliveryNewsletterClient);
+const addToAirtableUserTesting = addToUserTestingFactory(userDataClient, airtableUserTestingClient);
 const searchBusinessName = searchBusinessNameFactory(businessNameClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
@@ -88,7 +107,13 @@ const myNJSelfRegClient = MyNJSelfRegClientFactory(
 app.use(bodyParser.json({ strict: false }));
 app.use(
   "/api",
-  userRouterFactory(userDataClient, updateLicenseStatus, taxFilingClient, addGovDeliveryNewsletter)
+  userRouterFactory(
+    userDataClient,
+    updateLicenseStatus,
+    taxFilingClient,
+    addGovDeliveryNewsletter,
+    addToAirtableUserTesting
+  )
 );
 app.use("/api", businessNameRouterFactory(searchBusinessName));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));

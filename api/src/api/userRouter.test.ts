@@ -11,7 +11,7 @@ import {
   generateUserData,
 } from "../../test/factories";
 import jwt from "jsonwebtoken";
-import { TaxFilingClient, UserDataClient, AddNewsletter } from "../domain/types";
+import { TaxFilingClient, UserDataClient, AddNewsletter, AddToUserTesting } from "../domain/types";
 import { EntityIdStatus } from "@shared/taxFiling";
 import dayjs from "dayjs";
 
@@ -26,6 +26,7 @@ describe("userRouter", () => {
   let stubUserDataClient: jest.Mocked<UserDataClient>;
   let stubTaxFilingClient: jest.Mocked<TaxFilingClient>;
   let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
+  let stubAddToUserTesting: jest.MockedFunction<AddToUserTesting>;
   let stubUpdateLicenseStatus: jest.Mock;
 
   beforeEach(async () => {
@@ -36,13 +37,20 @@ describe("userRouter", () => {
     };
     stubUpdateLicenseStatus = jest.fn();
     stubAddNewsletter = jest.fn();
+    stubAddToUserTesting = jest.fn();
     stubTaxFilingClient = {
       fetchForEntityId: jest.fn(),
     };
     app = express();
     app.use(bodyParser.json());
     app.use(
-      userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus, stubTaxFilingClient, stubAddNewsletter)
+      userRouterFactory(
+        stubUserDataClient,
+        stubUpdateLicenseStatus,
+        stubTaxFilingClient,
+        stubAddNewsletter,
+        stubAddToUserTesting
+      )
     );
   });
 
@@ -239,15 +247,16 @@ describe("userRouter", () => {
       expect(response.body).toEqual({ error: "error" });
     });
 
-    it("adds newsletter to externalStatus if receiveNewsletter is true", async () => {
+    it("adds to newsletter and user testing if true", async () => {
       const userData = generateUserData({
-        user: generateUser({ id: "123", externalStatus: {} }),
+        user: generateUser({ id: "123", externalStatus: {}, userTesting: true, receiveNewsletter: true }),
       });
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       stubUserDataClient.put.mockResolvedValue(generateUserData({}));
 
       await request(app).post(`/users`).send(userData).set("Authorization", "Bearer user-123-token");
       expect(stubAddNewsletter).toHaveBeenCalled();
+      expect(stubAddToUserTesting).toHaveBeenCalled();
     });
   });
 });

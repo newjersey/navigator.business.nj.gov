@@ -11,6 +11,7 @@ export interface UserDataClient {
 export interface UserDataQlClient {
   search: (statement: string) => Promise<UserData[]>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;
+  getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
 }
 export interface BusinessNameClient {
   search: (name: string) => Promise<string[]>;
@@ -21,6 +22,7 @@ export interface NewsletterClient {
 }
 
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;
+export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
@@ -28,6 +30,10 @@ export interface LicenseStatusClient {
 
 export interface TaxFilingClient {
   fetchForEntityId: (entityId: string) => Promise<TaxFilingData>;
+}
+
+export interface UserTestingClient {
+  add: (user: BusinessUser) => Promise<UserTestingResponse>;
 }
 
 export type SectionType = "PLAN" | "START" | "OPERATE";
@@ -125,8 +131,13 @@ export interface NewsletterResponse {
   status: NewsletterStatus;
 }
 
+export interface UserTestingResponse {
+  success: boolean;
+}
+
 export type ExternalStatus = {
   newsletter?: NewsletterResponse;
+  userTesting?: UserTestingResponse;
 };
 
 export type BusinessUser = {

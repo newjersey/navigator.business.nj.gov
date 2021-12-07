@@ -9,6 +9,8 @@ import {
   Preferences,
   SelfRegResponse,
   UserData,
+  NewsletterResponse,
+  UserTestingResponse,
 } from "../src/domain/types";
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
@@ -186,15 +188,26 @@ export const randomNewsletterStatus = (failed = !!(randomInt() % 2)): Newsletter
   return status[randomIndex];
 };
 
-export const generateExternalStatus = (
-  overrides: Partial<ExternalStatus>,
-  failed = !!(randomInt() % 2)
-): ExternalStatus => {
+export const generateExternalStatus = (overrides: Partial<ExternalStatus>): ExternalStatus => {
   return {
-    newsletter: {
-      success: !failed,
-      status: randomNewsletterStatus(failed),
-    },
+    newsletter: generateNewsletterResponse({}),
+    userTesting: generateUserTestingResponse({}),
+    ...overrides,
+  };
+};
+
+export const generateNewsletterResponse = (overrides: Partial<NewsletterResponse>): NewsletterResponse => {
+  const failed = !!(randomInt() % 2);
+  return {
+    success: !failed,
+    status: randomNewsletterStatus(failed),
+    ...overrides,
+  };
+};
+
+export const generateUserTestingResponse = (overrides: Partial<UserTestingResponse>): UserTestingResponse => {
+  return {
+    success: !!(randomInt() % 2),
     ...overrides,
   };
 };
