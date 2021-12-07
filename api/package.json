@@ -73,7 +73,7 @@
     "jest": "27.4.3",
     "jest-dynalite": "3.4.4",
     "jest-junit": "13.0.0",
-    "prettier": "2.5.0",
+    "prettier": "2.5.1",
     "rimraf": "3.0.2",
     "serverless": "2.68.0",
     "serverless-dynamodb-local": "0.2.40",
