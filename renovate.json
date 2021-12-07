@@ -7,7 +7,7 @@
   "ignorePaths": [".yarn"],
   "postUpdateOptions": ["yarnDedupeHighest"],
   "lockFileMaintenance": { "enabled": true },
-  "ignoreDeps": ["node"],
+  "ignoreDeps": ["node", "cimg/node"],
   "packageRules": [
     {
       "matchPackagePrefixes": ["cypress"],
