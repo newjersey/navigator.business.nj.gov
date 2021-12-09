@@ -128,7 +128,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-testid="info-panel"]').should("not.exist");
   });
 
-  it.only("user data is updated if opted into newsletter", () => {
+  it("user data is updated if opted into newsletter", () => {
     cy.intercept("POST", "/local/api/users").as("new-user");
     completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
     cy.wait("@new-user").then((event) => {
