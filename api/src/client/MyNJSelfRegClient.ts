@@ -1,7 +1,8 @@
-import { BusinessUser, SelfRegClient, SelfRegResponse } from "../domain/types";
+import { SelfRegClient, SelfRegResponse } from "../domain/types";
 import axios from "axios";
 import xml2js from "xml2js";
 import { LogWriterType } from "../libs/logWriter";
+import { BusinessUser } from "@shared/businessUser";
 
 type MyNJConfig = {
   serviceToken: string;

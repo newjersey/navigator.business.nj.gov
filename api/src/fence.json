@@ -18,6 +18,7 @@
     "winston",
     "winston-cloudwatch",
     "airtable",
+    "@shared/businessUser",
     "@shared/industry",
     "@shared/legalStructure",
     "@shared/municipality",

@@ -1,4 +1,10 @@
-import { LicenseStatus, LicenseStatusItem, ProfileData, TaxFilingData } from "@businessnjgovnavigator/shared";
+import {
+  BusinessUser,
+  LicenseStatus,
+  LicenseStatusItem,
+  ProfileData,
+  TaxFilingData,
+} from "@businessnjgovnavigator/shared";
 
 export interface UserData {
   user: BusinessUser;
@@ -287,36 +293,6 @@ export interface PostOnboarding {
   radioNo: string;
   radioNoContent: string;
 }
-
-export const newsletterStatusList = [
-  "SUCCESS",
-  "EMAIL_ERROR",
-  "TOPIC_ERROR",
-  "RESPONSE_ERROR",
-  "QUESTION_WARNING",
-] as const;
-
-export type NewsletterStatus = typeof newsletterStatusList[number];
-
-export interface NewsletterResponse {
-  success: boolean;
-  status: NewsletterStatus;
-}
-
-export type ExternalStatus = {
-  newsletter?: NewsletterResponse;
-};
-
-export type BusinessUser = {
-  name?: string;
-  email: string;
-  id: string;
-  externalStatus: ExternalStatus;
-  receiveNewsletter: boolean;
-  userTesting: boolean;
-  myNJUserKey?: string;
-  intercomHash?: string;
-};
 
 export interface SessionHelper {
   getCurrentToken: () => Promise<string>;

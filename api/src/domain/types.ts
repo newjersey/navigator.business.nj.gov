@@ -1,4 +1,5 @@
 import * as https from "https";
+import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
 import { ProfileData } from "@shared/profileData";
 import { TaxFilingData } from "@shared/taxFiling";
@@ -113,43 +114,6 @@ export interface Preferences {
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
-
-export const newsletterStatusList = [
-  "SUCCESS",
-  "EMAIL_ERROR",
-  "TOPIC_ERROR",
-  "RESPONSE_ERROR",
-  "RESPONSE_FAIL",
-  "RESPONSE_WARNING",
-  "QUESTION_WARNING",
-] as const;
-
-export type NewsletterStatus = typeof newsletterStatusList[number];
-
-export interface NewsletterResponse {
-  success: boolean;
-  status: NewsletterStatus;
-}
-
-export interface UserTestingResponse {
-  success: boolean;
-}
-
-export type ExternalStatus = {
-  newsletter?: NewsletterResponse;
-  userTesting?: UserTestingResponse;
-};
-
-export type BusinessUser = {
-  name?: string;
-  email: string;
-  id: string;
-  externalStatus: ExternalStatus;
-  receiveNewsletter: boolean;
-  userTesting: boolean;
-  myNJUserKey?: string;
-  intercomHash?: string;
-};
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {

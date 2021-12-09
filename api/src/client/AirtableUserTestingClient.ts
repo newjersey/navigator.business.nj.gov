@@ -1,7 +1,8 @@
-import { BusinessUser, UserTestingClient, UserTestingResponse } from "../domain/types";
+import { UserTestingClient } from "../domain/types";
 import dayjs from "dayjs";
 import Airtable from "airtable";
 import { LogWriterType } from "@libs/logWriter";
+import { BusinessUser, UserTestingResponse } from "@shared/businessUser";
 
 type AirtableConfig = {
   apiKey: string;
