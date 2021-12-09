@@ -128,18 +128,18 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-testid="info-panel"]').should("not.exist");
   });
 
-  it("user data is updated if opted into newsletter", () => {
+  it.only("user data is updated if opted into newsletter", () => {
     cy.intercept("POST", "/local/api/users").as("new-user");
     completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
     cy.wait("@new-user").then((event) => {
-      console.log(`Received: ${event.request.body.user.externalStatus}`);
+      console.log(`Received: ${JSON.stringify(event.request.body.user.externalStatus)}`);
       const expected = {
         newsletter: {
-          status: "SUCCESS",
           success: true,
+          status: "SUCCESS",
         },
       };
-      console.log(`Expected: ${expected}`);
+      console.log(`Expected: ${JSON.stringify(expected)}`);
       expect(event.request.body.user.externalStatus).to.deep.equal(expected);
     });
     cy.url().should("contain", "/roadmap");
