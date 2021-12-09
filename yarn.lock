@@ -2378,7 +2378,7 @@ __metadata:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 27.4.2
     "@serverless/typescript": 2.68.0
-    "@types/aws-lambda": 8.10.85
+    "@types/aws-lambda": 8.10.86
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
     "@types/express": 4.17.13
@@ -2488,7 +2488,7 @@ __metadata:
     "@testing-library/jest-dom": 5.15.1
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
-    "@types/aws-lambda": 8.10.85
+    "@types/aws-lambda": 8.10.86
     "@types/broken-link-checker": 0.7.1
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
@@ -8619,10 +8619,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/aws-lambda@npm:8.10.85, @types/aws-lambda@npm:^8.10.56":
-  version: 8.10.85
-  resolution: "@types/aws-lambda@npm:8.10.85"
-  checksum: c7817c84f4e1a17c000dc54b57686ebafa2429701919a095d5fb266a067edf7c14009460e9d1653a2703dadedca0e5849ce108c35e7c82560f023fdaf39abc36
+"@types/aws-lambda@npm:8.10.86, @types/aws-lambda@npm:^8.10.56":
+  version: 8.10.86
+  resolution: "@types/aws-lambda@npm:8.10.86"
+  checksum: b452cf207fc749e58c10250e52bd05e7edeed96763edcbf6645642117e88e57bbe7794c04cd3e5f42d7b383490c566cfbbc0e2f4f31e9a90f7175d1731e874ec
   languageName: node
   linkType: hard
 
