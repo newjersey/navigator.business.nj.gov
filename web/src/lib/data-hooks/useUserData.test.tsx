@@ -1,7 +1,7 @@
 import React from "react";
 import { useUserData, UseUserDataResponse } from "./useUserData";
 import { generateUseUserDataResponse, withAuth, withUserDataError } from "@/test/helpers";
-import { BusinessUser } from "@/lib/types/types";
+import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import * as api from "@/lib/api-client/apiClient";
 import { generateUser, generateUserData } from "@/test/factories";
 import { act, render } from "@testing-library/react";

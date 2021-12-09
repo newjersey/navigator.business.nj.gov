@@ -1,5 +1,4 @@
 import {
-  BusinessUser,
   LicenseData,
   NameAndAddress,
   NameAvailability,
@@ -13,6 +12,7 @@ import {
   UserData,
 } from "@/lib/types/types";
 import {
+  BusinessUser,
   Industry,
   Industries,
   LegalStructure,

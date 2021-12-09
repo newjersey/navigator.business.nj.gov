@@ -1,4 +1,4 @@
-import { BusinessUser } from "@/lib/types/types";
+import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import { Auth } from "@aws-amplify/auth";
 import awsExports from "../../../aws-exports";
 import axios, { AxiosResponse } from "axios";

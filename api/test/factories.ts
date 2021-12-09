@@ -1,17 +1,19 @@
 import {
-  BusinessUser,
-  ExternalStatus,
   LicenseData,
   LicenseEntity,
   NameAndAddress,
-  newsletterStatusList,
-  NewsletterStatus,
   Preferences,
   SelfRegResponse,
   UserData,
+} from "../src/domain/types";
+import {
+  BusinessUser,
+  ExternalStatus,
+  newsletterStatusList,
+  NewsletterStatus,
   NewsletterResponse,
   UserTestingResponse,
-} from "../src/domain/types";
+} from "@shared/businessUser";
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import { LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";

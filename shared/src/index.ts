@@ -1,3 +1,4 @@
+export * from "./businessUser";
 export * from "./industry";
 export * from "./legalStructure";
 export * from "./licenseStatus";

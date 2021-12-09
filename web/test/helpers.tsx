@@ -9,7 +9,8 @@ import {
 } from "@/pages/_app";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
-import { BusinessUser, Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
+import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
+import { BusinessUser } from "@businessnjgovnavigator/shared";
 import os from "os";
 import { RenderResult } from "@testing-library/react";
 
