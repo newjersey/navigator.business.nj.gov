@@ -1,6 +1,4 @@
 import {
-  LicenseData,
-  NameAndAddress,
   NameAvailability,
   Preferences,
   Roadmap,
@@ -9,7 +7,6 @@ import {
   Step,
   Task,
   TaskLink,
-  UserData,
 } from "@/lib/types/types";
 import {
   BusinessUser,
@@ -17,13 +14,16 @@ import {
   Industries,
   LegalStructure,
   LegalStructures,
+  LicenseData,
   LicenseStatusItem,
   LicenseStatusResult,
   Municipality,
   MunicipalityDetail,
+  NameAndAddress,
   ProfileData,
   TaxFiling,
   TaxFilingData,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import { getSectionNames } from "@/lib/utils/helpers";

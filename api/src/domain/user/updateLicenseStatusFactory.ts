@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  NameAndAddress,
-  SearchLicenseStatus,
-  TaskProgress,
-  UpdateLicenseStatus,
-  UserData,
-  UserDataClient,
-} from "../types";
-import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
+import { SearchLicenseStatus, UpdateLicenseStatus, UserDataClient } from "../types";
+import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
+import { NameAndAddress } from "@shared/misc";
+import { TaskProgress, UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 

@@ -9,9 +9,7 @@ import {
 } from "@/test/factories";
 import {
   createEmptyProfileDisplayContent as createEmptyProfileDisplayContent,
-  createEmptyUserData,
   ProfileDisplayContent,
-  UserData,
 } from "@/lib/types/types";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -25,6 +23,7 @@ import { ProfileDefaults } from "@/display-defaults//ProfileDefaults";
 import { LookupIndustryById, Municipality } from "@businessnjgovnavigator/shared";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { templateEval } from "@/lib/utils/helpers";
+import { createEmptyUserData, UserData } from "@businessnjgovnavigator/shared/";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");

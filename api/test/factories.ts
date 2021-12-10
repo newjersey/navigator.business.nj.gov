@@ -1,11 +1,4 @@
-import {
-  LicenseData,
-  LicenseEntity,
-  NameAndAddress,
-  Preferences,
-  SelfRegResponse,
-  UserData,
-} from "../src/domain/types";
+import { SelfRegResponse } from "../src/domain/types";
 import {
   BusinessUser,
   ExternalStatus,
@@ -15,12 +8,14 @@ import {
   UserTestingResponse,
 } from "@shared/businessUser";
 import { Industries, Industry } from "@shared/industry";
+import { LicenseStatusItem, LicenseStatusResult, LicenseData, LicenseEntity } from "@shared/license";
+import { NameAndAddress } from "@shared/misc";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
-import { LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
 import { ProfileData } from "@shared/profileData";
 import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import dayjs from "dayjs";
 import { Municipality } from "@shared/municipality";
+import { Preferences, UserData } from "@shared/userData";
 
 export const randomInt = (length = 8): number =>
   Math.floor(

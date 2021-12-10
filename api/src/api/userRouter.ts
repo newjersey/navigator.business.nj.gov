@@ -2,10 +2,8 @@ import { Request, Response, Router } from "express";
 import {
   AddNewsletter,
   AddToUserTesting,
-  createEmptyUserData,
   TaxFilingClient,
   UpdateLicenseStatus,
-  UserData,
   UserDataClient,
 } from "../domain/types";
 import jwt from "jsonwebtoken";
@@ -13,6 +11,7 @@ import dayjs from "dayjs";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 import { shouldAddToNewsletter } from "../domain/newsletter/shouldAddToNewsletter";
 import { shouldAddToUserTesting } from "../domain/user-testing/shouldAddToUserTesting";
+import { createEmptyUserData, UserData } from "@shared/userData";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {

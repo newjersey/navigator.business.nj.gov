@@ -1,4 +1,4 @@
-import { UpdateLicenseStatus, UserData, UserDataClient } from "../types";
+import { UpdateLicenseStatus, UserDataClient } from "../types";
 import {
   generateLicenseData,
   generateLicenseStatusItem,
@@ -9,6 +9,7 @@ import {
 } from "../../../test/factories";
 import dayjs from "dayjs";
 import { updateLicenseStatusFactory } from "./updateLicenseStatusFactory";
+import { UserData } from "@shared/userData";
 
 describe("updateLicenseStatus", () => {
   let updateLicenseStatus: UpdateLicenseStatus;

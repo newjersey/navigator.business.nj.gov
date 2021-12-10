@@ -16,7 +16,6 @@ import { GetStaticPropsResult } from "next";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
-  createEmptyProfileData,
   createEmptyProfileDisplayContent,
   createProfileFieldErrorMap,
   OnboardingStatus,
@@ -45,7 +44,7 @@ import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { RoadmapContext } from "@/pages/_app";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { NextSeo } from "next-seo";
-import { Municipality, ProfileData } from "@businessnjgovnavigator/shared";
+import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import Link from "next/link";
 import { FlowType, getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 

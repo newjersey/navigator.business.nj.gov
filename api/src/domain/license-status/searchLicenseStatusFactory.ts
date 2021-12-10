@@ -1,5 +1,6 @@
-import { LicenseEntity, LicenseStatusClient, NameAndAddress, SearchLicenseStatus } from "../types";
-import { LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
+import { LicenseStatusClient, SearchLicenseStatus } from "../types";
+import { LicenseStatusItem, LicenseStatusResult, LicenseEntity } from "@shared/license";
+import { NameAndAddress } from "@shared/misc";
 import { inputManipulator } from "../inputManipulator";
 import dayjs from "dayjs";
 

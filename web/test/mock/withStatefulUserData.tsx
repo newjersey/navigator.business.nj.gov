@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode, createContext, useContext, useState } from "react";
-import { UserData } from "@/lib/types/types";
+import { UserData } from "@businessnjgovnavigator/shared";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { getLastCalledWith } from "@/test/helpers";
 

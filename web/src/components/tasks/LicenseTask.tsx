@@ -2,8 +2,8 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { Content } from "@/components/Content";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import React, { ReactElement, useState } from "react";
-import { NameAndAddress, Task, UserData } from "@/lib/types/types";
-import { LicenseStatusResult } from "@businessnjgovnavigator/shared";
+import { Task } from "@/lib/types/types";
+import { LicenseStatusResult, UserData } from "@businessnjgovnavigator/shared";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
@@ -14,6 +14,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
+import { NameAndAddress } from "@businessnjgovnavigator/shared";
 
 interface Props {
   task: Task;

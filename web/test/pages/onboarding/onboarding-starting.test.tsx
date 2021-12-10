@@ -5,7 +5,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { createEmptyUserData } from "@/lib/types/types";
+import { createEmptyUserData } from "@businessnjgovnavigator/shared";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";

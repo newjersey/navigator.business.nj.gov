@@ -3,13 +3,8 @@ import { NumericField } from "@/components/onboarding/NumericField";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { OnboardingContext } from "@/pages/onboarding";
-import {
-  createEmptyProfileData,
-  createEmptyProfileDisplayContent,
-  OperateDisplayContent,
-  ProfileFields,
-} from "@/lib/types/types";
-import { ProfileData } from "@businessnjgovnavigator/shared/";
+import { createEmptyProfileDisplayContent, OperateDisplayContent, ProfileFields } from "@/lib/types/types";
+import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { Alert } from "@/components/njwds/Alert";
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";

@@ -1,4 +1,5 @@
-import { AddToUserTesting, UserData, UserDataQlClient } from "../types";
+import { UserData } from "@shared/userData";
+import { AddToUserTesting, UserDataQlClient } from "../types";
 
 type AddToUserTestingBatchResponse = {
   success: number;

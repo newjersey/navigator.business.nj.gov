@@ -1,10 +1,5 @@
-import { Municipality } from "@businessnjgovnavigator/shared";
-import {
-  createEmptyProfileDisplayContent,
-  createEmptyUserData,
-  ProfileDisplayContent,
-  UserData,
-} from "@/lib/types/types";
+import { createEmptyUserData, Municipality, UserData } from "@businessnjgovnavigator/shared";
+import { createEmptyProfileDisplayContent, ProfileDisplayContent } from "@/lib/types/types";
 import { fireEvent, render, RenderResult, waitForElementToBeRemoved, within } from "@testing-library/react";
 import { generateUser } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";

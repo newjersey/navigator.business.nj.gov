@@ -15,8 +15,8 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { FilingReference, OperateDisplayContent, UserData } from "@/lib/types/types";
-import { EntityIdStatus } from "@businessnjgovnavigator/shared";
+import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
+import { EntityIdStatus, UserData } from "@businessnjgovnavigator/shared";
 import { getByTextAcrossElements, queryByTextAcrossElements } from "@/test/helpers";
 import { useMockDate } from "@/test/mock/useMockDate";
 import { createTheme, ThemeProvider } from "@mui/material";

@@ -18,12 +18,13 @@
     "winston",
     "winston-cloudwatch",
     "airtable",
-    "@shared/businessUser",
+    "@shared/*",
     "@shared/industry",
     "@shared/legalStructure",
     "@shared/municipality",
     "@shared/taxFiling",
-    "@shared/licenseStatus",
-    "@shared/profileData"
+    "@shared/license",
+    "@shared/profileData",
+    "@shared/userData"
   ]
 }

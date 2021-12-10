@@ -5,14 +5,13 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { createEmptyUserData } from "@/lib/types/types";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { templateEval } from "@/lib/utils/helpers";
 import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { createEmptyUserData, LookupIndustryById } from "@businessnjgovnavigator/shared";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");

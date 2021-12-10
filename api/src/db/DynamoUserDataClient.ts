@@ -2,8 +2,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import AWS from "aws-sdk";
-import { UserData, UserDataClient, UserDataQlClient } from "../domain/types";
+import { UserDataClient, UserDataQlClient } from "../domain/types";
 import { CURRENT_VERSION, MigrationFunction, Migrations } from "./migrations/migrations";
+import { UserData } from "@shared/userData";
 
 const migrateUserData = (data: any): any => {
   const dataVersion = data.version || 0;
