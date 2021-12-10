@@ -1,4 +1,5 @@
-import { AddToUserTesting, UserData, UserDataClient, UserTestingClient } from "../types";
+import { UserData } from "@shared/userData";
+import { AddToUserTesting, UserDataClient, UserTestingClient } from "../types";
 
 export const addToUserTestingFactory = (
   userDataClient: UserDataClient,

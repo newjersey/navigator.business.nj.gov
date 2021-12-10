@@ -1,5 +1,6 @@
+import { LicenseEntity } from "@shared/license";
 import AWS from "aws-sdk";
-import { LicenseEntity, LicenseStatusClient } from "../domain/types";
+import { LicenseStatusClient } from "../domain/types";
 
 export const FakeLicenseStatusClient = (): LicenseStatusClient => {
   const search = async (): Promise<LicenseEntity[]> => {

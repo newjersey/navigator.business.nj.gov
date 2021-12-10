@@ -3,7 +3,6 @@ import {
   Roadmap,
   Step,
   Task,
-  UserData,
   SectionType,
   SectionCompletion,
   Preferences,
@@ -14,6 +13,7 @@ import {
 import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { UserData } from "@businessnjgovnavigator/shared/";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);

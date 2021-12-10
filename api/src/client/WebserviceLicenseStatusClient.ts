@@ -1,6 +1,7 @@
-import { LicenseEntity, LicenseStatusClient } from "../domain/types";
+import { LicenseStatusClient } from "../domain/types";
 import axios, { AxiosError } from "axios";
 import { LogWriterType } from "../libs/logWriter";
+import { LicenseEntity } from "@shared/license";
 
 export const WebserviceLicenseStatusClient = (
   baseUrl: string,

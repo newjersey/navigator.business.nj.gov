@@ -1,12 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import {
-  NameAndAddress,
-  NameAvailability,
-  SelfRegRequest,
-  SelfRegResponse,
-  UserData,
-} from "@/lib/types/types";
+import { NameAvailability, SelfRegRequest, SelfRegResponse } from "@/lib/types/types";
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
+import { NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
 export const getUserData = (id: string): Promise<UserData> => {

@@ -1,7 +1,8 @@
 import * as https from "https";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
-import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/licenseStatus";
-import { ProfileData } from "@shared/profileData";
+import { LicenseStatusResult, LicenseEntity } from "@shared/license";
+import { NameAndAddress } from "@shared/misc";
+import { UserData } from "@shared/userData";
 import { TaxFilingData } from "@shared/taxFiling";
 
 export interface UserDataClient {
@@ -37,8 +38,6 @@ export interface UserTestingClient {
   add: (user: BusinessUser) => Promise<UserTestingResponse>;
 }
 
-export type SectionType = "PLAN" | "START" | "OPERATE";
-
 export interface SelfRegClient {
   grant: (user: BusinessUser) => Promise<SelfRegResponse>;
   resume: (authID: string) => Promise<SelfRegResponse>;
@@ -57,97 +56,7 @@ export type SearchLicenseStatus = (
 export type UpdateLicenseStatus = (userId: string, nameAndAddress: NameAndAddress) => Promise<UserData>;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;
 
-export type NameAndAddress = {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
-};
-
-export interface LicenseData {
-  nameAndAddress: NameAndAddress;
-  completedSearch: boolean;
-  lastCheckedStatus: string;
-  status: LicenseStatus;
-  items: LicenseStatusItem[];
-}
-
-export type LicenseEntity = {
-  fullName: string;
-  addressLine1: string;
-  addressCity: string;
-  addressState: string;
-  addressCounty: string;
-  addressZipCode: string;
-  professionName: string;
-  licenseType: string;
-  applicationNumber: string;
-  licenseNumber: string;
-  licenseStatus: string;
-  issueDate: string;
-  expirationDate: string;
-  checklistItem: string;
-  checkoffStatus: "Completed" | "Unchecked" | "Not Applicable";
-  dateThisStatus: string;
-};
-
 export type NameAvailability = {
   status: "AVAILABLE" | "UNAVAILABLE";
   similarNames: string[];
-};
-
-export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
-
-export interface UserData {
-  user: BusinessUser;
-  profileData: ProfileData;
-  formProgress: FormProgress;
-  taskProgress: Record<string, TaskProgress>;
-  licenseData: LicenseData | undefined;
-  preferences: Preferences;
-  taxFilingData: TaxFilingData;
-}
-
-export interface Preferences {
-  roadmapOpenSections: SectionType[];
-  roadmapOpenSteps: number[];
-}
-
-export type FormProgress = "UNSTARTED" | "COMPLETED";
-
-export const createEmptyUserData = (user: BusinessUser): UserData => {
-  return {
-    user: user,
-    profileData: createEmptyProfileData(),
-    formProgress: "UNSTARTED",
-    taskProgress: {},
-    licenseData: undefined,
-    preferences: {
-      roadmapOpenSections: ["PLAN", "START"],
-      roadmapOpenSteps: [],
-    },
-    taxFilingData: {
-      entityIdStatus: "UNKNOWN",
-      filings: [],
-    },
-  };
-};
-
-export const createEmptyProfileData = (): ProfileData => {
-  return {
-    hasExistingBusiness: undefined,
-    businessName: "",
-    industryId: undefined,
-    legalStructureId: undefined,
-    municipality: undefined,
-    liquorLicense: false,
-    homeBasedBusiness: false,
-    constructionRenovationPlan: undefined,
-    entityId: undefined,
-    employerId: undefined,
-    taxId: undefined,
-    notes: "",
-    certificationIds: [],
-    existingEmployees: undefined,
-  };
 };

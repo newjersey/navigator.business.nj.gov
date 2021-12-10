@@ -1,5 +1,7 @@
+import { NameAndAddress } from "@shared/misc";
+import { UserData } from "@shared/userData";
 import { Router } from "express";
-import { NameAndAddress, UpdateLicenseStatus, UserData } from "../domain/types";
+import { UpdateLicenseStatus } from "../domain/types";
 import { getSignedInUserId } from "./userRouter";
 
 export const licenseStatusRouterFactory = (updateLicenseStatus: UpdateLicenseStatus): Router => {

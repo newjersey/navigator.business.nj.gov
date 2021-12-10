@@ -7,11 +7,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import {
-  createEmptyProfileData,
-  createEmptyProfileDisplayContent as createEmptyProfileDisplayContent,
-  createEmptyUserData,
-} from "@/lib/types/types";
+import { createEmptyProfileDisplayContent as createEmptyProfileDisplayContent } from "@/lib/types/types";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { withRoadmap } from "@/test/helpers";
@@ -21,6 +17,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import { createEmptyUserData, createEmptyProfileData } from "@businessnjgovnavigator/shared/";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");

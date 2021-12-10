@@ -13,7 +13,6 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import {
-  createEmptyProfileData,
   createProfileFieldErrorMap,
   ProfileDisplayContent,
   ProfileFieldErrorMap,
@@ -38,7 +37,7 @@ import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
-import { Municipality, ProfileData } from "@businessnjgovnavigator/shared";
+import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import { OnboardingStatusLookup } from "@/lib/utils/helpers";
 import { Button } from "@/components/njwds-extended/Button";
 

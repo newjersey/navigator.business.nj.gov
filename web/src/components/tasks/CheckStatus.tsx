@@ -5,7 +5,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createEmptyNameAndAddress, NameAndAddress } from "@/lib/types/types";
+import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared";
 import { Alert } from "@/components/njwds/Alert";
 import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";

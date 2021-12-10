@@ -12,7 +12,8 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { SectionType, UserData } from "@/lib/types/types";
+import { SectionType } from "@/lib/types/types";
+import { UserData } from "@businessnjgovnavigator/shared/";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 

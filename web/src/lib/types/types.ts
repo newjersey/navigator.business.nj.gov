@@ -1,79 +1,16 @@
-import {
-  BusinessUser,
-  LicenseStatus,
-  LicenseStatusItem,
-  ProfileData,
-  TaxFilingData,
-} from "@businessnjgovnavigator/shared";
-
-export interface UserData {
-  user: BusinessUser;
-  profileData: ProfileData;
-  formProgress: FormProgress;
-  taskProgress: Record<string, TaskProgress>;
-  licenseData: LicenseData | undefined;
-  preferences: Preferences;
-  taxFilingData: TaxFilingData;
-}
+import { emptyProfileData, BusinessUser, ProfileData } from "@businessnjgovnavigator/shared";
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
-export const createEmptyUserData = (user: BusinessUser): UserData => {
-  return {
-    user: user,
-    profileData: createEmptyProfileData(),
-    formProgress: "UNSTARTED",
-    taskProgress: {},
-    licenseData: undefined,
-    preferences: {
-      roadmapOpenSections: ["PLAN", "START"],
-      roadmapOpenSteps: [],
-    },
-    taxFilingData: {
-      entityIdStatus: "UNKNOWN",
-      filings: [],
-    },
-  };
-};
-
 export interface Preferences {
   roadmapOpenSections: SectionType[];
   roadmapOpenSteps: number[];
 }
 
-const emptyProfileData: ProfileData = {
-  hasExistingBusiness: undefined,
-  businessName: "",
-  industryId: undefined,
-  legalStructureId: undefined,
-  municipality: undefined,
-  liquorLicense: false,
-  homeBasedBusiness: false,
-  constructionRenovationPlan: undefined,
-  entityId: undefined,
-  employerId: undefined,
-  taxId: undefined,
-  notes: "",
-  certificationIds: [],
-  existingEmployees: undefined,
-};
-
-export const createEmptyProfileData = (): ProfileData => {
-  return emptyProfileData;
-};
-
 export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS";
-
-export interface LicenseData {
-  nameAndAddress: NameAndAddress;
-  completedSearch: boolean;
-  lastCheckedStatus: string;
-  status: LicenseStatus;
-  items: LicenseStatusItem[];
-}
 
 export type OperateDisplayContent = {
   entityIdMd: string;
@@ -308,20 +245,6 @@ export type NameAvailability = {
   status: "AVAILABLE" | "UNAVAILABLE";
   similarNames: string[];
 };
-
-export type NameAndAddress = {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
-};
-
-export const createEmptyNameAndAddress = (): NameAndAddress => ({
-  name: "",
-  addressLine1: "",
-  addressLine2: "",
-  zipCode: "",
-});
 
 export type SelfRegResponse = {
   authRedirectURL: string;

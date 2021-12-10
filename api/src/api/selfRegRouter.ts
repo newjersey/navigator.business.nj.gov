@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { createEmptyUserData, SelfRegClient, UserData, UserDataClient } from "../domain/types";
+import { SelfRegClient, UserDataClient } from "../domain/types";
 import { v4 as uuidv4 } from "uuid";
 import { createHmac } from "crypto";
+import { createEmptyUserData, UserData } from "@shared/userData";
 
 export const selfRegRouterFactory = (
   userDataClient: UserDataClient,
