@@ -6,10 +6,10 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v4-yarn-deploy-deps-{{ checksum "yarn.lock" }}
-            - v4-yarn-deps-{{ checksum "yarn.lock" }}
-            - v4-yarn-deploy-deps-
-            - v4-yarn-deps-
+            - v5-yarn-deploy-deps-{{ checksum "yarn.lock" }}
+            - v5-yarn-deps-{{ checksum "yarn.lock" }}
+            - v5-yarn-deploy-deps-
+            - v5-yarn-deps-
       - run:
           name: Install yarn packages
           command: yarn install
@@ -30,7 +30,6 @@ commands:
           command: |
             sudo apt update
             sudo apt install -y openjdk-11-jdk-headless
-      - setup-npm-global
       - bootstrap-code
       - run:
           name: Configure Amplify
@@ -43,6 +42,7 @@ commands:
 
   configure-and-build:
     steps:
+      - setup-npm-global
       - configure
       - run:
           name: Build
@@ -102,21 +102,21 @@ commands:
   store-cache:
     steps:
       - save_cache:
-          key: v4-yarn-deps-{{ checksum "yarn.lock" }}
+          key: v5-yarn-deps-{{ checksum "yarn.lock" }}
           paths:
             - ./.yarn/cache
             - ~/.npm-global
-            - /root/.cache/Cypress
+            - ~/.cache/Cypress
 
   store-deploy-cache:
     steps:
       - save_cache:
-          key: v4-yarn-deploy-deps-{{ checksum "yarn.lock" }}
+          key: v5-yarn-deploy-deps-{{ checksum "yarn.lock" }}
           paths:
             - ./.yarn/cache
             - ./web/.next/cache
             - ~/.npm-global
-            - /root/.cache/Cypress
+            - ~/.cache/Cypress
 
   deploy-serverless:
     steps:
@@ -250,8 +250,23 @@ jobs:
     steps:
       - set-dev-env-vars
       - configure-and-build
-      - code-quality
       - store-cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - '*'
+
+  lint:
+    docker:
+      - image: cimg/node:14.18.2
+    resource_class: large
+    steps:
+      - set-dev-env-vars
+      - attach_workspace:
+            at: .
+      - configure
+      - bootstrap-code
+      - code-quality
       - store_test_results:
           path: coverage/test_results
       - store_artifacts:
@@ -272,6 +287,8 @@ jobs:
       - image: cimg/node:14.18.2
     steps:
       - set-dev-env-vars
+      - attach_workspace:
+            at: .
       - deploy
       - deploy-storybook
       - store-deploy-cache
@@ -313,6 +330,8 @@ jobs:
       - image: cimg/node:14.18.2-browsers
     steps:
       - set-cypress-env-vars
+      - attach_workspace:
+            at: .
       - configure-and-build
       - install-chrome
       - perform-cypress-tests:
@@ -370,6 +389,13 @@ workflows:
             branches:
               ignore:
                 - /^release-.*/
+      - lint:
+          filters:
+            branches:
+              ignore:
+                - /^release-.*/
+          requires:
+            - build
       - cypress-tests:
           name: Cypress Tests - Group 1
           suite: group1
@@ -378,6 +404,8 @@ workflows:
               ignore:
                 - main
                 - /^release-.*/
+          requires:
+            - build
       - cypress-tests:
           name: Cypress Tests - Group 2
           suite: group2
@@ -386,6 +414,8 @@ workflows:
               ignore:
                 - main
                 - /^release-.*/
+          requires:
+            - build
       - cypress-tests:
           name: Cypress Tests - Group 3
           suite: group3
@@ -394,6 +424,8 @@ workflows:
               ignore:
                 - main
                 - /^release-.*/
+          requires:
+            - build
       - cypress-tests:
           name: Cypress Tests - Group 1
           enable-dashboard: true
@@ -402,6 +434,8 @@ workflows:
             branches:
               only:
                 - main
+          requires:
+            - build
       - cypress-tests:
           name: Cypress Tests - Group 2
           enable-dashboard: true
@@ -410,6 +444,8 @@ workflows:
             branches:
               only:
                 - main
+          requires:
+            - build
       - cypress-tests:
           name: Cypress Tests - Group 3
           enable-dashboard: true
@@ -418,6 +454,8 @@ workflows:
             branches:
               only:
                 - main
+          requires:
+            - build
       - deploy-dev:
           name: dev-deploy
           filters:
