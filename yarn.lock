@@ -2395,7 +2395,7 @@ __metadata:
     aws-lambda: 1.0.7
     aws-sdk: 2.1046.0
     axios: 0.24.0
-    body-parser: 1.19.0
+    body-parser: 1.19.1
     copy-webpack-plugin: 10.0.0
     cors: 2.8.5
     cross-env: 7.0.3
@@ -2515,7 +2515,7 @@ __metadata:
     axios: 0.24.0
     babel-jest: 27.4.4
     babel-loader: 8.2.3
-    body-parser: 1.19.0
+    body-parser: 1.19.1
     broken-link-checker: 0.7.8
     cat: 0.2.0
     check-node-version: 4.2.1
@@ -11781,6 +11781,24 @@ __metadata:
     raw-body: 2.4.0
     type-is: ~1.6.17
   checksum: 490231b4c89bbd43112762f7ba8e5342c174a6c9f64284a3b0fcabf63277e332f8316765596f1e5b15e4f3a6cf0422e005f4bb3149ed3a224bb025b7a36b9ac1
+  languageName: node
+  linkType: hard
+
+"body-parser@npm:1.19.1":
+  version: 1.19.1
+  resolution: "body-parser@npm:1.19.1"
+  dependencies:
+    bytes: 3.1.1
+    content-type: ~1.0.4
+    debug: 2.6.9
+    depd: ~1.1.2
+    http-errors: 1.8.1
+    iconv-lite: 0.4.24
+    on-finished: ~2.3.0
+    qs: 6.9.6
+    raw-body: 2.4.2
+    type-is: ~1.6.18
+  checksum: 9197a300a6580b8723c7b6b1e22cebd5ba47cd4a6fd45c153350efcde79293869ddee8d17d95fb52724812d649d89d62775faab072608d3243a0cbb00582234e
   languageName: node
   linkType: hard
 
@@ -28427,6 +28445,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:6.9.6":
+  version: 6.9.6
+  resolution: "qs@npm:6.9.6"
+  checksum: cb6df402bb8a3dbefa4bd46eba0dfca427079baca923e6b8d28a03e6bfb16a5c1dcdb96e69388f9c5813ac8ff17bb8bbca22f2ecd31fe1e344a55cb531b5fabf
+  languageName: node
+  linkType: hard
+
 "qs@npm:^6.10.0, qs@npm:^6.5.1, qs@npm:^6.9.4":
   version: 6.10.2
   resolution: "qs@npm:6.10.2"
@@ -28606,7 +28631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raw-body@npm:^2.2.0":
+"raw-body@npm:2.4.2, raw-body@npm:^2.2.0":
   version: 2.4.2
   resolution: "raw-body@npm:2.4.2"
   dependencies:
