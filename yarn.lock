@@ -2405,7 +2405,7 @@ __metadata:
     express: 4.17.1
     good-fences: 1.0.1
     jasmine: 3.10.0
-    jest: 27.4.3
+    jest: 27.4.4
     jest-dynalite: 3.4.4
     jest-junit: 13.0.0
     jsonwebtoken: 8.5.1
@@ -2513,7 +2513,7 @@ __metadata:
     aws-lambda: 1.0.7
     aws-sdk: 2.1046.0
     axios: 0.24.0
-    babel-jest: 27.4.2
+    babel-jest: 27.4.4
     babel-loader: 8.2.3
     body-parser: 1.19.0
     broken-link-checker: 0.7.8
@@ -2546,7 +2546,7 @@ __metadata:
     husky: 7.0.4
     identity-obj-proxy: 3.0.0
     jasmine: 3.10.0
-    jest: 27.4.3
+    jest: 27.4.4
     jest-dynalite: 3.4.4
     jest-junit: 13.0.0
     jest-raw-loader: 1.0.1
@@ -2615,7 +2615,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.4.1
     eslint-config-prettier: 8.3.0
-    jest: 27.4.3
+    jest: 27.4.4
     jest-junit: 13.0.0
     prettier: 2.5.1
     rimraf: 3.0.2
@@ -2673,7 +2673,7 @@ __metadata:
     "@typescript-eslint/parser": 5.6.0
     airtable: 0.11.1
     axios: 0.24.0
-    babel-jest: 27.4.2
+    babel-jest: 27.4.4
     babel-loader: 8.2.3
     broken-link-checker: 0.7.8
     clean-webpack-plugin: 4.0.0
@@ -2699,7 +2699,7 @@ __metadata:
     good-fences: 1.0.1
     gray-matter: 4.0.3
     identity-obj-proxy: 3.0.0
-    jest: 27.4.3
+    jest: 27.4.4
     jest-junit: 13.0.0
     jest-raw-loader: 1.0.1
     lodash.orderby: 4.6.0
@@ -4106,7 +4106,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/core@npm:^27.4.3, @jest/core@npm:^27.4.4":
+"@jest/core@npm:^27.4.4":
   version: 27.4.4
   resolution: "@jest/core@npm:27.4.4"
   dependencies:
@@ -4289,7 +4289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/transform@npm:^27.4.2, @jest/transform@npm:^27.4.4":
+"@jest/transform@npm:^27.4.4":
   version: 27.4.4
   resolution: "@jest/transform@npm:27.4.4"
   dependencies:
@@ -11255,25 +11255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-jest@npm:27.4.2":
-  version: 27.4.2
-  resolution: "babel-jest@npm:27.4.2"
-  dependencies:
-    "@jest/transform": ^27.4.2
-    "@jest/types": ^27.4.2
-    "@types/babel__core": ^7.1.14
-    babel-plugin-istanbul: ^6.0.0
-    babel-preset-jest: ^27.4.0
-    chalk: ^4.0.0
-    graceful-fs: ^4.2.4
-    slash: ^3.0.0
-  peerDependencies:
-    "@babel/core": ^7.8.0
-  checksum: a0843be04f7f46c563464865913c25663c22983eff31b5f706a35940a2bec230d907a05dc5bdd9198f0252c267b68196777fa37997ccf550dbcfbdddb000ccf5
-  languageName: node
-  linkType: hard
-
-"babel-jest@npm:^27.4.4":
+"babel-jest@npm:27.4.4, babel-jest@npm:^27.4.4":
   version: 27.4.4
   resolution: "babel-jest@npm:27.4.4"
   dependencies:
@@ -20997,7 +20979,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-cli@npm:^27.4.3":
+"jest-cli@npm:^27.4.4":
   version: 27.4.4
   resolution: "jest-cli@npm:27.4.4"
   dependencies:
@@ -21553,13 +21535,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:27.4.3":
-  version: 27.4.3
-  resolution: "jest@npm:27.4.3"
+"jest@npm:27.4.4":
+  version: 27.4.4
+  resolution: "jest@npm:27.4.4"
   dependencies:
-    "@jest/core": ^27.4.3
+    "@jest/core": ^27.4.4
     import-local: ^3.0.2
-    jest-cli: ^27.4.3
+    jest-cli: ^27.4.4
   peerDependencies:
     node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
   peerDependenciesMeta:
@@ -21567,7 +21549,7 @@ __metadata:
       optional: true
   bin:
     jest: bin/jest.js
-  checksum: 0c76bbc996e496f11d7daa2e01b5c90ebf9e2587a1d1fa7e0cb8afc7c50abda24874766e107f9080103795af9ac80a06c83d61d9fc50762bd6d915db40a1f1df
+  checksum: 0af09bd42c1ecef555dbc4a8cdd2b77b4bfff9ab3d7d2ee01e343067f443eb5743c7acdf2f28e8d2d268c8e058b129c79b1eda99d7c8b06a6a0e9e1fd04cb741
   languageName: node
   linkType: hard
 
