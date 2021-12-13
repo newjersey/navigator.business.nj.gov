@@ -70,7 +70,7 @@
     "eslint-config-prettier": "8.3.0",
     "good-fences": "1.0.1",
     "jasmine": "3.10.0",
-    "jest": "27.4.3",
+    "jest": "27.4.4",
     "jest-dynalite": "3.4.4",
     "jest-junit": "13.0.0",
     "prettier": "2.5.1",
