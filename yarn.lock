@@ -2584,7 +2584,7 @@ __metadata:
     storybook-addon-designs: 6.2.0
     style-loader: 3.3.1
     supertest: 6.1.6
-    swr: 1.1.0
+    swr: 1.1.1
     ts-jest: 27.1.1
     ts-loader: 9.2.6
     ts-node: 10.4.0
@@ -2721,7 +2721,7 @@ __metadata:
     sass: 1.44.0
     sass-loader: 12.4.0
     style-loader: 3.3.1
-    swr: 1.1.0
+    swr: 1.1.1
     ts-jest: 27.1.1
     ts-loader: 9.2.6
     ts-node: 10.4.0
@@ -32951,12 +32951,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swr@npm:1.1.0":
-  version: 1.1.0
-  resolution: "swr@npm:1.1.0"
+"swr@npm:1.1.1":
+  version: 1.1.1
+  resolution: "swr@npm:1.1.1"
   peerDependencies:
     react: ^16.11.0 || ^17.0.0 || ^18.0.0
-  checksum: ee878b7a5dce6a8c866e9e56125168e732678e27be9211c5d32505e940c6b67ecf841c81badfba72eff82f126b18bcdadbb24211dcebeb440bd2bc67df37e29e
+  checksum: 6ac1af4f7ad512c6de4dda2be4f18efe95f338dd2d0235c7de70e8c44df15c27a42ced48f2668dd2c3f6466d10eb51f3d8c21748d0f16a9a50683f6fa1db426d
   languageName: node
   linkType: hard
 
