@@ -38,7 +38,7 @@ import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
-import { OnboardingStatusLookup } from "@/lib/utils/helpers";
+import { getSectionCompletion, OnboardingStatusLookup } from "@/lib/utils/helpers";
 import { Button } from "@/components/njwds-extended/Button";
 
 interface Props {
@@ -48,7 +48,7 @@ interface Props {
 
 const ProfilePage = (props: Props): ReactElement => {
   useAuthProtectedPage();
-  const { setRoadmap } = useContext(RoadmapContext);
+  const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
@@ -85,7 +85,10 @@ const ProfilePage = (props: Props): ReactElement => {
     }
     setIsLoading(true);
     setAnalyticsDimensions(profileData);
-    setRoadmap(await buildUserRoadmap(profileData));
+    const newRoadmap = await buildUserRoadmap(profileData);
+    setRoadmap(newRoadmap);
+    setSectionCompletion(getSectionCompletion(newRoadmap, userData));
+
     update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");
