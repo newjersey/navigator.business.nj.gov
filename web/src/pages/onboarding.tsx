@@ -30,6 +30,7 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import {
+  getSectionCompletion,
   OnboardingErrorLookup,
   OnboardingStatusLookup,
   scrollToTop,
@@ -79,7 +80,7 @@ export const OnboardingContext = createContext<OnboardingContextType>({
 
 const OnboardingPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
-  const { setRoadmap } = useContext(RoadmapContext);
+  const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
 
   const router = useRouter();
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
@@ -206,7 +207,9 @@ const OnboardingPage = (props: Props): ReactElement => {
     setAlert(undefined);
     setError(undefined);
 
-    setRoadmap(await buildUserRoadmap(newProfileData));
+    const newRoadmap = await buildUserRoadmap(profileData);
+    setRoadmap(newRoadmap);
+    setSectionCompletion(getSectionCompletion(newRoadmap, userData));
 
     if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
       update({ ...userData, profileData: newProfileData }).then(() => {
