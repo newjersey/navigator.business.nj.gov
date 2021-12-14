@@ -14,7 +14,7 @@ To apply for an S corporation designation in the State of New Jersey you will ne
 - Obtain permission from all the stakeholders to file for an S corporation designation
 - Apply for an S corporation designation at the federal level with the Internal Revenue Service
 - Register with the NJ Division of Revenue and Enterprise Services
-- Have received your Certificate of Incorporation and Certificate of Authority to do business in the state of New Jersey
+- Have received your Certificate of Formation or Certificate of Authority to do business in the state of New Jersey
   
 After you’ve completed this task you will have:
 - An S corporation designation with the State of New Jersey
