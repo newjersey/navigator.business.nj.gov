@@ -3,10 +3,10 @@ id: "apply-scorp-federal"
 urlSlug: "apply-for-scorp-federal-government"
 name: "Apply for an S Corporation Designation with the Federal Government"
 callToActionLink: "https://www.irs.gov/pub/irs-pdf/f2553.pdf"
-callToActionText: "Apply for a S Corporation Designation"
+callToActionText: "Apply for S Corporation Designation"
 ---
 
-A S corporation designation allows your business to avoid double taxation on corporate income by passing it onto the shareholders to be taxed at their individual tax rates. The process to apply for an S corporation designation starts at the federal level. If you do not file for an S corporation designation but choose to pay taxes under this structure, you could be liable for fees associated with improperly filing taxes.
+S corporation designation allows your business to avoid double taxation on corporate income by passing it onto the shareholders to be taxed at their individual tax rates. The process to apply for an S corporation designation starts at the federal level.
 
 In most cases, the IRS will approve or reject the application and will notify the business entity within 60 days. Some form selections may delay the process up to 90 days.
 
