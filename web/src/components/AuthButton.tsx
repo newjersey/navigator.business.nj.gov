@@ -16,6 +16,7 @@ export const AuthButton = (props?: Props): ReactElement => {
 
   const loginButton = () => (
     <button
+      data-testid="login-button"
       className="usa-button usa-button--outline auth-button margin-bottom-2 text-no-wrap"
       onClick={triggerSignIn}
     >
