@@ -24,6 +24,6 @@ To complete this application, you must have:
 
 After you complete this task, you will have:
 
-- Proof of Filing
+- `Business Registration Certificate (BRC)|business-reg-certificate`
 - NJ Tax ID
 - Authorization to Collect Sales Tax
