@@ -35,7 +35,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
   };
 
   const filterOptions = createFilterOptions({
-    matchFrom: "start",
+    matchFrom: "any",
     stringify: (option: Municipality) => option.displayName,
   });
 
