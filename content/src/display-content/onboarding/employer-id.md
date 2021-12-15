@@ -3,4 +3,4 @@
 
 ## Employer Identification number (EIN)
 
-What is an `EIN|ein`?
+What is your `EIN|ein`?
