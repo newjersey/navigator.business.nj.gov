@@ -24,6 +24,6 @@ To complete this application, you must have:
 After you complete this task, you will have:
 
 - `Entity ID|entity-id`
-- Certificate of Formation, Incorporation or Authorization as applicable
-- Certified copy of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
+- `Certificate of Formation|certificate-formation`, Incorporation or Authorization as applicable
+- `Certified copy|certified-copy` of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
 - `Certificate of Good Standing|good-standing` (optional with additional fee)
