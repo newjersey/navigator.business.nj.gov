@@ -1,3 +1,29 @@
+# [1.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.4.0...v1.5.0) (2021-12-15)
+
+
+### Bug Fixes
+
+* [[#1157](https://github.com/newjersey/navigator.business.nj.gov/issues/1157)] change the location search to be an any instead of a starts with search type ([6c6a6eb](https://github.com/newjersey/navigator.business.nj.gov/commit/6c6a6eb1ef5c4ca180d6a4a708480f0488afd718))
+* [[#976](https://github.com/newjersey/navigator.business.nj.gov/issues/976)] added logic to get and set section completion obj post onboarding and industry change ([2959b57](https://github.com/newjersey/navigator.business.nj.gov/commit/2959b579bed3618cb2275a21e99274a275469b92))
+* capture newsletter cypress logs ([d1afe90](https://github.com/newjersey/navigator.business.nj.gov/commit/d1afe9028a848c10df680bbe393fa794412ea67b))
+* **deps:** update aws-amplify ([8e7a2f1](https://github.com/newjersey/navigator.business.nj.gov/commit/8e7a2f18a05e85c6a42f24977bc5bff8731647d5))
+* **deps:** update dependency @aws-amplify/ui-react to v2.1.4 ([f62777c](https://github.com/newjersey/navigator.business.nj.gov/commit/f62777c2d442fcb0f01de3e20e3193ffb3bf3758))
+* **deps:** update dependency body-parser to v1.19.1 ([a715916](https://github.com/newjersey/navigator.business.nj.gov/commit/a7159165d057df1da959d81f15462a741e693f53))
+* **deps:** update dependency focus-trap-react to v8.9.0 ([f5a3179](https://github.com/newjersey/navigator.business.nj.gov/commit/f5a3179567b5073914c222b8ea45d3f6167c5453))
+* **deps:** update dependency netlify-cms-app to v2.15.60 ([b0431fd](https://github.com/newjersey/navigator.business.nj.gov/commit/b0431fd324388594fcbffdcde8da5bfc6e404606))
+* **deps:** update dependency swr to v1.1.0 ([47dca29](https://github.com/newjersey/navigator.business.nj.gov/commit/47dca296f24f2498f6f791e9d6b65bdafd1b5202))
+* **deps:** update dependency swr to v1.1.1 ([48b6941](https://github.com/newjersey/navigator.business.nj.gov/commit/48b69415359d6530d9298107ad394c1f747366b7))
+* **deps:** update material-ui monorepo ([02cca6a](https://github.com/newjersey/navigator.business.nj.gov/commit/02cca6a8984735028bd0219ef01c56d03b9a0c64))
+* newsletter cypress fix ([318ada4](https://github.com/newjersey/navigator.business.nj.gov/commit/318ada4d8ba1e531aa5b3e4d11ccf2fd75eb77f7))
+* switching to console logs funtil winston is fixed ([717dee1](https://github.com/newjersey/navigator.business.nj.gov/commit/717dee176614aa6dc8d03d169b5bd39b7e9088e9))
+* updating circleci with the necessary govdelivery envs ([b2da9c2](https://github.com/newjersey/navigator.business.nj.gov/commit/b2da9c264f700afbc6e638f57948d58df544ac90))
+
+
+### Features
+
+* [[#926](https://github.com/newjersey/navigator.business.nj.gov/issues/926)] Newsletter Integration ([4044c03](https://github.com/newjersey/navigator.business.nj.gov/commit/4044c03793517a038d34cda8ca5278245d2d4f40))
+* [[#951](https://github.com/newjersey/navigator.business.nj.gov/issues/951)] integrate with airtable for opting-in users for user-testing ([a179fce](https://github.com/newjersey/navigator.business.nj.gov/commit/a179fce061ce179ba0fcecdccd1f6f4dffa8e622))
+
 # [1.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.3.0...v1.4.0) (2021-12-06)
 
 
