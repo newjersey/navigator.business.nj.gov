@@ -279,6 +279,7 @@ jobs:
     resource_class: small
     steps:
       - set-prod-env-vars
+      - setup-npm-global
       - bootstrap-code
       - generate-release-notes
 
