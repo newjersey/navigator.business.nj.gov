@@ -1,6 +1,6 @@
 ## Certificate of Good Standing
 
-This document certifies that you are properly registered for taxes with the state and are able to operate as a business. 
+This document certifies that you are properly registered for taxes with the state and are able to operate as a business.
 
 It does NOT indicate that you are in good standing with your taxes; that document is called a Tax Clearance Certificate. Although a Certificate of Good Standing is not required to run your business, you'll need it to apply for financial resources, or to do business in another state.
 

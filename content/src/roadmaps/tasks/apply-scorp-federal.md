@@ -11,9 +11,11 @@ S corporation designation allows your business to avoid double taxation on corpo
 In most cases, the IRS will approve or reject the application and will notify the business entity within 60 days. Some form selections may delay the process up to 90 days.
 
 To apply for an S corporation status you will need:
+
 - EIN
 - Registered agent
 - Information of every shareholder (name, address, social security number, signature, number of shares, and date acquired)
- 
+
 After you’ve completed this task you will have:
+
 - An S corporation designation at the federal level

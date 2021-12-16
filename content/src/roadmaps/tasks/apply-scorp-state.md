@@ -11,10 +11,12 @@ S corporation designation at the state level allows your business to avoid doubl
 For the election to be in effect for the current tax year, you must file the application within 3 ½ months of the start of your fiscal year. Once your application is accepted, a corporation may remain an S corporation in New Jersey for as long as it remains an S corporation at the federal level.
 
 To apply for an S corporation designation in the State of New Jersey you will need to:
+
 - Obtain permission from all the stakeholders to file for an S corporation designation
 - Apply for an S corporation designation at the federal level with the Internal Revenue Service
 - Register with the NJ Division of Revenue and Enterprise Services
 - Have received your Certificate of Formation or Certificate of Authority to do business in the state of New Jersey
-  
+
 After you’ve completed this task you will have:
+
 - An S corporation designation with the State of New Jersey
