@@ -1,7 +1,10 @@
-[
-  {
-    "step": 5,
-    "weight": 2,
-    "task": "mocha-task-5"
-  }
-]
+{
+  "roadmapSteps": [
+    {
+      "step": 5,
+      "weight": 2,
+      "task": "mocha-task-5"
+    }
+  ],
+  "modifications": []
+}

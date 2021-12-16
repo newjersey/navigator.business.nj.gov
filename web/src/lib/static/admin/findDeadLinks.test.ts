@@ -27,8 +27,6 @@ describe("findDeadLinks", () => {
       // @ts-ignore
       .mockReturnValueOnce(["addon1.json", "addon2.json"])
       // @ts-ignore
-      .mockReturnValueOnce(["mod1.json", "mod2.json"])
-      // @ts-ignore
       .mockReturnValueOnce(["info1.md", "info2.md", "info3", "info4", "dead-info.md"])
       // @ts-ignore
       .mockReturnValueOnce(["display-subfolder", "display1.md", "display2.ts"])
@@ -39,10 +37,9 @@ describe("findDeadLinks", () => {
     const task2 = "Task 2 contents with `contextual info|info1` in it";
     const deadTask = "Dead task contents";
     const industry1 = '{"roadmapSteps":[],"modifications":[]}';
-    const addOn1 = '[{"step": 1, "weight": 1, "task": "task1"}]';
-    const addOn2 = "[]";
-    const mod1 = '[{"step": 1, "taskToReplaceFilename": "something","replaceWithFilename": "task2"}]';
-    const mod2 = "[]";
+    const addOn1 = '{"roadmapSteps":[{"step": 1, "weight": 1, "task": "task1"}],"modifications":[]}';
+    const addOn2 =
+      '{"roadmapSteps":[],"modifications":[{"step": 1, "taskToReplaceFilename": "something","replaceWithFilename": "task2"}]}';
     const info1 = "Info 1 contents with `contextual info|info2` in it";
     const info2 = "Info 2 contents";
     const info3 = "Info 3 contents";
@@ -52,14 +49,12 @@ describe("findDeadLinks", () => {
     const displaySubfolderItem1 = "Display contents with `contextual info|info4` in it";
 
     mockedFs.readFileSync
-      .mockReturnValueOnce(task1)
-      .mockReturnValueOnce(task2)
-      .mockReturnValueOnce(deadTask)
       .mockReturnValueOnce(industry1)
       .mockReturnValueOnce(addOn1)
       .mockReturnValueOnce(addOn2)
-      .mockReturnValueOnce(mod1)
-      .mockReturnValueOnce(mod2)
+      .mockReturnValueOnce(task1)
+      .mockReturnValueOnce(task2)
+      .mockReturnValueOnce(deadTask)
       .mockReturnValueOnce(info1)
       .mockReturnValueOnce(info2)
       .mockReturnValueOnce(info3)

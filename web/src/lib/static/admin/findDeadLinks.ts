@@ -12,7 +12,6 @@ const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
 const tasksDir = path.join(roadmapsDir, "tasks");
 const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
-const modificationsDir = path.join(roadmapsDir, "modifications");
 const contextualInfoDir = path.join(displayContentDir, "contextual-information");
 
 type Filenames = {
@@ -20,7 +19,6 @@ type Filenames = {
   industries: string[];
   filings: string[];
   addOns: string[];
-  modifications: string[];
   contextualInfos: string[];
   displayContents: string[];
 };
@@ -54,31 +52,32 @@ const getFilenames = (): Filenames => ({
   industries: fs.readdirSync(industriesDir),
   filings: fs.readdirSync(filingsDir),
   addOns: fs.readdirSync(addOnsDir),
-  modifications: fs.readdirSync(modificationsDir),
   contextualInfos: fs.readdirSync(contextualInfoDir),
   displayContents: getFlattenedFilenames(displayContentDir).filter((it) => it.endsWith(".md")),
 });
 
-const getContents = (filenames: Filenames): FileContents => ({
-  tasks: filenames.tasks.map(
-    (it) => matter(fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")).content
-  ),
-  industries: filenames.industries.map(
+const getContents = (filenames: Filenames): FileContents => {
+  const industries = filenames.industries.map(
     (it) => JSON.parse(fs.readFileSync(path.join(roadmapsDir, "industries", it), "utf8")) as IndustryRoadmap
-  ),
-  addOns: filenames.addOns.map(
-    (it) => JSON.parse(fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")) as AddOn[]
-  ),
-  modifications: filenames.modifications.map(
-    (it) =>
-      JSON.parse(fs.readFileSync(path.join(roadmapsDir, "modifications", it), "utf8")) as TaskModification[]
-  ),
-  contextualInfos: filenames.contextualInfos.map(
-    (it) =>
-      matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8")).content
-  ),
-  displayContents: filenames.displayContents.map((it) => matter(fs.readFileSync(it, "utf8")).content),
-});
+  );
+  const addOns = filenames.addOns.map(
+    (it) => JSON.parse(fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")) as IndustryRoadmap
+  );
+
+  return {
+    tasks: filenames.tasks.map(
+      (it) => matter(fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")).content
+    ),
+    industries,
+    addOns: addOns.map((i) => i.roadmapSteps),
+    modifications: industries.map((i) => i.modifications).concat(addOns.map((i) => i.modifications)),
+    contextualInfos: filenames.contextualInfos.map(
+      (it) =>
+        matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8")).content
+    ),
+    displayContents: filenames.displayContents.map((it) => matter(fs.readFileSync(it, "utf8")).content),
+  };
+};
 
 const isReferencedInAMarkdown = async (
   contextualInfoFilename: string,

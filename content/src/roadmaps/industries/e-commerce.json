@@ -1,4 +1,12 @@
 {
+  "id": "e-commerce",
+  "name": "E-Commerce",
+  "description": "Selling or reselling goods or services on the internet",
+  "canBeHomeBased": true,
+  "isLiquorLicenseApplicable": false,
+  "isMobileLocation": false,
+  "canBeReseller": true,
+  "additionalSearchTerms": "ecommerce",
   "roadmapSteps": [
     {
       "step": 1,

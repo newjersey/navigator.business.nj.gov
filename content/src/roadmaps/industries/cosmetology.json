@@ -1,4 +1,12 @@
 {
+  "id": "cosmetology",
+  "name": "Cosmetology",
+  "description": "Offering hair, nail, or skin related services",
+  "canBeHomeBased": false,
+  "isLiquorLicenseApplicable": false,
+  "licenseType": "Cosmetology and Hairstyling",
+  "isMobileLocation": false,
+  "canBeReseller": true,
   "roadmapSteps": [
     {
       "step": 1,

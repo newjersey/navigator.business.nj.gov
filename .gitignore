@@ -27,6 +27,9 @@ yarn-error.log*
 
 .idea/
 
+# Content build
+content/lib
+
 # Netlify build
 web/out_*
 

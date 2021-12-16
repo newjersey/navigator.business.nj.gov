@@ -1,4 +1,11 @@
 {
+  "id": "restaurant",
+  "name": "Restaurant",
+  "description": "Providing food to patrons",
+  "canBeHomeBased": false,
+  "isLiquorLicenseApplicable": true,
+  "isMobileLocation": false,
+  "canBeReseller": true,
   "roadmapSteps": [
     {
       "step": 1,

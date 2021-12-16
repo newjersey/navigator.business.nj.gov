@@ -47,9 +47,7 @@ describe("loadDisplayContent", () => {
       );
       const pathSeparator = getPathSeparator();
       for (const legalStructure of LegalStructures) {
-        expect(allFilePaths).toContain(
-          `${pathSeparator}legal-structure${pathSeparator}${legalStructure.id}.md`
-        );
+        expect(allFilePaths).toContain(`${pathSeparator}legal-structure-${legalStructure.id}.md`);
       }
     });
   });

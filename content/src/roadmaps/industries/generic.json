@@ -1,4 +1,11 @@
 {
+  "id": "generic",
+  "name": "Any Other Business Type",
+  "description": "Select this if you don’t see your specific industry",
+  "canBeHomeBased": true,
+  "isLiquorLicenseApplicable": false,
+  "isMobileLocation": false,
+  "canBeReseller": true,
   "roadmapSteps": [
     {
       "step": 1,
