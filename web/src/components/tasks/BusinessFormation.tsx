@@ -18,9 +18,11 @@ import React, { createContext, ReactElement, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 import { TaskCTA } from "../TaskCTA";
 import { BusinessAddressLine1 } from "./business-formation/BusinessAddressLine1";
+import { BusinessFormationNotifications } from "./business-formation/BusinessFormationNotifications";
 import { BusinessFormationNumericField } from "./business-formation/BusinessFormationNumericField";
 import { BusinessFormationTextField } from "./business-formation/BusinessFormationTextField";
 import { BusinessSuffixDropdown } from "./business-formation/BusinessSuffixDropdown";
+import { PaymentTypeDropdown } from "./business-formation/PaymentTypeDropdown";
 
 interface Props {
   task: Task;
@@ -72,6 +74,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
       if (!formationData.agentOfficeAddressCity) return;
       if (!formationData.agentOfficeAddressZipCode) return;
     }
+
+    if (!formationData.paymentType) return;
 
     update({ ...userData, formationData });
   };
@@ -147,6 +151,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
           validationText={BusinessFormationDefaults.businessAddressZipCode}
         />
         <RegisteredAgent />
+        <PaymentTypeDropdown />
+        <Content>{props.displayContent.disclaimer.contentMd}</Content>
+        <BusinessFormationNotifications />
         <Button style="primary" onClick={submitFormationData}>
           {BusinessFormationDefaults.submitButtonText}
         </Button>

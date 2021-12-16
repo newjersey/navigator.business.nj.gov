@@ -11,7 +11,8 @@
     "CHHA",
     "logisticare",
     "NJPDES",
-    "scorp"
+    "scorp",
+    "NICUSA"
   ],
   "ignorePaths": ["node_modules/**", "out/**"]
 }

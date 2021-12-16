@@ -1,4 +1,5 @@
 import {
+  FormationDisplayContent,
   NameAvailability,
   Preferences,
   Roadmap,
@@ -245,7 +246,90 @@ export const randomLegalStructure = (): LegalStructure => {
 };
 
 export const randomIndustry = (isMobileLocation = false): Industry => {
-  const filteredIndustries = Industries.filter((x) => x.isMobileLocation === isMobileLocation);
+  const filteredIndustries = Industries.filter((x: Industry) => x.isMobileLocation === isMobileLocation);
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
 };
+
+export const generateFormationDisplayContent = (
+  overrides: Partial<FormationDisplayContent>
+): FormationDisplayContent => ({
+  businessSuffix: {
+    contentMd: `some-business-suffix-content-${randomInt()}`,
+    placeholder: `some-business-suffix-placeholder-${randomInt()}`,
+  },
+  businessStartDate: {
+    contentMd: `some-business-start-date-content-${randomInt()}`,
+  },
+  businessAddressLine1: {
+    contentMd: `some-business-address-line-1-content-${randomInt()}`,
+    placeholder: `some-business-address-line-1-placeholder-${randomInt()}`,
+  },
+  businessAddressLine2: {
+    contentMd: `some-business-address-line-2-content-${randomInt()}`,
+    placeholder: `some-business-address-line-2-placeholder-${randomInt()}`,
+  },
+  businessAddressState: {
+    contentMd: `some-business-address-state-content-${randomInt()}`,
+    placeholder: `some-business-address-state-placeholder-${randomInt()}`,
+  },
+  businessAddressZipCode: {
+    contentMd: `some-business-address-zip-code-content-${randomInt()}`,
+    placeholder: `some-business-address-zip-code-placeholder-${randomInt()}`,
+  },
+
+  agentNumberOrManual: {
+    contentMd: `some-agent-number-or-manual-content-${randomInt()}`,
+    radioButtonNumberText: `some-agent-number-or-manual-radio-number-text-${randomInt()}`,
+    radioButtonManualText: `some-agent-number-or-manual-radio-manual-text-${randomInt()}`,
+  },
+  agentNumber: {
+    contentMd: `some-agent-number-content-${randomInt()}`,
+    placeholder: `some-agent-number-placeholder-${randomInt()}`,
+  },
+  agentName: {
+    contentMd: `some-agent-name-content-${randomInt()}`,
+    placeholder: `some-agent-name-placeholder-${randomInt()}`,
+  },
+  agentEmail: {
+    contentMd: `some-agent-email-content-${randomInt()}`,
+    placeholder: `some-agent-email-placeholder-${randomInt()}`,
+  },
+  agentOfficeAddressLine1: {
+    contentMd: `some-agent-office-address-line-1-content-${randomInt()}`,
+    placeholder: `some-business-address-line-1-placeholder-${randomInt()}`,
+  },
+  agentOfficeAddressLine2: {
+    contentMd: `some-agent-office-address-line-2-content-${randomInt()}`,
+    placeholder: `some-business-address-line-2-placeholder-${randomInt()}`,
+  },
+  agentOfficeAddressCity: {
+    contentMd: `some-agent-office-address-city-content-${randomInt()}`,
+    placeholder: `some-agent-office-address-city-placeholder-${randomInt()}`,
+  },
+  agentOfficeAddressState: {
+    contentMd: `some-agent-office-address-state-content-${randomInt()}`,
+    placeholder: `some-agent-office-address-state-placeholder-${randomInt()}`,
+  },
+  agentOfficeAddressZipCode: {
+    contentMd: `some-agent-office-address-zip-code-content-${randomInt()}`,
+    placeholder: `some-agent-office-address-zip-code-placeholder-${randomInt()}`,
+  },
+  paymentType: {
+    contentMd: `some-payment-type-content-${randomInt()}`,
+    placeholder: `some-payment-type-placeholder-${randomInt()}`,
+  },
+  disclaimer: {
+    contentMd: `some-disclaimer-${randomInt()}`,
+  },
+  notification: {
+    contentMd: `some-notification-${randomInt()}`,
+  },
+  optInAnnualReport: {
+    contentMd: `some-opt-in-annual-report-content-${randomInt()}`,
+  },
+  optInCorpWatch: {
+    contentMd: `some-opt-in-corp-watch-content-${randomInt()}`,
+  },
+  ...overrides,
+});
