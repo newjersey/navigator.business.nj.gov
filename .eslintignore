@@ -11,6 +11,8 @@ web/stories
 web/display-defaults/
 node_modules
 
+shared/lib
+
 web/amplify/#current-cloud-backend/
 web/amplify/.config/local-*
 web/amplify/logs
@@ -24,6 +26,7 @@ web/amplifyconfiguration.json
 web/amplify-build-config.json
 web/amplify-gradle-config.json
 web/amplifytools.xcconfig
+aws_config_file_path.json
 
 # Serverless directories
 api/.serverless
