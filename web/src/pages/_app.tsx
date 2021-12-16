@@ -1,3 +1,5 @@
+// organize-imports-ignore
+import "../styles/global.scss";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getCurrentUser } from "@/lib/auth/sessionHelper";
@@ -22,7 +24,6 @@ import React, {
   useState,
 } from "react";
 import SEO from "../../next-seo.config";
-import "../styles/global.scss";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
