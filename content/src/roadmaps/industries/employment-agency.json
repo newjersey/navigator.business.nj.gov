@@ -1,4 +1,11 @@
 {
+  "id": "employment-agency",
+  "name": "Employment Agency",
+  "description": "A business that finds employment for a job seeker and employees for employers",
+  "canBeHomeBased": true,
+  "isLiquorLicenseApplicable": false,
+  "isMobileLocation": false,
+  "canBeReseller": true,
   "roadmapSteps": [
     {
       "step": 1,

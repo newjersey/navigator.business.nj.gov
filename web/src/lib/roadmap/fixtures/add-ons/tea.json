@@ -1,12 +1,15 @@
-[
-  {
-    "step": 2,
-    "weight": 3,
-    "task": "tea-task-1"
-  },
-  {
-    "step": 3,
-    "weight": 3,
-    "task": "tea-task-2"
-  }
-]
+{
+  "roadmapSteps": [
+    {
+      "step": 2,
+      "weight": 3,
+      "task": "tea-task-1"
+    },
+    {
+      "step": 3,
+      "weight": 3,
+      "task": "tea-task-2"
+    }
+  ],
+  "modifications": []
+}

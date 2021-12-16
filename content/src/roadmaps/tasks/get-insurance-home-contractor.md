@@ -1,6 +1,7 @@
 ---
 id: "research-insurance-needs"
 urlSlug: "get-insurance"
+industryId: "home-contractor"
 name: "Get an Insurance Policy"
 callToActionLink: ""
 callToActionText: ""

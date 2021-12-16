@@ -6,7 +6,6 @@ import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@busi
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   const addOns = [];
-  const modifications = [];
   const industry = LookupIndustryById(profileData.industryId);
 
   if (!profileData.homeBasedBusiness && !industry.isMobileLocation) {
@@ -15,7 +14,6 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
 
   if (profileData.liquorLicense) {
     addOns.push("liquor-license");
-    modifications.push("liquor-license");
   }
 
   if (industry.canBeReseller) {
@@ -30,12 +28,9 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     }
   }
 
-  const industryId =
-    !profileData.industryId || profileData.industryId === "generic"
-      ? "another-industry"
-      : profileData.industryId;
+  const industryId = profileData.industryId ?? "generic";
 
-  let roadmap = await buildRoadmap({ industryId, addOns, modifications });
+  let roadmap = await buildRoadmap({ industryId, addOns });
 
   if (profileData.municipality) {
     roadmap = await addMunicipalitySpecificData(roadmap, profileData.municipality.id);

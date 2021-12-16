@@ -1,4 +1,11 @@
 {
+  "id": "food-truck",
+  "name": "Food Truck",
+  "description": "A vehicle where food or beverages are transported, stored, or prepared for sale at temporary locations",
+  "canBeHomeBased": false,
+  "isLiquorLicenseApplicable": false,
+  "isMobileLocation": true,
+  "canBeReseller": true,
   "roadmapSteps": [
     {
       "step": 1,

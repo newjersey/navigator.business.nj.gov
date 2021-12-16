@@ -12,6 +12,7 @@ web/display-defaults/
 node_modules
 
 shared/lib
+content/lib
 
 web/amplify/#current-cloud-backend/
 web/amplify/.config/local-*

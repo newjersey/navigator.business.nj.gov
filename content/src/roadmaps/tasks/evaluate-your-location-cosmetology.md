@@ -2,6 +2,8 @@
 id: "identify-potential-lease"
 urlSlug: "evaluate-your-location"
 name: "Evaluate Your Location"
+industryId: 'cosmetology'
+modification: true
 callToActionLink: ""
 callToActionText: ""
 ---

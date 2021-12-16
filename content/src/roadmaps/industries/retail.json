@@ -1,4 +1,7 @@
 {
+  "isMobileLocation": false,
+  "canBeHomeBased": false,
+  "canBeReseller": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -26,5 +29,10 @@
       "task": "search-licenses-retail"
     }
   ],
-  "modifications": []
+  "name": "Retail",
+  "isLiquorLicenseApplicable": false,
+  "modifications": [],
+  "additionalSearchTerms": "s",
+  "id": "retail",
+  "description": "Selling or reselling goods in a brick and mortar location outside of your home"
 }

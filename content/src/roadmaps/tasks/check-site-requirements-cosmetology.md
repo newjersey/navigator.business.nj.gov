@@ -2,6 +2,8 @@
 id: "check-site-requirements"
 urlSlug: "check-site-requirements"
 name: "Determine Site Requirements"
+industryId: 'cosmetology'
+modification: true
 callToActionLink: ""
 callToActionText: ""
 ---

@@ -1,4 +1,11 @@
 {
+  "id": "homemaker-home-health-aide",
+  "name": "Home Health Aide",
+  "description": "A business staffing licensed personnel to provide home health care services",
+  "canBeHomeBased": true,
+  "isLiquorLicenseApplicable": false,
+  "isMobileLocation": false,
+  "canBeReseller": true,
   "roadmapSteps": [
     {
       "step": 1,

@@ -93,24 +93,9 @@ describe("buildUserRoadmap", () => {
       });
     });
 
-    it("adds another-industry add-on when industry is generic", async () => {
-      await buildUserRoadmap(generateProfileData({ industryId: "generic" }));
-      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-      expect(lastCalledWith.industryId).toBe("another-industry");
-      expect(lastCalledWith.addOns).not.toContain("restaurant");
-      expect(lastCalledWith.addOns).not.toContain("cosmetology");
-      expect(lastCalledWith.addOns).not.toContain("e-commerce");
-      expect(lastCalledWith.addOns).not.toContain("home-contractor");
-
-      expect(lastCalledWith.modifications).not.toContain("restaurant");
-      expect(lastCalledWith.modifications).not.toContain("cosmetology");
-      expect(lastCalledWith.modifications).not.toContain("e-commerce");
-      expect(lastCalledWith.modifications).not.toContain("home-contractor");
-    });
-
     const expectOnlyIndustry = (
       industry: string,
-      lastCalledWith: { industryId: string; addOns: string[]; modifications: string[] }
+      lastCalledWith: { industryId: string; addOns: string[] }
     ): void => {
       const shouldNotContainIndustries = Industries.filter((it) => it.id !== industry);
 
@@ -118,7 +103,6 @@ describe("buildUserRoadmap", () => {
 
       for (const shouldNotContainIndustry of shouldNotContainIndustries) {
         expect(lastCalledWith.addOns).not.toContain(shouldNotContainIndustry);
-        expect(lastCalledWith.modifications).not.toContain(shouldNotContainIndustry);
       }
     };
   });
@@ -127,13 +111,11 @@ describe("buildUserRoadmap", () => {
     it("adds liquor-license add-on and modification if is true", async () => {
       await buildUserRoadmap(generateProfileData({ liquorLicense: true }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("liquor-license");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].modifications).toContain("liquor-license");
     });
 
     it("does not add liquor-license add-on and modification if is true", async () => {
       await buildUserRoadmap(generateProfileData({ liquorLicense: false }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("liquor-license");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].modifications).not.toContain("liquor-license");
     });
   });
 

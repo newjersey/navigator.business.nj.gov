@@ -4,6 +4,7 @@ urlSlug: "individual-staff-licenses-cosmetology"
 name: "Get Your Individual License and Ensure Your Staff Have Licenses"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: "Apply for A Cosmetology License"
+modification: true
 ---
 
 You and/or your staff will need to have individual cosmetology licenses. If the business owner does not have a cosmetology license, the manager of the shop must have a license and at least 2 years of experience.

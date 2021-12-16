@@ -2,6 +2,7 @@
 id: "certificate-of-occupancy"
 urlSlug: "site-safety-permits"
 name: "Obtain Site Safety Permits"
+industryId: 'cosmetology'
 callToActionLink: ""
 callToActionText: ""
 ---

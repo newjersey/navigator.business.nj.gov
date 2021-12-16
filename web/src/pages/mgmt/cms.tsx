@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { SlugControl } from "../../lib/cms/fields/slugfield";
 
 const CMS_CONFIG = {};
 const Loading = () => (
@@ -11,8 +12,15 @@ const CMS = dynamic(
   // @ts-expect-error: No type definition available
   () =>
     import("netlify-cms-app").then((CMS) => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       // @ts-expect-error: No type definition available
       CMS.init({ CMS_CONFIG });
+      // @ts-expect-error: No type definition available
+      CMS.registerWidget("slug", SlugControl);
+      // CMS.registerEventListener({
+      //   name: 'preSave',
+      //   handler: ({ author, entry }) => console.log(JSON.stringify({ author, data: entry.get('data') })),
+      // });
     }),
   { ssr: false, loading: Loading }
 );
