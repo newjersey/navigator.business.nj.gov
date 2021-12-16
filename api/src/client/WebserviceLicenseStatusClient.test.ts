@@ -1,7 +1,7 @@
-import { LogWriter, LogWriterType } from "../libs/logWriter";
 import axios from "axios";
 import { generateLicenseEntity } from "../../test/factories";
 import { LicenseStatusClient } from "../domain/types";
+import { LogWriter, LogWriterType } from "../libs/logWriter";
 import { WebserviceLicenseStatusClient } from "./WebserviceLicenseStatusClient";
 
 jest.mock("axios");

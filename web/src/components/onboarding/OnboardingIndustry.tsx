@@ -1,11 +1,11 @@
-import React, { ReactElement, useContext } from "react";
-import { FormControl, InputLabel } from "@mui/material";
-import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
+import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
+import { OnboardingContext } from "@/pages/onboarding";
+import { FormControl, InputLabel } from "@mui/material";
+import React, { ReactElement, useContext } from "react";
 
 export const OnboardingIndustry = (): ReactElement => {
   const { state } = useContext(OnboardingContext);

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { UserTestingClient } from "../domain/types";
-import { AirtableUserTestingClient } from "./AirtableUserTestingClient";
-import { generateUser } from "../../test/factories";
-import { LogWriter, LogWriterType } from "../libs/logWriter";
 import * as Airtable from "airtable";
 import dayjs from "dayjs";
+import { generateUser } from "../../test/factories";
+import { UserTestingClient } from "../domain/types";
+import { LogWriter, LogWriterType } from "../libs/logWriter";
+import { AirtableUserTestingClient } from "./AirtableUserTestingClient";
 
 type MockAirtableType = {
   baseIdCalledWith: string;

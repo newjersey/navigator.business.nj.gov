@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react";
-import { Task } from "@/components/Task";
-import * as types from "@/lib/types/types";
 import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
-import { isStepCompleted } from "@/lib/utils/helpers";
+import { Task } from "@/components/Task";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import * as types from "@/lib/types/types";
+import { isStepCompleted } from "@/lib/utils/helpers";
+import React, { ReactElement } from "react";
 
 interface Props {
   step: types.Step;

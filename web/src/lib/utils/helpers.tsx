@@ -1,19 +1,19 @@
-import React, { useEffect, useRef, ReactElement } from "react";
+import { NavDefaults } from "@/display-defaults/NavDefaults";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import {
+  OnboardingStatus,
+  Preferences,
+  ProfileError,
   Roadmap,
+  SectionCompletion,
+  sectionNames,
+  SectionType,
   Step,
   Task,
-  SectionType,
-  SectionCompletion,
-  Preferences,
-  sectionNames,
-  OnboardingStatus,
-  ProfileError,
 } from "@/lib/types/types";
-import { NavDefaults } from "@/display-defaults/NavDefaults";
-import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { UserData } from "@businessnjgovnavigator/shared/";
+import React, { ReactElement, useEffect, useRef } from "react";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);

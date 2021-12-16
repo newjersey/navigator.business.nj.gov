@@ -1,5 +1,5 @@
-import { BusinessNameClient, NameAvailability, SearchBusinessName } from "../types";
 import { inputManipulator } from "../inputManipulator";
+import { BusinessNameClient, NameAvailability, SearchBusinessName } from "../types";
 
 export const searchBusinessNameFactory = (businessNameClient: BusinessNameClient): SearchBusinessName => {
   return async (name: string): Promise<NameAvailability> => {

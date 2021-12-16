@@ -1,13 +1,13 @@
-import React, { FormEvent, ReactElement, useEffect, useState } from "react";
+import { Content } from "@/components/Content";
+import { Button } from "@/components/njwds-extended/Button";
+import { Alert } from "@/components/njwds/Alert";
 import { NumericField } from "@/components/onboarding/NumericField";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { OnboardingContext } from "@/pages/onboarding";
 import { createEmptyProfileDisplayContent, OperateDisplayContent, ProfileFields } from "@/lib/types/types";
+import { OnboardingContext } from "@/pages/onboarding";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
-import { Alert } from "@/components/njwds/Alert";
-import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
+import React, { FormEvent, ReactElement, useEffect, useState } from "react";
 
 interface Props {
   displayContent: OperateDisplayContent;

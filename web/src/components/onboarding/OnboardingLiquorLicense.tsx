@@ -1,7 +1,7 @@
-import React, { ReactElement, useContext } from "react";
-import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
+import { OnboardingContext } from "@/pages/onboarding";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import React, { ReactElement, useContext } from "react";
 
 export const OnboardingLiquorLicense = (): ReactElement => {
   const { state, setProfileData } = useContext(OnboardingContext);

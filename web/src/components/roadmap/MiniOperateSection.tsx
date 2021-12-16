@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
-import Link from "next/link";
 import { FilingReference, SectionType } from "@/lib/types/types";
-import { SectionAccordion } from "./SectionAccordion";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { ReactElement } from "react";
+import { SectionAccordion } from "./SectionAccordion";
 
 interface Props {
   filingsReferences: Record<string, FilingReference>;

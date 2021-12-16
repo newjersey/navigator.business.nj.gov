@@ -1,10 +1,10 @@
-import React, { ReactElement, useCallback } from "react";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import analytics from "@/lib/utils/analytics";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getSectionNames, isStepCompleted } from "@/lib/utils/helpers";
-import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { MiniRoadmapStep } from "@/components/roadmap/MiniRoadmapStep";
+import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
+import { getSectionNames, isStepCompleted } from "@/lib/utils/helpers";
+import React, { ReactElement, useCallback } from "react";
 
 interface Props {
   activeTaskId?: string | undefined;

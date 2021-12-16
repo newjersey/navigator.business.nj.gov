@@ -1,6 +1,8 @@
-import { fireEvent, render, RenderResult, within } from "@testing-library/react";
 import { OperateSection } from "@/components/roadmap/OperateSection";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
+import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import {
   generatePreferences,
   generateProfileData,
@@ -8,22 +10,20 @@ import {
   generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
-import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
+import { getByTextAcrossElements, queryByTextAcrossElements } from "@/test/helpers";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockDate } from "@/test/mock/useMockDate";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
 import { EntityIdStatus, UserData } from "@businessnjgovnavigator/shared";
-import { getByTextAcrossElements, queryByTextAcrossElements } from "@/test/helpers";
-import { useMockDate } from "@/test/mock/useMockDate";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { fireEvent, render, RenderResult, within } from "@testing-library/react";
 import React, { ReactNode } from "react";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { templateEval } from "@/lib/utils/helpers";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));

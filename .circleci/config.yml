@@ -284,7 +284,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - '*'
+            - "*"
 
   lint:
     docker:
@@ -293,7 +293,7 @@ jobs:
     steps:
       - set-dev-env-vars
       - attach_workspace:
-            at: .
+          at: .
       - configure
       - bootstrap-code
       - code-quality
@@ -319,7 +319,7 @@ jobs:
     steps:
       - set-dev-env-vars
       - attach_workspace:
-            at: .
+          at: .
       - deploy
       - deploy-storybook
       - store-deploy-cache
@@ -362,7 +362,7 @@ jobs:
     steps:
       - set-cypress-env-vars
       - attach_workspace:
-            at: .
+          at: .
       - configure-and-build
       - install-chrome
       - perform-integration-tests:
@@ -383,7 +383,7 @@ jobs:
       - image: cimg/node:14.18.2-browsers
     steps:
       - attach_workspace:
-            at: .
+          at: .
       - set-dev-env-vars
       - configure-smoke-test
       - install-chrome

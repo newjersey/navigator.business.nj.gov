@@ -1,8 +1,8 @@
-import fs from "fs";
-import path from "path";
 import { Task, TaskDependencies, TaskLink } from "@/lib/types/types";
 import { convertTaskMd, TaskWithoutLinks } from "@/lib/utils/markdownReader";
-import { loadUrlSlugByFilename, getFileNameByUrlSlug } from "./helpers";
+import fs from "fs";
+import path from "path";
+import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 
 export type PathParams<P> = { params: P; locale?: string };
 export type TaskUrlSlugParam = {

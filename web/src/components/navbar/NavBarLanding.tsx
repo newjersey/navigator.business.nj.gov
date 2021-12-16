@@ -1,9 +1,9 @@
-import React, { ReactElement, useContext, useState } from "react";
 import { Signup } from "@/components/Signup";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
-import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { AuthContext } from "@/pages/_app";
+import React, { ReactElement, useContext, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 
 type Props = {

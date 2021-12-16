@@ -1,4 +1,4 @@
-import { emptyProfileData, BusinessUser, ProfileData } from "@businessnjgovnavigator/shared";
+import { BusinessUser, emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";

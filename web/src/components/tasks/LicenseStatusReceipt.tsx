@@ -1,9 +1,9 @@
-import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared";
-import React, { ReactElement, useEffect, useState } from "react";
-import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { Icon } from "@/components/njwds/Icon";
+import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
+import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared";
+import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   items: LicenseStatusItem[];

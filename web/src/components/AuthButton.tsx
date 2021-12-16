@@ -1,10 +1,10 @@
-import React, { ReactElement, useContext } from "react";
-import { AuthContext } from "@/pages/_app";
-import { useRouter } from "next/router";
-import { onSignOut } from "@/lib/auth/signinHelper";
+import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
-import { NavDefaults } from "@/display-defaults/NavDefaults";
+import { onSignOut } from "@/lib/auth/signinHelper";
+import { AuthContext } from "@/pages/_app";
+import { useRouter } from "next/router";
+import React, { ReactElement, useContext } from "react";
 
 interface Props {
   className?: string;

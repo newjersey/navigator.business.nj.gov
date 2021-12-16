@@ -1,9 +1,9 @@
-import React, { ReactElement, useContext } from "react";
-import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
-import { Certifications, LookupCertificationById } from "@businessnjgovnavigator/shared";
 import { setHeaderRole } from "@/lib/utils/helpers";
+import { OnboardingContext } from "@/pages/onboarding";
+import { Certifications, LookupCertificationById } from "@businessnjgovnavigator/shared";
+import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import React, { ReactElement, useContext } from "react";
 
 export const OnboardingCertifications = (): ReactElement => {
   const { state, setProfileData } = useContext(OnboardingContext);

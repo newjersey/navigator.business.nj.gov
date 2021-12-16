@@ -1,7 +1,7 @@
-import React, { ReactElement, ReactNode, createContext, useContext, useState } from "react";
-import { UserData } from "@businessnjgovnavigator/shared";
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { getLastCalledWith } from "@/test/helpers";
+import { UserData } from "@businessnjgovnavigator/shared";
+import React, { createContext, ReactElement, ReactNode, useContext, useState } from "react";
 
 const updateSpy = jest.fn();
 

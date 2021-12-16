@@ -1,6 +1,6 @@
-import { loadAllMunicipalities } from "./loadMunicipalities";
 import { generateMunicipalityDetail } from "@/test/factories";
 import fs from "fs";
+import { loadAllMunicipalities } from "./loadMunicipalities";
 
 jest.mock("fs");
 

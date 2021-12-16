@@ -1,5 +1,10 @@
-import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
-import React from "react";
+import { ProfileDefaults } from "@/display-defaults//ProfileDefaults";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import {
+  createEmptyProfileDisplayContent as createEmptyProfileDisplayContent,
+  ProfileDisplayContent,
+} from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
 import {
   generateMunicipality,
@@ -7,23 +12,18 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import {
-  createEmptyProfileDisplayContent as createEmptyProfileDisplayContent,
-  ProfileDisplayContent,
-} from "@/lib/types/types";
+import { withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { ProfileDefaults } from "@/display-defaults//ProfileDefaults";
 import { LookupIndustryById, Municipality } from "@businessnjgovnavigator/shared";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
-import { templateEval } from "@/lib/utils/helpers";
 import { createEmptyUserData, UserData } from "@businessnjgovnavigator/shared/";
+import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import React from "react";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");

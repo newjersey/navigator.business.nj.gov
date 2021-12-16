@@ -1,9 +1,9 @@
-import * as https from "https";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
-import { LicenseStatusResult, LicenseEntity } from "@shared/license";
+import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
-import { UserData } from "@shared/userData";
 import { TaxFilingData } from "@shared/taxFiling";
+import { UserData } from "@shared/userData";
+import * as https from "https";
 
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;

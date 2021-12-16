@@ -1,28 +1,28 @@
-import React from "react";
-import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
-import * as materialUi from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import TaskPage from "@/pages/tasks/[taskUrlSlug]";
+import { RoadmapDefaults, SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { Task, TaskProgress } from "@/lib/types/types";
+import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
-  generateProfileData,
   generatePreferences,
+  generateProfileData,
   generateStep,
   generateTask,
   generateTaskLink,
   generateUserData,
 } from "@/test/factories";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { RoadmapDefaults, SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { UserData } from "@businessnjgovnavigator/shared";
+import * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
+import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

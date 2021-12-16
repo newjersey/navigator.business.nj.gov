@@ -1,4 +1,5 @@
-import React from "react";
+import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
+import { SectionType } from "@/lib/types/types";
 import {
   generatePreferences,
   generateRoadmap,
@@ -6,16 +7,15 @@ import {
   generateStep,
   generateUserData,
 } from "@/test/factories";
-import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { SectionType } from "@/lib/types/types";
 import { UserData } from "@businessnjgovnavigator/shared/";
-import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

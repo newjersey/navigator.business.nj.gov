@@ -1,23 +1,23 @@
-import { GetStaticPathsResult, GetStaticPropsResult } from "next";
-import React, { ReactElement } from "react";
+import { Content } from "@/components/Content";
+import { NavBar } from "@/components/navbar/NavBar";
+import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
+import { Tag } from "@/components/njwds-extended/Tag";
 import { PageSkeleton } from "@/components/PageSkeleton";
+import { TaskCTA } from "@/components/TaskCTA";
+import { FilingDefaults } from "@/display-defaults/FilingDefaults";
+import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
+  FilingUrlSlugParam,
   loadAllFilingUrlSlugs,
   loadFilingByUrlSlug,
-  FilingUrlSlugParam,
   loadFilingsReferences,
 } from "@/lib/static/loadFilings";
 import { Filing, FilingReference } from "@/lib/types/types";
-import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
-import { Content } from "@/components/Content";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
-import { TaskCTA } from "@/components/TaskCTA";
-import { NextSeo } from "next-seo";
-import { NavBar } from "@/components/navbar/NavBar";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import dayjs from "dayjs";
-import { FilingDefaults } from "@/display-defaults/FilingDefaults";
-import { Tag } from "@/components/njwds-extended/Tag";
+import { GetStaticPathsResult, GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
+import React, { ReactElement } from "react";
 
 interface Props {
   filing: Filing;

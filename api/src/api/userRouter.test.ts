@@ -1,7 +1,9 @@
-import request from "supertest";
-import express, { Express } from "express";
+import { EntityIdStatus } from "@shared/taxFiling";
 import bodyParser from "body-parser";
-import { userRouterFactory } from "./userRouter";
+import dayjs from "dayjs";
+import express, { Express } from "express";
+import jwt from "jsonwebtoken";
+import request from "supertest";
 import {
   generateLicenseData,
   generateProfileData,
@@ -10,10 +12,8 @@ import {
   generateUser,
   generateUserData,
 } from "../../test/factories";
-import jwt from "jsonwebtoken";
-import { TaxFilingClient, UserDataClient, AddNewsletter, AddToUserTesting } from "../domain/types";
-import { EntityIdStatus } from "@shared/taxFiling";
-import dayjs from "dayjs";
+import { AddNewsletter, AddToUserTesting, TaxFilingClient, UserDataClient } from "../domain/types";
+import { userRouterFactory } from "./userRouter";
 
 jest.mock("jsonwebtoken", () => ({
   decode: jest.fn(),

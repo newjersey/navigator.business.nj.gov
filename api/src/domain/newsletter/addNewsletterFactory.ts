@@ -1,5 +1,5 @@
-import { AddNewsletter, NewsletterClient, UserDataClient } from "../types";
 import { UserData } from "@shared/userData";
+import { AddNewsletter, NewsletterClient, UserDataClient } from "../types";
 
 export const addNewsletterFactory = (
   userDataClient: UserDataClient,

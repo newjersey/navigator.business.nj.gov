@@ -1,5 +1,5 @@
-import { v7UserData } from "./v7_add_license_data";
 import { randomInt } from "./migrations";
+import { v7UserData } from "./v7_add_license_data";
 
 export interface v8UserData {
   user: v8BusinessUser;

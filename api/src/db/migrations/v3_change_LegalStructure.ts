@@ -1,5 +1,5 @@
-import { v2LegalStructure, v2UserData } from "./v2_formData_to_onboardingData";
 import { randomInt } from "./migrations";
+import { v2LegalStructure, v2UserData } from "./v2_formData_to_onboardingData";
 
 export interface v3UserData {
   user: v3BusinessUser;

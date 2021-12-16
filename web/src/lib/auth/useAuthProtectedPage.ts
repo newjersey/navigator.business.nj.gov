@@ -1,7 +1,7 @@
-import { useContext, useEffect } from "react";
-import { useRouter } from "next/router";
-import { AuthContext } from "@/pages/_app";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { AuthContext } from "@/pages/_app";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
 
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
 export const useAuthProtectedPage = (): void => {

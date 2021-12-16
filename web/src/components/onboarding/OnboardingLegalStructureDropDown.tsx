@@ -1,12 +1,12 @@
-import React, { ReactElement, ReactNode, useContext } from "react";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
-import { MenuOptionSelected } from "@/components/MenuOptionSelected";
-import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
-import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
+import { MenuOptionSelected } from "@/components/MenuOptionSelected";
+import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { setHeaderRole } from "@/lib/utils/helpers";
+import { OnboardingContext } from "@/pages/onboarding";
+import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
+import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import orderBy from "lodash.orderby";
+import React, { ReactElement, ReactNode, useContext } from "react";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setProfileData } = useContext(OnboardingContext);

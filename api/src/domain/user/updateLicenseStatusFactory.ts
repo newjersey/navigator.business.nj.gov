@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { SearchLicenseStatus, UpdateLicenseStatus, UserDataClient } from "../types";
 import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
 import { TaskProgress, UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
+import { SearchLicenseStatus, UpdateLicenseStatus, UserDataClient } from "../types";
 
 export const updateLicenseStatusFactory = (
   userDataClient: UserDataClient,

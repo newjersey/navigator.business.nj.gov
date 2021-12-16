@@ -1,13 +1,13 @@
-import { Industries, Industry, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
-import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
-import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
-import orderBy from "lodash.orderby";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
-import { OnboardingContext } from "@/pages/onboarding";
 import { splitAndBoldSearchText } from "@/lib/utils/helpers";
+import { OnboardingContext } from "@/pages/onboarding";
+import { Industries, Industry, LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
+import orderBy from "lodash.orderby";
+import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 export const IndustryDropdown = (): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");

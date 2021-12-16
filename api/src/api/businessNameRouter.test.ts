@@ -1,8 +1,8 @@
-import request from "supertest";
-import express, { Express } from "express";
 import bodyParser from "body-parser";
-import { businessNameRouterFactory } from "./businessNameRouter";
+import express, { Express } from "express";
+import request from "supertest";
 import { NameAvailability } from "../domain/types";
+import { businessNameRouterFactory } from "./businessNameRouter";
 
 describe("businessNameRouter", () => {
   let app: Express;

@@ -1,28 +1,28 @@
-import "../styles/global.scss";
+import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
+import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { getCurrentUser } from "@/lib/auth/sessionHelper";
+import { onSignIn } from "@/lib/auth/signinHelper";
+import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
+import { useMountEffect } from "@/lib/utils/helpers";
+import { Hub, HubCapsule } from "@aws-amplify/core";
+import { createTheme, StyledEngineProvider, Theme, ThemeProvider } from "@mui/material";
+import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import Script from "next/script";
+import "njwds/dist/css/styles.css";
 import React, {
-  ReactElement,
   createContext,
+  Dispatch,
+  ReactElement,
+  SetStateAction,
   useEffect,
   useReducer,
   useState,
-  Dispatch,
-  SetStateAction,
 } from "react";
-import { createTheme, ThemeProvider, Theme, StyledEngineProvider } from "@mui/material";
-import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { getCurrentUser } from "@/lib/auth/sessionHelper";
-import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
-import { useMountEffect } from "@/lib/utils/helpers";
-import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
-import { onSignIn } from "@/lib/auth/signinHelper";
-import { useRouter } from "next/router";
-import { Hub, HubCapsule } from "@aws-amplify/core";
-import { DefaultSeo } from "next-seo";
-import Script from "next/script";
 import SEO from "../../next-seo.config";
-import analytics from "@/lib/utils/analytics";
-import "njwds/dist/css/styles.css";
+import "../styles/global.scss";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

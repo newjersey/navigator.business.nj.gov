@@ -1,5 +1,5 @@
-import { Roadmap, SectionType, Step } from "@/lib/types/types";
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
+import { Roadmap, SectionType, Step } from "@/lib/types/types";
 
 export const buildRoadmap = async ({
   industryId,

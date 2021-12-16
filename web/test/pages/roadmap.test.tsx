@@ -1,30 +1,30 @@
-import React from "react";
-import { fireEvent, render, RenderResult, within } from "@testing-library/react";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
+import { FilingReference } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
-  generateProfileData,
   generatePreferences,
+  generateProfileData,
   generateStep,
   generateTask,
   generateTaxFiling,
   generateTaxFilingData,
 } from "@/test/factories";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   setMockUserDataResponse,
   useMockProfileData,
   useMockUserData,
   useMockUserDataError,
 } from "@/test/mock/mockUseUserData";
-import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
-import dayjs from "dayjs";
-import { FilingReference } from "@/lib/types/types";
-import { useMockDate } from "../mock/useMockDate";
 import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
+import { fireEvent, render, RenderResult, within } from "@testing-library/react";
+import dayjs from "dayjs";
+import React from "react";
+import { useMockDate } from "../mock/useMockDate";
 
 function mockMaterialUI(): typeof materialUi {
   return {

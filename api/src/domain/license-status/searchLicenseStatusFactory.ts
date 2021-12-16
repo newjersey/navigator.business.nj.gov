@@ -1,8 +1,8 @@
-import { LicenseStatusClient, SearchLicenseStatus } from "../types";
-import { LicenseStatusItem, LicenseStatusResult, LicenseEntity } from "@shared/license";
+import { LicenseEntity, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
-import { inputManipulator } from "../inputManipulator";
 import dayjs from "dayjs";
+import { inputManipulator } from "../inputManipulator";
+import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 
 export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusClient): SearchLicenseStatus => {
   return async (nameAndAddress: NameAndAddress, licenseType: string): Promise<LicenseStatusResult> => {

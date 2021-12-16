@@ -1,18 +1,18 @@
-import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
+import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import {
   AuthContext,
+  ContextualInfo,
   ContextualInfoContext,
   RoadmapContext,
   UserDataErrorContext,
-  ContextualInfo,
 } from "@/pages/_app";
-import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUserData } from "@/test/factories";
-import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import { BusinessUser } from "@businessnjgovnavigator/shared";
-import os from "os";
 import { RenderResult } from "@testing-library/react";
+import os from "os";
+import React, { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
   subject: ReactElement,

@@ -1,5 +1,5 @@
 import * as AWS from "aws-sdk";
-import { AttributeMap, KeySchemaElement, Key } from "aws-sdk/clients/dynamodb";
+import { AttributeMap, Key, KeySchemaElement } from "aws-sdk/clients/dynamodb";
 
 function itemToKey(item: AttributeMap, keySchema: KeySchemaElement[]): Key {
   let itemKey: Key = {};

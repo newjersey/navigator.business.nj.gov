@@ -1,8 +1,8 @@
-import React from "react";
-import { render } from "@testing-library/react";
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import CompleteSignin from "@/pages/complete-signin";
 import { useMockRouter } from "@/test/mock/mockRouter";
+import { render } from "@testing-library/react";
+import React from "react";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));

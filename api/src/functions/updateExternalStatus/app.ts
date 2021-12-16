@@ -1,14 +1,12 @@
-import { DynamoUserDataClient, DynamoQlUserDataClient } from "src/db/DynamoUserDataClient";
-import AWS from "aws-sdk";
-
-import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
-import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
-import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
-
 import { LogWriter } from "@libs/logWriter";
+import AWS from "aws-sdk";
+import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
+import { DynamoQlUserDataClient, DynamoUserDataClient } from "src/db/DynamoUserDataClient";
+import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
+import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
-import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
 import { addToUserTestingBatch } from "../../domain/user-testing/addToUserTestingBatch";
+import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
 
 export default async function handler() {
   const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import request from "supertest";
-import express, { Express } from "express";
 import bodyParser from "body-parser";
-import { licenseStatusRouterFactory } from "./licenseStatusRouter";
+import express, { Express } from "express";
+import request from "supertest";
 import {
   generateLicenseData,
   generateLicenseStatusItem,
   generateNameAndAddress,
   generateUserData,
 } from "../../test/factories";
+import { licenseStatusRouterFactory } from "./licenseStatusRouter";
 import { getSignedInUserId } from "./userRouter";
 
 jest.mock("./userRouter", () => ({

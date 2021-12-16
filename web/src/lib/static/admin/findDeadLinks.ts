@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import path from "path";
-import fs from "fs";
-import matter from "gray-matter";
 import { AddOn, IndustryRoadmap, TaskModification } from "@/lib/roadmap/roadmapBuilder";
 import { HtmlUrlChecker } from "broken-link-checker";
+import fs from "fs";
+import matter from "gray-matter";
+import path from "path";
 
 const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");

@@ -1,5 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
-import React from "react";
+import { createEmptyProfileDisplayContent as createEmptyProfileDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
 import {
   generateMunicipality,
@@ -7,17 +6,18 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { createEmptyProfileDisplayContent as createEmptyProfileDisplayContent } from "@/lib/types/types";
+import { withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyUserData, createEmptyProfileData } from "@businessnjgovnavigator/shared/";
+import { createEmptyProfileData, createEmptyUserData } from "@businessnjgovnavigator/shared/";
+import { render, waitFor } from "@testing-library/react";
+import React from "react";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");

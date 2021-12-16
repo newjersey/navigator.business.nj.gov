@@ -1,9 +1,9 @@
-import React from "react";
-import { withAuth } from "@/test/helpers";
-import { useAuthProtectedPage, useUnauthedOnlyPage, signInSamlError } from "@/lib/auth/useAuthProtectedPage";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { signInSamlError, useAuthProtectedPage, useUnauthedOnlyPage } from "@/lib/auth/useAuthProtectedPage";
+import { withAuth } from "@/test/helpers";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
-import { useMockRouter, mockPush } from "@/test/mock/mockRouter";
+import React from "react";
 
 jest.mock("next/router");
 
