@@ -1,10 +1,6 @@
 {
-  "id": "cleaning-aid",
-  "name": "Cleaning Service",
-  "description": "Providing commercial or residential cleaning services",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": false,
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -28,5 +24,9 @@
       "task": "get-insurance"
     }
   ],
-  "modifications": []
+  "name": "Cleaning Service",
+  "isLiquorLicenseApplicable": false,
+  "modifications": [],
+  "id": "cleaning-aid",
+  "description": "Providing commercial or residential cleaning services"
 }
