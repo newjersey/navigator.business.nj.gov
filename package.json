@@ -31,7 +31,7 @@
     "@aws-amplify/core": "4.3.10",
     "@aws-amplify/ui-react": "2.1.4",
     "@businessnjgovnavigator/shared": "*",
-    "@emotion/react": "11.7.0",
+    "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
     "@mui/lab": "5.0.0-alpha.59",
     "@mui/material": "5.2.3",
