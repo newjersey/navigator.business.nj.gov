@@ -16,7 +16,7 @@
     "preinstall": "npm install -g @aws-amplify/cli@7.3.6",
     "prepare": "husky install",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
-    "prettier:check": "lerna run --stream prettier:check",
+    "prettier:check": "prettier --check . --ignore-path=./.eslintignore",
     "start:dev": "lerna run  --stream dev",
     "invokeNewsletter": "lerna run  --stream invokeNewsletter",
     "spellcheck": "lerna run --stream spellcheck",
