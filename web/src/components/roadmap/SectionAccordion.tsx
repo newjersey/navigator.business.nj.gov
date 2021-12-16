@@ -1,10 +1,10 @@
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import React, { ReactElement, ReactNode } from "react";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { SectionType } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
 import { SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { SectionType } from "@/lib/types/types";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import React, { ReactElement, ReactNode } from "react";
 
 interface Props {
   sectionType: SectionType;

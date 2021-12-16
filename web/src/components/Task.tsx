@@ -1,11 +1,11 @@
-import Link from "next/link";
-import React, { ReactElement } from "react";
-import * as types from "@/lib/types/types";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
+import * as types from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMediaQuery } from "@mui/material";
-import { MediaQueries } from "@/lib/PageSizes";
+import Link from "next/link";
+import React, { ReactElement } from "react";
 
 interface Props {
   task: types.Task;

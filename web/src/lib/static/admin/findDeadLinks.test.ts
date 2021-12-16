@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import fs from "fs";
 import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 import { Options } from "broken-link-checker";
+import fs from "fs";
 
 jest.mock("fs");
 jest.mock("process", () => ({

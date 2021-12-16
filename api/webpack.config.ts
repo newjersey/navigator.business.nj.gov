@@ -1,7 +1,7 @@
 import path from "path";
 import slsw from "serverless-webpack";
-import nodeExternals from "webpack-node-externals";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import nodeExternals from "webpack-node-externals";
 
 /*
 This line is only required if you are specifying `TS_NODE_PROJECT` for whatever reason.

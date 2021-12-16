@@ -1,11 +1,11 @@
-import request from "supertest";
-import express, { Express } from "express";
-import bodyParser from "body-parser";
-import { SelfRegClient, UserDataClient } from "../domain/types";
-import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
-import { selfRegRouterFactory } from "./selfRegRouter";
-import uuid from "uuid";
 import { createEmptyUserData } from "@shared/userData";
+import bodyParser from "body-parser";
+import express, { Express } from "express";
+import request from "supertest";
+import uuid from "uuid";
+import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
+import { SelfRegClient, UserDataClient } from "../domain/types";
+import { selfRegRouterFactory } from "./selfRegRouter";
 
 jest.mock("uuid", () => ({ v4: jest.fn() }));
 const mockUuid = uuid as jest.Mocked<typeof uuid>;

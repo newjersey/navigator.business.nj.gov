@@ -1,4 +1,5 @@
-import { fireEvent, waitFor } from "@testing-library/react";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { templateEval } from "@/lib/utils/helpers";
 import {
   generateMunicipality,
   generateProfileData as generateProfileData,
@@ -8,10 +9,9 @@ import {
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
-import { templateEval } from "@/lib/utils/helpers";
 import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyUserData, LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { fireEvent, waitFor } from "@testing-library/react";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");

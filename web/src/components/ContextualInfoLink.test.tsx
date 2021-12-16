@@ -1,8 +1,8 @@
-import React from "react";
-import { fireEvent, render, waitFor } from "@testing-library/react";
-import { ContextualInfoLink } from "./ContextualInfoLink";
-import { withContextualInfo } from "@/test/helpers";
 import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchContextualInfo";
+import { withContextualInfo } from "@/test/helpers";
+import { fireEvent, render, waitFor } from "@testing-library/react";
+import React from "react";
+import { ContextualInfoLink } from "./ContextualInfoLink";
 
 jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({
   fetchContextualInfo: jest.fn(),

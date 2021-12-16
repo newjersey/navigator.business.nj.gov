@@ -1,13 +1,13 @@
-import React, { ReactElement, useState } from "react";
-import analytics from "@/lib/utils/analytics";
-import { Icon } from "@/components/njwds/Icon";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettings";
+import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { FilingReference, Task } from "@/lib/types/types";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
-import { MiniOperateSection } from "../roadmap/MiniOperateSection";
+import { FilingReference, Task } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import Link from "next/link";
+import React, { ReactElement, useState } from "react";
+import { MiniOperateSection } from "../roadmap/MiniOperateSection";
 interface Props {
   scrolled: boolean;
   task?: Task;

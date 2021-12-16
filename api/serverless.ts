@@ -1,10 +1,8 @@
 import type { AWS } from "@serverless/typescript";
-
+import { env } from "process";
+import dynamoDbSchema from "./dynamodb-schema.json";
 import express from "./src/functions/express";
 import updateExternalStatus from "./src/functions/updateExternalStatus";
-
-import dynamoDbSchema from "./dynamodb-schema.json";
-import { env } from "process";
 
 const isDocker = process.env.IS_DOCKER == "true" || false; // set in docker-compose
 const stage = process.env.STAGE || "local";

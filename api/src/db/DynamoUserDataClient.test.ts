@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import AWS from "aws-sdk";
-import { UserDataClient, UserDataQlClient } from "../domain/types";
-import { DynamoQlUserDataClient, DynamoUserDataClient } from "./DynamoUserDataClient";
 import { generateUser, generateUserData } from "../../test/factories";
+import { UserDataClient } from "../domain/types";
+import { DynamoUserDataClient } from "./DynamoUserDataClient";
 // import { clearTable } from "../../test/dynamodb-utils";
 
 // references jest-dynalite-config values

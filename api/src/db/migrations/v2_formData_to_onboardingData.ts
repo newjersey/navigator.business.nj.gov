@@ -1,5 +1,5 @@
-import { v1UserData } from "./v1_addTaskProgress";
 import { randomInt } from "./migrations";
+import { v1UserData } from "./v1_addTaskProgress";
 
 export interface v2UserData {
   user: v2BusinessUser;

@@ -1,7 +1,7 @@
-import React, { ReactElement } from "react";
 import { UnlockingAlert } from "@/components/tasks/UnlockingAlert";
-import { TaskLink } from "@/lib/types/types";
 import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
+import { TaskLink } from "@/lib/types/types";
+import React, { ReactElement } from "react";
 
 interface Props {
   taskLinks: TaskLink[];

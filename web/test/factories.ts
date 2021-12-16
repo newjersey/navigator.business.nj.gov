@@ -8,10 +8,11 @@ import {
   Task,
   TaskLink,
 } from "@/lib/types/types";
+import { getSectionNames } from "@/lib/utils/helpers";
 import {
   BusinessUser,
-  Industry,
   Industries,
+  Industry,
   LegalStructure,
   LegalStructures,
   LicenseData,
@@ -26,7 +27,6 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
-import { getSectionNames } from "@/lib/utils/helpers";
 
 export const randomInt = (length = 8): number =>
   Math.floor(

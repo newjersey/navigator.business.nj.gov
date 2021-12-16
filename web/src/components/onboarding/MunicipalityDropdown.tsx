@@ -1,11 +1,10 @@
-import { Municipality } from "@businessnjgovnavigator/shared";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
-import { createFilterOptions, TextField } from "@mui/material";
-import React, { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
-import { Autocomplete } from "@mui/material";
 import { ProfileFields } from "@/lib/types/types";
 import { splitAndBoldSearchText } from "@/lib/utils/helpers";
+import { Municipality } from "@businessnjgovnavigator/shared";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
+import React, { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
 interface Props {
   fieldName: ProfileFields;

@@ -1,13 +1,13 @@
-import React, { ReactElement, useState, useRef, useEffect, useContext } from "react";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Icon } from "@/components/njwds/Icon";
-import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
-import { ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList } from "@mui/material";
-import { AuthContext } from "@/pages/_app";
-import { useRouter } from "next/router";
 import { onSignOut } from "@/lib/auth/signinHelper";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getUserNameOrEmail } from "@/lib/utils/helpers";
+import { AuthContext } from "@/pages/_app";
+import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 export const NavBarLoggedInDesktop = (): ReactElement => {
   const { userData } = useUserData();

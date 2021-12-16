@@ -1,8 +1,8 @@
+import { ProfileDisplayContent, RoadmapDisplayContent } from "@/lib/types/types";
+import { getMarkdown } from "@/lib/utils/markdownReader";
+import { LegalStructures } from "@businessnjgovnavigator/shared";
 import fs from "fs";
 import path from "path";
-import { ProfileDisplayContent, RoadmapDisplayContent } from "@/lib/types/types";
-import { LegalStructures } from "@businessnjgovnavigator/shared";
-import { getMarkdown } from "@/lib/utils/markdownReader";
 
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
 

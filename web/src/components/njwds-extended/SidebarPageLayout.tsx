@@ -1,12 +1,12 @@
-import React, { ReactElement } from "react";
-import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
 import { Icon } from "@/components/njwds/Icon";
-import analytics from "@/lib/utils/analytics";
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
-import Link from "next/link";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
+import { MediaQueries } from "@/lib/PageSizes";
 import { FilingReference, Task } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
+import { useMediaQuery } from "@mui/material";
+import Link from "next/link";
+import React, { ReactElement } from "react";
 import { MiniOperateSection } from "../roadmap/MiniOperateSection";
 
 interface Props {

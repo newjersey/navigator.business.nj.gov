@@ -1,15 +1,15 @@
-import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
+import { Alert } from "@/components/njwds/Alert";
+import { LicenseSearchError } from "@/components/tasks/LicenseTask";
+import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
+import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
-import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared";
-import { Alert } from "@/components/njwds/Alert";
-import { LicenseSearchError } from "@/components/tasks/LicenseTask";
-import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";
-import analytics from "@/lib/utils/analytics";
+import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 
 const useStyles = makeStyles(() =>

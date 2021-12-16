@@ -1,5 +1,5 @@
-import { BusinessNameClient } from "../domain/types";
 import axios, { AxiosError } from "axios";
+import { BusinessNameClient } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 
 export const WebserviceBusinessNameClient = (

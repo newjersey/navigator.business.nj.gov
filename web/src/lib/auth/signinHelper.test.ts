@@ -1,7 +1,7 @@
+import * as api from "@/lib/api-client/apiClient";
 import { generateUser, generateUserData } from "@/test/factories";
 import * as session from "./sessionHelper";
 import { onSignIn, onSignOut } from "./signinHelper";
-import * as api from "@/lib/api-client/apiClient";
 
 jest.mock("./sessionHelper", () => ({
   getCurrentUser: jest.fn(),

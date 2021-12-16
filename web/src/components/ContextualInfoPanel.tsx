@@ -1,9 +1,9 @@
-import React, { ReactElement, useContext } from "react";
-import { Icon } from "@/components/njwds/Icon";
-import { ContextualInfo, ContextualInfoContext } from "@/pages/_app";
 import { Content } from "@/components/Content";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
+import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
+import { ContextualInfo, ContextualInfoContext } from "@/pages/_app";
+import React, { ReactElement, useContext } from "react";
 
 export const ContextualInfoPanel = (): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);

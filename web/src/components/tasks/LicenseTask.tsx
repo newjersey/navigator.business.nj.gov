@@ -1,20 +1,19 @@
-import { TaskHeader } from "@/components/TaskHeader";
 import { Content } from "@/components/Content";
-import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import React, { ReactElement, useState } from "react";
-import { Task } from "@/lib/types/types";
-import { LicenseStatusResult, UserData } from "@businessnjgovnavigator/shared";
-import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { TaskHeader } from "@/components/TaskHeader";
 import { CheckStatus } from "@/components/tasks/CheckStatus";
-import * as api from "@/lib/api-client/apiClient";
 import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import analytics from "@/lib/utils/analytics";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
+import * as api from "@/lib/api-client/apiClient";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
-import { NameAndAddress } from "@businessnjgovnavigator/shared";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Task } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
+import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { LicenseStatusResult, NameAndAddress, UserData } from "@businessnjgovnavigator/shared";
+import React, { ReactElement, useState } from "react";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
 interface Props {
   task: Task;

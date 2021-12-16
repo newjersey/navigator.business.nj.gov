@@ -1,10 +1,10 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { MediaQueries } from "@/lib/PageSizes";
-import { useMediaQuery } from "@mui/material";
 import { NavBarLanding } from "@/components/navbar/NavBarLanding";
-import { NavBarLoggedInMobile } from "@/components/navbar/NavBarLoggedInMobile";
-import { FilingReference, Task } from "@/lib/types/types";
 import { NavBarLoggedInDesktop } from "@/components/navbar/NavBarLoggedInDesktop";
+import { NavBarLoggedInMobile } from "@/components/navbar/NavBarLoggedInMobile";
+import { MediaQueries } from "@/lib/PageSizes";
+import { FilingReference, Task } from "@/lib/types/types";
+import { useMediaQuery } from "@mui/material";
+import React, { ReactElement, useEffect, useState } from "react";
 
 type Props = {
   landingPage?: boolean;

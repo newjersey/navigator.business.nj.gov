@@ -1,5 +1,5 @@
-import { Dispatch, Reducer } from "react";
 import { BusinessUser } from "@businessnjgovnavigator/shared/";
+import { Dispatch, Reducer } from "react";
 
 export type UserActionType = "LOGIN" | "LOGOUT" | "UPDATE_USER";
 

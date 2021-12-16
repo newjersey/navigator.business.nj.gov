@@ -1,10 +1,10 @@
-import Home from "@/pages/index";
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
-import React, { ReactElement } from "react";
+import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useUnauthedOnlyPage } from "@/lib/auth/useAuthProtectedPage";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { triggerSignIn } from "@/lib/auth/sessionHelper";
+import Home from "@/pages/index";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import React, { ReactElement } from "react";
 
 const CompleteSignin = (): ReactElement => {
   useUnauthedOnlyPage();

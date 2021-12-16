@@ -1,3 +1,5 @@
+import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalityById";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
 import {
   generateMunicipality,
@@ -8,8 +10,6 @@ import {
   generateTask,
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { Industries } from "@businessnjgovnavigator/shared";
 
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));

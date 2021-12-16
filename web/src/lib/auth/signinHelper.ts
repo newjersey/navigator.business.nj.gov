@@ -1,9 +1,9 @@
+import * as api from "@/lib/api-client/apiClient";
+import analytics from "@/lib/utils/analytics";
+import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { Dispatch } from "react";
 import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
-import * as api from "@/lib/api-client/apiClient";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import analytics from "@/lib/utils/analytics";
 import { triggerSignOut } from "./sessionHelper";
 
 export const onSignIn = async (

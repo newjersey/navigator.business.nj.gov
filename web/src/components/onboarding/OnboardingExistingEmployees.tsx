@@ -1,7 +1,7 @@
-import React, { ReactElement, ReactNode } from "react";
-import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { NumericField } from "./NumericField";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import React, { ReactElement, ReactNode } from "react";
+import { NumericField } from "./NumericField";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

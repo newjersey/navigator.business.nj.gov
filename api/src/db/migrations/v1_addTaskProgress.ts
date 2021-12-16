@@ -1,5 +1,5 @@
-import { v0UserData } from "./v0_userData";
 import { randomInt } from "./migrations";
+import { v0UserData } from "./v0_userData";
 
 export interface v1UserData {
   user: v1BusinessUser;

@@ -1,8 +1,8 @@
+import { UserData } from "@shared/userData";
 import { generateUser, generateUserData } from "../../../test/factories";
 import { AddToUserTesting, UserDataClient, UserDataQlClient, UserTestingClient } from "../types";
-import { addToUserTestingFactory } from "./addToUserTestingFactory";
 import { addToUserTestingBatch } from "./addToUserTestingBatch";
-import { UserData } from "@shared/userData";
+import { addToUserTestingFactory } from "./addToUserTestingFactory";
 
 describe("addToUserTestingBatch", () => {
   let stubUserTestingClient: jest.Mocked<UserTestingClient>;

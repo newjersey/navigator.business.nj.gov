@@ -1,21 +1,21 @@
-import React from "react";
-import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import * as api from "@/lib/api-client/apiClient";
+import { NameAvailability } from "@/lib/types/types";
 import {
   generateNameAvailability,
   generateProfileData,
   generateTask,
   generateUserData,
 } from "@/test/factories";
-import { NameAvailability } from "@/lib/types/types";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { act, fireEvent, render, RenderResult } from "@testing-library/react";
+import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

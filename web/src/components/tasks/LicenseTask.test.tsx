@@ -1,14 +1,4 @@
-import React from "react";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
-import {
-  act,
-  fireEvent,
-  render,
-  RenderResult,
-  waitFor,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { LicenseTask } from "@/components/tasks/LicenseTask";
 import * as api from "@/lib/api-client/apiClient";
 import {
   generateLicenseData,
@@ -19,7 +9,17 @@ import {
   generateUserData,
 } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { LicenseTask } from "@/components/tasks/LicenseTask";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { createTheme, ThemeProvider } from "@mui/material";
+import {
+  act,
+  fireEvent,
+  render,
+  RenderResult,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
+import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

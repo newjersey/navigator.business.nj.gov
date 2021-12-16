@@ -1,9 +1,9 @@
-import { Roadmap, SectionCompletion } from "@/lib/types/types";
-import { useContext } from "react";
-import { RoadmapContext } from "@/pages/_app";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getSectionCompletion, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
+import { Roadmap, SectionCompletion } from "@/lib/types/types";
+import { getSectionCompletion, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { RoadmapContext } from "@/pages/_app";
+import { useContext } from "react";
 
 export const useRoadmap = (): {
   roadmap: Roadmap | undefined;

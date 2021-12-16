@@ -1,5 +1,5 @@
-import { v3UserData } from "./v3_change_LegalStructure";
 import { randomInt } from "./migrations";
+import { v3UserData } from "./v3_change_LegalStructure";
 
 export interface v4UserData {
   user: v4BusinessUser;

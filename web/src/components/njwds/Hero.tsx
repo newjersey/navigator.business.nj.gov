@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
 import { AuthButton } from "@/components/AuthButton";
+import React, { ReactElement } from "react";
 
 interface Props {
   calloutText: string;

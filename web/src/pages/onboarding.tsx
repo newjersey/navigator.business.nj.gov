@@ -1,20 +1,17 @@
-import React, {
-  FormEvent,
-  ReactElement,
-  createContext,
-  useContext,
-  useCallback,
-  useEffect,
-  useState,
-  useRef,
-  useMemo,
-} from "react";
-import { useRouter } from "next/router";
-import { useMediaQuery } from "@mui/material";
-import { CSSTransition } from "react-transition-group";
-import { GetStaticPropsResult } from "next";
+import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { Alert } from "@/components/njwds/Alert";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { FlowType, getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
+import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { PageSkeleton } from "@/components/PageSkeleton";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
+import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
   createEmptyProfileDisplayContent,
   createProfileFieldErrorMap,
@@ -24,11 +21,7 @@ import {
   ProfileFieldErrorMap,
   ProfileFields,
 } from "@/lib/types/types";
-import { MediaQueries } from "@/lib/PageSizes";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import {
   getSectionCompletion,
   OnboardingErrorLookup,
@@ -36,18 +29,25 @@ import {
   scrollToTop,
   templateEval,
 } from "@/lib/utils/helpers";
-import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
-import { Alert } from "@/components/njwds/Alert";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { RoadmapContext } from "@/pages/_app";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { NextSeo } from "next-seo";
 import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
+import { useMediaQuery } from "@mui/material";
+import { GetStaticPropsResult } from "next";
+import { NextSeo } from "next-seo";
 import Link from "next/link";
-import { FlowType, getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
+import { useRouter } from "next/router";
+import React, {
+  createContext,
+  FormEvent,
+  ReactElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { CSSTransition } from "react-transition-group";
 
 interface Props {
   displayContent: ProfileDisplayContent;

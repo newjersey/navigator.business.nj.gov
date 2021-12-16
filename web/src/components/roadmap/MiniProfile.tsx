@@ -1,12 +1,12 @@
-import React, { ReactElement, useEffect, useState } from "react";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
+import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMediaQuery } from "@mui/material";
-import { MediaQueries } from "@/lib/PageSizes";
-import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
+import React, { ReactElement, useEffect, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 
 interface Props {

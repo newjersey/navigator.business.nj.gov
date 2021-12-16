@@ -1,8 +1,8 @@
-import { ProfileFields } from "@/lib/types/types";
-import React, { FocusEvent, ReactElement } from "react";
 import { OnboardingField } from "@/components/onboarding/OnboardingField";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { ProfileFields } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
+import React, { FocusEvent, ReactElement } from "react";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

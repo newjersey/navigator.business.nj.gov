@@ -1,11 +1,11 @@
+import { AuthButton } from "@/components/AuthButton";
+import { Icon } from "@/components/njwds/Icon";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import React, { ReactElement, useState } from "react";
-import { Icon } from "@/components/njwds/Icon";
-import { AuthButton } from "@/components/AuthButton";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import Link from "next/link";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import Link from "next/link";
+import React, { ReactElement, useState } from "react";
 
 export const NavSideBarUserSettings = (): ReactElement => {
   const { userData } = useUserData();

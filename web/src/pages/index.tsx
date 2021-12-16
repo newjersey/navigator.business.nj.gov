@@ -1,14 +1,14 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Hero } from "@/components/njwds/Hero";
-import { PageSkeleton } from "@/components/PageSkeleton";
-import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { LandingPageDefaults } from "@/display-defaults/LandingPageDefaults";
-import { Signup } from "@/components/Signup";
-import { Card } from "@/components/njwds-extended/Card";
 import { LegalMessage } from "@/components/LegalMessage";
 import { NavBar } from "@/components/navbar/NavBar";
+import { Card } from "@/components/njwds-extended/Card";
+import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
+import { Hero } from "@/components/njwds/Hero";
+import { PageSkeleton } from "@/components/PageSkeleton";
+import { Signup } from "@/components/Signup";
+import { LandingPageDefaults } from "@/display-defaults/LandingPageDefaults";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { useRouter } from "next/router";
+import React, { ReactElement, useEffect, useState } from "react";
 
 const Home = (): ReactElement => {
   const { userData, error } = useUserData();

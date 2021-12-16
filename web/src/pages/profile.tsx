@@ -1,45 +1,43 @@
-import React, { FormEvent, ReactElement, useContext, useEffect, useState } from "react";
-import deepEqual from "fast-deep-equal/es6/react";
-import { GetStaticPropsResult } from "next";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-
+import { NavBar } from "@/components/navbar/NavBar";
+import { Button } from "@/components/njwds-extended/Button";
+import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
-import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
-
-import { PageSkeleton } from "@/components/PageSkeleton";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
-import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import {
-  createProfileFieldErrorMap,
-  ProfileDisplayContent,
-  ProfileFieldErrorMap,
-  ProfileFields,
-  OnboardingStatus,
-} from "@/lib/types/types";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { OnboardingContext } from "@/pages/onboarding";
-import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
+import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
+import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { RoadmapContext } from "@/pages/_app";
-import { NavBar } from "@/components/navbar/NavBar";
-import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
-import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
-import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
-import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
-import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
+import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
+import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
+import { PageSkeleton } from "@/components/PageSkeleton";
+import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
+import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
+import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
+import {
+  createProfileFieldErrorMap,
+  OnboardingStatus,
+  ProfileDisplayContent,
+  ProfileFieldErrorMap,
+  ProfileFields,
+} from "@/lib/types/types";
+import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getSectionCompletion, OnboardingStatusLookup } from "@/lib/utils/helpers";
-import { Button } from "@/components/njwds-extended/Button";
+import { OnboardingContext } from "@/pages/onboarding";
+import { RoadmapContext } from "@/pages/_app";
+import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import deepEqual from "fast-deep-equal/es6/react";
+import { GetStaticPropsResult } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { FormEvent, ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {
   displayContent: ProfileDisplayContent;

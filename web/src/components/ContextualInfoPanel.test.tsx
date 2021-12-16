@@ -1,7 +1,7 @@
-import React from "react";
 import { withContextualInfo } from "@/test/helpers";
-import { ContextualInfoPanel } from "./ContextualInfoPanel";
 import { render, RenderResult } from "@testing-library/react";
+import React from "react";
+import { ContextualInfoPanel } from "./ContextualInfoPanel";
 
 describe("<ContextualInfoPanel />", () => {
   it("is closed when contextual info is empty", () => {

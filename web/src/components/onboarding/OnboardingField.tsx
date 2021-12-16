@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useRef } from "react";
-import { TextField, TextFieldProps } from "@mui/material";
-import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
-import { camelCaseToSentence, setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileFields } from "@/lib/types/types";
+import { camelCaseToSentence, setHeaderRole } from "@/lib/utils/helpers";
+import { OnboardingContext } from "@/pages/onboarding";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
+import { TextField, TextFieldProps } from "@mui/material";
+import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useRef } from "react";
 
 interface Props {
   fieldName: ProfileFields;

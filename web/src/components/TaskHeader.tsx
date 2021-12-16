@@ -1,18 +1,18 @@
-import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
-import React, { useState, ReactElement } from "react";
-import { SectionType, Task, TaskProgress } from "@/lib/types/types";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
-import { Icon } from "@/components/njwds/Icon";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { Icon } from "@/components/njwds/Icon";
+import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
+import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import {
-  setPreferencesCloseSection,
-  getModifiedTaskContent,
-  getSectionPositions,
-  getSectionCompletion,
-} from "@/lib/utils/helpers";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { SectionType, Task, TaskProgress } from "@/lib/types/types";
+import {
+  getModifiedTaskContent,
+  getSectionCompletion,
+  getSectionPositions,
+  setPreferencesCloseSection,
+} from "@/lib/utils/helpers";
+import React, { ReactElement, useState } from "react";
 import { CongratulatoryDialog } from "./CongratulatoryDialog";
 
 interface Props {

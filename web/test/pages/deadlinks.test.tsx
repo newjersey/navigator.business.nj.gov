@@ -1,7 +1,7 @@
-import React from "react";
+import * as api from "@/lib/api-client/apiClient";
 import DeadLinksPage from "@/pages/mgmt/deadlinks";
 import { fireEvent, render, waitFor } from "@testing-library/react";
-import * as api from "@/lib/api-client/apiClient";
+import React from "react";
 
 jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;

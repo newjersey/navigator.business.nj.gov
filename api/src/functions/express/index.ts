@@ -1,5 +1,5 @@
-import { handlerPath } from "@libs/handlerResolver";
 import { FnType } from "@functions/index";
+import { handlerPath } from "@libs/handlerResolver";
 
 export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
   handler: `${handlerPath(__dirname)}/app.handler`,

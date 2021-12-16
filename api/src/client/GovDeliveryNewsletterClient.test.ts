@@ -1,8 +1,8 @@
-import { LogWriter, LogWriterType } from "../libs/logWriter";
 import axios from "axios";
-import { NewsletterClient } from "../domain/types";
-import { GovDeliveryResponse, GovDeliveryNewsletterClient } from "./GovDeliveryNewsletterClient";
 import { randomInt } from "../../test/factories";
+import { NewsletterClient } from "../domain/types";
+import { LogWriter, LogWriterType } from "../libs/logWriter";
+import { GovDeliveryNewsletterClient, GovDeliveryResponse } from "./GovDeliveryNewsletterClient";
 
 const generateGovDeliveryResponse = (
   overrides: Partial<GovDeliveryResponse>,

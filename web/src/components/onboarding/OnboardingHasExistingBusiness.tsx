@@ -1,8 +1,8 @@
-import React, { ReactElement, useContext } from "react";
-import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { setHeaderRole } from "@/lib/utils/helpers";
+import { OnboardingContext } from "@/pages/onboarding";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import React, { ReactElement, useContext } from "react";
 
 export const OnboardingHasExistingBusiness = (): ReactElement => {
   const { state, setProfileData } = useContext(OnboardingContext);

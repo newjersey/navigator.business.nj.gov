@@ -1,10 +1,9 @@
-import React, { ReactElement } from "react";
-import { Dialog, DialogContent } from "@mui/material";
+import { RoadmapDefaults, SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { SectionType } from "@/lib/types/types";
-import { SectionDefaults, RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
-import { IconButton } from "@mui/material";
-import { Icon } from "./njwds/Icon";
+import { Dialog, DialogContent, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
+import React, { ReactElement } from "react";
+import { Icon } from "./njwds/Icon";
 
 interface Props {
   nextSectionType: SectionType | undefined;

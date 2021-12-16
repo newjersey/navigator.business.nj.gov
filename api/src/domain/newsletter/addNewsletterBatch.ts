@@ -1,5 +1,5 @@
-import { AddNewsletter, UserDataQlClient } from "../types";
 import { UserData } from "@shared/userData";
+import { AddNewsletter, UserDataQlClient } from "../types";
 
 type AddNewsletterBatchResponse = {
   success: number;

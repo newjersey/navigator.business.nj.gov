@@ -1,9 +1,9 @@
-import React, { ReactElement } from "react";
-import Link from "next/link";
+import { Icon } from "@/components/njwds/Icon";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Icon } from "@/components/njwds/Icon";
+import Link from "next/link";
+import React, { ReactElement } from "react";
 
 interface Props {
   task: Task;

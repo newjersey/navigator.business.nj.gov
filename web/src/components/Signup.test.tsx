@@ -1,10 +1,10 @@
-import React from "react";
-import { act, fireEvent, render, RenderResult } from "@testing-library/react";
-import * as api from "@/lib/api-client/apiClient";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { Signup } from "@/components/Signup";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
+import * as api from "@/lib/api-client/apiClient";
 import { SelfRegResponse } from "@/lib/types/types";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { act, fireEvent, render, RenderResult } from "@testing-library/react";
+import React from "react";
 
 jest.mock("next/router");
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));

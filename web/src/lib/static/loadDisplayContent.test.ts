@@ -1,7 +1,7 @@
+import { getPathSeparator } from "@/test/helpers";
+import { LegalStructures } from "@businessnjgovnavigator/shared";
 import fs from "fs";
 import { loadProfileDisplayContent, loadRoadmapDisplayContent } from "./loadDisplayContent";
-import { LegalStructures } from "@businessnjgovnavigator/shared";
-import { getPathSeparator } from "@/test/helpers";
 
 jest.mock("fs");
 

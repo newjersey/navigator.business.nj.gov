@@ -1,15 +1,15 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import createStyles from "@mui/styles/createStyles";
-import makeStyles from "@mui/styles/makeStyles";
-import { TaskProgress } from "@/lib/types/types";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
-import analytics from "@/lib/utils/analytics";
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
-import { ToastAlert } from "./njwds-extended/ToastAlert";
-import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
 import { TaskProgressLookup } from "@/display-defaults/TaskProgressLookup";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
+import { TaskProgress } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
+import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
+import React, { ReactElement, useEffect, useState } from "react";
 import { Tag } from "./njwds-extended/Tag";
+import { ToastAlert } from "./njwds-extended/ToastAlert";
 
 const useStyles = makeStyles(() =>
   createStyles({

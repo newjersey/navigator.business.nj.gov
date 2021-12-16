@@ -1,7 +1,7 @@
-import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import { Auth } from "@aws-amplify/auth";
-import awsExports from "../../../aws-exports";
+import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosResponse } from "axios";
+import awsExports from "../../../aws-exports";
 
 type CognitoIdPayload = {
   aud: string;

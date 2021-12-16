@@ -1,14 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { migrate_v0_to_v1 } from "./v1_addTaskProgress";
-import { migrate_v1_to_v2 } from "./v2_formData_to_onboardingData";
-import { migrate_v2_to_v3 } from "./v3_change_LegalStructure";
-import { migrate_v3_to_v4 } from "./v4_add_municipality";
-import { migrate_v4_to_v5 } from "./v5_add_liquor_license";
-import { migrate_v5_to_v6 } from "./v6_add_home_based_business";
-import { migrate_v6_to_v7 } from "./v7_add_license_data";
-import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
-import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 import { migrate_v9_to_v10 } from "./v10_add_mynjuserkey";
 import { migrate_v10_to_v11 } from "./v11_change_license_statuses";
 import { migrate_v11_to_v12 } from "./v12_remove_scorp";
@@ -19,6 +10,7 @@ import { migrate_v15_to_v16 } from "./v16_add_user_preferences";
 import { migrate_v16_to_v17 } from "./v17_add_operate_section";
 import { migrate_v17_to_v18 } from "./v18_add_foodtruck_roadmap";
 import { migrate_v18_to_v19 } from "./v19_add_employment_agency_roadmap";
+import { migrate_v0_to_v1 } from "./v1_addTaskProgress";
 import { migrate_v19_to_v20 } from "./v20_switch_industry_to_id";
 import { migrate_v20_to_v21 } from "./v21_add_tax_fields";
 import { migrate_v21_to_v22 } from "./v22_switch_legal_structure_to_id";
@@ -29,8 +21,16 @@ import { migrate_v25_to_v26 } from "./v26_remove_dateofformation";
 import { migrate_v26_to_v27 } from "./v27_add_registration_optouts";
 import { migrate_v27_to_v28 } from "./v28_add_hasExistingBusiness_to_profile";
 import { migrate_v28_to_v29 } from "./v29_add_certifications_profile";
+import { migrate_v1_to_v2 } from "./v2_formData_to_onboardingData";
 import { migrate_v29_to_v30 } from "./v30_add_existingEmployees";
 import { migrate_v30_to_v31 } from "./v31_3rd_party_status";
+import { migrate_v2_to_v3 } from "./v3_change_LegalStructure";
+import { migrate_v3_to_v4 } from "./v4_add_municipality";
+import { migrate_v4_to_v5 } from "./v5_add_liquor_license";
+import { migrate_v5_to_v6 } from "./v6_add_home_based_business";
+import { migrate_v6_to_v7 } from "./v7_add_license_data";
+import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
+import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
 export type MigrationFunction = (data: any) => any;
 export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));

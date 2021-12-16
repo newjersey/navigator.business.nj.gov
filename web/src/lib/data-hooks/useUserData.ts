@@ -1,10 +1,10 @@
-import useSWR from "swr";
-import { useContext, useEffect } from "react";
 import * as api from "@/lib/api-client/apiClient";
 import { postUserData } from "@/lib/api-client/apiClient";
 import { UserDataError } from "@/lib/types/types";
 import { AuthContext, UserDataErrorContext } from "@/pages/_app";
 import { UserData } from "@businessnjgovnavigator/shared/";
+import { useContext, useEffect } from "react";
+import useSWR from "swr";
 
 export const useUserData = (): UseUserDataResponse => {
   const { state, dispatch } = useContext(AuthContext);

@@ -1,7 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { completeOnboarding } from "../support/helpers";
 import { Industries } from "@businessnjgovnavigator/shared";
+import { completeOnboarding } from "../support/helpers";
 
 describe("Roadmap [all] [group2]", () => {
   beforeEach(() => {

@@ -1,4 +1,7 @@
-import React, { ChangeEvent, ReactElement, useState } from "react";
+import { Alert } from "@/components/njwds/Alert";
+import { Icon } from "@/components/njwds/Icon";
+import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
+import { postSelfReg } from "@/lib/api-client/apiClient";
 import {
   Checkbox,
   Dialog,
@@ -10,12 +13,9 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
-import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useRouter } from "next/router";
-import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
-import { Alert } from "@/components/njwds/Alert";
+import React, { ChangeEvent, ReactElement, useState } from "react";
 import { Button } from "./njwds-extended/Button";
-import { Icon } from "@/components/njwds/Icon";
 
 type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "DUPLICATE_SIGNUP" | "GENERIC";
 const SelfRegErrorLookup: Record<SelfRegError, string> = {

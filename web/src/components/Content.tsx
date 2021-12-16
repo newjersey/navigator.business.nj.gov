@@ -1,11 +1,11 @@
+import { ContextualInfoLink } from "@/components/ContextualInfoLink";
+import { Icon } from "@/components/njwds/Icon";
+import analytics from "@/lib/utils/analytics";
 import React, { ReactElement } from "react";
 import remark from "remark";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import remark2react from "remark-react";
-import { ContextualInfoLink } from "@/components/ContextualInfoLink";
-import { Icon } from "@/components/njwds/Icon";
-import analytics from "@/lib/utils/analytics";
 
 interface Props {
   children: string;

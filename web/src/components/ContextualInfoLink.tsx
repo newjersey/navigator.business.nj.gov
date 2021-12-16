@@ -1,7 +1,7 @@
-import React, { ReactElement, useContext, useState } from "react";
-import { ContextualInfoContext } from "@/pages/_app";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
 import analytics from "@/lib/utils/analytics";
+import { ContextualInfoContext } from "@/pages/_app";
+import React, { ReactElement, useContext, useState } from "react";
 
 export const ContextualInfoLink = ({ children }: { children: string[] }): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);

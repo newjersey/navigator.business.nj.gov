@@ -1,6 +1,6 @@
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import React, { ReactElement, FocusEvent } from "react";
+import React, { FocusEvent, ReactElement } from "react";
 import { OnboardingField } from "./OnboardingField";
 
 interface Props {

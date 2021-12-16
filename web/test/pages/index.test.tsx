@@ -1,12 +1,12 @@
-import React from "react";
-import Home from "@/pages/index";
-import { withAuth } from "@/test/helpers";
-import { generateUser } from "@/test/factories";
-import { useMockUserData, setMockUserDataResponse } from "@/test/mock/mockUseUserData";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { render } from "@testing-library/react";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import Home from "@/pages/index";
+import { generateUser } from "@/test/factories";
+import { withAuth } from "@/test/helpers";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
+import { render } from "@testing-library/react";
+import React from "react";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

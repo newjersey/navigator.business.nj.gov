@@ -1,6 +1,6 @@
-import { v23UserData } from "./v23_rename_onboardingData_to_profileData";
-import { randomInt } from "./migrations";
 import dayjs from "dayjs";
+import { randomInt } from "./migrations";
+import { v23UserData } from "./v23_rename_onboardingData_to_profileData";
 
 export interface v24UserData {
   user: v24BusinessUser;

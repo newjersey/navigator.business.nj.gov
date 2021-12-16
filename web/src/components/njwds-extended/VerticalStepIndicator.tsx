@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect } from "react";
 import { useOnWindowResize } from "@/lib/utils/helpers";
+import React, { ReactElement, useEffect } from "react";
 
 interface Props {
   stepNumber: number;

@@ -1,14 +1,14 @@
-import React, { ReactElement } from "react";
-import { getCurrentDate } from "@/lib/utils/getCurrentDate";
-import { FilingReference } from "@/lib/types/types";
-import { TaxFiling } from "@businessnjgovnavigator/shared/";
-import dayjs from "dayjs";
-import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
-import { Icon } from "@/components/njwds/Icon";
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { useMediaQuery } from "@mui/material";
+import { Icon } from "@/components/njwds/Icon";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { MediaQueries } from "@/lib/PageSizes";
+import { FilingReference } from "@/lib/types/types";
+import { getCurrentDate } from "@/lib/utils/getCurrentDate";
+import { TaxFiling } from "@businessnjgovnavigator/shared/";
+import { useMediaQuery } from "@mui/material";
+import dayjs from "dayjs";
 import Link from "next/link";
+import React, { ReactElement } from "react";
 import { Tag } from "../njwds-extended/Tag";
 
 interface Props {

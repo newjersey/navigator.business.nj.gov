@@ -1,6 +1,6 @@
-import React, { ReactElement, useContext } from "react";
-import { OnboardingContext } from "@/pages/onboarding";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { OnboardingContext } from "@/pages/onboarding";
+import React, { ReactElement, useContext } from "react";
 import { Button } from "../njwds-extended/Button";
 
 export const OnboardingButtonGroup = (): ReactElement => {

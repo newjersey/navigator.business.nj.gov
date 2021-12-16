@@ -1,5 +1,5 @@
-import { v11UserData } from "./v11_change_license_statuses";
 import { randomInt } from "./migrations";
+import { v11UserData } from "./v11_change_license_statuses";
 
 export interface v12UserData {
   user: v12BusinessUser;

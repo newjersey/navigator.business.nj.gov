@@ -1,6 +1,6 @@
-import { TaxFilingClient } from "../domain/types";
 import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import dayjs from "dayjs";
+import { TaxFilingClient } from "../domain/types";
 
 export const FakeTaxFilingClient = (): TaxFilingClient => {
   const fetchForEntityId = (entityId: string): Promise<TaxFilingData> => {

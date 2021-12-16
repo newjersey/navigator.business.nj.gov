@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
 import { Alert } from "@/components/njwds/Alert";
-import { UserDataError } from "@/lib/types/types";
 import { SitewideErrorDefaults } from "@/display-defaults/SitewideErrorDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { UserDataError } from "@/lib/types/types";
+import React, { ReactElement } from "react";
 
 const UserDataErrorLookup: Record<UserDataError, string> = {
   NO_DATA: SitewideErrorDefaults.errorTextNoData,

@@ -1,13 +1,13 @@
-import React, { ReactElement, useContext, FocusEvent } from "react";
-import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
-import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
-import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { setHeaderRole } from "@/lib/utils/helpers";
-import { Municipality } from "@businessnjgovnavigator/shared";
-import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
+import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
+import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
+import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { setHeaderRole } from "@/lib/utils/helpers";
+import { OnboardingContext } from "@/pages/onboarding";
+import { Municipality } from "@businessnjgovnavigator/shared";
+import React, { FocusEvent, ReactElement, useContext } from "react";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

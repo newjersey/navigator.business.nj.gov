@@ -1,10 +1,10 @@
-import React, { ReactElement, useContext } from "react";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { OnboardingContext } from "@/pages/onboarding";
 import { Content } from "@/components/Content";
-import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import { setHeaderRole } from "@/lib/utils/helpers";
+import { OnboardingContext } from "@/pages/onboarding";
+import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import orderBy from "lodash.orderby";
+import React, { ReactElement, useContext } from "react";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setProfileData } = useContext(OnboardingContext);
