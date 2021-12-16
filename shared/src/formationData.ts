@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-
 export interface FormationData {
   businessSuffix: BusinessSuffix | undefined;
   businessStartDate: string;
@@ -19,11 +18,19 @@ export interface FormationData {
   agentOfficeAddressZipCode: string;
   // signatures: string[];
   // paymentType: "CC" | "ACH" | undefined;
+  paymentType: PaymentType;
+  annualReportNotification: boolean;
+  corpWatchNotification: boolean;
 }
 
 export type FormationTextField = Exclude<
   keyof FormationData,
-  "businessSuffix" | "businessStartDate" | "agentNumberOrManual"
+  | "businessSuffix"
+  | "businessStartDate"
+  | "paymentType"
+  | "annualReportNotification"
+  | "corpWatchNotification"
+  | "agentNumberOrManual"
 >;
 
 export const createEmptyFormationData = (): FormationData => {
@@ -45,9 +52,13 @@ export const createEmptyFormationData = (): FormationData => {
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: "",
     // signatures: [],
-    // paymentType: undefined,
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
   };
 };
+
+export type PaymentType = "CC" | "ACH" | undefined;
 
 export type BusinessSuffix =
   | "LLC"

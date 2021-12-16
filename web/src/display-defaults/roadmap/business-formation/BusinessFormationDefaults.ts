@@ -14,4 +14,6 @@ export const BusinessFormationDefaults: Record<string, string> = {
   agentEmailErrorText: "Agent email is required",
   agentOfficeAddressLine1ErrorText: "Agent office address is required",
   agentOfficeAddressCityErrorText: "Agent office city is required",
+  creditCardPaymentTypeLabel: "Credit Card",
+  achPaymentTypeLabel: "E-Check",
 };

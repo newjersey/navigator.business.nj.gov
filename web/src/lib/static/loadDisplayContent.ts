@@ -121,6 +121,11 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const businessAddressLine2 = getMarkdown(loadFile("business-formation/business-address-line2.md"));
   const businessAddressState = getMarkdown(loadFile("business-formation/business-address-state.md"));
   const businessAddressZipCode = getMarkdown(loadFile("business-formation/business-address-zip-code.md"));
+  const paymentType = getMarkdown(loadFile("business-formation/payment-type.md"));
+  const disclaimer = getMarkdown(loadFile("business-formation/disclaimer.md"));
+  const notification = getMarkdown(loadFile("business-formation/notification.md"));
+  const optInAnnualReport = getMarkdown(loadFile("business-formation/opt-in-annual-report.md"));
+  const optInCorpWatch = getMarkdown(loadFile("business-formation/opt-in-corp-watch.md"));
 
   const agentNumberOrManual = getMarkdown(loadFile("business-formation/registered-agent.md"));
   const agentNumber = getMarkdown(loadFile("business-formation/registered-agent-number.md"));
@@ -195,6 +200,22 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       agentOfficeAddressZipCode: {
         contentMd: agentOfficeAddressZipCode.content,
         ...(agentOfficeAddressZipCode.grayMatter as FieldGrayMatter),
+      },
+      paymentType: {
+        contentMd: paymentType.content,
+        ...(paymentType.grayMatter as FieldGrayMatter),
+      },
+      disclaimer: {
+        contentMd: disclaimer.content,
+      },
+      notification: {
+        contentMd: notification.content,
+      },
+      optInAnnualReport: {
+        contentMd: optInAnnualReport.content,
+      },
+      optInCorpWatch: {
+        contentMd: optInCorpWatch.content,
       },
     },
   };

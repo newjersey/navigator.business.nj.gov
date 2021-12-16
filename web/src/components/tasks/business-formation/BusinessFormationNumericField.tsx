@@ -1,11 +1,11 @@
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { templateEval } from "@/lib/utils/helpers";
-import { FormationData } from "@businessnjgovnavigator/shared";
+import { FormationTextField } from "@businessnjgovnavigator/shared";
 import React, { FocusEvent, ReactElement, useState } from "react";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
 
 interface Props {
-  fieldName: Exclude<keyof FormationData, "businessSuffix" | "businessStartDate" | "agentNumberOrManual">;
+  fieldName: FormationTextField;
   validationText?: string;
   maxLength: number;
   minLength?: number;

@@ -1,4 +1,4 @@
-import { BusinessUser, emptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
+import { BusinessUser, emptyProfileData, PaymentType, ProfileData } from "@businessnjgovnavigator/shared";
 
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
@@ -91,11 +91,26 @@ export type FormationDisplayContent = {
   agentOfficeAddressCity: TextFieldContent;
   agentOfficeAddressState: TextFieldContent;
   agentOfficeAddressZipCode: TextFieldContent;
+  paymentType: TextFieldContent;
+  disclaimer: {
+    contentMd: string;
+  };
+  notification: {
+    contentMd: string;
+  };
+  optInAnnualReport: {
+    contentMd: string;
+  };
+  optInCorpWatch: {
+    contentMd: string;
+  };
 };
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
   formationDisplayContent: createEmptyFormationDisplayContent(),
 });
+
+export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
   businessSuffix: {
@@ -157,6 +172,22 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   agentOfficeAddressZipCode: {
     contentMd: "",
     placeholder: "",
+  },
+  paymentType: {
+    contentMd: "",
+    placeholder: "",
+  },
+  disclaimer: {
+    contentMd: "",
+  },
+  notification: {
+    contentMd: "",
+  },
+  optInAnnualReport: {
+    contentMd: "",
+  },
+  optInCorpWatch: {
+    contentMd: "",
   },
 });
 
