@@ -2450,7 +2450,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@businessnjgovnavigator/content@workspace:content":
+"@businessnjgovnavigator/content@*, @businessnjgovnavigator/content@workspace:content":
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
@@ -2458,6 +2458,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 5.13.4
     prettier: 2.5.1
+    rimraf: 3.0.2
   languageName: unknown
   linkType: soft
 
@@ -2470,6 +2471,7 @@ __metadata:
     "@aws-amplify/ui-react": 2.1.5
     "@babel/core": 7.16.5
     "@babel/runtime": 7.16.5
+    "@businessnjgovnavigator/content": "*"
     "@businessnjgovnavigator/shared": "*"
     "@commitlint/cli": 15.0.0
     "@commitlint/config-conventional": 15.0.0
@@ -2623,6 +2625,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/shared@workspace:shared"
   dependencies:
     "@babel/runtime": 7.16.5
+    "@businessnjgovnavigator/content": "*"
     "@jest/types": 27.4.2
     "@types/jest": 27.0.3
     "@types/node": 14.18.1

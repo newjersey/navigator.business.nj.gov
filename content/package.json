@@ -5,6 +5,8 @@
   "private": true,
   "main": "src",
   "scripts": {
+    "build": "node ./build.js",
+    "clean": "rimraf lib",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "spellcheck": "cspell **/*.md -c ../cspell.json"
@@ -17,6 +19,7 @@
     "@types/node": "14.18.1",
     "cross-env": "7.0.3",
     "cspell": "5.13.4",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "rimraf": "3.0.2"
   }
 }

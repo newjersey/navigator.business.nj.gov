@@ -15,10 +15,10 @@ export const loadProfileDisplayContent = (): ProfileDisplayContent => {
   const industry = getMarkdown(loadFile("industry.md"));
   const legalStructure = getMarkdown(loadFile("legal-structure.md"));
   const municipality = getMarkdown(loadFile("municipality.md"));
-  const specificHomeContractor = getMarkdown(loadFile("industry/industry-specific/home-contractor.md"));
-  const specificEmploymentAgency = getMarkdown(loadFile("industry/industry-specific/employment-agency.md"));
-  const specificLiquor = getMarkdown(loadFile("industry/industry-specific/liquor.md"));
-  const specificHomeBased = getMarkdown(loadFile("municipality/home-based-business.md"));
+  const specificHomeContractor = getMarkdown(loadFile("industry-home-contractor.md"));
+  const specificEmploymentAgency = getMarkdown(loadFile("industry-employment-agency.md"));
+  const specificLiquor = getMarkdown(loadFile("industry-liquor.md"));
+  const specificHomeBased = getMarkdown(loadFile("municipality-home-based-business.md"));
   const employerId = getMarkdown(loadFile("employer-id.md"));
   const entityId = getMarkdown(loadFile("entity-id.md"));
   const notes = getMarkdown(loadFile("notes.md"));
@@ -29,7 +29,7 @@ export const loadProfileDisplayContent = (): ProfileDisplayContent => {
   const legalStructureOptionContent: Record<string, string> = {};
   LegalStructures.forEach((legalStructure) => {
     legalStructureOptionContent[legalStructure.id] = getMarkdown(
-      loadFile(`legal-structure/${legalStructure.id}.md`)
+      loadFile(`legal-structure-${legalStructure.id}.md`)
     ).content;
   });
 
@@ -97,23 +97,25 @@ export const loadProfileDisplayContent = (): ProfileDisplayContent => {
 export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
   const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
   const readOperateContent = (filename: string): string =>
-    fs.readFileSync(path.join(displayContentDir, "roadmap", "operate", filename), "utf8");
+    fs.readFileSync(path.join(displayContentDir, "roadmap", filename), "utf8");
 
   return {
     contentMd: getMarkdown(roadmapContents).content,
     operateDisplayContent: {
-      entityIdMd: getMarkdown(readOperateContent("entity-id-form.md")).content,
-      filingCalendarMd: getMarkdown(readOperateContent("filing-calendar.md")).content,
-      entityIdErrorNotRegisteredMd: getMarkdown(readOperateContent("entity-id-error-not-registered.md"))
+      entityIdMd: getMarkdown(readOperateContent("operate-entity-id-form.md")).content,
+      filingCalendarMd: getMarkdown(readOperateContent("operate-filing-calendar.md")).content,
+      entityIdErrorNotRegisteredMd: getMarkdown(
+        readOperateContent("operate-entity-id-error-not-registered.md")
+      ).content,
+      entityIdErrorNotFoundMd: getMarkdown(readOperateContent("operate-entity-id-error-not-found.md"))
         .content,
-      entityIdErrorNotFoundMd: getMarkdown(readOperateContent("entity-id-error-not-found.md")).content,
     },
   };
 };
 
 export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const loadFile = (filename: string): string =>
-    fs.readFileSync(path.join(displayContentDir, "tasks", filename), "utf8");
+    fs.readFileSync(path.join(displayContentDir, filename), "utf8");
 
   const businessNameAndLegalStructure = getMarkdown(
     loadFile("business-formation/business-name-and-legal-structure.md")

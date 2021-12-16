@@ -7,7 +7,6 @@ describe("roadmapBuilder", () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
       addOns: [],
-      modifications: [],
     });
 
     expect(roadmap).toEqual(expectedGenericRoadmap);
@@ -17,7 +16,6 @@ describe("roadmapBuilder", () => {
     const roadmap = await buildRoadmap({
       industryId: "coffee",
       addOns: ["tea"],
-      modifications: [],
     });
 
     expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(
@@ -37,7 +35,6 @@ describe("roadmapBuilder", () => {
     const roadmap = await buildRoadmap({
       industryId: "coffee",
       addOns: [],
-      modifications: [],
     });
 
     expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(
@@ -57,7 +54,6 @@ describe("roadmapBuilder", () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
       addOns: ["weighted"],
-      modifications: [],
     });
 
     expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual([
@@ -71,7 +67,6 @@ describe("roadmapBuilder", () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
       addOns: ["mocha"],
-      modifications: [],
     });
 
     expect(roadmap.steps[4].tasks.map((it) => it.id)).toEqual(["mocha-task-5-id"]);
@@ -81,7 +76,6 @@ describe("roadmapBuilder", () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",
       addOns: ["blocking"],
-      modifications: [],
     });
 
     const blockedTask = roadmap.steps[0].tasks.find((it) => it.id === "blocked-id");

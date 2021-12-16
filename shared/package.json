@@ -23,6 +23,9 @@
     "printWidth": 110,
     "endOfLine": "auto"
   },
+  "dependencies": {
+    "@businessnjgovnavigator/content": "*"
+  },
   "devDependencies": {
     "@babel/runtime": "7.16.5",
     "@jest/types": "27.4.2",

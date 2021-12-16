@@ -1,4 +1,4 @@
-import industryJson from "../../content/src/industry.json";
+import industryJson from "../../content/lib/industry.json";
 
 export interface Industry {
   id: string;
@@ -10,6 +10,18 @@ export interface Industry {
   isMobileLocation: boolean;
   canBeReseller: boolean;
   additionalSearchTerms?: string;
+  roadmapSteps: AddOn[];
+  modifications: TaskModification[];
+}
+
+export interface AddOn {
+  step: number;
+  weight: number;
+  task: string;
+}
+export interface TaskModification {
+  taskToReplaceFilename: string;
+  replaceWithFilename: string;
 }
 
 export const LookupIndustryById = (id: string | undefined): Industry => {
@@ -22,6 +34,8 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       isLiquorLicenseApplicable: false,
       isMobileLocation: false,
       canBeReseller: true,
+      roadmapSteps: [],
+      modifications: [],
     }
   );
 };
