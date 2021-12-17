@@ -315,6 +315,14 @@ export const generateFormationDisplayContent = (
     contentMd: `some-agent-office-address-zip-code-content-${randomInt()}`,
     placeholder: `some-agent-office-address-zip-code-placeholder-${randomInt()}`,
   },
+  signer: {
+    contentMd: `some-signer-content- ${randomInt()}`,
+    placeholder: `some-signer-placeholder-${randomInt()}`,
+  },
+  additionalSigners: {
+    contentMd: `some-additional-signer-content- ${randomInt()}`,
+    placeholder: `some-additional-signer-placeholder-${randomInt()}`,
+  },
   paymentType: {
     contentMd: `some-payment-type-content-${randomInt()}`,
     placeholder: `some-payment-type-placeholder-${randomInt()}`,

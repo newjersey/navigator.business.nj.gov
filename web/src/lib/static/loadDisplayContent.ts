@@ -136,6 +136,8 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const agentOfficeAddressCity = getMarkdown(loadFile("business-formation/registered-agent-city.md"));
   const agentOfficeAddressState = getMarkdown(loadFile("business-formation/registered-agent-state.md"));
   const agentOfficeAddressZipCode = getMarkdown(loadFile("business-formation/registered-agent-zip.md"));
+  const signer = getMarkdown(loadFile("business-formation/signatures.md"));
+  const additionalSigners = getMarkdown(loadFile("business-formation/additional-signers.md"));
 
   return {
     formationDisplayContent: {
@@ -200,6 +202,14 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       agentOfficeAddressZipCode: {
         contentMd: agentOfficeAddressZipCode.content,
         ...(agentOfficeAddressZipCode.grayMatter as FieldGrayMatter),
+      },
+      signer: {
+        contentMd: signer.content,
+        ...(signer.grayMatter as FieldGrayMatter),
+      },
+      additionalSigners: {
+        contentMd: additionalSigners.content,
+        ...(additionalSigners.grayMatter as FieldGrayMatter),
       },
       paymentType: {
         contentMd: paymentType.content,

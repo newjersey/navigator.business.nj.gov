@@ -1,6 +1,5 @@
 import { BusinessFormation } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
-import { createEmptyFormationDisplayContent, FormationDisplayContent } from "@/lib/types/types";
 import {
   generateFormationDisplayContent,
   generateMunicipality,
@@ -28,19 +27,16 @@ describe("<BusinessFormation />", () => {
   let subject: RenderResult;
   const task = generateTask({});
 
-  const renderTask = (
-    userData: Partial<UserData>,
-    overrideDispayContent?: FormationDisplayContent
-  ): RenderResult => {
+  const renderTask = (userData: Partial<UserData>): RenderResult => {
+    const displayContent = generateFormationDisplayContent({
+      optInAnnualReport: { contentMd: "annual report" },
+      optInCorpWatch: { contentMd: "corp watch" },
+    });
+
     return render(
       <WithStatefulUserData initialUserData={generateUserData(userData)}>
         <ThemeProvider theme={createTheme()}>
-          <BusinessFormation
-            task={task}
-            displayContent={
-              overrideDispayContent ? overrideDispayContent : createEmptyFormationDisplayContent()
-            }
-          />
+          <BusinessFormation task={task} displayContent={displayContent} />
         </ThemeProvider>
       </WithStatefulUserData>
     );
@@ -111,12 +107,7 @@ describe("<BusinessFormation />", () => {
 
     it("updates userData when business formation data is submitted", () => {
       const profileData = generateLLCProfileData({});
-      const displayContent = generateFormationDisplayContent({
-        optInAnnualReport: { contentMd: "annual report" },
-        optInCorpWatch: { contentMd: "corp watch" },
-      });
-
-      subject = renderTask({ profileData }, displayContent);
+      subject = renderTask({ profileData });
 
       selectByText("Business suffix", "LLC");
       const threeDaysFromNow = dayjs().add(3, "days");
@@ -132,6 +123,8 @@ describe("<BusinessFormation />", () => {
       fillText("Agent office address line2", "Suite 101");
       fillText("Agent office address city", "Newark");
       fillText("Agent office address zip code", "45678");
+
+      fillText("Signer", "Elrond");
 
       selectByText("Payment Type", BusinessFormationDefaults.creditCardPaymentTypeLabel);
       selectCheckBox("annual report");
@@ -156,6 +149,8 @@ describe("<BusinessFormation />", () => {
       expect(currentUserData().formationData?.agentOfficeAddressCity).toEqual("Newark");
       expect(currentUserData().formationData?.agentOfficeAddressState).toEqual("NJ");
       expect(currentUserData().formationData?.agentOfficeAddressZipCode).toEqual("45678");
+      expect(currentUserData().formationData?.signer).toEqual("Elrond");
+      expect(currentUserData().formationData?.additionalSigners).toEqual([]);
       expect(currentUserData().formationData?.paymentType).toEqual("CC");
       expect(currentUserData().formationData?.annualReportNotification).toEqual(true);
       expect(currentUserData().formationData?.corpWatchNotification).toEqual(true);
@@ -179,68 +174,71 @@ describe("<BusinessFormation />", () => {
       expect(subject.queryByTestId("agent-name")).not.toBeInTheDocument();
     });
 
+    it("adds additional signers", () => {
+      const profileData = generateLLCProfileData({});
+      subject = renderTask({ profileData });
+      fillAllFieldsBut(["Additional signer"]);
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fillText("Additional signer 0", "Red Skull");
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fillText("Additional signer 1", "V");
+
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+      expect(currentUserData().formationData?.additionalSigners).toEqual(["Red Skull", "V"]);
+    });
+
+    it("deletes an additional signer", () => {
+      const profileData = generateLLCProfileData({});
+      subject = renderTask({ profileData });
+      fillAllFieldsBut(["Additional signer"]);
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fillText("Additional signer 0", "Red Skull");
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fillText("Additional signer 1", "V");
+      fireEvent.click(subject.getAllByLabelText("delete additional signer")[0]);
+
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+      expect(currentUserData().formationData?.additionalSigners).toEqual(["V"]);
+    });
+
+    it("ignores empty signer fields", () => {
+      const profileData = generateLLCProfileData({});
+      subject = renderTask({ profileData });
+      fillAllFieldsBut(["Additional signer"]);
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fillText("Additional signer 1", "Red Skull");
+
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+      expect(currentUserData().formationData?.additionalSigners).toEqual(["Red Skull"]);
+    });
+
+    it("does not add more than 10 signers", () => {
+      const profileData = generateLLCProfileData({});
+      subject = renderTask({ profileData });
+      fillAllFieldsBut(["Additional signer"]);
+      for (let i = 0; i < 8; i++) {
+        fireEvent.click(
+          subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false })
+        );
+      }
+      expect(
+        subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false })
+      ).toBeInTheDocument();
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      expect(
+        subject.queryByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false })
+      ).not.toBeInTheDocument();
+    });
+
     describe("required fields", () => {
       beforeEach(() => {
         const profileData = generateLLCProfileData({});
-        const displayContent = generateFormationDisplayContent({
-          optInAnnualReport: { contentMd: "annual report" },
-          optInCorpWatch: { contentMd: "corp watch" },
-        });
-        subject = renderTask({ profileData }, displayContent);
+        subject = renderTask({ profileData });
       });
-
-      const fillAllFieldsBut = (
-        fieldLabels: string[],
-        other: { agentRadio: "NUMBER" | "MANUAL_ENTRY" } = { agentRadio: "NUMBER" }
-      ) => {
-        if (!fieldLabels.includes("Business suffix")) {
-          selectByText("Business suffix", "LLC");
-        }
-        if (!fieldLabels.includes("Business address line1")) {
-          fillText("Business address line1", "1234 main street");
-        }
-        if (!fieldLabels.includes("Business address line2")) {
-          fillText("Business address line2", "Suite 304");
-        }
-        if (!fieldLabels.includes("Business address zip code")) {
-          fillText("Business address zip code", "12345");
-        }
-        if (other.agentRadio === "NUMBER") {
-          if (!fieldLabels.includes("Agent number")) {
-            fillText("Agent number", "1234567890");
-          }
-        } else {
-          chooseRadio("registered-agent-manual");
-
-          if (!fieldLabels.includes("Agent name")) {
-            fillText("Agent name", "Hugo Weaving");
-          }
-          if (!fieldLabels.includes("Agent email")) {
-            fillText("Agent email", "name@example.com");
-          }
-          if (!fieldLabels.includes("Agent office address line1")) {
-            fillText("Agent office address line1", "400 Pennsylvania Ave");
-          }
-          if (!fieldLabels.includes("Agent office address line2")) {
-            fillText("Agent office address line2", "Suite 101");
-          }
-          if (!fieldLabels.includes("Agent office address city")) {
-            fillText("Agent office address city", "Newark");
-          }
-          if (!fieldLabels.includes("Agent office address zip code")) {
-            fillText("Agent office address zip code", "45678");
-          }
-        }
-        if (!fieldLabels.includes("Payment type")) {
-          selectByText("Payment Type", BusinessFormationDefaults.creditCardPaymentTypeLabel);
-        }
-        if (!fieldLabels.includes("Opt in annual report")) {
-          selectCheckBox("annual report");
-        }
-        if (!fieldLabels.includes("Opt in corp watch")) {
-          selectCheckBox("corp watch");
-        }
-      };
 
       describe("does not submit when missing a required field", () => {
         it("Business suffix", () => {
@@ -257,6 +255,18 @@ describe("<BusinessFormation />", () => {
 
         it("Business address zip code", () => {
           fillAllFieldsBut(["Business address zip code"]);
+          fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+          expect(userDataWasNotUpdated()).toEqual(true);
+        });
+
+        it("signer", () => {
+          fillAllFieldsBut(["Signer"]);
+          fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+          expect(userDataWasNotUpdated()).toEqual(true);
+        });
+
+        it("Payment type", () => {
+          fillAllFieldsBut(["Payment type"]);
           fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
           expect(userDataWasNotUpdated()).toEqual(true);
         });
@@ -302,43 +312,43 @@ describe("<BusinessFormation />", () => {
             expect(userDataWasNotUpdated()).toEqual(true);
           });
         });
+      });
 
-        it("Payment type", () => {
-          fillAllFieldsBut(["Payment type"]);
+      describe("submits when missing optional field", () => {
+        it("everything present", () => {
+          fillAllFieldsBut([]);
           fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
-          expect(userDataWasNotUpdated()).toEqual(true);
+          expect(userDataWasNotUpdated()).toEqual(false);
         });
 
-        describe("submits when missing optional field", () => {
-          it("everything present", () => {
-            fillAllFieldsBut([]);
-            fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
-            expect(userDataWasNotUpdated()).toEqual(false);
-          });
+        it("agent address line 2", () => {
+          fillAllFieldsBut(["Agent office address line2"], { agentRadio: "MANUAL_ENTRY" });
+          fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+          expect(userDataWasNotUpdated()).toEqual(false);
+        });
 
-          it("agent address line 2", () => {
-            fillAllFieldsBut(["Agent office address line2"], { agentRadio: "MANUAL_ENTRY" });
-            fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
-            expect(userDataWasNotUpdated()).toEqual(false);
-          });
+        it("business address line 2", () => {
+          fillAllFieldsBut(["Business address line2"], { agentRadio: "MANUAL_ENTRY" });
+          fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+          expect(userDataWasNotUpdated()).toEqual(false);
+        });
 
-          it("business address line 2", () => {
-            fillAllFieldsBut(["Business address line2"], { agentRadio: "MANUAL_ENTRY" });
-            fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
-            expect(userDataWasNotUpdated()).toEqual(false);
-          });
+        it("Opt in annual report", () => {
+          fillAllFieldsBut(["Opt in annual report"], { agentRadio: "MANUAL_ENTRY" });
+          fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+          expect(userDataWasNotUpdated()).toEqual(false);
+        });
 
-          it("Opt in annual report", () => {
-            fillAllFieldsBut(["Opt in annual report"], { agentRadio: "MANUAL_ENTRY" });
-            fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
-            expect(userDataWasNotUpdated()).toEqual(false);
-          });
+        it("Opt in corp watch", () => {
+          fillAllFieldsBut(["Opt in corp watch"], { agentRadio: "MANUAL_ENTRY" });
+          fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+          expect(userDataWasNotUpdated()).toEqual(false);
+        });
 
-          it("Opt in corp watch", () => {
-            fillAllFieldsBut(["Opt in corp watch"], { agentRadio: "MANUAL_ENTRY" });
-            fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
-            expect(userDataWasNotUpdated()).toEqual(false);
-          });
+        it("additional signer", () => {
+          fillAllFieldsBut(["Additional signer"]);
+          fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
+          expect(userDataWasNotUpdated()).toEqual(false);
         });
       });
     });
@@ -368,5 +378,67 @@ describe("<BusinessFormation />", () => {
 
   const chooseRadio = (value: string) => {
     fireEvent.click(subject.getByTestId(value));
+  };
+
+  const fillAllFieldsBut = (
+    fieldLabels: string[],
+    other: { agentRadio: "NUMBER" | "MANUAL_ENTRY" } = { agentRadio: "NUMBER" }
+  ) => {
+    if (!fieldLabels.includes("Business suffix")) {
+      selectByText("Business suffix", "LLC");
+    }
+    if (!fieldLabels.includes("Business address line1")) {
+      fillText("Business address line1", "1234 main street");
+    }
+    if (!fieldLabels.includes("Business address line2")) {
+      fillText("Business address line2", "Suite 304");
+    }
+    if (!fieldLabels.includes("Business address zip code")) {
+      fillText("Business address zip code", "12345");
+    }
+    if (!fieldLabels.includes("Signer")) {
+      fillText("Signer", "Elrond");
+    }
+    if (!fieldLabels.includes("Additional signer")) {
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
+      fillText("Additional signer 0", "Red Skull");
+    }
+
+    if (!fieldLabels.includes("Payment type")) {
+      selectByText("Payment Type", BusinessFormationDefaults.creditCardPaymentTypeLabel);
+    }
+    if (!fieldLabels.includes("Opt in annual report")) {
+      selectCheckBox("annual report");
+    }
+    if (!fieldLabels.includes("Opt in corp watch")) {
+      selectCheckBox("corp watch");
+    }
+
+    if (other.agentRadio === "NUMBER") {
+      if (!fieldLabels.includes("Agent number")) {
+        fillText("Agent number", "1234567890");
+      }
+    } else {
+      chooseRadio("registered-agent-manual");
+
+      if (!fieldLabels.includes("Agent name")) {
+        fillText("Agent name", "Hugo Weaving");
+      }
+      if (!fieldLabels.includes("Agent email")) {
+        fillText("Agent email", "name@example.com");
+      }
+      if (!fieldLabels.includes("Agent office address line1")) {
+        fillText("Agent office address line1", "400 Pennsylvania Ave");
+      }
+      if (!fieldLabels.includes("Agent office address line2")) {
+        fillText("Agent office address line2", "Suite 101");
+      }
+      if (!fieldLabels.includes("Agent office address city")) {
+        fillText("Agent office address city", "Newark");
+      }
+      if (!fieldLabels.includes("Agent office address zip code")) {
+        fillText("Agent office address zip code", "45678");
+      }
+    }
   };
 });

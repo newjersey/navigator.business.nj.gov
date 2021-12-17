@@ -91,6 +91,8 @@ export type FormationDisplayContent = {
   agentOfficeAddressCity: TextFieldContent;
   agentOfficeAddressState: TextFieldContent;
   agentOfficeAddressZipCode: TextFieldContent;
+  signer: TextFieldContent;
+  additionalSigners: TextFieldContent;
   paymentType: TextFieldContent;
   disclaimer: {
     contentMd: string;
@@ -170,6 +172,14 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     placeholder: "",
   },
   agentOfficeAddressZipCode: {
+    contentMd: "",
+    placeholder: "",
+  },
+  signer: {
+    contentMd: "",
+    placeholder: "",
+  },
+  additionalSigners: {
     contentMd: "",
     placeholder: "",
   },
