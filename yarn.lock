@@ -2402,6 +2402,7 @@ __metadata:
     "@types/xml2js": 0.4.9
     "@typescript-eslint/eslint-plugin": 5.7.0
     "@typescript-eslint/parser": 5.7.0
+    airtable: 0.11.1
     aws-lambda: 1.0.7
     aws-sdk: 2.1046.0
     axios: 0.24.0
