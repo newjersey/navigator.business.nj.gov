@@ -3,12 +3,10 @@ id: "haul-waste-hic"
 urlSlug: "haul-waste"
 name: "Register Items that Will Haul Waste"
 callToActionLink: "https://www.wastedecals.nj.gov/sg2.html"
-callToActionText: "Apply for Your Waste Hauling Decals"
+callToActionText: "Apply for My Waste Hauling Decal"
 ---
 
-You need to register any vehicle(s) or items you use to haul and discard the waste you create. Vehicle registatraion is required to enter waste facilities. Waste facility vehciles will not allow none registered vehicles to discard waste. The New Jersey Department of Environmental Protection (DEP) issues a decal that should be placed on any items used for hauling. 
-
-Once your application is submitted and approved, you will recieve an e-mail asking for payment. Your decal(s) will be mailed out the same day as payment was made.
+You need to register any vehicle(s) or items you use to haul and discard the waste you create. Waste facility will not allow unregistered vehicles or items to discard waste. The New Jersey Department of Environmental Protection (DEP) registers vehicels or items used for hauling waste. Once your application is submitted and approved, you will recieve an e-mail asking for payment. Your decal(s) will be mailed out the same day as payment was made.
 
 If you collect or haul waste created by other companies, you will need to be a commercial waste hauler, which is a more time-intensive process. 
 
