@@ -14,7 +14,7 @@ If you collect or haul waste created by other companies, you will need to be a c
 
 To complete this application, you must have:
 - A completed application
-- Affidavit/notarized aapplication
+- Affidavit/notarized application
 - Valid Motor Vehicle Insurance Card for all vehicles
 - Motor Vehicle registration that indicate that the vehicle is registered as Commercial and display 
 - Lease agreement and certification (for leased vehicels, if applicable) 
