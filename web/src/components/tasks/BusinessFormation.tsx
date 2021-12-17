@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessStartDate } from "@/components/tasks/business-formation/BusinessStartDate";
 import { RegisteredAgent } from "@/components/tasks/business-formation/RegisteredAgent";
+import { Signatures } from "@/components/tasks/business-formation/Signatures";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -64,6 +65,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     if (!formationData.businessSuffix) return;
     if (!formationData.businessAddressLine1) return;
     if (!formationData.businessAddressZipCode) return;
+    if (!formationData.signer) return;
     if (formationData.agentNumberOrManual === "NUMBER") {
       if (!formationData.agentNumber) return;
     }
@@ -77,7 +79,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
     if (!formationData.paymentType) return;
 
-    update({ ...userData, formationData });
+    const removedEmptySigners = {
+      ...formationData,
+      additionalSigners: formationData.additionalSigners.filter((it) => !!it),
+    };
+
+    update({ ...userData, formationData: removedEmptySigners });
   };
   const makeUpdateProfileLink = (label: string, value: string): ReactElement => {
     const linkElement = <a href="/profile">{BusinessFormationDefaults.updateYourProfileLinkText}</a>;
@@ -151,6 +158,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           validationText={BusinessFormationDefaults.businessAddressZipCode}
         />
         <RegisteredAgent />
+        <Signatures />
         <PaymentTypeDropdown />
         <Content>{props.displayContent.disclaimer.contentMd}</Content>
         <BusinessFormationNotifications />

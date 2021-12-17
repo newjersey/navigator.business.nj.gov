@@ -16,8 +16,8 @@ export interface FormationData {
   agentOfficeAddressCity: string;
   agentOfficeAddressState: string;
   agentOfficeAddressZipCode: string;
-  // signatures: string[];
-  // paymentType: "CC" | "ACH" | undefined;
+  signer: string;
+  additionalSigners: string[];
   paymentType: PaymentType;
   annualReportNotification: boolean;
   corpWatchNotification: boolean;
@@ -27,6 +27,7 @@ export type FormationTextField = Exclude<
   keyof FormationData,
   | "businessSuffix"
   | "businessStartDate"
+  | "additionalSigners"
   | "paymentType"
   | "annualReportNotification"
   | "corpWatchNotification"
@@ -51,7 +52,8 @@ export const createEmptyFormationData = (): FormationData => {
     agentOfficeAddressCity: "",
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: "",
-    // signatures: [],
+    signer: "",
+    additionalSigners: [],
     paymentType: undefined,
     annualReportNotification: false,
     corpWatchNotification: false,

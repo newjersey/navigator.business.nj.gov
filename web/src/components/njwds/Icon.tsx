@@ -3,12 +3,14 @@ import React, { ReactElement } from "react";
 interface Props {
   children: string;
   className?: string;
+  label?: string;
 }
 
 export const Icon = (props: Props): ReactElement => {
   return (
     <svg
       className={`usa-icon ${props.className ? props.className : ""}`}
+      aria-label={props.label}
       aria-hidden="true"
       focusable="false"
       role="img"
