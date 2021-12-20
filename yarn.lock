@@ -2419,7 +2419,7 @@ __metadata:
     express: 4.17.1
     good-fences: 1.0.1
     jasmine: 3.10.0
-    jest: 27.4.4
+    jest: 27.4.5
     jest-dynalite: 3.4.4
     jest-junit: 13.0.0
     jsonwebtoken: 8.5.1
@@ -2434,7 +2434,7 @@ __metadata:
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.0
     supertest: 6.1.6
-    ts-jest: 27.1.1
+    ts-jest: 27.1.2
     ts-loader: 9.2.6
     ts-node: 10.4.0
     tsconfig-paths: 3.12.0
@@ -2528,7 +2528,7 @@ __metadata:
     aws-lambda: 1.0.7
     aws-sdk: 2.1046.0
     axios: 0.24.0
-    babel-jest: 27.4.4
+    babel-jest: 27.4.5
     babel-loader: 8.2.3
     body-parser: 1.19.1
     broken-link-checker: 0.7.8
@@ -2561,7 +2561,7 @@ __metadata:
     husky: 7.0.4
     identity-obj-proxy: 3.0.0
     jasmine: 3.10.0
-    jest: 27.4.4
+    jest: 27.4.5
     jest-dynalite: 3.4.4
     jest-junit: 13.0.0
     jest-raw-loader: 1.0.1
@@ -2601,7 +2601,7 @@ __metadata:
     style-loader: 3.3.1
     supertest: 6.1.6
     swr: 1.1.1
-    ts-jest: 27.1.1
+    ts-jest: 27.1.2
     ts-loader: 9.2.6
     ts-node: 10.4.0
     tsconfig-paths: 3.12.0
@@ -2631,11 +2631,11 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.4.1
     eslint-config-prettier: 8.3.0
-    jest: 27.4.4
+    jest: 27.4.5
     jest-junit: 13.0.0
     prettier: 2.5.1
     rimraf: 3.0.2
-    ts-jest: 27.1.1
+    ts-jest: 27.1.2
     ts-node: 10.4.0
     tsconfig-paths: 3.12.0
     typescript: 4.5.4
@@ -2689,7 +2689,7 @@ __metadata:
     "@typescript-eslint/parser": 5.7.0
     airtable: 0.11.1
     axios: 0.24.0
-    babel-jest: 27.4.4
+    babel-jest: 27.4.5
     babel-loader: 8.2.3
     broken-link-checker: 0.7.8
     clean-webpack-plugin: 4.0.0
@@ -2715,7 +2715,7 @@ __metadata:
     good-fences: 1.0.1
     gray-matter: 4.0.3
     identity-obj-proxy: 3.0.0
-    jest: 27.4.4
+    jest: 27.4.5
     jest-junit: 13.0.0
     jest-raw-loader: 1.0.1
     lodash.orderby: 4.6.0
@@ -2739,7 +2739,7 @@ __metadata:
     sass-loader: 12.4.0
     style-loader: 3.3.1
     swr: 1.1.1
-    ts-jest: 27.1.1
+    ts-jest: 27.1.2
     ts-loader: 9.2.6
     ts-node: 10.4.0
     typescript: 4.5.4
@@ -4100,7 +4100,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/core@npm:^27.4.4, @jest/core@npm:^27.4.5":
+"@jest/core@npm:^27.4.5":
   version: 27.4.5
   resolution: "@jest/core@npm:27.4.5"
   dependencies:
@@ -4283,7 +4283,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/transform@npm:^27.4.4, @jest/transform@npm:^27.4.5":
+"@jest/transform@npm:^27.4.5":
   version: 27.4.5
   resolution: "@jest/transform@npm:27.4.5"
   dependencies:
@@ -11249,25 +11249,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-jest@npm:27.4.4":
-  version: 27.4.4
-  resolution: "babel-jest@npm:27.4.4"
-  dependencies:
-    "@jest/transform": ^27.4.4
-    "@jest/types": ^27.4.2
-    "@types/babel__core": ^7.1.14
-    babel-plugin-istanbul: ^6.0.0
-    babel-preset-jest: ^27.4.0
-    chalk: ^4.0.0
-    graceful-fs: ^4.2.4
-    slash: ^3.0.0
-  peerDependencies:
-    "@babel/core": ^7.8.0
-  checksum: 2d9de4f050f5c976a88f2afe5f7c9c53a5a1420320c70e46186d05dfe53eddccbcded80ef4ade80f4a1cacd940f6c934357e229b1f9666b00776c0d358d95fa6
-  languageName: node
-  linkType: hard
-
-"babel-jest@npm:^27.4.5":
+"babel-jest@npm:27.4.5, babel-jest@npm:^27.4.5":
   version: 27.4.5
   resolution: "babel-jest@npm:27.4.5"
   dependencies:
@@ -21049,7 +21031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-cli@npm:^27.4.4":
+"jest-cli@npm:^27.4.5":
   version: 27.4.5
   resolution: "jest-cli@npm:27.4.5"
   dependencies:
@@ -21605,13 +21587,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:27.4.4":
-  version: 27.4.4
-  resolution: "jest@npm:27.4.4"
+"jest@npm:27.4.5":
+  version: 27.4.5
+  resolution: "jest@npm:27.4.5"
   dependencies:
-    "@jest/core": ^27.4.4
+    "@jest/core": ^27.4.5
     import-local: ^3.0.2
-    jest-cli: ^27.4.4
+    jest-cli: ^27.4.5
   peerDependencies:
     node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
   peerDependenciesMeta:
@@ -21619,7 +21601,7 @@ __metadata:
       optional: true
   bin:
     jest: bin/jest.js
-  checksum: 0af09bd42c1ecef555dbc4a8cdd2b77b4bfff9ab3d7d2ee01e343067f443eb5743c7acdf2f28e8d2d268c8e058b129c79b1eda99d7c8b06a6a0e9e1fd04cb741
+  checksum: 57ee4be68650dd1f89e077cca48813d824779a07626e84178c672727ace1ef3cd489f124a27dc02b88601774413330e6d35080b11919efa6460ee61d378c6610
   languageName: node
   linkType: hard
 
@@ -33980,9 +33962,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:27.1.1":
-  version: 27.1.1
-  resolution: "ts-jest@npm:27.1.1"
+"ts-jest@npm:27.1.2":
+  version: 27.1.2
+  resolution: "ts-jest@npm:27.1.2"
   dependencies:
     bs-logger: 0.x
     fast-json-stable-stringify: 2.x
@@ -34010,7 +33992,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: 3aea68083399c49e9079dbd1583ee5cce7da9648a6cdaef96c2b5f2f85de375c186227724336f359ecd2bc7871bff0911667d1f4867e0e275417b3e4887841d9
+  checksum: 2e7275f8a3545ec1340b37c458ace9244b5903e86861eb108beffff97d433f296c1254f76a41b573b1fe6245110b21bb62150bb88d55159f1dc7a929886535cb
   languageName: node
   linkType: hard
 
