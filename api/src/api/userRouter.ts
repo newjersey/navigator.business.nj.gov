@@ -100,9 +100,11 @@ export const userRouterFactory = (
       };
     }
     if (shouldAddToNewsletter(userData)) {
+      userData.user.externalStatus.newsletter = { status: "IN_PROGRESS" };
       addNewsletter(userData);
     }
     if (shouldAddToUserTesting(userData)) {
+      userData.user.externalStatus.userTesting = { status: "IN_PROGRESS" };
       addToUserTesting(userData);
     }
     userDataClient

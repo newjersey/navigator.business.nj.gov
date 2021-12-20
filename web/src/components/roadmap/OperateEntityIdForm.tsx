@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const OperateEntityIdForm = (props: Props): ReactElement => {
-  const { userData, update, refresh } = useUserData();
+  const { userData, update } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [isValid, setIsValid] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -63,8 +63,6 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
         filings: [],
       },
     });
-
-    await refresh();
   };
 
   return (

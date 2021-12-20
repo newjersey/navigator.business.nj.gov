@@ -204,8 +204,10 @@ export const generateNewsletterResponse = (overrides: Partial<NewsletterResponse
 };
 
 export const generateUserTestingResponse = (overrides: Partial<UserTestingResponse>): UserTestingResponse => {
+  const failed = !!(randomInt() % 2);
   return {
-    success: !!(randomInt() % 2),
+    success: !failed,
+    status: failed ? "CONNECTION_ERROR" : "SUCCESS",
     ...overrides,
   };
 };

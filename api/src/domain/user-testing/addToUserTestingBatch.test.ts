@@ -30,7 +30,7 @@ describe("addToUserTestingBatch", () => {
     stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
-    stubUserTestingClient.add.mockResolvedValue({ success: true });
+    stubUserTestingClient.add.mockResolvedValue({ success: true, status: "SUCCESS" });
 
     stubUserDataQlClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
@@ -46,8 +46,8 @@ describe("addToUserTestingBatch", () => {
       return Promise.resolve(userData);
     });
     stubUserTestingClient.add
-      .mockResolvedValueOnce({ success: false })
-      .mockResolvedValueOnce({ success: true });
+      .mockResolvedValueOnce({ success: false, status: "RESPONSE_ERROR" })
+      .mockResolvedValueOnce({ success: true, status: "SUCCESS" });
 
     stubUserDataQlClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
@@ -62,7 +62,9 @@ describe("addToUserTestingBatch", () => {
     stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
-    stubUserTestingClient.add.mockRejectedValueOnce({}).mockResolvedValueOnce({ success: true });
+    stubUserTestingClient.add
+      .mockRejectedValueOnce({})
+      .mockResolvedValueOnce({ success: true, status: "SUCCESS" });
 
     stubUserDataQlClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),

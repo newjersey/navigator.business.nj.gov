@@ -2,7 +2,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { postUserData } from "@/lib/api-client/apiClient";
 import { UserDataError } from "@/lib/types/types";
 import { AuthContext, UserDataErrorContext } from "@/pages/_app";
-import { UserData } from "@businessnjgovnavigator/shared/";
+import { externalSyncUser, UserData } from "@businessnjgovnavigator/shared/";
 import { useContext, useEffect } from "react";
 import useSWR from "swr";
 
@@ -39,10 +39,11 @@ export const useUserData = (): UseUserDataResponse => {
 
   const update = async (newUserData: UserData | undefined): Promise<void> => {
     if (newUserData) {
-      await mutate(newUserData, false);
+      mutate({ ...newUserData, user: externalSyncUser(newUserData.user) }, false);
       return postUserData(newUserData)
-        .then(() => {
+        .then((response: UserData) => {
           setUserDataError(undefined);
+          mutate(response, false);
         })
         .catch(() => {
           setUserDataError("UPDATE_FAILED");

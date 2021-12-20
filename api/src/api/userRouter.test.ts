@@ -258,5 +258,21 @@ describe("userRouter", () => {
       expect(stubAddNewsletter).toHaveBeenCalled();
       expect(stubAddToUserTesting).toHaveBeenCalled();
     });
+    it("does not add to newsletter and user testing if true", async () => {
+      const userData = generateUserData({
+        user: generateUser({
+          id: "123",
+          externalStatus: { newsletter: { status: "IN_PROGRESS" }, userTesting: { status: "IN_PROGRESS" } },
+          userTesting: true,
+          receiveNewsletter: true,
+        }),
+      });
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
+
+      await request(app).post(`/users`).send(userData).set("Authorization", "Bearer user-123-token");
+      expect(stubAddNewsletter).not.toHaveBeenCalled();
+      expect(stubAddToUserTesting).not.toHaveBeenCalled();
+    });
   });
 });

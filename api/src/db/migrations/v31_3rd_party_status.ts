@@ -27,10 +27,15 @@ export interface v31NewsletterResponse {
   success: boolean;
   status: v31NewsletterStatus;
 }
+export interface v31UserTestingResponse {
+  success: boolean;
+}
 
 export type v31ExternalStatus = {
   newsletter?: v31NewsletterResponse;
+  userTesting?: v31UserTestingResponse;
 };
+
 export const migrate_v30_to_v31 = (v30Data: v30UserData): v31UserData => {
   return {
     ...v30Data,
