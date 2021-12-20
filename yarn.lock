@@ -2410,7 +2410,7 @@ __metadata:
     aws-sdk: 2.1046.0
     axios: 0.24.0
     body-parser: 1.19.1
-    copy-webpack-plugin: 10.0.0
+    copy-webpack-plugin: 10.2.0
     cors: 2.8.5
     cross-env: 7.0.3
     dayjs: 1.10.7
@@ -2426,7 +2426,7 @@ __metadata:
     prettier: 2.5.1
     prettier-plugin-organize-imports: 2.3.4
     rimraf: 3.0.2
-    serverless: 2.68.0
+    serverless: 2.69.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.3.1
@@ -2535,7 +2535,7 @@ __metadata:
     cat: 0.2.0
     check-node-version: 4.2.1
     clean-webpack-plugin: 4.0.0
-    copy-webpack-plugin: 10.0.0
+    copy-webpack-plugin: 10.2.0
     cors: 2.8.5
     cross-env: 7.0.3
     cspell: 5.13.3
@@ -2590,7 +2590,7 @@ __metadata:
     sass: 1.45.0
     sass-loader: 12.4.0
     semantic-release: 18.0.1
-    serverless: 2.68.0
+    serverless: 2.69.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.3.1
@@ -2693,7 +2693,7 @@ __metadata:
     babel-loader: 8.2.3
     broken-link-checker: 0.7.8
     clean-webpack-plugin: 4.0.0
-    copy-webpack-plugin: 10.0.0
+    copy-webpack-plugin: 10.2.0
     cross-env: 7.0.3
     cspell: 5.13.3
     css-loader: 6.5.1
@@ -11179,7 +11179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:2.1046.0, aws-sdk@npm:^2.1036.0, aws-sdk@npm:^2.1041.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0":
+"aws-sdk@npm:2.1046.0, aws-sdk@npm:^2.1036.0, aws-sdk@npm:^2.1046.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0":
   version: 2.1046.0
   resolution: "aws-sdk@npm:2.1046.0"
   dependencies:
@@ -13065,7 +13065,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-progress-footer@npm:^2.2.0, cli-progress-footer@npm:^2.3.0":
+"cli-progress-footer@npm:^2.3.0":
   version: 2.3.0
   resolution: "cli-progress-footer@npm:2.3.0"
   dependencies:
@@ -13937,9 +13937,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-webpack-plugin@npm:10.0.0":
-  version: 10.0.0
-  resolution: "copy-webpack-plugin@npm:10.0.0"
+"copy-webpack-plugin@npm:10.2.0":
+  version: 10.2.0
+  resolution: "copy-webpack-plugin@npm:10.2.0"
   dependencies:
     fast-glob: ^3.2.7
     glob-parent: ^6.0.1
@@ -13949,7 +13949,7 @@ __metadata:
     serialize-javascript: ^6.0.0
   peerDependencies:
     webpack: ^5.1.0
-  checksum: 70652af613b6bee93039c95daa72a68b0cdc4f66d3d861d9237b4b338968fb5c4fb1860c8424348c73d480975844887c9a0d9a2a57257c226a896b2348d2edcd
+  checksum: ae99dc42d0fbe4d7fc4a6a0902130c4420c7a2f27a995df55b4fcaa5c5aec371b4545609249f93e8db0f5b95daaed053e74f38d794ace1336f21886c29e2fddc
   languageName: node
   linkType: hard
 
@@ -31344,9 +31344,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:2.68.0":
-  version: 2.68.0
-  resolution: "serverless@npm:2.68.0"
+"serverless@npm:2.69.1":
+  version: 2.69.1
+  resolution: "serverless@npm:2.69.1"
   dependencies:
     "@serverless/cli": ^1.5.3
     "@serverless/components": ^3.18.1
@@ -31356,14 +31356,14 @@ __metadata:
     ajv: ^6.12.6
     ajv-keywords: ^3.5.2
     archiver: ^5.3.0
-    aws-sdk: ^2.1041.0
+    aws-sdk: ^2.1046.0
     bluebird: ^3.7.2
     boxen: ^5.1.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
     child-process-ext: ^2.1.1
     ci-info: ^3.3.0
-    cli-progress-footer: ^2.2.0
+    cli-progress-footer: ^2.3.0
     d: ^1.0.1
     dayjs: ^1.10.7
     decompress: ^4.2.1
@@ -31407,7 +31407,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 93cc25f616e567c80ae9464bef9a3e8361f28948230ed46aaa559d0d2651d3217cd7add5722b3c0879b6c982ac95da08e34fff1ebca47301c5357321eaa54999
+  checksum: 0fa9ee894a7ff7620cc55b10c56779ac74a3bd25d21dfa0d448575c720cc1361cf54c019b79e413003584bd1c7a9de959f218972d42feaab549593816465e3d5
   languageName: node
   linkType: hard
 
