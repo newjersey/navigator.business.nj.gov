@@ -38,7 +38,7 @@
     "body-parser": "1.19.1",
     "cors": "2.8.5",
     "dayjs": "1.10.7",
-    "express": "4.17.1",
+    "express": "4.17.2",
     "jsonwebtoken": "8.5.1",
     "serverless-http": "2.7.0",
     "uuid": "8.3.2",
