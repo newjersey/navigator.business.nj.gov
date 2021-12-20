@@ -14,11 +14,13 @@ export const BusinessAddressLine1 = (): ReactElement => {
   };
 
   return (
-    <BusinessFormationTextField
-      fieldName="businessAddressLine1"
-      error={error}
-      onValidation={onValidation}
-      validationText={BusinessFormationDefaults.businessAddressLine1ErrorText}
-    />
+    <div className="form-input margin-bottom-2">
+      <BusinessFormationTextField
+        fieldName="businessAddressLine1"
+        error={error}
+        onValidation={onValidation}
+        validationText={BusinessFormationDefaults.businessAddressLine1ErrorText}
+      />
+    </div>
   );
 };

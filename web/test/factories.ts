@@ -254,6 +254,9 @@ export const randomIndustry = (isMobileLocation = false): Industry => {
 export const generateFormationDisplayContent = (
   overrides: Partial<FormationDisplayContent>
 ): FormationDisplayContent => ({
+  businessNameAndLegalStructure: {
+    contentMd: `some-business-name-and-legal-structure-content-${randomInt()}`,
+  },
   businessSuffix: {
     contentMd: `some-business-suffix-content-${randomInt()}`,
     placeholder: `some-business-suffix-placeholder-${randomInt()}`,
@@ -277,7 +280,6 @@ export const generateFormationDisplayContent = (
     contentMd: `some-business-address-zip-code-content-${randomInt()}`,
     placeholder: `some-business-address-zip-code-placeholder-${randomInt()}`,
   },
-
   agentNumberOrManual: {
     contentMd: `some-agent-number-or-manual-content-${randomInt()}`,
     radioButtonNumberText: `some-agent-number-or-manual-radio-number-text-${randomInt()}`,
@@ -338,6 +340,20 @@ export const generateFormationDisplayContent = (
   },
   optInCorpWatch: {
     contentMd: `some-opt-in-corp-watch-content-${randomInt()}`,
+  },
+  officialFormationDocument: {
+    contentMd: `some-official-formation-document-content-${randomInt()}`,
+    cost: `some-official-formation-document-cost-${randomInt()}`,
+  },
+  certificateOfStanding: {
+    contentMd: `some-certificate-of-standing-content-${randomInt()}`,
+    cost: `some-certificate-of-standing-cost-${randomInt()}`,
+    optionalLabel: `some-certificate-of-standing-optional-label-${randomInt()}`,
+  },
+  certifiedCopyOfFormationDocument: {
+    contentMd: `some-certified-copy-of-formation-document-content-${randomInt()}`,
+    cost: `some-certified-copy-of-formation-document-cost-${randomInt()}`,
+    optionalLabel: `some-certified-copy-of-formation-document-optional-label-${randomInt()}`,
   },
   ...overrides,
 });

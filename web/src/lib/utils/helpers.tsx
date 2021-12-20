@@ -228,3 +228,15 @@ export const splitAndBoldSearchText = (displayText: string, searchText: string):
     return <>{displayText}</>;
   }
 };
+
+export const addTwoDollarValues = (currVal: string, addValue: string) => {
+  const currentValue = currVal[0] === "$" ? Number(currVal.slice(1)) : Number(currVal);
+  const additionalValue = addValue[0] === "$" ? Number(addValue.slice(1)) : Number(addValue);
+  return `$${(currentValue + additionalValue).toFixed(2)}`;
+};
+
+export const subtractTwoDollarValues = (currVal: string, addValue: string) => {
+  const currentValue = currVal[0] === "$" ? Number(currVal.slice(1)) : Number(currVal);
+  const additionalValue = addValue[0] === "$" ? Number(addValue.slice(1)) : Number(addValue);
+  return `$${(currentValue - additionalValue).toFixed(2)}`;
+};

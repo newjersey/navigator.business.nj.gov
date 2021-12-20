@@ -21,7 +21,7 @@ export const BusinessFormationNotifications = (): ReactElement => {
   };
 
   return (
-    <>
+    <div className="margin-y-2">
       <Content>{state.displayContent.notification.contentMd}</Content>{" "}
       <FormGroup>
         <FormControlLabel
@@ -33,6 +33,6 @@ export const BusinessFormationNotifications = (): ReactElement => {
           label={<Content>{state.displayContent.optInCorpWatch.contentMd}</Content>}
         />
       </FormGroup>
-    </>
+    </div>
   );
 };

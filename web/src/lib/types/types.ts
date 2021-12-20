@@ -70,6 +70,9 @@ export type ProfileDisplayContent = {
 };
 
 export type FormationDisplayContent = {
+  businessNameAndLegalStructure: {
+    contentMd: string;
+  };
   businessSuffix: TextFieldContent;
   businessStartDate: {
     contentMd: string;
@@ -106,6 +109,20 @@ export type FormationDisplayContent = {
   optInCorpWatch: {
     contentMd: string;
   };
+  officialFormationDocument: {
+    contentMd: string;
+    cost: string;
+  };
+  certificateOfStanding: {
+    contentMd: string;
+    cost: string;
+    optionalLabel: string;
+  };
+  certifiedCopyOfFormationDocument: {
+    contentMd: string;
+    cost: string;
+    optionalLabel: string;
+  };
 };
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
@@ -115,6 +132,9 @@ export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
+  businessNameAndLegalStructure: {
+    contentMd: "",
+  },
   businessSuffix: {
     contentMd: "",
     placeholder: "",
@@ -198,6 +218,20 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   },
   optInCorpWatch: {
     contentMd: "",
+  },
+  officialFormationDocument: {
+    contentMd: "",
+    cost: "",
+  },
+  certificateOfStanding: {
+    contentMd: "",
+    cost: "",
+    optionalLabel: "",
+  },
+  certifiedCopyOfFormationDocument: {
+    contentMd: "",
+    cost: "",
+    optionalLabel: "",
   },
 });
 
