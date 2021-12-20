@@ -37,10 +37,10 @@ export const AirtableUserTestingClient = (
       base(table).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
           logWriter.LogInfo(`UserResearchClient - Airtable - Error Received: ${err}`);
-          return resolve({ success: false });
+          return resolve({ success: false, status: "RESPONSE_ERROR" });
         }
         logWriter.LogInfo(`UserResearchClient - Airtable - Response Received: ${res}`);
-        return resolve({ success: true });
+        return resolve({ success: true, status: "SUCCESS" });
       });
     });
   };

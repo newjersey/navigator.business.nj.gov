@@ -81,7 +81,7 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
         config.logWriter.LogError("NewsletterResponse - GovDelivery - Error", error);
         return {
           success: false,
-          status: "RESPONSE_FAIL",
+          status: "CONNECTION_ERROR",
         };
       });
   };

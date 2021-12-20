@@ -23,7 +23,7 @@ describe("addToUserTesting", () => {
     stubUserDataClient.put.mockImplementation((userData: UserData): Promise<UserData> => {
       return Promise.resolve(userData);
     });
-    stubUserTestingClient.add.mockResolvedValue({ success: true });
+    stubUserTestingClient.add.mockResolvedValue({ success: true, status: "SUCCESS" });
 
     const userData = generateUserData({ user: generateUser({ externalStatus: {} }) });
     const response = await addToUserTesting(userData);
@@ -33,7 +33,10 @@ describe("addToUserTesting", () => {
       ...userData,
       user: {
         ...userData.user,
-        externalStatus: { ...userData.user.externalStatus, userTesting: { success: true } },
+        externalStatus: {
+          ...userData.user.externalStatus,
+          userTesting: { success: true, status: "SUCCESS" },
+        },
       },
     });
   });

@@ -38,7 +38,7 @@ describe("AirtableUserTestingClient", () => {
   it("sends user data to airtable", async () => {
     const user = generateUser({});
     const result = await client.add(user);
-    expect(result).toEqual({ success: true });
+    expect(result).toEqual({ success: true, status: "SUCCESS" });
     expect(mockAirtable.baseIdCalledWith).toEqual("some-base-id");
     expect(mockAirtable.tableIdCalledWith).toEqual("Users");
     expect(mockAirtable.dataCalledWith).toEqual([

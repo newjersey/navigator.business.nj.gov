@@ -56,9 +56,9 @@ describe("GovDeliveryNewsletterClient", () => {
     });
   });
 
-  it("returns RESPONSE_FAIL if an error is thrown by axios", async () => {
+  it("returns CONNECTION_ERROR if an error is thrown by axios", async () => {
     mockAxios.get.mockRejectedValueOnce({ message: "something random" });
-    expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "RESPONSE_FAIL" });
+    expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "CONNECTION_ERROR" });
   });
 
   it("returns EMAIL_ERROR if there is an invalid email", async () => {
