@@ -278,7 +278,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:14.18.2
-    resource_class: large
     steps:
       - set-dev-env-vars
       - configure-and-build
@@ -291,7 +290,6 @@ jobs:
   lint:
     docker:
       - image: cimg/node:14.18.2
-    resource_class: large
     steps:
       - set-dev-env-vars
       - attach_workspace:
