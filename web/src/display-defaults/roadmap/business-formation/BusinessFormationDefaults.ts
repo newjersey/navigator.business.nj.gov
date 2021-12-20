@@ -18,4 +18,7 @@ export const BusinessFormationDefaults: Record<string, string> = {
   addNewSignerButtonText: "Add New Signer",
   creditCardPaymentTypeLabel: "Credit Card",
   achPaymentTypeLabel: "E-Check",
+  documentTableColumn2Label: "Documentation Options",
+  documentTableColumn3Label: "New Jersey Statutory Fee",
+  documentTableTotalCostLabel: "Total:",
 };

@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
-import { BusinessStartDate } from "@/components/tasks/business-formation/BusinessStartDate";
 import { RegisteredAgent } from "@/components/tasks/business-formation/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/Signatures";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -9,20 +8,14 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createEmptyFormationDisplayContent, FormationDisplayContent, Task } from "@/lib/types/types";
-import { getModifiedTaskContent, templateEval } from "@/lib/utils/helpers";
-import {
-  createEmptyFormationData,
-  FormationData,
-  LookupLegalStructureById,
-} from "@businessnjgovnavigator/shared";
+import { getModifiedTaskContent } from "@/lib/utils/helpers";
+import { createEmptyFormationData, FormationData } from "@businessnjgovnavigator/shared";
 import React, { createContext, ReactElement, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 import { TaskCTA } from "../TaskCTA";
-import { BusinessAddressLine1 } from "./business-formation/BusinessAddressLine1";
+import { BusinessFormationDocuments } from "./business-formation/BusinessFormationDocuments";
 import { BusinessFormationNotifications } from "./business-formation/BusinessFormationNotifications";
-import { BusinessFormationNumericField } from "./business-formation/BusinessFormationNumericField";
-import { BusinessFormationTextField } from "./business-formation/BusinessFormationTextField";
-import { BusinessSuffixDropdown } from "./business-formation/BusinessSuffixDropdown";
+import { BusinessNameAndLegalStructure } from "./business-formation/BusinessNameAndLegalStructure";
 import { PaymentTypeDropdown } from "./business-formation/PaymentTypeDropdown";
 
 interface Props {
@@ -86,24 +79,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
     update({ ...userData, formationData: removedEmptySigners });
   };
-  const makeUpdateProfileLink = (label: string, value: string): ReactElement => {
-    const linkElement = <a href="/profile">{BusinessFormationDefaults.updateYourProfileLinkText}</a>;
-    const splitText = templateEval(BusinessFormationDefaults.updateYourProfileDisplayText, {
-      value,
-      link: "${link}",
-    }).split("${link}");
-
-    return (
-      <div className="margin-bottom-2">
-        <span className="text-bold">{label}&nbsp;</span>
-        <span>
-          {splitText[0]}
-          {linkElement}
-          {splitText[1]}
-        </span>
-      </div>
-    );
-  };
 
   if (!isLLC) {
     return (
@@ -134,32 +109,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
       <TaskHeader task={props.task} />
       <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />
       <div data-testid="formation-form">
-        {makeUpdateProfileLink(
-          BusinessFormationDefaults.legalStructureLabel,
-          LookupLegalStructureById(userData?.profileData.legalStructureId).name
-        )}
-        {makeUpdateProfileLink(
-          BusinessFormationDefaults.businessNameLabel,
-          userData?.profileData.businessName || BusinessFormationDefaults.notSetBusinessNameText
-        )}
-        <BusinessSuffixDropdown />
-        <BusinessStartDate />
-        <BusinessAddressLine1 />
-        <BusinessFormationTextField fieldName="businessAddressLine2" />
-        {makeUpdateProfileLink(
-          BusinessFormationDefaults.businessAddressCityLabel,
-          userData?.profileData.municipality?.name || BusinessFormationDefaults.notSetBusinessAddressCityLabel
-        )}
-        <BusinessFormationTextField fieldName="businessAddressState" disabled={true} />
-        <BusinessFormationNumericField
-          minLength={5}
-          maxLength={5}
-          fieldName={"businessAddressZipCode"}
-          validationText={BusinessFormationDefaults.businessAddressZipCode}
-        />
+        <BusinessNameAndLegalStructure />
         <RegisteredAgent />
         <Signatures />
         <PaymentTypeDropdown />
+        <BusinessFormationDocuments />
         <Content>{props.displayContent.disclaimer.contentMd}</Content>
         <BusinessFormationNotifications />
         <Button style="primary" onClick={submitFormationData}>

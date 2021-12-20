@@ -21,6 +21,9 @@ export interface FormationData {
   paymentType: PaymentType;
   annualReportNotification: boolean;
   corpWatchNotification: boolean;
+  officialFormationDocument: boolean;
+  certificateOfStanding: boolean;
+  certifiedCopyOfFormationDocument: boolean;
 }
 
 export type FormationTextField = Exclude<
@@ -32,6 +35,9 @@ export type FormationTextField = Exclude<
   | "annualReportNotification"
   | "corpWatchNotification"
   | "agentNumberOrManual"
+  | "officialFormationDocument"
+  | "certificateOfStanding"
+  | "certifiedCopyOfFormationDocument"
 >;
 
 export const createEmptyFormationData = (): FormationData => {
@@ -57,6 +63,9 @@ export const createEmptyFormationData = (): FormationData => {
     paymentType: undefined,
     annualReportNotification: false,
     corpWatchNotification: false,
+    officialFormationDocument: true,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
   };
 };
 

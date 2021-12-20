@@ -115,6 +115,9 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const loadFile = (filename: string): string =>
     fs.readFileSync(path.join(displayContentDir, "tasks", filename), "utf8");
 
+  const businessNameAndLegalStructure = getMarkdown(
+    loadFile("business-formation/business-name-and-legal-structure.md")
+  );
   const businessSuffix = getMarkdown(loadFile("business-formation/business-suffix.md"));
   const businessStartDate = getMarkdown(loadFile("business-formation/business-start-date.md"));
   const businessAddressLine1 = getMarkdown(loadFile("business-formation/business-address-line1.md"));
@@ -123,6 +126,12 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const businessAddressZipCode = getMarkdown(loadFile("business-formation/business-address-zip-code.md"));
   const paymentType = getMarkdown(loadFile("business-formation/payment-type.md"));
   const disclaimer = getMarkdown(loadFile("business-formation/disclaimer.md"));
+  const officialFormationDocument = getMarkdown(loadFile("business-formation/doc-official-formation.md"));
+  const certificateOfStanding = getMarkdown(loadFile("business-formation/doc-certificate-of-standing.md"));
+  const certifiedCopyOfFormationDocument = getMarkdown(
+    loadFile("business-formation/doc-certified-copy-of-formation-document.md")
+  );
+
   const notification = getMarkdown(loadFile("business-formation/notification.md"));
   const optInAnnualReport = getMarkdown(loadFile("business-formation/opt-in-annual-report.md"));
   const optInCorpWatch = getMarkdown(loadFile("business-formation/opt-in-corp-watch.md"));
@@ -141,6 +150,9 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
 
   return {
     formationDisplayContent: {
+      businessNameAndLegalStructure: {
+        contentMd: businessNameAndLegalStructure.content,
+      },
       businessSuffix: {
         contentMd: businessSuffix.content,
         ...(businessSuffix.grayMatter as FieldGrayMatter),
@@ -227,12 +239,29 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       optInCorpWatch: {
         contentMd: optInCorpWatch.content,
       },
+      officialFormationDocument: {
+        contentMd: officialFormationDocument.content,
+        ...(officialFormationDocument.grayMatter as DocumentFieldGrayMatter),
+      },
+      certificateOfStanding: {
+        contentMd: certificateOfStanding.content,
+        ...(certificateOfStanding.grayMatter as DocumentFieldGrayMatter),
+      },
+      certifiedCopyOfFormationDocument: {
+        contentMd: certifiedCopyOfFormationDocument.content,
+        ...(certifiedCopyOfFormationDocument.grayMatter as DocumentFieldGrayMatter),
+      },
     },
   };
 };
 
 type FieldGrayMatter = {
   placeholder: string;
+};
+
+type DocumentFieldGrayMatter = {
+  cost: string;
+  optionalLabel: string;
 };
 
 type RadioGrayMatter = {
