@@ -11,7 +11,7 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyUserData, LookupIndustryById } from "@businessnjgovnavigator/shared";
-import { waitFor } from "@testing-library/react";
+import { waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -60,6 +60,35 @@ describe("onboarding - starting a business", () => {
     await page.visitStep5();
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 5 } }, undefined, { shallow: true });
     expect(subject.getByTestId("step-5")).toBeInTheDocument();
+  });
+
+  it("shows correct next-button text on each page", async () => {
+    const { subject, page } = renderPage({});
+    page.chooseRadio("has-existing-business-false");
+    const page1 = within(subject.getByTestId("page-1-form"));
+    expect(page1.queryByText(OnboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page1.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+
+    await page.visitStep2();
+    const page2 = within(subject.getByTestId("page-2-form"));
+    expect(page2.queryByText(OnboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page2.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+
+    await page.visitStep3();
+    const page3 = within(subject.getByTestId("page-3-form"));
+    expect(page3.queryByText(OnboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page3.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+
+    await page.visitStep4();
+    const page4 = within(subject.getByTestId("page-4-form"));
+    expect(page4.queryByText(OnboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page4.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    page.chooseRadio("general-partnership");
+
+    await page.visitStep5();
+    const page5 = within(subject.getByTestId("page-5-form"));
+    expect(page5.queryByText(OnboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page5.queryByText(OnboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("prefills form from existing user data", async () => {
