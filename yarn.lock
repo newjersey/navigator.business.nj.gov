@@ -2456,7 +2456,7 @@ __metadata:
   dependencies:
     "@types/node": 14.18.1
     cross-env: 7.0.3
-    cspell: 5.13.3
+    cspell: 5.13.4
     prettier: 2.5.1
   languageName: unknown
   linkType: soft
@@ -2538,7 +2538,7 @@ __metadata:
     copy-webpack-plugin: 10.2.0
     cors: 2.8.5
     cross-env: 7.0.3
-    cspell: 5.13.3
+    cspell: 5.13.4
     css-loader: 6.5.1
     cypress: 9.1.1
     cypress-audit: 1.1.0
@@ -2695,7 +2695,7 @@ __metadata:
     clean-webpack-plugin: 4.0.0
     copy-webpack-plugin: 10.2.0
     cross-env: 7.0.3
-    cspell: 5.13.3
+    cspell: 5.13.4
     css-loader: 6.5.1
     cypress: 9.1.1
     cypress-audit: 1.1.0
@@ -14166,7 +14166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cspell-gitignore@npm:^5.13.3":
+"cspell-gitignore@npm:^5.13.4":
   version: 5.13.4
   resolution: "cspell-gitignore@npm:5.13.4"
   dependencies:
@@ -14178,7 +14178,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cspell-glob@npm:^5.13.3, cspell-glob@npm:^5.13.4":
+"cspell-glob@npm:^5.13.4":
   version: 5.13.4
   resolution: "cspell-glob@npm:5.13.4"
   dependencies:
@@ -14194,7 +14194,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cspell-lib@npm:^5.13.3":
+"cspell-lib@npm:^5.13.4":
   version: 5.13.4
   resolution: "cspell-lib@npm:5.13.4"
   dependencies:
@@ -14228,27 +14228,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cspell@npm:5.13.3":
-  version: 5.13.3
-  resolution: "cspell@npm:5.13.3"
+"cspell@npm:5.13.4":
+  version: 5.13.4
+  resolution: "cspell@npm:5.13.4"
   dependencies:
     chalk: ^4.1.2
     commander: ^8.3.0
     comment-json: ^4.1.1
-    cspell-gitignore: ^5.13.3
-    cspell-glob: ^5.13.3
-    cspell-lib: ^5.13.3
+    cspell-gitignore: ^5.13.4
+    cspell-glob: ^5.13.4
+    cspell-lib: ^5.13.4
     fast-json-stable-stringify: ^2.1.0
     file-entry-cache: ^6.0.1
     fs-extra: ^10.0.0
     get-stdin: ^8.0.0
     glob: ^7.2.0
     imurmurhash: ^0.1.4
+    semver: ^7.3.5
     strip-ansi: ^6.0.1
     vscode-uri: ^3.0.2
   bin:
     cspell: bin.js
-  checksum: 66b05a47233f8bef2493a36aa4dc45e7ac2866af9f06f9848d53ad68ffe7abb626df7e47985b14a12cbe39508a0403410f403f2ed5b1b8e232dda56023a57492
+  checksum: ff14d3c8f1cf4508d502ce091e4e0973971b38a3223b62ee6ff6bd125535c7d5022a15ba213d21f73a4c3f8dd93db650d6d2fee5abd3cadb762620a29ace8e97
   languageName: node
   linkType: hard
 
