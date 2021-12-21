@@ -3,7 +3,11 @@ import { OnboardingContext } from "@/pages/onboarding";
 import React, { ReactElement, useContext } from "react";
 import { Button } from "../njwds-extended/Button";
 
-export const OnboardingButtonGroup = (): ReactElement => {
+interface Props {
+  isFinal: boolean;
+}
+
+export const OnboardingButtonGroup = (props: Props): ReactElement => {
   const { state, onBack } = useContext(OnboardingContext);
 
   const back = (event: React.MouseEvent) => {
@@ -19,7 +23,7 @@ export const OnboardingButtonGroup = (): ReactElement => {
         </Button>
       )}
       <Button style="primary" dataTestid="next" typeSubmit noRightMargin>
-        {OnboardingDefaults.nextButtonText}
+        {props.isFinal ? OnboardingDefaults.finalNextButtonText : OnboardingDefaults.nextButtonText}
       </Button>
     </div>
   );

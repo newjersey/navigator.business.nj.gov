@@ -11,7 +11,7 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyUserData, LookupIndustryById } from "@businessnjgovnavigator/shared";
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -62,6 +62,31 @@ describe("onboarding - owning a business", () => {
     page.selectByText("Location", "Newark");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
     expect(subject.getByTestId("step-4")).toBeInTheDocument();
+  });
+
+  it("shows correct next-button text on each page", async () => {
+    const { subject, page } = renderPage({});
+    page.chooseRadio("has-existing-business-true");
+    const page1 = within(subject.getByTestId("page-1-form"));
+    expect(page1.queryByText(OnboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page1.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+
+    await page.visitStep2();
+    const page2 = within(subject.getByTestId("page-2-form"));
+    expect(page2.queryByText(OnboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page2.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+
+    await page.visitStep3();
+    page.fillText("Business name", "Cool Computers");
+    page.selectByValue("Industry", "e-commerce");
+    const page3 = within(subject.getByTestId("page-3-form"));
+    expect(page3.queryByText(OnboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page3.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+
+    await page.visitStep4();
+    const page4 = within(subject.getByTestId("page-4-form"));
+    expect(page4.queryByText(OnboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page4.queryByText(OnboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("updates the user data after each form page", async () => {

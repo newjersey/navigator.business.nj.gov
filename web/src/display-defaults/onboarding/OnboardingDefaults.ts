@@ -1,6 +1,7 @@
 export const OnboardingDefaults: Record<string, string> = {
   pageTitle: "Tell Us About Your Business",
   nextButtonText: "Next",
+  finalNextButtonText: "Submit",
   backButtonText: "Back",
   stepXofYTemplate: "(Step ${currentPage} of ${totalPages})",
   stepOneTemplate: "(Step ${currentPage})",

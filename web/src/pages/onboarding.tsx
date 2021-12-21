@@ -339,10 +339,16 @@ const OnboardingPage = (props: Props): ReactElement => {
                 classNames={`width-100 ${getAnimation()}`}
               >
                 <SingleColumnContainer>
-                  <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+                  <form
+                    onSubmit={onSubmit}
+                    className={`usa-prose onboarding-form margin-top-2`}
+                    data-testid={`page-${index + 1}-form`}
+                  >
                     {onboardingPage.component}
                     <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
-                    <OnboardingButtonGroup />
+                    <OnboardingButtonGroup
+                      isFinal={page.current === onboardingFlows[currentFlow].pages.length}
+                    />
                   </form>
                 </SingleColumnContainer>
               </CSSTransition>
