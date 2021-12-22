@@ -6,6 +6,7 @@
   "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
   "canBeReseller": true,
+  "additionalSearchTerms": "commercial cleaning service",
   "roadmapSteps": [
     {
       "step": 1,
