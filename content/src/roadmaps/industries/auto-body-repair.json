@@ -6,7 +6,7 @@
   "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
   "canBeReseller": true,
-  "additionalSearchTerms": "car","auto body shop","auto shop","car center","auto center",
+  "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",
   "roadmapSteps": [
     {
       "step": 1,
