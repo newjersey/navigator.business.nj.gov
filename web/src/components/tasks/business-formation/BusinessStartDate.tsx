@@ -21,6 +21,7 @@ export const BusinessStartDate = (): ReactElement => {
         ...state.formationFormData,
         businessStartDate: dayjs().format("YYYY-MM-DD"),
       });
+      setShowError(false);
     }
   });
 
@@ -37,7 +38,6 @@ export const BusinessStartDate = (): ReactElement => {
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify ">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-            label=""
             minDate={dayjs()}
             maxDate={dayjs().add(100, "years")}
             value={dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD")}
