@@ -2394,13 +2394,13 @@ __metadata:
     "@types/aws-lambda": 8.10.88
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
-    "@types/dedent": ^0.7.0
+    "@types/dedent": 0.7.0
     "@types/express": 4.17.13
     "@types/jasmine": 3.10.2
     "@types/jest": 27.0.3
     "@types/jsonwebtoken": 8.5.6
     "@types/node": 14.18.1
-    "@types/simple-oauth2": ^4.1.1
+    "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.11
     "@types/uuid": 8.3.3
     "@types/webpack-node-externals": 2.5.3
@@ -2416,7 +2416,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     dayjs: 1.10.7
-    dedent: ^0.7.0
+    dedent: 0.7.0
     eslint: 8.4.1
     eslint-config-prettier: 8.3.0
     express: 4.17.2
@@ -2436,7 +2436,7 @@ __metadata:
     serverless-offline-ssm: 5.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.0
-    simple-oauth2: ^4.3.0
+    simple-oauth2: 4.3.0
     supertest: 6.1.6
     ts-jest: 27.1.2
     ts-loader: 9.2.6
@@ -2513,7 +2513,7 @@ __metadata:
     "@types/broken-link-checker": 0.7.1
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
-    "@types/dedent": ^0.7.0
+    "@types/dedent": 0.7.0
     "@types/express": 4.17.13
     "@types/jasmine": 3.10.2
     "@types/jest": 27.0.3
@@ -2524,7 +2524,7 @@ __metadata:
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.3
     "@types/react-transition-group": 4.4.4
-    "@types/simple-oauth2": ^4.1.1
+    "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.11
     "@types/testing-library__jest-dom": 5.14.2
     "@types/uuid": 8.3.3
@@ -2553,7 +2553,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.10.7
-    dedent: ^0.7.0
+    dedent: 0.7.0
     dotenv: 10.0.0
     eslint: 8.4.1
     eslint-config-next: 12.0.7
@@ -2606,7 +2606,7 @@ __metadata:
     serverless-offline-ssm: 5.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.0
-    simple-oauth2: ^4.3.0
+    simple-oauth2: 4.3.0
     storybook-addon-designs: 6.2.0
     style-loader: 3.3.1
     supertest: 6.1.6
@@ -8852,7 +8852,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/dedent@npm:^0.7.0":
+"@types/dedent@npm:0.7.0":
   version: 0.7.0
   resolution: "@types/dedent@npm:0.7.0"
   checksum: b9b7f0c42d99da764be75dd00b2f2be162f5a0ca43aafe0c740efa76b5f37f8a4f4e2ccc84883054e06e05c1169733aa8ee7750da0334c9cba26d9e10ae844f1
@@ -9318,7 +9318,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/simple-oauth2@npm:^4.1.1":
+"@types/simple-oauth2@npm:4.1.1":
   version: 4.1.1
   resolution: "@types/simple-oauth2@npm:4.1.1"
   checksum: 6b037f80b9e941cee00307356bbbbb14be3d06f8c6d6ea3ffbe8c2f702adf2760ae56ecf0995f342a4b8efe6531d13ff7eab24f6569b6761fbf850d07a621581
@@ -14841,7 +14841,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dedent@npm:^0.7.0":
+"dedent@npm:0.7.0, dedent@npm:^0.7.0":
   version: 0.7.0
   resolution: "dedent@npm:0.7.0"
   checksum: 87de191050d9a40dd70cad01159a0bcf05ecb59750951242070b6abf9569088684880d00ba92a955b4058804f16eeaf91d604f283929b4f614d181cd7ae633d2
@@ -31518,7 +31518,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-oauth2@npm:^4.3.0":
+"simple-oauth2@npm:4.3.0":
   version: 4.3.0
   resolution: "simple-oauth2@npm:4.3.0"
   dependencies:
