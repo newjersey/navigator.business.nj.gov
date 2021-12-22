@@ -25,6 +25,8 @@
     "@shared/taxFiling",
     "@shared/license",
     "@shared/profileData",
-    "@shared/userData"
+    "@shared/userData",
+    "dedent",
+    "simple-oauth2"
   ]
 }

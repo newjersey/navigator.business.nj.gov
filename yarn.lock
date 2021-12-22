@@ -2394,11 +2394,13 @@ __metadata:
     "@types/aws-lambda": 8.10.88
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
+    "@types/dedent": ^0.7.0
     "@types/express": 4.17.13
     "@types/jasmine": 3.10.2
     "@types/jest": 27.0.3
     "@types/jsonwebtoken": 8.5.6
     "@types/node": 14.18.1
+    "@types/simple-oauth2": ^4.1.1
     "@types/supertest": 2.0.11
     "@types/uuid": 8.3.3
     "@types/webpack-node-externals": 2.5.3
@@ -2414,6 +2416,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     dayjs: 1.10.7
+    dedent: ^0.7.0
     eslint: 8.4.1
     eslint-config-prettier: 8.3.0
     express: 4.17.2
@@ -2433,6 +2436,7 @@ __metadata:
     serverless-offline-ssm: 5.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.0
+    simple-oauth2: ^4.3.0
     supertest: 6.1.6
     ts-jest: 27.1.2
     ts-loader: 9.2.6
@@ -2509,6 +2513,7 @@ __metadata:
     "@types/broken-link-checker": 0.7.1
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
+    "@types/dedent": ^0.7.0
     "@types/express": 4.17.13
     "@types/jasmine": 3.10.2
     "@types/jest": 27.0.3
@@ -2519,6 +2524,7 @@ __metadata:
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.3
     "@types/react-transition-group": 4.4.4
+    "@types/simple-oauth2": ^4.1.1
     "@types/supertest": 2.0.11
     "@types/testing-library__jest-dom": 5.14.2
     "@types/uuid": 8.3.3
@@ -2547,6 +2553,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.10.7
+    dedent: ^0.7.0
     dotenv: 10.0.0
     eslint: 8.4.1
     eslint-config-next: 12.0.7
@@ -2599,6 +2606,7 @@ __metadata:
     serverless-offline-ssm: 5.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.0
+    simple-oauth2: ^4.3.0
     storybook-addon-designs: 6.2.0
     style-loader: 3.3.1
     supertest: 6.1.6
@@ -4010,7 +4018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/wreck@npm:17.x.x":
+"@hapi/wreck@npm:17.x.x, @hapi/wreck@npm:^17.0.0":
   version: 17.1.0
   resolution: "@hapi/wreck@npm:17.1.0"
   dependencies:
@@ -7043,6 +7051,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sideway/address@npm:^4.1.3":
+  version: 4.1.3
+  resolution: "@sideway/address@npm:4.1.3"
+  dependencies:
+    "@hapi/hoek": ^9.0.0
+  checksum: 3c1faf6ef37a0b59b62ce42b59c012c00ef1fc4194ad6776c65c2f9a6dd6c1710c6f6362b3ca3fa582fdb93984f0cb64ca44f9f5e02940634805f5e561279c22
+  languageName: node
+  linkType: hard
+
+"@sideway/formula@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@sideway/formula@npm:3.0.0"
+  checksum: 8ae26a0ed6bc84f7310be6aae6eb9d81e97f382619fc69025d346871a707eaab0fa38b8c857e3f0c35a19923de129f42d35c50b8010c928d64aab41578580ec4
+  languageName: node
+  linkType: hard
+
+"@sideway/pinpoint@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@sideway/pinpoint@npm:2.0.0"
+  checksum: 0f4491e5897fcf5bf02c46f5c359c56a314e90ba243f42f0c100437935daa2488f20482f0f77186bd6bf43345095a95d8143ecf8b1f4d876a7bc0806aba9c3d2
+  languageName: node
+  linkType: hard
+
 "@sindresorhus/is@npm:^0.14.0":
   version: 0.14.0
   resolution: "@sindresorhus/is@npm:0.14.0"
@@ -8821,6 +8852,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/dedent@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@types/dedent@npm:0.7.0"
+  checksum: b9b7f0c42d99da764be75dd00b2f2be162f5a0ca43aafe0c740efa76b5f37f8a4f4e2ccc84883054e06e05c1169733aa8ee7750da0334c9cba26d9e10ae844f1
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.0":
   version: 3.7.2
   resolution: "@types/eslint-scope@npm:3.7.2"
@@ -9277,6 +9315,13 @@ __metadata:
     "@types/mime": ^1
     "@types/node": "*"
   checksum: eaca858739483e3ded254cad7d7a679dc2c8b3f52c8bb0cd845b3b7eb1984bde0371fdcb0a5c83aa12e6daf61b6beb762545021f520f08a1fe882a3fa4ea5554
+  languageName: node
+  linkType: hard
+
+"@types/simple-oauth2@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@types/simple-oauth2@npm:4.1.1"
+  checksum: 6b037f80b9e941cee00307356bbbbb14be3d06f8c6d6ea3ffbe8c2f702adf2760ae56ecf0995f342a4b8efe6531d13ff7eab24f6569b6761fbf850d07a621581
   languageName: node
   linkType: hard
 
@@ -21524,6 +21569,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"joi@npm:^17.3.0":
+  version: 17.5.0
+  resolution: "joi@npm:17.5.0"
+  dependencies:
+    "@hapi/hoek": ^9.0.0
+    "@hapi/topo": ^5.0.0
+    "@sideway/address": ^4.1.3
+    "@sideway/formula": ^3.0.0
+    "@sideway/pinpoint": ^2.0.0
+  checksum: 6a20d009d2fa8a72dbfd9bc739d240f678b09d3a16c05b4bfb4e2d0503e60f7d7914250f0bfc52fb79a537490739ba36a1ace00a05b8ddecaaacfcedafc5c8b9
+  languageName: node
+  linkType: hard
+
 "jpeg-js@npm:^0.4.1":
   version: 0.4.3
   resolution: "jpeg-js@npm:0.4.3"
@@ -31457,6 +31515,18 @@ __metadata:
     "@kwsites/promise-deferred": ^1.1.1
     debug: ^4.3.2
   checksum: ba84b942ad5cebb9d43df2f147e414e348584f40023121896959f22d05e260ae71b862a93db5c473413f8d218f2122f2964d22f6b7bd77cc12dabc7e73b066be
+  languageName: node
+  linkType: hard
+
+"simple-oauth2@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "simple-oauth2@npm:4.3.0"
+  dependencies:
+    "@hapi/hoek": ^9.0.4
+    "@hapi/wreck": ^17.0.0
+    debug: ^4.1.1
+    joi: ^17.3.0
+  checksum: a78c6181cc64b86ab2bebb5a4e484a4bfbb1890e7b08022d1f6f1cd6e95e5d4cae1d96c009ff7f60fdf1e32761ccf937e7fb8b4ca5d34473951016305c3baade
   languageName: node
   linkType: hard
 

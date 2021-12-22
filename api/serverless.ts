@@ -2,6 +2,7 @@ import type { AWS } from "@serverless/typescript";
 import { env } from "process";
 import dynamoDbSchema from "./dynamodb-schema.json";
 import express from "./src/functions/express";
+import githubOauth2 from "./src/functions/githubOauth2";
 import updateExternalStatus from "./src/functions/updateExternalStatus";
 
 const isDocker = process.env.IS_DOCKER == "true" || false; // set in docker-compose
@@ -15,7 +16,8 @@ const govDeliveryBaseUrl = process.env.GOV_DELIVERY_BASE_URL || "";
 const govDeliveryTopic = process.env.GOV_DELIVERY_TOPIC || "";
 const govDeliveryApiKey = process.env.GOV_DELIVERY_API_KEY || "";
 const govDeliveryQuestionId = process.env.GOV_DELIVERY_URL_QUESTION_ID || "";
-
+const oAuthClientId = process.env.OAUTH_CLIENT_ID || "";
+const oAuthClientSecret = process.env.OAUTH_CLIENT_SECRET || "";
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
 const airtableUserResearchBaseId = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
 const airtableBaseUrl = process.env.AIRTABLE_BASE_URL || "";
@@ -122,6 +124,8 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       USERS_TABLE: usersTable,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
+      OAUTH_CLIENT_ID: oAuthClientId,
+      OAUTH_CLIENT_SECRET: oAuthClientSecret,
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
       GOV_DELIVERY_BASE_URL: govDeliveryBaseUrl,
       GOV_DELIVERY_TOPIC: govDeliveryTopic,
@@ -156,6 +160,19 @@ const serverlessConfiguration: AWS = {
         : undefined
     ),
     govDelivery: updateExternalStatus(
+      env.CI
+        ? {
+            securityGroupIds: [
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SECURITY_GROUP}",
+            ],
+            subnetIds: [
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_01}",
+              "${self:custom.config.infrastructure.${self:custom.ssmLocation}.SUBNET_02}",
+            ],
+          }
+        : undefined
+    ),
+    githubOauth2: githubOauth2(
       env.CI
         ? {
             securityGroupIds: [
