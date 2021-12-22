@@ -14,6 +14,7 @@ import {
   AllBusinessSuffixes,
   BusinessSuffix,
   BusinessUser,
+  FormationData,
   FormationFormData,
   Industries,
   Industry,
@@ -396,4 +397,12 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
 export const randomBusinessSuffix = (): BusinessSuffix => {
   const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);
   return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
+};
+
+export const generateFormationData = (overrides: Partial<FormationData>): FormationData => {
+  return {
+    formationFormData: generateFormationFormData({}),
+    formationResponse: undefined,
+    ...overrides,
+  };
 };
