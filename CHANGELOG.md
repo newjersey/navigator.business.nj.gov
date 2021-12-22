@@ -1,3 +1,27 @@
+# [1.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.5.0...v1.6.0) (2021-12-22)
+
+
+### Bug Fixes
+
+* [[#1187](https://github.com/newjersey/navigator.business.nj.gov/issues/1187)] fix duplicate external sync issues ([f3a1d93](https://github.com/newjersey/navigator.business.nj.gov/commit/f3a1d93641b87fa84f90a624474b855adf78aa4d))
+* **deps:** update aws-amplify ([a534db0](https://github.com/newjersey/navigator.business.nj.gov/commit/a534db034d4cbf3a823d7614cd95fb59cbb53d63))
+* **deps:** update dependency @emotion/react to v11.7.1 ([9a22346](https://github.com/newjersey/navigator.business.nj.gov/commit/9a22346d1b87e216e5f616dce869e4666a36a00b))
+* **deps:** update dependency express to v4.17.2 ([a01a162](https://github.com/newjersey/navigator.business.nj.gov/commit/a01a16206ee868ff6d974022df68cb8527f7c4ff))
+* **deps:** update material-ui monorepo ([c8ed969](https://github.com/newjersey/navigator.business.nj.gov/commit/c8ed969629187dad20e499f67b3422510efbac8d))
+
+
+### Features
+
+* [[#1086](https://github.com/newjersey/navigator.business.nj.gov/issues/1086)] different text for next button on last page ([28294db](https://github.com/newjersey/navigator.business.nj.gov/commit/28294dba4a5c4f2ca7be120a3bec5c830d871dcf))
+* [[#951](https://github.com/newjersey/navigator.business.nj.gov/issues/951)] add airtable env vars to serverless ([9af2596](https://github.com/newjersey/navigator.business.nj.gov/commit/9af2596334db890d1d2e3362aff08a9b509bfc31))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] add signatures to business formation ([cc6810a](https://github.com/newjersey/navigator.business.nj.gov/commit/cc6810a21d8ed0cdd5c69935919937448ee3f271))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] added documents table to business formation ([d45d1e0](https://github.com/newjersey/navigator.business.nj.gov/commit/d45d1e0731da206713e03f1652b94fdbe696bd01))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] enable business formation in dev ([7b5fbb9](https://github.com/newjersey/navigator.business.nj.gov/commit/7b5fbb9a89c96f74742c2bd5b4eceedd213fe9a9))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] formation: business info, address, registered agent ([d1d383b](https://github.com/newjersey/navigator.business.nj.gov/commit/d1d383b1ae00f98478b9f103bc5e6ae90a970e45))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] payment type, disclaimer, notifications ([67b1237](https://github.com/newjersey/navigator.business.nj.gov/commit/67b123711b70146e5ec4f51f889e64baa813cb80))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] rename env vars for formation feature flag ([f2ab287](https://github.com/newjersey/navigator.business.nj.gov/commit/f2ab2873e46d7bdbf945c112af7e6033f6667899))
+* cms setup & content reorg ([e1d81cb](https://github.com/newjersey/navigator.business.nj.gov/commit/e1d81cb9d997781c85fbcbb6658d2fe73295524b))
+
 # [1.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.4.0...v1.5.0) (2021-12-15)
 
 
