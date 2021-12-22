@@ -44,10 +44,6 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
         if (process.env.NODE_ENV !== "test") {
           console.log("response", response);
         }
-        logWriter.LogInfo(
-          `myNJ Self-Reg - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
-        );
-
         const xmlResponseName = type === "GRANT" ? "ns2:grantResponse" : "ns2:resumeResponse";
         const xmlResponseObj = response["S:Envelope"]["S:Body"][0][xmlResponseName][0]["return"][0];
 
@@ -55,6 +51,10 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
         const authId = xmlResponseObj["AuthID"];
         const authURL = xmlResponseObj["AuthURL"];
         const errors = xmlResponseObj["Errors"];
+
+        logWriter.LogInfo(
+          `myNJ Self-Reg - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+        );
 
         if (!success || success[0] !== "true") {
           return Promise.reject(errors);
