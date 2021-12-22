@@ -27,9 +27,9 @@ collections:
             name: step
             widget: relation
             collection: "settings"
-            searchFields: ["steps.*.name"]
-            valueField: "steps.*.step_number"
-            displayFields: ["steps.*.name"]
+            search_fields: ["steps.*.name"]
+            value_field: "steps.*.step_number"
+            display_fields: ["steps.*.name"]
           - label: Weight
             name: weight
             widget: number
@@ -37,9 +37,9 @@ collections:
             name: task
             widget: "relation"
             collection: "tasks"
-            searchFields: ["{{filename}}", "name", "urlSlug"]
-            valueField: "{{filename}}"
-            displayFields: ["{{filename}}"]
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
       - label: Task Overrides
         name: modifications
         widget: list
@@ -49,16 +49,16 @@ collections:
             name: taskToReplaceFilename
             widget: "relation"
             collection: "tasks"
-            searchFields: ["{{filename}}", "name", "urlSlug"]
-            valueField: "{{filename}}"
-            displayFields: ["{{filename}}"]
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
           - label: Modified Task
             name: replaceWithFilename
             widget: "relation"
             collection: "tasks"
-            searchFields: ["{{filename}}", "name", "urlSlug"]
-            valueField: "{{filename}}"
-            displayFields: ["{{filename}}"]
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
 
   - name: "roadmaps"
     label: "Industry Roadmaps"
@@ -112,9 +112,9 @@ collections:
             name: step
             widget: relation
             collection: "settings"
-            searchFields: ["steps.*.name"]
-            valueField: "steps.*.step_number"
-            displayFields: ["steps.*.name"]
+            search_fields: ["steps.*.name"]
+            value_field: "steps.*.step_number"
+            display_fields: ["steps.*.name"]
           - label: Weight
             name: weight
             widget: number
@@ -122,9 +122,9 @@ collections:
             name: task
             widget: "relation"
             collection: "tasks"
-            searchFields: ["{{filename}}", "name", "urlSlug"]
-            valueField: "{{filename}}"
-            displayFields: ["{{filename}}"]
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
       - label: Task Overrides
         name: modifications
         widget: list
@@ -134,16 +134,16 @@ collections:
             name: taskToReplaceFilename
             widget: "relation"
             collection: "tasks"
-            searchFields: ["{{filename}}", "name", "urlSlug"]
-            valueField: "{{filename}}"
-            displayFields: ["{{filename}}"]
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
           - label: Modified Task
             name: replaceWithFilename
             widget: "relation"
             collection: "tasks"
-            searchFields: ["{{filename}}", "name", "urlSlug"]
-            valueField: "{{filename}}"
-            displayFields: ["{{filename}}"]
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
 
   - name: "tasks"
     label: "Tasks"
@@ -168,9 +168,9 @@ collections:
         name: industryId
         widget: "relation"
         collection: "roadmaps"
-        searchFields: ["{{id}}"]
-        valueField: "{{id}}"
-        displayFields: ["{{id}}"]
+        search_fields: ["{{id}}"]
+        value_field: "{{id}}"
+        display_fields: ["{{id}}"]
         required: false
 
   - name: "filings"
