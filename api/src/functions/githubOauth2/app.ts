@@ -38,13 +38,24 @@ app.get("/api/cms/auth", (req, res) => {
   const authorizationCode = new AuthorizationCode(oauthConfig);
 
   const url = authorizationCode.authorizeURL({
-    redirect_uri: `https://${host}/api/cms/callback`,
+    redirect_uri: `https://${host}/dev/api/cms/callback`,
     scope: `repo,user`,
     state: randomState(),
   });
 
   res.writeHead(301, { Location: url });
   res.end();
+});
+
+app.get("/api/cms/", async (req, res) => {
+  res.send(`Hello<br>
+    <a href="/auth" target="_self">
+      Log in with GITHUB}
+    </a>`);
+});
+
+app.get("/api/cms/success", async (req, res) => {
+  res.send("");
 });
 
 app.get("/api/cms/callback", async (req, res) => {
@@ -56,7 +67,7 @@ app.get("/api/cms/callback", async (req, res) => {
 
     const accessToken = await authorizationCode.getToken({
       code,
-      redirect_uri: `https://${host}/api/cms/callback`,
+      redirect_uri: `https://${host}/dev/api/cms/callback`,
     });
 
     console.debug("callback host=%o", host);

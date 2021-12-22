@@ -2,6 +2,8 @@ backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
   branch: main
+  base_url: https://cubukxpyt9.execute-api.us-east-1.amazonaws.com
+  auth_endpoint: /dev/api/cms/auth
   squash_merges: true
   commit_messages:
     create: "feat: creating {{collection}} {{slug}}"

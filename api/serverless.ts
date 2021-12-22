@@ -172,6 +172,12 @@ const serverlessConfiguration: AWS = {
           }
         : undefined
     ),
+  },
+};
+
+if (stage === "dev") {
+  serverlessConfiguration.functions = {
+    ...serverlessConfiguration.functions,
     githubOauth2: githubOauth2(
       env.CI
         ? {
@@ -185,8 +191,8 @@ const serverlessConfiguration: AWS = {
           }
         : undefined
     ),
-  },
-};
+  };
+}
 
 if (!env.CI || stage === "local") {
   serverlessConfiguration.resources = {

@@ -8,14 +8,7 @@ export default (vpcConfig: FnType["vpc"]): FnType => ({
     {
       http: {
         method: "get",
-        path: "/api/cms/auth",
-        cors: true,
-      },
-    },
-    {
-      http: {
-        method: "get",
-        path: "/api/cms/callback",
+        path: "/api/cms/{proxy+}",
         cors: true,
       },
     },
