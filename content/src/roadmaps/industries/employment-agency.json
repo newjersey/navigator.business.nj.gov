@@ -6,6 +6,7 @@
   "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
   "canBeReseller": true,
+  "additionalSearchTerms": "employment office","employment services","temporary agency","employment recruiter","employment center",
   "roadmapSteps": [
     {
       "step": 1,
