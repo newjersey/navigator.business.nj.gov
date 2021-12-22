@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 export interface FormationData {
   formationFormData: FormationFormData;
   formationResponse: FormationSubmitResponse | undefined;
@@ -48,7 +46,7 @@ export type FormationTextField = Exclude<
 export const createEmptyFormationFormData = (): FormationFormData => {
   return {
     businessSuffix: undefined,
-    businessStartDate: dayjs().format("YYYY-MM-DD"),
+    businessStartDate: "",
     businessAddressLine1: "",
     businessAddressLine2: "",
     businessAddressState: "NJ",

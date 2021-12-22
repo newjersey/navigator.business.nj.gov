@@ -2,6 +2,7 @@ import { BusinessFormation } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import * as api from "@/lib/api-client/apiClient";
 import {
+  generateFormationData,
   generateFormationDisplayContent,
   generateMunicipality,
   generateProfileData,
@@ -15,7 +16,12 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { LookupLegalStructureById, ProfileData, UserData } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyFormationFormData,
+  LookupLegalStructureById,
+  ProfileData,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import dayjs, { Dayjs } from "dayjs";
@@ -191,6 +197,15 @@ describe("<BusinessFormation />", () => {
       expect(subject.getByText("$200.00")).toBeInTheDocument();
       expect(formationFormData.annualReportNotification).toEqual(true);
       expect(formationFormData.corpWatchNotification).toEqual(true);
+    });
+
+    it("defaults date picker to current date when it has no value", () => {
+      const profileData = generateLLCProfileData({});
+      const formationFormData = createEmptyFormationFormData();
+      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
+
+      const today = dayjs().format("MMM D, YYYY");
+      expect(subject.getByLabelText(`Choose date, selected date is ${today}`)).toBeInTheDocument();
     });
 
     it("defaults to registered agent number and toggles to manual with radio button", () => {
