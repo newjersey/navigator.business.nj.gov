@@ -1,7 +1,8 @@
 backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
-  branch: main  
+  branch: main
+  squash_merges: true
   commit_messages:
     create: "feat: creating {{collection}} {{slug}}"
     update: "fix: updating {{collection}} {{slug}}"
