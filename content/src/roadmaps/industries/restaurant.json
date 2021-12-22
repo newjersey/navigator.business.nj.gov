@@ -6,6 +6,7 @@
   "isLiquorLicenseApplicable": true,
   "isMobileLocation": false,
   "canBeReseller": true,
+  "additionalSearchTerms": "cafe,grill",
   "roadmapSteps": [
     {
       "step": 1,

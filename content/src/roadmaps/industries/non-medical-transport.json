@@ -6,6 +6,7 @@
   "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
   "canBeReseller": false,
+  "additionalSearchTerms": "transportation service,non-emergency transportation",
   "roadmapSteps": [
     {
       "step": 1,

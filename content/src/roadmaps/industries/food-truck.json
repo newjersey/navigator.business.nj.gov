@@ -6,6 +6,7 @@
   "isLiquorLicenseApplicable": false,
   "isMobileLocation": true,
   "canBeReseller": true,
+  "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart",
   "roadmapSteps": [
     {
       "step": 1,
