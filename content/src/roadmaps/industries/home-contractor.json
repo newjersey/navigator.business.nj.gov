@@ -7,6 +7,7 @@
   "licenseType": "Home Improvement Contractors",
   "isMobileLocation": false,
   "canBeReseller": true,
+  "additionalSearchTerms": "renovation",
   "roadmapSteps": [
     {
       "step": 1,
