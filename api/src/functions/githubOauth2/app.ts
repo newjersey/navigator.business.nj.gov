@@ -29,6 +29,13 @@ export const oauthConfig: ModuleOptions = Object.freeze({
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use((req, res, next) => {
+  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify(req.query));
+  console.log(JSON.stringify(req.params));
+  console.log(JSON.stringify(req.headers));
+  next();
+});
 
 app.get("/api/cms/auth", (req, res) => {
   const { host } = req.headers;
@@ -47,17 +54,6 @@ app.get("/api/cms/auth", (req, res) => {
   res.end();
 });
 
-app.get("/api/cms/", async (req, res) => {
-  res.send(`Hello<br>
-    <a href="/auth" target="_self">
-      Log in with GITHUB}
-    </a>`);
-});
-
-app.get("/api/cms/success", async (req, res) => {
-  res.send("");
-});
-
 app.get("/api/cms/callback", async (req, res) => {
   try {
     const code = req.query.code as string;
@@ -67,7 +63,7 @@ app.get("/api/cms/callback", async (req, res) => {
 
     const accessToken = await authorizationCode.getToken({
       code,
-      redirect_uri: `https://${host}/dev/api/cms/callback`,
+      redirect_uri: `https://dev.d1fxpe8xsdfr62.amplifyapp.com/mgmt/cms/`,
     });
 
     console.debug("callback host=%o", host);
@@ -83,6 +79,7 @@ app.get("/api/cms/callback", async (req, res) => {
       })
     );
   } catch (e) {
+    console.error(JSON.stringify(e));
     res.status(200).send(renderResponse("error", e));
   }
 });
