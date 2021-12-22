@@ -4,12 +4,13 @@ import { RegisteredAgent } from "@/components/tasks/business-formation/Registere
 import { Signatures } from "@/components/tasks/business-formation/Signatures";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
+import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createEmptyFormationDisplayContent, FormationDisplayContent, Task } from "@/lib/types/types";
 import { getModifiedTaskContent } from "@/lib/utils/helpers";
-import { createEmptyFormationData, FormationData } from "@businessnjgovnavigator/shared";
+import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
 import React, { createContext, ReactElement, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 import { TaskCTA } from "../TaskCTA";
@@ -24,60 +25,70 @@ interface Props {
 }
 
 interface FormationState {
-  formationData: FormationData;
+  formationFormData: FormationFormData;
   displayContent: FormationDisplayContent;
 }
 
 interface FormationContextType {
   state: FormationState;
-  setFormationData: (formationData: FormationData) => void;
+  setFormationFormData: (formationFormData: FormationFormData) => void;
 }
 
 export const FormationContext = createContext<FormationContextType>({
   state: {
-    formationData: createEmptyFormationData(),
+    formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent(),
   },
-  setFormationData: () => {},
+  setFormationFormData: () => {},
 });
 
 export const BusinessFormation = (props: Props): ReactElement => {
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
-  const [formationData, setFormationData] = useState<FormationData>(createEmptyFormationData());
+  const [formationFormData, setFormationFormData] = useState<FormationFormData>(
+    createEmptyFormationFormData()
+  );
 
   const isLLC = userData?.profileData.legalStructureId === "limited-liability-company";
   const unlockedByTaskLinks = taskFromRoadmap
     ? taskFromRoadmap.unlockedBy.filter((it) => userData?.taskProgress[it.id] !== "COMPLETED")
     : [];
 
-  const submitFormationData = () => {
+  const submitFormationFormData = async () => {
     if (!userData) return;
 
-    if (!formationData.businessSuffix) return;
-    if (!formationData.businessAddressLine1) return;
-    if (!formationData.businessAddressZipCode) return;
-    if (!formationData.signer) return;
-    if (formationData.agentNumberOrManual === "NUMBER") {
-      if (!formationData.agentNumber) return;
+    if (!formationFormData.businessSuffix) return;
+    if (!formationFormData.businessAddressLine1) return;
+    if (!formationFormData.businessAddressZipCode) return;
+    if (!formationFormData.signer) return;
+    if (formationFormData.agentNumberOrManual === "NUMBER") {
+      if (!formationFormData.agentNumber) return;
     }
-    if (formationData.agentNumberOrManual === "MANUAL_ENTRY") {
-      if (!formationData.agentName) return;
-      if (!formationData.agentEmail) return;
-      if (!formationData.agentOfficeAddressLine1) return;
-      if (!formationData.agentOfficeAddressCity) return;
-      if (!formationData.agentOfficeAddressZipCode) return;
+    if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
+      if (!formationFormData.agentName) return;
+      if (!formationFormData.agentEmail) return;
+      if (!formationFormData.agentOfficeAddressLine1) return;
+      if (!formationFormData.agentOfficeAddressCity) return;
+      if (!formationFormData.agentOfficeAddressZipCode) return;
     }
 
-    if (!formationData.paymentType) return;
+    if (!formationFormData.paymentType) return;
 
-    const removedEmptySigners = {
-      ...formationData,
-      additionalSigners: formationData.additionalSigners.filter((it) => !!it),
+    const formationFormDataWithEmptySignersRemoved = {
+      ...formationFormData,
+      additionalSigners: formationFormData.additionalSigners.filter((it) => !!it),
     };
 
-    update({ ...userData, formationData: removedEmptySigners });
+    const newUserData = await api.postBusinessFormation({
+      ...userData,
+      formationData: {
+        ...userData.formationData,
+        formationFormData: formationFormDataWithEmptySignersRemoved,
+      },
+    });
+
+    update(newUserData);
   };
 
   if (!isLLC) {
@@ -100,10 +111,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
     <FormationContext.Provider
       value={{
         state: {
-          formationData: formationData,
+          formationFormData: formationFormData,
           displayContent: props.displayContent,
         },
-        setFormationData,
+        setFormationFormData,
       }}
     >
       <TaskHeader task={props.task} />
@@ -116,7 +127,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         <BusinessFormationDocuments />
         <Content>{props.displayContent.disclaimer.contentMd}</Content>
         <BusinessFormationNotifications />
-        <Button style="primary" onClick={submitFormationData}>
+        <Button style="primary" onClick={submitFormationFormData}>
           {BusinessFormationDefaults.submitButtonText}
         </Button>
       </div>

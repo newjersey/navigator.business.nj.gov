@@ -7,11 +7,11 @@ import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const PaymentTypeDropdown = (): ReactElement => {
-  const { state, setFormationData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(FormationContext);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
-    setFormationData({
-      ...state.formationData,
+    setFormationFormData({
+      ...state.formationFormData,
       paymentType: event.target.value as PaymentType,
     });
   };
@@ -22,7 +22,7 @@ export const PaymentTypeDropdown = (): ReactElement => {
   ];
 
   const selectedPaymentLabel = paymentOptions.find(
-    (paymentType) => paymentType.type === state.formationData.paymentType
+    (paymentType) => paymentType.type === state.formationFormData.paymentType
   )?.displayText;
 
   return (
@@ -37,7 +37,7 @@ export const PaymentTypeDropdown = (): ReactElement => {
             labelId="payment-type-label"
             id="payment-type"
             displayEmpty
-            value={state.formationData.paymentType || ""}
+            value={state.formationFormData.paymentType || ""}
             onChange={handleChange}
             inputProps={{ "data-testid": "payment-type" }}
             renderValue={(selected) => {

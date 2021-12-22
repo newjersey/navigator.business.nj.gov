@@ -6,10 +6,12 @@ import express from "express";
 import serverless from "serverless-http";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { businessNameRouterFactory } from "../../api/businessNameRouter";
+import { formationRouterFactory } from "../../api/formationRouter";
 import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
 import { userRouterFactory } from "../../api/userRouter";
 import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
+import { ApiFormationClient } from "../../client/ApiFormationClient";
 import { FakeTaxFilingClient } from "../../client/FakeTaxFilingClient";
 import { GovDeliveryNewsletterClient } from "../../client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
@@ -66,6 +68,10 @@ const AIRTABLE_BASE_URL =
   process.env.AIRTABLE_BASE_URL ||
   (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
 
+const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
+const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
+const FORMATION_API_BASE_URL = process.env.FORMATION_API_BASE_URL || "";
+
 const govDeliveryNewsletterClient = GovDeliveryNewsletterClient({
   baseUrl: GOV_DELIVERY_BASE_URL,
   topic: GOV_DELIVERY_TOPIC,
@@ -104,6 +110,15 @@ const myNJSelfRegClient = MyNJSelfRegClientFactory(
   logger
 );
 
+const apiFormationClient = ApiFormationClient(
+  {
+    account: FORMATION_API_ACCOUNT,
+    key: FORMATION_API_KEY,
+    baseUrl: FORMATION_API_BASE_URL,
+  },
+  logger
+);
+
 app.use(bodyParser.json({ strict: false }));
 app.use(
   "/api",
@@ -118,6 +133,7 @@ app.use(
 app.use("/api", businessNameRouterFactory(searchBusinessName));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, myNJSelfRegClient));
+app.use("/api", formationRouterFactory(apiFormationClient, userDataClient));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {

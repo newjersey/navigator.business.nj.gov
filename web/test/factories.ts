@@ -11,7 +11,10 @@ import {
 } from "@/lib/types/types";
 import { getSectionNames } from "@/lib/utils/helpers";
 import {
+  AllBusinessSuffixes,
+  BusinessSuffix,
   BusinessUser,
+  FormationFormData,
   Industries,
   Industry,
   LegalStructure,
@@ -60,7 +63,10 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
-    formationData: undefined, // Placeholder
+    formationData: {
+      formationFormData: generateFormationFormData({}),
+      formationResponse: undefined,
+    },
     ...overrides,
   };
 };
@@ -357,3 +363,37 @@ export const generateFormationDisplayContent = (
   },
   ...overrides,
 });
+
+export const generateFormationFormData = (overrides: Partial<FormationFormData>): FormationFormData => {
+  return {
+    businessSuffix: randomBusinessSuffix(),
+    businessStartDate: dayjs().add(1, "days").format("YYYY-MM-DD"),
+    businessAddressLine1: `some-address-1-${randomInt()}`,
+    businessAddressLine2: `some-address-2-${randomInt()}`,
+    businessAddressState: "NJ",
+    businessAddressZipCode: `some-zipcode-${randomInt()}`,
+    agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
+    agentNumber: `some-agent-number-${randomInt()}`,
+    agentName: `some-agent-name-${randomInt()}`,
+    agentEmail: `some-agent-email-${randomInt()}`,
+    agentOfficeAddressLine1: `some-agent-office-address-1-${randomInt()}`,
+    agentOfficeAddressLine2: `some-agent-office-address-2-${randomInt()}`,
+    agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
+    agentOfficeAddressState: "NJ",
+    agentOfficeAddressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    signer: `some-signer-${randomInt()}`,
+    additionalSigners: [`some-additional-signer-${randomInt()}`],
+    paymentType: randomInt() % 2 ? "ACH" : "CC",
+    annualReportNotification: !!(randomInt() % 2),
+    corpWatchNotification: !!(randomInt() % 2),
+    officialFormationDocument: !!(randomInt() % 2),
+    certificateOfStanding: !!(randomInt() % 2),
+    certifiedCopyOfFormationDocument: !!(randomInt() % 2),
+    ...overrides,
+  };
+};
+
+export const randomBusinessSuffix = (): BusinessSuffix => {
+  const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);
+  return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
+};

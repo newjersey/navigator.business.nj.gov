@@ -6,11 +6,11 @@ import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const BusinessSuffixDropdown = (): ReactElement => {
-  const { state, setFormationData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(FormationContext);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
-    setFormationData({
-      ...state.formationData,
+    setFormationFormData({
+      ...state.formationFormData,
       businessSuffix: event.target.value as BusinessSuffix,
     });
   };
@@ -27,7 +27,7 @@ export const BusinessSuffixDropdown = (): ReactElement => {
             labelId="business-suffix-label"
             id="business-suffix"
             displayEmpty
-            value={state.formationData.businessSuffix || ""}
+            value={state.formationFormData.businessSuffix || ""}
             onChange={handleChange}
             inputProps={{ "data-testid": "business-suffix" }}
             renderValue={(selected) => {

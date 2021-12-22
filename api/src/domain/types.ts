@@ -1,4 +1,5 @@
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
+import { FormationSubmitResponse } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
 import { TaxFilingData } from "@shared/taxFiling";
@@ -10,17 +11,23 @@ export interface UserDataClient {
   findByEmail: (email: string) => Promise<UserData | undefined>;
   put: (userData: UserData) => Promise<UserData>;
 }
+
 export interface UserDataQlClient {
   search: (statement: string) => Promise<UserData[]>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
 }
+
 export interface BusinessNameClient {
   search: (name: string) => Promise<string[]>;
 }
 
 export interface NewsletterClient {
   add: (email: string) => Promise<NewsletterResponse>;
+}
+
+export interface FormationClient {
+  form: (userData: UserData) => Promise<FormationSubmitResponse>;
 }
 
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;

@@ -1,6 +1,6 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { NameAvailability, SelfRegRequest, SelfRegResponse } from "@/lib/types/types";
-import { NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
+import { NameAndAddress, UserData } from "@businessnjgovnavigator/shared";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -18,6 +18,10 @@ export const searchBusinessName = (name: string): Promise<NameAvailability> => {
 
 export const checkLicenseStatus = (nameAndAddress: NameAndAddress): Promise<UserData> => {
   return post(`/license-status`, nameAndAddress);
+};
+
+export const postBusinessFormation = (userData: UserData): Promise<UserData> => {
+  return post(`/formation`, userData);
 };
 
 export const postSelfReg = (selfRegRequest: SelfRegRequest): Promise<SelfRegResponse> => {

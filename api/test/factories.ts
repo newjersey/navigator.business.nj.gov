@@ -6,6 +6,7 @@ import {
   newsletterStatusList,
   UserTestingResponse,
 } from "@shared/businessUser";
+import { AllBusinessSuffixes, BusinessSuffix, FormationData, FormationFormData } from "@shared/formationData";
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import { LicenseData, LicenseEntity, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
@@ -43,7 +44,10 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences(),
     taxFilingData: generateTaxFilingData({}),
-    formationData: undefined, // placeholder
+    formationData: {
+      formationResponse: undefined,
+      formationFormData: generateFormationFormData({}),
+    },
     ...overrides,
   };
 };
@@ -194,6 +198,14 @@ export const generateExternalStatus = (overrides: Partial<ExternalStatus>): Exte
   };
 };
 
+export const generateFormationData = (overrides: Partial<FormationData>): FormationData => {
+  return {
+    formationFormData: generateFormationFormData({}),
+    formationResponse: undefined,
+    ...overrides,
+  };
+};
+
 export const generateNewsletterResponse = (overrides: Partial<NewsletterResponse>): NewsletterResponse => {
   const failed = !!(randomInt() % 2);
   return {
@@ -210,4 +222,38 @@ export const generateUserTestingResponse = (overrides: Partial<UserTestingRespon
     status: failed ? "CONNECTION_ERROR" : "SUCCESS",
     ...overrides,
   };
+};
+
+export const generateFormationFormData = (overrides: Partial<FormationFormData>): FormationFormData => {
+  return {
+    businessSuffix: randomBusinessSuffix(),
+    businessStartDate: dayjs().add(1, "days").format("YYYY-MM-DD"),
+    businessAddressLine1: `some-address-1-${randomInt()}`,
+    businessAddressLine2: `some-address-2-${randomInt()}`,
+    businessAddressState: "NJ",
+    businessAddressZipCode: `some-zipcode-${randomInt()}`,
+    agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
+    agentNumber: `some-agent-number-${randomInt()}`,
+    agentName: `some-agent-name-${randomInt()}`,
+    agentEmail: `some-agent-email-${randomInt()}`,
+    agentOfficeAddressLine1: `some-agent-office-address-1-${randomInt()}`,
+    agentOfficeAddressLine2: `some-agent-office-address-2-${randomInt()}`,
+    agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
+    agentOfficeAddressState: "NJ",
+    agentOfficeAddressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    signer: `some-signer-${randomInt()}`,
+    additionalSigners: [`some-additional-signer-${randomInt()}`],
+    paymentType: randomInt() % 2 ? "ACH" : "CC",
+    annualReportNotification: !!(randomInt() % 2),
+    corpWatchNotification: !!(randomInt() % 2),
+    officialFormationDocument: !!(randomInt() % 2),
+    certificateOfStanding: !!(randomInt() % 2),
+    certifiedCopyOfFormationDocument: !!(randomInt() % 2),
+    ...overrides,
+  };
+};
+
+export const randomBusinessSuffix = (): BusinessSuffix => {
+  const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);
+  return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
 };
