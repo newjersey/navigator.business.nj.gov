@@ -2,7 +2,7 @@
   "isMobileLocation": false,
   "canBeHomeBased": false,
   "canBeReseller": true,
-  "additionalSearchTerms": "store","reseller","outlet","shop",
+  "additionalSearchTerms": "store,reseller,outlet,shop",
   "roadmapSteps": [
     {
       "step": 1,
