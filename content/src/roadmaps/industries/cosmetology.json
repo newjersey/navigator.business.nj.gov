@@ -7,6 +7,7 @@
   "licenseType": "Cosmetology and Hairstyling",
   "isMobileLocation": false,
   "canBeReseller": true,
+  "additionalSearchTerms": "cosmetics","beautician","aesthetician",
   "roadmapSteps": [
     {
       "step": 1,
