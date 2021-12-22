@@ -5,7 +5,6 @@ backend:
   commit_messages:
     create: "feat: creating {{collection}} {{slug}}"
     update: "fix: updating {{collection}} {{slug}}"
-local_backend: true
 publish_mode: editorial_workflow
 media_folder: web/public/img
 logo_url: https://dev.d1fxpe8xsdfr62.amplifyapp.com/img/Navigator-logo.svg
