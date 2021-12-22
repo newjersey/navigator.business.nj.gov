@@ -1,5 +1,5 @@
 import { BusinessUser } from "./businessUser";
-import { FormationData } from "./formationData";
+import { createEmptyFormationFormData, FormationData } from "./formationData";
 import { LicenseData } from "./license";
 import { createEmptyProfileData, ProfileData } from "./profileData";
 import { TaxFilingData } from "./taxFiling";
@@ -12,7 +12,7 @@ export interface UserData {
   licenseData: LicenseData | undefined;
   preferences: Preferences;
   taxFilingData: TaxFilingData;
-  formationData: FormationData | undefined;
+  formationData: FormationData;
 }
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
@@ -30,7 +30,10 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       entityIdStatus: "UNKNOWN",
       filings: [],
     },
-    formationData: undefined,
+    formationData: {
+      formationFormData: createEmptyFormationFormData(),
+      formationResponse: undefined,
+    },
   };
 };
 

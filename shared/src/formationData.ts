@@ -1,11 +1,16 @@
 import dayjs from "dayjs";
+
 export interface FormationData {
+  formationFormData: FormationFormData;
+  formationResponse: FormationSubmitResponse | undefined;
+}
+
+export interface FormationFormData {
   businessSuffix: BusinessSuffix | undefined;
   businessStartDate: string;
   businessAddressLine1: string;
   businessAddressLine2: string;
   businessAddressState: string;
-  // businessAddressCounty: string;
   businessAddressZipCode: string;
   agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
   agentNumber: string;
@@ -27,7 +32,7 @@ export interface FormationData {
 }
 
 export type FormationTextField = Exclude<
-  keyof FormationData,
+  keyof FormationFormData,
   | "businessSuffix"
   | "businessStartDate"
   | "additionalSigners"
@@ -40,14 +45,13 @@ export type FormationTextField = Exclude<
   | "certifiedCopyOfFormationDocument"
 >;
 
-export const createEmptyFormationData = (): FormationData => {
+export const createEmptyFormationFormData = (): FormationFormData => {
   return {
     businessSuffix: undefined,
     businessStartDate: dayjs().format("YYYY-MM-DD"),
     businessAddressLine1: "",
     businessAddressLine2: "",
     businessAddressState: "NJ",
-    // businessAddressCounty: "",
     businessAddressZipCode: "",
     agentNumberOrManual: "NUMBER",
     agentNumber: "",
@@ -91,3 +95,15 @@ export const AllBusinessSuffixes = [
   "LIMITED LIABILITY CO.",
   "LIMITED LIABILITY COMPANY",
 ];
+
+export type FormationSubmitResponse = {
+  success: boolean;
+  token: string | undefined;
+  redirect: string | undefined;
+  errors: FormationSubmitError[];
+};
+
+export type FormationSubmitError = {
+  field: string;
+  message: string;
+};

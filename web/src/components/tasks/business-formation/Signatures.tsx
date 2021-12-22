@@ -8,7 +8,7 @@ import { TextField } from "@mui/material";
 import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
 
 export const Signatures = (): ReactElement => {
-  const { state, setFormationData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(FormationContext);
   const [error, setError] = useState(false);
 
   const onValidation = (event: FocusEvent<HTMLInputElement>) => {
@@ -20,26 +20,26 @@ export const Signatures = (): ReactElement => {
   };
 
   const addAdditionalSignerField = () => {
-    setFormationData({
-      ...state.formationData,
-      additionalSigners: [...state.formationData.additionalSigners, ""],
+    setFormationFormData({
+      ...state.formationFormData,
+      additionalSigners: [...state.formationFormData.additionalSigners, ""],
     });
   };
 
   const removeAdditionalSigner = (index: number) => {
-    const newAdditionalSigners = [...state.formationData.additionalSigners];
+    const newAdditionalSigners = [...state.formationFormData.additionalSigners];
     newAdditionalSigners.splice(index, 1);
-    setFormationData({
-      ...state.formationData,
+    setFormationFormData({
+      ...state.formationFormData,
       additionalSigners: newAdditionalSigners,
     });
   };
 
   const handleAdditionalSignerChange = (event: ChangeEvent<HTMLInputElement>, index: number): void => {
-    const newAdditionalSigners = [...state.formationData.additionalSigners];
+    const newAdditionalSigners = [...state.formationFormData.additionalSigners];
     newAdditionalSigners[index] = event.target.value;
-    setFormationData({
-      ...state.formationData,
+    setFormationFormData({
+      ...state.formationFormData,
       additionalSigners: newAdditionalSigners,
     });
   };
@@ -53,7 +53,7 @@ export const Signatures = (): ReactElement => {
           onValidation={onValidation}
           validationText={BusinessFormationDefaults.signerErrorText}
         />
-        {state.formationData.additionalSigners.map((it, index) => {
+        {state.formationFormData.additionalSigners.map((it, index) => {
           return (
             <div className="margin-bottom-1" key={index}>
               <Content>{state.displayContent.additionalSigners.contentMd}</Content>
@@ -82,7 +82,7 @@ export const Signatures = (): ReactElement => {
             </div>
           );
         })}
-        {state.formationData.additionalSigners.length < 9 && (
+        {state.formationFormData.additionalSigners.length < 9 && (
           <Button style="tertiary" onClick={addAdditionalSignerField}>
             <Icon>add</Icon> {BusinessFormationDefaults.addNewSignerButtonText}
           </Button>

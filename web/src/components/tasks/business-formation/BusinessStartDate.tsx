@@ -12,11 +12,11 @@ dayjs.extend(advancedFormat);
 export const BusinessStartDate = (): ReactElement => {
   const [showError, setShowError] = useState<boolean>(false);
 
-  const { state, setFormationData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(FormationContext);
 
   const handleChange = (value: string) => {
-    setFormationData({
-      ...state.formationData,
+    setFormationFormData({
+      ...state.formationFormData,
       businessStartDate: value,
     });
   };
@@ -29,7 +29,7 @@ export const BusinessStartDate = (): ReactElement => {
             label=""
             minDate={dayjs()}
             maxDate={dayjs().add(100, "years")}
-            value={dayjs(state.formationData.businessStartDate, "YYYY-MM-DD")}
+            value={dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD")}
             inputFormat={"MM/DD/YYYY"}
             onChange={(newValue: Dayjs | null): void => {
               if (newValue) {

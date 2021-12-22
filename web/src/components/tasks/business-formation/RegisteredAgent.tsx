@@ -8,13 +8,13 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { FocusEvent, ReactElement, useContext, useState } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
-  const { state, setFormationData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(FormationContext);
   const [errorMap, setErrorMap] = useState<Partial<Record<FormationTextField, boolean>>>({});
 
   const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     setErrorMap({});
-    setFormationData({
-      ...state.formationData,
+    setFormationFormData({
+      ...state.formationFormData,
       agentNumberOrManual: event.target.value as "NUMBER" | "MANUAL_ENTRY",
     });
   };
@@ -24,7 +24,7 @@ export const RegisteredAgent = (): ReactElement => {
     field: FormationTextField,
     radioValueNeeded: "NUMBER" | "MANUAL_ENTRY"
   ) => {
-    if (state.formationData.agentNumberOrManual !== radioValueNeeded) {
+    if (state.formationFormData.agentNumberOrManual !== radioValueNeeded) {
       setErrorMap({ ...errorMap, [field]: false });
     } else if (!event.target.value.trim()) {
       setErrorMap({ ...errorMap, [field]: true });
@@ -41,7 +41,7 @@ export const RegisteredAgent = (): ReactElement => {
           <RadioGroup
             aria-label="Registered Agent"
             name="registered-agent"
-            value={state.formationData.agentNumberOrManual}
+            value={state.formationFormData.agentNumberOrManual}
             onChange={handleRadioSelection}
             row
           >
@@ -65,7 +65,7 @@ export const RegisteredAgent = (): ReactElement => {
         </FormControl>
 
         <div className="margin-top-2">
-          {state.formationData.agentNumberOrManual === "NUMBER" && (
+          {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
               <BusinessFormationTextField
                 error={errorMap["agentNumber"]}
@@ -76,7 +76,7 @@ export const RegisteredAgent = (): ReactElement => {
             </div>
           )}
 
-          {state.formationData.agentNumberOrManual === "MANUAL_ENTRY" && (
+          {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
             <div data-testid="agent-name">
               <BusinessFormationTextField
                 error={errorMap["agentName"]}

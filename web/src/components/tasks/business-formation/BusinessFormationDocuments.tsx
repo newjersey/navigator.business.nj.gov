@@ -6,29 +6,29 @@ import React, { ReactElement, useContext, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const BusinessFormationDocuments = (): ReactElement => {
-  const { state, setFormationData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(FormationContext);
   const [totalCost, setTotalCost] = useState<string>(state.displayContent.officialFormationDocument.cost);
 
   const handleCertificateOfStandingClick = () => {
-    const value = !state.formationData.certificateOfStanding
+    const value = !state.formationFormData.certificateOfStanding
       ? addTwoDollarValues(totalCost, state.displayContent.certificateOfStanding.cost)
       : subtractTwoDollarValues(totalCost, state.displayContent.certificateOfStanding.cost);
 
-    setFormationData({
-      ...state.formationData,
-      certificateOfStanding: !state.formationData.certificateOfStanding,
+    setFormationFormData({
+      ...state.formationFormData,
+      certificateOfStanding: !state.formationFormData.certificateOfStanding,
     });
     setTotalCost(value);
   };
 
   const handleCertifiedFormationDocumentClick = () => {
-    const value = !state.formationData.certifiedCopyOfFormationDocument
+    const value = !state.formationFormData.certifiedCopyOfFormationDocument
       ? addTwoDollarValues(totalCost, state.displayContent.certifiedCopyOfFormationDocument.cost)
       : subtractTwoDollarValues(totalCost, state.displayContent.certifiedCopyOfFormationDocument.cost);
 
-    setFormationData({
-      ...state.formationData,
-      certifiedCopyOfFormationDocument: !state.formationData.certifiedCopyOfFormationDocument,
+    setFormationFormData({
+      ...state.formationFormData,
+      certifiedCopyOfFormationDocument: !state.formationFormData.certifiedCopyOfFormationDocument,
     });
 
     setTotalCost(value);

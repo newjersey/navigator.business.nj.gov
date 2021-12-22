@@ -18,21 +18,21 @@ interface Props {
 }
 
 export const BusinessFormationTextField = (props: Props): ReactElement => {
-  const { state, setFormationData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(FormationContext);
 
   const inputRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     props.handleChange && props.handleChange();
     const value = props.valueFilter ? props.valueFilter(event.target.value) : event.target.value;
-    const formationData = { ...state.formationData };
-    formationData[props.fieldName] = value;
-    setFormationData({ ...formationData });
+    const formationFormData = { ...state.formationFormData };
+    formationFormData[props.fieldName] = value;
+    setFormationFormData({ ...formationFormData });
   };
 
   const value = props.visualFilter
-    ? props.visualFilter((state.formationData[props.fieldName] as string) ?? "")
-    : state.formationData[props.fieldName];
+    ? props.visualFilter((state.formationFormData[props.fieldName] as string) ?? "")
+    : state.formationFormData[props.fieldName];
 
   return (
     <div ref={inputRef}>

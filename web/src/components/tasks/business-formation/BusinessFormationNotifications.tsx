@@ -4,19 +4,19 @@ import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const BusinessFormationNotifications = (): ReactElement => {
-  const { state, setFormationData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(FormationContext);
 
   const handleAnnualReportClick = () => {
-    setFormationData({
-      ...state.formationData,
-      annualReportNotification: !state.formationData.annualReportNotification,
+    setFormationFormData({
+      ...state.formationFormData,
+      annualReportNotification: !state.formationFormData.annualReportNotification,
     });
   };
 
   const handleCorpWatchClick = () => {
-    setFormationData({
-      ...state.formationData,
-      corpWatchNotification: !state.formationData.corpWatchNotification,
+    setFormationFormData({
+      ...state.formationFormData,
+      corpWatchNotification: !state.formationFormData.corpWatchNotification,
     });
   };
 
