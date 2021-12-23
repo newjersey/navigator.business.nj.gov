@@ -16,6 +16,7 @@ import {
   BusinessUser,
   FormationData,
   FormationFormData,
+  FormationSubmitResponse,
   Industries,
   Industry,
   LegalStructure,
@@ -403,6 +404,18 @@ export const generateFormationData = (overrides: Partial<FormationData>): Format
   return {
     formationFormData: generateFormationFormData({}),
     formationResponse: undefined,
+    ...overrides,
+  };
+};
+
+export const generateFormationSubmitResponse = (
+  overrides: Partial<FormationSubmitResponse>
+): FormationSubmitResponse => {
+  return {
+    success: !!(randomInt() % 2),
+    token: `some-token-${randomInt()}`,
+    redirect: `some-redirect-${randomInt()}`,
+    errors: [],
     ...overrides,
   };
 };

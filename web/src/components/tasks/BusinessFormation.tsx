@@ -11,6 +11,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createEmptyFormationDisplayContent, FormationDisplayContent, Task } from "@/lib/types/types";
 import { getModifiedTaskContent } from "@/lib/utils/helpers";
 import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
+import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 import { TaskCTA } from "../TaskCTA";
@@ -46,6 +47,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
+  const router = useRouter();
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
@@ -89,6 +91,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
 
     update(newUserData);
+    if (
+      newUserData.formationData.formationResponse?.success &&
+      newUserData.formationData.formationResponse?.redirect
+    ) {
+      await router.replace(newUserData.formationData.formationResponse.redirect);
+    }
   };
 
   if (!isLLC) {

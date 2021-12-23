@@ -4,11 +4,13 @@ import * as api from "@/lib/api-client/apiClient";
 import {
   generateFormationData,
   generateFormationDisplayContent,
+  generateFormationSubmitResponse,
   generateMunicipality,
   generateProfileData,
   generateTask,
   generateUserData,
 } from "@/test/factories";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
@@ -18,6 +20,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   createEmptyFormationFormData,
+  FormationSubmitResponse,
   LookupLegalStructureById,
   ProfileData,
   UserData,
@@ -29,6 +32,7 @@ import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("next/router");
 jest.mock("@/lib/api-client/apiClient", () => ({ postBusinessFormation: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -72,15 +76,22 @@ describe("<BusinessFormation />", () => {
     );
   };
 
-  const mockApiResponse = () => {
+  const mockApiResponse = (response?: FormationSubmitResponse) => {
     mockApi.postBusinessFormation.mockImplementation((userData) => {
-      return Promise.resolve(userData);
+      return Promise.resolve({
+        ...userData,
+        formationData: {
+          ...userData.formationData,
+          formationResponse: response,
+        },
+      });
     });
   };
 
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
+    useMockRouter({});
     setupStatefulUserDataContext();
     mockApiResponse();
   });
@@ -284,6 +295,22 @@ describe("<BusinessFormation />", () => {
       expect(
         subject.queryByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false })
       ).not.toBeInTheDocument();
+    });
+
+    it("redirects to payment redirect URL on success", async () => {
+      const profileData = generateLLCProfileData({});
+      subject = renderTask({ profileData });
+
+      mockApiResponse(
+        generateFormationSubmitResponse({
+          success: true,
+          redirect: "www.example.com",
+        })
+      );
+
+      fillAllFieldsBut([]);
+      await clickSubmit();
+      expect(mockPush).toHaveBeenCalledWith("www.example.com");
     });
 
     describe("required fields", () => {
