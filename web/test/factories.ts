@@ -16,6 +16,7 @@ import {
   BusinessUser,
   FormationData,
   FormationFormData,
+  FormationSubmitError,
   FormationSubmitResponse,
   Industries,
   Industry,
@@ -416,6 +417,16 @@ export const generateFormationSubmitResponse = (
     token: `some-token-${randomInt()}`,
     redirect: `some-redirect-${randomInt()}`,
     errors: [],
+    ...overrides,
+  };
+};
+
+export const generateFormationSubmitError = (
+  overrides: Partial<FormationSubmitError>
+): FormationSubmitError => {
+  return {
+    field: `some-field-${randomInt()}`,
+    message: `some-message-${randomInt()}`,
     ...overrides,
   };
 };

@@ -4,6 +4,7 @@ import * as api from "@/lib/api-client/apiClient";
 import {
   generateFormationData,
   generateFormationDisplayContent,
+  generateFormationSubmitError,
   generateFormationSubmitResponse,
   generateMunicipality,
   generateProfileData,
@@ -311,6 +312,29 @@ describe("<BusinessFormation />", () => {
       fillAllFieldsBut([]);
       await clickSubmit();
       expect(mockPush).toHaveBeenCalledWith("www.example.com");
+    });
+
+    it("displays error messages on error", async () => {
+      const profileData = generateLLCProfileData({});
+      subject = renderTask({ profileData });
+
+      mockApiResponse(
+        generateFormationSubmitResponse({
+          success: false,
+          errors: [
+            generateFormationSubmitError({ field: "some field 1", message: "very bad input" }),
+            generateFormationSubmitError({ field: "some field 2", message: "must be nj zipcode" }),
+          ],
+        })
+      );
+
+      fillAllFieldsBut([]);
+      await clickSubmit();
+      expect(mockPush).not.toHaveBeenCalled();
+      expect(subject.getByText("some field 1")).toBeInTheDocument();
+      expect(subject.getByText("very bad input")).toBeInTheDocument();
+      expect(subject.getByText("some field 2")).toBeInTheDocument();
+      expect(subject.getByText("must be nj zipcode")).toBeInTheDocument();
     });
 
     describe("required fields", () => {
