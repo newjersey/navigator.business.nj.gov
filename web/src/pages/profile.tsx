@@ -18,18 +18,19 @@ import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
   createProfileFieldErrorMap,
+  LoadDisplayContent,
   OnboardingStatus,
-  ProfileDisplayContent,
   ProfileFieldErrorMap,
   ProfileFields,
+  UserDisplayContent,
 } from "@/lib/types/types";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getSectionCompletion, OnboardingStatusLookup } from "@/lib/utils/helpers";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { RoadmapContext } from "@/pages/_app";
 import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
@@ -40,7 +41,7 @@ import { useRouter } from "next/router";
 import React, { FormEvent, ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {
-  displayContent: ProfileDisplayContent;
+  displayContent: LoadDisplayContent;
   municipalities: Municipality[];
 }
 
@@ -94,11 +95,12 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   return (
-    <OnboardingContext.Provider
+    <ProfileDataContext.Provider
       value={{
         state: {
           profileData: profileData,
-          displayContent: props.displayContent,
+          displayContent: props.displayContent["PROFILE"] as UserDisplayContent,
+          flow: "PROFILE",
           municipalities: props.municipalities,
         },
         setProfileData,
@@ -225,7 +227,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </div>
         </main>
       </PageSkeleton>
-    </OnboardingContext.Provider>
+    </ProfileDataContext.Provider>
   );
 };
 
@@ -234,7 +236,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
 
   return {
     props: {
-      displayContent: loadProfileDisplayContent(),
+      displayContent: loadUserDisplayContent(),
       municipalities,
     },
   };

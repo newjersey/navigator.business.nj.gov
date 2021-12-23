@@ -18,56 +18,62 @@ export type OperateDisplayContent = {
   entityIdErrorNotRegisteredMd: string;
 };
 
-type TextFieldContent = {
+export type TextFieldContent = {
   contentMd: string;
-  placeholder: string;
+  placeholder?: string;
+};
+export type RadioFieldContent = { contentMd: string; radioButtonYesText: string; radioButtonNoText: string };
+
+export type LegalFieldContent = {
+  contentMd: string;
+  optionContent: Record<string, string>;
+};
+export type FlowType = "OWNING" | "STARTING";
+
+export type UserContentType = FlowType | "PROFILE";
+export interface IndustryFieldContent extends TextFieldContent {
+  specificHomeContractorMd: string;
+  specificEmploymentAgencyMd: string;
+  specificLiquorQuestion: RadioFieldContent;
+  specificHomeBasedBusinessQuestion: RadioFieldContent;
+}
+
+export type StartingFlowContent = {
+  hasExistingBusiness: RadioFieldContent;
+  businessName: TextFieldContent;
+  industry: IndustryFieldContent;
+  municipality: TextFieldContent;
+  legalStructure: LegalFieldContent;
 };
 
-export type ProfileDisplayContent = {
-  hasExistingBusiness: { contentMd: string; radioButtonYesText: string; radioButtonNoText: string };
+export type ProfileContent = {
   businessName: TextFieldContent;
-  industry: {
-    contentMd: string;
-    placeholder: string;
-    specificHomeContractorMd: string;
-    specificEmploymentAgencyMd: string;
-    specificLiquorQuestion: {
-      contentMd: string;
-      radioButtonYesText: string;
-      radioButtonNoText: string;
-    };
-    specificHomeBasedBusinessQuestion: {
-      contentMd: string;
-      radioButtonYesText: string;
-      radioButtonNoText: string;
-    };
-  };
-  legalStructure: {
-    contentMd: string;
-    optionContent: Record<string, string>;
-  };
-  municipality: {
-    contentMd: string;
-    placeholder: string;
-  };
-  notes: {
-    contentMd: string;
-  };
-  taxId: {
-    contentMd: string;
-  };
-  employerId: {
-    contentMd: string;
-  };
-  entityId: {
-    contentMd: string;
-  };
-  certifications: { contentMd: string; placeholder: string };
-  existingEmployees: {
-    contentMd: string;
-    placeholder: string;
-  };
+  industry: IndustryFieldContent;
+  municipality: TextFieldContent;
+  legalStructure: LegalFieldContent;
+  notes: TextFieldContent;
+  taxId: TextFieldContent;
+  entityId: TextFieldContent;
+  employerId: TextFieldContent;
 };
+
+export type OwningFlowContent = {
+  hasExistingBusiness: RadioFieldContent;
+  businessName: TextFieldContent;
+  industry: IndustryFieldContent;
+  entityId: TextFieldContent;
+  certifications: TextFieldContent;
+  municipality: TextFieldContent;
+  existingEmployees: TextFieldContent;
+};
+export interface UserDisplayContent extends StartingFlowContent, OwningFlowContent, ProfileContent {}
+
+export interface LoadDisplayContent
+  extends Record<UserContentType, OwningFlowContent | StartingFlowContent | ProfileContent> {
+  OWNING: OwningFlowContent;
+  STARTING: StartingFlowContent;
+  PROFILE: ProfileContent;
+}
 
 export type FormationDisplayContent = {
   businessNameAndLegalStructure: {
@@ -235,8 +241,7 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   },
 });
 
-const emptyProfileDisplayContent: ProfileDisplayContent = {
-  hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
+const coreContent = {
   businessName: {
     contentMd: "",
     placeholder: "",
@@ -272,6 +277,14 @@ const emptyProfileDisplayContent: ProfileDisplayContent = {
     contentMd: "",
     placeholder: "",
   },
+};
+export const emptyStartingFlowContent: StartingFlowContent = {
+  ...coreContent,
+  hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
+};
+
+export const emptyProfileContent: ProfileContent = {
+  ...coreContent,
   notes: {
     contentMd: "",
   },
@@ -284,6 +297,37 @@ const emptyProfileDisplayContent: ProfileDisplayContent = {
   entityId: {
     contentMd: "",
   },
+};
+
+export const emptyOwningFlowContent: OwningFlowContent = {
+  hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
+  businessName: {
+    contentMd: "",
+    placeholder: "",
+  },
+  industry: {
+    contentMd: "",
+    placeholder: "",
+    specificHomeContractorMd: "",
+    specificEmploymentAgencyMd: "",
+    specificLiquorQuestion: {
+      contentMd: "",
+      radioButtonYesText: "",
+      radioButtonNoText: "",
+    },
+    specificHomeBasedBusinessQuestion: {
+      contentMd: "",
+      radioButtonYesText: "",
+      radioButtonNoText: "",
+    },
+  },
+  municipality: {
+    contentMd: "",
+    placeholder: "",
+  },
+  entityId: {
+    contentMd: "",
+  },
   certifications: {
     contentMd: "",
     placeholder: "",
@@ -292,22 +336,36 @@ const emptyProfileDisplayContent: ProfileDisplayContent = {
     contentMd: "",
     placeholder: "",
   },
-} as ProfileDisplayContent;
-
-export const createEmptyProfileDisplayContent = (): ProfileDisplayContent => {
-  return emptyProfileDisplayContent;
 };
 
-export type ProfileFields = keyof ProfileData & keyof ProfileDisplayContent;
+export const createEmptyUserDisplayContent = (): UserDisplayContent => ({
+  ...emptyOwningFlowContent,
+  ...emptyStartingFlowContent,
+  ...emptyProfileContent,
+});
 
-const profileDisplayContentFields = Object.keys(
-  emptyProfileDisplayContent
-) as (keyof ProfileDisplayContent)[];
+export const createEmptyLoadDisplayContent = (): LoadDisplayContent => ({
+  STARTING: emptyStartingFlowContent,
+  OWNING: emptyOwningFlowContent,
+  PROFILE: emptyProfileContent,
+});
+export type ProfileFields = keyof ProfileData & keyof UserDisplayContent;
+
+export const profileDisplayFields = Object.keys(emptyProfileContent) as (keyof ProfileContent)[];
+
+export const owningFlowDisplayFields = Object.keys(emptyOwningFlowContent) as (keyof OwningFlowContent)[];
+
+export const startFlowDisplayFields = Object.keys(emptyStartingFlowContent) as (keyof StartingFlowContent)[];
 
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 
 export const profileFields: ProfileFields[] = [
-  ...new Set([...profileDisplayContentFields, ...onboardingDataFields]),
+  ...new Set([
+    ...profileDisplayFields,
+    ...onboardingDataFields,
+    ...owningFlowDisplayFields,
+    ...startFlowDisplayFields,
+  ]),
 ] as ProfileFields[];
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";

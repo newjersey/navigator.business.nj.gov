@@ -1,4 +1,4 @@
-import { createEmptyProfileDisplayContent as createEmptyProfileDisplayContent } from "@/lib/types/types";
+import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
 import {
   generateMunicipality,
@@ -62,7 +62,7 @@ describe("onboarding - shared", () => {
     const subject = render(
       withRoadmap(
         <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
-          <Onboarding displayContent={createEmptyProfileDisplayContent()} municipalities={[]} />
+          <Onboarding displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
         </WithStatefulUserData>,
         undefined,
         undefined,
@@ -218,7 +218,7 @@ describe("onboarding - shared", () => {
   });
 
   it("displays industry-specific content for home contractors when selected", async () => {
-    const displayContent = createEmptyProfileDisplayContent();
+    const displayContent = createEmptyLoadDisplayContent()["STARTING"];
     displayContent.industry.specificHomeContractorMd = "Learn more about home contractors!";
 
     const { subject, page } = renderPage({});
@@ -238,7 +238,7 @@ describe("onboarding - shared", () => {
   });
 
   it("displays industry-specific content for employment agency when selected", async () => {
-    const displayContent = createEmptyProfileDisplayContent();
+    const displayContent = createEmptyLoadDisplayContent()["STARTING"];
     displayContent.industry.specificEmploymentAgencyMd = "Learn more about employment agencies!";
 
     const { subject, page } = renderPage({});
@@ -257,7 +257,7 @@ describe("onboarding - shared", () => {
   });
 
   it("displays liquor license question for restaurants when selected", async () => {
-    const displayContent = createEmptyProfileDisplayContent();
+    const displayContent = createEmptyLoadDisplayContent()["STARTING"];
     displayContent.industry.specificLiquorQuestion = {
       contentMd: "Do you need a liquor license?",
       radioButtonYesText: "Yeah",
@@ -280,9 +280,8 @@ describe("onboarding - shared", () => {
 
   it("displays home-based business question for applicable industries on municipality page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const displayContent = createEmptyProfileDisplayContent();
-
-    displayContent.industry.specificHomeBasedBusinessQuestion = {
+    const displayContent = createEmptyLoadDisplayContent();
+    displayContent.STARTING.industry.specificHomeBasedBusinessQuestion = {
       contentMd: "Are you a home-based business?",
       radioButtonYesText: "Yeah",
       radioButtonNoText: "Nah",
@@ -307,8 +306,9 @@ describe("onboarding - shared", () => {
   });
 
   it("does not display home-based business question for non-applicable industries", async () => {
-    const displayContent = createEmptyProfileDisplayContent();
-    displayContent.industry.specificHomeBasedBusinessQuestion.contentMd = "Are you a home-based business?";
+    const displayContent = createEmptyLoadDisplayContent();
+    displayContent.STARTING.industry.specificHomeBasedBusinessQuestion.contentMd =
+      "Are you a home-based business?";
 
     const { subject, page } = renderPage({ displayContent });
     page.chooseRadio("has-existing-business-false");

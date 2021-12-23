@@ -1,4 +1,4 @@
-import { createEmptyProfileDisplayContent, ProfileDisplayContent } from "@/lib/types/types";
+import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
 import { generateUser } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
@@ -12,14 +12,14 @@ export const renderPage = ({
   userData,
 }: {
   municipalities?: Municipality[];
-  displayContent?: ProfileDisplayContent;
+  displayContent?: LoadDisplayContent;
   userData?: UserData;
 }): { subject: RenderResult; page: PageHelpers } => {
   const emptyUserData = createEmptyUserData(generateUser({}));
   const subject = render(
     <WithStatefulUserData initialUserData={userData || emptyUserData}>
       <Onboarding
-        displayContent={displayContent || createEmptyProfileDisplayContent()}
+        displayContent={displayContent || createEmptyLoadDisplayContent()}
         municipalities={municipalities || []}
       />
     </WithStatefulUserData>

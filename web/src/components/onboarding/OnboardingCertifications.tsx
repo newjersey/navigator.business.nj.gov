@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { Certifications, LookupCertificationById } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 export const OnboardingCertifications = (): ReactElement => {
-  const { state, setProfileData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(ProfileDataContext);
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     const value = typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value;

@@ -3,7 +3,7 @@ import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { splitAndBoldSearchText } from "@/lib/utils/helpers";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { Industries, Industry, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import orderBy from "lodash.orderby";
@@ -11,7 +11,7 @@ import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 export const IndustryDropdown = (): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
-  const { state, setProfileData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(ProfileDataContext);
 
   const IndustriesOrdered: Industry[] = orderBy(Industries, (industry: Industry) => {
     return industry.name;

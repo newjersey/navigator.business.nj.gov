@@ -1,7 +1,7 @@
 import { getPathSeparator } from "@/test/helpers";
 import { LegalStructures } from "@businessnjgovnavigator/shared";
 import fs from "fs";
-import { loadProfileDisplayContent, loadRoadmapDisplayContent } from "./loadDisplayContent";
+import { loadRoadmapDisplayContent, loadUserDisplayContent } from "./loadDisplayContent";
 
 jest.mock("fs");
 
@@ -30,7 +30,7 @@ describe("loadDisplayContent", () => {
 
       mockedFs.readFileSync.mockReturnValue(onboardingDisplayMd);
 
-      expect(loadProfileDisplayContent().municipality).toEqual({
+      expect(loadUserDisplayContent().PROFILE.municipality).toEqual({
         placeholder: "Fill me in",
         contentMd: "\n### I am a header\n\nI am a description",
       });
@@ -39,11 +39,11 @@ describe("loadDisplayContent", () => {
     it("loads content for each legal structure option", () => {
       mockedFs.readFileSync.mockReturnValue("### I am a header\n\nI am a description");
 
-      expect(loadProfileDisplayContent().legalStructure.optionContent["c-corporation"]).toEqual(
+      expect(loadUserDisplayContent().STARTING.legalStructure.optionContent["c-corporation"]).toEqual(
         "### I am a header\n\nI am a description"
       );
       const allFilePaths = mockedFs.readFileSync.mock.calls.map(
-        (args) => (args[0] as string).split("onboarding")[1]
+        (args) => (args[0] as string).split("onboarding/starting")[1]
       );
       const pathSeparator = getPathSeparator();
       for (const legalStructure of LegalStructures) {

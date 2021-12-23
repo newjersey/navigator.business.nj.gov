@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 export const OnboardingLiquorLicense = (): ReactElement => {
-  const { state, setProfileData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(ProfileDataContext);
 
   const handleLiquorLicenseSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     setProfileData({

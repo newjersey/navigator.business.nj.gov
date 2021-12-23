@@ -1,5 +1,5 @@
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import React, { ReactElement, useContext } from "react";
 import { Button } from "../njwds-extended/Button";
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const OnboardingButtonGroup = (props: Props): ReactElement => {
-  const { state, onBack } = useContext(OnboardingContext);
+  const { state, onBack } = useContext(ProfileDataContext);
 
   const back = (event: React.MouseEvent) => {
     event.preventDefault();
