@@ -21,4 +21,5 @@ export const BusinessFormationDefaults: Record<string, string> = {
   documentTableColumn2Label: "Documentation Options",
   documentTableColumn3Label: "New Jersey Statutory Fee",
   documentTableTotalCostLabel: "Total:",
+  submitErrorHeading: "Formation failed. Errors found in the following fields:",
 };

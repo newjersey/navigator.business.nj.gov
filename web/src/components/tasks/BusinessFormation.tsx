@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds/Alert";
 import { TaskHeader } from "@/components/TaskHeader";
 import { RegisteredAgent } from "@/components/tasks/business-formation/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/Signatures";
@@ -51,6 +52,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isLLC = userData?.profileData.legalStructureId === "limited-liability-company";
   const unlockedByTaskLinks = taskFromRoadmap
@@ -82,6 +84,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       additionalSigners: formationFormData.additionalSigners.filter((it) => !!it),
     };
 
+    setIsLoading(true);
     const newUserData = await api.postBusinessFormation({
       ...userData,
       formationData: {
@@ -91,6 +94,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
 
     update(newUserData);
+    setIsLoading(false);
     if (
       newUserData.formationData.formationResponse?.success &&
       newUserData.formationData.formationResponse?.redirect
@@ -135,9 +139,25 @@ export const BusinessFormation = (props: Props): ReactElement => {
         <BusinessFormationDocuments />
         <Content>{props.displayContent.disclaimer.contentMd}</Content>
         <BusinessFormationNotifications />
-        <Button style="primary" onClick={submitFormationFormData}>
+        <Button loading={isLoading} style="primary" onClick={submitFormationFormData}>
           {BusinessFormationDefaults.submitButtonText}
         </Button>
+        {userData.formationData.formationResponse &&
+          !isLoading &&
+          userData.formationData.formationResponse.errors.length > 0 && (
+            <Alert variant="error" heading={BusinessFormationDefaults.submitErrorHeading}>
+              <ul>
+                {userData.formationData.formationResponse.errors.map((it) => (
+                  <li key={it.field}>
+                    {it.field}
+                    <ul>
+                      <li>{it.message}</li>
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </Alert>
+          )}
       </div>
     </FormationContext.Provider>
   );
