@@ -2586,7 +2586,6 @@ __metadata:
     next-seo: 4.28.1
     prettier: 2.5.1
     prettier-plugin-organize-imports: 2.3.4
-    prop-types: 15.7.2
     raw-loader: 4.0.2
     react: 17.0.2
     react-dom: 17.0.2
@@ -2736,7 +2735,6 @@ __metadata:
     next-seo: 4.28.1
     prettier: 2.5.1
     prettier-plugin-organize-imports: 2.3.4
-    prop-types: 15.7.2
     raw-loader: 4.0.2
     react: 17.0.2
     react-dom: 17.0.2
@@ -28190,7 +28188,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.7.2, prop-types@npm:^15.0.0, prop-types@npm:^15.5.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.4, prop-types@npm:^15.5.6, prop-types@npm:^15.5.7, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.5.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.4, prop-types@npm:^15.5.6, prop-types@npm:^15.5.7, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:

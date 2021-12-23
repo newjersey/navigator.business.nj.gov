@@ -161,7 +161,6 @@
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "prettier": "2.5.1",
     "prettier-plugin-organize-imports": "2.3.4",
-    "prop-types": "15.7.2",
     "raw-loader": "4.0.2",
     "rimraf": "3.0.2",
     "sass": "1.45.0",
