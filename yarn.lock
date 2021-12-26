@@ -2390,7 +2390,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 27.4.2
-    "@serverless/typescript": 2.68.0
+    "@serverless/typescript": 2.69.1
     "@types/aws-lambda": 8.10.88
     "@types/copy-webpack-plugin": 8.0.1
     "@types/cors": 2.8.12
@@ -2491,7 +2491,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.0.7
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 2.68.0
+    "@serverless/typescript": 2.69.1
     "@storybook/addon-a11y": 6.4.9
     "@storybook/addon-actions": 6.4.9
     "@storybook/addon-docs": 6.4.9
@@ -6953,10 +6953,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:2.68.0":
-  version: 2.68.0
-  resolution: "@serverless/typescript@npm:2.68.0"
-  checksum: 362836c540acb39f1c6e6e6de5249a369c9a723b0e4238736993504f6360bf08b9a7c83d3c00ed84e3dc636bf82667fded9ce7f822cced9ecf4a6f2be63b1f90
+"@serverless/typescript@npm:2.69.1":
+  version: 2.69.1
+  resolution: "@serverless/typescript@npm:2.69.1"
+  checksum: 8dd026e3f301b139ef75c58db50a9cc72f9edc7705286248ac8f88b511f38ad3deda4c7b3a72d04e23e6826f704795e1115a5d9e73a44d1ef9700aca1d200ca8
   languageName: node
   linkType: hard
 
