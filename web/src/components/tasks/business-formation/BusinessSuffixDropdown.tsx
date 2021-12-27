@@ -3,7 +3,7 @@ import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-f
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import { AllBusinessSuffixes, BusinessSuffix } from "@businessnjgovnavigator/shared";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import React, { FocusEvent, ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const BusinessSuffixDropdown = (): ReactElement => {
@@ -15,6 +15,14 @@ export const BusinessSuffixDropdown = (): ReactElement => {
       ...state.formationFormData,
       businessSuffix: event.target.value as BusinessSuffix,
     });
+  };
+
+  const onValidation = (event: FocusEvent<HTMLInputElement>) => {
+    if (!event.target.value.trim()) {
+      setErrorMap({ ...state.errorMap, businessSuffix: { invalid: true } });
+    } else if (event.target.value.trim()) {
+      setErrorMap({ ...state.errorMap, businessSuffix: { invalid: false } });
+    }
   };
 
   return (
@@ -31,6 +39,7 @@ export const BusinessSuffixDropdown = (): ReactElement => {
             displayEmpty
             value={state.formationFormData.businessSuffix || ""}
             onChange={handleChange}
+            onBlur={onValidation}
             inputProps={{ "data-testid": "business-suffix" }}
             renderValue={(selected) => {
               if (selected.length === 0) {

@@ -3,7 +3,7 @@ import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-f
 import { AllPaymentTypes } from "@/lib/types/types";
 import { PaymentType } from "@businessnjgovnavigator/shared";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import React, { FocusEvent, ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const PaymentTypeDropdown = (): ReactElement => {
@@ -15,6 +15,14 @@ export const PaymentTypeDropdown = (): ReactElement => {
       ...state.formationFormData,
       paymentType: event.target.value as PaymentType,
     });
+  };
+
+  const onValidation = (event: FocusEvent<HTMLInputElement>) => {
+    if (!event.target.value.trim()) {
+      setErrorMap({ ...state.errorMap, paymentType: { invalid: true } });
+    } else if (event.target.value.trim()) {
+      setErrorMap({ ...state.errorMap, paymentType: { invalid: false } });
+    }
   };
 
   const paymentOptions: AllPaymentTypes = [
@@ -40,6 +48,7 @@ export const PaymentTypeDropdown = (): ReactElement => {
             displayEmpty
             value={state.formationFormData.paymentType || ""}
             onChange={handleChange}
+            onBlur={onValidation}
             inputProps={{ "data-testid": "payment-type" }}
             renderValue={(selected) => {
               if (selected.length === 0) {
