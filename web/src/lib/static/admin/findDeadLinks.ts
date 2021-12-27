@@ -135,9 +135,13 @@ export const findDeadTasks = async (): Promise<string[]> => {
   const deadTasks = [];
   const filenames = getFilenames();
   const contents = getContents(filenames);
-  for (const filename of filenames.tasks) {
-    if (!(await isReferencedInARoadmap(filename, contents))) {
-      deadTasks.push(filename);
+  const checkDeadTasks = process.env.CHECK_DEAD_LINKS ?? true;
+
+  if (checkDeadTasks) {
+    for (const filename of filenames.tasks) {
+      if (!(await isReferencedInARoadmap(filename, contents))) {
+        deadTasks.push(filename);
+      }
     }
   }
   return deadTasks;
@@ -175,26 +179,30 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     return url.startsWith("$") && templateEvals.some((it) => url.includes(it));
   };
 
-  for (const page of pages) {
-    const promise = new Promise((resolve) => {
-      const htmlUrlChecker = new HtmlUrlChecker(
-        {},
-        {
-          link: (result: any) => {
-            if (result.broken && !isTemplateLink(result.url.original)) {
-              deadLinks[page].push(result.url.original);
-            }
-          },
-          end: () => {
-            resolve({});
-          },
-        }
-      );
-      const url = new URL(process.env.REDIRECT_URL || "");
-      htmlUrlChecker.enqueue(`${url.origin}${page}`, {});
-    });
+  const checkDeadLinks = process.env.CHECK_DEAD_LINKS ?? true;
 
-    pagePromises.push(promise);
+  if (checkDeadLinks) {
+    for (const page of pages) {
+      const promise = new Promise((resolve) => {
+        const htmlUrlChecker = new HtmlUrlChecker(
+          {},
+          {
+            link: (result: any) => {
+              if (result.broken && !isTemplateLink(result.url.original)) {
+                deadLinks[page].push(result.url.original);
+              }
+            },
+            end: () => {
+              resolve({});
+            },
+          }
+        );
+        const url = new URL(process.env.REDIRECT_URL || "");
+        htmlUrlChecker.enqueue(`${url.origin}${page}`, {});
+      });
+
+      pagePromises.push(promise);
+    }
   }
 
   await Promise.all(pagePromises);
