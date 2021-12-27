@@ -23,10 +23,15 @@ import fs from "fs";
 import path from "path";
 
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
+const onboardingContentFolder: Record<UserContentType, string> = {
+  OWNING: "owning",
+  STARTING: "starting",
+  PROFILE: "profile",
+};
 
 export const loadUserDisplayContent = (): LoadDisplayContent => {
   const getPath = (filename: string, type: UserContentType): string =>
-    path.join(displayContentDir, "onboarding", type.toLowerCase(), filename);
+    path.join(displayContentDir, "onboarding", onboardingContentFolder[type], filename);
   const loadFile = (filename: string, type: UserContentType): string =>
     fs.readFileSync(getPath(filename, type), "utf8");
   const fileExists = (filename: string, type: UserContentType): boolean =>

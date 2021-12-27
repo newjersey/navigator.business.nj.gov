@@ -49,7 +49,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
           handleChange={handleChange}
           value={state.profileData.municipality}
           onSelect={onSelect}
-          placeholderText={state.displayContent.municipality.placeholder as string}
+          placeholderText={state.displayContent.municipality.placeholder ?? ""}
         />
 
         {isHomeBasedBusinessApplicable(state.profileData.industryId) && (
