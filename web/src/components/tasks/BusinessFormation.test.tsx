@@ -185,7 +185,7 @@ describe("<BusinessFormation />", () => {
       selectCheckBox("Certificate of standing");
       selectCheckBox("Certified copy of formation document");
 
-      await clickSubmit();
+      await clickSubmitWithTick();
 
       expect(subject.getByText("business name and legal structure")).toBeInTheDocument();
       const formationFormData = currentUserData().formationData.formationFormData;
@@ -254,7 +254,7 @@ describe("<BusinessFormation />", () => {
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fillText("Additional signer 1", "V");
 
-      await clickSubmit();
+      await clickSubmitWithTick();
       expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual(["Red Skull", "V"]);
     });
 
@@ -268,7 +268,7 @@ describe("<BusinessFormation />", () => {
       fillText("Additional signer 1", "V");
       fireEvent.click(subject.getAllByLabelText("delete additional signer")[0]);
 
-      await clickSubmit();
+      await clickSubmitWithTick();
       expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual(["V"]);
     });
 
@@ -283,7 +283,7 @@ describe("<BusinessFormation />", () => {
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fillText("Additional signer 1", "Red Skull");
 
-      await clickSubmit();
+      await clickSubmitWithTick();
       expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual(["Red Skull"]);
     });
 
@@ -317,7 +317,7 @@ describe("<BusinessFormation />", () => {
       );
 
       fillAllFieldsBut([]);
-      await clickSubmit();
+      await clickSubmitWithTick();
       expect(mockPush).toHaveBeenCalledWith("www.example.com");
     });
 
@@ -336,7 +336,7 @@ describe("<BusinessFormation />", () => {
       );
 
       fillAllFieldsBut([]);
-      await clickSubmit();
+      await clickSubmitWithTick();
       expect(mockPush).not.toHaveBeenCalled();
       expect(subject.getByText("some field 1")).toBeInTheDocument();
       expect(subject.getByText("very bad input")).toBeInTheDocument();
@@ -344,15 +344,15 @@ describe("<BusinessFormation />", () => {
       expect(subject.getByText("must be nj zipcode")).toBeInTheDocument();
     });
 
-    it("displays alert and highlights fields when submitting with missing fields", async () => {
+    it("displays alert and highlights fields when submitting with missing fields", () => {
       const profileData = generateLLCProfileData({});
       subject = renderTask({ profileData });
       fillAllFieldsBut(["Business address line1"]);
-      await clickSubmit();
+      clickSubmit();
       expect(subject.getByText(BusinessFormationDefaults.businessAddressLine1ErrorText)).toBeInTheDocument();
       expect(subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)).toBeInTheDocument();
       fillText("Business address line1", "1234 main street");
-      await clickSubmit();
+      clickSubmit();
       expect(
         subject.queryByText(BusinessFormationDefaults.businessAddressLine1ErrorText)
       ).not.toBeInTheDocument();
@@ -368,88 +368,90 @@ describe("<BusinessFormation />", () => {
       });
 
       describe("does not submit when missing a required field", () => {
-        it("Business suffix", async () => {
+        it("Business suffix", () => {
           fillAllFieldsBut(["Business suffix"]);
-          await clickSubmit();
+          clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
-        it("Business address line1", async () => {
+        it("Business address line1", () => {
           fillAllFieldsBut(["Business address line1"]);
-          await clickSubmit();
+          clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
-        it("Business address zip code", async () => {
+        it("Business address zip code", () => {
           fillAllFieldsBut(["Business address zip code"]);
-          await clickSubmit();
+          clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
-        it("signer", async () => {
+        it("signer", () => {
           fillAllFieldsBut(["Signer"]);
-          await clickSubmit();
+          clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
-        it("Contact first name", async () => {
+
+        it("Contact first name", () => {
           fillAllFieldsBut(["Contact first name"]);
-          await clickSubmit();
+          clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
-        it("Contact last name", async () => {
+
+        it("Contact last name", () => {
           fillAllFieldsBut(["Contact last name"]);
-          await clickSubmit();
+          clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
-        it("Contact phone number", async () => {
+
+        it("Contact phone number", () => {
           fillAllFieldsBut(["Contact phone number"]);
-          await clickSubmit();
+          clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
-        it("Payment type", async () => {
+
+        it("Payment type", () => {
           fillAllFieldsBut(["Payment type"]);
-          await clickSubmit();
+          clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         describe("when agent number selected", () => {
-          it("agent number", async () => {
+          it("agent number", () => {
             fillAllFieldsBut(["Agent number"], { agentRadio: "NUMBER" });
-            await clickSubmit();
+            clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
         });
 
         describe("when agent manual selected", () => {
-          it("agent name", async () => {
+          it("agent name", () => {
             fillAllFieldsBut(["Agent name"], { agentRadio: "MANUAL_ENTRY" });
-            await clickSubmit();
+            clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
 
-          it("agent email", async () => {
+          it("agent email", () => {
             fillAllFieldsBut(["Agent email"], { agentRadio: "MANUAL_ENTRY" });
-            await clickSubmit();
+            clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
 
-          it("agent address line 1", async () => {
+          it("agent address line 1", () => {
             fillAllFieldsBut(["Agent office address line1"], { agentRadio: "MANUAL_ENTRY" });
-            await clickSubmit();
+            clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
 
-          it("Agent office address city", async () => {
-            fillAllFieldsBut(["Agent office address line1", "Agent office address city"], {
-              agentRadio: "MANUAL_ENTRY",
-            });
-            await clickSubmit();
+          it("Agent office address city", () => {
+            fillAllFieldsBut(["Agent office address city"], { agentRadio: "MANUAL_ENTRY" });
+            clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
 
-          it("Agent office address zip code", async () => {
+          it("Agent office address zip code", () => {
             fillAllFieldsBut(["Agent office address zip code"], { agentRadio: "MANUAL_ENTRY" });
-            await clickSubmit();
+            clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
         });
@@ -542,11 +544,15 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(subject.getByTestId(value));
   };
 
-  const clickSubmit = async (): Promise<void> => {
+  const clickSubmitWithTick = async (): Promise<void> => {
     fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
     await act(async () => {
       await flushPromises();
     });
+  };
+
+  const clickSubmit = (): void => {
+    fireEvent.click(subject.getByText(BusinessFormationDefaults.submitButtonText));
   };
 
   const fillAllFieldsBut = (
