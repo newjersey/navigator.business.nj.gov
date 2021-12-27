@@ -58,6 +58,10 @@
     {
       "name": "apply-for-shop-license",
       "dependencies": ["site-safety-permits-cosmetology"]
+    },
+    {
+      "name": "haul-waste",
+      "dependencies": ["register-consumer-affairs"]
     }
   ]
 }
