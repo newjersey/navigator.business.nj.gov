@@ -10,6 +10,8 @@ Now that you have your `Certificate of Occupancy or Approval|certificate-occupan
 
 The New Jersey Board of Cosmetology and Hairstyling requires that new shops, relocated shops, or shops that have transferred ownership obtain a license with the New Jersey Division of Consumer Affairs.
 
+Once you submit your application, it will be reviewed, and a site inspection will be conducted.
+
 To complete this application, you must have:
 
 - `Legal structure|legal-structure-learn-more`
