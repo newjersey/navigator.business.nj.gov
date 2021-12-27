@@ -2399,7 +2399,7 @@ __metadata:
     "@types/jasmine": 3.10.2
     "@types/jest": 27.0.3
     "@types/jsonwebtoken": 8.5.6
-    "@types/node": 14.18.1
+    "@types/node": 14.18.3
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.11
     "@types/uuid": 8.3.3
@@ -2458,7 +2458,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 14.18.1
+    "@types/node": 14.18.3
     cross-env: 7.0.3
     cspell: 5.13.4
     prettier: 2.5.1
@@ -2519,7 +2519,7 @@ __metadata:
     "@types/jest": 27.0.3
     "@types/jsonwebtoken": 8.5.6
     "@types/lodash.orderby": 4.6.6
-    "@types/node": 14.18.1
+    "@types/node": 14.18.3
     "@types/react": 17.0.38
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.4
@@ -2635,7 +2635,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 27.4.2
     "@types/jest": 27.0.3
-    "@types/node": 14.18.1
+    "@types/node": 14.18.3
     "@typescript-eslint/eslint-plugin": 5.8.0
     "@typescript-eslint/parser": 5.8.0
     cross-env: 7.0.3
@@ -2689,7 +2689,7 @@ __metadata:
     "@types/broken-link-checker": 0.7.1
     "@types/jest": 27.0.3
     "@types/lodash.orderby": 4.6.6
-    "@types/node": 14.18.1
+    "@types/node": 14.18.3
     "@types/react": 17.0.38
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.4
@@ -9117,14 +9117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.18.1":
-  version: 14.18.1
-  resolution: "@types/node@npm:14.18.1"
-  checksum: 4ad88c071792081a04069d7380aff855b8982bf3e064c7c9614c8dba69cafa0f50899950326429baa9ee7b2c5b4306ed7dca1411e209281aaea31809a40adbe4
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:>=8.0.0 <15, @types/node@npm:^14.0.10, @types/node@npm:^14.14.31":
+"@types/node@npm:14.18.3, @types/node@npm:>=8.0.0 <15, @types/node@npm:^14.0.10, @types/node@npm:^14.14.31":
   version: 14.18.3
   resolution: "@types/node@npm:14.18.3"
   checksum: 72275674a25b0e9d4fe213449d874fd3e8280a84d911a359d298d68b84550b6a3210d484dc2662b8eb6e0b1829f4dac5e60cb7c01ce78878b316305c798d1cbb
