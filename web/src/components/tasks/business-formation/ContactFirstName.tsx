@@ -1,15 +1,16 @@
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
-import React, { FocusEvent, ReactElement, useState } from "react";
+import React, { FocusEvent, ReactElement, useContext } from "react";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
 
 export const ContactFirstName = (): ReactElement => {
-  const [error, setError] = useState(false);
+  const { state, setErrorMap } = useContext(FormationContext);
 
   const onValidation = (event: FocusEvent<HTMLInputElement>) => {
     if (!event.target.value.trim()) {
-      setError(true);
+      setErrorMap({ ...state.errorMap, contactFirstName: { invalid: true } });
     } else if (event.target.value.trim()) {
-      setError(false);
+      setErrorMap({ ...state.errorMap, contactFirstName: { invalid: false } });
     }
   };
 
@@ -17,7 +18,7 @@ export const ContactFirstName = (): ReactElement => {
     <div className="form-input margin-bottom-2">
       <BusinessFormationTextField
         fieldName="contactFirstName"
-        error={error}
+        error={state.errorMap.contactFirstName.invalid}
         onValidation={onValidation}
         validationText={BusinessFormationDefaults.contactFirstNameErrorText}
       />

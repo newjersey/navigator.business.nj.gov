@@ -327,11 +327,11 @@ export const profileFields: ProfileFields[] = [
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
-type ProfileFieldStatus = {
+export type FieldStatus = {
   invalid: boolean;
 };
 
-export type ProfileFieldErrorMap = Record<ProfileFields, ProfileFieldStatus>;
+export type ProfileFieldErrorMap = Record<ProfileFields, FieldStatus>;
 
 export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
   profileFields.reduce((p, c: ProfileFields) => {

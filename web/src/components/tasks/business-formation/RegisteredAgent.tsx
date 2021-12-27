@@ -5,14 +5,28 @@ import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { FormationTextField } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { FocusEvent, ReactElement, useContext, useState } from "react";
+import React, { FocusEvent, ReactElement, useContext } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
-  const { state, setFormationFormData } = useContext(FormationContext);
-  const [errorMap, setErrorMap] = useState<Partial<Record<FormationTextField, boolean>>>({});
+  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
+
+  const resetAgentFieldsInErrorMap = (): void => {
+    setErrorMap({
+      ...state.errorMap,
+      agentNumberOrManual: { invalid: false },
+      agentNumber: { invalid: false },
+      agentName: { invalid: false },
+      agentEmail: { invalid: false },
+      agentOfficeAddressLine1: { invalid: false },
+      agentOfficeAddressLine2: { invalid: false },
+      agentOfficeAddressCity: { invalid: false },
+      agentOfficeAddressState: { invalid: false },
+      agentOfficeAddressZipCode: { invalid: false },
+    });
+  };
 
   const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    setErrorMap({});
+    resetAgentFieldsInErrorMap();
     setFormationFormData({
       ...state.formationFormData,
       agentNumberOrManual: event.target.value as "NUMBER" | "MANUAL_ENTRY",
@@ -25,11 +39,11 @@ export const RegisteredAgent = (): ReactElement => {
     radioValueNeeded: "NUMBER" | "MANUAL_ENTRY"
   ) => {
     if (state.formationFormData.agentNumberOrManual !== radioValueNeeded) {
-      setErrorMap({ ...errorMap, [field]: false });
+      setErrorMap({ ...state.errorMap, [field]: { invalid: false } });
     } else if (!event.target.value.trim()) {
-      setErrorMap({ ...errorMap, [field]: true });
+      setErrorMap({ ...state.errorMap, [field]: { invalid: true } });
     } else if (event.target.value.trim()) {
-      setErrorMap({ ...errorMap, [field]: false });
+      setErrorMap({ ...state.errorMap, [field]: { invalid: false } });
     }
   };
 
@@ -68,7 +82,7 @@ export const RegisteredAgent = (): ReactElement => {
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
               <BusinessFormationTextField
-                error={errorMap["agentNumber"]}
+                error={state.errorMap["agentNumber"].invalid}
                 onValidation={(event) => onValidation(event, "agentNumber", "NUMBER")}
                 validationText={BusinessFormationDefaults.agentNumberErrorText}
                 fieldName="agentNumber"
@@ -79,20 +93,20 @@ export const RegisteredAgent = (): ReactElement => {
           {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
             <div data-testid="agent-name">
               <BusinessFormationTextField
-                error={errorMap["agentName"]}
+                error={state.errorMap["agentName"].invalid}
                 onValidation={(event) => onValidation(event, "agentName", "MANUAL_ENTRY")}
                 validationText={BusinessFormationDefaults.agentNameErrorText}
                 fieldName="agentName"
               />
               <BusinessFormationTextField
                 fieldName="agentEmail"
-                error={errorMap["agentEmail"]}
+                error={state.errorMap["agentEmail"].invalid}
                 onValidation={(event) => onValidation(event, "agentEmail", "MANUAL_ENTRY")}
                 validationText={BusinessFormationDefaults.agentEmailErrorText}
               />
               <BusinessFormationTextField
                 fieldName="agentOfficeAddressLine1"
-                error={errorMap["agentOfficeAddressLine1"]}
+                error={state.errorMap["agentOfficeAddressLine1"].invalid}
                 onValidation={(event) => onValidation(event, "agentOfficeAddressLine1", "MANUAL_ENTRY")}
                 validationText={BusinessFormationDefaults.agentOfficeAddressLine1ErrorText}
               />
@@ -101,7 +115,7 @@ export const RegisteredAgent = (): ReactElement => {
                 <div className="desktop:grid-col-5">
                   <BusinessFormationTextField
                     fieldName="agentOfficeAddressCity"
-                    error={errorMap["agentOfficeAddressCity"]}
+                    error={state.errorMap["agentOfficeAddressCity"].invalid}
                     onValidation={(event) => onValidation(event, "agentOfficeAddressCity", "MANUAL_ENTRY")}
                     validationText={BusinessFormationDefaults.agentOfficeAddressCityErrorText}
                   />

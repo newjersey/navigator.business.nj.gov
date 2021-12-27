@@ -344,6 +344,23 @@ describe("<BusinessFormation />", () => {
       expect(subject.getByText("must be nj zipcode")).toBeInTheDocument();
     });
 
+    it("displays alert and highlights fields when submitting with missing fields", async () => {
+      const profileData = generateLLCProfileData({});
+      subject = renderTask({ profileData });
+      fillAllFieldsBut(["Business address line1"]);
+      await clickSubmit();
+      expect(subject.getByText(BusinessFormationDefaults.businessAddressLine1ErrorText)).toBeInTheDocument();
+      expect(subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)).toBeInTheDocument();
+      fillText("Business address line1", "1234 main street");
+      await clickSubmit();
+      expect(
+        subject.queryByText(BusinessFormationDefaults.businessAddressLine1ErrorText)
+      ).not.toBeInTheDocument();
+      expect(
+        subject.queryByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
+      ).not.toBeInTheDocument();
+    });
+
     describe("required fields", () => {
       beforeEach(() => {
         const profileData = generateLLCProfileData({});
@@ -500,6 +517,7 @@ describe("<BusinessFormation />", () => {
 
   const fillText = (label: string, value: string) => {
     fireEvent.change(subject.getByLabelText(label), { target: { value: value } });
+    fireEvent.blur(subject.getByLabelText(label));
   };
 
   const selectCheckBox = (label: string) => {

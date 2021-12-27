@@ -1,14 +1,16 @@
 import { Content } from "@/components/Content";
+import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import { AllBusinessSuffixes, BusinessSuffix } from "@businessnjgovnavigator/shared";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const BusinessSuffixDropdown = (): ReactElement => {
-  const { state, setFormationFormData } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
+    setErrorMap({ ...state.errorMap, businessSuffix: { invalid: false } });
     setFormationFormData({
       ...state.formationFormData,
       businessSuffix: event.target.value as BusinessSuffix,
@@ -19,7 +21,7 @@ export const BusinessSuffixDropdown = (): ReactElement => {
     <>
       <Content>{state.displayContent.businessSuffix.contentMd}</Content>
       <div className="form-input margin-bottom-2">
-        <FormControl fullWidth>
+        <FormControl fullWidth error={state.errorMap.businessSuffix.invalid}>
           <InputLabel id="business-suffix-label" className="visibility-hidden">
             {camelCaseToSentence("businessSuffix")}
           </InputLabel>
@@ -46,6 +48,9 @@ export const BusinessSuffixDropdown = (): ReactElement => {
               </MenuItem>
             ))}
           </Select>
+          <FormHelperText>
+            {state.errorMap.businessSuffix.invalid ? BusinessFormationDefaults.suffixErrorText : " "}
+          </FormHelperText>
         </FormControl>
       </div>
     </>
