@@ -2520,9 +2520,9 @@ __metadata:
     "@types/jsonwebtoken": 8.5.6
     "@types/lodash.orderby": 4.6.6
     "@types/node": 14.18.1
-    "@types/react": 17.0.37
+    "@types/react": 17.0.38
     "@types/react-swipeable-views": 0.13.1
-    "@types/react-tabs": 2.3.3
+    "@types/react-tabs": 2.3.4
     "@types/react-transition-group": 4.4.4
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.11
@@ -2690,9 +2690,9 @@ __metadata:
     "@types/jest": 27.0.3
     "@types/lodash.orderby": 4.6.6
     "@types/node": 14.18.1
-    "@types/react": 17.0.37
+    "@types/react": 17.0.38
     "@types/react-swipeable-views": 0.13.1
-    "@types/react-tabs": 2.3.3
+    "@types/react-tabs": 2.3.4
     "@types/react-transition-group": 4.4.4
     "@types/testing-library__jest-dom": 5.14.2
     "@typescript-eslint/eslint-plugin": 5.7.0
@@ -9240,12 +9240,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-tabs@npm:2.3.3":
-  version: 2.3.3
-  resolution: "@types/react-tabs@npm:2.3.3"
+"@types/react-tabs@npm:2.3.4":
+  version: 2.3.4
+  resolution: "@types/react-tabs@npm:2.3.4"
   dependencies:
     "@types/react": "*"
-  checksum: 3c1090f711ac412929108f1c69bc8de46a5251e33b34da37c107b2645d0174a63ecfc934ac369b6b3dd32b5c04a6cb33f34997e3334ed719e1397c61ab273426
+  checksum: 7718e08b6be3f8b4f423fde9a3610e423a63ef44ce640ad23368e27e0f15e710d1df6c442ae0a348a7da891c9599f3bc77c4b4c2ad06f99aef39a0aaa642e1e6
   languageName: node
   linkType: hard
 
@@ -9258,7 +9258,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
+"@types/react@npm:*, @types/react@npm:17.0.38":
   version: 17.0.38
   resolution: "@types/react@npm:17.0.38"
   dependencies:
@@ -9266,17 +9266,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 4079f4f959cd4a4bfaeda8b89fe8a1b1f8bdc9d87acfdc5f74a0b39cec9ec6a470724357c62778c0f063180b360c250e920c5a142f1dbcda67d9cc25a6d43a85
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:17.0.37":
-  version: 17.0.37
-  resolution: "@types/react@npm:17.0.37"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: e68b0d59aa69577fc6a6d654b25d5d8408625498f4c483f160b557fac21e840f6e8807cbde93e9f039949b6d624a019b1990d18499c1d65aecf3605c25e30242
   languageName: node
   linkType: hard
 
