@@ -109,9 +109,9 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             Signed: true,
           })),
         ],
-        ContactFirstName: "",
-        ContactLastName: "",
-        ContactPhoneNumber: "1234567890",
+        ContactFirstName: formationFormData.contactFirstName,
+        ContactLastName: formationFormData.contactLastName,
+        ContactPhoneNumber: formationFormData.contactPhoneNumber,
       },
     };
   };

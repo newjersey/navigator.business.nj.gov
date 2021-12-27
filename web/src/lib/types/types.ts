@@ -123,6 +123,9 @@ export type FormationDisplayContent = {
     cost: string;
     optionalLabel: string;
   };
+  contactFirstName: TextFieldContent;
+  contactLastName: TextFieldContent;
+  contactPhoneNumber: TextFieldContent;
 };
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
@@ -232,6 +235,18 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     contentMd: "",
     cost: "",
     optionalLabel: "",
+  },
+  contactFirstName: {
+    contentMd: "",
+    placeholder: "",
+  },
+  contactLastName: {
+    contentMd: "",
+    placeholder: "",
+  },
+  contactPhoneNumber: {
+    contentMd: "",
+    placeholder: "",
   },
 });
 

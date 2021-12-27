@@ -21,18 +21,30 @@ export const BusinessFormationNotifications = (): ReactElement => {
   };
 
   return (
-    <div className="margin-y-2">
-      <Content>{state.displayContent.notification.contentMd}</Content>{" "}
-      <FormGroup>
-        <FormControlLabel
-          control={<Checkbox onChange={handleAnnualReportClick} />}
-          label={<Content>{state.displayContent.optInAnnualReport.contentMd}</Content>}
-        />
-        <FormControlLabel
-          control={<Checkbox onChange={handleCorpWatchClick} />}
-          label={<Content>{state.displayContent.optInCorpWatch.contentMd}</Content>}
-        />
-      </FormGroup>
+    <div>
+      <div className="margin-y-2">
+        <Content>{state.displayContent.notification.contentMd}</Content>{" "}
+        <FormGroup>
+          <FormControlLabel
+            style={{ display: "table" }}
+            control={
+              <div style={{ display: "table-cell", width: "42px" }}>
+                <Checkbox onChange={handleAnnualReportClick} />
+              </div>
+            }
+            label={<Content>{state.displayContent.optInAnnualReport.contentMd}</Content>}
+          />
+          <FormControlLabel
+            style={{ display: "table" }}
+            control={
+              <div style={{ display: "table-cell", width: "42px" }}>
+                <Checkbox onChange={handleCorpWatchClick} />
+              </div>
+            }
+            label={<Content>{state.displayContent.optInCorpWatch.contentMd}</Content>}
+          />
+        </FormGroup>
+      </div>
     </div>
   );
 };

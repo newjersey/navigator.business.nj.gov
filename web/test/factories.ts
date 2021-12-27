@@ -364,6 +364,18 @@ export const generateFormationDisplayContent = (
     cost: `some-certified-copy-of-formation-document-cost-${randomInt()}`,
     optionalLabel: `some-certified-copy-of-formation-document-optional-label-${randomInt()}`,
   },
+  contactFirstName: {
+    contentMd: `some-contact-first-name-content-${randomInt()}`,
+    placeholder: `some-contact-first-name-placeholder-${randomInt()}`,
+  },
+  contactLastName: {
+    contentMd: `some-contact-last-name-content-${randomInt()}`,
+    placeholder: `some-contact-last-name-placeholder-${randomInt()}`,
+  },
+  contactPhoneNumber: {
+    contentMd: `some-contact-phone-number-content-${randomInt()}`,
+    placeholder: `some-contact-phone-number-placeholder-${randomInt()}`,
+  },
   ...overrides,
 });
 
@@ -392,6 +404,9 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     officialFormationDocument: !!(randomInt() % 2),
     certificateOfStanding: !!(randomInt() % 2),
     certifiedCopyOfFormationDocument: !!(randomInt() % 2),
+    contactFirstName: `some-contact-first-name-${randomInt()}`,
+    contactLastName: `some-contact-last-name-${randomInt()}`,
+    contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
     ...overrides,
   };
 };

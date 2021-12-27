@@ -47,7 +47,9 @@ export const BusinessFormationDocuments = (): ReactElement => {
         <tbody>
           <tr>
             <td>
-              <Checkbox disabled defaultChecked id="officialFormationDocument" />
+              <div className="business-formation-documents-table-checkboxes">
+                <Checkbox disabled defaultChecked id="officialFormationDocument" />
+              </div>
             </td>
             <td>
               <label htmlFor="officialFormationDocument">
@@ -58,7 +60,9 @@ export const BusinessFormationDocuments = (): ReactElement => {
           </tr>
           <tr>
             <td>
-              <Checkbox onChange={handleCertificateOfStandingClick} id="certificateOfStanding" />
+              <div className="business-formation-documents-table-checkboxes">
+                <Checkbox onChange={handleCertificateOfStandingClick} id="certificateOfStanding" />
+              </div>
             </td>
             <td>
               <label htmlFor="certificateOfStanding">
@@ -70,10 +74,12 @@ export const BusinessFormationDocuments = (): ReactElement => {
           </tr>
           <tr>
             <td>
-              <Checkbox
-                onChange={handleCertifiedFormationDocumentClick}
-                id="certifiedCopyOfFormationDocument"
-              />
+              <div className="business-formation-documents-table-checkboxes">
+                <Checkbox
+                  onChange={handleCertifiedFormationDocumentClick}
+                  id="certifiedCopyOfFormationDocument"
+                />
+              </div>
             </td>
             <td>
               <label htmlFor="certifiedCopyOfFormationDocument">
@@ -87,8 +93,10 @@ export const BusinessFormationDocuments = (): ReactElement => {
         <tfoot>
           <tr>
             <td colSpan={3}>
-              <span className="text-bold">{BusinessFormationDefaults.documentTableTotalCostLabel}</span>{" "}
-              {totalCost}
+              <div className="text-align-right">
+                <span className="text-bold">{BusinessFormationDefaults.documentTableTotalCostLabel}</span>{" "}
+                {totalCost}
+              </div>
             </td>
           </tr>
         </tfoot>

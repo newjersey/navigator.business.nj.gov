@@ -1,5 +1,3 @@
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
-import { templateEval } from "@/lib/utils/helpers";
 import { FormationTextField } from "@businessnjgovnavigator/shared";
 import React, { FocusEvent, ReactElement, useState } from "react";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
@@ -9,10 +7,13 @@ interface Props {
   validationText?: string;
   maxLength: number;
   minLength?: number;
+  visualFilter?: (value: string) => string;
 }
 
 export const BusinessFormationNumericField = (props: Props): ReactElement => {
   const [error, setError] = useState(false);
+
+  const regex = (value: string): string => value.replace(/[^0-9]/g, "");
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     const userInput = event.target.value.length;
@@ -24,22 +25,14 @@ export const BusinessFormationNumericField = (props: Props): ReactElement => {
     valid ? setError(false) : setError(true);
   };
 
-  const regex = (value: string): string => value.replace(/[^0-9]/g, "");
-
   return (
     <BusinessFormationTextField
       valueFilter={regex}
       fieldName={props.fieldName}
       onValidation={onValidation}
       error={error}
-      validationText={
-        props.validationText
-          ? props.validationText
-          : templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
-              length: props.maxLength.toString(),
-            })
-      }
-      visualFilter={regex}
+      validationText={props.validationText}
+      visualFilter={props.visualFilter ? props.visualFilter : regex}
       fieldOptions={{
         inputProps: { inputMode: "numeric", maxLength: props.maxLength },
       }}

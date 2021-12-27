@@ -149,6 +149,9 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const agentOfficeAddressZipCode = getMarkdown(loadFile("business-formation/registered-agent-zip.md"));
   const signer = getMarkdown(loadFile("business-formation/signatures.md"));
   const additionalSigners = getMarkdown(loadFile("business-formation/additional-signers.md"));
+  const contactFirstName = getMarkdown(loadFile("business-formation/contact-first-name.md"));
+  const contactLastName = getMarkdown(loadFile("business-formation/contact-last-name.md"));
+  const contactPhoneNumber = getMarkdown(loadFile("business-formation/contact-phone-number.md"));
 
   return {
     formationDisplayContent: {
@@ -252,6 +255,18 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       certifiedCopyOfFormationDocument: {
         contentMd: certifiedCopyOfFormationDocument.content,
         ...(certifiedCopyOfFormationDocument.grayMatter as DocumentFieldGrayMatter),
+      },
+      contactFirstName: {
+        contentMd: contactFirstName.content,
+        ...(contactFirstName.grayMatter as FieldGrayMatter),
+      },
+      contactLastName: {
+        contentMd: contactLastName.content,
+        ...(contactLastName.grayMatter as FieldGrayMatter),
+      },
+      contactPhoneNumber: {
+        contentMd: contactPhoneNumber.content,
+        ...(contactPhoneNumber.grayMatter as FieldGrayMatter),
       },
     },
   };

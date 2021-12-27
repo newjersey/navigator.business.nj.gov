@@ -249,6 +249,9 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     officialFormationDocument: !!(randomInt() % 2),
     certificateOfStanding: !!(randomInt() % 2),
     certifiedCopyOfFormationDocument: !!(randomInt() % 2),
+    contactFirstName: `some-contact-first-name-${randomInt()}`,
+    contactLastName: `some-contact-last-name-${randomInt()}`,
+    contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
     ...overrides,
   };
 };

@@ -19,6 +19,9 @@ import { TaskCTA } from "../TaskCTA";
 import { BusinessFormationDocuments } from "./business-formation/BusinessFormationDocuments";
 import { BusinessFormationNotifications } from "./business-formation/BusinessFormationNotifications";
 import { BusinessNameAndLegalStructure } from "./business-formation/BusinessNameAndLegalStructure";
+import { ContactFirstName } from "./business-formation/ContactFirstName";
+import { ContactLastName } from "./business-formation/ContactLastName";
+import { ContactPhoneNumber } from "./business-formation/ContactPhoneNumber";
 import { PaymentTypeDropdown } from "./business-formation/PaymentTypeDropdown";
 
 interface Props {
@@ -76,6 +79,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
       if (!formationFormData.agentOfficeAddressCity) return;
       if (!formationFormData.agentOfficeAddressZipCode) return;
     }
+
+    if (!formationFormData.contactFirstName) return;
+    if (!formationFormData.contactLastName) return;
+    if (!formationFormData.contactPhoneNumber) return;
 
     if (!formationFormData.paymentType) return;
 
@@ -135,13 +142,20 @@ export const BusinessFormation = (props: Props): ReactElement => {
         <BusinessNameAndLegalStructure />
         <RegisteredAgent />
         <Signatures />
+        <ContactFirstName />
+        <ContactLastName />
+        <ContactPhoneNumber />
         <PaymentTypeDropdown />
         <BusinessFormationDocuments />
-        <Content>{props.displayContent.disclaimer.contentMd}</Content>
         <BusinessFormationNotifications />
-        <Button loading={isLoading} style="primary" onClick={submitFormationFormData}>
-          {BusinessFormationDefaults.submitButtonText}
-        </Button>
+        <Content>{props.displayContent.disclaimer.contentMd}</Content>{" "}
+        <div className="margin-top-2 ">
+          <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
+            <Button loading={isLoading} style="primary" onClick={submitFormationFormData}>
+              {BusinessFormationDefaults.submitButtonText}
+            </Button>{" "}
+          </div>
+        </div>
         {userData.formationData.formationResponse &&
           !isLoading &&
           userData.formationData.formationResponse.errors.length > 0 && (
