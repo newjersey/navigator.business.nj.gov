@@ -29,5 +29,6 @@
     "form-business-entity",
     "register-for-taxes",
     "apply-scorp-federal"
-  ]
+  ],
+  "apply-for-shop-license": ["site-safety-permits"]
 }
