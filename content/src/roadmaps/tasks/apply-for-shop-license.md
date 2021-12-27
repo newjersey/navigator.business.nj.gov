@@ -5,9 +5,6 @@ name: "Apply for a Cosmetology Shop License"
 callToActionLink: "https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx"
 callToActionText: "Apply for My Cosmetology Shop License"
 ---
-
-Now that you have your `Certificate of Occupancy or Approval|certificate-occupancy` and Fire Prevention Permit, you can apply for your license.
-
 The New Jersey Board of Cosmetology and Hairstyling requires that new shops, relocated shops, or shops that have transferred ownership obtain a license with the New Jersey Division of Consumer Affairs.
 
 Once you submit your application, it will be reviewed, and a site inspection will be conducted.
