@@ -2581,7 +2581,7 @@ __metadata:
     lodash.orderby: 4.6.0
     napa: 3.0.0
     nc: "git+https://github.com/dsueltenfuss/nc.git"
-    netlify-cms-app: 2.15.61
+    netlify-cms-app: 2.15.62
     next: 12.0.7
     next-seo: 4.28.1
     prettier: 2.5.1
@@ -2730,7 +2730,7 @@ __metadata:
     jest-raw-loader: 1.0.1
     lodash.orderby: 4.6.0
     napa: 3.0.0
-    netlify-cms-app: 2.15.61
+    netlify-cms-app: 2.15.62
     next: 12.0.7
     next-seo: 4.28.1
     prettier: 2.5.1
@@ -24866,9 +24866,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-app@npm:2.15.61":
-  version: 2.15.61
-  resolution: "netlify-cms-app@npm:2.15.61"
+"netlify-cms-app@npm:2.15.62":
+  version: 2.15.62
+  resolution: "netlify-cms-app@npm:2.15.62"
   dependencies:
     "@emotion/core": ^10.0.35
     "@emotion/styled": ^10.0.27
@@ -24883,13 +24883,13 @@ __metadata:
     netlify-cms-backend-gitlab: ^2.12.0
     netlify-cms-backend-proxy: ^1.2.3
     netlify-cms-backend-test: ^2.11.3
-    netlify-cms-core: ^2.54.2
+    netlify-cms-core: ^2.54.3
     netlify-cms-editor-component-image: ^2.7.0
     netlify-cms-lib-auth: ^2.4.2
     netlify-cms-lib-util: ^2.14.0
     netlify-cms-lib-widgets: ^1.7.0
     netlify-cms-locales: ^1.38.1
-    netlify-cms-ui-default: ^2.15.3
+    netlify-cms-ui-default: ^2.15.4
     netlify-cms-widget-boolean: ^2.4.1
     netlify-cms-widget-code: ^1.3.3
     netlify-cms-widget-colorstring: ^1.1.1
@@ -24912,7 +24912,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: e3946ea27aace423429b8e5563d4293b23ea7c7a50fcef7f0be1ba2a7c7ce0e63752a4bc4c57d2d5b6c7863c4ca55e7304a4618e476a978b61461d30940ce332
+  checksum: 20e3da73687d4535f506e812a1c4365b3a18f1b4c67e6a1491e09beabc0716ee9061ee12e8b1e4e91c0c77ce0ada7fdd4a3c43f7d03310b09e5970657a4dff56
   languageName: node
   linkType: hard
 
@@ -25058,7 +25058,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-core@npm:^2.54.2":
+"netlify-cms-core@npm:^2.54.3":
   version: 2.54.3
   resolution: "netlify-cms-core@npm:2.54.3"
   dependencies:
@@ -25181,7 +25181,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-ui-default@npm:^2.15.3":
+"netlify-cms-ui-default@npm:^2.15.4":
   version: 2.15.4
   resolution: "netlify-cms-ui-default@npm:2.15.4"
   dependencies:
