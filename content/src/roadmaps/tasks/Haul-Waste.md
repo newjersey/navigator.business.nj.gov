@@ -16,7 +16,7 @@ To complete this application, you must have:
 - Valid Motor Vehicle Insurance Card for all vehicles
 - Motor Vehicle registration that indicate that the vehicle is registered as Commercial and display 
 - Lease agreement and certification (for leased vehicels, if applicable) 
-- Home Improvement Contractor registration card
+- Home Improvement Contractor offical registration document (also known as a registration card)
 - Copy of the “Certificate of Liability” insurance and bid or contract for demolition (if applicable)
 
 After you complete this task, you will have:
