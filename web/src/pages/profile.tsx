@@ -94,12 +94,15 @@ const ProfilePage = (props: Props): ReactElement => {
     });
   };
 
+  const mergeDisplayContent = (): UserDisplayContent =>
+    ({ ...props.displayContent["STARTING"], ...props.displayContent["PROFILE"] } as UserDisplayContent);
+
   return (
     <ProfileDataContext.Provider
       value={{
         state: {
           profileData: profileData,
-          displayContent: props.displayContent["PROFILE"] as UserDisplayContent,
+          displayContent: mergeDisplayContent(),
           flow: "PROFILE",
           municipalities: props.municipalities,
         },

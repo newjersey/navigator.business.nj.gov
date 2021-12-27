@@ -29,7 +29,7 @@ describe("loadDisplayContent", () => {
         "I am a description";
 
       mockedFs.readFileSync.mockReturnValue(onboardingDisplayMd);
-
+      mockedFs.existsSync.mockReturnValue(true);
       expect(loadUserDisplayContent().PROFILE.municipality).toEqual({
         placeholder: "Fill me in",
         contentMd: "\n### I am a header\n\nI am a description",

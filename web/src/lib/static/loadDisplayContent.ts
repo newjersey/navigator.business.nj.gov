@@ -25,8 +25,12 @@ import path from "path";
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
 
 export const loadUserDisplayContent = (): LoadDisplayContent => {
+  const getPath = (filename: string, type: UserContentType): string =>
+    path.join(displayContentDir, "onboarding", type.toLowerCase(), filename);
   const loadFile = (filename: string, type: UserContentType): string =>
-    fs.readFileSync(path.join(displayContentDir, "onboarding", type.toLowerCase(), filename), "utf8");
+    fs.readFileSync(getPath(filename, type), "utf8");
+  const fileExists = (filename: string, type: UserContentType): boolean =>
+    fs.existsSync(getPath(filename, type));
 
   const getRadioFieldContent = (filename: string, type: UserContentType): RadioFieldContent => {
     const markdown = getMarkdown(loadFile(filename, type));
@@ -122,8 +126,9 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
       emptyStartingFlowContent
     );
 
-  const profileContent: ProfileContent = Object.keys(fieldFunctions)
+  const profileContent: Partial<ProfileContent> = Object.keys(fieldFunctions)
     .filter((name) => profileDisplayFields.includes(name as keyof ProfileContent))
+    .filter((name) => fileExists(name, "PROFILE"))
     .reduce(
       (content, name) => ({
         ...content,

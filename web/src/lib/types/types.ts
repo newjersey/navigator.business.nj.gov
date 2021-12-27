@@ -66,13 +66,14 @@ export type OwningFlowContent = {
   municipality: TextFieldContent;
   existingEmployees: TextFieldContent;
 };
+
 export interface UserDisplayContent extends StartingFlowContent, OwningFlowContent, ProfileContent {}
 
 export interface LoadDisplayContent
-  extends Record<UserContentType, OwningFlowContent | StartingFlowContent | ProfileContent> {
+  extends Record<UserContentType, OwningFlowContent | StartingFlowContent | Partial<ProfileContent>> {
   OWNING: OwningFlowContent;
   STARTING: StartingFlowContent;
-  PROFILE: ProfileContent;
+  PROFILE: Partial<ProfileContent>;
 }
 
 export type FormationDisplayContent = {
@@ -300,31 +301,10 @@ export const emptyProfileContent: ProfileContent = {
 };
 
 export const emptyOwningFlowContent: OwningFlowContent = {
+  businessName: coreContent.businessName,
+  industry: coreContent.industry,
+  municipality: coreContent.municipality,
   hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
-  businessName: {
-    contentMd: "",
-    placeholder: "",
-  },
-  industry: {
-    contentMd: "",
-    placeholder: "",
-    specificHomeContractorMd: "",
-    specificEmploymentAgencyMd: "",
-    specificLiquorQuestion: {
-      contentMd: "",
-      radioButtonYesText: "",
-      radioButtonNoText: "",
-    },
-    specificHomeBasedBusinessQuestion: {
-      contentMd: "",
-      radioButtonYesText: "",
-      radioButtonNoText: "",
-    },
-  },
-  municipality: {
-    contentMd: "",
-    placeholder: "",
-  },
   entityId: {
     contentMd: "",
   },
