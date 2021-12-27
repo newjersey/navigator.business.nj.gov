@@ -18,4 +18,4 @@ To complete this application, you must have:
 After you complete this task, you will have:
 
 - A New Jersey Home Improvement Contractor (NJHIC) number
-- Official paper registration received my mail (also known as a registration card)
+- Official registration document received my mail (also known as a registration card)
