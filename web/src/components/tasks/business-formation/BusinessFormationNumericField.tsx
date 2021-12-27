@@ -1,5 +1,6 @@
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { FormationTextField } from "@businessnjgovnavigator/shared";
-import React, { FocusEvent, ReactElement, useState } from "react";
+import React, { FocusEvent, ReactElement, useContext } from "react";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export const BusinessFormationNumericField = (props: Props): ReactElement => {
-  const [error, setError] = useState(false);
+  const { state, setErrorMap } = useContext(FormationContext);
 
   const regex = (value: string): string => value.replace(/[^0-9]/g, "");
 
@@ -22,7 +23,9 @@ export const BusinessFormationNumericField = (props: Props): ReactElement => {
       ? userInput >= props.minLength && userInput <= props.maxLength
       : userInput === props.maxLength || userInput === 0;
 
-    valid ? setError(false) : setError(true);
+    valid
+      ? setErrorMap({ ...state.errorMap, [props.fieldName]: { invalid: false } })
+      : setErrorMap({ ...state.errorMap, [props.fieldName]: { invalid: true } });
   };
 
   return (
@@ -30,7 +33,7 @@ export const BusinessFormationNumericField = (props: Props): ReactElement => {
       valueFilter={regex}
       fieldName={props.fieldName}
       onValidation={onValidation}
-      error={error}
+      error={state.errorMap[props.fieldName].invalid}
       validationText={props.validationText}
       visualFilter={props.visualFilter ? props.visualFilter : regex}
       fieldOptions={{

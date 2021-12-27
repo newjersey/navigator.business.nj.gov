@@ -9,11 +9,16 @@ import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createEmptyFormationDisplayContent, FormationDisplayContent, Task } from "@/lib/types/types";
-import { getModifiedTaskContent } from "@/lib/utils/helpers";
+import {
+  createEmptyFormationDisplayContent,
+  FieldStatus,
+  FormationDisplayContent,
+  Task,
+} from "@/lib/types/types";
+import { camelCaseToSentence, getModifiedTaskContent } from "@/lib/utils/helpers";
 import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
-import React, { createContext, ReactElement, useState } from "react";
+import React, { createContext, ReactElement, useMemo, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 import { TaskCTA } from "../TaskCTA";
 import { BusinessFormationDocuments } from "./business-formation/BusinessFormationDocuments";
@@ -29,22 +34,37 @@ interface Props {
   displayContent: FormationDisplayContent;
 }
 
+type FormationFields = keyof FormationFormData;
+type FormationFieldErrorMap = Record<FormationFields, FieldStatus>;
+
+const allFormationFormFields = Object.keys(createEmptyFormationFormData()) as (keyof FormationFormData)[];
+
+const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
+  allFormationFormFields.reduce((acc, field: FormationFields) => {
+    acc[field] = { invalid: false };
+    return acc;
+  }, {} as FormationFieldErrorMap);
+
 interface FormationState {
   formationFormData: FormationFormData;
   displayContent: FormationDisplayContent;
+  errorMap: FormationFieldErrorMap;
 }
 
 interface FormationContextType {
   state: FormationState;
   setFormationFormData: (formationFormData: FormationFormData) => void;
+  setErrorMap: (errorMap: FormationFieldErrorMap) => void;
 }
 
 export const FormationContext = createContext<FormationContextType>({
   state: {
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent(),
+    errorMap: createFormationFieldErrorMap(),
   },
   setFormationFormData: () => {},
+  setErrorMap: () => {},
 });
 
 export const BusinessFormation = (props: Props): ReactElement => {
@@ -56,36 +76,58 @@ export const BusinessFormation = (props: Props): ReactElement => {
     createEmptyFormationFormData()
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
+  const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
 
   const isLLC = userData?.profileData.legalStructureId === "limited-liability-company";
   const unlockedByTaskLinks = taskFromRoadmap
     ? taskFromRoadmap.unlockedBy.filter((it) => userData?.taskProgress[it.id] !== "COMPLETED")
     : [];
 
+  const requiredFieldsWithError = useMemo(() => {
+    let requiredFields: FormationFields[] = [
+      "businessSuffix",
+      "businessAddressLine1",
+      "businessAddressZipCode",
+      "signer",
+      "paymentType",
+      "contactFirstName",
+      "contactLastName",
+      "contactPhoneNumber",
+    ];
+
+    if (formationFormData.agentNumberOrManual === "NUMBER") {
+      requiredFields = [...requiredFields, "agentNumber"];
+    }
+
+    if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
+      requiredFields = [
+        ...requiredFields,
+        "agentName",
+        "agentEmail",
+        "agentOfficeAddressLine1",
+        "agentOfficeAddressCity",
+        "agentOfficeAddressZipCode",
+      ];
+    }
+
+    return requiredFields.filter((it) => errorMap[it].invalid || !formationFormData[it]);
+  }, [formationFormData, errorMap]);
+
   const submitFormationFormData = async () => {
     if (!userData) return;
 
-    if (!formationFormData.businessSuffix) return;
-    if (!formationFormData.businessAddressLine1) return;
-    if (!formationFormData.businessAddressZipCode) return;
-    if (!formationFormData.signer) return;
-    if (formationFormData.agentNumberOrManual === "NUMBER") {
-      if (!formationFormData.agentNumber) return;
-    }
-    if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
-      if (!formationFormData.agentName) return;
-      if (!formationFormData.agentEmail) return;
-      if (!formationFormData.agentOfficeAddressLine1) return;
-      if (!formationFormData.agentOfficeAddressCity) return;
-      if (!formationFormData.agentOfficeAddressZipCode) return;
+    if (requiredFieldsWithError.length > 0) {
+      setShowRequiredFieldsError(true);
+      const newErrorMappedFields = requiredFieldsWithError.reduce(
+        (acc: FormationFieldErrorMap, cur: FormationFields) => ({ ...acc, [cur]: { invalid: true } }),
+        {} as FormationFieldErrorMap
+      );
+      setErrorMap({ ...errorMap, ...newErrorMappedFields });
+      return;
     }
 
-    if (!formationFormData.contactFirstName) return;
-    if (!formationFormData.contactLastName) return;
-    if (!formationFormData.contactPhoneNumber) return;
-
-    if (!formationFormData.paymentType) return;
-
+    setShowRequiredFieldsError(false);
     const formationFormDataWithEmptySignersRemoved = {
       ...formationFormData,
       additionalSigners: formationFormData.additionalSigners.filter((it) => !!it),
@@ -132,8 +174,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
         state: {
           formationFormData: formationFormData,
           displayContent: props.displayContent,
+          errorMap: errorMap,
         },
         setFormationFormData,
+        setErrorMap,
       }}
     >
       <TaskHeader task={props.task} />
@@ -158,6 +202,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         </div>
         {userData.formationData.formationResponse &&
           !isLoading &&
+          !showRequiredFieldsError &&
           userData.formationData.formationResponse.errors.length > 0 && (
             <Alert variant="error" heading={BusinessFormationDefaults.submitErrorHeading}>
               <ul>
@@ -172,6 +217,15 @@ export const BusinessFormation = (props: Props): ReactElement => {
               </ul>
             </Alert>
           )}
+        {showRequiredFieldsError && requiredFieldsWithError.length > 0 && (
+          <Alert variant="error" heading={BusinessFormationDefaults.missingFieldsOnSubmitModalText}>
+            <ul>
+              {requiredFieldsWithError.map((it) => (
+                <li key={it}>{camelCaseToSentence(it)}</li>
+              ))}
+            </ul>
+          </Alert>
+        )}
       </div>
     </FormationContext.Provider>
   );

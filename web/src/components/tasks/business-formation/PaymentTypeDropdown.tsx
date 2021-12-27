@@ -2,14 +2,15 @@ import { Content } from "@/components/Content";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { AllPaymentTypes } from "@/lib/types/types";
 import { PaymentType } from "@businessnjgovnavigator/shared";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const PaymentTypeDropdown = (): ReactElement => {
-  const { state, setFormationFormData } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
+    setErrorMap({ ...state.errorMap, paymentType: { invalid: false } });
     setFormationFormData({
       ...state.formationFormData,
       paymentType: event.target.value as PaymentType,
@@ -29,7 +30,7 @@ export const PaymentTypeDropdown = (): ReactElement => {
     <>
       <Content>{state.displayContent.paymentType.contentMd}</Content>
       <div className="form-input margin-bottom-2">
-        <FormControl fullWidth>
+        <FormControl fullWidth error={state.errorMap.paymentType.invalid}>
           <InputLabel id="payment-type-label" className="visibility-hidden">
             Payment Type
           </InputLabel>
@@ -56,6 +57,9 @@ export const PaymentTypeDropdown = (): ReactElement => {
               </MenuItem>
             ))}
           </Select>
+          <FormHelperText>
+            {state.errorMap.paymentType.invalid ? BusinessFormationDefaults.paymentTypeErrorText : " "}
+          </FormHelperText>
         </FormControl>
       </div>
     </>

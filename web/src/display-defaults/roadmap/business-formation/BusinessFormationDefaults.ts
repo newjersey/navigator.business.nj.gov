@@ -1,6 +1,7 @@
 export const BusinessFormationDefaults: Record<string, string> = {
   notSetBusinessNameText: "Not set",
   submitButtonText: "Submit",
+  suffixErrorText: "Business suffix is required",
   businessNameLabel: "Business Name:",
   legalStructureLabel: "Legal Structure:",
   updateYourProfileDisplayText: "${value}, if this is incorrect, ${link}.",
@@ -18,6 +19,7 @@ export const BusinessFormationDefaults: Record<string, string> = {
   addNewSignerButtonText: "Add New Signer",
   creditCardPaymentTypeLabel: "Credit Card",
   achPaymentTypeLabel: "E-Check",
+  paymentTypeErrorText: "Payment type is required",
   documentTableColumn2Label: "Documentation Options",
   documentTableColumn3Label: "New Jersey Statutory Fee",
   documentTableTotalCostLabel: "Total:",
@@ -25,4 +27,5 @@ export const BusinessFormationDefaults: Record<string, string> = {
   contactFirstNameErrorText: "First name is required",
   contactLastNameErrorText: "Last name is required",
   contactPhoneNumberErrorText: "Phone number is required",
+  missingFieldsOnSubmitModalText: "Cannot submit. The following fields are required:",
 };
