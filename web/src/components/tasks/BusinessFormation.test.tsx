@@ -117,6 +117,22 @@ describe("<BusinessFormation />", () => {
       });
     };
 
+    it("shows success page when form already submitted", () => {
+      const profileData = generateLLCProfileData({});
+      const formationData = generateFormationData({
+        formationResponse: generateFormationSubmitResponse({
+          success: true,
+          redirect: "www.example.com/token",
+        }),
+      });
+      subject = renderTask({ profileData, formationData });
+      expect(subject.getByText(BusinessFormationDefaults.alreadySubmittedLinkText)).toBeInTheDocument();
+      expect(
+        subject.getByText(BusinessFormationDefaults.alreadySubmittedLinkText).getAttribute("href")
+      ).toEqual("www.example.com/token");
+      expect(subject.queryByLabelText("Business address line1")).not.toBeInTheDocument();
+    });
+
     it("displays legal structure from profile data", () => {
       subject = renderTask({ profileData: generateLLCProfileData({}) });
       expect(
@@ -460,56 +476,56 @@ describe("<BusinessFormation />", () => {
       describe("submits when missing optional field", () => {
         it("everything present", async () => {
           fillAllFieldsBut([]);
-          await clickSubmit();
+          await clickSubmitWithTick();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("agent address line 2", async () => {
           fillAllFieldsBut(["Agent office address line2"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
+          await clickSubmitWithTick();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("business address line 2", async () => {
           fillAllFieldsBut(["Business address line2"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
+          await clickSubmitWithTick();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("Opt in annual report", async () => {
           fillAllFieldsBut(["Opt in annual report"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
+          await clickSubmitWithTick();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("Opt in corp watch", async () => {
           fillAllFieldsBut(["Opt in corp watch"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
+          await clickSubmitWithTick();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("additional signer", async () => {
           fillAllFieldsBut(["Additional signer"]);
-          await clickSubmit();
+          await clickSubmitWithTick();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("Opt in corp watch", async () => {
           fillAllFieldsBut(["Opt in corp watch"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
+          await clickSubmitWithTick();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("Certificate of standing", async () => {
           fillAllFieldsBut(["Certificate of standing"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
+          await clickSubmitWithTick();
           expect(userDataWasNotUpdated()).toEqual(false);
           expect(subject.getByText("$150.00")).toBeInTheDocument();
         });
 
         it("Certified copy of formation document", async () => {
           fillAllFieldsBut(["Certified copy of formation document"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
+          await clickSubmitWithTick();
           await waitFor(() => expect(subject.getByText("$175.00")).toBeInTheDocument());
           expect(userDataWasNotUpdated()).toEqual(false);
         });

@@ -15,7 +15,7 @@ import {
   FormationDisplayContent,
   Task,
 } from "@/lib/types/types";
-import { camelCaseToSentence, getModifiedTaskContent } from "@/lib/utils/helpers";
+import { camelCaseToSentence, getModifiedTaskContent, templateEval } from "@/lib/utils/helpers";
 import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useMemo, useState } from "react";
@@ -164,6 +164,32 @@ export const BusinessFormation = (props: Props): ReactElement => {
           link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
           text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
         />
+      </div>
+    );
+  }
+
+  if (userData?.formationData.formationResponse?.success) {
+    const linkElement = (
+      <a href={userData.formationData.formationResponse.redirect}>
+        {BusinessFormationDefaults.alreadySubmittedLinkText}
+      </a>
+    );
+    const splitText = templateEval(BusinessFormationDefaults.alreadySubmittedText, { link: "${link}" }).split(
+      "${link}"
+    );
+
+    return (
+      <div className="flex flex-column space-between minh-37">
+        <div>
+          <TaskHeader task={props.task} />
+          <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />
+          <h2>{BusinessFormationDefaults.alreadySubmittedHeader}</h2>
+          <p>
+            {splitText[0]}
+            {linkElement}
+            {splitText[1]}
+          </p>
+        </div>
       </div>
     );
   }
