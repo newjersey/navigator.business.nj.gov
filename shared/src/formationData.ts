@@ -27,17 +27,20 @@ export interface FormationFormData {
   officialFormationDocument: boolean;
   certificateOfStanding: boolean;
   certifiedCopyOfFormationDocument: boolean;
+  contactFirstName: string;
+  contactLastName: string;
+  contactPhoneNumber: string;
 }
 
 export type FormationTextField = Exclude<
   keyof FormationFormData,
   | "businessSuffix"
   | "businessStartDate"
+  | "agentNumberOrManual"
   | "additionalSigners"
   | "paymentType"
   | "annualReportNotification"
   | "corpWatchNotification"
-  | "agentNumberOrManual"
   | "officialFormationDocument"
   | "certificateOfStanding"
   | "certifiedCopyOfFormationDocument"
@@ -68,6 +71,9 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     officialFormationDocument: true,
     certificateOfStanding: false,
     certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
   };
 };
 

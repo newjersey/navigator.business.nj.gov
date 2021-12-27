@@ -22,4 +22,7 @@ export const BusinessFormationDefaults: Record<string, string> = {
   documentTableColumn3Label: "New Jersey Statutory Fee",
   documentTableTotalCostLabel: "Total:",
   submitErrorHeading: "Formation failed. Errors found in the following fields:",
+  contactFirstNameErrorText: "First name is required",
+  contactLastNameErrorText: "Last name is required",
+  contactPhoneNumberErrorText: "Phone number is required",
 };

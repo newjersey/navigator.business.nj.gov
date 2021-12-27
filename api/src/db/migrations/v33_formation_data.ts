@@ -1,4 +1,3 @@
-import { FormationFormData } from "@shared/formationData";
 import { v32UserData } from "./v32_3rd_party_status_status";
 
 export interface v33UserData {
@@ -209,7 +208,7 @@ type v33FormationSubmitError = {
 
 // ---------------- v33 factories ----------------
 
-const createEmptyFormationFormData = (): FormationFormData => {
+const createEmptyFormationFormData = (): v33FormationFormData => {
   return {
     businessSuffix: undefined,
     businessStartDate: "",

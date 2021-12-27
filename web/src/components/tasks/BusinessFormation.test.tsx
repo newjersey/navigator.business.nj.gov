@@ -50,19 +50,19 @@ describe("<BusinessFormation />", () => {
       businessNameAndLegalStructure: {
         contentMd: "business name and legal structure",
       },
-      optInAnnualReport: { contentMd: "annual report" },
-      optInCorpWatch: { contentMd: "corp watch" },
+      optInAnnualReport: { contentMd: "Annual report" },
+      optInCorpWatch: { contentMd: "Corp watch" },
       officialFormationDocument: {
         contentMd: "",
         cost: "$125.00",
       },
       certificateOfStanding: {
-        contentMd: "certificate of standing",
+        contentMd: "Certificate of standing",
         cost: "$50.00",
         optionalLabel: "",
       },
       certifiedCopyOfFormationDocument: {
-        contentMd: "certified copy of formation document",
+        contentMd: "Certified copy of formation document",
         cost: "$25.00",
         optionalLabel: "",
       },
@@ -175,11 +175,15 @@ describe("<BusinessFormation />", () => {
 
       fillText("Signer", "Elrond");
 
+      fillText("Contact first name", "John");
+      fillText("Contact last name", "Smith");
+      fillText("Contact phone number", "123A45a678 90");
+
       selectByText("Payment Type", BusinessFormationDefaults.creditCardPaymentTypeLabel);
-      selectCheckBox("annual report");
-      selectCheckBox("corp watch");
-      selectCheckBox("certificate of standing");
-      selectCheckBox("certified copy of formation document");
+      selectCheckBox("Annual report");
+      selectCheckBox("Corp watch");
+      selectCheckBox("Certificate of standing");
+      selectCheckBox("Certified copy of formation document");
 
       await clickSubmit();
 
@@ -202,6 +206,9 @@ describe("<BusinessFormation />", () => {
       expect(formationFormData.agentOfficeAddressZipCode).toEqual("45678");
       expect(formationFormData.signer).toEqual("Elrond");
       expect(formationFormData.additionalSigners).toEqual([]);
+      expect(formationFormData.contactFirstName).toEqual("John");
+      expect(formationFormData.contactLastName).toEqual("Smith");
+      expect(formationFormData.contactPhoneNumber).toEqual("1234567890");
       expect(formationFormData.paymentType).toEqual("CC");
       expect(formationFormData.officialFormationDocument).toEqual(true);
       expect(formationFormData.certificateOfStanding).toEqual(true);
@@ -367,7 +374,21 @@ describe("<BusinessFormation />", () => {
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
-
+        it("Contact first name", async () => {
+          fillAllFieldsBut(["Contact first name"]);
+          await clickSubmit();
+          expect(userDataWasNotUpdated()).toEqual(true);
+        });
+        it("Contact last name", async () => {
+          fillAllFieldsBut(["Contact last name"]);
+          await clickSubmit();
+          expect(userDataWasNotUpdated()).toEqual(true);
+        });
+        it("Contact phone number", async () => {
+          fillAllFieldsBut(["Contact phone number"]);
+          await clickSubmit();
+          expect(userDataWasNotUpdated()).toEqual(true);
+        });
         it("Payment type", async () => {
           fillAllFieldsBut(["Payment type"]);
           await clickSubmit();
@@ -533,20 +554,29 @@ describe("<BusinessFormation />", () => {
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fillText("Additional signer 0", "Red Skull");
     }
+    if (!fieldLabels.includes("Contact first name")) {
+      fillText("Contact first name", "John");
+    }
+    if (!fieldLabels.includes("Contact last name")) {
+      fillText("Contact last name", "Smith");
+    }
+    if (!fieldLabels.includes("Contact phone number")) {
+      fillText("Contact phone number", "1234567890");
+    }
     if (!fieldLabels.includes("Payment type")) {
       selectByText("Payment Type", BusinessFormationDefaults.creditCardPaymentTypeLabel);
     }
     if (!fieldLabels.includes("Opt in annual report")) {
-      selectCheckBox("annual report");
+      selectCheckBox("Annual report");
     }
     if (!fieldLabels.includes("Opt in corp watch")) {
-      selectCheckBox("corp watch");
+      selectCheckBox("Corp watch");
     }
     if (!fieldLabels.includes("Certificate of standing")) {
-      selectCheckBox("certificate of standing");
+      selectCheckBox("Certificate of standing");
     }
     if (!fieldLabels.includes("Certified copy of formation document")) {
-      selectCheckBox("certified copy of formation document");
+      selectCheckBox("Certified copy of formation document");
     }
 
     if (other.agentRadio === "NUMBER") {

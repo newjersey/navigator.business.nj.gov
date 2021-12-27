@@ -60,8 +60,9 @@ export const OnboardingField = (props: Props): ReactElement => {
           helperText={props.error ? props.validationText ?? " " : " "}
           variant="outlined"
           fullWidth
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          placeholder={(state.displayContent[props.fieldName] as Record<string, any>).placeholder ?? ""}
+          placeholder={
+            (state.displayContent[props.fieldName] as Record<string, string | undefined>).placeholder ?? ""
+          }
           {...props.fieldOptions}
           inputProps={{
             "aria-label": camelCaseToSentence(props.fieldName),
