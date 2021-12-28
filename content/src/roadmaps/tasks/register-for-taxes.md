@@ -26,4 +26,5 @@ After you complete this task, you will have:
 
 - `Business Registration Certificate (BRC)|business-reg-certificate`
 - NJ Tax ID
-- Authorization to Collect Sales Tax
+- `Business Tax PIN|tax-pin`
+- Authorization to Collect Sales Tax (if applicable)
