@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { NameAvailability, SearchBusinessName } from "../domain/types";
+import { BusinessNameClient, NameAvailability } from "../domain/types";
 
-export const businessNameRouterFactory = (searchBusinessName: SearchBusinessName): Router => {
+export const businessNameRouterFactory = (businessNameClient: BusinessNameClient): Router => {
   const router = Router();
 
   router.get("/business-name-availability", (req, res) => {
-    searchBusinessName((req.query as BusinessQueryParams).query)
+    businessNameClient
+      .search((req.query as BusinessQueryParams).query)
       .then((result: NameAvailability) => {
         res.json(result);
       })

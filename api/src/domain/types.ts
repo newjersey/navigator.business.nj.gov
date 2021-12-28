@@ -19,7 +19,7 @@ export interface UserDataQlClient {
 }
 
 export interface BusinessNameClient {
-  search: (name: string) => Promise<string[]>;
+  search: (name: string) => Promise<NameAvailability>;
 }
 
 export interface NewsletterClient {
