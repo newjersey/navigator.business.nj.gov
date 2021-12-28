@@ -1,34 +1,63 @@
 {
-  "register-for-ein": ["search-business-name"],
-  "form-business-entity": ["search-business-name", "register-for-ein"],
-  "register-for-taxes": ["form-business-entity"],
-  "sign-lease": ["form-business-entity", "register-for-taxes"],
-  "get-insurance": ["form-business-entity", "register-for-taxes"],
-  "get-insurance-home-contractor": ["form-business-entity", "register-for-taxes"],
-  "floor-plan-approval-doh": ["form-business-entity", "sign-lease"],
-  "home-health-aide-license": ["form-business-entity", "register-for-taxes"],
-  "individual-staff-licenses-health-aide": ["form-business-entity", "home-health-aide-license"],
-  "search-licenses": ["form-business-entity", "register-for-taxes"],
-  "search-licenses-employment-agency": ["form-business-entity", "register-for-taxes"],
-  "site-safety-permits-cosmetology": ["sign-lease", "building-permit"],
-  "town-mercantile-license-liquor": ["register-for-taxes", "sign-lease", "liquor-license-availability"],
-  "zoning": ["sign-lease"],
-  "sign-lease-food-truck": ["form-business-entity", "register-for-taxes"],
-  "apply-for-food-truck-license": ["form-business-entity", "register-for-taxes"],
-  "logisticare": ["form-business-entity", "register-for-taxes", "register-vehicle"],
-  "search-licenses-retail": ["form-business-entity", "register-for-taxes"],
-  "apply-scorp-federal": [
-    "search-business-name",
-    "register-for-ein",
-    "form-business-entity",
-    "register-for-taxes"
-  ],
-  "apply-scorp-state": [
-    "search-business-name",
-    "register-for-ein",
-    "form-business-entity",
-    "register-for-taxes",
-    "apply-scorp-federal"
-  ],
-  "apply-for-shop-license": ["site-safety-permits"]
+  "dependencies": [
+    { "name": "register-for-ein", "dependencies": ["search-business-name"] },
+    { "name": "form-business-entity", "dependencies": ["search-business-name", "register-for-ein"] },
+    { "name": "register-for-taxes", "dependencies": ["form-business-entity"] },
+    { "name": "sign-lease", "dependencies": ["form-business-entity", "register-for-taxes"] },
+    { "name": "get-insurance", "dependencies": ["form-business-entity", "register-for-taxes"] },
+    {
+      "name": "get-insurance-home-contractor",
+      "dependencies": ["form-business-entity", "register-for-taxes"]
+    },
+    { "name": "floor-plan-approval-doh", "dependencies": ["form-business-entity", "sign-lease"] },
+    { "name": "home-health-aide-license", "dependencies": ["form-business-entity", "register-for-taxes"] },
+    {
+      "name": "individual-staff-licenses-health-aide",
+      "dependencies": ["form-business-entity", "home-health-aide-license"]
+    },
+    { "name": "search-licenses", "dependencies": ["form-business-entity", "register-for-taxes"] },
+    {
+      "name": "search-licenses-employment-agency",
+      "dependencies": ["form-business-entity", "register-for-taxes"]
+    },
+    { "name": "site-safety-permits-cosmetology", "dependencies": ["sign-lease", "building-permit"] },
+    {
+      "name": "town-mercantile-license-liquor",
+      "dependencies": ["register-for-taxes", "sign-lease", "liquor-license-availability"]
+    },
+    { "name": "zoning", "dependencies": ["sign-lease"] },
+    { "name": "sign-lease-food-truck", "dependencies": ["form-business-entity", "register-for-taxes"] },
+    {
+      "name": "apply-for-food-truck-license",
+      "dependencies": ["form-business-entity", "register-for-taxes"]
+    },
+    {
+      "name": "logisticare",
+      "dependencies": ["form-business-entity", "register-for-taxes", "register-vehicle"]
+    },
+    { "name": "search-licenses-retail", "dependencies": ["form-business-entity", "register-for-taxes"] },
+    {
+      "name": "apply-scorp-federal",
+      "dependencies": [
+        "search-business-name",
+        "register-for-ein",
+        "form-business-entity",
+        "register-for-taxes"
+      ]
+    },
+    {
+      "name": "apply-scorp-state",
+      "dependencies": [
+        "search-business-name",
+        "register-for-ein",
+        "form-business-entity",
+        "register-for-taxes",
+        "apply-scorp-federal"
+      ]
+    },
+    {
+      "name": "apply-for-shop-license",
+      "dependencies": ["site-safety-permits"]
+    }
+  ]
 }

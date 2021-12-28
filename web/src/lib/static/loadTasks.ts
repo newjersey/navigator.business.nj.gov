@@ -33,15 +33,14 @@ const loadTaskByFileName = (fileName: string): Task => {
   const fullPath = path.join(roadmapsDir, "tasks", `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
-  const dependencies = JSON.parse(
-    fs.readFileSync(path.join(roadmapsDir, "task-dependencies.json"), "utf8")
-  ) as TaskDependencies;
+  const dependencies = JSON.parse(fs.readFileSync(path.join(roadmapsDir, "task-dependencies.json"), "utf8"))
+    .dependencies as TaskDependencies[];
 
   const taskWithoutLinks = convertTaskMd(fileContents);
   const fileNameWithoutMd = fileName.split(".md")[0];
-  const unlockedByTaskLinks = (dependencies[fileNameWithoutMd] || []).map((dependencyFileName) =>
-    loadTaskLinkByFilename(dependencyFileName)
-  );
+  const unlockedByTaskLinks = (
+    dependencies.find((dependency) => dependency.name === fileNameWithoutMd)?.dependencies || []
+  ).map((dependencyFileName) => loadTaskLinkByFilename(dependencyFileName));
 
   return {
     ...taskWithoutLinks,

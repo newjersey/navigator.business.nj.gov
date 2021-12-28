@@ -90,8 +90,10 @@ describe("loadTasks", () => {
         "I am a text content3";
 
       const dependencyFile = JSON.stringify({
-        task2: ["task3"],
-        task1: ["task2"],
+        dependencies: [
+          { name: "task2", dependencies: ["task3"] },
+          { name: "task1", dependencies: ["task2"] },
+        ],
       });
 
       mockReadDirReturn(["task1.md", "task2.md", "task3.md"]);
