@@ -5,7 +5,7 @@ import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
-import { ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import React, { ReactNode } from "react";
 import { OnboardingExistingEmployees } from "./OnboardingExistingEmployees";
@@ -21,7 +21,6 @@ export type ErrorFieldMap = {
   inline?: { name: ProfileFields; valid: boolean }[];
   banner?: { name: ProfileError; valid: boolean }[];
 };
-export type FlowType = "OWNING" | "STARTING";
 
 export const getOnboardingFlows = (
   profileData: ProfileData,

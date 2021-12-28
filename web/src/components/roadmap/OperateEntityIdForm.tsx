@@ -4,8 +4,8 @@ import { Alert } from "@/components/njwds/Alert";
 import { NumericField } from "@/components/onboarding/NumericField";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createEmptyProfileDisplayContent, OperateDisplayContent, ProfileFields } from "@/lib/types/types";
-import { OnboardingContext } from "@/pages/onboarding";
+import { createEmptyUserDisplayContent, OperateDisplayContent, ProfileFields } from "@/lib/types/types";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import React, { FormEvent, ReactElement, useEffect, useState } from "react";
 
@@ -66,11 +66,11 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
   };
 
   return (
-    <OnboardingContext.Provider
+    <ProfileDataContext.Provider
       value={{
         state: {
           profileData,
-          displayContent: createEmptyProfileDisplayContent(),
+          displayContent: createEmptyUserDisplayContent(),
           municipalities: [],
         },
         setProfileData,
@@ -110,6 +110,6 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
           </Alert>
         )}
       </div>
-    </OnboardingContext.Provider>
+    </ProfileDataContext.Provider>
   );
 };

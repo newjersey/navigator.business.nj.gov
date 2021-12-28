@@ -1,50 +1,66 @@
-import { ProfileDisplayContent, RoadmapDisplayContent, TasksDisplayContent } from "@/lib/types/types";
+import {
+  emptyOwningFlowContent,
+  emptyProfileContent,
+  emptyStartingFlowContent,
+  IndustryFieldContent,
+  LegalFieldContent,
+  LoadDisplayContent,
+  OwningFlowContent,
+  owningFlowDisplayFields,
+  ProfileContent,
+  profileDisplayFields,
+  RadioFieldContent,
+  RoadmapDisplayContent,
+  startFlowDisplayFields,
+  StartingFlowContent,
+  TasksDisplayContent,
+  TextFieldContent,
+  UserContentType,
+} from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
 import { LegalStructures } from "@businessnjgovnavigator/shared";
 import fs from "fs";
 import path from "path";
 
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
+const onboardingContentFolder: Record<UserContentType, string> = {
+  OWNING: "owning",
+  STARTING: "starting",
+  PROFILE: "profile",
+};
 
-export const loadProfileDisplayContent = (): ProfileDisplayContent => {
-  const loadFile = (filename: string): string =>
-    fs.readFileSync(path.join(displayContentDir, "onboarding", filename), "utf8");
+export const loadUserDisplayContent = (): LoadDisplayContent => {
+  const getPath = (filename: string, type: UserContentType): string =>
+    path.join(displayContentDir, "onboarding", onboardingContentFolder[type], filename);
+  const loadFile = (filename: string, type: UserContentType): string =>
+    fs.readFileSync(getPath(filename, type), "utf8");
+  const fileExists = (filename: string, type: UserContentType): boolean =>
+    fs.existsSync(getPath(filename, type));
 
-  const hasExistingBusiness = getMarkdown(loadFile("has-existing-business.md"));
-  const businessName = getMarkdown(loadFile("business-name.md"));
-  const industry = getMarkdown(loadFile("industry.md"));
-  const legalStructure = getMarkdown(loadFile("legal-structure.md"));
-  const municipality = getMarkdown(loadFile("municipality.md"));
-  const specificHomeContractor = getMarkdown(loadFile("industry-home-contractor.md"));
-  const specificEmploymentAgency = getMarkdown(loadFile("industry-employment-agency.md"));
-  const specificLiquor = getMarkdown(loadFile("industry-liquor.md"));
-  const specificHomeBased = getMarkdown(loadFile("municipality-home-based-business.md"));
-  const employerId = getMarkdown(loadFile("employer-id.md"));
-  const entityId = getMarkdown(loadFile("entity-id.md"));
-  const notes = getMarkdown(loadFile("notes.md"));
-  const taxId = getMarkdown(loadFile("tax-id.md"));
-  const certifications = getMarkdown(loadFile("certifications.md"));
-  const existingEmployees = getMarkdown(loadFile("existing-employees.md"));
+  const getRadioFieldContent = (filename: string, type: UserContentType): RadioFieldContent => {
+    const markdown = getMarkdown(loadFile(filename, type));
+    return {
+      contentMd: markdown.content,
+      radioButtonYesText: (markdown.grayMatter as RadioGrayMatter).radioButtonYesText,
+      radioButtonNoText: (markdown.grayMatter as RadioGrayMatter).radioButtonNoText,
+    };
+  };
+  const getTextFieldContent = (filename: string, type: UserContentType): TextFieldContent => {
+    const markdown = getMarkdown(loadFile(filename, type));
+    return {
+      contentMd: markdown.content,
+      ...(markdown.grayMatter as FieldGrayMatter),
+    };
+  };
 
-  const legalStructureOptionContent: Record<string, string> = {};
-  LegalStructures.forEach((legalStructure) => {
-    legalStructureOptionContent[legalStructure.id] = getMarkdown(
-      loadFile(`legal-structure-${legalStructure.id}.md`)
-    ).content;
-  });
-
-  return {
-    hasExistingBusiness: {
-      contentMd: hasExistingBusiness.content,
-      radioButtonYesText: (hasExistingBusiness.grayMatter as RadioGrayMatter).radioButtonYesText,
-      radioButtonNoText: (hasExistingBusiness.grayMatter as RadioGrayMatter).radioButtonNoText,
-    },
-    businessName: {
-      contentMd: businessName.content,
-      ...(businessName.grayMatter as FieldGrayMatter),
-    },
-    industry: {
-      contentMd: industry.content,
+  const industry = (type: UserContentType): IndustryFieldContent => {
+    const industryContent = getMarkdown(loadFile("industry.md", type));
+    const specificHomeContractor = getMarkdown(loadFile("industry-home-contractor.md", type));
+    const specificEmploymentAgency = getMarkdown(loadFile("industry-employment-agency.md", type));
+    const specificLiquor = getMarkdown(loadFile("industry-liquor.md", type));
+    const specificHomeBased = getMarkdown(loadFile("municipality-home-based-business.md", type));
+    return {
+      contentMd: industryContent.content,
       specificHomeContractorMd: specificHomeContractor.content,
       specificEmploymentAgencyMd: specificEmploymentAgency.content,
       specificLiquorQuestion: {
@@ -57,41 +73,86 @@ export const loadProfileDisplayContent = (): ProfileDisplayContent => {
         radioButtonYesText: (specificHomeBased.grayMatter as RadioGrayMatter).radioButtonYesText,
         radioButtonNoText: (specificHomeBased.grayMatter as RadioGrayMatter).radioButtonNoText,
       },
-      ...(industry.grayMatter as FieldGrayMatter),
-    },
-    legalStructure: {
-      contentMd: legalStructure.content,
-      optionContent: legalStructureOptionContent,
-    },
-    municipality: {
-      contentMd: municipality.content,
-      ...(municipality.grayMatter as FieldGrayMatter),
-    },
-    employerId: {
-      contentMd: employerId.content,
-      ...(employerId.grayMatter as FieldGrayMatter),
-    },
-    entityId: {
-      contentMd: entityId.content,
-      ...(entityId.grayMatter as FieldGrayMatter),
-    },
-    notes: {
-      contentMd: notes.content,
-      ...(notes.grayMatter as FieldGrayMatter),
-    },
-    taxId: {
-      contentMd: taxId.content,
-      ...(taxId.grayMatter as FieldGrayMatter),
-    },
-    certifications: {
-      contentMd: certifications.content,
-      ...(certifications.grayMatter as FieldGrayMatter),
-    },
-    existingEmployees: {
-      contentMd: existingEmployees.content,
-      placeholder: (existingEmployees.grayMatter as FieldGrayMatter).placeholder,
-    },
+      ...(industryContent.grayMatter as FieldGrayMatter),
+    };
   };
+
+  const legalStructure = (type: UserContentType): LegalFieldContent => {
+    const legalStructureContent = getMarkdown(loadFile("legal-structure.md", type));
+    const legalStructureOptionContent: Record<string, string> = {};
+    LegalStructures.forEach((structure) => {
+      legalStructureOptionContent[structure.id] = getMarkdown(
+        loadFile(`legal-structure-${structure.id}.md`, type)
+      ).content;
+    });
+    return {
+      contentMd: legalStructureContent.content,
+      optionContent: legalStructureOptionContent,
+    };
+  };
+
+  const hasExistingBusiness = (type: UserContentType) =>
+    getRadioFieldContent("has-existing-business.md", type);
+  const businessName = (type: UserContentType) => getTextFieldContent("business-name.md", type);
+  const municipality = (type: UserContentType) => getTextFieldContent("municipality.md", type);
+  const employerId = (type: UserContentType) => getTextFieldContent("employer-id.md", type);
+  const entityId = (type: UserContentType) => getTextFieldContent("entity-id.md", type);
+  const notes = (type: UserContentType) => getTextFieldContent("notes.md", type);
+  const taxId = (type: UserContentType) => getTextFieldContent("tax-id.md", type);
+  const certifications = (type: UserContentType) => getTextFieldContent("certifications.md", type);
+  const existingEmployees = (type: UserContentType) => getTextFieldContent("existing-employees.md", type);
+
+  const fieldFunctions: Record<
+    keyof StartingFlowContent | keyof OwningFlowContent | keyof ProfileContent,
+    (type: UserContentType) => LegalFieldContent | RadioFieldContent | IndustryFieldContent | TextFieldContent
+  > = {
+    hasExistingBusiness,
+    businessName,
+    municipality,
+    employerId,
+    entityId,
+    notes,
+    taxId,
+    certifications,
+    existingEmployees,
+    industry,
+    legalStructure,
+  };
+
+  const startingFlowContent: StartingFlowContent = Object.keys(fieldFunctions)
+    .filter((name) => {
+      return startFlowDisplayFields.includes(name as keyof StartingFlowContent);
+    })
+    .reduce(
+      (content, name) => ({
+        ...content,
+        [name as keyof StartingFlowContent]: fieldFunctions[name as keyof StartingFlowContent]("STARTING"),
+      }),
+      emptyStartingFlowContent
+    );
+
+  const profileContent: Partial<ProfileContent> = Object.keys(fieldFunctions)
+    .filter((name) => profileDisplayFields.includes(name as keyof ProfileContent))
+    .filter((name) => fileExists(name, "PROFILE"))
+    .reduce(
+      (content, name) => ({
+        ...content,
+        [name as keyof ProfileContent]: fieldFunctions[name as keyof ProfileContent]("PROFILE"),
+      }),
+      emptyProfileContent
+    );
+
+  const owningFlowContent: OwningFlowContent = Object.keys(fieldFunctions)
+    .filter((name) => owningFlowDisplayFields.includes(name as keyof OwningFlowContent))
+    .reduce(
+      (content, name) => ({
+        ...content,
+        [name as keyof OwningFlowContent]: fieldFunctions[name as keyof OwningFlowContent]("OWNING"),
+      }),
+      emptyOwningFlowContent
+    );
+
+  return { OWNING: owningFlowContent, STARTING: startingFlowContent, PROFILE: profileContent };
 };
 
 export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {

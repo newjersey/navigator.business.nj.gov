@@ -1,13 +1,13 @@
 import { Content } from "@/components/Content";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import orderBy from "lodash.orderby";
 import React, { ReactElement, useContext } from "react";
 
 export const OnboardingLegalStructure = (): ReactElement => {
-  const { state, setProfileData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(ProfileDataContext);
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,

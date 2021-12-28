@@ -3,12 +3,12 @@ import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { FormControl, InputLabel } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 export const OnboardingIndustry = (): ReactElement => {
-  const { state } = useContext(OnboardingContext);
+  const { state } = useContext(ProfileDataContext);
 
   const headerLevelTwo = setHeaderRole(2, "h2-element");
 

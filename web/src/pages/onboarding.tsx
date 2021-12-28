@@ -1,7 +1,7 @@
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Alert } from "@/components/njwds/Alert";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { FlowType, getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
+import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
@@ -10,16 +10,19 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { loadProfileDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
-  createEmptyProfileDisplayContent,
+  createEmptyUserDisplayContent,
   createProfileFieldErrorMap,
+  FlowType,
+  LoadDisplayContent,
   OnboardingStatus,
-  ProfileDisplayContent,
   ProfileError,
   ProfileFieldErrorMap,
   ProfileFields,
+  UserContentType,
+  UserDisplayContent,
 } from "@/lib/types/types";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import {
@@ -50,28 +53,30 @@ import React, {
 import { CSSTransition } from "react-transition-group";
 
 interface Props {
-  displayContent: ProfileDisplayContent;
+  displayContent: LoadDisplayContent;
   municipalities: Municipality[];
 }
 
-interface OnboardingState {
+interface ProfileDataState {
   page?: number;
   profileData: ProfileData;
-  displayContent: ProfileDisplayContent;
+  displayContent: UserDisplayContent;
+  flow?: UserContentType;
   municipalities: Municipality[];
 }
 
-interface OnboardingContextType {
-  state: OnboardingState;
+interface ProfileDataContextType {
+  state: ProfileDataState;
   setProfileData: (profileData: ProfileData) => void;
   onBack: () => void;
 }
 
-export const OnboardingContext = createContext<OnboardingContextType>({
+export const ProfileDataContext = createContext<ProfileDataContextType>({
   state: {
     page: 1,
     profileData: createEmptyProfileData(),
-    displayContent: createEmptyProfileDisplayContent(),
+    flow: "STARTING",
+    displayContent: createEmptyUserDisplayContent(),
     municipalities: [],
   },
   setProfileData: () => {},
@@ -280,12 +285,13 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   return (
-    <OnboardingContext.Provider
+    <ProfileDataContext.Provider
       value={{
         state: {
           page: page.current,
           profileData: profileData,
-          displayContent: props.displayContent,
+          flow: currentFlow,
+          displayContent: props.displayContent[currentFlow] as UserDisplayContent,
           municipalities: props.municipalities,
         },
         setProfileData,
@@ -356,7 +362,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           </div>
         </main>
       </PageSkeleton>
-    </OnboardingContext.Provider>
+    </ProfileDataContext.Provider>
   );
 };
 
@@ -365,7 +371,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
 
   return {
     props: {
-      displayContent: loadProfileDisplayContent(),
+      displayContent: loadUserDisplayContent(),
       municipalities,
     },
   };

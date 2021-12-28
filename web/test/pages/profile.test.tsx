@@ -1,9 +1,6 @@
 import { ProfileDefaults } from "@/display-defaults//ProfileDefaults";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
-import {
-  createEmptyProfileDisplayContent as createEmptyProfileDisplayContent,
-  ProfileDisplayContent,
-} from "@/lib/types/types";
+import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
 import {
@@ -45,7 +42,7 @@ describe("profile", () => {
     userData,
   }: {
     municipalities?: Municipality[];
-    displayContent?: ProfileDisplayContent;
+    displayContent?: LoadDisplayContent;
     userData?: UserData;
   }): RenderResult => {
     const genericTown =
@@ -59,7 +56,7 @@ describe("profile", () => {
         }
       >
         <Profile
-          displayContent={displayContent || createEmptyProfileDisplayContent()}
+          displayContent={displayContent || createEmptyLoadDisplayContent()}
           municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]}
         />
       </WithStatefulUserData>
@@ -144,7 +141,7 @@ describe("profile", () => {
     subject = render(
       withRoadmap(
         <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
-          <Profile displayContent={createEmptyProfileDisplayContent()} municipalities={[]} />
+          <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
         </WithStatefulUserData>,
         undefined,
         undefined,

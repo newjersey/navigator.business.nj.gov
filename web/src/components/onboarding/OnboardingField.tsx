@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { ProfileFields } from "@/lib/types/types";
 import { camelCaseToSentence, setHeaderRole } from "@/lib/utils/helpers";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { TextField, TextFieldProps } from "@mui/material";
 import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useRef } from "react";
@@ -18,7 +18,8 @@ interface Props {
 }
 
 export const OnboardingField = (props: Props): ReactElement => {
-  const { state, setProfileData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(ProfileDataContext);
+
   const headerRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {

@@ -5,7 +5,7 @@ import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefa
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { OnboardingContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/pages/onboarding";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const OnboardingMunicipality = (props: Props): ReactElement => {
-  const { state, setProfileData } = useContext(OnboardingContext);
+  const { state, setProfileData } = useContext(ProfileDataContext);
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     const valid = event.target.value.length > 0;
@@ -49,7 +49,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
           handleChange={handleChange}
           value={state.profileData.municipality}
           onSelect={onSelect}
-          placeholderText={state.displayContent.municipality.placeholder}
+          placeholderText={state.displayContent.municipality.placeholder ?? ""}
         />
 
         {isHomeBasedBusinessApplicable(state.profileData.industryId) && (
