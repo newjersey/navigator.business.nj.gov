@@ -11,14 +11,13 @@ import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
 import { userRouterFactory } from "../../api/userRouter";
 import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
+import { ApiBusinessNameClient } from "../../client/ApiBusinessNameClient";
 import { ApiFormationClient } from "../../client/ApiFormationClient";
 import { FakeTaxFilingClient } from "../../client/FakeTaxFilingClient";
 import { GovDeliveryNewsletterClient } from "../../client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
-import { WebserviceBusinessNameClient } from "../../client/WebserviceBusinessNameClient";
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
 import { DynamoUserDataClient } from "../../db/DynamoUserDataClient";
-import { searchBusinessNameFactory } from "../../domain/business-names/searchBusinessNameFactory";
 import { searchLicenseStatusFactory } from "../../domain/license-status/searchLicenseStatusFactory";
 import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
@@ -54,7 +53,7 @@ const licenseStatusClient = WebserviceLicenseStatusClient(LICENSE_STATUS_BASE_UR
 
 const BUSINESS_NAME_BASE_URL =
   process.env.BUSINESS_NAME_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
-const businessNameClient = WebserviceBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
+const businessNameClient = ApiBusinessNameClient(BUSINESS_NAME_BASE_URL, logger);
 
 const GOV_DELIVERY_BASE_URL =
   process.env.GOV_DELIVERY_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
@@ -95,7 +94,6 @@ const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 
 const addGovDeliveryNewsletter = addNewsletterFactory(userDataClient, govDeliveryNewsletterClient);
 const addToAirtableUserTesting = addToUserTestingFactory(userDataClient, airtableUserTestingClient);
-const searchBusinessName = searchBusinessNameFactory(businessNameClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 
@@ -130,7 +128,7 @@ app.use(
     addToAirtableUserTesting
   )
 );
-app.use("/api", businessNameRouterFactory(searchBusinessName));
+app.use("/api", businessNameRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, myNJSelfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient));

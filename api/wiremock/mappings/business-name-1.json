@@ -1,11 +1,11 @@
 {
   "request": {
-    "method": "POST",
-    "url": "/ws/simple/queryBusinessName"
+    "method": "GET",
+    "url": "/Available?q=Aculyst"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "business-name-response.json",
+    "bodyFileName": "business-name-response-unavailable.json",
     "headers": {
       "Content-Type": "text/json"
     }

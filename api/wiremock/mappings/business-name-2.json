@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/Available?q=My%20Cool%20Business"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "business-name-response-available.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}
