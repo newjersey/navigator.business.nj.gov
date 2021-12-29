@@ -9,6 +9,7 @@ backend:
   commit_messages:
     create: "feat: creating {{collection}} {{slug}}"
     update: "fix: updating {{collection}} {{slug}}"
+# local_backend: true
 publish_mode: editorial_workflow
 media_folder: web/public/img
 logo_url: https://dev.d1fxpe8xsdfr62.amplifyapp.com/img/Navigator-logo.svg
@@ -162,7 +163,7 @@ collections:
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug", name: "urlSlug", widget: "string" }
-      - { label: "Filename", name: "filename", widget: "slug", required: false  }
+      - { label: "Filename", name: "filename", widget: "slug", required: false }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -193,7 +194,7 @@ collections:
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      
+
   - name: "contextual-information"
     label: "Contextual Information"
     folder: "content/src/display-content/contextual-information"
@@ -208,9 +209,9 @@ collections:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
 
-  - name: "onboarding-content"
-    label: "Onboarding Content"
-    folder: "content/src/display-content/onboarding"
+  - name: "owning-onboarding-content"
+    label: "Oscar Onboarding Content"
+    folder: "content/src/display-content/onboarding/owning"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -220,7 +221,41 @@ collections:
       preview: true
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false   }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "Yes Button Copy", name: "radioButtonYesText", widget: "string", required: false }
+      - { label: "No Button Copy", name: "radioButtonNoText", widget: "string", required: false }
+
+  - name: "starting-onboarding-content"
+    label: "Poppy Onboarding Content"
+    folder: "content/src/display-content/onboarding/starting"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "Yes Button Copy", name: "radioButtonYesText", widget: "string", required: false }
+      - { label: "No Button Copy", name: "radioButtonNoText", widget: "string", required: false }
+
+  - name: "profile-content"
+    label: "Profile Content"
+    folder: "content/src/display-content/onboarding/profile"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
       - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
       - { label: "Yes Button Copy", name: "radioButtonYesText", widget: "string", required: false }
       - { label: "No Button Copy", name: "radioButtonNoText", widget: "string", required: false }
@@ -237,12 +272,12 @@ collections:
       preview: true
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false   }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
       - { label: "Question Copy", name: "radioQuestion", widget: "string", required: false }
       - { label: "Yes Button Copy", name: "radioYes", widget: "string", required: false }
       - { label: "No Button Copy", name: "radioNo", widget: "string", required: false }
       - { label: "No Button Content", name: "radioNoContent", widget: "string", required: false }
-      
+
   - name: "business-formation"
     label: "Business Formation"
     folder: "content/src/display-content/business-formation"
@@ -255,9 +290,19 @@ collections:
       preview: true
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false   }
-      - { label: "Radio Button Number Text", name: "radioButtonNumberText", widget: "string", required: false }
-      - { label: "Radio Button Manual Text", name: "radioButtonManualText", widget: "string", required: false }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - {
+          label: "Radio Button Number Text",
+          name: "radioButtonNumberText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Radio Button Manual Text",
+          name: "radioButtonManualText",
+          widget: "string",
+          required: false,
+        }
       - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
       - { label: "cost", name: "cost", widget: "string", required: false }
       - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
@@ -274,7 +319,7 @@ collections:
       preview: true
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false   }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
 
   - name: "settings"
     label: "Roadmap Settings"
@@ -307,3 +352,26 @@ collections:
                 widget: number
                 min: 0
                 value_type: int
+      - label: "Task Dependencies"
+        name: "task-dependencies"
+        file: "content/src/roadmaps/task-dependencies.json"
+        fields:
+          - label: Tasks
+            name: dependencies
+            widget: list
+            fields:
+              - label: Task
+                name: name
+                widget: "relation"
+                collection: "tasks"
+                search_fields: ["{{filename}}", "name", "urlSlug"]
+                value_field: "{{filename}}"
+                display_fields: ["{{filename}}"]
+              - label: Dependencies
+                name: dependencies
+                widget: "relation"
+                collection: "tasks"
+                search_fields: ["{{filename}}", "name", "urlSlug"]
+                value_field: "{{filename}}"
+                display_fields: ["{{filename}}"]
+                multiple: true

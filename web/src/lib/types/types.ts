@@ -429,7 +429,8 @@ export interface TaskLink {
 }
 
 export type TaskDependencies = {
-  [filename: string]: string[];
+  name: string;
+  dependencies: string[];
 };
 
 export interface Filing {
