@@ -239,13 +239,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
         <BusinessFormationDocuments />
         <BusinessFormationNotifications />
         <Content>{props.displayContent.disclaimer.contentMd}</Content>{" "}
-        <div className="margin-top-2 ">
-          <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
-            <Button loading={isLoading} style="primary" onClick={submitFormationFormData}>
-              {BusinessFormationDefaults.submitButtonText}
-            </Button>{" "}
-          </div>
-        </div>
         {userData.formationData.formationResponse &&
           !isLoading &&
           !showRequiredFieldsError &&
@@ -274,6 +267,13 @@ export const BusinessFormation = (props: Props): ReactElement => {
             </ul>
           </Alert>
         )}
+        <div className="margin-top-2 ">
+          <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
+            <Button loading={isLoading} style="primary" onClick={submitFormationFormData}>
+              {BusinessFormationDefaults.submitButtonText}
+            </Button>{" "}
+          </div>
+        </div>
       </div>
     </FormationContext.Provider>
   );
