@@ -27,7 +27,7 @@ export const BusinessFormationDefaults: Record<string, string> = {
   contactFirstNameErrorText: "First name is required",
   contactLastNameErrorText: "Last name is required",
   contactPhoneNumberErrorText: "Phone number is required",
-  missingFieldsOnSubmitModalText: "Cannot submit. The following fields are required:",
+  missingFieldsOnSubmitModalText: "Cannot submit. The following fields are missing or invalid:",
   alreadySubmittedHeader: "Successfully Submitted",
   alreadySubmittedText:
     "You've already successfully submitted your business formation. " +

@@ -105,6 +105,14 @@ export const BusinessFormation = (props: Props): ReactElement => {
   }, userData);
 
   const requiredFieldsWithError = useMemo(() => {
+    const isStartDateValid = (): boolean => {
+      if (!formationFormData.businessStartDate) return false;
+      return (
+        dayjs(formationFormData.businessStartDate).isValid() &&
+        dayjs(formationFormData.businessStartDate).isAfter(dayjs().subtract(1, "day"), "day")
+      );
+    };
+
     let requiredFields: FormationFields[] = [
       "businessSuffix",
       "businessAddressLine1",
@@ -131,7 +139,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
       ];
     }
 
-    return requiredFields.filter((it) => errorMap[it].invalid || !formationFormData[it]);
+    const invalidFields = requiredFields.filter((it) => errorMap[it].invalid || !formationFormData[it]);
+    if (!isStartDateValid()) {
+      invalidFields.push("businessStartDate");
+    }
+    return invalidFields;
   }, [formationFormData, errorMap]);
 
   const submitFormationFormData = async () => {

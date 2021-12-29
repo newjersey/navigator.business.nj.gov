@@ -446,6 +446,13 @@ describe("<BusinessFormation />", () => {
       ).not.toBeInTheDocument();
     });
 
+    it("validates date on submit", async () => {
+      renderWithData({ businessStartDate: dayjs().subtract(1, "day").format("YYYY-MM-DD") });
+      await clickSubmit();
+      expect(subject.getByText(BusinessFormationDefaults.startDateErrorText)).toBeInTheDocument();
+      expect(subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)).toBeInTheDocument();
+    });
+
     it("uses name from profile when business formation data is not set", async () => {
       const user = generateUser({ name: "Mike Jones" });
       const profileData = generateLLCProfileData({});
