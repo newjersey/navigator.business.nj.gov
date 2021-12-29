@@ -61,7 +61,11 @@ export const BusinessFormationDocuments = (): ReactElement => {
           <tr>
             <td>
               <div className="business-formation-documents-table-checkboxes">
-                <Checkbox onChange={handleCertificateOfStandingClick} id="certificateOfStanding" />
+                <Checkbox
+                  onChange={handleCertificateOfStandingClick}
+                  id="certificateOfStanding"
+                  checked={state.formationFormData.certificateOfStanding}
+                />
               </div>
             </td>
             <td>
@@ -78,6 +82,7 @@ export const BusinessFormationDocuments = (): ReactElement => {
                 <Checkbox
                   onChange={handleCertifiedFormationDocumentClick}
                   id="certifiedCopyOfFormationDocument"
+                  checked={state.formationFormData.certifiedCopyOfFormationDocument}
                 />
               </div>
             </td>

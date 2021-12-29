@@ -9,14 +9,21 @@ import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { splitFullName } from "@/lib/domain-logic/splitFullName";
 import {
   createEmptyFormationDisplayContent,
   FieldStatus,
   FormationDisplayContent,
   Task,
 } from "@/lib/types/types";
-import { camelCaseToSentence, getModifiedTaskContent, templateEval } from "@/lib/utils/helpers";
+import {
+  camelCaseToSentence,
+  getModifiedTaskContent,
+  templateEval,
+  useMountEffectWhenDefined,
+} from "@/lib/utils/helpers";
 import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useMemo, useState } from "react";
 import { Button } from "../njwds-extended/Button";
@@ -75,6 +82,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
@@ -83,6 +91,18 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const unlockedByTaskLinks = taskFromRoadmap
     ? taskFromRoadmap.unlockedBy.filter((it) => userData?.taskProgress[it.id] !== "COMPLETED")
     : [];
+
+  useMountEffectWhenDefined(() => {
+    if (!userData) return;
+    const splitName = splitFullName(userData.user.name);
+    setFormationFormData({
+      ...userData.formationData.formationFormData,
+      businessStartDate:
+        userData.formationData.formationFormData.businessStartDate || dayjs().format("YYYY-MM-DD"),
+      contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
+      contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
+    });
+  }, userData);
 
   const requiredFieldsWithError = useMemo(() => {
     let requiredFields: FormationFields[] = [
@@ -236,7 +256,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
                   <li key={it.field}>
                     {it.field}
                     <ul>
-                      <li>{it.message}</li>
+                      <li>
+                        <Content>{it.message}</Content>
+                      </li>
                     </ul>
                   </li>
                 ))}
