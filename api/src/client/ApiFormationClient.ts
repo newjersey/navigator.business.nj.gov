@@ -15,11 +15,13 @@ type ApiConfig = {
 export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): FormationClient => {
   const form = (userData: UserData): Promise<FormationSubmitResponse> => {
     const postBody = makePostBody(userData, config);
-    logger.LogInfo(`Formation - NICUSA - Request Sent to ${config.baseUrl}. data: ${postBody}`);
+    logger.LogInfo(
+      `Formation - NICUSA - Request Sent to ${config.baseUrl}. data: ${JSON.stringify(postBody)}`
+    );
     return axios
       .post(config.baseUrl, postBody)
       .then((response) => {
-        logger.LogInfo(`Formation - NICUSA - Response received: ${response}`);
+        logger.LogInfo(`Formation - NICUSA - Response received: ${JSON.stringify(response.data)}`);
         if (response.data.Success && response.data.Success === true) {
           const successResponse = response.data as ApiResponse;
           return {
