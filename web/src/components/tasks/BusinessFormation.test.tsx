@@ -23,6 +23,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   createEmptyFormationFormData,
+  FormationFormData,
   FormationSubmitResponse,
   LookupLegalStructureById,
   ProfileData,
@@ -112,13 +113,6 @@ describe("<BusinessFormation />", () => {
   });
 
   describe("when LLC", () => {
-    const generateLLCProfileData = (data: Partial<ProfileData>): ProfileData => {
-      return generateProfileData({
-        legalStructureId: "limited-liability-company",
-        ...data,
-      });
-    };
-
     it("shows success page when form already submitted", () => {
       const profileData = generateLLCProfileData({});
       const formationData = generateFormationData({
@@ -153,9 +147,7 @@ describe("<BusinessFormation />", () => {
 
     it("displays City (Main Business Address) from profile data", () => {
       const profileData = generateLLCProfileData({
-        municipality: generateMunicipality({
-          name: "Newark",
-        }),
+        municipality: generateMunicipality({ name: "Newark" }),
       });
       subject = renderTask({ profileData });
       expect(subject.getByText("Newark", { exact: false })).toBeInTheDocument();
@@ -261,7 +253,7 @@ describe("<BusinessFormation />", () => {
       });
     });
 
-    it("updates userData when business formation data is submitted", async () => {
+    it("fills form, submits, and updates userData", async () => {
       const profileData = generateLLCProfileData({});
       const formationData = {
         formationFormData: createEmptyFormationFormData(),
@@ -333,19 +325,13 @@ describe("<BusinessFormation />", () => {
     });
 
     it("defaults date picker to current date when it has no value", () => {
-      const profileData = generateLLCProfileData({});
-      const formationFormData = createEmptyFormationFormData();
-      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
-
+      renderWithData({ businessStartDate: "" });
       const today = dayjs().format("MMM D, YYYY");
       expect(subject.getByLabelText(`Choose date, selected date is ${today}`)).toBeInTheDocument();
     });
 
     it("defaults to registered agent number and toggles to manual with radio button", () => {
-      const profileData = generateLLCProfileData({});
-      const formationFormData = createEmptyFormationFormData();
-      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
-
+      renderWithData({ agentNumberOrManual: "NUMBER" });
       expect(subject.queryByTestId("agent-number")).toBeInTheDocument();
       expect(subject.queryByTestId("agent-name")).not.toBeInTheDocument();
 
@@ -361,10 +347,7 @@ describe("<BusinessFormation />", () => {
     });
 
     it("adds additional signers", async () => {
-      const profileData = generateLLCProfileData({});
-      const formationFormData = createEmptyFormationFormData();
-      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
-      fillAllFieldsBut(["Additional signer"]);
+      renderWithData({ additionalSigners: [] });
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fillText("Additional signer 0", "Red Skull");
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
@@ -375,13 +358,7 @@ describe("<BusinessFormation />", () => {
     });
 
     it("deletes an additional signer", async () => {
-      const profileData = generateLLCProfileData({});
-      const formationData = {
-        formationFormData: createEmptyFormationFormData(),
-        formationResponse: undefined,
-      };
-      subject = renderTask({ profileData, formationData });
-      fillAllFieldsBut(["Additional signer"]);
+      renderWithData({ additionalSigners: [] });
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fillText("Additional signer 0", "Red Skull");
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
@@ -393,13 +370,7 @@ describe("<BusinessFormation />", () => {
     });
 
     it("ignores empty signer fields", async () => {
-      const profileData = generateLLCProfileData({});
-      const formationData = {
-        formationFormData: createEmptyFormationFormData(),
-        formationResponse: undefined,
-      };
-      subject = renderTask({ profileData, formationData });
-      fillAllFieldsBut(["Additional signer"]);
+      renderWithData({ additionalSigners: [] });
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
@@ -412,10 +383,7 @@ describe("<BusinessFormation />", () => {
     });
 
     it("does not add more than 10 signers", () => {
-      const profileData = generateLLCProfileData({});
-      const formationFormData = createEmptyFormationFormData();
-      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
-      fillAllFieldsBut(["Additional signer"]);
+      renderWithData({ additionalSigners: [] });
       for (let i = 0; i < 8; i++) {
         fireEvent.click(
           subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false })
@@ -431,10 +399,6 @@ describe("<BusinessFormation />", () => {
     });
 
     it("redirects to payment redirect URL on success", async () => {
-      const profileData = generateLLCProfileData({});
-      const formationFormData = createEmptyFormationFormData();
-      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
-
       mockApiResponse(
         generateFormationSubmitResponse({
           success: true,
@@ -442,16 +406,12 @@ describe("<BusinessFormation />", () => {
         })
       );
 
-      fillAllFieldsBut([]);
+      renderWithData({});
       await clickSubmit();
       expect(mockPush).toHaveBeenCalledWith("www.example.com");
     });
 
     it("displays error messages on error", async () => {
-      const profileData = generateLLCProfileData({});
-      const formationFormData = createEmptyFormationFormData();
-      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
-
       mockApiResponse(
         generateFormationSubmitResponse({
           success: false,
@@ -462,7 +422,7 @@ describe("<BusinessFormation />", () => {
         })
       );
 
-      fillAllFieldsBut([]);
+      renderWithData({});
       await clickSubmit();
       expect(mockPush).not.toHaveBeenCalled();
       expect(subject.getByText("some field 1")).toBeInTheDocument();
@@ -472,10 +432,7 @@ describe("<BusinessFormation />", () => {
     });
 
     it("displays alert and highlights fields when submitting with missing fields", async () => {
-      const profileData = generateLLCProfileData({});
-      const formationFormData = createEmptyFormationFormData();
-      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
-      fillAllFieldsBut(["Business address line1"]);
+      renderWithData({ businessAddressLine1: "" });
       await clickSubmit();
       expect(subject.getByText(BusinessFormationDefaults.businessAddressLine1ErrorText)).toBeInTheDocument();
       expect(subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)).toBeInTheDocument();
@@ -499,8 +456,8 @@ describe("<BusinessFormation />", () => {
         formationData: generateFormationData({ formationFormData }),
       });
 
-      expect((subject.getByLabelText("Contact first name") as HTMLInputElement).value).toEqual("Mike");
-      expect((subject.getByLabelText("Contact last name") as HTMLInputElement).value).toEqual("Jones");
+      expect(getInputElementByLabel("Contact first name").value).toEqual("Mike");
+      expect(getInputElementByLabel("Contact last name").value).toEqual("Jones");
     });
 
     it("uses name from formation data when it exists", async () => {
@@ -516,73 +473,63 @@ describe("<BusinessFormation />", () => {
         formationData: generateFormationData({ formationFormData }),
       });
 
-      expect((subject.getByLabelText("Contact first name") as HTMLInputElement).value).toEqual("Actual");
-      expect((subject.getByLabelText("Contact last name") as HTMLInputElement).value).toEqual("Name");
+      expect(getInputElementByLabel("Contact first name").value).toEqual("Actual");
+      expect(getInputElementByLabel("Contact last name").value).toEqual("Name");
     });
 
     describe("required fields", () => {
-      beforeEach(() => {
-        const profileData = generateLLCProfileData({});
-        const formationData = {
-          formationFormData: createEmptyFormationFormData(),
-          formationResponse: undefined,
-        };
-        const user = generateUser({ name: "" });
-        subject = renderTask({ profileData, formationData, user });
-      });
-
       describe("does not submit when missing a required field", () => {
         it("Business suffix", async () => {
-          fillAllFieldsBut(["Business suffix"]);
+          renderWithData({ businessSuffix: undefined });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         it("Business address line1", async () => {
-          fillAllFieldsBut(["Business address line1"]);
+          renderWithData({ businessAddressLine1: "" });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         it("Business address zip code", async () => {
-          fillAllFieldsBut(["Business address zip code"]);
+          renderWithData({ businessAddressZipCode: "" });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         it("signer", async () => {
-          fillAllFieldsBut(["Signer"]);
+          renderWithData({ signer: "" });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         it("Contact first name", async () => {
-          fillAllFieldsBut(["Contact first name"]);
+          renderWithData({ contactFirstName: "" });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         it("Contact last name", async () => {
-          fillAllFieldsBut(["Contact last name"]);
+          renderWithData({ contactLastName: "" });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         it("Contact phone number", async () => {
-          fillAllFieldsBut(["Contact phone number"]);
+          renderWithData({ contactPhoneNumber: "" });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         it("Payment type", async () => {
-          fillAllFieldsBut(["Payment type"]);
+          renderWithData({ paymentType: undefined });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
 
         describe("when agent number selected", () => {
           it("agent number", async () => {
-            fillAllFieldsBut(["Agent number"], { agentRadio: "NUMBER" });
+            renderWithData({ agentNumber: "", agentNumberOrManual: "NUMBER" });
             await clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
@@ -590,33 +537,31 @@ describe("<BusinessFormation />", () => {
 
         describe("when agent manual selected", () => {
           it("agent name", async () => {
-            fillAllFieldsBut(["Agent name"], { agentRadio: "MANUAL_ENTRY" });
+            renderWithData({ agentName: "", agentNumberOrManual: "MANUAL_ENTRY" });
             await clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
 
           it("agent email", async () => {
-            fillAllFieldsBut(["Agent email"], { agentRadio: "MANUAL_ENTRY" });
+            renderWithData({ agentEmail: "", agentNumberOrManual: "MANUAL_ENTRY" });
             await clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
 
           it("agent address line 1", async () => {
-            fillAllFieldsBut(["Agent office address line1"], { agentRadio: "MANUAL_ENTRY" });
+            renderWithData({ agentOfficeAddressLine1: "", agentNumberOrManual: "MANUAL_ENTRY" });
             await clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
 
           it("Agent office address city", async () => {
-            fillAllFieldsBut(["Agent office address line1", "Agent office address city"], {
-              agentRadio: "MANUAL_ENTRY",
-            });
+            renderWithData({ agentOfficeAddressCity: "", agentNumberOrManual: "MANUAL_ENTRY" });
             await clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
 
           it("Agent office address zip code", async () => {
-            fillAllFieldsBut(["Agent office address zip code"], { agentRadio: "MANUAL_ENTRY" });
+            renderWithData({ agentOfficeAddressZipCode: "", agentNumberOrManual: "MANUAL_ENTRY" });
             await clickSubmit();
             expect(userDataWasNotUpdated()).toEqual(true);
           });
@@ -625,63 +570,38 @@ describe("<BusinessFormation />", () => {
 
       describe("submits when missing optional field", () => {
         it("everything present", async () => {
-          fillAllFieldsBut([]);
+          renderWithData({});
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("agent address line 2", async () => {
-          fillAllFieldsBut(["Agent office address line2"], { agentRadio: "MANUAL_ENTRY" });
+          renderWithData({ agentOfficeAddressLine2: "", agentNumberOrManual: "MANUAL_ENTRY" });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("business address line 2", async () => {
-          fillAllFieldsBut(["Business address line2"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
-          expect(userDataWasNotUpdated()).toEqual(false);
-        });
-
-        it("Opt in annual report", async () => {
-          fillAllFieldsBut(["Opt in annual report"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
-          expect(userDataWasNotUpdated()).toEqual(false);
-        });
-
-        it("Opt in corp watch", async () => {
-          fillAllFieldsBut(["Opt in corp watch"], { agentRadio: "MANUAL_ENTRY" });
+          renderWithData({ businessAddressLine2: "" });
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(false);
         });
 
         it("additional signer", async () => {
-          fillAllFieldsBut(["Additional signer"]);
+          renderWithData({ additionalSigners: [] });
           await clickSubmit();
-          expect(userDataWasNotUpdated()).toEqual(false);
-        });
-
-        it("Opt in corp watch", async () => {
-          fillAllFieldsBut(["Opt in corp watch"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
-          expect(userDataWasNotUpdated()).toEqual(false);
-        });
-
-        it("Certificate of standing", async () => {
-          fillAllFieldsBut(["Certificate of standing"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
-          expect(userDataWasNotUpdated()).toEqual(false);
-          expect(subject.getByText("$150.00")).toBeInTheDocument();
-        });
-
-        it("Certified copy of formation document", async () => {
-          fillAllFieldsBut(["Certified copy of formation document"], { agentRadio: "MANUAL_ENTRY" });
-          await clickSubmit();
-          await waitFor(() => expect(subject.getByText("$175.00")).toBeInTheDocument());
           expect(userDataWasNotUpdated()).toEqual(false);
         });
       });
     });
   });
+
+  const generateLLCProfileData = (data: Partial<ProfileData>): ProfileData => {
+    return generateProfileData({
+      legalStructureId: "limited-liability-company",
+      ...data,
+    });
+  };
 
   const fillText = (label: string, value: string) => {
     fireEvent.change(subject.getByLabelText(label), { target: { value: value } });
@@ -727,79 +647,13 @@ describe("<BusinessFormation />", () => {
     return subject.getByLabelText(label) as HTMLInputElement;
   };
 
-  const fillAllFieldsBut = (
-    fieldLabels: string[],
-    other: { agentRadio: "NUMBER" | "MANUAL_ENTRY" } = { agentRadio: "NUMBER" }
-  ) => {
-    if (!fieldLabels.includes("Business suffix")) {
-      selectByText("Business suffix", "LLC");
-    }
-    if (!fieldLabels.includes("Business address line1")) {
-      fillText("Business address line1", "1234 main street");
-    }
-    if (!fieldLabels.includes("Business address line2")) {
-      fillText("Business address line2", "Suite 304");
-    }
-    if (!fieldLabels.includes("Business address zip code")) {
-      fillText("Business address zip code", "12345");
-    }
-    if (!fieldLabels.includes("Signer")) {
-      fillText("Signer", "Elrond");
-    }
-    if (!fieldLabels.includes("Additional signer")) {
-      fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
-      fillText("Additional signer 0", "Red Skull");
-    }
-    if (!fieldLabels.includes("Contact first name")) {
-      fillText("Contact first name", "John");
-    }
-    if (!fieldLabels.includes("Contact last name")) {
-      fillText("Contact last name", "Smith");
-    }
-    if (!fieldLabels.includes("Contact phone number")) {
-      fillText("Contact phone number", "1234567890");
-    }
-    if (!fieldLabels.includes("Payment type")) {
-      selectByText("Payment Type", BusinessFormationDefaults.creditCardPaymentTypeLabel);
-    }
-    if (!fieldLabels.includes("Opt in annual report")) {
-      selectCheckBox("Annual report");
-    }
-    if (!fieldLabels.includes("Opt in corp watch")) {
-      selectCheckBox("Corp watch");
-    }
-    if (!fieldLabels.includes("Certificate of standing")) {
-      selectCheckBox("Certificate of standing");
-    }
-    if (!fieldLabels.includes("Certified copy of formation document")) {
-      selectCheckBox("Certified copy of formation document");
-    }
-
-    if (other.agentRadio === "NUMBER") {
-      if (!fieldLabels.includes("Agent number")) {
-        fillText("Agent number", "1234567890");
-      }
-    } else {
-      chooseRadio("registered-agent-manual");
-
-      if (!fieldLabels.includes("Agent name")) {
-        fillText("Agent name", "Hugo Weaving");
-      }
-      if (!fieldLabels.includes("Agent email")) {
-        fillText("Agent email", "name@example.com");
-      }
-      if (!fieldLabels.includes("Agent office address line1")) {
-        fillText("Agent office address line1", "400 Pennsylvania Ave");
-      }
-      if (!fieldLabels.includes("Agent office address line2")) {
-        fillText("Agent office address line2", "Suite 101");
-      }
-      if (!fieldLabels.includes("Agent office address city")) {
-        fillText("Agent office address city", "Newark");
-      }
-      if (!fieldLabels.includes("Agent office address zip code")) {
-        fillText("Agent office address zip code", "45678");
-      }
-    }
+  const renderWithData = (formationFormData: Partial<FormationFormData>): void => {
+    const profileData = generateLLCProfileData({});
+    const formationData = {
+      formationFormData: generateFormationFormData(formationFormData),
+      formationResponse: undefined,
+    };
+    const user = generateUser({ name: "" });
+    subject = renderTask({ profileData, formationData, user });
   };
 });
