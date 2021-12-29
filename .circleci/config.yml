@@ -479,6 +479,16 @@ workflows:
           requires:
             - build
       - integration-tests:
+          name: Integration Tests - Group 4
+          suite: group4
+          filters:
+            branches:
+              ignore:
+                - main
+                - /^release-.*/
+          requires:
+            - build
+      - integration-tests:
           name: Integration Tests - Group 1
           enable-dashboard: true
           suite: group1
@@ -502,6 +512,16 @@ workflows:
           name: Integration Tests - Group 3
           enable-dashboard: true
           suite: group3
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Group 4
+          enable-dashboard: true
+          suite: group4
           filters:
             branches:
               only:
