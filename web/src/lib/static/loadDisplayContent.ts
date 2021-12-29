@@ -1,6 +1,5 @@
 import {
   emptyOwningFlowContent,
-  emptyProfileContent,
   emptyStartingFlowContent,
   IndustryFieldContent,
   LegalFieldContent,
@@ -34,8 +33,6 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     path.join(displayContentDir, "onboarding", onboardingContentFolder[type], filename);
   const loadFile = (filename: string, type: UserContentType): string =>
     fs.readFileSync(getPath(filename, type), "utf8");
-  const fileExists = (filename: string, type: UserContentType): boolean =>
-    fs.existsSync(getPath(filename, type));
 
   const getRadioFieldContent = (filename: string, type: UserContentType): RadioFieldContent => {
     const markdown = getMarkdown(loadFile(filename, type));
@@ -133,14 +130,20 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
 
   const profileContent: Partial<ProfileContent> = Object.keys(fieldFunctions)
     .filter((name) => profileDisplayFields.includes(name as keyof ProfileContent))
-    .filter((name) => fileExists(name, "PROFILE"))
-    .reduce(
-      (content, name) => ({
-        ...content,
-        [name as keyof ProfileContent]: fieldFunctions[name as keyof ProfileContent]("PROFILE"),
-      }),
-      emptyProfileContent
-    );
+    .reduce((content, name) => {
+      try {
+        return {
+          ...content,
+          [name as keyof ProfileContent]: fieldFunctions[name as keyof ProfileContent]("PROFILE"),
+        };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        if (error.code !== "ENOENT") {
+          throw error;
+        }
+        return content;
+      }
+    }, {});
 
   const owningFlowContent: OwningFlowContent = Object.keys(fieldFunctions)
     .filter((name) => owningFlowDisplayFields.includes(name as keyof OwningFlowContent))

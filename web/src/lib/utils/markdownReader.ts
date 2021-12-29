@@ -29,7 +29,7 @@ type TaskGrayMatter = {
   postOnboardingQuestion: string;
 };
 
-type MarkdownResult = {
+export type MarkdownResult = {
   content: string;
   grayMatter: unknown;
 };
