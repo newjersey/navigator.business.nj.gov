@@ -29,7 +29,10 @@ export const BusinessFormationNotifications = (): ReactElement => {
             style={{ display: "table" }}
             control={
               <div style={{ display: "table-cell", width: "42px" }}>
-                <Checkbox onChange={handleAnnualReportClick} />
+                <Checkbox
+                  onChange={handleAnnualReportClick}
+                  checked={state.formationFormData.annualReportNotification}
+                />
               </div>
             }
             label={<Content>{state.displayContent.optInAnnualReport.contentMd}</Content>}
@@ -38,7 +41,10 @@ export const BusinessFormationNotifications = (): ReactElement => {
             style={{ display: "table" }}
             control={
               <div style={{ display: "table-cell", width: "42px" }}>
-                <Checkbox onChange={handleCorpWatchClick} />
+                <Checkbox
+                  onChange={handleCorpWatchClick}
+                  checked={state.formationFormData.corpWatchNotification}
+                />
               </div>
             }
             label={<Content>{state.displayContent.optInCorpWatch.contentMd}</Content>}

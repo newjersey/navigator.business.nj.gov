@@ -4,11 +4,13 @@ import * as api from "@/lib/api-client/apiClient";
 import {
   generateFormationData,
   generateFormationDisplayContent,
+  generateFormationFormData,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
   generateMunicipality,
   generateProfileData,
   generateTask,
+  generateUser,
   generateUserData,
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -53,7 +55,7 @@ describe("<BusinessFormation />", () => {
       optInAnnualReport: { contentMd: "Annual report" },
       optInCorpWatch: { contentMd: "Corp watch" },
       officialFormationDocument: {
-        contentMd: "",
+        contentMd: "Official formation document",
         cost: "$125.00",
       },
       certificateOfStanding: {
@@ -170,12 +172,108 @@ describe("<BusinessFormation />", () => {
       ).toBeInTheDocument();
     });
 
+    it("auto-fills fields from userData if it exists and agent number is selected", async () => {
+      const profileData = generateLLCProfileData({});
+      const formationData = {
+        formationFormData: generateFormationFormData({
+          businessSuffix: "LTD LIABILITY CO",
+          businessStartDate: dayjs().format("YYYY-MM-DD"),
+          businessAddressLine1: `123 main street`,
+          businessAddressLine2: `suite 102`,
+          businessAddressState: "NJ",
+          businessAddressZipCode: `07601`,
+          agentNumber: `123465798`,
+          signer: `signer 1`,
+          additionalSigners: [`signer 2`, "signer 3"],
+          paymentType: "CC",
+          contactFirstName: `John`,
+          contactLastName: `Smith`,
+          contactPhoneNumber: `6024153214`,
+          annualReportNotification: true,
+          corpWatchNotification: true,
+          officialFormationDocument: true,
+          certificateOfStanding: true,
+          certifiedCopyOfFormationDocument: true,
+        }),
+        formationResponse: undefined,
+      };
+
+      subject = renderTask({ profileData, formationData });
+      chooseRadio("registered-agent-number");
+
+      await waitFor(() => {
+        expect(subject.getByText("LTD LIABILITY CO")).toBeInTheDocument();
+
+        const today = dayjs().format("MMM D, YYYY");
+        expect(getInputElementByLabel(`Choose date, selected date is ${today}`).value).toBe(
+          dayjs().format("MM/DD/YYYY")
+        );
+
+        expect(getInputElementByLabel("Business address line1").value).toBe("123 main street");
+        expect(getInputElementByLabel("Business address line2").value).toBe("suite 102");
+        expect(getInputElementByLabel("Business address state").value).toBe("NJ");
+        expect(getInputElementByLabel("Business address zip code").value).toBe("07601");
+        expect(getInputElementByLabel("Agent number").value).toBe("123465798");
+        expect(getInputElementByLabel("Signer").value).toBe("signer 1");
+        expect(getInputElementByLabel("Additional signer 0").value).toBe("signer 2");
+        expect(getInputElementByLabel("Additional signer 1").value).toBe("signer 3");
+        expect(subject.getByText(BusinessFormationDefaults.creditCardPaymentTypeLabel)).toBeInTheDocument();
+        expect(getInputElementByLabel("Contact first name").value).toBe("John");
+        expect(getInputElementByLabel("Contact last name").value).toBe("Smith");
+        expect(getInputElementByLabel("Contact phone number").value).toBe("(602) 415-3214");
+        expect(getInputElementByLabel("Annual report").checked).toBe(true);
+        expect(getInputElementByLabel("Corp watch").checked).toBe(true);
+        expect(getInputElementByLabel("Official formation document").checked).toBe(true);
+        expect(getInputElementByLabel("Certificate of standing").checked).toBe(true);
+        expect(getInputElementByLabel("Certified copy of formation document").checked).toBe(true);
+      });
+    });
+
+    it("auto-fills fields from userData if it exists with agent manual entry", async () => {
+      const profileData = generateLLCProfileData({});
+      const formationData = {
+        formationFormData: generateFormationFormData({
+          paymentType: "ACH",
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentName: `agent 1`,
+          agentEmail: `agent@email.com`,
+          agentOfficeAddressLine1: `123 agent address`,
+          agentOfficeAddressLine2: `agent suite 201`,
+          agentOfficeAddressCity: `agent-city-402`,
+          agentOfficeAddressState: "DC",
+          agentOfficeAddressZipCode: `998877`,
+        }),
+        formationResponse: undefined,
+      };
+
+      subject = renderTask({ profileData, formationData });
+      chooseRadio("registered-agent-manual");
+
+      await waitFor(() => {
+        expect(subject.getByText(BusinessFormationDefaults.achPaymentTypeLabel)).toBeInTheDocument();
+        expect(getInputElementByLabel("Agent name").value).toBe("agent 1");
+        expect(getInputElementByLabel("Agent email").value).toBe("agent@email.com");
+        expect(getInputElementByLabel("Agent office address line1").value).toBe("123 agent address");
+        expect(getInputElementByLabel("Agent office address line2").value).toBe("agent suite 201");
+        expect(getInputElementByLabel("Agent office address city").value).toBe("agent-city-402");
+        expect(getInputElementByLabel("Agent office address state").value).toBe("DC");
+        expect(getInputElementByLabel("Agent office address zip code").value).toBe("998877");
+      });
+    });
+
     it("updates userData when business formation data is submitted", async () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationData = {
+        formationFormData: createEmptyFormationFormData(),
+        formationResponse: undefined,
+      };
+      subject = renderTask({ profileData, formationData });
 
       selectByText("Business suffix", "LLC");
       const threeDaysFromNow = dayjs().add(3, "days");
+      if (threeDaysFromNow.month() !== dayjs().month()) {
+        selectNextMonth();
+      }
       selectDate(threeDaysFromNow);
       fillText("Business address line1", "1234 main street");
       fillText("Business address line2", "Suite 304");
@@ -245,7 +343,8 @@ describe("<BusinessFormation />", () => {
 
     it("defaults to registered agent number and toggles to manual with radio button", () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationFormData = createEmptyFormationFormData();
+      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
 
       expect(subject.queryByTestId("agent-number")).toBeInTheDocument();
       expect(subject.queryByTestId("agent-name")).not.toBeInTheDocument();
@@ -263,7 +362,8 @@ describe("<BusinessFormation />", () => {
 
     it("adds additional signers", async () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationFormData = createEmptyFormationFormData();
+      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
       fillAllFieldsBut(["Additional signer"]);
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fillText("Additional signer 0", "Red Skull");
@@ -276,7 +376,11 @@ describe("<BusinessFormation />", () => {
 
     it("deletes an additional signer", async () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationData = {
+        formationFormData: createEmptyFormationFormData(),
+        formationResponse: undefined,
+      };
+      subject = renderTask({ profileData, formationData });
       fillAllFieldsBut(["Additional signer"]);
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fillText("Additional signer 0", "Red Skull");
@@ -290,7 +394,11 @@ describe("<BusinessFormation />", () => {
 
     it("ignores empty signer fields", async () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationData = {
+        formationFormData: createEmptyFormationFormData(),
+        formationResponse: undefined,
+      };
+      subject = renderTask({ profileData, formationData });
       fillAllFieldsBut(["Additional signer"]);
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
       fireEvent.click(subject.getByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false }));
@@ -305,7 +413,8 @@ describe("<BusinessFormation />", () => {
 
     it("does not add more than 10 signers", () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationFormData = createEmptyFormationFormData();
+      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
       fillAllFieldsBut(["Additional signer"]);
       for (let i = 0; i < 8; i++) {
         fireEvent.click(
@@ -323,7 +432,8 @@ describe("<BusinessFormation />", () => {
 
     it("redirects to payment redirect URL on success", async () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationFormData = createEmptyFormationFormData();
+      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
 
       mockApiResponse(
         generateFormationSubmitResponse({
@@ -339,7 +449,8 @@ describe("<BusinessFormation />", () => {
 
     it("displays error messages on error", async () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationFormData = createEmptyFormationFormData();
+      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
 
       mockApiResponse(
         generateFormationSubmitResponse({
@@ -362,7 +473,8 @@ describe("<BusinessFormation />", () => {
 
     it("displays alert and highlights fields when submitting with missing fields", async () => {
       const profileData = generateLLCProfileData({});
-      subject = renderTask({ profileData });
+      const formationFormData = createEmptyFormationFormData();
+      subject = renderTask({ profileData, formationData: generateFormationData({ formationFormData }) });
       fillAllFieldsBut(["Business address line1"]);
       await clickSubmit();
       expect(subject.getByText(BusinessFormationDefaults.businessAddressLine1ErrorText)).toBeInTheDocument();
@@ -377,10 +489,46 @@ describe("<BusinessFormation />", () => {
       ).not.toBeInTheDocument();
     });
 
+    it("uses name from profile when business formation data is not set", async () => {
+      const user = generateUser({ name: "Mike Jones" });
+      const profileData = generateLLCProfileData({});
+      const formationFormData = createEmptyFormationFormData();
+      subject = renderTask({
+        profileData,
+        user,
+        formationData: generateFormationData({ formationFormData }),
+      });
+
+      expect((subject.getByLabelText("Contact first name") as HTMLInputElement).value).toEqual("Mike");
+      expect((subject.getByLabelText("Contact last name") as HTMLInputElement).value).toEqual("Jones");
+    });
+
+    it("uses name from formation data when it exists", async () => {
+      const user = generateUser({ name: "Some Wrong Name" });
+      const profileData = generateLLCProfileData({});
+      const formationFormData = generateFormationFormData({
+        contactFirstName: "Actual",
+        contactLastName: "Name",
+      });
+      subject = renderTask({
+        profileData,
+        user,
+        formationData: generateFormationData({ formationFormData }),
+      });
+
+      expect((subject.getByLabelText("Contact first name") as HTMLInputElement).value).toEqual("Actual");
+      expect((subject.getByLabelText("Contact last name") as HTMLInputElement).value).toEqual("Name");
+    });
+
     describe("required fields", () => {
       beforeEach(() => {
         const profileData = generateLLCProfileData({});
-        subject = renderTask({ profileData });
+        const formationData = {
+          formationFormData: createEmptyFormationFormData(),
+          formationResponse: undefined,
+        };
+        const user = generateUser({ name: "" });
+        subject = renderTask({ profileData, formationData, user });
       });
 
       describe("does not submit when missing a required field", () => {
@@ -407,21 +555,25 @@ describe("<BusinessFormation />", () => {
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
+
         it("Contact first name", async () => {
           fillAllFieldsBut(["Contact first name"]);
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
+
         it("Contact last name", async () => {
           fillAllFieldsBut(["Contact last name"]);
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
+
         it("Contact phone number", async () => {
           fillAllFieldsBut(["Contact phone number"]);
           await clickSubmit();
           expect(userDataWasNotUpdated()).toEqual(true);
         });
+
         it("Payment type", async () => {
           fillAllFieldsBut(["Payment type"]);
           await clickSubmit();
@@ -554,6 +706,12 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(chosenDate);
   };
 
+  const selectNextMonth = () => {
+    const today = dayjs().format("MMM D, YYYY");
+    fireEvent.click(subject.getByLabelText(`Choose date, selected date is ${today}`));
+    fireEvent.click(subject.getByLabelText(`Next month`));
+  };
+
   const chooseRadio = (value: string) => {
     fireEvent.click(subject.getByTestId(value));
   };
@@ -563,6 +721,10 @@ describe("<BusinessFormation />", () => {
     await act(async () => {
       await flushPromises();
     });
+  };
+
+  const getInputElementByLabel = (label: string): HTMLInputElement => {
+    return subject.getByLabelText(label) as HTMLInputElement;
   };
 
   const fillAllFieldsBut = (

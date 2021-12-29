@@ -13,3 +13,5 @@ global.console.warn = (message) => {
 global.console.error = (message) => {
   throw message;
 };
+
+jest.setTimeout(10000);

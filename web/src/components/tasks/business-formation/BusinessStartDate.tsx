@@ -17,10 +17,6 @@ export const BusinessStartDate = (): ReactElement => {
 
   useMountEffect(() => {
     if (!state.formationFormData.businessStartDate) {
-      setFormationFormData({
-        ...state.formationFormData,
-        businessStartDate: dayjs().format("YYYY-MM-DD"),
-      });
       setShowError(false);
     }
   });
