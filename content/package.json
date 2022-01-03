@@ -9,7 +9,7 @@
     "clean": "rimraf lib",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
-    "spellcheck": "cspell **/*.md -c ../cspell.json"
+    "spellcheck": "cspell -c ../cspell.json  '**/*.md'"
   },
   "prettier": {
     "printWidth": 110,
