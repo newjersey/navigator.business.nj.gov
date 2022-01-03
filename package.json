@@ -74,8 +74,8 @@
     "xml2js": "0.4.23"
   },
   "devDependencies": {
-    "@babel/core": "7.16.5",
-    "@babel/runtime": "7.16.5",
+    "@babel/core": "7.16.7",
+    "@babel/runtime": "7.16.7",
     "@businessnjgovnavigator/shared": "*",
     "@commitlint/cli": "16.0.1",
     "@commitlint/config-conventional": "16.0.0",
