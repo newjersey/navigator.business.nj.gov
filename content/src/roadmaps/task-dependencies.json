@@ -57,7 +57,7 @@
     },
     {
       "name": "apply-for-shop-license",
-      "dependencies": ["site-safety-permits"]
+      "dependencies": ["site-safety-permits-cosmetology"]
     }
   ]
 }
