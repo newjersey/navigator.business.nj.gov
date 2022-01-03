@@ -42,10 +42,10 @@ describe("loadDisplayContent", () => {
       expect(loadUserDisplayContent().STARTING.legalStructure.optionContent["c-corporation"]).toEqual(
         "### I am a header\n\nI am a description"
       );
-      const allFilePaths = mockedFs.readFileSync.mock.calls.map(
-        (args) => (args[0] as string).split("onboarding/starting")[1]
-      );
       const pathSeparator = getPathSeparator();
+      const allFilePaths = mockedFs.readFileSync.mock.calls.map(
+        (args) => (args[0] as string).split(`onboarding${pathSeparator}starting`)[1]
+      );
       for (const legalStructure of LegalStructures) {
         expect(allFilePaths).toContain(`${pathSeparator}legal-structure-${legalStructure.id}.md`);
       }
