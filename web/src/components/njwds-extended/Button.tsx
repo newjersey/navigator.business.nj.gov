@@ -68,7 +68,7 @@ export const Button = (props: Props): ReactElement => {
         props.underline ? " underline" : ""
       }${props.smallText ? " font-body-2xs" : ""}${props.textBold ? " text-bold" : ""} ${showDisabledClass}`}
       onClick={props.onClick}
-      {...(props.typeSubmit ? { type: "submit" } : {})}
+      {...(props.typeSubmit ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
     >
       {props.loading ? (
