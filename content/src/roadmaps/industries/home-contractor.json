@@ -38,6 +38,11 @@
       "step": 5,
       "weight": 100,
       "task": "register-consumer-affairs"
+    },
+    {
+      "step": 5,
+      "weight": 200,
+      "task": "Haul-Waste"
     }
   ],
   "modifications": []
