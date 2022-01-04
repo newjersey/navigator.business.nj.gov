@@ -29,18 +29,9 @@ export const oauthConfig: ModuleOptions = Object.freeze({
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-app.use((req, res, next) => {
-  console.log(JSON.stringify(req.body));
-  console.log(JSON.stringify(req.query));
-  console.log(JSON.stringify(req.params));
-  console.log(JSON.stringify(req.headers));
-  next();
-});
 
 app.get("/api/cms/auth", (req, res) => {
   const { host } = req.headers;
-
-  console.debug("auth host=%o", host);
 
   const authorizationCode = new AuthorizationCode(oauthConfig);
 
@@ -63,18 +54,14 @@ app.get("/api/cms/callback", async (req, res) => {
 
     const accessToken = await authorizationCode.getToken({
       code,
-      redirect_uri: `https://dev.d1fxpe8xsdfr62.amplifyapp.com/mgmt/cms/`,
+      redirect_uri: `https://${host}/dev/api/cms/callback`,
     });
-
-    console.debug("callback host=%o", host);
-
-    const { token } = authorizationCode.createToken(accessToken);
 
     res.setHeader("Content-Type", "text/html");
 
     res.status(200).send(
       renderResponse("success", {
-        token: token.token.access_token,
+        token: accessToken.token["access_token"],
         provider: "github",
       })
     );
