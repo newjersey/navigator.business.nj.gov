@@ -55,7 +55,7 @@ const RoadmapPage = (props: Props): ReactElement => {
         <SinglePageLayout>
           <div className="fdr fjc fac">
             <CircularProgress />
-            <div className="margin-left-2 h3-element">Loading...</div>
+            <div className="margin-left-2 h3-styling">Loading...</div>
           </div>
         </SinglePageLayout>
       ) : (
@@ -75,7 +75,7 @@ const RoadmapPage = (props: Props): ReactElement => {
               {!roadmap ? (
                 <div className="fdr fjc fac">
                   <CircularProgress />
-                  <div className="margin-left-2 h3-element">Loading...</div>
+                  <div className="margin-left-2 h3-styling">Loading...</div>
                 </div>
               ) : (
                 <>

@@ -52,7 +52,7 @@ const Home = (): ReactElement => {
               <div
                 role="heading"
                 aria-level={2}
-                className="h2-element-usa-prose-override l2-header-custom text-center margin-y-0 padding-bottom-40 fixed-width no-padding-lr display-block"
+                className="h2-styling l2-header-custom text-center margin-y-0 padding-bottom-40 fixed-width no-padding-lr display-block"
               >
                 {LandingPageDefaults.section2HeaderFirstLineText}
                 <span className="display-inline-override">

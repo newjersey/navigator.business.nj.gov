@@ -16,10 +16,14 @@ export const OnboardingCertifications = (): ReactElement => {
     });
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h2-element");
+  const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (
     <>
+      <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
+        {state.displayContent.certifications.headingBolded}{" "}
+        <span className="text-light">{state.displayContent.certifications.headingNotBolded}</span>
+      </div>
       <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.certifications.contentMd}</Content>
       <div className="form-input margin-top-3">
         <FormControl variant="outlined" fullWidth>

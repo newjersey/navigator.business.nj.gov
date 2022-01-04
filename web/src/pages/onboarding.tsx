@@ -265,9 +265,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       ref={headerRef}
       role="heading"
       aria-level={1}
-      className={`margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4 ${
-        isLargeScreen ? "h1-element" : "h2-element font-heading-xl"
-      }`}
+      className={`margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4 h2-styling`}
     >
       {OnboardingDefaults.pageTitle}{" "}
       <span className="weight-400" data-testid={`step-${page.current.toString()}`}>
@@ -317,7 +315,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                 isOpen={alert !== undefined}
                 close={() => setAlert(undefined)}
               >
-                <div data-testid={`toast-alert-${alert}`} className="h3-element">
+                <div data-testid={`toast-alert-${alert}`} className="h3-styling">
                   {OnboardingStatusLookup[alert].header}
                 </div>
                 <div className="padding-top-05">

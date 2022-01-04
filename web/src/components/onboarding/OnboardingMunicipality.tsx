@@ -12,6 +12,7 @@ import React, { FocusEvent, ReactElement, useContext } from "react";
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
+  h3Heading?: boolean;
 }
 
 export const OnboardingMunicipality = (props: Props): ReactElement => {
@@ -33,7 +34,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
     });
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h2-element");
+  const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (
     <>
@@ -54,7 +55,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
 
         {isHomeBasedBusinessApplicable(state.profileData.industryId) && (
           <div className="margin-top-3">
-            <OnboardingHomeBasedBusiness />
+            <OnboardingHomeBasedBusiness h3Heading={props.h3Heading} />
           </div>
         )}
       </div>

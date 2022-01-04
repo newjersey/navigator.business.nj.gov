@@ -35,7 +35,7 @@ export const OnboardingField = (props: Props): ReactElement => {
     });
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h2-element");
+  const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   const value = props.visualFilter
     ? props.visualFilter((state.profileData[props.fieldName] as string) ?? "")

@@ -10,7 +10,7 @@ import React, { ReactElement, useContext } from "react";
 export const OnboardingIndustry = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
 
-  const headerLevelTwo = setHeaderRole(2, "h2-element");
+  const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (
     <>
