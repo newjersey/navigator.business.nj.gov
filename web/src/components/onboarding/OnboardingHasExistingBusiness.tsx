@@ -14,11 +14,11 @@ export const OnboardingHasExistingBusiness = (): ReactElement => {
     });
   };
 
-  const header = setHeaderRole(3, "h3-element");
+  const header = setHeaderRole(2, "h3-styling");
 
   return (
     <>
-      <Content overrides={{ h3: header }}>{state.displayContent.hasExistingBusiness.contentMd}</Content>
+      <Content overrides={{ h2: header }}>{state.displayContent.hasExistingBusiness.contentMd}</Content>
       <FormControl fullWidth>
         <RadioGroup
           aria-label="Has Existing Business"

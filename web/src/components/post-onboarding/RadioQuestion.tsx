@@ -42,12 +42,7 @@ export const RadioQuestion = (props: Props): ReactElement => {
     <>
       {onboardingQuestion.question && (
         <>
-          <div
-            role="heading"
-            aria-level={2}
-            data-testid={props.id}
-            className="h3-element-usa-prose-override margin-y-205"
-          >
+          <div role="heading" aria-level={2} data-testid={props.id} className="h4-styling margin-top-205">
             {onboardingQuestion.question}
           </div>
           <FormControl variant="outlined" fullWidth>

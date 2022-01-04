@@ -161,7 +161,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 isOpen={alert !== undefined}
                 close={() => setAlert(undefined)}
               >
-                <div data-testid={`toast-alert-${alert}`} className="h3-element">
+                <div data-testid={`toast-alert-${alert}`} className="h3-styling">
                   {OnboardingStatusLookup[alert].header}
                 </div>
                 <div className="padding-top-05">
@@ -182,7 +182,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <div className="margin-top-6 desktop:margin-top-0">
             <SinglePageLayout wrappedWithMain={false}>
               <SingleColumnContainer>
-                <div role="heading" aria-level={1} className="h1-element">
+                <div role="heading" aria-level={1} className="h2-styling">
                   {ProfileDefaults.pageTitle}
                 </div>
                 <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
@@ -193,7 +193,11 @@ const ProfilePage = (props: Props): ReactElement => {
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <OnboardingLegalStructure />
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
-                  <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+                  <OnboardingMunicipality
+                    onValidation={onValidation}
+                    fieldStates={fieldStates}
+                    h3Heading={true}
+                  />
                   <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
                   <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} />
                   <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />

@@ -30,7 +30,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
     </div>
   );
 
-  const headerLevelTwo = setHeaderRole(2, "h2-element");
+  const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (
     <>

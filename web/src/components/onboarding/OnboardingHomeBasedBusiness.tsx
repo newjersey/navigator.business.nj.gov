@@ -4,7 +4,11 @@ import { ProfileDataContext } from "@/pages/onboarding";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
-export const OnboardingHomeBasedBusiness = (): ReactElement => {
+interface Props {
+  h3Heading?: boolean;
+}
+
+export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
@@ -14,7 +18,8 @@ export const OnboardingHomeBasedBusiness = (): ReactElement => {
     });
   };
 
-  const header = setHeaderRole(3, "h3-element");
+  const eleSize = props.h3Heading ? "h3-styling" : "h4-styling";
+  const header = setHeaderRole(3, eleSize);
 
   return (
     <>

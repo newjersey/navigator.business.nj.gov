@@ -21,6 +21,8 @@ export type OperateDisplayContent = {
 export type TextFieldContent = {
   contentMd: string;
   placeholder?: string;
+  headingBolded?: string;
+  headingNotBolded?: string;
 };
 export type RadioFieldContent = { contentMd: string; radioButtonYesText: string; radioButtonNoText: string };
 

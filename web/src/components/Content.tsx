@@ -15,7 +15,7 @@ interface Props {
 export const Content = (props: Props): ReactElement => {
   return (
     <div className="usa-prose">
-      <ContentNonProse>{props.children}</ContentNonProse>
+      <ContentNonProse overrides={props.overrides}>{props.children}</ContentNonProse>
     </div>
   );
 };

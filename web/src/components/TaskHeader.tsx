@@ -84,7 +84,7 @@ export const TaskHeader = (props: Props): ReactElement => {
       <div
         role="heading"
         aria-level={1}
-        className="margin-top-0 margin-bottom-2 h2-element-usa-prose-override"
+        className="margin-top-0 margin-bottom-2 h2-styling"
         data-task-id={props.task.id}
       >
         {getModifiedTaskContent(roadmap, props.task, "name")}

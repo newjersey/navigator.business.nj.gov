@@ -49,7 +49,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
     return <>{LookupLegalStructureById(value as string).name}</>;
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h2-element");
+  const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (
     <>
