@@ -112,7 +112,7 @@
     "@types/jest": "27.4.0",
     "@types/jsonwebtoken": "8.5.6",
     "@types/lodash.orderby": "4.6.6",
-    "@types/node": "14.18.3",
+    "@types/node": "14.18.4",
     "@types/react": "17.0.38",
     "@types/react-swipeable-views": "0.13.1",
     "@types/react-tabs": "2.3.4",
