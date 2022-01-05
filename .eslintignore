@@ -13,6 +13,7 @@ node_modules
 
 shared/lib
 content/lib
+content
 
 web/amplify/#current-cloud-backend/
 web/amplify/.config/local-*
