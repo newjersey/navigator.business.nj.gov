@@ -1,4 +1,5 @@
 ---
+placeholder: "Enter notes"
 ---
 
 ## Notes
