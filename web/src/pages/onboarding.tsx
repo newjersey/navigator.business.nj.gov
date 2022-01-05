@@ -268,7 +268,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       className={`margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4 h2-styling`}
     >
       {OnboardingDefaults.pageTitle}{" "}
-      <span className="weight-400" data-testid={`step-${page.current.toString()}`}>
+      <span className="text-light" data-testid={`step-${page.current.toString()}`}>
         {evalHeaderStepsTemplate()}
       </span>
     </div>

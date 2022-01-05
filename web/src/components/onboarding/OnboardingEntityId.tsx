@@ -19,6 +19,10 @@ export const OnboardingEntityId = (props: Props): ReactElement => {
 
   return (
     <>
+      <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
+        {state.displayContent.entityId.headingBolded}{" "}
+        <span className="text-light">{state.displayContent.entityId.headingNotBolded}</span>
+      </div>
       <NumericField
         onValidation={props.onValidation}
         invalid={props.fieldStates[fieldName].invalid}

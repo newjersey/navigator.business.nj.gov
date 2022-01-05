@@ -1,6 +1,7 @@
 ---
+placeholder: "Enter Employer ID Number"
+headingBolded: "Employer Identification Number"
+headingNotBolded: "(EIN)"
 ---
-
-## Employer Identification number (EIN)
 
 What is your `EIN|ein`?
