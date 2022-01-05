@@ -150,6 +150,14 @@ export const getUserNameOrEmail = (userData: UserData | undefined): string => {
   else return NavDefaults.myNJAccountText;
 };
 
+export const validateEmail = (email: string): boolean => {
+  return !!String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
 export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
   if (!roadmap) return [];
   const { steps } = roadmap;
@@ -239,4 +247,10 @@ export const subtractTwoDollarValues = (currVal: string, addValue: string) => {
   const currentValue = currVal[0] === "$" ? Number(currVal.slice(1)) : Number(currVal);
   const additionalValue = addValue[0] === "$" ? Number(addValue.slice(1)) : Number(addValue);
   return `$${(currentValue - additionalValue).toFixed(2)}`;
+};
+
+export const zipCodeRange = (value: string) => {
+  const parsedValue = parseInt(value);
+  if (typeof parsedValue !== "number") return false;
+  return parsedValue >= 7001 && parsedValue <= 8999;
 };

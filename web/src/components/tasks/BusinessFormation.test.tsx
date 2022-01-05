@@ -269,7 +269,7 @@ describe("<BusinessFormation />", () => {
       selectDate(threeDaysFromNow);
       fillText("Business address line1", "1234 main street");
       fillText("Business address line2", "Suite 304");
-      fillText("Business address zip code", "12345");
+      fillText("Business address zip code", "08001");
 
       chooseRadio("registered-agent-manual");
       fillText("Agent name", "Hugo Weaving");
@@ -277,7 +277,7 @@ describe("<BusinessFormation />", () => {
       fillText("Agent office address line1", "400 Pennsylvania Ave");
       fillText("Agent office address line2", "Suite 101");
       fillText("Agent office address city", "Newark");
-      fillText("Agent office address zip code", "45678");
+      fillText("Agent office address zip code", "08002");
 
       fillText("Signer", "Elrond");
 
@@ -300,7 +300,7 @@ describe("<BusinessFormation />", () => {
       expect(formationFormData.businessAddressLine1).toEqual("1234 main street");
       expect(formationFormData.businessAddressLine2).toEqual("Suite 304");
       expect(formationFormData.businessAddressState).toEqual("NJ");
-      expect(formationFormData.businessAddressZipCode).toEqual("12345");
+      expect(formationFormData.businessAddressZipCode).toEqual("08001");
       expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
       expect(formationFormData.agentNumber).toEqual("");
       expect(formationFormData.agentName).toEqual("Hugo Weaving");
@@ -309,7 +309,7 @@ describe("<BusinessFormation />", () => {
       expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
       expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
       expect(formationFormData.agentOfficeAddressState).toEqual("NJ");
-      expect(formationFormData.agentOfficeAddressZipCode).toEqual("45678");
+      expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
       expect(formationFormData.signer).toEqual("Elrond");
       expect(formationFormData.additionalSigners).toEqual([]);
       expect(formationFormData.contactFirstName).toEqual("John");
@@ -485,6 +485,103 @@ describe("<BusinessFormation />", () => {
     });
 
     describe("required fields", () => {
+      describe("email validation", () => {
+        it("displays error message due to failed email validation", async () => {
+          renderWithData({ agentEmail: "", agentNumberOrManual: "MANUAL_ENTRY" });
+          fillText("Agent email", "deeb.gmail");
+          await clickSubmit();
+          await waitFor(() => {
+            expect(subject.queryByText(BusinessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
+            expect(
+              subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
+            ).toBeInTheDocument();
+          });
+        });
+
+        it("displays error message due to failed email validation", async () => {
+          renderWithData({ agentEmail: "", agentNumberOrManual: "MANUAL_ENTRY" });
+          fillText("Agent email", "deeb@");
+          await clickSubmit();
+          await waitFor(() => {
+            expect(subject.queryByText(BusinessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
+            expect(
+              subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
+            ).toBeInTheDocument();
+          });
+        });
+
+        it("passes email validation", async () => {
+          renderWithData({ agentEmail: "", agentNumberOrManual: "MANUAL_ENTRY" });
+          fillText("Agent email", "lol@deeb.gmail");
+
+          await clickSubmit();
+          await waitFor(() => {
+            expect(
+              subject.queryByText(BusinessFormationDefaults.agentEmailErrorText)
+            ).not.toBeInTheDocument();
+          });
+        });
+      });
+
+      describe("NJ zipcode validation", () => {
+        it("displays error message when non-NJ zipcode is entered in main business address", async () => {
+          renderWithData({ businessAddressZipCode: "", agentNumberOrManual: "MANUAL_ENTRY" });
+          fillText("Business address zip code", "22222");
+
+          await clickSubmit();
+          await waitFor(() => {
+            expect(
+              subject.getByText(BusinessFormationDefaults.businessAddressZipCodeErrorText)
+            ).toBeInTheDocument();
+            expect(
+              subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
+            ).toBeInTheDocument();
+          });
+        });
+
+        it("displays error message when Alpha zipcode is entered in main business address", async () => {
+          renderWithData({ businessAddressZipCode: "", agentNumberOrManual: "MANUAL_ENTRY" });
+          fillText("Business address zip code", "AAAAA");
+
+          await clickSubmit();
+          await waitFor(() => {
+            expect(
+              subject.getByText(BusinessFormationDefaults.businessAddressZipCodeErrorText)
+            ).toBeInTheDocument();
+            expect(
+              subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
+            ).toBeInTheDocument();
+          });
+        });
+
+        it("passes zipcode validation in main business address", async () => {
+          renderWithData({ businessAddressZipCode: "", agentNumberOrManual: "MANUAL_ENTRY" });
+          fillText("Business address zip code", "07001");
+          await clickSubmit();
+          await waitFor(() => {
+            expect(
+              subject.queryByText(BusinessFormationDefaults.businessAddressZipCodeErrorText)
+            ).not.toBeInTheDocument();
+            expect(
+              subject.queryByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
+            ).not.toBeInTheDocument();
+          });
+        });
+
+        it("displays error message due to non-NJ zipcode is entered in registered agent address", async () => {
+          renderWithData({ agentOfficeAddressZipCode: "", agentNumberOrManual: "MANUAL_ENTRY" });
+          fillText("Agent office address zip code", "22222");
+          await clickSubmit();
+          await waitFor(() => {
+            expect(
+              subject.getByText(BusinessFormationDefaults.agentOfficeAddressZipCodeErrorText)
+            ).toBeInTheDocument();
+            expect(
+              subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
+            ).toBeInTheDocument();
+          });
+        });
+      });
       describe("does not submit when missing a required field", () => {
         it("Business suffix", async () => {
           renderWithData({ businessSuffix: undefined });

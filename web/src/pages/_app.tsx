@@ -142,6 +142,21 @@ const theme = createTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "&.Mui-disabled": {
+            backgroundColor: "#f0f0f0",
+          },
+          input: {
+            "&.Mui-disabled": {
+              color: "#1b1b1b",
+              "-webkit-text-fill-color": "#1b1b1b",
+            },
+          },
+        },
+      },
+    },
   },
 });
 
