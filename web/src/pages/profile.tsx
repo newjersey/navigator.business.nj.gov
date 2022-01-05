@@ -198,16 +198,16 @@ const ProfilePage = (props: Props): ReactElement => {
                     fieldStates={fieldStates}
                     h3Heading={true}
                   />
-                  <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                  <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} />
-                  <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                  <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates}>
-                    <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                    <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   </OnboardingEntityId>
                   <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} />
-                  <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                  <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <OnboardingNotes />
-                  <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                  <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <div className="float-right fdr">
                     <button
                       type="button"
