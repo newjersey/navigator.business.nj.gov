@@ -5,4 +5,4 @@ radioButtonNoText: "No"
 
 ## Owning a Business
 
-Have you already registered and formed your business?
+Have you already `formed and registered|form-and-register-business` your business?
