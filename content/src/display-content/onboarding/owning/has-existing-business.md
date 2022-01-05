@@ -3,6 +3,6 @@ radioButtonYesText: "Yes"
 radioButtonNoText: "No"
 ---
 
-## Owning a Business
+## Phase of Your Business
 
 Have you already `formed and registered|form-and-register-business` your business?
