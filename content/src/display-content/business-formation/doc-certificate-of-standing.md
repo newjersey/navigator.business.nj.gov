@@ -3,4 +3,4 @@ optionalLabel: "(Optional)"
 cost: "$50.00"
 ---
 
-`Certificate of Standing |tbd`
+`Certificate of Standing|certificate-of-standing`

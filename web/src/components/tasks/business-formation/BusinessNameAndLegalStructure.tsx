@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { templateEval } from "@/lib/utils/helpers";
+import { templateEval, zipCodeRange } from "@/lib/utils/helpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -61,7 +61,8 @@ export const BusinessNameAndLegalStructure = (): ReactElement => {
           minLength={5}
           maxLength={5}
           fieldName={"businessAddressZipCode"}
-          validationText={BusinessFormationDefaults.businessAddressZipCode}
+          validationText={BusinessFormationDefaults.businessAddressZipCodeErrorText}
+          additionalValidation={zipCodeRange}
         />
       </div>
     </>

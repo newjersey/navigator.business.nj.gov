@@ -3,6 +3,7 @@ import { BusinessFormationNumericField } from "@/components/tasks/business-forma
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
+import { validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import { FormationTextField } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { FocusEvent, ReactElement, useContext } from "react";
@@ -36,13 +37,14 @@ export const RegisteredAgent = (): ReactElement => {
   const onValidation = (
     event: FocusEvent<HTMLInputElement>,
     field: FormationTextField,
-    radioValueNeeded: "NUMBER" | "MANUAL_ENTRY"
+    radioValueNeeded: "NUMBER" | "MANUAL_ENTRY",
+    callback: (input: string) => boolean = () => true
   ) => {
     if (state.formationFormData.agentNumberOrManual !== radioValueNeeded) {
       setErrorMap({ ...state.errorMap, [field]: { invalid: false } });
-    } else if (!event.target.value.trim()) {
+    } else if (!event.target.value.trim() || !callback(event.target.value)) {
       setErrorMap({ ...state.errorMap, [field]: { invalid: true } });
-    } else if (event.target.value.trim()) {
+    } else if (event.target.value.trim() && callback(event.target.value)) {
       setErrorMap({ ...state.errorMap, [field]: { invalid: false } });
     }
   };
@@ -81,11 +83,11 @@ export const RegisteredAgent = (): ReactElement => {
         <div className="margin-top-2">
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
-              <BusinessFormationTextField
-                error={state.errorMap["agentNumber"].invalid}
-                onValidation={(event) => onValidation(event, "agentNumber", "NUMBER")}
+              <BusinessFormationNumericField
+                minLength={4}
+                maxLength={7}
+                fieldName={"agentNumber"}
                 validationText={BusinessFormationDefaults.agentNumberErrorText}
-                fieldName="agentNumber"
               />
             </div>
           )}
@@ -101,7 +103,7 @@ export const RegisteredAgent = (): ReactElement => {
               <BusinessFormationTextField
                 fieldName="agentEmail"
                 error={state.errorMap["agentEmail"].invalid}
-                onValidation={(event) => onValidation(event, "agentEmail", "MANUAL_ENTRY")}
+                onValidation={(event) => onValidation(event, "agentEmail", "MANUAL_ENTRY", validateEmail)}
                 validationText={BusinessFormationDefaults.agentEmailErrorText}
               />
               <BusinessFormationTextField
@@ -128,7 +130,8 @@ export const RegisteredAgent = (): ReactElement => {
                     minLength={5}
                     maxLength={5}
                     fieldName={"agentOfficeAddressZipCode"}
-                    validationText={BusinessFormationDefaults.businessAddressZipCode}
+                    validationText={BusinessFormationDefaults.agentOfficeAddressZipCodeErrorText}
+                    additionalValidation={zipCodeRange}
                   />
                 </div>
               </div>

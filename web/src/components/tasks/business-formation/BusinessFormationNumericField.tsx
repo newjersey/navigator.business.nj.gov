@@ -9,19 +9,25 @@ interface Props {
   maxLength: number;
   minLength?: number;
   visualFilter?: (value: string) => string;
+  additionalValidation?: (value: string) => boolean;
 }
 
-export const BusinessFormationNumericField = (props: Props): ReactElement => {
+export const BusinessFormationNumericField = ({
+  additionalValidation = () => true,
+  ...props
+}: Props): ReactElement => {
   const { state, setErrorMap } = useContext(FormationContext);
 
   const regex = (value: string): string => value.replace(/[^0-9]/g, "");
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-    const userInput = event.target.value.length;
+    const userInput = event.target.value;
 
     const valid = props.minLength
-      ? userInput >= props.minLength && userInput <= props.maxLength
-      : userInput === props.maxLength || userInput === 0;
+      ? userInput.length >= props.minLength &&
+        userInput.length <= props.maxLength &&
+        additionalValidation(userInput)
+      : false;
 
     valid
       ? setErrorMap({ ...state.errorMap, [props.fieldName]: { invalid: false } })
