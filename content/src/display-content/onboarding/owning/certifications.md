@@ -4,4 +4,4 @@ headingBolded: "Certifications"
 headingNotBolded: "(Optional)"
 ---
 
-Is your business certified? It's okay if you don't have any certifications yet.
+At least 51% of my business is owned and controlled by (select all that apply) 

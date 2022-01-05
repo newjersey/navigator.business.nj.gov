@@ -1,7 +1,7 @@
 ---
-placeholder: "Type a name"
+placeholder: "Type Your Business Name"
 ---
 
 ## Business Name
 
-What do you want to name your business? You can change this name again later.
+What is your business' name? 
