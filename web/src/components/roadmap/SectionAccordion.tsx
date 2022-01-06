@@ -70,9 +70,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
               alt=""
               data-testid={`${isCompleted ? "completed" : "regular"}-${sectionName}-section-img`}
             />{" "}
-            <div className="inline" aria-label={`Section ${sectionName}`}>
-              {SectionDefaults[props.sectionType]}
-            </div>
+            <div className="inline">{SectionDefaults[props.sectionType]}</div>
           </h2>
         </AccordionSummary>
         <AccordionDetails>{props.children}</AccordionDetails>
