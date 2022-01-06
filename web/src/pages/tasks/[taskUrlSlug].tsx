@@ -19,7 +19,7 @@ import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadFilingsReferences } from "@/lib/static/loadFilings";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { FilingReference, Task, TasksDisplayContent } from "@/lib/types/types";
-import { getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
+import { featureFlags, getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -46,6 +46,8 @@ const TaskPage = (props: Props): ReactElement => {
     };
   }, [props.task.urlSlug, roadmap]);
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
+
+  const { featureDisableFormation } = featureFlags(router.query);
 
   const getUnlockedBy = (): ReactElement => {
     const unlockedByTaskLinks = taskFromRoadmap
@@ -105,7 +107,7 @@ const TaskPage = (props: Props): ReactElement => {
   };
 
   const businessFormationFeatureFlag = (): ReactElement => {
-    if (process.env.FEATURE_DISABLE_FORMATION === "true")
+    if (featureDisableFormation)
       return (
         <div className="flex flex-column space-between minh-37">
           <div>

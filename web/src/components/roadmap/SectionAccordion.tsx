@@ -3,6 +3,7 @@ import { SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SectionType } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import React, { ReactElement, ReactNode } from "react";
 
@@ -27,7 +28,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
   const handleAccordionStateChange = async (): Promise<void> => {
     const roadmapOpenSections = userData?.preferences.roadmapOpenSections;
     if (!roadmapOpenSections) return;
-
+    analytics.event.roadmap_section.click.expand_contract();
     if (isOpen) {
       const newUserData = {
         ...userData,

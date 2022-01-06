@@ -1,4 +1,5 @@
 import { FilingReference, SectionType } from "@/lib/types/types";
+import { featureFlags } from "@/lib/utils/helpers";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
@@ -11,7 +12,7 @@ interface Props {
 
 export const MiniOperateSection = ({ filingsReferences, onClose }: Props): ReactElement => {
   const router = useRouter();
-  const featureDisableOperate = process.env.FEATURE_DISABLE_OPERATE ?? false;
+  const { featureDisableOperate } = featureFlags(router.query);
   if (featureDisableOperate) return <></>;
 
   return (

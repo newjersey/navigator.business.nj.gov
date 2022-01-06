@@ -1,5 +1,6 @@
 import { RoadmapDefaults, SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { SectionType } from "@/lib/types/types";
+import { featureFlags } from "@/lib/utils/helpers";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
@@ -21,8 +22,7 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
 
   const publicName = SectionDefaults[props.nextSectionType];
 
-  const featureDisableOperate = process.env.FEATURE_DISABLE_OPERATE ?? false;
-
+  const featureDisableOperate = featureFlags(router.query).featureDisableOperate;
   const hideLink = featureDisableOperate && props.nextSectionType === "OPERATE";
 
   return (

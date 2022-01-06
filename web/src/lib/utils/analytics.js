@@ -32,9 +32,47 @@ export default {
     homeBasedBusiness: (value) => {
       window.gtag("set", "dimension5", value);
     },
+    persona: (value) => {
+      window.gtag("set", "dimension6", value);
+    },
   },
 
   event: {
+    landing_page_hero_log_in: {
+      click: {
+        go_to_myNJ_login: () => {
+          sendEvent("landing_page_hero_log_in", "click", "go_to_myNJ_login");
+        },
+      },
+    },
+    landing_page_hero_get_started: {
+      click: {
+        open_create_account_modal: () => {
+          sendEvent("landing_page_hero_get_started", "click", "open_create_account_modal");
+        },
+      },
+    },
+    landing_page_navbar_log_in: {
+      click: {
+        go_to_myNJ_login: () => {
+          sendEvent("landing_page_navbar_log_in", "click", "go_to_myNJ_login");
+        },
+      },
+    },
+    landing_page_navbar_register: {
+      click: {
+        open_create_account_modal: () => {
+          sendEvent("landing_page_navbar_register", "click", "open_create_account_modal");
+        },
+      },
+    },
+    landing_page_registration_create: {
+      click: {
+        go_to_myNJ_registration: () => {
+          sendEvent("landing_page_registration_create", "click", "go_to_myNJ_registration");
+        },
+      },
+    },
     roadmap_task_title: {
       click: {
         go_to_task: () => {
@@ -53,6 +91,41 @@ export default {
       click: {
         return_to_onboarding: () => {
           sendEvent("roadmap_profile_edit_button", "click", "return_to_onboarding");
+        },
+      },
+    },
+    roadmap_PBS_link: {
+      click: {
+        go_to_PBS: () => {
+          sendEvent("roadmap_PBS_link", "click", "go_to_PBS");
+        },
+      },
+    },
+    roadmap_footer_live_chat_link: {
+      click: {
+        open_live_chat: () => {
+          sendEvent("roadmap_footer_live_chat_link", "click", "open_live_chat");
+        },
+      },
+    },
+    roadmap_section: {
+      click: {
+        expand_contract: () => {
+          sendEvent("roadmap_section", "click", "expand_contract");
+        },
+      },
+    },
+    profile_save: {
+      click: {
+        save_profile_changes: () => {
+          sendEvent("profile_save", "click", "save_profile_changes");
+        },
+      },
+    },
+    profile_back_to_roadmap: {
+      click: {
+        view_roadmap: () => {
+          sendEvent("profile_back_to_roadmap", "click", "view_roadmap");
         },
       },
     },
@@ -155,6 +228,13 @@ export default {
       click: {
         view_sidebar: () => {
           sendEvent("contextual_link", "click", "view_sidebar");
+        },
+      },
+    },
+    tooltip: {
+      mouseover: {
+        view_tooltip: () => {
+          sendEvent("tooltip", "mouseover", "view_tooltip");
         },
       },
     },

@@ -14,7 +14,8 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadFilingsReferences } from "@/lib/static/loadFilings";
 import { FilingReference, RoadmapDisplayContent } from "@/lib/types/types";
-import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import analytics from "@/lib/utils/analytics";
+import { featureFlags, getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { CircularProgress } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -30,7 +31,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   const { userData, error } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
-  const featureDisableOperate = process.env.FEATURE_DISABLE_OPERATE ?? false;
+  const { featureDisableOperate } = featureFlags(router.query);
 
   useMountEffectWhenDefined(() => {
     (async () => {
@@ -95,7 +96,9 @@ const RoadmapPage = (props: Props): ReactElement => {
                     />
                   ) : (
                     <div className="margin-top-6 font-body-2xs text-center">
-                      <ContentNonProse>{RoadmapDefaults.operateComplianceText}</ContentNonProse>
+                      <ContentNonProse onClick={analytics.event.roadmap_PBS_link.click.go_to_PBS}>
+                        {RoadmapDefaults.operateComplianceText}
+                      </ContentNonProse>
                     </div>
                   )}
                 </>

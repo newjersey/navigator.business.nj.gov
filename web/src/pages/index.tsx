@@ -7,6 +7,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { Signup } from "@/components/Signup";
 import { LandingPageDefaults } from "@/display-defaults/LandingPageDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 
@@ -42,6 +43,7 @@ const Home = (): ReactElement => {
             callToActionText={LandingPageDefaults.herocallToActionText}
             onClick={() => {
               setSignupIsOpen(true);
+              analytics.event.landing_page_hero_get_started.click.open_create_account_modal();
             }}
           />
 

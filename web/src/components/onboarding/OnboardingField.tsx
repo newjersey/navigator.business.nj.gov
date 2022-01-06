@@ -44,7 +44,7 @@ export const OnboardingField = (props: Props): ReactElement => {
   return (
     <div ref={headerRef}>
       {state.displayContent[props.fieldName].contentMd && (
-        <div className="margin-bottom-2" data-testId={`onboardingFieldContent-${props.fieldName}`}>
+        <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${props.fieldName}`}>
           <Content overrides={{ h2: headerLevelTwo }}>
             {state.displayContent[props.fieldName].contentMd}
           </Content>

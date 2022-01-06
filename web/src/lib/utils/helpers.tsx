@@ -13,6 +13,7 @@ import {
   Task,
 } from "@/lib/types/types";
 import { UserData } from "@businessnjgovnavigator/shared/";
+import { ParsedUrlQuery } from "querystring";
 import React, { ReactElement, useEffect, useRef } from "react";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -253,4 +254,25 @@ export const zipCodeRange = (value: string) => {
   const parsedValue = parseInt(value);
   if (typeof parsedValue !== "number") return false;
   return parsedValue >= 7001 && parsedValue <= 8999;
+};
+
+export const featureFlags = (
+  query: ParsedUrlQuery
+): Record<"featureDisableOperate" | "featureDisableOscarOnboarding" | "featureDisableFormation", boolean> => {
+  const featureDisableOperate = query?.operate
+    ? query?.operate === "false"
+    : process.env.FEATURE_DISABLE_OPERATE
+    ? process.env.FEATURE_DISABLE_OPERATE === "true"
+    : false;
+  const featureDisableOscarOnboarding = query?.oscar
+    ? query?.oscar === "false"
+    : process.env.FEATURE_DISABLE_OSCAR_ONBOARDING
+    ? process.env.FEATURE_DISABLE_OSCAR_ONBOARDING === "true"
+    : false;
+  const featureDisableFormation = query?.formation
+    ? query?.formation === "false"
+    : process.env.FEATURE_DISABLE_FORMATION
+    ? process.env.FEATURE_DISABLE_FORMATION === "true"
+    : false;
+  return { featureDisableOperate, featureDisableOscarOnboarding, featureDisableFormation };
 };

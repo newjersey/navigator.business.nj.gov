@@ -2,12 +2,14 @@ import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
+import analytics from "@/lib/utils/analytics";
 import { AuthContext } from "@/pages/_app";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
   className?: string;
+  position?: "HERO" | "NAVBAR";
 }
 
 export const AuthButton = (props?: Props): ReactElement => {
@@ -18,7 +20,14 @@ export const AuthButton = (props?: Props): ReactElement => {
     <button
       data-testid="login-button"
       className="usa-button usa-button--outline auth-button margin-bottom-2 text-no-wrap"
-      onClick={triggerSignIn}
+      onClick={() => {
+        triggerSignIn();
+        if (props?.position === "HERO") {
+          analytics.event.landing_page_hero_log_in.click.go_to_myNJ_login();
+        } else if (props?.position === "NAVBAR") {
+          analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
+        }
+      }}
     >
       {NavDefaults.logInButton}
     </button>

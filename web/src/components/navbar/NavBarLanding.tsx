@@ -2,6 +2,7 @@ import { Signup } from "@/components/Signup";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
+import analytics from "@/lib/utils/analytics";
 import { AuthContext } from "@/pages/_app";
 import React, { ReactElement, useContext, useState } from "react";
 import { Button } from "../njwds-extended/Button";
@@ -55,6 +56,7 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
                   textBold
                   onClick={() => {
                     setSignupIsOpen(true);
+                    analytics.event.landing_page_navbar_register.click.open_create_account_modal();
                   }}
                 >
                   {NavDefaults.registerButton}

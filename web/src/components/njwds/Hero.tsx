@@ -32,7 +32,7 @@ export const Hero = (props: Props): ReactElement => {
             >
               {props.callToActionText}
             </button>
-            <AuthButton />
+            <AuthButton position="HERO" />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { Alert } from "@/components/njwds/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { postSelfReg } from "@/lib/api-client/apiClient";
+import analytics from "@/lib/utils/analytics";
 import {
   Checkbox,
   Dialog,
@@ -213,7 +214,10 @@ export const Signup = (props: Props): ReactElement => {
             typeSubmit
             style="primary"
             loading={isLoading}
-            onClick={submitSelfReg}
+            onClick={() => {
+              submitSelfReg();
+              analytics.event.landing_page_registration_create.click.go_to_myNJ_registration();
+            }}
             dataTestid="submit-selfreg"
           >
             {SelfRegDefaults.submitButtonText}

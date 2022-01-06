@@ -36,6 +36,7 @@
     "next-seo",
     "@jest/types",
     "@mui/lab/AdapterDayjs",
+    "querystring",
     "dayjs/plugin/advancedFormat",
     "@businessnjgovnavigator/shared",
     "broken-link-checker",

@@ -26,6 +26,7 @@ import {
 } from "@/lib/types/types";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import {
+  featureFlags,
   getSectionCompletion,
   OnboardingErrorLookup,
   OnboardingStatusLookup,
@@ -99,7 +100,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
 
-  const shouldDisableOscarFlow = process.env.FEATURE_DISABLE_OSCAR_ONBOARDING === "true";
+  const { featureDisableOscarOnboarding: shouldDisableOscarFlow } = featureFlags(router.query);
 
   const onValidation = useCallback(
     (field: ProfileFields, invalid: boolean): void => {

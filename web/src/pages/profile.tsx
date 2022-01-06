@@ -28,6 +28,7 @@ import {
   ProfileFields,
   UserDisplayContent,
 } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getSectionCompletion, OnboardingStatusLookup } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
@@ -68,6 +69,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const onBack = () => {
     if (!userData) return;
+    analytics.event.profile_back_to_roadmap.click.view_roadmap();
     if (!deepEqual(profileData, userData.profileData)) {
       setEscapeModal(true);
     } else {
@@ -78,6 +80,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
+    analytics.event.profile_save.click.save_profile_changes();
     if (Object.keys(fieldStates).some((k) => fieldStates[k as ProfileFields].invalid)) {
       setAlert("ERROR");
       return;
