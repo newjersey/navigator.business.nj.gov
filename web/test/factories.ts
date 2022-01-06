@@ -442,6 +442,7 @@ export const generateFormationSubmitError = (
   return {
     field: `some-field-${randomInt()}`,
     message: `some-message-${randomInt()}`,
+    type: randomInt() % 2 ? "UNKNOWN" : "RESPONSE",
     ...overrides,
   };
 };

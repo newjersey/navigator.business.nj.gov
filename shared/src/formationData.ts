@@ -109,5 +109,6 @@ export type FormationSubmitResponse = {
 
 export type FormationSubmitError = {
   field: string;
+  type: "FIELD" | "UNKNOWN" | "RESPONSE";
   message: string;
 };

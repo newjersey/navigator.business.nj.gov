@@ -1,4 +1,4 @@
-import { BusinessSuffix, FormationSubmitResponse } from "@shared/formationData";
+import { BusinessSuffix, FormationSubmitError, FormationSubmitResponse } from "@shared/formationData";
 import { UserData } from "@shared/userData";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -31,25 +31,33 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             errors: [],
           };
         } else {
-          const errors = response.data as ApiError[];
+          let errors = [] as FormationSubmitError[];
+          if (response.headers["content-type"].includes("application/json")) {
+            const apiError = response.data as ApiError[];
+            errors = apiError.map((error) => ({
+              field: splitErrorField(error.Name),
+              message: error.ErrorMessage,
+              type: "FIELD",
+            }));
+          } else {
+            logger.LogInfo(`Formation - NICUSA - Response error received: ${response.data}`);
+            errors = [{ field: "", message: "Response error", type: "RESPONSE" }];
+          }
           return {
             success: false,
             token: undefined,
             redirect: undefined,
-            errors: errors.map((error) => ({
-              field: splitErrorField(error.Name),
-              message: error.ErrorMessage,
-            })),
+            errors,
           };
         }
       })
       .catch((error) => {
-        logger.LogInfo(`Formation - NICUSA - Error received: ${error}`);
+        logger.LogInfo(`Formation - NICUSA - Unknown error received: ${error}`);
         return {
           success: false,
           token: undefined,
           redirect: undefined,
-          errors: [{ field: "", message: "Unknown Error" }],
+          errors: [{ field: "", message: "Unknown Error", type: "UNKNOWN" }],
         };
       });
   };
@@ -184,6 +192,7 @@ export type ApiError = {
   Valid: boolean;
   ErrorMessage: string;
   Name: string; // field with error
+  type: string;
 };
 
 export type ApiErrorResponse = ApiError[];
