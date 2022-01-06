@@ -1,3 +1,45 @@
+# [1.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.6.0...v1.7.0) (2022-01-06)
+
+
+### Bug Fixes
+
+* [[#1226](https://github.com/newjersey/navigator.business.nj.gov/issues/1226)] correct the data being passed to the myNJ log message ([3ca0970](https://github.com/newjersey/navigator.business.nj.gov/commit/3ca0970a7818a583f7c7446d6942405335f53751))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] await all the submits to fix act error ([bf483a9](https://github.com/newjersey/navigator.business.nj.gov/commit/bf483a95500462b0a9e4bc02964dbca8514c7a75))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] ensure it logs the request/response properly ([c0052b6](https://github.com/newjersey/navigator.business.nj.gov/commit/c0052b68f6c29eafccd6bf4936da87cc2c004b75))
+* corrected spacing on profile page ([a07811e](https://github.com/newjersey/navigator.business.nj.gov/commit/a07811e5c36d301f01b08c90ee6bccb648097ce5))
+* **deps:** update dependency netlify-cms-app to v2.15.62 ([bde82f6](https://github.com/newjersey/navigator.business.nj.gov/commit/bde82f609343993eb679f42fb1e83f48649d0e7f))
+* **deps:** update material-ui monorepo ([668c5d9](https://github.com/newjersey/navigator.business.nj.gov/commit/668c5d9f1fe796214201e8304e88bc9a79504dfe))
+* github cms oauth ([0046ffb](https://github.com/newjersey/navigator.business.nj.gov/commit/0046ffba5d24c48c7c47b1482f97872d8c81650a))
+* github cms oauth ([c7c59e9](https://github.com/newjersey/navigator.business.nj.gov/commit/c7c59e9b8a262ce27757af5acd3f950bc2d141ee))
+* github cms oauth ([9e92c01](https://github.com/newjersey/navigator.business.nj.gov/commit/9e92c01fff706e8747c5e5f8486447053076280e))
+* profile content ([39c0ea9](https://github.com/newjersey/navigator.business.nj.gov/commit/39c0ea9dbdc3135ecdafac2d442bb777b35fac58))
+* update netlify-cms config.yml ([24dff0c](https://github.com/newjersey/navigator.business.nj.gov/commit/24dff0c1d3e9050a7d2d0fc3ff24f10b20d3b111))
+* updating Roadmap Settings task-dependencies ([#1286](https://github.com/newjersey/navigator.business.nj.gov/issues/1286)) ([5a9b63f](https://github.com/newjersey/navigator.business.nj.gov/commit/5a9b63f82fdadae6a0ca4b08aa22e38aa66d7fb9))
+
+
+### Features
+
+* [[#1065](https://github.com/newjersey/navigator.business.nj.gov/issues/1065)] updated font-weight to steps in onboarding flow ([f5cbc56](https://github.com/newjersey/navigator.business.nj.gov/commit/f5cbc56be50102160966c0e96cebda496d10b3cb))
+* [[#1065](https://github.com/newjersey/navigator.business.nj.gov/issues/1065)] ux enhancement - heading font-size on onboarding pages ([57ced6e](https://github.com/newjersey/navigator.business.nj.gov/commit/57ced6e28017a8908aced8061ad720cfebad461d))
+* [[#826](https://github.com/newjersey/navigator.business.nj.gov/issues/826)] integrate name-search with NICUSA api ([f25a1ec](https://github.com/newjersey/navigator.business.nj.gov/commit/f25a1ecef5c1ef98323a9715bdbec5740f3c52d4))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] add contact info to business formation ([64ef13b](https://github.com/newjersey/navigator.business.nj.gov/commit/64ef13bccbbb71655a9b3246e8840cb1ae9711fd))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] add env vars for formation api ([1fa4130](https://github.com/newjersey/navigator.business.nj.gov/commit/1fa413075dcc0ec16bdb6a60f1039c46074c61cd))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] add migration for formationData ([387aa36](https://github.com/newjersey/navigator.business.nj.gov/commit/387aa36da526e76ee7c53d08c4392db8762b1ca0))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] add on-blur validation for dropdowns ([45c5975](https://github.com/newjersey/navigator.business.nj.gov/commit/45c5975b84ae944ff9f1d72f38cd613ca3ea152e))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] autofill form fields from userdata ([e6633d2](https://github.com/newjersey/navigator.business.nj.gov/commit/e6633d272ffb708823ad2ea0069d911868cedfce))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] business formation v1 - addressed open issues ([6a5917b](https://github.com/newjersey/navigator.business.nj.gov/commit/6a5917b08206f31303c86b9545b7b7f3d9c6c79a))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] display errors returned from formation api ([f3bbc1c](https://github.com/newjersey/navigator.business.nj.gov/commit/f3bbc1c4b8a753615b7f25c899b532605ca67d93))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] fix start-date label & helpertext ([b8d9a44](https://github.com/newjersey/navigator.business.nj.gov/commit/b8d9a44f8a5f0202851a19ae804ea69d917c00cd))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] full-page validation on submit ([239c008](https://github.com/newjersey/navigator.business.nj.gov/commit/239c008e9c424e6bca1ab0c7d542eb0145253067))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] integrate with NICUSA api backend ([91b01e8](https://github.com/newjersey/navigator.business.nj.gov/commit/91b01e8ec35a1b924f3a599bcd6db7227e462971))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] redirect to payment url on successful api call ([9f3d301](https://github.com/newjersey/navigator.business.nj.gov/commit/9f3d30149c906efd849c72c90fabfa09473b53f8))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] show success page when success response from API ([42b9f2e](https://github.com/newjersey/navigator.business.nj.gov/commit/42b9f2e4269ee85ad7b93ca5c475b0c7f25cf4bf))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] validate date on submit ([0cb7ddf](https://github.com/newjersey/navigator.business.nj.gov/commit/0cb7ddf22bbba9e86f9f3011d73f94124e0d04b2))
+* adding task dependencies to CMS w/refactor ([#1259](https://github.com/newjersey/navigator.business.nj.gov/issues/1259)) ([4823c1c](https://github.com/newjersey/navigator.business.nj.gov/commit/4823c1c148c4cd8f952183abd758588ac12fd5b4))
+* content splitting onboarding flows and profile ([#1240](https://github.com/newjersey/navigator.business.nj.gov/issues/1240)) ([2c1e741](https://github.com/newjersey/navigator.business.nj.gov/commit/2c1e741753d28dbeffa216df8a401d30dc438254))
+* github cms oauth ([f6245d2](https://github.com/newjersey/navigator.business.nj.gov/commit/f6245d28a395fe0c86cb9142adc9d7c0dec1dece))
+* squashing cms changes ([61d1d20](https://github.com/newjersey/navigator.business.nj.gov/commit/61d1d20d7c1e4b58ef2d7e38cb52d53e20cae2d6))
+
 # [1.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.5.0...v1.6.0) (2021-12-22)
 
 
