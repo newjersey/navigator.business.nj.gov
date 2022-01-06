@@ -416,8 +416,16 @@ describe("<BusinessFormation />", () => {
         generateFormationSubmitResponse({
           success: false,
           errors: [
-            generateFormationSubmitError({ field: "some field 1", message: "very bad input" }),
-            generateFormationSubmitError({ field: "some field 2", message: "must be nj zipcode" }),
+            generateFormationSubmitError({
+              field: "some field 1",
+              message: "very bad input",
+              type: "RESPONSE",
+            }),
+            generateFormationSubmitError({
+              field: "some field 2",
+              message: "must be nj zipcode",
+              type: "RESPONSE",
+            }),
           ],
         })
       );
