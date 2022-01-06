@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { templateEval, zipCodeRange } from "@/lib/utils/helpers";
+import { setHeaderRole, templateEval, zipCodeRange } from "@/lib/utils/helpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared";
 import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -34,10 +34,14 @@ export const BusinessNameAndLegalStructure = (): ReactElement => {
     );
   };
 
+  const headerLevelTwo = setHeaderRole(2, "h3-styling");
+
   return (
     <>
       <div className="margin-bottom-2">
-        <Content>{state.displayContent.businessNameAndLegalStructure.contentMd}</Content>
+        <Content overrides={{ h3: headerLevelTwo }}>
+          {state.displayContent.businessNameAndLegalStructure.contentMd}
+        </Content>
       </div>
       {makeUpdateProfileLink(
         BusinessFormationDefaults.legalStructureLabel,

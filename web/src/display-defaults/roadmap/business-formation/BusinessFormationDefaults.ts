@@ -11,7 +11,7 @@ export const BusinessFormationDefaults: Record<string, string> = {
   businessAddressCityLabel: "City",
   notSetBusinessAddressCityLabel: "Not set",
   businessAddressZipCodeErrorText: "Must be a NJ Zip Code between 07001 and 08999",
-  agentNumberErrorText: "Agent number is required",
+  agentNumberErrorText: "Registered Agent Number must be 4-7 digits",
   agentNameErrorText: "Agent name is required",
   agentEmailErrorText: "Agent email is required",
   agentOfficeAddressLine1ErrorText: "Agent office address is required",
