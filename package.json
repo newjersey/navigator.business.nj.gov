@@ -149,7 +149,7 @@
     "good-fences": "1.0.1",
     "husky": "7.0.4",
     "identity-obj-proxy": "3.0.0",
-    "jasmine": "3.99.0",
+    "jasmine": "4.0.1",
     "jest": "27.4.5",
     "jest-dynalite": "3.4.4",
     "jest-junit": "13.0.0",
