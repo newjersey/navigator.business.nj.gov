@@ -51,8 +51,8 @@ export const BusinessFormationTextField = (props: Props): ReactElement => {
         disabled={props.disabled}
         {...props.fieldOptions}
         inputProps={{
-          "aria-label": camelCaseToSentence(props.fieldName),
           ...props.fieldOptions?.inputProps,
+          "aria-label": camelCaseToSentence(props.fieldName),
         }}
       />
     </div>

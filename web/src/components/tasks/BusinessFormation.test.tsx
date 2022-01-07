@@ -196,10 +196,7 @@ describe("<BusinessFormation />", () => {
       await waitFor(() => {
         expect(subject.getByText("LTD LIABILITY CO")).toBeInTheDocument();
 
-        const today = dayjs().format("MMM D, YYYY");
-        expect(getInputElementByLabel(`Choose date, selected date is ${today}`).value).toBe(
-          dayjs().format("MM/DD/YYYY")
-        );
+        expect(getInputElementByLabel("Business start date").value).toBe(dayjs().format("MM/DD/YYYY"));
 
         expect(getInputElementByLabel("Business address line1").value).toBe("123 main street");
         expect(getInputElementByLabel("Business address line2").value).toBe("suite 102");
@@ -326,8 +323,7 @@ describe("<BusinessFormation />", () => {
 
     it("defaults date picker to current date when it has no value", () => {
       renderWithData({ businessStartDate: "" });
-      const today = dayjs().format("MMM D, YYYY");
-      expect(subject.getByLabelText(`Choose date, selected date is ${today}`)).toBeInTheDocument();
+      expect(subject.getByLabelText("Business start date")).toBeInTheDocument();
     });
 
     it("defaults to registered agent number and toggles to manual with radio button", () => {
@@ -731,9 +727,10 @@ describe("<BusinessFormation />", () => {
   };
 
   const selectDate = (value: Dayjs) => {
-    const today = dayjs().format("MMM D, YYYY");
     const desiredValue = value.format("MMM D, YYYY");
-    fireEvent.click(subject.getByLabelText(`Choose date, selected date is ${today}`));
+
+    fireEvent.click(subject.getByLabelText(`Business start date`));
+
     const chosenDate = subject.getByRole("button", { name: desiredValue });
     fireEvent.click(chosenDate);
   };
