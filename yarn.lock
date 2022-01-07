@@ -2422,7 +2422,7 @@ __metadata:
     eslint-config-prettier: 8.3.0
     express: 4.17.2
     good-fences: 1.0.1
-    jasmine: 3.99.0
+    jasmine: 4.0.1
     jest: 27.4.5
     jest-dynalite: 3.4.4
     jest-junit: 13.0.0
@@ -2570,7 +2570,7 @@ __metadata:
     gray-matter: 4.0.3
     husky: 7.0.4
     identity-obj-proxy: 3.0.0
-    jasmine: 3.99.0
+    jasmine: 4.0.1
     jest: 27.4.5
     jest-dynalite: 3.4.4
     jest-junit: 13.0.0
@@ -20937,22 +20937,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:~3.99.0":
-  version: 3.99.0
-  resolution: "jasmine-core@npm:3.99.0"
-  checksum: afab2049116105547619b6591a700a137c95b3535ddc83583df666db356d45a7ea5564eeef74321b414d839c796d619e5fa1584096a73f82bd978a2bdad06b1a
+"jasmine-core@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "jasmine-core@npm:4.0.0"
+  checksum: ebb5906c3e91f6d403e9122b8c2955c3272072c4b0fecc1cf1d356e8e4399b0c85b8d6dd0b5abbaa3b9afbdcd279c13394a4a71c0683d4e68fb18213abb68065
   languageName: node
   linkType: hard
 
-"jasmine@npm:3.99.0":
-  version: 3.99.0
-  resolution: "jasmine@npm:3.99.0"
+"jasmine@npm:4.0.1":
+  version: 4.0.1
+  resolution: "jasmine@npm:4.0.1"
   dependencies:
     glob: ^7.1.6
-    jasmine-core: ~3.99.0
+    jasmine-core: ^4.0.0
   bin:
     jasmine: bin/jasmine.js
-  checksum: baa9a5d8555b844063cd6e11bb272d424a17fa3ebd31c62b211a80c9b8dbb4d9c26218b33212b4f8122e38204a443c2eefbcce89c1c72ee3f0044037ec651427
+  checksum: 8d1922e93ed47e17d4b6209ba1c48f4c652e612287f4c4339c1d1fdc68cc1ea7c238164b31066fa24ceeececbef666320e03768bf374a5dc817bdb2f7c43d2a2
   languageName: node
   linkType: hard
 
