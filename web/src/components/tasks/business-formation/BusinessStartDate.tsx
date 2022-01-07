@@ -53,6 +53,7 @@ export const BusinessStartDate = (): ReactElement => {
                 helperText={showError ? BusinessFormationDefaults.startDateErrorText : " "}
                 inputProps={{
                   ...params.inputProps,
+                  "aria-label": "Business start date",
                   "data-testid": "date-textfield",
                 }}
               />
