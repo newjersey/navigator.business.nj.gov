@@ -2607,7 +2607,7 @@ __metadata:
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.0
     simple-oauth2: 4.3.0
-    storybook-addon-designs: 6.2.0
+    storybook-addon-designs: 6.2.1
     style-loader: 3.3.1
     supertest: 6.1.6
     swr: 1.1.2
@@ -32258,12 +32258,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-designs@npm:6.2.0":
-  version: 6.2.0
-  resolution: "storybook-addon-designs@npm:6.2.0"
+"storybook-addon-designs@npm:6.2.1":
+  version: 6.2.1
+  resolution: "storybook-addon-designs@npm:6.2.1"
   dependencies:
     "@figspec/react": ^1.0.0
-  checksum: 2fe4e30a3cf505fa7839db60692f5a5f985e12e8734b58f35190a9715338beb7387f5f8a15a7c4fb6c256a0bfcacba9c6e1267fe50344fd622c05c877e1dadbc
+  checksum: 0ea3ef4d1b08b5604ac0592697793a5e30eac33fae8499bd772a1568bc21bb2ea67ed638d9b4c2f4e94713ceb5321e23fb4985d381e3c9c61094abe3a6b58063
   languageName: node
   linkType: hard
 
