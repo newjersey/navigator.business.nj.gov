@@ -1,7 +1,7 @@
 export const ProfileDefaults: Record<string, string> = {
   pageTitle: "My Profile",
   saveButtonText: "Save",
-  backButtonText: "Back to Roadmap",
+  backButtonText: "Go Back",
   successTextHeader: "Profile Updated",
   successTextBody: "Your profile has been updated.",
   successTextLink: "Go back to Roadmap.",

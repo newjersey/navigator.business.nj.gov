@@ -83,7 +83,7 @@ describe("task page", () => {
     expect(subject.getByText("destination: city clerk")).toBeInTheDocument();
     expect(subject.getByText("Submit The Form Here")).toBeInTheDocument();
 
-    expect(subject.queryByText("Back to Roadmap", { exact: false })).toBeInTheDocument();
+    expect(subject.queryByText(TaskDefaults.backToRoadmapText, { exact: false })).toBeInTheDocument();
   });
 
   it("does not show button if no link available", () => {
