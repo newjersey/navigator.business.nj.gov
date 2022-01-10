@@ -1,3 +1,18 @@
+# [1.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.7.0...v1.8.0) (2022-01-10)
+
+
+### Bug Fixes
+
+* **deps:** update material-ui monorepo ([24ce4a7](https://github.com/newjersey/navigator.business.nj.gov/commit/24ce4a77e18a3d2d94b3fcd805f7805c0fc4889a))
+
+
+### Features
+
+* [[#876](https://github.com/newjersey/navigator.business.nj.gov/issues/876)] google analytics improvements ([e2856c5](https://github.com/newjersey/navigator.business.nj.gov/commit/e2856c5a2821c596208243582db46834f6b86471))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] business formation - updated response error logic ([7bd9124](https://github.com/newjersey/navigator.business.nj.gov/commit/7bd9124af95490777fab520e8b604dd8e2a116cf))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] fixed accessability issues on business formation ([091cf97](https://github.com/newjersey/navigator.business.nj.gov/commit/091cf97e6d8e5d3256d20a8d7ccd48e2bf98e9bb))
+* [[#977](https://github.com/newjersey/navigator.business.nj.gov/issues/977)] fixed datepicker accessibility issue ([2833df7](https://github.com/newjersey/navigator.business.nj.gov/commit/2833df71760ec7f9751a73faa8bf78ededea4137))
+
 # [1.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.6.0...v1.7.0) (2022-01-06)
 
 
