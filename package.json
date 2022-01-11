@@ -163,7 +163,7 @@
     "prettier-plugin-organize-imports": "2.3.4",
     "raw-loader": "4.0.2",
     "rimraf": "3.0.2",
-    "sass": "1.45.2",
+    "sass": "1.47.0",
     "sass-loader": "12.4.0",
     "semantic-release": "18.0.1",
     "serverless": "2.70.0",
