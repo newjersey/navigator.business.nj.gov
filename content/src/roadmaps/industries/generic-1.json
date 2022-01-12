@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
-  "canBeHomeBased": true,
-  "canBeReseller": true,
+  "canBeHomeBased": false,
+  "canBeReseller": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -32,6 +32,7 @@
   "name": "Pharmacy",
   "isLiquorLicenseApplicable": false,
   "modifications": [],
+  "additionalSearchTerms": "pharmaceutics, drugstore, apothecary, chemist medicine",
   "id": "pharmacy",
-  "description": "Select this if you don’t see your specific industry"
+  "description": "A business that prepares and dispenses prescriptions and medicine"
 }
