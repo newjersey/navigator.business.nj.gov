@@ -90,6 +90,10 @@ export const getLastCalledWith = <T, R>(fn: jest.MockInstance<T, R[]>): R[] => {
   return fn.mock.calls[lastIndex];
 };
 
+export const getNumberOfMockCalls = <T, R>(fn: jest.MockInstance<T, R[]>): number => {
+  return fn.mock.calls.length;
+};
+
 export const getPathSeparator = (): string => {
   const isWin = os.platform() === "win32";
   if (isWin) {

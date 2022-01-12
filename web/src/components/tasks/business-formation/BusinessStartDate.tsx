@@ -39,9 +39,8 @@ export const BusinessStartDate = (): ReactElement => {
             value={dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD")}
             inputFormat={"MM/DD/YYYY"}
             onChange={(newValue: Dayjs | null): void => {
-              if (newValue) {
-                handleChange(newValue.format("YYYY-MM-DD"));
-              }
+              if (newValue) handleChange(newValue.format("YYYY-MM-DD"));
+              if (newValue === null) handleChange("");
             }}
             onError={(hasError: string | null) => {
               setShowError(!!hasError);
