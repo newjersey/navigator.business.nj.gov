@@ -6,10 +6,10 @@ id: pharmacy-prepare
 callToActionLink: https://www.njconsumeraffairs.gov/regulations/Chapter-39-State-Board-of-Pharmacy.pdf
 callToActionText: "Read the Pharmacy Rules "
 ---
-The State regulates pharmacies for the safety of workers and customers. To help guide pharmacies on rules they have created a handbook.
+The State regulates pharmacies for the safety of workers and customers. To help guide pharmacies on State rules, the New Jersey Department of Consumer Affairs' Board of Pharmacy created a handbook.
 
 This document contains critical information on:
 
 * Permit application and renewal process
-* Shop requirements (Design, Appliances, and Library)
-* Requirements of the Pharmacist-In-Charge and Other Personnel
+* Shop requirements (site design, appliances, and library)
+* Requirements of the Pharmacist-In-Charge and other personnel
