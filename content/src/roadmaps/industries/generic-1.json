@@ -32,6 +32,6 @@
   "name": "Pharmacy",
   "isLiquorLicenseApplicable": false,
   "modifications": [],
-  "id": "generic",
+  "id": "pharmacy",
   "description": "Select this if you don’t see your specific industry"
 }
