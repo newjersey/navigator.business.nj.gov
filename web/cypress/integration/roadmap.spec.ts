@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { clickEdit, clickNext, clickSave, clickToastLink, completeOnboarding } from "../support/helpers";
+import { clickEdit, clickNext, clickSave, completeOnboarding } from "../support/helpers";
 
 describe("Roadmap [feature] [all] [group2]", () => {
   beforeEach(() => {
@@ -70,7 +70,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.contains("Allendale").click({ force: true });
 
     clickSave();
-    clickToastLink();
 
     // check roadmap
     cy.get('[data-business-name="Applebee\'s"]').should("exist");

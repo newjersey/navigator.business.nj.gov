@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { clickBack, clickEdit, clickNext, clickSave, completeOnboarding } from "../support/helpers";
+import { clickEdit, clickNext, clickSave, completeOnboarding } from "../support/helpers";
 
 describe("Roadmap [feature] [all] [group3]", () => {
   beforeEach(() => {
@@ -72,7 +72,6 @@ describe("Roadmap [feature] [all] [group3]", () => {
     cy.contains("Restaurant").click({ force: true });
 
     clickSave();
-    clickBack();
 
     // check roadmap
     cy.get('[data-business-name="Applebee\'s"]').should("exist");
