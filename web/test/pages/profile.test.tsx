@@ -93,13 +93,11 @@ describe("profile", () => {
     expect(getNotesValue()).toEqual("whats appppppp");
   });
 
-  it("user is able to save and stays on the page", async () => {
+  it("user is able to save and is redirected to roadmap", async () => {
     subject = renderPage({});
     fillText("Business name", "Cool Computers");
     clickSave();
-    await waitFor(() => expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument());
-    expect(currentUserData().profileData.businessName).toEqual("Cool Computers");
-    fillText("Business name", "Cool Computers2");
+    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap?success=true"));
   });
 
   it("updates the user data on save", async () => {

@@ -1,3 +1,4 @@
+import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { FilingReference } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
@@ -21,7 +22,7 @@ import {
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, RenderResult, within } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
 import { useMockDate } from "../mock/useMockDate";
@@ -101,6 +102,13 @@ describe("roadmap page", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     renderRoadmapPage();
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
+  });
+
+  it("shows toast alert when success query is true", async () => {
+    useMockProfileData({});
+    useMockRouter({ isReady: true, query: { success: "true" } });
+    const subject = renderRoadmapPage();
+    await waitFor(() => expect(subject.getByText(ProfileDefaults.successTextHeader)).toBeInTheDocument());
   });
 
   describe("business information", () => {

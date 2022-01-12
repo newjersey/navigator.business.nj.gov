@@ -37,7 +37,6 @@ import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgo
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, ReactElement, useContext, useEffect, useState } from "react";
 
@@ -94,6 +93,7 @@ const ProfilePage = (props: Props): ReactElement => {
     update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");
+      router.push("/roadmap?success=true");
     });
   };
 
@@ -167,16 +167,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 <div data-testid={`toast-alert-${alert}`} className="h3-styling">
                   {OnboardingStatusLookup[alert].header}
                 </div>
-                <div className="padding-top-05">
-                  {OnboardingStatusLookup[alert].body}{" "}
-                  {OnboardingStatusLookup[alert] && (
-                    <Link href="/roadmap">
-                      <a href="/roadmap" data-testid={`toast-link`}>
-                        {OnboardingStatusLookup[alert].link}
-                      </a>
-                    </Link>
-                  )}
-                </div>
+                <div className="padding-top-05">{OnboardingStatusLookup[alert].body}</div>
               </ToastAlert>
             )}
             <UserDataErrorAlert />

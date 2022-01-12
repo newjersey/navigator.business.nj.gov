@@ -130,7 +130,6 @@ export const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
   SUCCESS: {
     body: ProfileDefaults.successTextBody,
     header: ProfileDefaults.successTextHeader,
-    link: ProfileDefaults.successTextLink,
     variant: "success",
   },
   ERROR: {
