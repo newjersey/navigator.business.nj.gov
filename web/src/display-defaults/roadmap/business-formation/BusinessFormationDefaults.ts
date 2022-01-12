@@ -1,5 +1,8 @@
 export const BusinessFormationDefaults: Record<string, string> = {
   notSetBusinessNameText: "Not set",
+  initialNextButtonText: "Start Forming My Business",
+  nextButtonText: "Continue",
+  previousButtonText: "Back",
   submitButtonText: "Submit",
   suffixErrorText: "Business suffix is required",
   businessNameLabel: "Business Name:",

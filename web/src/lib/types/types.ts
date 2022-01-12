@@ -1,4 +1,5 @@
 import { BusinessUser, emptyProfileData, PaymentType, ProfileData } from "@businessnjgovnavigator/shared";
+import { FormationFormData } from "@businessnjgovnavigator/shared/";
 
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
@@ -366,6 +367,9 @@ export const profileFields: ProfileFields[] = [
 ] as ProfileFields[];
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
+
+export type FormationFields = keyof FormationFormData;
+export type FormationFieldErrorMap = Record<FormationFields, FieldStatus>;
 
 export type FieldStatus = {
   invalid: boolean;

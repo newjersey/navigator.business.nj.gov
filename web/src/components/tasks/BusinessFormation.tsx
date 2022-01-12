@@ -1,48 +1,31 @@
 import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds/Alert";
 import { TaskHeader } from "@/components/TaskHeader";
-import { RegisteredAgent } from "@/components/tasks/business-formation/RegisteredAgent";
-import { Signatures } from "@/components/tasks/business-formation/Signatures";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
-import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
 import {
   createEmptyFormationDisplayContent,
-  FieldStatus,
   FormationDisplayContent,
+  FormationFieldErrorMap,
+  FormationFields,
   Task,
 } from "@/lib/types/types";
-import {
-  camelCaseToSentence,
-  getModifiedTaskContent,
-  templateEval,
-  useMountEffectWhenDefined,
-} from "@/lib/utils/helpers";
+import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
-import { useRouter } from "next/router";
-import React, { createContext, ReactElement, useMemo, useState } from "react";
-import { Button } from "../njwds-extended/Button";
+import React, { createContext, ReactElement, useState } from "react";
 import { TaskCTA } from "../TaskCTA";
-import { BusinessFormationDocuments } from "./business-formation/BusinessFormationDocuments";
-import { BusinessFormationNotifications } from "./business-formation/BusinessFormationNotifications";
-import { BusinessNameAndLegalStructure } from "./business-formation/BusinessNameAndLegalStructure";
-import { ContactFirstName } from "./business-formation/ContactFirstName";
-import { ContactLastName } from "./business-formation/ContactLastName";
-import { ContactPhoneNumber } from "./business-formation/ContactPhoneNumber";
-import { PaymentTypeDropdown } from "./business-formation/PaymentTypeDropdown";
+import { BusinessSection } from "./business-formation/BusinessSection";
+import { ContactsSection } from "./business-formation/ContactsSection";
+import { PaymentSection } from "./business-formation/PaymentSection";
 
 interface Props {
   task: Task;
   displayContent: FormationDisplayContent;
 }
-
-type FormationFields = keyof FormationFormData;
-type FormationFieldErrorMap = Record<FormationFields, FieldStatus>;
 
 const allFormationFormFields = Object.keys(createEmptyFormationFormData()) as (keyof FormationFormData)[];
 
@@ -53,6 +36,7 @@ const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
   }, {} as FormationFieldErrorMap);
 
 interface FormationState {
+  tab: number;
   formationFormData: FormationFormData;
   displayContent: FormationDisplayContent;
   errorMap: FormationFieldErrorMap;
@@ -62,30 +46,31 @@ interface FormationContextType {
   state: FormationState;
   setFormationFormData: (formationFormData: FormationFormData) => void;
   setErrorMap: (errorMap: FormationFieldErrorMap) => void;
+  setTab: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const FormationContext = createContext<FormationContextType>({
   state: {
+    tab: 1,
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent(),
     errorMap: createFormationFieldErrorMap(),
   },
   setFormationFormData: () => {},
   setErrorMap: () => {},
+  setTab: () => {},
 });
 
 export const BusinessFormation = (props: Props): ReactElement => {
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
   const { roadmap } = useRoadmap();
-  const { userData, update } = useUserData();
-  const router = useRouter();
+  const { userData } = useUserData();
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
+  const [tab, setTab] = useState(1);
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
-  const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
 
   const isLLC = userData?.profileData.legalStructureId === "limited-liability-company";
   const unlockedByTaskLinks = taskFromRoadmap
@@ -103,86 +88,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
       contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
     });
   }, userData);
-
-  const requiredFieldsWithError = useMemo(() => {
-    const isStartDateValid = (): boolean => {
-      if (!formationFormData.businessStartDate) return false;
-      return (
-        dayjs(formationFormData.businessStartDate).isValid() &&
-        dayjs(formationFormData.businessStartDate).isAfter(dayjs().subtract(1, "day"), "day")
-      );
-    };
-
-    let requiredFields: FormationFields[] = [
-      "businessSuffix",
-      "businessAddressLine1",
-      "businessAddressZipCode",
-      "signer",
-      "paymentType",
-      "contactFirstName",
-      "contactLastName",
-      "contactPhoneNumber",
-    ];
-
-    if (formationFormData.agentNumberOrManual === "NUMBER") {
-      requiredFields = [...requiredFields, "agentNumber"];
-    }
-
-    if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
-      requiredFields = [
-        ...requiredFields,
-        "agentName",
-        "agentEmail",
-        "agentOfficeAddressLine1",
-        "agentOfficeAddressCity",
-        "agentOfficeAddressZipCode",
-      ];
-    }
-
-    const invalidFields = requiredFields.filter((it) => errorMap[it].invalid || !formationFormData[it]);
-    if (!isStartDateValid()) {
-      invalidFields.push("businessStartDate");
-    }
-    return invalidFields;
-  }, [formationFormData, errorMap]);
-
-  const submitFormationFormData = async () => {
-    if (!userData) return;
-
-    if (requiredFieldsWithError.length > 0) {
-      setShowRequiredFieldsError(true);
-      const newErrorMappedFields = requiredFieldsWithError.reduce(
-        (acc: FormationFieldErrorMap, cur: FormationFields) => ({ ...acc, [cur]: { invalid: true } }),
-        {} as FormationFieldErrorMap
-      );
-      setErrorMap({ ...errorMap, ...newErrorMappedFields });
-      return;
-    }
-
-    setShowRequiredFieldsError(false);
-    const formationFormDataWithEmptySignersRemoved = {
-      ...formationFormData,
-      additionalSigners: formationFormData.additionalSigners.filter((it) => !!it),
-    };
-
-    setIsLoading(true);
-    const newUserData = await api.postBusinessFormation({
-      ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationFormData: formationFormDataWithEmptySignersRemoved,
-      },
-    });
-
-    update(newUserData);
-    setIsLoading(false);
-    if (
-      newUserData.formationData.formationResponse?.success &&
-      newUserData.formationData.formationResponse?.redirect
-    ) {
-      await router.replace(newUserData.formationData.formationResponse.redirect);
-    }
-  };
 
   if (!isLLC) {
     return (
@@ -230,61 +135,25 @@ export const BusinessFormation = (props: Props): ReactElement => {
     <FormationContext.Provider
       value={{
         state: {
+          tab: tab,
           formationFormData: formationFormData,
           displayContent: props.displayContent,
           errorMap: errorMap,
         },
         setFormationFormData,
         setErrorMap,
+        setTab,
       }}
     >
-      <TaskHeader task={props.task} />
-      <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />
-      <div data-testid="formation-form">
-        <BusinessNameAndLegalStructure />
-        <RegisteredAgent />
-        <Signatures />
-        <ContactFirstName />
-        <ContactLastName />
-        <ContactPhoneNumber />
-        <PaymentTypeDropdown />
-        <BusinessFormationDocuments />
-        <BusinessFormationNotifications />
-        <Content>{props.displayContent.disclaimer.contentMd}</Content>{" "}
-        {userData.formationData.formationResponse &&
-          !isLoading &&
-          !showRequiredFieldsError &&
-          userData.formationData.formationResponse.errors.length > 0 && (
-            <Alert variant="error" heading={BusinessFormationDefaults.submitErrorHeading}>
-              <ul>
-                {userData.formationData.formationResponse.errors.map((it) => (
-                  <li key={it.field}>
-                    {it.field}
-                    <ul>
-                      <li>
-                        <Content>{it.message}</Content>
-                      </li>
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-            </Alert>
-          )}
-        {showRequiredFieldsError && requiredFieldsWithError.length > 0 && (
-          <Alert variant="error" heading={BusinessFormationDefaults.missingFieldsOnSubmitModalText}>
-            <ul>
-              {requiredFieldsWithError.map((it) => (
-                <li key={it}>{camelCaseToSentence(it)}</li>
-              ))}
-            </ul>
-          </Alert>
-        )}
-        <div className="margin-top-2 ">
-          <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
-            <Button loading={isLoading} style="primary" onClick={submitFormationFormData}>
-              {BusinessFormationDefaults.submitButtonText}
-            </Button>{" "}
-          </div>
+      <div className="flex flex-column  minh-37">
+        <div>
+          <TaskHeader task={props.task} />
+          <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />
+        </div>
+        <div data-testid="formation-form" className="fg1 flex flex-column space-between">
+          <BusinessSection />
+          <ContactsSection />
+          <PaymentSection displayContent={props.displayContent} />
         </div>
       </div>
     </FormationContext.Provider>
