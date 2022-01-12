@@ -12,4 +12,4 @@ This document contains critical information on:
 
 * Permit application and renewal process
 * Shop requirements (site design, appliances, and library)
-* Requirements of the Pharmacist-In-Charge and other personnel
+* Requirements of the `Pharmacist-In-Charge|pharmicist-in-charge` and other personnel
