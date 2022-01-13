@@ -23,7 +23,7 @@ import { featureFlags, getModifiedTaskContent, getUrlSlugs, rswitch } from "@/li
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import React, { ReactElement, useMemo } from "react";
+import React, { ReactElement, ReactNode, useMemo } from "react";
 
 interface Props {
   task: Task;
@@ -84,44 +84,18 @@ const TaskPage = (props: Props): ReactElement => {
     </div>
   );
 
-  const getPostOnboardingQuestion = (): ReactElement => {
-    if (!props.task.postOnboardingQuestion) return <></>;
-    return rswitch(props.task.postOnboardingQuestion, {
-      "construction-renovation": (
-        <RadioQuestion id="construction-renovation" onboardingKey="constructionRenovationPlan" />
-      ),
-      default: <></>,
-    });
-  };
-
-  const getTaskContent = (): ReactElement => {
-    const content = getModifiedTaskContent(roadmap, props.task, "contentMd");
-    const [beforeQuestion, afterQuestion] = content.split("{postOnboardingQuestion}");
-    return (
-      <>
-        <Content>{beforeQuestion}</Content>
-        {getPostOnboardingQuestion()}
-        <Content>{afterQuestion}</Content>
-      </>
-    );
+  const getTaskBody = (): ReactElement => {
+    const task = {
+      ...props.task,
+      contentMd: getModifiedTaskContent(roadmap, props.task, "contentMd"),
+      callToActionLink: getModifiedTaskContent(roadmap, props.task, "callToActionLink"),
+      callToActionText: getModifiedTaskContent(roadmap, props.task, "callToActionText"),
+    };
+    return <TaskElement task={task}>{getUnlockedBy()}</TaskElement>;
   };
 
   const businessFormationFeatureFlag = (): ReactElement => {
-    if (featureDisableFormation)
-      return (
-        <div className="flex flex-column space-between minh-37">
-          <div>
-            <TaskHeader task={props.task} />
-            {getUnlockedBy()}
-            {getTaskContent()}
-          </div>
-          <TaskCTA
-            link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
-            text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
-          />
-        </div>
-      );
-
+    if (featureDisableFormation) return getTaskBody();
     return (
       <BusinessFormation task={props.task} displayContent={props.displayContent.formationDisplayContent} />
     );
@@ -142,23 +116,38 @@ const TaskPage = (props: Props): ReactElement => {
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
             "form-business-entity": businessFormationFeatureFlag(),
-            default: (
-              <div className="flex flex-column space-between minh-37">
-                <div>
-                  <TaskHeader task={props.task} />
-                  {getUnlockedBy()}
-                  {getTaskContent()}
-                </div>
-                <TaskCTA
-                  link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
-                  text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
-                />
-              </div>
-            ),
+            default: getTaskBody(),
           })}
         </SidebarPageLayout>
       </PageSkeleton>
     </>
+  );
+};
+
+const getPostOnboardingQuestion = (task: Task): ReactElement => {
+  if (!task.postOnboardingQuestion) return <></>;
+  return rswitch(task.postOnboardingQuestion, {
+    "construction-renovation": (
+      <RadioQuestion id="construction-renovation" onboardingKey="constructionRenovationPlan" />
+    ),
+    default: <></>,
+  });
+};
+
+export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }) => {
+  const [beforeQuestion, afterQuestion] = props.task.contentMd.split("{postOnboardingQuestion}");
+
+  return (
+    <div id="taskElement" className="flex flex-column space-between minh-37">
+      <div>
+        <TaskHeader task={props.task} />
+        {props.children}
+        <Content>{beforeQuestion}</Content>
+        {getPostOnboardingQuestion(props.task)}
+        <Content>{afterQuestion}</Content>
+      </div>
+      <TaskCTA link={props.task.callToActionLink} text={props.task.callToActionText} />
+    </div>
   );
 };
 

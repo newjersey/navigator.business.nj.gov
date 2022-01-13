@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { SlugControl } from "../../lib/cms/fields/slugfield";
+import TaskPreview from "../../lib/cms/previews/task";
 
 const CMS_CONFIG = {};
 const Loading = () => (
@@ -17,10 +18,16 @@ const CMS = dynamic(
       CMS.init({ CMS_CONFIG });
       // @ts-expect-error: No type definition available
       CMS.registerWidget("slug", SlugControl);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("tasks", TaskPreview);
     }),
   { ssr: false, loading: Loading }
 );
 
-const Admin = () => <CMS />;
+const Admin = () => (
+  <>
+    <CMS />
+  </>
+);
 
 export default Admin;
