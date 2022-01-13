@@ -257,7 +257,13 @@ export const zipCodeRange = (value: string) => {
 
 export const featureFlags = (
   query: ParsedUrlQuery
-): Record<"featureDisableOperate" | "featureDisableOscarOnboarding" | "featureDisableFormation", boolean> => {
+): Record<
+  | "featureDisableOperate"
+  | "featureDisableOscarOnboarding"
+  | "featureDisableFormation"
+  | "featureHidePharmacyLicenseCheck",
+  boolean
+> => {
   const featureDisableOperate = query?.operate
     ? query?.operate === "false"
     : process.env.FEATURE_DISABLE_OPERATE
@@ -273,5 +279,15 @@ export const featureFlags = (
     : process.env.FEATURE_DISABLE_FORMATION
     ? process.env.FEATURE_DISABLE_FORMATION === "true"
     : false;
-  return { featureDisableOperate, featureDisableOscarOnboarding, featureDisableFormation };
+  const featureHidePharmacyLicenseCheck = query?.pharmacy
+    ? query?.pharmacy === "false"
+    : process.env.FEATURE_HIDE_PHARMACY_LICENSE_CHECK
+    ? process.env.FEATURE_HIDE_PHARMACY_LICENSE_CHECK === "true"
+    : false;
+  return {
+    featureDisableOperate,
+    featureDisableOscarOnboarding,
+    featureDisableFormation,
+    featureHidePharmacyLicenseCheck,
+  };
 };
