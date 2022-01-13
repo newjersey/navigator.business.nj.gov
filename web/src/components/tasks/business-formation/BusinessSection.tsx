@@ -2,6 +2,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import { scrollToTop } from "@/lib/utils/helpers";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -67,9 +68,9 @@ export const BusinessSection = (): ReactElement => {
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
       return;
     }
-
     setShowRequiredFieldsError(false);
     setTab(2);
+    scrollToTop();
     update({
       ...userData,
       formationData: {

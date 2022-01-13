@@ -40,6 +40,7 @@ export const BusinessFormationTextField = (props: Props): ReactElement => {
       <TextField
         value={value ?? ""}
         id={props.fieldName}
+        onInput={props.onValidation}
         onChange={handleChange}
         onBlur={props.onValidation}
         onSubmit={props.onValidation}

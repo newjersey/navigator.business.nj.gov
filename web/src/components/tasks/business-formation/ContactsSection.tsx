@@ -2,6 +2,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import { scrollToTop } from "@/lib/utils/helpers";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 import { BusinessFormationFieldAlert } from "./BusinessFormationFieldAlert";
@@ -37,6 +38,7 @@ export const ContactsSection = (): ReactElement => {
 
     setShowRequiredFieldsError(false);
     setTab(3);
+    scrollToTop();
 
     const formationFormDataWithEmptySignersRemoved = {
       ...state.formationFormData,
@@ -65,7 +67,13 @@ export const ContactsSection = (): ReactElement => {
       </div>
       <div className="margin-top-2">
         <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
-          <Button style="secondary" onClick={() => setTab(1)}>
+          <Button
+            style="secondary"
+            onClick={() => {
+              setTab(1);
+              scrollToTop();
+            }}
+          >
             {BusinessFormationDefaults.previousButtonText}
           </Button>
           <Button style="primary" onClick={submitContactData}>

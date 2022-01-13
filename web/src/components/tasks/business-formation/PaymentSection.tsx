@@ -5,6 +5,7 @@ import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-f
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationDisplayContent, FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import { scrollToTop } from "@/lib/utils/helpers";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -115,7 +116,13 @@ export const PaymentSection = (props: Props): ReactElement => {
         )}
       <div className="margin-top-2 ">
         <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
-          <Button style="secondary" onClick={() => setTab(2)}>
+          <Button
+            style="secondary"
+            onClick={() => {
+              setTab(2);
+              scrollToTop();
+            }}
+          >
             {BusinessFormationDefaults.previousButtonText}
           </Button>
           <Button loading={isLoading} style="primary" onClick={submitFormationFormData}>
