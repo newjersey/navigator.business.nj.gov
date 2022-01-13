@@ -243,6 +243,23 @@ describe("task page", () => {
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
+  it("loads License task screen for pharmacy-license", () => {
+    process.env = Object.assign(process.env, { FEATURE_HIDE_PHARMACY_LICENSE_CHECK: false });
+    subject = renderPage(
+      generateTask({ id: "pharmacy-license" }),
+      generateUserData({ licenseData: undefined })
+    );
+    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
+  it("hides pharmacy-license License Task screen under feature flag", () => {
+    process.env = Object.assign(process.env, { FEATURE_HIDE_PHARMACY_LICENSE_CHECK: true });
+    const task = generateTask({ id: "pharmacy-license" });
+    subject = renderPage(task, generateUserData({ licenseData: undefined }));
+    expect(subject.queryByTestId("cta-secondary")).not.toBeInTheDocument();
+    expect(subject.getByText(task.contentMd)).toBeInTheDocument();
+  });
+
   it("loads construction post-onboarding question for task in template body", async () => {
     subject = renderPage(
       generateTask({

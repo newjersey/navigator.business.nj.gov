@@ -155,6 +155,12 @@
       "dependencies": [
         "register-consumer-affairs"
       ]
+    },
+    {
+      "name": "pharmacy-license",
+      "dependencies": [
+        "site-safety-permits"
+      ]
     }
   ]
 }
