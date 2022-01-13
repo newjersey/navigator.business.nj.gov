@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.8.0...v1.8.1) (2022-01-13)
+
+
+### Bug Fixes
+
+* Google analytics dimension ([920bdb8](https://github.com/newjersey/navigator.business.nj.gov/commit/920bdb8ef386b4c2dc8af559a14e8a481d6dde81))
+
 # [1.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.7.0...v1.8.0) (2022-01-10)
 
 

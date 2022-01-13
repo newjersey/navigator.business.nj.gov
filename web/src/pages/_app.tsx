@@ -236,7 +236,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           'dimension2': 'Municipality',
           'dimension3': 'Legal Structure',
           'dimension4': 'Liquor License',
-          'dimension5': 'Home-Based Business'
+          'dimension5': 'Home-Based Business',
+          'dimension6': 'Persona'
         }
       });`,
         }}
