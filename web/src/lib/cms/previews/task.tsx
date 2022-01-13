@@ -14,8 +14,7 @@ type Props = {
 const TaskPreview = (props: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const styles = [...props.window.parent.document.head.getElementsByTagName("style")];
-    styles.map((i) => ref?.current?.ownerDocument.head.appendChild(i.cloneNode(true)));
+    ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
