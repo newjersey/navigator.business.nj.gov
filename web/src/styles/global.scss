@@ -201,6 +201,19 @@ td {
   padding: 1rem;
 }
 
+.env-table td {
+  height: 1rem;
+  table-layout: auto;
+}
+
+.env-table td.enabled {
+  background-color: lightgreen;
+}
+
+.env-table td.disabled {
+  background-color: lightpink;
+}
+
 .truncate {
   white-space: nowrap;
   overflow: hidden;
