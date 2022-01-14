@@ -294,7 +294,7 @@ commands:
 jobs:
   build:
     docker:
-      - image: cimg/node:14.18.2
+      - image: cimg/node:14.18.3
     steps:
       - set-dev-env-vars
       - configure-and-build
@@ -306,7 +306,7 @@ jobs:
 
   lint:
     docker:
-      - image: cimg/node:14.18.2
+      - image: cimg/node:14.18.3
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -322,7 +322,7 @@ jobs:
 
   prepare-release:
     docker:
-      - image: cimg/node:14.18.2
+      - image: cimg/node:14.18.3
     resource_class: small
     steps:
       - set-prod-env-vars
@@ -332,7 +332,7 @@ jobs:
 
   deploy-dev:
     docker:
-      - image: cimg/node:14.18.2
+      - image: cimg/node:14.18.3
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -347,7 +347,7 @@ jobs:
 
   deploy-staging:
     docker:
-      - image: cimg/node:14.18.2
+      - image: cimg/node:14.18.3
     steps:
       - set-staging-env-vars
       - deploy
@@ -358,7 +358,7 @@ jobs:
 
   deploy-production:
     docker:
-      - image: cimg/node:14.18.2
+      - image: cimg/node:14.18.3
     steps:
       - set-prod-env-vars
       - deploy
@@ -375,7 +375,7 @@ jobs:
       suite:
         type: string
     docker:
-      - image: cimg/node:14.18.2-browsers
+      - image: cimg/node:14.18.3-browsers
     steps:
       - set-cypress-env-vars
       - attach_workspace:
@@ -397,7 +397,7 @@ jobs:
       suite:
         type: string
     docker:
-      - image: cimg/node:14.18.2-browsers
+      - image: cimg/node:14.18.3-browsers
     steps:
       - attach_workspace:
           at: .
