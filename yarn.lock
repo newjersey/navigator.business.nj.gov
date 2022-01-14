@@ -2461,7 +2461,7 @@ __metadata:
   dependencies:
     "@types/node": 14.18.5
     cross-env: 7.0.3
-    cspell: 5.15.1
+    cspell: 5.15.2
     prettier: 2.5.1
     rimraf: 3.0.2
   languageName: unknown
@@ -2547,7 +2547,7 @@ __metadata:
     copy-webpack-plugin: 10.2.0
     cors: 2.8.5
     cross-env: 7.0.3
-    cspell: 5.15.1
+    cspell: 5.15.2
     css-loader: 6.5.1
     cypress: 9.2.0
     cypress-audit: 1.1.0
@@ -2706,7 +2706,7 @@ __metadata:
     clean-webpack-plugin: 4.0.0
     copy-webpack-plugin: 10.2.0
     cross-env: 7.0.3
-    cspell: 5.15.1
+    cspell: 5.15.2
     css-loader: 6.5.1
     cypress: 9.2.0
     cypress-audit: 1.1.0
@@ -14315,7 +14315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cspell-gitignore@npm:^5.15.1":
+"cspell-gitignore@npm:^5.15.2":
   version: 5.15.2
   resolution: "cspell-gitignore@npm:5.15.2"
   dependencies:
@@ -14327,7 +14327,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cspell-glob@npm:^5.15.1, cspell-glob@npm:^5.15.2":
+"cspell-glob@npm:^5.15.2":
   version: 5.15.2
   resolution: "cspell-glob@npm:5.15.2"
   dependencies:
@@ -14343,7 +14343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cspell-lib@npm:^5.15.1":
+"cspell-lib@npm:^5.15.2":
   version: 5.15.2
   resolution: "cspell-lib@npm:5.15.2"
   dependencies:
@@ -14377,16 +14377,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cspell@npm:5.15.1":
-  version: 5.15.1
-  resolution: "cspell@npm:5.15.1"
+"cspell@npm:5.15.2":
+  version: 5.15.2
+  resolution: "cspell@npm:5.15.2"
   dependencies:
     chalk: ^4.1.2
     commander: ^8.3.0
     comment-json: ^4.1.1
-    cspell-gitignore: ^5.15.1
-    cspell-glob: ^5.15.1
-    cspell-lib: ^5.15.1
+    cspell-gitignore: ^5.15.2
+    cspell-glob: ^5.15.2
+    cspell-lib: ^5.15.2
     fast-json-stable-stringify: ^2.1.0
     file-entry-cache: ^6.0.1
     fs-extra: ^10.0.0
@@ -14398,7 +14398,7 @@ __metadata:
     vscode-uri: ^3.0.3
   bin:
     cspell: bin.js
-  checksum: 929a7d2d38b2cf8b49a90c242ad6bb207b0c556190c923dcf54af05ea1bd8b11e02b968d976dc00e1e3b27a64c73231b6577bfa8a1d0251dc5a424987861e376
+  checksum: 09b27f19fa8d37292eae5e39573f2aa2684904f650de4ceece440e678cef51b6bdf56e189a5daa3189d31df223ef6c6ef02e64b2d4d0dc94dbca35744de42700
   languageName: node
   linkType: hard
 
