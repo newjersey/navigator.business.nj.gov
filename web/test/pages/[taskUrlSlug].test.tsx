@@ -443,6 +443,18 @@ describe("task page", () => {
     });
   });
 
+  it("does not render next and prevous buttons when legal structure is LLC and form-business-entity task is rendered", () => {
+    subject = renderPage(
+      generateTask({ id: "form-business-entity" }),
+      generateUserData({
+        taskProgress: {},
+        profileData: generateProfileData({ legalStructureId: "limited-liability-company" }),
+      })
+    );
+
+    expect(subject.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
+  });
+
   const changeTaskNotStartedToCompleted = (): void => {
     fireEvent.click(subject.getAllByText("Not started")[0]);
     fireEvent.click(subject.getByText("Completed"));

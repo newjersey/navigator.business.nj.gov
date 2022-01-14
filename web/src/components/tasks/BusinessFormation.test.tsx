@@ -116,22 +116,6 @@ describe("<BusinessFormation />", () => {
   });
 
   describe("when LLC", () => {
-    it("shows success page when form already submitted", () => {
-      const profileData = generateLLCProfileData({});
-      const formationData = generateFormationData({
-        formationResponse: generateFormationSubmitResponse({
-          success: true,
-          redirect: "www.example.com/token",
-        }),
-      });
-      subject = renderTask({ profileData, formationData });
-      expect(subject.getByText(BusinessFormationDefaults.alreadySubmittedLinkText)).toBeInTheDocument();
-      expect(
-        subject.getByText(BusinessFormationDefaults.alreadySubmittedLinkText).getAttribute("href")
-      ).toEqual("www.example.com/token");
-      expect(subject.queryByLabelText("Business address line1")).not.toBeInTheDocument();
-    });
-
     it("fills multi-tab form, submits, and updates userData", async () => {
       const profileData = generateLLCProfileData({});
       const formationData = {
