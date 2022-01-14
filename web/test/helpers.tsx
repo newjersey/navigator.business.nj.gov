@@ -94,6 +94,10 @@ export const getNumberOfMockCalls = <T, R>(fn: jest.MockInstance<T, R[]>): numbe
   return fn.mock.calls.length;
 };
 
+export const randomIntFromInterval = (min: string, max: string) => {
+  return Math.floor(Math.random() * (Number(max) - Number(min) + 1) + Number(min));
+};
+
 export const getPathSeparator = (): string => {
   const isWin = os.platform() === "win32";
   if (isWin) {

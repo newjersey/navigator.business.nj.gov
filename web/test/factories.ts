@@ -34,6 +34,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
+import { randomIntFromInterval } from "./helpers";
 
 export const randomInt = (length = 8): number =>
   Math.floor(
@@ -386,16 +387,16 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     businessAddressLine1: `some-address-1-${randomInt()}`,
     businessAddressLine2: `some-address-2-${randomInt()}`,
     businessAddressState: "NJ",
-    businessAddressZipCode: `some-zipcode-${randomInt()}`,
+    businessAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
     agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
     agentNumber: `some-agent-number-${randomInt()}`,
     agentName: `some-agent-name-${randomInt()}`,
-    agentEmail: `some-agent-email-${randomInt()}`,
+    agentEmail: `some-agent-email-${randomInt()}@gmail.com`,
     agentOfficeAddressLine1: `some-agent-office-address-1-${randomInt()}`,
     agentOfficeAddressLine2: `some-agent-office-address-2-${randomInt()}`,
     agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
     agentOfficeAddressState: "NJ",
-    agentOfficeAddressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    agentOfficeAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
     signer: `some-signer-${randomInt()}`,
     additionalSigners: [`some-additional-signer-${randomInt()}`],
     paymentType: randomInt() % 2 ? "ACH" : "CC",

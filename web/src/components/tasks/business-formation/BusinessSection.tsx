@@ -2,7 +2,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
-import { scrollToTop } from "@/lib/utils/helpers";
+import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -51,6 +51,41 @@ export const BusinessSection = (): ReactElement => {
 
     if (!isStartDateValid()) {
       invalidFields.push("businessStartDate");
+    }
+
+    const isValidBusinessAddressZipCode = (): boolean => {
+      if (!state.formationFormData.businessAddressZipCode) return false;
+      return zipCodeRange(state.formationFormData.businessAddressZipCode);
+    };
+
+    if (!isValidBusinessAddressZipCode() && !invalidFields.includes("businessAddressZipCode")) {
+      invalidFields.push("businessAddressZipCode");
+    }
+
+    const isValidAgentOfficeAddressZipCode = (): boolean => {
+      if (!state.formationFormData.agentOfficeAddressZipCode) return false;
+      return zipCodeRange(state.formationFormData.agentOfficeAddressZipCode);
+    };
+
+    if (
+      !isValidAgentOfficeAddressZipCode() &&
+      !invalidFields.includes("agentOfficeAddressZipCode") &&
+      state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY"
+    ) {
+      invalidFields.push("agentOfficeAddressZipCode");
+    }
+
+    const isValidAgentEmail = (): boolean => {
+      if (!state.formationFormData.agentEmail) return false;
+      return validateEmail(state.formationFormData.agentEmail);
+    };
+
+    if (
+      !isValidAgentEmail() &&
+      !invalidFields.includes("agentEmail") &&
+      state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY"
+    ) {
+      invalidFields.push("agentEmail");
     }
 
     return invalidFields;

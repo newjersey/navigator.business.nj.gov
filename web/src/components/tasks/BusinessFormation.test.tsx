@@ -872,10 +872,11 @@ describe("<BusinessFormation />", () => {
   const submitBusinessTab = async (completed = true) => {
     fireEvent.click(subject.getByText(BusinessFormationDefaults.initialNextButtonText));
 
-    if (completed)
+    if (completed) {
       await waitFor(() => {
         expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
       });
+    }
   };
 
   const submitContactsTab = async (completed = true) => {
