@@ -58,7 +58,7 @@ const TaskPage = (props: Props): ReactElement => {
   };
 
   const nextAndPreviousButtons = (): ReactElement => (
-    <div className="flex flex-row margin-top-2 padding-right-1">
+    <div className="flex flex-row margin-top-2 padding-right-1" data-testid="nextAndPreviousButtons">
       <button
         className="flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105"
         style={{ visibility: previousUrlSlug ? "visible" : "hidden" }}
@@ -101,6 +101,15 @@ const TaskPage = (props: Props): ReactElement => {
     );
   };
 
+  const renderNextAndPreviousButtons = () => {
+    if (
+      props.task.id === "form-business-entity" &&
+      userData?.profileData.legalStructureId === "limited-liability-company"
+    )
+      return;
+    return nextAndPreviousButtons();
+  };
+
   return (
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
@@ -108,7 +117,7 @@ const TaskPage = (props: Props): ReactElement => {
         <NavBar task={props.task} sideBarPageLayout={true} filingsReferences={props.filingsReferences} />
         <SidebarPageLayout
           task={props.task}
-          belowOutlineBoxComponent={nextAndPreviousButtons()}
+          belowOutlineBoxComponent={renderNextAndPreviousButtons()}
           filingsReferences={props.filingsReferences}
         >
           {rswitch(props.task.id, {

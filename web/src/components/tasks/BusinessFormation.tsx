@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -13,7 +12,7 @@ import {
   FormationFields,
   Task,
 } from "@/lib/types/types";
-import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import React, { createContext, ReactElement, useState } from "react";
@@ -101,32 +100,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
           link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
           text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
         />
-      </div>
-    );
-  }
-
-  if (userData?.formationData.formationResponse?.success) {
-    const linkElement = (
-      <a href={userData.formationData.formationResponse.redirect}>
-        {BusinessFormationDefaults.alreadySubmittedLinkText}
-      </a>
-    );
-    const splitText = templateEval(BusinessFormationDefaults.alreadySubmittedText, { link: "${link}" }).split(
-      "${link}"
-    );
-
-    return (
-      <div className="flex flex-column space-between minh-37">
-        <div>
-          <TaskHeader task={props.task} />
-          <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />
-          <h2>{BusinessFormationDefaults.alreadySubmittedHeader}</h2>
-          <p>
-            {splitText[0]}
-            {linkElement}
-            {splitText[1]}
-          </p>
-        </div>
       </div>
     );
   }
