@@ -5,15 +5,9 @@ id: veteran-owned-business
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
 callToActionText: Apply for My Veteran Owned Business Certification
 ---
-A 
+A \`veteran|veteran\`-owned business (VOB) is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a veteran. 
 
-```
-veteran
-```
-
-\-owned business is a business that has its principal place of business in the State of New Jersey, is independently owned and operated and at least 51% of the business is owned and controlled by a veteran. 
-
-A veteran-owned business certification may not provide an advantage for New Jersey State contracts. This may provide an advantage for other contracting opportunities.
+*VOB certification may not provide an advantage for New Jersey State contracts. It may provide an advantage for other contracting opportunities.*
 
 To complete this application, you must have:
 
