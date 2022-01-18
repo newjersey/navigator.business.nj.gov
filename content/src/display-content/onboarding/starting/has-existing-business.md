@@ -1,6 +1,6 @@
 ---
-radioButtonYesText: Yes
-radioButtonNoText: No
+radioButtonYesText: Yes, my business is operating
+radioButtonNoText: No, I still need to register my business
 ---
 ## Business Status
 
