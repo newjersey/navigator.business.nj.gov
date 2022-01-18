@@ -7,7 +7,7 @@ backend:
   use_graphql: true
   squash_merges: true
   commit_messages:
-    create: "feat: creating {{collection}} {{slug}}"
+    create: "chore: creating {{collection}} {{slug}}"
     update: "fix: updating {{collection}} {{slug}}"
 # local_backend: true
 publish_mode: editorial_workflow
