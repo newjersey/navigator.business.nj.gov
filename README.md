@@ -49,7 +49,7 @@ amplify init
 Additionally, serverless needs to be configured with our AWS account. Run this with our AWS access credentials:
 
 ```shell
-sls config credentials -- --provider aws --key AWS_KEY --secret AWS_SECRET_KEY
+sls config credentials --provider aws --key AWS_KEY --secret AWS_SECRET_KEY
 ```
 
 ### Local env
