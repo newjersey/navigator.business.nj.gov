@@ -2,7 +2,7 @@
 urlSlug: pharmacy-license
 name: Apply for a Pharmacy Permit
 id: pharmacy-license
-callToActionLink: https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf
+callToActionLink: https://www.njconsumeraffairs.gov/phar/Applications/Pharmacy-Permit-Application.pdf
 callToActionText: Apply for My Permit with the Division of Consumer Affairs
 ---
 The New Jersey Board of Pharmacy requires that new shops, relocated shops, or shops that have transferred 100% of the ownership obtain a permit with the New Jersey Division of Consumer Affairs. After you submit your application it will be reviewed, and your site will be inspected. Your site should be operation ready when you do your site inspection. 
@@ -17,7 +17,7 @@ To complete this application, you must have:
 * Names and addresses of all officers and owners of 10% or more of stock (c-corps only)
 * Registered pharmacists name, hours of work, an certificate #
 * Name and contact of unregistered employees
-* \`Pharmacist in-charge|pharmacist-in-charge\`
+* `Pharmacist in-charge|pharmacist-in-charge`
 * Copy of prescription and poison label
 * Business Address
 * Hours of operation
