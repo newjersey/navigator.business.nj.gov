@@ -17,7 +17,7 @@ To complete this application, you must have:
 * Names and addresses of all officers and owners of 10% or more of stock (c-corps only)
 * Registered pharmacists name, hours of work, an certificate #
 * Name and contact of unregistered employees
-* \`Pharmacist in-charge|pharmacist-in-charge\`
+* `Pharmacist in-charge|pharmacist-in-charge`
 * Copy of prescription and poison label
 * Business Address
 * Hours of operation
