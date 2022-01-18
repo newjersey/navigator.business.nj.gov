@@ -447,7 +447,7 @@ describe("<BusinessFormation />", () => {
       expect(mockPush).toHaveBeenCalledWith("www.example.com");
     });
 
-    it("displays error messages on error", async () => {
+    it("displays error messages on error and hides error when payment page is revisited", async () => {
       mockApiResponse(
         generateFormationSubmitResponse({
           success: false,
@@ -475,6 +475,19 @@ describe("<BusinessFormation />", () => {
       expect(subject.getByText("very bad input")).toBeInTheDocument();
       expect(subject.getByText("some field 2")).toBeInTheDocument();
       expect(subject.getByText("must be nj zipcode")).toBeInTheDocument();
+
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.previousButtonText));
+
+      await waitFor(() => {
+        expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+      });
+
+      await submitContactsTab();
+
+      expect(subject.queryByText("some field 1")).not.toBeInTheDocument();
+      expect(subject.queryByText("very bad input")).not.toBeInTheDocument();
+      expect(subject.queryByText("some field 2")).not.toBeInTheDocument();
+      expect(subject.queryByText("must be nj zipcode")).not.toBeInTheDocument();
     });
 
     it("displays alert and highlights fields when submitting with missing fields", async () => {

@@ -39,6 +39,7 @@ interface FormationState {
   formationFormData: FormationFormData;
   displayContent: FormationDisplayContent;
   errorMap: FormationFieldErrorMap;
+  showResponseAlert: boolean;
 }
 
 interface FormationContextType {
@@ -46,6 +47,7 @@ interface FormationContextType {
   setFormationFormData: (formationFormData: FormationFormData) => void;
   setErrorMap: (errorMap: FormationFieldErrorMap) => void;
   setTab: React.Dispatch<React.SetStateAction<number>>;
+  setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FormationContext = createContext<FormationContextType>({
@@ -54,10 +56,12 @@ export const FormationContext = createContext<FormationContextType>({
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent(),
     errorMap: createFormationFieldErrorMap(),
+    showResponseAlert: false,
   },
   setFormationFormData: () => {},
   setErrorMap: () => {},
   setTab: () => {},
+  setShowResponseAlert: () => {},
 });
 
 export const BusinessFormation = (props: Props): ReactElement => {
@@ -68,8 +72,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
     createEmptyFormationFormData()
   );
   const [tab, setTab] = useState(1);
-
   const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
+  const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
 
   const isLLC = userData?.profileData.legalStructureId === "limited-liability-company";
   const unlockedByTaskLinks = taskFromRoadmap
@@ -112,10 +116,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
           formationFormData: formationFormData,
           displayContent: props.displayContent,
           errorMap: errorMap,
+          showResponseAlert: showResponseAlert,
         },
         setFormationFormData,
         setErrorMap,
         setTab,
+        setShowResponseAlert,
       }}
     >
       <div className="flex flex-column  minh-37">

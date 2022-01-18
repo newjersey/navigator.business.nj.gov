@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const PaymentSection = (props: Props): ReactElement => {
-  const { state, setErrorMap, setTab } = useContext(FormationContext);
+  const { state, setErrorMap, setTab, setShowResponseAlert } = useContext(FormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const { userData, update } = useUserData();
   const router = useRouter();
@@ -77,6 +77,7 @@ export const PaymentSection = (props: Props): ReactElement => {
         await router.replace(newUserData.formationData.formationResponse.redirect);
       } else {
         setIsLoading(false);
+        setShowResponseAlert(true);
       }
     }
   };
@@ -96,6 +97,7 @@ export const PaymentSection = (props: Props): ReactElement => {
         requiredFieldsWithError={requiredFieldsWithError}
       />
       {userData.formationData.formationResponse &&
+        state.showResponseAlert &&
         !isLoading &&
         !showRequiredFieldsError &&
         userData.formationData.formationResponse.errors.length > 0 && (
@@ -121,6 +123,7 @@ export const PaymentSection = (props: Props): ReactElement => {
             onClick={() => {
               setTab(2);
               scrollToTop();
+              setShowResponseAlert(false);
             }}
           >
             {BusinessFormationDefaults.previousButtonText}
