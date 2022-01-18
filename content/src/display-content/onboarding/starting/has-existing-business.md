@@ -4,4 +4,4 @@ radioButtonNoText: No
 ---
 ## Business Status
 
-Have you already formed and registered your business?
+Have you already `formed and registered|form-and-register-business` your business?
