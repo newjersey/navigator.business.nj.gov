@@ -10,13 +10,14 @@ interface Props {
   singularText: string;
   pluralText: string;
   className?: string;
+  dataTestid?: string;
 }
 
 export const UnlockingAlert = (props: Props): ReactElement => {
   if (props.taskLinks.length === 0 && !props.isLoading) return <></>;
 
   return (
-    <div className={props.className}>
+    <div className={props.className} data-testid={props.dataTestid}>
       <Alert variant={props.variant} slim>
         {props.isLoading ? (
           <>{TaskDefaults.loadingTaskDependencies}</>

@@ -121,7 +121,13 @@ export const BusinessFormation = (props: Props): ReactElement => {
       <div className="flex flex-column  minh-37">
         <div>
           <TaskHeader task={props.task} />
-          <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />
+          {tab === 1 && (
+            <UnlockedBy
+              taskLinks={unlockedByTaskLinks}
+              isLoading={!taskFromRoadmap}
+              dataTestid="dependency-alert"
+            />
+          )}
         </div>
         <div data-testid="formation-form" className="fg1 flex flex-column space-between">
           <BusinessSection />
