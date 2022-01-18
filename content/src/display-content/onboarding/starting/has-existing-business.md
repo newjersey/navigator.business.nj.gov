@@ -1,8 +1,7 @@
 ---
-radioButtonYesText: "Yes"
-radioButtonNoText: "No"
+radioButtonYesText: Yes, my business is operating
+radioButtonNoText: No, I still need to register my business
 ---
+## Business Status
 
-## Owning a Business
-
-Have you already registered and formed your business?
+Have you already `formed and registered|form-and-register-business` your business?
