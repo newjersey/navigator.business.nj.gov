@@ -195,6 +195,24 @@ collections:
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
 
+  - name: "funding"
+    label: "Funding Content"
+    folder: "content/src/funding"
+    summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+
   - name: "contextual-information"
     label: "Contextual Information"
     folder: "content/src/display-content/contextual-information"
