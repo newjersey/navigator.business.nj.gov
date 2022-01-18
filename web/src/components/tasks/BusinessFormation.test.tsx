@@ -278,6 +278,20 @@ describe("<BusinessFormation />", () => {
       });
     });
 
+    it("only displays dependency alert on the first tab", async () => {
+      renderWithData({});
+
+      expect(subject.queryByTestId("dependency-alert")).toBeInTheDocument();
+
+      await submitBusinessTab();
+
+      expect(subject.queryByTestId("dependency-alert")).not.toBeInTheDocument();
+
+      await submitContactsTab();
+
+      expect(subject.queryByTestId("dependency-alert")).not.toBeInTheDocument();
+    });
+
     it("navigates back to business tab from the contact tab", async () => {
       renderWithData({});
       await submitBusinessTab();

@@ -6,6 +6,7 @@ import React, { ReactElement } from "react";
 interface Props {
   taskLinks: TaskLink[];
   isLoading: boolean;
+  dataTestid?: string;
 }
 
 export const UnlockedBy = (props: Props): ReactElement => (
@@ -16,5 +17,6 @@ export const UnlockedBy = (props: Props): ReactElement => (
     pluralText={TaskDefaults.unlockedByPlural}
     className="margin-bottom-3"
     isLoading={props.isLoading}
+    dataTestid={props.dataTestid}
   />
 );
