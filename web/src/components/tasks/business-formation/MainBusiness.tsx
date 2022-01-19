@@ -11,7 +11,7 @@ import { BusinessFormationTextField } from "./BusinessFormationTextField";
 import { BusinessStartDate } from "./BusinessStartDate";
 import { BusinessSuffixDropdown } from "./BusinessSuffixDropdown";
 
-export const BusinessNameAndLegalStructure = (): ReactElement => {
+export const MainBusiness = (): ReactElement => {
   const { state } = useContext(FormationContext);
 
   const { userData } = useUserData();

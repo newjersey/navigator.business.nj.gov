@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 import { BusinessFormationFieldAlert } from "./BusinessFormationFieldAlert";
-import { BusinessNameAndLegalStructure } from "./BusinessNameAndLegalStructure";
+import { MainBusiness } from "./MainBusiness";
 import { RegisteredAgent } from "./RegisteredAgent";
 
 export const BusinessSection = (): ReactElement => {
@@ -119,7 +119,7 @@ export const BusinessSection = (): ReactElement => {
 
   return (
     <div data-testid="business-section">
-      <BusinessNameAndLegalStructure />
+      <MainBusiness />
       <RegisteredAgent />
       <BusinessFormationFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
