@@ -20,8 +20,12 @@ export const checkLicenseStatus = (nameAndAddress: NameAndAddress): Promise<User
   return post(`/license-status`, nameAndAddress);
 };
 
-export const postBusinessFormation = (userData: UserData): Promise<UserData> => {
-  return post(`/formation`, userData);
+export const postBusinessFormation = (userData: UserData, returnUrl: string): Promise<UserData> => {
+  return post(`/formation`, { userData, returnUrl });
+};
+
+export const getCompletedFiling = (): Promise<UserData> => {
+  return get(`/completed-filing`);
 };
 
 export const postSelfReg = (selfRegRequest: SelfRegRequest): Promise<SelfRegResponse> => {

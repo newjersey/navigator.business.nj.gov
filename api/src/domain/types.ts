@@ -1,5 +1,5 @@
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
-import { FormationSubmitResponse } from "@shared/formationData";
+import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
 import { TaxFilingData } from "@shared/taxFiling";
@@ -27,7 +27,8 @@ export interface NewsletterClient {
 }
 
 export interface FormationClient {
-  form: (userData: UserData) => Promise<FormationSubmitResponse>;
+  form: (userData: UserData, returnUrl: string) => Promise<FormationSubmitResponse>;
+  getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
 }
 
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;

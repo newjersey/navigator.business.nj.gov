@@ -1,4 +1,9 @@
-import { BusinessSuffix, FormationSubmitError, FormationSubmitResponse } from "@shared/formationData";
+import {
+  BusinessSuffix,
+  FormationSubmitError,
+  FormationSubmitResponse,
+  GetFilingResponse,
+} from "@shared/formationData";
 import { UserData } from "@shared/userData";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -13,13 +18,13 @@ type ApiConfig = {
 };
 
 export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): FormationClient => {
-  const form = (userData: UserData): Promise<FormationSubmitResponse> => {
-    const postBody = makePostBody(userData, config);
+  const form = (userData: UserData, returnUrl: string): Promise<FormationSubmitResponse> => {
+    const postBody = makePostBody(userData, returnUrl, config);
     logger.LogInfo(
-      `Formation - NICUSA - Request Sent to ${config.baseUrl}. data: ${JSON.stringify(postBody)}`
+      `Formation - NICUSA - Request Sent to ${config.baseUrl}/PrepareFiling data: ${JSON.stringify(postBody)}`
     );
     return axios
-      .post(config.baseUrl, postBody)
+      .post(`${config.baseUrl}/PrepareFiling`, postBody)
       .then((response) => {
         logger.LogInfo(`Formation - NICUSA - Response received: ${JSON.stringify(response.data)}`);
         if (response.data.Success && response.data.Success === true) {
@@ -27,6 +32,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           return {
             success: true,
             token: successResponse.PayUrl.PortalPayId,
+            formationId: successResponse.Id,
             redirect: successResponse.PayUrl.RedirectToUrl,
             errors: [],
           };
@@ -45,6 +51,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           }
           return {
             success: false,
+            formationId: undefined,
             token: undefined,
             redirect: undefined,
             errors,
@@ -52,23 +59,77 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         }
       })
       .catch((error) => {
-        logger.LogInfo(`Formation - NICUSA - Unknown error received: ${error}`);
+        logger.LogInfo(`Formation - NICUSA - Unknown error received: ${JSON.stringify(error)}`);
         return {
           success: false,
           token: undefined,
+          formationId: undefined,
           redirect: undefined,
           errors: [{ field: "", message: "Unknown Error", type: "UNKNOWN" }],
         };
       });
   };
 
-  const makePostBody = (userData: UserData, config: ApiConfig) => {
+  const getCompletedFiling = (formationId: string): Promise<GetFilingResponse> => {
+    const postBody = {
+      Account: config.account,
+      Key: config.key,
+      FormationId: formationId,
+    };
+    logger.LogInfo(
+      `GetFiling - NICUSA - Request Sent to ${config.baseUrl}/GetCompletedFiling data: ${JSON.stringify(
+        postBody
+      )}`
+    );
+    return axios
+      .post(`${config.baseUrl}/GetCompletedFiling`, postBody)
+      .then((response) => {
+        logger.LogInfo(`GetFiling - NICUSA - Response received: ${JSON.stringify(response.data)}`);
+        if (response.data.Success && response.data.Success === true) {
+          const successResponse = response.data as ApiGetFilingResponse;
+          return {
+            success: successResponse.Success,
+            entityId: successResponse.EntityId,
+            transactionDate: successResponse.TransactionDate,
+            confirmationNumber: successResponse.ConfirmationNumber,
+            formationDoc: successResponse.FormationDoc,
+            standingDoc: successResponse.StandingDoc,
+            certifiedDoc: successResponse.CertifiedDoc,
+          };
+        } else {
+          return {
+            success: false,
+            entityId: "",
+            transactionDate: "",
+            confirmationNumber: "",
+            formationDoc: "",
+            standingDoc: "",
+            certifiedDoc: "",
+          };
+        }
+      })
+      .catch((error) => {
+        logger.LogInfo(`GetFiling - NICUSA - Unknown error received: ${JSON.stringify(error)}`);
+        return {
+          success: false,
+          entityId: "",
+          transactionDate: "",
+          confirmationNumber: "",
+          formationDoc: "",
+          standingDoc: "",
+          certifiedDoc: "",
+        };
+      });
+  };
+
+  const makePostBody = (userData: UserData, returnUrl: string, config: ApiConfig) => {
     const formationFormData = userData.formationData.formationFormData;
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
 
     return {
       Account: config.account,
       Key: config.key,
+      ReturnUrl: `${returnUrl}?completeFiling=true`,
       Formation: {
         Gov2GoAnnualReports: formationFormData.annualReportNotification,
         Gov2GoCorpWatch: formationFormData.corpWatchNotification,
@@ -128,6 +189,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
 
   return {
     form,
+    getCompletedFiling,
   };
 };
 
@@ -181,6 +243,7 @@ type BusinessType = "DomesticLimitedLiabilityCompany";
 
 export type ApiResponse = {
   Success: boolean;
+  Id: string;
   PayUrl: {
     PortalPayId: string;
     RedirectToUrl: string;
@@ -196,3 +259,14 @@ export type ApiError = {
 };
 
 export type ApiErrorResponse = ApiError[];
+
+export type ApiGetFilingResponse = {
+  Success: boolean;
+  BusinessName: string;
+  EntityId: string;
+  TransactionDate: string;
+  ConfirmationNumber: string;
+  FormationDoc: string;
+  StandingDoc: string;
+  CertifiedDoc: string;
+};

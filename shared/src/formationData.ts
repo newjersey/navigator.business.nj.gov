@@ -1,6 +1,7 @@
 export interface FormationData {
   formationFormData: FormationFormData;
   formationResponse: FormationSubmitResponse | undefined;
+  getFilingResponse: GetFilingResponse | undefined;
 }
 
 export interface FormationFormData {
@@ -103,6 +104,7 @@ export const AllBusinessSuffixes = [
 export type FormationSubmitResponse = {
   success: boolean;
   token: string | undefined;
+  formationId: string | undefined;
   redirect: string | undefined;
   errors: FormationSubmitError[];
 };
@@ -111,4 +113,14 @@ export type FormationSubmitError = {
   field: string;
   type: "FIELD" | "UNKNOWN" | "RESPONSE";
   message: string;
+};
+
+export type GetFilingResponse = {
+  success: boolean;
+  entityId: string;
+  transactionDate: string;
+  confirmationNumber: string;
+  formationDoc: string;
+  standingDoc: string;
+  certifiedDoc: string;
 };

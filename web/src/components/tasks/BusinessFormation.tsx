@@ -1,6 +1,8 @@
 import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
+import { FormationSuccessPage } from "@/components/tasks/business-formation/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -15,7 +17,8 @@ import {
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
-import React, { createContext, ReactElement, useState } from "react";
+import { useRouter } from "next/router";
+import React, { createContext, ReactElement, useEffect, useState } from "react";
 import { TaskCTA } from "../TaskCTA";
 import { BusinessSection } from "./business-formation/BusinessSection";
 import { ContactsSection } from "./business-formation/ContactsSection";
@@ -67,7 +70,8 @@ export const FormationContext = createContext<FormationContextType>({
 export const BusinessFormation = (props: Props): ReactElement => {
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
   const { roadmap } = useRoadmap();
-  const { userData } = useUserData();
+  const { userData, update } = useUserData();
+  const router = useRouter();
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
@@ -92,6 +96,15 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   }, userData);
 
+  useEffect(() => {
+    if (!router.isReady) return;
+    const completeFiling = router.query.completeFiling;
+    if (completeFiling === "true") {
+      router.replace({ pathname: "/tasks/form-business-entity" }, undefined, { shallow: true });
+      api.getCompletedFiling().then((newUserData) => update(newUserData));
+    }
+  }, [router.isReady, router.query.completeFiling, update, router]);
+
   if (!isLLC) {
     return (
       <div className="flex flex-column space-between minh-37">
@@ -104,6 +117,15 @@ export const BusinessFormation = (props: Props): ReactElement => {
           link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
           text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
         />
+      </div>
+    );
+  }
+
+  if (userData?.formationData.getFilingResponse?.success) {
+    return (
+      <div className="flex flex-column space-between minh-37">
+        <TaskHeader task={props.task} />
+        <FormationSuccessPage getFilingResponse={userData.formationData.getFilingResponse} />
       </div>
     );
   }

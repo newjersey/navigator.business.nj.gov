@@ -33,10 +33,13 @@ export const BusinessFormationDefaults: Record<string, string> = {
   contactLastNameErrorText: "Last name is required",
   contactPhoneNumberErrorText: "Phone number is required",
   missingFieldsOnSubmitModalText: "Cannot submit. The following fields are missing or invalid:",
-  alreadySubmittedHeader: "Successfully Submitted",
-  alreadySubmittedText:
-    "You've already successfully submitted your business formation. " +
-    "If you finished paying and got your documents, you're all set. " +
-    "If you still need to complete payment, ${link}.",
-  alreadySubmittedLinkText: "visit your specialized payment page",
+  successPageHeader: "Hooray!",
+  successPageSubheader: "You have successfully formed your business entity and reserved your business name!",
+  successPageBody:
+    "Below are your requested documents, you can download them for your records until ${expirationDate}.",
+  formationDocLabel: "Official Formation Document (PDF)",
+  standingDocLabel: "Certificate of Good Standing (PDF)",
+  certifiedDocLabel: "Certified Copy of Formation (PDF)",
+  entityIdLabel: "Entity ID",
+  confirmationNumberLabel: "Confirmation Number:",
 };

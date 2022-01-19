@@ -18,6 +18,7 @@ import {
   FormationFormData,
   FormationSubmitError,
   FormationSubmitResponse,
+  GetFilingResponse,
   Industries,
   Industry,
   LegalStructure,
@@ -67,10 +68,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
-    formationData: {
-      formationFormData: generateFormationFormData({}),
-      formationResponse: undefined,
-    },
+    formationData: generateFormationData({}),
     ...overrides,
   };
 };
@@ -421,6 +419,7 @@ export const generateFormationData = (overrides: Partial<FormationData>): Format
   return {
     formationFormData: generateFormationFormData({}),
     formationResponse: undefined,
+    getFilingResponse: undefined,
     ...overrides,
   };
 };
@@ -431,6 +430,7 @@ export const generateFormationSubmitResponse = (
   return {
     success: !!(randomInt() % 2),
     token: `some-token-${randomInt()}`,
+    formationId: `some-id-${randomInt()}`,
     redirect: `some-redirect-${randomInt()}`,
     errors: [],
     ...overrides,
@@ -444,6 +444,19 @@ export const generateFormationSubmitError = (
     field: `some-field-${randomInt()}`,
     message: `some-message-${randomInt()}`,
     type: randomInt() % 2 ? "UNKNOWN" : "RESPONSE",
+    ...overrides,
+  };
+};
+
+export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>): GetFilingResponse => {
+  return {
+    success: true,
+    entityId: `some-entity-${randomInt()}`,
+    transactionDate: dayjs().toISOString(),
+    confirmationNumber: `some-confirmation-number-${randomInt()}`,
+    formationDoc: `some-formation-doc-${randomInt()}`,
+    standingDoc: `some-standing-doc-${randomInt()}`,
+    certifiedDoc: `some-certified-doc-${randomInt()}`,
     ...overrides,
   };
 };

@@ -26,6 +26,13 @@
   flex: 0 0 50%;
 }
 
+.flex-half-tablet {
+  flex: 0 0 100%;
+  @media all and (min-width: $md) {
+    flex: 0 0 50%;
+  }
+}
+
 .fjs {
   justify-content: flex-start;
 }
@@ -64,6 +71,10 @@
 
 .fg1 {
   flex-grow: 1;
+}
+
+.fww {
+  flex-wrap: wrap;
 }
 
 .fww-tablet {

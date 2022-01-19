@@ -1,5 +1,10 @@
-import { BusinessUser, emptyProfileData, PaymentType, ProfileData } from "@businessnjgovnavigator/shared";
-import { FormationFormData } from "@businessnjgovnavigator/shared/";
+import {
+  BusinessUser,
+  emptyProfileData,
+  FormationFormData,
+  PaymentType,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
