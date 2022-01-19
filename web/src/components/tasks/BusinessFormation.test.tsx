@@ -1,12 +1,14 @@
 import { BusinessFormation } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import * as api from "@/lib/api-client/apiClient";
+import { templateEval } from "@/lib/utils/helpers";
 import {
   generateFormationData,
   generateFormationDisplayContent,
   generateFormationFormData,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
+  generateGetFilingResponse,
   generateMunicipality,
   generateProfileData,
   generateTask,
@@ -26,6 +28,7 @@ import {
   createEmptyFormationFormData,
   FormationFormData,
   FormationSubmitResponse,
+  GetFilingResponse,
   LookupLegalStructureById,
   ProfileData,
   UserData,
@@ -38,7 +41,10 @@ import React from "react";
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/router");
-jest.mock("@/lib/api-client/apiClient", () => ({ postBusinessFormation: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postBusinessFormation: jest.fn(),
+  getCompletedFiling: jest.fn(),
+}));
 const mockApi = api as jest.Mocked<typeof api>;
 
 function flushPromises() {
@@ -116,11 +122,63 @@ describe("<BusinessFormation />", () => {
   });
 
   describe("when LLC", () => {
+    it("requests for getFiling and updates userData when at ?completeFiling=true query param and replaces URL", async () => {
+      const profileData = generateLLCProfileData({});
+      const formationData = generateFormationData({
+        formationResponse: generateFormationSubmitResponse({ success: true }),
+      });
+      useMockRouter({ isReady: true, query: { completeFiling: "true" } });
+      const newUserData = generateUserData({});
+      mockApi.getCompletedFiling.mockResolvedValue(newUserData);
+
+      subject = renderTask({ profileData, formationData });
+      expect(mockApi.getCompletedFiling).toHaveBeenCalled();
+      await waitFor(() => expect(currentUserData()).toEqual(newUserData));
+      expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/form-business-entity" }, undefined, {
+        shallow: true,
+      });
+    });
+
+    describe("success page", () => {
+      let getFilingResponse: GetFilingResponse;
+      beforeEach(() => {
+        getFilingResponse = generateGetFilingResponse({ success: true });
+        const profileData = generateLLCProfileData({});
+        const formationData = generateFormationData({ getFilingResponse });
+        subject = renderTask({ profileData, formationData });
+      });
+
+      it("displays success page, documents, entity id, confirmation id", () => {
+        expect(subject.getByText(BusinessFormationDefaults.successPageHeader)).toBeInTheDocument();
+        expect(subject.getByText(BusinessFormationDefaults.successPageSubheader)).toBeInTheDocument();
+        expect(subject.getByText(getFilingResponse.entityId)).toBeInTheDocument();
+        expect(subject.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
+        expect(subject.getByTestId(BusinessFormationDefaults.formationDocLabel).getAttribute("href")).toEqual(
+          getFilingResponse.formationDoc
+        );
+        expect(subject.getByTestId(BusinessFormationDefaults.standingDocLabel).getAttribute("href")).toEqual(
+          getFilingResponse.standingDoc
+        );
+        expect(subject.getByTestId(BusinessFormationDefaults.certifiedDocLabel).getAttribute("href")).toEqual(
+          getFilingResponse.certifiedDoc
+        );
+      });
+
+      it("shows expiration date as transaction date plus 30 days", () => {
+        const datePlusThirty = dayjs(getFilingResponse.transactionDate).add(30, "days").format("MM/DD/YYYY");
+        const bodyText = templateEval(BusinessFormationDefaults.successPageBody, {
+          expirationDate: datePlusThirty,
+        });
+        expect(subject.getByText(bodyText)).toBeInTheDocument();
+      });
+    });
+
     it("fills multi-tab form, submits, and updates userData", async () => {
       const profileData = generateLLCProfileData({});
       const formationData = {
         formationFormData: createEmptyFormationFormData(),
         formationResponse: undefined,
+        getFilingResponse: undefined,
       };
       subject = renderTask({ profileData, formationData });
 
@@ -216,6 +274,7 @@ describe("<BusinessFormation />", () => {
           certifiedCopyOfFormationDocument: true,
         }),
         formationResponse: undefined,
+        getFilingResponse: undefined,
       };
 
       subject = renderTask({ profileData, formationData });
@@ -262,6 +321,7 @@ describe("<BusinessFormation />", () => {
           agentOfficeAddressZipCode: `998877`,
         }),
         formationResponse: undefined,
+        getFilingResponse: undefined,
       };
 
       subject = renderTask({ profileData, formationData });
@@ -862,6 +922,7 @@ describe("<BusinessFormation />", () => {
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData),
       formationResponse: undefined,
+      getFilingResponse: undefined,
     };
     const user = generateUser({ name: "" });
     subject = renderTask({ profileData, formationData, user });

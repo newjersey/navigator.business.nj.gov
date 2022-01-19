@@ -3,7 +3,12 @@
 import bodyParser from "body-parser";
 import express, { Express } from "express";
 import request from "supertest";
-import { generateUserData } from "../../test/factories";
+import {
+  generateFormationData,
+  generateFormationSubmitResponse,
+  generateGetFilingResponse,
+  generateUserData,
+} from "../../test/factories";
 import { FormationClient, UserDataClient } from "../domain/types";
 import { formationRouterFactory } from "./formationRouter";
 import { getSignedInUserId } from "./userRouter";
@@ -23,6 +28,7 @@ describe("formationRouter", () => {
     fakeSignedInUserId.mockReturnValue("some-id");
     stubFormationClient = {
       form: jest.fn(),
+      getCompletedFiling: jest.fn(),
     };
     stubUserDataClient = {
       get: jest.fn(),
@@ -38,55 +44,129 @@ describe("formationRouter", () => {
     await new Promise((resolve) => setTimeout(resolve, 500));
   });
 
-  it("sends posted user data to formation client and returns updated user data with client response", async () => {
-    const formationResponse = {
-      success: true,
-      token: "some-token",
-      redirect: "some-redirect",
-      errors: [],
-    };
-    stubFormationClient.form.mockResolvedValue(formationResponse);
+  describe("/formation", () => {
+    it("sends posted user data to formation client and returns updated user data with client response", async () => {
+      const formationResponse = generateFormationSubmitResponse({ success: true });
+      stubFormationClient.form.mockResolvedValue(formationResponse);
 
-    const userData = generateUserData({});
-    const response = await request(app).post(`/formation`).send(userData);
+      const userData = generateUserData({});
+      const response = await request(app).post(`/formation`).send({
+        userData: userData,
+        returnUrl: "some-url",
+      });
 
-    expect(response.status).toEqual(200);
-    expect(response.body).toEqual({
-      ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationResponse: formationResponse,
-      },
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual({
+        ...userData,
+        formationData: {
+          ...userData.formationData,
+          formationResponse: formationResponse,
+        },
+      });
+    });
+
+    it("updates user data with response from formation", async () => {
+      const formationResponse = generateFormationSubmitResponse({ success: true });
+
+      stubFormationClient.form.mockResolvedValue(formationResponse);
+
+      const userData = generateUserData({});
+      await request(app).post(`/formation`).send({
+        userData: userData,
+        returnUrl: "some-url",
+      });
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...userData,
+        formationData: {
+          ...userData.formationData,
+          formationResponse: formationResponse,
+        },
+      });
+    });
+
+    it("updates user data even if client fails", async () => {
+      stubFormationClient.form.mockRejectedValue({});
+
+      const userData = generateUserData({});
+      await request(app).post(`/formation`).send({
+        userData: userData,
+        returnUrl: "some-url",
+      });
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
     });
   });
 
-  it("updates user data with response from formation", async () => {
-    const formationResponse = {
-      success: true,
-      token: "some-token",
-      redirect: "some-redirect",
-      errors: [],
-    };
-    stubFormationClient.form.mockResolvedValue(formationResponse);
+  describe("/completed-filing", () => {
+    it("returns updated user data with get-filing response", async () => {
+      const getFilingResponse = generateGetFilingResponse({});
+      stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-    const userData = generateUserData({});
-    await request(app).post(`/formation`).send(userData);
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+        }),
+      });
+      stubUserDataClient.get.mockResolvedValue(userData);
+      const response = await request(app).get(`/completed-filing`).send();
 
-    expect(stubUserDataClient.put).toHaveBeenCalledWith({
-      ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationResponse: formationResponse,
-      },
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual({
+        ...userData,
+        formationData: {
+          ...userData.formationData,
+          getFilingResponse: getFilingResponse,
+        },
+      });
+
+      expect(stubFormationClient.getCompletedFiling).toHaveBeenCalledWith("some-formation-id");
     });
-  });
 
-  it("updates user data even if client fails", async () => {
-    stubFormationClient.form.mockRejectedValue({});
+    it("updates userData, with taskProgress complete if getFiling returns success", async () => {
+      const getFilingResponse = generateGetFilingResponse({ success: true });
+      stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
-    const userData = generateUserData({});
-    await request(app).post(`/formation`).send(userData);
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+        }),
+      });
+      stubUserDataClient.get.mockResolvedValue(userData);
+      await request(app).get(`/completed-filing`).send();
 
-    expect(stubUserDataClient.put).toHaveBeenCalledWith(userData);
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...userData,
+        formationData: {
+          ...userData.formationData,
+          getFilingResponse: getFilingResponse,
+        },
+        taskProgress: {
+          ...userData.taskProgress,
+          "form-business-entity": "COMPLETED",
+        },
+      });
+    });
+
+    it("updates userData, without taskProgress complete if getFiling is not success", async () => {
+      const getFilingResponse = generateGetFilingResponse({ success: false });
+      stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
+
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+        }),
+      });
+      stubUserDataClient.get.mockResolvedValue(userData);
+      await request(app).get(`/completed-filing`).send();
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...userData,
+        formationData: {
+          ...userData.formationData,
+          getFilingResponse: getFilingResponse,
+        },
+      });
+    });
   });
 });

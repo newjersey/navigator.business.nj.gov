@@ -6,7 +6,14 @@ import {
   newsletterStatusList,
   UserTestingResponse,
 } from "@shared/businessUser";
-import { AllBusinessSuffixes, BusinessSuffix, FormationData, FormationFormData } from "@shared/formationData";
+import {
+  AllBusinessSuffixes,
+  BusinessSuffix,
+  FormationData,
+  FormationFormData,
+  FormationSubmitResponse,
+  GetFilingResponse,
+} from "@shared/formationData";
 import { Industries, Industry } from "@shared/industry";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import { LicenseData, LicenseEntity, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
@@ -44,10 +51,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     licenseData: generateLicenseData({}),
     preferences: generatePreferences(),
     taxFilingData: generateTaxFilingData({}),
-    formationData: {
-      formationResponse: undefined,
-      formationFormData: generateFormationFormData({}),
-    },
+    formationData: generateFormationData({}),
     ...overrides,
   };
 };
@@ -202,6 +206,7 @@ export const generateFormationData = (overrides: Partial<FormationData>): Format
   return {
     formationFormData: generateFormationFormData({}),
     formationResponse: undefined,
+    getFilingResponse: undefined,
     ...overrides,
   };
 };
@@ -252,6 +257,32 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     contactFirstName: `some-contact-first-name-${randomInt()}`,
     contactLastName: `some-contact-last-name-${randomInt()}`,
     contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>): GetFilingResponse => {
+  return {
+    success: true,
+    entityId: `some-entity-${randomInt()}`,
+    transactionDate: dayjs().toISOString(),
+    confirmationNumber: `some-confirmation-number-${randomInt()}`,
+    formationDoc: `some-formation-doc-${randomInt()}`,
+    standingDoc: `some-standing-doc-${randomInt()}`,
+    certifiedDoc: `some-certified-doc-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateFormationSubmitResponse = (
+  overrides: Partial<FormationSubmitResponse>
+): FormationSubmitResponse => {
+  return {
+    success: !!(randomInt() % 2),
+    token: `some-token-${randomInt()}`,
+    formationId: `some-id-${randomInt()}`,
+    redirect: `some-redirect-${randomInt()}`,
+    errors: [],
     ...overrides,
   };
 };

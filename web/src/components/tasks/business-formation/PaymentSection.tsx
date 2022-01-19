@@ -60,13 +60,16 @@ export const PaymentSection = (props: Props): ReactElement => {
 
       setIsLoading(true);
 
-      const newUserData = await api.postBusinessFormation({
-        ...userData,
-        formationData: {
-          ...userData.formationData,
-          formationFormData: state.formationFormData,
+      const newUserData = await api.postBusinessFormation(
+        {
+          ...userData,
+          formationData: {
+            ...userData.formationData,
+            formationFormData: state.formationFormData,
+          },
         },
-      });
+        window.location.href
+      );
 
       update(newUserData);
 

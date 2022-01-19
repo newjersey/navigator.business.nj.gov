@@ -33,6 +33,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     formationData: {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
+      getFilingResponse: undefined,
     },
   };
 };
