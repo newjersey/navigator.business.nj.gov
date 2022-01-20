@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "airtable:dump": "node scripts/airtableDump.js",
-    "build": "yarn next build",
+    "build": "yarn next build && next export",
     "build-storybook": "build-storybook",
     "clean": "rimraf .next public/vendor",
     "cypress:open": "cypress open",
@@ -17,7 +17,6 @@
     "fences": "gf",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
-    "postbuild": "yarn next export",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "run:napa": "napa",
