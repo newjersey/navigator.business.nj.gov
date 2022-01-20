@@ -1,0 +1,23 @@
+---
+urlSlug: license-accounting
+filename: license-accounting
+name: Apply for an Certified Public Accounting License
+id: license-accounting
+callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
+callToActionText: Apply for a Certified Pubic Accounting License
+---
+The New Jersey State Board of Accountancy is responsible for licensing and regulating certified public accountants. You may apply for a certified public accounting license online through the New Jersey Division of Consumer Affairs.
+
+ 
+
+To apply for an accounting license you will need:
+
+* At least 150 credit hours (within or beyond a degree program)
+* One year of public accounting experience
+* Passing scores on the Uniform CPA Exam
+
+ 
+
+After you complete this task, you will have:
+
+* A confirmation letter of your application to become a certified public accountant
