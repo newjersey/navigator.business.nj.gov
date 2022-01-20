@@ -47,7 +47,7 @@ const TaskPage = (props: Props): ReactElement => {
   }, [props.task.urlSlug, roadmap]);
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
 
-  const { featureDisableFormation, featureHidePharmacyLicenseCheck } = featureFlags(router.query);
+  const { featureDisableFormation } = featureFlags(router.query);
 
   const getUnlockedBy = (): ReactElement => {
     const unlockedByTaskLinks = taskFromRoadmap
@@ -124,11 +124,7 @@ const TaskPage = (props: Props): ReactElement => {
             "search-business-name": <SearchBusinessName task={props.task} />,
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
-            "pharmacy-license": featureHidePharmacyLicenseCheck ? (
-              getTaskBody()
-            ) : (
-              <LicenseTask task={props.task} />
-            ),
+            "pharmacy-license": <LicenseTask task={props.task} />,
             "form-business-entity": businessFormationFeatureFlag(),
             default: getTaskBody(),
           })}
