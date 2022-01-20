@@ -2596,7 +2596,7 @@ __metadata:
     remark-html: 13.0.2
     remark-react: 8.0.0
     rimraf: 3.0.2
-    sass: 1.47.0
+    sass: 1.49.0
     sass-loader: 12.4.0
     semantic-release: 18.0.1
     serverless: 2.70.0
@@ -2745,7 +2745,7 @@ __metadata:
     remark-html: 13.0.2
     remark-react: 8.0.0
     rimraf: 3.0.2
-    sass: 1.47.0
+    sass: 1.49.0
     sass-loader: 12.4.0
     style-loader: 3.3.1
     swr: 1.1.2
@@ -30937,16 +30937,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.47.0":
-  version: 1.47.0
-  resolution: "sass@npm:1.47.0"
+"sass@npm:1.49.0":
+  version: 1.49.0
+  resolution: "sass@npm:1.49.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: e725a37eb7360ad5f96e6e6209d81beeb22ecec70c6f01a1acdf237dbbb6e05e50cc0a0851b16ee1dbc63fbdd7a90405cbbd9911f56b2dba3d5f934f7e291f10
+  checksum: 7cd60868594fb0b6fed87bf4870ad5a7da7e3746cb5127f3ede2565380f3e30ba2de72d64e9083f2d55d0de81f756894fe6d9314c97acb704cf9fc97fbbafd0c
   languageName: node
   linkType: hard
 
