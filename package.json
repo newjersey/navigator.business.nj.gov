@@ -96,7 +96,7 @@
     "@storybook/storybook-deployer": "2.8.10",
     "@swc/core": "1.2.127",
     "@swc/jest": "0.2.15",
-    "@testing-library/dom": "8.11.1",
+    "@testing-library/dom": "8.11.2",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
