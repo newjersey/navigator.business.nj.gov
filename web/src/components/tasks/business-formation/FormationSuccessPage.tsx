@@ -30,16 +30,20 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
           downloadLink={props.getFilingResponse.formationDoc}
           icon="formation-icon-blue"
         />
-        <FormationSuccessDocument
-          label={BusinessFormationDefaults.standingDocLabel}
-          downloadLink={props.getFilingResponse.standingDoc}
-          icon="certificate-icon"
-        />
-        <FormationSuccessDocument
-          label={BusinessFormationDefaults.certifiedDocLabel}
-          downloadLink={props.getFilingResponse.certifiedDoc}
-          icon="formation-icon-purple"
-        />
+        {props.getFilingResponse.standingDoc && (
+          <FormationSuccessDocument
+            label={BusinessFormationDefaults.standingDocLabel}
+            downloadLink={props.getFilingResponse.standingDoc}
+            icon="certificate-icon"
+          />
+        )}
+        {props.getFilingResponse.certifiedDoc && (
+          <FormationSuccessDocument
+            label={BusinessFormationDefaults.certifiedDocLabel}
+            downloadLink={props.getFilingResponse.certifiedDoc}
+            icon="formation-icon-purple"
+          />
+        )}
         <FormationSuccessDocument
           label={BusinessFormationDefaults.entityIdLabel}
           downloadLink=""

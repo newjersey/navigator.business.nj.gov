@@ -141,14 +141,16 @@ describe("<BusinessFormation />", () => {
 
     describe("success page", () => {
       let getFilingResponse: GetFilingResponse;
-      beforeEach(() => {
-        getFilingResponse = generateGetFilingResponse({ success: true });
+
+      const renderWithFilingResponse = (overrides: Partial<GetFilingResponse>): void => {
+        getFilingResponse = generateGetFilingResponse({ success: true, ...overrides });
         const profileData = generateLLCProfileData({});
         const formationData = generateFormationData({ getFilingResponse });
         subject = renderTask({ profileData, formationData });
-      });
+      };
 
       it("displays success page, documents, entity id, confirmation id", () => {
+        renderWithFilingResponse({});
         expect(subject.getByText(BusinessFormationDefaults.successPageHeader)).toBeInTheDocument();
         expect(subject.getByText(BusinessFormationDefaults.successPageSubheader)).toBeInTheDocument();
         expect(subject.getByText(getFilingResponse.entityId)).toBeInTheDocument();
@@ -165,11 +167,17 @@ describe("<BusinessFormation />", () => {
       });
 
       it("shows expiration date as transaction date plus 30 days", () => {
+        renderWithFilingResponse({});
         const datePlusThirty = dayjs(getFilingResponse.transactionDate).add(30, "days").format("MM/DD/YYYY");
         const bodyText = templateEval(BusinessFormationDefaults.successPageBody, {
           expirationDate: datePlusThirty,
         });
         expect(subject.getByText(bodyText)).toBeInTheDocument();
+      });
+
+      it("does not display documents when they are not present", () => {
+        renderWithFilingResponse({ certifiedDoc: "" });
+        expect(subject.queryByTestId(BusinessFormationDefaults.certifiedDocLabel)).not.toBeInTheDocument();
       });
     });
 
