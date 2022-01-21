@@ -46,7 +46,6 @@
     },
     {
       "matchPackageNames": [
-        "@types/copy-webpack-plugin",
         "@types/webpack-node-externals",
         "copy-webpack-plugin",
         "tsconfig-paths-webpack-plugin",
