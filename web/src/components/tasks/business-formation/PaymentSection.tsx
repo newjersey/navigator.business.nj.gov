@@ -4,7 +4,7 @@ import { Alert } from "@/components/njwds/Alert";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormationDisplayContent, FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import { scrollToTop } from "@/lib/utils/helpers";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -17,11 +17,7 @@ import { ContactLastName } from "./ContactLastName";
 import { ContactPhoneNumber } from "./ContactPhoneNumber";
 import { PaymentTypeDropdown } from "./PaymentTypeDropdown";
 
-interface Props {
-  displayContent: FormationDisplayContent;
-}
-
-export const PaymentSection = (props: Props): ReactElement => {
+export const PaymentSection = (): ReactElement => {
   const { state, setErrorMap, setTab, setShowResponseAlert } = useContext(FormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const { userData, update } = useUserData();
@@ -85,7 +81,6 @@ export const PaymentSection = (props: Props): ReactElement => {
     }
   };
 
-  if (!userData || state.tab !== 3) return <></>;
   return (
     <div data-testid="payment-section">
       <ContactFirstName />
@@ -94,12 +89,12 @@ export const PaymentSection = (props: Props): ReactElement => {
       <PaymentTypeDropdown />
       <BusinessFormationDocuments />
       <BusinessFormationNotifications />
-      <Content>{props.displayContent.disclaimer.contentMd}</Content>
+      <Content>{state.displayContent.disclaimer.contentMd}</Content>
       <BusinessFormationFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
         requiredFieldsWithError={requiredFieldsWithError}
       />
-      {userData.formationData.formationResponse &&
+      {userData?.formationData.formationResponse &&
         state.showResponseAlert &&
         !isLoading &&
         !showRequiredFieldsError &&
@@ -124,7 +119,7 @@ export const PaymentSection = (props: Props): ReactElement => {
           <Button
             style="secondary"
             onClick={() => {
-              setTab(2);
+              setTab(state.tab - 1);
               scrollToTop();
               setShowResponseAlert(false);
             }}

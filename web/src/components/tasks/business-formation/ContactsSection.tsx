@@ -38,7 +38,7 @@ export const ContactsSection = (): ReactElement => {
     }
 
     setShowRequiredFieldsError(false);
-    setTab(3);
+    setTab(state.tab + 1);
     scrollToTop();
 
     const formationFormDataWithEmptySignersRemoved = {
@@ -54,8 +54,6 @@ export const ContactsSection = (): ReactElement => {
       },
     });
   };
-
-  if (state.tab !== 2) return <></>;
 
   return (
     <>
@@ -73,7 +71,7 @@ export const ContactsSection = (): ReactElement => {
           <Button
             style="secondary"
             onClick={() => {
-              setTab(1);
+              setTab(state.tab - 1);
               scrollToTop();
             }}
           >

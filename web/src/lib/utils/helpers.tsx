@@ -279,3 +279,13 @@ export const featureFlags = (
     featureDisableFormation,
   };
 };
+
+export const getStringifiedAddress = (
+  addressLine1: string,
+  city: string,
+  state: string,
+  zipcode: string,
+  addressLine2?: string
+) => {
+  return `${addressLine1}, ${addressLine2 ? `${addressLine2}, ` : ""}${city}, ${state}, ${zipcode}`;
+};

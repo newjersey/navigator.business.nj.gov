@@ -226,6 +226,28 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const contactFirstName = getMarkdown(loadFile("business-formation/contact-first-name.md"));
   const contactLastName = getMarkdown(loadFile("business-formation/contact-last-name.md"));
   const contactPhoneNumber = getMarkdown(loadFile("business-formation/contact-phone-number.md"));
+  const reviewPageBusinessName = getMarkdown(loadFile("business-formation/review-page-business-name.md"));
+  const reviewPageLegalStructure = getMarkdown(loadFile("business-formation/review-page-legal-structure.md"));
+  const reviewPageAddress = getMarkdown(loadFile("business-formation/review-page-address.md"));
+  const reviewPageBusinessStartDate = getMarkdown(
+    loadFile("business-formation/review-page-business-start-date.md")
+  );
+  const reviewPageBusinessSuffix = getMarkdown(loadFile("business-formation/review-page-business-suffix.md"));
+  const reviewPageEmail = getMarkdown(loadFile("business-formation/review-page-email.md"));
+  const reviewPageMemberName = getMarkdown(loadFile("business-formation/review-page-member-name.md"));
+  const reviewPageRegisteredAgentName = getMarkdown(
+    loadFile("business-formation/review-page-registered-agent-name.md")
+  );
+  const reviewPageSignerName = getMarkdown(loadFile("business-formation/review-page-signer-name.md"));
+  const reviewPageLocation = getMarkdown(loadFile("business-formation/review-page-location.md"));
+  const reviewPageRegisteredAgent = getMarkdown(
+    loadFile("business-formation/review-page-registered-agent.md")
+  );
+  const reviewPageRegisteredAgentNumber = getMarkdown(
+    loadFile("business-formation/review-page-registered-agent-number.md")
+  );
+  const reviewPageSignatures = getMarkdown(loadFile("business-formation/review-page-signatures.md"));
+  const reviewPageMembers = getMarkdown(loadFile("business-formation/review-page-members.md"));
 
   return {
     formationDisplayContent: {
@@ -374,6 +396,20 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
         contentMd: contactPhoneNumber.content,
         ...(contactPhoneNumber.grayMatter as FieldGrayMatter),
       },
+      reviewPageBusinessName: { contentMd: reviewPageBusinessName.content },
+      reviewPageLegalStructure: { contentMd: reviewPageLegalStructure.content },
+      reviewPageAddress: { contentMd: reviewPageAddress.content },
+      reviewPageBusinessStartDate: { contentMd: reviewPageBusinessStartDate.content },
+      reviewPageBusinessSuffix: { contentMd: reviewPageBusinessSuffix.content },
+      reviewPageEmail: { contentMd: reviewPageEmail.content },
+      reviewPageMemberName: { contentMd: reviewPageMemberName.content },
+      reviewPageRegisteredAgentName: { contentMd: reviewPageRegisteredAgentName.content },
+      reviewPageSignerName: { contentMd: reviewPageSignerName.content },
+      reviewPageLocation: { contentMd: reviewPageLocation.content },
+      reviewPageRegisteredAgent: { contentMd: reviewPageRegisteredAgent.content },
+      reviewPageRegisteredAgentNumber: { contentMd: reviewPageRegisteredAgentNumber.content },
+      reviewPageSignatures: { contentMd: reviewPageSignatures.content },
+      reviewPageMembers: { contentMd: reviewPageMembers.content },
     },
   };
 };
