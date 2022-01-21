@@ -3,8 +3,6 @@ import React, { ReactElement } from "react";
 import { BusinessFormationNumericField } from "./BusinessFormationNumericField";
 
 export const ContactPhoneNumber = (): ReactElement => {
-  const fieldName = "contactPhoneNumber";
-
   const visualFilter = (phoneNumber: string) => {
     const length = phoneNumber.length;
 
@@ -18,9 +16,9 @@ export const ContactPhoneNumber = (): ReactElement => {
     <div className="form-input margin-bottom-2">
       <BusinessFormationNumericField
         validationText={BusinessFormationDefaults.contactPhoneNumberErrorText}
-        fieldName={fieldName}
-        maxLength={14}
-        minLength={14}
+        fieldName={"contactPhoneNumber"}
+        maxLength={10}
+        minLength={10}
         visualFilter={visualFilter}
       />
     </div>

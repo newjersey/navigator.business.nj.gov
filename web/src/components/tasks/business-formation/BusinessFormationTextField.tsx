@@ -1,14 +1,16 @@
 import { Content } from "@/components/Content";
+import { GenericTextField } from "@/components/GenericTextField";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import { camelCaseToSentence } from "@/lib/utils/helpers";
 import { FormationTextField } from "@businessnjgovnavigator/shared";
-import { TextField, TextFieldProps } from "@mui/material";
-import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useRef } from "react";
+import { TextFieldProps } from "@mui/material";
+import React, { ReactElement, useContext } from "react";
 
 interface Props {
   fieldName: FormationTextField;
   fieldOptions?: TextFieldProps;
-  onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
+  onValidation?: (invalid: boolean, fieldName: string) => void;
+  additionalValidation?: (value: string) => boolean;
+  required?: boolean;
   visualFilter?: (value: string) => string;
   valueFilter?: (value: string) => string;
   handleChange?: () => void;
@@ -18,42 +20,28 @@ interface Props {
 }
 
 export const BusinessFormationTextField = (props: Props): ReactElement => {
-  const { state, setFormationFormData } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
 
-  const inputRef = useRef<HTMLDivElement>(null);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (value: string): void => {
     props.handleChange && props.handleChange();
-    const value = props.valueFilter ? props.valueFilter(event.target.value) : event.target.value;
     const formationFormData = { ...state.formationFormData };
     formationFormData[props.fieldName] = value;
     setFormationFormData({ ...formationFormData });
   };
 
-  const value = props.visualFilter
-    ? props.visualFilter((state.formationFormData[props.fieldName] as string) ?? "")
-    : state.formationFormData[props.fieldName];
-
+  const onValidation = (invalid: boolean, fieldName: string) => {
+    setErrorMap({ ...state.errorMap, [fieldName]: { invalid } });
+  };
   return (
-    <div ref={inputRef}>
+    <div>
       <Content>{state.displayContent[props.fieldName].contentMd}</Content>
-      <TextField
-        value={value ?? ""}
-        id={props.fieldName}
-        onChange={handleChange}
-        onBlur={props.onValidation}
-        onSubmit={props.onValidation}
-        error={props.error}
-        helperText={props.error ? props.validationText ?? " " : " "}
-        variant="outlined"
-        fullWidth
-        placeholder={state.displayContent[props.fieldName].placeholder ?? ""}
-        disabled={props.disabled}
-        {...props.fieldOptions}
-        inputProps={{
-          ...props.fieldOptions?.inputProps,
-          "aria-label": camelCaseToSentence(props.fieldName),
-        }}
+      <GenericTextField
+        value={state.formationFormData[props.fieldName]}
+        placeholder={state.displayContent[props.fieldName].placeholder}
+        handleChange={handleChange}
+        error={props.error ?? state.errorMap[props.fieldName].invalid}
+        onValidation={props.onValidation ?? onValidation}
+        {...props}
       />
     </div>
   );

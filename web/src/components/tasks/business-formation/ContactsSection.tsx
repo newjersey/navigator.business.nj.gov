@@ -6,6 +6,7 @@ import { scrollToTop } from "@/lib/utils/helpers";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 import { BusinessFormationFieldAlert } from "./BusinessFormationFieldAlert";
+import { Members } from "./Members";
 import { Signatures } from "./Signatures";
 
 export const ContactsSection = (): ReactElement => {
@@ -59,6 +60,8 @@ export const ContactsSection = (): ReactElement => {
   return (
     <>
       <div data-testid="contacts-section">
+        <Members />
+        <hr className="bg-base-lighter" />
         <Signatures />
         <BusinessFormationFieldAlert
           showRequiredFieldsError={showRequiredFieldsError}
