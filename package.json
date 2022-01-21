@@ -39,7 +39,7 @@
     "@storybook/addon-outline": "6.4.13",
     "airtable": "0.11.1",
     "aws-lambda": "1.0.7",
-    "axios": "0.24.0",
+    "axios": "0.25.0",
     "babel-jest": "27.4.6",
     "body-parser": "1.19.1",
     "broken-link-checker": "0.7.8",
