@@ -1,3 +1,39 @@
+# [1.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.8.1...v1.9.0) (2022-01-21)
+
+
+### Bug Fixes
+
+* [[#1072](https://github.com/newjersey/navigator.business.nj.gov/issues/1072)] auto-fill validation on submit ([4816e81](https://github.com/newjersey/navigator.business.nj.gov/commit/4816e8135e70eaee04d7b077497b13434651ad89))
+* [[#1072](https://github.com/newjersey/navigator.business.nj.gov/issues/1072)] display dependency alert on first tab only ([7c60b62](https://github.com/newjersey/navigator.business.nj.gov/commit/7c60b62ad8b04c1c71a0fadec30d688b5eb6adb4))
+* [[#1072](https://github.com/newjersey/navigator.business.nj.gov/issues/1072)] hide response alert when submit page is revisited ([b669d52](https://github.com/newjersey/navigator.business.nj.gov/commit/b669d527de49e47792f217dfafb58b725e57d597))
+* [[#1072](https://github.com/newjersey/navigator.business.nj.gov/issues/1072)] remove next and previous buttons and temp submission page ([7fd04e7](https://github.com/newjersey/navigator.business.nj.gov/commit/7fd04e72fb4b0f733fceb347fc81b2a52f711447))
+* [[#1072](https://github.com/newjersey/navigator.business.nj.gov/issues/1072)] separated business formation into tabs ([7485825](https://github.com/newjersey/navigator.business.nj.gov/commit/7485825fc4fafb61150f2880fd28f230e9feb17a))
+* [[#1107](https://github.com/newjersey/navigator.business.nj.gov/issues/1107)] fix previews netlify-cms task ([4c2d339](https://github.com/newjersey/navigator.business.nj.gov/commit/4c2d33961ca24d3a283a3d36ab0b063dfca514dd))
+* [1072] textfield validation when autofill used ([08c1796](https://github.com/newjersey/navigator.business.nj.gov/commit/08c17965983636ef9c5a53f2bcaf287b93292391))
+* **deps:** update dependency focus-trap-react to v8.9.1 ([1e10cd5](https://github.com/newjersey/navigator.business.nj.gov/commit/1e10cd5b8972e66de8539bbc096de1802e46fc3b))
+* **deps:** update dependency winston to v3.4.0 ([44d7c3f](https://github.com/newjersey/navigator.business.nj.gov/commit/44d7c3f82108dfd7bf3f830edb401250bf7f0f04))
+* **deps:** update material-ui monorepo ([5d04b9c](https://github.com/newjersey/navigator.business.nj.gov/commit/5d04b9cf1261c1924eb646cb2f236c13ec668cf8))
+* globally added margin-top to input elements ([922dd09](https://github.com/newjersey/navigator.business.nj.gov/commit/922dd09c20fc275fc7250ead2bb77126a307b0aa))
+* lock colors package resolution ([159b077](https://github.com/newjersey/navigator.business.nj.gov/commit/159b0774239dba07485f439981fdf7467caaf3d6))
+* remove pharmacy license feature flag ([510358a](https://github.com/newjersey/navigator.business.nj.gov/commit/510358a8ae05cc54ebc95f66ca0e53b15243faa9))
+* updating Contextual Information pharmacist-in-charge ([#1382](https://github.com/newjersey/navigator.business.nj.gov/issues/1382)) ([9d47d24](https://github.com/newjersey/navigator.business.nj.gov/commit/9d47d24ce19e6cb5fbb75c9a701f480b54bcaab8))
+* updating Oscar Onboarding Content has-existing-business ([#1378](https://github.com/newjersey/navigator.business.nj.gov/issues/1378)) ([1e8c37e](https://github.com/newjersey/navigator.business.nj.gov/commit/1e8c37e93205a5e7b3b6aed4e90b13b9039cccfb))
+* updating Poppy Onboarding Content has-existing-business ([#1380](https://github.com/newjersey/navigator.business.nj.gov/issues/1380)) ([3f2e6ec](https://github.com/newjersey/navigator.business.nj.gov/commit/3f2e6ec6baec971dabc929f9d23b8b65bde84861))
+* updating Tasks pharmacy-license ([#1379](https://github.com/newjersey/navigator.business.nj.gov/issues/1379)) ([6fe422f](https://github.com/newjersey/navigator.business.nj.gov/commit/6fe422fe64de9780fb5ef62a886fe425c98b263f))
+* updating Tasks pharmacy-license ([#1381](https://github.com/newjersey/navigator.business.nj.gov/issues/1381)) ([944a0b8](https://github.com/newjersey/navigator.business.nj.gov/commit/944a0b851599314ddb08e1f783faf604d138ea52))
+
+
+### Features
+
+* [[#1082](https://github.com/newjersey/navigator.business.nj.gov/issues/1082)] add pharmacy license-check screen ([66adf30](https://github.com/newjersey/navigator.business.nj.gov/commit/66adf30d2fd402e7a8fce21bfdbf18df82d9655b))
+* [[#1168](https://github.com/newjersey/navigator.business.nj.gov/issues/1168)] send user to roadmap after saving profile ([5f03316](https://github.com/newjersey/navigator.business.nj.gov/commit/5f033161ecfd24e237523243e91226192d4fc7a7))
+* creating Contextual Information pharmacist-in-charge ([#1340](https://github.com/newjersey/navigator.business.nj.gov/issues/1340)) ([3f2731f](https://github.com/newjersey/navigator.business.nj.gov/commit/3f2731ff585d9d224e5db4209b5f57e007221e54))
+* creating Contextual Information pharmacy-references ([#1341](https://github.com/newjersey/navigator.business.nj.gov/issues/1341)) ([967e4d0](https://github.com/newjersey/navigator.business.nj.gov/commit/967e4d0453ac13a8d33fc3cd3ee8589757e09012))
+* creating Contextual Information veteran ([#1348](https://github.com/newjersey/navigator.business.nj.gov/issues/1348)) ([691d317](https://github.com/newjersey/navigator.business.nj.gov/commit/691d3172f0397d5769f15d6ecf9fd1740f4416f0))
+* creating Filings Content veteran-owned-business ([#1347](https://github.com/newjersey/navigator.business.nj.gov/issues/1347)) ([e0952f3](https://github.com/newjersey/navigator.business.nj.gov/commit/e0952f31caf1fa1739637a8f03251b79a41a98c3))
+* creating Industry Roadmaps generic-1 ([#1336](https://github.com/newjersey/navigator.business.nj.gov/issues/1336)) ([a52c7f9](https://github.com/newjersey/navigator.business.nj.gov/commit/a52c7f9e998b7a8eed6e48baa4828c42a4d93013))
+* creating Tasks pharmacy-prepare ([#1339](https://github.com/newjersey/navigator.business.nj.gov/issues/1339)) ([44ca34a](https://github.com/newjersey/navigator.business.nj.gov/commit/44ca34ae5c328bb9557928df24ca757c1cef1025))
+
 ## [1.8.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.8.0...v1.8.1) (2022-01-13)
 
 
