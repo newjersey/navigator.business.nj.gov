@@ -9,7 +9,7 @@ export const BusinessFormationDefaults: Record<string, string> = {
   legalStructureLabel: "Legal Structure:",
   updateYourProfileDisplayText: "${value}, if this is incorrect, ${link}.",
   updateYourProfileLinkText: "update your profile",
-  startDateErrorText: "Invalid Date",
+  startDateErrorText: "The business formation date must be today or a future date formatted as MM/DD/YYYY",
   businessAddressLine1ErrorText: "Address is required",
   businessAddressCityLabel: "City",
   notSetBusinessAddressCityLabel: "Not set",
