@@ -8,6 +8,7 @@ import {
 } from "@shared/businessUser";
 import {
   AllBusinessSuffixes,
+  BusinessMember,
   BusinessSuffix,
   FormationData,
   FormationFormData,
@@ -247,6 +248,7 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: `some-agent-office-zipcode-${randomInt()}`,
     signer: `some-signer-${randomInt()}`,
+    members: [generateFormationMember({})],
     additionalSigners: [`some-additional-signer-${randomInt()}`],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
@@ -286,6 +288,15 @@ export const generateFormationSubmitResponse = (
     ...overrides,
   };
 };
+export const generateFormationMember = (overrides: Partial<BusinessMember>): BusinessMember => ({
+  name: `some-members-name-${randomInt()}`,
+  addressLine1: `some-members-address-1-${randomInt()}`,
+  addressLine2: `some-members-address-2-${randomInt()}`,
+  addressCity: `some-members-address-city-${randomInt()}`,
+  addressState: `New Jersey`,
+  addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+  ...overrides,
+});
 
 export const randomBusinessSuffix = (): BusinessSuffix => {
   const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);

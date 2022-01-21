@@ -4,6 +4,15 @@ export interface FormationData {
   getFilingResponse: GetFilingResponse | undefined;
 }
 
+export interface BusinessMember {
+  name: string;
+  addressLine1: string;
+  addressLine2: string;
+  addressCity: string;
+  addressState: string;
+  addressZipCode: string;
+}
+
 export interface FormationFormData {
   businessSuffix: BusinessSuffix | undefined;
   businessStartDate: string;
@@ -20,6 +29,7 @@ export interface FormationFormData {
   agentOfficeAddressCity: string;
   agentOfficeAddressState: string;
   agentOfficeAddressZipCode: string;
+  members: BusinessMember[];
   signer: string;
   additionalSigners: string[];
   paymentType: PaymentType;
@@ -45,7 +55,17 @@ export type FormationTextField = Exclude<
   | "officialFormationDocument"
   | "certificateOfStanding"
   | "certifiedCopyOfFormationDocument"
+  | "members"
 >;
+
+export const createEmptyBusinessMember = (): BusinessMember => ({
+  name: "",
+  addressLine1: "",
+  addressLine2: "",
+  addressCity: "",
+  addressState: "",
+  addressZipCode: "",
+});
 
 export const createEmptyFormationFormData = (): FormationFormData => {
   return {
@@ -64,6 +84,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     agentOfficeAddressCity: "",
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: "",
+    members: [],
     signer: "",
     additionalSigners: [],
     paymentType: undefined,

@@ -5,18 +5,10 @@ import { BusinessFormationTextField } from "@/components/tasks/business-formatio
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { TextField } from "@mui/material";
-import React, { ChangeEvent, FocusEvent, ReactElement, useContext } from "react";
+import React, { ChangeEvent, ReactElement, useContext } from "react";
 
 export const Signatures = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
-
-  const onValidation = (event: FocusEvent<HTMLInputElement>) => {
-    if (!event.target.value.trim()) {
-      setErrorMap({ ...state.errorMap, signer: { invalid: true } });
-    } else if (event.target.value.trim()) {
-      setErrorMap({ ...state.errorMap, signer: { invalid: false } });
-    }
-  };
+  const { state, setFormationFormData } = useContext(FormationContext);
 
   const addAdditionalSignerField = () => {
     setFormationFormData({
@@ -48,8 +40,7 @@ export const Signatures = (): ReactElement => {
       <div className="form-input margin-bottom-2">
         <BusinessFormationTextField
           fieldName="signer"
-          error={state.errorMap.signer.invalid}
-          onValidation={onValidation}
+          required={true}
           validationText={BusinessFormationDefaults.signerErrorText}
         />
         {state.formationFormData.additionalSigners.map((it, index) => {

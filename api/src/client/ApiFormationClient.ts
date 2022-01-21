@@ -168,6 +168,17 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
               }
             : null,
         },
+        Members: formationFormData.members.map((member) => ({
+          Name: member.name,
+          Location: {
+            Address1: member.addressLine1,
+            Address2: member.addressLine2,
+            City: member.addressCity,
+            State: member.addressState,
+            Zipcode: member.addressZipCode,
+            Country: "US",
+          },
+        })),
         Signers: [
           {
             Name: formationFormData.signer,
@@ -218,6 +229,10 @@ export type ApiSubmission = {
       Name: string | null; // 50 max, required if no ID
       Location: ApiLocation | null; // required if no ID
     };
+    Members: Array<{
+      Name: string; // 50 max
+      Location: MemberLocation;
+    }>;
     Signers: Array<{
       //This can be a list/array of items. Maximum 10
       Name: string; // max 50
@@ -235,6 +250,15 @@ type ApiLocation = {
   Address2: string; // max 35 char
   City: string; // 30 char max, Can not be left blank, if any other address field has data
   State: "New Jersey"; // required if country = US. Must be full state name. Ex: Alabama
+  Zipcode: string; // max 5 if country=US, 11 otherwise
+  Country: "US"; //alpha-2 iban code
+};
+
+type MemberLocation = {
+  Address1: string; // 35 char max, Can not be left blank, if any other address field has data
+  Address2: string; // max 35 char
+  City: string; // 30 char max, Can not be left blank, if any other address field has data
+  State: string; // required if country = US. Must be full state name. Ex: Alabama
   Zipcode: string; // max 5 if country=US, 11 otherwise
   Country: "US"; //alpha-2 iban code
 };

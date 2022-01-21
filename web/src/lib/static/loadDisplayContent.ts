@@ -211,6 +211,16 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const agentOfficeAddressCity = getMarkdown(loadFile("business-formation/registered-agent-city.md"));
   const agentOfficeAddressState = getMarkdown(loadFile("business-formation/registered-agent-state.md"));
   const agentOfficeAddressZipCode = getMarkdown(loadFile("business-formation/registered-agent-zip.md"));
+
+  const memberName = getMarkdown(loadFile("business-formation/member-name.md"));
+  const memberAddressLine1 = getMarkdown(loadFile("business-formation/member-address-1.md"));
+  const memberAddressLine2 = getMarkdown(loadFile("business-formation/member-address-2.md"));
+  const memberAddressCity = getMarkdown(loadFile("business-formation/member-city.md"));
+  const memberAddressState = getMarkdown(loadFile("business-formation/member-state.md"));
+  const memberAddressZipCode = getMarkdown(loadFile("business-formation/member-zip.md"));
+  const membersModal = getMarkdown(loadFile("business-formation/members-modal.md"));
+  const members = getMarkdown(loadFile("business-formation/members.md"));
+
   const signer = getMarkdown(loadFile("business-formation/signatures.md"));
   const additionalSigners = getMarkdown(loadFile("business-formation/additional-signers.md"));
   const contactFirstName = getMarkdown(loadFile("business-formation/contact-first-name.md"));
@@ -284,6 +294,38 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
         contentMd: agentOfficeAddressZipCode.content,
         ...(agentOfficeAddressZipCode.grayMatter as FieldGrayMatter),
       },
+      memberName: {
+        contentMd: memberName.content,
+        ...(memberName.grayMatter as FieldGrayMatter),
+      },
+      memberAddressLine1: {
+        contentMd: memberAddressLine1.content,
+        ...(memberAddressLine1.grayMatter as FieldGrayMatter),
+      },
+      memberAddressLine2: {
+        contentMd: memberAddressLine2.content,
+        ...(memberAddressLine2.grayMatter as FieldGrayMatter),
+      },
+      memberAddressCity: {
+        contentMd: memberAddressCity.content,
+        ...(memberAddressCity.grayMatter as FieldGrayMatter),
+      },
+      memberAddressState: {
+        contentMd: memberAddressState.content,
+        ...(memberAddressState.grayMatter as FieldGrayMatter),
+      },
+      memberAddressZipCode: {
+        contentMd: memberAddressZipCode.content,
+        ...(memberAddressZipCode.grayMatter as FieldGrayMatter),
+      },
+      members: {
+        contentMd: members.content,
+        ...(members.grayMatter as MemberGrayMatter),
+      },
+      membersModal: {
+        contentMd: membersModal.content,
+        sameNameCheckboxText: (membersModal.grayMatter as MembersModalGrayMatter).checkboxText,
+      },
       signer: {
         contentMd: signer.content,
         ...(signer.grayMatter as FieldGrayMatter),
@@ -353,4 +395,14 @@ type RadioGrayMatter = {
 type RegisteredAgentRadioGrayMatter = {
   radioButtonNumberText: string;
   radioButtonManualText: string;
+};
+
+type MembersModalGrayMatter = {
+  checkboxText: string;
+};
+
+type MemberGrayMatter = {
+  title: string;
+  titleSubtext: string;
+  placeholder: string;
 };

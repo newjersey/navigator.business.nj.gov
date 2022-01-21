@@ -85,6 +85,19 @@ describe("ApiFormationClient", () => {
               Country: "US",
             },
           },
+          Members: [
+            {
+              Name: formationFormData.members[0].name,
+              Location: {
+                Address1: formationFormData.members[0].addressLine1,
+                Address2: formationFormData.members[0].addressLine2,
+                City: formationFormData.members[0].addressCity,
+                State: formationFormData.members[0].addressState,
+                Zipcode: formationFormData.members[0].addressZipCode,
+                Country: "US",
+              },
+            },
+          ],
           Signers: [
             {
               Name: "faraz",

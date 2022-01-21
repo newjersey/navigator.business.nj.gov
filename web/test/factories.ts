@@ -1,3 +1,4 @@
+import { states } from "@/components/tasks/business-formation/StateDropdown";
 import {
   FormationDisplayContent,
   NameAvailability,
@@ -12,6 +13,7 @@ import {
 import { getSectionNames } from "@/lib/utils/helpers";
 import {
   AllBusinessSuffixes,
+  BusinessMember,
   BusinessSuffix,
   BusinessUser,
   FormationData,
@@ -325,6 +327,38 @@ export const generateFormationDisplayContent = (
     contentMd: `some-agent-office-address-zip-code-content-${randomInt()}`,
     placeholder: `some-agent-office-address-zip-code-placeholder-${randomInt()}`,
   },
+  memberName: {
+    contentMd: `some-memberName-content-${randomInt()}`,
+    placeholder: `some-memberName-placeholder-${randomInt()}`,
+  },
+  memberAddressLine1: {
+    contentMd: `some-memberAddressLine1-content-${randomInt()}`,
+    placeholder: `some-memberAddressLine1-placeholder-${randomInt()}`,
+  },
+  memberAddressLine2: {
+    contentMd: `some-memberAddressLine2-content-${randomInt()}`,
+    placeholder: `some-memberAddressLine2-placeholder-${randomInt()}`,
+  },
+  memberAddressCity: {
+    contentMd: `some-memberAddressCity-content-${randomInt()}`,
+    placeholder: `some-memberAddressCity-placeholder-${randomInt()}`,
+  },
+  memberAddressState: {
+    contentMd: `some-memberAddressState-content-${randomInt()}`,
+    placeholder: `some-memberAddressState-placeholder-${randomInt()}`,
+  },
+  memberAddressZipCode: {
+    contentMd: `some-memberAddressZipCode-content-${randomInt()}`,
+    placeholder: `some-memberAddressZipCode-placeholder-${randomInt()}`,
+  },
+  members: {
+    contentMd: `some-members-content-${randomInt()}`,
+    placeholder: `some-members-placeholder-${randomInt()}`,
+  },
+  membersModal: {
+    contentMd: `some-membersModal-content-${randomInt()}`,
+    sameNameCheckboxText: `some-membersModal-checkbox-${randomInt()}`,
+  },
   signer: {
     contentMd: `some-signer-content- ${randomInt()}`,
     placeholder: `some-signer-placeholder-${randomInt()}`,
@@ -395,6 +429,7 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
+    members: [generateFormationMember({})],
     signer: `some-signer-${randomInt()}`,
     additionalSigners: [`some-additional-signer-${randomInt()}`],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
@@ -409,6 +444,24 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     ...overrides,
   };
 };
+
+const generateZipCode = () => {
+  const zip = randomIntFromInterval("1", "99999").toString();
+  return "0".repeat(5 - zip.length) + zip;
+};
+
+const generateStateItem = () => states[randomIntFromInterval("0", (states.length - 1).toString())];
+export const generateStateInput = () => generateStateItem()[randomInt() % 2 ? "shortCode" : "name"];
+
+export const generateFormationMember = (overrides: Partial<BusinessMember>): BusinessMember => ({
+  name: `some-members-name-${randomInt()}`,
+  addressLine1: `some-members-address-1-${randomInt()}`,
+  addressLine2: `some-members-address-2-${randomInt()}`,
+  addressCity: `some-members-address-city-${randomInt()}`,
+  addressState: generateStateItem().name,
+  addressZipCode: generateZipCode(),
+  ...overrides,
+});
 
 export const randomBusinessSuffix = (): BusinessSuffix => {
   const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);

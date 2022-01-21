@@ -109,6 +109,17 @@ export type FormationDisplayContent = {
   agentOfficeAddressCity: TextFieldContent;
   agentOfficeAddressState: TextFieldContent;
   agentOfficeAddressZipCode: TextFieldContent;
+  memberName: TextFieldContent;
+  memberAddressLine1: TextFieldContent;
+  memberAddressLine2: TextFieldContent;
+  memberAddressCity: TextFieldContent;
+  memberAddressState: TextFieldContent;
+  memberAddressZipCode: TextFieldContent;
+  members: TextFieldContent;
+  membersModal: {
+    contentMd: string;
+    sameNameCheckboxText: string;
+  };
   signer: TextFieldContent;
   additionalSigners: TextFieldContent;
   paymentType: TextFieldContent;
@@ -212,6 +223,38 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   agentOfficeAddressZipCode: {
     contentMd: "",
     placeholder: "",
+  },
+  memberName: {
+    contentMd: "",
+    placeholder: "",
+  },
+  memberAddressLine1: {
+    contentMd: "",
+    placeholder: "",
+  },
+  memberAddressLine2: {
+    contentMd: "",
+    placeholder: "",
+  },
+  memberAddressCity: {
+    contentMd: "",
+    placeholder: "",
+  },
+  memberAddressState: {
+    contentMd: "",
+    placeholder: "",
+  },
+  memberAddressZipCode: {
+    contentMd: "",
+    placeholder: "",
+  },
+  members: {
+    contentMd: "",
+    placeholder: "",
+  },
+  membersModal: {
+    contentMd: "",
+    sameNameCheckboxText: "",
   },
   signer: {
     contentMd: "",

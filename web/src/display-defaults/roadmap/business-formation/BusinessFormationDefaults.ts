@@ -42,4 +42,22 @@ export const BusinessFormationDefaults: Record<string, string> = {
   certifiedDocLabel: "Certified Copy of Formation (PDF)",
   entityIdLabel: "Entity ID",
   confirmationNumberLabel: "Confirmation Number:",
+  alreadySubmittedHeader: "Successfully Submitted",
+  alreadySubmittedText:
+    "You've already successfully submitted your business formation. " +
+    "If you finished paying and got your documents, you're all set. " +
+    "If you still need to complete payment, ${link}.",
+  alreadySubmittedLinkText: "visit your specialized payment page",
+  membersNewButtonText: "Add New Member",
+  membersExpandText: "Expand",
+  membersTableColumn: "Name,Street,Actions",
+  membersModalNextButtonText: "Add Member",
+  membersModalBackButtonText: "Cancel",
+  membersSuccessTextHeader: "Member Added",
+  membersSuccessTextBody: "A member has been added successfully",
+  NameErrorText: "Name is required",
+  AddressErrorText: "Address is required",
+  AddressCityErrorText: "City is required",
+  AddressStateErrorText: "state is required",
+  AddressZipCodeErrorText: "Must be a valid 5 digit Zip Code",
 };

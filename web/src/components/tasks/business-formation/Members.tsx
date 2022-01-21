@@ -1,0 +1,135 @@
+import { Content } from "@/components/Content";
+import { Button } from "@/components/njwds-extended/Button";
+import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { Icon } from "@/components/njwds/Icon";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
+import { BusinessMember } from "@businessnjgovnavigator/shared";
+import { IconButton } from "@mui/material";
+import React, { ReactElement, useContext, useState } from "react";
+import { MembersDialog } from "./MembersModal";
+
+export const formatAddress = (member: BusinessMember) =>
+  `${member.addressLine1}, ${member.addressLine2 ? `${member.addressLine2},` : ""} ${member.addressCity}, ${
+    member.addressState
+  } ${member.addressZipCode}`;
+
+export const Members = (): ReactElement => {
+  const { state, setFormationFormData } = useContext(FormationContext);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [editIndex, setEditIndex] = useState<number | undefined>(undefined);
+  const [alert, setAlert] = useState<boolean | undefined>(undefined);
+
+  const deleteMember = (index: number) =>
+    setFormationFormData({
+      ...state.formationFormData,
+      members: [
+        ...[...state.formationFormData.members].slice(0, index),
+        ...[...state.formationFormData.members].slice(index + 1),
+      ],
+    });
+  return (
+    <>
+      <SingleColumnContainer>
+        {alert && (
+          <ToastAlert variant="success" isOpen={alert !== undefined} close={() => setAlert(undefined)}>
+            <div data-testid={`toast-alert-${alert}`} className="h3-styling">
+              {BusinessFormationDefaults.membersSuccessTextHeader}
+            </div>
+            <div className="padding-top-05">{BusinessFormationDefaults.membersSuccessTextBody}</div>
+          </ToastAlert>
+        )}
+      </SingleColumnContainer>
+      <div className="form-input margin-bottom-2">
+        <Content
+          overrides={{
+            h4: ({ children }: { children: string[] }): ReactElement => (
+              <h4 style={{ display: "inline" }}>{children}</h4>
+            ),
+            h6: ({ children }: { children: string[] }): ReactElement => (
+              <h6 style={{ display: "inline", textTransform: "initial" }}>{children}</h6>
+            ),
+          }}
+        >
+          {state.displayContent.members.contentMd}
+        </Content>
+
+        <table className="members margin-top-2 margin-bottom-3">
+          <thead>
+            <tr>
+              {BusinessFormationDefaults.membersTableColumn.split(",").map((value: string) => (
+                <th className="margin-bottom-2" key={value.toLowerCase()}>
+                  {value}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {state.formationFormData.members.length > 0 ? (
+              state.formationFormData.members.map((it, index) => {
+                return (
+                  <tr className="margin-bottom-1" key={index}>
+                    <td>{it.name}</td>
+                    <td>{formatAddress(it)}</td>
+                    <td style={{ display: "inline-flex" }}>
+                      <IconButton
+                        aria-label="edit"
+                        onClick={() => {
+                          setEditIndex(index);
+                          setModalOpen(true);
+                        }}
+                        className="usa-button usa-button--unstyled"
+                      >
+                        <Icon className="usa-icon--size-3">edit</Icon>
+                      </IconButton>
+                      <span style={{ height: "1.5rem", width: ".75rem" }} />{" "}
+                      <span style={{ borderLeft: "1px solid black", height: "1.5rem", width: ".75rem" }} />
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          deleteMember(index);
+                        }}
+                        className="usa-button usa-button--unstyled"
+                      >
+                        <Icon className="usa-icon--size-3">delete</Icon>
+                      </IconButton>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </tbody>
+          <tfoot>
+            {state.formationFormData.members.length === 0 ? (
+              <tr>
+                <td colSpan={3}>{state.displayContent.members.placeholder}</td>
+              </tr>
+            ) : (
+              <></>
+            )}
+          </tfoot>
+        </table>
+        {state.formationFormData.members.length <= 9 && (
+          <Button
+            style="tertiary"
+            onClick={() => {
+              setEditIndex(undefined);
+              setModalOpen(true);
+            }}
+          >
+            <Icon>add</Icon> {BusinessFormationDefaults.membersNewButtonText}
+          </Button>
+        )}
+      </div>
+      <MembersDialog
+        open={modalOpen}
+        handleClose={() => setModalOpen(false)}
+        index={editIndex}
+        onSave={() => setAlert(true)}
+      />
+    </>
+  );
+};
