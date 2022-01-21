@@ -44,8 +44,10 @@ export const formationRouterFactory = (
       .getCompletedFiling(userData.formationData.formationResponse.formationId)
       .then(async (getFilingResponse: GetFilingResponse) => {
         const taskProgress = userData.taskProgress;
+        let entityId = userData.profileData.entityId;
         if (getFilingResponse.success) {
           taskProgress["form-business-entity"] = "COMPLETED";
+          entityId = getFilingResponse.entityId;
         }
         const userDataWithResponse = {
           ...userData,
@@ -53,6 +55,10 @@ export const formationRouterFactory = (
           formationData: {
             ...userData.formationData,
             getFilingResponse,
+          },
+          profileData: {
+            ...userData.profileData,
+            entityId,
           },
         };
         await userDataClient.put(userDataWithResponse);

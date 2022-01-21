@@ -11,6 +11,7 @@ interface Props {
   validationText?: string;
   maxLength: number;
   minLength?: number;
+  disabled?: boolean;
 }
 
 export const NumericField = (props: Props): ReactElement => {
@@ -46,6 +47,7 @@ export const NumericField = (props: Props): ReactElement => {
       fieldOptions={{
         inputProps: { inputMode: "numeric", maxLength: props.maxLength },
       }}
+      disabled={props.disabled}
     />
   );
 };

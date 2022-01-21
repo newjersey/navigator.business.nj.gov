@@ -99,8 +99,8 @@ describe("formationRouter", () => {
   });
 
   describe("/completed-filing", () => {
-    it("returns updated user data with get-filing response", async () => {
-      const getFilingResponse = generateGetFilingResponse({});
+    it("saves and returns updated user data with get-filing response", async () => {
+      const getFilingResponse = generateGetFilingResponse({ success: true });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
       const userData = generateUserData({
@@ -112,30 +112,8 @@ describe("formationRouter", () => {
       const response = await request(app).get(`/completed-filing`).send();
 
       expect(response.status).toEqual(200);
-      expect(response.body).toEqual({
-        ...userData,
-        formationData: {
-          ...userData.formationData,
-          getFilingResponse: getFilingResponse,
-        },
-      });
 
-      expect(stubFormationClient.getCompletedFiling).toHaveBeenCalledWith("some-formation-id");
-    });
-
-    it("updates userData, with taskProgress complete if getFiling returns success", async () => {
-      const getFilingResponse = generateGetFilingResponse({ success: true });
-      stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
-
-      const userData = generateUserData({
-        formationData: generateFormationData({
-          formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
-        }),
-      });
-      stubUserDataClient.get.mockResolvedValue(userData);
-      await request(app).get(`/completed-filing`).send();
-
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+      const expectedNewUserData = {
         ...userData,
         formationData: {
           ...userData.formationData,
@@ -145,10 +123,18 @@ describe("formationRouter", () => {
           ...userData.taskProgress,
           "form-business-entity": "COMPLETED",
         },
-      });
+        profileData: {
+          ...userData.profileData,
+          entityId: getFilingResponse.entityId,
+        },
+      };
+
+      expect(response.body).toEqual(expectedNewUserData);
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(expectedNewUserData);
+      expect(stubFormationClient.getCompletedFiling).toHaveBeenCalledWith("some-formation-id");
     });
 
-    it("updates userData, without taskProgress complete if getFiling is not success", async () => {
+    it("updates userData, without taskProgress complete nor entityID, if getFiling is not success", async () => {
       const getFilingResponse = generateGetFilingResponse({ success: false });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 

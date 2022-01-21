@@ -15,6 +15,7 @@ interface Props {
   handleChange?: () => void;
   error?: boolean;
   validationText?: string;
+  disabled?: boolean;
 }
 
 export const OnboardingField = (props: Props): ReactElement => {
@@ -69,6 +70,7 @@ export const OnboardingField = (props: Props): ReactElement => {
             "aria-label": camelCaseToSentence(props.fieldName),
             ...props.fieldOptions?.inputProps,
           }}
+          disabled={props.disabled}
         />
       </div>
     </div>

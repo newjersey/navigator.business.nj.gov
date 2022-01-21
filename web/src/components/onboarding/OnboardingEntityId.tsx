@@ -8,7 +8,9 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   children?: ReactNode;
   fieldStates: ProfileFieldErrorMap;
+  disabled?: boolean;
 }
+
 export const OnboardingEntityId = (props: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const fieldName = "entityId";
@@ -28,6 +30,7 @@ export const OnboardingEntityId = (props: Props): ReactElement => {
         invalid={props.fieldStates[fieldName].invalid}
         fieldName={fieldName}
         maxLength={10}
+        disabled={props.disabled}
       />
       {props.children}
     </>

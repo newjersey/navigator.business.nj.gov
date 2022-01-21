@@ -4,6 +4,8 @@ import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/t
 import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
 import {
+  generateFormationData,
+  generateGetFilingResponse,
   generateMunicipality,
   generateProfileData as generateProfileData,
   generateUser,
@@ -218,6 +220,22 @@ describe("profile", () => {
     fireEvent.click(subject.getByText(ProfileDefaults.escapeModalReturn));
     await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
     await waitFor(() => expect(() => currentUserData()).toThrowError());
+  });
+
+  it("disables entityID field if formation getFiling success", () => {
+    const userData = generateUserData({
+      formationData: generateFormationData({
+        getFilingResponse: generateGetFilingResponse({
+          success: true,
+        }),
+      }),
+      profileData: generateProfileData({
+        legalStructureId: "c-corporation",
+        entityId: "some-id",
+      }),
+    });
+    subject = renderPage({ userData });
+    expect(subject.getByLabelText("Entity id").getAttribute("disabled")).not.toBeNull();
   });
 
   const fillText = (label: string, value: string) => {
