@@ -20,9 +20,7 @@ import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useEffect, useState } from "react";
 import { TaskCTA } from "../TaskCTA";
-import { BusinessSection } from "./business-formation/BusinessSection";
-import { ContactsSection } from "./business-formation/ContactsSection";
-import { PaymentSection } from "./business-formation/PaymentSection";
+import { businessFormationTabs } from "./business-formation/businessFormationTabs";
 
 interface Props {
   task: Task;
@@ -55,7 +53,7 @@ interface FormationContextType {
 
 export const FormationContext = createContext<FormationContextType>({
   state: {
-    tab: 1,
+    tab: 0,
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent(),
     errorMap: createFormationFieldErrorMap(),
@@ -75,7 +73,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState(0);
   const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
 
@@ -149,7 +147,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       <div className="flex flex-column  minh-37">
         <div>
           <TaskHeader task={props.task} />
-          {tab === 1 && (
+          {tab === 0 && (
             <UnlockedBy
               taskLinks={unlockedByTaskLinks}
               isLoading={!taskFromRoadmap}
@@ -158,9 +156,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           )}
         </div>
         <div data-testid="formation-form" className="fg1 flex flex-column space-between">
-          <BusinessSection />
-          <ContactsSection />
-          <PaymentSection displayContent={props.displayContent} />
+          {businessFormationTabs[tab].component}
         </div>
       </div>
     </FormationContext.Provider>

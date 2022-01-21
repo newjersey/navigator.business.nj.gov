@@ -18,6 +18,7 @@ interface Props {
   smallText?: boolean;
   textBold?: boolean;
   loading?: boolean;
+  widthAutoOnMobile?: boolean;
 }
 
 export const Button = (props: Props): ReactElement => {
@@ -66,7 +67,9 @@ export const Button = (props: Props): ReactElement => {
     <button
       className={`${style} ${btnHeight}${props.noRightMargin ? " margin-right-0" : ""}${
         props.underline ? " underline" : ""
-      }${props.smallText ? " font-body-2xs" : ""}${props.textBold ? " text-bold" : ""} ${showDisabledClass}`}
+      }${props.smallText ? " font-body-2xs" : ""}${props.textBold ? " text-bold" : ""}${
+        props.widthAutoOnMobile ? " width-auto" : ""
+      } ${showDisabledClass}`}
       onClick={props.onClick}
       {...(props.typeSubmit ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}

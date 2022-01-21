@@ -104,7 +104,7 @@ export const BusinessSection = (): ReactElement => {
       return;
     }
     setShowRequiredFieldsError(false);
-    setTab(2);
+    setTab(state.tab + 1);
     scrollToTop();
     update({
       ...userData,
@@ -114,8 +114,6 @@ export const BusinessSection = (): ReactElement => {
       },
     });
   };
-
-  if (state.tab !== 1) return <></>;
 
   return (
     <div data-testid="business-section">

@@ -6,12 +6,19 @@
   width: 10rem;
 }
 
+.business-formation-documents thead tr th {
+  height: 1rem;
+  border: 2px solid #a9aeb1;
+}
+
 .business-formation-documents tbody tr td {
   height: 1rem;
+  border: 2px solid #a9aeb1;
 }
 
 .business-formation-documents tfoot tr td {
   height: 1rem;
+  border: 2px solid #a9aeb1;
 }
 
 .business-formation-documents-table-checkboxes {
@@ -21,4 +28,12 @@
 
 .task-submit-button-background {
   margin: 0px -24px -24px -24px;
+}
+
+.min-height-575rem {
+  min-height: 5.75rem;
+}
+
+.width-11rem {
+  width: 11rem;
 }

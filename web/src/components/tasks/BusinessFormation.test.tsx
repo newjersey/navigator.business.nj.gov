@@ -32,7 +32,6 @@ import {
   FormationFormData,
   FormationSubmitResponse,
   GetFilingResponse,
-  LookupLegalStructureById,
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
@@ -230,8 +229,8 @@ describe("<BusinessFormation />", () => {
       clickMemberSubmit();
 
       fillText("Signer", "Elrond");
-
       await submitContactsTab();
+      await submitReviewTab();
 
       fillText("Contact first name", "John");
       fillText("Contact last name", "Smith");
@@ -350,6 +349,7 @@ describe("<BusinessFormation />", () => {
       expect(getInputElementByLabel("Additional signer 1").value).toBe("signer 3");
 
       await submitContactsTab();
+      await submitReviewTab();
 
       expect(subject.getByText(BusinessFormationDefaults.creditCardPaymentTypeLabel)).toBeInTheDocument();
       expect(getInputElementByLabel("Contact first name").value).toBe("John");
@@ -407,34 +407,124 @@ describe("<BusinessFormation />", () => {
       expect(subject.queryByTestId("dependency-alert")).not.toBeInTheDocument();
     });
 
-    it("navigates back to business tab from the contact tab", async () => {
+    it("navigates from business tab to payment tab and back to business tab", async () => {
       renderWithData({});
       await submitBusinessTab();
+      await submitContactsTab();
+      await submitReviewTab();
 
       fireEvent.click(subject.getByText(BusinessFormationDefaults.previousButtonText));
+      await waitFor(() => {
+        expect(subject.getByTestId("review-section")).toBeInTheDocument();
+      });
 
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.previousButtonText));
+      await waitFor(() => {
+        expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+      });
+
+      fireEvent.click(subject.getByText(BusinessFormationDefaults.previousButtonText));
       await waitFor(() => {
         expect(subject.queryByTestId("business-section")).toBeInTheDocument();
       });
     });
 
-    it("navigates back to contact tab from the payment tab", async () => {
+    it("routes to profile page when edit business name button is clicked", async () => {
       renderWithData({});
-      await submitBusinessTab();
-      await submitContactsTab();
-      fireEvent.click(subject.getByText(BusinessFormationDefaults.previousButtonText));
+      fireEvent.click(subject.getByTestId("edit-business-name"));
+      expect(mockPush).toHaveBeenCalledWith("/profile");
+    });
 
-      await waitFor(() => {
-        expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+    it("routes to profile page when edit legal structure button is clicked", async () => {
+      renderWithData({});
+      fireEvent.click(subject.getByTestId("edit-legal-structure"));
+      expect(mockPush).toHaveBeenCalledWith("/profile");
+    });
+
+    describe("navigates from the review page", () => {
+      it("displays the first tab when the edit button in the main business section is clicked", async () => {
+        renderWithData({});
+        await submitBusinessTab();
+        await submitContactsTab();
+        fireEvent.click(subject.getByTestId("edit-business-name-section"));
+
+        await waitFor(() => {
+          expect(subject.queryByTestId("business-section")).toBeInTheDocument();
+        });
+      });
+
+      it("displays the first tab when the edit button in the location section is clicked", async () => {
+        renderWithData({});
+        await submitBusinessTab();
+        await submitContactsTab();
+        fireEvent.click(subject.getByTestId("edit-location-section"));
+
+        await waitFor(() => {
+          expect(subject.queryByTestId("business-section")).toBeInTheDocument();
+        });
+      });
+
+      it("displays the second tab when the edit button in the registered agent section is clicked", async () => {
+        renderWithData({});
+        await submitBusinessTab();
+        await submitContactsTab();
+        fireEvent.click(subject.getByTestId("edit-registered-agent-section"));
+
+        await waitFor(() => {
+          expect(subject.queryByTestId("business-section")).toBeInTheDocument();
+        });
+      });
+
+      it("displays the second tab when the edit button in the signatures section is clicked", async () => {
+        renderWithData({});
+        await submitBusinessTab();
+        await submitContactsTab();
+        fireEvent.click(subject.getByTestId("edit-signature-section"));
+
+        await waitFor(() => {
+          expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+        });
+      });
+
+      it("displays the second tab when the edit button in the members section is clicked", async () => {
+        renderWithData({});
+        await submitBusinessTab();
+        await submitContactsTab();
+        fireEvent.click(subject.getByTestId("edit-members-section"));
+
+        await waitFor(() => {
+          expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+        });
+      });
+
+      it("displays agent number on review tab", async () => {
+        renderWithData({ agentNumberOrManual: "NUMBER" });
+        await submitBusinessTab();
+        await submitContactsTab();
+        expect(subject.getByTestId("agent-number")).toBeInTheDocument();
+        expect(subject.queryByTestId("agent-manual-entry")).not.toBeInTheDocument();
+      });
+
+      it("displays manually entered registered agent info on review tab", async () => {
+        renderWithData({ agentNumberOrManual: "MANUAL_ENTRY" });
+        await submitBusinessTab();
+        await submitContactsTab();
+        expect(subject.queryByTestId("agent-number")).not.toBeInTheDocument();
+        expect(subject.getByTestId("agent-manual-entry")).toBeInTheDocument();
+      });
+
+      it("does not display members section within review tab when members do not exist", async () => {
+        renderWithData({ members: [] });
+        await submitBusinessTab();
+        await submitContactsTab();
+        expect(subject.queryByTestId("edit-members-section")).not.toBeInTheDocument();
       });
     });
 
     describe("display profile data information on business tab", () => {
       it("displays legal structure from profile data", () => {
         subject = renderTask({ profileData: generateLLCProfileData({}) });
-        expect(
-          subject.getByText(LookupLegalStructureById("limited-liability-company").name, { exact: false })
-        ).toBeInTheDocument();
+        expect(subject.getByText(BusinessFormationDefaults.llcText)).toBeInTheDocument();
       });
 
       it("displays business name from profile data", () => {
@@ -700,6 +790,7 @@ describe("<BusinessFormation />", () => {
       renderWithData({});
       await submitBusinessTab();
       await submitContactsTab();
+      await submitReviewTab();
       await clickSubmit();
       expect(mockPush).toHaveBeenCalledWith("www.example.com");
     });
@@ -726,6 +817,7 @@ describe("<BusinessFormation />", () => {
       renderWithData({});
       await submitBusinessTab();
       await submitContactsTab();
+      await submitReviewTab();
       await clickSubmit();
       expect(mockPush).not.toHaveBeenCalled();
       expect(subject.getByText("some field 1")).toBeInTheDocument();
@@ -736,10 +828,10 @@ describe("<BusinessFormation />", () => {
       fireEvent.click(subject.getByText(BusinessFormationDefaults.previousButtonText));
 
       await waitFor(() => {
-        expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+        expect(subject.getByTestId("review-section")).toBeInTheDocument();
       });
 
-      await submitContactsTab();
+      await submitReviewTab();
 
       expect(subject.queryByText("some field 1")).not.toBeInTheDocument();
       expect(subject.queryByText("very bad input")).not.toBeInTheDocument();
@@ -782,6 +874,7 @@ describe("<BusinessFormation />", () => {
 
       await submitBusinessTab();
       await submitContactsTab();
+      await submitReviewTab();
       expect(getInputElementByLabel("Contact first name").value).toEqual("Mike");
       expect(getInputElementByLabel("Contact last name").value).toEqual("Jones");
     });
@@ -801,6 +894,7 @@ describe("<BusinessFormation />", () => {
 
       await submitBusinessTab();
       await submitContactsTab();
+      await submitReviewTab();
       expect(getInputElementByLabel("Contact first name").value).toEqual("Actual");
       expect(getInputElementByLabel("Contact last name").value).toEqual("Name");
     });
@@ -923,48 +1017,10 @@ describe("<BusinessFormation />", () => {
       });
 
       describe("when agent number selected", () => {
-        it("agent number", () => {
+        it("agent number", async () => {
           renderWithData({ agentNumber: "", agentNumberOrManual: "NUMBER" });
+          await submitBusinessTab(false);
           expect(userDataWasNotUpdated()).toEqual(true);
-        });
-        describe("when agent number selected", () => {
-          it("agent number", async () => {
-            renderWithData({ agentNumber: "", agentNumberOrManual: "NUMBER" });
-            await submitBusinessTab(false);
-            expect(userDataWasNotUpdated()).toEqual(true);
-          });
-        });
-
-        describe("when agent manual selected", () => {
-          it("agent name", async () => {
-            renderWithData({ agentName: "", agentNumberOrManual: "MANUAL_ENTRY" });
-            await submitBusinessTab(false);
-            expect(userDataWasNotUpdated()).toEqual(true);
-          });
-
-          it("agent email", async () => {
-            renderWithData({ agentEmail: "", agentNumberOrManual: "MANUAL_ENTRY" });
-            await submitBusinessTab(false);
-            expect(userDataWasNotUpdated()).toEqual(true);
-          });
-
-          it("agent address line 1", async () => {
-            renderWithData({ agentOfficeAddressLine1: "", agentNumberOrManual: "MANUAL_ENTRY" });
-            await submitBusinessTab(false);
-            expect(userDataWasNotUpdated()).toEqual(true);
-          });
-
-          it("Agent office address city", async () => {
-            renderWithData({ agentOfficeAddressCity: "", agentNumberOrManual: "MANUAL_ENTRY" });
-            await submitBusinessTab(false);
-            expect(userDataWasNotUpdated()).toEqual(true);
-          });
-
-          it("Agent office address zip code", async () => {
-            renderWithData({ agentOfficeAddressZipCode: "", agentNumberOrManual: "MANUAL_ENTRY" });
-            await submitBusinessTab(false);
-            expect(userDataWasNotUpdated()).toEqual(true);
-          });
         });
       });
 
@@ -1011,6 +1067,7 @@ describe("<BusinessFormation />", () => {
         renderWithData({ contactFirstName: "" });
         await submitBusinessTab();
         await submitContactsTab();
+        await submitReviewTab();
         await clickSubmit();
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
@@ -1019,6 +1076,7 @@ describe("<BusinessFormation />", () => {
         renderWithData({ contactLastName: "" });
         await submitBusinessTab();
         await submitContactsTab();
+        await submitReviewTab();
         await clickSubmit();
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
@@ -1027,6 +1085,7 @@ describe("<BusinessFormation />", () => {
         renderWithData({ contactPhoneNumber: "" });
         await submitBusinessTab();
         await submitContactsTab();
+        await submitReviewTab();
         await clickSubmit();
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
@@ -1035,6 +1094,7 @@ describe("<BusinessFormation />", () => {
         renderWithData({ paymentType: undefined });
         await submitBusinessTab();
         await submitContactsTab();
+        await submitReviewTab();
         await clickSubmit();
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
@@ -1044,6 +1104,7 @@ describe("<BusinessFormation />", () => {
           renderWithData({});
           await submitBusinessTab();
           await submitContactsTab();
+          await submitReviewTab();
           await clickSubmit();
           expect(userDataUpdatedNTimes()).toEqual(3);
         });
@@ -1052,6 +1113,7 @@ describe("<BusinessFormation />", () => {
           renderWithData({ agentOfficeAddressLine2: "", agentNumberOrManual: "MANUAL_ENTRY" });
           await submitBusinessTab();
           await submitContactsTab();
+          await submitReviewTab();
           await clickSubmit();
           expect(userDataUpdatedNTimes()).toEqual(3);
         });
@@ -1060,6 +1122,7 @@ describe("<BusinessFormation />", () => {
           renderWithData({ businessAddressLine2: "" });
           await submitBusinessTab();
           await submitContactsTab();
+          await submitReviewTab();
           await clickSubmit();
           expect(userDataUpdatedNTimes()).toEqual(3);
         });
@@ -1068,6 +1131,7 @@ describe("<BusinessFormation />", () => {
           renderWithData({ additionalSigners: [] });
           await submitBusinessTab();
           await submitContactsTab();
+          await submitReviewTab();
           await clickSubmit();
           expect(userDataUpdatedNTimes()).toEqual(3);
         });
@@ -1185,7 +1249,15 @@ describe("<BusinessFormation />", () => {
 
     if (completed)
       await waitFor(() => {
-        expect(subject.queryByTestId("payment-section")).toBeInTheDocument();
+        expect(subject.queryByTestId("review-section")).toBeInTheDocument();
       });
+  };
+
+  const submitReviewTab = async () => {
+    fireEvent.click(subject.getByText(BusinessFormationDefaults.nextButtonText));
+
+    await waitFor(() => {
+      expect(subject.queryByTestId("payment-section")).toBeInTheDocument();
+    });
   };
 });

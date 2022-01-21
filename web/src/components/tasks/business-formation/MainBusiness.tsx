@@ -1,19 +1,15 @@
-import { Content } from "@/components/Content";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { setHeaderRole, templateEval, zipCodeRange } from "@/lib/utils/helpers";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared";
-import React, { ReactElement, useContext } from "react";
-import { FormationContext } from "../BusinessFormation";
+import { templateEval, zipCodeRange } from "@/lib/utils/helpers";
+import React, { ReactElement } from "react";
 import { BusinessAddressLine1 } from "./BusinessAddressLine1";
 import { BusinessFormationNumericField } from "./BusinessFormationNumericField";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
+import { BusinessNameAndLegalStructure } from "./BusinessNameAndLegalStructure";
 import { BusinessStartDate } from "./BusinessStartDate";
 import { BusinessSuffixDropdown } from "./BusinessSuffixDropdown";
 
 export const MainBusiness = (): ReactElement => {
-  const { state } = useContext(FormationContext);
-
   const { userData } = useUserData();
 
   const makeUpdateProfileLink = (label: string, value: string): ReactElement => {
@@ -34,23 +30,9 @@ export const MainBusiness = (): ReactElement => {
     );
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
-
   return (
     <>
-      <div className="margin-bottom-2">
-        <Content overrides={{ h3: headerLevelTwo }}>
-          {state.displayContent.businessNameAndLegalStructure.contentMd}
-        </Content>
-      </div>
-      {makeUpdateProfileLink(
-        BusinessFormationDefaults.legalStructureLabel,
-        LookupLegalStructureById(userData?.profileData.legalStructureId).name
-      )}
-      {makeUpdateProfileLink(
-        BusinessFormationDefaults.businessNameLabel,
-        userData?.profileData.businessName || BusinessFormationDefaults.notSetBusinessNameText
-      )}
+      <BusinessNameAndLegalStructure />
       <BusinessSuffixDropdown />
       <BusinessStartDate />
       <BusinessAddressLine1 />
