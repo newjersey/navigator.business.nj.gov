@@ -6,7 +6,7 @@ id: license-accounting
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 callToActionText: Apply for a Certified Pubic Accounting License
 ---
-You must apply for a certified public accounting license through the New Jersey Division of Consumer Affairs'Board of Accountancy.
+You must apply for a certified public accounting license through the New Jersey Division of Consumer Affairs Board of Accountancy.
 
 To apply for an accounting license you will need:
 
@@ -16,4 +16,4 @@ To apply for an accounting license you will need:
 
 After you complete this task, you will have:
 
-* A confirmation letter of your application to become a certified public accountant
+* A confirmation letter with your certified public accountant license number
