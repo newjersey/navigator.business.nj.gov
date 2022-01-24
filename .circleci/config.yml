@@ -46,6 +46,12 @@ commands:
             npm config set prefix '~/.npm-global'
             export PATH=~/.npm-global/bin:$PATH
 
+  install-dynamodb:
+    steps:
+      - run:
+          name: Install Dynamodb local
+          command: yarn workspace @businessnjgovnavigator/api install-dynamo-local
+
   configure:
     steps:
       - run:
@@ -436,6 +442,7 @@ jobs:
       - attach_workspace:
           at: .
       - configure-and-build
+      - install-dynamodb
       - install-chrome
       - perform-integration-tests:
           enable-dashboard: << parameters.enable-dashboard >>
