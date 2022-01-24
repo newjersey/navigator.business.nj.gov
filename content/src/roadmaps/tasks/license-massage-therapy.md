@@ -15,18 +15,15 @@ To apply for a massage therapy license you will need:
 * Passing scores on the certification exam from the National Certification Board for Therapeutic Massage and Bodywork (NCBTMB), or
 * Passing scores on the certification exam(MBLEx) from the Federation of State Massage Therapy Board (FSMTB) 
 
-You will need to request your school to submit an official transcript and the supervision certification directly to the New Jersey Board of Massage and Bodywork Therapy in a sealed envelope. Your official examination scores will also need to be sent directly to the board in a sealed envelope.
+You will need to request your school to submit an official transcript and the Supervision Certification form directly to the New Jersey Board of Massage and Bodywork Therapy in a sealed envelope. Your official examination scores will also need to be sent directly to the board in a sealed envelope.
 
 Your school transcripts, supervision certification, and examination scores can be mailed to:
 
-New Jersey Board of Massage and Bodywork Therapy
-
-124 Halsey Street, 6th Floor
-
-P.O. Box 47032
-
+New Jersey Board of Massage and Bodywork Therapy  
+124 Halsey Street, 6th Floor  
+P.O. Box 47032  
 Newark NJ 07102 
 
 After you complete this task, you will have:
 
-* A confirmation letter of your application to become a licensed massage therapist
+* A massage therapy license number
