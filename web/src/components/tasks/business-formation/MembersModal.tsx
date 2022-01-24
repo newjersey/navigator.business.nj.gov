@@ -5,7 +5,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
-import { BusinessMember, createEmptyBusinessMember } from "@businessnjgovnavigator/shared";
+import { createEmptyFormationMember, FormationMember } from "@businessnjgovnavigator/shared";
 import { Checkbox, Dialog, DialogContent, FormControlLabel, FormGroup, IconButton } from "@mui/material";
 import React, { FormEvent, ReactElement, useContext, useEffect, useRef, useState } from "react";
 import { StateDropdown } from "./StateDropdown";
@@ -16,10 +16,10 @@ interface Props {
   onSave: () => void;
 }
 
-export const MembersDialog = (props: Props): ReactElement => {
+export const MembersModal = (props: Props): ReactElement => {
   const { state, setFormationFormData } = useContext(FormationContext);
   const [useAgentAddress, setUseAgentAddress] = useState<boolean>(false);
-  const [memberData, setMemberData] = useState<BusinessMember>(createEmptyBusinessMember());
+  const [memberData, setMemberData] = useState<FormationMember>(createEmptyFormationMember());
   const formRef = useRef<HTMLFormElement>(null);
 
   type FieldStatus = {
@@ -45,7 +45,7 @@ export const MembersDialog = (props: Props): ReactElement => {
   const [memberErrorMap, setMemberErrorMap] = useState<MemberErrorMap>(createMemberErrorMap());
 
   const reset = () => {
-    setMemberData(createEmptyBusinessMember());
+    setMemberData(createEmptyFormationMember());
     setUseAgentAddress(false);
     setMemberErrorMap(createMemberErrorMap());
   };
@@ -80,13 +80,15 @@ export const MembersDialog = (props: Props): ReactElement => {
     props.handleClose();
     reset();
   };
+
   const onValidation = (invalid: boolean, fieldName: string) => {
     setMemberErrorMap({ ...memberErrorMap, [fieldName]: { invalid } });
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (Object.values(memberErrorMap).some((i) => i.invalid === undefined)) {
+    const unValidated = Object.values(memberErrorMap).some((i) => i.invalid === undefined);
+    if (unValidated) {
       setMemberErrorMap(
         errorFields.reduce(
           (prev: MemberErrorMap, curr: ErrorFields) => ({
@@ -98,7 +100,9 @@ export const MembersDialog = (props: Props): ReactElement => {
       );
       return;
     }
-    if (Object.values(memberErrorMap).some((i) => i.invalid)) {
+    const failedValidation = Object.values(memberErrorMap).some((i) => i.invalid);
+
+    if (failedValidation) {
       return;
     }
     if (props.index === undefined) {
@@ -164,7 +168,7 @@ export const MembersDialog = (props: Props): ReactElement => {
                 handleChange={(value: string) => setMemberData({ ...memberData, name: value })}
                 error={memberErrorMap["memberName"].invalid}
                 onValidation={onValidation}
-                validationText={BusinessFormationDefaults.NameErrorText}
+                validationText={BusinessFormationDefaults.nameErrorText}
                 fieldName="memberName"
                 required={true}
                 autoComplete="name"
@@ -179,7 +183,7 @@ export const MembersDialog = (props: Props): ReactElement => {
                 error={memberErrorMap["memberAddressLine1"].invalid}
                 onValidation={onValidation}
                 autoComplete="address-line1"
-                validationText={BusinessFormationDefaults.AddressErrorText}
+                validationText={BusinessFormationDefaults.addressErrorText}
                 disabled={useAgentAddress}
                 required={true}
               />
@@ -205,7 +209,7 @@ export const MembersDialog = (props: Props): ReactElement => {
                     handleChange={(value: string) => setMemberData({ ...memberData, addressCity: value })}
                     error={memberErrorMap["memberAddressCity"].invalid}
                     onValidation={onValidation}
-                    validationText={BusinessFormationDefaults.AddressCityErrorText}
+                    validationText={BusinessFormationDefaults.addressCityErrorText}
                   />
                 </div>
               </div>
@@ -216,7 +220,7 @@ export const MembersDialog = (props: Props): ReactElement => {
                     fieldName="memberAddressState"
                     value={memberData.addressState}
                     placeholder={state.displayContent.memberAddressState.placeholder}
-                    validationText={BusinessFormationDefaults.AddressStateErrorText}
+                    validationText={BusinessFormationDefaults.addressStateErrorText}
                     onSelect={(value: string | undefined) =>
                       setMemberData({ ...memberData, addressState: value ?? "" })
                     }
@@ -238,7 +242,7 @@ export const MembersDialog = (props: Props): ReactElement => {
                     error={memberErrorMap["memberAddressZipCode"].invalid}
                     handleChange={(value: string) => setMemberData({ ...memberData, addressZipCode: value })}
                     value={memberData.addressZipCode}
-                    validationText={BusinessFormationDefaults.AddressZipCodeErrorText}
+                    validationText={BusinessFormationDefaults.addressZipCodeErrorText}
                     onValidation={onValidation}
                     required={true}
                     placeholder={state.displayContent.memberAddressZipCode.placeholder}

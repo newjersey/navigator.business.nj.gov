@@ -2,15 +2,15 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
-import { BusinessMember } from "@businessnjgovnavigator/shared";
+import { FormationMember } from "@businessnjgovnavigator/shared";
 import { IconButton } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
-import { MembersDialog } from "./MembersModal";
+import styles from "../../../styles/members.module.scss";
+import { MembersModal } from "./MembersModal";
 
-export const formatAddress = (member: BusinessMember) =>
+export const formatAddress = (member: FormationMember) =>
   `${member.addressLine1}, ${member.addressLine2 ? `${member.addressLine2},` : ""} ${member.addressCity}, ${
     member.addressState
   } ${member.addressZipCode}`;
@@ -31,17 +31,15 @@ export const Members = (): ReactElement => {
     });
   return (
     <>
-      <SingleColumnContainer>
-        {alert && (
-          <ToastAlert variant="success" isOpen={alert !== undefined} close={() => setAlert(undefined)}>
-            <div data-testid={`toast-alert-${alert}`} className="h3-styling">
-              {BusinessFormationDefaults.membersSuccessTextHeader}
-            </div>
-            <div className="padding-top-05">{BusinessFormationDefaults.membersSuccessTextBody}</div>
-          </ToastAlert>
-        )}
-      </SingleColumnContainer>
-      <div className="form-input margin-bottom-2">
+      {alert && (
+        <ToastAlert variant="success" isOpen={alert !== undefined} close={() => setAlert(undefined)}>
+          <div data-testid={`toast-alert-success`} className="h3-styling">
+            {BusinessFormationDefaults.membersSuccessTextHeader}
+          </div>
+          <div className="padding-top-05">{BusinessFormationDefaults.membersSuccessTextBody}</div>
+        </ToastAlert>
+      )}
+      <div className={`form-input margin-bottom-2 ${styles.membersTable}`}>
         <Content
           overrides={{
             h4: ({ children }: { children: string[] }): ReactElement => (
@@ -55,7 +53,7 @@ export const Members = (): ReactElement => {
           {state.displayContent.members.contentMd}
         </Content>
 
-        <table className="members margin-top-2 margin-bottom-3">
+        <table className={`members margin-top-2 margin-bottom-3`}>
           <thead>
             <tr>
               {BusinessFormationDefaults.membersTableColumn.split(",").map((value: string) => (
@@ -124,7 +122,7 @@ export const Members = (): ReactElement => {
           </Button>
         )}
       </div>
-      <MembersDialog
+      <MembersModal
         open={modalOpen}
         handleClose={() => setModalOpen(false)}
         index={editIndex}

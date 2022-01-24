@@ -8,10 +8,10 @@ import {
 } from "@shared/businessUser";
 import {
   AllBusinessSuffixes,
-  BusinessMember,
   BusinessSuffix,
   FormationData,
   FormationFormData,
+  FormationMember,
   FormationSubmitResponse,
   GetFilingResponse,
 } from "@shared/formationData";
@@ -288,7 +288,7 @@ export const generateFormationSubmitResponse = (
     ...overrides,
   };
 };
-export const generateFormationMember = (overrides: Partial<BusinessMember>): BusinessMember => ({
+export const generateFormationMember = (overrides: Partial<FormationMember>): FormationMember => ({
   name: `some-members-name-${randomInt()}`,
   addressLine1: `some-members-address-1-${randomInt()}`,
   addressLine2: `some-members-address-2-${randomInt()}`,

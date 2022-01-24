@@ -8,7 +8,7 @@ export const ContactFirstName = (): ReactElement => {
       <BusinessFormationTextField
         fieldName="contactFirstName"
         required={true}
-        validationText={BusinessFormationDefaults.contactFirstNameErrorText}
+        validationText={BusinessFormationDefaults.contactFirstnameErrorText}
       />
     </div>
   );

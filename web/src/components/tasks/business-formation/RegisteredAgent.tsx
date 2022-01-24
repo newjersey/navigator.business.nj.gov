@@ -80,7 +80,7 @@ export const RegisteredAgent = (): ReactElement => {
             <div data-testid="agent-name">
               <BusinessFormationTextField
                 required={true}
-                validationText={BusinessFormationDefaults.agentNameErrorText}
+                validationText={BusinessFormationDefaults.agentnameErrorText}
                 fieldName="agentName"
               />
               <BusinessFormationTextField
@@ -100,7 +100,7 @@ export const RegisteredAgent = (): ReactElement => {
                   <BusinessFormationTextField
                     fieldName="agentOfficeAddressCity"
                     required={true}
-                    validationText={BusinessFormationDefaults.agentOfficeAddressCityErrorText}
+                    validationText={BusinessFormationDefaults.agentOfficeaddressCityErrorText}
                   />
                 </div>
                 <div className="desktop:grid-col-2">
@@ -111,7 +111,7 @@ export const RegisteredAgent = (): ReactElement => {
                     minLength={5}
                     maxLength={5}
                     fieldName={"agentOfficeAddressZipCode"}
-                    validationText={BusinessFormationDefaults.agentOfficeAddressZipCodeErrorText}
+                    validationText={BusinessFormationDefaults.agentOfficeaddressZipCodeErrorText}
                     additionalValidation={zipCodeRange}
                   />
                 </div>

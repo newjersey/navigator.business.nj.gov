@@ -65,7 +65,7 @@ export const MainBusiness = (): ReactElement => {
           minLength={5}
           maxLength={5}
           fieldName={"businessAddressZipCode"}
-          validationText={BusinessFormationDefaults.businessAddressZipCodeErrorText}
+          validationText={BusinessFormationDefaults.businessaddressZipCodeErrorText}
           additionalValidation={zipCodeRange}
         />
       </div>

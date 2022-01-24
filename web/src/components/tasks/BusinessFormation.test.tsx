@@ -27,9 +27,9 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  BusinessMember,
   createEmptyFormationFormData,
   FormationFormData,
+  FormationMember,
   FormationSubmitResponse,
   GetFilingResponse,
   LookupLegalStructureById,
@@ -40,7 +40,6 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import dayjs, { Dayjs } from "dayjs";
 import React from "react";
-import { formatAddress } from "./business-formation/Members";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -213,7 +212,7 @@ describe("<BusinessFormation />", () => {
 
       await submitBusinessTab();
 
-      const member: BusinessMember = {
+      const member: FormationMember = {
         name: "Joe Biden",
         addressLine1: "1600 Pennsylvania Ave NW",
         addressLine2: "Office of the President",
@@ -224,10 +223,6 @@ describe("<BusinessFormation />", () => {
       expect(subject.getByText(displayContent.members.placeholder as string)).toBeInTheDocument();
 
       await fillAndSubmitMemberModal(member);
-
-      await openMemberModal();
-      selectCheckBox(displayContent.membersModal.sameNameCheckboxText);
-      clickMemberSubmit();
 
       fillText("Signer", "Elrond");
 
@@ -268,12 +263,6 @@ describe("<BusinessFormation />", () => {
         expect(formationFormData.members[0].addressCity).toEqual(member.addressCity);
         expect(formationFormData.members[0].addressState).toEqual("District of Columbia");
         expect(formationFormData.members[0].addressZipCode).toEqual("20500");
-        expect(formationFormData.members[1].name).toEqual("Hugo Weaving");
-        expect(formationFormData.members[1].addressLine1).toEqual("400 Pennsylvania Ave");
-        expect(formationFormData.members[1].addressLine2).toEqual("Suite 101");
-        expect(formationFormData.members[1].addressCity).toEqual("Newark");
-        expect(formationFormData.members[1].addressState).toEqual("New Jersey");
-        expect(formationFormData.members[1].addressZipCode).toEqual("08002");
         expect(formationFormData.signer).toEqual("Elrond");
         expect(formationFormData.additionalSigners).toEqual([]);
         expect(formationFormData.contactFirstName).toEqual("John");
@@ -342,9 +331,20 @@ describe("<BusinessFormation />", () => {
       expect(subject.queryByText(displayContent.members.placeholder as string)).not.toBeInTheDocument();
       expect(subject.getByText(formationData.formationFormData.members[0].name)).toBeInTheDocument();
       expect(
-        subject.getByText(formatAddress(formationData.formationFormData.members[0]))
+        subject.getByText(formationData.formationFormData.members[0].addressLine1, { exact: false })
       ).toBeInTheDocument();
-
+      expect(
+        subject.getByText(formationData.formationFormData.members[0].addressLine2, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        subject.getByText(formationData.formationFormData.members[0].addressCity, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        subject.getByText(formationData.formationFormData.members[0].addressState, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        subject.getByText(formationData.formationFormData.members[0].addressZipCode, { exact: false })
+      ).toBeInTheDocument();
       expect(getInputElementByLabel("Signer").value).toBe("signer 1");
       expect(getInputElementByLabel("Additional signer 0").value).toBe("signer 2");
       expect(getInputElementByLabel("Additional signer 1").value).toBe("signer 3");
@@ -546,9 +546,10 @@ describe("<BusinessFormation />", () => {
         subject.queryByText(BusinessFormationDefaults.addNewSignerButtonText, { exact: false })
       ).not.toBeInTheDocument();
     });
+
     describe("add and manipulate members", () => {
       it("edits members", async () => {
-        const members = [...Array(9)].map(() => generateFormationMember({}));
+        const members = [...Array(2)].map(() => generateFormationMember({}));
         renderWithData({
           members,
         });
@@ -556,15 +557,19 @@ describe("<BusinessFormation />", () => {
         expect(
           subject.queryByText(BusinessFormationDefaults.membersNewButtonText, { exact: false })
         ).toBeInTheDocument();
-        const addressTd = subject.getByText(formatAddress(members[5]));
+        const addressTd = subject.getByText(members[1].addressLine1, { exact: false });
         expect(addressTd).toBeInTheDocument();
+        expect(subject.getByText(members[1].addressLine2, { exact: false })).toBeInTheDocument();
+        expect(subject.getByText(members[1].addressCity, { exact: false })).toBeInTheDocument();
+        expect(subject.getByText(members[1].addressState, { exact: false })).toBeInTheDocument();
+        expect(subject.getByText(members[1].addressZipCode, { exact: false })).toBeInTheDocument();
         fireEvent.click(addressTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
-        expect(getInputElementByLabel("Member name").value).toBe(members[5].name);
-        expect(getInputElementByLabel("Member address line1").value).toBe(members[5].addressLine1);
-        expect(getInputElementByLabel("Member address line2").value).toBe(members[5].addressLine2);
-        expect(getInputElementByLabel("Member address city").value).toBe(members[5].addressCity);
-        expect(getInputElementByLabel("Member address state").value).toBe(members[5].addressState);
-        expect(getInputElementByLabel("Member address zip code").value).toBe(members[5].addressZipCode);
+        expect(getInputElementByLabel("Member name").value).toBe(members[1].name);
+        expect(getInputElementByLabel("Member address line1").value).toBe(members[1].addressLine1);
+        expect(getInputElementByLabel("Member address line2").value).toBe(members[1].addressLine2);
+        expect(getInputElementByLabel("Member address city").value).toBe(members[1].addressCity);
+        expect(getInputElementByLabel("Member address state").value).toBe(members[1].addressState);
+        expect(getInputElementByLabel("Member address zip code").value).toBe(members[1].addressZipCode);
         const newName = "Joe Biden";
         fillText("Member name", newName);
         clickMemberSubmit();
@@ -573,35 +578,26 @@ describe("<BusinessFormation />", () => {
             subject.getByText(BusinessFormationDefaults.membersSuccessTextBody, { exact: false })
           ).toBeInTheDocument();
         });
-        expect(
-          subject.getByText(BusinessFormationDefaults.membersNewButtonText, { exact: false })
-        ).toBeInTheDocument();
+        expect(subject.getByText(newName, { exact: false })).toBeInTheDocument();
         await submitContactsTab();
         const newMembers = currentUserData().formationData.formationFormData.members;
-        expect(newMembers.length).toEqual(9);
-        expect(newMembers.findIndex((member) => member.name == newName)).toEqual(5);
+        expect(newMembers.length).toEqual(2);
+        expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
       });
 
       it("is able to delete members", async () => {
-        const members = [...Array(10)].map(() => generateFormationMember({}));
+        const members = [...Array(2)].map(() => generateFormationMember({}));
         renderWithData({
           members,
         });
         await submitBusinessTab();
-        expect(
-          subject.queryByText(BusinessFormationDefaults.membersNewButtonText, { exact: false })
-        ).not.toBeInTheDocument();
-
-        const addressTd = subject.getByText(formatAddress(members[5]));
+        const addressTd = subject.getByText(members[1].name, { exact: false });
         expect(addressTd).toBeInTheDocument();
         fireEvent.click(addressTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
-        expect(
-          subject.getByText(BusinessFormationDefaults.membersNewButtonText, { exact: false })
-        ).toBeInTheDocument();
         await submitContactsTab();
         const newMembers = currentUserData().formationData.formationFormData.members;
-        expect(newMembers.length).toEqual(9);
-        expect(newMembers.find((member) => member == members[5])).toBeFalsy();
+        expect(newMembers.length).toEqual(1);
+        expect(newMembers.find((member) => member == members[1])).toBeFalsy();
       });
 
       it("does not show checkbox in modal if agent set using number", async () => {
@@ -613,41 +609,64 @@ describe("<BusinessFormation />", () => {
         ).not.toBeInTheDocument();
       });
 
+      it("adds members using registered agent data using checkbox", async () => {
+        renderWithData({
+          agentNumberOrManual: "MANUAL_ENTRY",
+          members: [],
+          agentName: `agent 1`,
+          agentEmail: `agent@email.com`,
+          agentOfficeAddressLine1: `123 agent address`,
+          agentOfficeAddressLine2: `agent suite 201`,
+          agentOfficeAddressCity: `agent-city-402`,
+          agentOfficeAddressState: "NJ",
+          agentOfficeAddressZipCode: `07601`,
+        });
+        await submitBusinessTab();
+        await openMemberModal();
+        selectCheckBox(displayContent.membersModal.sameNameCheckboxText);
+        expect(getInputElementByLabel("Member name").value).toBe("agent 1");
+        expect(getInputElementByLabel("Member address line1").value).toBe("123 agent address");
+        expect(getInputElementByLabel("Member address line2").value).toBe("agent suite 201");
+        expect(getInputElementByLabel("Member address city").value).toBe("agent-city-402");
+        expect(getInputElementByLabel("Member address state").value).toBe("New Jersey");
+        expect(getInputElementByLabel("Member address zip code").value).toBe("07601");
+      });
+
       it("shows validation on submit", async () => {
         renderWithData({});
         await submitBusinessTab();
         await openMemberModal();
         clickMemberSubmit();
         expect(
-          subject.queryByText(BusinessFormationDefaults.NameErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.nameErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          subject.queryByText(BusinessFormationDefaults.AddressErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.addressErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          subject.queryByText(BusinessFormationDefaults.AddressCityErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.addressCityErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          subject.queryByText(BusinessFormationDefaults.AddressStateErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.addressStateErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          subject.queryByText(BusinessFormationDefaults.AddressZipCodeErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.addressZipCodeErrorText, { exact: false })
         ).toBeInTheDocument();
         await fillMemberModal({});
         expect(
-          subject.queryByText(BusinessFormationDefaults.NameErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.nameErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          subject.queryByText(BusinessFormationDefaults.AddressErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.addressErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          subject.queryByText(BusinessFormationDefaults.AddressCityErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.addressCityErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          subject.queryByText(BusinessFormationDefaults.AddressStateErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.addressStateErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          subject.queryByText(BusinessFormationDefaults.AddressZipCodeErrorText, { exact: false })
+          subject.queryByText(BusinessFormationDefaults.addressZipCodeErrorText, { exact: false })
         ).not.toBeInTheDocument();
         clickMemberSubmit();
         await waitFor(() => {
@@ -689,6 +708,7 @@ describe("<BusinessFormation />", () => {
         expect(currentUserData().formationData.formationFormData.members.length).toEqual(10);
       });
     });
+
     it("redirects to payment redirect URL on success", async () => {
       mockApiResponse(
         generateFormationSubmitResponse({
@@ -850,7 +870,7 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(BusinessFormationDefaults.businessAddressZipCodeErrorText)
+              subject.getByText(BusinessFormationDefaults.businessaddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
               subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
@@ -865,7 +885,7 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(BusinessFormationDefaults.businessAddressZipCodeErrorText)
+              subject.getByText(BusinessFormationDefaults.businessaddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
               subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
@@ -880,7 +900,7 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.queryByText(BusinessFormationDefaults.businessAddressZipCodeErrorText)
+              subject.queryByText(BusinessFormationDefaults.businessaddressZipCodeErrorText)
             ).not.toBeInTheDocument();
             expect(
               subject.queryByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
@@ -895,7 +915,7 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(BusinessFormationDefaults.agentOfficeAddressZipCodeErrorText)
+              subject.getByText(BusinessFormationDefaults.agentOfficeaddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
               subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
@@ -1127,7 +1147,7 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(subject.getByTestId("memberSubmit"));
   };
 
-  const fillMemberModal = async (overrides: Partial<BusinessMember>) => {
+  const fillMemberModal = async (overrides: Partial<FormationMember>) => {
     const member = generateFormationMember({ addressState: generateStateInput(), ...overrides });
     fillText("Member name", member.name);
     fillText("Member address line1", member.addressLine1);
@@ -1137,7 +1157,7 @@ describe("<BusinessFormation />", () => {
     fillText("Member address zip code", member.addressZipCode);
   };
 
-  const fillAndSubmitMemberModal = async (overrides: Partial<BusinessMember>) => {
+  const fillAndSubmitMemberModal = async (overrides: Partial<FormationMember>) => {
     await openMemberModal();
     await fillMemberModal(overrides);
     clickMemberSubmit();

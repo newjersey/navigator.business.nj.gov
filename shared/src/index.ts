@@ -7,5 +7,6 @@ export * from "./license";
 export * from "./misc";
 export * from "./municipality";
 export * from "./profileData";
+export * from "./states";
 export * from "./taxFiling";
 export * from "./userData";

@@ -1,5 +1,10 @@
 import axios from "axios";
-import { generateFormationData, generateFormationFormData, generateUserData } from "../../test/factories";
+import {
+  generateFormationData,
+  generateFormationFormData,
+  generateFormationMember,
+  generateUserData,
+} from "../../test/factories";
 import { FormationClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 import {
@@ -36,6 +41,7 @@ describe("ApiFormationClient", () => {
       const formationFormData = generateFormationFormData({
         agentNumberOrManual: "MANUAL_ENTRY",
         signer: "faraz",
+        members: [generateFormationMember({})],
         additionalSigners: ["anne", "mike"],
       });
 

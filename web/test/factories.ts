@@ -1,4 +1,3 @@
-import { states } from "@/components/tasks/business-formation/StateDropdown";
 import {
   FormationDisplayContent,
   NameAvailability,
@@ -13,11 +12,12 @@ import {
 import { getSectionNames } from "@/lib/utils/helpers";
 import {
   AllBusinessSuffixes,
-  BusinessMember,
+  arrayOfStateObjects as states,
   BusinessSuffix,
   BusinessUser,
   FormationData,
   FormationFormData,
+  FormationMember,
   FormationSubmitError,
   FormationSubmitResponse,
   GetFilingResponse,
@@ -451,9 +451,10 @@ const generateZipCode = () => {
 };
 
 const generateStateItem = () => states[randomIntFromInterval("0", (states.length - 1).toString())];
+
 export const generateStateInput = () => generateStateItem()[randomInt() % 2 ? "shortCode" : "name"];
 
-export const generateFormationMember = (overrides: Partial<BusinessMember>): BusinessMember => ({
+export const generateFormationMember = (overrides: Partial<FormationMember>): FormationMember => ({
   name: `some-members-name-${randomInt()}`,
   addressLine1: `some-members-address-1-${randomInt()}`,
   addressLine2: `some-members-address-2-${randomInt()}`,

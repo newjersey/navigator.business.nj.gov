@@ -4,7 +4,7 @@ export interface FormationData {
   getFilingResponse: GetFilingResponse | undefined;
 }
 
-export interface BusinessMember {
+export interface FormationMember {
   name: string;
   addressLine1: string;
   addressLine2: string;
@@ -29,7 +29,7 @@ export interface FormationFormData {
   agentOfficeAddressCity: string;
   agentOfficeAddressState: string;
   agentOfficeAddressZipCode: string;
-  members: BusinessMember[];
+  members: FormationMember[];
   signer: string;
   additionalSigners: string[];
   paymentType: PaymentType;
@@ -58,7 +58,7 @@ export type FormationTextField = Exclude<
   | "members"
 >;
 
-export const createEmptyBusinessMember = (): BusinessMember => ({
+export const createEmptyFormationMember = (): FormationMember => ({
   name: "",
   addressLine1: "",
   addressLine2: "",
