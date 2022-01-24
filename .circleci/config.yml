@@ -62,7 +62,8 @@ commands:
       - install-awscli
       - bootstrap-code
       - setup_remote_docker:
-          version: 19.03.13
+          version: 20.10.11
+          docker_layer_caching: true
       - run:
           name: Configure Serverless
           command: yarn workspace @businessnjgovnavigator/api serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
