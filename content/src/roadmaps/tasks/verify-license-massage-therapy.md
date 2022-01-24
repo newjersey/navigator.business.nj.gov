@@ -14,4 +14,4 @@ To complete this task you will need:
 * The city used in their license application
 
 After you complete this task you will have:
-* Verification that the staff members providing massage therapy services have a valid license
+* Confirmation that the staff members providing massage therapy services have a valid license
