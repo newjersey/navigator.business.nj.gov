@@ -16,4 +16,4 @@ To apply for an accounting license you will need:
 
 After you complete this task, you will have:
 
-* A confirmation letter with your certified public accountant license number
+* A confirmation letter (sent via postal mail) with your certified public accountant license number
