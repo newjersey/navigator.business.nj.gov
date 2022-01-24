@@ -15,12 +15,9 @@ To register your firm you will need:
 
 You can download the registration form from the New Jersey Division of Consumer Affairs but will have to mail a paper copy to:
 
-Division of Consumer Affairs 
-
-New Jersey State Board of Accountancy
-
-124 Halsey Street, 6th Floor, P.O. Box 45000 
-
+Division of Consumer Affairs  
+New Jersey State Board of Accountancy  
+124 Halsey Street, 6th Floor, P.O. Box 45000   
 Newark, New Jersey 07101
 
 
