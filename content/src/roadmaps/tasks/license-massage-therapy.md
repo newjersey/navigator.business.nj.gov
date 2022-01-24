@@ -26,4 +26,4 @@ Newark NJ 07102 
 
 After you complete this task, you will have:
 
-* A massage therapy license number
+* A confirmation letter (sent via postal mail) with your massage therapy license number
