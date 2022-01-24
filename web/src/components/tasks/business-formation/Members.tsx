@@ -42,8 +42,8 @@ export const Members = (): ReactElement => {
       <div className={`form-input margin-bottom-2 ${styles.membersTable}`}>
         <Content
           overrides={{
-            h4: ({ children }: { children: string[] }): ReactElement => (
-              <h4 style={{ display: "inline" }}>{children}</h4>
+            h3: ({ children }: { children: string[] }): ReactElement => (
+              <h3 style={{ display: "inline" }}>{children}</h3>
             ),
             h6: ({ children }: { children: string[] }): ReactElement => (
               <h6 style={{ display: "inline", textTransform: "initial" }}>{children}</h6>
@@ -118,7 +118,10 @@ export const Members = (): ReactElement => {
               setModalOpen(true);
             }}
           >
-            <Icon>add</Icon> {BusinessFormationDefaults.membersNewButtonText}
+            <Icon>add</Icon>{" "}
+            <span className="text-underline" style={{ textUnderlinePosition: "under" }}>
+              {BusinessFormationDefaults.membersNewButtonText}
+            </span>
           </Button>
         )}
       </div>

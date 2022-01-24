@@ -557,13 +557,15 @@ describe("<BusinessFormation />", () => {
         expect(
           subject.queryByText(BusinessFormationDefaults.membersNewButtonText, { exact: false })
         ).toBeInTheDocument();
-        const addressTd = subject.getByText(members[1].addressLine1, { exact: false });
-        expect(addressTd).toBeInTheDocument();
-        expect(subject.getByText(members[1].addressLine2, { exact: false })).toBeInTheDocument();
-        expect(subject.getByText(members[1].addressCity, { exact: false })).toBeInTheDocument();
-        expect(subject.getByText(members[1].addressState, { exact: false })).toBeInTheDocument();
-        expect(subject.getByText(members[1].addressZipCode, { exact: false })).toBeInTheDocument();
-        fireEvent.click(addressTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
+        const nameTd = subject.getByText(members[1].name, { exact: false });
+        expect(nameTd).toBeInTheDocument();
+        expect(
+          subject.getByText(
+            `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState} ${members[1].addressZipCode}`,
+            { exact: false }
+          )
+        ).toBeInTheDocument();
+        fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
         expect(getInputElementByLabel("Member name").value).toBe(members[1].name);
         expect(getInputElementByLabel("Member address line1").value).toBe(members[1].addressLine1);
         expect(getInputElementByLabel("Member address line2").value).toBe(members[1].addressLine2);
@@ -591,9 +593,9 @@ describe("<BusinessFormation />", () => {
           members,
         });
         await submitBusinessTab();
-        const addressTd = subject.getByText(members[1].name, { exact: false });
-        expect(addressTd).toBeInTheDocument();
-        fireEvent.click(addressTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
+        const nameTd = subject.getByText(members[1].name, { exact: false });
+        expect(nameTd).toBeInTheDocument();
+        fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
         await submitContactsTab();
         const newMembers = currentUserData().formationData.formationFormData.members;
         expect(newMembers.length).toEqual(1);

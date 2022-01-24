@@ -1,21 +1,22 @@
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { Icon } from "@/components/njwds/Icon";
 import analytics from "@/lib/utils/analytics";
-import React, { ReactElement } from "react";
+import React, { CSSProperties, ReactElement } from "react";
 import remark from "remark";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import remark2react from "remark-react";
 
-interface Props {
+interface ContentProps {
   children: string;
+  style?: CSSProperties;
   overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
   onClick?: () => void;
 }
 
-export const Content = (props: Props): ReactElement => {
+export const Content = (props: ContentProps): ReactElement => {
   return (
-    <div className="usa-prose">
+    <div className="usa-prose" style={props.style}>
       <ContentNonProse overrides={props.overrides} onClick={props.onClick}>
         {props.children}
       </ContentNonProse>
@@ -23,7 +24,13 @@ export const Content = (props: Props): ReactElement => {
   );
 };
 
-export const ContentNonProse = (props: Props): ReactElement => {
+interface ContentNonProseProps {
+  children: string;
+  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
+  onClick?: () => void;
+}
+
+export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
   const markdown = remark()
     .use(remark2react, {
       remarkReactComponents: {

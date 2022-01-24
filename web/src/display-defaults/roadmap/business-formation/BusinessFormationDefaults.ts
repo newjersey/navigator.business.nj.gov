@@ -50,7 +50,7 @@ export const BusinessFormationDefaults: Record<string, string> = {
   alreadySubmittedLinkText: "visit your specialized payment page",
   membersNewButtonText: "Add New Member",
   membersExpandText: "Expand",
-  membersTableColumn: "Name,Street,Actions",
+  membersTableColumn: "Name,Address,Actions",
   membersModalNextButtonText: "Add Member",
   membersModalBackButtonText: "Cancel",
   membersSuccessTextHeader: "Member Added",

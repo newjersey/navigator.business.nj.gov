@@ -6,7 +6,15 @@ import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { createEmptyFormationMember, FormationMember } from "@businessnjgovnavigator/shared";
-import { Checkbox, Dialog, DialogContent, FormControlLabel, FormGroup, IconButton } from "@mui/material";
+import {
+  Checkbox,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  FormGroup,
+  IconButton,
+} from "@mui/material";
 import React, { FormEvent, ReactElement, useContext, useEffect, useRef, useState } from "react";
 import { StateDropdown } from "./StateDropdown";
 interface Props {
@@ -44,21 +52,17 @@ export const MembersModal = (props: Props): ReactElement => {
 
   const [memberErrorMap, setMemberErrorMap] = useState<MemberErrorMap>(createMemberErrorMap());
 
-  const reset = () => {
-    setMemberData(createEmptyFormationMember());
-    setUseAgentAddress(false);
-    setMemberErrorMap(createMemberErrorMap());
-  };
-
   useEffect(() => {
     if (props.index !== undefined) {
       setMemberData({ ...state.formationFormData.members[props.index] });
       setMemberErrorMap(createMemberErrorMap(false));
     } else {
-      reset();
+      setMemberData(createEmptyFormationMember());
+      setUseAgentAddress(false);
+      setMemberErrorMap(createMemberErrorMap());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.index, state.formationFormData.members]);
+  }, [props.open]);
 
   const checkBoxCheck = (checked: boolean) => {
     setUseAgentAddress(checked);
@@ -74,11 +78,6 @@ export const MembersModal = (props: Props): ReactElement => {
       });
       setMemberErrorMap(createMemberErrorMap(false));
     }
-  };
-
-  const handleClose = () => {
-    props.handleClose();
-    reset();
   };
 
   const onValidation = (invalid: boolean, fieldName: string) => {
@@ -115,7 +114,7 @@ export const MembersModal = (props: Props): ReactElement => {
       members[props.index] = memberData;
       setFormationFormData({ ...state.formationFormData, members });
     }
-    handleClose();
+    props.handleClose();
     props.onSave();
   };
 
@@ -125,25 +124,29 @@ export const MembersModal = (props: Props): ReactElement => {
       maxWidth="sm"
       style={{ paddingBottom: "10px" }}
       fullWidth
-      onClose={handleClose}
+      onClose={props.handleClose}
       data-testid={"members-modal"}
     >
-      <DialogContent>
+      <DialogTitle sx={{ marginBottom: 2, padding: 3, paddingBottom: 0 }}>
+        {" "}
+        <Content>{state.displayContent.membersModal.contentMd}</Content>
         <IconButton
           aria-label="close"
-          onClick={handleClose}
+          onClick={props.handleClose}
           sx={{
             position: "absolute",
-            right: 8,
-            top: 8,
+            right: 10,
+            top: 12,
             color: (theme) => theme.palette.grey[500],
           }}
         >
           <Icon className="usa-icon--size-4">close</Icon>
         </IconButton>
+      </DialogTitle>
+
+      <DialogContent dividers={true}>
         <div>
           <div className="form-input margin-bottom-1 margin-top-1">
-            <Content>{state.displayContent.membersModal.contentMd}</Content>
             {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" ? (
               <FormGroup className="padding-left-105">
                 <FormControlLabel
@@ -187,7 +190,17 @@ export const MembersModal = (props: Props): ReactElement => {
                 disabled={useAgentAddress}
                 required={true}
               />
-              <Content>{state.displayContent.memberAddressLine2.contentMd}</Content>
+              <Content
+                style={{ display: "inline" }}
+                overrides={{
+                  p: ({ children }: { children: string[] }): ReactElement => (
+                    <p style={{ display: "inline" }}>{children}</p>
+                  ),
+                }}
+              >
+                {state.displayContent.memberAddressLine2.contentMd}
+              </Content>{" "}
+              <h6 style={{ display: "inline", textTransform: "initial" }}>(Optional)</h6>
               <GenericTextField
                 fieldName="memberAddressLine2"
                 value={memberData.addressLine2}
@@ -250,12 +263,16 @@ export const MembersModal = (props: Props): ReactElement => {
                 </div>
               </div>
               <div className="margin-top-2">
-                <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
-                  <Button style="secondary" onClick={handleClose} dataTestid={"memberCancel"}>
+                <div className="padding-205 bg-base-lightest flex flex-justify-end task-submit-button-background flex-wrap">
+                  <Button style="secondary" onClick={props.handleClose} dataTestid={"memberCancel"}>
                     {BusinessFormationDefaults.membersModalBackButtonText}
                   </Button>
+                  <div className="tablet:display-none margin-1"></div>
                   <Button style="primary" typeSubmit={true} dataTestid={"memberSubmit"}>
-                    {BusinessFormationDefaults.membersModalNextButtonText}
+                    <span className="text-no-wrap">
+                      {" "}
+                      {BusinessFormationDefaults.membersModalNextButtonText}
+                    </span>
                   </Button>
                 </div>
               </div>
