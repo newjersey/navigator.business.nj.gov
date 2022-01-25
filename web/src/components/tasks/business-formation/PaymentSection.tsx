@@ -118,6 +118,7 @@ export const PaymentSection = (): ReactElement => {
         <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
           <Button
             style="secondary"
+            widthAutoOnMobile
             onClick={() => {
               setTab(state.tab - 1);
               scrollToTop();
@@ -126,9 +127,17 @@ export const PaymentSection = (): ReactElement => {
           >
             {BusinessFormationDefaults.previousButtonText}
           </Button>
-          <Button loading={isLoading} style="primary" onClick={submitFormationFormData}>
-            {BusinessFormationDefaults.submitButtonText}
-          </Button>
+          <div className="margin-right-205">
+            <Button
+              loading={isLoading}
+              widthAutoOnMobile
+              noRightMargin
+              style="primary"
+              onClick={submitFormationFormData}
+            >
+              {BusinessFormationDefaults.submitButtonText}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
