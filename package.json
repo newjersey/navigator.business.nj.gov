@@ -100,7 +100,7 @@
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
-    "@types/aws-lambda": "8.10.91",
+    "@types/aws-lambda": "8.10.92",
     "@types/broken-link-checker": "0.7.1",
     "@types/cors": "2.8.12",
     "@types/dedent": "0.7.0",
