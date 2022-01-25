@@ -70,6 +70,7 @@ export const ContactsSection = (): ReactElement => {
         <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
           <Button
             style="secondary"
+            widthAutoOnMobile
             onClick={() => {
               setTab(state.tab - 1);
               scrollToTop();
@@ -77,9 +78,11 @@ export const ContactsSection = (): ReactElement => {
           >
             {BusinessFormationDefaults.previousButtonText}
           </Button>
-          <Button style="primary" onClick={submitContactData}>
-            {BusinessFormationDefaults.nextButtonText}
-          </Button>
+          <div className="margin-right-205">
+            <Button style="primary" onClick={submitContactData} widthAutoOnMobile noRightMargin>
+              {BusinessFormationDefaults.nextButtonText}
+            </Button>
+          </div>
         </div>
       </div>
     </>
