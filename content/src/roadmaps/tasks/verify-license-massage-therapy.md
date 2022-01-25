@@ -8,7 +8,7 @@ callToActionText: Verify Your Staff is Licensed
 ---
 You or any of your staff providing massage therapy services will need to have individual massage therapy licenses. It is the responsibility of the business owner to ensure all staff providing massage therapy services is properly licensed by the State of New Jersey Division of Consumer Affairs.
 
-To complete this task you will need:
+To complete this application you will need:
 * Your employee's full name
 * Their license number
 * The city used in their license application
