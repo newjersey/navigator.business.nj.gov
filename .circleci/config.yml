@@ -524,11 +524,13 @@ workflows:
             branches:
               ignore:
                 - /^release-.*/
+                - /^staging-.*/
       - lint:
           filters:
             branches:
               ignore:
                 - /^release-.*/
+                - /^staging-.*/
           requires:
             - build
       - integration-tests:
@@ -539,6 +541,7 @@ workflows:
               ignore:
                 - main
                 - /^release-.*/
+                - /^staging-.*/
           requires:
             - build
       - integration-tests:
@@ -549,6 +552,7 @@ workflows:
               ignore:
                 - main
                 - /^release-.*/
+                - /^staging-.*/
           requires:
             - build
       - integration-tests:
@@ -559,6 +563,7 @@ workflows:
               ignore:
                 - main
                 - /^release-.*/
+                - /^staging-.*/
           requires:
             - build
       - integration-tests:
@@ -569,6 +574,7 @@ workflows:
               ignore:
                 - main
                 - /^release-.*/
+                - /^staging-.*/
           requires:
             - build
       - integration-tests:
