@@ -144,7 +144,7 @@ const theme = createTheme({
     },
     MuiInputBase: {
       styleOverrides: {
-        root: { marginTop: "4px" },
+        root: { marginTop: "0px" },
       },
     },
     MuiOutlinedInput: {
