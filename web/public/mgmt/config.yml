@@ -242,7 +242,8 @@ collections:
       - { label: "Filename", name: "slug", widget: "slug", required: false }
       - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
       - { label: "Yes Button Copy", name: "radioButtonYesText", widget: "string", required: false }
-      - { label: "No Button Copy", name: "radioButtonNoText", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
 
   - name: "starting-onboarding-content"
     label: "Poppy Onboarding Content"
@@ -260,6 +261,8 @@ collections:
       - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
       - { label: "Yes Button Copy", name: "radioButtonYesText", widget: "string", required: false }
       - { label: "No Button Copy", name: "radioButtonNoText", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
 
   - name: "profile-content"
     label: "Profile Content"
@@ -277,6 +280,8 @@ collections:
       - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
       - { label: "Yes Button Copy", name: "radioButtonYesText", widget: "string", required: false }
       - { label: "No Button Copy", name: "radioButtonNoText", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"
@@ -295,6 +300,8 @@ collections:
       - { label: "Yes Button Copy", name: "radioYes", widget: "string", required: false }
       - { label: "No Button Copy", name: "radioNo", widget: "string", required: false }
       - { label: "No Button Content", name: "radioNoContent", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
 
   - name: "business-formation"
     label: "Business Formation"
@@ -324,6 +331,8 @@ collections:
       - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
       - { label: "cost", name: "cost", widget: "string", required: false }
       - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
 
   - name: "roadmap-content"
     label: "Roadmap Content"
