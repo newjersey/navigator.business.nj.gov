@@ -1,7 +1,6 @@
 import { BusinessFormation } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import * as api from "@/lib/api-client/apiClient";
-import { templateEval } from "@/lib/utils/helpers";
 import {
   generateFormationData,
   generateFormationDisplayContent,
@@ -170,10 +169,7 @@ describe("<BusinessFormation />", () => {
       it("shows expiration date as transaction date plus 30 days", () => {
         renderWithFilingResponse({});
         const datePlusThirty = dayjs(getFilingResponse.transactionDate).add(30, "days").format("MM/DD/YYYY");
-        const bodyText = templateEval(BusinessFormationDefaults.successPageBody, {
-          expirationDate: datePlusThirty,
-        });
-        expect(subject.getByText(bodyText)).toBeInTheDocument();
+        expect(subject.getByText(datePlusThirty, { exact: false })).toBeInTheDocument();
       });
 
       it("does not display documents when they are not present", () => {
