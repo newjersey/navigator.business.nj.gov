@@ -3,8 +3,8 @@ import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import React, { FocusEvent, ReactElement, useContext } from "react";
-import { OnboardingField } from "./OnboardingField";
+import React, { ReactElement, useContext } from "react";
+import { NumericField } from "./NumericField";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -13,17 +13,7 @@ interface Props {
 
 export const OnboardingEmployerId = (props: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
-
-  const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-    const valid = event.target.value.length === 10 || event.target.value.length === 0;
-    props.onValidation(fieldName, !valid);
-  };
-
-  const handleChange = (): void => props.onValidation(fieldName, false);
-
   const fieldName = "employerId";
-
-  const dataFormat = (value: string): string => value.replace(/[^0-9]/g, "");
 
   return (
     <>
@@ -31,19 +21,16 @@ export const OnboardingEmployerId = (props: Props): ReactElement => {
         {state.displayContent.employerId.headingBolded}{" "}
         <span className="text-light">{state.displayContent.employerId.headingNotBolded}</span>
       </div>
-      <OnboardingField
+      <NumericField
         fieldName={fieldName}
-        onValidation={onValidation}
-        handleChange={handleChange}
+        onValidation={props.onValidation}
         error={props.fieldStates[fieldName].invalid}
         validationText={templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
-          length: "10",
+          length: "9",
         })}
-        valueFilter={dataFormat}
         visualFilter={displayAsEin}
-        fieldOptions={{
-          inputProps: { inputMode: "numeric", maxLength: "10" },
-        }}
+        maxLength={9}
+        minLength={9}
       />
     </>
   );

@@ -89,9 +89,10 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
             onValidation={(field: ProfileFields, invalid: boolean) => {
               setIsValid(!invalid);
             }}
-            invalid={!isValid}
+            error={!isValid}
             fieldName="entityId"
             maxLength={10}
+            minLength={10}
           />
           <div className="mla height-5 margin-top-2 mobile-lg:margin-top-0">
             <Button style="primary" typeSubmit loading={isLoading}>

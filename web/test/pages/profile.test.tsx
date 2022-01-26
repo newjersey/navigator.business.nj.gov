@@ -184,7 +184,7 @@ describe("profile", () => {
     clickSave();
     await waitFor(() => {
       expect(
-        subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "10" }))
+        subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "9" }))
       ).toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });

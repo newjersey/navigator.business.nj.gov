@@ -27,9 +27,10 @@ export const OnboardingEntityId = (props: Props): ReactElement => {
       </div>
       <NumericField
         onValidation={props.onValidation}
-        invalid={props.fieldStates[fieldName].invalid}
+        error={props.fieldStates[fieldName].invalid}
         fieldName={fieldName}
         maxLength={10}
+        minLength={10}
         disabled={props.disabled}
       />
       {props.children}

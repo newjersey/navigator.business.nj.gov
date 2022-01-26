@@ -1,11 +1,11 @@
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import { TextField, TextFieldProps } from "@mui/material";
-import React, { ChangeEvent, FocusEvent, ReactElement } from "react";
+import React, { ChangeEvent, FocusEvent, ReactElement, useEffect } from "react";
 
-interface Props {
+export interface GenericTextFieldProps {
   fieldName: string;
   fieldOptions?: TextFieldProps;
-  onValidation?: (invalid: boolean, fieldName: string) => void;
+  onValidation?: (fieldName: string, invalid: boolean) => void;
   additionalValidation?: (value: string) => boolean;
   visualFilter?: (value: string) => string;
   valueFilter?: (value: string) => string;
@@ -14,25 +14,65 @@ interface Props {
   validationText?: string;
   disabled?: boolean;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
+  onChangeTrigger?: boolean;
+  resetOnChangeTrigger?: () => void;
   autoComplete?: string;
   required?: boolean;
+  numericProps?: {
+    maxLength: number;
+    minLength?: number;
+  };
 }
 
-export const GenericTextField = (props: Props): ReactElement => {
+export const GenericTextField = (props: GenericTextFieldProps): ReactElement => {
+  let visualFilter = props.visualFilter;
+  let valueFilter = props.valueFilter;
+  let additionalValidation = props.additionalValidation;
+  let fieldOptions = props.fieldOptions;
+
+  if (props.numericProps) {
+    const regex = (value: string): string => value.replace(/[^0-9]/g, "");
+
+    visualFilter = (value: string): string =>
+      props.visualFilter ? props.visualFilter(regex(value)) : regex(value);
+
+    const maxLength = props.numericProps?.maxLength as number;
+
+    valueFilter = (value) => (maxLength ? regex(value).slice(0, maxLength) : regex(value));
+
+    const minValue = (value: string): boolean =>
+      !props.required && value.length == 0
+        ? true
+        : props.numericProps?.minLength
+        ? value.length >= props.numericProps.minLength
+        : true;
+
+    additionalValidation = (returnedValue: string): boolean =>
+      ![
+        minValue(returnedValue),
+        returnedValue.length <= maxLength,
+        props.additionalValidation ? props.additionalValidation(returnedValue) : true,
+      ].some((i) => !i);
+    fieldOptions = {
+      ...fieldOptions,
+      inputProps: { ...fieldOptions?.inputProps, inputMode: "numeric" },
+    };
+  }
+
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-    const value = props.valueFilter ? props.valueFilter(event.target.value) : event.target.value;
-    const invalid = props.additionalValidation ? !props.additionalValidation(value) : false;
-    const required = props.required ? !value.trim() : false;
+    const value = valueFilter ? valueFilter(event.target.value) : event.target.value;
+    const invalid = additionalValidation ? !additionalValidation(value) : false;
+    const invalidRequired = props.required ? !value.trim() : false;
     props.onValidation &&
       props.onValidation(
-        [required, invalid].some((i) => !!i),
-        props.fieldName
+        props.fieldName,
+        [invalidRequired, invalid].some((i) => !!i)
       );
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const value = props.valueFilter ? props.valueFilter(event.target.value) : event.target.value;
+    const value = valueFilter ? valueFilter(event.target.value) : event.target.value;
     props.handleChange && props.handleChange(value);
     if (event && event.nativeEvent.constructor.name === "Event") {
       //Generic events triggered by autofill
@@ -40,7 +80,16 @@ export const GenericTextField = (props: Props): ReactElement => {
     }
   };
 
-  const value = props.visualFilter ? props.visualFilter(props.value ?? "") : props.value;
+  const value = visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? "";
+
+  useEffect(() => {
+    props.onChangeTrigger &&
+      props.resetOnChangeTrigger &&
+      props.resetOnChangeTrigger() &&
+      props.handleChange &&
+      props.handleChange(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.onChangeTrigger]);
 
   return (
     <TextField
@@ -56,9 +105,9 @@ export const GenericTextField = (props: Props): ReactElement => {
       fullWidth
       placeholder={props.placeholder ?? ""}
       disabled={props.disabled}
-      {...props.fieldOptions}
+      {...fieldOptions}
       inputProps={{
-        ...props.fieldOptions?.inputProps,
+        ...fieldOptions?.inputProps,
         "aria-label": camelCaseToSentence(props.fieldName),
       }}
     />

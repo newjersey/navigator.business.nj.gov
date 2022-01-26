@@ -80,7 +80,7 @@ export const MembersModal = (props: Props): ReactElement => {
     }
   };
 
-  const onValidation = (invalid: boolean, fieldName: string) => {
+  const onValidation = (fieldName: string, invalid: boolean) => {
     setMemberErrorMap({ ...memberErrorMap, [fieldName]: { invalid } });
   };
 
