@@ -43,9 +43,7 @@ export const BusinessSuffixDropdown = (): ReactElement => {
             inputProps={{ "data-testid": "business-suffix" }}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return (
-                  <div className="text-disabled-dark">{state.displayContent.businessSuffix.placeholder}</div>
-                );
+                return <div className="text-base">{state.displayContent.businessSuffix.placeholder}</div>;
               }
 
               return selected;
