@@ -260,6 +260,8 @@ commands:
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_STAGING' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_STAGING' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_STAGING' >> $BASH_ENV
+            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_STAGING' >> $BASH_ENV
+            echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_STAGING' >> $BASH_ENV
             echo 'export LICENSE_STATUS_BASE_URL=$LICENSE_STATUS_BASE_URL_STAGING' >> $BASH_ENV
             echo 'export FORMATION_API_BASE_URL=$FORMATION_API_BASE_URL_STAGING' >> $BASH_ENV
             echo 'export FORMATION_API_KEY=$FORMATION_API_KEY_STAGING' >> $BASH_ENV
@@ -420,7 +422,7 @@ jobs:
       - image: cimg/node:14.18.3
     steps:
       - set-staging-env-vars
-      - deploy-amplify-build
+      - deploy
     environment:
       STAGE: staging
       AMPLIFY_ENV: staging
