@@ -2491,6 +2491,7 @@ __metadata:
     "@types/lodash.orderby": 4.6.6
     "@types/node": 14.18.9
     "@types/react": 17.0.38
+    "@types/react-dom": ^17.0.11
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.4
     "@types/react-transition-group": 4.4.4
@@ -2549,6 +2550,7 @@ __metadata:
     lerna: 4.0.0
     lint-staged: 12.3.1
     lodash.orderby: 4.6.0
+    markdown-truncate: ^1.0.4
     napa: 3.0.0
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     netlify-cms-app: 2.15.65
@@ -2661,6 +2663,7 @@ __metadata:
     "@types/lodash.orderby": 4.6.6
     "@types/node": 14.18.9
     "@types/react": 17.0.38
+    "@types/react-dom": ^17.0.11
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.4
     "@types/react-transition-group": 4.4.4
@@ -9102,6 +9105,15 @@ __metadata:
   version: 1.2.4
   resolution: "@types/range-parser@npm:1.2.4"
   checksum: b7c0dfd5080a989d6c8bb0b6750fc0933d9acabeb476da6fe71d8bdf1ab65e37c136169d84148034802f48378ab94e3c37bb4ef7656b2bec2cb9c0f8d4146a95
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^17.0.11":
+  version: 17.0.11
+  resolution: "@types/react-dom@npm:17.0.11"
+  dependencies:
+    "@types/react": "*"
+  checksum: 4d5730dffbef86c887cecad7e3cecda424ce6a64d0b5441c63b5b015d48219868660a2bb1aa15e897e565ad8867fa6b885d4358b04e1c4e589ba4c07c3fda55c
   languageName: node
   linkType: hard
 
@@ -23211,6 +23223,13 @@ __metadata:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: f7d8375f9871f228f2d0a06055f1d01f82c57cbd93fde2b9cb24ccebde741b9ebc0f4b8c52239f7b192c72e7f587cca4d3e752b731539be1936b3290470d119c
+  languageName: node
+  linkType: hard
+
+"markdown-truncate@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "markdown-truncate@npm:1.0.4"
+  checksum: f58dc73416ea6a4ecbe7c82c4d2c37b31a931b4f44176e8be91d260898a4123be89c677b13ec5f3a8885b2b7830644b9f17d3cd025582f6df474c1ea7bbe9e9f
   languageName: node
   linkType: hard
 

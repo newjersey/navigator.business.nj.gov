@@ -45,6 +45,7 @@
     "storybook-addon-designs",
     "next/dynamic",
     "netlify-cms-app",
-    "path"
+    "path",
+    "markdown-truncate"
   ]
 }

@@ -4,6 +4,7 @@ urlSlug: "temp"
 name: "Temp"
 callToActionLink: "https://www.temp.com"
 callToActionText: "File Your Temp Report"
+type: "CERTIFICATION"
 ---
 
-Lorem Ipsum
+Lorem **Ipsum**

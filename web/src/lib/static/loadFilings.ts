@@ -1,4 +1,4 @@
-import { Filing, FilingReference } from "@/lib/types/types";
+import { Filing } from "@/lib/types/types";
 import { convertTaskMd } from "@/lib/utils/markdownReader";
 import fs from "fs";
 import path from "path";
@@ -27,7 +27,7 @@ export const loadFilingByUrlSlug = (urlSlug: string): Filing => {
   return loadFilingByFileName(matchingFileName);
 };
 
-const loadFilingByFileName = (fileName: string): Filing => {
+export const loadFilingByFileName = (fileName: string): Filing => {
   const fullPath = path.join(filingsDir, `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -38,16 +38,4 @@ const loadFilingByFileName = (fileName: string): Filing => {
     ...filingContent,
     filename: fileNameWithoutMd,
   } as Filing;
-};
-
-export const loadFilingsReferences = (): Record<string, FilingReference> => {
-  const fileNames = fs.readdirSync(filingsDir);
-  const fileContents = fileNames.map((fileName) => {
-    return loadFilingByFileName(fileName);
-  });
-
-  return fileContents.reduce((acc: Record<string, FilingReference>, curr: Filing) => {
-    acc[curr.id] = { name: curr.name, urlSlug: curr.urlSlug };
-    return acc;
-  }, {} as Record<string, FilingReference>);
 };

@@ -45,7 +45,7 @@ const renderPage = (task: Task, initialUserData?: UserData): RenderResult =>
   render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
-        <TaskPage task={task} filingsReferences={{}} displayContent={createEmptyTaskDisplayContent()} />
+        <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} />
       </WithStatefulUserData>
     </materialUi.ThemeProvider>
   );

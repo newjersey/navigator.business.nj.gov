@@ -1,9 +1,10 @@
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
-import { FilingReference } from "@/lib/types/types";
+import { OperateReference } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
+  generateOperateReference,
   generatePreferences,
   generateProfileData,
   generateStep,
@@ -68,10 +69,7 @@ describe("roadmap page", () => {
   const renderRoadmapPage = (): RenderResult => {
     return render(
       <ThemeProvider theme={createTheme()}>
-        <RoadmapPage
-          filingsReferences={{} as Record<string, FilingReference>}
-          displayContent={emptyDisplayContent}
-        />
+        <RoadmapPage operateReferences={{}} displayContent={emptyDisplayContent} />
       </ThemeProvider>
     );
   };
@@ -451,17 +449,17 @@ describe("roadmap page", () => {
       }),
     });
 
-    const filingRef: Record<string, FilingReference> = {
-      "some-tax-filing-identifier-1": {
+    const filingRef: Record<string, OperateReference> = {
+      "some-tax-filing-identifier-1": generateOperateReference({
         name: "some-name-1",
         urlSlug: "some-urlSlug-1",
-      },
+      }),
     };
 
     const renderRoadmapPage = (): RenderResult => {
       return render(
         <ThemeProvider theme={createTheme()}>
-          <RoadmapPage filingsReferences={filingRef} displayContent={emptyDisplayContent} />
+          <RoadmapPage operateReferences={filingRef} displayContent={emptyDisplayContent} />
         </ThemeProvider>
       );
     };

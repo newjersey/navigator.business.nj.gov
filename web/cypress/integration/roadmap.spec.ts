@@ -55,7 +55,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.contains("Absecon").should("exist");
 
-    cy.get("[data-back-to-roadmap]").click({ force: true });
+    cy.get('[data-testid="back-to-roadmap"]').click({ force: true });
 
     // editing data in the Profile page
     clickEdit();

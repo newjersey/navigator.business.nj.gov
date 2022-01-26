@@ -14,8 +14,8 @@ import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
-import { loadFilingsReferences } from "@/lib/static/loadFilings";
-import { FilingReference, RoadmapDisplayContent } from "@/lib/types/types";
+import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
+import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { featureFlags, getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { CircularProgress } from "@mui/material";
@@ -25,7 +25,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
-  filingsReferences: Record<string, FilingReference>;
+  operateReferences: Record<string, OperateReference>;
 }
 
 const RoadmapPage = (props: Props): ReactElement => {
@@ -101,7 +101,7 @@ const RoadmapPage = (props: Props): ReactElement => {
                   {!featureDisableOperate ? (
                     <OperateSection
                       displayContent={props.displayContent.operateDisplayContent}
-                      filingsReferences={props.filingsReferences}
+                      operateReferences={props.operateReferences}
                     />
                   ) : (
                     <div className="margin-top-6 font-body-2xs text-center">
@@ -139,7 +139,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
   return {
     props: {
       displayContent: loadRoadmapDisplayContent(),
-      filingsReferences: loadFilingsReferences(),
+      operateReferences: loadOperateReferences(),
     },
   };
 };

@@ -253,3 +253,10 @@ td {
 .usa-alert--slim:before {
   margin-top: 0.5rem;
 }
+
+.dashboard-opportunities-list {
+  @media all and (min-width: $lg) {
+    max-height: 925px;
+    overflow: auto;
+  }
+}

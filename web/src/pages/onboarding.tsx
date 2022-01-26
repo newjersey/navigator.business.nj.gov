@@ -229,7 +229,11 @@ const OnboardingPage = (props: Props): ReactElement => {
       });
     } else {
       update({ ...userData, profileData: newProfileData, formProgress: "COMPLETED" }).then(async () => {
-        await router.push("/roadmap");
+        if (newProfileData.hasExistingBusiness) {
+          await router.push("/dashboard");
+        } else {
+          await router.push("/roadmap");
+        }
       });
     }
   };

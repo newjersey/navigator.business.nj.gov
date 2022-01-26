@@ -1,4 +1,4 @@
-import { Filing } from "@/lib/types/types";
+import { Filing, Opportunity, OpportunityType } from "@/lib/types/types";
 import matter from "gray-matter";
 
 export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks | Filing => {
@@ -8,6 +8,17 @@ export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks | Filing
   return {
     contentMd: matterResult.content,
     ...taskGrayMatter,
+  };
+};
+
+export const convertOpportunityMd = (oppMdContents: string, filename: string): Opportunity => {
+  const matterResult = matter(oppMdContents);
+  const oppGrayMatter = matterResult.data as OpportunityGrayMatter;
+
+  return {
+    contentMd: matterResult.content,
+    filename: filename,
+    ...oppGrayMatter,
   };
 };
 
@@ -27,6 +38,15 @@ type TaskGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   postOnboardingQuestion: string;
+};
+
+type OpportunityGrayMatter = {
+  id: string;
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  type: OpportunityType;
 };
 
 export type MarkdownResult = {

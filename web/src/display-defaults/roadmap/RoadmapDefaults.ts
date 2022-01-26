@@ -20,9 +20,6 @@ export const RoadmapDefaults: Record<string, string> = {
   loadingText: "Loading...",
   operateFormSubmitButtonText: "Submit",
   calendarFilingDueDateLabel: "Due",
-  calendarHeader: "My Filing Calendar",
-  calendarTooltip:
-    "This is your personalized calendar of upcoming of taxes and filings that the New Jersey Department of Treasury has identified. Click on any item to learn about the filing and how you can comply.",
   congratulatorModalTitle: "You did it!",
   congratulatorModalHeader: "You reached a crucial milestone as a business.",
   congratulatorModalBody: "You can now start your",

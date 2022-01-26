@@ -1,9 +1,10 @@
 import { OperateSection } from "@/components/roadmap/OperateSection";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
-import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
+import { OperateDisplayContent, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
+  generateOperateReference,
   generatePreferences,
   generateProfileData,
   generateTaxFiling,
@@ -36,7 +37,7 @@ const emptyContent: OperateDisplayContent = {
   entityIdErrorNotFoundMd: "ENTITY ID NOT FOUND",
 };
 
-const emptyFilings: Record<string, FilingReference> = {};
+const emptyFilings: Record<string, OperateReference> = {};
 
 describe("<OperateSection />", () => {
   beforeEach(() => {
@@ -57,7 +58,7 @@ describe("<OperateSection />", () => {
   const statefulRender = (initialData: UserData = generateUserData({})): RenderResult => {
     return renderSection(
       <WithStatefulUserData initialUserData={initialData}>
-        <OperateSection displayContent={emptyContent} filingsReferences={emptyFilings} />
+        <OperateSection displayContent={emptyContent} operateReferences={emptyFilings} />
       </WithStatefulUserData>
     );
   };
@@ -72,7 +73,7 @@ describe("<OperateSection />", () => {
         }),
       });
 
-      return renderSection(<OperateSection displayContent={emptyContent} filingsReferences={emptyFilings} />);
+      return renderSection(<OperateSection displayContent={emptyContent} operateReferences={emptyFilings} />);
     };
 
     describe("when to show form", () => {
@@ -195,15 +196,15 @@ describe("<OperateSection />", () => {
         }),
       });
 
-      const filingRef: Record<string, FilingReference> = {
-        "some-tax-filing-identifier-1": {
+      const filingRef: Record<string, OperateReference> = {
+        "some-tax-filing-identifier-1": generateOperateReference({
           name: "some-name-1",
           urlSlug: "some-urlSlug-1",
-        },
+        }),
       };
 
       const subject = renderSection(
-        <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+        <OperateSection displayContent={emptyContent} operateReferences={filingRef} />
       );
       expect(getByTextAcrossElements(subject, "Oct 2021")).toBeInTheDocument();
       expect(getByTextAcrossElements(subject, "Nov 2021")).toBeInTheDocument();
@@ -233,15 +234,15 @@ describe("<OperateSection />", () => {
         }),
       });
 
-      const filingRef: Record<string, FilingReference> = {
-        "some-tax-filing-identifier-1": {
+      const filingRef: Record<string, OperateReference> = {
+        "some-tax-filing-identifier-1": generateOperateReference({
           name: "some-name-1",
           urlSlug: "some-urlSlug-1",
-        },
+        }),
       };
 
       const subject = renderSection(
-        <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+        <OperateSection displayContent={emptyContent} operateReferences={filingRef} />
       );
       expect(getByTextAcrossElements(subject, "Nov 2021")).toBeInTheDocument();
       expect(getByTextAcrossElements(subject, "Oct 2022")).toBeInTheDocument();
@@ -261,15 +262,15 @@ describe("<OperateSection />", () => {
         }),
       });
 
-      const filingRef: Record<string, FilingReference> = {
-        "some-tax-filing-identifier-1": {
+      const filingRef: Record<string, OperateReference> = {
+        "some-tax-filing-identifier-1": generateOperateReference({
           name: "some-name-1",
           urlSlug: "some-urlSlug-1",
-        },
+        }),
       };
 
       const subject = renderSection(
-        <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+        <OperateSection displayContent={emptyContent} operateReferences={filingRef} />
       );
       const nextAnnualFilingMonth = subject.getByTestId("Apr 2022");
 
@@ -294,13 +295,13 @@ describe("<OperateSection />", () => {
         }),
       });
 
-      const filingRef: Record<string, FilingReference> = {
-        "later-filing": { name: "Later Filing", urlSlug: "" },
-        "early-filing": { name: "Early Filing", urlSlug: "" },
+      const filingRef: Record<string, OperateReference> = {
+        "later-filing": generateOperateReference({ name: "Later Filing", urlSlug: "" }),
+        "early-filing": generateOperateReference({ name: "Early Filing", urlSlug: "" }),
       };
 
       const subject = renderSection(
-        <OperateSection displayContent={emptyContent} filingsReferences={filingRef} />
+        <OperateSection displayContent={emptyContent} operateReferences={filingRef} />
       );
 
       const filingsInOrderOnPage = subject.getAllByTestId("filing").map((it) => it.textContent);

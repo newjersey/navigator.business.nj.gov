@@ -1,6 +1,8 @@
 import {
   FormationDisplayContent,
   NameAvailability,
+  OperateReference,
+  Opportunity,
   Preferences,
   Roadmap,
   SectionCompletion,
@@ -529,6 +531,29 @@ export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>)
     formationDoc: `some-formation-doc-${randomInt()}`,
     standingDoc: `some-standing-doc-${randomInt()}`,
     certifiedDoc: `some-certified-doc-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunity => {
+  return {
+    id: `some-id-${randomInt()}`,
+    filename: `some-filename-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    urlSlug: `some-url-slug-${randomInt()}`,
+    callToActionLink: `some-cta-link-${randomInt()}`,
+    callToActionText: `some-cta-text-${randomInt()}`,
+    contentMd: `some-content-${randomInt()}`,
+    type: randomInt() % 2 ? "CERTIFICATION" : "FUNDING",
+    ...overrides,
+  };
+};
+
+export const generateOperateReference = (overrides: Partial<OperateReference>): OperateReference => {
+  return {
+    name: `some-name-${randomInt()}`,
+    urlSlug: `some-url-slug-${randomInt()}`,
+    urlPath: `some-url-path-${randomInt()}`,
     ...overrides,
   };
 };
