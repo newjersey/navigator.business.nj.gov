@@ -2513,7 +2513,7 @@ __metadata:
     "@emotion/styled": 11.6.0
     "@jest/types": 27.4.2
     "@mdx-js/react": 1.6.22
-    "@mui/lab": 5.0.0-alpha.66
+    "@mui/lab": 5.0.0-alpha.65
     "@mui/material": 5.3.1
     "@mui/styles": 5.3.0
     "@next/bundle-analyzer": 12.0.8
@@ -2694,7 +2694,7 @@ __metadata:
     "@emotion/styled": 11.6.0
     "@jest/types": 27.4.2
     "@mdx-js/react": 1.6.22
-    "@mui/lab": 5.0.0-alpha.66
+    "@mui/lab": 5.0.0-alpha.65
     "@mui/material": 5.3.1
     "@mui/styles": 5.3.0
     "@next/bundle-analyzer": 12.0.8
@@ -5289,6 +5289,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/base@npm:5.0.0-alpha.65":
+  version: 5.0.0-alpha.65
+  resolution: "@mui/base@npm:5.0.0-alpha.65"
+  dependencies:
+    "@babel/runtime": ^7.16.7
+    "@emotion/is-prop-valid": ^1.1.1
+    "@mui/utils": ^5.3.0
+    "@popperjs/core": ^2.4.4
+    clsx: ^1.1.1
+    prop-types: ^15.7.2
+    react-is: ^17.0.2
+  peerDependencies:
+    "@types/react": ^16.8.6 || ^17.0.0
+    react: ^17.0.0
+    react-dom: ^17.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 2994e3c358d891f9e38f7eb5e35ea4cf6f6c853a5509ec341ca559b2c097638bb504617c48657a45deddfbe5fdb620804c417f6e4474a83338bf0c7943d82cd6
+  languageName: node
+  linkType: hard
+
 "@mui/base@npm:5.0.0-alpha.66":
   version: 5.0.0-alpha.66
   resolution: "@mui/base@npm:5.0.0-alpha.66"
@@ -5311,16 +5333,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/lab@npm:5.0.0-alpha.66":
-  version: 5.0.0-alpha.66
-  resolution: "@mui/lab@npm:5.0.0-alpha.66"
+"@mui/lab@npm:5.0.0-alpha.65":
+  version: 5.0.0-alpha.65
+  resolution: "@mui/lab@npm:5.0.0-alpha.65"
   dependencies:
     "@babel/runtime": ^7.16.7
     "@date-io/date-fns": ^2.11.0
     "@date-io/dayjs": ^2.11.0
     "@date-io/luxon": ^2.11.1
     "@date-io/moment": ^2.11.0
-    "@mui/base": 5.0.0-alpha.66
+    "@mui/base": 5.0.0-alpha.65
     "@mui/system": ^5.3.0
     "@mui/utils": ^5.3.0
     clsx: ^1.1.1
@@ -5348,7 +5370,7 @@ __metadata:
       optional: true
     moment:
       optional: true
-  checksum: ac9c2fe43c7291c61bd82921f2d610096a6c278c311a86092161db5898707e5e704ff80485f2781a0fd960652811b1ae48c06838a7c716f3ef54b5e93626490c
+  checksum: fb8ce4c31b20202495f4df5b0cf657e63cb490feabd3da452d362941ef99c737f08e3d77bd481ce167638fdf0af76a8aa8a2d8ed797afdefbfbf87bd6aae4589
   languageName: node
   linkType: hard
 
