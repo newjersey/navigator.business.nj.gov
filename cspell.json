@@ -12,7 +12,9 @@
     "logisticare",
     "NJPDES",
     "scorp",
-    "NICUSA"
+    "NICUSA",
+    "NCBTMB",
+    "FSMTB"
   ],
   "ignorePaths": ["node_modules/**", "out/**"]
 }
