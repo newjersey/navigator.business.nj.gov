@@ -10,7 +10,7 @@ New public accounting firms must be registered with the New Jersey State Board o
 
 To register your firm you will need:
 
-* A designated Resident Manager-In-Charge of the practice unit (a certified public accountant)
+* A designated resident Manager-In-Charge, a Manager-In-Charge must be a certified public accountant of the practice unit
 * Payment in the form of two separate checks (one for the application fee and one for the license fee)
 
 After you complete this task, you will have:
