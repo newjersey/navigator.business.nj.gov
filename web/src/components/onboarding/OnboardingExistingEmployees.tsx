@@ -16,11 +16,11 @@ export const OnboardingExistingEmployees = (props: Props): ReactElement => {
     <>
       <NumericField
         onValidation={props.onValidation}
-        invalid={props.fieldStates[fieldName].invalid}
+        error={props.fieldStates[fieldName].invalid}
         fieldName={fieldName}
         maxLength={7}
-        minLength={1}
         validationText={OnboardingDefaults.errorTextRequiredExistingEmployees}
+        required={true}
       />
       {props.children}
     </>

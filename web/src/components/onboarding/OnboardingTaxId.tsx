@@ -13,7 +13,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
   return (
     <NumericField
       onValidation={props.onValidation}
-      invalid={props.fieldStates[fieldName].invalid}
+      error={props.fieldStates[fieldName].invalid}
       fieldName={fieldName}
       maxLength={9}
     />

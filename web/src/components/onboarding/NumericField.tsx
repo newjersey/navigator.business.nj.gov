@@ -1,53 +1,19 @@
-import { OnboardingField } from "@/components/onboarding/OnboardingField";
+import { OnboardingField, OnboardingProps } from "@/components/onboarding/OnboardingField";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
-import { ProfileFields } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import React, { FocusEvent, ReactElement } from "react";
+import React, { ReactElement } from "react";
+import { NumericFieldProps } from "../GenericNumericField";
 
-interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  invalid: boolean;
-  fieldName: ProfileFields;
-  validationText?: string;
-  maxLength: number;
-  minLength?: number;
-  disabled?: boolean;
-}
+interface Props extends Omit<OnboardingProps, "numericProps">, NumericFieldProps {}
 
-export const NumericField = (props: Props): ReactElement => {
-  const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-    const userInput = event.target.value.length;
-
-    const valid = props.minLength
-      ? userInput >= props.minLength && userInput <= props.maxLength
-      : userInput === props.maxLength || userInput === 0;
-
-    props.onValidation(props.fieldName, !valid);
-  };
-
-  const handleChange = (): void => props.onValidation(props.fieldName, false);
-
-  const regex = (value: string): string => value.replace(/[^0-9]/g, "");
-
+export const NumericField = ({ minLength, maxLength, ...props }: Props): ReactElement => {
   return (
     <OnboardingField
-      valueFilter={regex}
-      fieldName={props.fieldName}
-      onValidation={onValidation}
-      error={props.invalid}
-      validationText={
-        props.validationText
-          ? props.validationText
-          : templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
-              length: props.maxLength.toString(),
-            })
-      }
-      visualFilter={regex}
-      handleChange={handleChange}
-      fieldOptions={{
-        inputProps: { inputMode: "numeric", maxLength: props.maxLength },
-      }}
-      disabled={props.disabled}
+      validationText={templateEval(OnboardingDefaults.errorTextMinimumNumericField, {
+        length: maxLength.toString(),
+      })}
+      {...props}
+      numericProps={{ minLength, maxLength }}
     />
   );
 };
