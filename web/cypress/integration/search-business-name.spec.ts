@@ -33,7 +33,7 @@ describe("search business name [feature] [all] [group2]", () => {
 
     // update name
     cy.get('[data-testid="update-name"]').click();
-    cy.get("[data-back-to-roadmap]").click();
+    cy.get('[data-testid="back-to-roadmap"]').click();
     cy.get('[data-business-name="Aculyst"]').should("not.exist");
     cy.get('[data-business-name="My Cool Business"]').should("exist");
   });

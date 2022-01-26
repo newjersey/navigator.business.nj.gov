@@ -1,8 +1,9 @@
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { FilingReference, Task } from "@/lib/types/types";
+import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
@@ -13,34 +14,37 @@ interface Props {
   children: React.ReactNode;
   task?: Task | undefined;
   belowOutlineBoxComponent?: React.ReactNode;
-  filingsReferences?: Record<string, FilingReference>;
+  operateReferences?: Record<string, OperateReference>;
 }
-
-const backButton = (
-  <Link href="/roadmap" passHref>
-    <a
-      href="/roadmap"
-      data-back-to-roadmap
-      className="usa-link fdr fac margin-top-3 margin-bottom-3 usa-link-hover-override desktop:margin-top-0 desktop:margin-bottom-7"
-      onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
-    >
-      <div className="circle-3 bg-green icon-green-bg-color-hover">
-        <Icon className="text-white usa-icon--size-3">arrow_back</Icon>
-      </div>
-      <div className="margin-left-2 margin-y-auto text-primary font-sans-xs usa-link text-green-color-hover">
-        {TaskDefaults.backToRoadmapText}
-      </div>
-    </a>
-  </Link>
-);
 
 export const SidebarPageLayout = ({
   children,
   task,
   belowOutlineBoxComponent,
-  filingsReferences,
+  operateReferences,
 }: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+  const { userData } = useUserData();
+
+  const mainPageLink = userData?.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap";
+
+  const backButton = (
+    <Link href={mainPageLink} passHref>
+      <a
+        href={mainPageLink}
+        data-testid="back-to-roadmap"
+        className="usa-link fdr fac margin-top-3 margin-bottom-3 usa-link-hover-override desktop:margin-top-0 desktop:margin-bottom-7"
+        onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
+      >
+        <div className="circle-3 bg-green icon-green-bg-color-hover">
+          <Icon className="text-white usa-icon--size-3">arrow_back</Icon>
+        </div>
+        <div className="margin-left-2 margin-y-auto text-primary font-sans-xs usa-link text-green-color-hover">
+          {TaskDefaults.backToRoadmapText}
+        </div>
+      </a>
+    </Link>
+  );
 
   return (
     <>
@@ -57,8 +61,11 @@ export const SidebarPageLayout = ({
                 <nav aria-label="Secondary">
                   {" "}
                   {backButton}
-                  <MiniRoadmap activeTaskId={task?.id} />
-                  {filingsReferences && <MiniOperateSection filingsReferences={filingsReferences} />}
+                  {operateReferences != null && Object.keys(operateReferences).length > 0 ? (
+                    <MiniOperateSection operateReferences={operateReferences} />
+                  ) : (
+                    <MiniRoadmap activeTaskId={task?.id} />
+                  )}
                 </nav>
               )}
             </div>

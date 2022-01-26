@@ -3,7 +3,7 @@ import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettin
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
-import { FilingReference, Task } from "@/lib/types/types";
+import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Link from "next/link";
 import React, { ReactElement, useState } from "react";
@@ -12,14 +12,14 @@ interface Props {
   scrolled: boolean;
   task?: Task;
   sideBarPageLayout?: boolean;
-  filingsReferences?: Record<string, FilingReference>;
+  operateReferences?: Record<string, OperateReference>;
 }
 
 export const NavBarLoggedInMobile = ({
   scrolled,
   task,
   sideBarPageLayout,
-  filingsReferences,
+  operateReferences,
 }: Props): ReactElement => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const open = () => setSidebarIsOpen(true);
@@ -81,10 +81,12 @@ export const NavBarLoggedInMobile = ({
           >
             <Icon className="font-sans-xl">close</Icon>
           </button>
-          {sideBarPageLayout && <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />}
-          {sideBarPageLayout && filingsReferences && (
-            <MiniOperateSection filingsReferences={filingsReferences} onClose={close} />
-          )}
+          {sideBarPageLayout &&
+            (operateReferences != null && Object.keys(operateReferences).length > 0 ? (
+              <MiniOperateSection operateReferences={operateReferences} onClose={close} />
+            ) : (
+              <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />
+            ))}
           <NavSideBarUserSettings />
         </nav>
       </FocusTrappedSidebar>

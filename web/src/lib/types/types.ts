@@ -473,6 +473,24 @@ export type RoadmapDisplayContent = {
   operateDisplayContent: OperateDisplayContent;
 };
 
+export type DashboardDisplayContent = {
+  introTextMd: string;
+  opportunityTextMd: string;
+};
+
+export type Opportunity = {
+  id: string;
+  filename: string;
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  contentMd: string;
+  type: OpportunityType;
+};
+
+export type OpportunityType = "FUNDING" | "CERTIFICATION";
+
 export type TasksDisplayContent = {
   formationDisplayContent: FormationDisplayContent;
 };
@@ -534,9 +552,10 @@ export interface Filing {
   contentMd: string;
 }
 
-export type FilingReference = {
+export type OperateReference = {
   name: string;
   urlSlug: string;
+  urlPath: string;
 };
 
 export interface PostOnboarding {

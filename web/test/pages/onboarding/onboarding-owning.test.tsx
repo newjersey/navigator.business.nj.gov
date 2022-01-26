@@ -113,7 +113,7 @@ describe("onboarding - owning a business", () => {
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "small-business-enterprise");
     page.clickNext();
-    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard"));
     expect(currentUserData()).toEqual({
       ...initialUserData,
       formProgress: "COMPLETED",
@@ -242,7 +242,7 @@ describe("onboarding - owning a business", () => {
 
     page.fillText("Existing employees", "123");
     page.clickNext();
-    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard"));
   });
 
   it("prefills form from existing user data", async () => {

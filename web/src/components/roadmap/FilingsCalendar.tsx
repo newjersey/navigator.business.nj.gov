@@ -1,8 +1,9 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
+import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { MediaQueries } from "@/lib/PageSizes";
-import { FilingReference } from "@/lib/types/types";
+import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@/lib/utils/getCurrentDate";
 import { TaxFiling } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
@@ -13,7 +14,7 @@ import { Tag } from "../njwds-extended/Tag";
 
 interface Props {
   taxFilings: TaxFiling[];
-  filingsReferences: Record<string, FilingReference>;
+  operateReferences: Record<string, OperateReference>;
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {
@@ -37,12 +38,12 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         </div>
         <div>
           {thisMonthFilings
-            .filter((filing) => props.filingsReferences[filing.identifier])
+            .filter((filing) => props.operateReferences[filing.identifier])
             .map((filing) => (
               <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
-                <Link href={`filings/${props.filingsReferences[filing.identifier].urlSlug}`}>
+                <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
                   <a
-                    href={`filings/${props.filingsReferences[filing.identifier].urlSlug}`}
+                    href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
                     data-testid={filing.identifier.toLowerCase()}
                     className="usa-link text-secondary-darker text-secondary-darker:hover text-no-underline"
                   >
@@ -57,7 +58,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                       </span>
                       {" - "}
                       <span className="text-no-uppercase">
-                        {props.filingsReferences[filing.identifier].name}
+                        {props.operateReferences[filing.identifier].name}
                       </span>
                     </Tag>
                   </a>
@@ -94,8 +95,8 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   return (
     <>
       <div className="fdr fac padding-top-2">
-        <h3 className="">{RoadmapDefaults.calendarHeader}</h3>
-        <ArrowTooltip title={RoadmapDefaults.calendarTooltip}>
+        <h2 className="">{DashboardDefaults.calendarHeader}</h2>
+        <ArrowTooltip title={DashboardDefaults.calendarTooltip}>
           <div className="fdr fac margin-left-1 font-body-lg text-green" data-testid="calendar-tooltip">
             <Icon>help_outline</Icon>
           </div>

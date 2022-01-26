@@ -152,7 +152,7 @@ describe("<SearchBusinessName />", () => {
     const returnedPromise = Promise.resolve(generateNameAvailability(nameAvailability));
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
     fireEvent.click(searchButton());
-    await act(() => returnedPromise);
+    await act(() => returnedPromise.then());
   };
 
   const searchAndReject = async (): Promise<void> => {

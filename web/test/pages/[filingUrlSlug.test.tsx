@@ -39,7 +39,7 @@ describe("filing page", () => {
       contentMd: "content-1",
     };
 
-    subject = render(<FilingPage filing={filing} filingsReferences={{}} />);
+    subject = render(<FilingPage filing={filing} operateReferences={{}} />);
 
     expect(subject.getByText("filing-name-1")).toBeInTheDocument();
     expect(subject.getByText("cta-text-1")).toBeInTheDocument();
