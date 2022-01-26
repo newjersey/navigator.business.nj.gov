@@ -39,7 +39,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
 
   return (
     <div key={`${stepNumber}-${isOpen}`} id={`vertical-content-${stepNumber}`} className="margin-y-2">
-      <div className="fdr fac padding-left-05">
+      <div className="fdr fac padding-left-05 margin-bottom-1">
         <VerticalStepIndicator
           stepNumber={stepNumber}
           last={props.isLast}
