@@ -220,7 +220,7 @@ export const ReviewSection = (): ReactElement => {
         {getBusinessSuffixAndStartDate}
         {getMainBusinessLocation}
         {getRegisteredAgent}
-        {state.formationFormData.members.length && getMembers}
+        {state.formationFormData.members.length ? getMembers : null}
         {getSignatures}
       </div>
 
