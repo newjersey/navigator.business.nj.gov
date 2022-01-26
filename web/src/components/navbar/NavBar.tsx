@@ -2,7 +2,7 @@ import { NavBarLanding } from "@/components/navbar/NavBarLanding";
 import { NavBarLoggedInDesktop } from "@/components/navbar/NavBarLoggedInDesktop";
 import { NavBarLoggedInMobile } from "@/components/navbar/NavBarLoggedInMobile";
 import { MediaQueries } from "@/lib/PageSizes";
-import { FilingReference, Task } from "@/lib/types/types";
+import { OperateReference, Task } from "@/lib/types/types";
 import { useMediaQuery } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ type Props = {
   landingPage?: boolean;
   task?: Task;
   sideBarPageLayout?: boolean;
-  filingsReferences?: Record<string, FilingReference>;
+  operateReferences?: Record<string, OperateReference>;
 };
 
 export const NavBar = (props: Props): ReactElement => {
@@ -51,7 +51,7 @@ export const NavBar = (props: Props): ReactElement => {
             scrolled={scrolled}
             task={task}
             sideBarPageLayout={props.sideBarPageLayout}
-            filingsReferences={props.filingsReferences}
+            operateReferences={props.operateReferences}
           />
           <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />
         </>

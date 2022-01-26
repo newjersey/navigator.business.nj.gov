@@ -1,7 +1,7 @@
 import { NavBar } from "@/components/navbar/NavBar";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
-import { FilingReference } from "@/lib/types/types";
+import { OperateReference } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask, generateUser } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -41,7 +41,7 @@ describe("<NavBar />", () => {
   describe("navbar - used when user is on landing page", () => {
     it("displays landing page navbar when prop is passed", () => {
       const subject = render(
-        <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} filingsReferences={{}} />
+        <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
       );
       expect(subject.getByText(NavDefaults.registerButton)).toBeInTheDocument();
     });
@@ -72,7 +72,7 @@ describe("<NavBar />", () => {
     const renderDesktopNav = (): RenderResult => {
       setLargeScreen(true);
       return render(
-        <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} filingsReferences={{}} />
+        <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
       );
     };
 
@@ -115,7 +115,7 @@ describe("<NavBar />", () => {
     const renderMobileRoadmapNav = (): RenderResult => {
       setLargeScreen(false);
       const subject = render(
-        <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} filingsReferences={{}} />
+        <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
       );
       fireEvent.click(subject.getByTestId("nav-menu-open"));
       return subject;
@@ -144,13 +144,14 @@ describe("<NavBar />", () => {
       useMockRoadmap({});
     });
 
-    const renderMobileTaskNav = (): RenderResult => {
+    const renderMobileTaskNav = (config?: { includeOperateRef: boolean }): RenderResult => {
       setLargeScreen(false);
 
-      const filingRef: Record<string, FilingReference> = {
+      const operateRef: Record<string, OperateReference> = {
         "some-tax-filing-identifier-1": {
           name: "some-filing-name-1",
           urlSlug: "some-urlSlug-1",
+          urlPath: "some-path",
         },
       };
 
@@ -159,7 +160,7 @@ describe("<NavBar />", () => {
           landingPage={false}
           task={generateTask({})}
           sideBarPageLayout={true}
-          filingsReferences={filingRef}
+          operateReferences={config?.includeOperateRef ? operateRef : undefined}
         />
       );
       fireEvent.click(subject.getByTestId("nav-menu-open"));
@@ -168,11 +169,39 @@ describe("<NavBar />", () => {
 
     displaysUserNameOrEmail(renderMobileTaskNav);
 
-    it("displays mini-roadmap", () => {
+    it("displays mini-roadmap with PLAN/START when operateReferences does not exist", () => {
       useMockUserData({});
-      useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
+      useMockRoadmap(
+        generateRoadmap({
+          steps: [
+            generateStep({ name: "step1", section: "PLAN" }),
+            generateStep({ name: "step2", section: "START" }),
+          ],
+        })
+      );
       const subject = renderMobileTaskNav();
       expect(subject.queryByText("step1")).toBeInTheDocument();
+      expect(subject.queryByText(SectionDefaults.PLAN)).toBeInTheDocument();
+      expect(subject.queryByText(SectionDefaults.START)).toBeInTheDocument();
+      expect(subject.queryByText(SectionDefaults.OPERATE)).not.toBeInTheDocument();
+    });
+
+    it("displays mini-roadmap with OPERATE when operateReferences does exists", () => {
+      useMockUserData({});
+      useMockRoadmap(
+        generateRoadmap({
+          steps: [
+            generateStep({ name: "step1", section: "PLAN" }),
+            generateStep({ name: "step2", section: "START" }),
+          ],
+        })
+      );
+
+      const subject = renderMobileTaskNav({ includeOperateRef: true });
+      expect(subject.queryByText(SectionDefaults.OPERATE)).toBeInTheDocument();
+      expect(subject.queryByText("step1")).not.toBeInTheDocument();
+      expect(subject.queryByText(SectionDefaults.PLAN)).not.toBeInTheDocument();
+      expect(subject.queryByText(SectionDefaults.START)).not.toBeInTheDocument();
     });
 
     it("hide drawer when mini-roadmap task is clicked", async () => {
@@ -208,18 +237,10 @@ describe("<NavBar />", () => {
       });
     });
 
-    it("displays the operate section within the drawer", () => {
-      useMockUserData({});
-      const subject = renderMobileTaskNav();
-      const sectionName = SectionDefaults.OPERATE.toLowerCase();
-      expect(subject.getByTestId(`section-${sectionName}`)).toBeInTheDocument();
-      expect(subject.getByTestId("some-filing-name-1")).toBeInTheDocument();
-    });
-
-    it("hide drawer when filings task is clicked", async () => {
+    it("hide drawer when filings task is clicked when operate refs exist", async () => {
       useMockUserData({});
 
-      const subject = renderMobileTaskNav();
+      const subject = renderMobileTaskNav({ includeOperateRef: true });
       fireEvent.click(subject.getByTestId("some-filing-name-1"));
 
       await waitForElementToBeRemoved(() => subject.queryByTestId("nav-sidebar-menu"));

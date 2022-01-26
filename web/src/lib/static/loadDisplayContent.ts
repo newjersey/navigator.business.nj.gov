@@ -1,4 +1,5 @@
 import {
+  DashboardDisplayContent,
   emptyOwningFlowContent,
   emptyStartingFlowContent,
   IndustryFieldContent,
@@ -174,6 +175,22 @@ export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
       entityIdErrorNotFoundMd: getMarkdown(readOperateContent("operate-entity-id-error-not-found.md"))
         .content,
     },
+  };
+};
+
+export const loadDashboardDisplayContent = (): DashboardDisplayContent => {
+  const introTextContent = fs.readFileSync(
+    path.join(displayContentDir, "dashboard", "intro-text.md"),
+    "utf8"
+  );
+  const opportunityTextContent = fs.readFileSync(
+    path.join(displayContentDir, "dashboard", "opportunity-text.md"),
+    "utf8"
+  );
+
+  return {
+    introTextMd: getMarkdown(introTextContent).content,
+    opportunityTextMd: getMarkdown(opportunityTextContent).content,
   };
 };
 

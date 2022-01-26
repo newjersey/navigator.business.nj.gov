@@ -62,7 +62,7 @@ describe("Roadmap [feature] [all] [group3]", () => {
     cy.contains("Absecon").should("exist");
 
     // editing data
-    cy.get("[data-back-to-roadmap]").click({ force: true });
+    cy.get('[data-testid="back-to-roadmap"]').click({ force: true });
     clickEdit();
 
     cy.get('input[aria-label="Business name"]').clear();

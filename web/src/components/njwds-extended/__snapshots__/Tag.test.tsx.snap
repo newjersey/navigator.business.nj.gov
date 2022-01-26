@@ -4,7 +4,13 @@ exports[`Tag Primary Bold displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-primary-lighter text-primary-dark text-bold"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-primary-lighter text-primary-dark
+        
+        text-bold
+        
+      "
     >
       Primary Test
     </span>
@@ -16,7 +22,13 @@ exports[`Tag Primary textWrap displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-wrap display-block bg-primary-lighter text-primary-dark"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-wrap display-block
+        bg-primary-lighter text-primary-dark
+        
+        
+        
+      "
     >
       Primary Test with a really really really really long child
     </span>
@@ -28,7 +40,13 @@ exports[`Tag Variants Primary displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-primary-lighter text-primary-dark"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-primary-lighter text-primary-dark
+        
+        
+        
+      "
     >
       Primary Test
     </span>
@@ -40,7 +58,13 @@ exports[`Tag Variants accent displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-accent-warm-lighter text-accent-warm-darker"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-accent-warm-lighter text-accent-warm-darker
+        
+        
+        
+      "
     >
       Accent Test
     </span>
@@ -52,7 +76,13 @@ exports[`Tag Variants base displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-base-lighter text-base-dark"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-base-lighter text-base-dark
+        
+        
+        
+      "
     >
       Base Test
     </span>
@@ -64,7 +94,13 @@ exports[`Tag Variants baseDark displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-white text-base-dark border usa-tag-padding-override"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-white text-base-dark border usa-tag-padding-override
+        
+        
+        
+      "
     >
       BaseDark Test
     </span>
@@ -76,7 +112,13 @@ exports[`Tag Variants error displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-error-lighter text-error-dark"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-error-lighter text-error-dark
+        
+        
+        
+      "
     >
       Error Test
     </span>
@@ -88,7 +130,13 @@ exports[`Tag Variants info displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-info-lighter text-info-darker"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-info-lighter text-info-darker
+        
+        
+        
+      "
     >
       Info Test
     </span>
@@ -100,7 +148,13 @@ exports[`Tag Variants info with hover displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-info-lighter text-info-darker accent-cool-hover-override"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-info-lighter text-info-darker
+        accent-cool-hover-override
+        
+        
+      "
     >
       Info with hover Test
     </span>
@@ -112,7 +166,13 @@ exports[`Tag Variants noBg displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 text-no-wrap bg-white text-base"
+      class="usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+        text-no-wrap
+        bg-white text-base
+        
+        
+        
+      "
     >
       NoBg Test
     </span>

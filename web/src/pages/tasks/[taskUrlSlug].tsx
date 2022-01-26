@@ -16,9 +16,8 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
-import { loadFilingsReferences } from "@/lib/static/loadFilings";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
-import { FilingReference, Task, TasksDisplayContent } from "@/lib/types/types";
+import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { featureFlags, getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -27,7 +26,6 @@ import React, { ReactElement, ReactNode, useMemo } from "react";
 
 interface Props {
   task: Task;
-  filingsReferences: Record<string, FilingReference>;
   displayContent: TasksDisplayContent;
 }
 
@@ -114,12 +112,8 @@ const TaskPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
       <PageSkeleton>
-        <NavBar task={props.task} sideBarPageLayout={true} filingsReferences={props.filingsReferences} />
-        <SidebarPageLayout
-          task={props.task}
-          belowOutlineBoxComponent={renderNextAndPreviousButtons()}
-          filingsReferences={props.filingsReferences}
-        >
+        <NavBar task={props.task} sideBarPageLayout={true} />
+        <SidebarPageLayout task={props.task} belowOutlineBoxComponent={renderNextAndPreviousButtons()}>
           {rswitch(props.task.id, {
             "search-business-name": <SearchBusinessName task={props.task} />,
             "apply-for-shop-license": <LicenseTask task={props.task} />,
@@ -173,7 +167,6 @@ export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetSta
   return {
     props: {
       task: loadTaskByUrlSlug(params.taskUrlSlug),
-      filingsReferences: loadFilingsReferences(),
       displayContent: loadTasksDisplayContent(),
     },
   };

@@ -7,27 +7,12 @@ export const FakeTaxFilingClient = (): TaxFilingClient => {
     if (entityId === "0000000000") {
       return Promise.resolve({
         entityIdStatus: "EXISTS_AND_REGISTERED",
-        filings: [
-          generateTaxFiling({ identifier: "DOMESTIC_ANNUAL_REPORT", dueDate: "2021-11-01" }),
-          generateTaxFiling({ identifier: "PASS_THROUGH_ALTERNATIVE_INCOME_TAX", dueDate: "2021-11-16" }),
-          generateTaxFiling({ identifier: "TRANSMIT_1095_FORMS", dueDate: "2021-12-01" }),
-          generateTaxFiling({ identifier: "SALES_TAX", dueDate: "2022-01-17" }),
-          generateTaxFiling({ identifier: "UNEMPLOYMENT", dueDate: "2022-02-17" }),
-          generateTaxFiling({ identifier: "PAYROLL", dueDate: "2022-02-17" }),
-          generateTaxFiling({ identifier: "ANNUAL_FILING", dueDate: "2022-03-09" }),
-          generateTaxFiling({ identifier: "PROPERTY_TAX", dueDate: "2022-06-01" }),
-        ],
+        filings: [generateTaxFiling({ identifier: "ANNUAL_FILING", dueDate: "2022-03-09" })],
       });
     } else if (entityId === "1111111111") {
       return Promise.resolve({
         entityIdStatus: "EXISTS_AND_REGISTERED",
-        filings: [
-          generateTaxFiling({ identifier: "SALES_TAX", dueDate: "2022-01-17" }),
-          generateTaxFiling({ identifier: "PASS_THROUGH_ALTERNATIVE_INCOME_TAX", dueDate: "2022-02-16" }),
-          generateTaxFiling({ identifier: "TRANSMIT_1095_FORMS", dueDate: "2022-03-01" }),
-          generateTaxFiling({ identifier: "ANNUAL_FILING", dueDate: "2022-04-09" }),
-          generateTaxFiling({ identifier: "PROPERTY_TAX", dueDate: "2022-07-01" }),
-        ],
+        filings: [generateTaxFiling({ identifier: "ANNUAL_FILING", dueDate: "2022-04-09" })],
       });
     } else if (entityId === "2222222222") {
       return Promise.resolve({

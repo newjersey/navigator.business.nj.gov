@@ -2,7 +2,7 @@ import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
 import { OperateEntityIdForm } from "@/components/roadmap/OperateEntityIdForm";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FilingReference, OperateDisplayContent } from "@/lib/types/types";
+import { OperateDisplayContent, OperateReference } from "@/lib/types/types";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import React, { ReactElement, useEffect } from "react";
@@ -12,7 +12,7 @@ dayjs.extend(advancedFormat);
 
 interface Props {
   displayContent: OperateDisplayContent;
-  filingsReferences: Record<string, FilingReference>;
+  operateReferences: Record<string, OperateReference>;
 }
 
 export const OperateSection = (props: Props): ReactElement => {
@@ -46,7 +46,7 @@ export const OperateSection = (props: Props): ReactElement => {
         <Content key="annualFilingMd">{props.displayContent.filingCalendarMd}</Content>
         <FilingsCalendar
           taxFilings={userData?.taxFilingData.filings || []}
-          filingsReferences={props.filingsReferences}
+          operateReferences={props.operateReferences}
         />
       </div>
     );
