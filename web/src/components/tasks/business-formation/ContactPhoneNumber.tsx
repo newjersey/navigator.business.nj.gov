@@ -5,7 +5,6 @@ import { BusinessFormationNumericField } from "./BusinessFormationNumericField";
 export const ContactPhoneNumber = (): ReactElement => {
   const visualFilter = (phoneNumber: string) => {
     const length = phoneNumber.length;
-
     if (length === 0) return phoneNumber;
     if (length < 4) return `(${phoneNumber}`;
     if (length < 7) return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;

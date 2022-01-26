@@ -10,7 +10,7 @@ interface Props {
   fieldName: string;
   onSelect: (value: string | undefined) => void;
   placeholder?: string;
-  onValidation?: (invalid: boolean, fieldName: string) => void;
+  onValidation?: (fieldName: string, invalid: boolean) => void;
   error?: boolean;
   validationText?: string;
   validationLabel?: string;
@@ -29,7 +29,7 @@ export const StateDropdown = (props: Props): ReactElement => {
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     const value = event.target.value;
     const invalid = props.required ? !value.trim() : false;
-    props.onValidation && props.onValidation(invalid, props.fieldName);
+    props.onValidation && props.onValidation(props.fieldName, invalid);
   };
 
   const handleInputChange = (event: ChangeEvent<unknown>, value: string | null) => {
