@@ -323,10 +323,10 @@ commands:
     steps:
       - run:
           name: Clear Storybook S3 Bucket
-          command: aws s3 rm s3://$STORYBOOK_S3_BUCKET_NEW --recursive
+          command: aws s3 rm s3://$STORYBOOK_S3_BUCKET --recursive
       - run:
           name: Deploy Storybook
-          command: yarn workspace @businessnjgovnavigator/web deploy:storybook --bucket-path $STORYBOOK_S3_BUCKET_NEW  --aws-profile=NONE
+          command: yarn workspace @businessnjgovnavigator/web deploy:storybook --bucket-path $STORYBOOK_S3_BUCKET  --aws-profile=NONE
 
   install-chrome:
     steps:
