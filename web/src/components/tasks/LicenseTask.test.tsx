@@ -223,9 +223,9 @@ describe("<LicenseTask />", () => {
 
       fireEvent.submit(subject.getByTestId("check-status-submit"));
       expect(subject.queryByTestId("loading-spinner")).toBeInTheDocument();
-      await act(() => returnedPromise);
-
-      expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+      await waitFor(() => {
+        expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+      });
     });
 
     it("displays the loading spinner while failed request is being made", async () => {

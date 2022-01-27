@@ -3,7 +3,7 @@ import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import * as api from "@/lib/api-client/apiClient";
 import { SelfRegResponse } from "@/lib/types/types";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { act, fireEvent, render, RenderResult } from "@testing-library/react";
+import { act, fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import React from "react";
 
 jest.mock("next/router");
@@ -36,60 +36,67 @@ describe("<Signup />", () => {
   };
 
   it("collects name, email, and confirm email fields and submits to api", async () => {
-    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
+    renderAndFillForm("Some Name", "some-email@example.com");
     clickSubmit();
-    await act(() => returnedPromise);
-    expect(mockApi.postSelfReg).toHaveBeenCalledWith({
-      email: "some-email@example.com",
-      confirmEmail: "some-email@example.com",
-      name: "Some Name",
-      receiveNewsletter: true,
-      userTesting: true,
+    await waitFor(() => {
+      expect(mockApi.postSelfReg).toHaveBeenCalledWith({
+        email: "some-email@example.com",
+        confirmEmail: "some-email@example.com",
+        name: "Some Name",
+        receiveNewsletter: true,
+        userTesting: true,
+      });
     });
   });
 
   it("allows a user to uncheck to opt out of newsletter", async () => {
-    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
+    renderAndFillForm("Some Name", "some-email@example.com");
     fireEvent.click(subject.getByLabelText(SelfRegDefaults.newsletterCheckboxLabel));
     clickSubmit();
-    await act(() => returnedPromise);
-    expect(mockApi.postSelfReg).toHaveBeenCalledWith({
-      email: "some-email@example.com",
-      confirmEmail: "some-email@example.com",
-      name: "Some Name",
-      receiveNewsletter: false,
-      userTesting: true,
+    await waitFor(() => {
+      expect(mockApi.postSelfReg).toHaveBeenCalledWith({
+        email: "some-email@example.com",
+        confirmEmail: "some-email@example.com",
+        name: "Some Name",
+        receiveNewsletter: false,
+        userTesting: true,
+      });
     });
   });
 
   it("allows a user to uncheck to opt out of user testing", async () => {
-    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
+    renderAndFillForm("Some Name", "some-email@example.com");
     fireEvent.click(subject.getByLabelText(SelfRegDefaults.userTestingCheckboxLabel));
     clickSubmit();
-    await act(() => returnedPromise);
-    expect(mockApi.postSelfReg).toHaveBeenCalledWith({
-      email: "some-email@example.com",
-      confirmEmail: "some-email@example.com",
-      name: "Some Name",
-      receiveNewsletter: true,
-      userTesting: false,
+    await waitFor(() => {
+      expect(mockApi.postSelfReg).toHaveBeenCalledWith({
+        email: "some-email@example.com",
+        confirmEmail: "some-email@example.com",
+        name: "Some Name",
+        receiveNewsletter: true,
+        userTesting: false,
+      });
     });
   });
 
   it("shows loading spinner while request is being processed", async () => {
-    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
+    renderAndFillForm("Some Name", "some-email@example.com");
     expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
     clickSubmit();
     expect(subject.queryByTestId("loading-spinner")).toBeInTheDocument();
-    await act(() => returnedPromise);
-    expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
+    });
   });
 
   it("redirects the user to the url returned by the api", async () => {
-    const returnedPromise = renderAndFillForm("Some Name", "some-email@example.com");
+    renderAndFillForm("Some Name", "some-email@example.com");
     clickSubmit();
-    await act(() => returnedPromise);
-    expect(mockPush).toHaveBeenCalledWith("www.example.com");
+
+    await waitFor(() => {
+      expect(mockPush).toHaveBeenCalledWith("www.example.com");
+    });
   });
 
   it("shows the user an error message if the emails don't match", async () => {
@@ -108,10 +115,10 @@ describe("<Signup />", () => {
     fillText("some-email@example.com", "confirm-email");
     clickSubmit();
 
-    await act(() => resolvedPromise);
-
-    expect(subject.queryByTestId("error-alert-EMAILS_DO_NOT_MATCH")).not.toBeInTheDocument();
-    expect(mockApi.postSelfReg).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(subject.queryByTestId("error-alert-EMAILS_DO_NOT_MATCH")).not.toBeInTheDocument();
+      expect(mockApi.postSelfReg).toHaveBeenCalled();
+    });
   });
 
   it("shows the user an error message if any fields empty", async () => {
@@ -137,9 +144,10 @@ describe("<Signup />", () => {
     fillText("Some Name", "name");
     clickSubmit();
 
-    await act(() => resolvedPromise);
-    expect(subject.queryByTestId("error-alert-REQUIRED_FIELDS")).not.toBeInTheDocument();
-    expect(mockApi.postSelfReg).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(subject.queryByTestId("error-alert-REQUIRED_FIELDS")).not.toBeInTheDocument();
+      expect(mockApi.postSelfReg).toHaveBeenCalled();
+    });
   });
 
   it("shows the user an error message if myNJ returns an duplicate_signup error", async () => {
