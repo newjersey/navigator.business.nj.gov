@@ -374,6 +374,7 @@ const coreContent = {
       "limited-liability-partnership": "",
       "limited-liability-company": "",
       "c-corporation": "",
+      "s-corporation": "",
     },
   },
   municipality: {

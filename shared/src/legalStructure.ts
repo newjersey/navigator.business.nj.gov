@@ -3,6 +3,7 @@ export interface LegalStructure {
   name: string;
   requiresPublicFiling: boolean;
   hasTradeName: boolean;
+  onboardingOrder: number;
 }
 
 export const LookupLegalStructureById = (id: string | undefined): LegalStructure => {
@@ -12,6 +13,7 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
       name: "",
       requiresPublicFiling: false,
       hasTradeName: false,
+      onboardingOrder: 0,
     }
   );
 };
@@ -22,35 +24,48 @@ export const LegalStructures: LegalStructure[] = [
     name: "Sole Proprietorship",
     requiresPublicFiling: false,
     hasTradeName: true,
+    onboardingOrder: 30,
   },
   {
     id: "general-partnership",
     name: "General Partnership",
     requiresPublicFiling: false,
     hasTradeName: true,
+    onboardingOrder: 20,
   },
   {
     id: "limited-partnership",
     name: "Limited Partnership (LP)",
     requiresPublicFiling: true,
     hasTradeName: false,
+    onboardingOrder: 70,
   },
   {
     id: "limited-liability-partnership",
     name: "Limited Liability Partnership (LLP)",
     requiresPublicFiling: true,
     hasTradeName: false,
+    onboardingOrder: 60,
   },
   {
     id: "limited-liability-company",
     name: "Limited Liability Company (LLC)",
     requiresPublicFiling: true,
     hasTradeName: false,
+    onboardingOrder: 10,
   },
   {
     id: "c-corporation",
     name: "C-Corporation",
     requiresPublicFiling: true,
     hasTradeName: false,
+    onboardingOrder: 40,
+  },
+  {
+    id: "s-corporation",
+    name: "C-Corporation with S-Corp Tax Designation",
+    requiresPublicFiling: true,
+    hasTradeName: false,
+    onboardingOrder: 50,
   },
 ];

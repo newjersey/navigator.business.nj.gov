@@ -83,6 +83,14 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
     });
+
+    it("adds tax registration tasks for S-Corp legal structures", async () => {
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "general-partnership" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("scorp");
+
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "s-corporation" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp");
+    });
   });
 
   describe("industry", () => {
