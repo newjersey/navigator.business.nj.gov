@@ -74,14 +74,14 @@ commands:
     steps:
       - run:
           name: Build Web Docker image
-          command: docker build -f WebApp.Dockerfile . -t 534320591531.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-${CIRCLE_SHA1} -t 534320591531.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator -t 534320591531.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-latest
+          command: docker build -f WebApp.Dockerfile . -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-${CIRCLE_SHA1} -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-latest
       - run:
           name: Push Web Docker image
           command: |
-            aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin 534320591531.dkr.ecr.${AWS_REGION}.amazonaws.com
-            docker push 534320591531.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-${CIRCLE_SHA1}
-            docker push 534320591531.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator
-            docker push 534320591531.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-latest
+            aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-${CIRCLE_SHA1}
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-latest
 
   configure-and-build-amplify:
     steps:
@@ -231,6 +231,7 @@ commands:
             echo 'export REDIRECT_URL=$REDIRECT_URL_DEV_NEW' >> $BASH_ENV
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEWDEV' >> $BASH_ENV
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEWDEV' >> $BASH_ENV
+            echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_DEV' >> $BASH_ENV
             echo 'export SMOKE_TEST_ENV=$SMOKE_TEST_ENV_DEV' >> $BASH_ENV
             echo 'export FEATURE_DISABLE_FORMATION_STAGING=$FEATURE_DISABLE_FORMATION_STAGING' >> $BASH_ENV
             echo 'export FEATURE_DISABLE_OPERATE_PROD=$FEATURE_DISABLE_OPERATE_PROD' >> $BASH_ENV
@@ -269,6 +270,7 @@ commands:
             echo 'export REDIRECT_URL=$REDIRECT_URL_STAGING' >> $BASH_ENV
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_STAGING' >> $BASH_ENV
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_STAGING' >> $BASH_ENV
+            echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_STAGING' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_STAGING' >> $BASH_ENV
             echo 'export FEATURE_DISABLE_FORMATION=$FEATURE_DISABLE_FORMATION_STAGING' >> $BASH_ENV
 
@@ -294,6 +296,7 @@ commands:
             echo 'export FEATURE_DISABLE_FORMATION=$FEATURE_DISABLE_FORMATION_PROD' >> $BASH_ENV
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PROD' >> $BASH_ENV
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PROD' >> $BASH_ENV
+            echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_PROD' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_PROD' >> $BASH_ENV
 
   deploy-amplify-build:
