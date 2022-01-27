@@ -12,7 +12,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
     (legalStructure: LegalStructure) => {
-      return legalStructure.name;
+      return legalStructure.onboardingOrder;
     }
   );
 

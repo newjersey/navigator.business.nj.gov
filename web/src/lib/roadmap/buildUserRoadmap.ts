@@ -12,6 +12,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     addOns.push("physical-location");
   }
 
+  if (profileData.legalStructureId === "s-corporation") {
+    addOns.push("scorp");
+  }
+
   if (profileData.liquorLicense) {
     addOns.push("liquor-license");
   }
