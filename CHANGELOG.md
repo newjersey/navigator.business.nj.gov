@@ -1,3 +1,27 @@
+# [1.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.9.0...v1.10.0) (2022-01-27)
+
+
+### Bug Fixes
+
+* [[#1123](https://github.com/newjersey/navigator.business.nj.gov/issues/1123)] member migration ([f50d70a](https://github.com/newjersey/navigator.business.nj.gov/commit/f50d70a2606639c6488a0103f5b3acc2fa0556c1))
+* [[#1200](https://github.com/newjersey/navigator.business.nj.gov/issues/1200)] business formation review section ([a5069a3](https://github.com/newjersey/navigator.business.nj.gov/commit/a5069a3d12140de666904c52e659ed4763950187))
+* [[#1200](https://github.com/newjersey/navigator.business.nj.gov/issues/1200)] members section rendering 0 on page ([04d1ae4](https://github.com/newjersey/navigator.business.nj.gov/commit/04d1ae43677de77b3c01d2a47d2aa70b3fbf15fe))
+* [[#1205](https://github.com/newjersey/navigator.business.nj.gov/issues/1205)] adjust styling for success page ([d45e04f](https://github.com/newjersey/navigator.business.nj.gov/commit/d45e04f32683d69a80fddaaafdb4fa9474463f7e))
+* [[#1205](https://github.com/newjersey/navigator.business.nj.gov/issues/1205)] hide documents when not available ([7380208](https://github.com/newjersey/navigator.business.nj.gov/commit/738020840bffbfb2675341fb23edba5d571187f8))
+* [[#1205](https://github.com/newjersey/navigator.business.nj.gov/issues/1205)] save entityID to user profile after formation ([a3febca](https://github.com/newjersey/navigator.business.nj.gov/commit/a3febcac0e1efb482a7d991c7070379ba9ad184a))
+* updating Contextual Information legal-structure-learn-more ([#1391](https://github.com/newjersey/navigator.business.nj.gov/issues/1391)) ([80cda65](https://github.com/newjersey/navigator.business.nj.gov/commit/80cda652a56bb7fcb03b9a6e859d8de6d043e551))
+
+
+### Features
+
+* [[#1123](https://github.com/newjersey/navigator.business.nj.gov/issues/1123)] members form to business formation ([a1922fb](https://github.com/newjersey/navigator.business.nj.gov/commit/a1922fbf301212e1bd38526d5b8ef07c5b396b2f))
+* [[#1205](https://github.com/newjersey/navigator.business.nj.gov/issues/1205)] business formation success page & getFiling API call ([599ad05](https://github.com/newjersey/navigator.business.nj.gov/commit/599ad056692dd3d45cbc8ff0281f61d0ee73e39c))
+
+
+### Reverts
+
+* revert mui.lab package back to previous version ([8b387e0](https://github.com/newjersey/navigator.business.nj.gov/commit/8b387e06a1d61e168f899c498f449a9943eea779))
+
 # [1.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.8.1...v1.9.0) (2022-01-21)
 
 
