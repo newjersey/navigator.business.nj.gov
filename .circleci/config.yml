@@ -283,7 +283,7 @@ commands:
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_PROD' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_PROD' >> $BASH_ENV
-            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV_PROD' >> $BASH_ENV
+            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_PROD' >> $BASH_ENV
             echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_PROD' >> $BASH_ENV
             echo 'export LICENSE_STATUS_BASE_URL=$LICENSE_STATUS_BASE_URL_PROD' >> $BASH_ENV
             echo 'export FORMATION_API_BASE_URL=$FORMATION_API_BASE_URL_PROD' >> $BASH_ENV
@@ -482,37 +482,37 @@ jobs:
 workflows:
   release-pipeline:
     jobs:
-      #- staging-hold:
-      #    type: approval
-      #    filters:
-      #      branches:
-      #        only:
-      #          - /^release-.*/
-      #          - /^staging-.*/
-      #- deploy-staging:
-      #    name: staging-deploy
-      #    filters:
-      #      branches:
-      #        only:
-      #          - /^release-.*/
-      #          - /^staging-.*/
-      #    requires:
-      #      - staging-hold
+      - staging-hold:
+          type: approval
+          filters:
+            branches:
+              only:
+                - /^release-.*/
+                - /^staging-.*/
+      - deploy-staging:
+          name: staging-deploy
+          filters:
+            branches:
+              only:
+                - /^release-.*/
+                - /^staging-.*/
+          requires:
+            - staging-hold
       - production-hold:
           type: approval
           filters:
             branches:
               only:
                 - /^release-.*/
-      #    requires:
-      #      - staging-deploy
-      #- prepare-release:
-      #    filters:
-      #      branches:
-      #        only:
-      #          - /^release-.*/
-      #    requires:
-      #      - production-hold
+          requires:
+            - staging-deploy
+      - prepare-release:
+          filters:
+            branches:
+              only:
+                - /^release-.*/
+          requires:
+            - production-hold
       - deploy-production:
           name: production-deploy
           filters:
@@ -520,7 +520,7 @@ workflows:
               only:
                 - /^release-.*/
           requires:
-            - production-hold
+            - prepare-release
 
   build-and-test:
     jobs:
