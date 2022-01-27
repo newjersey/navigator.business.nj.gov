@@ -1,0 +1,251 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Styles primary displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles primary-big displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="  "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles primary-input-field-height displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button padding-y-205 height-7 "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles secondary displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button usa-button--outline height-5 "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles secondary-big displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="  "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles secondary-input-field-height displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button usa-button--outline padding-y-205 height-7 "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles tertiary displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button usa-button--unstyled  "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button loading button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 usa-button--disabled"
+      type="button"
+    >
+      <div
+        data-testid="loading-spinner"
+      >
+        <div
+          class="margin-top-neg-1"
+        >
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 24px; height: 24px;"
+          >
+            <svg
+              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="17"
+                stroke-width="10"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button submit button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 "
+      type="submit"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button with dataTestid displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 "
+      data-testid="test-button-1"
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button with noRightMargin button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 margin-right-0 "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button with smallText button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 font-body-2xs "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button with textBold button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 text-bold "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button with underline button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 underline "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button with widthAutoOnMobile button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-5 width-auto "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
