@@ -520,7 +520,9 @@ describe("<BusinessFormation />", () => {
     describe("display profile data information on business tab", () => {
       it("displays legal structure from profile data", () => {
         subject = renderTask({ profileData: generateLLCProfileData({}) });
-        expect(subject.getByText(BusinessFormationDefaults.llcText)).toBeInTheDocument();
+        const displayLegalStructure = subject.getByTestId("legal-structure");
+
+        expect(displayLegalStructure).toHaveTextContent(BusinessFormationDefaults.llcText);
       });
 
       it("displays business name from profile data", () => {

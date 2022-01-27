@@ -72,7 +72,10 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
             </Button>
           )}
         </div>
-        <div className="padding-bottom-205 padding-x-205 tablet:padding-205 flex-half">
+        <div
+          className="padding-bottom-205 padding-x-205 tablet:padding-205 flex-half"
+          data-testid="legal-structure"
+        >
           <Content>{state.displayContent.reviewPageLegalStructure.contentMd}</Content>
           <span>{legalStructureName}</span>{" "}
           {!reviewPage && (
