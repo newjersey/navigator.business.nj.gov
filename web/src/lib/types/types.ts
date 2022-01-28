@@ -34,6 +34,7 @@ export type RadioFieldContent = { contentMd: string; radioButtonYesText: string;
 
 export type LegalFieldContent = {
   contentMd: string;
+  placeholder?: string;
   optionContent: Record<string, string>;
 };
 export type FlowType = "OWNING" | "STARTING";

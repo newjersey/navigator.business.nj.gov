@@ -7,7 +7,7 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
-import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructureDropDown";
+import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
@@ -185,7 +185,7 @@ const ProfilePage = (props: Props): ReactElement => {
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <OnboardingIndustry />
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
-                  <OnboardingLegalStructure />
+                  <OnboardingLegalStructureDropdown />
                   <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
                   <OnboardingMunicipality
                     onValidation={onValidation}

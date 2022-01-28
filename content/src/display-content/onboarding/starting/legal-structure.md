@@ -1,4 +1,5 @@
 ---
+placeholder: "Select a legal structure"
 ---
 
 ## Legal Structure
