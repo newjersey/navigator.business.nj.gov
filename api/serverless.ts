@@ -16,8 +16,8 @@ const govDeliveryBaseUrl = process.env.GOV_DELIVERY_BASE_URL || "";
 const govDeliveryTopic = process.env.GOV_DELIVERY_TOPIC || "";
 const govDeliveryApiKey = process.env.GOV_DELIVERY_API_KEY || "";
 const govDeliveryQuestionId = process.env.GOV_DELIVERY_URL_QUESTION_ID || "";
-const oAuthClientId = process.env.OAUTH_CLIENT_ID || "";
-const oAuthClientSecret = process.env.OAUTH_CLIENT_SECRET || "";
+const cmsoAuthClientId = process.env.CMS_OAUTH_CLIENT_ID || "";
+const cmsoAuthClientSecret = process.env.CMS_OAUTH_CLIENT_SECRET || "";
 const formationApiAccount = process.env.FORMATION_API_ACCOUNT || "";
 const formationApiKey = process.env.FORMATION_API_KEY || "";
 const formationApiBaseUrl = process.env.FORMATION_API_BASE_URL || "";
@@ -116,8 +116,8 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       USERS_TABLE: usersTable,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
-      OAUTH_CLIENT_ID: oAuthClientId,
-      OAUTH_CLIENT_SECRET: oAuthClientSecret,
+      CMS_OAUTH_CLIENT_ID: cmsoAuthClientId,
+      CMS_OAUTH_CLIENT_SECRET: cmsoAuthClientSecret,
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
       GOV_DELIVERY_BASE_URL: govDeliveryBaseUrl,
       GOV_DELIVERY_TOPIC: govDeliveryTopic,
