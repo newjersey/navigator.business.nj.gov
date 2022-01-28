@@ -2476,7 +2476,7 @@ __metadata:
     "@storybook/storybook-deployer": 2.8.10
     "@swc/core": 1.2.133
     "@swc/jest": 0.2.17
-    "@testing-library/dom": 8.11.2
+    "@testing-library/dom": 8.11.3
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
@@ -2654,7 +2654,7 @@ __metadata:
     "@storybook/storybook-deployer": 2.8.10
     "@swc/core": 1.2.133
     "@swc/jest": 0.2.17
-    "@testing-library/dom": 8.11.2
+    "@testing-library/dom": 8.11.3
     "@testing-library/jest-dom": 5.16.1
     "@testing-library/react": 12.1.2
     "@testing-library/user-event": 13.5.0
@@ -8521,9 +8521,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:8.11.2, @testing-library/dom@npm:^8.0.0":
-  version: 8.11.2
-  resolution: "@testing-library/dom@npm:8.11.2"
+"@testing-library/dom@npm:8.11.3, @testing-library/dom@npm:^8.0.0":
+  version: 8.11.3
+  resolution: "@testing-library/dom@npm:8.11.3"
   dependencies:
     "@babel/code-frame": ^7.10.4
     "@babel/runtime": ^7.12.5
@@ -8533,7 +8533,7 @@ __metadata:
     dom-accessibility-api: ^0.5.9
     lz-string: ^1.4.4
     pretty-format: ^27.0.2
-  checksum: 163e6572a3caa9fab4cb48e03fa2bf2cf702a72ba55b13c8ad7ad1f807762fd480e28f54c36ff5df8ce14a97adda275b4b3bf3c81439c6509ec219c198dc4f9b
+  checksum: 2245d254b6058590e25de86fb7b3c75e4a31096901a191f80d3efb9fa7e1e273043416f370c8770feb9f3ccc73a1550a877a3b003b593f1728ae828fcb52cd62
   languageName: node
   linkType: hard
 
