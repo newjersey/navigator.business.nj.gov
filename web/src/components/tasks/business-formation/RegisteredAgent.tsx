@@ -36,7 +36,7 @@ export const RegisteredAgent = (): ReactElement => {
   return (
     <>
       <Content>{state.displayContent.agentNumberOrManual.contentMd}</Content>
-      <div className="form-input margin-bottom-2">
+      <div className="form-input margin-bottom-2" id="registeredAgent">
         <FormControl fullWidth>
           <RadioGroup
             aria-label="Registered Agent"

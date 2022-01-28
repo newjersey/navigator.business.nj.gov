@@ -29,6 +29,7 @@ import { migrate_v32_to_v33 } from "./v33_formation_data";
 import { migrate_v33_to_v34 } from "./v34_add_contact_to_formation_data";
 import { migrate_v34_to_v35 } from "./v35_add_formation_getfiling_response";
 import { migrate_v35_to_v36 } from "./v36_add_member_to_formation_data";
+import { migrate_v36_to_v37 } from "./v37_add_dateofformation";
 import { migrate_v2_to_v3 } from "./v3_change_LegalStructure";
 import { migrate_v3_to_v4 } from "./v4_add_municipality";
 import { migrate_v4_to_v5 } from "./v5_add_liquor_license";
@@ -77,6 +78,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v33_to_v34,
   migrate_v34_to_v35,
   migrate_v35_to_v36,
+  migrate_v36_to_v37,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

@@ -29,6 +29,7 @@ export const OnboardingField = ({ fieldName, ...props }: OnboardingProps): React
       ...profileData,
     });
   };
+
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (

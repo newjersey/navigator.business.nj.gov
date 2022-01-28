@@ -12,11 +12,15 @@ import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withS
 import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyUserData, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { fireEvent, waitFor, within } from "@testing-library/react";
+import dayjs from "dayjs";
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+
+const date = dayjs().subtract(4, "days");
+const dateOfFormation = date.format("YYYY-MM-DD");
 
 describe("onboarding - owning a business", () => {
   beforeEach(() => {
@@ -48,6 +52,7 @@ describe("onboarding - owning a business", () => {
     expect(subject.getByTestId("step-1")).toBeInTheDocument();
 
     await page.visitStep2();
+    page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
     expect(subject.getByTestId("step-2")).toBeInTheDocument();
@@ -72,6 +77,7 @@ describe("onboarding - owning a business", () => {
     expect(page1.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     await page.visitStep2();
+    page.selectDate("Date of formation", date);
     const page2 = within(subject.getByTestId("page-2-form"));
     expect(page2.queryByText(OnboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page2.queryByText(OnboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
@@ -97,17 +103,16 @@ describe("onboarding - owning a business", () => {
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
     expect(currentUserData().profileData.hasExistingBusiness).toEqual(true);
-
+    page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
     await page.visitStep3();
+    expect(currentUserData().profileData.dateOfFormation).toEqual(dateOfFormation);
     expect(currentUserData().profileData.entityId).toEqual("1234567890");
-
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep4();
     expect(currentUserData().profileData.industryId).toEqual("e-commerce");
     expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
-
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
@@ -124,6 +129,7 @@ describe("onboarding - owning a business", () => {
         industryId: "e-commerce",
         homeBasedBusiness: true,
         legalStructureId: undefined,
+        dateOfFormation,
         municipality: newark,
         entityId: "1234567890",
         certificationIds: ["veteran-owned", "small-business-enterprise"],
@@ -148,6 +154,7 @@ describe("onboarding - owning a business", () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
+    page.selectDate("Date of formation", date);
     page.fillText("Entity id", "123");
     fireEvent.blur(subject.getByLabelText("Entity id"));
     page.clickNext();
@@ -172,10 +179,32 @@ describe("onboarding - owning a business", () => {
     });
   });
 
+  it("prevents user from moving after Step 2 if your dateOfFormation is empty", async () => {
+    const { subject, page } = renderPage({});
+    page.chooseRadio("has-existing-business-true");
+    await page.visitStep2();
+    page.clickNext();
+    await waitFor(() => {
+      expect(subject.getByTestId("step-2")).toBeInTheDocument();
+      expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
+      expect(subject.getByText(OnboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
+      expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    });
+    page.selectDate("Date of formation", date);
+    expect(subject.queryByText(OnboardingDefaults.dateOfFormationErrorText)).not.toBeInTheDocument();
+    await page.visitStep3();
+    await waitFor(() => {
+      expect(subject.getByTestId("step-3")).toBeInTheDocument();
+      expect(subject.queryByTestId("step-2")).not.toBeInTheDocument();
+      expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+    });
+  });
+
   it("prevents user from moving after Step 3 if you have not entered a business name", async () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
+    page.selectDate("Date of formation", date);
     await page.visitStep3();
     page.clickNext();
     await waitFor(() => {
@@ -199,6 +228,7 @@ describe("onboarding - owning a business", () => {
     const { subject, page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
+    page.selectDate("Date of formation", date);
     await page.visitStep3();
     page.fillText("Business name", "A business");
     await page.visitStep4();
@@ -227,9 +257,9 @@ describe("onboarding - owning a business", () => {
 
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
+    page.selectDate("Date of formation", date);
     await page.visitStep3();
     page.fillText("Business name", "A business");
-
     await page.visitStep4();
     expect(subject.getByTestId("step-4")).toBeInTheDocument();
     page.selectByText("Location", "Newark");
@@ -250,6 +280,7 @@ describe("onboarding - owning a business", () => {
       profileData: generateProfileData({
         hasExistingBusiness: true,
         entityId: "0123456789",
+        dateOfFormation,
         businessName: "Applebees",
         industryId: "cosmetology",
         municipality: generateMunicipality({
@@ -263,7 +294,7 @@ describe("onboarding - owning a business", () => {
 
     await page.visitStep2();
     expect(page.getEntityIdValue()).toEqual("0123456789");
-
+    expect(page.getDateOfFormationValue()).toEqual(date.format("MM/DD/YYYY"));
     await page.visitStep3();
     expect(page.getBusinessNameValue()).toEqual("Applebees");
     expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);

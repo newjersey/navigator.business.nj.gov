@@ -8,6 +8,7 @@ import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import React, { ReactNode } from "react";
+import { OnboardingDateOfFormation } from "./OnboardingDateOfFormation";
 import { OnboardingExistingEmployees } from "./OnboardingExistingEmployees";
 
 export type OnboardingFlow = {
@@ -38,8 +39,21 @@ export const getOnboardingFlows = (
         }),
       },
       {
-        component: <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} />,
-        getErrorMap: () => ({ inline: [{ name: "entityId", valid: !fieldStates.entityId.invalid }] }),
+        component: (
+          <>
+            <OnboardingDateOfFormation onValidation={onValidation} fieldStates={fieldStates} />
+            <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} />
+          </>
+        ),
+        getErrorMap: () => ({
+          inline: [
+            { name: "entityId", valid: !fieldStates.entityId.invalid },
+            {
+              name: "dateOfFormation",
+              valid: !!profileData.dateOfFormation && !fieldStates.dateOfFormation.invalid,
+            },
+          ],
+        }),
       },
       {
         component: (

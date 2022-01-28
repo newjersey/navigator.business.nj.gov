@@ -69,6 +69,7 @@ export type OwningFlowContent = {
   hasExistingBusiness: RadioFieldContent;
   businessName: TextFieldContent;
   industry: IndustryFieldContent;
+  dateOfFormation: TextFieldContent;
   entityId: TextFieldContent;
   ownership: TextFieldContent;
   municipality: TextFieldContent;
@@ -412,6 +413,10 @@ export const emptyOwningFlowContent: OwningFlowContent = {
     contentMd: "",
   },
   ownership: {
+    contentMd: "",
+    placeholder: "",
+  },
+  dateOfFormation: {
     contentMd: "",
     placeholder: "",
   },
