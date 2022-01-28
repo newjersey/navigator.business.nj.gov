@@ -2524,7 +2524,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.10.7
     dedent: 0.7.0
-    dotenv: 14.2.0
+    dotenv: 14.3.2
     eslint: 8.7.0
     eslint-config-next: 12.0.8
     eslint-config-prettier: 8.3.0
@@ -2682,7 +2682,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.10.7
-    dotenv: 14.2.0
+    dotenv: 14.3.2
     eslint: 8.7.0
     eslint-config-next: 12.0.8
     eslint-config-prettier: 8.3.0
@@ -15211,10 +15211,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:14.2.0":
-  version: 14.2.0
-  resolution: "dotenv@npm:14.2.0"
-  checksum: 85a0e44918ef49e64c278f757dab50a156b9a6ca67f708876fd81d265e575e35b67387fc681d910df99368d6c1edca66cd546edeb0f7db3b499cb876c999233e
+"dotenv@npm:14.3.2":
+  version: 14.3.2
+  resolution: "dotenv@npm:14.3.2"
+  checksum: 86c06758915d6facc35275f4a7fafc16705b6f3b44befaa8abca91367991efc8ff8db5437d3cc14778231d19fb97610fe82d60f8a53ba723cdb69fe4171439aa
   languageName: node
   linkType: hard
 
