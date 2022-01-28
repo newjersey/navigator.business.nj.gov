@@ -1,10 +1,10 @@
-import { OnboardingCertifications } from "@/components/onboarding/OnboardingCertifications";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingHasExistingBusiness } from "@/components/onboarding/OnboardingHasExistingBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
+import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import React, { ReactNode } from "react";
@@ -58,7 +58,7 @@ export const getOnboardingFlows = (
             <div className="margin-top-205" />
             <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
             <div className="margin-top-205" />
-            <OnboardingCertifications />
+            <OnboardingOwnership />
           </>
         ),
         getErrorMap: () => ({

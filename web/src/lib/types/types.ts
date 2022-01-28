@@ -70,7 +70,7 @@ export type OwningFlowContent = {
   businessName: TextFieldContent;
   industry: IndustryFieldContent;
   entityId: TextFieldContent;
-  certifications: TextFieldContent;
+  ownership: TextFieldContent;
   municipality: TextFieldContent;
   existingEmployees: TextFieldContent;
 };
@@ -411,7 +411,7 @@ export const emptyOwningFlowContent: OwningFlowContent = {
   entityId: {
     contentMd: "",
   },
-  certifications: {
+  ownership: {
     contentMd: "",
     placeholder: "",
   },

@@ -96,7 +96,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   const entityId = (type: UserContentType) => getTextFieldContent("entity-id.md", type);
   const notes = (type: UserContentType) => getTextFieldContent("notes.md", type);
   const taxId = (type: UserContentType) => getTextFieldContent("tax-id.md", type);
-  const certifications = (type: UserContentType) => getTextFieldContent("certifications.md", type);
+  const ownership = (type: UserContentType) => getTextFieldContent("ownership.md", type);
   const existingEmployees = (type: UserContentType) => getTextFieldContent("existing-employees.md", type);
 
   const fieldFunctions: Record<
@@ -110,7 +110,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     entityId,
     notes,
     taxId,
-    certifications,
+    ownership,
     existingEmployees,
     industry,
     legalStructure,
