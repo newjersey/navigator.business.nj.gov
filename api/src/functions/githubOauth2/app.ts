@@ -7,22 +7,22 @@ import serverless from "serverless-http";
 import { AuthorizationCode, ModuleOptions } from "simple-oauth2";
 
 const {
-  OAUTH_CLIENT_ID = "",
-  OAUTH_CLIENT_SECRET = "",
-  OAUTH_HOST = "https://github.com",
-  OAUTH_TOKEN_PATH = "/login/oauth/access_token",
-  OAUTH_AUTHORIZE_PATH = "/login/oauth/authorize",
+  CMS_OAUTH_CLIENT_ID = "",
+  CMS_OAUTH_CLIENT_SECRET = "",
+  CMS_OAUTH_HOST = "https://github.com",
+  CMS_OAUTH_TOKEN_PATH = "/login/oauth/access_token",
+  CMS_OAUTH_AUTHORIZE_PATH = "/login/oauth/authorize",
 } = process.env;
 
 export const oauthConfig: ModuleOptions = Object.freeze({
   client: Object.freeze({
-    id: OAUTH_CLIENT_ID,
-    secret: OAUTH_CLIENT_SECRET,
+    id: CMS_OAUTH_CLIENT_ID,
+    secret: CMS_OAUTH_CLIENT_SECRET,
   }),
   auth: Object.freeze({
-    tokenHost: OAUTH_HOST,
-    tokenPath: OAUTH_TOKEN_PATH,
-    authorizePath: OAUTH_AUTHORIZE_PATH,
+    tokenHost: CMS_OAUTH_HOST,
+    tokenPath: CMS_OAUTH_TOKEN_PATH,
+    authorizePath: CMS_OAUTH_AUTHORIZE_PATH,
   }),
 });
 
