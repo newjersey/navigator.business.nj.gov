@@ -54,7 +54,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
   return (
     <>
       <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.legalStructure.contentMd}</Content>
-      <div className="form-input-wide margin-top-3">
+      <div className="form-input margin-top-3">
         <FormControl variant="outlined" fullWidth>
           <Select
             fullWidth
