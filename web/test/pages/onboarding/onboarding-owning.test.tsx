@@ -110,8 +110,8 @@ describe("onboarding - owning a business", () => {
 
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
-    page.selectByValue("Certifications", "veteran-owned");
-    page.selectByValue("Certifications", "small-business-enterprise");
+    page.selectByValue("Ownership", "veteran-owned");
+    page.selectByValue("Ownership", "small-business-enterprise");
     page.clickNext();
     await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
     expect(currentUserData()).toEqual({

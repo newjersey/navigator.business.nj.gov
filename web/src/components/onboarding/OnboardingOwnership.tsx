@@ -5,7 +5,7 @@ import { Certifications, LookupCertificationById } from "@businessnjgovnavigator
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
-export const OnboardingCertifications = (): ReactElement => {
+export const OnboardingOwnership = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
@@ -15,16 +15,15 @@ export const OnboardingCertifications = (): ReactElement => {
       certificationIds: value,
     });
   };
-
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (
     <>
       <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
-        {state.displayContent.certifications.headingBolded}{" "}
-        <span className="text-light">{state.displayContent.certifications.headingNotBolded}</span>
+        {state.displayContent.ownership.headingBolded}{" "}
+        <span className="text-light">{state.displayContent.ownership.headingNotBolded}</span>
       </div>
-      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.certifications.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.ownership.contentMd}</Content>
       <div className="form-input margin-top-3">
         <FormControl variant="outlined" fullWidth>
           <Select
@@ -34,16 +33,14 @@ export const OnboardingCertifications = (): ReactElement => {
             onChange={handleChange}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return (
-                  <div className="text-disabled-dark">{state.displayContent.certifications.placeholder}</div>
-                );
+                return <div className="text-disabled-dark">{state.displayContent.ownership.placeholder}</div>;
               }
 
               return selected.map((it) => LookupCertificationById(it).name).join(", ");
             }}
             inputProps={{
-              "aria-label": "Certifications",
-              "data-testid": "certifications",
+              "aria-label": "Ownership",
+              "data-testid": "ownership",
             }}
           >
             {Certifications.map((cert) => (
