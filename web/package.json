@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "airtable:dump": "node scripts/airtableDump.js",
+    "airtable:dump": "node src/scripts/airtableDump.js",
+    "airtable:fetch-opps": "node src/scripts/airtableOpportunityDump.js",
     "build": "yarn next build && yarn next export",
     "build-storybook": "build-storybook",
     "clean": "rimraf .next public/vendor",
