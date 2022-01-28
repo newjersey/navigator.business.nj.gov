@@ -1,6 +1,6 @@
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import { TextField, TextFieldProps } from "@mui/material";
-import React, { ChangeEvent, FocusEvent, ReactElement, useEffect } from "react";
+import React, { ChangeEvent, FocusEvent, ReactElement } from "react";
 
 export interface GenericTextFieldProps {
   fieldName: string;
@@ -15,8 +15,6 @@ export interface GenericTextFieldProps {
   disabled?: boolean;
   placeholder?: string;
   value?: string | number;
-  onChangeTrigger?: boolean;
-  resetOnChangeTrigger?: () => void;
   autoComplete?: string;
   required?: boolean;
   numericProps?: {
@@ -81,15 +79,6 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
   };
 
   const value = visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? "";
-
-  useEffect(() => {
-    props.onChangeTrigger &&
-      props.resetOnChangeTrigger &&
-      props.resetOnChangeTrigger() &&
-      props.handleChange &&
-      props.handleChange(value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.onChangeTrigger]);
 
   return (
     <TextField

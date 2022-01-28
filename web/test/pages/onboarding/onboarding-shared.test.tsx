@@ -17,6 +17,7 @@ import {
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyProfileData, createEmptyUserData } from "@businessnjgovnavigator/shared/";
 import { render, waitFor } from "@testing-library/react";
+import dayjs from "dayjs";
 import React from "react";
 
 jest.mock("next/router");
@@ -150,6 +151,7 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
+    page.selectDate("Date of formation", dayjs().subtract(4, "days"));
     page.fillText("Entity id", "1234567890");
     await page.visitStep3();
     page.fillText("Business name", "Cool Computers");
@@ -188,6 +190,7 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
+    page.selectDate("Date of formation", dayjs().subtract(4, "days"));
     page.fillText("Entity id", "1234567890");
     await page.visitStep3();
     page.fillText("Business name", "Cool Computers");
@@ -206,6 +209,7 @@ describe("onboarding - shared", () => {
       entityId: "1234567890",
       businessName: "Cool Computers",
       industryId: "restaurant",
+      dateOfFormation: dayjs().subtract(4, "days").format("YYYY-MM-DD"),
       homeBasedBusiness: false,
       municipality: newark,
       liquorLicense: false,

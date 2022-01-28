@@ -2,6 +2,7 @@ import { createEmptyUserData, UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
+import { calculateNextAnnualFilingDate } from "../domain/calculateNextAnnualFilingDate";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 import { shouldAddToNewsletter } from "../domain/newsletter/shouldAddToNewsletter";
 import {
@@ -99,14 +100,31 @@ export const userRouterFactory = (
         },
       };
     }
+
+    if (userData.profileData.dateOfFormation) {
+      const annualFilingDate = calculateNextAnnualFilingDate(userData.profileData.dateOfFormation);
+      userData = {
+        ...userData,
+        taxFilingData: {
+          ...userData.taxFilingData,
+          filings: [
+            ...userData.taxFilingData.filings,
+            { identifier: "ANNUAL_FILING", dueDate: annualFilingDate },
+          ],
+        },
+      };
+    }
+
     if (shouldAddToNewsletter(userData)) {
       userData.user.externalStatus.newsletter = { status: "IN_PROGRESS" };
       addNewsletter(userData);
     }
+
     if (shouldAddToUserTesting(userData)) {
       userData.user.externalStatus.userTesting = { status: "IN_PROGRESS" };
       addToUserTesting(userData);
     }
+
     userDataClient
       .put(userData)
       .then((result: UserData) => {
@@ -127,6 +145,7 @@ export const userRouterFactory = (
 
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
     const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+
     const emptyUserData = createEmptyUserData({
       myNJUserKey: signedInUserId,
       email: signedInUser.email,
@@ -136,6 +155,7 @@ export const userRouterFactory = (
       receiveNewsletter: true,
       userTesting: true,
     });
+
     userDataClient
       .put(emptyUserData)
       .then((result) => {

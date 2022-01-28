@@ -3,7 +3,9 @@ import Onboarding from "@/pages/onboarding";
 import { generateUser } from "@/test/factories";
 import { WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { createEmptyUserData, Municipality, UserData } from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, RenderResult, waitForElementToBeRemoved, within } from "@testing-library/react";
+import { Dayjs } from "dayjs";
 import React from "react";
 
 export const renderPage = ({
@@ -18,10 +20,12 @@ export const renderPage = ({
   const emptyUserData = createEmptyUserData(generateUser({}));
   const subject = render(
     <WithStatefulUserData initialUserData={userData || emptyUserData}>
-      <Onboarding
-        displayContent={displayContent || createEmptyLoadDisplayContent()}
-        municipalities={municipalities || []}
-      />
+      <ThemeProvider theme={createTheme()}>
+        <Onboarding
+          displayContent={displayContent || createEmptyLoadDisplayContent()}
+          municipalities={municipalities || []}
+        />
+      </ThemeProvider>
     </WithStatefulUserData>
   );
   const page = createPageHelpers(subject);
@@ -30,11 +34,13 @@ export const renderPage = ({
 
 export type PageHelpers = {
   fillText: (label: string, value: string) => void;
+  selectDate: (label: string, value: Dayjs) => void;
   selectByValue: (label: string, value: string) => void;
   selectByText: (label: string, value: string) => void;
   chooseRadio: (value: string) => void;
   clickNext: () => void;
   clickBack: () => void;
+  getDateOfFormationValue: () => string;
   getEntityIdValue: () => string;
   getBusinessNameValue: () => string;
   getIndustryValue: () => string;
@@ -49,6 +55,14 @@ export type PageHelpers = {
 export const createPageHelpers = (subject: RenderResult): PageHelpers => {
   const fillText = (label: string, value: string) => {
     fireEvent.change(subject.getByLabelText(label), { target: { value: value } });
+  };
+
+  const selectDate = (label: string, value: Dayjs) => {
+    fireEvent.click(subject.getByLabelText(label));
+    fireEvent.click(subject.getByText(value.format("YYYY"), { selector: "button" }));
+    fireEvent.click(subject.getByText(value.format("MMM"), { selector: "button" }));
+    fireEvent.click(subject.getByLabelText(value.format("MMM D, YYYY")));
+    fireEvent.blur(subject.getByLabelText("Date of formation"));
   };
 
   const selectByValue = (label: string, value: string) => {
@@ -76,6 +90,9 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
   };
 
   const getEntityIdValue = (): string => (subject.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+
+  const getDateOfFormationValue = (): string =>
+    (subject.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
 
   const getBusinessNameValue = (): string =>
     (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
@@ -114,10 +131,12 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
     fillText,
     selectByValue,
     selectByText,
+    selectDate,
     chooseRadio,
     clickNext,
     clickBack,
     getEntityIdValue,
+    getDateOfFormationValue,
     getBusinessNameValue,
     getIndustryValue,
     getRadioButtonValue,

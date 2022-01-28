@@ -101,7 +101,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const hasHandledRouting = useRef<boolean>(false);
 
   const { featureDisableOscarOnboarding: shouldDisableOscarFlow } = featureFlags(router.query);
-
   const onValidation = useCallback(
     (field: ProfileFields, invalid: boolean): void => {
       setFieldStates({ ...fieldStates, [field]: { invalid } });
@@ -195,6 +194,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           municipality: profileData.municipality,
           hasExistingBusiness: profileData.hasExistingBusiness,
           legalStructureId: undefined,
+          dateOfFormation: undefined,
           entityId: undefined,
           constructionRenovationPlan: undefined,
           employerId: undefined,

@@ -95,6 +95,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   const businessName = (type: UserContentType) => getTextFieldContent("business-name.md", type);
   const municipality = (type: UserContentType) => getTextFieldContent("municipality.md", type);
   const employerId = (type: UserContentType) => getTextFieldContent("employer-id.md", type);
+  const dateOfFormation = (type: UserContentType) => getTextFieldContent("date-of-formation.md", type);
   const entityId = (type: UserContentType) => getTextFieldContent("entity-id.md", type);
   const notes = (type: UserContentType) => getTextFieldContent("notes.md", type);
   const taxId = (type: UserContentType) => getTextFieldContent("tax-id.md", type);
@@ -109,6 +110,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     businessName,
     municipality,
     employerId,
+    dateOfFormation,
     entityId,
     notes,
     taxId,

@@ -126,7 +126,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
     });
   });
 
-  describe("Onboarding - owning flow", () => {
+  describe.only("Onboarding - owning flow", () => {
     describe("Step 1", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
@@ -138,12 +138,12 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       });
     });
     describe("Step 2", () => {
-      it("should pass the audits", () => {
+      it.only("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
 
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
-
+        cy.get('input[aria-label="Date of formation"]').type("11/11/2011", { force: true });
         cy.get('input[aria-label="Entity id"]').type("1234567890");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
@@ -156,7 +156,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
-
+        cy.get('input[aria-label="Date of formation"]').type("11/11/2011", { force: true });
         cy.get('input[aria-label="Entity id"]').type("1234567890");
         clickNext();
 
@@ -175,7 +175,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
-
+        cy.get('input[aria-label="Date of formation"]').type("11/11/2011", { force: true });
         cy.get('input[aria-label="Entity id"]').type("1234567890");
         clickNext();
 
