@@ -86,6 +86,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     return {
       contentMd: legalStructureContent.content,
       optionContent: legalStructureOptionContent,
+      ...(legalStructureContent.grayMatter as FieldGrayMatter),
     };
   };
 
