@@ -200,7 +200,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           employerId: undefined,
           taxId: undefined,
           notes: "",
-          certificationIds: [],
+          ownershipTypeIds: [],
           existingEmployees: undefined,
         };
 

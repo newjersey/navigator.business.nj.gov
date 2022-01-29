@@ -140,7 +140,7 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      certificationIds: [],
+      ownershipTypeIds: [],
     });
   });
 
@@ -179,7 +179,7 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      certificationIds: [],
+      ownershipTypeIds: [],
     });
   });
 
@@ -217,7 +217,7 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      certificationIds: ["veteran-owned"],
+      ownershipTypeIds: ["veteran-owned"],
     });
   });
 

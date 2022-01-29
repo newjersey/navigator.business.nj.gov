@@ -111,7 +111,7 @@ export const generateProfileData = (
     employerId: randomInt(9).toString(),
     taxId: randomInt(9).toString(),
     notes: `some-notes-${randomInt()}`,
-    certificationIds: [],
+    ownershipTypeIds: [],
     existingEmployees: randomInt(7).toString(),
     ...overrides,
   };

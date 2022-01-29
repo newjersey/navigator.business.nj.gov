@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import { Certifications, LookupCertificationById } from "@businessnjgovnavigator/shared";
+import { LookupOwnershipTypeById, OwnershipTypes } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
@@ -12,7 +12,7 @@ export const OnboardingOwnership = (): ReactElement => {
     const value = typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value;
     setProfileData({
       ...state.profileData,
-      certificationIds: value,
+      ownershipTypeIds: value,
     });
   };
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
@@ -29,23 +29,23 @@ export const OnboardingOwnership = (): ReactElement => {
           <Select
             multiple
             displayEmpty
-            value={state.profileData.certificationIds}
+            value={state.profileData.ownershipTypeIds}
             onChange={handleChange}
             renderValue={(selected) => {
               if (selected.length === 0) {
                 return <div className="text-disabled-dark">{state.displayContent.ownership.placeholder}</div>;
               }
 
-              return selected.map((it) => LookupCertificationById(it).name).join(", ");
+              return selected.map((it) => LookupOwnershipTypeById(it).name).join(", ");
             }}
             inputProps={{
               "aria-label": "Ownership",
               "data-testid": "ownership",
             }}
           >
-            {Certifications.map((cert) => (
+            {OwnershipTypes.map((cert) => (
               <MenuItem key={cert.id} value={cert.id} data-testid={cert.id}>
-                <Checkbox checked={state.profileData.certificationIds.indexOf(cert.id) > -1} />
+                <Checkbox checked={state.profileData.ownershipTypeIds.indexOf(cert.id) > -1} />
                 <ListItemText className="text-wrap" primary={cert.name} />
               </MenuItem>
             ))}
