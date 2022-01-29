@@ -116,7 +116,7 @@ describe("onboarding - owning a business", () => {
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
-    page.selectByValue("Ownership", "small-business-enterprise");
+    page.selectByValue("Ownership", "disabled-veteran");
     page.clickNext();
     await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard"));
     expect(currentUserData()).toEqual({
@@ -132,7 +132,7 @@ describe("onboarding - owning a business", () => {
         dateOfFormation,
         municipality: newark,
         entityId: "1234567890",
-        certificationIds: ["veteran-owned", "small-business-enterprise"],
+        ownershipTypeIds: ["veteran-owned", "disabled-veteran"],
         existingEmployees: "1234567",
       },
     });

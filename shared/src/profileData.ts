@@ -14,7 +14,7 @@ export interface ProfileData {
   employerId: string | undefined;
   taxId: string | undefined;
   notes: string;
-  certificationIds: string[];
+  ownershipTypeIds: string[];
   existingEmployees: string | undefined;
 }
 
@@ -32,7 +32,7 @@ export const emptyProfileData: ProfileData = {
   employerId: undefined,
   taxId: undefined,
   notes: "",
-  certificationIds: [],
+  ownershipTypeIds: [],
   existingEmployees: undefined,
 };
 
