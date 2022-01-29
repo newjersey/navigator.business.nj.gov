@@ -1192,6 +1192,7 @@ describe("<BusinessFormation />", () => {
   };
 
   const selectNextMonth = () => {
+    fireEvent.click(subject.getByLabelText(`Business start date`));
     fireEvent.click(subject.getByLabelText(`Next month`));
   };
 
