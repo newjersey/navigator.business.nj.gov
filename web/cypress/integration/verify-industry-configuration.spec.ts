@@ -3,7 +3,7 @@
 import { Industries } from "@businessnjgovnavigator/shared";
 import { completeOnboarding } from "../support/helpers";
 
-describe("Roadmap [all] [group2]", () => {
+describe("Roadmap [all] [group4]", () => {
   beforeEach(() => {
     cy.resetUserData();
     cy.loginByCognitoApi();
