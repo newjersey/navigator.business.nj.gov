@@ -1,7 +1,7 @@
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import React, { ReactElement, ReactNode } from "react";
-import { NumericField } from "./NumericField";
+import { OnboardingNumericField } from "./OnboardingNumericField";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -14,7 +14,7 @@ export const OnboardingExistingEmployees = (props: Props): ReactElement => {
 
   return (
     <>
-      <NumericField
+      <OnboardingNumericField
         onValidation={props.onValidation}
         error={props.fieldStates[fieldName].invalid}
         fieldName={fieldName}

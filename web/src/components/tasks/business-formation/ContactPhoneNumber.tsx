@@ -1,6 +1,6 @@
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import React, { ReactElement } from "react";
-import { BusinessFormationNumericField } from "./BusinessFormationNumericField";
+import { BusinessFormationTextField } from "./BusinessFormationTextField";
 
 export const ContactPhoneNumber = (): ReactElement => {
   const visualFilter = (phoneNumber: string) => {
@@ -13,11 +13,13 @@ export const ContactPhoneNumber = (): ReactElement => {
 
   return (
     <div className="form-input margin-bottom-2">
-      <BusinessFormationNumericField
+      <BusinessFormationTextField
         validationText={BusinessFormationDefaults.contactPhoneNumberErrorText}
         fieldName={"contactPhoneNumber"}
-        maxLength={10}
-        minLength={10}
+        numericProps={{
+          minLength: 10,
+          maxLength: 10,
+        }}
         visualFilter={visualFilter}
       />
     </div>

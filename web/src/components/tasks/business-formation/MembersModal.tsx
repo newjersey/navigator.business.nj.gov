@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { GenericNumericField } from "@/components/GenericNumericField";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
@@ -246,9 +245,11 @@ export const MembersModal = (props: Props): ReactElement => {
                 </div>
                 <div className="desktop:grid-col-6">
                   <Content>{state.displayContent.memberAddressZipCode.contentMd}</Content>
-                  <GenericNumericField
-                    minLength={5}
-                    maxLength={5}
+                  <GenericTextField
+                    numericProps={{
+                      minLength: 5,
+                      maxLength: 5,
+                    }}
                     disabled={useAgentAddress}
                     fieldName={"memberAddressZipCode"}
                     autoComplete="postal-code"

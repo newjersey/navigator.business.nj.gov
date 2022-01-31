@@ -3,7 +3,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval, zipCodeRange } from "@/lib/utils/helpers";
 import React, { ReactElement } from "react";
 import { BusinessAddressLine1 } from "./BusinessAddressLine1";
-import { BusinessFormationNumericField } from "./BusinessFormationNumericField";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
 import { BusinessNameAndLegalStructure } from "./BusinessNameAndLegalStructure";
 import { BusinessStartDate } from "./BusinessStartDate";
@@ -43,9 +42,11 @@ export const MainBusiness = (): ReactElement => {
       )}
       <BusinessFormationTextField fieldName="businessAddressState" disabled={true} />
       <div className="form-input margin-bottom-2">
-        <BusinessFormationNumericField
-          minLength={5}
-          maxLength={5}
+        <BusinessFormationTextField
+          numericProps={{
+            minLength: 5,
+            maxLength: 5,
+          }}
           fieldName={"businessAddressZipCode"}
           validationText={BusinessFormationDefaults.businessaddressZipCodeErrorText}
           additionalValidation={zipCodeRange}

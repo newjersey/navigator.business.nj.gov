@@ -1,4 +1,4 @@
-import { NumericField } from "@/components/onboarding/NumericField";
+import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileDataContext } from "@/pages/onboarding";
@@ -25,7 +25,7 @@ export const OnboardingEntityId = (props: Props): ReactElement => {
         {state.displayContent.entityId.headingBolded}{" "}
         <span className="text-light">{state.displayContent.entityId.headingNotBolded}</span>
       </div>
-      <NumericField
+      <OnboardingNumericField
         onValidation={props.onValidation}
         error={props.fieldStates[fieldName].invalid}
         fieldName={fieldName}

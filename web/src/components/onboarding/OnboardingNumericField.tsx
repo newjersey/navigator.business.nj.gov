@@ -2,11 +2,15 @@ import { OnboardingField, OnboardingProps } from "@/components/onboarding/Onboar
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { templateEval } from "@/lib/utils/helpers";
 import React, { ReactElement } from "react";
-import { NumericFieldProps } from "../GenericNumericField";
+
+interface NumericFieldProps {
+  maxLength: number;
+  minLength?: number;
+}
 
 interface Props extends Omit<OnboardingProps, "numericProps">, NumericFieldProps {}
 
-export const NumericField = ({ minLength, maxLength, ...props }: Props): ReactElement => {
+export const OnboardingNumericField = ({ minLength, maxLength, ...props }: Props): ReactElement => {
   return (
     <OnboardingField
       validationText={templateEval(OnboardingDefaults.errorTextMinimumNumericField, {

@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { BusinessFormationNumericField } from "@/components/tasks/business-formation/BusinessFormationNumericField";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
@@ -67,9 +66,11 @@ export const RegisteredAgent = (): ReactElement => {
         <div className="margin-top-2">
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
-              <BusinessFormationNumericField
-                minLength={4}
-                maxLength={7}
+              <BusinessFormationTextField
+                numericProps={{
+                  minLength: 4,
+                  maxLength: 7,
+                }}
                 fieldName={"agentNumber"}
                 validationText={BusinessFormationDefaults.agentNumberErrorText}
               />
@@ -107,9 +108,11 @@ export const RegisteredAgent = (): ReactElement => {
                   <BusinessFormationTextField fieldName="agentOfficeAddressState" disabled={true} />
                 </div>
                 <div className="desktop:grid-col-5">
-                  <BusinessFormationNumericField
-                    minLength={5}
-                    maxLength={5}
+                  <BusinessFormationTextField
+                    numericProps={{
+                      minLength: 5,
+                      maxLength: 5,
+                    }}
                     fieldName={"agentOfficeAddressZipCode"}
                     validationText={BusinessFormationDefaults.agentOfficeaddressZipCodeErrorText}
                     additionalValidation={zipCodeRange}

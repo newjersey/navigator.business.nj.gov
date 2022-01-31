@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { Alert } from "@/components/njwds/Alert";
-import { NumericField } from "@/components/onboarding/NumericField";
+import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createEmptyUserDisplayContent, OperateDisplayContent, ProfileFields } from "@/lib/types/types";
@@ -85,7 +85,7 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
           onSubmit={onSubmit}
           className="mobile-lg:display-flex mobile-lg:flex-row mobile-lg:flex-justify"
         >
-          <NumericField
+          <OnboardingNumericField
             onValidation={(field: ProfileFields, invalid: boolean) => {
               setIsValid(!invalid);
             }}

@@ -4,7 +4,7 @@ import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import React, { ReactElement, useContext } from "react";
-import { NumericField } from "./NumericField";
+import { OnboardingNumericField } from "./OnboardingNumericField";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -21,7 +21,7 @@ export const OnboardingEmployerId = (props: Props): ReactElement => {
         {state.displayContent.employerId.headingBolded}{" "}
         <span className="text-light">{state.displayContent.employerId.headingNotBolded}</span>
       </div>
-      <NumericField
+      <OnboardingNumericField
         fieldName={fieldName}
         onValidation={props.onValidation}
         error={props.fieldStates[fieldName].invalid}
