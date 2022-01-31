@@ -164,14 +164,9 @@ describe("ApiFormationClient", () => {
     });
 
     it("responds with error messages when failure", async () => {
-      const stubError1 = generateApiError({ Name: "Formation.PayerEmail", type: "FIELD" });
-      const stubError2 = generateApiError({ Name: "Formation.RegisteredAgent", type: "FIELD" });
-      mockAxios.post.mockResolvedValue({
-        headers: {
-          "content-type": "application/json",
-        },
-        data: [stubError1, stubError2],
-      });
+      const stubError1 = generateApiError({ Name: "Formation.PayerEmail" });
+      const stubError2 = generateApiError({ Name: "Formation.RegisteredAgent" });
+      mockAxios.post.mockResolvedValue({ data: [stubError1, stubError2] });
 
       const userData = generateUserData({});
 
@@ -186,6 +181,21 @@ describe("ApiFormationClient", () => {
       });
     });
 
+    it("responds with generic response error when un-parseable failure", async () => {
+      mockAxios.post.mockResolvedValue({
+        data: "Unexpected error: An error occurred while updating the entries.",
+      });
+
+      const userData = generateUserData({});
+
+      expect(await client.form(userData, "some-url")).toEqual({
+        success: false,
+        token: undefined,
+        redirect: undefined,
+        errors: [{ field: "", message: "Response Error", type: "RESPONSE" }],
+      });
+    });
+
     it("responds with generic error message when connection error", async () => {
       mockAxios.post.mockRejectedValue({});
       const userData = generateUserData({});
@@ -195,21 +205,6 @@ describe("ApiFormationClient", () => {
         token: undefined,
         redirect: undefined,
         errors: [{ field: "", message: "Unknown Error", type: "UNKNOWN" }],
-      });
-    });
-
-    it("responds with error message on url redirect", async () => {
-      mockAxios.post.mockResolvedValue({
-        headers: { "content-type": "text/html; charset=utf-8" },
-        data: '\r\n\r\n<!DOCTYPE html>\r\n<html lang="en">\r\n<head id="H',
-      });
-      const userData = generateUserData({});
-
-      expect(await client.form(userData, "some-url")).toEqual({
-        success: false,
-        token: undefined,
-        redirect: undefined,
-        errors: [{ field: "", message: "Response error", type: "RESPONSE" }],
       });
     });
 
@@ -231,7 +226,6 @@ describe("ApiFormationClient", () => {
         Valid: false,
         ErrorMessage: `some-error-message-${Math.random()}`,
         Name: `some-error-name-${Math.random()}`,
-        type: `some-error-type-${Math.random()}`,
         ...overrides,
       };
     };
