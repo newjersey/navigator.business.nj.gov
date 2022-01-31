@@ -62,7 +62,7 @@
     "remark": "12.0.1",
     "remark-html": "13.0.2",
     "remark-react": "8.0.0",
-    "swr": "1.1.2"
+    "swr": "1.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.16.12",
