@@ -142,7 +142,7 @@ const serverlessConfiguration: AWS = {
   functions: {},
 };
 
-if (stage === "dev" || stage === "local") {
+if (stage === "dev" || stage === "local" || stage === "staging") {
   serverlessConfiguration.custom = {
     ...serverlessConfiguration.custom,
     config: {
@@ -179,7 +179,7 @@ if (stage === "dev" || stage === "local") {
   };
 }
 
-if (stage !== "dev" && stage !== "local") {
+if (stage !== "dev" && stage !== "local" && stage !== "staging") {
   serverlessConfiguration.custom = {
     ...serverlessConfiguration.custom,
     config: {
