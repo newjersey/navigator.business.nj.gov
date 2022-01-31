@@ -12,7 +12,7 @@ To apply for an accounting license you will need:
 
 * At least 150 credit hours (within or beyond a degree program)
 * One year of public accounting experience
-* Passing scores on the Uniform CPA Exam
+* Passing scores on the `Uniform CPA Exam|uniform-cpa-exam`
 
 After you complete this task, you will have:
 
