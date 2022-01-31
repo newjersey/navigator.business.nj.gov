@@ -100,7 +100,7 @@ export const PaymentSection = (): ReactElement => {
         !showRequiredFieldsError &&
         userData.formationData.formationResponse.errors.length > 0 && (
           <Alert variant="error" heading={BusinessFormationDefaults.submitErrorHeading}>
-            <ul>
+            <ul style={{ wordBreak: "break-word" }}>
               {userData.formationData.formationResponse.errors.map((it) => (
                 <li key={it.field}>
                   {it.field}
