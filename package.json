@@ -155,7 +155,7 @@
     "jest-raw-loader": "1.0.1",
     "kill-port": "1.6.1",
     "lerna": "4.0.0",
-    "lint-staged": "12.3.1",
+    "lint-staged": "12.3.2",
     "napa": "3.0.0",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "prettier": "2.5.1",
