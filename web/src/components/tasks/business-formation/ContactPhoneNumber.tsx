@@ -17,7 +17,6 @@ export const ContactPhoneNumber = (): ReactElement => {
         validationText={BusinessFormationDefaults.contactPhoneNumberErrorText}
         fieldName={"contactPhoneNumber"}
         numericProps={{
-          minLength: 10,
           maxLength: 10,
         }}
         visualFilter={visualFilter}

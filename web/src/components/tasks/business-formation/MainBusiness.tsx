@@ -44,9 +44,9 @@ export const MainBusiness = (): ReactElement => {
       <div className="form-input margin-bottom-2">
         <BusinessFormationTextField
           numericProps={{
-            minLength: 5,
             maxLength: 5,
           }}
+          required={true}
           fieldName={"businessAddressZipCode"}
           validationText={BusinessFormationDefaults.businessaddressZipCodeErrorText}
           additionalValidation={zipCodeRange}

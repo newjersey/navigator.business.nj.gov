@@ -30,7 +30,6 @@ export const OnboardingEmployerId = (props: Props): ReactElement => {
         })}
         visualFilter={displayAsEin}
         maxLength={9}
-        minLength={9}
       />
     </>
   );

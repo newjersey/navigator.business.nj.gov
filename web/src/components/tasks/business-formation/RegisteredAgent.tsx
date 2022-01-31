@@ -110,12 +110,12 @@ export const RegisteredAgent = (): ReactElement => {
                 <div className="desktop:grid-col-5">
                   <BusinessFormationTextField
                     numericProps={{
-                      minLength: 5,
                       maxLength: 5,
                     }}
                     fieldName={"agentOfficeAddressZipCode"}
                     validationText={BusinessFormationDefaults.agentOfficeaddressZipCodeErrorText}
                     additionalValidation={zipCodeRange}
+                    required={true}
                   />
                 </div>
               </div>

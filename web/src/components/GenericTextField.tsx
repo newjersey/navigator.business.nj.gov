@@ -39,16 +39,22 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
 
     valueFilter = (value) => (maxLength ? regex(value).slice(0, maxLength) : regex(value));
 
-    const minValue = (value: string): boolean =>
-      !props.required && value.length == 0
-        ? true
-        : props.numericProps?.minLength
-        ? value.length >= props.numericProps.minLength
-        : true;
+    const validMinimumValue = (value: string): boolean => {
+      if (!props.required && value.length == 0) {
+        return true;
+      }
+      if (props.numericProps?.minLength) {
+        return value.length >= props.numericProps.minLength;
+      }
+      if (props.numericProps?.maxLength) {
+        return value.length >= props.numericProps.maxLength;
+      }
+      return true;
+    };
 
     additionalValidation = (returnedValue: string): boolean =>
       ![
-        minValue(returnedValue),
+        validMinimumValue(returnedValue),
         returnedValue.length <= maxLength,
         props.additionalValidation ? props.additionalValidation(returnedValue) : true,
       ].some((i) => !i);

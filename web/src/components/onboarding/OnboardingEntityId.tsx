@@ -30,7 +30,6 @@ export const OnboardingEntityId = (props: Props): ReactElement => {
         error={props.fieldStates[fieldName].invalid}
         fieldName={fieldName}
         maxLength={10}
-        minLength={10}
         disabled={props.disabled}
       />
       {props.children}

@@ -247,7 +247,6 @@ export const MembersModal = (props: Props): ReactElement => {
                   <Content>{state.displayContent.memberAddressZipCode.contentMd}</Content>
                   <GenericTextField
                     numericProps={{
-                      minLength: 5,
                       maxLength: 5,
                     }}
                     disabled={useAgentAddress}

@@ -92,7 +92,6 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
             error={!isValid}
             fieldName="entityId"
             maxLength={10}
-            minLength={10}
           />
           <div className="mla height-5 margin-top-2 mobile-lg:margin-top-0">
             <Button style="primary" typeSubmit loading={isLoading}>
