@@ -37,6 +37,7 @@
   "name": "Certified Public Accountant",
   "isLiquorLicenseApplicable": false,
   "modifications": [],
+  "additionalSearchTerms": "CPA, accountant, accounting",
   "id": "generic",
   "description": "Oversees a businesses financial functions like audits and financial statements "
 }
