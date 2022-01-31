@@ -90,6 +90,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
     existingEmployees: randomInt(7).toString(),
+    taxPin: randomInt(4).toString(),
     ...overrides,
   };
 };

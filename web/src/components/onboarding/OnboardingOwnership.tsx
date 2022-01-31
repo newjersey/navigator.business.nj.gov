@@ -1,11 +1,15 @@
 import { Content } from "@/components/Content";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import { LookupOwnershipTypeById, OwnershipTypes } from "@businessnjgovnavigator/shared";
+import { LookupOwnershipTypeById, OwnershipType, OwnershipTypes } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
-export const OnboardingOwnership = (): ReactElement => {
+interface Props {
+  headerAriaLevel?: number;
+}
+
+export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
@@ -15,11 +19,11 @@ export const OnboardingOwnership = (): ReactElement => {
       ownershipTypeIds: value,
     });
   };
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
     <>
-      <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
+      <div role="heading" aria-level={headerAriaLevel} className="h3-styling margin-bottom-2">
         {state.displayContent.ownership.headingBolded}{" "}
         <span className="text-light">{state.displayContent.ownership.headingNotBolded}</span>
       </div>
@@ -33,7 +37,7 @@ export const OnboardingOwnership = (): ReactElement => {
             onChange={handleChange}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return <div className="text-disabled-dark">{state.displayContent.ownership.placeholder}</div>;
+                return <div className="text-base">{state.displayContent.ownership.placeholder}</div>;
               }
 
               return selected.map((it) => LookupOwnershipTypeById(it).name).join(", ");
@@ -43,10 +47,10 @@ export const OnboardingOwnership = (): ReactElement => {
               "data-testid": "ownership",
             }}
           >
-            {OwnershipTypes.map((cert) => (
-              <MenuItem key={cert.id} value={cert.id} data-testid={cert.id}>
-                <Checkbox checked={state.profileData.ownershipTypeIds.indexOf(cert.id) > -1} />
-                <ListItemText className="text-wrap" primary={cert.name} />
+            {OwnershipTypes.map((ownership: OwnershipType) => (
+              <MenuItem key={ownership.id} value={ownership.id} data-testid={ownership.id}>
+                <Checkbox checked={state.profileData.ownershipTypeIds.indexOf(ownership.id) > -1} />
+                <ListItemText className="text-wrap" primary={ownership.name} />
               </MenuItem>
             ))}
           </Select>

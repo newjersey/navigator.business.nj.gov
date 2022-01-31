@@ -1,9 +1,11 @@
 import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { NavBar } from "@/components/navbar/NavBar";
+import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
 import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
+import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { loadDashboardDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -13,7 +15,8 @@ import { DashboardDisplayContent, OperateReference, Opportunity } from "@/lib/ty
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
-import React, { ReactElement } from "react";
+import { useRouter } from "next/router";
+import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   displayContent: DashboardDisplayContent;
@@ -24,6 +27,14 @@ interface Props {
 const DashboardPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
   const { userData } = useUserData();
+  const router = useRouter();
+  const [successAlert, setSuccessAlert] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    const success = router.query.success;
+    setSuccessAlert(success === "true");
+  }, [router.isReady, router.query.success]);
 
   return (
     <PageSkeleton showLegalMessage={true}>
@@ -76,6 +87,21 @@ const DashboardPage = (props: Props): ReactElement => {
           </div>
         </main>
       </div>
+      {successAlert && (
+        <ToastAlert
+          variant="success"
+          isOpen={successAlert}
+          close={() => {
+            setSuccessAlert(false);
+            router.replace({ pathname: "/dashboard" }, undefined, { shallow: true });
+          }}
+        >
+          <div data-testid="toast-alert-SUCCESS" className="h3-styling">
+            {ProfileDefaults.successTextHeader}
+          </div>
+          <div className="padding-top-05">{ProfileDefaults.successTextBody}</div>
+        </ToastAlert>
+      )}
     </PageSkeleton>
   );
 };

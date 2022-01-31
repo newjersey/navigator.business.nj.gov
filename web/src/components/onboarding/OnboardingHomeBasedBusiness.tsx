@@ -6,6 +6,7 @@ import React, { ReactElement, useContext } from "react";
 
 interface Props {
   h3Heading?: boolean;
+  headerAriaLevel: number;
 }
 
 export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
@@ -19,7 +20,7 @@ export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
   };
 
   const eleSize = props.h3Heading ? "h3-styling" : "h4-styling";
-  const header = setHeaderRole(3, eleSize);
+  const header = setHeaderRole(props.headerAriaLevel + 1, eleSize);
 
   return (
     <>

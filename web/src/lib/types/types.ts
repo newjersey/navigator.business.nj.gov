@@ -64,6 +64,10 @@ export type ProfileContent = {
   taxId: TextFieldContent;
   entityId: TextFieldContent;
   employerId: TextFieldContent;
+  taxPin: TextFieldContent;
+  businessProfile: TextFieldContent;
+  businessInformation: TextFieldContent;
+  businessReferences: TextFieldContent;
 };
 
 export type OwningFlowContent = {
@@ -401,6 +405,21 @@ export const emptyProfileContent: ProfileContent = {
     contentMd: "",
   },
   entityId: {
+    contentMd: "",
+  },
+  taxPin: {
+    contentMd: "",
+  },
+  businessProfile: {
+    contentMd: "",
+  },
+  businessInformation: {
+    contentMd: "",
+  },
+  businessReferences: {
+    contentMd: "",
+  },
+  businessName: {
     contentMd: "",
   },
 };

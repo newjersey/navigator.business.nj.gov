@@ -9,9 +9,10 @@ interface Props {
   children?: ReactNode;
   fieldStates: ProfileFieldErrorMap;
   disabled?: boolean;
+  headerAriaLevel?: number;
 }
 
-export const OnboardingEntityId = (props: Props): ReactElement => {
+export const OnboardingEntityId = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const fieldName = "entityId";
 
@@ -21,7 +22,7 @@ export const OnboardingEntityId = (props: Props): ReactElement => {
 
   return (
     <>
-      <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
+      <div role="heading" aria-level={headerAriaLevel} className="h3-styling margin-bottom-2">
         {state.displayContent.entityId.headingBolded}{" "}
         <span className="text-light">{state.displayContent.entityId.headingNotBolded}</span>
       </div>
@@ -31,6 +32,7 @@ export const OnboardingEntityId = (props: Props): ReactElement => {
         fieldName={fieldName}
         maxLength={10}
         disabled={props.disabled}
+        headerAriaLevel={headerAriaLevel}
       />
       {props.children}
     </>

@@ -7,10 +7,14 @@ import { ProfileDataContext } from "@/pages/onboarding";
 import { FormControl, InputLabel } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
-export const OnboardingIndustry = (): ReactElement => {
+interface Props {
+  headerAriaLevel?: number;
+}
+
+export const OnboardingIndustry = ({ headerAriaLevel = 2 }: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
 
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
     <>

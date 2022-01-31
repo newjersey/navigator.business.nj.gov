@@ -202,6 +202,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           notes: "",
           ownershipTypeIds: [],
           existingEmployees: undefined,
+          taxPin: undefined,
         };
 
         setProfileData(newProfileData);

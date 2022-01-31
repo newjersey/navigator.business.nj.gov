@@ -16,6 +16,7 @@ export interface ProfileData {
   notes: string;
   ownershipTypeIds: string[];
   existingEmployees: string | undefined;
+  taxPin: string | undefined;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -34,6 +35,7 @@ export const emptyProfileData: ProfileData = {
   notes: "",
   ownershipTypeIds: [],
   existingEmployees: undefined,
+  taxPin: undefined,
 };
 
 export const createEmptyProfileData = (): ProfileData => {

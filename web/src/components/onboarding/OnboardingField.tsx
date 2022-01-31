@@ -9,9 +9,14 @@ import { GenericTextField, GenericTextFieldProps } from "../GenericTextField";
 export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "onValidation" | "fieldName"> {
   fieldName: ProfileFields;
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
+  headerAriaLevel?: number;
 }
 
-export const OnboardingField = ({ fieldName, ...props }: OnboardingProps): ReactElement => {
+export const OnboardingField = ({
+  fieldName,
+  headerAriaLevel = 2,
+  ...props
+}: OnboardingProps): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const onValidation = (fieldName: string, invalid: boolean): void => {
@@ -30,7 +35,7 @@ export const OnboardingField = ({ fieldName, ...props }: OnboardingProps): React
     });
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
     <div>
