@@ -1,29 +1,6 @@
 version: 2.1
 
 commands:
-  bootstrap-code-amplify:
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v5-yarn-deploy-deps-{{ checksum "yarn.lock" }}
-            - v5-yarn-deps-{{ checksum "yarn.lock" }}
-            - v5-yarn-deploy-deps-
-            - v5-yarn-deps-
-      - install-amplify
-      - run:
-          name: Install yarn packages
-          command: yarn install
-
-  install-amplify:
-    steps:
-      - setup-npm-global
-      - run:
-          name: Install Amplify
-          command: |
-            export PATH=~/.npm-global/bin:$PATH
-            npm install -g @aws-amplify/cli@7.6.7
-
   bootstrap-code:
     steps:
       - checkout
@@ -82,19 +59,6 @@ commands:
             docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-${CIRCLE_SHA1}
             docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator
             docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-latest
-
-  configure-and-build-amplify:
-    steps:
-      - install-amplify
-      - configure
-      - run:
-          name: Configure Amplify
-          command: |
-            export PATH=~/.npm-global/bin:$PATH
-            ./scripts/amplify-ci/configure.sh
-      - run:
-          name: Build
-          command: yarn build
 
   configure-and-build:
     steps:
@@ -204,14 +168,6 @@ commands:
           name: Deploy Serverless
           command: yarn workspace @businessnjgovnavigator/api serverless deploy --verbose --stage ${STAGE} --region us-east-1
 
-  deploy-amplify:
-    steps:
-      - run:
-          name: Deploy Amplify
-          command: |
-            export PATH=~/.npm-global/bin:$PATH
-            ./scripts/amplify-ci/publish.sh
-
   set-dev-env-vars:
     steps:
       - run:
@@ -286,12 +242,12 @@ commands:
       - run:
           name: Set Production Environment Variables
           command: |
-            echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
-            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD' >> $BASH_ENV
+            echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD_NEW' >> $BASH_ENV
+            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD_NEW' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_PROD' >> $BASH_ENV
-            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_PROD' >> $BASH_ENV
-            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_PROD' >> $BASH_ENV
-            echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_PROD' >> $BASH_ENV
+            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_PROD_NEW' >> $BASH_ENV
+            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_PROD_NEW' >> $BASH_ENV
+            echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_PROD_NEW' >> $BASH_ENV
             echo 'export LICENSE_STATUS_BASE_URL=$LICENSE_STATUS_BASE_URL_PROD' >> $BASH_ENV
             echo 'export FORMATION_API_BASE_URL=$FORMATION_API_BASE_URL_PROD' >> $BASH_ENV
             echo 'export FORMATION_API_KEY=$FORMATION_API_KEY_PROD' >> $BASH_ENV
@@ -301,17 +257,11 @@ commands:
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_PROD' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_PROD' >> $BASH_ENV
             echo 'export FEATURE_DISABLE_FORMATION=$FEATURE_DISABLE_FORMATION_PROD' >> $BASH_ENV
-            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PROD' >> $BASH_ENV
-            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PROD' >> $BASH_ENV
+            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEWPROD' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEWPROD' >> $BASH_ENV
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_PROD' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_PROD' >> $BASH_ENV
             echo 'export FEATURE_DISABLE_CANNABIS=$FEATURE_DISABLE_CANNABIS_PROD' >> $BASH_ENV
-
-  deploy-amplify-build:
-    steps:
-      - configure-and-build-amplify
-      - deploy-serverless
-      - deploy-amplify
 
   deploy:
     steps:
@@ -455,7 +405,6 @@ jobs:
       - store-deploy-cache
     environment:
       STAGE: dev
-      AMPLIFY_ENV: dev
       MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
 
   deploy-staging:
@@ -466,7 +415,6 @@ jobs:
       - deploy
     environment:
       STAGE: staging
-      AMPLIFY_ENV: staging
       MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
 
   deploy-production:
@@ -474,10 +422,9 @@ jobs:
       - image: cimg/node:14.19.1
     steps:
       - set-prod-env-vars
-      - deploy-amplify-build
+      - deploy
     environment:
       STAGE: prod
-      AMPLIFY_ENV: prod
       MYNJ_PROFILE_LINK: https://my.state.nj.us/portal/Desktop
 
   integration-tests:
