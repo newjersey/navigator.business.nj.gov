@@ -92,6 +92,7 @@ describe("updateLicenseStatus", () => {
 
     expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("NOT_STARTED");
     expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("NOT_STARTED");
+    expect(resultUserData.taskProgress["pharmacy-license"]).toEqual("NOT_STARTED");
 
     expect(stubUserDataClient.put).toHaveBeenCalledWith(resultUserData);
   });
@@ -112,6 +113,7 @@ describe("updateLicenseStatus", () => {
 
     expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("IN_PROGRESS");
     expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("IN_PROGRESS");
+    expect(resultUserData.taskProgress["pharmacy-license"]).toEqual("IN_PROGRESS");
   });
 
   it("updates the license task status to COMPLETED when license is active", async () => {
@@ -124,5 +126,6 @@ describe("updateLicenseStatus", () => {
 
     expect(resultUserData.taskProgress["apply-for-shop-license"]).toEqual("COMPLETED");
     expect(resultUserData.taskProgress["register-consumer-affairs"]).toEqual("COMPLETED");
+    expect(resultUserData.taskProgress["pharmacy-license"]).toEqual("COMPLETED");
   });
 });

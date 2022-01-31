@@ -23,6 +23,7 @@ export const updateLicenseStatusFactory = (
         ...args.userData.taskProgress,
         "apply-for-shop-license": args.taskStatus,
         "register-consumer-affairs": args.taskStatus,
+        "pharmacy-license": args.taskStatus,
       },
       licenseData: {
         nameAndAddress: args.nameAndAddress,
