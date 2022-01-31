@@ -38,16 +38,16 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           };
         } else {
           let errors = [] as FormationSubmitError[];
-          if (response.headers["content-type"].includes("application/json")) {
-            const apiError = response.data as ApiError[];
+          logger.LogInfo(`Formation - NICUSA - Response error received: ${JSON.stringify(response.data)}`);
+          if (Array.isArray(response.data)) {
+            const apiError = response.data as ApiErrorResponse;
             errors = apiError.map((error) => ({
               field: splitErrorField(error.Name),
               message: error.ErrorMessage,
               type: "FIELD",
             }));
           } else {
-            logger.LogInfo(`Formation - NICUSA - Response error received: ${response.data}`);
-            errors = [{ field: "", message: "Response error", type: "RESPONSE" }];
+            errors = [{ field: "", message: "Response Error", type: "RESPONSE" }];
           }
           return {
             success: false,
@@ -279,7 +279,6 @@ export type ApiError = {
   Valid: boolean;
   ErrorMessage: string;
   Name: string; // field with error
-  type: string;
 };
 
 export type ApiErrorResponse = ApiError[];
