@@ -126,7 +126,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
     });
   });
 
-  describe.only("Onboarding - owning flow", () => {
+  describe("Onboarding - owning flow", () => {
     describe("Step 1", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
@@ -138,12 +138,17 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       });
     });
     describe("Step 2", () => {
-      it.only("should pass the audits", () => {
+      it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
 
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
-        cy.get('input[aria-label="Date of formation"]').type("11/11/2011", { force: true });
+
+        cy.get('button[aria-label="Choose date"]').click();
+        cy.get('button:contains("2020")').click();
+        cy.get('button:contains("Jan")').click();
+        cy.get('button[aria-label="Jan 25, 2020"]').click();
+
         cy.get('input[aria-label="Entity id"]').type("1234567890");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
@@ -156,7 +161,12 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
-        cy.get('input[aria-label="Date of formation"]').type("11/11/2011", { force: true });
+
+        cy.get('button[aria-label="Choose date"]').click();
+        cy.get('button:contains("2020")').click();
+        cy.get('button:contains("Jan")').click();
+        cy.get('button[aria-label="Jan 25, 2020"]').click();
+
         cy.get('input[aria-label="Entity id"]').type("1234567890");
         clickNext();
 
@@ -175,7 +185,12 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
-        cy.get('input[aria-label="Date of formation"]').type("11/11/2011", { force: true });
+
+        cy.get('button[aria-label="Choose date"]').click();
+        cy.get('button:contains("2020")').click();
+        cy.get('button:contains("Jan")').click();
+        cy.get('button[aria-label="Jan 25, 2020"]').click();
+
         cy.get('input[aria-label="Entity id"]').type("1234567890");
         clickNext();
 
