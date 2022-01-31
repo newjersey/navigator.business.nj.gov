@@ -280,5 +280,47 @@ export default {
         },
       },
     },
+    task_business_name_check_availability: {
+      submit: {
+        view_business_name_availability: () => {
+          sendEvent("task_business_name_check_availability", "submit", "view_business_name_availability");
+        },
+      },
+    },
+    account_menu_my_profile: {
+      click: {
+        go_to_profile_screen: () => {
+          sendEvent("account_menu_my_profile", "click", "go_to_profile_screen");
+        },
+      },
+    },
+    account_menu_myNJ_account: {
+      click: {
+        go_to_myNJ_home: () => {
+          sendEvent("account_menu_myNJ_account", "click", "go_to_myNJ_home");
+        },
+      },
+    },
+    account_name: {
+      click: {
+        expand_account_menu: () => {
+          sendEvent("account_name", "click", "expand_account_menu");
+        },
+      },
+    },
+    onboarding_last_step: {
+      submit: {
+        finish_onboarding: () => {
+          sendEvent("onboarding_last_step", "submit", "finish_onboarding");
+        },
+      },
+    },
+    onboarding_first_step: {
+      arrive: {
+        arrive_from_myNJ_registration: () => {
+          sendEvent("onboarding_first_step", "arrive", "arrive_from_myNJ_registration");
+        },
+      },
+    },
   },
 };

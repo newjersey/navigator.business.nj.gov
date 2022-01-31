@@ -20,6 +20,12 @@ const Home = (): ReactElement => {
     if (userData?.formProgress === "COMPLETED") {
       router.replace("/roadmap");
     } else if (userData?.formProgress === "UNSTARTED") {
+      if (
+        !!process.env.MYNJ_PROFILE_LINK &&
+        document.referrer.includes(process.env.MYNJ_PROFILE_LINK.split("/", 3).join("/"))
+      ) {
+        analytics.event.onboarding_first_step.arrive.arrive_from_myNJ_registration();
+      }
       router.replace("/onboarding");
     } else if (userData === undefined && error != undefined) {
       router.replace("/roadmap");

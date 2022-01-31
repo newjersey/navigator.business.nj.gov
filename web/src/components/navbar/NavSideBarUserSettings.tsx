@@ -2,6 +2,7 @@ import { AuthButton } from "@/components/AuthButton";
 import { Icon } from "@/components/njwds/Icon";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import Link from "next/link";
@@ -17,7 +18,10 @@ export const NavSideBarUserSettings = (): ReactElement => {
       <Accordion
         elevation={0}
         expanded={accordionIsOpen}
-        onChange={() => setAccordionIsOpen(!accordionIsOpen)}
+        onChange={() => {
+          !accordionIsOpen && analytics.event.account_name.click.expand_account_menu();
+          setAccordionIsOpen(!accordionIsOpen);
+        }}
       >
         <AccordionSummary
           expandIcon={<Icon className="usa-icon--size-3 text-ink">expand_more</Icon>}
@@ -31,20 +35,27 @@ export const NavSideBarUserSettings = (): ReactElement => {
         <AccordionDetails>
           <div className="margin-left-2 margin-bottom-2">
             <div className="margin-bottom-2">
-              <a
-                target="_blank"
-                rel="noreferrer"
-                className={`text-no-underline override-text-base`}
-                href={process.env.MYNJ_PROFILE_LINK || ""}
+              <button
+                className={`clear-button override-text-base`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
+                  window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
+                }}
               >
                 {NavDefaults.myNJAccountText}
-              </a>
+              </button>
             </div>
             <div className="margin-bottom-2">
               <Link href="/profile" passHref>
-                <a href="/profile" className="text-no-underline override-text-base">
+                <button
+                  className="clear-button override-text-base"
+                  onClick={() => {
+                    analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+                  }}
+                >
                   {NavDefaults.profileLinkText}
-                </a>
+                </button>
               </Link>
             </div>
             <AuthButton className="clear-button text-base text-left" />

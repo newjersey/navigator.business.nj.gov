@@ -9,11 +9,11 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { NameAvailability, Task } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { FormControl, TextField } from "@mui/material";
 import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { Button } from "../njwds-extended/Button";
-
 interface Props {
   task: Task;
 }
@@ -51,6 +51,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
 
     setError(undefined);
     setIsLoading(true);
+    analytics.event.task_business_name_check_availability.submit.view_business_name_availability();
 
     api
       .searchBusinessName(name)

@@ -24,6 +24,7 @@ import {
   UserContentType,
   UserDisplayContent,
 } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import {
   featureFlags,
@@ -229,6 +230,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         headerRef.current?.focus();
       });
     } else {
+      analytics.event.onboarding_last_step.submit.finish_onboarding();
       update({ ...userData, profileData: newProfileData, formProgress: "COMPLETED" }).then(async () => {
         if (newProfileData.hasExistingBusiness) {
           await router.push("/dashboard");

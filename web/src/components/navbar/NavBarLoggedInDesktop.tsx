@@ -2,6 +2,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { AuthContext } from "@/pages/_app";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
@@ -20,10 +21,14 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   const toggleDropdown = (): void => {
+    if (!open) {
+      analytics.event.account_name.click.expand_account_menu();
+    }
     setOpen((prevOpen) => !prevOpen);
   };
 
   const handleProfileClick = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
+    analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
     window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
     handleClose(event);
   };
@@ -96,7 +101,12 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
                           {NavDefaults.myNJAccountText}
                         </button>
                       </MenuItem>
-                      <MenuItem onClick={() => router.push("/profile")}>
+                      <MenuItem
+                        onClick={() => {
+                          analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+                          router.push("/profile");
+                        }}
+                      >
                         <button className="clear-button font-body-2xs text-bold text-primary">
                           {NavDefaults.profileLinkText}
                         </button>
