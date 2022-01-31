@@ -101,6 +101,10 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   const taxId = (type: UserContentType) => getTextFieldContent("tax-id.md", type);
   const ownership = (type: UserContentType) => getTextFieldContent("ownership.md", type);
   const existingEmployees = (type: UserContentType) => getTextFieldContent("existing-employees.md", type);
+  const taxPin = (type: UserContentType) => getTextFieldContent("tax-pin.md", type);
+  const businessProfile = (type: UserContentType) => getTextFieldContent("business-profile.md", type);
+  const businessInformation = (type: UserContentType) => getTextFieldContent("business-information.md", type);
+  const businessReferences = (type: UserContentType) => getTextFieldContent("business-references.md", type);
 
   const fieldFunctions: Record<
     keyof StartingFlowContent | keyof OwningFlowContent | keyof ProfileContent,
@@ -118,6 +122,10 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     existingEmployees,
     industry,
     legalStructure,
+    taxPin,
+    businessProfile,
+    businessInformation,
+    businessReferences,
   };
 
   const startingFlowContent: StartingFlowContent = Object.keys(fieldFunctions)

@@ -1,4 +1,4 @@
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
+import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import React, { ReactElement, ReactNode } from "react";
 import { OnboardingNumericField } from "./OnboardingNumericField";
@@ -10,8 +10,8 @@ interface Props {
   headerAriaLevel?: number;
 }
 
-export const OnboardingExistingEmployees = (props: Props): ReactElement => {
-  const fieldName = "existingEmployees";
+export const OnboardingTaxPin = (props: Props): ReactElement => {
+  const fieldName = "taxPin";
 
   return (
     <>
@@ -19,10 +19,9 @@ export const OnboardingExistingEmployees = (props: Props): ReactElement => {
         onValidation={props.onValidation}
         error={props.fieldStates[fieldName].invalid}
         fieldName={fieldName}
-        maxLength={7}
-        minLength={1}
-        validationText={OnboardingDefaults.errorTextRequiredExistingEmployees}
-        required={true}
+        maxLength={4}
+        minLength={4}
+        validationText={ProfileDefaults.taxPinErrorText}
         headerAriaLevel={props.headerAriaLevel}
       />
       {props.children}

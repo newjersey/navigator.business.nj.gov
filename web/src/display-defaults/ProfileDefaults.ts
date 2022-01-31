@@ -1,5 +1,5 @@
 export const ProfileDefaults: Record<string, string> = {
-  pageTitle: "My Profile",
+  pageTitle: "Business Profile",
   saveButtonText: "Save",
   backButtonText: "Cancel",
   successTextHeader: "Profile Updated",
@@ -10,4 +10,5 @@ export const ProfileDefaults: Record<string, string> = {
   escapeModalBody: "You have unsaved changes that will be lost.",
   escapeModalReturn: "Continue without saving",
   escapeModalEscape: "Go back",
+  taxPinErrorText: "Tax PIN must be 4 digits",
 };

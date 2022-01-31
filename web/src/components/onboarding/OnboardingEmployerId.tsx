@@ -9,15 +9,16 @@ import { OnboardingNumericField } from "./OnboardingNumericField";
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
+  headerAriaLevel?: number;
 }
 
-export const OnboardingEmployerId = (props: Props): ReactElement => {
+export const OnboardingEmployerId = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const fieldName = "employerId";
 
   return (
     <>
-      <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
+      <div role="heading" aria-level={headerAriaLevel} className="h3-styling margin-bottom-2">
         {state.displayContent.employerId.headingBolded}{" "}
         <span className="text-light">{state.displayContent.employerId.headingNotBolded}</span>
       </div>
@@ -30,6 +31,8 @@ export const OnboardingEmployerId = (props: Props): ReactElement => {
         })}
         visualFilter={displayAsEin}
         maxLength={9}
+        minLength={9}
+        headerAriaLevel={headerAriaLevel}
       />
     </>
   );

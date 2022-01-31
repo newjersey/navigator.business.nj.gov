@@ -1,9 +1,9 @@
+import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingHasExistingBusiness } from "@/components/onboarding/OnboardingHasExistingBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
-import { OnboardingBusinessName } from "@/components/onboarding/OnboardingName";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared";

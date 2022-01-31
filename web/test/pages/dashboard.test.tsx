@@ -1,4 +1,5 @@
 import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
+import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { DashboardDisplayContent, OperateReference, Opportunity } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
@@ -10,11 +11,13 @@ import {
 } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { render, RenderResult, within } from "@testing-library/react";
+import { render, RenderResult, waitFor, within } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
+import { useMockRouter } from "../mock/mockRouter";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("next/router");
 
 describe("dashboard", () => {
   const emptyDisplayContent: DashboardDisplayContent = {
@@ -26,6 +29,7 @@ describe("dashboard", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockUserData({});
+    useMockRouter({});
   });
 
   const renderPage = (overrides: {
@@ -151,5 +155,11 @@ describe("dashboard", () => {
     const subject = renderPage({ opportunities });
     expect(subject.getByText("a bo")).toBeInTheDocument();
     expect(subject.getByText("a li")).toBeInTheDocument();
+  });
+
+  it("shows toast alert when success query is true", async () => {
+    useMockRouter({ isReady: true, query: { success: "true" } });
+    const subject = renderPage({});
+    await waitFor(() => expect(subject.getByText(ProfileDefaults.successTextHeader)).toBeInTheDocument());
   });
 });

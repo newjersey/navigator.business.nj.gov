@@ -6,6 +6,7 @@ import { OnboardingField } from "./OnboardingField";
 interface Props {
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
   fieldStates?: ProfileFieldErrorMap;
+  headerAriaLevel?: number;
 }
 
 export const OnboardingBusinessName = (props: Props): ReactElement => {
@@ -16,6 +17,7 @@ export const OnboardingBusinessName = (props: Props): ReactElement => {
       error={props.fieldStates ? props.fieldStates.businessName.invalid : false}
       required={true}
       validationText={OnboardingDefaults.errorTextRequiredBusinessName}
+      headerAriaLevel={props.headerAriaLevel}
     />
   );
 };

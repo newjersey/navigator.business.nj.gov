@@ -19,8 +19,13 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { LookupIndustryById, Municipality } from "@businessnjgovnavigator/shared";
-import { createEmptyUserData, UserData } from "@businessnjgovnavigator/shared/";
+import {
+  createEmptyUserData,
+  LookupIndustryById,
+  LookupOwnershipTypeById,
+  Municipality,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import React from "react";
 
@@ -65,177 +70,401 @@ describe("profile", () => {
     );
   };
 
-  it("prefills form from existing user data", async () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        businessName: "Applebees",
-        industryId: "cosmetology",
-        legalStructureId: "c-corporation",
-        entityId: "1234567890",
-        employerId: "123456789",
-        taxId: "123456790",
-        notes: "whats appppppp",
-        municipality: generateMunicipality({
-          displayName: "Newark",
-        }),
-      }),
-    });
-
-    subject = renderPage({ userData });
-    expect(getBusinessNameValue()).toEqual("Applebees");
-
-    expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
-
-    expect(getLegalStructureValue()).toEqual("c-corporation");
-
-    expect(getMunicipalityValue()).toEqual("Newark");
-    expect(getEmployerIdValue()).toEqual("12-3456789");
-    expect(getEntityIdValue()).toEqual("1234567890");
-    expect(getTaxIdValue()).toEqual("123456790");
-    expect(getNotesValue()).toEqual("whats appppppp");
-  });
-
-  it("user is able to save and is redirected to roadmap", async () => {
-    subject = renderPage({});
-    fillText("Business name", "Cool Computers");
-    clickSave();
-    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap?success=true"));
-  });
-
-  it("updates the user data on save", async () => {
-    const initialUserData = createEmptyUserData(generateUser({}));
-    const newark = generateMunicipality({ displayName: "Newark" });
-    subject = renderPage({ userData: initialUserData, municipalities: [newark] });
-    fillText("Business name", "Cool Computers");
-    selectByText("Location", newark.displayName);
-    selectByValue("Industry", "e-commerce");
-    selectByValue("Legal structure", "c-corporation");
-    fillText("Entity id", "0234567890");
-    fillText("Tax id", "023456790");
-    fillText("Employer id", "02-3456780");
-    fillText("Notes", "whats appppppp");
-    clickSave();
-    await waitFor(() => expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument());
-    expect(currentUserData()).toEqual({
-      ...initialUserData,
-      formProgress: "COMPLETED",
-      profileData: {
-        ...initialUserData.profileData,
-        businessName: "Cool Computers",
-        industryId: "e-commerce",
-        homeBasedBusiness: true,
-        legalStructureId: "c-corporation",
-        municipality: newark,
-        taxId: "023456790",
-        entityId: "0234567890",
-        employerId: "023456780",
-        notes: "whats appppppp",
-      },
-    });
-  });
-
-  it("builds and sets roadmap on save", async () => {
-    const profileData = generateProfileData({});
-    const mockSetRoadmap = jest.fn();
-
-    subject = render(
-      withRoadmap(
-        <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
-          <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
-        </WithStatefulUserData>,
-        undefined,
-        undefined,
-        mockSetRoadmap
-      )
+  it("shows loading page if page has not loaded yet", () => {
+    const subject = render(
+      <WithStatefulUserData initialUserData={undefined}>
+        <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
+      </WithStatefulUserData>
     );
-    clickSave();
-    await waitFor(() => expect(currentUserData()));
-    await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(1));
+
+    expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
+    expect(subject.queryByText(ProfileDefaults.pageTitle)).not.toBeInTheDocument();
+    expect(subject.queryByText(ProfileDefaults.pageTitle)).not.toBeInTheDocument();
   });
 
-  it("prevents user from saving if they have not selected a location", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
-    subject = renderPage({ municipalities: [newark] });
-    fillText("Location", "");
-    fireEvent.blur(subject.getByLabelText("Location"));
-    clickSave();
-    expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
-    await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
-    selectByText("Location", newark.displayName);
-    await waitFor(() =>
-      expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).not.toBeInTheDocument()
-    );
-  });
-
-  it("entity-id field existing depends on legal structure", async () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        legalStructureId: "general-partnership",
-      }),
+  describe("starting new business", () => {
+    it("user is able to save and is redirected to roadmap", async () => {
+      subject = renderPage({});
+      fillText("Business name", "Cool Computers");
+      clickSave();
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap?success=true"));
     });
-    subject = renderPage({ userData });
-    expect(subject.queryByLabelText("Entity id")).not.toBeInTheDocument();
-  });
 
-  it("prevents user from saving if they have not correctly modified validated fields", async () => {
-    subject = renderPage({});
-    fillText("Employer id", "123490");
-    fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
-    clickSave();
-    await waitFor(() => {
-      expect(
-        subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "9" }))
-      ).toBeInTheDocument();
-      expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    it("prevents user from going back to roadmap if there are unsaved changes", async () => {
+      subject = renderPage({});
+      fillText("Business name", "Cool Computers");
+      clickBack();
+      expect(subject.getByText(ProfileDefaults.escapeModalReturn)).toBeInTheDocument();
     });
-  });
 
-  it("user is able to go back to roadmap", async () => {
-    subject = renderPage({});
-    clickBack();
-    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
-  });
+    it("returns user to profile page from un-saved changes modal", async () => {
+      subject = renderPage({});
+      fillText("Business name", "Cool Computers");
+      clickBack();
+      fireEvent.click(subject.getByText(ProfileDefaults.escapeModalEscape));
+      fillText("Business name", "Cool Computers2");
+    });
 
-  it("prevents user from going back to roadmap if there are unsaved changes", async () => {
-    subject = renderPage({});
-    fillText("Business name", "Cool Computers");
-    clickBack();
-    expect(subject.getByText(ProfileDefaults.escapeModalReturn)).toBeInTheDocument();
-  });
+    it("updates the user data on save", async () => {
+      const initialUserData = createEmptyUserData(generateUser({}));
+      const newark = generateMunicipality({ displayName: "Newark" });
+      subject = renderPage({ userData: initialUserData, municipalities: [newark] });
+      fillText("Business name", "Cool Computers");
+      selectByText("Location", newark.displayName);
+      selectByValue("Industry", "e-commerce");
+      selectByValue("Legal structure", "c-corporation");
+      fillText("Entity id", "0234567890");
+      fillText("Tax id", "023456790");
+      fillText("Employer id", "02-3456780");
+      fillText("Notes", "whats appppppp");
+      clickSave();
 
-  it("returns user to profile page from un-saved changes modal", async () => {
-    subject = renderPage({});
-    fillText("Business name", "Cool Computers");
-    clickBack();
-    fireEvent.click(subject.getByText(ProfileDefaults.escapeModalEscape));
-    fillText("Business name", "Cool Computers2");
-  });
+      await waitFor(() => {
+        expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+        expect(currentUserData()).toEqual({
+          ...initialUserData,
+          formProgress: "COMPLETED",
+          profileData: {
+            ...initialUserData.profileData,
+            businessName: "Cool Computers",
+            industryId: "e-commerce",
+            homeBasedBusiness: true,
+            legalStructureId: "c-corporation",
+            municipality: newark,
+            taxId: "023456790",
+            entityId: "0234567890",
+            employerId: "023456780",
+            notes: "whats appppppp",
+          },
+        });
+      });
+    });
 
-  it("returns user to roadmap from un-saved changes modal", async () => {
-    const initialUserData = createEmptyUserData(generateUser({}));
-    const newark = generateMunicipality({ displayName: "Newark" });
-    subject = renderPage({ userData: initialUserData, municipalities: [newark] });
-    selectByText("Location", newark.displayName);
-    clickBack();
-    fireEvent.click(subject.getByText(ProfileDefaults.escapeModalReturn));
-    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
-    await waitFor(() => expect(() => currentUserData()).toThrowError());
-  });
-
-  it("disables entityID field if formation getFiling success", () => {
-    const userData = generateUserData({
-      formationData: generateFormationData({
-        getFilingResponse: generateGetFilingResponse({
-          success: true,
+    it("disables entityID field if formation getFiling success", () => {
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({
+            success: true,
+          }),
         }),
-      }),
-      profileData: generateProfileData({
-        legalStructureId: "c-corporation",
-        entityId: "some-id",
-      }),
+        profileData: generateProfileData({
+          legalStructureId: "c-corporation",
+          entityId: "some-id",
+        }),
+      });
+
+      subject = renderPage({ userData });
+      expect(subject.getByLabelText("Entity id").getAttribute("disabled")).not.toBeNull();
     });
-    subject = renderPage({ userData });
-    expect(subject.getByLabelText("Entity id").getAttribute("disabled")).not.toBeNull();
+
+    it("prevents user from saving if they have not selected a location", async () => {
+      const newark = generateMunicipality({ displayName: "Newark" });
+      subject = renderPage({ municipalities: [newark] });
+      fillText("Location", "");
+      fireEvent.blur(subject.getByLabelText("Location"));
+      clickSave();
+      expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
+      await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
+      selectByText("Location", newark.displayName);
+      await waitFor(() =>
+        expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).not.toBeInTheDocument()
+      );
+    });
+
+    it("entity-id field existing depends on legal structure", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: "general-partnership",
+        }),
+      });
+      subject = renderPage({ userData });
+      expect(subject.queryByLabelText("Entity id")).not.toBeInTheDocument();
+    });
+
+    it("prevents user from saving if they partially entered Employer Id", async () => {
+      subject = renderPage({});
+      fillText("Employer id", "123490");
+      fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
+      clickSave();
+      await waitFor(() => {
+        expect(
+          subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "9" }))
+        ).toBeInTheDocument();
+        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      });
+    });
+
+    it("user is able to go back to roadmap", async () => {
+      subject = renderPage({});
+      clickBack();
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+    });
+
+    it("prefills form from existing user data", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessName: "Applebees",
+          industryId: "cosmetology",
+          legalStructureId: "c-corporation",
+          entityId: "1234567890",
+          employerId: "123456789",
+          taxId: "123456790",
+          notes: "whats appppppp",
+          municipality: generateMunicipality({
+            displayName: "Newark",
+          }),
+        }),
+      });
+
+      subject = renderPage({ userData });
+      expect(getBusinessNameValue()).toEqual("Applebees");
+
+      expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
+
+      expect(getLegalStructureValue()).toEqual("c-corporation");
+
+      expect(getMunicipalityValue()).toEqual("Newark");
+      expect(getEmployerIdValue()).toEqual("12-3456789");
+      expect(getEntityIdValue()).toEqual("1234567890");
+      expect(getTaxIdValue()).toEqual("123456790");
+      expect(getNotesValue()).toEqual("whats appppppp");
+    });
+
+    it("builds and sets roadmap on save", async () => {
+      const profileData = generateProfileData({});
+      const mockSetRoadmap = jest.fn();
+
+      subject = render(
+        withRoadmap(
+          <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
+            <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
+          </WithStatefulUserData>,
+          undefined,
+          undefined,
+          mockSetRoadmap
+        )
+      );
+      clickSave();
+      await waitFor(() => expect(currentUserData()));
+      await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(1));
+    });
+
+    it("returns user to roadmap from un-saved changes modal", async () => {
+      const initialUserData = createEmptyUserData(generateUser({}));
+      const newark = generateMunicipality({ displayName: "Newark" });
+      subject = renderPage({ userData: initialUserData, municipalities: [newark] });
+      selectByText("Location", newark.displayName);
+      clickBack();
+      fireEvent.click(subject.getByText(ProfileDefaults.escapeModalReturn));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+      await waitFor(() => expect(() => currentUserData()).toThrowError());
+    });
+  });
+
+  describe("has existing business", () => {
+    it("user is able to save and is redirected to dashboard", async () => {
+      const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
+
+      subject = renderPage({
+        userData: userData,
+      });
+
+      fillText("Business name", "Cool Computers");
+      clickSave();
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true"));
+    });
+
+    it("prevents user from going back to dashboard if there are unsaved changes", async () => {
+      const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
+
+      subject = renderPage({
+        userData: userData,
+      });
+      fillText("Business name", "Cool Computers");
+      clickBack();
+      expect(subject.getByText(ProfileDefaults.escapeModalReturn)).toBeInTheDocument();
+    });
+
+    it("returns user to profile page from un-saved changes modal", async () => {
+      const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
+
+      subject = renderPage({
+        userData: userData,
+      });
+      fillText("Business name", "Cool Computers");
+      clickBack();
+      fireEvent.click(subject.getByText(ProfileDefaults.escapeModalEscape));
+      fillText("Business name", "Cool Computers2");
+    });
+
+    it("updates the user data on save", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({ hasExistingBusiness: true, industryId: undefined }),
+      });
+      const newark = generateMunicipality({ displayName: "Newark" });
+
+      subject = renderPage({ userData: userData, municipalities: [newark] });
+
+      fillText("Business name", "Cool Computers");
+      selectByValue("Industry", "e-commerce");
+      fillText("Existing employees", "123");
+      selectByText("Location", newark.displayName);
+      selectByValue("Ownership", "veteran-owned");
+      selectByValue("Ownership", "woman-owned");
+      fillText("Employer id", "02-3456780");
+      fillText("Entity id", "0234567890");
+      fillText("Tax id", "023456790");
+      fillText("Notes", "whats appppppp");
+      fillText("Tax pin", "6666");
+      clickSave();
+
+      await waitFor(() => {
+        expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+        expect(currentUserData()).toEqual({
+          ...userData,
+          formProgress: "COMPLETED",
+          profileData: {
+            ...userData.profileData,
+            businessName: "Cool Computers",
+            industryId: "e-commerce",
+            homeBasedBusiness: true,
+            existingEmployees: "123",
+            ownershipTypeIds: ["veteran-owned", "woman-owned"],
+            municipality: newark,
+            taxId: "023456790",
+            entityId: "0234567890",
+            employerId: "023456780",
+            notes: "whats appppppp",
+            taxPin: "6666",
+          },
+        });
+      });
+    });
+
+    it("prefills form from existing user data", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: true,
+          businessName: "Applebees",
+          industryId: "e-commerce",
+          entityId: "1234567890",
+          employerId: "123456789",
+          taxId: "123456790",
+          notes: "whats appppppp",
+          municipality: generateMunicipality({
+            displayName: "Newark",
+          }),
+          ownershipTypeIds: ["veteran-owned", "woman-owned"],
+          homeBasedBusiness: false,
+          existingEmployees: "123",
+          taxPin: "6666",
+        }),
+      });
+
+      const veteran = LookupOwnershipTypeById("veteran-owned").name;
+      const woman = LookupOwnershipTypeById("woman-owned").name;
+
+      subject = renderPage({ userData });
+
+      expect(getBusinessNameValue()).toEqual("Applebees");
+      expect(getIndustryValue()).toEqual(LookupIndustryById("e-commerce").name);
+      expect(getEmployerIdValue()).toEqual("12-3456789");
+      expect(getEntityIdValue()).toEqual("1234567890");
+      expect(getTaxIdValue()).toEqual("123456790");
+      expect(getNotesValue()).toEqual("whats appppppp");
+      expect(getMunicipalityValue()).toEqual("Newark");
+      expect(subject.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
+      expect(getExistingEmployeesValue()).toEqual("123");
+      expect(getTaxPinValue()).toEqual("6666");
+      expect(getRadioButtonFromFormControlLabel("home-based-business-false")).toBeChecked();
+    });
+
+    it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({ hasExistingBusiness: true }),
+      });
+      subject = renderPage({ userData: userData });
+
+      fillText("Tax pin", "");
+      fireEvent.blur(subject.getByLabelText("Tax pin"));
+      expect(subject.queryByText(ProfileDefaults.taxPinErrorText)).not.toBeInTheDocument();
+
+      fillText("Tax pin", "123");
+      fireEvent.blur(subject.getByLabelText("Tax pin"));
+      await waitFor(() => {
+        expect(subject.queryByText(ProfileDefaults.taxPinErrorText)).toBeInTheDocument();
+      });
+
+      fillText("Tax pin", "1234");
+      fireEvent.blur(subject.getByLabelText("Tax pin"));
+      await waitFor(() => {
+        expect(subject.queryByText(ProfileDefaults.taxPinErrorText)).not.toBeInTheDocument();
+      });
+    });
+
+    it("prevents user from saving if they partially entered Employer Id", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({ hasExistingBusiness: true }),
+      });
+      subject = renderPage({ userData: userData });
+
+      fillText("Employer id", "123490");
+      fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
+      clickSave();
+      await waitFor(() => {
+        expect(
+          subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "9" }))
+        ).toBeInTheDocument();
+        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      });
+    });
+
+    it("user is able to go back to dashboard", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({ hasExistingBusiness: true }),
+      });
+      subject = renderPage({ userData: userData });
+
+      clickBack();
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard"));
+    });
+
+    it("builds and sets roadmap on save", async () => {
+      const profileData = generateProfileData({ hasExistingBusiness: true });
+      const mockSetRoadmap = jest.fn();
+
+      subject = render(
+        withRoadmap(
+          <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
+            <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
+          </WithStatefulUserData>,
+          undefined,
+          undefined,
+          mockSetRoadmap
+        )
+      );
+      clickSave();
+      await waitFor(() => {
+        expect(currentUserData());
+        expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    it("returns user to dashboard from un-saved changes modal", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({ hasExistingBusiness: true }),
+      });
+
+      const newark = generateMunicipality({ displayName: "Newark" });
+      subject = renderPage({ userData: userData, municipalities: [newark] });
+      selectByText("Location", newark.displayName);
+      clickBack();
+      fireEvent.click(subject.getByText(ProfileDefaults.escapeModalReturn));
+      await waitFor(() => {
+        expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard");
+        expect(() => currentUserData()).toThrowError();
+      });
+    });
   });
 
   const fillText = (label: string, value: string) => {
@@ -281,4 +510,12 @@ describe("profile", () => {
 
   const getLegalStructureValue = (): string =>
     (subject.queryByTestId("legal-structure") as HTMLInputElement)?.value;
+
+  const getExistingEmployeesValue = (): string =>
+    (subject.getByLabelText("Existing employees") as HTMLInputElement).value;
+
+  const getTaxPinValue = (): string => (subject.getByLabelText("Tax pin") as HTMLInputElement).value;
+
+  const getRadioButtonFromFormControlLabel = (dataTestId: string): HTMLInputElement =>
+    within(subject.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
 });

@@ -5,6 +5,7 @@ import React, { ReactElement } from "react";
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
+  headerAriaLevel?: number;
 }
 
 export const OnboardingTaxId = (props: Props): ReactElement => {
@@ -16,6 +17,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
       error={props.fieldStates[fieldName].invalid}
       fieldName={fieldName}
       maxLength={9}
+      headerAriaLevel={props.headerAriaLevel}
     />
   );
 };

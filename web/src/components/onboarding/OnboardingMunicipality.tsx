@@ -13,9 +13,10 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
   h3Heading?: boolean;
+  headerAriaLevel?: number;
 }
 
-export const OnboardingMunicipality = (props: Props): ReactElement => {
+export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
@@ -34,7 +35,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
     });
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
     <>
@@ -55,7 +56,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
 
         {isHomeBasedBusinessApplicable(state.profileData.industryId) && (
           <div className="margin-top-3">
-            <OnboardingHomeBasedBusiness h3Heading={props.h3Heading} />
+            <OnboardingHomeBasedBusiness h3Heading={props.h3Heading} headerAriaLevel={headerAriaLevel} />
           </div>
         )}
       </div>

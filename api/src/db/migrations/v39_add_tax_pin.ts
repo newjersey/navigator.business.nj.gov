@@ -1,50 +1,47 @@
-import { v37UserData } from "./v37_add_dateofformation";
+import { v38UserData } from "./v38_swap_certification_for_ownership";
 
-export interface v38UserData {
-  user: v38BusinessUser;
-  profileData: v38ProfileData;
-  formProgress: v38FormProgress;
-  taskProgress: Record<string, v38TaskProgress>;
-  licenseData: v38LicenseData | undefined;
-  preferences: v38Preferences;
-  taxFilingData: v38TaxFilingData;
-  formationData: v38FormationData;
+export interface v39UserData {
+  user: v39BusinessUser;
+  profileData: v39ProfileData;
+  formProgress: v39FormProgress;
+  taskProgress: Record<string, v39TaskProgress>;
+  licenseData: v39LicenseData | undefined;
+  preferences: v39Preferences;
+  taxFilingData: v39TaxFilingData;
+  formationData: v39FormationData;
   version: number;
 }
 
-export const migrate_v37_to_v38 = (v37Data: v37UserData): v38UserData => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { certificationIds, ...profileData } = v37Data.profileData;
-
+export const migrate_v38_to_v39 = (v38Data: v38UserData): v39UserData => {
   return {
-    ...v37Data,
-    profileData: { ...profileData, ownershipTypeIds: [] },
-    version: 38,
+    ...v38Data,
+    profileData: { ...v38Data.profileData, taxPin: undefined },
+    version: 39,
   };
 };
 
-// ---------------- v38 types ----------------
+// ---------------- v39 types ----------------
 
-type v38TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
-type v38FormProgress = "UNSTARTED" | "COMPLETED";
+type v39TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+type v39FormProgress = "UNSTARTED" | "COMPLETED";
 
-type v38BusinessUser = {
+type v39BusinessUser = {
   name?: string;
   email: string;
   id: string;
   receiveNewsletter: boolean;
   userTesting: boolean;
-  externalStatus: v38ExternalStatus;
+  externalStatus: v39ExternalStatus;
   myNJUserKey?: string;
   intercomHash?: string;
 };
 
-interface v38ProfileData {
+interface v39ProfileData {
   hasExistingBusiness: boolean | undefined;
   businessName: string;
   industryId: string | undefined;
   legalStructureId: string | undefined;
-  municipality: v38Municipality | undefined;
+  municipality: v39Municipality | undefined;
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
   constructionRenovationPlan: boolean | undefined;
@@ -55,55 +52,56 @@ interface v38ProfileData {
   notes: string;
   ownershipTypeIds: string[];
   existingEmployees: string | undefined;
+  taxPin: string | undefined;
 }
 
-type v38Municipality = {
+type v39Municipality = {
   name: string;
   displayName: string;
   county: string;
   id: string;
 };
 
-type v38TaxFilingData = {
-  entityIdStatus: v38EntityIdStatus;
-  filings: v38TaxFiling[];
+type v39TaxFilingData = {
+  entityIdStatus: v39EntityIdStatus;
+  filings: v39TaxFiling[];
 };
 
-type v38EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
+type v39EntityIdStatus = "UNKNOWN" | "EXISTS_AND_REGISTERED" | "EXISTS_NOT_REGISTERED" | "NOT_FOUND";
 
-type v38TaxFiling = {
+type v39TaxFiling = {
   identifier: string;
   dueDate: string;
 };
 
-type v38NameAndAddress = {
+type v39NameAndAddress = {
   name: string;
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
 };
 
-type v38LicenseData = {
-  nameAndAddress: v38NameAndAddress;
+type v39LicenseData = {
+  nameAndAddress: v39NameAndAddress;
   completedSearch: boolean;
   lastCheckedStatus: string;
-  status: v38LicenseStatus;
-  items: v38LicenseStatusItem[];
+  status: v39LicenseStatus;
+  items: v39LicenseStatusItem[];
 };
 
-type v38Preferences = {
-  roadmapOpenSections: v38SectionType[];
+type v39Preferences = {
+  roadmapOpenSections: v39SectionType[];
   roadmapOpenSteps: number[];
 };
 
-type v38LicenseStatusItem = {
+type v39LicenseStatusItem = {
   title: string;
-  status: v38CheckoffStatus;
+  status: v39CheckoffStatus;
 };
 
-type v38CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+type v39CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
-type v38LicenseStatus =
+type v39LicenseStatus =
   | "ACTIVE"
   | "PENDING"
   | "UNKNOWN"
@@ -117,30 +115,30 @@ type v38LicenseStatus =
   | "VOLUNTARY_SURRENDER"
   | "WITHDRAWN";
 
-type v38SectionType = "PLAN" | "START" | "OPERATE";
+type v39SectionType = "PLAN" | "START" | "OPERATE";
 
-type v38ExternalStatus = {
-  newsletter?: v38NewsletterResponse;
-  userTesting?: v38UserTestingResponse;
+type v39ExternalStatus = {
+  newsletter?: v39NewsletterResponse;
+  userTesting?: v39UserTestingResponse;
 };
 
-interface v38NewsletterResponse {
+interface v39NewsletterResponse {
   success?: boolean;
-  status: v38NewsletterStatus;
+  status: v39NewsletterStatus;
 }
 
-interface v38UserTestingResponse {
+interface v39UserTestingResponse {
   success?: boolean;
-  status: v38UserTestingStatus;
+  status: v39UserTestingStatus;
 }
 
-type v38NewsletterStatus = typeof newsletterStatusList[number];
+type v39NewsletterStatus = typeof newsletterStatusList[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v38UserTestingStatus = typeof userTestingStatusList[number];
+type v39UserTestingStatus = typeof userTestingStatusList[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -152,13 +150,13 @@ const newsletterStatusList = [
   "QUESTION_WARNING",
 ] as const;
 
-interface v38FormationData {
-  formationFormData: v38FormationFormData;
-  formationResponse: v38FormationSubmitResponse | undefined;
-  getFilingResponse: v38GetFilingResponse | undefined;
+interface v39FormationData {
+  formationFormData: v39FormationFormData;
+  formationResponse: v39FormationSubmitResponse | undefined;
+  getFilingResponse: v39GetFilingResponse | undefined;
 }
 
-interface v38FormationMember {
+interface v39FormationMember {
   name: string;
   addressLine1: string;
   addressLine2: string;
@@ -167,8 +165,8 @@ interface v38FormationMember {
   addressZipCode: string;
 }
 
-interface v38FormationFormData {
-  businessSuffix: v38BusinessSuffix | undefined;
+interface v39FormationFormData {
+  businessSuffix: v39BusinessSuffix | undefined;
   businessStartDate: string;
   businessAddressLine1: string;
   businessAddressLine2: string;
@@ -183,10 +181,10 @@ interface v38FormationFormData {
   agentOfficeAddressCity: string;
   agentOfficeAddressState: string;
   agentOfficeAddressZipCode: string;
-  members: v38FormationMember[];
+  members: v39FormationMember[];
   signer: string;
   additionalSigners: string[];
-  paymentType: v38PaymentType;
+  paymentType: v39PaymentType;
   annualReportNotification: boolean;
   corpWatchNotification: boolean;
   officialFormationDocument: boolean;
@@ -197,9 +195,9 @@ interface v38FormationFormData {
   contactPhoneNumber: string;
 }
 
-type v38PaymentType = "CC" | "ACH" | undefined;
+type v39PaymentType = "CC" | "ACH" | undefined;
 
-type v38BusinessSuffix =
+type v39BusinessSuffix =
   | "LLC"
   | "L.L.C."
   | "LTD LIABILITY CO"
@@ -209,20 +207,20 @@ type v38BusinessSuffix =
   | "LIMITED LIABILITY CO."
   | "LIMITED LIABILITY COMPANY";
 
-type v38FormationSubmitResponse = {
+type v39FormationSubmitResponse = {
   success: boolean;
   token: string | undefined;
   formationId: string | undefined;
   redirect: string | undefined;
-  errors: v38FormationSubmitError[];
+  errors: v39FormationSubmitError[];
 };
 
-type v38FormationSubmitError = {
+type v39FormationSubmitError = {
   field: string;
   message: string;
 };
 
-type v38GetFilingResponse = {
+type v39GetFilingResponse = {
   success: boolean;
   entityId: string;
   transactionDate: string;
@@ -232,4 +230,4 @@ type v38GetFilingResponse = {
   certifiedDoc: string;
 };
 
-// ---------------- v38 factories ----------------
+// ---------------- v39 factories ----------------
