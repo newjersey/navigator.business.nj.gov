@@ -9,4 +9,4 @@
 7. Register as a State government vendor using `NJSTART|njstart`
 8. Register as an [Urban Enterprise Zone Business](https://www.state.nj.us/treasury/taxation/su_uez_over.shtml)
 9. Change your tax registration account information online (i.e. add or cancel a tax filing obligations)
-10. Elect to be treated as a small `S-corporation|s-corp` for flow through tax treatment
+10. Elect to be treated as a small `S Corporation|s-corp` for flow through tax treatment

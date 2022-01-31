@@ -56,14 +56,14 @@ export const LegalStructures: LegalStructure[] = [
   },
   {
     id: "c-corporation",
-    name: "C-Corporation",
+    name: "C Corporation",
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 40,
   },
   {
     id: "s-corporation",
-    name: "C-Corporation with S-Corp Tax Designation",
+    name: "C Corporation with S Corp Tax Designation",
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 50,
