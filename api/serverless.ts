@@ -40,7 +40,7 @@ const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
-  frameworkVersion: "2",
+  frameworkVersion: "3",
   custom: {
     webpack: {
       webpackConfig: "./webpack.config.ts",
@@ -70,7 +70,6 @@ const serverlessConfiguration: AWS = {
     "serverless-offline-ssm",
     "serverless-offline",
   ],
-  variablesResolutionMode: "20210326",
   provider: {
     name: "aws",
     runtime: "nodejs14.x",
@@ -136,7 +135,6 @@ const serverlessConfiguration: AWS = {
       STAGE: stage,
       INTERCOM_HASH_SECRET: intercomHashSecret,
     },
-    lambdaHashingVersion: "20201221",
     logRetentionInDays: 180,
   },
   functions: {},
