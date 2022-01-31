@@ -2534,7 +2534,7 @@ __metadata:
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     netlify-cms-app: 2.15.65
     next: 12.0.9
-    next-seo: 4.29.0
+    next-seo: 5.0.0
     prettier: 2.5.1
     prettier-plugin-organize-imports: 2.3.4
     raw-loader: 4.0.2
@@ -2684,7 +2684,7 @@ __metadata:
     napa: 3.0.0
     netlify-cms-app: 2.15.65
     next: 12.0.9
-    next-seo: 4.29.0
+    next-seo: 5.0.0
     prettier: 2.5.1
     prettier-plugin-organize-imports: 2.3.4
     raw-loader: 4.0.2
@@ -24361,14 +24361,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-seo@npm:4.29.0":
-  version: 4.29.0
-  resolution: "next-seo@npm:4.29.0"
+"next-seo@npm:5.0.0":
+  version: 5.0.0
+  resolution: "next-seo@npm:5.0.0"
   peerDependencies:
     next: ^8.1.1-canary.54 || >=9.0.0
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: c725138f2b0a17a4b09afddeeb6d4e1b291220bbd083e8855f7c7646dfb14a742c8dd5a9fd8d5abea4e5a7b978675746b9ce54b119b7d6ceb060a880aace5db8
+  checksum: 2f17714196137b9dc3caa73d06bfe418ef7e74dbd9814b4099be63307a52708709317055bef5fa4b4676dd606ed69bef5f1df3b61c1b85c09702c979b7baebd1
   languageName: node
   linkType: hard
 
