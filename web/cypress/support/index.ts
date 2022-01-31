@@ -46,6 +46,7 @@ declare global {
     }
     interface Chainable {
       loginByCognitoApi(): void;
+      chooseDatePicker(selector: string, value: string): void;
       resetUserData(): void;
       lighthouse(lighthouseThresholds?: LighthouseThresholds, lighthouseConfig?: LighthouseConfig): void;
       pa11y(thresholds?: Pa11yThresholds): void;

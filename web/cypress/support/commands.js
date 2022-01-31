@@ -119,3 +119,20 @@ Cypress.Commands.add("resetUserData", () => {
 Cypress.Commands.add("forceClick", { prevSubject: "element" }, (subject) => {
   cy.wrap(subject).click({ force: true });
 });
+
+Cypress.Commands.add("chooseDatePicker", (selector, value) => {
+  cy.get("body").then(($body) => {
+    const mobilePickerSelector = `input${selector}[readonly]`;
+    const isMobile = $body.find(mobilePickerSelector).length > 0;
+    if (isMobile) {
+      // The MobileDatePicker component has readonly inputs and needs to
+      // be opened and clicked on edit so its inputs can be edited
+      cy.get(mobilePickerSelector).click();
+      cy.get('[role="dialog"] [aria-label="calendar view is open, go to text input view"]').click();
+      cy.get(`[role="dialog"] input${selector}`).clear().type(value);
+      cy.contains('[role="dialog"] button', "OK").click();
+    } else {
+      cy.get(`input${selector} `).clear().type(value);
+    }
+  });
+});
