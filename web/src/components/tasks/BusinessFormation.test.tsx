@@ -189,9 +189,6 @@ describe("<BusinessFormation />", () => {
 
       selectByText("Business suffix", "LLC");
       const threeDaysFromNow = dayjs().add(3, "days");
-      if (threeDaysFromNow.month() !== dayjs().month()) {
-        selectNextMonth();
-      }
       selectDate(threeDaysFromNow);
       fillText("Business address line1", "1234 main street");
       fillText("Business address line2", "Suite 304");
@@ -1186,13 +1183,15 @@ describe("<BusinessFormation />", () => {
 
     fireEvent.click(subject.getByLabelText(`Business start date`));
 
+    if (value.month() !== dayjs().month()) {
+      selectNextMonth();
+    }
+
     const chosenDate = subject.getByRole("button", { name: desiredValue });
     fireEvent.click(chosenDate);
   };
 
   const selectNextMonth = () => {
-    const today = dayjs().format("MMM D, YYYY");
-    fireEvent.click(subject.getByLabelText(`Choose date, selected date is ${today}`));
     fireEvent.click(subject.getByLabelText(`Next month`));
   };
 
