@@ -128,19 +128,12 @@
     {
       "name": "apply-scorp-federal",
       "dependencies": [
-        "search-business-name",
-        "register-for-ein",
-        "form-business-entity",
         "register-for-taxes"
       ]
     },
     {
       "name": "apply-scorp-state",
       "dependencies": [
-        "search-business-name",
-        "register-for-ein",
-        "form-business-entity",
-        "register-for-taxes",
         "apply-scorp-federal"
       ]
     },
