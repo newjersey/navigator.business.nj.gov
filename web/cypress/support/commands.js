@@ -32,10 +32,10 @@ import { testUserEmail, testUserPassword } from "./index";
 
 Auth.configure({
   identityPoolRegion: "us-east-1",
-  identityPoolId: Cypress.env("AWS_COGNITO_IDENTITY_POOL_ID_NEW"),
+  identityPoolId: Cypress.env("COGNITO_IDENTITY_POOL_ID"),
   region: "us-east-1",
-  userPoolId: Cypress.env("AWS_USER_POOLS_ID_NEW"),
-  userPoolWebClientId: Cypress.env("AWS_USER_POOLS_WEB_CLIENT_ID_NEW"),
+  userPoolId: Cypress.env("COGNITO_USER_POOL_ID"),
+  userPoolWebClientId: Cypress.env("COGNITO_WEB_CLIENT_ID"),
   oauth: {},
 });
 
