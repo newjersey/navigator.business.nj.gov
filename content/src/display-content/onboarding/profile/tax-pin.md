@@ -6,4 +6,4 @@ headingNotBolded: "(Optional)"
 
 ## Tax Pin
 
-What is your `Tax Pin?|tax-pin`?
+What is your `Tax Pin|tax-pin`?

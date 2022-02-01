@@ -68,6 +68,8 @@ export type ProfileContent = {
   businessProfile: TextFieldContent;
   businessInformation: TextFieldContent;
   businessReferences: TextFieldContent;
+  ownership: TextFieldContent;
+  existingEmployees: TextFieldContent;
 };
 
 export type OwningFlowContent = {
@@ -420,6 +422,12 @@ export const emptyProfileContent: ProfileContent = {
     contentMd: "",
   },
   businessName: {
+    contentMd: "",
+  },
+  ownership: {
+    contentMd: "",
+  },
+  existingEmployees: {
     contentMd: "",
   },
 };
