@@ -97,10 +97,10 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
       helperText={props.error ? props.validationText ?? " " : " "}
       variant="outlined"
       autoComplete={props.autoComplete}
-      fullWidth
       placeholder={props.placeholder ?? ""}
       disabled={props.disabled}
       {...fieldOptions}
+      sx={{ width: 1, ...fieldOptions?.sx }}
       inputProps={{
         ...fieldOptions?.inputProps,
         "aria-label": camelCaseToSentence(props.fieldName),

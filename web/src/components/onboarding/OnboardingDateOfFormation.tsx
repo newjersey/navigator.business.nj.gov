@@ -75,7 +75,11 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
                 onValidation={onValidation}
                 validationText={OnboardingDefaults.dateOfFormationErrorText}
                 error={props.fieldStates[fieldName].invalid}
-                fieldOptions={{ ...params, error: props.fieldStates[fieldName].invalid }}
+                fieldOptions={{
+                  ...params,
+                  sx: { width: "50%", ...params.sx },
+                  error: props.fieldStates[fieldName].invalid,
+                }}
               />
             </div>
           </div>
