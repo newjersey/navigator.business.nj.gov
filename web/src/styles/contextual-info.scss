@@ -10,7 +10,7 @@
   overflow-y: auto;
   padding: 1.5rem;
   z-index: 500;
-  background-color: #e7f6f8;
+  background-color: $info-lighter;
   width: 75vw;
 
   &.is-visible {
@@ -63,7 +63,7 @@
   right: 0;
   top: 0;
   position: fixed;
-  background: #000;
+  background: $black;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
   visibility: hidden;

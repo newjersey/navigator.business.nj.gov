@@ -1,5 +1,5 @@
 .footer-link-custom {
-  color: #7fb135 !important;
+  color: $primary-light !important;
   font-weight: 400 !important;
   text-decoration: none;
 }
@@ -21,17 +21,17 @@
 }
 
 .icon-custom {
-  color: #e6e6e6;
+  color: $base-lighter;
   width: 2.5rem !important;
   height: 2.5rem !important;
 }
 
 .icon-custom:hover {
-  color: #fff;
+  color: $white;
 }
 
 .heart-custom {
-  color: #dd3534;
+  color: $error;
 }
 
 .footer-custom {
@@ -53,20 +53,20 @@
 }
 
 .footer-divider-top {
-  border-top: 1px solid #757575;
+  border-top: 1px solid $base;
 }
 
 .footer-divider-bottom {
-  border-bottom: 1px solid #757575;
+  border-bottom: 1px solid $base;
 }
 
 @media only screen and (min-width: $lg) {
   .footer-container span:not(:first-child) {
-    border-left: 1px solid #757575;
+    border-left: 1px solid $base;
   }
 
   .footer-divider-top {
-    border-top: 1px solid #757575;
+    border-top: 1px solid $base;
   }
 
   .footer-container {

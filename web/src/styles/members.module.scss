@@ -1,3 +1,5 @@
+@import "colors";
+
 .membersTable {
   table,
   td {
@@ -12,10 +14,10 @@
     padding-left: 1em;
   }
   table > thead {
-    border-bottom: 2px solid #a9aeb1;
+    border-bottom: 2px solid $base-light;
   }
   table > tfoot {
-    border-bottom: 1px solid #a9aeb1;
+    border-bottom: 1px solid $base-light;
   }
 
   table > thead,
