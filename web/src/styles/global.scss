@@ -87,7 +87,11 @@ $lg: 64em; //desktop and up (1024px)
 }
 
 .usa-button--outline {
-  background-color: #fff !important;
+  background-color: $white !important;
+}
+
+.usa-button--unstyled {
+  color: $primary !important;
 }
 
 .clear-button {
@@ -99,12 +103,17 @@ $lg: 64em; //desktop and up (1024px)
 }
 
 .override-text-base {
-  color: #757575 !important;
+  color: $base !important;
+}
+
+.border-primary,
+.hover\:border-primary:hover {
+  border-color: $primary !important;
 }
 
 .usa-link:visited,
 .usa-prose > a:visited {
-  color: #243413 !important;
+  color: $primary-darker !important;
 }
 
 .fit-screen-content {
@@ -135,7 +144,7 @@ $lg: 64em; //desktop and up (1024px)
 }
 
 .skip-link {
-  background: #fff;
+  background: $white;
   font-weight: 700;
   left: 50%;
   padding: 0.25rem;
@@ -172,10 +181,10 @@ $lg: 64em; //desktop and up (1024px)
 
 .usa-link-hover-override:hover {
   .icon-green-bg-color-hover {
-    background-color: #466c04;
+    background-color: $primary-dark;
   }
   .text-green-color-hover {
-    color: #466c04;
+    color: $primary-dark;
   }
 }
 
@@ -196,7 +205,7 @@ table {
 table,
 th,
 td {
-  border: 2px solid #a9aeb1;
+  border: 2px solid $base-light !important;
 }
 
 td {
@@ -226,7 +235,7 @@ td {
 
 .operate-bullet:before {
   border-radius: 99rem;
-  background-color: #243413;
+  background-color: $primary-darker;
   content: "";
   height: 0.5rem;
   width: 0.5rem;
@@ -238,7 +247,7 @@ td {
 }
 
 .operate-bullet.active:before {
-  background-color: #466c04;
+  background-color: $primary-dark;
 }
 
 .tag-fixed-width {

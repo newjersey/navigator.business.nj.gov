@@ -7,14 +7,14 @@
 
 .auth-button:hover {
   background-color: transparent;
-  box-shadow: inset 0 0 0 3px #466c04 !important;
-  color: #466c04;
+  box-shadow: inset 0 0 0 3px $primary-dark !important;
+  color: $primary-dark;
 }
 
 .auth-button:active {
   background-color: transparent;
-  box-shadow: inset 0 0 0 3px #243413 !important;
-  color: #243413;
+  box-shadow: inset 0 0 0 3px $primary-darker !important;
+  color: $primary-darker;
 }
 
 .card-group-margin-custom {
@@ -24,7 +24,7 @@
 
 .gradient-bg {
   background-image: none !important;
-  background: linear-gradient(#fff, #fff, #ecf3ec) !important;
+  background: linear-gradient($white, $white, $success-lighter) !important;
 }
 
 .no-bg {
@@ -44,7 +44,7 @@
 }
 
 .hero-header {
-  color: #5c5c5c;
+  color: $base-dark;
   font-weight: 400;
 }
 
@@ -57,14 +57,14 @@
 }
 
 .l2-bg {
-  background: #ecf3ec url(/img/Bg-wavy-white@2x.png) bottom center no-repeat;
+  background: $success-lighter url(/img/Bg-wavy-white@2x.png) bottom center no-repeat;
   background-size: auto;
   height: auto;
 }
 
 .float-content {
   position: absolute;
-  background-color: #ecf3ec;
+  background-color: $success-lighter;
 }
 
 .l2-heading-alt {
@@ -97,7 +97,7 @@
 
   text-align: center;
   font-size: 1rem;
-  color: #466c04;
+  color: $primary-dark;
 
   align-items: center;
 
@@ -315,7 +315,7 @@
   height: 5rem;
   width: 20rem;
   position: relative;
-  border-top: 0.125rem solid #7fb135;
+  border-top: 0.125rem solid $primary-light;
   margin: auto;
 }
 

@@ -52,9 +52,7 @@ export const PaymentTypeDropdown = (): ReactElement => {
             inputProps={{ "data-testid": "payment-type" }}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return (
-                  <div className="text-disabled-dark">{state.displayContent.paymentType.placeholder}</div>
-                );
+                return <div className="text-base">{state.displayContent.paymentType.placeholder}</div>;
               }
 
               return selectedPaymentLabel;

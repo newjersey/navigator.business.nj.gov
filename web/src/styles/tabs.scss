@@ -6,14 +6,14 @@
 }
 
 .react-tabs__tab-list {
-  border-bottom: 2px solid #e6e6e6;
+  border-bottom: 2px solid $base-lighter;
   margin: 0 0 10px;
   padding: 0;
 }
 
 .react-tabs__tab {
   display: inline-block;
-  border: 2px solid #e6e6e6;
+  border: 2px solid $base-lighter;
   border-left: none;
   border-bottom: none;
   bottom: -2px;
@@ -24,10 +24,10 @@
   margin-bottom: 0;
   font-size: 14px;
   font-weight: 700;
-  color: #757575;
+  color: $base;
 
   &:first-of-type {
-    border-left: 2px solid #e6e6e6;
+    border-left: 2px solid $base-lighter;
   }
 
   @media all and (min-width: $xs) {
@@ -36,8 +36,8 @@
 }
 
 .react-tabs__tab--selected {
-  background: #fff;
-  border-color: #e6e6e6;
+  background: $white;
+  border-color: $base-lighter;
   color: $primary;
 
   &:before {
@@ -69,7 +69,7 @@
   left: -4px;
   right: -4px;
   bottom: -5px;
-  background: #fff;
+  background: $white;
 }
 
 .react-tabs__tab-panel {
