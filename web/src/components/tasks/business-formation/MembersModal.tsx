@@ -263,14 +263,23 @@ export const MembersModal = (props: Props): ReactElement => {
                 </div>
               </div>
               <div className="margin-top-2">
-                <div className="padding-205 bg-base-lightest flex flex-justify-end task-submit-button-background flex-wrap">
-                  <Button style="secondary" onClick={props.handleClose} dataTestid={"memberCancel"}>
+                <div className="padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background flex-wrap">
+                  <Button
+                    style="secondary"
+                    onClick={props.handleClose}
+                    dataTestid={"memberCancel"}
+                    widthAutoOnMobile
+                  >
                     {BusinessFormationDefaults.membersModalBackButtonText}
                   </Button>
-                  <div className="tablet:display-none margin-1"></div>
-                  <Button style="primary" typeSubmit={true} dataTestid={"memberSubmit"}>
+                  <Button
+                    style="primary"
+                    typeSubmit={true}
+                    dataTestid={"memberSubmit"}
+                    noRightMargin
+                    widthAutoOnMobile
+                  >
                     <span className="text-no-wrap">
-                      {" "}
                       {BusinessFormationDefaults.membersModalNextButtonText}
                     </span>
                   </Button>

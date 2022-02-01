@@ -65,11 +65,13 @@ export const Button = (props: Props): ReactElement => {
 
   return (
     <button
-      className={`${style} ${btnHeight}${props.noRightMargin ? " margin-right-0" : ""}${
-        props.underline ? " underline" : ""
-      }${props.smallText ? " font-body-2xs" : ""}${props.textBold ? " text-bold" : ""}${
-        props.widthAutoOnMobile ? " width-auto" : ""
-      } ${showDisabledClass}`}
+      className={`${style} ${btnHeight}${
+        props.noRightMargin && props.style !== "tertiary" ? " margin-right-0" : ""
+      }${!props.noRightMargin && props.style !== "tertiary" ? " margin-right-2" : ""}${
+        props.style === "tertiary" ? " margin-right-0" : ""
+      }${props.underline ? " underline" : ""}${props.smallText ? " font-body-2xs" : ""}${
+        props.textBold ? " text-bold" : ""
+      }${props.widthAutoOnMobile ? " width-auto" : ""} ${showDisabledClass}`}
       onClick={props.onClick}
       {...(props.typeSubmit ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}

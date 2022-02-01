@@ -225,7 +225,7 @@ export const ReviewSection = (): ReactElement => {
       </div>
 
       <div className="margin-top-2">
-        <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
+        <div className="padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background">
           <Button
             style="secondary"
             widthAutoOnMobile
@@ -236,18 +236,17 @@ export const ReviewSection = (): ReactElement => {
           >
             {BusinessFormationDefaults.previousButtonText}
           </Button>
-          <div className="margin-right-205">
-            <Button
-              style="primary"
-              noRightMargin
-              onClick={() => {
-                setTab(state.tab + 1);
-                scrollToTop();
-              }}
-            >
-              {BusinessFormationDefaults.nextButtonText}
-            </Button>
-          </div>
+          <Button
+            style="primary"
+            noRightMargin
+            onClick={() => {
+              setTab(state.tab + 1);
+              scrollToTop();
+            }}
+            widthAutoOnMobile
+          >
+            {BusinessFormationDefaults.nextButtonText}
+          </Button>
         </div>
       </div>
     </>

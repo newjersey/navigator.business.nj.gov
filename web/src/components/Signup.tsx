@@ -212,6 +212,7 @@ export const Signup = (props: Props): ReactElement => {
           </Button>
           <Button
             typeSubmit
+            noRightMargin
             style="primary"
             loading={isLoading}
             onClick={() => {
