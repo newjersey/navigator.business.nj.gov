@@ -1,4 +1,4 @@
-FROM node:14.18.3-buster as runner
+FROM node:14.19.0-buster as runner
 
 WORKDIR /app
 ENV NODE_ENV production
