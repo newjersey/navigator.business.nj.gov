@@ -215,12 +215,12 @@ commands:
       - run:
           name: Set Development Environment Variables
           command: |
-            echo 'export API_BASE_URL=$API_BASE_URL_AWS_DEV_NEW' >> $BASH_ENV
-            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_DEV_NEW' >> $BASH_ENV
+            echo 'export API_BASE_URL=$API_BASE_URL_AWS_DEV' >> $BASH_ENV
+            echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_DEV' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_DEV' >> $BASH_ENV
-            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV_NEW' >> $BASH_ENV
-            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV_NEW' >> $BASH_ENV
-            echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_DEV_NEW' >> $BASH_ENV
+            echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
+            echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV' >> $BASH_ENV
+            echo 'export COGNITO_IDENTITY_POOL_ID=$COGNITO_IDENTITY_POOL_ID_DEV' >> $BASH_ENV
             echo 'export LICENSE_STATUS_BASE_URL=$LICENSE_STATUS_BASE_URL_DEV' >> $BASH_ENV
             echo 'export FORMATION_API_BASE_URL=$FORMATION_API_BASE_URL_DEV' >> $BASH_ENV
             echo 'export FORMATION_API_KEY=$FORMATION_API_KEY_DEV' >> $BASH_ENV
@@ -228,9 +228,9 @@ commands:
             echo 'export MYNJ_ROLE_NAME=$MYNJ_ROLE_NAME_DEV' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_DEV' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_DEV' >> $BASH_ENV
-            echo 'export REDIRECT_URL=$REDIRECT_URL_DEV_NEW' >> $BASH_ENV
-            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEWDEV' >> $BASH_ENV
-            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEWDEV' >> $BASH_ENV
+            echo 'export REDIRECT_URL=$REDIRECT_URL_DEV' >> $BASH_ENV
+            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV' >> $BASH_ENV
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_DEV' >> $BASH_ENV
             echo 'export SMOKE_TEST_ENV=$SMOKE_TEST_ENV_DEV' >> $BASH_ENV
             echo 'export FEATURE_DISABLE_FORMATION_STAGING=$FEATURE_DISABLE_FORMATION_STAGING' >> $BASH_ENV
