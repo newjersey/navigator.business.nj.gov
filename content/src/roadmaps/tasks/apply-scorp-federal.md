@@ -7,7 +7,7 @@ callToActionText: Apply for S Corporation Designation
 ---
 The process to apply for an S corporation designation starts at the federal level. In most cases, the IRS will approve or reject the application and will notify the business entity within 60 days. 
 
-To apply for an S corporation status you will need:
+To apply for an S corp status you will need:
 
 * `EIN|ein`
 * `Registered agent|registered-agent`
@@ -15,4 +15,4 @@ To apply for an S corporation status you will need:
 
 After you’ve completed this task you will have:
 
-* A letter confirming your business' election to file taxes as an S Corporation
+* A letter confirming your business' election to file taxes as an S Corp
