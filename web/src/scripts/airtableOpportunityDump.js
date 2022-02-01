@@ -96,14 +96,19 @@ const convertFundingType = (value) => {
 };
 
 const convertBusinessStage = (value) => {
-  if (value === "VC supported technology companies") {
-    return "VC-supported technology companies";
-  } else if (value === "Angel- supported technology companies") {
-    return "Angel-supported technology companies";
-  } else if (value === "Start-up and Operating") {
-    return "Both";
+  if (value === "VC supported technology companies" || value === "operating") {
+    return "operating";
+  } else if (
+    value === "Angel- supported technology companies" ||
+    value === "VC supported technology companies" ||
+    value === "VC-supported technology companies" ||
+    value === "early-stage technology" ||
+    value === "startup" ||
+    value === "Early Stage Business"
+  ) {
+    return "early-stage";
   } else {
-    return value;
+    return "both";
   }
 };
 

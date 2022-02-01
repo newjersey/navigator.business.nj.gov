@@ -242,7 +242,10 @@ collections:
         name: "programFrequency"
         widget: "select"
         options: [ "annual", "ongoing", "reoccuring", "one-time", "pilot", "other" ]
-      - { label: "Business Stage", name: "businessStage", widget: "string", required: false }
+      - label: "Business Stage"
+        name: "businessStage"
+        widget: "select"
+        options: [ "early-stage", "operating", "both" ]
       - { label: "Business Size", name: "businessSize", widget: "string", required: false }
       - label: "Home Based"
         name: "homeBased"
@@ -366,7 +369,10 @@ collections:
         name: "programFrequency"
         widget: "select"
         options: [ "annual", "ongoing", "reoccuring", "one-time", "pilot", "other" ]
-      - { label: "Business Stage", name: "businessStage", widget: "string", required: false }
+      - label: "Business Stage"
+        name: "businessStage"
+        widget: "select"
+        options: [ "early-stage", "operating", "both" ]
       - { label: "Business Size", name: "businessSize", widget: "string", required: false }
       - label: "Home Based"
         name: "homeBased"
