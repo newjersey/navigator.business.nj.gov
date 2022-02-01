@@ -42,7 +42,7 @@ import { CircularProgress, Dialog, DialogContent, DialogTitle, IconButton } from
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { FormEvent, ReactElement, useContext, useEffect, useState } from "react";
+import React, { FormEvent, ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 interface Props {
   displayContent: LoadDisplayContent;
@@ -66,7 +66,11 @@ const ProfilePage = (props: Props): ReactElement => {
       ...props.displayContent["PROFILE"],
     } as UserDisplayContent;
   };
-  const [mergedDisplayContent] = useState(mergeDisplayContent());
+
+  const mergedDisplayContent = useMemo(mergeDisplayContent, [
+    props.displayContent,
+    userData?.profileData.hasExistingBusiness,
+  ]);
 
   useEffect(() => {
     if (userData) {
