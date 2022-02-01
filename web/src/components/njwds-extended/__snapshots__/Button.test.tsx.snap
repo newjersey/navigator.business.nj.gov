@@ -4,7 +4,7 @@ exports[`Button Styles primary displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button height-5 "
+      class="usa-button height-5 margin-right-2 "
       type="button"
     >
       <div>
@@ -19,7 +19,7 @@ exports[`Button Styles primary-big displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="  "
+      class="  margin-right-2 "
       type="button"
     >
       <div>
@@ -34,7 +34,7 @@ exports[`Button Styles primary-input-field-height displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-205 height-7 "
+      class="usa-button padding-y-205 height-7 margin-right-2 "
       type="button"
     >
       <div>
@@ -49,7 +49,7 @@ exports[`Button Styles secondary displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button usa-button--outline height-5 "
+      class="usa-button usa-button--outline height-5 margin-right-2 "
       type="button"
     >
       <div>
@@ -64,7 +64,7 @@ exports[`Button Styles secondary-big displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="  "
+      class="  margin-right-2 "
       type="button"
     >
       <div>
@@ -79,7 +79,7 @@ exports[`Button Styles secondary-input-field-height displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button usa-button--outline padding-y-205 height-7 "
+      class="usa-button usa-button--outline padding-y-205 height-7 margin-right-2 "
       type="button"
     >
       <div>
@@ -94,7 +94,7 @@ exports[`Button Styles tertiary displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button usa-button--unstyled  "
+      class="usa-button usa-button--unstyled  margin-right-0 "
       type="button"
     >
       <div>
@@ -109,7 +109,7 @@ exports[`Button loading button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button height-5 usa-button--disabled"
+      class="usa-button height-5 margin-right-2 usa-button--disabled"
       type="button"
     >
       <div
@@ -148,7 +148,7 @@ exports[`Button submit button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button height-5 "
+      class="usa-button height-5 margin-right-2 "
       type="submit"
     >
       <div>
@@ -163,7 +163,7 @@ exports[`Button with dataTestid displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button height-5 "
+      class="usa-button height-5 margin-right-2 "
       data-testid="test-button-1"
       type="button"
     >
@@ -194,7 +194,7 @@ exports[`Button with smallText button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button height-5 font-body-2xs "
+      class="usa-button height-5 margin-right-2 font-body-2xs "
       type="button"
     >
       <div>
@@ -209,7 +209,7 @@ exports[`Button with textBold button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button height-5 text-bold "
+      class="usa-button height-5 margin-right-2 text-bold "
       type="button"
     >
       <div>
@@ -224,7 +224,7 @@ exports[`Button with underline button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button height-5 underline "
+      class="usa-button height-5 margin-right-2 underline "
       type="button"
     >
       <div>
@@ -239,7 +239,7 @@ exports[`Button with widthAutoOnMobile button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button height-5 width-auto "
+      class="usa-button height-5 margin-right-2 width-auto "
       type="button"
     >
       <div>

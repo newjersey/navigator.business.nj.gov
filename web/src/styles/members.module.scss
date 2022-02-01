@@ -3,14 +3,14 @@
 .membersTable {
   table,
   td {
-    border: none;
+    border: none !important;
     height: auto;
   }
 
   table,
   th {
     text-align: left;
-    border: none;
+    border: none !important;
     padding-left: 1em;
   }
   table > thead {

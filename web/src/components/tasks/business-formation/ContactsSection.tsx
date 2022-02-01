@@ -67,7 +67,7 @@ export const ContactsSection = (): ReactElement => {
         />
       </div>
       <div className="margin-top-2">
-        <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
+        <div className="padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background">
           <Button
             style="secondary"
             widthAutoOnMobile
@@ -78,11 +78,9 @@ export const ContactsSection = (): ReactElement => {
           >
             {BusinessFormationDefaults.previousButtonText}
           </Button>
-          <div className="margin-right-205">
-            <Button style="primary" onClick={submitContactData} widthAutoOnMobile noRightMargin>
-              {BusinessFormationDefaults.nextButtonText}
-            </Button>
-          </div>
+          <Button style="primary" onClick={submitContactData} widthAutoOnMobile noRightMargin>
+            {BusinessFormationDefaults.nextButtonText}
+          </Button>
         </div>
       </div>
     </>

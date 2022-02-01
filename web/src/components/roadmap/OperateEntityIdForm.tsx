@@ -94,7 +94,7 @@ export const OperateEntityIdForm = (props: Props): ReactElement => {
             maxLength={10}
           />
           <div className="mla height-5 margin-top-2 mobile-lg:margin-top-0">
-            <Button style="primary" typeSubmit loading={isLoading}>
+            <Button style="primary" typeSubmit loading={isLoading} noRightMargin>
               {RoadmapDefaults.operateFormSubmitButtonText}
             </Button>
           </div>

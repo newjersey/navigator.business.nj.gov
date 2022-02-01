@@ -124,12 +124,10 @@ export const BusinessSection = (): ReactElement => {
         requiredFieldsWithError={requiredFieldsWithError}
       />
       <div className="margin-top-2 ">
-        <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
-          <div className="margin-right-205">
-            <Button style="primary" onClick={submitBusinessData} noRightMargin widthAutoOnMobile>
-              {BusinessFormationDefaults.initialNextButtonText}
-            </Button>
-          </div>
+        <div className="padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background">
+          <Button style="primary" onClick={submitBusinessData} noRightMargin widthAutoOnMobile>
+            {BusinessFormationDefaults.initialNextButtonText}
+          </Button>
         </div>
       </div>
     </div>

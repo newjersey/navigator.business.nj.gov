@@ -115,7 +115,7 @@ export const PaymentSection = (): ReactElement => {
           </Alert>
         )}
       <div className="margin-top-2 ">
-        <div className="padding-y-205 bg-base-lightest flex flex-justify-end task-submit-button-background">
+        <div className="padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background">
           <Button
             style="secondary"
             widthAutoOnMobile
@@ -127,17 +127,15 @@ export const PaymentSection = (): ReactElement => {
           >
             {BusinessFormationDefaults.previousButtonText}
           </Button>
-          <div className="margin-right-205">
-            <Button
-              loading={isLoading}
-              widthAutoOnMobile
-              noRightMargin
-              style="primary"
-              onClick={submitFormationFormData}
-            >
-              {BusinessFormationDefaults.submitButtonText}
-            </Button>
-          </div>
+          <Button
+            loading={isLoading}
+            widthAutoOnMobile
+            noRightMargin
+            style="primary"
+            onClick={submitFormationFormData}
+          >
+            {BusinessFormationDefaults.submitButtonText}
+          </Button>
         </div>
       </div>
     </div>

@@ -195,6 +195,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
                 loading={isLoading}
                 typeSubmit
                 dataTestid="search-availability"
+                noRightMargin
               >
                 {SearchBusinessNamesDefaults.searchButtonText}
               </Button>
