@@ -7,11 +7,10 @@ callToActionText: "Learn more"
 type: "FUNDING"
 fundingType: "loan"
 benefits: "Financing up to $500,000."
-eligibility: "Small businesses that have been in operation for at least 1 full year and not-for-profits that have been in operation for at least 3 full years, and have no more than $3M in total revenue. 
-Special consideration for creditworthy small, minority-owned, and women-owned businesses."
+eligibility: "Small businesses that have been in operation for at least 1 full year and not-for-profits that have been in operation for at least 3 full years, and have no more than $3M in total revenue. Special consideration for creditworthy small, minority-owned, and women-owned businesses."
 publishStageArchive: ""
-industry:  ["All Industries"]
-agency:  ["NJEDA"]
+industry: ["All Industries"]
+agency: ["NJEDA"]
 openDate: ""
 dueDate: ""
 status: "open"

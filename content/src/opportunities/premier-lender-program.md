@@ -7,11 +7,10 @@ callToActionText: "Learn more"
 type: "FUNDING"
 fundingType: "loan"
 benefits: "Loan participation of up to $2 million or line of credit guarantees up to $750,000."
-eligibility: "Businesses and nonprofits that commit to create or retain 1 new full-time job for every $65,000 in NJEDA exposure. 
-Application fee of $1K."
+eligibility: "Businesses and nonprofits that commit to create or retain 1 new full-time job for every $65,000 in NJEDA exposure. Application fee of $1K."
 publishStageArchive: ""
-industry:  ["All Industries"]
-agency:  ["NJEDA"]
+industry: ["All Industries"]
+agency: ["NJEDA"]
 openDate: ""
 dueDate: ""
 status: "open"

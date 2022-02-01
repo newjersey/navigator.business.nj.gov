@@ -7,11 +7,10 @@ callToActionText: ""
 type: "FUNDING"
 fundingType: "technical assistance"
 benefits: "Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities."
-eligibility: "Registered to do business in New Jersey and located in New Jersey.
-Typically demonstrates some signs of financial or operational traction."
+eligibility: "Registered to do business in New Jersey and located in New Jersey. Typically demonstrates some signs of financial or operational traction."
 publishStageArchive: "Do Not Publish"
-industry:  ["Technology","Life Sciences","Industries not classified"]
-agency:  ["NJEDA"]
+industry: ["Technology", "Life Sciences", "Industries not classified"]
+agency: ["NJEDA"]
 openDate: ""
 dueDate: ""
 status: "open"

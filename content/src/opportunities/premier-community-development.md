@@ -7,11 +7,10 @@ callToActionText: "Learn more"
 type: "FUNDING"
 fundingType: "loan"
 benefits: "Loan participation of up to $500,000 or line of credit guarantee."
-eligibility: "Businesses that commit to create or retain 1 new full-time job for every $65,000 in NJEDA exposure within 2 years. 
-Must be in operation for at least 1 year (3 if a non-profit). "
+eligibility: "Businesses that commit to create or retain 1 new full-time job for every $65,000 in NJEDA exposure within 2 years. Must be in operation for at least 1 year (3 if a non-profit). "
 publishStageArchive: ""
-industry:  ["All Industries"]
-agency:  ["NJEDA"]
+industry: ["All Industries"]
+agency: ["NJEDA"]
 openDate: ""
 dueDate: ""
 status: "open"

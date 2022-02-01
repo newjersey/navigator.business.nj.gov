@@ -7,11 +7,10 @@ callToActionText: "Learn more"
 type: "FUNDING"
 fundingType: "tax exemption"
 benefits: "Ability to purchase machinery, equipment, furniture, fixtures, and building materials without New Jersey sales tax."
-eligibility: "Companies with 1,000 or more employees that relocate at least 500 workers to a new or substantially rehabilitated facility. 
-Life sciences or manufacturing companies relocating 250 or more employees may be eligible."
+eligibility: "Companies with 1,000 or more employees that relocate at least 500 workers to a new or substantially rehabilitated facility. Life sciences or manufacturing companies relocating 250 or more employees may be eligible."
 publishStageArchive: ""
-industry:  ["All Industries"]
-agency:  ["NJEDA"]
+industry: ["All Industries"]
+agency: ["NJEDA"]
 openDate: ""
 dueDate: ""
 status: "open"

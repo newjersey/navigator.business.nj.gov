@@ -6,12 +6,11 @@ callToActionLink: "https://www.nj.gov/labor/employer-services/business/returnand
 callToActionText: "Learn more"
 type: "FUNDING"
 fundingType: "grant"
-benefits: "Employers: up to 50% wage subsidy for up to 6 months (cap of $10K per employee, total cap of $40k across all employees).
-Employees: $500 incentive for re-entering the workforce and receiving training from businesses with 100 or fewer employees. "
+benefits: "Employers: up to 50% wage subsidy for up to 6 months (cap of $10K per employee, total cap of $40k across all employees). Employees: $500 incentive for re-entering the workforce and receiving training from businesses with 100 or fewer employees. "
 eligibility: "Employers with 100 or fewer employees registered with the State of NJ and who will provide substantive on-the-job training at their location or, depending on circumstances, utilize approved virtual training, that result in skill badges or industry-recognized credentials. "
 publishStageArchive: ""
-industry:  ["All"]
-agency:  ["NJDOL"]
+industry: ["All"]
+agency: ["NJDOL"]
 openDate: ""
 dueDate: ""
 status: "open"

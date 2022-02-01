@@ -7,11 +7,10 @@ callToActionText: "Learn more"
 type: "FUNDING"
 fundingType: "tax credit"
 benefits: "Tax credits up to 35% of qualified film production expenses."
-eligibility: "Feature films, television series, or television shows of 22 minutes or more in length, intended for a national or regional audience that incur 60% or more of the total film production expenses for services and goods purchased through vendors authorized to do business in New Jersey. 
-Not Eligible: Productions featuring news, current events, weather, and market reports or public programming, talk show, sports event, or reality show; productions that solicit funds; productions containing obscene material as defined under N.J.S.2C:34-2 and N.J.S.2C:34-3; or productions primarily for private, industrial, corporate, or institutional purposes."
+eligibility: "Feature films, television series, or television shows of 22 minutes or more in length, intended for a national or regional audience that incur 60% or more of the total film production expenses for services and goods purchased through vendors authorized to do business in New Jersey. Not Eligible: Productions featuring news, current events, weather, and market reports or public programming, talk show, sports event, or reality show; productions that solicit funds; productions containing obscene material as defined under N.J.S.2C:34-2 and N.J.S.2C:34-3; or productions primarily for private, industrial, corporate, or institutional purposes."
 publishStageArchive: ""
-industry:  ["Arts, Entertainment, and Recreation"]
-agency:  ["NJEDA"]
+industry: ["Arts, Entertainment, and Recreation"]
+agency: ["NJEDA"]
 openDate: ""
 dueDate: ""
 status: "first-come, first-served"

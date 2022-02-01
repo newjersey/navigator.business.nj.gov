@@ -46,7 +46,7 @@ const airtableToOpportunity = async (airtableOpp) => {
     callToActionText: callToActionText,
     description: description,
     type: "FUNDING",
-    fundingType: airtableOpp["Filter: Funding Type"] ?? "",
+    fundingType: convertFundingType(airtableOpp["Filter: Funding Type"] ?? ""),
     benefits: airtableOpp["Benefits Summary (Public)"] ?? "",
     eligibility: airtableOpp["Eligibility- (Public)"] ?? "",
     publishStageArchive: airtableOpp["Publish/Stage/Archive"] ? airtableOpp["Publish/Stage/Archive"][0] : "",
@@ -58,7 +58,7 @@ const airtableToOpportunity = async (airtableOpp) => {
     dueDate: airtableOpp["Due Date"] ?? "",
     status: convertStatus(airtableOpp["Filter: Status (open// closed// ...)"]),
     programFrequency: convertProgramFrequency(airtableOpp["Filter: Program Frequency"] ?? ""),
-    businessStage: airtableOpp["Filter: Business Stage"] ?? "",
+    businessStage: convertBusinessStage(airtableOpp["Filter: Business Stage"] ?? ""),
     businessSize: convertBusinessSize(airtableOpp["Filter: Business Size (Employees)"] ?? ""),
     homeBased: convertHomeBasedValues(airtableOpp["Filter: Home Base Businesses"] ?? ""),
     mwvb: convertMWVB(airtableOpp["Filter: MWVB"] ?? ""),
@@ -69,11 +69,41 @@ const airtableToOpportunity = async (airtableOpp) => {
 
 const convertHomeBasedValues = (value) => {
   if (value === "yes") {
-    return "YES";
+    return "yes";
   } else if (value === "no") {
-    return "NO";
+    return "no";
   } else {
-    return "UNKNOWN";
+    return "unknown";
+  }
+};
+
+const convertFundingType = (value) => {
+  if (value === "Tax Credit") {
+    return "tax credit";
+  } else if (value === "Loan") {
+    return "loan";
+  } else if (value === "Grant") {
+    return "grant";
+  } else if (value === "Technical Assistance") {
+    return "technical assistance";
+  } else if (value === "Tax Exemption") {
+    return "tax exemption";
+  } else if (value === "hiring and employee support") {
+    return "hiring and employee training support";
+  } else {
+    return value;
+  }
+};
+
+const convertBusinessStage = (value) => {
+  if (value === "VC supported technology companies") {
+    return "VC-supported technology companies";
+  } else if (value === "Angel- supported technology companies") {
+    return "Angel-supported technology companies";
+  } else if (value === "Start-up and Operating") {
+    return "Both";
+  } else {
+    return value;
   }
 };
 
