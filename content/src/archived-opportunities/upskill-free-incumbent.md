@@ -29,7 +29,7 @@ status: "closed"
 programFrequency: "reoccuring"
 businessStage: "Both"
 businessSize: "n/a"
-homeBased: "NO"
+homeBased: "no"
 mwvb: "n/a"
 preferenceGiven: "no"
 county: ["All"]

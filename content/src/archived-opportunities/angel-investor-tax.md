@@ -5,7 +5,7 @@ name: "Angel Investor Tax Credit Program"
 callToActionLink: "https://www.njeda.com/angeltaxcredit/"
 callToActionText: "Learn more"
 type: "FUNDING"
-fundingType: "Tax Credit"
+fundingType: "tax credit"
 benefits: "Businesses can receive tax credits equal to 20% of a qualified investment with a potential 5% bonus."
 eligibility: "Investors who invest in eligible emerging technology businesses or venture funds in New Jersey.
  Both the investor and the technology company must complete the application no later than 6 months from the date of investment. 
@@ -20,7 +20,7 @@ status: "deadline"
 programFrequency: "reoccuring"
 businessStage: "Early Stage Business"
 businessSize: "<225"
-homeBased: "YES"
+homeBased: "yes"
 mwvb: "mwbe"
 preferenceGiven: "yes"
 county: ["All"]

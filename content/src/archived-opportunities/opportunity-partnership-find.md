@@ -29,7 +29,7 @@ status: "opening soon"
 programFrequency: "reoccuring"
 businessStage: "Both"
 businessSize: "n/a"
-homeBased: "YES"
+homeBased: "yes"
 mwvb: "n/a"
 preferenceGiven: "no"
 county: ["All"]

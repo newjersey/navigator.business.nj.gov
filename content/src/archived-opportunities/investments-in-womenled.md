@@ -5,7 +5,7 @@ name: "Investments in Women-Led Start-ups"
 callToActionLink: "http://www.njeda.com/goldenseeds"
 callToActionText: "Learn more"
 type: "FUNDING"
-fundingType: "Technical Assistance"
+fundingType: "technical assistance"
 benefits: "Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities."
 eligibility: "Product is in beta (versus alpha) stage of development and has been created with input from clients or potential clients.
 Business has some “proof of concept” revenue.
@@ -21,7 +21,7 @@ status: "open"
 programFrequency: "ongoing"
 businessStage: "Early Stage Business"
 businessSize: "n/a"
-homeBased: "YES"
+homeBased: "yes"
 mwvb: "wbe"
 preferenceGiven: ""
 county: ["All"]
