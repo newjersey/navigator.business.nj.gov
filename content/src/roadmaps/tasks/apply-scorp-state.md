@@ -17,4 +17,4 @@ To complete this application, you must have:
 
 After you’ve completed this task you will have:
 
-* A letter confirming your S Corp status with the State of New Jersey
+* A letter confirming your S corp status with the State of New Jersey
