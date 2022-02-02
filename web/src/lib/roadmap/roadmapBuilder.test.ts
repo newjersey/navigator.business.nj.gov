@@ -19,14 +19,16 @@ describe("roadmapBuilder", () => {
     });
 
     expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(
-      expect.arrayContaining(["generic-task-1-id", "coffee-task-1-id"])
+      expect.arrayContaining([
+        "generic-task-1-id",
+        "coffee-task-1-id",
+        "generic-task-2-id",
+        "coffee-task-2-id",
+        "tea-task-1-id",
+      ])
     );
 
     expect(roadmap.steps[1].tasks.map((it) => it.id)).toEqual(
-      expect.arrayContaining(["generic-task-2-id", "coffee-task-2-id", "tea-task-1-id"])
-    );
-
-    expect(roadmap.steps[2].tasks.map((it) => it.id)).toEqual(
       expect.arrayContaining(["coffee-task-3-id", "tea-task-2-id"])
     );
   });
@@ -38,16 +40,17 @@ describe("roadmapBuilder", () => {
     });
 
     expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(
-      expect.arrayContaining(["generic-task-1-id", "coffee-task-1-id"])
+      expect.arrayContaining([
+        "generic-task-1-id",
+        "coffee-task-1-id",
+        "generic-task-2-id",
+        "coffee-task-2-id",
+      ])
     );
 
-    expect(roadmap.steps[1].tasks.map((it) => it.id)).toEqual(
-      expect.arrayContaining(["generic-task-2-id", "coffee-task-2-id"])
-    );
+    expect(roadmap.steps[1].tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["coffee-task-3-id"]));
 
-    expect(roadmap.steps[2].tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["coffee-task-3-id"]));
-
-    expect(roadmap.steps[3].tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["coffee-task-4-id"]));
+    expect(roadmap.steps[2].tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["coffee-task-4-id"]));
   });
 
   it("orders tasks in a step by weight", async () => {
@@ -59,6 +62,7 @@ describe("roadmapBuilder", () => {
     expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual([
       "weighted-task-0-id",
       "generic-task-1-id",
+      "generic-task-2-id",
       "weighted-task-10-id",
     ]);
   });
@@ -69,7 +73,7 @@ describe("roadmapBuilder", () => {
       addOns: ["mocha"],
     });
 
-    expect(roadmap.steps[4].tasks.map((it) => it.id)).toEqual(["mocha-task-5-id"]);
+    expect(roadmap.steps[3].tasks.map((it) => it.id)).toEqual(["mocha-task-5-id"]);
   });
 
   it("adds unlockedBy to tasks from dependencies file without duplicate url-slugs", async () => {
@@ -115,15 +119,6 @@ const expectedGenericRoadmap: Roadmap = {
           contentMd: `${EOL}Generic Task 1 Contents${EOL}`,
           unlockedBy: [],
         },
-      ],
-    },
-    {
-      step_number: 2,
-      name: "Step 2 Name",
-      section: "PLAN",
-      timeEstimate: "2 months",
-      description: "Step 2 description",
-      tasks: [
         {
           id: "generic-task-2-id",
           filename: "generic-task-2",
@@ -137,11 +132,11 @@ const expectedGenericRoadmap: Roadmap = {
       ],
     },
     {
-      step_number: 3,
-      name: "Step 3 Name",
+      step_number: 2,
+      name: "Step 2 Name",
       section: "START",
       timeEstimate: "3 months",
-      description: "Step 3 description",
+      description: "Step 2 description",
       tasks: [
         {
           id: "generic-task-3-id",
@@ -156,11 +151,11 @@ const expectedGenericRoadmap: Roadmap = {
       ],
     },
     {
-      step_number: 4,
-      name: "Step 4 Name",
+      step_number: 3,
+      name: "Step 3 Name",
       timeEstimate: "4 months",
       section: "START",
-      description: "Step 4 description",
+      description: "Step 3 description",
       tasks: [
         {
           id: "generic-task-4-id",

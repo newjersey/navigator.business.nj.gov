@@ -1,37 +1,37 @@
 {
   "roadmapSteps": [
     {
-      "step": 2,
+      "step": 1,
       "weight": 1,
       "task": "evaluate-your-location"
     },
     {
-      "step": 2,
+      "step": 1,
       "weight": 2,
       "task": "check-site-requirements"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 1,
       "task": "sign-lease"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 4,
       "task": "site-safety-permits"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 2,
       "task": "town-mercantile-license"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 3,
       "task": "building-permit"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 2,
       "task": "zoning"
     }

@@ -14,32 +14,32 @@
       "task": "business-plan"
     },
     {
-      "step": 2,
+      "step": 1,
       "weight": 1,
       "task": "payment-structure-non-medical-trans"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 20,
       "task": "register-for-ein"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 25,
       "task": "register-for-taxes"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 2,
       "task": "register-vehicle"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 3,
       "task": "logisticare"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 10,
       "task": "get-insurance"
     }

@@ -1,12 +1,12 @@
 {
   "roadmapSteps": [
     {
-      "step": 3,
+      "step": 2,
       "weight": 19,
       "task": "search-business-name"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 21,
       "task": "form-business-entity"
     }

@@ -1,7 +1,7 @@
 {
   "roadmapSteps": [
     {
-      "step": 5,
+      "step": 4,
       "weight": 2,
       "task": "mocha-task-5"
     }

@@ -15,32 +15,32 @@
       "task": "business-plan"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 20,
       "task": "register-for-ein"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 25,
       "task": "register-for-taxes"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 10,
       "task": "get-insurance"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 8,
       "task": "apply-for-shop-license"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 9,
       "task": "individual-staff-licenses-cosmetology"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 10,
       "task": "site-inspection"
     }

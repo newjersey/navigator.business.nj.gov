@@ -15,32 +15,32 @@
       "task": "business-plan"
     },
     {
-      "step": 2,
+      "step": 1,
       "weight": 100,
       "task": "research-insurance-needs-home-contractor"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 20,
       "task": "register-for-ein"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 25,
       "task": "register-for-taxes"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 10,
       "task": "get-insurance-home-contractor"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 100,
       "task": "register-consumer-affairs"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 200,
       "task": "Haul-Waste"
     }
