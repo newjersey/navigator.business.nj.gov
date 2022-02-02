@@ -58,10 +58,7 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
   };
 
   const selectDate = (label: string, value: Dayjs) => {
-    fireEvent.click(subject.getByLabelText(label));
-    fireEvent.click(subject.getByText(value.format("YYYY"), { selector: "button" }));
-    fireEvent.click(subject.getByText(value.format("MMM"), { selector: "button" }));
-    fireEvent.click(subject.getByLabelText(value.format("MMM D, YYYY")));
+    fillText(label, value.format("MM/DD/YYYY"));
     fireEvent.blur(subject.getByLabelText("Date of formation"));
   };
 

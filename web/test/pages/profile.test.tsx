@@ -27,7 +27,12 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import dayjs from "dayjs";
 import React from "react";
+
+const date = dayjs().subtract(10, "days");
+
+const dateOfFormation = date.format("YYYY-MM-DD");
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
@@ -313,6 +318,7 @@ describe("profile", () => {
       selectByValue("Ownership", "woman-owned");
       fillText("Employer id", "02-3456780");
       fillText("Entity id", "0234567890");
+      fillText("Date of formation", date.format("MM/DD/YYYY"));
       fillText("Tax id", "023456790");
       fillText("Notes", "whats appppppp");
       fillText("Tax pin", "6666");
@@ -331,6 +337,7 @@ describe("profile", () => {
             existingEmployees: "123",
             ownershipTypeIds: ["veteran-owned", "woman-owned"],
             municipality: newark,
+            dateOfFormation,
             taxId: "023456790",
             entityId: "0234567890",
             employerId: "023456780",
@@ -349,6 +356,7 @@ describe("profile", () => {
           industryId: "e-commerce",
           entityId: "1234567890",
           employerId: "123456789",
+          dateOfFormation,
           taxId: "123456790",
           notes: "whats appppppp",
           municipality: generateMunicipality({
@@ -371,12 +379,32 @@ describe("profile", () => {
       expect(getEmployerIdValue()).toEqual("12-3456789");
       expect(getEntityIdValue()).toEqual("1234567890");
       expect(getTaxIdValue()).toEqual("123456790");
+      expect(getDateOfFormation()).toEqual(date.format("MM/DD/YYYY"));
       expect(getNotesValue()).toEqual("whats appppppp");
       expect(getMunicipalityValue()).toEqual("Newark");
       expect(subject.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
       expect(getExistingEmployeesValue()).toEqual("123");
       expect(getTaxPinValue()).toEqual("6666");
       expect(getRadioButtonFromFormControlLabel("home-based-business-false")).toBeChecked();
+    });
+
+    it("shows an error when dateOfFormation is empty", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({ hasExistingBusiness: true }),
+      });
+      subject = renderPage({ userData: userData });
+
+      fillText("Date of formation", "");
+      fireEvent.blur(subject.getByLabelText("Date of formation"));
+      await waitFor(() => {
+        expect(subject.queryByText(OnboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
+      });
+
+      fillText("Date of formation", date.format("MM/DD/YYYY"));
+      fireEvent.blur(subject.getByLabelText("Date of formation"));
+      await waitFor(() => {
+        expect(subject.queryByText(OnboardingDefaults.dateOfFormationErrorText)).not.toBeInTheDocument();
+      });
     });
 
     it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
@@ -495,6 +523,9 @@ describe("profile", () => {
     (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
 
   const getEntityIdValue = (): string => (subject.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+
+  const getDateOfFormation = (): string =>
+    (subject.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
 
   const getNotesValue = (): string => (subject.queryByLabelText("Notes") as HTMLInputElement)?.value;
 

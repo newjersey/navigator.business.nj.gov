@@ -2,12 +2,12 @@ import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefa
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import { DatePicker, LocalizationProvider } from "@mui/lab";
+import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextFieldProps } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import { Content } from "../Content";
 import { GenericTextField } from "../GenericTextField";
 
@@ -16,23 +16,25 @@ dayjs.extend(advancedFormat);
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
+  headerAriaLevel?: number;
 }
 
-export const OnboardingDateOfFormation = (props: Props): ReactElement => {
+export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const fieldName = "dateOfFormation";
   const { state, setProfileData } = useContext(ProfileDataContext);
-  const [dateValue, setDateValue] = React.useState<Dayjs | null>(
-    state.profileData[fieldName] ? dayjs(state.profileData[fieldName]) : null
-  );
+  const [dateValue, setDateValue] = React.useState<Dayjs | null>(null);
   const [dateError, setDateError] = React.useState<boolean>(false);
 
   const onValidation = (): void => {
-    additionalValidation(dateValue) && handleChange(dateValue as Dayjs);
     props.onValidation && props.onValidation(fieldName, !additionalValidation(dateValue));
   };
 
   const additionalValidation = (newValue: Dayjs | null): boolean =>
     newValue !== null && newValue?.isValid() && !dateError;
+
+  useEffect(() => {
+    !!state.profileData.dateOfFormation && setDateValue(dayjs(state.profileData.dateOfFormation));
+  }, [state.profileData.dateOfFormation]);
 
   const handleChange = (dayjs: Dayjs) => {
     setProfileData({
@@ -41,11 +43,12 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
     });
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const Picker = process.env.NODE_ENV === "test" ? DesktopDatePicker : DatePicker;
+  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
+      <Picker
         views={["year", "month", "day"]}
         disableFuture
         openTo="year"
