@@ -33,6 +33,7 @@ import { migrate_v36_to_v37 } from "./v37_add_dateofformation";
 import { migrate_v37_to_v38 } from "./v38_swap_certification_for_ownership";
 import { migrate_v38_to_v39 } from "./v39_add_tax_pin";
 import { migrate_v2_to_v3 } from "./v3_change_LegalStructure";
+import { migrate_v39_to_v40 } from "./v40_merge_down_steps";
 import { migrate_v3_to_v4 } from "./v4_add_municipality";
 import { migrate_v4_to_v5 } from "./v5_add_liquor_license";
 import { migrate_v5_to_v6 } from "./v6_add_home_based_business";
@@ -83,6 +84,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v36_to_v37,
   migrate_v37_to_v38,
   migrate_v38_to_v39,
+  migrate_v39_to_v40,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

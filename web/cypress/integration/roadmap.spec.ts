@@ -27,9 +27,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[id="plan-header"]').click({ force: true });
     cy.get('[data-step="1"]').should("exist");
     cy.get('[data-task="business-plan"]').should("exist");
-
-    // step 2
-    cy.get('[data-step="2"]').should("exist");
     cy.get('[data-task="research-insurance-needs"]').should("exist");
 
     // step 3
@@ -37,11 +34,11 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[id="start-header"]').click({ force: true });
     cy.get('[id="start-content"]').should("not.be.visible");
     cy.get('[id="start-header"]').click({ force: true });
-    cy.get('[data-step="3"]').should("exist");
+    cy.get('[data-step="2"]').should("exist");
     cy.get('[data-task="register-trade-name"]').should("exist");
 
     // step 4
-    cy.get('[data-step="4"]').should("exist");
+    cy.get('[data-step="3"]').should("exist");
 
     // tasks screen
     cy.get('[data-task="register-trade-name"]').click({ force: true });
@@ -49,7 +46,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
-    cy.get('[data-step="5"]').click({ force: true });
+    cy.get('[data-step="4"]').click({ force: true });
     cy.get('[data-task="check-local-requirements"]').click({ force: true });
     cy.get('[data-task-id="register-trade-name"]').should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
