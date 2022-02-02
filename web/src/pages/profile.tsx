@@ -6,6 +6,7 @@ import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
+import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
@@ -182,6 +183,13 @@ const ProfilePage = (props: Props): ReactElement => {
       </div>
       <div className="margin-top-4">
         <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+      </div>
+      <div className="margin-top-4">
+        <OnboardingDateOfFormation
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          headerAriaLevel={3}
+        />
       </div>
       <div className="margin-top-4">
         <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />

@@ -172,6 +172,7 @@ describe("onboarding - shared", () => {
       businessName: "Cool Computers",
       industryId: "e-commerce",
       homeBasedBusiness: true,
+      dateOfFormation: undefined,
       legalStructureId: undefined,
       municipality: newark,
       liquorLicense: false,
