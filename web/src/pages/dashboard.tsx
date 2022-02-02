@@ -80,7 +80,9 @@ const DashboardPage = (props: Props): ReactElement => {
                       <OpportunityCard key={opp.id} opportunity={opp} />
                     ))}
                   </div>
-                  <Content>{props.displayContent.opportunityTextMd}</Content>
+                  <div className="margin-top-205">
+                    <Content>{props.displayContent.opportunityTextMd}</Content>
+                  </div>
                 </div>
               </div>
             </div>
