@@ -1,3 +1,39 @@
+# [1.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.10.0...v1.11.0) (2022-02-03)
+
+
+### Bug Fixes
+
+* [[#1188](https://github.com/newjersey/navigator.business.nj.gov/issues/1188)] correct the placeholder for the legal structure dropdown ([4eb6da8](https://github.com/newjersey/navigator.business.nj.gov/commit/4eb6da8ddb150a98525578d7311d7a4ff654ae00))
+* [[#1326](https://github.com/newjersey/navigator.business.nj.gov/issues/1326)] create archive for funding markdowns ([6a32a53](https://github.com/newjersey/navigator.business.nj.gov/commit/6a32a53ed1ae641a875ac1c9e556add8e0380479))
+* [[#1326](https://github.com/newjersey/navigator.business.nj.gov/issues/1326)] move archived-opportunities folder ([422e5c1](https://github.com/newjersey/navigator.business.nj.gov/commit/422e5c10f7ca905812bf6436010879b8fbf329a7))
+* [[#1364](https://github.com/newjersey/navigator.business.nj.gov/issues/1364)] formation API error handling ([b6de54d](https://github.com/newjersey/navigator.business.nj.gov/commit/b6de54d62607f337166d73dc0adac06927496e00))
+* [[#1364](https://github.com/newjersey/navigator.business.nj.gov/issues/1364)] wrap long URL in formation error ([f0e151a](https://github.com/newjersey/navigator.business.nj.gov/commit/f0e151a4f6cffaa87ac2c44e422cb55c65763da4))
+* [[#1428](https://github.com/newjersey/navigator.business.nj.gov/issues/1428)] update task status for pharmacy license ([152e08c](https://github.com/newjersey/navigator.business.nj.gov/commit/152e08c5d473e4aa63448baa2583e953ea4074ae))
+* businessformation date field test, month awareness ([7ce1de0](https://github.com/newjersey/navigator.business.nj.gov/commit/7ce1de0af09af4bee33d2914329faf646d743e67))
+* changed onboarding certification to ownership ([e14bb83](https://github.com/newjersey/navigator.business.nj.gov/commit/e14bb8317201893673e0c0ef503251c5167074c7))
+* changed onboarding certification to ownership - backend ([82874d0](https://github.com/newjersey/navigator.business.nj.gov/commit/82874d03390d337a054cec704238295d643ed699))
+* cypress onboarding test ([0406864](https://github.com/newjersey/navigator.business.nj.gov/commit/04068643b922fe4c1ad17695cc847f12ba1049e1))
+* cypress onboarding test ([d699bad](https://github.com/newjersey/navigator.business.nj.gov/commit/d699bad7010921991746f27164667ff3ec0c3bef))
+* **deps:** update dependency next to v12.0.9 [security] ([efe49c0](https://github.com/newjersey/navigator.business.nj.gov/commit/efe49c04c6bf5e5b635f1dafc35a1dc95c65a528))
+* **deps:** update dependency next-seo to v5 ([47c6453](https://github.com/newjersey/navigator.business.nj.gov/commit/47c6453e0da5baa3645815f48387e8d6c2d23b9f))
+* **deps:** update dependency swr to v1.2.0 ([ff7efe3](https://github.com/newjersey/navigator.business.nj.gov/commit/ff7efe341701b6bec3b12a0420983196974dc79f))
+* **deps:** update dependency winston to v3.5.0 ([33e50fe](https://github.com/newjersey/navigator.business.nj.gov/commit/33e50fec4c44102fbee53e42724d8bc0e8418d67))
+* make Onboarding Formation date half-width ([ec6ad0a](https://github.com/newjersey/navigator.business.nj.gov/commit/ec6ad0a5e4757794d39cb01c297b3780b321eb5c))
+* updating Contextual Information entity-id ([#1512](https://github.com/newjersey/navigator.business.nj.gov/issues/1512)) ([14a9528](https://github.com/newjersey/navigator.business.nj.gov/commit/14a95284b60951a2d5764ab62047b0d1ccae7b0e))
+* updating Tasks apply-scorp-federal ([#1508](https://github.com/newjersey/navigator.business.nj.gov/issues/1508)) ([963b073](https://github.com/newjersey/navigator.business.nj.gov/commit/963b07318c879815b8bad296edef3aab46d17898))
+* updating Tasks apply-scorp-state ([#1509](https://github.com/newjersey/navigator.business.nj.gov/issues/1509)) ([724adbc](https://github.com/newjersey/navigator.business.nj.gov/commit/724adbc4af9ea9dc809902cc3f4cd65df0732d37))
+* updating Tasks insurance-massage-therapy ([#1507](https://github.com/newjersey/navigator.business.nj.gov/issues/1507)) ([14f123c](https://github.com/newjersey/navigator.business.nj.gov/commit/14f123c1bc626329c93e6891606b955b55011a6f))
+* updating Tasks license-accounting ([#1496](https://github.com/newjersey/navigator.business.nj.gov/issues/1496)) ([f7532da](https://github.com/newjersey/navigator.business.nj.gov/commit/f7532da1378914d4c2f07e34a145b9a5b6bc3f93))
+* updating Tasks license-massage-therapy ([#1452](https://github.com/newjersey/navigator.business.nj.gov/issues/1452)) ([bfe9521](https://github.com/newjersey/navigator.business.nj.gov/commit/bfe95212b3565d7a6829ea9a49594c29a738051b))
+
+
+### Features
+
+* [[#1326](https://github.com/newjersey/navigator.business.nj.gov/issues/1326)] one-time import funding opportunities from airtable ([379f103](https://github.com/newjersey/navigator.business.nj.gov/commit/379f103427a0c403ee56bf3d070c525522463d9b))
+* [[#1363](https://github.com/newjersey/navigator.business.nj.gov/issues/1363)] add scorp legal structure ([5fecbe3](https://github.com/newjersey/navigator.business.nj.gov/commit/5fecbe3735c9e3768b9617fa041bd7fa13c56b5e))
+* [[#1396](https://github.com/newjersey/navigator.business.nj.gov/issues/1396)] oscar profile page ([db99b2b](https://github.com/newjersey/navigator.business.nj.gov/commit/db99b2b0d11be4c3b0b70e7f46267224906f4a40))
+* [[#880](https://github.com/newjersey/navigator.business.nj.gov/issues/880)] add oscar dashboard v1 ([6be52eb](https://github.com/newjersey/navigator.business.nj.gov/commit/6be52ebdd62a9952eab72e028cd04438292858e8))
+
 # [1.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.9.0...v1.10.0) (2022-01-27)
 
 
