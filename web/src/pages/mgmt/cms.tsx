@@ -1,6 +1,7 @@
+import { SlugControl } from "@/lib/cms/fields/slugfield";
+import OpportunitiesPreview from "@/lib/cms/previews/opportunities";
+import TaskPreview from "@/lib/cms/previews/task";
 import dynamic from "next/dynamic";
-import { SlugControl } from "../../lib/cms/fields/slugfield";
-import TaskPreview from "../../lib/cms/previews/task";
 
 const CMS_CONFIG = {};
 const Loading = () => (
@@ -20,6 +21,10 @@ const CMS = dynamic(
       CMS.registerWidget("slug", SlugControl);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("tasks", TaskPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("funding-opportunities", OpportunitiesPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("archived-funding-opportunities", OpportunitiesPreview);
     }),
   { ssr: false, loading: Loading }
 );

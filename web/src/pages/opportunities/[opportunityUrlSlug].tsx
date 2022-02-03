@@ -20,6 +20,21 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
 }
 
+export const OpportunityElement = (props: { opportunity: Opportunity }): ReactElement => {
+  return (
+    <>
+      <div className="flex flex-column space-between minh-37">
+        <div>
+          <div role="heading" aria-level={1} className="margin-top-0 margin-bottom-2 h2-styling">
+            {props.opportunity.name}
+          </div>
+          <Content>{props.opportunity.contentMd}</Content>
+        </div>
+        <TaskCTA link={props.opportunity.callToActionLink} text={props.opportunity.callToActionText} />
+      </div>
+    </>
+  );
+};
 const OpportunityPage = (props: Props): ReactElement => {
   useAuthProtectedPage();
 
@@ -29,15 +44,7 @@ const OpportunityPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} />
         <SidebarPageLayout operateReferences={props.operateReferences}>
-          <div className="flex flex-column space-between minh-37">
-            <div>
-              <div role="heading" aria-level={1} className="margin-top-0 margin-bottom-2 h2-styling">
-                {props.opportunity.name}
-              </div>
-              <Content>{props.opportunity.contentMd}</Content>
-            </div>
-            <TaskCTA link={props.opportunity.callToActionLink} text={props.opportunity.callToActionText} />
-          </div>
+          <OpportunityElement opportunity={props.opportunity} />
         </SidebarPageLayout>
       </PageSkeleton>
     </>
