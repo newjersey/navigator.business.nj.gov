@@ -359,6 +359,7 @@ collections:
         widget: "select"
         options: [ "", "Do Not Publish" ]
         default: ""
+        required: false
       - { label: "Open Date", name: "openDate", widget: "date", required: false, default: '' }
       - { label: "Due Date", name: "dueDate", widget: "date", required: false, default: '' }
       - label: "Status"
@@ -384,6 +385,7 @@ collections:
         name: "preferenceGiven"
         widget: "select"
         options: [ "yes", "no", "" ]
+        required: false
       - label: "County"
         name: "county"
         widget: "select"
