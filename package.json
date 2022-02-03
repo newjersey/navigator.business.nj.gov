@@ -68,7 +68,7 @@
     "simple-oauth2": "4.3.0",
     "swr": "1.2.0",
     "uuid": "8.3.2",
-    "winston": "3.5.0",
+    "winston": "3.5.1",
     "winston-cloudwatch": "3.1.1",
     "xml2js": "0.4.23"
   },
