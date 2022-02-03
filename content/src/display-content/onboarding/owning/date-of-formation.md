@@ -1,3 +1,3 @@
 ## Business Formation
 
-When did you register your business?
+When did you form your business (this is the day you got your `Entity ID|entity-id`)?
