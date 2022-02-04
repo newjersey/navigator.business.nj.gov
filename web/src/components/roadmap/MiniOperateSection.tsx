@@ -1,5 +1,4 @@
 import { OperateReference, SectionType } from "@/lib/types/types";
-import { featureFlags } from "@/lib/utils/helpers";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
@@ -12,8 +11,6 @@ interface Props {
 
 export const MiniOperateSection = ({ operateReferences, onClose }: Props): ReactElement => {
   const router = useRouter();
-  const { featureDisableOperate } = featureFlags(router.query);
-  if (featureDisableOperate) return <></>;
 
   return (
     <SectionAccordion sectionType={"OPERATE" as SectionType} mini={true}>

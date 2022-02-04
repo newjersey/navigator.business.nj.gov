@@ -1,15 +1,11 @@
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
-import { OperateReference } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
-  generateOperateReference,
   generatePreferences,
-  generateProfileData,
   generateStep,
   generateTask,
-  generateTaxFiling,
   generateTaxFilingData,
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -24,7 +20,6 @@ import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
-import dayjs from "dayjs";
 import React from "react";
 import { useMockDate } from "../mock/useMockDate";
 
@@ -48,12 +43,6 @@ const setMobileScreen = (value: boolean): void => {
 
 const emptyDisplayContent = {
   contentMd: "",
-  operateDisplayContent: {
-    filingCalendarMd: "",
-    entityIdErrorNotFoundMd: "",
-    entityIdErrorNotRegisteredMd: "",
-    entityIdMd: "",
-  },
 };
 
 describe("roadmap page", () => {
@@ -407,67 +396,17 @@ describe("roadmap page", () => {
 
     useMockUserData({
       preferences: generatePreferences({
-        roadmapOpenSections: ["PLAN", "START", "OPERATE"],
+        roadmapOpenSections: ["PLAN", "START"],
       }),
-      taxFilingData: generateTaxFilingData({ entityIdStatus: "UNKNOWN" }),
+      taxFilingData: generateTaxFilingData({}),
     });
 
     const subject = renderRoadmapPage();
 
     const sectionStart = subject.getByTestId("section-start");
     const sectionPlan = subject.getByTestId("section-plan");
-    const sectionOperate = subject.getByTestId("section-operate");
 
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
-    expect(within(sectionOperate).getByText(RoadmapDefaults.operateFormSubmitButtonText)).toBeVisible();
-  });
-
-  it("renders the calendar when entity ID is validated", () => {
-    useMockDate("2021-11-01");
-
-    useMockRoadmap({
-      steps: [
-        generateStep({ name: "step1", section: "PLAN" }),
-        generateStep({ name: "step2", section: "START" }),
-      ],
-    });
-
-    useMockUserData({
-      profileData: generateProfileData({}),
-      preferences: generatePreferences({
-        roadmapOpenSections: ["OPERATE"],
-      }),
-      taxFilingData: generateTaxFilingData({
-        entityIdStatus: "EXISTS_AND_REGISTERED",
-        filings: [
-          generateTaxFiling({
-            identifier: "some-tax-filing-identifier-1",
-            dueDate: "2021-11-30",
-          }),
-        ],
-      }),
-    });
-
-    const filingRef: Record<string, OperateReference> = {
-      "some-tax-filing-identifier-1": generateOperateReference({
-        name: "some-name-1",
-        urlSlug: "some-urlSlug-1",
-      }),
-    };
-
-    const renderRoadmapPage = (): RenderResult => {
-      return render(
-        <ThemeProvider theme={createTheme()}>
-          <RoadmapPage operateReferences={filingRef} displayContent={emptyDisplayContent} />
-        </ThemeProvider>
-      );
-    };
-
-    const subject = renderRoadmapPage();
-    const annualReportLink = subject.getByTestId("some-tax-filing-identifier-1");
-    const currMonth = subject.getByTestId(dayjs().format("Nov 2021"));
-    expect(currMonth).toContainElement(annualReportLink);
-    expect(annualReportLink).toHaveAttribute("href", "filings/some-urlSlug-1");
   });
 });

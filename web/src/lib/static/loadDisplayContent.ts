@@ -172,20 +172,9 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
 
 export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
   const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
-  const readOperateContent = (filename: string): string =>
-    fs.readFileSync(path.join(displayContentDir, "roadmap", filename), "utf8");
 
   return {
     contentMd: getMarkdown(roadmapContents).content,
-    operateDisplayContent: {
-      entityIdMd: getMarkdown(readOperateContent("operate-entity-id-form.md")).content,
-      filingCalendarMd: getMarkdown(readOperateContent("operate-filing-calendar.md")).content,
-      entityIdErrorNotRegisteredMd: getMarkdown(
-        readOperateContent("operate-entity-id-error-not-registered.md")
-      ).content,
-      entityIdErrorNotFoundMd: getMarkdown(readOperateContent("operate-entity-id-error-not-found.md"))
-        .content,
-    },
   };
 };
 

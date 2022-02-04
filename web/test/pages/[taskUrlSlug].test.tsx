@@ -165,60 +165,79 @@ describe("task page", () => {
     });
   });
 
-  describe("task status updates", () => {
-    let taskProgress: Record<string, TaskProgress>;
-    beforeEach(() => {
-      const planTaskId = "123";
-      const sectionTaskId = "124";
+  it("shows congratulatory modal with link when PLAN section completed", () => {
+    const planTaskId = "123";
+    const startTaskId = "124";
 
-      taskProgress = {
+    const planTask = generateTask({ id: planTaskId });
+    const startTask = generateTask({ id: startTaskId });
+
+    const userData = generateUserData({
+      taskProgress: {
         [planTaskId]: "NOT_STARTED",
-        [sectionTaskId]: "COMPLETED",
-      };
-      const planTask = generateTask({ id: planTaskId });
-
-      const userData = generateUserData({
-        taskProgress,
-        preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
-      });
-
-      useMockRoadmap({
-        steps: [
-          generateStep({ tasks: [planTask], section: "PLAN" }),
-          generateStep({ tasks: [generateTask({ id: sectionTaskId })], section: "START" }),
-        ],
-      });
-
-      subject = renderPage(planTask, userData);
-
-      changeTaskNotStartedToCompleted();
-
-      taskProgress[planTaskId] = "COMPLETED";
-
-      expect(currentUserData().taskProgress).toEqual(taskProgress);
+        [startTaskId]: "NOT_STARTED",
+      },
+      preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
     });
 
-    it("show modal upon section completion", async () => {
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
-      const link = subject.queryByText(
-        `${SectionDefaults["OPERATE"]} ${RoadmapDefaults.congratulatorModalLinkText}`
-      );
-      expect(link).toBeVisible();
-      fireEvent.click(link as HTMLElement);
-      expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    useMockRoadmap({
+      steps: [
+        generateStep({ tasks: [planTask], section: "PLAN" }),
+        generateStep({ tasks: [startTask], section: "START" }),
+      ],
     });
 
-    describe("operate feature flag check", () => {
-      beforeAll(() => {
-        process.env = Object.assign(process.env, { FEATURE_DISABLE_OPERATE: true });
-      });
-      it("hides operate text on modal with feature flag", () => {
-        expect(subject.getByText(`${RoadmapDefaults.congratulatorModalHeader}`)).toBeVisible();
-        expect(
-          subject.queryByText(`${SectionDefaults["OPERATE"]} ${RoadmapDefaults.congratulatorModalLinkText}`)
-        ).not.toBeInTheDocument();
-      });
+    subject = renderPage(planTask, userData);
+    changeTaskNotStartedToCompleted();
+
+    expect(currentUserData().taskProgress).toEqual({
+      [planTaskId]: "COMPLETED",
+      [startTaskId]: "NOT_STARTED",
     });
+
+    expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
+    const link = subject.queryByText(
+      `${SectionDefaults["START"]} ${RoadmapDefaults.congratulatorModalLinkText}`
+    );
+    expect(link).toBeInTheDocument();
+    fireEvent.click(link as HTMLElement);
+    expect(mockPush).toHaveBeenCalledWith("/roadmap");
+  });
+
+  it("shows congratulatory modal without link when START section completed", () => {
+    const planTaskId = "123";
+    const startTaskId = "124";
+
+    const planTask = generateTask({ id: planTaskId });
+    const startTask = generateTask({ id: startTaskId });
+
+    const userData = generateUserData({
+      taskProgress: {
+        [planTaskId]: "COMPLETED",
+        [startTaskId]: "NOT_STARTED",
+      },
+      preferences: generatePreferences({ roadmapOpenSections: ["START"] }),
+    });
+
+    useMockRoadmap({
+      steps: [
+        generateStep({ tasks: [planTask], section: "PLAN" }),
+        generateStep({ tasks: [startTask], section: "START" }),
+      ],
+    });
+
+    subject = renderPage(startTask, userData);
+    changeTaskNotStartedToCompleted();
+
+    expect(currentUserData().taskProgress).toEqual({
+      [planTaskId]: "COMPLETED",
+      [startTaskId]: "COMPLETED",
+    });
+
+    expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
+    expect(
+      subject.queryByText(RoadmapDefaults.congratulatorModalLinkText, { exact: false })
+    ).not.toBeInTheDocument();
   });
 
   it("loads Search Business Names task screen for search-available-names", () => {

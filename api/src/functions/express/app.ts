@@ -13,7 +13,6 @@ import { userRouterFactory } from "../../api/userRouter";
 import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "../../client/ApiBusinessNameClient";
 import { ApiFormationClient } from "../../client/ApiFormationClient";
-import { FakeTaxFilingClient } from "../../client/FakeTaxFilingClient";
 import { GovDeliveryNewsletterClient } from "../../client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
@@ -97,8 +96,6 @@ const addToAirtableUserTesting = addToUserTestingFactory(userDataClient, airtabl
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 
-const taxFilingClient = FakeTaxFilingClient();
-
 const myNJSelfRegClient = MyNJSelfRegClientFactory(
   {
     serviceToken: process.env.MYNJ_SERVICE_TOKEN || "",
@@ -120,13 +117,7 @@ const apiFormationClient = ApiFormationClient(
 app.use(bodyParser.json({ strict: false }));
 app.use(
   "/api",
-  userRouterFactory(
-    userDataClient,
-    updateLicenseStatus,
-    taxFilingClient,
-    addGovDeliveryNewsletter,
-    addToAirtableUserTesting
-  )
+  userRouterFactory(userDataClient, updateLicenseStatus, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
 app.use("/api", businessNameRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));

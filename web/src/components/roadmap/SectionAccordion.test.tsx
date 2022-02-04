@@ -63,7 +63,7 @@ describe("<SectionAccordion />", () => {
       "PLAN",
       generateUserData({
         preferences: generatePreferences({
-          roadmapOpenSections: ["PLAN", "START", "OPERATE"],
+          roadmapOpenSections: ["PLAN", "START"],
         }),
       })
     );
@@ -72,10 +72,10 @@ describe("<SectionAccordion />", () => {
 
     expect(sectionPlan).toBeInTheDocument();
     fireEvent.click(sectionPlan);
-    expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START", "OPERATE"]);
+    expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
     fireEvent.click(sectionPlan);
     expect(currentUserData().preferences.roadmapOpenSections).toEqual(
-      expect.arrayContaining(["PLAN", "START", "OPERATE"])
+      expect.arrayContaining(["PLAN", "START"])
     );
   });
 

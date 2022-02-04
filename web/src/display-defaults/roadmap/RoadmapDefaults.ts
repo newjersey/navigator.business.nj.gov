@@ -18,7 +18,6 @@ export const RoadmapDefaults: Record<string, string> = {
   roadmapTitleNotSet: "Your Business Roadmap",
   roadmapTitleTemplate: "Business Roadmap for ${businessName}",
   loadingText: "Loading...",
-  operateFormSubmitButtonText: "Submit",
   calendarFilingDueDateLabel: "Due",
   congratulatorModalTitle: "You did it!",
   congratulatorModalHeader: "You reached a crucial milestone as a business.",

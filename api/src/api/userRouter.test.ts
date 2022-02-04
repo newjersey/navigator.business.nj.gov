@@ -1,4 +1,3 @@
-import { EntityIdStatus } from "@shared/taxFiling";
 import bodyParser from "body-parser";
 import dayjs from "dayjs";
 import express, { Express } from "express";
@@ -7,12 +6,10 @@ import request from "supertest";
 import {
   generateLicenseData,
   generateProfileData,
-  generateTaxFiling,
-  generateTaxFilingData,
   generateUser,
   generateUserData,
 } from "../../test/factories";
-import { AddNewsletter, AddToUserTesting, TaxFilingClient, UserDataClient } from "../domain/types";
+import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
 import { userRouterFactory } from "./userRouter";
 
 jest.mock("jsonwebtoken", () => ({
@@ -24,7 +21,6 @@ describe("userRouter", () => {
   let app: Express;
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
-  let stubTaxFilingClient: jest.Mocked<TaxFilingClient>;
   let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
   let stubAddToUserTesting: jest.MockedFunction<AddToUserTesting>;
   let stubUpdateLicenseStatus: jest.Mock;
@@ -38,19 +34,10 @@ describe("userRouter", () => {
     stubUpdateLicenseStatus = jest.fn();
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
-    stubTaxFilingClient = {
-      fetchForEntityId: jest.fn(),
-    };
     app = express();
     app.use(bodyParser.json());
     app.use(
-      userRouterFactory(
-        stubUserDataClient,
-        stubUpdateLicenseStatus,
-        stubTaxFilingClient,
-        stubAddNewsletter,
-        stubAddToUserTesting
-      )
+      userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus, stubAddNewsletter, stubAddToUserTesting)
     );
   });
 
@@ -178,7 +165,7 @@ describe("userRouter", () => {
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({ dateOfFormation: "2021-03-01", entityId: undefined }),
-        taxFilingData: { entityIdStatus: "UNKNOWN", filings: [] },
+        taxFilingData: { filings: [] },
       });
 
       stubUserDataClient.put.mockResolvedValue(postedUserData);
@@ -200,7 +187,6 @@ describe("userRouter", () => {
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({ dateOfFormation: "2021-03-01", entityId: undefined }),
         taxFilingData: {
-          entityIdStatus: "UNKNOWN",
           filings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
         },
       });
@@ -211,54 +197,7 @@ describe("userRouter", () => {
       expect(stubUserDataClient.put).toHaveBeenCalledWith({
         ...postedUserData,
         taxFilingData: {
-          ...postedUserData.taxFilingData,
           filings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
-        },
-      });
-    });
-
-    it("fetches new entity ID status and updates taxFilingData", async () => {
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const postedUserData = generateUserData({
-        user: generateUser({ id: "123" }),
-        profileData: generateProfileData({ entityId: "1234567890" }),
-        taxFilingData: generateTaxFilingData({ entityIdStatus: "UNKNOWN", filings: [] }),
-      });
-
-      const stubFilingData = {
-        entityIdStatus: "EXISTS_AND_REGISTERED" as EntityIdStatus,
-        filings: [generateTaxFiling({})],
-      };
-
-      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
-      stubTaxFilingClient.fetchForEntityId.mockResolvedValue(stubFilingData);
-
-      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
-
-      expect(stubTaxFilingClient.fetchForEntityId).toHaveBeenCalledWith("1234567890");
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...postedUserData,
-        taxFilingData: stubFilingData,
-      });
-    });
-
-    it("does not fetch data and overwrites taxFilingData if entity ID is empty", async () => {
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const postedUserData = generateUserData({
-        user: generateUser({ id: "123" }),
-        profileData: generateProfileData({ entityId: "" }),
-        taxFilingData: generateTaxFilingData({ entityIdStatus: "EXISTS_AND_REGISTERED", filings: [] }),
-      });
-
-      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
-      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
-
-      expect(stubTaxFilingClient.fetchForEntityId).not.toHaveBeenCalled();
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...postedUserData,
-        taxFilingData: {
-          entityIdStatus: "UNKNOWN",
-          filings: [],
         },
       });
     });
