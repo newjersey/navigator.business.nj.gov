@@ -16,7 +16,7 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: <50
+businessSize: n/a
 homeBased: yes
 mwvb: n/a
 preferenceGiven: ""
@@ -28,7 +28,6 @@ industry:
   - Professional, Scientific and Technical Services
   - Manufacturing
   - Other Services (except Public Administration)
-  - Industries not classified
 ---
 The Clean Tech Research & Development (R&D) Voucher Program helps early-stage New Jersey clean tech and clean energy companies offset the cost of accessing equipment at participating New Jersey university or federal labs for R&D.
 
