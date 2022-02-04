@@ -25,30 +25,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:4.3.20":
-  version: 4.3.20
-  resolution: "@aws-amplify/auth@npm:4.3.20"
+"@aws-amplify/auth@npm:4.4.1":
+  version: 4.4.1
+  resolution: "@aws-amplify/auth@npm:4.4.1"
   dependencies:
-    "@aws-amplify/cache": 4.0.32
-    "@aws-amplify/core": 4.3.12
-    amazon-cognito-identity-js: 5.2.4
+    "@aws-amplify/cache": 4.0.34
+    "@aws-amplify/core": 4.3.14
+    amazon-cognito-identity-js: 5.2.6
     crypto-js: ^4.1.1
-  checksum: 5d7ac89131451cbc3e5721dbfbc424a5126cc6cd4b4a2d5094229a7857fbaad9f85e88a2363cfd62f20035753e36d728f07779fcc62e0740b7fbf0bccd19f2a1
+  checksum: 9ad2fc444caa0cf065601e17aab988a7242be3b7fb5b4525197912ac8d8cc27f2472ec45050166d139676061aa2f60d5304761ca3a86c4e7a26c8342847abff0
   languageName: node
   linkType: hard
 
-"@aws-amplify/cache@npm:4.0.32":
-  version: 4.0.32
-  resolution: "@aws-amplify/cache@npm:4.0.32"
+"@aws-amplify/cache@npm:4.0.34":
+  version: 4.0.34
+  resolution: "@aws-amplify/cache@npm:4.0.34"
   dependencies:
-    "@aws-amplify/core": 4.3.12
-  checksum: 1aa368eb93146a6fe9c294192cc47dbaac1b5ed1945b4afcc1b852720849353ac0d8e549537cb96ce9f85f8bebdce67baf061fdac86232f982f0f275a53b3d18
+    "@aws-amplify/core": 4.3.14
+  checksum: 55a8f68eeb4d480d856a3e4a9ba8bafbb38f54e69e847aad5148dc58c5df44c22c822089bdb663edfc20c54c57fcea06e78dd8646f7da9561a1e7526c9675675
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:4.3.12":
-  version: 4.3.12
-  resolution: "@aws-amplify/core@npm:4.3.12"
+"@aws-amplify/core@npm:4.3.14":
+  version: 4.3.14
+  resolution: "@aws-amplify/core@npm:4.3.14"
   dependencies:
     "@aws-crypto/sha256-js": 1.0.0-alpha.0
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
@@ -58,7 +58,7 @@ __metadata:
     "@aws-sdk/util-hex-encoding": 3.6.1
     universal-cookie: ^4.0.4
     zen-observable-ts: 0.8.19
-  checksum: 60a234a29629e29f0ec86fbf8891d9824105d833bb32294926244a36e10226fe24c9e82945ac4ca48cc661cedee023db7c0e8b6f73c7c3d2c492565ec3d4525b
+  checksum: 198ed04d7ecd4a077b8acf94a7da45cec46f57e106f208eb1dc4369b6f72f99bc422f713379fa7bcf09b4bd9151f4b0241b1f53bc9692e6e775a7f70e0289524
   languageName: node
   linkType: hard
 
@@ -86,41 +86,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-react@npm:2.1.9":
-  version: 2.1.9
-  resolution: "@aws-amplify/ui-react@npm:2.1.9"
+"@aws-amplify/ui-react@npm:2.2.2":
+  version: 2.2.2
+  resolution: "@aws-amplify/ui-react@npm:2.2.2"
   dependencies:
-    "@aws-amplify/ui": 3.0.8
+    "@aws-amplify/ui": 3.0.12
     "@aws-amplify/ui-react-v1": "npm:@aws-amplify/ui-react@1.2.9"
     "@radix-ui/react-accordion": 0.1.1
     "@radix-ui/react-dropdown-menu": 0.1.1
     "@radix-ui/react-id": 0.1.1
     "@radix-ui/react-slider": 0.1.1
     "@radix-ui/react-tabs": 0.1.1
-    "@xstate/react": ^1.4.0
-    classnames: ^2.3.1
-    deepmerge: ^4.2.2
-    lodash: ^4.17.21
-    qrcode: ^1.4.4
-    react-generate-context: ^1.0.0
+    "@xstate/react": 1.6.3
+    classnames: 2.3.1
+    deepmerge: 4.2.2
+    lodash: 4.17.21
+    qrcode: 1.5.0
+    react-generate-context: 1.0.1
   peerDependencies:
     aws-amplify: 3.x.x || 4.x.x
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: 92ade935276cf756c16fdb449ed023db46de4f0c5948d6aecaf98cca8dc5126aca4ae408ad9b1424e7d1b8c5b42a1cb53a3fc5a8b32e470ae920817d8d7224d7
+  checksum: 1d38722345cd575346f63e442caaa9c0104c54f2d86eb6078ca14459354f18cbda1bf345dd1daf681360d85694f18ff93ee739a2c4df411436193c8447828a89
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui@npm:3.0.8":
-  version: 3.0.8
-  resolution: "@aws-amplify/ui@npm:3.0.8"
+"@aws-amplify/ui@npm:3.0.12":
+  version: 3.0.12
+  resolution: "@aws-amplify/ui@npm:3.0.12"
   dependencies:
-    lodash: ^4.17.21
-    style-dictionary: ^3.0.1
-    xstate: ^4.20.1
+    lodash: 4.17.21
+    style-dictionary: 3.0.3
+    xstate: 4.28.0
   peerDependencies:
     aws-amplify: 3.x.x || 4.x.x
-  checksum: bcff3202fcd76c175092ba96750562778697ab6a2a2f7010a2d23ddf5633b60d5f13b8c28dae5a385add24423950fd1af01214af4154846c903e767c96e947ba
+  checksum: 53ad24d2541b9fa240c4478d5b1ad9708b7fbe5133925e5059065c13a82a218346227dfec3de51e2e2f60443ddfa883adb19d705556aa87b2478eb76c6e5b7b6
   languageName: node
   linkType: hard
 
@@ -2464,9 +2464,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 4.3.20
-    "@aws-amplify/core": 4.3.12
-    "@aws-amplify/ui-react": 2.1.9
+    "@aws-amplify/auth": 4.4.1
+    "@aws-amplify/core": 4.3.14
+    "@aws-amplify/ui-react": 2.2.2
     "@babel/core": 7.16.12
     "@babel/runtime": 7.16.7
     "@businessnjgovnavigator/content": "*"
@@ -2651,9 +2651,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 4.3.20
-    "@aws-amplify/core": 4.3.12
-    "@aws-amplify/ui-react": 2.1.9
+    "@aws-amplify/auth": 4.4.1
+    "@aws-amplify/core": 4.3.14
+    "@aws-amplify/ui-react": 2.2.2
     "@babel/core": 7.16.12
     "@businessnjgovnavigator/shared": "*"
     "@emotion/react": 11.7.1
@@ -9667,7 +9667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xstate/react@npm:^1.4.0":
+"@xstate/react@npm:1.6.3":
   version: 1.6.3
   resolution: "@xstate/react@npm:1.6.3"
   dependencies:
@@ -10024,16 +10024,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"amazon-cognito-identity-js@npm:5.2.4":
-  version: 5.2.4
-  resolution: "amazon-cognito-identity-js@npm:5.2.4"
+"amazon-cognito-identity-js@npm:5.2.6":
+  version: 5.2.6
+  resolution: "amazon-cognito-identity-js@npm:5.2.6"
   dependencies:
     buffer: 4.9.2
     crypto-js: ^4.1.1
     fast-base64-decode: ^1.0.0
     isomorphic-unfetch: ^3.0.0
     js-cookie: ^2.2.1
-  checksum: b05ef7747307088d44a5320c7cf823618e3e1f8e777d377c9f3f36a0208bad954e37518d9eb1b06509a0c5a1cd3a5d2eedf6ee2df212199742a77d6f0718b6ba
+  checksum: 31e41b1f81fac5c27eb7916a06e7cb30549396fff5f12d5bbd4b3a41b4a244a48bddbf2dd4e24691546ee50035488e5064de635316d6691662f390b5e8507c17
   languageName: node
   linkType: hard
 
@@ -12408,7 +12408,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.3.1":
+"classnames@npm:2.3.1":
   version: 2.3.1
   resolution: "classnames@npm:2.3.1"
   checksum: 14db8889d56c267a591f08b0834989fe542d47fac659af5a539e110cc4266694e8de86e4e3bbd271157dbd831361310a8293e0167141e80b0f03a0f175c80960
@@ -14252,7 +14252,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deepmerge@npm:^4.2.2":
+"deepmerge@npm:4.2.2, deepmerge@npm:^4.2.2":
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
   checksum: a8c43a1ed8d6d1ed2b5bf569fa4c8eb9f0924034baf75d5d406e47e157a451075c4db353efea7b6bcc56ec48116a8ce72fccf867b6e078e7c561904b5897530b
@@ -20894,13 +20894,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonc-parser@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "jsonc-parser@npm:3.0.0"
-  checksum: 1df2326f1f9688de30c70ff19c5b2a83ba3b89a1036160da79821d1361090775e9db502dc57a67c11b56e1186fc1ed70b887f25c5febf9a3ec4f91435836c99d
-  languageName: node
-  linkType: hard
-
 "jsonfile@npm:^2.1.0":
   version: 2.4.0
   resolution: "jsonfile@npm:2.4.0"
@@ -22181,7 +22174,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.0.1, lodash@npm:^4.1.1, lodash@npm:^4.17.0, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.7.0":
+"lodash@npm:4.17.21, lodash@npm:^4.0.1, lodash@npm:^4.1.1, lodash@npm:^4.17.0, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.7.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -27233,7 +27226,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qrcode@npm:^1.4.4":
+"qrcode@npm:1.5.0, qrcode@npm:^1.4.4":
   version: 1.5.0
   resolution: "qrcode@npm:1.5.0"
   dependencies:
@@ -27644,7 +27637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-generate-context@npm:^1.0.0":
+"react-generate-context@npm:1.0.1":
   version: 1.0.1
   resolution: "react-generate-context@npm:1.0.1"
   peerDependencies:
@@ -31252,9 +31245,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-dictionary@npm:^3.0.1":
-  version: 3.1.1
-  resolution: "style-dictionary@npm:3.1.1"
+"style-dictionary@npm:3.0.3":
+  version: 3.0.3
+  resolution: "style-dictionary@npm:3.0.3"
   dependencies:
     chalk: ^4.0.0
     change-case: ^4.1.2
@@ -31262,12 +31255,11 @@ __metadata:
     fs-extra: ^8.1.0
     glob: ^7.1.6
     json5: ^2.1.3
-    jsonc-parser: ^3.0.0
     lodash: ^4.17.15
     tinycolor2: ^1.4.1
   bin:
     style-dictionary: bin/style-dictionary
-  checksum: fa1a9e1c5346025ca3ac6e81c9d168b702ce52420eb2c5834df3c2b4ff9054521639c73d46ca006592f1f717529e09b82de1b97bd17ff8174a42cdf487dc0c9c
+  checksum: 989d44651455344d34594220c4e5bc1014705a41d1c804082de10b6253cae1159e56ea772a75c6ed840d61330bc527f766de26e537ea2462381f461aaa18fc92
   languageName: node
   linkType: hard
 
@@ -34365,10 +34357,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xstate@npm:^4.20.1":
-  version: 4.29.0
-  resolution: "xstate@npm:4.29.0"
-  checksum: af4d273632dbab9df91aba1204bf9c28ff2dbed73a23ed16c77e2151702a18030b9187565bdb92f9e95c309b0cffa6d86655d1b36f2e22e8f0a0d193472dea6b
+"xstate@npm:4.28.0":
+  version: 4.28.0
+  resolution: "xstate@npm:4.28.0"
+  checksum: 9953a3b3d1586c2cecc8fd904e4faa12b68edacd9bdac541aaf1a98f890e199b1fb056d0eaee8391e71f4d24bc6ab1e6d785be1b36b906d9f3e14ea1498822c6
   languageName: node
   linkType: hard
 
