@@ -92,13 +92,15 @@ const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
 };
 
 const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[]): RoadmapBuilder => {
-  modifications.forEach((modification) => {
-    const task = findTaskInRoadmapByFilename(roadmap, modification.taskToReplaceFilename);
-    if (!task) {
-      return;
-    }
-    task.filename = modification.replaceWithFilename;
-  });
+  if (modifications) {
+    modifications.forEach((modification) => {
+      const task = findTaskInRoadmapByFilename(roadmap, modification.taskToReplaceFilename);
+      if (!task) {
+        return;
+      }
+      task.filename = modification.replaceWithFilename;
+    });
+  }
 
   return roadmap;
 };

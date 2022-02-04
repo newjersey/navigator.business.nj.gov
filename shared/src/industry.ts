@@ -11,7 +11,7 @@ export interface Industry {
   canBeReseller: boolean;
   additionalSearchTerms?: string;
   roadmapSteps: AddOn[];
-  modifications: TaskModification[];
+  modifications?: TaskModification[];
 }
 
 export interface AddOn {
@@ -35,7 +35,6 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       isMobileLocation: false,
       canBeReseller: true,
       roadmapSteps: [],
-      modifications: [],
     }
   );
 };
