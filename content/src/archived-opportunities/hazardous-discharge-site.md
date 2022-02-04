@@ -23,7 +23,11 @@ preferenceGiven: ""
 county:
   - All
 industry:
-  - All Industries
+  - Real Estate and Rental and Leasing
+  - Construction
+  - Agriculture, Forestry, and Fishing and Hunting
+  - Other Services (except Public Administration)
+  - Waste Management
 ---
 The Hazardous Discharge Site Remediation Fund (HDSRF) provides funding for the investigation, remediation, and cleanup of contaminated and underutilized sites.
 
