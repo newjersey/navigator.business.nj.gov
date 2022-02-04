@@ -5,14 +5,8 @@ id: return-and-earn-employer-grants-for-hiring-unemployed
 type: FUNDING
 callToActionLink: https://www.nj.gov/labor/employer-services/business/returnandearn.shtml
 callToActionText: Learn more
-benefits: "Employers: up to 50% wage subsidy for up to 6 months (cap of $10K per
-  employee, total cap of $40k across all employees). Employees: $500 incentive
-  for re-entering the workforce and receiving training from businesses with 100
-  or fewer employees. "
-eligibility: "Employers with 100 or fewer employees registered with the State of
-  NJ and who will provide substantive on-the-job training at their location or,
-  depending on circumstances, utilize approved virtual training, that result in
-  skill badges or industry-recognized credentials. "
+benefits: ""
+eligibility: ""
 fundingType: grant
 agency:
   - NJDOL
@@ -31,5 +25,8 @@ county:
 industry:
   - All
 ---
-
 The Return and Earn program is a grant for employers who hire unemployed workers, train them, and provide those workers with a new skill required for the job.
+
+**Benefits:** Employers: up to 50% wage subsidy for up to 6 months (cap of $10K per employee, total cap of $40k across all employees). Employees: $500 incentive for re-entering the workforce and receiving training from businesses with 100 or fewer employees. 
+
+**Eligibility:** Employers with 100 or fewer employees registered with the State of NJ and who will provide substantive on-the-job training at their location or, depending on circumstances, utilize approved virtual training, that results in skill badges or industry-recognized credentials.
