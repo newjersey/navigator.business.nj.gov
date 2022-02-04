@@ -226,12 +226,14 @@ collections:
         name: "agency"
         widget: "select"
         multiple: true
-        options: [ "", "NJEDA", "NJDOL" ]
+        options: [ "NJEDA", "NJDOL" ]
+        required: false
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
-        options: [ "", "Do Not Publish" ]
+        options: [ "Do Not Publish" ]
         default: ""
+        required: false
       - { label: "Open Date", name: "openDate", widget: "date", required: false, default: '' }
       - { label: "Due Date", name: "dueDate", widget: "date", required: false, default: '' }
       - label: "Status"
@@ -256,13 +258,14 @@ collections:
       - label: "Preference Given"
         name: "preferenceGiven"
         widget: "select"
-        options: [ "yes", "no", "" ]
+        options: [ "yes", "no" ]
+        required: false
       - label: "County"
         name: "county"
         widget: "select"
         multiple: true
+        min: 0
         options: [
-            "",
             "Atlantic",
             "Bergen",
             "Burlington",
@@ -289,8 +292,8 @@ collections:
         name: "industry"
         widget: "select"
         multiple: true
+        min: 0
         options: [
-            "",
             "All",
             "Gov Priority",
             "Transportation and Warehousing",
