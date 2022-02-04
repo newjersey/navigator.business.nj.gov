@@ -4,7 +4,7 @@ name: Get Certified as a Veteran-Owned Business
 id: veteran-owned-business
 type: CERTIFICATION
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
-callToActionText: Apply for My Veteran Owned Business Certification
+callToActionText: Apply for My Certification
 fundingType: tax exemption
 openDate: ""
 dueDate: ""
