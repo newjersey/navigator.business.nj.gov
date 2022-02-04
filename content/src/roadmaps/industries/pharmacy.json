@@ -37,7 +37,6 @@
   ],
   "name": "Pharmacy",
   "isLiquorLicenseApplicable": false,
-  "modifications": [],
   "additionalSearchTerms": "pharmaceutics, drugstore, apothecary, chemist medicine",
   "id": "pharmacy",
   "description": "A business that prepares and dispenses prescriptions and medicine"
