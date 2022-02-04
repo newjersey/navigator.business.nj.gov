@@ -23,8 +23,8 @@ A `veteran|veteran`-owned business (VOB) is a business that has its principal pl
 
 To complete this application, you must have:
 
-* Proof of Honorable Discharge from the US Military form DD-214 provide for the majority of owner(s)
-* Proof of New Jersey residency. Provide for Majority owner(s)
+* Proof of Honorable Discharge from the US Military form DD-214 for the majority of owner(s)
+* Proof of New Jersey residency for Majority owner(s)
 
 After you complete this, you will have:
 
