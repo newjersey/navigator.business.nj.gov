@@ -28,4 +28,4 @@ To complete this application, you must have:
 
 After you complete this, you will have:
 
-* Veteran-owned cusiness certification
+* Veteran-owned business certification
