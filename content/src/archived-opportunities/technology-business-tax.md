@@ -6,10 +6,8 @@ id: technology-business-tax-certificate-transfer-nol-program-[formerly-net-opera
 type: FUNDING
 callToActionLink: https://www.njeda.com/nol/
 callToActionText: Learn more
-benefits: Ability to sell NOL and unused R&D tax credits for up to 80% of their
-  value up to a total amount of $20 million.
-eligibility: Technology or life sciences companies with up to 225 employees in
-  the United States with an operating loss for at least the last 2 years.
+benefits: ""
+eligibility: ""
 fundingType: tax credit
 agency:
   - NJEDA
@@ -35,5 +33,8 @@ industry:
   - Professional, Scientific and Technical Services
   - Other Services (except Public Administration)
 ---
-
 The Net Operating Loss Program enables qualified, unprofitable New Jersey-based technology or biotechnology businesses to sell a percentage of their net operating losses (NOL) and unused research and development (R&D) tax credits to unrelated profitable businesses.
+
+**Benefits:** Ability to sell NOL and unused R&D tax credits for up to 80% of their value up to a total amount of $20 million.
+
+**Eligibility:** Technology or life sciences companies with up to 225 employees in the United States with an operating loss for at least the last 2 years.
