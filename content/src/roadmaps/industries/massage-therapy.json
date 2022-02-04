@@ -69,6 +69,7 @@
       "task": "verify-license-massage-therapy"
     }
   ],
+  "modifications": [],
   "name": "Massage Therapy",
   "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "Masseuse, Spa, Spa services",
