@@ -17,7 +17,7 @@ status: opening soon
 programFrequency: ongoing
 businessStage: operating
 businessSize: n/a
-homeBased: yes
+homeBased: no
 mwvb: 40% of program funds targeted to census tracts that were eligible to be
   designated as Opportunity Zones
 preferenceGiven: yes
