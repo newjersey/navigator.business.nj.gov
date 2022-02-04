@@ -16,7 +16,7 @@ eligibility: Manufacturing and processing facilities, certain government-owned
 fundingType: loan
 agency:
   - NJEDA
-publishStageArchive: Do Not Publish
+publishStageArchive: null
 openDate: ""
 dueDate: ""
 status: open
