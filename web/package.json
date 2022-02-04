@@ -35,9 +35,9 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@aws-amplify/auth": "4.3.20",
-    "@aws-amplify/core": "4.3.12",
-    "@aws-amplify/ui-react": "2.1.9",
+    "@aws-amplify/auth": "4.4.1",
+    "@aws-amplify/core": "4.3.14",
+    "@aws-amplify/ui-react": "2.2.2",
     "@businessnjgovnavigator/shared": "*",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
