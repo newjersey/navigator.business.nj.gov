@@ -16,7 +16,7 @@ dueDate: 2025-07-01T04:00:00.000Z
 status: first-come, first-served
 programFrequency: ongoing
 businessStage: operating
-businessSize: 150<
+businessSize: yes
 homeBased: no
 mwvb: n/a
 preferenceGiven: ""
@@ -28,7 +28,6 @@ industry:
   - Professional, Scientific and Technical Services
   - Manufacturing
   - Other Services (except Public Administration)
-  - Industries not classified
 ---
 The Offshore Wind Tax Credit Program is a financial tool that spurs private capital investment and employment growth in major, land-based offshore wind industry projects.
 
