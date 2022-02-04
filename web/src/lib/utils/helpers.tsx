@@ -3,7 +3,6 @@ import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefa
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import {
   OnboardingStatus,
-  Preferences,
   ProfileError,
   Roadmap,
   SectionCompletion,
@@ -12,7 +11,7 @@ import {
   Step,
   Task,
 } from "@/lib/types/types";
-import { UserData } from "@businessnjgovnavigator/shared/";
+import { Preferences, UserData } from "@businessnjgovnavigator/shared/";
 import { ParsedUrlQuery } from "querystring";
 import React, { ReactElement, useEffect, useRef } from "react";
 
@@ -257,12 +256,7 @@ export const zipCodeRange = (value: string) => {
 
 export const featureFlags = (
   query: ParsedUrlQuery
-): Record<"featureDisableOperate" | "featureDisableOscarOnboarding" | "featureDisableFormation", boolean> => {
-  const featureDisableOperate = query?.operate
-    ? query?.operate === "false"
-    : process.env.FEATURE_DISABLE_OPERATE
-    ? process.env.FEATURE_DISABLE_OPERATE === "true"
-    : false;
+): Record<"featureDisableOscarOnboarding" | "featureDisableFormation", boolean> => {
   const featureDisableOscarOnboarding = query?.oscar
     ? query?.oscar === "false"
     : process.env.FEATURE_DISABLE_OSCAR_ONBOARDING
@@ -274,7 +268,6 @@ export const featureFlags = (
     ? process.env.FEATURE_DISABLE_FORMATION === "true"
     : false;
   return {
-    featureDisableOperate,
     featureDisableOscarOnboarding,
     featureDisableFormation,
   };

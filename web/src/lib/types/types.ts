@@ -10,19 +10,7 @@ export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
-export interface Preferences {
-  roadmapOpenSections: SectionType[];
-  roadmapOpenSteps: number[];
-}
-
 export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS";
-
-export type OperateDisplayContent = {
-  entityIdMd: string;
-  filingCalendarMd: string;
-  entityIdErrorNotFoundMd: string;
-  entityIdErrorNotRegisteredMd: string;
-};
 
 export type TextFieldContent = {
   contentMd: string;
@@ -503,7 +491,6 @@ export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
 
 export type RoadmapDisplayContent = {
   contentMd: string;
-  operateDisplayContent: OperateDisplayContent;
 };
 
 export type DashboardDisplayContent = {
@@ -539,7 +526,6 @@ export interface RoadmapStatus {
 export type SectionCompletion = Record<SectionType, boolean>;
 
 export const sectionNames = ["PLAN", "START", "OPERATE"] as const;
-
 export type SectionType = typeof sectionNames[number];
 
 export interface Step {

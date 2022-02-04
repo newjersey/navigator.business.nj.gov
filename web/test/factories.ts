@@ -3,7 +3,6 @@ import {
   NameAvailability,
   OperateReference,
   Opportunity,
-  Preferences,
   Roadmap,
   SectionCompletion,
   SectionType,
@@ -33,6 +32,7 @@ import {
   Municipality,
   MunicipalityDetail,
   NameAndAddress,
+  Preferences,
   ProfileData,
   TaxFiling,
   TaxFilingData,
@@ -79,7 +79,6 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
 
 export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
   return {
-    entityIdStatus: "UNKNOWN",
     filings: [generateTaxFiling({})],
     ...overrides,
   };

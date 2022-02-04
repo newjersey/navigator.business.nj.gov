@@ -5,13 +5,7 @@ import jwt from "jsonwebtoken";
 import { calculateNextAnnualFilingDate } from "../domain/calculateNextAnnualFilingDate";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 import { shouldAddToNewsletter } from "../domain/newsletter/shouldAddToNewsletter";
-import {
-  AddNewsletter,
-  AddToUserTesting,
-  TaxFilingClient,
-  UpdateLicenseStatus,
-  UserDataClient,
-} from "../domain/types";
+import { AddNewsletter, AddToUserTesting, UpdateLicenseStatus, UserDataClient } from "../domain/types";
 import { shouldAddToUserTesting } from "../domain/user-testing/shouldAddToUserTesting";
 
 const getTokenFromHeader = (req: Request): string => {
@@ -46,7 +40,6 @@ export const getSignedInUserId = (req: Request): string => {
 export const userRouterFactory = (
   userDataClient: UserDataClient,
   updateLicenseStatus: UpdateLicenseStatus,
-  taxFilingClient: TaxFilingClient,
   addNewsletter: AddNewsletter,
   addToUserTesting: AddToUserTesting
 ): Router => {
@@ -88,19 +81,6 @@ export const userRouterFactory = (
       return;
     }
 
-    if (userData.profileData.entityId) {
-      const taxFilingData = await taxFilingClient.fetchForEntityId(userData.profileData.entityId);
-      userData = { ...userData, taxFilingData };
-    } else {
-      userData = {
-        ...userData,
-        taxFilingData: {
-          entityIdStatus: "UNKNOWN",
-          filings: [],
-        },
-      };
-    }
-
     if (userData.profileData.dateOfFormation) {
       const annualFilingDate = calculateNextAnnualFilingDate(userData.profileData.dateOfFormation);
       userData = {
@@ -108,7 +88,7 @@ export const userRouterFactory = (
         taxFilingData: {
           ...userData.taxFilingData,
           filings: [
-            ...userData.taxFilingData.filings,
+            ...userData.taxFilingData.filings.filter((it) => it.identifier !== "ANNUAL_FILING"),
             { identifier: "ANNUAL_FILING", dueDate: annualFilingDate },
           ],
         },

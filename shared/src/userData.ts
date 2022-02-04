@@ -27,7 +27,6 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       roadmapOpenSteps: [],
     },
     taxFilingData: {
-      entityIdStatus: "UNKNOWN",
       filings: [],
     },
     formationData: {

@@ -2,7 +2,6 @@ import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/b
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
-import { TaxFilingData } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
 import * as https from "https";
 
@@ -36,10 +35,6 @@ export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 
 export interface LicenseStatusClient {
   search: (name: string, zipCode: string, licenseType: string) => Promise<LicenseEntity[]>;
-}
-
-export interface TaxFilingClient {
-  fetchForEntityId: (entityId: string) => Promise<TaxFilingData>;
 }
 
 export interface UserTestingClient {

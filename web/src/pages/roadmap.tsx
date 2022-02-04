@@ -4,7 +4,6 @@ import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { MiniProfile } from "@/components/roadmap/MiniProfile";
-import { OperateSection } from "@/components/roadmap/OperateSection";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
@@ -17,7 +16,7 @@ import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { featureFlags, getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { CircularProgress } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -33,7 +32,6 @@ const RoadmapPage = (props: Props): ReactElement => {
   const { userData, error } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
-  const { featureDisableOperate } = featureFlags(router.query);
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
 
   useMountEffectWhenDefined(() => {
@@ -98,18 +96,11 @@ const RoadmapPage = (props: Props): ReactElement => {
                         ))}
                     </SectionAccordion>
                   ))}
-                  {!featureDisableOperate ? (
-                    <OperateSection
-                      displayContent={props.displayContent.operateDisplayContent}
-                      operateReferences={props.operateReferences}
-                    />
-                  ) : (
-                    <div className="margin-top-6 font-body-2xs text-center">
-                      <ContentNonProse onClick={analytics.event.roadmap_PBS_link.click.go_to_PBS}>
-                        {RoadmapDefaults.operateComplianceText}
-                      </ContentNonProse>
-                    </div>
-                  )}
+                  <div className="margin-top-6 font-body-2xs text-center">
+                    <ContentNonProse onClick={analytics.event.roadmap_PBS_link.click.go_to_PBS}>
+                      {RoadmapDefaults.operateComplianceText}
+                    </ContentNonProse>
+                  </div>
                 </>
               )}
             </div>
