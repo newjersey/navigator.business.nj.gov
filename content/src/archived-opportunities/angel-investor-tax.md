@@ -16,7 +16,7 @@ dueDate: 2022-11-02T03:30:00.000Z
 status: deadline
 programFrequency: reoccuring
 businessStage: early-stage
-businessSize: <225
+businessSize: n/a
 homeBased: yes
 mwvb: mwbe
 preferenceGiven: yes
