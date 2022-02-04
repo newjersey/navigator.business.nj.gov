@@ -19,7 +19,7 @@ businessStage: operating
 businessSize: n/a
 homeBased: yes
 mwvb: n/a
-preferenceGiven: no
+preferenceGiven: null
 county:
   - All
 industry:
