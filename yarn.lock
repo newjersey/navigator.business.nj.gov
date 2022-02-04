@@ -5463,15 +5463,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:12.0.8":
-  version: 12.0.8
-  resolution: "@next/eslint-plugin-next@npm:12.0.8"
-  dependencies:
-    glob: 7.1.7
-  checksum: b6e5bb303ce430f10660dc173462094535797df4c2f1763161f02504954b97d19a47519a977932d6ff7f0399c963939a4735e0e13daee38ae7b17d22318254f1
-  languageName: node
-  linkType: hard
-
 "@next/swc-android-arm64@npm:12.0.10":
   version: 12.0.10
   resolution: "@next/swc-android-arm64@npm:12.0.10"
