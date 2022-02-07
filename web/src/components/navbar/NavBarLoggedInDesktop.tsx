@@ -8,7 +8,7 @@ import { AuthContext } from "@/pages/_app";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 export const NavBarLoggedInDesktop = (): ReactElement => {
   const { userData } = useUserData();
@@ -63,11 +63,16 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
     prevOpen.current = open;
   }, [open]);
 
+  const redirectUrl = useMemo(
+    () => (userData?.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap"),
+    [userData?.profileData.hasExistingBusiness]
+  );
+
   return (
     <nav aria-label="Primary" className="grid-container">
       <div className="display-flex flex-row flex-justify flex-align-center height-8">
-        <Link href="/roadmap" passHref>
-          <a href="/roadmap">
+        <Link href={redirectUrl} passHref>
+          <a href={redirectUrl}>
             <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
           </a>
         </Link>

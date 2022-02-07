@@ -3,10 +3,11 @@ import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettin
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { NavDefaults } from "@/display-defaults/NavDefaults";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Link from "next/link";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useMemo, useState } from "react";
 import { MiniOperateSection } from "../roadmap/MiniOperateSection";
 interface Props {
   scrolled: boolean;
@@ -21,9 +22,16 @@ export const NavBarLoggedInMobile = ({
   sideBarPageLayout,
   operateReferences,
 }: Props): ReactElement => {
+  const { userData } = useUserData();
+
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const open = () => setSidebarIsOpen(true);
   const close = () => setSidebarIsOpen(false);
+
+  const redirectUrl = useMemo(
+    () => (userData?.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap"),
+    [userData?.profileData.hasExistingBusiness]
+  );
 
   return (
     <>
@@ -57,8 +65,8 @@ export const NavBarLoggedInMobile = ({
           {sideBarPageLayout ? (
             <div className="text-bold">{NavDefaults.taskPageNavBarHeading}</div>
           ) : (
-            <Link href="/roadmap" passHref>
-              <a href="/roadmap">
+            <Link href={redirectUrl} passHref>
+              <a href={redirectUrl}>
                 <img src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
               </a>
             </Link>
