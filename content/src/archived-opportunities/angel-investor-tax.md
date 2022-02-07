@@ -27,6 +27,7 @@ industry:
   - Life Sciences
   - Clean Energy
   - Offshore Wind
+  - Other Services (except Public Administration)
 ---
 The New Jersey Angel Investor Tax Credit Program establishes refundable tax credits for qualified investments in New Jersey emerging technology businesses to stimulate investment in the innovation economy.
 
