@@ -10,7 +10,7 @@ eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
-publishStageArchive: Do Not Publish
+publishStageArchive: null
 openDate: ""
 dueDate: ""
 status: first-come, first-served
@@ -24,7 +24,7 @@ preferenceGiven: ""
 county:
   - All
 industry:
-  - All Industries
+  - Waste Management
 ---
 The Brownfields Impact Fund is a pilot program, funded by the federal Environmental Protection Agency's Revolving Loan Fund grant, that will provide $800,000 in funding for loans to private developers and loans and/or sub-grants to public sector and non-profits to carry out cleanups at brownfield sites.
 
