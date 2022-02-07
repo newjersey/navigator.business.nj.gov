@@ -1,6 +1,6 @@
 ---
 urlSlug: perjob-tax-credits
-name: Per-job Tax Credits with the Emerge Program
+name: Per-Job Tax Credits with the Emerge Program
 id: perjob-tax-credits-with-the-emerge-program
 type: FUNDING
 callToActionLink: https://www.njeda.com/emerge/
@@ -16,14 +16,23 @@ dueDate: ""
 status: open
 programFrequency: other
 businessStage: operating
-businessSize: n/a
+businessSize: yes
 homeBased: no
 mwvb: Bonuses available based on business size, industry, and other project details
 preferenceGiven: ""
 county:
   - All
 industry:
-  - All Industries
+  - Technology
+  - Professional, Scientific and Technical Services
+  - Life Sciences
+  - Clean Energy
+  - Transportation and Warehousing
+  - Accommodation and Food Services
+  - Manufacturing
+  - Finance, Insurance and Professional Services
+  - Digital and Print Media
+  - Other Services (except Public Administration)
 ---
 The Emerge Program provides per-job tax credits to projects in targeted communities that invest private capital into New Jersey and create new full-time jobs or retain a significant number of jobs in Governor Phil Murphy’s priority sectors versus an out-of-state alternative location.
 
