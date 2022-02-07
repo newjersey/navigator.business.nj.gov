@@ -34,8 +34,8 @@ industry:
   - Digital and Print Media
   - Finance, Insurance and Professional Services
 ---
-Upskill offers New Jersey employers training grants of up to $2k per worker to improve existing employees’ skills. Training may be provided by employers at their business or by an eligible training provider. These should be cohort-based trainings, not unique to one employee.
+Upskill offers New Jersey employers training grants of up to $2,000 per worker to improve existing employees’ skills. Training may be provided by employers at their business or by an eligible training provider. These should be cohort-based trainings, not unique to one employee.
 
-**Benefits:** Employers can receive grants up to $2k per worker.
+**Benefits:** Employers can receive grants of up to $2,000 per worker.
 
 **Eligibility:** Employers with existing employees that they want to train in a new skill. Preference is given to urban centers and underserved communities.
