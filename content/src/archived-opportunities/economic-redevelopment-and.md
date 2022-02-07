@@ -16,7 +16,7 @@ dueDate: ""
 status: closed
 programFrequency: one-time
 businessStage: operating
-businessSize: n/a
+businessSize: yes
 homeBased: no
 mwvb: n/a
 preferenceGiven: ""
