@@ -16,7 +16,7 @@ dueDate: ""
 status: opening soon
 programFrequency: reoccuring
 businessStage: both
-businessSize: n/a
+businessSize: yes
 homeBased: yes
 mwvb: n/a
 preferenceGiven: no
@@ -29,10 +29,10 @@ industry:
   - Educational Services
   - Manufacturing
   - Offshore Wind
-  - "Transportation and Warehousing "
   - Accommodation and Food Services
   - Digital and Print Media
   - Finance, Insurance and Professional Services
+  - Other Services (except Public Administration)
 ---
 Opportunity Partnership helps employers identify an appropriate educational institution or training provider to train employees. The business and the school together develop training programs to teach needed skills you. Upon completing the program, trainees must qualify for entry-level positions in your company.
 
