@@ -13,7 +13,7 @@ agency:
 publishStageArchive: ""
 openDate: ""
 dueDate: ""
-status: closed
+status: open
 programFrequency: reoccuring
 businessStage: both
 businessSize: Yes
