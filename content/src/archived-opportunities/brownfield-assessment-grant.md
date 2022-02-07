@@ -23,7 +23,7 @@ preferenceGiven: ""
 county:
   - All
 industry:
-  - All Industries
+  - Waste Management
 ---
 The Brownfield Assessment Grant Program provides grant money to support site assessment at any eligible brownfield site in NJ.
 
