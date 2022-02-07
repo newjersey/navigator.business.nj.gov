@@ -74,7 +74,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
                 <div className="desktop:grid-col-4 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">
                   <h2>{DashboardDefaults.opportunitiesHeader}</h2>
-                  <hr className="bg-base-lighter margin-bottom-3" aria-hidden={true} />
+                  <hr className="margin-bottom-3" aria-hidden={true} />
                   <div className="dashboard-opportunities-list">
                     {props.opportunities.map((opp) => (
                       <OpportunityCard key={opp.id} opportunity={opp} />

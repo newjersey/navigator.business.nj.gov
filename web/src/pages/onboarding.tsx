@@ -311,7 +311,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
           <SingleColumnContainer>
             {header()}
-            {!isLargeScreen && <hr className="bg-base-lighter" />}
+            {!isLargeScreen && <hr />}
             {error && (
               <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
                 {OnboardingErrorLookup[error]}
@@ -357,7 +357,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                     data-testid={`page-${index + 1}-form`}
                   >
                     {onboardingPage.component}
-                    <hr className="margin-top-6 margin-bottom-4 bg-base-lighter" aria-hidden={true} />
+                    <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
                     <OnboardingButtonGroup
                       isFinal={page.current === onboardingFlows[currentFlow].pages.length}
                     />

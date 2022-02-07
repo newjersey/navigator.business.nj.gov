@@ -31,7 +31,7 @@ export const ReviewSection = (): ReactElement => {
         </div>
         <div>{dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/DD/YYYY")}</div>
       </div>
-      <hr className="bg-base-lighter margin-y-205" />
+      <hr className="margin-y-205" />
     </>
   );
 
@@ -71,7 +71,7 @@ export const ReviewSection = (): ReactElement => {
           )}
         </div>
       </div>
-      <hr className="bg-base-lighter margin-y-205" />
+      <hr className="margin-y-205" />
     </>
   );
 
@@ -136,7 +136,7 @@ export const ReviewSection = (): ReactElement => {
         </div>
       )}
 
-      <hr className="bg-base-lighter margin-y-205" />
+      <hr className="margin-y-205" />
     </>
   );
 
@@ -170,7 +170,7 @@ export const ReviewSection = (): ReactElement => {
           <div className={index !== 0 ? "tablet:margin-top-1" : ""}>{member.name}</div>
         </div>
       ))}
-      <hr className="bg-base-lighter margin-y-205" />
+      <hr className="margin-y-205" />
     </>
   );
 
