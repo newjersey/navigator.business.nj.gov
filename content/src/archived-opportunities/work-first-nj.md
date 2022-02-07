@@ -31,4 +31,4 @@ Work First NJ provides skills, training, and education opportunities to SNAP and
 
 **Eligibility:** Business must be registered in New Jersey.
 
-Interested individuals should contact Ahmad McDougle wfnj@dol.nj.gov
+Interested individuals should contact Ahmad McDougle at wfnj@dol.nj.gov
