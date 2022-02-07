@@ -36,6 +36,9 @@ export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
       remarkReactComponents: {
         code: ContextualInfoLink,
         a: Link(props.onClick),
+        h2: ({ children }: { children: string[] }) => <h2 className="h3-styling">{children}</h2>,
+        h3: ({ children }: { children: string[] }) => <h3 className="h4-styling">{children}</h3>,
+        blockquote: GreenBox,
         table: OutlineBox,
         thead: Unformatted,
         tr: Unformatted,
@@ -100,4 +103,8 @@ const OutlineBox = ({ children }: { children: string[] }): ReactElement => {
       {children}
     </div>
   );
+};
+
+const GreenBox = ({ children }: { children: string[] }): ReactElement => {
+  return <div className="green-box text-normal padding-2 margin-top-2 bg-success-lighter">{children}</div>;
 };

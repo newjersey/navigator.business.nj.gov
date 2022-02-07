@@ -59,7 +59,7 @@ export const ContactsSection = (): ReactElement => {
     <>
       <div data-testid="contacts-section">
         <Members />
-        <hr className="bg-base-lighter" />
+        <hr />
         <Signatures />
         <BusinessFormationFieldAlert
           showRequiredFieldsError={showRequiredFieldsError}

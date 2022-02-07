@@ -123,26 +123,26 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const startingNewBusiness = (
     <>
-      <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
+      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingBusinessName />
-      <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
+      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingIndustry />
-      <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
+      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingLegalStructureDropdown />
-      <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
+      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
-      <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
+      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} />
-      <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
+      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingEntityId
         onValidation={onValidation}
         fieldStates={fieldStates}
         disabled={userData?.formationData?.getFilingResponse?.success}
       >
-        <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />{" "}
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />{" "}
       </OnboardingEntityId>
       <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} />
-      <hr className="margin-top-4 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
+      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingNotes />
     </>
   );
@@ -176,7 +176,7 @@ const ProfilePage = (props: Props): ReactElement => {
       <div className="margin-top-4">
         <OnboardingOwnership headerAriaLevel={3} />
       </div>
-      <hr className="bg-base-lighter margin-top-3 margin-bottom-4" />
+      <hr className="margin-top-3 margin-bottom-4" />
       <Content>{mergedDisplayContent.businessReferences.contentMd}</Content>
       <div className="margin-top-4">
         <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
@@ -300,7 +300,7 @@ const ProfilePage = (props: Props): ReactElement => {
                         ? hasExistingBusiness
                         : startingNewBusiness}
 
-                      <hr className="margin-top-7 margin-bottom-2 bg-base-lighter" aria-hidden={true} />
+                      <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
                       <div className="float-right fdr">
                         <button
                           type="button"

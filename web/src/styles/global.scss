@@ -23,6 +23,26 @@ $lg: 64em; //desktop and up (1024px)
   box-sizing: border-box;
 }
 
+hr {
+  background-color: #e6e6e6;
+}
+
+.green-box {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    list-style-type: "• ";
+    padding-inline-start: 1rem;
+  }
+}
+
 .mla {
   margin-left: auto !important;
 }

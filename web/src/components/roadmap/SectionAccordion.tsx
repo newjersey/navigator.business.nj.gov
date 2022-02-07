@@ -76,7 +76,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
         </AccordionSummary>
         <AccordionDetails>{props.children}</AccordionDetails>
       </Accordion>
-      <hr className={`${dividerClasses} bg-base-lighter`} />
+      <hr className={dividerClasses} />
     </div>
   );
 };

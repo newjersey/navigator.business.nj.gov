@@ -62,7 +62,7 @@ export const NavSideBarUserSettings = (): ReactElement => {
           </div>
         </AccordionDetails>
       </Accordion>
-      <hr className="bg-base-lighter" />
+      <hr />
     </div>
   );
 };
