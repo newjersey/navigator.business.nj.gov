@@ -27,7 +27,6 @@ import {
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import {
-  featureFlags,
   getSectionCompletion,
   OnboardingErrorLookup,
   OnboardingStatusLookup,
@@ -101,7 +100,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
 
-  const { featureDisableOscarOnboarding: shouldDisableOscarFlow } = featureFlags(router.query);
   const onValidation = useCallback(
     (field: ProfileFields, invalid: boolean): void => {
       setFieldStates({ ...fieldStates, [field]: { invalid } });
@@ -111,23 +109,15 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const onboardingFlows = useMemo(() => {
     const onboardingFlows = getOnboardingFlows(profileData, onValidation, fieldStates);
-    if (shouldDisableOscarFlow) {
-      return {
-        STARTING: { pages: onboardingFlows.STARTING.pages.slice(1) },
-        OWNING: { pages: onboardingFlows.OWNING.pages.slice(1) },
-      };
-    }
     return onboardingFlows;
-  }, [profileData, onValidation, fieldStates, shouldDisableOscarFlow]);
+  }, [profileData, onValidation, fieldStates]);
 
   useEffect(() => {
     if (userData) {
       setProfileData(userData.profileData);
-      if (!shouldDisableOscarFlow) {
-        setCurrentFlow(userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
-      }
+      setCurrentFlow(userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
     }
-  }, [userData, shouldDisableOscarFlow, setProfileData]);
+  }, [userData, setProfileData]);
 
   const queryShallowPush = useCallback(
     (page: number) => router.push({ query: { page: page } }, undefined, { shallow: true }),
@@ -176,39 +166,32 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
 
     let newProfileData = profileData;
-    if (shouldDisableOscarFlow) {
+
+    const hasExistingBusinessChanged =
+      profileData.hasExistingBusiness !== userData.profileData.hasExistingBusiness;
+
+    if (page.current === 1 && hasExistingBusinessChanged) {
       newProfileData = {
-        ...profileData,
-        hasExistingBusiness: false,
+        businessName: profileData.businessName,
+        industryId: profileData.industryId,
+        homeBasedBusiness: profileData.homeBasedBusiness,
+        liquorLicense: profileData.liquorLicense,
+        municipality: profileData.municipality,
+        hasExistingBusiness: profileData.hasExistingBusiness,
+        legalStructureId: undefined,
+        dateOfFormation: undefined,
+        entityId: undefined,
+        constructionRenovationPlan: undefined,
+        employerId: undefined,
+        taxId: undefined,
+        notes: "",
+        ownershipTypeIds: [],
+        existingEmployees: undefined,
+        taxPin: undefined,
       };
+
       setProfileData(newProfileData);
-    } else {
-      const hasExistingBusinessChanged =
-        profileData.hasExistingBusiness !== userData.profileData.hasExistingBusiness;
-
-      if (page.current === 1 && hasExistingBusinessChanged) {
-        newProfileData = {
-          businessName: profileData.businessName,
-          industryId: profileData.industryId,
-          homeBasedBusiness: profileData.homeBasedBusiness,
-          liquorLicense: profileData.liquorLicense,
-          municipality: profileData.municipality,
-          hasExistingBusiness: profileData.hasExistingBusiness,
-          legalStructureId: undefined,
-          dateOfFormation: undefined,
-          entityId: undefined,
-          constructionRenovationPlan: undefined,
-          employerId: undefined,
-          taxId: undefined,
-          notes: "",
-          ownershipTypeIds: [],
-          existingEmployees: undefined,
-          taxPin: undefined,
-        };
-
-        setProfileData(newProfileData);
-        setCurrentFlow(profileData.hasExistingBusiness ? "OWNING" : "STARTING");
-      }
+      setCurrentFlow(profileData.hasExistingBusiness ? "OWNING" : "STARTING");
     }
 
     setAnalyticsDimensions(newProfileData);
@@ -256,7 +239,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   const evalHeaderStepsTemplate = (): string => {
-    if (page.current === 1 && !shouldDisableOscarFlow) {
+    if (page.current === 1) {
       return templateEval(OnboardingDefaults.stepOneTemplate, {
         currentPage: page.current.toString(),
       });

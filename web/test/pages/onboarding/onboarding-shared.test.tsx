@@ -3,7 +3,6 @@ import Onboarding from "@/pages/onboarding";
 import {
   generateMunicipality,
   generateProfileData as generateProfileData,
-  generateUser,
   generateUserData,
 } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers";
@@ -15,7 +14,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyProfileData, createEmptyUserData } from "@businessnjgovnavigator/shared/";
+import { createEmptyProfileData } from "@businessnjgovnavigator/shared/";
 import { render, waitFor } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
@@ -392,48 +391,5 @@ describe("onboarding - shared", () => {
       page.selectByValue("Industry", industry);
       await page.visitStep4();
     };
-  });
-
-  describe("owning a business feature flag", () => {
-    it("only shows 4-step starting flow when disable feature flag is true", async () => {
-      process.env.FEATURE_DISABLE_OSCAR_ONBOARDING = "true";
-
-      const initialUserData = createEmptyUserData(generateUser({}));
-      const newark = generateMunicipality({ displayName: "Newark" });
-      const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
-
-      page.fillText("Business name", "Cool Computers");
-
-      await page.visitStep2();
-      expect(currentUserData().profileData.businessName).toEqual("Cool Computers");
-      page.selectByValue("Industry", "e-commerce");
-
-      await page.visitStep3();
-      expect(currentUserData().profileData.industryId).toEqual("e-commerce");
-      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
-      page.chooseRadio("general-partnership");
-
-      await page.visitStep4();
-      expect(currentUserData().profileData.legalStructureId).toEqual("general-partnership");
-      page.selectByText("Location", "Newark");
-
-      page.clickNext();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
-      expect(currentUserData()).toEqual({
-        ...initialUserData,
-        formProgress: "COMPLETED",
-        profileData: {
-          ...initialUserData.profileData,
-          hasExistingBusiness: false,
-          businessName: "Cool Computers",
-          industryId: "e-commerce",
-          homeBasedBusiness: true,
-          legalStructureId: "general-partnership",
-          municipality: newark,
-        },
-      });
-
-      process.env.FEATURE_DISABLE_OSCAR_ONBOARDING = undefined;
-    });
   });
 });

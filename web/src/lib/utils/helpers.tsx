@@ -254,21 +254,13 @@ export const zipCodeRange = (value: string) => {
   return parsedValue >= 7001 && parsedValue <= 8999;
 };
 
-export const featureFlags = (
-  query: ParsedUrlQuery
-): Record<"featureDisableOscarOnboarding" | "featureDisableFormation", boolean> => {
-  const featureDisableOscarOnboarding = query?.oscar
-    ? query?.oscar === "false"
-    : process.env.FEATURE_DISABLE_OSCAR_ONBOARDING
-    ? process.env.FEATURE_DISABLE_OSCAR_ONBOARDING === "true"
-    : false;
+export const featureFlags = (query: ParsedUrlQuery): Record<"featureDisableFormation", boolean> => {
   const featureDisableFormation = query?.formation
     ? query?.formation === "false"
     : process.env.FEATURE_DISABLE_FORMATION
     ? process.env.FEATURE_DISABLE_FORMATION === "true"
     : false;
   return {
-    featureDisableOscarOnboarding,
     featureDisableFormation,
   };
 };
