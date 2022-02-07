@@ -33,4 +33,4 @@ The Offshore Wind Tax Credit Program is a financial tool that spurs private capi
 
 **Benefits:** Tax credits up to 100% of qualified investments.
 
-**Eligibility:** Businesses investing at least $17.5 million in a qualified wind energy facility and employing at least 150 new, full-time employees.
+**Eligibility:** Businesses investing at least $17.5M in a qualified wind energy facility and employing at least 150 new, full-time employees.
