@@ -12,7 +12,7 @@ backend:
 # local_backend: true
 publish_mode: editorial_workflow
 media_folder: web/public/img
-logo_url: https://dev.d1fxpe8xsdfr62.amplifyapp.com/img/Navigator-logo.svg
+logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
 public_folder: web/public
 collections:
   - label: Roadmap Add-ons
