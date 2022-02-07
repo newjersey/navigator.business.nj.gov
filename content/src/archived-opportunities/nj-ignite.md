@@ -16,7 +16,7 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: <10
+businessSize: yes
 homeBased: yes
 mwvb: Bonus months available for workspaces located in an Opportunity Zone,
   affiliated with a hospital system or New Jersey university, or is recently
@@ -29,6 +29,7 @@ industry:
   - Real Estate and Rental and Leasing
   - Technology
   - Life Sciences
+  - Other Services (except Public Administration)
 ---
 NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.
 
