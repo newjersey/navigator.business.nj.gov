@@ -1,3 +1,51 @@
+# [2.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.11.0...v2.0.0) (2022-02-07)
+
+
+### Bug Fixes
+
+* **deps:** update aws-amplify ([1cebef9](https://github.com/newjersey/navigator.business.nj.gov/commit/1cebef939c7fba184ecd71b00b2a4ee06e5e6ab8))
+* **deps:** update dependency next-seo to v5.1.0 ([57100c2](https://github.com/newjersey/navigator.business.nj.gov/commit/57100c2c6f56680321aa4c8c8810769f4382dc72))
+* **deps:** update dependency winston to v3.5.1 ([32756e4](https://github.com/newjersey/navigator.business.nj.gov/commit/32756e419708faac681c798d2a96770ac2ca1a8e))
+* **deps:** update material-ui monorepo ([40af36d](https://github.com/newjersey/navigator.business.nj.gov/commit/40af36d826f3f5ecbe25f212d9f052c89045f25b))
+* make fields optional for funding in netlify ([a86490f](https://github.com/newjersey/navigator.business.nj.gov/commit/a86490f5e47e09ad6496bb07bb23d259bc592438))
+* make task modifications options for industries and tasks ([5bb78fc](https://github.com/newjersey/navigator.business.nj.gov/commit/5bb78fc17ea85ee0fd9a6a03e2d88a7d3d957315))
+* remove empty option from funding CMS ([8c273cf](https://github.com/newjersey/navigator.business.nj.gov/commit/8c273cffdd5920d1d35f65c4a33664dac65de742))
+* update cms required fields ([18751e8](https://github.com/newjersey/navigator.business.nj.gov/commit/18751e8f3d402c671e6e422a762d57a2cb5c1ae9))
+* updating Contextual Information form-and-register-business ([#1628](https://github.com/newjersey/navigator.business.nj.gov/issues/1628)) ([8f55398](https://github.com/newjersey/navigator.business.nj.gov/commit/8f55398023bc4fabf779e8b1205fe176db5249e7))
+* updating Contextual Information registered-agent ([#1532](https://github.com/newjersey/navigator.business.nj.gov/issues/1532)) ([b9dae4c](https://github.com/newjersey/navigator.business.nj.gov/commit/b9dae4c5d19ac4f1e66c93a7b628ca52b3016a83))
+* updating Funding Opportunities Content premier-community-development ([#1539](https://github.com/newjersey/navigator.business.nj.gov/issues/1539)) ([7c90a27](https://github.com/newjersey/navigator.business.nj.gov/commit/7c90a277f4db8efec8106a894b2c7f60e8a85573))
+* updating Funding Opportunities Content premier-lender-program ([#1540](https://github.com/newjersey/navigator.business.nj.gov/issues/1540)) ([8d42ddc](https://github.com/newjersey/navigator.business.nj.gov/commit/8d42ddc66311cdf5a9209341f98b0555beb19052))
+* updating Funding Opportunities Content small-business-fund ([#1552](https://github.com/newjersey/navigator.business.nj.gov/issues/1552)) ([776abd8](https://github.com/newjersey/navigator.business.nj.gov/commit/776abd8638b26724cfcba2919d24cbe4ffa91100))
+* updating Funding Opportunities Content small-business-fund ([#1613](https://github.com/newjersey/navigator.business.nj.gov/issues/1613)) ([5419e62](https://github.com/newjersey/navigator.business.nj.gov/commit/5419e624b7f94b291138fdd4171ba123a630c2df))
+* updating Funding Opportunities Content small-business-improvement ([#1553](https://github.com/newjersey/navigator.business.nj.gov/issues/1553)) ([4ddf068](https://github.com/newjersey/navigator.business.nj.gov/commit/4ddf068d7d37ea9da367f92cbee83df52e829e36))
+* updating Funding Opportunities Content small-business-improvement ([#1598](https://github.com/newjersey/navigator.business.nj.gov/issues/1598)) ([b2fbf03](https://github.com/newjersey/navigator.business.nj.gov/commit/b2fbf038e7ea474deee331f2c3e36508339fbe74))
+* updating Funding Opportunities Content small-business-improvement ([#1614](https://github.com/newjersey/navigator.business.nj.gov/issues/1614)) ([88fa077](https://github.com/newjersey/navigator.business.nj.gov/commit/88fa07745e64f9b0faefa3766f07055309d541bd))
+* updating Funding Opportunities Content small-business-lease ([#1554](https://github.com/newjersey/navigator.business.nj.gov/issues/1554)) ([d033c98](https://github.com/newjersey/navigator.business.nj.gov/commit/d033c98fef1ec47e3e29c6bee6a4f02f36813d1a))
+* updating Funding Opportunities Content small-business-lease ([#1601](https://github.com/newjersey/navigator.business.nj.gov/issues/1601)) ([cf31f8f](https://github.com/newjersey/navigator.business.nj.gov/commit/cf31f8ff83cab0e8d532ff98eb282a715f625dba))
+* updating Funding Opportunities Content the-small-business ([#1555](https://github.com/newjersey/navigator.business.nj.gov/issues/1555)) ([42d0ca2](https://github.com/newjersey/navigator.business.nj.gov/commit/42d0ca282ded5cc1b718c2f7a50a11913185e45e))
+* updating Funding Opportunities Content veteran-owned-business ([#1604](https://github.com/newjersey/navigator.business.nj.gov/issues/1604)) ([542215f](https://github.com/newjersey/navigator.business.nj.gov/commit/542215f6f6d66065080d7bda0c06a6040358b2b0))
+* updating Funding Opportunities Content veteran-owned-business ([#1612](https://github.com/newjersey/navigator.business.nj.gov/issues/1612)) ([9ee3e05](https://github.com/newjersey/navigator.business.nj.gov/commit/9ee3e052924cd391a3d9db64dffb69e52c1bc192))
+* updating Oscar Onboarding Content date-of-formation ([#1527](https://github.com/newjersey/navigator.business.nj.gov/issues/1527)) ([4cfcdfc](https://github.com/newjersey/navigator.business.nj.gov/commit/4cfcdfc34326f5d94263549614bb0578e6ab592b))
+* updating Oscar Onboarding Content date-of-formation ([#1626](https://github.com/newjersey/navigator.business.nj.gov/issues/1626)) ([ee19608](https://github.com/newjersey/navigator.business.nj.gov/commit/ee196083c63d679d26790391077007956fae1a85))
+* updating Oscar Onboarding Content date-of-formation ([#1627](https://github.com/newjersey/navigator.business.nj.gov/issues/1627)) ([73c61ee](https://github.com/newjersey/navigator.business.nj.gov/commit/73c61ee8adc35515af8ad147ca9b4ad16c0986dc))
+* updating Oscar Onboarding Content date-of-formation ([#1629](https://github.com/newjersey/navigator.business.nj.gov/issues/1629)) ([81e8145](https://github.com/newjersey/navigator.business.nj.gov/commit/81e81459aefc1e32d4606033eee3b6da286b2497))
+* updating Oscar Onboarding Content existing-employees ([#1526](https://github.com/newjersey/navigator.business.nj.gov/issues/1526)) ([0c47c83](https://github.com/newjersey/navigator.business.nj.gov/commit/0c47c83acae7a4de3d202df00633b6b1fad796a5))
+* updating Oscar Onboarding Content municipality ([#1565](https://github.com/newjersey/navigator.business.nj.gov/issues/1565)) ([d7638fe](https://github.com/newjersey/navigator.business.nj.gov/commit/d7638fe4fe412c62523bd7d594aa1ad138274ec9))
+* updating Poppy Onboarding Content municipality ([#1568](https://github.com/newjersey/navigator.business.nj.gov/issues/1568)) ([5cd44b6](https://github.com/newjersey/navigator.business.nj.gov/commit/5cd44b67f189127fef1fc890d9cea72768ee7570))
+
+
+* feat!: implement onboarding and dashboard for oscar persona ([6b362ce](https://github.com/newjersey/navigator.business.nj.gov/commit/6b362ce8a6bc16c808bb00eac4e0faeab4c359f6))
+
+
+### Features
+
+* [[#1324](https://github.com/newjersey/navigator.business.nj.gov/issues/1324)] remove operate section for poppy ([96351fc](https://github.com/newjersey/navigator.business.nj.gov/commit/96351fc56fa6a511bdbae761917e10a59a6950f7))
+
+
+### BREAKING CHANGES
+
+* new persona
+
 # [1.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v1.10.0...v1.11.0) (2022-02-03)
 
 
