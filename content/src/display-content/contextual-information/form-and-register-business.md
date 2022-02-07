@@ -1,16 +1,11 @@
 ### Form and Register Your Business
 
-You need to form and register your business with the State of New Jersey to legally operate in the State. The process to [form and register your business](https://business.nj.gov/pages/register-your-business) includes:
+All businesses need to form and register with the State of New Jersey to legally operate in the State. 
 
-- Registering your business name
-- Obtaining your Employee Identification Number `(EIN)|ein`
-- Registering your `legal structure|legal-structure-learn-more`
-- Registering for New Jersey Tax and Employer purposes
+If you've fully [registered your business](https://business.nj.gov/pages/register-your-business) you should have:
 
-If you've successfully formed and registered your business you will have received:
-
-- `Entity ID|entity-id`
-- `Certificate of Formation|certificate-formation`
-- `Business Registration Certificate (BRC)|business-reg-certificate`
+- `EIN|EIN` 
+- `Entity ID|entity-id` (Only required for LLC, C corp, LP and LLP)
 - `NJ Tax ID|tax-id`
-- `Authorization to Collect Sales Tax|certificate-authority-sales-tax`
+
+If you do not have all the items above, don't worry, we can help. Select "No, I still need to register my business."
