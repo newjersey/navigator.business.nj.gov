@@ -31,4 +31,4 @@ NJ Accelerate supports accelerator programs and their graduate companies. Incent
 
 **Benefits:** 1:1 matching event sponsorship up to $100,000 for accelerator programs. 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies.
 
-**Eligibility:** Accelerator programs and graduates of Approved Accelerators.
+**Eligibility:** Accelerator programs and graduates of approved accelerators.
