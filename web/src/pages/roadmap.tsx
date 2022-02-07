@@ -44,6 +44,15 @@ const RoadmapPage = (props: Props): ReactElement => {
 
   useEffect(() => {
     if (!router.isReady) return;
+    if (router.query.error === "true" && userData?.profileData.hasExistingBusiness) {
+      router.replace("/dashboard");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady, router.query.error, userData?.profileData.hasExistingBusiness]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
     const success = router.query.success;
     setSuccessAlert(success === "true");
   }, [router.isReady, router.query.success]);

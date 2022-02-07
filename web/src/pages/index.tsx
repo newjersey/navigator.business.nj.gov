@@ -18,7 +18,11 @@ const Home = (): ReactElement => {
 
   useEffect(() => {
     if (userData?.formProgress === "COMPLETED") {
-      router.replace("/roadmap");
+      if (userData?.profileData.hasExistingBusiness) {
+        router.replace("/dashboard");
+      } else {
+        router.replace("/roadmap");
+      }
     } else if (userData?.formProgress === "UNSTARTED") {
       if (
         !!process.env.MYNJ_PROFILE_LINK &&
@@ -28,7 +32,7 @@ const Home = (): ReactElement => {
       }
       router.replace("/onboarding");
     } else if (userData === undefined && error != undefined) {
-      router.replace("/roadmap");
+      router.replace("/roadmap?error=true");
     }
   }, [userData, error, router]);
 

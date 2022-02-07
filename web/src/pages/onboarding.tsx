@@ -290,6 +290,11 @@ const OnboardingPage = (props: Props): ReactElement => {
     return slidePage === page.previous ? 100 : 300;
   };
 
+  const redirectUrl = useMemo(
+    () => (userData?.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap"),
+    [userData?.profileData.hasExistingBusiness]
+  );
+
   return (
     <ProfileDataContext.Provider
       value={{
@@ -329,8 +334,8 @@ const OnboardingPage = (props: Props): ReactElement => {
                 <div className="padding-top-05">
                   {OnboardingStatusLookup[alert].body}{" "}
                   {OnboardingStatusLookup[alert] && (
-                    <Link href="/roadmap">
-                      <a href="/roadmap" data-testid={`toast-link`}>
+                    <Link href={redirectUrl}>
+                      <a href={redirectUrl} data-testid={`toast-link`}>
                         {OnboardingStatusLookup[alert].link}
                       </a>
                     </Link>
