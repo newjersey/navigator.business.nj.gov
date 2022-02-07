@@ -16,7 +16,7 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: n/a
+businessSize: yes
 homeBased: yes
 mwvb: n/a
 preferenceGiven: ""
