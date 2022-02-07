@@ -29,8 +29,8 @@ industry:
 ---
 Founders & Funders enables early-stage New Jersey technology and life sciences companies to meet potential investors in 10-minute, one-on-one “speed dating” sessions to discuss strategy, business models, and funding opportunities.
 
-NJ Founders & Funders - NJEDA
-
 **Benefits:** Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.
 
 **Eligibility:** Registered to do business in New Jersey and located in New Jersey. Typically demonstrates some signs of financial or operational traction.
+
+NJ Founders & Funders - NJEDA
