@@ -1,6 +1,15 @@
 import React, { ReactElement } from "react";
 
-type TagVariant = "primary" | "base" | "info" | "error" | "accent" | "noBg" | "baseDark" | "baseBlack";
+type TagVariant =
+  | "primary"
+  | "base"
+  | "info"
+  | "error"
+  | "accent"
+  | "noBg"
+  | "baseDark"
+  | "baseBlack"
+  | "required";
 
 interface Props {
   tagVariant: TagVariant;
@@ -11,6 +20,7 @@ interface Props {
   hover?: boolean;
   fixedWidth?: boolean;
   hexColor?: string;
+  paddingOverrideClassName?: string;
 }
 
 export const Tag = (props: Props): ReactElement => {
@@ -42,6 +52,9 @@ export const Tag = (props: Props): ReactElement => {
     case "baseBlack":
       styling = "bg-white text-black";
       break;
+    case "required":
+      styling = "bg-white text-accent-cool-darker border-1px border-accent-cool-darker";
+      break;
   }
 
   switch (props.hover) {
@@ -52,12 +65,13 @@ export const Tag = (props: Props): ReactElement => {
 
   return (
     <span
-      className={`usa-tag font-sans-2xs padding-y-2px width-full width-auto line-height-sans-2 
+      className={`flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
         ${props.textWrap ? "text-wrap display-block" : "text-no-wrap"}
         ${styling}
         ${hoverStyling}
         ${props.bold ? "text-bold" : ""}
         ${props.fixedWidth ? "tag-fixed-width display-inline-block" : ""}
+        ${props.paddingOverrideClassName ?? "padding-y-2px"}
       `}
       style={props.hexColor ? { backgroundColor: props.hexColor } : {}}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}

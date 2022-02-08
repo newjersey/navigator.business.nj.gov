@@ -90,7 +90,7 @@ export const setPreferencesCloseSection = (preferences: Preferences, current: Se
 export const getModifiedTaskContent = (
   roadmap: Roadmap | undefined,
   task: Task,
-  field: Exclude<keyof Task, "unlockedBy">
+  field: Exclude<keyof Task, "unlockedBy" | "required">
 ): string => {
   const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
   if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {

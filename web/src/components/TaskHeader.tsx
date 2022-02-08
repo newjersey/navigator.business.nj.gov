@@ -3,6 +3,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SectionType, Task, TaskProgress } from "@/lib/types/types";
@@ -14,6 +15,7 @@ import {
 } from "@/lib/utils/helpers";
 import React, { ReactElement, useState } from "react";
 import { CongratulatoryDialog } from "./CongratulatoryDialog";
+import { Tag } from "./njwds-extended/Tag";
 
 interface Props {
   task: Task;
@@ -89,7 +91,23 @@ export const TaskHeader = (props: Props): ReactElement => {
       >
         {getModifiedTaskContent(roadmap, props.task, "name")}
       </div>
-      <div className="margin-top-0 margin-bottom-2">{renderProgress()}</div>
+      <div className="flex flex-align-center flex-wrap margin-top-0 margin-bottom-2">
+        {renderProgress()}
+        {props.task.required === true && (
+          <div className="flex flex-align-center tablet:margin-left-05">
+            <Tag tagVariant="required" paddingOverrideClassName="padding-y-0 padding-left-0">
+              <img
+                className="margin-right-05 margin-left-neg-1px margin-y-neg-1px"
+                width="20px"
+                height="20px"
+                src="/img/required-task-icon.svg"
+                alt=""
+              />
+              {TaskDefaults.requiredTagText}
+            </Tag>
+          </div>
+        )}
+      </div>
       <UserDataErrorAlert />
       <CongratulatoryDialog
         nextSectionType={nextSection}
