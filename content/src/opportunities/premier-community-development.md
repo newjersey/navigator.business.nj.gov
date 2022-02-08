@@ -16,7 +16,7 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: operating
-businessSize: n/a
+businessSize: yes
 homeBased: yes
 mwvb: n/a
 preferenceGiven: null
