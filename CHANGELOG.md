@@ -1,3 +1,11 @@
+## [2.0.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.0.1...v2.0.2) (2022-02-08)
+
+
+### Bug Fixes
+
+* dashboard/roadmap redirect test ([f009fa7](https://github.com/newjersey/navigator.business.nj.gov/commit/f009fa79140e3113ed8487c7bb40647fdad2ecc7))
+* update logic in the roadmap when logging in for existing business users ([38d98a2](https://github.com/newjersey/navigator.business.nj.gov/commit/38d98a2bc61690ead1e7125c91c017d6f07a4598))
+
 ## [2.0.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.0.0...v2.0.1) (2022-02-07)
 
 
