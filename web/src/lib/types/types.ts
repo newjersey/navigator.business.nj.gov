@@ -547,6 +547,7 @@ export interface Task {
   contentMd: string;
   postOnboardingQuestion?: string;
   unlockedBy: TaskLink[];
+  required?: boolean;
 }
 
 export interface TaskLink {

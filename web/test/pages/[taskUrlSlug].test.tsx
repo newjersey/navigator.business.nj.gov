@@ -204,6 +204,16 @@ describe("task page", () => {
     expect(mockPush).toHaveBeenCalledWith("/roadmap");
   });
 
+  it("displays required tag in header if task is required", () => {
+    const subject = renderPage(generateTask({ required: true }));
+    expect(subject.getByText(TaskDefaults.requiredTagText)).toBeInTheDocument();
+  });
+
+  it("does not display required tag in header if task is not required", () => {
+    const subject = renderPage(generateTask({ required: false }));
+    expect(subject.queryByText(TaskDefaults.requiredTagText)).not.toBeInTheDocument();
+  });
+
   it("shows congratulatory modal without link when START section completed", () => {
     const planTaskId = "123";
     const startTaskId = "124";

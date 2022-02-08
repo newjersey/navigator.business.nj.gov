@@ -176,6 +176,7 @@ collections:
         value_field: "{{id}}"
         display_fields: ["{{id}}"]
         required: false
+      - { label: "Required", name: "required", widget: "boolean", required: false }
 
   - name: "filings"
     label: "Filings Content"
@@ -213,7 +214,7 @@ collections:
       - label: "Type"
         name: "type"
         widget: "select"
-        options: [ "FUNDING", "CERTIFICATION" ]
+        options: ["FUNDING", "CERTIFICATION"]
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Benefits", name: "benefits", widget: "string", required: false }
@@ -221,51 +222,60 @@ collections:
       - label: "Funding Type"
         name: "fundingType"
         widget: "select"
-        options: [ "tax credit", "loan", "grant", "technical assistance", "hiring and employee training support", "tax exemption" ]
+        options:
+          [
+            "tax credit",
+            "loan",
+            "grant",
+            "technical assistance",
+            "hiring and employee training support",
+            "tax exemption",
+          ]
       - label: "Agency"
         name: "agency"
         widget: "select"
         multiple: true
-        options: [ "NJEDA", "NJDOL" ]
+        options: ["NJEDA", "NJDOL"]
         required: false
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
-        options: [ "Do Not Publish" ]
+        options: ["Do Not Publish"]
         default: ""
         required: false
-      - { label: "Open Date", name: "openDate", widget: "date", required: false, default: '' }
-      - { label: "Due Date", name: "dueDate", widget: "date", required: false, default: '' }
+      - { label: "Open Date", name: "openDate", widget: "date", required: false, default: "" }
+      - { label: "Due Date", name: "dueDate", widget: "date", required: false, default: "" }
       - label: "Status"
         name: "status"
         widget: "select"
-        options: [ "open", "deadline", "first-come, first-served", "closed" ]
+        options: ["open", "deadline", "first-come, first-served", "closed"]
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
-        options: [ "annual", "ongoing", "reoccuring", "one-time", "pilot", "other" ]
+        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
       - label: "Business Stage"
         name: "businessStage"
         widget: "select"
-        options: [ "early-stage", "operating", "both" ]
+        options: ["early-stage", "operating", "both"]
       - { label: "Business Size", name: "businessSize", widget: "string", required: false }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
-        options: [ "yes", "no", "unknown" ]
+        options: ["yes", "no", "unknown"]
         default: "unknown"
       - { label: "MWVB", name: "mwvb", widget: "string", required: false }
       - label: "Preference Given"
         name: "preferenceGiven"
         widget: "select"
-        options: [ "yes", "no" ]
+        options: ["yes", "no"]
         required: false
       - label: "County"
         name: "county"
         widget: "select"
         multiple: true
         min: 0
-        options: [
+        options:
+          [
             "Atlantic",
             "Bergen",
             "Burlington",
@@ -287,13 +297,14 @@ collections:
             "Sussex",
             "Union",
             "Warren",
-        ]
+          ]
       - label: "Industry"
         name: "industry"
         widget: "select"
         multiple: true
         min: 0
-        options: [
+        options:
+          [
             "All",
             "Gov Priority",
             "Transportation and Warehousing",
@@ -322,8 +333,8 @@ collections:
             "Transportation and Warehousing",
             "Utilities",
             "Waste Management",
-            "Wholesale Trade"
-        ]
+            "Wholesale Trade",
+          ]
 
   - name: "archived-funding-opportunities"
     label: "Archived Funding Opportunities Content"
@@ -343,7 +354,7 @@ collections:
       - label: "Type"
         name: "type"
         widget: "select"
-        options: [ "FUNDING", "CERTIFICATION" ]
+        options: ["FUNDING", "CERTIFICATION"]
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Benefits", name: "benefits", widget: "string", required: false }
@@ -351,50 +362,59 @@ collections:
       - label: "Funding Type"
         name: "fundingType"
         widget: "select"
-        options: [ "tax credit", "loan", "grant", "technical assistance", "hiring and employee training support", "tax exemption" ]
+        options:
+          [
+            "tax credit",
+            "loan",
+            "grant",
+            "technical assistance",
+            "hiring and employee training support",
+            "tax exemption",
+          ]
       - label: "Agency"
         name: "agency"
         widget: "select"
         multiple: true
-        options: [ "NJEDA", "NJDOL" ]
+        options: ["NJEDA", "NJDOL"]
         required: false
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
-        options: [ "Do Not Publish" ]
+        options: ["Do Not Publish"]
         required: false
-      - { label: "Open Date", name: "openDate", widget: "date", required: false, default: '' }
-      - { label: "Due Date", name: "dueDate", widget: "date", required: false, default: '' }
+      - { label: "Open Date", name: "openDate", widget: "date", required: false, default: "" }
+      - { label: "Due Date", name: "dueDate", widget: "date", required: false, default: "" }
       - label: "Status"
         name: "status"
         widget: "select"
-        options: [ "open", "deadline", "first-come, first-served", "closed" ]
+        options: ["open", "deadline", "first-come, first-served", "closed"]
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
-        options: [ "annual", "ongoing", "reoccuring", "one-time", "pilot", "other" ]
+        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
       - label: "Business Stage"
         name: "businessStage"
         widget: "select"
-        options: [ "early-stage", "operating", "both" ]
+        options: ["early-stage", "operating", "both"]
       - { label: "Business Size", name: "businessSize", widget: "string", required: false }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
-        options: [ "yes", "no", "unknown" ]
+        options: ["yes", "no", "unknown"]
         default: "unknown"
       - { label: "MWVB", name: "mwvb", widget: "string", required: false }
       - label: "Preference Given"
         name: "preferenceGiven"
         widget: "select"
-        options: [ "yes", "no" ]
+        options: ["yes", "no"]
         required: false
       - label: "County"
         name: "county"
         widget: "select"
         multiple: true
         min: 0
-        options: [
+        options:
+          [
             "Atlantic",
             "Bergen",
             "Burlington",
@@ -416,13 +436,14 @@ collections:
             "Sussex",
             "Union",
             "Warren",
-        ]
+          ]
       - label: "Industry"
         name: "industry"
         widget: "select"
         multiple: true
         min: 0
-        options: [
+        options:
+          [
             "All",
             "Gov Priority",
             "Transportation and Warehousing",
@@ -451,9 +472,8 @@ collections:
             "Transportation and Warehousing",
             "Utilities",
             "Waste Management",
-            "Wholesale Trade"
-        ]
-
+            "Wholesale Trade",
+          ]
 
   - name: "contextual-information"
     label: "Contextual Information"

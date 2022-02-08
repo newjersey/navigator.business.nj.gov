@@ -1,4 +1,6 @@
+import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import * as types from "@/lib/types/types";
@@ -19,7 +21,19 @@ export const Task = (props: Props): ReactElement => {
 
   return (
     <li className="margin-0">
-      <div className={`line-height-sans-2 flex ${isTabletAndUp ? "margin-bottom-2" : "margin-bottom-1"}`}>
+      <div
+        className={`line-height-sans-2 flex flex-align-center ${
+          isTabletAndUp ? "margin-bottom-2" : "margin-bottom-1"
+        }`}
+      >
+        <ArrowTooltip title={TaskDefaults.requiredTagText}>
+          <img
+            src="/img/required-task-icon.svg"
+            alt=""
+            className="margin-right-2"
+            style={{ visibility: props.task.required === true ? "visible" : "hidden" }}
+          />
+        </ArrowTooltip>
         {isTabletAndUp && <span className="margin-right-205">{TaskProgressTagLookup[taskProgress]}</span>}
         <Link href={`/tasks/${props.task.urlSlug}`} passHref>
           <a
@@ -32,7 +46,9 @@ export const Task = (props: Props): ReactElement => {
           </a>
         </Link>
       </div>
-      {!isTabletAndUp && <div className="margin-bottom-2">{TaskProgressTagLookup[taskProgress]}</div>}
+      {!isTabletAndUp && (
+        <div className="margin-bottom-2 margin-left-4">{TaskProgressTagLookup[taskProgress]}</div>
+      )}
     </li>
   );
 };

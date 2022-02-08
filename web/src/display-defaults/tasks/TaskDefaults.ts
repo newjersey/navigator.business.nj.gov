@@ -8,4 +8,5 @@ export const TaskDefaults: Record<string, string> = {
   unlockedBySingular: "Before starting this task, we recommend that you take a look at:",
   unlockedByPlural: "Before starting this task, we recommend you take a look at:",
   loadingTaskDependencies: "Loading task dependencies…",
+  requiredTagText: "Required",
 };

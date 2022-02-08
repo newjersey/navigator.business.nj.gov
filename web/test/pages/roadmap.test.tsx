@@ -1,5 +1,6 @@
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
+import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
@@ -408,5 +409,47 @@ describe("roadmap page", () => {
 
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
+  });
+
+  it("renders icon next to task status only if task is required", () => {
+    useMockRoadmap({
+      steps: [
+        generateStep({
+          section: "PLAN",
+          tasks: [generateTask({ required: true }), generateTask({ required: false })],
+        }),
+      ],
+    });
+
+    const subject = renderRoadmapPage();
+    const sectionPlan = subject.getByTestId("section-plan");
+    const allTasks = within(sectionPlan).getAllByRole("listitem");
+
+    expect(allTasks.length).toEqual(2);
+
+    expect(within(allTasks[0]).getByLabelText(TaskDefaults.requiredTagText)).toBeVisible();
+    expect(within(allTasks[1]).queryByLabelText(TaskDefaults.requiredTagText)).not.toBeVisible();
+  });
+
+  it("renders tooltip when hovering over a required task's icon", async () => {
+    useMockRoadmap({
+      steps: [
+        generateStep({
+          name: "step1",
+          tasks: [generateTask({ required: true })],
+        }),
+      ],
+    });
+
+    const subject = renderRoadmapPage();
+    await waitFor(() => expect(subject.queryByText(TaskDefaults.requiredTagText)).not.toBeInTheDocument());
+
+    const requiredIcon = subject.getByLabelText(TaskDefaults.requiredTagText);
+    fireEvent.mouseOver(requiredIcon);
+
+    await waitFor(() => {
+      expect(subject.queryByText(TaskDefaults.requiredTagText)).toBeInTheDocument();
+      expect(subject.queryByText(TaskDefaults.requiredTagText)).toBeVisible();
+    });
   });
 });

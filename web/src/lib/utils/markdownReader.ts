@@ -38,6 +38,7 @@ type TaskGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   postOnboardingQuestion: string;
+  required?: boolean;
 };
 
 type OpportunityGrayMatter = {
@@ -62,4 +63,5 @@ export type TaskWithoutLinks = {
   callToActionText: string;
   postOnboardingQuestion: string;
   contentMd: string;
+  required?: boolean;
 };
