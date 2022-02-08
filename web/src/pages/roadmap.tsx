@@ -44,7 +44,10 @@ const RoadmapPage = (props: Props): ReactElement => {
 
   useEffect(() => {
     if (!router.isReady) return;
-    if (router.query.error === "true" && userData?.profileData.hasExistingBusiness) {
+    if (
+      (router.query.error === "true" || (router.query?.code && router.query?.state)) &&
+      userData?.profileData.hasExistingBusiness
+    ) {
       router.replace("/dashboard");
     }
 
