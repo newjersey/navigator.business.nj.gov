@@ -55,10 +55,10 @@ describe("HomePage", () => {
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 
-  it("redirects to onboarding page when it is unknown if user has completed onboarding flow or not", () => {
+  it("redirects to roadmap page when it is unknown if user has completed onboarding flow or not", () => {
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
     render(withAuth(<Home />, { user: generateUser({}) }));
-    expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    expect(mockPush).toHaveBeenCalledWith("/roadmap?error=true");
   });
   it("opens the modal with signUp = true in the querystring", () => {
     useMockRouter({ isReady: true, query: { signUp: "true" } });
