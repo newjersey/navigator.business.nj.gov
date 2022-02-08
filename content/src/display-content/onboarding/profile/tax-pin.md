@@ -1,9 +1,8 @@
 ---
-placeholder: "Enter Tax PIN number"
-headingBolded: "New Jersey Tax Pin"
-headingNotBolded: "(Optional)"
+placeholder: Enter Tax PIN number
+headingBolded: New Jersey Tax Pin
+headingNotBolded: (Optional)
 ---
-
-## Tax Pin
+## Tax PIN
 
 What is your `Tax Pin|tax-pin`?
