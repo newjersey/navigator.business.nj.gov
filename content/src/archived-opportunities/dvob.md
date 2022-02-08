@@ -17,7 +17,7 @@ county:
 industry:
   - Administrative and Employment Services
 ---
-A Disabled Veteran-owned business (DVOB) is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a veteran.
+A Disabled Veteran-Owned Business (DVOB) is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a veteran.
 
 *DVOB certification may provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey).*
 
@@ -28,4 +28,4 @@ To complete this application, you must have:
 
 After you complete this, you will have:
 
-* A disabled veteran-owned business certificate
+* A Disabled Veteran-Owned Business certificate
