@@ -3,8 +3,8 @@ urlSlug: nj-brownfields-assistance
 name: NJ Brownfields Assistance Center @ NJIT
 id: nj-brownfields-assistance-center-njit
 type: FUNDING
-callToActionLink: ""
-callToActionText: ""
+callToActionLink: www.njit.edu/njbrownfields
+callToActionText: Learn More
 benefits: ""
 eligibility: ""
 fundingType: technical assistance
@@ -25,7 +25,7 @@ county:
 industry:
   - All Industries
 ---
-The [NJ Brownfields](www.njit.edu/njbrownfields) Assistance Center provides free guidance, tools, and resources to New Jersey county and municipal governments interested in redeveloping and reclaiming brownfield sites.
+The NJ Brownfields Assistance Center provides free guidance, tools, and resources to New Jersey county and municipal governments interested in redeveloping and reclaiming brownfield sites.
 
 **Benefits:** Free focused Assistance to New Jersey County and Local Governments and nonprofits to develop brownfield redevelopment solutions, as well as educate and engage communities in an effort to build capacity and a knowledge base on brownfield redevelopment.
 
