@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Content } from "@/components/Content";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { Icon } from "@/components/njwds/Icon";
@@ -5,10 +6,35 @@ import analytics from "@/lib/utils/analytics";
 import { ContextualInfo, ContextualInfoContext } from "@/pages/_app";
 import React, { ReactElement, useContext } from "react";
 
+// eslint-disable-next-line react/display-name
+export const ContextInfoElement = React.forwardRef(
+  (
+    props: { isVisible: boolean; markdown: string; close?: () => void },
+    ref?: React.LegacyRef<any>
+  ): ReactElement => (
+    <aside
+      data-testid="info-panel"
+      aria-label="Additional Information Panel"
+      className={`info-panel ${props.isVisible ? "is-visible" : "is-hidden"}`}
+      ref={ref}
+    >
+      <button
+        className="fdr fac fjc info-panel-close cursor-pointer"
+        aria-label="close panel"
+        onClick={props.close}
+      >
+        <Icon className="font-sans-xl">close</Icon>
+      </button>
+      <Content>{props.markdown}</Content>
+    </aside>
+  )
+);
+
 export const ContextualInfoPanel = (): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
 
   const close = () => {
+    analytics.event.contextual_sidebar_close_button.click.close_contextual_sidebar();
     setContextualInfo((prevContextualInfo: ContextualInfo) => ({
       ...prevContextualInfo,
       isVisible: false,
@@ -26,31 +52,16 @@ export const ContextualInfoPanel = (): ReactElement => {
     <>
       <div
         aria-hidden="true"
-        onClick={() => {
-          analytics.event.contextual_sidebar.click_outside.close_contextual_sidebar();
-          close();
-        }}
+        onClick={close}
         data-testid="overlay"
         className={`info-overlay ${contextualInfo.isVisible ? "is-visible" : ""}`}
       />
       <FocusTrappedSidebar close={close} isOpen={contextualInfo.isVisible}>
-        <aside
-          data-testid="info-panel"
-          aria-label="Additional Information Panel"
-          className={`info-panel ${contextualInfo.isVisible ? "is-visible" : "is-hidden"}`}
-        >
-          <button
-            className="fdr fac fjc info-panel-close cursor-pointer"
-            aria-label="close panel"
-            onClick={() => {
-              analytics.event.contextual_sidebar_close_button.click.close_contextual_sidebar();
-              close();
-            }}
-          >
-            <Icon className="font-sans-xl">close</Icon>
-          </button>
-          <Content>{contextualInfo.markdown}</Content>
-        </aside>
+        <ContextInfoElement
+          isVisible={contextualInfo.isVisible}
+          markdown={contextualInfo.markdown}
+          close={close}
+        />
       </FocusTrappedSidebar>
     </>
   );

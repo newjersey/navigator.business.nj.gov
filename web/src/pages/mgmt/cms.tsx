@@ -1,4 +1,6 @@
+import ContextEditor from "@/lib/cms/editors/context-info";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
+import ContextInfoPreview from "@/lib/cms/previews/context-info";
 import OpportunitiesPreview from "@/lib/cms/previews/opportunities";
 import TaskPreview from "@/lib/cms/previews/task";
 import dynamic from "next/dynamic";
@@ -25,6 +27,10 @@ const CMS = dynamic(
       CMS.registerPreviewTemplate("funding-opportunities", OpportunitiesPreview);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("archived-funding-opportunities", OpportunitiesPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(ContextEditor);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("contextual-information", ContextInfoPreview);
     }),
   { ssr: false, loading: Loading }
 );
