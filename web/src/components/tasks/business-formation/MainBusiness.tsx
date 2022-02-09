@@ -48,7 +48,7 @@ export const MainBusiness = (): ReactElement => {
           }}
           required={true}
           fieldName={"businessAddressZipCode"}
-          validationText={BusinessFormationDefaults.businessaddressZipCodeErrorText}
+          validationText={BusinessFormationDefaults.businessAddressZipCodeErrorText}
           additionalValidation={zipCodeRange}
         />
       </div>

@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { DatePicker, LocalizationProvider } from "@mui/lab";
+import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextField } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
@@ -28,12 +28,14 @@ export const BusinessStartDate = (): ReactElement => {
     });
   };
 
+  const Picker = process.env.NODE_ENV === "test" ? DesktopDatePicker : DatePicker;
+
   return (
     <div className="margin-bottom-2">
       <Content key="dateOfFormationMd">{state.displayContent.businessStartDate.contentMd}</Content>
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify ">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
+          <Picker
             minDate={dayjs()}
             maxDate={dayjs().add(100, "years")}
             value={dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD")}

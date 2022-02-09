@@ -14,6 +14,7 @@ export interface FormationMember {
 }
 
 export interface FormationFormData {
+  businessName: string;
   businessSuffix: BusinessSuffix | undefined;
   businessStartDate: string;
   businessAddressLine1: string;
@@ -69,6 +70,7 @@ export const createEmptyFormationMember = (): FormationMember => ({
 
 export const createEmptyFormationFormData = (): FormationFormData => {
   return {
+    businessName: "",
     businessSuffix: undefined,
     businessStartDate: "",
     businessAddressLine1: "",

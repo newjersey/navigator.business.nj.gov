@@ -22,7 +22,6 @@ import {
   currentUserData,
   setupStatefulUserDataContext,
   userDataUpdatedNTimes,
-  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
@@ -425,13 +424,13 @@ describe("<BusinessFormation />", () => {
     it("routes to profile page when edit business name button is clicked", async () => {
       renderWithData({});
       fireEvent.click(subject.getByTestId("edit-business-name"));
-      expect(mockPush).toHaveBeenCalledWith("/profile");
+      expect(mockPush).toHaveBeenCalledWith("/profile?path=businessFormation");
     });
 
     it("routes to profile page when edit legal structure button is clicked", async () => {
       renderWithData({});
       fireEvent.click(subject.getByTestId("edit-legal-structure"));
-      expect(mockPush).toHaveBeenCalledWith("/profile");
+      expect(mockPush).toHaveBeenCalledWith("/profile?path=businessFormation");
     });
 
     describe("navigates from the review page", () => {
@@ -871,8 +870,15 @@ describe("<BusinessFormation />", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("validates date on submit", async () => {
+    it("resets date on initial load", async () => {
       renderWithData({ businessStartDate: dayjs().subtract(1, "day").format("YYYY-MM-DD") });
+      expect(subject.getByLabelText("Business start date")).toHaveValue(dayjs().format("MM/DD/YYYY"));
+      await submitBusinessTab(true);
+    });
+
+    it("validates date on submit", async () => {
+      renderWithData({});
+      selectDate(dayjs().subtract(4, "day"));
       await submitBusinessTab(false);
       expect(subject.getByText(BusinessFormationDefaults.startDateErrorText)).toBeInTheDocument();
       expect(subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)).toBeInTheDocument();
@@ -961,7 +967,7 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(BusinessFormationDefaults.businessaddressZipCodeErrorText)
+              subject.getByText(BusinessFormationDefaults.businessAddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
               subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
@@ -976,7 +982,7 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(BusinessFormationDefaults.businessaddressZipCodeErrorText)
+              subject.getByText(BusinessFormationDefaults.businessAddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
               subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
@@ -987,16 +993,7 @@ describe("<BusinessFormation />", () => {
         it("passes zipcode validation in main business address", async () => {
           renderWithData({ businessAddressZipCode: "", agentNumberOrManual: "MANUAL_ENTRY" });
           fillText("Business address zip code", "07001");
-
-          await submitBusinessTab(false);
-          await waitFor(() => {
-            expect(
-              subject.queryByText(BusinessFormationDefaults.businessaddressZipCodeErrorText)
-            ).not.toBeInTheDocument();
-            expect(
-              subject.queryByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
-            ).not.toBeInTheDocument();
-          });
+          await submitBusinessTab(true);
         });
 
         it("displays error message due to non-NJ zipcode is entered in registered agent address", async () => {
@@ -1006,7 +1003,7 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(BusinessFormationDefaults.agentOfficeaddressZipCodeErrorText)
+              subject.getByText(BusinessFormationDefaults.agentOfficeAddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
               subject.getByText(BusinessFormationDefaults.missingFieldsOnSubmitModalText)
@@ -1018,26 +1015,33 @@ describe("<BusinessFormation />", () => {
       it("Business suffix", async () => {
         renderWithData({ businessSuffix: undefined });
         await submitBusinessTab(false);
-        expect(userDataWasNotUpdated()).toEqual(true);
+        expect(subject.getByRole("alert")).toHaveTextContent(/Business suffix/);
+      });
+
+      it("Business name", async () => {
+        renderWithData({}, { businessName: undefined });
+        await submitBusinessTab(false);
+        expect(subject.getByText(BusinessFormationDefaults.notSetBusinessNameErrorText)).toBeInTheDocument();
+        expect(subject.getByRole("alert")).toHaveTextContent(/Business name/);
       });
 
       it("Business address line1", async () => {
         renderWithData({ businessAddressLine1: "" });
         await submitBusinessTab(false);
-        expect(userDataWasNotUpdated()).toEqual(true);
+        expect(subject.getByRole("alert")).toHaveTextContent(/Business address line1/);
       });
 
       it("Business address zip code", async () => {
         renderWithData({ businessAddressZipCode: "" });
         await submitBusinessTab(false);
-        expect(userDataWasNotUpdated()).toEqual(true);
+        expect(subject.getByRole("alert")).toHaveTextContent(/Business address zip code/);
       });
 
       describe("when agent number selected", () => {
         it("agent number", async () => {
           renderWithData({ agentNumber: "", agentNumberOrManual: "NUMBER" });
           await submitBusinessTab(false);
-          expect(userDataWasNotUpdated()).toEqual(true);
+          expect(subject.getByRole("alert")).toHaveTextContent(/Agent number/);
         });
       });
 
@@ -1045,31 +1049,31 @@ describe("<BusinessFormation />", () => {
         it("agent name", async () => {
           renderWithData({ agentName: "", agentNumberOrManual: "MANUAL_ENTRY" });
           await submitBusinessTab(false);
-          expect(userDataWasNotUpdated()).toEqual(true);
+          expect(subject.getByRole("alert")).toHaveTextContent(/Agent name/);
         });
 
         it("agent email", async () => {
           renderWithData({ agentEmail: "", agentNumberOrManual: "MANUAL_ENTRY" });
           await submitBusinessTab(false);
-          expect(userDataWasNotUpdated()).toEqual(true);
+          expect(subject.getByRole("alert")).toHaveTextContent(/Agent email/);
         });
 
         it("agent address line 1", async () => {
           renderWithData({ agentOfficeAddressLine1: "", agentNumberOrManual: "MANUAL_ENTRY" });
           await submitBusinessTab(false);
-          expect(userDataWasNotUpdated()).toEqual(true);
+          expect(subject.getByRole("alert")).toHaveTextContent(/Agent office address line1/);
         });
 
         it("Agent office address city", async () => {
           renderWithData({ agentOfficeAddressCity: "", agentNumberOrManual: "MANUAL_ENTRY" });
           await submitBusinessTab(false);
-          expect(userDataWasNotUpdated()).toEqual(true);
+          expect(subject.getByRole("alert")).toHaveTextContent(/Agent office address city/);
         });
 
         it("Agent office address zip code", async () => {
           renderWithData({ agentOfficeAddressZipCode: "", agentNumberOrManual: "MANUAL_ENTRY" });
           await submitBusinessTab(false);
-          expect(userDataWasNotUpdated()).toEqual(true);
+          expect(subject.getByRole("alert")).toHaveTextContent(/Agent office address zip code/);
         });
       });
 
@@ -1179,21 +1183,8 @@ describe("<BusinessFormation />", () => {
   };
 
   const selectDate = (value: Dayjs) => {
-    const desiredValue = value.format("MMM D, YYYY");
-
-    fireEvent.click(subject.getByLabelText(`Business start date`));
-
-    if (value.month() !== dayjs().month()) {
-      selectNextMonth();
-    }
-
-    const chosenDate = subject.getByRole("button", { name: desiredValue });
-    fireEvent.click(chosenDate);
-  };
-
-  const selectNextMonth = () => {
-    fireEvent.click(subject.getByLabelText(`Business start date`));
-    fireEvent.click(subject.getByLabelText(`Next month`));
+    fillText("Business start date", value.format("MM/DD/YYYY"));
+    fireEvent.blur(subject.getByLabelText("Business start date"));
   };
 
   const chooseRadio = (value: string) => {
@@ -1243,15 +1234,18 @@ describe("<BusinessFormation />", () => {
     return subject.getByLabelText(label) as HTMLInputElement;
   };
 
-  const renderWithData = (formationFormData: Partial<FormationFormData>): void => {
-    const profileData = generateLLCProfileData({});
+  const renderWithData = (
+    formationFormData: Partial<FormationFormData>,
+    profileData: Partial<ProfileData> = {}
+  ): void => {
+    const llcProfileData = generateLLCProfileData(profileData);
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData),
       formationResponse: undefined,
       getFilingResponse: undefined,
     };
     const user = generateUser({ name: "" });
-    subject = renderTask({ profileData, formationData, user });
+    subject = renderTask({ profileData: llcProfileData, formationData, user });
   };
 
   const submitBusinessTab = async (completed = true) => {
@@ -1260,6 +1254,10 @@ describe("<BusinessFormation />", () => {
     if (completed) {
       await waitFor(() => {
         expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+      });
+    } else {
+      await waitFor(() => {
+        expect(subject.queryByTestId("contacts-section")).not.toBeInTheDocument();
       });
     }
   };

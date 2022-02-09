@@ -17,6 +17,7 @@ export const BusinessSection = (): ReactElement => {
 
   const requiredFieldsWithError = useMemo(() => {
     let requiredFields: FormationFields[] = [
+      "businessName",
       "businessSuffix",
       "businessAddressLine1",
       "businessAddressZipCode",
@@ -94,6 +95,14 @@ export const BusinessSection = (): ReactElement => {
   const submitBusinessData = async () => {
     if (!userData) return;
 
+    update({
+      ...userData,
+      formationData: {
+        ...userData.formationData,
+        formationFormData: state.formationFormData,
+      },
+    });
+
     if (requiredFieldsWithError.length > 0) {
       setShowRequiredFieldsError(true);
       const newErrorMappedFields = requiredFieldsWithError.reduce(
@@ -106,13 +115,6 @@ export const BusinessSection = (): ReactElement => {
     setShowRequiredFieldsError(false);
     setTab(state.tab + 1);
     scrollToTop();
-    update({
-      ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationFormData: state.formationFormData,
-      },
-    });
   };
 
   return (

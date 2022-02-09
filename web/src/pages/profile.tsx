@@ -74,6 +74,14 @@ const ProfilePage = (props: Props): ReactElement => {
     userData?.profileData.hasExistingBusiness,
   ]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const redirect = (params?: { [key: string]: any }, routerType = router.push) =>
+    router.query.path === "businessFormation"
+      ? routerType("/tasks/form-business-entity")
+      : userData?.profileData.hasExistingBusiness
+      ? routerType(`/dashboard${params ? `?${new URLSearchParams(params).toString()}` : ""}`)
+      : routerType(`/roadmap${params ? `?${new URLSearchParams(params).toString()}` : ""}`);
+
   useEffect(() => {
     if (userData) {
       setProfileData(userData.profileData);
@@ -92,7 +100,7 @@ const ProfilePage = (props: Props): ReactElement => {
     if (!deepEqual(profileData, userData.profileData)) {
       setEscapeModal(true);
     } else {
-      userData?.profileData.hasExistingBusiness ? router.replace("/dashboard") : router.replace("/roadmap");
+      redirect(undefined, router.replace);
     }
   };
 
@@ -113,10 +121,7 @@ const ProfilePage = (props: Props): ReactElement => {
     update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");
-
-      userData?.profileData.hasExistingBusiness
-        ? router.push("/dashboard?success=true")
-        : router.push("/roadmap?success=true");
+      redirect({ success: true });
     });
   };
 
@@ -243,15 +248,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <DialogContent>
             <div className="padding-x-2 padding-bottom-3">
               <p className="padding-bottom-1 font-body-xs">{ProfileDefaults.escapeModalBody}</p>
-              <button
-                className="usa-button "
-                onClick={() =>
-                  userData?.profileData.hasExistingBusiness
-                    ? router.replace("/dashboard")
-                    : router.replace("/roadmap")
-                }
-                data-testid="return"
-              >
+              <button className="usa-button " onClick={() => redirect()} data-testid="return">
                 {ProfileDefaults.escapeModalReturn}
               </button>
               <button

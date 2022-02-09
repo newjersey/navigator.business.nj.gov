@@ -4,6 +4,7 @@ import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-f
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
+import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -17,7 +18,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
   const { state, setTab } = useContext(FormationContext);
   const { userData } = useUserData();
   const router = useRouter();
-  const onEditProfile = () => router.push("/profile");
+  const onEditProfile = () => router.push("/profile?path=businessFormation");
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
@@ -54,11 +55,15 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         </div>
       </div>
 
-      <div className="min-height-575rem bg-base-lightest margin-bottom-205 display-block tablet:display-flex tablet:flex-row ">
+      <div
+        className={`min-height-575rem bg-base-lightest margin-bottom-1 display-block tablet:display-flex tablet:flex-row ${
+          state.errorMap["businessName"].invalid && "radius-md border-1px border-error"
+        }`}
+      >
         <div className="padding-205 flex-half">
           <Content>{state.displayContent.reviewPageBusinessName.contentMd}</Content>
           <span className="text-accent-cool-darker">
-            {userData?.profileData.businessName || BusinessFormationDefaults.notSetBusinessNameText}
+            {state?.formationFormData.businessName || BusinessFormationDefaults.notSetBusinessNameText}
           </span>{" "}
           {!reviewPage && (
             <Button
@@ -91,6 +96,9 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
           )}
         </div>
       </div>
+      <FormHelperText id={"businessNameAndLegalStructure"} className="Mui-error">
+        {state.errorMap["businessName"].invalid && BusinessFormationDefaults.notSetBusinessNameErrorText}
+      </FormHelperText>
     </>
   );
 };

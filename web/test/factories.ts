@@ -444,6 +444,7 @@ export const generateFormationDisplayContent = (
 
 export const generateFormationFormData = (overrides: Partial<FormationFormData>): FormationFormData => {
   return {
+    businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(),
     businessStartDate: dayjs().add(1, "days").format("YYYY-MM-DD"),
     businessAddressLine1: `some-address-1-${randomInt()}`,

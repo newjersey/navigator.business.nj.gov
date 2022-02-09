@@ -96,6 +96,22 @@ describe("profile", () => {
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap?success=true"));
     });
 
+    it("user is able to save and is redirected back to Business Formation", async () => {
+      useMockRouter({ query: { path: "businessFormation" } });
+      subject = renderPage({});
+      fillText("Business name", "Cool Computers");
+      clickSave();
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/form-business-entity"));
+    });
+
+    it("user is able to go back to Business Formation", async () => {
+      useMockRouter({ query: { path: "businessFormation" } });
+
+      subject = renderPage({});
+      clickBack();
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/form-business-entity"));
+    });
+
     it("prevents user from going back to roadmap if there are unsaved changes", async () => {
       subject = renderPage({});
       fillText("Business name", "Cool Computers");

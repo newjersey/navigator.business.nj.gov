@@ -82,13 +82,16 @@ export const BusinessFormation = (props: Props): ReactElement => {
     ? taskFromRoadmap.unlockedBy.filter((it) => userData?.taskProgress[it.id] !== "COMPLETED")
     : [];
 
+  const getDate = (date?: string): string =>
+    !date || dayjs(date, "YYYY-MM-DD").isBefore(dayjs()) ? dayjs().format("YYYY-MM-DD") : date;
+
   useMountEffectWhenDefined(() => {
     if (!userData) return;
     const splitName = splitFullName(userData.user.name);
     setFormationFormData({
       ...userData.formationData.formationFormData,
-      businessStartDate:
-        userData.formationData.formationFormData.businessStartDate || dayjs().format("YYYY-MM-DD"),
+      businessName: userData.profileData.businessName,
+      businessStartDate: getDate(userData.formationData.formationFormData.businessStartDate),
       contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
       contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
     });

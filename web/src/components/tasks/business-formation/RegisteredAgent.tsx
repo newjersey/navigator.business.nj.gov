@@ -113,7 +113,7 @@ export const RegisteredAgent = (): ReactElement => {
                       maxLength: 5,
                     }}
                     fieldName={"agentOfficeAddressZipCode"}
-                    validationText={BusinessFormationDefaults.agentOfficeaddressZipCodeErrorText}
+                    validationText={BusinessFormationDefaults.agentOfficeAddressZipCodeErrorText}
                     additionalValidation={zipCodeRange}
                     required={true}
                   />
