@@ -23,9 +23,9 @@ mwvb: 40% of program funds targeted to census tracts that were eligible to be
 preferenceGiven: yes
 county:
   - All
-industry:
-  - All Industries
+industry: []
 ---
+
 The Small Business Improvement Grant offers reimbursement for costs associated with completed building improvements or purchased new furniture, fixtures and equipment made since March 9th, 2020.
 
 **Benefits:** Grants equal to 50% of eligible total project costs up to $50,000.

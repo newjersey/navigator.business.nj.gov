@@ -9,7 +9,7 @@ fundingType: "tax credit"
 benefits: "Tax credits or grant reimbursements up to 20% of eligible project costs plus bonuses."
 eligibility: "Residential and commercial development projects located in a qualifying incentive area that meet all other program eligibility criteria. "
 publishStageArchive: ""
-industry: ["All Industries"]
+industry: []
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

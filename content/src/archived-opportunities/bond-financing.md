@@ -9,7 +9,7 @@ fundingType: "loan"
 benefits: "Tax-exempt bonds up to $10M for Manufacturers, unlimited for Non-Profits and public infrastructure projects."
 eligibility: "Manufacturing and processing facilities, certain government-owned facilities, facilities that furnish utilities, and some 501(c)(3) nonprofit organizations that meet Internal Revenue Code requirements for tax-exempt bond financing. Bonds can be used for projects that are owned and operated for the benefit of local, county, and state government bodies and is for capital improvements and expansions."
 publishStageArchive: ""
-industry: ["All Industries"]
+industry: []
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

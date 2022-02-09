@@ -43,6 +43,7 @@ export type PageHelpers = {
   getDateOfFormationValue: () => string;
   getEntityIdValue: () => string;
   getBusinessNameValue: () => string;
+  getSectorIDValue: () => string;
   getIndustryValue: () => string;
   getRadioButtonValue: () => string;
   getMunicipalityValue: () => string;
@@ -94,6 +95,8 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
   const getBusinessNameValue = (): string =>
     (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
 
+  const getSectorIDValue = (): string => (subject.queryByLabelText("Sector") as HTMLInputElement)?.value;
+
   const getIndustryValue = (): string => (subject.queryByTestId("industryid") as HTMLInputElement)?.value;
 
   const getRadioButtonValue = (): string => {
@@ -138,6 +141,7 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
     getIndustryValue,
     getRadioButtonValue,
     getMunicipalityValue,
+    getSectorIDValue,
     visitStep2,
     visitStep3,
     visitStep4,

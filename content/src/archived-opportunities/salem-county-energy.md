@@ -9,7 +9,7 @@ fundingType: "tax exemption"
 benefits: 'Sales tax exemption for the purchase of "energy," or electricity and natural gas, for use at the facility.'
 eligibility: "Manufacturing businesses in Salem County with at least 50 employees. At least 50% of employees must be involved in the manufacturing process. The energy and utility services must be consumed exclusively at the facility."
 publishStageArchive: ""
-industry: ["Manufacturing"]
+industry: ["manufacturing"]
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

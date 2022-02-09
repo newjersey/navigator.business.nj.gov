@@ -127,10 +127,11 @@ describe("onboarding - shared", () => {
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
     expect(currentUserData().profileData).toEqual({
+      ...initialUserData.profileData,
       hasExistingBusiness: true,
       entityId: undefined,
       businessName: "Cool Computers",
-      industryId: "e-commerce",
+      industryId: "generic",
       homeBasedBusiness: true,
       legalStructureId: undefined,
       municipality: newark,
@@ -154,10 +155,11 @@ describe("onboarding - shared", () => {
     page.fillText("Entity id", "1234567890");
     await page.visitStep3();
     page.fillText("Business name", "Cool Computers");
-    page.selectByValue("Industry", "e-commerce");
+    page.selectByValue("Sector", "clean-energy");
     await page.visitStep4();
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
+    page.chooseRadio("home-based-business-true");
 
     page.clickBack();
     page.clickBack();
@@ -166,10 +168,11 @@ describe("onboarding - shared", () => {
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
     expect(currentUserData().profileData).toEqual({
+      ...initialUserData.profileData,
       hasExistingBusiness: false,
       entityId: undefined,
       businessName: "Cool Computers",
-      industryId: "e-commerce",
+      industryId: undefined,
       homeBasedBusiness: true,
       dateOfFormation: undefined,
       legalStructureId: undefined,
@@ -194,10 +197,11 @@ describe("onboarding - shared", () => {
     page.fillText("Entity id", "1234567890");
     await page.visitStep3();
     page.fillText("Business name", "Cool Computers");
-    page.selectByValue("Industry", "restaurant");
+    page.selectByValue("Sector", "clean-energy");
     await page.visitStep4();
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
+    page.chooseRadio("home-based-business-true");
 
     page.clickBack();
     page.clickBack();
@@ -205,12 +209,13 @@ describe("onboarding - shared", () => {
 
     await page.visitStep2();
     expect(currentUserData().profileData).toEqual({
+      ...initialUserData.profileData,
       hasExistingBusiness: true,
       entityId: "1234567890",
       businessName: "Cool Computers",
-      industryId: "restaurant",
+      industryId: "generic",
       dateOfFormation: dayjs().subtract(4, "days").format("YYYY-MM-DD"),
-      homeBasedBusiness: false,
+      homeBasedBusiness: true,
       municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -218,6 +223,7 @@ describe("onboarding - shared", () => {
       taxId: undefined,
       notes: "",
       ownershipTypeIds: ["veteran-owned"],
+      sectorId: "clean-energy",
     });
   });
 
@@ -285,7 +291,7 @@ describe("onboarding - shared", () => {
   it("displays home-based business question for applicable industries on municipality page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const displayContent = createEmptyLoadDisplayContent();
-    displayContent.STARTING.industry.specificHomeBasedBusinessQuestion = {
+    displayContent.STARTING.homeBased = {
       contentMd: "Are you a home-based business?",
       radioButtonYesText: "Yeah",
       radioButtonNoText: "Nah",
@@ -311,8 +317,7 @@ describe("onboarding - shared", () => {
 
   it("does not display home-based business question for non-applicable industries", async () => {
     const displayContent = createEmptyLoadDisplayContent();
-    displayContent.STARTING.industry.specificHomeBasedBusinessQuestion.contentMd =
-      "Are you a home-based business?";
+    displayContent.STARTING.homeBased.contentMd = "Are you a home-based business?";
 
     const { subject, page } = renderPage({ displayContent });
     page.chooseRadio("has-existing-business-false");

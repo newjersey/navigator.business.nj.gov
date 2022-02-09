@@ -22,9 +22,9 @@ mwvb: mwbe
 preferenceGiven: no
 county:
   - All
-industry:
-  - All Industries
+industry: []
 ---
+
 The Small Business Fund provides creditworthy small, minority-owned and women-owned businesses and nonprofits in New Jersey access to financing.
 
 **Benefits:** Financing up to $500,000.

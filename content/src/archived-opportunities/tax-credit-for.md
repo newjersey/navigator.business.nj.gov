@@ -9,7 +9,7 @@ fundingType: "tax credit"
 benefits: "The tax credit ranges from $2,400 to up to $9,600 per hire of veterans or individuals from other target groups with significant barriers to employment."
 eligibility: "Business must be a registered in New Jersey."
 publishStageArchive: ""
-industry: ["All"]
+industry: []
 agency: ["NJDOL"]
 openDate: ""
 dueDate: ""

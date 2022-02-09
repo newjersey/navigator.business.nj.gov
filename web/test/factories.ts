@@ -13,6 +13,7 @@ import {
 import { getSectionNames } from "@/lib/utils/helpers";
 import {
   AllBusinessSuffixes,
+  arrayOfSectors as sectors,
   arrayOfStateObjects as states,
   BusinessSuffix,
   BusinessUser,
@@ -34,6 +35,7 @@ import {
   NameAndAddress,
   Preferences,
   ProfileData,
+  SectorType,
   TaxFiling,
   TaxFilingData,
   UserData,
@@ -113,6 +115,7 @@ export const generateProfileData = (
     ownershipTypeIds: [],
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
+    sectorId: randomSector().id,
     ...overrides,
   };
 };
@@ -257,6 +260,11 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
 export const randomLegalStructure = (): LegalStructure => {
   const randomIndex = Math.floor(Math.random() * LegalStructures.length);
   return LegalStructures[randomIndex];
+};
+
+export const randomSector = (): SectorType => {
+  const randomIndex = Math.floor(Math.random() * sectors.length);
+  return sectors[randomIndex];
 };
 
 export const randomIndustry = (isMobileLocation = false): Industry => {

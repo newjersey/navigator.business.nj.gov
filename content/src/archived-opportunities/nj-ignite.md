@@ -9,7 +9,7 @@ fundingType: "grant"
 benefits: "Benefits for Renters: Rent support grants. Benefits for Collaborative Workspaces: A tenant attraction tool."
 eligibility: "Renters can be early-stage technology and life science companies in New Jersey with 10 or fewer employees and less than $1 million in trailing 12 months gross sales from date of application submission. Collaborative workplaces can be entities with a minimum of 5 unique paying tenants over the last 2 years. Renters and collaborative workplaces must apply together."
 publishStageArchive: ""
-industry: ["Real Estate and Rental and Leasing", "Technology", "Life Sciences"]
+industry: ["real-estate", "technology", "life-sciences"]
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

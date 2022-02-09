@@ -9,7 +9,7 @@ fundingType: "loan"
 benefits: "Addresses funding gaps to make the remediation phase of the project financially viable for remedial actions and other eligible activities."
 eligibility: "This funding is for environmental cleanup (not assessment or investigation)."
 publishStageArchive: "Do Not Publish"
-industry: ["All Industries"]
+industry: []
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

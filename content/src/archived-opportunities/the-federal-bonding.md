@@ -9,7 +9,7 @@ fundingType: "hiring and employee training support"
 benefits: "Up to $25,000 federal bond insuring employers against theft, forgery, larceny or embezzlement for a term of 6 months"
 eligibility: "Business must be a registered in New Jersey."
 publishStageArchive: ""
-industry: ["All"]
+industry: []
 agency: ["NJDOL"]
 openDate: ""
 dueDate: ""

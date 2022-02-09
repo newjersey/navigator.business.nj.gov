@@ -10,6 +10,7 @@ import { ProfileData } from "@businessnjgovnavigator/shared";
 import React, { ReactNode } from "react";
 import { OnboardingDateOfFormation } from "./OnboardingDateOfFormation";
 import { OnboardingExistingEmployees } from "./OnboardingExistingEmployees";
+import { OnboardingSectors } from "./OnboardingSectors";
 
 export type OnboardingFlow = {
   pages: {
@@ -60,10 +61,18 @@ export const getOnboardingFlows = (
           <>
             <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
             <div className="margin-top-205" />
-            <OnboardingIndustry />
+            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
           </>
         ),
-        getErrorMap: () => ({ inline: [{ name: "businessName", valid: !!profileData.businessName }] }),
+        getErrorMap: () => ({
+          inline: [
+            { name: "businessName", valid: !!profileData.businessName },
+            {
+              name: "sectorId",
+              valid: !!profileData.sectorId,
+            },
+          ],
+        }),
       },
       {
         component: (

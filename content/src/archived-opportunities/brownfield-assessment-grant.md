@@ -9,7 +9,7 @@ fundingType: "grant"
 benefits: "Free Environmental Site Assessment to assess contamination at brownfield sites."
 eligibility: "This grant is available for eligible brownfield sites in the state to assess known or suspected contamination at a site."
 publishStageArchive: "Do Not Publish"
-industry: ["All Industries"]
+industry: []
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

@@ -56,7 +56,6 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     const specificHomeContractor = getMarkdown(loadFile("industry-home-contractor.md", type));
     const specificEmploymentAgency = getMarkdown(loadFile("industry-employment-agency.md", type));
     const specificLiquor = getMarkdown(loadFile("industry-liquor.md", type));
-    const specificHomeBased = getMarkdown(loadFile("municipality-home-based-business.md", type));
     return {
       contentMd: industryContent.content,
       specificHomeContractorMd: specificHomeContractor.content,
@@ -65,11 +64,6 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
         contentMd: specificLiquor.content,
         radioButtonYesText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonYesText,
         radioButtonNoText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonNoText,
-      },
-      specificHomeBasedBusinessQuestion: {
-        contentMd: specificHomeBased.content,
-        radioButtonYesText: (specificHomeBased.grayMatter as RadioGrayMatter).radioButtonYesText,
-        radioButtonNoText: (specificHomeBased.grayMatter as RadioGrayMatter).radioButtonNoText,
       },
       ...(industryContent.grayMatter as FieldGrayMatter),
     };
@@ -105,6 +99,9 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   const businessProfile = (type: UserContentType) => getTextFieldContent("business-profile.md", type);
   const businessInformation = (type: UserContentType) => getTextFieldContent("business-information.md", type);
   const businessReferences = (type: UserContentType) => getTextFieldContent("business-references.md", type);
+  const sectorId = (type: UserContentType) => getTextFieldContent("sector-id.md", type);
+  const homeBased = (type: UserContentType) =>
+    getTextFieldContent("municipality-home-based-business.md", type);
 
   const fieldFunctions: Record<
     keyof StartingFlowContent | keyof OwningFlowContent | keyof ProfileContent,
@@ -126,6 +123,8 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     businessProfile,
     businessInformation,
     businessReferences,
+    sectorId,
+    homeBased,
   };
 
   const startingFlowContent: StartingFlowContent = Object.keys(fieldFunctions)

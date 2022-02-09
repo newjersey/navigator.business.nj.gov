@@ -24,9 +24,7 @@ export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
 
   return (
     <>
-      <Content overrides={{ h3: header }}>
-        {state.displayContent.industry.specificHomeBasedBusinessQuestion.contentMd}
-      </Content>
+      <Content overrides={{ h3: header }}>{state.displayContent.homeBased.contentMd}</Content>
       <FormControl fullWidth>
         <RadioGroup
           aria-label="Home-based Business"
@@ -41,7 +39,7 @@ export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
             data-testid="home-based-business-true"
             value={true}
             control={<Radio color="primary" />}
-            label={state.displayContent.industry.specificHomeBasedBusinessQuestion.radioButtonYesText}
+            label={state.displayContent.homeBased.radioButtonYesText}
           />
           <FormControlLabel
             style={{ marginRight: "3rem" }}
@@ -49,7 +47,7 @@ export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
             data-testid="home-based-business-false"
             value={false}
             control={<Radio color="primary" />}
-            label={state.displayContent.industry.specificHomeBasedBusinessQuestion.radioButtonNoText}
+            label={state.displayContent.homeBased.radioButtonNoText}
           />
         </RadioGroup>
       </FormControl>

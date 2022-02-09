@@ -9,7 +9,7 @@ fundingType: "hiring and employee training support"
 benefits: "Help businesses find employees by providing guidance on job matching or occupation specific training program. This would be an involved process."
 eligibility: "Business must be a registered in New Jersey."
 publishStageArchive: ""
-industry: ["All"]
+industry: []
 agency: ["NJDOL"]
 openDate: ""
 dueDate: ""
