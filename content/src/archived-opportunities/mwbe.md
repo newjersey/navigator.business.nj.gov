@@ -1,6 +1,6 @@
 ---
 urlSlug: mwbe
-name: Minority/Women-Owned Business
+name: Obtain a Minority/Women-Owned Business
 id: mwbe
 type: CERTIFICATION
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
@@ -34,4 +34,4 @@ To complete this application, you must have:
 
 After you complete this, you will have:
 
-* Minority/women-owned business certification
+* A Minority/Women-owned Business Enterprise certificate
