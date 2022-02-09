@@ -44,7 +44,8 @@
     "underserved",
     "TANF",
     "tanf",
-    "Dougle"
+    "Dougle",
+    "DVOB"
   ],
   "ignorePaths": ["node_modules/**", "out/**"]
 }
