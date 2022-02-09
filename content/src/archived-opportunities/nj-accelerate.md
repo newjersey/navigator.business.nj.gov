@@ -9,7 +9,7 @@ fundingType: "loan"
 benefits: "1:1 matching event sponsorship up to $100,000 for accelerator programs. 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies."
 eligibility: "Accelerator programs and graduates of Approved Accelerators. "
 publishStageArchive: ""
-industry: ["Technology", "Life Sciences"]
+industry: ["technology", "life-sciences"]
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

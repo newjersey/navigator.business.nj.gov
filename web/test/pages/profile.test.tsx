@@ -23,6 +23,7 @@ import {
   createEmptyUserData,
   LookupIndustryById,
   LookupOwnershipTypeById,
+  LookupSectorTypeById,
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared";
@@ -122,6 +123,7 @@ describe("profile", () => {
       fillText("Tax id", "023456790");
       fillText("Employer id", "02-3456780");
       fillText("Notes", "whats appppppp");
+      chooseRadio("home-based-business-true");
       clickSave();
 
       await waitFor(() => {
@@ -311,7 +313,7 @@ describe("profile", () => {
       subject = renderPage({ userData: userData, municipalities: [newark] });
 
       fillText("Business name", "Cool Computers");
-      selectByValue("Industry", "e-commerce");
+      selectByValue("Sector", "clean-energy");
       fillText("Existing employees", "123");
       selectByText("Location", newark.displayName);
       selectByValue("Ownership", "veteran-owned");
@@ -322,6 +324,7 @@ describe("profile", () => {
       fillText("Tax id", "023456790");
       fillText("Notes", "whats appppppp");
       fillText("Tax pin", "6666");
+      chooseRadio("home-based-business-true");
       clickSave();
 
       await waitFor(() => {
@@ -332,7 +335,6 @@ describe("profile", () => {
           profileData: {
             ...userData.profileData,
             businessName: "Cool Computers",
-            industryId: "e-commerce",
             homeBasedBusiness: true,
             existingEmployees: "123",
             ownershipTypeIds: ["veteran-owned", "woman-owned"],
@@ -343,6 +345,7 @@ describe("profile", () => {
             employerId: "023456780",
             notes: "whats appppppp",
             taxPin: "6666",
+            sectorId: "clean-energy",
           },
         });
       });
@@ -353,7 +356,6 @@ describe("profile", () => {
         profileData: generateProfileData({
           hasExistingBusiness: true,
           businessName: "Applebees",
-          industryId: "e-commerce",
           entityId: "1234567890",
           employerId: "123456789",
           dateOfFormation,
@@ -366,6 +368,7 @@ describe("profile", () => {
           homeBasedBusiness: false,
           existingEmployees: "123",
           taxPin: "6666",
+          sectorId: "clean-energy",
         }),
       });
 
@@ -375,7 +378,7 @@ describe("profile", () => {
       subject = renderPage({ userData });
 
       expect(getBusinessNameValue()).toEqual("Applebees");
-      expect(getIndustryValue()).toEqual(LookupIndustryById("e-commerce").name);
+      expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
       expect(getEmployerIdValue()).toEqual("12-3456789");
       expect(getEntityIdValue()).toEqual("1234567890");
       expect(getTaxIdValue()).toEqual("123456790");
@@ -443,6 +446,20 @@ describe("profile", () => {
         expect(
           subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "9" }))
         ).toBeInTheDocument();
+        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      });
+    });
+
+    it("prevents user from saving if sector is not selected", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({ hasExistingBusiness: true, sectorId: "" }),
+      });
+      subject = renderPage({ userData: userData });
+      fireEvent.blur(subject.queryByLabelText("Sector") as HTMLElement);
+
+      clickSave();
+      await waitFor(() => {
+        expect(subject.queryByText(OnboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
         expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
     });
@@ -522,6 +539,8 @@ describe("profile", () => {
   const getBusinessNameValue = (): string =>
     (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
 
+  const getSectorIDValue = (): string => (subject.queryByLabelText("Sector") as HTMLInputElement)?.value;
+
   const getEntityIdValue = (): string => (subject.queryByLabelText("Entity id") as HTMLInputElement)?.value;
 
   const getDateOfFormation = (): string =>
@@ -549,4 +568,8 @@ describe("profile", () => {
 
   const getRadioButtonFromFormControlLabel = (dataTestId: string): HTMLInputElement =>
     within(subject.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
+
+  const chooseRadio = (value: string) => {
+    fireEvent.click(subject.getByTestId(value));
+  };
 });

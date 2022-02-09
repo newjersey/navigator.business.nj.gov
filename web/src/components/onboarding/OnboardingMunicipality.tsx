@@ -37,6 +37,10 @@ export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props)
 
   const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
+  const renderHomeBasedBusinessQuestion =
+    isHomeBasedBusinessApplicable(state.profileData.industryId) ||
+    state.profileData.hasExistingBusiness === true;
+
   return (
     <>
       <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.municipality.contentMd}</Content>
@@ -54,7 +58,7 @@ export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props)
           placeholderText={state.displayContent.municipality.placeholder ?? ""}
         />
 
-        {isHomeBasedBusinessApplicable(state.profileData.industryId) && (
+        {renderHomeBasedBusinessQuestion && (
           <div className="margin-top-3">
             <OnboardingHomeBasedBusiness h3Heading={props.h3Heading} headerAriaLevel={headerAriaLevel} />
           </div>

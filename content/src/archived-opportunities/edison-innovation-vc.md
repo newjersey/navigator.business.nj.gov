@@ -9,7 +9,7 @@ fundingType: "loan"
 benefits: "Up to $1,000,000 in growth capital matched with outside investors on a 1 to 1 basis."
 eligibility: "Venture capital supported New Jersey-based technology companies with a minimum trailing 12-month commercial revenues of $500,000. This revenue amount must exceed the amount of the potential Edison Innovation Fund investment amount. The company must employ 75% of its W-2 employees in NJ or commit to growing 10 high-paying jobs over two years."
 publishStageArchive: ""
-industry: ["Technology", "Life Sciences"]
+industry: ["technology", "life-sciences"]
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

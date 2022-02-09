@@ -173,7 +173,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     if (page.current === 1 && hasExistingBusinessChanged) {
       newProfileData = {
         businessName: profileData.businessName,
-        industryId: profileData.industryId,
+        industryId: profileData.hasExistingBusiness === true ? "generic" : undefined,
         homeBasedBusiness: profileData.homeBasedBusiness,
         liquorLicense: profileData.liquorLicense,
         municipality: profileData.municipality,
@@ -188,6 +188,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         ownershipTypeIds: [],
         existingEmployees: undefined,
         taxPin: undefined,
+        sectorId: undefined,
       };
 
       setProfileData(newProfileData);

@@ -11,13 +11,12 @@ eligibility: "All industries are welcome to explore this resource, but it may be
 publishStageArchive: ""
 industry:
   [
-    "Life Sciences",
-    "Technology",
-    "Clean Energy",
-    "Educational Services",
-    "Manufacturing",
-    "Offshore Wind",
-    "Transportation and Warehousing ",
+    "life-sciences",
+    "technology",
+    "clean-energy",
+    "educational-services",
+    "manufacturing",
+    "transportation-and-warehousing ",
   ]
 agency: ["NJEDA"]
 openDate: ""

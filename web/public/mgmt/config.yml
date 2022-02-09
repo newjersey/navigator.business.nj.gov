@@ -298,43 +298,15 @@ collections:
             "Union",
             "Warren",
           ]
-      - label: "Industry"
-        name: "industry"
-        widget: "select"
+      - label: Industry
+        name: industry
+        widget: relation
         multiple: true
-        min: 0
-        options:
-          [
-            "All",
-            "Gov Priority",
-            "Transportation and Warehousing",
-            "All Industries",
-            "Accommodation and Food Services",
-            "Administrative and Employment Services",
-            "Agriculture, Forestry, and Fishing and Hunting",
-            "Arts, Entertainment, and Recreation",
-            "Clean Energy",
-            "Construction",
-            "Digital and Print Media",
-            "Educational Services",
-            "Finance, Insurance and Professional Services",
-            "Health Care and Social Assistance",
-            "Industries not classified",
-            "Life Sciences",
-            "Manufacturing",
-            "Mining, Quarrying, and Oil and Gas Extraction",
-            "Offshore Wind",
-            "Organizational or Financial Management Companies",
-            "Other Services (except Public Administration)",
-            "Professional, Scientific and Technical Services",
-            "Real Estate and Rental and Leasing",
-            "Retail Trade",
-            "Technology",
-            "Transportation and Warehousing",
-            "Utilities",
-            "Waste Management",
-            "Wholesale Trade",
-          ]
+        required: false
+        collection: "dashboard-settings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
 
   - name: "archived-funding-opportunities"
     label: "Archived Funding Opportunities Content"
@@ -437,43 +409,15 @@ collections:
             "Union",
             "Warren",
           ]
-      - label: "Industry"
-        name: "industry"
-        widget: "select"
+      - label: Industry
+        name: industry
+        widget: relation
         multiple: true
-        min: 0
-        options:
-          [
-            "All",
-            "Gov Priority",
-            "Transportation and Warehousing",
-            "All Industries",
-            "Accommodation and Food Services",
-            "Administrative and Employment Services",
-            "Agriculture, Forestry, and Fishing and Hunting",
-            "Arts, Entertainment, and Recreation",
-            "Clean Energy",
-            "Construction",
-            "Digital and Print Media",
-            "Educational Services",
-            "Finance, Insurance and Professional Services",
-            "Health Care and Social Assistance",
-            "Industries not classified",
-            "Life Sciences",
-            "Manufacturing",
-            "Mining, Quarrying, and Oil and Gas Extraction",
-            "Offshore Wind",
-            "Organizational or Financial Management Companies",
-            "Other Services (except Public Administration)",
-            "Professional, Scientific and Technical Services",
-            "Real Estate and Rental and Leasing",
-            "Retail Trade",
-            "Technology",
-            "Transportation and Warehousing",
-            "Utilities",
-            "Waste Management",
-            "Wholesale Trade",
-          ]
+        required: false
+        collection: "dashboard-settings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
 
   - name: "contextual-information"
     label: "Contextual Information"
@@ -609,6 +553,27 @@ collections:
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
+
+  - name: "dashboard-settings"
+    label: "Dashboard Settings"
+    editor:
+      preview: false
+    files:
+      - label: "Industry Sectors"
+        name: "arrayOfSectors"
+        file: "content/src/dashboard/sectors.json"
+        fields:
+          - label: Sectors
+            name: arrayOfSectors
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
 
   - name: "settings"
     label: "Roadmap Settings"

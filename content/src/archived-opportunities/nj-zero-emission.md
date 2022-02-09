@@ -9,7 +9,7 @@ fundingType: "grant"
 benefits: "Vouchers up to $100,000 plus bonuses."
 eligibility: "Businesses and nonprofits in the greater Newark, Camden and New Brunswick areas purchasing one or more new zero emission medium- or heavy-duty vehicles."
 publishStageArchive: ""
-industry: ["All Industries"]
+industry: []
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

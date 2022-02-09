@@ -11,16 +11,15 @@ eligibility: "Employers with existing employees that they want to train in a new
 publishStageArchive: ""
 industry:
   [
-    "Life Sciences",
-    "Technology",
-    "Clean Energy",
-    "Educational Services",
-    "Manufacturing",
-    "Offshore Wind",
-    "Transportation and Warehousing ",
-    "Accommodation and Food Services",
-    "Digital and Print Media",
-    "Finance, Insurance and Professional Services",
+    "life-sciences",
+    "technology",
+    "clean-energy",
+    "educational-services",
+    "manufacturing",
+    "transportation-and-warehousing ",
+    "accommodation-and-food-services",
+    "digital-and-print-media",
+    "finance-insurance",
   ]
 agency: ["NJDOL"]
 openDate: ""

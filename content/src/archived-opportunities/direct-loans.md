@@ -9,7 +9,7 @@ fundingType: "loan"
 benefits: "Loans up to $2 million for fixed assets, or up to $750,000 for working capital to be used for fixed assets or working capital."
 eligibility: "Businesses that commit to creating or maintaining 1 job for every $65,000 of assistance. There is an application fee of $1K."
 publishStageArchive: ""
-industry: ["All Industries"]
+industry: []
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

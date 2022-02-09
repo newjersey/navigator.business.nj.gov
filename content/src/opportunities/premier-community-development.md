@@ -13,18 +13,20 @@ agency:
 publishStageArchive: null
 openDate: ""
 dueDate: ""
+businessSize: n/a
+preferenceGiven: null
+sector:
+  - digital-and-print-media
 status: open
 programFrequency: ongoing
 businessStage: operating
-businessSize: n/a
 homeBased: yes
 mwvb: n/a
-preferenceGiven: null
 county:
   - All
-industry:
-  - All Industries
+industry: []
 ---
+
 The Premier Community Development Financial Institutions (CDFI) Program provides qualified small businesses and not-for-profit organizations loan participation, loan guarantees, and line of credit guarantees in partnership with designated Premier CDFIs.
 
 **Benefits:** Loan participation of up to $500,000 or line of credit guarantee.

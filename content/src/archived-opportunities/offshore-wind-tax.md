@@ -10,14 +10,7 @@ benefits: "Tax credits up to 100% of qualified investments."
 eligibility: "Businesses investing at least $17.5 million in a qualified wind energy facility and employing at least 150 new, full-time employees."
 publishStageArchive: ""
 industry:
-  [
-    "Clean Energy",
-    "Offshore Wind",
-    "Professional, Scientific and Technical Services",
-    "Manufacturing",
-    "Other Services (except Public Administration)",
-    "Industries not classified",
-  ]
+  ["clean-energy", "professional-scientific-and-technical-services", "manufacturing", "other-services"]
 agency: ["NJEDA"]
 openDate: ""
 dueDate: "2025-07-01T04:00:00.000Z"

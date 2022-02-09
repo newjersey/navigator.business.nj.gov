@@ -12,4 +12,5 @@ export const OnboardingDefaults: Record<string, string> = {
   errorTextMinimumNumericField: "Must be ${length} digits long.",
   errorTextRequiredExistingEmployees: "Please enter number of employees",
   dateOfFormationErrorText: "Your formation date must be in the past, and should be formatted as 00/00/0000.",
+  errorTextRequiredSector: "Please select a sector.",
 };

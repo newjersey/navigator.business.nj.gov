@@ -14,12 +14,11 @@ businessStage: early-stage
 homeBased: no
 county:
   - Burlington
-industry:
-  - Gov Priority
+ownershipType: veteran-owned
 ---
 A `Veteran|veteran`-Owned Business (VOB) is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a veteran.
 
-*VOB certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey).*
+_VOB certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)._
 
 To complete this application, you must have:
 

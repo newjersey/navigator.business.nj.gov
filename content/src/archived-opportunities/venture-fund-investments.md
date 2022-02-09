@@ -9,7 +9,7 @@ fundingType: "loan"
 benefits: "Investment capital commitments up to $10 million."
 eligibility: "Venture funds that are actively investing in New Jersey’s innovative industries."
 publishStageArchive: ""
-industry: ["Technology", "Life Sciences"]
+industry: ["technology", "life-sciences"]
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

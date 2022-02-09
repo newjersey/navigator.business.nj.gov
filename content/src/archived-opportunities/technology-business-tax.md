@@ -11,13 +11,12 @@ eligibility: "Technology or life sciences companies with up to 225 employees in 
 publishStageArchive: ""
 industry:
   [
-    "Technology",
-    "Life Sciences",
-    "Clean Energy",
-    "Health Care and Social Assistance",
-    "Professional, Scientific and Technical Services",
-    "Other Services (except Public Administration)",
-    "Industries not classified",
+    "technology",
+    "life-sciences",
+    "clean-energy",
+    "health-care-and-social-assistance",
+    "professional-scientific-and-technical-services",
+    "other-services",
   ]
 agency: ["NJEDA"]
 openDate: "2022-05-01T13:00:00.000Z"

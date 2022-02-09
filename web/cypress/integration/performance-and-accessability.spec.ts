@@ -166,8 +166,8 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         cy.get('input[aria-label="Business name"]').type("Beesapple's");
 
-        cy.get('[aria-label="Industry"]').click();
-        cy.contains("E-Commerce").click();
+        cy.get('[aria-label="Sector"]').click();
+        cy.contains("Clean Energy").click();
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -187,8 +187,8 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         cy.get('input[aria-label="Business name"]').type("Beesapple's");
 
-        cy.get('[aria-label="Industry"]').click();
-        cy.contains("E-Commerce").click();
+        cy.get('[aria-label="Sector"]').click();
+        cy.contains("Clean Energy").click();
         clickNext();
 
         cy.get('input[type="radio"][value="false"]').check();

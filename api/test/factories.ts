@@ -21,6 +21,7 @@ import { LicenseData, LicenseEntity, LicenseStatusItem, LicenseStatusResult } fr
 import { NameAndAddress } from "@shared/misc";
 import { Municipality } from "@shared/municipality";
 import { ProfileData } from "@shared/profileData";
+import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
 import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import { Preferences, UserData } from "@shared/userData";
 import dayjs from "dayjs";
@@ -90,6 +91,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     ownershipTypeIds: [],
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
+    sectorId: randomSector().id,
     ...overrides,
   };
 };
@@ -181,6 +183,11 @@ export const generateSelfRegResponse = (overrides: Partial<SelfRegResponse>): Se
 export const randomLegalStructure = (): LegalStructure => {
   const randomIndex = Math.floor(Math.random() * LegalStructures.length);
   return LegalStructures[randomIndex];
+};
+
+export const randomSector = (): SectorType => {
+  const randomIndex = Math.floor(Math.random() * sectors.length);
+  return sectors[randomIndex];
 };
 
 export const randomIndustry = (): Industry => {

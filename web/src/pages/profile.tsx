@@ -15,6 +15,7 @@ import { OnboardingLegalStructureDropdown } from "@/components/onboarding/Onboar
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
+import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -109,9 +110,7 @@ const ProfilePage = (props: Props): ReactElement => {
     setRoadmap(newRoadmap);
     setSectionCompletion(getSectionCompletion(newRoadmap, userData));
 
-    console.log("before update");
     update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
-      console.log("then statement");
       setIsLoading(false);
       setAlert("SUCCESS");
 
@@ -139,7 +138,7 @@ const ProfilePage = (props: Props): ReactElement => {
         fieldStates={fieldStates}
         disabled={userData?.formationData?.getFilingResponse?.success}
       >
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />{" "}
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       </OnboardingEntityId>
       <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
@@ -156,7 +155,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
       </div>
       <div className="margin-top-4">
-        <OnboardingIndustry headerAriaLevel={3} />
+        <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
       </div>
       <div className="margin-top-4">
         <OnboardingExistingEmployees

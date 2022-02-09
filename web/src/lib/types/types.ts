@@ -32,7 +32,6 @@ export interface IndustryFieldContent extends TextFieldContent {
   specificHomeContractorMd: string;
   specificEmploymentAgencyMd: string;
   specificLiquorQuestion: RadioFieldContent;
-  specificHomeBasedBusinessQuestion: RadioFieldContent;
 }
 
 export type StartingFlowContent = {
@@ -41,6 +40,7 @@ export type StartingFlowContent = {
   industry: IndustryFieldContent;
   municipality: TextFieldContent;
   legalStructure: LegalFieldContent;
+  homeBased: RadioFieldContent;
 };
 
 export type ProfileContent = {
@@ -58,17 +58,21 @@ export type ProfileContent = {
   businessReferences: TextFieldContent;
   ownership: TextFieldContent;
   existingEmployees: TextFieldContent;
+  dateOfFormation: TextFieldContent;
+  sectorId: TextFieldContent;
+  homeBased: RadioFieldContent;
 };
 
 export type OwningFlowContent = {
   hasExistingBusiness: RadioFieldContent;
   businessName: TextFieldContent;
-  industry: IndustryFieldContent;
   dateOfFormation: TextFieldContent;
   entityId: TextFieldContent;
   ownership: TextFieldContent;
   municipality: TextFieldContent;
   existingEmployees: TextFieldContent;
+  sectorId: TextFieldContent;
+  homeBased: RadioFieldContent;
 };
 
 export interface UserDisplayContent extends StartingFlowContent, OwningFlowContent, ProfileContent {}
@@ -345,22 +349,6 @@ const coreContent = {
     contentMd: "",
     placeholder: "",
   },
-  industry: {
-    contentMd: "",
-    placeholder: "",
-    specificHomeContractorMd: "",
-    specificEmploymentAgencyMd: "",
-    specificLiquorQuestion: {
-      contentMd: "",
-      radioButtonYesText: "",
-      radioButtonNoText: "",
-    },
-    specificHomeBasedBusinessQuestion: {
-      contentMd: "",
-      radioButtonYesText: "",
-      radioButtonNoText: "",
-    },
-  },
   legalStructure: {
     contentMd: "",
     optionContent: {
@@ -377,10 +365,27 @@ const coreContent = {
     contentMd: "",
     placeholder: "",
   },
+  homeBased: {
+    contentMd: "",
+    radioButtonYesText: "",
+    radioButtonNoText: "",
+  },
 };
+
 export const emptyStartingFlowContent: StartingFlowContent = {
   ...coreContent,
   hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
+  industry: {
+    contentMd: "",
+    placeholder: "",
+    specificHomeContractorMd: "",
+    specificEmploymentAgencyMd: "",
+    specificLiquorQuestion: {
+      contentMd: "",
+      radioButtonYesText: "",
+      radioButtonNoText: "",
+    },
+  },
 };
 
 export const emptyProfileContent: ProfileContent = {
@@ -418,12 +423,29 @@ export const emptyProfileContent: ProfileContent = {
   existingEmployees: {
     contentMd: "",
   },
+  dateOfFormation: {
+    contentMd: "",
+  },
+  sectorId: {
+    contentMd: "",
+  },
+  industry: {
+    contentMd: "",
+    placeholder: "",
+    specificHomeContractorMd: "",
+    specificEmploymentAgencyMd: "",
+    specificLiquorQuestion: {
+      contentMd: "",
+      radioButtonYesText: "",
+      radioButtonNoText: "",
+    },
+  },
 };
 
 export const emptyOwningFlowContent: OwningFlowContent = {
   businessName: coreContent.businessName,
-  industry: coreContent.industry,
   municipality: coreContent.municipality,
+  homeBased: coreContent.homeBased,
   hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
   entityId: {
     contentMd: "",
@@ -437,6 +459,10 @@ export const emptyOwningFlowContent: OwningFlowContent = {
     placeholder: "",
   },
   existingEmployees: {
+    contentMd: "",
+    placeholder: "",
+  },
+  sectorId: {
     contentMd: "",
     placeholder: "",
   },

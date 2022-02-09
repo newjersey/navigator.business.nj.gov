@@ -9,7 +9,7 @@ fundingType: "tax credit"
 benefits: "A tax credit equal to 20% of qualified digital media production expenses, or 25% of qualified digital media production expenses incurred for services performed and tangible personal property purchased through vendors located in specific New Jersey counties."
 eligibility: "Companies producing content in New Jersey."
 publishStageArchive: ""
-industry: ["Arts, Entertainment, and Recreation"]
+industry: ["arts-entertainment-and-recreation"]
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""

@@ -9,7 +9,7 @@ fundingType: "technical assistance"
 benefits: "Free focused Assistance to New Jersey County and Local Governments and nonprofits to develop brownfield redevelopment solutions, as well as educate and engage communities in an effort to build capacity and a knowledge base on brownfield redevelopment."
 eligibility: "The NJ Brownfield Assistance Center @ NJIT provides the tools and resources necessary to reclaim and redevelop brownfield sites."
 publishStageArchive: ""
-industry: ["All Industries"]
+industry: []
 agency: ["NJEDA"]
 openDate: ""
 dueDate: ""
