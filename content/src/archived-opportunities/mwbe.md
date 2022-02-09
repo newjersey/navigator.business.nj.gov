@@ -34,4 +34,4 @@ To complete this application, you must have:
 
 After you complete this, you will have:
 
-* A Minority/Women-owned Business Enterprise Certificate
+* A Minority/Women-owned Business Enterprise certificate
