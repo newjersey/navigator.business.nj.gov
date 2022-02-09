@@ -2,12 +2,29 @@ import { Content } from "@/components/Content";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { addTwoDollarValues, subtractTwoDollarValues } from "@/lib/utils/helpers";
 import { Checkbox } from "@mui/material";
-import React, { ReactElement, useContext, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const BusinessFormationDocuments = (): ReactElement => {
   const { state, setFormationFormData } = useContext(FormationContext);
   const [totalCost, setTotalCost] = useState<string>(state.displayContent.officialFormationDocument.cost);
+
+  useEffect(() => {
+    let currentCost = totalCost;
+    if (state.formationFormData.certificateOfStanding) {
+      currentCost = addTwoDollarValues(currentCost, state.displayContent.certificateOfStanding.cost);
+    }
+
+    if (state.formationFormData.certifiedCopyOfFormationDocument) {
+      currentCost = addTwoDollarValues(
+        currentCost,
+        state.displayContent.certifiedCopyOfFormationDocument.cost
+      );
+    }
+
+    setTotalCost(currentCost);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleCertificateOfStandingClick = () => {
     const value = !state.formationFormData.certificateOfStanding
