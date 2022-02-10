@@ -1,33 +1,36 @@
 ---
-id: "clean-tech-research-development-rd-voucher-program"
-urlSlug: "clean-tech-research"
-name: "Clean Tech Research & Development (R&D) Voucher Program"
-callToActionLink: "https://www.njeda.com/cleantechvoucher/"
-callToActionText: "Learn more"
-type: "FUNDING"
-fundingType: "grant"
-benefits: "Vouchers totaling up to $15,000 per year."
-eligibility: "New Jersey-based clean energy and clean technology companies with 50 or fewer full-time equivalent employees."
+urlSlug: clean-tech-research
+name: Clean Tech Research & Development (R&D) Voucher Program
+id: clean-tech-research-development-rd-voucher-program
+type: FUNDING
+callToActionLink: https://www.njeda.com/cleantechvoucher/
+callToActionText: Learn more
+benefits: ""
+eligibility: ""
+fundingType: grant
+agency:
+  - NJEDA
 publishStageArchive: ""
-industry:
-  [
-    "technology",
-    "clean-energy",
-    "professional-scientific-and-technical-services",
-    "manufacturing",
-    "other-services",
-  ]
-agency: ["NJEDA"]
 openDate: ""
 dueDate: ""
-status: "first-come, first-served"
-programFrequency: "ongoing"
-businessStage: "early-stage"
-businessSize: "<50"
-homeBased: "yes"
-mwvb: "n/a"
+status: first-come, first-served
+programFrequency: ongoing
+businessStage: early-stage
+businessSize: yes
+homeBased: yes
+mwvb: n/a
 preferenceGiven: ""
-county: ["All"]
+county:
+  - All
+industry:
+  - Technology
+  - Clean Energy
+  - Professional, Scientific and Technical Services
+  - Manufacturing
+  - Other Services (except Public Administration)
 ---
+The Clean Tech Research & Development (R&D) Voucher Program helps early-stage New Jersey clean tech and clean energy companies offset the cost of accessing equipment at participating New Jersey university or federal labs for R&D.
 
-The Clean Tech Research & Development (R&D) Voucher Program helps early-stage New Jersey clean tech and clean-energy companies offset the cost of accessing equipment at participating New Jersey university or federal labs for R&D.
+**Benefits:** Vouchers totaling up to $15,000 per year.
+
+**Eligibility:** New Jersey-based clean energy and clean technology companies with 50 or fewer full-time equivalent employees.
