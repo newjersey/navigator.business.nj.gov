@@ -7,19 +7,18 @@ interface Props {
 }
 
 export const MenuOptionSelected = (props: Props): ReactElement => (
-  <div className="fdc">
-    <div>
-      <span className="padding-right-05">
+  <>
+    <div className="flex flex-row">
+      <div className="padding-right-05">
         <Icon>check</Icon>
-      </span>
-      <span className="text-bold">{props.children}</span>
+      </div>
+      <div className="text-bold">{props.children}</div>
     </div>
+
     {props.secondaryText && (
-      <div className="font-body-3xs text-base-dark">
-        <span className="text-bold padding-left-205 text-wrap display-inline-block">
-          {props.secondaryText}
-        </span>
+      <div className="font-body-3xs text-base-dark text-bold padding-left-205 text-wrap">
+        {props.secondaryText}
       </div>
     )}
-  </div>
+  </>
 );
