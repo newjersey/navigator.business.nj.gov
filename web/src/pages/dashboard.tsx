@@ -8,6 +8,7 @@ import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefault
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { filterOpportunities } from "@/lib/domain-logic/filterOpportunities";
 import { loadDashboardDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { loadAllOpportunities } from "@/lib/static/loadOpportunities";
@@ -29,6 +30,8 @@ const DashboardPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const router = useRouter();
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
+
+  const filteredOpportunities = userData ? filterOpportunities(props.opportunities, userData) : [];
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -76,7 +79,7 @@ const DashboardPage = (props: Props): ReactElement => {
                   <h2>{DashboardDefaults.opportunitiesHeader}</h2>
                   <hr className="margin-bottom-3" aria-hidden={true} />
                   <div className="dashboard-opportunities-list">
-                    {props.opportunities.map((opp) => (
+                    {filteredOpportunities.map((opp) => (
                       <OpportunityCard key={opp.id} opportunity={opp} />
                     ))}
                   </div>

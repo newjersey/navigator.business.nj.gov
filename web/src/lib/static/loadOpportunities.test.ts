@@ -28,7 +28,26 @@ describe("loadOpportunities", () => {
         'name: "Some Opportunity Name 1"\n' +
         'callToActionLink: "https://www.example.com/1"\n' +
         'callToActionText: "Click here 1"\n' +
-        'type: "FUNDING" \n' +
+        'type: "FUNDING"\n' +
+        'benefits: "some-benefits"\n' +
+        'eligibility: "some-eligibility"\n' +
+        "fundingType: loan\n" +
+        "agency:\n" +
+        "  - NJEDA\n" +
+        "publishStageArchive: null\n" +
+        'openDate: ""\n' +
+        'dueDate: ""\n' +
+        "status: open\n" +
+        "programFrequency: ongoing\n" +
+        "businessStage: operating\n" +
+        "businessSize: n/a\n" +
+        "homeBased: yes\n" +
+        "mwvb: n/a\n" +
+        "preferenceGiven: null\n" +
+        "county:\n" +
+        "  - All\n" +
+        "industry:\n" +
+        "  - cannabis\n" +
         "---\n" +
         "Some content description 1";
 
@@ -59,6 +78,22 @@ describe("loadOpportunities", () => {
             callToActionText: "Click here 1",
             contentMd: "Some content description 1",
             type: "FUNDING",
+            benefits: "some-benefits",
+            eligibility: "some-eligibility",
+            fundingType: "loan",
+            agency: ["NJEDA"],
+            publishStageArchive: null,
+            openDate: "",
+            dueDate: "",
+            status: "open",
+            programFrequency: "ongoing",
+            businessStage: "operating",
+            businessSize: "n/a",
+            homeBased: "yes",
+            mwvb: "n/a",
+            preferenceGiven: null,
+            county: ["All"],
+            industry: ["cannabis"],
           },
           {
             id: "some-id-2",
