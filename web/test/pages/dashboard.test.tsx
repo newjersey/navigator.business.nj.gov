@@ -9,7 +9,7 @@ import {
   generateTaxFilingData,
   generateUser,
 } from "@/test/factories";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, RenderResult, waitFor, within } from "@testing-library/react";
 import dayjs from "dayjs";
@@ -90,21 +90,29 @@ describe("dashboard", () => {
     expect(subject.getByText("Annual Report")).toBeInTheDocument();
   });
 
-  it("displays all opportunities", () => {
+  it("displays opportunities filtered from user data", () => {
+    useMockProfileData({
+      homeBasedBusiness: false,
+      municipality: undefined,
+      existingEmployees: "1",
+      sectorId: "construction",
+    });
+
     const opportunities = [
-      generateOpportunity({ name: "Opportunity 1" }),
-      generateOpportunity({ name: "Opportunity 2" }),
-      generateOpportunity({ name: "Opportunity 3" }),
+      generateOpportunity({ name: "Opportunity 1", industry: ["construction"] }),
+      generateOpportunity({ name: "Opportunity 2", industry: [] }),
+      generateOpportunity({ name: "Opportunity 3", industry: ["cannabis"] }),
     ];
 
     const subject = renderPage({ opportunities });
 
     expect(subject.getByText("Opportunity 1")).toBeInTheDocument();
     expect(subject.getByText("Opportunity 2")).toBeInTheDocument();
-    expect(subject.getByText("Opportunity 3")).toBeInTheDocument();
+    expect(subject.queryByText("Opportunity 3")).not.toBeInTheDocument();
   });
 
   it("displays correct opportunity type tag", () => {
+    useMockProfileDataForUnfilteredOpportunities();
     const opportunities = [
       generateOpportunity({ id: "opp1", type: "FUNDING" }),
       generateOpportunity({ id: "opp2", type: "CERTIFICATION" }),
@@ -120,6 +128,7 @@ describe("dashboard", () => {
   });
 
   it("links to task page for opportunities", () => {
+    useMockProfileDataForUnfilteredOpportunities();
     const opportunities = [generateOpportunity({ urlSlug: "opp", name: "Funding Opp" })];
 
     const subject = renderPage({ opportunities });
@@ -128,6 +137,7 @@ describe("dashboard", () => {
   });
 
   it("displays first 150 characters of opportunity description", () => {
+    useMockProfileDataForUnfilteredOpportunities();
     const opp1Characters = Array(151).fill("a").join("");
     const opp1ExpectedTextOnPage = `${Array(150).fill("a").join("")}...`;
 
@@ -144,6 +154,7 @@ describe("dashboard", () => {
   });
 
   it("truncates markdown without showing characters on page", () => {
+    useMockProfileDataForUnfilteredOpportunities();
     const characters = Array(145).fill("a").join("");
     const boldContent = `${characters} *a bold text*`;
     const linkContent = `${characters} [a link text](www.example.com)`;
@@ -162,4 +173,13 @@ describe("dashboard", () => {
     const subject = renderPage({});
     await waitFor(() => expect(subject.getByText(ProfileDefaults.successTextHeader)).toBeInTheDocument());
   });
+
+  const useMockProfileDataForUnfilteredOpportunities = () => {
+    useMockProfileData({
+      homeBasedBusiness: false,
+      municipality: undefined,
+      existingEmployees: "1",
+      sectorId: undefined,
+    });
+  };
 });

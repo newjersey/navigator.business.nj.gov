@@ -1,4 +1,17 @@
-import { Filing, Opportunity, OpportunityType } from "@/lib/types/types";
+import {
+  County,
+  Filing,
+  Opportunity,
+  OpportunityAgency,
+  OpportunityBusinessStage,
+  OpportunityFundingType,
+  OpportunityHomeBased,
+  OpportunityPreferenceGiven,
+  OpportunityProgramFrequency,
+  OpportunityPublishStatus,
+  OpportunityStatus,
+  OpportunityType,
+} from "@/lib/types/types";
 import matter from "gray-matter";
 
 export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks | Filing => {
@@ -48,6 +61,22 @@ type OpportunityGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   type: OpportunityType;
+  benefits: string;
+  eligibility: string;
+  fundingType: OpportunityFundingType;
+  agency: OpportunityAgency[];
+  publishStageArchive: OpportunityPublishStatus | null;
+  openDate: string;
+  dueDate: string;
+  status: OpportunityStatus;
+  programFrequency: OpportunityProgramFrequency;
+  businessStage: OpportunityBusinessStage;
+  businessSize: string;
+  homeBased: OpportunityHomeBased;
+  mwvb: string;
+  preferenceGiven: OpportunityPreferenceGiven | null;
+  county: County[];
+  industry: string[];
 };
 
 export type MarkdownResult = {

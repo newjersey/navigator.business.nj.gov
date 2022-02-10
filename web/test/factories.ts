@@ -1,8 +1,15 @@
 import {
+  AllCounties,
+  County,
   FormationDisplayContent,
   NameAvailability,
   OperateReference,
   Opportunity,
+  OpportunityBusinessStage,
+  OpportunityFundingType,
+  OpportunityHomeBased,
+  OpportunityProgramFrequency,
+  OpportunityStatus,
   Roadmap,
   SectionCompletion,
   SectionType,
@@ -495,11 +502,6 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
   ...overrides,
 });
 
-export const randomBusinessSuffix = (): BusinessSuffix => {
-  const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);
-  return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
-};
-
 export const generateFormationData = (overrides: Partial<FormationData>): FormationData => {
   return {
     formationFormData: generateFormationFormData({}),
@@ -556,6 +558,22 @@ export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunit
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
     type: randomInt() % 2 ? "CERTIFICATION" : "FUNDING",
+    benefits: `some-benefits-${randomInt()}`,
+    eligibility: `some-eligibility-${randomInt()}`,
+    fundingType: randomOpportunityFundingType(),
+    agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
+    publishStageArchive: null,
+    openDate: dayjs().toISOString(),
+    dueDate: dayjs().toISOString(),
+    status: randomOpportunityStatus(),
+    programFrequency: randomOpportunityProgramFrequency(),
+    businessStage: randomOpportunityBusinessStage(),
+    businessSize: ">200",
+    homeBased: randomOpportunityHomeBased(),
+    mwvb: `some-mwvb-${randomInt()}`,
+    preferenceGiven: null,
+    county: [randomCounty()],
+    industry: [randomSector().id],
     ...overrides,
   };
 };
@@ -567,4 +585,51 @@ export const generateOperateReference = (overrides: Partial<OperateReference>): 
     urlPath: `some-url-path-${randomInt()}`,
     ...overrides,
   };
+};
+
+export const randomBusinessSuffix = (): BusinessSuffix => {
+  const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);
+  return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
+};
+
+export const randomOpportunityStatus = (): OpportunityStatus => {
+  const all = ["open", "deadline", "first-come, first-served", "closed"];
+  const randomIndex = Math.floor(Math.random() * all.length);
+  return all[randomIndex] as OpportunityStatus;
+};
+
+export const randomOpportunityProgramFrequency = (): OpportunityProgramFrequency => {
+  const all = ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"];
+  const randomIndex = Math.floor(Math.random() * all.length);
+  return all[randomIndex] as OpportunityProgramFrequency;
+};
+
+export const randomOpportunityBusinessStage = (): OpportunityBusinessStage => {
+  const all = ["early-stage", "operating", "both"];
+  const randomIndex = Math.floor(Math.random() * all.length);
+  return all[randomIndex] as OpportunityBusinessStage;
+};
+
+export const randomOpportunityFundingType = (): OpportunityFundingType => {
+  const all = [
+    "tax credit",
+    "loan",
+    "grant",
+    "technical assistance",
+    "hiring and employee training support",
+    "tax exemption",
+  ];
+  const randomIndex = Math.floor(Math.random() * all.length);
+  return all[randomIndex] as OpportunityFundingType;
+};
+
+export const randomOpportunityHomeBased = (): OpportunityHomeBased => {
+  const all = ["yes", "no", "unknown"];
+  const randomIndex = Math.floor(Math.random() * all.length);
+  return all[randomIndex] as OpportunityHomeBased;
+};
+
+export const randomCounty = (): County => {
+  const randomIndex = Math.floor(Math.random() * AllCounties.length);
+  return AllCounties[randomIndex] as County;
 };

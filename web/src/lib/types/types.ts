@@ -533,9 +533,94 @@ export type Opportunity = {
   callToActionText: string;
   contentMd: string;
   type: OpportunityType;
+  benefits: string;
+  eligibility: string;
+  fundingType: OpportunityFundingType;
+  agency: OpportunityAgency[];
+  publishStageArchive: OpportunityPublishStatus | null;
+  openDate: string;
+  dueDate: string;
+  status: OpportunityStatus;
+  programFrequency: OpportunityProgramFrequency;
+  businessStage: OpportunityBusinessStage;
+  businessSize: string;
+  homeBased: OpportunityHomeBased;
+  mwvb: string;
+  preferenceGiven: OpportunityPreferenceGiven | null;
+  county: County[];
+  industry: string[];
 };
 
 export type OpportunityType = "FUNDING" | "CERTIFICATION";
+export type OpportunityFundingType =
+  | "tax credit"
+  | "loan"
+  | "grant"
+  | "technical assistance"
+  | "hiring and employee training support"
+  | "tax exemption";
+export type OpportunityAgency = "NJEDA" | "NJDOL";
+export type OpportunityPublishStatus = "Do Not Publish";
+export type OpportunityStatus = "open" | "deadline" | "first-come, first-served" | "closed";
+export type OpportunityProgramFrequency =
+  | "annual"
+  | "ongoing"
+  | "reoccuring"
+  | "one-time"
+  | "pilot"
+  | "other";
+export type OpportunityBusinessStage = "early-stage" | "operating" | "both";
+export type OpportunityHomeBased = "yes" | "no" | "unknown";
+export type OpportunityPreferenceGiven = "yes" | "no";
+
+export const AllCounties = [
+  "All",
+  "Atlantic",
+  "Bergen",
+  "Burlington",
+  "Camden",
+  "Cape May",
+  "Cumberland",
+  "Essex",
+  "Gloucester",
+  "Hudson",
+  "Hunterdon",
+  "Mercer",
+  "Middlesex",
+  "Monmouth",
+  "Morris",
+  "Ocean",
+  "Passaic",
+  "Salem",
+  "Somerset",
+  "Sussex",
+  "Union",
+  "Warren",
+];
+
+export type County =
+  | "All"
+  | "Atlantic"
+  | "Bergen"
+  | "Burlington"
+  | "Camden"
+  | "Cape May"
+  | "Cumberland"
+  | "Essex"
+  | "Gloucester"
+  | "Hudson"
+  | "Hunterdon"
+  | "Mercer"
+  | "Middlesex"
+  | "Monmouth"
+  | "Morris"
+  | "Ocean"
+  | "Passaic"
+  | "Salem"
+  | "Somerset"
+  | "Sussex"
+  | "Union"
+  | "Warren";
 
 export type TasksDisplayContent = {
   formationDisplayContent: FormationDisplayContent;

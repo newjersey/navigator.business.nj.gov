@@ -276,6 +276,7 @@ collections:
         min: 0
         options:
           [
+            "All",
             "Atlantic",
             "Bergen",
             "Burlington",
