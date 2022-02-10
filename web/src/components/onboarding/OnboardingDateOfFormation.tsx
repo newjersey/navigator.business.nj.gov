@@ -83,6 +83,7 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
                   sx: { width: "50%", ...params.sx },
                   error: props.fieldStates[fieldName].invalid,
                 }}
+                autoComplete="off"
               />
             </div>
           </div>
