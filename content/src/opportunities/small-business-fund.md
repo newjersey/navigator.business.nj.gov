@@ -22,7 +22,7 @@ mwvb: mwbe
 preferenceGiven: no
 county:
   - All
-industry: []
+sector: []
 ---
 
 The Small Business Fund provides creditworthy small, minority-owned and women-owned businesses and nonprofits in New Jersey access to financing.

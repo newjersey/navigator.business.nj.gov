@@ -99,9 +99,9 @@ describe("dashboard", () => {
     });
 
     const opportunities = [
-      generateOpportunity({ name: "Opportunity 1", industry: ["construction"] }),
-      generateOpportunity({ name: "Opportunity 2", industry: [] }),
-      generateOpportunity({ name: "Opportunity 3", industry: ["cannabis"] }),
+      generateOpportunity({ name: "Opportunity 1", sector: ["construction"] }),
+      generateOpportunity({ name: "Opportunity 2", sector: [] }),
+      generateOpportunity({ name: "Opportunity 3", sector: ["cannabis"] }),
     ];
 
     const subject = renderPage({ opportunities });

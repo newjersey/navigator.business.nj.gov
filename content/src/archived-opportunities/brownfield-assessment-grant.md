@@ -22,9 +22,9 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
-  - Waste Management
+sector: []
 ---
+
 The Brownfield Assessment Grant Program provides grant money to support site assessment at any eligible brownfield site in NJ.
 
 **Benefits:** Free Environmental Site Assessment to assess contamination at brownfield sites.

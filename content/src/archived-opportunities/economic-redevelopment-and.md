@@ -22,10 +22,11 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Construction
   - Real Estate and Rental and Leasing
 ---
+
 The Economic Redevelopment and Growth (ERG) Program is an incentive for developers and businesses to address revenue gaps in residential or commercial development projects. The original program closed for applications in 2019, but the program has been reopened for applications under the Economic Recovery Act of 2020.
 
 **Benefits:** Tax credits or grant reimbursements up to 20% of eligible project costs plus bonuses.

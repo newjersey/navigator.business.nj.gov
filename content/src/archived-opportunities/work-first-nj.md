@@ -22,9 +22,9 @@ mwvb: n/a
 preferenceGiven: no
 county:
   - All
-industry:
-  - All
+sector: []
 ---
+
 Work First NJ provides skills, training, and education opportunities to SNAP and TANF recipients. The focus of the program is to provide skills-based programs with a job-driven approach utilizing resources and expertise to prepare individuals who receive SNAP or TANF resources to fill areas of demand for a trained workforce. Not all programs need to be designed from scratch, some employment and training programs already exist, in which case, this program may suggest skilled workers for hire.
 
 **Benefits:** Help businesses find employees by providing guidance on job matching or occupation-specific training programs. This would be an involved process.

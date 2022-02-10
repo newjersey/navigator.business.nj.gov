@@ -25,12 +25,13 @@ mwvb: Bonus months available for workspaces located in an Opportunity Zone,
 preferenceGiven: yes
 county:
   - All
-industry:
+sector:
   - Real Estate and Rental and Leasing
   - Technology
   - Life Sciences
   - Other Services (except Public Administration)
 ---
+
 NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.
 
 **Benefits:** Benefits for Renters: Rent support grants. Benefits for Collaborative Workspaces: A tenant attraction tool.

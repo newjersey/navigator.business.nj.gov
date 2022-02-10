@@ -22,9 +22,9 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
-  - All Industries
+sector: []
 ---
+
 The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption certificate for purchases related to the construction and renovation of a new business location.
 
 **Benefits:** Ability to purchase machinery, equipment, furniture, fixtures, and building materials without New Jersey sales tax.

@@ -46,7 +46,7 @@ describe("loadOpportunities", () => {
         "preferenceGiven: null\n" +
         "county:\n" +
         "  - All\n" +
-        "industry:\n" +
+        "sector:\n" +
         "  - cannabis\n" +
         "---\n" +
         "Some content description 1";
@@ -93,7 +93,7 @@ describe("loadOpportunities", () => {
             mwvb: "n/a",
             preferenceGiven: null,
             county: ["All"],
-            industry: ["cannabis"],
+            sector: ["cannabis"],
           },
           {
             id: "some-id-2",

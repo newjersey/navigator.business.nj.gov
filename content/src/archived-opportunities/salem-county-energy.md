@@ -22,10 +22,11 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - Salem
-industry:
+sector:
   - Manufacturing
   - Clean Energy
 ---
+
 The Salem County Energy Sales Tax Exemption program provides an energy sales tax exemption for the retail sales of electricity and natural gas and their transport to manufacturing businesses in Salem County.
 
 **Benefits:** Sales tax exemption for the purchase of "energy," or electricity and natural gas, for use at the facility.

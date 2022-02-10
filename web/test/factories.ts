@@ -576,7 +576,7 @@ export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunit
     mwvb: `some-mwvb-${randomInt()}`,
     preferenceGiven: null,
     county: [randomCounty()],
-    industry: [randomSector().id],
+    sector: [randomSector().id],
     ...overrides,
   };
 };

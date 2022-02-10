@@ -22,10 +22,11 @@ mwvb: wbe
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Technology
   - Life Sciences
 ---
+
 Golden Seeds is a nationwide angel investor network dedicated to investing in women-led startups. The New Jersey chapter of Golden Seeds launched in 2021 to increase available capital for female-led businesses.
 
 **Benefits:** Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.

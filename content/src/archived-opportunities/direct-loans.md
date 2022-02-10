@@ -22,9 +22,9 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
-  - All Industries
+sector: []
 ---
+
 New Jersey businesses in need of financing and committed to job creation or retention may be eligible for direct loans through the New Jersey Economic Development Authority (NJEDA) when conventional financing is not available.
 
 **Benefits:** Loans up to $2M for fixed assets, or up to $750,000 for working capital to be used for fixed assets or working capital.

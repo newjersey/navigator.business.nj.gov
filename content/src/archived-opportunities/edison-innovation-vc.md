@@ -22,10 +22,11 @@ mwvb: mwbe
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Technology
   - Life Sciences
 ---
+
 Edison Innovation VC Growth Fund provides funding to early-stage, emerging technology businesses matched with an outside equity investor within the last 90 days.
 
 **Benefits:** Up to $1M in growth capital matched with outside investors on a 1 to 1 basis.

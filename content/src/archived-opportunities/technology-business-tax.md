@@ -25,7 +25,7 @@ mwvb: $10 million set aside for businesses located in Innovation Zones (any
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Technology
   - Life Sciences
   - Clean Energy
@@ -33,6 +33,7 @@ industry:
   - Professional, Scientific and Technical Services
   - Other Services (except Public Administration)
 ---
+
 The Net Operating Loss Program enables qualified, unprofitable New Jersey-based technology or biotechnology businesses to sell a percentage of their net operating losses (NOL) and unused research and development (R&D) tax credits to unrelated profitable businesses.
 
 **Benefits:** Ability to sell NOL and unused R&D tax credits for up to 80% of their value up to a total amount of $20M.

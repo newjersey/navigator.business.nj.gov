@@ -22,13 +22,14 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Clean Energy
   - Offshore Wind
   - Professional, Scientific and Technical Services
   - Manufacturing
   - Other Services (except Public Administration)
 ---
+
 The Offshore Wind Tax Credit Program is a financial tool that spurs private capital investment and employment growth in major, land-based offshore wind industry projects.
 
 **Benefits:** Tax credits up to 100% of qualified investments.

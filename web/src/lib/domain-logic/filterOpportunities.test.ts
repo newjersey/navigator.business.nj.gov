@@ -150,10 +150,10 @@ describe("filterOpportunities", () => {
       }),
     });
 
-    const opp1 = generateOpportunity({ industry: ["construction"] });
-    const opp2 = generateOpportunity({ industry: [] });
-    const opp3 = generateOpportunity({ industry: ["construction", "cannabis"] });
-    const opp4 = generateOpportunity({ industry: ["cannabis", "manufacturing"] });
+    const opp1 = generateOpportunity({ sector: ["construction"] });
+    const opp2 = generateOpportunity({ sector: [] });
+    const opp3 = generateOpportunity({ sector: ["construction", "cannabis"] });
+    const opp4 = generateOpportunity({ sector: ["cannabis", "manufacturing"] });
     const opportunities = [opp1, opp2, opp3, opp4];
 
     const result = filterOpportunities(opportunities, userData);

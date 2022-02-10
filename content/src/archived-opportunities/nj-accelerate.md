@@ -23,10 +23,11 @@ mwvb: Bonuses available for accelerator programs with a diversity focus as well
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Technology
   - Life Sciences
 ---
+
 NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to locate and grow in New Jersey.
 
 **Benefits:** 1:1 matching event sponsorship up to $100,000 for accelerator programs. 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies.

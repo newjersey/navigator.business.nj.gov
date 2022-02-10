@@ -22,11 +22,12 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Technology
   - Life Sciences
   - Other Services (except Public Administration)
 ---
+
 Founders & Funders enables early-stage New Jersey technology and life sciences companies to meet potential investors in 10-minute, one-on-one “speed dating” sessions to discuss strategy, business models, and funding opportunities.
 
 **Benefits:** Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.

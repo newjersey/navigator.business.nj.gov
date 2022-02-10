@@ -22,13 +22,14 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Technology
   - Clean Energy
   - Professional, Scientific and Technical Services
   - Manufacturing
   - Other Services (except Public Administration)
 ---
+
 The Clean Tech Research & Development (R&D) Voucher Program helps early-stage New Jersey clean tech and clean energy companies offset the cost of accessing equipment at participating New Jersey university or federal labs for R&D.
 
 **Benefits:** Vouchers totaling up to $15,000 per year.
