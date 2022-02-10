@@ -120,6 +120,7 @@ export const BusinessSection = (): ReactElement => {
   return (
     <div data-testid="business-section">
       <MainBusiness />
+      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <RegisteredAgent />
       <BusinessFormationFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}

@@ -18,39 +18,53 @@ export const MainBusiness = (): ReactElement => {
       link: "${link}",
     }).split("${link}");
     return (
-      <div className="margin-bottom-2">
+      <>
         <span className="text-bold">{label}&nbsp;</span>
-        <span>
+        <div>
           {splitText[0]}
           {linkElement}
           {splitText[1]}
-        </span>
-      </div>
+        </div>
+      </>
     );
   };
 
   return (
     <>
       <BusinessNameAndLegalStructure />
-      <BusinessSuffixDropdown />
-      <BusinessStartDate />
+      <div className="grid-row grid-gap-2">
+        <div className="tablet:grid-col-6">
+          <BusinessSuffixDropdown />
+        </div>
+        <div className="tablet:grid-col-6 margin-bottom-2">
+          <BusinessStartDate />
+        </div>
+      </div>
+      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <BusinessAddressLine1 />
       <BusinessFormationTextField fieldName="businessAddressLine2" />
-      {makeUpdateProfileLink(
-        BusinessFormationDefaults.businessAddressCityLabel,
-        userData?.profileData.municipality?.name || BusinessFormationDefaults.notSetBusinessAddressCityLabel
-      )}
-      <BusinessFormationTextField fieldName="businessAddressState" disabled={true} />
-      <div className="form-input margin-bottom-2">
-        <BusinessFormationTextField
-          numericProps={{
-            maxLength: 5,
-          }}
-          required={true}
-          fieldName={"businessAddressZipCode"}
-          validationText={BusinessFormationDefaults.businessAddressZipCodeErrorText}
-          additionalValidation={zipCodeRange}
-        />
+      <div className="grid-row grid-gap-2">
+        <div className="margin-bottom-2 grid-col-12 tablet:grid-col-6">
+          {makeUpdateProfileLink(
+            BusinessFormationDefaults.businessAddressCityLabel,
+            userData?.profileData.municipality?.name ||
+              BusinessFormationDefaults.notSetBusinessAddressCityLabel
+          )}
+        </div>
+        <div className="margin-bottom-2 form-input grid-col-5 tablet:grid-col-2">
+          <BusinessFormationTextField fieldName="businessAddressState" disabled={true} />
+        </div>
+        <div className="margin-bottom-2 form-input grid-col-7 tablet:grid-col-4">
+          <BusinessFormationTextField
+            numericProps={{
+              maxLength: 5,
+            }}
+            required={true}
+            fieldName={"businessAddressZipCode"}
+            validationText={BusinessFormationDefaults.businessAddressZipCodeErrorText}
+            additionalValidation={zipCodeRange}
+          />
+        </div>
       </div>
     </>
   );

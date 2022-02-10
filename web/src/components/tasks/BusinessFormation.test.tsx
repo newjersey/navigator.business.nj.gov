@@ -252,7 +252,7 @@ describe("<BusinessFormation />", () => {
         expect(formationFormData.members[0].addressLine1).toEqual(member.addressLine1);
         expect(formationFormData.members[0].addressLine2).toEqual(member.addressLine2);
         expect(formationFormData.members[0].addressCity).toEqual(member.addressCity);
-        expect(formationFormData.members[0].addressState).toEqual("District of Columbia");
+        expect(formationFormData.members[0].addressState).toEqual("DC");
         expect(formationFormData.members[0].addressZipCode).toEqual("20500");
         expect(formationFormData.signer).toEqual("Elrond");
         expect(formationFormData.additionalSigners).toEqual([]);
@@ -714,7 +714,7 @@ describe("<BusinessFormation />", () => {
         expect(getInputElementByLabel("Member address line1").value).toBe("123 agent address");
         expect(getInputElementByLabel("Member address line2").value).toBe("agent suite 201");
         expect(getInputElementByLabel("Member address city").value).toBe("agent-city-402");
-        expect(getInputElementByLabel("Member address state").value).toBe("New Jersey");
+        expect(getInputElementByLabel("Member address state").value).toBe("NJ");
         expect(getInputElementByLabel("Member address zip code").value).toBe("07601");
       });
 

@@ -56,7 +56,7 @@ export const StateDropdown = (props: Props): ReactElement => {
       options={states}
       value={getState(props.value) || null}
       filterOptions={filterOptions}
-      getOptionLabel={(option: StateObject) => option.name}
+      getOptionLabel={(option: StateObject) => option.shortCode}
       isOptionEqualToValue={(option: StateObject, value: StateObject) =>
         option.shortCode === value.shortCode || option.name === value.name
       }
@@ -70,9 +70,9 @@ export const StateDropdown = (props: Props): ReactElement => {
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           {selected ? (
-            <MenuOptionSelected>{option.name}</MenuOptionSelected>
+            <MenuOptionSelected>{option.shortCode}</MenuOptionSelected>
           ) : (
-            <MenuOptionUnselected>{option.name}</MenuOptionUnselected>
+            <MenuOptionUnselected>{option.shortCode}</MenuOptionUnselected>
           )}
         </li>
       )}

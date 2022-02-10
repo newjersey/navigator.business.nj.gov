@@ -149,6 +149,7 @@ export type FormationDisplayContent = {
     cost: string;
     optionalLabel: string;
   };
+  contactInformation: { contentMd: string };
   contactFirstName: TextFieldContent;
   contactLastName: TextFieldContent;
   contactPhoneNumber: TextFieldContent;
@@ -311,6 +312,9 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     contentMd: "",
     cost: "",
     optionalLabel: "",
+  },
+  contactInformation: {
+    contentMd: "",
   },
   contactFirstName: {
     contentMd: "",
