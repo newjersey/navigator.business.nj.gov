@@ -23,7 +23,7 @@ mwvb: 40% of program funds targeted to census tracts that were eligible to be
 preferenceGiven: yes
 county:
   - All
-industry: []
+sector: []
 ---
 
 The Small Business Lease Grant supports the growth and success of small businesses and nonprofits by providing grant funding to cover a portion of lease payments for businesses and nonprofits leasing new or additional space.

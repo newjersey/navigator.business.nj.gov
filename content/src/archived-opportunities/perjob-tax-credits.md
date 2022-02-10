@@ -22,7 +22,7 @@ mwvb: Bonuses available based on business size, industry, and other project deta
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Technology
   - Professional, Scientific and Technical Services
   - Life Sciences
@@ -34,6 +34,7 @@ industry:
   - Digital and Print Media
   - Other Services (except Public Administration)
 ---
+
 The Emerge Program provides per-job tax credits to projects in targeted communities that invest private capital into New Jersey and create new full-time jobs or retain a significant number of jobs in Governor Phil Murphy’s priority sectors versus an out-of-state alternative location.
 
 **Benefits:** Annual base per-new job tax credits from $500,000 - $8,000 per job per year depending on project location and other aspects of the project. Bonuses are also available on project location, industry, and alignment with other policy objectives. Jobs that are covered by a labor harmony agreement are eligible for an additional $1,000 bonus over the capped amounts.

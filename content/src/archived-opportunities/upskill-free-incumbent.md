@@ -22,7 +22,7 @@ mwvb: n/a
 preferenceGiven: no
 county:
   - All
-industry:
+sector:
   - Life Sciences
   - Technology
   - Clean Energy
@@ -34,6 +34,7 @@ industry:
   - Finance, Insurance and Professional Services
   - Other Services (except Public Administration)
 ---
+
 Upskill offers New Jersey employers of any size grants to improve existing employees’ skills. Training may be provided by employers at their business or by an eligible training provider. These should be cohort-based trainings, not unique to one employee.
 
 **Benefits:** Employers can receive grants of up to $100,000.

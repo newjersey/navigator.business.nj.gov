@@ -22,7 +22,7 @@ mwvb: n/a
 preferenceGiven: no
 county:
   - All
-industry: []
+sector: []
 ---
 
 The Premier Lender Program provides New Jersey-based businesses and not-for-profit organizations loan participation and guarantees that can help them overcome the financial obstacles to growth and expansion.

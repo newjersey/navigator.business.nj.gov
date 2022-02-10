@@ -24,7 +24,6 @@ homeBased: yes
 mwvb: n/a
 county:
   - All
-industry: []
 ---
 
 The Premier Community Development Financial Institutions (CDFI) Program provides qualified small businesses and not-for-profit organizations loan participation, loan guarantees, and line of credit guarantees in partnership with designated Premier CDFIs.

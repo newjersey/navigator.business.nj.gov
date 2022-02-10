@@ -22,9 +22,9 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
-  - All Industries
+sector: []
 ---
+
 The Bond Financing program provides bond financing to qualified manufacturing companies, 501(c)(3) nonprofit organizations, and other facilities in New Jersey.
 
 **Benefits:** Tax-exempt bonds up to $10M for Manufacturers, unlimited for Non-Profits and public infrastructure projects.

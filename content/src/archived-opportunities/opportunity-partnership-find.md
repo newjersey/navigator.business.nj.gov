@@ -22,7 +22,7 @@ mwvb: n/a
 preferenceGiven: no
 county:
   - All
-industry:
+sector:
   - Life Sciences
   - Technology
   - Clean Energy
@@ -34,6 +34,7 @@ industry:
   - Finance, Insurance and Professional Services
   - Other Services (except Public Administration)
 ---
+
 Opportunity Partnership helps employers identify an appropriate educational institution or training provider to train employees. The business and the school together develop training programs to teach needed skills you. Upon completing the program, trainees must qualify for entry-level positions in your company.
 
 **Benefits:** Company-tailored training to ensure an appropriate pipeline of employees.

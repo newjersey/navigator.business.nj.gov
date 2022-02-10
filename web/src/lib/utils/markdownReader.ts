@@ -76,7 +76,7 @@ type OpportunityGrayMatter = {
   mwvb: string;
   preferenceGiven: OpportunityPreferenceGiven | null;
   county: County[];
-  industry: string[];
+  sector: string[];
 };
 
 export type MarkdownResult = {

@@ -22,12 +22,13 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Technology
   - Life Sciences
   - Other Services (except Public Administration)
   - Professional, Scientific and Technical Services
 ---
+
 The New Jersey Economic Development Authority invests in venture capital funds active in New Jersey. Venture partners leverage NJEDA investment to increase funds available for emerging innovative companies to grow and create jobs in the State.
 
 **Benefits:** Investment capital commitments up to $10M.

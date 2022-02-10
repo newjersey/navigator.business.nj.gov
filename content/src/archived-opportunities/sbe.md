@@ -14,23 +14,23 @@ businessStage: operating
 homeBased: unknown
 county:
   - Burlington
-industry:
-  - All Industries
+sector: []
 ---
+
 A Small Business Enterprise (SBE) is a business whose:
 
 1. primary location is in New Jersey, and
 2. has 100 or fewer full-time employees, and
-3. has 51% or more of their business operations/sales in New Jersey, OR  
+3. has 51% or more of their business operations/sales in New Jersey, OR
 4. has 51% or more of the company’s full-time employees in New Jersey.
 5. SBE's have [additional revenue limits](https://business.nj.gov/pages/sbe) your business should be aware of to make sure you qualify.
 
-*Having an SBE certification may give you an advantage in [government contracts](https://business.nj.gov/pages/sbe).*
+_Having an SBE certification may give you an advantage in [government contracts](https://business.nj.gov/pages/sbe)._
 
 To complete this application, you must have:
 
-* TBD
+- TBD
 
 After you complete this, you will have:
 
-* A Small Business Enterprise certificate
+- A Small Business Enterprise certificate

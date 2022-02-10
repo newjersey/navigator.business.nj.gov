@@ -299,8 +299,8 @@ collections:
             "Union",
             "Warren",
           ]
-      - label: Industry
-        name: industry
+      - label: Sector
+        name: sector
         widget: relation
         multiple: true
         required: false
@@ -410,8 +410,8 @@ collections:
             "Union",
             "Warren",
           ]
-      - label: Industry
-        name: industry
+      - label: Sector
+        name: sector
         widget: relation
         multiple: true
         required: false

@@ -23,9 +23,10 @@ mwvb: Limited to NJDEP designated Community Collaborative Initiative cities for
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Waste Management
 ---
+
 The Brownfields Impact Fund is a pilot program, funded by the federal Environmental Protection Agency's Revolving Loan Fund grant, that will provide $800,000 in funding for loans to private developers and loans and/or sub-grants to public sector and non-profits to carry out cleanups at brownfield sites.
 
 **Benefits:** Addresses funding gaps to make the remediation phase of the project financially viable for remedial actions and other eligible activities.

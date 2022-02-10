@@ -22,7 +22,7 @@ mwvb: mwbe
 preferenceGiven: no
 county:
   - All
-industry: []
+sector: []
 ---
 
 The Small Business Bonding Readiness Assistance Program prepares small, minority-, and women-owned businesses to obtain surety bonds, which will make them more competitive when applying for state and federal government contracts.

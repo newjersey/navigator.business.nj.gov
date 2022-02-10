@@ -13,8 +13,8 @@ export const filterOpportunities = (opportunities: Opportunity[], userData: User
       );
     }
 
-    if (userData.profileData.sectorId && it.industry.length > 0) {
-      return it.industry.includes(userData.profileData.sectorId);
+    if (userData.profileData.sectorId && it.sector.length > 0) {
+      return it.sector.includes(userData.profileData.sectorId);
     }
 
     if (userData.profileData.existingEmployees) {

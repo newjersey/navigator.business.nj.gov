@@ -22,9 +22,9 @@ mwvb: n/a
 preferenceGiven: no
 county:
   - All
-industry:
-  - All
+sector: []
 ---
+
 NJ Industry Partnerships can provide you with access to government resources, professional connections, and potential funding opportunities, to help your business achieve its goals. New Jersey Department Of Labor, acting as a hub, will connect you with other local voices in your industry to address the economic and logistical needs of your operation.
 
 **Benefits:** Businesses can get help filling positions with skilled workers, developing career pathways to ensure a pipeline of future workers, creating ongoing training feedback loops with education, workforce, and economic development partners. The program also gives businesses a powerful industry voice to impact policy.

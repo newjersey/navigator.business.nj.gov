@@ -22,7 +22,7 @@ mwvb: n/a
 preferenceGiven: ""
 county:
   - All
-industry:
+sector:
   - Life Sciences
   - Technology
   - Clean Energy
@@ -31,6 +31,7 @@ industry:
   - Offshore Wind
   - "Transportation and Warehousing "
 ---
+
 Research with NJ is a free online portal that showcases New Jersey’s experts in science, technology, engineering, and mathematics (STEM). It provides local, national, and international commercial enterprises, ranging from entrepreneurs and start-ups to global businesses, with insight into groundbreaking research taking place within the state’s network of research universities.
 
 **Benefits:** It provides local, national, and international commercial enterprises, ranging from entrepreneurs and start-ups to global businesses, with insight into groundbreaking research taking place within the state’s network of research universities. This includes information on subject matter experts, facilities, publications, intellectual property, news, and events that can help Research with NJ users forge partnerships and build innovative new businesses and products based on the latest scientific and technological breakthroughs.
