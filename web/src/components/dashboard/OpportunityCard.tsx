@@ -37,7 +37,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
       data-testid={props.opportunity.id}
       className="bg-base-lightest border-1px border-base-lighter padding-3 margin-bottom-205 radius-md"
     >
-      <div>{TYPE_TO_LABEL[props.opportunity.type]}</div>
+      <div className="display-inline-flex">{TYPE_TO_LABEL[props.opportunity.type]}</div>
 
       <h3 className="font-body-md text-normal">
         <a className="usa-link" href={`/opportunities/${props.opportunity.urlSlug}`}>
