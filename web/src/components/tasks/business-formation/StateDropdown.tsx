@@ -45,7 +45,7 @@ export const StateDropdown = (props: Props): ReactElement => {
   const filterOptions = createFilterOptions({
     matchFrom: "start",
     trim: true,
-    stringify: (option: StateObject) => option.name,
+    stringify: (option: StateObject) => option.shortCode,
   });
 
   const getState = (value: string | undefined): StateObject | undefined =>

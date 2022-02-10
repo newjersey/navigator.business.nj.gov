@@ -70,28 +70,31 @@ export const Members = (): ReactElement => {
                   <tr className="margin-bottom-1" key={index}>
                     <td>{it.name}</td>
                     <td>{formatAddress(it)}</td>
-                    <td style={{ display: "inline-flex" }}>
-                      <IconButton
-                        aria-label="edit"
-                        onClick={() => {
-                          setEditIndex(index);
-                          setModalOpen(true);
-                        }}
-                        className="usa-button usa-button--unstyled"
-                      >
-                        <Icon className="usa-icon--size-3">edit</Icon>
-                      </IconButton>
-                      <span style={{ height: "1.5rem", width: ".75rem" }} />{" "}
-                      <span style={{ borderLeft: "1px solid black", height: "1.5rem", width: ".75rem" }} />
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => {
-                          deleteMember(index);
-                        }}
-                        className="usa-button usa-button--unstyled"
-                      >
-                        <Icon className="usa-icon--size-3">delete</Icon>
-                      </IconButton>
+                    <td className="display-inline-flex">
+                      <div>
+                        <IconButton
+                          aria-label="edit"
+                          onClick={() => {
+                            setEditIndex(index);
+                            setModalOpen(true);
+                          }}
+                          className="usa-button usa-button--unstyled"
+                        >
+                          <Icon className="usa-icon--size-3">edit</Icon>
+                        </IconButton>
+                      </div>
+                      <div className="margin-x-1 border-1px border-base-light" />
+                      <div>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => {
+                            deleteMember(index);
+                          }}
+                          className="usa-button usa-button--unstyled"
+                        >
+                          <Icon className="usa-icon--size-3">delete</Icon>
+                        </IconButton>
+                      </div>
                     </td>
                   </tr>
                 );

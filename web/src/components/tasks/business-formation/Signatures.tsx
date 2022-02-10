@@ -47,27 +47,29 @@ export const Signatures = (): ReactElement => {
           return (
             <div className="margin-bottom-1" key={index}>
               <Content>{state.displayContent.additionalSigners.contentMd}</Content>
-              <div className="fdr">
-                <TextField
-                  value={it}
-                  id={`additional-signer-${index}`}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    handleAdditionalSignerChange(event, index)
-                  }
-                  variant="outlined"
-                  fullWidth
-                  placeholder={state.displayContent.additionalSigners.placeholder ?? ""}
-                  inputProps={{
-                    "aria-label": `Additional signer ${index}`,
-                  }}
-                />
-                <Button style="tertiary" onClick={() => removeAdditionalSigner(index)}>
-                  <div className="border-base-light border-1px margin-x-1 radius-md">
-                    <Icon className="padding-05 font-body-xl" label="delete additional signer">
+              <div className="grid-row flex-align-center">
+                <div className="grid-col">
+                  <TextField
+                    value={it}
+                    id={`additional-signer-${index}`}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                      handleAdditionalSignerChange(event, index)
+                    }
+                    variant="outlined"
+                    fullWidth
+                    placeholder={state.displayContent.additionalSigners.placeholder ?? ""}
+                    inputProps={{
+                      "aria-label": `Additional signer ${index}`,
+                    }}
+                  />
+                </div>
+                <div className="grid-col-auto padding-left-1">
+                  <Button style="tertiary" onClick={() => removeAdditionalSigner(index)}>
+                    <Icon className="font-body-xl" label="delete additional signer">
                       delete
                     </Icon>
-                  </div>
-                </Button>
+                  </Button>
+                </div>
               </div>
             </div>
           );
