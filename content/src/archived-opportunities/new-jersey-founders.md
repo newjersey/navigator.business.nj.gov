@@ -1,28 +1,36 @@
 ---
-id: "new-jersey-founders-funders"
-urlSlug: "new-jersey-founders"
-name: "New Jersey Founders & Funders"
+urlSlug: new-jersey-founders
+name: New Jersey Founders & Funders
+id: new-jersey-founders-funders
+type: FUNDING
 callToActionLink: ""
 callToActionText: ""
-type: "FUNDING"
-fundingType: "technical assistance"
-benefits: "Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities."
-eligibility: "Registered to do business in New Jersey and located in New Jersey. Typically demonstrates some signs of financial or operational traction."
-publishStageArchive: "Do Not Publish"
-industry: ["technology", "life-sciences", "other-services"]
-agency: ["NJEDA"]
+benefits: ""
+eligibility: ""
+fundingType: technical assistance
+agency:
+  - NJEDA
+publishStageArchive: Do Not Publish
 openDate: ""
 dueDate: ""
-status: "open"
-programFrequency: "reoccuring"
-businessStage: "early-stage"
-businessSize: "n/a"
-homeBased: "yes"
-mwvb: "n/a"
+status: open
+programFrequency: reoccuring
+businessStage: early-stage
+businessSize: n/a
+homeBased: yes
+mwvb: n/a
 preferenceGiven: ""
-county: ["All"]
+county:
+  - All
+industry:
+  - Technology
+  - Life Sciences
+  - Other Services (except Public Administration)
 ---
+Founders & Funders enables early-stage New Jersey technology and life sciences companies to meet potential investors in 10-minute, one-on-one “speed dating” sessions to discuss strategy, business models, and funding opportunities.
 
-Founders & Funders enables early-stage New Jersey technology and life-sciences companies to meet potential investors in 10-minute, one-on-one “speed dating” sessions to discuss strategy, business models, and funding opportunities.
+**Benefits:** Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities.
+
+**Eligibility:** Registered to do business in New Jersey and located in New Jersey. Typically demonstrates some signs of financial or operational traction.
 
 NJ Founders & Funders - NJEDA
