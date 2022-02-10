@@ -96,18 +96,18 @@ export const RegisteredAgent = (): ReactElement => {
                 validationText={BusinessFormationDefaults.agentOfficeAddressLine1ErrorText}
               />
               <BusinessFormationTextField fieldName="agentOfficeAddressLine2" />
-              <div className="grid-row grid-gap-1">
-                <div className="desktop:grid-col-5">
+              <div className="grid-row grid-gap-2">
+                <div className="grid-col-12 tablet:grid-col-6">
                   <BusinessFormationTextField
                     fieldName="agentOfficeAddressCity"
                     required={true}
                     validationText={BusinessFormationDefaults.agentOfficeaddressCityErrorText}
                   />
                 </div>
-                <div className="desktop:grid-col-2">
+                <div className="grid-col-5 tablet:grid-col-2">
                   <BusinessFormationTextField fieldName="agentOfficeAddressState" disabled={true} />
                 </div>
-                <div className="desktop:grid-col-5">
+                <div className="grid-col-7 tablet:grid-col-4">
                   <BusinessFormationTextField
                     numericProps={{
                       maxLength: 5,

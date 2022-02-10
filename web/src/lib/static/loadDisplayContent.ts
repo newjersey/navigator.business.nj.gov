@@ -239,6 +239,7 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
 
   const signer = getMarkdown(loadFile("business-formation/signatures.md"));
   const additionalSigners = getMarkdown(loadFile("business-formation/additional-signers.md"));
+  const contactInformation = getMarkdown(loadFile("business-formation/contact-information.md"));
   const contactFirstName = getMarkdown(loadFile("business-formation/contact-first-name.md"));
   const contactLastName = getMarkdown(loadFile("business-formation/contact-last-name.md"));
   const contactPhoneNumber = getMarkdown(loadFile("business-formation/contact-phone-number.md"));
@@ -399,6 +400,9 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       certifiedCopyOfFormationDocument: {
         contentMd: certifiedCopyOfFormationDocument.content,
         ...(certifiedCopyOfFormationDocument.grayMatter as DocumentFieldGrayMatter),
+      },
+      contactInformation: {
+        contentMd: contactInformation.content,
       },
       contactFirstName: {
         contentMd: contactFirstName.content,

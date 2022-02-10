@@ -84,9 +84,20 @@ export const PaymentSection = (): ReactElement => {
 
   return (
     <div data-testid="payment-section">
-      <ContactFirstName />
-      <ContactLastName />
-      <ContactPhoneNumber />
+      <Content>{state.displayContent.contactInformation.contentMd}</Content>
+      <div className="grid-row grid-gap-2 margin-top-2">
+        <div className="form-input margin-bottom-2 tablet:grid-col-6">
+          <ContactFirstName />
+        </div>
+        <div className="form-input margin-bottom-2 tablet:grid-col-6">
+          <ContactLastName />
+        </div>
+      </div>
+      <div className="grid-row">
+        <div className="tablet:grid-col-6">
+          <ContactPhoneNumber />
+        </div>
+      </div>
       <PaymentTypeDropdown />
       <BusinessFormationDocuments />
       <BusinessFormationNotifications />

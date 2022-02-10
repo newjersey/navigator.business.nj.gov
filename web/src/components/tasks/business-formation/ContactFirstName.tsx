@@ -4,12 +4,10 @@ import { BusinessFormationTextField } from "./BusinessFormationTextField";
 
 export const ContactFirstName = (): ReactElement => {
   return (
-    <div className="form-input margin-bottom-2">
-      <BusinessFormationTextField
-        fieldName="contactFirstName"
-        required={true}
-        validationText={BusinessFormationDefaults.contactFirstnameErrorText}
-      />
-    </div>
+    <BusinessFormationTextField
+      fieldName="contactFirstName"
+      required={true}
+      validationText={BusinessFormationDefaults.contactFirstnameErrorText}
+    />
   );
 };

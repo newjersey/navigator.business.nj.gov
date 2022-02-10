@@ -409,6 +409,9 @@ export const generateFormationDisplayContent = (
     cost: `some-certified-copy-of-formation-document-cost-${randomInt()}`,
     optionalLabel: `some-certified-copy-of-formation-document-optional-label-${randomInt()}`,
   },
+  contactInformation: {
+    contentMd: `some-contact-information-content-${randomInt()}`,
+  },
   contactFirstName: {
     contentMd: `some-contact-first-name-content-${randomInt()}`,
     placeholder: `some-contact-first-name-placeholder-${randomInt()}`,
@@ -490,7 +493,7 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
   addressLine1: `some-members-address-1-${randomInt()}`,
   addressLine2: `some-members-address-2-${randomInt()}`,
   addressCity: `some-members-address-city-${randomInt()}`,
-  addressState: generateStateItem().name,
+  addressState: generateStateItem().shortCode,
   addressZipCode: generateZipCode(),
   ...overrides,
 });

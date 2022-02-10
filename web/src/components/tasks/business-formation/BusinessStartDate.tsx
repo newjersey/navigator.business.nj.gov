@@ -31,9 +31,9 @@ export const BusinessStartDate = (): ReactElement => {
   const Picker = process.env.NODE_ENV === "test" ? DesktopDatePicker : DatePicker;
 
   return (
-    <div className="margin-bottom-2">
+    <>
       <Content key="dateOfFormationMd">{state.displayContent.businessStartDate.contentMd}</Content>
-      <div className="tablet:display-flex tablet:flex-row tablet:flex-justify ">
+      <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker
             minDate={dayjs()}
@@ -51,6 +51,7 @@ export const BusinessStartDate = (): ReactElement => {
               <TextField
                 {...params}
                 variant="outlined"
+                fullWidth
                 helperText={showError ? BusinessFormationDefaults.startDateErrorText : " "}
                 inputProps={{
                   ...params.inputProps,
@@ -62,6 +63,6 @@ export const BusinessStartDate = (): ReactElement => {
           />
         </LocalizationProvider>
       </div>
-    </div>
+    </>
   );
 };

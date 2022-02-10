@@ -208,8 +208,8 @@ export const MembersModal = (props: Props): ReactElement => {
                 autoComplete="address-line2"
                 handleChange={(value: string) => setMemberData({ ...memberData, addressLine2: value })}
               />
-              <div className="grid-row grid-gap-1">
-                <div className="desktop:grid-col">
+              <div className="grid-row grid-gap-2">
+                <div className="grid-col-12 tablet:grid-col-6">
                   <Content>{state.displayContent.memberAddressCity.contentMd}</Content>
                   <GenericTextField
                     fieldName="memberAddressCity"
@@ -224,9 +224,7 @@ export const MembersModal = (props: Props): ReactElement => {
                     validationText={BusinessFormationDefaults.addressCityErrorText}
                   />
                 </div>
-              </div>
-              <div className="grid-row grid-gap-1">
-                <div className="desktop:grid-col-6">
+                <div className="grid-col-5 tablet:grid-col-3">
                   <Content>{state.displayContent.memberAddressState.contentMd}</Content>
                   <StateDropdown
                     fieldName="memberAddressState"
@@ -243,7 +241,7 @@ export const MembersModal = (props: Props): ReactElement => {
                     required={true}
                   />
                 </div>
-                <div className="desktop:grid-col-6">
+                <div className="grid-col-7 tablet:grid-col-3">
                   <Content>{state.displayContent.memberAddressZipCode.contentMd}</Content>
                   <GenericTextField
                     numericProps={{
