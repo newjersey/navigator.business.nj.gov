@@ -5,6 +5,7 @@ import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-f
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -55,7 +56,7 @@ export const PaymentSection = (): ReactElement => {
       setShowRequiredFieldsError(false);
 
       setIsLoading(true);
-
+      analytics.event.business_formation_billing_step_continue_button.click.go_to_next_formation_step();
       const newUserData = await api.postBusinessFormation(
         {
           ...userData,

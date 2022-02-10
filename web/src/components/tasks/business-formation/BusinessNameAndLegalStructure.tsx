@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormHelperText } from "@mui/material";
@@ -69,7 +70,10 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
             <Button
               style="tertiary"
               widthAutoOnMobile
-              onClick={onEditProfile}
+              onClick={() => {
+                analytics.event.business_formation_business_name_edit.click.go_to_profile_screen();
+                onEditProfile();
+              }}
               underline
               dataTestid="edit-business-name"
             >
@@ -87,7 +91,10 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
             <Button
               style="tertiary"
               widthAutoOnMobile
-              onClick={onEditProfile}
+              onClick={() => {
+                analytics.event.business_formation_legal_structure_edit.click.go_to_profile_screen();
+                onEditProfile();
+              }}
               underline
               dataTestid="edit-legal-structure"
             >

@@ -2,6 +2,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -112,6 +113,9 @@ export const BusinessSection = (): ReactElement => {
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
       return;
     }
+
+    analytics.event.business_formation_business_step_continue_button.click.go_to_next_formation_step();
+
     setShowRequiredFieldsError(false);
     setTab(state.tab + 1);
     scrollToTop();

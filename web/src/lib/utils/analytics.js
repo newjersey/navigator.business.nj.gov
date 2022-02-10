@@ -322,5 +322,47 @@ export default {
         },
       },
     },
+    business_formation_business_name_edit: {
+      click: {
+        go_to_profile_screen: () => {
+          sendEvent("business_formation_business_name_edit", "click", "go_to_profile_screen");
+        },
+      },
+    },
+    business_formation_legal_structure_edit: {
+      click: {
+        go_to_profile_screen: () => {
+          sendEvent("business_formation_legal_structure_edit", "click", "go_to_profile_screen");
+        },
+      },
+    },
+    business_formation_business_step_continue_button: {
+      click: {
+        go_to_next_formation_step: () => {
+          sendEvent("business_formation_business_step_continue_button", "click", "go_to_next_formation_step");
+        },
+      },
+    },
+    business_formation_contacts_step_continue_button: {
+      click: {
+        go_to_next_formation_step: () => {
+          sendEvent("business_formation_contacts_step_continue_button", "click", "go_to_next_formation_step");
+        },
+      },
+    },
+    business_formation_review_step_continue_button: {
+      click: {
+        go_to_next_formation_step: () => {
+          sendEvent("business_formation_review_step_continue_button", "click", "go_to_next_formation_step");
+        },
+      },
+    },
+    business_formation_billing_step_continue_button: {
+      click: {
+        go_to_next_formation_step: () => {
+          sendEvent("business_formation_billing_step_continue_button", "click", "go_to_next_formation_step");
+        },
+      },
+    },
   },
 };

@@ -2,6 +2,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -38,8 +39,6 @@ export const ContactsSection = (): ReactElement => {
     }
 
     setShowRequiredFieldsError(false);
-    setTab(state.tab + 1);
-    scrollToTop();
 
     const formationFormDataWithEmptySignersRemoved = {
       ...state.formationFormData,
@@ -53,6 +52,10 @@ export const ContactsSection = (): ReactElement => {
         formationFormData: formationFormDataWithEmptySignersRemoved,
       },
     });
+
+    analytics.event.business_formation_contacts_step_continue_button.click.go_to_next_formation_step();
+    setTab(state.tab + 1);
+    scrollToTop();
   };
 
   return (

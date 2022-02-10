@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext } from "react";
@@ -240,6 +241,7 @@ export const ReviewSection = (): ReactElement => {
             style="primary"
             noRightMargin
             onClick={() => {
+              analytics.event.business_formation_review_step_continue_button.click.go_to_next_formation_step();
               setTab(state.tab + 1);
               scrollToTop();
             }}
