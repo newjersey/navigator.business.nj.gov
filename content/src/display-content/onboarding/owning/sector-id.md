@@ -2,6 +2,6 @@
 placeholder: "Select a sector"
 ---
 
-## Sector
+## Industry Sector
 
 Which sector best describes your business?
