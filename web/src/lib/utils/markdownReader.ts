@@ -1,16 +1,16 @@
 import {
+  Certification,
   County,
   Filing,
-  Opportunity,
+  Funding,
+  FundingBusinessStage,
+  FundingHomeBased,
+  FundingPreferenceGiven,
+  FundingProgramFrequency,
+  FundingPublishStatus,
+  FundingStatus,
+  FundingType,
   OpportunityAgency,
-  OpportunityBusinessStage,
-  OpportunityFundingType,
-  OpportunityHomeBased,
-  OpportunityPreferenceGiven,
-  OpportunityProgramFrequency,
-  OpportunityPublishStatus,
-  OpportunityStatus,
-  OpportunityType,
 } from "@/lib/types/types";
 import matter from "gray-matter";
 
@@ -24,14 +24,25 @@ export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks | Filing
   };
 };
 
-export const convertOpportunityMd = (oppMdContents: string, filename: string): Opportunity => {
+export const convertFundingMd = (oppMdContents: string, filename: string): Funding => {
   const matterResult = matter(oppMdContents);
-  const oppGrayMatter = matterResult.data as OpportunityGrayMatter;
+  const oppGrayMatter = matterResult.data as FundingGrayMatter;
 
   return {
     contentMd: matterResult.content,
     filename: filename,
     ...oppGrayMatter,
+  };
+};
+
+export const convertCertificationMd = (mdContents: string, filename: string): Certification => {
+  const matterResult = matter(mdContents);
+  const grayMatter = matterResult.data as CertificationGrayMatter;
+
+  return {
+    contentMd: matterResult.content,
+    filename: filename,
+    ...grayMatter,
   };
 };
 
@@ -54,29 +65,37 @@ type TaskGrayMatter = {
   required?: boolean;
 };
 
-type OpportunityGrayMatter = {
+type FundingGrayMatter = {
   id: string;
   name: string;
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  type: OpportunityType;
   benefits: string;
   eligibility: string;
-  fundingType: OpportunityFundingType;
+  fundingType: FundingType;
   agency: OpportunityAgency[];
-  publishStageArchive: OpportunityPublishStatus | null;
+  publishStageArchive: FundingPublishStatus | null;
   openDate: string;
   dueDate: string;
-  status: OpportunityStatus;
-  programFrequency: OpportunityProgramFrequency;
-  businessStage: OpportunityBusinessStage;
+  status: FundingStatus;
+  programFrequency: FundingProgramFrequency;
+  businessStage: FundingBusinessStage;
   businessSize: string;
-  homeBased: OpportunityHomeBased;
+  homeBased: FundingHomeBased;
   mwvb: string;
-  preferenceGiven: OpportunityPreferenceGiven | null;
+  preferenceGiven: FundingPreferenceGiven | null;
   county: County[];
   sector: string[];
+};
+
+type CertificationGrayMatter = {
+  id: string;
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  agency: OpportunityAgency[];
 };
 
 export type MarkdownResult = {

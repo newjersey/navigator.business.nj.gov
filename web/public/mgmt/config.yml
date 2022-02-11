@@ -198,7 +198,7 @@ collections:
 
   - name: "funding-opportunities"
     label: "Funding Opportunities Content"
-    folder: "content/src/opportunities"
+    folder: "content/src/fundings"
     summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
@@ -211,10 +211,6 @@ collections:
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
-      - label: "Type"
-        name: "type"
-        widget: "select"
-        options: ["FUNDING", "CERTIFICATION"]
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Benefits", name: "benefits", widget: "string", required: false }
@@ -311,7 +307,7 @@ collections:
 
   - name: "archived-funding-opportunities"
     label: "Archived Funding Opportunities Content"
-    folder: "content/src/archived-opportunities"
+    folder: "content/src/archived-fundings"
     summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
@@ -324,10 +320,6 @@ collections:
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
-      - label: "Type"
-        name: "type"
-        widget: "select"
-        options: ["FUNDING", "CERTIFICATION"]
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Benefits", name: "benefits", widget: "string", required: false }
@@ -419,6 +411,54 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+
+  - name: "certification-opportunities"
+    label: "Certification Opportunities Content"
+    folder: "content/src/certifications"
+    summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        multiple: true
+        options: [ "NJEDA", "NJDOL" ]
+        required: false
+
+  - name: "archived-certification-opportunities"
+    label: "Archived Certification Opportunities Content"
+    folder: "content/src/archived-certifications"
+    summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        multiple: true
+        options: [ "NJEDA", "NJDOL" ]
+        required: false
 
   - name: "contextual-information"
     label: "Contextual Information"

@@ -1,23 +1,30 @@
 import { Content } from "@/components/Content";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
-import { Opportunity, OpportunityType } from "@/lib/types/types";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
 import React, { ReactElement } from "react";
 
-interface Props {
-  opportunity: Opportunity;
+interface Opportunity {
+  id: string;
+  name: string;
+  urlSlug: string;
+  contentMd: string;
 }
 
-const TYPE_TO_LABEL: Record<OpportunityType, ReactElement> = {
-  FUNDING: (
+interface Props {
+  opportunity: Opportunity;
+  urlPath: "funding" | "certification";
+}
+
+const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
+  funding: (
     <Tag tagVariant="baseBlack" hexColor="#D5A0E3">
       {DashboardDefaults.fundingTagText}
     </Tag>
   ),
-  CERTIFICATION: (
+  certification: (
     <Tag tagVariant="baseBlack" hexColor="#b1b0e3">
       {DashboardDefaults.certificationTagText}
     </Tag>
@@ -37,10 +44,10 @@ export const OpportunityCard = (props: Props): ReactElement => {
       data-testid={props.opportunity.id}
       className="bg-base-lightest border-1px border-base-lighter padding-3 margin-bottom-205 radius-md"
     >
-      <div className="display-inline-flex">{TYPE_TO_LABEL[props.opportunity.type]}</div>
+      <div className="display-inline-flex">{TYPE_TO_LABEL[props.urlPath]}</div>
 
       <h3 className="font-body-md text-normal">
-        <a className="usa-link" href={`/opportunities/${props.opportunity.urlSlug}`}>
+        <a className="usa-link" href={`/${props.urlPath}/${props.opportunity.urlSlug}`}>
           {props.opportunity.name}
         </a>
       </h3>

@@ -1,17 +1,18 @@
 import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
-import { DashboardDisplayContent, OperateReference, Opportunity } from "@/lib/types/types";
+import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
 import {
-  generateOpportunity,
+  generateCertification,
+  generateFunding,
   generateTaxFiling,
   generateTaxFilingData,
   generateUser,
 } from "@/test/factories";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { render, RenderResult, waitFor, within } from "@testing-library/react";
+import { render, RenderResult, waitFor } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
 import { useMockRouter } from "../mock/mockRouter";
@@ -35,14 +36,16 @@ describe("dashboard", () => {
   const renderPage = (overrides: {
     displayContent?: DashboardDisplayContent;
     operateRefs?: Record<string, OperateReference>;
-    opportunities?: Opportunity[];
+    fundings?: Funding[];
+    certifications?: Certification[];
   }): RenderResult => {
     return render(
       <ThemeProvider theme={createTheme()}>
         <DashboardPage
           displayContent={overrides.displayContent ?? emptyDisplayContent}
           operateReferences={overrides.operateRefs ?? emptyOperateRef}
-          opportunities={overrides.opportunities ?? []}
+          fundings={overrides.fundings ?? []}
+          certifications={overrides.certifications ?? []}
         />
       </ThemeProvider>
     );
@@ -90,7 +93,19 @@ describe("dashboard", () => {
     expect(subject.getByText("Annual Report")).toBeInTheDocument();
   });
 
-  it("displays opportunities filtered from user data", () => {
+  it("displays certifications", () => {
+    const certifications = [
+      generateCertification({ name: "Cert 1" }),
+      generateCertification({ name: "Cert 2" }),
+    ];
+
+    const subject = renderPage({ certifications });
+
+    expect(subject.getByText("Cert 1")).toBeInTheDocument();
+    expect(subject.getByText("Cert 2")).toBeInTheDocument();
+  });
+
+  it("displays fundings filtered from user data", () => {
     useMockProfileData({
       homeBasedBusiness: false,
       municipality: undefined,
@@ -98,45 +113,38 @@ describe("dashboard", () => {
       sectorId: "construction",
     });
 
-    const opportunities = [
-      generateOpportunity({ name: "Opportunity 1", sector: ["construction"] }),
-      generateOpportunity({ name: "Opportunity 2", sector: [] }),
-      generateOpportunity({ name: "Opportunity 3", sector: ["cannabis"] }),
+    const fundings = [
+      generateFunding({ name: "Funding 1", sector: ["construction"] }),
+      generateFunding({ name: "Funding 2", sector: [] }),
+      generateFunding({ name: "Funding 3", sector: ["cannabis"] }),
     ];
 
-    const subject = renderPage({ opportunities });
+    const subject = renderPage({ fundings });
 
-    expect(subject.getByText("Opportunity 1")).toBeInTheDocument();
-    expect(subject.getByText("Opportunity 2")).toBeInTheDocument();
-    expect(subject.queryByText("Opportunity 3")).not.toBeInTheDocument();
+    expect(subject.getByText("Funding 1")).toBeInTheDocument();
+    expect(subject.getByText("Funding 2")).toBeInTheDocument();
+    expect(subject.queryByText("Funding 3")).not.toBeInTheDocument();
   });
 
-  it("displays correct opportunity type tag", () => {
+  it("links to task page for fundings", () => {
     useMockProfileDataForUnfilteredOpportunities();
-    const opportunities = [
-      generateOpportunity({ id: "opp1", type: "FUNDING" }),
-      generateOpportunity({ id: "opp2", type: "CERTIFICATION" }),
-    ];
+    const fundings = [generateFunding({ urlSlug: "opp", name: "Funding Opp" })];
 
-    const subject = renderPage({ opportunities });
+    const subject = renderPage({ fundings });
 
-    const opp1 = within(subject.getByTestId("opp1"));
-    const opp2 = within(subject.getByTestId("opp2"));
-
-    expect(opp1.getByText(DashboardDefaults.fundingTagText)).toBeInTheDocument();
-    expect(opp2.getByText(DashboardDefaults.certificationTagText)).toBeInTheDocument();
+    expect(subject.getByText("Funding Opp").getAttribute("href")).toEqual("/funding/opp");
   });
 
-  it("links to task page for opportunities", () => {
+  it("links to task page for certifications", () => {
     useMockProfileDataForUnfilteredOpportunities();
-    const opportunities = [generateOpportunity({ urlSlug: "opp", name: "Funding Opp" })];
+    const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1" })];
 
-    const subject = renderPage({ opportunities });
+    const subject = renderPage({ certifications });
 
-    expect(subject.getByText("Funding Opp").getAttribute("href")).toEqual("/opportunities/opp");
+    expect(subject.getByText("Cert 1").getAttribute("href")).toEqual("/certification/cert1");
   });
 
-  it("displays first 150 characters of opportunity description", () => {
+  it("displays first 150 characters of funding description", () => {
     useMockProfileDataForUnfilteredOpportunities();
     const opp1Characters = Array(151).fill("a").join("");
     const opp1ExpectedTextOnPage = `${Array(150).fill("a").join("")}...`;
@@ -144,11 +152,11 @@ describe("dashboard", () => {
     const opp2Characters = Array(150).fill("b").join("");
     const opp2ExpectedTextOnPage = `${Array(150).fill("b").join("")}`;
 
-    const opportunities = [
-      generateOpportunity({ contentMd: opp1Characters }),
-      generateOpportunity({ contentMd: opp2Characters }),
+    const fundings = [
+      generateFunding({ contentMd: opp1Characters }),
+      generateFunding({ contentMd: opp2Characters }),
     ];
-    const subject = renderPage({ opportunities });
+    const subject = renderPage({ fundings });
     expect(subject.getByText(opp1ExpectedTextOnPage)).toBeInTheDocument();
     expect(subject.getByText(opp2ExpectedTextOnPage)).toBeInTheDocument();
   });
@@ -159,11 +167,11 @@ describe("dashboard", () => {
     const boldContent = `${characters} *a bold text*`;
     const linkContent = `${characters} [a link text](www.example.com)`;
 
-    const opportunities = [
-      generateOpportunity({ contentMd: boldContent }),
-      generateOpportunity({ contentMd: linkContent }),
+    const fundings = [
+      generateFunding({ contentMd: boldContent }),
+      generateFunding({ contentMd: linkContent }),
     ];
-    const subject = renderPage({ opportunities });
+    const subject = renderPage({ fundings });
     expect(subject.getByText("a bo")).toBeInTheDocument();
     expect(subject.getByText("a li")).toBeInTheDocument();
   });

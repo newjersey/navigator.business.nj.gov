@@ -529,7 +529,7 @@ export type DashboardDisplayContent = {
   opportunityTextMd: string;
 };
 
-export type Opportunity = {
+export type Funding = {
   id: string;
   filename: string;
   name: string;
@@ -537,46 +537,50 @@ export type Opportunity = {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
-  type: OpportunityType;
   benefits: string;
   eligibility: string;
-  fundingType: OpportunityFundingType;
+  fundingType: FundingType;
   agency: OpportunityAgency[];
-  publishStageArchive: OpportunityPublishStatus | null;
+  publishStageArchive: FundingPublishStatus | null;
   openDate: string;
   dueDate: string;
-  status: OpportunityStatus;
-  programFrequency: OpportunityProgramFrequency;
-  businessStage: OpportunityBusinessStage;
+  status: FundingStatus;
+  programFrequency: FundingProgramFrequency;
+  businessStage: FundingBusinessStage;
   businessSize: string;
-  homeBased: OpportunityHomeBased;
+  homeBased: FundingHomeBased;
   mwvb: string;
-  preferenceGiven: OpportunityPreferenceGiven | null;
+  preferenceGiven: FundingPreferenceGiven | null;
   county: County[];
   sector: string[];
 };
 
-export type OpportunityType = "FUNDING" | "CERTIFICATION";
-export type OpportunityFundingType =
+export type Certification = {
+  id: string;
+  filename: string;
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  contentMd: string;
+  agency: OpportunityAgency[];
+};
+
+export type OpportunityAgency = "NJEDA" | "NJDOL";
+
+export type FundingType =
   | "tax credit"
   | "loan"
   | "grant"
   | "technical assistance"
   | "hiring and employee training support"
   | "tax exemption";
-export type OpportunityAgency = "NJEDA" | "NJDOL";
-export type OpportunityPublishStatus = "Do Not Publish";
-export type OpportunityStatus = "open" | "deadline" | "first-come, first-served" | "closed";
-export type OpportunityProgramFrequency =
-  | "annual"
-  | "ongoing"
-  | "reoccuring"
-  | "one-time"
-  | "pilot"
-  | "other";
-export type OpportunityBusinessStage = "early-stage" | "operating" | "both";
-export type OpportunityHomeBased = "yes" | "no" | "unknown";
-export type OpportunityPreferenceGiven = "yes" | "no";
+export type FundingPublishStatus = "Do Not Publish";
+export type FundingStatus = "open" | "deadline" | "first-come, first-served" | "closed";
+export type FundingProgramFrequency = "annual" | "ongoing" | "reoccuring" | "one-time" | "pilot" | "other";
+export type FundingBusinessStage = "early-stage" | "operating" | "both";
+export type FundingHomeBased = "yes" | "no" | "unknown";
+export type FundingPreferenceGiven = "yes" | "no";
 
 export const AllCounties = [
   "All",

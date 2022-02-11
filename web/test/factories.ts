@@ -1,15 +1,16 @@
 import {
   AllCounties,
+  Certification,
   County,
   FormationDisplayContent,
+  Funding,
+  FundingBusinessStage,
+  FundingHomeBased,
+  FundingProgramFrequency,
+  FundingStatus,
+  FundingType,
   NameAvailability,
   OperateReference,
-  Opportunity,
-  OpportunityBusinessStage,
-  OpportunityFundingType,
-  OpportunityHomeBased,
-  OpportunityProgramFrequency,
-  OpportunityStatus,
   Roadmap,
   SectionCompletion,
   SectionType,
@@ -550,7 +551,7 @@ export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>)
   };
 };
 
-export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunity => {
+export const generateFunding = (overrides: Partial<Funding>): Funding => {
   return {
     id: `some-id-${randomInt()}`,
     filename: `some-filename-${randomInt()}`,
@@ -559,23 +560,36 @@ export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunit
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
-    type: randomInt() % 2 ? "CERTIFICATION" : "FUNDING",
     benefits: `some-benefits-${randomInt()}`,
     eligibility: `some-eligibility-${randomInt()}`,
-    fundingType: randomOpportunityFundingType(),
+    fundingType: randomFundingType(),
     agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
     publishStageArchive: null,
     openDate: dayjs().toISOString(),
     dueDate: dayjs().toISOString(),
-    status: randomOpportunityStatus(),
-    programFrequency: randomOpportunityProgramFrequency(),
-    businessStage: randomOpportunityBusinessStage(),
+    status: randomFundingStatus(),
+    programFrequency: randomFundingProgramFrequency(),
+    businessStage: randomFundingBusinessStage(),
     businessSize: ">200",
-    homeBased: randomOpportunityHomeBased(),
+    homeBased: randomFundingHomeBased(),
     mwvb: `some-mwvb-${randomInt()}`,
     preferenceGiven: null,
     county: [randomCounty()],
     sector: [randomSector().id],
+    ...overrides,
+  };
+};
+
+export const generateCertification = (overrides: Partial<Certification>): Certification => {
+  return {
+    id: `some-id-${randomInt()}`,
+    filename: `some-filename-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    urlSlug: `some-url-slug-${randomInt()}`,
+    callToActionLink: `some-cta-link-${randomInt()}`,
+    callToActionText: `some-cta-text-${randomInt()}`,
+    contentMd: `some-content-${randomInt()}`,
+    agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
     ...overrides,
   };
 };
@@ -594,25 +608,25 @@ export const randomBusinessSuffix = (): BusinessSuffix => {
   return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
 };
 
-export const randomOpportunityStatus = (): OpportunityStatus => {
+export const randomFundingStatus = (): FundingStatus => {
   const all = ["open", "deadline", "first-come, first-served", "closed"];
   const randomIndex = Math.floor(Math.random() * all.length);
-  return all[randomIndex] as OpportunityStatus;
+  return all[randomIndex] as FundingStatus;
 };
 
-export const randomOpportunityProgramFrequency = (): OpportunityProgramFrequency => {
+export const randomFundingProgramFrequency = (): FundingProgramFrequency => {
   const all = ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"];
   const randomIndex = Math.floor(Math.random() * all.length);
-  return all[randomIndex] as OpportunityProgramFrequency;
+  return all[randomIndex] as FundingProgramFrequency;
 };
 
-export const randomOpportunityBusinessStage = (): OpportunityBusinessStage => {
+export const randomFundingBusinessStage = (): FundingBusinessStage => {
   const all = ["early-stage", "operating", "both"];
   const randomIndex = Math.floor(Math.random() * all.length);
-  return all[randomIndex] as OpportunityBusinessStage;
+  return all[randomIndex] as FundingBusinessStage;
 };
 
-export const randomOpportunityFundingType = (): OpportunityFundingType => {
+export const randomFundingType = (): FundingType => {
   const all = [
     "tax credit",
     "loan",
@@ -622,13 +636,13 @@ export const randomOpportunityFundingType = (): OpportunityFundingType => {
     "tax exemption",
   ];
   const randomIndex = Math.floor(Math.random() * all.length);
-  return all[randomIndex] as OpportunityFundingType;
+  return all[randomIndex] as FundingType;
 };
 
-export const randomOpportunityHomeBased = (): OpportunityHomeBased => {
+export const randomFundingHomeBased = (): FundingHomeBased => {
   const all = ["yes", "no", "unknown"];
   const randomIndex = Math.floor(Math.random() * all.length);
-  return all[randomIndex] as OpportunityHomeBased;
+  return all[randomIndex] as FundingHomeBased;
 };
 
 export const randomCounty = (): County => {
