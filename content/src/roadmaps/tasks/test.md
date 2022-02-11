@@ -18,6 +18,4 @@ this is a test
 >
 > > and this is another box with contextual `info|business-reg-certificate` and some second level info
 >
-> right `here.|business-reg-certificate` boom.
 >
->  info
