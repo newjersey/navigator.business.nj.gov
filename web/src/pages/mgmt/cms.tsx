@@ -1,7 +1,8 @@
 import ContextEditor from "@/lib/cms/editors/context-info";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
+import CertificationsPreview from "@/lib/cms/previews/certifications";
 import ContextInfoPreview from "@/lib/cms/previews/context-info";
-import OpportunitiesPreview from "@/lib/cms/previews/opportunities";
+import FundingsPreview from "@/lib/cms/previews/fundings";
 import TaskPreview from "@/lib/cms/previews/task";
 import dynamic from "next/dynamic";
 
@@ -24,9 +25,13 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("tasks", TaskPreview);
       // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("funding-opportunities", OpportunitiesPreview);
+      CMS.registerPreviewTemplate("funding-opportunities", FundingsPreview);
       // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("archived-funding-opportunities", OpportunitiesPreview);
+      CMS.registerPreviewTemplate("archived-funding-opportunities", FundingsPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("certification-opportunities", CertificationsPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("archived-certification-opportunities", CertificationsPreview);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(ContextEditor);
       // @ts-expect-error: No type definition available

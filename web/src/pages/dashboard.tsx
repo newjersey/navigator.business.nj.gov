@@ -8,11 +8,12 @@ import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefault
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { filterOpportunities } from "@/lib/domain-logic/filterOpportunities";
+import { filterFundings } from "@/lib/domain-logic/filterFundings";
+import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadDashboardDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { loadAllOpportunities } from "@/lib/static/loadOpportunities";
-import { DashboardDisplayContent, OperateReference, Opportunity } from "@/lib/types/types";
+import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
@@ -22,7 +23,8 @@ import React, { ReactElement, useEffect, useState } from "react";
 interface Props {
   displayContent: DashboardDisplayContent;
   operateReferences: Record<string, OperateReference>;
-  opportunities: Opportunity[];
+  fundings: Funding[];
+  certifications: Certification[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -31,7 +33,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const router = useRouter();
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
 
-  const filteredOpportunities = userData ? filterOpportunities(props.opportunities, userData) : [];
+  const filteredFundings = userData ? filterFundings(props.fundings, userData) : [];
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -79,8 +81,11 @@ const DashboardPage = (props: Props): ReactElement => {
                   <h2>{DashboardDefaults.opportunitiesHeader}</h2>
                   <hr className="margin-bottom-3" aria-hidden={true} />
                   <div className="dashboard-opportunities-list">
-                    {filteredOpportunities.map((opp) => (
-                      <OpportunityCard key={opp.id} opportunity={opp} />
+                    {props.certifications.map((cert) => (
+                      <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
+                    ))}
+                    {filteredFundings.map((funding) => (
+                      <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
                     ))}
                   </div>
                   <div className="margin-top-205">
@@ -116,7 +121,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
     props: {
       displayContent: loadDashboardDisplayContent(),
       operateReferences: loadOperateReferences(),
-      opportunities: loadAllOpportunities(),
+      fundings: loadAllFundings(),
+      certifications: loadAllCertifications(),
     },
   };
 };

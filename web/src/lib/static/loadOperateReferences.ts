@@ -1,25 +1,36 @@
+import { loadCertificationByFileName } from "@/lib/static/loadCertifications";
 import { loadFilingByFileName } from "@/lib/static/loadFilings";
-import { loadOpportunityByFileName } from "@/lib/static/loadOpportunities";
+import { loadFundingByFileName } from "@/lib/static/loadFundings";
 import { OperateReference } from "@/lib/types/types";
 import fs from "fs";
 import path from "path";
 
 const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
-const opportunityDir = path.join(process.cwd(), "..", "content", "src", "opportunities");
+const fundingsDir = path.join(process.cwd(), "..", "content", "src", "fundings");
+const certificationsDir = path.join(process.cwd(), "..", "content", "src", "certifications");
 
 export const loadOperateReferences = (): Record<string, OperateReference> => {
   const filingFilenames = fs.readdirSync(filingsDir);
-  const opportunityFilenames = fs.readdirSync(opportunityDir);
+  const fundingFilenames = fs.readdirSync(fundingsDir);
+  const certFilenames = fs.readdirSync(certificationsDir);
   const filingFileContents = filingFilenames.map((fileName) => ({
     ...loadFilingByFileName(fileName),
     origin: "filings" as Origin,
   }));
-  const opportunityFileContents = opportunityFilenames.map((fileName) => ({
-    ...loadOpportunityByFileName(fileName),
-    origin: "opportunities" as Origin,
+  const fundingFileContents = fundingFilenames.map((fileName) => ({
+    ...loadFundingByFileName(fileName),
+    origin: "funding" as Origin,
+  }));
+  const certificationFileContents = certFilenames.map((fileName) => ({
+    ...loadCertificationByFileName(fileName),
+    origin: "certification" as Origin,
   }));
 
-  const allContents: FileProperties[] = [...filingFileContents, ...opportunityFileContents];
+  const allContents: FileProperties[] = [
+    ...filingFileContents,
+    ...fundingFileContents,
+    ...certificationFileContents,
+  ];
 
   return allContents.reduce((acc: Record<string, OperateReference>, curr: FileProperties) => {
     acc[curr.id] = {
@@ -38,4 +49,4 @@ type FileProperties = {
   origin: Origin;
 };
 
-type Origin = "filings" | "opportunities";
+type Origin = "filings" | "funding" | "certification";
