@@ -1,6 +1,5 @@
 ---
-optionalLabel: "(Optional)"
-cost: "$50.00"
+cost: 50
 ---
 
-`Certificate of Standing|certificate-of-standing`
+`Certificate of Standing|certificate-of-standing` (Optional)

@@ -62,16 +62,16 @@ describe("<BusinessFormation />", () => {
     optInCorpWatch: { contentMd: "Corp watch" },
     officialFormationDocument: {
       contentMd: "Official formation document",
-      cost: "$125.00",
+      cost: 125,
     },
     certificateOfStanding: {
       contentMd: "Certificate of standing",
-      cost: "$50.00",
+      cost: 50,
       optionalLabel: "",
     },
     certifiedCopyOfFormationDocument: {
       contentMd: "Certified copy of formation document",
-      cost: "$25.00",
+      cost: 25,
       optionalLabel: "",
     },
   });
@@ -222,8 +222,7 @@ describe("<BusinessFormation />", () => {
       fillText("Contact first name", "John");
       fillText("Contact last name", "Smith");
       fillText("Contact phone number", "123A45a678 90");
-
-      selectByText("Payment Type", BusinessFormationDefaults.creditCardPaymentTypeLabel);
+      fireEvent.click(subject.getByLabelText("Credit card"));
       selectCheckBox("Annual report");
       selectCheckBox("Corp watch");
       selectCheckBox("Certificate of standing");
@@ -1117,6 +1116,7 @@ describe("<BusinessFormation />", () => {
         await submitContactsTab();
         await submitReviewTab();
         await clickSubmit();
+        expect(subject.getByText(BusinessFormationDefaults.paymentTypeErrorText)).toBeInTheDocument();
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
 

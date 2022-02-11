@@ -386,9 +386,8 @@ export const generateFormationDisplayContent = (
     contentMd: `some-additional-signer-content- ${randomInt()}`,
     placeholder: `some-additional-signer-placeholder-${randomInt()}`,
   },
-  paymentType: {
+  services: {
     contentMd: `some-payment-type-content-${randomInt()}`,
-    placeholder: `some-payment-type-placeholder-${randomInt()}`,
   },
   disclaimer: {
     contentMd: `some-disclaimer-${randomInt()}`,
@@ -404,16 +403,16 @@ export const generateFormationDisplayContent = (
   },
   officialFormationDocument: {
     contentMd: `some-official-formation-document-content-${randomInt()}`,
-    cost: `some-official-formation-document-cost-${randomInt()}`,
+    cost: randomInt(),
   },
   certificateOfStanding: {
     contentMd: `some-certificate-of-standing-content-${randomInt()}`,
-    cost: `some-certificate-of-standing-cost-${randomInt()}`,
+    cost: randomInt(),
     optionalLabel: `some-certificate-of-standing-optional-label-${randomInt()}`,
   },
   certifiedCopyOfFormationDocument: {
     contentMd: `some-certified-copy-of-formation-document-content-${randomInt()}`,
-    cost: `some-certified-copy-of-formation-document-cost-${randomInt()}`,
+    cost: randomInt(),
     optionalLabel: `some-certified-copy-of-formation-document-optional-label-${randomInt()}`,
   },
   contactInformation: {

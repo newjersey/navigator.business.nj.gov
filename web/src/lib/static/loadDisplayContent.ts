@@ -206,7 +206,7 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const businessAddressLine2 = getMarkdown(loadFile("business-formation/business-address-line2.md"));
   const businessAddressState = getMarkdown(loadFile("business-formation/business-address-state.md"));
   const businessAddressZipCode = getMarkdown(loadFile("business-formation/business-address-zip-code.md"));
-  const paymentType = getMarkdown(loadFile("business-formation/payment-type.md"));
+  const services = getMarkdown(loadFile("business-formation/services.md"));
   const disclaimer = getMarkdown(loadFile("business-formation/disclaimer.md"));
   const officialFormationDocument = getMarkdown(loadFile("business-formation/doc-official-formation.md"));
   const certificateOfStanding = getMarkdown(loadFile("business-formation/doc-certificate-of-standing.md"));
@@ -373,9 +373,8 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
         contentMd: additionalSigners.content,
         ...(additionalSigners.grayMatter as FieldGrayMatter),
       },
-      paymentType: {
-        contentMd: paymentType.content,
-        ...(paymentType.grayMatter as FieldGrayMatter),
+      services: {
+        contentMd: services.content,
       },
       disclaimer: {
         contentMd: disclaimer.content,
@@ -439,7 +438,7 @@ type FieldGrayMatter = {
 };
 
 type DocumentFieldGrayMatter = {
-  cost: string;
+  cost: number;
   optionalLabel: string;
 };
 

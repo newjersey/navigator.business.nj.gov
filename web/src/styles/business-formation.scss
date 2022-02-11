@@ -1,31 +1,91 @@
-.business-formation-documents thead tr th:nth-child(1) {
-  width: 4rem;
+table.business-formation-table {
+  border: 0px solid #f0f0f0;
+
+  thead {
+    tr {
+      th:nth-child(3) {
+        text-align: right;
+        padding-right: 1em;
+        width: 6rem;
+      }
+      th:nth-child(1) {
+        width: 4rem;
+        padding-left: 1em;
+        text-align: left;
+        white-space: nowrap;
+      }
+      th {
+        height: 1rem;
+        border: 0px;
+        border-bottom: 1px solid $base-light;
+      }
+    }
+  }
+
+  tbody {
+    border: 1px solid #f0f0f0;
+
+    tr {
+      td:nth-child(3) {
+        text-align: right;
+      }
+      td:nth-child(2) {
+        padding-left: 0;
+      }
+      td {
+        width: 4rem !important;
+        height: 1rem;
+        border: 0px;
+      }
+    }
+  }
+
+  tfoot tr {
+    border: 1px solid #f0f0f0;
+    background: #ecf3ec;
+    td {
+      height: 1rem;
+      border: 0px;
+    }
+  }
+  .business-formation-table-checkboxes {
+    span {
+      padding: 0;
+    }
+  }
 }
 
-.business-formation-documents thead tr th:nth-child(3) {
-  width: 10rem;
+table.business-formation-document {
+  tbody {
+    tr:nth-child(2) {
+      background: #f7f7f7;
+    }
+  }
 }
+table.business-formation-payment {
+  thead {
+    border-top: 1px solid $base-light;
+    border-left: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    tr:nth-child(1) th {
+      padding-top: 1em;
+    }
+    tr:nth-child(2) th {
+      padding-bottom: 0.5em;
+    }
+    th {
+      padding-left: 1em;
+      padding-right: 1em;
 
-.business-formation-documents thead tr th {
-  height: 1rem;
-  border: 2px solid $base-light;
+      border-bottom: 0px !important;
+    }
+  }
+  tbody {
+    tr:nth-child(1) {
+      background: #f7f7f7;
+    }
+  }
 }
-
-.business-formation-documents tbody tr td {
-  height: 1rem;
-  border: 2px solid $base-light;
-}
-
-.business-formation-documents tfoot tr td {
-  height: 1rem;
-  border: 2px solid $base-light;
-}
-
-.business-formation-documents-table-checkboxes {
-  margin-top: -9px;
-  margin-left: -5px;
-}
-
 .task-submit-button-background {
   margin: 0px -24px -24px -24px;
 }

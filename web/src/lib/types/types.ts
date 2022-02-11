@@ -122,7 +122,9 @@ export type FormationDisplayContent = {
   };
   signer: TextFieldContent;
   additionalSigners: TextFieldContent;
-  paymentType: TextFieldContent;
+  services: {
+    contentMd: string;
+  };
   disclaimer: {
     contentMd: string;
   };
@@ -137,16 +139,16 @@ export type FormationDisplayContent = {
   };
   officialFormationDocument: {
     contentMd: string;
-    cost: string;
+    cost: number;
   };
   certificateOfStanding: {
     contentMd: string;
-    cost: string;
+    cost: number;
     optionalLabel: string;
   };
   certifiedCopyOfFormationDocument: {
     contentMd: string;
-    cost: string;
+    cost: number;
     optionalLabel: string;
   };
   contactInformation: { contentMd: string };
@@ -283,9 +285,8 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     contentMd: "",
     placeholder: "",
   },
-  paymentType: {
+  services: {
     contentMd: "",
-    placeholder: "",
   },
   disclaimer: {
     contentMd: "",
@@ -301,16 +302,16 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   },
   officialFormationDocument: {
     contentMd: "",
-    cost: "",
+    cost: 0,
   },
   certificateOfStanding: {
     contentMd: "",
-    cost: "",
+    cost: 0,
     optionalLabel: "",
   },
   certifiedCopyOfFormationDocument: {
     contentMd: "",
-    cost: "",
+    cost: 0,
     optionalLabel: "",
   },
   contactInformation: {

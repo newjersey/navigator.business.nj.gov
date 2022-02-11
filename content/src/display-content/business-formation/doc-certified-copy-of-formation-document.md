@@ -1,6 +1,5 @@
 ---
-optionalLabel: "(Optional)"
-cost: "$25.00"
+cost: 50
 ---
 
-`Certified Copy of Formation Doc|certified-copy-of-formation-doc`
+`Certified Copy of Formation Doc|certified-copy-of-formation-doc` (Optional)

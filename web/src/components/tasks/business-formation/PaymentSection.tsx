@@ -16,7 +16,7 @@ import { BusinessFormationNotifications } from "./BusinessFormationNotifications
 import { ContactFirstName } from "./ContactFirstName";
 import { ContactLastName } from "./ContactLastName";
 import { ContactPhoneNumber } from "./ContactPhoneNumber";
-import { PaymentTypeDropdown } from "./PaymentTypeDropdown";
+import { PaymentTypeTable } from "./PaymentTypeTable";
 
 export const PaymentSection = (): ReactElement => {
   const { state, setErrorMap, setTab, setShowResponseAlert } = useContext(FormationContext);
@@ -98,8 +98,8 @@ export const PaymentSection = (): ReactElement => {
           <ContactPhoneNumber />
         </div>
       </div>
-      <PaymentTypeDropdown />
       <BusinessFormationDocuments />
+      <PaymentTypeTable />
       <BusinessFormationNotifications />
       <Content>{state.displayContent.disclaimer.contentMd}</Content>
       <BusinessFormationFieldAlert

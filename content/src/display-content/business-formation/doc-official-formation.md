@@ -1,5 +1,5 @@
 ---
-cost: "$125.00"
+cost: 125
 ---
 
 `Official Formation Documentation|official-formation-documentation`
