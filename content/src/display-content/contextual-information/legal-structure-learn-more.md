@@ -1,12 +1,12 @@
 ### Legal Structures
 
-Your business' legal structure (also known as business structure) defines your taxes, personal liability, partnerships and registration requirements. Below is a list of common legal structures, it is not an exhaustive list and it does not serve as legal or tax advice.
+Your business' legal structure (also known as business structure) defines your taxes, personal liability, partnerships, and registration requirements. Below is a list of common legal structures, it is not an exhaustive list and it does not serve as legal or tax advice.
 
 Some types of legal structures are easier to set up than others. For instance, forming a sole proprietorship does not require you to file any formation documents (although a tax registration is still required), while for entities such as corporations and Limited Liability Companies, you will need to formally incorporate your company with the State. Click the links for more information about the advantages and drawbacks of each business structure.
 
 **[Limited Liability Company](https://business.nj.gov/pages/limited-liability-company-llc)**
 
-An Limited Liability Company (LLC) is a hybrid between a corporation and a partnership. Similar to a C-Corporation, business owners in an LLC are not responsible for the debt of the company. In other words, they have limited liability. However, unlike a corporation, the business does not file separate taxes. Instead, each partner (called members) includes their profits on their personal tax return.
+A Limited Liability Company (LLC) is a hybrid between a corporation and a partnership. Similar to a C Corporation, business owners in an LLC are not responsible for the debt of the company. In other words, they have limited liability. However, unlike a corporation, the business does not file separate taxes. Instead, each partner (called members) includes their profits on their personal tax return.
 
 **[Sole Proprietorship](https://business.nj.gov/pages/sole-proprietorship)**
 
@@ -16,9 +16,9 @@ A sole proprietorship is the most basic type of business to establish. You alone
 
 In a general partnership, two or more people share ownership of a single business. The partners manage the business and are responsible for all debts and obligations of the business. The details of this agreement should be written out formally to define the roles of each partner, including what would happen if the business fails.‍
 
-**[C-Corporation](https://business.nj.gov/pages/c-corporation-c-corp)**
+**[C Corporation](https://business.nj.gov/pages/c-corporation-c-corp)**
 
-A (C-Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. It is a separate entity from those who own it, meaning it can be taxed (or sued) independently from its owners. In a C-Corp, the owners are called shareholders. They elect a board of directors to oversee major policies and decisions, and appoint officers who carry out the daily operations of the business.‍
+A C Corporation (C Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. It is a separate entity from those who own it, meaning it can be taxed (or sued) independently from its owners. In a C Corp, the owners are called shareholders. They elect a board of directors to oversee major policies and decisions, and appoint officers who carry out the daily operations of the business.‍
 
 **[C Corp with an S Corp designation](https://business.nj.gov/pages/s-corporation-s-corp)**
 
