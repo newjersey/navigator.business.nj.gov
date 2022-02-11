@@ -729,4 +729,4 @@ export type SelfRegRequest = {
   userTesting: boolean;
 };
 
-export type businessFormationTabsNames = "Main Business" | "Contacts" | "Review" | "Payment";
+export type businessFormationTabsNames = "Business" | "Contacts" | "Review" | "Billing";

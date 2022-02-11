@@ -50,21 +50,21 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
   };
 
   return (
-    <div
-      className={`usa-step-indicator usa-step-indicator--counters${sm} usa-step-indicator__segments vertical`}
-    >
-      <div className="visually-hidden-centered">
-        {props.completed ? `Completed step ${props.stepNumber}` : `Step ${props.stepNumber}`}
+    <div className="vertical-step-indicator">
+      <div className={`usa-step-indicator usa-step-indicator--counters${sm} usa-step-indicator__segments`}>
+        <div className="visually-hidden-centered">
+          {props.completed ? `Completed step ${props.stepNumber}` : `Step ${props.stepNumber}`}
+        </div>
+        <div
+          className={`usa-step-indicator__segment usa-step-indicator__segment--${
+            props.active ? "current" : "complete"
+          }`}
+          aria-hidden="true"
+          data-num={props.completed ? "✓" : props.stepNumber}
+        />
+        <span className="usa-step-indicator__segment-label" />
+        {getTrailingBar()}
       </div>
-      <div
-        className={` vertical usa-step-indicator__segment usa-step-indicator__segment--${
-          props.active ? "current" : "complete"
-        }`}
-        aria-hidden="true"
-        data-num={props.completed ? "✓" : props.stepNumber}
-      />
-      <span className="usa-step-indicator__segment-label" />
-      {getTrailingBar()}
     </div>
   );
 };
