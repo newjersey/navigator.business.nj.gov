@@ -1,7 +1,7 @@
 ---
 urlSlug: license-accounting
 filename: license-accounting
-name: Apply for an Certified Public Accounting License
+name: Apply for a Certified Public Accounting License
 id: license-accounting
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 callToActionText: Apply for My CPA License
