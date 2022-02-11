@@ -19,7 +19,7 @@ const OpportunitiesPreview = (props: Props) => {
   }, [ref]);
 
   const { body, ...data } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
-  const opportunity: Opportunity = { contentMd: body, ...data };
+  const opportunity: Opportunity = { contentMd: body ?? "", ...data };
 
   return (
     <div ref={ref} style={{ margin: 40, pointerEvents: "none" }}>

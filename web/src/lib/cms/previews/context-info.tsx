@@ -21,7 +21,7 @@ const ContextInfoPreview = (props: Props) => {
 
   return (
     <div ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <ContextInfoElement markdown={body} isVisible={true} />
+      <ContextInfoElement markdown={body ?? ""} isVisible={true} />
     </div>
   );
 };

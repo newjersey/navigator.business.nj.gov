@@ -19,7 +19,7 @@ const TaskPreview = (props: Props) => {
   }, [ref]);
 
   const { body, ...data } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
-  const task: Task = { contentMd: body, ...data };
+  const task: Task = { contentMd: body ?? "", ...data };
 
   return (
     <div ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
