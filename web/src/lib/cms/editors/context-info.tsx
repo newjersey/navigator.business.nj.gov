@@ -68,9 +68,9 @@ export default {
     postContext: string;
     postFormat: string;
   }) =>
-    `${obj.preFormat}${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${obj.contextId}\` ${(
-      obj.postContext || ""
-    ).trim()}${obj.postFormat}`,
+    `${obj.preFormat || ""}${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
+      obj.contextId || ""
+    }\` ${(obj.postContext || "").trim()}${obj.postFormat || ""}`,
 
   toPreview: () => `<div></div>`,
 };
