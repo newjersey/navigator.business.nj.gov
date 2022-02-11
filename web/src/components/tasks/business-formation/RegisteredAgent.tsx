@@ -35,7 +35,7 @@ export const RegisteredAgent = (): ReactElement => {
   return (
     <>
       <Content>{state.displayContent.agentNumberOrManual.contentMd}</Content>
-      <div className="form-input margin-bottom-2" id="registeredAgent">
+      <div className="form-input margin-bottom-2 margin-top-105" id="registeredAgent">
         <FormControl fullWidth>
           <RadioGroup
             aria-label="Registered Agent"
@@ -45,7 +45,6 @@ export const RegisteredAgent = (): ReactElement => {
             row
           >
             <FormControlLabel
-              style={{ marginRight: "3rem" }}
               labelPlacement="end"
               data-testid="registered-agent-number"
               value="NUMBER"
@@ -53,7 +52,6 @@ export const RegisteredAgent = (): ReactElement => {
               label={state.displayContent.agentNumberOrManual.radioButtonNumberText}
             />
             <FormControlLabel
-              style={{ marginRight: "3rem" }}
               labelPlacement="end"
               data-testid="registered-agent-manual"
               value="MANUAL_ENTRY"
@@ -63,7 +61,7 @@ export const RegisteredAgent = (): ReactElement => {
           </RadioGroup>
         </FormControl>
 
-        <div className="margin-top-2">
+        <div className="margin-top-3">
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
               <BusinessFormationTextField
