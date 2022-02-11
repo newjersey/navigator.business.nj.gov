@@ -45,7 +45,8 @@
     "TANF",
     "tanf",
     "Dougle",
-    "DVOB"
+    "DVOB",
+    "epcd"
   ],
   "ignorePaths": ["node_modules/**", "out/**"]
 }
