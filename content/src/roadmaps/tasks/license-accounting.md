@@ -10,10 +10,10 @@ You or any staff providing accounting services must be licensed as a certified p
 
 To apply for an accounting license you will need:
 
-* At least 150 credit hours (within or beyond a degree program)
-* One year of public accounting experience
+* At least 150 credit hours (24 semester credits in Accounting courses, and 24 semester credits in Business courses)
+* One year of full-time public accounting experience under the supervision of an active CPA
 * Passing scores on the `Uniform CPA Exam|uniform-cpa-exam`
 
 After you complete this task, you will have:
 
-* A confirmation letter (sent via postal mail) with your certified public accountant license number
+* A copy of your license (sent via postal mail) with your certified public accountant license number
