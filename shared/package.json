@@ -27,7 +27,7 @@
     "@businessnjgovnavigator/content": "*"
   },
   "devDependencies": {
-    "@babel/runtime": "7.17.0",
+    "@babel/runtime": "7.17.2",
     "@jest/types": "27.5.1",
     "@types/jest": "27.4.0",
     "@types/node": "14.18.10",
