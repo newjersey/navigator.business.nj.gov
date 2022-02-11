@@ -6,11 +6,11 @@ id: test
 ---
 this is a test
 
-\---
+---
 
-\>this is a box\
->that continues on\
-\
+>this is a box
+>that continues on
+
 ## and this is a header
 
-\>and this is another box
+>and this is another box
