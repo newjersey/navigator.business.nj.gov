@@ -65,6 +65,10 @@
     {
       "matchPackagePrefixes": ["@swc"],
       "groupName": "swc"
+    },
+    {
+      "matchPackagePrefixes": ["@mui"],
+      "groupName": "material-ui"
     }
   ]
 }
