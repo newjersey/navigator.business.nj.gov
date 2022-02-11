@@ -8,12 +8,12 @@ import { ReviewSection } from "./ReviewSection";
 export const businessFormationTabs: { component: ReactElement; section: businessFormationTabsNames }[] = [
   {
     component: <BusinessSection />,
-    section: "Main Business",
+    section: "Business",
   },
   {
     component: <ContactsSection />,
     section: "Contacts",
   },
   { component: <ReviewSection />, section: "Review" },
-  { component: <PaymentSection />, section: "Payment" },
+  { component: <PaymentSection />, section: "Billing" },
 ];

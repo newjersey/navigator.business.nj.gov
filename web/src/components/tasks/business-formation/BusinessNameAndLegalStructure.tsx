@@ -44,7 +44,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
             <Button
               style="tertiary"
               onClick={() => {
-                setTab(businessFormationTabs.findIndex((obj) => obj.section === "Main Business"));
+                setTab(businessFormationTabs.findIndex((obj) => obj.section === "Business"));
                 scrollToTop();
               }}
               underline

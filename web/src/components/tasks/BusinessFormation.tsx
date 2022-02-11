@@ -19,6 +19,7 @@ import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovn
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useEffect, useState } from "react";
+import { HorizontalStepper } from "../njwds-extended/HorizontalStepper";
 import { TaskCTA } from "../TaskCTA";
 import { businessFormationTabs } from "./business-formation/businessFormationTabs";
 
@@ -84,6 +85,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   const getDate = (date?: string): string =>
     !date || dayjs(date, "YYYY-MM-DD").isBefore(dayjs()) ? dayjs().format("YYYY-MM-DD") : date;
+  const stepNames = businessFormationTabs.map((value) => value.section);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -157,6 +159,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
               dataTestid="dependency-alert"
             />
           )}
+        </div>
+        <HorizontalStepper arrayOfSteps={stepNames} currentStep={tab} />
+        <div className="display-block">
+          <hr className="margin-bottom-2" />
         </div>
         <div data-testid="formation-form" className="fg1 flex flex-column space-between">
           {businessFormationTabs[tab].component}

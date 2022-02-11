@@ -48,7 +48,7 @@ export const ReviewSection = (): ReactElement => {
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(businessFormationTabs.findIndex((obj) => obj.section === "Main Business"));
+              setTab(businessFormationTabs.findIndex((obj) => obj.section === "Business"));
               scrollToTop();
             }}
             underline
@@ -88,7 +88,7 @@ export const ReviewSection = (): ReactElement => {
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(businessFormationTabs.findIndex((obj) => obj.section === "Main Business"));
+              setTab(businessFormationTabs.findIndex((obj) => obj.section === "Business"));
               scrollToTop();
             }}
             underline
