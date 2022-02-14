@@ -148,11 +148,6 @@
     background-color: $info-darker !important;
   }
 
-  .usa-step-indicator__segment--complete:before,
-  .usa-step-indicator__segment--current:before {
-    content: attr(data-num) !important;
-  }
-
   @media all and (min-width: $sm) {
     .usa-step-indicator__segment:before {
       left: calc(50% - 12px) !important;
@@ -173,6 +168,11 @@
       display: block;
       right: 50%;
       width: auto;
+    }
+
+    .usa-step-indicator__segment--complete:before,
+    .usa-step-indicator__segment--current:before {
+      content: attr(data-num) !important;
     }
   }
 }
