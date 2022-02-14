@@ -564,6 +564,7 @@ export type Certification = {
   callToActionText: string;
   contentMd: string;
   agency: OpportunityAgency[];
+  applicableOwnershipTypes: string[];
 };
 
 export type OpportunityAgency = "NJEDA" | "NJDOL";

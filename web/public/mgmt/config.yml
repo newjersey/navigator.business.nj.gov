@@ -435,6 +435,15 @@ collections:
         multiple: true
         options: [ "NJEDA", "NJDOL" ]
         required: false
+      - label: "Applicable Ownership Types"
+        name: applicableOwnershipTypes
+        widget: relation
+        multiple: true
+        required: false
+        collection: "dashboard-settings"
+        search_fields: [ "arrayOfOwnershipTypes.*.name" ]
+        value_field: "arrayOfOwnershipTypes.*.id"
+        display_fields: [ "arrayOfOwnershipTypes.*.name" ]
 
   - name: "archived-certification-opportunities"
     label: "Archived Certification Opportunities Content"
@@ -459,6 +468,15 @@ collections:
         multiple: true
         options: [ "NJEDA", "NJDOL" ]
         required: false
+      - label: "Applicable Ownership Types"
+        name: applicableOwnershipTypes
+        widget: relation
+        multiple: true
+        required: false
+        collection: "dashboard-settings"
+        search_fields: [ "arrayOfOwnershipTypes.*.name" ]
+        value_field: "arrayOfOwnershipTypes.*.id"
+        display_fields: [ "arrayOfOwnershipTypes.*.name" ]
 
   - name: "contextual-information"
     label: "Contextual Information"
@@ -606,6 +624,21 @@ collections:
         fields:
           - label: Sectors
             name: arrayOfSectors
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Ownership Types"
+        name: "arrayOfOwnershipTypes"
+        file: "content/src/dashboard/ownershipTypes.json"
+        fields:
+          - label: Ownership Types
+            name: arrayOfOwnershipTypes
             widget: list
             summary: "{{name}}"
             fields:

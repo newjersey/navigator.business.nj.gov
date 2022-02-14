@@ -21,6 +21,7 @@ import {
 import { getSectionNames } from "@/lib/utils/helpers";
 import {
   AllBusinessSuffixes,
+  arrayOfOwnershipTypes as ownershipTypes,
   arrayOfSectors as sectors,
   arrayOfStateObjects as states,
   BusinessSuffix,
@@ -41,6 +42,7 @@ import {
   Municipality,
   MunicipalityDetail,
   NameAndAddress,
+  OwnershipType,
   Preferences,
   ProfileData,
   SectorType,
@@ -263,22 +265,6 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     lastCheckedStatus: dayjs().toISOString(),
     ...overrides,
   };
-};
-
-export const randomLegalStructure = (): LegalStructure => {
-  const randomIndex = Math.floor(Math.random() * LegalStructures.length);
-  return LegalStructures[randomIndex];
-};
-
-export const randomSector = (): SectorType => {
-  const randomIndex = Math.floor(Math.random() * sectors.length);
-  return sectors[randomIndex];
-};
-
-export const randomIndustry = (isMobileLocation = false): Industry => {
-  const filteredIndustries = Industries.filter((x: Industry) => x.isMobileLocation === isMobileLocation);
-  const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
-  return filteredIndustries[randomIndex];
 };
 
 export const generateFormationDisplayContent = (
@@ -590,6 +576,7 @@ export const generateCertification = (overrides: Partial<Certification>): Certif
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
     agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
+    applicableOwnershipTypes: [randomOwnershipType().id],
     ...overrides,
   };
 };
@@ -648,4 +635,25 @@ export const randomFundingHomeBased = (): FundingHomeBased => {
 export const randomCounty = (): County => {
   const randomIndex = Math.floor(Math.random() * AllCounties.length);
   return AllCounties[randomIndex] as County;
+};
+
+export const randomLegalStructure = (): LegalStructure => {
+  const randomIndex = Math.floor(Math.random() * LegalStructures.length);
+  return LegalStructures[randomIndex];
+};
+
+export const randomSector = (): SectorType => {
+  const randomIndex = Math.floor(Math.random() * sectors.length);
+  return sectors[randomIndex];
+};
+
+export const randomOwnershipType = (): OwnershipType => {
+  const randomIndex = Math.floor(Math.random() * ownershipTypes.length);
+  return ownershipTypes[randomIndex];
+};
+
+export const randomIndustry = (isMobileLocation = false): Industry => {
+  const filteredIndustries = Industries.filter((x: Industry) => x.isMobileLocation === isMobileLocation);
+  const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
+  return filteredIndustries[randomIndex];
 };

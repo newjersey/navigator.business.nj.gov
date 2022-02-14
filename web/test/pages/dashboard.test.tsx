@@ -93,16 +93,22 @@ describe("dashboard", () => {
     expect(subject.getByText("Annual Report")).toBeInTheDocument();
   });
 
-  it("displays certifications", () => {
+  it("displays certifications filtered from user data", () => {
+    useMockProfileData({
+      ownershipTypeIds: ["disabled-veteran"],
+    });
+
     const certifications = [
-      generateCertification({ name: "Cert 1" }),
-      generateCertification({ name: "Cert 2" }),
+      generateCertification({ name: "Cert 1", applicableOwnershipTypes: ["disabled-veteran"] }),
+      generateCertification({ name: "Cert 2", applicableOwnershipTypes: [] }),
+      generateCertification({ name: "Cert 3", applicableOwnershipTypes: ["minority-owned"] }),
     ];
 
     const subject = renderPage({ certifications });
 
     expect(subject.getByText("Cert 1")).toBeInTheDocument();
     expect(subject.getByText("Cert 2")).toBeInTheDocument();
+    expect(subject.queryByText("Cert 3")).not.toBeInTheDocument();
   });
 
   it("displays fundings filtered from user data", () => {
@@ -188,6 +194,7 @@ describe("dashboard", () => {
       municipality: undefined,
       existingEmployees: "1",
       sectorId: undefined,
+      ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
     });
   };
 });
