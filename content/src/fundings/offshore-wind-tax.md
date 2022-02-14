@@ -11,7 +11,7 @@ agency:
   - NJEDA
 publishStageArchive: ""
 openDate: ""
-dueDate: 2025-07-01T04:00:00.000Z
+dueDate: 07/01/2025
 status: first-come, first-served
 programFrequency: ongoing
 businessStage: operating
