@@ -1,10 +1,6 @@
 {
-  "id": "marketing-consultant",
-  "name": "Marketing Consulting",
-  "description": "Expert advice to improve the client’s business exposure",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
   "canBeReseller": false,
   "roadmapSteps": [
     {
@@ -32,5 +28,10 @@
       "weight": 10,
       "task": "search-licenses"
     }
-  ]
+  ],
+  "name": "Marketing Consulting",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "marketing, advertising, consultant",
+  "id": "marketing-consultant",
+  "description": "Expert advice to improve the client’s business exposure"
 }
