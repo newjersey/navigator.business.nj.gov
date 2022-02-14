@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds/Alert";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskHeader } from "@/components/TaskHeader";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -100,7 +100,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
   const showErrorAlert = (): ReactElement => {
     if (!error || error === "BAD_INPUT") return <></>;
     return (
-      <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
+      <Alert dataTestid={`error-alert-${error}`} variant="error">
         {SearchBusinessNameErrorLookup[error]}
       </Alert>
     );
@@ -128,18 +128,20 @@ export const SearchBusinessName = (props: Props): ReactElement => {
             <span className="text-underline">{SearchBusinessNamesDefaults.updateButtonText}</span>
           </button>
         )}
-        <Alert variant="info" slim className="margin-bottom-4">
-          <Content>{SearchBusinessNamesDefaults.officialCheckText}</Content>
-          <a
-            href={SearchBusinessNamesDefaults.officialCheckButtonLink}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            <button data-testid="official-check" className="usa-button usa-button--secondary margin-top-2">
-              {SearchBusinessNamesDefaults.officialCheckButtonText}
-            </button>
-          </a>
-        </Alert>
+        <div className="margin-bottom-2">
+          <Alert variant="info">
+            <Content>{SearchBusinessNamesDefaults.officialCheckText}</Content>
+            <a
+              href={SearchBusinessNamesDefaults.officialCheckButtonLink}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <button data-testid="official-check" className="usa-button usa-button--secondary margin-top-2">
+                {SearchBusinessNamesDefaults.officialCheckButtonText}
+              </button>
+            </a>
+          </Alert>
+        </div>
       </div>
     );
   };

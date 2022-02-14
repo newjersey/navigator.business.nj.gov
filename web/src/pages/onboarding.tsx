@@ -1,5 +1,5 @@
+import { Alert } from "@/components/njwds-extended/Alert";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
-import { Alert } from "@/components/njwds/Alert";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
@@ -302,7 +302,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             {header()}
             {!isLargeScreen && <hr />}
             {error && (
-              <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
+              <Alert dataTestid={`error-alert-${error}`} variant="error">
                 {OnboardingErrorLookup[error]}
               </Alert>
             )}

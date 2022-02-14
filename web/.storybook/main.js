@@ -7,7 +7,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/preset-scss",
     "storybook-addon-designs",
-    "storybook-addon-outline",
     "@storybook/addon-a11y",
   ],
   core: {

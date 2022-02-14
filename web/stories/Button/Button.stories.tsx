@@ -1,10 +1,10 @@
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 import { Button } from "../../src/components/njwds-extended/Button";
 
 export default {
-  title: "Components/Button/Tertiary",
+  title: "Components/Button",
   component: Button,
   decorators: [withDesign],
   parameters: {
@@ -16,28 +16,29 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = ({ children, ...args }) => (
-  <Button {...args}>{children}</Button>
+  <div className="bg-base-lightest width-mobile height-mobile flex flex-align-center flex-justify-center">
+    <Button {...args}>{children}</Button>
+  </div>
 );
 
-export const Tertiary = Template.bind({});
+export const Standard = Template.bind({});
 
-Tertiary.args = {
-  style: "tertiary",
+Standard.args = {
+  style: "primary",
   children: "button",
 };
 
-export const TertiaryBold = Template.bind({});
+export const NoMargins = Template.bind({});
 
-TertiaryBold.args = {
-  style: "tertiary",
+NoMargins.args = {
+  style: "primary",
   children: "button",
-  textBold: true,
+  noRightMargin: true,
 };
 
-export const TertiaryUnderline = Template.bind({});
+export const MatchesInputFieldHeight = Template.bind({});
 
-TertiaryUnderline.args = {
-  style: "tertiary",
+MatchesInputFieldHeight.args = {
+  style: "primary-input-field-height",
   children: "button",
-  underline: true,
 };

@@ -1,4 +1,4 @@
-import { Alert, AlertVariant } from "@/components/njwds/Alert";
+import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
 import { Paper, Snackbar } from "@mui/material";
 import React, { ReactElement, ReactNode } from "react";
 
@@ -21,7 +21,7 @@ export const ToastAlert = (props: Props): ReactElement => (
   >
     <div>
       <Paper>
-        <Alert heading={props.heading} variant={props.variant} slim rounded className="margin-y-2">
+        <Alert heading={props.heading} variant={props.variant} rounded>
           {props.children}
         </Alert>
       </Paper>

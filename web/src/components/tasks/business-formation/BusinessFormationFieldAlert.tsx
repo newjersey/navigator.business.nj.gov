@@ -1,4 +1,4 @@
-import { Alert } from "@/components/njwds/Alert";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared";
