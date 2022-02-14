@@ -11,7 +11,7 @@ agency:
   - NJEDA
 publishStageArchive: ""
 openDate: ""
-dueDate: 2022-11-02T03:30:00.000Z
+dueDate: 11/02/2022
 status: deadline
 programFrequency: reoccuring
 businessStage: early-stage

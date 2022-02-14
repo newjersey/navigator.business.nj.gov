@@ -11,8 +11,8 @@ fundingType: tax credit
 agency:
   - NJEDA
 publishStageArchive: ""
-openDate: 2022-05-01T13:00:00.000Z
-dueDate: 2022-07-01T03:30:00.000Z
+openDate: 05/01/2022
+dueDate: 07/01/2022
 status: deadline
 programFrequency: reoccuring
 businessStage: early-stage
