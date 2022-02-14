@@ -1,10 +1,6 @@
 {
-  "id": "pr-consultant",
-  "name": "PR Consulting",
-  "description": "Offers services that communicate the mission and image of a business to the public",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
   "canBeReseller": false,
   "roadmapSteps": [
     {
@@ -32,5 +28,10 @@
       "weight": 10,
       "task": "search-licenses"
     }
-  ]
+  ],
+  "name": "PR Consulting",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "Image management, consultant, advertising, communications, media",
+  "id": "pr-consultant",
+  "description": "Offers services that communicate the mission and image of a business to the public"
 }
