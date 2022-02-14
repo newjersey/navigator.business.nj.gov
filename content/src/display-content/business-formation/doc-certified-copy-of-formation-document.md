@@ -1,5 +1,4 @@
 ---
 cost: 50
 ---
-
-`Certified Copy of Formation Doc|certified-copy-of-formation-doc` (Optional)
+ `Certified Copy of Formation Document|certified-copy-of-formation-doc` (Optional)
