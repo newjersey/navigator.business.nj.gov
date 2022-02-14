@@ -21,7 +21,7 @@ export interface GenericTextFieldProps {
     maxLength: number;
     minLength?: number;
   };
-  formInputWide: boolean;
+  formInputWide?: boolean;
 }
 
 export const GenericTextField = (props: GenericTextFieldProps): ReactElement => {
