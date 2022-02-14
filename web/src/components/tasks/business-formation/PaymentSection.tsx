@@ -98,10 +98,14 @@ export const PaymentSection = (): ReactElement => {
           <ContactPhoneNumber />
         </div>
       </div>
+      <hr className="margin-bottom-2" />
+      <Content>{state.displayContent.services.contentMd}</Content>
       <BusinessFormationDocuments />
       <PaymentTypeTable />
       <BusinessFormationNotifications />
-      <Content>{state.displayContent.disclaimer.contentMd}</Content>
+      <div className="margin-top-3">
+        <Content>{state.displayContent.disclaimer.contentMd}</Content>
+      </div>
       <BusinessFormationFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
         requiredFieldsWithError={requiredFieldsWithError}
