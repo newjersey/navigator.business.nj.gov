@@ -1,7 +1,6 @@
 ---
-placeholder: "Address Line 1"
+placeholder: Address Line 1
 ---
-
-## Main Business Address
+## Business Address
 
 **Address Line 1**
