@@ -1,4 +1,4 @@
-import { Alert } from "@/components/njwds/Alert";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { postSelfReg } from "@/lib/api-client/apiClient";
@@ -97,7 +97,7 @@ export const Signup = (props: Props): ReactElement => {
   const showAlert = (): ReactElement => {
     if (error) {
       return (
-        <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
+        <Alert dataTestid={`error-alert-${error}`} variant="error">
           {SelfRegErrorLookup[error]}
         </Alert>
       );

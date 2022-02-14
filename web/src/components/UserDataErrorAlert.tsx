@@ -1,4 +1,4 @@
-import { Alert } from "@/components/njwds/Alert";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { SitewideErrorDefaults } from "@/display-defaults/SitewideErrorDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { UserDataError } from "@/lib/types/types";
@@ -14,7 +14,7 @@ export const UserDataErrorAlert = (): ReactElement => {
   const { error } = useUserData();
 
   return error ? (
-    <Alert data-testid={`error-alert-${error}`} slim variant="error" className="margin-y-2">
+    <Alert dataTestid={`error-alert-${error}`} variant="error">
       {UserDataErrorLookup[error]}
     </Alert>
   ) : (

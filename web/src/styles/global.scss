@@ -140,10 +140,6 @@ hr {
   min-height: calc(100vh - 15.625rem);
 }
 
-.no-margin-top {
-  margin-top: 0rem !important;
-}
-
 .usa-nav-container.scrolled {
   position: fixed;
   top: 0;
@@ -277,10 +273,6 @@ td {
 
 .text-align-right {
   text-align: right;
-}
-
-.usa-alert--slim:before {
-  margin-top: 0.5rem;
 }
 
 .dashboard-opportunities-list {

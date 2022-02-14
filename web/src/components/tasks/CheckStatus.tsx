@@ -1,4 +1,4 @@
-import { Alert } from "@/components/njwds/Alert";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";
@@ -74,12 +74,7 @@ export const CheckStatus = (props: Props): ReactElement => {
   const getErrorAlert = (): ReactElement => {
     if (!props.error) return <></>;
     return (
-      <Alert
-        data-testid={`error-alert-${props.error}`}
-        slim
-        variant="error"
-        className="margin-y-2 no-margin-top"
-      >
+      <Alert dataTestid={`error-alert-${props.error}`} variant="error">
         {LicenseSearchErrorLookup[props.error]}
       </Alert>
     );
