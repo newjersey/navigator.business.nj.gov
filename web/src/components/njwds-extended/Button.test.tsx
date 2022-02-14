@@ -97,4 +97,12 @@ describe("Button", () => {
     ).baseElement;
     expect(subject).toMatchSnapshot();
   });
+  it("with heightAutoOnMobile button displays correctly", () => {
+    const subject = render(
+      <Button heightAutoOnMobile style="primary">
+        Test Button
+      </Button>
+    ).baseElement;
+    expect(subject).toMatchSnapshot();
+  });
 });

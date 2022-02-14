@@ -175,6 +175,21 @@ exports[`Button with dataTestid displays correctly 1`] = `
 </body>
 `;
 
+exports[`Button with heightAutoOnMobile button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button height-auto margin-right-2 "
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
 exports[`Button with noRightMargin button displays correctly 1`] = `
 <body>
   <div>

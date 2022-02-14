@@ -19,6 +19,7 @@ interface Props {
   textBold?: boolean;
   loading?: boolean;
   widthAutoOnMobile?: boolean;
+  heightAutoOnMobile?: boolean;
 }
 
 export const Button = (props: Props): ReactElement => {
@@ -65,7 +66,7 @@ export const Button = (props: Props): ReactElement => {
 
   return (
     <button
-      className={`${style} ${btnHeight}${
+      className={`${style} ${props.heightAutoOnMobile ? "height-auto" : btnHeight}${
         props.noRightMargin && props.style !== "tertiary" ? " margin-right-0" : ""
       }${!props.noRightMargin && props.style !== "tertiary" ? " margin-right-2" : ""}${
         props.style === "tertiary" ? " margin-right-0" : ""

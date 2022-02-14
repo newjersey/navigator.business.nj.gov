@@ -21,36 +21,34 @@ export const BusinessFormationNotifications = (): ReactElement => {
   };
 
   return (
-    <div>
-      <div className="margin-y-2">
-        <Content>{state.displayContent.notification.contentMd}</Content>{" "}
-        <FormGroup>
-          <FormControlLabel
-            style={{ display: "table" }}
-            control={
-              <div style={{ display: "table-cell", width: "42px" }}>
-                <Checkbox
-                  onChange={handleAnnualReportClick}
-                  checked={state.formationFormData.annualReportNotification}
-                />
-              </div>
-            }
-            label={<Content>{state.displayContent.optInAnnualReport.contentMd}</Content>}
-          />
-          <FormControlLabel
-            style={{ display: "table" }}
-            control={
-              <div style={{ display: "table-cell", width: "42px" }}>
-                <Checkbox
-                  onChange={handleCorpWatchClick}
-                  checked={state.formationFormData.corpWatchNotification}
-                />
-              </div>
-            }
-            label={<Content>{state.displayContent.optInCorpWatch.contentMd}</Content>}
-          />
-        </FormGroup>
-      </div>
+    <div className="margin-top-3 margin-bottom-2">
+      <Content>{state.displayContent.notification.contentMd}</Content>{" "}
+      <FormGroup>
+        <FormControlLabel
+          style={{ display: "table" }}
+          control={
+            <div style={{ display: "table-cell", width: "42px" }}>
+              <Checkbox
+                onChange={handleAnnualReportClick}
+                checked={state.formationFormData.annualReportNotification}
+              />
+            </div>
+          }
+          label={<Content>{state.displayContent.optInAnnualReport.contentMd}</Content>}
+        />
+        <FormControlLabel
+          style={{ display: "table" }}
+          control={
+            <div style={{ display: "table-cell", width: "42px" }}>
+              <Checkbox
+                onChange={handleCorpWatchClick}
+                checked={state.formationFormData.corpWatchNotification}
+              />
+            </div>
+          }
+          label={<Content>{state.displayContent.optInCorpWatch.contentMd}</Content>}
+        />
+      </FormGroup>
     </div>
   );
 };
