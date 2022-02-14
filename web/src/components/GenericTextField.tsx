@@ -21,6 +21,7 @@ export interface GenericTextFieldProps {
     maxLength: number;
     minLength?: number;
   };
+  formInputWide: boolean;
 }
 
 export const GenericTextField = (props: GenericTextFieldProps): ReactElement => {
@@ -87,24 +88,26 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
   const value = visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? "";
 
   return (
-    <TextField
-      value={value ?? ""}
-      id={props.fieldName}
-      name={props.fieldName}
-      onChange={handleChange}
-      onBlur={onValidation}
-      error={props.error}
-      helperText={props.error ? props.validationText ?? " " : " "}
-      variant="outlined"
-      autoComplete={props.autoComplete}
-      placeholder={props.placeholder ?? ""}
-      disabled={props.disabled}
-      {...fieldOptions}
-      sx={{ width: 1, ...fieldOptions?.sx }}
-      inputProps={{
-        ...fieldOptions?.inputProps,
-        "aria-label": camelCaseToSentence(props.fieldName),
-      }}
-    />
+    <div className={`${props.formInputWide ? "form-input-wide" : "form-input"}`}>
+      <TextField
+        value={value ?? ""}
+        id={props.fieldName}
+        name={props.fieldName}
+        onChange={handleChange}
+        onBlur={onValidation}
+        error={props.error}
+        helperText={props.error ? props.validationText ?? " " : " "}
+        variant="outlined"
+        autoComplete={props.autoComplete}
+        placeholder={props.placeholder ?? ""}
+        disabled={props.disabled}
+        {...fieldOptions}
+        sx={{ width: 1, ...fieldOptions?.sx }}
+        inputProps={{
+          ...fieldOptions?.inputProps,
+          "aria-label": camelCaseToSentence(props.fieldName),
+        }}
+      />
+    </div>
   );
 };
