@@ -1,7 +1,11 @@
 import { Content } from "@/components/Content";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import { LookupOwnershipTypeById, OwnershipType, OwnershipTypes } from "@businessnjgovnavigator/shared";
+import {
+  arrayOfOwnershipTypes,
+  LookupOwnershipTypeById,
+  OwnershipType,
+} from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
@@ -47,7 +51,7 @@ export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElemen
               "data-testid": "ownership",
             }}
           >
-            {OwnershipTypes.map((ownership: OwnershipType) => (
+            {arrayOfOwnershipTypes.map((ownership: OwnershipType) => (
               <MenuItem key={ownership.id} value={ownership.id} data-testid={ownership.id}>
                 <Checkbox checked={state.profileData.ownershipTypeIds.indexOf(ownership.id) > -1} />
                 <ListItemText className="text-wrap" primary={ownership.name} />

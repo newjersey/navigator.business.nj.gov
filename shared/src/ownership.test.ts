@@ -1,10 +1,10 @@
-import { LookupOwnershipTypeById, OwnershipTypes } from "./ownership";
+import { arrayOfOwnershipTypes, LookupOwnershipTypeById } from "./ownership";
 
 describe("Ownership Tests", () => {
   it("has Ownership records", () => {
-    expect(OwnershipTypes.length).toBeGreaterThan(0);
+    expect(arrayOfOwnershipTypes.length).toBeGreaterThan(0);
   });
-  OwnershipTypes.forEach((i) => {
+  arrayOfOwnershipTypes.forEach((i) => {
     it(`${i.id} has an id`, () => {
       expect(i.id.length).toBeGreaterThan(0);
     });

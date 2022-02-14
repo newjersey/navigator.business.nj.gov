@@ -8,6 +8,7 @@ import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefault
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
 import { filterFundings } from "@/lib/domain-logic/filterFundings";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadDashboardDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -34,6 +35,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
 
   const filteredFundings = userData ? filterFundings(props.fundings, userData) : [];
+  const filteredCertifications = userData ? filterCertifications(props.certifications, userData) : [];
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -81,7 +83,7 @@ const DashboardPage = (props: Props): ReactElement => {
                   <h2>{DashboardDefaults.opportunitiesHeader}</h2>
                   <hr className="margin-bottom-3" aria-hidden={true} />
                   <div className="dashboard-opportunities-list">
-                    {props.certifications.map((cert) => (
+                    {filteredCertifications.map((cert) => (
                       <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
                     ))}
                     {filteredFundings.map((funding) => (

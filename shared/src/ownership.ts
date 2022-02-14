@@ -1,3 +1,4 @@
+import OwnershipTypeJSON from "../../content/src/dashboard/ownershipTypes.json";
 export interface OwnershipType {
   id: string;
   name: string;
@@ -5,28 +6,11 @@ export interface OwnershipType {
 
 export const LookupOwnershipTypeById = (id: string): OwnershipType => {
   return (
-    OwnershipTypes.find((x) => x.id === id) ?? {
+    arrayOfOwnershipTypes.find((x) => x.id === id) ?? {
       id: "",
       name: "",
     }
   );
 };
 
-export const OwnershipTypes: OwnershipType[] = [
-  {
-    id: "woman-owned",
-    name: "a woman",
-  },
-  {
-    id: "minority-owned",
-    name: "a minority",
-  },
-  {
-    id: "veteran-owned",
-    name: "a veteran",
-  },
-  {
-    id: "disabled-veteran",
-    name: "a disabled veteran",
-  },
-];
+export const arrayOfOwnershipTypes = OwnershipTypeJSON.arrayOfOwnershipTypes;

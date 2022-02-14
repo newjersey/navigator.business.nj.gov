@@ -4,6 +4,7 @@ name: Get My Small Business Enterprise Certification
 id: sbe
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
 callToActionText: Apply for My SBE Certification
+applicableOwnershipTypes: []
 ---
 
 A Small Business Enterprise (SBE) is a business:

@@ -96,6 +96,7 @@ type CertificationGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   agency: OpportunityAgency[];
+  applicableOwnershipTypes: string[];
 };
 
 export type MarkdownResult = {

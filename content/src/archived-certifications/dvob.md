@@ -4,6 +4,7 @@ name: Get Certified as a Disabled Veteran-Owned Business
 id: dvob-certification
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
 callToActionText: Get My DVOB Certification
+applicableOwnershipTypes: []
 ---
 
 A Disabled Veteran-Owned Business (DVOB) is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a veteran.
