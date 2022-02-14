@@ -239,8 +239,8 @@ collections:
         options: ["Do Not Publish"]
         default: ""
         required: false
-      - { label: "Open Date", name: "openDate", widget: "date", required: false, default: "" }
-      - { label: "Due Date", name: "dueDate", widget: "date", required: false, default: "" }
+      - { label: "Open Date", name: "openDate", widget: "datetime", required: false, default: "", format: "MM/DD/yyyy" }
+      - { label: "Due Date", name: "dueDate", widget: "datetime", required: false, default: "", format: "MM/DD/yyyy" }
       - label: "Status"
         name: "status"
         widget: "select"
@@ -347,8 +347,8 @@ collections:
         widget: "select"
         options: ["Do Not Publish"]
         required: false
-      - { label: "Open Date", name: "openDate", widget: "date", required: false, default: "" }
-      - { label: "Due Date", name: "dueDate", widget: "date", required: false, default: "" }
+      - { label: "Open Date", name: "openDate", widget: "datetime", required: false, default: "", format: "MM/DD/yyyy" }
+      - { label: "Due Date", name: "dueDate", widget: "datetime", required: false, default: "", format: "MM/DD/yyyy" }
       - label: "Status"
         name: "status"
         widget: "select"
