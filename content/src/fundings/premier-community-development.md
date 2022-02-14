@@ -10,7 +10,7 @@ fundingType: loan
 agency:
   - NJEDA
 publishStageArchive: null
-openDate: 2022-04-03T04:00:00.000Z
+openDate: 04-Sa-2022
 dueDate: ""
 status: open
 programFrequency: ongoing
