@@ -10,19 +10,19 @@ fundingType: loan
 agency:
   - NJEDA
 publishStageArchive: null
-openDate: ""
+openDate: 2022-03-27T04:00:00.000Z
 dueDate: ""
-businessSize: n/a
-preferenceGiven: null
-sector:
-  - digital-and-print-media
 status: open
 programFrequency: ongoing
 businessStage: operating
+businessSize: n/a
 homeBased: yes
 mwvb: n/a
+preferenceGiven: null
 county:
   - All
+sector:
+  - digital-and-print-media
 ---
 
 The Premier Community Development Financial Institutions (CDFI) Program provides qualified small businesses and not-for-profit organizations loan participation, loan guarantees, and line of credit guarantees in partnership with designated Premier CDFIs.
