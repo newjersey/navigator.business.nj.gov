@@ -16,9 +16,7 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = ({ children, ...args }) => (
-  <div className="bg-base-lightest width-mobile height-mobile flex flex-align-center flex-justify-center">
-    <Button {...args}>{children}</Button>
-  </div>
+  <Button {...args}>{children}</Button>
 );
 
 export const Standard = Template.bind({});

@@ -15,11 +15,7 @@ export default {
   },
 } as ComponentMeta<typeof Alert>;
 
-const Template: ComponentStory<typeof Alert> = ({ children, ...args }) => (
-  <div className="bg-base-lightest width-mobile height-mobile flex flex-align-center flex-justify-center">
-    <Alert {...args}>{children}</Alert>
-  </div>
-);
+const Template: ComponentStory<typeof Alert> = ({ children, ...args }) => <Alert {...args}>{children}</Alert>;
 
 export const Standard = Template.bind({});
 
