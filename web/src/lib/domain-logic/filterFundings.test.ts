@@ -73,12 +73,12 @@ describe("filterFundings", () => {
       profileData: generateProfileData({
         homeBasedBusiness: false,
         municipality: undefined,
-        existingEmployees: "1",
+        existingEmployees: "0",
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ publishStageArchive: "Do Not Publish" });
-    const funding2 = generateFunding({ publishStageArchive: null });
+    const funding1 = generateFunding({ businessSize: "n/a", publishStageArchive: "Do Not Publish" });
+    const funding2 = generateFunding({ businessSize: "n/a", publishStageArchive: null });
     const fundings = [funding1, funding2];
 
     const result = filterFundings(fundings, userData);
@@ -154,10 +154,11 @@ describe("filterFundings", () => {
     const funding2 = generateFunding({ sector: [] });
     const funding3 = generateFunding({ sector: ["construction", "cannabis"] });
     const funding4 = generateFunding({ sector: ["cannabis", "manufacturing"] });
-    const fundings = [funding1, funding2, funding3, funding4];
+    const funding5 = generateFunding({ sector: ["Construction"] });
+    const fundings = [funding1, funding2, funding3, funding4, funding5];
 
     const result = filterFundings(fundings, userData);
-    expect(result.length).toEqual(3);
+    expect(result.length).toEqual(4);
     expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
   });
 });

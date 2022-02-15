@@ -3,26 +3,37 @@ import { UserData } from "@businessnjgovnavigator/shared";
 
 export const filterFundings = (fundings: Funding[], userData: UserData): Funding[] => {
   return fundings.filter((it) => {
-    if (userData.profileData.homeBasedBusiness) {
-      return it.homeBased === "yes" || it.homeBased === "unknown";
+    let allowedFunding = true;
+    if (userData.profileData.homeBasedBusiness && it.homeBased !== "yes" && it.homeBased !== "unknown") {
+      allowedFunding = false;
     }
 
     if (userData.profileData.municipality && it.county.length > 0) {
-      return (
-        it.county.includes("All") || it.county.includes(userData.profileData.municipality.county as County)
-      );
-    }
-
-    if (userData.profileData.sectorId && it.sector.length > 0) {
-      return it.sector.includes(userData.profileData.sectorId);
-    }
-
-    if (userData.profileData.existingEmployees) {
-      if (parseInt(userData.profileData.existingEmployees) === 0) {
-        return it.businessSize === "n/a";
+      if (
+        !it.county.includes("All") &&
+        !it.county.includes(userData.profileData.municipality.county as County)
+      ) {
+        allowedFunding = false;
       }
     }
 
-    return it.publishStageArchive !== "Do Not Publish";
+    if (userData.profileData.sectorId && it.sector.length > 0) {
+      const sectorRegex = new RegExp(it.sector.join("|"), "i");
+      if (!sectorRegex.test(userData.profileData.sectorId)) {
+        allowedFunding = false;
+      }
+    }
+
+    if (userData.profileData.existingEmployees && it.businessSize) {
+      if (parseInt(userData.profileData.existingEmployees) === 0 && it.businessSize !== "n/a") {
+        allowedFunding = false;
+      }
+    }
+
+    if (it.publishStageArchive === "Do Not Publish") {
+      allowedFunding = false;
+    }
+
+    return allowedFunding;
   });
 };
