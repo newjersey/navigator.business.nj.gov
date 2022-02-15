@@ -5,6 +5,7 @@ $base: #757575;
 $base-dark: #5c5c5c;
 $base-darkest: #1b1b1b;
 $ink: #1b1b1b;
+$beta: #faf3d1;
 
 $primary-lighter: #c5ee93;
 $primary-light: #7fb135;
@@ -62,6 +63,10 @@ $disabled-dark: #adadad;
 
 $black: #000;
 $white: #fff;
+
+.bg-beta {
+  background-color: $beta !important;
+}
 
 .bg-info-lighter {
   background-color: $info-lighter !important;
