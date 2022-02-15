@@ -9,7 +9,6 @@ export const filterCertifications = (
     if (it.applicableOwnershipTypes.length === 0) return true;
     return it.applicableOwnershipTypes.some((cert) => {
       return userData.profileData.ownershipTypeIds.some((ownershipType) => {
-        console.log(cert, ownershipType);
         return cert === ownershipType;
       });
     });

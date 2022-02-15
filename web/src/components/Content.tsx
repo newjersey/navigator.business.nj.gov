@@ -9,6 +9,7 @@ import remark2react from "remark-react";
 
 interface ContentProps {
   children: string;
+  className?: string;
   style?: CSSProperties;
   overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
   onClick?: () => void;
@@ -16,7 +17,7 @@ interface ContentProps {
 
 export const Content = (props: ContentProps): ReactElement => {
   return (
-    <div className="usa-prose" style={props.style}>
+    <div className={`usa-prose ${props.className}`} style={props.style}>
       <ContentNonProse overrides={props.overrides} onClick={props.onClick}>
         {props.children}
       </ContentNonProse>

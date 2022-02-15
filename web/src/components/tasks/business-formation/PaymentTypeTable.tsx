@@ -9,21 +9,26 @@ import { FormationContext } from "../BusinessFormation";
 export const PaymentTypeTable = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
   const [totalCost, setTotalCost] = useState<number>(0);
+  const [documentCount, setDocumentCount] = useState<number>(1);
 
   useEffect(() => {
     let minCost = state.displayContent.officialFormationDocument.cost;
+    let documentCount = 1;
     if (state.formationFormData.certificateOfStanding) {
       minCost += state.displayContent.certificateOfStanding.cost;
+      documentCount += 1;
     }
     if (state.formationFormData.certifiedCopyOfFormationDocument) {
       minCost += state.displayContent.certifiedCopyOfFormationDocument.cost;
+      documentCount += 1;
     }
     if (state.formationFormData.paymentType === "ACH") {
-      minCost += parseFloat(BusinessFormationDefaults.achPaymentCost);
+      minCost += documentCount * parseFloat(BusinessFormationDefaults.achPaymentCost);
     }
     if (state.formationFormData.paymentType === "CC") {
-      minCost += parseFloat(BusinessFormationDefaults.creditCardPaymentCost);
+      minCost += documentCount * parseFloat(BusinessFormationDefaults.creditCardPaymentCost);
     }
+    setDocumentCount(documentCount);
     setTotalCost(minCost);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -93,7 +98,7 @@ export const PaymentTypeTable = (): ReactElement => {
               </label>
             </td>
             <td className={state.formationFormData.paymentType === "CC" ? "text-success-dark text-bold" : ""}>
-              {getDollarValue(BusinessFormationDefaults.creditCardPaymentCost)}
+              {getDollarValue(BusinessFormationDefaults.creditCardPaymentCost, documentCount)}
             </td>
           </tr>
           <tr>
@@ -129,7 +134,7 @@ export const PaymentTypeTable = (): ReactElement => {
             <td
               className={state.formationFormData.paymentType === "ACH" ? "text-success-dark text-bold" : ""}
             >
-              {getDollarValue(BusinessFormationDefaults.achPaymentCost)}
+              {getDollarValue(BusinessFormationDefaults.achPaymentCost, documentCount)}
             </td>
           </tr>
         </tbody>

@@ -56,11 +56,13 @@ export const BusinessFormationDocuments = (): ReactElement => {
               </div>
             </td>
             <td>
-              <label htmlFor="officialFormationDocument">
+              <label htmlFor="officialFormationDocument" className={"text-success-dark text-bold"}>
                 <Content>{state.displayContent.officialFormationDocument.contentMd}</Content>
               </label>
             </td>
-            <td>{getDollarValue(state.displayContent.officialFormationDocument.cost)}</td>
+            <td className={"text-success-dark text-bold"}>
+              {getDollarValue(state.displayContent.officialFormationDocument.cost)}
+            </td>
           </tr>
           <tr>
             <td>
@@ -73,11 +75,22 @@ export const BusinessFormationDocuments = (): ReactElement => {
               </div>
             </td>
             <td>
-              <label htmlFor="certificateOfStanding">
-                <Content>{state.displayContent.certificateOfStanding.contentMd}</Content>
+              <label htmlFor="certificateOfStanding" className="display-inline-flex">
+                <Content
+                  className={
+                    state.formationFormData.certificateOfStanding ? "text-success-dark text-bold" : ""
+                  }
+                >
+                  {state.displayContent.certificateOfStanding.contentMd}
+                </Content>
+                &nbsp;{state.displayContent.certificateOfStanding.optionalLabel}
               </label>
             </td>
-            <td>{getDollarValue(state.displayContent.certificateOfStanding.cost)}</td>
+            <td
+              className={state.formationFormData.certificateOfStanding ? "text-success-dark text-bold" : ""}
+            >
+              {getDollarValue(state.displayContent.certificateOfStanding.cost)}
+            </td>
           </tr>
           <tr>
             <td>
@@ -90,11 +103,26 @@ export const BusinessFormationDocuments = (): ReactElement => {
               </div>
             </td>
             <td>
-              <label htmlFor="certifiedCopyOfFormationDocument">
-                <Content>{state.displayContent.certifiedCopyOfFormationDocument.contentMd}</Content>
+              <label htmlFor="certifiedCopyOfFormationDocument" className="display-inline-flex">
+                <Content
+                  className={
+                    state.formationFormData.certifiedCopyOfFormationDocument
+                      ? "text-success-dark text-bold"
+                      : ""
+                  }
+                >
+                  {state.displayContent.certifiedCopyOfFormationDocument.contentMd}
+                </Content>
+                &nbsp;{state.displayContent.certifiedCopyOfFormationDocument.optionalLabel}
               </label>
             </td>
-            <td>{getDollarValue(state.displayContent.certifiedCopyOfFormationDocument.cost)}</td>
+            <td
+              className={
+                state.formationFormData.certifiedCopyOfFormationDocument ? "text-success-dark text-bold" : ""
+              }
+            >
+              {getDollarValue(state.displayContent.certifiedCopyOfFormationDocument.cost)}
+            </td>
           </tr>
         </tbody>
         <tfoot>
