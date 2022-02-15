@@ -24,6 +24,7 @@ jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 
+const date = dayjs().subtract(1, "month").date(1);
 describe("onboarding - shared", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -151,7 +152,7 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
-    page.selectDate("Date of formation", dayjs().subtract(4, "days"));
+    page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
     await page.visitStep3();
     page.fillText("Business name", "Cool Computers");
@@ -193,7 +194,7 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
-    page.selectDate("Date of formation", dayjs().subtract(4, "days"));
+    page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
     await page.visitStep3();
     page.fillText("Business name", "Cool Computers");
@@ -214,7 +215,7 @@ describe("onboarding - shared", () => {
       entityId: "1234567890",
       businessName: "Cool Computers",
       industryId: "generic",
-      dateOfFormation: dayjs().subtract(4, "days").format("YYYY-MM-DD"),
+      dateOfFormation: date.format("YYYY-MM-DD"),
       homeBasedBusiness: true,
       municipality: newark,
       liquorLicense: false,

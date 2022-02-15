@@ -144,7 +144,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
 
-        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/25/2020");
+        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/2020");
 
         cy.get('input[aria-label="Entity id"]').type("1234567890");
 
@@ -159,7 +159,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
 
-        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/25/2020");
+        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/2020");
 
         cy.get('input[aria-label="Entity id"]').type("1234567890");
         clickNext();
@@ -180,7 +180,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.get('input[type="radio"][value="true"]').check();
         clickNext();
 
-        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/25/2020");
+        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/2020");
 
         cy.get('input[aria-label="Entity id"]').type("1234567890");
         clickNext();

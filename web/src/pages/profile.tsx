@@ -68,7 +68,7 @@ const ProfilePage = (props: Props): ReactElement => {
       ...props.displayContent["PROFILE"],
     } as UserDisplayContent;
   };
-
+  console.log(fieldStates);
   const mergedDisplayContent = useMemo(mergeDisplayContent, [
     props.displayContent,
     userData?.profileData.hasExistingBusiness,

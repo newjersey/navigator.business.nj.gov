@@ -19,7 +19,7 @@ jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 
-const date = dayjs().subtract(4, "days");
+const date = dayjs().subtract(1, "month").date(1);
 const dateOfFormation = date.format("YYYY-MM-DD");
 
 describe("onboarding - owning a business", () => {
@@ -319,7 +319,7 @@ describe("onboarding - owning a business", () => {
 
     await page.visitStep2();
     expect(page.getEntityIdValue()).toEqual("0123456789");
-    expect(page.getDateOfFormationValue()).toEqual(date.format("MM/DD/YYYY"));
+    expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
     await page.visitStep3();
     expect(page.getBusinessNameValue()).toEqual("Applebees");
     expect(page.getSectorIDValue()).toEqual("Clean Energy");

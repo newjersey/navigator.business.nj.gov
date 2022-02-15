@@ -59,7 +59,7 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
   };
 
   const selectDate = (label: string, value: Dayjs) => {
-    fillText(label, value.format("MM/DD/YYYY"));
+    fillText(label, value.format("MM/YYYY"));
     fireEvent.blur(subject.getByLabelText("Date of formation"));
   };
 
