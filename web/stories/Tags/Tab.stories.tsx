@@ -15,11 +15,7 @@ export default {
   },
 } as ComponentMeta<typeof Tag>;
 
-const Template: ComponentStory<typeof Tag> = ({ children, ...args }) => (
-  <div className="bg-base-lightest width-mobile height-mobile flex flex-align-center flex-justify-center">
-    <Tag {...args}>{children}</Tag>
-  </div>
-);
+const Template: ComponentStory<typeof Tag> = ({ children, ...args }) => <Tag {...args}>{children}</Tag>;
 
 export const Standard = Template.bind({});
 
