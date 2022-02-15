@@ -1,6 +1,5 @@
 ---
 cost: 25
-optionalLabel: "(Optional)"
+optionalLabel: (Optional)
 ---
-
-`Certified Copy of Formation Document|certified-copy-of-formation-doc`
+ `Certified Copy of Formation Document|certified-copy`
