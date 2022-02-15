@@ -28,6 +28,7 @@ export default {
       widget: "relation",
       collection: "contextual-information",
       search_fields: ["{{filename}}"],
+      options_length: 100,
       value_field: "{{filename}}",
       display_fields: ["{{filename}}"],
     },
