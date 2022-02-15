@@ -236,9 +236,9 @@ export const splitAndBoldSearchText = (displayText: string, searchText: string):
   }
 };
 
-export const getDollarValue = (currVal: string | number, multiplyBy = 1): string => {
+export const getDollarValue = (currVal: string | number): string => {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
-    parseFloat(currVal.toString()) * multiplyBy
+    parseFloat(currVal.toString())
   );
 };
 

@@ -7,29 +7,33 @@ import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const PaymentTypeTable = (): ReactElement => {
+  const achPaymentCost = parseFloat(BusinessFormationDefaults.achPaymentCost);
+  const creditCardPaymentCostExtra = parseFloat(BusinessFormationDefaults.creditCardPaymentCostExtra);
+  const creditCardPaymentCostInitial = parseFloat(BusinessFormationDefaults.creditCardPaymentCostInitial);
+
   const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
-  const [totalCost, setTotalCost] = useState<number>(0);
-  const [documentCount, setDocumentCount] = useState<number>(1);
+  const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
+  const [creditCardCost, setCreditCardCost] = useState<number>(creditCardPaymentCostInitial);
+  const [achCost, setAchCost] = useState<number>(achPaymentCost);
 
   useEffect(() => {
-    let minCost = state.displayContent.officialFormationDocument.cost;
-    let documentCount = 1;
-    if (state.formationFormData.certificateOfStanding) {
-      minCost += state.displayContent.certificateOfStanding.cost;
-      documentCount += 1;
-    }
-    if (state.formationFormData.certifiedCopyOfFormationDocument) {
-      minCost += state.displayContent.certifiedCopyOfFormationDocument.cost;
-      documentCount += 1;
-    }
-    if (state.formationFormData.paymentType === "ACH") {
-      minCost += documentCount * parseFloat(BusinessFormationDefaults.achPaymentCost);
-    }
-    if (state.formationFormData.paymentType === "CC") {
-      minCost += documentCount * parseFloat(BusinessFormationDefaults.creditCardPaymentCost);
-    }
-    setDocumentCount(documentCount);
-    setTotalCost(minCost);
+    const costs = [state.displayContent.officialFormationDocument.cost];
+    state.formationFormData.certificateOfStanding &&
+      costs.push(state.displayContent.certificateOfStanding.cost);
+
+    state.formationFormData.certifiedCopyOfFormationDocument &&
+      costs.push(state.displayContent.certifiedCopyOfFormationDocument.cost);
+
+    const achCost = costs.length * achPaymentCost;
+    const creditCardCost = creditCardPaymentCostInitial + (costs.length - 1) * creditCardPaymentCostExtra;
+
+    state.formationFormData.paymentType === "ACH" && costs.push(achCost);
+
+    state.formationFormData.paymentType === "CC" && costs.push(creditCardCost);
+
+    setCreditCardCost(creditCardCost);
+    setAchCost(achCost);
+    setTotalCost(costs.reduce((a, b) => a + b, 0));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     state.formationFormData.certificateOfStanding,
@@ -98,7 +102,7 @@ export const PaymentTypeTable = (): ReactElement => {
               </label>
             </td>
             <td className={state.formationFormData.paymentType === "CC" ? "text-success-dark text-bold" : ""}>
-              {getDollarValue(BusinessFormationDefaults.creditCardPaymentCost, documentCount)}
+              {getDollarValue(creditCardCost)}
             </td>
           </tr>
           <tr>
@@ -134,7 +138,7 @@ export const PaymentTypeTable = (): ReactElement => {
             <td
               className={state.formationFormData.paymentType === "ACH" ? "text-success-dark text-bold" : ""}
             >
-              {getDollarValue(BusinessFormationDefaults.achPaymentCost, documentCount)}
+              {getDollarValue(achCost)}
             </td>
           </tr>
         </tbody>
@@ -149,7 +153,9 @@ export const PaymentTypeTable = (): ReactElement => {
             </td>
             <td colSpan={1}></td>
             <td colSpan={1}>
-              <div className="text-align-right text-bold">{getDollarValue(totalCost)}</div>
+              <div className="text-align-right text-bold" aria-label={"Total"}>
+                {getDollarValue(totalCost)}
+              </div>
             </td>
           </tr>
         </tfoot>

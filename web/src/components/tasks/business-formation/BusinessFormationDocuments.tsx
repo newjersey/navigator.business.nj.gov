@@ -75,7 +75,7 @@ export const BusinessFormationDocuments = (): ReactElement => {
               </div>
             </td>
             <td>
-              <label htmlFor="certificateOfStanding" className="display-inline-flex">
+              <label htmlFor="certificateOfStanding" className="display-inline-flex fww">
                 <Content
                   className={
                     state.formationFormData.certificateOfStanding ? "text-success-dark text-bold" : ""
@@ -103,7 +103,7 @@ export const BusinessFormationDocuments = (): ReactElement => {
               </div>
             </td>
             <td>
-              <label htmlFor="certifiedCopyOfFormationDocument" className="display-inline-flex">
+              <label htmlFor="certifiedCopyOfFormationDocument" className="display-inline-flex fww">
                 <Content
                   className={
                     state.formationFormData.certifiedCopyOfFormationDocument
@@ -134,7 +134,9 @@ export const BusinessFormationDocuments = (): ReactElement => {
             </td>
             <td colSpan={1}></td>
             <td colSpan={1}>
-              <div className="text-align-right text-bold">{getDollarValue(totalCost)}</div>
+              <div className="text-align-right text-bold" aria-label="Subtotal">
+                {getDollarValue(totalCost)}
+              </div>
             </td>
           </tr>
         </tfoot>

@@ -794,6 +794,64 @@ describe("<BusinessFormation />", () => {
       });
     });
 
+    it("updates total and subtotals correctly", async () => {
+      renderWithData({
+        paymentType: undefined,
+        officialFormationDocument: true,
+        certificateOfStanding: false,
+        certifiedCopyOfFormationDocument: false,
+      });
+      await submitBusinessTab();
+      await submitContactsTab();
+      await submitReviewTab();
+      expect(subject.getByLabelText("Subtotal")).toHaveTextContent(
+        displayContent.officialFormationDocument.cost.toString()
+      );
+      selectCheckBox("Certificate of standing");
+      expect(subject.getByLabelText("Subtotal")).toHaveTextContent(
+        (displayContent.officialFormationDocument.cost + displayContent.certificateOfStanding.cost).toString()
+      );
+      selectCheckBox("Certified copy of formation document");
+      expect(subject.getByLabelText("Subtotal")).toHaveTextContent(
+        (
+          displayContent.officialFormationDocument.cost +
+          displayContent.certificateOfStanding.cost +
+          displayContent.certifiedCopyOfFormationDocument.cost
+        ).toString()
+      );
+      expect(subject.getByLabelText("Total")).toHaveTextContent(
+        (
+          displayContent.officialFormationDocument.cost +
+          displayContent.certificateOfStanding.cost +
+          displayContent.certifiedCopyOfFormationDocument.cost
+        ).toString()
+      );
+      selectCheckBox("Certified copy of formation document");
+      expect(subject.getByLabelText("Subtotal")).toHaveTextContent(
+        (displayContent.officialFormationDocument.cost + displayContent.certificateOfStanding.cost).toString()
+      );
+      expect(subject.getByLabelText("Total")).toHaveTextContent(
+        (displayContent.officialFormationDocument.cost + displayContent.certificateOfStanding.cost).toString()
+      );
+      fireEvent.click(subject.getByLabelText("Credit card"));
+      expect(subject.getByLabelText("Total")).toHaveTextContent(
+        (
+          displayContent.officialFormationDocument.cost +
+          displayContent.certificateOfStanding.cost +
+          parseFloat(BusinessFormationDefaults.creditCardPaymentCostInitial) +
+          parseFloat(BusinessFormationDefaults.creditCardPaymentCostExtra)
+        ).toString()
+      );
+      fireEvent.click(subject.getByLabelText("E check"));
+      expect(subject.getByLabelText("Total")).toHaveTextContent(
+        (
+          displayContent.officialFormationDocument.cost +
+          displayContent.certificateOfStanding.cost +
+          parseFloat(BusinessFormationDefaults.achPaymentCost) * 2
+        ).toString()
+      );
+    });
+
     it("redirects to payment redirect URL on success", async () => {
       mockApiResponse(
         generateFormationSubmitResponse({
