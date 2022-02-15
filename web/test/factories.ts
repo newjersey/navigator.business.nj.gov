@@ -270,6 +270,9 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
 export const generateFormationDisplayContent = (
   overrides: Partial<FormationDisplayContent>
 ): FormationDisplayContent => ({
+  introParagraph: {
+    contentMd: `some-intro-content-${randomInt()}`,
+  },
   businessNameAndLegalStructure: {
     contentMd: `some-business-name-and-legal-structure-content-${randomInt()}`,
   },

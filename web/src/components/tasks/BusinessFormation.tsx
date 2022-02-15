@@ -153,11 +153,16 @@ export const BusinessFormation = (props: Props): ReactElement => {
         <div>
           <TaskHeader task={props.task} />
           {tab === 0 && (
-            <UnlockedBy
-              taskLinks={unlockedByTaskLinks}
-              isLoading={!taskFromRoadmap}
-              dataTestid="dependency-alert"
-            />
+            <>
+              <UnlockedBy
+                taskLinks={unlockedByTaskLinks}
+                isLoading={!taskFromRoadmap}
+                dataTestid="dependency-alert"
+              />
+              <div className="margin-bottom-2">
+                <Content>{props.displayContent.introParagraph.contentMd}</Content>
+              </div>
+            </>
           )}
         </div>
         <HorizontalStepper arrayOfSteps={stepNames} currentStep={tab} />

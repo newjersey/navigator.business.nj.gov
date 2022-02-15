@@ -85,6 +85,7 @@ export interface LoadDisplayContent
 }
 
 export type FormationDisplayContent = {
+  introParagraph: { contentMd: string };
   businessNameAndLegalStructure: {
     contentMd: string;
   };
@@ -182,6 +183,9 @@ export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
+  introParagraph: {
+    contentMd: "",
+  },
   businessNameAndLegalStructure: {
     contentMd: "",
   },
