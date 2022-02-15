@@ -25,22 +25,19 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
   const [dateValue, setDateValue] = React.useState<Dayjs | null>(null);
   const [dateError, setDateError] = React.useState<boolean>(false);
 
-  const onValidation = (): void => {
-    props.onValidation && props.onValidation(fieldName, !additionalValidation(dateValue));
-  };
-
-  const additionalValidation = (newValue: Dayjs | null): boolean =>
-    newValue !== null && newValue?.isValid() && !dateError;
+  const onValidation = (): void => props.onValidation(fieldName, !(dateValue?.isValid() && !dateError));
 
   useEffect(() => {
     !!state.profileData.dateOfFormation && setDateValue(dayjs(state.profileData.dateOfFormation));
   }, [state.profileData.dateOfFormation]);
 
-  const handleChange = (dayjs: Dayjs) => {
-    setProfileData({
-      ...state.profileData,
-      [fieldName]: dayjs?.format("YYYY-MM-DD"),
-    });
+  const handleChange = (date: Dayjs | null) => {
+    setDateValue(date);
+    date?.isValid() &&
+      setProfileData({
+        ...state.profileData,
+        [fieldName]: date?.date(1).format("YYYY-MM-DD"),
+      });
   };
 
   const Picker = process.env.NODE_ENV === "test" ? DesktopDatePicker : DatePicker;
@@ -49,20 +46,17 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Picker
-        views={["year", "month", "day"]}
+        views={["year", "month"]}
+        inputFormat={"MM/YYYY"}
+        disableMaskedInput={false}
+        mask={"__/____"}
         disableFuture
         openTo="year"
         maxDate={dayjs()}
         value={dateValue}
-        onClose={() => onValidation()}
-        inputFormat={"MM/DD/YYYY"}
-        onChange={(newValue: Dayjs | null): void => {
-          additionalValidation(newValue) && handleChange(newValue as Dayjs);
-          setDateValue(newValue);
-        }}
-        onError={(value: string | null) => {
-          setDateError(!!value);
-        }}
+        onClose={onValidation}
+        onChange={handleChange}
+        onError={(hasError: string | null) => setDateError(!!hasError)}
         renderInput={(params: TextFieldProps) => (
           <div>
             {state.displayContent[fieldName].contentMd && (
@@ -80,10 +74,10 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
                 error={props.fieldStates[fieldName].invalid}
                 fieldOptions={{
                   ...params,
+                  // onBlur: onValidation,
                   sx: { width: "50%", ...params.sx },
                   error: props.fieldStates[fieldName].invalid,
                 }}
-                autoComplete="off"
               />
             </div>
           </div>

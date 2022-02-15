@@ -31,7 +31,7 @@ import { fireEvent, render, RenderResult, waitFor, within } from "@testing-libra
 import dayjs from "dayjs";
 import React from "react";
 
-const date = dayjs().subtract(10, "days");
+const date = dayjs().subtract(1, "month").date(1);
 
 const dateOfFormation = date.format("YYYY-MM-DD");
 
@@ -336,7 +336,7 @@ describe("profile", () => {
       selectByValue("Ownership", "woman-owned");
       fillText("Employer id", "02-3456780");
       fillText("Entity id", "0234567890");
-      fillText("Date of formation", date.format("MM/DD/YYYY"));
+      fillText("Date of formation", date.format("MM/YYYY"));
       fillText("Tax id", "023456790");
       fillText("Notes", "whats appppppp");
       fillText("Tax pin", "6666");
@@ -398,7 +398,7 @@ describe("profile", () => {
       expect(getEmployerIdValue()).toEqual("12-3456789");
       expect(getEntityIdValue()).toEqual("1234567890");
       expect(getTaxIdValue()).toEqual("123456790");
-      expect(getDateOfFormation()).toEqual(date.format("MM/DD/YYYY"));
+      expect(getDateOfFormation()).toEqual(date.format("MM/YYYY"));
       expect(getNotesValue()).toEqual("whats appppppp");
       expect(getMunicipalityValue()).toEqual("Newark");
       expect(subject.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
@@ -419,7 +419,7 @@ describe("profile", () => {
         expect(subject.queryByText(OnboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
       });
 
-      fillText("Date of formation", date.format("MM/DD/YYYY"));
+      fillText("Date of formation", date.format("MM/YYYY"));
       fireEvent.blur(subject.getByLabelText("Date of formation"));
       await waitFor(() => {
         expect(subject.queryByText(OnboardingDefaults.dateOfFormationErrorText)).not.toBeInTheDocument();
@@ -530,6 +530,7 @@ describe("profile", () => {
 
   const fillText = (label: string, value: string) => {
     fireEvent.change(subject.getByLabelText(label), { target: { value: value } });
+    fireEvent.blur(subject.getByLabelText(label));
   };
 
   const selectByValue = (label: string, value: string) => {
