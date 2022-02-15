@@ -22,11 +22,6 @@
       "step": 3,
       "weight": 10,
       "task": "get-insurance"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "task": "search-licenses"
     }
   ],
   "name": "Marketing Consulting",
