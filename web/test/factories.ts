@@ -208,6 +208,8 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     postOnboardingQuestion: `some-post-onboarding-${randomInt()}`,
     unlockedBy: [generateTaskLink({})],
     required: Math.random() < 0.5,
+    issuingAgency: `some-agency-${randomInt()}`,
+    formName: `some-form-${randomInt()}`,
     ...overrides,
   };
 };

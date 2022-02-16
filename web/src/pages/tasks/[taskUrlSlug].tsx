@@ -149,11 +149,31 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
         <Content>{beforeQuestion}</Content>
         {getPostOnboardingQuestion(props.task)}
         <Content>{afterQuestion}</Content>
+        {props.task.issuingAgency || props.task.formName ? (
+          <>
+            <hr className="margin-y-3" />
+            {props.task.issuingAgency != null && (
+              <TaskExtraInfo
+                headerText={TaskDefaults.issuingAgencyText}
+                valueText={props.task.issuingAgency}
+              />
+            )}
+            {props.task.formName != null && (
+              <TaskExtraInfo headerText={TaskDefaults.formNameText} valueText={props.task.formName} />
+            )}
+          </>
+        ) : null}
       </div>
       <TaskCTA link={props.task.callToActionLink} text={props.task.callToActionText} />
     </div>
   );
 };
+
+const TaskExtraInfo = (props: { headerText: string; valueText: string }) => (
+  <h6 className="margin-y-0 text-base-dark font-sans-3xs text-normal">
+    <b>{`${props.headerText.toUpperCase()}:`}</b> {props.valueText.toUpperCase()}
+  </h6>
+);
 
 export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
   const paths = loadAllTaskUrlSlugs();
