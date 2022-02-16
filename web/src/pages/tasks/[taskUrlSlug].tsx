@@ -152,15 +152,18 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
         {props.task.issuingAgency || props.task.formName ? (
           <>
             <hr className="margin-y-3" />
-            {props.task.issuingAgency != null && (
-              <TaskExtraInfo
-                headerText={TaskDefaults.issuingAgencyText}
-                valueText={props.task.issuingAgency}
-              />
-            )}
-            {props.task.formName != null && (
-              <TaskExtraInfo headerText={TaskDefaults.formNameText} valueText={props.task.formName} />
-            )}
+            {props.task.issuingAgency ? (
+              <div>
+                <span className="h5-styling">{`${TaskDefaults.issuingAgencyText}: `}</span>
+                <span className="h6-styling">{props.task.issuingAgency}</span>
+              </div>
+            ) : null}
+            {props.task.formName ? (
+              <div>
+                <span className="h5-styling">{`${TaskDefaults.formNameText}: `}</span>
+                <span className="h6-styling">{props.task.formName}</span>
+              </div>
+            ) : null}
           </>
         ) : null}
       </div>
@@ -168,12 +171,6 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
     </div>
   );
 };
-
-const TaskExtraInfo = (props: { headerText: string; valueText: string }) => (
-  <h6 className="margin-y-0 text-base-dark font-sans-3xs text-normal">
-    <b>{`${props.headerText.toUpperCase()}:`}</b> {props.valueText.toUpperCase()}
-  </h6>
-);
 
 export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
   const paths = loadAllTaskUrlSlugs();

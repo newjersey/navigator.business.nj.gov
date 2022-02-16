@@ -219,32 +219,32 @@ describe("task page", () => {
     const formName = "xY39";
     const subject = renderPage(generateTask({ issuingAgency, formName }));
 
-    expect(subject.getByText(`${TaskDefaults.issuingAgencyText.toUpperCase()}:`)).toBeInTheDocument();
-    expect(subject.getByText(issuingAgency.toUpperCase())).toBeInTheDocument();
+    expect(subject.getByText(`${TaskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    expect(subject.getByText(issuingAgency)).toBeInTheDocument();
 
-    expect(subject.getByText(`${TaskDefaults.formNameText.toUpperCase()}:`)).toBeInTheDocument();
-    expect(subject.getByText(formName.toUpperCase())).toBeInTheDocument();
+    expect(subject.getByText(`${TaskDefaults.formNameText}:`)).toBeInTheDocument();
+    expect(subject.getByText(formName)).toBeInTheDocument();
   });
 
   it("does not display issuing agency in task footer when it is undefined value", () => {
     const subject = renderPage(generateTask({ issuingAgency: undefined }));
 
-    expect(subject.queryByText(`${TaskDefaults.formNameText.toUpperCase()}:`)).toBeInTheDocument();
-    expect(subject.queryByText(`${TaskDefaults.issuingAgencyText.toUpperCase()}:`)).not.toBeInTheDocument();
+    expect(subject.queryByText(`${TaskDefaults.formNameText}:`)).toBeInTheDocument();
+    expect(subject.queryByText(`${TaskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
   });
 
   it("does not display form name in task footer when it is undefined value", () => {
     const subject = renderPage(generateTask({ formName: undefined }));
 
-    expect(subject.queryByText(`${TaskDefaults.issuingAgencyText.toUpperCase()}:`)).toBeInTheDocument();
-    expect(subject.queryByText(`${TaskDefaults.formNameText.toUpperCase()}:`)).not.toBeInTheDocument();
+    expect(subject.queryByText(`${TaskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    expect(subject.queryByText(`${TaskDefaults.formNameText}:`)).not.toBeInTheDocument();
   });
 
   it("does not display form name or agency in task footer when both are undefined", () => {
     const subject = renderPage(generateTask({ formName: undefined, issuingAgency: undefined }));
 
-    expect(subject.queryByText(`${TaskDefaults.issuingAgencyText.toUpperCase()}:`)).not.toBeInTheDocument();
-    expect(subject.queryByText(`${TaskDefaults.formNameText.toUpperCase()}:`)).not.toBeInTheDocument();
+    expect(subject.queryByText(`${TaskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
+    expect(subject.queryByText(`${TaskDefaults.formNameText}:`)).not.toBeInTheDocument();
   });
 
   it("shows congratulatory modal without link when START section completed", () => {
