@@ -21,15 +21,13 @@ export const Hero = (props: Props): ReactElement => {
           <img src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
         </div>
         <div className="usa-hero__callout no-bg no-max-width flex-order-1 max-width flex-smaller no-padding-x">
-          <div
-            role="heading"
-            aria-level={1}
+          <h1
             className={`text-primary-darker h1-styling-large ${isDesktopAndUp ? "text-left" : "text-center"}`}
           >
             {props.calloutText}
             <br />
             {props.subCalloutText}
-          </div>
+          </h1>
           <p className="text-gray-90 font-sans-lg text-left-desktop margin-bottom-4">
             {props.supportingText}
           </p>

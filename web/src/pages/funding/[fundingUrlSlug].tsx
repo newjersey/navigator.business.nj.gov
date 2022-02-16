@@ -21,8 +21,8 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
     <>
       <div className="flex flex-column space-between minh-37">
         <div>
-          <div role="heading" aria-level={1} className="margin-top-0 margin-bottom-2 h2-styling">
-            {props.funding.name}
+          <div className="margin-bottom-2">
+            <h1>{props.funding.name}</h1>
           </div>
           <Content>{props.funding.contentMd}</Content>
         </div>

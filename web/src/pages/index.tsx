@@ -61,16 +61,14 @@ const Home = (): ReactElement => {
 
           <div className="l2-bg height-34 bg-contain">
             <div className="grid-custom">
-              <div
-                role="heading"
-                aria-level={2}
-                className="h2-styling l2-header-custom text-center margin-y-0 padding-bottom-40 fixed-width no-padding-lr display-block"
-              >
-                {LandingPageDefaults.section2HeaderFirstLineText}
-                <span className="display-inline-override">
-                  {LandingPageDefaults.section2HeaderSecondLineText}
-                </span>
-                <span>{LandingPageDefaults.section2HeaderThirdLineText}</span>
+              <div className="l2-header-custom text-center margin-y-0 padding-bottom-40 fixed-width no-padding-lr display-block">
+                <h2>
+                  {LandingPageDefaults.section2HeaderFirstLineText}
+                  <span className="display-inline-override">
+                    {LandingPageDefaults.section2HeaderSecondLineText}
+                  </span>
+                  <span>{LandingPageDefaults.section2HeaderThirdLineText}</span>
+                </h2>
               </div>
 
               <div className="l2-image img-desktop">
@@ -99,15 +97,13 @@ const Home = (): ReactElement => {
 
         <SinglePageLayout wrappedWithMain={false}>
           <section aria-label="Existing business">
-            <div
-              role="heading"
-              aria-level={2}
-              className="text-center text-bold h2-styling padding-top-9 desktop:padding-top-2 line-height-205"
-            >
-              {LandingPageDefaults.section3HeaderFirstLineText}
-              <span className="display-block display-inline-override">
-                {LandingPageDefaults.section3HeaderSecondLineText}
-              </span>
+            <div className="text-center text-bold padding-top-9 desktop:padding-top-2 line-height-205">
+              <h2>
+                {LandingPageDefaults.section3HeaderFirstLineText}
+                <span className="display-block display-inline-override">
+                  {LandingPageDefaults.section3HeaderSecondLineText}
+                </span>
+              </h2>
             </div>
 
             <ul className="usa-card-group flex-direction card-group-margin-custom">

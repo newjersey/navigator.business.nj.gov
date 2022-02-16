@@ -35,8 +35,8 @@ const FilingPage = (props: Props): ReactElement => {
         <SidebarPageLayout operateReferences={props.operateReferences}>
           <div className="flex flex-column space-between minh-37">
             <div>
-              <div role="heading" aria-level={1} className="margin-top-0 margin-bottom-2 h2-styling">
-                {props.filing.name}
+              <div className="margin-bottom-2">
+                <h1>{props.filing.name}</h1>
               </div>
               <div className="margin-bottom-4" data-testid="due-date">
                 <Tag tagVariant="baseDark" bold={true}>

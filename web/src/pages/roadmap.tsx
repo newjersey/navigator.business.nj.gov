@@ -82,9 +82,7 @@ const RoadmapPage = (props: Props): ReactElement => {
         <div className="margin-top-6 desktop:margin-top-0">
           <SinglePageLayout>
             <div className="margin-bottom-205">
-              <div role="heading" aria-level={1} className="h1-styling-large">
-                {getHeader()}
-              </div>
+              <h1 className="h1-styling-large">{getHeader()}</h1>
             </div>
             <UserDataErrorAlert />
             {(!error || error !== "NO_DATA") && (
