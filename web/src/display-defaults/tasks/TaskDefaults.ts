@@ -9,4 +9,6 @@ export const TaskDefaults: Record<string, string> = {
   unlockedByPlural: "Before starting this task, we recommend you take a look at:",
   loadingTaskDependencies: "Loading task dependencies…",
   requiredTagText: "Required",
+  issuingAgencyText: "Issuing Agency",
+  formNameText: "Form",
 };

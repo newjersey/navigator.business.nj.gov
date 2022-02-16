@@ -669,6 +669,8 @@ export interface Task {
   postOnboardingQuestion?: string;
   unlockedBy: TaskLink[];
   required?: boolean;
+  issuingAgency?: string;
+  formName?: string;
 }
 
 export interface TaskLink {

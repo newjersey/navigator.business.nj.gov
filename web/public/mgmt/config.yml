@@ -177,6 +177,8 @@ collections:
         display_fields: ["{{id}}"]
         required: false
       - { label: "Required", name: "required", widget: "boolean", required: false }
+      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+      - { label: "Form Name", name: "formName", widget: "string", required: false }
 
   - name: "filings"
     label: "Filings Content"
@@ -239,8 +241,22 @@ collections:
         options: ["Do Not Publish"]
         default: ""
         required: false
-      - { label: "Open Date", name: "openDate", widget: "datetime", required: false, default: "", format: "MM/DD/yyyy" }
-      - { label: "Due Date", name: "dueDate", widget: "datetime", required: false, default: "", format: "MM/DD/yyyy" }
+      - {
+          label: "Open Date",
+          name: "openDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+      - {
+          label: "Due Date",
+          name: "dueDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
       - label: "Status"
         name: "status"
         widget: "select"
@@ -347,8 +363,22 @@ collections:
         widget: "select"
         options: ["Do Not Publish"]
         required: false
-      - { label: "Open Date", name: "openDate", widget: "datetime", required: false, default: "", format: "MM/DD/yyyy" }
-      - { label: "Due Date", name: "dueDate", widget: "datetime", required: false, default: "", format: "MM/DD/yyyy" }
+      - {
+          label: "Open Date",
+          name: "openDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+      - {
+          label: "Due Date",
+          name: "dueDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
       - label: "Status"
         name: "status"
         widget: "select"
@@ -433,7 +463,7 @@ collections:
         name: "agency"
         widget: "select"
         multiple: true
-        options: [ "NJEDA", "NJDOL" ]
+        options: ["NJEDA", "NJDOL"]
         required: false
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
@@ -441,9 +471,9 @@ collections:
         multiple: true
         required: false
         collection: "dashboard-settings"
-        search_fields: [ "arrayOfOwnershipTypes.*.name" ]
+        search_fields: ["arrayOfOwnershipTypes.*.name"]
         value_field: "arrayOfOwnershipTypes.*.id"
-        display_fields: [ "arrayOfOwnershipTypes.*.name" ]
+        display_fields: ["arrayOfOwnershipTypes.*.name"]
 
   - name: "archived-certification-opportunities"
     label: "Archived Certification Opportunities Content"
@@ -466,7 +496,7 @@ collections:
         name: "agency"
         widget: "select"
         multiple: true
-        options: [ "NJEDA", "NJDOL" ]
+        options: ["NJEDA", "NJDOL"]
         required: false
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
@@ -474,9 +504,9 @@ collections:
         multiple: true
         required: false
         collection: "dashboard-settings"
-        search_fields: [ "arrayOfOwnershipTypes.*.name" ]
+        search_fields: ["arrayOfOwnershipTypes.*.name"]
         value_field: "arrayOfOwnershipTypes.*.id"
-        display_fields: [ "arrayOfOwnershipTypes.*.name" ]
+        display_fields: ["arrayOfOwnershipTypes.*.name"]
 
   - name: "contextual-information"
     label: "Contextual Information"

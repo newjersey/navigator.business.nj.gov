@@ -63,6 +63,8 @@ type TaskGrayMatter = {
   callToActionText: string;
   postOnboardingQuestion: string;
   required?: boolean;
+  issuingAgency?: string;
+  formName?: string;
 };
 
 type FundingGrayMatter = {
@@ -113,4 +115,6 @@ export type TaskWithoutLinks = {
   postOnboardingQuestion: string;
   contentMd: string;
   required?: boolean;
+  issuingAgency?: string;
+  formName?: string;
 };
