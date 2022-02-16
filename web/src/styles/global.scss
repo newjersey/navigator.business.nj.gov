@@ -194,6 +194,45 @@ hr {
   font-size: 1rem !important;
 }
 
+.h1-styling-large {
+  margin: 0 !important;
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+  font-weight: 700 !important;
+  font-size: 3rem !important;
+  line-height: 120% !important;
+}
+
+.usa-prose > .h5,
+.usa-prose > .h5-styling,
+.h5-styling,
+h5 {
+  margin: 0 !important;
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  line-height: 160% !important;
+  color: $base-dark !important;
+  text-transform: uppercase !important;
+  display: inline !important;
+}
+
+.usa-prose > .h6,
+.usa-prose > .h6-styling,
+.h6-styling,
+h6 {
+  margin: 0 !important;
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
+  line-height: 160% !important;
+  color: $base-dark !important;
+  text-transform: uppercase !important;
+  display: inline !important;
+}
+
 .usa-link-hover-override:hover {
   .icon-green-bg-color-hover {
     background-color: $primary-dark;
@@ -270,8 +309,12 @@ td {
   text-align: center;
 }
 
+.text-align-left {
+  text-align: left !important;
+}
+
 .text-align-right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .dashboard-opportunities-list {

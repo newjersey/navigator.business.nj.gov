@@ -76,7 +76,7 @@ const Home = (): ReactElement => {
               <div className="l2-image img-desktop">
                 <img src="../img/Landing-sec2-people.png" alt="People" />
               </div>
-              <p className="small-font text-center padding-20 p-desktop">
+              <p className="font-sans-lg text-center padding-20 p-desktop">
                 {LandingPageDefaults.section2SupportingText}
               </p>
               <div className="fdr fjc icon-container-desktop">
@@ -102,7 +102,7 @@ const Home = (): ReactElement => {
             <div
               role="heading"
               aria-level={2}
-              className="text-center text-bold font-32 padding-top-9 desktop:padding-top-2 line-height-205"
+              className="text-center text-bold h2-styling padding-top-9 desktop:padding-top-2 line-height-205"
             >
               {LandingPageDefaults.section3HeaderFirstLineText}
               <span className="display-block display-inline-override">

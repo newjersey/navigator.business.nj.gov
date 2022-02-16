@@ -39,6 +39,8 @@ export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
         a: Link(props.onClick),
         h2: ({ children }: { children: string[] }) => <h2 className="h3-styling">{children}</h2>,
         h3: ({ children }: { children: string[] }) => <h3 className="h4-styling">{children}</h3>,
+        h5: ({ children }: { children: string[] }) => <div className="h5-styling">{children}</div>,
+        h6: ({ children }: { children: string[] }) => <div className="h6-styling">{children}</div>,
         blockquote: GreenBox,
         table: OutlineBox,
         thead: Unformatted,

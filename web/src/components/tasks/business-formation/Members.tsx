@@ -45,9 +45,6 @@ export const Members = (): ReactElement => {
             h3: ({ children }: { children: string[] }): ReactElement => (
               <h3 style={{ display: "inline" }}>{children}</h3>
             ),
-            h6: ({ children }: { children: string[] }): ReactElement => (
-              <h6 style={{ display: "inline", textTransform: "initial" }}>{children}</h6>
-            ),
           }}
         >
           {state.displayContent.members.contentMd}
