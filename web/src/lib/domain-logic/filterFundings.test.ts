@@ -12,14 +12,20 @@ describe("filterFundings", () => {
       profileData: generateProfileData({
         homeBasedBusiness: true,
         municipality: undefined,
-        existingEmployees: "1",
+        existingEmployees: "0",
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ homeBased: "yes" });
-    const funding2 = generateFunding({ homeBased: "no" });
-    const funding3 = generateFunding({ homeBased: "unknown" });
-    const fundings = [funding1, funding2, funding3];
+    const funding1 = generateFunding({ homeBased: "yes", businessSize: "n/a" });
+    const funding2 = generateFunding({ homeBased: "no", businessSize: "n/a" });
+    const funding3 = generateFunding({ homeBased: "unknown", businessSize: "n/a" });
+    const funding4 = generateFunding({ homeBased: "yes", businessSize: "50" });
+    const funding5 = generateFunding({
+      homeBased: "yes",
+      businessSize: "n/a",
+      publishStageArchive: "Do Not Publish",
+    });
+    const fundings = [funding1, funding2, funding3, funding4, funding5];
 
     const result = filterFundings(fundings, userData);
     expect(result.length).toEqual(2);
@@ -31,14 +37,20 @@ describe("filterFundings", () => {
       profileData: generateProfileData({
         homeBasedBusiness: false,
         municipality: undefined,
-        existingEmployees: "1",
+        existingEmployees: "0",
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ homeBased: "yes" });
-    const funding2 = generateFunding({ homeBased: "no" });
-    const funding3 = generateFunding({ homeBased: "unknown" });
-    const fundings = [funding1, funding2, funding3];
+    const funding1 = generateFunding({ homeBased: "yes", businessSize: "n/a" });
+    const funding2 = generateFunding({ homeBased: "no", businessSize: "n/a" });
+    const funding3 = generateFunding({ homeBased: "unknown", businessSize: "n/a" });
+    const funding4 = generateFunding({ homeBased: "yes", businessSize: "50" });
+    const funding5 = generateFunding({
+      homeBased: "yes",
+      businessSize: "n/a",
+      publishStageArchive: "Do Not Publish",
+    });
+    const fundings = [funding1, funding2, funding3, funding4, funding5];
 
     const result = filterFundings(fundings, userData);
     expect(result.length).toEqual(3);
@@ -61,7 +73,8 @@ describe("filterFundings", () => {
     const funding4 = generateFunding({ county: ["Bergen", "Camden"] });
     const funding5 = generateFunding({ county: ["All"] });
     const funding6 = generateFunding({ county: ["All", "Camden"] });
-    const fundings = [funding1, funding2, funding3, funding4, funding5, funding6];
+    const funding7 = generateFunding({ county: ["All", "Camden"], publishStageArchive: "Do Not Publish" });
+    const fundings = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
     const result = filterFundings(fundings, userData);
     expect(result.length).toEqual(5);
@@ -73,13 +86,14 @@ describe("filterFundings", () => {
       profileData: generateProfileData({
         homeBasedBusiness: false,
         municipality: undefined,
-        existingEmployees: "0",
+        existingEmployees: "1",
         sectorId: undefined,
       }),
     });
     const funding1 = generateFunding({ businessSize: "n/a", publishStageArchive: "Do Not Publish" });
     const funding2 = generateFunding({ businessSize: "n/a", publishStageArchive: null });
-    const fundings = [funding1, funding2];
+    const funding3 = generateFunding({ businessSize: "200", publishStageArchive: "Do Not Publish" });
+    const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
     expect(result.length).toEqual(1);
@@ -97,7 +111,8 @@ describe("filterFundings", () => {
     });
     const funding1 = generateFunding({ businessSize: "n/a" });
     const funding2 = generateFunding({ businessSize: "yes" });
-    const fundings = [funding1, funding2];
+    const funding3 = generateFunding({ businessSize: "n/a", publishStageArchive: "Do Not Publish" });
+    const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
     expect(result.length).toEqual(1);
@@ -115,11 +130,12 @@ describe("filterFundings", () => {
     });
     const funding1 = generateFunding({ businessSize: "n/a" });
     const funding2 = generateFunding({ businessSize: "yes" });
-    const fundings = [funding1, funding2];
+    const funding3 = generateFunding({ businessSize: "n/a", publishStageArchive: null });
+    const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
-    expect(result.length).toEqual(1);
-    expect(result).toEqual(expect.arrayContaining([funding1]));
+    expect(result.length).toEqual(2);
+    expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
   });
 
   it("displays all fundings when # employees > 0", () => {
