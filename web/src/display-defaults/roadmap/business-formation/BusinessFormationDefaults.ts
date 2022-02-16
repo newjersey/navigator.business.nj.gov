@@ -60,6 +60,7 @@ export const BusinessFormationDefaults: Record<string, string> = {
   membersModalBackButtonText: "Cancel",
   membersSuccessTextHeader: "Member Added",
   membersSuccessTextBody: "A member has been added successfully",
+  membersAddressLine2Optional: "(Optional)",
   nameErrorText: "Name is required",
   addressErrorText: "Address is required",
   addressCityErrorText: "City is required",

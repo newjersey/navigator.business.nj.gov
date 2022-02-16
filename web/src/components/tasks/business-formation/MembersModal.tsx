@@ -196,8 +196,8 @@ export const MembersModal = (props: Props): ReactElement => {
               }}
             >
               {state.displayContent.memberAddressLine2.contentMd}
-            </Content>
-            <h6 style={{ display: "inline", textTransform: "initial" }}>(Optional)</h6>
+            </Content>{" "}
+            <div className="h6-styling">{BusinessFormationDefaults.membersAddressLine2Optional}</div>
             <GenericTextField
               fieldName="memberAddressLine2"
               value={memberData.addressLine2}
