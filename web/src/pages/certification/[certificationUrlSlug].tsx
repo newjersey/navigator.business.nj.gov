@@ -25,8 +25,8 @@ export const CertificationElement = (props: { certification: Certification }): R
     <>
       <div className="flex flex-column space-between minh-37">
         <div>
-          <div role="heading" aria-level={1} className="margin-top-0 margin-bottom-2 h2-styling">
-            {props.certification.name}
+          <div className="margin-bottom-2">
+            <h1>{props.certification.name}</h1>
           </div>
           <Content>{props.certification.contentMd}</Content>
         </div>

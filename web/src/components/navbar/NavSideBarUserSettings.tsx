@@ -27,10 +27,12 @@ export const NavSideBarUserSettings = (): ReactElement => {
           expandIcon={<Icon className="usa-icon--size-3 text-ink">expand_more</Icon>}
           id="user-profile-header"
         >
-          <h4 className="flex flex-align-center margin-y-2 text-primary">
-            <Icon className="margin-right-1 usa-icon--size-3">account_circle</Icon>
-            <span>{userName}</span>
-          </h4>
+          <div className="margin-y-2">
+            <h4 className="flex flex-align-center text-primary">
+              <Icon className="margin-right-1 usa-icon--size-3">account_circle</Icon>
+              <span>{userName}</span>
+            </h4>
+          </div>
         </AccordionSummary>
         <AccordionDetails>
           <div className="margin-left-2 margin-bottom-2">

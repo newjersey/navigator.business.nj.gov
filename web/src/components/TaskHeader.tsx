@@ -83,13 +83,8 @@ export const TaskHeader = (props: Props): ReactElement => {
 
   return (
     <>
-      <div
-        role="heading"
-        aria-level={1}
-        className="margin-top-0 margin-bottom-2 h2-styling"
-        data-task-id={props.task.id}
-      >
-        {getModifiedTaskContent(roadmap, props.task, "name")}
+      <div className="margin-bottom-2">
+        <h1 data-task-id={props.task.id}>{getModifiedTaskContent(roadmap, props.task, "name")}</h1>
       </div>
       <div className="flex flex-align-center flex-wrap margin-top-0 margin-bottom-2">
         {renderProgress()}

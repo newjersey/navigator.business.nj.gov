@@ -46,7 +46,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
     >
       <div className="display-inline-flex">{TYPE_TO_LABEL[props.urlPath]}</div>
 
-      <h3 className="font-body-md text-normal">
+      <h3 className="font-body-md text-normal h4-styling">
         <a className="usa-link" href={`/${props.urlPath}/${props.opportunity.urlSlug}`}>
           {props.opportunity.name}
         </a>

@@ -31,7 +31,7 @@ export const Step = (props: Props): ReactElement => {
           </div>
           <div className="step-label">
             <h3
-              className="margin-0 font-sans-sm line-height-body-5 weight-unset"
+              className="margin-0 font-sans-sm line-height-body-5 weight-unset h4-styling"
               data-step={props.step.step_number}
             >
               {props.step.name}

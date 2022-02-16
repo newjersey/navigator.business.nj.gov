@@ -253,16 +253,13 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   const header = () => (
-    <div
-      ref={headerRef}
-      role="heading"
-      aria-level={1}
-      className={`margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4 h2-styling`}
-    >
-      {OnboardingDefaults.pageTitle}{" "}
-      <span className="text-light" data-testid={`step-${page.current.toString()}`}>
-        {evalHeaderStepsTemplate()}
-      </span>
+    <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4">
+      <h1 ref={headerRef}>
+        {OnboardingDefaults.pageTitle}{" "}
+        <span className="text-light" data-testid={`step-${page.current.toString()}`}>
+          {evalHeaderStepsTemplate()}
+        </span>
+      </h1>
     </div>
   );
 

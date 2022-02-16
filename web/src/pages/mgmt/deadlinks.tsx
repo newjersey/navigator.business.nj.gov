@@ -76,7 +76,7 @@ const DeadLinksPage = (props: Props): ReactElement => {
         <div key={i}>
           {props.deadLinks[page].length > 0 && (
             <>
-              <h4>Page: {page}</h4>
+              <div className="h4-styling">Page: {page}</div>
               <ul>
                 {props.deadLinks[page].map((link, i) => (
                   <li key={i}>{link}</li>
