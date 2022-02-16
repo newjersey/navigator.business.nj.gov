@@ -14,6 +14,7 @@ export default async (): Promise<Config.InitialOptions> => {
       "@/test/(.*)": "<rootDir>/test/$1",
       "@/pages/(.*)": "<rootDir>/src/pages/$1",
       "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/shared/src/$1",
+      "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1",
     },
     transform: {
       "\\.md$": "jest-raw-loader",
