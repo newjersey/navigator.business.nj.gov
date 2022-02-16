@@ -197,7 +197,7 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const loadFile = (filename: string): string =>
     fs.readFileSync(path.join(displayContentDir, filename), "utf8");
 
-  const introParagraph = getMarkdown(loadFile("business-formation/intro-paragraph.md"));
+  const introParagraph = getMarkdown(loadFile("business-formation/form-business-entity-intro.md"));
   const businessNameAndLegalStructure = getMarkdown(
     loadFile("business-formation/business-name-and-legal-structure.md")
   );
