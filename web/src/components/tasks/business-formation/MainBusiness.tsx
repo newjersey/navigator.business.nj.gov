@@ -1,6 +1,6 @@
 import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { templateEval, zipCodeRange } from "@/lib/utils/helpers";
+import { zipCodeRange } from "@/lib/utils/helpers";
 import React, { ReactElement } from "react";
 import { BusinessAddressLine1 } from "./BusinessAddressLine1";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
@@ -10,24 +10,6 @@ import { BusinessSuffixDropdown } from "./BusinessSuffixDropdown";
 
 export const MainBusiness = (): ReactElement => {
   const { userData } = useUserData();
-
-  const makeUpdateProfileLink = (label: string, value: string): ReactElement => {
-    const linkElement = <a href="/profile">{BusinessFormationDefaults.updateYourProfileLinkText}</a>;
-    const splitText = templateEval(BusinessFormationDefaults.updateYourProfileDisplayText, {
-      value,
-      link: "${link}",
-    }).split("${link}");
-    return (
-      <>
-        <span className="text-bold">{label}&nbsp;</span>
-        <div>
-          {splitText[0]}
-          {linkElement}
-          {splitText[1]}
-        </div>
-      </>
-    );
-  };
 
   return (
     <>
@@ -45,11 +27,12 @@ export const MainBusiness = (): ReactElement => {
       <BusinessFormationTextField fieldName="businessAddressLine2" />
       <div className="grid-row grid-gap-2">
         <div className="margin-bottom-2 grid-col-12 tablet:grid-col-6">
-          {makeUpdateProfileLink(
-            BusinessFormationDefaults.businessAddressCityLabel,
-            userData?.profileData.municipality?.name ||
-              BusinessFormationDefaults.notSetBusinessAddressCityLabel
-          )}
+          <span className="text-bold">{BusinessFormationDefaults.businessAddressCityLabel}</span>
+          <div>
+            {userData?.profileData.municipality?.name ??
+              BusinessFormationDefaults.notSetBusinessAddressCityLabel}{" "}
+            <a href="/profile">{BusinessFormationDefaults.editButtonText}</a>
+          </div>
         </div>
         <div className="margin-bottom-2 form-input grid-col-5 tablet:grid-col-2">
           <BusinessFormationTextField fieldName="businessAddressState" disabled={true} />
