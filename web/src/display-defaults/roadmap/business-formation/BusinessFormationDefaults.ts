@@ -8,7 +8,6 @@ export const BusinessFormationDefaults: Record<string, string> = {
   submitButtonText: "Submit",
   editButtonText: "Edit",
   suffixErrorText: "Business suffix is required",
-  updateYourProfileDisplayText: "${value}, if this is incorrect, ${link}.",
   updateYourProfileLinkText: "update your profile",
   startDateErrorText: "The business formation date must be today or a future date formatted as MM/DD/YYYY",
   businessAddressLine1ErrorText: "Address is required",
