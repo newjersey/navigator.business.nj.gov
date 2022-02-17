@@ -8,5 +8,5 @@ export const DashboardDefaults: Record<string, string> = {
   calendarLegalText: "This calendar is not a complete list of your obligations as a business.",
   calendarHeader: "My Calendar",
   calendarTooltip:
-    "This is your personalized calendar of upcoming of taxes and filings that the New Jersey Department of Treasury has identified. Click on any item to learn about the filing and how you can comply.",
+    "This calendar shows you NJ filing due dates unique to your business. Click on any item to learn where to file.",
 };
