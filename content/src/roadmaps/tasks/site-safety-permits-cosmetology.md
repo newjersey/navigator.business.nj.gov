@@ -1,17 +1,26 @@
 ---
-id: "certificate-of-occupancy"
-urlSlug: "site-safety-permits"
-name: "Obtain Site Safety Permits"
+urlSlug: site-safety-permits
+name: Obtain Site Safety Permits
+id: certificate-of-occupancy
 callToActionLink: ""
 callToActionText: ""
+issuingAgency: New Jersey Division of Consumer Affairs Board of Cosmetology and Hairstyling
 ---
 
-It's time to obtain approvals that show that your site is safe for customers and workers. The New Jersey Division of Consumer Affairs requires you to obtain and show a fire permit and `Certificate of Occupancy or Approval|certificate-occupancy` prior to applying for a shop license. Below is a checklist with some of the certificates or permits you may need.
+You will need to obtain and show site safety permits such as a fire permit and a `Certificate of Occupancy or Approval|certificate-occupancy` prior to obtaining a shop license.
 
-1. **Fire Prevent Permits:** Obtain any fire prevention or burglar alarm permits from your local Fire Department. **_This is required by the Division of Consumer Affairs to receive a shop license._**
-2. **Certificate of Occupancy/Approval:** If you've completed site construction/renovations, it's time to obtain a Certificate of Occupancy or Approval from your local Buildings/Construction Department. **_Remember, to apply for your shop license, you will need to submit this Certificate to the Division of Consumer Affairs._**
+---
 
-After you complete this task, you will have:
+### Safety Permits
 
-- A fire prevention permit
-- A Certificate of Occupancy or Approval
+1. **Fire Prevention Permits:** Obtain any fire prevention or burglar alarm permits from your local Fire Department. 
+2. **Certificate of Occupancy/Approval:** If you've completed site construction/renovations, obtain a Certificate of Occupancy or Approval from your local Buildings/Construction Department.
+
+>**Once completed, you will have:**
+>
+>- A Fire Prevention Permit
+>- A Certificate of Occupancy/Approval
+
+>**What if I don't get site safety permits?**
+>
+>You will not be able to submit an application for a shop license.
