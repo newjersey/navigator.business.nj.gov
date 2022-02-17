@@ -7,7 +7,7 @@ callToActionText: ""
 issuingAgency: New Jersey Division of Consumer Affairs Board of Cosmetology and Hairstyling
 ---
 
-You will need to obtain and show a site safety permits such as a fire permit and a `Certificate of Occupancy or Approval|certificate-occupancy` prior to applying for a shop license.
+You will need to obtain and show site safety permits such as a fire permit and a `Certificate of Occupancy or Approval|certificate-occupancy` prior to obtaining a shop license.
 
 ---
 
@@ -16,7 +16,7 @@ You will need to obtain and show a site safety permits such as a fire permit and
 1. **Fire Prevention Permits:** Obtain any fire prevention or burglar alarm permits from your local Fire Department. 
 2. **Certificate of Occupancy/Approval:** If you've completed site construction/renovations, obtain a Certificate of Occupancy or Approval from your local Buildings/Construction Department.
 
->**Once completed, you will have**
+>**Once completed, you will have:**
 >
 >- A Fire Prevention Permit
 >- A Certificate of Occupancy/Approval
