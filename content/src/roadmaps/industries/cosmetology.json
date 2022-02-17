@@ -1,13 +1,7 @@
 {
-  "id": "cosmetology",
-  "name": "Cosmetology",
-  "description": "Offering hair, nail, or skin related services",
-  "canBeHomeBased": false,
-  "isLiquorLicenseApplicable": false,
-  "licenseType": "Cosmetology and Hairstyling",
   "isMobileLocation": false,
+  "canBeHomeBased": false,
   "canBeReseller": true,
-  "additionalSearchTerms": "cosmetics,beautician,aesthetician",
   "roadmapSteps": [
     {
       "step": 1,
@@ -38,13 +32,10 @@
       "step": 4,
       "weight": 9,
       "task": "individual-staff-licenses-cosmetology"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "task": "site-inspection"
     }
   ],
+  "name": "Cosmetology",
+  "isLiquorLicenseApplicable": false,
   "modifications": [
     {
       "taskToReplaceFilename": "check-site-requirements",
@@ -58,5 +49,9 @@
       "taskToReplaceFilename": "evaluate-your-location",
       "replaceWithFilename": "evaluate-your-location-cosmetology"
     }
-  ]
+  ],
+  "additionalSearchTerms": "cosmetics,beautician,aesthetician",
+  "id": "cosmetology",
+  "licenseType": "Cosmetology and Hairstyling",
+  "description": "Offering hair, nail, or skin related services"
 }
