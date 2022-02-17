@@ -12,6 +12,6 @@ If your business will offer spray paint services to vehicles, you must speak wit
 2. **Hazardous Waste**: Related to potential paint solvents and material waste.
 3. **New Jersey Pollutant Discharge Elimination System (NJPDES)**: Caused by potential discharge water from your facility.
 4. **Wetlands, Existing Flood Hazard Areas**: Related to potential disturbances caused by your business.
-5. **Right to Know**: Due to hazardous material which may be stored on the site. 
+5. **Right to Know**: Due to hazardous material which may be stored on the site.
 
 Contact DEP's Office of Permitting and Project Navigation at (609)292-3600 for additional guidance on your permitting needs.

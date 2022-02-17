@@ -3,6 +3,6 @@
 
 ### New Jersey Tax ID
 
-Lorem ipsum dolor sit amen, en elite scripts occurrence. Deter ornateness debits man id. Erse sol um cu quo, est ea accustom investiture. Ad sit bemuses complected, dolor em pertinacity dissenter est re.
+Your NJ Tax ID number will be a 12-digit number, the first 9-digits are often the same as your EIN number, the last 3-digits are a location code provided by the State. This number is sensitive information and is used for state tax purposes.
 
-Merriam perpetual occurrence est at, per vitae. Usu cu ores quid, me rides sapper croquet ex. Ea animal trot anti est, purport augur negligent it pro, usu magma premeditated ex. Imus en elite scripts occurrence. I onset voluminous eons, pro mutate passim ex.
+If you completed the NJ-Reg form online, you will find your NJ Tax ID number on the registration confirmation after registering for state taxes and employer purposes.
