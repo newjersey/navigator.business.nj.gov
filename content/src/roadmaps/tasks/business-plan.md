@@ -6,7 +6,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Data shows that businesses with a plan are more successful. Your business plan guides your business and helps you make decisions around operations, staffing, marketing, and financing. Learn [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan) on our website. There are numerous national and local organizations that can help you write your business plan for free, below are a few:
+Your business plan guides your business and helps you make decisions around operations, staffing, marketing, and financing. Learn [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan) on our website. 
 
 ---
 
@@ -23,4 +23,6 @@ Data shows that businesses with a plan are more successful. Your business plan g
 >
 >- A business plan to help you make informed decisions for this roadmap
 
->**
+>**What if I don't make a business plan?**
+>
+>Data shows that businesses with a plan are more successful. In addition, some State licenses may require you to have a business plan.
