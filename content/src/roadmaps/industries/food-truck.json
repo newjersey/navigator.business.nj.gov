@@ -1,44 +1,62 @@
 {
-  "addOns": [
+  "id": "food-truck",
+  "name": "Food Truck",
+  "description": "A vehicle where food or beverages are transported, stored, or prepared for sale at temporary locations",
+  "canBeHomeBased": false,
+  "isLiquorLicenseApplicable": false,
+  "isMobileLocation": true,
+  "canBeReseller": true,
+  "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart",
+  "roadmapSteps": [
     {
-      "step": 2,
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
       "weight": 1,
       "task": "evaluate-your-location"
     },
     {
-      "step": 4,
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
       "weight": 1,
       "task": "apply-for-food-truck-license"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 2,
-      "task": "zoning"
+      "task": "zoning-food-truck"
     },
     {
-      "step": 5,
+      "step": 3,
+      "weight": 10,
+      "task": "get-insurance"
+    },
+    {
+      "step": 4,
       "weight": 100,
       "task": "food-safety-course"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 3,
-      "task": "sign-lease"
+      "task": "sign-lease-food-truck"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 2,
       "task": "town-mercantile-license"
-    }
-  ],
-  "modifications": [
-    {
-      "taskToReplaceFilename": "zoning",
-      "replaceWithFilename": "zoning-food-truck"
-    },
-    {
-      "taskToReplaceFilename": "sign-lease",
-      "replaceWithFilename": "sign-lease-food-truck"
     }
   ]
 }

@@ -1,7 +1,15 @@
-[
-  {
-    "step": 2,
-    "weight": 100,
-    "task": "liquor-license-availability"
-  }
-]
+{
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 100,
+      "task": "liquor-license-availability"
+    }
+  ],
+  "modifications": [
+    {
+      "taskToReplaceFilename": "town-mercantile-license",
+      "replaceWithFilename": "town-mercantile-license-liquor"
+    }
+  ]
+}

@@ -1,20 +1,48 @@
 {
-  "addOns": [
+  "id": "home-contractor",
+  "name": "Home Improvement Contractor",
+  "description": "Repairing or renovating residential or non-commercial properties",
+  "canBeHomeBased": true,
+  "isLiquorLicenseApplicable": false,
+  "licenseType": "Home Improvement Contractors",
+  "isMobileLocation": false,
+  "canBeReseller": true,
+  "additionalSearchTerms": "renovation",
+  "roadmapSteps": [
     {
-      "step": 2,
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
       "weight": 100,
       "task": "research-insurance-needs-home-contractor"
     },
     {
-      "step": 5,
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "get-insurance-home-contractor"
+    },
+    {
+      "step": 4,
       "weight": 100,
       "task": "register-consumer-affairs"
-    }
-  ],
-  "modifications": [
+    },
     {
-      "taskToReplaceFilename": "get-insurance",
-      "replaceWithFilename": "get-insurance-hic"
+      "step": 4,
+      "weight": 200,
+      "task": "Haul-Waste"
     }
   ]
 }
