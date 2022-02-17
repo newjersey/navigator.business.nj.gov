@@ -9,7 +9,7 @@ issuingAgency: "New Jersey Motor Vehicle Commission "
 formName: BLC-25
 ---
 
-The auto-body repair license can be obtained from the Motor Vehicle Commission. To receive a license you must be 18 years or older, have the legal capacity to contract and be liable for all debt incurred, and have no criminal record.
+Auto-body repair businesses are required to obtain a license. To apply for a license you must be 18 years or older, have the legal capacity to contract and be liable for all debt incurred, and have no criminal record.
 
 ---
 
