@@ -1,9 +1,10 @@
 ---
-id: "board-inspection"
-urlSlug: "site-inspection"
-name: "Pass Your Site Inspection"
+urlSlug: site-inspection
+name: Pass Your Site Inspection
+id: board-inspection
 callToActionLink: ""
 callToActionText: ""
+issuingAgency: New Jersey Division of Consumer Affairs Board of Cosmetology and Hairstyling
 ---
 
 After the Division of Consumer Affairs has received and reviewed your shop license application and confirmed all materials were submitted, you need to have the site inspected.
