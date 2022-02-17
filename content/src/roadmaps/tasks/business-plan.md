@@ -19,7 +19,7 @@ Your business plan guides your business and helps you make decisions around oper
 5. **[The Latin American Economic Development Association of Southern New Jersey](http://www.laeda.com/)** offers support to all entrepreneurs.
 6. **[Union County Economic Development Corporation](https://ucedc.com/)** provides free classes and paid business mentoring services.
 
->**Once completed, you will have**
+>**Once completed, you will have:**
 >
 >- A business plan to help you make informed decisions for this roadmap
 
