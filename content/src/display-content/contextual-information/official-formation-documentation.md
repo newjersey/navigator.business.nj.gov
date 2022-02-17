@@ -1,3 +1,0 @@
-## Official Formation Documentation
-
-Placeholder

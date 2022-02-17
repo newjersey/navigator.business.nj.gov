@@ -1,1 +1,0 @@
-An S Corporation (S Corp) is similar to a C Corporation except that the business is not taxed separately from the owners. S Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. [Learn more](https://business.nj.gov/pages/s-corporation-s-corp)

@@ -1,3 +1,0 @@
-### Failure to Pay Taxes on Time
-
-If you do not pay taxes on time...

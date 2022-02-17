@@ -1,5 +1,0 @@
----
-placeholder: "Office City"
----
-
-**City**

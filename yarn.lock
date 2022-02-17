@@ -2668,7 +2668,6 @@ __metadata:
     clean-webpack-plugin: 4.0.0
     copy-webpack-plugin: 10.2.4
     cross-env: 7.0.3
-    cspell: 5.18.4
     css-loader: 6.6.0
     cypress: 9.4.1
     cypress-audit: 1.1.0
