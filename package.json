@@ -99,7 +99,7 @@
     "@swc/jest": "0.2.17",
     "@testing-library/dom": "8.11.3",
     "@testing-library/jest-dom": "5.16.2",
-    "@testing-library/react": "12.1.2",
+    "@testing-library/react": "12.1.3",
     "@testing-library/user-event": "13.5.0",
     "@types/aws-lambda": "8.10.92",
     "@types/broken-link-checker": "0.7.1",
