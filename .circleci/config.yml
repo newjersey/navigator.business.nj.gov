@@ -1,5 +1,10 @@
 version: 2.1
 
+parameters:
+  build_content_site:
+    type: boolean
+    default: false
+
 commands:
   bootstrap-code-amplify:
     steps:
@@ -522,6 +527,11 @@ workflows:
                 - /^release-.*/
           requires:
             - prepare-release
+
+  build-content:
+    when: << pipeline.parameters.build_content_site >>
+    jobs:
+      - build
 
   build-and-test:
     jobs:
