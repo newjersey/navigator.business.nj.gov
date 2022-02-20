@@ -37,7 +37,7 @@
     "@mui/styles": "5.4.2",
     "@next/env": "12.1.0",
     "@storybook/addon-outline": "6.4.19",
-    "airtable": "0.11.1",
+    "airtable": "0.11.2",
     "aws-lambda": "1.0.7",
     "axios": "0.26.0",
     "babel-jest": "27.5.1",
