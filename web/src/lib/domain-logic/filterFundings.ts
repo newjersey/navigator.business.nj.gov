@@ -24,8 +24,8 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
       }
     }
 
-    if (userData.profileData.existingEmployees && it.businessSize) {
-      if (parseInt(userData.profileData.existingEmployees) === 0 && it.businessSize !== "n/a") {
+    if (userData.profileData.existingEmployees && it.employeesRequired) {
+      if (parseInt(userData.profileData.existingEmployees) === 0 && it.employeesRequired !== "n/a") {
         allowedFunding = false;
       }
     }

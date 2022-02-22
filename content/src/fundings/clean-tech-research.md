@@ -4,8 +4,6 @@ name: Clean Tech Research & Development (R&D) Voucher Program
 id: clean-tech-research-development-rd-voucher-program
 callToActionLink: https://www.njeda.com/cleantechvoucher/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

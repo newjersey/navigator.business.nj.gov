@@ -4,8 +4,6 @@ name: "Return and Earn: Employer Grants for Hiring Unemployed"
 id: return-and-earn-employer-grants-for-hiring-unemployed
 callToActionLink: https://www.nj.gov/labor/employer-services/business/returnandearn.shtml
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJDOL
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: one-time
 businessStage: both
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: n/a
-preferenceGiven: no
+preferenceForOpportunityZone: no
 county:
   - All
 sector: []

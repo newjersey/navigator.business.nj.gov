@@ -16,13 +16,13 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ homeBased: "yes", businessSize: "n/a" });
-    const funding2 = generateFunding({ homeBased: "no", businessSize: "n/a" });
-    const funding3 = generateFunding({ homeBased: "unknown", businessSize: "n/a" });
-    const funding4 = generateFunding({ homeBased: "yes", businessSize: "50" });
+    const funding1 = generateFunding({ homeBased: "yes", employeesRequired: "n/a" });
+    const funding2 = generateFunding({ homeBased: "no", employeesRequired: "n/a" });
+    const funding3 = generateFunding({ homeBased: "unknown", employeesRequired: "n/a" });
+    const funding4 = generateFunding({ homeBased: "yes", employeesRequired: "50" });
     const funding5 = generateFunding({
       homeBased: "yes",
-      businessSize: "n/a",
+      employeesRequired: "n/a",
       publishStageArchive: "Do Not Publish",
     });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
@@ -41,13 +41,13 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ homeBased: "yes", businessSize: "n/a" });
-    const funding2 = generateFunding({ homeBased: "no", businessSize: "n/a" });
-    const funding3 = generateFunding({ homeBased: "unknown", businessSize: "n/a" });
-    const funding4 = generateFunding({ homeBased: "yes", businessSize: "50" });
+    const funding1 = generateFunding({ homeBased: "yes", employeesRequired: "n/a" });
+    const funding2 = generateFunding({ homeBased: "no", employeesRequired: "n/a" });
+    const funding3 = generateFunding({ homeBased: "unknown", employeesRequired: "n/a" });
+    const funding4 = generateFunding({ homeBased: "yes", employeesRequired: "50" });
     const funding5 = generateFunding({
       homeBased: "yes",
-      businessSize: "n/a",
+      employeesRequired: "n/a",
       publishStageArchive: "Do Not Publish",
     });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
@@ -90,9 +90,9 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ businessSize: "n/a", publishStageArchive: "Do Not Publish" });
-    const funding2 = generateFunding({ businessSize: "n/a", publishStageArchive: null });
-    const funding3 = generateFunding({ businessSize: "200", publishStageArchive: "Do Not Publish" });
+    const funding1 = generateFunding({ employeesRequired: "n/a", publishStageArchive: "Do Not Publish" });
+    const funding2 = generateFunding({ employeesRequired: "n/a", publishStageArchive: null });
+    const funding3 = generateFunding({ employeesRequired: "200", publishStageArchive: "Do Not Publish" });
     const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
@@ -100,7 +100,7 @@ describe("filterFundings", () => {
     expect(result).toEqual(expect.arrayContaining([funding2]));
   });
 
-  it('displays only fundings with businessSize "n/a" when # employees is 0', () => {
+  it('displays only fundings with employeesRequired "n/a" when # employees is 0', () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         homeBasedBusiness: false,
@@ -109,9 +109,9 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ businessSize: "n/a" });
-    const funding2 = generateFunding({ businessSize: "yes" });
-    const funding3 = generateFunding({ businessSize: "n/a", publishStageArchive: "Do Not Publish" });
+    const funding1 = generateFunding({ employeesRequired: "n/a" });
+    const funding2 = generateFunding({ employeesRequired: "yes" });
+    const funding3 = generateFunding({ employeesRequired: "n/a", publishStageArchive: "Do Not Publish" });
     const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
@@ -119,7 +119,7 @@ describe("filterFundings", () => {
     expect(result).toEqual(expect.arrayContaining([funding1]));
   });
 
-  it('displays only fundings with businessSize "n/a" when # employees is equivalent to 0', () => {
+  it('displays only fundings with employeesRequired "n/a" when # employees is equivalent to 0', () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         homeBasedBusiness: false,
@@ -128,9 +128,9 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ businessSize: "n/a" });
-    const funding2 = generateFunding({ businessSize: "yes" });
-    const funding3 = generateFunding({ businessSize: "n/a", publishStageArchive: null });
+    const funding1 = generateFunding({ employeesRequired: "n/a" });
+    const funding2 = generateFunding({ employeesRequired: "yes" });
+    const funding3 = generateFunding({ employeesRequired: "n/a", publishStageArchive: null });
     const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
@@ -147,8 +147,8 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ businessSize: "n/a" });
-    const funding2 = generateFunding({ businessSize: "yes" });
+    const funding1 = generateFunding({ employeesRequired: "n/a" });
+    const funding2 = generateFunding({ employeesRequired: "yes" });
     const fundings = [funding1, funding2];
 
     const result = filterFundings(fundings, userData);

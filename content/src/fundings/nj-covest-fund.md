@@ -4,8 +4,6 @@ name: NJ CoVest Fund
 id: nj-covest-fund
 callToActionLink: https://www.njeda.com/njcovestfund/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: yes
+employeesRequired: yes
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

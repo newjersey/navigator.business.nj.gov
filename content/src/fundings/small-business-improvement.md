@@ -4,8 +4,6 @@ name: Small Business Improvement Grant
 id: small-business-improvement-grant
 callToActionLink: https://www.njeda.com/small-business-improvement-grant/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJEDA
@@ -15,11 +13,11 @@ dueDate: ""
 status: opening soon
 programFrequency: ongoing
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: no
 mwvb: 40% of program funds targeted to census tracts that were eligible to be
   designated as Opportunity Zones
-preferenceGiven: yes
+preferenceForOpportunityZone: yes
 county:
   - All
 sector: []

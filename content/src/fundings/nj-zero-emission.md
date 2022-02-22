@@ -4,8 +4,6 @@ name: NJ Zero Emission Incentive Program (NJZIP)
 id: nj-zero-emission-incentive-program-njzip
 callToActionLink: https://www.njeda.com/njzip.
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: pilot
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: yes
 mwvb: Bonuses available for MWBEs, VOB, small businesses (does not need to be SBE)
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - Camden
   - Middlesex

@@ -59,10 +59,11 @@ const airtableToOpportunity = async (airtableOpp) => {
     status: convertStatus(airtableOpp["Filter: Status (open// closed// ...)"]),
     programFrequency: convertProgramFrequency(airtableOpp["Filter: Program Frequency"] ?? ""),
     businessStage: convertBusinessStage(airtableOpp["Filter: Business Stage"] ?? ""),
-    businessSize: convertBusinessSize(airtableOpp["Filter: Business Size (Employees)"] ?? ""),
+    employeesRequired: convertemployeesRequired(airtableOpp["Filter: Business Size (Employees)"] ?? ""),
     homeBased: convertHomeBasedValues(airtableOpp["Filter: Home Base Businesses"] ?? ""),
     mwvb: convertMWVB(airtableOpp["Filter: MWVB"] ?? ""),
-    preferenceGiven: airtableOpp["Is preference given to businesses in an opportunity zone?"] ?? "",
+    preferenceForOpportunityZone:
+      airtableOpp["Is preference given to businesses in an opportunity zone?"] ?? "",
     county: airtableOpp["Filter: County"] ?? [],
   };
 };
@@ -148,7 +149,7 @@ const convertStatus = (value) => {
   }
 };
 
-const convertBusinessSize = (value) => {
+const convertemployeesRequired = (value) => {
   if (value === "N/A") {
     return "n/a";
   } else {
@@ -201,10 +202,10 @@ const writeMarkdownString = (opportunity) => {
     `status: "${opportunity.status}"\n` +
     `programFrequency: "${opportunity.programFrequency}"\n` +
     `businessStage: "${opportunity.businessStage}"\n` +
-    `businessSize: "${opportunity.businessSize}"\n` +
+    `employeesRequired: "${opportunity.employeesRequired}"\n` +
     `homeBased: "${opportunity.homeBased}"\n` +
     `mwvb: "${opportunity.mwvb}"\n` +
-    `preferenceGiven: "${opportunity.preferenceGiven}"\n` +
+    `preferenceForOpportunityZone: "${opportunity.preferenceForOpportunityZone}"\n` +
     `county: [${opportunity.county.map((it) => `"${it}"`).join(",")}]\n` +
     `---\n` +
     `\n` +

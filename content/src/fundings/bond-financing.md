@@ -4,8 +4,6 @@ name: Bond Financing
 id: bond-financing
 callToActionLink: https://www.njeda.com/bondfinancing/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector: []

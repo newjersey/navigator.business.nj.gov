@@ -4,8 +4,6 @@ name: Small Business  Fund
 id: small-business-fund
 callToActionLink: "https://www.njeda.com/smallbusinessfund/ "
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: yes
 mwvb: mwbe
-preferenceGiven: no
+preferenceForOpportunityZone: no
 county:
   - All
 sector: []

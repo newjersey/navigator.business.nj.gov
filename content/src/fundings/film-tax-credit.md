@@ -4,8 +4,6 @@ name: Film Tax Credit Program
 id: film-tax-credit-program
 callToActionLink: https://www.njeda.com/film
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax credit
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: reoccuring
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: no
 mwvb: Diversity Bonus available
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

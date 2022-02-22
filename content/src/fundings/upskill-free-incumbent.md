@@ -4,8 +4,6 @@ name: "Upskill: Free Incumbent Worker Training Programs"
 id: upskill-free-incumbent-worker-training-programs
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJDOL
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: reoccuring
 businessStage: both
-businessSize: Yes
+employeesRequired: Yes
 homeBased: no
 mwvb: n/a
-preferenceGiven: no
+preferenceForOpportunityZone: no
 county:
   - All
 sector:

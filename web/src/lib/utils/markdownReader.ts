@@ -5,7 +5,7 @@ import {
   Funding,
   FundingBusinessStage,
   FundingHomeBased,
-  FundingPreferenceGiven,
+  FundingpreferenceForOpportunityZone,
   FundingProgramFrequency,
   FundingPublishStatus,
   FundingStatus,
@@ -73,8 +73,6 @@ type FundingGrayMatter = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  benefits: string;
-  eligibility: string;
   fundingType: FundingType;
   agency: OpportunityAgency[];
   publishStageArchive: FundingPublishStatus | null;
@@ -83,10 +81,10 @@ type FundingGrayMatter = {
   status: FundingStatus;
   programFrequency: FundingProgramFrequency;
   businessStage: FundingBusinessStage;
-  businessSize: string;
+  employeesRequired: string;
   homeBased: FundingHomeBased;
   mwvb: string;
-  preferenceGiven: FundingPreferenceGiven | null;
+  preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];
 };

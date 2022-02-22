@@ -4,8 +4,6 @@ name: Economic Redevelopment and Growth (ERG) Program
 id: economic-redevelopment-and-growth-erg-program
 callToActionLink: https://www.njeda.com/erg/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax credit
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: closed
 programFrequency: one-time
 businessStage: operating
-businessSize: yes
+employeesRequired: yes
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:
