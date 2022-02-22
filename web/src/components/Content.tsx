@@ -107,5 +107,9 @@ const OutlineBox = ({ children }: { children: string[] }): ReactElement => {
 };
 
 const GreenBox = ({ children }: { children: string[] }): ReactElement => {
-  return <div className="green-box text-normal padding-2 margin-top-2 bg-success-lighter">{children}</div>;
+  return (
+    <div className="green-box text-normal padding-2 margin-top-2 bg-success-lighter radius-lg">
+      {children}
+    </div>
+  );
 };
