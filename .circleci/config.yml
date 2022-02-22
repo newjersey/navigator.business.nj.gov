@@ -1,0 +1,33 @@
+version: 2.1
+
+jobs:
+  build-content:
+    docker:
+      - image: cimg/node:14.19.0
+    steps:
+      - checkout
+      - run: 
+          name: yarn install
+          command: yarn install
+      - run:
+          name: "Run Spellchecker"
+          command: yarn spellcheck
+      - run:
+          name: Trigger the navigator build job
+          command: |
+            printf "Triggering an navigator.business.nj.gov build on the main branch\n\n"
+
+            BUILD_INFO=$(curl --request POST --url https://circleci.com/api/v2/project/gh/newjersey/navigator.business.nj.gov/pipeline  --header 'authorization: api_key_header' --header 'content-type: application/json' --header "Circle-Token: $CIRCLE_TOKEN" --data '{"branch":"main","parameters":{"build_content_site":true}}')
+
+            printf "\n\nBuild triggered\n\n"
+            printf "Follow the progress of the build on \nhttps://circleci.com/gh/newjersey/navigator.business.nj.gov/tree/main"
+      
+
+workflows:
+  content-workflow:
+    jobs:
+      - build-content:
+          filters:
+            branches:
+              only:
+                - main
