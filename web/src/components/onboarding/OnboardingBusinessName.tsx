@@ -7,17 +7,19 @@ interface Props {
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
   fieldStates?: ProfileFieldErrorMap;
   headerAriaLevel?: number;
+  disabled?: boolean;
 }
 
 export const OnboardingBusinessName = (props: Props): ReactElement => {
   return (
     <OnboardingField
-      fieldName={"businessName"}
+      fieldName="businessName"
       onValidation={props.onValidation}
       error={props.fieldStates ? props.fieldStates.businessName.invalid : false}
       required={true}
       validationText={OnboardingDefaults.errorTextRequiredBusinessName}
       headerAriaLevel={props.headerAriaLevel}
+      disabled={props.disabled}
     />
   );
 };

@@ -127,7 +127,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const startingNewBusiness = (
     <>
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingBusinessName />
+      <OnboardingBusinessName disabled={userData?.formationData.getFilingResponse?.success} />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingIndustry />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
@@ -156,7 +156,12 @@ const ProfilePage = (props: Props): ReactElement => {
         <Content>{mergedDisplayContent.businessInformation.contentMd}</Content>
       </div>
       <div className="margin-top-4">
-        <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+        <OnboardingBusinessName
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          headerAriaLevel={3}
+          disabled={userData?.formationData.getFilingResponse?.success}
+        />
       </div>
       <div className="margin-top-4">
         <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />

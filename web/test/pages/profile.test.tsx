@@ -180,6 +180,19 @@ describe("profile", () => {
       expect(subject.getByLabelText("Entity id").getAttribute("disabled")).not.toBeNull();
     });
 
+    it("disables business name field if formation getFiling success", () => {
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({
+            success: true,
+          }),
+        }),
+      });
+
+      subject = renderPage({ userData });
+      expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
+    });
+
     it("prevents user from saving if they have not selected a location", async () => {
       const newark = generateMunicipality({ displayName: "Newark" });
       subject = renderPage({ municipalities: [newark] });
@@ -526,6 +539,20 @@ describe("profile", () => {
         expect(() => currentUserData()).toThrowError();
       });
     });
+  });
+
+  it("disables business name field if formation getFiling success", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({ hasExistingBusiness: true }),
+      formationData: generateFormationData({
+        getFilingResponse: generateGetFilingResponse({
+          success: true,
+        }),
+      }),
+    });
+
+    subject = renderPage({ userData });
+    expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
   });
 
   const fillText = (label: string, value: string) => {
