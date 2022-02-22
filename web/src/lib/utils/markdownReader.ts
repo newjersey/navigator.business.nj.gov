@@ -99,6 +99,7 @@ type CertificationGrayMatter = {
   callToActionText: string;
   agency: OpportunityAgency[];
   applicableOwnershipTypes: string[];
+  isSbe: boolean;
 };
 
 export type MarkdownResult = {

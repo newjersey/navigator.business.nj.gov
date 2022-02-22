@@ -5,6 +5,7 @@ id: mwbe
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
 callToActionText: Apply for My M/WBE Certification
 applicableOwnershipTypes: []
+isSbe: false
 ---
 
 A `Minority|minority` or `Women|women` owned Business Enterprise (M/WBE) is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a minority AND/OR women.

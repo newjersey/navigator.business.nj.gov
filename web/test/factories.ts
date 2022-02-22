@@ -582,6 +582,7 @@ export const generateCertification = (overrides: Partial<Certification>): Certif
     contentMd: `some-content-${randomInt()}`,
     agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
     applicableOwnershipTypes: [randomOwnershipType().id],
+    isSbe: false,
     ...overrides,
   };
 };
