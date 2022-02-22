@@ -46,7 +46,12 @@
     "tanf",
     "Dougle",
     "DVOB",
-    "epcd"
+    "epcd",
+    "microbusiness",
+    "microbusinesses",
+    "diverslyownedbusiness",
+    "impactzonebusiness",
+    "socialequitybusiness"
   ],
   "ignorePaths": ["node_modules/**", "out/**"]
 }
