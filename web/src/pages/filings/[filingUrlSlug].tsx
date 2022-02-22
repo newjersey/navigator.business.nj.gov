@@ -38,7 +38,7 @@ const FilingPage = (props: Props): ReactElement => {
               <div className="margin-bottom-2">
                 <h1>{props.filing.name}</h1>
               </div>
-              <div className="margin-bottom-4" data-testid="due-date">
+              <div className="display-inline-flex margin-bottom-4" data-testid="due-date">
                 <Tag tagVariant="baseDark" bold={true}>
                   {FilingDefaults.tagContentBeforeDueDate} {dueDate}
                 </Tag>
