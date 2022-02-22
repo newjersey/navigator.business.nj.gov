@@ -51,7 +51,7 @@ export const getOnboardingFlows = (
             { name: "entityId", valid: !fieldStates.entityId.invalid },
             {
               name: "dateOfFormation",
-              valid: !!profileData.dateOfFormation && !fieldStates.dateOfFormation.invalid,
+              valid: !fieldStates.dateOfFormation.invalid,
             },
           ],
         }),
