@@ -39,7 +39,7 @@
     "cors": "2.8.5",
     "dayjs": "1.10.7",
     "dedent": "0.7.0",
-    "express": "4.17.2",
+    "express": "4.17.3",
     "jsonwebtoken": "8.5.1",
     "serverless-http": "2.7.0",
     "simple-oauth2": "4.3.0",
