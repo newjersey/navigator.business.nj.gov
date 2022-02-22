@@ -65,7 +65,7 @@
     "swr": "1.2.1"
   },
   "devDependencies": {
-    "@babel/core": "7.17.2",
+    "@babel/core": "7.17.5",
     "@jest/types": "27.5.1",
     "@mdx-js/react": "2.0.0",
     "@next/bundle-analyzer": "12.1.0",
