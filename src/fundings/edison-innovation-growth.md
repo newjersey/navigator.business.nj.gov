@@ -4,8 +4,6 @@ name: Edison Innovation Growth Stars Fund
 id: edison-innovation-growth-stars-fund
 callToActionLink: https://www.njeda.com/edisoninnovation/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: n/a
+employeesRequired: n/a
 homeBased: no
 mwvb: mwbe
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

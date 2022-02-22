@@ -4,8 +4,6 @@ name: Investments in Women-Led Start-ups
 id: investments-in-women-led-startups
 callToActionLink: http://www.njeda.com/goldenseeds
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: technical assistance
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: n/a
+employeesRequired: n/a
 homeBased: yes
 mwvb: wbe
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

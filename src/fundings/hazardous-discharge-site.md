@@ -4,8 +4,6 @@ name: Hazardous Discharge Site Remediation Fund
 id: hazardous-discharge-site-remediation-fund
 callToActionLink: https://www.nj.gov/dep/srp/finance/hdsrf/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: both
-businessSize: n/a
+employeesRequired: n/a
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

@@ -4,8 +4,6 @@ name: Urban Enterprise Zone Manufacturers Energy Sales Tax Exemption
 id: urban-enterprise-zone-manufacturers-energy-sales-tax-exemption
 callToActionLink: https://www.njeda.com/uez/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax exemption
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: reoccuring
 businessStage: operating
-businessSize: yes
+employeesRequired: yes
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

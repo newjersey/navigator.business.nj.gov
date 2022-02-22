@@ -4,8 +4,6 @@ name: Venture Fund Investments
 id: venture-fund-investments
 callToActionLink: https://www.njeda.com/venturefunds/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: yes
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

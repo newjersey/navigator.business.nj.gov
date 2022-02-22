@@ -5,8 +5,6 @@ name: Technology Business Tax Certificate Transfer (NOL) Program [formerly Net
 id: technology-business-tax-certificate-transfer-nol-program-[formerly-net-operating-loss-program]
 callToActionLink: https://www.njeda.com/nol/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax credit
 agency:
   - NJEDA
@@ -16,12 +14,12 @@ dueDate: 07/01/2022
 status: deadline
 programFrequency: reoccuring
 businessStage: early-stage
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: $10 million set aside for businesses located in Innovation Zones (any
   unused balance of the $10 million set-aside is reverted to the general program
   pool)
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

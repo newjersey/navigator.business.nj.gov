@@ -4,8 +4,6 @@ name: New Jersey Founders & Funders
 id: new-jersey-founders-funders
 callToActionLink: ""
 callToActionText: ""
-benefits: ""
-eligibility: ""
 fundingType: technical assistance
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: reoccuring
 businessStage: early-stage
-businessSize: n/a
+employeesRequired: n/a
 homeBased: yes
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

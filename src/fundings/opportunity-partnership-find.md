@@ -4,8 +4,6 @@ name: "Opportunity Partnership: Find Skilled Employees"
 id: opportunity-partnership-find-skilled-employees
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJDOL
@@ -15,10 +13,10 @@ dueDate: ""
 status: opening soon
 programFrequency: reoccuring
 businessStage: both
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: n/a
-preferenceGiven: no
+preferenceForOpportunityZone: no
 county:
   - All
 sector:

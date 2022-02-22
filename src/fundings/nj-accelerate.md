@@ -4,8 +4,6 @@ name: NJ Accelerate
 id: nj-accelerate
 callToActionLink: https://www.njeda.com/njaccelerate/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
@@ -15,11 +13,11 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: n/a
+employeesRequired: n/a
 homeBased: yes
 mwvb: Bonuses available for accelerator programs with a diversity focus as well
   as mwbe
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

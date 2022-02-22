@@ -4,8 +4,6 @@ name: Offshore Wind Tax Credit Program
 id: offshore-wind-tax-credit-program
 callToActionLink: https://www.njeda.com/offshorewindtaxcredit/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax credit
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: 07/01/2025
 status: first-come, first-served
 programFrequency: ongoing
 businessStage: operating
-businessSize: yes
+employeesRequired: yes
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

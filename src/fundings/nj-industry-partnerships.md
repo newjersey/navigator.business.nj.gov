@@ -4,8 +4,6 @@ name: NJ Industry Partnerships
 id: nj-industry-partnerships
 callToActionLink: https://industrypartnerships.nj.gov/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: hiring and employee training support
 agency:
   - NJDOL
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: both
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: n/a
-preferenceGiven: no
+preferenceForOpportunityZone: no
 county:
   - All
 sector: []

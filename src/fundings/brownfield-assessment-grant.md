@@ -4,8 +4,6 @@ name: Brownfield Assessment Grant
 id: brownfield-assessment-grant
 callToActionLink: https://www.njeda.com/community%20revitalization/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: one-time
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector: []

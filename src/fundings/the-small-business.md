@@ -4,8 +4,6 @@ name: The Small Business Bonding Readiness Assistance Program
 id: the-small-business-bonding-readiness-assistance-program
 callToActionLink: https://www.aaccnj.com/bonding-program---sbbrap.html
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: technical assistance
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: reoccuring
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: yes
 mwvb: mwbe
-preferenceGiven: no
+preferenceForOpportunityZone: no
 county:
   - All
 sector: []
