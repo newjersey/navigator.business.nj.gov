@@ -2352,7 +2352,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 27.5.1
-    "@serverless/typescript": 3.1.1
+    "@serverless/typescript": 3.3.0
     "@types/aws-lambda": 8.10.92
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
@@ -2390,10 +2390,10 @@ __metadata:
     prettier: 2.5.1
     prettier-plugin-organize-imports: 2.3.4
     rimraf: 3.0.2
-    serverless: 3.1.1
+    serverless: 3.3.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
-    serverless-offline: 8.4.0
+    serverless-offline: 8.5.0
     serverless-offline-ssm: 5.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.1
@@ -2406,7 +2406,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 3.5.2
     typescript: 4.5.5
     uuid: 8.3.2
-    webpack: 5.68.0
+    webpack: 5.69.1
     webpack-node-externals: 3.0.0
     winston: 3.6.0
     winston-cloudwatch: 3.1.1
@@ -2452,7 +2452,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.1.0
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 3.1.1
+    "@serverless/typescript": 3.3.0
     "@storybook/addon-a11y": 6.4.19
     "@storybook/addon-actions": 6.4.19
     "@storybook/addon-docs": 6.4.19
@@ -2560,10 +2560,10 @@ __metadata:
     sass: 1.49.8
     sass-loader: 12.6.0
     semantic-release: 19.0.2
-    serverless: 3.1.1
+    serverless: 3.3.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
-    serverless-offline: 8.4.0
+    serverless-offline: 8.5.0
     serverless-offline-ssm: 5.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.1
@@ -2579,7 +2579,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 3.5.2
     typescript: 4.5.5
     uuid: 8.3.2
-    webpack: 5.68.0
+    webpack: 5.69.1
     webpack-node-externals: 3.0.0
     winston: 3.6.0
     winston-cloudwatch: 3.1.1
@@ -2715,7 +2715,7 @@ __metadata:
     ts-loader: 9.2.6
     ts-node: 10.5.0
     typescript: 4.5.5
-    webpack: 5.68.0
+    webpack: 5.69.1
   languageName: unknown
   linkType: soft
 
@@ -6719,7 +6719,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/dashboard-plugin@npm:^6.0.0":
+"@serverless/dashboard-plugin@npm:^6.1.0":
   version: 6.1.0
   resolution: "@serverless/dashboard-plugin@npm:6.1.0"
   dependencies:
@@ -6780,14 +6780,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:3.1.1":
-  version: 3.1.1
-  resolution: "@serverless/typescript@npm:3.1.1"
-  checksum: 09d28ffb41ceee6c8f8e5a2fa70667d339c3a5e4f3a5b6febb30906f1adc72d971b505e6236664405f14b2b9cb581a10df33046e7e5803bf2bba000110d28332
+"@serverless/typescript@npm:3.3.0":
+  version: 3.3.0
+  resolution: "@serverless/typescript@npm:3.3.0"
+  checksum: 22d48612a86b34406a80d79bf4f282ba4059e96f3300c4929500501de3fa78ac8b9a5755024fab4872239232eb325ec2c30f445dfd538e499d51a25b9f6f9074
   languageName: node
   linkType: hard
 
-"@serverless/utils@npm:^6.0.0, @serverless/utils@npm:^6.0.2":
+"@serverless/utils@npm:^6.0.2":
   version: 6.0.2
   resolution: "@serverless/utils@npm:6.0.2"
   dependencies:
@@ -8611,7 +8611,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint-scope@npm:^3.7.0, @types/eslint-scope@npm:^3.7.3":
+"@types/eslint-scope@npm:^3.7.3":
   version: 3.7.3
   resolution: "@types/eslint-scope@npm:3.7.3"
   dependencies:
@@ -8635,13 +8635,6 @@ __metadata:
   version: 0.0.51
   resolution: "@types/estree@npm:0.0.51"
   checksum: e56a3bcf759fd9185e992e7fdb3c6a5f81e8ff120e871641607581fb3728d16c811702a7d40fa5f869b7f7b4437ab6a87eb8d98ffafeee51e85bbe955932a189
-  languageName: node
-  linkType: hard
-
-"@types/estree@npm:^0.0.50":
-  version: 0.0.50
-  resolution: "@types/estree@npm:0.0.50"
-  checksum: 9a2b6a4a8c117f34d08fbda5e8f69b1dfb109f7d149b60b00fd7a9fb6ac545c078bc590aa4ec2f0a256d680cf72c88b3b28b60c326ee38a7bc8ee1ee95624922
   languageName: node
   linkType: hard
 
@@ -10146,7 +10139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ajv@npm:^8.0.0, ajv@npm:^8.8.0, ajv@npm:^8.9.0":
+"ajv@npm:^8.0.0, ajv@npm:^8.10.0, ajv@npm:^8.8.0":
   version: 8.10.0
   resolution: "ajv@npm:8.10.0"
   dependencies:
@@ -10966,9 +10959,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1065.0, aws-sdk@npm:^2.1066.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0":
-  version: 2.1077.0
-  resolution: "aws-sdk@npm:2.1077.0"
+"aws-sdk@npm:^2.1076.0, aws-sdk@npm:^2.7.0, aws-sdk@npm:^2.814.0":
+  version: 2.1079.0
+  resolution: "aws-sdk@npm:2.1079.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -10979,7 +10972,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: 728e8f2dfb1751d050ba5fdb032c78a8748ea3d8d13c898efdb0c68db3cd4a5369fab782d0d827a0cb8830372fabf2621e2824a8838d152eec2b8726f30f1a42
+  checksum: 7c355c56afdac3fcf29af63391b95f78d3a4b1b6d78c5a2438f0d1c7f0fb7cc2675319c0f88210e9e114856a3026b8d313b692255fa4192d2fc3ed96bf9245c0
   languageName: node
   linkType: hard
 
@@ -30087,14 +30080,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:8.4.0":
-  version: 8.4.0
-  resolution: "serverless-offline@npm:8.4.0"
+"serverless-offline@npm:8.5.0":
+  version: 8.5.0
+  resolution: "serverless-offline@npm:8.5.0"
   dependencies:
     "@hapi/boom": ^9.1.4
     "@hapi/h2o2": ^9.1.0
     "@hapi/hapi": ^20.2.1
-    aws-sdk: ^2.1065.0
+    aws-sdk: ^2.1076.0
     boxen: ^5.1.2
     chalk: ^4.1.2
     cuid: ^2.1.8
@@ -30119,10 +30112,10 @@ __metadata:
     semver: ^7.3.5
     update-notifier: ^5.1.0
     velocityjs: ^2.0.6
-    ws: ^7.5.6
+    ws: ^7.5.7
   peerDependencies:
     serverless: ^1.60.0 || 2 || 3
-  checksum: 814e072d302a1448eba9cccdf57425a5a7a48cc5aa86d97c7fd7edcf1cfb781d74e87b331e73b859328279241f38ea0957d5ac6b2ecbc6560046ac8abac2f209
+  checksum: 0b69625f5df4eda5d8fe35771abced654752ec042fba8523aeb9b54a71e589c33b303db57d8875838d08bb4e9e1b7461f2b870570521142e738950f9d992e300
   languageName: node
   linkType: hard
 
@@ -30159,17 +30152,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.1.1":
-  version: 3.1.1
-  resolution: "serverless@npm:3.1.1"
+"serverless@npm:3.3.0":
+  version: 3.3.0
+  resolution: "serverless@npm:3.3.0"
   dependencies:
-    "@serverless/dashboard-plugin": ^6.0.0
+    "@serverless/dashboard-plugin": ^6.1.0
     "@serverless/platform-client": ^4.3.1
-    "@serverless/utils": ^6.0.0
-    ajv: ^8.9.0
+    "@serverless/utils": ^6.0.2
+    ajv: ^8.10.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.0
-    aws-sdk: ^2.1066.0
+    aws-sdk: ^2.1076.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
@@ -30206,19 +30199,19 @@ __metadata:
     promise-queue: ^2.2.5
     require-from-string: ^2.0.2
     semver: ^7.3.5
-    signal-exit: ^3.0.6
+    signal-exit: ^3.0.7
     strip-ansi: ^6.0.1
     supports-color: ^8.1.1
     tar: ^6.1.11
     timers-ext: ^0.1.7
-    type: ^2.5.0
+    type: ^2.6.0
     untildify: ^4.0.0
     uuid: ^8.3.2
     yaml-ast-parser: 0.0.43
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 360f37dc8ff5a26d9e501ba6ec0197039166e6836cb564b40fd7052679121de82243e9d8dc2eb491654648e9e9f7edd8ab40922aaf50cf4572d7859fe6024b35
+  checksum: dd77bd84d4f5387f0bf6e05bc0c3e3c32fbbfd03416710dcf91d90331100e6d06b9245d9aa48a17e0edbf8e60176050b836542d58de3ffa8d076abbfbbee9904
   languageName: node
   linkType: hard
 
@@ -30353,7 +30346,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"signal-exit@npm:^3.0.0, signal-exit@npm:^3.0.2, signal-exit@npm:^3.0.3, signal-exit@npm:^3.0.6, signal-exit@npm:^3.0.7":
+"signal-exit@npm:^3.0.0, signal-exit@npm:^3.0.2, signal-exit@npm:^3.0.3, signal-exit@npm:^3.0.7":
   version: 3.0.7
   resolution: "signal-exit@npm:3.0.7"
   checksum: a2f098f247adc367dffc27845853e9959b9e88b01cb301658cfe4194352d8d2bb32e18467c786a7fe15f1d44b233ea35633d076d5e737870b7139949d1ab6318
@@ -34088,44 +34081,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.68.0":
-  version: 5.68.0
-  resolution: "webpack@npm:5.68.0"
-  dependencies:
-    "@types/eslint-scope": ^3.7.0
-    "@types/estree": ^0.0.50
-    "@webassemblyjs/ast": 1.11.1
-    "@webassemblyjs/wasm-edit": 1.11.1
-    "@webassemblyjs/wasm-parser": 1.11.1
-    acorn: ^8.4.1
-    acorn-import-assertions: ^1.7.6
-    browserslist: ^4.14.5
-    chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.8.3
-    es-module-lexer: ^0.9.0
-    eslint-scope: 5.1.1
-    events: ^3.2.0
-    glob-to-regexp: ^0.4.1
-    graceful-fs: ^4.2.9
-    json-parse-better-errors: ^1.0.2
-    loader-runner: ^4.2.0
-    mime-types: ^2.1.27
-    neo-async: ^2.6.2
-    schema-utils: ^3.1.0
-    tapable: ^2.1.1
-    terser-webpack-plugin: ^5.1.3
-    watchpack: ^2.3.1
-    webpack-sources: ^3.2.3
-  peerDependenciesMeta:
-    webpack-cli:
-      optional: true
-  bin:
-    webpack: bin/webpack.js
-  checksum: ac6efd861a0bfb35d8a467fba0d87f905ef6e1a9a9f7e3db42ea459cf191268094cedd025d3eb36a1464e2208a0c193f3f4a92531ba58850246f3c6b8f210b03
-  languageName: node
-  linkType: hard
-
-"webpack@npm:^5, webpack@npm:^5.9.0":
+"webpack@npm:5.69.1, webpack@npm:^5, webpack@npm:^5.9.0":
   version: 5.69.1
   resolution: "webpack@npm:5.69.1"
   dependencies:
@@ -34507,7 +34463,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^7.0.0, ws@npm:^7.2.3, ws@npm:^7.3.1, ws@npm:^7.4.6, ws@npm:^7.5.3, ws@npm:^7.5.6":
+"ws@npm:^7.0.0, ws@npm:^7.2.3, ws@npm:^7.3.1, ws@npm:^7.4.6, ws@npm:^7.5.3, ws@npm:^7.5.7":
   version: 7.5.7
   resolution: "ws@npm:7.5.7"
   peerDependencies:
