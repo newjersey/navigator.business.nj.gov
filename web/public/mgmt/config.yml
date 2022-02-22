@@ -510,7 +510,7 @@ collections:
 
   - name: "contextual-information"
     label: "Contextual Information"
-    folder: "src/display-contextual-information"
+    folder: "src/display-content/content/contextual-information"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -524,7 +524,7 @@ collections:
 
   - name: "owning-onboarding-content"
     label: "Oscar Onboarding Content"
-    folder: "src/display-onboarding/owning"
+    folder: "src/display-content/content/onboarding/owning"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -542,7 +542,7 @@ collections:
 
   - name: "starting-onboarding-content"
     label: "Poppy Onboarding Content"
-    folder: "src/display-onboarding/starting"
+    folder: "src/display-content/onboarding/starting"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -561,7 +561,7 @@ collections:
 
   - name: "profile-content"
     label: "Profile Content"
-    folder: "src/display-onboarding/profile"
+    folder: "src/display-content/onboarding/profile"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -580,7 +580,7 @@ collections:
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"
-    folder: "src/display-post-onboarding"
+    folder: "src/display-content/post-onboarding"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -600,7 +600,7 @@ collections:
 
   - name: "business-formation"
     label: "Business Formation"
-    folder: "src/display-business-formation"
+    folder: "src/display-content/business-formation"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -631,7 +631,7 @@ collections:
 
   - name: "roadmap-content"
     label: "Roadmap Content"
-    folder: "src/display-roadmap"
+    folder: "src/display-content/roadmap"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
