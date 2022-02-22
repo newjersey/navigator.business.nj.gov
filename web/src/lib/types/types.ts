@@ -569,6 +569,7 @@ export type Certification = {
   contentMd: string;
   agency: OpportunityAgency[];
   applicableOwnershipTypes: string[];
+  isSbe: boolean;
 };
 
 export type OpportunityAgency = "NJEDA" | "NJDOL";
