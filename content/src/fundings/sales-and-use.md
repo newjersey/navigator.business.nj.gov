@@ -4,8 +4,6 @@ name: Sales and Use Tax Exemption Program
 id: sales-and-use-tax-exemption-program
 callToActionLink: https://www.njeda.com/stx/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax exemption
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: operating
-businessSize: yes
+employeesRequired: yes
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector: []

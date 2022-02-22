@@ -541,8 +541,6 @@ export type Funding = {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
-  benefits: string;
-  eligibility: string;
   fundingType: FundingType;
   agency: OpportunityAgency[];
   publishStageArchive: FundingPublishStatus | null;
@@ -551,10 +549,10 @@ export type Funding = {
   status: FundingStatus;
   programFrequency: FundingProgramFrequency;
   businessStage: FundingBusinessStage;
-  businessSize: string;
+  employeesRequired: string;
   homeBased: FundingHomeBased;
   mwvb: string;
-  preferenceGiven: FundingPreferenceGiven | null;
+  preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];
 };
@@ -585,7 +583,7 @@ export type FundingStatus = "open" | "deadline" | "first-come, first-served" | "
 export type FundingProgramFrequency = "annual" | "ongoing" | "reoccuring" | "one-time" | "pilot" | "other";
 export type FundingBusinessStage = "early-stage" | "operating" | "both";
 export type FundingHomeBased = "yes" | "no" | "unknown";
-export type FundingPreferenceGiven = "yes" | "no";
+export type FundingpreferenceForOpportunityZone = "yes" | "no";
 
 export const AllCounties = [
   "All",

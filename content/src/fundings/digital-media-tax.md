@@ -4,8 +4,6 @@ name: Digital Media Tax Credit
 id: digital-media-tax-credit
 callToActionLink: https://www.njeda.com/film
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax credit
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: reoccuring
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: yes
 mwvb: Bonuses for projects that submit an approved diversity plan.
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - Atlantic
   - Burlington

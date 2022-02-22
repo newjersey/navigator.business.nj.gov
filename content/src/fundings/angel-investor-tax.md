@@ -4,8 +4,6 @@ name: Angel Investor Tax Credit Program
 id: angel-investor-tax-credit-program
 callToActionLink: https://www.njeda.com/angeltaxcredit/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax credit
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: 11/02/2022
 status: deadline
 programFrequency: reoccuring
 businessStage: early-stage
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: mwbe
-preferenceGiven: yes
+preferenceForOpportunityZone: yes
 county:
   - All
 sector:

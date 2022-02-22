@@ -4,8 +4,6 @@ name: Small Business Lease Grant
 id: small-business-lease-grant
 callToActionLink: https://www.njeda.com/small-business-lease-grant-program/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJEDA
@@ -15,11 +13,11 @@ dueDate: ""
 status: first-come, first-served
 programFrequency: one-time
 businessStage: operating
-businessSize: n/a
+employeesRequired: n/a
 homeBased: no
 mwvb: 40% of program funds targeted to census tracts that were eligible to be
   designated as Opportunity Zones
-preferenceGiven: yes
+preferenceForOpportunityZone: yes
 county:
   - All
 sector: []

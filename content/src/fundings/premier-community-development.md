@@ -4,16 +4,14 @@ name: Premier Community Development Financial Institution (CDFI) Program
 id: premier-community-development-financial-institution-cdfi-program
 callToActionLink: https://www.njeda.com/premierCDFI/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: loan
 agency:
   - NJEDA
 publishStageArchive: null
 openDate: ""
 dueDate: ""
-businessSize: n/a
-preferenceGiven: null
+employeesRequired: n/a
+preferenceForOpportunityZone: null
 sector:
   - digital-and-print-media
 status: open

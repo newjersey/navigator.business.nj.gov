@@ -4,8 +4,6 @@ name: NJ Brownfields Assistance Center @ NJIT
 id: nj-brownfields-assistance-center-njit
 callToActionLink: www.njit.edu/njbrownfields
 callToActionText: Learn More
-benefits: ""
-eligibility: ""
 fundingType: technical assistance
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: both
-businessSize: n/a
+employeesRequired: n/a
 homeBased: no
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector: []

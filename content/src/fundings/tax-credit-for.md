@@ -4,8 +4,6 @@ name: Tax Credit for Hiring Veterans and Other Target Groups
 id: tax-credit-for-hiring-veterans-and-other-target-groups
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax credit
 agency:
   - NJDOL
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: both
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: n/a
-preferenceGiven: no
+preferenceForOpportunityZone: no
 county:
   - All
 sector:

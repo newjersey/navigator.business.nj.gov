@@ -4,8 +4,6 @@ name: NJ Ignite
 id: nj-ignite
 callToActionLink: https://www.njeda.com/njignite
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: grant
 agency:
   - NJEDA
@@ -15,13 +13,13 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: early-stage
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: Bonus months available for workspaces located in an Opportunity Zone,
   affiliated with a hospital system or New Jersey university, or is recently
   established. Also, for  registered MWBE companies or a foreign company’s first
   location in the US.
-preferenceGiven: yes
+preferenceForOpportunityZone: yes
 county:
   - All
 sector:

@@ -4,8 +4,6 @@ name: Per-Job Tax Credits with the Emerge Program
 id: perjob-tax-credits-with-the-emerge-program
 callToActionLink: https://www.njeda.com/emerge/
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: tax credit
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: other
 businessStage: operating
-businessSize: yes
+employeesRequired: yes
 homeBased: no
 mwvb: Bonuses available based on business size, industry, and other project details
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:

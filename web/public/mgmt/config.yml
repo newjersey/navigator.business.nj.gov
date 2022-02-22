@@ -215,8 +215,6 @@ collections:
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Benefits", name: "benefits", widget: "string", required: false }
-      - { label: "Eligibility", name: "eligibility", widget: "string", required: false }
       - label: "Funding Type"
         name: "fundingType"
         widget: "select"
@@ -241,22 +239,6 @@ collections:
         options: ["Do Not Publish"]
         default: ""
         required: false
-      - {
-          label: "Open Date",
-          name: "openDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
-      - {
-          label: "Due Date",
-          name: "dueDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
       - label: "Status"
         name: "status"
         widget: "select"
@@ -269,15 +251,21 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-      - { label: "Business Size", name: "businessSize", widget: "string", required: false }
+      - {
+          label: "Employees Required",
+          name: "employeesRequired",
+          widget: "select",
+          required: true,
+          options: ["yes", "n/a"],
+        }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
         options: ["yes", "no", "unknown"]
         default: "unknown"
       - { label: "MWVB", name: "mwvb", widget: "string", required: false }
-      - label: "Preference Given"
-        name: "preferenceGiven"
+      - label: "Preference for Opportunity Zone"
+        name: "preferenceForOpportunityZone"
         widget: "select"
         options: ["yes", "no"]
         required: false
@@ -311,7 +299,7 @@ collections:
             "Union",
             "Warren",
           ]
-      - label: Sector
+      - label: Industry Sector
         name: sector
         widget: relation
         multiple: true
@@ -320,7 +308,22 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
-
+      - {
+          label: "Open Date",
+          name: "openDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+      - {
+          label: "Due Date",
+          name: "dueDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
   - name: "archived-funding-opportunities"
     label: "Archived Funding Opportunities Content"
     folder: "src/archived-fundings"
@@ -338,8 +341,6 @@ collections:
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Benefits", name: "benefits", widget: "string", required: false }
-      - { label: "Eligibility", name: "eligibility", widget: "string", required: false }
       - label: "Funding Type"
         name: "fundingType"
         widget: "select"
@@ -363,22 +364,6 @@ collections:
         widget: "select"
         options: ["Do Not Publish"]
         required: false
-      - {
-          label: "Open Date",
-          name: "openDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
-      - {
-          label: "Due Date",
-          name: "dueDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
       - label: "Status"
         name: "status"
         widget: "select"
@@ -391,15 +376,21 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-      - { label: "Business Size", name: "businessSize", widget: "string", required: false }
+      - {
+          label: "Employees Required",
+          name: "employeesRequired",
+          widget: "select",
+          required: true,
+          options: ["yes", "n/a"],
+        }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
         options: ["yes", "no", "unknown"]
         default: "unknown"
       - { label: "MWVB", name: "mwvb", widget: "string", required: false }
-      - label: "Preference Given"
-        name: "preferenceGiven"
+      - label: "Preference for Opportunity Zone"
+        name: "preferenceForOpportunityZone"
         widget: "select"
         options: ["yes", "no"]
         required: false
@@ -432,7 +423,7 @@ collections:
             "Union",
             "Warren",
           ]
-      - label: Sector
+      - label: Industry Sector
         name: sector
         widget: relation
         multiple: true
@@ -441,7 +432,22 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
-
+      - {
+          label: "Open Date",
+          name: "openDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+      - {
+          label: "Due Date",
+          name: "dueDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
   - name: "certification-opportunities"
     label: "Certification Opportunities Content"
     folder: "src/certifications"

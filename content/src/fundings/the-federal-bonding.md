@@ -4,8 +4,6 @@ name: "The Federal Bonding Program: Assurance for Hiring Risk Workers"
 id: the-federal-bonding-program-assurance-for-hiring-risk-workers
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
-benefits: ""
-eligibility: ""
 fundingType: hiring and employee training support
 agency:
   - NJDOL
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: both
-businessSize: yes
+employeesRequired: yes
 homeBased: yes
 mwvb: n/a
-preferenceGiven: no
+preferenceForOpportunityZone: no
 county:
   - All
 sector: []

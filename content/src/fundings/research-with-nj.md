@@ -4,8 +4,6 @@ name: Research with NJ
 id: research-with-nj
 callToActionLink: www.researchwithnj.com
 callToActionText: Learn More
-benefits: ""
-eligibility: ""
 fundingType: technical assistance
 agency:
   - NJEDA
@@ -15,10 +13,10 @@ dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: both
-businessSize: n/a
+employeesRequired: n/a
 homeBased: unknown
 mwvb: n/a
-preferenceGiven: ""
+preferenceForOpportunityZone: ""
 county:
   - All
 sector:
