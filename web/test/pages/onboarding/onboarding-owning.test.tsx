@@ -179,27 +179,6 @@ describe("onboarding - owning a business", () => {
     });
   });
 
-  it("prevents user from moving after Step 2 if your dateOfFormation is empty", async () => {
-    const { subject, page } = renderPage({});
-    page.chooseRadio("has-existing-business-true");
-    await page.visitStep2();
-    page.clickNext();
-    await waitFor(() => {
-      expect(subject.getByTestId("step-2")).toBeInTheDocument();
-      expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
-      expect(subject.getByText(OnboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
-      expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
-    });
-    page.selectDate("Date of formation", date);
-    expect(subject.queryByText(OnboardingDefaults.dateOfFormationErrorText)).not.toBeInTheDocument();
-    await page.visitStep3();
-    await waitFor(() => {
-      expect(subject.getByTestId("step-3")).toBeInTheDocument();
-      expect(subject.queryByTestId("step-2")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
-    });
-  });
-
   it("prevents user from moving after Step 3 if you have not entered a business name", async () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-true");
