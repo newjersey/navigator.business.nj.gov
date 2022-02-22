@@ -5,8 +5,10 @@ import express, { Express } from "express";
 import request from "supertest";
 import {
   generateFormationData,
+  generateFormationFormData,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
+  generateProfileData,
   generateUserData,
 } from "../../test/factories";
 import { FormationClient, UserDataClient } from "../domain/types";
@@ -104,8 +106,14 @@ describe("formationRouter", () => {
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
       const userData = generateUserData({
+        profileData: generateProfileData({
+          businessName: "Old Name",
+        }),
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+          formationFormData: generateFormationFormData({
+            businessName: "New Name",
+          }),
         }),
       });
       stubUserDataClient.get.mockResolvedValue(userData);
@@ -126,6 +134,7 @@ describe("formationRouter", () => {
         profileData: {
           ...userData.profileData,
           entityId: getFilingResponse.entityId,
+          businessName: "New Name",
         },
       };
 
@@ -134,13 +143,19 @@ describe("formationRouter", () => {
       expect(stubFormationClient.getCompletedFiling).toHaveBeenCalledWith("some-formation-id");
     });
 
-    it("updates userData, without taskProgress complete nor entityID, if getFiling is not success", async () => {
+    it("updates userData, without taskProgress complete, entityID and businessName, if getFiling is not success", async () => {
       const getFilingResponse = generateGetFilingResponse({ success: false });
       stubFormationClient.getCompletedFiling.mockResolvedValue(getFilingResponse);
 
       const userData = generateUserData({
+        profileData: generateProfileData({
+          businessName: "Old Name",
+        }),
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+          formationFormData: generateFormationFormData({
+            businessName: "New Name",
+          }),
         }),
       });
       stubUserDataClient.get.mockResolvedValue(userData);
