@@ -1,7 +1,12 @@
 import { getPathSeparator } from "@/test/helpers";
 import { LegalStructures } from "@businessnjgovnavigator/shared";
 import fs from "fs";
-import { loadRoadmapDisplayContent, loadUserDisplayContent } from "./loadDisplayContent";
+import {
+  loadDashboardDisplayContent,
+  loadRoadmapDisplayContent,
+  loadTasksDisplayContent,
+  loadUserDisplayContent,
+} from "./loadDisplayContent";
 
 jest.mock("fs");
 
@@ -58,6 +63,29 @@ describe("loadDisplayContent", () => {
 
       mockedFs.readFileSync.mockReturnValue(roadmapContentMd);
       expect(loadRoadmapDisplayContent().contentMd).toEqual("### I am a header\n\nI am a description");
+    });
+  });
+
+  describe("loadDashboardDisplayContent", () => {
+    it("returns dashboard content from markdown", () => {
+      const introTextContent = "### I am a header\n\nI am a description";
+
+      mockedFs.readFileSync.mockReturnValue(introTextContent);
+      expect(loadDashboardDisplayContent().introTextMd).toEqual("### I am a header\n\nI am a description");
+      expect(loadDashboardDisplayContent().opportunityTextMd).toEqual(
+        "### I am a header\n\nI am a description"
+      );
+    });
+  });
+
+  describe("loadTasksDisplayContent", () => {
+    it("returns task display content from markdown", () => {
+      const introParagraph = "### I am a header\n\nI am a description";
+
+      mockedFs.readFileSync.mockReturnValue(introParagraph);
+      expect(loadTasksDisplayContent().formationDisplayContent.introParagraph.contentMd).toEqual(
+        "### I am a header\n\nI am a description"
+      );
     });
   });
 });
