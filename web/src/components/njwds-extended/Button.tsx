@@ -25,31 +25,26 @@ interface Props {
 export const Button = (props: Props): ReactElement => {
   let style = "";
   let disabledClass = "";
-  let btnHeight = "";
   const widthRef = useRef<HTMLInputElement | null>(null);
   const [width, setWidth] = useState<number>();
   const [height, setHeight] = useState<number>();
 
   switch (props.style) {
     case "primary":
-      style = "usa-button";
+      style = "usa-button padding-y-1";
       disabledClass = "usa-button--disabled";
-      btnHeight = "height-5";
       break;
     case "primary-input-field-height":
-      style = "usa-button padding-y-205";
-      disabledClass = "usa-button--disabled padding-y-205";
-      btnHeight = "height-7";
+      style = "usa-button padding-y-2";
+      disabledClass = "usa-button--disabled padding-y-2";
       break;
     case "secondary":
-      style = "usa-button usa-button--outline";
+      style = "usa-button usa-button--outline padding-y-1";
       disabledClass = "usa-button--outline-disabled";
-      btnHeight = "height-5";
       break;
     case "secondary-input-field-height":
-      style = "usa-button usa-button--outline padding-y-205";
-      disabledClass = "usa-button--outline-disabled padding-y-205";
-      btnHeight = "height-7";
+      style = "usa-button usa-button--outline padding-y-2";
+      disabledClass = "usa-button--outline-disabled padding-y-2";
       break;
     case "tertiary":
       style = "usa-button usa-button--unstyled";
@@ -66,7 +61,7 @@ export const Button = (props: Props): ReactElement => {
 
   return (
     <button
-      className={`${style} ${props.heightAutoOnMobile ? "height-auto" : btnHeight}${
+      className={`${style} ${props.heightAutoOnMobile ? "height-auto" : ""}${
         props.noRightMargin && props.style !== "tertiary" ? " margin-right-0" : ""
       }${!props.noRightMargin && props.style !== "tertiary" ? " margin-right-2" : ""}${
         props.style === "tertiary" ? " margin-right-0" : ""
