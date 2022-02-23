@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Tag } from "@/components/njwds-extended/Tag";
-import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
@@ -21,12 +21,12 @@ interface Props {
 const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
   funding: (
     <Tag tagVariant="baseBlack" hexColor="#D5A0E3">
-      {DashboardDefaults.fundingTagText}
+      {Defaults.dashboardDefaults.fundingTagText}
     </Tag>
   ),
   certification: (
     <Tag tagVariant="baseBlack" hexColor="#b1b0e3">
-      {DashboardDefaults.certificationTagText}
+      {Defaults.dashboardDefaults.certificationTagText}
     </Tag>
   ),
 };

@@ -15,6 +15,31 @@ media_folder: web/public/img
 logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
 public_folder: web/public
 collections:
+  - name: "config"
+    label: "General Config"
+    editor:
+      preview: false
+    files:
+      - label: "Defaults"
+        name: "defaults"
+        file: "src/display-defaults/defaults.json"
+        fields:
+          - label: Dashboard Defaults
+            name: dashboardDefaults
+            collapsed: true
+            widget: object
+            summary: "{{dashboardDefaults}}"
+            fields:
+              - { label: Header Text, name: headerText, widget: string }
+              - { label: Missing Name Header Text, name: missingNameHeaderText, widget: string }
+              - { label: Edit Profile Text, name: editProfileText, widget: string }
+              - { label: Opportunities Header, name: opportunitiesHeader, widget: string }
+              - { label: Funding Tag Text, name: fundingTagText, widget: string }
+              - { label: Certification Tag Text, name: certificationTagText, widget: string }
+              - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
+              - { label: Calendar Header, name: calendarHeader, widget: string }
+              - { label: Calendar Tooltip, name: calendarTooltip, widget: string }
+
   - label: Roadmap Add-ons
     name: addons
     folder: "src/roadmaps/add-ons"

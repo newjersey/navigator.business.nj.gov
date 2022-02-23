@@ -4,7 +4,6 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
-import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -17,6 +16,7 @@ import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
@@ -57,8 +57,8 @@ const DashboardPage = (props: Props): ReactElement => {
                 <div className="desktop:grid-col-8 usa-prose">
                   <h1>
                     {userData?.user.name
-                      ? templateEval(DashboardDefaults.headerText, { name: userData.user.name })
-                      : DashboardDefaults.missingNameHeaderText}
+                      ? templateEval(Defaults.dashboardDefaults.headerText, { name: userData.user.name })
+                      : Defaults.dashboardDefaults.missingNameHeaderText}
                   </h1>
                   <Content>{props.displayContent.introTextMd}</Content>
 
@@ -67,7 +67,7 @@ const DashboardPage = (props: Props): ReactElement => {
                       href="/profile"
                       onClick={() => analytics.event.roadmap_profile_edit_button.click.return_to_onboarding()}
                     >
-                      {DashboardDefaults.editProfileText}
+                      {Defaults.dashboardDefaults.editProfileText}
                     </a>
                   </p>
 
@@ -80,11 +80,11 @@ const DashboardPage = (props: Props): ReactElement => {
                     operateReferences={props.operateReferences}
                   />
 
-                  <p className="text-base-dark">{DashboardDefaults.calendarLegalText}</p>
+                  <p className="text-base-dark">{Defaults.dashboardDefaults.calendarLegalText}</p>
                 </div>
 
                 <div className="desktop:grid-col-4 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">
-                  <h2>{DashboardDefaults.opportunitiesHeader}</h2>
+                  <h2>{Defaults.dashboardDefaults.opportunitiesHeader}</h2>
                   <hr className="margin-bottom-3" aria-hidden={true} />
                   <div className="dashboard-opportunities-list">
                     {filteredCertifications.map((cert) => (
