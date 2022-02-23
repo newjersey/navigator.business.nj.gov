@@ -1,14 +1,10 @@
-import { createEmptyUserData } from "@shared/userData";
+import { UserData } from "@shared/userData";
 import bodyParser from "body-parser";
 import express, { Express } from "express";
 import request from "supertest";
-import uuid from "uuid";
 import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
 import { SelfRegClient, UserDataClient } from "../domain/types";
 import { selfRegRouterFactory } from "./selfRegRouter";
-
-jest.mock("uuid", () => ({ v4: jest.fn() }));
-const mockUuid = uuid as jest.Mocked<typeof uuid>;
 
 function mockCrypto() {
   return {
@@ -50,205 +46,88 @@ describe("selfRegRouter", () => {
     await new Promise((resolve) => setTimeout(resolve, 500));
   });
 
-  it("returns an error if emails do not match", async () => {
-    const response = await request(app).post(`/self-reg`).send({
-      email: "some-email",
-      confirmEmail: "non-matching-email",
+  const sendRequest = async (userData: UserData) => request(app).post(`/self-reg`).send(userData);
+
+  describe("when record has a myNJ key", () => {
+    const myNJKey = "some-mynj-key";
+    const stubRecordWithMyNJKey = generateUserData({ user: generateUser({ myNJUserKey: myNJKey }) });
+
+    it("calls auth resume with myNJ key, saves data, & returns the auth redirect URL on success", async () => {
+      const selfRegResponse = generateSelfRegResponse({ myNJUserKey: myNJKey });
+      stubSelfRegClient.resume.mockResolvedValue(selfRegResponse);
+
+      const response = await sendRequest(stubRecordWithMyNJKey);
+      expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...stubRecordWithMyNJKey,
+        user: {
+          ...stubRecordWithMyNJKey.user,
+          intercomHash: "hashed-mynj-result",
+        },
+      });
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
     });
 
-    expect(response.status).toEqual(400);
+    it("returns an error when auth resume fails", async () => {
+      stubUserDataClient.findByEmail.mockResolvedValue(stubRecordWithMyNJKey);
+      stubSelfRegClient.resume.mockRejectedValue({});
+
+      const response = await sendRequest(stubRecordWithMyNJKey);
+      expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
+      expect(response.status).toEqual(500);
+    });
+
+    it("returns a 409 error when auth resume returns DUPLICATE_SIGNUP", async () => {
+      stubSelfRegClient.resume.mockRejectedValue("DUPLICATE_SIGNUP");
+
+      const response = await sendRequest(stubRecordWithMyNJKey);
+      expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
+      expect(response.status).toEqual(409);
+    });
   });
 
-  describe("when emails match", () => {
-    const email = "some-email";
-    const name = "some name";
-    const sendRequest = async () =>
-      request(app).post(`/self-reg`).send({
-        email: email,
-        confirmEmail: email,
-        name: name,
-        receiveNewsletter: true,
-        userTesting: true,
-      });
+  describe("when record DOES NOT have a myNJ key", () => {
+    const stubRecordNoKey = generateUserData({ user: generateUser({ myNJUserKey: undefined }) });
 
-    it("fetches user data from database via email", async () => {
-      stubUserDataClient.findByEmail.mockResolvedValue(generateUserData({}));
-      await sendRequest();
-      expect(stubUserDataClient.findByEmail).toHaveBeenCalledWith(email);
+    it("calls auth grant with user info & returns the auth redirect URL & saves myNJ key / hash on success", async () => {
+      const selfRegResponse = generateSelfRegResponse({});
+      stubSelfRegClient.grant.mockResolvedValue(selfRegResponse);
+
+      const response = await sendRequest(stubRecordNoKey);
+
+      expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
+
+      const newUserWithKey = {
+        ...stubRecordNoKey,
+        user: {
+          ...stubRecordNoKey.user,
+          myNJUserKey: selfRegResponse.myNJUserKey,
+          intercomHash: "hashed-mynj-result",
+        },
+      };
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(newUserWithKey);
+
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
     });
 
-    describe("when record matching email found", () => {
-      describe("when record has a myNJ key", () => {
-        const myNJKey = "some-mynj-key";
-        const stubRecordWithMyNJKey = generateUserData({ user: generateUser({ myNJUserKey: myNJKey }) });
+    it("returns an error when auth grant fails", async () => {
+      stubSelfRegClient.grant.mockRejectedValue({});
 
-        it("calls auth resume with myNJ key & returns the auth redirect URL on success", async () => {
-          stubUserDataClient.findByEmail.mockResolvedValue(stubRecordWithMyNJKey);
-          const selfRegResponse = generateSelfRegResponse({});
-          stubSelfRegClient.resume.mockResolvedValue(selfRegResponse);
-
-          const response = await sendRequest();
-          expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
-          expect(response.status).toEqual(200);
-          expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
-        });
-
-        it("returns an error when auth resume fails", async () => {
-          stubUserDataClient.findByEmail.mockResolvedValue(stubRecordWithMyNJKey);
-          stubSelfRegClient.resume.mockRejectedValue({});
-
-          const response = await sendRequest();
-          expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
-          expect(response.status).toEqual(500);
-        });
-
-        it("returns a 409 error when auth resume returns DUPLICATE_SIGNUP", async () => {
-          stubUserDataClient.findByEmail.mockResolvedValue(stubRecordWithMyNJKey);
-          stubSelfRegClient.resume.mockRejectedValue("DUPLICATE_SIGNUP");
-
-          const response = await sendRequest();
-          expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
-          expect(response.status).toEqual(409);
-        });
-      });
-
-      describe("when record DOES NOT have a myNJ key", () => {
-        const stubRecordNoKey = generateUserData({ user: generateUser({ myNJUserKey: undefined }) });
-
-        it("calls auth grant with user info & returns the auth redirect URL & saves myNJ key / hash on success", async () => {
-          stubUserDataClient.findByEmail.mockResolvedValue(stubRecordNoKey);
-          const selfRegResponse = generateSelfRegResponse({});
-          stubSelfRegClient.grant.mockResolvedValue(selfRegResponse);
-
-          const response = await sendRequest();
-
-          expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
-
-          const newUserWithKey = {
-            ...stubRecordNoKey,
-            user: {
-              ...stubRecordNoKey.user,
-              myNJUserKey: selfRegResponse.myNJUserKey,
-              intercomHash: "hashed-mynj-result",
-            },
-          };
-          expect(stubUserDataClient.put).toHaveBeenCalledWith(newUserWithKey);
-
-          expect(response.status).toEqual(200);
-          expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
-        });
-
-        it("returns an error when auth grant fails", async () => {
-          stubUserDataClient.findByEmail.mockResolvedValue(stubRecordNoKey);
-          stubSelfRegClient.grant.mockRejectedValue({});
-
-          const response = await sendRequest();
-          expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
-          expect(stubUserDataClient.put).not.toHaveBeenCalled();
-          expect(response.status).toEqual(500);
-        });
-
-        it("returns a 409 error when auth grant returns DUPLICATE_SIGNUP", async () => {
-          stubUserDataClient.findByEmail.mockResolvedValue(stubRecordNoKey);
-          stubSelfRegClient.grant.mockRejectedValue("DUPLICATE_SIGNUP");
-
-          const response = await sendRequest();
-          expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
-          expect(stubUserDataClient.put).not.toHaveBeenCalled();
-          expect(response.status).toEqual(409);
-        });
-      });
+      const response = await sendRequest(stubRecordNoKey);
+      expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
+      expect(stubUserDataClient.put).not.toHaveBeenCalled();
+      expect(response.status).toEqual(500);
     });
 
-    describe("when NO record matching email found", () => {
-      const stubUuid = "some-uuid";
-      beforeEach(async () => {
-        mockUuid.v4.mockReturnValue(stubUuid);
-        stubUserDataClient.findByEmail.mockResolvedValue(undefined);
-      });
+    it("returns a 409 error when auth grant returns DUPLICATE_SIGNUP", async () => {
+      stubSelfRegClient.grant.mockRejectedValue("DUPLICATE_SIGNUP");
 
-      it("puts initial user data into database with generated UUID, calls auth grant, saves new user & returns redirect", async () => {
-        const emptyUserData = createEmptyUserData({
-          myNJUserKey: undefined,
-          email: email,
-          id: stubUuid,
-          name: name,
-          externalStatus: {},
-          receiveNewsletter: true,
-          userTesting: true,
-        });
-        stubUserDataClient.put.mockResolvedValue(emptyUserData);
-
-        const selfRegResponse = generateSelfRegResponse({});
-        stubSelfRegClient.grant.mockResolvedValue(selfRegResponse);
-
-        const response = await sendRequest();
-        expect(stubUserDataClient.put).toHaveBeenCalledWith(emptyUserData);
-        expect(stubSelfRegClient.grant).toHaveBeenCalledWith(emptyUserData.user);
-
-        const newUserWithKey = {
-          ...emptyUserData,
-          user: {
-            ...emptyUserData.user,
-            myNJUserKey: selfRegResponse.myNJUserKey,
-            intercomHash: "hashed-mynj-result",
-          },
-        };
-        expect(stubUserDataClient.put).toHaveBeenCalledWith(newUserWithKey);
-
-        expect(response.status).toEqual(200);
-        expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
-      });
-
-      it("returns an error when save new user fails", async () => {
-        stubUserDataClient.put.mockRejectedValue({});
-        const response = await sendRequest();
-        expect(response.status).toEqual(500);
-      });
-
-      it("returns an error when auth grant fails", async () => {
-        const emptyUserData = createEmptyUserData({
-          myNJUserKey: undefined,
-          email: email,
-          id: stubUuid,
-          name: "",
-          externalStatus: {},
-          receiveNewsletter: true,
-          userTesting: true,
-        });
-
-        stubUserDataClient.put.mockResolvedValue(emptyUserData);
-        stubSelfRegClient.grant.mockRejectedValue({});
-
-        const response = await sendRequest();
-        expect(response.status).toEqual(500);
-      });
-
-      it("returns a 409 error when auth grant returns DUPLICATE_SIGNUP", async () => {
-        const emptyUserData = createEmptyUserData({
-          myNJUserKey: undefined,
-          email: email,
-          id: stubUuid,
-          name: "",
-          externalStatus: {},
-          receiveNewsletter: true,
-          userTesting: true,
-        });
-
-        stubUserDataClient.put.mockResolvedValue(emptyUserData);
-        stubSelfRegClient.grant.mockRejectedValue("DUPLICATE_SIGNUP");
-
-        const response = await sendRequest();
-        expect(response.status).toEqual(409);
-      });
-    });
-
-    describe("when find email call fails", () => {
-      it("returns an error", async () => {
-        stubUserDataClient.findByEmail.mockRejectedValue({});
-        const response = await sendRequest();
-        expect(response.status).toEqual(500);
-      });
+      const response = await sendRequest(stubRecordNoKey);
+      expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
+      expect(stubUserDataClient.put).not.toHaveBeenCalled();
+      expect(response.status).toEqual(409);
     });
   });
 });

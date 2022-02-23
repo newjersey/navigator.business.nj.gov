@@ -5,7 +5,7 @@ import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { postSelfReg } from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
@@ -34,7 +34,15 @@ import {
 } from "@/lib/utils/helpers";
 import { RoadmapContext } from "@/pages/_app";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
-import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  BusinessUser,
+  createEmptyProfileData,
+  createEmptyUser,
+  createEmptyUserData,
+  Municipality,
+  ProfileData,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -61,6 +69,7 @@ interface Props {
 interface ProfileDataState {
   page?: number;
   profileData: ProfileData;
+  user?: BusinessUser;
   displayContent: UserDisplayContent;
   flow?: UserContentType;
   municipalities: Municipality[];
@@ -69,6 +78,7 @@ interface ProfileDataState {
 interface ProfileDataContextType {
   state: ProfileDataState;
   setProfileData: (profileData: ProfileData) => void;
+  setUser: (user: BusinessUser) => void;
   onBack: () => void;
 }
 
@@ -76,21 +86,23 @@ export const ProfileDataContext = createContext<ProfileDataContextType>({
   state: {
     page: 1,
     profileData: createEmptyProfileData(),
+    user: createEmptyUser(),
     flow: "STARTING",
     displayContent: createEmptyUserDisplayContent(),
     municipalities: [],
   },
   setProfileData: () => {},
+  setUser: () => {},
   onBack: () => {},
 });
 
 const OnboardingPage = (props: Props): ReactElement => {
-  useAuthProtectedPage();
   const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
 
   const router = useRouter();
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [user, setUser] = useState<BusinessUser>(createEmptyUser());
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const { userData, update } = useUserData();
@@ -108,13 +120,14 @@ const OnboardingPage = (props: Props): ReactElement => {
   );
 
   const onboardingFlows = useMemo(() => {
-    const onboardingFlows = getOnboardingFlows(profileData, onValidation, fieldStates);
+    const onboardingFlows = getOnboardingFlows(profileData, user, onValidation, fieldStates);
     return onboardingFlows;
-  }, [profileData, onValidation, fieldStates]);
+  }, [profileData, user, onValidation, fieldStates]);
 
   useEffect(() => {
     if (userData) {
       setProfileData(userData.profileData);
+      setUser(userData.user);
       setCurrentFlow(userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
     }
   }, [userData, setProfileData]);
@@ -146,7 +159,10 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    if (!userData) return;
+    let currentUserData = userData;
+    if (!currentUserData) {
+      currentUserData = createEmptyUserData(user);
+    }
 
     const currentPageFlow = onboardingFlows[currentFlow].pages[page.current - 1];
     const errorMap = currentPageFlow.getErrorMap();
@@ -168,11 +184,11 @@ const OnboardingPage = (props: Props): ReactElement => {
     let newProfileData = profileData;
 
     const hasExistingBusinessChanged =
-      profileData.hasExistingBusiness !== userData.profileData.hasExistingBusiness;
+      profileData.hasExistingBusiness !== currentUserData.profileData.hasExistingBusiness;
 
     if (page.current === 1 && hasExistingBusinessChanged) {
       let initialOnboardingFlow = profileData.initialOnboardingFlow;
-      if (userData.formProgress !== "COMPLETED") {
+      if (currentUserData.formProgress !== "COMPLETED") {
         initialOnboardingFlow = profileData.hasExistingBusiness ? "OWNING" : "STARTING";
       }
 
@@ -207,10 +223,10 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     const newRoadmap = await buildUserRoadmap(profileData);
     setRoadmap(newRoadmap);
-    setSectionCompletion(getSectionCompletion(newRoadmap, userData));
+    setSectionCompletion(getSectionCompletion(newRoadmap, currentUserData));
 
     if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
-      update({ ...userData, profileData: newProfileData }).then(() => {
+      update({ ...currentUserData, user, profileData: newProfileData }, { local: true }).then(() => {
         const nextCurrentPage = page.current + 1;
         setPage({
           current: nextCurrentPage,
@@ -221,13 +237,24 @@ const OnboardingPage = (props: Props): ReactElement => {
       });
     } else {
       analytics.event.onboarding_last_step.submit.finish_onboarding();
-      update({ ...userData, profileData: newProfileData, formProgress: "COMPLETED" }).then(async () => {
-        if (newProfileData.hasExistingBusiness) {
-          await router.push("/dashboard");
-        } else {
-          await router.push("/roadmap");
-        }
-      });
+      const newUserData: UserData = {
+        ...currentUserData,
+        user,
+        profileData: newProfileData,
+        formProgress: "COMPLETED",
+      };
+      postSelfReg(newUserData)
+        .then(async (response) => {
+          update(newUserData, { local: true });
+          await router.replace(response.authRedirectURL);
+        })
+        .catch((errorCode) => {
+          if (errorCode === 409) {
+            setError("MYNJ_DUPLICATE_SIGNUP");
+          } else {
+            setError("MYNJ_GENERIC");
+          }
+        });
     }
   };
 
@@ -288,11 +315,13 @@ const OnboardingPage = (props: Props): ReactElement => {
         state: {
           page: page.current,
           profileData: profileData,
+          user: user,
           flow: currentFlow,
           displayContent: props.displayContent[currentFlow] as UserDisplayContent,
           municipalities: props.municipalities,
         },
         setProfileData,
+        setUser,
         onBack,
       }}
     >

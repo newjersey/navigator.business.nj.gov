@@ -35,6 +35,7 @@ const adminPassword = process.env.ADMIN_PASSWORD ?? "";
 const myNJServiceToken = process.env.MYNJ_SERVICE_TOKEN || "";
 const myNJRoleName = process.env.MYNJ_ROLE_NAME || "";
 const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
+const useFakeSelfReg = process.env.USE_FAKE_SELF_REG || "";
 const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 
 const serverlessConfiguration: AWS = {
@@ -131,6 +132,7 @@ const serverlessConfiguration: AWS = {
       MYNJ_SERVICE_TOKEN: myNJServiceToken,
       MYNJ_ROLE_NAME: myNJRoleName,
       MYNJ_SERVICE_URL: myNJServiceUrl,
+      USE_FAKE_SELF_REG: useFakeSelfReg,
       ADMIN_PASSWORD: adminPassword,
       STAGE: stage,
       INTERCOM_HASH_SECRET: intercomHashSecret,

@@ -1,5 +1,6 @@
 import {
   BusinessUser,
+  emptyBusinessUser,
   emptyProfileData,
   FormationFormData,
   PaymentType,
@@ -14,7 +15,11 @@ export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
-export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS";
+export type ProfileError =
+  | "REQUIRED_LEGAL"
+  | "REQUIRED_EXISTING_BUSINESS"
+  | "MYNJ_DUPLICATE_SIGNUP"
+  | "MYNJ_GENERIC";
 
 export type TextFieldContent = {
   contentMd: string;
@@ -492,13 +497,15 @@ export const createEmptyLoadDisplayContent = (): LoadDisplayContent => ({
   OWNING: emptyOwningFlowContent,
   PROFILE: emptyProfileContent,
 });
-export type ProfileFields = keyof ProfileData & keyof UserDisplayContent;
+export type ProfileFields = (keyof ProfileData & keyof UserDisplayContent) | keyof BusinessUser;
 
 export const profileDisplayFields = Object.keys(emptyProfileContent) as (keyof ProfileContent)[];
 
 export const owningFlowDisplayFields = Object.keys(emptyOwningFlowContent) as (keyof OwningFlowContent)[];
 
 export const startFlowDisplayFields = Object.keys(emptyStartingFlowContent) as (keyof StartingFlowContent)[];
+
+const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
 
 const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
 
@@ -508,6 +515,7 @@ export const profileFields: ProfileFields[] = [
     ...onboardingDataFields,
     ...owningFlowDisplayFields,
     ...startFlowDisplayFields,
+    ...businessUserDisplayFields,
   ]),
 ] as ProfileFields[];
 

@@ -1,3 +1,4 @@
+import * as api from "@/lib/api-client/apiClient";
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
 import {
@@ -10,6 +11,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
+  getLastCalledWithConfig,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
@@ -23,6 +25,9 @@ jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
+
+const mockApi = api as jest.Mocked<typeof api>;
 
 const date = dayjs().subtract(1, "month").date(1);
 describe("onboarding - shared", () => {
@@ -30,6 +35,7 @@ describe("onboarding - shared", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
+    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "" });
   });
 
   it("routes to the first onboarding question when they have not answered the first question", async () => {
@@ -84,6 +90,23 @@ describe("onboarding - shared", () => {
 
     page.clickNext();
     await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(5));
+  });
+
+  it("updates locally for each step", async () => {
+    const { page } = renderPage({ userData: generateUserData({}) });
+    page.chooseRadio("has-existing-business-false");
+    await page.visitStep2();
+    expect(getLastCalledWithConfig().local).toEqual(true);
+    await page.visitStep3();
+    expect(getLastCalledWithConfig().local).toEqual(true);
+    await page.visitStep4();
+    expect(getLastCalledWithConfig().local).toEqual(true);
+    await page.visitStep5();
+    expect(getLastCalledWithConfig().local).toEqual(true);
+    await page.visitStep6();
+    expect(getLastCalledWithConfig().local).toEqual(true);
+    page.clickNext();
+    await waitFor(() => expect(getLastCalledWithConfig().local).toEqual(true));
   });
 
   it("prevents user from moving after Step 1 if you have not selected whether you own a business", async () => {

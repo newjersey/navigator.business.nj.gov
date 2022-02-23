@@ -247,6 +247,7 @@ commands:
           name: Set Cypress Environment Variables
           command: |
             echo 'export API_BASE_URL=http://localhost:5000/local' >> $BASH_ENV
+            echo 'export USE_FAKE_SELF_REG=true' >> $BASH_ENV
             echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
             echo 'export COGNITO_USER_POOL_ID=$COGNITO_USER_POOL_ID_DEV' >> $BASH_ENV

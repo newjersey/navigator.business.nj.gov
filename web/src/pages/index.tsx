@@ -4,17 +4,15 @@ import { Card } from "@/components/njwds-extended/Card";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { Signup } from "@/components/Signup";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect } from "react";
 
 const Home = (): ReactElement => {
   const { userData, error } = useUserData();
   const router = useRouter();
-  const [signupIsOpen, setSignupIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (userData?.formProgress === "COMPLETED") {
@@ -38,8 +36,10 @@ const Home = (): ReactElement => {
 
   useEffect(() => {
     if (!router.isReady || !router.query.signUp) return;
-    setSignupIsOpen(router.query.signUp === "true");
-  }, [router.isReady, router.query]);
+    if (router.query.signUp === "true") {
+      router.replace("/onboarding");
+    }
+  }, [router.isReady, router, router.query]);
 
   return (
     <PageSkeleton home={true}>
@@ -52,12 +52,10 @@ const Home = (): ReactElement => {
             supportingText={Defaults.landingPage.heroSupportingText}
             callToActionText={Defaults.landingPage.heroCallToActionText}
             onClick={() => {
-              setSignupIsOpen(true);
+              router.push("/onboarding");
               analytics.event.landing_page_hero_get_started.click.open_create_account_modal();
             }}
           />
-
-          <Signup isOpen={signupIsOpen} onClose={() => setSignupIsOpen(false)} />
 
           <div className="l2-bg height-34 bg-contain">
             <div className="grid-custom">

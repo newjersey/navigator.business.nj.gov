@@ -1,5 +1,5 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
-import { NameAvailability, SelfRegRequest, SelfRegResponse } from "@/lib/types/types";
+import { NameAvailability, SelfRegResponse } from "@/lib/types/types";
 import { NameAndAddress, UserData } from "@businessnjgovnavigator/shared";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -28,9 +28,9 @@ export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
 };
 
-export const postSelfReg = (selfRegRequest: SelfRegRequest): Promise<SelfRegResponse> => {
+export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
   return axios
-    .post(`${apiBaseUrl}/api/self-reg`, selfRegRequest)
+    .post(`${apiBaseUrl}/api/self-reg`, userData)
     .then((response) => response.data)
     .catch((error: AxiosError) => {
       return Promise.reject(error.response?.status);

@@ -6,7 +6,7 @@ import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 
 jest.mock("next/router");
@@ -23,6 +23,13 @@ describe("HomePage", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
+  });
+
+  it("sends to onboarding when Get Started button clicked", () => {
+    useMockUserData({});
+    const subject = render(withAuth(<Home />, { user: generateUser({}) }));
+    fireEvent.click(subject.getByText(Defaults.landingPage.heroCallToActionText));
+    expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 
   it("redirects to roadmap page when user has completed onboarding flow", () => {
@@ -60,17 +67,19 @@ describe("HomePage", () => {
     render(withAuth(<Home />, { user: generateUser({}) }));
     expect(mockPush).toHaveBeenCalledWith("/roadmap?error=true");
   });
-  it("opens the modal with signUp = true in the querystring", () => {
+
+  it("redirects to onboarding with signUp = true in the querystring", () => {
     useMockRouter({ isReady: true, query: { signUp: "true" } });
-    setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
-    const page = render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
-    expect(page.getByText(Defaults.selfRegistration.signupTitleText)).toBeInTheDocument();
+    setMockUserDataResponse({ error: undefined, userData: undefined });
+    render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
+    expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
-  it("does not open the modal with signUp = false in the querystrings", () => {
+
+  it("stays on homepage with signUp = false in the querystrings", () => {
     useMockRouter({ isReady: true, query: { signUp: "false" } });
-    setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
-    const page = render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
-    expect(page.queryByText(Defaults.selfRegistration.signupTitleText)).not.toBeInTheDocument();
+    setMockUserDataResponse({ error: undefined, userData: undefined });
+    render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
+    expect(mockPush).not.toHaveBeenCalled();
   });
 
   it("renders one main element on the index page", () => {

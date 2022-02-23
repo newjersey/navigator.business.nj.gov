@@ -13,6 +13,7 @@ import { userRouterFactory } from "../../api/userRouter";
 import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "../../client/ApiBusinessNameClient";
 import { ApiFormationClient } from "../../client/ApiFormationClient";
+import { FakeSelfRegClientFactory } from "../../client/FakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "../../client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
@@ -104,6 +105,8 @@ const myNJSelfRegClient = MyNJSelfRegClientFactory(
   },
   logger
 );
+const fakeSelfRegClient = FakeSelfRegClientFactory();
+const selfRegClient = process.env.USE_FAKE_SELF_REG === "true" ? fakeSelfRegClient : myNJSelfRegClient;
 
 const apiFormationClient = ApiFormationClient(
   {
@@ -121,7 +124,7 @@ app.use(
 );
 app.use("/api", businessNameRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
-app.use("/api", selfRegRouterFactory(userDataClient, myNJSelfRegClient));
+app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient));
 
 app.post("/api/mgmt/auth", (req, res) => {

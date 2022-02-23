@@ -3,7 +3,6 @@ import { completeOnboarding } from "../support/helpers";
 
 describe("search business name [feature] [all] [group2]", () => {
   beforeEach(() => {
-    cy.resetUserData();
     cy.loginByCognitoApi();
   });
 

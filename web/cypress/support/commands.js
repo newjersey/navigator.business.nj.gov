@@ -84,6 +84,7 @@ Cypress.Commands.add("loginByCognitoApi", () => {
       url: `${Cypress.env("API_BASE_URL")}/api/users`,
       body: createEmptyUserData({
         email: testUserEmail,
+        name: "Some Name",
         id: cognitoResponse.attributes.sub,
         receiveNewsletter: true,
         externalStatus: {},
@@ -93,27 +94,6 @@ Cypress.Commands.add("loginByCognitoApi", () => {
       },
     }).then(() => cy.visit("/onboarding"));
   });
-});
-
-Cypress.Commands.add("resetUserData", () => {
-  Auth.currentSession()
-    .then((currentSession) => {
-      const userId = currentSession.getIdToken().decodePayload().sub;
-      cy.request({
-        method: "POST",
-        url: `${Cypress.env("API_BASE_URL")}/api/users`,
-        body: createEmptyUserData({
-          email: testUserEmail,
-          id: userId,
-          receiveNewsletter: true,
-          externalStatus: {},
-        }),
-        auth: {
-          bearer: currentSession.getIdToken().getJwtToken(),
-        },
-      });
-    })
-    .catch((err) => console.log(err));
 });
 
 Cypress.Commands.add("forceClick", { prevSubject: "element" }, (subject) => {

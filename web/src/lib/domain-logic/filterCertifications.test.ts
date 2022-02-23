@@ -118,7 +118,6 @@ describe("filterCertifications", () => {
       userData
     );
     expect(results.length).toEqual(7);
-    console.log(results);
     expect(results).toEqual(expect.arrayContaining([cert1, cert3, cert4, cert5, cert6, cert8, cert9]));
   });
 });

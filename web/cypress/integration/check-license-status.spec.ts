@@ -3,7 +3,6 @@ import { completeOnboarding } from "../support/helpers";
 
 describe("check license status [feature] [all] [group1]", () => {
   beforeEach(() => {
-    cy.resetUserData();
     cy.loginByCognitoApi();
   });
 

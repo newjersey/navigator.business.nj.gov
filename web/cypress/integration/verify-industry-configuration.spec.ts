@@ -5,7 +5,6 @@ import { completeNewBusinessOnboarding, randomInt } from "../support/helpers";
 
 describe("Roadmap [all] [group4]", () => {
   beforeEach(() => {
-    cy.resetUserData();
     cy.loginByCognitoApi();
   });
 

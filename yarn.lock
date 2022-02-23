@@ -2611,6 +2611,7 @@ __metadata:
     ts-node: 10.5.0
     tsconfig-paths: 3.12.0
     typescript: 4.5.5
+    uuid: 8.3.2
   languageName: unknown
   linkType: soft
 

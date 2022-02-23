@@ -1,10 +1,10 @@
-import { Signup } from "@/components/Signup";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import analytics from "@/lib/utils/analytics";
 import { AuthContext } from "@/pages/_app";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
-import React, { ReactElement, useContext, useState } from "react";
+import { useRouter } from "next/router";
+import React, { ReactElement, useContext } from "react";
 import { Button } from "../njwds-extended/Button";
 
 type Props = {
@@ -13,8 +13,8 @@ type Props = {
 };
 
 export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement => {
-  const [signupIsOpen, setSignupIsOpen] = useState<boolean>(false);
   const { state } = useContext(AuthContext);
+  const router = useRouter();
 
   const getLoginButtonText = (): string => {
     switch (state.isAuthenticated) {
@@ -55,7 +55,7 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
                   style="tertiary"
                   textBold
                   onClick={() => {
-                    setSignupIsOpen(true);
+                    router.push("/onboarding");
                     analytics.event.landing_page_navbar_register.click.open_create_account_modal();
                   }}
                 >
@@ -63,7 +63,6 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
                 </Button>
               </span>
             </div>
-            <Signup isOpen={signupIsOpen} onClose={() => setSignupIsOpen(false)} />
           </div>
         </div>
       </div>

@@ -2,12 +2,12 @@ import { Content } from "@/components/Content";
 import { ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import { ProfileData } from "@businessnjgovnavigator/shared/";
+import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext } from "react";
 import { GenericTextField, GenericTextFieldProps } from "../GenericTextField";
 
 export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "onValidation" | "fieldName"> {
-  fieldName: ProfileFields;
+  fieldName: Exclude<ProfileFields, keyof BusinessUser>;
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
   headerAriaLevel?: number;
 }

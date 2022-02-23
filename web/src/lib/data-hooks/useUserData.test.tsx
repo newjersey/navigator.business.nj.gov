@@ -30,6 +30,13 @@ describe("useUserData", () => {
     return returnVal;
   };
 
+  it("does not post update when local flag is true", async () => {
+    const currentUser = generateUser({});
+    const { update } = setupHook(currentUser);
+    await act(() => update(generateUserData({}), { local: true }));
+    expect(mockApi.postUserData).not.toHaveBeenCalled();
+  });
+
   describe("when there is no current user", () => {
     it("does not call to get user data", () => {
       setupHook(undefined);
