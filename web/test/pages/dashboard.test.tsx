@@ -1,4 +1,3 @@
-import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -11,6 +10,7 @@ import {
   generateUser,
 } from "@/test/factories";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import DashboardDefaults from "@businessnjgovnavigator/content/display-defaults/dashboard/dashboardDefaults.json";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, RenderResult, waitFor } from "@testing-library/react";
 import dayjs from "dayjs";

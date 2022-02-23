@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Tag } from "@/components/njwds-extended/Tag";
-import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
+import DashboardDefaults from "@businessnjgovnavigator/content/display-defaults/dashboard/dashboardDefaults.json";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";

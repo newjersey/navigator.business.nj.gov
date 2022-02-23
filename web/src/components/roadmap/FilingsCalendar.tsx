@@ -1,10 +1,10 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
-import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@/lib/utils/getCurrentDate";
+import DashboardDefaults from "@businessnjgovnavigator/content/display-defaults/dashboard/dashboardDefaults.json";
 import { TaxFiling } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import dayjs from "dayjs";
