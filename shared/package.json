@@ -24,7 +24,8 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@businessnjgovnavigator/content": "*"
+    "@businessnjgovnavigator/content": "*",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@babel/runtime": "7.17.2",

@@ -14,7 +14,6 @@ import {
 
 describe("Profile [feature] [all] [group1]", () => {
   beforeEach(() => {
-    cy.resetUserData();
     cy.loginByCognitoApi();
   });
 

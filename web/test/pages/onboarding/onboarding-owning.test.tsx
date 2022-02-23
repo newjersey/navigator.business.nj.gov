@@ -1,3 +1,4 @@
+import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   generateMunicipality,
@@ -8,7 +9,7 @@ import {
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import { PageHelpers, renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { createEmptyUserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, waitFor, within } from "@testing-library/react";
@@ -18,6 +19,8 @@ jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
+const mockApi = api as jest.Mocked<typeof api>;
 
 const date = dayjs().subtract(1, "month").date(1);
 const dateOfFormation = date.format("YYYY-MM-DD");
@@ -27,6 +30,7 @@ describe("onboarding - owning a business", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
+    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "" });
   });
 
   it("uses special template eval for step 1 label", async () => {
@@ -38,7 +42,7 @@ describe("onboarding - owning a business", () => {
     await page.visitStep2();
     expect(
       subject.getByText(
-        templateEval(Defaults.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "4" })
+        templateEval(Defaults.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "5" })
       )
     ).toBeInTheDocument();
   });
@@ -69,7 +73,8 @@ describe("onboarding - owning a business", () => {
   });
 
   it("shows correct next-button text on each page", async () => {
-    const { subject, page } = renderPage({});
+    const newark = generateMunicipality({ displayName: "Newark" });
+    const { subject, page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("has-existing-business-true");
     const page1 = within(subject.getByTestId("page-1-form"));
     expect(page1.queryByText(Defaults.onboardingDefaults.nextButtonText)).toBeInTheDocument();
@@ -90,8 +95,18 @@ describe("onboarding - owning a business", () => {
 
     await page.visitStep4();
     const page4 = within(subject.getByTestId("page-4-form"));
-    expect(page4.queryByText(Defaults.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page4.queryByText(Defaults.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page4.queryByText(Defaults.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page4.queryByText(Defaults.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    page.fillText("Existing employees", "1234567");
+    page.selectByText("Location", "Newark");
+    page.selectByValue("Ownership", "veteran-owned");
+    page.selectByValue("Ownership", "disabled-veteran");
+    page.chooseRadio("home-based-business-true");
+
+    await page.visitStep5();
+    const page5 = within(subject.getByTestId("page-5-form"));
+    expect(page5.queryByText(Defaults.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page5.queryByText(Defaults.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("updates the user data after each form page", async () => {
@@ -116,11 +131,10 @@ describe("onboarding - owning a business", () => {
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
     page.chooseRadio("home-based-business-true");
-    page.clickNext();
-    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard"));
+    await page.visitStep5();
     expect(currentUserData()).toEqual({
       ...initialUserData,
-      formProgress: "COMPLETED",
+      formProgress: "UNSTARTED",
       profileData: {
         ...initialUserData.profileData,
         hasExistingBusiness: true,
@@ -290,8 +304,7 @@ describe("onboarding - owning a business", () => {
     });
 
     page.fillText("Existing employees", "123");
-    page.clickNext();
-    await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard"));
+    await page.visitStep5();
   });
 
   it("prefills form from existing user data", async () => {
@@ -319,5 +332,14 @@ describe("onboarding - owning a business", () => {
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
     await page.visitStep4();
     expect(page.getMunicipalityValue()).toEqual("Newark");
+  });
+
+  describe("validates self-reg step", () => {
+    runSelfRegPageTests({ hasExistingBusiness: true }, async (page: PageHelpers) => {
+      await page.visitStep2();
+      await page.visitStep3();
+      await page.visitStep4();
+      await page.visitStep5();
+    });
   });
 });

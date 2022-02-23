@@ -4,7 +4,6 @@ import { clickEdit, clickNext, clickSave, completeOnboarding } from "../support/
 
 describe("Roadmap [feature] [all] [group3]", () => {
   beforeEach(() => {
-    cy.resetUserData();
     cy.loginByCognitoApi();
     cy.viewport("iphone-5");
   });

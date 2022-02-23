@@ -218,6 +218,7 @@ const ProfilePage = (props: Props): ReactElement => {
           flow: "PROFILE",
           municipalities: props.municipalities,
         },
+        setUser: () => {},
         setProfileData,
         onBack,
       }}

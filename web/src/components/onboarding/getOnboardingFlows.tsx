@@ -4,9 +4,10 @@ import { OnboardingHasExistingBusiness } from "@/components/onboarding/Onboardin
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
+import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { ProfileData } from "@businessnjgovnavigator/shared";
+import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared";
 import React, { ReactNode } from "react";
 import { OnboardingDateOfFormation } from "./OnboardingDateOfFormation";
 import { OnboardingExistingEmployees } from "./OnboardingExistingEmployees";
@@ -26,6 +27,7 @@ export type ErrorFieldMap = {
 
 export const getOnboardingFlows = (
   profileData: ProfileData,
+  businessUser: BusinessUser,
   onValidation: (field: ProfileFields, invalid: boolean) => void,
   fieldStates: ProfileFieldErrorMap
 ): Record<FlowType, OnboardingFlow> => ({
@@ -94,6 +96,20 @@ export const getOnboardingFlows = (
           ],
         }),
       },
+      {
+        component: <OnboardingNameAndEmail onValidation={onValidation} fieldStates={fieldStates} />,
+        getErrorMap: () => {
+          return {
+            inline: [
+              {
+                name: "name",
+                valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
+              },
+              { name: "email", valid: businessUser.email.length > 0 && !fieldStates.email.invalid },
+            ],
+          };
+        },
+      },
     ],
   },
   STARTING: {
@@ -125,6 +141,20 @@ export const getOnboardingFlows = (
         getErrorMap: () => ({
           inline: [{ name: "municipality", valid: profileData.municipality !== undefined }],
         }),
+      },
+      {
+        component: <OnboardingNameAndEmail onValidation={onValidation} fieldStates={fieldStates} />,
+        getErrorMap: () => {
+          return {
+            inline: [
+              {
+                name: "name",
+                valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
+              },
+              { name: "email", valid: businessUser.email.length > 0 && !fieldStates.email.invalid },
+            ],
+          };
+        },
       },
     ],
   },

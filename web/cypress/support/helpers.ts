@@ -63,6 +63,9 @@ export const completeOnboarding = (
   cy.get('[aria-label="Location"]').click();
   cy.contains(city).click();
   clickNext();
+
+  clickNext();
+  cy.wait(2000); // wait for redirect
 };
 
 export const lighthouseDesktopConfig: LighthouseConfig = {
@@ -222,6 +225,10 @@ export const completeNewBusinessOnboarding = (
     onOnboardingPage.selectHomeBased(homeBased);
   }
 
+  onOnboardingPage.clickNext();
+  cy.url().should("include", `onboarding?page=${6}`);
+
+  cy.wait(1000); // wait for onboarding animation
   onOnboardingPage.clickNext();
   cy.url().should("include", `roadmap`);
 };

@@ -5,6 +5,10 @@ import React, { createContext, ReactElement, ReactNode, useContext, useState } f
 
 const updateSpy = jest.fn();
 
+export const getLastCalledWithConfig = (): { local?: boolean } => {
+  return getLastCalledWith(updateSpy)[1] as { local?: boolean };
+};
+
 export const currentUserData = (): UserData => {
   return getLastCalledWith(updateSpy)[0] as UserData;
 };
@@ -26,8 +30,8 @@ export const WithStatefulUserData = ({
 }): ReactElement => {
   const [userData, setUserData] = useState<UserData | undefined>(initialUserData);
 
-  const update = (newUserData: UserData | undefined): Promise<void> => {
-    updateSpy(newUserData);
+  const update = (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
+    updateSpy(newUserData, config);
     setUserData(newUserData);
     return Promise.resolve();
   };

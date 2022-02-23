@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export type BusinessUser = {
   name?: string;
   email: string;
@@ -8,6 +10,19 @@ export type BusinessUser = {
   myNJUserKey?: string;
   intercomHash?: string;
 };
+
+export const emptyBusinessUser = {
+  name: undefined,
+  email: "",
+  id: uuidv4(),
+  externalStatus: {},
+  receiveNewsletter: true,
+  userTesting: true,
+  myNJUserKey: undefined,
+  intercomHash: undefined,
+};
+
+export const createEmptyUser = (): BusinessUser => emptyBusinessUser;
 
 export const shouldAddToNewsletter = (newBusinessUser: BusinessUser): boolean =>
   newBusinessUser.receiveNewsletter && !newBusinessUser.externalStatus.newsletter;

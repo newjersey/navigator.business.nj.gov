@@ -1,7 +1,7 @@
 import { NavBar } from "@/components/navbar/NavBar";
 import { OperateReference } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask, generateUser } from "@/test/factories";
-import { useMockRouter } from "@/test/mock/mockRouter";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserData";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
@@ -35,6 +35,7 @@ const setLargeScreen = (value: boolean): void => {
 describe("<NavBar />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockRouter({});
   });
 
   describe("navbar - used when user is on landing page", () => {
@@ -43,6 +44,14 @@ describe("<NavBar />", () => {
         <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
       );
       expect(subject.getByText(Defaults.navigationDefaults.registerButton)).toBeInTheDocument();
+    });
+
+    it("goes to onboarding when signup is clicked", () => {
+      const subject = render(
+        <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
+      );
+      fireEvent.click(subject.getByText(Defaults.navigationDefaults.registerButton));
+      expect(mockPush).toHaveBeenCalledWith("/onboarding");
     });
   });
 

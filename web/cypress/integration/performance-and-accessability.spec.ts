@@ -34,7 +34,6 @@ describe("Performance and Accessability - Landing Page [all] [group2]", () => {
 
 describe("Performance and Accessability - Onboarding [all] [group1]", () => {
   beforeEach(() => {
-    cy.resetUserData();
     cy.loginByCognitoApi();
   });
 
@@ -137,6 +136,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.pa11y(defaultPa11yThresholds);
       });
     });
+
     describe("Step 2", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
@@ -152,6 +152,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.pa11y(defaultPa11yThresholds);
       });
     });
+
     describe("Step 3", () => {
       it("should pass the audits", () => {
         cy.wait(1000); // wait for onboarding animation
@@ -202,11 +203,11 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
   });
 });
 
-describe("Performance and Accessability - Roadmap [all] [group3]", () => {
+describe("Performance and Accessibility - Roadmap [all] [group3]", () => {
   beforeEach(() => {
-    cy.resetUserData();
     cy.loginByCognitoApi();
   });
+
   describe("Roadmap", () => {
     it("should pass the audits", () => {
       completeOnboarding("Smith Works", "e-commerce", "general-partnership");

@@ -37,9 +37,11 @@ export const useUserData = (): UseUserDataResponse => {
     }
   }, [userDataError, dataExists, error, setUserDataError]);
 
-  const update = async (newUserData: UserData | undefined): Promise<void> => {
+  const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
     if (newUserData) {
       mutate({ ...newUserData, user: externalSyncUser(newUserData.user) }, false);
+      if (config?.local) return;
+
       return postUserData(newUserData)
         .then((response: UserData) => {
           setUserDataError(undefined);
@@ -69,6 +71,6 @@ export type UseUserDataResponse = {
   userData: UserData | undefined;
   isLoading: boolean;
   error: UserDataError | undefined;
-  update: (newUserData: UserData | undefined) => Promise<void>;
+  update: (newUserData: UserData | undefined, config?: { local?: boolean }) => Promise<void>;
   refresh: () => Promise<void>;
 };
