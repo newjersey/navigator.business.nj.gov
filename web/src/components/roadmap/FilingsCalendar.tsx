@@ -1,10 +1,10 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
-import { DashboardDefaults } from "@/display-defaults/dashboard/DashboardDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@/lib/utils/getCurrentDate";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { TaxFiling } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import dayjs from "dayjs";
@@ -95,8 +95,8 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   return (
     <>
       <div className="fdr fac padding-top-2">
-        <h2 className="">{DashboardDefaults.calendarHeader}</h2>
-        <ArrowTooltip title={DashboardDefaults.calendarTooltip}>
+        <h2 className="">{Defaults.dashboardDefaults.calendarHeader}</h2>
+        <ArrowTooltip title={Defaults.dashboardDefaults.calendarTooltip}>
           <div className="fdr fac margin-left-1 font-body-lg text-green" data-testid="calendar-tooltip">
             <Icon>help_outline</Icon>
           </div>
