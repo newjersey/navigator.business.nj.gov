@@ -110,7 +110,7 @@ describe("dashboard", () => {
     expect(subject.queryByText("Cert 3")).not.toBeInTheDocument();
   });
 
-  it("displays fundings filtered from user data", () => {
+  it("displays fundings filtered & sorted from user data", () => {
     useMockProfileData({
       homeBasedBusiness: false,
       municipality: undefined,
@@ -119,21 +119,30 @@ describe("dashboard", () => {
     });
 
     const fundings = [
-      generateFunding({ name: "Funding 1", sector: ["construction"] }),
-      generateFunding({ name: "Funding 2", sector: [] }),
-      generateFunding({ name: "Funding 3", sector: ["cannabis"] }),
+      generateFunding({ name: "Funding 1", sector: ["construction"], status: "closed" }),
+      generateFunding({ name: "Funding 2", sector: ["construction"], status: "open" }),
+      generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "open" }),
+      generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
+      generateFunding({ name: "Funding 5", sector: [], status: "first-come, first-served" }),
     ];
 
     const subject = renderPage({ fundings });
 
-    expect(subject.getByText("Funding 1")).toBeInTheDocument();
+    expect(subject.queryByText("Funding 1")).not.toBeInTheDocument();
     expect(subject.getByText("Funding 2")).toBeInTheDocument();
     expect(subject.queryByText("Funding 3")).not.toBeInTheDocument();
+    expect(subject.getByText("Funding 4")).toBeInTheDocument();
+    expect(subject.getByText("Funding 5")).toBeInTheDocument();
+
+    const visualFundings = subject.getAllByText(new RegExp(/^Funding [0-9]/));
+    expect(visualFundings[0]).toHaveTextContent("Funding 4");
+    expect(visualFundings[1]).toHaveTextContent("Funding 5");
+    expect(visualFundings[2]).toHaveTextContent("Funding 2");
   });
 
   it("links to task page for fundings", () => {
     useMockProfileDataForUnfilteredOpportunities();
-    const fundings = [generateFunding({ urlSlug: "opp", name: "Funding Opp" })];
+    const fundings = [generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "open" })];
 
     const subject = renderPage({ fundings });
 
@@ -158,8 +167,8 @@ describe("dashboard", () => {
     const opp2ExpectedTextOnPage = `${Array(150).fill("b").join("")}`;
 
     const fundings = [
-      generateFunding({ contentMd: opp1Characters }),
-      generateFunding({ contentMd: opp2Characters }),
+      generateFunding({ contentMd: opp1Characters, status: "open" }),
+      generateFunding({ contentMd: opp2Characters, status: "open" }),
     ];
     const subject = renderPage({ fundings });
     expect(subject.getByText(opp1ExpectedTextOnPage)).toBeInTheDocument();
@@ -173,8 +182,8 @@ describe("dashboard", () => {
     const linkContent = `${characters} [a link text](www.example.com)`;
 
     const fundings = [
-      generateFunding({ contentMd: boldContent }),
-      generateFunding({ contentMd: linkContent }),
+      generateFunding({ contentMd: boldContent, status: "open" }),
+      generateFunding({ contentMd: linkContent, status: "open" }),
     ];
     const subject = renderPage({ fundings });
     expect(subject.getByText("a bo")).toBeInTheDocument();

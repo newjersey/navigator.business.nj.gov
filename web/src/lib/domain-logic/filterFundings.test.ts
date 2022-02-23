@@ -16,17 +16,16 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ homeBased: "yes", employeesRequired: "n/a" });
-    const funding2 = generateFunding({ homeBased: "no", employeesRequired: "n/a" });
-    const funding3 = generateFunding({ homeBased: "unknown", employeesRequired: "n/a" });
-    const funding4 = generateFunding({ homeBased: "yes", employeesRequired: "50" });
+    const funding1 = generateFunding({ homeBased: "yes", employeesRequired: "n/a", status: "open" });
+    const funding2 = generateFunding({ homeBased: "no", employeesRequired: "n/a", status: "open" });
+    const funding3 = generateFunding({ homeBased: "unknown", employeesRequired: "n/a", status: "open" });
+    const funding4 = generateFunding({ homeBased: "yes", employeesRequired: "50", status: "open" });
     const funding5 = generateFunding({
       homeBased: "yes",
       employeesRequired: "n/a",
       publishStageArchive: "Do Not Publish",
     });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
-
     const result = filterFundings(fundings, userData);
     expect(result.length).toEqual(2);
     expect(result).toEqual(expect.arrayContaining([funding1, funding3]));
@@ -41,10 +40,10 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ homeBased: "yes", employeesRequired: "n/a" });
-    const funding2 = generateFunding({ homeBased: "no", employeesRequired: "n/a" });
-    const funding3 = generateFunding({ homeBased: "unknown", employeesRequired: "n/a" });
-    const funding4 = generateFunding({ homeBased: "yes", employeesRequired: "50" });
+    const funding1 = generateFunding({ homeBased: "yes", employeesRequired: "n/a", status: "open" });
+    const funding2 = generateFunding({ homeBased: "no", employeesRequired: "n/a", status: "open" });
+    const funding3 = generateFunding({ homeBased: "unknown", employeesRequired: "n/a", status: "open" });
+    const funding4 = generateFunding({ homeBased: "yes", employeesRequired: "50", status: "open" });
     const funding5 = generateFunding({
       homeBased: "yes",
       employeesRequired: "n/a",
@@ -67,13 +66,17 @@ describe("filterFundings", () => {
       }),
     });
 
-    const funding1 = generateFunding({ county: ["Atlantic"] });
-    const funding2 = generateFunding({ county: [] });
-    const funding3 = generateFunding({ county: ["Bergen", "Atlantic"] });
-    const funding4 = generateFunding({ county: ["Bergen", "Camden"] });
-    const funding5 = generateFunding({ county: ["All"] });
-    const funding6 = generateFunding({ county: ["All", "Camden"] });
-    const funding7 = generateFunding({ county: ["All", "Camden"], publishStageArchive: "Do Not Publish" });
+    const funding1 = generateFunding({ county: ["Atlantic"], status: "open" });
+    const funding2 = generateFunding({ county: [], status: "open" });
+    const funding3 = generateFunding({ county: ["Bergen", "Atlantic"], status: "open" });
+    const funding4 = generateFunding({ county: ["Bergen", "Camden"], status: "open" });
+    const funding5 = generateFunding({ county: ["All"], status: "open" });
+    const funding6 = generateFunding({ county: ["All", "Camden"], status: "open" });
+    const funding7 = generateFunding({
+      county: ["All", "Camden"],
+      status: "open",
+      publishStageArchive: "Do Not Publish",
+    });
     const fundings = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
 
     const result = filterFundings(fundings, userData);
@@ -90,9 +93,17 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ employeesRequired: "n/a", publishStageArchive: "Do Not Publish" });
-    const funding2 = generateFunding({ employeesRequired: "n/a", publishStageArchive: null });
-    const funding3 = generateFunding({ employeesRequired: "200", publishStageArchive: "Do Not Publish" });
+    const funding1 = generateFunding({
+      employeesRequired: "n/a",
+      status: "open",
+      publishStageArchive: "Do Not Publish",
+    });
+    const funding2 = generateFunding({ employeesRequired: "n/a", status: "open", publishStageArchive: null });
+    const funding3 = generateFunding({
+      employeesRequired: "200",
+      status: "open",
+      publishStageArchive: "Do Not Publish",
+    });
     const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
@@ -109,9 +120,13 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ employeesRequired: "n/a" });
-    const funding2 = generateFunding({ employeesRequired: "yes" });
-    const funding3 = generateFunding({ employeesRequired: "n/a", publishStageArchive: "Do Not Publish" });
+    const funding1 = generateFunding({ employeesRequired: "n/a", status: "open" });
+    const funding2 = generateFunding({ employeesRequired: "yes", status: "open" });
+    const funding3 = generateFunding({
+      employeesRequired: "n/a",
+      status: "open",
+      publishStageArchive: "Do Not Publish",
+    });
     const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
@@ -128,9 +143,9 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ employeesRequired: "n/a" });
-    const funding2 = generateFunding({ employeesRequired: "yes" });
-    const funding3 = generateFunding({ employeesRequired: "n/a", publishStageArchive: null });
+    const funding1 = generateFunding({ employeesRequired: "n/a", status: "open" });
+    const funding2 = generateFunding({ employeesRequired: "yes", status: "open" });
+    const funding3 = generateFunding({ employeesRequired: "n/a", status: "open", publishStageArchive: null });
     const fundings = [funding1, funding2, funding3];
 
     const result = filterFundings(fundings, userData);
@@ -147,8 +162,8 @@ describe("filterFundings", () => {
         sectorId: undefined,
       }),
     });
-    const funding1 = generateFunding({ employeesRequired: "n/a" });
-    const funding2 = generateFunding({ employeesRequired: "yes" });
+    const funding1 = generateFunding({ employeesRequired: "n/a", status: "open" });
+    const funding2 = generateFunding({ employeesRequired: "yes", status: "open" });
     const fundings = [funding1, funding2];
 
     const result = filterFundings(fundings, userData);
@@ -166,15 +181,38 @@ describe("filterFundings", () => {
       }),
     });
 
-    const funding1 = generateFunding({ sector: ["construction"] });
+    const funding1 = generateFunding({ sector: ["construction"], status: "open" });
     const funding2 = generateFunding({ sector: [] });
-    const funding3 = generateFunding({ sector: ["construction", "cannabis"] });
-    const funding4 = generateFunding({ sector: ["cannabis", "manufacturing"] });
-    const funding5 = generateFunding({ sector: ["Construction"] });
+    const funding3 = generateFunding({ sector: ["construction", "cannabis"], status: "open" });
+    const funding4 = generateFunding({ sector: ["cannabis", "manufacturing"], status: "open" });
+    const funding5 = generateFunding({ sector: ["Construction"], status: "open" });
     const fundings = [funding1, funding2, funding3, funding4, funding5];
 
     const result = filterFundings(fundings, userData);
     expect(result.length).toEqual(4);
     expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
+  });
+
+  it("sorts fundings by status first then alphabetically", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        homeBasedBusiness: false,
+        municipality: generateMunicipality({ county: "Atlantic" }),
+        sectorId: undefined,
+        existingEmployees: "1",
+      }),
+    });
+
+    const funding1 = generateFunding({ county: [], name: "bca", status: "deadline" });
+    const funding2 = generateFunding({ county: [], name: "abc", status: "deadline" });
+    const funding3 = generateFunding({ county: [], name: "cba", status: "deadline" });
+    const funding4 = generateFunding({ county: [], name: "abc", status: "first-come, first-served" });
+    const funding5 = generateFunding({ county: [], name: "cba", status: "closed" });
+    const funding6 = generateFunding({ county: [], name: "bca", status: "open" });
+    const fundings = [funding6, funding2, funding5, funding3, funding1, funding4];
+
+    const result = filterFundings(fundings, userData);
+    expect(result.length).toEqual(5);
+    expect(result).toEqual([funding2, funding1, funding3, funding4, funding6]);
   });
 });

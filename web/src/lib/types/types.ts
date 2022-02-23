@@ -585,6 +585,12 @@ export type FundingType =
   | "tax exemption";
 export type FundingPublishStatus = "Do Not Publish";
 export type FundingStatus = "open" | "deadline" | "first-come, first-served" | "closed";
+export const FundingStatusOrder: Record<FundingStatus, number> = {
+  open: 2,
+  deadline: 0,
+  "first-come, first-served": 1,
+  closed: 4,
+};
 export type FundingProgramFrequency = "annual" | "ongoing" | "reoccuring" | "one-time" | "pilot" | "other";
 export type FundingBusinessStage = "early-stage" | "operating" | "both";
 export type FundingHomeBased = "yes" | "no" | "unknown";
