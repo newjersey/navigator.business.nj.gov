@@ -72,7 +72,11 @@ const DashboardPage = (props: Props): ReactElement => {
                   </p>
 
                   <FilingsCalendar
-                    taxFilings={userData?.taxFilingData.filings || []}
+                    taxFilings={
+                      userData != null && userData.profileData.dateOfFormation != null
+                        ? userData.taxFilingData.filings
+                        : []
+                    }
                     operateReferences={props.operateReferences}
                   />
 
