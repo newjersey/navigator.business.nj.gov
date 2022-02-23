@@ -516,7 +516,7 @@ collections:
 
   - name: "contextual-information"
     label: "Contextual Information"
-    folder: "src/display-content/content/contextual-information"
+    folder: "src/display-content/contextual-information"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -530,7 +530,7 @@ collections:
 
   - name: "owning-onboarding-content"
     label: "Oscar Onboarding Content"
-    folder: "src/display-content/content/onboarding/owning"
+    folder: "src/display-content/onboarding/owning"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
