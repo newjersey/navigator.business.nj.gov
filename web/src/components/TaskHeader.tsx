@@ -8,6 +8,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SectionType, Task, TaskProgress } from "@/lib/types/types";
 import {
+  getModifiedTaskBooleanUndefined,
   getModifiedTaskContent,
   getSectionCompletion,
   getSectionPositions,
@@ -88,7 +89,7 @@ export const TaskHeader = (props: Props): ReactElement => {
       </div>
       <div className="flex flex-align-center flex-wrap margin-top-0 margin-bottom-2">
         {renderProgress()}
-        {props.task.required === true && (
+        {getModifiedTaskBooleanUndefined(roadmap, props.task, "required") === true && (
           <div className="flex flex-align-center tablet:margin-left-05">
             <Tag tagVariant="required" paddingOverrideClassName="padding-y-0 padding-left-0">
               <img

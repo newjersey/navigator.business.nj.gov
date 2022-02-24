@@ -214,6 +214,17 @@ describe("task page", () => {
     expect(subject.queryByText(TaskDefaults.requiredTagText)).not.toBeInTheDocument();
   });
 
+  it("overrides required tag in header from task in roadmap", () => {
+    const id = "123";
+    const taskInRoadmap = generateTask({ id, required: false });
+    const taskStaticGeneration = generateTask({ id, required: true });
+    useMockRoadmap({
+      steps: [generateStep({ tasks: [taskInRoadmap], section: "PLAN" })],
+    });
+    const subject = renderPage(taskStaticGeneration);
+    expect(subject.queryByText(TaskDefaults.requiredTagText)).not.toBeInTheDocument();
+  });
+
   it("displays issuing form and agency in task footer when they are defined values", () => {
     const issuingAgency = "NJ Dept of Treasury";
     const formName = "xY39";
