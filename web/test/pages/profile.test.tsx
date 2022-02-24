@@ -425,27 +425,6 @@ describe("profile", () => {
       expect(getRadioButtonFromFormControlLabel("home-based-business-false")).toBeChecked();
     });
 
-    it("shows an error when dateOfFormation is empty", async () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({ hasExistingBusiness: true }),
-      });
-      subject = renderPage({ userData: userData });
-
-      fillText("Date of formation", "");
-      fireEvent.blur(subject.getByLabelText("Date of formation"));
-      await waitFor(() => {
-        expect(subject.queryByText(Defaults.onboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
-      });
-
-      fillText("Date of formation", date.format("MM/YYYY"));
-      fireEvent.blur(subject.getByLabelText("Date of formation"));
-      await waitFor(() => {
-        expect(
-          subject.queryByText(Defaults.onboardingDefaults.dateOfFormationErrorText)
-        ).not.toBeInTheDocument();
-      });
-    });
-
     it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({ hasExistingBusiness: true }),

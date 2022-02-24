@@ -1,5 +1,5 @@
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { setHeaderRole } from "@/lib/utils/helpers";
+import { setHeaderRole, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
@@ -7,7 +7,7 @@ import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextFieldProps } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import React, { ReactElement, useContext, useEffect } from "react";
+import React, { ReactElement, useContext } from "react";
 import { Content } from "../Content";
 import { GenericTextField } from "../GenericTextField";
 
@@ -23,21 +23,20 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
   const fieldName = "dateOfFormation";
   const { state, setProfileData } = useContext(ProfileDataContext);
   const [dateValue, setDateValue] = React.useState<Dayjs | null>(null);
+
+  useMountEffectWhenDefined(() => {
+    setDateValue(dayjs(state.profileData.dateOfFormation));
+  }, state.profileData.dateOfFormation);
   const [dateError, setDateError] = React.useState<boolean>(false);
-
-  const onValidation = (): void => props.onValidation(fieldName, !(dateValue?.isValid() && !dateError));
-
-  useEffect(() => {
-    !!state.profileData.dateOfFormation && setDateValue(dayjs(state.profileData.dateOfFormation));
-  }, [state.profileData.dateOfFormation]);
+  const onValidation = (): void =>
+    props.onValidation(fieldName, !(dateValue == null || (dateValue?.isValid() && !dateError)));
 
   const handleChange = (date: Dayjs | null) => {
     setDateValue(date);
-    date?.isValid() &&
-      setProfileData({
-        ...state.profileData,
-        [fieldName]: date?.date(1).format("YYYY-MM-DD"),
-      });
+    setProfileData({
+      ...state.profileData,
+      [fieldName]: date?.isValid() ? date?.date(1).format("YYYY-MM-DD") : undefined,
+    });
   };
 
   const Picker = process.env.NODE_ENV === "test" ? DesktopDatePicker : DatePicker;
@@ -74,7 +73,6 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
                 error={props.fieldStates[fieldName].invalid}
                 fieldOptions={{
                   ...params,
-                  // onBlur: onValidation,
                   sx: { width: "50%", ...params.sx },
                   error: props.fieldStates[fieldName].invalid,
                 }}
