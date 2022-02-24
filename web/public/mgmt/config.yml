@@ -138,7 +138,7 @@ collections:
               - { label: Plan Label, name: PLAN, widget: string }
               - { label: Start Label, name: START, widget: string }
               - { label: Operate Label, name: OPERATE, widget: string }
-          - label: Section Defaults
+          - label: Task Defaults
             name: taskDefaults
             collapsed: true
             widget: object
