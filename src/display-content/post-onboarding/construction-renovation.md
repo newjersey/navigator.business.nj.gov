@@ -5,7 +5,7 @@ radioYes: Yes
 radioNo: No
 radioNoContent: No further action is required.
 ---
-
+### Site Considerations
 1. **Site Drawings:** Hire an architect to create site drawings that meet your business needs and budget.
 2. **Utilities:** Work with your local government on any utility or water approvals you may need.
 3. **Construction Permits:** File for a construction permit with your local government's Building/Construction Department.
@@ -13,9 +13,9 @@ radioNoContent: No further action is required.
 
 Once you have all the necessary drawings, approvals, and contractors in place, you are in a good position to get your construction or renovation started!
 
-After you complete this task (if applicable), you will have:
-
-- Site drawings
-- Utility approvals
-- Construction permits
-- Contractors for build out
+> **Once completed, you will have:**
+>
+> - Site drawings
+> - Utility approvals
+> - Construction permits
+> - Contractors for build out
