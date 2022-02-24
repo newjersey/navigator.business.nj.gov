@@ -1,5 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
-import { Footer } from "@/display-defaults/Footer";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement } from "react";
 
 export const InnovFooter = (): ReactElement => {
@@ -14,60 +14,60 @@ export const InnovFooter = (): ReactElement => {
             <p className="footer-container">
               <span>
                 <a
-                  href={Footer.linkOne}
+                  href={Defaults.footer.linkOne}
                   className="usa-identifier__required-link padding-right-1 footer-link-custom"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {Footer.linkOneText}
+                  {Defaults.footer.linkOneText}
                 </a>
               </span>
               <span>
                 <a
-                  href={Footer.linkTwo}
+                  href={Defaults.footer.linkTwo}
                   className="usa-identifier__required-link padding-x-1 footer-link-custom"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {Footer.linkTwoText}
+                  {Defaults.footer.linkTwoText}
                 </a>
               </span>
               <span>
                 <a
-                  href={Footer.linkThree}
+                  href={Defaults.footer.linkThree}
                   className="usa-identifier__required-link padding-left-1 footer-link-custom"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {Footer.linkThreeText}
+                  {Defaults.footer.linkThreeText}
                 </a>
               </span>
             </p>
 
             <p className="footer-container footer-divider-top padding-y-105 footer-divider-bottom">
               <span className="padding-right-1">
-                {Footer.officeTextOne}
+                {Defaults.footer.officeTextOne}
                 <Icon className="heart-custom">favorite</Icon>
-                {Footer.officeTextTwo}
+                {Defaults.footer.officeTextTwo}
                 <a
-                  href={Footer.officeLink}
+                  href={Defaults.footer.officeLink}
                   target="_blank"
                   className="usa-identifier__required-link footer-link-custom"
                   rel="noreferrer"
                 >
-                  {Footer.officeLinkText}
+                  {Defaults.footer.officeLinkText}
                 </a>
               </span>
 
               <span className="padding-left-1 display-block-mobile display-inline-desktop">
-                {Footer.creditText}
+                {Defaults.footer.creditText}
                 <a
-                  href={Footer.creditLink}
+                  href={Defaults.footer.creditLink}
                   target="_blank"
                   className="usa-identifier__required-link footer-link-custom"
                   rel="noreferrer"
                 >
-                  {Footer.creditLinkText}
+                  {Defaults.footer.creditLinkText}
                 </a>
               </span>
             </p>
@@ -82,13 +82,13 @@ export const InnovFooter = (): ReactElement => {
             <div className="usa-identifier__identity">
               <p className="usa-identifier__identity-domain"></p>
               <p className="usa-identifier__identity-disclaimer footer-text-custom">
-                {Footer.officeExternalText}
+                {Defaults.footer.officeExternalText}
               </p>
             </div>
 
             <div className="usa-identifier__logos margin-right-none">
               <a
-                href={Footer.gitHubLink}
+                href={Defaults.footer.gitHubLink}
                 className="usa-identifier__logo"
                 target="_blank"
                 rel="noreferrer"
@@ -97,7 +97,7 @@ export const InnovFooter = (): ReactElement => {
                 <Icon className="icon-custom margin-top-1">github</Icon>
               </a>
               <a
-                href={Footer.twitterLink}
+                href={Defaults.footer.twitterLink}
                 className="usa-identifier__logo"
                 target="_blank"
                 rel="noreferrer"

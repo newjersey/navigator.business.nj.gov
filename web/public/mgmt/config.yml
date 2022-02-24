@@ -48,6 +48,28 @@ collections:
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Calendar Tooltip, name: calendarTooltip, widget: string }
+          - label: Page Footer
+            name: footer
+            collapsed: true
+            widget: object
+            summary: "{{footer}}"
+            fields:
+              - { label: Link One Test, name: linkOneText, widget: string }
+              - { label: Link One, name: linkOne, widget: string }
+              - { label: Link Two Text, name: linkTwoText, widget: string }
+              - { label: Link Two, name: linkTwo, widget: string }
+              - { label: Link Three Text, name: linkThreeText, widget: string }
+              - { label: Link Three, name: linkThree, widget: string }
+              - { label: Office Text One, name: officeTextOne, widget: string }
+              - { label: Office Text Two, name: officeTextTwo, widget: string }
+              - { label: Office Link Text, name: officeLinkText, widget: string }
+              - { label: Office Link, name: officeLink, widget: string }
+              - { label: Credit Text, name: creditText, widget: string }
+              - { label: Credit Link Text, name: creditLinkText, widget: string }
+              - { label: Credit Link, name: creditLink, widget: string }
+              - { label: Office External Text, name: officeExternalText, widget: string }
+              - { label: Github Link, name: gitHubLink, widget: string }
+              - { label: Twitter Link, name: twitterLink, widget: string }
           - label: Navigation Defaults
             name: navigationDefaults
             collapsed: true
