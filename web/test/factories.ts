@@ -110,6 +110,7 @@ export const generateProfileData = (
 ): ProfileData => {
   return {
     hasExistingBusiness: false,
+    initialOnboardingFlow: "STARTING",
     businessName: `some-business-name-${randomInt()}`,
     industryId: randomIndustry(isMobileLocation).id,
     legalStructureId: randomLegalStructure().id,

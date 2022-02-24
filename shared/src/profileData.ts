@@ -2,6 +2,7 @@ import { Municipality } from "./municipality";
 
 export interface ProfileData {
   hasExistingBusiness: boolean | undefined;
+  initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
   businessName: string;
   industryId: string | undefined;
   legalStructureId: string | undefined;
@@ -22,6 +23,7 @@ export interface ProfileData {
 
 export const emptyProfileData: ProfileData = {
   hasExistingBusiness: undefined,
+  initialOnboardingFlow: undefined,
   businessName: "",
   industryId: undefined,
   legalStructureId: undefined,

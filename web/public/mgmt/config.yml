@@ -48,6 +48,9 @@ collections:
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Calendar Tooltip, name: calendarTooltip, widget: string }
+              - { label: Back To Roadmap Header, name: backToRoadmapHeader, widget: string }
+              - { label: Back To Roadmap Text, name: backToRoadmapText, widget: string }
+              - { label: Back To Roadmap Link Text, name: backToRoadmapLinkText, widget: string }
           - label: Page Footer
             name: footer
             collapsed: true
