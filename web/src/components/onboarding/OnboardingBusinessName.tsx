@@ -1,5 +1,5 @@
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement } from "react";
 import { OnboardingField } from "./OnboardingField";
 
@@ -17,7 +17,7 @@ export const OnboardingBusinessName = (props: Props): ReactElement => {
       onValidation={props.onValidation}
       error={props.fieldStates ? props.fieldStates.businessName.invalid : false}
       required={true}
-      validationText={OnboardingDefaults.errorTextRequiredBusinessName}
+      validationText={Defaults.onboardingDefaults.errorTextRequiredBusinessName}
       headerAriaLevel={props.headerAriaLevel}
       disabled={props.disabled}
     />

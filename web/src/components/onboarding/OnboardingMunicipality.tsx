@@ -1,11 +1,11 @@
 import { Content } from "@/components/Content";
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
@@ -51,7 +51,7 @@ export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props)
           fieldName={fieldName}
           error={props.fieldStates[fieldName].invalid}
           validationLabel="Error"
-          validationText={OnboardingDefaults.errorTextRequiredMunicipality}
+          validationText={Defaults.onboardingDefaults.errorTextRequiredMunicipality}
           handleChange={handleChange}
           value={state.profileData.municipality}
           onSelect={onSelect}

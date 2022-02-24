@@ -7,7 +7,6 @@ import { MiniProfile } from "@/components/roadmap/MiniProfile";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -17,6 +16,7 @@ import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { CircularProgress } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -131,9 +131,9 @@ const RoadmapPage = (props: Props): ReactElement => {
           }}
         >
           <div data-testid="toast-alert-SUCCESS" className="h3-styling">
-            {ProfileDefaults.successTextHeader}
+            {Defaults.profileDefaults.successTextHeader}
           </div>
-          <div className="padding-top-05">{ProfileDefaults.successTextBody}</div>
+          <div className="padding-top-05">{Defaults.profileDefaults.successTextBody}</div>
         </ToastAlert>
       )}
     </PageSkeleton>

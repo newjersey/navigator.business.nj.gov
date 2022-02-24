@@ -1,5 +1,5 @@
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { ProfileDataContext } from "@/pages/onboarding";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement, useContext } from "react";
 import { Button } from "../njwds-extended/Button";
 
@@ -19,11 +19,13 @@ export const OnboardingButtonGroup = (props: Props): ReactElement => {
     <div className="float-right fdr margin-bottom-8">
       {(state.page || 1) > 1 && (
         <Button style="secondary" onClick={back} dataTestid="back">
-          {OnboardingDefaults.backButtonText}
+          {Defaults.onboardingDefaults.backButtonText}
         </Button>
       )}
       <Button style="primary" dataTestid="next" typeSubmit noRightMargin>
-        {props.isFinal ? OnboardingDefaults.finalNextButtonText : OnboardingDefaults.nextButtonText}
+        {props.isFinal
+          ? Defaults.onboardingDefaults.finalNextButtonText
+          : Defaults.onboardingDefaults.nextButtonText}
       </Button>
     </div>
   );

@@ -5,7 +5,6 @@ import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -34,6 +33,7 @@ import {
   templateEval,
 } from "@/lib/utils/helpers";
 import { RoadmapContext } from "@/pages/_app";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
@@ -241,11 +241,11 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const evalHeaderStepsTemplate = (): string => {
     if (page.current === 1) {
-      return templateEval(OnboardingDefaults.stepOneTemplate, {
+      return templateEval(Defaults.onboardingDefaults.stepOneTemplate, {
         currentPage: page.current.toString(),
       });
     } else {
-      return templateEval(OnboardingDefaults.stepXofYTemplate, {
+      return templateEval(Defaults.onboardingDefaults.stepXofYTemplate, {
         currentPage: page.current.toString(),
         totalPages: onboardingFlows[currentFlow].pages.length.toString(),
       });
@@ -255,7 +255,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const header = () => (
     <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4">
       <h1 ref={headerRef}>
-        {OnboardingDefaults.pageTitle}{" "}
+        {Defaults.onboardingDefaults.pageTitle}{" "}
         <span className="text-light" data-testid={`step-${page.current.toString()}`}>
           {evalHeaderStepsTemplate()}
         </span>
@@ -291,7 +291,9 @@ const OnboardingPage = (props: Props): ReactElement => {
       }}
     >
       <NextSeo
-        title={`Business.NJ.gov Navigator - ${OnboardingDefaults.pageTitle} ${evalHeaderStepsTemplate()} `}
+        title={`Business.NJ.gov Navigator - ${
+          Defaults.onboardingDefaults.pageTitle
+        } ${evalHeaderStepsTemplate()} `}
       />
       <PageSkeleton>
         <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">

@@ -1,4 +1,3 @@
-import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
@@ -185,7 +184,9 @@ describe("dashboard", () => {
   it("shows toast alert when success query is true", async () => {
     useMockRouter({ isReady: true, query: { success: "true" } });
     const subject = renderPage({});
-    await waitFor(() => expect(subject.getByText(ProfileDefaults.successTextHeader)).toBeInTheDocument());
+    await waitFor(() =>
+      expect(subject.getByText(Defaults.profileDefaults.successTextHeader)).toBeInTheDocument()
+    );
   });
 
   const useMockProfileDataForUnfilteredOpportunities = () => {

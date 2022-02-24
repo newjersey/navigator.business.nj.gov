@@ -4,7 +4,6 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
-import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
@@ -113,9 +112,9 @@ const DashboardPage = (props: Props): ReactElement => {
           }}
         >
           <div data-testid="toast-alert-SUCCESS" className="h3-styling">
-            {ProfileDefaults.successTextHeader}
+            {Defaults.profileDefaults.successTextHeader}
           </div>
-          <div className="padding-top-05">{ProfileDefaults.successTextBody}</div>
+          <div className="padding-top-05">{Defaults.profileDefaults.successTextBody}</div>
         </ToastAlert>
       )}
     </PageSkeleton>

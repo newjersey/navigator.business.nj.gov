@@ -24,6 +24,15 @@ collections:
         name: "defaults"
         file: "src/display-defaults/defaults.json"
         fields:
+          - label: Beta Bar
+            name: betaBar
+            collapsed: true
+            widget: object
+            summary: "{{betaBar}}"
+            fields:
+              - { label: Beta Main Text, name: betaMainText, widget: string }
+              - { label: Beta Form Test, name: betaFormText, widget: string }
+              - { label: Beta Form Link, name: betaFormLink, widget: string }
           - label: Dashboard Defaults
             name: dashboardDefaults
             collapsed: true
@@ -51,6 +60,44 @@ collections:
               - { label: MyNJ Account Text, name: myNJAccountText, widget: string }
               - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
               - { label: Profile Link Text, name: profileLinkText, widget: string }
+          - label: Onboarding Defaults
+            name: onboardingDefaults
+            collapsed: true
+            widget: object
+            summary: "{{onboardingDefaults}}"
+            fields:
+              - { label: Page Title, name: pageTitle, widget: string }
+              - { label: Next Button Text, name: nextButtonText, widget: string }
+              - { label: Final Next Button Text, name: finalNextButtonText, widget: string }
+              - { label: Back Button Test, name: backButtonText, widget: string }
+              - { label: Step X of Y Template, name: stepXofYTemplate, widget: string }
+              - { label: Step One Templace, name: stepOneTemplate, widget: string }
+              - { label: Error Text - Required Legal, name: errorTextRequiredLegal, widget: string }
+              - { label: Error Text - Required Business Name, name: errorTextRequiredBusinessName, widget: string }
+              - { label: Error Text - Required Municipality, name: errorTextRequiredMunicipality, widget: string }
+              - { label: Error Text - Required Existing Business, name: errorTextRequiredExistingBusiness, widget: string }
+              - { label: Error Text - Minimum Numeric Field, name: errorTextMinimumNumericField, widget: string }
+              - { label: Error Text - Required Existing Employees, name: errorTextRequiredExistingEmployees, widget: string }
+              - { label: Error Text - Date of Formation, name: dateOfFormationErrorText, widget: string }
+              - { label: Error Text - Required Sector, name: errorTextRequiredSector, widget: string }
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: true
+            widget: object
+            summary: "{{profileDefaults}}"
+            fields:
+              - { label: Page Title, name: pageTitle, widget: string }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Back Button Text, name: backButtonText, widget: string }
+              - { label: Success Text - Header, name: successTextHeader, widget: string }
+              - { label: Success Text - Body, name: successTextBody, widget: string }
+              - { label: Error Text - Header, name: errorTextHeader, widget: string }
+              - { label: Error Text - Body, name: errorTextBody, widget: string }
+              - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
+              - { label: Escape Model - Return, name: escapeModalBody, widget: string }
+              - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
+              - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
+              - { label: Tax PIN Error Text, name: taxPinErrorText, widget: string }
 
   - label: Roadmap Add-ons
     name: addons

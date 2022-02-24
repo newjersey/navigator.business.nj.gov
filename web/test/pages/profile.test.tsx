@@ -1,5 +1,3 @@
-import { ProfileDefaults } from "@/display-defaults//ProfileDefaults";
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
@@ -19,6 +17,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import {
   createEmptyUserData,
   LookupIndustryById,
@@ -84,8 +83,8 @@ describe("profile", () => {
     );
 
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText(ProfileDefaults.pageTitle)).not.toBeInTheDocument();
-    expect(subject.queryByText(ProfileDefaults.pageTitle)).not.toBeInTheDocument();
+    expect(subject.queryByText(Defaults.profileDefaults.pageTitle)).not.toBeInTheDocument();
+    expect(subject.queryByText(Defaults.profileDefaults.pageTitle)).not.toBeInTheDocument();
   });
 
   describe("starting new business", () => {
@@ -116,14 +115,14 @@ describe("profile", () => {
       subject = renderPage({});
       fillText("Business name", "Cool Computers");
       clickBack();
-      expect(subject.getByText(ProfileDefaults.escapeModalReturn)).toBeInTheDocument();
+      expect(subject.getByText(Defaults.profileDefaults.escapeModalReturn)).toBeInTheDocument();
     });
 
     it("returns user to profile page from un-saved changes modal", async () => {
       subject = renderPage({});
       fillText("Business name", "Cool Computers");
       clickBack();
-      fireEvent.click(subject.getByText(ProfileDefaults.escapeModalEscape));
+      fireEvent.click(subject.getByText(Defaults.profileDefaults.escapeModalEscape));
       fillText("Business name", "Cool Computers2");
     });
 
@@ -199,11 +198,15 @@ describe("profile", () => {
       fillText("Location", "");
       fireEvent.blur(subject.getByLabelText("Location"));
       clickSave();
-      expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
+      expect(
+        subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredMunicipality)
+      ).toBeInTheDocument();
       await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
       selectByText("Location", newark.displayName);
       await waitFor(() =>
-        expect(subject.queryByText(OnboardingDefaults.errorTextRequiredMunicipality)).not.toBeInTheDocument()
+        expect(
+          subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredMunicipality)
+        ).not.toBeInTheDocument()
       );
     });
 
@@ -224,7 +227,9 @@ describe("profile", () => {
       clickSave();
       await waitFor(() => {
         expect(
-          subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "9" }))
+          subject.queryByText(
+            templateEval(Defaults.onboardingDefaults.errorTextMinimumNumericField, { length: "9" })
+          )
         ).toBeInTheDocument();
         expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
@@ -291,7 +296,7 @@ describe("profile", () => {
       subject = renderPage({ userData: initialUserData, municipalities: [newark] });
       selectByText("Location", newark.displayName);
       clickBack();
-      fireEvent.click(subject.getByText(ProfileDefaults.escapeModalReturn));
+      fireEvent.click(subject.getByText(Defaults.profileDefaults.escapeModalReturn));
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
       await waitFor(() => expect(() => currentUserData()).toThrowError());
     });
@@ -318,7 +323,7 @@ describe("profile", () => {
       });
       fillText("Business name", "Cool Computers");
       clickBack();
-      expect(subject.getByText(ProfileDefaults.escapeModalReturn)).toBeInTheDocument();
+      expect(subject.getByText(Defaults.profileDefaults.escapeModalReturn)).toBeInTheDocument();
     });
 
     it("returns user to profile page from un-saved changes modal", async () => {
@@ -329,7 +334,7 @@ describe("profile", () => {
       });
       fillText("Business name", "Cool Computers");
       clickBack();
-      fireEvent.click(subject.getByText(ProfileDefaults.escapeModalEscape));
+      fireEvent.click(subject.getByText(Defaults.profileDefaults.escapeModalEscape));
       fillText("Business name", "Cool Computers2");
     });
 
@@ -429,13 +434,15 @@ describe("profile", () => {
       fillText("Date of formation", "");
       fireEvent.blur(subject.getByLabelText("Date of formation"));
       await waitFor(() => {
-        expect(subject.queryByText(OnboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
+        expect(subject.queryByText(Defaults.onboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
       });
 
       fillText("Date of formation", date.format("MM/YYYY"));
       fireEvent.blur(subject.getByLabelText("Date of formation"));
       await waitFor(() => {
-        expect(subject.queryByText(OnboardingDefaults.dateOfFormationErrorText)).not.toBeInTheDocument();
+        expect(
+          subject.queryByText(Defaults.onboardingDefaults.dateOfFormationErrorText)
+        ).not.toBeInTheDocument();
       });
     });
 
@@ -447,18 +454,18 @@ describe("profile", () => {
 
       fillText("Tax pin", "");
       fireEvent.blur(subject.getByLabelText("Tax pin"));
-      expect(subject.queryByText(ProfileDefaults.taxPinErrorText)).not.toBeInTheDocument();
+      expect(subject.queryByText(Defaults.profileDefaults.taxPinErrorText)).not.toBeInTheDocument();
 
       fillText("Tax pin", "123");
       fireEvent.blur(subject.getByLabelText("Tax pin"));
       await waitFor(() => {
-        expect(subject.queryByText(ProfileDefaults.taxPinErrorText)).toBeInTheDocument();
+        expect(subject.queryByText(Defaults.profileDefaults.taxPinErrorText)).toBeInTheDocument();
       });
 
       fillText("Tax pin", "1234");
       fireEvent.blur(subject.getByLabelText("Tax pin"));
       await waitFor(() => {
-        expect(subject.queryByText(ProfileDefaults.taxPinErrorText)).not.toBeInTheDocument();
+        expect(subject.queryByText(Defaults.profileDefaults.taxPinErrorText)).not.toBeInTheDocument();
       });
     });
 
@@ -473,7 +480,9 @@ describe("profile", () => {
       clickSave();
       await waitFor(() => {
         expect(
-          subject.queryByText(templateEval(OnboardingDefaults.errorTextMinimumNumericField, { length: "9" }))
+          subject.queryByText(
+            templateEval(Defaults.onboardingDefaults.errorTextMinimumNumericField, { length: "9" })
+          )
         ).toBeInTheDocument();
         expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
@@ -488,7 +497,7 @@ describe("profile", () => {
 
       clickSave();
       await waitFor(() => {
-        expect(subject.queryByText(OnboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
+        expect(subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
         expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
     });
@@ -533,7 +542,7 @@ describe("profile", () => {
       subject = renderPage({ userData: userData, municipalities: [newark] });
       selectByText("Location", newark.displayName);
       clickBack();
-      fireEvent.click(subject.getByText(ProfileDefaults.escapeModalReturn));
+      fireEvent.click(subject.getByText(Defaults.profileDefaults.escapeModalReturn));
       await waitFor(() => {
         expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard");
         expect(() => currentUserData()).toThrowError();

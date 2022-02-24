@@ -1,5 +1,3 @@
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
-import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import {
   OnboardingStatus,
   ProfileError,
@@ -127,20 +125,20 @@ interface AlertProps {
 
 export const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
   SUCCESS: {
-    body: ProfileDefaults.successTextBody,
-    header: ProfileDefaults.successTextHeader,
+    body: Defaults.profileDefaults.successTextBody,
+    header: Defaults.profileDefaults.successTextHeader,
     variant: "success",
   },
   ERROR: {
-    body: ProfileDefaults.errorTextBody,
-    header: ProfileDefaults.errorTextHeader,
+    body: Defaults.profileDefaults.errorTextBody,
+    header: Defaults.profileDefaults.errorTextHeader,
     variant: "error",
   },
 };
 
 export const OnboardingErrorLookup: Record<ProfileError, string> = {
-  REQUIRED_LEGAL: OnboardingDefaults.errorTextRequiredLegal,
-  REQUIRED_EXISTING_BUSINESS: OnboardingDefaults.errorTextRequiredExistingBusiness,
+  REQUIRED_LEGAL: Defaults.onboardingDefaults.errorTextRequiredLegal,
+  REQUIRED_EXISTING_BUSINESS: Defaults.onboardingDefaults.errorTextRequiredExistingBusiness,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {

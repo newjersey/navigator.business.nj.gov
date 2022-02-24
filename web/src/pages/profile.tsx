@@ -20,7 +20,6 @@ import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
@@ -39,6 +38,7 @@ import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getSectionCompletion, OnboardingStatusLookup } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import { RoadmapContext } from "@/pages/_app";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
 import { CircularProgress, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
@@ -234,7 +234,7 @@ const ProfilePage = (props: Props): ReactElement => {
         >
           <DialogTitle id="escape-modal">
             <div className="padding-top-5 padding-x-2 text-bold font-body-lg">
-              {ProfileDefaults.escapeModalHeader}
+              {Defaults.profileDefaults.escapeModalHeader}
             </div>
             <IconButton
               aria-label="close"
@@ -251,16 +251,16 @@ const ProfilePage = (props: Props): ReactElement => {
           </DialogTitle>
           <DialogContent>
             <div className="padding-x-2 padding-bottom-3">
-              <p className="padding-bottom-1 font-body-xs">{ProfileDefaults.escapeModalBody}</p>
+              <p className="padding-bottom-1 font-body-xs">{Defaults.profileDefaults.escapeModalBody}</p>
               <button className="usa-button " onClick={() => redirect()} data-testid="return">
-                {ProfileDefaults.escapeModalReturn}
+                {Defaults.profileDefaults.escapeModalReturn}
               </button>
               <button
                 className="usa-button usa-button--outline margin-right-0"
                 onClick={() => setEscapeModal(false)}
                 data-testid="escape"
               >
-                {ProfileDefaults.escapeModalEscape}
+                {Defaults.profileDefaults.escapeModalEscape}
               </button>
             </div>
           </DialogContent>
@@ -308,7 +308,7 @@ const ProfilePage = (props: Props): ReactElement => {
                           onClick={() => onBack()}
                           data-testid="back"
                         >
-                          {ProfileDefaults.backButtonText}
+                          {Defaults.profileDefaults.backButtonText}
                         </button>
                         <Button
                           style="primary"
@@ -318,7 +318,7 @@ const ProfilePage = (props: Props): ReactElement => {
                           dataTestid="save"
                           loading={isLoading}
                         >
-                          {ProfileDefaults.saveButtonText}
+                          {Defaults.profileDefaults.saveButtonText}
                         </Button>
                       </div>
                     </form>{" "}

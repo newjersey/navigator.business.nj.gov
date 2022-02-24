@@ -1,7 +1,7 @@
-import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextFieldProps } from "@mui/material";
@@ -70,7 +70,7 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
               <GenericTextField
                 fieldName={fieldName}
                 onValidation={onValidation}
-                validationText={OnboardingDefaults.dateOfFormationErrorText}
+                validationText={Defaults.onboardingDefaults.dateOfFormationErrorText}
                 error={props.fieldStates[fieldName].invalid}
                 fieldOptions={{
                   ...params,
