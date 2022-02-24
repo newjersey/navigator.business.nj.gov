@@ -15,6 +15,24 @@
     "calendarHeader": "My Calendar",
     "calendarTooltip": "This calendar shows you NJ filing due dates unique to your business. Click on any item to learn where to file."
   },
+  "footer": {
+    "linkOneText": "Give Us Feedback",
+    "linkOne": "https://forms.business.nj.gov/feedback/",
+    "linkTwoText": "Terms & Privacy Policy",
+    "linkTwo": "https://business.nj.gov/privacy-policy",
+    "linkThreeText": "Sign Up For Our Newsletter",
+    "linkThree": "https://business.nj.gov/newsletter-signup",
+    "officeTextOne": "Made with ",
+    "officeTextTwo": " by the ",
+    "officeLinkText": "Office of Innovation",
+    "officeLink": "https://innovation.nj.gov/",
+    "creditText": " Powered by ",
+    "creditLinkText": "Open Source",
+    "creditLink": "https://business.nj.gov/license-and-copyright-notice",
+    "officeExternalText": "Follow us on:",
+    "gitHubLink": "https://github.com/newjersey",
+    "twitterLink": "https://twitter.com/i/lists/1148625562895826945"
+  },
   "navigationDefaults": {
     "logInButton": "Log in",
     "registerButton": "Register",
