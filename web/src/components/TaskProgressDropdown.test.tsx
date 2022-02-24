@@ -1,4 +1,3 @@
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
@@ -45,8 +44,8 @@ describe("<TaskProgressDropdown />", () => {
     const subject = render(<TaskProgressDropdown onSelect={jest.fn()} />);
     fireEvent.click(subject.getAllByText(notStartedText)[0]);
 
-    expect(subject.queryByText(TaskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
+    expect(subject.queryByText(Defaults.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
     fireEvent.click(subject.getByText(inProgressText));
-    expect(subject.queryByText(TaskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
+    expect(subject.queryByText(Defaults.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
   });
 });

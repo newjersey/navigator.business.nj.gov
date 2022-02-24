@@ -1,6 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { TaskProgress } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
@@ -65,7 +64,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
   return (
     <div className="margin-left-neg-1">
       <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
-        {TaskDefaults.taskProgressSuccessToastBody}
+        {Defaults.taskDefaults.taskProgressSuccessToastBody}
       </ToastAlert>
       <MuiButton
         style={{ whiteSpace: "nowrap" }}

@@ -1,5 +1,6 @@
-import { RoadmapDefaults, SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
+import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { SectionType } from "@/lib/types/types";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
@@ -15,7 +16,7 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
   const router = useRouter();
   const onClickComplete = () => router.push("/roadmap");
 
-  const publicName = props.nextSectionType ? SectionDefaults[props.nextSectionType] : "";
+  const publicName = props.nextSectionType ? Defaults.sectionHeaders[props.nextSectionType] : "";
   const hideLink = !props.nextSectionType || props.nextSectionType === "OPERATE";
 
   return (

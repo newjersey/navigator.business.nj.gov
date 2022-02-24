@@ -1,5 +1,4 @@
 import { NavBar } from "@/components/navbar/NavBar";
-import { SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { OperateReference } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask, generateUser } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -133,7 +132,7 @@ describe("<NavBar />", () => {
     it("does not display operate section", () => {
       useMockUserData({});
       const subject = renderMobileRoadmapNav();
-      const sectionName = SectionDefaults.OPERATE.toLowerCase();
+      const sectionName = Defaults.sectionHeaders.OPERATE.toLowerCase();
       expect(subject.queryByTestId(`section-${sectionName}`)).not.toBeInTheDocument();
     });
   });
@@ -181,9 +180,9 @@ describe("<NavBar />", () => {
       );
       const subject = renderMobileTaskNav();
       expect(subject.queryByText("step1")).toBeInTheDocument();
-      expect(subject.queryByText(SectionDefaults.PLAN)).toBeInTheDocument();
-      expect(subject.queryByText(SectionDefaults.START)).toBeInTheDocument();
-      expect(subject.queryByText(SectionDefaults.OPERATE)).not.toBeInTheDocument();
+      expect(subject.queryByText(Defaults.sectionHeaders.PLAN)).toBeInTheDocument();
+      expect(subject.queryByText(Defaults.sectionHeaders.START)).toBeInTheDocument();
+      expect(subject.queryByText(Defaults.sectionHeaders.OPERATE)).not.toBeInTheDocument();
     });
 
     it("displays mini-roadmap with OPERATE when operateReferences does exists", () => {
@@ -198,10 +197,10 @@ describe("<NavBar />", () => {
       );
 
       const subject = renderMobileTaskNav({ includeOperateRef: true });
-      expect(subject.queryByText(SectionDefaults.OPERATE)).toBeInTheDocument();
+      expect(subject.queryByText(Defaults.sectionHeaders.OPERATE)).toBeInTheDocument();
       expect(subject.queryByText("step1")).not.toBeInTheDocument();
-      expect(subject.queryByText(SectionDefaults.PLAN)).not.toBeInTheDocument();
-      expect(subject.queryByText(SectionDefaults.START)).not.toBeInTheDocument();
+      expect(subject.queryByText(Defaults.sectionHeaders.PLAN)).not.toBeInTheDocument();
+      expect(subject.queryByText(Defaults.sectionHeaders.START)).not.toBeInTheDocument();
     });
 
     it("hide drawer when mini-roadmap task is clicked", async () => {

@@ -129,6 +129,33 @@ collections:
               - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
               - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
               - { label: Tax PIN Error Text, name: taxPinErrorText, widget: string }
+          - label: Section Headers
+            name: sectionHeaders
+            collapsed: true
+            widget: object
+            summary: "{{sectionHeaders}}"
+            fields:
+              - { label: Plan Label, name: PLAN, widget: string }
+              - { label: Start Label, name: START, widget: string }
+              - { label: Operate Label, name: OPERATE, widget: string }
+          - label: Section Defaults
+            name: taskDefaults
+            collapsed: true
+            widget: object
+            summary: "{{taskDefaults}}"
+            fields:
+              - { label: Page Title, name: pageTitle, widget: string }
+              - { label: Back Button Text, name: backToRoadmapText, widget: string }
+              - { label: Default Call to Action Test, name: defaultCallToActionText, widget: string }
+              - { label: Task Progress - Success Toast, name: taskProgressSuccessToastBody, widget: string }
+              - { label: Next Task Button Text, name: nextTaskButtonText, widget: string }
+              - { label: Previous Task Button Text, name: previousTaskButtonText, widget: string }
+              - { label: Unlocked By - Singular, name: unlockedBySingular, widget: string }
+              - { label: Unlocked By - Plural, name: unlockedByPlural, widget: string }
+              - { label: Loading Tasks Text, name: loadingTaskDependencies, widget: string }
+              - { label: Required Tag, name: requiredTagText, widget: string }
+              - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
+              - { label: Form Label, name: formNameText, widget: string }
           - label: Task Progress
             name: taskProgress
             collapsed: true

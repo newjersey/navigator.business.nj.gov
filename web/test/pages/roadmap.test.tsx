@@ -1,5 +1,4 @@
 import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
@@ -429,8 +428,8 @@ describe("roadmap page", () => {
 
     expect(allTasks.length).toEqual(2);
 
-    expect(within(allTasks[0]).getByLabelText(TaskDefaults.requiredTagText)).toBeVisible();
-    expect(within(allTasks[1]).queryByLabelText(TaskDefaults.requiredTagText)).not.toBeVisible();
+    expect(within(allTasks[0]).getByLabelText(Defaults.taskDefaults.requiredTagText)).toBeVisible();
+    expect(within(allTasks[1]).queryByLabelText(Defaults.taskDefaults.requiredTagText)).not.toBeVisible();
   });
 
   it("renders tooltip when hovering over a required task's icon", async () => {
@@ -444,14 +443,16 @@ describe("roadmap page", () => {
     });
 
     const subject = renderRoadmapPage();
-    await waitFor(() => expect(subject.queryByText(TaskDefaults.requiredTagText)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).not.toBeInTheDocument()
+    );
 
-    const requiredIcon = subject.getByLabelText(TaskDefaults.requiredTagText);
+    const requiredIcon = subject.getByLabelText(Defaults.taskDefaults.requiredTagText);
     fireEvent.mouseOver(requiredIcon);
 
     await waitFor(() => {
-      expect(subject.queryByText(TaskDefaults.requiredTagText)).toBeInTheDocument();
-      expect(subject.queryByText(TaskDefaults.requiredTagText)).toBeVisible();
+      expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).toBeInTheDocument();
+      expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).toBeVisible();
     });
   });
 });

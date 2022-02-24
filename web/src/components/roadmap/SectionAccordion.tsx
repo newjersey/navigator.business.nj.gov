@@ -1,9 +1,9 @@
 import { Icon } from "@/components/njwds/Icon";
-import { SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SectionType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import React, { ReactElement, ReactNode } from "react";
 
@@ -71,7 +71,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
               alt=""
               data-testid={`${isCompleted ? "completed" : "regular"}-${sectionName}-section-img`}
             />{" "}
-            <div className="inline">{SectionDefaults[props.sectionType]}</div>
+            <div className="inline">{Defaults.sectionHeaders[props.sectionType]}</div>
           </h2>
         </AccordionSummary>
         <AccordionDetails>{props.children}</AccordionDetails>

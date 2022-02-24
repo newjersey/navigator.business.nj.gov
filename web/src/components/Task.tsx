@@ -1,10 +1,10 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import * as types from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import React, { ReactElement } from "react";
@@ -26,7 +26,7 @@ export const Task = (props: Props): ReactElement => {
           isTabletAndUp ? "margin-bottom-2" : "margin-bottom-1"
         }`}
       >
-        <ArrowTooltip title={TaskDefaults.requiredTagText}>
+        <ArrowTooltip title={Defaults.taskDefaults.requiredTagText}>
           <img
             src="/img/required-task-icon.svg"
             alt=""

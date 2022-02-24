@@ -1,6 +1,6 @@
 import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { TaskLink } from "@/lib/types/types";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -20,7 +20,7 @@ export const UnlockingAlert = (props: Props): ReactElement => {
     <div className={props.className}>
       <Alert variant={props.variant} dataTestid={props.dataTestid}>
         {props.isLoading ? (
-          <>{TaskDefaults.loadingTaskDependencies}</>
+          <>{Defaults.taskDefaults.loadingTaskDependencies}</>
         ) : (
           <>
             {props.taskLinks.length === 1 ? props.singularText : props.pluralText}{" "}

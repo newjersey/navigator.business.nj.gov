@@ -3,7 +3,6 @@ import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SectionType, Task, TaskProgress } from "@/lib/types/types";
@@ -14,6 +13,7 @@ import {
   getSectionPositions,
   setPreferencesCloseSection,
 } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement, useState } from "react";
 import { CongratulatoryDialog } from "./CongratulatoryDialog";
 import { Tag } from "./njwds-extended/Tag";
@@ -99,7 +99,7 @@ export const TaskHeader = (props: Props): ReactElement => {
                 src="/img/required-task-icon.svg"
                 alt=""
               />
-              {TaskDefaults.requiredTagText}
+              {Defaults.taskDefaults.requiredTagText}
             </Tag>
           </div>
         )}

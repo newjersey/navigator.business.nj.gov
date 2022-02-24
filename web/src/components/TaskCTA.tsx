@@ -1,5 +1,5 @@
-import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import analytics from "@/lib/utils/analytics";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement } from "react";
 import { Button } from "./njwds-extended/Button";
 
@@ -22,7 +22,7 @@ export const TaskCTA = (props: Props): ReactElement => {
             noRightMargin
             onClick={analytics.event.task_primary_call_to_action.click.open_external_website}
           >
-            {props.text || TaskDefaults.defaultCallToActionText}
+            {props.text || Defaults.taskDefaults.defaultCallToActionText}
           </Button>
         </a>
       </div>

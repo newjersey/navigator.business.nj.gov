@@ -1,5 +1,3 @@
-import { SectionType } from "@/lib/types/types";
-
 export const RoadmapDefaults: Record<string, string> = {
   greyBoxBusinessNameText: "Business Name",
   greyBoxIndustryText: "Industry",
@@ -25,10 +23,4 @@ export const RoadmapDefaults: Record<string, string> = {
   congratulatorModalLinkText: "tasks.",
   operateComplianceText:
     "After you've started your business, you must stay in compliance with the State. Visit [Premier Business Services](https://www16.state.nj.us/NJ_PREMIER_EBIZ/jsp/home.jsp) to register.",
-};
-
-export const SectionDefaults: Record<SectionType, string> = {
-  PLAN: "Plan",
-  START: "Start",
-  OPERATE: "Operate",
 };
