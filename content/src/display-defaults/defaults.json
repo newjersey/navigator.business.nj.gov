@@ -33,6 +33,11 @@
     "gitHubLink": "https://github.com/newjersey",
     "twitterLink": "https://twitter.com/i/lists/1148625562895826945"
   },
+  "legalMessageDefaults": {
+    "legalMessageTextOne": "This information is supplied as a guide and is not a substitute for legal or professional advice. It is the responsibility of the business owner to comply with all local, county, and state regulations even if they are not listed here. For no-cost assistance with your business, use the ",
+    "legalMessageLegalChat": "live chat",
+    "legalMessageTextTwo": " to speak with a Business Advocate based in New Jersey."
+  },
   "navigationDefaults": {
     "logInButton": "Log in",
     "registerButton": "Register",
@@ -70,5 +75,10 @@
     "escapeModalReturn": "Continue without saving",
     "escapeModalEscape": "Go back",
     "taxPinErrorText": "Tax PIN must be 4 digits"
+  },
+  "taskProgress": {
+    "NOT_STARTED": "Not started",
+    "IN_PROGRESS": "In progress",
+    "COMPLETED": "Completed"
   }
 }

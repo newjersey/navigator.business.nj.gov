@@ -1,9 +1,9 @@
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
-import { TaskProgressLookup } from "@/display-defaults/TaskProgressLookup";
 import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
 import { TaskProgress } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
@@ -72,7 +72,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         aria-controls="task-progress-status-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        aria-label={`Status of the current task is ${TaskProgressLookup[value].toLowerCase()}`}
+        aria-label={`Status of the current task is ${Defaults.taskProgress[value].toLowerCase()}`}
       >
         {TaskProgressTagLookup[value]}
         <Icon>unfold_more</Icon>
@@ -98,7 +98,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           selected={value === "NOT_STARTED"}
         >
           <Tag tagVariant="base" dataTestid="NOT_STARTED" fixedWidth>
-            {TaskProgressLookup.NOT_STARTED}
+            {Defaults.taskProgress.NOT_STARTED}
           </Tag>
         </MenuItem>
         <MenuItem
@@ -107,7 +107,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           selected={value === "IN_PROGRESS"}
         >
           <Tag tagVariant="info" dataTestid="IN_PROGRESS" fixedWidth>
-            {TaskProgressLookup.IN_PROGRESS}
+            {Defaults.taskProgress.IN_PROGRESS}
           </Tag>
         </MenuItem>
         <MenuItem
@@ -116,7 +116,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           selected={value === "COMPLETED"}
         >
           <Tag tagVariant="primary" dataTestid="COMPLETED" fixedWidth>
-            {TaskProgressLookup.COMPLETED}
+            {Defaults.taskProgress.COMPLETED}
           </Tag>
         </MenuItem>
       </Menu>

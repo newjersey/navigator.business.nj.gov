@@ -70,6 +70,15 @@ collections:
               - { label: Office External Text, name: officeExternalText, widget: string }
               - { label: Github Link, name: gitHubLink, widget: string }
               - { label: Twitter Link, name: twitterLink, widget: string }
+          - label: Legal Messages
+            name: legalMessageDefaults
+            collapsed: true
+            widget: object
+            summary: "{{legalMessageDefaults}}"
+            fields:
+              - { label: Line 1, name: legalMessageTextOne, widget: string }
+              - { label: Chat Label, name: legalMessageLegalChat, widget: string }
+              - { label: Line 2, name: legalMessageTextTwo, widget: string }
           - label: Navigation Defaults
             name: navigationDefaults
             collapsed: true
@@ -120,6 +129,15 @@ collections:
               - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
               - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
               - { label: Tax PIN Error Text, name: taxPinErrorText, widget: string }
+          - label: Task Progress
+            name: taskProgress
+            collapsed: true
+            widget: object
+            summary: "{{taskProgress}}"
+            fields:
+              - { label: Not Started Text, name: NOT_STARTED, widget: string }
+              - { label: In Progress Text, name: IN_PROGRESS, widget: string }
+              - { label: Completed Text, name: COMPLETED, widget: string }
 
   - label: Roadmap Add-ons
     name: addons

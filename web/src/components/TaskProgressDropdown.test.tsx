@@ -1,13 +1,13 @@
-import { TaskProgressLookup } from "@/display-defaults/TaskProgressLookup";
 import { TaskDefaults } from "@/display-defaults/tasks/TaskDefaults";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { TaskProgressDropdown } from "./TaskProgressDropdown";
 
 describe("<TaskProgressDropdown />", () => {
-  const notStartedText = TaskProgressLookup.NOT_STARTED;
-  const inProgressText = TaskProgressLookup.IN_PROGRESS;
-  const completedText = TaskProgressLookup.COMPLETED;
+  const notStartedText = Defaults.taskProgress.NOT_STARTED;
+  const inProgressText = Defaults.taskProgress.IN_PROGRESS;
+  const completedText = Defaults.taskProgress.COMPLETED;
 
   it("displays Not Started as the default", () => {
     const subject = render(<TaskProgressDropdown onSelect={jest.fn()} />);
