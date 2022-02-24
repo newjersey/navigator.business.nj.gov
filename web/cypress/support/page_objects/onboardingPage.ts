@@ -13,7 +13,7 @@ export class OnboardingPage {
     return cy.get('[data-testid="industryid"]');
   }
 
-  getLegalStructureRadio(companyType: string) {
+  getLegalStructure(companyType: string) {
     return cy.get(`[data-value="${companyType}"]`);
   }
 
@@ -48,7 +48,7 @@ export class OnboardingPage {
   }
 
   selectLegalStructure(companyType: string) {
-    this.getLegalStructureRadio(companyType).click();
+    this.getLegalStructure(companyType).click();
   }
 
   selectHomeBased(radio: boolean) {
