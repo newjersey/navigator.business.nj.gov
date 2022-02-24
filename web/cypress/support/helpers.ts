@@ -1,4 +1,5 @@
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { onOnboardingPage } from "./page_objects/onboardingPage";
 
 /* eslint-disable cypress/no-unnecessary-waiting */
 export const clickNext = (): void => {
@@ -25,6 +26,56 @@ export const clickTask = (taskId: string): void => {
   const taskValue = `[data-task="${taskId}"]`;
   cy.get(taskValue).click({ force: true });
   cy.wait(1000);
+};
+
+export const randomInt = (length = 8): number =>
+  Math.floor(
+    Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1)
+  );
+
+export const completeNewBusinessOnboarding = (
+  businessName: string,
+  industry: string,
+  companyType: string,
+  city: string,
+  homeBased: boolean | undefined,
+  liquor: boolean | undefined
+): void => {
+  cy.url().should("include", `onboarding?page=${1}`);
+  onOnboardingPage.selectNewBusiness(false);
+  onOnboardingPage.getHasExistingBusiness(true).should("not.be.checked");
+  onOnboardingPage.clickNext();
+
+  cy.url().should("include", `onboarding?page=${2}`);
+  onOnboardingPage.typeBusinessName(businessName);
+  onOnboardingPage.clickNext();
+
+  cy.url().should("include", `onboarding?page=${3}`);
+  onOnboardingPage.selectIndustry(industry);
+
+  if (liquor === undefined) {
+    onOnboardingPage.getLiquorLicense().should("not.exist");
+  } else {
+    onOnboardingPage.selectLiquorLicense(liquor);
+  }
+
+  onOnboardingPage.clickNext();
+
+  cy.url().should("include", `onboarding?page=${4}`);
+  onOnboardingPage.selectLegalStructure(companyType);
+  onOnboardingPage.clickNext();
+
+  cy.url().should("include", `onboarding?page=${5}`);
+  onOnboardingPage.selectLocation(city);
+
+  if (homeBased === undefined) {
+    onOnboardingPage.getHomeBased().should("not.exist");
+  } else {
+    onOnboardingPage.selectHomeBased(homeBased);
+  }
+
+  onOnboardingPage.clickNext();
+  cy.url().should("include", `roadmap`);
 };
 
 export const completeOnboarding = (

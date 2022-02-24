@@ -1,7 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { Industries } from "@businessnjgovnavigator/shared";
-import { completeOnboarding } from "../support/helpers";
+import { completeNewBusinessOnboarding, randomInt } from "../support/helpers";
 
 describe("Roadmap [all] [group4]", () => {
   beforeEach(() => {
@@ -11,13 +11,24 @@ describe("Roadmap [all] [group4]", () => {
 
   Industries.forEach((industry) => {
     it(` ${industry.name} completes onboarding and shows the roadmap`, () => {
-      // onboarding
-      completeOnboarding("Beesapple's", industry.id, "general-partnership", !industry.canBeHomeBased);
+      const businessName = `Generic Business Name ${randomInt()}`;
+      const industryId = industry.id;
+      const companyType = "general-partnership";
+      const location = "Absecon";
+      const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
+      const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
 
-      cy.url().should("contain", "/roadmap");
+      completeNewBusinessOnboarding(
+        businessName,
+        industryId,
+        companyType,
+        location,
+        homeBasedQuestion,
+        liquorLicenseQuestion
+      );
 
       // check roadmap
-      cy.get('[data-business-name="Beesapple\'s"]').should("exist");
+      cy.get(`[data-business-name="${businessName}"]`).should("exist");
       cy.get(`[data-industry=${industry.id}]`).should("exist");
       cy.get('[data-legal-structure="general-partnership"]').should("exist");
       cy.get('[data-municipality="Absecon"]').should("exist");
