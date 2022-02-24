@@ -1,4 +1,9 @@
 {
+  "betaBar": {
+    "betaMainText": "This site is in beta. ",
+    "betaFormText": "Let us know what you think!",
+    "betaFormLink": "https://forms.business.nj.gov/feedback/"
+  },
   "dashboardDefaults": {
     "headerText": "Hello, ${name}",
     "missingNameHeaderText": "Hello!",
@@ -17,5 +22,35 @@
     "myNJAccountText": "myNewJersey account",
     "taskPageNavBarHeading": "Business Roadmap",
     "profileLinkText": "Business Profile"
+  },
+  "onboardingDefaults": {
+    "pageTitle": "Tell Us About Your Business",
+    "nextButtonText": "Next",
+    "finalNextButtonText": "Submit",
+    "backButtonText": "Back",
+    "stepXofYTemplate": "(Step ${currentPage} of ${totalPages})",
+    "stepOneTemplate": "(Step ${currentPage})",
+    "errorTextRequiredLegal": "Please select a legal structure.",
+    "errorTextRequiredBusinessName": "Please enter your business name.",
+    "errorTextRequiredMunicipality": "Please select a location.",
+    "errorTextRequiredExistingBusiness": "Please select whether you have an existing business.",
+    "errorTextMinimumNumericField": "Must be ${length} digits long.",
+    "errorTextRequiredExistingEmployees": "Please enter number of employees",
+    "dateOfFormationErrorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
+    "errorTextRequiredSector": "Please select a sector."
+  },
+  "profileDefaults": {
+    "pageTitle": "Business Profile",
+    "saveButtonText": "Save",
+    "backButtonText": "Cancel",
+    "successTextHeader": "Profile Updated",
+    "successTextBody": "Your profile has been updated.",
+    "errorTextHeader": "Error",
+    "errorTextBody": "These are errors with some entries, please try again.",
+    "escapeModalHeader": "Are you sure you want to continue?",
+    "escapeModalBody": "You have unsaved changes that will be lost.",
+    "escapeModalReturn": "Continue without saving",
+    "escapeModalEscape": "Go back",
+    "taxPinErrorText": "Tax PIN must be 4 digits"
   }
 }
