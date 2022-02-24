@@ -1,13 +1,15 @@
 ---
-id: "home-health-aide-license"
-urlSlug: "home-health-aide-license"
-name: "Apply for a Home Health Aide License"
-callToActionLink: "https://www.njconsumeraffairs.gov/epservices"
-callToActionText: "Apply for an Agency License"
+urlSlug: home-health-aide-license
+name: Apply for an Employment Agency License If Applicable
+id: home-health-aide-license
+callToActionLink: https://www.njconsumeraffairs.gov/epservices
+callToActionText: Contact the Division of Consumer Affairs
+required: true
+issuingAgency: New Jersey’s Division of Consumer Affairs Employment and Personnel Services
 ---
+You may need to apply for an Employment Agency License prior to offering caregiving services. You will need to speak with a New Jersey Employment and Personnel Services representative to determine if this license is necessary.
 
-Home health aide businesses need to apply for an Employment Agency/Agents License with New Jersey’s Division of Consumer Affairs.
-
-After completing this task, you will have:
-
-- A license to operate as a homemaker-home health aide business
+---
+>**What if I don't get this license?**
+>
+> You may be subject to fines.
