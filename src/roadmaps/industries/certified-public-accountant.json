@@ -9,27 +9,27 @@
       "task": "business-plan"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 30,
       "task": "register-for-ein"
     },
     {
-      "step": 3,
+      "step": 2,
       "weight": 31,
       "task": "register-for-taxes"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 40,
       "task": "get-insurance"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 50,
       "task": "license-accounting"
     },
     {
-      "step": 5,
+      "step": 4,
       "weight": 51,
       "task": "register-firm-accounting"
     }

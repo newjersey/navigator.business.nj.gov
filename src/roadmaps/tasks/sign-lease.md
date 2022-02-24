@@ -1,17 +1,20 @@
 ---
-id: "sign-lease"
-urlSlug: "sign-lease"
-name: "Sign Your Lease"
+urlSlug: sign-lease
+name: Sign Your Lease
+id: sign-lease
 callToActionLink: ""
 callToActionText: ""
 ---
+You can sign a lease under your official business name and legal structure. Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location. Have an attorney review the terms prior to signing. 
 
-You can sign a lease under your official business name and legal structure. Signing your lease under your registered business name may protect you personally from liabilities and costs associated with your new commercial or industrial location. Before signing your lease, have an attorney review the terms. Make sure your lease terms take into account:
+- - -
 
-1. **Lease Start Date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control.
-2. **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations`.
-3. **Tenant Improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease.
+### Contract Considerations
 
-After you complete this task, you will have:
+* **Lease Start Date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control.
+* **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations` .
+* **Tenant Improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease.
 
-- A signed lease
+> **Once completed, you will have:**
+>
+> * A signed lease

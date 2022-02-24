@@ -1,14 +1,17 @@
 ---
-id: "register-for-taxes"
-urlSlug: "register-for-taxes"
-name: "Register for State Taxes and Employer Purposes"
-callToActionLink: "https://www.state.nj.us/treasury/revenue/gettingregistered.shtml"
-callToActionText: "Register My Business for State Taxes"
+urlSlug: register-for-taxes
+name: Register for State Taxes and Employer Purposes
+id: register-for-taxes
+callToActionLink: https://www.state.nj.us/treasury/revenue/gettingregistered.shtml
+callToActionText: Register My Business for State Taxes
+required: true
+issuingAgency: New Jersey Division of Revenue and Enterprise Services
+formName: NJ-Reg
 ---
+It's time to register your business for State taxes. Doing so will tell the State more about your business and determine what taxes and employer contributions you're liable for.
 
-It's time to register your business for State taxes with the Division of Revenue and Enterprise Services. Doing so will tell the State more about your business and determine what taxes and employer contributions you're liable for. The form you will be filing for this task is often referred to as NJ-Reg.
-
-To complete this application, you must have:
+---
+### Application Needs
 
 - `Entity ID|entity-id` (not required for general partnership or sole proprietorship)
 - `NAICS code|naics`
@@ -22,9 +25,9 @@ To complete this application, you must have:
 - Mail to address and business location(s)
 - Other taxes you may collect (i.e. motor fuels and cigarette/tobacco taxes), a list will be provided
 
-After you complete this task, you will have:
-
-- `Business Registration Certificate (BRC)|business-reg-certificate`
-- NJ Tax ID
-- `Business Tax PIN|tax-pin`
-- Authorization to Collect Sales Tax (if applicable)
+>**Once completed, you will have:**
+>
+>- `Business Registration Certificate (BRC)|business-reg-certificate`
+>- `NJ Tax ID|tax-id`
+>- `Business Tax PIN|tax-pin`
+>- Authorization to Collect Sales Tax Certificate (if applicable)

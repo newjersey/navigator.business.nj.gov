@@ -1,18 +1,21 @@
 ---
 urlSlug: register-firm-accounting
 filename: register-firm-accounting
-name: Register Your Accounting Firm with New Jersey’s Division of Consumer Affairs
+name: Register Your Accounting Firm with the State
 id: register-firm-accounting
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Applications/Firm-Registration-Application.pdf
 callToActionText: Register My Accounting Firm
+required: true
+issuingAgency: New Jersey Division of Consumer Affairs' Board of Accountancy
 ---
-New public accounting firms must be registered with the New Jersey State Board of Accountancy. 
+New accounting firms must register and obtain certification.
 
-To register your firm you will need:
+---
+### Application Needs 
 
 * A designated resident Manager-In-Charge, a Manager-In-Charge must be a certified public accountant of the practice unit
 * Payment for the required application and registration fees
 
-After you complete this task, you will have:
-
-* A certificate indicating your firm has been registered with the New Jersey State Board of Accountancy
+>**Once completed, you will have:**
+>
+>* A certificate indicating your firm has been successfully registered
