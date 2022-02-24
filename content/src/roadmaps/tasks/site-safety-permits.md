@@ -4,7 +4,7 @@ name: Obtain Site Safety Permits
 id: certificate-of-occupancy
 callToActionLink: ""
 callToActionText: ""
-required: true
+required: false
 ---
 Your business site will need to be inspected and approved by your local government to verify that it's safe for customers and employees.
 
