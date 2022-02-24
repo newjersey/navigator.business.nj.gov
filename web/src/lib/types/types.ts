@@ -6,6 +6,10 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 
+// returns all keys in an object of a type
+// e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
+export type KeysOfType<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never }[keyof T];
+
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";

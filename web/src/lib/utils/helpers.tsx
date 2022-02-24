@@ -1,4 +1,5 @@
 import {
+  KeysOfType,
   OnboardingStatus,
   ProfileError,
   Roadmap,
@@ -88,13 +89,25 @@ export const setPreferencesCloseSection = (preferences: Preferences, current: Se
 export const getModifiedTaskContent = (
   roadmap: Roadmap | undefined,
   task: Task,
-  field: Exclude<keyof Task, "unlockedBy" | "required">
+  field: KeysOfType<Task, string>
 ): string => {
   const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
   if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {
     return taskInRoadmap[field] || "";
   }
   return task[field] || "";
+};
+
+export const getModifiedTaskBooleanUndefined = (
+  roadmap: Roadmap | undefined,
+  task: Task,
+  field: KeysOfType<Task, boolean | undefined>
+): boolean | undefined => {
+  const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
+  if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {
+    return taskInRoadmap[field] || undefined;
+  }
+  return task[field] || undefined;
 };
 
 export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }): T => {
