@@ -12,7 +12,7 @@ The State requires that your massage therapy business have insurance.
 ### Insurance Requirements
 
 * **Professional Liability Insurance:** To receive your massage therapy license, you must provide proof of professional liability insurance coverage in a minimum amount of $1,000,000.00 per occurrence and $3,000,000.00 aggregate per policy year. 
-* **Workers' Compensation Insurance:** If you plan to have employees, the State of New Jersey requires that you obtain `workers' comp insurance|workers-comp.` 
+* **Workers' Compensation Insurance:** If you plan to have employees, the State of New Jersey requires that you obtain `workers' comp insurance|workers-comp`. 
 
 > **Once completed, you will have:**
 >
