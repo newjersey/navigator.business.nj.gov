@@ -1,11 +1,11 @@
 import { NavBar } from "@/components/navbar/NavBar";
-import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { SectionDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { OperateReference } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask, generateUser } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserData";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
@@ -43,7 +43,7 @@ describe("<NavBar />", () => {
       const subject = render(
         <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
       );
-      expect(subject.getByText(NavDefaults.registerButton)).toBeInTheDocument();
+      expect(subject.getByText(Defaults.navigationDefaults.registerButton)).toBeInTheDocument();
     });
   });
 
@@ -64,7 +64,7 @@ describe("<NavBar />", () => {
     it("displays default text if no user data", () => {
       useUndefinedUserData();
       const subject = renderFunc();
-      expect(subject.getAllByText(NavDefaults.myNJAccountText).length).toBeGreaterThan(0);
+      expect(subject.getAllByText(Defaults.navigationDefaults.myNJAccountText).length).toBeGreaterThan(0);
     });
   };
 
@@ -87,8 +87,8 @@ describe("<NavBar />", () => {
       const subject = renderDesktopNav();
       const menuEl = subject.getByText(user.name);
       expect(menuEl).toBeInTheDocument();
-      expect(subject.queryByText(NavDefaults.logoutButton)).not.toBeInTheDocument();
-      expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeInTheDocument();
+      expect(subject.queryByText(Defaults.navigationDefaults.logoutButton)).not.toBeInTheDocument();
+      expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
@@ -100,13 +100,13 @@ describe("<NavBar />", () => {
       const menuEl = subject.getByText(user.name);
 
       userEvent.click(menuEl);
-      expect(subject.getByText(NavDefaults.logoutButton)).toBeInTheDocument();
-      expect(subject.getByText(NavDefaults.myNJAccountText)).toBeInTheDocument();
+      expect(subject.getByText(Defaults.navigationDefaults.logoutButton)).toBeInTheDocument();
+      expect(subject.getByText(Defaults.navigationDefaults.myNJAccountText)).toBeInTheDocument();
 
       userEvent.click(menuEl);
       await waitFor(() => {
-        expect(subject.queryByText(NavDefaults.logoutButton)).not.toBeInTheDocument();
-        expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeInTheDocument();
+        expect(subject.queryByText(Defaults.navigationDefaults.logoutButton)).not.toBeInTheDocument();
+        expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
       });
     });
   });
@@ -223,17 +223,17 @@ describe("<NavBar />", () => {
     it("opens and closes user profile links", async () => {
       useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
       const subject = renderMobileTaskNav();
-      expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeVisible();
-      expect(subject.queryByText(NavDefaults.profileLinkText)).not.toBeVisible();
+      expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).not.toBeVisible();
+      expect(subject.queryByText(Defaults.navigationDefaults.profileLinkText)).not.toBeVisible();
 
       fireEvent.click(subject.getByText("Grace Hopper"));
-      expect(subject.queryByText(NavDefaults.myNJAccountText)).toBeVisible();
-      expect(subject.queryByText(NavDefaults.profileLinkText)).toBeVisible();
+      expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).toBeVisible();
+      expect(subject.queryByText(Defaults.navigationDefaults.profileLinkText)).toBeVisible();
 
       fireEvent.click(subject.getByText("Grace Hopper"));
       await waitFor(() => {
-        expect(subject.queryByText(NavDefaults.myNJAccountText)).not.toBeVisible();
-        expect(subject.queryByText(NavDefaults.profileLinkText)).not.toBeVisible();
+        expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).not.toBeVisible();
+        expect(subject.queryByText(Defaults.navigationDefaults.profileLinkText)).not.toBeVisible();
       });
     });
 

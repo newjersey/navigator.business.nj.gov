@@ -1,4 +1,3 @@
-import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { OnboardingDefaults } from "@/display-defaults/onboarding/OnboardingDefaults";
 import { ProfileDefaults } from "@/display-defaults/ProfileDefaults";
 import {
@@ -11,6 +10,7 @@ import {
   Step,
   Task,
 } from "@/lib/types/types";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { Preferences, UserData } from "@businessnjgovnavigator/shared/";
 import { ParsedUrlQuery } from "querystring";
 import React, { ReactElement, useEffect, useRef } from "react";
@@ -146,7 +146,7 @@ export const OnboardingErrorLookup: Record<ProfileError, string> = {
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {
   if (userData?.user.name) return userData.user.name;
   else if (userData?.user.email) return userData.user.email;
-  else return NavDefaults.myNJAccountText;
+  else return Defaults.navigationDefaults.myNJAccountText;
 };
 
 export const validateEmail = (email: string): boolean => {

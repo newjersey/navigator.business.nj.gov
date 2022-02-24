@@ -1,9 +1,9 @@
-import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import analytics from "@/lib/utils/analytics";
 import { AuthContext } from "@/pages/_app";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";
 
@@ -29,7 +29,7 @@ export const AuthButton = (props?: Props): ReactElement => {
         }
       }}
     >
-      {NavDefaults.logInButton}
+      {Defaults.navigationDefaults.logInButton}
     </button>
   );
 
@@ -43,7 +43,7 @@ export const AuthButton = (props?: Props): ReactElement => {
       }`}
       onClick={() => onSignOut(router.push, dispatch)}
     >
-      {NavDefaults.logoutButton}
+      {Defaults.navigationDefaults.logoutButton}
     </button>
   );
 

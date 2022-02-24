@@ -2,10 +2,10 @@ import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettings";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import Link from "next/link";
 import React, { ReactElement, useMemo, useState } from "react";
 import { MiniOperateSection } from "../roadmap/MiniOperateSection";
@@ -63,7 +63,7 @@ export const NavBarLoggedInMobile = ({
         </button>
         <div className={`usa-logo ${scrolled ? "bg-white" : ""} navigator-logo-mobile`}>
           {sideBarPageLayout ? (
-            <div className="text-bold">{NavDefaults.taskPageNavBarHeading}</div>
+            <div className="text-bold">{Defaults.navigationDefaults.taskPageNavBarHeading}</div>
           ) : (
             <Link href={redirectUrl} passHref>
               <a href={redirectUrl}>

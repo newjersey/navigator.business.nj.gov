@@ -1,9 +1,9 @@
 import { Signup } from "@/components/Signup";
-import { NavDefaults } from "@/display-defaults/NavDefaults";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import analytics from "@/lib/utils/analytics";
 import { AuthContext } from "@/pages/_app";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement, useContext, useState } from "react";
 import { Button } from "../njwds-extended/Button";
 
@@ -19,11 +19,11 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
   const getLoginButtonText = (): string => {
     switch (state.isAuthenticated) {
       case IsAuthenticated.FALSE:
-        return NavDefaults.logInButton;
+        return Defaults.navigationDefaults.logInButton;
       case IsAuthenticated.TRUE:
-        return NavDefaults.logoutButton;
+        return Defaults.navigationDefaults.logoutButton;
       case IsAuthenticated.UNKNOWN:
-        return NavDefaults.logInButton;
+        return Defaults.navigationDefaults.logInButton;
     }
   };
 
@@ -59,7 +59,7 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
                     analytics.event.landing_page_navbar_register.click.open_create_account_modal();
                   }}
                 >
-                  {NavDefaults.registerButton}
+                  {Defaults.navigationDefaults.registerButton}
                 </Button>
               </span>
             </div>

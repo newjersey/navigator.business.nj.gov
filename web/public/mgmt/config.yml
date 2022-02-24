@@ -39,6 +39,18 @@ collections:
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Calendar Tooltip, name: calendarTooltip, widget: string }
+          - label: Navigation Defaults
+            name: navigationDefaults
+            collapsed: true
+            widget: object
+            summary: "{{navigationDefaults}}"
+            fields:
+              - { label: Login Button, name: logInButton, widget: string }
+              - { label: Registration Button, name: registerButton, widget: string }
+              - { label: Logout Button, name: logoutButton, widget: string }
+              - { label: MyNJ Account Text, name: myNJAccountText, widget: string }
+              - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
+              - { label: Profile Link Text, name: profileLinkText, widget: string }
 
   - label: Roadmap Add-ons
     name: addons
