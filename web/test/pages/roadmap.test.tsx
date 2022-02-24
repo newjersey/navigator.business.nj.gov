@@ -3,9 +3,11 @@ import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
   generatePreferences,
+  generateProfileData,
   generateStep,
   generateTask,
   generateTaxFilingData,
+  generateUserData,
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -15,6 +17,11 @@ import {
   useMockUserData,
   useMockUserDataError,
 } from "@/test/mock/mockUseUserData";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -454,5 +461,28 @@ describe("roadmap page", () => {
       expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).toBeInTheDocument();
       expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).toBeVisible();
     });
+  });
+
+  it("switches user to oscar and sends to onboarding", async () => {
+    setupStatefulUserDataContext();
+    const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: false }) });
+
+    const subject = render(
+      <WithStatefulUserData initialUserData={userData}>
+        <ThemeProvider theme={createTheme()}>
+          <RoadmapPage operateReferences={{}} displayContent={emptyDisplayContent} />
+        </ThemeProvider>
+      </WithStatefulUserData>
+    );
+
+    fireEvent.click(subject.getByText(RoadmapDefaults.graduationButtonText));
+    expect(currentUserData()).toEqual({
+      ...userData,
+      profileData: {
+        ...userData.profileData,
+        hasExistingBusiness: true,
+      },
+    });
+    await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/onboarding"));
   });
 });

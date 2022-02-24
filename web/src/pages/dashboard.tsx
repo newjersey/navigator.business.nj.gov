@@ -42,6 +42,19 @@ const DashboardPage = (props: Props): ReactElement => {
     setSuccessAlert(success === "true");
   }, [router.isReady, router.query.success]);
 
+  const backToRoadmapBox = (): ReactElement => (
+    <div className="margin-top-6">
+      <div className="padding-3 bg-base-lightest radius-md">
+        <h2 className="margin-y-0">{Defaults.dashboardDefaults.backToRoadmapHeader}</h2>
+        <p className="margin-y-1 text-base-dark">
+          {Defaults.dashboardDefaults.backToRoadmapText.split("${link}")[0]}
+          <a href="/roadmap">{Defaults.dashboardDefaults.backToRoadmapLinkText}</a>
+          {Defaults.dashboardDefaults.backToRoadmapText.split("${link}")[1]}
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <PageSkeleton showLegalMessage={true}>
       <NavBar />
@@ -80,6 +93,8 @@ const DashboardPage = (props: Props): ReactElement => {
                   />
 
                   <p className="text-base-dark">{Defaults.dashboardDefaults.calendarLegalText}</p>
+
+                  {userData?.profileData.initialOnboardingFlow === "STARTING" && backToRoadmapBox()}
                 </div>
 
                 <div className="desktop:grid-col-4 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">

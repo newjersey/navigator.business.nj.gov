@@ -124,6 +124,7 @@ describe("onboarding - owning a business", () => {
       profileData: {
         ...initialUserData.profileData,
         hasExistingBusiness: true,
+        initialOnboardingFlow: "OWNING",
         businessName: "Cool Computers",
         homeBasedBusiness: true,
         legalStructureId: undefined,

@@ -47,12 +47,6 @@ export const BusinessFormationDefaults: Record<string, string> = {
   certifiedDocLabel: "Certified Copy of Formation (PDF)",
   entityIdLabel: "Entity ID",
   confirmationNumberLabel: "Confirmation Number:",
-  alreadySubmittedHeader: "Successfully Submitted",
-  alreadySubmittedText:
-    "You've already successfully submitted your business formation. " +
-    "If you finished paying and got your documents, you're all set. " +
-    "If you still need to complete payment, ${link}.",
-  alreadySubmittedLinkText: "visit your specialized payment page",
   membersNewButtonText: "Add New Member",
   membersExpandText: "Expand",
   membersTableColumn: "Name,Address,Actions",

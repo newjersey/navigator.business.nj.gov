@@ -1,3 +1,4 @@
+import { randomInt } from "./migrations";
 import { v41UserData } from "./v41_remove_operate_section";
 
 export interface v42UserData {
@@ -39,7 +40,7 @@ type v42BusinessUser = {
   intercomHash?: string;
 };
 
-interface v42ProfileData {
+export interface v42ProfileData {
   hasExistingBusiness: boolean | undefined;
   businessName: string;
   industryId: string | undefined;
@@ -232,3 +233,78 @@ type v42GetFilingResponse = {
 };
 
 // ---------------- v42 factories ----------------
+
+export const generatev42User = (overrides: Partial<v42BusinessUser>): v42BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    ...overrides,
+  };
+};
+
+export const generatev42ProfileData = (overrides: Partial<v42ProfileData>): v42ProfileData => {
+  return {
+    hasExistingBusiness: false,
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    homeBasedBusiness: true,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    ownershipTypeIds: [],
+    existingEmployees: undefined,
+    taxPin: undefined,
+    sectorId: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev42FormationFormData = (
+  overrides: Partial<v42FormationFormData>
+): v42FormationFormData => {
+  return {
+    businessSuffix: undefined,
+    businessStartDate: "",
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "",
+    businessAddressZipCode: "",
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "",
+    agentOfficeAddressZipCode: "",
+    members: [],
+    signer: "",
+    additionalSigners: [],
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
+    officialFormationDocument: false,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    ...overrides,
+  };
+};

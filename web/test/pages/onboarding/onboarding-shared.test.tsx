@@ -96,6 +96,30 @@ describe("onboarding - shared", () => {
     expect(subject.queryByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).not.toBeInTheDocument();
   });
 
+  it("sets initialOnboardingFlow if formProgress is not COMPLETED", async () => {
+    const initialUserData = generateUserData({
+      formProgress: "UNSTARTED",
+      profileData: generateProfileData({ initialOnboardingFlow: "STARTING" }),
+    });
+
+    const { page } = renderPage({ userData: initialUserData });
+    page.chooseRadio("has-existing-business-true");
+    await page.visitStep2();
+    expect(currentUserData().profileData.initialOnboardingFlow).toEqual("OWNING");
+  });
+
+  it("preserves initialOnboardingFlow value if formProgress is COMPLETED", async () => {
+    const initialUserData = generateUserData({
+      formProgress: "COMPLETED",
+      profileData: generateProfileData({ initialOnboardingFlow: "STARTING" }),
+    });
+
+    const { page } = renderPage({ userData: initialUserData });
+    page.chooseRadio("has-existing-business-true");
+    await page.visitStep2();
+    expect(currentUserData().profileData.initialOnboardingFlow).toEqual("STARTING");
+  });
+
   it("is able to go back", async () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-false");

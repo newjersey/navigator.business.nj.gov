@@ -189,6 +189,18 @@ describe("dashboard", () => {
     );
   });
 
+  it("shows back-to-roadmap box for users who were previously starting a business", () => {
+    useMockProfileData({ initialOnboardingFlow: "STARTING" });
+    const subject = renderPage({});
+    expect(subject.queryByText(Defaults.dashboardDefaults.backToRoadmapHeader)).toBeInTheDocument();
+  });
+
+  it("does not show back-to-roadmap box for users who have only used the owning-a-business flow", () => {
+    useMockProfileData({ initialOnboardingFlow: "OWNING" });
+    const subject = renderPage({});
+    expect(subject.queryByText(Defaults.dashboardDefaults.backToRoadmapHeader)).not.toBeInTheDocument();
+  });
+
   const useMockProfileDataForUnfilteredOpportunities = () => {
     useMockProfileData({
       homeBasedBusiness: false,

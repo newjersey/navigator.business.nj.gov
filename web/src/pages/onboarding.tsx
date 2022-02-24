@@ -171,7 +171,13 @@ const OnboardingPage = (props: Props): ReactElement => {
       profileData.hasExistingBusiness !== userData.profileData.hasExistingBusiness;
 
     if (page.current === 1 && hasExistingBusinessChanged) {
+      let initialOnboardingFlow = profileData.initialOnboardingFlow;
+      if (userData.formProgress !== "COMPLETED") {
+        initialOnboardingFlow = profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+      }
+
       newProfileData = {
+        initialOnboardingFlow: initialOnboardingFlow,
         businessName: profileData.businessName,
         industryId: profileData.hasExistingBusiness === true ? "generic" : undefined,
         homeBasedBusiness: profileData.homeBasedBusiness,

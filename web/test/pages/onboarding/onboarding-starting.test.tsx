@@ -150,6 +150,7 @@ describe("onboarding - starting a business", () => {
       formProgress: "COMPLETED",
       profileData: {
         ...initialUserData.profileData,
+        initialOnboardingFlow: "STARTING",
         hasExistingBusiness: false,
         businessName: "Cool Computers",
         industryId: "e-commerce",

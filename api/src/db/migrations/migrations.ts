@@ -36,6 +36,7 @@ import { migrate_v2_to_v3 } from "./v3_change_LegalStructure";
 import { migrate_v39_to_v40 } from "./v40_merge_down_steps";
 import { migrate_v40_to_v41 } from "./v41_remove_operate_section";
 import { migrate_v41_to_v42 } from "./v42_add_sector_to_profile_data";
+import { migrate_v42_to_v43 } from "./v43_add_initial_flow_to_profile_data";
 import { migrate_v3_to_v4 } from "./v4_add_municipality";
 import { migrate_v4_to_v5 } from "./v5_add_liquor_license";
 import { migrate_v5_to_v6 } from "./v6_add_home_based_business";
@@ -89,6 +90,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v39_to_v40,
   migrate_v40_to_v41,
   migrate_v41_to_v42,
+  migrate_v42_to_v43,
 ];
 
 export const CURRENT_VERSION = Migrations.length;
