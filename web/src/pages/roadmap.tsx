@@ -8,7 +8,6 @@ import { MiniProfile } from "@/components/roadmap/MiniProfile";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -62,10 +61,10 @@ const RoadmapPage = (props: Props): ReactElement => {
 
   const getHeader = (): string => {
     return userData?.profileData.businessName
-      ? templateEval(RoadmapDefaults.roadmapTitleTemplate, {
+      ? templateEval(Defaults.roadmapDefaults.roadmapTitleTemplate, {
           businessName: userData.profileData.businessName,
         })
-      : RoadmapDefaults.roadmapTitleNotSet;
+      : Defaults.roadmapDefaults.roadmapTitleNotSet;
   };
 
   return (

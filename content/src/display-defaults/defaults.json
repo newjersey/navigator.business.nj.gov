@@ -18,6 +18,9 @@
     "backToRoadmapText": "Our business roadmap will give you a personalized ${link}.",
     "backToRoadmapLinkText": "step-by-step guide"
   },
+  "filingDefaults": {
+    "tagContentBeforeDueDate": "Next Due:"
+  },
   "footer": {
     "linkOneText": "Give Us Feedback",
     "linkOne": "https://forms.business.nj.gov/feedback/",
@@ -79,6 +82,33 @@
     "escapeModalEscape": "Go back",
     "taxPinErrorText": "Tax PIN must be 4 digits"
   },
+  "roadmapDefaults": {
+    "greyBoxBusinessNameText": "Business Name",
+    "greyBoxIndustryText": "Industry",
+    "greyBoxLegalStructureText": "Legal Structure",
+    "greyBoxMunicipalityText": "Location",
+    "greyBoxEINText": "Employer Identification Number (EIN)",
+    "greyBoxEntityIdText": "Entity ID",
+    "greyBoxTaxIdText": "NJ Tax ID",
+    "greyBoxNotesText": "Notes",
+    "greyBoxEditText": "View/Edit Profile",
+    "greyBoxHeaderText": "Business Profile",
+    "greyBoxNotSetText": "Not set",
+    "greyBoxNotEnteredText": "Not entered",
+    "greyBoxViewMoreText": "View More",
+    "greyBoxViewLessText": "View Less",
+    "roadmapTitleNotSet": "Your Business Roadmap",
+    "roadmapTitleTemplate": "Business Roadmap for ${businessName}",
+    "loadingText": "Loading...",
+    "calendarFilingDueDateLabel": "Due",
+    "congratulatorModalTitle": "You did it!",
+    "congratulatorModalHeader": "You reached a crucial milestone as a business.",
+    "congratulatorModalBody": "You can now start your",
+    "congratulatorModalLinkText": "tasks.",
+    "graduationHeader": "I have formed and registered my business, what’s next?",
+    "graduationBodyText": "Learn about annual filings, certifications, funding opportunities, and more.",
+    "graduationButtonText": "Continue"
+  },
   "sectionHeaders": {
     "PLAN": "Plan",
     "START": "Start",
@@ -105,6 +135,12 @@
     "newsletterCheckboxLabel":
       "I want to receive the Business.NJ.gov newsletter and receive information likely to affect my business.",
     "userTestingCheckboxLabel": "I am willing to be contacted to provide feedback on Business.NJ.gov."
+  },
+  "sitewideErrorMessages": {
+    "errorTextNoData": "Something went wrong and we can't access your data. Please try again later.",
+    "errorTextCachedOnly":
+      "We're having trouble connecting; the data you're viewing is cached and it may be out-of-date.",
+    "errorTextUpdateFailed": "Something went wrong with your request. Please try again later."
   },
   "taskDefaults": {
     "backToRoadmapText": "Go Back",

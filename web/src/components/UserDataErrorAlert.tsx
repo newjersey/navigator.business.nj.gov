@@ -1,13 +1,13 @@
 import { Alert } from "@/components/njwds-extended/Alert";
-import { SitewideErrorDefaults } from "@/display-defaults/SitewideErrorDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { UserDataError } from "@/lib/types/types";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement } from "react";
 
 const UserDataErrorLookup: Record<UserDataError, string> = {
-  NO_DATA: SitewideErrorDefaults.errorTextNoData,
-  CACHED_ONLY: SitewideErrorDefaults.errorTextCachedOnly,
-  UPDATE_FAILED: SitewideErrorDefaults.errorTextUpdateFailed,
+  NO_DATA: Defaults.sitewideErrorMessages.errorTextNoData,
+  CACHED_ONLY: Defaults.sitewideErrorMessages.errorTextCachedOnly,
+  UPDATE_FAILED: Defaults.sitewideErrorMessages.errorTextUpdateFailed,
 };
 
 export const UserDataErrorAlert = (): ReactElement => {

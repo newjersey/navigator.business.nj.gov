@@ -1,4 +1,3 @@
-import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { createEmptyTaskDisplayContent, Task, TaskProgress } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
@@ -199,7 +198,7 @@ describe("task page", () => {
 
     expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
     const link = subject.queryByText(
-      `${Defaults.sectionHeaders["START"]} ${RoadmapDefaults.congratulatorModalLinkText}`
+      `${Defaults.sectionHeaders["START"]} ${Defaults.roadmapDefaults.congratulatorModalLinkText}`
     );
     expect(link).toBeInTheDocument();
     fireEvent.click(link as HTMLElement);
@@ -292,7 +291,7 @@ describe("task page", () => {
 
     expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
     expect(
-      subject.queryByText(RoadmapDefaults.congratulatorModalLinkText, { exact: false })
+      subject.queryByText(Defaults.roadmapDefaults.congratulatorModalLinkText, { exact: false })
     ).not.toBeInTheDocument();
   });
 

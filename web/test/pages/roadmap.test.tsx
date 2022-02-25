@@ -1,4 +1,3 @@
-import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
@@ -74,14 +73,14 @@ describe("roadmap page", () => {
     setMockUserDataResponse({ userData: undefined });
     const subject = renderRoadmapPage();
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText(RoadmapDefaults.roadmapTitleNotSet)).toBeNull();
+    expect(subject.queryByText(Defaults.roadmapDefaults.roadmapTitleNotSet)).toBeNull();
   });
 
   it("shows loading page if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     const subject = renderRoadmapPage();
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText(RoadmapDefaults.roadmapTitleNotSet)).toBeNull();
+    expect(subject.queryByText(Defaults.roadmapDefaults.roadmapTitleNotSet)).toBeNull();
   });
 
   it("shows user data and loading spinner when user data loaded but not roadmap", () => {
@@ -123,7 +122,7 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent(
-        RoadmapDefaults.greyBoxNotSetText
+        Defaults.roadmapDefaults.greyBoxNotSetText
       );
     });
 
@@ -142,7 +141,7 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByTestId("mini-profile-industryId")).toHaveTextContent(
-        RoadmapDefaults.greyBoxNotSetText
+        Defaults.roadmapDefaults.greyBoxNotSetText
       );
     });
 
@@ -163,7 +162,7 @@ describe("roadmap page", () => {
       const subject = renderRoadmapPage();
       expect(subject.getByText("Not set")).toBeInTheDocument();
       expect(subject.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
-        RoadmapDefaults.greyBoxNotSetText
+        Defaults.roadmapDefaults.greyBoxNotSetText
       );
     });
 
@@ -183,7 +182,7 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByTestId("mini-profile-location")).toHaveTextContent(
-        RoadmapDefaults.greyBoxNotSetText
+        Defaults.roadmapDefaults.greyBoxNotSetText
       );
     });
 
@@ -239,13 +238,13 @@ describe("roadmap page", () => {
       const subject = renderRoadmapPage();
 
       expect(subject.getByTestId("mini-profile-employerId")).toHaveTextContent(
-        RoadmapDefaults.greyBoxNotEnteredText
+        Defaults.roadmapDefaults.greyBoxNotEnteredText
       );
       expect(subject.getByTestId("mini-profile-taxId")).toHaveTextContent(
-        RoadmapDefaults.greyBoxNotEnteredText
+        Defaults.roadmapDefaults.greyBoxNotEnteredText
       );
       expect(subject.getByTestId("mini-profile-notes")).toHaveTextContent(
-        RoadmapDefaults.greyBoxNotEnteredText
+        Defaults.roadmapDefaults.greyBoxNotEnteredText
       );
     });
 
@@ -271,7 +270,7 @@ describe("roadmap page", () => {
       expect(subject.queryByText("111111111")).not.toBeInTheDocument();
       expect(subject.queryByText("some notes")).not.toBeInTheDocument();
 
-      fireEvent.click(subject.getByText(RoadmapDefaults.greyBoxViewMoreText));
+      fireEvent.click(subject.getByText(Defaults.roadmapDefaults.greyBoxViewMoreText));
       expect(subject.queryByText("some name")).toBeInTheDocument();
       expect(subject.queryByText("C Corporation")).toBeInTheDocument();
       expect(subject.queryByText("Franklin")).toBeInTheDocument();
@@ -281,7 +280,7 @@ describe("roadmap page", () => {
       expect(subject.queryByText("111111111")).toBeInTheDocument();
       expect(subject.queryByText("some notes")).toBeInTheDocument();
 
-      fireEvent.click(subject.getByText(RoadmapDefaults.greyBoxViewLessText));
+      fireEvent.click(subject.getByText(Defaults.roadmapDefaults.greyBoxViewLessText));
       expect(subject.queryByText("123456790")).not.toBeInTheDocument();
       expect(subject.queryByText("98-76543210")).not.toBeInTheDocument();
       expect(subject.queryByText("111111111")).not.toBeInTheDocument();
@@ -475,7 +474,7 @@ describe("roadmap page", () => {
       </WithStatefulUserData>
     );
 
-    fireEvent.click(subject.getByText(RoadmapDefaults.graduationButtonText));
+    fireEvent.click(subject.getByText(Defaults.roadmapDefaults.graduationButtonText));
     expect(currentUserData()).toEqual({
       ...userData,
       profileData: {

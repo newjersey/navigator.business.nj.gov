@@ -4,12 +4,12 @@ import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout
 import { Tag } from "@/components/njwds-extended/Tag";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
-import { FilingDefaults } from "@/display-defaults/FilingDefaults";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Filing, OperateReference } from "@/lib/types/types";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import dayjs from "dayjs";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -40,7 +40,7 @@ const FilingPage = (props: Props): ReactElement => {
               </div>
               <div className="display-inline-flex margin-bottom-4" data-testid="due-date">
                 <Tag tagVariant="baseDark" bold={true}>
-                  {FilingDefaults.tagContentBeforeDueDate} {dueDate}
+                  {Defaults.filingDefaults.tagContentBeforeDueDate} {dueDate}
                 </Tag>
               </div>
               <Content>{props.filing.contentMd}</Content>

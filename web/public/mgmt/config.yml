@@ -51,6 +51,13 @@ collections:
               - { label: Back To Roadmap Header, name: backToRoadmapHeader, widget: string }
               - { label: Back To Roadmap Text, name: backToRoadmapText, widget: string }
               - { label: Back To Roadmap Link Text, name: backToRoadmapLinkText, widget: string }
+          - label: Filing Defaults
+            name: filingDefaults
+            collapsed: true
+            widget: object
+            summary: "{{filingDefaults}}"
+            fields:
+              - { label: Tag Content before Due Date, name: tagContentBeforeDueDate, widget: string }
           - label: Page Footer
             name: footer
             collapsed: true
@@ -132,6 +139,37 @@ collections:
               - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
               - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
               - { label: Tax PIN Error Text, name: taxPinErrorText, widget: string }
+          - label: Roadmap Defaults
+            name: roadmapDefaults
+            collapsed: true
+            widget: object
+            summary: "{{roadmapDefaults}}"
+            fields:
+              - { label: Grey Box - Business Name Label, name: greyBoxBusinessNameText, widget: string }
+              - { label: Grey Box - Industry Label, name: greyBoxIndustryText, widget: string }
+              - { label: Grey Box - Legal Structure Label, name: greyBoxLegalStructureText, widget: string }
+              - { label: Grey Box - Municipality Label, name: greyBoxMunicipalityText, widget: string }
+              - { label: Grey Box - EIN Label, name: greyBoxEINText, widget: string }
+              - { label: Grey Box - Entity ID Label, name: greyBoxEntityIdText, widget: string }
+              - { label: Grey Box - Tax ID Label, name: greyBoxTaxIdText, widget: string }
+              - { label: Grey Box - Notes Label, name: greyBoxNotesText, widget: string }
+              - { label: Grey Box - Edit Link, name: greyBoxEditText, widget: string }
+              - { label: Grey Box - Header, name: greyBoxHeaderText, widget: string }
+              - { label: Grey Box - Not Set Placeholder, name: greyBoxNotSetText, widget: string }
+              - { label: Grey Box - Not Entered Placeholder, name: greyBoxNotEnteredText, widget: string }
+              - { label: Grey Box - View More Text, name: greyBoxViewMoreText, widget: string }
+              - { label: Grey Box - View Less Text, name: greyBoxViewLessText, widget: string }
+              - { label: Roadmap Title - No Business Name, name: roadmapTitleNotSet, widget: string }
+              - { label: Roadmap Title - with Business Name, name: roadmapTitleTemplate, widget: string }
+              - { label: Loading Text, name: loadingText, widget: string }
+              - { label: Calendar Filing Due Date Label, name: calendarFilingDueDateLabel, widget: string }
+              - { label: Congratulatory Modal - Title, name: congratulatorModalTitle, widget: string }
+              - { label: Congratulatory Modal - Header, name: congratulatorModalHeader, widget: string }
+              - { label: Congratulatory Modal - Body, name: congratulatorModalBody, widget: string }
+              - { label: Congratulatory Modal - Link Text, name: congratulatorModalLinkText, widget: string }
+              - { label: Graduation Header, name: graduationHeader, widget: string }
+              - { label: Graduation Body, name: graduationBodyText, widget: string }
+              - { label: Graduation Button, name: graduationButtonText, widget: string }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true
@@ -165,6 +203,15 @@ collections:
               - { label: Complete Signin Description, name: completeSigninDescriptionText, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
+          - label: Sitewide Error Messages
+            name: sitewideErrorMessages
+            collapsed: true
+            widget: object
+            summary: "{{sitewideErrorMessages}}"
+            fields:
+              - { label: Error - No Data, name: errorTextNoData, widget: string }
+              - { label: Error - Cached Only, name: errorTextCachedOnly, widget: string }
+              - { label: Error - Update Failed, name: errorTextUpdateFailed, widget: string }
           - label: Task Defaults
             name: taskDefaults
             collapsed: true

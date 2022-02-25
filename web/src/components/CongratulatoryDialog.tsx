@@ -1,4 +1,3 @@
-import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { SectionType } from "@/lib/types/types";
 import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
@@ -53,7 +52,7 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
             style={{ marginTop: "33px", marginBottom: "33px", width: "98px", height: "99px" }}
           />
           <div style={{ fontWeight: 700, fontSize: "26px", lineHeight: "30.55px" }}>
-            {RoadmapDefaults.congratulatorModalTitle}
+            {Defaults.roadmapDefaults.congratulatorModalTitle}
           </div>
           <div
             style={{
@@ -64,11 +63,11 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
               letterSpacing: "2.5%",
             }}
           >
-            {RoadmapDefaults.congratulatorModalHeader}
+            {Defaults.roadmapDefaults.congratulatorModalHeader}
             <br />
             {!hideLink && (
               <>
-                {RoadmapDefaults.congratulatorModalBody}{" "}
+                {Defaults.roadmapDefaults.congratulatorModalBody}{" "}
                 <span
                   role={"button"}
                   tabIndex={0}
@@ -83,7 +82,7 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
                     cursor: "pointer",
                   }}
                 >
-                  {publicName} {RoadmapDefaults.congratulatorModalLinkText}
+                  {publicName} {Defaults.roadmapDefaults.congratulatorModalLinkText}
                 </span>
               </>
             )}

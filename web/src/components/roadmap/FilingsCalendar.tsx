@@ -1,6 +1,5 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Icon } from "@/components/njwds/Icon";
-import { RoadmapDefaults } from "@/display-defaults/roadmap/RoadmapDefaults";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@/lib/utils/getCurrentDate";
@@ -53,7 +52,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                       hover={true}
                     >
                       <span className="text-bold text-uppercase ">
-                        {RoadmapDefaults.calendarFilingDueDateLabel}{" "}
+                        {Defaults.roadmapDefaults.calendarFilingDueDateLabel}{" "}
                         {dayjs(filing.dueDate, "YYYY-MM-DD").format("M/D")}
                       </span>
                       {" - "}
