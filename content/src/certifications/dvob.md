@@ -4,7 +4,8 @@ name: Get Certified as a Disabled Veteran-Owned Business
 id: dvob-certification
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
 callToActionText: Get My DVOB Certification
-applicableOwnershipTypes: []
+applicableOwnershipTypes:
+  - disabled-veteran
 isSbe: false
 ---
 
