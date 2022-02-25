@@ -1,7 +1,7 @@
 backend:
   name: github
-  repo: newjersey/navigator-content
-  branch: main
+  repo: navigator.business.nj.gov
+  branch: content
   base_url: https://cubukxpyt9.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
@@ -22,7 +22,7 @@ collections:
     files:
       - label: "Defaults"
         name: "defaults"
-        file: "src/display-defaults/defaults.json"
+        file: "content/src/display-defaults/defaults.json"
         fields:
           - label: Beta Bar
             name: betaBar
@@ -195,7 +195,7 @@ collections:
 
   - label: Roadmap Add-ons
     name: addons
-    folder: "src/roadmaps/add-ons"
+    folder: "content/src/roadmaps/add-ons"
     extension: "json"
     identifier_field: "{{filename}}"
     summary: "{{filename}}"
@@ -244,7 +244,7 @@ collections:
 
   - name: "roadmaps"
     label: "Industry Roadmaps"
-    folder: "src/roadmaps/industries"
+    folder: "content/src/roadmaps/industries"
     slug: "{{id}}"
     identifier_field: "{{id}}"
     extension: "json"
@@ -329,7 +329,7 @@ collections:
 
   - name: "tasks"
     label: "Tasks"
-    folder: "src/roadmaps/tasks"
+    folder: "content/src/roadmaps/tasks"
     summary: "{{filename}} - [{{id}}] - {{name}} - {{industryId}}"
     identifier_field: "{{filename}}"
     slug: "{{fields.filename}}"
@@ -360,7 +360,7 @@ collections:
 
   - name: "filings"
     label: "Filings Content"
-    folder: "src/filings"
+    folder: "content/src/filings"
     summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
@@ -378,7 +378,7 @@ collections:
 
   - name: "funding-opportunities"
     label: "Funding Opportunities Content"
-    folder: "src/fundings"
+    folder: "content/src/fundings"
     summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
@@ -504,7 +504,7 @@ collections:
         }
   - name: "archived-funding-opportunities"
     label: "Archived Funding Opportunities Content"
-    folder: "src/archived-fundings"
+    folder: "content/src/archived-fundings"
     summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
@@ -628,7 +628,7 @@ collections:
         }
   - name: "certification-opportunities"
     label: "Certification Opportunities Content"
-    folder: "src/certifications"
+    folder: "content/src/certifications"
     summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
@@ -661,7 +661,7 @@ collections:
 
   - name: "archived-certification-opportunities"
     label: "Archived Certification Opportunities Content"
-    folder: "src/archived-certifications"
+    folder: "content/src/archived-certifications"
     summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
     identifier_field: "{{urlSlug}}"
     slug: "{{urlSlug}}"
@@ -694,7 +694,7 @@ collections:
 
   - name: "contextual-information"
     label: "Contextual Information"
-    folder: "src/display-content/contextual-information"
+    folder: "content/src/display-content/contextual-information"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -708,7 +708,7 @@ collections:
 
   - name: "owning-onboarding-content"
     label: "Oscar Onboarding Content"
-    folder: "src/display-content/onboarding/owning"
+    folder: "content/src/display-content/onboarding/owning"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -726,7 +726,7 @@ collections:
 
   - name: "starting-onboarding-content"
     label: "Poppy Onboarding Content"
-    folder: "src/display-content/onboarding/starting"
+    folder: "content/src/display-content/onboarding/starting"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -745,7 +745,7 @@ collections:
 
   - name: "profile-content"
     label: "Profile Content"
-    folder: "src/display-content/onboarding/profile"
+    folder: "content/src/display-content/onboarding/profile"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -764,7 +764,7 @@ collections:
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"
-    folder: "src/display-content/post-onboarding"
+    folder: "content/src/display-content/post-onboarding"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -784,7 +784,7 @@ collections:
 
   - name: "business-formation"
     label: "Business Formation"
-    folder: "src/display-content/business-formation"
+    folder: "content/src/display-content/business-formation"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -815,7 +815,7 @@ collections:
 
   - name: "roadmap-content"
     label: "Roadmap Content"
-    folder: "src/display-content/roadmap"
+    folder: "content/src/display-content/roadmap"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -834,7 +834,7 @@ collections:
     files:
       - label: "Industry Sectors"
         name: "arrayOfSectors"
-        file: "src/dashboard/sectors.json"
+        file: "content/src/dashboard/sectors.json"
         fields:
           - label: Sectors
             name: arrayOfSectors
@@ -849,7 +849,7 @@ collections:
                 widget: hidden
       - label: "Ownership Types"
         name: "arrayOfOwnershipTypes"
-        file: "src/dashboard/ownershipTypes.json"
+        file: "content/src/dashboard/ownershipTypes.json"
         fields:
           - label: Ownership Types
             name: arrayOfOwnershipTypes
@@ -869,7 +869,7 @@ collections:
     files:
       - label: "Steps"
         name: "steps"
-        file: "src/roadmaps/steps.json"
+        file: "content/src/roadmaps/steps.json"
         fields:
           - label: steps
             name: steps
@@ -896,7 +896,7 @@ collections:
                 value_type: int
       - label: "Task Dependencies"
         name: "task-dependencies"
-        file: "src/roadmaps/task-dependencies.json"
+        file: "content/src/roadmaps/task-dependencies.json"
         fields:
           - label: Tasks
             name: dependencies
