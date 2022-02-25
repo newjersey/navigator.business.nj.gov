@@ -1,4 +1,3 @@
-import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import analytics from "@/lib/utils/analytics";
 import Home from "@/pages/index";
@@ -6,6 +5,7 @@ import { generateUser } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { render } from "@testing-library/react";
 import React from "react";
 
@@ -64,13 +64,13 @@ describe("HomePage", () => {
     useMockRouter({ isReady: true, query: { signUp: "true" } });
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
     const page = render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
-    expect(page.getByText(SelfRegDefaults.signupTitleText)).toBeInTheDocument();
+    expect(page.getByText(Defaults.selfRegistration.signupTitleText)).toBeInTheDocument();
   });
   it("does not open the modal with signUp = false in the querystrings", () => {
     useMockRouter({ isReady: true, query: { signUp: "false" } });
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
     const page = render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
-    expect(page.queryByText(SelfRegDefaults.signupTitleText)).not.toBeInTheDocument();
+    expect(page.queryByText(Defaults.selfRegistration.signupTitleText)).not.toBeInTheDocument();
   });
 
   it("renders one main element on the index page", () => {

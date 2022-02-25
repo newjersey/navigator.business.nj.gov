@@ -1,8 +1,8 @@
-import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useUnauthedOnlyPage } from "@/lib/auth/useAuthProtectedPage";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Home from "@/pages/index";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import React, { ReactElement } from "react";
 
@@ -25,12 +25,12 @@ const CompleteSignin = (): ReactElement => {
       >
         <DialogTitle id="complete-signin-modal">
           <div className="padding-top-1 padding-x-2 text-bold font-body-xl">
-            {SelfRegDefaults.completeSigninTitleText}
+            {Defaults.selfRegistration.completeSigninTitleText}
           </div>
         </DialogTitle>
         <DialogContent>
           <div className="padding-2">
-            <p className="padding-bottom-1">{SelfRegDefaults.completeSigninDescriptionText}</p>
+            <p className="padding-bottom-1">{Defaults.selfRegistration.completeSigninDescriptionText}</p>
           </div>
         </DialogContent>
       </Dialog>

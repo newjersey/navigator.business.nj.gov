@@ -1,8 +1,8 @@
 import { Signup } from "@/components/Signup";
-import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import * as api from "@/lib/api-client/apiClient";
 import { SelfRegResponse } from "@/lib/types/types";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { act, fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -51,7 +51,7 @@ describe("<Signup />", () => {
 
   it("allows a user to uncheck to opt out of newsletter", async () => {
     renderAndFillForm("Some Name", "some-email@example.com");
-    fireEvent.click(subject.getByLabelText(SelfRegDefaults.newsletterCheckboxLabel));
+    fireEvent.click(subject.getByLabelText(Defaults.selfRegistration.newsletterCheckboxLabel));
     clickSubmit();
     await waitFor(() => {
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
@@ -66,7 +66,7 @@ describe("<Signup />", () => {
 
   it("allows a user to uncheck to opt out of user testing", async () => {
     renderAndFillForm("Some Name", "some-email@example.com");
-    fireEvent.click(subject.getByLabelText(SelfRegDefaults.userTestingCheckboxLabel));
+    fireEvent.click(subject.getByLabelText(Defaults.selfRegistration.userTestingCheckboxLabel));
     clickSubmit();
     await waitFor(() => {
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({

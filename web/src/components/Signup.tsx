@@ -1,8 +1,8 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
-import { SelfRegDefaults } from "@/display-defaults/SelfRegDefaults";
 import { postSelfReg } from "@/lib/api-client/apiClient";
 import analytics from "@/lib/utils/analytics";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import {
   Checkbox,
   Dialog,
@@ -20,10 +20,10 @@ import { Button } from "./njwds-extended/Button";
 
 type SelfRegError = "EMAILS_DO_NOT_MATCH" | "REQUIRED_FIELDS" | "DUPLICATE_SIGNUP" | "GENERIC";
 const SelfRegErrorLookup: Record<SelfRegError, string> = {
-  EMAILS_DO_NOT_MATCH: SelfRegDefaults.errorTextEmailsNotMatching,
-  REQUIRED_FIELDS: SelfRegDefaults.errorTextRequiredFields,
-  DUPLICATE_SIGNUP: SelfRegDefaults.errorTextDuplicateSignup,
-  GENERIC: SelfRegDefaults.errorTextGeneric,
+  EMAILS_DO_NOT_MATCH: Defaults.selfRegistration.errorTextEmailsNotMatching,
+  REQUIRED_FIELDS: Defaults.selfRegistration.errorTextRequiredFields,
+  DUPLICATE_SIGNUP: Defaults.selfRegistration.errorTextDuplicateSignup,
+  GENERIC: Defaults.selfRegistration.errorTextGeneric,
 };
 
 interface Props {
@@ -116,7 +116,7 @@ export const Signup = (props: Props): ReactElement => {
     >
       <DialogTitle id="signup-modal">
         <div className="padding-top-1 text-bold tablet:padding-x-2 tablet:font-body-xl mobile-lg:font-body-lg">
-          {SelfRegDefaults.signupTitleText}
+          {Defaults.selfRegistration.signupTitleText}
         </div>
       </DialogTitle>
       <DialogContent>
@@ -133,16 +133,16 @@ export const Signup = (props: Props): ReactElement => {
           <Icon className="usa-icon--size-4">close</Icon>
         </IconButton>
         <div className="tablet:padding-2">
-          <p className="padding-bottom-1">{SelfRegDefaults.signupDescriptionText}</p>
+          <p className="padding-bottom-1">{Defaults.selfRegistration.signupDescriptionText}</p>
           {showAlert()}
           <div className="margin-top-2">
-            <label htmlFor="name">{SelfRegDefaults.nameFieldLabel}</label>
+            <label htmlFor="name">{Defaults.selfRegistration.nameFieldLabel}</label>
             <TextField
               value={name}
               onChange={handleNameChange}
               variant="outlined"
               fullWidth
-              placeholder={SelfRegDefaults.nameFieldPlaceholder}
+              placeholder={Defaults.selfRegistration.nameFieldPlaceholder}
               inputProps={{
                 id: "name",
                 "data-testid": "name",
@@ -150,13 +150,13 @@ export const Signup = (props: Props): ReactElement => {
             />
           </div>
           <div className="margin-top-2">
-            <label htmlFor="email">{SelfRegDefaults.emailFieldLabel}</label>
+            <label htmlFor="email">{Defaults.selfRegistration.emailFieldLabel}</label>
             <TextField
               value={email}
               onChange={handleEmailChange}
               variant="outlined"
               fullWidth
-              placeholder={SelfRegDefaults.emailFieldPlaceholder}
+              placeholder={Defaults.selfRegistration.emailFieldPlaceholder}
               inputProps={{
                 id: "email",
                 "data-testid": "email",
@@ -164,13 +164,13 @@ export const Signup = (props: Props): ReactElement => {
             />
           </div>
           <div className="margin-y-2">
-            <label htmlFor="confirm-email">{SelfRegDefaults.confirmEmailFieldLabel}</label>
+            <label htmlFor="confirm-email">{Defaults.selfRegistration.confirmEmailFieldLabel}</label>
             <TextField
               value={confirmEmail}
               onChange={handleConfirmEmailChange}
               variant="outlined"
               fullWidth
-              placeholder={SelfRegDefaults.confirmEmailFieldPlaceholder}
+              placeholder={Defaults.selfRegistration.confirmEmailFieldPlaceholder}
               inputProps={{
                 id: "confirm-email",
                 "data-testid": "confirm-email",
@@ -180,7 +180,7 @@ export const Signup = (props: Props): ReactElement => {
           <FormGroup>
             <FormControlLabel
               style={{ display: "table" }}
-              label={SelfRegDefaults.newsletterCheckboxLabel}
+              label={Defaults.selfRegistration.newsletterCheckboxLabel}
               control={
                 <div style={{ display: "table-cell", width: "42px" }}>
                   <Checkbox
@@ -192,7 +192,7 @@ export const Signup = (props: Props): ReactElement => {
             />
             <FormControlLabel
               style={{ display: "table" }}
-              label={SelfRegDefaults.userTestingCheckboxLabel}
+              label={Defaults.selfRegistration.userTestingCheckboxLabel}
               control={
                 <div style={{ display: "table-cell", width: "42px" }}>
                   <Checkbox
@@ -208,7 +208,7 @@ export const Signup = (props: Props): ReactElement => {
       <DialogActions>
         <div className="padding-3 flex">
           <Button style="secondary" onClick={onClose}>
-            {SelfRegDefaults.closeButtonText}
+            {Defaults.selfRegistration.closeButtonText}
           </Button>
           <Button
             typeSubmit
@@ -221,7 +221,7 @@ export const Signup = (props: Props): ReactElement => {
             }}
             dataTestid="submit-selfreg"
           >
-            {SelfRegDefaults.submitButtonText}
+            {Defaults.selfRegistration.submitButtonText}
           </Button>
         </div>
       </DialogActions>

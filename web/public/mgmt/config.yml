@@ -141,6 +141,30 @@ collections:
               - { label: Plan Label, name: PLAN, widget: string }
               - { label: Start Label, name: START, widget: string }
               - { label: Operate Label, name: OPERATE, widget: string }
+          - label: Self Registration 
+            name: selfRegistration
+            collapsed: true
+            widget: object
+            summary: "{{selfRegistration}}"
+            fields:
+              - { label: Signup Header, name: signupTitleText, widget: string }
+              - { label: Signup Descritpion, name: signupDescriptionText, widget: string }
+              - { label: Name Label, name: nameFieldLabel, widget: string }
+              - { label: Name Placeholder, name: nameFieldPlaceholder, widget: string }
+              - { label: Email Label, name: emailFieldLabel, widget: string }
+              - { label: Email Placeholder, name: emailFieldPlaceholder, widget: string }
+              - { label: Confirm Email Label, name: confirmEmailFieldLabel, widget: string }
+              - { label: Confirm Email Placeholder, name: confirmEmailFieldPlaceholder, widget: string }
+              - { label: Submit Button Text, name: submitButtonText, widget: string }
+              - { label: Close Button Text, name: closeButtonText, widget: string }
+              - { label: Error - Emails not matching, name: errorTextEmailsNotMatching, widget: string }
+              - { label: Error - Required Fields, name: errorTextRequiredFields, widget: string }
+              - { label: Error - Duplicate Signup, name: errorTextDuplicateSignup, widget: string }
+              - { label: Error - Generic, name: errorTextGeneric, widget: string }
+              - { label: Complete Signin Title, name: completeSigninTitleText, widget: string }
+              - { label: Complete Signin Description, name: completeSigninDescriptionText, widget: string }
+              - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
+              - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
           - label: Task Defaults
             name: taskDefaults
             collapsed: true
