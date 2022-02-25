@@ -1,10 +1,10 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
-import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
@@ -35,7 +35,7 @@ interface Props {
 const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
   NOT_FOUND: LicenseScreenDefaults.errorTextNotFound,
   FIELDS_REQUIRED: LicenseScreenDefaults.errorTextFieldsRequired,
-  SEARCH_FAILED: SearchBusinessNamesDefaults.errorTextSearchFailed,
+  SEARCH_FAILED: Defaults.searchBusinessNameTask.errorTextSearchFailed,
 };
 
 export const CheckStatus = (props: Props): ReactElement => {

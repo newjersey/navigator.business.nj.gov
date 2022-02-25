@@ -239,6 +239,24 @@ collections:
               - { label: Not Started Text, name: NOT_STARTED, widget: string }
               - { label: In Progress Text, name: IN_PROGRESS, widget: string }
               - { label: Completed Text, name: COMPLETED, widget: string }
+          - label: Task - Business Name Search Headers
+            name: searchBusinessNameTask
+            collapsed: true
+            widget: object
+            summary: "{{searchBusinessNameTask}}"
+            fields:
+              - { label: Placeholder Text, name: placeholderText, widget: string }
+              - { label: Search Button Label, name: searchButtonText, widget: string }
+              - { label: Unavailable Name Message, name: unavailableText, widget: string }
+              - { label: Similar Unavailable Names Message, name: similarUnavailableNamesText, widget: string }
+              - { label: Available Name Message, name: availableText, widget: string }
+              - { label: Update Button Text, name: updateButtonText, widget: string }
+              - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
+              - { label: Offical Check Button, name: officialCheckButtonText, widget: string }
+              - { label: Officail Check Link, name: officialCheckButtonLink, widget: string }
+              - { label: Official Check Text, name: officialCheckText, widget: string }
+              - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
+              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
 
   - label: Roadmap Add-ons
     name: addons

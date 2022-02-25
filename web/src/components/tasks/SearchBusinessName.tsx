@@ -3,7 +3,6 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskHeader } from "@/components/TaskHeader";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { SearchBusinessNamesDefaults } from "@/display-defaults/tasks/search-business-names/SearchBusinessNamesDefaults";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
@@ -11,6 +10,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { NameAvailability, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { FormControl, TextField } from "@mui/material";
 import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { Button } from "../njwds-extended/Button";
@@ -20,8 +20,8 @@ interface Props {
 
 type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
 const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
-  BAD_INPUT: SearchBusinessNamesDefaults.errorTextBadInput,
-  SEARCH_FAILED: SearchBusinessNamesDefaults.errorTextSearchFailed,
+  BAD_INPUT: Defaults.searchBusinessNameTask.errorTextBadInput,
+  SEARCH_FAILED: Defaults.searchBusinessNameTask.errorTextSearchFailed,
 };
 
 export const SearchBusinessName = (props: Props): ReactElement => {
@@ -110,14 +110,14 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     return (
       <div data-testid="available-text">
         <p className="font-body-2xs text-primary">
-          {templateEval(SearchBusinessNamesDefaults.availableText, { name: nameDisplayedInResults })}
+          {templateEval(Defaults.searchBusinessNameTask.availableText, { name: nameDisplayedInResults })}
         </p>
         {updateButtonClicked ? (
           <div className="font-body-2xs text-primary margin-top-05" data-testid="name-has-been-updated">
             <span className="padding-right-05">
               <Icon>check</Icon>
             </span>
-            <span>{SearchBusinessNamesDefaults.nameHasBeenUpdatedText}</span>
+            <span>{Defaults.searchBusinessNameTask.nameHasBeenUpdatedText}</span>
           </div>
         ) : (
           <button
@@ -125,19 +125,19 @@ export const SearchBusinessName = (props: Props): ReactElement => {
             data-testid="update-name"
             className="usa-button usa-button--unstyled font-body-2xs"
           >
-            <span className="text-underline">{SearchBusinessNamesDefaults.updateButtonText}</span>
+            <span className="text-underline">{Defaults.searchBusinessNameTask.updateButtonText}</span>
           </button>
         )}
         <div className="margin-bottom-2">
           <Alert variant="info">
-            <Content>{SearchBusinessNamesDefaults.officialCheckText}</Content>
+            <Content>{Defaults.searchBusinessNameTask.officialCheckText}</Content>
             <a
-              href={SearchBusinessNamesDefaults.officialCheckButtonLink}
+              href={Defaults.searchBusinessNameTask.officialCheckButtonLink}
               target="_blank"
               rel="noreferrer noopener"
             >
               <button data-testid="official-check" className="usa-button usa-button--secondary margin-top-2">
-                {SearchBusinessNamesDefaults.officialCheckButtonText}
+                {Defaults.searchBusinessNameTask.officialCheckButtonText}
               </button>
             </a>
           </Alert>
@@ -150,10 +150,10 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     return (
       <div data-testid="unavailable-text">
         <p className="font-body-2xs text-red">
-          {templateEval(SearchBusinessNamesDefaults.unavailableText, { name: nameDisplayedInResults })}
+          {templateEval(Defaults.searchBusinessNameTask.unavailableText, { name: nameDisplayedInResults })}
         </p>
         <p className="font-body-2xs text-red margin-bottom-1">
-          {SearchBusinessNamesDefaults.similarUnavailableNamesText}
+          {Defaults.searchBusinessNameTask.similarUnavailableNamesText}
         </p>
         <ul className="usa-list--unstyled font-body-2xs text-red">
           {nameAvailability &&
@@ -183,7 +183,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
               value={name}
               onChange={handleName}
               variant="outlined"
-              placeholder={SearchBusinessNamesDefaults.placeholderText}
+              placeholder={Defaults.searchBusinessNameTask.placeholderText}
               inputProps={{
                 "aria-label": "Search business name",
               }}
@@ -199,7 +199,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
                 dataTestid="search-availability"
                 noRightMargin
               >
-                {SearchBusinessNamesDefaults.searchButtonText}
+                {Defaults.searchBusinessNameTask.searchButtonText}
               </Button>
             </FormControl>
           </div>
