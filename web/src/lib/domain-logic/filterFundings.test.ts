@@ -182,7 +182,7 @@ describe("filterFundings", () => {
     });
 
     const funding1 = generateFunding({ sector: ["construction"], status: "open" });
-    const funding2 = generateFunding({ sector: [] });
+    const funding2 = generateFunding({ sector: [], status: "open" });
     const funding3 = generateFunding({ sector: ["construction", "cannabis"], status: "open" });
     const funding4 = generateFunding({ sector: ["cannabis", "manufacturing"], status: "open" });
     const funding5 = generateFunding({ sector: ["Construction"], status: "open" });
