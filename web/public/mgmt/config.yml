@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: navigator.business.nj.gov
-  branch: content
+  branch: content-repo
   base_url: https://cubukxpyt9.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
