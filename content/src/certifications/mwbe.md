@@ -4,7 +4,9 @@ name: Obtain a Minority/Women-Owned Business
 id: mwbe
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
 callToActionText: Apply for My M/WBE Certification
-applicableOwnershipTypes: []
+applicableOwnershipTypes:
+  - woman-owned
+  - minority-owned
 isSbe: false
 ---
 
