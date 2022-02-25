@@ -42,7 +42,11 @@ collections:
               - { label: ACH Payment Cost, name: achPaymentCost, widget: string }
               - { label: ACH Payment label, name: achPaymentTypeLabel, widget: string }
               - { label: Add New Signer Button, name: addNewSignerButtonText, widget: string }
-              - { label: Business Address - City - Not Set, name: notSetBusinessAddressCityLabel, widget: string }
+              - {
+                  label: Business Address - City - Not Set,
+                  name: notSetBusinessAddressCityLabel,
+                  widget: string,
+                }
               - { label: Business Address - City Label, name: businessAddressCityLabel, widget: string }
               - { label: Business Name - Not Set, name: notSetBusinessNameText, widget: string }
               - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
@@ -54,7 +58,11 @@ collections:
               - { label: Document - Standing Label, name: standingDocLabel, widget: string }
               - { label: Document Table - Column 2 Label, name: documentTableColumn2Label, widget: string }
               - { label: Document Table - Column 3 Label, name: documentTableColumn3Label, widget: string }
-              - { label: Document Table - Subtotal Label, name: documentTableSubTotalCostLabel, widget: string }
+              - {
+                  label: Document Table - Subtotal Label,
+                  name: documentTableSubTotalCostLabel,
+                  widget: string,
+                }
               - { label: Edit Button Text, name: editButtonText, widget: string }
               - { label: Entity ID Label, name: entityIdLabel, widget: string }
               - { label: Error - Address City, name: addressCityErrorText, widget: string }
@@ -62,18 +70,38 @@ collections:
               - { label: Error - Address Zip Code, name: addressZipCodeErrorText, widget: string }
               - { label: Error - Address, name: addressErrorText, widget: string }
               - { label: Error - Agent Address City, name: agentOfficeaddressCityErrorText, widget: string }
-              - { label: Error - Agent Address Line 1, name: agentOfficeAddressLine1ErrorText, widget: string }
-              - { label: Error - Agent Address Zip Code, name: agentOfficeAddressZipCodeErrorText, widget: string }
+              - {
+                  label: Error - Agent Address Line 1,
+                  name: agentOfficeAddressLine1ErrorText,
+                  widget: string,
+                }
+              - {
+                  label: Error - Agent Address Zip Code,
+                  name: agentOfficeAddressZipCodeErrorText,
+                  widget: string,
+                }
               - { label: Error - Agent Email, name: agentEmailErrorText, widget: string }
               - { label: Error - Agent Name, name: agentnameErrorText, widget: string }
               - { label: Error - Agent Number, name: agentNumberErrorText, widget: string }
-              - { label: Error - Business Address Line 1, name: businessAddressLine1ErrorText, widget: string }
-              - { label: Error - Business Address Zip Code, name: businessAddressZipCodeErrorText, widget: string }
+              - {
+                  label: Error - Business Address Line 1,
+                  name: businessAddressLine1ErrorText,
+                  widget: string,
+                }
+              - {
+                  label: Error - Business Address Zip Code,
+                  name: businessAddressZipCodeErrorText,
+                  widget: string,
+                }
               - { label: Error - Business Name Not Set, name: notSetBusinessNameErrorText, widget: string }
               - { label: Error - Contact First Name, name: contactFirstnameErrorText, widget: string }
               - { label: Error - Contact Last Name, name: contactLastnameErrorText, widget: string }
               - { label: Error - Contact Phone Number, name: contactPhoneNumberErrorText, widget: string }
-              - { label: Error - Missing Fields on Submit, name: missingFieldsOnSubmitModalText, widget: string }
+              - {
+                  label: Error - Missing Fields on Submit,
+                  name: missingFieldsOnSubmitModalText,
+                  widget: string,
+                }
               - { label: Error - Name, name: nameErrorText, widget: string }
               - { label: Error - Signer, name: signerErrorText, widget: string }
               - { label: Error - Start Date, name: startDateErrorText, widget: string }
@@ -92,7 +120,11 @@ collections:
               - { label: Next Button Text, name: nextButtonText, widget: string }
               - { label: Payment Type - Error, name: paymentTypeErrorText, widget: string }
               - { label: Payment Type - Table Label, name: paymentTypeTableLabel, widget: string }
-              - { label: Payment Type - Total Cost Label, name: paymentTypeTableTotalCostLabel, widget: string }
+              - {
+                  label: Payment Type - Total Cost Label,
+                  name: paymentTypeTableTotalCostLabel,
+                  widget: string,
+                }
               - { label: Previous Button Text, name: previousButtonText, widget: string }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Success Page - Body, name: successPageBody, widget: string }
@@ -135,14 +167,22 @@ collections:
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
               - { label: Hero - Call to Action, name: heroCallToActionText, widget: string }
               - { label: Section 2 - Header - First Line, name: section2HeaderFirstLineText, widget: string }
-              - { label: Section 2 - Header - Second Line, name: section2HeaderSecondLineText, widget: string }
+              - {
+                  label: Section 2 - Header - Second Line,
+                  name: section2HeaderSecondLineText,
+                  widget: string,
+                }
               - { label: Section 2 - Header - Third Line, name: section2HeaderThirdLineText, widget: string }
               - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: string }
               - { label: Section 2 - Icon 1 Text, name: section2Icon1Text, widget: string }
               - { label: Section 2 - Icon 2 Text, name: section2Icon2Text, widget: string }
               - { label: Section 2 - Icon 3 Text, name: section2Icon3Text, widget: string }
               - { label: Section 3 - Header - First Line, name: section3HeaderFirstLineText, widget: string }
-              - { label: Section 3 - Header - Second Line, name: section3HeaderSecondLineText, widget: string }
+              - {
+                  label: Section 3 - Header - Second Line,
+                  name: section3HeaderSecondLineText,
+                  widget: string,
+                }
               - { label: Column 1 - Header, name: column1Header, widget: string }
               - { label: Column 1 - Supporting Text, name: column1SupportingText, widget: string }
               - { label: Column 1 - Button Text, name: column1Button, widget: string }
@@ -195,11 +235,31 @@ collections:
               - { label: Step X of Y Template, name: stepXofYTemplate, widget: string }
               - { label: Step One Templace, name: stepOneTemplate, widget: string }
               - { label: Error Text - Required Legal, name: errorTextRequiredLegal, widget: string }
-              - { label: Error Text - Required Business Name, name: errorTextRequiredBusinessName, widget: string }
-              - { label: Error Text - Required Municipality, name: errorTextRequiredMunicipality, widget: string }
-              - { label: Error Text - Required Existing Business, name: errorTextRequiredExistingBusiness, widget: string }
-              - { label: Error Text - Minimum Numeric Field, name: errorTextMinimumNumericField, widget: string }
-              - { label: Error Text - Required Existing Employees, name: errorTextRequiredExistingEmployees, widget: string }
+              - {
+                  label: Error Text - Required Business Name,
+                  name: errorTextRequiredBusinessName,
+                  widget: string,
+                }
+              - {
+                  label: Error Text - Required Municipality,
+                  name: errorTextRequiredMunicipality,
+                  widget: string,
+                }
+              - {
+                  label: Error Text - Required Existing Business,
+                  name: errorTextRequiredExistingBusiness,
+                  widget: string,
+                }
+              - {
+                  label: Error Text - Minimum Numeric Field,
+                  name: errorTextMinimumNumericField,
+                  widget: string,
+                }
+              - {
+                  label: Error Text - Required Existing Employees,
+                  name: errorTextRequiredExistingEmployees,
+                  widget: string,
+                }
               - { label: Error Text - Date of Formation, name: dateOfFormationErrorText, widget: string }
               - { label: Error Text - Required Sector, name: errorTextRequiredSector, widget: string }
           - label: Page Footer
@@ -282,7 +342,7 @@ collections:
               - { label: Plan Label, name: PLAN, widget: string }
               - { label: Start Label, name: START, widget: string }
               - { label: Operate Label, name: OPERATE, widget: string }
-          - label: Self Registration 
+          - label: Self Registration
             name: selfRegistration
             collapsed: true
             widget: object
@@ -351,7 +411,11 @@ collections:
               - { label: Placeholder Text, name: placeholderText, widget: string }
               - { label: Search Button Label, name: searchButtonText, widget: string }
               - { label: Unavailable Name Message, name: unavailableText, widget: string }
-              - { label: Similar Unavailable Names Message, name: similarUnavailableNamesText, widget: string }
+              - {
+                  label: Similar Unavailable Names Message,
+                  name: similarUnavailableNamesText,
+                  widget: string,
+                }
               - { label: Available Name Message, name: availableText, widget: string }
               - { label: Update Button Text, name: updateButtonText, widget: string }
               - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
@@ -395,11 +459,19 @@ collections:
               - { label: Status - Expired, name: expiredPermitStatusText, widget: string }
               - { label: Status - Barred, name: barredPermitStatusText, widget: string }
               - { label: Status - Out of State, name: outOfBusinessPermitStatusText, widget: string }
-              - { label: Status - Reinstatement Pending, name: reinstatementPendingPermitStatusText, widget: string }
+              - {
+                  label: Status - Reinstatement Pending,
+                  name: reinstatementPendingPermitStatusText,
+                  widget: string,
+                }
               - { label: Status - Closed, name: closedPermitStatusText, widget: string }
               - { label: Status - Deleted, name: deletedPermitStatusText, widget: string }
               - { label: Status - Denied, name: deniedPermitStatusText, widget: string }
-              - { label: Status - Voluntary Surrener, name: voluntarySurrenderPermitStatusText, widget: string }
+              - {
+                  label: Status - Voluntary Surrener,
+                  name: voluntarySurrenderPermitStatusText,
+                  widget: string,
+                }
               - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
               - { label: Tooltip Text, name: tooltipText, widget: string }
 
@@ -868,6 +940,7 @@ collections:
         search_fields: ["arrayOfOwnershipTypes.*.name"]
         value_field: "arrayOfOwnershipTypes.*.id"
         display_fields: ["arrayOfOwnershipTypes.*.name"]
+      - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
 
   - name: "archived-certification-opportunities"
     label: "Archived Certification Opportunities Content"
@@ -901,6 +974,7 @@ collections:
         search_fields: ["arrayOfOwnershipTypes.*.name"]
         value_field: "arrayOfOwnershipTypes.*.id"
         display_fields: ["arrayOfOwnershipTypes.*.name"]
+      - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
 
   - name: "contextual-information"
     label: "Contextual Information"
