@@ -58,28 +58,43 @@ collections:
             summary: "{{filingDefaults}}"
             fields:
               - { label: Tag Content before Due Date, name: tagContentBeforeDueDate, widget: string }
-          - label: Page Footer
-            name: footer
+          - label: Landing Page
+            name: landingPage
             collapsed: true
             widget: object
-            summary: "{{footer}}"
+            summary: "{{landingPage}}"
             fields:
-              - { label: Link One Test, name: linkOneText, widget: string }
-              - { label: Link One, name: linkOne, widget: string }
-              - { label: Link Two Text, name: linkTwoText, widget: string }
-              - { label: Link Two, name: linkTwo, widget: string }
-              - { label: Link Three Text, name: linkThreeText, widget: string }
-              - { label: Link Three, name: linkThree, widget: string }
-              - { label: Office Text One, name: officeTextOne, widget: string }
-              - { label: Office Text Two, name: officeTextTwo, widget: string }
-              - { label: Office Link Text, name: officeLinkText, widget: string }
-              - { label: Office Link, name: officeLink, widget: string }
-              - { label: Credit Text, name: creditText, widget: string }
-              - { label: Credit Link Text, name: creditLinkText, widget: string }
-              - { label: Credit Link, name: creditLink, widget: string }
-              - { label: Office External Text, name: officeExternalText, widget: string }
-              - { label: Github Link, name: gitHubLink, widget: string }
-              - { label: Twitter Link, name: twitterLink, widget: string }
+              - { label: Hero - First Line, name: heroCalloutFirstLineText, widget: string }
+              - { label: Hero - Second Line, name: heroCalloutSecondLineText, widget: string }
+              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Hero - Call to Action, name: heroCallToActionText, widget: string }
+              - { label: Section 2 - Header - First Line, name: section2HeaderFirstLineText, widget: string }
+              - { label: Section 2 - Header - Second Line, name: section2HeaderSecondLineText, widget: string }
+              - { label: Section 2 - Header - Third Line, name: section2HeaderThirdLineText, widget: string }
+              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: string }
+              - { label: Section 2 - Icon 1 Text, name: section2Icon1Text, widget: string }
+              - { label: Section 2 - Icon 2 Text, name: section2Icon2Text, widget: string }
+              - { label: Section 2 - Icon 3 Text, name: section2Icon3Text, widget: string }
+              - { label: Section 3 - Header - First Line, name: section3HeaderFirstLineText, widget: string }
+              - { label: Section 3 - Header - Second Line, name: section3HeaderSecondLineText, widget: string }
+              - { label: Column 1 - Header, name: column1Header, widget: string }
+              - { label: Column 1 - Supporting Text, name: column1SupportingText, widget: string }
+              - { label: Column 1 - Button Text, name: column1Button, widget: string }
+              - { label: Column 1 - Button Link, name: column1ButtonLink, widget: string }
+              - { label: Column 1 - Image, name: column1Image, widget: string }
+              - { label: Column 1 - Image Alt Text, name: column1ImageAlt, widget: string }
+              - { label: Column 2 - Header, name: column2Header, widget: string }
+              - { label: Column 2 - Supporting Text, name: column2SupportingText, widget: string }
+              - { label: Column 2 - Button Text, name: column2Button, widget: string }
+              - { label: Column 2 - Button Link, name: column2ButtonLink, widget: string }
+              - { label: Column 2 - Image, name: column2Image, widget: string }
+              - { label: Column 2 - Image Alt Text, name: column2ImageAlt, widget: string }
+              - { label: Column 3 - Header, name: column3Header, widget: string }
+              - { label: Column 3 - Supporting Text, name: column3SupportingText, widget: string }
+              - { label: Column 3 - Button Text, name: column3Button, widget: string }
+              - { label: Column 3 - Button Link, name: column3ButtonLink, widget: string }
+              - { label: Column 3 - Image, name: column3Image, widget: string }
+              - { label: Column 3 - Image Alt Text, name: column3ImageAlt, widget: string }
           - label: Legal Messages
             name: legalMessageDefaults
             collapsed: true
@@ -121,6 +136,28 @@ collections:
               - { label: Error Text - Required Existing Employees, name: errorTextRequiredExistingEmployees, widget: string }
               - { label: Error Text - Date of Formation, name: dateOfFormationErrorText, widget: string }
               - { label: Error Text - Required Sector, name: errorTextRequiredSector, widget: string }
+          - label: Page Footer
+            name: footer
+            collapsed: true
+            widget: object
+            summary: "{{footer}}"
+            fields:
+              - { label: Link One Test, name: linkOneText, widget: string }
+              - { label: Link One, name: linkOne, widget: string }
+              - { label: Link Two Text, name: linkTwoText, widget: string }
+              - { label: Link Two, name: linkTwo, widget: string }
+              - { label: Link Three Text, name: linkThreeText, widget: string }
+              - { label: Link Three, name: linkThree, widget: string }
+              - { label: Office Text One, name: officeTextOne, widget: string }
+              - { label: Office Text Two, name: officeTextTwo, widget: string }
+              - { label: Office Link Text, name: officeLinkText, widget: string }
+              - { label: Office Link, name: officeLink, widget: string }
+              - { label: Credit Text, name: creditText, widget: string }
+              - { label: Credit Link Text, name: creditLinkText, widget: string }
+              - { label: Credit Link, name: creditLink, widget: string }
+              - { label: Office External Text, name: officeExternalText, widget: string }
+              - { label: Github Link, name: gitHubLink, widget: string }
+              - { label: Twitter Link, name: twitterLink, widget: string }
           - label: Profile Defaults
             name: profileDefaults
             collapsed: true
