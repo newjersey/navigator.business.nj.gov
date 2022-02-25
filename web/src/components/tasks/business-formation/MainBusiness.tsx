@@ -1,6 +1,6 @@
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { zipCodeRange } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement } from "react";
 import { BusinessAddressLine1 } from "./BusinessAddressLine1";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
@@ -27,11 +27,11 @@ export const MainBusiness = (): ReactElement => {
       <BusinessFormationTextField fieldName="businessAddressLine2" />
       <div className="grid-row grid-gap-2">
         <div className="margin-bottom-2 grid-col-12 tablet:grid-col-6">
-          <span className="text-bold">{BusinessFormationDefaults.businessAddressCityLabel}</span>
+          <span className="text-bold">{Defaults.businessFormationDefaults.businessAddressCityLabel}</span>
           <div>
             {userData?.profileData.municipality?.name ??
-              BusinessFormationDefaults.notSetBusinessAddressCityLabel}{" "}
-            <a href="/profile">{BusinessFormationDefaults.editButtonText}</a>
+              Defaults.businessFormationDefaults.notSetBusinessAddressCityLabel}{" "}
+            <a href="/profile">{Defaults.businessFormationDefaults.editButtonText}</a>
           </div>
         </div>
         <div className="margin-bottom-2 form-input grid-col-5 tablet:grid-col-2">
@@ -44,7 +44,7 @@ export const MainBusiness = (): ReactElement => {
             }}
             required={true}
             fieldName={"businessAddressZipCode"}
-            validationText={BusinessFormationDefaults.businessAddressZipCodeErrorText}
+            validationText={Defaults.businessFormationDefaults.businessAddressZipCodeErrorText}
             additionalValidation={zipCodeRange}
           />
         </div>

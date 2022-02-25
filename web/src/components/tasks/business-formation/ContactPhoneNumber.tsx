@@ -1,4 +1,4 @@
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement } from "react";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
 
@@ -14,7 +14,7 @@ export const ContactPhoneNumber = (): ReactElement => {
   return (
     <div className="form-input margin-bottom-2">
       <BusinessFormationTextField
-        validationText={BusinessFormationDefaults.contactPhoneNumberErrorText}
+        validationText={Defaults.businessFormationDefaults.contactPhoneNumberErrorText}
         fieldName={"contactPhoneNumber"}
         numericProps={{
           maxLength: 10,

@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -115,7 +115,7 @@ export const PaymentSection = (): ReactElement => {
         !isLoading &&
         !showRequiredFieldsError &&
         userData.formationData.formationResponse.errors.length > 0 && (
-          <Alert variant="error" heading={BusinessFormationDefaults.submitErrorHeading}>
+          <Alert variant="error" heading={Defaults.businessFormationDefaults.submitErrorHeading}>
             <ul style={{ wordBreak: "break-word" }}>
               {userData.formationData.formationResponse.errors.map((it) => (
                 <li key={it.field}>
@@ -141,7 +141,7 @@ export const PaymentSection = (): ReactElement => {
               setShowResponseAlert(false);
             }}
           >
-            {BusinessFormationDefaults.previousButtonText}
+            {Defaults.businessFormationDefaults.previousButtonText}
           </Button>
           <Button
             loading={isLoading}
@@ -150,7 +150,7 @@ export const PaymentSection = (): ReactElement => {
             style="primary"
             onClick={submitFormationFormData}
           >
-            {BusinessFormationDefaults.submitButtonText}
+            {Defaults.businessFormationDefaults.submitButtonText}
           </Button>
         </div>
       </div>

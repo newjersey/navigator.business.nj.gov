@@ -1,4 +1,4 @@
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement } from "react";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
 
@@ -7,7 +7,7 @@ export const ContactLastName = (): ReactElement => {
     <BusinessFormationTextField
       fieldName="contactLastName"
       required={true}
-      validationText={BusinessFormationDefaults.contactLastnameErrorText}
+      validationText={Defaults.businessFormationDefaults.contactLastnameErrorText}
     />
   );
 };

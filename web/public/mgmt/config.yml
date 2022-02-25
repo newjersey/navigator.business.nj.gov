@@ -33,6 +33,72 @@ collections:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Form Test, name: betaFormText, widget: string }
               - { label: Beta Form Link, name: betaFormLink, widget: string }
+          - label: Business Formation Defaults
+            name: businessFormationDefaults
+            collapsed: true
+            widget: object
+            summary: "{{businessFormationDefaults}}"
+            fields:
+              - { label: ACH Payment Cost, name: achPaymentCost, widget: string }
+              - { label: ACH Payment label, name: achPaymentTypeLabel, widget: string }
+              - { label: Add New Signer Button, name: addNewSignerButtonText, widget: string }
+              - { label: Business Address - City - Not Set, name: notSetBusinessAddressCityLabel, widget: string }
+              - { label: Business Address - City Label, name: businessAddressCityLabel, widget: string }
+              - { label: Business Name - Not Set, name: notSetBusinessNameText, widget: string }
+              - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
+              - { label: Credit Card Payment Cost, name: creditCardPaymentCostInitial, widget: string }
+              - { label: Credit Card Payment Extra Cost, name: creditCardPaymentCostExtra, widget: string }
+              - { label: Credit Card Payment label, name: creditCardPaymentTypeLabel, widget: string }
+              - { label: Document - Certified Label, name: certifiedDocLabel, widget: string }
+              - { label: Document - Formation Label, name: formationDocLabel, widget: string }
+              - { label: Document - Standing Label, name: standingDocLabel, widget: string }
+              - { label: Document Table - Column 2 Label, name: documentTableColumn2Label, widget: string }
+              - { label: Document Table - Column 3 Label, name: documentTableColumn3Label, widget: string }
+              - { label: Document Table - Subtotal Label, name: documentTableSubTotalCostLabel, widget: string }
+              - { label: Edit Button Text, name: editButtonText, widget: string }
+              - { label: Entity ID Label, name: entityIdLabel, widget: string }
+              - { label: Error - Address City, name: addressCityErrorText, widget: string }
+              - { label: Error - Address State, name: addressStateErrorText, widget: string }
+              - { label: Error - Address Zip Code, name: addressZipCodeErrorText, widget: string }
+              - { label: Error - Address, name: addressErrorText, widget: string }
+              - { label: Error - Agent Address City, name: agentOfficeaddressCityErrorText, widget: string }
+              - { label: Error - Agent Address Line 1, name: agentOfficeAddressLine1ErrorText, widget: string }
+              - { label: Error - Agent Address Zip Code, name: agentOfficeAddressZipCodeErrorText, widget: string }
+              - { label: Error - Agent Email, name: agentEmailErrorText, widget: string }
+              - { label: Error - Agent Name, name: agentnameErrorText, widget: string }
+              - { label: Error - Agent Number, name: agentNumberErrorText, widget: string }
+              - { label: Error - Business Address Line 1, name: businessAddressLine1ErrorText, widget: string }
+              - { label: Error - Business Address Zip Code, name: businessAddressZipCodeErrorText, widget: string }
+              - { label: Error - Business Name Not Set, name: notSetBusinessNameErrorText, widget: string }
+              - { label: Error - Contact First Name, name: contactFirstnameErrorText, widget: string }
+              - { label: Error - Contact Last Name, name: contactLastnameErrorText, widget: string }
+              - { label: Error - Contact Phone Number, name: contactPhoneNumberErrorText, widget: string }
+              - { label: Error - Missing Fields on Submit, name: missingFieldsOnSubmitModalText, widget: string }
+              - { label: Error - Name, name: nameErrorText, widget: string }
+              - { label: Error - Signer, name: signerErrorText, widget: string }
+              - { label: Error - Start Date, name: startDateErrorText, widget: string }
+              - { label: Error - Submit Heading, name: submitErrorHeading, widget: string }
+              - { label: Error - Suffix, name: suffixErrorText, widget: string }
+              - { label: Initial Next Button Text, name: initialNextButtonText, widget: string }
+              - { label: LLC Label, name: llcText, widget: string }
+              - { label: Member - Address Line 2 Optional, name: membersAddressLine2Optional, widget: string }
+              - { label: Member - Back Button, name: membersModalBackButtonText, widget: string }
+              - { label: Member - Expand Link, name: membersExpandText, widget: string }
+              - { label: Member - Next Button, name: membersModalNextButtonText, widget: string }
+              - { label: Member - Success Message Body, name: membersSuccessTextBody, widget: string }
+              - { label: Member - Success Message Header, name: membersSuccessTextHeader, widget: string }
+              - { label: Member - Table Column Headers, name: membersTableColumn, widget: string }
+              - { label: Memeber - Add Member Button, name: membersNewButtonText, widget: string }
+              - { label: Next Button Text, name: nextButtonText, widget: string }
+              - { label: Payment Type - Error, name: paymentTypeErrorText, widget: string }
+              - { label: Payment Type - Table Label, name: paymentTypeTableLabel, widget: string }
+              - { label: Payment Type - Total Cost Label, name: paymentTypeTableTotalCostLabel, widget: string }
+              - { label: Previous Button Text, name: previousButtonText, widget: string }
+              - { label: Submit Button Text, name: submitButtonText, widget: string }
+              - { label: Success Page - Body, name: successPageBody, widget: string }
+              - { label: Success Page - Header, name: successPageHeader, widget: string }
+              - { label: Success Page - Subheader, name: successPageSubheader, widget: string }
+              - { label: Update your Profile text, name: updateYourProfileLinkText, widget: string }
           - label: Dashboard Defaults
             name: dashboardDefaults
             collapsed: true

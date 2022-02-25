@@ -1,9 +1,9 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 import { BusinessFormationFieldAlert } from "./BusinessFormationFieldAlert";
@@ -79,10 +79,10 @@ export const ContactsSection = (): ReactElement => {
               scrollToTop();
             }}
           >
-            {BusinessFormationDefaults.previousButtonText}
+            {Defaults.businessFormationDefaults.previousButtonText}
           </Button>
           <Button style="primary" onClick={submitContactData} widthAutoOnMobile noRightMargin>
-            {BusinessFormationDefaults.nextButtonText}
+            {Defaults.businessFormationDefaults.nextButtonText}
           </Button>
         </div>
       </div>

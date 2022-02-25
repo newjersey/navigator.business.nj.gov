@@ -1,10 +1,10 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { useMediaQuery } from "@mui/material";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -142,7 +142,7 @@ export const BusinessSection = (): ReactElement => {
             widthAutoOnMobile
             heightAutoOnMobile={isMobile}
           >
-            {BusinessFormationDefaults.initialNextButtonText}
+            {Defaults.businessFormationDefaults.initialNextButtonText}
           </Button>
         </div>
       </div>

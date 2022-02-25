@@ -3,7 +3,7 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { createEmptyFormationMember, FormationMember } from "@businessnjgovnavigator/shared";
 import {
   Checkbox,
@@ -168,7 +168,7 @@ export const MembersModal = (props: Props): ReactElement => {
               handleChange={(value: string) => setMemberData({ ...memberData, name: value })}
               error={memberErrorMap["memberName"].invalid}
               onValidation={onValidation}
-              validationText={BusinessFormationDefaults.nameErrorText}
+              validationText={Defaults.businessFormationDefaults.nameErrorText}
               fieldName="memberName"
               required={true}
               autoComplete="name"
@@ -183,7 +183,7 @@ export const MembersModal = (props: Props): ReactElement => {
               error={memberErrorMap["memberAddressLine1"].invalid}
               onValidation={onValidation}
               autoComplete="address-line1"
-              validationText={BusinessFormationDefaults.addressErrorText}
+              validationText={Defaults.businessFormationDefaults.addressErrorText}
               disabled={useAgentAddress}
               required={true}
             />
@@ -197,7 +197,7 @@ export const MembersModal = (props: Props): ReactElement => {
             >
               {state.displayContent.memberAddressLine2.contentMd}
             </Content>{" "}
-            <div className="h6-styling">{BusinessFormationDefaults.membersAddressLine2Optional}</div>
+            <div className="h6-styling">{Defaults.businessFormationDefaults.membersAddressLine2Optional}</div>
             <GenericTextField
               fieldName="memberAddressLine2"
               value={memberData.addressLine2}
@@ -219,7 +219,7 @@ export const MembersModal = (props: Props): ReactElement => {
                   handleChange={(value: string) => setMemberData({ ...memberData, addressCity: value })}
                   error={memberErrorMap["memberAddressCity"].invalid}
                   onValidation={onValidation}
-                  validationText={BusinessFormationDefaults.addressCityErrorText}
+                  validationText={Defaults.businessFormationDefaults.addressCityErrorText}
                 />
               </div>
               <div className="grid-col-6 tablet:grid-col-3">
@@ -228,7 +228,7 @@ export const MembersModal = (props: Props): ReactElement => {
                   fieldName="memberAddressState"
                   value={memberData.addressState}
                   placeholder={state.displayContent.memberAddressState.placeholder}
-                  validationText={BusinessFormationDefaults.addressStateErrorText}
+                  validationText={Defaults.businessFormationDefaults.addressStateErrorText}
                   onSelect={(value: string | undefined) =>
                     setMemberData({ ...memberData, addressState: value ?? "" })
                   }
@@ -251,7 +251,7 @@ export const MembersModal = (props: Props): ReactElement => {
                   error={memberErrorMap["memberAddressZipCode"].invalid}
                   handleChange={(value: string) => setMemberData({ ...memberData, addressZipCode: value })}
                   value={memberData.addressZipCode}
-                  validationText={BusinessFormationDefaults.addressZipCodeErrorText}
+                  validationText={Defaults.businessFormationDefaults.addressZipCodeErrorText}
                   onValidation={onValidation}
                   required={true}
                   placeholder={state.displayContent.memberAddressZipCode.placeholder}
@@ -270,7 +270,7 @@ export const MembersModal = (props: Props): ReactElement => {
                   widthAutoOnMobile
                   noRightMargin
                 >
-                  {BusinessFormationDefaults.membersModalBackButtonText}
+                  {Defaults.businessFormationDefaults.membersModalBackButtonText}
                 </Button>
                 <Button
                   style="primary"
@@ -279,7 +279,9 @@ export const MembersModal = (props: Props): ReactElement => {
                   noRightMargin
                   widthAutoOnMobile
                 >
-                  <span className="text-no-wrap">{BusinessFormationDefaults.membersModalNextButtonText}</span>
+                  <span className="text-no-wrap">
+                    {Defaults.businessFormationDefaults.membersModalNextButtonText}
+                  </span>
                 </Button>
               </div>
             </div>

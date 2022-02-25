@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useMountEffect } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextField } from "@mui/material";
@@ -52,7 +52,7 @@ export const BusinessStartDate = (): ReactElement => {
                 {...params}
                 variant="outlined"
                 fullWidth
-                helperText={showError ? BusinessFormationDefaults.startDateErrorText : " "}
+                helperText={showError ? Defaults.businessFormationDefaults.startDateErrorText : " "}
                 inputProps={{
                   ...params.inputProps,
                   "aria-label": "Business start date",

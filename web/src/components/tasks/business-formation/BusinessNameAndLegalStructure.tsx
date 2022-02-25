@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
@@ -26,7 +26,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
   let legalStructureName;
   const legalStructure = LookupLegalStructureById(userData?.profileData.legalStructureId);
   legalStructure.name === "Limited Liability Company (LLC)"
-    ? (legalStructureName = BusinessFormationDefaults.llcText)
+    ? (legalStructureName = Defaults.businessFormationDefaults.llcText)
     : (legalStructureName = legalStructure.name);
 
   if (!userData) return <></>;
@@ -50,7 +50,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
               underline
               dataTestid="edit-business-name-section"
             >
-              {BusinessFormationDefaults.editButtonText}
+              {Defaults.businessFormationDefaults.editButtonText}
             </Button>
           )}
         </div>
@@ -64,7 +64,8 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         <div className="padding-205 flex-half">
           <Content>{state.displayContent.reviewPageBusinessName.contentMd}</Content>
           <span className="text-accent-cool-darker">
-            {state?.formationFormData.businessName || BusinessFormationDefaults.notSetBusinessNameText}
+            {state?.formationFormData.businessName ||
+              Defaults.businessFormationDefaults.notSetBusinessNameText}
           </span>{" "}
           {!reviewPage && (
             <Button
@@ -77,7 +78,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
               underline
               dataTestid="edit-business-name"
             >
-              {BusinessFormationDefaults.editButtonText}
+              {Defaults.businessFormationDefaults.editButtonText}
             </Button>
           )}
         </div>
@@ -98,13 +99,14 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
               underline
               dataTestid="edit-legal-structure"
             >
-              {BusinessFormationDefaults.editButtonText}
+              {Defaults.businessFormationDefaults.editButtonText}
             </Button>
           )}
         </div>
       </div>
       <FormHelperText id={"businessNameAndLegalStructure"} className="Mui-error">
-        {state.errorMap["businessName"].invalid && BusinessFormationDefaults.notSetBusinessNameErrorText}
+        {state.errorMap["businessName"].invalid &&
+          Defaults.businessFormationDefaults.notSetBusinessNameErrorText}
       </FormHelperText>
     </>
   );

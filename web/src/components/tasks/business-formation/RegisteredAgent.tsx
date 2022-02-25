@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { validateEmail, zipCodeRange } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
@@ -70,7 +70,7 @@ export const RegisteredAgent = (): ReactElement => {
                   maxLength: 7,
                 }}
                 fieldName={"agentNumber"}
-                validationText={BusinessFormationDefaults.agentNumberErrorText}
+                validationText={Defaults.businessFormationDefaults.agentNumberErrorText}
               />
             </div>
           )}
@@ -79,19 +79,19 @@ export const RegisteredAgent = (): ReactElement => {
             <div data-testid="agent-name">
               <BusinessFormationTextField
                 required={true}
-                validationText={BusinessFormationDefaults.agentnameErrorText}
+                validationText={Defaults.businessFormationDefaults.agentnameErrorText}
                 fieldName="agentName"
               />
               <BusinessFormationTextField
                 fieldName="agentEmail"
                 additionalValidation={validateEmail}
                 required={true}
-                validationText={BusinessFormationDefaults.agentEmailErrorText}
+                validationText={Defaults.businessFormationDefaults.agentEmailErrorText}
               />
               <BusinessFormationTextField
                 fieldName="agentOfficeAddressLine1"
                 required={true}
-                validationText={BusinessFormationDefaults.agentOfficeAddressLine1ErrorText}
+                validationText={Defaults.businessFormationDefaults.agentOfficeAddressLine1ErrorText}
               />
               <BusinessFormationTextField fieldName="agentOfficeAddressLine2" />
               <div className="grid-row grid-gap-2">
@@ -99,7 +99,7 @@ export const RegisteredAgent = (): ReactElement => {
                   <BusinessFormationTextField
                     fieldName="agentOfficeAddressCity"
                     required={true}
-                    validationText={BusinessFormationDefaults.agentOfficeaddressCityErrorText}
+                    validationText={Defaults.businessFormationDefaults.agentOfficeaddressCityErrorText}
                   />
                 </div>
                 <div className="grid-col-5 tablet:grid-col-2">
@@ -111,7 +111,7 @@ export const RegisteredAgent = (): ReactElement => {
                       maxLength: 5,
                     }}
                     fieldName={"agentOfficeAddressZipCode"}
-                    validationText={BusinessFormationDefaults.agentOfficeAddressZipCodeErrorText}
+                    validationText={Defaults.businessFormationDefaults.agentOfficeAddressZipCodeErrorText}
                     additionalValidation={zipCodeRange}
                     required={true}
                   />

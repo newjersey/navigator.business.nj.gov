@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationDefaults } from "@/display-defaults/roadmap/business-formation/BusinessFormationDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -54,7 +54,7 @@ export const ReviewSection = (): ReactElement => {
             underline
             dataTestid="edit-location-section"
           >
-            {BusinessFormationDefaults.editButtonText}
+            {Defaults.businessFormationDefaults.editButtonText}
           </Button>
         </div>
       </div>
@@ -94,7 +94,7 @@ export const ReviewSection = (): ReactElement => {
             underline
             dataTestid="edit-registered-agent-section"
           >
-            {BusinessFormationDefaults.editButtonText}
+            {Defaults.businessFormationDefaults.editButtonText}
           </Button>
         </div>
       </div>
@@ -159,7 +159,7 @@ export const ReviewSection = (): ReactElement => {
             underline
             dataTestid="edit-members-section"
           >
-            {BusinessFormationDefaults.editButtonText}
+            {Defaults.businessFormationDefaults.editButtonText}
           </Button>
         </div>
       </div>
@@ -193,7 +193,7 @@ export const ReviewSection = (): ReactElement => {
             underline
             dataTestid="edit-signature-section"
           >
-            {BusinessFormationDefaults.editButtonText}
+            {Defaults.businessFormationDefaults.editButtonText}
           </Button>
         </div>
       </div>
@@ -235,7 +235,7 @@ export const ReviewSection = (): ReactElement => {
               scrollToTop();
             }}
           >
-            {BusinessFormationDefaults.previousButtonText}
+            {Defaults.businessFormationDefaults.previousButtonText}
           </Button>
           <Button
             style="primary"
@@ -247,7 +247,7 @@ export const ReviewSection = (): ReactElement => {
             }}
             widthAutoOnMobile
           >
-            {BusinessFormationDefaults.nextButtonText}
+            {Defaults.businessFormationDefaults.nextButtonText}
           </Button>
         </div>
       </div>
