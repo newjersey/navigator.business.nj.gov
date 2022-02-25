@@ -29,10 +29,6 @@ export class OnboardingPage {
     return cy.get('[data-testid="municipality"]');
   }
 
-  getNextButton() {
-    return cy.get('[data-testid="next"]');
-  }
-
   selectNewBusiness(radio: boolean) {
     this.getHasExistingBusiness(radio).check();
   }
@@ -63,10 +59,12 @@ export class OnboardingPage {
     this.getLocationDropdown().click();
     cy.contains(city).click();
   }
+}
 
+class OnboardingPageWithNavigation extends OnboardingPage {
   clickNext() {
-    this.getNextButton().click();
+    cy.get('[data-testid="next"]').click();
   }
 }
 
-export const onOnboardingPage = new OnboardingPage();
+export const onOnboardingPage = new OnboardingPageWithNavigation();
