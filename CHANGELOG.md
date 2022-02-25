@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.2.0...v2.2.1) (2022-02-25)
+
+
+### Bug Fixes
+
+* correct build step ([3752539](https://github.com/newjersey/navigator.business.nj.gov/commit/37525393f74c1d00223b6119744018c374f62733))
+
 # [2.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.1.0...v2.2.0) (2022-02-25)
 
 
