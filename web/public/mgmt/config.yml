@@ -239,7 +239,7 @@ collections:
               - { label: Not Started Text, name: NOT_STARTED, widget: string }
               - { label: In Progress Text, name: IN_PROGRESS, widget: string }
               - { label: Completed Text, name: COMPLETED, widget: string }
-          - label: Task - Business Name Search Headers
+          - label: Task - Business Name Search
             name: searchBusinessNameTask
             collapsed: true
             widget: object
@@ -257,6 +257,48 @@ collections:
               - { label: Official Check Text, name: officialCheckText, widget: string }
               - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+          - label: Task - License Search
+            name: licenseSearchTask
+            collapsed: true
+            widget: object
+            summary: "{{licenseSearchTask}}"
+            fields:
+              - { label: Primary CTA - Line 1, name: primaryCTAFirstLineText, widget: string }
+              - { label: Primary CTA - Line 2, name: primaryCTASecondLineText, widget: string }
+              - { label: Secondary CTA - Line 1, name: secondaryCTAFirstLineText, widget: string }
+              - { label: Secondary CTA - Line 2, name: secondaryCTASecondLineText, widget: string }
+              - { label: Tab 1 Label, name: tab1Text, widget: string }
+              - { label: Tab 2 Label, name: tab2Text, widget: string }
+              - { label: Check Status Text, name: checkStatusText, widget: string }
+              - { label: Business Name Label, name: businessNameLabel, widget: string }
+              - { label: Business Name Placeholder, name: businessNamePlaceholder, widget: string }
+              - { label: Address 1 Label, name: address1Label, widget: string }
+              - { label: Address 1 Placeholder, name: address1Placeholder, widget: string }
+              - { label: Address 2 Label, name: address2Label, widget: string }
+              - { label: Address 2 Placeholder, name: address2Placeholder, widget: string }
+              - { label: Zip Code Label, name: zipCodeLabel, widget: string }
+              - { label: Zip Code Placeholder, name: zipCodePlaceholder, widget: string }
+              - { label: State Label, name: stateLabel, widget: string }
+              - { label: State Placeholder, name: statePlaceholder, widget: string }
+              - { label: Submit Button Text, name: submitText, widget: string }
+              - { label: Error - Not Found, name: errorTextNotFound, widget: string }
+              - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
+              - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
+              - { label: Found Text, name: foundText, widget: string }
+              - { label: Permit Status Label, name: permitStatusText, widget: string }
+              - { label: Edit Button Text, name: editButtonText, widget: string }
+              - { label: Status - Pending, name: pendingPermitStatusText, widget: string }
+              - { label: Status - Active, name: activePermitStatusText, widget: string }
+              - { label: Status - Expired, name: expiredPermitStatusText, widget: string }
+              - { label: Status - Barred, name: barredPermitStatusText, widget: string }
+              - { label: Status - Out of State, name: outOfBusinessPermitStatusText, widget: string }
+              - { label: Status - Reinstatement Pending, name: reinstatementPendingPermitStatusText, widget: string }
+              - { label: Status - Closed, name: closedPermitStatusText, widget: string }
+              - { label: Status - Deleted, name: deletedPermitStatusText, widget: string }
+              - { label: Status - Denied, name: deniedPermitStatusText, widget: string }
+              - { label: Status - Voluntary Surrener, name: voluntarySurrenderPermitStatusText, widget: string }
+              - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
+              - { label: Tooltip Text, name: tooltipText, widget: string }
 
   - label: Roadmap Add-ons
     name: addons

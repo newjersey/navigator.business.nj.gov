@@ -3,7 +3,6 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { CheckStatus } from "@/components/tasks/CheckStatus";
 import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
@@ -11,6 +10,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { LicenseStatusResult, NameAndAddress, UserData } from "@businessnjgovnavigator/shared";
 import React, { ReactElement, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
@@ -101,12 +101,12 @@ export const LicenseTask = (props: Props): ReactElement => {
 
   return (
     <div className="flex flex-column">
-      <TaskHeader task={props.task} tooltipText={LicenseScreenDefaults.tooltipText} />
+      <TaskHeader task={props.task} tooltipText={Defaults.licenseSearchTask.tooltipText} />
 
       <Tabs selectedIndex={tabIndex} onSelect={onSelectTab}>
         <TabList>
-          <Tab>{LicenseScreenDefaults.tab1Text}</Tab>
-          <Tab>{LicenseScreenDefaults.tab2Text}</Tab>
+          <Tab>{Defaults.licenseSearchTask.tab1Text}</Tab>
+          <Tab>{Defaults.licenseSearchTask.tab2Text}</Tab>
         </TabList>
 
         <TabPanel>
@@ -124,9 +124,9 @@ export const LicenseTask = (props: Props): ReactElement => {
                 data-testid="cta-primary"
               >
                 <div className="flex flex-column">
-                  <div>{LicenseScreenDefaults.primaryCTAFirstLineText}</div>
+                  <div>{Defaults.licenseSearchTask.primaryCTAFirstLineText}</div>
                   <div className="font-body-3xs margin-top-05">
-                    {LicenseScreenDefaults.primaryCTASecondLineText}
+                    {Defaults.licenseSearchTask.primaryCTASecondLineText}
                   </div>
                 </div>
               </button>
@@ -140,9 +140,9 @@ export const LicenseTask = (props: Props): ReactElement => {
               data-testid="cta-secondary"
             >
               <div className="flex flex-column">
-                <div>{LicenseScreenDefaults.secondaryCTAFirstLineText}</div>
+                <div>{Defaults.licenseSearchTask.secondaryCTAFirstLineText}</div>
                 <div className="font-body-3xs margin-top-05">
-                  {LicenseScreenDefaults.secondaryCTASecondLineText}
+                  {Defaults.licenseSearchTask.secondaryCTASecondLineText}
                 </div>
               </div>
             </button>

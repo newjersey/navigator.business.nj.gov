@@ -1,7 +1,7 @@
 import { Icon } from "@/components/njwds/Icon";
-import { LicenseScreenDefaults } from "@/display-defaults/tasks/license/LicenseScreenDefaults";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
+import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
 import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared";
 import React, { ReactElement, useEffect, useState } from "react";
 
@@ -48,17 +48,17 @@ const grayPermitTheme: PermitTheme = {
 };
 
 const LicenseStatusLookup: Record<LicenseStatus, string> = {
-  ACTIVE: LicenseScreenDefaults.activePermitStatusText,
-  PENDING: LicenseScreenDefaults.pendingPermitStatusText,
-  EXPIRED: LicenseScreenDefaults.expiredPermitStatusText,
-  BARRED: LicenseScreenDefaults.barredPermitStatusText,
-  OUT_OF_BUSINESS: LicenseScreenDefaults.outOfBusinessPermitStatusText,
-  REINSTATEMENT_PENDING: LicenseScreenDefaults.reinstatementPendingPermitStatusText,
-  CLOSED: LicenseScreenDefaults.closedPermitStatusText,
-  DELETED: LicenseScreenDefaults.deletedPermitStatusText,
-  DENIED: LicenseScreenDefaults.deniedPermitStatusText,
-  VOLUNTARY_SURRENDER: LicenseScreenDefaults.voluntarySurrenderPermitStatusText,
-  WITHDRAWN: LicenseScreenDefaults.withdrawnPermitStatusText,
+  ACTIVE: Defaults.licenseSearchTask.activePermitStatusText,
+  PENDING: Defaults.licenseSearchTask.pendingPermitStatusText,
+  EXPIRED: Defaults.licenseSearchTask.expiredPermitStatusText,
+  BARRED: Defaults.licenseSearchTask.barredPermitStatusText,
+  OUT_OF_BUSINESS: Defaults.licenseSearchTask.outOfBusinessPermitStatusText,
+  REINSTATEMENT_PENDING: Defaults.licenseSearchTask.reinstatementPendingPermitStatusText,
+  CLOSED: Defaults.licenseSearchTask.closedPermitStatusText,
+  DELETED: Defaults.licenseSearchTask.deletedPermitStatusText,
+  DENIED: Defaults.licenseSearchTask.deniedPermitStatusText,
+  VOLUNTARY_SURRENDER: Defaults.licenseSearchTask.voluntarySurrenderPermitStatusText,
+  WITHDRAWN: Defaults.licenseSearchTask.withdrawnPermitStatusText,
   UNKNOWN: "",
 };
 
@@ -120,7 +120,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
 
   return (
     <div className="fdc fg1 overflow-y-hidden margin-top-3">
-      <p className="margin-x-3 margin-bottom-3">{LicenseScreenDefaults.foundText}</p>
+      <p className="margin-x-3 margin-bottom-3">{Defaults.licenseSearchTask.foundText}</p>
 
       <div className={`${theme.gradient} fg1 fdr fjc`}>
         <div className="receipt-box padding-bottom-10">
@@ -128,7 +128,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
             className={`${theme.bgColor} ${theme.borderColor} padding-3 border-top-2px font-body-md text-bold fdr fac`}
             data-testid={`permit-${props.status}`}
           >
-            <span className="padding-right-1">{LicenseScreenDefaults.permitStatusText}</span>
+            <span className="padding-right-1">{Defaults.licenseSearchTask.permitStatusText}</span>
             <Icon className={`${theme.headerIconColor} usa-icon--size-3`}>{getIcon(props.status)}</Icon>
             <span className={`${theme.textColor} padding-left-05 text-uppercase`}>{getText()}</span>
           </div>
@@ -143,7 +143,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
                 }}
                 className="usa-button usa-button--unstyled mla font-body-2xs underline width-auto"
               >
-                {LicenseScreenDefaults.editButtonText}
+                {Defaults.licenseSearchTask.editButtonText}
               </button>
             </div>
             <div className="border-dashed border-bottom-2px border-top-0 border-left-0 border-right-0 border-base-lighter padding-bottom-3">
