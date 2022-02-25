@@ -1,3 +1,43 @@
+# [2.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.1.0...v2.2.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* [[#1439](https://github.com/newjersey/navigator.business.nj.gov/issues/1439)] update beta bar color and remove tag ([bc008e5](https://github.com/newjersey/navigator.business.nj.gov/commit/bc008e583de2bc9525bf606d59f8667f8b46f1d6))
+* [[#1443](https://github.com/newjersey/navigator.business.nj.gov/issues/1443)] favicon transparency ([db71f90](https://github.com/newjersey/navigator.business.nj.gov/commit/db71f900d1f635a66d4faaf1d41284359579589d))
+* [[#1557](https://github.com/newjersey/navigator.business.nj.gov/issues/1557)] do not show tax filing if date of formation empty ([b2410ac](https://github.com/newjersey/navigator.business.nj.gov/commit/b2410acedf73ec55a58771ea7617bbfdfcaa2443))
+* [[#1853](https://github.com/newjersey/navigator.business.nj.gov/issues/1853)] required text showing when task is not required ([2c7e85d](https://github.com/newjersey/navigator.business.nj.gov/commit/2c7e85dbc1c22ed196a48fd4780a5fab5665948f))
+* dateOfFormation non-required validation ([d878dcc](https://github.com/newjersey/navigator.business.nj.gov/commit/d878dcc576ddd2f9263b52bf89a08c4311360689))
+* **deps:** update dependency axios to v0.26.0 ([9ebbbab](https://github.com/newjersey/navigator.business.nj.gov/commit/9ebbbab125d6212bc989ea513a71c07dfab742db))
+* **deps:** update dependency body-parser to v1.19.2 ([5adfaf1](https://github.com/newjersey/navigator.business.nj.gov/commit/5adfaf1d5ef527790101efbfe57e5faa4183a3cd))
+* **deps:** update dependency express to v4.17.3 ([5e52256](https://github.com/newjersey/navigator.business.nj.gov/commit/5e52256e8a915d6546485281b384cc55bbd730f2))
+* **deps:** update dependency focus-trap-react to v8.9.2 ([e4fefb4](https://github.com/newjersey/navigator.business.nj.gov/commit/e4fefb420763620dbd1a5793d3f9175d726a14ab))
+* **deps:** update dependency swr to v1.2.2 ([6d781f6](https://github.com/newjersey/navigator.business.nj.gov/commit/6d781f6a64284a02e872888fa560704badd931cd))
+* **deps:** update dependency winston to v3.6.0 ([25da65c](https://github.com/newjersey/navigator.business.nj.gov/commit/25da65c1658f5484225f1da3cf80f7215b6d8c21))
+* **deps:** update emotion monorepo to v11.8.1 ([504a028](https://github.com/newjersey/navigator.business.nj.gov/commit/504a028914f6dfeb5c7e65c81b6a5a865de8eb3b))
+* **deps:** update material-ui ([ee8db7f](https://github.com/newjersey/navigator.business.nj.gov/commit/ee8db7fabe79c653f75aada4acf0a1cd16e8346a))
+* **deps:** update material-ui ([a5a5643](https://github.com/newjersey/navigator.business.nj.gov/commit/a5a5643e599c12b7c67706f487e6633e752c8ae6))
+* netlify config ([384b988](https://github.com/newjersey/navigator.business.nj.gov/commit/384b9888b1e6f54e11086b44e0e96f4cdda063ca))
+* updating Industry Roadmaps cosmetology ([#1781](https://github.com/newjersey/navigator.business.nj.gov/issues/1781)) ([3483eec](https://github.com/newjersey/navigator.business.nj.gov/commit/3483eec4f493080855d2a69aa1e7a1aadc4d120c))
+* updating Tasks apply-for-food-truck-license ([#1775](https://github.com/newjersey/navigator.business.nj.gov/issues/1775)) ([634593f](https://github.com/newjersey/navigator.business.nj.gov/commit/634593f0d63a39098d59321e63259bd05c0b5dfc))
+* updating Tasks apply-for-shop-license ([#1776](https://github.com/newjersey/navigator.business.nj.gov/issues/1776)) ([51c44d1](https://github.com/newjersey/navigator.business.nj.gov/commit/51c44d1ae9ab7c6e814b0f1209fc2472947cfe2d))
+* updating Tasks apply-scorp-federal ([#1777](https://github.com/newjersey/navigator.business.nj.gov/issues/1777)) ([9149ce0](https://github.com/newjersey/navigator.business.nj.gov/commit/9149ce09355fc7849d227bc66e639bc412731880))
+* updating Tasks apply-scorp-state ([#1778](https://github.com/newjersey/navigator.business.nj.gov/issues/1778)) ([13a755c](https://github.com/newjersey/navigator.business.nj.gov/commit/13a755c6b37149035ca12479d3eb3eb6092be4d8))
+* updating Tasks auto-body-repair-license ([#1779](https://github.com/newjersey/navigator.business.nj.gov/issues/1779)) ([8f029fb](https://github.com/newjersey/navigator.business.nj.gov/commit/8f029fbd2697fb2ca12212b4894bff5c566a69a3))
+* updating Tasks building-permit ([#1782](https://github.com/newjersey/navigator.business.nj.gov/issues/1782)) ([b555642](https://github.com/newjersey/navigator.business.nj.gov/commit/b55564221d7a22cb144d5f04ae13fe9ccc9705e5))
+* updating Tasks business-plan ([#1783](https://github.com/newjersey/navigator.business.nj.gov/issues/1783)) ([061bac0](https://github.com/newjersey/navigator.business.nj.gov/commit/061bac095f24faae31bafe7e17255f9c3bda75f7))
+* updating Tasks site-safety-permits-cosmetology ([#1784](https://github.com/newjersey/navigator.business.nj.gov/issues/1784)) ([ce98bfb](https://github.com/newjersey/navigator.business.nj.gov/commit/ce98bfbb3971a595ff138f9dda2136944a8e749d))
+
+
+### Features
+
+* [[#1443](https://github.com/newjersey/navigator.business.nj.gov/issues/1443)] new favicon ([d4712e0](https://github.com/newjersey/navigator.business.nj.gov/commit/d4712e0f88d2f9a0baa3d2814ded17ba030719d9))
+* [[#1557](https://github.com/newjersey/navigator.business.nj.gov/issues/1557)] date of formation optional for oscar ([822d6b3](https://github.com/newjersey/navigator.business.nj.gov/commit/822d6b354ff543f81ca19c68ac8d77ef9410c972))
+* [[#1672](https://github.com/newjersey/navigator.business.nj.gov/issues/1672)] add issuing agency and form to task screen ([8d968fb](https://github.com/newjersey/navigator.business.nj.gov/commit/8d968fbf6d06014fe7f66e0b89ae4b24e22666ac))
+* [[#1672](https://github.com/newjersey/navigator.business.nj.gov/issues/1672)] update formatting for task blockquote and cta ([198ada6](https://github.com/newjersey/navigator.business.nj.gov/commit/198ada6c06b542c76eb5974d702661f48f31e421))
+* [[#1695](https://github.com/newjersey/navigator.business.nj.gov/issues/1695)] sbe certifications on dashboard ([9a69b5f](https://github.com/newjersey/navigator.business.nj.gov/commit/9a69b5fe488b1fd62af5da94347a9b9f3ca53889))
+* [[#1735](https://github.com/newjersey/navigator.business.nj.gov/issues/1735)] cannot edit business name after successful formation ([a66849f](https://github.com/newjersey/navigator.business.nj.gov/commit/a66849fb39f9b4e96ea651cea28c7ca456abb1e2))
+
 # [2.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.0.2...v2.1.0) (2022-02-15)
 
 
