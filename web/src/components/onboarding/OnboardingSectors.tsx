@@ -1,7 +1,7 @@
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@businessnjgovnavigator/shared";
 import { Autocomplete, TextField } from "@mui/material";
 import orderBy from "lodash.orderby";
@@ -89,7 +89,7 @@ export const OnboardingSectors = ({ headerAriaLevel = 2, ...props }: Props): Rea
               error={props.fieldStates.sectorId.invalid}
               helperText={
                 props.fieldStates.sectorId.invalid
-                  ? Defaults.onboardingDefaults.errorTextRequiredSector ?? " "
+                  ? Config.onboardingDefaults.errorTextRequiredSector ?? " "
                   : " "
               }
             />

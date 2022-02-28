@@ -3,7 +3,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { TextField } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useContext } from "react";
 
@@ -41,7 +41,7 @@ export const Signatures = (): ReactElement => {
         <BusinessFormationTextField
           fieldName="signer"
           required={true}
-          validationText={Defaults.businessFormationDefaults.signerErrorText}
+          validationText={Config.businessFormationDefaults.signerErrorText}
         />
         {state.formationFormData.additionalSigners.map((it, index) => {
           return (
@@ -78,7 +78,7 @@ export const Signatures = (): ReactElement => {
           <Button style="tertiary" onClick={addAdditionalSignerField}>
             <Icon>add</Icon>{" "}
             <span className="text-underline" style={{ textUnderlinePosition: "under" }}>
-              {Defaults.businessFormationDefaults.addNewSignerButtonText}
+              {Config.businessFormationDefaults.addNewSignerButtonText}
             </span>
           </Button>
         )}

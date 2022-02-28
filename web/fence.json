@@ -42,7 +42,7 @@
     "broken-link-checker",
     "@storybook/react",
     "@businessnjgovnavigator/content/roadmaps/task-dependencies.json",
-    "@businessnjgovnavigator/content/display-defaults/defaults.json",
+    "@businessnjgovnavigator/content/fieldConfig/config.json",
     "storybook-addon-designs",
     "next/dynamic",
     "netlify-cms-app",

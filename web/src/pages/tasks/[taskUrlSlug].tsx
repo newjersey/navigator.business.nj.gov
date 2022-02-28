@@ -18,7 +18,7 @@ import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { featureFlags, getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -64,7 +64,7 @@ const TaskPage = (props: Props): ReactElement => {
       >
         <div className="flex flex-justify">
           <Icon className="usa-icon--size-4">navigate_before</Icon>
-          <span className="flex-align-self-center"> {Defaults.taskDefaults.previousTaskButtonText}</span>
+          <span className="flex-align-self-center"> {Config.taskDefaults.previousTaskButtonText}</span>
           <Icon className="usa-icon--size-4 visibility-hidden"> </Icon>
         </div>
       </button>
@@ -75,7 +75,7 @@ const TaskPage = (props: Props): ReactElement => {
       >
         <div className="flex flex-justify">
           <Icon className="usa-icon--size-4 visibility-hidden"> </Icon>
-          <span className="flex-align-self-center">{Defaults.taskDefaults.nextTaskButtonText}</span>
+          <span className="flex-align-self-center">{Config.taskDefaults.nextTaskButtonText}</span>
           <Icon className="usa-icon--size-4">navigate_next</Icon>
         </div>
       </button>
@@ -154,13 +154,13 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
             <hr className="margin-y-3" />
             {props.task.issuingAgency ? (
               <div>
-                <span className="h5-styling">{`${Defaults.taskDefaults.issuingAgencyText}: `}</span>
+                <span className="h5-styling">{`${Config.taskDefaults.issuingAgencyText}: `}</span>
                 <span className="h6-styling">{props.task.issuingAgency}</span>
               </div>
             ) : null}
             {props.task.formName ? (
               <div>
-                <span className="h5-styling">{`${Defaults.taskDefaults.formNameText}: `}</span>
+                <span className="h5-styling">{`${Config.taskDefaults.formNameText}: `}</span>
                 <span className="h6-styling">{props.task.formName}</span>
               </div>
             ) : null}

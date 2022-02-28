@@ -1,5 +1,5 @@
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, ReactNode } from "react";
 import { OnboardingNumericField } from "./OnboardingNumericField";
 
@@ -21,7 +21,7 @@ export const OnboardingExistingEmployees = (props: Props): ReactElement => {
         fieldName={fieldName}
         maxLength={7}
         minLength={1}
-        validationText={Defaults.onboardingDefaults.errorTextRequiredExistingEmployees}
+        validationText={Config.onboardingDefaults.errorTextRequiredExistingEmployees}
         required={true}
         headerAriaLevel={props.headerAriaLevel}
       />

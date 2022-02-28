@@ -4,7 +4,7 @@ import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyUser, createEmptyUserData, Municipality, UserData } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
@@ -127,13 +127,13 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
     (subject.queryByTestId("municipality") as HTMLInputElement)?.value;
 
   const getFullNameValue = (): string =>
-    (subject.queryByLabelText(Defaults.selfRegistration.nameFieldLabel) as HTMLInputElement)?.value;
+    (subject.queryByLabelText(Config.selfRegistration.nameFieldLabel) as HTMLInputElement)?.value;
 
   const getEmailValue = (): string =>
-    (subject.queryByLabelText(Defaults.selfRegistration.emailFieldLabel) as HTMLInputElement)?.value;
+    (subject.queryByLabelText(Config.selfRegistration.emailFieldLabel) as HTMLInputElement)?.value;
 
   const getConfirmEmailValue = (): string =>
-    (subject.queryByLabelText(Defaults.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)?.value;
+    (subject.queryByLabelText(Config.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)?.value;
 
   const visitStep2 = async () => {
     clickNext();
@@ -203,47 +203,47 @@ export const runSelfRegPageTests = (
   });
 
   it("prevents user from registering if the email is not matching", async () => {
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "email@example.co");
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.co");
     page.clickNext();
-    expect(subject.queryAllByText(Defaults.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+    expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
     expect(currentUserData().user).toEqual(user);
   });
 
   it("prevents user from registering if the email is not matching after changing it", async () => {
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.co");
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.co");
     page.clickNext();
-    expect(subject.queryAllByText(Defaults.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+    expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
     expect(currentUserData().user).toEqual(user);
   });
 
   it("prevents user from registering if the name is empty", async () => {
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.nameFieldLabel, "");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
-    expect(subject.queryByText(Defaults.selfRegistration.errorTextRequiredFields)).toBeInTheDocument();
+    expect(subject.queryByText(Config.selfRegistration.errorTextRequiredFields)).toBeInTheDocument();
     expect(currentUserData().user).toEqual(user);
   });
 
   it("prevents user from registering if the email is empty", async () => {
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "");
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "");
     page.clickNext();
-    expect(subject.queryAllByText(Defaults.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+    expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
     expect(currentUserData().user).toEqual(user);
   });
 
   it("allows a user to uncheck to opt out of newsletter", async () => {
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    fireEvent.click(subject.getByLabelText(Defaults.selfRegistration.newsletterCheckboxLabel));
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    fireEvent.click(subject.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
     page.clickNext();
     await waitFor(() => {
       expect(currentUserData().user).toEqual({
@@ -257,10 +257,10 @@ export const runSelfRegPageTests = (
   });
 
   it("allows a user to uncheck to opt out of user testing", async () => {
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    fireEvent.click(subject.getByLabelText(Defaults.selfRegistration.userTestingCheckboxLabel));
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    fireEvent.click(subject.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
     page.clickNext();
 
     await waitFor(() => {
@@ -276,9 +276,9 @@ export const runSelfRegPageTests = (
 
   it("posts user data to self-reg api", async () => {
     mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "www.example.com" });
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
     await waitFor(() => {
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
@@ -296,30 +296,30 @@ export const runSelfRegPageTests = (
   });
 
   it("shows the user an error message if myNJ returns an duplicate_signup error", async () => {
-    expect(subject.queryByText(Defaults.selfRegistration.errorTextDuplicateSignup)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.selfRegistration.errorTextDuplicateSignup)).not.toBeInTheDocument();
 
     const rejectedPromise = Promise.reject(409);
     mockApi.postSelfReg.mockReturnValue(rejectedPromise);
 
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
     await act(() => rejectedPromise.catch(() => {}));
-    expect(subject.queryByText(Defaults.selfRegistration.errorTextDuplicateSignup)).toBeInTheDocument();
+    expect(subject.queryByText(Config.selfRegistration.errorTextDuplicateSignup)).toBeInTheDocument();
   });
 
   it("shows the user an error message if myNJ returns an error", async () => {
-    expect(subject.queryByText(Defaults.selfRegistration.errorTextGeneric)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.selfRegistration.errorTextGeneric)).not.toBeInTheDocument();
 
     const rejectedPromise = Promise.reject(500);
     mockApi.postSelfReg.mockReturnValue(rejectedPromise);
 
-    page.fillText(Defaults.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Defaults.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Defaults.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
     await act(() => rejectedPromise.catch(() => {}));
-    expect(subject.queryByText(Defaults.selfRegistration.errorTextGeneric)).toBeInTheDocument();
+    expect(subject.queryByText(Config.selfRegistration.errorTextGeneric)).toBeInTheDocument();
   });
 };

@@ -1,18 +1,16 @@
 import { Content } from "@/components/Content";
 import { getDollarValue } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { PaymentType } from "@businessnjgovnavigator/shared";
 import { FormHelperText, Radio } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 
 export const PaymentTypeTable = (): ReactElement => {
-  const achPaymentCost = parseFloat(Defaults.businessFormationDefaults.achPaymentCost);
-  const creditCardPaymentCostExtra = parseFloat(
-    Defaults.businessFormationDefaults.creditCardPaymentCostExtra
-  );
+  const achPaymentCost = parseFloat(Config.businessFormationDefaults.achPaymentCost);
+  const creditCardPaymentCostExtra = parseFloat(Config.businessFormationDefaults.creditCardPaymentCostExtra);
   const creditCardPaymentCostInitial = parseFloat(
-    Defaults.businessFormationDefaults.creditCardPaymentCostInitial
+    Config.businessFormationDefaults.creditCardPaymentCostInitial
   );
 
   const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
@@ -58,7 +56,7 @@ export const PaymentTypeTable = (): ReactElement => {
       <table className="business-formation-table business-formation-payment">
         <thead>
           <tr>
-            <th className="text-bold">{Defaults.businessFormationDefaults.paymentTypeTableLabel}</th>
+            <th className="text-bold">{Config.businessFormationDefaults.paymentTypeTableLabel}</th>
             <th></th>
             <th></th>
           </tr>
@@ -66,7 +64,7 @@ export const PaymentTypeTable = (): ReactElement => {
             <th colSpan={3}>
               {state.errorMap.paymentType.invalid ? (
                 <FormHelperText className={"text-error"}>
-                  {Defaults.businessFormationDefaults.paymentTypeErrorText}
+                  {Config.businessFormationDefaults.paymentTypeErrorText}
                 </FormHelperText>
               ) : (
                 " "
@@ -102,7 +100,7 @@ export const PaymentTypeTable = (): ReactElement => {
                     : ""
                 }
               >
-                <Content>{Defaults.businessFormationDefaults.creditCardPaymentTypeLabel}</Content>
+                <Content>{Config.businessFormationDefaults.creditCardPaymentTypeLabel}</Content>
               </label>
             </td>
             <td className={state.formationFormData.paymentType === "CC" ? "text-success-dark text-bold" : ""}>
@@ -136,7 +134,7 @@ export const PaymentTypeTable = (): ReactElement => {
                     : ""
                 }
               >
-                <Content>{Defaults.businessFormationDefaults.achPaymentTypeLabel}</Content>
+                <Content>{Config.businessFormationDefaults.achPaymentTypeLabel}</Content>
               </label>
             </td>
             <td
@@ -151,7 +149,7 @@ export const PaymentTypeTable = (): ReactElement => {
             <td colSpan={1}>
               <div className="text-align-left">
                 <span className="text-bold r">
-                  {Defaults.businessFormationDefaults.paymentTypeTableTotalCostLabel}
+                  {Config.businessFormationDefaults.paymentTypeTableTotalCostLabel}
                 </span>{" "}
               </div>
             </td>

@@ -5,7 +5,7 @@ import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import Link from "next/link";
 import React, { ReactElement, useMemo, useState } from "react";
 import { MiniOperateSection } from "../roadmap/MiniOperateSection";
@@ -63,7 +63,7 @@ export const NavBarLoggedInMobile = ({
         </button>
         <div className={`usa-logo ${scrolled ? "bg-white" : ""} navigator-logo-mobile`}>
           {sideBarPageLayout ? (
-            <div className="text-bold">{Defaults.navigationDefaults.taskPageNavBarHeading}</div>
+            <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
           ) : (
             <Link href={redirectUrl} passHref>
               <a href={redirectUrl}>

@@ -3,7 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
 import { BusinessFormationFieldAlert } from "./BusinessFormationFieldAlert";
@@ -79,10 +79,10 @@ export const ContactsSection = (): ReactElement => {
               scrollToTop();
             }}
           >
-            {Defaults.businessFormationDefaults.previousButtonText}
+            {Config.businessFormationDefaults.previousButtonText}
           </Button>
           <Button style="primary" onClick={submitContactData} widthAutoOnMobile noRightMargin>
-            {Defaults.businessFormationDefaults.nextButtonText}
+            {Config.businessFormationDefaults.nextButtonText}
           </Button>
         </div>
       </div>

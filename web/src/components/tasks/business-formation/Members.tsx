@@ -3,7 +3,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationMember } from "@businessnjgovnavigator/shared";
 import { IconButton } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
@@ -34,9 +34,9 @@ export const Members = (): ReactElement => {
       {alert && (
         <ToastAlert variant="success" isOpen={alert !== undefined} close={() => setAlert(undefined)}>
           <div data-testid={`toast-alert-success`} className="h3-styling">
-            {Defaults.businessFormationDefaults.membersSuccessTextHeader}
+            {Config.businessFormationDefaults.membersSuccessTextHeader}
           </div>
-          <div className="padding-top-05">{Defaults.businessFormationDefaults.membersSuccessTextBody}</div>
+          <div className="padding-top-05">{Config.businessFormationDefaults.membersSuccessTextBody}</div>
         </ToastAlert>
       )}
       <div className={`form-input margin-bottom-2 ${styles.membersTable}`}>
@@ -53,7 +53,7 @@ export const Members = (): ReactElement => {
         <table className={`members margin-top-2 margin-bottom-3`}>
           <thead>
             <tr>
-              {Defaults.businessFormationDefaults.membersTableColumn.split(",").map((value: string) => (
+              {Config.businessFormationDefaults.membersTableColumn.split(",").map((value: string) => (
                 <th className="margin-bottom-2" key={value.toLowerCase()}>
                   {value}
                 </th>
@@ -120,7 +120,7 @@ export const Members = (): ReactElement => {
           >
             <Icon>add</Icon>{" "}
             <span className="text-underline" style={{ textUnderlinePosition: "under" }}>
-              {Defaults.businessFormationDefaults.membersNewButtonText}
+              {Config.businessFormationDefaults.membersNewButtonText}
             </span>
           </Button>
         )}

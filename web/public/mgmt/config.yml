@@ -20,9 +20,9 @@ collections:
     editor:
       preview: false
     files:
-      - label: "Defaults"
-        name: "defaults"
-        file: "content/src/display-defaults/defaults.json"
+      - label: "Config"
+        name: "config"
+        file: "content/src/fieldConfig/config.json"
         fields:
           - label: Beta Bar
             name: betaBar

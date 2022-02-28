@@ -3,7 +3,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import Link from "next/link";
 import React, { ReactElement, useState } from "react";
@@ -45,7 +45,7 @@ export const NavSideBarUserSettings = (): ReactElement => {
                   window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
                 }}
               >
-                {Defaults.navigationDefaults.myNJAccountText}
+                {Config.navigationDefaults.myNJAccountText}
               </button>
             </div>
             <div className="margin-bottom-2">
@@ -56,7 +56,7 @@ export const NavSideBarUserSettings = (): ReactElement => {
                     analytics.event.account_menu_my_profile.click.go_to_profile_screen();
                   }}
                 >
-                  {Defaults.navigationDefaults.profileLinkText}
+                  {Config.navigationDefaults.profileLinkText}
                 </button>
               </Link>
             </div>

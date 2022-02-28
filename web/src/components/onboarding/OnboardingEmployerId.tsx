@@ -2,7 +2,7 @@ import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 import { OnboardingNumericField } from "./OnboardingNumericField";
 
@@ -26,7 +26,7 @@ export const OnboardingEmployerId = ({ headerAriaLevel = 2, ...props }: Props): 
         fieldName={fieldName}
         onValidation={props.onValidation}
         error={props.fieldStates[fieldName].invalid}
-        validationText={templateEval(Defaults.onboardingDefaults.errorTextMinimumNumericField, {
+        validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
           length: "9",
         })}
         visualFilter={displayAsEin}

@@ -5,7 +5,7 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
@@ -51,7 +51,7 @@ export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props)
           fieldName={fieldName}
           error={props.fieldStates[fieldName].invalid}
           validationLabel="Error"
-          validationText={Defaults.onboardingDefaults.errorTextRequiredMunicipality}
+          validationText={Config.onboardingDefaults.errorTextRequiredMunicipality}
           handleChange={handleChange}
           value={state.profileData.municipality}
           onSelect={onSelect}

@@ -1,5 +1,5 @@
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, ReactNode } from "react";
 import { OnboardingNumericField } from "./OnboardingNumericField";
 
@@ -21,7 +21,7 @@ export const OnboardingTaxPin = (props: Props): ReactElement => {
         fieldName={fieldName}
         maxLength={4}
         minLength={4}
-        validationText={Defaults.profileDefaults.taxPinErrorText}
+        validationText={Config.profileDefaults.taxPinErrorText}
         headerAriaLevel={props.headerAriaLevel}
       />
       {props.children}

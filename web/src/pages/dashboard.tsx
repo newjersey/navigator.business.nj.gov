@@ -15,7 +15,7 @@ import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
@@ -45,11 +45,11 @@ const DashboardPage = (props: Props): ReactElement => {
   const backToRoadmapBox = (): ReactElement => (
     <div className="margin-top-6">
       <div className="padding-3 bg-base-lightest radius-md">
-        <h2 className="margin-y-0">{Defaults.dashboardDefaults.backToRoadmapHeader}</h2>
+        <h2 className="margin-y-0">{Config.dashboardDefaults.backToRoadmapHeader}</h2>
         <p className="margin-y-1 text-base-dark">
-          {Defaults.dashboardDefaults.backToRoadmapText.split("${link}")[0]}
-          <a href="/roadmap">{Defaults.dashboardDefaults.backToRoadmapLinkText}</a>
-          {Defaults.dashboardDefaults.backToRoadmapText.split("${link}")[1]}
+          {Config.dashboardDefaults.backToRoadmapText.split("${link}")[0]}
+          <a href="/roadmap">{Config.dashboardDefaults.backToRoadmapLinkText}</a>
+          {Config.dashboardDefaults.backToRoadmapText.split("${link}")[1]}
         </p>
       </div>
     </div>
@@ -69,8 +69,8 @@ const DashboardPage = (props: Props): ReactElement => {
                 <div className="desktop:grid-col-8 usa-prose">
                   <h1>
                     {userData?.user.name
-                      ? templateEval(Defaults.dashboardDefaults.headerText, { name: userData.user.name })
-                      : Defaults.dashboardDefaults.missingNameHeaderText}
+                      ? templateEval(Config.dashboardDefaults.headerText, { name: userData.user.name })
+                      : Config.dashboardDefaults.missingNameHeaderText}
                   </h1>
                   <Content>{props.displayContent.introTextMd}</Content>
 
@@ -79,7 +79,7 @@ const DashboardPage = (props: Props): ReactElement => {
                       href="/profile"
                       onClick={() => analytics.event.roadmap_profile_edit_button.click.return_to_onboarding()}
                     >
-                      {Defaults.dashboardDefaults.editProfileText}
+                      {Config.dashboardDefaults.editProfileText}
                     </a>
                   </p>
 
@@ -92,13 +92,13 @@ const DashboardPage = (props: Props): ReactElement => {
                     operateReferences={props.operateReferences}
                   />
 
-                  <p className="text-base-dark">{Defaults.dashboardDefaults.calendarLegalText}</p>
+                  <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
 
                   {userData?.profileData.initialOnboardingFlow === "STARTING" && backToRoadmapBox()}
                 </div>
 
                 <div className="desktop:grid-col-4 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">
-                  <h2>{Defaults.dashboardDefaults.opportunitiesHeader}</h2>
+                  <h2>{Config.dashboardDefaults.opportunitiesHeader}</h2>
                   <hr className="margin-bottom-3" aria-hidden={true} />
                   <div className="dashboard-opportunities-list">
                     {filteredCertifications.map((cert) => (
@@ -127,9 +127,9 @@ const DashboardPage = (props: Props): ReactElement => {
           }}
         >
           <div data-testid="toast-alert-SUCCESS" className="h3-styling">
-            {Defaults.profileDefaults.successTextHeader}
+            {Config.profileDefaults.successTextHeader}
           </div>
-          <div className="padding-top-05">{Defaults.profileDefaults.successTextBody}</div>
+          <div className="padding-top-05">{Config.profileDefaults.successTextBody}</div>
         </ToastAlert>
       )}
     </PageSkeleton>

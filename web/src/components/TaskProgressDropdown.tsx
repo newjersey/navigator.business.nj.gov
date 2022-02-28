@@ -2,7 +2,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskProgress } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
@@ -64,14 +64,14 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
   return (
     <div className="margin-left-neg-1">
       <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
-        {Defaults.taskDefaults.taskProgressSuccessToastBody}
+        {Config.taskDefaults.taskProgressSuccessToastBody}
       </ToastAlert>
       <MuiButton
         style={{ whiteSpace: "nowrap" }}
         aria-controls="task-progress-status-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        aria-label={`Status of the current task is ${Defaults.taskProgress[value].toLowerCase()}`}
+        aria-label={`Status of the current task is ${Config.taskProgress[value].toLowerCase()}`}
       >
         {TaskProgressTagLookup[value]}
         <Icon>unfold_more</Icon>
@@ -97,7 +97,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           selected={value === "NOT_STARTED"}
         >
           <Tag tagVariant="base" dataTestid="NOT_STARTED" fixedWidth>
-            {Defaults.taskProgress.NOT_STARTED}
+            {Config.taskProgress.NOT_STARTED}
           </Tag>
         </MenuItem>
         <MenuItem
@@ -106,7 +106,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           selected={value === "IN_PROGRESS"}
         >
           <Tag tagVariant="info" dataTestid="IN_PROGRESS" fixedWidth>
-            {Defaults.taskProgress.IN_PROGRESS}
+            {Config.taskProgress.IN_PROGRESS}
           </Tag>
         </MenuItem>
         <MenuItem
@@ -115,7 +115,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           selected={value === "COMPLETED"}
         >
           <Tag tagVariant="primary" dataTestid="COMPLETED" fixedWidth>
-            {Defaults.taskProgress.COMPLETED}
+            {Config.taskProgress.COMPLETED}
           </Tag>
         </MenuItem>
       </Menu>

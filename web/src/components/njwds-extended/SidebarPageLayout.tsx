@@ -4,7 +4,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import React, { ReactElement } from "react";
@@ -40,7 +40,7 @@ export const SidebarPageLayout = ({
           <Icon className="text-white usa-icon--size-3">arrow_back</Icon>
         </div>
         <div className="margin-left-2 margin-y-auto text-primary font-sans-xs usa-link text-green-color-hover">
-          {Defaults.taskDefaults.backToRoadmapText}
+          {Config.taskDefaults.backToRoadmapText}
         </div>
       </a>
     </Link>

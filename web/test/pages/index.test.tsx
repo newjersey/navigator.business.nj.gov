@@ -5,7 +5,7 @@ import { generateUser } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 
@@ -28,7 +28,7 @@ describe("HomePage", () => {
   it("sends to onboarding when Get Started button clicked", () => {
     useMockUserData({});
     const subject = render(withAuth(<Home />, { user: generateUser({}) }));
-    fireEvent.click(subject.getByText(Defaults.landingPage.heroCallToActionText));
+    fireEvent.click(subject.getByText(Config.landingPage.heroCallToActionText));
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 

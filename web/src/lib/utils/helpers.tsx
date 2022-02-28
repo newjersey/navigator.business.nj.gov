@@ -9,7 +9,7 @@ import {
   Step,
   Task,
 } from "@/lib/types/types";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Preferences, UserData } from "@businessnjgovnavigator/shared/";
 import { ParsedUrlQuery } from "querystring";
 import React, { ReactElement, useEffect, useRef } from "react";
@@ -138,28 +138,28 @@ interface AlertProps {
 
 export const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
   SUCCESS: {
-    body: Defaults.profileDefaults.successTextBody,
-    header: Defaults.profileDefaults.successTextHeader,
+    body: Config.profileDefaults.successTextBody,
+    header: Config.profileDefaults.successTextHeader,
     variant: "success",
   },
   ERROR: {
-    body: Defaults.profileDefaults.errorTextBody,
-    header: Defaults.profileDefaults.errorTextHeader,
+    body: Config.profileDefaults.errorTextBody,
+    header: Config.profileDefaults.errorTextHeader,
     variant: "error",
   },
 };
 
 export const OnboardingErrorLookup: Record<ProfileError, string> = {
-  REQUIRED_LEGAL: Defaults.onboardingDefaults.errorTextRequiredLegal,
-  REQUIRED_EXISTING_BUSINESS: Defaults.onboardingDefaults.errorTextRequiredExistingBusiness,
-  MYNJ_DUPLICATE_SIGNUP: Defaults.selfRegistration.errorTextDuplicateSignup,
-  MYNJ_GENERIC: Defaults.selfRegistration.errorTextGeneric,
+  REQUIRED_LEGAL: Config.onboardingDefaults.errorTextRequiredLegal,
+  REQUIRED_EXISTING_BUSINESS: Config.onboardingDefaults.errorTextRequiredExistingBusiness,
+  MYNJ_DUPLICATE_SIGNUP: Config.selfRegistration.errorTextDuplicateSignup,
+  MYNJ_GENERIC: Config.selfRegistration.errorTextGeneric,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {
   if (userData?.user.name) return userData.user.name;
   else if (userData?.user.email) return userData.user.email;
-  else return Defaults.navigationDefaults.myNJAccountText;
+  else return Config.navigationDefaults.myNJAccountText;
 };
 
 export const validateEmail = (email: string): boolean => {

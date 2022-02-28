@@ -1,6 +1,6 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFormData } from "@businessnjgovnavigator/shared";
 import React, { ReactElement } from "react";
 
@@ -13,7 +13,7 @@ export const BusinessFormationFieldAlert = (props: Props): ReactElement => {
   return (
     <>
       {props.showRequiredFieldsError && props.requiredFieldsWithError.length > 0 && (
-        <Alert variant="error" heading={Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText}>
+        <Alert variant="error" heading={Config.businessFormationDefaults.missingFieldsOnSubmitModalText}>
           <ul>
             {props.requiredFieldsWithError.map((it) => (
               <li key={it}>{camelCaseToSentence(it)}</li>

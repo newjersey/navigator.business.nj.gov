@@ -3,7 +3,7 @@ import { generateOperateReference, generateStep, generateUserData } from "@/test
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { render } from "@testing-library/react";
@@ -49,15 +49,15 @@ describe("<SidebarPageLayout />", () => {
     const subject = render(
       <SidebarPageLayout operateReferences={operateReferences}>stuff</SidebarPageLayout>
     );
-    expect(subject.queryByText(Defaults.sectionHeaders.OPERATE)).toBeInTheDocument();
-    expect(subject.queryByText(Defaults.sectionHeaders.PLAN)).not.toBeInTheDocument();
-    expect(subject.queryByText(Defaults.sectionHeaders.START)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.sectionHeaders.OPERATE)).toBeInTheDocument();
+    expect(subject.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
   });
 
   it("shows only plan/start sections when there are no operateReferences", () => {
     const subject = render(<SidebarPageLayout>stuff</SidebarPageLayout>);
-    expect(subject.queryByText(Defaults.sectionHeaders.OPERATE)).not.toBeInTheDocument();
-    expect(subject.queryByText(Defaults.sectionHeaders.PLAN)).toBeInTheDocument();
-    expect(subject.queryByText(Defaults.sectionHeaders.START)).toBeInTheDocument();
+    expect(subject.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
+    expect(subject.queryByText(Config.sectionHeaders.START)).toBeInTheDocument();
   });
 });

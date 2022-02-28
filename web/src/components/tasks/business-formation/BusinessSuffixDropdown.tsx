@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { AllBusinessSuffixes, BusinessSuffix } from "@businessnjgovnavigator/shared";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { FocusEvent, ReactElement, useContext } from "react";
@@ -56,7 +56,7 @@ export const BusinessSuffixDropdown = (): ReactElement => {
             ))}
           </Select>
           <FormHelperText>
-            {state.errorMap.businessSuffix.invalid ? Defaults.businessFormationDefaults.suffixErrorText : " "}
+            {state.errorMap.businessSuffix.invalid ? Config.businessFormationDefaults.suffixErrorText : " "}
           </FormHelperText>
         </FormControl>
       </div>

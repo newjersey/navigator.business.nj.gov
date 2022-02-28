@@ -6,7 +6,7 @@ import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect } from "react";
 
@@ -47,10 +47,10 @@ const Home = (): ReactElement => {
       <main data-testid="main">
         <section aria-label="Introduction">
           <Hero
-            calloutText={Defaults.landingPage.heroCalloutFirstLineText}
-            subCalloutText={Defaults.landingPage.heroCalloutSecondLineText}
-            supportingText={Defaults.landingPage.heroSupportingText}
-            callToActionText={Defaults.landingPage.heroCallToActionText}
+            calloutText={Config.landingPage.heroCalloutFirstLineText}
+            subCalloutText={Config.landingPage.heroCalloutSecondLineText}
+            supportingText={Config.landingPage.heroSupportingText}
+            callToActionText={Config.landingPage.heroCallToActionText}
             onClick={() => {
               router.push("/onboarding");
               analytics.event.landing_page_hero_get_started.click.open_create_account_modal();
@@ -61,11 +61,11 @@ const Home = (): ReactElement => {
             <div className="grid-custom">
               <div className="l2-header-custom text-center margin-y-0 padding-bottom-40 fixed-width no-padding-lr display-block">
                 <h2>
-                  {Defaults.landingPage.section2HeaderFirstLineText}
+                  {Config.landingPage.section2HeaderFirstLineText}
                   <span className="display-inline-override">
-                    {Defaults.landingPage.section2HeaderSecondLineText}
+                    {Config.landingPage.section2HeaderSecondLineText}
                   </span>
-                  <span>{Defaults.landingPage.section2HeaderThirdLineText}</span>
+                  <span>{Config.landingPage.section2HeaderThirdLineText}</span>
                 </h2>
               </div>
 
@@ -73,20 +73,20 @@ const Home = (): ReactElement => {
                 <img src="../img/Landing-sec2-people.png" alt="People" />
               </div>
               <p className="font-sans-lg text-center padding-20 p-desktop">
-                {Defaults.landingPage.section2SupportingText}
+                {Config.landingPage.section2SupportingText}
               </p>
               <div className="fdr fjc icon-container-desktop">
                 <div className="l2-icon">
                   <img src="../img/Icon-legal-structure.svg" alt="Legal Structure Icon" />
-                  <p>{Defaults.landingPage.section2Icon1Text}</p>
+                  <p>{Config.landingPage.section2Icon1Text}</p>
                 </div>
                 <div className="l2-icon">
                   <img src="../img/Icon-industry.svg" alt="Industry Icon" />
-                  <p>{Defaults.landingPage.section2Icon2Text}</p>
+                  <p>{Config.landingPage.section2Icon2Text}</p>
                 </div>
                 <div className="l2-icon">
                   <img src="../img/Icon-Location.svg" alt="Location Icon" />
-                  <p>{Defaults.landingPage.section2Icon3Text}</p>
+                  <p>{Config.landingPage.section2Icon3Text}</p>
                 </div>
               </div>
             </div>
@@ -97,41 +97,41 @@ const Home = (): ReactElement => {
           <section aria-label="Existing business">
             <div className="text-center text-bold padding-top-9 desktop:padding-top-2 line-height-205">
               <h2>
-                {Defaults.landingPage.section3HeaderFirstLineText}
+                {Config.landingPage.section3HeaderFirstLineText}
                 <span className="display-block display-inline-override">
-                  {Defaults.landingPage.section3HeaderSecondLineText}
+                  {Config.landingPage.section3HeaderSecondLineText}
                 </span>
               </h2>
             </div>
 
             <ul className="usa-card-group flex-direction card-group-margin-custom">
               <Card
-                headerText={Defaults.landingPage.column1Header}
-                mainText={Defaults.landingPage.column1SupportingText}
-                buttonText={Defaults.landingPage.column1Button}
-                link={Defaults.landingPage.column1ButtonLink}
-                imageSource={Defaults.landingPage.column1Image}
-                altImageText={Defaults.landingPage.column1ImageAlt}
+                headerText={Config.landingPage.column1Header}
+                mainText={Config.landingPage.column1SupportingText}
+                buttonText={Config.landingPage.column1Button}
+                link={Config.landingPage.column1ButtonLink}
+                imageSource={Config.landingPage.column1Image}
+                altImageText={Config.landingPage.column1ImageAlt}
                 mainTextClassName="padding-bottom-5"
               />
 
               <Card
-                headerText={Defaults.landingPage.column2Header}
-                mainText={Defaults.landingPage.column2SupportingText}
-                buttonText={Defaults.landingPage.column2Button}
-                link={Defaults.landingPage.column2ButtonLink}
-                imageSource={Defaults.landingPage.column2Image}
-                altImageText={Defaults.landingPage.column2ImageAlt}
+                headerText={Config.landingPage.column2Header}
+                mainText={Config.landingPage.column2SupportingText}
+                buttonText={Config.landingPage.column2Button}
+                link={Config.landingPage.column2ButtonLink}
+                imageSource={Config.landingPage.column2Image}
+                altImageText={Config.landingPage.column2ImageAlt}
                 mainTextClassName="padding-bottom-2"
               />
 
               <Card
-                headerText={Defaults.landingPage.column3Header}
-                mainText={Defaults.landingPage.column3SupportingText}
-                buttonText={Defaults.landingPage.column3Button}
-                link={Defaults.landingPage.column3ButtonLink}
-                imageSource={Defaults.landingPage.column3Image}
-                altImageText={Defaults.landingPage.column3ImageAlt}
+                headerText={Config.landingPage.column3Header}
+                mainText={Config.landingPage.column3SupportingText}
+                buttonText={Config.landingPage.column3Button}
+                link={Config.landingPage.column3ButtonLink}
+                imageSource={Config.landingPage.column3Image}
+                altImageText={Config.landingPage.column3ImageAlt}
                 buttonClassName="intercom-button"
                 mainTextClassName="padding-bottom-12"
               />

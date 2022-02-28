@@ -4,7 +4,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import { AuthContext } from "@/pages/_app";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -103,7 +103,7 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                       <MenuItem onClick={handleProfileClick}>
                         <button className="clear-button font-body-2xs text-bold text-primary">
-                          {Defaults.navigationDefaults.myNJAccountText}
+                          {Config.navigationDefaults.myNJAccountText}
                         </button>
                       </MenuItem>
                       <MenuItem
@@ -113,12 +113,12 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
                         }}
                       >
                         <button className="clear-button font-body-2xs text-bold text-primary">
-                          {Defaults.navigationDefaults.profileLinkText}
+                          {Config.navigationDefaults.profileLinkText}
                         </button>
                       </MenuItem>
                       <MenuItem onClick={handleLogoutClick}>
                         <button className="clear-button font-body-2xs text-bold text-primary">
-                          {Defaults.navigationDefaults.logoutButton}
+                          {Config.navigationDefaults.logoutButton}
                         </button>
                       </MenuItem>
                     </MenuList>

@@ -23,7 +23,7 @@ import {
   userDataUpdatedNTimes,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   createEmptyFormationFormData,
   FormationFormData,
@@ -150,20 +150,18 @@ describe("<BusinessFormation />", () => {
 
       it("displays success page, documents, entity id, confirmation id", () => {
         renderWithFilingResponse({});
-        expect(subject.getByText(Defaults.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
-        expect(
-          subject.getByText(Defaults.businessFormationDefaults.successPageSubheader)
-        ).toBeInTheDocument();
+        expect(subject.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
+        expect(subject.getByText(Config.businessFormationDefaults.successPageSubheader)).toBeInTheDocument();
         expect(subject.getByText(getFilingResponse.entityId)).toBeInTheDocument();
         expect(subject.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
         expect(
-          subject.getByTestId(Defaults.businessFormationDefaults.formationDocLabel).getAttribute("href")
+          subject.getByTestId(Config.businessFormationDefaults.formationDocLabel).getAttribute("href")
         ).toEqual(getFilingResponse.formationDoc);
         expect(
-          subject.getByTestId(Defaults.businessFormationDefaults.standingDocLabel).getAttribute("href")
+          subject.getByTestId(Config.businessFormationDefaults.standingDocLabel).getAttribute("href")
         ).toEqual(getFilingResponse.standingDoc);
         expect(
-          subject.getByTestId(Defaults.businessFormationDefaults.certifiedDocLabel).getAttribute("href")
+          subject.getByTestId(Config.businessFormationDefaults.certifiedDocLabel).getAttribute("href")
         ).toEqual(getFilingResponse.certifiedDoc);
       });
 
@@ -176,7 +174,7 @@ describe("<BusinessFormation />", () => {
       it("does not display documents when they are not present", () => {
         renderWithFilingResponse({ certifiedDoc: "" });
         expect(
-          subject.queryByTestId(Defaults.businessFormationDefaults.certifiedDocLabel)
+          subject.queryByTestId(Config.businessFormationDefaults.certifiedDocLabel)
         ).not.toBeInTheDocument();
       });
     });
@@ -347,7 +345,7 @@ describe("<BusinessFormation />", () => {
       await submitReviewTab();
 
       expect(
-        subject.getByText(Defaults.businessFormationDefaults.creditCardPaymentTypeLabel)
+        subject.getByText(Config.businessFormationDefaults.creditCardPaymentTypeLabel)
       ).toBeInTheDocument();
       expect(getInputElementByLabel("Contact first name").value).toBe("John");
       expect(getInputElementByLabel("Contact last name").value).toBe("Smith");
@@ -410,17 +408,17 @@ describe("<BusinessFormation />", () => {
       await submitContactsTab();
       await submitReviewTab();
 
-      fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.previousButtonText));
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
       await waitFor(() => {
         expect(subject.getByTestId("review-section")).toBeInTheDocument();
       });
 
-      fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.previousButtonText));
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
       await waitFor(() => {
         expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
       });
 
-      fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.previousButtonText));
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
       await waitFor(() => {
         expect(subject.queryByTestId("business-section")).toBeInTheDocument();
       });
@@ -523,7 +521,7 @@ describe("<BusinessFormation />", () => {
         subject = renderTask({ profileData: generateLLCProfileData({}) });
         const displayLegalStructure = subject.getByTestId("legal-structure");
 
-        expect(displayLegalStructure).toHaveTextContent(Defaults.businessFormationDefaults.llcText);
+        expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.llcText);
       });
 
       it("displays business name from profile data", () => {
@@ -531,7 +529,7 @@ describe("<BusinessFormation />", () => {
         subject = renderTask({ profileData });
         expect(subject.getByText("some cool name", { exact: false })).toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.notSetBusinessNameText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.notSetBusinessNameText, { exact: false })
         ).not.toBeInTheDocument();
       });
 
@@ -542,7 +540,7 @@ describe("<BusinessFormation />", () => {
         subject = renderTask({ profileData });
         expect(subject.getByText("Newark", { exact: false })).toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.notSetBusinessAddressCityLabel, {
+          subject.queryByText(Config.businessFormationDefaults.notSetBusinessAddressCityLabel, {
             exact: false,
           })
         ).not.toBeInTheDocument();
@@ -552,7 +550,7 @@ describe("<BusinessFormation />", () => {
         const profileData = generateLLCProfileData({ businessName: "" });
         subject = renderTask({ profileData });
         expect(
-          subject.getByText(Defaults.businessFormationDefaults.notSetBusinessNameText, { exact: false })
+          subject.getByText(Config.businessFormationDefaults.notSetBusinessNameText, { exact: false })
         ).toBeInTheDocument();
       });
     });
@@ -583,11 +581,11 @@ describe("<BusinessFormation />", () => {
 
       await submitBusinessTab();
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fillText("Additional signer 0", "Red Skull");
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fillText("Additional signer 1", "V");
 
@@ -600,11 +598,11 @@ describe("<BusinessFormation />", () => {
 
       await submitBusinessTab();
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fillText("Additional signer 0", "Red Skull");
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fillText("Additional signer 1", "V");
       fireEvent.click(subject.getAllByLabelText("delete additional signer")[0]);
@@ -618,19 +616,19 @@ describe("<BusinessFormation />", () => {
 
       await submitBusinessTab();
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       fillText("Additional signer 1", "Red Skull");
 
@@ -644,17 +642,17 @@ describe("<BusinessFormation />", () => {
       await submitBusinessTab();
       for (let i = 0; i < 8; i++) {
         fireEvent.click(
-          subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+          subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
         );
       }
       expect(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       ).toBeInTheDocument();
       fireEvent.click(
-        subject.getByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
       expect(
-        subject.queryByText(Defaults.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        subject.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       ).not.toBeInTheDocument();
     });
 
@@ -666,7 +664,7 @@ describe("<BusinessFormation />", () => {
         });
         await submitBusinessTab();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.membersNewButtonText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).toBeInTheDocument();
         const nameTd = subject.getByText(members[1].name, { exact: false });
         expect(nameTd).toBeInTheDocument();
@@ -688,7 +686,7 @@ describe("<BusinessFormation />", () => {
         clickMemberSubmit();
         await waitFor(() => {
           expect(
-            subject.getByText(Defaults.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+            subject.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
           ).toBeInTheDocument();
         });
         expect(subject.getByText(newName, { exact: false })).toBeInTheDocument();
@@ -751,40 +749,40 @@ describe("<BusinessFormation />", () => {
         await openMemberModal();
         clickMemberSubmit();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.nameErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.addressErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.addressCityErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.addressStateErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
         ).toBeInTheDocument();
         await fillMemberModal({});
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.nameErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.addressErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.addressCityErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.addressStateErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
         ).not.toBeInTheDocument();
         clickMemberSubmit();
         await waitFor(() => {
           expect(
-            subject.getByText(Defaults.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+            subject.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
           ).toBeInTheDocument();
         });
       });
@@ -807,7 +805,7 @@ describe("<BusinessFormation />", () => {
           await fillAndSubmitMemberModal({});
         }
         expect(
-          subject.getByText(Defaults.businessFormationDefaults.membersNewButtonText, { exact: false })
+          subject.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).toBeInTheDocument();
 
         await openMemberModal();
@@ -815,7 +813,7 @@ describe("<BusinessFormation />", () => {
         clickMemberSubmit();
 
         expect(
-          subject.queryByText(Defaults.businessFormationDefaults.membersNewButtonText, { exact: false })
+          subject.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).not.toBeInTheDocument();
         await submitContactsTab();
         expect(currentUserData().formationData.formationFormData.members.length).toEqual(10);
@@ -866,8 +864,8 @@ describe("<BusinessFormation />", () => {
         (
           displayContent.officialFormationDocument.cost +
           displayContent.certificateOfStanding.cost +
-          parseFloat(Defaults.businessFormationDefaults.creditCardPaymentCostInitial) +
-          parseFloat(Defaults.businessFormationDefaults.creditCardPaymentCostExtra)
+          parseFloat(Config.businessFormationDefaults.creditCardPaymentCostInitial) +
+          parseFloat(Config.businessFormationDefaults.creditCardPaymentCostExtra)
         ).toString()
       );
       fireEvent.click(subject.getByLabelText("E check"));
@@ -875,7 +873,7 @@ describe("<BusinessFormation />", () => {
         (
           displayContent.officialFormationDocument.cost +
           displayContent.certificateOfStanding.cost +
-          parseFloat(Defaults.businessFormationDefaults.achPaymentCost) * 2
+          parseFloat(Config.businessFormationDefaults.achPaymentCost) * 2
         ).toString()
       );
     });
@@ -926,7 +924,7 @@ describe("<BusinessFormation />", () => {
       expect(subject.getByText("some field 2")).toBeInTheDocument();
       expect(subject.getByText("must be nj zipcode")).toBeInTheDocument();
 
-      fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.previousButtonText));
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
 
       await waitFor(() => {
         expect(subject.getByTestId("review-section")).toBeInTheDocument();
@@ -944,18 +942,18 @@ describe("<BusinessFormation />", () => {
       renderWithData({ businessAddressLine1: "" });
       await submitBusinessTab(false);
       expect(
-        subject.getByText(Defaults.businessFormationDefaults.businessAddressLine1ErrorText)
+        subject.getByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
       ).toBeInTheDocument();
       expect(
-        subject.getByText(Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText)
+        subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
       ).toBeInTheDocument();
       fillText("Business address line1", "1234 main street");
       await submitBusinessTab();
       expect(
-        subject.queryByText(Defaults.businessFormationDefaults.businessAddressLine1ErrorText)
+        subject.queryByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText)
+        subject.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
       ).not.toBeInTheDocument();
     });
 
@@ -969,9 +967,9 @@ describe("<BusinessFormation />", () => {
       renderWithData({});
       selectDate(dayjs().subtract(4, "day"));
       await submitBusinessTab(false);
-      expect(subject.getByText(Defaults.businessFormationDefaults.startDateErrorText)).toBeInTheDocument();
+      expect(subject.getByText(Config.businessFormationDefaults.startDateErrorText)).toBeInTheDocument();
       expect(
-        subject.getByText(Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText)
+        subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
       ).toBeInTheDocument();
     });
 
@@ -1022,10 +1020,10 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.queryByText(Defaults.businessFormationDefaults.agentEmailErrorText)
+              subject.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
             ).toBeInTheDocument();
             expect(
-              subject.getByText(Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText)
+              subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
             ).toBeInTheDocument();
           });
         });
@@ -1037,10 +1035,10 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.queryByText(Defaults.businessFormationDefaults.agentEmailErrorText)
+              subject.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
             ).toBeInTheDocument();
             expect(
-              subject.getByText(Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText)
+              subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
             ).toBeInTheDocument();
           });
         });
@@ -1051,7 +1049,7 @@ describe("<BusinessFormation />", () => {
 
           await submitBusinessTab();
           expect(
-            subject.queryByText(Defaults.businessFormationDefaults.agentEmailErrorText)
+            subject.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
           ).not.toBeInTheDocument();
         });
       });
@@ -1064,10 +1062,10 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(Defaults.businessFormationDefaults.businessAddressZipCodeErrorText)
+              subject.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
-              subject.getByText(Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText)
+              subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
             ).toBeInTheDocument();
           });
         });
@@ -1079,10 +1077,10 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(Defaults.businessFormationDefaults.businessAddressZipCodeErrorText)
+              subject.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
-              subject.getByText(Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText)
+              subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
             ).toBeInTheDocument();
           });
         });
@@ -1100,10 +1098,10 @@ describe("<BusinessFormation />", () => {
           await submitBusinessTab(false);
           await waitFor(() => {
             expect(
-              subject.getByText(Defaults.businessFormationDefaults.agentOfficeAddressZipCodeErrorText)
+              subject.getByText(Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText)
             ).toBeInTheDocument();
             expect(
-              subject.getByText(Defaults.businessFormationDefaults.missingFieldsOnSubmitModalText)
+              subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
             ).toBeInTheDocument();
           });
         });
@@ -1119,7 +1117,7 @@ describe("<BusinessFormation />", () => {
         renderWithData({}, { businessName: undefined });
         await submitBusinessTab(false);
         expect(
-          subject.getByText(Defaults.businessFormationDefaults.notSetBusinessNameErrorText)
+          subject.getByText(Config.businessFormationDefaults.notSetBusinessNameErrorText)
         ).toBeInTheDocument();
         expect(subject.getByRole("alert")).toHaveTextContent(/Business name/);
       });
@@ -1216,9 +1214,7 @@ describe("<BusinessFormation />", () => {
         await submitContactsTab();
         await submitReviewTab();
         await clickSubmit();
-        expect(
-          subject.getByText(Defaults.businessFormationDefaults.paymentTypeErrorText)
-        ).toBeInTheDocument();
+        expect(subject.getByText(Config.businessFormationDefaults.paymentTypeErrorText)).toBeInTheDocument();
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
 
@@ -1294,10 +1290,10 @@ describe("<BusinessFormation />", () => {
   };
 
   const openMemberModal = async (): Promise<void> => {
-    fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.membersNewButtonText));
+    fireEvent.click(subject.getByText(Config.businessFormationDefaults.membersNewButtonText));
     await waitFor(() => {
       expect(
-        subject.getByText(Defaults.businessFormationDefaults.membersModalNextButtonText)
+        subject.getByText(Config.businessFormationDefaults.membersModalNextButtonText)
       ).toBeInTheDocument();
     });
   };
@@ -1322,13 +1318,13 @@ describe("<BusinessFormation />", () => {
     clickMemberSubmit();
     await waitFor(() => {
       expect(
-        subject.getByText(Defaults.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+        subject.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
       ).toBeInTheDocument();
     });
   };
 
   const clickSubmit = async (): Promise<void> => {
-    fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.submitButtonText));
+    fireEvent.click(subject.getByText(Config.businessFormationDefaults.submitButtonText));
     await act(async () => {
       await flushPromises();
     });
@@ -1353,7 +1349,7 @@ describe("<BusinessFormation />", () => {
   };
 
   const submitBusinessTab = async (completed = true) => {
-    fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.initialNextButtonText));
+    fireEvent.click(subject.getByText(Config.businessFormationDefaults.initialNextButtonText));
 
     if (completed) {
       await waitFor(() => {
@@ -1367,7 +1363,7 @@ describe("<BusinessFormation />", () => {
   };
 
   const submitContactsTab = async (completed = true) => {
-    fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.nextButtonText));
+    fireEvent.click(subject.getByText(Config.businessFormationDefaults.nextButtonText));
 
     if (completed)
       await waitFor(() => {
@@ -1376,7 +1372,7 @@ describe("<BusinessFormation />", () => {
   };
 
   const submitReviewTab = async () => {
-    fireEvent.click(subject.getByText(Defaults.businessFormationDefaults.nextButtonText));
+    fireEvent.click(subject.getByText(Config.businessFormationDefaults.nextButtonText));
 
     await waitFor(() => {
       expect(subject.queryByTestId("payment-section")).toBeInTheDocument();

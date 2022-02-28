@@ -9,7 +9,7 @@ import {
   generateUser,
 } from "@/test/factories";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, RenderResult, waitFor } from "@testing-library/react";
 import dayjs from "dayjs";
@@ -53,14 +53,14 @@ describe("dashboard", () => {
   it("includes user full name in header", () => {
     useMockUserData({ user: generateUser({ name: "Ada Lovelace" }) });
     const subject = renderPage({});
-    const expectedHeaderText = templateEval(Defaults.dashboardDefaults.headerText, { name: "Ada Lovelace" });
+    const expectedHeaderText = templateEval(Config.dashboardDefaults.headerText, { name: "Ada Lovelace" });
     expect(subject.getByText(expectedHeaderText)).toBeInTheDocument();
   });
 
   it("greets user when name is undefined", () => {
     useMockUserData({ user: generateUser({ name: undefined }) });
     const subject = renderPage({});
-    expect(subject.getByText(Defaults.dashboardDefaults.missingNameHeaderText)).toBeInTheDocument();
+    expect(subject.getByText(Config.dashboardDefaults.missingNameHeaderText)).toBeInTheDocument();
   });
 
   it("displays intro content", () => {
@@ -194,20 +194,20 @@ describe("dashboard", () => {
     useMockRouter({ isReady: true, query: { success: "true" } });
     const subject = renderPage({});
     await waitFor(() =>
-      expect(subject.getByText(Defaults.profileDefaults.successTextHeader)).toBeInTheDocument()
+      expect(subject.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument()
     );
   });
 
   it("shows back-to-roadmap box for users who were previously starting a business", () => {
     useMockProfileData({ initialOnboardingFlow: "STARTING" });
     const subject = renderPage({});
-    expect(subject.queryByText(Defaults.dashboardDefaults.backToRoadmapHeader)).toBeInTheDocument();
+    expect(subject.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).toBeInTheDocument();
   });
 
   it("does not show back-to-roadmap box for users who have only used the owning-a-business flow", () => {
     useMockProfileData({ initialOnboardingFlow: "OWNING" });
     const subject = renderPage({});
-    expect(subject.queryByText(Defaults.dashboardDefaults.backToRoadmapHeader)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).not.toBeInTheDocument();
   });
 
   const useMockProfileDataForUnfilteredOpportunities = () => {
