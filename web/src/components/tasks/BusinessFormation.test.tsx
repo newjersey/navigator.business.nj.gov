@@ -58,8 +58,6 @@ describe("<BusinessFormation />", () => {
     businessNameAndLegalStructure: {
       contentMd: "business name and legal structure",
     },
-    optInAnnualReport: { contentMd: "Annual report" },
-    optInCorpWatch: { contentMd: "Corp watch" },
     officialFormationDocument: {
       contentMd: "Official formation document",
       cost: 125,
@@ -225,8 +223,8 @@ describe("<BusinessFormation />", () => {
       fillText("Contact last name", "Smith");
       fillText("Contact phone number", "123A45a678 90");
       fireEvent.click(subject.getByLabelText("Credit card"));
-      selectCheckBox("Annual report");
-      selectCheckBox("Corp watch");
+      selectCheckBox(Config.businessFormationDefaults.optInAnnualReportText);
+      selectCheckBox(Config.businessFormationDefaults.optInCorpWatchText);
       selectCheckBox("Certificate of standing");
       selectCheckBox("Certified copy of formation document");
 
@@ -350,8 +348,10 @@ describe("<BusinessFormation />", () => {
       expect(getInputElementByLabel("Contact first name").value).toBe("John");
       expect(getInputElementByLabel("Contact last name").value).toBe("Smith");
       expect(getInputElementByLabel("Contact phone number").value).toBe("(602) 415-3214");
-      expect(getInputElementByLabel("Annual report").checked).toBe(true);
-      expect(getInputElementByLabel("Corp watch").checked).toBe(true);
+      expect(getInputElementByLabel(Config.businessFormationDefaults.optInAnnualReportText).checked).toBe(
+        true
+      );
+      expect(getInputElementByLabel(Config.businessFormationDefaults.optInCorpWatchText).checked).toBe(true);
       expect(getInputElementByLabel("Official formation document").checked).toBe(true);
       expect(getInputElementByLabel("Certificate of standing").checked).toBe(true);
       expect(getInputElementByLabel("Certified copy of formation document").checked).toBe(true);

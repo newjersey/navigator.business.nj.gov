@@ -49,6 +49,8 @@ collections:
                 }
               - { label: Business Address - City Label, name: businessAddressCityLabel, widget: string }
               - { label: Business Name - Not Set, name: notSetBusinessNameText, widget: string }
+              - { label: Business Suffix Label, name: businessSuffixLabel, widget: string, hint: This field supports Markdown}
+              - { label: Business Suffix Placeholder, name: businessSuffixPlaceholder, widget: string }
               - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
               - { label: Credit Card Payment Cost, name: creditCardPaymentCostInitial, widget: string }
               - { label: Credit Card Payment Extra Cost, name: creditCardPaymentCostExtra, widget: string }
@@ -117,7 +119,21 @@ collections:
               - { label: Member - Success Message Header, name: membersSuccessTextHeader, widget: string }
               - { label: Member - Table Column Headers, name: membersTableColumn, widget: string }
               - { label: Memeber - Add Member Button, name: membersNewButtonText, widget: string }
+              - { label: Memeber Modal - Name Label, name: memberModalNameLabel, widget: string, hint: This field supports Markdown  }
+              - { label: Memeber Modal - Name Placeholder, name: memberModalNamePlaceholder, widget: string }
+              - { label: Memeber Modal - Address Line 1 Label, name: memberModalAddressLine1Label, widget: string, hint: This field supports Markdown  }
+              - { label: Memeber Modal - Address Line 1 Placeholder, name: memberModalAddressLine1Placeholder, widget: string }
+              - { label: Memeber Modal - Address Line 2 Label, name: memberModalAddressLine2Label, widget: string, hint: This field supports Markdown  }
+              - { label: Memeber Modal - Address Line 2 Placeholder, name: memberModalAddressLine2Placeholder, widget: string }
+              - { label: Memeber Modal - City Label, name: memberModalCityLabel, widget: string, hint: This field supports Markdown  }
+              - { label: Memeber Modal - City Placeholder, name: memberModalCityPlaceholder, widget: string }
+              - { label: Memeber Modal - State Label, name: memberModalStateLabel, widget: string, hint: This field supports Markdown  }
+              - { label: Memeber Modal - State Placeholder, name: memberModalStatePlaceholder, widget: string }
+              - { label: Memeber Modal - Zip Code Label, name: memberModalZipCodeLabel, widget: string, hint: This field supports Markdown  }
+              - { label: Memeber Modal - Zip Code Placeholder, name: memberModalZipCodePlaceholder, widget: string }
               - { label: Next Button Text, name: nextButtonText, widget: string }
+              - { label: Opt In - Annual Report Text, name: optInAnnualReportText, widget: string, hint: This field supports Markdown }
+              - { label: Opt In - Corp Watch Text, name: optInCorpWatchText, widget: string, hint: This field supports Markdown }
               - { label: Payment Type - Error, name: paymentTypeErrorText, widget: string }
               - { label: Payment Type - Table Label, name: paymentTypeTableLabel, widget: string }
               - {
@@ -126,20 +142,90 @@ collections:
                   widget: string,
                 }
               - { label: Previous Button Text, name: previousButtonText, widget: string }
-              - { label: Review Page - Address Label, name: reviewPageAddressLabel, widget: string, hint: This field supports Markdown}
-              - { label: Review Page - Business Name Label, name: reviewPageBusinessNameLabel, widget: string, hint: This field supports Markdown}
-              - { label: Review Page - Business Start Date Label, name: reviewPageBusinessStartDateLabel, widget: string, hint: This field supports Markdown}
-              - { label: Review Page - Business Suffix Label, name: reviewPageBusinessSuffixLabel, widget: string, hint: This field supports Markdown}
-              - { label: Review Page - Email Label, name: reviewPageEmailLabel, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Legal Structure Label, name: reviewPageLegalStructureLabel, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Location Header, name: reviewPageLocationHeader, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Members Header, name: reviewPageMembersHeader, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Member Name Label, name: reviewPageMemberNameLabel, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Registered Agent Header, name: reviewPageRegisteredAgentHeader, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Registered Agent Name Label, name: reviewPageRegisteredAgentNameLabel, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Registered Agent Number Label, name: reviewPageRegisteredAgentNumberLabel, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Signatures Header, name: reviewPageSignaturesHeader, widget: string, hint: This field supports Markdown }
-              - { label: Review Page - Signer Name Label, name: reviewPageSignerNameLabel, widget: string, hint: This field supports Markdown }
+              - {
+                  label: Review Page - Address Label,
+                  name: reviewPageAddressLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Business Name Label,
+                  name: reviewPageBusinessNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Business Start Date Label,
+                  name: reviewPageBusinessStartDateLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Business Suffix Label,
+                  name: reviewPageBusinessSuffixLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Email Label,
+                  name: reviewPageEmailLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Legal Structure Label,
+                  name: reviewPageLegalStructureLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Location Header,
+                  name: reviewPageLocationHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Members Header,
+                  name: reviewPageMembersHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Member Name Label,
+                  name: reviewPageMemberNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Registered Agent Header,
+                  name: reviewPageRegisteredAgentHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Registered Agent Name Label,
+                  name: reviewPageRegisteredAgentNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Registered Agent Number Label,
+                  name: reviewPageRegisteredAgentNumberLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Signatures Header,
+                  name: reviewPageSignaturesHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Signer Name Label,
+                  name: reviewPageSignerNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Success Page - Body, name: successPageBody, widget: string }
               - { label: Success Page - Header, name: successPageHeader, widget: string }

@@ -161,10 +161,10 @@ export const MembersModal = (props: Props): ReactElement => {
           )}
 
           <form ref={formRef} data-testid="member" className="padding-top-1" onSubmit={onSubmit}>
-            <Content>{state.displayContent.memberName.contentMd}</Content>
+            <Content>{Config.businessFormationDefaults.memberModalNameLabel}</Content>
             <GenericTextField
               value={memberData.name}
-              placeholder={state.displayContent.memberName.placeholder}
+              placeholder={Config.businessFormationDefaults.memberModalNamePlaceholder}
               handleChange={(value: string) => setMemberData({ ...memberData, name: value })}
               error={memberErrorMap["memberName"].invalid}
               onValidation={onValidation}
@@ -174,11 +174,11 @@ export const MembersModal = (props: Props): ReactElement => {
               autoComplete="name"
               disabled={useAgentAddress}
             />
-            <Content>{state.displayContent.memberAddressLine1.contentMd}</Content>
+            <Content>{Config.businessFormationDefaults.memberModalAddressLine1Label}</Content>
             <GenericTextField
               fieldName="memberAddressLine1"
               value={memberData.addressLine1}
-              placeholder={state.displayContent.memberAddressLine1.placeholder}
+              placeholder={Config.businessFormationDefaults.memberModalAddressLine1Placeholder}
               handleChange={(value: string) => setMemberData({ ...memberData, addressLine1: value })}
               error={memberErrorMap["memberAddressLine1"].invalid}
               onValidation={onValidation}
@@ -195,27 +195,27 @@ export const MembersModal = (props: Props): ReactElement => {
                 ),
               }}
             >
-              {state.displayContent.memberAddressLine2.contentMd}
+              {Config.businessFormationDefaults.memberModalAddressLine2Label}
             </Content>{" "}
             <div className="h6-styling">{Config.businessFormationDefaults.membersAddressLine2Optional}</div>
             <GenericTextField
               fieldName="memberAddressLine2"
               value={memberData.addressLine2}
-              placeholder={state.displayContent.memberAddressLine2.placeholder}
+              placeholder={Config.businessFormationDefaults.memberModalAddressLine2Placeholder}
               disabled={useAgentAddress}
               autoComplete="address-line2"
               handleChange={(value: string) => setMemberData({ ...memberData, addressLine2: value })}
             />
             <div className="grid-row grid-gap-2">
               <div className="grid-col-12 tablet:grid-col-6">
-                <Content>{state.displayContent.memberAddressCity.contentMd}</Content>
+                <Content>{Config.businessFormationDefaults.memberModalCityLabel}</Content>
                 <GenericTextField
                   fieldName="memberAddressCity"
                   autoComplete="address-level2"
                   value={memberData.addressCity}
                   disabled={useAgentAddress}
                   required={true}
-                  placeholder={state.displayContent.memberAddressCity.placeholder}
+                  placeholder={Config.businessFormationDefaults.memberModalCityPlaceholder}
                   handleChange={(value: string) => setMemberData({ ...memberData, addressCity: value })}
                   error={memberErrorMap["memberAddressCity"].invalid}
                   onValidation={onValidation}
@@ -223,11 +223,11 @@ export const MembersModal = (props: Props): ReactElement => {
                 />
               </div>
               <div className="grid-col-6 tablet:grid-col-3">
-                <Content>{state.displayContent.memberAddressState.contentMd}</Content>
+                <Content>{Config.businessFormationDefaults.memberModalStateLabel}</Content>
                 <StateDropdown
                   fieldName="memberAddressState"
                   value={memberData.addressState}
-                  placeholder={state.displayContent.memberAddressState.placeholder}
+                  placeholder={Config.businessFormationDefaults.memberModalStatePlaceholder}
                   validationText={Config.businessFormationDefaults.addressStateErrorText}
                   onSelect={(value: string | undefined) =>
                     setMemberData({ ...memberData, addressState: value ?? "" })
@@ -240,7 +240,7 @@ export const MembersModal = (props: Props): ReactElement => {
                 />
               </div>
               <div className="grid-col-6 tablet:grid-col-3">
-                <Content>{state.displayContent.memberAddressZipCode.contentMd}</Content>
+                <Content>{Config.businessFormationDefaults.memberModalZipCodeLabel}</Content>
                 <GenericTextField
                   numericProps={{
                     maxLength: 5,
@@ -254,7 +254,7 @@ export const MembersModal = (props: Props): ReactElement => {
                   validationText={Config.businessFormationDefaults.addressZipCodeErrorText}
                   onValidation={onValidation}
                   required={true}
-                  placeholder={state.displayContent.memberAddressZipCode.placeholder}
+                  placeholder={Config.businessFormationDefaults.memberModalZipCodePlaceholder}
                 />
               </div>
             </div>

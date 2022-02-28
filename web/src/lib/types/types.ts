@@ -98,7 +98,6 @@ export type FormationDisplayContent = {
   businessNameAndLegalStructure: {
     contentMd: string;
   };
-  businessSuffix: TextFieldContent;
   businessStartDate: {
     contentMd: string;
   };
@@ -119,12 +118,6 @@ export type FormationDisplayContent = {
   agentOfficeAddressCity: TextFieldContent;
   agentOfficeAddressState: TextFieldContent;
   agentOfficeAddressZipCode: TextFieldContent;
-  memberName: TextFieldContent;
-  memberAddressLine1: TextFieldContent;
-  memberAddressLine2: TextFieldContent;
-  memberAddressCity: TextFieldContent;
-  memberAddressState: TextFieldContent;
-  memberAddressZipCode: TextFieldContent;
   members: TextFieldContent;
   membersModal: {
     contentMd: string;
@@ -139,12 +132,6 @@ export type FormationDisplayContent = {
     contentMd: string;
   };
   notification: {
-    contentMd: string;
-  };
-  optInAnnualReport: {
-    contentMd: string;
-  };
-  optInCorpWatch: {
     contentMd: string;
   };
   officialFormationDocument: {
@@ -179,10 +166,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   },
   businessNameAndLegalStructure: {
     contentMd: "",
-  },
-  businessSuffix: {
-    contentMd: "",
-    placeholder: "",
   },
   businessStartDate: {
     contentMd: "",
@@ -240,30 +223,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     contentMd: "",
     placeholder: "",
   },
-  memberName: {
-    contentMd: "",
-    placeholder: "",
-  },
-  memberAddressLine1: {
-    contentMd: "",
-    placeholder: "",
-  },
-  memberAddressLine2: {
-    contentMd: "",
-    placeholder: "",
-  },
-  memberAddressCity: {
-    contentMd: "",
-    placeholder: "",
-  },
-  memberAddressState: {
-    contentMd: "",
-    placeholder: "",
-  },
-  memberAddressZipCode: {
-    contentMd: "",
-    placeholder: "",
-  },
   members: {
     contentMd: "",
     placeholder: "",
@@ -287,12 +246,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     contentMd: "",
   },
   notification: {
-    contentMd: "",
-  },
-  optInAnnualReport: {
-    contentMd: "",
-  },
-  optInCorpWatch: {
     contentMd: "",
   },
   officialFormationDocument: {

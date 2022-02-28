@@ -279,10 +279,6 @@ export const generateFormationDisplayContent = (
   businessNameAndLegalStructure: {
     contentMd: `some-business-name-and-legal-structure-content-${randomInt()}`,
   },
-  businessSuffix: {
-    contentMd: `some-business-suffix-content-${randomInt()}`,
-    placeholder: `some-business-suffix-placeholder-${randomInt()}`,
-  },
   businessStartDate: {
     contentMd: `some-business-start-date-content-${randomInt()}`,
   },
@@ -339,30 +335,6 @@ export const generateFormationDisplayContent = (
     contentMd: `some-agent-office-address-zip-code-content-${randomInt()}`,
     placeholder: `some-agent-office-address-zip-code-placeholder-${randomInt()}`,
   },
-  memberName: {
-    contentMd: `some-memberName-content-${randomInt()}`,
-    placeholder: `some-memberName-placeholder-${randomInt()}`,
-  },
-  memberAddressLine1: {
-    contentMd: `some-memberAddressLine1-content-${randomInt()}`,
-    placeholder: `some-memberAddressLine1-placeholder-${randomInt()}`,
-  },
-  memberAddressLine2: {
-    contentMd: `some-memberAddressLine2-content-${randomInt()}`,
-    placeholder: `some-memberAddressLine2-placeholder-${randomInt()}`,
-  },
-  memberAddressCity: {
-    contentMd: `some-memberAddressCity-content-${randomInt()}`,
-    placeholder: `some-memberAddressCity-placeholder-${randomInt()}`,
-  },
-  memberAddressState: {
-    contentMd: `some-memberAddressState-content-${randomInt()}`,
-    placeholder: `some-memberAddressState-placeholder-${randomInt()}`,
-  },
-  memberAddressZipCode: {
-    contentMd: `some-memberAddressZipCode-content-${randomInt()}`,
-    placeholder: `some-memberAddressZipCode-placeholder-${randomInt()}`,
-  },
   members: {
     contentMd: `some-members-content-${randomInt()}`,
     placeholder: `some-members-placeholder-${randomInt()}`,
@@ -387,12 +359,6 @@ export const generateFormationDisplayContent = (
   },
   notification: {
     contentMd: `some-notification-${randomInt()}`,
-  },
-  optInAnnualReport: {
-    contentMd: `some-opt-in-annual-report-content-${randomInt()}`,
-  },
-  optInCorpWatch: {
-    contentMd: `some-opt-in-corp-watch-content-${randomInt()}`,
   },
   officialFormationDocument: {
     contentMd: `some-official-formation-document-content-${randomInt()}`,
