@@ -13,7 +13,7 @@ import {
   getSectionPositions,
   setPreferencesCloseSection,
 } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
 import { CongratulatoryDialog } from "./CongratulatoryDialog";
 import { Tag } from "./njwds-extended/Tag";
@@ -99,7 +99,7 @@ export const TaskHeader = (props: Props): ReactElement => {
                 src="/img/required-task-icon.svg"
                 alt=""
               />
-              {Defaults.taskDefaults.requiredTagText}
+              {Config.taskDefaults.requiredTagText}
             </Tag>
           </div>
         )}

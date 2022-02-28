@@ -15,7 +15,7 @@ import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -61,10 +61,10 @@ const RoadmapPage = (props: Props): ReactElement => {
 
   const getHeader = (): string => {
     return userData?.profileData.businessName
-      ? templateEval(Defaults.roadmapDefaults.roadmapTitleTemplate, {
+      ? templateEval(Config.roadmapDefaults.roadmapTitleTemplate, {
           businessName: userData.profileData.businessName,
         })
-      : Defaults.roadmapDefaults.roadmapTitleNotSet;
+      : Config.roadmapDefaults.roadmapTitleNotSet;
   };
 
   return (
@@ -128,9 +128,9 @@ const RoadmapPage = (props: Props): ReactElement => {
           }}
         >
           <div data-testid="toast-alert-SUCCESS" className="h3-styling">
-            {Defaults.profileDefaults.successTextHeader}
+            {Config.profileDefaults.successTextHeader}
           </div>
-          <div className="padding-top-05">{Defaults.profileDefaults.successTextBody}</div>
+          <div className="padding-top-05">{Config.profileDefaults.successTextBody}</div>
         </ToastAlert>
       )}
     </PageSkeleton>

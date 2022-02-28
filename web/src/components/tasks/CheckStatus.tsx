@@ -3,7 +3,7 @@ import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
@@ -32,9 +32,9 @@ interface Props {
 }
 
 const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {
-  NOT_FOUND: Defaults.licenseSearchTask.errorTextNotFound,
-  FIELDS_REQUIRED: Defaults.licenseSearchTask.errorTextFieldsRequired,
-  SEARCH_FAILED: Defaults.searchBusinessNameTask.errorTextSearchFailed,
+  NOT_FOUND: Config.licenseSearchTask.errorTextNotFound,
+  FIELDS_REQUIRED: Config.licenseSearchTask.errorTextFieldsRequired,
+  SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
 };
 
 export const CheckStatus = (props: Props): ReactElement => {
@@ -82,16 +82,16 @@ export const CheckStatus = (props: Props): ReactElement => {
   return (
     <>
       {getErrorAlert()}
-      <p className="margin-bottom-4 margin-top-3">{Defaults.licenseSearchTask.checkStatusText}</p>
+      <p className="margin-bottom-4 margin-top-3">{Config.licenseSearchTask.checkStatusText}</p>
       <form onSubmit={onSubmit}>
         <div className="margin-bottom-2">
-          <label htmlFor="business-name">{Defaults.licenseSearchTask.businessNameLabel}</label>
+          <label htmlFor="business-name">{Config.licenseSearchTask.businessNameLabel}</label>
           <TextField
             value={formValues.name}
             onChange={handleChange("name")}
             variant="outlined"
             fullWidth
-            placeholder={Defaults.licenseSearchTask.businessNamePlaceholder}
+            placeholder={Config.licenseSearchTask.businessNamePlaceholder}
             inputProps={{
               id: "business-name",
               "data-testid": "business-name",
@@ -99,13 +99,13 @@ export const CheckStatus = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-bottom-2">
-          <label htmlFor="address-1">{Defaults.licenseSearchTask.address1Label}</label>
+          <label htmlFor="address-1">{Config.licenseSearchTask.address1Label}</label>
           <TextField
             value={formValues.addressLine1}
             onChange={handleChange("addressLine1")}
             variant="outlined"
             fullWidth
-            placeholder={Defaults.licenseSearchTask.address1Placeholder}
+            placeholder={Config.licenseSearchTask.address1Placeholder}
             inputProps={{
               id: "address-1",
               "data-testid": "address-1",
@@ -113,13 +113,13 @@ export const CheckStatus = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-bottom-2">
-          <label htmlFor="address-2">{Defaults.licenseSearchTask.address2Label}</label>
+          <label htmlFor="address-2">{Config.licenseSearchTask.address2Label}</label>
           <TextField
             value={formValues.addressLine2}
             onChange={handleChange("addressLine2")}
             variant="outlined"
             fullWidth
-            placeholder={Defaults.licenseSearchTask.address2Placeholder}
+            placeholder={Config.licenseSearchTask.address2Placeholder}
             inputProps={{
               id: "address-2",
               "data-testid": "address-2",
@@ -128,13 +128,13 @@ export const CheckStatus = (props: Props): ReactElement => {
         </div>
         <div className="fdr flex-half">
           <div className="flex-half padding-right-1">
-            <label htmlFor="city">{Defaults.licenseSearchTask.zipCodeLabel}</label>
+            <label htmlFor="city">{Config.licenseSearchTask.zipCodeLabel}</label>
             <TextField
               value={formValues.zipCode}
               onChange={handleChange("zipCode")}
               variant="outlined"
               fullWidth
-              placeholder={Defaults.licenseSearchTask.zipCodePlaceholder}
+              placeholder={Config.licenseSearchTask.zipCodePlaceholder}
               inputProps={{
                 id: "zipcode",
                 "data-testid": "zipcode",
@@ -144,13 +144,13 @@ export const CheckStatus = (props: Props): ReactElement => {
             />
           </div>
           <div className="flex-half padding-left-1">
-            <label htmlFor="state">{Defaults.licenseSearchTask.stateLabel}</label>
+            <label htmlFor="state">{Config.licenseSearchTask.stateLabel}</label>
             <TextField
               value={"New Jersey"}
               onChange={() => {}}
               variant="outlined"
               fullWidth
-              placeholder={Defaults.licenseSearchTask.statePlaceholder}
+              placeholder={Config.licenseSearchTask.statePlaceholder}
               inputProps={{
                 id: "state",
                 "data-testid": "state",
@@ -173,7 +173,7 @@ export const CheckStatus = (props: Props): ReactElement => {
               loading={props.isLoading}
               dataTestid="check-status-submit"
             >
-              {Defaults.licenseSearchTask.submitText}
+              {Config.licenseSearchTask.submitText}
             </Button>
           </div>
         </div>

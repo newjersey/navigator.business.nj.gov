@@ -4,7 +4,7 @@ import { generateRoadmap, generateStep, generateTask, generateUser } from "@/tes
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
@@ -43,14 +43,14 @@ describe("<NavBar />", () => {
       const subject = render(
         <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
       );
-      expect(subject.getByText(Defaults.navigationDefaults.registerButton)).toBeInTheDocument();
+      expect(subject.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
     });
 
     it("goes to onboarding when signup is clicked", () => {
       const subject = render(
         <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
       );
-      fireEvent.click(subject.getByText(Defaults.navigationDefaults.registerButton));
+      fireEvent.click(subject.getByText(Config.navigationDefaults.registerButton));
       expect(mockPush).toHaveBeenCalledWith("/onboarding");
     });
   });
@@ -72,7 +72,7 @@ describe("<NavBar />", () => {
     it("displays default text if no user data", () => {
       useUndefinedUserData();
       const subject = renderFunc();
-      expect(subject.getAllByText(Defaults.navigationDefaults.myNJAccountText).length).toBeGreaterThan(0);
+      expect(subject.getAllByText(Config.navigationDefaults.myNJAccountText).length).toBeGreaterThan(0);
     });
   };
 
@@ -95,8 +95,8 @@ describe("<NavBar />", () => {
       const subject = renderDesktopNav();
       const menuEl = subject.getByText(user.name);
       expect(menuEl).toBeInTheDocument();
-      expect(subject.queryByText(Defaults.navigationDefaults.logoutButton)).not.toBeInTheDocument();
-      expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
+      expect(subject.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
+      expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
@@ -108,13 +108,13 @@ describe("<NavBar />", () => {
       const menuEl = subject.getByText(user.name);
 
       userEvent.click(menuEl);
-      expect(subject.getByText(Defaults.navigationDefaults.logoutButton)).toBeInTheDocument();
-      expect(subject.getByText(Defaults.navigationDefaults.myNJAccountText)).toBeInTheDocument();
+      expect(subject.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
+      expect(subject.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
 
       userEvent.click(menuEl);
       await waitFor(() => {
-        expect(subject.queryByText(Defaults.navigationDefaults.logoutButton)).not.toBeInTheDocument();
-        expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
+        expect(subject.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
+        expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
       });
     });
   });
@@ -141,7 +141,7 @@ describe("<NavBar />", () => {
     it("does not display operate section", () => {
       useMockUserData({});
       const subject = renderMobileRoadmapNav();
-      const sectionName = Defaults.sectionHeaders.OPERATE.toLowerCase();
+      const sectionName = Config.sectionHeaders.OPERATE.toLowerCase();
       expect(subject.queryByTestId(`section-${sectionName}`)).not.toBeInTheDocument();
     });
   });
@@ -189,9 +189,9 @@ describe("<NavBar />", () => {
       );
       const subject = renderMobileTaskNav();
       expect(subject.queryByText("step1")).toBeInTheDocument();
-      expect(subject.queryByText(Defaults.sectionHeaders.PLAN)).toBeInTheDocument();
-      expect(subject.queryByText(Defaults.sectionHeaders.START)).toBeInTheDocument();
-      expect(subject.queryByText(Defaults.sectionHeaders.OPERATE)).not.toBeInTheDocument();
+      expect(subject.queryByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
+      expect(subject.queryByText(Config.sectionHeaders.START)).toBeInTheDocument();
+      expect(subject.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
     });
 
     it("displays mini-roadmap with OPERATE when operateReferences does exists", () => {
@@ -206,10 +206,10 @@ describe("<NavBar />", () => {
       );
 
       const subject = renderMobileTaskNav({ includeOperateRef: true });
-      expect(subject.queryByText(Defaults.sectionHeaders.OPERATE)).toBeInTheDocument();
+      expect(subject.queryByText(Config.sectionHeaders.OPERATE)).toBeInTheDocument();
       expect(subject.queryByText("step1")).not.toBeInTheDocument();
-      expect(subject.queryByText(Defaults.sectionHeaders.PLAN)).not.toBeInTheDocument();
-      expect(subject.queryByText(Defaults.sectionHeaders.START)).not.toBeInTheDocument();
+      expect(subject.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
+      expect(subject.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
     });
 
     it("hide drawer when mini-roadmap task is clicked", async () => {
@@ -231,17 +231,17 @@ describe("<NavBar />", () => {
     it("opens and closes user profile links", async () => {
       useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
       const subject = renderMobileTaskNav();
-      expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).not.toBeVisible();
-      expect(subject.queryByText(Defaults.navigationDefaults.profileLinkText)).not.toBeVisible();
+      expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeVisible();
+      expect(subject.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeVisible();
 
       fireEvent.click(subject.getByText("Grace Hopper"));
-      expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).toBeVisible();
-      expect(subject.queryByText(Defaults.navigationDefaults.profileLinkText)).toBeVisible();
+      expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).toBeVisible();
+      expect(subject.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
 
       fireEvent.click(subject.getByText("Grace Hopper"));
       await waitFor(() => {
-        expect(subject.queryByText(Defaults.navigationDefaults.myNJAccountText)).not.toBeVisible();
-        expect(subject.queryByText(Defaults.navigationDefaults.profileLinkText)).not.toBeVisible();
+        expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeVisible();
+        expect(subject.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeVisible();
       });
     });
 

@@ -16,7 +16,6 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["src/components/*"],
-      "@/display-defaults/*": ["src/display-defaults/*"],
       "@/lib/*": ["src/lib/*"],
       "@/test/*": ["test/*"],
       "@/pages/*": ["src/pages/*"],

@@ -1,6 +1,6 @@
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileDataContext } from "@/pages/onboarding";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
 import { GenericTextField } from "../GenericTextField";
@@ -49,36 +49,36 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
 
   return (
     <div className="tablet:padding-2">
-      <p className="padding-bottom-1">{Defaults.selfRegistration.signupDescriptionText}</p>
+      <p className="padding-bottom-1">{Config.selfRegistration.signupDescriptionText}</p>
       <div className="margin-top-2">
-        <label htmlFor="name">{Defaults.selfRegistration.nameFieldLabel}</label>
+        <label htmlFor="name">{Config.selfRegistration.nameFieldLabel}</label>
         <GenericTextField
           value={state.user?.name}
           fieldName={"name"}
           error={props.fieldStates["name"].invalid}
           onValidation={onValidation}
-          validationText={Defaults.selfRegistration.errorTextRequiredFields}
+          validationText={Config.selfRegistration.errorTextRequiredFields}
           required={true}
-          placeholder={Defaults.selfRegistration.nameFieldPlaceholder}
+          placeholder={Config.selfRegistration.nameFieldPlaceholder}
           handleChange={handleName}
         />
       </div>
       <div className="margin-top-2">
-        <label htmlFor="email">{Defaults.selfRegistration.emailFieldLabel}</label>
+        <label htmlFor="email">{Config.selfRegistration.emailFieldLabel}</label>
         <GenericTextField
           value={email}
           fieldName={"email"}
           error={props.fieldStates["email"].invalid}
           handleChange={handleEmail()}
           onValidation={onValidation}
-          validationText={Defaults.selfRegistration.errorTextEmailsNotMatching}
+          validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           required={true}
           additionalValidation={(value) => (confirmEmail ? value == confirmEmail : true)}
-          placeholder={Defaults.selfRegistration.emailFieldPlaceholder}
+          placeholder={Config.selfRegistration.emailFieldPlaceholder}
         />
       </div>
       <div className="margin-y-2">
-        <label htmlFor="confirm-email">{Defaults.selfRegistration.confirmEmailFieldLabel}</label>
+        <label htmlFor="confirm-email">{Config.selfRegistration.confirmEmailFieldLabel}</label>
         <GenericTextField
           value={confirmEmail}
           error={props.fieldStates["email"].invalid}
@@ -86,15 +86,15 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           onValidation={(_, invalid) => onValidation("email", invalid)}
           required={true}
           additionalValidation={(value) => value == email}
-          validationText={Defaults.selfRegistration.errorTextEmailsNotMatching}
-          placeholder={Defaults.selfRegistration.confirmEmailFieldPlaceholder}
+          validationText={Config.selfRegistration.errorTextEmailsNotMatching}
+          placeholder={Config.selfRegistration.confirmEmailFieldPlaceholder}
           fieldName={"confirm-email"}
         />
       </div>
       <FormGroup>
         <FormControlLabel
           style={{ display: "table" }}
-          label={Defaults.selfRegistration.newsletterCheckboxLabel}
+          label={Config.selfRegistration.newsletterCheckboxLabel}
           control={
             <div style={{ display: "table-cell", width: "42px" }}>
               <Checkbox
@@ -106,7 +106,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
         />
         <FormControlLabel
           style={{ display: "table" }}
-          label={Defaults.selfRegistration.userTestingCheckboxLabel}
+          label={Config.selfRegistration.userTestingCheckboxLabel}
           control={
             <div style={{ display: "table-cell", width: "42px" }}>
               <Checkbox

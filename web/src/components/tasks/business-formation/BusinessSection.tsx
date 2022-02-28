@@ -4,7 +4,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -142,7 +142,7 @@ export const BusinessSection = (): ReactElement => {
             widthAutoOnMobile
             heightAutoOnMobile={isMobile}
           >
-            {Defaults.businessFormationDefaults.initialNextButtonText}
+            {Config.businessFormationDefaults.initialNextButtonText}
           </Button>
         </div>
       </div>

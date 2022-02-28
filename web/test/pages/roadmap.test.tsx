@@ -21,7 +21,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
@@ -73,14 +73,14 @@ describe("roadmap page", () => {
     setMockUserDataResponse({ userData: undefined });
     const subject = renderRoadmapPage();
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText(Defaults.roadmapDefaults.roadmapTitleNotSet)).toBeNull();
+    expect(subject.queryByText(Config.roadmapDefaults.roadmapTitleNotSet)).toBeNull();
   });
 
   it("shows loading page if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     const subject = renderRoadmapPage();
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText(Defaults.roadmapDefaults.roadmapTitleNotSet)).toBeNull();
+    expect(subject.queryByText(Config.roadmapDefaults.roadmapTitleNotSet)).toBeNull();
   });
 
   it("shows user data and loading spinner when user data loaded but not roadmap", () => {
@@ -102,7 +102,7 @@ describe("roadmap page", () => {
     useMockRouter({ isReady: true, query: { success: "true" } });
     const subject = renderRoadmapPage();
     await waitFor(() =>
-      expect(subject.getByText(Defaults.profileDefaults.successTextHeader)).toBeInTheDocument()
+      expect(subject.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument()
     );
   });
 
@@ -122,7 +122,7 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent(
-        Defaults.roadmapDefaults.greyBoxNotSetText
+        Config.roadmapDefaults.greyBoxNotSetText
       );
     });
 
@@ -141,7 +141,7 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByTestId("mini-profile-industryId")).toHaveTextContent(
-        Defaults.roadmapDefaults.greyBoxNotSetText
+        Config.roadmapDefaults.greyBoxNotSetText
       );
     });
 
@@ -162,7 +162,7 @@ describe("roadmap page", () => {
       const subject = renderRoadmapPage();
       expect(subject.getByText("Not set")).toBeInTheDocument();
       expect(subject.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
-        Defaults.roadmapDefaults.greyBoxNotSetText
+        Config.roadmapDefaults.greyBoxNotSetText
       );
     });
 
@@ -182,7 +182,7 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.getByTestId("mini-profile-location")).toHaveTextContent(
-        Defaults.roadmapDefaults.greyBoxNotSetText
+        Config.roadmapDefaults.greyBoxNotSetText
       );
     });
 
@@ -238,13 +238,13 @@ describe("roadmap page", () => {
       const subject = renderRoadmapPage();
 
       expect(subject.getByTestId("mini-profile-employerId")).toHaveTextContent(
-        Defaults.roadmapDefaults.greyBoxNotEnteredText
+        Config.roadmapDefaults.greyBoxNotEnteredText
       );
       expect(subject.getByTestId("mini-profile-taxId")).toHaveTextContent(
-        Defaults.roadmapDefaults.greyBoxNotEnteredText
+        Config.roadmapDefaults.greyBoxNotEnteredText
       );
       expect(subject.getByTestId("mini-profile-notes")).toHaveTextContent(
-        Defaults.roadmapDefaults.greyBoxNotEnteredText
+        Config.roadmapDefaults.greyBoxNotEnteredText
       );
     });
 
@@ -270,7 +270,7 @@ describe("roadmap page", () => {
       expect(subject.queryByText("111111111")).not.toBeInTheDocument();
       expect(subject.queryByText("some notes")).not.toBeInTheDocument();
 
-      fireEvent.click(subject.getByText(Defaults.roadmapDefaults.greyBoxViewMoreText));
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.greyBoxViewMoreText));
       expect(subject.queryByText("some name")).toBeInTheDocument();
       expect(subject.queryByText("C Corporation")).toBeInTheDocument();
       expect(subject.queryByText("Franklin")).toBeInTheDocument();
@@ -280,7 +280,7 @@ describe("roadmap page", () => {
       expect(subject.queryByText("111111111")).toBeInTheDocument();
       expect(subject.queryByText("some notes")).toBeInTheDocument();
 
-      fireEvent.click(subject.getByText(Defaults.roadmapDefaults.greyBoxViewLessText));
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.greyBoxViewLessText));
       expect(subject.queryByText("123456790")).not.toBeInTheDocument();
       expect(subject.queryByText("98-76543210")).not.toBeInTheDocument();
       expect(subject.queryByText("111111111")).not.toBeInTheDocument();
@@ -434,8 +434,8 @@ describe("roadmap page", () => {
 
     expect(allTasks.length).toEqual(2);
 
-    expect(within(allTasks[0]).getByLabelText(Defaults.taskDefaults.requiredTagText)).toBeVisible();
-    expect(within(allTasks[1]).queryByLabelText(Defaults.taskDefaults.requiredTagText)).not.toBeVisible();
+    expect(within(allTasks[0]).getByLabelText(Config.taskDefaults.requiredTagText)).toBeVisible();
+    expect(within(allTasks[1]).queryByLabelText(Config.taskDefaults.requiredTagText)).not.toBeVisible();
   });
 
   it("renders tooltip when hovering over a required task's icon", async () => {
@@ -450,15 +450,15 @@ describe("roadmap page", () => {
 
     const subject = renderRoadmapPage();
     await waitFor(() =>
-      expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).not.toBeInTheDocument()
+      expect(subject.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument()
     );
 
-    const requiredIcon = subject.getByLabelText(Defaults.taskDefaults.requiredTagText);
+    const requiredIcon = subject.getByLabelText(Config.taskDefaults.requiredTagText);
     fireEvent.mouseOver(requiredIcon);
 
     await waitFor(() => {
-      expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).toBeInTheDocument();
-      expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).toBeVisible();
+      expect(subject.queryByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
+      expect(subject.queryByText(Config.taskDefaults.requiredTagText)).toBeVisible();
     });
   });
 
@@ -474,7 +474,7 @@ describe("roadmap page", () => {
       </WithStatefulUserData>
     );
 
-    fireEvent.click(subject.getByText(Defaults.roadmapDefaults.graduationButtonText));
+    fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
     expect(currentUserData()).toEqual({
       ...userData,
       profileData: {

@@ -16,7 +16,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
@@ -82,9 +82,7 @@ describe("task page", () => {
     expect(subject.getByText("destination: city clerk")).toBeInTheDocument();
     expect(subject.getByText("Submit The Form Here")).toBeInTheDocument();
 
-    expect(
-      subject.queryByText(Defaults.taskDefaults.backToRoadmapText, { exact: false })
-    ).toBeInTheDocument();
+    expect(subject.queryByText(Config.taskDefaults.backToRoadmapText, { exact: false })).toBeInTheDocument();
   });
 
   it("does not show button if no link available", () => {
@@ -198,7 +196,7 @@ describe("task page", () => {
 
     expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
     const link = subject.queryByText(
-      `${Defaults.sectionHeaders["START"]} ${Defaults.roadmapDefaults.congratulatorModalLinkText}`
+      `${Config.sectionHeaders["START"]} ${Config.roadmapDefaults.congratulatorModalLinkText}`
     );
     expect(link).toBeInTheDocument();
     fireEvent.click(link as HTMLElement);
@@ -207,12 +205,12 @@ describe("task page", () => {
 
   it("displays required tag in header if task is required", () => {
     const subject = renderPage(generateTask({ required: true }));
-    expect(subject.getByText(Defaults.taskDefaults.requiredTagText)).toBeInTheDocument();
+    expect(subject.getByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
   });
 
   it("does not display required tag in header if task is not required", () => {
     const subject = renderPage(generateTask({ required: false }));
-    expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
   });
 
   it("overrides required tag in header from task in roadmap", () => {
@@ -223,7 +221,7 @@ describe("task page", () => {
       steps: [generateStep({ tasks: [taskInRoadmap], section: "PLAN" })],
     });
     const subject = renderPage(taskStaticGeneration);
-    expect(subject.queryByText(Defaults.taskDefaults.requiredTagText)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
   });
 
   it("displays issuing form and agency in task footer when they are defined values", () => {
@@ -231,32 +229,32 @@ describe("task page", () => {
     const formName = "xY39";
     const subject = renderPage(generateTask({ issuingAgency, formName }));
 
-    expect(subject.getByText(`${Defaults.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    expect(subject.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
     expect(subject.getByText(issuingAgency)).toBeInTheDocument();
 
-    expect(subject.getByText(`${Defaults.taskDefaults.formNameText}:`)).toBeInTheDocument();
+    expect(subject.getByText(`${Config.taskDefaults.formNameText}:`)).toBeInTheDocument();
     expect(subject.getByText(formName)).toBeInTheDocument();
   });
 
   it("does not display issuing agency in task footer when it is undefined value", () => {
     const subject = renderPage(generateTask({ issuingAgency: undefined }));
 
-    expect(subject.queryByText(`${Defaults.taskDefaults.formNameText}:`)).toBeInTheDocument();
-    expect(subject.queryByText(`${Defaults.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
+    expect(subject.queryByText(`${Config.taskDefaults.formNameText}:`)).toBeInTheDocument();
+    expect(subject.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
   });
 
   it("does not display form name in task footer when it is undefined value", () => {
     const subject = renderPage(generateTask({ formName: undefined }));
 
-    expect(subject.queryByText(`${Defaults.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
-    expect(subject.queryByText(`${Defaults.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
+    expect(subject.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    expect(subject.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
   });
 
   it("does not display form name or agency in task footer when both are undefined", () => {
     const subject = renderPage(generateTask({ formName: undefined, issuingAgency: undefined }));
 
-    expect(subject.queryByText(`${Defaults.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
-    expect(subject.queryByText(`${Defaults.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
+    expect(subject.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
+    expect(subject.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
   });
 
   it("shows congratulatory modal without link when START section completed", () => {
@@ -291,7 +289,7 @@ describe("task page", () => {
 
     expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
     expect(
-      subject.queryByText(Defaults.roadmapDefaults.congratulatorModalLinkText, { exact: false })
+      subject.queryByText(Config.roadmapDefaults.congratulatorModalLinkText, { exact: false })
     ).not.toBeInTheDocument();
   });
 
@@ -393,28 +391,28 @@ describe("task page", () => {
 
     it("renders only Next Task button for first task", async () => {
       subject = renderPage(taskOne);
-      expect(subject.getByText(Defaults.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
-      expect(subject.queryByText(Defaults.taskDefaults.previousTaskButtonText)).not.toBeVisible();
+      expect(subject.getByText(Config.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
+      expect(subject.queryByText(Config.taskDefaults.previousTaskButtonText)).not.toBeVisible();
     });
 
     it("renders only Previous Task button at last task", async () => {
       subject = renderPage(taskThree);
-      expect(subject.queryByText(Defaults.taskDefaults.nextTaskButtonText)).not.toBeVisible();
-      expect(subject.getByText(Defaults.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
+      expect(subject.queryByText(Config.taskDefaults.nextTaskButtonText)).not.toBeVisible();
+      expect(subject.getByText(Config.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
     });
 
     it("renders both Next and Previous buttons for task in the middle", async () => {
       subject = renderPage(taskTwo);
-      expect(subject.getByText(Defaults.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
-      expect(subject.getByText(Defaults.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
+      expect(subject.getByText(Config.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
+      expect(subject.getByText(Config.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
     });
 
     it("links to next and previous tasks", () => {
       subject = renderPage(taskTwo);
-      fireEvent.click(subject.getByText(Defaults.taskDefaults.nextTaskButtonText));
+      fireEvent.click(subject.getByText(Config.taskDefaults.nextTaskButtonText));
       expect(mockPush).toHaveBeenCalledWith("/tasks/task-3");
 
-      fireEvent.click(subject.getByText(Defaults.taskDefaults.previousTaskButtonText));
+      fireEvent.click(subject.getByText(Config.taskDefaults.previousTaskButtonText));
       expect(mockPush).toHaveBeenCalledWith("/tasks/task-1");
     });
   });
@@ -438,10 +436,10 @@ describe("task page", () => {
       useMockRoadmapWithTask(task);
       subject = renderPage(task);
       expect(
-        subject.queryByText(Defaults.taskDefaults.unlockedBySingular, { exact: false })
+        subject.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Defaults.taskDefaults.unlockedByPlural, { exact: false })
+        subject.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
       ).not.toBeInTheDocument();
     });
 
@@ -452,10 +450,10 @@ describe("task page", () => {
       useMockRoadmapWithTask(task);
       subject = renderPage(task);
       expect(
-        subject.queryByText(Defaults.taskDefaults.unlockedByPlural, { exact: false })
+        subject.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Defaults.taskDefaults.unlockedBySingular, { exact: false })
+        subject.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
       ).toBeInTheDocument();
       expect(subject.queryByText("Do this first", { exact: false })).toBeInTheDocument();
       expect(subject.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
@@ -474,11 +472,9 @@ describe("task page", () => {
       useMockRoadmapWithTask(task);
       subject = renderPage(task);
 
+      expect(subject.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })).toBeInTheDocument();
       expect(
-        subject.queryByText(Defaults.taskDefaults.unlockedByPlural, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        subject.queryByText(Defaults.taskDefaults.unlockedBySingular, { exact: false })
+        subject.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
       ).not.toBeInTheDocument();
       expect(subject.queryByText("Do this first", { exact: false })).toBeInTheDocument();
       expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();
@@ -514,10 +510,10 @@ describe("task page", () => {
       subject = renderPage(task);
 
       expect(
-        subject.queryByText(Defaults.taskDefaults.unlockedByPlural, { exact: false })
+        subject.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Defaults.taskDefaults.unlockedBySingular, { exact: false })
+        subject.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
       ).toBeInTheDocument();
       expect(subject.queryByText("Do this first", { exact: false })).not.toBeInTheDocument();
       expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();

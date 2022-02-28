@@ -10,7 +10,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { PageHelpers, renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyUserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, waitFor, within } from "@testing-library/react";
 import dayjs from "dayjs";
@@ -36,13 +36,13 @@ describe("onboarding - owning a business", () => {
   it("uses special template eval for step 1 label", async () => {
     const { subject, page } = renderPage({});
     expect(
-      subject.getByText(templateEval(Defaults.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
+      subject.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
     ).toBeInTheDocument();
     page.chooseRadio("has-existing-business-true");
     await page.visitStep2();
     expect(
       subject.getByText(
-        templateEval(Defaults.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "5" })
+        templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "5" })
       )
     ).toBeInTheDocument();
   });
@@ -77,26 +77,26 @@ describe("onboarding - owning a business", () => {
     const { subject, page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("has-existing-business-true");
     const page1 = within(subject.getByTestId("page-1-form"));
-    expect(page1.queryByText(Defaults.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page1.queryByText(Defaults.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     await page.visitStep2();
     page.selectDate("Date of formation", date);
     const page2 = within(subject.getByTestId("page-2-form"));
-    expect(page2.queryByText(Defaults.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page2.queryByText(Defaults.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     await page.visitStep3();
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     const page3 = within(subject.getByTestId("page-3-form"));
-    expect(page3.queryByText(Defaults.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page3.queryByText(Defaults.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     await page.visitStep4();
     const page4 = within(subject.getByTestId("page-4-form"));
-    expect(page4.queryByText(Defaults.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page4.queryByText(Defaults.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
@@ -105,8 +105,8 @@ describe("onboarding - owning a business", () => {
 
     await page.visitStep5();
     const page5 = within(subject.getByTestId("page-5-form"));
-    expect(page5.queryByText(Defaults.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page5.queryByText(Defaults.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page5.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page5.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("updates the user data after each form page", async () => {
@@ -178,7 +178,7 @@ describe("onboarding - owning a business", () => {
       expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
       expect(
         subject.getByText(
-          templateEval(Defaults.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
+          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
         )
       ).toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
@@ -189,7 +189,7 @@ describe("onboarding - owning a business", () => {
     await waitFor(() => {
       expect(
         subject.queryByText(
-          templateEval(Defaults.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
+          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
         )
       ).not.toBeInTheDocument();
       expect(subject.getByTestId("step-3")).toBeInTheDocument();
@@ -210,7 +210,7 @@ describe("onboarding - owning a business", () => {
       expect(subject.getByTestId("step-3")).toBeInTheDocument();
       expect(subject.queryByTestId("step-4")).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredBusinessName)
+        subject.queryByText(Config.onboardingDefaults.errorTextRequiredBusinessName)
       ).toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
@@ -219,7 +219,7 @@ describe("onboarding - owning a business", () => {
 
     await waitFor(() => {
       expect(
-        subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredBusinessName)
+        subject.queryByText(Config.onboardingDefaults.errorTextRequiredBusinessName)
       ).not.toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
       expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
@@ -237,16 +237,14 @@ describe("onboarding - owning a business", () => {
     await waitFor(() => {
       expect(subject.getByTestId("step-3")).toBeInTheDocument();
       expect(subject.queryByTestId("step-4")).not.toBeInTheDocument();
-      expect(subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
+      expect(subject.queryByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
     page.selectByValue("Sector", "clean-energy");
     page.clickNext();
 
     await waitFor(() => {
-      expect(
-        subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredSector)
-      ).not.toBeInTheDocument();
+      expect(subject.queryByText(Config.onboardingDefaults.errorTextRequiredSector)).not.toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
       expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
     });
@@ -267,7 +265,7 @@ describe("onboarding - owning a business", () => {
     await waitFor(() => {
       expect(subject.getByTestId("step-4")).toBeInTheDocument();
       expect(
-        subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredMunicipality)
+        subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
       ).toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
@@ -275,7 +273,7 @@ describe("onboarding - owning a business", () => {
     page.clickNext();
     await waitFor(() => {
       expect(
-        subject.queryByText(Defaults.onboardingDefaults.errorTextRequiredMunicipality)
+        subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
       ).not.toBeInTheDocument();
       expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
     });
@@ -299,7 +297,7 @@ describe("onboarding - owning a business", () => {
     page.clickNext();
 
     await waitFor(() => {
-      subject.getByText(Defaults.onboardingDefaults.errorTextRequiredExistingEmployees);
+      subject.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees);
       expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 

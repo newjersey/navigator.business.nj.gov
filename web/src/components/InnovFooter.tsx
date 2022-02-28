@@ -1,5 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 export const InnovFooter = (): ReactElement => {
@@ -14,60 +14,60 @@ export const InnovFooter = (): ReactElement => {
             <p className="footer-container">
               <span>
                 <a
-                  href={Defaults.footer.linkOne}
+                  href={Config.footer.linkOne}
                   className="usa-identifier__required-link padding-right-1 footer-link-custom"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {Defaults.footer.linkOneText}
+                  {Config.footer.linkOneText}
                 </a>
               </span>
               <span>
                 <a
-                  href={Defaults.footer.linkTwo}
+                  href={Config.footer.linkTwo}
                   className="usa-identifier__required-link padding-x-1 footer-link-custom"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {Defaults.footer.linkTwoText}
+                  {Config.footer.linkTwoText}
                 </a>
               </span>
               <span>
                 <a
-                  href={Defaults.footer.linkThree}
+                  href={Config.footer.linkThree}
                   className="usa-identifier__required-link padding-left-1 footer-link-custom"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {Defaults.footer.linkThreeText}
+                  {Config.footer.linkThreeText}
                 </a>
               </span>
             </p>
 
             <p className="footer-container footer-divider-top padding-y-105 footer-divider-bottom">
               <span className="padding-right-1">
-                {Defaults.footer.officeTextOne}
+                {Config.footer.officeTextOne}
                 <Icon className="heart-custom">favorite</Icon>
-                {Defaults.footer.officeTextTwo}
+                {Config.footer.officeTextTwo}
                 <a
-                  href={Defaults.footer.officeLink}
+                  href={Config.footer.officeLink}
                   target="_blank"
                   className="usa-identifier__required-link footer-link-custom"
                   rel="noreferrer"
                 >
-                  {Defaults.footer.officeLinkText}
+                  {Config.footer.officeLinkText}
                 </a>
               </span>
 
               <span className="padding-left-1 display-block-mobile display-inline-desktop">
-                {Defaults.footer.creditText}
+                {Config.footer.creditText}
                 <a
-                  href={Defaults.footer.creditLink}
+                  href={Config.footer.creditLink}
                   target="_blank"
                   className="usa-identifier__required-link footer-link-custom"
                   rel="noreferrer"
                 >
-                  {Defaults.footer.creditLinkText}
+                  {Config.footer.creditLinkText}
                 </a>
               </span>
             </p>
@@ -82,13 +82,13 @@ export const InnovFooter = (): ReactElement => {
             <div className="usa-identifier__identity">
               <p className="usa-identifier__identity-domain"></p>
               <p className="usa-identifier__identity-disclaimer footer-text-custom">
-                {Defaults.footer.officeExternalText}
+                {Config.footer.officeExternalText}
               </p>
             </div>
 
             <div className="usa-identifier__logos margin-right-none">
               <a
-                href={Defaults.footer.gitHubLink}
+                href={Config.footer.gitHubLink}
                 className="usa-identifier__logo"
                 target="_blank"
                 rel="noreferrer"
@@ -97,7 +97,7 @@ export const InnovFooter = (): ReactElement => {
                 <Icon className="icon-custom margin-top-1">github</Icon>
               </a>
               <a
-                href={Defaults.footer.twitterLink}
+                href={Config.footer.twitterLink}
                 className="usa-identifier__logo"
                 target="_blank"
                 rel="noreferrer"

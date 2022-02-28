@@ -1,5 +1,5 @@
 import { SectionType } from "@/lib/types/types";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
@@ -15,7 +15,7 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
   const router = useRouter();
   const onClickComplete = () => router.push("/roadmap");
 
-  const publicName = props.nextSectionType ? Defaults.sectionHeaders[props.nextSectionType] : "";
+  const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";
   const hideLink = !props.nextSectionType || props.nextSectionType === "OPERATE";
 
   return (
@@ -52,7 +52,7 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
             style={{ marginTop: "33px", marginBottom: "33px", width: "98px", height: "99px" }}
           />
           <div style={{ fontWeight: 700, fontSize: "26px", lineHeight: "30.55px" }}>
-            {Defaults.roadmapDefaults.congratulatorModalTitle}
+            {Config.roadmapDefaults.congratulatorModalTitle}
           </div>
           <div
             style={{
@@ -63,11 +63,11 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
               letterSpacing: "2.5%",
             }}
           >
-            {Defaults.roadmapDefaults.congratulatorModalHeader}
+            {Config.roadmapDefaults.congratulatorModalHeader}
             <br />
             {!hideLink && (
               <>
-                {Defaults.roadmapDefaults.congratulatorModalBody}{" "}
+                {Config.roadmapDefaults.congratulatorModalBody}{" "}
                 <span
                   role={"button"}
                   tabIndex={0}
@@ -82,7 +82,7 @@ export const CongratulatoryDialog = (props: Props): ReactElement => {
                     cursor: "pointer",
                   }}
                 >
-                  {publicName} {Defaults.roadmapDefaults.congratulatorModalLinkText}
+                  {publicName} {Config.roadmapDefaults.congratulatorModalLinkText}
                 </span>
               </>
             )}

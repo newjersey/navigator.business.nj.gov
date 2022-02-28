@@ -1,6 +1,6 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 
@@ -31,12 +31,12 @@ export const GraduationBox = (): ReactElement => {
         />
       </div>
       <div>
-        <h3>{Defaults.roadmapDefaults.graduationHeader}</h3>
-        <p className="margin-bottom-1 text-base-dark">{Defaults.roadmapDefaults.graduationBodyText}</p>
+        <h3>{Config.roadmapDefaults.graduationHeader}</h3>
+        <p className="margin-bottom-1 text-base-dark">{Config.roadmapDefaults.graduationBodyText}</p>
       </div>
       <div className="mla">
         <Button style="primary" onClick={graduateToOwning}>
-          {Defaults.roadmapDefaults.graduationButtonText}
+          {Config.roadmapDefaults.graduationButtonText}
         </Button>
       </div>
     </div>

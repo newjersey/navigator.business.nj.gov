@@ -10,7 +10,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LicenseStatusResult, NameAndAddress, UserData } from "@businessnjgovnavigator/shared";
 import React, { ReactElement, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
@@ -101,12 +101,12 @@ export const LicenseTask = (props: Props): ReactElement => {
 
   return (
     <div className="flex flex-column">
-      <TaskHeader task={props.task} tooltipText={Defaults.licenseSearchTask.tooltipText} />
+      <TaskHeader task={props.task} tooltipText={Config.licenseSearchTask.tooltipText} />
 
       <Tabs selectedIndex={tabIndex} onSelect={onSelectTab}>
         <TabList>
-          <Tab>{Defaults.licenseSearchTask.tab1Text}</Tab>
-          <Tab>{Defaults.licenseSearchTask.tab2Text}</Tab>
+          <Tab>{Config.licenseSearchTask.tab1Text}</Tab>
+          <Tab>{Config.licenseSearchTask.tab2Text}</Tab>
         </TabList>
 
         <TabPanel>
@@ -124,9 +124,9 @@ export const LicenseTask = (props: Props): ReactElement => {
                 data-testid="cta-primary"
               >
                 <div className="flex flex-column">
-                  <div>{Defaults.licenseSearchTask.primaryCTAFirstLineText}</div>
+                  <div>{Config.licenseSearchTask.primaryCTAFirstLineText}</div>
                   <div className="font-body-3xs margin-top-05">
-                    {Defaults.licenseSearchTask.primaryCTASecondLineText}
+                    {Config.licenseSearchTask.primaryCTASecondLineText}
                   </div>
                 </div>
               </button>
@@ -140,9 +140,9 @@ export const LicenseTask = (props: Props): ReactElement => {
               data-testid="cta-secondary"
             >
               <div className="flex flex-column">
-                <div>{Defaults.licenseSearchTask.secondaryCTAFirstLineText}</div>
+                <div>{Config.licenseSearchTask.secondaryCTAFirstLineText}</div>
                 <div className="font-body-3xs margin-top-05">
-                  {Defaults.licenseSearchTask.secondaryCTASecondLineText}
+                  {Config.licenseSearchTask.secondaryCTASecondLineText}
                 </div>
               </div>
             </button>

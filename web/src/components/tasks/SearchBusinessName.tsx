@@ -10,7 +10,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { NameAvailability, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField } from "@mui/material";
 import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 import { Button } from "../njwds-extended/Button";
@@ -20,8 +20,8 @@ interface Props {
 
 type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
 const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
-  BAD_INPUT: Defaults.searchBusinessNameTask.errorTextBadInput,
-  SEARCH_FAILED: Defaults.searchBusinessNameTask.errorTextSearchFailed,
+  BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
+  SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
 };
 
 export const SearchBusinessName = (props: Props): ReactElement => {
@@ -110,14 +110,14 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     return (
       <div data-testid="available-text">
         <p className="font-body-2xs text-primary">
-          {templateEval(Defaults.searchBusinessNameTask.availableText, { name: nameDisplayedInResults })}
+          {templateEval(Config.searchBusinessNameTask.availableText, { name: nameDisplayedInResults })}
         </p>
         {updateButtonClicked ? (
           <div className="font-body-2xs text-primary margin-top-05" data-testid="name-has-been-updated">
             <span className="padding-right-05">
               <Icon>check</Icon>
             </span>
-            <span>{Defaults.searchBusinessNameTask.nameHasBeenUpdatedText}</span>
+            <span>{Config.searchBusinessNameTask.nameHasBeenUpdatedText}</span>
           </div>
         ) : (
           <button
@@ -125,19 +125,19 @@ export const SearchBusinessName = (props: Props): ReactElement => {
             data-testid="update-name"
             className="usa-button usa-button--unstyled font-body-2xs"
           >
-            <span className="text-underline">{Defaults.searchBusinessNameTask.updateButtonText}</span>
+            <span className="text-underline">{Config.searchBusinessNameTask.updateButtonText}</span>
           </button>
         )}
         <div className="margin-bottom-2">
           <Alert variant="info">
-            <Content>{Defaults.searchBusinessNameTask.officialCheckText}</Content>
+            <Content>{Config.searchBusinessNameTask.officialCheckText}</Content>
             <a
-              href={Defaults.searchBusinessNameTask.officialCheckButtonLink}
+              href={Config.searchBusinessNameTask.officialCheckButtonLink}
               target="_blank"
               rel="noreferrer noopener"
             >
               <button data-testid="official-check" className="usa-button usa-button--secondary margin-top-2">
-                {Defaults.searchBusinessNameTask.officialCheckButtonText}
+                {Config.searchBusinessNameTask.officialCheckButtonText}
               </button>
             </a>
           </Alert>
@@ -150,10 +150,10 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     return (
       <div data-testid="unavailable-text">
         <p className="font-body-2xs text-red">
-          {templateEval(Defaults.searchBusinessNameTask.unavailableText, { name: nameDisplayedInResults })}
+          {templateEval(Config.searchBusinessNameTask.unavailableText, { name: nameDisplayedInResults })}
         </p>
         <p className="font-body-2xs text-red margin-bottom-1">
-          {Defaults.searchBusinessNameTask.similarUnavailableNamesText}
+          {Config.searchBusinessNameTask.similarUnavailableNamesText}
         </p>
         <ul className="usa-list--unstyled font-body-2xs text-red">
           {nameAvailability &&
@@ -183,7 +183,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
               value={name}
               onChange={handleName}
               variant="outlined"
-              placeholder={Defaults.searchBusinessNameTask.placeholderText}
+              placeholder={Config.searchBusinessNameTask.placeholderText}
               inputProps={{
                 "aria-label": "Search business name",
               }}
@@ -199,7 +199,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
                 dataTestid="search-availability"
                 noRightMargin
               >
-                {Defaults.searchBusinessNameTask.searchButtonText}
+                {Config.searchBusinessNameTask.searchButtonText}
               </Button>
             </FormControl>
           </div>

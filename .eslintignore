@@ -8,7 +8,6 @@ web/out/
 web/cypress/plugins
 web/cypress/support
 web/stories
-web/display-defaults/
 node_modules
 
 shared/lib

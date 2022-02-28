@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { getDollarValue } from "@/lib/utils/helpers";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -43,9 +43,9 @@ export const BusinessFormationDocuments = (): ReactElement => {
       <table className="business-formation-table business-formation-document">
         <thead>
           <tr>
-            <th className="text-bold">{Defaults.businessFormationDefaults.documentTableColumn2Label}</th>
+            <th className="text-bold">{Config.businessFormationDefaults.documentTableColumn2Label}</th>
             <th></th>
-            <th className="text-bold">{Defaults.businessFormationDefaults.documentTableColumn3Label}</th>
+            <th className="text-bold">{Config.businessFormationDefaults.documentTableColumn3Label}</th>
           </tr>
         </thead>
         <tbody>
@@ -130,7 +130,7 @@ export const BusinessFormationDocuments = (): ReactElement => {
             <td colSpan={1}>
               <div className="text-align-left">
                 <span className="text-bold">
-                  {Defaults.businessFormationDefaults.documentTableSubTotalCostLabel}
+                  {Config.businessFormationDefaults.documentTableSubTotalCostLabel}
                 </span>{" "}
               </div>
             </td>

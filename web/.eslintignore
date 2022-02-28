@@ -7,7 +7,6 @@ out/
 cypress/plugins
 cypress/support
 stories/
-display-defaults/
 
 amplify/#current-cloud-backend/
 amplify/.config/local-*

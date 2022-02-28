@@ -1,12 +1,12 @@
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { TaskProgressDropdown } from "./TaskProgressDropdown";
 
 describe("<TaskProgressDropdown />", () => {
-  const notStartedText = Defaults.taskProgress.NOT_STARTED;
-  const inProgressText = Defaults.taskProgress.IN_PROGRESS;
-  const completedText = Defaults.taskProgress.COMPLETED;
+  const notStartedText = Config.taskProgress.NOT_STARTED;
+  const inProgressText = Config.taskProgress.IN_PROGRESS;
+  const completedText = Config.taskProgress.COMPLETED;
 
   it("displays Not Started as the default", () => {
     const subject = render(<TaskProgressDropdown onSelect={jest.fn()} />);
@@ -44,8 +44,8 @@ describe("<TaskProgressDropdown />", () => {
     const subject = render(<TaskProgressDropdown onSelect={jest.fn()} />);
     fireEvent.click(subject.getAllByText(notStartedText)[0]);
 
-    expect(subject.queryByText(Defaults.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
+    expect(subject.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
     fireEvent.click(subject.getByText(inProgressText));
-    expect(subject.queryByText(Defaults.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
+    expect(subject.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
   });
 });

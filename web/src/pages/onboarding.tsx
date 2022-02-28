@@ -33,7 +33,7 @@ import {
   templateEval,
 } from "@/lib/utils/helpers";
 import { RoadmapContext } from "@/pages/_app";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
   createEmptyProfileData,
@@ -274,11 +274,11 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const evalHeaderStepsTemplate = (): string => {
     if (page.current === 1) {
-      return templateEval(Defaults.onboardingDefaults.stepOneTemplate, {
+      return templateEval(Config.onboardingDefaults.stepOneTemplate, {
         currentPage: page.current.toString(),
       });
     } else {
-      return templateEval(Defaults.onboardingDefaults.stepXofYTemplate, {
+      return templateEval(Config.onboardingDefaults.stepXofYTemplate, {
         currentPage: page.current.toString(),
         totalPages: onboardingFlows[currentFlow].pages.length.toString(),
       });
@@ -288,7 +288,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const header = () => (
     <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4">
       <h1 ref={headerRef}>
-        {Defaults.onboardingDefaults.pageTitle}{" "}
+        {Config.onboardingDefaults.pageTitle}{" "}
         <span className="text-light" data-testid={`step-${page.current.toString()}`}>
           {evalHeaderStepsTemplate()}
         </span>
@@ -327,7 +327,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     >
       <NextSeo
         title={`Business.NJ.gov Navigator - ${
-          Defaults.onboardingDefaults.pageTitle
+          Config.onboardingDefaults.pageTitle
         } ${evalHeaderStepsTemplate()} `}
       />
       <PageSkeleton>

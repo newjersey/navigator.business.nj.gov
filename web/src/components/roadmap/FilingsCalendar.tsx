@@ -3,7 +3,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import { getCurrentDate } from "@/lib/utils/getCurrentDate";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { TaxFiling } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import dayjs from "dayjs";
@@ -52,7 +52,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                       hover={true}
                     >
                       <span className="text-bold text-uppercase ">
-                        {Defaults.roadmapDefaults.calendarFilingDueDateLabel}{" "}
+                        {Config.roadmapDefaults.calendarFilingDueDateLabel}{" "}
                         {dayjs(filing.dueDate, "YYYY-MM-DD").format("M/D")}
                       </span>
                       {" - "}
@@ -94,8 +94,8 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   return (
     <>
       <div className="fdr fac padding-top-2">
-        <h2 className="">{Defaults.dashboardDefaults.calendarHeader}</h2>
-        <ArrowTooltip title={Defaults.dashboardDefaults.calendarTooltip}>
+        <h2 className="">{Config.dashboardDefaults.calendarHeader}</h2>
+        <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
           <div className="fdr fac margin-left-1 font-body-lg text-green" data-testid="calendar-tooltip">
             <Icon>help_outline</Icon>
           </div>

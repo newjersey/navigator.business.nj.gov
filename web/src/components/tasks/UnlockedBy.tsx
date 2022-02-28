@@ -1,6 +1,6 @@
 import { UnlockingAlert } from "@/components/tasks/UnlockingAlert";
 import { TaskLink } from "@/lib/types/types";
-import Defaults from "@businessnjgovnavigator/content/display-defaults/defaults.json";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -13,8 +13,8 @@ export const UnlockedBy = (props: Props): ReactElement => (
   <UnlockingAlert
     taskLinks={props.taskLinks}
     variant="warning"
-    singularText={Defaults.taskDefaults.unlockedBySingular}
-    pluralText={Defaults.taskDefaults.unlockedByPlural}
+    singularText={Config.taskDefaults.unlockedBySingular}
+    pluralText={Config.taskDefaults.unlockedByPlural}
     className="margin-bottom-3"
     isLoading={props.isLoading}
     dataTestid={props.dataTestid}
