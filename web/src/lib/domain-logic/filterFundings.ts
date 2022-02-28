@@ -25,7 +25,7 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
         return false;
     }
 
-    if (it.status === "closed") return false;
+    if (it.status === "closed" || it.status === "opening soon") return false;
 
     return true;
   });

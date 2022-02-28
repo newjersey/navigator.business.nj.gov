@@ -716,7 +716,8 @@ collections:
       - label: "Status"
         name: "status"
         widget: "select"
-        options: ["open", "deadline", "first-come, first-served", "closed"]
+        required: true
+        options: ["open", "opening soon", "deadline", "first-come, first-served", "closed"]
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
@@ -841,7 +842,8 @@ collections:
       - label: "Status"
         name: "status"
         widget: "select"
-        options: ["open", "deadline", "first-come, first-served", "closed"]
+        required: true
+        options: ["open", "opening soon", "deadline", "first-come, first-served", "closed"]
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"
