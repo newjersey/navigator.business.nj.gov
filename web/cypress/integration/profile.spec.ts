@@ -21,67 +21,61 @@ describe("Profile [feature] [all] [group1]", () => {
     it("random industry", () => {
       const industry = randomElementFromArray(industriesNotHomeBasedOrLiquorLicense as Industry[]);
       const businessName = `Generic Business Name ${randomInt()}`;
-      const industryId = industry.id;
-      const companyType = "general-partnership";
-      const location = "Absecon";
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
 
-      completeNewBusinessOnboarding(
+      completeNewBusinessOnboarding({
         businessName,
-        industryId,
-        companyType,
-        location,
+        industry,
         homeBasedQuestion,
-        liquorLicenseQuestion
-      );
+        liquorLicenseQuestion,
+      });
 
-      checkProfilePage(companyType, homeBasedQuestion, liquorLicenseQuestion);
+      checkProfilePage({
+        businessName,
+        industry,
+        homeBasedQuestion,
+        liquorLicenseQuestion,
+      });
     });
 
     it("random homebased industry", () => {
       const industry = randomElementFromArray(homeBasedIndustries as Industry[]);
       const businessName = `Generic Business Name ${randomInt()}`;
-      const industryId = industry.id;
-      const companyType = "general-partnership";
-      const location = "Absecon";
-      const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
+      const homeBasedQuestion = Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
 
-      completeNewBusinessOnboarding(
+      completeNewBusinessOnboarding({
         businessName,
-        industryId,
-        companyType,
-        location,
+        industry,
         homeBasedQuestion,
-        liquorLicenseQuestion
-      );
+        liquorLicenseQuestion,
+      });
 
-      checkProfilePage(companyType, homeBasedQuestion, liquorLicenseQuestion);
+      checkProfilePage({ businessName, industry, homeBasedQuestion, liquorLicenseQuestion });
     });
 
     it("random liquor license industry", () => {
       const industry = randomElementFromArray(liquorLicenseIndustries as Industry[]);
       const businessName = `Generic Business Name ${randomInt()}`;
-      const industryId = industry.id;
-      const companyType = "general-partnership";
-      const location = "Absecon";
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
-      const liquorLicenseQuestion =
-        industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+      const liquorLicenseQuestion = Boolean(randomInt() % 2);
 
-      completeNewBusinessOnboarding(
+      completeNewBusinessOnboarding({
         businessName,
-        industryId,
-        companyType,
-        location,
+        industry,
         homeBasedQuestion,
-        liquorLicenseQuestion
-      );
+        liquorLicenseQuestion,
+      });
 
-      checkProfilePage(companyType, homeBasedQuestion, liquorLicenseQuestion);
+      checkProfilePage({
+        businessName,
+        industry,
+        homeBasedQuestion,
+        liquorLicenseQuestion,
+      });
     });
 
     it("random industry with company type that has trade name (entity id)", () => {
@@ -90,23 +84,26 @@ describe("Profile [feature] [all] [group1]", () => {
         legalStructureWithTradeName as LegalStructure[]
       );
       const businessName = `Generic Business Name ${randomInt()}`;
-      const industryId = industry.id;
       const companyType = companyTypeWithTradeName.id;
-      const location = "Absecon";
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
 
-      completeNewBusinessOnboarding(
+      completeNewBusinessOnboarding({
         businessName,
-        industryId,
+        industry,
         companyType,
-        location,
         homeBasedQuestion,
-        liquorLicenseQuestion
-      );
+        liquorLicenseQuestion,
+      });
 
-      checkProfilePage(companyType, homeBasedQuestion, liquorLicenseQuestion);
+      checkProfilePage({
+        businessName,
+        industry,
+        companyType,
+        homeBasedQuestion,
+        liquorLicenseQuestion,
+      });
     });
   });
 });

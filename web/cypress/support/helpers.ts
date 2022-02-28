@@ -1,5 +1,5 @@
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
-import { Industries, LegalStructures, LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { Industries, Industry, LegalStructures, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
 import { onProfilePage } from "./page_objects/profilePage";
 import { onRoadmapPage } from "./page_objects/roadmapPage";
@@ -138,97 +138,155 @@ export const legalStructureWithTradeName = LegalStructures.filter((legalStructur
   return legalStructure.hasTradeName;
 });
 
-export const checkProfilePage = (
-  companyType: string,
-  homeBasedQuestion: boolean | undefined,
-  liquorLicenseQuestion: boolean | undefined
-) => {
-  cy.url().should("contain", "/roadmap");
-  onRoadmapPage.clickEditProfileLink();
-
-  onProfilePage.getBusinessName().should("exist");
-  onProfilePage.getIndustryDropdown().should("exist");
-  onProfilePage.getLegalStructure().should("exist");
-  onProfilePage.getLocationDropdown().should("exist");
-  onProfilePage.getEmployerId().should("exist");
-  onProfilePage.getTaxId().should("exist");
-  onProfilePage.getNotes().should("exist");
-
-  if (isEntityIdApplicable(companyType)) {
-    onProfilePage.getEntityId().should("exist");
-  } else {
-    onProfilePage.getEntityId().should("not.exist");
-  }
-
-  if (homeBasedQuestion === undefined) {
-    onProfilePage.getHomeBased().should("not.exist");
-  } else if (homeBasedQuestion === true) {
-    onProfilePage.getHomeBased(true).should("be.checked");
-    onProfilePage.getHomeBased(false).should("not.be.checked");
-  } else {
-    onProfilePage.getHomeBased(true).should("not.be.checked");
-    onProfilePage.getHomeBased(false).should("be.checked");
-  }
-
-  if (liquorLicenseQuestion === undefined) {
-    onProfilePage.getLiquorLicense().should("not.exist");
-  } else if (liquorLicenseQuestion === true) {
-    onProfilePage.getLiquorLicense(true).should("be.checked");
-    onProfilePage.getLiquorLicense(false).should("not.be.checked");
-  } else {
-    onProfilePage.getLiquorLicense(true).should("not.be.checked");
-    onProfilePage.getLiquorLicense(false).should("be.checked");
-  }
-
-  onProfilePage.clickSaveButton();
-  cy.url().should("contain", "/roadmap");
+type registration = {
+  fullName: string;
+  email: string;
 };
+interface startingOnboardingData {
+  businessName: string;
+  industry: Industry;
+  companyType?: string;
+  city?: string;
+  homeBasedQuestion: boolean | undefined;
+  liquorLicenseQuestion: boolean | undefined;
+}
 
-export const completeNewBusinessOnboarding = (
-  businessName: string,
-  industry: string,
-  companyType: string,
-  city: string,
-  homeBased: boolean | undefined,
-  liquor: boolean | undefined
-): void => {
+export const completeNewBusinessOnboarding = ({
+  businessName,
+  industry,
+  companyType = "general-partnership",
+  city = "Absecon",
+  homeBasedQuestion = undefined,
+  liquorLicenseQuestion = undefined,
+  fullName = "Michael Smith",
+  email = "MichaelSmith@gmail.com",
+}: startingOnboardingData & Partial<registration>): void => {
   cy.url().should("include", `onboarding?page=${1}`);
   onOnboardingPage.selectNewBusiness(false);
   onOnboardingPage.getHasExistingBusiness(true).should("not.be.checked");
+  onOnboardingPage.getHasExistingBusiness(false).should("be.checked");
   onOnboardingPage.clickNext();
 
   cy.url().should("include", `onboarding?page=${2}`);
   onOnboardingPage.typeBusinessName(businessName);
+  onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   onOnboardingPage.clickNext();
 
   cy.url().should("include", `onboarding?page=${3}`);
-  onOnboardingPage.selectIndustry(industry);
+  onOnboardingPage.selectIndustry((industry as Industry).id);
+  onOnboardingPage
+    .getIndustryDropdown()
+    .invoke("prop", "value")
+    .should("contain", (industry as Industry).name);
 
-  if (liquor === undefined) {
+  if (liquorLicenseQuestion === undefined) {
     onOnboardingPage.getLiquorLicense().should("not.exist");
   } else {
-    onOnboardingPage.selectLiquorLicense(liquor);
+    onOnboardingPage.selectLiquorLicense(liquorLicenseQuestion);
+    onOnboardingPage.getLiquorLicense(liquorLicenseQuestion).should("be.checked");
+    onOnboardingPage.getLiquorLicense(!liquorLicenseQuestion).should("not.be.checked");
   }
-
   onOnboardingPage.clickNext();
 
   cy.url().should("include", `onboarding?page=${4}`);
   onOnboardingPage.selectLegalStructure(companyType);
+  onOnboardingPage
+    .getLegalStructure(companyType)
+    .parents(`[data-testid=${companyType}]`)
+    .find("span")
+    .first()
+    .should("have.class", "Mui-checked");
   onOnboardingPage.clickNext();
 
   cy.url().should("include", `onboarding?page=${5}`);
   onOnboardingPage.selectLocation(city);
-
-  if (homeBased === undefined) {
+  onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", city);
+  if (homeBasedQuestion === undefined) {
     onOnboardingPage.getHomeBased().should("not.exist");
   } else {
-    onOnboardingPage.selectHomeBased(homeBased);
+    onOnboardingPage.selectHomeBased(homeBasedQuestion);
+    onOnboardingPage.getHomeBased(homeBasedQuestion).should("be.checked");
+    onOnboardingPage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   }
 
   onOnboardingPage.clickNext();
   cy.url().should("include", `onboarding?page=${6}`);
+  onOnboardingPage.typeFullName(fullName);
+  onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
+  onOnboardingPage.typeEmail(email);
+  onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
+  onOnboardingPage.typeConfirmEmail(email);
+  onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
+  onOnboardingPage.getNewsletterCheckbox().should("be.checked");
+  onOnboardingPage.getContactMeCheckbox().should("not.be.checked");
+  onOnboardingPage.checkContactMeCheckbox();
+  onOnboardingPage.getContactMeCheckbox().should("be.checked");
 
-  cy.wait(1000); // wait for onboarding animation
   onOnboardingPage.clickNext();
   cy.url().should("include", `roadmap`);
+};
+
+interface startingProfileData extends startingOnboardingData {
+  employerId: string;
+  taxId: string;
+  notes: string;
+  entityId: string;
+}
+
+export const checkProfilePage = ({
+  businessName,
+  industry,
+  companyType = "general-partnership",
+  city = "Absecon",
+  homeBasedQuestion = undefined,
+  liquorLicenseQuestion = undefined,
+  employerId = "",
+  taxId = "",
+  notes = "",
+  entityId = "",
+}: Partial<startingProfileData>): void => {
+  cy.url().should("contain", "/roadmap");
+  onRoadmapPage.clickEditProfileLink();
+
+  onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
+  onOnboardingPage
+    .getIndustryDropdown()
+    .invoke("prop", "value")
+    .should("contain", (industry as Industry).name);
+
+  if (liquorLicenseQuestion === undefined) {
+    onProfilePage.getLiquorLicense().should("not.exist");
+  } else {
+    onProfilePage.getLiquorLicense(liquorLicenseQuestion).should("be.checked");
+    onProfilePage.getLiquorLicense(!liquorLicenseQuestion).should("not.be.checked");
+  }
+  onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", city);
+
+  if (homeBasedQuestion === undefined) {
+    onOnboardingPage.getHomeBased().should("not.exist");
+  } else {
+    onOnboardingPage.getHomeBased(homeBasedQuestion).should("be.checked");
+    onOnboardingPage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
+  }
+
+  onProfilePage
+    .getLegalStructure()
+    .parent()
+    .find("input")
+    .invoke("prop", "value")
+    .should("contain", companyType);
+
+  onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerId);
+  onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
+  onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
+
+  if (isEntityIdApplicable(companyType)) {
+    onProfilePage.getEntityId().should("exist");
+    onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
+  } else {
+    onProfilePage.getEntityId().should("not.exist");
+  }
+
+  onProfilePage.clickSaveButton();
+  cy.url().should("contain", "/roadmap");
 };

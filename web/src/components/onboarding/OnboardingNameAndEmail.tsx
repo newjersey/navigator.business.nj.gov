@@ -100,6 +100,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
               <Checkbox
                 checked={state.user?.receiveNewsletter}
                 onChange={(event) => handleNewsletter(event.target.checked)}
+                id="newsletterCheckbox"
               />
             </div>
           }
@@ -112,6 +113,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
               <Checkbox
                 checked={state.user?.userTesting}
                 onChange={(event) => handleUserTesting(event.target.checked)}
+                id="contactMeCheckbox"
               />
             </div>
           }
