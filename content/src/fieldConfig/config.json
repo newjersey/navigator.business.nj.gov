@@ -64,7 +64,21 @@
     "addressErrorText": "Address is required",
     "addressCityErrorText": "City is required",
     "addressStateErrorText": "state is required",
-    "addressZipCodeErrorText": "Must be a valid 5 digit Zip Code"
+    "addressZipCodeErrorText": "Must be a valid 5 digit Zip Code",
+    "reviewPageSignerNameLabel": "**Signer Name:**",
+    "reviewPageBusinessStartDateLabel": "**Business Start Date**",
+    "reviewPageRegisteredAgentHeader": "### Registered Agent",
+    "reviewPageAddressLabel": "**Address:**",
+    "reviewPageBusinessNameLabel": "**Business Name**",
+    "reviewPageBusinessSuffixLabel": "**Business Suffix:**",
+    "reviewPageSignaturesHeader": "### Signatures",
+    "reviewPageEmailLabel": "**Email:**",
+    "reviewPageLegalStructureLabel": "**Legal Structure** `Learn more|legal-structure-learn-more`",
+    "reviewPageLocationHeader": "### Location",
+    "reviewPageRegisteredAgentNumberLabel": "**Number:**",
+    "reviewPageMemberNameLabel": "**Member Name:**",
+    "reviewPageMembersHeader": "### Members",
+    "reviewPageRegisteredAgentNameLabel": "**Name:**"
   },
   "dashboardDefaults": {
     "headerText": "Hello, ${name}",

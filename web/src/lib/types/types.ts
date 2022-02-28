@@ -165,24 +165,6 @@ export type FormationDisplayContent = {
   contactFirstName: TextFieldContent;
   contactLastName: TextFieldContent;
   contactPhoneNumber: TextFieldContent;
-  reviewPageBusinessName: {
-    contentMd: string;
-  };
-  reviewPageLegalStructure: {
-    contentMd: string;
-  };
-  reviewPageAddress: { contentMd: string };
-  reviewPageBusinessStartDate: { contentMd: string };
-  reviewPageBusinessSuffix: { contentMd: string };
-  reviewPageEmail: { contentMd: string };
-  reviewPageMemberName: { contentMd: string };
-  reviewPageRegisteredAgentName: { contentMd: string };
-  reviewPageSignerName: { contentMd: string };
-  reviewPageLocation: { contentMd: string };
-  reviewPageRegisteredAgent: { contentMd: string };
-  reviewPageRegisteredAgentNumber: { contentMd: string };
-  reviewPageSignatures: { contentMd: string };
-  reviewPageMembers: { contentMd: string };
 };
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
@@ -342,24 +324,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     contentMd: "",
     placeholder: "",
   },
-  reviewPageBusinessName: {
-    contentMd: "",
-  },
-  reviewPageLegalStructure: {
-    contentMd: "",
-  },
-  reviewPageAddress: { contentMd: "" },
-  reviewPageBusinessStartDate: { contentMd: "" },
-  reviewPageBusinessSuffix: { contentMd: "" },
-  reviewPageEmail: { contentMd: "" },
-  reviewPageMemberName: { contentMd: "" },
-  reviewPageRegisteredAgentName: { contentMd: "" },
-  reviewPageSignerName: { contentMd: "" },
-  reviewPageLocation: { contentMd: "" },
-  reviewPageRegisteredAgent: { contentMd: "" },
-  reviewPageRegisteredAgentNumber: { contentMd: "" },
-  reviewPageSignatures: { contentMd: "" },
-  reviewPageMembers: { contentMd: "" },
 });
 
 const coreContent = {
