@@ -34,7 +34,7 @@ export class OnboardingPage {
   }
 
   typeBusinessName(businessName: string) {
-    this.getBusinessName().type(businessName);
+    this.getBusinessName().clear().type(businessName);
   }
 
   selectIndustry(industry: string) {
@@ -61,10 +61,50 @@ export class OnboardingPage {
   }
 }
 
-class OnboardingPageWithNavigation extends OnboardingPage {
+class OnboardingPageWithElementsNotInProfile extends OnboardingPage {
+  getFullName() {
+    return cy.get("#name");
+  }
+
+  getEmail() {
+    return cy.get("#email");
+  }
+
+  getConfirmEmail() {
+    return cy.get("#confirm-email");
+  }
+
+  getNewsletterCheckbox() {
+    return cy.get("#newsletterCheckbox");
+  }
+
+  getContactMeCheckbox() {
+    return cy.get("#contactMeCheckbox");
+  }
+
+  checkNewsletterCheckbox() {
+    this.getNewsletterCheckbox().check();
+  }
+
+  checkContactMeCheckbox() {
+    this.getContactMeCheckbox().check();
+  }
+
+  typeFullName(name: string) {
+    this.getFullName().clear().type(name);
+  }
+
+  typeEmail(name: string) {
+    this.getEmail().clear().type(name);
+  }
+
+  typeConfirmEmail(name: string) {
+    this.getConfirmEmail().clear().type(name);
+  }
+
   clickNext() {
     cy.get('[data-testid="next"]').click();
   }
 }
 
-export const onOnboardingPage = new OnboardingPageWithNavigation();
+export const onOnboardingPage = new OnboardingPageWithElementsNotInProfile();
