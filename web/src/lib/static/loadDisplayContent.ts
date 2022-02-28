@@ -201,7 +201,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const businessNameAndLegalStructure = getMarkdown(
     loadFile("business-formation/business-name-and-legal-structure.md")
   );
-  const businessSuffix = getMarkdown(loadFile("business-formation/business-suffix.md"));
   const businessStartDate = getMarkdown(loadFile("business-formation/business-start-date.md"));
   const businessAddressLine1 = getMarkdown(loadFile("business-formation/business-address-line1.md"));
   const businessAddressLine2 = getMarkdown(loadFile("business-formation/business-address-line2.md"));
@@ -216,8 +215,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   );
 
   const notification = getMarkdown(loadFile("business-formation/notification.md"));
-  const optInAnnualReport = getMarkdown(loadFile("business-formation/opt-in-annual-report.md"));
-  const optInCorpWatch = getMarkdown(loadFile("business-formation/opt-in-corp-watch.md"));
 
   const agentNumberOrManual = getMarkdown(loadFile("business-formation/registered-agent.md"));
   const agentNumber = getMarkdown(loadFile("business-formation/registered-agent-number.md"));
@@ -229,12 +226,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const agentOfficeAddressState = getMarkdown(loadFile("business-formation/registered-agent-state.md"));
   const agentOfficeAddressZipCode = getMarkdown(loadFile("business-formation/registered-agent-zip.md"));
 
-  const memberName = getMarkdown(loadFile("business-formation/member-name.md"));
-  const memberAddressLine1 = getMarkdown(loadFile("business-formation/member-address-1.md"));
-  const memberAddressLine2 = getMarkdown(loadFile("business-formation/member-address-2.md"));
-  const memberAddressCity = getMarkdown(loadFile("business-formation/member-city.md"));
-  const memberAddressState = getMarkdown(loadFile("business-formation/member-state.md"));
-  const memberAddressZipCode = getMarkdown(loadFile("business-formation/member-zip.md"));
   const membersModal = getMarkdown(loadFile("business-formation/members-modal.md"));
   const members = getMarkdown(loadFile("business-formation/members.md"));
 
@@ -252,10 +243,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       },
       businessNameAndLegalStructure: {
         contentMd: businessNameAndLegalStructure.content,
-      },
-      businessSuffix: {
-        contentMd: businessSuffix.content,
-        ...(businessSuffix.grayMatter as FieldGrayMatter),
       },
       businessStartDate: {
         contentMd: businessStartDate.content,
@@ -315,30 +302,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
         contentMd: agentOfficeAddressZipCode.content,
         ...(agentOfficeAddressZipCode.grayMatter as FieldGrayMatter),
       },
-      memberName: {
-        contentMd: memberName.content,
-        ...(memberName.grayMatter as FieldGrayMatter),
-      },
-      memberAddressLine1: {
-        contentMd: memberAddressLine1.content,
-        ...(memberAddressLine1.grayMatter as FieldGrayMatter),
-      },
-      memberAddressLine2: {
-        contentMd: memberAddressLine2.content,
-        ...(memberAddressLine2.grayMatter as FieldGrayMatter),
-      },
-      memberAddressCity: {
-        contentMd: memberAddressCity.content,
-        ...(memberAddressCity.grayMatter as FieldGrayMatter),
-      },
-      memberAddressState: {
-        contentMd: memberAddressState.content,
-        ...(memberAddressState.grayMatter as FieldGrayMatter),
-      },
-      memberAddressZipCode: {
-        contentMd: memberAddressZipCode.content,
-        ...(memberAddressZipCode.grayMatter as FieldGrayMatter),
-      },
       members: {
         contentMd: members.content,
         ...(members.grayMatter as MemberGrayMatter),
@@ -363,12 +326,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       },
       notification: {
         contentMd: notification.content,
-      },
-      optInAnnualReport: {
-        contentMd: optInAnnualReport.content,
-      },
-      optInCorpWatch: {
-        contentMd: optInCorpWatch.content,
       },
       officialFormationDocument: {
         contentMd: officialFormationDocument.content,

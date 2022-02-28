@@ -27,7 +27,7 @@ export const BusinessSuffixDropdown = (): ReactElement => {
 
   return (
     <>
-      <Content>{state.displayContent.businessSuffix.contentMd}</Content>
+      <Content>{Config.businessFormationDefaults.businessSuffixLabel}</Content>
       <div className="form-input margin-bottom-2">
         <FormControl fullWidth error={state.errorMap.businessSuffix.invalid}>
           <InputLabel id="business-suffix-label" className="visibility-hidden">
@@ -43,7 +43,11 @@ export const BusinessSuffixDropdown = (): ReactElement => {
             inputProps={{ "data-testid": "business-suffix" }}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return <div className="text-base">{state.displayContent.businessSuffix.placeholder}</div>;
+                return (
+                  <div className="text-base">
+                    {Config.businessFormationDefaults.businessSuffixPlaceholder}
+                  </div>
+                );
               }
 
               return selected;

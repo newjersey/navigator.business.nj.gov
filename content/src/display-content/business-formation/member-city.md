@@ -1,5 +1,0 @@
----
-placeholder: "City"
----
-
-**City**
