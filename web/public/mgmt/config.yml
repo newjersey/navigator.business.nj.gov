@@ -212,7 +212,7 @@ collections:
               - { label: Column 3 - Header, name: column3Header, widget: string }
               - { label: Column 3 - Supporting Text, name: column3SupportingText, widget: string }
               - { label: Column 3 - Button Text, name: column3Button, widget: string }
-              - { label: Column 3 - Button Link, name: column3ButtonLink, widget: string }
+              - { label: Column 3 - Button Link, name: column3ButtonLink, widget: string, required: false }
               - { label: Column 3 - Image, name: column3Image, widget: string }
               - { label: Column 3 - Image Alt Text, name: column3ImageAlt, widget: string }
           - label: Legal Messages
