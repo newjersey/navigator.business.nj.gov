@@ -62,7 +62,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         }`}
       >
         <div className="padding-205 flex-half">
-          <Content>{state.displayContent.reviewPageBusinessName.contentMd}</Content>
+          <Content>{Config.businessFormationDefaults.reviewPageBusinessNameLabel}</Content>
           <span className="text-accent-cool-darker">
             {state?.formationFormData.businessName || Config.businessFormationDefaults.notSetBusinessNameText}
           </span>{" "}
@@ -85,7 +85,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
           className="padding-bottom-205 padding-x-205 tablet:padding-205 flex-half"
           data-testid="legal-structure"
         >
-          <Content>{state.displayContent.reviewPageLegalStructure.contentMd}</Content>
+          <Content>{Config.businessFormationDefaults.reviewPageLegalStructureLabel}</Content>
           <span>{legalStructureName}</span>{" "}
           {!reviewPage && (
             <Button

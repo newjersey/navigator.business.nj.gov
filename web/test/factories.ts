@@ -423,24 +423,6 @@ export const generateFormationDisplayContent = (
     contentMd: `some-contact-phone-number-content-${randomInt()}`,
     placeholder: `some-contact-phone-number-placeholder-${randomInt()}`,
   },
-  reviewPageBusinessName: {
-    contentMd: `some-business-name-${randomInt()}`,
-  },
-  reviewPageLegalStructure: {
-    contentMd: `some-legal-structure-${randomInt()}`,
-  },
-  reviewPageAddress: { contentMd: `some-address-content-${randomInt()}` },
-  reviewPageBusinessStartDate: { contentMd: `some-start-date-content-${randomInt()}` },
-  reviewPageBusinessSuffix: { contentMd: `some-business-suffix-content-${randomInt()}` },
-  reviewPageEmail: { contentMd: `some-email-content-${randomInt()}` },
-  reviewPageMemberName: { contentMd: `some-member-name-content-${randomInt()}` },
-  reviewPageRegisteredAgentName: { contentMd: `some-registered-agent-name-content-${randomInt()}` },
-  reviewPageSignerName: { contentMd: `some-signer-name-content-${randomInt()}` },
-  reviewPageLocation: { contentMd: `some-location-content-${randomInt()}` },
-  reviewPageRegisteredAgent: { contentMd: `some-registered-agent-content-${randomInt()}` },
-  reviewPageRegisteredAgentNumber: { contentMd: `some-registered-agent-number-content-${randomInt()}` },
-  reviewPageSignatures: { contentMd: `some-signature-content-${randomInt()}` },
-  reviewPageMembers: { contentMd: `some-members-content-${randomInt()}` },
   ...overrides,
 });
 

@@ -126,6 +126,20 @@ collections:
                   widget: string,
                 }
               - { label: Previous Button Text, name: previousButtonText, widget: string }
+              - { label: Review Page - Address Label, name: reviewPageAddressLabel, widget: string, hint: This field supports Markdown}
+              - { label: Review Page - Business Name Label, name: reviewPageBusinessNameLabel, widget: string, hint: This field supports Markdown}
+              - { label: Review Page - Business Start Date Label, name: reviewPageBusinessStartDateLabel, widget: string, hint: This field supports Markdown}
+              - { label: Review Page - Business Suffix Label, name: reviewPageBusinessSuffixLabel, widget: string, hint: This field supports Markdown}
+              - { label: Review Page - Email Label, name: reviewPageEmailLabel, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Legal Structure Label, name: reviewPageLegalStructureLabel, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Location Header, name: reviewPageLocationHeader, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Members Header, name: reviewPageMembersHeader, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Member Name Label, name: reviewPageMemberNameLabel, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Registered Agent Header, name: reviewPageRegisteredAgentHeader, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Registered Agent Name Label, name: reviewPageRegisteredAgentNameLabel, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Registered Agent Number Label, name: reviewPageRegisteredAgentNumberLabel, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Signatures Header, name: reviewPageSignaturesHeader, widget: string, hint: This field supports Markdown }
+              - { label: Review Page - Signer Name Label, name: reviewPageSignerNameLabel, widget: string, hint: This field supports Markdown }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Success Page - Body, name: successPageBody, widget: string }
               - { label: Success Page - Header, name: successPageHeader, widget: string }

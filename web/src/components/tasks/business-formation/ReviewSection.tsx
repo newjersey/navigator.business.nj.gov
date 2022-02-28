@@ -20,7 +20,7 @@ export const ReviewSection = (): ReactElement => {
     <>
       <div className="display-block tablet:display-flex">
         <div className="text-bold width-11rem">
-          <Content>{state.displayContent.reviewPageBusinessSuffix.contentMd}</Content>
+          <Content>{Config.businessFormationDefaults.reviewPageBusinessSuffixLabel}</Content>
         </div>
         <div>
           {userData?.profileData.businessName} {state.formationFormData.businessSuffix}
@@ -28,7 +28,7 @@ export const ReviewSection = (): ReactElement => {
       </div>
       <div className="display-block tablet:display-flex margin-top-1">
         <div className="text-bold width-11rem">
-          <Content>{state.displayContent.reviewPageBusinessStartDate.contentMd}</Content>
+          <Content>{Config.businessFormationDefaults.reviewPageBusinessStartDateLabel}</Content>
         </div>
         <div>{dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/DD/YYYY")}</div>
       </div>
@@ -41,7 +41,7 @@ export const ReviewSection = (): ReactElement => {
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {state.displayContent.reviewPageLocation.contentMd}
+            {Config.businessFormationDefaults.reviewPageLocationHeader}
           </Content>
         </div>
         <div className="margin-left-2">
@@ -60,7 +60,7 @@ export const ReviewSection = (): ReactElement => {
       </div>
       <div className="display-block tablet:display-flex">
         <div className="text-bold width-11rem">
-          <Content>{state.displayContent.reviewPageAddress.contentMd}</Content>
+          <Content>{Config.businessFormationDefaults.reviewPageAddressLabel}</Content>
         </div>
         <div>
           {getStringifiedAddress(
@@ -81,7 +81,7 @@ export const ReviewSection = (): ReactElement => {
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {state.displayContent.reviewPageRegisteredAgent.contentMd}
+            {Config.businessFormationDefaults.reviewPageRegisteredAgentHeader}
           </Content>
         </div>
         <div className="margin-left-2">
@@ -101,7 +101,7 @@ export const ReviewSection = (): ReactElement => {
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (
         <div className="display-block tablet:display-flex" data-testid="agent-number">
           <div className="text-bold width-11rem">
-            <Content>{state.displayContent.reviewPageRegisteredAgentNumber.contentMd}</Content>
+            <Content>{Config.businessFormationDefaults.reviewPageRegisteredAgentNumberLabel}</Content>
           </div>
           <div>{state.formationFormData.agentNumber}</div>
         </div>
@@ -110,19 +110,19 @@ export const ReviewSection = (): ReactElement => {
         <div data-testid="agent-manual-entry">
           <div className="display-block tablet:display-flex">
             <div className="text-bold width-11rem">
-              <Content>{state.displayContent.reviewPageRegisteredAgentName.contentMd}</Content>
+              <Content>{Config.businessFormationDefaults.reviewPageRegisteredAgentNameLabel}</Content>
             </div>
             <div>{state.formationFormData.agentName}</div>
           </div>
           <div className="display-block tablet:display-flex margin-top-1">
             <div className="text-bold width-11rem">
-              <Content>{state.displayContent.reviewPageEmail.contentMd}</Content>
+              <Content>{Config.businessFormationDefaults.reviewPageEmailLabel}</Content>
             </div>
             <div>{state.formationFormData.agentEmail}</div>
           </div>
           <div className="display-block tablet:display-flex margin-top-1">
             <div className="text-bold width-11rem">
-              <Content>{state.displayContent.reviewPageAddress.contentMd}</Content>
+              <Content>{Config.businessFormationDefaults.reviewPageAddressLabel}</Content>
             </div>
             <div>
               {getStringifiedAddress(
@@ -146,7 +146,7 @@ export const ReviewSection = (): ReactElement => {
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {state.displayContent.reviewPageMembers.contentMd}
+            {Config.businessFormationDefaults.reviewPageMembersHeader}
           </Content>
         </div>
         <div className="margin-left-2">
@@ -166,7 +166,7 @@ export const ReviewSection = (): ReactElement => {
       {userData?.formationData.formationFormData.members.map((member, index) => (
         <div className="display-block tablet:display-flex" key={`${member.name}-${index}`}>
           <div className={`text-bold width-11rem ${index !== 0 ? "margin-top-1" : ""}`}>
-            <Content>{state.displayContent.reviewPageMemberName.contentMd}</Content>
+            <Content>{Config.businessFormationDefaults.reviewPageMemberNameLabel}</Content>
           </div>
           <div className={index !== 0 ? "tablet:margin-top-1" : ""}>{member.name}</div>
         </div>
@@ -180,7 +180,7 @@ export const ReviewSection = (): ReactElement => {
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {state.displayContent.reviewPageSignatures.contentMd}
+            {Config.businessFormationDefaults.reviewPageSignaturesHeader}
           </Content>
         </div>
         <div className="margin-left-2">
@@ -199,14 +199,14 @@ export const ReviewSection = (): ReactElement => {
       </div>
       <div className="display-block tablet:display-flex">
         <div className="text-bold width-11rem">
-          <Content>{state.displayContent.reviewPageSignerName.contentMd}</Content>
+          <Content>{Config.businessFormationDefaults.reviewPageSignerNameLabel}</Content>
         </div>
         <div>{state.formationFormData.signer}</div>
       </div>
       {userData?.formationData.formationFormData.additionalSigners.map((signer, index) => (
         <div className="display-block tablet:display-flex" key={`${signer}-${index}`}>
           <div className="text-bold width-11rem margin-top-1">
-            <Content>{state.displayContent.reviewPageSignerName.contentMd}</Content>
+            <Content>{Config.businessFormationDefaults.reviewPageSignerNameLabel}</Content>
           </div>
           <div className="tablet:margin-top-1">{signer}</div>
         </div>
