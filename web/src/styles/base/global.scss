@@ -1,25 +1,3 @@
-$xs: 30em; //mobile-lg + up (480px)
-$sm: 40em; //tablet + up (640px)
-$md: 50em; //big tablet (800px)
-$lg: 64em; //desktop and up (1024px)
-
-@import "njwds-overrides/colors";
-@import "njwds-overrides/typography";
-@import "flex";
-@import "onboarding";
-@import "roadmap";
-@import "contextual-info";
-@import "left-nav";
-@import "tabs";
-@import "license-status";
-@import "njwds-overrides/stepper";
-@import "njwds-overrides/overrides";
-@import "njwds-overrides/components";
-@import "landing";
-@import "innov-footer";
-@import "nav-bar";
-@import "business-formation";
-
 * {
   box-sizing: border-box;
 }
@@ -108,22 +86,6 @@ hr {
   margin: auto;
   white-space: nowrap;
   width: 1px;
-}
-
-.usa-button--outline {
-  background-color: $white !important;
-}
-
-.usa-button--unstyled {
-  color: $primary !important;
-}
-
-.clear-button {
-  background-color: transparent;
-  padding: 0;
-  border-width: 0;
-  border-color: transparent;
-  cursor: pointer;
 }
 
 .override-text-base {
@@ -272,4 +234,93 @@ td {
 
 .margin-0-override {
   margin: 0 !important;
+}
+
+.min-height-575rem {
+  min-height: 5.75rem;
+}
+
+.width-11rem {
+  width: 11rem;
+}
+
+.minh-30 {
+  min-height: 30rem;
+}
+
+.minh-40 {
+  min-height: 40rem;
+}
+
+.minh-37 {
+  min-height: 37rem;
+}
+
+.minw-30 {
+  min-width: 30rem;
+}
+
+.usa-alert__text a,
+.usa-link,
+.usa-prose > a {
+  color: $primary !important;
+}
+
+.usa-link:visited,
+.usa-prose > a:visited {
+  color: $primary !important;
+}
+
+.usa-link:focus,
+.usa-prose > a:focus {
+  outline: 0.25rem solid $primary !important;
+}
+
+.usa-link:hover,
+.usa-prose > a:hover {
+  color: $primary-dark !important;
+}
+
+.usa-link:active,
+.usa-prose > a:active {
+  color: $primary-darker !important;
+}
+
+.usa-prose > p,
+p {
+  max-width: unset !important;
+}
+
+li {
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.usa-button--unstyled {
+  text-decoration: none !important;
+  text-align: unset !important;
+}
+
+.underline {
+  text-decoration: underline !important;
+}
+
+hr {
+  height: 1px !important;
+  border: none !important;
+}
+
+@media all and (min-width: $xs) {
+  .form-input {
+    max-width: 30rem;
+  }
+}
+
+@media all and (min-width: $sm) {
+  .form-input {
+    max-width: 37.5rem;
+  }
+  .form-input-wide {
+    max-width: 43.75rem;
+  }
 }

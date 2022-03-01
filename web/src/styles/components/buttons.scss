@@ -1,0 +1,19 @@
+.usa-button--outline {
+  background-color: $white !important;
+}
+
+.usa-button--unstyled {
+  color: $primary !important;
+}
+
+.clear-button {
+  background-color: transparent;
+  padding: 0;
+  border-width: 0;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.task-submit-button-background {
+  margin: 0px -24px -24px -24px;
+}
