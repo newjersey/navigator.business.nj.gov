@@ -33,7 +33,7 @@ export const SidebarPageLayout = ({
       <a
         href={mainPageLink}
         data-testid="back-to-roadmap"
-        className="usa-link fdr fac margin-top-3 margin-bottom-3 usa-link-hover-override desktop:margin-top-0 desktop:margin-bottom-7"
+        className="usa-link fdr fac margin-top-3 margin-bottom-3 usa-link-hover-override desktop:margin-top-0 desktop:margin-bottom-4"
         onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
       >
         <div className="circle-3 bg-green icon-green-bg-color-hover">
@@ -53,7 +53,7 @@ export const SidebarPageLayout = ({
           <div className="grid-row grid-gap">
             <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs" id="main">
               {!isLargeScreen && <div>{backButton}</div>}
-              <div className="border-1px border-base-light usa-prose minh-40 padding-3">{children}</div>
+              <div className="border-1px border-base-light usa-prose minh-40 padding-205">{children}</div>
               {belowOutlineBoxComponent}
             </main>
             <div className="usa-layout-docs__sidenav desktop:grid-col-4 order-first">
@@ -61,6 +61,7 @@ export const SidebarPageLayout = ({
                 <nav aria-label="Secondary">
                   {" "}
                   {backButton}
+                  <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />
                   {operateReferences != null && Object.keys(operateReferences).length > 0 ? (
                     <MiniOperateSection operateReferences={operateReferences} />
                   ) : (

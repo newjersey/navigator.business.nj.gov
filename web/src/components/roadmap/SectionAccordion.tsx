@@ -63,16 +63,18 @@ export const SectionAccordion = (props: Props): ReactElement => {
           id={`${sectionName}-header`}
           data-testid={`${sectionName}-header`}
         >
-          <h2 className={`flex flex-align-center margin-y-2 ${headerClasses}`}>
-            <img
-              role="presentation"
-              className={sectionIconClasses}
-              src={isCompleted ? `/img/section-complete.svg` : `/img/section-header-${sectionName}.svg`}
-              alt=""
-              data-testid={`${isCompleted ? "completed" : "regular"}-${sectionName}-section-img`}
-            />{" "}
-            <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
-          </h2>
+          <div className="margin-y-2">
+            <h2 className={`flex flex-align-center margin-0-override ${headerClasses}`}>
+              <img
+                role="presentation"
+                className={sectionIconClasses}
+                src={isCompleted ? `/img/section-complete.svg` : `/img/section-header-${sectionName}.svg`}
+                alt=""
+                data-testid={`${isCompleted ? "completed" : "regular"}-${sectionName}-section-img`}
+              />{" "}
+              <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
+            </h2>
+          </div>
         </AccordionSummary>
         <AccordionDetails>{props.children}</AccordionDetails>
       </Accordion>

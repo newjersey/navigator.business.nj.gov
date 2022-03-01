@@ -19,7 +19,7 @@ export const MiniOperateSection = ({ operateReferences, onClose }: Props): React
           <Link href={operateReferences[ref].urlPath} passHref>
             <button
               data-testid={operateReferences[ref].name}
-              className={`operate-bullet usa-button--unstyled width-100 padding-1 cursor-pointer hover:bg-base-lightest line-height-body-2 font-body-3xs text-ink ${
+              className={`usa-button--unstyled width-100 padding-1 cursor-pointer hover:bg-base-lightest line-height-body-2 font-body-3xs text-ink ${
                 router.query.filingUrlSlug === operateReferences[ref].urlPath
                   ? "bg-base-lightest bg-chevron text-primary-dark text-bold active"
                   : ""
