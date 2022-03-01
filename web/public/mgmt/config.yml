@@ -97,7 +97,7 @@ collections:
                 }
               - {
                   label: Business Address - Zip Code Placeholder,
-                  name: registeredAgentZipCodePlaceholder,
+                  name: businessAddressZipCodePlaceholder,
                   widget: string,
                 }
               - { label: Business Name - Not Set, name: notSetBusinessNameText, widget: string }
