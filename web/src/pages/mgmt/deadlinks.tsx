@@ -100,13 +100,18 @@ const DeadLinksPage = (props: Props): ReactElement => {
 };
 
 export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-  return {
-    props: {
-      deadTasks: await findDeadTasks(),
-      deadContextualInfo: await findDeadContextualInfo(),
-      deadLinks: await findDeadLinks(),
-    },
-  };
+  const buildCheckDeadPages = process.env.CHECK_DEAD_LINKS ?? true;
+  if (!buildCheckDeadPages) {
+    return { notFound: true };
+  } else {
+    return {
+      props: {
+        deadTasks: await findDeadTasks(),
+        deadContextualInfo: await findDeadContextualInfo(),
+        deadLinks: await findDeadLinks(),
+      },
+    };
+  }
 };
 
 export default DeadLinksPage;
