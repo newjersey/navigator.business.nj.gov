@@ -127,8 +127,10 @@ export const getOnboardingFlows = (
         getErrorMap: () => undefined,
       },
       {
-        component: <OnboardingIndustry />,
-        getErrorMap: () => undefined,
+        component: <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />,
+        getErrorMap: () => ({
+          inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+        }),
       },
       {
         component: <OnboardingLegalStructure />,

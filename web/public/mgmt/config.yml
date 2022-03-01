@@ -590,6 +590,11 @@ collections:
                   widget: string,
                 }
               - {
+                  label: Error Text - Required Industry,
+                  name: errorTextRequiredIndustry,
+                  widget: string,
+                }
+              - {
                   label: Error Text - Required Municipality,
                   name: errorTextRequiredMunicipality,
                   widget: string,

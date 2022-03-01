@@ -235,7 +235,8 @@
     "stepOneTemplate": "(Step ${currentPage})",
     "errorTextRequiredSector": "Please select a sector.",
     "errorTextRequiredExistingBusiness": "Please select whether you have an existing business.",
-    "errorTextRequiredBusinessName": "Please enter your business name."
+    "errorTextRequiredBusinessName": "Please enter your business name.",
+    "errorTextRequiredIndustry": "Industry is a required field."
   },
   "roadmapDefaults": {
     "congratulatorModalBody": "You can now start your",

@@ -2,34 +2,54 @@ import { Content } from "@/components/Content";
 import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
+import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import React, { ReactElement, useContext } from "react";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import React, { FocusEvent, ReactElement, useContext } from "react";
 
 interface Props {
+  onValidation: (field: ProfileFields, invalid: boolean) => void;
+  fieldStates: ProfileFieldErrorMap;
   headerAriaLevel?: number;
 }
 
-export const OnboardingIndustry = ({ headerAriaLevel = 2 }: Props): ReactElement => {
+export const OnboardingIndustry = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
+
+  const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
+    const valid = event.target.value.length > 0;
+    props.onValidation(fieldName, !valid);
+  };
+
+  const handleChange = (): void => props.onValidation(fieldName, false);
+
+  const fieldName = "industryId";
 
   const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
     <>
-      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.industry.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.industryId.contentMd}</Content>
       <div className="form-input margin-top-2">
-        <IndustryDropdown />
+        <IndustryDropdown
+          fieldName={fieldName}
+          error={props.fieldStates[fieldName].invalid}
+          validationLabel="Error"
+          validationText={Config.onboardingDefaults.errorTextRequiredIndustry}
+          handleChange={handleChange}
+          onValidation={onValidation}
+        />
 
         {state.profileData.industryId === "home-contractor" && (
           <div className="margin-top-2">
-            <Content>{state.displayContent.industry.specificHomeContractorMd}</Content>
+            <Content>{state.displayContent.industryId.specificHomeContractorMd}</Content>
           </div>
         )}
 
         {state.profileData.industryId === "employment-agency" && (
           <div className="margin-top-2">
-            <Content>{state.displayContent.industry.specificEmploymentAgencyMd}</Content>
+            <Content>{state.displayContent.industryId.specificEmploymentAgencyMd}</Content>
           </div>
         )}
 

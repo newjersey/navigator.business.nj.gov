@@ -129,7 +129,7 @@ const ProfilePage = (props: Props): ReactElement => {
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingBusinessName disabled={userData?.formationData.getFilingResponse?.success} />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingIndustry />
+      <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingLegalStructureDropdown />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />

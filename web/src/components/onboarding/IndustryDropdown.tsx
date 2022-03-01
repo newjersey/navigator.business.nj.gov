@@ -2,14 +2,24 @@ import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
+import { ProfileFields } from "@/lib/types/types";
 import { splitAndBoldSearchText } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import { Industries, Industry, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import orderBy from "lodash.orderby";
-import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
+import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
 
-export const IndustryDropdown = (): ReactElement => {
+interface Props {
+  fieldName: ProfileFields;
+  handleChange?: () => void;
+  onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
+  error?: boolean;
+  validationText?: string;
+  validationLabel?: string;
+}
+
+export const IndustryDropdown = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
 
@@ -40,10 +50,12 @@ export const IndustryDropdown = (): ReactElement => {
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    props.handleChange && props.handleChange();
     setSearchText(event.target.value);
   };
 
   const handleIndustry = (event: ChangeEvent<unknown>, value: Industry | null) => {
+    props.handleChange && props.handleChange();
     handleIndustryIdChange(value?.id);
     setSearchText(value ? value.name : "");
   };
@@ -61,6 +73,8 @@ export const IndustryDropdown = (): ReactElement => {
       isOptionEqualToValue={(option: Industry, value: Industry) => option.id === value.id}
       value={state.profileData.industryId ? LookupIndustryById(state.profileData.industryId) : null}
       onChange={handleIndustry}
+      onBlur={props.onValidation}
+      onSubmit={props.onValidation}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           {selected ? (
@@ -79,7 +93,7 @@ export const IndustryDropdown = (): ReactElement => {
       renderInput={(params) => (
         <TextField
           {...params}
-          id="industry"
+          id="industryId"
           inputProps={{
             "aria-label": "Industry",
             "data-testid": "industryid",
@@ -87,8 +101,11 @@ export const IndustryDropdown = (): ReactElement => {
           }}
           value={searchText}
           onChange={handleChange}
+          onSubmit={props.onValidation}
           variant="outlined"
-          placeholder={state.displayContent.industry.placeholder}
+          placeholder={state.displayContent.industryId.placeholder}
+          error={props.error}
+          helperText={props.error ? props.validationText ?? " " : " "}
         />
       )}
       fullWidth

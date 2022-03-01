@@ -46,7 +46,7 @@ export interface IndustryFieldContent extends TextFieldContent {
 export type StartingFlowContent = {
   hasExistingBusiness: RadioFieldContent;
   businessName: TextFieldContent;
-  industry: IndustryFieldContent;
+  industryId: IndustryFieldContent;
   municipality: TextFieldContent;
   legalStructure: LegalFieldContent;
   homeBased: RadioFieldContent;
@@ -54,7 +54,7 @@ export type StartingFlowContent = {
 
 export type ProfileContent = {
   businessName: TextFieldContent;
-  industry: IndustryFieldContent;
+  industryId: IndustryFieldContent;
   municipality: TextFieldContent;
   legalStructure: LegalFieldContent;
   notes: TextFieldContent;
@@ -209,7 +209,7 @@ const coreContent = {
 export const emptyStartingFlowContent: StartingFlowContent = {
   ...coreContent,
   hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
-  industry: {
+  industryId: {
     contentMd: "",
     placeholder: "",
     specificHomeContractorMd: "",
@@ -263,7 +263,7 @@ export const emptyProfileContent: ProfileContent = {
   sectorId: {
     contentMd: "",
   },
-  industry: {
+  industryId: {
     contentMd: "",
     placeholder: "",
     specificHomeContractorMd: "",

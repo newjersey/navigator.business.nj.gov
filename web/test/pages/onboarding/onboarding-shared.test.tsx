@@ -277,7 +277,7 @@ describe("onboarding - shared", () => {
 
   it("displays industry-specific content for home contractors when selected", async () => {
     const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-    displayContent.industry.specificHomeContractorMd = "Learn more about home contractors!";
+    displayContent.industryId.specificHomeContractorMd = "Learn more about home contractors!";
 
     const { subject, page } = renderPage({});
 
@@ -297,7 +297,7 @@ describe("onboarding - shared", () => {
 
   it("displays industry-specific content for employment agency when selected", async () => {
     const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-    displayContent.industry.specificEmploymentAgencyMd = "Learn more about employment agencies!";
+    displayContent.industryId.specificEmploymentAgencyMd = "Learn more about employment agencies!";
 
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-false");
@@ -316,7 +316,7 @@ describe("onboarding - shared", () => {
 
   it("displays liquor license question for restaurants when selected", async () => {
     const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-    displayContent.industry.specificLiquorQuestion = {
+    displayContent.industryId.specificLiquorQuestion = {
       contentMd: "Do you need a liquor license?",
       radioButtonYesText: "Yeah",
       radioButtonNoText: "Nah",
