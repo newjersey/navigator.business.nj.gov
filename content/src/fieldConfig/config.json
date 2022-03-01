@@ -141,7 +141,12 @@
     "contactPhoneNumberErrorText": "Phone number is required",
     "reviewPageEmailLabel": "**Email:**",
     "reviewPageMembersHeader": "### Members",
-    "successPageHeader": "Hooray!"
+    "successPageHeader": "Hooray!",
+    "nameCheckPlaceholderText": "Enter a business name",
+    "nameCheckValidationErrorText": "You need to enter a business name to check availability.",
+    "nameCheckUnavailableText": "Sorry, \"${name}\" isn’t available. Try another name. Once you have found an available name you then can officially form your business.",
+    "nameCheckAvailableText": "\"${name}\" is available. This name will be registered with the State ONLY after you submit the rest of this form.",
+    "nameCheckUpdateProfileText": "Update my profile with the name \"${name}\" (this does not register your name with the State)."
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
@@ -331,7 +336,7 @@
     "updateButtonText": "Update the name on your Roadmap with this one",
     "officialCheckButtonLink": "https://www.njportal.com/DOR/BusinessNameSearch/Search/BusinessName",
     "officialCheckText": "Do an official check with the New Jersey Division of Revenue and Enterprise Services to confirm your name is legally clear to use. Once confirmed, you can reserve the name and form your business.",
-    "nameHasBeenUpdatedText": "Your business name has been updated",
+    "nameHasBeenUpdatedText": "Your business name has been updated.",
     "similarUnavailableNamesText": "Here are similar business names that are already taken:",
     "availableText": "It looks like \"${name}\" might be available, but you should next do an official name check using the button below.",
     "errorTextBadInput": "Sorry, that isn't a valid company name. Try being more specific.",

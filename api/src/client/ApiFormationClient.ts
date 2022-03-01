@@ -140,7 +140,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         BusinessInformation: {
           CompanyOrigin: "Domestic",
           Business: "DomesticLimitedLiabilityCompany",
-          BusinessName: userData.profileData.businessName,
+          BusinessName: formationFormData.businessName,
           BusinessDesignator: formationFormData.businessSuffix,
           EffectiveFilingDate: dayjs(formationFormData.businessStartDate, "YYYY-MM-DD").toISOString(),
           MainAddress: {

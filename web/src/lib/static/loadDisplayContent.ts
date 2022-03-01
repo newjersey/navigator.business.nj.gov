@@ -198,6 +198,7 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
     fs.readFileSync(path.join(displayContentDir, filename), "utf8");
 
   const introParagraph = getMarkdown(loadFile("business-formation/form-business-entity-intro.md"));
+  const businessNameCheck = getMarkdown(loadFile("business-formation/business-name-check.md"));
   const services = getMarkdown(loadFile("business-formation/services.md"));
   const officialFormationDocument = getMarkdown(loadFile("business-formation/doc-official-formation.md"));
   const certificateOfStanding = getMarkdown(loadFile("business-formation/doc-certificate-of-standing.md"));
@@ -218,6 +219,9 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
     formationDisplayContent: {
       introParagraph: {
         contentMd: introParagraph.content,
+      },
+      businessNameCheck: {
+        contentMd: businessNameCheck.content,
       },
       agentNumberOrManual: {
         contentMd: agentNumberOrManual.content,

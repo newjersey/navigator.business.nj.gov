@@ -1,11 +1,9 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { MediaQueries } from "@/lib/PageSizes";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { useMediaQuery } from "@mui/material";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { FormationContext } from "../BusinessFormation";
@@ -17,7 +15,6 @@ export const BusinessSection = (): ReactElement => {
   const { state, setErrorMap, setTab } = useContext(FormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const { userData, update } = useUserData();
-  const isMobile = useMediaQuery(MediaQueries.isMobile);
 
   const requiredFieldsWithError = useMemo(() => {
     let requiredFields: FormationFields[] = [
@@ -133,16 +130,20 @@ export const BusinessSection = (): ReactElement => {
         showRequiredFieldsError={showRequiredFieldsError}
         requiredFieldsWithError={requiredFieldsWithError}
       />
-      <div className="margin-top-2 ">
+      <div className="margin-top-2">
         <div className="padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background">
           <Button
-            style="primary"
-            onClick={submitBusinessData}
-            noRightMargin
+            style="secondary"
             widthAutoOnMobile
-            heightAutoOnMobile={isMobile}
+            onClick={() => {
+              setTab(state.tab - 1);
+              scrollToTop();
+            }}
           >
-            {Config.businessFormationDefaults.initialNextButtonText}
+            {Config.businessFormationDefaults.previousButtonText}
+          </Button>
+          <Button style="primary" onClick={submitBusinessData} widthAutoOnMobile noRightMargin>
+            {Config.businessFormationDefaults.nextButtonText}
           </Button>
         </div>
       </div>

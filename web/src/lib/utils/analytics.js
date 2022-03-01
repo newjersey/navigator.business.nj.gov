@@ -378,5 +378,19 @@ export default {
         },
       },
     },
+    business_formation_name_step_continue_button: {
+      click: {
+        go_to_next_formation_step: () => {
+          sendEvent("business_formation_name_step_continue_button", "click", "go_to_next_formation_step");
+        },
+      },
+    },
+    business_formation_name_step_update_name_on_roadmap: {
+      click: {
+        update_name_on_roadmap: () => {
+          sendEvent("business_formation_name_step_update_name_on_roadmap", "click", "update_name_on_roadmap");
+        },
+      },
+    },
   },
 };
