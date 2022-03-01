@@ -36,7 +36,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
       <div className="flex space-between margin-bottom-2 flex-align-center">
         <div className="maxw-mobile-lg ">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {state.displayContent.businessNameAndLegalStructure.contentMd}
+            {Config.businessFormationDefaults.businessNameAndLegalStructureHeader}
           </Content>
         </div>
         <div className="margin-left-2">

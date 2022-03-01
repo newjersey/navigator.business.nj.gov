@@ -55,9 +55,6 @@ describe("<BusinessFormation />", () => {
   let subject: RenderResult;
   const task = generateTask({});
   const displayContent = generateFormationDisplayContent({
-    businessNameAndLegalStructure: {
-      contentMd: "business name and legal structure",
-    },
     officialFormationDocument: {
       contentMd: "Official formation document",
       cost: 125,
@@ -114,7 +111,6 @@ describe("<BusinessFormation />", () => {
     const profileData = generateProfileData({ legalStructureId: "limited-liability-company" });
     subject = renderTask({ profileData });
     expect(subject.queryByTestId("formation-form")).toBeInTheDocument();
-    expect(subject.getByText("business name and legal structure")).toBeInTheDocument();
     expect(subject.queryByTestId("business-section")).toBeInTheDocument();
   });
 

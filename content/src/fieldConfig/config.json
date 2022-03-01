@@ -127,7 +127,11 @@
     "businessAddressZipCodePlaceholder": "Zip Code",
     "businessAddressHeader": "## Business Address",
     "signerLabel": "**Signer Full Name**",
-    "signerPlaceholder": "Signer Full Name"
+    "signerPlaceholder": "Signer Full Name",
+    "businessNameAndLegalStructureHeader": "### Business Name and Legal Structure",
+    "businessStartDateLabel": "**Business Start Date**",
+    "contactInformationHeader": "## Billing Contact Information",
+    "paymentDisclaimerText": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment."
   },
   "dashboardDefaults": {
     "headerText": "Hello, ${name}",

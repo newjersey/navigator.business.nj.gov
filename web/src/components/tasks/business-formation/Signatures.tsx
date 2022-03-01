@@ -50,7 +50,7 @@ export const Signatures = (): ReactElement => {
         {state.formationFormData.additionalSigners.map((it, index) => {
           return (
             <div className="margin-bottom-1" key={index}>
-              <Content>{state.displayContent.additionalSigners.contentMd}</Content>
+              <Content>{Config.businessFormationDefaults.signerLabel}</Content>
               <div className="grid-row flex-align-center">
                 <div className="grid-col">
                   <TextField
@@ -61,7 +61,7 @@ export const Signatures = (): ReactElement => {
                     }
                     variant="outlined"
                     fullWidth
-                    placeholder={state.displayContent.additionalSigners.placeholder ?? ""}
+                    placeholder={Config.businessFormationDefaults.signerPlaceholder ?? ""}
                     inputProps={{
                       "aria-label": `Additional signer ${index}`,
                     }}

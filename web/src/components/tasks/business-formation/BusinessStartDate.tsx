@@ -32,7 +32,7 @@ export const BusinessStartDate = (): ReactElement => {
 
   return (
     <>
-      <Content key="dateOfFormationMd">{state.displayContent.businessStartDate.contentMd}</Content>
+      <Content key="dateOfFormationMd">{Config.businessFormationDefaults.businessStartDateLabel}</Content>
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker

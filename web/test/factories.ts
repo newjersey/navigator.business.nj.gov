@@ -276,12 +276,6 @@ export const generateFormationDisplayContent = (
   introParagraph: {
     contentMd: `some-intro-content-${randomInt()}`,
   },
-  businessNameAndLegalStructure: {
-    contentMd: `some-business-name-and-legal-structure-content-${randomInt()}`,
-  },
-  businessStartDate: {
-    contentMd: `some-business-start-date-content-${randomInt()}`,
-  },
   agentNumberOrManual: {
     contentMd: `some-agent-number-or-manual-content-${randomInt()}`,
     radioButtonNumberText: `some-agent-number-or-manual-radio-number-text-${randomInt()}`,
@@ -298,15 +292,8 @@ export const generateFormationDisplayContent = (
   signatureHeader: {
     contentMd: `some-signer-content- ${randomInt()}`,
   },
-  additionalSigners: {
-    contentMd: `some-additional-signer-content- ${randomInt()}`,
-    placeholder: `some-additional-signer-placeholder-${randomInt()}`,
-  },
   services: {
     contentMd: `some-payment-type-content-${randomInt()}`,
-  },
-  disclaimer: {
-    contentMd: `some-disclaimer-${randomInt()}`,
   },
   notification: {
     contentMd: `some-notification-${randomInt()}`,
@@ -324,9 +311,6 @@ export const generateFormationDisplayContent = (
     contentMd: `some-certified-copy-of-formation-document-content-${randomInt()}`,
     cost: randomInt(),
     optionalLabel: `some-certified-copy-of-formation-document-optional-label-${randomInt()}`,
-  },
-  contactInformation: {
-    contentMd: `some-contact-information-content-${randomInt()}`,
   },
   ...overrides,
 });

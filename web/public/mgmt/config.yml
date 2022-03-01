@@ -42,6 +42,8 @@ collections:
               - { label: ACH Payment Cost, name: achPaymentCost, widget: string }
               - { label: ACH Payment label, name: achPaymentTypeLabel, widget: string }
               - { label: Add New Signer Button, name: addNewSignerButtonText, widget: string }
+              - { label: Business Name & Legal Structure Header, name: businessNameAndLegalStructureHeader, widget: string, hint: This field supports Markdown}
+              - { label: Business Start Date Label, name: businessStartDateLabel, widget: string, hint: This field supports Markdown}
               - {
                   label: Business Address - Header,
                   name: businessAddressHeader,
@@ -107,6 +109,12 @@ collections:
                 }
               - { label: Business Suffix Placeholder, name: businessSuffixPlaceholder, widget: string }
               - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
+              - {
+                  label: Contact Section Header,
+                  name: contactInformationHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - {
                   label: Contact First Name Label,
                   name: contactFirstNameLabel,
@@ -267,6 +275,12 @@ collections:
               - {
                   label: Opt In - Corp Watch Text,
                   name: optInCorpWatchText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Payment Disclaimer Text,
+                  name: paymentDisclaimerText,
                   widget: string,
                   hint: This field supports Markdown,
                 }
