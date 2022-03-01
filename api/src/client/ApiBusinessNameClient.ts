@@ -10,7 +10,9 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
       .get(url)
       .then((response: AxiosResponse<ApiNameAvailabilityResponse>) => {
         logWriter.LogInfo(
-          `Business Name Search - NICUSA - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
+          `Business Name Search - NICUSA - Response Received. Status: ${response.status} : ${
+            response.statusText
+          }. Data: ${JSON.stringify(response.data)}`
         );
         return {
           status: response.data.Available ? "AVAILABLE" : ("UNAVAILABLE" as "AVAILABLE" | "UNAVAILABLE"),
