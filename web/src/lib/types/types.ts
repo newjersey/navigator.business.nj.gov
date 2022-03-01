@@ -95,6 +95,7 @@ export interface LoadDisplayContent
 
 export type FormationDisplayContent = {
   introParagraph: { contentMd: string };
+  businessNameCheck: { contentMd: string };
   agentNumberOrManual: {
     contentMd: string;
     radioButtonNumberText: string;
@@ -138,6 +139,9 @@ export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
   introParagraph: {
+    contentMd: "",
+  },
+  businessNameCheck: {
     contentMd: "",
   },
   agentNumberOrManual: {
@@ -574,4 +578,6 @@ export type SelfRegRequest = {
   userTesting: boolean;
 };
 
-export type businessFormationTabsNames = "Business" | "Contacts" | "Review" | "Billing";
+export type businessFormationTabsNames = "Name" | "Business" | "Contacts" | "Review" | "Billing";
+
+export type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";

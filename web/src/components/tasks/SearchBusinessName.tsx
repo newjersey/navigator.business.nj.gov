@@ -3,16 +3,15 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskHeader } from "@/components/TaskHeader";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import * as api from "@/lib/api-client/apiClient";
+import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { NameAvailability, Task } from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
+import { Task } from "@/lib/types/types";
 import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField } from "@mui/material";
-import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
+import React, { ReactElement } from "react";
 import { Button } from "../njwds-extended/Button";
 interface Props {
   task: Task;
@@ -25,68 +24,26 @@ const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
 };
 
 export const SearchBusinessName = (props: Props): ReactElement => {
-  const [name, setName] = useState<string>("");
-  const [nameDisplayedInResults, setNameDisplayedInResults] = useState<string>("");
-  const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
-  const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
-  const { userData, update } = useUserData();
+  const { userData } = useUserData();
   const { roadmap } = useRoadmap();
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
-
-  const handleName = (event: ChangeEvent<HTMLInputElement>): void => {
-    setName(event.target.value);
-  };
-
-  const searchBusinessName = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-    setNameAvailability(undefined);
-    setUpdateButtonClicked(false);
-
-    if (!name) {
-      setError("BAD_INPUT");
-      return;
-    }
-
-    setError(undefined);
-    setIsLoading(true);
-    analytics.event.task_business_name_check_availability.submit.view_business_name_availability();
-
-    api
-      .searchBusinessName(name)
-      .then((result: NameAvailability) => {
-        setNameDisplayedInResults(name);
-        setIsLoading(false);
-        setNameAvailability(result);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        if (error === 400) {
-          setError("BAD_INPUT");
-        } else {
-          setError("SEARCH_FAILED");
-        }
-      });
-  };
+  const {
+    currentName,
+    submittedName,
+    isLoading,
+    error,
+    nameAvailability,
+    updateButtonClicked,
+    updateCurrentName,
+    searchBusinessName,
+    updateNameOnProfile,
+    setCurrentName,
+  } = useBusinessNameSearch(false);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
-    setName(userData.profileData.businessName);
+    setCurrentName(userData.profileData.businessName);
   }, userData);
-
-  const updateBusinessName = (): void => {
-    if (!userData) return;
-    setUpdateButtonClicked(true);
-    const newUserData = {
-      ...userData,
-      profileData: {
-        ...userData.profileData,
-        businessName: name,
-      },
-    };
-    update(newUserData);
-  };
 
   const showBadInputError = (): ReactElement => {
     if (error !== "BAD_INPUT") return <></>;
@@ -110,7 +67,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     return (
       <div data-testid="available-text">
         <p className="font-body-2xs text-primary">
-          {templateEval(Config.searchBusinessNameTask.availableText, { name: nameDisplayedInResults })}
+          {templateEval(Config.searchBusinessNameTask.availableText, { name: submittedName })}
         </p>
         {updateButtonClicked ? (
           <div className="font-body-2xs text-primary margin-top-05" data-testid="name-has-been-updated">
@@ -121,7 +78,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
           </div>
         ) : (
           <button
-            onClick={updateBusinessName}
+            onClick={updateNameOnProfile}
             data-testid="update-name"
             className="usa-button usa-button--unstyled font-body-2xs"
           >
@@ -150,7 +107,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     return (
       <div data-testid="unavailable-text">
         <p className="font-body-2xs text-red">
-          {templateEval(Config.searchBusinessNameTask.unavailableText, { name: nameDisplayedInResults })}
+          {templateEval(Config.searchBusinessNameTask.unavailableText, { name: submittedName })}
         </p>
         <p className="font-body-2xs text-red margin-bottom-1">
           {Config.searchBusinessNameTask.similarUnavailableNamesText}
@@ -180,8 +137,8 @@ export const SearchBusinessName = (props: Props): ReactElement => {
             <TextField
               className="fg1 width-100"
               margin="dense"
-              value={name}
-              onChange={handleName}
+              value={currentName}
+              onChange={updateCurrentName}
               variant="outlined"
               placeholder={Config.searchBusinessNameTask.placeholderText}
               inputProps={{

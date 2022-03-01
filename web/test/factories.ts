@@ -276,6 +276,9 @@ export const generateFormationDisplayContent = (
   introParagraph: {
     contentMd: `some-intro-content-${randomInt()}`,
   },
+  businessNameCheck: {
+    contentMd: `some-business-name-check-content-${randomInt()}`,
+  },
   agentNumberOrManual: {
     contentMd: `some-agent-number-or-manual-content-${randomInt()}`,
     radioButtonNumberText: `some-agent-number-or-manual-radio-number-text-${randomInt()}`,

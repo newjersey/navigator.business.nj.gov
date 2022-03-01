@@ -7,7 +7,7 @@ describe("search business name [feature] [all] [group2]", () => {
   });
 
   it("searches available names", () => {
-    completeOnboarding("Aculyst", "e-commerce", "limited-liability-company");
+    completeOnboarding("Aculyst", "e-commerce", "limited-liability-partnership");
 
     // roadmap business name
     cy.get('[data-business-name="Aculyst"]').should("exist");

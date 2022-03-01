@@ -60,28 +60,36 @@ describe("buildUserRoadmap", () => {
       await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("llc");
 
       await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-
-      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("llc");
 
       await buildUserRoadmap(generateProfileData({ legalStructureId: "c-corporation" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("llc");
+    });
+
+    it("adds llc for LLC legal structure", async () => {
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("llc");
     });
 
     it("adds trade-name for Trade Name legal structures", async () => {
       await buildUserRoadmap(generateProfileData({ legalStructureId: "general-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("llc");
 
       await buildUserRoadmap(generateProfileData({ legalStructureId: "sole-proprietorship" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("llc");
     });
 
     it("adds tax registration tasks for S-Corp legal structures", async () => {
