@@ -33,7 +33,7 @@ export class ProfilePage extends OnboardingPage {
   selectLegalStructure(id: string) {
     const companyType = LookupLegalStructureById(id).name;
     this.getLegalStructure().click();
-    cy.contains(companyType).click();
+    cy.contains(companyType).click({ force: true });
   }
 
   typeTaxId(taxId: string) {
