@@ -140,22 +140,37 @@ const OnboardingPage = (props: Props): ReactElement => {
   useEffect(() => {
     if (!router.isReady || !userData || hasHandledRouting.current) return;
 
-    const queryPage = Number(router.query.page);
+    (async () => {
+      if (userData?.formProgress === "COMPLETED") {
+        await router.replace("/profile");
+        return;
+      } else {
+        const queryPage = Number(router.query.page);
 
-    const hasAnsweredExistingBusiness = userData.profileData.hasExistingBusiness !== undefined;
-    const currentFlowInUserData = userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
-    const requestedPageIsInRange =
-      queryPage <= onboardingFlows[currentFlowInUserData].pages.length && queryPage > 0;
+        const hasAnsweredExistingBusiness = userData.profileData.hasExistingBusiness !== undefined;
+        const currentFlowInUserData = userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+        const requestedPageIsInRange =
+          queryPage <= onboardingFlows[currentFlowInUserData].pages.length && queryPage > 0;
 
-    if (hasAnsweredExistingBusiness && requestedPageIsInRange) {
-      setPage({ current: queryPage, previous: queryPage - 1 });
-    } else {
-      setPage({ current: 1, previous: 1 });
-      queryShallowPush(1);
-    }
+        if (hasAnsweredExistingBusiness && requestedPageIsInRange) {
+          setPage({ current: queryPage, previous: queryPage - 1 });
+        } else {
+          setPage({ current: 1, previous: 1 });
+          queryShallowPush(1);
+        }
 
-    hasHandledRouting.current = true;
-  }, [router.isReady, router.query.page, userData, onboardingFlows, queryShallowPush, hasHandledRouting]);
+        hasHandledRouting.current = true;
+      }
+    })();
+  }, [
+    router,
+    router.isReady,
+    router.query.page,
+    userData,
+    onboardingFlows,
+    queryShallowPush,
+    hasHandledRouting,
+  ]);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
