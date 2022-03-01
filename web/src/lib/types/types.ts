@@ -95,12 +95,6 @@ export interface LoadDisplayContent
 
 export type FormationDisplayContent = {
   introParagraph: { contentMd: string };
-  businessNameAndLegalStructure: {
-    contentMd: string;
-  };
-  businessStartDate: {
-    contentMd: string;
-  };
   agentNumberOrManual: {
     contentMd: string;
     radioButtonNumberText: string;
@@ -114,11 +108,7 @@ export type FormationDisplayContent = {
   signatureHeader: {
     contentMd: string;
   };
-  additionalSigners: TextFieldContent;
   services: {
-    contentMd: string;
-  };
-  disclaimer: {
     contentMd: string;
   };
   notification: {
@@ -138,7 +128,6 @@ export type FormationDisplayContent = {
     cost: number;
     optionalLabel: string;
   };
-  contactInformation: { contentMd: string };
 };
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
@@ -149,12 +138,6 @@ export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
   introParagraph: {
-    contentMd: "",
-  },
-  businessNameAndLegalStructure: {
-    contentMd: "",
-  },
-  businessStartDate: {
     contentMd: "",
   },
   agentNumberOrManual: {
@@ -173,14 +156,7 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   signatureHeader: {
     contentMd: "",
   },
-  additionalSigners: {
-    contentMd: "",
-    placeholder: "",
-  },
   services: {
-    contentMd: "",
-  },
-  disclaimer: {
     contentMd: "",
   },
   notification: {
@@ -199,9 +175,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     contentMd: "",
     cost: 0,
     optionalLabel: "",
-  },
-  contactInformation: {
-    contentMd: "",
   },
 });
 

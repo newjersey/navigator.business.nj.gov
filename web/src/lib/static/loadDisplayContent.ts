@@ -198,12 +198,7 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
     fs.readFileSync(path.join(displayContentDir, filename), "utf8");
 
   const introParagraph = getMarkdown(loadFile("business-formation/form-business-entity-intro.md"));
-  const businessNameAndLegalStructure = getMarkdown(
-    loadFile("business-formation/business-name-and-legal-structure.md")
-  );
-  const businessStartDate = getMarkdown(loadFile("business-formation/business-start-date.md"));
   const services = getMarkdown(loadFile("business-formation/services.md"));
-  const disclaimer = getMarkdown(loadFile("business-formation/disclaimer.md"));
   const officialFormationDocument = getMarkdown(loadFile("business-formation/doc-official-formation.md"));
   const certificateOfStanding = getMarkdown(loadFile("business-formation/doc-certificate-of-standing.md"));
   const certifiedCopyOfFormationDocument = getMarkdown(
@@ -218,19 +213,11 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const members = getMarkdown(loadFile("business-formation/members.md"));
 
   const signatureHeader = getMarkdown(loadFile("business-formation/signatures.md"));
-  const additionalSigners = getMarkdown(loadFile("business-formation/additional-signers.md"));
-  const contactInformation = getMarkdown(loadFile("business-formation/contact-information.md"));
 
   return {
     formationDisplayContent: {
       introParagraph: {
         contentMd: introParagraph.content,
-      },
-      businessNameAndLegalStructure: {
-        contentMd: businessNameAndLegalStructure.content,
-      },
-      businessStartDate: {
-        contentMd: businessStartDate.content,
       },
       agentNumberOrManual: {
         contentMd: agentNumberOrManual.content,
@@ -250,15 +237,8 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       signatureHeader: {
         contentMd: signatureHeader.content,
       },
-      additionalSigners: {
-        contentMd: additionalSigners.content,
-        ...(additionalSigners.grayMatter as FieldGrayMatter),
-      },
       services: {
         contentMd: services.content,
-      },
-      disclaimer: {
-        contentMd: disclaimer.content,
       },
       notification: {
         contentMd: notification.content,
@@ -274,9 +254,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       certifiedCopyOfFormationDocument: {
         contentMd: certifiedCopyOfFormationDocument.content,
         ...(certifiedCopyOfFormationDocument.grayMatter as DocumentFieldGrayMatter),
-      },
-      contactInformation: {
-        contentMd: contactInformation.content,
       },
     },
   };

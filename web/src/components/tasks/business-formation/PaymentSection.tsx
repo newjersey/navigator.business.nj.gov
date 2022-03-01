@@ -84,7 +84,7 @@ export const PaymentSection = (): ReactElement => {
 
   return (
     <div data-testid="payment-section">
-      <Content>{state.displayContent.contactInformation.contentMd}</Content>
+      <Content>{Config.businessFormationDefaults.contactInformationHeader}</Content>
       <div className="grid-row grid-gap-2 margin-top-2">
         <div className="form-input margin-bottom-2 tablet:grid-col-6">
           <ContactFirstName />
@@ -104,7 +104,7 @@ export const PaymentSection = (): ReactElement => {
       <PaymentTypeTable />
       <BusinessFormationNotifications />
       <div className="margin-top-3">
-        <Content>{state.displayContent.disclaimer.contentMd}</Content>
+        <Content>{Config.businessFormationDefaults.paymentDisclaimerText}</Content>
       </div>
       <BusinessFormationFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
