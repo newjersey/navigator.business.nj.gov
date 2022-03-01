@@ -38,7 +38,11 @@ export const Signatures = (): ReactElement => {
   return (
     <>
       <div className="form-input margin-bottom-2">
+        <Content>{state.displayContent.signatureHeader.contentMd}</Content>
+        <br />
         <BusinessFormationTextField
+          label={Config.businessFormationDefaults.signerLabel}
+          placeholder={Config.businessFormationDefaults.signerPlaceholder}
           fieldName="signer"
           required={true}
           validationText={Config.businessFormationDefaults.signerErrorText}

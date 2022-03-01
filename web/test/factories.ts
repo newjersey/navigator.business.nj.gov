@@ -282,58 +282,10 @@ export const generateFormationDisplayContent = (
   businessStartDate: {
     contentMd: `some-business-start-date-content-${randomInt()}`,
   },
-  businessAddressLine1: {
-    contentMd: `some-business-address-line-1-content-${randomInt()}`,
-    placeholder: `some-business-address-line-1-placeholder-${randomInt()}`,
-  },
-  businessAddressLine2: {
-    contentMd: `some-business-address-line-2-content-${randomInt()}`,
-    placeholder: `some-business-address-line-2-placeholder-${randomInt()}`,
-  },
-  businessAddressState: {
-    contentMd: `some-business-address-state-content-${randomInt()}`,
-    placeholder: `some-business-address-state-placeholder-${randomInt()}`,
-  },
-  businessAddressZipCode: {
-    contentMd: `some-business-address-zip-code-content-${randomInt()}`,
-    placeholder: `some-business-address-zip-code-placeholder-${randomInt()}`,
-  },
   agentNumberOrManual: {
     contentMd: `some-agent-number-or-manual-content-${randomInt()}`,
     radioButtonNumberText: `some-agent-number-or-manual-radio-number-text-${randomInt()}`,
     radioButtonManualText: `some-agent-number-or-manual-radio-manual-text-${randomInt()}`,
-  },
-  agentNumber: {
-    contentMd: `some-agent-number-content-${randomInt()}`,
-    placeholder: `some-agent-number-placeholder-${randomInt()}`,
-  },
-  agentName: {
-    contentMd: `some-agent-name-content-${randomInt()}`,
-    placeholder: `some-agent-name-placeholder-${randomInt()}`,
-  },
-  agentEmail: {
-    contentMd: `some-agent-email-content-${randomInt()}`,
-    placeholder: `some-agent-email-placeholder-${randomInt()}`,
-  },
-  agentOfficeAddressLine1: {
-    contentMd: `some-agent-office-address-line-1-content-${randomInt()}`,
-    placeholder: `some-business-address-line-1-placeholder-${randomInt()}`,
-  },
-  agentOfficeAddressLine2: {
-    contentMd: `some-agent-office-address-line-2-content-${randomInt()}`,
-    placeholder: `some-business-address-line-2-placeholder-${randomInt()}`,
-  },
-  agentOfficeAddressCity: {
-    contentMd: `some-agent-office-address-city-content-${randomInt()}`,
-    placeholder: `some-agent-office-address-city-placeholder-${randomInt()}`,
-  },
-  agentOfficeAddressState: {
-    contentMd: `some-agent-office-address-state-content-${randomInt()}`,
-    placeholder: `some-agent-office-address-state-placeholder-${randomInt()}`,
-  },
-  agentOfficeAddressZipCode: {
-    contentMd: `some-agent-office-address-zip-code-content-${randomInt()}`,
-    placeholder: `some-agent-office-address-zip-code-placeholder-${randomInt()}`,
   },
   members: {
     contentMd: `some-members-content-${randomInt()}`,
@@ -343,9 +295,8 @@ export const generateFormationDisplayContent = (
     contentMd: `some-membersModal-content-${randomInt()}`,
     sameNameCheckboxText: `some-membersModal-checkbox-${randomInt()}`,
   },
-  signer: {
+  signatureHeader: {
     contentMd: `some-signer-content- ${randomInt()}`,
-    placeholder: `some-signer-placeholder-${randomInt()}`,
   },
   additionalSigners: {
     contentMd: `some-additional-signer-content- ${randomInt()}`,
@@ -376,18 +327,6 @@ export const generateFormationDisplayContent = (
   },
   contactInformation: {
     contentMd: `some-contact-information-content-${randomInt()}`,
-  },
-  contactFirstName: {
-    contentMd: `some-contact-first-name-content-${randomInt()}`,
-    placeholder: `some-contact-first-name-placeholder-${randomInt()}`,
-  },
-  contactLastName: {
-    contentMd: `some-contact-last-name-content-${randomInt()}`,
-    placeholder: `some-contact-last-name-placeholder-${randomInt()}`,
-  },
-  contactPhoneNumber: {
-    contentMd: `some-contact-phone-number-content-${randomInt()}`,
-    placeholder: `some-contact-phone-number-placeholder-${randomInt()}`,
   },
   ...overrides,
 });

@@ -24,7 +24,11 @@ export const MainBusiness = (): ReactElement => {
       </div>
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <BusinessAddressLine1 />
-      <BusinessFormationTextField fieldName="businessAddressLine2" />
+      <BusinessFormationTextField
+        label={Config.businessFormationDefaults.businessAddressAddressLine2Label}
+        placeholder={Config.businessFormationDefaults.businessAddressAddressLine2Placeholder}
+        fieldName="businessAddressLine2"
+      />
       <div className="grid-row grid-gap-2">
         <div className="margin-bottom-2 grid-col-12 tablet:grid-col-6">
           <span className="text-bold">{Config.businessFormationDefaults.businessAddressCityLabel}</span>
@@ -35,10 +39,17 @@ export const MainBusiness = (): ReactElement => {
           </div>
         </div>
         <div className="margin-bottom-2 form-input grid-col-5 tablet:grid-col-2">
-          <BusinessFormationTextField fieldName="businessAddressState" disabled={true} />
+          <BusinessFormationTextField
+            label={Config.businessFormationDefaults.businessAddressStateLabel}
+            placeholder={Config.businessFormationDefaults.businessAddressStatePlaceholder}
+            fieldName="businessAddressState"
+            disabled={true}
+          />
         </div>
         <div className="margin-bottom-2 form-input grid-col-7 tablet:grid-col-4">
           <BusinessFormationTextField
+            label={Config.businessFormationDefaults.businessAddressZipCodeLabel}
+            placeholder={Config.businessFormationDefaults.businessAddressZipCodePlaceholder}
             numericProps={{
               maxLength: 5,
             }}

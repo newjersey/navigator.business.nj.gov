@@ -202,10 +202,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
     loadFile("business-formation/business-name-and-legal-structure.md")
   );
   const businessStartDate = getMarkdown(loadFile("business-formation/business-start-date.md"));
-  const businessAddressLine1 = getMarkdown(loadFile("business-formation/business-address-line1.md"));
-  const businessAddressLine2 = getMarkdown(loadFile("business-formation/business-address-line2.md"));
-  const businessAddressState = getMarkdown(loadFile("business-formation/business-address-state.md"));
-  const businessAddressZipCode = getMarkdown(loadFile("business-formation/business-address-zip-code.md"));
   const services = getMarkdown(loadFile("business-formation/services.md"));
   const disclaimer = getMarkdown(loadFile("business-formation/disclaimer.md"));
   const officialFormationDocument = getMarkdown(loadFile("business-formation/doc-official-formation.md"));
@@ -217,24 +213,13 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const notification = getMarkdown(loadFile("business-formation/notification.md"));
 
   const agentNumberOrManual = getMarkdown(loadFile("business-formation/registered-agent.md"));
-  const agentNumber = getMarkdown(loadFile("business-formation/registered-agent-number.md"));
-  const agentName = getMarkdown(loadFile("business-formation/registered-agent-name.md"));
-  const agentEmail = getMarkdown(loadFile("business-formation/registered-agent-email.md"));
-  const agentOfficeAddressLine1 = getMarkdown(loadFile("business-formation/registered-agent-address-1.md"));
-  const agentOfficeAddressLine2 = getMarkdown(loadFile("business-formation/registered-agent-address-2.md"));
-  const agentOfficeAddressCity = getMarkdown(loadFile("business-formation/registered-agent-city.md"));
-  const agentOfficeAddressState = getMarkdown(loadFile("business-formation/registered-agent-state.md"));
-  const agentOfficeAddressZipCode = getMarkdown(loadFile("business-formation/registered-agent-zip.md"));
 
   const membersModal = getMarkdown(loadFile("business-formation/members-modal.md"));
   const members = getMarkdown(loadFile("business-formation/members.md"));
 
-  const signer = getMarkdown(loadFile("business-formation/signatures.md"));
+  const signatureHeader = getMarkdown(loadFile("business-formation/signatures.md"));
   const additionalSigners = getMarkdown(loadFile("business-formation/additional-signers.md"));
   const contactInformation = getMarkdown(loadFile("business-formation/contact-information.md"));
-  const contactFirstName = getMarkdown(loadFile("business-formation/contact-first-name.md"));
-  const contactLastName = getMarkdown(loadFile("business-formation/contact-last-name.md"));
-  const contactPhoneNumber = getMarkdown(loadFile("business-formation/contact-phone-number.md"));
 
   return {
     formationDisplayContent: {
@@ -247,60 +232,12 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       businessStartDate: {
         contentMd: businessStartDate.content,
       },
-      businessAddressLine1: {
-        contentMd: businessAddressLine1.content,
-        ...(businessAddressLine1.grayMatter as FieldGrayMatter),
-      },
-      businessAddressLine2: {
-        contentMd: businessAddressLine2.content,
-        ...(businessAddressLine2.grayMatter as FieldGrayMatter),
-      },
-      businessAddressState: {
-        contentMd: businessAddressState.content,
-        ...(businessAddressState.grayMatter as FieldGrayMatter),
-      },
-      businessAddressZipCode: {
-        contentMd: businessAddressZipCode.content,
-        ...(businessAddressZipCode.grayMatter as FieldGrayMatter),
-      },
       agentNumberOrManual: {
         contentMd: agentNumberOrManual.content,
         radioButtonNumberText: (agentNumberOrManual.grayMatter as RegisteredAgentRadioGrayMatter)
           .radioButtonNumberText,
         radioButtonManualText: (agentNumberOrManual.grayMatter as RegisteredAgentRadioGrayMatter)
           .radioButtonManualText,
-      },
-      agentNumber: {
-        contentMd: agentNumber.content,
-        ...(agentNumber.grayMatter as FieldGrayMatter),
-      },
-      agentName: {
-        contentMd: agentName.content,
-        ...(agentName.grayMatter as FieldGrayMatter),
-      },
-      agentEmail: {
-        contentMd: agentEmail.content,
-        ...(agentEmail.grayMatter as FieldGrayMatter),
-      },
-      agentOfficeAddressLine1: {
-        contentMd: agentOfficeAddressLine1.content,
-        ...(agentOfficeAddressLine1.grayMatter as FieldGrayMatter),
-      },
-      agentOfficeAddressLine2: {
-        contentMd: agentOfficeAddressLine2.content,
-        ...(agentOfficeAddressLine2.grayMatter as FieldGrayMatter),
-      },
-      agentOfficeAddressCity: {
-        contentMd: agentOfficeAddressCity.content,
-        ...(agentOfficeAddressCity.grayMatter as FieldGrayMatter),
-      },
-      agentOfficeAddressState: {
-        contentMd: agentOfficeAddressState.content,
-        ...(agentOfficeAddressState.grayMatter as FieldGrayMatter),
-      },
-      agentOfficeAddressZipCode: {
-        contentMd: agentOfficeAddressZipCode.content,
-        ...(agentOfficeAddressZipCode.grayMatter as FieldGrayMatter),
       },
       members: {
         contentMd: members.content,
@@ -310,9 +247,8 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
         contentMd: membersModal.content,
         sameNameCheckboxText: (membersModal.grayMatter as MembersModalGrayMatter).checkboxText,
       },
-      signer: {
-        contentMd: signer.content,
-        ...(signer.grayMatter as FieldGrayMatter),
+      signatureHeader: {
+        contentMd: signatureHeader.content,
       },
       additionalSigners: {
         contentMd: additionalSigners.content,
@@ -341,18 +277,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       },
       contactInformation: {
         contentMd: contactInformation.content,
-      },
-      contactFirstName: {
-        contentMd: contactFirstName.content,
-        ...(contactFirstName.grayMatter as FieldGrayMatter),
-      },
-      contactLastName: {
-        contentMd: contactLastName.content,
-        ...(contactLastName.grayMatter as FieldGrayMatter),
-      },
-      contactPhoneNumber: {
-        contentMd: contactPhoneNumber.content,
-        ...(contactPhoneNumber.grayMatter as FieldGrayMatter),
       },
     },
   };
