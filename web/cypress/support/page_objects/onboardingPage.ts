@@ -40,11 +40,11 @@ export class OnboardingPage {
   selectIndustry(industry: string) {
     const industryValue = LookupIndustryById(industry).name;
     this.getIndustryDropdown().click();
-    cy.contains(industryValue).click();
+    cy.contains(industryValue).click({ force: true });
   }
 
   selectLegalStructure(companyType: string) {
-    this.getLegalStructure(companyType).click();
+    this.getLegalStructure(companyType).click({ force: true });
   }
 
   selectHomeBased(radio: boolean) {
@@ -55,9 +55,9 @@ export class OnboardingPage {
     this.getLiquorLicense(radio).check();
   }
 
-  selectLocation(city: string) {
-    this.getLocationDropdown().click();
-    cy.contains(city).click();
+  selectLocation(townDisplayName: string) {
+    this.getLocationDropdown().type(townDisplayName);
+    cy.get("#mui-2-option-0").click({ force: true });
   }
 }
 
@@ -103,7 +103,7 @@ class OnboardingPageWithElementsNotInProfile extends OnboardingPage {
   }
 
   clickNext() {
-    cy.get('[data-testid="next"]').click();
+    cy.get('[data-testid="next"]').first().click({ force: true });
   }
 }
 
