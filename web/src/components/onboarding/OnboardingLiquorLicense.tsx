@@ -15,7 +15,7 @@ export const OnboardingLiquorLicense = (): ReactElement => {
 
   return (
     <>
-      <Content>{state.displayContent.industry.specificLiquorQuestion.contentMd}</Content>
+      <Content>{state.displayContent.industryId.specificLiquorQuestion.contentMd}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label="Liquor License"
@@ -30,7 +30,7 @@ export const OnboardingLiquorLicense = (): ReactElement => {
             data-testid="liquor-license-true"
             value={true}
             control={<Radio color="primary" />}
-            label={state.displayContent.industry.specificLiquorQuestion.radioButtonYesText}
+            label={state.displayContent.industryId.specificLiquorQuestion.radioButtonYesText}
           />
           <FormControlLabel
             style={{ marginRight: "3rem" }}
@@ -38,7 +38,7 @@ export const OnboardingLiquorLicense = (): ReactElement => {
             data-testid="liquor-license-false"
             value={false}
             control={<Radio color="primary" />}
-            label={state.displayContent.industry.specificLiquorQuestion.radioButtonNoText}
+            label={state.displayContent.industryId.specificLiquorQuestion.radioButtonNoText}
           />
         </RadioGroup>
       </FormControl>

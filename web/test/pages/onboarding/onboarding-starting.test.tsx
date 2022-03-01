@@ -57,6 +57,7 @@ describe("onboarding - starting a business", () => {
     await page.visitStep3();
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
     expect(subject.getByTestId("step-3")).toBeInTheDocument();
+    page.selectByText("Industry", "Any Other Business Type");
 
     await page.visitStep4();
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
@@ -90,6 +91,7 @@ describe("onboarding - starting a business", () => {
     const page3 = within(subject.getByTestId("page-3-form"));
     expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    page.selectByText("Industry", "Any Other Business Type");
 
     await page.visitStep4();
     const page4 = within(subject.getByTestId("page-4-form"));
@@ -203,11 +205,28 @@ describe("onboarding - starting a business", () => {
     });
   });
 
+  it("prevents user from moving after Step 3 if you have not selected an industry", async () => {
+    const { subject, page } = renderPage({});
+    page.chooseRadio("has-existing-business-false");
+    await page.visitStep2();
+    await page.visitStep3();
+    page.clickNext();
+    expect(subject.getByTestId("step-3")).toBeInTheDocument();
+    expect(subject.queryByTestId("step-4")).not.toBeInTheDocument();
+    expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    page.selectByText("Industry", "Any Other Business Type");
+    await page.visitStep4();
+    expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+    expect(subject.getByTestId("step-4")).toBeInTheDocument();
+    expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
+  });
+
   it("prevents user from moving after Step 4 if you have not selected a legal structure", async () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
     await page.visitStep3();
+    page.selectByText("Industry", "Any Other Business Type");
     await page.visitStep4();
     page.clickNext();
     expect(subject.getByTestId("step-4")).toBeInTheDocument();
@@ -226,6 +245,7 @@ describe("onboarding - starting a business", () => {
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
     await page.visitStep3();
+    page.selectByText("Industry", "Any Other Business Type");
     await page.visitStep4();
     page.chooseRadio("general-partnership");
     await page.visitStep5();
@@ -252,6 +272,7 @@ describe("onboarding - starting a business", () => {
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
     await page.visitStep3();
+    page.selectByText("Industry", "Any Other Business Type");
     await page.visitStep4();
     page.clickNext();
     expect(subject.getByTestId("step-4")).toBeInTheDocument();

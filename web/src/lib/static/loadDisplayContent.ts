@@ -51,7 +51,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     };
   };
 
-  const industry = (type: UserContentType): IndustryFieldContent => {
+  const industryId = (type: UserContentType): IndustryFieldContent => {
     const industryContent = getMarkdown(loadFile("industry.md", type));
     const specificHomeContractor = getMarkdown(loadFile("industry-home-contractor.md", type));
     const specificEmploymentAgency = getMarkdown(loadFile("industry-employment-agency.md", type));
@@ -117,7 +117,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     taxId,
     ownership,
     existingEmployees,
-    industry,
+    industryId,
     legalStructure,
     taxPin,
     businessProfile,
