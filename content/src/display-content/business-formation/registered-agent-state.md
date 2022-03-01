@@ -1,5 +1,0 @@
----
-placeholder: "Office State"
----
-
-**State**

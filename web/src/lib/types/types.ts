@@ -101,29 +101,19 @@ export type FormationDisplayContent = {
   businessStartDate: {
     contentMd: string;
   };
-  businessAddressLine1: TextFieldContent;
-  businessAddressLine2: TextFieldContent;
-  businessAddressState: TextFieldContent;
-  businessAddressZipCode: TextFieldContent;
   agentNumberOrManual: {
     contentMd: string;
     radioButtonNumberText: string;
     radioButtonManualText: string;
   };
-  agentNumber: TextFieldContent;
-  agentName: TextFieldContent;
-  agentEmail: TextFieldContent;
-  agentOfficeAddressLine1: TextFieldContent;
-  agentOfficeAddressLine2: TextFieldContent;
-  agentOfficeAddressCity: TextFieldContent;
-  agentOfficeAddressState: TextFieldContent;
-  agentOfficeAddressZipCode: TextFieldContent;
   members: TextFieldContent;
   membersModal: {
     contentMd: string;
     sameNameCheckboxText: string;
   };
-  signer: TextFieldContent;
+  signatureHeader: {
+    contentMd: string;
+  };
   additionalSigners: TextFieldContent;
   services: {
     contentMd: string;
@@ -149,9 +139,6 @@ export type FormationDisplayContent = {
     optionalLabel: string;
   };
   contactInformation: { contentMd: string };
-  contactFirstName: TextFieldContent;
-  contactLastName: TextFieldContent;
-  contactPhoneNumber: TextFieldContent;
 };
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
@@ -170,58 +157,10 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   businessStartDate: {
     contentMd: "",
   },
-  businessAddressLine1: {
-    contentMd: "",
-    placeholder: "",
-  },
-  businessAddressLine2: {
-    contentMd: "",
-    placeholder: "",
-  },
-  businessAddressState: {
-    contentMd: "",
-    placeholder: "",
-  },
-  businessAddressZipCode: {
-    contentMd: "",
-    placeholder: "",
-  },
   agentNumberOrManual: {
     contentMd: "",
     radioButtonNumberText: "",
     radioButtonManualText: "",
-  },
-  agentNumber: {
-    contentMd: "",
-    placeholder: "",
-  },
-  agentName: {
-    contentMd: "",
-    placeholder: "",
-  },
-  agentEmail: {
-    contentMd: "",
-    placeholder: "",
-  },
-  agentOfficeAddressLine1: {
-    contentMd: "",
-    placeholder: "",
-  },
-  agentOfficeAddressLine2: {
-    contentMd: "",
-    placeholder: "",
-  },
-  agentOfficeAddressCity: {
-    contentMd: "",
-    placeholder: "",
-  },
-  agentOfficeAddressState: {
-    contentMd: "",
-    placeholder: "",
-  },
-  agentOfficeAddressZipCode: {
-    contentMd: "",
-    placeholder: "",
   },
   members: {
     contentMd: "",
@@ -231,9 +170,8 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     contentMd: "",
     sameNameCheckboxText: "",
   },
-  signer: {
+  signatureHeader: {
     contentMd: "",
-    placeholder: "",
   },
   additionalSigners: {
     contentMd: "",
@@ -264,18 +202,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   },
   contactInformation: {
     contentMd: "",
-  },
-  contactFirstName: {
-    contentMd: "",
-    placeholder: "",
-  },
-  contactLastName: {
-    contentMd: "",
-    placeholder: "",
-  },
-  contactPhoneNumber: {
-    contentMd: "",
-    placeholder: "",
   },
 });
 

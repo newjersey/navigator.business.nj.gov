@@ -6,6 +6,7 @@ import React, { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"> {
   fieldName: Exclude<FormationTextField, "businessName">;
+  label: string;
 }
 
 export const BusinessFormationTextField = (props: Props): ReactElement => {
@@ -23,10 +24,10 @@ export const BusinessFormationTextField = (props: Props): ReactElement => {
   };
   return (
     <div>
-      <Content>{state.displayContent[props.fieldName].contentMd}</Content>
+      <Content>{props.label}</Content>
       <GenericTextField
         value={state.formationFormData[props.fieldName]}
-        placeholder={state.displayContent[props.fieldName].placeholder}
+        placeholder={props.placeholder}
         onValidation={onValidation}
         {...props}
         handleChange={handleChange}

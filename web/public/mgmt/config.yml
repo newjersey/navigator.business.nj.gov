@@ -43,15 +43,95 @@ collections:
               - { label: ACH Payment label, name: achPaymentTypeLabel, widget: string }
               - { label: Add New Signer Button, name: addNewSignerButtonText, widget: string }
               - {
+                  label: Business Address - Header,
+                  name: businessAddressHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Business Address - Address Line 1 Label,
+                  name: businessAddressAddressLine1Label,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Business Address - Address Line 1 Placeholder,
+                  name: businessAddressAddressLine1Placeholder,
+                  widget: string,
+                }
+              - {
+                  label: Business Address - Address Line 2 Label,
+                  name: businessAddressAddressLine2Label,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Business Address - Address Line 2 Placeholder,
+                  name: businessAddressAddressLine2Placeholder,
+                  widget: string,
+                }
+              - { label: Business Address - City Label, name: businessAddressCityLabel, widget: string }
+              - {
                   label: Business Address - City - Not Set,
                   name: notSetBusinessAddressCityLabel,
                   widget: string,
                 }
-              - { label: Business Address - City Label, name: businessAddressCityLabel, widget: string }
+              - {
+                  label: Business Address - State Label,
+                  name: businessAddressStateLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Business Address - State Placeholder,
+                  name: businessAddressStatePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Business Address - Zip Code Label,
+                  name: businessAddressZipCodeLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Business Address - Zip Code Placeholder,
+                  name: registeredAgentZipCodePlaceholder,
+                  widget: string,
+                }
               - { label: Business Name - Not Set, name: notSetBusinessNameText, widget: string }
-              - { label: Business Suffix Label, name: businessSuffixLabel, widget: string, hint: This field supports Markdown}
+              - {
+                  label: Business Suffix Label,
+                  name: businessSuffixLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - { label: Business Suffix Placeholder, name: businessSuffixPlaceholder, widget: string }
               - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
+              - {
+                  label: Contact First Name Label,
+                  name: contactFirstNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Contact First Name Placeholder, name: contactFirstNamePlaceholder, widget: string }
+              - {
+                  label: Contact Last Name Label,
+                  name: contactLastNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Contact Last Name Placeholder, name: contactLastNamePlaceholder, widget: string }
+              - {
+                  label: Contact Phone Number Label,
+                  name: contactPhoneNumberLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Contact Phone Number Placeholder,
+                  name: contactPhoneNumberPlaceholder,
+                  widget: string,
+                }
               - { label: Credit Card Payment Cost, name: creditCardPaymentCostInitial, widget: string }
               - { label: Credit Card Payment Extra Cost, name: creditCardPaymentCostExtra, widget: string }
               - { label: Credit Card Payment label, name: creditCardPaymentTypeLabel, widget: string }
@@ -119,21 +199,77 @@ collections:
               - { label: Member - Success Message Header, name: membersSuccessTextHeader, widget: string }
               - { label: Member - Table Column Headers, name: membersTableColumn, widget: string }
               - { label: Memeber - Add Member Button, name: membersNewButtonText, widget: string }
-              - { label: Memeber Modal - Name Label, name: memberModalNameLabel, widget: string, hint: This field supports Markdown  }
+              - {
+                  label: Memeber Modal - Name Label,
+                  name: memberModalNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - { label: Memeber Modal - Name Placeholder, name: memberModalNamePlaceholder, widget: string }
-              - { label: Memeber Modal - Address Line 1 Label, name: memberModalAddressLine1Label, widget: string, hint: This field supports Markdown  }
-              - { label: Memeber Modal - Address Line 1 Placeholder, name: memberModalAddressLine1Placeholder, widget: string }
-              - { label: Memeber Modal - Address Line 2 Label, name: memberModalAddressLine2Label, widget: string, hint: This field supports Markdown  }
-              - { label: Memeber Modal - Address Line 2 Placeholder, name: memberModalAddressLine2Placeholder, widget: string }
-              - { label: Memeber Modal - City Label, name: memberModalCityLabel, widget: string, hint: This field supports Markdown  }
+              - {
+                  label: Memeber Modal - Address Line 1 Label,
+                  name: memberModalAddressLine1Label,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Memeber Modal - Address Line 1 Placeholder,
+                  name: memberModalAddressLine1Placeholder,
+                  widget: string,
+                }
+              - {
+                  label: Memeber Modal - Address Line 2 Label,
+                  name: memberModalAddressLine2Label,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Memeber Modal - Address Line 2 Placeholder,
+                  name: memberModalAddressLine2Placeholder,
+                  widget: string,
+                }
+              - {
+                  label: Memeber Modal - City Label,
+                  name: memberModalCityLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - { label: Memeber Modal - City Placeholder, name: memberModalCityPlaceholder, widget: string }
-              - { label: Memeber Modal - State Label, name: memberModalStateLabel, widget: string, hint: This field supports Markdown  }
-              - { label: Memeber Modal - State Placeholder, name: memberModalStatePlaceholder, widget: string }
-              - { label: Memeber Modal - Zip Code Label, name: memberModalZipCodeLabel, widget: string, hint: This field supports Markdown  }
-              - { label: Memeber Modal - Zip Code Placeholder, name: memberModalZipCodePlaceholder, widget: string }
+              - {
+                  label: Memeber Modal - State Label,
+                  name: memberModalStateLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Memeber Modal - State Placeholder,
+                  name: memberModalStatePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Memeber Modal - Zip Code Label,
+                  name: memberModalZipCodeLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Memeber Modal - Zip Code Placeholder,
+                  name: memberModalZipCodePlaceholder,
+                  widget: string,
+                }
               - { label: Next Button Text, name: nextButtonText, widget: string }
-              - { label: Opt In - Annual Report Text, name: optInAnnualReportText, widget: string, hint: This field supports Markdown }
-              - { label: Opt In - Corp Watch Text, name: optInCorpWatchText, widget: string, hint: This field supports Markdown }
+              - {
+                  label: Opt In - Annual Report Text,
+                  name: optInAnnualReportText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Opt In - Corp Watch Text,
+                  name: optInCorpWatchText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - { label: Payment Type - Error, name: paymentTypeErrorText, widget: string }
               - { label: Payment Type - Table Label, name: paymentTypeTableLabel, widget: string }
               - {
@@ -142,6 +278,94 @@ collections:
                   widget: string,
                 }
               - { label: Previous Button Text, name: previousButtonText, widget: string }
+              - {
+                  label: Registered Agent - Number Label,
+                  name: registeredAgentNumberLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Registered Agent - Number Placeholder,
+                  name: registeredAgentNumberPlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Registered Agent - Name Label,
+                  name: registeredAgentNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Registered Agent - Name Placeholder,
+                  name: registeredAgentNamePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Registered Agent - Email Label,
+                  name: registeredAgentEmailLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Registered Agent - Email Placeholder,
+                  name: registeredAgentEmailPlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Registered Agent - Address Line 1 Label,
+                  name: registeredAgentAddressLine1Label,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Registered Agent - Address Line 1 Placeholder,
+                  name: registeredAgentAddressLine1Placeholder,
+                  widget: string,
+                }
+              - {
+                  label: Registered Agent - Address Line 2 Label,
+                  name: registeredAgentAddressLine2Label,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Registered Agent - Address Line 2 Placeholder,
+                  name: registeredAgentAddressLine2Placeholder,
+                  widget: string,
+                }
+              - {
+                  label: Registered Agent - City Label,
+                  name: registeredAgentCityLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Registered Agent - City Placeholder,
+                  name: registeredAgentCityPlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Registered Agent - State Label,
+                  name: registeredAgentStateLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Registered Agent - State Placeholder,
+                  name: registeredAgentStatePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Registered Agent - Zip Code Label,
+                  name: registeredAgentZipCodeLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Registered Agent - Zip Code Placeholder,
+                  name: registeredAgentZipCodePlaceholder,
+                  widget: string,
+                }
               - {
                   label: Review Page - Address Label,
                   name: reviewPageAddressLabel,
@@ -225,6 +449,17 @@ collections:
                   name: reviewPageSignerNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
+                }
+              - {
+                  label: Signer - Label,
+                  name: signerLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Signer - Placeholder,
+                  name: signerPlaceholder,
+                  widget: string,
                 }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Success Page - Body, name: successPageBody, widget: string }

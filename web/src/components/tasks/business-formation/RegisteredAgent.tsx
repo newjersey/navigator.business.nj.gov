@@ -65,6 +65,8 @@ export const RegisteredAgent = (): ReactElement => {
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
               <BusinessFormationTextField
+                label={Config.businessFormationDefaults.registeredAgentNumberLabel}
+                placeholder={Config.businessFormationDefaults.registeredAgentNumberPlaceholder}
                 numericProps={{
                   minLength: 4,
                   maxLength: 7,
@@ -78,32 +80,49 @@ export const RegisteredAgent = (): ReactElement => {
           {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
             <div data-testid="agent-name">
               <BusinessFormationTextField
+                label={Config.businessFormationDefaults.registeredAgentNameLabel}
+                placeholder={Config.businessFormationDefaults.registeredAgentNamePlaceholder}
                 required={true}
                 validationText={Config.businessFormationDefaults.agentnameErrorText}
                 fieldName="agentName"
               />
               <BusinessFormationTextField
+                label={Config.businessFormationDefaults.registeredAgentEmailLabel}
+                placeholder={Config.businessFormationDefaults.registeredAgentEmailPlaceholder}
                 fieldName="agentEmail"
                 additionalValidation={validateEmail}
                 required={true}
                 validationText={Config.businessFormationDefaults.agentEmailErrorText}
               />
               <BusinessFormationTextField
+                label={Config.businessFormationDefaults.registeredAgentAddressLine1Label}
+                placeholder={Config.businessFormationDefaults.registeredAgentAddressLine1Placeholder}
                 fieldName="agentOfficeAddressLine1"
                 required={true}
                 validationText={Config.businessFormationDefaults.agentOfficeAddressLine1ErrorText}
               />
-              <BusinessFormationTextField fieldName="agentOfficeAddressLine2" />
+              <BusinessFormationTextField
+                label={Config.businessFormationDefaults.registeredAgentAddressLine2Label}
+                placeholder={Config.businessFormationDefaults.registeredAgentAddressLine2Placeholder}
+                fieldName="agentOfficeAddressLine2"
+              />
               <div className="grid-row grid-gap-2">
                 <div className="grid-col-12 tablet:grid-col-6">
                   <BusinessFormationTextField
+                    label={Config.businessFormationDefaults.registeredAgentCityLabel}
+                    placeholder={Config.businessFormationDefaults.registeredAgentCityPlaceholder}
                     fieldName="agentOfficeAddressCity"
                     required={true}
                     validationText={Config.businessFormationDefaults.agentOfficeaddressCityErrorText}
                   />
                 </div>
                 <div className="grid-col-5 tablet:grid-col-2">
-                  <BusinessFormationTextField fieldName="agentOfficeAddressState" disabled={true} />
+                  <BusinessFormationTextField
+                    label={Config.businessFormationDefaults.registeredAgentStateLabel}
+                    placeholder={Config.businessFormationDefaults.registeredAgentStatePlaceholder}
+                    fieldName="agentOfficeAddressState"
+                    disabled={true}
+                  />
                 </div>
                 <div className="grid-col-7 tablet:grid-col-4">
                   <BusinessFormationTextField
@@ -111,6 +130,8 @@ export const RegisteredAgent = (): ReactElement => {
                       maxLength: 5,
                     }}
                     fieldName={"agentOfficeAddressZipCode"}
+                    label={Config.businessFormationDefaults.registeredAgentZipCodeLabel}
+                    placeholder={Config.businessFormationDefaults.registeredAgentZipCodePlaceholder}
                     validationText={Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText}
                     additionalValidation={zipCodeRange}
                     required={true}

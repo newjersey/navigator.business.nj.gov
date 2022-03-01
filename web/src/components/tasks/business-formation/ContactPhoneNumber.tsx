@@ -15,6 +15,8 @@ export const ContactPhoneNumber = (): ReactElement => {
     <div className="form-input margin-bottom-2">
       <BusinessFormationTextField
         validationText={Config.businessFormationDefaults.contactPhoneNumberErrorText}
+        label={Config.businessFormationDefaults.contactPhoneNumberLabel}
+        placeholder={Config.businessFormationDefaults.contactPhoneNumberPlaceholder}
         fieldName={"contactPhoneNumber"}
         numericProps={{
           maxLength: 10,
