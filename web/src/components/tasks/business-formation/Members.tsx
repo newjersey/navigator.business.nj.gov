@@ -7,7 +7,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationMember } from "@businessnjgovnavigator/shared";
 import { IconButton } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
-import styles from "../../../styles/members.module.scss";
+import styles from "../../../styles/sections/members.module.scss";
 import { MembersModal } from "./MembersModal";
 
 export const formatAddress = (member: FormationMember) =>

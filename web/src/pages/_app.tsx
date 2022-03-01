@@ -1,5 +1,5 @@
 // organize-imports-ignore
-import "../styles/global.scss";
+import "../styles/main.scss";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getCurrentUser } from "@/lib/auth/sessionHelper";

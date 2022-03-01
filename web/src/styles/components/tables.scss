@@ -48,6 +48,7 @@ table.business-formation-table {
       border: 0px;
     }
   }
+
   .business-formation-table-checkboxes {
     span {
       padding: 0;
@@ -62,6 +63,7 @@ table.business-formation-document {
     }
   }
 }
+
 table.business-formation-payment {
   thead {
     border-top: 1px solid $base-light;
@@ -80,20 +82,10 @@ table.business-formation-payment {
       border-bottom: 0px !important;
     }
   }
+
   tbody {
     tr:nth-child(1) {
       background: #f7f7f7;
     }
   }
-}
-.task-submit-button-background {
-  margin: 0px -24px -24px -24px;
-}
-
-.min-height-575rem {
-  min-height: 5.75rem;
-}
-
-.width-11rem {
-  width: 11rem;
 }
