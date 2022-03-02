@@ -61,6 +61,7 @@ export const BusinessNameSection = (): ReactElement => {
           <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
           <div className="tablet:grid-col-8">
             <TextField
+              autoComplete="off"
               className="fg1 width-100"
               margin="dense"
               value={currentName}
