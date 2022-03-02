@@ -100,7 +100,8 @@ const DeadLinksPage = (props: Props): ReactElement => {
 };
 
 export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-  const buildCheckDeadPages = process.env.CHECK_DEAD_LINKS ?? true;
+  const buildCheckDeadPages =
+    (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS == "true") || false;
   if (!buildCheckDeadPages) {
     return { notFound: true };
   } else {

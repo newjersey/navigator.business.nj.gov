@@ -138,7 +138,7 @@ export const findDeadTasks = async (): Promise<string[]> => {
   const deadTasks = [];
   const filenames = getFilenames();
   const contents = getContents(filenames);
-  const checkDeadTasks = process.env.CHECK_DEAD_LINKS ?? true;
+  const checkDeadTasks = (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS === "true") || false;
 
   if (checkDeadTasks) {
     for (const filename of filenames.tasks) {
@@ -182,7 +182,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     return url.startsWith("$") && templateEvals.some((it) => url.includes(it));
   };
 
-  const checkDeadLinks = process.env.CHECK_DEAD_LINKS ?? true;
+  const checkDeadLinks = (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS === "true") || false;
 
   if (checkDeadLinks) {
     for (const page of pages) {
