@@ -36,7 +36,7 @@
   "dependencies": {
     "@aws-amplify/auth": "4.4.2",
     "@aws-amplify/core": "4.4.0",
-    "@aws-amplify/ui-react": "2.2.2",
+    "@aws-amplify/ui-react": "2.7.0",
     "@businessnjgovnavigator/shared": "*",
     "@emotion/react": "11.8.1",
     "@emotion/styled": "11.8.1",
