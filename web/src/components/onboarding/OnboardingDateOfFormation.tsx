@@ -17,6 +17,7 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
   required?: boolean;
+  disabled?: boolean;
   headerAriaLevel?: number;
 }
 
@@ -53,8 +54,9 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
         inputFormat={"MM/YYYY"}
         disableMaskedInput={false}
         mask={"__/____"}
-        disableFuture
+        disableFuture={!props.disabled}
         openTo="year"
+        disabled={props.disabled}
         maxDate={dayjs()}
         value={dateValue}
         onClose={onValidation}

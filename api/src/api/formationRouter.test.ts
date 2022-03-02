@@ -134,6 +134,7 @@ describe("formationRouter", () => {
         profileData: {
           ...userData.profileData,
           entityId: getFilingResponse.entityId,
+          dateOfFormation: userData.formationData.formationFormData.businessStartDate,
           businessName: "New Name",
         },
       };

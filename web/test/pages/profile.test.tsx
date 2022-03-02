@@ -191,7 +191,21 @@ describe("profile", () => {
       subject = renderPage({ userData });
       expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
     });
+    it("disables date of formation if formation getFiling success", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: true,
+        }),
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({
+            success: true,
+          }),
+        }),
+      });
 
+      subject = renderPage({ userData });
+      expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
+    });
     it("prevents user from saving if they have not selected a location", async () => {
       const newark = generateMunicipality({ displayName: "Newark" });
       subject = renderPage({ municipalities: [newark] });

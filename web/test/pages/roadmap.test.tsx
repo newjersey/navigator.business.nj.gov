@@ -1,6 +1,8 @@
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
+  generateFormationData,
+  generateGetFilingResponse,
   generateMunicipality,
   generatePreferences,
   generateProfileData,
@@ -474,9 +476,26 @@ describe("roadmap page", () => {
     });
   });
   describe("oscar graduation modal", () => {
-    it("switches user to oscar and sends to dashboard", async () => {
+    let userData = generateUserData({});
+    const getRoadMap = () =>
+      render(
+        <WithStatefulUserData initialUserData={userData}>
+          <ThemeProvider theme={createTheme()}>
+            <RoadmapPage
+              operateReferences={{}}
+              displayContent={emptyDisplayContent}
+              profileDisplayContent={createEmptyLoadDisplayContent()}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>
+      );
+
+    beforeEach(() => {
       setupStatefulUserDataContext();
-      const userData = generateUserData({
+    });
+
+    it("switches user to oscar and sends to dashboard", async () => {
+      userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
@@ -488,17 +507,8 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = render(
-        <WithStatefulUserData initialUserData={userData}>
-          <ThemeProvider theme={createTheme()}>
-            <RoadmapPage
-              operateReferences={{}}
-              displayContent={emptyDisplayContent}
-              profileDisplayContent={createEmptyLoadDisplayContent()}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>
-      );
+      const subject = getRoadMap();
+
       const date = dayjs().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
 
@@ -526,9 +536,7 @@ describe("roadmap page", () => {
     it("pre-populates fields with data from profile", async () => {
       const date = dayjs().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
-
-      setupStatefulUserDataContext();
-      const userData = generateUserData({
+      userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
@@ -540,17 +548,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = render(
-        <WithStatefulUserData initialUserData={userData}>
-          <ThemeProvider theme={createTheme()}>
-            <RoadmapPage
-              operateReferences={{}}
-              displayContent={emptyDisplayContent}
-              profileDisplayContent={createEmptyLoadDisplayContent()}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>
-      );
+      const subject = getRoadMap();
 
       const helpers = createPageHelpers(subject);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
@@ -578,25 +576,14 @@ describe("roadmap page", () => {
     });
 
     it("hides date of formation if legal structure does not require public filing ", async () => {
-      setupStatefulUserDataContext();
-      const userData = generateUserData({
+      userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "general-partnership",
         }),
       });
 
-      const subject = render(
-        <WithStatefulUserData initialUserData={userData}>
-          <ThemeProvider theme={createTheme()}>
-            <RoadmapPage
-              operateReferences={{}}
-              displayContent={emptyDisplayContent}
-              profileDisplayContent={createEmptyLoadDisplayContent()}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>
-      );
+      const subject = getRoadMap();
 
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
@@ -604,8 +591,7 @@ describe("roadmap page", () => {
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
     });
     it("auto fills sector based on sectorDefault in the industry object", async () => {
-      setupStatefulUserDataContext();
-      const userData = generateUserData({
+      userData = generateUserData({
         profileData: generateProfileData({
           industryId: "restaurant",
           hasExistingBusiness: false,
@@ -613,17 +599,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = render(
-        <WithStatefulUserData initialUserData={userData}>
-          <ThemeProvider theme={createTheme()}>
-            <RoadmapPage
-              operateReferences={{}}
-              displayContent={emptyDisplayContent}
-              profileDisplayContent={createEmptyLoadDisplayContent()}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>
-      );
+      const subject = getRoadMap();
 
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
@@ -634,8 +610,7 @@ describe("roadmap page", () => {
     });
 
     it("fires validations when clicking submit", async () => {
-      setupStatefulUserDataContext();
-      const userData = generateUserData({
+      userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
@@ -647,17 +622,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = render(
-        <WithStatefulUserData initialUserData={userData}>
-          <ThemeProvider theme={createTheme()}>
-            <RoadmapPage
-              operateReferences={{}}
-              displayContent={emptyDisplayContent}
-              profileDisplayContent={createEmptyLoadDisplayContent()}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>
-      );
+      const subject = getRoadMap();
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
       expect(userDataWasNotUpdated()).toEqual(true);
@@ -667,6 +632,28 @@ describe("roadmap page", () => {
       expect(
         subject.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
       ).toBeInTheDocument();
+    });
+
+    it("disables date of formation if formation getFiling success", () => {
+      userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "limited-liability-partnership",
+        }),
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({
+            success: true,
+          }),
+        }),
+      });
+
+      const subject = getRoadMap();
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      const helpers = createPageHelpers(subject);
+      expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
+      expect(helpers.getDateOfFormationValue()).toEqual(
+        dayjs(userData.formationData.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/YYYY")
+      );
     });
   });
 });

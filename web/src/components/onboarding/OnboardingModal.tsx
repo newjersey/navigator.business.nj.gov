@@ -139,6 +139,7 @@ export const OnboardingModal = (props: Props): ReactElement => {
                       onValidation={onValidation}
                       fieldStates={fieldStates}
                       required={true}
+                      disabled={userData?.formationData.getFilingResponse?.success}
                       headerAriaLevel={3}
                     />
                   ) : undefined}
