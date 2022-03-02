@@ -25,7 +25,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
   }
 
   if (profileData.legalStructureId) {
-    if (profileData.legalStructureId === "limited-liability-company") {
+    if (
+      profileData.legalStructureId === "limited-liability-company" &&
+      process.env.FEATURE_DISABLE_FORMATION !== "true"
+    ) {
       addOns.push("llc");
     } else if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing");

@@ -120,7 +120,7 @@ export const BusinessNameSection = (): ReactElement => {
           )}
         </Alert>
       )}
-      {nameAvailability?.status === "AVAILABLE" && (
+      {nameAvailability?.status === "AVAILABLE" && submittedName === currentName && (
         <div>
           <Alert variant="success" dataTestid="available-text">
             <p className="font-sans-xs">
