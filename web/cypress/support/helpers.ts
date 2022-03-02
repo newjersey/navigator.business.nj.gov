@@ -146,7 +146,7 @@ interface startingOnboardingData {
   businessName: string;
   industry: Industry;
   companyType: string;
-  townDisplayName: string;
+  townDisplayName: string | undefined;
   homeBasedQuestion: boolean | undefined;
   liquorLicenseQuestion: boolean | undefined;
 }
@@ -156,10 +156,10 @@ export const completeNewBusinessOnboarding = ({
   industry,
   companyType,
   townDisplayName,
-  homeBasedQuestion = undefined,
-  liquorLicenseQuestion = undefined,
-  fullName = "Michael Smith",
-  email = "MichaelSmith@gmail.com",
+  homeBasedQuestion,
+  liquorLicenseQuestion,
+  fullName = `Michael Smith ${randomInt()}`,
+  email = `MichaelSmith${randomInt()}@gmail.com`,
 }: startingOnboardingData & Partial<registration>): void => {
   cy.url().should("include", `onboarding?page=${1}`);
   onOnboardingPage.selectNewBusiness(false);
@@ -199,8 +199,15 @@ export const completeNewBusinessOnboarding = ({
   onOnboardingPage.clickNext();
 
   cy.url().should("include", `onboarding?page=${5}`);
-  onOnboardingPage.selectLocation(townDisplayName);
-  onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+
+  if (townDisplayName) {
+    onOnboardingPage.selectLocation(townDisplayName);
+    onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+  } else {
+    onOnboardingPage.selectRandomLocation();
+    onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
+  }
+
   if (homeBasedQuestion === undefined) {
     onOnboardingPage.getHomeBased().should("not.exist");
   } else {
@@ -238,8 +245,8 @@ export const checkProfilePage = ({
   industry,
   companyType,
   townDisplayName,
-  homeBasedQuestion = undefined,
-  liquorLicenseQuestion = undefined,
+  homeBasedQuestion,
+  liquorLicenseQuestion,
   employerId = "",
   taxId = "",
   notes = "",
@@ -260,7 +267,12 @@ export const checkProfilePage = ({
     onProfilePage.getLiquorLicense(liquorLicenseQuestion).should("be.checked");
     onProfilePage.getLiquorLicense(!liquorLicenseQuestion).should("not.be.checked");
   }
-  onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+
+  if (townDisplayName) {
+    onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+  } else {
+    onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
+  }
 
   if (homeBasedQuestion === undefined) {
     onOnboardingPage.getHomeBased().should("not.exist");
@@ -347,9 +359,23 @@ export const updateProfilePage = ({
     onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
   }
 
-  if (entityId && !isEntityIdApplicable(companyType)) {
-    onProfilePage.typeEntityId(entityId);
-    onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
+  if (entityId) {
+    if (companyType && isEntityIdApplicable(companyType)) {
+      onProfilePage.typeEntityId(entityId);
+      onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
+    } else if (!companyType) {
+      onProfilePage
+        .getLegalStructure()
+        .parent()
+        .find("input")
+        .invoke("prop", "value")
+        .then((legalStructure) => {
+          if (isEntityIdApplicable(legalStructure)) {
+            onProfilePage.typeEntityId(entityId);
+            onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
+          }
+        });
+    }
   }
 
   if (taxId) {
