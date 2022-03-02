@@ -36,14 +36,12 @@
   "dependencies": {
     "@aws-amplify/auth": "4.4.2",
     "@aws-amplify/core": "4.4.0",
-    "@aws-amplify/ui-react": "2.2.2",
     "@businessnjgovnavigator/shared": "*",
     "@emotion/react": "11.8.1",
     "@emotion/styled": "11.8.1",
     "@mui/lab": "5.0.0-alpha.71",
     "@mui/material": "5.4.4",
     "@mui/styles": "5.4.4",
-    "@next/env": "12.1.0",
     "axios": "0.26.0",
     "broken-link-checker": "0.7.8",
     "dayjs": "1.10.8",
@@ -60,7 +58,6 @@
     "react-tabs": "4.0.1",
     "react-transition-group": "4.4.2",
     "remark": "12.0.1",
-    "remark-html": "13.0.2",
     "remark-react": "8.0.0",
     "swr": "1.2.2"
   },

@@ -41,10 +41,6 @@
       "groupName": "testing-library"
     },
     {
-      "matchPackageNames": ["@types/jasmine", "jasmine"],
-      "groupName": "jasmine"
-    },
-    {
       "matchPackageNames": [
         "@types/webpack-node-externals",
         "copy-webpack-plugin",
