@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert Variants Error displays correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="usa-alert margin-y-2 usa-alert--slim usa-alert--error"
+      role="alert"
+    >
+      <div
+        class="usa-alert__body"
+      >
+        <div
+          class="usa-alert__text"
+        >
+          Test Button
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Alert Variants Info displays correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="usa-alert margin-y-2 usa-alert--slim usa-alert--info"
+    >
+      <div
+        class="usa-alert__body"
+      >
+        <div
+          class="usa-alert__text"
+        >
+          Test Button
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Alert Variants Success displays correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="usa-alert margin-y-2 usa-alert--slim usa-alert--success"
+    >
+      <div
+        class="usa-alert__body"
+      >
+        <div
+          class="usa-alert__text"
+        >
+          Test Button
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Alert Variants warning displays correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="usa-alert margin-y-2 usa-alert--slim usa-alert--warning"
+    >
+      <div
+        class="usa-alert__body"
+      >
+        <div
+          class="usa-alert__text"
+        >
+          Test Button
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Alert error with no icon displays correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="usa-alert margin-y-2 usa-alert--slim usa-alert--error usa-alert--no-icon"
+      role="alert"
+    >
+      <div
+        class="usa-alert__body"
+      >
+        <div
+          class="usa-alert__text"
+        >
+          Test Button
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Alert info with rounded corners displays correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="usa-alert margin-y-2 usa-alert--slim radius-md usa-alert--info"
+    >
+      <div
+        class="usa-alert__body"
+      >
+        <div
+          class="usa-alert__text"
+        >
+          Test Button
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Alert warning with heading displays correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="usa-alert margin-y-2 usa-alert--slim usa-alert--warning"
+    >
+      <div
+        class="usa-alert__body"
+      >
+        <h3
+          class="margin-bottom-0 margin-top-neg-05"
+        >
+          Warning Alert with heading
+        </h3>
+        <div
+          class="usa-alert__text"
+        >
+          Test Button
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
