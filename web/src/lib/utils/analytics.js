@@ -115,6 +115,20 @@ export default {
         },
       },
     },
+    roadmap_graduate_button: {
+      click: {
+        view_graduation_modal: () => {
+          sendEvent("roadmap_graduate_button", "click", "view_graduation_modal");
+        },
+      },
+    },
+    graduation_modal: {
+      submit: {
+        prospective_roadmap_to_existing_dashboard: () => {
+          sendEvent("graduation_modal", "click", "prospective_roadmap_to_existing_dashboard");
+        },
+      },
+    },
     profile_save: {
       click: {
         save_profile_changes: () => {

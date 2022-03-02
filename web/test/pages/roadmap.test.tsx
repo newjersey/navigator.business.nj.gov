@@ -1,3 +1,4 @@
+import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateMunicipality,
@@ -26,8 +27,10 @@ import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import dayjs from "dayjs";
 import React from "react";
 import { useMockDate } from "../mock/useMockDate";
+import { createPageHelpers } from "./onboarding/helpers-onboarding";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -64,7 +67,11 @@ describe("roadmap page", () => {
   const renderRoadmapPage = (): RenderResult => {
     return render(
       <ThemeProvider theme={createTheme()}>
-        <RoadmapPage operateReferences={{}} displayContent={emptyDisplayContent} />
+        <RoadmapPage
+          operateReferences={{}}
+          displayContent={emptyDisplayContent}
+          profileDisplayContent={createEmptyLoadDisplayContent()}
+        />
       </ThemeProvider>
     );
   };
@@ -461,27 +468,110 @@ describe("roadmap page", () => {
       expect(subject.queryByText(Config.taskDefaults.requiredTagText)).toBeVisible();
     });
   });
+  describe("oscar graduation modal", () => {
+    it("switches user to oscar and sends to dashboard", async () => {
+      setupStatefulUserDataContext();
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "limited-liability-partnership",
+          dateOfFormation: undefined,
+          sectorId: undefined,
+          industryId: undefined,
+          ownershipTypeIds: [],
+          existingEmployees: undefined,
+        }),
+      });
 
-  it("switches user to oscar and sends to onboarding", async () => {
-    setupStatefulUserDataContext();
-    const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: false }) });
+      const subject = render(
+        <WithStatefulUserData initialUserData={userData}>
+          <ThemeProvider theme={createTheme()}>
+            <RoadmapPage
+              operateReferences={{}}
+              displayContent={emptyDisplayContent}
+              profileDisplayContent={createEmptyLoadDisplayContent()}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>
+      );
+      const date = dayjs().subtract(1, "month").date(1);
+      const dateOfFormation = date.format("YYYY-MM-DD");
 
-    const subject = render(
-      <WithStatefulUserData initialUserData={userData}>
-        <ThemeProvider theme={createTheme()}>
-          <RoadmapPage operateReferences={{}} displayContent={emptyDisplayContent} />
-        </ThemeProvider>
-      </WithStatefulUserData>
-    );
-
-    fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-    expect(currentUserData()).toEqual({
-      ...userData,
-      profileData: {
-        ...userData.profileData,
-        hasExistingBusiness: true,
-      },
+      const helpers = createPageHelpers(subject);
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      helpers.selectDate("Date of formation", date);
+      helpers.selectByValue("Sector", "clean-energy");
+      helpers.selectByValue("Ownership", "veteran-owned");
+      helpers.fillText("Existing employees", "1234567");
+      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      expect(currentUserData()).toEqual({
+        ...userData,
+        profileData: {
+          ...userData.profileData,
+          dateOfFormation,
+          sectorId: "clean-energy",
+          ownershipTypeIds: ["veteran-owned"],
+          existingEmployees: "1234567",
+          hasExistingBusiness: true,
+        },
+      });
+      await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/dashboard"));
     });
-    await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/onboarding"));
+    it("hides date of formation if legal structure does not require public filing ", async () => {
+      setupStatefulUserDataContext();
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "general-partnership",
+        }),
+      });
+
+      const subject = render(
+        <WithStatefulUserData initialUserData={userData}>
+          <ThemeProvider theme={createTheme()}>
+            <RoadmapPage
+              operateReferences={{}}
+              displayContent={emptyDisplayContent}
+              profileDisplayContent={createEmptyLoadDisplayContent()}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>
+      );
+
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      expect(subject.queryByLabelText("Date of formation")).not.toBeInTheDocument();
+      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+    });
+    it("auto fills sector based on sectorDefault in the industry object", async () => {
+      setupStatefulUserDataContext();
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          industryId: "restaurant",
+          hasExistingBusiness: false,
+          sectorId: undefined,
+        }),
+      });
+
+      const subject = render(
+        <WithStatefulUserData initialUserData={userData}>
+          <ThemeProvider theme={createTheme()}>
+            <RoadmapPage
+              operateReferences={{}}
+              displayContent={emptyDisplayContent}
+              profileDisplayContent={createEmptyLoadDisplayContent()}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>
+      );
+
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      expect((subject.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual(
+        "Accommodation and Food Services"
+      );
+    });
   });
 });

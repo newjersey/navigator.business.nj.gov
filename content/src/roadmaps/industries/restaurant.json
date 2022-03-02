@@ -4,6 +4,7 @@
   "description": "Providing food to patrons",
   "canBeHomeBased": false,
   "isLiquorLicenseApplicable": true,
+  "defaultSectorId": "accommodation-and-food-services",
   "isMobileLocation": false,
   "canBeReseller": true,
   "additionalSearchTerms": "cafe,grill",

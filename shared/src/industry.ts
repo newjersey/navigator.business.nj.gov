@@ -10,6 +10,7 @@ export interface Industry {
   isMobileLocation: boolean;
   canBeReseller: boolean;
   additionalSearchTerms?: string;
+  defaultSectorId?: string;
   roadmapSteps: AddOn[];
   modifications?: TaskModification[];
 }

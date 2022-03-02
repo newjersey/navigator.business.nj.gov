@@ -263,7 +263,10 @@
     "congratulatorModalTitle": "You did it!",
     "graduationHeader": "I have formed and registered my business, what’s next?",
     "graduationBodyText": "Learn about annual filings, certifications, funding opportunities, and more.",
-    "greyBoxNotEnteredText": "Not entered"
+    "greyBoxNotEnteredText": "Not entered",
+    "graduationModalTitle": "## Tell us more about your business",
+    "graduationModalContinueButtonText": "Continue",
+    "graduationModalCancelButtonText": "Cancel"
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",

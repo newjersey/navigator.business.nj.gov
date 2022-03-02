@@ -16,6 +16,7 @@ dayjs.extend(advancedFormat);
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
+  required?: boolean;
   headerAriaLevel?: number;
 }
 
@@ -29,7 +30,10 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
   }, state.profileData.dateOfFormation);
   const [dateError, setDateError] = React.useState<boolean>(false);
   const onValidation = (): void =>
-    props.onValidation(fieldName, !(dateValue == null || (dateValue?.isValid() && !dateError)));
+    props.onValidation(
+      fieldName,
+      !((dateValue == null && !props.required) || (dateValue?.isValid() && !dateError))
+    );
 
   const handleChange = (date: Dayjs | null) => {
     setDateValue(date);

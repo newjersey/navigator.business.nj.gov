@@ -918,6 +918,14 @@ collections:
         name: additionalSearchTerms
         widget: string
         required: false
+      - label: Default Sector
+        name: defaultSectorId
+        widget: relation
+        required: false
+        collection: "dashboard-settings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
       - label: Id / Filename
         name: id
         widget: string
