@@ -1,11 +1,6 @@
 import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  generateMunicipality,
-  generateProfileData as generateProfileData,
-  generateUser,
-  generateUserData,
-} from "@/test/factories";
+import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
