@@ -20,10 +20,15 @@ import {
 import {
   currentUserData,
   setupStatefulUserDataContext,
+  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+import {
+  LookupIndustryById,
+  LookupOwnershipTypeById,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
@@ -518,6 +523,60 @@ describe("roadmap page", () => {
       });
       await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/dashboard"));
     });
+    it("pre-populates fields with data from profile", async () => {
+      const date = dayjs().subtract(1, "month").date(1);
+      const dateOfFormation = date.format("YYYY-MM-DD");
+
+      setupStatefulUserDataContext();
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "limited-liability-partnership",
+          dateOfFormation,
+          sectorId: "clean-energy",
+          industryId: undefined,
+          ownershipTypeIds: ["veteran-owned"],
+          existingEmployees: "1234567",
+        }),
+      });
+
+      const subject = render(
+        <WithStatefulUserData initialUserData={userData}>
+          <ThemeProvider theme={createTheme()}>
+            <RoadmapPage
+              operateReferences={{}}
+              displayContent={emptyDisplayContent}
+              profileDisplayContent={createEmptyLoadDisplayContent()}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>
+      );
+
+      const helpers = createPageHelpers(subject);
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      expect(helpers.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
+      expect(helpers.getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
+      expect(subject.queryByLabelText("Ownership")).toHaveTextContent(
+        `${LookupOwnershipTypeById("veteran-owned").name}`
+      );
+      expect((subject.getByLabelText("Existing employees") as HTMLInputElement).value).toEqual("1234567");
+
+      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      expect(currentUserData()).toEqual({
+        ...userData,
+        profileData: {
+          ...userData.profileData,
+          dateOfFormation,
+          sectorId: "clean-energy",
+          ownershipTypeIds: ["veteran-owned"],
+          existingEmployees: "1234567",
+          hasExistingBusiness: true,
+        },
+      });
+      await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/dashboard"));
+    });
+
     it("hides date of formation if legal structure does not require public filing ", async () => {
       setupStatefulUserDataContext();
       const userData = generateUserData({
@@ -572,6 +631,42 @@ describe("roadmap page", () => {
       expect((subject.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual(
         "Accommodation and Food Services"
       );
+    });
+
+    it("fires validations when clicking submit", async () => {
+      setupStatefulUserDataContext();
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "limited-liability-partnership",
+          dateOfFormation: undefined,
+          sectorId: undefined,
+          industryId: undefined,
+          ownershipTypeIds: [],
+          existingEmployees: undefined,
+        }),
+      });
+
+      const subject = render(
+        <WithStatefulUserData initialUserData={userData}>
+          <ThemeProvider theme={createTheme()}>
+            <RoadmapPage
+              operateReferences={{}}
+              displayContent={emptyDisplayContent}
+              profileDisplayContent={createEmptyLoadDisplayContent()}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>
+      );
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      expect(userDataWasNotUpdated()).toEqual(true);
+      await waitFor(() => expect(mockPush).not.toHaveBeenCalledWith("/dashboard"));
+      expect(subject.getByText(Config.onboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
+      expect(subject.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
+      expect(
+        subject.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
+      ).toBeInTheDocument();
     });
   });
 });
