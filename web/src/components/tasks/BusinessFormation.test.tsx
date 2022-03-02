@@ -201,7 +201,7 @@ describe("<BusinessFormation />", () => {
         expect(subject.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
       });
 
-      it("does not display continue button if user types in new name after finding an available one", async () => {
+      it("does not display continue button and available alert if user types in new name after finding an available one", async () => {
         const profileData = generateLLCProfileData({});
         const formationData = {
           formationFormData: createEmptyFormationFormData(),
@@ -215,9 +215,11 @@ describe("<BusinessFormation />", () => {
         fillText("Search business name", "First Name");
         await searchBusinessName({ status: "AVAILABLE" });
         expect(subject.getByText(Config.businessFormationDefaults.initialNextButtonText)).toBeVisible();
+        expect(subject.getByTestId("available-text")).toBeInTheDocument();
 
         fillText("Search business name", "Second Name");
         expect(subject.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
+        expect(subject.queryByTestId("available-text")).not.toBeInTheDocument();
       });
 
       it("shows available text if name is available", async () => {
