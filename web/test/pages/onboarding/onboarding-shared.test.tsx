@@ -1,11 +1,7 @@
 import * as api from "@/lib/api-client/apiClient";
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
-import {
-  generateMunicipality,
-  generateProfileData as generateProfileData,
-  generateUserData,
-} from "@/test/factories";
+import { generateMunicipality, generateProfileData, generateUserData } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";

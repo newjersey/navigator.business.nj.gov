@@ -5,7 +5,7 @@ import {
   generateFormationData,
   generateGetFilingResponse,
   generateMunicipality,
-  generateProfileData as generateProfileData,
+  generateProfileData,
   generateUser,
   generateUserData,
 } from "@/test/factories";
