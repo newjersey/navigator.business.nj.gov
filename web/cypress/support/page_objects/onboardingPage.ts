@@ -1,4 +1,5 @@
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { random } from "lodash";
 
 export class OnboardingPage {
   getHasExistingBusiness(radio: boolean) {
@@ -58,6 +59,16 @@ export class OnboardingPage {
   selectLocation(townDisplayName: string) {
     this.getLocationDropdown().type(townDisplayName);
     cy.get("#mui-2-option-0").click({ force: true });
+  }
+
+  selectRandomLocation() {
+    this.getLocationDropdown().click();
+    cy.get("#mui-2-listbox")
+      .find("li")
+      .then((list) => {
+        const num = random(list.length - 1);
+        cy.get(`#mui-2-option-${num}`).click({ force: true });
+      });
   }
 }
 

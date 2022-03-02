@@ -4,22 +4,17 @@ import { Industries, LegalStructure, LegalStructures } from "@businessnjgovnavig
 import { completeNewBusinessOnboarding, randomElementFromArray, randomInt } from "../support/helpers";
 
 describe("Roadmap [all] [group4]", () => {
-  // Regular function used to access test context object
-  beforeEach(function () {
+  beforeEach(() => {
     cy.loginByCognitoApi();
-    cy.fixture("municipalities.json").then((list) => {
-      this.muni = Object.values(list);
-    });
   });
 
   Industries.forEach((industry) => {
-    // Regular function used to access test context object
-    it(` ${industry.name} completes onboarding and shows the roadmap`, function () {
+    it(` ${industry.name} completes onboarding and shows the roadmap`, () => {
       const businessName = `Generic Business Name ${randomInt()}`;
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
       const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
       const companyType = randomElementFromArray(LegalStructures as LegalStructure[]).id;
-      const { townDisplayName, townName } = randomElementFromArray(this.muni);
+      const townDisplayName = undefined;
 
       completeNewBusinessOnboarding({
         businessName,
@@ -34,7 +29,9 @@ describe("Roadmap [all] [group4]", () => {
       cy.get(`[data-business-name="${businessName}"]`).should("exist");
       cy.get(`[data-industry="${industry.id}"]`).should("exist");
       cy.get(`[data-legal-structure="${companyType}"]`).should("exist");
-      cy.get(`[data-municipality="${townName}"]`).should("exist");
+      cy.get(`[data-testid="mini-profile-location"]`)
+        .invoke("attr", "data-municipality")
+        .should("not.eq", "");
     });
   });
 });
