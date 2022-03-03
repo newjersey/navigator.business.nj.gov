@@ -2304,7 +2304,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.13.0
     "@typescript-eslint/parser": 5.13.0
     airtable: 0.11.2
-    aws-sdk: 2.1084.0
+    aws-sdk: 2.1085.0
     axios: 0.26.0
     body-parser: 1.19.2
     copy-webpack-plugin: 10.2.4
@@ -2313,7 +2313,7 @@ __metadata:
     dayjs: 1.10.8
     dedent: 0.7.0
     eslint: 8.10.0
-    eslint-config-prettier: 8.4.0
+    eslint-config-prettier: 8.5.0
     express: 4.17.3
     good-fences: 1.0.1
     jest: 27.5.1
@@ -2323,7 +2323,7 @@ __metadata:
     prettier: 2.5.1
     prettier-plugin-organize-imports: 2.3.4
     rimraf: 3.0.2
-    serverless: 3.7.0
+    serverless: 3.7.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.5.0
@@ -2408,7 +2408,7 @@ __metadata:
     "@types/lodash.orderby": 4.6.6
     "@types/node": 14.18.12
     "@types/react": 17.0.39
-    "@types/react-dom": 17.0.12
+    "@types/react-dom": 17.0.13
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.4
     "@types/react-transition-group": 4.4.4
@@ -2421,7 +2421,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.13.0
     "@typescript-eslint/parser": 5.13.0
     airtable: 0.11.2
-    aws-sdk: 2.1084.0
+    aws-sdk: 2.1085.0
     axios: 0.26.0
     babel-jest: 27.5.1
     babel-loader: 8.2.3
@@ -2444,7 +2444,7 @@ __metadata:
     dotenv: 16.0.0
     eslint: 8.10.0
     eslint-config-next: 12.1.0
-    eslint-config-prettier: 8.4.0
+    eslint-config-prettier: 8.5.0
     eslint-plugin-cypress: 2.12.1
     eslint-plugin-jsx-a11y: 6.5.1
     eslint-plugin-react: 7.29.2
@@ -2484,7 +2484,7 @@ __metadata:
     sass: 1.49.9
     sass-loader: 12.6.0
     semantic-release: 19.0.2
-    serverless: 3.7.0
+    serverless: 3.7.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.5.0
@@ -2525,7 +2525,7 @@ __metadata:
     "@typescript-eslint/parser": 5.13.0
     cross-env: 7.0.3
     eslint: 8.10.0
-    eslint-config-prettier: 8.4.0
+    eslint-config-prettier: 8.5.0
     jest: 27.5.1
     jest-junit: 13.0.0
     prettier: 2.5.1
@@ -2575,7 +2575,7 @@ __metadata:
     "@types/lodash.orderby": 4.6.6
     "@types/node": 14.18.12
     "@types/react": 17.0.39
-    "@types/react-dom": 17.0.12
+    "@types/react-dom": 17.0.13
     "@types/react-swipeable-views": 0.13.1
     "@types/react-tabs": 2.3.4
     "@types/react-transition-group": 4.4.4
@@ -2599,7 +2599,7 @@ __metadata:
     dotenv: 16.0.0
     eslint: 8.10.0
     eslint-config-next: 12.1.0
-    eslint-config-prettier: 8.4.0
+    eslint-config-prettier: 8.5.0
     eslint-plugin-cypress: 2.12.1
     eslint-plugin-jsx-a11y: 6.5.1
     eslint-plugin-react: 7.29.2
@@ -6160,9 +6160,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/dashboard-plugin@npm:^6.1.4":
-  version: 6.1.4
-  resolution: "@serverless/dashboard-plugin@npm:6.1.4"
+"@serverless/dashboard-plugin@npm:^6.1.5":
+  version: 6.1.5
+  resolution: "@serverless/dashboard-plugin@npm:6.1.5"
   dependencies:
     "@serverless/event-mocks": ^1.1.1
     "@serverless/platform-client": ^4.3.2
@@ -6184,7 +6184,7 @@ __metadata:
     type: ^2.6.0
     uuid: ^8.3.2
     yamljs: ^0.3.0
-  checksum: 9f214aee1612b49bdc0f5365cbc08cdbd69625f367244ee1d5d243688b0c570f84fd94ed69c853adb9aaa427139020ed6c99b0e0b4458fe79f874d74a54cfe55
+  checksum: c6cdcae586eb60b58a131237d9ae1c97be64f2de72c5f86ccd182f3c4cc412d179e77b3ef1c291f9128e6067ed6d4a23b8a19b5022ca53c5596289e230af3656
   languageName: node
   linkType: hard
 
@@ -6262,6 +6262,43 @@ __metadata:
     uuid: ^8.3.2
     write-file-atomic: ^4.0.0
   checksum: 2735644a0d7bbaeb7072622f3d1c34f06596b33236062af66eb2b3aab737fd16804c049063fd49ea6c818a705e4acce45ae699fba0f0ddf2c40ea18f6c9897a1
+  languageName: node
+  linkType: hard
+
+"@serverless/utils@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "@serverless/utils@npm:6.0.3"
+  dependencies:
+    archive-type: ^4.0.0
+    chalk: ^4.1.2
+    ci-info: ^3.3.0
+    cli-progress-footer: ^2.3.0
+    content-disposition: ^0.5.4
+    d: ^1.0.1
+    decompress: ^4.2.1
+    event-emitter: ^0.3.5
+    ext: ^1.6.0
+    ext-name: ^5.0.0
+    file-type: ^16.5.3
+    filenamify: ^4.3.0
+    get-stream: ^6.0.1
+    got: ^11.8.3
+    inquirer: ^8.2.0
+    js-yaml: ^4.1.0
+    jwt-decode: ^3.1.2
+    lodash: ^4.17.21
+    log: ^6.3.1
+    log-node: ^8.0.3
+    make-dir: ^3.1.0
+    memoizee: ^0.4.15
+    ncjsm: ^4.3.0
+    p-event: ^4.2.0
+    supports-color: ^8.1.1
+    type: ^2.6.0
+    uni-global: ^1.0.0
+    uuid: ^8.3.2
+    write-file-atomic: ^4.0.1
+  checksum: 1f1e4e88174a37d9fb3f7577746ef6326f529f76c8f4963ba11490b59c06716f2504d4df3963274bbbabf278e2d86eb84b9eea7bc34f4bf7d5385000a433594d
   languageName: node
   linkType: hard
 
@@ -8393,12 +8430,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:17.0.12":
-  version: 17.0.12
-  resolution: "@types/react-dom@npm:17.0.12"
+"@types/react-dom@npm:17.0.13":
+  version: 17.0.13
+  resolution: "@types/react-dom@npm:17.0.13"
   dependencies:
     "@types/react": "*"
-  checksum: 9754e1d0c0107310eab35a2eb1dad45f6ef0a41e562c23a29d6bf723a29c8a2036c4acd6a1a1422bf7cf956d431e41b154608dd917f6e69c7ab0d87720c5e27e
+  checksum: 62c42a54ac8961c23a0e74b9cdd8b0a78563757e462b1ab665b2aa365bfd8b86a73d3f6eafc09a4a80fb08659321db168f012aa597c41c0df36f645a94e9266b
   languageName: node
   linkType: hard
 
@@ -10354,9 +10391,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:2.1084.0, aws-sdk@npm:^2.1083.0":
-  version: 2.1084.0
-  resolution: "aws-sdk@npm:2.1084.0"
+"aws-sdk@npm:2.1085.0, aws-sdk@npm:^2.1084.0":
+  version: 2.1085.0
+  resolution: "aws-sdk@npm:2.1085.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -10367,7 +10404,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: 1854bd426ee604eacc37740b0bb47b13cd40893de076d8118e91780350293d06acdad649e84aa843d4c4c140d6ec90191fe6b41665c6e16c8e502df37e7d1e0b
+  checksum: 0545a4a4459b78773b87407e4a163bbe83cee52568121549506db5d4ab1caecb7abcd6d40208638fc24599c7df256944e4d265e039fc8976714c23426aaf53a8
   languageName: node
   linkType: hard
 
@@ -14963,14 +15000,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:8.4.0":
-  version: 8.4.0
-  resolution: "eslint-config-prettier@npm:8.4.0"
+"eslint-config-prettier@npm:8.5.0":
+  version: 8.5.0
+  resolution: "eslint-config-prettier@npm:8.5.0"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: ee8dc343f1fed15dc0658e190a966cc23644477f2331a7f56ae2bb79dd74892e3cde8ea5c142e7a3329a8291a1de041e13ca96e54d0c85ff4a2aba13390c5f10
+  checksum: 0d0f5c32e7a0ad91249467ce71ca92394ccd343178277d318baf32063b79ea90216f4c81d1065d60f96366fdc60f151d4d68ae7811a58bd37228b84c2083f893
   languageName: node
   linkType: hard
 
@@ -29307,18 +29344,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.7.0":
-  version: 3.7.0
-  resolution: "serverless@npm:3.7.0"
+"serverless@npm:3.7.1":
+  version: 3.7.1
+  resolution: "serverless@npm:3.7.1"
   dependencies:
     "@serverless/aws-lambda-otel-extension-dist": ^0.1.6
-    "@serverless/dashboard-plugin": ^6.1.4
+    "@serverless/dashboard-plugin": ^6.1.5
     "@serverless/platform-client": ^4.3.2
-    "@serverless/utils": ^6.0.2
+    "@serverless/utils": ^6.0.3
     ajv: ^8.10.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.0
-    aws-sdk: ^2.1083.0
+    aws-sdk: ^2.1084.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
@@ -29367,7 +29404,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 788555f0384ce7f97512b3cb1f4bc533184888c882b32a5d665b9b08ad0665d305b04e90d1ec2b4a6e4ba7dbf2454a6beecf728bdb869843a757c48c71897e53
+  checksum: d7de6213f7962f26b4cbd04f6314b6756b6686a8ed4fb7f7e3dfd6c66141ffc8cb060e0c0840b3d4720bc58bf4c8275cdd0c8cb636c1f812b035885d4a269ba9
   languageName: node
   linkType: hard
 
@@ -33504,7 +33541,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"write-file-atomic@npm:*, write-file-atomic@npm:^4.0.0":
+"write-file-atomic@npm:*, write-file-atomic@npm:^4.0.0, write-file-atomic@npm:^4.0.1":
   version: 4.0.1
   resolution: "write-file-atomic@npm:4.0.1"
   dependencies:
