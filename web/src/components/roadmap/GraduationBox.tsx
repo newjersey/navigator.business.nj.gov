@@ -36,7 +36,9 @@ export const GraduationBox = (props: Props): ReactElement => {
         </div>
         <div>
           <h3>{Config.roadmapDefaults.graduationHeader}</h3>
-          <p className="margin-bottom-1 text-base-dark">{Config.roadmapDefaults.graduationBodyText}</p>
+          <div className="margin-top-neg-1">
+            <p className="text-base-dark">{Config.roadmapDefaults.graduationBodyText}</p>
+          </div>
         </div>
         <div className="mla">
           <Button style="primary" onClick={graduateToOwning}>

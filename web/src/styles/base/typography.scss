@@ -96,6 +96,13 @@ h6 {
   display: inline !important;
 }
 
+.usa-prose > p,
+p {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+  margin: 0rem 0rem 1rem 0rem !important;
+}
+
 .text-info-lighter {
   color: $info-lighter !important;
 }
