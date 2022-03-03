@@ -1,3 +1,32 @@
+# [2.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.2.1...v2.3.0) (2022-03-03)
+
+
+### Bug Fixes
+
+* [[#1204](https://github.com/newjersey/navigator.business.nj.gov/issues/1204)] add feature flag logic to business name check in formation ([b83978f](https://github.com/newjersey/navigator.business.nj.gov/commit/b83978f1b3d70499563c727a240288f4f1e6a83d))
+* [[#1561](https://github.com/newjersey/navigator.business.nj.gov/issues/1561)] require industry field for new business owners ([802b749](https://github.com/newjersey/navigator.business.nj.gov/commit/802b7490baae4e7f969f010959fa8d93afa0caa0))
+* [[#1648](https://github.com/newjersey/navigator.business.nj.gov/issues/1648)] fix funding sorting ([11273e6](https://github.com/newjersey/navigator.business.nj.gov/commit/11273e68afacee3e2037febb89901597e2d05bf7))
+* [[#1648](https://github.com/newjersey/navigator.business.nj.gov/issues/1648)] fix funding sorting test ([cc3923c](https://github.com/newjersey/navigator.business.nj.gov/commit/cc3923c56001b2c46f0b15a1196e84e68d5cb711))
+* [[#1734](https://github.com/newjersey/navigator.business.nj.gov/issues/1734)] increase z-index of context info ([7bdd9eb](https://github.com/newjersey/navigator.business.nj.gov/commit/7bdd9ebb4f218f01bafd39a83ff92962a3704d3a))
+* add space for beta bar ([16397e8](https://github.com/newjersey/navigator.business.nj.gov/commit/16397e8a88b147dc981a862901dddaa8be74d0d9))
+* disable onboarding once the user has completed it ([ae4de35](https://github.com/newjersey/navigator.business.nj.gov/commit/ae4de3540bae75510d4e474124167c52ea6b8c5d))
+* improve logged data for business name search ([39e8df8](https://github.com/newjersey/navigator.business.nj.gov/commit/39e8df8e070597e7768a6a7282a5f97204ccc774))
+* moving netlify back to branch on navigator ([16f9461](https://github.com/newjersey/navigator.business.nj.gov/commit/16f9461170b2279dc11d25db9e491b1f1d829946))
+* moving netlify back to branch on navigator ([746515f](https://github.com/newjersey/navigator.business.nj.gov/commit/746515f3fe44f48cf13a08678bf4674744b27358))
+* updating Certification Opportunities Content dvob ([#1879](https://github.com/newjersey/navigator.business.nj.gov/issues/1879)) ([ce9029e](https://github.com/newjersey/navigator.business.nj.gov/commit/ce9029eb0e4ccc7e75bada06a64487fa45d2deba))
+* updating Certification Opportunities Content mwbe ([#1878](https://github.com/newjersey/navigator.business.nj.gov/issues/1878)) ([df3ce42](https://github.com/newjersey/navigator.business.nj.gov/commit/df3ce425e354a9a6e906ab39e17f4ed4fea9ba61))
+* updating General Config config ([#1900](https://github.com/newjersey/navigator.business.nj.gov/issues/1900)) ([69842f6](https://github.com/newjersey/navigator.business.nj.gov/commit/69842f6e2092f65f2200172875a2f33cc7810652))
+* updating General Config config ([#1911](https://github.com/newjersey/navigator.business.nj.gov/issues/1911)) ([aefba4e](https://github.com/newjersey/navigator.business.nj.gov/commit/aefba4e70382b043569e30df0c287c8d8bf55ed2))
+* updating General Config config ([#1918](https://github.com/newjersey/navigator.business.nj.gov/issues/1918)) ([87d2d5b](https://github.com/newjersey/navigator.business.nj.gov/commit/87d2d5b8be3792dde64814251704a55c44263dec))
+
+
+### Features
+
+* [[#1204](https://github.com/newjersey/navigator.business.nj.gov/issues/1204)] merge business name check into formation ([58bde61](https://github.com/newjersey/navigator.business.nj.gov/commit/58bde61028afa93f56c49adbfaf38104c737b743))
+* [[#1560](https://github.com/newjersey/navigator.business.nj.gov/issues/1560)] add graduation toggle to roadmap page ([4c836bc](https://github.com/newjersey/navigator.business.nj.gov/commit/4c836bcef792fa5cdf8b9ffaec2a7386002c1756))
+* [[#1734](https://github.com/newjersey/navigator.business.nj.gov/issues/1734)] graduation toggle modal ([9a31581](https://github.com/newjersey/navigator.business.nj.gov/commit/9a315818c28039f961eff056bf86e859593b7c30))
+* [[#1774](https://github.com/newjersey/navigator.business.nj.gov/issues/1774)] move self-reg to end of onboarding ([7fd90a9](https://github.com/newjersey/navigator.business.nj.gov/commit/7fd90a996b8b30fbd3c57ca30dc64d2d4d42c666))
+
 ## [2.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.2.0...v2.2.1) (2022-02-25)
 
 
