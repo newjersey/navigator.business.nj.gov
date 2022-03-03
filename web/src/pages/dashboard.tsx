@@ -45,7 +45,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const backToRoadmapBox = (): ReactElement => (
     <div className="margin-top-6">
       <div className="padding-3 bg-base-lightest radius-md">
-        <h2 className="margin-y-0">{Config.dashboardDefaults.backToRoadmapHeader}</h2>
+        <h2 className="margin-y-0 h3-styling">{Config.dashboardDefaults.backToRoadmapHeader}</h2>
         <p className="margin-y-1 text-base-dark">
           {Config.dashboardDefaults.backToRoadmapText.split("${link}")[0]}
           <a href="/roadmap">{Config.dashboardDefaults.backToRoadmapLinkText}</a>
