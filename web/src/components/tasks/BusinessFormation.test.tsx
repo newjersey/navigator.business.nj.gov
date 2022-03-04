@@ -177,6 +177,43 @@ describe("<BusinessFormation />", () => {
     });
 
     describe("business name check tab", () => {
+      it("pre-fills the text field with the business name from profile", () => {
+        const profileData = generateLLCProfileData({
+          businessName: "My Restaurant",
+        });
+        const formationData = {
+          formationFormData: createEmptyFormationFormData(),
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+        };
+        subject = renderTask({ profileData, formationData });
+
+        expect((subject.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
+          "My Restaurant"
+        );
+      });
+
+      it("overrides the text field's initial value if user types in field", () => {
+        const profileData = generateLLCProfileData({
+          businessName: "My Restaurant",
+        });
+        const formationData = {
+          formationFormData: createEmptyFormationFormData(),
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+        };
+        subject = renderTask({ profileData, formationData });
+
+        expect((subject.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
+          "My Restaurant"
+        );
+
+        fillText("Search business name", "My New Restaurant");
+        expect((subject.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
+          "My New Restaurant"
+        );
+      });
+
       it("displays continue button on business name tab only once name is available", async () => {
         const profileData = generateLLCProfileData({});
         const formationData = {
@@ -199,6 +236,19 @@ describe("<BusinessFormation />", () => {
         fillText("Search business name", "Anything");
         await searchBusinessNameAndGetError();
         expect(subject.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
+      });
+
+      it("saves business name to profile after clicking continue", async () => {
+        const profileData = generateLLCProfileData({});
+        const formationData = {
+          formationFormData: createEmptyFormationFormData(),
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+        };
+        subject = renderTask({ profileData, formationData });
+
+        await submitBusinessNameTab("My Test Business");
+        await waitFor(() => expect(currentUserData().profileData.businessName).toEqual("My Test Business"));
       });
 
       it("does not display continue button and available alert if user types in new name after finding an available one", async () => {
@@ -236,49 +286,6 @@ describe("<BusinessFormation />", () => {
         expect(mockApi.searchBusinessName).toHaveBeenCalledWith("Pizza Joint");
         expect(subject.getByTestId("available-text")).toBeInTheDocument();
         expect(subject.queryByTestId("unavailable-text")).not.toBeInTheDocument();
-      });
-
-      it("updates the business name in roadmap", async () => {
-        const profileData = generateLLCProfileData({
-          businessName: "Old business name",
-        });
-        const formationData = {
-          formationFormData: createEmptyFormationFormData(),
-          formationResponse: undefined,
-          getFilingResponse: undefined,
-        };
-        subject = renderTask({ profileData, formationData });
-
-        fillText("Search business name", "New business name");
-        await searchBusinessName({ status: "AVAILABLE" });
-
-        fireEvent.click(subject.getByTestId("update-name"));
-        expect(currentUserData().profileData.businessName).toEqual("New business name");
-      });
-
-      it("removes the update button when clicked and resets when new search is performed", async () => {
-        const profileData = generateLLCProfileData({});
-        const formationData = {
-          formationFormData: createEmptyFormationFormData(),
-          formationResponse: undefined,
-          getFilingResponse: undefined,
-        };
-        subject = renderTask({ profileData, formationData });
-
-        fillText("Search business name", "Pizza Joint");
-        await searchBusinessName({ status: "AVAILABLE" });
-        fireEvent.click(subject.getByTestId("update-name"));
-
-        expect(subject.queryByTestId("update-name")).not.toBeInTheDocument();
-        expect(subject.getByText(Config.searchBusinessNameTask.nameHasBeenUpdatedText)).toBeInTheDocument();
-
-        fillText("Search business name", "Pizza Joint 2");
-        await searchBusinessName({ status: "AVAILABLE" });
-
-        expect(subject.getByTestId("update-name")).toBeInTheDocument();
-        expect(
-          subject.queryByText(Config.searchBusinessNameTask.nameHasBeenUpdatedText)
-        ).not.toBeInTheDocument();
       });
 
       it("shows unavailable text if name is not available", async () => {
@@ -649,12 +656,12 @@ describe("<BusinessFormation />", () => {
       });
     });
 
-    it("routes to profile page when edit business name button is clicked", async () => {
+    it("Goes back to name tab when edit business name button is clicked", async () => {
       renderWithData({});
       await submitBusinessNameTab();
 
       fireEvent.click(subject.getByTestId("edit-business-name"));
-      expect(mockPush).toHaveBeenCalledWith("/profile?path=businessFormation");
+      expect(subject.queryByTestId("business-name-section")).toBeInTheDocument();
     });
 
     it("routes to profile page when edit legal structure button is clicked", async () => {

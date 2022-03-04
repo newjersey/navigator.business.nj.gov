@@ -64,15 +64,14 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         <div className="padding-205 flex-half">
           <Content>{Config.businessFormationDefaults.reviewPageBusinessNameLabel}</Content>
           <span className="text-accent-cool-darker">
-            {state?.formationFormData.businessName || Config.businessFormationDefaults.notSetBusinessNameText}
+            {userData.profileData.businessName || Config.businessFormationDefaults.notSetBusinessNameText}
           </span>{" "}
           {!reviewPage && (
             <Button
               style="tertiary"
               widthAutoOnMobile
               onClick={() => {
-                analytics.event.business_formation_business_name_edit.click.go_to_profile_screen();
-                onEditProfile();
+                setTab(businessFormationTabs.findIndex((obj) => obj.section === "Name"));
               }}
               underline
               dataTestid="edit-business-name"

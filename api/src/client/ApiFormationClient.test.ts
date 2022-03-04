@@ -65,7 +65,7 @@ describe("ApiFormationClient", () => {
           BusinessInformation: {
             CompanyOrigin: "Domestic",
             Business: "DomesticLimitedLiabilityCompany",
-            BusinessName: formationFormData.businessName,
+            BusinessName: userData.profileData.businessName,
             BusinessDesignator: formationFormData.businessSuffix,
             EffectiveFilingDate: dayjs(formationFormData.businessStartDate, "YYYY-MM-DD").toISOString(),
             MainAddress: {

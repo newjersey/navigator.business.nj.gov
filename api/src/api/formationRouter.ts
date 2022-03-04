@@ -45,12 +45,10 @@ export const formationRouterFactory = (
       .then(async (getFilingResponse: GetFilingResponse) => {
         const taskProgress = userData.taskProgress;
         let entityId = userData.profileData.entityId;
-        let businessName = userData.profileData.businessName;
         let dateOfFormation = userData.profileData.dateOfFormation;
         if (getFilingResponse.success) {
           taskProgress["form-business-entity"] = "COMPLETED";
           entityId = getFilingResponse.entityId;
-          businessName = userData.formationData.formationFormData.businessName;
           dateOfFormation = userData.formationData.formationFormData.businessStartDate;
         }
         const userDataWithResponse = {
@@ -63,7 +61,6 @@ export const formationRouterFactory = (
           profileData: {
             ...userData.profileData,
             entityId,
-            businessName,
             dateOfFormation,
           },
         };

@@ -6,9 +6,8 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
-import { getModifiedTaskContent, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getModifiedTaskContent, templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField } from "@mui/material";
 import React, { ReactElement } from "react";
@@ -24,7 +23,6 @@ const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
 };
 
 export const SearchBusinessName = (props: Props): ReactElement => {
-  const { userData } = useUserData();
   const { roadmap } = useRoadmap();
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
   const {
@@ -37,13 +35,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     updateCurrentName,
     searchBusinessName,
     updateNameOnProfile,
-    setCurrentName,
   } = useBusinessNameSearch(false);
-
-  useMountEffectWhenDefined(() => {
-    if (!userData) return;
-    setCurrentName(userData.profileData.businessName);
-  }, userData);
 
   const showBadInputError = (): ReactElement => {
     if (error !== "BAD_INPUT") return <></>;

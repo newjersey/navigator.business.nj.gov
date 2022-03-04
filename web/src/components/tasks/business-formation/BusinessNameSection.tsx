@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { Icon } from "@/components/njwds/Icon";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -29,11 +28,9 @@ export const BusinessNameSection = (): ReactElement => {
     isLoading,
     error,
     nameAvailability,
-    updateButtonClicked,
     updateCurrentName,
     onBlurNameField,
     searchBusinessName,
-    updateNameOnProfile,
   } = useBusinessNameSearch(true);
 
   const submitNameAndContinue = async () => {
@@ -45,6 +42,10 @@ export const BusinessNameSection = (): ReactElement => {
     setFormationFormData(newFormationFormData);
     update({
       ...userData,
+      profileData: {
+        ...userData.profileData,
+        businessName: submittedName,
+      },
       formationData: {
         ...userData.formationData,
         formationFormData: newFormationFormData,
@@ -57,8 +58,9 @@ export const BusinessNameSection = (): ReactElement => {
   return (
     <div data-testid="business-name-section">
       <form onSubmit={searchBusinessName} className="usa-prose grid-container padding-0">
+        <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
+        <div className="text-bold">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
         <div className="grid-row grid-gap-2">
-          <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
           <div className="tablet:grid-col-8">
             <TextField
               autoComplete="off"
@@ -122,35 +124,13 @@ export const BusinessNameSection = (): ReactElement => {
         </Alert>
       )}
       {nameAvailability?.status === "AVAILABLE" && submittedName === currentName && (
-        <div>
-          <Alert variant="success" dataTestid="available-text">
-            <p className="font-sans-xs">
-              {templateEval(Config.businessFormationDefaults.nameCheckAvailableText, {
-                name: submittedName,
-              })}
-            </p>
-            {updateButtonClicked ? (
-              <p className="font-sans-xs text-primary margin-top-05">
-                <span className="padding-right-05">
-                  <Icon>check</Icon>
-                </span>
-                <span>{Config.searchBusinessNameTask.nameHasBeenUpdatedText}</span>
-              </p>
-            ) : (
-              <button
-                onClick={updateNameOnProfile}
-                className="usa-button usa-button--unstyled font-sans-xs margin-top-105"
-                data-testid="update-name"
-              >
-                <span className="text-underline line-height-sans-3">
-                  {templateEval(Config.businessFormationDefaults.nameCheckUpdateProfileText, {
-                    name: submittedName,
-                  })}
-                </span>
-              </button>
-            )}
-          </Alert>
-        </div>
+        <Alert variant="success" dataTestid="available-text">
+          <span className="font-sans-xs">
+            {templateEval(Config.businessFormationDefaults.nameCheckAvailableText, {
+              name: submittedName,
+            })}
+          </span>
+        </Alert>
       )}
       <div
         className={"padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background"}
