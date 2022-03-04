@@ -19,8 +19,8 @@ export const selfRegRouterFactory = (
       } else {
         selfRegResponse = await selfRegClient.resume(userData.user.myNJUserKey);
       }
-      await updateMyNJKey(userData, selfRegResponse.myNJUserKey);
-      res.json({ authRedirectURL: selfRegResponse.authRedirectURL });
+      const updatedUserData = await updateMyNJKey(userData, selfRegResponse.myNJUserKey);
+      res.json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
     } catch (error) {
       if (error === "DUPLICATE_SIGNUP") {
         res.status(409).send(error);

@@ -6,7 +6,12 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { PageHelpers, renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyUser, createEmptyUserData, LookupIndustryById } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyUser,
+  createEmptyUserData,
+  LookupIndustryById,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router");
@@ -22,7 +27,6 @@ describe("onboarding - starting a business", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
-    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "" });
   });
 
   it("uses special template eval for step 1 label", async () => {
@@ -194,9 +198,18 @@ describe("onboarding - starting a business", () => {
           email: "email@example.com",
         },
       };
-
+      mockApi.postSelfReg.mockResolvedValue({
+        authRedirectURL: "",
+        userData: {
+          ...expectedUserData,
+          user: { ...expectedUserData.user, myNJUserKey: "12345" },
+        } as UserData,
+      });
       expect(api.postSelfReg).toHaveBeenCalledWith(expectedUserData);
-      expect(currentUserData()).toEqual(expectedUserData);
+      expect(currentUserData()).toEqual({
+        ...expectedUserData,
+        user: { ...expectedUserData.user, myNJUserKey: "12345" },
+      });
     });
   });
 

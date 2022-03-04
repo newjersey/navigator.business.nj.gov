@@ -245,14 +245,19 @@ export const runSelfRegPageTests = (
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     fireEvent.click(subject.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
     page.clickNext();
+    const businessUser = {
+      ...user,
+      email: "email@example.com",
+      name: "My Name",
+      receiveNewsletter: false,
+      userTesting: true,
+    };
+    mockApi.postSelfReg.mockResolvedValue({
+      authRedirectURL: "www.example.com",
+      userData: { ...userData, user: businessUser },
+    });
     await waitFor(() => {
-      expect(currentUserData().user).toEqual({
-        ...user,
-        email: "email@example.com",
-        name: "My Name",
-        receiveNewsletter: false,
-        userTesting: true,
-      });
+      expect(currentUserData().user).toEqual(businessUser);
     });
   });
 
@@ -262,36 +267,50 @@ export const runSelfRegPageTests = (
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     fireEvent.click(subject.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
     page.clickNext();
-
+    const businessUser = {
+      ...user,
+      email: "email@example.com",
+      name: "My Name",
+      receiveNewsletter: true,
+      userTesting: false,
+    };
+    mockApi.postSelfReg.mockResolvedValue({
+      authRedirectURL: "www.example.com",
+      userData: { ...userData, user: businessUser },
+    });
     await waitFor(() => {
-      expect(currentUserData().user).toEqual({
-        ...user,
-        email: "email@example.com",
-        name: "My Name",
-        receiveNewsletter: true,
-        userTesting: false,
-      });
+      expect(currentUserData().user).toEqual(businessUser);
     });
   });
 
   it("posts user data to self-reg api", async () => {
-    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "www.example.com" });
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
+    const businessUser = {
+      ...user,
+      email: "email@example.com",
+      name: "My Name",
+      receiveNewsletter: true,
+      userTesting: true,
+    };
+    mockApi.postSelfReg.mockResolvedValue({
+      authRedirectURL: "www.example.com",
+      userData: { ...userData, user: { ...businessUser, myNJUserKey: "12345" } },
+    });
     await waitFor(() => {
       expect(mockApi.postSelfReg).toHaveBeenCalledWith({
         ...userData,
-        user: {
-          ...user,
-          email: "email@example.com",
-          name: "My Name",
-          receiveNewsletter: true,
-          userTesting: true,
-        },
+        user: businessUser,
       });
       expect(mockPush).toHaveBeenCalledWith("www.example.com");
+    });
+    await waitFor(() => {
+      expect(currentUserData().user).toEqual({
+        ...businessUser,
+        myNJUserKey: "12345",
+      });
     });
   });
 

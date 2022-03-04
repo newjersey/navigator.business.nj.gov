@@ -25,7 +25,7 @@ describe("onboarding - owning a business", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
-    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "" });
+    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "", userData: generateUserData({}) });
   });
 
   it("uses special template eval for step 1 label", async () => {

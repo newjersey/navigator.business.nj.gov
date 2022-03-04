@@ -5,6 +5,7 @@ import {
   FormationFormData,
   PaymentType,
   ProfileData,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 
 // returns all keys in an object of a type
@@ -568,6 +569,7 @@ export type NameAvailability = {
 
 export type SelfRegResponse = {
   authRedirectURL: string;
+  userData: UserData;
 };
 
 export type SelfRegRequest = {

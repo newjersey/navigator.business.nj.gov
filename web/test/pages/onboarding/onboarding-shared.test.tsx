@@ -31,7 +31,7 @@ describe("onboarding - shared", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
-    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "" });
+    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "", userData: generateUserData({}) });
   });
 
   it("routes to the first onboarding question when they have not answered the first question", async () => {
