@@ -42,8 +42,18 @@ collections:
               - { label: ACH Payment Cost, name: achPaymentCost, widget: string }
               - { label: ACH Payment label, name: achPaymentTypeLabel, widget: string }
               - { label: Add New Signer Button, name: addNewSignerButtonText, widget: string }
-              - { label: Business Name & Legal Structure Header, name: businessNameAndLegalStructureHeader, widget: string, hint: This field supports Markdown}
-              - { label: Business Start Date Label, name: businessStartDateLabel, widget: string, hint: This field supports Markdown}
+              - {
+                  label: Business Name & Legal Structure Header,
+                  name: businessNameAndLegalStructureHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Business Start Date Label,
+                  name: businessStartDateLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - {
                   label: Business Address - Header,
                   name: businessAddressHeader,
@@ -470,11 +480,7 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Signer - Placeholder,
-                  name: signerPlaceholder,
-                  widget: string,
-                }
+              - { label: Signer - Placeholder, name: signerPlaceholder, widget: string }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Success Page - Body, name: successPageBody, widget: string }
               - { label: Success Page - Header, name: successPageHeader, widget: string }
@@ -589,11 +595,7 @@ collections:
                   name: errorTextRequiredBusinessName,
                   widget: string,
                 }
-              - {
-                  label: Error Text - Required Industry,
-                  name: errorTextRequiredIndustry,
-                  widget: string,
-                }
+              - { label: Error Text - Required Industry, name: errorTextRequiredIndustry, widget: string }
               - {
                   label: Error Text - Required Municipality,
                   name: errorTextRequiredMunicipality,
@@ -829,12 +831,14 @@ collections:
               - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
               - { label: Tooltip Text, name: tooltipText, widget: string }
 
-  - label: Roadmap Add-ons
-    name: addons
+  - name: addons
+    label: Roadmap Add-ons
     folder: "content/src/roadmaps/add-ons"
     extension: "json"
     identifier_field: "{{filename}}"
     summary: "{{filename}}"
+    editor:
+      preview: false
     fields:
       - label: Roadmap Steps
         name: roadmapSteps
@@ -1147,6 +1151,7 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
+
   - name: "archived-funding-opportunities"
     label: "Archived Funding Opportunities Content"
     folder: "content/src/archived-fundings"
@@ -1272,6 +1277,7 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
+
   - name: "certification-opportunities"
     label: "Certification Opportunities Content"
     folder: "content/src/certifications"
@@ -1513,7 +1519,8 @@ collections:
 
   - name: "settings"
     label: "Roadmap Settings"
-    delete: false
+    editor:
+      preview: false
     files:
       - label: "Steps"
         name: "steps"
