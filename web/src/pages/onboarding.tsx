@@ -260,7 +260,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       };
       postSelfReg(newUserData)
         .then(async (response) => {
-          update(response.userData, { local: true });
+          await update(response.userData, { local: true });
           await router.replace(response.authRedirectURL);
         })
         .catch((errorCode) => {
