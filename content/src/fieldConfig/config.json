@@ -146,7 +146,7 @@
     "nameCheckValidationErrorText": "You need to enter a business name to check availability.",
     "nameCheckUnavailableText": "Sorry, \"${name}\" isn’t available. Try another name. Once you have found an available name you then can officially form your business.",
     "nameCheckAvailableText": "\"${name}\" is available. This name will be registered with the State ONLY after you submit the rest of this form.",
-    "nameCheckUpdateProfileText": "Update my profile with the name \"${name}\" (this does not register your name with the State)."
+    "nameCheckFieldLabel": "Business Name Search"
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
