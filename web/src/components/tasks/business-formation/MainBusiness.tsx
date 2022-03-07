@@ -1,8 +1,8 @@
+import { Content } from "@/components/Content";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
-import { BusinessAddressLine1 } from "./BusinessAddressLine1";
 import { BusinessFormationTextField } from "./BusinessFormationTextField";
 import { BusinessNameAndLegalStructure } from "./BusinessNameAndLegalStructure";
 import { BusinessStartDate } from "./BusinessStartDate";
@@ -23,7 +23,16 @@ export const MainBusiness = (): ReactElement => {
         </div>
       </div>
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-      <BusinessAddressLine1 />
+      <div className="form-input margin-bottom-2">
+        <Content>{Config.businessFormationDefaults.businessAddressHeader}</Content>
+        <BusinessFormationTextField
+          label={Config.businessFormationDefaults.businessAddressAddressLine1Label}
+          placeholder={Config.businessFormationDefaults.businessAddressAddressLine1Placeholder}
+          fieldName="businessAddressLine1"
+          required={true}
+          validationText={Config.businessFormationDefaults.businessAddressLine1ErrorText}
+        />
+      </div>
       <BusinessFormationTextField
         label={Config.businessFormationDefaults.businessAddressAddressLine2Label}
         placeholder={Config.businessFormationDefaults.businessAddressAddressLine2Placeholder}
