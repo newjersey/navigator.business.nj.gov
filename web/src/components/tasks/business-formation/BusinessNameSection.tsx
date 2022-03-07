@@ -59,7 +59,7 @@ export const BusinessNameSection = (): ReactElement => {
     <div data-testid="business-name-section">
       <form onSubmit={searchBusinessName} className="usa-prose grid-container padding-0">
         <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
-        <div className="text-bold">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
+        <div className="text-bold margin-top-1">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
         <div className="grid-row grid-gap-2">
           <div className="tablet:grid-col-8">
             <TextField

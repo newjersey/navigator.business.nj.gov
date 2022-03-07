@@ -27,6 +27,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
+  BusinessUser,
   createEmptyFormationFormData,
   FormationFormData,
   FormationMember,
@@ -822,6 +823,185 @@ describe("<BusinessFormation />", () => {
 
       expect(subject.queryByTestId("agent-number")).toBeInTheDocument();
       expect(subject.queryByTestId("agent-name")).not.toBeInTheDocument();
+    });
+
+    it("Auto-fills and disables agent name and email from user account when box checked", async () => {
+      renderWithData(
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentEmail: "original@example.com",
+          agentName: "Original Name",
+        },
+        undefined,
+        {
+          name: "New Name",
+          email: "new@example.com",
+        }
+      );
+      await submitBusinessNameTab();
+
+      expect(getInputElementByLabel("Agent name").value).toEqual("Original Name");
+      expect(getInputElementByLabel("Agent email").value).toEqual("original@example.com");
+      expect(getInputElementByLabel("Agent name").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent email").disabled).toEqual(false);
+
+      selectCheckBox(Config.businessFormationDefaults.sameAgentInfoAsAccount);
+
+      expect(getInputElementByLabel("Agent name").value).toEqual("New Name");
+      expect(getInputElementByLabel("Agent email").value).toEqual("new@example.com");
+      expect(getInputElementByLabel("Agent name").disabled).toEqual(true);
+      expect(getInputElementByLabel("Agent email").disabled).toEqual(true);
+    });
+
+    it("Un-disables but leaves values for agent name and email when user unchecks same account box", async () => {
+      renderWithData(
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentEmail: "original@example.com",
+          agentName: "Original Name",
+        },
+        undefined,
+        {
+          name: "New Name",
+          email: "new@example.com",
+        }
+      );
+      await submitBusinessNameTab();
+
+      selectCheckBox(Config.businessFormationDefaults.sameAgentInfoAsAccount);
+      selectCheckBox(Config.businessFormationDefaults.sameAgentInfoAsAccount);
+
+      expect(getInputElementByLabel("Agent name").value).toEqual("New Name");
+      expect(getInputElementByLabel("Agent email").value).toEqual("new@example.com");
+      expect(getInputElementByLabel("Agent name").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent email").disabled).toEqual(false);
+    });
+
+    it("Auto-fills and disables (exc. state) agent address from business address when box checked", async () => {
+      renderWithData(
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentOfficeAddressLine1: "Old Add 123",
+          agentOfficeAddressLine2: "Old Add 456",
+          agentOfficeAddressCity: "Old Test City",
+          agentOfficeAddressZipCode: "07001",
+          agentOfficeAddressState: "CA",
+          businessAddressLine1: "New Add 123",
+          businessAddressLine2: "New Add 456",
+          businessAddressZipCode: "07002",
+          businessAddressState: "NJ",
+        },
+        {
+          municipality: generateMunicipality({ name: "New Test City" }),
+        }
+      );
+      await submitBusinessNameTab();
+
+      expect(getInputElementByLabel("Agent office address line1").value).toEqual("Old Add 123");
+      expect(getInputElementByLabel("Agent office address line2").value).toEqual("Old Add 456");
+      expect(getInputElementByLabel("Agent office address city").value).toEqual("Old Test City");
+      expect(getInputElementByLabel("Agent office address zip code").value).toEqual("07001");
+      expect(getInputElementByLabel("Agent office address state").value).toEqual("CA");
+      expect(getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address city").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
+
+      selectCheckBox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+
+      expect(getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
+      expect(getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
+      expect(getInputElementByLabel("Agent office address city").value).toEqual("New Test City");
+      expect(getInputElementByLabel("Agent office address zip code").value).toEqual("07002");
+      expect(getInputElementByLabel("Agent office address state").value).toEqual("NJ");
+      expect(getInputElementByLabel("Agent office address line1").disabled).toEqual(true);
+      expect(getInputElementByLabel("Agent office address line2").disabled).toEqual(true);
+      expect(getInputElementByLabel("Agent office address city").disabled).toEqual(true);
+      expect(getInputElementByLabel("Agent office address zip code").disabled).toEqual(true);
+    });
+
+    it("Un-checks box and un-disables agent address fields but leaves values when user edits business address after checking box", async () => {
+      renderWithData(
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentOfficeAddressLine1: "Old Add 123",
+          agentOfficeAddressLine2: "Old Add 456",
+          agentOfficeAddressCity: "Old Test City",
+          agentOfficeAddressZipCode: "07001",
+          agentOfficeAddressState: "CA",
+          businessAddressLine1: "New Add 123",
+          businessAddressLine2: "New Add 456",
+          businessAddressZipCode: "07002",
+          businessAddressState: "NJ",
+        },
+        {
+          municipality: generateMunicipality({ name: "New Test City" }),
+        }
+      );
+      await submitBusinessNameTab();
+
+      selectCheckBox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+
+      expect(
+        getInputElementByLabel(Config.businessFormationDefaults.sameAgentAddressAsBusiness).checked
+      ).toEqual(true);
+      expect(getInputElementByLabel("Agent office address line1").disabled).toEqual(true);
+      expect(getInputElementByLabel("Agent office address line2").disabled).toEqual(true);
+      expect(getInputElementByLabel("Agent office address city").disabled).toEqual(true);
+      expect(getInputElementByLabel("Agent office address zip code").disabled).toEqual(true);
+
+      fillText("Business address line1", "Edited Add 123");
+
+      expect(
+        getInputElementByLabel(Config.businessFormationDefaults.sameAgentAddressAsBusiness).checked
+      ).toEqual(false);
+      expect(getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
+      expect(getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
+      expect(getInputElementByLabel("Agent office address city").value).toEqual("New Test City");
+      expect(getInputElementByLabel("Agent office address zip code").value).toEqual("07002");
+      expect(getInputElementByLabel("Agent office address state").value).toEqual("NJ");
+      expect(getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address city").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
+    });
+
+    it("Un-disables fields but leaves values when user unchecks same business address box", async () => {
+      renderWithData(
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentOfficeAddressLine1: "Old Add 123",
+          agentOfficeAddressLine2: "Old Add 456",
+          agentOfficeAddressCity: "Old Test City",
+          agentOfficeAddressZipCode: "07001",
+          agentOfficeAddressState: "CA",
+          businessAddressLine1: "New Add 123",
+          businessAddressLine2: "New Add 456",
+          businessAddressZipCode: "07002",
+          businessAddressState: "NJ",
+        },
+        {
+          municipality: generateMunicipality({ name: "New Test City" }),
+        }
+      );
+      await submitBusinessNameTab();
+
+      selectCheckBox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+
+      selectCheckBox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+
+      expect(
+        getInputElementByLabel(Config.businessFormationDefaults.sameAgentAddressAsBusiness).checked
+      ).toEqual(false);
+      expect(getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
+      expect(getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
+      expect(getInputElementByLabel("Agent office address city").value).toEqual("New Test City");
+      expect(getInputElementByLabel("Agent office address zip code").value).toEqual("07002");
+      expect(getInputElementByLabel("Agent office address state").value).toEqual("NJ");
+      expect(getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address city").disabled).toEqual(false);
+      expect(getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
     });
 
     it("adds additional signers", async () => {
@@ -1626,7 +1806,8 @@ describe("<BusinessFormation />", () => {
 
   const renderWithData = (
     formationFormData: Partial<FormationFormData>,
-    profileData: Partial<ProfileData> = {}
+    profileData: Partial<ProfileData> = {},
+    businessUserData: Partial<BusinessUser> = { name: "" }
   ): void => {
     const llcProfileData = generateLLCProfileData(profileData);
     const formationData = {
@@ -1634,7 +1815,7 @@ describe("<BusinessFormation />", () => {
       formationResponse: undefined,
       getFilingResponse: undefined,
     };
-    const user = generateUser({ name: "" });
+    const user = generateUser(businessUserData);
     subject = renderTask({ profileData: llcProfileData, formationData, user });
   };
 
