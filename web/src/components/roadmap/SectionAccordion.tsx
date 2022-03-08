@@ -5,13 +5,17 @@ import { SectionType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import React, { ReactElement, ReactNode } from "react";
+import React, { createContext, ReactElement, ReactNode } from "react";
 
 interface Props {
   sectionType: SectionType;
   children: ReactNode;
   mini?: boolean;
 }
+
+export const SectionAccordionContext = createContext({
+  isOpen: false,
+});
 
 export const SectionAccordion = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
@@ -20,7 +24,6 @@ export const SectionAccordion = (props: Props): ReactElement => {
   const headerClasses = props.mini ? "" : "margin-top-3 tablet:margin-left-3";
   const sectionIconClasses = props.mini ? "height-4 padding-right-105" : "height-5 padding-right-205";
   const dividerClasses = props.mini ? "margin-y-2" : "margin-y-3";
-
   const sectionName = props.sectionType.toLowerCase();
   const isOpen = userData?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
   const isCompleted = sectionCompletion ? sectionCompletion[props.sectionType] : false;
@@ -56,28 +59,30 @@ export const SectionAccordion = (props: Props): ReactElement => {
 
   return (
     <div data-testid={`section-${sectionName}`}>
-      <Accordion elevation={0} expanded={isOpen} onChange={handleAccordionStateChange}>
-        <AccordionSummary
-          expandIcon={<Icon className={dropdownIconClasses}>expand_more</Icon>}
-          aria-controls={`${sectionName}-content`}
-          id={`${sectionName}-header`}
-          data-testid={`${sectionName}-header`}
-        >
-          <div className="margin-y-2">
-            <h2 className={`flex flex-align-center margin-0-override ${headerClasses}`}>
-              <img
-                role="presentation"
-                className={sectionIconClasses}
-                src={isCompleted ? `/img/section-complete.svg` : `/img/section-header-${sectionName}.svg`}
-                alt=""
-                data-testid={`${isCompleted ? "completed" : "regular"}-${sectionName}-section-img`}
-              />{" "}
-              <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
-            </h2>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>{props.children}</AccordionDetails>
-      </Accordion>
+      <SectionAccordionContext.Provider value={{ isOpen }}>
+        <Accordion elevation={0} expanded={isOpen} onChange={handleAccordionStateChange}>
+          <AccordionSummary
+            expandIcon={<Icon className={dropdownIconClasses}>expand_more</Icon>}
+            aria-controls={`${sectionName}-content`}
+            id={`${sectionName}-header`}
+            data-testid={`${sectionName}-header`}
+          >
+            <div className="margin-y-2">
+              <h2 className={`flex flex-align-center margin-0-override ${headerClasses}`}>
+                <img
+                  role="presentation"
+                  className={sectionIconClasses}
+                  src={isCompleted ? `/img/section-complete.svg` : `/img/section-header-${sectionName}.svg`}
+                  alt=""
+                  data-testid={`${isCompleted ? "completed" : "regular"}-${sectionName}-section-img`}
+                />{" "}
+                <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
+              </h2>
+            </div>
+          </AccordionSummary>
+          <AccordionDetails>{props.children}</AccordionDetails>
+        </Accordion>
+      </SectionAccordionContext.Provider>
       <hr className={dividerClasses} />
     </div>
   );

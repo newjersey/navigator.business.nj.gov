@@ -5,6 +5,7 @@ interface Props {
   stepNumber: number;
   last: boolean;
   active?: boolean;
+  hideBar?: boolean;
   small?: boolean;
   completed?: boolean;
   isOpen?: boolean;
@@ -33,11 +34,17 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
     }
   };
 
-  useEffect(resizeVerticalBarToContent, [props.isOpen, props.last, props.stepNumber, verticalHeight]);
+  useEffect(resizeVerticalBarToContent, [
+    props.isOpen,
+    props.last,
+    props.stepNumber,
+    verticalHeight,
+    props.hideBar,
+  ]);
   useOnWindowResize(resizeVerticalBarToContent);
 
   const getTrailingBar = () => {
-    if (props.small && props.last && !isOpen) {
+    if (props.hideBar || (props.small && props.last && !isOpen)) {
       return <></>;
     }
     return (
