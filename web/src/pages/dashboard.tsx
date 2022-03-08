@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
+import { UnGraduationBox } from "@/components/dashboard/UnGraduationBox";
 import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -42,19 +43,6 @@ const DashboardPage = (props: Props): ReactElement => {
     setSuccessAlert(success === "true");
   }, [router.isReady, router.query.success]);
 
-  const backToRoadmapBox = (): ReactElement => (
-    <div className="margin-top-6">
-      <div className="padding-3 bg-base-lightest radius-md">
-        <h2 className="margin-y-0 h3-styling">{Config.dashboardDefaults.backToRoadmapHeader}</h2>
-        <p className="margin-y-1 text-base-dark">
-          {Config.dashboardDefaults.backToRoadmapText.split("${link}")[0]}
-          <a href="/roadmap">{Config.dashboardDefaults.backToRoadmapLinkText}</a>
-          {Config.dashboardDefaults.backToRoadmapText.split("${link}")[1]}
-        </p>
-      </div>
-    </div>
-  );
-
   return (
     <PageSkeleton showLegalMessage={true}>
       <NavBar />
@@ -94,7 +82,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
                   <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
 
-                  {userData?.profileData.initialOnboardingFlow === "STARTING" && backToRoadmapBox()}
+                  {userData?.profileData.initialOnboardingFlow === "STARTING" && <UnGraduationBox />}
                 </div>
 
                 <div className="desktop:grid-col-4 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">

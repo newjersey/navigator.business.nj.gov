@@ -1,6 +1,10 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
+import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
+import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
+import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   createProfileFieldErrorMap,
@@ -23,10 +27,6 @@ import {
 import { Dialog, DialogContent, DialogTitle, FormControl, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { FormEvent, ReactElement, useMemo, useState } from "react";
-import { OnboardingDateOfFormation } from "./OnboardingDateOfFormation";
-import { OnboardingExistingEmployees } from "./OnboardingExistingEmployees";
-import { OnboardingOwnership } from "./OnboardingOwnership";
-import { OnboardingSectors } from "./OnboardingSectors";
 
 interface Props {
   open: boolean;
@@ -35,7 +35,7 @@ interface Props {
   onSave: () => void;
 }
 
-export const OnboardingModal = (props: Props): ReactElement => {
+export const GraduationModal = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
@@ -74,6 +74,24 @@ export const OnboardingModal = (props: Props): ReactElement => {
     props.handleClose();
     setFieldStates(createProfileFieldErrorMap());
   };
+
+  const graduateToOwning = async (): Promise<void> => {
+    if (!userData) return;
+
+    const newProfileData = {
+      ...profileData,
+      hasExistingBusiness: true,
+    };
+    setAnalyticsDimensions(newProfileData);
+    analytics.event.graduation_modal.submit.prospective_roadmap_to_existing_dashboard();
+    await update({
+      ...userData,
+      profileData: newProfileData,
+    });
+
+    await router.push("/dashboard");
+  };
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!userData) return;
@@ -85,17 +103,8 @@ export const OnboardingModal = (props: Props): ReactElement => {
     };
     setFieldStates(errorMap);
     if (Object.keys(errorMap).some((k) => errorMap[k as ProfileFields].invalid)) return;
-    const newProfileData = {
-      ...profileData,
-      hasExistingBusiness: true,
-    };
-    setAnalyticsDimensions(newProfileData);
-    analytics.event.graduation_modal.submit.prospective_roadmap_to_existing_dashboard();
-    await update({
-      ...userData,
-      profileData: newProfileData,
-    });
-    await router.push("/dashboard");
+
+    await graduateToOwning();
   };
 
   return (

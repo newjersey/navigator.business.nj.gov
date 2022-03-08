@@ -4,17 +4,25 @@ import DashboardPage from "@/pages/dashboard";
 import {
   generateCertification,
   generateFunding,
+  generateProfileData,
   generateTaxFiling,
   generateTaxFilingData,
   generateUser,
+  generateUserData,
 } from "@/test/factories";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { UserData } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { render, RenderResult, waitFor } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
-import { useMockRouter } from "../mock/mockRouter";
+import { mockPush, useMockRouter } from "../mock/mockRouter";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router");
@@ -47,6 +55,21 @@ describe("dashboard", () => {
           certifications={overrides.certifications ?? []}
         />
       </ThemeProvider>
+    );
+  };
+
+  const renderWithUserData = (userData: UserData) => {
+    return render(
+      <WithStatefulUserData initialUserData={userData}>
+        <ThemeProvider theme={createTheme()}>
+          <DashboardPage
+            displayContent={emptyDisplayContent}
+            operateReferences={emptyOperateRef}
+            fundings={[]}
+            certifications={[]}
+          />
+        </ThemeProvider>
+      </WithStatefulUserData>
     );
   };
 
@@ -198,13 +221,29 @@ describe("dashboard", () => {
     );
   });
 
-  it("shows back-to-roadmap box for users who were previously starting a business", () => {
-    useMockProfileData({ initialOnboardingFlow: "STARTING" });
-    const subject = renderPage({});
+  it("can un-graduate users who were previously starting a business", async () => {
+    const initialUserData = generateUserData({
+      profileData: generateProfileData({
+        initialOnboardingFlow: "STARTING",
+        hasExistingBusiness: true,
+      }),
+    });
+    setupStatefulUserDataContext();
+    const subject = renderWithUserData(initialUserData);
     expect(subject.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).toBeInTheDocument();
+
+    fireEvent.click(subject.getByText(Config.dashboardDefaults.backToRoadmapLinkText));
+    expect(currentUserData()).toEqual({
+      ...initialUserData,
+      profileData: {
+        ...initialUserData.profileData,
+        hasExistingBusiness: false,
+      },
+    });
+    await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/roadmap"));
   });
 
-  it("does not show back-to-roadmap box for users who have only used the owning-a-business flow", () => {
+  it("does not show un-graduation box for users who have only used the owning-a-business flow", () => {
     useMockProfileData({ initialOnboardingFlow: "OWNING" });
     const subject = renderPage({});
     expect(subject.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).not.toBeInTheDocument();
