@@ -1,8 +1,9 @@
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
 import { Step } from "@/lib/types/types";
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 import { VerticalStepIndicator } from "../njwds-extended/VerticalStepIndicator";
+import { SectionAccordionContext } from "./SectionAccordion";
 
 interface Props {
   step: Step;
@@ -17,7 +18,7 @@ interface Props {
 export const MiniRoadmapStep = (props: Props): ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(props.isOpen ?? false);
   const stepNumber = props.step.step_number;
-
+  const { isOpen: sectionIsOpen } = useContext(SectionAccordionContext);
   const isActive = useMemo(() => {
     if (!props.activeTaskId) return undefined;
     return !!props.step.tasks.find((task) => task.id === props.activeTaskId);
@@ -44,6 +45,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
           stepNumber={stepNumber}
           last={props.isLast}
           isOpen={isOpen}
+          hideBar={!sectionIsOpen}
           active={isActive}
           small={true}
           completed={props.completed}
