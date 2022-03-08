@@ -93,13 +93,15 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="fdr fac padding-top-2">
+      <div className="fdr padding-top-2">
         <h2 className="">{Config.dashboardDefaults.calendarHeader}</h2>
-        <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
-          <div className="fdr fac margin-left-1 font-body-lg text-green" data-testid="calendar-tooltip">
-            <Icon>help_outline</Icon>
-          </div>
-        </ArrowTooltip>
+        <div className="margin-top-05">
+          <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
+            <div className="fdr fac margin-left-1 font-body-lg text-green" data-testid="calendar-tooltip">
+              <Icon>help_outline</Icon>
+            </div>
+          </ArrowTooltip>
+        </div>
       </div>
       <table>
         <tbody>{getTableRows()}</tbody>
