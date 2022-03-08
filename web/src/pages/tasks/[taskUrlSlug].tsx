@@ -119,6 +119,7 @@ const TaskPage = (props: Props): ReactElement => {
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
             "pharmacy-license": <LicenseTask task={props.task} />,
+            "license-accounting": <LicenseTask task={props.task} />,
             "form-business-entity": businessFormationFeatureFlag(),
             default: getTaskBody(),
           })}

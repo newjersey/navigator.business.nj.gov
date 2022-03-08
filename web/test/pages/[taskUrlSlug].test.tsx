@@ -323,6 +323,14 @@ describe("task page", () => {
     expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
+  it("loads License task screen for license-accounting", () => {
+    subject = renderPage(
+      generateTask({ id: "license-accounting" }),
+      generateUserData({ licenseData: undefined })
+    );
+    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+  });
+
   it("loads construction post-onboarding question for task in template body", async () => {
     subject = renderPage(
       generateTask({
