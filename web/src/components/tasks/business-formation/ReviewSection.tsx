@@ -1,14 +1,14 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
+import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/BusinessNameAndLegalStructure";
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext } from "react";
-import { FormationContext } from "../BusinessFormation";
-import { businessFormationTabs } from "./businessFormationTabs";
-import { BusinessNameAndLegalStructure } from "./BusinessNameAndLegalStructure";
 
 export const ReviewSection = (): ReactElement => {
   const { state, setTab } = useContext(FormationContext);

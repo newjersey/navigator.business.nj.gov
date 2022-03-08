@@ -1,4 +1,5 @@
 import { Alert } from "@/components/njwds-extended/Alert";
+import { Button } from "@/components/njwds-extended/Button";
 import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
@@ -9,7 +10,6 @@ import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
 import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
-import { Button } from "../njwds-extended/Button";
 
 const useStyles = makeStyles(() =>
   createStyles({

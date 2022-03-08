@@ -1,14 +1,14 @@
 import { Button } from "@/components/njwds-extended/Button";
+import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { Members } from "@/components/tasks/business-formation/Members";
+import { Signatures } from "@/components/tasks/business-formation/Signatures";
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
-import { FormationContext } from "../BusinessFormation";
-import { BusinessFormationFieldAlert } from "./BusinessFormationFieldAlert";
-import { Members } from "./Members";
-import { Signatures } from "./Signatures";
 
 export const ContactsSection = (): ReactElement => {
   const { state, setErrorMap, setTab } = useContext(FormationContext);

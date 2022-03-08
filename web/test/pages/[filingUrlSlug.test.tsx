@@ -1,9 +1,9 @@
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
+import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@/test/factories";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockDate } from "@/test/mock/useMockDate";
 import { render } from "@testing-library/react";
 import React from "react";
-import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "../factories";
-import { useMockUserData } from "../mock/mockUseUserData";
-import { useMockDate } from "../mock/useMockDate";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));

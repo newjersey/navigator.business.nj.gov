@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -10,7 +11,6 @@ import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField, useMediaQuery } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
-import { FormationContext } from "../BusinessFormation";
 
 const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
   BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,

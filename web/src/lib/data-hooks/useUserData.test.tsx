@@ -1,10 +1,10 @@
 import * as api from "@/lib/api-client/apiClient";
+import { useUserData, UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { generateUser, generateUserData } from "@/test/factories";
 import { generateUseUserDataResponse, withAuth, withUserDataError } from "@/test/helpers";
 import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import { act, render } from "@testing-library/react";
 import React from "react";
-import { useUserData, UseUserDataResponse } from "./useUserData";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),

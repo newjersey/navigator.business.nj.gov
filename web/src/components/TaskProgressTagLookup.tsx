@@ -1,7 +1,7 @@
+import { Tag } from "@/components/njwds-extended/Tag";
 import { TaskProgress } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
-import { Tag } from "./njwds-extended/Tag";
 
 export const TaskProgressTagLookup: Record<TaskProgress, ReactElement> = {
   NOT_STARTED: (

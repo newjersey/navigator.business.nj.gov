@@ -1,17 +1,17 @@
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
+import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
+import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingHasExistingBusiness } from "@/components/onboarding/OnboardingHasExistingBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
+import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared";
 import React, { ReactNode } from "react";
-import { OnboardingDateOfFormation } from "./OnboardingDateOfFormation";
-import { OnboardingExistingEmployees } from "./OnboardingExistingEmployees";
-import { OnboardingSectors } from "./OnboardingSectors";
 
 export type OnboardingFlow = {
   pages: {

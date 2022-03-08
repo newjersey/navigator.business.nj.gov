@@ -1,7 +1,7 @@
+import { Alert } from "@/components/njwds-extended/Alert";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { withDesign } from "storybook-addon-designs";
-import { Alert } from "../../src/components/njwds-extended/Alert";
 
 export default {
   title: "Components/Alert",

@@ -1,9 +1,9 @@
+import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
-import { GenericTextField } from "../GenericTextField";
 
 interface Props {
   onValidation: (fieldName: ProfileFields, invalid: boolean) => void;

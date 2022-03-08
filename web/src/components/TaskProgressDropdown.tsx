@@ -1,3 +1,5 @@
+import { Tag } from "@/components/njwds-extended/Tag";
+import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaskProgress } from "@/lib/types/types";
@@ -7,8 +9,6 @@ import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
 import React, { ReactElement, useEffect, useState } from "react";
-import { Tag } from "./njwds-extended/Tag";
-import { ToastAlert } from "./njwds-extended/ToastAlert";
 
 const useStyles = makeStyles(() =>
   createStyles({

@@ -1,3 +1,5 @@
+import { Content } from "@/components/Content";
+import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
@@ -8,8 +10,6 @@ import { TextFieldProps } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import React, { ReactElement, useContext } from "react";
-import { Content } from "../Content";
-import { GenericTextField } from "../GenericTextField";
 
 dayjs.extend(advancedFormat);
 

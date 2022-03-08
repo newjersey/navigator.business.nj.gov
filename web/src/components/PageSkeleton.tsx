@@ -2,8 +2,8 @@ import { BetaBar } from "@/components/BetaBar";
 import { InnovFooter } from "@/components/InnovFooter";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import React, { ReactElement } from "react";
-import { SingleColumnContainer } from "./njwds/SingleColumnContainer";
 
 interface Props {
   children: React.ReactNode;

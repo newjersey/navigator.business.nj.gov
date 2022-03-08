@@ -1,7 +1,7 @@
+import { Button } from "@/components/njwds-extended/Button";
 import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
-import { Button } from "../njwds-extended/Button";
 
 interface Props {
   isFinal: boolean;

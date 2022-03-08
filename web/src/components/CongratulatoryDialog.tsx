@@ -1,9 +1,9 @@
+import { Icon } from "@/components/njwds/Icon";
 import { SectionType } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
-import { Icon } from "./njwds/Icon";
 
 interface Props {
   nextSectionType: SectionType | undefined;

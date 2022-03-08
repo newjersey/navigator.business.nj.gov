@@ -19,12 +19,14 @@ import {
   useMockUserData,
   useMockUserDataError,
 } from "@/test/mock/mockUseUserData";
+import { useMockDate } from "@/test/mock/useMockDate";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { createPageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   LookupIndustryById,
@@ -36,8 +38,6 @@ import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
-import { useMockDate } from "../mock/useMockDate";
-import { createPageHelpers } from "./onboarding/helpers-onboarding";
 
 function mockMaterialUI(): typeof materialUi {
   return {

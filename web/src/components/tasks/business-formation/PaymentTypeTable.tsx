@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { getDollarValue } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { PaymentType } from "@businessnjgovnavigator/shared";
 import { FormHelperText, Radio } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
-import { FormationContext } from "../BusinessFormation";
 
 export const PaymentTypeTable = (): ReactElement => {
   const achPaymentCost = parseFloat(Config.businessFormationDefaults.achPaymentCost);

@@ -1,5 +1,7 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
@@ -8,8 +10,6 @@ import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";
-import { FormationContext } from "../BusinessFormation";
-import { businessFormationTabs } from "./businessFormationTabs";
 
 interface Props {
   reviewPage?: boolean;

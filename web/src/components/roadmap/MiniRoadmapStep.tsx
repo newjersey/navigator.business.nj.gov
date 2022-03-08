@@ -1,9 +1,9 @@
+import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
+import { SectionAccordionContext } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/lib/types/types";
 import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
-import { VerticalStepIndicator } from "../njwds-extended/VerticalStepIndicator";
-import { SectionAccordionContext } from "./SectionAccordion";
 
 interface Props {
   step: Step;

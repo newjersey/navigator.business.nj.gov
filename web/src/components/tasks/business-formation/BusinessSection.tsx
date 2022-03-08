@@ -1,4 +1,8 @@
 import { Button } from "@/components/njwds-extended/Button";
+import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { MainBusiness } from "@/components/tasks/business-formation/MainBusiness";
+import { RegisteredAgent } from "@/components/tasks/business-formation/RegisteredAgent";
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -6,10 +10,6 @@ import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
-import { FormationContext } from "../BusinessFormation";
-import { BusinessFormationFieldAlert } from "./BusinessFormationFieldAlert";
-import { MainBusiness } from "./MainBusiness";
-import { RegisteredAgent } from "./RegisteredAgent";
 
 export const BusinessSection = (): ReactElement => {
   const { state, setErrorMap, setTab } = useContext(FormationContext);

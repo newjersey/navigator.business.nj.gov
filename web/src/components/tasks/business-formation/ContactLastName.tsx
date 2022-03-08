@@ -1,6 +1,6 @@
+import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
-import { BusinessFormationTextField } from "./BusinessFormationTextField";
 
 export const ContactLastName = (): ReactElement => {
   return (

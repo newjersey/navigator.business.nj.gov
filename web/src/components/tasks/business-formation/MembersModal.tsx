@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { StateDropdown } from "@/components/tasks/business-formation/StateDropdown";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyFormationMember, FormationMember } from "@businessnjgovnavigator/shared";
@@ -15,7 +16,6 @@ import {
   IconButton,
 } from "@mui/material";
 import React, { FormEvent, ReactElement, useContext, useEffect, useRef, useState } from "react";
-import { StateDropdown } from "./StateDropdown";
 interface Props {
   open: boolean;
   index?: number;

@@ -1,4 +1,6 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { CongratulatoryDialog } from "@/components/CongratulatoryDialog";
+import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
@@ -15,8 +17,6 @@ import {
 } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
-import { CongratulatoryDialog } from "./CongratulatoryDialog";
-import { Tag } from "./njwds-extended/Tag";
 
 interface Props {
   task: Task;

@@ -18,6 +18,7 @@
       "@/components/*": ["src/components/*"],
       "@/lib/*": ["src/lib/*"],
       "@/test/*": ["test/*"],
+      "@/styles/*": ["src/styles/*"],
       "@/pages/*": ["src/pages/*"],
       "@businessnjgovnavigator/shared/*": ["../shared/lib/shared/src/*"],
       "@businessnjgovnavigator/content/*": ["../content/src/*"]

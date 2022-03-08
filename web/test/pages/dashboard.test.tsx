@@ -10,6 +10,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
@@ -22,7 +23,6 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
-import { mockPush, useMockRouter } from "../mock/mockRouter";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router");

@@ -1,3 +1,6 @@
+import { Content } from "@/components/Content";
+import { MenuOptionSelected } from "@/components/MenuOptionSelected";
+import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
@@ -6,9 +9,6 @@ import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@bu
 import { Autocomplete, TextField } from "@mui/material";
 import orderBy from "lodash.orderby";
 import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
-import { Content } from "../Content";
-import { MenuOptionSelected } from "../MenuOptionSelected";
-import { MenuOptionUnselected } from "../MenuOptionUnselected";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

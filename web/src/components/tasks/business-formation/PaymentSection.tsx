@@ -1,6 +1,14 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
+import { BusinessFormationDocuments } from "@/components/tasks/business-formation/BusinessFormationDocuments";
+import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { BusinessFormationNotifications } from "@/components/tasks/business-formation/BusinessFormationNotifications";
+import { ContactFirstName } from "@/components/tasks/business-formation/ContactFirstName";
+import { ContactLastName } from "@/components/tasks/business-formation/ContactLastName";
+import { ContactPhoneNumber } from "@/components/tasks/business-formation/ContactPhoneNumber";
+import { PaymentTypeTable } from "@/components/tasks/business-formation/PaymentTypeTable";
+import { FormationContext } from "@/components/tasks/BusinessFormation";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
@@ -9,14 +17,6 @@ import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
-import { FormationContext } from "../BusinessFormation";
-import { BusinessFormationDocuments } from "./BusinessFormationDocuments";
-import { BusinessFormationFieldAlert } from "./BusinessFormationFieldAlert";
-import { BusinessFormationNotifications } from "./BusinessFormationNotifications";
-import { ContactFirstName } from "./ContactFirstName";
-import { ContactLastName } from "./ContactLastName";
-import { ContactPhoneNumber } from "./ContactPhoneNumber";
-import { PaymentTypeTable } from "./PaymentTypeTable";
 
 export const PaymentSection = (): ReactElement => {
   const { state, setErrorMap, setTab, setShowResponseAlert } = useContext(FormationContext);

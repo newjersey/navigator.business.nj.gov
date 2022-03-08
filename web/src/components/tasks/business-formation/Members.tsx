@@ -2,13 +2,13 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
+import { MembersModal } from "@/components/tasks/business-formation/MembersModal";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
+import styles from "@/styles/sections/members.module.scss";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationMember } from "@businessnjgovnavigator/shared";
 import { IconButton } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
-import styles from "../../../styles/sections/members.module.scss";
-import { MembersModal } from "./MembersModal";
 
 export const formatAddress = (member: FormationMember) =>
   `${member.addressLine1}, ${member.addressLine2 ? `${member.addressLine2},` : ""} ${member.addressCity}, ${

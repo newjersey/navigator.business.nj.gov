@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
+import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext } from "react";
-import { GenericTextField, GenericTextFieldProps } from "../GenericTextField";
 
 export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "onValidation" | "fieldName"> {
   fieldName: Exclude<ProfileFields, keyof BusinessUser>;

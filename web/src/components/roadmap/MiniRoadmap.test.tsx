@@ -1,3 +1,4 @@
+import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { generatePreferences, generateStep, generateTask, generateUserData } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
@@ -8,7 +9,6 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import React from "react";
-import { MiniRoadmap } from "./MiniRoadmap";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

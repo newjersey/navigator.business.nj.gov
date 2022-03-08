@@ -1,5 +1,8 @@
 import { Content } from "@/components/Content";
+import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
+import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import * as api from "@/lib/api-client/apiClient";
@@ -19,9 +22,6 @@ import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovn
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useEffect, useState } from "react";
-import { HorizontalStepper } from "../njwds-extended/HorizontalStepper";
-import { TaskCTA } from "../TaskCTA";
-import { businessFormationTabs } from "./business-formation/businessFormationTabs";
 
 interface Props {
   task: Task;

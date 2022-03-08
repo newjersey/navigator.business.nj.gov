@@ -1,6 +1,7 @@
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettings";
 import { Icon } from "@/components/njwds/Icon";
+import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { OperateReference, Task } from "@/lib/types/types";
@@ -8,7 +9,6 @@ import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import Link from "next/link";
 import React, { ReactElement, useMemo, useState } from "react";
-import { MiniOperateSection } from "../roadmap/MiniOperateSection";
 interface Props {
   scrolled: boolean;
   task?: Task;

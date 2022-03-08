@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
+import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/BusinessNameAndLegalStructure";
+import { BusinessStartDate } from "@/components/tasks/business-formation/BusinessStartDate";
+import { BusinessSuffixDropdown } from "@/components/tasks/business-formation/BusinessSuffixDropdown";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
-import { BusinessFormationTextField } from "./BusinessFormationTextField";
-import { BusinessNameAndLegalStructure } from "./BusinessNameAndLegalStructure";
-import { BusinessStartDate } from "./BusinessStartDate";
-import { BusinessSuffixDropdown } from "./BusinessSuffixDropdown";
 
 export const MainBusiness = (): ReactElement => {
   const { userData } = useUserData();

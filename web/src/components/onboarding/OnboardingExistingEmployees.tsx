@@ -1,7 +1,7 @@
+import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, ReactNode } from "react";
-import { OnboardingNumericField } from "./OnboardingNumericField";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

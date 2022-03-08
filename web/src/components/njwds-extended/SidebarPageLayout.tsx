@@ -1,4 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
+import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -8,7 +9,6 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import { MiniOperateSection } from "../roadmap/MiniOperateSection";
 
 interface Props {
   children: React.ReactNode;

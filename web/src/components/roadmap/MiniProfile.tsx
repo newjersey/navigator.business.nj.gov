@@ -1,3 +1,4 @@
+import { Button } from "@/components/njwds-extended/Button";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -7,7 +8,6 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
-import { Button } from "../njwds-extended/Button";
 
 interface Props {
   profileData: ProfileData;

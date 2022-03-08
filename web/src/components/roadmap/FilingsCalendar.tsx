@@ -1,4 +1,5 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
@@ -9,7 +10,6 @@ import { useMediaQuery } from "@mui/material";
 import dayjs from "dayjs";
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import { Tag } from "../njwds-extended/Tag";
 
 interface Props {
   taxFilings: TaxFiling[];

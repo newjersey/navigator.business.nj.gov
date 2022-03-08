@@ -1,10 +1,10 @@
+import { BusinessNameSection } from "@/components/tasks/business-formation/BusinessNameSection";
+import { BusinessSection } from "@/components/tasks/business-formation/BusinessSection";
+import { ContactsSection } from "@/components/tasks/business-formation/ContactsSection";
+import { PaymentSection } from "@/components/tasks/business-formation/PaymentSection";
+import { ReviewSection } from "@/components/tasks/business-formation/ReviewSection";
 import { businessFormationTabsNames } from "@/lib/types/types";
 import React, { ReactElement } from "react";
-import { BusinessNameSection } from "./BusinessNameSection";
-import { BusinessSection } from "./BusinessSection";
-import { ContactsSection } from "./ContactsSection";
-import { PaymentSection } from "./PaymentSection";
-import { ReviewSection } from "./ReviewSection";
 
 export const businessFormationTabs: { component: ReactElement; section: businessFormationTabsNames }[] = [
   {
