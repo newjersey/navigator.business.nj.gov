@@ -1,9 +1,9 @@
 import { Button } from "@/components/njwds-extended/Button";
+import { GraduationModal } from "@/components/roadmap/GraduationModal";
 import { LoadDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
-import { OnboardingModal } from "../onboarding/OnboardingModal";
 
 type Props = {
   displayContent: LoadDisplayContent;
@@ -12,14 +12,14 @@ type Props = {
 export const GraduationBox = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const graduateToOwning = async (): Promise<void> => {
+  const openModal = async (): Promise<void> => {
     analytics.event.roadmap_graduate_button.click.view_graduation_modal();
     setModalOpen(true);
   };
 
   return (
     <>
-      <OnboardingModal
+      <GraduationModal
         displayContent={props.displayContent}
         open={modalOpen}
         handleClose={() => setModalOpen(false)}
@@ -41,7 +41,7 @@ export const GraduationBox = (props: Props): ReactElement => {
           </div>
         </div>
         <div className="mla">
-          <Button style="primary" onClick={graduateToOwning}>
+          <Button style="primary" onClick={openModal}>
             {Config.roadmapDefaults.graduationButtonText}
           </Button>
         </div>

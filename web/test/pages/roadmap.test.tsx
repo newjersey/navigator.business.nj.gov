@@ -475,6 +475,7 @@ describe("roadmap page", () => {
       expect(subject.queryByText(Config.taskDefaults.requiredTagText)).toBeVisible();
     });
   });
+
   describe("oscar graduation modal", () => {
     let userData = generateUserData({});
     const getRoadMap = () =>
@@ -533,6 +534,7 @@ describe("roadmap page", () => {
       });
       await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/dashboard"));
     });
+
     it("pre-populates fields with data from profile", async () => {
       const date = dayjs().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
@@ -590,6 +592,7 @@ describe("roadmap page", () => {
       expect(subject.queryByLabelText("Date of formation")).not.toBeInTheDocument();
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
     });
+
     it("auto fills sector based on sectorDefault in the industry object", async () => {
       userData = generateUserData({
         profileData: generateProfileData({
