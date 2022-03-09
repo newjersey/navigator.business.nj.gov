@@ -1,6 +1,8 @@
 import { Content } from "@/components/Content";
 import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
+import { OnboardingCannabisLicense } from "@/components/onboarding/OnboardingCannabisLicense";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
+import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
@@ -56,6 +58,12 @@ export const OnboardingIndustry = ({ headerAriaLevel = 2, ...props }: Props): Re
         {isLiquorLicenseApplicable(state.profileData.industryId) && (
           <div className="margin-top-4">
             <OnboardingLiquorLicense />
+          </div>
+        )}
+
+        {isCannabisLicenseApplicable(state.profileData.industryId) && (
+          <div className="margin-top-4">
+            <OnboardingCannabisLicense />
           </div>
         )}
       </div>

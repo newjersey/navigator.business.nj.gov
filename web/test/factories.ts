@@ -117,6 +117,7 @@ export const generateProfileData = (
     municipality: generateMunicipality({}),
     liquorLicense: false,
     homeBasedBusiness: false,
+    cannabisLicenseType: undefined,
     constructionRenovationPlan: undefined,
     dateOfFormation: dayjs().format("YYYY-MM-DD"),
     entityId: randomInt(10).toString(),

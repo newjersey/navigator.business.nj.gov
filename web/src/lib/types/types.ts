@@ -28,7 +28,18 @@ export type TextFieldContent = {
   headingBolded?: string;
   headingNotBolded?: string;
 };
-export type RadioFieldContent = { contentMd: string; radioButtonYesText: string; radioButtonNoText: string };
+
+export type RadioFieldContent = {
+  contentMd: string;
+  radioButtonYesText: string;
+  radioButtonNoText: string;
+};
+
+export type CannabisRadioFieldContent = {
+  contentMd: string;
+  radioButtonAnnualText: string;
+  radioButtonConditionalText: string;
+};
 
 export type LegalFieldContent = {
   contentMd: string;
@@ -42,6 +53,7 @@ export interface IndustryFieldContent extends TextFieldContent {
   specificHomeContractorMd: string;
   specificEmploymentAgencyMd: string;
   specificLiquorQuestion: RadioFieldContent;
+  specificCannabisLicenseQuestion: CannabisRadioFieldContent;
 }
 
 export type StartingFlowContent = {
@@ -213,7 +225,11 @@ const coreContent = {
 
 export const emptyStartingFlowContent: StartingFlowContent = {
   ...coreContent,
-  hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
+  hasExistingBusiness: {
+    contentMd: "",
+    radioButtonYesText: "",
+    radioButtonNoText: "",
+  },
   industryId: {
     contentMd: "",
     placeholder: "",
@@ -223,6 +239,11 @@ export const emptyStartingFlowContent: StartingFlowContent = {
       contentMd: "",
       radioButtonYesText: "",
       radioButtonNoText: "",
+    },
+    specificCannabisLicenseQuestion: {
+      contentMd: "",
+      radioButtonAnnualText: "",
+      radioButtonConditionalText: "",
     },
   },
 };
@@ -277,6 +298,11 @@ export const emptyProfileContent: ProfileContent = {
       contentMd: "",
       radioButtonYesText: "",
       radioButtonNoText: "",
+    },
+    specificCannabisLicenseQuestion: {
+      contentMd: "",
+      radioButtonAnnualText: "",
+      radioButtonConditionalText: "",
     },
   },
 };

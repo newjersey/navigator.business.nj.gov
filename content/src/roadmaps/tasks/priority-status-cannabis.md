@@ -15,9 +15,9 @@ Your business may qualify for priority status in the Cannabis application proces
 
 Diversely-owned businesses are given the highest priority followed by social-equity businesses. Having multiple priorities is not an advantage. Identify which of the following priorities you qualify for:
 
-- `Diversely Owned Businesses|diverselyowned-cannabis`
-- `Social Equity Businesses|socialequity-cannabis`
-- `Impact Zone Businesses|impactzone-cannabis`
+- `Diversely Owned Businesses|diversely-owned-business-cannabis`
+- `Social Equity Businesses|social-equity-business-cannabis`
+- `Impact Zone Businesses|impact-zone-business-cannabis`
 
 ---
 

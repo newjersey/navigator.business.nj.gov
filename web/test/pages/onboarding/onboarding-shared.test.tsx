@@ -332,6 +332,33 @@ describe("onboarding - shared", () => {
     expect(currentUserData().profileData.liquorLicense).toEqual(true);
   });
 
+  it("displays cannabis license type for cannabis when selected", async () => {
+    const displayContent = createEmptyLoadDisplayContent()["STARTING"];
+    displayContent.industryId.specificCannabisLicenseQuestion = {
+      contentMd: "What type of cannabis license?",
+      radioButtonConditionalText: "Conditional",
+      radioButtonAnnualText: "Annual",
+    };
+
+    const { subject, page } = renderPage({});
+    page.chooseRadio("has-existing-business-false");
+    await page.visitStep2();
+    await page.visitStep3();
+
+    expect(subject.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
+    page.selectByValue("Industry", "cannabis");
+    expect(subject.queryByText("What type of cannabis license?")).toBeInTheDocument();
+
+    page.chooseRadio("cannabis-license-annual");
+    await page.visitStep4();
+    expect(currentUserData().profileData.cannabisLicenseType).toEqual("ANNUAL");
+
+    page.clickBack();
+    page.chooseRadio("cannabis-license-conditional");
+    await page.visitStep4();
+    expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
+  });
+
   it("displays home-based business question for applicable industries on municipality page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const displayContent = createEmptyLoadDisplayContent();
