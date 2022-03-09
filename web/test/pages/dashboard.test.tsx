@@ -19,13 +19,26 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared";
-import { createTheme, ThemeProvider } from "@mui/material";
+import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
 
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
+
+jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router");
+
+const setMobileScreen = (value: boolean): void => {
+  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+};
 
 describe("dashboard", () => {
   const emptyDisplayContent: DashboardDisplayContent = {
@@ -38,6 +51,7 @@ describe("dashboard", () => {
     jest.resetAllMocks();
     useMockUserData({});
     useMockRouter({});
+    setMobileScreen(true);
   });
 
   const renderPage = (overrides: {
@@ -111,8 +125,34 @@ describe("dashboard", () => {
     };
 
     const subject = renderPage({ operateRefs });
+    expect(subject.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
     expect(subject.getByText(dueDate.format("M/D"), { exact: false })).toBeInTheDocument();
     expect(subject.getByText("Annual Report")).toBeInTheDocument();
+  });
+
+  it("displays filings calendar as list with annual report date", () => {
+    setMobileScreen(false);
+
+    const dueDate = dayjs().add(2, "months");
+    const annualReport = generateTaxFiling({
+      identifier: "annual-report",
+      dueDate: dueDate.format("YYYY-MM-DD"),
+    });
+    useMockUserData({ taxFilingData: generateTaxFilingData({ filings: [annualReport] }) });
+    const operateRefs: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+
+    const subject = renderPage({ operateRefs });
+    expect(subject.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
+    expect(subject.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(
+      subject.getByText(`Annual Report ${dayjs(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`)
+    ).toBeInTheDocument();
   });
 
   it("displays certifications filtered from user data", () => {
