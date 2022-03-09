@@ -1,9 +1,11 @@
 ---
 slug: socialequitybusiness-cannabis
 ---
+
 ### Social Equity Business or a Legacy Cannabis Application
 
-A Social Equity Business (SEB) must have more than 50% of its ownership meet one of two criteria: 
+A Social Equity Business (SEB) must have more than 50% of its ownership meet one of two criteria:
+
 - Have lived in an [Economically Disadvantaged Area](https://www.nj.gov/cannabis/businesses/priority-applications/eda.shtml) for 5 of the last 10 years AND have a household income 80% or less than the average median household income in New Jersey, OR
 - Have been convicted of at least two disorderly persons offenses or at least one indictable offense related to marijuana or hashish
 

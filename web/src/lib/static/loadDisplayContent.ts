@@ -56,6 +56,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     const specificHomeContractor = getMarkdown(loadFile("industry-home-contractor.md", type));
     const specificEmploymentAgency = getMarkdown(loadFile("industry-employment-agency.md", type));
     const specificLiquor = getMarkdown(loadFile("industry-liquor.md", type));
+    const specificCannabis = getMarkdown(loadFile("industry-cannabis.md", type));
     return {
       contentMd: industryContent.content,
       specificHomeContractorMd: specificHomeContractor.content,
@@ -64,6 +65,12 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
         contentMd: specificLiquor.content,
         radioButtonYesText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonYesText,
         radioButtonNoText: (specificLiquor.grayMatter as RadioGrayMatter).radioButtonNoText,
+      },
+      specificCannabisLicenseQuestion: {
+        contentMd: specificCannabis.content,
+        radioButtonAnnualText: (specificCannabis.grayMatter as CannabisRadioGrayMatter).radioButtonAnnualText,
+        radioButtonConditionalText: (specificCannabis.grayMatter as CannabisRadioGrayMatter)
+          .radioButtonConditionalText,
       },
       ...(industryContent.grayMatter as FieldGrayMatter),
     };
@@ -275,6 +282,11 @@ type DocumentFieldGrayMatter = {
 type RadioGrayMatter = {
   radioButtonYesText: string;
   radioButtonNoText: string;
+};
+
+type CannabisRadioGrayMatter = {
+  radioButtonAnnualText: string;
+  radioButtonConditionalText: string;
 };
 
 type RegisteredAgentRadioGrayMatter = {

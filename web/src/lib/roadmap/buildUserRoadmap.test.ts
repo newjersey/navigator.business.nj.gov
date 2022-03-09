@@ -145,6 +145,26 @@ describe("buildUserRoadmap", () => {
     });
   });
 
+  describe("cannabis license type", () => {
+    it("adds annual-cannabis add-on when cannabis license ANNUAL", async () => {
+      await buildUserRoadmap(generateProfileData({ cannabisLicenseType: "ANNUAL" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("cannabis-annual");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-conditional");
+    });
+
+    it("adds conditional-cannabis add-on when cannabis license CONDITIONAL", async () => {
+      await buildUserRoadmap(generateProfileData({ cannabisLicenseType: "CONDITIONAL" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-annual");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("cannabis-conditional");
+    });
+
+    it("adds neither cannabis add-on when cannabis license is undefined", async () => {
+      await buildUserRoadmap(generateProfileData({ cannabisLicenseType: undefined }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-annual");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cannabis-conditional");
+    });
+  });
+
   describe("municipality", () => {
     it("replaces placeholders with info from the user municipality", async () => {
       mockFetchMunicipality.mockResolvedValue(

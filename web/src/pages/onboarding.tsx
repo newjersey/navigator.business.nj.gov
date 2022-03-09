@@ -215,6 +215,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         liquorLicense: profileData.liquorLicense,
         municipality: profileData.municipality,
         hasExistingBusiness: profileData.hasExistingBusiness,
+        cannabisLicenseType: undefined,
         legalStructureId: undefined,
         dateOfFormation: undefined,
         entityId: undefined,

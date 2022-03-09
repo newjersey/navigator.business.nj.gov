@@ -1,0 +1,43 @@
+{
+  "id": "cannabis",
+  "name": "Cannabis",
+  "description": "A business that manufacturers, delivers, or sells cannabis",
+  "canBeHomeBased": false,
+  "isLiquorLicenseApplicable": false,
+  "isMobileLocation": false,
+  "canBeReseller": false,
+  "additionalSearchTerms": "marijuana",
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 5,
+      "task": "priority-status-cannabis"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "get-insurance"
+    }
+  ],
+  "modifications": [
+    {
+      "taskToReplaceFilename": "zoning",
+      "replaceWithFilename": "zoning-cannabis"
+    }
+  ]
+}
