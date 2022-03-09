@@ -190,7 +190,8 @@
     "editProfileText": "Edit My Profile",
     "certificationTagText": "Certification",
     "headerText": "Hello, ${name}",
-    "opportunitiesHeader": "Opportunities"
+    "opportunitiesHeader": "Opportunities",
+    "opportunitiesCount": "${count} Total"
   },
   "landingPage": {
     "column1Image": "../img/Not-Starting-1-visit-site.svg",
