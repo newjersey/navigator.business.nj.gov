@@ -86,8 +86,17 @@ const DashboardPage = (props: Props): ReactElement => {
                 </div>
 
                 <div className="desktop:grid-col-5 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">
-                  <h2>{Config.dashboardDefaults.opportunitiesHeader}</h2>
-                  <hr className="margin-bottom-3" aria-hidden={true} />
+                  <header className="flex flex-justify flex-align-center">
+                    <h2>{Config.dashboardDefaults.opportunitiesHeader}</h2>
+                    {userData != null && (
+                      <div className="text-base-dark font-sans-xs margin-bottom-2">
+                        {templateEval(Config.dashboardDefaults.opportunitiesCount, {
+                          count: String(filteredCertifications.length + filteredFundings.length),
+                        })}
+                      </div>
+                    )}
+                  </header>
+                  <hr className="margin-bottom-3 margin-top-0" aria-hidden={true} />
                   <div className="dashboard-opportunities-list">
                     {filteredCertifications.map((cert) => (
                       <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />

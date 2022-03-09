@@ -1,3 +1,5 @@
+import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
+import { filterFundings } from "@/lib/domain-logic/filterFundings";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
@@ -72,15 +74,19 @@ describe("dashboard", () => {
     );
   };
 
-  const renderWithUserData = (userData: UserData) => {
+  const renderWithUserData = (
+    userData: UserData,
+    fundings: Funding[] = [],
+    certifications: Certification[] = []
+  ) => {
     return render(
       <WithStatefulUserData initialUserData={userData}>
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
             displayContent={emptyDisplayContent}
             operateReferences={emptyOperateRef}
-            fundings={[]}
-            certifications={[]}
+            fundings={fundings}
+            certifications={certifications}
           />
         </ThemeProvider>
       </WithStatefulUserData>
@@ -153,6 +159,41 @@ describe("dashboard", () => {
     expect(
       subject.getByText(`Annual Report ${dayjs(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`)
     ).toBeInTheDocument();
+  });
+
+  it("displays total count of filtered certifications of fundings in list header", () => {
+    const initialUserData = generateUserData({
+      profileData: generateProfileData({
+        homeBasedBusiness: false,
+        municipality: undefined,
+        existingEmployees: "1",
+        sectorId: "construction",
+        ownershipTypeIds: ["disabled-veteran"],
+      }),
+    });
+    const fundings = [
+      generateFunding({ name: "Funding 1", sector: ["construction"], status: "closed" }), // Filtered out
+      generateFunding({ name: "Funding 2", sector: ["construction"], status: "open" }),
+      generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "open" }), // Filtered out
+      generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
+      generateFunding({ name: "Funding 5", sector: [], status: "first-come, first-served" }),
+    ];
+    const certifications = [
+      generateCertification({ name: "Cert 1", applicableOwnershipTypes: ["disabled-veteran"] }),
+      generateCertification({ name: "Cert 2", applicableOwnershipTypes: [] }),
+      generateCertification({ name: "Cert 3", applicableOwnershipTypes: ["minority-owned"] }), // Filtered out
+    ];
+
+    setupStatefulUserDataContext();
+    const subject = renderWithUserData(initialUserData, fundings, certifications);
+
+    const filteredFundings = filterFundings(fundings, initialUserData);
+    const filteredCertifications = filterCertifications(certifications, initialUserData);
+
+    const label = templateEval(Config.dashboardDefaults.opportunitiesCount, {
+      count: String(filteredFundings.length + filteredCertifications.length),
+    });
+    expect(subject.getByText(label)).toBeInTheDocument();
   });
 
   it("displays certifications filtered from user data", () => {
