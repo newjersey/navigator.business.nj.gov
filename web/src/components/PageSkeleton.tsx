@@ -9,6 +9,7 @@ interface Props {
   children: React.ReactNode;
   home?: boolean;
   showLegalMessage?: boolean;
+  isWidePage?: boolean;
 }
 
 export const PageSkeleton = (props: Props): ReactElement => {
@@ -22,7 +23,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
             </a>
           </div>
         )}
-        <Banner />
+        <Banner isWidePage={props.isWidePage} />
         <BetaBar />
       </section>
       <div className="fit-screen-content">{props.children}</div>

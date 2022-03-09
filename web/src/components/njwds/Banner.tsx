@@ -1,10 +1,16 @@
 import React, { ReactElement } from "react";
 
-export const Banner = (): ReactElement => {
+type Props = {
+  isWidePage?: boolean;
+};
+
+export const Banner = (props: Props): ReactElement => {
   return (
     <div className="nj-banner">
       <div className="nj-banner__header">
-        <div className="grid-container">
+        <div
+          className={props.isWidePage ? "grid-container-widescreen desktop:padding-x-7" : "grid-container"}
+        >
           <div className="nj-banner__inner">
             <div className="grid-col-auto">
               <img className="nj-banner__header-seal" src="/vendor/img/nj_state_seal.png" alt="NJ flag" />
