@@ -69,27 +69,53 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     );
   };
 
-  const getTableRows = (): ReactElement[] => {
+  const renderCalendar = (): ReactElement => {
     const monthIndices = Array.from(Array(12).keys());
 
-    let monthsPerRow = 4;
-    if (!isLargeScreen) {
-      monthsPerRow = 2;
-    }
+    const monthsPerRow = 4;
 
     const rowIndices = monthIndices.filter((num) => num % monthsPerRow === 0);
 
-    return rowIndices.map((rowIndex) => {
-      const monthIndicesForRow = monthIndices.slice(rowIndex, rowIndex + monthsPerRow);
-      return (
-        <tr key={rowIndex}>
-          {monthIndicesForRow.map((month) => (
-            <td key={month}>{getMonth(month)}</td>
-          ))}
-        </tr>
-      );
-    });
+    return (
+      <table data-testid="filings-calendar-as-table">
+        <tbody>
+          {rowIndices.map((rowIndex) => {
+            const monthIndicesForRow = monthIndices.slice(rowIndex, rowIndex + monthsPerRow);
+            return (
+              <tr key={rowIndex}>
+                {monthIndicesForRow.map((month) => (
+                  <td key={month}>{getMonth(month)}</td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
   };
+
+  const renderList = () => (
+    <div data-testid="filings-calendar-as-list">
+      {props.taxFilings
+        .filter((filing) => props.operateReferences[filing.identifier])
+        .map((filing) => (
+          <div key={`${filing.identifier}-${filing.dueDate}`} className="flex margin-bottom-2 minh-6">
+            <div className="width-05 bg-primary"></div>
+            <div className="margin-left-205">
+              <div className="text-bold">{dayjs(filing.dueDate, "YYYY-MM-DD").format("MMMM D, YYYY")}</div>
+              <div>
+                <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
+                  <a href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
+                    {props.operateReferences[filing.identifier].name}{" "}
+                    {dayjs(filing.dueDate, "YYYY-MM-DD").format("YYYY")}
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+    </div>
+  );
 
   return (
     <>
@@ -103,9 +129,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           </ArrowTooltip>
         </div>
       </div>
-      <table>
-        <tbody>{getTableRows()}</tbody>
-      </table>
+      {isLargeScreen ? renderCalendar() : renderList()}
     </>
   );
 };
