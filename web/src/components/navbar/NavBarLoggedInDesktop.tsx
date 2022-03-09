@@ -10,7 +10,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
-export const NavBarLoggedInDesktop = (): ReactElement => {
+type Props = {
+  isWidePage?: boolean;
+};
+
+export const NavBarLoggedInDesktop = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const { dispatch } = useContext(AuthContext);
   const router = useRouter();
@@ -69,7 +73,10 @@ export const NavBarLoggedInDesktop = (): ReactElement => {
   );
 
   return (
-    <nav aria-label="Primary" className="grid-container">
+    <nav
+      aria-label="Primary"
+      className={props.isWidePage ? "grid-container-widescreen desktop:padding-x-7" : "grid-container"}
+    >
       <div className="display-flex flex-row flex-justify flex-align-center height-8">
         <Link href={redirectUrl} passHref>
           <a href={redirectUrl}>

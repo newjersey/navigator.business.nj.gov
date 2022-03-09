@@ -44,17 +44,17 @@ const DashboardPage = (props: Props): ReactElement => {
   }, [router.isReady, router.query.success]);
 
   return (
-    <PageSkeleton showLegalMessage={true}>
-      <NavBar />
-      <div className="margin-top-6 desktop:margin-top-0">
+    <PageSkeleton showLegalMessage={true} isWidePage={true}>
+      <NavBar isWidePage={true} />
+      <div className="margin-top-4 desktop:margin-top-0">
         <main id="main" data-testid="SPL-main-ele">
           <div
             data-testid="SPL-div-ele"
-            className="usa-section padding-top-0 desktop:padding-top-6 padding-bottom-15"
+            className="usa-section padding-top-0 desktop:padding-top-5 padding-bottom-15"
           >
-            <div className="grid-container width-100">
+            <div className="grid-container-widescreen desktop:padding-x-7 width-100">
               <div className="grid-row grid-gap-6">
-                <div className="desktop:grid-col-8 usa-prose">
+                <div className="desktop:grid-col-7 usa-prose">
                   <h1>
                     {userData?.user.name
                       ? templateEval(Config.dashboardDefaults.headerText, { name: userData.user.name })
@@ -85,7 +85,7 @@ const DashboardPage = (props: Props): ReactElement => {
                   {userData?.profileData.initialOnboardingFlow === "STARTING" && <UnGraduationBox />}
                 </div>
 
-                <div className="desktop:grid-col-4 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">
+                <div className="desktop:grid-col-5 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">
                   <h2>{Config.dashboardDefaults.opportunitiesHeader}</h2>
                   <hr className="margin-bottom-3" aria-hidden={true} />
                   <div className="dashboard-opportunities-list">
