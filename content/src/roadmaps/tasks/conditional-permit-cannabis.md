@@ -20,7 +20,7 @@ If you are looking to get a cannabis license, read the [application acceptance c
 - A `Business Registration Certificate|business-reg-certificate`
 - `EIN|ein` and `NJ Tax ID|tax-id` or SS# (if Sole Proprietorship or General Partnership)
 - Information on all `Persons of Interest|poi-cannabis`
-- Information on all `Entities of Interest|eio-cannabis`
+- Information on all `Entities of Interest|eoi-cannabis`
 - The proposed location of the cannabis business
 - Name and contact information for the proposed landlord, if applicable
 - [Entity Disclosure Forms](https://www.nj.gov/cannabis/documents/businesses/personal-use/CRC%20Entity%20Disclosure%20Form%20Fillable.pdf) for the license applicant and all Entities of Interest
@@ -33,12 +33,12 @@ If you are looking to get a cannabis license, read the [application acceptance c
 - Waiver of liability
 - Application fees
 - Proof that each owner of the conditional license has for the immediately preceding taxable year, an adjusted gross income of no more than $200,000, or no more than $400,000 if filing jointly with another individual, proof can be in the form of a previous year's tax statement
-- ** `Diversely-Owned Businesses Only|diversely-owned-business-cannabis` :** Copy of Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification from the NJ Department of Treasury
-- **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis` . This can be a proposed business address and/or a letter of intent
+- ** `Diversely-Owned Businesses|diverselyownedbusiness-cannabis` Only:** Provide a copy of your Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification from the NJ Department of Treasury
+- **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis` Proof can be a proposed business address and/or a letter of intent
 - **Social Equity Businesses Only:**
   A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the
   criteria for a `Social Equity Business|social-equity-business-cannabis` and appropriate documentation to prove residency
-- **Micro business Only:** Documentation that the business will comply with the `requirements for a micro businesses|microbusiness-cannabis`
+- **Microbusiness Only:** Documentation that the business will comply with the `requirements for a microbusinesses|microbusiness-cannabis`
 
 > **Once completed, you will have:**
 >
