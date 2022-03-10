@@ -53,7 +53,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
         <button className="usa-button--unstyled width-100" onClick={toggleOpen} aria-expanded={isOpen}>
           <div className=" step-label sm fdr fjc fac">
             <h3
-              className={`margin-0 font-body-xs line-height-body-2 text-ink  ${
+              className={`margin-bottom-0 text-ink  ${
                 isActive ? "text-primary-dark" : "weight-unset"
               } h4-styling`}
               data-step={stepNumber}
