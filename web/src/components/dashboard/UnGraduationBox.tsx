@@ -29,10 +29,10 @@ export const UnGraduationBox = (): ReactElement => {
   return (
     <div className="margin-top-6">
       <div className="padding-3 bg-base-lightest radius-md">
-        <h2 className="margin-y-0 h3-styling">{Config.dashboardDefaults.backToRoadmapHeader}</h2>
-        <p className="margin-y-1 text-base-dark">
+        <h2 className="h3-styling margin-bottom-105">{Config.dashboardDefaults.backToRoadmapHeader}</h2>
+        <p className="text-base-dark">
           {Config.dashboardDefaults.backToRoadmapText.split("${link}")[0]}
-          <Button style="tertiary" underline onClick={ungraduateToStarting}>
+          <Button style="tertiary" underline widthAutoOnMobile onClick={ungraduateToStarting}>
             {Config.dashboardDefaults.backToRoadmapLinkText}
           </Button>
           {Config.dashboardDefaults.backToRoadmapText.split("${link}")[1]}
