@@ -96,7 +96,7 @@ const DashboardPage = (props: Props): ReactElement => {
                       </div>
                     )}
                   </header>
-                  <hr className="margin-bottom-3 margin-top-0" aria-hidden={true} />
+                  <hr className="margin-bottom-3 margin-top-0 margin-right-105" aria-hidden={true} />
                   <div className="dashboard-opportunities-list padding-right-105">
                     {filteredCertifications.map((cert) => (
                       <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
