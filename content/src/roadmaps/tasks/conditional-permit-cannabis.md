@@ -20,7 +20,7 @@ If you are looking to get a cannabis license, read the [application acceptance c
 - A `Business Registration Certificate|business-reg-certificate`
 - `EIN|ein` and `NJ Tax ID|tax-id` or SS# (if Sole Proprietorship or General Partnership)
 - Information on all `Persons of Interest|poi-cannabis`
-- Information on all `Entities of Interest|eio-cannabis`
+- Information on all `Entities of Interest|eoi-cannabis`
 - The proposed location of the cannabis business
 - Name and contact information for the proposed landlord, if applicable
 - [Entity Disclosure Forms](https://www.nj.gov/cannabis/documents/businesses/personal-use/CRC%20Entity%20Disclosure%20Form%20Fillable.pdf) for the license applicant and all Entities of Interest
