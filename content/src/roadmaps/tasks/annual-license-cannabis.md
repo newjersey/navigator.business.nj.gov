@@ -18,7 +18,7 @@ If you are looking to get a cannabis license, read the [application acceptance c
 - Business Plan
 - Business Name
 - A `Business Registration Certificate|business-reg-certificate`
-- `EIN|ein `and ~NJ Tax ID|tax-id` or SS# (if Sole Proprietorship or General Partnership)
+- `EIN|ein` and ~NJ Tax ID|tax-id` or SS# (if Sole Proprietorship or General Partnership)
 - Information on all `Persons of Interest|poi-cannabis`
 - Information on all `Entities of Interest|eio-cannabis`
 - The proposed location of the cannabis business
