@@ -89,7 +89,7 @@ const DashboardPage = (props: Props): ReactElement => {
                   <header className="flex flex-justify flex-align-center">
                     <h2>{Config.dashboardDefaults.opportunitiesHeader}</h2>
                     {userData != null && (
-                      <div className="text-base-dark font-sans-xs margin-bottom-2">
+                      <div className="text-base-dark font-sans-xs margin-bottom-2 padding-right-105">
                         {templateEval(Config.dashboardDefaults.opportunitiesCount, {
                           count: String(filteredCertifications.length + filteredFundings.length),
                         })}
