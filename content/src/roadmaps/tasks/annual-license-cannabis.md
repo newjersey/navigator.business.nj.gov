@@ -42,7 +42,7 @@ If you are looking to get a cannabis license, read the [application acceptance c
 - ** `Diversely-Owned Businesses|diverselyownedbusiness-cannabis` Only:** Copy of Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification with the NJ Department of Treasury
 - **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis`
 - **Social Equity Businesses Only:**
-  A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis` and appropriate documentation to prove residency
+  A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis` and documentation (such as a tax return) to prove residency
 - **Microbusiness Only:** Documentation that the business will comply with the `requirements for a microbusinesses|microbusiness-cannabis`
 
 > **Once completed, you will have:**
