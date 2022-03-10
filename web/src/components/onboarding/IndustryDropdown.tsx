@@ -1,11 +1,17 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { ProfileFields } from "@/lib/types/types";
 import { splitAndBoldSearchText } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import { Industries, Industry, LookupIndustryById } from "@businessnjgovnavigator/shared";
+import {
+  CannabisLicenseType,
+  Industries,
+  Industry,
+  LookupIndustryById,
+} from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import orderBy from "lodash.orderby";
 import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
@@ -29,6 +35,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
   const handleIndustryIdChange = (industryId: string | undefined) => {
     let homeBasedBusiness = true;
+    let cannabisLicenseType = undefined;
 
     if (!isHomeBasedBusinessApplicable(industryId)) {
       homeBasedBusiness = false;
@@ -41,10 +48,20 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       }
     }
 
+    if (isCannabisLicenseApplicable(industryId)) {
+      const wasCannabisPreviouslyApplicable = isCannabisLicenseApplicable(state.profileData.industryId);
+      if (wasCannabisPreviouslyApplicable) {
+        cannabisLicenseType = state.profileData.cannabisLicenseType;
+      } else {
+        cannabisLicenseType = "CONDITIONAL" as CannabisLicenseType;
+      }
+    }
+
     setProfileData({
       ...state.profileData,
       liquorLicense: isLiquorLicenseApplicable(industryId) ? state.profileData.liquorLicense : false,
       homeBasedBusiness,
+      cannabisLicenseType,
       industryId: industryId,
     });
   };

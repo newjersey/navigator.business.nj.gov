@@ -9,7 +9,7 @@ export interface ProfileData {
   municipality: Municipality | undefined;
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
-  cannabisLicenseType: "CONDITIONAL" | "ANNUAL" | undefined;
+  cannabisLicenseType: CannabisLicenseType;
   constructionRenovationPlan: boolean | undefined;
   dateOfFormation: string | undefined;
   entityId: string | undefined;
@@ -47,3 +47,5 @@ export const emptyProfileData: ProfileData = {
 export const createEmptyProfileData = (): ProfileData => {
   return emptyProfileData;
 };
+
+export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;

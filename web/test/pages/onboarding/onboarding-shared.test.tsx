@@ -13,7 +13,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/";
-import { render, waitFor } from "@testing-library/react";
+import { render, RenderResult, waitFor } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
 
@@ -332,31 +332,59 @@ describe("onboarding - shared", () => {
     expect(currentUserData().profileData.liquorLicense).toEqual(true);
   });
 
-  it("displays cannabis license type for cannabis when selected", async () => {
-    const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-    displayContent.industryId.specificCannabisLicenseQuestion = {
-      contentMd: "What type of cannabis license?",
-      radioButtonConditionalText: "Conditional",
-      radioButtonAnnualText: "Annual",
-    };
+  describe("cannabis license type question", () => {
+    let subject: RenderResult;
+    let page: PageHelpers;
 
-    const { subject, page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    await page.visitStep3();
+    beforeEach(async () => {
+      const displayContent = createEmptyLoadDisplayContent()["STARTING"];
+      displayContent.industryId.specificCannabisLicenseQuestion = {
+        contentMd: "What type of cannabis license?",
+        radioButtonConditionalText: "Conditional",
+        radioButtonAnnualText: "Annual",
+      };
 
-    expect(subject.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
-    page.selectByValue("Industry", "cannabis");
-    expect(subject.queryByText("What type of cannabis license?")).toBeInTheDocument();
+      const result = renderPage({});
+      page = result.page;
+      subject = result.subject;
 
-    page.chooseRadio("cannabis-license-annual");
-    await page.visitStep4();
-    expect(currentUserData().profileData.cannabisLicenseType).toEqual("ANNUAL");
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+      await page.visitStep3();
+    });
 
-    page.clickBack();
-    page.chooseRadio("cannabis-license-conditional");
-    await page.visitStep4();
-    expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
+    it("displays cannabis license type question for cannabis only", async () => {
+      expect(subject.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
+      page.selectByValue("Industry", "cannabis");
+      expect(subject.queryByText("What type of cannabis license?")).toBeInTheDocument();
+
+      page.selectByValue("Industry", "generic");
+      expect(subject.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
+    });
+
+    it("defaults cannabis license type to CONDITIONAL", async () => {
+      page.selectByValue("Industry", "cannabis");
+      await page.visitStep4();
+      expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
+    });
+
+    it("allows switching cannabis license type to ANNUAL", async () => {
+      page.selectByValue("Industry", "cannabis");
+      page.chooseRadio("cannabis-license-annual");
+      await page.visitStep4();
+      expect(currentUserData().profileData.cannabisLicenseType).toEqual("ANNUAL");
+    });
+
+    it("sets cannabis license type to back undefined when switching back to non-cannabis industru", async () => {
+      expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
+      page.selectByValue("Industry", "cannabis");
+      await page.visitStep4();
+      expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
+      page.clickBack();
+      page.selectByValue("Industry", "generic");
+      await page.visitStep4();
+      expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
+    });
   });
 
   it("displays home-based business question for applicable industries on municipality page", async () => {
