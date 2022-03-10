@@ -35,10 +35,8 @@ export const GraduationBox = (props: Props): ReactElement => {
           />
         </div>
         <div>
-          <h3>{Config.roadmapDefaults.graduationHeader}</h3>
-          <div className="margin-top-neg-105">
-            <p className="text-base-dark">{Config.roadmapDefaults.graduationBodyText}</p>
-          </div>
+          <h3 className="margin-bottom-105">{Config.roadmapDefaults.graduationHeader}</h3>
+          <p className="text-base-dark">{Config.roadmapDefaults.graduationBodyText}</p>
         </div>
         <div className="mla">
           <Button style="primary" onClick={openModal}>

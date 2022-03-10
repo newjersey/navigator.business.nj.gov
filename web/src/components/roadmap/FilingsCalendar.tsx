@@ -119,11 +119,14 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="fdr padding-top-2">
-        <h2 className="">{Config.dashboardDefaults.calendarHeader}</h2>
+      <div className="flex flex-align-end padding-y-2">
+        <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
         <div className="margin-top-05">
           <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
-            <div className="fdr fac margin-left-1 font-body-lg text-green" data-testid="calendar-tooltip">
+            <div
+              className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
+              data-testid="calendar-tooltip"
+            >
               <Icon>help_outline</Icon>
             </div>
           </ArrowTooltip>
