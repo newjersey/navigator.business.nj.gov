@@ -2,12 +2,12 @@
   "roadmapSteps": [
     {
       "step": 3,
-      "weight": 6,
+      "weight": 2,
       "task": "conditional-permit-cannabis"
     },
     {
       "step": 4,
-      "weight": 10,
+      "weight": 1,
       "task": "conversion-license-cannabis"
     }
   ]
