@@ -1,12 +1,7 @@
 {
-  "id": "cannabis",
-  "name": "Cannabis",
-  "description": "A business that manufacturers, delivers, or sells cannabis",
-  "canBeHomeBased": false,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": false,
   "canBeReseller": false,
-  "additionalSearchTerms": "marijuana",
   "roadmapSteps": [
     {
       "step": 1,
@@ -25,7 +20,7 @@
     },
     {
       "step": 3,
-      "weight": 5,
+      "weight": 1,
       "task": "priority-status-cannabis"
     },
     {
@@ -34,10 +29,15 @@
       "task": "get-insurance"
     }
   ],
+  "name": "Cannabis",
+  "isLiquorLicenseApplicable": false,
   "modifications": [
     {
       "taskToReplaceFilename": "zoning",
       "replaceWithFilename": "zoning-cannabis"
     }
-  ]
+  ],
+  "additionalSearchTerms": "marijuana",
+  "id": "cannabis",
+  "description": "A business that manufacturers, delivers, or sells cannabis"
 }
