@@ -20,7 +20,7 @@ If you are looking to get a cannabis license, read the [application acceptance c
 - A `Business Registration Certificate|business-reg-certificate`
 - `EIN|ein` and ~NJ Tax ID|tax-id` or SS# (if Sole Proprietorship or General Partnership)
 - Information on all `Persons of Interest|poi-cannabis`
-- Information on all `Entities of Interest|eio-cannabis`
+- Information on all `Entities of Interest|eoi-cannabis`
 - The proposed location of the cannabis business
 - Name and contact information for the proposed landlord, if applicable
 - [Entity Disclosure Forms](https://www.nj.gov/cannabis/documents/businesses/personal-use/CRC%20Entity%20Disclosure%20Form%20Fillable.pdf) for the license applicant and all Entities of Interest
@@ -39,7 +39,7 @@ If you are looking to get a cannabis license, read the [application acceptance c
 - A resolution adopted by the municipality’s governing body, or where the municipality has no governing body, a written letter of support from the municipality’s executive stating that the applicant is compliant with [Section VIII of Notice of Application Acceptance](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf)
 - Your application can gain additional priority by providing an attestation from a labor organization indicating that you two have entered a labor peace agreement (this is not required and no micro businesses do not gain additional priority for this)
 - Application fees
-- ** `Diversely-Owned Businesses|diversely-owned-business-cannabis` Only:** Copy of Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification with the NJ Department of Treasury
+- ** `Diversely-Owned Businesses|diverselyownedbusiness-cannabis` Only:** Copy of Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification with the NJ Department of Treasury
 - **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis`
 - **Social Equity Businesses Only:**
   A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis` and appropriate documentation to prove residency
