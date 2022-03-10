@@ -38,7 +38,7 @@ If you are looking to get a cannabis license, read the [application acceptance c
 - **Social Equity Businesses Only:**
   A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the
   criteria for a `Social Equity Business|social-equity-business-cannabis` and appropriate documentation to prove residency
-- **Micro business Only:** Documentation that the business will comply with the `requirements for a micro businesses|microbusiness-cannabis`
+- **Micro Business Only:** Documentation that the business will comply with the `requirements for a micro businesses|microbusiness-cannabis`
 
 > **Once completed, you will have:**
 >
