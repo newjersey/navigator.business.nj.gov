@@ -1,7 +1,8 @@
 ---
 urlSlug: priority-status-cannabis
 filename: priority-status-cannabis
-name: "Determine if You are Eligible for Priority Status "
+name: Determine if You are Eligible for Priority Status with Your Cannabis
+  Application
 id: priority-status-cannabis
 required: true
 issuingAgency: ""
@@ -15,7 +16,7 @@ Your business may qualify for priority status in the Cannabis application proces
 
 Diversely-owned businesses are given the highest priority followed by social-equity businesses. Having multiple priorities is not an advantage. Identify which of the following priorities you qualify for:
 
-- `Diversely Owned Businesses|diversely-owned-business-cannabis`
+- `Diversely Owned Businesses|diverselyownedbusiness-cannabis`
 - `Social Equity Businesses|social-equity-business-cannabis`
 - `Impact Zone Businesses|impact-zone-business-cannabis`
 
