@@ -8,7 +8,7 @@ callToActionText: ""
 required: true
 ---
 
-To obtain a cannabis license you will need zoning approval from your local government. Your Cannabis application will ask you to provide proof of local support for the applicant that is compliant with [Section VIII of the Notice of Application Acceptance.](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf)
+To obtain a Cannabis license you will need zoning approval from your local government. Your Cannabis application will ask you to provide proof of local support for the applicant that is compliant with [Section VIII of the Notice of Application Acceptance.](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf)
 
 **To complete this task you must meet with your local Zoning Office.**
 
