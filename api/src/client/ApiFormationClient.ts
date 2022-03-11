@@ -130,6 +130,15 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       Account: config.account,
       Key: config.key,
       ReturnUrl: `${returnUrl}?completeFiling=true`,
+      Payer: {
+        CompanyName: userData.profileData.businessName,
+        Address1: formationFormData.businessAddressLine1,
+        Address2: formationFormData.businessAddressLine2,
+        City: userData.profileData.municipality?.name,
+        StateAbbreviation: "NJ",
+        ZipCode: formationFormData.businessAddressZipCode,
+        Email: userData.user.email,
+      },
       Formation: {
         Gov2GoAnnualReports: formationFormData.annualReportNotification,
         Gov2GoCorpWatch: formationFormData.corpWatchNotification,
@@ -207,6 +216,18 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
 export type ApiSubmission = {
   Account: string; //API User Account id
   Key: string; //API Account Key
+  Payer: {
+    FirstName: string; // string (combined with LastName total 49), if not set will use ContactFirstName
+    LastName: string; // string (combined with FirstName total 49), if not set will use ContactLastName
+    CompanyName: string;
+    Address1: string;
+    Address2: string;
+    City: string;
+    StateAbbreviation: string; // 2 chars
+    ZipCode: string; // 5 chars
+    PhoneNumber: string; // 12 chars, if not set ContactPhoneNumber will be used
+    Email: string;
+  };
   Formation: {
     Gov2GoAnnualReports: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Annual Reports
     Gov2GoCorpWatch: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Corpwatch
