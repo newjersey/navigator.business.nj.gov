@@ -3,7 +3,8 @@
     {
       "name": "register-for-ein",
       "dependencies": [
-        "search-business-name"
+        "search-business-name",
+        "form-business-entity-llc"
       ]
     },
     {
@@ -16,13 +17,16 @@
     {
       "name": "register-for-taxes",
       "dependencies": [
-        "form-business-entity"
+        "form-business-entity",
+        "form-business-entity-llc",
+        "register-for-ein"
       ]
     },
     {
       "name": "sign-lease",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
@@ -30,6 +34,7 @@
       "name": "get-insurance",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
@@ -37,6 +42,7 @@
       "name": "get-insurance-home-contractor",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
@@ -44,6 +50,7 @@
       "name": "floor-plan-approval-doh",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "sign-lease"
       ]
     },
@@ -51,6 +58,7 @@
       "name": "home-health-aide-license",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
@@ -58,6 +66,7 @@
       "name": "individual-staff-licenses-health-aide",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "home-health-aide-license"
       ]
     },
@@ -65,6 +74,7 @@
       "name": "search-licenses",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
@@ -72,6 +82,7 @@
       "name": "search-licenses-employment-agency",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
@@ -100,6 +111,7 @@
       "name": "sign-lease-food-truck",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
@@ -107,6 +119,7 @@
       "name": "apply-for-food-truck-license",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
@@ -114,6 +127,7 @@
       "name": "logisticare",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes",
         "register-vehicle"
       ]
@@ -122,6 +136,7 @@
       "name": "search-licenses-retail",
       "dependencies": [
         "form-business-entity",
+        "form-business-entity-llc",
         "register-for-taxes"
       ]
     },
