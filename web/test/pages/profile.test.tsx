@@ -162,50 +162,68 @@ describe("profile", () => {
       });
     });
 
-    it("disables entityID field if formation getFiling success", () => {
-      const userData = generateUserData({
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({
-            success: true,
-          }),
-        }),
-        profileData: generateProfileData({
-          legalStructureId: "c-corporation",
-          entityId: "some-id",
-        }),
+    describe("disables fields when formation getFiling success", () => {
+      describe("starting a business", () => {
+        beforeEach(() => {
+          subject = renderPage({
+            userData: generateUserData({
+              formationData: generateFormationData({
+                getFilingResponse: generateGetFilingResponse({
+                  success: true,
+                }),
+              }),
+              profileData: generateProfileData({
+                hasExistingBusiness: false,
+                legalStructureId: "limited-liability-company",
+                entityId: "some-id",
+                businessName: "some-name",
+              }),
+            }),
+          });
+        });
+
+        it("disables entityID", () => {
+          expect(subject.getByLabelText("Entity id")).toHaveAttribute("disabled");
+        });
+
+        it("disables businessName", () => {
+          expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
+        });
       });
 
-      subject = renderPage({ userData });
-      expect(subject.getByLabelText("Entity id").getAttribute("disabled")).not.toBeNull();
-    });
+      describe("owning a business", () => {
+        beforeEach(() => {
+          subject = renderPage({
+            userData: generateUserData({
+              formationData: generateFormationData({
+                getFilingResponse: generateGetFilingResponse({
+                  success: true,
+                }),
+              }),
+              profileData: generateProfileData({
+                hasExistingBusiness: true,
+                legalStructureId: "limited-liability-company",
+                entityId: "some-id",
+                businessName: "some-name",
+              }),
+            }),
+          });
+        });
 
-    it("disables business name field if formation getFiling success", () => {
-      const userData = generateUserData({
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({
-            success: true,
-          }),
-        }),
+        it("disables entityID", () => {
+          expect(subject.getByLabelText("Entity id")).toHaveAttribute("disabled");
+        });
+
+        it("disables businessName", () => {
+          expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
+        });
+
+        it("disables dateOfFormation", () => {
+          expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
+        });
       });
-
-      subject = renderPage({ userData });
-      expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
     });
-    it("disables date of formation if formation getFiling success", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          hasExistingBusiness: true,
-        }),
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({
-            success: true,
-          }),
-        }),
-      });
 
-      subject = renderPage({ userData });
-      expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
-    });
     it("prevents user from saving if they have not selected a location", async () => {
       const newark = generateMunicipality({ displayName: "Newark" });
       subject = renderPage({ municipalities: [newark] });
