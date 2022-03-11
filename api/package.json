@@ -67,7 +67,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.10.0",
     "eslint-config-prettier": "8.5.0",
-    "good-fences": "1.0.1",
+    "good-fences": "1.0.2",
     "jest": "27.5.1",
     "jest-dynalite": "3.4.4",
     "jest-junit": "13.0.0",
