@@ -190,7 +190,12 @@ const ProfilePage = (props: Props): ReactElement => {
         <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
       </div>
       <div className="margin-top-4">
-        <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+        <OnboardingEntityId
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          headerAriaLevel={3}
+          disabled={userData?.formationData.getFilingResponse?.success}
+        />
       </div>
       <div className="margin-top-4">
         <OnboardingDateOfFormation
