@@ -25,6 +25,7 @@ export const updateLicenseStatusFactory = (
         "register-consumer-affairs": args.taskStatus,
         "pharmacy-license": args.taskStatus,
         "license-accounting": args.taskStatus,
+        "license-massage-therapy": args.taskStatus,
       },
       licenseData: {
         nameAndAddress: args.nameAndAddress,
