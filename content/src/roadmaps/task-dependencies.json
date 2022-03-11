@@ -169,6 +169,20 @@
       "dependencies": [
         "site-safety-permits"
       ]
+    },
+    {
+      "name": "license-accounting",
+      "dependencies": [
+        "form-business-entity",
+        "form-business-entity-llc",
+        "register-for-taxes"
+      ]
+    },
+    {
+      "name": "register-firm-accounting",
+      "dependencies": [
+        "license-accounting"
+      ]
     }
   ]
 }
