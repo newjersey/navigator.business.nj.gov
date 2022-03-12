@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "airtable": "0.11.2",
-    "axios": "0.26.0",
+    "axios": "0.26.1",
     "body-parser": "1.19.2",
     "cors": "2.8.5",
     "dayjs": "1.10.8",
