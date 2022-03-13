@@ -86,7 +86,7 @@
     "@types/jest": "27.4.1",
     "@types/lodash.orderby": "4.6.6",
     "@types/node": "14.18.12",
-    "@types/react": "17.0.39",
+    "@types/react": "17.0.40",
     "@types/react-dom": "17.0.13",
     "@types/react-swipeable-views": "0.13.1",
     "@types/react-tabs": "2.3.4",
