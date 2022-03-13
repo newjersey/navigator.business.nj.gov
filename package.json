@@ -29,7 +29,7 @@
     "@aws-amplify/core": "4.4.0",
     "@businessnjgovnavigator/content": "*",
     "@businessnjgovnavigator/shared": "*",
-    "@emotion/react": "11.8.1",
+    "@emotion/react": "11.8.2",
     "@emotion/styled": "11.8.1",
     "@mui/lab": "5.0.0-alpha.72",
     "@mui/material": "5.5.0",
