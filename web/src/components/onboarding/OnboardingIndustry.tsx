@@ -35,7 +35,6 @@ export const OnboardingIndustry = ({ headerAriaLevel = 2, ...props }: Props): Re
       <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.industryId.contentMd}</Content>
       <div className="form-input margin-top-2">
         <IndustryDropdown
-          fieldName={fieldName}
           error={props.fieldStates[fieldName].invalid}
           validationLabel="Error"
           validationText={Config.onboardingDefaults.errorTextRequiredIndustry}

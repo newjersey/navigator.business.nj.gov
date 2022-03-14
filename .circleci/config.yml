@@ -308,6 +308,7 @@ commands:
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PROD' >> $BASH_ENV
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_PROD' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_PROD' >> $BASH_ENV
+            echo 'export FEATURE_DISABLE_CANNABIS=$FEATURE_DISABLE_CANNABIS_PROD' >> $BASH_ENV
 
   deploy-amplify-build:
     steps:

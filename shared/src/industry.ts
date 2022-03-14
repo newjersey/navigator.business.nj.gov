@@ -20,6 +20,7 @@ export interface AddOn {
   weight: number;
   task: string;
 }
+
 export interface TaskModification {
   taskToReplaceFilename: string;
   replaceWithFilename: string;

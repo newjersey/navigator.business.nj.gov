@@ -3,7 +3,6 @@ import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
-import { ProfileFields } from "@/lib/types/types";
 import { splitAndBoldSearchText } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import {
@@ -17,7 +16,6 @@ import orderBy from "lodash.orderby";
 import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
-  fieldName: ProfileFields;
   handleChange?: () => void;
   onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
@@ -31,6 +29,11 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
   const IndustriesOrdered: Industry[] = orderBy(Industries, (industry: Industry) => {
     return industry.name;
+  }).filter((industry: Industry) => {
+    if (industry.id === "cannabis") {
+      return process.env.FEATURE_DISABLE_CANNABIS !== "true";
+    }
+    return true;
   });
 
   const handleIndustryIdChange = (industryId: string | undefined) => {
