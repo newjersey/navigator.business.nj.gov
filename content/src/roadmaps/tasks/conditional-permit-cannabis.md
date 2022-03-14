@@ -32,7 +32,7 @@ If you are looking to get a cannabis license, read the [application acceptance c
 * Waiver of liability
 * Application fees
 * Proof that each owner of the conditional license has for the immediately preceding taxable year, an adjusted gross income of no more than $200,000, or no more than $400,000 if filing jointly with another individual, proof can be in the form of a previous year's tax statement
-* ** `Diversely-Owned Businesses|diverselyownedbusiness-cannabis` Only:** Provide a copy of your Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification from the NJ Department of Treasury
+* ** `Diversely-Owned Businesses|diversely-owned-business-cannabis` Only:** Provide a copy of your Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification from the NJ Department of Treasury
 * **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis` Proof can be a proposed business address and/or a letter of intent
 * **Social Equity Businesses Only:** A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis` and documentation (such as a tax return) to prove residency
 * **Microbusiness Only:** Documentation that the business will comply with the `requirements for a microbusinesses|microbusiness-cannabis` 
