@@ -1,5 +1,5 @@
 ---
-slug: diverslyownedbusiness-cannabis
+slug: diverselyownedbusiness-cannabis
 ---
 
 ### Diversely Owned Businesses-Cannabis Application
