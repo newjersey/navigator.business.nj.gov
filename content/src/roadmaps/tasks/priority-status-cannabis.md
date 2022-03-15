@@ -1,8 +1,7 @@
 ---
 urlSlug: priority-status-cannabis
 filename: priority-status-cannabis
-name: Determine if You are Eligible for Priority Status with Your Cannabis
-  Application
+name: Determine if You are Eligible for Cannabis Priority Status
 id: priority-status-cannabis
 required: true
 issuingAgency: ""
