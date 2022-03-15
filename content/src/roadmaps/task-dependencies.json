@@ -183,6 +183,26 @@
       "dependencies": [
         "license-accounting"
       ]
+    },
+    {
+      "name": "conversion-license-cannabis",
+      "dependencies": [
+        "zoning-cannabis",
+        "conditional-permit-cannabis"
+      ]
+    },
+    {
+      "name": "annual-license-cannabis",
+      "dependencies": [
+        "zoning-cannabis",
+        "priority-status-cannabis"
+      ]
+    },
+    {
+      "name": "conditional-permit-cannabis",
+      "dependencies": [
+        "priority-status-cannabis"
+      ]
     }
   ]
 }
