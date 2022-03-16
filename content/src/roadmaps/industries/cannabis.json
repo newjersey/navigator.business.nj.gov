@@ -20,7 +20,7 @@
     },
     {
       "step": 3,
-      "weight": 1,
+      "weight": 0,
       "task": "priority-status-cannabis"
     },
     {
