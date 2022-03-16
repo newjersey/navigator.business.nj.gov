@@ -16,11 +16,7 @@ export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
-export type ProfileError =
-  | "REQUIRED_LEGAL"
-  | "REQUIRED_EXISTING_BUSINESS"
-  | "MYNJ_DUPLICATE_SIGNUP"
-  | "MYNJ_GENERIC";
+export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS";
 
 export type TextFieldContent = {
   contentMd: string;
@@ -581,11 +577,6 @@ export interface PostOnboarding {
 export interface SessionHelper {
   getCurrentToken: () => Promise<string>;
   getCurrentUser: () => Promise<BusinessUser>;
-}
-
-export interface AuthenticationHelper {
-  onSignIn: () => Promise<void>;
-  onSignOut: () => void;
 }
 
 export type NameAvailability = {

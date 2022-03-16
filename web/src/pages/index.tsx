@@ -22,12 +22,6 @@ const Home = (): ReactElement => {
         router.replace("/roadmap");
       }
     } else if (userData?.formProgress === "UNSTARTED") {
-      if (
-        !!process.env.MYNJ_PROFILE_LINK &&
-        document.referrer.includes(process.env.MYNJ_PROFILE_LINK.split("/", 3).join("/"))
-      ) {
-        analytics.event.onboarding_first_step.arrive.arrive_from_myNJ_registration();
-      }
       router.replace("/onboarding");
     } else if (userData === undefined && error != undefined) {
       router.replace("/roadmap?error=true");
@@ -53,7 +47,7 @@ const Home = (): ReactElement => {
             callToActionText={Config.landingPage.heroCallToActionText}
             onClick={() => {
               router.push("/onboarding");
-              analytics.event.landing_page_hero_get_started.click.open_create_account_modal();
+              analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
             }}
           />
 

@@ -5,7 +5,8 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadDashboardDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -14,10 +15,11 @@ import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
+import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {
   displayContent: DashboardDisplayContent;
@@ -27,10 +29,21 @@ interface Props {
 }
 
 const DashboardPage = (props: Props): ReactElement => {
-  useAuthProtectedPage();
+  useAuthAlertPage();
   const { userData } = useUserData();
   const router = useRouter();
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
+
+  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+
+  const editOnClick = () => {
+    if (isAuthenticated == IsAuthenticated.TRUE) {
+      analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
+      router.push("/profile");
+    } else {
+      setModalIsVisible(true);
+    }
+  };
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -58,12 +71,15 @@ const DashboardPage = (props: Props): ReactElement => {
                   <Content>{props.displayContent.introTextMd}</Content>
 
                   <p>
-                    <a
-                      href="/profile"
-                      onClick={() => analytics.event.roadmap_profile_edit_button.click.return_to_onboarding()}
+                    <button
+                      role="link"
+                      style={{ border: 0, cursor: "pointer", backgroundColor: "transparent" }}
+                      className="usa-link"
+                      onClick={editOnClick}
+                      data-testid="grey-callout-link"
                     >
                       {Config.dashboardDefaults.editProfileText}
-                    </a>
+                    </button>
                   </p>
 
                   <FilingsCalendar

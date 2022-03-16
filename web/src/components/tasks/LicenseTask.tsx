@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { UseAuthModalWrapper } from "@/components/SignUpDialogs";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckStatus } from "@/components/tasks/CheckStatus";
 import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
@@ -31,7 +32,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   const [error, setError] = useState<LicenseSearchError | undefined>(undefined);
   const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { userData, update } = useUserData();
+  const { userData, refresh } = useUserData();
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
 
   const allFieldsHaveValues = (nameAndAddress: NameAndAddress) => {
@@ -94,72 +95,74 @@ export const LicenseTask = (props: Props): ReactElement => {
         }
       })
       .finally(async () => {
-        update(await api.getUserData(userData.user.id));
+        refresh();
         setIsLoading(false);
       });
   };
 
   return (
-    <div className="flex flex-column">
-      <TaskHeader task={props.task} tooltipText={Config.licenseSearchTask.tooltipText} />
+    <UseAuthModalWrapper>
+      <div className="flex flex-column">
+        <TaskHeader task={props.task} tooltipText={Config.licenseSearchTask.tooltipText} />
 
-      <Tabs selectedIndex={tabIndex} onSelect={onSelectTab}>
-        <TabList>
-          <Tab>{Config.licenseSearchTask.tab1Text}</Tab>
-          <Tab>{Config.licenseSearchTask.tab2Text}</Tab>
-        </TabList>
+        <Tabs selectedIndex={tabIndex} onSelect={onSelectTab}>
+          <TabList>
+            <Tab>{Config.licenseSearchTask.tab1Text}</Tab>
+            <Tab>{Config.licenseSearchTask.tab2Text}</Tab>
+          </TabList>
 
-        <TabPanel>
-          <div className="margin-top-3">
-            <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
-            <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
-          </div>
-          <div className="flex flex-column margin-top-4 margin-bottom-1">
-            <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
+          <TabPanel>
+            <div className="margin-top-3">
+              <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
+              <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+            </div>
+            <div className="flex flex-column margin-top-4 margin-bottom-1">
+              <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
+                <button
+                  onClick={() => {
+                    analytics.event.task_primary_call_to_action.click.open_external_website();
+                  }}
+                  className="usa-button width-100 margin-bottom-2"
+                  data-testid="cta-primary"
+                >
+                  <div className="flex flex-column">
+                    <div>{Config.licenseSearchTask.primaryCTAFirstLineText}</div>
+                    <div className="font-body-3xs margin-top-05">
+                      {Config.licenseSearchTask.primaryCTASecondLineText}
+                    </div>
+                  </div>
+                </button>
+              </a>
               <button
                 onClick={() => {
-                  analytics.event.task_primary_call_to_action.click.open_external_website();
+                  analytics.event.task_button_i_already_submitted.click.view_status_tab();
+                  setTabIndex(STATUS_TAB_INDEX);
                 }}
-                className="usa-button width-100 margin-bottom-2"
-                data-testid="cta-primary"
+                className="usa-button usa-button--outline width-100"
+                data-testid="cta-secondary"
               >
                 <div className="flex flex-column">
-                  <div>{Config.licenseSearchTask.primaryCTAFirstLineText}</div>
+                  <div>{Config.licenseSearchTask.secondaryCTAFirstLineText}</div>
                   <div className="font-body-3xs margin-top-05">
-                    {Config.licenseSearchTask.primaryCTASecondLineText}
+                    {Config.licenseSearchTask.secondaryCTASecondLineText}
                   </div>
                 </div>
               </button>
-            </a>
-            <button
-              onClick={() => {
-                analytics.event.task_button_i_already_submitted.click.view_status_tab();
-                setTabIndex(STATUS_TAB_INDEX);
-              }}
-              className="usa-button usa-button--outline width-100"
-              data-testid="cta-secondary"
-            >
-              <div className="flex flex-column">
-                <div>{Config.licenseSearchTask.secondaryCTAFirstLineText}</div>
-                <div className="font-body-3xs margin-top-05">
-                  {Config.licenseSearchTask.secondaryCTASecondLineText}
-                </div>
-              </div>
-            </button>
-          </div>
-        </TabPanel>
-        <TabPanel>
-          {licenseStatusResult ? (
-            <LicenseStatusReceipt
-              status={licenseStatusResult.status}
-              items={licenseStatusResult.checklistItems}
-              onEdit={onEdit}
-            />
-          ) : (
-            <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
-          )}
-        </TabPanel>
-      </Tabs>
-    </div>
+            </div>
+          </TabPanel>
+          <TabPanel>
+            {licenseStatusResult ? (
+              <LicenseStatusReceipt
+                status={licenseStatusResult.status}
+                items={licenseStatusResult.checklistItems}
+                onEdit={onEdit}
+              />
+            ) : (
+              <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
+            )}
+          </TabPanel>
+        </Tabs>
+      </div>
+    </UseAuthModalWrapper>
   );
 };

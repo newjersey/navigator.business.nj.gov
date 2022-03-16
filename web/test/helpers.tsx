@@ -2,6 +2,7 @@ import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import {
+  AuthAlertContext,
   AuthContext,
   ContextualInfo,
   ContextualInfoContext,
@@ -9,7 +10,7 @@ import {
   UserDataErrorContext,
 } from "@/pages/_app";
 import { generateUserData } from "@/test/factories";
-import { BusinessUser } from "@businessnjgovnavigator/shared";
+import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { RenderResult } from "@testing-library/react";
 import os from "os";
 import React, { Dispatch, ReactElement, SetStateAction } from "react";
@@ -38,6 +39,35 @@ export const withContextualInfo = (
     <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
       {subject}
     </ContextualInfoContext.Provider>
+  );
+};
+
+export const withAuthAlert = (
+  subject: ReactElement,
+  isAuthenticated: IsAuthenticated,
+  context?: {
+    alertIsVisible?: boolean;
+    modalIsVisible?: boolean;
+    registrationAlertStatus?: RegistrationStatus;
+    setRegistrationAlertStatus?: (value: RegistrationStatus | undefined) => void;
+    setAlertIsVisible?: (value: boolean) => void;
+    setModalIsVisible?: (value: boolean) => void;
+  }
+): ReactElement => {
+  return (
+    <AuthAlertContext.Provider
+      value={{
+        isAuthenticated,
+        alertIsVisible: context?.alertIsVisible ?? false,
+        modalIsVisible: context?.modalIsVisible ?? false,
+        registrationAlertStatus: context?.registrationAlertStatus ?? undefined,
+        setRegistrationAlertStatus: context?.setRegistrationAlertStatus || jest.fn(),
+        setAlertIsVisible: context?.setAlertIsVisible || jest.fn(),
+        setModalIsVisible: context?.setModalIsVisible || jest.fn(),
+      }}
+    >
+      {subject}
+    </AuthAlertContext.Provider>
   );
 };
 
@@ -123,4 +153,14 @@ export const queryByTextAcrossElements = (subject: RenderResult, text: string): 
     const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as HTMLElement));
     return hasText(node) && childrenDontHaveText;
   });
+};
+
+export const markdownToText = (text: string): string => {
+  if (text.includes("[")) {
+    return text.split("[")[1].split("]")[0].trim();
+  }
+  if (text.includes("#")) {
+    return text.split("#").join("").trim();
+  }
+  return text;
 };

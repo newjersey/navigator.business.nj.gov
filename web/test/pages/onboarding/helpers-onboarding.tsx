@@ -1,14 +1,21 @@
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
+import { withAuth } from "@/test/helpers";
 import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyUser, createEmptyUserData, Municipality, UserData } from "@businessnjgovnavigator/shared";
+import {
+  BusinessUser,
+  createEmptyUser,
+  createEmptyUserData,
+  Municipality,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
-  act,
   fireEvent,
   render,
   RenderResult,
@@ -25,21 +32,35 @@ export const renderPage = ({
   municipalities,
   displayContent,
   userData,
+  user,
+  isAuthenticated,
 }: {
   municipalities?: Municipality[];
   displayContent?: LoadDisplayContent;
-  userData?: UserData;
+  userData?: UserData | null;
+  user?: BusinessUser;
+  isAuthenticated?: IsAuthenticated;
 }): { subject: RenderResult; page: PageHelpers } => {
-  const emptyUserData = createEmptyUserData(generateUser({}));
   const subject = render(
-    <WithStatefulUserData initialUserData={userData || emptyUserData}>
-      <ThemeProvider theme={createTheme()}>
-        <Onboarding
-          displayContent={displayContent || createEmptyLoadDisplayContent()}
-          municipalities={municipalities || []}
-        />
-      </ThemeProvider>
-    </WithStatefulUserData>
+    withAuth(
+      <WithStatefulUserData
+        initialUserData={
+          userData === undefined
+            ? createEmptyUserData(generateUser({}))
+            : userData === null
+            ? undefined
+            : userData
+        }
+      >
+        <ThemeProvider theme={createTheme()}>
+          <Onboarding
+            displayContent={displayContent || createEmptyLoadDisplayContent()}
+            municipalities={municipalities || []}
+          />
+        </ThemeProvider>
+      </WithStatefulUserData>,
+      { user, isAuthenticated }
+    )
   );
   const page = createPageHelpers(subject);
   return { subject, page };
@@ -200,6 +221,31 @@ export const runSelfRegPageTests = (
     page = render.page;
     subject = render.subject;
     await advanceToSelfReg(page);
+    mockApi.postNewsletter.mockImplementation((request) =>
+      Promise.resolve({
+        ...request,
+        user: {
+          ...request.user,
+          externalStatus: {
+            ...request.user.externalStatus,
+            newsletter: { status: "SUCCESS", success: true },
+          },
+        },
+      })
+    );
+
+    mockApi.postUserTesting.mockImplementation((request) =>
+      Promise.resolve({
+        ...request,
+        user: {
+          ...request.user,
+          externalStatus: {
+            ...request.user.externalStatus,
+            userTesting: { status: "SUCCESS", success: true },
+          },
+        },
+      })
+    );
   });
 
   it("prevents user from registering if the email is not matching", async () => {
@@ -251,11 +297,9 @@ export const runSelfRegPageTests = (
       name: "My Name",
       receiveNewsletter: false,
       userTesting: true,
+      externalStatus: { userTesting: { status: "SUCCESS", success: true } },
     };
-    mockApi.postSelfReg.mockResolvedValue({
-      authRedirectURL: "www.example.com",
-      userData: { ...userData, user: businessUser },
-    });
+
     await waitFor(() => {
       expect(currentUserData().user).toEqual(businessUser);
     });
@@ -273,17 +317,15 @@ export const runSelfRegPageTests = (
       name: "My Name",
       receiveNewsletter: true,
       userTesting: false,
+      externalStatus: { newsletter: { status: "SUCCESS", success: true } },
     };
-    mockApi.postSelfReg.mockResolvedValue({
-      authRedirectURL: "www.example.com",
-      userData: { ...userData, user: businessUser },
-    });
+
     await waitFor(() => {
       expect(currentUserData().user).toEqual(businessUser);
     });
   });
 
-  it("posts user data to self-reg api", async () => {
+  it("redirects the user after completion", async () => {
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
@@ -294,51 +336,14 @@ export const runSelfRegPageTests = (
       name: "My Name",
       receiveNewsletter: true,
       userTesting: true,
+      externalStatus: {
+        newsletter: { status: "SUCCESS", success: true },
+        userTesting: { status: "SUCCESS", success: true },
+      },
     };
-    mockApi.postSelfReg.mockResolvedValue({
-      authRedirectURL: "www.example.com",
-      userData: { ...userData, user: { ...businessUser, myNJUserKey: "12345" } },
-    });
     await waitFor(() => {
-      expect(mockApi.postSelfReg).toHaveBeenCalledWith({
-        ...userData,
-        user: businessUser,
-      });
-      expect(mockPush).toHaveBeenCalledWith("www.example.com");
+      expect(currentUserData().user).toEqual(businessUser);
+      expect(mockPush).toHaveBeenCalledWith(hasExistingBusiness ? "/dashboard" : "/roadmap");
     });
-    await waitFor(() => {
-      expect(currentUserData().user).toEqual({
-        ...businessUser,
-        myNJUserKey: "12345",
-      });
-    });
-  });
-
-  it("shows the user an error message if myNJ returns an duplicate_signup error", async () => {
-    expect(subject.queryByText(Config.selfRegistration.errorTextDuplicateSignup)).not.toBeInTheDocument();
-
-    const rejectedPromise = Promise.reject(409);
-    mockApi.postSelfReg.mockReturnValue(rejectedPromise);
-
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    page.clickNext();
-    await act(() => rejectedPromise.catch(() => {}));
-    expect(subject.queryByText(Config.selfRegistration.errorTextDuplicateSignup)).toBeInTheDocument();
-  });
-
-  it("shows the user an error message if myNJ returns an error", async () => {
-    expect(subject.queryByText(Config.selfRegistration.errorTextGeneric)).not.toBeInTheDocument();
-
-    const rejectedPromise = Promise.reject(500);
-    mockApi.postSelfReg.mockReturnValue(rejectedPromise);
-
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    page.clickNext();
-    await act(() => rejectedPromise.catch(() => {}));
-    expect(subject.queryByText(Config.selfRegistration.errorTextGeneric)).toBeInTheDocument();
   });
 };

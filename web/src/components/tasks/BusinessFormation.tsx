@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { UseAuthModalWrapper } from "@/components/SignUpDialogs";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
@@ -71,6 +72,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
   const router = useRouter();
+
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
@@ -149,30 +151,32 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setShowResponseAlert,
       }}
     >
-      <div className="flex flex-column  minh-37">
-        <div>
-          <TaskHeader task={props.task} />
-          {tab === 0 && (
-            <>
-              <UnlockedBy
-                taskLinks={unlockedByTaskLinks}
-                isLoading={!taskFromRoadmap}
-                dataTestid="dependency-alert"
-              />
-              <div className="margin-bottom-2">
-                <Content>{props.displayContent.introParagraph.contentMd}</Content>
-              </div>
-            </>
-          )}
+      <UseAuthModalWrapper>
+        <div className="flex flex-column  minh-37">
+          <div>
+            <TaskHeader task={props.task} />
+            {tab === 0 && (
+              <>
+                <UnlockedBy
+                  taskLinks={unlockedByTaskLinks}
+                  isLoading={!taskFromRoadmap}
+                  dataTestid="dependency-alert"
+                />
+                <div className="margin-bottom-2">
+                  <Content>{props.displayContent.introParagraph.contentMd}</Content>
+                </div>
+              </>
+            )}
+          </div>
+          <HorizontalStepper arrayOfSteps={stepNames} currentStep={tab} />
+          <div className="display-block">
+            <hr className="margin-bottom-2" />
+          </div>
+          <div data-testid="formation-form" className="fg1 flex flex-column space-between">
+            {businessFormationTabs[tab].component}
+          </div>
         </div>
-        <HorizontalStepper arrayOfSteps={stepNames} currentStep={tab} />
-        <div className="display-block">
-          <hr className="margin-bottom-2" />
-        </div>
-        <div data-testid="formation-form" className="fg1 flex flex-column space-between">
-          {businessFormationTabs[tab].component}
-        </div>
-      </div>
+      </UseAuthModalWrapper>
     </FormationContext.Provider>
   );
 };

@@ -17,7 +17,7 @@ interface ContentProps {
 
 export const Content = (props: ContentProps): ReactElement => {
   return (
-    <div className={`usa-prose ${props.className}`} style={props.style}>
+    <div className={`usa-prose ${props.className ?? ""}`} style={props.style}>
       <ContentNonProse overrides={props.overrides} onClick={props.onClick}>
         {props.children}
       </ContentNonProse>

@@ -1,7 +1,8 @@
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
-import { generateMunicipality, generateProfileData, generateUserData } from "@/test/factories";
+import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -18,10 +19,13 @@ import dayjs from "dayjs";
 import React from "react";
 
 jest.mock("next/router");
-jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postSelfReg: jest.fn(),
+  postNewsletter: jest.fn(),
+  postUserTesting: jest.fn(),
+}));
 
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -88,8 +92,39 @@ describe("onboarding - shared", () => {
     await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(5));
   });
 
+  it("generates a new empty userData object during guest checkout", async () => {
+    renderPage({ userData: null, user: generateUser({}), isAuthenticated: IsAuthenticated.FALSE });
+    expect(currentUserData().user);
+  });
+
   it("updates locally for each step", async () => {
-    const { page } = renderPage({ userData: generateUserData({}) });
+    const userData = generateUserData({});
+    const { page } = renderPage({ userData });
+    mockApi.postNewsletter.mockImplementation((request) =>
+      Promise.resolve({
+        ...request,
+        user: {
+          ...request.user,
+          externalStatus: {
+            ...request.user.externalStatus,
+            newsletter: { status: "SUCCESS", success: true },
+          },
+        },
+      })
+    );
+
+    mockApi.postUserTesting.mockImplementation((request) =>
+      Promise.resolve({
+        ...request,
+        user: {
+          ...request.user,
+          externalStatus: {
+            ...request.user.externalStatus,
+            userTesting: { status: "SUCCESS", success: true },
+          },
+        },
+      })
+    );
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
     expect(getLastCalledWithConfig().local).toEqual(true);

@@ -15,10 +15,9 @@ import {
 import { waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router");
-jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({ postNewsletter: jest.fn(), postUserTesting: jest.fn() }));
 
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -179,7 +178,7 @@ describe("onboarding - starting a business", () => {
     page.clickNext();
 
     await waitFor(() => {
-      const expectedUserData = {
+      const expectedUserData: UserData = {
         ...initialUserData,
         formProgress: "COMPLETED",
         profileData: {
@@ -198,17 +197,55 @@ describe("onboarding - starting a business", () => {
           email: "email@example.com",
         },
       };
-      mockApi.postSelfReg.mockResolvedValue({
-        authRedirectURL: "",
-        userData: {
-          ...expectedUserData,
-          user: { ...expectedUserData.user, myNJUserKey: "12345" },
-        } as UserData,
+
+      mockApi.postNewsletter.mockImplementation((request) =>
+        Promise.resolve({
+          ...request,
+          user: {
+            ...request.user,
+            externalStatus: {
+              ...request.user.externalStatus,
+              newsletter: { status: "SUCCESS", success: true },
+            },
+          },
+        })
+      );
+
+      mockApi.postUserTesting.mockImplementation((request) =>
+        Promise.resolve({
+          ...request,
+          user: {
+            ...request.user,
+            externalStatus: {
+              ...request.user.externalStatus,
+              userTesting: { status: "SUCCESS", success: true },
+            },
+          },
+        })
+      );
+
+      expect(mockApi.postNewsletter).toHaveBeenCalledWith({
+        ...expectedUserData,
+        user: { ...expectedUserData.user, externalStatus: {} },
       });
-      expect(api.postSelfReg).toHaveBeenCalledWith(expectedUserData);
+
+      expect(mockApi.postUserTesting).toHaveBeenCalledWith({
+        ...expectedUserData,
+        user: {
+          ...expectedUserData.user,
+          externalStatus: { newsletter: { status: "SUCCESS", success: true } },
+        },
+      });
+
       expect(currentUserData()).toEqual({
         ...expectedUserData,
-        user: { ...expectedUserData.user, myNJUserKey: "12345" },
+        user: {
+          ...expectedUserData.user,
+          externalStatus: {
+            newsletter: { status: "SUCCESS", success: true },
+            userTesting: { status: "SUCCESS", success: true },
+          },
+        },
       });
     });
   });

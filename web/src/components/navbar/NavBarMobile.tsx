@@ -16,14 +16,13 @@ interface Props {
   operateReferences?: Record<string, OperateReference>;
 }
 
-export const NavBarLoggedInMobile = ({
+export const NavBarMobile = ({
   scrolled,
   task,
   sideBarPageLayout,
   operateReferences,
 }: Props): ReactElement => {
   const { userData } = useUserData();
-
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const open = () => setSidebarIsOpen(true);
   const close = () => setSidebarIsOpen(false);

@@ -23,7 +23,7 @@ describe("addNewsletterBatch", () => {
       getNeedToAddToUserTestingUsers: jest.fn(),
       search: jest.fn(),
     };
-    addNewsletter = addNewsletterFactory(stubUserDataClient, stubNewsletterClient);
+    addNewsletter = addNewsletterFactory(stubNewsletterClient);
   });
 
   it("adds all users and returns success, failed, and total count when all succeed", async () => {
@@ -37,7 +37,7 @@ describe("addNewsletterBatch", () => {
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addNewsletterBatch(addNewsletter, stubUserDataQlClient);
+    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient, stubUserDataQlClient);
     expect(results).toEqual({ total: 2, success: 2, failed: 0 });
   });
 
@@ -54,7 +54,7 @@ describe("addNewsletterBatch", () => {
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addNewsletterBatch(addNewsletter, stubUserDataQlClient);
+    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient, stubUserDataQlClient);
     expect(results).toEqual({ total: 2, success: 1, failed: 1 });
   });
 
@@ -71,7 +71,7 @@ describe("addNewsletterBatch", () => {
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addNewsletterBatch(addNewsletter, stubUserDataQlClient);
+    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient, stubUserDataQlClient);
     expect(results).toEqual({ total: 2, success: 1, failed: 1 });
   });
 });

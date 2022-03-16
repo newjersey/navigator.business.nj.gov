@@ -1,3 +1,4 @@
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
@@ -11,6 +12,7 @@ import {
   generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
+import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -48,7 +50,6 @@ function mockMaterialUI(): typeof materialUi {
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/router");
-jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
@@ -118,6 +119,48 @@ describe("roadmap page", () => {
     await waitFor(() =>
       expect(subject.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument()
     );
+  });
+
+  it("shows registration modal when guest user clicks profile edit button", async () => {
+    useMockProfileData({});
+    const setModalIsVisible = jest.fn();
+    const subject = render(
+      withAuthAlert(
+        <ThemeProvider theme={createTheme()}>
+          <RoadmapPage
+            operateReferences={{}}
+            displayContent={emptyDisplayContent}
+            profileDisplayContent={createEmptyLoadDisplayContent()}
+          />
+        </ThemeProvider>,
+        IsAuthenticated.FALSE,
+        { modalIsVisible: false, setModalIsVisible }
+      )
+    );
+    fireEvent.click(subject.getByTestId("grey-callout-link"));
+    expect(setModalIsVisible).toHaveBeenCalled();
+    expect(mockPush).not.toHaveBeenCalled();
+  });
+
+  it("directs authenticated user to profile when profile edit button is clicked", async () => {
+    useMockProfileData({});
+    const setModalIsVisible = jest.fn();
+    const subject = render(
+      withAuthAlert(
+        <ThemeProvider theme={createTheme()}>
+          <RoadmapPage
+            operateReferences={{}}
+            displayContent={emptyDisplayContent}
+            profileDisplayContent={createEmptyLoadDisplayContent()}
+          />
+        </ThemeProvider>,
+        IsAuthenticated.TRUE,
+        { modalIsVisible: false, setModalIsVisible }
+      )
+    );
+    fireEvent.click(subject.getByTestId("grey-callout-link"));
+    expect(mockPush).toHaveBeenCalled();
+    expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
   describe("business information", () => {

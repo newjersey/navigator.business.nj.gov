@@ -1,3 +1,4 @@
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
@@ -11,6 +12,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
+import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -285,6 +287,48 @@ describe("dashboard", () => {
     const subject = renderPage({ fundings });
     expect(subject.getByText("a bo")).toBeInTheDocument();
     expect(subject.getByText("a li")).toBeInTheDocument();
+  });
+
+  it("shows registration modal when guest user clicks profile edit button", async () => {
+    const setModalIsVisible = jest.fn();
+    const subject = render(
+      withAuthAlert(
+        <ThemeProvider theme={createTheme()}>
+          <DashboardPage
+            displayContent={emptyDisplayContent}
+            operateReferences={emptyOperateRef}
+            fundings={[]}
+            certifications={[]}
+          />
+        </ThemeProvider>,
+        IsAuthenticated.FALSE,
+        { modalIsVisible: false, setModalIsVisible }
+      )
+    );
+    fireEvent.click(subject.getByTestId("grey-callout-link"));
+    expect(setModalIsVisible).toHaveBeenCalled();
+    expect(mockPush).not.toHaveBeenCalled();
+  });
+
+  it("directs authenticated user to profile when profile edit button is clicked", async () => {
+    const setModalIsVisible = jest.fn();
+    const subject = render(
+      withAuthAlert(
+        <ThemeProvider theme={createTheme()}>
+          <DashboardPage
+            displayContent={emptyDisplayContent}
+            operateReferences={emptyOperateRef}
+            fundings={[]}
+            certifications={[]}
+          />
+        </ThemeProvider>,
+        IsAuthenticated.TRUE,
+        { modalIsVisible: false, setModalIsVisible }
+      )
+    );
+    fireEvent.click(subject.getByTestId("grey-callout-link"));
+    expect(mockPush).toHaveBeenCalled();
+    expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
   it("shows toast alert when success query is true", async () => {

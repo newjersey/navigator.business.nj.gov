@@ -3,7 +3,7 @@ import "../styles/main.scss";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { getCurrentUser } from "@/lib/auth/sessionHelper";
-import { onSignIn } from "@/lib/auth/signinHelper";
+import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
@@ -24,6 +24,10 @@ import React, {
   useState,
 } from "react";
 import SEO from "../../next-seo.config";
+import { SWRConfig } from "swr";
+import { UserDataStorage } from "@/lib/utils/storage-helpers";
+import { SelfRegToast, UseAuthModal, UseAuthToast } from "@/components/SignUpDialogs";
+import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -39,7 +43,8 @@ export const AuthContext = createContext<AuthContextType>({
   dispatch: () => {},
   state: initialState,
 });
-AuthContext.displayName = "Authenication";
+
+AuthContext.displayName = "Authentication";
 
 export interface RoadmapContextType {
   roadmap: Roadmap | undefined;
@@ -54,7 +59,30 @@ export const RoadmapContext = createContext<RoadmapContextType>({
   setRoadmap: () => {},
   setSectionCompletion: () => {},
 });
+
 RoadmapContext.displayName = "Roadmap";
+
+export interface AuthAlertContextType {
+  isAuthenticated: IsAuthenticated;
+  registrationAlertStatus: RegistrationStatus | undefined;
+  alertIsVisible: boolean;
+  modalIsVisible: boolean;
+  setRegistrationAlertStatus: (value: RegistrationStatus | undefined) => void;
+  setAlertIsVisible: (value: boolean) => void;
+  setModalIsVisible: (value: boolean) => void;
+}
+
+export const AuthAlertContext = createContext<AuthAlertContextType>({
+  isAuthenticated: IsAuthenticated.UNKNOWN,
+  registrationAlertStatus: undefined,
+  alertIsVisible: false,
+  setRegistrationAlertStatus: () => {},
+  setAlertIsVisible: () => {},
+  modalIsVisible: false,
+  setModalIsVisible: () => {},
+});
+
+AuthAlertContext.displayName = "Authentication Toast";
 
 export interface ContextualInfo {
   isVisible: boolean;
@@ -73,6 +101,7 @@ export const ContextualInfoContext = createContext<ContextualInfoContextType>({
   },
   setContextualInfo: () => {},
 });
+
 ContextualInfoContext.displayName = "Contextual Info";
 
 export interface UserDataErrorContextType {
@@ -84,6 +113,7 @@ export const UserDataErrorContext = createContext<UserDataErrorContextType>({
   userDataError: undefined,
   setUserDataError: () => {},
 });
+
 UserDataErrorContext.displayName = "User Data Error";
 
 const theme = createTheme({
@@ -168,6 +198,17 @@ const theme = createTheme({
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
+  const [registrationAlertStatus, _setRegistrationAlertStatus] = useState<RegistrationStatus | undefined>(
+    UserDataStorage().getRegistrationStatus()
+  );
+
+  const setRegistrationAlertStatus = (value: RegistrationStatus | undefined) => {
+    _setRegistrationAlertStatus(value);
+    UserDataStorage().setRegistrationStatus(value);
+  };
+
+  const [authToast, setAuthToast] = useState<boolean>(false);
+  const [authModal, setAuthModal] = useState<boolean>(false);
   const [sectionCompletion, setSectionCompletion] = useState<SectionCompletion | undefined>(undefined);
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
@@ -175,7 +216,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   });
   const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);
   const router = useRouter();
-
   const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || "";
 
   const listener = (data: HubCapsule): void => {
@@ -215,10 +255,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         });
       })
       .catch(() => {
-        dispatch({
-          type: "LOGOUT",
-          user: undefined,
-        });
+        onGuestSignIn(router.push, dispatch);
       });
   });
 
@@ -260,23 +297,39 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         />
       )}
       <DefaultSeo {...SEO} />
-
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <AuthContext.Provider value={{ state, dispatch }}>
-            <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-              <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-                <RoadmapContext.Provider
-                  value={{ roadmap, setRoadmap, sectionCompletion, setSectionCompletion }}
-                >
-                  <ContextualInfoPanel />
-                  <Component {...pageProps} />
-                </RoadmapContext.Provider>
-              </ContextualInfoContext.Provider>
-            </UserDataErrorContext.Provider>
-          </AuthContext.Provider>
-        </ThemeProvider>
-      </StyledEngineProvider>
+      <SWRConfig value={{ provider: UserDataStorage }}>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <AuthContext.Provider value={{ state, dispatch }}>
+              <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
+                <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
+                  <RoadmapContext.Provider
+                    value={{ roadmap, setRoadmap, sectionCompletion, setSectionCompletion }}
+                  >
+                    <AuthAlertContext.Provider
+                      value={{
+                        isAuthenticated: state.isAuthenticated,
+                        alertIsVisible: authToast,
+                        modalIsVisible: authModal,
+                        registrationAlertStatus,
+                        setRegistrationAlertStatus,
+                        setAlertIsVisible: setAuthToast,
+                        setModalIsVisible: setAuthModal,
+                      }}
+                    >
+                      <ContextualInfoPanel />
+                      <UseAuthToast />
+                      <UseAuthModal />
+                      <SelfRegToast />
+                      <Component {...pageProps} />
+                    </AuthAlertContext.Provider>
+                  </RoadmapContext.Provider>
+                </ContextualInfoContext.Provider>
+              </UserDataErrorContext.Provider>
+            </AuthContext.Provider>
+          </ThemeProvider>
+        </StyledEngineProvider>
+      </SWRConfig>
     </>
   );
 };

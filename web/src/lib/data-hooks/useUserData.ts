@@ -1,20 +1,23 @@
 import * as api from "@/lib/api-client/apiClient";
 import { postUserData } from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { UserDataError } from "@/lib/types/types";
 import { AuthContext, UserDataErrorContext } from "@/pages/_app";
-import { externalSyncUser, UserData } from "@businessnjgovnavigator/shared/";
+import { UserData } from "@businessnjgovnavigator/shared/";
 import { useContext, useEffect } from "react";
 import useSWR from "swr";
 
 export const useUserData = (): UseUserDataResponse => {
   const { state, dispatch } = useContext(AuthContext);
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
-  const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData);
+  const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
+    isPaused: () => state.isAuthenticated != IsAuthenticated.TRUE,
+  });
 
   const dataExists = !!data;
 
   useEffect(() => {
-    if (!data || !state.user) return;
+    if (!data || !state.user || state.isAuthenticated != IsAuthenticated.TRUE) return;
     dispatch({
       type: "UPDATE_USER",
       user: {
@@ -28,20 +31,19 @@ export const useUserData = (): UseUserDataResponse => {
   }, [dataExists]);
 
   useEffect(() => {
-    if (error && dataExists) {
+    if (error && dataExists && state.isAuthenticated == IsAuthenticated.TRUE) {
       setUserDataError("CACHED_ONLY");
     } else if (error && !dataExists) {
       setUserDataError("NO_DATA");
     } else if (!error && userDataError !== "UPDATE_FAILED") {
       setUserDataError(undefined);
     }
-  }, [userDataError, dataExists, error, setUserDataError]);
+  }, [userDataError, dataExists, error, setUserDataError, state.isAuthenticated]);
 
   const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
     if (newUserData) {
-      mutate({ ...newUserData, user: externalSyncUser(newUserData.user) }, false);
-      if (config?.local) return;
-
+      mutate(newUserData, false);
+      if (config?.local || state.isAuthenticated != IsAuthenticated.TRUE) return;
       return postUserData(newUserData)
         .then((response: UserData) => {
           setUserDataError(undefined);

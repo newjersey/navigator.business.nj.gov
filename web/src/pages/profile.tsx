@@ -35,7 +35,7 @@ import {
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { getSectionCompletion, OnboardingStatusLookup } from "@/lib/utils/helpers";
+import { getSectionCompletion, OnboardingStatusLookup, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import { RoadmapContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -44,7 +44,7 @@ import { CircularProgress, Dialog, DialogContent, DialogTitle, IconButton } from
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { FormEvent, ReactElement, useContext, useEffect, useMemo, useState } from "react";
+import React, { FormEvent, ReactElement, useContext, useMemo, useState } from "react";
 
 interface Props {
   displayContent: LoadDisplayContent;
@@ -81,11 +81,11 @@ const ProfilePage = (props: Props): ReactElement => {
       ? routerType(`/dashboard${params ? `?${new URLSearchParams(params).toString()}` : ""}`)
       : routerType(`/roadmap${params ? `?${new URLSearchParams(params).toString()}` : ""}`);
 
-  useEffect(() => {
+  useMountEffectWhenDefined(() => {
     if (userData) {
       setProfileData(userData.profileData);
     }
-  }, [userData]);
+  }, userData);
 
   const onValidation = (field: ProfileFields, invalid: boolean) => {
     setFieldStates({ ...fieldStates, [field]: { invalid } });

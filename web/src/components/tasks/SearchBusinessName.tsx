@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { UseAuthModalWrapper } from "@/components/SignUpDialogs";
 import { TaskHeader } from "@/components/TaskHeader";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
@@ -121,7 +122,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
   };
 
   return (
-    <>
+    <UseAuthModalWrapper>
       <TaskHeader task={props.task} />
       <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
       {showErrorAlert()}
@@ -163,6 +164,6 @@ export const SearchBusinessName = (props: Props): ReactElement => {
         {nameAvailability?.status === "AVAILABLE" && showAvailable()}
         {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
       </div>
-    </>
+    </UseAuthModalWrapper>
   );
 };

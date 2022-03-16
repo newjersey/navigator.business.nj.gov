@@ -1,4 +1,3 @@
-import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -11,11 +10,12 @@ import { fireEvent, waitFor, within } from "@testing-library/react";
 import dayjs from "dayjs";
 
 jest.mock("next/router");
-jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
-const mockApi = api as jest.Mocked<typeof api>;
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postNewsletter: jest.fn(),
+  postUserTesting: jest.fn(),
+}));
 
 const date = dayjs().subtract(1, "month").date(1);
 const dateOfFormation = date.format("YYYY-MM-DD");
@@ -25,7 +25,6 @@ describe("onboarding - owning a business", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
-    mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "", userData: generateUserData({}) });
   });
 
   it("uses special template eval for step 1 label", async () => {

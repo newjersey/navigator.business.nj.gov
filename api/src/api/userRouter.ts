@@ -4,9 +4,7 @@ import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
 import { calculateNextAnnualFilingDate } from "../domain/calculateNextAnnualFilingDate";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
-import { shouldAddToNewsletter } from "../domain/newsletter/shouldAddToNewsletter";
-import { AddNewsletter, AddToUserTesting, UpdateLicenseStatus, UserDataClient } from "../domain/types";
-import { shouldAddToUserTesting } from "../domain/user-testing/shouldAddToUserTesting";
+import { UpdateLicenseStatus, UserDataClient } from "../domain/types";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -39,9 +37,7 @@ export const getSignedInUserId = (req: Request): string => {
 
 export const userRouterFactory = (
   userDataClient: UserDataClient,
-  updateLicenseStatus: UpdateLicenseStatus,
-  addNewsletter: AddNewsletter,
-  addToUserTesting: AddToUserTesting
+  updateLicenseStatus: UpdateLicenseStatus
 ): Router => {
   const router = Router();
 
@@ -93,16 +89,6 @@ export const userRouterFactory = (
           ],
         },
       };
-    }
-
-    if (shouldAddToNewsletter(userData)) {
-      userData.user.externalStatus.newsletter = { status: "IN_PROGRESS" };
-      addNewsletter(userData);
-    }
-
-    if (shouldAddToUserTesting(userData)) {
-      userData.user.externalStatus.userTesting = { status: "IN_PROGRESS" };
-      addToUserTesting(userData);
     }
 
     userDataClient

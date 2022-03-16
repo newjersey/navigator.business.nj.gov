@@ -141,6 +141,8 @@ export const legalStructureWithTradeName = LegalStructures.filter((legalStructur
 type registration = {
   fullName: string;
   email: string;
+  isNewsletterChecked: boolean;
+  isContactMeChecked: boolean;
 };
 interface startingOnboardingData {
   businessName: string;
@@ -160,6 +162,8 @@ export const completeNewBusinessOnboarding = ({
   liquorLicenseQuestion,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
+  isNewsletterChecked = true,
+  isContactMeChecked = false,
 }: startingOnboardingData & Partial<registration>): void => {
   cy.url().should("include", `onboarding?page=${1}`);
   onOnboardingPage.selectNewBusiness(false);
@@ -224,10 +228,10 @@ export const completeNewBusinessOnboarding = ({
   onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
   onOnboardingPage.typeConfirmEmail(email);
   onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.getNewsletterCheckbox().should("be.checked");
-  onOnboardingPage.getContactMeCheckbox().should("not.be.checked");
-  onOnboardingPage.checkContactMeCheckbox();
-  onOnboardingPage.getContactMeCheckbox().should("be.checked");
+  onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
+  onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
+  onOnboardingPage.toggleContactMeCheckbox(!isContactMeChecked);
+  onOnboardingPage.getContactMeCheckbox().should(`${!isContactMeChecked ? "be" : "not.be"}.checked`);
 
   onOnboardingPage.clickNext();
   cy.url().should("include", `roadmap`);

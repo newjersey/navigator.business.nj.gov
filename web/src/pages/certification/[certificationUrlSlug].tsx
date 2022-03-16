@@ -3,7 +3,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import {
   CertificationUrlSlugParam,
   loadAllCertificationUrlSlugs,
@@ -37,7 +37,7 @@ export const CertificationElement = (props: { certification: Certification }): R
 };
 
 const CertificationPage = (props: Props): ReactElement => {
-  useAuthProtectedPage();
+  useAuthAlertPage();
 
   return (
     <>

@@ -5,7 +5,8 @@ import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { postSelfReg } from "@/lib/api-client/apiClient";
+import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
@@ -24,7 +25,7 @@ import {
   UserDisplayContent,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
+import { setAnalyticsDimensions, setRegistrationDimension } from "@/lib/utils/analytics-helpers";
 import {
   getSectionCompletion,
   OnboardingErrorLookup,
@@ -32,7 +33,7 @@ import {
   scrollToTop,
   templateEval,
 } from "@/lib/utils/helpers";
-import { RoadmapContext } from "@/pages/_app";
+import { AuthContext, RoadmapContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
@@ -98,6 +99,7 @@ export const ProfileDataContext = createContext<ProfileDataContextType>({
 
 const OnboardingPage = (props: Props): ReactElement => {
   const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
+  const { state } = useContext(AuthContext);
 
   const router = useRouter();
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
@@ -129,8 +131,15 @@ const OnboardingPage = (props: Props): ReactElement => {
       setProfileData(userData.profileData);
       setUser(userData.user);
       setCurrentFlow(userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
+    } else if (state.user && state.isAuthenticated == IsAuthenticated.FALSE) {
+      const _userData = createEmptyUserData(state.user);
+      setRegistrationDimension("Began Onboarding");
+      update(_userData, { local: true });
+      setProfileData(_userData.profileData);
+      setUser(_userData.user);
     }
-  }, [userData, setProfileData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.isAuthenticated, state.user, userData]);
 
   const queryShallowPush = useCallback(
     (page: number) => router.push({ query: { page: page } }, undefined, { shallow: true }),
@@ -252,25 +261,25 @@ const OnboardingPage = (props: Props): ReactElement => {
         headerRef.current?.focus();
       });
     } else {
+      setRegistrationDimension("Onboarded Guest");
       analytics.event.onboarding_last_step.submit.finish_onboarding();
-      const newUserData: UserData = {
+      let newUserData: UserData = {
         ...currentUserData,
         user,
         profileData: newProfileData,
         formProgress: "COMPLETED",
       };
-      postSelfReg(newUserData)
-        .then(async (response) => {
-          await update(response.userData, { local: true });
-          await router.replace(response.authRedirectURL);
-        })
-        .catch((errorCode) => {
-          if (errorCode === 409) {
-            setError("MYNJ_DUPLICATE_SIGNUP");
-          } else {
-            setError("MYNJ_GENERIC");
-          }
-        });
+
+      if (newUserData.user.receiveNewsletter) {
+        newUserData = await api.postNewsletter(newUserData);
+      }
+
+      if (newUserData.user.userTesting) {
+        newUserData = await api.postUserTesting(newUserData);
+      }
+
+      await update(newUserData);
+      await router.push(newUserData.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap");
     }
   };
 

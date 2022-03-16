@@ -67,9 +67,9 @@ export default async function handler() {
     logger
   );
 
-  const addNewsletter = addNewsletterFactory(dbClient, newsletterGovDeliveryClient);
-  const addToAirtableUserTesting = addToUserTestingFactory(dbClient, airtableUserTestingClient);
+  const addNewsletter = addNewsletterFactory(newsletterGovDeliveryClient);
+  const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
 
-  await addNewsletterBatch(addNewsletter, qlClient);
-  await addToUserTestingBatch(addToAirtableUserTesting, qlClient);
+  await addNewsletterBatch(addNewsletter, dbClient, qlClient);
+  await addToUserTestingBatch(addToAirtableUserTesting, dbClient, qlClient);
 }

@@ -1,5 +1,6 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { AuthContext } from "@/pages/_app";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { AuthAlertContext, AuthContext } from "@/pages/_app";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 
@@ -19,6 +20,17 @@ export const useAuthProtectedPage = (): void => {
       }
     })();
   }, [router, state.isAuthenticated]);
+};
+
+export const useAuthAlertPage = (): void => {
+  const { isAuthenticated, setAlertIsVisible } = useContext(AuthAlertContext);
+  useMountEffectWhenDefined(() => {
+    (async () => {
+      if (isAuthenticated === IsAuthenticated.FALSE) {
+        setAlertIsVisible(true);
+      }
+    })();
+  }, isAuthenticated);
 };
 
 export const useUnauthedOnlyPage = (): void => {

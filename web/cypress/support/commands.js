@@ -29,7 +29,6 @@ import "cypress-audit/commands";
 import "cypress-wait-until";
 import { createEmptyUserData } from "../../../shared/src/userData";
 import { testUserEmail, testUserPassword } from "./index";
-
 Auth.configure({
   identityPoolRegion: "us-east-1",
   identityPoolId: Cypress.env("COGNITO_IDENTITY_POOL_ID"),
@@ -40,6 +39,8 @@ Auth.configure({
 });
 
 Cypress.Commands.add("loginByCognitoApi", () => {
+  cy.clearCookies();
+
   const log = Cypress.log({
     displayName: "COGNITO LOGIN",
     message: [`🔐 Authenticating | ${testUserEmail}`],
@@ -52,7 +53,7 @@ Cypress.Commands.add("loginByCognitoApi", () => {
 
   cy.wrap(signIn, { log: false }).then((cognitoResponse) => {
     const keyPrefixWithUsername = `${cognitoResponse.keyPrefix}.${cognitoResponse.username}`;
-
+    window.sessionStorage.clear();
     window.localStorage.setItem(
       `${keyPrefixWithUsername}.idToken`,
       cognitoResponse.signInUserSession.idToken.jwtToken

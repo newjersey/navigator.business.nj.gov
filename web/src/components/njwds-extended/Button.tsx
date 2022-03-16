@@ -22,6 +22,7 @@ interface Props {
   widthAutoOnMobile?: boolean;
   heightAutoOnMobile?: boolean;
   intercomButton?: boolean;
+  className?: string;
 }
 
 export const Button = (props: Props): ReactElement => {
@@ -67,7 +68,7 @@ export const Button = (props: Props): ReactElement => {
 
   return (
     <button
-      className={`${style}${props.heightAutoOnMobile ? " height-auto" : ""}${
+      className={`${style} ${props.className ?? ""} ${props.heightAutoOnMobile ? "height-auto" : ""}${
         props.noRightMargin && props.style !== "tertiary" ? " margin-right-0" : ""
       }${!props.noRightMargin && props.style !== "tertiary" ? " margin-right-2" : ""}${
         props.style === "tertiary" ? " margin-right-0" : ""

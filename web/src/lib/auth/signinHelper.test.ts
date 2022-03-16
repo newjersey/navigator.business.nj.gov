@@ -1,7 +1,16 @@
 import * as api from "@/lib/api-client/apiClient";
+import { onGuestSignIn, onSignIn, onSignOut } from "@/lib/auth/signinHelper";
 import { generateUser, generateUserData } from "@/test/factories";
 import * as session from "./sessionHelper";
-import { onSignIn, onSignOut } from "./signinHelper";
+
+const userDataStorage = {
+  getCurrentUserData: jest.fn(),
+  delete: jest.fn(),
+};
+
+jest.mock("@/lib/utils/storage-helpers", () => ({
+  UserDataStorage: jest.fn(() => userDataStorage),
+}));
 
 jest.mock("./sessionHelper", () => ({
   getCurrentUser: jest.fn(),
@@ -39,11 +48,48 @@ describe("SigninHelper", () => {
     });
   });
 
+  describe("onGuestSignIn", () => {
+    it("dispatches guest user login", async () => {
+      const user = generateUser({});
+      const userData = generateUserData({ user });
+      const userStorageMock = userDataStorage.getCurrentUserData.mockImplementation(() => userData);
+      await onGuestSignIn(mockPush, mockDispatch);
+      expect(userStorageMock).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: "LOGIN_GUEST",
+        user: user,
+      });
+    });
+
+    it("redirect user to onboarding if still in progress", async () => {
+      const user = generateUser({});
+      const userData = generateUserData({ user, formProgress: "UNSTARTED" });
+      userDataStorage.getCurrentUserData.mockImplementation(() => userData);
+      mockSession.getCurrentUser.mockImplementation(() => {
+        throw new Error("New");
+      });
+      await onGuestSignIn(mockPush, mockDispatch);
+      expect(mockPush).toHaveBeenCalledWith("/onboarding");
+    });
+
+    it("redirect user to home if no user data is found", async () => {
+      userDataStorage.getCurrentUserData.mockImplementation(() => undefined);
+      mockSession.getCurrentUser.mockImplementation(() => {
+        throw new Error("New");
+      });
+      await onGuestSignIn(mockPush, mockDispatch);
+      expect(mockPush).toHaveBeenCalledWith("/");
+    });
+  });
+
   describe("onSignOut", () => {
     it("dispatches a logout with undefined user", async () => {
+      const user = generateUser({});
+      mockSession.getCurrentUser.mockResolvedValue(user);
+      const userStorageMock = userDataStorage.delete.mockImplementation(() => {});
       await onSignOut(mockPush, mockDispatch);
-
       expect(mockSession.triggerSignOut).toHaveBeenCalled();
+      expect(userStorageMock).toHaveBeenCalledWith(user.id);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGOUT",
         user: undefined,

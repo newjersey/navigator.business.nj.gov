@@ -152,8 +152,6 @@ export const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
 export const OnboardingErrorLookup: Record<ProfileError, string> = {
   REQUIRED_LEGAL: Config.onboardingDefaults.errorTextRequiredLegal,
   REQUIRED_EXISTING_BUSINESS: Config.onboardingDefaults.errorTextRequiredExistingBusiness,
-  MYNJ_DUPLICATE_SIGNUP: Config.selfRegistration.errorTextDuplicateSignup,
-  MYNJ_GENERIC: Config.selfRegistration.errorTextGeneric,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {

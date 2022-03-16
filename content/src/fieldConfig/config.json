@@ -176,7 +176,18 @@
     "logoutButton": "Log out",
     "myNJAccountText": "myNewJersey account",
     "taskPageNavBarHeading": "Business Roadmap",
-    "profileLinkText": "Business Profile"
+    "profileLinkText": "Business Profile",
+    "navBarGuestText": "Guest",
+    "navBarGuestRegistrationText": "Register now",
+    "guestAlertTitle": "### Register to Save Your Progress",
+    "guestAlertBody": "Now that you've filled out your business information, you can save your progress and come back later by [creating an account](#). ",
+    "guestSuccessTitle": "### You are Now Registered!",
+    "guestSuccessBody": "You can now save your progress, access more features, and edit your profile.",
+    "guestModalTitle": "## Create an Account to Access this Feature",
+    "guestModalBody": "To use this feature, you need to create a free account with the State of New Jersey's secure login system, MyNJ. This will ensure your privacy, and allow you to come back any time.",
+    "guestModalButtonText": "Complete my Registration",
+    "guestModalSubText": "Already have an account? [Log In](#)"
+
   },
   "dashboardDefaults": {
     "backToRoadmapLinkText": "step-by-step guide",

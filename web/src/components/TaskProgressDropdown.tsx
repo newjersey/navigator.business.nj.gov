@@ -2,13 +2,15 @@ import { Tag } from "@/components/njwds-extended/Tag";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { TaskProgress } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,14 +30,19 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [value, setValue] = useState<TaskProgress>(props.initialValue || "NOT_STARTED");
   const [successToastIsOpen, setSuccessToastIsOpen] = useState<boolean>(false);
+  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
 
   useEffect(() => {
     setValue(props.initialValue || "NOT_STARTED");
   }, [props.initialValue]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    analytics.event.task_status.click.dropdown_appears();
-    setAnchorEl(event.currentTarget);
+    if (isAuthenticated == IsAuthenticated.TRUE) {
+      analytics.event.task_status.click.dropdown_appears();
+      setAnchorEl(event.currentTarget);
+    } else {
+      setModalIsVisible(true);
+    }
   };
 
   const close = () => {

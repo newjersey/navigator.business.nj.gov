@@ -1,10 +1,11 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
-import { onSignOut } from "@/lib/auth/signinHelper";
+import { triggerSignIn } from "@/lib/auth/sessionHelper";
+import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import { AuthContext } from "@/pages/_app";
+import { AuthAlertContext, AuthContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import Link from "next/link";
@@ -15,10 +16,11 @@ type Props = {
   isWidePage?: boolean;
 };
 
-export const NavBarLoggedInDesktop = (props: Props): ReactElement => {
-  const { userData } = useUserData();
-  const { dispatch } = useContext(AuthContext);
+export const NavBarDesktop = (props: Props): ReactElement => {
+  const { userData, update } = useUserData();
+  const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
+  const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
   const userName = getUserNameOrEmail(userData);
 
@@ -92,9 +94,17 @@ export const NavBarLoggedInDesktop = (props: Props): ReactElement => {
             aria-haspopup="true"
             onClick={toggleDropdown}
           >
-            <div className="text-bold text-primary flex flex-align-center">
-              <Icon className="usa-icon--size-4 margin-right-1">account_circle</Icon>
-              <div>{userName}</div>
+            <div
+              className={`text-bold text-${
+                state.isAuthenticated == "TRUE" ? "primary" : "base"
+              } flex flex-align-center`}
+            >
+              <Icon className="usa-icon--size-4 margin-right-1">
+                {state.isAuthenticated == "TRUE" ? "account_circle" : "help"}
+              </Icon>
+              <div>
+                {state.isAuthenticated == "TRUE" ? userName : Config.navigationDefaults.navBarGuestText}
+              </div>
               <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
             </div>
           </button>
@@ -108,28 +118,54 @@ export const NavBarLoggedInDesktop = (props: Props): ReactElement => {
               >
                 <Paper>
                   <ClickAwayListener onClickAway={handleClose}>
-                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                      <MenuItem onClick={handleProfileClick}>
-                        <Button style="tertiary" textBold smallText>
-                          {Config.navigationDefaults.myNJAccountText}
-                        </Button>
-                      </MenuItem>
-                      <MenuItem
-                        onClick={() => {
-                          analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-                          router.push("/profile");
-                        }}
-                      >
-                        <Button style="tertiary" textBold smallText>
-                          {Config.navigationDefaults.profileLinkText}
-                        </Button>
-                      </MenuItem>
-                      <MenuItem onClick={handleLogoutClick}>
-                        <Button style="tertiary" textBold smallText>
-                          {Config.navigationDefaults.logoutButton}
-                        </Button>
-                      </MenuItem>
-                    </MenuList>
+                    {state.isAuthenticated == "TRUE" ? (
+                      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                        <MenuItem onClick={handleProfileClick}>
+                          <Button style="tertiary" textBold smallText>
+                            {Config.navigationDefaults.myNJAccountText}
+                          </Button>
+                        </MenuItem>
+                        <MenuItem
+                          onClick={() => {
+                            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+                            router.push("/profile");
+                          }}
+                        >
+                          <Button style="tertiary" textBold smallText>
+                            {Config.navigationDefaults.profileLinkText}
+                          </Button>
+                        </MenuItem>
+                        <MenuItem onClick={handleLogoutClick}>
+                          <Button style="tertiary" textBold smallText>
+                            {Config.navigationDefaults.logoutButton}
+                          </Button>
+                        </MenuItem>
+                      </MenuList>
+                    ) : (
+                      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                        <MenuItem
+                          onClick={() => {
+                            analytics.event.guest_menu.click.go_to_myNJ_registration();
+                            onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
+                          }}
+                        >
+                          <Button style="tertiary" textBold smallText>
+                            {Config.navigationDefaults.navBarGuestRegistrationText}
+                          </Button>
+                        </MenuItem>
+                        <MenuItem
+                          onClick={() => {
+                            analytics.event.guest_menu.click.go_to_myNJ_registration();
+                            triggerSignIn();
+                          }}
+                          data-testid="login-button"
+                        >
+                          <Button style="tertiary" textBold smallText>
+                            {Config.navigationDefaults.logInButton}
+                          </Button>
+                        </MenuItem>
+                      </MenuList>
+                    )}
                   </ClickAwayListener>
                 </Paper>
               </Grow>

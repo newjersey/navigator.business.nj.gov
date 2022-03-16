@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import serverless from "serverless-http";
+import { externalEndpointFactory } from "src/api/externalEndpointRouter";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { businessNameRouterFactory } from "../../api/businessNameRouter";
 import { formationRouterFactory } from "../../api/formationRouter";
@@ -92,8 +93,8 @@ const airtableUserTestingClient = AirtableUserTestingClient(
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 
-const addGovDeliveryNewsletter = addNewsletterFactory(userDataClient, govDeliveryNewsletterClient);
-const addToAirtableUserTesting = addToUserTestingFactory(userDataClient, airtableUserTestingClient);
+const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClient);
+const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
 
@@ -118,9 +119,10 @@ const apiFormationClient = ApiFormationClient(
 );
 
 app.use(bodyParser.json({ strict: false }));
+app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus));
 app.use(
-  "/api",
-  userRouterFactory(userDataClient, updateLicenseStatus, addGovDeliveryNewsletter, addToAirtableUserTesting)
+  "/api/ext",
+  externalEndpointFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
 app.use("/api", businessNameRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));

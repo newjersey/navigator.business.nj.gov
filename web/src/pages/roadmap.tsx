@@ -8,7 +8,7 @@ import { MiniProfile } from "@/components/roadmap/MiniProfile";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { loadRoadmapDisplayContent, loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const RoadmapPage = (props: Props): ReactElement => {
-  useAuthProtectedPage();
+  useAuthAlertPage();
   const { userData, error } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();

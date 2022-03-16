@@ -1,6 +1,6 @@
+import { NavBarDesktop } from "@/components/navbar/NavBarDesktop";
 import { NavBarLanding } from "@/components/navbar/NavBarLanding";
-import { NavBarLoggedInDesktop } from "@/components/navbar/NavBarLoggedInDesktop";
-import { NavBarLoggedInMobile } from "@/components/navbar/NavBarLoggedInMobile";
+import { NavBarMobile } from "@/components/navbar/NavBarMobile";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference, Task } from "@/lib/types/types";
 import { useMediaQuery } from "@mui/material";
@@ -44,11 +44,11 @@ export const NavBar = (props: Props): ReactElement => {
         </>
       )}
 
-      {!landingPage && isLargeScreen && <NavBarLoggedInDesktop isWidePage={props.isWidePage} />}
+      {!landingPage && isLargeScreen && <NavBarDesktop isWidePage={props.isWidePage} />}
 
       {!landingPage && !isLargeScreen && (
         <>
-          <NavBarLoggedInMobile
+          <NavBarMobile
             scrolled={scrolled}
             task={task}
             sideBarPageLayout={props.sideBarPageLayout}

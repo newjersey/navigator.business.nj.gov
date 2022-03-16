@@ -41,6 +41,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
   return (
     <Autocomplete
       options={props.municipalities}
+      id={props.fieldName}
       filterOptions={filterOptions}
       getOptionLabel={(municipality: Municipality) => municipality.displayName}
       isOptionEqualToValue={(option: Municipality, value: Municipality) => option.id === value.id}
@@ -62,7 +63,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       renderInput={(params) => (
         <TextField
           {...params}
-          id={props.fieldName}
+          // id={props.fieldName}
           inputProps={{
             "aria-label": "Location",
             "data-testid": props.fieldName,

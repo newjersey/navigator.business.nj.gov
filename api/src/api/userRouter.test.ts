@@ -9,7 +9,7 @@ import {
   generateUser,
   generateUserData,
 } from "../../test/factories";
-import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
+import { UserDataClient } from "../domain/types";
 import { userRouterFactory } from "./userRouter";
 
 jest.mock("jsonwebtoken", () => ({
@@ -21,8 +21,6 @@ describe("userRouter", () => {
   let app: Express;
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
-  let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
-  let stubAddToUserTesting: jest.MockedFunction<AddToUserTesting>;
   let stubUpdateLicenseStatus: jest.Mock;
 
   beforeEach(async () => {
@@ -32,13 +30,9 @@ describe("userRouter", () => {
       findByEmail: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
-    stubAddNewsletter = jest.fn();
-    stubAddToUserTesting = jest.fn();
     app = express();
     app.use(bodyParser.json());
-    app.use(
-      userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus, stubAddNewsletter, stubAddToUserTesting)
-    );
+    app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus));
   });
 
   const cognitoPayload = ({ id }: { id: string }) => ({
@@ -228,34 +222,6 @@ describe("userRouter", () => {
 
       expect(response.status).toEqual(500);
       expect(response.body).toEqual({ error: "error" });
-    });
-
-    it("adds to newsletter and user testing if true", async () => {
-      const userData = generateUserData({
-        user: generateUser({ id: "123", externalStatus: {}, userTesting: true, receiveNewsletter: true }),
-      });
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
-
-      await request(app).post(`/users`).send(userData).set("Authorization", "Bearer user-123-token");
-      expect(stubAddNewsletter).toHaveBeenCalled();
-      expect(stubAddToUserTesting).toHaveBeenCalled();
-    });
-    it("does not add to newsletter and user testing if true", async () => {
-      const userData = generateUserData({
-        user: generateUser({
-          id: "123",
-          externalStatus: { newsletter: { status: "IN_PROGRESS" }, userTesting: { status: "IN_PROGRESS" } },
-          userTesting: true,
-          receiveNewsletter: true,
-        }),
-      });
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
-
-      await request(app).post(`/users`).send(userData).set("Authorization", "Bearer user-123-token");
-      expect(stubAddNewsletter).not.toHaveBeenCalled();
-      expect(stubAddToUserTesting).not.toHaveBeenCalled();
     });
   });
 });

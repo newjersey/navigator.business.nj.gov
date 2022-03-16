@@ -1,10 +1,13 @@
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData, UseUserDataResponse } from "@/lib/data-hooks/useUserData";
+import { UserDataStorage } from "@/lib/utils/storage-helpers";
 import { generateUser, generateUserData } from "@/test/factories";
 import { generateUseUserDataResponse, withAuth, withUserDataError } from "@/test/helpers";
 import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import { act, render } from "@testing-library/react";
 import React from "react";
+import { SWRConfig } from "swr";
 
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
@@ -12,21 +15,42 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
+const userDataStorage = UserDataStorage();
+
+const mockDispatch = jest.fn();
+
 describe("useUserData", () => {
   let mockSetError: jest.Mock;
 
   beforeEach(() => {
+    userDataStorage.clear();
     jest.resetAllMocks();
     mockSetError = jest.fn();
   });
 
-  const setupHook = (currentUser: BusinessUser | undefined): UseUserDataResponse => {
+  const setupHook = (
+    currentUser: BusinessUser | undefined,
+    isAuthenticated?: IsAuthenticated
+  ): UseUserDataResponse => {
     const returnVal = generateUseUserDataResponse({});
     function TestComponent() {
       Object.assign(returnVal, useUserData());
       return null;
     }
-    render(withUserDataError(withAuth(<TestComponent />, { user: currentUser }), undefined, mockSetError));
+    render(
+      withUserDataError(
+        withAuth(
+          <>
+            <SWRConfig value={{ provider: () => userDataStorage }}>
+              <TestComponent />
+            </SWRConfig>
+          </>,
+          { user: currentUser, dispatch: mockDispatch, isAuthenticated }
+        ),
+        undefined,
+        mockSetError
+      )
+    );
     return returnVal;
   };
 
@@ -34,6 +58,12 @@ describe("useUserData", () => {
     const currentUser = generateUser({});
     const { update } = setupHook(currentUser);
     await act(() => update(generateUserData({}), { local: true }));
+    expect(mockApi.postUserData).not.toHaveBeenCalled();
+  });
+  it("does not post update when user is unauthenticated", async () => {
+    const currentUser = generateUser({});
+    const { update } = setupHook(currentUser, IsAuthenticated.FALSE);
+    await act(() => update(generateUserData({})));
     expect(mockApi.postUserData).not.toHaveBeenCalled();
   });
 
@@ -44,7 +74,7 @@ describe("useUserData", () => {
     });
   });
 
-  describe("when there is a current user", () => {
+  describe("when there is a authenticated current user", () => {
     it("uses user id to get user data", () => {
       const currentUser = generateUser({});
       setupHook(currentUser);
@@ -72,6 +102,21 @@ describe("useUserData", () => {
       expect(mockApi.getUserData).toHaveBeenCalled();
     });
 
+    it("update auth state when data is initially loaded ", async () => {
+      const currentUser = generateUser({});
+      const currentUserData = generateUserData({ user: { ...currentUser, myNJUserKey: "1234" } });
+      mockApi.getUserData.mockResolvedValue(currentUserData);
+      const { refresh } = setupHook(currentUser, IsAuthenticated.TRUE);
+      await act(() => refresh());
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: "UPDATE_USER",
+        user: {
+          ...currentUser,
+          myNJUserKey: currentUserData.user.myNJUserKey,
+        },
+      });
+    });
+
     it("sets error to NO_DATA when api call fails with no cache", async () => {
       const currentUser = generateUser({});
       const rejectedPromise = Promise.reject(500);
@@ -93,6 +138,47 @@ describe("useUserData", () => {
       const newUserData = generateUserData({});
       await act(() => update(newUserData).catch(() => {}));
       expect(mockSetError).toHaveBeenCalledWith("UPDATE_FAILED");
+    });
+  });
+
+  describe("when there is a guest current user", () => {
+    beforeEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it("uses user id to get user data from cache", () => {
+      const currentUser = generateUser({});
+      const currentUserData = generateUserData({ user: currentUser });
+      userDataStorage.set(currentUser.id, currentUserData);
+      const { userData } = setupHook(currentUser, IsAuthenticated.FALSE);
+      expect(mockApi.getUserData).not.toHaveBeenCalled();
+      expect(userData).toEqual(currentUserData);
+    });
+
+    it("saves new user data to cache when calling update", async () => {
+      const currentUser = generateUser({});
+      const { update } = setupHook(currentUser, IsAuthenticated.FALSE);
+      expect(userDataStorage.getCurrentUserData()).toBeUndefined();
+      const currentUserData = generateUserData({ user: currentUser });
+      await act(() => update(currentUserData));
+      expect(mockApi.postUserData).not.toHaveBeenCalled();
+      expect(userDataStorage.getCurrentUserData()).toEqual(currentUserData);
+    });
+
+    it("does not update auth state when data is initially loaded ", async () => {
+      const currentUser = generateUser({});
+      const currentUserData = generateUserData({ user: currentUser });
+      userDataStorage.set(currentUser.id, currentUserData);
+      const { refresh } = setupHook(currentUser, IsAuthenticated.FALSE);
+      await act(() => refresh());
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
+
+    it("does not update data from api when calling refresh", async () => {
+      const currentUser = generateUser({});
+      const { refresh } = setupHook(currentUser, IsAuthenticated.FALSE);
+      await act(() => refresh());
+      expect(mockApi.postUserData).not.toHaveBeenCalled();
     });
   });
 });

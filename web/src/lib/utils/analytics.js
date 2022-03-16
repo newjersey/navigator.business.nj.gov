@@ -35,6 +35,9 @@ export default {
     persona: (value) => {
       window.gtag("set", "dimension6", value);
     },
+    registrationStatus: (value) => {
+      window.gtag("set", "dimension7", value);
+    },
   },
 
   event: {
@@ -47,8 +50,8 @@ export default {
     },
     landing_page_hero_get_started: {
       click: {
-        open_create_account_modal: () => {
-          sendEvent("landing_page_hero_get_started", "click", "open_create_account_modal");
+        go_to_onboarding: () => {
+          sendEvent("landing_page_hero_get_started", "click", "go_to_onboarding");
         },
       },
     },
@@ -61,15 +64,42 @@ export default {
     },
     landing_page_navbar_register: {
       click: {
-        open_create_account_modal: () => {
-          sendEvent("landing_page_navbar_register", "click", "open_create_account_modal");
+        go_to_onboarding: () => {
+          sendEvent("landing_page_navbar_register", "click", "go_to_onboarding");
         },
       },
     },
-    landing_page_registration_create: {
+    guest_toast: {
       click: {
         go_to_myNJ_registration: () => {
-          sendEvent("landing_page_registration_create", "click", "go_to_myNJ_registration");
+          sendEvent("guest_toast", "click", "go_to_myNJ_registration");
+        },
+      },
+    },
+    guest_modal: {
+      click: {
+        go_to_myNJ_registration: () => {
+          sendEvent("guest_modal", "click", "go_to_myNJ_registration");
+        },
+        go_to_myNJ_login: () => {
+          sendEvent("guest_modal", "click", "go_to_myNJ_login");
+        },
+      },
+    },
+    guest_menu: {
+      click: {
+        go_to_myNJ_registration: () => {
+          sendEvent("guest_menu", "click", "go_to_myNJ_registration");
+        },
+        go_to_myNJ_login: () => {
+          sendEvent("guest_modal", "click", "go_to_myNJ_login");
+        },
+      },
+    },
+    roadmap_dashboard: {
+      arrive: {
+        arrive_from_myNJ_registration: () => {
+          sendEvent("roadmap_dashboard", "arrive", "arrive_from_myNJ_registration");
         },
       },
     },
@@ -333,13 +363,6 @@ export default {
       submit: {
         finish_onboarding: () => {
           sendEvent("onboarding_last_step", "submit", "finish_onboarding");
-        },
-      },
-    },
-    onboarding_first_step: {
-      arrive: {
-        arrive_from_myNJ_registration: () => {
-          sendEvent("onboarding_first_step", "arrive", "arrive_from_myNJ_registration");
         },
       },
     },

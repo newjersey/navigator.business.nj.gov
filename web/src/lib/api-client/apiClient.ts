@@ -28,6 +28,13 @@ export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
 };
 
+export const postNewsletter = async (userData: UserData): Promise<UserData> => {
+  return post(`/ext/newsletter`, userData, false);
+};
+export const postUserTesting = async (userData: UserData): Promise<UserData> => {
+  return post(`/ext/userTesting`, userData, false);
+};
+
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
   return axios
     .post(`${apiBaseUrl}/api/self-reg`, userData)
@@ -47,8 +54,8 @@ export const get = async <T>(url: string): Promise<T> => {
     });
 };
 
-export const post = async <T, R>(url: string, data: R): Promise<T> => {
-  const authHeader = await authConfig();
+export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> => {
+  const authHeader = auth ? await authConfig() : {};
   return axios
     .post(`${apiBaseUrl}/api${url}`, data, authHeader)
     .then((response) => response.data)

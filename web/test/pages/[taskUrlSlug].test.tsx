@@ -31,7 +31,6 @@ function mockMaterialUI(): typeof materialUi {
 }
 
 jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

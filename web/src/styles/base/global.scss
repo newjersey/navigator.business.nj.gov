@@ -83,6 +83,14 @@ hr {
   }
 }
 
+.disabled-overlay {
+  opacity: 0.4;
+  cursor: not-allowed;
+  .cursor-wrapper {
+    pointer-events: none;
+  }
+}
+
 .dashed-underline {
   border-bottom-width: 2px;
   border-bottom-style: dashed;

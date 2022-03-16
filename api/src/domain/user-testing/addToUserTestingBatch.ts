@@ -1,5 +1,5 @@
 import { UserData } from "@shared/userData";
-import { AddToUserTesting, UserDataQlClient } from "../types";
+import { AddToUserTesting, UserDataClient, UserDataQlClient } from "../types";
 
 type AddToUserTestingBatchResponse = {
   success: number;
@@ -9,6 +9,7 @@ type AddToUserTestingBatchResponse = {
 
 export const addToUserTestingBatch = async (
   addToUserTesting: AddToUserTesting,
+  userDataClient: UserDataClient,
   userDataQlClient: UserDataQlClient
 ): Promise<AddToUserTestingBatchResponse> => {
   const results = await userDataQlClient.getNeedToAddToUserTestingUsers();
@@ -19,6 +20,7 @@ export const addToUserTestingBatch = async (
     promises.push(
       addToUserTesting(newUserData)
         .then((result) => {
+          userDataClient.put(result);
           if (result.user.externalStatus.userTesting?.success) {
             success += 1;
           } else {

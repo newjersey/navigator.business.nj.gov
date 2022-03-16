@@ -590,6 +590,16 @@ collections:
               - { label: MyNJ Account Text, name: myNJAccountText, widget: string }
               - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
               - { label: Profile Link Text, name: profileLinkText, widget: string }
+              - { label: NavBar Guest Profile text, name: navBarGuestText, widget: string }
+              - { label: Navbar Guest dropdown registration text, name: navBarGuestRegistrationText, widget: string }
+              - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
+              - { label: Guest Alert Body, name: guestAlertBody, widget: string }
+              - { label: Guest Success Toast Title, name: guestSuccessTitle, widget: string }
+              - { label: Guest Success Toast Body, name: guestSuccessBody, widget: string }
+              - { label: Guest Alert Modal Title, name: guestModalTitle, widget: string }
+              - { label: Guest Alert Modal Body, name: guestModalBody, widget: string }
+              - { label: Guest Alert Button, name: guestModalButtonText, widget: string }
+              - { label: Guest Alert Sub Button text, name: guestModalSubText, widget: string }
           - label: Onboarding Defaults
             name: onboardingDefaults
             collapsed: true

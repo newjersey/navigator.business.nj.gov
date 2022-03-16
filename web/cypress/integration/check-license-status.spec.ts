@@ -15,7 +15,7 @@ describe("check license status [feature] [all] [group1]", () => {
     // application tab
     cy.get('[data-task="register-consumer-affairs"]').click();
     cy.get('button[data-testid="cta-secondary"]').click();
-
+    cy.intercept(`${Cypress.env("API_BASE_URL")}/api/users/*`).as("userAPI");
     // check status tab, error messages
     cy.get('input[data-testid="business-name"]').should("have.value", "Aculyst");
     cy.get('input[data-testid="zipcode"]').type("12345");
@@ -27,7 +27,7 @@ describe("check license status [feature] [all] [group1]", () => {
     cy.get('button[data-testid="check-status-submit"]').click();
 
     cy.get('[data-testid="error-alert-NOT_FOUND"]').should("exist");
-
+    cy.wait("@userAPI");
     // re-load page, come back to same page
     cy.visit("/tasks/register-consumer-affairs");
     cy.get('input[data-testid="business-name"]').should("have.value", "Aculyst");

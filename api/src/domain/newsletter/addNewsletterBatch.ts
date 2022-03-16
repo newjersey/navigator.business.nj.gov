@@ -1,5 +1,5 @@
 import { UserData } from "@shared/userData";
-import { AddNewsletter, UserDataQlClient } from "../types";
+import { AddNewsletter, UserDataClient, UserDataQlClient } from "../types";
 
 type AddNewsletterBatchResponse = {
   success: number;
@@ -9,6 +9,7 @@ type AddNewsletterBatchResponse = {
 
 export const addNewsletterBatch = async (
   addNewsletter: AddNewsletter,
+  userDataClient: UserDataClient,
   userDataQlClient: UserDataQlClient
 ): Promise<AddNewsletterBatchResponse> => {
   const results = await userDataQlClient.getNeedNewsletterUsers();
@@ -19,6 +20,7 @@ export const addNewsletterBatch = async (
     promises.push(
       addNewsletter(newUserData)
         .then((result) => {
+          userDataClient.put(result);
           if (result.user.externalStatus.newsletter?.success) {
             success += 1;
           } else {

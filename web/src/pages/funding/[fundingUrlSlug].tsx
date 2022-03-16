@@ -3,7 +3,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Funding, OperateReference } from "@/lib/types/types";
@@ -33,7 +33,7 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
 };
 
 const FundingPage = (props: Props): ReactElement => {
-  useAuthProtectedPage();
+  useAuthAlertPage();
 
   return (
     <>

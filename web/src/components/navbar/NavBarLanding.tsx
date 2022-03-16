@@ -55,8 +55,8 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
                   style="tertiary"
                   textBold
                   onClick={() => {
+                    analytics.event.landing_page_navbar_register.click.go_to_onboarding();
                     router.push("/onboarding");
-                    analytics.event.landing_page_navbar_register.click.open_create_account_modal();
                   }}
                 >
                   {Config.navigationDefaults.registerButton}

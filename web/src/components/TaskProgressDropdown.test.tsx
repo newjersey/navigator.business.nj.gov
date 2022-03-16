@@ -1,6 +1,9 @@
 import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { TaskProgress } from "@/lib/types/types";
+import { withAuthAlert } from "@/test/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import React from "react";
 
 describe("<TaskProgressDropdown />", () => {
@@ -8,13 +11,39 @@ describe("<TaskProgressDropdown />", () => {
   const inProgressText = Config.taskProgress.IN_PROGRESS;
   const completedText = Config.taskProgress.COMPLETED;
 
+  const setModalIsVisible = jest.fn();
+  const onSelectCallBack = jest.fn();
+
+  const setupHookWithAuth = (context: {
+    onSelect?: typeof onSelectCallBack;
+    initialValue?: TaskProgress;
+    isAuthenticated?: IsAuthenticated;
+    modalIsVisible?: boolean;
+  }): RenderResult => {
+    return render(
+      withAuthAlert(
+        <TaskProgressDropdown
+          onSelect={context.onSelect ?? onSelectCallBack}
+          initialValue={context.initialValue}
+        />,
+        context.isAuthenticated ?? IsAuthenticated.TRUE,
+        { modalIsVisible: context.modalIsVisible ?? false, setModalIsVisible }
+      )
+    );
+  };
+
+  let subject: RenderResult;
+
+  beforeEach(() => {
+    jest.restoreAllMocks();
+    subject = setupHookWithAuth({});
+  });
+
   it("displays Not Started as the default", () => {
-    const subject = render(<TaskProgressDropdown onSelect={jest.fn()} />);
     expect(subject.getAllByText(notStartedText)[0]).toBeVisible();
   });
 
   it("displays the selected tag when closed", () => {
-    const subject = render(<TaskProgressDropdown onSelect={jest.fn()} />);
     fireEvent.click(subject.getAllByText(notStartedText)[0]);
 
     expect(subject.getByText(inProgressText)).toBeVisible();
@@ -27,21 +56,17 @@ describe("<TaskProgressDropdown />", () => {
   });
 
   it("calls the prop callback when an option is selected", () => {
-    const callback = jest.fn();
-    const subject = render(<TaskProgressDropdown onSelect={callback} />);
     fireEvent.click(subject.getAllByText(notStartedText)[0]);
     fireEvent.click(subject.getByText(inProgressText));
-
-    expect(callback).toHaveBeenCalledWith("IN_PROGRESS");
+    expect(onSelectCallBack).toHaveBeenCalledWith("IN_PROGRESS");
   });
 
-  it("uses initialValue prop as initial value", () => {
-    const subject = render(<TaskProgressDropdown onSelect={jest.fn()} initialValue="COMPLETED" />);
-    expect(subject.getAllByText(completedText)[0]).toBeVisible();
+  it("uses initialValue prop as initial value", async () => {
+    subject = setupHookWithAuth({ initialValue: "COMPLETED" });
+    waitFor(() => expect(subject.getAllByText(completedText)[0]).toBeVisible());
   });
 
   it("shows a success toast when an option is selected", () => {
-    const subject = render(<TaskProgressDropdown onSelect={jest.fn()} />);
     fireEvent.click(subject.getAllByText(notStartedText)[0]);
 
     expect(subject.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();

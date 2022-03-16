@@ -1,5 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 
+export const registrationStatusList = [
+  "SUCCESS",
+  "IN_PROGRESS",
+  "RESPONSE_ERROR",
+  "DUPLICATE_ERROR",
+] as const;
+export type RegistrationStatus = typeof registrationStatusList[number];
+
 export type BusinessUser = {
   name?: string;
   email: string;
@@ -23,25 +31,6 @@ export const emptyBusinessUser = {
 };
 
 export const createEmptyUser = (): BusinessUser => emptyBusinessUser;
-
-export const shouldAddToNewsletter = (newBusinessUser: BusinessUser): boolean =>
-  newBusinessUser.receiveNewsletter && !newBusinessUser.externalStatus.newsletter;
-
-export const shouldAddToUserTesting = (newBusinessUser: BusinessUser): boolean =>
-  newBusinessUser.userTesting && !newBusinessUser.externalStatus.userTesting;
-
-export const externalSyncUser = (newBusinessUser: BusinessUser): BusinessUser => {
-  const newsletter = shouldAddToNewsletter(newBusinessUser)
-    ? ({ status: "IN_PROGRESS" } as NewsletterResponse)
-    : newBusinessUser.externalStatus.newsletter;
-  const userTesting = shouldAddToUserTesting(newBusinessUser)
-    ? ({ status: "IN_PROGRESS" } as UserTestingResponse)
-    : newBusinessUser.externalStatus.userTesting;
-  return {
-    ...newBusinessUser,
-    externalStatus: { ...newBusinessUser.externalStatus, newsletter, userTesting },
-  };
-};
 
 export type ExternalStatus = {
   newsletter?: NewsletterResponse;

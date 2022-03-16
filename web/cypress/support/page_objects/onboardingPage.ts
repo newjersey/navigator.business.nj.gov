@@ -58,16 +58,16 @@ export class OnboardingPage {
 
   selectLocation(townDisplayName: string) {
     this.getLocationDropdown().type(townDisplayName);
-    cy.get("#mui-2-option-0").click({ force: true });
+    cy.get("#municipality-option-0").click({ force: true });
   }
 
   selectRandomLocation() {
     this.getLocationDropdown().click();
-    cy.get("#mui-2-listbox")
+    cy.get("#municipality-listbox")
       .find("li")
       .then((list) => {
         const num = random(list.length - 1);
-        cy.get(`#mui-2-option-${num}`).click({ force: true });
+        cy.get(`#municipality-option-${num}`).click({ force: true });
       });
   }
 }
@@ -93,12 +93,12 @@ class OnboardingPageWithElementsNotInProfile extends OnboardingPage {
     return cy.get("#contactMeCheckbox");
   }
 
-  checkNewsletterCheckbox() {
-    this.getNewsletterCheckbox().check();
+  toggleNewsletterCheckbox(check = true) {
+    check ? this.getNewsletterCheckbox().check() : this.getNewsletterCheckbox().uncheck();
   }
 
-  checkContactMeCheckbox() {
-    this.getContactMeCheckbox().check();
+  toggleContactMeCheckbox(check = true) {
+    check ? this.getContactMeCheckbox().check() : this.getContactMeCheckbox().uncheck();
   }
 
   typeFullName(name: string) {

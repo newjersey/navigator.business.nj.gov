@@ -1,6 +1,6 @@
 import { generateNameAndAddress, generateUser, generateUserData } from "@/test/factories";
 import axios from "axios";
-import { checkLicenseStatus, get, getUserData, postUserData } from "./apiClient";
+import { checkLicenseStatus, get, getUserData, postNewsletter, postUserData } from "./apiClient";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -47,5 +47,12 @@ describe("apiClient", () => {
     expect(mockAxios.post).toHaveBeenCalledWith("/api/license-status", nameAndAddress, {
       headers: { Authorization: "Bearer some-token" },
     });
+  });
+
+  it("posts user data without token", async () => {
+    const userData = generateUserData({ user: generateUser({ id: "456" }) });
+    mockAxios.post.mockResolvedValue({ data: userData });
+    expect(await postNewsletter(userData)).toEqual(userData);
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/ext/newsletter", userData, {});
   });
 });

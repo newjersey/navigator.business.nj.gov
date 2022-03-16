@@ -1,10 +1,7 @@
 import { UserData } from "@shared/userData";
-import { AddToUserTesting, UserDataClient, UserTestingClient } from "../types";
+import { AddToUserTesting, UserTestingClient } from "../types";
 
-export const addToUserTestingFactory = (
-  userDataClient: UserDataClient,
-  userTestingClient: UserTestingClient
-): AddToUserTesting => {
+export const addToUserTestingFactory = (userTestingClient: UserTestingClient): AddToUserTesting => {
   return async (userData: UserData): Promise<UserData> => {
     const userTesting = await userTestingClient.add(userData.user);
     const user: UserData = {
@@ -17,6 +14,6 @@ export const addToUserTestingFactory = (
         },
       },
     };
-    return userDataClient.put(user);
+    return user;
   };
 };

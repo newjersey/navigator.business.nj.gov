@@ -15,6 +15,13 @@ export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
     {
       http: {
         method: "ANY",
+        path: "/api/ext/{proxy+}",
+        cors: true,
+      },
+    },
+    {
+      http: {
+        method: "ANY",
         path: "/{proxy+}",
         authorizer: {
           arn: cognitoArn,
