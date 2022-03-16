@@ -23050,13 +23050,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^2.0.0":
-  version: 2.1.11
-  resolution: "nanoid@npm:2.1.11"
-  checksum: 18cd14386816873849787eb4e65667021bfdeb019a8f14c74287c23594c67b7c0e8f42c7d69f6aedf05cd3d100f1ddc41184f9f9b6b17fbaea1c3ee3f0704eec
-  languageName: node
-  linkType: hard
-
 "nanoid@npm:^3.1.23, nanoid@npm:^3.3.1":
   version: 3.3.1
   resolution: "nanoid@npm:3.3.1"
@@ -23127,15 +23120,15 @@ __metadata:
   linkType: hard
 
 "nc@git+https://github.com/dsueltenfuss/nc.git":
-  version: 1.0.3
-  resolution: "nc@https://github.com/dsueltenfuss/nc.git#commit=059381be09bc2e934c3eea1f5f2af05aad3e0eca"
+  version: 1.0.4
+  resolution: "nc@https://github.com/dsueltenfuss/nc.git#commit=c1b8baf157cbd94a3142dc90c0d530bd2ee5f0a0"
   dependencies:
-    debug: ^4.1.1
-    netcat: ^1.4.0
-    yargs: ^17.2.1
+    debug: ^4.3.3
+    netcat: "git+https://github.com/dsueltenfuss/netcat.git"
+    yargs: ^17.3.1
   bin:
     nc: ./bin/nc.js
-  checksum: 6ad3607d800af04c4e274ca99e5362ab62438042ec748e74a27df545f00887f49b397f3c5eee0214c38a806ca7f7a5a2b2899019c5811756c23584716ff6612d
+  checksum: 553966d03404ff138e71150e7769b21ad0060e598bc235eda9c95db6d7987b00dfa5cb689563acd2589fc8f00c5d095110f9459ecd9f19f1f20a707c5df9f2a5
   languageName: node
   linkType: hard
 
@@ -23196,17 +23189,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netcat@npm:^1.4.0":
-  version: 1.5.0
-  resolution: "netcat@npm:1.5.0"
+"netcat@git+https://github.com/dsueltenfuss/netcat.git":
+  version: 1.5.1
+  resolution: "netcat@https://github.com/dsueltenfuss/netcat.git#commit=2a9146f7a31daafb94697800cfa7e977d65ef520"
   dependencies:
     async-each-series: ^1.1.0
     datagram-stream: ^1.1.1
     debug: ^4.0.1
     hexer: ^1.5.0
-    nanoid: ^2.0.0
-    through2: ^3.0.0
-  checksum: 342ebc99c1eb74e20f7793524da1602ea9223f0cca9db5558e64f6e0c9798b0362c3651cf15e742e0a778da2fb41c4701d21795a0ebcd2d33b7041fbe68f6cfe
+    nanoid: ^3.3.1
+    through2: ^4.0.2
+  checksum: ee2c6563269813e5a0576c44fa447af5e39122d4928ab736a50673e66f837afda08c110cf5a2c51ffa2627bc151b10d348a731c54f2026192b1f6e450220d050
   languageName: node
   linkType: hard
 
@@ -27748,7 +27741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:2 || 3, readable-stream@npm:3, readable-stream@npm:^3.0.0, readable-stream@npm:^3.0.2, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.6.0":
+"readable-stream@npm:3, readable-stream@npm:^3.0.0, readable-stream@npm:^3.0.2, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.6.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
   dependencies:
@@ -31204,17 +31197,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"through2@npm:^3.0.0":
-  version: 3.0.2
-  resolution: "through2@npm:3.0.2"
-  dependencies:
-    inherits: ^2.0.4
-    readable-stream: 2 || 3
-  checksum: 47c9586c735e7d9cbbc1029f3ff422108212f7cc42e06d5cc9fff7901e659c948143c790e0d0d41b1b5f89f1d1200bdd200c7b72ad34f42f9edbeb32ea49e8b7
-  languageName: node
-  linkType: hard
-
-"through2@npm:^4.0.0":
+"through2@npm:^4.0.0, through2@npm:^4.0.2":
   version: 4.0.2
   resolution: "through2@npm:4.0.2"
   dependencies:
@@ -33768,7 +33751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.0.0, yargs@npm:^17.2.1":
+"yargs@npm:^17.0.0, yargs@npm:^17.3.1":
   version: 17.3.1
   resolution: "yargs@npm:17.3.1"
   dependencies:
