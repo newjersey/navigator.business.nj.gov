@@ -1,3 +1,17 @@
+## [2.4.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.4.0...v2.4.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* updating Contextual Information cannabis-conditional-license ([#2030](https://github.com/newjersey/navigator.business.nj.gov/issues/2030)) ([a742227](https://github.com/newjersey/navigator.business.nj.gov/commit/a7422278e36014a31bdefa6f958ace32c57ce999))
+* updating Industry Roadmaps cannabis ([1e78112](https://github.com/newjersey/navigator.business.nj.gov/commit/1e78112f5988298b300820e6949ac84e417930eb))
+* updating Roadmap Add-ons cannabis-conditional ([#2033](https://github.com/newjersey/navigator.business.nj.gov/issues/2033)) ([f6c79d0](https://github.com/newjersey/navigator.business.nj.gov/commit/f6c79d0332ef10412ce44b7dfd85359016bf6c0c))
+* updating Roadmap Settings task-dependencies ([#2031](https://github.com/newjersey/navigator.business.nj.gov/issues/2031)) ([4643141](https://github.com/newjersey/navigator.business.nj.gov/commit/46431415ed036cbba2f613651ee603f6bab0d9d4))
+* updating Tasks annual-license-cannabis ([#2027](https://github.com/newjersey/navigator.business.nj.gov/issues/2027)) ([ba86454](https://github.com/newjersey/navigator.business.nj.gov/commit/ba86454cb9356180d2756f6b591deca6d0da1289))
+* updating Tasks conditional-permit-cannabis ([#2029](https://github.com/newjersey/navigator.business.nj.gov/issues/2029)) ([75d1eff](https://github.com/newjersey/navigator.business.nj.gov/commit/75d1eff226adad7f14659e51fe12d63f75343979))
+* updating Tasks conditional-permit-cannabis ([#2035](https://github.com/newjersey/navigator.business.nj.gov/issues/2035)) ([11c7072](https://github.com/newjersey/navigator.business.nj.gov/commit/11c7072eaa0e32a87101d4fb5c977b2ce8f68469))
+* updating Tasks priority-status-cannabis ([#2028](https://github.com/newjersey/navigator.business.nj.gov/issues/2028)) ([723105f](https://github.com/newjersey/navigator.business.nj.gov/commit/723105fa4dccc2521b7f8fe5b7f7cbd4a411ef2b))
+
 # [2.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.3.0...v2.4.0) (2022-03-15)
 
 
