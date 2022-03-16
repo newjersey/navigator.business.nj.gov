@@ -216,65 +216,70 @@ collections:
               - { label: Member - Success Message Body, name: membersSuccessTextBody, widget: string }
               - { label: Member - Success Message Header, name: membersSuccessTextHeader, widget: string }
               - { label: Member - Table Column Headers, name: membersTableColumn, widget: string }
-              - { label: Memeber - Add Member Button, name: membersNewButtonText, widget: string }
+              - { label: Member - Add Member Button, name: membersNewButtonText, widget: string }
               - {
-                  label: Memeber Modal - Name Label,
+                  label: Member Modal - Name Label,
                   name: memberModalNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - { label: Memeber Modal - Name Placeholder, name: memberModalNamePlaceholder, widget: string }
+              - { label: Member Modal - Name Placeholder, name: memberModalNamePlaceholder, widget: string }
               - {
-                  label: Memeber Modal - Address Line 1 Label,
+                  label: Member Modal - Address Line 1 Label,
                   name: memberModalAddressLine1Label,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Memeber Modal - Address Line 1 Placeholder,
+                  label: Member Modal - Address Line 1 Placeholder,
                   name: memberModalAddressLine1Placeholder,
                   widget: string,
                 }
               - {
-                  label: Memeber Modal - Address Line 2 Label,
+                  label: Member Modal - Address Line 2 Label,
                   name: memberModalAddressLine2Label,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Memeber Modal - Address Line 2 Placeholder,
+                  label: Member Modal - Address Line 2 Placeholder,
                   name: memberModalAddressLine2Placeholder,
                   widget: string,
                 }
               - {
-                  label: Memeber Modal - City Label,
+                  label: Member Modal - City Label,
                   name: memberModalCityLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - { label: Memeber Modal - City Placeholder, name: memberModalCityPlaceholder, widget: string }
+              - { label: Member Modal - City Placeholder, name: memberModalCityPlaceholder, widget: string }
               - {
-                  label: Memeber Modal - State Label,
+                  label: Member Modal - State Label,
                   name: memberModalStateLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Memeber Modal - State Placeholder,
+                  label: Member Modal - State Placeholder,
                   name: memberModalStatePlaceholder,
                   widget: string,
                 }
               - {
-                  label: Memeber Modal - Zip Code Label,
+                  label: Member Modal - Zip Code Label,
                   name: memberModalZipCodeLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Memeber Modal - Zip Code Placeholder,
+                  label: Member Modal - Zip Code Placeholder,
                   name: memberModalZipCodePlaceholder,
                   widget: string,
                 }
+              - { label: Name Check Placeholder Text, name: nameCheckPlaceholderText, widget: string }
+              - { label: Name Check Validation Text, name: nameCheckValidationErrorText, widget: string }
+              - { label: Name Check Unavailable Text, name: nameCheckUnavailableText, widget: string }
+              - { label: Name Check Available Text, name: nameCheckAvailableText, widget: string }
+              - { label: Name Check Field Label, name: nameCheckFieldLabel, widget: string }
               - { label: Next Button Text, name: nextButtonText, widget: string }
               - {
                   label: Opt In - Annual Report Text,
@@ -474,6 +479,8 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
+              - { label: Same Agent Info As Account, name: sameAgentInfoAsAccount, widget: string }
+              - { label: Same Agent Address As Business, name: sameAgentAddressAsBusiness, widget: string }
               - {
                   label: Signer - Label,
                   name: signerLabel,
@@ -695,6 +702,9 @@ collections:
               - { label: Graduation Header, name: graduationHeader, widget: string }
               - { label: Graduation Body, name: graduationBodyText, widget: string }
               - { label: Graduation Button, name: graduationButtonText, widget: string }
+              - { label: Graduation Modal Continue Button Text, name: graduationModalContinueButtonText, widget: string }
+              - { label: Graduation Modal Cancel Button Text, name: graduationModalCancelButtonText, widget: string }
+              - { label: Graduation Modal Title, name: graduationModalTitle, widget: string }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true
