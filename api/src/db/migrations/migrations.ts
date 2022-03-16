@@ -38,6 +38,7 @@ import { migrate_v40_to_v41 } from "./v41_remove_operate_section";
 import { migrate_v41_to_v42 } from "./v42_add_sector_to_profile_data";
 import { migrate_v42_to_v43 } from "./v43_add_initial_flow_to_profile_data";
 import { migrate_v43_to_v44 } from "./v44_add_cannabis_license_to_profile_data";
+import { migrate_v44_to_v45 } from "./v45_add_hidden_opportunities_to_preferences";
 import { migrate_v3_to_v4 } from "./v4_add_municipality";
 import { migrate_v4_to_v5 } from "./v5_add_liquor_license";
 import { migrate_v5_to_v6 } from "./v6_add_home_based_business";
@@ -93,6 +94,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v41_to_v42,
   migrate_v42_to_v43,
   migrate_v43_to_v44,
+  migrate_v44_to_v45,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

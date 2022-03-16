@@ -8,7 +8,8 @@ interface Props {
     | "primary-big"
     | "secondary-big"
     | "secondary-input-field-height"
-    | "primary-input-field-height";
+    | "primary-input-field-height"
+    | "narrow-light";
   children: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
   dataTestid?: string;
@@ -48,6 +49,10 @@ export const Button = (props: Props): ReactElement => {
       break;
     case "tertiary":
       style = "usa-button usa-button--unstyled";
+      break;
+    case "narrow-light":
+      style =
+        "usa-button usa-tag bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button";
       break;
   }
   const showDisabledClass = props.loading ? disabledClass : "";

@@ -1,11 +1,10 @@
-import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
-import { filterFundings } from "@/lib/domain-logic/filterFundings";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
 import {
   generateCertification,
   generateFunding,
+  generatePreferences,
   generateProfileData,
   generateTaxFiling,
   generateTaxFilingData,
@@ -23,7 +22,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
+import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import dayjs from "dayjs";
 import React from "react";
 
@@ -76,8 +75,10 @@ describe("dashboard", () => {
 
   const renderWithUserData = (
     userData: UserData,
-    fundings: Funding[] = [],
-    certifications: Certification[] = []
+    overrides: {
+      fundings?: Funding[];
+      certifications?: Certification[];
+    }
   ) => {
     return render(
       <WithStatefulUserData initialUserData={userData}>
@@ -85,8 +86,8 @@ describe("dashboard", () => {
           <DashboardPage
             displayContent={emptyDisplayContent}
             operateReferences={emptyOperateRef}
-            fundings={fundings}
-            certifications={certifications}
+            fundings={overrides.fundings ?? []}
+            certifications={overrides.certifications ?? []}
           />
         </ThemeProvider>
       </WithStatefulUserData>
@@ -171,6 +172,7 @@ describe("dashboard", () => {
         ownershipTypeIds: ["disabled-veteran"],
       }),
     });
+
     const fundings = [
       generateFunding({ name: "Funding 1", sector: ["construction"], status: "closed" }), // Filtered out
       generateFunding({ name: "Funding 2", sector: ["construction"], status: "open" }),
@@ -185,14 +187,9 @@ describe("dashboard", () => {
     ];
 
     setupStatefulUserDataContext();
-    const subject = renderWithUserData(initialUserData, fundings, certifications);
+    const subject = renderWithUserData(initialUserData, { fundings, certifications });
 
-    const filteredFundings = filterFundings(fundings, initialUserData);
-    const filteredCertifications = filterCertifications(certifications, initialUserData);
-
-    const label = templateEval(Config.dashboardDefaults.opportunitiesCount, {
-      count: String(filteredFundings.length + filteredCertifications.length),
-    });
+    const label = templateEval(Config.dashboardDefaults.opportunitiesCount, { count: "5" });
     expect(subject.getByText(label)).toBeInTheDocument();
   });
 
@@ -245,25 +242,21 @@ describe("dashboard", () => {
   });
 
   it("links to task page for fundings", () => {
-    useMockProfileDataForUnfilteredOpportunities();
+    useMockProfileData(profileDataForUnfilteredOpportunities);
     const fundings = [generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "open" })];
-
     const subject = renderPage({ fundings });
-
     expect(subject.getByText("Funding Opp").getAttribute("href")).toEqual("/funding/opp");
   });
 
   it("links to task page for certifications", () => {
-    useMockProfileDataForUnfilteredOpportunities();
+    useMockProfileData(profileDataForUnfilteredOpportunities);
     const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1" })];
-
     const subject = renderPage({ certifications });
-
     expect(subject.getByText("Cert 1").getAttribute("href")).toEqual("/certification/cert1");
   });
 
   it("displays first 150 characters of funding description", () => {
-    useMockProfileDataForUnfilteredOpportunities();
+    useMockProfileData(profileDataForUnfilteredOpportunities);
     const opp1Characters = Array(151).fill("a").join("");
     const opp1ExpectedTextOnPage = `${Array(150).fill("a").join("")}...`;
 
@@ -280,7 +273,7 @@ describe("dashboard", () => {
   });
 
   it("truncates markdown without showing characters on page", () => {
-    useMockProfileDataForUnfilteredOpportunities();
+    useMockProfileData(profileDataForUnfilteredOpportunities);
     const characters = Array(145).fill("a").join("");
     const boldContent = `${characters} *a bold text*`;
     const linkContent = `${characters} [a link text](www.example.com)`;
@@ -310,7 +303,7 @@ describe("dashboard", () => {
       }),
     });
     setupStatefulUserDataContext();
-    const subject = renderWithUserData(initialUserData);
+    const subject = renderWithUserData(initialUserData, {});
     expect(subject.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).toBeInTheDocument();
 
     fireEvent.click(subject.getByText(Config.dashboardDefaults.backToRoadmapLinkText));
@@ -330,13 +323,120 @@ describe("dashboard", () => {
     expect(subject.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).not.toBeInTheDocument();
   });
 
-  const useMockProfileDataForUnfilteredOpportunities = () => {
-    useMockProfileData({
-      homeBasedBusiness: false,
-      municipality: undefined,
-      existingEmployees: "1",
-      sectorId: undefined,
-      ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
+  describe("hiding opportunities", () => {
+    let subject: RenderResult;
+    const headerWithCount = (count: number): string =>
+      templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: `${count}` });
+    const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1", id: "cert1-id" })];
+    const fundings = [generateFunding({ urlSlug: "fund1", name: "Fund 1", id: "fund1-id" })];
+
+    beforeEach(() => {
+      setupStatefulUserDataContext();
     });
-  };
+
+    it("moves an opportunity to/from Hidden accordion when hide/unhide is clicked", () => {
+      subject = renderWithUserData(generateUserData({ profileData: profileDataForUnfilteredOpportunities }), {
+        certifications,
+        fundings,
+      });
+
+      let funding1 = within(subject.getByTestId("fund1-id"));
+      let visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
+      let hiddenOpportunities = within(subject.getByTestId("hidden-opportunities"));
+
+      expect(subject.queryByText(headerWithCount(0))).toBeInTheDocument();
+      expect(subject.queryByText(headerWithCount(1))).not.toBeInTheDocument();
+
+      expect(visibleOpportunities.queryByText("Fund 1")).toBeInTheDocument();
+      expect(visibleOpportunities.queryByText("Cert 1")).toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
+
+      fireEvent.click(funding1.getByText(Config.dashboardDefaults.hideOpportunityText));
+      funding1 = within(subject.getByTestId("fund1-id"));
+      visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
+      hiddenOpportunities = within(subject.getByTestId("hidden-opportunities"));
+
+      expect(subject.queryByText(headerWithCount(0))).not.toBeInTheDocument();
+      expect(subject.queryByText(headerWithCount(1))).toBeInTheDocument();
+
+      expect(visibleOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
+      expect(visibleOpportunities.queryByText("Cert 1")).toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Fund 1")).toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
+
+      fireEvent.click(funding1.getByText(Config.dashboardDefaults.unhideOpportunityText));
+      visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
+      hiddenOpportunities = within(subject.getByTestId("hidden-opportunities"));
+
+      expect(subject.queryByText(headerWithCount(0))).toBeInTheDocument();
+      expect(subject.queryByText(headerWithCount(1))).not.toBeInTheDocument();
+
+      expect(visibleOpportunities.queryByText("Fund 1")).toBeInTheDocument();
+      expect(visibleOpportunities.queryByText("Cert 1")).toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
+    });
+
+    it("saves hidden opportunities to user data", () => {
+      const initialUserData = generateUserData({
+        profileData: profileDataForUnfilteredOpportunities,
+        preferences: generatePreferences({
+          hiddenCertificationIds: [],
+          hiddenFundingIds: [],
+        }),
+      });
+
+      subject = renderWithUserData(initialUserData, { certifications, fundings });
+      const funding1 = within(subject.getByTestId("fund1-id"));
+
+      fireEvent.click(funding1.getByText(Config.dashboardDefaults.hideOpportunityText));
+      expect(currentUserData()).toEqual({
+        ...initialUserData,
+        preferences: {
+          ...initialUserData.preferences,
+          hiddenFundingIds: ["fund1-id"],
+        },
+      });
+    });
+
+    it("hides opportunities from user data", () => {
+      const initialUserData = generateUserData({
+        profileData: profileDataForUnfilteredOpportunities,
+        preferences: generatePreferences({
+          hiddenCertificationIds: [],
+          hiddenFundingIds: ["fund1-id"],
+        }),
+      });
+
+      subject = renderWithUserData(initialUserData, { certifications, fundings });
+      const visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
+
+      expect(subject.queryByText(headerWithCount(0))).not.toBeInTheDocument();
+      expect(subject.queryByText(headerWithCount(1))).toBeInTheDocument();
+      expect(visibleOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
+      expect(visibleOpportunities.queryByText("Cert 1")).toBeInTheDocument();
+    });
+
+    it("displays empty state when all opportunities are hidden", () => {
+      const initialUserData = generateUserData({
+        profileData: profileDataForUnfilteredOpportunities,
+        preferences: generatePreferences({
+          hiddenCertificationIds: ["cert1-id"],
+          hiddenFundingIds: ["fund1-id"],
+        }),
+      });
+
+      subject = renderWithUserData(initialUserData, { certifications, fundings });
+      expect(subject.queryByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).toBeInTheDocument();
+    });
+  });
+
+  const profileDataForUnfilteredOpportunities = generateProfileData({
+    homeBasedBusiness: false,
+    municipality: undefined,
+    existingEmployees: "1",
+    sectorId: undefined,
+    ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
+  });
 });

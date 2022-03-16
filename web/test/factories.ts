@@ -161,6 +161,8 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
   return {
     roadmapOpenSections: ["PLAN", "START"],
     roadmapOpenSteps: [randomInt()],
+    hiddenFundingIds: [],
+    hiddenCertificationIds: [],
     ...overrides,
   };
 };
@@ -432,7 +434,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     publishStageArchive: null,
     openDate: dayjs().toISOString(),
     dueDate: dayjs().toISOString(),
-    status: randomFundingStatus(),
+    status: "open",
     programFrequency: randomFundingProgramFrequency(),
     businessStage: randomFundingBusinessStage(),
     employeesRequired: ">200",

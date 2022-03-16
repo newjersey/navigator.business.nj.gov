@@ -1,8 +1,8 @@
-import { County, Funding, FundingStatusOrder } from "@/lib/types/types";
+import { County, Funding } from "@/lib/types/types";
 import { UserData } from "@businessnjgovnavigator/shared";
 
 export const filterFundings = (fundings: Funding[], userData: UserData): Funding[] => {
-  const filtered = fundings.filter((it) => {
+  return fundings.filter((it) => {
     if (it.publishStageArchive === "Do Not Publish") return false;
 
     if (userData.profileData.homeBasedBusiness && it.homeBased !== "yes" && it.homeBased !== "unknown")
@@ -15,6 +15,7 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
       )
         return false;
     }
+
     if (userData.profileData.sectorId && it.sector.length > 0) {
       const sectorRegex = new RegExp(it.sector.join("|"), "i");
       if (!sectorRegex.test(userData.profileData.sectorId)) return false;
@@ -28,15 +29,5 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
     if (it.status === "closed" || it.status === "opening soon") return false;
 
     return true;
-  });
-
-  return filtered.sort((a, b) => {
-    const nameA = a.name.toUpperCase(); // ignore upper and lowercase
-    const nameB = b.name.toUpperCase();
-    if (FundingStatusOrder[a.status] < FundingStatusOrder[b.status]) return -1;
-    else if (FundingStatusOrder[a.status] > FundingStatusOrder[b.status]) return 1;
-    else if (nameA < nameB) return -1;
-    else if (nameA > nameB) return 1;
-    return 0;
   });
 };
