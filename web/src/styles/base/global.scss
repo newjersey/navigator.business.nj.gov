@@ -41,6 +41,25 @@ hr {
   font-weight: unset;
 }
 
+.weight-unset-override {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-weight: unset !important;
+  }
+}
+
+.override-p-2xs {
+  p,
+  ul,
+  li,
+  ol {
+    font-size: 0.88rem !important;
+  }
+}
+
 .weight-inherit {
   font-weight: inherit !important;
 }

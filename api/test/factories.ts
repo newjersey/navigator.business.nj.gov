@@ -171,6 +171,8 @@ export const generatePreferences = (): Preferences => {
   return {
     roadmapOpenSections: ["PLAN", "START"],
     roadmapOpenSteps: [],
+    hiddenFundingIds: [],
+    hiddenCertificationIds: [],
   };
 };
 

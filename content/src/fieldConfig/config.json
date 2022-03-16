@@ -191,7 +191,12 @@
     "certificationTagText": "Certification",
     "headerText": "Hello, ${name}",
     "opportunitiesHeader": "Opportunities",
-    "opportunitiesCount": "${count} Total"
+    "opportunitiesCount": "${count} Total",
+    "hiddenOpportunitiesHeader": "View Hidden Opportunities (${count})",
+    "hideOpportunityText": "Hide",
+    "unhideOpportunityText": "Unhide",
+    "emptyOpportunitiesHeader": "No matching opportunities yet.",
+    "emptyOpportunitiesText": "If you're seeing this, you might have hidden all your opportunities. Don't worry, you can view all hidden opportunities below."
   },
   "landingPage": {
     "column1Image": "../img/Not-Starting-1-visit-site.svg",

@@ -496,6 +496,12 @@ collections:
               - { label: Missing Name Header Text, name: missingNameHeaderText, widget: string }
               - { label: Edit Profile Text, name: editProfileText, widget: string }
               - { label: Opportunities Header, name: opportunitiesHeader, widget: string }
+              - { label: Opportunities Count, name: opportunitiesCount, widget: string }
+              - { label: Hidden Opportunities Header, name: hiddenOpportunitiesHeader, widget: string }
+              - { label: Hide Opportunity Text, name: hideOpportunityText, widget: string }
+              - { label: Unhide Opportunity Text, name: unhideOpportunityText, widget: string }
+              - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: string }
+              - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
               - { label: Funding Tag Text, name: fundingTagText, widget: string }
               - { label: Certification Tag Text, name: certificationTagText, widget: string }
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }

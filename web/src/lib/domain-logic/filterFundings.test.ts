@@ -192,27 +192,4 @@ describe("filterFundings", () => {
     expect(result.length).toEqual(4);
     expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
   });
-
-  it("sorts fundings by status first then alphabetically", () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        homeBasedBusiness: false,
-        municipality: generateMunicipality({ county: "Atlantic" }),
-        sectorId: undefined,
-        existingEmployees: "1",
-      }),
-    });
-
-    const funding1 = generateFunding({ county: [], name: "bca", status: "deadline" });
-    const funding2 = generateFunding({ county: [], name: "abc", status: "deadline" });
-    const funding3 = generateFunding({ county: [], name: "cba", status: "deadline" });
-    const funding4 = generateFunding({ county: [], name: "abc", status: "first-come, first-served" });
-    const funding5 = generateFunding({ county: [], name: "cba", status: "closed" });
-    const funding6 = generateFunding({ county: [], name: "bca", status: "open" });
-    const fundings = [funding6, funding2, funding5, funding3, funding1, funding4];
-
-    const result = filterFundings(fundings, userData);
-    expect(result.length).toEqual(5);
-    expect(result).toEqual([funding2, funding1, funding3, funding4, funding6]);
-  });
 });

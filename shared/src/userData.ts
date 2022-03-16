@@ -25,6 +25,8 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     preferences: {
       roadmapOpenSections: ["PLAN", "START"],
       roadmapOpenSteps: [],
+      hiddenCertificationIds: [],
+      hiddenFundingIds: [],
     },
     taxFilingData: {
       filings: [],
@@ -42,6 +44,8 @@ export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 export interface Preferences {
   roadmapOpenSections: SectionType[];
   roadmapOpenSteps: number[];
+  hiddenFundingIds: string[];
+  hiddenCertificationIds: string[];
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
