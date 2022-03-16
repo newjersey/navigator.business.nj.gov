@@ -8,8 +8,7 @@ callToActionText: Apply for My Conditional Cannabis License
 required: true
 issuingAgency: Cannabis Regulatory Commission
 ---
-
-If you are looking to get a cannabis license, read the [application acceptance criteria and process](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf) and [visit the Recreational Cannabis Businesses Site](https://www.nj.gov/cannabis/businesses/index.shtml) to become familiar with the process and requirements. Applications are reviewed on an ongoing basis, you can apply at any time.
+Cannabis licenses are reviewed on an ongoing basis and you can apply at any time.
 
 ---
 
