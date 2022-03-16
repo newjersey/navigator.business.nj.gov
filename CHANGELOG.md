@@ -1,3 +1,10 @@
+## [2.4.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.4.1...v2.4.2) (2022-03-16)
+
+
+### Bug Fixes
+
+* correct a typo on the landing page ([be90310](https://github.com/newjersey/navigator.business.nj.gov/commit/be9031061034c5c7aa68b90ffa8c1e18a8f74ca2))
+
 ## [2.4.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.4.0...v2.4.1) (2022-03-16)
 
 
