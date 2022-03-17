@@ -649,7 +649,6 @@ workflows:
             branches:
               only:
                 - main
-                - 1515/mdeeb/guestmode
           requires:
             - build
       - smoke-tests:
