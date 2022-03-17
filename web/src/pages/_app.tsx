@@ -25,11 +25,11 @@ import React, {
 } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
-import { UserDataStorage } from "@/lib/utils/storage-helpers";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { SignUpToast } from "@/components/auth/SignUpToast";
 import { SignUpModal } from "@/components/auth/SignUpModal";
 import { SelfRegToast } from "@/components/auth/SelfRegToast";
+import { UserDataStorage } from "@/lib/utils/userDataStorage";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

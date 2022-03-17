@@ -28,7 +28,6 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
-
 const date = dayjs().subtract(1, "month").date(1);
 describe("onboarding - shared", () => {
   beforeEach(() => {
@@ -100,31 +99,8 @@ describe("onboarding - shared", () => {
   it("updates locally for each step", async () => {
     const userData = generateUserData({});
     const { page } = renderPage({ userData });
-    mockApi.postNewsletter.mockImplementation((request) =>
-      Promise.resolve({
-        ...request,
-        user: {
-          ...request.user,
-          externalStatus: {
-            ...request.user.externalStatus,
-            newsletter: { status: "SUCCESS", success: true },
-          },
-        },
-      })
-    );
-
-    mockApi.postUserTesting.mockImplementation((request) =>
-      Promise.resolve({
-        ...request,
-        user: {
-          ...request.user,
-          externalStatus: {
-            ...request.user.externalStatus,
-            userTesting: { status: "SUCCESS", success: true },
-          },
-        },
-      })
-    );
+    mockApi.postNewsletter.mockImplementation((request) => Promise.resolve(request));
+    mockApi.postUserTesting.mockImplementation((request) => Promise.resolve(request));
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
     expect(getLastCalledWithConfig().local).toEqual(true);

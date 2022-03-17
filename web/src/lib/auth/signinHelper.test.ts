@@ -8,7 +8,7 @@ const userDataStorage = {
   delete: jest.fn(),
 };
 
-jest.mock("@/lib/utils/storage-helpers", () => ({
+jest.mock("@/lib/utils/userDataStorage", () => ({
   UserDataStorage: jest.fn(() => userDataStorage),
 }));
 

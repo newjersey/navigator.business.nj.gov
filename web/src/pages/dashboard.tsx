@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { OpportunitiesList } from "@/components/dashboard/OpportunitiesList";
 import { UnGraduationBox } from "@/components/dashboard/UnGraduationBox";
 import { NavBar } from "@/components/navbar/NavBar";
+import { Button } from "@/components/njwds-extended/Button";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
@@ -70,17 +71,15 @@ const DashboardPage = (props: Props): ReactElement => {
                   </h1>
                   <Content>{props.displayContent.introTextMd}</Content>
 
-                  <p>
-                    <button
-                      role="link"
-                      style={{ border: 0, cursor: "pointer", backgroundColor: "transparent" }}
-                      className="usa-link"
-                      onClick={editOnClick}
-                      data-testid="grey-callout-link"
-                    >
-                      {Config.dashboardDefaults.editProfileText}
-                    </button>
-                  </p>
+                  <Button
+                    style="tertiary"
+                    className="margin-y-2 margin-left-05"
+                    underline={true}
+                    onClick={editOnClick}
+                    dataTestid="grey-callout-link"
+                  >
+                    {Config.dashboardDefaults.editProfileText}
+                  </Button>
 
                   <FilingsCalendar
                     taxFilings={

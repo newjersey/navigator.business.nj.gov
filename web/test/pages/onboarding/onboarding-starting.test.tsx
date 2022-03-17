@@ -26,6 +26,32 @@ describe("onboarding - starting a business", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
+
+    mockApi.postNewsletter.mockImplementation((request) =>
+      Promise.resolve({
+        ...request,
+        user: {
+          ...request.user,
+          externalStatus: {
+            ...request.user.externalStatus,
+            newsletter: { status: "SUCCESS", success: true },
+          },
+        },
+      })
+    );
+
+    mockApi.postUserTesting.mockImplementation((request) =>
+      Promise.resolve({
+        ...request,
+        user: {
+          ...request.user,
+          externalStatus: {
+            ...request.user.externalStatus,
+            userTesting: { status: "SUCCESS", success: true },
+          },
+        },
+      })
+    );
   });
 
   it("uses special template eval for step 1 label", async () => {
@@ -197,32 +223,6 @@ describe("onboarding - starting a business", () => {
           email: "email@example.com",
         },
       };
-
-      mockApi.postNewsletter.mockImplementation((request) =>
-        Promise.resolve({
-          ...request,
-          user: {
-            ...request.user,
-            externalStatus: {
-              ...request.user.externalStatus,
-              newsletter: { status: "SUCCESS", success: true },
-            },
-          },
-        })
-      );
-
-      mockApi.postUserTesting.mockImplementation((request) =>
-        Promise.resolve({
-          ...request,
-          user: {
-            ...request.user,
-            externalStatus: {
-              ...request.user.externalStatus,
-              userTesting: { status: "SUCCESS", success: true },
-            },
-          },
-        })
-      );
 
       expect(mockApi.postNewsletter).toHaveBeenCalledWith({
         ...expectedUserData,

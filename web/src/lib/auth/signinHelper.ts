@@ -2,7 +2,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions, setRegistrationDimension } from "@/lib/utils/analytics-helpers";
-import { UserDataStorage } from "@/lib/utils/storage-helpers";
+import { UserDataStorage } from "@/lib/utils/userDataStorage";
 import { AuthAlertContextType } from "@/pages/_app";
 import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared";
 import { Dispatch } from "react";
