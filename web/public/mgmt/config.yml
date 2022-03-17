@@ -55,6 +55,11 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Business Start Date Tooltip,
+                  name: businessStartDateTooltip,
+                  widget: string,
+                }
+              - {
                   label: Business Address - Header,
                   name: businessAddressHeader,
                   widget: string,
@@ -116,6 +121,11 @@ collections:
                   name: businessSuffixLabel,
                   widget: string,
                   hint: This field supports Markdown,
+                }
+              - {
+                  label: Business Suffix Tooltip,
+                  name: businessSuffixTooltip,
+                  widget: string,
                 }
               - { label: Business Suffix Placeholder, name: businessSuffixPlaceholder, widget: string }
               - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }

@@ -1,4 +1,6 @@
+import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -32,7 +34,14 @@ export const BusinessStartDate = (): ReactElement => {
 
   return (
     <>
-      <Content key="dateOfFormationMd">{Config.businessFormationDefaults.businessStartDateLabel}</Content>
+      <div className="flex">
+        <Content key="dateOfFormationMd">{Config.businessFormationDefaults.businessStartDateLabel}</Content>
+        <ArrowTooltip title={Config.businessFormationDefaults.businessStartDateTooltip}>
+          <div className="fdr fac margin-left-05" data-testid="automatic-status-info-tooltip">
+            <Icon>help_outline</Icon>
+          </div>
+        </ArrowTooltip>
+      </div>
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker
