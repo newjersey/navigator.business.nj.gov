@@ -2335,7 +2335,7 @@ __metadata:
     ts-jest: 27.1.3
     ts-loader: 9.2.8
     ts-node: 10.7.0
-    tsconfig-paths: 3.13.0
+    tsconfig-paths: 3.14.0
     tsconfig-paths-webpack-plugin: 3.5.2
     typescript: 4.6.2
     webpack: 5.70.0
@@ -2499,7 +2499,7 @@ __metadata:
     ts-jest: 27.1.3
     ts-loader: 9.2.8
     ts-node: 10.7.0
-    tsconfig-paths: 3.13.0
+    tsconfig-paths: 3.14.0
     tsconfig-paths-webpack-plugin: 3.5.2
     typescript: 4.6.2
     uuid: 8.3.2
@@ -2532,7 +2532,7 @@ __metadata:
     rimraf: 3.0.2
     ts-jest: 27.1.3
     ts-node: 10.7.0
-    tsconfig-paths: 3.13.0
+    tsconfig-paths: 3.14.0
     typescript: 4.6.2
     uuid: 8.3.2
   languageName: unknown
@@ -31671,15 +31671,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths@npm:3.13.0, tsconfig-paths@npm:^3.10.1, tsconfig-paths@npm:^3.12.0, tsconfig-paths@npm:^3.9.0":
-  version: 3.13.0
-  resolution: "tsconfig-paths@npm:3.13.0"
+"tsconfig-paths@npm:3.14.0, tsconfig-paths@npm:^3.10.1, tsconfig-paths@npm:^3.12.0, tsconfig-paths@npm:^3.9.0":
+  version: 3.14.0
+  resolution: "tsconfig-paths@npm:3.14.0"
   dependencies:
     "@types/json5": ^0.0.29
     json5: ^1.0.1
     minimist: ^1.2.0
     strip-bom: ^3.0.0
-  checksum: 64f0de3c882c016cdfe34d5261087fcf0c75048c4206ee32540e36df9f99d82d2caa5872135d3b6704324f5fd7d9032131caf316c1da83c2ac465d5dfb2aafd4
+  checksum: edd81e8f053a67e4a308037d2668c1fff06b01d4c3989170b90eb7eae5bdbebcc4910a8b7fbe0af3c21c62b68f67c1a9b9de5d9fe96cfe15ca45f7a198ee2c0c
   languageName: node
   linkType: hard
 
