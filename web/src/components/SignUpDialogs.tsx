@@ -49,7 +49,7 @@ export const SelfRegToast = (): ReactElement => {
         autoHideDuration={null}
         snackBarProps={{ sx: { paddingX: 0 } }}
       >
-        <div className="fin fac padding-y-2" data-testid={"reg-toast"}>
+        <div className="fin fac padding-y-2 padding-right-3" data-testid={"reg-toast"}>
           {alertMap[registrationAlertStatus] == "success" ? (
             <img
               src={`/img/congratulations-green.svg`}

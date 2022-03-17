@@ -37,6 +37,7 @@ export const onSelfRegister = (
   api
     .postSelfReg(userData)
     .then(async (response) => {
+      await update(response.userData);
       await replace(response.authRedirectURL);
     })
     .catch((errorCode) => {
