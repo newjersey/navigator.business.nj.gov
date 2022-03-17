@@ -48,7 +48,12 @@ export const SignUpModal = (): ReactElement => {
   }
 
   return (
-    <Dialog open={modalIsVisible} maxWidth="xs" onClose={() => undefined} data-testid={"self-reg-modal"}>
+    <Dialog
+      open={modalIsVisible}
+      maxWidth="xs"
+      onClose={() => setModalIsVisible(false)}
+      data-testid={"self-reg-modal"}
+    >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
         <Content>{Config.navigationDefaults.guestModalTitle}</Content>
         <IconButton
