@@ -1,4 +1,6 @@
+import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
+import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -27,7 +29,14 @@ export const BusinessSuffixDropdown = (): ReactElement => {
 
   return (
     <>
-      <Content>{Config.businessFormationDefaults.businessSuffixLabel}</Content>
+      <div className="flex">
+        <Content>{Config.businessFormationDefaults.businessSuffixLabel}</Content>
+        <ArrowTooltip title={Config.businessFormationDefaults.businessSuffixTooltip}>
+          <div className="fdr fac margin-left-05" data-testid="automatic-status-info-tooltip">
+            <Icon>help_outline</Icon>
+          </div>
+        </ArrowTooltip>
+      </div>
       <div className="form-input margin-bottom-2">
         <FormControl fullWidth error={state.errorMap.businessSuffix.invalid}>
           <InputLabel id="business-suffix-label" className="visibility-hidden">
