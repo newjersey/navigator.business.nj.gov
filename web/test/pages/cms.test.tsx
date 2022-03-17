@@ -5,7 +5,10 @@ import path from "path";
 describe("cms", () => {
   describe("config", () => {
     it("allows editing all config fields in the CMS", () => {
-      const cmsConfig = fs.readFileSync(path.join(process.cwd(), "public", "mgmt", "config.yml"), "utf8");
+      const cmsConfig = fs.readFileSync(
+        path.join(process.cwd(), "web", "public", "mgmt", "config.yml"),
+        "utf8"
+      );
       const defaults = Object.keys(Config);
 
       for (const defaultGroup of defaults) {
