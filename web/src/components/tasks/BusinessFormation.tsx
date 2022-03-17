@@ -1,6 +1,6 @@
+import { SignUpModalWrapper } from "@/components/auth/SignUpModal";
 import { Content } from "@/components/Content";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
-import { UseAuthModalWrapper } from "@/components/SignUpDialogs";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
@@ -151,7 +151,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setShowResponseAlert,
       }}
     >
-      <UseAuthModalWrapper>
+      <SignUpModalWrapper>
         <div className="flex flex-column  minh-37">
           <div>
             <TaskHeader task={props.task} />
@@ -176,7 +176,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
             {businessFormationTabs[tab].component}
           </div>
         </div>
-      </UseAuthModalWrapper>
+      </SignUpModalWrapper>
     </FormationContext.Provider>
   );
 };

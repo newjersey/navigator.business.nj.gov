@@ -176,7 +176,7 @@ describe("<NavBar />", () => {
       });
     });
 
-    it("sends user to selfRegistration", async () => {
+    it("sends user to selfRegistration when registration button is clicked", async () => {
       setLargeScreen(true);
       setupStatefulUserDataContext();
       const user = generateUser({ name: "John Smith", email: "test@example.com" });
@@ -313,7 +313,7 @@ describe("<NavBar />", () => {
         });
       });
 
-      it("sends user to selfRegistration", async () => {
+      it("sends user to selfRegistration when registration button is clicked", async () => {
         setLargeScreen(false);
         setupStatefulUserDataContext();
         const user = generateUser({ name: "John Smith", email: "test@example.com" });

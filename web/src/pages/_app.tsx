@@ -26,8 +26,10 @@ import React, {
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
 import { UserDataStorage } from "@/lib/utils/storage-helpers";
-import { SelfRegToast, UseAuthModal, UseAuthToast } from "@/components/SignUpDialogs";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { SignUpToast } from "@/components/auth/SignUpToast";
+import { SignUpModal } from "@/components/auth/SignUpModal";
+import { SelfRegToast } from "@/components/auth/SelfRegToast";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -318,8 +320,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                       }}
                     >
                       <ContextualInfoPanel />
-                      <UseAuthToast />
-                      <UseAuthModal />
+                      <SignUpToast />
+                      <SignUpModal />
                       <SelfRegToast />
                       <Component {...pageProps} />
                     </AuthAlertContext.Provider>

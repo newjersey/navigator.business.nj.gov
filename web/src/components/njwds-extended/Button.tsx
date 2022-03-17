@@ -35,19 +35,19 @@ export const Button = (props: Props): ReactElement => {
   switch (props.style) {
     case "primary":
       style = "usa-button padding-y-1";
-      disabledClass = " usa-button--disabled";
+      disabledClass = "usa-button--disabled";
       break;
     case "primary-input-field-height":
       style = "usa-button padding-y-2";
-      disabledClass = " usa-button--disabled padding-y-2";
+      disabledClass = "usa-button--disabled padding-y-2";
       break;
     case "secondary":
       style = "usa-button usa-button--outline padding-y-1";
-      disabledClass = " usa-button--outline-disabled";
+      disabledClass = "usa-button--outline-disabled";
       break;
     case "secondary-input-field-height":
       style = "usa-button usa-button--outline padding-y-2";
-      disabledClass = " usa-button--outline-disabled padding-y-2";
+      disabledClass = "usa-button--outline-disabled padding-y-2";
       break;
     case "tertiary":
       style = "usa-button usa-button--unstyled";
@@ -66,17 +66,37 @@ export const Button = (props: Props): ReactElement => {
     }
   }, [height, width, props.loading, disabledClass]);
 
+  const getRightMargin = () => {
+    if (props.style === "tertiary") return "margin-right-0";
+    return props.noRightMargin ? "margin-right-0" : "margin-right-2";
+  };
+  const heightAutoOnMobile = props.heightAutoOnMobile ? "height-auto" : "";
+  const widthAutoOnMobile = props.widthAutoOnMobile ? "width-auto" : "";
+  const noRightMargin = getRightMargin();
+  const underline = props.underline ? "underline" : "";
+  const smallText = props.smallText ? "font-body-2xs" : "";
+  const textBold = props.textBold ? "textBold" : "";
+  const intercomButton = props.intercomButton ? "intercom-button" : "";
+
+  const className = [
+    style,
+    props.className,
+    heightAutoOnMobile,
+    widthAutoOnMobile,
+    noRightMargin,
+    underline,
+    smallText,
+    textBold,
+    intercomButton,
+    showDisabledClass,
+  ]
+    .map((i) => i?.trim())
+    .filter((value: string | undefined) => value && value.length > 0)
+    .join(" ");
+
   return (
     <button
-      className={`${style} ${props.className ?? ""} ${props.heightAutoOnMobile ? "height-auto" : ""}${
-        props.noRightMargin && props.style !== "tertiary" ? " margin-right-0" : ""
-      }${!props.noRightMargin && props.style !== "tertiary" ? " margin-right-2" : ""}${
-        props.style === "tertiary" ? " margin-right-0" : ""
-      }${props.underline ? " underline" : ""}${props.smallText ? " font-body-2xs" : ""}${
-        props.textBold ? " text-bold" : ""
-      }${props.widthAutoOnMobile ? " width-auto" : ""}${showDisabledClass}${
-        props.intercomButton ? " intercom-button" : ""
-      }`}
+      className={className}
       onClick={props.onClick}
       {...(props.typeSubmit ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}

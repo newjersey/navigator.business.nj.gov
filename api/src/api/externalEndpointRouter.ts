@@ -5,7 +5,7 @@ import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types
 import { shouldAddToUserTesting } from "../domain/user-testing/shouldAddToUserTesting";
 import { getSignedInUserId } from "./userRouter";
 
-export const externalEndpointFactory = (
+export const externalEndpointRouterFactory = (
   userDataClient: UserDataClient,
   addNewsletter: AddNewsletter,
   addToUserTesting: AddToUserTesting
@@ -24,20 +24,14 @@ export const externalEndpointFactory = (
     if (shouldAddToNewsletter(userData)) {
       userData = await addNewsletter(userData);
       if (!isAnonymous) {
-        userDataClient
-          .put(userData)
-          .then((result: UserData) => {
-            res.json(result);
-          })
-          .catch((error) => {
-            res.status(500).json({ error });
-          });
-      } else {
-        res.json(userData);
+        try {
+          userData = await userDataClient.put(userData);
+        } catch (error) {
+          res.status(500).json({ error });
+        }
       }
-    } else {
-      res.json(userData);
     }
+    res.json(userData);
   });
 
   router.post("/userTesting", async (req, res) => {
@@ -51,22 +45,15 @@ export const externalEndpointFactory = (
 
     if (shouldAddToUserTesting(userData)) {
       userData = await addToUserTesting(userData);
-
       if (!isAnonymous) {
-        userDataClient
-          .put(userData)
-          .then((result: UserData) => {
-            res.json(result);
-          })
-          .catch((error) => {
-            res.status(500).json({ error });
-          });
-      } else {
-        res.json(userData);
+        try {
+          userData = await userDataClient.put(userData);
+        } catch (error) {
+          res.status(500).json({ error });
+        }
       }
-    } else {
-      res.json(userData);
     }
+    res.json(userData);
   });
 
   return router;

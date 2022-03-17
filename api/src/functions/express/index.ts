@@ -15,7 +15,7 @@ export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
     {
       http: {
         method: "ANY",
-        path: "/api/ext/{proxy+}",
+        path: "/api/external/{proxy+}",
         cors: true,
       },
     },

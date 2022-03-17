@@ -29,10 +29,10 @@ export const getCompletedFiling = (): Promise<UserData> => {
 };
 
 export const postNewsletter = async (userData: UserData): Promise<UserData> => {
-  return post(`/ext/newsletter`, userData, false);
+  return post(`/external/newsletter`, userData, false);
 };
 export const postUserTesting = async (userData: UserData): Promise<UserData> => {
-  return post(`/ext/userTesting`, userData, false);
+  return post(`/external/userTesting`, userData, false);
 };
 
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {

@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import serverless from "serverless-http";
-import { externalEndpointFactory } from "src/api/externalEndpointRouter";
+import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { businessNameRouterFactory } from "../../api/businessNameRouter";
 import { formationRouterFactory } from "../../api/formationRouter";
@@ -121,8 +121,8 @@ const apiFormationClient = ApiFormationClient(
 app.use(bodyParser.json({ strict: false }));
 app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus));
 app.use(
-  "/api/ext",
-  externalEndpointFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
+  "/api/external",
+  externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
 app.use("/api", businessNameRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));

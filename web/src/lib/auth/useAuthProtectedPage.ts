@@ -23,7 +23,7 @@ export const useAuthProtectedPage = (): void => {
 };
 
 export const useAuthAlertPage = (): void => {
-  const { isAuthenticated, setAlertIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setAlertIsVisible, modalIsVisible } = useContext(AuthAlertContext);
   useMountEffectWhenDefined(() => {
     (async () => {
       if (isAuthenticated === IsAuthenticated.FALSE) {
@@ -31,6 +31,12 @@ export const useAuthAlertPage = (): void => {
       }
     })();
   }, isAuthenticated);
+
+  useEffect(() => {
+    if (modalIsVisible) {
+      setAlertIsVisible(false);
+    }
+  }, [modalIsVisible, setAlertIsVisible]);
 };
 
 export const useUnauthedOnlyPage = (): void => {

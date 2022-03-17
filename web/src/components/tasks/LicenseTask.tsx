@@ -1,5 +1,5 @@
+import { SignUpModalWrapper } from "@/components/auth/SignUpModal";
 import { Content } from "@/components/Content";
-import { UseAuthModalWrapper } from "@/components/SignUpDialogs";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckStatus } from "@/components/tasks/CheckStatus";
 import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
@@ -101,7 +101,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   return (
-    <UseAuthModalWrapper>
+    <SignUpModalWrapper>
       <div className="flex flex-column">
         <TaskHeader task={props.task} tooltipText={Config.licenseSearchTask.tooltipText} />
 
@@ -163,6 +163,6 @@ export const LicenseTask = (props: Props): ReactElement => {
           </TabPanel>
         </Tabs>
       </div>
-    </UseAuthModalWrapper>
+    </SignUpModalWrapper>
   );
 };

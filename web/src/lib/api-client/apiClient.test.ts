@@ -53,6 +53,6 @@ describe("apiClient", () => {
     const userData = generateUserData({ user: generateUser({ id: "456" }) });
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postNewsletter(userData)).toEqual(userData);
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/ext/newsletter", userData, {});
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/external/newsletter", userData, {});
   });
 });

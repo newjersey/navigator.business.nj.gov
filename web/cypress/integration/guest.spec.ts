@@ -58,24 +58,33 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.get(`[data-business-name='${businessName}']`).should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.get('[data-testid="self-reg-toast"]').should("be.visible");
-    cy.get('[aria-label="close"]').click({ force: true });
-
-    // go to auth blocked task
-    cy.get('[data-task="register-consumer-affairs"]').click({ force: true });
-    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
-    cy.get('[data-task-id="register-consumer-affairs"]').should("exist");
-    cy.get('[data-testid="self-reg-modal"]').should("be.visible");
-    cy.get('[aria-label="close"]').click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
+    cy.get('[aria-label="close"]').click({ force: true });
+    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
 
     // go back to roadmap
     cy.get(`[data-testid="back-to-roadmap"]`).click({ force: true });
     cy.get('[data-testid="self-reg-toast"]').should("be.visible");
     cy.get('[aria-label="close"]').click({ force: true });
+    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
+
+    // go to auth blocked task
+    cy.get('[data-task="register-consumer-affairs"]').click({ force: true });
+    cy.get('[data-task-id="register-consumer-affairs"]').should("exist");
+    cy.get('[data-testid="self-reg-modal"]').should("be.visible");
+    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
+    cy.get('[aria-label="close"]').click({ force: true });
+    cy.get('[data-testid="self-reg-modal"]').should("not.exist");
+
+    // go back to roadmap
+    cy.get(`[data-testid="back-to-roadmap"]`).click({ force: true });
+    cy.get('[data-testid="self-reg-modal"]').should("not.exist");
+    cy.get('[data-testid="self-reg-toast"]').should("be.visible");
 
     // try editing data in the Profile page
     clickEdit();
     cy.get('[data-testid="self-reg-modal"]').should("be.visible");
+    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
     cy.get('[aria-label="close"]').click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
   });

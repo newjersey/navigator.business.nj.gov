@@ -63,7 +63,6 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       renderInput={(params) => (
         <TextField
           {...params}
-          // id={props.fieldName}
           inputProps={{
             "aria-label": "Location",
             "data-testid": props.fieldName,

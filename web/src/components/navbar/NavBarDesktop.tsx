@@ -75,6 +75,61 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     [userData?.profileData.hasExistingBusiness]
   );
 
+  const isAuthenticated = useMemo(() => state.isAuthenticated == "TRUE", [state.isAuthenticated]);
+  const textColor = isAuthenticated ? "primary" : "base";
+  const accountIcon = isAuthenticated ? "account_circle" : "help";
+  const accountString = isAuthenticated ? userName : Config.navigationDefaults.navBarGuestText;
+
+  const UnAuthenticatedMenu = () => (
+    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+      <MenuItem
+        onClick={() => {
+          analytics.event.guest_menu.click.go_to_myNJ_registration();
+          onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
+        }}
+      >
+        <Button style="tertiary" textBold smallText>
+          {Config.navigationDefaults.navBarGuestRegistrationText}
+        </Button>
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          analytics.event.guest_menu.click.go_to_myNJ_registration();
+          triggerSignIn();
+        }}
+        data-testid="login-button"
+      >
+        <Button style="tertiary" textBold smallText>
+          {Config.navigationDefaults.logInButton}
+        </Button>
+      </MenuItem>
+    </MenuList>
+  );
+
+  const AuthenticatedMenu = () => (
+    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+      <MenuItem onClick={handleProfileClick}>
+        <Button style="tertiary" textBold smallText>
+          {Config.navigationDefaults.myNJAccountText}
+        </Button>
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+          router.push("/profile");
+        }}
+      >
+        <Button style="tertiary" textBold smallText>
+          {Config.navigationDefaults.profileLinkText}
+        </Button>
+      </MenuItem>
+      <MenuItem onClick={handleLogoutClick}>
+        <Button style="tertiary" textBold smallText>
+          {Config.navigationDefaults.logoutButton}
+        </Button>
+      </MenuItem>
+    </MenuList>
+  );
   return (
     <nav
       aria-label="Primary"
@@ -94,17 +149,9 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             aria-haspopup="true"
             onClick={toggleDropdown}
           >
-            <div
-              className={`text-bold text-${
-                state.isAuthenticated == "TRUE" ? "primary" : "base"
-              } flex flex-align-center`}
-            >
-              <Icon className="usa-icon--size-4 margin-right-1">
-                {state.isAuthenticated == "TRUE" ? "account_circle" : "help"}
-              </Icon>
-              <div>
-                {state.isAuthenticated == "TRUE" ? userName : Config.navigationDefaults.navBarGuestText}
-              </div>
+            <div className={`text-bold text-${textColor} flex flex-align-center`}>
+              <Icon className="usa-icon--size-4 margin-right-1">{accountIcon}</Icon>
+              <div>{accountString}</div>
               <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
             </div>
           </button>
@@ -118,54 +165,7 @@ export const NavBarDesktop = (props: Props): ReactElement => {
               >
                 <Paper>
                   <ClickAwayListener onClickAway={handleClose}>
-                    {state.isAuthenticated == "TRUE" ? (
-                      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                        <MenuItem onClick={handleProfileClick}>
-                          <Button style="tertiary" textBold smallText>
-                            {Config.navigationDefaults.myNJAccountText}
-                          </Button>
-                        </MenuItem>
-                        <MenuItem
-                          onClick={() => {
-                            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-                            router.push("/profile");
-                          }}
-                        >
-                          <Button style="tertiary" textBold smallText>
-                            {Config.navigationDefaults.profileLinkText}
-                          </Button>
-                        </MenuItem>
-                        <MenuItem onClick={handleLogoutClick}>
-                          <Button style="tertiary" textBold smallText>
-                            {Config.navigationDefaults.logoutButton}
-                          </Button>
-                        </MenuItem>
-                      </MenuList>
-                    ) : (
-                      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                        <MenuItem
-                          onClick={() => {
-                            analytics.event.guest_menu.click.go_to_myNJ_registration();
-                            onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
-                          }}
-                        >
-                          <Button style="tertiary" textBold smallText>
-                            {Config.navigationDefaults.navBarGuestRegistrationText}
-                          </Button>
-                        </MenuItem>
-                        <MenuItem
-                          onClick={() => {
-                            analytics.event.guest_menu.click.go_to_myNJ_registration();
-                            triggerSignIn();
-                          }}
-                          data-testid="login-button"
-                        >
-                          <Button style="tertiary" textBold smallText>
-                            {Config.navigationDefaults.logInButton}
-                          </Button>
-                        </MenuItem>
-                      </MenuList>
-                    )}
+                    {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
                   </ClickAwayListener>
                 </Paper>
               </Grow>

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import request from "supertest";
 import { generateUser, generateUserData } from "../../test/factories";
 import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
-import { externalEndpointFactory } from "./externalEndpointRouter";
+import { externalEndpointRouterFactory } from "./externalEndpointRouter";
 
 jest.mock("jsonwebtoken", () => ({
   decode: jest.fn(),
@@ -28,7 +28,7 @@ describe("externalEndpointRouter", () => {
     stubAddToUserTesting = jest.fn();
     app = express();
     app.use(bodyParser.json());
-    app.use(externalEndpointFactory(stubUserDataClient, stubAddNewsletter, stubAddToUserTesting));
+    app.use(externalEndpointRouterFactory(stubUserDataClient, stubAddNewsletter, stubAddToUserTesting));
   });
 
   const cognitoPayload = ({ id }: { id: string }) => ({
@@ -52,74 +52,91 @@ describe("externalEndpointRouter", () => {
   });
 
   describe("POST", () => {
-    it("adds to newsletter and user testing if true", async () => {
-      const userData = generateUserData({
-        user: generateUser({ id: "123", externalStatus: {}, userTesting: true, receiveNewsletter: true }),
+    describe("newsletter", () => {
+      it("adds to newsletter if receiveNewsletter is set to true and externalStatus is empty", async () => {
+        const userData = generateUserData({
+          user: generateUser({
+            externalStatus: { userTesting: { status: "IN_PROGRESS" } },
+            receiveNewsletter: true,
+          }),
+        });
+        await request(app).post(`/newsletter`).send(userData);
+        expect(stubAddNewsletter).toHaveBeenCalled();
       });
-      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
-      await request(app).post(`/newsletter`).send(userData);
-      expect(stubAddNewsletter).toHaveBeenCalled();
-      expect(stubUserDataClient.put).not.toHaveBeenCalled();
+
+      it("does not add to newsletter if the request has been attempted", async () => {
+        const userData = generateUserData({
+          user: generateUser({
+            externalStatus: { newsletter: { status: "IN_PROGRESS" } },
+            receiveNewsletter: true,
+          }),
+        });
+        await request(app).post(`/newsletter`).send(userData);
+        expect(stubAddNewsletter).not.toHaveBeenCalled();
+      });
+
+      it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
+        const userData = generateUserData({
+          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
+        });
+        await request(app).post(`/newsletter`).send(userData);
+        expect(stubAddNewsletter).toHaveBeenCalled();
+        expect(stubUserDataClient.put).not.toHaveBeenCalled();
+      });
+
+      it("adds to newsletter and updates the db if the user is authenticated", async () => {
+        const userData = generateUserData({
+          user: generateUser({ id: "123", externalStatus: {}, receiveNewsletter: true }),
+        });
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        stubUserDataClient.put.mockResolvedValue(userData);
+        await request(app).post(`/newsletter`).send(userData).set("Authorization", "Bearer user-123-token");
+        expect(stubAddNewsletter).toHaveBeenCalled();
+        expect(stubUserDataClient.put).toHaveBeenCalled();
+      });
     });
-
-    it("adds to newsletter and puts to db if user is authenticated", async () => {
-      const userData = generateUserData({
-        user: generateUser({ id: "123", externalStatus: {}, userTesting: true, receiveNewsletter: true }),
+    describe("userTesting", () => {
+      it("adds to userTesting if userTesting is set to true and externalStatus is empty", async () => {
+        const userData = generateUserData({
+          user: generateUser({
+            externalStatus: { newsletter: { status: "IN_PROGRESS" } },
+            userTesting: true,
+          }),
+        });
+        await request(app).post(`/userTesting`).send(userData);
+        expect(stubAddToUserTesting).toHaveBeenCalled();
       });
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
 
-      await request(app).post(`/newsletter`).send(userData).set("Authorization", "Bearer user-123-token");
-      expect(stubAddNewsletter).toHaveBeenCalled();
-      expect(stubUserDataClient.put).toHaveBeenCalled();
-    });
-
-    it("does not add to newsletter if the request has been attempted", async () => {
-      const userData = generateUserData({
-        user: generateUser({
-          id: "123",
-          externalStatus: { newsletter: { status: "IN_PROGRESS" } },
-          userTesting: true,
-          receiveNewsletter: true,
-        }),
+      it("does not add to userTesting if the request has been attempted", async () => {
+        const userData = generateUserData({
+          user: generateUser({
+            externalStatus: { userTesting: { status: "IN_PROGRESS" } },
+            userTesting: true,
+          }),
+        });
+        await request(app).post(`/userTesting`).send(userData);
+        expect(stubAddToUserTesting).not.toHaveBeenCalled();
       });
-      await request(app).post(`/newsletter`).send(userData);
-      expect(stubAddNewsletter).not.toHaveBeenCalled();
-    });
 
-    it("adds to userTesting and user testing if true", async () => {
-      const userData = generateUserData({
-        user: generateUser({ id: "123", externalStatus: {}, userTesting: true, receiveNewsletter: true }),
+      it("adds to newsletter and does not update the db if the user is unauthenticated", async () => {
+        const userData = generateUserData({
+          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
+        });
+        await request(app).post(`/userTesting`).send(userData);
+        expect(stubAddToUserTesting).toHaveBeenCalled();
+        expect(stubUserDataClient.put).not.toHaveBeenCalled();
       });
-      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
-      await request(app).post(`/userTesting`).send(userData);
-      expect(stubAddToUserTesting).toHaveBeenCalled();
-      expect(stubUserDataClient.put).not.toHaveBeenCalled();
-    });
 
-    it("adds to userTesting and puts to db if user is authenticated", async () => {
-      const userData = generateUserData({
-        user: generateUser({ id: "123", externalStatus: {}, userTesting: true, receiveNewsletter: true }),
+      it("adds to newsletter and updates the db if the user is authenticated", async () => {
+        const userData = generateUserData({
+          user: generateUser({ id: "123", externalStatus: {}, userTesting: true }),
+        });
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        stubUserDataClient.put.mockResolvedValue(userData);
+        await request(app).post(`/userTesting`).send(userData).set("Authorization", "Bearer user-123-token");
+        expect(stubAddToUserTesting).toHaveBeenCalled();
+        expect(stubUserDataClient.put).toHaveBeenCalled();
       });
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      stubUserDataClient.put.mockResolvedValue(generateUserData({}));
-
-      await request(app).post(`/userTesting`).send(userData).set("Authorization", "Bearer user-123-token");
-      expect(stubAddToUserTesting).toHaveBeenCalled();
-      expect(stubUserDataClient.put).toHaveBeenCalled();
-    });
-
-    it("does not add to userTesting if the request has been attempted", async () => {
-      const userData = generateUserData({
-        user: generateUser({
-          id: "123",
-          externalStatus: { userTesting: { status: "IN_PROGRESS" } },
-          userTesting: true,
-          receiveNewsletter: true,
-        }),
-      });
-      await request(app).post(`/userTesting`).send(userData);
-      expect(stubAddToUserTesting).not.toHaveBeenCalled();
     });
   });
 });
