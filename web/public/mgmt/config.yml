@@ -219,6 +219,10 @@ collections:
               - { label: Error - Suffix, name: suffixErrorText, widget: string }
               - { label: Initial Next Button Text, name: initialNextButtonText, widget: string }
               - { label: LLC Label, name: llcText, widget: string }
+              - { label: Legal Structure Warning Modal Header, name: legalStructureWarningModalHeader, widget: string }
+              - { label: Legal Structure Warning Modal Body, name: legalStructureWarningModalBody, widget: string }
+              - { label: Legal Structure Warning Modal Continue Button Text, name: legalStructureWarningModalContinueButtonText, widget: string }
+              - { label: Legal Structure Warning Modal Cancel Button Text, name: legalStructureWarningModalCancelButtonText, widget: string }
               - { label: Member - Address Line 2 Optional, name: membersAddressLine2Optional, widget: string }
               - { label: Member - Back Button, name: membersModalBackButtonText, widget: string }
               - { label: Member - Expand Link, name: membersExpandText, widget: string }

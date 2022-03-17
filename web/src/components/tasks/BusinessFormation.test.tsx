@@ -397,6 +397,26 @@ describe("<BusinessFormation />", () => {
       });
     });
 
+    it("displays modal when legal structure Edit button clicked", async () => {
+      const profileData = generateLLCProfileData({});
+      const formationData = {
+        formationFormData: createEmptyFormationFormData(),
+        formationResponse: undefined,
+        getFilingResponse: undefined,
+      };
+      subject = renderTask({ profileData, formationData });
+
+      await submitBusinessNameTab("Pizza Joint");
+
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.legalStructureWarningModalHeader)
+      ).not.toBeInTheDocument();
+      fireEvent.click(subject.getByTestId("edit-legal-structure"));
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.legalStructureWarningModalHeader)
+      ).toBeInTheDocument();
+    });
+
     it("fills multi-tab form, submits, and updates userData", async () => {
       const profileData = generateLLCProfileData({});
       const formationData = {
@@ -670,6 +690,11 @@ describe("<BusinessFormation />", () => {
       await submitBusinessNameTab();
 
       fireEvent.click(subject.getByTestId("edit-legal-structure"));
+      fireEvent.click(
+        within(subject.getByTestId("modal-content")).getByText(
+          Config.businessFormationDefaults.legalStructureWarningModalContinueButtonText
+        )
+      );
       expect(mockPush).toHaveBeenCalledWith("/profile?path=businessFormation");
     });
 

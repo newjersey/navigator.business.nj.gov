@@ -150,7 +150,11 @@
     "nameCheckAvailableText": "\"${name}\" is available. This name will be registered with the State ONLY after you submit the rest of this form.",
     "nameCheckFieldLabel": "Business Name Search",
     "sameAgentInfoAsAccount": "The agent information is the same as the account holder",
-    "sameAgentAddressAsBusiness": "The address is the same as the business location"
+    "sameAgentAddressAsBusiness": "The address is the same as the business location",
+    "legalStructureWarningModalHeader": "Warning!",
+    "legalStructureWarningModalBody": "Changing your Legal Structure may result in having to use a separate application to form your business.",
+    "legalStructureWarningModalContinueButtonText": "Continue",
+    "legalStructureWarningModalCancelButtonText": "Cancel"
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",

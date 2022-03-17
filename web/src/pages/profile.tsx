@@ -3,7 +3,6 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
-import { Icon } from "@/components/njwds/Icon";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
@@ -19,6 +18,7 @@ import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { PageSkeleton } from "@/components/PageSkeleton";
+import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -40,7 +40,7 @@ import { ProfileDataContext } from "@/pages/onboarding";
 import { RoadmapContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
-import { CircularProgress, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -231,48 +231,15 @@ const ProfilePage = (props: Props): ReactElement => {
     >
       <PageSkeleton showLegalMessage={true}>
         <NavBar />
-
-        <Dialog
-          fullWidth={false}
-          maxWidth="sm"
-          open={escapeModal}
-          onClose={() => setEscapeModal(false)}
-          aria-labelledby="escape-modal"
-        >
-          <DialogTitle id="escape-modal">
-            <div className="padding-top-5 padding-x-2 text-bold font-body-lg">
-              {Config.profileDefaults.escapeModalHeader}
-            </div>
-            <IconButton
-              aria-label="close"
-              onClick={() => setEscapeModal(false)}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <Icon className="usa-icon--size-4">close</Icon>
-            </IconButton>
-          </DialogTitle>
-          <DialogContent>
-            <div className="padding-x-2 padding-bottom-3">
-              <p className="padding-bottom-1 font-body-xs">{Config.profileDefaults.escapeModalBody}</p>
-              <Button style="primary" onClick={() => redirect()} dataTestid="return">
-                {Config.profileDefaults.escapeModalReturn}
-              </Button>
-              <Button
-                style="secondary"
-                noRightMargin
-                onClick={() => setEscapeModal(false)}
-                dataTestid="escape"
-              >
-                {Config.profileDefaults.escapeModalEscape}
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
+        <TwoButtonDialog
+          isOpen={escapeModal}
+          close={() => setEscapeModal(false)}
+          title={Config.profileDefaults.escapeModalHeader}
+          body={Config.profileDefaults.escapeModalBody}
+          primaryButtonText={Config.profileDefaults.escapeModalReturn}
+          primaryButtonOnClick={() => redirect()}
+          secondaryButtonText={Config.profileDefaults.escapeModalEscape}
+        />
         <main className="usa-section padding-top-0 desktop:padding-top-3" id="main">
           <SingleColumnContainer>
             {alert && (

@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
@@ -9,17 +10,22 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
   reviewPage?: boolean;
 }
 
 export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): ReactElement => {
+  const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
   const { state, setTab } = useContext(FormationContext);
   const { userData } = useUserData();
   const router = useRouter();
-  const onEditProfile = () => router.push("/profile?path=businessFormation");
+
+  const editLegalStructure = () => {
+    analytics.event.business_formation_legal_structure_edit.click.go_to_profile_screen();
+    router.push("/profile?path=businessFormation");
+  };
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
@@ -90,10 +96,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
             <Button
               style="tertiary"
               widthAutoOnMobile
-              onClick={() => {
-                analytics.event.business_formation_legal_structure_edit.click.go_to_profile_screen();
-                onEditProfile();
-              }}
+              onClick={() => setLegalStructureWarningIsOpen(true)}
               underline
               dataTestid="edit-legal-structure"
             >
@@ -106,6 +109,15 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         {state.errorMap["businessName"].invalid &&
           Config.businessFormationDefaults.notSetBusinessNameErrorText}
       </FormHelperText>
+      <TwoButtonDialog
+        isOpen={legalStructureWarningIsOpen}
+        close={() => setLegalStructureWarningIsOpen(false)}
+        title={Config.businessFormationDefaults.legalStructureWarningModalHeader}
+        body={Config.businessFormationDefaults.legalStructureWarningModalBody}
+        primaryButtonText={Config.businessFormationDefaults.legalStructureWarningModalContinueButtonText}
+        primaryButtonOnClick={editLegalStructure}
+        secondaryButtonText={Config.businessFormationDefaults.legalStructureWarningModalCancelButtonText}
+      />
     </>
   );
 };
