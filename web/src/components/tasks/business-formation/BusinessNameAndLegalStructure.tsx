@@ -23,8 +23,13 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
   const router = useRouter();
 
   const editLegalStructure = () => {
-    analytics.event.business_formation_legal_structure_edit.click.go_to_profile_screen();
+    analytics.event.business_formation_legal_structure_modal.submit.go_to_profile_screen();
     router.push("/profile?path=businessFormation");
+  };
+
+  const showLegalStructureModal = () => {
+    analytics.event.business_formation_legal_structure_edit.click.show_legal_structure_modal();
+    setLegalStructureWarningIsOpen(true);
   };
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
@@ -96,7 +101,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
             <Button
               style="tertiary"
               widthAutoOnMobile
-              onClick={() => setLegalStructureWarningIsOpen(true)}
+              onClick={showLegalStructureModal}
               underline
               dataTestid="edit-legal-structure"
             >

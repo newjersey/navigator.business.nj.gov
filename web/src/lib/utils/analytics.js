@@ -368,13 +368,20 @@ export default {
     },
     business_formation_business_name_edit: {
       click: {
-        go_to_profile_screen: () => {
-          sendEvent("business_formation_business_name_edit", "click", "go_to_profile_screen");
+        go_to_name_search_step: () => {
+          sendEvent("business_formation_business_name_edit", "click", "go_to_name_search_step");
         },
       },
     },
     business_formation_legal_structure_edit: {
       click: {
+        show_legal_structure_modal: () => {
+          sendEvent("business_formation_legal_structure_edit", "click", "show_legal_structure_modal");
+        },
+      },
+    },
+    business_formation_legal_structure_modal: {
+      submit: {
         go_to_profile_screen: () => {
           sendEvent("business_formation_legal_structure_edit", "click", "go_to_profile_screen");
         },
