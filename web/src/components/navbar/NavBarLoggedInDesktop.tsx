@@ -1,3 +1,4 @@
+import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -109,9 +110,9 @@ export const NavBarLoggedInDesktop = (props: Props): ReactElement => {
                   <ClickAwayListener onClickAway={handleClose}>
                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                       <MenuItem onClick={handleProfileClick}>
-                        <button className="clear-button font-body-2xs text-bold text-primary">
+                        <Button style="tertiary" textBold smallText>
                           {Config.navigationDefaults.myNJAccountText}
-                        </button>
+                        </Button>
                       </MenuItem>
                       <MenuItem
                         onClick={() => {
@@ -119,14 +120,14 @@ export const NavBarLoggedInDesktop = (props: Props): ReactElement => {
                           router.push("/profile");
                         }}
                       >
-                        <button className="clear-button font-body-2xs text-bold text-primary">
+                        <Button style="tertiary" textBold smallText>
                           {Config.navigationDefaults.profileLinkText}
-                        </button>
+                        </Button>
                       </MenuItem>
                       <MenuItem onClick={handleLogoutClick}>
-                        <button className="clear-button font-body-2xs text-bold text-primary">
+                        <Button style="tertiary" textBold smallText>
                           {Config.navigationDefaults.logoutButton}
-                        </button>
+                        </Button>
                       </MenuItem>
                     </MenuList>
                   </ClickAwayListener>

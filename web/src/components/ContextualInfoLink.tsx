@@ -1,3 +1,4 @@
+import { Button } from "@/components/njwds-extended/Button";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
 import analytics from "@/lib/utils/analytics";
 import { ContextualInfoContext } from "@/pages/_app";
@@ -24,12 +25,8 @@ export const ContextualInfoLink = ({ children }: { children: string[] }): ReactE
   };
 
   return (
-    <button
-      className="usa-button--unstyled cursor-pointer weight-inherit style-inherit"
-      data-testid={contextualInfoId}
-      onClick={setContext}
-    >
+    <Button style="tertiary" dataTestid={contextualInfoId} onClick={setContext}>
       <span className="dashed-underline border-primary line-height-body-5">{displayText}</span>
-    </button>
+    </Button>
   );
 };

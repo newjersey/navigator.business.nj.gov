@@ -69,13 +69,17 @@ export const SearchBusinessName = (props: Props): ReactElement => {
             <span>{Config.searchBusinessNameTask.nameHasBeenUpdatedText}</span>
           </div>
         ) : (
-          <button
-            onClick={updateNameOnProfile}
-            data-testid="update-name"
-            className="usa-button usa-button--unstyled font-body-2xs"
-          >
-            <span className="text-underline">{Config.searchBusinessNameTask.updateButtonText}</span>
-          </button>
+          <>
+            <Button
+              style="tertiary"
+              underline
+              smallText
+              onClick={updateNameOnProfile}
+              dataTestid="update-name"
+            >
+              <span className="">{Config.searchBusinessNameTask.updateButtonText}</span>
+            </Button>
+          </>
         )}
         <div className="margin-bottom-2">
           <Alert variant="info">

@@ -1,8 +1,10 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { GraduationModal } from "@/components/roadmap/GraduationModal";
+import { MediaQueries } from "@/lib/PageSizes";
 import { LoadDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useMediaQuery } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 type Props = {
@@ -11,6 +13,7 @@ type Props = {
 
 export const GraduationBox = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const openModal = async (): Promise<void> => {
     analytics.event.roadmap_graduate_button.click.view_graduation_modal();
@@ -25,21 +28,22 @@ export const GraduationBox = (props: Props): ReactElement => {
         handleClose={() => setModalOpen(false)}
         onSave={() => undefined}
       />
-      <div className="padding-3 bg-base-lightest radius-md fdr fac">
-        <div>
-          <img
-            src={`/img/congratulations-green.svg`}
-            style={{ width: "60px", height: "60px" }}
-            className="margin-right-3"
-            alt=""
-          />
+      <div
+        className={`padding-3 bg-base-lightest radius-md ${
+          isTabletAndUp
+            ? "display-flex flex-row flex-align-center flex-justify"
+            : "display-flex flex-column flex-align-center"
+        }`}
+      >
+        <div className="tablet:margin-right-3 minw-8">
+          <img src={`/img/congratulations-green.svg`} style={{ width: "60px", height: "60px" }} alt="" />
         </div>
-        <div>
+        <div className="tablet:margin-right-3 margin-y-3 tablet:margin-y-0">
           <h3 className="margin-bottom-105">{Config.roadmapDefaults.graduationHeader}</h3>
           <p className="text-base-dark">{Config.roadmapDefaults.graduationBodyText}</p>
         </div>
-        <div className="mla">
-          <Button style="primary" onClick={openModal}>
+        <div className="">
+          <Button style="primary" onClick={openModal} noRightMargin widthAutoOnMobile>
             {Config.roadmapDefaults.graduationButtonText}
           </Button>
         </div>

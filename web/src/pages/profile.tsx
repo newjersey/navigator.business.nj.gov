@@ -259,16 +259,17 @@ const ProfilePage = (props: Props): ReactElement => {
           <DialogContent>
             <div className="padding-x-2 padding-bottom-3">
               <p className="padding-bottom-1 font-body-xs">{Config.profileDefaults.escapeModalBody}</p>
-              <button className="usa-button " onClick={() => redirect()} data-testid="return">
+              <Button style="primary" onClick={() => redirect()} dataTestid="return">
                 {Config.profileDefaults.escapeModalReturn}
-              </button>
-              <button
-                className="usa-button usa-button--outline margin-right-0"
+              </Button>
+              <Button
+                style="secondary"
+                noRightMargin
                 onClick={() => setEscapeModal(false)}
-                data-testid="escape"
+                dataTestid="escape"
               >
                 {Config.profileDefaults.escapeModalEscape}
-              </button>
+              </Button>
             </div>
           </DialogContent>
         </Dialog>
@@ -294,9 +295,9 @@ const ProfilePage = (props: Props): ReactElement => {
               <SingleColumnContainer>
                 {userData === undefined ? (
                   <SinglePageLayout>
-                    <div className="fdr fjc fac">
+                    <div className="flex flex-justify-center flex-align-center">
                       <CircularProgress />
-                      <div className="margin-left-2 h3-styling">Loading...</div>
+                      <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
                     </div>
                   </SinglePageLayout>
                 ) : (
@@ -309,14 +310,9 @@ const ProfilePage = (props: Props): ReactElement => {
 
                       <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
                       <div className="float-right fdr">
-                        <button
-                          type="button"
-                          className="usa-button usa-button--outline"
-                          onClick={() => onBack()}
-                          data-testid="back"
-                        >
+                        <Button style="secondary" onClick={() => onBack()} dataTestid="back">
                           {Config.profileDefaults.backButtonText}
-                        </button>
+                        </Button>
                         <Button
                           style="primary"
                           typeSubmit

@@ -105,4 +105,12 @@ describe("Button", () => {
     ).baseElement;
     expect(subject).toMatchSnapshot();
   });
+  it("with intercomButton button displays correctly", () => {
+    const subject = render(
+      <Button intercomButton style="primary">
+        Test Button
+      </Button>
+    ).baseElement;
+    expect(subject).toMatchSnapshot();
+  });
 });

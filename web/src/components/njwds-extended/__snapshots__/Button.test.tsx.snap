@@ -4,7 +4,7 @@ exports[`Button Styles primary displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-2 "
+      class="usa-button padding-y-1 margin-right-2"
       type="button"
     >
       <div>
@@ -19,7 +19,7 @@ exports[`Button Styles primary-big displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="  margin-right-2 "
+      class=" margin-right-2"
       type="button"
     >
       <div>
@@ -34,7 +34,7 @@ exports[`Button Styles primary-input-field-height displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-2  margin-right-2 "
+      class="usa-button padding-y-2 margin-right-2"
       type="button"
     >
       <div>
@@ -49,7 +49,7 @@ exports[`Button Styles secondary displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button usa-button--outline padding-y-1  margin-right-2 "
+      class="usa-button usa-button--outline padding-y-1 margin-right-2"
       type="button"
     >
       <div>
@@ -64,7 +64,7 @@ exports[`Button Styles secondary-big displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="  margin-right-2 "
+      class=" margin-right-2"
       type="button"
     >
       <div>
@@ -79,7 +79,7 @@ exports[`Button Styles secondary-input-field-height displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button usa-button--outline padding-y-2  margin-right-2 "
+      class="usa-button usa-button--outline padding-y-2 margin-right-2"
       type="button"
     >
       <div>
@@ -94,7 +94,7 @@ exports[`Button Styles tertiary displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button usa-button--unstyled  margin-right-0 "
+      class="usa-button usa-button--unstyled margin-right-0"
       type="button"
     >
       <div>
@@ -109,35 +109,31 @@ exports[`Button loading button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-2 usa-button--disabled"
+      class="usa-button padding-y-1 margin-right-2 usa-button--disabled"
       type="button"
     >
       <div
         data-testid="loading-spinner"
       >
-        <div
-          class="margin-top-neg-1"
+        <span
+          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+          role="progressbar"
+          style="width: 24px; height: 24px;"
         >
-          <span
-            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
-            role="progressbar"
-            style="width: 24px; height: 24px;"
+          <svg
+            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+            viewBox="22 22 44 44"
           >
-            <svg
-              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
-              viewBox="22 22 44 44"
-            >
-              <circle
-                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
-                cx="44"
-                cy="44"
-                fill="none"
-                r="17"
-                stroke-width="10"
-              />
-            </svg>
-          </span>
-        </div>
+            <circle
+              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+              cx="44"
+              cy="44"
+              fill="none"
+              r="17"
+              stroke-width="10"
+            />
+          </svg>
+        </span>
       </div>
     </button>
   </div>
@@ -148,7 +144,7 @@ exports[`Button submit button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-2 "
+      class="usa-button padding-y-1 margin-right-2"
       type="submit"
     >
       <div>
@@ -163,7 +159,7 @@ exports[`Button with dataTestid displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-2 "
+      class="usa-button padding-y-1 margin-right-2"
       data-testid="test-button-1"
       type="button"
     >
@@ -179,7 +175,22 @@ exports[`Button with heightAutoOnMobile button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1 height-auto margin-right-2 "
+      class="usa-button padding-y-1 height-auto margin-right-2"
+      type="button"
+    >
+      <div>
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button with intercomButton button displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button padding-y-1 margin-right-2 intercom-button"
       type="button"
     >
       <div>
@@ -194,7 +205,7 @@ exports[`Button with noRightMargin button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-0 "
+      class="usa-button padding-y-1 margin-right-0"
       type="button"
     >
       <div>
@@ -209,7 +220,7 @@ exports[`Button with smallText button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-2 font-body-2xs "
+      class="usa-button padding-y-1 margin-right-2 font-body-2xs"
       type="button"
     >
       <div>
@@ -224,7 +235,7 @@ exports[`Button with textBold button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-2 text-bold "
+      class="usa-button padding-y-1 margin-right-2 text-bold"
       type="button"
     >
       <div>
@@ -239,7 +250,7 @@ exports[`Button with underline button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-2 underline "
+      class="usa-button padding-y-1 margin-right-2 underline"
       type="button"
     >
       <div>
@@ -254,7 +265,7 @@ exports[`Button with widthAutoOnMobile button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1  margin-right-2 width-auto "
+      class="usa-button padding-y-1 margin-right-2 width-auto"
       type="button"
     >
       <div>

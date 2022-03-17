@@ -73,9 +73,9 @@ const RoadmapPage = (props: Props): ReactElement => {
       <NavBar />
       {!userData || userData?.formProgress !== "COMPLETED" ? (
         <SinglePageLayout>
-          <div className="fdr fjc fac">
+          <div className="flex flex-justify-center flex-align-center">
             <CircularProgress />
-            <div className="margin-left-2 h3-styling">Loading...</div>
+            <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
           </div>
         </SinglePageLayout>
       ) : (
@@ -95,9 +95,9 @@ const RoadmapPage = (props: Props): ReactElement => {
             )}
             <div className="margin-top-3">
               {!roadmap ? (
-                <div className="fdr fjc fac">
+                <div className="flex flex-justify-center flex-align-center">
                   <CircularProgress />
-                  <div className="margin-left-2 h3-styling">Loading...</div>
+                  <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
                 </div>
               ) : (
                 <>
