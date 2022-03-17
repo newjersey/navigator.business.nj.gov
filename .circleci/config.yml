@@ -138,6 +138,8 @@ commands:
         type: boolean
       suite:
         type: string
+      browser:
+        type: string
     steps:
       - run:
           name: Install Additional Tools
@@ -148,7 +150,7 @@ commands:
           background: true
       - run:
           name: Run Tests
-          command: yarn cypress:run --browser=chrome --record=<< parameters.enable-dashboard >> --env SUITE=<< parameters.suite >>
+          command: yarn cypress:run --browser=<< parameters.browser >> --record=<< parameters.enable-dashboard >> --env SUITE=<< parameters.suite >>
           working_directory: web
       - store_test_results:
           path: web/cypress/results
@@ -345,6 +347,24 @@ commands:
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
             sudo dpkg -i google-chrome-stable_current_amd64.deb
 
+  install-edge:
+    steps:
+      - run:
+          name: Install Edge
+          command: |
+            curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+            sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
+            sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
+            sudo rm microsoft.gpg
+            sudo apt update && sudo apt install microsoft-edge-stable
+
+  install-firefox:
+    steps:
+      - run:
+          name: Install Firefox
+          command: |
+            sudo apt install firefox
+
   install-awscli:
     steps:
       - run:
@@ -453,6 +473,9 @@ jobs:
         default: false
       suite:
         type: string
+      browser:
+        type: string
+        default: "chrome"
     docker:
       - image: cimg/node:14.19.0-browsers
     steps:
@@ -462,9 +485,12 @@ jobs:
       - configure-and-build
       - install-dynamodb
       - install-chrome
+      - install-edge
+      - install-firefox
       - perform-integration-tests:
           enable-dashboard: << parameters.enable-dashboard >>
           suite: << parameters.suite >>
+          browser: << parameters.browser >>
       - store-deploy-cache
     environment:
       CYPRESS_API_BASE_URL: http://localhost:5000/local
@@ -651,6 +677,89 @@ workflows:
                 - main
           requires:
             - build
+      # edge integration tests
+      - integration-tests:
+          name: Integration Tests - Edge - Group 1
+          suite: group1
+          browser: edge
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Edge - Group 2
+          suite: group2
+          browser: edge
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Edge - Group 3
+          suite: group3
+          browser: edge
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Edge - Group 4
+          suite: group4
+          browser: edge
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      # firefox integration tests
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 1
+          suite: group1
+          browser: firefox
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 2
+          suite: group2
+          browser: firefox
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 3
+          suite: group3
+          browser: firefox
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 4
+          suite: group4
+          browser: firefox
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+
       - smoke-tests:
           name: Deployment Smoke Tests
           enable-dashboard: true
