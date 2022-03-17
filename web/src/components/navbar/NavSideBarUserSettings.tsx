@@ -1,4 +1,5 @@
 import { AuthButton } from "@/components/AuthButton";
+import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
@@ -37,27 +38,27 @@ export const NavSideBarUserSettings = (): ReactElement => {
         <AccordionDetails>
           <div className="margin-left-2 margin-bottom-2">
             <div className="margin-bottom-2">
-              <button
-                className={`clear-button override-text-base`}
+              <Button
+                style="tertiary"
                 onClick={(event) => {
                   event.preventDefault();
                   analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
                   window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
                 }}
               >
-                {Config.navigationDefaults.myNJAccountText}
-              </button>
+                <span className="text-base">{Config.navigationDefaults.myNJAccountText}</span>
+              </Button>
             </div>
             <div className="margin-bottom-2">
               <Link href="/profile" passHref>
-                <button
-                  className="clear-button override-text-base"
+                <Button
+                  style="tertiary"
                   onClick={() => {
                     analytics.event.account_menu_my_profile.click.go_to_profile_screen();
                   }}
                 >
-                  {Config.navigationDefaults.profileLinkText}
-                </button>
+                  <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
+                </Button>
               </Link>
             </div>
             <AuthButton className="clear-button text-base text-left" />

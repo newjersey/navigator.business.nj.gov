@@ -84,7 +84,6 @@ hr {
 }
 
 .dashed-underline {
-  padding-bottom: 1px;
   border-bottom-width: 2px;
   border-bottom-style: dashed;
 }
@@ -105,10 +104,6 @@ hr {
   margin: auto;
   white-space: nowrap;
   width: 1px;
-}
-
-.override-text-base {
-  color: $base !important;
 }
 
 .border-primary,

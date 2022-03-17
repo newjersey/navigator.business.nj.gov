@@ -62,9 +62,9 @@ $success: #00a91c;
 $success-dark: #4d8055;
 $success-darker: #446443;
 
-$disabled-light: #e6e6e6;
-$disabled: #c9c9c9;
-$disabled-dark: #adadad;
+$disabled-light: $base-lighter;
+$disabled: $base;
+$disabled-dark: $base-light;
 
 $black: #000;
 $white: #fff;

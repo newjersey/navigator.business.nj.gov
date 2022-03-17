@@ -51,7 +51,6 @@ export const NavBarLoggedInMobile = ({
       >
         <button
           className="left-nav-menu-button radius-0"
-          data-hamburger
           data-testid="nav-menu-open"
           aria-label="open menu"
           onClick={() => {

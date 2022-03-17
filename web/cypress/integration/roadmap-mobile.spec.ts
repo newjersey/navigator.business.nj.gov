@@ -50,7 +50,7 @@ describe("Roadmap [feature] [all] [group3]", () => {
     cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
-    cy.get("[data-hamburger]").click({ force: true });
+    cy.get('[data-testid="nav-menu-open"]').click({ force: true });
     cy.get('[data-step="4"]').click({ force: true });
     cy.get('[data-task="check-local-requirements"]').click({ force: true });
     cy.get('[data-task-id="register-trade-name"]').should("not.exist");

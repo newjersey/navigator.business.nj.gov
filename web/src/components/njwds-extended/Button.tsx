@@ -21,6 +21,7 @@ interface Props {
   loading?: boolean;
   widthAutoOnMobile?: boolean;
   heightAutoOnMobile?: boolean;
+  intercomButton?: boolean;
 }
 
 export const Button = (props: Props): ReactElement => {
@@ -33,19 +34,19 @@ export const Button = (props: Props): ReactElement => {
   switch (props.style) {
     case "primary":
       style = "usa-button padding-y-1";
-      disabledClass = "usa-button--disabled";
+      disabledClass = " usa-button--disabled";
       break;
     case "primary-input-field-height":
       style = "usa-button padding-y-2";
-      disabledClass = "usa-button--disabled padding-y-2";
+      disabledClass = " usa-button--disabled padding-y-2";
       break;
     case "secondary":
       style = "usa-button usa-button--outline padding-y-1";
-      disabledClass = "usa-button--outline-disabled";
+      disabledClass = " usa-button--outline-disabled";
       break;
     case "secondary-input-field-height":
       style = "usa-button usa-button--outline padding-y-2";
-      disabledClass = "usa-button--outline-disabled padding-y-2";
+      disabledClass = " usa-button--outline-disabled padding-y-2";
       break;
     case "tertiary":
       style = "usa-button usa-button--unstyled";
@@ -66,22 +67,22 @@ export const Button = (props: Props): ReactElement => {
 
   return (
     <button
-      className={`${style} ${props.heightAutoOnMobile ? "height-auto" : ""}${
+      className={`${style}${props.heightAutoOnMobile ? " height-auto" : ""}${
         props.noRightMargin && props.style !== "tertiary" ? " margin-right-0" : ""
       }${!props.noRightMargin && props.style !== "tertiary" ? " margin-right-2" : ""}${
         props.style === "tertiary" ? " margin-right-0" : ""
       }${props.underline ? " underline" : ""}${props.smallText ? " font-body-2xs" : ""}${
         props.textBold ? " text-bold" : ""
-      }${props.widthAutoOnMobile ? " width-auto" : ""} ${showDisabledClass}`}
+      }${props.widthAutoOnMobile ? " width-auto" : ""}${showDisabledClass}${
+        props.intercomButton ? " intercom-button" : ""
+      }`}
       onClick={props.onClick}
       {...(props.typeSubmit ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
     >
       {props.loading ? (
         <div style={{ width: width, height: height }} data-testid="loading-spinner">
-          <div className="margin-top-neg-1">
-            <CircularProgress size={24} thickness={10} />
-          </div>
+          <CircularProgress size={24} thickness={10} />
         </div>
       ) : (
         <div ref={widthRef}>{props.children}</div>
