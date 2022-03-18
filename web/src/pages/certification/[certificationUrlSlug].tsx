@@ -23,15 +23,13 @@ interface Props {
 export const CertificationElement = (props: { certification: Certification }): ReactElement => {
   return (
     <>
-      <div className="flex flex-column space-between minh-37">
-        <div>
-          <div className="margin-bottom-2">
-            <h1>{props.certification.name}</h1>
-          </div>
-          <Content>{props.certification.contentMd}</Content>
+      <div className="minh-37">
+        <div className="margin-bottom-2">
+          <h1>{props.certification.name}</h1>
         </div>
-        <TaskCTA link={props.certification.callToActionLink} text={props.certification.callToActionText} />
+        <Content>{props.certification.contentMd}</Content>
       </div>
+      <TaskCTA link={props.certification.callToActionLink} text={props.certification.callToActionText} />
     </>
   );
 };
@@ -42,9 +40,9 @@ const CertificationPage = (props: Props): ReactElement => {
   return (
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.certification.name}`} />
-      <PageSkeleton>
-        <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} />
-        <SidebarPageLayout operateReferences={props.operateReferences}>
+      <PageSkeleton isWidePage>
+        <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} isWidePage />
+        <SidebarPageLayout operateReferences={props.operateReferences} isWidePage>
           <CertificationElement certification={props.certification} />
         </SidebarPageLayout>
       </PageSkeleton>

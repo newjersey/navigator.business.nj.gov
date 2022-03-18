@@ -15,6 +15,7 @@ interface Props {
   task?: Task | undefined;
   belowOutlineBoxComponent?: React.ReactNode;
   operateReferences?: Record<string, OperateReference>;
+  isWidePage?: boolean;
 }
 
 export const SidebarPageLayout = ({
@@ -22,6 +23,7 @@ export const SidebarPageLayout = ({
   task,
   belowOutlineBoxComponent,
   operateReferences,
+  isWidePage,
 }: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { userData } = useUserData();
@@ -49,14 +51,23 @@ export const SidebarPageLayout = ({
   return (
     <>
       <div className={`usa-section padding-top-0 desktop:padding-top-6`}>
-        <div className="grid-container">
+        <div className={`grid-container${isWidePage ? "-widescreen desktop:padding-x-7" : ""}`}>
           <div className="grid-row grid-gap">
-            <main className="usa-layout-docs__main desktop:grid-col-8 usa-layout-docs" id="main">
+            <main
+              className={`usa-layout-docs__main ${
+                isWidePage ? "desktop:grid-col-9" : "desktop:grid-col-8"
+              } usa-layout-docs`}
+              id="main"
+            >
               {!isLargeScreen && <div>{backButton}</div>}
               <div className="border-1px border-base-light usa-prose minh-40 padding-205">{children}</div>
               {belowOutlineBoxComponent}
             </main>
-            <div className="usa-layout-docs__sidenav desktop:grid-col-4 order-first">
+            <div
+              className={`usa-layout-docs__sidenav ${
+                isWidePage ? "desktop:grid-col-3" : "desktop:grid-col-4"
+              } order-first`}
+            >
               {isLargeScreen && (
                 <nav aria-label="Secondary">
                   {" "}

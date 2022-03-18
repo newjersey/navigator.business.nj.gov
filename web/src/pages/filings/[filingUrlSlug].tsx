@@ -30,23 +30,21 @@ const FilingPage = (props: Props): ReactElement => {
   return (
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.filing.name}`} />
-      <PageSkeleton>
-        <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} />
-        <SidebarPageLayout operateReferences={props.operateReferences}>
-          <div className="flex flex-column space-between minh-37">
-            <div>
-              <div className="margin-bottom-2">
-                <h1>{props.filing.name}</h1>
-              </div>
-              <div className="display-inline-flex margin-bottom-4" data-testid="due-date">
-                <Tag tagVariant="baseDark" bold={true}>
-                  {Config.filingDefaults.tagContentBeforeDueDate} {dueDate}
-                </Tag>
-              </div>
-              <Content>{props.filing.contentMd}</Content>
+      <PageSkeleton isWidePage>
+        <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} isWidePage />
+        <SidebarPageLayout operateReferences={props.operateReferences} isWidePage>
+          <div className="minh-37">
+            <div className="margin-bottom-2">
+              <h1>{props.filing.name}</h1>
             </div>
-            <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
+            <div className="display-inline-flex margin-bottom-4" data-testid="due-date">
+              <Tag tagVariant="baseDark" bold={true}>
+                {Config.filingDefaults.tagContentBeforeDueDate} {dueDate}
+              </Tag>
+            </div>
+            <Content>{props.filing.contentMd}</Content>
           </div>
+          <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
         </SidebarPageLayout>
       </PageSkeleton>
     </>
