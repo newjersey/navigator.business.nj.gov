@@ -117,7 +117,7 @@
     "@types/xml2js": "0.4.9",
     "@typescript-eslint/eslint-plugin": "5.15.0",
     "@typescript-eslint/parser": "5.15.0",
-    "aws-sdk": "2.1095.0",
+    "aws-sdk": "2.1085.0",
     "babel-loader": "8.2.3",
     "cat": "0.2.0",
     "check-node-version": "4.2.1",
