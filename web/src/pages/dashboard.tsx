@@ -9,6 +9,7 @@ import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadDashboardDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -18,6 +19,7 @@ import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
@@ -34,6 +36,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const router = useRouter();
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
+  const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
 
@@ -51,19 +54,16 @@ const DashboardPage = (props: Props): ReactElement => {
     const success = router.query.success;
     setSuccessAlert(success === "true");
   }, [router.isReady, router.query.success]);
-
   return (
-    <PageSkeleton showLegalMessage={true} isWidePage={true}>
+    <PageSkeleton isWidePage={true}>
       <NavBar isWidePage={true} />
-      <div className="margin-top-4 desktop:margin-top-0">
+      <hr className="margin-0" />
+      <div className={`margin-top-4 desktop:margin-top-0 ${isDesktopAndUp ? "grayRightGutter" : ""}`}>
         <main id="main" data-testid="SPL-main-ele">
-          <div
-            data-testid="SPL-div-ele"
-            className="usa-section padding-top-0 desktop:padding-top-5 padding-bottom-15"
-          >
+          <div data-testid="SPL-div-ele" className="usa-section padding-0">
             <div className="grid-container-widescreen desktop:padding-x-7 width-100">
               <div className="grid-row grid-gap-6">
-                <div className="desktop:grid-col-7 usa-prose">
+                <div className="desktop:grid-col-7 usa-prose margin-top-6 padding-bottom-7 desktop:padding-bottom-15">
                   <h1>
                     {userData?.user.name
                       ? templateEval(Config.dashboardDefaults.headerText, { name: userData.user.name })
@@ -94,8 +94,11 @@ const DashboardPage = (props: Props): ReactElement => {
 
                   {userData?.profileData.initialOnboardingFlow === "STARTING" && <UnGraduationBox />}
                 </div>
-
-                <div className="desktop:grid-col-5 usa-prose border-left-2px border-base-lighter margin-top-6 desktop:margin-top-0">
+                <div
+                  className={`desktop:grid-col-5 usa-prose border-left-2px border-base-lighter padding-top-6 bg-base-lightest padding-bottom-15 ${
+                    !isDesktopAndUp ? "border-top border-base-light" : ""
+                  }`}
+                >
                   <OpportunitiesList
                     certifications={props.certifications}
                     fundings={props.fundings}

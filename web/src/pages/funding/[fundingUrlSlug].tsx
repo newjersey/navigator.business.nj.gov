@@ -19,15 +19,13 @@ interface Props {
 export const FundingElement = (props: { funding: Funding }): ReactElement => {
   return (
     <>
-      <div className="flex flex-column space-between minh-37">
-        <div>
-          <div className="margin-bottom-2">
-            <h1>{props.funding.name}</h1>
-          </div>
-          <Content>{props.funding.contentMd}</Content>
+      <div className="minh-37">
+        <div className="margin-bottom-2">
+          <h1>{props.funding.name}</h1>
         </div>
-        <TaskCTA link={props.funding.callToActionLink} text={props.funding.callToActionText} />
+        <Content>{props.funding.contentMd}</Content>
       </div>
+      <TaskCTA link={props.funding.callToActionLink} text={props.funding.callToActionText} />
     </>
   );
 };
@@ -38,9 +36,9 @@ const FundingPage = (props: Props): ReactElement => {
   return (
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.funding.name}`} />
-      <PageSkeleton>
-        <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} />
-        <SidebarPageLayout operateReferences={props.operateReferences}>
+      <PageSkeleton isWidePage>
+        <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} isWidePage />
+        <SidebarPageLayout operateReferences={props.operateReferences} isWidePage>
           <FundingElement funding={props.funding} />
         </SidebarPageLayout>
       </PageSkeleton>

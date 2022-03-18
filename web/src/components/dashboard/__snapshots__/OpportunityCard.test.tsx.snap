@@ -4,7 +4,7 @@ exports[`OpportunityCard matches the layout 1`] = `
 <body>
   <div>
     <div
-      class="bg-base-lightest border-1px border-base-lighter padding-3 margin-bottom-205 radius-md"
+      class="bg-white border-1px border-base-lighter padding-3 radius-md margin-bottom-205"
       data-testid="test"
     >
       <div
@@ -16,13 +16,12 @@ exports[`OpportunityCard matches the layout 1`] = `
           <span
             class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
         text-no-wrap
-        bg-white text-black
+        bg-white text-black bg-certification
         
         
         
         padding-y-2px
       "
-            style="background-color: rgb(213, 160, 227);"
           >
             Funding
           </span>

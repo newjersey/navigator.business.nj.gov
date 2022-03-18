@@ -6,10 +6,11 @@ import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
 import { filterFundings } from "@/lib/domain-logic/filterFundings";
 import { sortCertifications } from "@/lib/domain-logic/sortCertifications";
 import { sortFundings } from "@/lib/domain-logic/sortFundings";
+import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, DashboardDisplayContent, Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
@@ -21,6 +22,7 @@ interface Props {
 export const OpportunitiesList = (props: Props): ReactElement => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { userData } = useUserData();
+  const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   const filteredSortedFundings = userData ? sortFundings(filterFundings(props.fundings, userData)) : [];
   const filteredSortedCertifications = userData
@@ -50,7 +52,7 @@ export const OpportunitiesList = (props: Props): ReactElement => {
   };
 
   return (
-    <>
+    <div>
       <header className="flex flex-justify flex-align-center">
         <h2>{Config.dashboardDefaults.opportunitiesHeader}</h2>
         <div className="text-base-dark font-sans-xs margin-bottom-2 padding-right-105">
@@ -59,57 +61,79 @@ export const OpportunitiesList = (props: Props): ReactElement => {
           })}
         </div>
       </header>
-      <div className="dashboard-opportunities-list padding-right-105" data-testid="visible-opportunities">
-        {nonHiddenSortedCertifications.map((cert) => (
-          <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
-        ))}
-        {nonHiddenSortedFundings.map((funding) => (
-          <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
-        ))}
-        {nonHiddenSortedFundings.length + nonHiddenSortedCertifications.length === 0 && (
-          <div className="fdc fac margin-y-3">
-            <h3 className="text-normal">{Config.dashboardDefaults.emptyOpportunitiesHeader}</h3>
-            <img src={`/img/signpost.svg`} className="" alt="" />
-            <p className="text-center">{Config.dashboardDefaults.emptyOpportunitiesText}</p>
-          </div>
-        )}
-      </div>
-      <hr className="margin-bottom-3 margin-top-0 margin-right-105" aria-hidden={true} />
-
-      <div className="margin-y-205 weight-unset-override">
-        <Content>{props.displayContent.opportunityTextMd}</Content>
-      </div>
-
-      <Accordion
-        elevation={0}
-        expanded={hiddenAccordionIsOpen}
-        onChange={() => setHiddenAccordionIsOpen(!hiddenAccordionIsOpen)}
-      >
-        <AccordionSummary
-          expandIcon={<Icon className="usa-icon--size-5 margin-x-1 text-primary">expand_more</Icon>}
-          aria-controls="hidden-opportunity-content"
-          id="hidden-opportunity-header"
-          data-testid="hidden-opportunity-header"
-        >
-          <div className="margin-y-2">
-            <h3 className="flex flex-align-center margin-0-override text-normal">
-              <div className="inline">
-                {templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, {
-                  count: String(hiddenOpportunitiesCount()),
-                })}
-              </div>
-            </h3>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails data-testid="hidden-opportunities">
-          {hiddenSortedCertifications.map((cert) => (
+      {isDesktopAndUp && <hr className="margin-bottom-3 margin-right-105 bg-base-light" aria-hidden={true} />}
+      <div className="dashboard-opportunities-list">
+        <div className="padding-right-105" data-testid="visible-opportunities">
+          {nonHiddenSortedCertifications.map((cert) => (
             <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
           ))}
-          {hiddenSortedFundings.map((funding) => (
+          {nonHiddenSortedFundings.map((funding) => (
             <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
           ))}
-        </AccordionDetails>
-      </Accordion>
-    </>
+          {nonHiddenSortedFundings.length + nonHiddenSortedCertifications.length === 0 && (
+            <div className="fdc fac margin-y-3">
+              <h3 className="text-normal">{Config.dashboardDefaults.emptyOpportunitiesHeader}</h3>
+              <img src={`/img/signpost.svg`} className="" alt="" />
+              <p className="text-center">{Config.dashboardDefaults.emptyOpportunitiesText}</p>
+            </div>
+          )}
+        </div>
+        <hr className="margin-top-3 margin-right-105 bg-base-light" aria-hidden={true} />
+        {isDesktopAndUp && (
+          <>
+            <div className="margin-y-205 margin-top-3 weight-unset-override">
+              <Content>{props.displayContent.opportunityTextMd}</Content>
+            </div>
+            <hr className="margin-right-105 margin-top-3 bg-base-light" aria-hidden={true} />
+          </>
+        )}
+        <div className="margin-right-3">
+          <Accordion
+            elevation={0}
+            expanded={hiddenAccordionIsOpen}
+            onChange={() => setHiddenAccordionIsOpen(!hiddenAccordionIsOpen)}
+            sx={{
+              backgroundColor: `#f0f0f0`,
+              ":before": { backgroundColor: "#adadad", marginRight: "12px" },
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<Icon className="usa-icon--size-5 margin-x-1 text-primary">expand_more</Icon>}
+              aria-controls="hidden-opportunity-content"
+              id="hidden-opportunity-header"
+              data-testid="hidden-opportunity-header"
+            >
+              <div className="margin-y-2">
+                <h3 className="flex flex-align-center margin-0-override text-normal">
+                  <div className="inline">
+                    {templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, {
+                      count: String(hiddenOpportunitiesCount()),
+                    })}
+                  </div>
+                </h3>
+              </div>
+            </AccordionSummary>
+            <AccordionDetails data-testid="hidden-opportunities">
+              {hiddenSortedCertifications.map((cert) => (
+                <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
+              ))}
+              {hiddenSortedFundings.map((funding) => (
+                <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
+              ))}
+            </AccordionDetails>
+          </Accordion>
+        </div>
+        {!isDesktopAndUp && (
+          <>
+            <hr className="margin-right-105 margin-top-0 margin-bottom-3 bg-base-light" aria-hidden={true} />
+            <div className="margin-y-205 weight-unset-override">
+              <Content>{props.displayContent.opportunityTextMd}</Content>
+            </div>
+            <hr className="margin-right-105 margin-top-3 margin-bottom-0 bg-base-light" aria-hidden={true} />
+          </>
+        )}
+      </div>
+      {isDesktopAndUp && <hr className="margin-bottom-3 margin-right-105 bg-base-light" aria-hidden={true} />}
+    </div>
   );
 };
