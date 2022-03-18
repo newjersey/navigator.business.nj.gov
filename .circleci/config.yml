@@ -1,10 +1,5 @@
 version: 2.1
 
-parameters:
-  build_content_site:
-    type: boolean
-    default: false
-
 commands:
   bootstrap-code-amplify:
     steps:
@@ -373,7 +368,7 @@ commands:
             sudo apt-get update
             sudo apt-get install awscli
 
-  generate-release-notes:
+  install-github-cli:
     steps:
       - run:
           name: Install Github CLI
@@ -382,6 +377,10 @@ commands:
             echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
             sudo apt update
             sudo apt -y install gh
+
+  generate-release-notes:
+    steps:
+      - install-github-cli
       - run:
           name: Generate Release Notes
           command: yarn semantic-release --branches $CIRCLE_BRANCH
@@ -392,6 +391,22 @@ commands:
             gh pr create --fill --base main --head $CIRCLE_BRANCH
 
 jobs:
+  rebase-content:
+    docker:
+      - image: cimg/node:14.19.0
+    steps:
+      - checkout
+      - install-github-cli
+      - run:
+          name: Update content-repo branch
+          command: |
+            gh auth setup-git
+            git config --global user.email "innovation-admin@nj.gov"
+            git config --global user.name  "NJ Innovation CI"
+            git checkout content-repo
+            git rebase origin/main
+            git push --force
+
   build:
     docker:
       - image: cimg/node:14.19.1
@@ -557,13 +572,7 @@ workflows:
           requires:
             - prepare-release
 
-  build-content:
-    when: << pipeline.parameters.build_content_site >>
-    jobs:
-      - build
-
   build-and-test:
-    unless: << pipeline.parameters.build_content_site >>
     jobs:
       - build:
           filters:
@@ -770,3 +779,10 @@ workflows:
                 - main
           requires:
             - dev-deploy
+      - rebase-content:
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
