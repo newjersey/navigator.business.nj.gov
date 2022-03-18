@@ -9,7 +9,9 @@ type TagVariant =
   | "noBg"
   | "baseDark"
   | "baseBlack"
-  | "required";
+  | "required"
+  | "certification"
+  | "funding";
 
 interface Props {
   tagVariant: TagVariant;
@@ -51,6 +53,12 @@ export const Tag = (props: Props): ReactElement => {
       break;
     case "baseBlack":
       styling = "bg-white text-black";
+      break;
+    case "certification":
+      styling = "bg-white text-black bg-certification";
+      break;
+    case "funding":
+      styling = "bg-white text-black bg-funding";
       break;
     case "required":
       styling = "bg-white text-accent-cool-darker border-1px border-accent-cool-darker";

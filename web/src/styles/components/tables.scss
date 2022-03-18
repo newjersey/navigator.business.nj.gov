@@ -1,3 +1,34 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+table,
+th,
+td {
+  border: 2px solid $base-light;
+}
+
+td {
+  height: 15rem;
+  vertical-align: top;
+  padding: 1rem;
+}
+
+.env-table td {
+  height: 1rem;
+  table-layout: auto;
+}
+
+.env-table td.enabled {
+  background-color: lightgreen;
+}
+
+.env-table td.disabled {
+  background-color: lightpink;
+}
+
 table.business-formation-table {
   border: 0px solid #f0f0f0;
 
