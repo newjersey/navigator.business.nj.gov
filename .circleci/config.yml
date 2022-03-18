@@ -574,6 +574,12 @@ workflows:
 
   build-and-test:
     jobs:
+      - rebase-content:
+          filters:
+            branches:
+              only:
+                - main
+                - build-add-rebase-content-step
       - build:
           filters:
             branches:
