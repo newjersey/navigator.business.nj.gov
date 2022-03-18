@@ -17,7 +17,7 @@ export const TwoButtonDialog = (props: Props) => {
   return (
     <Dialog fullWidth={false} maxWidth="sm" open={props.isOpen} onClose={props.close} aria-labelledby="modal">
       <DialogTitle id="modal">
-        <div className="padding-top-5 padding-x-2 text-bold font-body-lg">{props.title}</div>
+        <div className="padding-top-5 padding-x-1 text-bold font-body-lg">{props.title}</div>
         <IconButton
           aria-label="close"
           onClick={props.close}
@@ -31,15 +31,24 @@ export const TwoButtonDialog = (props: Props) => {
           <Icon className="usa-icon--size-4">close</Icon>
         </IconButton>
       </DialogTitle>
-      <DialogContent>
-        <div className="padding-x-2 padding-bottom-3" data-testid="modal-content">
-          <p className="padding-bottom-1 font-body-xs">{props.body}</p>
-          <Button style="primary" onClick={props.primaryButtonOnClick}>
-            {props.primaryButtonText}
-          </Button>
-          <Button style="secondary" noRightMargin onClick={props.close}>
-            {props.secondaryButtonText}
-          </Button>
+      <DialogContent sx={{ padding: 0 }}>
+        <p className="padding-x-4 padding-bottom-1 font-body-xs">{props.body}</p>
+        <div
+          className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"
+          data-testid="modal-content"
+        >
+          <div className="mobile-lg:margin-left-auto">
+            <Button
+              style="secondary"
+              onClick={props.close}
+              className="margin-bottom-1 mobile-lg:margin-bottom-0 tablet:margin-right-1"
+            >
+              {props.secondaryButtonText}
+            </Button>
+            <Button style="primary" noRightMargin onClick={props.primaryButtonOnClick}>
+              {props.primaryButtonText}
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
