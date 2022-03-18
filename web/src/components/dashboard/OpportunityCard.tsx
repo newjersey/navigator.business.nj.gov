@@ -19,19 +19,12 @@ interface Opportunity {
 interface Props {
   opportunity: Opportunity;
   urlPath: "funding" | "certification";
+  isLast?: boolean;
 }
 
 const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
-  funding: (
-    <Tag tagVariant="baseBlack" hexColor="#D5A0E3">
-      {Config.dashboardDefaults.fundingTagText}
-    </Tag>
-  ),
-  certification: (
-    <Tag tagVariant="baseBlack" hexColor="#b1b0e3">
-      {Config.dashboardDefaults.certificationTagText}
-    </Tag>
-  ),
+  funding: <Tag tagVariant="certification">{Config.dashboardDefaults.fundingTagText}</Tag>,
+  certification: <Tag tagVariant="funding">{Config.dashboardDefaults.certificationTagText}</Tag>,
 };
 
 const MAX_CONTENT_CHARS = 150;
@@ -79,7 +72,9 @@ export const OpportunityCard = (props: Props): ReactElement => {
   return (
     <div
       data-testid={props.opportunity.id}
-      className="bg-base-lightest border-1px border-base-lighter padding-3 margin-bottom-205 radius-md"
+      className={`bg-white border-1px border-base-lighter padding-3 radius-md${
+        props.isLast ? "" : " margin-bottom-205"
+      }`}
     >
       <div className="fdr margin-bottom-105">
         <div className="margin-bottom-1">{TYPE_TO_LABEL[props.urlPath]}</div>
