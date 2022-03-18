@@ -185,7 +185,7 @@
     ]
   },
   "engines": {
-    "node": ">=14.19.1"
+    "node": ">=14.19.0"
   },
   "repository": {
     "type": "git",
