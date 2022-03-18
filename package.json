@@ -65,7 +65,7 @@
     "swr": "1.2.2",
     "uuid": "8.3.2",
     "winston": "3.6.0",
-    "winston-cloudwatch": "3.2.0",
+    "winston-cloudwatch": "3.1.1",
     "xml2js": "0.4.23"
   },
   "devDependencies": {
