@@ -43,7 +43,7 @@
     "serverless-http": "2.7.0",
     "simple-oauth2": "4.3.0",
     "winston": "3.6.0",
-    "winston-cloudwatch": "3.1.1",
+    "winston-cloudwatch": "3.2.0",
     "xml2js": "0.4.23"
   },
   "devDependencies": {
