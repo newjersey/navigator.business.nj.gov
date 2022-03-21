@@ -77,7 +77,6 @@ const DashboardPage = (props: Props): ReactElement => {
                       : Config.dashboardDefaults.missingNameHeaderText}
                   </h1>
                   <Content>{props.displayContent.introTextMd}</Content>
-
                   <Button
                     style="tertiary"
                     className="margin-y-2 margin-left-05"

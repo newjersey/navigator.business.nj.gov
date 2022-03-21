@@ -54,14 +54,17 @@ export const OpportunitiesList = (props: Props): ReactElement => {
   return (
     <div>
       <header className="flex flex-justify flex-align-center">
-        <h2>{Config.dashboardDefaults.opportunitiesHeader}</h2>
-        <div className="text-base-dark font-sans-xs margin-bottom-2 desktop:padding-right-1">
+        <h2 className="margin-bottom-0">{Config.dashboardDefaults.opportunitiesHeader}</h2>
+        <div className="text-base-dark font-sans-xs margin-bottom-0 desktop:padding-right-1">
           {templateEval(Config.dashboardDefaults.opportunitiesCount, {
             count: String(nonHiddenSortedFundings.length + nonHiddenSortedCertifications.length),
           })}
         </div>
       </header>
-      {isDesktopAndUp && <hr className="margin-bottom-3 margin-right-105 bg-base-light" aria-hidden={true} />}
+      <hr
+        className="margin-bottom-4 margin-top-105 desktop:margin-right-1 bg-base-light"
+        aria-hidden={true}
+      />
       <div className="dashboard-opportunities-list desktop:margin-right-1">
         <div className="desktop:padding-right-105" data-testid="visible-opportunities">
           {nonHiddenSortedCertifications.map((cert) => (
@@ -78,13 +81,13 @@ export const OpportunitiesList = (props: Props): ReactElement => {
             </div>
           )}
         </div>
-        <hr className="margin-top-3 margin-right-105 bg-base-light" aria-hidden={true} />
+        <hr className="margin-top-3 desktop:margin-right-1 bg-base-light" aria-hidden={true} />
         {isDesktopAndUp && (
           <>
             <div className="margin-y-205 margin-top-3 weight-unset-override">
               <Content>{props.displayContent.opportunityTextMd}</Content>
             </div>
-            <hr className="margin-right-105 margin-top-3 bg-base-light" aria-hidden={true} />
+            <hr className="margin-right-1 margin-top-3 bg-base-light" aria-hidden={true} />
           </>
         )}
         <div className="desktop:margin-right-3">
@@ -125,15 +128,26 @@ export const OpportunitiesList = (props: Props): ReactElement => {
         </div>
         {!isDesktopAndUp && (
           <>
-            <hr className="margin-right-105 margin-top-0 margin-bottom-3 bg-base-light" aria-hidden={true} />
+            <hr
+              className="desktop:margin-right-1 margin-top-0 margin-bottom-3 bg-base-light"
+              aria-hidden={true}
+            />
             <div className="margin-y-205 weight-unset-override">
               <Content>{props.displayContent.opportunityTextMd}</Content>
             </div>
-            <hr className="margin-right-105 margin-top-3 margin-bottom-0 bg-base-light" aria-hidden={true} />
+            <hr
+              className="desktop:margin-right-1 margin-top-3 margin-bottom-0 bg-base-light"
+              aria-hidden={true}
+            />
           </>
         )}
       </div>
-      {isDesktopAndUp && <hr className="margin-bottom-3 margin-right-105 bg-base-light" aria-hidden={true} />}
+      {isDesktopAndUp && (
+        <hr
+          className="margin-bottom-3 margin-top-4 desktop:margin-right-1 bg-base-light"
+          aria-hidden={true}
+        />
+      )}
     </div>
   );
 };
