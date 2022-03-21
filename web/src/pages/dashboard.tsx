@@ -58,12 +58,12 @@ const DashboardPage = (props: Props): ReactElement => {
     <PageSkeleton isWidePage={true}>
       <NavBar isWidePage={true} />
       <hr className="margin-0" />
-      <div className={`margin-top-4 desktop:margin-top-0 ${isDesktopAndUp ? "grayRightGutter" : ""}`}>
+      <div className={`desktop:margin-top-4 desktop:margin-top-0 ${isDesktopAndUp ? "grayRightGutter" : ""}`}>
         <main id="main" data-testid="SPL-main-ele">
           <div data-testid="SPL-div-ele" className="usa-section padding-0">
-            <div className="grid-container-widescreen desktop:padding-x-7 width-100">
-              <div className="grid-row grid-gap-6">
-                <div className="desktop:grid-col-7 usa-prose margin-top-6 padding-bottom-7 desktop:padding-bottom-15">
+            <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
+              <div className="grid-row">
+                <div className="padding-x-2 desktop:grid-col-7 usa-prose margin-top-6 padding-bottom-7 desktop:padding-bottom-15 desktop:padding-right-5">
                   <h1>
                     {userData?.user.name
                       ? templateEval(Config.dashboardDefaults.headerText, { name: userData.user.name })
@@ -95,8 +95,10 @@ const DashboardPage = (props: Props): ReactElement => {
                   {userData?.profileData.initialOnboardingFlow === "STARTING" && <UnGraduationBox />}
                 </div>
                 <div
-                  className={`desktop:grid-col-5 usa-prose border-left-2px border-base-lighter padding-top-6 bg-base-lightest padding-bottom-15 ${
-                    !isDesktopAndUp ? "border-top border-base-light" : ""
+                  className={`desktop:grid-col-5 usa-prose  border-base-lighter padding-top-6 bg-base-lightest padding-bottom-15 ${
+                    !isDesktopAndUp
+                      ? "padding-x-2 border-top border-base-light "
+                      : "border-left-2px padding-left-5"
                   }`}
                 >
                   <OpportunitiesList

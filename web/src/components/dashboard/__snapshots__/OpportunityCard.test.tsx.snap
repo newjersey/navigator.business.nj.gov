@@ -8,11 +8,9 @@ exports[`OpportunityCard matches the layout 1`] = `
       data-testid="test"
     >
       <div
-        class="fdr margin-bottom-105"
+        class="fdr margin-bottom-205"
       >
-        <div
-          class="margin-bottom-1"
-        >
+        <div>
           <span
             class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
         text-no-wrap
@@ -48,7 +46,7 @@ exports[`OpportunityCard matches the layout 1`] = `
                   />
                 </svg>
                 <span
-                  class="margin-left-05"
+                  class="margin-left-05 line-height-sans-2"
                 >
                   Hide
                 </span>
@@ -58,7 +56,7 @@ exports[`OpportunityCard matches the layout 1`] = `
         </div>
       </div>
       <div
-        class="text-normal font-body-md margin-bottom-1"
+        class="text-normal font-body-md margin-bottom-205"
       >
         <a
           class="usa-link"
