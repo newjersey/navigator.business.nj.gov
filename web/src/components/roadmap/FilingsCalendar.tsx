@@ -121,7 +121,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="flex flex-align-end padding-y-2">
+      <div className="flex flex-align-end padding-top-2">
         <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
         <div className="margin-top-05">
           <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
@@ -134,6 +134,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           </ArrowTooltip>
         </div>
       </div>
+      <hr className="margin-bottom-4 margin-top-105 bg-base-light" aria-hidden={true} />
       {isLargeScreen ? renderCalendar() : renderList()}
     </>
   );
