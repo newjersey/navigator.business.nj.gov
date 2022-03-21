@@ -62,7 +62,7 @@
     "swr": "1.2.2"
   },
   "devDependencies": {
-    "@babel/core": "7.17.7",
+    "@babel/core": "7.17.8",
     "@jest/types": "27.5.1",
     "@mdx-js/react": "2.1.0",
     "@next/bundle-analyzer": "12.1.0",
@@ -76,7 +76,7 @@
     "@storybook/preset-scss": "1.0.3",
     "@storybook/react": "6.4.19",
     "@storybook/storybook-deployer": "2.8.10",
-    "@swc/core": "1.2.158",
+    "@swc/core": "1.2.159",
     "@swc/jest": "0.2.20",
     "@testing-library/dom": "8.11.3",
     "@testing-library/jest-dom": "5.16.2",
@@ -86,8 +86,8 @@
     "@types/jest": "27.4.1",
     "@types/lodash.orderby": "4.6.6",
     "@types/node": "14.18.12",
-    "@types/react": "17.0.40",
-    "@types/react-dom": "17.0.13",
+    "@types/react": "17.0.41",
+    "@types/react-dom": "17.0.14",
     "@types/react-swipeable-views": "0.13.1",
     "@types/react-tabs": "2.3.4",
     "@types/react-transition-group": "4.4.4",
