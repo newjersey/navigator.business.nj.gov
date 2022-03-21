@@ -1368,6 +1368,16 @@ describe("<BusinessFormation />", () => {
         await submitContactsTab();
         expect(currentUserData().formationData.formationFormData.members.length).toEqual(10);
       });
+
+      it("renders mobile view of members table", async () => {
+        setDesktopScreen(false);
+
+        renderWithData({ members: [], agentNumberOrManual: "MANUAL_ENTRY" });
+        await submitBusinessNameTab();
+        await submitBusinessTab();
+        await fillAndSubmitMemberModal({});
+        expect(subject.getByTestId("members-table-mobile")).toBeInTheDocument();
+      });
     });
 
     it("updates total and subtotals correctly", async () => {

@@ -35,6 +35,21 @@ td {
   background-color: lightpink;
 }
 
+table.members-mobile {
+  tbody {
+    tr {
+      border: 1px solid $base-lighter;
+    }
+
+    tr:nth-child(1) {
+      border-top: 1px solid $base-light;
+    }
+    tr:nth-child(even) {
+      background-color: $base-lightest;
+    }
+  }
+}
+
 table.business-formation-table {
   border: 0px solid #f0f0f0;
 
