@@ -27,7 +27,6 @@
   "dependencies": {
     "@aws-amplify/auth": "4.4.3",
     "@aws-amplify/core": "4.4.1",
-    "@aws-sdk/client-cloudwatch-logs": "3.54.1",
     "@businessnjgovnavigator/content": "*",
     "@businessnjgovnavigator/shared": "*",
     "@emotion/react": "11.8.2",
@@ -66,7 +65,7 @@
     "swr": "1.2.2",
     "uuid": "8.3.2",
     "winston": "3.6.0",
-    "winston-cloudwatch": "4.0.1",
+    "winston-cloudwatch": "3.1.1",
     "xml2js": "0.4.23"
   },
   "devDependencies": {
