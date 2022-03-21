@@ -523,6 +523,8 @@ collections:
               - { label: Unhide Opportunity Text, name: unhideOpportunityText, widget: string }
               - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: string }
               - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
+              - { label: Empty Calendar Title Text, name: emptyCalendarTitleText, widget: string }
+              - { label: Empty Calendar Body Text, name: emptyCalendarBodyText, widget: string }
               - { label: Funding Tag Text, name: fundingTagText, widget: string }
               - { label: Certification Tag Text, name: certificationTagText, widget: string }
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }

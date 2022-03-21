@@ -12,7 +12,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers";
+import { markdownToText, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -137,6 +137,15 @@ describe("dashboard", () => {
     expect(subject.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
     expect(subject.getByText(dueDate.format("M/D"), { exact: false })).toBeInTheDocument();
     expect(subject.getByText("Annual Report")).toBeInTheDocument();
+  });
+
+  it("displays empty calendar content when there are no filings", () => {
+    useMockUserData({ taxFilingData: generateTaxFilingData({ filings: [] }) });
+    const subject = renderPage({});
+    expect(subject.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
+    expect(
+      subject.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+    ).toBeInTheDocument();
   });
 
   it("displays filings calendar as list with annual report date", () => {

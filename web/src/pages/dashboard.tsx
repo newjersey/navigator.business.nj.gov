@@ -22,7 +22,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 interface Props {
   displayContent: DashboardDisplayContent;
@@ -54,6 +54,13 @@ const DashboardPage = (props: Props): ReactElement => {
     const success = router.query.success;
     setSuccessAlert(success === "true");
   }, [router.isReady, router.query.success]);
+
+  const taxFilings = useMemo(
+    () =>
+      userData != null && userData.profileData.dateOfFormation != null ? userData.taxFilingData.filings : [],
+    [userData]
+  );
+
   return (
     <PageSkeleton isWidePage={true}>
       <NavBar isWidePage={true} />
@@ -80,18 +87,30 @@ const DashboardPage = (props: Props): ReactElement => {
                   >
                     {Config.dashboardDefaults.editProfileText}
                   </Button>
+                  {taxFilings.length > 0 ? (
+                    <>
+                      <FilingsCalendar taxFilings={taxFilings} operateReferences={props.operateReferences} />
 
-                  <FilingsCalendar
-                    taxFilings={
-                      userData != null && userData.profileData.dateOfFormation != null
-                        ? userData.taxFilingData.filings
-                        : []
-                    }
-                    operateReferences={props.operateReferences}
-                  />
+                      <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
+                    </>
+                  ) : (
+                    <div className=" padding-y-2">
+                      <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
+                      <hr className="bg-base-light margin-y-3 margin-right-105" aria-hidden={true} />
+                      <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col bg-base-lightest usa-prose padding-y-205 padding-x-3">
+                        <Content>{Config.dashboardDefaults.emptyCalendarTitleText}</Content>
+                        <img
+                          className="padding-y-2"
+                          src={`/img/empty-trophy-illustration.png`}
+                          alt="empty calendar"
+                        />
 
-                  <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
-
+                        <Content onClick={editOnClick}>
+                          {Config.dashboardDefaults.emptyCalendarBodyText}
+                        </Content>
+                      </div>
+                    </div>
+                  )}
                   {userData?.profileData.initialOnboardingFlow === "STARTING" && <UnGraduationBox />}
                 </div>
                 <div

@@ -203,7 +203,7 @@
     "calendarLegalText": "This calendar is not a complete list of your obligations as a business.",
     "fundingTagText": "Funding",
     "missingNameHeaderText": "Hello!",
-    "calendarHeader": "My Calendar",
+    "calendarHeader": "Upcoming Filings",
     "editProfileText": "Edit My Profile",
     "certificationTagText": "Certification",
     "headerText": "Hello, ${name}",
@@ -213,7 +213,9 @@
     "hideOpportunityText": "Hide",
     "unhideOpportunityText": "Unhide",
     "emptyOpportunitiesHeader": "No matching opportunities yet.",
-    "emptyOpportunitiesText": "If you're seeing this, you might have hidden all your opportunities. Don't worry, you can view all hidden opportunities below."
+    "emptyOpportunitiesText": "If you're seeing this, you might have hidden all your opportunities. Don't worry, you can view all hidden opportunities below.",
+    "emptyCalendarTitleText": "### Looks like you do not have any filings due!",
+    "emptyCalendarBodyText": "If you are an LLC, C Corp, L,P, or LLP, you need to tell us your business formation date so we can tell you when your next filing is due. You can do this by [updating your profile](#)."
   },
   "landingPage": {
     "column1Image": "../img/Not-Starting-1-visit-site.svg",
