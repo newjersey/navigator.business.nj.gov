@@ -6,7 +6,9 @@ table {
 
 table,
 th,
-td {
+td,
+.usa-prose > table td,
+.usa-prose > table th {
   border: 2px solid $base-light;
 }
 
@@ -14,6 +16,10 @@ td {
   height: 15rem;
   vertical-align: top;
   padding: 1rem;
+}
+
+.td-gray-border {
+  border: 2px solid $base-light !important;
 }
 
 .env-table td {

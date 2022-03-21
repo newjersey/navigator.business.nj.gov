@@ -76,13 +76,13 @@ export const OpportunityCard = (props: Props): ReactElement => {
         props.isLast ? "" : " margin-bottom-205"
       }`}
     >
-      <div className="fdr margin-bottom-105">
-        <div className="margin-bottom-1">{TYPE_TO_LABEL[props.urlPath]}</div>
+      <div className="fdr margin-bottom-205">
+        <div>{TYPE_TO_LABEL[props.urlPath]}</div>
         <div className="mla">
           <Button style="narrow-light" onClick={() => (isHidden() ? unhideSelf() : hideSelf())}>
             <div className="fdr fac">
               <Icon>{isHidden() ? "visibility" : "visibility_off"}</Icon>
-              <span className="margin-left-05">
+              <span className="margin-left-05 line-height-sans-2">
                 {isHidden()
                   ? Config.dashboardDefaults.unhideOpportunityText
                   : Config.dashboardDefaults.hideOpportunityText}
@@ -91,7 +91,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
           </Button>
         </div>
       </div>
-      <div className="text-normal font-body-md margin-bottom-1">
+      <div className="text-normal font-body-md margin-bottom-205">
         <a className="usa-link" href={`/${props.urlPath}/${props.opportunity.urlSlug}`}>
           {props.opportunity.name}
         </a>

@@ -55,15 +55,15 @@ export const OpportunitiesList = (props: Props): ReactElement => {
     <div>
       <header className="flex flex-justify flex-align-center">
         <h2>{Config.dashboardDefaults.opportunitiesHeader}</h2>
-        <div className="text-base-dark font-sans-xs margin-bottom-2 padding-right-105">
+        <div className="text-base-dark font-sans-xs margin-bottom-2 desktop:padding-right-1">
           {templateEval(Config.dashboardDefaults.opportunitiesCount, {
             count: String(nonHiddenSortedFundings.length + nonHiddenSortedCertifications.length),
           })}
         </div>
       </header>
       {isDesktopAndUp && <hr className="margin-bottom-3 margin-right-105 bg-base-light" aria-hidden={true} />}
-      <div className="dashboard-opportunities-list">
-        <div className="padding-right-105" data-testid="visible-opportunities">
+      <div className="dashboard-opportunities-list desktop:margin-right-1">
+        <div className="desktop:padding-right-105" data-testid="visible-opportunities">
           {nonHiddenSortedCertifications.map((cert) => (
             <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
           ))}
@@ -87,7 +87,7 @@ export const OpportunitiesList = (props: Props): ReactElement => {
             <hr className="margin-right-105 margin-top-3 bg-base-light" aria-hidden={true} />
           </>
         )}
-        <div className="margin-right-3">
+        <div className="desktop:margin-right-3">
           <Accordion
             elevation={0}
             expanded={hiddenAccordionIsOpen}

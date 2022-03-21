@@ -84,7 +84,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             return (
               <tr key={rowIndex}>
                 {monthIndicesForRow.map((month) => (
-                  <td key={month}>{getMonth(month)}</td>
+                  <td key={month} className="td-gray-border">
+                    {getMonth(month)}
+                  </td>
                 ))}
               </tr>
             );
