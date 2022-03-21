@@ -3,7 +3,11 @@
 }
 
 hr {
-  background-color: #e6e6e6;
+  background-color: $base-lighter;
+}
+
+.vl {
+  border-right: 2px solid $base-lighter;
 }
 
 .green-box {

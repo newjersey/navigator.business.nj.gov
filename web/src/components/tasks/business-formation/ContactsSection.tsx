@@ -73,7 +73,7 @@ export const ContactsSection = (): ReactElement => {
     <>
       <div data-testid="contacts-section">
         <Members />
-        <hr />
+        <hr className="margin-top-0 margin-bottom-3" />
         <Signatures />
         <BusinessFormationFieldAlert
           showRequiredFieldsError={showRequiredFieldsError}
