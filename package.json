@@ -199,7 +199,7 @@
   "homepage": "https://github.com/newjersey/navigator.business.nj.gov#readme",
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --fix ",
-    "*.{js,ts,tsx,css,md}": "prettier --write"
+    "*.{js,ts,tsx,css,md,scss,yml}": "prettier --write"
   },
   "prettier": {
     "printWidth": 110,
