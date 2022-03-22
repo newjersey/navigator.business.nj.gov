@@ -31,7 +31,9 @@ exports[`OpportunityCard matches the layout 1`] = `
             class="usa-button usa-tag bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button margin-right-2"
             type="button"
           >
-            <div>
+            <div
+              class="display-flex flex-row flex-justify-center flex-align-center"
+            >
               <div
                 class="fdr fac"
               >

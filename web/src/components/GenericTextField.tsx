@@ -22,6 +22,7 @@ export interface GenericTextFieldProps {
     minLength?: number;
   };
   formInputWide?: boolean;
+  ariaLabel?: string;
 }
 
 export const GenericTextField = (props: GenericTextFieldProps): ReactElement => {
@@ -105,7 +106,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
         sx={{ width: 1, ...fieldOptions?.sx }}
         inputProps={{
           ...fieldOptions?.inputProps,
-          "aria-label": camelCaseToSentence(props.fieldName),
+          "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
         }}
       />
     </div>

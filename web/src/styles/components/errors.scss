@@ -1,0 +1,15 @@
+.checkbox-error-backdrop-layer {
+  z-index: 1;
+  background-color: white;
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  margin-top: 6px;
+  margin-left: 4px;
+  border-radius: 3px;
+}
+
+.checkbox-error-backdrop {
+  border-radius: 3px;
+  background-color: rgba(181, 29, 9, 0.15);
+}

@@ -106,7 +106,9 @@ export const Button = (props: Props): ReactElement => {
           <CircularProgress size={24} thickness={10} />
         </div>
       ) : (
-        <div ref={widthRef}>{props.children}</div>
+        <div ref={widthRef} className="display-flex flex-row flex-justify-center flex-align-center">
+          {props.children}
+        </div>
       )}
     </button>
   );

@@ -7,7 +7,9 @@ exports[`Button Styles primary displays correctly 1`] = `
       class="usa-button padding-y-1 margin-right-2"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -22,7 +24,9 @@ exports[`Button Styles primary-big displays correctly 1`] = `
       class="margin-right-2"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -37,7 +41,9 @@ exports[`Button Styles primary-input-field-height displays correctly 1`] = `
       class="usa-button padding-y-2 margin-right-2"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -52,7 +58,9 @@ exports[`Button Styles secondary displays correctly 1`] = `
       class="usa-button usa-button--outline padding-y-1 margin-right-2"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -67,7 +75,9 @@ exports[`Button Styles secondary-big displays correctly 1`] = `
       class="margin-right-2"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -82,7 +92,9 @@ exports[`Button Styles secondary-input-field-height displays correctly 1`] = `
       class="usa-button usa-button--outline padding-y-2 margin-right-2"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -97,7 +109,9 @@ exports[`Button Styles tertiary displays correctly 1`] = `
       class="usa-button usa-button--unstyled margin-right-0"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -147,7 +161,9 @@ exports[`Button submit button displays correctly 1`] = `
       class="usa-button padding-y-1 margin-right-2"
       type="submit"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -163,7 +179,9 @@ exports[`Button with dataTestid displays correctly 1`] = `
       data-testid="test-button-1"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -178,7 +196,9 @@ exports[`Button with heightAutoOnMobile button displays correctly 1`] = `
       class="usa-button padding-y-1 height-auto margin-right-2"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -193,7 +213,9 @@ exports[`Button with intercomButton button displays correctly 1`] = `
       class="usa-button padding-y-1 margin-right-2 intercom-button"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -208,7 +230,9 @@ exports[`Button with noRightMargin button displays correctly 1`] = `
       class="usa-button padding-y-1 margin-right-0"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -223,7 +247,9 @@ exports[`Button with smallText button displays correctly 1`] = `
       class="usa-button padding-y-1 margin-right-2 font-body-2xs"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -238,7 +264,9 @@ exports[`Button with textBold button displays correctly 1`] = `
       class="usa-button padding-y-1 margin-right-2 textBold"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -253,7 +281,9 @@ exports[`Button with underline button displays correctly 1`] = `
       class="usa-button padding-y-1 margin-right-2 underline"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>
@@ -268,7 +298,9 @@ exports[`Button with widthAutoOnMobile button displays correctly 1`] = `
       class="usa-button padding-y-1 width-auto margin-right-2"
       type="button"
     >
-      <div>
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
         Test Button
       </div>
     </button>

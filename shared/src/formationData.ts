@@ -13,6 +13,11 @@ export interface FormationMember {
   addressZipCode: string;
 }
 
+export interface FormationSigner {
+  name: string;
+  signature: boolean;
+}
+
 export interface FormationFormData {
   businessName: string;
   businessSuffix: BusinessSuffix | undefined;
@@ -31,8 +36,8 @@ export interface FormationFormData {
   agentOfficeAddressState: string;
   agentOfficeAddressZipCode: string;
   members: FormationMember[];
-  signer: string;
-  additionalSigners: string[];
+  signer: FormationSigner;
+  additionalSigners: FormationSigner[];
   paymentType: PaymentType;
   annualReportNotification: boolean;
   corpWatchNotification: boolean;
@@ -49,6 +54,7 @@ export type FormationTextField = Exclude<
   | "businessSuffix"
   | "businessStartDate"
   | "agentNumberOrManual"
+  | "signer"
   | "additionalSigners"
   | "paymentType"
   | "annualReportNotification"
@@ -87,7 +93,10 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: "",
     members: [],
-    signer: "",
+    signer: {
+      name: "",
+      signature: false,
+    },
     additionalSigners: [],
     paymentType: undefined,
     annualReportNotification: false,
