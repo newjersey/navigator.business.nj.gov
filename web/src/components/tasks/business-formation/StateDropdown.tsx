@@ -28,7 +28,8 @@ export const StateDropdown = (props: Props): ReactElement => {
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     const value = event.target.value;
-    const invalid = props.required ? !value.trim() : false;
+    const invalid = props.required ? !value.trim() || getState(value) === undefined : false;
+
     props.onValidation && props.onValidation(props.fieldName, invalid);
   };
 
