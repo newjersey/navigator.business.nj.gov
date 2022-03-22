@@ -49,7 +49,7 @@ export const StateDropdown = (props: Props): ReactElement => {
   });
 
   const getState = (value: string | undefined): StateObject | undefined =>
-    states.find((state: StateObject) => state.name == value || state.shortCode == value);
+    states.find((state: StateObject) => state.name == value || state.shortCode == value?.toUpperCase());
 
   return (
     <Autocomplete
