@@ -2327,7 +2327,7 @@ __metadata:
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.5.0
-    serverless-offline-ssm: 5.2.0
+    serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.1
     simple-oauth2: 4.3.0
@@ -2488,7 +2488,7 @@ __metadata:
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.5.0
-    serverless-offline-ssm: 5.2.0
+    serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.6.1
     simple-oauth2: 4.3.0
@@ -29286,10 +29286,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline-ssm@npm:5.2.0":
-  version: 5.2.0
-  resolution: "serverless-offline-ssm@npm:5.2.0"
-  checksum: 3cb1ac9bbf74f6113e85c161ff9e41cec1d25a5e52846f5a180cd4929808cb480a196389e35197e157e06ef13fc0732eb09b5b6c55765b470d84506d84c1295c
+"serverless-offline-ssm@npm:6.2.0":
+  version: 6.2.0
+  resolution: "serverless-offline-ssm@npm:6.2.0"
+  checksum: 596e2594bece0572a178e77d8cc5a262fa1a2739e7a8bbb6435db111c0f1d9536376610544ed5d0bd2641e2e5528c1be8635adf05746bf27a86f806e012fd2d2
   languageName: node
   linkType: hard
 
