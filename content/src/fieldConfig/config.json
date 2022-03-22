@@ -154,11 +154,6 @@
     "reviewPageEmailLabel": "**Email:**",
     "reviewPageMembersHeader": "### Members",
     "nameCheckValidationErrorText": "You need to enter a business name to check availability.",
-    "signatureColumnLabel": "Signature",
-    "signatureAidText": "By checking this box I confirm that I am an authorized representative of this business",
-    "signatureDeleteMobileText": "Delete Signer",
-    "signatureCheckboxErrorText": "Please click the checkbox above to authorize this signature.",
-    "additionalSignatureNameErrorText": "Full name is required for each additional signer.",
     "successPageHeader": "Hooray!"
   },
   "selfRegistration": {
