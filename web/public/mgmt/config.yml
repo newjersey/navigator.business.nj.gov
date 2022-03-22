@@ -54,11 +54,7 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Business Start Date Tooltip,
-                  name: businessStartDateTooltip,
-                  widget: string,
-                }
+              - { label: Business Start Date Tooltip, name: businessStartDateTooltip, widget: string }
               - {
                   label: Business Address - Header,
                   name: businessAddressHeader,
@@ -122,11 +118,7 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Business Suffix Tooltip,
-                  name: businessSuffixTooltip,
-                  widget: string,
-                }
+              - { label: Business Suffix Tooltip, name: businessSuffixTooltip, widget: string }
               - { label: Business Suffix Placeholder, name: businessSuffixPlaceholder, widget: string }
               - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
               - {
@@ -219,10 +211,26 @@ collections:
               - { label: Error - Suffix, name: suffixErrorText, widget: string }
               - { label: Initial Next Button Text, name: initialNextButtonText, widget: string }
               - { label: LLC Label, name: llcText, widget: string }
-              - { label: Legal Structure Warning Modal Header, name: legalStructureWarningModalHeader, widget: string }
-              - { label: Legal Structure Warning Modal Body, name: legalStructureWarningModalBody, widget: string }
-              - { label: Legal Structure Warning Modal Continue Button Text, name: legalStructureWarningModalContinueButtonText, widget: string }
-              - { label: Legal Structure Warning Modal Cancel Button Text, name: legalStructureWarningModalCancelButtonText, widget: string }
+              - {
+                  label: Legal Structure Warning Modal Header,
+                  name: legalStructureWarningModalHeader,
+                  widget: string,
+                }
+              - {
+                  label: Legal Structure Warning Modal Body,
+                  name: legalStructureWarningModalBody,
+                  widget: string,
+                }
+              - {
+                  label: Legal Structure Warning Modal Continue Button Text,
+                  name: legalStructureWarningModalContinueButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Legal Structure Warning Modal Cancel Button Text,
+                  name: legalStructureWarningModalCancelButtonText,
+                  widget: string,
+                }
               - { label: Member - Address Line 2 Optional, name: membersAddressLine2Optional, widget: string }
               - { label: Member - Back Button, name: membersModalBackButtonText, widget: string }
               - { label: Member - Expand Link, name: membersExpandText, widget: string }
@@ -273,11 +281,7 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Member Modal - State Placeholder,
-                  name: memberModalStatePlaceholder,
-                  widget: string,
-                }
+              - { label: Member Modal - State Placeholder, name: memberModalStatePlaceholder, widget: string }
               - {
                   label: Member Modal - Zip Code Label,
                   name: memberModalZipCodeLabel,
@@ -495,6 +499,15 @@ collections:
                 }
               - { label: Same Agent Info As Account, name: sameAgentInfoAsAccount, widget: string }
               - { label: Same Agent Address As Business, name: sameAgentAddressAsBusiness, widget: string }
+              - { label: Signature Column Label, name: signatureColumnLabel, widget: string }
+              - { label: Signature Aid Text, name: signatureAidText, widget: string }
+              - { label: Signature Delete Mobile Text, name: signatureDeleteMobileText, widget: string }
+              - { label: Signature Checkbox Error Text, name: signatureCheckboxErrorText, widget: string }
+              - {
+                  label: Additional Signature Name Error Text,
+                  name: additionalSignatureNameErrorText,
+                  widget: string,
+                }
               - {
                   label: Signer - Label,
                   name: signerLabel,
@@ -607,7 +620,11 @@ collections:
               - { label: Task Page Nav Bar Heading, name: taskPageNavBarHeading, widget: string }
               - { label: Profile Link Text, name: profileLinkText, widget: string }
               - { label: NavBar Guest Profile text, name: navBarGuestText, widget: string }
-              - { label: Navbar Guest dropdown registration text, name: navBarGuestRegistrationText, widget: string }
+              - {
+                  label: Navbar Guest dropdown registration text,
+                  name: navBarGuestRegistrationText,
+                  widget: string,
+                }
               - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
               - { label: Guest Alert Body, name: guestAlertBody, widget: string }
               - { label: Guest Success Toast Title, name: guestSuccessTitle, widget: string }
@@ -728,8 +745,16 @@ collections:
               - { label: Graduation Header, name: graduationHeader, widget: string }
               - { label: Graduation Body, name: graduationBodyText, widget: string }
               - { label: Graduation Button, name: graduationButtonText, widget: string }
-              - { label: Graduation Modal Continue Button Text, name: graduationModalContinueButtonText, widget: string }
-              - { label: Graduation Modal Cancel Button Text, name: graduationModalCancelButtonText, widget: string }
+              - {
+                  label: Graduation Modal Continue Button Text,
+                  name: graduationModalContinueButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Graduation Modal Cancel Button Text,
+                  name: graduationModalCancelButtonText,
+                  widget: string,
+                }
               - { label: Graduation Modal Title, name: graduationModalTitle, widget: string }
           - label: Section Headers
             name: sectionHeaders

@@ -154,6 +154,11 @@
     "legalStructureWarningModalBody": "Changing your Legal Structure may result in having to use a separate application to form your business.",
     "legalStructureWarningModalContinueButtonText": "Continue",
     "legalStructureWarningModalCancelButtonText": "Cancel",
+    "signatureColumnLabel": "Signature",
+    "signatureAidText": "By checking this box I confirm that I am an authorized representative of this business",
+    "signatureDeleteMobileText": "Delete Signer",
+    "signatureCheckboxErrorText": "Please click the checkbox above to authorize this signature.",
+    "additionalSignatureNameErrorText": "Full name is required for each additional signer.",
     "successPageHeader": "Hooray!"
   },
   "selfRegistration": {

@@ -22,6 +22,7 @@ export const BusinessFormationTextField = (props: Props): ReactElement => {
   const onValidation = (fieldName: string, invalid: boolean) => {
     setErrorMap({ ...state.errorMap, [fieldName]: { invalid } });
   };
+
   return (
     <div>
       <Content>{props.label}</Content>

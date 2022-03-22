@@ -340,8 +340,11 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
     members: [generateFormationMember({})],
-    signer: `some-signer-${randomInt()}`,
-    additionalSigners: [`some-additional-signer-${randomInt()}`],
+    signer: {
+      name: `some-signer-${randomInt()}`,
+      signature: true,
+    },
+    additionalSigners: [{ name: `some-additional-signer-${randomInt()}`, signature: true }],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),

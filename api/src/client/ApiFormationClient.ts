@@ -190,14 +190,14 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         })),
         Signers: [
           {
-            Name: formationFormData.signer,
+            Name: formationFormData.signer.name,
             Title: "Authorized Representative",
-            Signed: true,
+            Signed: formationFormData.signer.signature,
           },
           ...formationFormData.additionalSigners.map((additionalSigner) => ({
-            Name: additionalSigner,
+            Name: additionalSigner.name,
             Title: "Authorized Representative",
-            Signed: true,
+            Signed: additionalSigner.signature,
           })),
         ],
         ContactFirstName: formationFormData.contactFirstName,

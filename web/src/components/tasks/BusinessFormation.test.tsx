@@ -36,11 +36,20 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { createTheme, ThemeProvider } from "@mui/material";
+import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
 import dayjs, { Dayjs } from "dayjs";
 import React from "react";
 
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
+
+jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("next/router");
@@ -97,12 +106,17 @@ describe("<BusinessFormation />", () => {
     });
   };
 
+  const setDesktopScreen = (value: boolean): void => {
+    (useMediaQuery as jest.Mock).mockImplementation(() => value);
+  };
+
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
     useMockRouter({});
     setupStatefulUserDataContext();
     mockApiResponse();
+    setDesktopScreen(true);
   });
 
   it("does not show form for non-LLC legal structure", () => {
@@ -458,6 +472,7 @@ describe("<BusinessFormation />", () => {
       await fillAndSubmitMemberModal(member);
 
       fillText("Signer", "Elrond");
+      selectCheckBox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
       await submitContactsTab();
       await submitReviewTab();
 
@@ -496,7 +511,10 @@ describe("<BusinessFormation />", () => {
         expect(formationFormData.members[0].addressCity).toEqual(member.addressCity);
         expect(formationFormData.members[0].addressState).toEqual("DC");
         expect(formationFormData.members[0].addressZipCode).toEqual("20500");
-        expect(formationFormData.signer).toEqual("Elrond");
+        expect(formationFormData.signer).toEqual({
+          name: "Elrond",
+          signature: true,
+        });
         expect(formationFormData.additionalSigners).toEqual([]);
         expect(formationFormData.contactFirstName).toEqual("John");
         expect(formationFormData.contactLastName).toEqual("Smith");
@@ -532,8 +550,20 @@ describe("<BusinessFormation />", () => {
               addressZipCode: "20500",
             },
           ],
-          signer: `signer 1`,
-          additionalSigners: [`signer 2`, "signer 3"],
+          signer: {
+            name: `signer 1`,
+            signature: true,
+          },
+          additionalSigners: [
+            {
+              name: `signer 2`,
+              signature: true,
+            },
+            {
+              name: `signer 3`,
+              signature: true,
+            },
+          ],
           paymentType: "CC",
           contactFirstName: `John`,
           contactLastName: `Smith`,
@@ -581,8 +611,8 @@ describe("<BusinessFormation />", () => {
         subject.getByText(formationData.formationFormData.members[0].addressZipCode, { exact: false })
       ).toBeInTheDocument();
       expect(getInputElementByLabel("Signer").value).toBe("signer 1");
-      expect(getInputElementByLabel("Additional signer 0").value).toBe("signer 2");
-      expect(getInputElementByLabel("Additional signer 1").value).toBe("signer 3");
+      expect(getInputElementByLabel("Additional signers 0").value).toBe("signer 2");
+      expect(getInputElementByLabel("Additional signers 1").value).toBe("signer 3");
 
       await submitContactsTab();
       await submitReviewTab();
@@ -1037,14 +1067,26 @@ describe("<BusinessFormation />", () => {
       fireEvent.click(
         subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
-      fillText("Additional signer 0", "Red Skull");
+      fillText("Additional signers 0", "Red Skull");
+      const firstAdditionalSigner = within(subject.getByTestId("additional-signers-0"));
+      fireEvent.click(
+        firstAdditionalSigner.getByLabelText(`${Config.businessFormationDefaults.signatureColumnLabel}*`)
+      );
+
       fireEvent.click(
         subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
-      fillText("Additional signer 1", "V");
+      fillText("Additional signers 1", "V");
+      const secondAdditionalSigner = within(subject.getByTestId("additional-signers-1"));
+      fireEvent.click(
+        secondAdditionalSigner.getByLabelText(`${Config.businessFormationDefaults.signatureColumnLabel}*`)
+      );
 
       await submitContactsTab();
-      expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual(["Red Skull", "V"]);
+      expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual([
+        { name: "Red Skull", signature: true },
+        { name: "V", signature: true },
+      ]);
     });
 
     it("deletes an additional signer", async () => {
@@ -1055,41 +1097,30 @@ describe("<BusinessFormation />", () => {
       fireEvent.click(
         subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
-      fillText("Additional signer 0", "Red Skull");
+      fillText("Additional signers 0", "Red Skull");
+      const firstAdditionalSigner = within(subject.getByTestId("additional-signers-0"));
+      fireEvent.click(
+        firstAdditionalSigner.getByLabelText(`${Config.businessFormationDefaults.signatureColumnLabel}*`)
+      );
+
       fireEvent.click(
         subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       );
-      fillText("Additional signer 1", "V");
+      fillText("Additional signers 1", "V");
+      const secondAdditionalSigner = within(subject.getByTestId("additional-signers-1"));
+      fireEvent.click(
+        secondAdditionalSigner.getByLabelText(`${Config.businessFormationDefaults.signatureColumnLabel}*`)
+      );
+
       fireEvent.click(subject.getAllByLabelText("delete additional signer")[0]);
 
       await submitContactsTab();
-      expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual(["V"]);
-    });
-
-    it("ignores empty signer fields", async () => {
-      renderWithData({ additionalSigners: [] });
-
-      await submitBusinessNameTab();
-      await submitBusinessTab();
-      fireEvent.click(
-        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-      );
-      fireEvent.click(
-        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-      );
-      fireEvent.click(
-        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-      );
-      fireEvent.click(
-        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-      );
-      fireEvent.click(
-        subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-      );
-      fillText("Additional signer 1", "Red Skull");
-
-      await submitContactsTab();
-      expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual(["Red Skull"]);
+      expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual([
+        {
+          name: "V",
+          signature: true,
+        },
+      ]);
     });
 
     it("does not add more than 10 signers", async () => {
@@ -1660,8 +1691,32 @@ describe("<BusinessFormation />", () => {
         });
       });
 
-      it("signer", async () => {
-        renderWithData({ signer: "" });
+      it("signer name", async () => {
+        renderWithData({ signer: { name: "", signature: true } });
+        await submitBusinessNameTab(); // Updates business name (1)
+        await submitBusinessTab(); // Updates business info (2)
+        submitContactsTab(false);
+        expect(userDataUpdatedNTimes()).toEqual(2);
+      });
+
+      it("signer signature", async () => {
+        renderWithData({ signer: { name: "asdf", signature: false } });
+        await submitBusinessNameTab(); // Updates business name (1)
+        await submitBusinessTab(); // Updates business info (2)
+        submitContactsTab(false);
+        expect(userDataUpdatedNTimes()).toEqual(2);
+      });
+
+      it("additional signer signature", async () => {
+        renderWithData({ additionalSigners: [{ name: "asdf", signature: false }] });
+        await submitBusinessNameTab(); // Updates business name (1)
+        await submitBusinessTab(); // Updates business info (2)
+        submitContactsTab(false);
+        expect(userDataUpdatedNTimes()).toEqual(2);
+      });
+
+      it("additional signer name", async () => {
+        renderWithData({ additionalSigners: [{ name: "", signature: true }] });
         await submitBusinessNameTab(); // Updates business name (1)
         await submitBusinessTab(); // Updates business info (2)
         submitContactsTab(false);

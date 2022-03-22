@@ -8,26 +8,37 @@ import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, useContext, useMemo, useState } from "react";
+import React, { ReactElement, useCallback, useContext, useEffect, useState } from "react";
 
 export const ContactsSection = (): ReactElement => {
   const { state, setErrorMap, setTab } = useContext(FormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const { userData, update } = useUserData();
 
-  const requiredFieldsWithError = useMemo(() => {
-    const requiredFields: FormationFields[] = ["signer"];
+  const getRequiredFieldsWithError = useCallback((): FormationFields[] => {
+    const invalidFields: FormationFields[] = [];
 
-    const invalidFields = requiredFields.filter(
-      (it) => state.errorMap[it].invalid || !state.formationFormData[it]
-    );
+    if (!state.formationFormData.signer.name || !state.formationFormData.signer.signature) {
+      invalidFields.push("signer");
+    }
+
+    if (!state.formationFormData.additionalSigners.every((it) => it.signature && it.name)) {
+      invalidFields.push("additionalSigners");
+    }
 
     return invalidFields;
-  }, [state.formationFormData, state.errorMap]);
+  }, [state.formationFormData]);
+
+  useEffect(() => {
+    if (getRequiredFieldsWithError().length === 0) {
+      setShowRequiredFieldsError(false);
+    }
+  }, [state.formationFormData, getRequiredFieldsWithError]);
 
   const submitContactData = async () => {
     if (!userData) return;
 
+    const requiredFieldsWithError = getRequiredFieldsWithError();
     if (requiredFieldsWithError.length > 0) {
       setShowRequiredFieldsError(true);
       const newErrorMappedFields = requiredFieldsWithError.reduce(
@@ -66,7 +77,7 @@ export const ContactsSection = (): ReactElement => {
         <Signatures />
         <BusinessFormationFieldAlert
           showRequiredFieldsError={showRequiredFieldsError}
-          requiredFieldsWithError={requiredFieldsWithError}
+          requiredFieldsWithError={getRequiredFieldsWithError()}
         />
       </div>
       <div className="margin-top-2">

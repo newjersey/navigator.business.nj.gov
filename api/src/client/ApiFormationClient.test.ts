@@ -40,9 +40,21 @@ describe("ApiFormationClient", () => {
 
       const formationFormData = generateFormationFormData({
         agentNumberOrManual: "MANUAL_ENTRY",
-        signer: "faraz",
+        signer: {
+          name: "faraz",
+          signature: true,
+        },
         members: [generateFormationMember({})],
-        additionalSigners: ["anne", "mike"],
+        additionalSigners: [
+          {
+            name: "anne",
+            signature: true,
+          },
+          {
+            name: "mike",
+            signature: false,
+          },
+        ],
       });
 
       const userData = generateUserData({
@@ -127,7 +139,7 @@ describe("ApiFormationClient", () => {
             {
               Name: "mike",
               Title: "Authorized Representative",
-              Signed: true,
+              Signed: false,
             },
           ],
           ContactFirstName: formationFormData.contactFirstName,

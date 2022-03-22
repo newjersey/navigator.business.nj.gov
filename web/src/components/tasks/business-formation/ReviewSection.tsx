@@ -201,14 +201,14 @@ export const ReviewSection = (): ReactElement => {
         <div className="text-bold width-11rem">
           <Content>{Config.businessFormationDefaults.reviewPageSignerNameLabel}</Content>
         </div>
-        <div>{state.formationFormData.signer}</div>
+        <div>{state.formationFormData.signer.name}</div>
       </div>
       {userData?.formationData.formationFormData.additionalSigners.map((signer, index) => (
         <div className="display-block tablet:display-flex" key={`${signer}-${index}`}>
           <div className="text-bold width-11rem margin-top-1">
             <Content>{Config.businessFormationDefaults.reviewPageSignerNameLabel}</Content>
           </div>
-          <div className="tablet:margin-top-1">{signer}</div>
+          <div className="tablet:margin-top-1">{signer.name}</div>
         </div>
       ))}
     </>
