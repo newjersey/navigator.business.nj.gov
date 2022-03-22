@@ -93,7 +93,7 @@
 }
 
 .mobile-lg\:flex-row {
-  @media (min-width:30em) {
+  @media (min-width: 30em) {
     flex-direction: row;
   }
 }
