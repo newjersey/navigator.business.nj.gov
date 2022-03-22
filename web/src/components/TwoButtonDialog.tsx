@@ -17,7 +17,7 @@ export const TwoButtonDialog = (props: Props) => {
   return (
     <Dialog fullWidth={false} maxWidth="sm" open={props.isOpen} onClose={props.close} aria-labelledby="modal">
       <DialogTitle id="modal" className="display-flex flex-row flex-align-center">
-        <h2 className="padding-x-1 margin-bottom-0">{props.title}</h2>
+        <div className="h2-styling padding-x-1 margin-bottom-0">{props.title}</div>
         <IconButton
           aria-label="close"
           className="margin-left-auto"
