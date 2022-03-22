@@ -11,6 +11,7 @@ interface Props {
   snackBarProps?: SnackbarProps;
   heading?: string;
   noIcon?: boolean;
+  className?: string;
 }
 
 export const ToastAlert = (props: Props): ReactElement => (
@@ -25,7 +26,13 @@ export const ToastAlert = (props: Props): ReactElement => (
   >
     <div>
       <Paper>
-        <Alert heading={props.heading} variant={props.variant} noIcon={props.noIcon} rounded>
+        <Alert
+          heading={props.heading}
+          className={props.className ?? ""}
+          variant={props.variant}
+          noIcon={props.noIcon}
+          rounded
+        >
           {props.children}
         </Alert>
       </Paper>

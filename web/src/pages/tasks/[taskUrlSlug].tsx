@@ -10,7 +10,6 @@ import { BusinessFormation } from "@/components/tasks/BusinessFormation";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -30,8 +29,6 @@ interface Props {
 }
 
 const TaskPage = (props: Props): ReactElement => {
-  useAuthAlertPage();
-
   const router = useRouter();
   const { userData } = useUserData();
   const { roadmap } = useRoadmap();

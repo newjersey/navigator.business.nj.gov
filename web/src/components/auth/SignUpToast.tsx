@@ -35,10 +35,12 @@ export const SignUpToast = (): ReactElement => {
       variant="info"
       noIcon={true}
       autoHideDuration={null}
+      className={"bg-base-lightest"}
       snackBarProps={{ sx: { paddingX: 0 } }}
     >
       <div className="fin fac padding-y-2" data-testid={"self-reg-toast"}>
         <img
+          className="display-none desktop:display-block"
           src={`/img/Group.svg`}
           alt="section"
           style={{ marginRight: "20px", width: "51px", height: "64px" }}
@@ -58,6 +60,7 @@ export const SignUpToast = (): ReactElement => {
             <Icon className="usa-icon--size-4">close</Icon>
           </IconButton>
           <Content
+            className="padding-top-105"
             onClick={() => {
               analytics.event.guest_toast.click.go_to_myNJ_registration();
               onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);

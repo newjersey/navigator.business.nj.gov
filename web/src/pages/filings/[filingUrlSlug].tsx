@@ -4,7 +4,6 @@ import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout
 import { Tag } from "@/components/njwds-extended/Tag";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
-import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
@@ -21,8 +20,6 @@ interface Props {
 }
 
 const FilingPage = (props: Props): ReactElement => {
-  useAuthAlertPage();
-
   const { userData } = useUserData();
   const matchingFiling = userData?.taxFilingData.filings.find((it) => it.identifier === props.filing.id);
   const dueDate = matchingFiling ? dayjs(matchingFiling.dueDate).format("MM/DD/YYYY") : "";
