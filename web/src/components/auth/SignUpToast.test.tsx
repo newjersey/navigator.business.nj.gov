@@ -6,6 +6,8 @@ import { markdownToText, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import * as materialUi from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -15,6 +17,16 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router");
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
+function mockMaterialUI(): typeof materialUi {
+  return {
+    ...jest.requireActual("@mui/material"),
+    useMediaQuery: jest.fn(),
+  };
+}
+jest.mock("@mui/material", () => mockMaterialUI());
+const setLargeScreen = (value: boolean): void => {
+  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+};
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("SignUpToast", () => {
@@ -74,5 +86,17 @@ describe("SignUpToast", () => {
       expect(mockApi.postSelfReg).toHaveBeenCalled();
       expect(mockPush).toHaveBeenCalled();
     });
+  });
+
+  it("icon logo on mobile", async () => {
+    setLargeScreen(false);
+    const subject = setupHookWithAuth(IsAuthenticated.FALSE);
+    await waitFor(() => expect(subject.queryByAltText("registration")).not.toBeInTheDocument());
+  });
+
+  it("icon logo on desktop", async () => {
+    setLargeScreen(true);
+    const subject = setupHookWithAuth(IsAuthenticated.FALSE);
+    await waitFor(() => expect(subject.getByAltText("registration")).toBeInTheDocument());
   });
 });
