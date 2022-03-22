@@ -16,15 +16,13 @@ interface Props {
 export const TwoButtonDialog = (props: Props) => {
   return (
     <Dialog fullWidth={false} maxWidth="sm" open={props.isOpen} onClose={props.close} aria-labelledby="modal">
-      <DialogTitle id="modal">
-        <div className="padding-top-5 padding-x-1 text-bold font-body-lg">{props.title}</div>
+      <DialogTitle id="modal" className="display-flex flex-row flex-align-center">
+        <h2 className="padding-x-1 margin-bottom-0">{props.title}</h2>
         <IconButton
           aria-label="close"
+          className="margin-left-auto"
           onClick={props.close}
           sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
             color: (theme) => theme.palette.grey[500],
           }}
         >
@@ -37,11 +35,11 @@ export const TwoButtonDialog = (props: Props) => {
           className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"
           data-testid="modal-content"
         >
-          <div className="mobile-lg:margin-left-auto">
+          <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
             <Button
               style="secondary"
               onClick={props.close}
-              className="margin-bottom-1 mobile-lg:margin-bottom-0 tablet:margin-right-1"
+              className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1"
             >
               {props.secondaryButtonText}
             </Button>

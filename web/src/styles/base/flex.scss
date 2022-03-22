@@ -87,3 +87,13 @@
 .space-between {
   justify-content: space-between;
 }
+
+.flex-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.mobile-lg\:flex-row {
+  @media (min-width:30em) {
+    flex-direction: row;
+  }
+}
