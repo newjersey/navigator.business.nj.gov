@@ -12,9 +12,9 @@ Everything is **TypeScript**.
 
 The frontend is **React** with **next.js**, deployed on **AWS Amplify**.
 
-The backend is an **Express** Node app deployed as an **AWS Lambda** function using **Serverless framework**. It connects to an **AWS DynamoDB** instance that is also configured through Serverless.
+The backend is an **Express** Node app deployed as an **AWS Lambda** function using **Serverless framework**. It connects to an **AWS DynamoDB** instance that is also configured through Terraform.
 
-The app uses **AWS Cognito** (through Amplify) to handle authentication, for now.
+The app uses **AWS Cognito** (through Amplify) to handle authentication for registered users. Unregistered users are able to browse the site in guest mode, without saving their data to the **DynamoDB**
 
 We deploy using **[CircleCI](https://app.circleci.com/pipelines/github/newjersey/navigator.business.nj.gov)** for CI/CD.
 
