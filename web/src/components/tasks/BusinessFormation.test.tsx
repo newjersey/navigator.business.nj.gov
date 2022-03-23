@@ -465,7 +465,6 @@ describe("<BusinessFormation />", () => {
       fillText("Contact last name", "Smith");
       fillText("Contact phone number", "123A45a678 90");
       fireEvent.click(subject.getByLabelText("Credit card"));
-      selectCheckBox(Config.businessFormationDefaults.optInAnnualReportText);
       selectCheckBox(Config.businessFormationDefaults.optInCorpWatchText);
       selectCheckBox("Certificate of standing");
       selectCheckBox("Certified copy of formation document");
@@ -507,7 +506,7 @@ describe("<BusinessFormation />", () => {
         expect(formationFormData.certifiedCopyOfFormationDocument).toEqual(true);
         expect(subject.getByText("$200.00")).toBeInTheDocument();
         expect(formationFormData.annualReportNotification).toEqual(true);
-        expect(formationFormData.corpWatchNotification).toEqual(true);
+        expect(formationFormData.corpWatchNotification).toEqual(false);
       });
     });
 
