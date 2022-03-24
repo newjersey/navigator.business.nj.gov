@@ -21,7 +21,7 @@ describe("HomePage", () => {
   it("sends to onboarding when Get Started button clicked", () => {
     useMockUserData({});
     const subject = render(withAuth(<Home />, { user: generateUser({}) }));
-    fireEvent.click(subject.getByText(Config.landingPage.heroCallToActionText));
+    fireEvent.click(subject.getAllByText(Config.landingPage.heroCallToActionText)[0]);
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 
@@ -55,12 +55,5 @@ describe("HomePage", () => {
     setMockUserDataResponse({ error: undefined, userData: undefined });
     render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
     expect(mockPush).not.toHaveBeenCalled();
-  });
-
-  it("renders one main element on the index page", () => {
-    const subject = render(<Home />);
-    expect(subject.getByTestId("main")).toBeInTheDocument();
-    expect(subject.getByTestId("SPL-div-ele")).toBeInTheDocument();
-    expect(subject.queryByTestId("SPL-main-ele")).not.toBeInTheDocument();
   });
 });

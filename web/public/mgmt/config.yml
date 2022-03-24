@@ -563,41 +563,50 @@ collections:
               - { label: Hero - Second Line, name: heroCalloutSecondLineText, widget: string }
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
               - { label: Hero - Call to Action, name: heroCallToActionText, widget: string }
-              - { label: Section 2 - Header - First Line, name: section2HeaderFirstLineText, widget: string }
-              - {
-                  label: Section 2 - Header - Second Line,
-                  name: section2HeaderSecondLineText,
-                  widget: string,
-                }
-              - { label: Section 2 - Header - Third Line, name: section2HeaderThirdLineText, widget: string }
+              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
               - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: string }
-              - { label: Section 2 - Icon 1 Text, name: section2Icon1Text, widget: string }
-              - { label: Section 2 - Icon 2 Text, name: section2Icon2Text, widget: string }
-              - { label: Section 2 - Icon 3 Text, name: section2Icon3Text, widget: string }
-              - { label: Section 3 - Header - First Line, name: section3HeaderFirstLineText, widget: string }
+              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
+              - { label: Section 3 - Header, name: section3HeaderText, widget: string }
+              - { label: Section 3 - Supporting Text, name: section3SupportingText, widget: string }
+              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
+              - { label: Section 4 - Header Text, name: section4HeaderText, widget: string }
+              - { label: Section 4 - First Icon Text, name: section4FirstIconText, widget: string }
+              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
+              - { label: Section 4 - Third Icon Text, name: section4ThirdIconText, widget: string }
+              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
               - {
-                  label: Section 3 - Header - Second Line,
-                  name: section3HeaderSecondLineText,
+                  label: Section 5 - First Supporting Text,
+                  name: section5FirstSupportingText,
                   widget: string,
                 }
-              - { label: Column 1 - Header, name: column1Header, widget: string }
-              - { label: Column 1 - Supporting Text, name: column1SupportingText, widget: string }
-              - { label: Column 1 - Button Text, name: column1Button, widget: string }
-              - { label: Column 1 - Button Link, name: column1ButtonLink, widget: string }
-              - { label: Column 1 - Image, name: column1Image, widget: string }
-              - { label: Column 1 - Image Alt Text, name: column1ImageAlt, widget: string }
-              - { label: Column 2 - Header, name: column2Header, widget: string }
-              - { label: Column 2 - Supporting Text, name: column2SupportingText, widget: string }
-              - { label: Column 2 - Button Text, name: column2Button, widget: string }
-              - { label: Column 2 - Button Link, name: column2ButtonLink, widget: string }
-              - { label: Column 2 - Image, name: column2Image, widget: string }
-              - { label: Column 2 - Image Alt Text, name: column2ImageAlt, widget: string }
-              - { label: Column 3 - Header, name: column3Header, widget: string }
-              - { label: Column 3 - Supporting Text, name: column3SupportingText, widget: string }
-              - { label: Column 3 - Button Text, name: column3Button, widget: string }
-              - { label: Column 3 - Button Link, name: column3ButtonLink, widget: string, required: false }
-              - { label: Column 3 - Image, name: column3Image, widget: string }
-              - { label: Column 3 - Image Alt Text, name: column3ImageAlt, widget: string }
+              - { label: Section 5 - Second Header Text, name: section5SecondHeaderText, widget: string }
+              - {
+                  label: Section 5 - Second Supporting Text,
+                  name: section5SecondSupportingText,
+                  widget: string,
+                }
+              - { label: Section 5 - Third Header Text, name: section5ThirdHeaderText, widget: string }
+              - {
+                  label: Section 5 - Third Supporting Text,
+                  name: section5ThirdSupportingText,
+                  widget: string,
+                }
+              - { label: Section 6 - Header Text, name: section6Header, widget: string }
+              - { label: Card 1 - Header Line 1, name: card1HeaderLine1, widget: string }
+              - { label: Card 1 - Header Line 2, name: card1HeaderLine2, widget: string }
+              - { label: Card 1 - Supporting Text, name: card1SupportingText, widget: string }
+              - { label: Card 1 - Button Text, name: card1Button, widget: string }
+              - { label: Card 1 - Button Link, name: card1ButtonLink, widget: string }
+              - { label: Card 2 - Header Line 2, name: card2HeaderLine1, widget: string }
+              - { label: Card 2 - Header Line 2, name: card2HeaderLine2, widget: string }
+              - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: string }
+              - { label: Card 2 - Button Text, name: card2Button, widget: string }
+              - { label: Card 2 - Button Link, name: card2ButtonLink, widget: string }
+              - { label: Card 3 - Header Line 3, name: card3HeaderLine1, widget: string }
+              - { label: Card 3 - Header Line 3, name: card3HeaderLine2, widget: string }
+              - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: string }
+              - { label: Card 3 - Button Text, name: card3Button, widget: string }
+              - { label: Card 3 - Button Link, name: card3ButtonLink, widget: string }
           - label: Legal Messages
             name: legalMessageDefaults
             collapsed: true

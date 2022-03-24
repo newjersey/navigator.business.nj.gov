@@ -59,13 +59,13 @@ export const NavBarMobile = ({
         >
           <Icon className="font-sans-xl">menu</Icon>
         </button>
-        <div className={`usa-logo ${scrolled ? "bg-white" : ""} navigator-logo-mobile`}>
+        <div className={`usa-logo ${scrolled ? "bg-white" : ""}`}>
           {sideBarPageLayout ? (
             <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
           ) : (
             <Link href={redirectUrl} passHref>
               <a href={redirectUrl}>
-                <img src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+                <img className="height-3" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
               </a>
             </Link>
           )}

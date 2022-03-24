@@ -24,3 +24,56 @@
   border: 1px solid #5c5c5c !important;
   color: #5c5c5c !important;
 }
+
+.usa-button--outline.border-2px:hover {
+  border: 2px solid;
+}
+
+.auth-button {
+  border-radius: 0.25rem !important;
+  font-size: 1.38rem !important;
+  padding: 1rem 1.5rem !important;
+  box-shadow: inset 0 0 0 3px hsl(82, 100%, 25%) !important;
+}
+
+.auth-button:hover {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 3px $primary-dark !important;
+  color: $primary-dark;
+}
+
+.auth-button:active {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 3px $primary-darker !important;
+  color: $primary-darker;
+}
+
+.btn-accent-cool-darker {
+  background-color: $accent-cool-darker !important;
+  &:hover {
+    background-color: $accent-cool-darkest !important;
+  }
+  &:active {
+    background-color: $accent-cool-more-darkest !important;
+  }
+}
+
+.btn-accent-cooler {
+  background-color: $accent-cooler !important;
+  &:hover {
+    background-color: $accent-cooler-dark !important;
+  }
+  &:active {
+    background-color: $accent-cooler-darker !important;
+  }
+}
+
+.btn-info {
+  background-color: $info !important;
+  &:hover {
+    background-color: $info-darker !important;
+  }
+  &:active {
+    background-color: $info-darkest !important;
+  }
+}

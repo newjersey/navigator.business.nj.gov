@@ -38,6 +38,26 @@ describe("Button", () => {
       const subject = render(<Button style="primary-input-field-height">Test Button</Button>).baseElement;
       expect(subject).toMatchSnapshot();
     });
+
+    it("narrow-light displays correctly", () => {
+      const subject = render(<Button style="narrow-light">Test Button</Button>).baseElement;
+      expect(subject).toMatchSnapshot();
+    });
+
+    it("accent-cool-darker-big displays correctly", () => {
+      const subject = render(<Button style="accent-cool-darker-big">Test Button</Button>).baseElement;
+      expect(subject).toMatchSnapshot();
+    });
+
+    it("accent-cooler displays correctly", () => {
+      const subject = render(<Button style="accent-cooler">Test Button</Button>).baseElement;
+      expect(subject).toMatchSnapshot();
+    });
+
+    it("info displays correctly", () => {
+      const subject = render(<Button style="info">Test Button</Button>).baseElement;
+      expect(subject).toMatchSnapshot();
+    });
   });
 
   it("submit button displays correctly", () => {
