@@ -20,6 +20,7 @@ export const BusinessSection = (): ReactElement => {
     let requiredFields: FormationFields[] = [
       "businessName",
       "businessSuffix",
+      "businessAddressCity",
       "businessAddressLine1",
       "businessAddressZipCode",
     ];
@@ -98,6 +99,7 @@ export const BusinessSection = (): ReactElement => {
 
     update({
       ...userData,
+      profileData: { ...userData.profileData, municipality: state.formationFormData.businessAddressCity },
       formationData: {
         ...userData.formationData,
         formationFormData: state.formationFormData,

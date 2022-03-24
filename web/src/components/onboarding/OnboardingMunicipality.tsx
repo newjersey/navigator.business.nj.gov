@@ -47,6 +47,7 @@ export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props)
       <div className="form-input margin-top-2">
         <MunicipalityDropdown
           municipalities={state.municipalities}
+          ariaLabel="Location"
           onValidation={onValidation}
           fieldName={fieldName}
           error={props.fieldStates[fieldName].invalid}

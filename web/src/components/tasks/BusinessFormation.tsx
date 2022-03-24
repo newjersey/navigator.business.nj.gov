@@ -19,7 +19,11 @@ import {
   Task,
 } from "@/lib/types/types";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { createEmptyFormationFormData, FormationFormData } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyFormationFormData,
+  FormationFormData,
+  Municipality,
+} from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useEffect, useState } from "react";
@@ -27,6 +31,7 @@ import React, { createContext, ReactElement, useEffect, useState } from "react";
 interface Props {
   task: Task;
   displayContent: FormationDisplayContent;
+  municipalities: Municipality[];
 }
 
 const allFormationFormFields = Object.keys(createEmptyFormationFormData()) as (keyof FormationFormData)[];
@@ -41,6 +46,7 @@ interface FormationState {
   tab: number;
   formationFormData: FormationFormData;
   displayContent: FormationDisplayContent;
+  municipalities: Municipality[];
   errorMap: FormationFieldErrorMap;
   showResponseAlert: boolean;
 }
@@ -58,6 +64,7 @@ export const FormationContext = createContext<FormationContextType>({
     tab: 0,
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent(),
+    municipalities: [],
     errorMap: createFormationFieldErrorMap(),
     showResponseAlert: false,
   },
@@ -96,6 +103,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       ...userData.formationData.formationFormData,
       businessName: userData.profileData.businessName,
       businessStartDate: getDate(userData.formationData.formationFormData.businessStartDate),
+      businessAddressCity: userData.profileData.municipality,
       contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
       contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
     });
@@ -142,6 +150,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           tab: tab,
           formationFormData: formationFormData,
           displayContent: props.displayContent,
+          municipalities: props.municipalities,
           errorMap: errorMap,
           showResponseAlert: showResponseAlert,
         },

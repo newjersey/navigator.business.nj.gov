@@ -43,7 +43,7 @@ const renderPage = (task: Task, initialUserData?: UserData): RenderResult =>
   render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
-        <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} />
+        <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} municipalities={[]} />
       </WithStatefulUserData>
     </materialUi.ThemeProvider>
   );

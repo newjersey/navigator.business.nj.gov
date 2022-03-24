@@ -326,6 +326,7 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(),
     businessStartDate: dayjs().add(1, "days").format("YYYY-MM-DD"),
+    businessAddressCity: generateMunicipality({}),
     businessAddressLine1: `some-address-1-${randomInt()}`,
     businessAddressLine2: `some-address-2-${randomInt()}`,
     businessAddressState: "NJ",

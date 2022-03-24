@@ -33,6 +33,7 @@ import {
   FormationMember,
   FormationSubmitResponse,
   GetFilingResponse,
+  Municipality,
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
@@ -84,11 +85,22 @@ describe("<BusinessFormation />", () => {
     },
   });
 
-  const renderTask = (userData: Partial<UserData>): RenderResult => {
+  const renderTask = (userData: Partial<UserData>, municipalities?: Municipality[]): RenderResult => {
+    const genericTown = userData.profileData?.municipality
+      ? userData.profileData.municipality
+      : generateMunicipality({ displayName: "GenericTown" });
+    const initialUserData = generateUserData({
+      ...userData,
+      profileData: generateProfileData({ ...userData.profileData, municipality: genericTown }),
+    });
     return render(
-      <WithStatefulUserData initialUserData={generateUserData(userData)}>
+      <WithStatefulUserData initialUserData={initialUserData}>
         <ThemeProvider theme={createTheme()}>
-          <BusinessFormation task={task} displayContent={displayContent} />
+          <BusinessFormation
+            task={task}
+            displayContent={displayContent}
+            municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]}
+          />
         </ThemeProvider>
       </WithStatefulUserData>
     );
@@ -264,6 +276,26 @@ describe("<BusinessFormation />", () => {
 
         await submitBusinessNameTab("My Test Business");
         await waitFor(() => expect(currentUserData().profileData.businessName).toEqual("My Test Business"));
+      });
+
+      it("saves business address city to profile after clicking continue", async () => {
+        const profileData = generateLLCProfileData({
+          municipality: generateMunicipality({ displayName: "Newark" }),
+        });
+        subject = renderTask({ profileData }, [generateMunicipality({ displayName: "GenericWhatever" })]);
+        await submitBusinessNameTab();
+        expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
+        selectByText("Business address city", "GenericWhatever");
+        expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
+          "GenericWhatever"
+        );
+        await submitBusinessTab();
+        await waitFor(() =>
+          expect(currentUserData().profileData.municipality?.displayName).toEqual("GenericWhatever")
+        );
+        expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
+          "GenericWhatever"
+        );
       });
 
       it("does not display continue button and available alert if user types in new name after finding an available one", async () => {
@@ -534,6 +566,7 @@ describe("<BusinessFormation />", () => {
         formationFormData: generateFormationFormData({
           businessSuffix: "LTD LIABILITY CO",
           businessStartDate: dayjs().format("YYYY-MM-DD"),
+          businessAddressCity: generateMunicipality({ displayName: "Newark" }),
           businessAddressLine1: `123 main street`,
           businessAddressLine2: `suite 102`,
           businessAddressState: "NJ",
@@ -840,12 +873,13 @@ describe("<BusinessFormation />", () => {
 
       it("displays City (Main Business Address) from profile data", async () => {
         const profileData = generateLLCProfileData({
-          municipality: generateMunicipality({ name: "Newark" }),
+          municipality: generateMunicipality({ displayName: "Newark" }),
         });
         subject = renderTask({ profileData });
         await submitBusinessNameTab();
 
-        expect(subject.getByText("Newark", { exact: false })).toBeInTheDocument();
+        expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
+
         expect(
           subject.queryByText(Config.businessFormationDefaults.notSetBusinessAddressCityLabel, {
             exact: false,

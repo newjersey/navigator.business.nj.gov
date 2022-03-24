@@ -1,3 +1,5 @@
+import { Municipality } from "./municipality";
+
 export interface FormationData {
   formationFormData: FormationFormData;
   formationResponse: FormationSubmitResponse | undefined;
@@ -22,6 +24,7 @@ export interface FormationFormData {
   businessName: string;
   businessSuffix: BusinessSuffix | undefined;
   businessStartDate: string;
+  businessAddressCity: Municipality | undefined;
   businessAddressLine1: string;
   businessAddressLine2: string;
   businessAddressState: string;
@@ -52,6 +55,7 @@ export interface FormationFormData {
 export type FormationTextField = Exclude<
   keyof FormationFormData,
   | "businessSuffix"
+  | "businessAddressCity"
   | "businessStartDate"
   | "agentNumberOrManual"
   | "signer"
@@ -79,6 +83,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     businessName: "",
     businessSuffix: undefined,
     businessStartDate: "",
+    businessAddressCity: undefined,
     businessAddressLine1: "",
     businessAddressLine2: "",
     businessAddressState: "NJ",

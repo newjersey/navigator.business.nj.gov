@@ -71,7 +71,7 @@ describe("ApiFormationClient", () => {
           CompanyName: userData.profileData.businessName,
           Address1: formationFormData.businessAddressLine1,
           Address2: formationFormData.businessAddressLine2,
-          City: userData.profileData.municipality?.name,
+          City: formationFormData.businessAddressCity?.name,
           StateAbbreviation: "NJ",
           ZipCode: formationFormData.businessAddressZipCode,
           Email: userData.user.email,

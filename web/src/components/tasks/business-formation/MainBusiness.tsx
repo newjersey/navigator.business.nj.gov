@@ -1,16 +1,14 @@
 import { Content } from "@/components/Content";
+import { BusinessFormationMunicipality } from "@/components/tasks/business-formation/BusinessFormationMunicipality";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/BusinessNameAndLegalStructure";
 import { BusinessStartDate } from "@/components/tasks/business-formation/BusinessStartDate";
 import { BusinessSuffixDropdown } from "@/components/tasks/business-formation/BusinessSuffixDropdown";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 export const MainBusiness = (): ReactElement => {
-  const { userData } = useUserData();
-
   return (
     <>
       <BusinessNameAndLegalStructure />
@@ -41,11 +39,7 @@ export const MainBusiness = (): ReactElement => {
       <div className="grid-row grid-gap-2">
         <div className="margin-bottom-2 grid-col-12 tablet:grid-col-6">
           <span className="text-bold">{Config.businessFormationDefaults.businessAddressCityLabel}</span>
-          <div>
-            {userData?.profileData.municipality?.name ??
-              Config.businessFormationDefaults.notSetBusinessAddressCityLabel}{" "}
-            <a href="/profile">{Config.businessFormationDefaults.editButtonText}</a>
-          </div>
+          <BusinessFormationMunicipality />
         </div>
         <div className="margin-bottom-2 form-input grid-col-5 tablet:grid-col-2">
           <BusinessFormationTextField

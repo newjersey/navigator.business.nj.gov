@@ -1,13 +1,12 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
-import { ProfileFields } from "@/lib/types/types";
-import { splitAndBoldSearchText } from "@/lib/utils/helpers";
+import { camelCaseToSentence, splitAndBoldSearchText } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import React, { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
 interface Props {
-  fieldName: ProfileFields;
+  fieldName: string;
   municipalities: Municipality[];
   value: Municipality | undefined;
   onSelect: (value: Municipality | undefined) => void;
@@ -15,6 +14,7 @@ interface Props {
   handleChange?: () => void;
   onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
+  ariaLabel?: string;
   validationText?: string;
   validationLabel?: string;
 }
@@ -64,7 +64,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
         <TextField
           {...params}
           inputProps={{
-            "aria-label": "Location",
+            "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
             "data-testid": props.fieldName,
             ...params.inputProps,
           }}

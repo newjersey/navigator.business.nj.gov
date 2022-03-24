@@ -14,10 +14,12 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { featureFlags, getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { Municipality } from "@businessnjgovnavigator/shared";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -26,6 +28,7 @@ import React, { ReactElement, ReactNode, useMemo } from "react";
 interface Props {
   task: Task;
   displayContent: TasksDisplayContent;
+  municipalities: Municipality[];
 }
 
 const TaskPage = (props: Props): ReactElement => {
@@ -92,7 +95,11 @@ const TaskPage = (props: Props): ReactElement => {
   const businessFormationFeatureFlag = (): ReactElement => {
     if (featureDisableFormation) return getTaskBody();
     return (
-      <BusinessFormation task={props.task} displayContent={props.displayContent.formationDisplayContent} />
+      <BusinessFormation
+        task={props.task}
+        displayContent={props.displayContent.formationDisplayContent}
+        municipalities={props.municipalities}
+      />
     );
   };
 
@@ -179,11 +186,17 @@ export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetStaticPropsResult<Props> => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: TaskUrlSlugParam;
+}): Promise<GetStaticPropsResult<Props>> => {
+  const municipalities = await loadAllMunicipalities();
   return {
     props: {
       task: loadTaskByUrlSlug(params.taskUrlSlug),
       displayContent: loadTasksDisplayContent(),
+      municipalities,
     },
   };
 };
