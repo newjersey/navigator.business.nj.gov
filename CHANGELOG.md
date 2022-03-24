@@ -1,3 +1,48 @@
+# [3.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.4.2...v3.0.0) (2022-03-24)
+
+
+### Bug Fixes
+
+* [[#1839](https://github.com/newjersey/navigator.business.nj.gov/issues/1839)] update styling of opporunities column and details screen ([3baee8a](https://github.com/newjersey/navigator.business.nj.gov/commit/3baee8add9aa7d41709c1c487a5d9589baf0a0e1))
+* [[#1996](https://github.com/newjersey/navigator.business.nj.gov/issues/1996)] design updates for modal ([4bae5b4](https://github.com/newjersey/navigator.business.nj.gov/commit/4bae5b4ac547918e13dfa900f841ecf37eb8b199))
+* [[#1996](https://github.com/newjersey/navigator.business.nj.gov/issues/1996)] update styling for modal ([423d3a1](https://github.com/newjersey/navigator.business.nj.gov/commit/423d3a1a931dc04196e5489abeefd77230014f18))
+* [[#2001](https://github.com/newjersey/navigator.business.nj.gov/issues/2001)] add tooltips to business formation headers ([c705a28](https://github.com/newjersey/navigator.business.nj.gov/commit/c705a281ed9175a4362f99d66ec38e23e1a2c5d1))
+* [[#2073](https://github.com/newjersey/navigator.business.nj.gov/issues/2073)] single letter bug with members state dropdown ([ac50ecd](https://github.com/newjersey/navigator.business.nj.gov/commit/ac50ecdd7529df54cb0c4c2f01ac313bdf37f272))
+* [[#2073](https://github.com/newjersey/navigator.business.nj.gov/issues/2073)] state dropdown bug within memebrs modal ([a1f71e2](https://github.com/newjersey/navigator.business.nj.gov/commit/a1f71e23da4e8b6d0379ff6d81a86c079a669107))
+* allow clickaway closing of guest modal ([760272a](https://github.com/newjersey/navigator.business.nj.gov/commit/760272a4887778889c46fafbed55ba01b1c5771f))
+* cleaning up deploy branches in circleci ([fbb2bdb](https://github.com/newjersey/navigator.business.nj.gov/commit/fbb2bdb915a718ed8123aae22c5273b691415ef7))
+* **deps:** update dependency dayjs to v1.11.0 ([6179c48](https://github.com/newjersey/navigator.business.nj.gov/commit/6179c48112a31782e476339372367885d39dad0b))
+* **deps:** update dependency winston-cloudwatch to v4 ([f276d49](https://github.com/newjersey/navigator.business.nj.gov/commit/f276d49ddb357332a9fb0f86d0e2f869b0d62484))
+* **deps:** update material-ui ([bf690a5](https://github.com/newjersey/navigator.business.nj.gov/commit/bf690a5d3aa14b281954269424608e1cbdacb328))
+* fixing self-reg return error, self-reg alert modal spacing ([d6a2712](https://github.com/newjersey/navigator.business.nj.gov/commit/d6a2712a102096c660bb126673a028eb707e93aa))
+* h2 styling for modal ([e26eecd](https://github.com/newjersey/navigator.business.nj.gov/commit/e26eecdac8aa81a1555eda3a07403a96cb0aa6b2))
+* prettier format ([dd9a70c](https://github.com/newjersey/navigator.business.nj.gov/commit/dd9a70c3323a6562f0d14b4fc5c139052a351841))
+* remove forced line-height from all elements ([e9502f6](https://github.com/newjersey/navigator.business.nj.gov/commit/e9502f6a34d1c8fb81e376e1d80d363390cd428d))
+* repairing comments for guest mode ([8a86264](https://github.com/newjersey/navigator.business.nj.gov/commit/8a86264dafe4fc95d371d57e4849f86e324f84d5))
+* repairing comments for guest mode v2 ([0b230b1](https://github.com/newjersey/navigator.business.nj.gov/commit/0b230b12bd6df63006748e24200e848416e21d61))
+* signup toast icon delayed rendering ([539ff26](https://github.com/newjersey/navigator.business.nj.gov/commit/539ff2659589251a08959d29c5a291583f436f37))
+* switching to async tax filings ([0a109f7](https://github.com/newjersey/navigator.business.nj.gov/commit/0a109f7fc4b20be829981c5cc46863c44aab6fe2))
+* switching to async tax filings ([175bb38](https://github.com/newjersey/navigator.business.nj.gov/commit/175bb3857eb59a4e16bb782672a4b9658826f65d))
+* updating General Config config ([#2043](https://github.com/newjersey/navigator.business.nj.gov/issues/2043)) ([edf8d2a](https://github.com/newjersey/navigator.business.nj.gov/commit/edf8d2a3bc85192e004feacd2f3faab3ad29e0fb))
+* updating guest checkout styling ([baceb26](https://github.com/newjersey/navigator.business.nj.gov/commit/baceb26853aa6bb0fe4fb775f82a1f97a5454c9b))
+
+
+### chore
+
+* update readme ([2c8854a](https://github.com/newjersey/navigator.business.nj.gov/commit/2c8854a7d654d71383c368da0fcbd0d069554c4c))
+
+
+### Features
+
+* [[#1837](https://github.com/newjersey/navigator.business.nj.gov/issues/1837)] hide/unhide opportunities on dashboard ([d695aba](https://github.com/newjersey/navigator.business.nj.gov/commit/d695aba4d35485f167f829d47425ca27a26b2806))
+* [[#1996](https://github.com/newjersey/navigator.business.nj.gov/issues/1996)] add legal structure warning modal to formation ([293c434](https://github.com/newjersey/navigator.business.nj.gov/commit/293c43464412b1e94aaaaa4b9f07da518c578adf))
+* guest checkout ([782bf98](https://github.com/newjersey/navigator.business.nj.gov/commit/782bf9839766399a9367d8462012a97b9ecedf06))
+
+
+### BREAKING CHANGES
+
+* implement guest mode and migrate registration
+
 ## [2.4.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v2.4.1...v2.4.2) (2022-03-16)
 
 
