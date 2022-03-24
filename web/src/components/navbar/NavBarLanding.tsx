@@ -7,12 +7,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";
 
-type Props = {
-  isLargeScreen: boolean;
-  scrolled: boolean;
-};
-
-export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement => {
+export const NavBarLanding = (): ReactElement => {
   const { state } = useContext(AuthContext);
   const router = useRouter();
 
@@ -30,41 +25,24 @@ export const NavBarLanding = ({ isLargeScreen, scrolled }: Props): ReactElement 
   return (
     <nav
       aria-label="Primary"
-      className={`grid-container width-100 padding-top-05 ${
-        !isLargeScreen && scrolled ? "scrolled scrolled-transition bg-white-transparent" : ""
-      }`}
+      className={"grid-container-widescreen desktop:padding-x-7 height-8 flex flex-justify flex-align-center"}
     >
-      <div className="grid-row grid-gap">
-        <div className="desktop:grid-col-12 usa-prose">
-          <div className="flex fac fjb">
-            <div className="flex-custom">
-              <img
-                className="padding-top-1 logo-max-width"
-                src="/img/Navigator-logo@2x.png"
-                alt="Business.NJ.Gov Navigator"
-              />
-            </div>
-            <div className="margin-left-auto flex fac">
-              <span className="text-no-wrap padding-x-105">
-                <Button style="tertiary" textBold onClick={triggerSignIn}>
-                  {getLoginButtonText()}
-                </Button>
-              </span>
-              <span className="text-no-wrap nav-padding-x">
-                <Button
-                  style="tertiary"
-                  textBold
-                  onClick={() => {
-                    analytics.event.landing_page_navbar_register.click.go_to_onboarding();
-                    router.push("/onboarding");
-                  }}
-                >
-                  {Config.navigationDefaults.registerButton}
-                </Button>
-              </span>
-            </div>
-          </div>
-        </div>
+      <img className="height-4" src="/img/Navigator-logo@2x.png" alt="Business.NJ.Gov Navigator" />
+      <div>
+        <span className="margin-right-2">
+          <Button style="tertiary" onClick={triggerSignIn}>
+            {getLoginButtonText()}
+          </Button>
+        </span>
+        <Button
+          style="tertiary"
+          onClick={() => {
+            analytics.event.landing_page_navbar_register.click.go_to_onboarding();
+            router.push("/onboarding");
+          }}
+        >
+          {Config.navigationDefaults.registerButton}
+        </Button>
       </div>
     </nav>
   );

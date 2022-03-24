@@ -36,7 +36,7 @@ const Home = (): ReactElement => {
   }, [router.isReady, router, router.query]);
 
   return (
-    <PageSkeleton home={true}>
+    <PageSkeleton home={true} isWidePage>
       <NavBar landingPage={true} />
       <main data-testid="main">
         <section aria-label="Introduction">
@@ -50,7 +50,7 @@ const Home = (): ReactElement => {
               analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
             }}
           />
-
+          Testing
           <div className="l2-bg height-34 bg-contain">
             <div className="grid-custom">
               <div className="l2-header-custom text-center margin-y-0 padding-bottom-40 fixed-width no-padding-lr display-block">
