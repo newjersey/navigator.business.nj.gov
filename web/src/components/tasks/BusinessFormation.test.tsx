@@ -278,26 +278,6 @@ describe("<BusinessFormation />", () => {
         await waitFor(() => expect(currentUserData().profileData.businessName).toEqual("My Test Business"));
       });
 
-      it("saves business address city to profile after clicking continue", async () => {
-        const profileData = generateLLCProfileData({
-          municipality: generateMunicipality({ displayName: "Newark" }),
-        });
-        subject = renderTask({ profileData }, [generateMunicipality({ displayName: "GenericWhatever" })]);
-        await submitBusinessNameTab();
-        expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
-        selectByText("Business address city", "GenericWhatever");
-        expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
-          "GenericWhatever"
-        );
-        await submitBusinessTab();
-        await waitFor(() =>
-          expect(currentUserData().profileData.municipality?.displayName).toEqual("GenericWhatever")
-        );
-        expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
-          "GenericWhatever"
-        );
-      });
-
       it("does not display continue button and available alert if user types in new name after finding an available one", async () => {
         const profileData = generateLLCProfileData({});
         const formationData = {
@@ -694,6 +674,48 @@ describe("<BusinessFormation />", () => {
         expect(getInputElementByLabel("Agent office address city").value).toBe("agent-city-402");
         expect(getInputElementByLabel("Agent office address state").value).toBe("DC");
         expect(getInputElementByLabel("Agent office address zip code").value).toBe("99887");
+      });
+    });
+
+    it("saves business address city to profile after clicking continue", async () => {
+      const profileData = generateLLCProfileData({
+        municipality: generateMunicipality({ displayName: "Newark" }),
+      });
+      subject = renderTask({ profileData }, [generateMunicipality({ displayName: "GenericWhatever" })]);
+      await submitBusinessNameTab();
+      expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
+      selectByText("Business address city", "GenericWhatever");
+      expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
+        "GenericWhatever"
+      );
+      await submitBusinessTab();
+      await waitFor(() => {
+        expect(currentUserData().profileData.municipality?.displayName).toEqual("GenericWhatever");
+        expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
+          "GenericWhatever"
+        );
+      });
+    });
+
+    it("does not save business address city to profile when page is invalid", async () => {
+      const profileData = generateLLCProfileData({
+        municipality: generateMunicipality({ displayName: "Newark" }),
+      });
+      subject = renderTask({ profileData }, [generateMunicipality({ displayName: "GenericWhatever" })]);
+      await submitBusinessNameTab();
+      expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
+      selectByText("Business address city", "GenericWhatever");
+      expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
+        "GenericWhatever"
+      );
+      fillText("Business address zip code", "AAAAA");
+      await submitBusinessTab(false);
+
+      await waitFor(() => {
+        expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
+        expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
+          "GenericWhatever"
+        );
       });
     });
 

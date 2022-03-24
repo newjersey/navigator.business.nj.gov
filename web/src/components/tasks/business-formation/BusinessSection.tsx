@@ -97,14 +97,13 @@ export const BusinessSection = (): ReactElement => {
   const submitBusinessData = async () => {
     if (!userData) return;
 
-    update({
+    const finalUserData = {
       ...userData,
-      profileData: { ...userData.profileData, municipality: state.formationFormData.businessAddressCity },
       formationData: {
         ...userData.formationData,
         formationFormData: state.formationFormData,
       },
-    });
+    };
 
     if (requiredFieldsWithError.length > 0) {
       setShowRequiredFieldsError(true);
@@ -113,8 +112,17 @@ export const BusinessSection = (): ReactElement => {
         {} as FormationFieldErrorMap
       );
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
+      update(finalUserData);
       return;
     }
+
+    update({
+      ...finalUserData,
+      profileData: {
+        ...finalUserData.profileData,
+        municipality: state.formationFormData.businessAddressCity,
+      },
+    });
 
     analytics.event.business_formation_business_step_continue_button.click.go_to_next_formation_step();
 
