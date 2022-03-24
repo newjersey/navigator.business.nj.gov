@@ -5,9 +5,15 @@ import { calculateNextAnnualFilingDate } from "./calculateNextAnnualFilingDate";
 export const getAnnualFilings = (userData: UserData) => {
   const filings = userData.taxFilingData.filings.filter((it) => it.identifier !== "ANNUAL_FILING");
 
-  const legalStructure = LookupLegalStructureById(userData.profileData.legalStructureId);
+  let requiresPublicFiling = true;
 
-  if (userData.profileData.dateOfFormation && legalStructure.requiresPublicFiling) {
+  if (userData.profileData.legalStructureId) {
+    requiresPublicFiling = LookupLegalStructureById(
+      userData.profileData.legalStructureId
+    ).requiresPublicFiling;
+  }
+
+  if (userData.profileData.dateOfFormation && requiresPublicFiling) {
     filings.push({
       identifier: "ANNUAL_FILING",
       dueDate: calculateNextAnnualFilingDate(userData.profileData.dateOfFormation),
