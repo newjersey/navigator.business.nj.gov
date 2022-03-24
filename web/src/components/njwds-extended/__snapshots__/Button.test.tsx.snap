@@ -129,25 +129,29 @@ exports[`Button loading button displays correctly 1`] = `
       <div
         data-testid="loading-spinner"
       >
-        <span
-          class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
-          role="progressbar"
-          style="width: 24px; height: 24px;"
+        <div
+          class="padding-top-1px"
         >
-          <svg
-            class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
-            viewBox="22 22 44 44"
+          <span
+            class="MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root"
+            role="progressbar"
+            style="width: 24px; height: 24px;"
           >
-            <circle
-              class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
-              cx="44"
-              cy="44"
-              fill="none"
-              r="17"
-              stroke-width="10"
-            />
-          </svg>
-        </span>
+            <svg
+              class="MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg"
+              viewBox="22 22 44 44"
+            >
+              <circle
+                class="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle"
+                cx="44"
+                cy="44"
+                fill="none"
+                r="17"
+                stroke-width="10"
+              />
+            </svg>
+          </span>
+        </div>
       </div>
     </button>
   </div>

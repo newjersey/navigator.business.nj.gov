@@ -1,10 +1,11 @@
 import { Icon } from "@/components/njwds/Icon";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { SectionType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
 import React, { createContext, ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -27,6 +28,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
   const sectionName = props.sectionType.toLowerCase();
   const isOpen = userData?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
   const isCompleted = sectionCompletion ? sectionCompletion[props.sectionType] : false;
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const handleAccordionStateChange = async (): Promise<void> => {
     const roadmapOpenSections = userData?.preferences.roadmapOpenSections;
@@ -67,7 +69,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}
           >
-            <div className="margin-y-2">
+            <div className={`margin-y-2${!props.mini && isTabletAndUp ? " margin-left-3" : ""}`}>
               <h2 className={`flex flex-align-center margin-0-override ${headerClasses}`}>
                 <img
                   role="presentation"

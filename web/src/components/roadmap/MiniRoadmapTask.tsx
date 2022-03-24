@@ -18,7 +18,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
   return (
     <Link href={`/tasks/${props.task.urlSlug}`} passHref>
       <button
-        className={`usa-button--unstyled width-100 padding-y-1 padding-left-1 padding-right-3 cursor-pointer hover:bg-base-lightest line-height-body-2 fdr fac font-body-3xs text-ink ${
+        className={`usa-button--unstyled padding-y-1 padding-left-1 padding-right-4 cursor-pointer hover:bg-base-lightest line-height-body-2 fdr fac font-body-3xs text-ink ${
           props.active ? "bg-base-lightest bg-chevron text-primary-dark text-bold" : ""
         }`}
         data-task={props.task.id}
@@ -32,7 +32,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
         ) : (
           <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
         )}
-        {props.task.name}
+        <span className="margin-right-05">{props.task.name}</span>
       </button>
     </Link>
   );

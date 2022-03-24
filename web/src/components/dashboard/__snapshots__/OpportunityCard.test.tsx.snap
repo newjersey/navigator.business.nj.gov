@@ -14,7 +14,7 @@ exports[`OpportunityCard matches the layout 1`] = `
           <span
             class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
         text-no-wrap
-        bg-white text-black bg-certification
+        bg-white text-base-darkest bg-certification
         
         
         

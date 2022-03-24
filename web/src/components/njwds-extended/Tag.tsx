@@ -8,7 +8,7 @@ type TagVariant =
   | "accent"
   | "noBg"
   | "baseDark"
-  | "baseBlack"
+  | "baseDarkest"
   | "required"
   | "certification"
   | "funding";
@@ -51,14 +51,11 @@ export const Tag = (props: Props): ReactElement => {
     case "baseDark":
       styling = "bg-white text-base-dark border usa-tag-padding-override";
       break;
-    case "baseBlack":
-      styling = "bg-white text-black";
-      break;
     case "certification":
-      styling = "bg-white text-black bg-certification";
+      styling = "bg-white text-base-darkest bg-certification";
       break;
     case "funding":
-      styling = "bg-white text-black bg-funding";
+      styling = "bg-white text-base-darkest bg-funding";
       break;
     case "required":
       styling = "bg-white text-accent-cool-darker border-1px border-accent-cool-darker";

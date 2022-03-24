@@ -20,6 +20,28 @@ export const GraduationBox = (props: Props): ReactElement => {
     setModalOpen(true);
   };
 
+  const renderMobileContent = (
+    <div className="flex flex-column flex-align-center">
+      <img src={`/img/congratulations-green.svg`} className="minw-8" alt="" />
+      <h3 className="margin-bottom-105 margin-top-3 text-center">
+        {Config.roadmapDefaults.graduationHeader}
+      </h3>
+      <p className="text-base-dark margin-bottom-3 text-center">
+        {Config.roadmapDefaults.graduationBodyText}
+      </p>
+    </div>
+  );
+
+  const renderContent = (
+    <div className="flex flex-align-center">
+      <img src={`/img/congratulations-green.svg`} className="minw-8 margin-right-3" alt="" />
+      <div className="margin-right-3">
+        <h3 className="margin-bottom-105">{Config.roadmapDefaults.graduationHeader}</h3>
+        <p className="text-base-dark">{Config.roadmapDefaults.graduationBodyText}</p>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <GraduationModal
@@ -35,18 +57,10 @@ export const GraduationBox = (props: Props): ReactElement => {
             : "display-flex flex-column flex-align-center"
         }`}
       >
-        <div className="tablet:margin-right-3 minw-8">
-          <img src={`/img/congratulations-green.svg`} style={{ width: "60px", height: "60px" }} alt="" />
-        </div>
-        <div className="tablet:margin-right-3 margin-y-3 tablet:margin-y-0">
-          <h3 className="margin-bottom-105">{Config.roadmapDefaults.graduationHeader}</h3>
-          <p className="text-base-dark">{Config.roadmapDefaults.graduationBodyText}</p>
-        </div>
-        <div className="">
-          <Button style="primary" onClick={openModal} noRightMargin widthAutoOnMobile>
-            {Config.roadmapDefaults.graduationButtonText}
-          </Button>
-        </div>
+        {isTabletAndUp ? renderContent : renderMobileContent}
+        <Button style="primary" onClick={openModal} noRightMargin widthAutoOnMobile>
+          {Config.roadmapDefaults.graduationButtonText}
+        </Button>
       </div>
     </>
   );
