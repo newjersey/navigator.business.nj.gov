@@ -5,6 +5,7 @@ import cors from "cors";
 import express from "express";
 import serverless from "serverless-http";
 import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
+import { guestRouterFactory } from "src/api/guestRouter";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { businessNameRouterFactory } from "../../api/businessNameRouter";
 import { formationRouterFactory } from "../../api/formationRouter";
@@ -124,6 +125,7 @@ app.use(
   "/api/external",
   externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
+app.use("/api/guest", guestRouterFactory());
 app.use("/api", businessNameRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));

@@ -25,6 +25,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   postSelfReg: jest.fn(),
   postNewsletter: jest.fn(),
   postUserTesting: jest.fn(),
+  postGetAnnualFilings: jest.fn(),
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
@@ -35,6 +36,7 @@ describe("onboarding - shared", () => {
     useMockRouter({});
     setupStatefulUserDataContext();
     mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "", userData: generateUserData({}) });
+    mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
   });
 
   it("routes to the first onboarding question when they have not answered the first question", async () => {

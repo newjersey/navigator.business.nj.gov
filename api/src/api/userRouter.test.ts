@@ -158,7 +158,11 @@ describe("userRouter", () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
-        profileData: generateProfileData({ dateOfFormation: "2021-03-01", entityId: undefined }),
+        profileData: generateProfileData({
+          dateOfFormation: "2021-03-01",
+          entityId: undefined,
+          legalStructureId: "limited-liability-company",
+        }),
         taxFilingData: { filings: [] },
       });
 
@@ -170,27 +174,6 @@ describe("userRouter", () => {
         ...postedUserData,
         taxFilingData: {
           ...postedUserData.taxFilingData,
-          filings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
-        },
-      });
-    });
-
-    it("calculates new annual filing date and overrides it if needed", async () => {
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const postedUserData = generateUserData({
-        user: generateUser({ id: "123" }),
-        profileData: generateProfileData({ dateOfFormation: "2021-03-01", entityId: undefined }),
-        taxFilingData: {
-          filings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
-        },
-      });
-      stubUserDataClient.put.mockResolvedValue(postedUserData);
-
-      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
-
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...postedUserData,
-        taxFilingData: {
           filings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
         },
       });

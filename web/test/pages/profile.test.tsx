@@ -1,3 +1,4 @@
+import * as api from "@/lib/api-client/apiClient";
 import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
@@ -6,6 +7,7 @@ import {
   generateGetFilingResponse,
   generateMunicipality,
   generateProfileData,
+  generateTaxFilingData,
   generateUser,
   generateUserData,
 } from "@/test/factories";
@@ -33,12 +35,15 @@ import React from "react";
 const date = dayjs().subtract(1, "month").date(1);
 
 const dateOfFormation = date.format("YYYY-MM-DD");
+const mockApi = api as jest.Mocked<typeof api>;
 
 jest.mock("next/router");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postGetAnnualFilings: jest.fn(),
+}));
 describe("profile", () => {
   let subject: RenderResult;
 
@@ -46,6 +51,7 @@ describe("profile", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
+    mockApi.postGetAnnualFilings.mockImplementation((userData) => Promise.resolve(userData));
   });
 
   const renderPage = ({
@@ -158,6 +164,24 @@ describe("profile", () => {
             employerId: "023456780",
             notes: "whats appppppp",
           },
+        });
+      });
+    });
+
+    it("updates tax filing data on save", async () => {
+      const taxData = generateTaxFilingData({});
+      mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) =>
+        Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
+      );
+      const initialUserData = generateUserData({ taxFilingData: taxData });
+      subject = renderPage({ userData: initialUserData });
+      clickSave();
+
+      await waitFor(() => {
+        expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+        expect(currentUserData()).toEqual({
+          ...initialUserData,
+          taxFilingData: { ...taxData, filings: [] },
         });
       });
     });

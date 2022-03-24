@@ -20,6 +20,7 @@ import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
@@ -39,7 +40,7 @@ import { getSectionCompletion, OnboardingStatusLookup, useMountEffectWhenDefined
 import { ProfileDataContext } from "@/pages/onboarding";
 import { RoadmapContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyProfileData, Municipality, ProfileData } from "@businessnjgovnavigator/shared";
+import { createEmptyProfileData, Municipality, ProfileData, UserData } from "@businessnjgovnavigator/shared";
 import { CircularProgress } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
@@ -115,9 +116,12 @@ const ProfilePage = (props: Props): ReactElement => {
     setAnalyticsDimensions(profileData);
     const newRoadmap = await buildUserRoadmap(profileData);
     setRoadmap(newRoadmap);
-    setSectionCompletion(getSectionCompletion(newRoadmap, userData));
 
-    update({ ...userData, profileData: profileData, formProgress: "COMPLETED" }).then(async () => {
+    let newUserData: UserData = { ...userData, profileData: profileData, formProgress: "COMPLETED" };
+    setSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
+    newUserData = await postGetAnnualFilings(newUserData);
+
+    update(newUserData).then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");
       redirect({ success: true });

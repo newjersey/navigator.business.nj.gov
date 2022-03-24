@@ -5,6 +5,7 @@ import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDat
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   createProfileFieldErrorMap,
@@ -23,6 +24,7 @@ import {
   Industries,
   LegalStructures,
   ProfileData,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import { Dialog, DialogContent, DialogTitle, FormControl, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
@@ -82,12 +84,18 @@ export const GraduationModal = (props: Props): ReactElement => {
       ...profileData,
       hasExistingBusiness: true,
     };
+
     setAnalyticsDimensions(newProfileData);
-    analytics.event.graduation_modal.submit.prospective_roadmap_to_existing_dashboard();
-    await update({
+
+    let newUserData: UserData = {
       ...userData,
       profileData: newProfileData,
-    });
+    };
+
+    newUserData = await postGetAnnualFilings(newUserData);
+
+    analytics.event.graduation_modal.submit.prospective_roadmap_to_existing_dashboard();
+    await update(newUserData);
 
     await router.push("/dashboard");
   };

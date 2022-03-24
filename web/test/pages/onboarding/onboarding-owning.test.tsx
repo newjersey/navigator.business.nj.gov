@@ -1,5 +1,12 @@
+import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
+import {
+  generateMunicipality,
+  generateProfileData,
+  generateTaxFilingData,
+  generateUser,
+  generateUserData,
+} from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
@@ -15,7 +22,10 @@ jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn()
 jest.mock("@/lib/api-client/apiClient", () => ({
   postNewsletter: jest.fn(),
   postUserTesting: jest.fn(),
+  postGetAnnualFilings: jest.fn(),
 }));
+
+const mockApi = api as jest.Mocked<typeof api>;
 
 const date = dayjs().subtract(1, "month").date(1);
 const dateOfFormation = date.format("YYYY-MM-DD");
@@ -25,6 +35,9 @@ describe("onboarding - owning a business", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
+    mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
+    mockApi.postNewsletter.mockImplementation((request) => Promise.resolve(request));
+    mockApi.postUserTesting.mockImplementation((request) => Promise.resolve(request));
   });
 
   it("uses special template eval for step 1 label", async () => {
@@ -324,6 +337,33 @@ describe("onboarding - owning a business", () => {
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
     await page.visitStep4();
     expect(page.getMunicipalityValue()).toEqual("Newark");
+  });
+
+  it("updates tax filing data on save", async () => {
+    const taxData = generateTaxFilingData({});
+    mockApi.postGetAnnualFilings.mockImplementation((userData) =>
+      Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
+    );
+    const initialUserData = generateUserData({
+      taxFilingData: taxData,
+      profileData: generateProfileData({
+        hasExistingBusiness: true,
+      }),
+    });
+    const { page } = renderPage({ userData: initialUserData });
+    expect(page.getRadioButtonValue()).toEqual("true");
+    await page.visitStep2();
+    await page.visitStep3();
+    await page.visitStep4();
+    await page.visitStep5();
+    page.clickNext();
+
+    await waitFor(() => {
+      expect(currentUserData()).toEqual({
+        ...initialUserData,
+        taxFilingData: { ...taxData, filings: [] },
+      });
+    });
   });
 
   describe("validates self-reg step", () => {

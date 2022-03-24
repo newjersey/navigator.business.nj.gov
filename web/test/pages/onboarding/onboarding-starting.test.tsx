@@ -17,7 +17,11 @@ import { waitFor, within } from "@testing-library/react";
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postNewsletter: jest.fn(), postUserTesting: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postNewsletter: jest.fn(),
+  postUserTesting: jest.fn(),
+  postGetAnnualFilings: jest.fn(),
+}));
 
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -26,7 +30,7 @@ describe("onboarding - starting a business", () => {
     jest.resetAllMocks();
     useMockRouter({});
     setupStatefulUserDataContext();
-
+    mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
     mockApi.postNewsletter.mockImplementation((request) =>
       Promise.resolve({
         ...request,

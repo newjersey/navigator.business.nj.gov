@@ -2,7 +2,7 @@ import { createEmptyUserData, UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
-import { calculateNextAnnualFilingDate } from "../domain/calculateNextAnnualFilingDate";
+import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 import { UpdateLicenseStatus, UserDataClient } from "../domain/types";
 
@@ -77,19 +77,7 @@ export const userRouterFactory = (
       return;
     }
 
-    if (userData.profileData.dateOfFormation) {
-      const annualFilingDate = calculateNextAnnualFilingDate(userData.profileData.dateOfFormation);
-      userData = {
-        ...userData,
-        taxFilingData: {
-          ...userData.taxFilingData,
-          filings: [
-            ...userData.taxFilingData.filings.filter((it) => it.identifier !== "ANNUAL_FILING"),
-            { identifier: "ANNUAL_FILING", dueDate: annualFilingDate },
-          ],
-        },
-      };
-    }
+    userData = getAnnualFilings(userData);
 
     userDataClient
       .put(userData)

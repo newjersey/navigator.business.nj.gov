@@ -1,3 +1,4 @@
+import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
@@ -34,6 +35,7 @@ import {
   LookupIndustryById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
@@ -53,6 +55,11 @@ jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postGetAnnualFilings: jest.fn(),
+}));
+
+const mockApi = api as jest.Mocked<typeof api>;
 
 const setMobileScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
@@ -520,8 +527,7 @@ describe("roadmap page", () => {
   });
 
   describe("oscar graduation modal", () => {
-    let userData = generateUserData({});
-    const getRoadMap = () =>
+    const getRoadMap = (userData: UserData) =>
       render(
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
@@ -536,10 +542,11 @@ describe("roadmap page", () => {
 
     beforeEach(() => {
       setupStatefulUserDataContext();
+      mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
     });
 
     it("switches user to oscar and sends to dashboard", async () => {
-      userData = generateUserData({
+      const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
@@ -551,7 +558,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = getRoadMap();
+      const subject = getRoadMap(userData);
 
       const date = dayjs().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
@@ -564,24 +571,27 @@ describe("roadmap page", () => {
       helpers.selectByValue("Ownership", "veteran-owned");
       helpers.fillText("Existing employees", "1234567");
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
-      expect(currentUserData()).toEqual({
-        ...userData,
-        profileData: {
-          ...userData.profileData,
-          dateOfFormation,
-          sectorId: "clean-energy",
-          ownershipTypeIds: ["veteran-owned"],
-          existingEmployees: "1234567",
-          hasExistingBusiness: true,
-        },
+
+      await waitFor(() => {
+        expect(currentUserData()).toEqual({
+          ...userData,
+          profileData: {
+            ...userData.profileData,
+            dateOfFormation,
+            sectorId: "clean-energy",
+            ownershipTypeIds: ["veteran-owned"],
+            existingEmployees: "1234567",
+            hasExistingBusiness: true,
+          },
+        });
+        expect(mockPush).toHaveBeenCalledWith("/dashboard");
       });
-      await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/dashboard"));
     });
 
     it("pre-populates fields with data from profile", async () => {
       const date = dayjs().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
-      userData = generateUserData({
+      const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
@@ -593,7 +603,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = getRoadMap();
+      const subject = getRoadMap(userData);
 
       const helpers = createPageHelpers(subject);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
@@ -606,29 +616,65 @@ describe("roadmap page", () => {
       expect((subject.getByLabelText("Existing employees") as HTMLInputElement).value).toEqual("1234567");
 
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
-      expect(currentUserData()).toEqual({
-        ...userData,
-        profileData: {
-          ...userData.profileData,
+
+      await waitFor(() => {
+        expect(currentUserData()).toEqual({
+          ...userData,
+          profileData: {
+            ...userData.profileData,
+            dateOfFormation,
+            sectorId: "clean-energy",
+            ownershipTypeIds: ["veteran-owned"],
+            existingEmployees: "1234567",
+            hasExistingBusiness: true,
+          },
+        });
+        expect(mockPush).toHaveBeenCalledWith("/dashboard");
+      });
+    });
+
+    it("updates filing data", async () => {
+      const taxData = generateTaxFilingData({});
+      mockApi.postGetAnnualFilings.mockImplementation((userData) =>
+        Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
+      );
+      const date = dayjs().subtract(1, "month").date(1);
+      const dateOfFormation = date.format("YYYY-MM-DD");
+      const userData = generateUserData({
+        taxFilingData: taxData,
+        profileData: generateProfileData({
+          hasExistingBusiness: true,
+          legalStructureId: "limited-liability-partnership",
           dateOfFormation,
           sectorId: "clean-energy",
+          industryId: undefined,
           ownershipTypeIds: ["veteran-owned"],
           existingEmployees: "1234567",
-          hasExistingBusiness: true,
-        },
+        }),
       });
-      await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/dashboard"));
+      const subject = getRoadMap(userData);
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+
+      await waitFor(() => {
+        expect(currentUserData()).toEqual({
+          ...userData,
+          taxFilingData: { ...taxData, filings: [] },
+        });
+        expect(mockPush).toHaveBeenCalledWith("/dashboard");
+      });
     });
 
     it("hides date of formation if legal structure does not require public filing ", async () => {
-      userData = generateUserData({
+      const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "general-partnership",
         }),
       });
 
-      const subject = getRoadMap();
+      const subject = getRoadMap(userData);
 
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
@@ -637,7 +683,7 @@ describe("roadmap page", () => {
     });
 
     it("auto fills sector based on sectorDefault in the industry object", async () => {
-      userData = generateUserData({
+      const userData = generateUserData({
         profileData: generateProfileData({
           industryId: "restaurant",
           hasExistingBusiness: false,
@@ -645,7 +691,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = getRoadMap();
+      const subject = getRoadMap(userData);
 
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
@@ -656,7 +702,7 @@ describe("roadmap page", () => {
     });
 
     it("fires validations when clicking submit", async () => {
-      userData = generateUserData({
+      const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
@@ -668,11 +714,11 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = getRoadMap();
+      const subject = getRoadMap(userData);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
       expect(userDataWasNotUpdated()).toEqual(true);
-      await waitFor(() => expect(mockPush).not.toHaveBeenCalledWith("/dashboard"));
+      expect(mockPush).not.toHaveBeenCalledWith("/dashboard");
       expect(subject.getByText(Config.onboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
       expect(subject.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
       expect(
@@ -681,7 +727,7 @@ describe("roadmap page", () => {
     });
 
     it("disables date of formation if formation getFiling success", () => {
-      userData = generateUserData({
+      const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
@@ -693,7 +739,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = getRoadMap();
+      const subject = getRoadMap(userData);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       const helpers = createPageHelpers(subject);
       expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");

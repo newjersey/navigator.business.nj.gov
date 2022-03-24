@@ -278,6 +278,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         newUserData = await api.postUserTesting(newUserData);
       }
 
+      newUserData = await api.postGetAnnualFilings(newUserData);
+
       await update(newUserData);
       await router.push(newUserData.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap");
     }
