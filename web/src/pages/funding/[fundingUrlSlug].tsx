@@ -21,6 +21,16 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
       <div className="minh-37">
         <div className="margin-bottom-2">
           <h1>{props.funding.name}</h1>
+          <div>
+            {props.funding.dueDate ? (
+              <span className="margin-right-2 border padding-x-1 border-base text-base">
+                DUE: {props.funding.dueDate}{" "}
+              </span>
+            ) : (
+              <></>
+            )}
+            <span className="text-base">{props.funding.status.toUpperCase()}</span>
+          </div>
         </div>
         <Content>{props.funding.contentMd}</Content>
       </div>
