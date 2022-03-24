@@ -89,7 +89,7 @@
     "@storybook/manager-webpack5": "6.4.19",
     "@storybook/preset-scss": "1.0.3",
     "@storybook/react": "6.4.19",
-    "@storybook/storybook-deployer": "2.8.10",
+    "@storybook/storybook-deployer": "2.8.11",
     "@swc/core": "1.2.159",
     "@swc/jest": "0.2.20",
     "@testing-library/dom": "8.11.3",
