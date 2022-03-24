@@ -30,7 +30,7 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
       const newHeight = height - parseInt(marginStyle.marginTop);
       verticalBar.style.height = `${newHeight}px`;
     } else {
-      verticalBar.style.height = `${height}px`;
+      verticalBar.style.height = props.small ? `${height + 16}px` : `${height}px`;
     }
   };
 
@@ -40,6 +40,7 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
     props.stepNumber,
     verticalHeight,
     props.hideBar,
+    props.small,
   ]);
   useOnWindowResize(resizeVerticalBarToContent);
 
@@ -57,7 +58,7 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="vertical-step-indicator">
+    <div className={`vertical-step-indicator ${sm ? "padding-left-05 margin-bottom-1" : ""}`}>
       <div className={`usa-step-indicator usa-step-indicator--counters${sm} usa-step-indicator__segments`}>
         <div className="visually-hidden-centered">
           {props.completed ? `Completed step ${props.stepNumber}` : `Step ${props.stepNumber}`}

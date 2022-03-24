@@ -32,6 +32,13 @@ const base = (
       base-darkest
     </div>
     <div className="margin-bottom-2 height-10 width-15 bg-ink text-base-lightest text-bold">ink</div>
+    <div className="margin-bottom-2 height-10 width-15 bg-disabled text-base-lightest text-bold">
+      disabled
+    </div>
+
+    <div className="margin-bottom-2 height-10 width-15 bg-white text-base-darkest text-bold border">
+      white
+    </div>
   </div>
 );
 
@@ -201,21 +208,6 @@ const success = (
   </div>
 );
 
-const disabled = (
-  <div className="margin-right-2">
-    <div className="margin-bottom-2">disabled</div>
-    <div className="margin-bottom-2 height-10 width-15 bg-disabled-light text-base-darkest text-bold">
-      disabled-light 'base lighter'
-    </div>
-    <div className="margin-bottom-2 height-10 width-15 bg-disabled text-base-darkest text-bold">disabled</div>
-    <div className="margin-bottom-2 height-10 width-15 bg-disabled-dark text-base-darkest text-bold">
-      disabled-dark 'base light'
-    </div>
-    <div className="margin-bottom-2 height-10 width-15 bg-white text-base-darkest text-bold">white</div>
-    <div className="margin-bottom-2 height-10 width-15 bg-black text-base-lightest text-bold">black</div>
-  </div>
-);
-
 const Template = ({}) => (
   <div className="flex flex-row">
     <div>{base}</div>
@@ -227,7 +219,6 @@ const Template = ({}) => (
     <div>{error}</div>
     <div>{warning}</div>
     <div>{success}</div>
-    <div>{disabled}</div>
   </div>
 );
 

@@ -79,7 +79,7 @@ const DashboardPage = (props: Props): ReactElement => {
                   <Content>{props.displayContent.introTextMd}</Content>
                   <Button
                     style="tertiary"
-                    className="margin-y-2 margin-left-05"
+                    className="margin-y-2"
                     underline={true}
                     onClick={editOnClick}
                     dataTestid="grey-callout-link"

@@ -103,7 +103,9 @@ export const Button = (props: Props): ReactElement => {
     >
       {props.loading ? (
         <div style={{ width: width, height: height }} data-testid="loading-spinner">
-          <CircularProgress size={24} thickness={10} />
+          <div className="padding-top-1px">
+            <CircularProgress size={24} thickness={10} />
+          </div>
         </div>
       ) : (
         <div ref={widthRef} className="display-flex flex-row flex-justify-center flex-align-center">
