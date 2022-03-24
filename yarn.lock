@@ -2392,7 +2392,7 @@ __metadata:
     "@storybook/manager-webpack5": 6.4.19
     "@storybook/preset-scss": 1.0.3
     "@storybook/react": 6.4.19
-    "@storybook/storybook-deployer": 2.8.10
+    "@storybook/storybook-deployer": 2.8.11
     "@swc/core": 1.2.159
     "@swc/jest": 0.2.20
     "@testing-library/dom": 8.11.3
@@ -2563,7 +2563,7 @@ __metadata:
     "@storybook/manager-webpack5": 6.4.19
     "@storybook/preset-scss": 1.0.3
     "@storybook/react": 6.4.19
-    "@storybook/storybook-deployer": 2.8.10
+    "@storybook/storybook-deployer": 2.8.11
     "@swc/core": 1.2.159
     "@swc/jest": 0.2.20
     "@testing-library/dom": 8.11.3
@@ -7554,9 +7554,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/storybook-deployer@npm:2.8.10":
-  version: 2.8.10
-  resolution: "@storybook/storybook-deployer@npm:2.8.10"
+"@storybook/storybook-deployer@npm:2.8.11":
+  version: 2.8.11
+  resolution: "@storybook/storybook-deployer@npm:2.8.11"
   dependencies:
     git-url-parse: ^11.1.2
     glob: ^7.1.3
@@ -7566,7 +7566,7 @@ __metadata:
   bin:
     storybook-to-aws-s3: bin/storybook_to_aws_s3
     storybook-to-ghpages: bin/storybook_to_ghpages
-  checksum: cbeff7556c7a9a955286d828b3b8dd1dbcddd1fb48a64793cfadafa0e2c927f915a557085e104e08b6fd3e56c05c26167dbda59f470b94637fc7d181311f61a7
+  checksum: 528fd76bd22448bcab44249014d81e9e8e5c6eb523558345b9e9406f69cf0c713ad37734e9a15932a8dd30ac1e9b3076909eb532b4942e5db6890eee9fdda551
   languageName: node
   linkType: hard
 
