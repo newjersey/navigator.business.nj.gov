@@ -53,6 +53,7 @@ describe("getAnnualFilings", () => {
       profileData: generateProfileData({
         dateOfFormation: "2021-03-01",
         entityId: undefined,
+        legalStructureId: undefined,
       }),
       taxFilingData: { filings: [] },
     });
