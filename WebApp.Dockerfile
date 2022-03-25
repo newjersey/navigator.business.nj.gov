@@ -17,6 +17,7 @@ RUN yarn workspaces focus --production
 WORKDIR /app
 
 FROM builder AS runner
+RUN apk --no-cache add curl
 RUN rm -rf ./.yarn/cache
 RUN rm -rf ./shared
 RUN rm -rf ./api
