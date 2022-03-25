@@ -9,6 +9,7 @@ export interface UserData {
   profileData: ProfileData;
   formProgress: FormProgress;
   taskProgress: Record<string, TaskProgress>;
+  taskItemChecklist: Record<string, boolean>;
   licenseData: LicenseData | undefined;
   preferences: Preferences;
   taxFilingData: TaxFilingData;
@@ -21,6 +22,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     profileData: createEmptyProfileData(),
     formProgress: "UNSTARTED",
     taskProgress: {},
+    taskItemChecklist: {},
     licenseData: undefined,
     preferences: {
       roadmapOpenSections: ["PLAN", "START"],

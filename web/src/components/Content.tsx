@@ -1,6 +1,8 @@
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { Icon } from "@/components/njwds/Icon";
+import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import analytics from "@/lib/utils/analytics";
+import { FormControlLabel } from "@mui/material";
 import React, { CSSProperties, ReactElement } from "react";
 import remark from "remark";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -41,6 +43,7 @@ export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
         h6: ({ children }: { children: string[] }) => <div className="h6-styling">{children}</div>,
         blockquote: GreenBox,
         table: OutlineBox,
+        li: ListOrCheckbox,
         thead: Unformatted,
         tr: Unformatted,
         th: Unformatted,
@@ -112,4 +115,20 @@ const GreenBox = ({ children }: { children: string[] }): ReactElement => {
       {children}
     </div>
   );
+};
+
+const ListOrCheckbox = ({ children }: { children: unknown[] }): ReactElement => {
+  if (typeof children[0] === "string" && children[0].startsWith("[]")) {
+    const checklistItemId = children[0].slice("[]".length).split("{")[1].split("}")[0];
+    const checklistItemBody = [children[0].split("}")[1].trim(), ...children.slice(1)];
+    return (
+      <div>
+        <FormControlLabel
+          label={<>{checklistItemBody}</>}
+          control={<TaskCheckbox checklistItemId={checklistItemId} />}
+        />
+      </div>
+    );
+  }
+  return <li>{children}</li>;
 };

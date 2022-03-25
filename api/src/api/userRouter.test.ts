@@ -98,6 +98,7 @@ describe("userRouter", () => {
       beforeEach(async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       });
+
       it("does not update license if licenseData is undefined", async () => {
         const userData = generateUserData({ licenseData: undefined });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -139,6 +140,10 @@ describe("userRouter", () => {
   });
 
   describe("POST", () => {
+    beforeEach(() => {
+      stubUserDataClient.get.mockResolvedValue(generateUserData({}));
+    });
+
     it("puts user data", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const userData = generateUserData({ user: generateUser({ id: "123" }) });
@@ -177,6 +182,53 @@ describe("userRouter", () => {
           filings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
         },
       });
+    });
+
+    it("clears taskChecklistItems if industry has changed", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const newIndustryUserData = generateUserData({
+        user: generateUser({ id: "123" }),
+        profileData: generateProfileData({ industryId: "cannabis" }),
+        taskItemChecklist: { "some-id": true },
+      });
+
+      stubUserDataClient.get.mockResolvedValue({
+        ...newIndustryUserData,
+        profileData: {
+          ...newIndustryUserData.profileData,
+          industryId: "home-contractor",
+        },
+      });
+      stubUserDataClient.put.mockResolvedValue(newIndustryUserData);
+
+      await request(app)
+        .post(`/users`)
+        .send(newIndustryUserData)
+        .set("Authorization", "Bearer user-123-token");
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...newIndustryUserData,
+        taskItemChecklist: {},
+      });
+    });
+
+    it("does not clear taskChecklistItems if industry has not changed", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const newIndustryUserData = generateUserData({
+        user: generateUser({ id: "123" }),
+        profileData: generateProfileData({ industryId: "cannabis" }),
+        taskItemChecklist: { "some-id": true },
+      });
+
+      stubUserDataClient.get.mockResolvedValue(newIndustryUserData);
+      stubUserDataClient.put.mockResolvedValue(newIndustryUserData);
+
+      await request(app)
+        .post(`/users`)
+        .send(newIndustryUserData)
+        .set("Authorization", "Bearer user-123-token");
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(newIndustryUserData);
     });
 
     it("returns a 403 when user JWT does not match user ID", async () => {
