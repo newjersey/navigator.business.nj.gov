@@ -73,7 +73,7 @@
     "documentTableColumn2Label": "Services",
     "businessAddressLine1ErrorText": "Enter an address",
     "formationDocLabel": "Official Formation Document (PDF)",
-    "legalStructureWarningModalBody": "If you change your legal structure, you may be required to complete a different form. Don't worry, once you update your profile, we will tell you which form you need to complete, and where you can complete the form.",
+    "legalStructureWarningModalBody": "If you change your legal structure, you may be required to complete a different form. Don't worry: once you update your profile, we will tell you which form you need to complete and where you can complete it.",
     "reviewPageRegisteredAgentNameLabel": "**Name:**",
     "achPaymentCost": "1",
     "sameAgentInfoAsAccount": "The agent information is the same as the account holder",
