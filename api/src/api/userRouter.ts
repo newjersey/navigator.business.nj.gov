@@ -72,9 +72,14 @@ export const userRouterFactory = (
   router.post("/users", async (req, res) => {
     let userData = req.body as UserData;
     const postedUserBodyId = userData.user.id;
+
     if (getSignedInUserId(req) !== postedUserBodyId) {
       res.status(403).json();
       return;
+    }
+
+    if (await industryHasChanged(userData)) {
+      userData = clearTaskItemChecklists(userData);
     }
 
     userData = getAnnualFilings(userData);
@@ -96,6 +101,24 @@ export const userRouterFactory = (
 
   const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>
     dayjs(lastCheckedDate).isBefore(dayjs().subtract(1, "hour"));
+
+  const industryHasChanged = (userData: UserData): Promise<boolean> => {
+    return userDataClient
+      .get(userData.user.id)
+      .then((oldUserData) => {
+        return oldUserData.profileData.industryId !== userData.profileData.industryId;
+      })
+      .catch(() => {
+        return false;
+      });
+  };
+
+  const clearTaskItemChecklists = (userData: UserData): UserData => {
+    return {
+      ...userData,
+      taskItemChecklist: {},
+    };
+  };
 
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {
     const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;

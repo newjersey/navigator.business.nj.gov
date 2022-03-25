@@ -14,7 +14,7 @@ describe("<TaskProgressDropdown />", () => {
   const setModalIsVisible = jest.fn();
   const onSelectCallBack = jest.fn();
 
-  const setupHookWithAuth = (context: {
+  const renderWithAuth = (context: {
     onSelect?: typeof onSelectCallBack;
     initialValue?: TaskProgress;
     isAuthenticated?: IsAuthenticated;
@@ -36,7 +36,7 @@ describe("<TaskProgressDropdown />", () => {
 
   beforeEach(() => {
     jest.restoreAllMocks();
-    subject = setupHookWithAuth({});
+    subject = renderWithAuth({});
   });
 
   it("displays Not Started as the default", () => {
@@ -62,7 +62,7 @@ describe("<TaskProgressDropdown />", () => {
   });
 
   it("uses initialValue prop as initial value", async () => {
-    subject = setupHookWithAuth({ initialValue: "COMPLETED" });
+    subject = renderWithAuth({ initialValue: "COMPLETED" });
     waitFor(() => expect(subject.getAllByText(completedText)[0]).toBeVisible());
   });
 

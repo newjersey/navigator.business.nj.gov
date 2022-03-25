@@ -50,6 +50,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     profileData: generateProfileData({}),
     formProgress: "UNSTARTED",
     taskProgress: {},
+    taskItemChecklist: {},
     licenseData: generateLicenseData({}),
     preferences: generatePreferences(),
     taxFilingData: generateTaxFilingData({}),
