@@ -115,7 +115,7 @@ export const Members = (): ReactElement => {
                         setEditIndex(index);
                         setModalOpen(true);
                       }}
-                      className="usa-button usa-button--unstyled"
+                      className="usa-button usa-button--unstyled width-auto"
                     >
                       <Icon className="usa-icon--size-3">edit</Icon>
                     </IconButton>
@@ -125,7 +125,7 @@ export const Members = (): ReactElement => {
                     onClick={() => {
                       deleteMember(index);
                     }}
-                    className="usa-button usa-button--unstyled"
+                    className="usa-button usa-button--unstyled width-auto"
                   >
                     <Icon className="usa-icon--size-3">delete</Icon>
                   </IconButton>
