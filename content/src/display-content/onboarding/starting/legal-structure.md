@@ -4,6 +4,6 @@ placeholder: Select a legal structure for your Navigator profile. (Making a
 ---
 ## Legal Structure
 
-Your businesses’ legal structure can have a large impact on taxes, financing, liability, and closure of your business. We strongly suggest doing research on the best legal structure for your business.
+Your businesses’ `legal structure|legal-structure-learn-more` can have a large impact on taxes, financing, liability, and closure of your business. We strongly suggest doing research on the best legal structure for your business.
 
-While your legal structure influences your business roadmap, you can make a selection now and always change it later. `Learn more about legal structures|legal-structure-learn-more` .
+Select a legal structure for your Navigator profile below. Making a selection will not form your business, it will help us create your personalized checklist. You can change your intended legal structure anytime before formally filing it with the NJ Department of Treasury.
