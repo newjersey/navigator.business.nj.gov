@@ -2290,7 +2290,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 27.5.1
-    "@serverless/typescript": 3.7.5
+    "@serverless/typescript": 3.8.0
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
@@ -2323,7 +2323,7 @@ __metadata:
     prettier: 2.6.1
     prettier-plugin-organize-imports: 2.3.4
     rimraf: 3.0.2
-    serverless: 3.7.9
+    serverless: 3.10.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.5.0
@@ -2381,7 +2381,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.1.0
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 3.7.5
+    "@serverless/typescript": 3.8.0
     "@storybook/addon-a11y": 6.4.19
     "@storybook/addon-actions": 6.4.19
     "@storybook/addon-docs": 6.4.19
@@ -2484,7 +2484,7 @@ __metadata:
     sass: 1.49.9
     sass-loader: 12.6.0
     semantic-release: 19.0.2
-    serverless: 3.7.9
+    serverless: 3.10.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 2.7.0
     serverless-offline: 8.5.0
@@ -6162,7 +6162,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/dashboard-plugin@npm:^6.1.5":
+"@serverless/dashboard-plugin@npm:^6.2.0":
   version: 6.2.0
   resolution: "@serverless/dashboard-plugin@npm:6.2.0"
   dependencies:
@@ -6223,10 +6223,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:3.7.5":
-  version: 3.7.5
-  resolution: "@serverless/typescript@npm:3.7.5"
-  checksum: fdd4f625424b18d801d3be2914b131f720320995d33184475953a3481c1608c8a7b84206d3b8e031961426175a047660b5f55502774dab2c9d46d325281746ab
+"@serverless/typescript@npm:3.8.0":
+  version: 3.8.0
+  resolution: "@serverless/typescript@npm:3.8.0"
+  checksum: 9dd2df51721ead0e9dfe29c2384e8b7f1ac02503f86f3b1572b0b54f853c186857507956cf196231e3b1baf94f5fb7542a1686c0f2acb4c18060487bff45326d
   languageName: node
   linkType: hard
 
@@ -9512,7 +9512,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ajv@npm:^8.0.0, ajv@npm:^8.10.0, ajv@npm:^8.8.0":
+"ajv@npm:^8.0.0, ajv@npm:^8.11.0, ajv@npm:^8.8.0":
   version: 8.11.0
   resolution: "ajv@npm:8.11.0"
   dependencies:
@@ -10309,7 +10309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1076.0, aws-sdk@npm:^2.1095.0, aws-sdk@npm:^2.7.0":
+"aws-sdk@npm:^2.1076.0, aws-sdk@npm:^2.1100.0, aws-sdk@npm:^2.7.0":
   version: 2.1101.0
   resolution: "aws-sdk@npm:2.1101.0"
   dependencies:
@@ -22595,7 +22595,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.0, micromatch@npm:^4.0.2, micromatch@npm:^4.0.4":
+"micromatch@npm:^4.0.0, micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5":
   version: 4.0.5
   resolution: "micromatch@npm:4.0.5"
   dependencies:
@@ -29329,17 +29329,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.7.9":
-  version: 3.7.9
-  resolution: "serverless@npm:3.7.9"
+"serverless@npm:3.10.0":
+  version: 3.10.0
+  resolution: "serverless@npm:3.10.0"
   dependencies:
-    "@serverless/dashboard-plugin": ^6.1.5
+    "@serverless/dashboard-plugin": ^6.2.0
     "@serverless/platform-client": ^4.3.2
     "@serverless/utils": ^6.0.3
-    ajv: ^8.10.0
+    ajv: ^8.11.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.0
-    aws-sdk: ^2.1095.0
+    aws-sdk: ^2.1100.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
@@ -29367,7 +29367,7 @@ __metadata:
     json-refs: ^3.0.15
     lodash: ^4.17.21
     memoizee: ^0.4.15
-    micromatch: ^4.0.4
+    micromatch: ^4.0.5
     node-fetch: ^2.6.7
     npm-registry-utilities: ^1.0.0
     object-hash: ^2.2.0
@@ -29389,7 +29389,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 8075b247eaa2a762580659d7077664f2990bb864aa5f39cb6d8e2d969293755c703367712bbed30d6ec5407f1a33ae1169d6bb41f90cbc859a1ca53f36b42c62
+  checksum: 186680e14f15e67090af54aa5ba4c657962e6b7734ea5eac044438aa31b4e5ed9c03025f252dbe193521d598fd86eb7a164927f1806033a40398dfcf785c73bc
   languageName: node
   linkType: hard
 
