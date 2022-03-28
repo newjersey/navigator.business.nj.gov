@@ -4,6 +4,7 @@
     "@aws-amplify/auth",
     "@aws-amplify/core",
     "@businessnjgovnavigator/content/fieldConfig/config.json",
+    "@businessnjgovnavigator/content/roadmaps/steps.json",
     "@businessnjgovnavigator/content/roadmaps/task-dependencies.json",
     "@businessnjgovnavigator/shared",
     "@jest/types",
