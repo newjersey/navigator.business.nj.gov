@@ -1,6 +1,5 @@
 ---
-placeholder: Select a legal structure for your Navigator profile. (Making a
-  selection will not form your business).
+placeholder: Select a legal structure for your Navigator profile.
 ---
 ## Intended Legal Structure
 
