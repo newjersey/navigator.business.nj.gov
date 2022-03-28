@@ -150,7 +150,7 @@
     "lint-staged": "12.3.7",
     "napa": "3.0.0",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
-    "prettier": "2.6.0",
+    "prettier": "2.6.1",
     "prettier-plugin-organize-imports": "2.3.4",
     "raw-loader": "4.0.2",
     "rimraf": "3.0.2",
