@@ -2,7 +2,7 @@
 placeholder: Select a legal structure for your Navigator profile. (Making a
   selection will not form your business).
 ---
-## Legal Structure
+## Intended Legal Structure
 
 Your businesses’ `legal structure|legal-structure-learn-more` can have a large impact on taxes, financing, liability, and closure of your business. We strongly suggest doing research on the best legal structure for your business.
 
