@@ -89,7 +89,7 @@
     "signatureDeleteMobileText": "Delete Signer",
     "nextButtonText": "Continue",
     "submitErrorHeading": "Form cannot be submitted. Review the errors found in the following fields:",
-    "businessSuffixTooltip": "A business designator represents your legal structure and is attached to the end of your business name.",
+    "businessSuffixTooltip": "A business designator is how your legal structure is displayed after your business name.",
     "contactLastNameLabel": "**Last Name**",
     "businessStartDateTooltip": "The NJ Department of Treasury often refers to this as an \"Effective Date.\"",
     "reviewPageLegalStructureLabel": "**Legal Structure** `Learn more|legal-structure-learn-more`",
