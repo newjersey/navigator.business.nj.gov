@@ -73,7 +73,7 @@ const RoadmapPage = (props: Props): ReactElement => {
       <NavBar />
       {!userData || userData?.formProgress !== "COMPLETED" ? (
         <SinglePageLayout>
-          <div className="flex flex-justify-center flex-align-center">
+          <div className="flex flex-justify-center flex-align-center margin-top-3 desktop:margin-top-0">
             <CircularProgress />
             <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
           </div>

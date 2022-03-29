@@ -106,7 +106,7 @@ exports[`Button Styles tertiary displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button usa-button--unstyled margin-right-0"
+      class="usa-button usa-button--unstyled width-auto margin-right-0"
       type="button"
     >
       <div
