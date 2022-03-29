@@ -50,7 +50,7 @@ export const Button = (props: Props): ReactElement => {
       disabledClass = "usa-button--outline-disabled padding-y-2";
       break;
     case "tertiary":
-      style = "usa-button usa-button--unstyled";
+      style = "usa-button usa-button--unstyled width-auto";
       break;
     case "narrow-light":
       style =
