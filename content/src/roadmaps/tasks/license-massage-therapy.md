@@ -19,9 +19,9 @@ You or any staff offering massage therapy services must register and apply for a
 
 ### Application Needs
 
-- An official transcript sent by your school in a sealed envelope
-- A [Supervision Certification](https://www.njconsumeraffairs.gov/mbt/Applications/Supervising-Faculty-Member-Certification.pdf) form completed by a licensed massage and bodywork therapist who has supervised the required 100 hours of clinical practice
-- Official exam scores sent directly to the Board in a sealed envelope (scores must be from either the `National Certification Board for Therapeutic Massage and Bodywork|national-certification-board-massage` , or the `Federation of State Massage Therapy Board|state-board-massage` )
+- []{An official transcript} sent by your school in a sealed envelope
+- []{A [Supervision Certification](https://www.njconsumeraffairs.gov/mbt/Applications/Supervising-Faculty-Member-Certification.pdf) form} completed by a licensed massage and bodywork therapist who has supervised the required 100 hours of clinical practice
+- []{Official exam scores sent directly to the Board} in a sealed envelope (scores must be from either the `National Certification Board for Therapeutic Massage and Bodywork|national-certification-board-massage` , or the `Federation of State Massage Therapy Board|state-board-massage` )
 
 > **Once completed, you will have:**
 >
