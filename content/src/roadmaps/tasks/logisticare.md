@@ -1,6 +1,6 @@
 ---
 urlSlug: logisticare
-name: Apply for Logisticare If Applicable
+name: Apply for Logisticare if Applicable
 id: logisticare
 callToActionLink: https://www.logisticare.com/sfapplication
 callToActionText: Become a Transportation Provider with Logisticare
