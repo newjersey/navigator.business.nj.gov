@@ -120,12 +120,17 @@ const GreenBox = ({ children }: { children: string[] }): ReactElement => {
 const ListOrCheckbox = ({ children }: { children: unknown[] }): ReactElement => {
   if (typeof children[0] === "string" && children[0].startsWith("[]")) {
     const checklistItemId = children[0].slice("[]".length).split("{")[1].split("}")[0];
-    const checklistItemBody = [children[0].split("}")[1].trim(), ...children.slice(1)];
+    const checklistItemBody = [children[0].split("}")[1], ...children.slice(1)];
     return (
-      <div>
+      <div className="padding-y-1">
         <FormControlLabel
           label={<>{checklistItemBody}</>}
-          control={<TaskCheckbox checklistItemId={checklistItemId} />}
+          control={
+            <TaskCheckbox
+              checklistItemId={checklistItemId}
+              checkboxProps={{ sx: { alignSelf: "self-start" } }}
+            />
+          }
         />
       </div>
     );

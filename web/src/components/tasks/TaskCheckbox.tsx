@@ -1,11 +1,12 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { AuthAlertContext } from "@/pages/_app";
-import { Checkbox } from "@mui/material";
+import { Checkbox, CheckboxProps } from "@mui/material";
 import React, { useContext } from "react";
 
 interface Props {
   checklistItemId: string;
+  checkboxProps?: CheckboxProps;
 }
 
 export const TaskCheckbox = (props: Props) => {
@@ -33,7 +34,7 @@ export const TaskCheckbox = (props: Props) => {
 
   return (
     <>
-      <Checkbox onChange={handleChange} checked={checklistItemStatus} />
+      <Checkbox onChange={handleChange} checked={checklistItemStatus} {...props.checkboxProps} />
     </>
   );
 };
