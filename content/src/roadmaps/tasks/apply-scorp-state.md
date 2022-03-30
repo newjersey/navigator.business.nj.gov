@@ -1,6 +1,6 @@
 ---
 urlSlug: apply-for-scorp-state
-name: Apply for an S Corporation Status with the State
+name: Apply for an S Corporation Status With the State
 id: apply-scorp-state
 callToActionLink: https://www.njportal.com/dor/scorp
 callToActionText: Apply for My S Corporation Status
