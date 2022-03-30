@@ -1,6 +1,6 @@
 ---
 urlSlug: spray-paint-permit
-name: Obtain Spray Paint Booth Permits, if Needed
+name: Obtain Spray Paint Booth Permits if Needed
 id: spray-paint-booth-permit-auto-body-repair
 callToActionLink: null
 callToActionText: null

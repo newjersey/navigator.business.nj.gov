@@ -1,6 +1,6 @@
 ---
 urlSlug: town-mercantile-license
-name: Get Your Mercantile License If Your Town Requires It
+name: Get Your Mercantile License if Your Town Requires It
 id: check-local-requirements
 callToActionLink: ${municipalityWebsite}
 callToActionText: Visit the ${municipality} Website

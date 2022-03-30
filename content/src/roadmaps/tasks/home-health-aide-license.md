@@ -1,6 +1,6 @@
 ---
 urlSlug: home-health-aide-license
-name: Apply for an Employment Agency License If Applicable
+name: Apply for an Employment Agency License if Applicable
 id: home-health-aide-license
 callToActionLink: https://www.njconsumeraffairs.gov/epservices
 callToActionText: Contact the Division of Consumer Affairs

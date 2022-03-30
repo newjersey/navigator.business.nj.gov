@@ -1,6 +1,6 @@
 ---
 urlSlug: zoning
-name: Obtain Zoning and Sign Permits If Required
+name: Obtain Zoning and Sign Permits if Required
 id: zoning
 callToActionLink: ""
 callToActionText: ""
