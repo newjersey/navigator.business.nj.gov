@@ -1,3 +1,4 @@
+import { Button } from "@/components/njwds-extended/Button";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
@@ -8,8 +9,8 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
-  className?: string;
-  position?: "HERO" | "NAVBAR";
+  position: "HERO" | "NAVBAR";
+  landing?: boolean;
 }
 
 export const AuthButton = (props?: Props): ReactElement => {
@@ -17,9 +18,11 @@ export const AuthButton = (props?: Props): ReactElement => {
   const router = useRouter();
 
   const loginButton = () => (
-    <button
+    <Button
+      style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
       data-testid="login-button"
-      className="usa-button usa-button--outline auth-button margin-bottom-2 text-no-wrap"
+      noRightMargin
+      widthAutoOnMobile
       onClick={() => {
         triggerSignIn();
         if (props?.position === "HERO") {
@@ -30,21 +33,19 @@ export const AuthButton = (props?: Props): ReactElement => {
       }}
     >
       {Config.navigationDefaults.logInButton}
-    </button>
+    </Button>
   );
 
   const logoutButton = () => (
-    <button
-      data-log-out-button
-      className={`${
-        props?.className
-          ? props.className
-          : "usa-button usa-button--outline auth-button margin-bottom-2 text-no-wrap"
-      }`}
+    <Button
+      style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
+      noRightMargin
       onClick={() => onSignOut(router.push, dispatch)}
     >
-      {Config.navigationDefaults.logoutButton}
-    </button>
+      <span className={props?.landing ? "text-primary" : "text-base"}>
+        {Config.navigationDefaults.logoutButton}
+      </span>
+    </Button>
   );
 
   switch (state.isAuthenticated) {

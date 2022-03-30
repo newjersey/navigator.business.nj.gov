@@ -1,5 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Button Styles accent-cool-darker-big displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button usa-button--big btn-accent-cool-darker margin-right-2"
+      type="button"
+    >
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles accent-cooler displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="margin-right-2"
+      type="button"
+    >
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles info displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="margin-right-2"
+      type="button"
+    >
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`Button Styles narrow-light displays correctly 1`] = `
+<body>
+  <div>
+    <button
+      class="usa-button usa-tag bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button margin-right-2"
+      type="button"
+    >
+      <div
+        class="display-flex flex-row flex-justify-center flex-align-center"
+      >
+        Test Button
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
 exports[`Button Styles primary displays correctly 1`] = `
 <body>
   <div>
@@ -21,7 +89,7 @@ exports[`Button Styles primary-big displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="margin-right-2"
+      class="usa-button usa-button--big margin-right-2"
       type="button"
     >
       <div
@@ -72,7 +140,7 @@ exports[`Button Styles secondary-big displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="margin-right-2"
+      class="usa-button usa-button--big usa-button--outline border-2px margin-right-2"
       type="button"
     >
       <div

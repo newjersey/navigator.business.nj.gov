@@ -3,6 +3,7 @@ $sm: 40em; //tablet + up (640px)
 $md: 50em; //big tablet (800px)
 $lg: 64em; //desktop and up (1024px)
 
+$base-extra-light: #f8f8f8;
 $base-lightest: #f0f0f0;
 $base-lighter: #e6e6e6;
 $base-light: #adadad;
@@ -31,6 +32,8 @@ $accent-cool-light: #aacdec;
 $accent-cool: #73b3e7;
 $accent-cool-dark: #4f97d1;
 $accent-cool-darker: #2c608a;
+$accent-cool-darkest: #38536f;
+$accent-cool-more-darkest: #2e4153;
 
 $accent-warm-lighter: #ffe396;
 $accent-warm-light: #e5a000;
@@ -43,6 +46,7 @@ $info-light: #99deea;
 $info: #00bde3;
 $info-dark: #009ec1;
 $info-darker: #2e6276;
+$info-darkest: #134c57;
 
 $error-lighter: #f4e3db;
 $error-light: #f39268;
@@ -64,3 +68,7 @@ $success-darker: #446443;
 
 $disabled: $base;
 $white: #fff;
+
+$accent-cooler: #835aa6;
+$accent-cooler-dark: #64477c;
+$accent-cooler-darker: #4f3b60;

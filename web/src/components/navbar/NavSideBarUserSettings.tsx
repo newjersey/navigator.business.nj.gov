@@ -93,7 +93,7 @@ export const NavSideBarUserSettings = (): ReactElement => {
         <AccordionDetails>
           <div className="margin-left-2 margin-bottom-2">
             {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
-            <AuthButton className="clear-button text-base text-left" />
+            <AuthButton position="NAVBAR" />
           </div>
         </AccordionDetails>
       </Accordion>

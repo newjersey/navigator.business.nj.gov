@@ -1,26 +1,12 @@
+import { AuthButton } from "@/components/AuthButton";
 import { Button } from "@/components/njwds-extended/Button";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import analytics from "@/lib/utils/analytics";
-import { AuthContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext } from "react";
+import React, { ReactElement } from "react";
 
 export const NavBarLanding = (): ReactElement => {
-  const { state } = useContext(AuthContext);
   const router = useRouter();
-
-  const getLoginButtonText = (): string => {
-    switch (state.isAuthenticated) {
-      case IsAuthenticated.FALSE:
-        return Config.navigationDefaults.logInButton;
-      case IsAuthenticated.TRUE:
-        return Config.navigationDefaults.logoutButton;
-      case IsAuthenticated.UNKNOWN:
-        return Config.navigationDefaults.logInButton;
-    }
-  };
 
   return (
     <nav
@@ -30,9 +16,7 @@ export const NavBarLanding = (): ReactElement => {
       <img className="height-4" src="/img/Navigator-logo@2x.png" alt="Business.NJ.Gov Navigator" />
       <div>
         <span className="margin-right-2">
-          <Button style="tertiary" onClick={triggerSignIn}>
-            {getLoginButtonText()}
-          </Button>
+          <AuthButton position="NAVBAR" landing />
         </span>
         <Button
           style="tertiary"

@@ -53,16 +53,31 @@ describe("<NavBar />", () => {
 
   describe("navbar - used when user is on landing page", () => {
     it("displays landing page navbar when prop is passed", () => {
-      const subject = render(
-        <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
-      );
+      setLargeScreen(true);
 
+      const subject = render(
+        <NavBar
+          landingPage={true}
+          task={undefined}
+          sideBarPageLayout={false}
+          operateReferences={{}}
+          isWidePage={false}
+        />
+      );
       expect(subject.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
     });
 
     it("goes to onboarding when signup is clicked", () => {
+      setLargeScreen(true);
+
       const subject = render(
-        <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
+        <NavBar
+          landingPage={true}
+          task={undefined}
+          sideBarPageLayout={false}
+          operateReferences={{}}
+          isWidePage={false}
+        />
       );
 
       fireEvent.click(subject.getByText(Config.navigationDefaults.registerButton));

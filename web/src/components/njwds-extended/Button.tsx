@@ -9,7 +9,10 @@ interface Props {
     | "secondary-big"
     | "secondary-input-field-height"
     | "primary-input-field-height"
-    | "narrow-light";
+    | "narrow-light"
+    | "accent-cool-darker-big"
+    | "accent-cooler"
+    | "info";
   children: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
   dataTestid?: string;
@@ -41,6 +44,14 @@ export const Button = (props: Props): ReactElement => {
       style = "usa-button padding-y-2";
       disabledClass = "usa-button--disabled padding-y-2";
       break;
+    case "primary-big":
+      style = "usa-button usa-button--big";
+      disabledClass = "usa-button--disabled";
+      break;
+    case "accent-cool-darker-big":
+      style = "usa-button usa-button--big btn-accent-cool-darker";
+      disabledClass = "usa-button--disabled";
+      break;
     case "secondary":
       style = "usa-button usa-button--outline padding-y-1";
       disabledClass = "usa-button--outline-disabled";
@@ -48,6 +59,10 @@ export const Button = (props: Props): ReactElement => {
     case "secondary-input-field-height":
       style = "usa-button usa-button--outline padding-y-2";
       disabledClass = "usa-button--outline-disabled padding-y-2";
+      break;
+    case "secondary-big":
+      style = "usa-button usa-button--big usa-button--outline border-2px";
+      disabledClass = "usa-button--outline-disabled";
       break;
     case "tertiary":
       style = "usa-button usa-button--unstyled width-auto";

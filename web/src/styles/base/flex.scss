@@ -97,3 +97,15 @@
     flex-direction: row;
   }
 }
+
+@media only screen and (min-width: $sm) {
+  .flex-direction {
+    flex-direction: column !important;
+  }
+}
+
+@media only screen and (min-width: $lg) {
+  .flex-direction {
+    flex-direction: row !important;
+  }
+}

@@ -13,7 +13,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.clearCookies();
     cy.window().then((window) => window.sessionStorage.clear());
     cy.visit("/");
-    cy.get("[data-hero-button=true]").click();
+    cy.get('[data-testid="hero"]').click();
     completeNewBusinessOnboarding({
       businessName,
       industry,

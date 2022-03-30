@@ -33,6 +33,10 @@ hr {
   width: 100% !important;
 }
 
+.width-80 {
+  width: 80%;
+}
+
 .width-auto {
   width: auto !important;
 }
@@ -156,6 +160,10 @@ hr {
   margin: 0 !important;
 }
 
+.margin-auto {
+  margin: auto;
+}
+
 .min-height-575rem {
   min-height: 5.75rem;
 }
@@ -215,6 +223,9 @@ hr {
   .form-input {
     max-width: 30rem;
   }
+  .display-block {
+    display: block;
+  }
 }
 
 @media all and (min-width: $sm) {
@@ -228,4 +239,83 @@ hr {
 
 .grayRightGutter {
   background: linear-gradient(to right, $white 70%, $base-lightest 70% 100%);
+}
+
+.arrow {
+  display: inline-block;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    border-style: solid;
+    border-color: inherit;
+    border-width: 2px 2px 0 0;
+    position: absolute;
+    transform-origin: 50% 50%;
+  }
+
+  &.left::before {
+    transform: rotate(-135deg);
+    margin: -9px 0 0 -9px;
+    left: 13px;
+  }
+  &.up::before {
+    transform: rotate(-45deg);
+    margin: -10px 0 0 -9px;
+    top: 14px;
+  }
+  &.down::before {
+    transform: rotate(135deg);
+    margin: -23px 0 0 -9px;
+    top: 100%;
+  }
+  &.right::before {
+    transform: rotate(45deg);
+    margin: -9px 0 0 -20px;
+    left: 100%;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    top: 50%;
+    left: 50%;
+    border-style: solid;
+    border-color: inherit;
+    position: absolute;
+  }
+
+  &.left::after {
+    width: inherit;
+    height: 0;
+    left: 0%;
+    border-width: 2px 0 0 0;
+  }
+
+  &.up::after {
+    width: 0;
+    height: inherit;
+    top: 0%;
+    border-width: 0 2px 0 0;
+  }
+
+  &.down::after {
+    width: 0;
+    height: inherit;
+    top: 0%;
+    border-width: 0 2px 0 0;
+  }
+
+  &.right::after {
+    width: inherit;
+    height: 0;
+    left: 1%;
+
+    border-width: 2px 0 0 0;
+  }
 }
