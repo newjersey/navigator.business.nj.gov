@@ -1,6 +1,6 @@
 ---
 urlSlug: zoning
-name: Obtain Zoning and Overnight Parking Approval If Required
+name: Obtain Zoning and Overnight Parking Approval if Required
 id: zoning
 callToActionLink: ""
 callToActionText: ""
