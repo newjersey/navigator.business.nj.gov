@@ -1,6 +1,6 @@
 ---
 urlSlug: reseller
-name: Decide if You Will be a Reseller
+name: Decide if You Will Be a Reseller
 id: reseller
 callToActionLink: ""
 callToActionText: ""
