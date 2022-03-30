@@ -1,7 +1,7 @@
 ---
 urlSlug: verify-license-massage-therapy
 filename: verify-license-massage-therapy
-name: Ensure Your Staff is Licensed
+name: Ensure Your Staff Is Licensed
 id: verify-license-massage-therapy
 callToActionLink: https://newjersey.mylicense.com/verification/Search.aspx?facility=N
 callToActionText: Verify My Staff is Licensed
