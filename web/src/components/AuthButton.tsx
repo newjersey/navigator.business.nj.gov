@@ -20,7 +20,7 @@ export const AuthButton = (props?: Props): ReactElement => {
   const loginButton = () => (
     <Button
       style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
-      data-testid="login-button"
+      dataTestid="login-button"
       noRightMargin
       widthAutoOnMobile
       onClick={() => {
