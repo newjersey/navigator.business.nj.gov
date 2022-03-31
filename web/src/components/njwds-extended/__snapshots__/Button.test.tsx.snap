@@ -333,7 +333,7 @@ exports[`Button with textBold button displays correctly 1`] = `
 <body>
   <div>
     <button
-      class="usa-button padding-y-1 margin-right-2 textBold"
+      class="usa-button padding-y-1 margin-right-2 text-bold"
       type="button"
     >
       <div

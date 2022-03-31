@@ -90,7 +90,7 @@ export const Button = (props: Props): ReactElement => {
   const noRightMargin = getRightMargin();
   const underline = props.underline ? "underline" : "";
   const smallText = props.smallText ? "font-body-2xs" : "";
-  const textBold = props.textBold ? "textBold" : "";
+  const textBold = props.textBold ? "text-bold" : "";
   const intercomButton = props.intercomButton ? "intercom-button" : "";
 
   const className = [
