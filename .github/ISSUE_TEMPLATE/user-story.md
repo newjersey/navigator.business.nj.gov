@@ -1,22 +1,30 @@
 ---
 name: User story
 about: Set up a new user story
-title: '<short, descriptive title>'
-labels: '(:star: )'
-assignees: ''
-
+title: "<short, descriptive title>"
+labels: "(:star: )"
+assignees: ""
 ---
 
-**As** <PERSONA>
-**I need to** <GOAL>
-**So that** <OUTCOME>
+As <PERSONA>, I need <SOLUTION>, so that <VALUE/OUTCOME>
 
 ## Acceptance criteria
 
-**Given** <CONDITION>
-**When** <ACTION>
-**Then** <OUTCOME>
+## Additional Acceptance Criteria
 
-## Notes
+- 508 Compliant
+- Follows Design
+- Works in Mobile
 
-- [ ]
+## Design
+
+- Desktop
+- Mobile
+
+## Analytics
+
+## Approvals
+
+- [ ] Content Review
+- [ ] UX Review
+- [ ] PO Approval
