@@ -20,7 +20,7 @@ Cannabis licenses are reviewed on an ongoing basis and you can apply at any time
 - []{cannabis-poi} Information on all `Persons of Interest|poi-cannabis` 
 - []{cannabis-eoi} Information on all `Entities of Interest|eoi-cannabis` 
 - []{cannabis-business-local} The proposed location of the cannabis business
-- []{general-landord-contact} Name and contact information for the proposed landlord, if applicable
+- []{general-landlord-contact} Name and contact information for the proposed landlord, if applicable
 - []{cannabis-entity-disclosure-forms} [Entity Disclosure Forms](https://www.nj.gov/cannabis/documents/businesses/personal-use/CRC%20Entity%20Disclosure%20Form%20Fillable.pdf) for the license applicant and all Entities of Interest
 - []{cannabis-personal-disclosure-forms} [Personal History Disclosure Forms](https://www.nj.gov/cannabis/documents/businesses/personal-use/Personal%20History%20Disclosure%20Form.pdf) for all Persons of Interest
 - []{general-cert-formation} A `Certificate of Formation|certificate-formation` for the license applicant and all Entities of Interest
@@ -28,7 +28,7 @@ Cannabis licenses are reviewed on an ongoing basis and you can apply at any time
 - []{cannabis-vendor-contracts} Any Vendor-Contractor agreements if the Vendor-Contractor qualifies as an Entity of Interest
 - []{cannabis-affidavit} [Completed affidavit](https://www.nj.gov/cannabis/documents/businesses/personal-use/Cannabis%20Business%20Applicant%20Affidavit%20Waiver%20Release.pdf)
 - []{cannabis-authorized-release} An authorization to release all information pertaining to the license holder
-- []{cannabis-liablity-waiver} A waiver of liability for any damages to the Person of Interest that may result from any disclosure or publication of any information acquired during the licensing process
+- []{cannabis-liability-waiver} A waiver of liability for any damages to the Person of Interest that may result from any disclosure or publication of any information acquired during the licensing process
 - []{cannabis-site-plan} A site plan of the proposed location including a floor plan
 - []{cannabis-location-description}A description of the suitability of the location, which may include renderings, architectural plans, or engineering plans
 - []{general-copy-lease}Copy of the lease agreement or letter of intent demonstrating that the applicant will have final site control of the premises upon application approval
