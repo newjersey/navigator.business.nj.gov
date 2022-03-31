@@ -32,7 +32,7 @@
       "enabled": false
     },
     {
-      "matchPackageNames": ["@types/react", "@types/react-tabs", "focus-trap-react"],
+      "matchPackageNames": ["@types/react", "focus-trap-react"],
       "matchPackagePrefixes": ["react"],
       "groupName": "react"
     },

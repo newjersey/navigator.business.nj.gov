@@ -2410,7 +2410,6 @@ __metadata:
     "@types/react": 17.0.43
     "@types/react-dom": 17.0.14
     "@types/react-swipeable-views": 0.13.1
-    "@types/react-tabs": 2.3.4
     "@types/react-transition-group": 4.4.4
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
@@ -2476,7 +2475,6 @@ __metadata:
     raw-loader: 4.0.2
     react: 17.0.2
     react-dom: 17.0.2
-    react-tabs: 4.0.1
     react-transition-group: 4.4.2
     remark: 12.0.1
     remark-react: 8.0.0
@@ -2577,7 +2575,6 @@ __metadata:
     "@types/react": 17.0.43
     "@types/react-dom": 17.0.14
     "@types/react-swipeable-views": 0.13.1
-    "@types/react-tabs": 2.3.4
     "@types/react-transition-group": 4.4.4
     "@types/testing-library__jest-dom": 5.14.3
     "@typescript-eslint/eslint-plugin": 5.16.0
@@ -2623,7 +2620,6 @@ __metadata:
     raw-loader: 4.0.2
     react: 17.0.2
     react-dom: 17.0.2
-    react-tabs: 4.0.1
     react-transition-group: 4.4.2
     remark: 12.0.1
     remark-react: 8.0.0
@@ -8434,15 +8430,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-tabs@npm:2.3.4":
-  version: 2.3.4
-  resolution: "@types/react-tabs@npm:2.3.4"
-  dependencies:
-    "@types/react": "*"
-  checksum: 7718e08b6be3f8b4f423fde9a3610e423a63ef44ce640ad23368e27e0f15e710d1df6c442ae0a348a7da891c9599f3bc77c4b4c2ad06f99aef39a0aaa642e1e6
-  languageName: node
-  linkType: hard
-
 "@types/react-transition-group@npm:4.4.4, @types/react-transition-group@npm:^4.4.4":
   version: 4.4.4
   resolution: "@types/react-transition-group@npm:4.4.4"
@@ -12120,7 +12107,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.1.0, clsx@npm:^1.1.1":
+"clsx@npm:^1.1.1":
   version: 1.1.1
   resolution: "clsx@npm:1.1.1"
   checksum: ff052650329773b9b245177305fc4c4dc3129f7b2be84af4f58dc5defa99538c61d4207be7419405a5f8f3d92007c954f4daba5a7b74e563d5de71c28c830063
@@ -26488,7 +26475,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.5.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.4, prop-types@npm:^15.5.6, prop-types@npm:^15.5.7, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.4, prop-types@npm:^15.5.6, prop-types@npm:^15.5.7, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -27517,18 +27504,6 @@ __metadata:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: fa03880a887bc0c79c0be25fc35924980d75f684f8d05620272bdfcbb9f119f45bb7f8ddd92b9e944103964a4e094b99750d0b19c992fd86f2ce0b70266e89c3
-  languageName: node
-  linkType: hard
-
-"react-tabs@npm:4.0.1":
-  version: 4.0.1
-  resolution: "react-tabs@npm:4.0.1"
-  dependencies:
-    clsx: ^1.1.0
-    prop-types: ^15.5.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-0
-  checksum: 71d15e22df13ee69ff37ac09de10aa9e5cf22abd5aaacd2c2639e9947beca4170cfd3e10f09946e7e7fc301a321cafae18ce1bbb3dbebfd1a63deb19bf0a30a9
   languageName: node
   linkType: hard
 

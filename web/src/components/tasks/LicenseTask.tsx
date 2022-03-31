@@ -13,8 +13,9 @@ import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LicenseStatusResult, NameAndAddress, UserData } from "@businessnjgovnavigator/shared";
+import { TabContext, TabList, TabPanel } from "@mui/lab/";
+import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useState } from "react";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
 interface Props {
   task: Task;
@@ -52,7 +53,8 @@ export const LicenseTask = (props: Props): ReactElement => {
     }
   }, userData);
 
-  const onSelectTab = (index: number): void => {
+  const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
+    const index = parseInt(newValue);
     if (index === APPLICATION_TAB_INDEX) {
       analytics.event.task_tab_start_application.click.view_application_tab();
     } else if (index === STATUS_TAB_INDEX) {
@@ -104,64 +106,80 @@ export const LicenseTask = (props: Props): ReactElement => {
     <SignUpModalWrapper>
       <div className="flex flex-column">
         <TaskHeader task={props.task} tooltipText={Config.licenseSearchTask.tooltipText} />
-
-        <Tabs selectedIndex={tabIndex} onSelect={onSelectTab}>
-          <TabList>
-            <Tab>{Config.licenseSearchTask.tab1Text}</Tab>
-            <Tab>{Config.licenseSearchTask.tab2Text}</Tab>
-          </TabList>
-
-          <TabPanel>
-            <div className="margin-top-3">
-              <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
-              <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
-            </div>
-            <div className="flex flex-column margin-top-4 margin-bottom-1">
-              <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
+        <Box sx={{ width: "100%" }}>
+          <TabContext value={tabIndex.toString()}>
+            <Box>
+              <TabList
+                onChange={onSelectTab}
+                aria-label="License task"
+                sx={{ borderBottom: 0, borderColor: "divider", marginTop: ".25rem" }}
+              >
+                <Box role="tab" sx={{ border: 0, borderColor: "divider", width: ".5rem" }} />
+                <Tab
+                  value="0"
+                  sx={{ border: 1, borderColor: "divider" }}
+                  label={Config.licenseSearchTask.tab1Text}
+                />
+                <Tab
+                  value="1"
+                  sx={{ border: 1, borderColor: "divider" }}
+                  label={Config.licenseSearchTask.tab2Text}
+                />
+                <Box sx={{ borderBottom: 1, borderColor: "divider", width: "100%" }} />
+              </TabList>
+            </Box>
+            <TabPanel value="0" sx={{ paddingX: 0 }}>
+              <div className="margin-top-3">
+                <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
+                <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
+              </div>
+              <div className="flex flex-column margin-top-4 margin-bottom-1">
+                <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
+                  <button
+                    onClick={() => {
+                      analytics.event.task_primary_call_to_action.click.open_external_website();
+                    }}
+                    className="usa-button width-100 margin-bottom-2"
+                    data-testid="cta-primary"
+                  >
+                    <div className="flex flex-column">
+                      <div>{Config.licenseSearchTask.primaryCTAFirstLineText}</div>
+                      <div className="font-body-3xs margin-top-05">
+                        {Config.licenseSearchTask.primaryCTASecondLineText}
+                      </div>
+                    </div>
+                  </button>
+                </a>
                 <button
                   onClick={() => {
-                    analytics.event.task_primary_call_to_action.click.open_external_website();
+                    analytics.event.task_button_i_already_submitted.click.view_status_tab();
+                    setTabIndex(STATUS_TAB_INDEX);
                   }}
-                  className="usa-button width-100 margin-bottom-2"
-                  data-testid="cta-primary"
+                  className="usa-button usa-button--outline width-100"
+                  data-testid="cta-secondary"
                 >
                   <div className="flex flex-column">
-                    <div>{Config.licenseSearchTask.primaryCTAFirstLineText}</div>
+                    <div>{Config.licenseSearchTask.secondaryCTAFirstLineText}</div>
                     <div className="font-body-3xs margin-top-05">
-                      {Config.licenseSearchTask.primaryCTASecondLineText}
+                      {Config.licenseSearchTask.secondaryCTASecondLineText}
                     </div>
                   </div>
                 </button>
-              </a>
-              <button
-                onClick={() => {
-                  analytics.event.task_button_i_already_submitted.click.view_status_tab();
-                  setTabIndex(STATUS_TAB_INDEX);
-                }}
-                className="usa-button usa-button--outline width-100"
-                data-testid="cta-secondary"
-              >
-                <div className="flex flex-column">
-                  <div>{Config.licenseSearchTask.secondaryCTAFirstLineText}</div>
-                  <div className="font-body-3xs margin-top-05">
-                    {Config.licenseSearchTask.secondaryCTASecondLineText}
-                  </div>
-                </div>
-              </button>
-            </div>
-          </TabPanel>
-          <TabPanel>
-            {licenseStatusResult ? (
-              <LicenseStatusReceipt
-                status={licenseStatusResult.status}
-                items={licenseStatusResult.checklistItems}
-                onEdit={onEdit}
-              />
-            ) : (
-              <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
-            )}
-          </TabPanel>
-        </Tabs>
+              </div>
+            </TabPanel>
+            <TabPanel value="1" sx={{ paddingX: 0 }}>
+              {licenseStatusResult ? (
+                <LicenseStatusReceipt
+                  status={licenseStatusResult.status}
+                  items={licenseStatusResult.checklistItems}
+                  onEdit={onEdit}
+                />
+              ) : (
+                <CheckStatus onSubmit={onSubmit} error={error} isLoading={isLoading} />
+              )}
+            </TabPanel>
+          </TabContext>
+        </Box>
       </div>
     </SignUpModalWrapper>
   );

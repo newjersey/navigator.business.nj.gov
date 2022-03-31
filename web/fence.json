@@ -39,7 +39,6 @@
     "react",
     "react-dom",
     "react-dom/test-utils",
-    "react-tabs",
     "react-transition-group",
     "remark",
     "remark-react",
