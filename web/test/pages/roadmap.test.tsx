@@ -731,6 +731,7 @@ describe("roadmap page", () => {
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
+          dateOfFormation: dayjs().add(1, "day").format("YYYY-MM-DD"),
         }),
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({
