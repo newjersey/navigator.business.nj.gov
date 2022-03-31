@@ -2468,7 +2468,7 @@ __metadata:
     markdown-truncate: 1.0.4
     napa: 3.0.0
     nc: "git+https://github.com/dsueltenfuss/nc.git"
-    netlify-cms-app: 2.15.69
+    netlify-cms-app: 2.15.70
     next: 12.1.0
     next-seo: 5.2.0
     prettier: 2.6.1
@@ -2615,7 +2615,7 @@ __metadata:
     lodash.orderby: 4.6.0
     markdown-truncate: 1.0.4
     napa: 3.0.0
-    netlify-cms-app: 2.15.69
+    netlify-cms-app: 2.15.70
     next: 12.1.0
     next-seo: 5.2.0
     prettier: 2.6.1
@@ -23234,9 +23234,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-app@npm:2.15.69":
-  version: 2.15.69
-  resolution: "netlify-cms-app@npm:2.15.69"
+"netlify-cms-app@npm:2.15.70":
+  version: 2.15.70
+  resolution: "netlify-cms-app@npm:2.15.70"
   dependencies:
     "@emotion/core": ^10.0.35
     "@emotion/styled": ^10.0.27
@@ -23251,19 +23251,19 @@ __metadata:
     netlify-cms-backend-gitlab: ^2.13.0
     netlify-cms-backend-proxy: ^1.2.3
     netlify-cms-backend-test: ^2.11.3
-    netlify-cms-core: ^2.54.8
+    netlify-cms-core: ^2.55.0
     netlify-cms-editor-component-image: ^2.7.0
     netlify-cms-lib-auth: ^2.4.2
     netlify-cms-lib-util: ^2.15.0
     netlify-cms-lib-widgets: ^1.8.0
-    netlify-cms-locales: ^1.38.2
+    netlify-cms-locales: ^1.39.0
     netlify-cms-ui-default: ^2.15.5
     netlify-cms-widget-boolean: ^2.4.1
     netlify-cms-widget-code: ^1.3.4
     netlify-cms-widget-colorstring: ^1.1.2
     netlify-cms-widget-date: ^2.6.3
     netlify-cms-widget-datetime: ^2.7.4
-    netlify-cms-widget-file: ^2.11.1
+    netlify-cms-widget-file: ^2.12.0
     netlify-cms-widget-image: ^2.8.1
     netlify-cms-widget-list: ^2.10.1
     netlify-cms-widget-map: ^1.5.1
@@ -23280,7 +23280,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 8d40f4a05feaf6117d61ed275be4fae4e9c23d4693e07bc51f0f6d643f8a995c2924447c0833f0a1d6973f2866495e2dda5afa428d2e5e1d0b826fd472413640
+  checksum: 1ac4cf3696e28d99ef3c6f98f6f00064974ce3c39721910f59769b9112ef1410b55d992146e1a52674dcaf4a2fabb80b072288f17c35c8cdca4d9993beb3744f
   languageName: node
   linkType: hard
 
@@ -23430,9 +23430,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-core@npm:^2.54.8":
-  version: 2.54.8
-  resolution: "netlify-cms-core@npm:2.54.8"
+"netlify-cms-core@npm:^2.55.0":
+  version: 2.55.0
+  resolution: "netlify-cms-core@npm:2.55.0"
   dependencies:
     "@iarna/toml": 2.2.5
     ajv: 8.1.0
@@ -23497,7 +23497,7 @@ __metadata:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
     react-immutable-proptypes: ^2.1.0
-  checksum: 8a9223e6655a952188f1f6f40b0494d2e475f12ba56b091554a5ea28b30ae1564cd886958146a7c391a4fad88adee6d72a877313a5b9eb80332dd1a6769a0c6f
+  checksum: f6a5b88a0347ef2e4e95ed023b47f6928963b8ba1334bbe7dbf67eb6853cd64be6734473da33ea145a20b5cb40a28fb939454c80f9d51d75b97f337c9c6faafa
   languageName: node
   linkType: hard
 
@@ -23546,10 +23546,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-locales@npm:^1.38.2":
-  version: 1.38.2
-  resolution: "netlify-cms-locales@npm:1.38.2"
-  checksum: 6ed30cdee1de3c3be6a66711eac3eb592084697b57119f53cf83c2489e0607f0bc4df9922285fee24dffedeacf5460022eaa4948004d21106f70f1e1cea875a7
+"netlify-cms-locales@npm:^1.39.0":
+  version: 1.39.0
+  resolution: "netlify-cms-locales@npm:1.39.0"
+  checksum: a65a74bebaf9a78481bbd2cb10a6452593aca02be9d46cc108fc894b9f7c35bef78b52c6aea8fc75e5fb049e0c786d1a4c307f76da896b6962531c945a8c4c74
   languageName: node
   linkType: hard
 
@@ -23646,9 +23646,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-widget-file@npm:^2.11.1":
-  version: 2.11.1
-  resolution: "netlify-cms-widget-file@npm:2.11.1"
+"netlify-cms-widget-file@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "netlify-cms-widget-file@npm:2.12.0"
   dependencies:
     array-move: 4.0.0
     common-tags: ^1.8.0
@@ -23662,7 +23662,7 @@ __metadata:
     react: ^16.8.4 || ^17.0.0
     react-immutable-proptypes: ^2.1.0
     uuid: ^3.3.2
-  checksum: 51d9c2249458f4ee4afee73db4dd918ba63ddaec2fd0b3c1989eaccfd89c3e3df29addad9f14eb322c3d26e29fedd79119183d7ad45e278f61bc164073b393a5
+  checksum: d0a119bd308c228586ba6ba0e69c89231f61efcff9d8da9db551b89bfb68c6814d1f8b63d1f4e414dd9fc4e222c0d3e0051060b66f91b0c34b537f38c465e04c
   languageName: node
   linkType: hard
 
