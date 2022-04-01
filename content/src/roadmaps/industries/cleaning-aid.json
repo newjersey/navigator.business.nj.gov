@@ -1,12 +1,8 @@
 {
-  "id": "cleaning-aid",
-  "name": "Cleaning Service",
-  "description": "Providing commercial or residential cleaning services",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "other-services",
   "canBeReseller": true,
-  "additionalSearchTerms": "cleaning lady,housekeeping,house cleaner,maid service,maid,cleaning company,cleaning crew",
   "roadmapSteps": [
     {
       "step": 1,
@@ -28,5 +24,10 @@
       "weight": 10,
       "task": "get-insurance"
     }
-  ]
+  ],
+  "name": "Cleaning Service",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "cleaning lady,housekeeping,house cleaner,maid service,maid,cleaning company,cleaning crew",
+  "id": "cleaning-aid",
+  "description": "Providing commercial or residential cleaning services"
 }
