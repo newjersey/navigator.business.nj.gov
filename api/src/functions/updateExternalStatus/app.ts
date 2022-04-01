@@ -1,7 +1,12 @@
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { LogWriter } from "@libs/logWriter";
-import AWS from "aws-sdk";
 import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
-import { DynamoQlUserDataClient, DynamoUserDataClient } from "src/db/DynamoUserDataClient";
+import {
+  dynamoDbTranslateConfig,
+  DynamoQlUserDataClient,
+  DynamoUserDataClient,
+} from "src/db/DynamoUserDataClient";
 import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
@@ -15,8 +20,8 @@ export default async function handler() {
   const STAGE = process.env.STAGE || "local";
 
   const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
-  let dynamoDb: AWS.DynamoDB;
-  let dynamoDbDocument: AWS.DynamoDB.DocumentClient;
+  let dynamoDb: DynamoDBClient;
+  let dynamoDbDocument: DynamoDBDocumentClient;
   if (IS_OFFLINE) {
     let dynamoDbEndpoint = "localhost";
     if (IS_DOCKER) {
@@ -26,11 +31,11 @@ export default async function handler() {
       region: "localhost",
       endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
     };
-    dynamoDb = new AWS.DynamoDB(endpoint);
-    dynamoDbDocument = new AWS.DynamoDB.DocumentClient(endpoint);
+    dynamoDb = new DynamoDBClient(endpoint);
+    dynamoDbDocument = DynamoDBDocumentClient.from(dynamoDb, dynamoDbTranslateConfig);
   } else {
-    dynamoDb = new AWS.DynamoDB();
-    dynamoDbDocument = new AWS.DynamoDB.DocumentClient();
+    dynamoDb = new DynamoDBClient({ region: "us-east-1" });
+    dynamoDbDocument = DynamoDBDocumentClient.from(dynamoDb, dynamoDbTranslateConfig);
   }
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "SearchApis");
   const dbClient = DynamoUserDataClient(dynamoDbDocument, USERS_TABLE);

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import AWS from "aws-sdk";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { generateUser, generateUserData } from "../../test/factories";
 import { UserDataClient } from "../domain/types";
-import { DynamoUserDataClient } from "./DynamoUserDataClient";
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
 
 // references jest-dynalite-config values
 const dbConfig = {
@@ -16,11 +17,11 @@ describe("DynamoUserDataClient", () => {
     region: "local",
   };
 
-  let client: AWS.DynamoDB.DocumentClient;
+  let client: DynamoDBDocumentClient;
   let dynamoUserDataClient: UserDataClient;
 
   beforeEach(() => {
-    client = new AWS.DynamoDB.DocumentClient(config);
+    client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
 
     dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName);
   });

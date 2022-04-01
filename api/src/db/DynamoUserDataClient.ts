@@ -1,10 +1,33 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import {
+  DynamoDBClient,
+  ExecuteStatementCommand,
+  QueryCommand,
+  QueryCommandInput,
+} from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { UserData } from "@shared/userData";
-import AWS from "aws-sdk";
 import { UserDataClient, UserDataQlClient } from "../domain/types";
 import { CURRENT_VERSION, MigrationFunction, Migrations } from "./migrations/migrations";
+
+const marshallOptions = {
+  // Whether to automatically convert empty strings, blobs, and sets to `null`.
+  convertEmptyValues: false, // false, by default.
+  // Whether to remove undefined values while marshalling.
+  removeUndefinedValues: true, // false, by default.
+  // Whether to convert typeof object to map attribute.
+  convertClassInstanceToMap: false, // false, by default.
+};
+
+const unmarshallOptions = {
+  // Whether to return numbers as a string instead of converting them to native JavaScript numbers.
+  wrapNumbers: false, // false, by default.
+};
+
+export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
 
 const migrateUserData = (data: any): any => {
   const dataVersion = data.version || 0;
@@ -15,11 +38,11 @@ const migrateUserData = (data: any): any => {
   return migratedData;
 };
 
-export const DynamoQlUserDataClient = (db: AWS.DynamoDB, tableName: string): UserDataQlClient => {
+export const DynamoQlUserDataClient = (db: DynamoDBClient, tableName: string): UserDataQlClient => {
   const search = async (statement: string): Promise<UserData[]> => {
-    const { Items = [] } = await db.executeStatement({ Statement: statement }).promise();
+    const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     const get = (object: any): UserData => {
-      const data = AWS.DynamoDB.Converter.unmarshall(object).data;
+      const data = unmarshall(object).data;
       const { version, ...userData } = migrateUserData(data);
       return userData;
     };
@@ -43,7 +66,7 @@ export const DynamoQlUserDataClient = (db: AWS.DynamoDB, tableName: string): Use
   };
 };
 
-export const DynamoUserDataClient = (db: AWS.DynamoDB.DocumentClient, tableName: string): UserDataClient => {
+export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: string): UserDataClient => {
   const doMigration = async (data: any): Promise<UserData> => {
     const migratedData = migrateUserData(data);
     await put(migratedData);
@@ -52,22 +75,21 @@ export const DynamoUserDataClient = (db: AWS.DynamoDB.DocumentClient, tableName:
   };
 
   const findByEmail = (email: string): Promise<UserData | undefined> => {
-    const params = {
+    const params: QueryCommandInput = {
       TableName: tableName,
       IndexName: "EmailIndex",
       KeyConditionExpression: "email = :email",
       ExpressionAttributeValues: {
-        ":email": email,
+        ":email": { S: email },
       },
     };
     return db
-      .query(params)
-      .promise()
+      .send(new QueryCommand(params))
       .then(async (result) => {
         if (!result.Items || result.Items.length !== 1) {
           return Promise.resolve(undefined);
         }
-        return await doMigration(result.Items[0].data);
+        return await doMigration(unmarshall(result.Items[0], unmarshallOptions).data);
       })
       .catch((error) => {
         console.log(error);
@@ -83,8 +105,8 @@ export const DynamoUserDataClient = (db: AWS.DynamoDB.DocumentClient, tableName:
       },
     };
     return db
-      .get(params)
-      .promise()
+      .send(new GetCommand(params))
+
       .then(async (result) => {
         if (!result.Item) {
           return Promise.reject("Not found");
@@ -110,8 +132,7 @@ export const DynamoUserDataClient = (db: AWS.DynamoDB.DocumentClient, tableName:
     };
 
     return db
-      .put(params)
-      .promise()
+      .send(new PutCommand(params))
       .then(() => {
         return userData;
       })

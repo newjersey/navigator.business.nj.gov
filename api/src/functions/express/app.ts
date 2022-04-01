@@ -1,5 +1,6 @@
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { LogWriter } from "@libs/logWriter";
-import AWS from "aws-sdk";
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
@@ -19,7 +20,7 @@ import { FakeSelfRegClientFactory } from "../../client/FakeSelfRegClient";
 import { GovDeliveryNewsletterClient } from "../../client/GovDeliveryNewsletterClient";
 import { MyNJSelfRegClientFactory } from "../../client/MyNJSelfRegClient";
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
-import { DynamoUserDataClient } from "../../db/DynamoUserDataClient";
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "../../db/DynamoUserDataClient";
 import { searchLicenseStatusFactory } from "../../domain/license-status/searchLicenseStatusFactory";
 import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
@@ -32,18 +33,26 @@ const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverl
 const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
 
 const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
-let dynamoDb: AWS.DynamoDB.DocumentClient;
+let dynamoDb: DynamoDBDocumentClient;
 if (IS_OFFLINE) {
   let dynamoDbEndpoint = "localhost";
   if (IS_DOCKER) {
     dynamoDbEndpoint = "dynamodb-local";
   }
-  dynamoDb = new AWS.DynamoDB.DocumentClient({
-    region: "localhost",
-    endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
-  });
+  dynamoDb = DynamoDBDocumentClient.from(
+    new DynamoDBClient({
+      region: "localhost",
+      endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
+    }),
+    dynamoDbTranslateConfig
+  );
 } else {
-  dynamoDb = new AWS.DynamoDB.DocumentClient();
+  dynamoDb = DynamoDBDocumentClient.from(
+    new DynamoDBClient({
+      region: "us-east-1",
+    }),
+    dynamoDbTranslateConfig
+  );
 }
 
 const STAGE = process.env.STAGE || "local";

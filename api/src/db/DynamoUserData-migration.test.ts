@@ -3,9 +3,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import AWS from "aws-sdk";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { UserDataClient } from "../domain/types";
-import { DynamoUserDataClient } from "./DynamoUserDataClient";
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
 
 // references jest-dynalite-config values
 const dbConfig = {
@@ -24,11 +25,11 @@ describe("DynamoUserDataClient Migrations", () => {
     region: "local",
   };
 
-  let client: AWS.DynamoDB.DocumentClient;
+  let client: DynamoDBDocumentClient;
   let dynamoUserDataClient: UserDataClient;
 
   beforeEach(async () => {
-    client = new AWS.DynamoDB.DocumentClient(config);
+    client = DynamoDBDocumentClient.from(new DynamoDBClient(config), dynamoDbTranslateConfig);
     dynamoUserDataClient = DynamoUserDataClient(client, dbConfig.tableName);
     await insertOldData();
   });
@@ -112,9 +113,9 @@ describe("DynamoUserDataClient Migrations", () => {
       },
     });
 
-    await client.put(makeParams(v0Data)).promise();
-    await client.put(makeParams(v1Data)).promise();
-    await client.put(makeParams(v2Data)).promise();
+    await client.send(new PutCommand(makeParams(v0Data)));
+    await client.send(new PutCommand(makeParams(v1Data)));
+    await client.send(new PutCommand(makeParams(v2Data)));
   };
 
   const getDbItem = async (id: string): Promise<any> => {
@@ -125,10 +126,7 @@ describe("DynamoUserDataClient Migrations", () => {
       },
     };
 
-    return client
-      .get(params)
-      .promise()
-      .then((result) => result.Item?.data);
+    return client.send(new GetCommand(params)).then((result) => result.Item?.data);
   };
 });
 

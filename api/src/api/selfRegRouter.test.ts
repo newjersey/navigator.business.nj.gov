@@ -3,21 +3,9 @@ import bodyParser from "body-parser";
 import express, { Express } from "express";
 import request from "supertest";
 import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
+import { generateHashedKey } from "../../test/helpers";
 import { SelfRegClient, UserDataClient } from "../domain/types";
 import { selfRegRouterFactory } from "./selfRegRouter";
-
-function mockCrypto() {
-  return {
-    ...jest.requireActual("crypto"),
-    createHmac: jest.fn(() => ({
-      update: jest.fn(() => ({
-        digest: jest.fn(() => "hashed-mynj-result"),
-      })),
-    })),
-  };
-}
-
-jest.mock("crypto", () => mockCrypto());
 
 describe("selfRegRouter", () => {
   let app: Express;
@@ -57,12 +45,13 @@ describe("selfRegRouter", () => {
       stubSelfRegClient.resume.mockResolvedValue(selfRegResponse);
 
       const response = await sendRequest(stubRecordWithMyNJKey);
+      const hashedKey = generateHashedKey(myNJKey);
       expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
       expect(stubUserDataClient.put).toHaveBeenCalledWith({
         ...stubRecordWithMyNJKey,
         user: {
           ...stubRecordWithMyNJKey.user,
-          intercomHash: "hashed-mynj-result",
+          intercomHash: hashedKey,
         },
       });
       expect(response.status).toEqual(200);
@@ -97,13 +86,14 @@ describe("selfRegRouter", () => {
       const response = await sendRequest(stubRecordNoKey);
 
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
+      const hashedKey = generateHashedKey(selfRegResponse.myNJUserKey);
 
       const newUserWithKey = {
         ...stubRecordNoKey,
         user: {
           ...stubRecordNoKey.user,
           myNJUserKey: selfRegResponse.myNJUserKey,
-          intercomHash: "hashed-mynj-result",
+          intercomHash: hashedKey,
         },
       };
       expect(stubUserDataClient.put).toHaveBeenCalledWith(newUserWithKey);
