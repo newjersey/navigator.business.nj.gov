@@ -1,6 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
+  "defaultSectorId": "organizational-or-financial-management",
   "canBeReseller": false,
   "roadmapSteps": [
     {
