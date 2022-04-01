@@ -1,6 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
+  "defaultSectorId": "professional-scientific-and-technical-services",
   "canBeReseller": false,
   "roadmapSteps": [
     {
