@@ -1,12 +1,8 @@
 {
-  "id": "janitorial-services",
-  "name": "Janitorial Services",
-  "description": "Commercial or residential property cleaning, maintenance, and management services",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "other-services",
   "canBeReseller": true,
-  "additionalSearchTerms": "commercial cleaning service",
   "roadmapSteps": [
     {
       "step": 1,
@@ -28,5 +24,10 @@
       "weight": 10,
       "task": "get-insurance"
     }
-  ]
+  ],
+  "name": "Janitorial Services",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "commercial cleaning service",
+  "id": "janitorial-services",
+  "description": "Commercial or residential property cleaning, maintenance, and management services"
 }
