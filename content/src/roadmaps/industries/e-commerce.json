@@ -1,13 +1,8 @@
 {
-  "id": "e-commerce",
-  "name": "E-Commerce",
-  "description": "Selling or reselling goods or services on the internet",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "retail-trade-and-ecommerce",
   "canBeReseller": true,
-  "additionalSearchTerms": "ecommerce",
-  "additionalSearchTerms": "online store,ecommerce,e-business",
   "roadmapSteps": [
     {
       "step": 1,
@@ -34,5 +29,10 @@
       "weight": 10,
       "task": "search-licenses"
     }
-  ]
+  ],
+  "name": "E-Commerce",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "online store,ecommerce,e-business",
+  "id": "e-commerce",
+  "description": "Selling or reselling goods or services on the internet"
 }
