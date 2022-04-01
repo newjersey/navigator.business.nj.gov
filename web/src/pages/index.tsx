@@ -100,7 +100,9 @@ const Home = (): ReactElement => {
         </div>
         <div>
           <Link href={buttonLink} passHref>
-            <button className={`usa-button usa-button btn-${buttonStyleProp} ${intercom ? "intercom" : ""}`}>
+            <button
+              className={`usa-button usa-button btn-${buttonStyleProp} ${intercom ? "intercom-button" : ""}`}
+            >
               {buttonText}
             </button>
           </Link>
