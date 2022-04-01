@@ -1,12 +1,8 @@
 {
-  "id": "non-medical-transport",
-  "name": "Non-Medical Transport",
-  "description": "The transportation of an individual with medical needs",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": false,
-  "additionalSearchTerms": "transportation service,non-emergency transportation",
   "roadmapSteps": [
     {
       "step": 1,
@@ -43,5 +39,10 @@
       "weight": 10,
       "task": "get-insurance"
     }
-  ]
+  ],
+  "name": "Non-Medical Transport",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "transportation service,non-emergency transportation",
+  "id": "non-medical-transport",
+  "description": "The transportation of an individual with medical needs"
 }
