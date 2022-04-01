@@ -1,4 +1,5 @@
 import { generateProfileData, generateUser, generateUserData } from "../../../test/factories";
+import { determineAnnualFilingDate } from "../../../test/helpers";
 import { getAnnualFilings } from "./getAnnualFilings";
 
 describe("getAnnualFilings", () => {
@@ -19,7 +20,7 @@ describe("getAnnualFilings", () => {
       ...postedUserData,
       taxFilingData: {
         ...postedUserData.taxFilingData,
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
+        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
       },
     });
   });
@@ -42,7 +43,7 @@ describe("getAnnualFilings", () => {
     expect(response).toEqual({
       ...postedUserData,
       taxFilingData: {
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
+        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
       },
     });
   });
@@ -64,7 +65,7 @@ describe("getAnnualFilings", () => {
       ...postedUserData,
       taxFilingData: {
         ...postedUserData.taxFilingData,
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
+        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-31") }],
       },
     });
   });

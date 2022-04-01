@@ -9,6 +9,7 @@ import {
   generateUser,
   generateUserData,
 } from "../../test/factories";
+import { determineAnnualFilingDate } from "../../test/helpers";
 import { UserDataClient } from "../domain/types";
 import { userRouterFactory } from "./userRouter";
 
@@ -179,7 +180,7 @@ describe("userRouter", () => {
         ...postedUserData,
         taxFilingData: {
           ...postedUserData.taxFilingData,
-          filings: [{ identifier: "ANNUAL_FILING", dueDate: "2022-03-31" }],
+          filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
         },
       });
     });
