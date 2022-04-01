@@ -1,10 +1,12 @@
 {
   "tags": ["api"],
   "dependencies": [
+    "@aws-sdk/client-dynamodb",
+    "@aws-sdk/lib-dynamodb",
+    "@aws-sdk/util-dynamodb",
     "@serverless/typescript",
     "@shared/*",
     "airtable",
-    "aws-sdk",
     "axios",
     "body-parser",
     "cors",
