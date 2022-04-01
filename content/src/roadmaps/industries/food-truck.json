@@ -1,12 +1,8 @@
 {
-  "id": "food-truck",
-  "name": "Food Truck",
-  "description": "A vehicle where food or beverages are transported, stored, or prepared for sale at temporary locations",
-  "canBeHomeBased": false,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": true,
+  "canBeHomeBased": false,
+  "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
-  "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart",
   "roadmapSteps": [
     {
       "step": 1,
@@ -58,5 +54,10 @@
       "weight": 2,
       "task": "town-mercantile-license"
     }
-  ]
+  ],
+  "name": "Food Truck",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart",
+  "id": "food-truck",
+  "description": "A vehicle where food or beverages are transported, stored, or prepared for sale at temporary locations"
 }
