@@ -214,47 +214,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-cloudwatch-logs@npm:3.58.0":
-  version: 3.58.0
-  resolution: "@aws-sdk/client-cloudwatch-logs@npm:3.58.0"
-  dependencies:
-    "@aws-crypto/sha256-browser": 2.0.0
-    "@aws-crypto/sha256-js": 2.0.0
-    "@aws-sdk/client-sts": 3.58.0
-    "@aws-sdk/config-resolver": 3.58.0
-    "@aws-sdk/credential-provider-node": 3.58.0
-    "@aws-sdk/fetch-http-handler": 3.58.0
-    "@aws-sdk/hash-node": 3.55.0
-    "@aws-sdk/invalid-dependency": 3.55.0
-    "@aws-sdk/middleware-content-length": 3.58.0
-    "@aws-sdk/middleware-host-header": 3.58.0
-    "@aws-sdk/middleware-logger": 3.55.0
-    "@aws-sdk/middleware-retry": 3.58.0
-    "@aws-sdk/middleware-serde": 3.55.0
-    "@aws-sdk/middleware-signing": 3.58.0
-    "@aws-sdk/middleware-stack": 3.55.0
-    "@aws-sdk/middleware-user-agent": 3.58.0
-    "@aws-sdk/node-config-provider": 3.58.0
-    "@aws-sdk/node-http-handler": 3.58.0
-    "@aws-sdk/protocol-http": 3.58.0
-    "@aws-sdk/smithy-client": 3.55.0
-    "@aws-sdk/types": 3.55.0
-    "@aws-sdk/url-parser": 3.55.0
-    "@aws-sdk/util-base64-browser": 3.58.0
-    "@aws-sdk/util-base64-node": 3.55.0
-    "@aws-sdk/util-body-length-browser": 3.55.0
-    "@aws-sdk/util-body-length-node": 3.55.0
-    "@aws-sdk/util-defaults-mode-browser": 3.55.0
-    "@aws-sdk/util-defaults-mode-node": 3.58.0
-    "@aws-sdk/util-user-agent-browser": 3.58.0
-    "@aws-sdk/util-user-agent-node": 3.58.0
-    "@aws-sdk/util-utf8-browser": 3.55.0
-    "@aws-sdk/util-utf8-node": 3.55.0
-    tslib: ^2.3.1
-  checksum: d614bbfae94d3c0a0e16e0be74825f88cfe877938a09c9de3513aacb30204c31523e5592513f7cdad540aa3fe4a91d13d50c12dbeaef36784de965cd0308e7b7
-  languageName: node
-  linkType: hard
-
 "@aws-sdk/client-cloudwatch-logs@npm:3.6.1":
   version: 3.6.1
   resolution: "@aws-sdk/client-cloudwatch-logs@npm:3.6.1"
@@ -3100,7 +3059,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/api@workspace:api"
   dependencies:
-    "@aws-sdk/client-cloudwatch-logs": 3.58.0
     "@aws-sdk/client-dynamodb": 3.58.0
     "@aws-sdk/lib-dynamodb": 3.58.0
     "@aws-sdk/util-dynamodb": 3.58.0
@@ -3156,7 +3114,7 @@ __metadata:
     webpack: 5.70.0
     webpack-node-externals: 3.0.0
     winston: 3.6.0
-    winston-cloudwatch: 4.0.1
+    winston-cloudwatch: 3.1.1
     wiremock: 2.32.0
     xml2js: 0.4.23
   languageName: unknown
@@ -3180,7 +3138,6 @@ __metadata:
   dependencies:
     "@aws-amplify/auth": 4.5.0
     "@aws-amplify/core": 4.5.0
-    "@aws-sdk/client-cloudwatch-logs": 3.58.0
     "@aws-sdk/client-dynamodb": 3.58.0
     "@aws-sdk/lib-dynamodb": 3.58.0
     "@aws-sdk/util-dynamodb": 3.58.0
@@ -3322,7 +3279,7 @@ __metadata:
     webpack: 5.70.0
     webpack-node-externals: 3.0.0
     winston: 3.6.0
-    winston-cloudwatch: 4.0.1
+    winston-cloudwatch: 3.1.1
     wiremock: 2.32.0
     xml2js: 0.4.23
     yarn-workspace-sync-deps: 0.3.2
@@ -34122,9 +34079,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winston-cloudwatch@npm:4.0.1":
-  version: 4.0.1
-  resolution: "winston-cloudwatch@npm:4.0.1"
+"winston-cloudwatch@npm:3.1.1":
+  version: 3.1.1
+  resolution: "winston-cloudwatch@npm:3.1.1"
   dependencies:
     async: ^3.1.0
     chalk: ^4.0.0
@@ -34136,7 +34093,7 @@ __metadata:
     proxy-agent: ^5.0.0
   peerDependencies:
     winston: ^3.0.0
-  checksum: 510dd199fe4d19ac608922f2b65fbdf480410ff41f92bd8cf411e8e3f9133e0806273e68fa7a07ef12003e0a527df087ce5cebb805d1e4e918a26831e03b652a
+  checksum: 657145b4618cfc6a917c3c963c5105fa06012c46d8f46614fdeb84a5c6251e7b640eb16c1f4cd225c668cf600738ba398c898e5e708e3a7513ed45d49f1ce954
   languageName: node
   linkType: hard
 
