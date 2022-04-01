@@ -1,10 +1,7 @@
 {
-  "id": "homemaker-home-health-aide",
-  "name": "Home Health Aide",
-  "description": "A business staffing licensed personnel to provide home health care services",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -37,5 +34,10 @@
       "weight": 30,
       "task": "individual-staff-licenses-health-aide"
     }
-  ]
+  ],
+  "name": "Home Health Aide",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "caregiver, care services",
+  "id": "homemaker-home-health-aide",
+  "description": "A business staffing licensed personnel to provide home health care services"
 }
