@@ -1,6 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": false,
+  "defaultSectorId": "cannabis",
   "canBeReseller": false,
   "roadmapSteps": [
     {
