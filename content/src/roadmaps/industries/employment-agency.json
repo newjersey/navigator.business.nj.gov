@@ -1,12 +1,8 @@
 {
-  "id": "employment-agency",
-  "name": "Employment Agency",
-  "description": "A business that finds employment for a job seeker and employees for employers",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "administrative-and-employment-services",
   "canBeReseller": true,
-  "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",
   "roadmapSteps": [
     {
       "step": 1,
@@ -38,5 +34,10 @@
       "weight": 10,
       "task": "search-licenses-employment-agency"
     }
-  ]
+  ],
+  "name": "Employment Agency",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",
+  "id": "employment-agency",
+  "description": "A business that finds employment for a job seeker and employees for employers"
 }
