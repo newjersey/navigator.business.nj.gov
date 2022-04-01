@@ -1,13 +1,8 @@
 {
-  "id": "home-contractor",
-  "name": "Home Improvement Contractor",
-  "description": "Repairing or renovating residential or non-commercial properties",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
-  "licenseType": "Home Improvement Contractors",
   "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "construction",
   "canBeReseller": true,
-  "additionalSearchTerms": "renovation",
   "roadmapSteps": [
     {
       "step": 1,
@@ -44,5 +39,11 @@
       "weight": 200,
       "task": "Haul-Waste"
     }
-  ]
+  ],
+  "name": "Home Improvement Contractor",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "renovation, home renovation",
+  "id": "home-contractor",
+  "licenseType": "Home Improvement Contractors",
+  "description": "Repairing or renovating residential or non-commercial properties"
 }
