@@ -1,6 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
+  "defaultSectorId": "digital-and-print-media",
   "canBeReseller": false,
   "roadmapSteps": [
     {
