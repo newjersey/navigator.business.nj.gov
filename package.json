@@ -27,6 +27,7 @@
   "dependencies": {
     "@aws-amplify/auth": "4.5.0",
     "@aws-amplify/core": "4.5.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.58.0",
     "@aws-sdk/client-dynamodb": "3.58.0",
     "@aws-sdk/lib-dynamodb": "3.58.0",
     "@aws-sdk/util-dynamodb": "3.58.0",
@@ -67,7 +68,7 @@
     "swr": "1.2.2",
     "uuid": "8.3.2",
     "winston": "3.6.0",
-    "winston-cloudwatch": "3.1.1",
+    "winston-cloudwatch": "4.0.1",
     "xml2js": "0.4.23"
   },
   "devDependencies": {
