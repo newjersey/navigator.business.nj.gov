@@ -427,7 +427,6 @@ jobs:
       - attach_workspace:
           at: .
       - configure
-      - bootstrap-code
       - code-quality
       - store_test_results:
           path: coverage/test_results
