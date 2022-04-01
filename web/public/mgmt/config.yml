@@ -606,7 +606,6 @@ collections:
               - { label: Card 3 - Header Line 3, name: card3HeaderLine2, widget: string }
               - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: string }
               - { label: Card 3 - Button Text, name: card3Button, widget: string }
-              - { label: Card 3 - Button Link, name: card3ButtonLink, widget: hidden }
           - label: Legal Messages
             name: legalMessageDefaults
             collapsed: true
