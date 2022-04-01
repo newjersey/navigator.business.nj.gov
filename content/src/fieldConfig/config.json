@@ -172,7 +172,7 @@
     "errorTextRequiredFields": "Please fill in all fields.",
     "errorTextDuplicateSignup": "This email is already registered, please login instead.",
     "completeSigninDescriptionText": "Please wait, finishing your request...",
-    "signupDescriptionText": "You'll register for the Business.NJ.gov Navigator with myNewJersey, a secure login platform run by the State of New Jersey. You may have a myNewJersey account already, or you can create one now. Either way, provide your name and email to get started.",
+    "signupDescriptionText": "To get started, please enter your name and email address below.",
     "confirmEmailFieldPlaceholder": "Type your email again",
     "emailFieldPlaceholder": "Type your email",
     "emailFieldLabel": "Email",
