@@ -1,5 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { completeOnboarding } from "../support/helpers";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { completeNewBusinessOnboarding, randomInt } from "cypress/support/helpers";
 
 describe("search business name [feature] [all] [group2]", () => {
   beforeEach(() => {
@@ -7,7 +8,22 @@ describe("search business name [feature] [all] [group2]", () => {
   });
 
   it("searches available names", () => {
-    completeOnboarding("Aculyst", "e-commerce", "limited-liability-partnership");
+    const businessName = "Aculyst";
+    const industry = LookupIndustryById("e-commerce");
+    const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
+    const liquorLicenseQuestion =
+      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+    const companyType = "limited-liability-partnership";
+    const townDisplayName = undefined;
+
+    completeNewBusinessOnboarding({
+      businessName,
+      industry,
+      homeBasedQuestion,
+      liquorLicenseQuestion,
+      companyType,
+      townDisplayName,
+    });
 
     // roadmap business name
     cy.get('[data-business-name="Aculyst"]').should("exist");
