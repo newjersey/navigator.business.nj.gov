@@ -33,7 +33,7 @@ const dateOfFormation = date.format("YYYY-MM-DD");
 describe("onboarding - owning a business", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
     mockApi.postNewsletter.mockImplementation((request) => Promise.resolve(request));

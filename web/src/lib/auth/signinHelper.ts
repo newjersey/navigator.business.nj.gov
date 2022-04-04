@@ -15,7 +15,6 @@ export const onSignIn = async (
   dispatch: Dispatch<AuthAction>
 ): Promise<void> => {
   const user = await session.getCurrentUser();
-
   dispatch({
     type: "LOGIN",
     user: user,
@@ -51,6 +50,7 @@ export const onSelfRegister = (
 
 export const onGuestSignIn = async (
   push: (url: string) => Promise<boolean>,
+  pathname: string,
   dispatch: Dispatch<AuthAction>
 ): Promise<void> => {
   let userData = UserDataStorage().getCurrentUserData();
@@ -71,8 +71,12 @@ export const onGuestSignIn = async (
       setRegistrationDimension("Onboarded Guest");
     }
   } else {
-    setRegistrationDimension("Not Started");
-    push("/");
+    if (pathname == "/onboarding") {
+      setRegistrationDimension("Began Onboarding");
+    } else {
+      setRegistrationDimension("Not Started");
+      push("/");
+    }
   }
 };
 

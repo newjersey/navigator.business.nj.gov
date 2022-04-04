@@ -28,7 +28,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 describe("onboarding - starting a business", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
     mockApi.postNewsletter.mockImplementation((request) =>

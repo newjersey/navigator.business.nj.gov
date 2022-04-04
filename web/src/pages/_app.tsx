@@ -257,7 +257,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         });
       })
       .catch(() => {
-        onGuestSignIn(router.push, dispatch);
+        onGuestSignIn(router.push, router.pathname, dispatch);
       });
   });
 

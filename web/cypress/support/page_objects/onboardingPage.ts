@@ -1,5 +1,4 @@
 import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared/";
-import { months } from "cypress/support/helpers";
 import { random } from "lodash";
 
 export class OnboardingPage {
@@ -59,10 +58,8 @@ export class OnboardingPage {
     this.getBusinessName().clear().type(businessName);
   }
 
-  typeBusinessFormationDate(month: months, year: string) {
-    this.getBusinessFormationDatePicker().parent().find("button").click();
-    cy.get(".MuiYearPicker-root").parentsUntil('[role="dialog"]').contains(year).click();
-    cy.get(".MuiMonthPicker-root").contains(month).click();
+  typeBusinessFormationDate(monthYearString: string) {
+    cy.chooseDatePicker('[name="dateOfFormation"]', monthYearString)
   }
 
   typeEntityId(EID: string) {

@@ -1,9 +1,12 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { clickEdit, clickNext, clickSave, completeNewBusinessOnboarding } from "../support/helpers";
+import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
+import { onProfilePage } from "cypress/support/page_objects/profilePage";
+import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
+import { completeNewBusinessOnboarding } from "../support/helpers";
 
-describe("Roadmap [feature] [all] [group3]", () => {
+describe("Roadmap [feature] [all] [group2]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
     cy.viewport("iphone-5");
@@ -71,7 +74,8 @@ describe("Roadmap [feature] [all] [group3]", () => {
 
     // editing data
     cy.get('[data-testid="back-to-roadmap"]').click({ force: true });
-    clickEdit();
+    onRoadmapPage.clickEditProfileLink();
+    cy.url().should("contain", "/profile");
 
     cy.get('input[aria-label="Business name"]').clear();
     cy.get('input[aria-label="Business name"]').type("Applebee's");
@@ -79,7 +83,8 @@ describe("Roadmap [feature] [all] [group3]", () => {
     cy.get('[aria-label="Industry"]').click({ force: true });
     cy.contains("Restaurant").click({ force: true });
 
-    clickSave();
+    onProfilePage.clickSaveButton();
+    cy.url().should("contain", "/roadmap");
 
     // check roadmap
     cy.get('[data-business-name="Applebee\'s"]').should("exist");
@@ -92,33 +97,38 @@ describe("Roadmap [feature] [all] [group3]", () => {
   });
 
   it("open and closes contextual info panel on onboarding screens", () => {
-    cy.wait(1000); // wait for onboarding animation
+    cy.url().should("include", "onboarding?page=1");
+    onOnboardingPage.selectNewBusiness(false);
+    onOnboardingPage.clickNext();
 
-    cy.get('input[type="radio"][value="false"]').check();
-    clickNext();
+    cy.url().should("include", "onboarding?page=2");
+    onOnboardingPage.typeBusinessName("Beesapple's");
+    onOnboardingPage.clickNext();
 
-    cy.get('input[aria-label="Business name"]').type("Beesapple's");
-    clickNext();
+    cy.url().should("include", "onboarding?page=3");
+    onOnboardingPage.selectIndustry("home-contractor");
 
-    cy.get('[aria-label="Industry"]').click({ force: true });
-    cy.contains("Home Improvement Contractor").click({ force: true });
     cy.get('[data-testid="home-contractors-activities"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
-    clickNext();
+    onOnboardingPage.clickNext();
 
+    cy.url().should("include", "onboarding?page=4");
     cy.get('[data-testid="legal-structure-learn-more"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
-    cy.get('[data-value="general-partnership"]').click({ force: true });
-    clickNext();
 
-    cy.get('input[type="radio"][value="false"]').check();
-    cy.get('[aria-label="Location"]').click({ force: true });
-    cy.contains("Absecon").click({ force: true });
-    clickNext();
+    onOnboardingPage.selectLegalStructure("general-partnership");
+    onOnboardingPage.clickNext();
+
+    cy.url().should("include", "onboarding?page=5");
+    onOnboardingPage.selectLocation("Absecon");
+    onOnboardingPage.selectHomeBased(false);
+    onOnboardingPage.clickNext();
+
+    cy.url().should("include", "onboarding?page=6");
   });
 
   it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {

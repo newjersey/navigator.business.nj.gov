@@ -214,7 +214,11 @@ export const runSelfRegPageTests = (
   let page: PageHelpers;
   let subject: RenderResult;
   const user = createEmptyUser();
-  const userData = generateUserData({ user, profileData: generateProfileData({ hasExistingBusiness }) });
+  const userData = generateUserData({
+    user,
+    formProgress: "UNSTARTED",
+    profileData: generateProfileData({ hasExistingBusiness }),
+  });
 
   beforeEach(async () => {
     const render = renderPage({ userData });
