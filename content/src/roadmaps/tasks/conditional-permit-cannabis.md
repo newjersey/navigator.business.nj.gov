@@ -36,11 +36,15 @@ Cannabis licenses are reviewed on an ongoing basis and you can apply at any time
 - **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis` Proof can be a proposed business address and/or a letter of intent
 - **Social Equity Businesses Only:** A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis` and documentation (such as a tax return) to prove residency
 - **Microbusiness Only:** A completed attestation (provided in your online application) that the business will comply with the `requirements for a microbusinesses|microbusiness-cannabis`
+
 ---
+
 ### Application Support
+
 * [Cannabis Application Guide](https://www.nj.gov/cannabis/documents/businesses/personal-use/Application%20Guide.pdf)
 * [Application Acceptance Criteria and Process](https://www.nj.gov/cannabis/documents/businesses/personal-use/Final%20Notice%20of%20Application%20Acceptance.pdf)
 * [Cannabis Regulatory Commission Website](https://www.nj.gov/cannabis/businesses/index.shtml)
+
 > **Once completed, you will have:**
 >
 > - A Cannabis license number
