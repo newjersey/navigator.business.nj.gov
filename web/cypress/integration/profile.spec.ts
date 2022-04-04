@@ -2,7 +2,7 @@
 
 import { Industries, Industry, LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared/";
 import {
-  checkProfilePage,
+  checkNewBusinessProfilePage,
   completeNewBusinessOnboarding,
   homeBasedIndustries,
   industriesNotHomeBasedOrLiquorLicense,
@@ -10,7 +10,7 @@ import {
   liquorLicenseIndustries,
   randomElementFromArray,
   randomInt,
-  updateProfilePage,
+  updateNewBusinessProfilePage,
 } from "../support/helpers";
 
 describe("Profile [feature] [all] [group1]", () => {
@@ -37,7 +37,7 @@ describe("Profile [feature] [all] [group1]", () => {
         companyType,
       });
 
-      checkProfilePage({
+      checkNewBusinessProfilePage({
         businessName,
         industry,
         homeBasedQuestion,
@@ -55,7 +55,7 @@ describe("Profile [feature] [all] [group1]", () => {
       const newTaxId = randomInt(9).toString();
       const newNotes = `New notes ${randomInt()}`;
 
-      updateProfilePage({
+      updateNewBusinessProfilePage({
         businessName: newBusinessName,
         companyType: newCompanyType,
         industry: newIndustry,
@@ -85,7 +85,7 @@ describe("Profile [feature] [all] [group1]", () => {
         townDisplayName,
       });
 
-      checkProfilePage({
+      checkNewBusinessProfilePage({
         businessName,
         industry,
         homeBasedQuestion,
@@ -94,7 +94,7 @@ describe("Profile [feature] [all] [group1]", () => {
         townDisplayName,
       });
 
-      updateProfilePage({
+      updateNewBusinessProfilePage({
         homeBasedQuestion: !homeBasedQuestion,
       });
     });
@@ -116,7 +116,7 @@ describe("Profile [feature] [all] [group1]", () => {
         townDisplayName,
       });
 
-      checkProfilePage({
+      checkNewBusinessProfilePage({
         businessName,
         industry,
         homeBasedQuestion,
@@ -125,7 +125,7 @@ describe("Profile [feature] [all] [group1]", () => {
         townDisplayName,
       });
 
-      updateProfilePage({
+      updateNewBusinessProfilePage({
         liquorLicenseQuestion: !liquorLicenseQuestion,
       });
     });
@@ -152,7 +152,7 @@ describe("Profile [feature] [all] [group1]", () => {
         townDisplayName,
       });
 
-      checkProfilePage({
+      checkNewBusinessProfilePage({
         businessName,
         industry,
         companyType,
@@ -161,7 +161,7 @@ describe("Profile [feature] [all] [group1]", () => {
         townDisplayName,
       });
 
-      updateProfilePage({
+      updateNewBusinessProfilePage({
         entityId: updatedEntityId,
       });
     });

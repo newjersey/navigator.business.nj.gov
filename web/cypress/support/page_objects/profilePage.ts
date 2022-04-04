@@ -18,6 +18,10 @@ export class ProfilePage extends OnboardingPage {
     return cy.get(`input[name="taxId"]`);
   }
 
+  getTaxPin() {
+    return cy.get(`input[name="taxPin"]`);
+  }
+
   getNotes() {
     return cy.get(`textarea[name="notes"]`);
   }
@@ -48,8 +52,12 @@ export class ProfilePage extends OnboardingPage {
     this.getNotes().type(notes);
   }
 
+  typeTaxPin(taxPin: string) {
+    return this.getTaxPin().clear().type(taxPin);
+  }
+
   typeEntityId(EID: string) {
-    this.getEntityId().type(EID);
+    this.getEntityId().clear().type(EID);
   }
 }
 

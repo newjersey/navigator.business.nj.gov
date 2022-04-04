@@ -1,4 +1,5 @@
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared/";
+import { months } from "cypress/support/helpers";
 import { random } from "lodash";
 
 export class OnboardingPage {
@@ -12,6 +13,22 @@ export class OnboardingPage {
 
   getIndustryDropdown() {
     return cy.get('[data-testid="industryid"]');
+  }
+
+  getBusinessFormationDatePicker() {
+    return cy.get('input[name="dateOfFormation"]');
+  }
+
+  getEntityId() {
+    return cy.get('input[name="entityId"]');
+  }
+
+  getIndustrySectorDropdown() {
+    return cy.get("#sectorId");
+  }
+
+  getNumberOfEmployees() {
+    return cy.get('input[name="existingEmployees"]');
   }
 
   getLegalStructure(companyType: string) {
@@ -30,6 +47,10 @@ export class OnboardingPage {
     return cy.get('[data-testid="municipality"]');
   }
 
+  getOwnershipDropdown() {
+    return cy.get('[data-testid="ownership"]');
+  }
+
   selectNewBusiness(radio: boolean) {
     this.getHasExistingBusiness(radio).check();
   }
@@ -38,10 +59,30 @@ export class OnboardingPage {
     this.getBusinessName().clear().type(businessName);
   }
 
+  typeBusinessFormationDate(month: months, year: string) {
+    this.getBusinessFormationDatePicker().parent().find("button").click();
+    cy.get(".MuiYearPicker-root").parentsUntil('[role="dialog"]').contains(year).click();
+    cy.get(".MuiMonthPicker-root").contains(month).click();
+  }
+
+  typeEntityId(EID: string) {
+    this.getEntityId().clear().type(EID);
+  }
+
+  typeNumberOfEmployees(number: string) {
+    return this.getNumberOfEmployees().clear().type(number);
+  }
+
   selectIndustry(industry: string) {
     const industryValue = LookupIndustryById(industry).name;
     this.getIndustryDropdown().click();
     cy.contains(industryValue).click({ force: true });
+  }
+
+  selectIndustrySector(sectorId: string) {
+    const sectorValue = LookupSectorTypeById(sectorId).name;
+    this.getIndustrySectorDropdown().click();
+    cy.contains(sectorValue).click({ force: true });
   }
 
   selectLegalStructure(companyType: string) {
@@ -54,6 +95,24 @@ export class OnboardingPage {
 
   selectLiquorLicense(radio: boolean) {
     this.getLiquorLicense(radio).check();
+  }
+
+  selectOwnership(arrayOfOwnership: string[]) {
+    this.getOwnershipDropdown().parent().click();
+
+    cy.get(".MuiList-root li").each((listItem) => {
+      if (listItem.hasClass("Mui-selected")) {
+        cy.wrap(listItem).click();
+      }
+    });
+
+    cy.get(".MuiList-root li").each((listItem) => {
+      const dataValue = listItem.data("value");
+      if (arrayOfOwnership.includes(dataValue)) {
+        cy.wrap(listItem).click();
+      }
+    });
+    cy.get("body").type("{esc}");
   }
 
   selectLocation(townDisplayName: string) {

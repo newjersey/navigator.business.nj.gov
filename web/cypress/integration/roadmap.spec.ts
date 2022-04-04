@@ -1,6 +1,20 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { clickEdit, clickNext, clickSave, completeOnboarding } from "../support/helpers";
+import {
+  Industries,
+  Industry,
+  LegalStructure,
+  LegalStructures,
+  LookupIndustryById,
+} from "@businessnjgovnavigator/shared";
+import {
+  clickEdit,
+  clickNext,
+  clickSave,
+  completeNewBusinessOnboarding,
+  randomElementFromArray,
+  randomInt,
+} from "../support/helpers";
 
 describe("Roadmap [feature] [all] [group2]", () => {
   beforeEach(() => {
@@ -8,13 +22,25 @@ describe("Roadmap [feature] [all] [group2]", () => {
   });
 
   it("enters user info and shows the roadmap", () => {
-    // onboarding
-    completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
+    const businessName = `Generic Business Name ${randomInt()}`;
+    const industry = LookupIndustryById("e-commerce");
+    const homeBasedQuestion = false;
+    const liquorLicenseQuestion =
+      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+    const companyType = "general-partnership";
+    const townDisplayName = "Absecon";
 
-    cy.url().should("contain", "/roadmap");
+    completeNewBusinessOnboarding({
+      businessName,
+      industry,
+      homeBasedQuestion,
+      liquorLicenseQuestion,
+      companyType,
+      townDisplayName,
+    });
 
     // check roadmap
-    cy.get('[data-business-name="Beesapple\'s"]').should("exist");
+    cy.get(`[data-business-name="${businessName}"]`).should("exist");
     cy.get('[data-industry="e-commerce"]').should("exist");
     cy.get('[data-legal-structure="general-partnership"]').should("exist");
     cy.get('[data-municipality="Absecon"]').should("exist");
@@ -41,7 +67,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
 
     // tasks screen
     cy.get('[data-task="register-trade-name"]').click({ force: true });
-    cy.get('[data-business-name="Beesapple\'s"]').should("not.exist");
+    cy.get(`[data-business-name="${businessName}"]`).should("not.exist");
     cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
@@ -56,8 +82,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     // editing data in the Profile page
     clickEdit();
 
-    cy.get('input[aria-label="Business name"]').clear();
-    cy.get('input[aria-label="Business name"]').type("Applebee's");
+    cy.get('input[aria-label="Business name"]').clear().type("Applebee's");
     cy.get('[aria-label="Industry"]').click({ force: true });
     cy.contains("Restaurant").click({ force: true });
     cy.get('[aria-label="Legal structure"]').click({ force: true });
@@ -109,11 +134,24 @@ describe("Roadmap [feature] [all] [group2]", () => {
   });
 
   it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
-    // onboarding
-    completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
+    const businessName = `Generic Business Name ${randomInt()}`;
+    const industry = LookupIndustryById("e-commerce");
+    const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
+    const liquorLicenseQuestion =
+      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+    const companyType = "general-partnership";
+    const townDisplayName = "Absecon";
+
+    completeNewBusinessOnboarding({
+      businessName,
+      industry,
+      homeBasedQuestion,
+      liquorLicenseQuestion,
+      companyType,
+      townDisplayName,
+    });
 
     // roadmap
-    cy.url().should("contain", "/roadmap");
     cy.get('[data-task="register-for-ein"]').click({ force: true });
     cy.get('[data-testid="ein"]').should("exist");
     cy.get('[data-testid="ein"]').click({ force: true });
@@ -124,8 +162,25 @@ describe("Roadmap [feature] [all] [group2]", () => {
   });
 
   it.skip("user data is updated if opted into newsletter", () => {
+    const businessName = `Generic Business Name ${randomInt()}`;
+    const industry = randomElementFromArray(Industries as Industry[]).id;
+    const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
+    const liquorLicenseQuestion =
+      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+    const companyType = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+    const townDisplayName = "Absecon";
+
+    completeNewBusinessOnboarding({
+      businessName,
+      industry,
+      homeBasedQuestion,
+      liquorLicenseQuestion,
+      companyType,
+      townDisplayName,
+    });
+
     cy.intercept("POST", "/local/api/users").as("new-user");
-    completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
+
     cy.wait("@new-user").then((event) => {
       cy.log(`Received: ${JSON.stringify(event.request.body.user.externalStatus)}`);
       const expected = {
