@@ -695,7 +695,7 @@ workflows:
             branches:
               only:
                 - main
-                - 1525-cypress-oscar-onboarding
+                - cypress-routing-issue
           requires:
             - build
       - integration-tests:
@@ -706,7 +706,7 @@ workflows:
             branches:
               only:
                 - main
-                - 1525-cypress-oscar-onboarding
+                - cypress-routing-issue
           requires:
             - build
       - integration-tests:
@@ -717,7 +717,7 @@ workflows:
             branches:
               only:
                 - main
-                - 1525-cypress-oscar-onboarding
+                - cypress-routing-issue
           requires:
             - build
       - integration-tests:
@@ -728,7 +728,7 @@ workflows:
             branches:
               only:
                 - main
-                - 1525-cypress-oscar-onboarding
+                - cypress-routing-issue
           requires:
             - build
       # firefox integration tests
@@ -740,7 +740,7 @@ workflows:
             branches:
               only:
                 - main
-                - 1525-cypress-oscar-onboarding
+                - cypress-routing-issue
           requires:
             - build
       - integration-tests:
@@ -751,7 +751,7 @@ workflows:
             branches:
               only:
                 - main
-                - 1525-cypress-oscar-onboarding
+                - cypress-routing-issue
           requires:
             - build
       - integration-tests:
@@ -762,7 +762,7 @@ workflows:
             branches:
               only:
                 - main
-                - 1525-cypress-oscar-onboarding
+                - cypress-routing-issue
           requires:
             - build
       - integration-tests:
@@ -773,7 +773,7 @@ workflows:
             branches:
               only:
                 - main
-                - 1525-cypress-oscar-onboarding
+                - cypress-routing-issue
           requires:
             - build
 
