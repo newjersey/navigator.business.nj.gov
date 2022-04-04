@@ -11,9 +11,8 @@ describe("Roadmap [all] [group4]", () => {
   Industries.forEach((industry) => {
     it(` ${industry.name} completes onboarding and shows the roadmap`, () => {
       const businessName = `Generic Business Name ${randomInt()}`;
-      const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
-      const liquorLicenseQuestion =
-        industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+      const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
+      const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
       const companyType = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = undefined;
 

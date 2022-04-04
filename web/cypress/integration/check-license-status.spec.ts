@@ -1,6 +1,5 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { completeNewBusinessOnboarding } from "../support/helpers";
+import { completeOnboarding } from "../support/helpers";
 
 describe("check license status [feature] [all] [group1]", () => {
   beforeEach(() => {
@@ -8,21 +7,7 @@ describe("check license status [feature] [all] [group1]", () => {
   });
 
   it("searches and checks license status", () => {
-    const businessName = "Aculyst";
-    const industry = LookupIndustryById("home-contractor");
-    const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
-    const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-    const companyType = "general-partnership";
-    const townDisplayName = "Absecon";
-
-    completeNewBusinessOnboarding({
-      businessName,
-      industry,
-      homeBasedQuestion,
-      liquorLicenseQuestion,
-      companyType,
-      townDisplayName,
-    });
+    completeOnboarding("Aculyst", "home-contractor", "limited-liability-company");
 
     // roadmap business name
     cy.get('[data-business-name="Aculyst"]').should("exist");

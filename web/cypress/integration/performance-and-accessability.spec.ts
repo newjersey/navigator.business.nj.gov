@@ -1,10 +1,9 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import {
   clickNext,
   clickTask,
-  completeNewBusinessOnboarding,
+  completeOnboarding,
   defaultPa11yThresholds,
   lighthouseDesktopConfig,
   lighthouseMobileConfig,
@@ -211,21 +210,7 @@ describe("Performance and Accessibility - Roadmap [all] [group3]", () => {
 
   describe("Roadmap", () => {
     it("should pass the audits", () => {
-      const businessName = "Smith Works";
-      const industry = LookupIndustryById("e-commerce");
-      const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
-      const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-      const companyType = "general-partnership";
-      const townDisplayName = "Absecon";
-
-      completeNewBusinessOnboarding({
-        businessName,
-        industry,
-        homeBasedQuestion,
-        liquorLicenseQuestion,
-        companyType,
-        townDisplayName,
-      });
+      completeOnboarding("Smith Works", "e-commerce", "general-partnership");
 
       // check roadmap
       cy.get('[data-business-name="Smith Works"]').should("exist");
@@ -240,22 +225,7 @@ describe("Performance and Accessibility - Roadmap [all] [group3]", () => {
       describe("Plan Your Business", () => {
         describe("Write Your Business Plan", () => {
           it("should pass the audits", () => {
-            const businessName = "Donut Shop";
-            const industry = LookupIndustryById("cosmetology");
-            const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
-            const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-            const companyType = "general-partnership";
-            const townDisplayName = "Absecon";
-
-            completeNewBusinessOnboarding({
-              businessName,
-              industry,
-              homeBasedQuestion,
-              liquorLicenseQuestion,
-              companyType,
-              townDisplayName,
-            });
-
+            completeOnboarding("Donut Shop", "cosmetology", "general-partnership");
             clickTask("business-plan");
 
             cy.lighthouse(undefined, lighthouseDesktopConfig);
@@ -267,22 +237,7 @@ describe("Performance and Accessibility - Roadmap [all] [group3]", () => {
           urlSlugs.forEach((slug) => {
             describe(slug, () => {
               it("should pass the audits", () => {
-                const businessName = "Donut Shop";
-                const industry = LookupIndustryById("cosmetology");
-                const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
-                const liquorLicenseQuestion =
-                  industry.isLiquorLicenseApplicable === false ? undefined : false;
-                const companyType = "general-partnership";
-                const townDisplayName = "Absecon";
-
-                completeNewBusinessOnboarding({
-                  businessName,
-                  industry,
-                  homeBasedQuestion,
-                  liquorLicenseQuestion,
-                  companyType,
-                  townDisplayName,
-                });
+                completeOnboarding("Donut Shop", "cosmetology", "general-partnership");
                 clickTask(slug);
 
                 cy.lighthouse(undefined, lighthouseDesktopConfig);

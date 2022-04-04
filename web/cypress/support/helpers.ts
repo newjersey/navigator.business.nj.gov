@@ -1,6 +1,5 @@
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
-import { Industries, Industry, LegalStructures, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
-import { onDashboardPage } from "./page_objects/dashboardPage";
+import { Industries, Industry, LegalStructures, LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
 import { onProfilePage } from "./page_objects/profilePage";
 import { onRoadmapPage } from "./page_objects/roadmapPage";
@@ -30,6 +29,43 @@ export const clickTask = (taskId: string): void => {
   const taskValue = `[data-task="${taskId}"]`;
   cy.get(taskValue).click({ force: true });
   cy.wait(1000);
+};
+
+export const completeOnboarding = (
+  businessName: string,
+  industry: string,
+  companyType: string,
+  homeBased = true,
+  city = "Absecon"
+): void => {
+  cy.wait(1000); // wait for onboarding animation
+
+  // check 'starting a business'
+  cy.get('input[type="radio"][value="false"]').check();
+  clickNext();
+
+  cy.get('input[aria-label="Business name"]').type(businessName);
+  clickNext();
+
+  const industryValue = LookupIndustryById(industry).name;
+  cy.get('[aria-label="Industry"]').click();
+  cy.contains(industryValue).click();
+  clickNext();
+
+  const companyTypeValue = `[data-value="${companyType}"]`;
+  cy.get(companyTypeValue).click();
+  clickNext();
+
+  if (!homeBased) {
+    cy.get('input[type="radio"][value="false"]').check();
+  }
+
+  cy.get('[aria-label="Location"]').click();
+  cy.contains(city).click();
+  clickNext();
+
+  clickNext();
+  cy.wait(2000); // wait for redirect
 };
 
 export const lighthouseDesktopConfig: LighthouseConfig = {
@@ -201,125 +237,6 @@ export const completeNewBusinessOnboarding = ({
   cy.url().should("include", `roadmap`);
 };
 
-interface existingOnboardingData {
-  businessFormationMonth?: months;
-  businessFormationYear?: string;
-  entityId?: string;
-  businessName: string;
-  sectorId: string;
-  numberOfEmployees: string;
-  townDisplayName: string;
-  homeBasedQuestion: boolean;
-  ownershipDataValues?: string[];
-}
-
-export type months =
-  | "Jan"
-  | "Feb"
-  | "Mar"
-  | "Apr"
-  | "May"
-  | "Jun"
-  | "Jul"
-  | "Aug"
-  | "Sep"
-  | "Oct"
-  | "Nov"
-  | "Dec";
-
-const monthInDigits = {
-  Jan: "01",
-  Feb: "02",
-  Mar: "03",
-  Apr: "04",
-  May: "05",
-  Jun: "06",
-  Jul: "07",
-  Aug: "08",
-  Sep: "09",
-  Oct: "10",
-  Nov: "11",
-  Dec: "12",
-};
-
-export const completeExistingBusinessOnboarding = ({
-  businessFormationMonth,
-  businessFormationYear,
-  entityId,
-  businessName,
-  sectorId,
-  numberOfEmployees,
-  townDisplayName,
-  homeBasedQuestion,
-  ownershipDataValues,
-  fullName = `Michael Smith ${randomInt()}`,
-  email = `MichaelSmith${randomInt()}@gmail.com`,
-  isNewsletterChecked = true,
-  isContactMeChecked = false,
-}: existingOnboardingData & Partial<registration>): void => {
-  cy.url().should("include", `onboarding?page=${1}`);
-  onOnboardingPage.selectNewBusiness(true);
-  onOnboardingPage.getHasExistingBusiness(true).should("be.checked");
-  onOnboardingPage.getHasExistingBusiness(false).should("not.be.checked");
-  onOnboardingPage.clickNext();
-
-  cy.url().should("include", `onboarding?page=${2}`);
-  if (businessFormationMonth && businessFormationYear) {
-    onOnboardingPage.typeBusinessFormationDate(businessFormationMonth, businessFormationYear);
-    onOnboardingPage
-      .getBusinessFormationDatePicker()
-      .invoke("prop", "value")
-      .should("contain", monthInDigits[businessFormationMonth], businessFormationYear);
-  }
-  if (entityId) {
-    onOnboardingPage.typeEntityId(entityId);
-    onOnboardingPage.getEntityId().invoke("prop", "value").should("contain", entityId);
-  }
-  onOnboardingPage.clickNext();
-
-  cy.url().should("include", `onboarding?page=${3}`);
-  onOnboardingPage.typeBusinessName(businessName);
-  onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
-  onOnboardingPage.selectIndustrySector(sectorId);
-  onOnboardingPage
-    .getIndustrySectorDropdown()
-    .invoke("prop", "value")
-    .then((value) => {
-      expect(value).to.contain(LookupSectorTypeById(sectorId).name);
-    });
-  onOnboardingPage.clickNext();
-
-  cy.url().should("include", `onboarding?page=${4}`);
-  onOnboardingPage.typeNumberOfEmployees(numberOfEmployees);
-  onOnboardingPage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
-  onOnboardingPage.selectLocation(townDisplayName);
-  onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-  onOnboardingPage.selectHomeBased(homeBasedQuestion);
-  onOnboardingPage.getHomeBased(homeBasedQuestion).should("be.checked");
-  onOnboardingPage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
-  if (!!ownershipDataValues && ownershipDataValues.length) {
-    onOnboardingPage.selectOwnership(ownershipDataValues);
-    ownershipDataValues.forEach((dataValue) => {
-      onOnboardingPage.getOwnershipDropdown().invoke("prop", "value").should("contain", dataValue);
-    });
-  }
-  onOnboardingPage.clickNext();
-
-  cy.url().should("include", `onboarding?page=${5}`);
-  onOnboardingPage.typeFullName(fullName);
-  onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
-  onOnboardingPage.typeEmail(email);
-  onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.typeConfirmEmail(email);
-  onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
-  onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
-  onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
-  onOnboardingPage.toggleContactMeCheckbox(!isContactMeChecked);
-  onOnboardingPage.getContactMeCheckbox().should(`${!isContactMeChecked ? "be" : "not.be"}.checked`);
-
-  onOnboardingPage.clickNext();
-  cy.url().should("include", `dashboard`);
-};
 interface startingProfileData extends startingOnboardingData {
   employerId: string;
   taxId: string;
@@ -327,15 +244,7 @@ interface startingProfileData extends startingOnboardingData {
   entityId: string;
 }
 
-interface existingProfileData extends existingOnboardingData {
-  employerId: string;
-  taxId: string;
-  notes: string;
-  entityId: string;
-  taxPin: string;
-}
-
-export const checkNewBusinessProfilePage = ({
+export const checkProfilePage = ({
   businessName,
   industry,
   companyType,
@@ -349,7 +258,6 @@ export const checkNewBusinessProfilePage = ({
 }: Partial<startingProfileData>): void => {
   cy.url().should("contain", "/roadmap");
   onRoadmapPage.clickEditProfileLink();
-  cy.url().should("contain", "/profile");
 
   onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   onOnboardingPage
@@ -400,63 +308,7 @@ export const checkNewBusinessProfilePage = ({
   cy.url().should("contain", "/roadmap");
 };
 
-export const checkExistingBusinessProfilePage = ({
-  businessFormationMonth,
-  businessFormationYear,
-  entityId,
-  businessName,
-  sectorId,
-  numberOfEmployees,
-  townDisplayName,
-  homeBasedQuestion,
-  ownershipDataValues,
-  employerId = "",
-  taxId = "",
-  notes = "",
-  taxPin = "",
-}: Partial<existingProfileData>): void => {
-  cy.url().should("contain", "/dashboard");
-  onDashboardPage.clickEditProfileLink();
-  cy.url().should("contain", "/profile");
-
-  onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
-  onProfilePage
-    .getIndustrySectorDropdown()
-    .invoke("prop", "value")
-    .then((value) => {
-      expect(value).to.contain(LookupSectorTypeById(sectorId as string).name);
-    });
-  onProfilePage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
-  onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-  onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
-  onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
-  if (!!ownershipDataValues && ownershipDataValues.length) {
-    ownershipDataValues.forEach((dataValue) => {
-      onProfilePage.getOwnershipDropdown().invoke("prop", "value").should("contain", dataValue);
-    });
-  }
-
-  const employerIdWithMatch = employerId.match("^[0-9]$") ? employerId.match("^[0-9]$") : "";
-  onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
-
-  if (entityId) {
-    onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
-  }
-
-  onProfilePage
-    .getBusinessFormationDatePicker()
-    .invoke("prop", "value")
-    .should("contain", monthInDigits[businessFormationMonth as months], businessFormationYear);
-
-  onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
-  onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
-  onProfilePage.getTaxPin().invoke("prop", "value").should("contain", taxPin);
-
-  onProfilePage.clickSaveButton();
-  cy.url().should("contain", "/dashboard");
-};
-
-export const updateNewBusinessProfilePage = ({
+export const updateProfilePage = ({
   businessName,
   industry,
   companyType,
@@ -470,7 +322,6 @@ export const updateNewBusinessProfilePage = ({
 }: Partial<startingProfileData>): void => {
   cy.url().should("contain", "/roadmap");
   onRoadmapPage.clickEditProfileLink();
-  cy.url().should("contain", "/profile");
 
   if (businessName) {
     onProfilePage.typeBusinessName(businessName);
@@ -549,99 +400,4 @@ export const updateNewBusinessProfilePage = ({
 
   onProfilePage.clickSaveButton();
   cy.url().should("contain", "/roadmap");
-};
-
-export const updateExBusinessProfilePage = ({
-  businessFormationMonth,
-  businessFormationYear,
-  entityId,
-  businessName,
-  sectorId,
-  numberOfEmployees,
-  townDisplayName,
-  homeBasedQuestion,
-  ownershipDataValues,
-  employerId,
-  taxId,
-  notes,
-  taxPin,
-}: Partial<existingProfileData>): void => {
-  cy.url().should("contain", "/dashboard");
-  onDashboardPage.clickEditProfileLink();
-  cy.url().should("contain", "/profile");
-
-  if (businessName) {
-    onProfilePage.typeBusinessName(businessName);
-    onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
-  }
-
-  if (sectorId) {
-    onProfilePage.selectIndustrySector(sectorId);
-    onProfilePage
-      .getIndustrySectorDropdown()
-      .invoke("prop", "value")
-      .then((value) => {
-        expect(value).to.contain(LookupSectorTypeById(sectorId).name);
-      });
-  }
-
-  if (numberOfEmployees) {
-    onProfilePage.typeNumberOfEmployees(numberOfEmployees);
-    onProfilePage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
-  }
-
-  if (townDisplayName) {
-    onProfilePage.selectLocation(townDisplayName);
-    onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-  }
-
-  if (homeBasedQuestion !== undefined) {
-    onProfilePage.selectHomeBased(homeBasedQuestion);
-    onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
-    onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
-  }
-
-  if (ownershipDataValues !== undefined && ownershipDataValues.length) {
-    onProfilePage.selectOwnership(ownershipDataValues);
-    ownershipDataValues.forEach((dataValue) => {
-      onProfilePage.getOwnershipDropdown().invoke("prop", "value").should("contain", dataValue);
-    });
-  }
-
-  if (employerId) {
-    const employerIdWithMatch = employerId.match("^[0-9]$") ? employerId.match("^[0-9]$") : "";
-    onProfilePage.typeEmployerId(employerId);
-    onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
-  }
-
-  if (entityId) {
-    onProfilePage.typeEntityId(entityId);
-    onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
-  }
-
-  if (businessFormationMonth && businessFormationYear) {
-    onProfilePage.typeBusinessFormationDate(businessFormationMonth, businessFormationYear);
-    onProfilePage
-      .getBusinessFormationDatePicker()
-      .invoke("prop", "value")
-      .should("contain", monthInDigits[businessFormationMonth], businessFormationYear);
-  }
-
-  if (taxId) {
-    onProfilePage.typeTaxId(taxId);
-    onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
-  }
-
-  if (taxPin) {
-    onProfilePage.typeTaxPin(taxPin);
-    onProfilePage.getTaxPin().invoke("prop", "value").should("contain", taxPin);
-  }
-
-  if (notes) {
-    onProfilePage.typeNotes(notes);
-    onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
-  }
-
-  onProfilePage.clickSaveButton();
-  cy.url().should("contain", "/dashboard");
 };

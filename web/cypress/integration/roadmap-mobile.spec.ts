@@ -1,7 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { clickEdit, clickNext, clickSave, completeNewBusinessOnboarding } from "../support/helpers";
+import { clickEdit, clickNext, clickSave, completeOnboarding } from "../support/helpers";
 
 describe("Roadmap [feature] [all] [group3]", () => {
   beforeEach(() => {
@@ -10,21 +9,10 @@ describe("Roadmap [feature] [all] [group3]", () => {
   });
 
   it("enters user info and shows the roadmap", () => {
-    const businessName = "Beesapple's";
-    const industry = LookupIndustryById("e-commerce");
-    const homeBasedQuestion = false;
-    const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-    const companyType = "general-partnership";
-    const townDisplayName = "Absecon";
+    // onboarding
+    completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
 
-    completeNewBusinessOnboarding({
-      businessName,
-      industry,
-      homeBasedQuestion,
-      liquorLicenseQuestion,
-      companyType,
-      townDisplayName,
-    });
+    cy.url().should("contain", "/roadmap");
 
     // check roadmap
     cy.get('[data-business-name="Beesapple\'s"]').should("exist");
@@ -122,23 +110,11 @@ describe("Roadmap [feature] [all] [group3]", () => {
   });
 
   it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
-    const businessName = "Beesapple's";
-    const industry = LookupIndustryById("e-commerce");
-    const homeBasedQuestion = false;
-    const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-    const companyType = "general-partnership";
-    const townDisplayName = "Absecon";
-
-    completeNewBusinessOnboarding({
-      businessName,
-      industry,
-      homeBasedQuestion,
-      liquorLicenseQuestion,
-      companyType,
-      townDisplayName,
-    });
+    // onboarding
+    completeOnboarding("Beesapple's", "e-commerce", "general-partnership", false);
 
     // roadmap
+    cy.url().should("contain", "/roadmap");
     cy.get('[data-task="register-for-ein"]').click({ force: true });
     cy.get('[data-testid="ein"]').should("exist");
     cy.get('[data-testid="ein"]').click({ force: true });
