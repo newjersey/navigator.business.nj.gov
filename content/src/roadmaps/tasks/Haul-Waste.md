@@ -1,6 +1,6 @@
 ---
 urlSlug: haul-waste
-name: Register Items that will Haul Waste
+name: Register Items That Will Haul Waste
 id: haul-waste-hic
 callToActionLink: https://www.wastedecals.nj.gov/sg2.html
 callToActionText: Apply for My Waste Hauling Decal
