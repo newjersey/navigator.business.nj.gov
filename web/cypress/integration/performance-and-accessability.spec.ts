@@ -1,9 +1,9 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
+import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
 import {
-  clickNext,
-  clickTask,
   completeNewBusinessOnboarding,
   defaultPa11yThresholds,
   lighthouseDesktopConfig,
@@ -41,9 +41,8 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
   describe("Onboarding - starting flow", () => {
     describe("Step 1", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
-
-        cy.get('input[type="radio"][value="false"]').check();
+        cy.url().should("include", "onboarding?page=1");
+        onOnboardingPage.selectNewBusiness(false);
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -51,12 +50,13 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
     });
     describe("Step 2", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
+        cy.url().should("include", "onboarding?page=1");
 
-        cy.get('input[type="radio"][value="false"]').check();
-        clickNext();
+        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.clickNext();
 
-        cy.get('input[aria-label="Business name"]').type("Beesapple's");
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessName("Beesapple's");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -64,16 +64,17 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
     });
     describe("Step 3", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
+        cy.url().should("include", "onboarding?page=1");
 
-        cy.get('input[type="radio"][value="false"]').check();
-        clickNext();
+        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.clickNext();
 
-        cy.get('input[aria-label="Business name"]').type("Beesapple's");
-        clickNext();
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.clickNext();
 
-        cy.get('[aria-label="Industry"]').click();
-        cy.contains("E-Commerce").click();
+        cy.url().should("include", "onboarding?page=3");
+        onOnboardingPage.selectIndustry("e-commerce");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -81,19 +82,21 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
     });
     describe("Step 4", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
+        cy.url().should("include", "onboarding?page=1");
 
-        cy.get('input[type="radio"][value="false"]').check();
-        clickNext();
+        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.clickNext();
 
-        cy.get('input[aria-label="Business name"]').type("Beesapple's");
-        clickNext();
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.clickNext();
 
-        cy.get('[aria-label="Industry"]').click();
-        cy.contains("E-Commerce").click();
-        clickNext();
+        cy.url().should("include", "onboarding?page=3");
+        onOnboardingPage.selectIndustry("e-commerce");
+        onOnboardingPage.clickNext();
 
-        cy.get('[data-value="general-partnership"]').click();
+        cy.url().should("include", "onboarding?page=4");
+        onOnboardingPage.selectLegalStructure("general-partnership");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -101,24 +104,62 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
     });
     describe("Step 5", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
+        cy.url().should("include", "onboarding?page=1");
 
-        cy.get('input[type="radio"][value="false"]').check();
-        clickNext();
+        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.clickNext();
 
-        cy.get('input[aria-label="Business name"]').type("Beesapple's");
-        clickNext();
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.clickNext();
 
-        cy.get('[aria-label="Industry"]').click();
-        cy.contains("E-Commerce").click();
-        clickNext();
+        cy.url().should("include", "onboarding?page=3");
+        onOnboardingPage.selectIndustry("e-commerce");
+        onOnboardingPage.clickNext();
 
-        cy.get('[data-value="general-partnership"]').click();
-        clickNext();
+        cy.url().should("include", "onboarding?page=4");
+        onOnboardingPage.selectLegalStructure("general-partnership");
+        onOnboardingPage.clickNext();
 
-        cy.get('input[type="radio"][value="false"]').check();
-        cy.get('[aria-label="Location"]').click();
-        cy.contains("Absecon").click();
+        cy.url().should("include", "onboarding?page=5");
+        onOnboardingPage.selectLocation("Absecon");
+        onOnboardingPage.selectHomeBased(false);
+
+        cy.lighthouse(undefined, lighthouseDesktopConfig);
+        cy.pa11y(defaultPa11yThresholds);
+      });
+    });
+
+    describe("Step 6", () => {
+      it("should pass the audits", () => {
+        cy.url().should("include", "onboarding?page=1");
+
+        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=3");
+        onOnboardingPage.selectIndustry("e-commerce");
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=4");
+        onOnboardingPage.selectLegalStructure("general-partnership");
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=5");
+        onOnboardingPage.selectLocation("Absecon");
+        onOnboardingPage.selectHomeBased(false);
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=6}");
+        onOnboardingPage.typeFullName("Michael Smith");
+        onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
+        onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
+        onOnboardingPage.toggleNewsletterCheckbox(true);
+        onOnboardingPage.toggleContactMeCheckbox(true);
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -129,9 +170,9 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
   describe("Onboarding - owning flow", () => {
     describe("Step 1", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
+        cy.url().should("include", "onboarding?page=1");
 
-        cy.get('input[type="radio"][value="true"]').check();
+        onOnboardingPage.selectNewBusiness(true);
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -140,14 +181,14 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
     describe("Step 2", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
+        cy.url().should("include", "onboarding?page=1");
 
-        cy.get('input[type="radio"][value="true"]').check();
-        clickNext();
+        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.clickNext();
 
-        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/2020");
-
-        cy.get('input[aria-label="Entity id"]').type("1234567890");
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessFormationDate("Jan", "2020");
+        onOnboardingPage.typeEntityId("1234567890");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -156,20 +197,19 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
     describe("Step 3", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
+        cy.url().should("include", "onboarding?page=1");
 
-        cy.get('input[type="radio"][value="true"]').check();
-        clickNext();
+        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.clickNext();
 
-        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/2020");
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessFormationDate("Jan", "2020");
+        onOnboardingPage.typeEntityId("1234567890");
+        onOnboardingPage.clickNext();
 
-        cy.get('input[aria-label="Entity id"]').type("1234567890");
-        clickNext();
-
-        cy.get('input[aria-label="Business name"]').type("Beesapple's");
-
-        cy.get('[aria-label="Sector"]').click();
-        cy.contains("Clean Energy").click();
+        cy.url().should("include", "onboarding?page=3");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.selectIndustrySector("clean-energy");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -177,25 +217,62 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
     });
     describe("Step 4", () => {
       it("should pass the audits", () => {
-        cy.wait(1000); // wait for onboarding animation
+        cy.url().should("include", "onboarding?page=1");
 
-        cy.get('input[type="radio"][value="true"]').check();
-        clickNext();
+        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.clickNext();
 
-        cy.chooseDatePicker('[aria-label="Date of formation"]', "01/2020");
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessFormationDate("Jan", "2020");
+        onOnboardingPage.typeEntityId("1234567890");
+        onOnboardingPage.clickNext();
 
-        cy.get('input[aria-label="Entity id"]').type("1234567890");
-        clickNext();
+        cy.url().should("include", "onboarding?page=3");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.selectIndustrySector("clean-energy");
+        onOnboardingPage.clickNext();
 
-        cy.get('input[aria-label="Business name"]').type("Beesapple's");
+        cy.url().should("include", "onboarding?page=4}");
+        onOnboardingPage.typeNumberOfEmployees("5");
+        onOnboardingPage.selectLocation("Absecon");
+        onOnboardingPage.selectHomeBased(false);
+        onOnboardingPage.selectOwnership(["women-owned"]);
 
-        cy.get('[aria-label="Sector"]').click();
-        cy.contains("Clean Energy").click();
-        clickNext();
+        cy.lighthouse(undefined, lighthouseDesktopConfig);
+        cy.pa11y(defaultPa11yThresholds);
+      });
+    });
 
-        cy.get('input[type="radio"][value="false"]').check();
-        cy.get('[aria-label="Location"]').click();
-        cy.contains("Absecon").click();
+    describe("Step 5", () => {
+      it("should pass the audits", () => {
+        cy.url().should("include", "onboarding?page=1");
+
+        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=2");
+        onOnboardingPage.typeBusinessFormationDate("Jan", "2020");
+        onOnboardingPage.typeEntityId("1234567890");
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=3");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.selectIndustrySector("clean-energy");
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=4}");
+        onOnboardingPage.typeNumberOfEmployees("5");
+        onOnboardingPage.selectLocation("Absecon");
+        onOnboardingPage.selectHomeBased(false);
+        onOnboardingPage.selectOwnership(["women-owned"]);
+        onOnboardingPage.clickNext();
+
+        cy.url().should("include", "onboarding?page=5}");
+        onOnboardingPage.typeFullName("Michael Smith");
+        onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
+        onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
+        onOnboardingPage.toggleNewsletterCheckbox(true);
+        onOnboardingPage.toggleContactMeCheckbox(true);
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -256,7 +333,7 @@ describe("Performance and Accessibility - Roadmap [all] [group3]", () => {
               townDisplayName,
             });
 
-            clickTask("business-plan");
+            onRoadmapPage.clickRoadmapTask("business-plan");
 
             cy.lighthouse(undefined, lighthouseDesktopConfig);
             cy.pa11y(defaultPa11yThresholds);
@@ -283,7 +360,7 @@ describe("Performance and Accessibility - Roadmap [all] [group3]", () => {
                   companyType,
                   townDisplayName,
                 });
-                clickTask(slug);
+                onRoadmapPage.clickRoadmapTask(slug);
 
                 cy.lighthouse(undefined, lighthouseDesktopConfig);
                 cy.pa11y(defaultPa11yThresholds);

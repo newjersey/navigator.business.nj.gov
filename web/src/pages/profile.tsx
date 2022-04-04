@@ -267,7 +267,11 @@ const ProfilePage = (props: Props): ReactElement => {
                 {userData === undefined ? (
                   <SinglePageLayout>
                     <div className="flex flex-justify-center flex-align-center">
-                      <CircularProgress />
+                      <CircularProgress
+                        id="profilePage"
+                        aria-label="profile page progress bar"
+                        aria-busy={true}
+                      />
                       <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
                     </div>
                   </SinglePageLayout>

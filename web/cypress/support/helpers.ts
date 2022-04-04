@@ -6,31 +6,6 @@ import { onProfilePage } from "./page_objects/profilePage";
 import { onRoadmapPage } from "./page_objects/roadmapPage";
 
 /* eslint-disable cypress/no-unnecessary-waiting */
-export const clickNext = (): void => {
-  cy.wait(300);
-  cy.get('[data-testid="next"]:visible').click({ force: true });
-  cy.wait(1000); // wait for onboarding animation
-};
-
-/* eslint-disable cypress/no-unnecessary-waiting */
-export const clickSave = (): void => {
-  cy.wait(300);
-  cy.get('[data-testid="save"]:visible').click({ force: true });
-  cy.wait(1000); // wait for onboarding animation
-};
-
-export const clickEdit = (): void => {
-  cy.get('[data-testid="grey-callout-link"]').click();
-  cy.wait(1000); // wait for onboarding animation
-};
-
-export const clickTask = (taskId: string): void => {
-  cy.get('[id="plan-header"]').click();
-  cy.get('[id="start-header"]').click();
-  const taskValue = `[data-task="${taskId}"]`;
-  cy.get(taskValue).click({ force: true });
-  cy.wait(1000);
-};
 
 export const lighthouseDesktopConfig: LighthouseConfig = {
   formFactor: "desktop",
@@ -129,18 +104,18 @@ export const completeNewBusinessOnboarding = ({
   isNewsletterChecked = true,
   isContactMeChecked = false,
 }: startingOnboardingData & Partial<registration>): void => {
-  cy.url().should("include", `onboarding?page=${1}`);
+  cy.url().should("include", "onboarding?page=1");
   onOnboardingPage.selectNewBusiness(false);
   onOnboardingPage.getHasExistingBusiness(true).should("not.be.checked");
   onOnboardingPage.getHasExistingBusiness(false).should("be.checked");
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", `onboarding?page=${2}`);
+  cy.url().should("include", "onboarding?page=2");
   onOnboardingPage.typeBusinessName(businessName);
   onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", `onboarding?page=${3}`);
+  cy.url().should("include", "onboarding?page=3");
   onOnboardingPage.selectIndustry((industry as Industry).id);
   onOnboardingPage
     .getIndustryDropdown()
@@ -156,7 +131,7 @@ export const completeNewBusinessOnboarding = ({
   }
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", `onboarding?page=${4}`);
+  cy.url().should("include", "onboarding?page=4");
   onOnboardingPage.selectLegalStructure(companyType);
   onOnboardingPage
     .getLegalStructure(companyType)
@@ -166,7 +141,7 @@ export const completeNewBusinessOnboarding = ({
     .should("have.class", "Mui-checked");
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", `onboarding?page=${5}`);
+  cy.url().should("include", "onboarding?page=5");
 
   if (townDisplayName) {
     onOnboardingPage.selectLocation(townDisplayName);
@@ -185,7 +160,7 @@ export const completeNewBusinessOnboarding = ({
   }
 
   onOnboardingPage.clickNext();
-  cy.url().should("include", `onboarding?page=${6}`);
+  cy.url().should("include", "onboarding?page=6");
   onOnboardingPage.typeFullName(fullName);
   onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
   onOnboardingPage.typeEmail(email);
@@ -257,13 +232,13 @@ export const completeExistingBusinessOnboarding = ({
   isNewsletterChecked = true,
   isContactMeChecked = false,
 }: existingOnboardingData & Partial<registration>): void => {
-  cy.url().should("include", `onboarding?page=${1}`);
+  cy.url().should("include", "onboarding?page=1");
   onOnboardingPage.selectNewBusiness(true);
   onOnboardingPage.getHasExistingBusiness(true).should("be.checked");
   onOnboardingPage.getHasExistingBusiness(false).should("not.be.checked");
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", `onboarding?page=${2}`);
+  cy.url().should("include", "onboarding?page=2");
   if (businessFormationMonth && businessFormationYear) {
     onOnboardingPage.typeBusinessFormationDate(businessFormationMonth, businessFormationYear);
     onOnboardingPage
@@ -277,7 +252,7 @@ export const completeExistingBusinessOnboarding = ({
   }
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", `onboarding?page=${3}`);
+  cy.url().should("include", "onboarding?page=3");
   onOnboardingPage.typeBusinessName(businessName);
   onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   onOnboardingPage.selectIndustrySector(sectorId);
@@ -289,7 +264,7 @@ export const completeExistingBusinessOnboarding = ({
     });
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", `onboarding?page=${4}`);
+  cy.url().should("include", "onboarding?page=4}");
   onOnboardingPage.typeNumberOfEmployees(numberOfEmployees);
   onOnboardingPage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
   onOnboardingPage.selectLocation(townDisplayName);
@@ -305,7 +280,7 @@ export const completeExistingBusinessOnboarding = ({
   }
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", `onboarding?page=${5}`);
+  cy.url().should("include", "onboarding?page=5");
   onOnboardingPage.typeFullName(fullName);
   onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
   onOnboardingPage.typeEmail(email);
