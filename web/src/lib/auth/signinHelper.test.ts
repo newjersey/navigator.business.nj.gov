@@ -53,7 +53,7 @@ describe("SigninHelper", () => {
       const user = generateUser({});
       const userData = generateUserData({ user });
       const userStorageMock = userDataStorage.getCurrentUserData.mockImplementation(() => userData);
-      await onGuestSignIn(mockPush, mockDispatch);
+      await onGuestSignIn(mockPush, "/", mockDispatch);
       expect(userStorageMock).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN_GUEST",
@@ -68,7 +68,7 @@ describe("SigninHelper", () => {
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, mockDispatch);
+      await onGuestSignIn(mockPush, "/", mockDispatch);
       expect(mockPush).toHaveBeenCalledWith("/onboarding");
     });
 
@@ -77,8 +77,17 @@ describe("SigninHelper", () => {
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, mockDispatch);
+      await onGuestSignIn(mockPush, "/roadmap", mockDispatch);
       expect(mockPush).toHaveBeenCalledWith("/");
+    });
+
+    it("does not redirect user when at /onboarding", async () => {
+      userDataStorage.getCurrentUserData.mockImplementation(() => undefined);
+      mockSession.getCurrentUser.mockImplementation(() => {
+        throw new Error("New");
+      });
+      await onGuestSignIn(mockPush, "/onboarding", mockDispatch);
+      expect(mockPush).not.toHaveBeenCalledWith("/");
     });
   });
 

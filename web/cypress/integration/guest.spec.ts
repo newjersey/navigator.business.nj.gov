@@ -1,7 +1,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
-import { clickEdit, completeNewBusinessOnboarding, randomInt } from "../support/helpers";
+import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
+import { completeNewBusinessOnboarding, randomInt } from "../support/helpers";
 
 describe("Guest Roadmap [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");
@@ -79,7 +80,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-testid="self-reg-toast"]').should("be.visible");
 
     // try editing data in the Profile page
-    clickEdit();
+    onRoadmapPage.clickEditProfileLink();
     cy.get('[data-testid="self-reg-modal"]').should("be.visible");
     cy.get('[data-testid="self-reg-toast"]').should("not.exist");
     cy.get('[aria-label="close"]').click({ force: true });

@@ -33,7 +33,7 @@ const date = dayjs().subtract(1, "month").date(1);
 describe("onboarding - shared", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({});
+    useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "", userData: generateUserData({}) });
     mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
@@ -163,7 +163,10 @@ describe("onboarding - shared", () => {
 
   it("resets non-shared information when switching from starting flow to owning flow", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const initialUserData = generateUserData({ profileData: createEmptyProfileData() });
+    const initialUserData = generateUserData({
+      formProgress: "UNSTARTED",
+      profileData: createEmptyProfileData(),
+    });
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("has-existing-business-false");
@@ -188,6 +191,7 @@ describe("onboarding - shared", () => {
       hasExistingBusiness: true,
       entityId: undefined,
       businessName: "Cool Computers",
+      initialOnboardingFlow: "OWNING",
       industryId: "generic",
       homeBasedBusiness: true,
       legalStructureId: undefined,
@@ -203,7 +207,10 @@ describe("onboarding - shared", () => {
 
   it("resets non-shared information when switching from owning flow to starting flow", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const initialUserData = generateUserData({ profileData: createEmptyProfileData() });
+    const initialUserData = generateUserData({
+      formProgress: "UNSTARTED",
+      profileData: createEmptyProfileData(),
+    });
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("has-existing-business-true");
@@ -229,6 +236,7 @@ describe("onboarding - shared", () => {
       hasExistingBusiness: false,
       entityId: undefined,
       businessName: "Cool Computers",
+      initialOnboardingFlow: "STARTING",
       industryId: undefined,
       homeBasedBusiness: true,
       dateOfFormation: undefined,
@@ -245,7 +253,10 @@ describe("onboarding - shared", () => {
 
   it("does not reset information when re-visiting page 1 but not switching the answer", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const initialUserData = generateUserData({ profileData: createEmptyProfileData() });
+    const initialUserData = generateUserData({
+      formProgress: "UNSTARTED",
+      profileData: createEmptyProfileData(),
+    });
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("has-existing-business-true");
@@ -273,6 +284,7 @@ describe("onboarding - shared", () => {
       industryId: "generic",
       dateOfFormation: date.format("YYYY-MM-DD"),
       homeBasedBusiness: true,
+      initialOnboardingFlow: "OWNING",
       municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,

@@ -61,6 +61,7 @@ import React, {
   useState,
 } from "react";
 import { CSSTransition } from "react-transition-group";
+import { useSWRConfig } from "swr";
 
 interface Props {
   displayContent: LoadDisplayContent;
@@ -113,6 +114,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
+  const { cache } = useSWRConfig();
 
   const onValidation = useCallback(
     (field: ProfileFields, invalid: boolean): void => {
@@ -126,51 +128,53 @@ const OnboardingPage = (props: Props): ReactElement => {
     return onboardingFlows;
   }, [profileData, user, onValidation, fieldStates]);
 
-  useEffect(() => {
-    if (userData) {
-      setProfileData(userData.profileData);
-      setUser(userData.user);
-      setCurrentFlow(userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
-    } else if (state.user && state.isAuthenticated == IsAuthenticated.FALSE) {
-      const _userData = createEmptyUserData(state.user);
-      setRegistrationDimension("Began Onboarding");
-      update(_userData, { local: true });
-      setProfileData(_userData.profileData);
-      setUser(_userData.user);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.isAuthenticated, state.user, userData]);
-
   const queryShallowPush = useCallback(
     (page: number) => router.push({ query: { page: page } }, undefined, { shallow: true }),
     [router]
   );
 
   useEffect(() => {
-    if (!router.isReady || !userData || hasHandledRouting.current) return;
+    if (!router.isReady || hasHandledRouting.current) return;
 
-    (async () => {
-      if (userData?.formProgress === "COMPLETED") {
-        await router.replace("/profile");
-        return;
-      } else {
-        const queryPage = Number(router.query.page);
+    let currentUserData = userData;
 
-        const hasAnsweredExistingBusiness = userData.profileData.hasExistingBusiness !== undefined;
-        const currentFlowInUserData = userData.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
-        const requestedPageIsInRange =
-          queryPage <= onboardingFlows[currentFlowInUserData].pages.length && queryPage > 0;
-
-        if (hasAnsweredExistingBusiness && requestedPageIsInRange) {
-          setPage({ current: queryPage, previous: queryPage - 1 });
+    if (currentUserData) {
+      setProfileData(currentUserData.profileData);
+      setUser(currentUserData.user);
+      setCurrentFlow(currentUserData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
+    } else if (state.user && state.isAuthenticated == IsAuthenticated.FALSE) {
+      (cache as Map<string, string>).clear();
+      currentUserData = createEmptyUserData(state.user);
+      setRegistrationDimension("Began Onboarding");
+      update(currentUserData, { local: true });
+      setProfileData(currentUserData.profileData);
+      setUser(currentUserData.user);
+    }
+    if (currentUserData)
+      (async () => {
+        if (currentUserData?.formProgress === "COMPLETED") {
+          await router.replace("/profile");
+          return;
         } else {
-          setPage({ current: 1, previous: 1 });
-          queryShallowPush(1);
-        }
+          const queryPage = Number(router.query.page);
 
-        hasHandledRouting.current = true;
-      }
-    })();
+          const hasAnsweredExistingBusiness = currentUserData?.profileData.hasExistingBusiness !== undefined;
+          const currentFlowInUserData = currentUserData?.profileData.hasExistingBusiness
+            ? "OWNING"
+            : "STARTING";
+          const requestedPageIsInRange =
+            queryPage <= onboardingFlows[currentFlowInUserData].pages.length && queryPage > 0;
+
+          if (hasAnsweredExistingBusiness && requestedPageIsInRange) {
+            setPage({ current: queryPage, previous: queryPage - 1 });
+          } else {
+            setPage({ current: 1, previous: 1 });
+            queryShallowPush(1);
+          }
+
+          hasHandledRouting.current = true;
+        }
+      })();
   }, [
     router,
     router.isReady,
@@ -179,14 +183,15 @@ const OnboardingPage = (props: Props): ReactElement => {
     onboardingFlows,
     queryShallowPush,
     hasHandledRouting,
+    state.user,
+    state.isAuthenticated,
+    cache,
+    update,
   ]);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    let currentUserData = userData;
-    if (!currentUserData) {
-      currentUserData = createEmptyUserData(user);
-    }
+    const currentUserData = userData as UserData;
 
     const currentPageFlow = onboardingFlows[currentFlow].pages[page.current - 1];
     const errorMap = currentPageFlow.getErrorMap();
