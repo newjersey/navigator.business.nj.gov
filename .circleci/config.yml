@@ -492,6 +492,7 @@ jobs:
         default: "chrome"
     docker:
       - image: cimg/node:14.19.1-browsers
+    resource_class: large
     steps:
       - set-cypress-env-vars
       - attach_workspace:
