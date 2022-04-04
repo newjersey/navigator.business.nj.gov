@@ -63,7 +63,7 @@
   "devDependencies": {
     "@babel/core": "7.17.8",
     "@jest/types": "27.5.1",
-    "@mdx-js/react": "2.1.0",
+    "@mdx-js/react": "2.1.1",
     "@next/bundle-analyzer": "12.1.4",
     "@next/eslint-plugin-next": "12.1.4",
     "@storybook/addon-actions": "6.4.20",
