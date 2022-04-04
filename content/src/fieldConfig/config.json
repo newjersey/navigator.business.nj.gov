@@ -10,7 +10,7 @@
     "OPERATE": "Operate"
   },
   "betaBar": {
-    "betaMainText": "This site is in beta. ",
+    "betaMainText": "This site is in beta.",
     "betaFormText": "Let us know what you think!",
     "betaFormLink": "https://forms.business.nj.gov/feedback/"
   },
@@ -409,11 +409,14 @@
     "taxPinErrorText": "Tax PIN must be 4 digits.",
     "escapeModalEscape": "Go back",
     "escapeModalBody": "You have unsaved changes that will be lost.",
+    "standingDocFileTitle": "temp",
     "successTextBody": "Your profile has been updated.",
+    "formationDocFileTitle": "temp",
     "errorTextBody": "There are errors with some entries, please try again.",
     "escapeModalHeader": "Are you sure you want to continue?",
     "saveButtonText": "Save",
     "escapeModalReturn": "Continue without saving",
-    "successTextHeader": "Profile Updated"
+    "successTextHeader": "Profile Updated",
+    "certificationDocFileTitle": "temp"
   }
 }
