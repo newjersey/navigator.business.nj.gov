@@ -1,8 +1,16 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { Industries, Industry, LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared/";
 import {
+  arrayOfSectors,
+  Industries,
+  Industry,
+  LegalStructure,
+  LegalStructures,
+} from "@businessnjgovnavigator/shared/";
+import {
+  checkExistingBusinessProfilePage,
   checkNewBusinessProfilePage,
+  completeExistingBusinessOnboarding,
   completeNewBusinessOnboarding,
   homeBasedIndustries,
   industriesNotHomeBasedOrLiquorLicense,
@@ -10,6 +18,7 @@ import {
   liquorLicenseIndustries,
   randomElementFromArray,
   randomInt,
+  updateExBusinessProfilePage,
   updateNewBusinessProfilePage,
 } from "../support/helpers";
 
@@ -164,6 +173,71 @@ describe("Profile [feature] [all] [group1]", () => {
       updateNewBusinessProfilePage({
         entityId: updatedEntityId,
       });
+    });
+  });
+
+  it.skip("onboards existing business and updates profile data", () => {
+    const businessFormationMonth = "Apr";
+    const businessFormationYear = "2021";
+    const entityId = randomInt(10).toString();
+    const businessName = `Generic Business Name ${randomInt()}`;
+    const sectorId = randomElementFromArray(arrayOfSectors).id;
+    const numberOfEmployees = randomInt(1).toString();
+    const townDisplayName = "Atlantic";
+    const homeBasedQuestion = Boolean(randomInt() % 2);
+    const ownershipDataValues = ["woman-owned", "veteran-owned"];
+
+    completeExistingBusinessOnboarding({
+      businessFormationMonth,
+      businessFormationYear,
+      entityId,
+      businessName,
+      sectorId,
+      numberOfEmployees,
+      townDisplayName,
+      homeBasedQuestion,
+      ownershipDataValues,
+    });
+
+    checkExistingBusinessProfilePage({
+      businessFormationMonth,
+      businessFormationYear,
+      entityId,
+      businessName,
+      sectorId,
+      numberOfEmployees,
+      townDisplayName,
+      homeBasedQuestion,
+      ownershipDataValues,
+    });
+
+    const updatedBsinessFormationMonth = "Mar";
+    const updatedBusinessFormationYear = "2020";
+    const updatedEntityId = randomInt(10).toString();
+    const updatedBusinessName = `Generic Business Name ${randomInt()}`;
+    const updatedSectorId = randomElementFromArray(arrayOfSectors).id;
+    const updatedNumberOfEmployees = randomInt(1).toString();
+    const updatedTownDisplayName = "Bass River";
+    const updatedOwnershipDataValues = ["disabled-veteran"];
+    const employerId = randomInt(10).toString();
+    const taxId = randomInt(9).toString();
+    const notes = `Notes ${randomInt()}`;
+    const taxPin = randomInt(4).toString();
+
+    updateExBusinessProfilePage({
+      businessFormationMonth: updatedBsinessFormationMonth,
+      businessFormationYear: updatedBusinessFormationYear,
+      entityId: updatedEntityId,
+      businessName: updatedBusinessName,
+      sectorId: updatedSectorId,
+      numberOfEmployees: updatedNumberOfEmployees,
+      townDisplayName: updatedTownDisplayName,
+      homeBasedQuestion: !homeBasedQuestion,
+      ownershipDataValues: updatedOwnershipDataValues,
+      employerId,
+      taxId,
+      notes,
+      taxPin,
     });
   });
 });

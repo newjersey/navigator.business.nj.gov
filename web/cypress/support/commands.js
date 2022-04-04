@@ -40,6 +40,7 @@ Auth.configure({
 
 Cypress.Commands.add("loginByCognitoApi", () => {
   cy.clearCookies();
+  cy.clearLocalStorage();
 
   const log = Cypress.log({
     displayName: "COGNITO LOGIN",
