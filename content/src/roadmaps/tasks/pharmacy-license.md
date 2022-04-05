@@ -22,7 +22,7 @@ Your pharmacy business needs a permit in order to operate. The permit applicatio
 - []{pharmacist-perscription-label} Copy of prescription and poison label
 - []{general-business-address} Business Address
 - []{general-hours-operation} Hours of operation
-- []{pharmacist-floor-dimenstion} Floor dimensions of Pharmacy Shop (height x width)
+- []{pharmacist-floor-dimension} Floor dimensions of Pharmacy Shop (height x width)
 - []{pharmacist-floor-dimenstion-prescriptions} Floor dimensions of Prescription department (height x width)
 - []{pharmacist-counter-dimension} Pharmacy counter dimensions (height x width)
 - []{pharmacist-equipment} Required pharmacy equipment (possessed or ordered) and references
