@@ -8,8 +8,6 @@ fundingType: tax credit
 agency:
   - NJEDA
 publishStageArchive: ""
-openDate: ""
-dueDate: ""
 status: closed
 programFrequency: one-time
 businessStage: operating
@@ -22,10 +20,15 @@ county:
 sector:
   - Construction
   - Real Estate and Rental and Leasing
+openDate: ""
+dueDate: ""
 ---
 
 The Economic Redevelopment and Growth (ERG) Program is an incentive for developers and businesses to address revenue gaps in residential or commercial development projects. The original program closed for applications in 2019, but the program has been reopened for applications under the Economic Recovery Act of 2020.
 
-**Benefits:** Tax credits or grant reimbursements up to 20% of eligible project costs plus bonuses.
+---
+### Eligibility
+* Residential or commercial projects must be located in a qualifying incentive area that meet all other program eligibility criteria
 
-**Eligibility:** Residential and commercial development projects located in a qualifying incentive area that meet all other program eligibility criteria.
+>**Benefits**
+>* Tax credits or grant reimbursements up to 20% of eligible project costs plus bonuses

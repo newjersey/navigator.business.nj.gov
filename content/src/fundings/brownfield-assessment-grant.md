@@ -8,8 +8,6 @@ fundingType: grant
 agency:
   - NJEDA
 publishStageArchive: Do Not Publish
-openDate: ""
-dueDate: ""
 status: first-come, first-served
 programFrequency: one-time
 businessStage: operating
@@ -20,10 +18,15 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector: []
+openDate: ""
+dueDate: ""
 ---
 
 The Brownfield Assessment Grant Program provides grant money to support site assessment at any eligible brownfield site in NJ.
 
-**Benefits:** Free Environmental Site Assessment to assess contamination at brownfield sites.
+---
+### Eligibility
+* Available for eligible brownfield sites in the state for the purpose of assessing known or suspected site contamination
 
-**Eligibility:** This grant is available for eligible brownfield sites in the state to assess known or suspected contamination at a site.
+>**Benefits**
+>* Free environmental site assessment to evaluate contamination at brownfield sites
