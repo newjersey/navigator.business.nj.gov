@@ -74,7 +74,7 @@ const RoadmapPage = (props: Props): ReactElement => {
       {!userData || userData?.formProgress !== "COMPLETED" ? (
         <SinglePageLayout>
           <div className="flex flex-justify-center flex-align-center margin-top-3 desktop:margin-top-0">
-            <CircularProgress />
+            <CircularProgress id="roadmapPage" aria-label="roadmap page progress bar" aria-busy={true} />
             <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
           </div>
         </SinglePageLayout>
@@ -96,7 +96,11 @@ const RoadmapPage = (props: Props): ReactElement => {
             <div className="margin-top-3">
               {!roadmap ? (
                 <div className="flex flex-justify-center flex-align-center">
-                  <CircularProgress />
+                  <CircularProgress
+                    id="roadmapSection"
+                    aria-label="roadmap section progress bar"
+                    aria-busy={true}
+                  />
                   <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
                 </div>
               ) : (
