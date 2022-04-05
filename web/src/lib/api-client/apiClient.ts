@@ -12,10 +12,6 @@ export const postUserData = async (userData: UserData): Promise<UserData> => {
   return post(`/users`, userData);
 };
 
-export const searchBusinessName = (name: string): Promise<NameAvailability> => {
-  return get(`/business-name-availability?query=${encodeURIComponent(name)}`);
-};
-
 export const checkLicenseStatus = (nameAndAddress: NameAndAddress): Promise<UserData> => {
   return post(`/license-status`, nameAndAddress);
 };
@@ -38,6 +34,10 @@ export const postUserTesting = async (userData: UserData): Promise<UserData> => 
 
 export const postGetAnnualFilings = async (userData: UserData): Promise<UserData> => {
   return post(`/guest/annualFilings`, userData, false);
+};
+
+export const searchBusinessName = (name: string): Promise<NameAvailability> => {
+  return get(`/guest/business-name-availability?query=${encodeURIComponent(name)}`, false);
 };
 
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {

@@ -37,12 +37,12 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
   }, [props.initialValue]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (isAuthenticated == IsAuthenticated.TRUE) {
-      analytics.event.task_status.click.dropdown_appears();
-      setAnchorEl(event.currentTarget);
-    } else {
+    if (isAuthenticated !== IsAuthenticated.TRUE) {
       setModalIsVisible(true);
+      return;
     }
+    analytics.event.task_status.click.dropdown_appears();
+    setAnchorEl(event.currentTarget);
   };
 
   const close = () => {

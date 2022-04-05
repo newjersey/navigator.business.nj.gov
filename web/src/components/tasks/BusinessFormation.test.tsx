@@ -1,5 +1,6 @@
 import { BusinessFormation } from "@/components/tasks/BusinessFormation";
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { NameAvailability } from "@/lib/types/types";
 import {
   generateFormationData,
@@ -17,6 +18,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
+import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -420,6 +422,37 @@ describe("<BusinessFormation />", () => {
         fillText("Search business name", "Anything else");
         await searchBusinessName({ status: "AVAILABLE", similarNames: [] });
         expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+      });
+
+      it("opens registration modal when guest mode user tries to continue", async () => {
+        const initialUserData = generateUserData({
+          formationData: {
+            formationFormData: createEmptyFormationFormData(),
+            formationResponse: undefined,
+            getFilingResponse: undefined,
+          },
+          profileData: generateLLCProfileData({}),
+        });
+
+        const setModalIsVisible = jest.fn();
+
+        subject = render(
+          withAuthAlert(
+            <WithStatefulUserData initialUserData={initialUserData}>
+              <ThemeProvider theme={createTheme()}>
+                <BusinessFormation task={task} displayContent={displayContent} municipalities={[]} />
+              </ThemeProvider>
+            </WithStatefulUserData>,
+            IsAuthenticated.FALSE,
+            { modalIsVisible: false, setModalIsVisible }
+          )
+        );
+
+        fillText("Search business name", "My test business");
+        await searchBusinessName({ status: "AVAILABLE" });
+        expect(setModalIsVisible).not.toHaveBeenCalled();
+        fireEvent.click(subject.getByText(Config.businessFormationDefaults.initialNextButtonText));
+        expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
     });
 

@@ -8,7 +8,6 @@ import serverless from "serverless-http";
 import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
-import { businessNameRouterFactory } from "../../api/businessNameRouter";
 import { formationRouterFactory } from "../../api/formationRouter";
 import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
@@ -134,8 +133,7 @@ app.use(
   "/api/external",
   externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
 );
-app.use("/api/guest", guestRouterFactory());
-app.use("/api", businessNameRouterFactory(businessNameClient));
+app.use("/api/guest", guestRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient));

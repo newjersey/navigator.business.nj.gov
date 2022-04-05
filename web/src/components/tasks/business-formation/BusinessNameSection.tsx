@@ -2,12 +2,14 @@ import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
+import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField, useMediaQuery } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
@@ -21,6 +23,7 @@ export const BusinessNameSection = (): ReactElement => {
   const { state, setTab, setFormationFormData } = useContext(FormationContext);
   const { userData, update } = useUserData();
   const isMobile = useMediaQuery(MediaQueries.isMobile);
+  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
   const {
     currentName,
     submittedName,
@@ -35,6 +38,12 @@ export const BusinessNameSection = (): ReactElement => {
 
   const submitNameAndContinue = async () => {
     if (!userData) return;
+
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      setModalIsVisible(true);
+      return;
+    }
+
     const newFormationFormData = {
       ...state.formationFormData,
       businessName: submittedName,
