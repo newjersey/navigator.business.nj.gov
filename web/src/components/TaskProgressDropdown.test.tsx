@@ -36,14 +36,15 @@ describe("<TaskProgressDropdown />", () => {
 
   beforeEach(() => {
     jest.restoreAllMocks();
-    subject = renderWithAuth({});
   });
 
   it("displays Not Started as the default", () => {
+    subject = renderWithAuth({});
     expect(subject.getAllByText(notStartedText)[0]).toBeVisible();
   });
 
   it("displays the selected tag when closed", () => {
+    subject = renderWithAuth({});
     fireEvent.click(subject.getAllByText(notStartedText)[0]);
 
     expect(subject.getByText(inProgressText)).toBeVisible();
@@ -56,6 +57,7 @@ describe("<TaskProgressDropdown />", () => {
   });
 
   it("calls the prop callback when an option is selected", () => {
+    subject = renderWithAuth({});
     fireEvent.click(subject.getAllByText(notStartedText)[0]);
     fireEvent.click(subject.getByText(inProgressText));
     expect(onSelectCallBack).toHaveBeenCalledWith("IN_PROGRESS");
@@ -63,14 +65,22 @@ describe("<TaskProgressDropdown />", () => {
 
   it("uses initialValue prop as initial value", async () => {
     subject = renderWithAuth({ initialValue: "COMPLETED" });
-    waitFor(() => expect(subject.getAllByText(completedText)[0]).toBeVisible());
+    await waitFor(() => expect(subject.getAllByText(completedText)[0]).toBeVisible());
   });
 
   it("shows a success toast when an option is selected", () => {
+    subject = renderWithAuth({});
     fireEvent.click(subject.getAllByText(notStartedText)[0]);
 
     expect(subject.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
     fireEvent.click(subject.getByText(inProgressText));
     expect(subject.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
+  });
+
+  it("opens registration modal when guest mode user tries to change state", () => {
+    subject = renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
+    fireEvent.click(subject.getAllByText(notStartedText)[0]);
+    fireEvent.click(subject.getByText(inProgressText));
+    expect(setModalIsVisible).toHaveBeenCalledWith(true);
   });
 });

@@ -69,7 +69,7 @@ describe("<TaskCheckbox />", () => {
     expect(currentUserData().taskItemChecklist["some-id"]).toBe(true);
   });
 
-  it("open registration modal when guest mode user tries to change state", () => {
+  it("opens registration modal when guest mode user tries to change state", () => {
     const subject = renderTaskCheckbox({
       checklistItemId: "some-id",
       isAuthenticated: IsAuthenticated.FALSE,
