@@ -409,14 +409,11 @@
     "taxPinErrorText": "Tax PIN must be 4 digits.",
     "escapeModalEscape": "Go back",
     "escapeModalBody": "You have unsaved changes that will be lost.",
-    "standingDocFileTitle": "temp",
     "successTextBody": "Your profile has been updated.",
-    "formationDocFileTitle": "temp",
     "errorTextBody": "There are errors with some entries, please try again.",
     "escapeModalHeader": "Are you sure you want to continue?",
     "saveButtonText": "Save",
     "escapeModalReturn": "Continue without saving",
-    "successTextHeader": "Profile Updated",
-    "certificationDocFileTitle": "temp"
+    "successTextHeader": "Profile Updated"
   }
 }
