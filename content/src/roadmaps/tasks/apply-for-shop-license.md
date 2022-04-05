@@ -13,14 +13,13 @@ New shops, relocated shops, or shops that have transferred ownership are require
 
 ### Application Needs
 
-*  `Legal structure|legal-structure-learn-more` 
-* Business address
-* Opening date
-* Date available for inspection
-* Fire Prevention Permit
-* License number of all practitioners
-* Certificate of Occupancy or Approval
-* Floor plan
+- []{general-business-address} Business address
+- []{cosmo-open-date} Opening date
+- []{cosmo-inspection-date} Date available for inspection
+- []{general-fire-prevention-permit} Fire Prevention Permit
+- []{cosmo-practioners-license} License number of all practitioners
+- []{general-Cert-Occupancy] Certificate of Occupancy or Approval
+- []{cosmo-floor-plan} Floor plan
 
 >**Once completed, you will have:**
 >
