@@ -24,7 +24,7 @@ openDate: ""
 dueDate: ""
 ---
 
-This is a pilot program, funded by the federal Environmental Protection Agency's Revolving Loan Fund grant that will provide $800,000 in funding for loans to private developers and loans and/or sub-grants to public sector and non-profits to carry out cleanups at brownfield sites.
+This is a pilot program, funded by the federal Environmental Protection Agency's Revolving Loan Fund (USEPA RLF) grant that will provide $800,000 in funding for loans to private developers and loans and/or sub-grants to public sector and non-profits to carry out cleanups at brownfield sites.
 
 ---
 ### Eligibility
