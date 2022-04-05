@@ -326,7 +326,7 @@ describe("roadmap page", () => {
       });
       const subject = renderRoadmapPage();
       expect(subject.queryByText("some name")).toBeInTheDocument();
-      expect(subject.queryByText("C Corporation")).toBeInTheDocument();
+      expect(subject.queryByText("Corporation")).toBeInTheDocument();
       expect(subject.queryByText("Franklin")).toBeInTheDocument();
       expect(subject.queryByText("Restaurant")).toBeInTheDocument();
       expect(subject.queryByText("123456790")).not.toBeInTheDocument();
@@ -336,7 +336,7 @@ describe("roadmap page", () => {
 
       fireEvent.click(subject.getByText(Config.roadmapDefaults.greyBoxViewMoreText));
       expect(subject.queryByText("some name")).toBeInTheDocument();
-      expect(subject.queryByText("C Corporation")).toBeInTheDocument();
+      expect(subject.queryByText("Corporation")).toBeInTheDocument();
       expect(subject.queryByText("Franklin")).toBeInTheDocument();
       expect(subject.queryByText("Restaurant")).toBeInTheDocument();
       expect(subject.queryByText("123456790")).toBeInTheDocument();
