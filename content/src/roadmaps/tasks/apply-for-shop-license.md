@@ -18,7 +18,7 @@ New shops, relocated shops, or shops that have transferred ownership are require
 - []{cosmo-inspection-date} Date available for inspection
 - []{general-fire-prevention-permit} Fire Prevention Permit
 - []{cosmo-practioners-license} License number of all practitioners
-- []{general-Cert-Occupancy] Certificate of Occupancy or Approval
+- []{general-cert-occupancy] Certificate of Occupancy or Approval
 - []{cosmo-floor-plan} Floor plan
 
 >**Once completed, you will have:**
