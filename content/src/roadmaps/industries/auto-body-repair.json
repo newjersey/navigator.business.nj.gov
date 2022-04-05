@@ -1,12 +1,8 @@
 {
-  "id": "auto-body-repair",
-  "name": "Auto-Body Repair",
-  "description": "A facility for the repair and restoration of vehicles",
-  "canBeHomeBased": false,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": false,
+  "defaultSectorId": "other-services",
   "canBeReseller": true,
-  "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",
   "roadmapSteps": [
     {
       "step": 1,
@@ -38,5 +34,10 @@
       "weight": 60,
       "task": "spray-paint-booth-permit-auto-body-repair"
     }
-  ]
+  ],
+  "name": "Auto-Body Repair",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",
+  "id": "auto-body-repair",
+  "description": "A facility for the repair and restoration of vehicles"
 }

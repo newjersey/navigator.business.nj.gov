@@ -1,13 +1,8 @@
 {
-  "id": "restaurant",
-  "name": "Restaurant",
-  "description": "Providing food to patrons",
-  "canBeHomeBased": false,
-  "isLiquorLicenseApplicable": true,
-  "defaultSectorId": "accommodation-and-food-services",
   "isMobileLocation": false,
+  "canBeHomeBased": false,
+  "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
-  "additionalSearchTerms": "cafe,grill",
   "roadmapSteps": [
     {
       "step": 1,
@@ -39,5 +34,10 @@
       "weight": 100,
       "task": "food-safety-course"
     }
-  ]
+  ],
+  "name": "Restaurant",
+  "isLiquorLicenseApplicable": true,
+  "additionalSearchTerms": "cafe, grill",
+  "id": "restaurant",
+  "description": "Providing food to patrons"
 }

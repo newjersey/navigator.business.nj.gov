@@ -1,10 +1,7 @@
 {
-  "id": "generic",
-  "name": "Any Other Business Type",
-  "description": "Select this if you don’t see your specific industry",
-  "canBeHomeBased": true,
-  "isLiquorLicenseApplicable": false,
   "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "other-services",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -32,5 +29,9 @@
       "weight": 10,
       "task": "search-licenses"
     }
-  ]
+  ],
+  "name": "Any Other Business Type",
+  "isLiquorLicenseApplicable": false,
+  "id": "generic",
+  "description": "Select this if you don’t see your specific industry"
 }

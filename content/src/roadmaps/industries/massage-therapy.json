@@ -1,6 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
+  "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -38,6 +39,6 @@
   "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "Masseuse, Spa, Spa services",
   "id": "massage-therapy",
-  "description": "Offers soft-tissue bodywork services for health and wellbeing purposes",
-  "licenseType": "Massage and Bodywork Therapy"
+  "licenseType": "Massage and Bodywork Therapy",
+  "description": "Offers soft-tissue bodywork services for health and wellbeing purposes"
 }

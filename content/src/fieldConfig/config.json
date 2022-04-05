@@ -10,7 +10,7 @@
     "OPERATE": "Operate"
   },
   "betaBar": {
-    "betaMainText": "This site is in beta. ",
+    "betaMainText": "This site is in beta.",
     "betaFormText": "Let us know what you think!",
     "betaFormLink": "https://forms.business.nj.gov/feedback/"
   },
@@ -26,7 +26,7 @@
     "certifiedDocLabel": "Certified Copy of Formation (PDF)",
     "membersAddressLine2Optional": "(Optional)",
     "legalStructureWarningModalCancelButtonText": "Cancel",
-    "businessStartDateLabel": "**Business Start Date**",
+    "businessStartDateLabel": "**Effective Date**",
     "notSetBusinessAddressCityLabel": "Not set",
     "membersSuccessTextHeader": "Member Added",
     "missingFieldsOnSubmitModalText": "Review before submitting. The following fields are missing or invalid:",
@@ -91,7 +91,7 @@
     "submitErrorHeading": "Form cannot be submitted. Review the errors found in the following fields:",
     "businessSuffixTooltip": "A business designator is how your legal structure is displayed after your business name.",
     "contactLastNameLabel": "**Last Name**",
-    "businessStartDateTooltip": "The NJ Department of Treasury often refers to this as an \"Effective Date.\"",
+    "businessStartDateTooltip": "You may choose a delayed (future) effective date for your filing. If you do not chose a future effective date, your filing will be effective (legal) immediately upon completion of this online process.",
     "reviewPageLegalStructureLabel": "**Legal Structure** `Learn more|legal-structure-learn-more`",
     "businessNameAndLegalStructureHeader": "### Business Name and Legal Structure",
     "updateYourProfileLinkText": "update your profile",
@@ -172,7 +172,7 @@
     "errorTextRequiredFields": "Please fill in all fields.",
     "errorTextDuplicateSignup": "This email is already registered, please login instead.",
     "completeSigninDescriptionText": "Please wait, finishing your request...",
-    "signupDescriptionText": "You'll register for the Business.NJ.gov Navigator with myNewJersey, a secure login platform run by the State of New Jersey. You may have a myNewJersey account already, or you can create one now. Either way, provide your name and email to get started.",
+    "signupDescriptionText": "To get started, please enter your name and email address below.",
     "confirmEmailFieldPlaceholder": "Type your email again",
     "emailFieldPlaceholder": "Type your email",
     "emailFieldLabel": "Email",
@@ -200,7 +200,7 @@
     "taskPageNavBarHeading": "Business Roadmap"
   },
   "dashboardDefaults": {
-    "backToRoadmapLinkText": "step-by-step guide",
+    "backToRoadmapLinkText": "step-by-step guide for starting your business",
     "unhideOpportunityText": "Unhide",
     "calendarTooltip": "This calendar shows you NJ filing due dates unique to your business. Click on any item to learn where to file.",
     "backToRoadmapHeader": "Want to make sure you properly registered your business?",

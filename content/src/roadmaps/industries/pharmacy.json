@@ -1,8 +1,8 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": false,
+  "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": false,
-  "licenseType": "Pharmacy",
   "roadmapSteps": [
     {
       "step": 1,
@@ -39,5 +39,6 @@
   "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "pharmaceutics, drugstore, apothecary, chemist medicine",
   "id": "pharmacy",
+  "licenseType": "Pharmacy",
   "description": "A business that prepares and dispenses prescriptions and medicine"
 }

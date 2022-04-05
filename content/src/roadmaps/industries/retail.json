@@ -1,8 +1,8 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": false,
+  "defaultSectorId": "retail-trade-and-ecommerce",
   "canBeReseller": true,
-  "additionalSearchTerms": "store,reseller,outlet,shop",
   "roadmapSteps": [
     {
       "step": 1,
@@ -32,6 +32,7 @@
   ],
   "name": "Retail",
   "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "store, reseller, outlet, shop",
   "id": "retail",
   "description": "Selling or reselling goods in a brick and mortar location outside of your home"
 }

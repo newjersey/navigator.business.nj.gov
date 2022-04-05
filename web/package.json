@@ -63,7 +63,7 @@
   "devDependencies": {
     "@babel/core": "7.17.8",
     "@jest/types": "27.5.1",
-    "@mdx-js/react": "2.1.0",
+    "@mdx-js/react": "2.1.1",
     "@next/bundle-analyzer": "12.1.4",
     "@next/eslint-plugin-next": "12.1.4",
     "@storybook/addon-actions": "6.4.20",
@@ -121,7 +121,7 @@
     "prettier-plugin-organize-imports": "2.3.4",
     "raw-loader": "4.0.2",
     "rimraf": "3.0.2",
-    "sass": "1.49.9",
+    "sass": "1.49.11",
     "sass-loader": "12.6.0",
     "style-loader": "3.3.1",
     "ts-jest": "27.1.4",
