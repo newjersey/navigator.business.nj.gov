@@ -27,7 +27,7 @@ Cannabis licenses are reviewed on an ongoing basis and you can apply at any time
 - []{cannabis-service-contracts} All management services contracts and financial source agreements, whether proposed or executed
 - []{cannabis-vendor-contracts} Any Vendor-Contractor agreements if the Vendor-Contractor qualifies as an Entity of Interest
 - []{cannabis-affidavit} [Completed affidavit](https://www.nj.gov/cannabis/documents/businesses/personal-use/Cannabis%20Business%20Applicant%20Affidavit%20Waiver%20Release.pdf)
-- []{cannabis-authorized-release} An authorization to release all information pertaining to the license holder
+- []{cannabis-authorized-release} [Authorization to release all information](https://www.nj.gov/cannabis/documents/businesses/personal-use/Personal%20History%20Disclosure%20Form.pdf) pertaining to the license holder
 - []{cannabis-liability-waiver} A waiver of liability for any damages to the Person of Interest that may result from any disclosure or publication of any information acquired during the licensing process
 - []{cannabis-site-plan} A site plan of the proposed location including a floor plan
 - []{cannabis-location-description}A description of the suitability of the location, which may include renderings, architectural plans, or engineering plans
