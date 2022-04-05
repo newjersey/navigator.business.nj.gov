@@ -29,5 +29,5 @@ The Bond Financing program provides bond financing to qualified manufacturing co
 * Bonds can be used for projects that are owned and operated for the benefit of local, county, and state government bodies and for capital improvements and expansions.
 
 >**Benefits** 
->* Tax-exempt bonds of up to 10M for manufacturers
+>* Tax-exempt bonds of up to $10M for manufacturers
 >* Unlimited for non-profits and public infrastructure projects
