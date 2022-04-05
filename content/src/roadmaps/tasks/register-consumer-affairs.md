@@ -12,8 +12,8 @@ All home improvement contractors (individuals and corporate entities) must regis
 ---
 ### Application Needs
 
-- A Certificate of Insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
-- Paid application fee
+- []{hic-coi} A Certificate of Insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
+- []{hic-fee} Paid application fee
 
 >**Once completed, you will have:**
 >
