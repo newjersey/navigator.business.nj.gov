@@ -38,7 +38,7 @@ Cannabis licenses are reviewed on an ongoing basis and you can apply at any time
 - []{cannabis-labor peace-agreement} Your application can gain additional priority by providing an attestation from a labor organization indicating that you two have entered a labor peace agreement (this is not required and no micro businesses do not gain additional priority for this)
 - []{cannabis-application-fees} Application fees
 - []{cannabis-dob} **`Diversely-Owned Businesses|diversely-owned-business-cannabis` Only:** Copy of Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification with the NJ Department of Treasury
--[]{cannabis-impact-zone} **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis` 
+- []{cannabis-impact-zone} **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis` 
 - []{cannabis-social-equity-biz}**Social Equity Businesses Only:**
   A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis` and documentation (such as a tax return) to prove residency
 - []{cannabis-microbusiness} **Microbusiness Only:** A completed attestation (provided in your online application) that the business will comply with the `requirements for a microbusinesses|microbusiness-cannabis` 
