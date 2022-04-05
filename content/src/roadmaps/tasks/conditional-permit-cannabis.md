@@ -30,6 +30,7 @@ Cannabis licenses are reviewed on an ongoing basis and you can apply at any time
 - []{cannabis-affidavit} [Completed affidavit](https://www.nj.gov/cannabis/documents/businesses/personal-use/Cannabis%20Business%20Applicant%20Affidavit%20Waiver%20Release.pdf)
 - []{cannabis-authorized-release} [Authorization to release all information](https://www.nj.gov/cannabis/documents/businesses/personal-use/Personal%20History%20Disclosure%20Form.pdf) pertaining to the license holder
 - []{Cannabis-tax-info} Proof that each owner of the conditional license has for the immediately preceding taxable year, an adjusted gross income of no more than $200,000, or no more than $400,000 if filing jointly with another individual, proof can be in the form of a previous year's tax statement
+- []{cannabis-liability-waiver} A waiver of liability for any damages to the Person of Interest that may result from any disclosure or publication of any information acquired during the licensing process
 - []{cannabis-application-fees} Application fees
 - []{cannabis-dob} **`Diversely-Owned Businesses|diversely-owned-business-cannabis` Only:** Copy of Minority or Women-Owned Business Enterprise Certification or Disabled Owned Veteran Certification with the NJ Department of Treasury
 -[]{cannabis-impact-zone} **Impact Zone Businesses Only:** Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis` 
