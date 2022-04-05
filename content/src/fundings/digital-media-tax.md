@@ -8,8 +8,6 @@ fundingType: tax credit
 agency:
   - NJEDA
 publishStageArchive: ""
-openDate: ""
-dueDate: ""
 status: first-come, first-served
 programFrequency: reoccuring
 businessStage: operating
@@ -27,10 +25,18 @@ county:
   - Mercer or Salem County
 sector:
   - Arts, Entertainment, and Recreation
+openDate: ""
+dueDate: ""
 ---
 
 The Digital Media Tax Credit Program provides a transferable credit against the corporate business tax and the gross income tax to incentivize companies to produce content in New Jersey.
 
-**Benefits:** A tax credit equal to 20% of qualified digital media production expenses, or 25% of qualified digital media production expenses incurred for services performed and tangible personal property purchased through vendors located in specific New Jersey counties.
+---
+### Eligibility
+* Companies must produce content in New Jersey
 
-**Eligibility:** Companies producing content in New Jersey.
+>**Benefits**
+>* A tax credit equal to 20% of qualified digital media production expenses, or 
+>* 25% of qualified digital media production expenses for services performed and tangible personal property purchased through vendors located in specific New Jersey counties
+
+
