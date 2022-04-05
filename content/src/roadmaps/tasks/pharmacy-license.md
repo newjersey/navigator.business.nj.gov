@@ -12,7 +12,7 @@ Your pharmacy business needs a permit in order to operate. The permit applicatio
 ---
 ### Application Needs
 
-* Pharmacy Name (This is usually your registered businesses name)
+* []{general-business-name} Pharmacy Name (This is usually your registered businesses name)
 * Have your name registered with the county clerk
 * Names and addresses of the registered agent (c corps only)
 * Names and addresses of all officers and owners of 10% or more of stock (c corps only)
