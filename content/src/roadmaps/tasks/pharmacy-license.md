@@ -12,22 +12,22 @@ Your pharmacy business needs a permit in order to operate. The permit applicatio
 ---
 ### Application Needs
 
-* []{general-business-name} Pharmacy Name (This is usually your registered businesses name)
-* Have your name registered with the county clerk
-* Names and addresses of the registered agent (c corps only)
-* Names and addresses of all officers and owners of 10% or more of stock (c corps only)
-* Registered pharmacists name, hours of work, and certificate number
-* Name and contact of unregistered employees
-* `Pharmacist in-charge|pharmacist-in-charge`
-* Copy of prescription and poison label
-* Business Address
-* Hours of operation
-* Floor dimensions of Pharmacy Shop (height x width)
-* Floor dimensions of Prescription department (height x width)
-* Pharmacy counter dimensions (height x width)
-* Required pharmacy equipment (possessed or ordered) and references
-* Picture of any exterior signage (if available at the time of your application)
-* Identified a site inspection date
+- []{general-business-name} Pharmacy Name (This is usually your registered businesses name)
+- []{general-register-name-county-clerk} Have your name registered with the county clerk
+- []{general-registered-agent-info} Names and addresses of the registered agent (c corps only)
+- []{general-ccorp-officers-info} Names and addresses of all officers and owners of 10% or more of stock (c corps only)
+- []{pharmacist-info} Registered pharmacists name, hours of work, and certificate number
+- []{pharamacist-employee-info} Name and contact of unregistered employees
+- []{pharmacist-in-charge} `Pharmacist in-charge|pharmacist-in-charge`
+- []{pharmacist-perscription-label} Copy of prescription and poison label
+- []{general-business-address} Business Address
+- []{general-hours-operation} Hours of operation
+- []{pharmacist-floor-dimenstion} Floor dimensions of Pharmacy Shop (height x width)
+- []{pharmacist-floor-dimenstion-prescriptions} Floor dimensions of Prescription department (height x width)
+- []{pharmacist-counter-dimension} Pharmacy counter dimensions (height x width)
+- []{pharmacist-equipment} Required pharmacy equipment (possessed or ordered) and references
+- []{pharamcist-signage} Picture of any exterior signage (if available at the time of your application)
+- []{pharmacist-inspection} Identified a site inspection date
 
 >** Once completed, you will have:**
 >
