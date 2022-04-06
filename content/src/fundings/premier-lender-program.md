@@ -8,8 +8,6 @@ fundingType: loan
 agency:
   - NJEDA
 publishStageArchive: null
-openDate: ""
-dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: operating
@@ -20,10 +18,15 @@ preferenceForOpportunityZone: no
 county:
   - All
 sector: []
+openDate: ""
+dueDate: ""
 ---
 
-The Premier Lender Program provides New Jersey-based businesses and not-for-profit organizations loan participation and guarantees that can help them overcome the financial obstacles to growth and expansion.
+The Premier Lender Program provides New Jersey-based businesses and not-for-profit organizations loan participation and guarantees that can help them overcome the financial obstacles to grow and expand their business.
 
-**Benefits**: Loan participation of up to $2 million or line of credit guarantees up to $750,000.
+---
+### Eligibility
+* Businesses and nonprofits must commit to create or retain 1 new full-time job for every $65,000 in NJEDA exposure. There is an application fee of $1,000
 
-**Eligibility**: Businesses and nonprofits that commit to create or retain 1 new full-time job for every $65,000 in NJEDA exposure. Application fee of $1,000.
+>**Benefits**
+>* Loan participation of up to $2 million or line of credit guarantees up to $750,000
