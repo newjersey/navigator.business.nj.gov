@@ -31,7 +31,7 @@ The Hazardous Discharge Site Remediation Fund (HDSRF) provides funding for the i
 
 ---
 ### Eligibility 
-* Businesses, individuals, or municipalities in New Jersey performing remediation or cleanup of contaminated and underutilized sites.
+* Businesses, individuals, or municipalities in New Jersey performing remediation or cleanup of contaminated and underutilized sites
 
 >**Benefits** 
 >* Grants of up to $5M per year for municipal and county redevelopment authorities
