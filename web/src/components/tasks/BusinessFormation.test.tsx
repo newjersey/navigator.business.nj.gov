@@ -1256,23 +1256,12 @@ describe("<BusinessFormation />", () => {
         expect(newMembers.find((member) => member == members[1])).toBeFalsy();
       });
 
-      it("does not show checkbox in modal if agent set using number", async () => {
-        renderWithData({ agentNumberOrManual: "NUMBER" });
-        await submitBusinessNameTab();
-        await submitBusinessTab();
-        await openMemberModal();
-        expect(
-          subject.queryByLabelText(displayContent.membersModal.sameNameCheckboxText)
-        ).not.toBeInTheDocument();
-      });
-
       it("adds members using registered agent data using checkbox", async () => {
         renderWithData(
           {
-            agentNumberOrManual: "MANUAL_ENTRY",
             members: [],
-            contactFirstName: "John",
-            contactLastName: "Smith",
+            contactFirstName: "  John  ",
+            contactLastName: "  Smith  ",
             businessAddressLine1: `123 business address`,
             businessAddressLine2: `business suite 201`,
             businessAddressState: "NJ",
