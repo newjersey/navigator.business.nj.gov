@@ -7,6 +7,7 @@ import {
   generateFormationDisplayContent,
   generateFormationFormData,
   generateFormationMember,
+  generateFormationSigner,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
@@ -1211,16 +1212,12 @@ describe("<BusinessFormation />", () => {
       ]);
     });
 
-    it("does not add more than 10 signers", async () => {
-      renderWithData({ additionalSigners: [] });
+    it("does not add more than 9 additional signers", async () => {
+      const eightSigners = Array(8).fill(generateFormationSigner({}));
+      renderWithData({ additionalSigners: eightSigners });
 
       await submitBusinessNameTab();
       await submitBusinessTab();
-      for (let i = 0; i < 8; i++) {
-        fireEvent.click(
-          subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-        );
-      }
       expect(
         subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
       ).toBeInTheDocument();
@@ -1383,13 +1380,11 @@ describe("<BusinessFormation />", () => {
       });
 
       it("does not add more than 10 members", async () => {
-        renderWithData({ members: [], agentNumberOrManual: "MANUAL_ENTRY" });
+        const nineMembers = Array(9).fill(generateFormationMember({}));
+        renderWithData({ members: nineMembers, agentNumberOrManual: "MANUAL_ENTRY" });
         await submitBusinessNameTab();
         await submitBusinessTab();
 
-        for (let i = 0; i < 9; i++) {
-          await fillAndSubmitMemberModal({});
-        }
         expect(
           subject.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).toBeInTheDocument();

@@ -29,6 +29,7 @@ import {
   FormationData,
   FormationFormData,
   FormationMember,
+  FormationSigner,
   FormationSubmitError,
   FormationSubmitResponse,
   GetFilingResponse,
@@ -342,11 +343,8 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
     members: [generateFormationMember({})],
-    signer: {
-      name: `some-signer-${randomInt()}`,
-      signature: true,
-    },
-    additionalSigners: [{ name: `some-additional-signer-${randomInt()}`, signature: true }],
+    signer: generateFormationSigner({}),
+    additionalSigners: [generateFormationSigner({ name: `some-additional-signer-${randomInt()}` })],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -356,6 +354,14 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     contactFirstName: `some-contact-first-name-${randomInt()}`,
     contactLastName: `some-contact-last-name-${randomInt()}`,
     contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateFormationSigner = (overrides: Partial<FormationSigner>): FormationSigner => {
+  return {
+    name: `some-signer-${randomInt()}`,
+    signature: true,
     ...overrides,
   };
 };
