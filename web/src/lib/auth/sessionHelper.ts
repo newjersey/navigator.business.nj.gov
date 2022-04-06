@@ -1,4 +1,9 @@
 import { Auth } from "@aws-amplify/auth";
+import { Sha256 } from "@aws-crypto/sha256-browser";
+import { HttpRequest } from "@aws-sdk/protocol-http";
+import { S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
+import { parseUrl } from "@aws-sdk/url-parser";
+import { formatUrl } from "@aws-sdk/util-format-url";
 import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosResponse } from "axios";
 
@@ -15,6 +20,7 @@ type CognitoIdPayload = {
   sub: string;
   token_use: string;
   "custom:myNJUserKey": string;
+  "custom:identityId": string | undefined;
   identities: CognitoIdentityPayload[] | undefined;
 };
 
@@ -74,6 +80,18 @@ export const triggerSignIn = async (): Promise<void> => {
   await Auth.federatedSignIn({ customProvider: "myNJ" });
 };
 
+export const getSignedS3Link = async (value: string, expires?: number) => {
+  const credentials = await Auth.currentUserCredentials();
+  const presigner = new S3RequestPresigner({
+    credentials,
+    region: process.env.AWS_REGION || "us-east-1",
+    sha256: Sha256,
+  });
+
+  const url = await presigner.presign(new HttpRequest(parseUrl(value)), { expiresIn: expires ?? 900 });
+  return formatUrl(url);
+};
+
 export const getCurrentToken = async (): Promise<string> => {
   const cognitoSession = await Auth.currentSession();
   return cognitoSession.getIdToken().getJwtToken();
@@ -83,6 +101,13 @@ export const getCurrentUser = async (): Promise<BusinessUser> => {
   configureAmplify();
   const cognitoSession = await Auth.currentSession();
   const cognitoPayload = cognitoSession.getIdToken().decodePayload() as CognitoIdPayload;
+  if (!cognitoPayload["custom:identityId"]) {
+    const user = await Auth.currentAuthenticatedUser();
+    const credentials = await Auth.currentUserCredentials();
+    await Auth.updateUserAttributes(user, {
+      "custom:identityId": credentials.identityId,
+    });
+  }
   return cognitoPayloadToBusinessUser(cognitoPayload);
 };
 

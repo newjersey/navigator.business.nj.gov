@@ -21,6 +21,7 @@ import {
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
@@ -56,6 +57,7 @@ function mockMaterialUI(): typeof materialUi {
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("next/router");
 jest.mock("@/lib/api-client/apiClient", () => ({
   postBusinessFormation: jest.fn(),
@@ -130,6 +132,7 @@ describe("<BusinessFormation />", () => {
     useMockRoadmap({});
     useMockRouter({});
     setupStatefulUserDataContext();
+    useMockDocuments({});
     mockApiResponse();
     setDesktopScreen(true);
   });
@@ -167,15 +170,24 @@ describe("<BusinessFormation />", () => {
 
     describe("success page", () => {
       let getFilingResponse: GetFilingResponse;
+      let profileData: ProfileData;
 
-      const renderWithFilingResponse = (overrides: Partial<GetFilingResponse>): void => {
+      const renderWithFilingResponse = (
+        overrides: Partial<GetFilingResponse>,
+        profileOverrides: Partial<ProfileData> = {}
+      ): void => {
         getFilingResponse = generateGetFilingResponse({ success: true, ...overrides });
-        const profileData = generateLLCProfileData({});
+        profileData = generateLLCProfileData(profileOverrides);
         const formationData = generateFormationData({ getFilingResponse });
         subject = renderTask({ profileData, formationData });
       };
 
-      it("displays success page, documents, entity id, confirmation id", () => {
+      it("displays success page, documents, entity id, confirmation id", async () => {
+        setMockDocumentsResponse({
+          formationDoc: "testForm.pdf",
+          certifiedDoc: "testCert.pdf",
+          standingDoc: "testStand.pdf",
+        });
         renderWithFilingResponse({});
         expect(subject.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
         expect(subject.getByText(Config.businessFormationDefaults.successPageSubheader)).toBeInTheDocument();
@@ -183,23 +195,20 @@ describe("<BusinessFormation />", () => {
         expect(subject.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
         expect(
           subject.getByTestId(Config.businessFormationDefaults.formationDocLabel).getAttribute("href")
-        ).toEqual(getFilingResponse.formationDoc);
+        ).toEqual("testForm.pdf");
         expect(
           subject.getByTestId(Config.businessFormationDefaults.standingDocLabel).getAttribute("href")
-        ).toEqual(getFilingResponse.standingDoc);
+        ).toEqual("testStand.pdf");
         expect(
           subject.getByTestId(Config.businessFormationDefaults.certifiedDocLabel).getAttribute("href")
-        ).toEqual(getFilingResponse.certifiedDoc);
-      });
-
-      it("shows expiration date as transaction date plus 30 days", () => {
-        renderWithFilingResponse({});
-        const datePlusThirty = dayjs(getFilingResponse.transactionDate).add(30, "days").format("MM/DD/YYYY");
-        expect(subject.getByText(datePlusThirty, { exact: false })).toBeInTheDocument();
+        ).toEqual("testCert.pdf");
       });
 
       it("does not display documents when they are not present", () => {
-        renderWithFilingResponse({ certifiedDoc: "" });
+        renderWithFilingResponse(
+          { certifiedDoc: "" },
+          { documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" } }
+        );
         expect(
           subject.queryByTestId(Config.businessFormationDefaults.certifiedDocLabel)
         ).not.toBeInTheDocument();

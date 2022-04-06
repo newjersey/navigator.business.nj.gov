@@ -4,6 +4,7 @@
     "@aws-sdk/client-dynamodb",
     "@aws-sdk/lib-dynamodb",
     "@aws-sdk/util-dynamodb",
+    "@aws-sdk/client-s3",
     "@serverless/typescript",
     "@shared/*",
     "airtable",

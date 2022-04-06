@@ -110,6 +110,7 @@ export const generateProfileData = (
   overrides: Partial<ProfileData>,
   isMobileLocation?: boolean
 ): ProfileData => {
+  const id = `some-id-${randomInt()}`;
   return {
     hasExistingBusiness: false,
     initialOnboardingFlow: "STARTING",
@@ -127,6 +128,11 @@ export const generateProfileData = (
     taxId: randomInt(9).toString(),
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
+    documents: {
+      certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
+      formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+    },
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
     sectorId: randomSector().id,

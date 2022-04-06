@@ -1,5 +1,11 @@
 import { Municipality } from "./municipality";
 
+export interface ProfileDocuments {
+  formationDoc: string;
+  standingDoc: string;
+  certifiedDoc: string;
+}
+
 export interface ProfileData {
   hasExistingBusiness: boolean | undefined;
   initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
@@ -16,6 +22,7 @@ export interface ProfileData {
   employerId: string | undefined;
   taxId: string | undefined;
   notes: string;
+  documents: ProfileDocuments;
   ownershipTypeIds: string[];
   existingEmployees: string | undefined;
   taxPin: string | undefined;
@@ -38,6 +45,7 @@ export const emptyProfileData: ProfileData = {
   employerId: undefined,
   taxId: undefined,
   notes: "",
+  documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
   ownershipTypeIds: [],
   existingEmployees: undefined,
   taxPin: undefined,

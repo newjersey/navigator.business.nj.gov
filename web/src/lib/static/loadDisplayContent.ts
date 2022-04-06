@@ -100,6 +100,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   const entityId = (type: UserContentType) => getTextFieldContent("entity-id.md", type);
   const notes = (type: UserContentType) => getTextFieldContent("notes.md", type);
   const taxId = (type: UserContentType) => getTextFieldContent("tax-id.md", type);
+  const documents = (type: UserContentType) => getTextFieldContent("documents.md", type);
   const ownership = (type: UserContentType) => getTextFieldContent("ownership.md", type);
   const existingEmployees = (type: UserContentType) => getTextFieldContent("existing-employees.md", type);
   const taxPin = (type: UserContentType) => getTextFieldContent("tax-pin.md", type);
@@ -124,6 +125,7 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     taxId,
     ownership,
     existingEmployees,
+    documents,
     industryId,
     legalStructure,
     taxPin,

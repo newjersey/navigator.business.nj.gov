@@ -16,6 +16,7 @@ const getTokenFromHeader = (req: Request): string => {
 type CognitoJWTPayload = {
   sub: string;
   "custom:myNJUserKey": string;
+  "custom:identityId": string | undefined;
   email: string;
   identities: CognitoIdentityPayload[] | undefined;
 };
@@ -29,8 +30,11 @@ type CognitoIdentityPayload = {
   userId: string;
 };
 
+export const getSignedInUser = (req: Request): CognitoJWTPayload =>
+  jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+
 export const getSignedInUserId = (req: Request): string => {
-  const signedInUser = jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+  const signedInUser = getSignedInUser(req);
   const myNJIdentityPayload = signedInUser.identities?.find((it) => it.providerName === "myNJ");
   return myNJIdentityPayload?.userId || signedInUser.sub;
 };

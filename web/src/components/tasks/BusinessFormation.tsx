@@ -137,7 +137,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     return (
       <div className="flex flex-column space-between minh-37">
         <TaskHeader task={props.task} />
-        <FormationSuccessPage getFilingResponse={userData.formationData.getFilingResponse} />
+        <FormationSuccessPage userData={userData} />
       </div>
     );
   }

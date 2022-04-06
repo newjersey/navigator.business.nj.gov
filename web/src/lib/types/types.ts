@@ -67,6 +67,7 @@ export type ProfileContent = {
   municipality: TextFieldContent;
   legalStructure: LegalFieldContent;
   notes: TextFieldContent;
+  documents: TextFieldContent;
   taxId: TextFieldContent;
   entityId: TextFieldContent;
   employerId: TextFieldContent;
@@ -248,6 +249,10 @@ export const emptyProfileContent: ProfileContent = {
   ...coreContent,
   notes: {
     contentMd: "",
+  },
+  documents: {
+    contentMd: "",
+    placeholder: "",
   },
   taxId: {
     contentMd: "",

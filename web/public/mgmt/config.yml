@@ -722,6 +722,10 @@ collections:
               - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
               - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
               - { label: Tax PIN Error Text, name: taxPinErrorText, widget: string }
+              - { label: Formation Document Link Text, name: formationDocFileTitle, widget: string }
+              - { label: Certification Document Link Text, name: certificationDocFileTitle, widget: string }
+              - { label: Standing Document Link Text, name: standingDocFileTitle, widget: string }
+
           - label: Roadmap Defaults
             name: roadmapDefaults
             collapsed: true

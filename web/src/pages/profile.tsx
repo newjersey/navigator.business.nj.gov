@@ -18,6 +18,7 @@ import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { PageSkeleton } from "@/components/PageSkeleton";
+import { Documents } from "@/components/profile/Documents";
 import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
@@ -40,7 +41,13 @@ import { getSectionCompletion, OnboardingStatusLookup, useMountEffectWhenDefined
 import { ProfileDataContext } from "@/pages/onboarding";
 import { AuthAlertContext, RoadmapContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyProfileData, Municipality, ProfileData, UserData } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyProfileData,
+  LookupLegalStructureById,
+  Municipality,
+  ProfileData,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { CircularProgress } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
@@ -167,6 +174,11 @@ const ProfilePage = (props: Props): ReactElement => {
         handleChangeOverride={showRegistrationModalForGuest()}
       />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+      {LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling ? (
+        <Documents displayContent={mergedDisplayContent} />
+      ) : (
+        <></>
+      )}
       <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
     </>
   );
@@ -248,6 +260,11 @@ const ProfilePage = (props: Props): ReactElement => {
           handleChangeOverride={showRegistrationModalForGuest()}
         />
       </div>
+      {userData?.formationData.getFilingResponse?.success ? (
+        <Documents displayContent={mergedDisplayContent} />
+      ) : (
+        <></>
+      )}
       <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
     </>
   );

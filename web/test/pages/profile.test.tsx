@@ -15,6 +15,7 @@ import {
 import { withAuthAlert, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
+import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -39,6 +40,7 @@ const dateOfFormation = date.format("YYYY-MM-DD");
 const mockApi = api as jest.Mocked<typeof api>;
 
 jest.mock("next/router");
+jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
@@ -54,6 +56,7 @@ describe("profile", () => {
     setModalIsVisible = jest.fn();
     useMockRouter({});
     setupStatefulUserDataContext();
+    useMockDocuments({});
     mockApi.postGetAnnualFilings.mockImplementation((userData) => Promise.resolve(userData));
   });
 
@@ -666,6 +669,166 @@ describe("profile", () => {
 
     subject = renderPage({ userData });
     expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
+  });
+
+  describe("Document Section", () => {
+    describe("if Poppy", () => {
+      it("shows document section if user's legal structure requires public filing", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            hasExistingBusiness: false,
+            legalStructureId: "limited-liability-company",
+          }),
+        });
+        subject = renderPage({ userData });
+        expect(subject.getByTestId("profileContent-documents")).toBeInTheDocument();
+      });
+
+      it("disables document section if user's legal structure does not require public filing", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            hasExistingBusiness: false,
+            legalStructureId: "sole-proprietorship",
+          }),
+        });
+        subject = renderPage({ userData });
+        expect(subject.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
+      });
+    });
+
+    describe("if Oscar", () => {
+      it("shows document section if user has successfully completed business formation", () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            getFilingResponse: generateGetFilingResponse({ success: true }),
+          }),
+          profileData: generateProfileData({
+            hasExistingBusiness: true,
+          }),
+        });
+        subject = renderPage({ userData });
+        expect(subject.getByTestId("profileContent-documents")).toBeInTheDocument();
+      });
+
+      it("disables document section if user has not completed business formation", () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            getFilingResponse: generateGetFilingResponse({ success: false }),
+          }),
+          profileData: generateProfileData({
+            hasExistingBusiness: true,
+          }),
+        });
+        subject = renderPage({ userData });
+        expect(subject.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
+      });
+    });
+
+    it("shows placeholder text if there are no documents", () => {
+      const content = createEmptyLoadDisplayContent();
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({ success: true }),
+        }),
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "limited-liability-company",
+          documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
+        }),
+      });
+      subject = renderPage({
+        userData,
+        displayContent: {
+          ...content,
+          PROFILE: { ...content.PROFILE, documents: { contentMd: "", placeholder: "test12345" } },
+        },
+      });
+      expect(subject.getByText("test12345")).toBeInTheDocument();
+    });
+
+    it("shows document links", () => {
+      const content = createEmptyLoadDisplayContent();
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({ success: true }),
+        }),
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "limited-liability-company",
+          documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
+        }),
+      });
+      subject = renderPage({
+        userData,
+        displayContent: {
+          ...content,
+          PROFILE: { ...content.PROFILE, documents: { contentMd: "", placeholder: "test12345" } },
+        },
+      });
+
+      expect(subject.queryByText("test12345")).not.toBeInTheDocument();
+      expect(subject.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
+      expect(subject.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
+      expect(subject.getByText(Config.profileDefaults.standingDocFileTitle)).toBeInTheDocument();
+    });
+
+    it("uses links from useDocuments hook", () => {
+      setMockDocumentsResponse({
+        formationDoc: "testForm.pdf",
+        certifiedDoc: "testCert.pdf",
+        standingDoc: "testStand.pdf",
+      });
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({ success: true }),
+        }),
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "limited-liability-company",
+          documents: { certifiedDoc: "pz.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
+        }),
+      });
+      subject = renderPage({
+        userData,
+      });
+
+      expect(subject.getByText(Config.profileDefaults.formationDocFileTitle).getAttribute("href")).toEqual(
+        "testForm.pdf"
+      );
+      expect(subject.getByText(Config.profileDefaults.standingDocFileTitle).getAttribute("href")).toEqual(
+        "testStand.pdf"
+      );
+      expect(
+        subject.getByText(Config.profileDefaults.certificationDocFileTitle).getAttribute("href")
+      ).toEqual("testCert.pdf");
+    });
+
+    it("hides document links if they do not exist", () => {
+      const content = createEmptyLoadDisplayContent();
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({ success: true }),
+        }),
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "limited-liability-company",
+          documents: { certifiedDoc: "pp.zip", formationDoc: "whatever.pdf", standingDoc: "" },
+        }),
+      });
+
+      subject = renderPage({
+        userData,
+        displayContent: {
+          ...content,
+          PROFILE: { ...content.PROFILE, documents: { contentMd: "zpiasd", placeholder: "test12345" } },
+        },
+      });
+
+      expect(subject.queryByText("test12345")).not.toBeInTheDocument();
+      expect(subject.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
+      expect(subject.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
+      expect(subject.queryByText(Config.profileDefaults.standingDocFileTitle)).not.toBeInTheDocument();
+    });
   });
 
   const fillText = (label: string, value: string) => {

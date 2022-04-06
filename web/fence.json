@@ -3,6 +3,12 @@
   "dependencies": [
     "@aws-amplify/auth",
     "@aws-amplify/core",
+    "@aws-amplify/storage",
+    "@aws-crypto/sha256-browser",
+    "@aws-sdk/protocol-http",
+    "@aws-sdk/s3-request-presigner",
+    "@aws-sdk/url-parser",
+    "@aws-sdk/util-format-url",
     "@businessnjgovnavigator/content/fieldConfig/config.json",
     "@businessnjgovnavigator/content/roadmaps/steps.json",
     "@businessnjgovnavigator/content/roadmaps/task-dependencies.json",

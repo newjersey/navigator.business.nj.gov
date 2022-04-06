@@ -38,6 +38,8 @@ const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
 const useFakeSelfReg = process.env.USE_FAKE_SELF_REG || "";
 const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 
+const documentS3Bucket = `nj-bfs-user-documents-${ssmLocation}`;
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -102,6 +104,11 @@ const serverlessConfiguration: AWS = {
           },
           {
             Effect: "Allow",
+            Action: ["s3:PutObject", "s3:ListBucket", "s3:GetObject"],
+            Resource: `arn:aws:s3:::${documentS3Bucket}/*`,
+          },
+          {
+            Effect: "Allow",
             Action: ["secretsmanager:GetSecretValue"],
             Resource: `arn:aws:secretsmanager:${region}:*:secret:*`,
           },
@@ -116,6 +123,7 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       USERS_TABLE: usersTable,
       LICENSE_STATUS_BASE_URL: licenseStatusBaseUrl,
+      DOCUMENT_S3_BUCKET: documentS3Bucket,
       CMS_OAUTH_CLIENT_ID: cmsoAuthClientId,
       CMS_OAUTH_CLIENT_SECRET: cmsoAuthClientSecret,
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,

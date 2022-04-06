@@ -25,7 +25,13 @@ export const FormationSuccessDocument = (props: Props): ReactElement => {
       {!props.downloadLink ? (
         contents
       ) : (
-        <a data-testid={props.label} className="no-link-style text-base-darkest" href={props.downloadLink}>
+        <a
+          data-testid={props.label}
+          className="no-link-style text-base-darkest"
+          href={props.downloadLink}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           {contents}
         </a>
       )}

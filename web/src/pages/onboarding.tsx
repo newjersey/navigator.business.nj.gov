@@ -238,6 +238,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         taxId: undefined,
         notes: "",
         ownershipTypeIds: [],
+        documents: { formationDoc: "", standingDoc: "", certifiedDoc: "" },
         existingEmployees: undefined,
         taxPin: undefined,
         sectorId: undefined,
