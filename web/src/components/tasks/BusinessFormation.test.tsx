@@ -1267,25 +1267,28 @@ describe("<BusinessFormation />", () => {
       });
 
       it("adds members using registered agent data using checkbox", async () => {
-        renderWithData({
-          agentNumberOrManual: "MANUAL_ENTRY",
-          members: [],
-          agentName: `agent 1`,
-          agentEmail: `agent@email.com`,
-          agentOfficeAddressLine1: `123 agent address`,
-          agentOfficeAddressLine2: `agent suite 201`,
-          agentOfficeAddressCity: `agent-city-402`,
-          agentOfficeAddressState: "NJ",
-          agentOfficeAddressZipCode: `07601`,
-        });
+        renderWithData(
+          {
+            agentNumberOrManual: "MANUAL_ENTRY",
+            members: [],
+            contactFirstName: "John",
+            contactLastName: "Smith",
+            businessAddressLine1: `123 business address`,
+            businessAddressLine2: `business suite 201`,
+            businessAddressState: "NJ",
+            businessAddressZipCode: `07601`,
+          },
+          { municipality: generateMunicipality({ displayName: "Newark" }) }
+        );
+
         await submitBusinessNameTab();
         await submitBusinessTab();
         await openMemberModal();
         selectCheckBox(displayContent.membersModal.sameNameCheckboxText);
-        expect(getInputElementByLabel("Member name").value).toBe("agent 1");
-        expect(getInputElementByLabel("Member address line1").value).toBe("123 agent address");
-        expect(getInputElementByLabel("Member address line2").value).toBe("agent suite 201");
-        expect(getInputElementByLabel("Member address city").value).toBe("agent-city-402");
+        expect(getInputElementByLabel("Member name").value).toBe("John Smith");
+        expect(getInputElementByLabel("Member address line1").value).toBe("123 business address");
+        expect(getInputElementByLabel("Member address line2").value).toBe("business suite 201");
+        expect(getInputElementByLabel("Member address city").value).toBe("Newark");
         expect(getInputElementByLabel("Member address state").value).toBe("NJ");
         expect(getInputElementByLabel("Member address zip code").value).toBe("07601");
       });

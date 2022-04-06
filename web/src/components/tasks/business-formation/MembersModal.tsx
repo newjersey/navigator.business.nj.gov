@@ -5,7 +5,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { StateDropdown } from "@/components/tasks/business-formation/StateDropdown";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyFormationMember, FormationMember } from "@businessnjgovnavigator/shared";
+import { createEmptyFormationMember, FormationMember, Municipality } from "@businessnjgovnavigator/shared";
 import {
   Checkbox,
   Dialog,
@@ -68,12 +68,12 @@ export const MembersModal = (props: Props): ReactElement => {
     if (state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && checked) {
       setMemberData({
         ...memberData,
-        name: state.formationFormData.agentName,
-        addressCity: state.formationFormData.agentOfficeAddressCity,
-        addressLine1: state.formationFormData.agentOfficeAddressLine1,
-        addressLine2: state.formationFormData.agentOfficeAddressLine2,
-        addressState: state.formationFormData.agentOfficeAddressState,
-        addressZipCode: state.formationFormData.agentOfficeAddressZipCode,
+        name: `${state.formationFormData.contactFirstName} ${state.formationFormData.contactLastName}`,
+        addressCity: (state.formationFormData.businessAddressCity as Municipality)?.displayName,
+        addressLine1: state.formationFormData.businessAddressLine1,
+        addressLine2: state.formationFormData.businessAddressLine2,
+        addressState: state.formationFormData.businessAddressState,
+        addressZipCode: state.formationFormData.businessAddressZipCode,
       });
       setMemberErrorMap(createMemberErrorMap(false));
     }
