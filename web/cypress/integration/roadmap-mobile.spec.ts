@@ -17,7 +17,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const industry = LookupIndustryById("e-commerce");
     const homeBasedQuestion = false;
     const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-    const companyType = "general-partnership";
+    const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
 
     completeNewBusinessOnboarding({
@@ -25,7 +25,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
-      companyType,
+      legalStructureId,
       townDisplayName,
     });
 
@@ -136,7 +136,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const industry = LookupIndustryById("e-commerce");
     const homeBasedQuestion = false;
     const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-    const companyType = "general-partnership";
+    const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
 
     completeNewBusinessOnboarding({
@@ -144,7 +144,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
-      companyType,
+      legalStructureId,
       townDisplayName,
     });
 

@@ -86,7 +86,7 @@ type registration = {
 interface startingOnboardingData {
   businessName: string;
   industry: Industry;
-  companyType: string;
+  legalStructureId: string;
   townDisplayName: string | undefined;
   homeBasedQuestion: boolean | undefined;
   liquorLicenseQuestion: boolean | undefined;
@@ -95,7 +95,7 @@ interface startingOnboardingData {
 export const completeNewBusinessOnboarding = ({
   businessName,
   industry,
-  companyType,
+  legalStructureId,
   townDisplayName,
   homeBasedQuestion,
   liquorLicenseQuestion,
@@ -132,10 +132,10 @@ export const completeNewBusinessOnboarding = ({
   onOnboardingPage.clickNext();
 
   cy.url().should("include", "onboarding?page=4");
-  onOnboardingPage.selectLegalStructure(companyType);
+  onOnboardingPage.selectLegalStructure(legalStructureId);
   onOnboardingPage
-    .getLegalStructure(companyType)
-    .parents(`[data-testid=${companyType}]`)
+    .getLegalStructure(legalStructureId)
+    .parents(`[data-testid=${legalStructureId}]`)
     .find("span")
     .first()
     .should("have.class", "Mui-checked");
@@ -282,7 +282,7 @@ interface existingProfileData extends existingOnboardingData {
 export const checkNewBusinessProfilePage = ({
   businessName,
   industry,
-  companyType,
+  legalStructureId: companyType,
   townDisplayName,
   homeBasedQuestion,
   liquorLicenseQuestion,
@@ -402,7 +402,7 @@ export const checkExistingBusinessProfilePage = ({
 export const updateNewBusinessProfilePage = ({
   businessName,
   industry,
-  companyType,
+  legalStructureId: companyType,
   townDisplayName,
   homeBasedQuestion,
   liquorLicenseQuestion,

@@ -31,7 +31,7 @@ describe("Profile [feature] [all] [group1]", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
       const industry = randomElementFromArray(industriesNotHomeBasedOrLiquorLicense as Industry[]);
       const businessName = `Generic Business Name ${randomInt()}`;
-      const companyType = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
@@ -43,7 +43,7 @@ describe("Profile [feature] [all] [group1]", () => {
         homeBasedQuestion,
         liquorLicenseQuestion,
         townDisplayName,
-        companyType,
+        legalStructureId,
       });
 
       checkNewBusinessProfilePage({
@@ -52,12 +52,12 @@ describe("Profile [feature] [all] [group1]", () => {
         homeBasedQuestion,
         liquorLicenseQuestion,
         townDisplayName,
-        companyType,
+        legalStructureId,
       });
 
       const newBusinessName = `Generic Business Name ${randomInt()}`;
       const newIndustry = randomElementFromArray(homeBasedIndustries as Industry[]);
-      const newCompanyType = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const newLegalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const newtownDisplayName = "Bass River";
       const newHomeBasedQuestion = Boolean(randomInt() % 2);
       const newEmployerId = randomInt(9).toString();
@@ -66,7 +66,7 @@ describe("Profile [feature] [all] [group1]", () => {
 
       updateNewBusinessProfilePage({
         businessName: newBusinessName,
-        companyType: newCompanyType,
+        legalStructureId: newLegalStructureId,
         industry: newIndustry,
         townDisplayName: newtownDisplayName,
         homeBasedQuestion: newHomeBasedQuestion,
@@ -82,7 +82,7 @@ describe("Profile [feature] [all] [group1]", () => {
       const homeBasedQuestion = Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-      const companyType = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
 
       completeNewBusinessOnboarding({
@@ -90,7 +90,7 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        companyType,
+        legalStructureId,
         townDisplayName,
       });
 
@@ -99,7 +99,7 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        companyType,
+        legalStructureId,
         townDisplayName,
       });
 
@@ -113,7 +113,7 @@ describe("Profile [feature] [all] [group1]", () => {
       const businessName = `Generic Business Name ${randomInt()}`;
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
-      const companyType = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
 
       completeNewBusinessOnboarding({
@@ -121,7 +121,7 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        companyType,
+        legalStructureId,
         townDisplayName,
       });
 
@@ -130,7 +130,7 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        companyType,
+        legalStructureId,
         townDisplayName,
       });
 
@@ -145,7 +145,7 @@ describe("Profile [feature] [all] [group1]", () => {
       const companyTypeWithTradeName = randomElementFromArray(
         legalStructureWithTradeName as LegalStructure[]
       );
-      const companyType = companyTypeWithTradeName.id;
+      const legalStructureId = companyTypeWithTradeName.id;
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
@@ -155,7 +155,7 @@ describe("Profile [feature] [all] [group1]", () => {
       completeNewBusinessOnboarding({
         businessName,
         industry,
-        companyType,
+        legalStructureId,
         homeBasedQuestion,
         liquorLicenseQuestion,
         townDisplayName,
@@ -164,7 +164,7 @@ describe("Profile [feature] [all] [group1]", () => {
       checkNewBusinessProfilePage({
         businessName,
         industry,
-        companyType,
+        legalStructureId,
         homeBasedQuestion,
         liquorLicenseQuestion,
         townDisplayName,
