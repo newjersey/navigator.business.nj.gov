@@ -1,16 +1,14 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
-import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   profileData: ProfileData;
@@ -21,15 +19,10 @@ export const MiniProfile = (props: Props): ReactElement => {
   const { isLoading } = useUserData();
   const [showingAll, setShowingAll] = useState(!isMobile);
   const router = useRouter();
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
 
   const editOnClick = () => {
-    if (isAuthenticated == IsAuthenticated.TRUE) {
-      analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
-      router.push("/profile");
-    } else {
-      setModalIsVisible(true);
-    }
+    analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
+    router.push("/profile");
   };
 
   useEffect(() => {

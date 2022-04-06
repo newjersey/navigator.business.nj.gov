@@ -84,6 +84,16 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
       <MenuItem
         onClick={() => {
+          analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+          router.push("/profile");
+        }}
+      >
+        <Button style="tertiary" textBold smallText>
+          {Config.navigationDefaults.profileLinkText}
+        </Button>
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
           analytics.event.guest_menu.click.go_to_myNJ_registration();
           onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
         }}

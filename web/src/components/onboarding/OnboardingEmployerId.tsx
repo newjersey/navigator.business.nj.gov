@@ -10,6 +10,7 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
   headerAriaLevel?: number;
+  handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingEmployerId = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
@@ -33,6 +34,7 @@ export const OnboardingEmployerId = ({ headerAriaLevel = 2, ...props }: Props): 
         maxLength={9}
         minLength={9}
         headerAriaLevel={headerAriaLevel}
+        handleChange={props.handleChangeOverride}
       />
     </>
   );

@@ -1,4 +1,5 @@
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
@@ -11,7 +12,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { withRoadmap } from "@/test/helpers";
+import { withAuthAlert, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -46,9 +47,11 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 describe("profile", () => {
   let subject: RenderResult;
+  let setModalIsVisible: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
+    setModalIsVisible = jest.fn();
     useMockRouter({});
     setupStatefulUserDataContext();
     mockApi.postGetAnnualFilings.mockImplementation((userData) => Promise.resolve(userData));
@@ -58,26 +61,32 @@ describe("profile", () => {
     municipalities,
     displayContent,
     userData,
+    isAuthenticated,
   }: {
     municipalities?: Municipality[];
     displayContent?: LoadDisplayContent;
     userData?: UserData;
+    isAuthenticated?: IsAuthenticated;
   }): RenderResult => {
     const genericTown =
       userData && userData.profileData.municipality
         ? userData.profileData.municipality
         : generateMunicipality({ displayName: "GenericTown" });
     return render(
-      <WithStatefulUserData
-        initialUserData={
-          userData || generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
-        }
-      >
-        <Profile
-          displayContent={displayContent || createEmptyLoadDisplayContent()}
-          municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]}
-        />
-      </WithStatefulUserData>
+      withAuthAlert(
+        <WithStatefulUserData
+          initialUserData={
+            userData || generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
+          }
+        >
+          <Profile
+            displayContent={displayContent || createEmptyLoadDisplayContent()}
+            municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]}
+          />
+        </WithStatefulUserData>,
+        isAuthenticated ?? IsAuthenticated.TRUE,
+        { modalIsVisible: false, setModalIsVisible }
+      )
     );
   };
 
@@ -91,6 +100,66 @@ describe("profile", () => {
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
     expect(subject.queryByText(Config.profileDefaults.pageTitle)).not.toBeInTheDocument();
     expect(subject.queryByText(Config.profileDefaults.pageTitle)).not.toBeInTheDocument();
+  });
+
+  describe("guest mode", () => {
+    describe("when prospective business owner", () => {
+      beforeEach(() => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({
+            hasExistingBusiness: false,
+            legalStructureId: "limited-liability-company",
+          }),
+        });
+        subject = renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
+      });
+
+      opensModalWhenEditingNonGuestModeProfileFields();
+    });
+
+    describe("when has existing business", () => {
+      beforeEach(() => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ hasExistingBusiness: true }),
+        });
+        subject = renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
+      });
+
+      opensModalWhenEditingNonGuestModeProfileFields();
+
+      it("opens registration modal when user tries to change Tax PIN", async () => {
+        fireEvent.change(subject.getByLabelText("Tax pin"), { target: { value: "123456789" } });
+        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+      });
+    });
+
+    function opensModalWhenEditingNonGuestModeProfileFields() {
+      it("user is able to edit name and save", async () => {
+        fillText("Business name", "Cool Computers");
+        clickSave();
+        await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalled());
+      });
+
+      it("opens registration modal when user tries to change EIN", async () => {
+        fireEvent.change(subject.getByLabelText("Employer id"), { target: { value: "123456789" } });
+        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+      });
+
+      it("opens registration modal when user tries to change entity ID", async () => {
+        fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "123456789" } });
+        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+      });
+
+      it("opens registration modal when user tries to change NJ Tax ID", async () => {
+        fireEvent.change(subject.getByLabelText("Tax id"), { target: { value: "123456789" } });
+        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+      });
+
+      it("opens registration modal when user tries to change Notes", async () => {
+        fireEvent.change(subject.getByLabelText("Notes"), { target: { value: "some note" } });
+        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+      });
+    }
   });
 
   describe("starting new business", () => {

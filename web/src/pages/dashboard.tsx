@@ -6,7 +6,6 @@ import { Button } from "@/components/njwds-extended/Button";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -17,12 +16,11 @@ import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
+import React, { ReactElement, useEffect, useMemo, useState } from "react";
 
 interface Props {
   displayContent: DashboardDisplayContent;
@@ -38,15 +36,9 @@ const DashboardPage = (props: Props): ReactElement => {
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
-
   const editOnClick = () => {
-    if (isAuthenticated == IsAuthenticated.TRUE) {
-      analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
-      router.push("/profile");
-    } else {
-      setModalIsVisible(true);
-    }
+    analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
+    router.push("/profile");
   };
 
   useEffect(() => {

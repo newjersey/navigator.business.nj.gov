@@ -27,17 +27,31 @@ export const NavSideBarUserSettings = (): ReactElement => {
   const accountString = isAuthenticated ? userName : Config.navigationDefaults.navBarGuestText;
 
   const UnAuthenticatedMenu = () => (
-    <div className="margin-bottom-2">
-      <Button
-        style="tertiary"
-        onClick={() => {
-          analytics.event.guest_menu.click.go_to_myNJ_registration();
-          onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
-        }}
-      >
-        <span className="text-base">{Config.navigationDefaults.navBarGuestRegistrationText}</span>
-      </Button>
-    </div>
+    <>
+      <div className="margin-bottom-2">
+        <Link href="/profile" passHref>
+          <Button
+            style="tertiary"
+            onClick={() => {
+              analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+            }}
+          >
+            <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
+          </Button>
+        </Link>
+      </div>
+      <div className="margin-bottom-2">
+        <Button
+          style="tertiary"
+          onClick={() => {
+            analytics.event.guest_menu.click.go_to_myNJ_registration();
+            onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
+          }}
+        >
+          <span className="text-base">{Config.navigationDefaults.navBarGuestRegistrationText}</span>
+        </Button>
+      </div>
+    </>
   );
 
   const AuthenticatedMenu = () => (

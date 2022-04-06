@@ -21,7 +21,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
-import { useAuthProtectedPage } from "@/lib/auth/useAuthProtectedPage";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -38,7 +38,7 @@ import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getSectionCompletion, OnboardingStatusLookup, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import { RoadmapContext } from "@/pages/_app";
+import { AuthAlertContext, RoadmapContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyProfileData, Municipality, ProfileData, UserData } from "@businessnjgovnavigator/shared";
 import { CircularProgress } from "@mui/material";
@@ -53,7 +53,6 @@ interface Props {
 }
 
 const ProfilePage = (props: Props): ReactElement => {
-  useAuthProtectedPage();
   const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
@@ -62,6 +61,8 @@ const ProfilePage = (props: Props): ReactElement => {
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
+  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+
   const mergeDisplayContent = (): UserDisplayContent => {
     const hasBusiness = userData?.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
     return {
@@ -104,6 +105,13 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
+  const showRegistrationModalForGuest = (): (() => void) | undefined => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      return () => setModalIsVisible(true);
+    }
+    return undefined;
+  };
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (!userData) return;
@@ -139,18 +147,27 @@ const ProfilePage = (props: Props): ReactElement => {
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} />
+      <OnboardingEmployerId
+        onValidation={onValidation}
+        fieldStates={fieldStates}
+        handleChangeOverride={showRegistrationModalForGuest()}
+      />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       <OnboardingEntityId
         onValidation={onValidation}
         fieldStates={fieldStates}
         disabled={userData?.formationData?.getFilingResponse?.success}
+        handleChangeOverride={showRegistrationModalForGuest()}
       >
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
       </OnboardingEntityId>
-      <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} />
+      <OnboardingTaxId
+        onValidation={onValidation}
+        fieldStates={fieldStates}
+        handleChangeOverride={showRegistrationModalForGuest()}
+      />
       <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingNotes />
+      <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
     </>
   );
 
@@ -191,7 +208,12 @@ const ProfilePage = (props: Props): ReactElement => {
       <hr className="margin-top-3 margin-bottom-4" />
       <Content>{mergedDisplayContent.businessReferences.contentMd}</Content>
       <div className="margin-top-4">
-        <OnboardingEmployerId onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+        <OnboardingEmployerId
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          headerAriaLevel={3}
+          handleChangeOverride={showRegistrationModalForGuest()}
+        />
       </div>
       <div className="margin-top-4">
         <OnboardingEntityId
@@ -199,6 +221,7 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldStates={fieldStates}
           headerAriaLevel={3}
           disabled={userData?.formationData.getFilingResponse?.success}
+          handleChangeOverride={showRegistrationModalForGuest()}
         />
       </div>
       <div className="margin-top-4">
@@ -210,12 +233,22 @@ const ProfilePage = (props: Props): ReactElement => {
         />
       </div>
       <div className="margin-top-4">
-        <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+        <OnboardingTaxId
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          headerAriaLevel={3}
+          handleChangeOverride={showRegistrationModalForGuest()}
+        />
       </div>
       <div className="margin-top-4">
-        <OnboardingTaxPin onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+        <OnboardingTaxPin
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          headerAriaLevel={3}
+          handleChangeOverride={showRegistrationModalForGuest()}
+        />
       </div>
-      <OnboardingNotes headerAriaLevel={3} />
+      <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
     </>
   );
 

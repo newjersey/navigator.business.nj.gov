@@ -24,10 +24,17 @@ export const useAuthProtectedPage = (): void => {
 
 export const useAuthAlertPage = (): void => {
   const { isAuthenticated, setAlertIsVisible, modalIsVisible } = useContext(AuthAlertContext);
+  const router = useRouter();
+
   useMountEffectWhenDefined(() => {
     (async () => {
       if (isAuthenticated === IsAuthenticated.FALSE) {
-        setAlertIsVisible(true);
+        const isShowingSuccessAlert = router.query.success === "true";
+        if (isShowingSuccessAlert) {
+          setAlertIsVisible(false);
+        } else {
+          setAlertIsVisible(true);
+        }
       }
     })();
   }, isAuthenticated);

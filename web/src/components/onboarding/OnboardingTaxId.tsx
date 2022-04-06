@@ -6,6 +6,7 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
   headerAriaLevel?: number;
+  handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingTaxId = (props: Props): ReactElement => {
@@ -18,6 +19,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
       fieldName={fieldName}
       maxLength={9}
       headerAriaLevel={props.headerAriaLevel}
+      handleChange={props.handleChangeOverride}
     />
   );
 };

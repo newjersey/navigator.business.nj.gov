@@ -298,7 +298,7 @@ describe("dashboard", () => {
     expect(subject.getByText("a li")).toBeInTheDocument();
   });
 
-  it("shows registration modal when guest user clicks profile edit button", async () => {
+  it("directs guest-mode user to profile when profile edit button is clicked", async () => {
     const setModalIsVisible = jest.fn();
     const subject = render(
       withAuthAlert(
@@ -315,8 +315,8 @@ describe("dashboard", () => {
       )
     );
     fireEvent.click(subject.getByTestId("grey-callout-link"));
-    expect(setModalIsVisible).toHaveBeenCalled();
-    expect(mockPush).not.toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalled();
+    expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
   it("directs authenticated user to profile when profile edit button is clicked", async () => {
