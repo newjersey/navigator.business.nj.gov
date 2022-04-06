@@ -13,7 +13,7 @@ describe("search business name [feature] [all] [group2]", () => {
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
     const liquorLicenseQuestion =
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-    const companyType = "limited-liability-partnership";
+    const legalStructureId = "limited-liability-partnership";
     const townDisplayName = undefined;
 
     completeNewBusinessOnboarding({
@@ -21,7 +21,7 @@ describe("search business name [feature] [all] [group2]", () => {
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
-      companyType,
+      legalStructureId,
       townDisplayName,
     });
 

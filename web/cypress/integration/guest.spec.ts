@@ -7,7 +7,7 @@ import { completeNewBusinessOnboarding, randomInt } from "../support/helpers";
 describe("Guest Roadmap [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");
   const businessName = `Generic Business Name ${randomInt()}`;
-  const companyType = "limited-liability-company";
+  const legalStructureId = "limited-liability-company";
   const townDisplayName = "Atlantic City";
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
       homeBasedQuestion: false,
       liquorLicenseQuestion: undefined,
       townDisplayName,
-      companyType,
+      legalStructureId,
       isContactMeChecked: true,
     });
   });
@@ -30,7 +30,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     // check roadmap
     cy.get(`[data-business-name='${businessName}']`).should("exist");
     cy.get(`[data-industry='${industry.id}']`).should("exist");
-    cy.get(`[data-legal-structure='${companyType}']`).should("exist");
+    cy.get(`[data-legal-structure='${legalStructureId}']`).should("exist");
     cy.get(`[data-municipality='${townDisplayName}']`).should("exist");
 
     cy.get('[data-testid="self-reg-toast"]').should("be.visible");

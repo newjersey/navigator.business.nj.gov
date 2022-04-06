@@ -23,7 +23,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const homeBasedQuestion = false;
     const liquorLicenseQuestion =
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-    const companyType = "general-partnership";
+    const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
 
     completeNewBusinessOnboarding({
@@ -31,7 +31,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
-      companyType,
+      legalStructureId,
       townDisplayName,
     });
 
@@ -141,7 +141,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
     const liquorLicenseQuestion =
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-    const companyType = "general-partnership";
+    const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
 
     completeNewBusinessOnboarding({
@@ -149,7 +149,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
-      companyType,
+      legalStructureId,
       townDisplayName,
     });
 
@@ -169,7 +169,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
     const liquorLicenseQuestion =
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-    const companyType = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+    const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
     const townDisplayName = "Absecon";
 
     cy.intercept("POST", "/local/api/users", (req) => req.continue()).as("new-user");
@@ -179,7 +179,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
-      companyType,
+      legalStructureId,
       townDisplayName,
     });
 

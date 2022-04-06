@@ -12,7 +12,7 @@ describe("check license status [feature] [all] [group1]", () => {
     const industry = LookupIndustryById("home-contractor");
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
     const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-    const companyType = "general-partnership";
+    const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
 
     completeNewBusinessOnboarding({
@@ -20,7 +20,7 @@ describe("check license status [feature] [all] [group1]", () => {
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
-      companyType,
+      legalStructureId,
       townDisplayName,
     });
 
