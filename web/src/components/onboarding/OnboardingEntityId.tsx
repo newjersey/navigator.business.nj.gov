@@ -10,6 +10,7 @@ interface Props {
   fieldStates: ProfileFieldErrorMap;
   disabled?: boolean;
   headerAriaLevel?: number;
+  handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingEntityId = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
@@ -33,6 +34,7 @@ export const OnboardingEntityId = ({ headerAriaLevel = 2, ...props }: Props): Re
         maxLength={10}
         disabled={props.disabled}
         headerAriaLevel={headerAriaLevel}
+        handleChange={props.handleChangeOverride}
       />
       {props.children}
     </>

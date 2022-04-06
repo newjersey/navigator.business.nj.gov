@@ -8,6 +8,7 @@ interface Props {
   fieldStates: ProfileFieldErrorMap;
   children?: ReactNode;
   headerAriaLevel?: number;
+  handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingTaxPin = (props: Props): ReactElement => {
@@ -23,6 +24,7 @@ export const OnboardingTaxPin = (props: Props): ReactElement => {
         minLength={4}
         validationText={Config.profileDefaults.taxPinErrorText}
         headerAriaLevel={props.headerAriaLevel}
+        handleChange={props.handleChangeOverride}
       />
       {props.children}
     </>

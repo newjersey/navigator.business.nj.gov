@@ -24,7 +24,11 @@ export const OnboardingField = ({
   };
 
   const handleChange = (value: string): void => {
-    props.handleChange && props.handleChange(value);
+    if (props.handleChange) {
+      props.handleChange(value);
+      return;
+    }
+
     const profileData = { ...state.profileData } as Record<
       keyof ProfileData,
       keyof ProfileData[keyof ProfileData]
