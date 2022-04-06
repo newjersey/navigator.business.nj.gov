@@ -4,16 +4,14 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationDocuments } from "@/components/tasks/business-formation/BusinessFormationDocuments";
 import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { BusinessFormationNotifications } from "@/components/tasks/business-formation/BusinessFormationNotifications";
-import { ContactFirstName } from "@/components/tasks/business-formation/ContactFirstName";
-import { ContactLastName } from "@/components/tasks/business-formation/ContactLastName";
-import { ContactPhoneNumber } from "@/components/tasks/business-formation/ContactPhoneNumber";
+import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { PaymentTypeTable } from "@/components/tasks/business-formation/PaymentTypeTable";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTop } from "@/lib/utils/helpers";
+import { getPhoneNumberFormat, scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -87,15 +85,38 @@ export const PaymentSection = (): ReactElement => {
       <Content>{Config.businessFormationDefaults.contactInformationHeader}</Content>
       <div className="grid-row grid-gap-2 margin-top-2">
         <div className="form-input margin-bottom-2 tablet:grid-col-6">
-          <ContactFirstName />
+          <BusinessFormationTextField
+            label={Config.businessFormationDefaults.contactFirstNameLabel}
+            placeholder={Config.businessFormationDefaults.contactFirstNamePlaceholder}
+            fieldName="contactFirstName"
+            required={true}
+            validationText={Config.businessFormationDefaults.contactFirstnameErrorText}
+          />
         </div>
         <div className="form-input margin-bottom-2 tablet:grid-col-6">
-          <ContactLastName />
+          <BusinessFormationTextField
+            label={Config.businessFormationDefaults.contactLastNameLabel}
+            placeholder={Config.businessFormationDefaults.contactLastNamePlaceholder}
+            fieldName="contactLastName"
+            required={true}
+            validationText={Config.businessFormationDefaults.contactLastnameErrorText}
+          />
         </div>
       </div>
       <div className="grid-row">
         <div className="tablet:grid-col-6">
-          <ContactPhoneNumber />
+          <div className="form-input margin-bottom-2">
+            <BusinessFormationTextField
+              validationText={Config.businessFormationDefaults.contactPhoneNumberErrorText}
+              label={Config.businessFormationDefaults.contactPhoneNumberLabel}
+              placeholder={Config.businessFormationDefaults.contactPhoneNumberPlaceholder}
+              fieldName={"contactPhoneNumber"}
+              numericProps={{
+                maxLength: 10,
+              }}
+              visualFilter={getPhoneNumberFormat}
+            />
+          </div>
         </div>
       </div>
       <hr className="margin-bottom-2" />
