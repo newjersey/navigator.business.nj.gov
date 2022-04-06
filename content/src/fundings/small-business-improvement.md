@@ -8,8 +8,6 @@ fundingType: grant
 agency:
   - NJEDA
 publishStageArchive: null
-openDate: ""
-dueDate: ""
 status: opening soon
 programFrequency: ongoing
 businessStage: operating
@@ -21,10 +19,15 @@ preferenceForOpportunityZone: yes
 county:
   - All
 sector: []
+openDate: ""
+dueDate: ""
 ---
 
 The Small Business Improvement Grant offers reimbursement for costs associated with completed building improvements or purchased new furniture, fixtures and equipment made since March 9th, 2020.
 
-**Benefits:** Grants equal to 50% of eligible total project costs up to $50,000.
+---
+### Eligibility
+* Small businesses and nonprofits in the process of making improvements to their business with a minimum expense of $5,000
 
-**Eligibility**: Small businesses and nonprofits making improvements with costs totaling at least $5,000.
+>**Benefits** 
+>* Grants are equal to 50% of eligible total project costs up to $50,000
