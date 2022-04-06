@@ -1,4 +1,5 @@
 ---
-checkboxText: "The name and address is the same as the registered agent"
+checkboxText: "Use Business Address"
 ---
+
 ### Add New Member

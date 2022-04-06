@@ -65,10 +65,10 @@ export const MembersModal = (props: Props): ReactElement => {
 
   const checkBoxCheck = (checked: boolean) => {
     setUseAgentAddress(checked);
-    if (state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && checked) {
+    if (checked) {
       setMemberData({
         ...memberData,
-        name: `${state.formationFormData.contactFirstName} ${state.formationFormData.contactLastName}`,
+        name: `${state.formationFormData.contactFirstName.trim()} ${state.formationFormData.contactLastName.trim()}`,
         addressCity: (state.formationFormData.businessAddressCity as Municipality)?.displayName,
         addressLine1: state.formationFormData.businessAddressLine1,
         addressLine2: state.formationFormData.businessAddressLine2,
@@ -144,21 +144,17 @@ export const MembersModal = (props: Props): ReactElement => {
 
       <DialogContent dividers={true}>
         <div className="form-input margin-bottom-1 margin-top-1">
-          {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" ? (
-            <FormGroup className="padding-left-105">
-              <FormControlLabel
-                label={state.displayContent.membersModal.sameNameCheckboxText}
-                control={
-                  <Checkbox
-                    checked={useAgentAddress}
-                    onChange={(event) => checkBoxCheck(event.target.checked)}
-                  />
-                }
-              />
-            </FormGroup>
-          ) : (
-            <></>
-          )}
+          <FormGroup className="padding-left-105">
+            <FormControlLabel
+              label={state.displayContent.membersModal.sameNameCheckboxText}
+              control={
+                <Checkbox
+                  checked={useAgentAddress}
+                  onChange={(event) => checkBoxCheck(event.target.checked)}
+                />
+              }
+            />
+          </FormGroup>
 
           <form ref={formRef} data-testid="member" className="padding-top-1" onSubmit={onSubmit}>
             <Content>{Config.businessFormationDefaults.memberModalNameLabel}</Content>
