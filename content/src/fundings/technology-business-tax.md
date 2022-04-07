@@ -9,8 +9,6 @@ fundingType: tax credit
 agency:
   - NJEDA
 publishStageArchive: ""
-openDate: 05/01/2022
-dueDate: 07/01/2022
 status: deadline
 programFrequency: reoccuring
 businessStage: early-stage
@@ -29,10 +27,13 @@ sector:
   - Health Care and Social Assistance
   - Professional, Scientific and Technical Services
   - Other Services (except Public Administration)
+openDate: 05/01/2022
+dueDate: 07/01/2022
 ---
 
 The Net Operating Loss Program enables qualified, unprofitable New Jersey-based technology or biotechnology businesses to sell a percentage of their net operating losses (NOL) and unused research and development (R&D) tax credits to unrelated profitable businesses.
 
-**Benefits:** Ability to sell NOL and unused R&D tax credits for up to 80% of their value up to a total amount of $20M.
-
+---
 **Eligibility:** Technology or life sciences companies with up to 225 employees in the United States with an operating loss for at least the last 2 years.
+
+**Benefits:** Ability to sell NOL and unused R&D tax credits for up to 80% of their value up to a total amount of $20M.
