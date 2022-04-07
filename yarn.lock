@@ -3486,7 +3486,7 @@ __metadata:
     rimraf: 3.0.2
     serverless: 3.10.0
     serverless-dynamodb-local: 0.2.40
-    serverless-http: 2.7.0
+    serverless-http: 3.0.1
     serverless-offline: 8.5.0
     serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
@@ -3653,7 +3653,7 @@ __metadata:
     semantic-release: 19.0.2
     serverless: 3.10.0
     serverless-dynamodb-local: 0.2.40
-    serverless-http: 2.7.0
+    serverless-http: 3.0.1
     serverless-offline: 8.5.0
     serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
@@ -4597,7 +4597,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:11.9.0":
+"@emotion/react@npm:11.9.0, @emotion/react@npm:^11.1.1":
   version: 11.9.0
   resolution: "@emotion/react@npm:11.9.0"
   dependencies:
@@ -4620,29 +4620,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.1.1":
-  version: 11.8.2
-  resolution: "@emotion/react@npm:11.8.2"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@emotion/babel-plugin": ^11.7.1
-    "@emotion/cache": ^11.7.1
-    "@emotion/serialize": ^1.0.2
-    "@emotion/utils": ^1.1.0
-    "@emotion/weak-memoize": ^0.2.5
-    hoist-non-react-statics: ^3.3.1
-  peerDependencies:
-    "@babel/core": ^7.0.0
-    react: ">=16.8.0"
-  peerDependenciesMeta:
-    "@babel/core":
-      optional: true
-    "@types/react":
-      optional: true
-  checksum: a8733f8375f9798953019872137326f39e5171b3286535fe34a695d63067a2c0f0f154beb6d117361206ef04a584fa4adef0ecc450654b6af4695b1d893d2496
-  languageName: node
-  linkType: hard
-
 "@emotion/serialize@npm:^0.11.15, @emotion/serialize@npm:^0.11.16":
   version: 0.11.16
   resolution: "@emotion/serialize@npm:0.11.16"
@@ -4656,20 +4633,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/serialize@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@emotion/serialize@npm:1.0.2"
-  dependencies:
-    "@emotion/hash": ^0.8.0
-    "@emotion/memoize": ^0.7.4
-    "@emotion/unitless": ^0.7.5
-    "@emotion/utils": ^1.0.0
-    csstype: ^3.0.2
-  checksum: ff84fbe09ec06e7ad3deaef5c5b5ea6af6a522e8efe49c2b398b875d06872626284a83b6b18b7f777750c94264a61e7924157d869d9bca2f675731bbb91a6055
-  languageName: node
-  linkType: hard
-
-"@emotion/serialize@npm:^1.0.3":
+"@emotion/serialize@npm:^1.0.2, @emotion/serialize@npm:^1.0.3":
   version: 1.0.3
   resolution: "@emotion/serialize@npm:1.0.3"
   dependencies:
@@ -9137,13 +9101,6 @@ __metadata:
   version: 4.2.2
   resolution: "@types/aria-query@npm:4.2.2"
   checksum: 6f2ce11d91e2d665f3873258db19da752d91d85d3679eb5efcdf9c711d14492287e1e4eb52613b28e60375841a9e428594e745b68436c963d8bad4bf72188df3
-  languageName: node
-  linkType: hard
-
-"@types/aws-lambda@npm:^8.10.56":
-  version: 8.10.93
-  resolution: "@types/aws-lambda@npm:8.10.93"
-  checksum: 82eac08a9e1c77724708192ff5c487ffbef572d4dd3851908c56c8bd7f174dd3fa558090ff5c499e04c3e7afa0dc885fb8cf12cd1b1044542b55b17c61846d14
   languageName: node
   linkType: hard
 
@@ -30565,15 +30522,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-http@npm:2.7.0":
-  version: 2.7.0
-  resolution: "serverless-http@npm:2.7.0"
-  dependencies:
-    "@types/aws-lambda": ^8.10.56
-  dependenciesMeta:
-    "@types/aws-lambda":
-      optional: true
-  checksum: caf128423daa23c2d20a805560a34ca3a7fe576400a2f2a27505d42031c6c94b2f4fbcf85e1adf6fa750f4efa11d00454559511331771295daadff31ed5564a6
+"serverless-http@npm:3.0.1":
+  version: 3.0.1
+  resolution: "serverless-http@npm:3.0.1"
+  checksum: 2f35619e9effa430c9e90c5b636cfe662d2f47bf70628ad1b12845d784a9e4c706c139224175bca3b4fd0a13297ee81da5ce3e7d35f0654136497453e18c0c35
   languageName: node
   linkType: hard
 
