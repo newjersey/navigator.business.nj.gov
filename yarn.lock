@@ -131,22 +131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/sha256-browser@npm:^1.0.0":
-  version: 1.2.2
-  resolution: "@aws-crypto/sha256-browser@npm:1.2.2"
-  dependencies:
-    "@aws-crypto/ie11-detection": ^1.0.0
-    "@aws-crypto/sha256-js": ^1.2.2
-    "@aws-crypto/supports-web-crypto": ^1.0.0
-    "@aws-crypto/util": ^1.2.2
-    "@aws-sdk/types": ^3.1.0
-    "@aws-sdk/util-locate-window": ^3.0.0
-    tslib: ^1.11.1
-  checksum: 1b67b3d4b308ccb7b1e41da45742041053da814d32095484c6bf2f4e90e67d0b7be6fe2bedacb6805ba1cccf9fa17101c435a8c81fd89bec50a677bb0d5c207e
-  languageName: node
-  linkType: hard
-
-"@aws-crypto/sha256-browser@npm:^2.0.1":
+"@aws-crypto/sha256-browser@npm:2.0.1":
   version: 2.0.1
   resolution: "@aws-crypto/sha256-browser@npm:2.0.1"
   dependencies:
@@ -159,6 +144,21 @@ __metadata:
     "@aws-sdk/util-utf8-browser": ^3.0.0
     tslib: ^1.11.1
   checksum: 8377062f3433338ce51eaa3472b82da1d7665bb45509b39d3f86679d9bea2d036df54ba34b58e5a945e528c10f6188513c0b97a9ca39e86f3e77351bd624c81d
+  languageName: node
+  linkType: hard
+
+"@aws-crypto/sha256-browser@npm:^1.0.0":
+  version: 1.2.2
+  resolution: "@aws-crypto/sha256-browser@npm:1.2.2"
+  dependencies:
+    "@aws-crypto/ie11-detection": ^1.0.0
+    "@aws-crypto/sha256-js": ^1.2.2
+    "@aws-crypto/supports-web-crypto": ^1.0.0
+    "@aws-crypto/util": ^1.2.2
+    "@aws-sdk/types": ^3.1.0
+    "@aws-sdk/util-locate-window": ^3.0.0
+    tslib: ^1.11.1
+  checksum: 1b67b3d4b308ccb7b1e41da45742041053da814d32095484c6bf2f4e90e67d0b7be6fe2bedacb6805ba1cccf9fa17101c435a8c81fd89bec50a677bb0d5c207e
   languageName: node
   linkType: hard
 
@@ -407,7 +407,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:^3.58.0":
+"@aws-sdk/client-s3@npm:3.58.0":
   version: 3.58.0
   resolution: "@aws-sdk/client-s3@npm:3.58.0"
   dependencies:
@@ -1304,7 +1304,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/protocol-http@npm:3.58.0, @aws-sdk/protocol-http@npm:^3.58.0":
+"@aws-sdk/protocol-http@npm:3.58.0":
   version: 3.58.0
   resolution: "@aws-sdk/protocol-http@npm:3.58.0"
   dependencies:
@@ -1366,7 +1366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/s3-request-presigner@npm:^3.58.0":
+"@aws-sdk/s3-request-presigner@npm:3.58.0":
   version: 3.58.0
   resolution: "@aws-sdk/s3-request-presigner@npm:3.58.0"
   dependencies:
@@ -1496,7 +1496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/url-parser@npm:3.55.0, @aws-sdk/url-parser@npm:^3.55.0":
+"@aws-sdk/url-parser@npm:3.55.0":
   version: 3.55.0
   resolution: "@aws-sdk/url-parser@npm:3.55.0"
   dependencies:
@@ -1677,7 +1677,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/util-format-url@npm:3.58.0, @aws-sdk/util-format-url@npm:^3.58.0":
+"@aws-sdk/util-format-url@npm:3.58.0":
   version: 3.58.0
   resolution: "@aws-sdk/util-format-url@npm:3.58.0"
   dependencies:
@@ -3447,7 +3447,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/api@workspace:api"
   dependencies:
     "@aws-sdk/client-dynamodb": 3.58.0
-    "@aws-sdk/client-s3": ^3.58.0
+    "@aws-sdk/client-s3": 3.58.0
     "@aws-sdk/lib-dynamodb": 3.58.0
     "@aws-sdk/util-dynamodb": 3.58.0
     "@businessnjgovnavigator/shared": "*"
@@ -3526,15 +3526,15 @@ __metadata:
   dependencies:
     "@aws-amplify/auth": 4.5.0
     "@aws-amplify/core": 4.5.0
-    "@aws-crypto/sha256-browser": ^2.0.1
+    "@aws-crypto/sha256-browser": 2.0.1
     "@aws-sdk/client-dynamodb": 3.58.0
-    "@aws-sdk/client-s3": ^3.58.0
+    "@aws-sdk/client-s3": 3.58.0
     "@aws-sdk/lib-dynamodb": 3.58.0
-    "@aws-sdk/protocol-http": ^3.58.0
-    "@aws-sdk/s3-request-presigner": ^3.58.0
-    "@aws-sdk/url-parser": ^3.55.0
+    "@aws-sdk/protocol-http": 3.58.0
+    "@aws-sdk/s3-request-presigner": 3.58.0
+    "@aws-sdk/url-parser": 3.55.0
     "@aws-sdk/util-dynamodb": 3.58.0
-    "@aws-sdk/util-format-url": ^3.58.0
+    "@aws-sdk/util-format-url": 3.58.0
     "@babel/core": 7.17.8
     "@businessnjgovnavigator/content": "*"
     "@businessnjgovnavigator/shared": "*"
@@ -3711,11 +3711,11 @@ __metadata:
   dependencies:
     "@aws-amplify/auth": 4.5.0
     "@aws-amplify/core": 4.5.0
-    "@aws-crypto/sha256-browser": ^2.0.1
-    "@aws-sdk/protocol-http": ^3.58.0
-    "@aws-sdk/s3-request-presigner": ^3.58.0
-    "@aws-sdk/url-parser": ^3.55.0
-    "@aws-sdk/util-format-url": ^3.58.0
+    "@aws-crypto/sha256-browser": 2.0.1
+    "@aws-sdk/protocol-http": 3.58.0
+    "@aws-sdk/s3-request-presigner": 3.58.0
+    "@aws-sdk/url-parser": 3.55.0
+    "@aws-sdk/util-format-url": 3.58.0
     "@babel/core": 7.17.8
     "@businessnjgovnavigator/shared": "*"
     "@emotion/react": 11.8.2
