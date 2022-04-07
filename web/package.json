@@ -42,7 +42,7 @@
     "@aws-sdk/url-parser": "3.55.0",
     "@aws-sdk/util-format-url": "3.58.0",
     "@businessnjgovnavigator/shared": "*",
-    "@emotion/react": "11.8.2",
+    "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
     "@mui/lab": "5.0.0-alpha.75",
     "@mui/material": "5.5.3",
