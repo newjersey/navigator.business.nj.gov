@@ -506,7 +506,6 @@ jobs:
           enable-dashboard: << parameters.enable-dashboard >>
           suite: << parameters.suite >>
           browser: << parameters.browser >>
-      - store-deploy-cache
     environment:
       CYPRESS_API_BASE_URL: http://localhost:5000/local
 
