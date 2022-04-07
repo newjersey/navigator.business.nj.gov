@@ -65,6 +65,10 @@
     {
       "matchPackagePrefixes": ["@mui"],
       "groupName": "material-ui"
+    },
+    {
+      "matchPackagePrefixes": ["@aws-sdk"],
+      "groupName": "aws-sdk"
     }
   ]
 }
