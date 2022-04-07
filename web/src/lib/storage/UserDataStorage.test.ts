@@ -1,8 +1,8 @@
-import { swrPrefixToIgnore, userDataPrefix, UserDataStorage } from "@/lib/utils/userDataStorage";
+import { swrPrefixToIgnore, userDataPrefix, UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { generateUserData } from "@/test/factories";
 
 describe("userDataStorage", () => {
-  const storage = UserDataStorage();
+  const storage = UserDataStorageFactory();
   const user = generateUserData({});
   let setItemSpy: jest.SpyInstance, getItemSpy: jest.SpyInstance;
 

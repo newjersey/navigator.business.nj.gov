@@ -1,5 +1,6 @@
 type StorageType = "session" | "local";
-export type GetStorageReturnValue = {
+
+export type BrowserStorage = {
   get: (key: string, type?: StorageType) => string | undefined;
   set: (key: string, value: string, type?: StorageType) => boolean;
   keys: (type?: StorageType) => string[];
@@ -7,7 +8,7 @@ export type GetStorageReturnValue = {
   clear: (type?: StorageType) => void;
 };
 
-const GetStorage = (): GetStorageReturnValue => {
+export const BrowserStorageFactory = (): BrowserStorage => {
   const storageType = (type?: StorageType): "localStorage" | "sessionStorage" =>
     `${type ?? "session"}Storage`;
 
@@ -42,5 +43,3 @@ const GetStorage = (): GetStorageReturnValue => {
     delete: _delete,
   };
 };
-
-export { GetStorage };
