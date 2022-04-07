@@ -24,30 +24,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:4.5.0":
-  version: 4.5.0
-  resolution: "@aws-amplify/auth@npm:4.5.0"
+"@aws-amplify/auth@npm:4.5.1":
+  version: 4.5.1
+  resolution: "@aws-amplify/auth@npm:4.5.1"
   dependencies:
-    "@aws-amplify/cache": 4.0.38
-    "@aws-amplify/core": 4.5.0
+    "@aws-amplify/cache": 4.0.39
+    "@aws-amplify/core": 4.5.1
     amazon-cognito-identity-js: 5.2.8
     crypto-js: ^4.1.1
-  checksum: 2c2b0789e11aa6eb877f07a5f8565acc6cc09900a2bae0541080b1c3cc3b5a81cacff4726ab664ea8bc3b90086b8b6bc8c6e52322c44f261a513c27e564334a8
+  checksum: 8e9672048def2b882a0d467d39d697c4f3dc7178ffc2a445f83e3443d5a6919096d3e4ab11b70c3552d7e0382aef8e6664a143c606a5fb1dca7b70fb736611f7
   languageName: node
   linkType: hard
 
-"@aws-amplify/cache@npm:4.0.38":
-  version: 4.0.38
-  resolution: "@aws-amplify/cache@npm:4.0.38"
+"@aws-amplify/cache@npm:4.0.39":
+  version: 4.0.39
+  resolution: "@aws-amplify/cache@npm:4.0.39"
   dependencies:
-    "@aws-amplify/core": 4.5.0
-  checksum: 482e673508051a1080cb98f62d73bd201e51878154fa85f7bf38c31cb13e60a4927821b9ee1eddf594055aa1d868ada0f733813c7875685e86d80b312e687343
+    "@aws-amplify/core": 4.5.1
+  checksum: d0bd1e86805bcbfb16e980ed07c0f2a90851dab1861a37e306c30cce1afb7cfc8e28b62ecf92b8419b370dc2f5076c122eadae015faf2dc0066f5ffbb1db5f80
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:4.5.0":
-  version: 4.5.0
-  resolution: "@aws-amplify/core@npm:4.5.0"
+"@aws-amplify/core@npm:4.5.1":
+  version: 4.5.1
+  resolution: "@aws-amplify/core@npm:4.5.1"
   dependencies:
     "@aws-crypto/sha256-js": 1.0.0-alpha.0
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
@@ -57,7 +57,7 @@ __metadata:
     "@aws-sdk/util-hex-encoding": 3.6.1
     universal-cookie: ^4.0.4
     zen-observable-ts: 0.8.19
-  checksum: fbe9dfc8ac06db43b910d500f65e325f2abc88a66e5e45714c97a138199c3089b0d6f3a169506ed10a06121ce7a0f61d0d393ce31d48602a66b722da77972de2
+  checksum: d32c8ae03a2746c66a0c11fbf975932b40803041e3f58122a3f4b43a7ffdc692d1a860720b2df4beabfd140a4eef9c0bc2af18a7d3e1779d9a451a4dbc4943c8
   languageName: node
   linkType: hard
 
@@ -3524,8 +3524,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 4.5.0
-    "@aws-amplify/core": 4.5.0
+    "@aws-amplify/auth": 4.5.1
+    "@aws-amplify/core": 4.5.1
     "@aws-crypto/sha256-browser": 2.0.1
     "@aws-sdk/client-dynamodb": 3.58.0
     "@aws-sdk/client-s3": 3.58.0
@@ -3709,8 +3709,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 4.5.0
-    "@aws-amplify/core": 4.5.0
+    "@aws-amplify/auth": 4.5.1
+    "@aws-amplify/core": 4.5.1
     "@aws-crypto/sha256-browser": 2.0.1
     "@aws-sdk/protocol-http": 3.58.0
     "@aws-sdk/s3-request-presigner": 3.58.0
@@ -4597,7 +4597,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:11.9.0":
+"@emotion/react@npm:11.9.0, @emotion/react@npm:^11.1.1":
   version: 11.9.0
   resolution: "@emotion/react@npm:11.9.0"
   dependencies:
@@ -4620,29 +4620,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.1.1":
-  version: 11.8.2
-  resolution: "@emotion/react@npm:11.8.2"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@emotion/babel-plugin": ^11.7.1
-    "@emotion/cache": ^11.7.1
-    "@emotion/serialize": ^1.0.2
-    "@emotion/utils": ^1.1.0
-    "@emotion/weak-memoize": ^0.2.5
-    hoist-non-react-statics: ^3.3.1
-  peerDependencies:
-    "@babel/core": ^7.0.0
-    react: ">=16.8.0"
-  peerDependenciesMeta:
-    "@babel/core":
-      optional: true
-    "@types/react":
-      optional: true
-  checksum: a8733f8375f9798953019872137326f39e5171b3286535fe34a695d63067a2c0f0f154beb6d117361206ef04a584fa4adef0ecc450654b6af4695b1d893d2496
-  languageName: node
-  linkType: hard
-
 "@emotion/serialize@npm:^0.11.15, @emotion/serialize@npm:^0.11.16":
   version: 0.11.16
   resolution: "@emotion/serialize@npm:0.11.16"
@@ -4656,20 +4633,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/serialize@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@emotion/serialize@npm:1.0.2"
-  dependencies:
-    "@emotion/hash": ^0.8.0
-    "@emotion/memoize": ^0.7.4
-    "@emotion/unitless": ^0.7.5
-    "@emotion/utils": ^1.0.0
-    csstype: ^3.0.2
-  checksum: ff84fbe09ec06e7ad3deaef5c5b5ea6af6a522e8efe49c2b398b875d06872626284a83b6b18b7f777750c94264a61e7924157d869d9bca2f675731bbb91a6055
-  languageName: node
-  linkType: hard
-
-"@emotion/serialize@npm:^1.0.3":
+"@emotion/serialize@npm:^1.0.2, @emotion/serialize@npm:^1.0.3":
   version: 1.0.3
   resolution: "@emotion/serialize@npm:1.0.3"
   dependencies:
