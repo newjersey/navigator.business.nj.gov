@@ -1,8 +1,8 @@
 import * as api from "@/lib/api-client/apiClient";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
+import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions, setRegistrationDimension } from "@/lib/utils/analytics-helpers";
-import { UserDataStorage } from "@/lib/utils/userDataStorage";
 import { AuthAlertContextType } from "@/pages/_app";
 import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared";
 import { Dispatch } from "react";
@@ -53,9 +53,10 @@ export const onGuestSignIn = async (
   pathname: string,
   dispatch: Dispatch<AuthAction>
 ): Promise<void> => {
-  let userData = UserDataStorage().getCurrentUserData();
+  const userDataStorage = UserDataStorageFactory();
+  let userData = userDataStorage.getCurrentUserData();
   if (userData?.user.myNJUserKey) {
-    UserDataStorage().deleteCurrentUser();
+    userDataStorage.deleteCurrentUser();
     userData = undefined;
   }
   dispatch({
@@ -86,7 +87,10 @@ export const onSignOut = async (
 ): Promise<void> => {
   analytics.event.roadmap_logout_button.click.log_out();
   const user = await session.getCurrentUser();
-  UserDataStorage().delete(user.id);
+
+  const userDataStorage = UserDataStorageFactory();
+  userDataStorage.delete(user.id);
+
   await triggerSignOut();
   dispatch({
     type: "LOGOUT",

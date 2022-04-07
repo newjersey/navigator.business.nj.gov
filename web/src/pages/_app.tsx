@@ -29,7 +29,7 @@ import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { SignUpToast } from "@/components/auth/SignUpToast";
 import { SignUpModal } from "@/components/auth/SignUpModal";
 import { SelfRegToast } from "@/components/auth/SelfRegToast";
-import { UserDataStorage } from "@/lib/utils/userDataStorage";
+import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -201,12 +201,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
   const [registrationAlertStatus, _setRegistrationAlertStatus] = useState<RegistrationStatus | undefined>(
-    UserDataStorage().getRegistrationStatus()
+    UserDataStorageFactory().getRegistrationStatus()
   );
 
   const setRegistrationAlertStatus = (value: RegistrationStatus | undefined) => {
     _setRegistrationAlertStatus(value);
-    UserDataStorage().setRegistrationStatus(value);
+    UserDataStorageFactory().setRegistrationStatus(value);
   };
 
   const [authToast, setAuthToast] = useState<boolean>(false);
@@ -299,7 +299,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         />
       )}
       <DefaultSeo {...SEO} />
-      <SWRConfig value={{ provider: UserDataStorage }}>
+      <SWRConfig value={{ provider: UserDataStorageFactory }}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
             <AuthContext.Provider value={{ state, dispatch }}>

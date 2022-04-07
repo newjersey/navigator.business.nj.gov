@@ -1,7 +1,7 @@
-import { GetStorage } from "@/lib/utils/storageHelper";
+import { BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
 
-describe("getStorage", () => {
-  const storage = GetStorage();
+describe("BrowserStorageFactory", () => {
+  const storage = BrowserStorageFactory();
 
   beforeEach(() => {
     jest.restoreAllMocks();

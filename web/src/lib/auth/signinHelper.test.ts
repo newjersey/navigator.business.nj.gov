@@ -8,14 +8,15 @@ const userDataStorage = {
   delete: jest.fn(),
 };
 
-jest.mock("@/lib/utils/userDataStorage", () => ({
-  UserDataStorage: jest.fn(() => userDataStorage),
+jest.mock("@/lib/storage/UserDataStorage", () => ({
+  UserDataStorageFactory: jest.fn(() => userDataStorage),
 }));
 
 jest.mock("./sessionHelper", () => ({
   getCurrentUser: jest.fn(),
   triggerSignOut: jest.fn().mockResolvedValue({}),
 }));
+
 const mockSession = session as jest.Mocked<typeof session>;
 
 jest.mock("@/lib/api-client/apiClient", () => ({

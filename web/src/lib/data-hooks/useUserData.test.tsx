@@ -1,7 +1,7 @@
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData, UseUserDataResponse } from "@/lib/data-hooks/useUserData";
-import { UserDataStorage } from "@/lib/utils/userDataStorage";
+import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { generateUser, generateUserData } from "@/test/factories";
 import { generateUseUserDataResponse, withAuth, withUserDataError } from "@/test/helpers";
 import { BusinessUser } from "@businessnjgovnavigator/shared/";
@@ -15,7 +15,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
-const userDataStorage = UserDataStorage();
+const userDataStorage = UserDataStorageFactory();
 
 const mockDispatch = jest.fn();
 
