@@ -8,8 +8,6 @@ fundingType: grant
 agency:
   - NJDOL
 publishStageArchive: Do Not Publish
-openDate: ""
-dueDate: ""
 status: opening soon
 programFrequency: reoccuring
 businessStage: both
@@ -30,10 +28,15 @@ sector:
   - Digital and Print Media
   - Finance, Insurance and Professional Services
   - Other Services (except Public Administration)
+openDate: ""
+dueDate: ""
 ---
 
-Opportunity Partnership helps employers identify an appropriate educational institution or training provider to train employees. The business and the school together develop training programs to teach needed skills you. Upon completing the program, trainees must qualify for entry-level positions in your company.
+Opportunity Partnership helps employers identify an appropriate educational institution or training provider to train employees. The business and the school develop training programs to teach necessary skills. Upon completing the program, trainees must qualify for entry-level positions in your company.
 
-**Benefits:** Company-tailored training to ensure an appropriate pipeline of employees.
+---
+### Eligibility
+* Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses
 
-**Eligibility:** Any business can be part of the application (though apprenticeship programs are the applicant). Funding is tied to individuals/future employees, not businesses.
+>**Benefits** 
+>* Company-tailored training to ensure an appropriate pipeline of employees

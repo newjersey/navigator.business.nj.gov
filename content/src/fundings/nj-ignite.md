@@ -8,8 +8,6 @@ fundingType: grant
 agency:
   - NJEDA
 publishStageArchive: ""
-openDate: ""
-dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: early-stage
@@ -27,10 +25,20 @@ sector:
   - Technology
   - Life Sciences
   - Other Services (except Public Administration)
+openDate: ""
+dueDate: ""
 ---
 
 NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.
 
-**Benefits:** Benefits for Renters: Rent support grants. Benefits for Collaborative Workspaces: A tenant attraction tool.
+---
 
-**Eligibility:** Renters can be early-stage technology and life science companies in New Jersey with 10 or fewer employees and less than $1M in trailing 12 months gross sales from the date of application submission. Collaborative workplaces can be entities with a minimum of 5 unique paying tenants over the last 2 years. Renters and collaborative workplaces must apply together.
+### Eligibility
+* Renters can be early-stage technology and life science companies in New Jersey with 10 or fewer employees
+* Less than $1M in trailing 12 months of gross sales from the date of application submission
+* Collaborative workplaces can be entities with a minimum of 5 unique paying tenants over the last 2 years. 
+* Renters and collaborative workplaces must apply together
+
+>**Benefits** 
+>* Benefits for Renters: Rent support grants 
+>* Benefits for Collaborative Workspaces: A tenant attraction tool

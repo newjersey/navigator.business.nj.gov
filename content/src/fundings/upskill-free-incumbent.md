@@ -8,8 +8,6 @@ fundingType: grant
 agency:
   - NJDOL
 publishStageArchive: ""
-openDate: ""
-dueDate: ""
 status: open
 programFrequency: reoccuring
 businessStage: both
@@ -30,10 +28,15 @@ sector:
   - Digital and Print Media
   - Finance, Insurance and Professional Services
   - Other Services (except Public Administration)
+openDate: ""
+dueDate: ""
 ---
 
-Upskill offers New Jersey employers of any size grants to improve existing employees’ skills. Training may be provided by employers at their business or by an eligible training provider. These should be cohort-based trainings, not unique to one employee.
+Upskill offers grants to New Jersey businesses of any size grants to improve existing employees’ skills. Training may be provided by employers at their business or by an eligible training provider. These should be group-based trainings, not unique to one employee.
 
-**Benefits:** Employers can receive grants of up to $100,000.
+---
+### Eligibility
+* Businesses with existing employees who can be trained in a new skill for current and future workforce demands
 
-**Eligibility:** Employers with existing employees who they want to train in a new skill for current and future workforce demands are eligible.
+>**Benefits**
+>* Employers can receive grants of up to $100,000

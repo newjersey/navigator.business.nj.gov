@@ -8,8 +8,6 @@ fundingType: tax credit
 agency:
   - NJDOL
 publishStageArchive: ""
-openDate: ""
-dueDate: ""
 status: open
 programFrequency: ongoing
 businessStage: both
@@ -21,10 +19,15 @@ county:
   - All
 sector:
   - All
+openDate: ""
+dueDate: ""
 ---
 
-The Work Opportunity tax credit program is a Federal tax credit for businesses who hire and retain veterans and individuals from other target groups with significant barriers to employment such as qualified TANF recipients, qualified veterans, qualified ex-felon, designated community resident, vocational rehabilitation referral, recipient of SNAP benefits (food stamps), Supplemental Security Income (SSI) recipient, long-term family assistance recipient, qualified long-term unemployment recipient.
+The Work Opportunity tax credit program is a Federal tax credit for businesses who hire and retain veterans and individuals from other target groups with significant barriers to employment such as qualified TANF recipients, qualified veterans, qualified ex-felons, designated community residents, vocational rehabilitation referrals, recipient of SNAP benefits (food stamps), Supplemental Security Income (SSI) recipients, long-term family assistance recipients, and qualified long-term unemployment recipients.
 
-**Benefits:** The tax credit ranges from $2,400 to up to $9,600 per hire of veterans or individuals from other target groups with significant barriers to employment.
+---
+### Eligibility
+* The business must be registered in New Jersey
 
-**Eligibility:** Business must be registered in New Jersey.
+>**Benefits** 
+>* The tax credit ranges from $2,400 to up to $9,600 per employee hired
