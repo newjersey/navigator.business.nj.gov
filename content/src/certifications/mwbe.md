@@ -14,7 +14,7 @@ A `Minority|minority` or `Women|women` owned Business Enterprise (M/WBE) is a bu
 
 _While New Jersey state government does not give special consideration to vendors that hold M/WBE certifications, some State licenses, municipal or federal contracts do give special consideration._
 
-To complete this application, you must have:
+### Application Needs
 
 - The names and addresses of the owner, partners, or shareholders, as applicable, and their representative shares of ownership
 - The names and addresses of the officers of the business
@@ -25,6 +25,6 @@ To complete this application, you must have:
 - An applicant's certificate of birth, or motor vehicle driver's license, passport, or other acceptable form of identification
 - An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business
 
-After you complete this, you will have:
-
-- A Minority/Women-owned Business Enterprise certificate
+> **After you complete this, you will have:**
+>
+>- A Minority/Women-owned Business Enterprise certificate
