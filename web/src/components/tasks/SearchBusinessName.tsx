@@ -1,4 +1,3 @@
-import { SignUpModalWrapper } from "@/components/auth/SignUpModal";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
@@ -122,7 +121,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
   };
 
   return (
-    <SignUpModalWrapper>
+    <>
       <TaskHeader task={props.task} />
       <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
       {showErrorAlert()}
@@ -164,6 +163,6 @@ export const SearchBusinessName = (props: Props): ReactElement => {
         {nameAvailability?.status === "AVAILABLE" && showAvailable()}
         {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
       </div>
-    </SignUpModalWrapper>
+    </>
   );
 };
