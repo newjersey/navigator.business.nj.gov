@@ -13,6 +13,7 @@ A Disabled Veteran-Owned Business (DVOB) is a business that has its principal pl
 
 _DVOB certification may provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)._
 
+---
 ### Application Needs
 
 - Federal Service-Disabled Veteran-Owned Business Determination Letter, Disability Award Letter or Federal Service-Disabled Veteran Letter. Provide for Majority owner(s)
