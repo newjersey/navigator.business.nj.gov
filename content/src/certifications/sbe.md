@@ -17,6 +17,7 @@ A Small Business Enterprise (SBE) is a business:
 
 _Having an SBE certification may give you an advantage in [government contracts](https://business.nj.gov/pages/sbe)_
 
+---
 ### Application Needs
 
 - An `EIN|ein`
