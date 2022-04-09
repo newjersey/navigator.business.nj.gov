@@ -3493,7 +3493,7 @@ __metadata:
     serverless-offline: 8.5.0
     serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
-    serverless-webpack: 5.6.1
+    serverless-webpack: 5.7.0
     simple-oauth2: 4.3.0
     supertest: 6.2.2
     ts-jest: 27.1.4
@@ -3660,7 +3660,7 @@ __metadata:
     serverless-offline: 8.5.0
     serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
-    serverless-webpack: 5.6.1
+    serverless-webpack: 5.7.0
     simple-oauth2: 4.3.0
     storybook-addon-designs: 6.2.1
     style-loader: 3.3.1
@@ -11912,21 +11912,6 @@ __metadata:
   version: 2.2.2
   resolution: "before-after-hook@npm:2.2.2"
   checksum: dc2e1ffe389e5afbef2a46790b1b5a50247ed57aba67649cfa9ec2552d248cc9278f222e72fb5a8ff59bbb39d78fbaa97e7234ead0c6b5e8418b67a8644ce207
-  languageName: node
-  linkType: hard
-
-"bestzip@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "bestzip@npm:2.2.0"
-  dependencies:
-    archiver: ^5.3.0
-    async: ^3.2.0
-    glob: ^7.1.6
-    which: ^2.0.2
-    yargs: ^16.2.0
-  bin:
-    bestzip: bin/cli.js
-  checksum: b2bdec21b60b12e4cbeb30fe55f364317ebdd817ab567c5a8d66a0b710b7091e187b8bc5aee8923f1bf47752331cbd93cd54573e0398fd0b1df18c87d4536e3a
   languageName: node
   linkType: hard
 
@@ -30639,17 +30624,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-webpack@npm:5.6.1":
-  version: 5.6.1
-  resolution: "serverless-webpack@npm:5.6.1"
+"serverless-webpack@npm:5.7.0":
+  version: 5.7.0
+  resolution: "serverless-webpack@npm:5.7.0"
   dependencies:
-    bestzip: ^2.2.0
+    archiver: ^5.3.0
     bluebird: ^3.7.2
     fs-extra: ^9.1.0
     glob: ^7.2.0
     is-builtin-module: ^3.1.0
     lodash: ^4.17.21
-    semver: ^7.3.5
+    semver: ^7.3.6
     ts-node: ">= 8.3.0"
   peerDependencies:
     serverless: 1 || 2 || 3
@@ -30657,7 +30642,7 @@ __metadata:
   dependenciesMeta:
     ts-node:
       optional: true
-  checksum: 22386b39af5acfb0de3d65823a1f09a308701d9b7b68da7ee0e7042445923a711b5535f4315870e0191d0e68dc03e8ebab2d16f3b970a76c4c7db3d414dde1b4
+  checksum: 0af550cdfcd5d71640e6d4c8d0d92ead085aa633e1a67b81155bdde93a3e961bd1ab7ef18cf3312cc315372f9ac9eca126db97dbffdb3040616a037bcfa6b736
   languageName: node
   linkType: hard
 
