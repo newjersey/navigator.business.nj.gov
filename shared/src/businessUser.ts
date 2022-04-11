@@ -8,6 +8,8 @@ export const registrationStatusList = [
 ] as const;
 export type RegistrationStatus = typeof registrationStatusList[number];
 
+export type ABExperience = "ExperienceA" | "ExperienceB";
+
 export type BusinessUser = {
   name?: string;
   email: string;
@@ -17,9 +19,15 @@ export type BusinessUser = {
   userTesting: boolean;
   myNJUserKey?: string;
   intercomHash?: string;
+  abExperience: ABExperience;
 };
 
-export const emptyBusinessUser = {
+export const decideABExperience = (): ABExperience => {
+  const percent = process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE ?? 0;
+  return Math.floor(Math.random() * 100) >= percent ? "ExperienceA" : "ExperienceB";
+};
+
+export const emptyBusinessUser: BusinessUser = {
   name: undefined,
   email: "",
   id: uuidv4(),
@@ -28,9 +36,13 @@ export const emptyBusinessUser = {
   userTesting: true,
   myNJUserKey: undefined,
   intercomHash: undefined,
+  abExperience: decideABExperience(),
 };
 
-export const createEmptyUser = (): BusinessUser => emptyBusinessUser;
+export const createEmptyUser = (abExperience?: ABExperience): BusinessUser => ({
+  ...emptyBusinessUser,
+  abExperience: abExperience ?? decideABExperience(),
+});
 
 export type ExternalStatus = {
   newsletter?: NewsletterResponse;

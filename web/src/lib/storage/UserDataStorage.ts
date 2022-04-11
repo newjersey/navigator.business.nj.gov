@@ -19,7 +19,7 @@ export const swrPrefixToIgnore = "$swr$";
 
 export const UserDataStorageFactory = (): UserDataStorage => {
   const buffer = new Map<string, UserData | undefined>();
-  const browserStorage = BrowserStorageFactory();
+  const browserStorage = BrowserStorageFactory("session");
 
   const get = (key?: string): UserData | undefined => {
     if (!key) return undefined;

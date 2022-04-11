@@ -1,8 +1,13 @@
 import * as api from "@/lib/api-client/apiClient";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
+import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import analytics from "@/lib/utils/analytics";
-import { setAnalyticsDimensions, setRegistrationDimension } from "@/lib/utils/analytics-helpers";
+import {
+  setABExperienceDimension,
+  setAnalyticsDimensions,
+  setRegistrationDimension,
+} from "@/lib/utils/analytics-helpers";
 import { AuthAlertContextType } from "@/pages/_app";
 import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared";
 import { Dispatch } from "react";
@@ -23,6 +28,7 @@ export const onSignIn = async (
   const userData = await api.getUserData(user.id);
   setAnalyticsDimensions(userData.profileData);
   setRegistrationDimension("Fully Registered");
+  setABExperienceDimension(userData.user.abExperience);
 };
 
 export const onSelfRegister = (
@@ -54,15 +60,18 @@ export const onGuestSignIn = async (
   dispatch: Dispatch<AuthAction>
 ): Promise<void> => {
   const userDataStorage = UserDataStorageFactory();
+  const abStorage = ABStorageFactory();
   let userData = userDataStorage.getCurrentUserData();
   if (userData?.user.myNJUserKey) {
     userDataStorage.deleteCurrentUser();
     userData = undefined;
   }
+  const user = userData?.user || createEmptyUser(abStorage.getExperience());
   dispatch({
     type: "LOGIN_GUEST",
-    user: userData?.user || createEmptyUser(),
+    user: user,
   });
+  setABExperienceDimension(user.abExperience);
   if (userData) {
     setAnalyticsDimensions(userData.profileData);
     if (userData.formProgress == "UNSTARTED") {

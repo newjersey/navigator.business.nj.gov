@@ -12,6 +12,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
+import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import {
   createEmptyUserDisplayContent,
   createProfileFieldErrorMap,
@@ -88,7 +89,7 @@ export const ProfileDataContext = createContext<ProfileDataContextType>({
   state: {
     page: 1,
     profileData: createEmptyProfileData(),
-    user: createEmptyUser(),
+    user: createEmptyUser(ABStorageFactory().getExperience()),
     flow: "STARTING",
     displayContent: createEmptyUserDisplayContent(),
     municipalities: [],
@@ -105,7 +106,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const router = useRouter();
   const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const [user, setUser] = useState<BusinessUser>(createEmptyUser());
+  const [user, setUser] = useState<BusinessUser>(createEmptyUser(ABStorageFactory().getExperience()));
   const [error, setError] = useState<ProfileError | undefined>(undefined);
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
   const { userData, update } = useUserData();

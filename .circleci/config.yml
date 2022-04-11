@@ -192,6 +192,7 @@ commands:
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_DEV' >> $BASH_ENV
             echo 'export SMOKE_TEST_ENV=$SMOKE_TEST_ENV_DEV' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_DEV' >> $BASH_ENV
+            echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_DEV' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -233,6 +234,7 @@ commands:
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_STAGING' >> $BASH_ENV
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_STAGING' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_STAGING' >> $BASH_ENV
+            echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_STAGING' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -257,6 +259,7 @@ commands:
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEWPROD' >> $BASH_ENV
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_PROD' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_PROD' >> $BASH_ENV
+            echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_PROD' >> $BASH_ENV
 
   deploy:
     steps:

@@ -281,7 +281,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           'dimension3': 'Legal Structure',
           'dimension4': 'Liquor License',
           'dimension5': 'Home-Based Business',
-          'dimension6': 'Persona'
+          'dimension6': 'Persona',
+          'dimension7': 'Registration Process',
+          'dimension8': 'AB Experience'
         }
       });`,
         }}
