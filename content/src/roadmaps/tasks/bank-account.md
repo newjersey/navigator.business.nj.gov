@@ -4,10 +4,12 @@ filename: bank-account
 name: Open a Business Bank Account
 id: bank-account
 ---
-A business bank account is meant to separate your business finances from your personal expenses with the purpose of keeping accurate, organized accounting records for tax purposes and business operations. 
+A business bank account separates your business finances from your personal expenses. This helps you have more accurate and organized accounting records for tax purposes and business operations.
+
+Most banks will let you open a business account, but it's always a good idea to compare services and fees.
 
 ---
-### Application Needs
+### To Open a Business Account, Bring Your:
 
 * `EIN|ein` 
 
@@ -21,4 +23,4 @@ A business bank account is meant to separate your business finances from your pe
 
 > **What if I don’t complete this task?**
 >
-> Mixing your personal and business expenses may lead to inaccurate tax filings and fines.
+> Mixing your personal and business expenses may result in inaccurate tax filings. This task is a recommendation and not a requirement.
