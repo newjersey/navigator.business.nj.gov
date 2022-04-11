@@ -6,6 +6,7 @@ id: bank-account
 ---
 A business bank account is meant to separate your business finances from your personal expenses with the purpose of keeping accurate, organized accounting records for tax purposes and business operations. 
 
+---
 ### Application Needs
 
 * `EIN|ein` 
