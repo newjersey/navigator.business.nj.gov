@@ -1,5 +1,6 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { validateEmail } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -73,7 +74,9 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           onValidation={onValidation}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           required={true}
-          additionalValidation={(value) => (confirmEmail ? value == confirmEmail : true)}
+          additionalValidation={(value) =>
+            confirmEmail ? value == confirmEmail : true && validateEmail(value)
+          }
           placeholder={Config.selfRegistration.emailFieldPlaceholder}
         />
       </div>
@@ -85,7 +88,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           handleChange={handleEmail(true)}
           onValidation={(_, invalid) => onValidation("email", invalid)}
           required={true}
-          additionalValidation={(value) => value == email}
+          additionalValidation={(value) => value == email && validateEmail(value)}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           placeholder={Config.selfRegistration.confirmEmailFieldPlaceholder}
           fieldName={"confirm-email"}

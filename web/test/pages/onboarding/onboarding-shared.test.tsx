@@ -473,6 +473,39 @@ describe("onboarding - shared", () => {
     expect(currentUserData().profileData.liquorLicense).toEqual(false);
   });
 
+  it("displays error message when @ is missing in email input field", async () => {
+    const { page, subject } = renderPage({
+      userData: generateUserData({ user: generateUser({ email: `some-emailexample.com` }) }),
+    });
+    page.chooseRadio("has-existing-business-false");
+    await page.visitStep2();
+    await page.visitStep3();
+    await page.visitStep4();
+    await page.visitStep5();
+    await page.visitStep6();
+    page.clickNext();
+    subject.debug();
+    await waitFor(() => {
+      expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    });
+  });
+
+  it("displays error message when . is missing in email input field", async () => {
+    const { page, subject } = renderPage({
+      userData: generateUserData({ user: generateUser({ email: `some-email@examplecom` }) }),
+    });
+    page.chooseRadio("has-existing-business-false");
+    await page.visitStep2();
+    await page.visitStep3();
+    await page.visitStep4();
+    await page.visitStep5();
+    await page.visitStep6();
+    page.clickNext();
+    await waitFor(() => {
+      expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    });
+  });
+
   describe("updates to industry affecting home-based business", () => {
     it("sets home-based business back to false if they select a non-applicable industry", async () => {
       const { page } = renderPage({});
