@@ -4,7 +4,7 @@ filename: bank-account
 name: Open a Business Bank Account
 id: bank-account
 ---
-A business bank account is meant to separate your business finances from your personal expenses to keep accurate, organized accounting records for tax purposes and business operations. Some legal entities, like an LLC, will require all partners present to open a bank account.
+A business bank account is meant to separate your business finances from your personal expenses with the purpose of keeping accurate, organized accounting records for tax purposes and business operations. 
 
 ### Application Needs
 
