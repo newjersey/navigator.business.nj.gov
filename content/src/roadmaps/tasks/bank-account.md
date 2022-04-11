@@ -8,8 +8,6 @@ A business bank account is meant to separate your business finances from your pe
 
 ### Application Needs
 
-
-
 * `EIN|ein` 
 
 * `Certificate of Formation|certificate-formation` 
@@ -19,7 +17,7 @@ A business bank account is meant to separate your business finances from your pe
 > **After you complete this task, you will have:**
 >
 > * A business bank account
->
+
 > **What if I don’t complete this task?**
 >
 > Mixing your personal and business expenses may lead to inaccurate tax filings and fines.
