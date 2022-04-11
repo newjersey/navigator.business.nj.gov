@@ -685,88 +685,6 @@ workflows:
                 - main
           requires:
             - build
-      # edge integration tests
-      - integration-tests:
-          name: Integration Tests - Edge - Group 1
-          suite: group1
-          browser: edge
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 2
-          suite: group2
-          browser: edge
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 3
-          suite: group3
-          browser: edge
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 4
-          suite: group4
-          browser: edge
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      # firefox integration tests
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 1
-          suite: group1
-          browser: firefox
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 2
-          suite: group2
-          browser: firefox
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 3
-          suite: group3
-          browser: firefox
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Firefox - Group 4
-          suite: group4
-          browser: firefox
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
 
       - smoke-tests:
           name: Deployment Smoke Tests
@@ -783,5 +701,66 @@ workflows:
             branches:
               only:
                 - main
+          requires:
+            - build
+
+  browser-testing:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - build
+      # edge integration tests
+      - integration-tests:
+          name: Integration Tests - Edge - Group 1
+          suite: group1
+          browser: edge
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Edge - Group 2
+          suite: group2
+          browser: edge
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Edge - Group 3
+          suite: group3
+          browser: edge
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Edge - Group 4
+          suite: group4
+          browser: edge
+          requires:
+            - build
+      # firefox integration tests
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 1
+          suite: group1
+          browser: firefox
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 2
+          suite: group2
+          browser: firefox
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 3
+          suite: group3
+          browser: firefox
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 4
+          suite: group4
+          browser: firefox
           requires:
             - build
