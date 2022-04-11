@@ -4,8 +4,11 @@ import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
+import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
+import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,6 +18,29 @@ const Home = (): ReactElement => {
   const { userData, error } = useUserData();
   const router = useRouter();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
+
+  let landingPageConfig = Config.landingPage;
+  if (typeof window !== "undefined") {
+    const abStorage = ABStorageFactory();
+    let landingPageExperience: ABExperience;
+    const storedExperience = abStorage.getExperience();
+
+    if (storedExperience !== undefined) {
+      landingPageExperience = storedExperience;
+    } else {
+      const experience = decideABExperience();
+      abStorage.setExperience(experience);
+      landingPageExperience = experience;
+    }
+
+    setABExperienceDimension(landingPageExperience);
+    if (landingPageExperience === "ExperienceB") {
+      landingPageConfig = {
+        ...landingPageConfig,
+        ...Config.landingPageExperienceB,
+      };
+    }
+  }
 
   useEffect(() => {
     if (userData?.formProgress === "COMPLETED") {
@@ -116,7 +142,6 @@ const Home = (): ReactElement => {
       <NavBar landingPage={true} />
       <main data-testid="main">
         <Hero
-          callToActionText={Config.landingPage.heroCallToActionText}
           onClick={() => {
             router.push("/onboarding");
             analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
@@ -126,7 +151,7 @@ const Home = (): ReactElement => {
         <section aria-label="How it works">
           <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
             <h2 className="text-accent-cool-darker h1-styling margin-bottom-6 padding-top-6">
-              {Config.landingPage.section4HeaderText}
+              {landingPageConfig.section4HeaderText}
             </h2>
             <div
               className={`flex ${
@@ -136,7 +161,7 @@ const Home = (): ReactElement => {
               <div className="margin-x-3">
                 <img className="" src="/img/Landing-documents.svg" alt="documents" />
                 <div className="text-accent-cool-darker width-card margin-top-2">
-                  {Config.landingPage.section4FirstIconText}
+                  {landingPageConfig.section4FirstIconText}
                 </div>
               </div>
               <div
@@ -147,7 +172,7 @@ const Home = (): ReactElement => {
               <div className="margin-x-3">
                 <img className="" src="/img/Landing-checkmarks.svg" alt="checklist" />
                 <div className="text-accent-cool-darker width-card margin-top-2">
-                  {Config.landingPage.section4SecondIconText}
+                  {landingPageConfig.section4SecondIconText}
                 </div>
               </div>
               <div
@@ -156,7 +181,7 @@ const Home = (): ReactElement => {
               <div className="margin-x-3">
                 <img className="" src="/img/Landing-building.svg" alt="government building" />
                 <div className="text-accent-cool-darker width-card margin-top-2">
-                  {Config.landingPage.section4ThirdIconText}
+                  {landingPageConfig.section4ThirdIconText}
                 </div>
               </div>
             </div>
@@ -170,22 +195,22 @@ const Home = (): ReactElement => {
           <div className="desktop:padding-x-8">
             <div className="padding-top-205 ">
               {renderTwoColumnRow(
-                Config.landingPage.section5FirstHeaderText,
-                Config.landingPage.section5FirstSupportingText,
+                landingPageConfig.section5FirstHeaderText,
+                landingPageConfig.section5FirstSupportingText,
                 "/img/Landing-step-by-step.svg",
                 "step by step guide"
               )}
             </div>
             {renderTwoColumnRow(
-              Config.landingPage.section5SecondHeaderText,
-              Config.landingPage.section5SecondSupportingText,
+              landingPageConfig.section5SecondHeaderText,
+              landingPageConfig.section5SecondSupportingText,
               "/img/Landing-funding-and-certifications.svg",
               "funding and certifications opportunities",
               true
             )}
             {renderTwoColumnRow(
-              Config.landingPage.section5ThirdHeaderText,
-              Config.landingPage.section5ThirdSupportingText,
+              landingPageConfig.section5ThirdHeaderText,
+              landingPageConfig.section5ThirdSupportingText,
               "/img/Landing-and-more.svg",
               "and more tools and features"
             )}
@@ -196,38 +221,38 @@ const Home = (): ReactElement => {
           <div className="bg-base-extra-light padding-x-2 desktop:padding-x-0 desktop:padding-bottom-10">
             <div className="desktop:grid-container-widescreen flex flex-column flex-align-center">
               <h2 className="base-darkest margin-top-7 text-center margin-bottom-5 desktop:margin-top-10 desktop:margin-bottom-8">
-                {Config.landingPage.section6Header}
+                {landingPageConfig.section6Header}
               </h2>
               <div className={`${isDesktopAndUp ? "flex flex-row" : ""}`}>
                 {renderCard(
                   "primary",
-                  Config.landingPage.card1HeaderLine1,
-                  Config.landingPage.card1HeaderLine2,
-                  Config.landingPage.card1SupportingText,
-                  Config.landingPage.card1ButtonLink,
-                  Config.landingPage.card1Button,
+                  landingPageConfig.card1HeaderLine1,
+                  landingPageConfig.card1HeaderLine2,
+                  landingPageConfig.card1SupportingText,
+                  landingPageConfig.card1ButtonLink,
+                  landingPageConfig.card1Button,
                   "primary"
                 )}
                 <div className={`${isDesktopAndUp ? "desktop:margin-x-6" : "margin-y-2"}`}>
                   {renderCard(
                     "accent-cooler",
 
-                    Config.landingPage.card2HeaderLine1,
-                    Config.landingPage.card2HeaderLine2,
-                    Config.landingPage.card2SupportingText,
-                    Config.landingPage.card2ButtonLink,
-                    Config.landingPage.card2Button,
+                    landingPageConfig.card2HeaderLine1,
+                    landingPageConfig.card2HeaderLine2,
+                    landingPageConfig.card2SupportingText,
+                    landingPageConfig.card2ButtonLink,
+                    landingPageConfig.card2Button,
                     "accent-cooler"
                   )}
                 </div>
                 {renderCard(
                   "info-dark",
 
-                  Config.landingPage.card3HeaderLine1,
-                  Config.landingPage.card3HeaderLine2,
-                  Config.landingPage.card3SupportingText,
+                  landingPageConfig.card3HeaderLine1,
+                  landingPageConfig.card3HeaderLine2,
+                  landingPageConfig.card3SupportingText,
                   "",
-                  Config.landingPage.card3Button,
+                  landingPageConfig.card3Button,
                   "info",
                   true
                 )}

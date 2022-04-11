@@ -38,6 +38,9 @@ export default {
     registrationStatus: (value) => {
       window.gtag("set", "dimension7", value);
     },
+    abExperience: (value) => {
+      window.gtag("set", "dimension8", value);
+    },
   },
 
   event: {

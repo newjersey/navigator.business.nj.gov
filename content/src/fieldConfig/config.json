@@ -258,6 +258,13 @@
     "section5SecondHeaderText": "Funding & Certifications",
     "section6Header": "Looking for More Support?"
   },
+  "landingPageExperienceB": {
+    "section5FirstSupportingText": "Knowing exactly what your business needs to do to start can be difficult. Our starter kit is unique to your industry and even includes Cannabis retailers. Find what licenses, forms, and permits you need to start your business in New Jersey. Learn the requirements of each application, find out what you get after submitting your application, and store critical business identification numbers all in one place. ",
+    "section4SecondIconText": "Your Starter Kit",
+    "section5ThirdSupportingText": "The Navigator is a one-stop-shop for all your New Jersey business needs. You can track your progress, check the status of applications, speak to NJ-based business advocates, and more!",
+    "heroSupportingText": "Create your free, personalized checklist to launch and grow your New Jersey business.",
+    "section5FirstHeaderText": "Starter Kit"
+  },
   "filingDefaults": {
     "tagContentBeforeDueDate": "Next Due:"
   },

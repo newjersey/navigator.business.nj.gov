@@ -606,6 +606,25 @@ collections:
               - { label: Card 3 - Header Line 3, name: card3HeaderLine2, widget: string }
               - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: string }
               - { label: Card 3 - Button Text, name: card3Button, widget: string }
+          - label: Landing Page Experience B
+            name: landingPageExperienceB
+            collapsed: true
+            widget: object
+            summary: "{{landingPageExperienceB}}"
+            fields:
+              - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
+              - {
+                  label: Section 5 - First Supporting Text,
+                  name: section5FirstSupportingText,
+                  widget: string,
+                }
+              - {
+                  label: Section 5 - Third Supporting Text,
+                  name: section5ThirdSupportingText,
+                  widget: string,
+                }
+              - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
           - label: Legal Messages
             name: legalMessageDefaults
             collapsed: true

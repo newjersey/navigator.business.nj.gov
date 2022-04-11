@@ -1,3 +1,4 @@
+import { decideABExperience } from "@shared/businessUser";
 import { createEmptyUserData, UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Request, Response, Router } from "express";
@@ -135,6 +136,7 @@ export const userRouterFactory = (
       externalStatus: {},
       receiveNewsletter: true,
       userTesting: true,
+      abExperience: decideABExperience(),
     });
 
     userDataClient

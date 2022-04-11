@@ -17,6 +17,7 @@ module.exports = withBundleAnalyzer({
     AWS_REGION: process.env.AWS_REGION,
     MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
     CHECK_DEAD_LINKS: process.env.CHECK_DEAD_LINKS,
+    AB_TESTING_EXPERIENCE_B_PERCENTAGE: process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE,
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {

@@ -72,6 +72,7 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
     externalStatus: {},
     receiveNewsletter: true,
     userTesting: true,
+    abExperience: randomInt() % 2 === 0 ? "ExperienceA" : "ExperienceB",
     ...overrides,
   };
 };

@@ -1,18 +1,26 @@
 import { AuthButton } from "@/components/AuthButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { MediaQueries } from "@/lib/PageSizes";
+import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import React, { ReactElement } from "react";
 
 interface Props {
-  callToActionText: string;
   onClick: () => void;
 }
 
 export const Hero = (props: Props): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+
+  let landingPageConfig = Config.landingPage;
+  if (ABStorageFactory().getExperience() === "ExperienceB") {
+    landingPageConfig = {
+      ...Config.landingPage,
+      ...Config.landingPageExperienceB,
+    };
+  }
 
   return (
     <section aria-label="Introduction">
@@ -27,12 +35,12 @@ export const Hero = (props: Props): ReactElement => {
               <h1
                 className={`text-primary-darker h1-styling-large desktop:margin-top-7 margin-bottom-3 desktop:margin-bottom-4`}
               >
-                {Config.landingPage.heroCalloutFirstLineText}
+                {landingPageConfig.heroCalloutFirstLineText}
                 <br />
-                {Config.landingPage.heroCalloutSecondLineText}
+                {landingPageConfig.heroCalloutSecondLineText}
               </h1>
               <div className="text-base-darkest font-sans-lg margin-bottom-3 desktop:margin-bottom-3">
-                {Config.landingPage.heroSupportingText}
+                {landingPageConfig.heroSupportingText}
               </div>
               <div className="desktop:display-inline margin-bottom-2 desktop-margin-bottom-0 desktop:margin-right-2">
                 <Button
@@ -42,7 +50,7 @@ export const Hero = (props: Props): ReactElement => {
                   widthAutoOnMobile
                   noRightMargin
                 >
-                  {Config.landingPage.heroCallToActionText}
+                  {landingPageConfig.heroCallToActionText}
                 </Button>
               </div>
 
@@ -74,13 +82,13 @@ export const Hero = (props: Props): ReactElement => {
               >
                 <div className="border-top-1 border-primary"></div>
                 <h2 className="h1-styling margin-y-4 desktop:margin-y-3">
-                  {Config.landingPage.section2HeaderText}
+                  {landingPageConfig.section2HeaderText}
                 </h2>
                 <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
-                  {Config.landingPage.section2SupportingText}
+                  {landingPageConfig.section2SupportingText}
                 </div>
                 <Button style="primary-big" onClick={props.onClick} widthAutoOnMobile noRightMargin>
-                  {Config.landingPage.section2CallToActionText}
+                  {landingPageConfig.section2CallToActionText}
                 </Button>
               </div>
             </div>
@@ -104,13 +112,13 @@ export const Hero = (props: Props): ReactElement => {
             >
               <div className="border-top-1 border-accent-cool-darker"></div>
               <h2 className="h1-styling margin-y-4 desktop:margin-y-3">
-                {Config.landingPage.section3HeaderText}
+                {landingPageConfig.section3HeaderText}
               </h2>
               <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
-                {Config.landingPage.section3SupportingText}
+                {landingPageConfig.section3SupportingText}
               </div>
               <Button style="accent-cool-darker-big" onClick={props.onClick} widthAutoOnMobile noRightMargin>
-                {Config.landingPage.section3CallToActionText}
+                {landingPageConfig.section3CallToActionText}
               </Button>
             </div>
           </div>
