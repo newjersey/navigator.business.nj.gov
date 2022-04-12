@@ -6,7 +6,7 @@ id: bank-account
 ---
 A business bank account separates your business finances from your personal expenses. This helps you have more accurate and organized accounting records for tax purposes and business operations.
 
-Most banks will let you open a business account, but it's always a good idea to compare services and fees.
+Some banks may request additional documentation. Be sure to compare and confirm document requirements, services and fees.
 
 ---
 ### To Open a Business Account, Bring Your:
