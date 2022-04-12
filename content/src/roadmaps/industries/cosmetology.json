@@ -21,7 +21,12 @@
     },
     {
       "step": 3,
-      "weight": 10,
+      "weight": 6,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
       "task": "get-insurance"
     },
     {
