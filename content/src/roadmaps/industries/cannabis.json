@@ -21,12 +21,17 @@
     },
     {
       "step": 3,
-      "weight": 0,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
       "task": "priority-status-cannabis"
     },
     {
       "step": 3,
-      "weight": 10,
+      "weight": 20,
       "task": "get-insurance"
     }
   ],
