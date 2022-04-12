@@ -18,7 +18,7 @@ interface Props {
 export const FundingElement = (props: { funding: Funding }): ReactElement => {
   return (
     <>
-      <div className="minh-37">
+      <div className="minh-38">
         <div className="margin-bottom-2">
           <h1>{props.funding.name}</h1>
           <div>

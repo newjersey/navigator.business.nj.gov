@@ -13,6 +13,7 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
@@ -20,6 +21,7 @@ import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { featureFlags, getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Municipality } from "@businessnjgovnavigator/shared";
+import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -44,6 +46,7 @@ const TaskPage = (props: Props): ReactElement => {
     };
   }, [props.task.urlSlug, roadmap]);
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const { featureDisableFormation } = featureFlags(router.query);
 
@@ -56,9 +59,14 @@ const TaskPage = (props: Props): ReactElement => {
   };
 
   const nextAndPreviousButtons = (): ReactElement => (
-    <div className="flex flex-row margin-top-2 padding-right-1" data-testid="nextAndPreviousButtons">
+    <div
+      className={`flex ${isTabletAndUp ? "flex-row" : "flex-column"} margin-top-2 padding-right-1`}
+      data-testid="nextAndPreviousButtons"
+    >
       <button
-        className="flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105"
+        className={`${
+          isTabletAndUp ? "" : "margin-bottom-2"
+        } flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105`}
         style={{ visibility: previousUrlSlug ? "visible" : "hidden" }}
         onClick={() => router.push(`/tasks/${previousUrlSlug}`)}
       >
@@ -148,7 +156,7 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
   const [beforeQuestion, afterQuestion] = props.task.contentMd.split("{postOnboardingQuestion}");
 
   return (
-    <div id="taskElement" className="flex flex-column space-between minh-37">
+    <div id="taskElement" className="flex flex-column space-between minh-38">
       <div>
         <TaskHeader task={props.task} />
         {props.children}

@@ -132,7 +132,7 @@ const RoadmapPage = (props: Props): ReactElement => {
             router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
           }}
         >
-          <div data-testid="toast-alert-SUCCESS" className="h3-styling">
+          <div data-testid="toast-alert-SUCCESS" className="h3-styling margin-bottom-0">
             {Config.profileDefaults.successTextHeader}
           </div>
           <div className="padding-top-05">{Config.profileDefaults.successTextBody}</div>

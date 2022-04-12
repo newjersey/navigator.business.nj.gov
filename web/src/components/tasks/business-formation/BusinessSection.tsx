@@ -141,7 +141,7 @@ export const BusinessSection = (): ReactElement => {
         requiredFieldsWithError={requiredFieldsWithError}
       />
       <div className="margin-top-2">
-        <div className="padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background">
+        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205">
           <Button
             style="secondary"
             widthAutoOnMobile

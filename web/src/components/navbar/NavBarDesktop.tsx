@@ -160,7 +160,9 @@ export const NavBarDesktop = (props: Props): ReactElement => {
             onClick={toggleDropdown}
           >
             <div className={`text-bold text-${textColor} flex flex-align-center`}>
-              <Icon className="usa-icon--size-4 margin-right-1">{accountIcon}</Icon>
+              <Icon className={`${isAuthenticated ? "usa-icon--size-4" : "usa-icon--size-3"} margin-right-1`}>
+                {accountIcon}
+              </Icon>
               <div>{accountString}</div>
               <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
             </div>

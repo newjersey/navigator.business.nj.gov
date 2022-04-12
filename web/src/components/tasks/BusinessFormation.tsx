@@ -119,7 +119,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   if (!isLLC) {
     return (
-      <div className="flex flex-column space-between minh-37">
+      <div className="flex flex-column space-between minh-38">
         <div>
           <TaskHeader task={props.task} />
           <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />
@@ -135,7 +135,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   if (userData?.formationData.getFilingResponse?.success) {
     return (
-      <div className="flex flex-column space-between minh-37">
+      <div className="flex flex-column space-between minh-38">
         <TaskHeader task={props.task} />
         <FormationSuccessPage userData={userData} />
       </div>
@@ -159,7 +159,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setShowResponseAlert,
       }}
     >
-      <div className="flex flex-column  minh-37">
+      <div className="flex flex-column  minh-38">
         <div>
           <TaskHeader task={props.task} />
           {tab === 0 && (
@@ -175,9 +175,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
             </>
           )}
         </div>
-        <HorizontalStepper arrayOfSteps={stepNames} currentStep={tab} />
+        <div className="margin-top-3">
+          <HorizontalStepper arrayOfSteps={stepNames} currentStep={tab} />
+        </div>
         <div className="display-block">
-          <hr className="margin-bottom-2" />
+          <hr className="margin-bottom-4" />
         </div>
         <div data-testid="formation-form" className="fg1 flex flex-column space-between">
           {businessFormationTabs[tab].component}

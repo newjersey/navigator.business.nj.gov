@@ -10,6 +10,12 @@ hr {
   border-right: 2px solid $base-lighter;
 }
 
+li,
+ol {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
 .green-box {
   h1,
   h2,
@@ -180,8 +186,8 @@ hr {
   min-height: 40rem;
 }
 
-.minh-37 {
-  min-height: 37rem;
+.minh-38 {
+  min-height: 38rem;
 }
 
 .minw-30 {

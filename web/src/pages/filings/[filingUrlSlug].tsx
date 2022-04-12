@@ -30,7 +30,7 @@ const FilingPage = (props: Props): ReactElement => {
       <PageSkeleton isWidePage>
         <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} isWidePage />
         <SidebarPageLayout operateReferences={props.operateReferences} isWidePage>
-          <div className="minh-37">
+          <div className="minh-38">
             <div className="margin-bottom-2">
               <h1>{props.filing.name}</h1>
             </div>

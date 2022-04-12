@@ -181,7 +181,7 @@ export const GraduationModal = (props: Props): ReactElement => {
               </div>
               <div className="margin-top-2">
                 <div
-                  className="padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background flex-wrap"
+                  className="flex flex-justify-end bg-base-lightest margin-x-neg-3 padding-3 margin-top-3 margin-bottom-neg-3"
                   style={{ gap: "1rem" }}
                 >
                   <Button

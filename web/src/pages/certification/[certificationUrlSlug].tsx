@@ -22,7 +22,7 @@ interface Props {
 export const CertificationElement = (props: { certification: Certification }): ReactElement => {
   return (
     <>
-      <div className="minh-37">
+      <div className="minh-38">
         <div className="margin-bottom-2">
           <h1>{props.certification.name}</h1>
         </div>

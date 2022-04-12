@@ -27,7 +27,7 @@ export const Alert = (props: Props): ReactElement => {
   return (
     <div className={className} {...alertRole} {...(dataTestid ? { "data-testid": dataTestid } : {})}>
       <div className="usa-alert__body">
-        {heading && <h3 className="margin-bottom-0 margin-top-neg-05">{heading}</h3>}
+        {heading && <h3 className="margin-bottom-0">{heading}</h3>}
         <div className="usa-alert__text">{children}</div>
       </div>
     </div>

@@ -13,7 +13,8 @@ export const BusinessFormationFieldAlert = (props: Props): ReactElement => {
   return (
     <>
       {props.showRequiredFieldsError && props.requiredFieldsWithError.length > 0 && (
-        <Alert variant="error" heading={Config.businessFormationDefaults.missingFieldsOnSubmitModalText}>
+        <Alert variant="error">
+          <div>{Config.businessFormationDefaults.missingFieldsOnSubmitModalText}</div>
           <ul>
             {props.requiredFieldsWithError.map((it) => (
               <li key={it}>{camelCaseToSentence(it)}</li>

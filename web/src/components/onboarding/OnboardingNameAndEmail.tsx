@@ -48,7 +48,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
     props.onValidation(fieldName as ProfileFields, invalid);
 
   return (
-    <div className="tablet:padding-2">
+    <div className="tablet:padding-y-2">
       <p className="padding-bottom-1">{Config.selfRegistration.signupDescriptionText}</p>
       <div className="margin-top-2">
         <label htmlFor="name">{Config.selfRegistration.nameFieldLabel}</label>
