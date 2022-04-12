@@ -26,18 +26,23 @@
     },
     {
       "step": 3,
-      "weight": 2,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 20,
       "task": "register-vehicle"
     },
     {
       "step": 3,
-      "weight": 3,
+      "weight": 30,
       "task": "logisticare"
-    },
-    {
-      "step": 3,
-      "weight": 10,
-      "task": "get-insurance"
     }
   ],
   "name": "Non-Medical Transport",
