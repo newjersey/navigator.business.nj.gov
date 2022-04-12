@@ -21,6 +21,11 @@
     },
     {
       "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
       "weight": 20,
       "task": "get-insurance"
     },
@@ -33,11 +38,6 @@
       "step": 3,
       "weight": 60,
       "task": "spray-paint-booth-permit-auto-body-repair"
-    },
-    {
-      "step": 3,
-      "weight": 10,
-      "task": "bank-account"
     }
   ],
   "name": "Auto-Body Repair",
