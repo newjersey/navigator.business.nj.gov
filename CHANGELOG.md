@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.2.0...v3.2.1) (2022-04-12)
+
+
+### Bug Fixes
+
+* **deps:** update aws-sdk to v3.67.0 ([41ac37d](https://github.com/newjersey/navigator.business.nj.gov/commit/41ac37d36b4f2342984050c387ff6c0529b05a01))
+
 # [3.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.1.1...v3.2.0) (2022-04-11)
 
 
