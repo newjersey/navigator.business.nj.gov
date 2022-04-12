@@ -27,16 +27,21 @@
     {
       "step": 3,
       "weight": 1,
-      "task": "apply-for-food-truck-license"
+      "task": "bank-account"
     },
     {
       "step": 3,
       "weight": 2,
+      "task": "apply-for-food-truck-license"
+    },
+    {
+      "step": 3,
+      "weight": 3,
       "task": "zoning-food-truck"
     },
     {
       "step": 3,
-      "weight": 10,
+      "weight": 4,
       "task": "get-insurance"
     },
     {
