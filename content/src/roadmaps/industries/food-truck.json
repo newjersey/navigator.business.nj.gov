@@ -26,17 +26,17 @@
     },
     {
       "step": 3,
-      "weight": 1,
+      "weight": 2,
       "task": "apply-for-food-truck-license"
     },
     {
       "step": 3,
-      "weight": 2,
+      "weight": 3,
       "task": "zoning-food-truck"
     },
     {
       "step": 3,
-      "weight": 10,
+      "weight": 4,
       "task": "get-insurance"
     },
     {
@@ -53,6 +53,11 @@
       "step": 4,
       "weight": 2,
       "task": "town-mercantile-license"
+    },
+    {
+      "step": 3,
+      "weight": 1,
+      "task": "bank-account"
     }
   ],
   "name": "Food Truck",
