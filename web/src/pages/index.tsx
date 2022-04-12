@@ -127,7 +127,9 @@ const Home = (): ReactElement => {
         <div>
           <Link href={buttonLink} passHref>
             <button
-              className={`usa-button usa-button btn-${buttonStyleProp} ${intercom ? "intercom-button" : ""}`}
+              className={`usa-button usa-button margin-right-0 btn-${buttonStyleProp} ${
+                intercom ? "intercom-button" : ""
+              }`}
             >
               {buttonText}
             </button>

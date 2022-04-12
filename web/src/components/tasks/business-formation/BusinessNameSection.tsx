@@ -142,7 +142,7 @@ export const BusinessNameSection = (): ReactElement => {
         </Alert>
       )}
       <div
-        className={"padding-3 bg-base-lightest flex flex-justify-end task-submit-button-background"}
+        className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205"
         style={{
           visibility:
             nameAvailability?.status === "AVAILABLE" && submittedName === currentName ? "visible" : "hidden",

@@ -132,7 +132,7 @@ exports[`Alert warning with heading displays correctly 1`] = `
         class="usa-alert__body"
       >
         <h3
-          class="margin-bottom-0 margin-top-neg-05"
+          class="margin-bottom-0"
         >
           Warning Alert with heading
         </h3>

@@ -121,14 +121,17 @@ const ListOrCheckbox = ({ children }: { children: unknown[] }): ReactElement => 
   if (typeof children[0] === "string" && children[0].startsWith("[]")) {
     const checklistItemId = children[0].slice("[]".length).split("{")[1].split("}")[0];
     const checklistItemBody = [children[0].split("}")[1], ...children.slice(1)];
+
     return (
-      <div className="padding-y-1">
+      <div className="margin-y-2">
         <FormControlLabel
           label={<>{checklistItemBody}</>}
           control={
             <TaskCheckbox
               checklistItemId={checklistItemId}
-              checkboxProps={{ sx: { alignSelf: "self-start" } }}
+              checkboxProps={{
+                sx: { alignSelf: "start", paddingTop: "1px", paddingBottom: "0px" },
+              }}
             />
           }
         />

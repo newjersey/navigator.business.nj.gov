@@ -26,7 +26,7 @@ export const ContextualInfoLink = ({ children }: { children: string[] }): ReactE
 
   return (
     <Button style="tertiary" dataTestid={contextualInfoId} onClick={setContext}>
-      <span className="dashed-underline border-primary line-height-body-5">{displayText}</span>
+      <span className="dashed-underline line-height-body-5">{displayText}</span>
     </Button>
   );
 };

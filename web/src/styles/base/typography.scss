@@ -125,8 +125,9 @@ div {
 }
 
 .dashed-underline {
-  border-bottom-width: 2px;
-  border-bottom-style: dashed;
+  text-decoration: dotted underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 2px;
 }
 
 .no-link-style {

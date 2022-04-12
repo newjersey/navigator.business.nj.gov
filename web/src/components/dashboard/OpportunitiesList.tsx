@@ -6,11 +6,10 @@ import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
 import { filterFundings } from "@/lib/domain-logic/filterFundings";
 import { sortCertifications } from "@/lib/domain-logic/sortCertifications";
 import { sortFundings } from "@/lib/domain-logic/sortFundings";
-import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, DashboardDisplayContent, Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
@@ -22,7 +21,6 @@ interface Props {
 export const OpportunitiesList = (props: Props): ReactElement => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { userData } = useUserData();
-  const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   const filteredSortedFundings = userData ? sortFundings(filterFundings(props.fundings, userData)) : [];
   const filteredSortedCertifications = userData
@@ -82,15 +80,7 @@ export const OpportunitiesList = (props: Props): ReactElement => {
           )}
         </div>
         <hr className="margin-top-3 desktop:margin-right-1 bg-base-light" aria-hidden={true} />
-        {isDesktopAndUp && (
-          <>
-            <div className="margin-y-205 margin-top-3 weight-unset-override">
-              <Content>{props.displayContent.opportunityTextMd}</Content>
-            </div>
-            <hr className="margin-right-1 margin-top-3 bg-base-light" aria-hidden={true} />
-          </>
-        )}
-        <div className="desktop:margin-right-3">
+        <div className="desktop:margin-right-3 desktop:margin-bottom-2">
           <Accordion
             elevation={0}
             expanded={hiddenAccordionIsOpen}
@@ -126,28 +116,20 @@ export const OpportunitiesList = (props: Props): ReactElement => {
             </AccordionDetails>
           </Accordion>
         </div>
-        {!isDesktopAndUp && (
-          <>
-            <hr
-              className="desktop:margin-right-1 margin-top-0 margin-bottom-3 bg-base-light"
-              aria-hidden={true}
-            />
-            <div className="margin-y-205 weight-unset-override">
-              <Content>{props.displayContent.opportunityTextMd}</Content>
-            </div>
-            <hr
-              className="desktop:margin-right-1 margin-top-3 margin-bottom-0 bg-base-light"
-              aria-hidden={true}
-            />
-          </>
-        )}
       </div>
-      {isDesktopAndUp && (
+      <>
         <hr
-          className="margin-bottom-3 margin-top-4 desktop:margin-right-1 bg-base-light"
+          className="desktop:margin-right-1 margin-top-0 desktop:margin-top-1 margin-bottom-2 bg-base-light"
           aria-hidden={true}
         />
-      )}
+        <div className="margin-y-205 weight-unset-override">
+          <Content>{props.displayContent.opportunityTextMd}</Content>
+        </div>
+        <hr
+          className="desktop:margin-right-1 margin-top-2 margin-bottom-0 bg-base-light"
+          aria-hidden={true}
+        />
+      </>
     </div>
   );
 };

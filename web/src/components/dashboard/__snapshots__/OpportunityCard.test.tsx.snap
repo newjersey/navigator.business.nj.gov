@@ -8,7 +8,7 @@ exports[`OpportunityCard matches the layout 1`] = `
       data-testid="test"
     >
       <div
-        class="fdr margin-bottom-205"
+        class="fdr margin-bottom-105"
       >
         <div>
           <span
@@ -58,7 +58,7 @@ exports[`OpportunityCard matches the layout 1`] = `
         </div>
       </div>
       <div
-        class="text-normal font-body-md margin-bottom-205"
+        class="text-normal font-body-md margin-bottom-105"
       >
         <a
           class="usa-link"

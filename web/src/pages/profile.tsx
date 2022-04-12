@@ -302,7 +302,7 @@ const ProfilePage = (props: Props): ReactElement => {
                 isOpen={alert !== undefined}
                 close={() => setAlert(undefined)}
               >
-                <div data-testid={`toast-alert-${alert}`} className="h3-styling">
+                <div data-testid={`toast-alert-${alert}`} className="h3-styling margin-bottom-0">
                   {OnboardingStatusLookup[alert].header}
                 </div>
                 <div className="padding-top-05">{OnboardingStatusLookup[alert].body}</div>

@@ -45,14 +45,14 @@ export const InnovFooter = (): ReactElement => {
             </p>
 
             <p className="footer-container footer-divider-top padding-y-105 footer-divider-bottom">
-              <span className="padding-right-1">
+              <span className="padding-right-1 text-center">
                 {Config.footer.officeTextOne}
                 <Icon className="heart-custom">favorite</Icon>
                 {Config.footer.officeTextTwo}
                 <a
                   href={Config.footer.officeLink}
                   target="_blank"
-                  className="usa-identifier__required-link footer-link-custom"
+                  className="usa-identifier__required-link footer-link-custom text-center"
                   rel="noreferrer"
                 >
                   {Config.footer.officeLinkText}
