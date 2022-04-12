@@ -21,7 +21,7 @@
     },
     {
       "step": 3,
-      "weight": 6,
+      "weight": 10,
       "task": "bank-account"
     },
     {
