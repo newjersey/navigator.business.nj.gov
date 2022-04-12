@@ -14,15 +14,6 @@ commands:
           name: Install yarn packages
           command: yarn install
 
-  setup-npm-global:
-    steps:
-      - run:
-          name: Setup global npm storage
-          command: |
-            mkdir ~/.npm-global
-            npm config set prefix '~/.npm-global'
-            export PATH=~/.npm-global/bin:$PATH
-
   install-dynamodb:
     steps:
       - run:
@@ -31,12 +22,12 @@ commands:
 
   configure:
     steps:
-      - run:
-          name: Install Tools
-          command: |
-            sudo apt update
-            sudo apt install -y openjdk-11-jdk-headless
-      - install-awscli
+      #- run:
+      #    name: Install Tools
+      #    command: |
+      #      sudo apt update
+      #      sudo apt install -y openjdk-11-jdk-headless
+      #- install-awscli
       - bootstrap-code
       - run:
           name: Configure Serverless
@@ -336,9 +327,35 @@ commands:
             gh pr create --fill --base main --head $CIRCLE_BRANCH
 
 jobs:
+  build-builder:
+    docker:
+      - image: cimg/node:14.19.1
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.11
+          docker_layer_caching: true
+      - install-awscli
+      - run:
+          name: Set Env Vars
+          command: |
+            echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV' >> $BASH_ENV
+            echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_DEV' >> $BASH_ENV
+      - run:
+          name: Build Docker Image
+          command: docker build -f Builder.Dockerfile . -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_builder_containers:builder-${CIRCLE_SHA1} -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_builder_containers:builder -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_builder_containers:builder-latest
+      - run:
+          name: Push Web Docker image
+          command: |
+            aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_builder_containers:builder-${CIRCLE_SHA1}
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_builder_containers:builder
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_builder_containers:builder-latest
+
   rebase-content:
     docker:
-      - image: cimg/node:14.19.0
+      - image: cimg/node:14.19.1
     steps:
       - checkout
       - install-github-cli
@@ -354,7 +371,10 @@ jobs:
 
   build:
     docker:
-      - image: cimg/node:14.19.1
+      - image: 534320591531.dkr.ecr.us-east-1.amazonaws.com/bfs_builder_containers:builder-latest
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-dev-env-vars
       - configure-and-build
@@ -366,7 +386,10 @@ jobs:
 
   lint-and-test:
     docker:
-      - image: cimg/node:14.19.1
+      - image: 534320591531.dkr.ecr.us-east-1.amazonaws.com/bfs_builder_containers:builder-latest
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -390,7 +413,10 @@ jobs:
 
   deploy-dev:
     docker:
-      - image: cimg/node:14.19.1
+      - image: 534320591531.dkr.ecr.us-east-1.amazonaws.com/bfs_builder_containers:builder-latest
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -404,7 +430,10 @@ jobs:
 
   deploy-staging:
     docker:
-      - image: cimg/node:14.19.1
+      - image: 534320591531.dkr.ecr.us-east-1.amazonaws.com/bfs_builder_containers:builder-latest
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-staging-env-vars
       - deploy
@@ -414,7 +443,10 @@ jobs:
 
   deploy-production:
     docker:
-      - image: cimg/node:14.19.1
+      - image: 534320591531.dkr.ecr.us-east-1.amazonaws.com/bfs_builder_containers:builder-latest
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-prod-env-vars
       - deploy
@@ -433,16 +465,19 @@ jobs:
         type: string
         default: "chrome"
     docker:
-      - image: cimg/node:14.19.1-browsers
+      - image: 534320591531.dkr.ecr.us-east-1.amazonaws.com/bfs_builder_containers:builder-latest
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-cypress-env-vars
       - attach_workspace:
           at: .
       - configure-and-build
       - install-dynamodb
-      - install-chrome
+      #- install-chrome
       - install-edge
-      - install-firefox
+      #- install-firefox
       - perform-integration-tests:
           enable-dashboard: << parameters.enable-dashboard >>
           suite: << parameters.suite >>
@@ -644,6 +679,15 @@ workflows:
                 - main
           requires:
             - build
+
+  build-builder:
+    jobs:
+      - build-builder:
+          name: Build Builder Image
+          filters:
+            branches:
+              only:
+                - feautre-build-tool
 
   browser-testing:
     triggers:
