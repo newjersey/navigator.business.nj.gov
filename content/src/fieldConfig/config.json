@@ -87,7 +87,7 @@
     "legalStructureWarningModalContinueButtonText": "Continue",
     "contactLastNamePlaceholder": "Last Name",
     "signatureDeleteMobileText": "Delete Signer",
-    "nextButtonText": "Continue",
+    "nextButtonText": "Save & Continue",
     "submitErrorHeading": "Form cannot be submitted. Review the errors found in the following fields:",
     "businessSuffixTooltip": "A business designator is how your legal structure is displayed after your business name.",
     "contactLastNameLabel": "**Last Name**",
@@ -409,14 +409,14 @@
     "taxPinErrorText": "Tax PIN must be 4 digits.",
     "escapeModalEscape": "Go back",
     "escapeModalBody": "You have unsaved changes that will be lost.",
+    "standingDocFileTitle": "Certified Copy of Formation",
     "successTextBody": "Your profile has been updated.",
+    "formationDocFileTitle": "Official Formation Document",
     "errorTextBody": "There are errors with some entries, please try again.",
     "escapeModalHeader": "Are you sure you want to continue?",
     "saveButtonText": "Save",
     "escapeModalReturn": "Continue without saving",
     "successTextHeader": "Profile Updated",
-    "formationDocFileTitle": "Official Formation Document",
-    "certificationDocFileTitle": "Certificate of Good Standing",
-    "standingDocFileTitle": "Certified Copy of Formation"
+    "certificationDocFileTitle": "Certificate of Good Standing"
   }
 }
