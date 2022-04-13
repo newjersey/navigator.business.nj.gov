@@ -1,3 +1,33 @@
+## [3.2.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.2.1...v3.2.2) (2022-04-13)
+
+
+### Bug Fixes
+
+* updating General Config config ([#2369](https://github.com/newjersey/navigator.business.nj.gov/issues/2369)) ([e4a44f2](https://github.com/newjersey/navigator.business.nj.gov/commit/e4a44f2b9a6971372b623180c09df1319902b0d6))
+* updating Industry Roadmaps auto-body-repair ([#2371](https://github.com/newjersey/navigator.business.nj.gov/issues/2371)) ([ac881ea](https://github.com/newjersey/navigator.business.nj.gov/commit/ac881eaf51f059d4bd6e80de74f823e51ce2dd84))
+* updating Industry Roadmaps cannabis ([#2373](https://github.com/newjersey/navigator.business.nj.gov/issues/2373)) ([2cdfe43](https://github.com/newjersey/navigator.business.nj.gov/commit/2cdfe43babad3bd2b63e7bede3ffc30d21cf78b8))
+* updating Industry Roadmaps cannabis ([#2407](https://github.com/newjersey/navigator.business.nj.gov/issues/2407)) ([49a6a0f](https://github.com/newjersey/navigator.business.nj.gov/commit/49a6a0f59f04818b312b02a2f12c3f1c04007db4))
+* updating Industry Roadmaps certified-public-accountant ([#2374](https://github.com/newjersey/navigator.business.nj.gov/issues/2374)) ([895afcb](https://github.com/newjersey/navigator.business.nj.gov/commit/895afcbab3431cf2bdae9ea9a20129648f69c1d5))
+* updating Industry Roadmaps cleaning-aid ([#2375](https://github.com/newjersey/navigator.business.nj.gov/issues/2375)) ([1109a3e](https://github.com/newjersey/navigator.business.nj.gov/commit/1109a3e36be693de913c4a506d19fe6bdcdc6ca5))
+* updating Industry Roadmaps cosmetology ([#2376](https://github.com/newjersey/navigator.business.nj.gov/issues/2376)) ([fb86458](https://github.com/newjersey/navigator.business.nj.gov/commit/fb86458e32c0aafdc5f4c41d6a3aa81d6991905f))
+* updating Industry Roadmaps e-commerce ([#2377](https://github.com/newjersey/navigator.business.nj.gov/issues/2377)) ([0cb1272](https://github.com/newjersey/navigator.business.nj.gov/commit/0cb127244a1428c6bece67fa7ffb4ce214cb01bd))
+* updating Industry Roadmaps employment-agency ([#2378](https://github.com/newjersey/navigator.business.nj.gov/issues/2378)) ([71ae3d1](https://github.com/newjersey/navigator.business.nj.gov/commit/71ae3d14a2680bcd86f573a3b00a698f97946c0f))
+* updating Industry Roadmaps food-truck ([#2379](https://github.com/newjersey/navigator.business.nj.gov/issues/2379)) ([5439315](https://github.com/newjersey/navigator.business.nj.gov/commit/5439315ad08c0aa7781f69614f4262196c48e072))
+* updating Industry Roadmaps generic ([#2380](https://github.com/newjersey/navigator.business.nj.gov/issues/2380)) ([da87d93](https://github.com/newjersey/navigator.business.nj.gov/commit/da87d93305b3dc996bfc2af33d143e69fbc1ad2b))
+* updating Industry Roadmaps home-contractor ([#2381](https://github.com/newjersey/navigator.business.nj.gov/issues/2381)) ([703d5cc](https://github.com/newjersey/navigator.business.nj.gov/commit/703d5ccdc26c259c9d1768b9116f92952dfb8c38))
+* updating Industry Roadmaps homemaker-home-health-aide ([#2383](https://github.com/newjersey/navigator.business.nj.gov/issues/2383)) ([c474b76](https://github.com/newjersey/navigator.business.nj.gov/commit/c474b76bdf38ea4b11bb7b434bb43f474cb0b3c0))
+* updating Industry Roadmaps janitorial-services ([#2384](https://github.com/newjersey/navigator.business.nj.gov/issues/2384)) ([09ad4c4](https://github.com/newjersey/navigator.business.nj.gov/commit/09ad4c441600df4365a24993ece9cc2ba0fb8430))
+* updating Industry Roadmaps management-consulting ([#2385](https://github.com/newjersey/navigator.business.nj.gov/issues/2385)) ([0c0656c](https://github.com/newjersey/navigator.business.nj.gov/commit/0c0656c31918f41c40507fe48ef2bf3ef97490db))
+* updating Industry Roadmaps marketing-consulting ([#2386](https://github.com/newjersey/navigator.business.nj.gov/issues/2386)) ([6bb2b83](https://github.com/newjersey/navigator.business.nj.gov/commit/6bb2b83112d0c78de9e5e083348bb100f07cbb54))
+* updating Industry Roadmaps massage-therapy ([#2387](https://github.com/newjersey/navigator.business.nj.gov/issues/2387)) ([77687b2](https://github.com/newjersey/navigator.business.nj.gov/commit/77687b28a54e11b32dd4b62ec1e8128546c6ed6b))
+* updating Industry Roadmaps non-medical-transport ([#2388](https://github.com/newjersey/navigator.business.nj.gov/issues/2388)) ([4ba2b84](https://github.com/newjersey/navigator.business.nj.gov/commit/4ba2b84c5e2d929a2faa3bf2aa9cb9fea0854bb5))
+* updating Industry Roadmaps pharmacy ([#2389](https://github.com/newjersey/navigator.business.nj.gov/issues/2389)) ([ec0f28d](https://github.com/newjersey/navigator.business.nj.gov/commit/ec0f28de02c4dd744b6fe9cc28c166b5454b89c9))
+* updating Industry Roadmaps pr-consultant ([#2390](https://github.com/newjersey/navigator.business.nj.gov/issues/2390)) ([b2800dc](https://github.com/newjersey/navigator.business.nj.gov/commit/b2800dc9aaa7f5226c05e0ddb9196a97325fca42))
+* updating Industry Roadmaps restaurant ([#2391](https://github.com/newjersey/navigator.business.nj.gov/issues/2391)) ([d9c9dfc](https://github.com/newjersey/navigator.business.nj.gov/commit/d9c9dfcc6055ef6fdaf34860b0551be2b919ec14))
+* updating Industry Roadmaps retail ([#2392](https://github.com/newjersey/navigator.business.nj.gov/issues/2392)) ([289c1e8](https://github.com/newjersey/navigator.business.nj.gov/commit/289c1e8d5c77084802e326f07ade107e0713525a))
+* updating Roadmap Add-ons cannabis-conditional ([#2411](https://github.com/newjersey/navigator.business.nj.gov/issues/2411)) ([6fede4c](https://github.com/newjersey/navigator.business.nj.gov/commit/6fede4ce779257d9bc20043f1629f7ffa7351e93))
+* updating Roadmap Add-ons physical-location ([#2397](https://github.com/newjersey/navigator.business.nj.gov/issues/2397)) ([2085479](https://github.com/newjersey/navigator.business.nj.gov/commit/20854798157acbca484ea156edb5ba796b8aa1bf))
+
 ## [3.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.2.0...v3.2.1) (2022-04-12)
 
 
