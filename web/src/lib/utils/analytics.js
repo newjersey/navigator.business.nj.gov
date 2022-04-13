@@ -366,6 +366,13 @@ export default {
         },
       },
     },
+    business_formation_success_screen: {
+      arrive: {
+        arrive_from_NIC_formation_processing: () => {
+          sendEvent("business_formation_success_screen", "arrive", "arrive_from_NIC_formation_processing");
+        },
+      },
+    },
     business_formation_business_name_edit: {
       click: {
         go_to_name_search_step: () => {
@@ -419,13 +426,6 @@ export default {
       click: {
         go_to_next_formation_step: () => {
           sendEvent("business_formation_name_step_continue_button", "click", "go_to_next_formation_step");
-        },
-      },
-    },
-    business_formation_name_step_update_name_on_roadmap: {
-      click: {
-        update_name_on_roadmap: () => {
-          sendEvent("business_formation_name_step_update_name_on_roadmap", "click", "update_name_on_roadmap");
         },
       },
     },

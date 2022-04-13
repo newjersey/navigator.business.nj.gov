@@ -81,9 +81,6 @@ export const useBusinessNameSearch = (
   const updateNameOnProfile = (): void => {
     if (!userData) return;
     setUpdateButtonClicked(true);
-    if (isBusinessFormation) {
-      analytics.event.business_formation_name_step_update_name_on_roadmap.click.update_name_on_roadmap();
-    }
     update({
       ...userData,
       profileData: {

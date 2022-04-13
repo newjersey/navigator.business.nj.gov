@@ -55,6 +55,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
             <Button
               style="tertiary"
               onClick={() => {
+                analytics.event.business_formation_business_name_edit.click.go_to_name_search_step();
                 setTab(businessFormationTabs.findIndex((obj) => obj.section === "Business"));
                 scrollToTop();
               }}

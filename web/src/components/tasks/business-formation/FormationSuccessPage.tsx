@@ -1,5 +1,7 @@
 import { FormationSuccessDocument } from "@/components/tasks/business-formation/FormationSuccessDocument";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
+import analytics from "@/lib/utils/analytics";
+import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared";
 import React, { ReactElement } from "react";
@@ -10,6 +12,11 @@ interface Props {
 
 export const FormationSuccessPage = (props: Props): ReactElement => {
   const { documents } = useDocuments();
+
+  useMountEffect(() => {
+    analytics.event.business_formation_success_screen.arrive.arrive_from_NIC_formation_processing();
+  });
+
   return (
     <>
       <div className="fdc fac margin-bottom-2">
