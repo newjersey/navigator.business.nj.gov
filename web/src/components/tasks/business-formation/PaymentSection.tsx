@@ -50,33 +50,33 @@ export const PaymentSection = (): ReactElement => {
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
 
       return;
-    } else {
-      setShowRequiredFieldsError(false);
+    }
 
-      setIsLoading(true);
-      analytics.event.business_formation_billing_step_continue_button.click.go_to_next_formation_step();
-      const newUserData = await api.postBusinessFormation(
-        {
-          ...userData,
-          formationData: {
-            ...userData.formationData,
-            formationFormData: state.formationFormData,
-          },
+    setShowRequiredFieldsError(false);
+
+    setIsLoading(true);
+    analytics.event.business_formation_billing_step_continue_button.click.go_to_next_formation_step();
+    const newUserData = await api.postBusinessFormation(
+      {
+        ...userData,
+        formationData: {
+          ...userData.formationData,
+          formationFormData: state.formationFormData,
         },
-        window.location.href
-      );
+      },
+      window.location.href
+    );
 
-      update(newUserData);
+    update(newUserData);
 
-      if (
-        newUserData.formationData.formationResponse?.success &&
-        newUserData.formationData.formationResponse?.redirect
-      ) {
-        await router.replace(newUserData.formationData.formationResponse.redirect);
-      } else {
-        setIsLoading(false);
-        setShowResponseAlert(true);
-      }
+    if (
+      newUserData.formationData.formationResponse?.success &&
+      newUserData.formationData.formationResponse?.redirect
+    ) {
+      await router.replace(newUserData.formationData.formationResponse.redirect);
+    } else {
+      setIsLoading(false);
+      setShowResponseAlert(true);
     }
   };
 
