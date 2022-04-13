@@ -28,19 +28,19 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("home-based business", () => {
-    it("adds physical-location add-on if home-based business is false", async () => {
+    it("adds non-home-based-business add-on if home-based business is false", async () => {
       await buildUserRoadmap(generateProfileData({ homeBasedBusiness: false }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("physical-location");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("non-home-based-business");
     });
 
-    it("does not add physical-location add-on if home-based business is true", async () => {
+    it("does not add non-home-based-business add-on if home-based business is true", async () => {
       await buildUserRoadmap(generateProfileData({ homeBasedBusiness: true }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("physical-location");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("non-home-based-business");
     });
 
-    it("does not add physical-location add-on if industry is food-truck", async () => {
+    it("does not add non-home-based-business add-on if industry is food-truck", async () => {
       await buildUserRoadmap(generateProfileData({ industryId: "food-truck" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("physical-location");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("non-home-based-business");
     });
   });
 

@@ -9,7 +9,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
   const industry = LookupIndustryById(profileData.industryId);
 
   if (!profileData.homeBasedBusiness && !industry.isMobileLocation) {
-    addOns.push("physical-location");
+    addOns.push("non-home-based-business");
   }
 
   if (profileData.legalStructureId === "s-corporation") {
