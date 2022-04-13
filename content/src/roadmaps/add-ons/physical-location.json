@@ -12,7 +12,7 @@
     },
     {
       "step": 3,
-      "weight": 1,
+      "weight": 20,
       "task": "sign-lease"
     },
     {
