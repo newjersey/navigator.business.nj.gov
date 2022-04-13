@@ -27,12 +27,12 @@
     },
     {
       "step": 3,
-      "weight": 3,
+      "weight": 25,
       "task": "building-permit"
     },
     {
       "step": 3,
-      "weight": 2,
+      "weight": 30,
       "task": "zoning"
     }
   ]
