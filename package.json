@@ -179,7 +179,7 @@
     "typescript": "4.6.3",
     "webpack": "5.72.0",
     "webpack-node-externals": "3.0.0",
-    "wiremock": "2.32.0",
+    "wiremock": "2.33.1",
     "yarn-workspace-sync-deps": "0.3.2"
   },
   "workspaces": {
