@@ -30,7 +30,7 @@
     "notSetBusinessAddressCityLabel": "Not set",
     "membersSuccessTextHeader": "Member Added",
     "missingFieldsOnSubmitModalText": "Review before submitting. The following fields are missing or invalid:",
-    "suffixErrorText": "Enter a business suffix",
+    "suffixErrorText": "Enter a business designator",
     "registeredAgentNamePlaceholder": "Registered Agent Name",
     "startDateErrorText": "The business formation date must be today or a future date formatted as MM/DD/YYYY",
     "agentnameErrorText": "Enter the agent's name",
