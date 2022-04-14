@@ -30,7 +30,6 @@ describe("Profile [feature] [all] [group1]", () => {
   describe("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
       const industry = randomElementFromArray(industriesNotHomeBasedOrLiquorLicense as Industry[]);
-      const businessName = `Generic Business Name ${randomInt()}`;
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
@@ -38,7 +37,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
 
       completeNewBusinessOnboarding({
-        businessName,
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
@@ -47,7 +45,6 @@ describe("Profile [feature] [all] [group1]", () => {
       });
 
       checkNewBusinessProfilePage({
-        businessName,
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
@@ -78,7 +75,6 @@ describe("Profile [feature] [all] [group1]", () => {
 
     it("onboards random homebased industry, then updates the field in profile", () => {
       const industry = randomElementFromArray(homeBasedIndustries as Industry[]);
-      const businessName = `Generic Business Name ${randomInt()}`;
       const homeBasedQuestion = Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
@@ -86,7 +82,6 @@ describe("Profile [feature] [all] [group1]", () => {
       const townDisplayName = "Atlantic";
 
       completeNewBusinessOnboarding({
-        businessName,
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
@@ -95,7 +90,6 @@ describe("Profile [feature] [all] [group1]", () => {
       });
 
       checkNewBusinessProfilePage({
-        businessName,
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
@@ -110,14 +104,12 @@ describe("Profile [feature] [all] [group1]", () => {
 
     it("onboards random liquor license industry, then updates the field in profile", () => {
       const industry = randomElementFromArray(liquorLicenseIndustries as Industry[]);
-      const businessName = `Generic Business Name ${randomInt()}`;
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
 
       completeNewBusinessOnboarding({
-        businessName,
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
@@ -126,7 +118,6 @@ describe("Profile [feature] [all] [group1]", () => {
       });
 
       checkNewBusinessProfilePage({
-        businessName,
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
@@ -140,7 +131,6 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random industry with company type that enables entity id field, then updates the field in profile", () => {
-      const businessName = `Generic Business Name ${randomInt()}`;
       const industry = randomElementFromArray(Industries as Industry[]);
       const companyTypeWithTradeName = randomElementFromArray(
         legalStructureWithTradeName as LegalStructure[]
@@ -153,7 +143,6 @@ describe("Profile [feature] [all] [group1]", () => {
       const updatedEntityId = randomInt(10).toString();
 
       completeNewBusinessOnboarding({
-        businessName,
         industry,
         legalStructureId,
         homeBasedQuestion,
@@ -162,7 +151,6 @@ describe("Profile [feature] [all] [group1]", () => {
       });
 
       checkNewBusinessProfilePage({
-        businessName,
         industry,
         legalStructureId,
         homeBasedQuestion,

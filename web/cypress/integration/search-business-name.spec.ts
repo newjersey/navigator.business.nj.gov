@@ -1,6 +1,10 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { completeNewBusinessOnboarding, randomInt } from "cypress/support/helpers";
+import {
+  completeNewBusinessOnboarding,
+  randomInt,
+  updateNewBusinessProfilePage,
+} from "cypress/support/helpers";
 
 describe("search business name [feature] [all] [group2]", () => {
   beforeEach(() => {
@@ -17,7 +21,6 @@ describe("search business name [feature] [all] [group2]", () => {
     const townDisplayName = undefined;
 
     completeNewBusinessOnboarding({
-      businessName,
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
@@ -26,11 +29,12 @@ describe("search business name [feature] [all] [group2]", () => {
     });
 
     // roadmap business name
-    cy.get('[data-business-name="Aculyst"]').should("exist");
+    updateNewBusinessProfilePage({ businessName });
+    cy.get(`[data-business-name="${businessName}"]`).should("exist");
 
     // search name
     cy.get('[data-task="search-business-name"]').click();
-    cy.get('input[aria-label="Search business name"]').should("have.value", "Aculyst");
+    cy.get('input[aria-label="Search business name"]').should("have.value", businessName);
     cy.get('button[data-testid="search-availability"]').click();
 
     // unavailable
@@ -49,7 +53,7 @@ describe("search business name [feature] [all] [group2]", () => {
     // update name
     cy.get('[data-testid="update-name"]').click();
     cy.get('[data-testid="back-to-roadmap"]').click();
-    cy.get('[data-business-name="Aculyst"]').should("not.exist");
+    cy.get(`[data-business-name="${businessName}"]`).should("not.exist");
     cy.get('[data-business-name="My Cool Business"]').should("exist");
   });
 });

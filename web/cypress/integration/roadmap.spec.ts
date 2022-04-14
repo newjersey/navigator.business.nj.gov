@@ -18,7 +18,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
   });
 
   it("enters user info and shows the roadmap", () => {
-    const businessName = `Generic Business Name ${randomInt()}`;
     const industry = LookupIndustryById("e-commerce");
     const homeBasedQuestion = false;
     const liquorLicenseQuestion =
@@ -27,7 +26,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const townDisplayName = "Absecon";
 
     completeNewBusinessOnboarding({
-      businessName,
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
@@ -36,7 +34,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
     });
 
     // check roadmap
-    cy.get(`[data-business-name="${businessName}"]`).should("exist");
     cy.get('[data-industry="e-commerce"]').should("exist");
     cy.get('[data-legal-structure="general-partnership"]').should("exist");
     cy.get('[data-municipality="Absecon"]').should("exist");
@@ -63,7 +60,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
 
     // tasks screen
     cy.get('[data-task="register-trade-name"]').click({ force: true });
-    cy.get(`[data-business-name="${businessName}"]`).should("not.exist");
+    cy.get('[data-legal-structure="general-partnership"]').should("not.exist");
     cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
@@ -106,10 +103,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
     onOnboardingPage.clickNext();
 
     cy.url().should("include", "onboarding?page=2");
-    onOnboardingPage.typeBusinessName("Beesapple's");
-    onOnboardingPage.clickNext();
-
-    cy.url().should("include", "onboarding?page=3");
     onOnboardingPage.selectIndustry("home-contractor");
 
     cy.get('[data-testid="home-contractors-activities"]').click({ force: true });
@@ -118,7 +111,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-testid="info-panel"]').should("not.exist");
     onOnboardingPage.clickNext();
 
-    cy.url().should("include", "onboarding?page=4");
+    cy.url().should("include", "onboarding?page=3");
     cy.get('[data-testid="legal-structure-learn-more"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });
@@ -127,16 +120,15 @@ describe("Roadmap [feature] [all] [group2]", () => {
     onOnboardingPage.selectLegalStructure("general-partnership");
     onOnboardingPage.clickNext();
 
-    cy.url().should("include", "onboarding?page=5");
+    cy.url().should("include", "onboarding?page=4");
     onOnboardingPage.selectLocation("Absecon");
     onOnboardingPage.selectHomeBased(false);
     onOnboardingPage.clickNext();
 
-    cy.url().should("include", "onboarding?page=6");
+    cy.url().should("include", "onboarding?page=5");
   });
 
   it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
-    const businessName = `Generic Business Name ${randomInt()}`;
     const industry = LookupIndustryById("e-commerce");
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
     const liquorLicenseQuestion =
@@ -145,7 +137,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const townDisplayName = "Absecon";
 
     completeNewBusinessOnboarding({
-      businessName,
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
@@ -164,7 +155,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
   });
 
   it("user data is updated if opted into newsletter", () => {
-    const businessName = `Generic Business Name ${randomInt()}`;
     const industry = randomElementFromArray(Industries as Industry[]) as Industry;
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
     const liquorLicenseQuestion =
@@ -175,7 +165,6 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.intercept("POST", "/local/api/users", (req) => req.continue()).as("new-user");
 
     completeNewBusinessOnboarding({
-      businessName,
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,

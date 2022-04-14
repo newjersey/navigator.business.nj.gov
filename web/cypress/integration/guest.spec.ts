@@ -2,11 +2,10 @@
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared";
 import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
-import { completeNewBusinessOnboarding, randomInt } from "../support/helpers";
+import { completeNewBusinessOnboarding } from "../support/helpers";
 
 describe("Guest Roadmap [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");
-  const businessName = `Generic Business Name ${randomInt()}`;
   const legalStructureId = "limited-liability-company";
   const townDisplayName = "Atlantic City";
 
@@ -16,7 +15,6 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.visit("/");
     cy.get('[data-testid="hero"]').click();
     completeNewBusinessOnboarding({
-      businessName,
       industry,
       homeBasedQuestion: false,
       liquorLicenseQuestion: undefined,
@@ -25,10 +23,11 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
       isContactMeChecked: true,
     });
   });
+
   it("enters user info and shows the roadmap", () => {
     cy.url().should("contain", "/roadmap");
+
     // check roadmap
-    cy.get(`[data-business-name='${businessName}']`).should("exist");
     cy.get(`[data-industry='${industry.id}']`).should("exist");
     cy.get(`[data-legal-structure='${legalStructureId}']`).should("exist");
     cy.get(`[data-municipality='${townDisplayName}']`).should("exist");
@@ -56,7 +55,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
 
     // go to regular task
     cy.get('[data-task="check-local-requirements"]').click({ force: true });
-    cy.get(`[data-business-name='${businessName}']`).should("not.exist");
+    cy.get(`[data-industry='${industry.id}']`).should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
     cy.get('[data-testid="self-reg-toast"]').should("not.exist");

@@ -288,7 +288,6 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
 
   describe("Roadmap", () => {
     it("should pass the audits", () => {
-      const businessName = "Smith Works";
       const industry = LookupIndustryById("e-commerce");
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
       const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
@@ -296,7 +295,6 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
       const townDisplayName = "Absecon";
 
       completeNewBusinessOnboarding({
-        businessName,
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
@@ -305,7 +303,6 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
       });
 
       // check roadmap
-      cy.get('[data-business-name="Smith Works"]').should("exist");
       cy.get('[data-industry="e-commerce"]').should("exist");
       cy.get('[data-legal-structure="general-partnership"]').should("exist");
       cy.get('[data-municipality="Absecon"]').should("exist");
@@ -313,11 +310,11 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
       cy.lighthouse(undefined, lighthouseDesktopConfig);
       cy.pa11y(defaultPa11yThresholds);
     });
+
     describe("Tasks", () => {
       const urlSlugs = ["identify-potential-lease", "check-site-requirements", "reseller", "business-plan"];
       urlSlugs.forEach((slug) => {
         it(`should pass the audits on ${slug}`, () => {
-          const businessName = "Donut Shop";
           const industry = LookupIndustryById("cosmetology");
           const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
           const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
@@ -325,7 +322,6 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
           const townDisplayName = "Absecon";
 
           completeNewBusinessOnboarding({
-            businessName,
             industry,
             homeBasedQuestion,
             liquorLicenseQuestion,

@@ -10,7 +10,6 @@ describe("Roadmap [all] [group4]", () => {
 
   Industries.forEach((industry) => {
     it(` ${industry.name} completes onboarding and shows the roadmap`, () => {
-      const businessName = `Generic Business Name ${randomInt()}`;
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
@@ -18,7 +17,6 @@ describe("Roadmap [all] [group4]", () => {
       const townDisplayName = undefined;
 
       completeNewBusinessOnboarding({
-        businessName,
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
@@ -27,7 +25,6 @@ describe("Roadmap [all] [group4]", () => {
       });
 
       // check roadmap
-      cy.get(`[data-business-name="${businessName}"]`).should("exist");
       cy.get(`[data-industry="${industry.id}"]`).should("exist");
       cy.get(`[data-legal-structure="${legalStructureId}"]`).should("exist");
       cy.get(`[data-testid="mini-profile-location"]`)

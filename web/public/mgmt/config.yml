@@ -765,8 +765,21 @@ collections:
               - { label: Grey Box - Not Entered Placeholder, name: greyBoxNotEnteredText, widget: string }
               - { label: Grey Box - View More Text, name: greyBoxViewMoreText, widget: string }
               - { label: Grey Box - View Less Text, name: greyBoxViewLessText, widget: string }
-              - { label: Roadmap Title - No Business Name, name: roadmapTitleNotSet, widget: string }
-              - { label: Roadmap Title - with Business Name, name: roadmapTitleTemplate, widget: string }
+              - {
+                  label: Roadmap Title - No Business Name nor User Name,
+                  name: roadmapTitleBusinessAndUserMissing,
+                  widget: string,
+                }
+              - {
+                  label: Roadmap Title - with Business Name,
+                  name: roadmapTitleTemplateForBusinessName,
+                  widget: string,
+                }
+              - {
+                  label: Roadmap Title - with User Name,
+                  name: roadmapTitleTemplateForUserName,
+                  widget: string,
+                }
               - { label: Loading Text, name: loadingText, widget: string }
               - { label: Calendar Filing Due Date Label, name: calendarFilingDueDateLabel, widget: string }
               - { label: Congratulatory Modal - Title, name: congratulatorModalTitle, widget: string }
