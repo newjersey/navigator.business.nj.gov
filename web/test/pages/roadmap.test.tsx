@@ -1,6 +1,7 @@
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateFormationData,
@@ -11,6 +12,7 @@ import {
   generateStep,
   generateTask,
   generateTaxFilingData,
+  generateUser,
   generateUserData,
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers";
@@ -95,14 +97,12 @@ describe("roadmap page", () => {
     setMockUserDataResponse({ userData: undefined });
     const subject = renderRoadmapPage();
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText(Config.roadmapDefaults.roadmapTitleNotSet)).toBeNull();
   });
 
   it("shows loading page if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     const subject = renderRoadmapPage();
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText(Config.roadmapDefaults.roadmapTitleNotSet)).toBeNull();
   });
 
   it("shows user data and loading spinner when user data loaded but not roadmap", () => {
@@ -175,19 +175,47 @@ describe("roadmap page", () => {
       useMockProfileData({ businessName: "My cool business" });
       const subject = renderRoadmapPage();
       expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent("My cool business");
-      expect(subject.getByText("Business Roadmap for My cool business")).toBeInTheDocument();
+      const expectedHeaderText = templateEval(Config.roadmapDefaults.roadmapTitleTemplateForBusinessName, {
+        businessName: "My cool business",
+      });
+      expect(subject.getByText(expectedHeaderText)).toBeInTheDocument();
     });
 
-    it("shows placeholder if no business name present", async () => {
-      useMockProfileData({
-        businessName: "",
-        industryId: "restaurant",
-        legalStructureId: "c-corporation",
+    it("shows placeholder with user name if no business name present", async () => {
+      useMockUserData({
+        profileData: generateProfileData({
+          businessName: "",
+          industryId: "restaurant",
+          legalStructureId: "c-corporation",
+        }),
+        user: generateUser({ name: "Ada Lovelace" }),
       });
       const subject = renderRoadmapPage();
       expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent(
         Config.roadmapDefaults.greyBoxNotSetText
       );
+      const expectedHeaderText = templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
+        name: "Ada Lovelace",
+      });
+      expect(subject.getByText(expectedHeaderText)).toBeInTheDocument();
+    });
+
+    it("shows placeholder if no business name nor user name present", async () => {
+      useMockUserData({
+        profileData: generateProfileData({
+          businessName: "",
+          industryId: "restaurant",
+          legalStructureId: "c-corporation",
+        }),
+        user: generateUser({ name: undefined }),
+      });
+      const subject = renderRoadmapPage();
+      expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent(
+        Config.roadmapDefaults.greyBoxNotSetText
+      );
+      expect(
+        subject.getByText(Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing)
+      ).toBeInTheDocument();
     });
 
     it("shows the human-readable industry from onboarding data", () => {

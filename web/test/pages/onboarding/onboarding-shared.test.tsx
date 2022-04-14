@@ -86,11 +86,9 @@ describe("onboarding - shared", () => {
     expect(mockSetRoadmap).toHaveBeenCalledTimes(2);
     await page.visitStep4();
     expect(mockSetRoadmap).toHaveBeenCalledTimes(3);
-    await page.visitStep5();
-    expect(mockSetRoadmap).toHaveBeenCalledTimes(4);
 
     page.clickNext();
-    await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(5));
+    await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(4));
   });
 
   it("generates a new empty userData object during guest checkout", async () => {
@@ -111,8 +109,6 @@ describe("onboarding - shared", () => {
     await page.visitStep4();
     expect(getLastCalledWithConfig().local).toEqual(true);
     await page.visitStep5();
-    expect(getLastCalledWithConfig().local).toEqual(true);
-    await page.visitStep6();
     expect(getLastCalledWithConfig().local).toEqual(true);
     page.clickNext();
     await waitFor(() => expect(getLastCalledWithConfig().local).toEqual(true));
@@ -156,7 +152,7 @@ describe("onboarding - shared", () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
-    page.fillText("Business name", "Cool Computers");
+    expect(subject.queryByTestId("step-2")).toBeInTheDocument();
     page.clickBack();
     expect(subject.queryByTestId("step-1")).toBeInTheDocument();
   });
@@ -171,15 +167,12 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
-    page.fillText("Business name", "Cool Computers");
-    await page.visitStep3();
     page.selectByValue("Industry", "e-commerce");
-    await page.visitStep4();
+    await page.visitStep3();
     page.chooseRadio("general-partnership");
-    await page.visitStep5();
+    await page.visitStep4();
     page.selectByText("Location", "Newark");
 
-    page.clickBack();
     page.clickBack();
     page.clickBack();
     page.clickBack();
@@ -190,7 +183,7 @@ describe("onboarding - shared", () => {
       ...initialUserData.profileData,
       hasExistingBusiness: true,
       entityId: undefined,
-      businessName: "Cool Computers",
+      businessName: "",
       initialOnboardingFlow: "OWNING",
       industryId: "generic",
       homeBasedBusiness: true,
@@ -304,8 +297,6 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
-    await page.visitStep3();
-
     expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
     page.selectByValue("Industry", "home-contractor");
     expect(subject.queryByText("Learn more about home contractors!")).toBeInTheDocument();
@@ -323,7 +314,6 @@ describe("onboarding - shared", () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
-    await page.visitStep3();
 
     expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
     page.selectByValue("Industry", "employment-agency");
@@ -346,13 +336,12 @@ describe("onboarding - shared", () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
-    await page.visitStep3();
 
     expect(subject.queryByText("Do you need a liquor license?")).not.toBeInTheDocument();
     page.selectByValue("Industry", "restaurant");
     expect(subject.queryByText("Do you need a liquor license?")).toBeInTheDocument();
     page.chooseRadio("liquor-license-true");
-    await page.visitStep4();
+    await page.visitStep3();
 
     expect(currentUserData().profileData.liquorLicense).toEqual(true);
   });
@@ -375,7 +364,6 @@ describe("onboarding - shared", () => {
 
       page.chooseRadio("has-existing-business-false");
       await page.visitStep2();
-      await page.visitStep3();
     });
 
     it("displays cannabis license type question for cannabis only", async () => {
@@ -389,25 +377,25 @@ describe("onboarding - shared", () => {
 
     it("defaults cannabis license type to CONDITIONAL", async () => {
       page.selectByValue("Industry", "cannabis");
-      await page.visitStep4();
+      await page.visitStep3();
       expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
     });
 
     it("allows switching cannabis license type to ANNUAL", async () => {
       page.selectByValue("Industry", "cannabis");
       page.chooseRadio("cannabis-license-annual");
-      await page.visitStep4();
+      await page.visitStep3();
       expect(currentUserData().profileData.cannabisLicenseType).toEqual("ANNUAL");
     });
 
     it("sets cannabis license type to back undefined when switching back to non-cannabis industru", async () => {
       expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
       page.selectByValue("Industry", "cannabis");
-      await page.visitStep4();
+      await page.visitStep3();
       expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
       page.clickBack();
       page.selectByValue("Industry", "generic");
-      await page.visitStep4();
+      await page.visitStep3();
       expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
     });
   });
@@ -425,11 +413,10 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
-    await page.visitStep3();
     page.selectByValue("Industry", "home-contractor");
-    await page.visitStep4();
+    await page.visitStep3();
     page.chooseRadio("general-partnership");
-    await page.visitStep5();
+    await page.visitStep4();
     page.selectByText("Location", "Newark");
 
     expect(subject.queryByText("Are you a home-based business?")).toBeInTheDocument();
@@ -446,12 +433,11 @@ describe("onboarding - shared", () => {
     const { subject, page } = renderPage({ displayContent });
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
-    await page.visitStep3();
 
     page.selectByValue("Industry", "restaurant");
-    await page.visitStep4();
+    await page.visitStep3();
     page.chooseRadio("general-partnership");
-    await page.visitStep5();
+    await page.visitStep4();
 
     expect(subject.queryByText("Are you a home-based business?")).not.toBeInTheDocument();
   });
@@ -460,16 +446,15 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({});
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
-    await page.visitStep3();
 
     page.selectByValue("Industry", "restaurant");
     page.chooseRadio("liquor-license-true");
-    await page.visitStep4();
+    await page.visitStep3();
     expect(currentUserData().profileData.liquorLicense).toEqual(true);
 
     page.clickBack();
     page.selectByValue("Industry", "cosmetology");
-    await page.visitStep4();
+    await page.visitStep3();
     expect(currentUserData().profileData.liquorLicense).toEqual(false);
   });
 
@@ -535,15 +520,14 @@ describe("onboarding - shared", () => {
     const selectInitialIndustry = async (industry: string, page: PageHelpers): Promise<void> => {
       page.chooseRadio("has-existing-business-false");
       await page.visitStep2();
-      await page.visitStep3();
-
       page.selectByValue("Industry", industry);
-      await page.visitStep4();
+
+      await page.visitStep3();
       page.chooseRadio("general-partnership");
     };
 
     const selectHomeBasedBusiness = async (value: string, page: PageHelpers): Promise<void> => {
-      await page.visitStep5();
+      await page.visitStep4();
       page.chooseRadio(`home-based-business-${value}`);
       page.clickBack();
     };
@@ -551,7 +535,7 @@ describe("onboarding - shared", () => {
     const reselectNewIndustry = async (industry: string, page: PageHelpers): Promise<void> => {
       page.clickBack();
       page.selectByValue("Industry", industry);
-      await page.visitStep4();
+      await page.visitStep3();
     };
   });
 });

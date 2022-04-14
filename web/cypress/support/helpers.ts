@@ -83,8 +83,8 @@ type registration = {
   isNewsletterChecked: boolean;
   isContactMeChecked: boolean;
 };
+
 interface startingOnboardingData {
-  businessName: string;
   industry: Industry;
   legalStructureId: string;
   townDisplayName: string | undefined;
@@ -93,7 +93,6 @@ interface startingOnboardingData {
 }
 
 export const completeNewBusinessOnboarding = ({
-  businessName,
   industry,
   legalStructureId,
   townDisplayName,
@@ -111,11 +110,7 @@ export const completeNewBusinessOnboarding = ({
   onOnboardingPage.clickNext();
 
   cy.url().should("include", "onboarding?page=2");
-  onOnboardingPage.typeBusinessName(businessName);
-  onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
-  onOnboardingPage.clickNext();
 
-  cy.url().should("include", "onboarding?page=3");
   onOnboardingPage.selectIndustry((industry as Industry).id);
   onOnboardingPage
     .getIndustryDropdown()
@@ -131,7 +126,7 @@ export const completeNewBusinessOnboarding = ({
   }
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", "onboarding?page=4");
+  cy.url().should("include", "onboarding?page=3");
   onOnboardingPage.selectLegalStructure(legalStructureId);
   onOnboardingPage
     .getLegalStructure(legalStructureId)
@@ -141,7 +136,7 @@ export const completeNewBusinessOnboarding = ({
     .should("have.class", "Mui-checked");
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", "onboarding?page=5");
+  cy.url().should("include", "onboarding?page=4");
 
   if (townDisplayName) {
     onOnboardingPage.selectLocation(townDisplayName);
@@ -160,7 +155,7 @@ export const completeNewBusinessOnboarding = ({
   }
 
   onOnboardingPage.clickNext();
-  cy.url().should("include", "onboarding?page=6");
+  cy.url().should("include", "onboarding?page=5");
   onOnboardingPage.typeFullName(fullName);
   onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
   onOnboardingPage.typeEmail(email);
@@ -290,12 +285,15 @@ export const checkNewBusinessProfilePage = ({
   taxId = "",
   notes = "",
   entityId = "",
-}: Partial<startingProfileData>): void => {
+}: Partial<startingProfileData & { businessName: string }>): void => {
   cy.url().should("contain", "/roadmap");
   onRoadmapPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
 
-  onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
+  if (businessName) {
+    onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
+  }
+
   onOnboardingPage
     .getIndustryDropdown()
     .invoke("prop", "value")
@@ -410,7 +408,7 @@ export const updateNewBusinessProfilePage = ({
   taxId,
   notes,
   entityId,
-}: Partial<startingProfileData>): void => {
+}: Partial<startingProfileData & { businessName: string }>): void => {
   cy.url().should("contain", "/roadmap");
   onRoadmapPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");

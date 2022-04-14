@@ -130,10 +130,6 @@ export const getOnboardingFlows = (
         }),
       },
       {
-        component: <OnboardingBusinessName />,
-        getErrorMap: () => undefined,
-      },
-      {
         component: <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />,
         getErrorMap: () => ({
           inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],

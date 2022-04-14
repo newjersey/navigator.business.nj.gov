@@ -327,7 +327,7 @@ describe("onboarding - owning a business", () => {
     });
 
     const { page } = renderPage({ userData });
-    expect(page.getRadioButtonValue()).toEqual("true");
+    expect(page.getRadioButtonValue("Has Existing Business")).toEqual("true");
 
     await page.visitStep2();
     expect(page.getEntityIdValue()).toEqual("0123456789");
@@ -351,7 +351,7 @@ describe("onboarding - owning a business", () => {
       }),
     });
     const { page } = renderPage({ userData: initialUserData });
-    expect(page.getRadioButtonValue()).toEqual("true");
+    expect(page.getRadioButtonValue("Has Existing Business")).toEqual("true");
     await page.visitStep2();
     await page.visitStep3();
     await page.visitStep4();

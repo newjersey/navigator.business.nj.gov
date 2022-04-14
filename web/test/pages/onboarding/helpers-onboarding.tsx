@@ -79,7 +79,7 @@ export type PageHelpers = {
   getBusinessNameValue: () => string;
   getSectorIDValue: () => string;
   getIndustryValue: () => string;
-  getRadioButtonValue: () => string;
+  getRadioButtonValue: (sectionAriaLabel: string) => string;
   getMunicipalityValue: () => string;
   getFullNameValue: () => string;
   getEmailValue: () => string;
@@ -139,8 +139,10 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
 
   const getIndustryValue = (): string => (subject.queryByTestId("industryid") as HTMLInputElement)?.value;
 
-  const getRadioButtonValue = (): string => {
-    const checked = subject.container.querySelector(".Mui-checked input") as HTMLInputElement;
+  const getRadioButtonValue = (sectionAriaLabel: string): string => {
+    const checked = subject.container.querySelector(
+      `[aria-label="${sectionAriaLabel}"] .Mui-checked input`
+    ) as HTMLInputElement;
     return checked.value as string;
   };
 
