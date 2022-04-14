@@ -467,7 +467,6 @@ describe("onboarding - shared", () => {
     await page.visitStep3();
     await page.visitStep4();
     await page.visitStep5();
-    await page.visitStep6();
     page.clickNext();
     subject.debug();
     await waitFor(() => {
@@ -484,7 +483,6 @@ describe("onboarding - shared", () => {
     await page.visitStep3();
     await page.visitStep4();
     await page.visitStep5();
-    await page.visitStep6();
     page.clickNext();
     await waitFor(() => {
       expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
