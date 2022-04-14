@@ -29,11 +29,6 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
   const IndustriesOrdered: Industry[] = orderBy(Industries, (industry: Industry) => {
     return industry.name;
-  }).filter((industry: Industry) => {
-    if (industry.id === "cannabis") {
-      return process.env.FEATURE_DISABLE_CANNABIS !== "true";
-    }
-    return true;
   });
 
   const handleIndustryIdChange = (industryId: string | undefined) => {

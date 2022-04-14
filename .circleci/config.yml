@@ -192,8 +192,6 @@ commands:
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_DEV' >> $BASH_ENV
             echo 'export SMOKE_TEST_ENV=$SMOKE_TEST_ENV_DEV' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_DEV' >> $BASH_ENV
-            echo 'export FEATURE_DISABLE_FORMATION_STAGING=$FEATURE_DISABLE_FORMATION_STAGING' >> $BASH_ENV
-            echo 'export FEATURE_DISABLE_FORMATION_PROD=$FEATURE_DISABLE_FORMATION_PROD' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -235,7 +233,6 @@ commands:
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_STAGING' >> $BASH_ENV
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_STAGING' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_STAGING' >> $BASH_ENV
-            echo 'export FEATURE_DISABLE_FORMATION=$FEATURE_DISABLE_FORMATION_STAGING' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -256,12 +253,10 @@ commands:
             echo 'export MYNJ_SERVICE_TOKEN=$MYNJ_SERVICE_TOKEN_PROD' >> $BASH_ENV
             echo 'export MYNJ_SERVICE_URL=$MYNJ_SERVICE_URL_PROD' >> $BASH_ENV
             echo 'export REDIRECT_URL=$REDIRECT_URL_PROD' >> $BASH_ENV
-            echo 'export FEATURE_DISABLE_FORMATION=$FEATURE_DISABLE_FORMATION_PROD' >> $BASH_ENV
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEWPROD' >> $BASH_ENV
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEWPROD' >> $BASH_ENV
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_PROD' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_PROD' >> $BASH_ENV
-            echo 'export FEATURE_DISABLE_CANNABIS=$FEATURE_DISABLE_CANNABIS_PROD' >> $BASH_ENV
 
   deploy:
     steps:
