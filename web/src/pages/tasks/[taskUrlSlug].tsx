@@ -17,7 +17,7 @@ import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
-import { featureFlags, getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
+import { getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Municipality } from "@businessnjgovnavigator/shared";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
@@ -44,8 +44,6 @@ const TaskPage = (props: Props): ReactElement => {
     };
   }, [props.task.urlSlug, roadmap]);
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
-
-  const { featureDisableFormation } = featureFlags(router.query);
 
   const getUnlockedBy = (): ReactElement => {
     const unlockedByTaskLinks = taskFromRoadmap
@@ -93,7 +91,6 @@ const TaskPage = (props: Props): ReactElement => {
   };
 
   const businessFormationFeatureFlag = (): ReactElement => {
-    if (featureDisableFormation) return getTaskBody();
     return (
       <BusinessFormation
         task={props.task}

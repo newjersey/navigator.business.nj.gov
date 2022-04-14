@@ -24,7 +24,6 @@ const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMuni
 describe("buildUserRoadmap", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    delete process.env.FEATURE_DISABLE_FORMATION;
   });
 
   describe("home-based business", () => {
@@ -74,20 +73,11 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("llc");
     });
 
-    it("adds llc for LLC legal structure if business formation is NOT disabled", async () => {
-      process.env.FEATURE_DISABLE_FORMATION = "false";
+    it("adds llc for LLC legal structure", async () => {
       await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("llc");
-    });
-
-    it("adds public-record-filing for LLC legal structure if business formation is disabled", async () => {
-      process.env.FEATURE_DISABLE_FORMATION = "true";
-      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("llc");
     });
 
     it("adds trade-name for Trade Name legal structures", async () => {

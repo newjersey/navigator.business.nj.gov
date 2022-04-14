@@ -17,8 +17,6 @@ module.exports = withBundleAnalyzer({
     AWS_REGION: process.env.AWS_REGION,
     MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
     CHECK_DEAD_LINKS: process.env.CHECK_DEAD_LINKS,
-    FEATURE_DISABLE_FORMATION: process.env.FEATURE_DISABLE_FORMATION,
-    FEATURE_DISABLE_CANNABIS: process.env.FEATURE_DISABLE_CANNABIS,
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {

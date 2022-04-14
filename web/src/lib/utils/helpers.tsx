@@ -11,7 +11,6 @@ import {
 } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Preferences, UserData } from "@businessnjgovnavigator/shared/";
-import { ParsedUrlQuery } from "querystring";
 import React, { ReactElement, useEffect, useRef } from "react";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -265,17 +264,6 @@ export const zipCodeRange = (value: string) => {
   const parsedValue = parseInt(value);
   if (typeof parsedValue !== "number") return false;
   return parsedValue >= 7001 && parsedValue <= 8999;
-};
-
-export const featureFlags = (query: ParsedUrlQuery): Record<"featureDisableFormation", boolean> => {
-  const featureDisableFormation = query?.formation
-    ? query?.formation === "false"
-    : process.env.FEATURE_DISABLE_FORMATION
-    ? process.env.FEATURE_DISABLE_FORMATION === "true"
-    : false;
-  return {
-    featureDisableFormation,
-  };
 };
 
 export const getStringifiedAddress = (
