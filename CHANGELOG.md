@@ -1,3 +1,15 @@
+# [3.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.2.2...v3.3.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency swr to v1.3.0 ([bb6897d](https://github.com/newjersey/navigator.business.nj.gov/commit/bb6897d62fac204fa9c43c4aeeeafcc2f6b2f7a2))
+
+
+### Features
+
+* [[#1444](https://github.com/newjersey/navigator.business.nj.gov/issues/1444)] add analytics events for Formation ([045f135](https://github.com/newjersey/navigator.business.nj.gov/commit/045f135dbdabc51dfea1fdb4e9102760fbc28e88))
+
 ## [3.2.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.2.1...v3.2.2) (2022-04-13)
 
 
