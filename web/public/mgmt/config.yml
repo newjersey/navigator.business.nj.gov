@@ -825,6 +825,7 @@ collections:
               - { label: Confirm Email Placeholder, name: confirmEmailFieldPlaceholder, widget: string }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Close Button Text, name: closeButtonText, widget: string }
+              - { label: Error - Full name is required, name: errorTextFullName, widget: string }
               - { label: Error - Emails not matching, name: errorTextEmailsNotMatching, widget: string }
               - { label: Error - Required Fields, name: errorTextRequiredFields, widget: string }
               - { label: Error - Duplicate Signup, name: errorTextDuplicateSignup, widget: string }
