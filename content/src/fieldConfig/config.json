@@ -163,7 +163,7 @@
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
-    "errorTextEmailsNotMatching": "Please enter matching emails.",
+    "errorTextEmailsNotMatching": "Email addresses must match and be valid.",
     "nameFieldPlaceholder": "Type your full name",
     "nameFieldLabel": "Full name",
     "completeSigninTitleText": "Completing signing you in...",
@@ -259,13 +259,6 @@
     "section5SecondHeaderText": "Funding & Certifications",
     "section6Header": "Looking for More Support?"
   },
-  "landingPageExperienceB": {
-    "section5FirstSupportingText": "Knowing exactly what your business needs to do to start can be difficult. Our starter kit is unique to your industry and even includes Cannabis retailers. Find what licenses, forms, and permits you need to start your business in New Jersey. Learn the requirements of each application, find out what you get after submitting your application, and store critical business identification numbers all in one place. ",
-    "section4SecondIconText": "Your Starter Kit",
-    "section5ThirdSupportingText": "The Navigator is a one-stop-shop for all your New Jersey business needs. You can track your progress, check the status of applications, speak to NJ-based business advocates, and more!",
-    "heroSupportingText": "Create your free, personalized checklist to launch and grow your New Jersey business.",
-    "section5FirstHeaderText": "Starter Kit"
-  },
   "filingDefaults": {
     "tagContentBeforeDueDate": "Next Due:"
   },
@@ -287,6 +280,7 @@
     "errorTextRequiredBusinessName": "Please enter your business name."
   },
   "roadmapDefaults": {
+    "roadmapTitleBusinessAndUserMissing": "Hello!",
     "congratulatorModalBody": "You can now start your",
     "greyBoxNotesText": "Notes",
     "greyBoxEditText": "View/Edit Profile",
@@ -297,11 +291,9 @@
     "congratulatorModalLinkText": "tasks.",
     "greyBoxNotSetText": "Not set",
     "loadingText": "Loading...",
+    "roadmapTitleTemplateForUserName": "Hello, ${name}",
     "calendarFilingDueDateLabel": "Due",
     "greyBoxEINText": "Employer Identification Number (EIN)",
-    "roadmapTitleBusinessAndUserMissing": "Hello!",
-    "roadmapTitleTemplateForUserName": "Hello, ${name}",
-    "roadmapTitleTemplateForBusinessName": "Business Roadmap for ${businessName}",
     "graduationButtonText": "Show Me Funding Opportunities",
     "congratulatorModalHeader": "You reached a crucial milestone as a business.",
     "greyBoxViewMoreText": "View More",
@@ -315,7 +307,8 @@
     "graduationModalTitle": "## Tell us more about your business",
     "graduationHeader": "Finished setting up your business?",
     "graduationBodyText": "If your business is up and running, you can now also use the Navigator to learn about filings, certifications, funding opportunities, and more.",
-    "greyBoxNotEnteredText": "Not entered"
+    "greyBoxNotEnteredText": "Not entered",
+    "roadmapTitleTemplateForBusinessName": "Business Roadmap for ${businessName}"
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
@@ -359,6 +352,13 @@
     "NOT_STARTED": "Not started",
     "IN_PROGRESS": "In progress",
     "COMPLETED": "Completed"
+  },
+  "landingPageExperienceB": {
+    "section5FirstSupportingText": "Knowing exactly what your business needs to do to start can be difficult. Our starter kit is unique to your industry and even includes Cannabis retailers. Find what licenses, forms, and permits you need to start your business in New Jersey. Learn the requirements of each application, find out what you get after submitting your application, and store critical business identification numbers all in one place. ",
+    "section4SecondIconText": "Your Starter Kit",
+    "section5ThirdSupportingText": "The Navigator is a one-stop-shop for all your New Jersey business needs. You can track your progress, check the status of applications, speak to NJ-based business advocates, and more!",
+    "heroSupportingText": "Create your free, personalized checklist to launch and grow your New Jersey business.",
+    "section5FirstHeaderText": "Starter Kit"
   },
   "taskDefaults": {
     "backToRoadmapText": "Go Back",
