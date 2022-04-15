@@ -278,7 +278,7 @@ export const runSelfRegPageTests = (
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.clickNext();
-    expect(subject.queryByText(Config.selfRegistration.errorTextRequiredFields)).toBeInTheDocument();
+    expect(subject.queryByText(Config.selfRegistration.errorTextFullName)).toBeInTheDocument();
     expect(currentUserData().user).toEqual(user);
   });
 

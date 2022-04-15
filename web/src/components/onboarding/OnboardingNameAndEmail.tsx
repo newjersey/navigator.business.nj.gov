@@ -58,7 +58,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           fieldName={"name"}
           error={props.fieldStates["name"].invalid}
           onValidation={onValidation}
-          validationText={Config.selfRegistration.errorTextRequiredFields}
+          validationText={Config.selfRegistration.errorTextFullName}
           required={true}
           placeholder={Config.selfRegistration.nameFieldPlaceholder}
           handleChange={handleName}
