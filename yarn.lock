@@ -3640,7 +3640,7 @@ __metadata:
     markdown-truncate: 1.0.4
     napa: 3.0.0
     nc: "git+https://github.com/dsueltenfuss/nc.git"
-    netlify-cms-app: 2.15.70
+    netlify-cms-app: 2.15.72
     next: 12.1.4
     next-seo: 5.4.0
     prettier: 2.6.2
@@ -3790,7 +3790,7 @@ __metadata:
     lodash.orderby: 4.6.0
     markdown-truncate: 1.0.4
     napa: 3.0.0
-    netlify-cms-app: 2.15.70
+    netlify-cms-app: 2.15.72
     next: 12.1.4
     next-seo: 5.4.0
     prettier: 2.6.2
@@ -24696,9 +24696,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-app@npm:2.15.70":
-  version: 2.15.70
-  resolution: "netlify-cms-app@npm:2.15.70"
+"netlify-cms-app@npm:2.15.72":
+  version: 2.15.72
+  resolution: "netlify-cms-app@npm:2.15.72"
   dependencies:
     "@emotion/core": ^10.0.35
     "@emotion/styled": ^10.0.27
@@ -24706,18 +24706,18 @@ __metadata:
     immutable: ^3.7.6
     lodash: ^4.17.11
     moment: ^2.24.0
-    netlify-cms-backend-azure: ^1.3.0
+    netlify-cms-backend-azure: ^1.3.1
     netlify-cms-backend-bitbucket: ^2.14.0
     netlify-cms-backend-git-gateway: ^2.13.1
-    netlify-cms-backend-github: ^2.14.0
+    netlify-cms-backend-github: ^2.14.1
     netlify-cms-backend-gitlab: ^2.13.0
     netlify-cms-backend-proxy: ^1.2.3
     netlify-cms-backend-test: ^2.11.3
-    netlify-cms-core: ^2.55.0
+    netlify-cms-core: ^2.55.2
     netlify-cms-editor-component-image: ^2.7.0
     netlify-cms-lib-auth: ^2.4.2
-    netlify-cms-lib-util: ^2.15.0
-    netlify-cms-lib-widgets: ^1.8.0
+    netlify-cms-lib-util: ^2.15.1
+    netlify-cms-lib-widgets: ^1.8.1
     netlify-cms-locales: ^1.39.0
     netlify-cms-ui-default: ^2.15.5
     netlify-cms-widget-boolean: ^2.4.1
@@ -24725,14 +24725,14 @@ __metadata:
     netlify-cms-widget-colorstring: ^1.1.2
     netlify-cms-widget-date: ^2.6.3
     netlify-cms-widget-datetime: ^2.7.4
-    netlify-cms-widget-file: ^2.12.0
+    netlify-cms-widget-file: ^2.12.1
     netlify-cms-widget-image: ^2.8.1
     netlify-cms-widget-list: ^2.10.1
     netlify-cms-widget-map: ^1.5.1
-    netlify-cms-widget-markdown: ^2.15.0
+    netlify-cms-widget-markdown: ^2.15.1
     netlify-cms-widget-number: ^2.5.0
-    netlify-cms-widget-object: ^2.7.1
-    netlify-cms-widget-relation: ^2.11.0
+    netlify-cms-widget-object: ^2.7.2
+    netlify-cms-widget-relation: ^2.11.1
     netlify-cms-widget-select: ^2.8.2
     netlify-cms-widget-string: ^2.3.0
     netlify-cms-widget-text: ^2.4.1
@@ -24742,11 +24742,11 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 1ac4cf3696e28d99ef3c6f98f6f00064974ce3c39721910f59769b9112ef1410b55d992146e1a52674dcaf4a2fabb80b072288f17c35c8cdca4d9993beb3744f
+  checksum: 0cdf8a9e81cb65ed36719438426e37bc7c28af3efb4c7d904b362711d2eab6777a043d98dabc1ebdb6e25ac7e8e3c49dd4dd988ee6bae56ea32fd077235131b4
   languageName: node
   linkType: hard
 
-"netlify-cms-backend-azure@npm:^1.3.0":
+"netlify-cms-backend-azure@npm:^1.3.1":
   version: 1.3.1
   resolution: "netlify-cms-backend-azure@npm:1.3.1"
   dependencies:
@@ -24812,7 +24812,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-backend-github@npm:^2.14.0":
+"netlify-cms-backend-github@npm:^2.14.1":
   version: 2.14.1
   resolution: "netlify-cms-backend-github@npm:2.14.1"
   dependencies:
@@ -24892,7 +24892,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-core@npm:^2.55.0":
+"netlify-cms-core@npm:^2.55.2":
   version: 2.55.2
   resolution: "netlify-cms-core@npm:2.55.2"
   dependencies:
@@ -24984,7 +24984,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-lib-util@npm:^2.15.0":
+"netlify-cms-lib-util@npm:^2.15.1":
   version: 2.15.1
   resolution: "netlify-cms-lib-util@npm:2.15.1"
   dependencies:
@@ -24998,7 +24998,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-lib-widgets@npm:^1.8.0":
+"netlify-cms-lib-widgets@npm:^1.8.1":
   version: 1.8.1
   resolution: "netlify-cms-lib-widgets@npm:1.8.1"
   peerDependencies:
@@ -25109,7 +25109,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-widget-file@npm:^2.12.0":
+"netlify-cms-widget-file@npm:^2.12.1":
   version: 2.12.1
   resolution: "netlify-cms-widget-file@npm:2.12.1"
   dependencies:
@@ -25180,7 +25180,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-widget-markdown@npm:^2.15.0":
+"netlify-cms-widget-markdown@npm:^2.15.1":
   version: 2.15.1
   resolution: "netlify-cms-widget-markdown@npm:2.15.1"
   dependencies:
@@ -25227,7 +25227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-widget-object@npm:^2.7.1":
+"netlify-cms-widget-object@npm:^2.7.2":
   version: 2.7.2
   resolution: "netlify-cms-widget-object@npm:2.7.2"
   peerDependencies:
@@ -25243,7 +25243,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"netlify-cms-widget-relation@npm:^2.11.0":
+"netlify-cms-widget-relation@npm:^2.11.1":
   version: 2.11.1
   resolution: "netlify-cms-widget-relation@npm:2.11.1"
   dependencies:
