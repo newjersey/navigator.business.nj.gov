@@ -1,0 +1,1 @@
+- []{required-unique-id}Checkbox Label
