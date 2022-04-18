@@ -89,7 +89,7 @@
     "@types/broken-link-checker": "0.7.1",
     "@types/jest": "27.4.1",
     "@types/lodash.orderby": "4.6.6",
-    "@types/node": "14.18.12",
+    "@types/node": "14.18.13",
     "@types/react": "17.0.44",
     "@types/react-dom": "17.0.15",
     "@types/react-swipeable-views": "0.13.1",
