@@ -31,7 +31,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     return industry.name;
   });
 
-  const handleIndustryIdChange = (industryId: string | undefined) => {
+  const onIndustryIdChange = (industryId: string | undefined) => {
     let homeBasedBusiness = true;
     let cannabisLicenseType = undefined;
 
@@ -55,23 +55,26 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       }
     }
 
+    const newSector = LookupIndustryById(industryId).defaultSectorId;
+
     setProfileData({
       ...state.profileData,
       liquorLicense: isLiquorLicenseApplicable(industryId) ? state.profileData.liquorLicense : false,
       homeBasedBusiness,
       cannabisLicenseType,
       industryId: industryId,
+      sectorId: newSector,
     });
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleSearchBoxChange = (event: ChangeEvent<HTMLInputElement>): void => {
     props.handleChange && props.handleChange();
     setSearchText(event.target.value);
   };
 
   const handleIndustry = (event: ChangeEvent<unknown>, value: Industry | null) => {
     props.handleChange && props.handleChange();
-    handleIndustryIdChange(value?.id);
+    onIndustryIdChange(value?.id);
     setSearchText(value ? value.name : "");
   };
 
@@ -115,7 +118,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
             ...params.inputProps,
           }}
           value={searchText}
-          onChange={handleChange}
+          onChange={handleSearchBoxChange}
           onSubmit={props.onValidation}
           variant="outlined"
           placeholder={state.displayContent.industryId.placeholder}

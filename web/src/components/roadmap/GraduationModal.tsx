@@ -77,6 +77,10 @@ export const GraduationModal = (props: Props): ReactElement => {
     setFieldStates(createProfileFieldErrorMap());
   };
 
+  const shouldShowSectorDropdown = (): boolean => {
+    return profileData.industryId === "generic" || !profileData.industryId;
+  };
+
   const graduateToOwning = async (): Promise<void> => {
     if (!userData) return;
 
@@ -161,11 +165,13 @@ export const GraduationModal = (props: Props): ReactElement => {
                     />
                   ) : undefined}
                   <div className="margin-top-1">
-                    <OnboardingSectors
-                      onValidation={onValidation}
-                      fieldStates={fieldStates}
-                      headerAriaLevel={3}
-                    />
+                    {shouldShowSectorDropdown() && (
+                      <OnboardingSectors
+                        onValidation={onValidation}
+                        fieldStates={fieldStates}
+                        headerAriaLevel={3}
+                      />
+                    )}
                   </div>
                   <div className="margin-top-1">
                     <OnboardingOwnership headerAriaLevel={3} />

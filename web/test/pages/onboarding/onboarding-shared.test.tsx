@@ -293,173 +293,190 @@ describe("onboarding - shared", () => {
     });
   });
 
-  it("displays industry-specific content for home contractors when selected", async () => {
-    const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-    displayContent.industryId.specificHomeContractorMd = "Learn more about home contractors!";
-
-    const { subject, page } = renderPage({});
-
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
-    page.selectByValue("Industry", "home-contractor");
-    expect(subject.queryByText("Learn more about home contractors!")).toBeInTheDocument();
-
-    await waitFor(() => {
-      page.selectByValue("Industry", "e-commerce");
-      expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
-    });
-  });
-
-  it("displays industry-specific content for employment agency when selected", async () => {
-    const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-    displayContent.industryId.specificEmploymentAgencyMd = "Learn more about employment agencies!";
-
-    const { subject, page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-
-    expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
-    page.selectByValue("Industry", "employment-agency");
-    expect(subject.queryByText("Learn more about employment agencies!")).toBeInTheDocument();
-
-    await waitFor(() => {
-      page.selectByValue("Industry", "e-commerce");
-      expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
-    });
-  });
-
-  it("displays liquor license question for restaurants when selected", async () => {
-    const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-    displayContent.industryId.specificLiquorQuestion = {
-      contentMd: "Do you need a liquor license?",
-      radioButtonYesText: "Yeah",
-      radioButtonNoText: "Nah",
-    };
-
-    const { subject, page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-
-    expect(subject.queryByText("Do you need a liquor license?")).not.toBeInTheDocument();
-    page.selectByValue("Industry", "restaurant");
-    expect(subject.queryByText("Do you need a liquor license?")).toBeInTheDocument();
-    page.chooseRadio("liquor-license-true");
-    await page.visitStep3();
-
-    expect(currentUserData().profileData.liquorLicense).toEqual(true);
-  });
-
-  describe("cannabis license type question", () => {
-    let subject: RenderResult;
-    let page: PageHelpers;
-
-    beforeEach(async () => {
+  describe("when industry changes", () => {
+    it("displays industry-specific content for home contractors when selected", async () => {
       const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-      displayContent.industryId.specificCannabisLicenseQuestion = {
-        contentMd: "What type of cannabis license?",
-        radioButtonConditionalText: "Conditional",
-        radioButtonAnnualText: "Annual",
-      };
+      displayContent.industryId.specificHomeContractorMd = "Learn more about home contractors!";
 
-      const result = renderPage({});
-      page = result.page;
-      subject = result.subject;
+      const { subject, page } = renderPage({});
 
       page.chooseRadio("has-existing-business-false");
       await page.visitStep2();
+      expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
+      page.selectByValue("Industry", "home-contractor");
+      expect(subject.queryByText("Learn more about home contractors!")).toBeInTheDocument();
+
+      await waitFor(() => {
+        page.selectByValue("Industry", "e-commerce");
+        expect(subject.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
+      });
     });
 
-    it("displays cannabis license type question for cannabis only", async () => {
-      expect(subject.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
-      page.selectByValue("Industry", "cannabis");
-      expect(subject.queryByText("What type of cannabis license?")).toBeInTheDocument();
+    it("displays industry-specific content for employment agency when selected", async () => {
+      const displayContent = createEmptyLoadDisplayContent()["STARTING"];
+      displayContent.industryId.specificEmploymentAgencyMd = "Learn more about employment agencies!";
 
-      page.selectByValue("Industry", "generic");
-      expect(subject.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
+      const { subject, page } = renderPage({});
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+
+      expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
+      page.selectByValue("Industry", "employment-agency");
+      expect(subject.queryByText("Learn more about employment agencies!")).toBeInTheDocument();
+
+      await waitFor(() => {
+        page.selectByValue("Industry", "e-commerce");
+        expect(subject.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
+      });
     });
 
-    it("defaults cannabis license type to CONDITIONAL", async () => {
-      page.selectByValue("Industry", "cannabis");
+    it("displays liquor license question for restaurants when selected", async () => {
+      const displayContent = createEmptyLoadDisplayContent()["STARTING"];
+      displayContent.industryId.specificLiquorQuestion = {
+        contentMd: "Do you need a liquor license?",
+        radioButtonYesText: "Yeah",
+        radioButtonNoText: "Nah",
+      };
+
+      const { subject, page } = renderPage({});
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+
+      expect(subject.queryByText("Do you need a liquor license?")).not.toBeInTheDocument();
+      page.selectByValue("Industry", "restaurant");
+      expect(subject.queryByText("Do you need a liquor license?")).toBeInTheDocument();
+      page.chooseRadio("liquor-license-true");
       await page.visitStep3();
-      expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
+
+      expect(currentUserData().profileData.liquorLicense).toEqual(true);
     });
 
-    it("allows switching cannabis license type to ANNUAL", async () => {
-      page.selectByValue("Industry", "cannabis");
-      page.chooseRadio("cannabis-license-annual");
-      await page.visitStep3();
-      expect(currentUserData().profileData.cannabisLicenseType).toEqual("ANNUAL");
+    describe("cannabis license type question", () => {
+      let subject: RenderResult;
+      let page: PageHelpers;
+
+      beforeEach(async () => {
+        const displayContent = createEmptyLoadDisplayContent()["STARTING"];
+        displayContent.industryId.specificCannabisLicenseQuestion = {
+          contentMd: "What type of cannabis license?",
+          radioButtonConditionalText: "Conditional",
+          radioButtonAnnualText: "Annual",
+        };
+
+        const result = renderPage({});
+        page = result.page;
+        subject = result.subject;
+
+        page.chooseRadio("has-existing-business-false");
+        await page.visitStep2();
+      });
+
+      it("displays cannabis license type question for cannabis only", async () => {
+        expect(subject.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
+        page.selectByValue("Industry", "cannabis");
+        expect(subject.queryByText("What type of cannabis license?")).toBeInTheDocument();
+
+        page.selectByValue("Industry", "generic");
+        expect(subject.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
+      });
+
+      it("defaults cannabis license type to CONDITIONAL", async () => {
+        page.selectByValue("Industry", "cannabis");
+        await page.visitStep3();
+        expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
+      });
+
+      it("allows switching cannabis license type to ANNUAL", async () => {
+        page.selectByValue("Industry", "cannabis");
+        page.chooseRadio("cannabis-license-annual");
+        await page.visitStep3();
+        expect(currentUserData().profileData.cannabisLicenseType).toEqual("ANNUAL");
+      });
+
+      it("sets cannabis license type to back undefined when switching back to non-cannabis industru", async () => {
+        expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
+        page.selectByValue("Industry", "cannabis");
+        await page.visitStep3();
+        expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
+        page.clickBack();
+        page.selectByValue("Industry", "generic");
+        await page.visitStep3();
+        expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
+      });
     });
 
-    it("sets cannabis license type to back undefined when switching back to non-cannabis industru", async () => {
-      expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
-      page.selectByValue("Industry", "cannabis");
+    it("displays home-based business question for applicable industries on municipality page", async () => {
+      const newark = generateMunicipality({ displayName: "Newark" });
+      const displayContent = createEmptyLoadDisplayContent();
+      displayContent.STARTING.homeBased = {
+        contentMd: "Are you a home-based business?",
+        radioButtonYesText: "Yeah",
+        radioButtonNoText: "Nah",
+      };
+
+      const { subject, page } = renderPage({ displayContent, municipalities: [newark] });
+
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+      page.selectByValue("Industry", "home-contractor");
       await page.visitStep3();
-      expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
+      page.chooseRadio("general-partnership");
+      await page.visitStep4();
+      page.selectByText("Location", "Newark");
+
+      expect(subject.queryByText("Are you a home-based business?")).toBeInTheDocument();
+      page.chooseRadio("home-based-business-true");
+
+      page.clickNext();
+      await waitFor(() => expect(currentUserData().profileData.homeBasedBusiness).toEqual(true));
+    });
+
+    it("does not display home-based business question for non-applicable industries", async () => {
+      const displayContent = createEmptyLoadDisplayContent();
+      displayContent.STARTING.homeBased.contentMd = "Are you a home-based business?";
+
+      const { subject, page } = renderPage({ displayContent });
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+
+      page.selectByValue("Industry", "restaurant");
+      await page.visitStep3();
+      page.chooseRadio("general-partnership");
+      await page.visitStep4();
+
+      expect(subject.queryByText("Are you a home-based business?")).not.toBeInTheDocument();
+    });
+
+    it("sets liquor license back to false if they select a different industry", async () => {
+      const { page } = renderPage({});
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+
+      page.selectByValue("Industry", "restaurant");
+      page.chooseRadio("liquor-license-true");
+      await page.visitStep3();
+      expect(currentUserData().profileData.liquorLicense).toEqual(true);
+
       page.clickBack();
-      page.selectByValue("Industry", "generic");
+      page.selectByValue("Industry", "cosmetology");
       await page.visitStep3();
-      expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
+      expect(currentUserData().profileData.liquorLicense).toEqual(false);
     });
-  });
 
-  it("displays home-based business question for applicable industries on municipality page", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
-    const displayContent = createEmptyLoadDisplayContent();
-    displayContent.STARTING.homeBased = {
-      contentMd: "Are you a home-based business?",
-      radioButtonYesText: "Yeah",
-      radioButtonNoText: "Nah",
-    };
+    it("sets sector for industry", async () => {
+      const { page } = renderPage({});
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
 
-    const { subject, page } = renderPage({ displayContent, municipalities: [newark] });
+      page.selectByValue("Industry", "restaurant");
+      await page.visitStep3();
+      expect(currentUserData().profileData.sectorId).toEqual("accommodation-and-food-services");
 
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    page.selectByValue("Industry", "home-contractor");
-    await page.visitStep3();
-    page.chooseRadio("general-partnership");
-    await page.visitStep4();
-    page.selectByText("Location", "Newark");
-
-    expect(subject.queryByText("Are you a home-based business?")).toBeInTheDocument();
-    page.chooseRadio("home-based-business-true");
-
-    page.clickNext();
-    await waitFor(() => expect(currentUserData().profileData.homeBasedBusiness).toEqual(true));
-  });
-
-  it("does not display home-based business question for non-applicable industries", async () => {
-    const displayContent = createEmptyLoadDisplayContent();
-    displayContent.STARTING.homeBased.contentMd = "Are you a home-based business?";
-
-    const { subject, page } = renderPage({ displayContent });
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-
-    page.selectByValue("Industry", "restaurant");
-    await page.visitStep3();
-    page.chooseRadio("general-partnership");
-    await page.visitStep4();
-
-    expect(subject.queryByText("Are you a home-based business?")).not.toBeInTheDocument();
-  });
-
-  it("sets liquor license back to false if they select a different industry", async () => {
-    const { page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-
-    page.selectByValue("Industry", "restaurant");
-    page.chooseRadio("liquor-license-true");
-    await page.visitStep3();
-    expect(currentUserData().profileData.liquorLicense).toEqual(true);
-
-    page.clickBack();
-    page.selectByValue("Industry", "cosmetology");
-    await page.visitStep3();
-    expect(currentUserData().profileData.liquorLicense).toEqual(false);
+      page.clickBack();
+      page.selectByValue("Industry", "cannabis");
+      await page.visitStep3();
+      expect(currentUserData().profileData.sectorId).toEqual("cannabis");
+    });
   });
 
   it("displays error message when @ is missing in email input field", async () => {

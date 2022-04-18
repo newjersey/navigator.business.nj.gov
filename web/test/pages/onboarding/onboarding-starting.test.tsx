@@ -202,6 +202,7 @@ describe("onboarding - starting a business", () => {
           hasExistingBusiness: false,
           businessName: "",
           industryId: "e-commerce",
+          sectorId: "retail-trade-and-ecommerce",
           homeBasedBusiness: true,
           legalStructureId: "general-partnership",
           municipality: newark,

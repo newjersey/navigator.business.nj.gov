@@ -31,7 +31,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { createPageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
+import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   LookupIndustryById,
@@ -542,8 +542,8 @@ describe("roadmap page", () => {
   });
 
   describe("oscar graduation modal", () => {
-    const getRoadMap = (userData: UserData) =>
-      render(
+    const renderPage = (userData: UserData): { subject: RenderResult; page: PageHelpers } => {
+      const subject = render(
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
             <RoadmapPage
@@ -554,6 +554,9 @@ describe("roadmap page", () => {
           </ThemeProvider>
         </WithStatefulUserData>
       );
+      const page = createPageHelpers(subject);
+      return { subject, page };
+    };
 
     beforeEach(() => {
       setupStatefulUserDataContext();
@@ -567,24 +570,23 @@ describe("roadmap page", () => {
           legalStructureId: "limited-liability-partnership",
           dateOfFormation: undefined,
           sectorId: undefined,
-          industryId: undefined,
+          industryId: "generic",
           ownershipTypeIds: [],
           existingEmployees: undefined,
         }),
       });
 
-      const subject = getRoadMap(userData);
+      const { subject, page } = renderPage(userData);
 
       const date = dayjs().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
 
-      const helpers = createPageHelpers(subject);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
-      helpers.selectDate("Date of formation", date);
-      helpers.selectByValue("Sector", "clean-energy");
-      helpers.selectByValue("Ownership", "veteran-owned");
-      helpers.fillText("Existing employees", "1234567");
+      page.selectDate("Date of formation", date);
+      page.selectByValue("Sector", "clean-energy");
+      page.selectByValue("Ownership", "veteran-owned");
+      page.fillText("Existing employees", "1234567");
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
 
       await waitFor(() => {
@@ -612,19 +614,18 @@ describe("roadmap page", () => {
           legalStructureId: "limited-liability-partnership",
           dateOfFormation,
           sectorId: "clean-energy",
-          industryId: undefined,
+          industryId: "generic",
           ownershipTypeIds: ["veteran-owned"],
           existingEmployees: "1234567",
         }),
       });
 
-      const subject = getRoadMap(userData);
+      const { subject, page } = renderPage(userData);
 
-      const helpers = createPageHelpers(subject);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
-      expect(helpers.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
-      expect(helpers.getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
+      expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
+      expect(page.getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
       expect(subject.queryByLabelText("Ownership")).toHaveTextContent(
         `${LookupOwnershipTypeById("veteran-owned").name}`
       );
@@ -662,12 +663,12 @@ describe("roadmap page", () => {
           legalStructureId: "limited-liability-partnership",
           dateOfFormation,
           sectorId: "clean-energy",
-          industryId: undefined,
+          industryId: "generic",
           ownershipTypeIds: ["veteran-owned"],
           existingEmployees: "1234567",
         }),
       });
-      const subject = getRoadMap(userData);
+      const { subject } = renderPage(userData);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
@@ -681,23 +682,22 @@ describe("roadmap page", () => {
       });
     });
 
-    it("hides date of formation if legal structure does not require public filing ", async () => {
+    it("shows sector for generic industry", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({
+          industryId: "generic",
           hasExistingBusiness: false,
-          legalStructureId: "general-partnership",
+          sectorId: undefined,
         }),
       });
 
-      const subject = getRoadMap(userData);
+      const { subject } = renderPage(userData);
 
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
-      expect(subject.queryByLabelText("Date of formation")).not.toBeInTheDocument();
-      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      expect((subject.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual("Other Services");
     });
 
-    it("auto fills sector based on sectorDefault in the industry object", async () => {
+    it("does not show sector for non-generic industry", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           industryId: "restaurant",
@@ -706,14 +706,10 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = getRoadMap(userData);
+      const { subject } = renderPage(userData);
 
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
-      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
-      expect((subject.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual(
-        "Accommodation and Food Services"
-      );
+      expect(subject.queryByLabelText("Sector")).not.toBeInTheDocument();
     });
 
     it("fires validations when clicking submit", async () => {
@@ -729,7 +725,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = getRoadMap(userData);
+      const { subject } = renderPage(userData);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
       fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
       expect(userDataWasNotUpdated()).toEqual(true);
@@ -739,6 +735,21 @@ describe("roadmap page", () => {
       expect(
         subject.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
       ).toBeInTheDocument();
+    });
+
+    it("hides date of formation if legal structure does not require public filing ", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "general-partnership",
+        }),
+      });
+
+      const { subject } = renderPage(userData);
+
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      expect(subject.queryByLabelText("Date of formation")).not.toBeInTheDocument();
     });
 
     it("disables date of formation if formation getFiling success", () => {
@@ -755,11 +766,10 @@ describe("roadmap page", () => {
         }),
       });
 
-      const subject = getRoadMap(userData);
+      const { subject, page } = renderPage(userData);
       fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-      const helpers = createPageHelpers(subject);
       expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
-      expect(helpers.getDateOfFormationValue()).toEqual(
+      expect(page.getDateOfFormationValue()).toEqual(
         dayjs(userData.formationData.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/YYYY")
       );
     });

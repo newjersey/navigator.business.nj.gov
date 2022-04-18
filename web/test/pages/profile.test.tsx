@@ -228,6 +228,7 @@ describe("profile", () => {
             ...initialUserData.profileData,
             businessName: "Cool Computers",
             industryId: "e-commerce",
+            sectorId: "retail-trade-and-ecommerce",
             homeBasedBusiness: true,
             legalStructureId: "c-corporation",
             municipality: newark,
