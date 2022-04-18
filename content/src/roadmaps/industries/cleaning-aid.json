@@ -30,9 +30,9 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Cleaning Service",
+  "name": "Cleaning and Janitorial Services",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "cleaning lady,housekeeping,house cleaner,maid service,maid,cleaning company,cleaning crew",
+  "additionalSearchTerms": "cleaning lady, housekeeping, house cleaner, maid service, maid, cleaning company, cleaning crew, janitorial",
   "id": "cleaning-aid",
   "description": "Providing commercial or residential cleaning services"
 }
