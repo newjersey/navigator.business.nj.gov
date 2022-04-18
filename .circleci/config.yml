@@ -39,17 +39,20 @@ commands:
       - bootstrap-code
 
   package-webapp-docker:
+    parameters:
+      image-name:
+        type: string
     steps:
       - run:
           name: Build Web Docker image
-          command: docker build -f WebApp.Dockerfile . -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-${CIRCLE_SHA1} -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-latest
+          command: docker build -f WebApp.Dockerfile . -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >>-${CIRCLE_SHA1} -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >> -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >>-latest
       - run:
           name: Push Web Docker image
           command: |
             aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
-            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-${CIRCLE_SHA1}
-            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator
-            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:bfs-navigator-latest
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >>-${CIRCLE_SHA1}
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >>
+            docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bfs_containers:<< parameters.image-name >>-latest
 
   configure-and-build:
     steps:
@@ -252,13 +255,33 @@ commands:
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_PROD' >> $BASH_ENV
             echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_PROD' >> $BASH_ENV
 
+  set-content-env-vars:
+    steps:
+      - run:
+          name: Set Content Environment Variables
+          command: |
+            echo 'export REDIRECT_URL=$REDIRECT_URL_CONTENT' >> $BASH_ENV
+
+  deploy-content:
+    steps:
+      - configure-and-build
+      - setup_remote_docker:
+          version: 20.10.11
+          docker_layer_caching: true
+      - package-webapp-docker:
+          image-name: bfs-navigator-content
+      - run:
+          name: Deploy WebApp
+          command: aws ecs update-service --cluster bfs_container_cluster --service bfs-navigator-content --region ${AWS_REGION} --force-new-deployment
+
   deploy:
     steps:
       - configure-and-build
       - setup_remote_docker:
           version: 20.10.11
           docker_layer_caching: true
-      - package-webapp-docker
+      - package-webapp-docker:
+          image-name: bfs-navigator
       - deploy-serverless
       - run:
           name: Deploy WebApp
@@ -381,6 +404,19 @@ jobs:
       - set-prod-env-vars
       - bootstrap-code
       - generate-release-notes
+
+  deploy-content:
+    docker:
+      - image: cimg/node:14.19.1
+    steps:
+      - set-dev-env-vars
+      - set-content-env-vars
+      - attach_workspace:
+          at: .
+      - deploy-content
+    environment:
+      STAGE: content
+      MYNJ_PROFILE_LINK: https://myt1.state.nj.us/portal/Desktop
 
   deploy-dev:
     docker:
@@ -618,6 +654,14 @@ workflows:
             branches:
               only:
                 - main
+          requires:
+            - build
+      - deploy-content:
+          name: content-deploy
+          filters:
+            branches:
+              only:
+                - content-repo
           requires:
             - build
 
