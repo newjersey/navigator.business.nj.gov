@@ -3,7 +3,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
 import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
-import { withRoadmap } from "@/test/helpers";
+import { withAuth, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -66,12 +66,16 @@ describe("onboarding - shared", () => {
   it("builds and sets roadmap after each step", async () => {
     const profileData = generateProfileData({ hasExistingBusiness: false });
     const mockSetRoadmap = jest.fn();
-
+    const user = generateUser({});
+    const userData = generateUserData({ profileData: profileData, user });
     const subject = render(
       withRoadmap(
-        <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
-          <Onboarding displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
-        </WithStatefulUserData>,
+        withAuth(
+          <WithStatefulUserData initialUserData={userData}>
+            <Onboarding displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
+          </WithStatefulUserData>,
+          { user: user, isAuthenticated: IsAuthenticated.TRUE }
+        ),
         undefined,
         undefined,
         mockSetRoadmap
@@ -468,7 +472,6 @@ describe("onboarding - shared", () => {
     await page.visitStep4();
     await page.visitStep5();
     page.clickNext();
-    subject.debug();
     await waitFor(() => {
       expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });

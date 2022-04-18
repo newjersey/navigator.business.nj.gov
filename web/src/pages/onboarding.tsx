@@ -62,7 +62,6 @@ import React, {
   useState,
 } from "react";
 import { CSSTransition } from "react-transition-group";
-import { useSWRConfig } from "swr";
 
 interface Props {
   displayContent: LoadDisplayContent;
@@ -115,7 +114,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
-  const { cache } = useSWRConfig();
 
   const onValidation = useCallback(
     (field: ProfileFields, invalid: boolean): void => {
@@ -135,7 +133,13 @@ const OnboardingPage = (props: Props): ReactElement => {
   );
 
   useEffect(() => {
-    if (!router.isReady || hasHandledRouting.current) return;
+    if (
+      !router.isReady ||
+      hasHandledRouting.current ||
+      !state.user ||
+      state.isAuthenticated === IsAuthenticated.UNKNOWN
+    )
+      return;
 
     let currentUserData = userData;
 
@@ -143,14 +147,14 @@ const OnboardingPage = (props: Props): ReactElement => {
       setProfileData(currentUserData.profileData);
       setUser(currentUserData.user);
       setCurrentFlow(currentUserData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
-    } else if (state.user && state.isAuthenticated == IsAuthenticated.FALSE) {
-      (cache as Map<string, string>).clear();
+    } else if (state.isAuthenticated == IsAuthenticated.FALSE) {
       currentUserData = createEmptyUserData(state.user);
       setRegistrationDimension("Began Onboarding");
-      update(currentUserData, { local: true });
+      update(currentUserData);
       setProfileData(currentUserData.profileData);
       setUser(currentUserData.user);
     }
+
     if (currentUserData)
       (async () => {
         if (currentUserData?.formProgress === "COMPLETED") {
@@ -186,7 +190,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     hasHandledRouting,
     state.user,
     state.isAuthenticated,
-    cache,
     update,
   ]);
 

@@ -49,61 +49,62 @@ Cypress.Commands.add("loginByCognitoApi", () => {
   return cy
     .clearLocalStorage()
     .clearCookies()
-    .then(() =>
-      cy
-        .wrap(Auth.signIn({ username: testUserEmail, password: testUserPassword }), { log: true })
-        .then((cognitoResponse) => {
-          const keyPrefixWithUsername = `${cognitoResponse.keyPrefix}.${cognitoResponse.username}`;
-          window.localStorage.setItem(
-            `${keyPrefixWithUsername}.idToken`,
-            cognitoResponse.signInUserSession.idToken.jwtToken
-          );
+    .wrap(Auth.signIn({ username: testUserEmail, password: testUserPassword }), { log: true })
+    .then((cognitoResponse) => {
+      const keyPrefixWithUsername = `${cognitoResponse.keyPrefix}.${cognitoResponse.username}`;
+      window.localStorage.setItem(
+        `${keyPrefixWithUsername}.idToken`,
+        cognitoResponse.signInUserSession.idToken.jwtToken
+      );
 
-          window.localStorage.setItem(
-            `${keyPrefixWithUsername}.accessToken`,
-            cognitoResponse.signInUserSession.accessToken.jwtToken
-          );
+      window.localStorage.setItem(
+        `${keyPrefixWithUsername}.accessToken`,
+        cognitoResponse.signInUserSession.accessToken.jwtToken
+      );
 
-          window.localStorage.setItem(
-            `${keyPrefixWithUsername}.refreshToken`,
-            cognitoResponse.signInUserSession.refreshToken.token
-          );
+      window.localStorage.setItem(
+        `${keyPrefixWithUsername}.refreshToken`,
+        cognitoResponse.signInUserSession.refreshToken.token
+      );
 
-          window.localStorage.setItem(
-            `${keyPrefixWithUsername}.clockDrift`,
-            cognitoResponse.signInUserSession.clockDrift
-          );
+      window.localStorage.setItem(
+        `${keyPrefixWithUsername}.clockDrift`,
+        cognitoResponse.signInUserSession.clockDrift
+      );
 
-          window.localStorage.setItem(`${cognitoResponse.keyPrefix}.LastAuthUser`, cognitoResponse.username);
+      window.localStorage.setItem(`${cognitoResponse.keyPrefix}.LastAuthUser`, cognitoResponse.username);
 
-          window.localStorage.setItem("amplify-authenticator-authState", "signedIn");
-          log.snapshot("after");
-          log.end();
-          return cy
-            .request({
-              method: "POST",
-              url: `${Cypress.env("API_BASE_URL")}/api/users`,
-              body: createEmptyUserData({
-                email: testUserEmail,
-                name: "Some Name",
-                id: cognitoResponse.attributes.sub,
-                receiveNewsletter: true,
-                externalStatus: {},
-              }),
-              auth: {
-                bearer: cognitoResponse.signInUserSession.idToken.jwtToken,
-              },
-            })
-            .then((response) => {
-              expect(response.status).to.equal(200);
-              return cy.wait(2000).visit("/onboarding", {
-                onBeforeLoad: (win) => {
-                  win.sessionStorage.clear();
-                },
-              });
-            });
+      window.localStorage.setItem("amplify-authenticator-authState", "signedIn");
+      log.snapshot("after");
+      log.end();
+      return cognitoResponse;
+    })
+    .wait(2000)
+    .then((cognitoResponse) => {
+      cy.request({
+        method: "POST",
+        url: `${Cypress.env("API_BASE_URL")}/api/users`,
+        body: createEmptyUserData({
+          email: testUserEmail,
+          name: "Some Name",
+          id: cognitoResponse.attributes.sub,
+          receiveNewsletter: true,
+          externalStatus: {},
+        }),
+        auth: {
+          bearer: cognitoResponse.signInUserSession.idToken.jwtToken,
+        },
+      })
+        .then((response) => {
+          expect(response.status).to.equal(200);
+          expect(response.body.formProgress).to.equal("UNSTARTED");
         })
-    );
+        .visit("/onboarding", {
+          onBeforeLoad: (win) => {
+            win.sessionStorage.clear();
+          },
+        });
+    });
 });
 
 Cypress.Commands.add("forceClick", { prevSubject: "element" }, (subject) => {

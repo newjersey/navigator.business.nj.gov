@@ -41,15 +41,12 @@ export const renderPage = ({
   user?: BusinessUser;
   isAuthenticated?: IsAuthenticated;
 }): { subject: RenderResult; page: PageHelpers } => {
+  const currentUser = user ?? userData?.user ?? generateUser({});
   const subject = render(
     withAuth(
       <WithStatefulUserData
         initialUserData={
-          userData === undefined
-            ? createEmptyUserData(generateUser({}))
-            : userData === null
-            ? undefined
-            : userData
+          userData === undefined ? createEmptyUserData(currentUser) : userData === null ? undefined : userData
         }
       >
         <ThemeProvider theme={createTheme()}>
@@ -59,7 +56,7 @@ export const renderPage = ({
           />
         </ThemeProvider>
       </WithStatefulUserData>,
-      { user, isAuthenticated }
+      { user: currentUser, isAuthenticated }
     )
   );
   const page = createPageHelpers(subject);
