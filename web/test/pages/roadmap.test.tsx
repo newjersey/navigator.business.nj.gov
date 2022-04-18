@@ -109,7 +109,7 @@ describe("roadmap page", () => {
     useMockProfileData({ businessName: "Some Cool Name" });
     setMockRoadmapResponse(undefined);
     const subject = renderRoadmapPage();
-    expect(subject.getByText("Business Roadmap for Some Cool Name")).toBeInTheDocument();
+    expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent("Some Cool Name");
     expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
@@ -171,36 +171,23 @@ describe("roadmap page", () => {
   });
 
   describe("business information", () => {
-    it("shows the business name from onboarding data", () => {
-      useMockProfileData({ businessName: "My cool business" });
-      const subject = renderRoadmapPage();
-      expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent("My cool business");
-      const expectedHeaderText = templateEval(Config.roadmapDefaults.roadmapTitleTemplateForBusinessName, {
-        businessName: "My cool business",
-      });
-      expect(subject.getByText(expectedHeaderText)).toBeInTheDocument();
-    });
-
-    it("shows placeholder with user name if no business name present", async () => {
+    it("shows template with user name as header", async () => {
       useMockUserData({
         profileData: generateProfileData({
-          businessName: "",
+          businessName: "some business",
           industryId: "restaurant",
           legalStructureId: "c-corporation",
         }),
         user: generateUser({ name: "Ada Lovelace" }),
       });
       const subject = renderRoadmapPage();
-      expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent(
-        Config.roadmapDefaults.greyBoxNotSetText
-      );
       const expectedHeaderText = templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
         name: "Ada Lovelace",
       });
       expect(subject.getByText(expectedHeaderText)).toBeInTheDocument();
     });
 
-    it("shows placeholder if no business name nor user name present", async () => {
+    it("shows header placeholder if no user name present", async () => {
       useMockUserData({
         profileData: generateProfileData({
           businessName: "",

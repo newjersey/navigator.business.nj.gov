@@ -61,11 +61,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   }, [router.isReady, router.query.success]);
 
   const getHeader = (): string => {
-    if (userData?.profileData.businessName) {
-      return templateEval(Config.roadmapDefaults.roadmapTitleTemplateForBusinessName, {
-        businessName: userData.profileData.businessName,
-      });
-    } else if (userData?.user.name) {
+    if (userData?.user.name) {
       return templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
         name: userData.user.name,
       });

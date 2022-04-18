@@ -771,11 +771,6 @@ collections:
                   widget: string,
                 }
               - {
-                  label: Roadmap Title - with Business Name,
-                  name: roadmapTitleTemplateForBusinessName,
-                  widget: string,
-                }
-              - {
                   label: Roadmap Title - with User Name,
                   name: roadmapTitleTemplateForUserName,
                   widget: string,
