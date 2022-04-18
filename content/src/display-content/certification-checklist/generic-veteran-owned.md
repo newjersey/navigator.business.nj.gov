@@ -1,0 +1,2 @@
+- []{general-veteran-honorable-discharge}Proof of Honorable Discharge from the US Military form DD-214 for the majority of owner(s)
+- []{general-veteran-nj-residency}Proof of New Jersey residency for majority owner(s)

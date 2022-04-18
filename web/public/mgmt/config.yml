@@ -1684,3 +1684,17 @@ collections:
                 value_field: "{{filename}}"
                 display_fields: ["{{filename}}"]
                 multiple: true
+
+  - label: "Certification Checklist"
+    name: "certification-checklist"
+    folder: "content/src/display-content/certification-checklist"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }

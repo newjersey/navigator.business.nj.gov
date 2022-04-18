@@ -1,0 +1,8 @@
+- []{general-minority-and-women-owned-owner-names}The names and addresses of the owner, partners, or shareholders, as applicable, and their representative shares of ownership
+- []{general-minority-and-women-owned-officer-names}The names and addresses of the officers of the business
+- []{general-minority-and-women-owned-bod-names}The names and addresses of members of the board of directors (c-corps only)
+- []{general-minority-and-women-owned-shares}The number of shares of stock issued and outstanding (c-corps only)
+- []{general-minority-and-women-owned-agreements}The articles of incorporation, bylaws, partnership agreements, or joint venture agreements (as applicable)
+- []{general-minority-and-women-charts}Organizational charts
+- []{general-minority-and-women-identification}An applicant's certificate of birth, or motor vehicle driver's license, passport, or other acceptable form of identification
+- []{general-minority-and-women-affidavit}An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business
