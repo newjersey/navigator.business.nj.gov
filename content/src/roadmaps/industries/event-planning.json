@@ -1,0 +1,43 @@
+{
+  "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "other-services",
+  "canBeReseller": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "search-licenses"
+    }
+  ],
+  "name": "Event Planning",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "planner, organizer, coordinator",
+  "id": "event-planning",
+  "description": "Offers coordination services for different types of events"
+}
