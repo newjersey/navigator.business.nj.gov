@@ -63,7 +63,7 @@
     "@types/simple-oauth2": "4.1.1",
     "@types/supertest": "2.0.12",
     "@types/webpack-node-externals": "2.5.3",
-    "@types/xml2js": "0.4.9",
+    "@types/xml2js": "0.4.11",
     "@typescript-eslint/eslint-plugin": "5.19.0",
     "@typescript-eslint/parser": "5.19.0",
     "copy-webpack-plugin": "10.2.4",
