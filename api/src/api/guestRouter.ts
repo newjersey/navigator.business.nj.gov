@@ -11,7 +11,6 @@ export const guestRouterFactory = (businessNameClient: BusinessNameClient): Rout
   });
 
   router.get("/business-name-availability", (req, res) => {
-    console.log("got here", req);
     businessNameClient
       .search((req.query as BusinessQueryParams).query)
       .then((result: NameAvailability) => {
