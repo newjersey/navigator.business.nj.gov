@@ -558,6 +558,14 @@ describe("roadmap page", () => {
       return { subject, page };
     };
 
+    const openGraduationModal = (subject: RenderResult): void => {
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+    };
+
+    const submitGraduationModal = (subject: RenderResult): void => {
+      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationModalContinueButtonText));
+    };
+
     beforeEach(() => {
       setupStatefulUserDataContext();
       mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
@@ -581,13 +589,13 @@ describe("roadmap page", () => {
       const date = dayjs().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
 
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      openGraduationModal(subject);
+      expect(subject.getByTestId("graduation-modal")).toBeInTheDocument();
       page.selectDate("Date of formation", date);
       page.selectByValue("Sector", "clean-energy");
       page.selectByValue("Ownership", "veteran-owned");
       page.fillText("Existing employees", "1234567");
-      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      submitGraduationModal(subject);
 
       await waitFor(() => {
         expect(currentUserData()).toEqual({
@@ -622,8 +630,7 @@ describe("roadmap page", () => {
 
       const { subject, page } = renderPage(userData);
 
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      openGraduationModal(subject);
       expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
       expect(page.getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
       expect(subject.queryByLabelText("Ownership")).toHaveTextContent(
@@ -631,7 +638,7 @@ describe("roadmap page", () => {
       );
       expect((subject.getByLabelText("Existing employees") as HTMLInputElement).value).toEqual("1234567");
 
-      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      submitGraduationModal(subject);
 
       await waitFor(() => {
         expect(currentUserData()).toEqual({
@@ -668,10 +675,10 @@ describe("roadmap page", () => {
           existingEmployees: "1234567",
         }),
       });
+
       const { subject } = renderPage(userData);
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
-      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      openGraduationModal(subject);
+      submitGraduationModal(subject);
 
       await waitFor(() => {
         expect(currentUserData()).toEqual({
@@ -693,7 +700,7 @@ describe("roadmap page", () => {
 
       const { subject } = renderPage(userData);
 
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      openGraduationModal(subject);
       expect((subject.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual("Other Services");
     });
 
@@ -708,7 +715,7 @@ describe("roadmap page", () => {
 
       const { subject } = renderPage(userData);
 
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      openGraduationModal(subject);
       expect(subject.queryByLabelText("Sector")).not.toBeInTheDocument();
     });
 
@@ -726,8 +733,8 @@ describe("roadmap page", () => {
       });
 
       const { subject } = renderPage(userData);
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-      fireEvent.click(subject.getByTestId("onboardingModalSubmit"));
+      openGraduationModal(subject);
+      submitGraduationModal(subject);
       expect(userDataWasNotUpdated()).toEqual(true);
       expect(mockPush).not.toHaveBeenCalledWith("/dashboard");
       expect(subject.getByText(Config.onboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
@@ -747,8 +754,8 @@ describe("roadmap page", () => {
 
       const { subject } = renderPage(userData);
 
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
-      expect(subject.getByTestId("onboarding-modal")).toBeInTheDocument();
+      openGraduationModal(subject);
+      expect(subject.getByTestId("graduation-modal")).toBeInTheDocument();
       expect(subject.queryByLabelText("Date of formation")).not.toBeInTheDocument();
     });
 
@@ -767,7 +774,7 @@ describe("roadmap page", () => {
       });
 
       const { subject, page } = renderPage(userData);
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+      openGraduationModal(subject);
       expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
       expect(page.getDateOfFormationValue()).toEqual(
         dayjs(userData.formationData.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/YYYY")

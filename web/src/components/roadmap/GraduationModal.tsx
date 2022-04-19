@@ -1,10 +1,8 @@
-import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
-import { Icon } from "@/components/njwds/Icon";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
@@ -26,9 +24,9 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { Dialog, DialogContent, DialogTitle, FormControl, IconButton } from "@mui/material";
+import { FormControl } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { FormEvent, ReactElement, useMemo, useState } from "react";
+import React, { ReactElement, useMemo, useState } from "react";
 
 interface Props {
   open: boolean;
@@ -104,8 +102,7 @@ export const GraduationModal = (props: Props): ReactElement => {
     await router.push("/dashboard");
   };
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async () => {
     if (!userData) return;
     const errorMap = {
       ...fieldStates,
@@ -133,89 +130,49 @@ export const GraduationModal = (props: Props): ReactElement => {
         onBack: () => {},
       }}
     >
-      <Dialog open={props.open} maxWidth="md" onClose={handleClose} data-testid={"onboarding-modal"}>
-        <DialogTitle sx={{ padding: 3, paddingBottom: 0 }}>
-          <Content>{Config.roadmapDefaults.graduationModalTitle}</Content>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{
-              position: "absolute",
-              right: 10,
-              top: 12,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <Icon className="usa-icon--size-4">close</Icon>
-          </IconButton>
-        </DialogTitle>
-
-        <DialogContent dividers={true}>
-          <div className="margin-bottom-1">
-            <form data-testid="onboarding-modal-content" onSubmit={onSubmit}>
-              <div className="grid-row grid-gap-2">
-                <FormControl fullWidth={true}>
-                  {needsDateOfFormation ? (
-                    <OnboardingDateOfFormation
-                      onValidation={onValidation}
-                      fieldStates={fieldStates}
-                      required={true}
-                      disabled={userData?.formationData.getFilingResponse?.success}
-                      headerAriaLevel={3}
-                    />
-                  ) : undefined}
-                  <div className="margin-top-1">
-                    {shouldShowSectorDropdown() && (
-                      <OnboardingSectors
-                        onValidation={onValidation}
-                        fieldStates={fieldStates}
-                        headerAriaLevel={3}
-                      />
-                    )}
-                  </div>
-                  <div className="margin-top-1">
-                    <OnboardingOwnership headerAriaLevel={3} />
-                  </div>
-                  <div className="margin-top-4">
-                    <OnboardingExistingEmployees
-                      onValidation={onValidation}
-                      fieldStates={fieldStates}
-                      headerAriaLevel={3}
-                    />
-                  </div>
-                </FormControl>
-              </div>
-              <div className="margin-top-2">
-                <div
-                  className="flex flex-justify-end bg-base-lightest margin-x-neg-3 padding-3 margin-top-3 margin-bottom-neg-3"
-                  style={{ gap: "1rem" }}
-                >
-                  <Button
-                    style="secondary"
-                    onClick={handleClose}
-                    dataTestid="onboardingModalCancel"
-                    widthAutoOnMobile
-                    noRightMargin
-                  >
-                    {Config.roadmapDefaults.graduationModalCancelButtonText}
-                  </Button>
-                  <Button
-                    style="primary"
-                    typeSubmit={true}
-                    dataTestid="onboardingModalSubmit"
-                    noRightMargin
-                    widthAutoOnMobile
-                  >
-                    <span className="text-no-wrap">
-                      {Config.roadmapDefaults.graduationModalContinueButtonText}
-                    </span>
-                  </Button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <TwoButtonDialog
+        isOpen={props.open}
+        close={handleClose}
+        title={Config.roadmapDefaults.graduationModalTitle}
+        primaryButtonText={Config.roadmapDefaults.graduationModalContinueButtonText}
+        primaryButtonOnClick={onSubmit}
+        secondaryButtonText={Config.roadmapDefaults.graduationModalCancelButtonText}
+        maxWidth="md"
+        dividers={true}
+      >
+        <div className="padding-x-4 padding-y-1" data-testid="graduation-modal">
+          <FormControl fullWidth={true}>
+            {needsDateOfFormation ? (
+              <OnboardingDateOfFormation
+                onValidation={onValidation}
+                fieldStates={fieldStates}
+                required={true}
+                disabled={userData?.formationData.getFilingResponse?.success}
+                headerAriaLevel={3}
+              />
+            ) : undefined}
+            <div className="margin-top-1">
+              {shouldShowSectorDropdown() && (
+                <OnboardingSectors
+                  onValidation={onValidation}
+                  fieldStates={fieldStates}
+                  headerAriaLevel={3}
+                />
+              )}
+            </div>
+            <div className="margin-top-1">
+              <OnboardingOwnership headerAriaLevel={3} />
+            </div>
+            <div className="margin-top-4">
+              <OnboardingExistingEmployees
+                onValidation={onValidation}
+                fieldStates={fieldStates}
+                headerAriaLevel={3}
+              />
+            </div>
+          </FormControl>
+        </div>
+      </TwoButtonDialog>
     </ProfileDataContext.Provider>
   );
 };

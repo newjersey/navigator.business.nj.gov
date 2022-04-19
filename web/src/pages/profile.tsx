@@ -289,7 +289,7 @@ const ProfilePage = (props: Props): ReactElement => {
           isOpen={escapeModal}
           close={() => setEscapeModal(false)}
           title={Config.profileDefaults.escapeModalHeader}
-          body={Config.profileDefaults.escapeModalBody}
+          bodyText={Config.profileDefaults.escapeModalBody}
           primaryButtonText={Config.profileDefaults.escapeModalReturn}
           primaryButtonOnClick={() => redirect()}
           secondaryButtonText={Config.profileDefaults.escapeModalEscape}

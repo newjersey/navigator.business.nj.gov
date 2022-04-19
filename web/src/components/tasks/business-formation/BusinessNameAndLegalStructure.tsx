@@ -119,7 +119,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         isOpen={legalStructureWarningIsOpen}
         close={() => setLegalStructureWarningIsOpen(false)}
         title={Config.businessFormationDefaults.legalStructureWarningModalHeader}
-        body={Config.businessFormationDefaults.legalStructureWarningModalBody}
+        bodyText={Config.businessFormationDefaults.legalStructureWarningModalBody}
         primaryButtonText={Config.businessFormationDefaults.legalStructureWarningModalContinueButtonText}
         primaryButtonOnClick={editLegalStructure}
         secondaryButtonText={Config.businessFormationDefaults.legalStructureWarningModalCancelButtonText}
