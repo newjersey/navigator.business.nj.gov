@@ -26,7 +26,11 @@ export const OnboardingLegalStructure = (): ReactElement => {
   const makeLabel = (legalStructureId: string): ReactElement => (
     <div className="margin-bottom-2 margin-top-1" data-value={legalStructureId}>
       <b>{LookupLegalStructureById(legalStructureId).name}</b>
-      <Content>{state.displayContent.legalStructure.optionContent[legalStructureId]}</Content>
+      <Content>
+        {state.displayContent.legalStructure.optionContent
+          ? state.displayContent.legalStructure.optionContent[legalStructureId]
+          : ""}
+      </Content>
     </div>
   );
 

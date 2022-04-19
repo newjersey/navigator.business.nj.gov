@@ -74,6 +74,7 @@ export type PageHelpers = {
   getDateOfFormationValue: () => string;
   getEntityIdValue: () => string;
   getBusinessNameValue: () => string;
+  getLegalStructureValue: () => string;
   getSectorIDValue: () => string;
   getIndustryValue: () => string;
   getRadioButtonValue: (sectionAriaLabel: string) => string;
@@ -146,6 +147,9 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
   const getMunicipalityValue = (): string =>
     (subject.queryByTestId("municipality") as HTMLInputElement)?.value;
 
+  const getLegalStructureValue = (): string =>
+    (subject.queryByTestId("legal-structure") as HTMLInputElement)?.value;
+
   const getFullNameValue = (): string =>
     (subject.queryByLabelText(Config.selfRegistration.nameFieldLabel) as HTMLInputElement)?.value;
 
@@ -191,6 +195,7 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
     getEntityIdValue,
     getDateOfFormationValue,
     getBusinessNameValue,
+    getLegalStructureValue,
     getIndustryValue,
     getRadioButtonValue,
     getMunicipalityValue,
@@ -220,7 +225,7 @@ export const runSelfRegPageTests = (
   });
 
   beforeEach(async () => {
-    const render = renderPage({ userData });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
     page = render.page;
     subject = render.subject;
     await advanceToSelfReg(page);

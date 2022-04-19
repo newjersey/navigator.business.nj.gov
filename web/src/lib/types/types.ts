@@ -37,11 +37,9 @@ export type CannabisRadioFieldContent = {
   radioButtonConditionalText: string;
 };
 
-export type LegalFieldContent = {
-  contentMd: string;
-  placeholder?: string;
-  optionContent: Record<string, string>;
-};
+export interface LegalFieldContent extends TextFieldContent {
+  optionContent?: Record<string, string>;
+}
 export type FlowType = "OWNING" | "STARTING";
 
 export type UserContentType = FlowType | "PROFILE";
@@ -88,6 +86,7 @@ export type OwningFlowContent = {
   dateOfFormation: TextFieldContent;
   entityId: TextFieldContent;
   ownership: TextFieldContent;
+  legalStructure: LegalFieldContent;
   municipality: TextFieldContent;
   existingEmployees: TextFieldContent;
   sectorId: TextFieldContent;
@@ -323,6 +322,19 @@ export const emptyOwningFlowContent: OwningFlowContent = {
   sectorId: {
     contentMd: "",
     placeholder: "",
+  },
+  legalStructure: {
+    contentMd: "",
+    placeholder: "",
+    optionContent: {
+      "sole-proprietorship": "",
+      "general-partnership": "",
+      "limited-partnership": "",
+      "limited-liability-partnership": "",
+      "limited-liability-company": "",
+      "c-corporation": "",
+      "s-corporation": "",
+    },
   },
 };
 

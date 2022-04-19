@@ -1,5 +1,11 @@
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
-import { Industries, Industry, LegalStructures, LookupSectorTypeById } from "@businessnjgovnavigator/shared";
+import {
+  Industries,
+  Industry,
+  LegalStructures,
+  LookupLegalStructureById,
+  LookupSectorTypeById,
+} from "@businessnjgovnavigator/shared";
 import { onDashboardPage } from "./page_objects/dashboardPage";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
 import { onProfilePage } from "./page_objects/profilePage";
@@ -176,6 +182,7 @@ interface existingOnboardingData {
   entityId?: string;
   businessName: string;
   sectorId: string;
+  legalStructureId?: string;
   numberOfEmployees: string;
   townDisplayName: string;
   homeBasedQuestion: boolean;
@@ -191,32 +198,51 @@ export const completeExistingBusinessOnboarding = ({
   townDisplayName,
   homeBasedQuestion,
   ownershipDataValues,
+  legalStructureId = businessFormationDate || entityId || randomInt() % 2
+    ? "limited-partnership"
+    : "sole-proprietorship",
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = true,
   isContactMeChecked = false,
 }: existingOnboardingData & Partial<registration>): void => {
-  cy.url().should("include", "onboarding?page=1");
+  let pageIndex = 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
+
   onOnboardingPage.selectNewBusiness(true);
   onOnboardingPage.getHasExistingBusiness(true).should("be.checked");
   onOnboardingPage.getHasExistingBusiness(false).should("not.be.checked");
+  const companyType = LookupLegalStructureById(legalStructureId);
+  onOnboardingPage.selectLegalStructureDropDown(companyType.name);
+  onOnboardingPage
+    .getLegalStructureDropDown()
+    .parent()
+    .find("input")
+    .invoke("prop", "value")
+    .should("contain", legalStructureId);
+
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", "onboarding?page=2");
-  if (businessFormationDate) {
-    onOnboardingPage.typeBusinessFormationDate(businessFormationDate);
-    onOnboardingPage
-      .getBusinessFormationDatePicker()
-      .invoke("prop", "value")
-      .should("contain", businessFormationDate);
-  }
-  if (entityId) {
-    onOnboardingPage.typeEntityId(entityId);
-    onOnboardingPage.getEntityId().invoke("prop", "value").should("contain", entityId);
-  }
-  onOnboardingPage.clickNext();
+  pageIndex += 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
 
-  cy.url().should("include", "onboarding?page=3");
+  if (companyType.requiresPublicFiling) {
+    if (businessFormationDate) {
+      onOnboardingPage.typeBusinessFormationDate(businessFormationDate);
+      onOnboardingPage
+        .getBusinessFormationDatePicker()
+        .invoke("prop", "value")
+        .should("contain", businessFormationDate);
+    }
+    if (entityId) {
+      onOnboardingPage.typeEntityId(entityId);
+      onOnboardingPage.getEntityId().invoke("prop", "value").should("contain", entityId);
+    }
+    onOnboardingPage.clickNext();
+
+    pageIndex += 1;
+    cy.url().should("include", `onboarding?page=${pageIndex}`);
+  }
   onOnboardingPage.typeBusinessName(businessName);
   onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   onOnboardingPage.selectIndustrySector(sectorId);
@@ -228,7 +254,9 @@ export const completeExistingBusinessOnboarding = ({
     });
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", "onboarding?page=4");
+  pageIndex += 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
+
   onOnboardingPage.typeNumberOfEmployees(numberOfEmployees);
   onOnboardingPage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
   onOnboardingPage.selectLocation(townDisplayName);
@@ -244,7 +272,9 @@ export const completeExistingBusinessOnboarding = ({
   }
   onOnboardingPage.clickNext();
 
-  cy.url().should("include", "onboarding?page=5");
+  pageIndex += 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
+
   onOnboardingPage.typeFullName(fullName);
   onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
   onOnboardingPage.typeEmail(email);

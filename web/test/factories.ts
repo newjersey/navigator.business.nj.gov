@@ -534,8 +534,12 @@ export const randomCounty = (): County => {
 };
 
 export const randomLegalStructure = (): LegalStructure => {
-  const randomIndex = Math.floor(Math.random() * LegalStructures.length);
-  return LegalStructures[randomIndex];
+  const requiresPublicFiling = Boolean(randomInt() % 2);
+  const LegalPublicFilings = LegalStructures.filter(
+    (item) => item.requiresPublicFiling == requiresPublicFiling
+  );
+  const randomIndex = Math.floor(Math.random() * LegalPublicFilings.length);
+  return LegalPublicFilings[randomIndex];
 };
 
 export const randomSector = (): SectorType => {

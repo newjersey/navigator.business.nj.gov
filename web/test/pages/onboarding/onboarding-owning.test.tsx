@@ -46,6 +46,7 @@ describe("onboarding - owning a business", () => {
       subject.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
     ).toBeInTheDocument();
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     expect(
       subject.getByText(
@@ -59,6 +60,7 @@ describe("onboarding - owning a business", () => {
     const { subject, page } = renderPage({ municipalities: [newark] });
 
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     expect(subject.getByTestId("step-1")).toBeInTheDocument();
 
     await page.visitStep2();
@@ -79,10 +81,27 @@ describe("onboarding - owning a business", () => {
     expect(subject.getByTestId("step-4")).toBeInTheDocument();
   });
 
-  it("shows correct next-button text on each page", async () => {
+  it("displays the legal structure dropdown", async () => {
+    const { subject, page } = renderPage({});
+    page.chooseRadio("has-existing-business-true");
+    expect(subject.getByLabelText("Legal structure")).toBeInTheDocument();
+  });
+
+  it("hides date of formation and entity id if legal structure  does not require Public Filing", async () => {
+    const { subject, page } = renderPage({});
+    page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "sole-proprietorship");
+    await page.visitStep2();
+    expect(subject.queryByLabelText("Date of formation")).not.toBeInTheDocument();
+    expect(subject.queryByLabelText("Entity id")).not.toBeInTheDocument();
+    expect(subject.getByLabelText("Business name")).toBeInTheDocument();
+  });
+
+  it("shows correct next-button text on each page if user requires legal filings", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { subject, page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     const page1 = within(subject.getByTestId("page-1-form"));
     expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
@@ -116,12 +135,44 @@ describe("onboarding - owning a business", () => {
     expect(page5.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
+  it("shows correct next-button text on each page if legal structure  does not require Public Filing", async () => {
+    const newark = generateMunicipality({ displayName: "Newark" });
+    const { subject, page } = renderPage({ municipalities: [newark] });
+    page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "sole-proprietorship");
+    const page1 = within(subject.getByTestId("page-1-form"));
+    expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+
+    await page.visitStep2();
+    page.fillText("Business name", "Cool Computers");
+    page.selectByValue("Sector", "clean-energy");
+    const page2 = within(subject.getByTestId("page-2-form"));
+    expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+
+    await page.visitStep3();
+    const page3 = within(subject.getByTestId("page-3-form"));
+    expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    page.fillText("Existing employees", "1234567");
+    page.selectByText("Location", "Newark");
+    page.selectByValue("Ownership", "veteran-owned");
+    page.selectByValue("Ownership", "disabled-veteran");
+    page.chooseRadio("home-based-business-true");
+
+    await page.visitStep4();
+    const page4 = within(subject.getByTestId("page-4-form"));
+    expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+  });
   it("updates the user data after each form page", async () => {
     const initialUserData = createEmptyUserData(generateUser({}));
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
 
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     expect(currentUserData().profileData.hasExistingBusiness).toEqual(true);
     page.selectDate("Date of formation", date);
@@ -148,7 +199,7 @@ describe("onboarding - owning a business", () => {
         initialOnboardingFlow: "OWNING",
         businessName: "Cool Computers",
         homeBasedBusiness: true,
-        legalStructureId: undefined,
+        legalStructureId: "c-corporation",
         dateOfFormation,
         municipality: newark,
         entityId: "1234567890",
@@ -167,6 +218,7 @@ describe("onboarding - owning a business", () => {
     expect(subject.queryByTestId("step-2")).not.toBeInTheDocument();
     expect(subject.getByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).toBeInTheDocument();
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     expect(subject.queryByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).not.toBeInTheDocument();
     expect(subject.queryByTestId("step-2")).toBeInTheDocument();
@@ -175,6 +227,7 @@ describe("onboarding - owning a business", () => {
   it("prevents user from moving after Step 2 if your entity id is invalid", async () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "123");
@@ -208,6 +261,7 @@ describe("onboarding - owning a business", () => {
   it("prevents user from moving after Step 3 if you have not entered a business name", async () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     page.selectDate("Date of formation", date);
     await page.visitStep3();
@@ -236,6 +290,7 @@ describe("onboarding - owning a business", () => {
   it("prevents user from moving after Step 3 if you have not entered a sector", async () => {
     const { subject, page } = renderPage({});
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     page.selectDate("Date of formation", date);
     await page.visitStep3();
@@ -261,6 +316,7 @@ describe("onboarding - owning a business", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { subject, page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     page.selectDate("Date of formation", date);
     await page.visitStep3();
@@ -293,6 +349,7 @@ describe("onboarding - owning a business", () => {
     });
 
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     page.selectDate("Date of formation", date);
     await page.visitStep3();
@@ -316,6 +373,7 @@ describe("onboarding - owning a business", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         hasExistingBusiness: true,
+        legalStructureId: "c-corporation",
         entityId: "0123456789",
         dateOfFormation,
         businessName: "Applebees",
@@ -329,6 +387,7 @@ describe("onboarding - owning a business", () => {
     const { page } = renderPage({ userData });
     expect(page.getRadioButtonValue("Has Existing Business")).toEqual("true");
 
+    expect(page.getLegalStructureValue()).toEqual("c-corporation");
     await page.visitStep2();
     expect(page.getEntityIdValue()).toEqual("0123456789");
     expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
@@ -347,6 +406,7 @@ describe("onboarding - owning a business", () => {
     const initialUserData = generateUserData({
       taxFilingData: taxData,
       profileData: generateProfileData({
+        legalStructureId: "c-corporation",
         hasExistingBusiness: true,
       }),
     });

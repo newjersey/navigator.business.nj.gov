@@ -59,7 +59,7 @@ export class OnboardingPage {
   }
 
   typeBusinessFormationDate(monthYearString: string) {
-    cy.chooseDatePicker('[name="dateOfFormation"]', monthYearString)
+    cy.chooseDatePicker('[name="dateOfFormation"]', monthYearString);
   }
 
   typeEntityId(EID: string) {
@@ -84,6 +84,15 @@ export class OnboardingPage {
 
   selectLegalStructure(companyType: string) {
     this.getLegalStructure(companyType).click({ force: true });
+  }
+
+  getLegalStructureDropDown() {
+    return cy.get("#mui-component-select-legal-structure");
+  }
+
+  selectLegalStructureDropDown(companyType: string) {
+    this.getLegalStructureDropDown().click();
+    cy.get('[role="listbox"]').contains(companyType).click({ force: true });
   }
 
   selectHomeBased(radio: boolean) {

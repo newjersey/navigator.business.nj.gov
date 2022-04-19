@@ -130,6 +130,12 @@ describe("onboarding - starting a business", () => {
     expect(page5.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
+  it("does not display the legal structure dropdown", async () => {
+    const { subject, page } = renderPage({});
+    page.chooseRadio("has-existing-business-false");
+    expect(subject.queryByLabelText("Legal structure")).not.toBeInTheDocument();
+  });
+
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({
       profileData: generateProfileData({

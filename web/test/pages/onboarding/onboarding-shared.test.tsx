@@ -182,6 +182,7 @@ describe("onboarding - shared", () => {
     page.clickBack();
 
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
@@ -191,7 +192,50 @@ describe("onboarding - shared", () => {
       initialOnboardingFlow: "OWNING",
       industryId: "generic",
       homeBasedBusiness: true,
-      legalStructureId: undefined,
+      legalStructureId: "c-corporation",
+      municipality: newark,
+      liquorLicense: false,
+      constructionRenovationPlan: undefined,
+      employerId: undefined,
+      taxId: undefined,
+      notes: "",
+      ownershipTypeIds: [],
+    });
+  });
+
+  it("resets non-shared information when switching from owning flow to starting flow with non-filing legal structure", async () => {
+    const newark = generateMunicipality({ displayName: "Newark" });
+    const initialUserData = generateUserData({
+      formProgress: "UNSTARTED",
+      profileData: createEmptyProfileData(),
+    });
+    const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
+
+    page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "sole-proprietorship");
+    await page.visitStep2();
+    page.fillText("Business name", "Cool Computers");
+    page.selectByValue("Sector", "clean-energy");
+    await page.visitStep3();
+    page.selectByText("Location", "Newark");
+    page.selectByValue("Ownership", "veteran-owned");
+    page.chooseRadio("home-based-business-true");
+
+    page.clickBack();
+    page.clickBack();
+
+    page.chooseRadio("has-existing-business-false");
+    await page.visitStep2();
+    expect(currentUserData().profileData).toEqual({
+      ...initialUserData.profileData,
+      hasExistingBusiness: false,
+      entityId: undefined,
+      businessName: "Cool Computers",
+      initialOnboardingFlow: "STARTING",
+      industryId: undefined,
+      homeBasedBusiness: true,
+      dateOfFormation: undefined,
+      legalStructureId: "sole-proprietorship",
       municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -211,6 +255,7 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
@@ -237,7 +282,7 @@ describe("onboarding - shared", () => {
       industryId: undefined,
       homeBasedBusiness: true,
       dateOfFormation: undefined,
-      legalStructureId: undefined,
+      legalStructureId: "c-corporation",
       municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -257,6 +302,7 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("has-existing-business-true");
+    page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
@@ -277,6 +323,7 @@ describe("onboarding - shared", () => {
       ...initialUserData.profileData,
       hasExistingBusiness: true,
       entityId: "1234567890",
+      legalStructureId: "c-corporation",
       businessName: "Cool Computers",
       industryId: "generic",
       dateOfFormation: date.format("YYYY-MM-DD"),
