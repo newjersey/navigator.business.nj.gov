@@ -5,6 +5,7 @@ import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingE
 import { OnboardingHasExistingBusiness } from "@/components/onboarding/OnboardingHasExistingBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
+import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
@@ -14,11 +15,10 @@ import { validateEmail } from "@/lib/utils/helpers";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared";
 import React, { ReactNode } from "react";
 
+type OnboardingPage = { component: ReactNode; getErrorMap: () => ErrorFieldMap | undefined };
+
 export type OnboardingFlow = {
-  pages: {
-    component: ReactNode;
-    getErrorMap: () => ErrorFieldMap | undefined;
-  }[];
+  pages: OnboardingPage[];
 };
 
 export type ErrorFieldMap = {
@@ -35,10 +35,18 @@ export const getOnboardingFlows = (
   OWNING: {
     pages: [
       {
-        component: <OnboardingHasExistingBusiness />,
+        component: (
+          <>
+            <OnboardingHasExistingBusiness />
+            <div className="padding-top-3">
+              <OnboardingLegalStructureDropdown />
+            </div>
+          </>
+        ),
         getErrorMap: () => ({
           banner: [
             { name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.hasExistingBusiness !== undefined },
+            { name: "REQUIRED_LEGAL", valid: profileData.legalStructureId !== undefined },
           ],
         }),
       },

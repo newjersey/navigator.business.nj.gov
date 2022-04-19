@@ -41,6 +41,7 @@ import {
   createEmptyProfileData,
   createEmptyUser,
   createEmptyUserData,
+  LookupLegalStructureById,
   Municipality,
   ProfileData,
   UserData,
@@ -113,6 +114,9 @@ const OnboardingPage = (props: Props): ReactElement => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
+  const [currentContent, setCurrentContent] = useState<UserDisplayContent>(
+    props.displayContent["STARTING"] as UserDisplayContent
+  );
   const hasHandledRouting = useRef<boolean>(false);
 
   const onValidation = useCallback(
@@ -124,6 +128,10 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const onboardingFlows = useMemo(() => {
     const onboardingFlows = getOnboardingFlows(profileData, user, onValidation, fieldStates);
+    const requiresPublicFiling = LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling;
+    if (!requiresPublicFiling) {
+      onboardingFlows["OWNING"].pages.splice(1, 1);
+    }
     return onboardingFlows;
   }, [profileData, user, onValidation, fieldStates]);
 
@@ -131,6 +139,16 @@ const OnboardingPage = (props: Props): ReactElement => {
     (page: number) => router.push({ query: { page: page } }, undefined, { shallow: true }),
     [router]
   );
+
+  useEffect(() => {
+    setCurrentContent(props.displayContent[currentFlow] as UserDisplayContent);
+  }, [currentFlow, props.displayContent]);
+
+  useEffect(() => {
+    const flow = profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+    setCurrentContent(props.displayContent[flow] as UserDisplayContent);
+    setCurrentFlow(flow);
+  }, [profileData.hasExistingBusiness, props.displayContent]);
 
   useEffect(() => {
     if (
@@ -233,8 +251,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         liquorLicense: profileData.liquorLicense,
         municipality: profileData.municipality,
         hasExistingBusiness: profileData.hasExistingBusiness,
+        legalStructureId: profileData.legalStructureId,
         cannabisLicenseType: undefined,
-        legalStructureId: undefined,
         dateOfFormation: undefined,
         entityId: undefined,
         constructionRenovationPlan: undefined,
@@ -354,7 +372,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           profileData: profileData,
           user: user,
           flow: currentFlow,
-          displayContent: props.displayContent[currentFlow] as UserDisplayContent,
+          displayContent: currentContent,
           municipalities: props.municipalities,
         },
         setProfileData,

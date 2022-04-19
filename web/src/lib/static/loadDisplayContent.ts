@@ -18,7 +18,7 @@ import {
   UserContentType,
 } from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
-import { LegalStructures } from "@businessnjgovnavigator/shared";
+import { LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
 import fs from "fs";
 import path from "path";
 
@@ -79,11 +79,19 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   const legalStructure = (type: UserContentType): LegalFieldContent => {
     const legalStructureContent = getMarkdown(loadFile("legal-structure.md", type));
     const legalStructureOptionContent: Record<string, string> = {};
-    LegalStructures.forEach((structure) => {
-      legalStructureOptionContent[structure.id] = getMarkdown(
-        loadFile(`legal-structure-${structure.id}.md`, type)
-      ).content;
+    LegalStructures.forEach((structure: LegalStructure) => {
+      try {
+        legalStructureOptionContent[structure.id] = getMarkdown(
+          loadFile(`legal-structure-${structure.id}.md`, type)
+        ).content;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        if (error.code !== "ENOENT") {
+          throw error;
+        }
+      }
     });
+
     return {
       contentMd: legalStructureContent.content,
       optionContent: legalStructureOptionContent,
