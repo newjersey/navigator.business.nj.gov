@@ -37,6 +37,7 @@
   ],
   "name": "Event Planning",
   "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "planner, organizer, coordinator",
   "id": "event-planning",
   "description": "Offers coordination services for different types of events"
 }
