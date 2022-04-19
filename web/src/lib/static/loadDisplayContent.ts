@@ -219,7 +219,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
 
   const agentNumberOrManual = getMarkdown(loadFile("business-formation/registered-agent.md"));
 
-  const membersModal = getMarkdown(loadFile("business-formation/members-modal.md"));
   const members = getMarkdown(loadFile("business-formation/members.md"));
 
   const signatureHeader = getMarkdown(loadFile("business-formation/signatures.md"));
@@ -242,10 +241,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       members: {
         contentMd: members.content,
         ...(members.grayMatter as MemberGrayMatter),
-      },
-      membersModal: {
-        contentMd: membersModal.content,
-        sameNameCheckboxText: (membersModal.grayMatter as MembersModalGrayMatter).checkboxText,
       },
       signatureHeader: {
         contentMd: signatureHeader.content,
@@ -294,10 +289,6 @@ type CannabisRadioGrayMatter = {
 type RegisteredAgentRadioGrayMatter = {
   radioButtonNumberText: string;
   radioButtonManualText: string;
-};
-
-type MembersModalGrayMatter = {
-  checkboxText: string;
 };
 
 type MemberGrayMatter = {

@@ -40,6 +40,8 @@
     "creditCardPaymentCostExtra": "2",
     "registeredAgentNameLabel": "**Registered Agent Name**",
     "membersModalNextButtonText": "Add Member",
+    "membersModalTitle": "Add New Member",
+    "membersCheckboxText": "Use Business Address",
     "signatureColumnLabel": "Signature",
     "registeredAgentCityLabel": "**City**",
     "paymentTypeTableLabel": "Select Payment Type",

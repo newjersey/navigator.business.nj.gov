@@ -300,10 +300,6 @@ export const generateFormationDisplayContent = (
     contentMd: `some-members-content-${randomInt()}`,
     placeholder: `some-members-placeholder-${randomInt()}`,
   },
-  membersModal: {
-    contentMd: `some-membersModal-content-${randomInt()}`,
-    sameNameCheckboxText: `some-membersModal-checkbox-${randomInt()}`,
-  },
   signatureHeader: {
     contentMd: `some-signer-content- ${randomInt()}`,
   },

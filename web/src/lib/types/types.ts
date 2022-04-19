@@ -112,10 +112,6 @@ export type FormationDisplayContent = {
     radioButtonManualText: string;
   };
   members: TextFieldContent;
-  membersModal: {
-    contentMd: string;
-    sameNameCheckboxText: string;
-  };
   signatureHeader: {
     contentMd: string;
   };
@@ -162,10 +158,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   members: {
     contentMd: "",
     placeholder: "",
-  },
-  membersModal: {
-    contentMd: "",
-    sameNameCheckboxText: "",
   },
   signatureHeader: {
     contentMd: "",

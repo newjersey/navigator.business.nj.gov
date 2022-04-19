@@ -1312,7 +1312,7 @@ describe("<BusinessFormation />", () => {
         await submitBusinessNameTab();
         await submitBusinessTab();
         await openMemberModal();
-        selectCheckBox(displayContent.membersModal.sameNameCheckboxText);
+        selectCheckBox(Config.businessFormationDefaults.membersCheckboxText);
         expect(getInputElementByLabel("Member name").value).toBe("John Smith");
         expect(getInputElementByLabel("Member address line1").value).toBe("123 business address");
         expect(getInputElementByLabel("Member address line2").value).toBe("business suite 201");
@@ -1371,8 +1371,13 @@ describe("<BusinessFormation />", () => {
         await submitBusinessNameTab();
         await submitBusinessTab();
         await openMemberModal();
-        selectCheckBox(displayContent.membersModal.sameNameCheckboxText);
-        fireEvent.click(subject.getByTestId("memberCancel"));
+        selectCheckBox(Config.businessFormationDefaults.membersCheckboxText);
+        fireEvent.click(subject.getByText(Config.businessFormationDefaults.membersModalBackButtonText));
+        await waitFor(() =>
+          expect(
+            subject.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
+          ).not.toBeInTheDocument()
+        );
         await openMemberModal();
         expect(getInputElementByLabel("Member name").value).toBe("");
       });
@@ -1388,9 +1393,14 @@ describe("<BusinessFormation />", () => {
         ).toBeInTheDocument();
 
         await openMemberModal();
-        selectCheckBox(displayContent.membersModal.sameNameCheckboxText);
+        selectCheckBox(Config.businessFormationDefaults.membersCheckboxText);
         clickMemberSubmit();
 
+        await waitFor(() =>
+          expect(
+            subject.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
+          ).not.toBeInTheDocument()
+        );
         expect(
           subject.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).not.toBeInTheDocument();
@@ -1943,7 +1953,7 @@ describe("<BusinessFormation />", () => {
   };
 
   const clickMemberSubmit = () => {
-    fireEvent.click(subject.getByTestId("memberSubmit"));
+    fireEvent.click(subject.getByText(Config.businessFormationDefaults.membersModalNextButtonText));
   };
 
   const fillMemberModal = async (overrides: Partial<FormationMember>) => {
