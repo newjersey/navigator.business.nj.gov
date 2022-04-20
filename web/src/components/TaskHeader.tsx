@@ -87,7 +87,10 @@ export const TaskHeader = (props: Props): ReactElement => {
       <div className="margin-bottom-2">
         <h1 data-task-id={props.task.id}>{getModifiedTaskContent(roadmap, props.task, "name")}</h1>
       </div>
-      <div className="flex flex-align-center flex-wrap margin-top-0 margin-bottom-2">
+      <div
+        className="flex flex-align-center flex-wrap margin-top-0 margin-bottom-2"
+        data-testid="taskProgress"
+      >
         {renderProgress()}
         {getModifiedTaskBooleanUndefined(roadmap, props.task, "required") === true && (
           <div className="flex flex-align-center tablet:margin-left-05">

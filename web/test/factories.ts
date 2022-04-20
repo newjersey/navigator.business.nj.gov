@@ -1,5 +1,6 @@
 import {
   AllCounties,
+  CannabisPriorityStatusDisplayContent,
   Certification,
   County,
   FormationDisplayContent,
@@ -280,6 +281,21 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     ...overrides,
   };
 };
+
+export const generateCannabisPriorityStatusDisplayContent = (
+  overrides: Partial<CannabisPriorityStatusDisplayContent>
+): CannabisPriorityStatusDisplayContent => ({
+  cannabisSocialEquityBusiness: {
+    contentMd: `Content\n- []{some-social-equity-business-id${randomInt()}}}some-social-equity-business-content`,
+  },
+  genericMinorityAndWomenOwned: {
+    contentMd: `Content\n- []{some-minority-and-women-id${randomInt()}}}some-minority-and-women-content`,
+  },
+  genericVeteranOwned: {
+    contentMd: `Content\n- []{some-veteran-id${randomInt()}}}some-veteran-content`,
+  },
+  ...overrides,
+});
 
 export const generateFormationDisplayContent = (
   overrides: Partial<FormationDisplayContent>

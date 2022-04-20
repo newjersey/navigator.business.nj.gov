@@ -231,6 +231,16 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
 
   const signatureHeader = getMarkdown(loadFile("business-formation/signatures.md"));
 
+  const cannabisSocialEquityBusinessChecklist = getMarkdown(
+    loadFile("certification-checklist/cannabis-social-equity-business.md")
+  );
+  const genericMinorityAndWomenOwnedChecklist = getMarkdown(
+    loadFile("certification-checklist/generic-minority-and-women-owned.md")
+  );
+  const genericVeteranOwnedChecklist = getMarkdown(
+    loadFile("certification-checklist/generic-veteran-owned.md")
+  );
+
   return {
     formationDisplayContent: {
       introParagraph: {
@@ -270,6 +280,17 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       certifiedCopyOfFormationDocument: {
         contentMd: certifiedCopyOfFormationDocument.content,
         ...(certifiedCopyOfFormationDocument.grayMatter as DocumentFieldGrayMatter),
+      },
+    },
+    cannabisPriorityStatusDisplayContent: {
+      cannabisSocialEquityBusiness: {
+        contentMd: cannabisSocialEquityBusinessChecklist.content,
+      },
+      genericMinorityAndWomenOwned: {
+        contentMd: genericMinorityAndWomenOwnedChecklist.content,
+      },
+      genericVeteranOwned: {
+        contentMd: genericVeteranOwnedChecklist.content,
       },
     },
   };

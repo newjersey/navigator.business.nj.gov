@@ -101,7 +101,11 @@ export interface LoadDisplayContent
   STARTING: StartingFlowContent;
   PROFILE: Partial<ProfileContent>;
 }
-
+export type CannabisPriorityStatusDisplayContent = {
+  cannabisSocialEquityBusiness: { contentMd: string };
+  genericMinorityAndWomenOwned: { contentMd: string };
+  genericVeteranOwned: { contentMd: string };
+};
 export type FormationDisplayContent = {
   introParagraph: { contentMd: string };
   businessNameCheck: { contentMd: string };
@@ -138,9 +142,22 @@ export type FormationDisplayContent = {
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
   formationDisplayContent: createEmptyFormationDisplayContent(),
+  cannabisPriorityStatusDisplayContent: createEmptyCannabisPriorityStatusDisplayContent(),
 });
 
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
+
+export const createEmptyCannabisPriorityStatusDisplayContent = (): CannabisPriorityStatusDisplayContent => ({
+  cannabisSocialEquityBusiness: {
+    contentMd: "",
+  },
+  genericMinorityAndWomenOwned: {
+    contentMd: "",
+  },
+  genericVeteranOwned: {
+    contentMd: "",
+  },
+});
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
   introParagraph: {
@@ -508,6 +525,7 @@ export type County =
 
 export type TasksDisplayContent = {
   formationDisplayContent: FormationDisplayContent;
+  cannabisPriorityStatusDisplayContent: CannabisPriorityStatusDisplayContent;
 };
 
 export interface Roadmap {

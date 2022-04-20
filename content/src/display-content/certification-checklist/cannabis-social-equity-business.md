@@ -1,1 +1,2 @@
-- []{required-unique-id}Checkbox Label
+- []{cannabis-social-equity-notarized-statement}A [notarized statement](https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf) by the owner(s) that they meet the criteria for a `Social Equity Business|social-equity-business-cannabis`
+- []{cannabis-social-equity-residency-doc}Documentation (such as a tax return) to prove residency

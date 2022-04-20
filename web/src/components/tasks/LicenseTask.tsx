@@ -6,7 +6,6 @@ import { LicenseStatusReceipt } from "@/components/tasks/LicenseStatusReceipt";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -34,7 +33,6 @@ export const LicenseTask = (props: Props): ReactElement => {
   const [licenseStatusResult, setLicenseStatusResult] = useState<LicenseStatusResult | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, refresh } = useUserData();
-  const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
 
   const allFieldsHaveValues = (nameAndAddress: NameAndAddress) => {
     return nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode;
@@ -130,7 +128,7 @@ export const LicenseTask = (props: Props): ReactElement => {
             </Box>
             <TabPanel value="0" sx={{ paddingX: 0 }}>
               <div className="margin-top-3">
-                <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
+                <UnlockedBy task={props.task} />
                 <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
               </div>
               <div className="flex flex-column margin-top-4 margin-bottom-1">

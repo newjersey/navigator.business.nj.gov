@@ -536,6 +536,64 @@ collections:
               - { label: Success Page - Header, name: successPageHeader, widget: string }
               - { label: Success Page - Subheader, name: successPageSubheader, widget: string }
               - { label: Update your Profile text, name: updateYourProfileLinkText, widget: string }
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: true
+            widget: object
+            summary: "{{cannabisPriorityStatus}}"
+            fields:
+              - { label: Tab 1 - Next Button Text, name: nextButtonText, widget: string }
+              - {
+                  label: Tab 1 - None Of The Above Checkbox Label,
+                  name: noPriortyStatusCheckboxText,
+                  widget: string,
+                }
+              - { label: Tab 2 - Header Text, name: secondTabHeaderText, widget: string }
+              - { label: Tab 2 - Text Before Header, name: secondTabDescriptionText, widget: string }
+              - { label: Tab 2 - Back Button Text, name: backButtonText, widget: string }
+              - {
+                  label: Tab 2 - Complete Task Progress Button Text,
+                  name: completeTaskProgressButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Text For None Of The Above Checkbox Selection,
+                  name: noPriorityStatusText,
+                  widget: string,
+                }
+              - { label: Tab 2 - Social Equity Header Text, name: socialEquityHeaderText, widget: string }
+              - { label: Tab 2 - Social Equity Button Text, name: socialEquityButtonText, widget: string }
+              - { label: Tab 2 - Social Equity Button Link, name: socialEquityButtonLink, widget: string }
+              - { label: Tab 2 - Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
+              - { label: Tab 2 - Impact Zone Text, name: impactZoneText, widget: string }
+              - { label: Tab 2 - Veteran Header Text, name: veteranHeaderText, widget: string }
+              - {
+                  label: Tab 2 - Minority Or Women Header Text,
+                  name: minorityOrWomenHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Veteran Minority Or Women Button Text,
+                  name: certificationButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Veteran Minority Or Women Button Link,
+                  name: certificationButtonLink,
+                  widget: string,
+                }
+              - { label: Tab 2 - Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
+              - {
+                  label: Tab 2 - Green Box Minority Or Women Text,
+                  name: greenBoxMinorityOrWomenText,
+                  widget: string,
+                }
+              - { label: Tab 2 - Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
+              - {
+                  label: Tab 2 - Green Box Social Equity Text,
+                  name: greenBoxSocialEquityText,
+                  widget: string,
+                }
           - label: Dashboard Defaults
             name: dashboardDefaults
             collapsed: true
@@ -1700,8 +1758,8 @@ collections:
                 display_fields: ["{{filename}}"]
                 multiple: true
 
-  - label: "Certification Checklist"
-    name: "certification-checklist"
+  - name: "certification-checklist"
+    label: "Certification Checklist"
     folder: "content/src/display-content/certification-checklist"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
