@@ -10,7 +10,7 @@ import {
   Industries,
   Industry,
   LookupIndustryById,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import orderBy from "lodash.orderby";
 import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";

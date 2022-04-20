@@ -8,7 +8,7 @@ import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared";
+import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";

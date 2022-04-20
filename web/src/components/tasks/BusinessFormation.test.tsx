@@ -36,15 +36,17 @@ import {
   FormationFormData,
   FormationMember,
   FormationSubmitResponse,
+  getCurrentDate,
+  getCurrentDateFormatted,
   GetFilingResponse,
   Municipality,
   ProfileData,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -498,7 +500,7 @@ describe("<BusinessFormation />", () => {
       await submitBusinessNameTab("Pizza Joint");
 
       selectByText("Business suffix", "LLC");
-      const threeDaysFromNow = dayjs().add(3, "days");
+      const threeDaysFromNow = getCurrentDate().add(3, "days");
       selectDate(threeDaysFromNow);
       fillText("Business address line1", "1234 main street");
       fillText("Business address line2", "Suite 304");
@@ -588,7 +590,7 @@ describe("<BusinessFormation />", () => {
       const formationData = {
         formationFormData: generateFormationFormData({
           businessSuffix: "LTD LIABILITY CO",
-          businessStartDate: dayjs().format("YYYY-MM-DD"),
+          businessStartDate: getCurrentDateFormatted("YYYY-MM-DD"),
           businessAddressCity: generateMunicipality({ displayName: "Newark" }),
           businessAddressLine1: `123 main street`,
           businessAddressLine2: `suite 102`,
@@ -639,7 +641,7 @@ describe("<BusinessFormation />", () => {
       chooseRadio("registered-agent-number");
 
       expect(subject.getByText("LTD LIABILITY CO")).toBeInTheDocument();
-      expect(getInputElementByLabel("Business start date").value).toBe(dayjs().format("MM/DD/YYYY"));
+      expect(getInputElementByLabel("Business start date").value).toBe(getCurrentDateFormatted("MM/DD/YYYY"));
       expect(getInputElementByLabel("Business address line1").value).toBe("123 main street");
       expect(getInputElementByLabel("Business address line2").value).toBe("suite 102");
       expect(getInputElementByLabel("Business address state").value).toBe("NJ");
@@ -1561,16 +1563,18 @@ describe("<BusinessFormation />", () => {
     });
 
     it("resets date on initial load", async () => {
-      renderWithData({ businessStartDate: dayjs().subtract(1, "day").format("YYYY-MM-DD") });
+      renderWithData({ businessStartDate: getCurrentDate().subtract(1, "day").format("YYYY-MM-DD") });
       await submitBusinessNameTab();
-      expect(subject.getByLabelText("Business start date")).toHaveValue(dayjs().format("MM/DD/YYYY"));
+      expect(subject.getByLabelText("Business start date")).toHaveValue(
+        getCurrentDateFormatted("MM/DD/YYYY")
+      );
       await submitBusinessTab(true);
     });
 
     it("validates date on submit", async () => {
       renderWithData({});
       await submitBusinessNameTab();
-      selectDate(dayjs().subtract(4, "day"));
+      selectDate(getCurrentDate().subtract(4, "day"));
       await submitBusinessTab(false);
       expect(subject.getByText(Config.businessFormationDefaults.startDateErrorText)).toBeInTheDocument();
       expect(

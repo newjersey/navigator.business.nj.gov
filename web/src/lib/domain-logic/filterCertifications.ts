@@ -1,5 +1,5 @@
 import { Certification } from "@/lib/types/types";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { UserData } from "@businessnjgovnavigator/shared/";
 
 export const LARGE_BUSINESS_MIN_EMPLOYEE_COUNT = 120;
 

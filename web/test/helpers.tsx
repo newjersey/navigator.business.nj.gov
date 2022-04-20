@@ -10,7 +10,7 @@ import {
   UserDataErrorContext,
 } from "@/pages/_app";
 import { generateUserData } from "@/test/factories";
-import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared";
+import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { RenderResult } from "@testing-library/react";
 import os from "os";
 import React, { Dispatch, ReactElement, SetStateAction } from "react";

@@ -1,6 +1,6 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { NameAvailability, SelfRegResponse } from "@/lib/types/types";
-import { NameAndAddress, UserData } from "@businessnjgovnavigator/shared";
+import { NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";

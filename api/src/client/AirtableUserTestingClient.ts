@@ -1,7 +1,7 @@
 import { LogWriterType } from "@libs/logWriter";
 import { BusinessUser, UserTestingResponse } from "@shared/businessUser";
+import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import Airtable from "airtable";
-import dayjs from "dayjs";
 import { UserTestingClient } from "../domain/types";
 
 type AirtableConfig = {
@@ -28,7 +28,7 @@ export const AirtableUserTestingClient = (
       const fields = {
         "Email Address": user.email,
         "First Name": user.name,
-        "Registration Date": dayjs().format("YYYY-MM-DD"),
+        "Registration Date": getCurrentDateFormatted("YYYY-MM-DD"),
         Source: "Opted In Navigator",
       };
       logWriter.LogInfo(

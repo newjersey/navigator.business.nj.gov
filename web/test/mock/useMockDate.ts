@@ -1,4 +1,4 @@
-import * as getCurrentDateModule from "@/lib/utils/getCurrentDate";
+import * as getCurrentDateModule from "@businessnjgovnavigator/shared/dateHelpers";
 import dayjs from "dayjs";
 
 const currentDateMock = (getCurrentDateModule as jest.Mocked<typeof getCurrentDateModule>).getCurrentDate;

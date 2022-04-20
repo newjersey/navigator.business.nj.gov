@@ -1,5 +1,5 @@
 import { County, Funding } from "@/lib/types/types";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { UserData } from "@businessnjgovnavigator/shared/";
 
 export const filterFundings = (fundings: Funding[], userData: UserData): Funding[] => {
   return fundings.filter((it) => {

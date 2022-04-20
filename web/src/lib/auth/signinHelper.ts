@@ -9,7 +9,7 @@ import {
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
 import { AuthAlertContextType } from "@/pages/_app";
-import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared";
+import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
 import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";

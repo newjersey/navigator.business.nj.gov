@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { Industries, LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
+import { Industries, LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared/";
 import { completeNewBusinessOnboarding, randomElementFromArray, randomInt } from "../support/helpers";
 
 describe("Roadmap [all] [group4]", () => {

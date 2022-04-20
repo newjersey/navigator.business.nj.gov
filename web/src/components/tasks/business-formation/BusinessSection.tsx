@@ -8,6 +8,7 @@ import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 
@@ -44,7 +45,7 @@ export const BusinessSection = (): ReactElement => {
       if (!state.formationFormData.businessStartDate) return false;
       return (
         dayjs(state.formationFormData.businessStartDate).isValid() &&
-        dayjs(state.formationFormData.businessStartDate).isAfter(dayjs().subtract(1, "day"), "day")
+        dayjs(state.formationFormData.businessStartDate).isAfter(getCurrentDate().subtract(1, "day"), "day")
       );
     };
 

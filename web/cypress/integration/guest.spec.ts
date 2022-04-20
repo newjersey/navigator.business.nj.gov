@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
 import { completeNewBusinessOnboarding } from "../support/helpers";
 

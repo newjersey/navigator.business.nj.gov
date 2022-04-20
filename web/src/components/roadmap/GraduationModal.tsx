@@ -23,7 +23,7 @@ import {
   LegalStructures,
   ProfileData,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { FormControl } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement, useMemo, useState } from "react";

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
 import { TaskProgress, UserData } from "@shared/userData";
-import dayjs from "dayjs";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 import { SearchLicenseStatus, UpdateLicenseStatus, UserDataClient } from "../types";
 
@@ -30,7 +30,7 @@ export const updateLicenseStatusFactory = (
       licenseData: {
         nameAndAddress: args.nameAndAddress,
         completedSearch: args.completed,
-        lastCheckedStatus: dayjs().toISOString(),
+        lastCheckedStatus: getCurrentDateISOString(),
         status: args.licenseStatus,
         items: args.items,
       },

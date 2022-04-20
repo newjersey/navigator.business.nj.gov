@@ -10,7 +10,7 @@ import {
   generateTask,
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers";
-import { Industries } from "@businessnjgovnavigator/shared";
+import { Industries } from "@businessnjgovnavigator/shared/";
 
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;

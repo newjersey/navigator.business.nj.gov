@@ -1,8 +1,8 @@
+import * as getCurrentDateModule from "@shared/dateHelpers";
 import dayjs from "dayjs";
-import * as getCurrentDateModule from "../getCurrentDate";
 import { calculateNextAnnualFilingDate } from "./calculateNextAnnualFilingDate";
 
-jest.mock("../getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
+jest.mock("@shared/dateHelpers", () => ({ getCurrentDate: jest.fn() }));
 const currentDateMock = (getCurrentDateModule as jest.Mocked<typeof getCurrentDateModule>).getCurrentDate;
 
 describe("calculateNextAnnualFilingDate", () => {

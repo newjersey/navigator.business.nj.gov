@@ -4,7 +4,7 @@ import { markdownToText, withAuthAlert } from "@/test/helpers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { RegistrationStatus } from "@businessnjgovnavigator/shared";
+import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { render, RenderResult, waitFor } from "@testing-library/react";
 import React from "react";
 

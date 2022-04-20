@@ -18,7 +18,7 @@ import {
   UserContentType,
 } from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
-import { LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared";
+import { LegalStructure, LegalStructures } from "@businessnjgovnavigator/shared/";
 import fs from "fs";
 import path from "path";
 

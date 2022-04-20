@@ -1,8 +1,9 @@
+import { getCurrentDate } from "@shared/dateHelpers";
 import { createHmac } from "crypto";
 import dayjs from "dayjs";
 
 export const determineAnnualFilingDate = (dateOfFormation: string) => {
-  const currentDate = dayjs();
+  const currentDate = getCurrentDate();
   const dateOfFormationDate = dayjs(dateOfFormation);
   let year = currentDate.year();
   if (dateOfFormationDate.month() < currentDate.month()) {

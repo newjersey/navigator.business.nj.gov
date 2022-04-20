@@ -21,7 +21,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { getCurrentDate, UserData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
@@ -119,7 +119,7 @@ describe("dashboard", () => {
   });
 
   it("displays filings calendar with annual report date", () => {
-    const dueDate = dayjs().add(2, "months");
+    const dueDate = getCurrentDate().add(2, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
       dueDate: dueDate.format("YYYY-MM-DD"),
@@ -151,7 +151,7 @@ describe("dashboard", () => {
   it("displays filings calendar as list with annual report date", () => {
     setMobileScreen(false);
 
-    const dueDate = dayjs().add(2, "months");
+    const dueDate = getCurrentDate().add(2, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
       dueDate: dueDate.format("YYYY-MM-DD"),

@@ -13,7 +13,7 @@ import {
   createEmptyUserData,
   Municipality,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   fireEvent,

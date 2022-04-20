@@ -13,9 +13,8 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyProfileData } from "@businessnjgovnavigator/shared/";
+import { createEmptyProfileData, getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { render, RenderResult, waitFor } from "@testing-library/react";
-import dayjs from "dayjs";
 import React from "react";
 
 jest.mock("next/router");
@@ -29,7 +28,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
-const date = dayjs().subtract(1, "month").date(1);
+const date = getCurrentDate().subtract(1, "month").date(1);
 describe("onboarding - shared", () => {
   beforeEach(() => {
     jest.resetAllMocks();

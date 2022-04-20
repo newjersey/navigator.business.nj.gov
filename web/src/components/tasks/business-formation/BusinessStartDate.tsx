@@ -4,6 +4,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextField } from "@mui/material";
@@ -45,8 +46,8 @@ export const BusinessStartDate = (): ReactElement => {
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker
-            minDate={dayjs()}
-            maxDate={dayjs().add(100, "years")}
+            minDate={getCurrentDate()}
+            maxDate={getCurrentDate().add(100, "years")}
             value={dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD")}
             inputFormat={"MM/DD/YYYY"}
             onChange={(newValue: Dayjs | null): void => {

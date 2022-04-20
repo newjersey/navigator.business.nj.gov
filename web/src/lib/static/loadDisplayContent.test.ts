@@ -1,5 +1,5 @@
 import { getPathSeparator } from "@/test/helpers";
-import { LegalStructures } from "@businessnjgovnavigator/shared";
+import { LegalStructures } from "@businessnjgovnavigator/shared/";
 import fs from "fs";
 import {
   loadDashboardDisplayContent,

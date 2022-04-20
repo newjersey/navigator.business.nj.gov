@@ -12,7 +12,7 @@ import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { LicenseStatusResult, NameAndAddress, UserData } from "@businessnjgovnavigator/shared";
+import { LicenseStatusResult, NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
 import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useState } from "react";

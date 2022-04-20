@@ -1,6 +1,6 @@
 import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { UserData } from "@businessnjgovnavigator/shared/";
 import React, { createContext, ReactElement, ReactNode, useContext, useState } from "react";
 
 const updateSpy = jest.fn();

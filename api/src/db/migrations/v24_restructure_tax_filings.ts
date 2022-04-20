@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import { randomInt } from "./migrations";
 import { v23UserData } from "./v23_rename_onboardingData_to_profileData";
 
@@ -138,7 +138,7 @@ export const generatev24ProfileData = (overrides: Partial<v24ProfileData>): v24P
     liquorLicense: false,
     homeBasedBusiness: false,
     constructionRenovationPlan: undefined,
-    dateOfFormation: dayjs().format("YYYY-MM"),
+    dateOfFormation: getCurrentDateFormatted("YYYY-MM"),
     entityId: "",
     employerId: "",
     taxId: "",

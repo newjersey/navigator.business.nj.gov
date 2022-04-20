@@ -1,5 +1,5 @@
+import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import { AxiosError } from "axios";
-import dayjs from "dayjs";
 import winston from "winston";
 import WinstonCloudWatch from "winston-cloudwatch";
 
@@ -14,7 +14,7 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
       level: "silly",
       name: `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`,
       logGroupName: `/${groupName}/${logStream}`,
-      logStreamName: `${logStream}-${dayjs().format("YYYYMMDD")}`,
+      logStreamName: `${logStream}-${getCurrentDateFormatted("YYYYMMDD")}`,
       awsRegion: region || process.env.AWS_REGION,
       retentionInDays: 180,
     })

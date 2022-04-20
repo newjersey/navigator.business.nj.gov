@@ -1,7 +1,7 @@
 import { getSignedS3Link } from "@/lib/auth/sessionHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { ProfileDocuments } from "@businessnjgovnavigator/shared";
+import { ProfileDocuments } from "@businessnjgovnavigator/shared/";
 import React from "react";
 
 export const useDocuments = (): {

@@ -6,7 +6,7 @@ import {
   LegalStructure,
   LegalStructures,
   LookupIndustryById,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
 import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";

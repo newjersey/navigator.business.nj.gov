@@ -32,6 +32,9 @@ import {
   FormationSigner,
   FormationSubmitError,
   FormationSubmitResponse,
+  getCurrentDate,
+  getCurrentDateFormatted,
+  getCurrentDateISOString,
   GetFilingResponse,
   Industries,
   Industry,
@@ -50,8 +53,7 @@ import {
   TaxFiling,
   TaxFilingData,
   UserData,
-} from "@businessnjgovnavigator/shared";
-import dayjs from "dayjs";
+} from "@businessnjgovnavigator/shared/";
 import { randomIntFromInterval } from "./helpers";
 
 export const randomInt = (length = 8): number =>
@@ -102,7 +104,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
 export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   return {
     identifier: `some-identifier-${randomInt()}`,
-    dueDate: dayjs().format("YYYY-MM-DD"),
+    dueDate: getCurrentDateFormatted("YYYY-MM-DD"),
     ...overrides,
   };
 };
@@ -112,6 +114,7 @@ export const generateProfileData = (
   isMobileLocation?: boolean
 ): ProfileData => {
   const id = `some-id-${randomInt()}`;
+  //console.log(getCurrentDateFormatted("YYYY-MM-DD"));
   return {
     hasExistingBusiness: false,
     initialOnboardingFlow: "STARTING",
@@ -123,7 +126,7 @@ export const generateProfileData = (
     homeBasedBusiness: false,
     cannabisLicenseType: undefined,
     constructionRenovationPlan: undefined,
-    dateOfFormation: dayjs().format("YYYY-MM-DD"),
+    dateOfFormation: getCurrentDateFormatted("YYYY-MM-DD"),
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
     taxId: randomInt(9).toString(),
@@ -277,7 +280,7 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     completedSearch: false,
     items: [generateLicenseStatusItem({})],
     status: "PENDING",
-    lastCheckedStatus: dayjs().toISOString(),
+    lastCheckedStatus: getCurrentDateISOString(),
     ...overrides,
   };
 };
@@ -330,7 +333,7 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
   return {
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(),
-    businessStartDate: dayjs().add(1, "days").format("YYYY-MM-DD"),
+    businessStartDate: getCurrentDate().add(1, "days").format("YYYY-MM-DD"),
     businessAddressCity: generateMunicipality({}),
     businessAddressLine1: `some-address-1-${randomInt()}`,
     businessAddressLine2: `some-address-2-${randomInt()}`,
@@ -425,7 +428,7 @@ export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>)
   return {
     success: true,
     entityId: `some-entity-${randomInt()}`,
-    transactionDate: dayjs().toISOString(),
+    transactionDate: getCurrentDateISOString(),
     confirmationNumber: `some-confirmation-number-${randomInt()}`,
     formationDoc: `some-formation-doc-${randomInt()}`,
     standingDoc: `some-standing-doc-${randomInt()}`,
@@ -446,8 +449,8 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     fundingType: randomFundingType(),
     agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
     publishStageArchive: null,
-    openDate: dayjs().toISOString(),
-    dueDate: dayjs().toISOString(),
+    openDate: getCurrentDateISOString(),
+    dueDate: getCurrentDateISOString(),
     status: "open",
     programFrequency: randomFundingProgramFrequency(),
     businessStage: randomFundingBusinessStage(),
