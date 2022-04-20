@@ -1,3 +1,28 @@
+# [3.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.3.0...v3.4.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* [[#1909](https://github.com/newjersey/navigator.business.nj.gov/issues/1909)] email validation on onboarding last step ([7b44234](https://github.com/newjersey/navigator.business.nj.gov/commit/7b44234e8ae46e288a47c1952c097aa500e8b850))
+* [[#2004](https://github.com/newjersey/navigator.business.nj.gov/issues/2004)] always show roadmap header from user name ([09c7f6b](https://github.com/newjersey/navigator.business.nj.gov/commit/09c7f6bf2344b0040ee6d1005dadc0feb34f7ff1))
+* [[#2004](https://github.com/newjersey/navigator.business.nj.gov/issues/2004)] fix email validation onboarding test ([a2d756a](https://github.com/newjersey/navigator.business.nj.gov/commit/a2d756a08d1fe26a6b0e976b4a124924e92e3466))
+* cypress onboarding bug ([f2d8352](https://github.com/newjersey/navigator.business.nj.gov/commit/f2d8352012d132517010a8a855245b70f091e616))
+* **deps:** update aws-amplify to v4.5.2 ([e05c787](https://github.com/newjersey/navigator.business.nj.gov/commit/e05c787fef45dc6af68832fd85cb5eb2a2bdf15b))
+* **deps:** update aws-sdk to v3.72.0 ([4de6fcf](https://github.com/newjersey/navigator.business.nj.gov/commit/4de6fcfb161d221b1013ef8b0009c7ab7886e5f4))
+* **deps:** update dependency dayjs to v1.11.1 ([2108d30](https://github.com/newjersey/navigator.business.nj.gov/commit/2108d30916a4270100282d5bb5c053ab89a42c4e))
+* **deps:** update dependency netlify-cms-app to v2.15.72 ([9d3c1c6](https://github.com/newjersey/navigator.business.nj.gov/commit/9d3c1c66e9b27cc0983da04e1a949db0b62fb78c))
+* **deps:** update material-ui ([05c22c1](https://github.com/newjersey/navigator.business.nj.gov/commit/05c22c19839d27ee29a58ae71ca1354c9e031464))
+* update error message for full name input in self reg ([cf6853c](https://github.com/newjersey/navigator.business.nj.gov/commit/cf6853c8c9d1b2a0e4e4d5232669acc34854b543))
+* updating General Config config ([#2422](https://github.com/newjersey/navigator.business.nj.gov/issues/2422)) ([1052caf](https://github.com/newjersey/navigator.business.nj.gov/commit/1052caf12a9da4ab73607c3b2f1d0c74418dbc81))
+* updating General Config config ([#2433](https://github.com/newjersey/navigator.business.nj.gov/issues/2433)) ([bf8a608](https://github.com/newjersey/navigator.business.nj.gov/commit/bf8a608d4d39590bc0f9c3bd57a1d7129b24d154))
+
+
+### Features
+
+* [[#1952](https://github.com/newjersey/navigator.business.nj.gov/issues/1952)] a/b testing for landing page ([b488921](https://github.com/newjersey/navigator.business.nj.gov/commit/b4889213f4a736b6920cbab30469a3bd60c0c001))
+* [[#2004](https://github.com/newjersey/navigator.business.nj.gov/issues/2004)] remove business name from Poppy onboarding ([44f058d](https://github.com/newjersey/navigator.business.nj.gov/commit/44f058d1432d2fefe71fba67286884bd30c736c5))
+* [[#2249](https://github.com/newjersey/navigator.business.nj.gov/issues/2249)] map sectors for grad, only show dropdown for generic industry ([68d8415](https://github.com/newjersey/navigator.business.nj.gov/commit/68d84154c28436883c78e44e3919940628563529))
+
 # [3.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.2.2...v3.3.0) (2022-04-14)
 
 
