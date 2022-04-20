@@ -24,6 +24,7 @@ RUN rm -rf ./api
 RUN rm -rf ./content
 COPY ./web/public ./web/public
 COPY ./web/.next ./web/.next
+COPY ./web/out ./web/out
 WORKDIR /app/web
 
 EXPOSE 3000
