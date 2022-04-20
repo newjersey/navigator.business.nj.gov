@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "retail-trade-and-ecommerce",
+  "defaultSectorId": "digital-and-print-media",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -35,9 +35,9 @@
       "task": "search-licenses"
     }
   ],
-  "name": "Online Business",
+  "name": "Photography",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "online store, ecommerce, e-business",
-  "id": "e-commerce",
-  "description": "Selling or reselling goods or services on the internet"
+  "additionalSearchTerms": "freelance photographer, professional photographer, photographer",
+  "id": "photography",
+  "description": "Offers portrait and event photography services"
 }

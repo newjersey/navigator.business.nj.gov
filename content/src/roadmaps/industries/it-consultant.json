@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "retail-trade-and-ecommerce",
+  "defaultSectorId": "technology",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -35,9 +35,9 @@
       "task": "search-licenses"
     }
   ],
-  "name": "Online Business",
+  "name": "IT Consultant",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "online store, ecommerce, e-business",
-  "id": "e-commerce",
-  "description": "Selling or reselling goods or services on the internet"
+  "additionalSearchTerms": "tech support, information technology, tech services, technical services",
+  "id": "it-consultant",
+  "description": "Offers system maintenance, configuration, and troubleshooting services"
 }

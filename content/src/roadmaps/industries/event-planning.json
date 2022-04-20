@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "retail-trade-and-ecommerce",
+  "defaultSectorId": "other-services",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -35,9 +35,9 @@
       "task": "search-licenses"
     }
   ],
-  "name": "Online Business",
+  "name": "Event Planning",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "online store, ecommerce, e-business",
-  "id": "e-commerce",
-  "description": "Selling or reselling goods or services on the internet"
+  "additionalSearchTerms": "planner, organizer, coordinator",
+  "id": "event-planning",
+  "description": "Offers coordination services for different types of events"
 }
