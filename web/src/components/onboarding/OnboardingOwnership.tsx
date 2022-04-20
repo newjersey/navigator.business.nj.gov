@@ -5,7 +5,7 @@ import {
   arrayOfOwnershipTypes,
   LookupOwnershipTypeById,
   OwnershipType,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 

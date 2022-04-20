@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import { FormationTextField } from "@businessnjgovnavigator/shared";
+import { FormationTextField } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"> {

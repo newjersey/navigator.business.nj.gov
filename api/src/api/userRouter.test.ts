@@ -1,5 +1,5 @@
+import { getCurrentDate } from "@shared/dateHelpers";
 import bodyParser from "body-parser";
-import dayjs from "dayjs";
 import express, { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
@@ -111,7 +111,7 @@ describe("userRouter", () => {
       it("does not update license if licenseData lastCheckedDate is within the last hour", async () => {
         const userData = generateUserData({
           licenseData: generateLicenseData({
-            lastCheckedStatus: dayjs().subtract(1, "hour").add(1, "minute").toISOString(),
+            lastCheckedStatus: getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString(),
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -126,7 +126,7 @@ describe("userRouter", () => {
             industryId: "home-contractor",
           }),
           licenseData: generateLicenseData({
-            lastCheckedStatus: dayjs().subtract(1, "hour").subtract(1, "minute").toISOString(),
+            lastCheckedStatus: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);

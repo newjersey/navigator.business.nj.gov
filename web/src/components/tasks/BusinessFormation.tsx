@@ -21,8 +21,10 @@ import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/h
 import {
   createEmptyFormationFormData,
   FormationFormData,
+  getCurrentDate,
+  getCurrentDateFormatted,
   Municipality,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useEffect, useState } from "react";
@@ -92,7 +94,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
     : [];
 
   const getDate = (date?: string): string =>
-    !date || dayjs(date, "YYYY-MM-DD").isBefore(dayjs()) ? dayjs().format("YYYY-MM-DD") : date;
+    !date || dayjs(date, "YYYY-MM-DD").isBefore(getCurrentDate())
+      ? getCurrentDateFormatted("YYYY-MM-DD")
+      : date;
   const stepNames = businessFormationTabs.map((value) => value.section);
 
   useMountEffectWhenDefined(() => {

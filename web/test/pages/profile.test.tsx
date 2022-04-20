@@ -24,17 +24,17 @@ import {
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   createEmptyUserData,
+  getCurrentDate,
   LookupIndustryById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   Municipality,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
-import dayjs from "dayjs";
 import React from "react";
 
-const date = dayjs().subtract(1, "month").date(1);
+const date = getCurrentDate().subtract(1, "month").date(1);
 
 const dateOfFormation = date.format("YYYY-MM-DD");
 const mockApi = api as jest.Mocked<typeof api>;

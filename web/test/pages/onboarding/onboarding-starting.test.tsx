@@ -11,7 +11,7 @@ import {
   createEmptyUserData,
   LookupIndustryById,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router");

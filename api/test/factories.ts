@@ -6,6 +6,7 @@ import {
   newsletterStatusList,
   UserTestingResponse,
 } from "@shared/businessUser";
+import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "@shared/dateHelpers";
 import {
   AllBusinessSuffixes,
   BusinessSuffix,
@@ -24,7 +25,6 @@ import { ProfileData } from "@shared/profileData";
 import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
 import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import { Preferences, UserData } from "@shared/userData";
-import dayjs from "dayjs";
 import { SelfRegResponse } from "../src/domain/types";
 
 export const randomInt = (length = 8): number =>
@@ -70,7 +70,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
 export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   return {
     identifier: `some-identifier-${randomInt()}`,
-    dueDate: dayjs().format("YYYY-MM-DD"),
+    dueDate: getCurrentDateFormatted("YYYY-MM-DD"),
     ...overrides,
   };
 };
@@ -170,7 +170,7 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     completedSearch: true,
     items: [generateLicenseStatusItem({})],
     status: "PENDING",
-    lastCheckedStatus: dayjs().toISOString(),
+    lastCheckedStatus: getCurrentDateISOString(),
     ...overrides,
   };
 };
@@ -254,7 +254,7 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
   return {
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(),
-    businessStartDate: dayjs().add(1, "days").format("YYYY-MM-DD"),
+    businessStartDate: getCurrentDate().add(1, "days").format("YYYY-MM-DD"),
     businessAddressCity: generateMunicipality({}),
     businessAddressLine1: `some-address-1-${randomInt()}`,
     businessAddressLine2: `some-address-2-${randomInt()}`,
@@ -292,7 +292,7 @@ export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>)
   return {
     success: true,
     entityId: `some-entity-${randomInt()}`,
-    transactionDate: dayjs().toISOString(),
+    transactionDate: getCurrentDateISOString(),
     confirmationNumber: `some-confirmation-number-${randomInt()}`,
     formationDoc: `some-formation-doc-${randomInt()}`,
     standingDoc: `some-standing-doc-${randomInt()}`,

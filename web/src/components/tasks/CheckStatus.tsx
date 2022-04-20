@@ -5,7 +5,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared";
+import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigator/shared/";
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";

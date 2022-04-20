@@ -7,7 +7,7 @@ import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormationMember } from "@businessnjgovnavigator/shared";
+import { FormationMember } from "@businessnjgovnavigator/shared/";
 import { IconButton, useMediaQuery } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
 

@@ -3,7 +3,7 @@ import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
-import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared";
+import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import orderBy from "lodash.orderby";
 import React, { ReactElement, ReactNode, useContext } from "react";

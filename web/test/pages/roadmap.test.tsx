@@ -24,7 +24,6 @@ import {
   useMockUserData,
   useMockUserDataError,
 } from "@/test/mock/mockUseUserData";
-import { useMockDate } from "@/test/mock/useMockDate";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -34,11 +33,12 @@ import {
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
+  getCurrentDate,
   LookupIndustryById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
@@ -56,7 +56,6 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postGetAnnualFilings: jest.fn(),
 }));
@@ -77,7 +76,6 @@ describe("roadmap page", () => {
     useMockUserData({});
     useMockRoadmap({});
     useMockRouter({});
-    useMockDate("2021-10-01");
     setMobileScreen(false);
   });
 
@@ -586,7 +584,7 @@ describe("roadmap page", () => {
 
       const { subject, page } = renderPage(userData);
 
-      const date = dayjs().subtract(1, "month").date(1);
+      const date = getCurrentDate().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
 
       openGraduationModal(subject);
@@ -614,7 +612,7 @@ describe("roadmap page", () => {
     });
 
     it("pre-populates fields with data from profile", async () => {
-      const date = dayjs().subtract(1, "month").date(1);
+      const date = getCurrentDate().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
       const userData = generateUserData({
         profileData: generateProfileData({
@@ -661,7 +659,7 @@ describe("roadmap page", () => {
       mockApi.postGetAnnualFilings.mockImplementation((userData) =>
         Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
       );
-      const date = dayjs().subtract(1, "month").date(1);
+      const date = getCurrentDate().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
       const userData = generateUserData({
         taxFilingData: taxData,
@@ -764,7 +762,7 @@ describe("roadmap page", () => {
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
-          dateOfFormation: dayjs().add(1, "day").format("YYYY-MM-DD"),
+          dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
         }),
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({

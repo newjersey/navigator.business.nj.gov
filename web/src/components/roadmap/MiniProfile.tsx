@@ -5,7 +5,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared";
+import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";

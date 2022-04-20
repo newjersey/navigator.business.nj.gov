@@ -4,10 +4,9 @@ import { StateDropdown } from "@/components/tasks/business-formation/StateDropdo
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyFormationMember, FormationMember, Municipality } from "@businessnjgovnavigator/shared";
+import { createEmptyFormationMember, FormationMember, Municipality } from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
-
 interface Props {
   open: boolean;
   index?: number;

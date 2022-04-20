@@ -17,7 +17,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { UserData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";

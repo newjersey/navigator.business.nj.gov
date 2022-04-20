@@ -6,7 +6,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import analytics from "@/lib/utils/analytics";
 import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { RegistrationStatus } from "@businessnjgovnavigator/shared";
+import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { IconButton } from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
 

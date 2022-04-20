@@ -13,6 +13,7 @@
     "@businessnjgovnavigator/content/roadmaps/steps.json",
     "@businessnjgovnavigator/content/roadmaps/task-dependencies.json",
     "@businessnjgovnavigator/shared",
+    "@businessnjgovnavigator/shared/dateHelpers",
     "@jest/types",
     "@mui/lab",
     "@mui/lab/AdapterDayjs",

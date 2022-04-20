@@ -2,7 +2,7 @@ import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicip
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared";
+import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared/";
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   const addOns = [];

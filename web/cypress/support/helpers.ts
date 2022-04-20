@@ -5,7 +5,7 @@ import {
   LegalStructures,
   LookupLegalStructureById,
   LookupSectorTypeById,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "./page_objects/dashboardPage";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
 import { onProfilePage } from "./page_objects/profilePage";

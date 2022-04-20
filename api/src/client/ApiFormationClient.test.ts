@@ -1,3 +1,4 @@
+import { getCurrentDateISOString } from "@shared/dateHelpers";
 import axios from "axios";
 import {
   generateFormationData,
@@ -281,7 +282,7 @@ describe("ApiFormationClient", () => {
         Success: true,
         BusinessName: `some-BusinessName-${Math.random()}`,
         EntityId: `some-EntityId-${Math.random()}`,
-        TransactionDate: dayjs().toISOString(),
+        TransactionDate: getCurrentDateISOString(),
         ConfirmationNumber: `some-ConfirmationNumber-${Math.random()}`,
         FormationDoc: `some-FormationDoc-${Math.random()}`,
         StandingDoc: `some-StandingDoc-${Math.random()}`,

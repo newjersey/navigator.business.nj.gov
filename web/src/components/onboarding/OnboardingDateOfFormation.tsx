@@ -4,6 +4,7 @@ import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextFieldProps } from "@mui/material";
@@ -57,7 +58,7 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
         disableFuture={!props.disabled}
         openTo="year"
         disabled={props.disabled}
-        maxDate={dayjs()}
+        maxDate={getCurrentDate()}
         value={dateValue}
         onClose={onValidation}
         onChange={handleChange}

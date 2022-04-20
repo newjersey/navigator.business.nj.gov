@@ -6,7 +6,7 @@ import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { Municipality } from "@businessnjgovnavigator/shared";
+import { Municipality } from "@businessnjgovnavigator/shared/";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
 interface Props {

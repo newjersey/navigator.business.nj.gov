@@ -45,7 +45,7 @@ import {
   Municipality,
   ProfileData,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";

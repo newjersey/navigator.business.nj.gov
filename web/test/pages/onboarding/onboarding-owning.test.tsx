@@ -12,9 +12,8 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { PageHelpers, renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyUserData } from "@businessnjgovnavigator/shared";
+import { createEmptyUserData, getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { fireEvent, waitFor, within } from "@testing-library/react";
-import dayjs from "dayjs";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -27,7 +26,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const mockApi = api as jest.Mocked<typeof api>;
 
-const date = dayjs().subtract(1, "month").date(1);
+const date = getCurrentDate().subtract(1, "month").date(1);
 const dateOfFormation = date.format("YYYY-MM-DD");
 
 describe("onboarding - owning a business", () => {

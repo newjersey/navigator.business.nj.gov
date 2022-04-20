@@ -6,7 +6,7 @@ import {
   PaymentType,
   ProfileData,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types

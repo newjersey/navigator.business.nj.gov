@@ -3,7 +3,7 @@ import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { UserData } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement } from "react";
 
 interface Props {

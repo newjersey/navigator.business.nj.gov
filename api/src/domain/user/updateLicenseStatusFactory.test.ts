@@ -1,3 +1,4 @@
+import { getCurrentDate } from "@shared/dateHelpers";
 import { UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import {
@@ -34,7 +35,7 @@ describe("updateLicenseStatus", () => {
         industryId: "home-contractor",
       }),
       licenseData: generateLicenseData({
-        lastCheckedStatus: dayjs().subtract(1, "hour").subtract(1, "minute").toISOString(),
+        lastCheckedStatus: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
       }),
     });
     stubUserDataClient.get.mockResolvedValue(userData);
@@ -69,9 +70,9 @@ describe("updateLicenseStatus", () => {
 
     expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
     expect(resultUserData.licenseData?.completedSearch).toEqual(true);
-    expect(dayjs(resultUserData.licenseData?.lastCheckedStatus as string).isSame(dayjs(), "minute")).toEqual(
-      true
-    );
+    expect(
+      dayjs(resultUserData.licenseData?.lastCheckedStatus as string).isSame(getCurrentDate(), "minute")
+    ).toEqual(true);
     expect(resultUserData.licenseData?.status).toEqual("ACTIVE");
     expect(resultUserData.licenseData?.items).toEqual(checklistItems);
 
@@ -84,9 +85,9 @@ describe("updateLicenseStatus", () => {
 
     expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
     expect(resultUserData.licenseData?.completedSearch).toEqual(false);
-    expect(dayjs(resultUserData.licenseData?.lastCheckedStatus as string).isSame(dayjs(), "minute")).toEqual(
-      true
-    );
+    expect(
+      dayjs(resultUserData.licenseData?.lastCheckedStatus as string).isSame(getCurrentDate(), "minute")
+    ).toEqual(true);
     expect(resultUserData.licenseData?.status).toEqual("UNKNOWN");
     expect(resultUserData.licenseData?.items).toEqual([]);
 

@@ -1,5 +1,5 @@
 import { BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
-import { ABExperience } from "@businessnjgovnavigator/shared";
+import { ABExperience } from "@businessnjgovnavigator/shared/";
 
 interface ABStorage {
   getExperience: () => ABExperience | undefined;

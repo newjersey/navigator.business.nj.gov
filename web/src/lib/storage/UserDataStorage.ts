@@ -1,5 +1,5 @@
 import { BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
-import { RegistrationStatus, UserData } from "@businessnjgovnavigator/shared";
+import { RegistrationStatus, UserData } from "@businessnjgovnavigator/shared/";
 
 interface UserDataStorage {
   get: (key?: string) => UserData | undefined;

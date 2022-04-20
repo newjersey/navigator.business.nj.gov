@@ -1,4 +1,5 @@
 import { decideABExperience } from "@shared/businessUser";
+import { getCurrentDate } from "@shared/dateHelpers";
 import { createEmptyUserData, UserData } from "@shared/userData";
 import dayjs from "dayjs";
 import { Request, Response, Router } from "express";
@@ -105,7 +106,7 @@ export const userRouterFactory = (
     hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus);
 
   const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>
-    dayjs(lastCheckedDate).isBefore(dayjs().subtract(1, "hour"));
+    dayjs(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
 
   const industryHasChanged = (userData: UserData): Promise<boolean> => {
     return userDataClient

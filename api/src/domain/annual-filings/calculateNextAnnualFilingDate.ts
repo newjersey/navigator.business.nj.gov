@@ -1,5 +1,5 @@
+import { getCurrentDate } from "@shared/dateHelpers";
 import dayjs from "dayjs";
-import { getCurrentDate } from "../getCurrentDate";
 
 export const calculateNextAnnualFilingDate = (dateOfFormation: string): string => {
   const today = getCurrentDate();

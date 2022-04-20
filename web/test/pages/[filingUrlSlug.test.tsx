@@ -1,12 +1,10 @@
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { useMockDate } from "@/test/mock/useMockDate";
 import { render } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/utils/getCurrentDate", () => ({ getCurrentDate: jest.fn() }));
 
 describe("filing page", () => {
   let subject;
@@ -16,8 +14,6 @@ describe("filing page", () => {
   });
 
   it("shows the filing details and correct due date", () => {
-    useMockDate("2021-11-01");
-
     useMockUserData({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({

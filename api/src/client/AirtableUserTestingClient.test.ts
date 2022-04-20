@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import * as Airtable from "airtable";
-import dayjs from "dayjs";
 import { generateUser } from "../../test/factories";
 import { UserTestingClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
@@ -46,7 +45,7 @@ describe("AirtableUserTestingClient", () => {
         fields: {
           "Email Address": user.email,
           "First Name": user.name,
-          "Registration Date": dayjs().format("YYYY-MM-DD"),
+          "Registration Date": getCurrentDateFormatted("YYYY-MM-DD"),
           Source: "Opted In Navigator",
         },
       },

@@ -1,4 +1,4 @@
-import { MunicipalityDetail } from "@businessnjgovnavigator/shared";
+import { MunicipalityDetail } from "@businessnjgovnavigator/shared/";
 
 export const fetchMunicipalityById = async (id: string): Promise<MunicipalityDetail> => {
   const file = await import(`../static/records/municipalities.json`);
