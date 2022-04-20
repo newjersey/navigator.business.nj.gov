@@ -5,7 +5,7 @@
   "scripts": {
     "airtable:dump": "node src/scripts/airtableDump.js",
     "airtable:fetch-opps": "node src/scripts/airtableOpportunityDump.js",
-    "build": "yarn next build && next export",
+    "build": "yarn next build",
     "build-storybook": "build-storybook",
     "clean": "rimraf .next public/vendor",
     "cypress:open": "cypress open",
