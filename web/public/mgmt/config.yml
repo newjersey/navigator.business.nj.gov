@@ -237,7 +237,6 @@ collections:
               - { label: Members - Checkbox Text, name: membersCheckboxText, widget: string }
               - { label: Member - Address Line 2 Optional, name: membersAddressLine2Optional, widget: string }
               - { label: Member - Expand Link, name: membersExpandText, widget: string }
-              - { label: Member - Next Button, name: membersModalNextButtonText, widget: string }
               - { label: Member - Success Message Body, name: membersSuccessTextBody, widget: string }
               - { label: Member - Success Message Header, name: membersSuccessTextHeader, widget: string }
               - { label: Member - Table Column Headers, name: membersTableColumn, widget: string }
