@@ -1,28 +1,25 @@
 ---
 urlSlug: priority-status-cannabis
 filename: priority-status-cannabis
-name: Determine if You Are Eligible for Cannabis Priority Status
+name: Determine if You are Eligible for Priority Status
 id: priority-status-cannabis
 required: true
 issuingAgency: ""
 ---
 
-Your business may qualify for priority status in the Cannabis application process. This means your application will be reviewed earlier than other applications. Learn more about how [priority status](https://www.nj.gov/cannabis/businesses/priority-applications/) is reviewed and approved.
+Priority applicants will receive priority review and approval in the application process. Having more than one [priority status](https://www.nj.gov/cannabis/businesses/priority-applications/) does not increase your priority. Learn more about how priority status is reviewed and approved.
 
 ---
 
-### Priority Types
+## Priority Types
 
-Diversely-owned businesses are given the highest priority followed by social-equity businesses. Having multiple priorities is not an advantage. Identify which of the following priorities you qualify for:
+Which of the following priorities do you qualify for?
 
-- `Diversely Owned Businesses|diversely-owned-business-cannabis`
-- `Social Equity Businesses|social-equity-business-cannabis`
-- `Impact Zone Businesses|impact-zone-business-cannabis`
-
----
-
-### How to prove your priority status?
-
-If you have a Diversely Owned Business, you must [apply for certification](https://www.njportal.com/DOR/SBERegistry/) from the New Jersey Department of Treasury.
-
-If you are a Social Equity Business or an Impact Zone Business you do not need to apply to anything now, but you will be asked unique questions in your Cannabis application.
+- []{general-minority-owned}50% or more of your business is owned by a `minority|minority`
+- []{general-women-owned}50% or more of your business is owned by a `woman|women`
+- []{general-veteran-owned}50% or more of your business is owned by a `veteran|veteran`
+- []{cannabis-business-in-impact-zone}My business is located in an `Impact Zone|impact-zone-business-cannabis`
+- []{cannabis-owner-in-impact-zone}My business is owned by people who live in an `Impact Zone|impact-zone-business-cannabis`
+- []{cannabis-employee-in-impact-zone}My business has employees who are residents of an `Impact Zone|impact-zone-business-cannabis`
+- []{cannabis-economically-disadvantaged-social-equity}Is owned by people who have lived in an `Economically Disadvantaged Area|social-equity-business-cannabis`
+- []{cannabis-criminal-offense-social-equity}Is owned by people with `convictions for cannabis-related offenses|social-equity-business-cannabis` (expunged or not)

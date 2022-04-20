@@ -6,7 +6,6 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { Task } from "@/lib/types/types";
 import { getModifiedTaskContent, templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -24,7 +23,6 @@ const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
 
 export const SearchBusinessName = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
   const {
     currentName,
     submittedName,
@@ -123,7 +121,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
   return (
     <>
       <TaskHeader task={props.task} />
-      <UnlockedBy taskLinks={taskFromRoadmap?.unlockedBy || []} isLoading={!taskFromRoadmap} />
+      <UnlockedBy task={props.task} />
       {showErrorAlert()}
       <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
 

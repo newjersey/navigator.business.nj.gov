@@ -7,11 +7,11 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormation } from "@/components/tasks/BusinessFormation";
+import { CannabisPriorityStatus } from "@/components/tasks/CannabisPriorityStatus";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -45,16 +45,7 @@ const TaskPage = (props: Props): ReactElement => {
       nextUrlSlug: arrayOfTasks[currentUrlSlugIndex + 1],
     };
   }, [props.task.urlSlug, roadmap]);
-  const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-
-  const getUnlockedBy = (): ReactElement => {
-    const unlockedByTaskLinks = taskFromRoadmap
-      ? taskFromRoadmap.unlockedBy.filter((it) => userData?.taskProgress[it.id] !== "COMPLETED")
-      : [];
-
-    return <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />;
-  };
 
   const nextAndPreviousButtons = (): ReactElement => (
     <div
@@ -95,7 +86,7 @@ const TaskPage = (props: Props): ReactElement => {
       callToActionLink: getModifiedTaskContent(roadmap, props.task, "callToActionLink"),
       callToActionText: getModifiedTaskContent(roadmap, props.task, "callToActionText"),
     };
-    return <TaskElement task={task}>{getUnlockedBy()}</TaskElement>;
+    return <TaskElement task={task}>{<UnlockedBy task={props.task} />}</TaskElement>;
   };
 
   const businessFormationFeatureFlag = (): ReactElement => {
@@ -131,6 +122,12 @@ const TaskPage = (props: Props): ReactElement => {
             "license-accounting": <LicenseTask task={props.task} />,
             "license-massage-therapy": <LicenseTask task={props.task} />,
             "form-business-entity": businessFormationFeatureFlag(),
+            "priority-status-cannabis": (
+              <CannabisPriorityStatus
+                task={props.task}
+                displayContent={props.displayContent.cannabisPriorityStatusDisplayContent}
+              />
+            ),
             default: getTaskBody(),
           })}
         </SidebarPageLayout>

@@ -40,6 +40,8 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("archived-certification-opportunities", CertificationsPreview);
       // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("certification-checklist", CertificationsPreview);
+      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(ContextEditor);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("contextual-information", ContextInfoPreview);

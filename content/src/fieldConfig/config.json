@@ -434,5 +434,27 @@
     "escapeModalReturn": "Continue without saving",
     "successTextHeader": "Profile Updated",
     "certificationDocFileTitle": "Certificate of Good Standing"
+  },
+  "cannabisPriorityStatus": {
+    "nextButtonText": "View Requirements",
+    "noPriortyStatusCheckboxText": "None of the above",
+    "secondTabHeaderText": "Application Needs",
+    "secondTabDescriptionText": "You qualify for the following priority statuses. Diversely-owned Business will have the highest priority followed by Social Equity Businesses and Impact Zone Businesses. Having multiple priorities does not give you an additional advantage.",
+    "backButtonText": "Back",
+    "completeTaskProgressButtonText": "Mark as Completed",
+    "noPriorityStatusText": "Based on your answers, you are not eligible for any priorty status. You can mark this task as completed.",
+    "socialEquityHeaderText": "Social Equity Business (SEB)",
+    "socialEquityButtonText": "Get My SEB Form",
+    "socialEquityButtonLink": "https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf",
+    "impactZoneHeaderText": "Impact Zone Business",
+    "impactZoneText": "Nothing else to do here, you’re ready to start applying for your Cannabis Permit.",
+    "veteranHeaderText": "Diversely-Owned Business: VBE Certification",
+    "minorityOrWomenHeaderText": "Diversely-Owned Business: M/WBE Certification",
+    "certificationButtonText": "Apply for My Certification",
+    "certificationButtonLink": "https://www.njportal.com/DOR/SBERegistry/",
+    "greenBoxBoldedText": "Once completed, you will have:",
+    "greenBoxMinorityOrWomenText": "A Minority/Women-owned Business Enterprise certificate",
+    "greenBoxVeteranText": "A Veteran-Owned Business certification",
+    "greenBoxSocialEquityText": "A completed Social Equity Business form"
   }
 }

@@ -7,7 +7,6 @@ import { FormationSuccessPage } from "@/components/tasks/business-formation/Form
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { useTaskFromRoadmap } from "@/lib/data-hooks/useTaskFromRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
 import {
@@ -76,7 +75,6 @@ export const FormationContext = createContext<FormationContextType>({
 });
 
 export const BusinessFormation = (props: Props): ReactElement => {
-  const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
   const router = useRouter();
@@ -89,9 +87,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
 
   const isLLC = userData?.profileData.legalStructureId === "limited-liability-company";
-  const unlockedByTaskLinks = taskFromRoadmap
-    ? taskFromRoadmap.unlockedBy.filter((it) => userData?.taskProgress[it.id] !== "COMPLETED")
-    : [];
 
   const getDate = (date?: string): string =>
     !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
@@ -126,7 +121,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       <div className="flex flex-column space-between minh-38">
         <div>
           <TaskHeader task={props.task} />
-          <UnlockedBy taskLinks={unlockedByTaskLinks} isLoading={!taskFromRoadmap} />
+          <UnlockedBy task={props.task} />
           <Content>{getModifiedTaskContent(roadmap, props.task, "contentMd")}</Content>
         </div>
         <TaskCTA
@@ -168,11 +163,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           <TaskHeader task={props.task} />
           {tab === 0 && (
             <>
-              <UnlockedBy
-                taskLinks={unlockedByTaskLinks}
-                isLoading={!taskFromRoadmap}
-                dataTestid="dependency-alert"
-              />
+              <UnlockedBy task={props.task} dataTestid="dependency-alert" />
               <div className="margin-bottom-2">
                 <Content>{props.displayContent.introParagraph.contentMd}</Content>
               </div>
