@@ -90,7 +90,7 @@ export const PaymentSection = (): ReactElement => {
             placeholder={Config.businessFormationDefaults.contactFirstNamePlaceholder}
             fieldName="contactFirstName"
             required={true}
-            validationText={Config.businessFormationDefaults.contactFirstnameErrorText}
+            validationText={Config.businessFormationDefaults.contactFirstNameErrorText}
           />
         </div>
         <div className="form-input margin-bottom-2 tablet:grid-col-6">
@@ -99,7 +99,7 @@ export const PaymentSection = (): ReactElement => {
             placeholder={Config.businessFormationDefaults.contactLastNamePlaceholder}
             fieldName="contactLastName"
             required={true}
-            validationText={Config.businessFormationDefaults.contactLastnameErrorText}
+            validationText={Config.businessFormationDefaults.contactLastNameErrorText}
           />
         </div>
       </div>

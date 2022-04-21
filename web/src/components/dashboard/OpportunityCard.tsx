@@ -84,7 +84,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
               <Icon>{isHidden() ? "visibility" : "visibility_off"}</Icon>
               <span className="margin-left-05 line-height-sans-2">
                 {isHidden()
-                  ? Config.dashboardDefaults.unhideOpportunityText
+                  ? Config.dashboardDefaults.unHideOpportunityText
                   : Config.dashboardDefaults.hideOpportunityText}
               </span>
             </div>

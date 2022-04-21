@@ -51,7 +51,16 @@
     "microbusinesses",
     "diverselyownedbusiness",
     "impactzonebusiness",
-    "socialequitybusiness"
+    "socialequitybusiness",
+    "datetime",
+    "roadmaps",
+    "ecommerce",
+    "aesthetician",
+    "Unhide",
+    "Passaic",
+    "Hunterdon",
+    "fundings",
+    "newjersey"
   ],
-  "ignorePaths": ["node_modules/**", "out/**"]
+  "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

@@ -50,7 +50,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
 
   return (
     <div className="tablet:padding-y-2">
-      <p className="padding-bottom-1">{Config.selfRegistration.signupDescriptionText}</p>
+      <p className="padding-bottom-1">{Config.selfRegistration.signUpDescriptionText}</p>
       <div className="margin-top-2">
         <label htmlFor="name">{Config.selfRegistration.nameFieldLabel}</label>
         <GenericTextField

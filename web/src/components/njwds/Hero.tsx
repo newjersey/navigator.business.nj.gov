@@ -35,9 +35,9 @@ export const Hero = (props: Props): ReactElement => {
               <h1
                 className={`text-primary-darker h1-styling-large desktop:margin-top-7 margin-bottom-3 desktop:margin-bottom-4`}
               >
-                {landingPageConfig.heroCalloutFirstLineText}
+                {landingPageConfig.heroCallOutFirstLineText}
                 <br />
-                {landingPageConfig.heroCalloutSecondLineText}
+                {landingPageConfig.heroCallOutSecondLineText}
               </h1>
               <div className="text-base-darkest font-sans-lg margin-bottom-3 desktop:margin-bottom-3">
                 {landingPageConfig.heroSupportingText}

@@ -30,7 +30,7 @@ export const SelfRegToast = (): ReactElement => {
 
   const contentMap: Record<AlertStatus, string> = {
     SUCCESS: Config.navigationDefaults.guestSuccessBody,
-    DUPLICATE_ERROR: Config.selfRegistration.errorTextDuplicateSignup,
+    DUPLICATE_ERROR: Config.selfRegistration.errorTextDuplicateSignUp,
     RESPONSE_ERROR: Config.selfRegistration.errorTextGeneric,
   };
 

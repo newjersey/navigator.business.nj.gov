@@ -25,12 +25,12 @@ const CompleteSignin = (): ReactElement => {
       >
         <DialogTitle id="complete-signin-modal">
           <div className="padding-top-1 padding-x-2 text-bold font-body-xl">
-            {Config.selfRegistration.completeSigninTitleText}
+            {Config.selfRegistration.completeSignInTitleText}
           </div>
         </DialogTitle>
         <DialogContent>
           <div className="padding-2">
-            <p className="padding-bottom-1">{Config.selfRegistration.completeSigninDescriptionText}</p>
+            <p className="padding-bottom-1">{Config.selfRegistration.completeSignInDescriptionText}</p>
           </div>
         </DialogContent>
       </Dialog>

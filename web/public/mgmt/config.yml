@@ -185,7 +185,7 @@ collections:
               - { label: Error - Address State, name: addressStateErrorText, widget: string }
               - { label: Error - Address Zip Code, name: addressZipCodeErrorText, widget: string }
               - { label: Error - Address, name: addressErrorText, widget: string }
-              - { label: Error - Agent Address City, name: agentOfficeaddressCityErrorText, widget: string }
+              - { label: Error - Agent Address City, name: agentOfficeAddressCityErrorText, widget: string }
               - {
                   label: Error - Agent Address Line 1,
                   name: agentOfficeAddressLine1ErrorText,
@@ -197,7 +197,7 @@ collections:
                   widget: string,
                 }
               - { label: Error - Agent Email, name: agentEmailErrorText, widget: string }
-              - { label: Error - Agent Name, name: agentnameErrorText, widget: string }
+              - { label: Error - Agent Name, name: agentNameErrorText, widget: string }
               - { label: Error - Agent Number, name: agentNumberErrorText, widget: string }
               - {
                   label: Error - Business Address Line 1,
@@ -210,8 +210,8 @@ collections:
                   widget: string,
                 }
               - { label: Error - Business Name Not Set, name: notSetBusinessNameErrorText, widget: string }
-              - { label: Error - Contact First Name, name: contactFirstnameErrorText, widget: string }
-              - { label: Error - Contact Last Name, name: contactLastnameErrorText, widget: string }
+              - { label: Error - Contact First Name, name: contactFirstNameErrorText, widget: string }
+              - { label: Error - Contact Last Name, name: contactLastNameErrorText, widget: string }
               - { label: Error - Contact Phone Number, name: contactPhoneNumberErrorText, widget: string }
               - {
                   label: Error - Missing Fields on Submit,
@@ -607,7 +607,7 @@ collections:
               - { label: Opportunities Count, name: opportunitiesCount, widget: string }
               - { label: Hidden Opportunities Header, name: hiddenOpportunitiesHeader, widget: string }
               - { label: Hide Opportunity Text, name: hideOpportunityText, widget: string }
-              - { label: Unhide Opportunity Text, name: unhideOpportunityText, widget: string }
+              - { label: Unhide Opportunity Text, name: unHideOpportunityText, widget: string }
               - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: string }
               - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
               - { label: Empty Calendar Title Text, name: emptyCalendarTitleText, widget: string }
@@ -633,8 +633,8 @@ collections:
             widget: object
             summary: "{{landingPage}}"
             fields:
-              - { label: Hero - First Line, name: heroCalloutFirstLineText, widget: string }
-              - { label: Hero - Second Line, name: heroCalloutSecondLineText, widget: string }
+              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
+              - { label: Hero - Second Line, name: heroCallOutSecondLineText, widget: string }
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
               - { label: Hero - Call to Action, name: heroCallToActionText, widget: string }
               - { label: Section 2 - Header, name: section2HeaderText, widget: string }
@@ -745,7 +745,7 @@ collections:
               - { label: Final Next Button Text, name: finalNextButtonText, widget: string }
               - { label: Back Button Test, name: backButtonText, widget: string }
               - { label: Step X of Y Template, name: stepXofYTemplate, widget: string }
-              - { label: Step One Templace, name: stepOneTemplate, widget: string }
+              - { label: Step One Template, name: stepOneTemplate, widget: string }
               - { label: Error Text - Required Legal, name: errorTextRequiredLegal, widget: string }
               - {
                   label: Error Text - Required Business Name,
@@ -884,8 +884,8 @@ collections:
             widget: object
             summary: "{{selfRegistration}}"
             fields:
-              - { label: Signup Header, name: signupTitleText, widget: string }
-              - { label: Signup Descritpion, name: signupDescriptionText, widget: string }
+              - { label: Sign-up Header, name: signUpTitleText, widget: string }
+              - { label: Sign-up Description, name: signUpDescriptionText, widget: string }
               - { label: Name Label, name: nameFieldLabel, widget: string }
               - { label: Name Placeholder, name: nameFieldPlaceholder, widget: string }
               - { label: Email Label, name: emailFieldLabel, widget: string }
@@ -897,17 +897,17 @@ collections:
               - { label: Error - Full name is required, name: errorTextFullName, widget: string }
               - { label: Error - Emails not matching, name: errorTextEmailsNotMatching, widget: string }
               - { label: Error - Required Fields, name: errorTextRequiredFields, widget: string }
-              - { label: Error - Duplicate Signup, name: errorTextDuplicateSignup, widget: string }
+              - { label: Error - Duplicate Sign-up, name: errorTextDuplicateSignUp, widget: string }
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
-              - { label: Complete Signin Title, name: completeSigninTitleText, widget: string }
-              - { label: Complete Signin Description, name: completeSigninDescriptionText, widget: string }
+              - { label: Complete Sign-in Title, name: completeSignInTitleText, widget: string }
+              - { label: Complete Sign-in Description, name: completeSignInDescriptionText, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
-          - label: Sitewide Error Messages
-            name: sitewideErrorMessages
+          - label: Site Wide Error Messages
+            name: siteWideErrorMessages
             collapsed: true
             widget: object
-            summary: "{{sitewideErrorMessages}}"
+            summary: "{{siteWideErrorMessages}}"
             fields:
               - { label: Error - No Data, name: errorTextNoData, widget: string }
               - { label: Error - Cached Only, name: errorTextCachedOnly, widget: string }
@@ -956,8 +956,8 @@ collections:
               - { label: Available Name Message, name: availableText, widget: string }
               - { label: Update Button Text, name: updateButtonText, widget: string }
               - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
-              - { label: Offical Check Button, name: officialCheckButtonText, widget: string }
-              - { label: Officail Check Link, name: officialCheckButtonLink, widget: string }
+              - { label: Official Check Button, name: officialCheckButtonText, widget: string }
+              - { label: Official Check Link, name: officialCheckButtonLink, widget: string }
               - { label: Official Check Text, name: officialCheckText, widget: string }
               - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
@@ -1005,7 +1005,7 @@ collections:
               - { label: Status - Deleted, name: deletedPermitStatusText, widget: string }
               - { label: Status - Denied, name: deniedPermitStatusText, widget: string }
               - {
-                  label: Status - Voluntary Surrener,
+                  label: Status - Voluntary Surrender,
                   name: voluntarySurrenderPermitStatusText,
                   widget: string,
                 }

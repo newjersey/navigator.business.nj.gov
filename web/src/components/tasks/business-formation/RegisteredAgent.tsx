@@ -152,7 +152,7 @@ export const RegisteredAgent = (): ReactElement => {
                 label={Config.businessFormationDefaults.registeredAgentNameLabel}
                 placeholder={Config.businessFormationDefaults.registeredAgentNamePlaceholder}
                 required={true}
-                validationText={Config.businessFormationDefaults.agentnameErrorText}
+                validationText={Config.businessFormationDefaults.agentNameErrorText}
                 fieldName="agentName"
                 disabled={useAccountInfo}
               />
@@ -192,7 +192,7 @@ export const RegisteredAgent = (): ReactElement => {
                     placeholder={Config.businessFormationDefaults.registeredAgentCityPlaceholder}
                     fieldName="agentOfficeAddressCity"
                     required={true}
-                    validationText={Config.businessFormationDefaults.agentOfficeaddressCityErrorText}
+                    validationText={Config.businessFormationDefaults.agentOfficeAddressCityErrorText}
                     disabled={useBusinessAddress}
                   />
                 </div>

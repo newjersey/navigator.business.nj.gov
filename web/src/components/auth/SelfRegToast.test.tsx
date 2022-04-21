@@ -61,7 +61,7 @@ describe("SelfRegToast", () => {
     const subject = setupHookWithAuth(IsAuthenticated.FALSE, "DUPLICATE_ERROR");
     await waitFor(() => {
       expect(
-        subject.getByText(markdownToText(Config.selfRegistration.errorTextDuplicateSignup))
+        subject.getByText(markdownToText(Config.selfRegistration.errorTextDuplicateSignUp))
       ).toBeInTheDocument();
       expect(
         subject.queryByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))

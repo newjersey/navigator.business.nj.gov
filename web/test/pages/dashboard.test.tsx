@@ -419,7 +419,7 @@ describe("dashboard", () => {
       expect(hiddenOpportunities.queryByText("Fund 1")).toBeInTheDocument();
       expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
 
-      fireEvent.click(funding1.getByText(Config.dashboardDefaults.unhideOpportunityText));
+      fireEvent.click(funding1.getByText(Config.dashboardDefaults.unHideOpportunityText));
       visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
       hiddenOpportunities = within(subject.getByTestId("hidden-opportunities"));
 

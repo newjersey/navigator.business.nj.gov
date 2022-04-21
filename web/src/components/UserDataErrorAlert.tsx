@@ -5,9 +5,9 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 const UserDataErrorLookup: Record<UserDataError, string> = {
-  NO_DATA: Config.sitewideErrorMessages.errorTextNoData,
-  CACHED_ONLY: Config.sitewideErrorMessages.errorTextCachedOnly,
-  UPDATE_FAILED: Config.sitewideErrorMessages.errorTextUpdateFailed,
+  NO_DATA: Config.siteWideErrorMessages.errorTextNoData,
+  CACHED_ONLY: Config.siteWideErrorMessages.errorTextCachedOnly,
+  UPDATE_FAILED: Config.siteWideErrorMessages.errorTextUpdateFailed,
 };
 
 export const UserDataErrorAlert = (): ReactElement => {
