@@ -1,7 +1,7 @@
 ---
 urlSlug: notary-register
 filename: notary-register
-name: Register as a Notary with the Department of Treasury
+name: Register as a Notary
 id: notary-register
 callToActionLink: https://www.njportal.com/DOR/Notary
 callToActionText: Register as a Notary
