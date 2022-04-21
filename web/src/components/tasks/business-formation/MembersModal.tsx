@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
+import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { GenericTextField } from "@/components/GenericTextField";
 import { StateDropdown } from "@/components/tasks/business-formation/StateDropdown";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyFormationMember, FormationMember, Municipality } from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -107,7 +107,7 @@ export const MembersModal = (props: Props): ReactElement => {
   };
 
   return (
-    <TwoButtonDialog
+    <DialogTwoButton
       isOpen={props.open}
       close={props.handleClose}
       title={Config.businessFormationDefaults.membersModalTitle}
@@ -116,7 +116,7 @@ export const MembersModal = (props: Props): ReactElement => {
       secondaryButtonText={Config.businessFormationDefaults.membersModalBackButtonText}
       dividers={true}
     >
-      <div className="padding-x-4 padding-y-1">
+      <>
         <FormGroup className="padding-left-105 padding-bottom-1">
           <FormControlLabel
             label={Config.businessFormationDefaults.membersCheckboxText}
@@ -224,7 +224,7 @@ export const MembersModal = (props: Props): ReactElement => {
             </div>
           </div>
         </div>
-      </div>
-    </TwoButtonDialog>
+      </>
+    </DialogTwoButton>
   );
 };

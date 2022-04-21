@@ -54,6 +54,16 @@
   }
 }
 
+.btn-accent-cool-darker {
+  background-color: $accent-cool-darker !important;
+  &:hover {
+    background-color: $accent-cool-darkest !important;
+  }
+  &:active {
+    background-color: $accent-cool-more-darkest !important;
+  }
+}
+
 .btn-accent-cooler {
   background-color: $accent-cooler !important;
   &:hover {
@@ -71,5 +81,16 @@
   }
   &:active {
     background-color: $info-darkest !important;
+  }
+}
+
+.btn-accent-cool-lightest {
+  background-color: $accent-cool-lightest !important;
+  color: $info-darkest !important;
+  &:hover {
+    background-color: $accent-cool-lighter !important;
+  }
+  &:active {
+    background-color: $accent-cool-light !important;
   }
 }

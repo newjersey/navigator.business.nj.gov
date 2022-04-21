@@ -11,8 +11,14 @@
   },
   "betaBar": {
     "betaMainText": "This site is in beta.",
-    "betaFormText": "Let us know what you think!",
-    "betaFormLink": "https://forms.business.nj.gov/feedback/"
+    "betaFormLink": "https://forms.business.nj.gov/feedback/",
+    "betaModalButtonText": "Share your feedback!",
+    "betaModalTitle": "Let us know what you think",
+    "betaModalBodyText": "Get in contact, report a bug, or share your feedback.",
+    "betaModalIntercomButtonText": "Speak with a NJ-Based Business Expert",
+    "betaModalFeedbackButtonText": "Share Feedback",
+    "betaModalBugReportButtonText": "Report an Issue",
+    "betaModalFeatureRequestButtonText": "Request a Feature"
   },
   "businessFormationDefaults": {
     "membersExpandText": "Expand",

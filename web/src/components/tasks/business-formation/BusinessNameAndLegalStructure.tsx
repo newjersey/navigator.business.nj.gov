@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
+import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
-import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
@@ -115,7 +115,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         {state.errorMap["businessName"].invalid &&
           Config.businessFormationDefaults.notSetBusinessNameErrorText}
       </FormHelperText>
-      <TwoButtonDialog
+      <DialogTwoButton
         isOpen={legalStructureWarningIsOpen}
         close={() => setLegalStructureWarningIsOpen(false)}
         title={Config.businessFormationDefaults.legalStructureWarningModalHeader}
