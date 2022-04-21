@@ -4,7 +4,7 @@ filename: notary-register
 name: Register as a Notary
 id: notary-register
 callToActionLink: https://www.njportal.com/DOR/Notary
-callToActionText: Register as a Notary
+callToActionText: Apply for My Notary Certificate
 required: true
 issuingAgency: New Jersey Department of Treasury
 ---
