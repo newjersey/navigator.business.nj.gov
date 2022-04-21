@@ -84,9 +84,7 @@ export const TaskHeader = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="margin-bottom-2">
-        <h1 data-task-id={props.task.id}>{getModifiedTaskContent(roadmap, props.task, "name")}</h1>
-      </div>
+      <h1 data-task-id={props.task.id}>{getModifiedTaskContent(roadmap, props.task, "name")}</h1>
       <div
         className="flex flex-align-center flex-wrap margin-top-0 margin-bottom-2"
         data-testid="taskProgress"

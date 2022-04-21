@@ -73,9 +73,9 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
   return (
     <>
       <Content>{props.task.contentMd}</Content>
-      <div className="usa-prose">
-        <ul>
-          <div className="margin-y-2">
+      <div className="usa-prose margin-bottom-3">
+        <ul style={{ marginTop: 0 }}>
+          <div className="margin-bottom-2">
             <FormControlLabel
               label={Config.cannabisPriorityStatus.noPriorityStatusCheckboxText}
               control={
@@ -90,7 +90,10 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
           </div>
         </ul>
       </div>
-      <div className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205">
+      <div
+        style={{ marginTop: "auto" }}
+        className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-bottom-neg-205"
+      >
         {displayNextTabButton && (
           <Button style="primary" noRightMargin dataTestid="nextTabButton" onClick={props.onNextTab}>
             {Config.cannabisPriorityStatus.nextButtonText}

@@ -58,7 +58,7 @@ export const CannabisPriorityStatus = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-column space-between minh-38">
+    <div className="flex flex-column minh-38">
       <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
         {Config.taskDefaults.taskProgressSuccessToastBody}
       </ToastAlert>
