@@ -22,6 +22,7 @@
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "run:napa": "napa",
+    "snapshot:update": "jest --updateSnapshot",
     "start": "next start",
     "storybook": "start-storybook -p 6006",
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",

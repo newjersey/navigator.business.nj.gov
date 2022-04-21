@@ -7,9 +7,11 @@ interface Props {
     | "tertiary"
     | "primary-big"
     | "secondary-big"
+    | "secondary-blue"
     | "secondary-input-field-height"
     | "primary-input-field-height"
     | "narrow-light"
+    | "narrow-accent-cool-lightest"
     | "accent-cool-darker-big"
     | "accent-cooler"
     | "info";
@@ -26,6 +28,7 @@ interface Props {
   heightAutoOnMobile?: boolean;
   intercomButton?: boolean;
   className?: string;
+  align?: "start" | "end" | "center";
 }
 
 export const Button = (props: Props): ReactElement => {
@@ -56,6 +59,10 @@ export const Button = (props: Props): ReactElement => {
       style = "usa-button usa-button--outline padding-y-1";
       disabledClass = "usa-button--outline-disabled";
       break;
+    case "secondary-blue":
+      style = "usa-button usa-button--secondary text-normal";
+      disabledClass = "usa-button--secondary-disabled";
+      break;
     case "secondary-input-field-height":
       style = "usa-button usa-button--outline padding-y-2";
       disabledClass = "usa-button--outline-disabled padding-y-2";
@@ -70,6 +77,9 @@ export const Button = (props: Props): ReactElement => {
     case "narrow-light":
       style =
         "usa-button usa-tag bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button";
+      break;
+    case "narrow-accent-cool-lightest":
+      style = "usa-button btn-accent-cool-lightest padding-y-1 text-normal ";
       break;
   }
   const showDisabledClass = props.loading ? disabledClass : "";
@@ -123,7 +133,10 @@ export const Button = (props: Props): ReactElement => {
           </div>
         </div>
       ) : (
-        <div ref={widthRef} className="display-flex flex-row flex-justify-center flex-align-center">
+        <div
+          ref={widthRef}
+          className={`display-flex flex-row flex-justify-${props.align || "center"} flex-align-center`}
+        >
           {props.children}
         </div>
       )}

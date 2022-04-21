@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
@@ -19,7 +20,6 @@ import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
-import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -285,7 +285,7 @@ const ProfilePage = (props: Props): ReactElement => {
     >
       <PageSkeleton showLegalMessage={true}>
         <NavBar />
-        <TwoButtonDialog
+        <DialogTwoButton
           isOpen={escapeModal}
           close={() => setEscapeModal(false)}
           title={Config.profileDefaults.escapeModalHeader}

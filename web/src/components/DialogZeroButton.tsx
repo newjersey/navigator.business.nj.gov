@@ -1,4 +1,3 @@
-import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import React, { ReactNode } from "react";
@@ -9,14 +8,12 @@ interface Props {
   title: string;
   bodyText?: string;
   children?: ReactNode;
-  primaryButtonText: string;
-  primaryButtonOnClick: () => void;
-  secondaryButtonText: string;
   maxWidth?: Breakpoint;
   dividers?: boolean;
+  unpaddedChildren?: ReactNode;
 }
 
-export const TwoButtonDialog = (props: Props) => {
+export const DialogZeroButton = (props: Props) => {
   return (
     <Dialog
       fullWidth={false}
@@ -39,25 +36,11 @@ export const TwoButtonDialog = (props: Props) => {
         </IconButton>
       </DialogTitle>
       <DialogContent sx={{ padding: 0 }} dividers={props.dividers}>
-        {props.bodyText && <p className="padding-x-4 padding-bottom-1 font-body-xs">{props.bodyText}</p>}
-        {props.children && <>{props.children}</>}
-        <div
-          className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"
-          data-testid="modal-content"
-        >
-          <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
-            <Button
-              style="secondary"
-              onClick={props.close}
-              className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1"
-            >
-              {props.secondaryButtonText}
-            </Button>
-            <Button style="primary" noRightMargin onClick={props.primaryButtonOnClick}>
-              {props.primaryButtonText}
-            </Button>
-          </div>
+        <div className="padding-x-4 padding-y-1">
+          {props.bodyText && <p className="font-body-xs">{props.bodyText}</p>}
+          {props.children && <>{props.children}</>}
         </div>
+        {props.unpaddedChildren && <>{props.unpaddedChildren}</>}
       </DialogContent>
     </Dialog>
   );

@@ -31,8 +31,22 @@ collections:
             summary: "{{betaBar}}"
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
-              - { label: Beta Form Test, name: betaFormText, widget: string }
               - { label: Beta Form Link, name: betaFormLink, widget: string }
+              - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
+              - { label: Beta Modal Title, name: betaModalTitle, widget: string }
+              - { label: Beta Modal Body Text, name: betaModalBodyText, widget: string }
+              - { label: Beta Modal Intercom Button Text, name: betaModalIntercomButtonText, widget: string }
+              - { label: Beta Modal Feedback Button Text, name: betaModalFeedbackButtonText, widget: string }
+              - {
+                  label: Beta Modal Bug Report Button Text,
+                  name: betaModalBugReportButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Beta Modal Feature Request Button Text,
+                  name: betaModalFeatureRequestButtonText,
+                  widget: string,
+                }
           - label: Business Formation Defaults
             name: businessFormationDefaults
             collapsed: true

@@ -1,8 +1,8 @@
+import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
-import { TwoButtonDialog } from "@/components/TwoButtonDialog";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
@@ -130,7 +130,7 @@ export const GraduationModal = (props: Props): ReactElement => {
         onBack: () => {},
       }}
     >
-      <TwoButtonDialog
+      <DialogTwoButton
         isOpen={props.open}
         close={handleClose}
         title={Config.roadmapDefaults.graduationModalTitle}
@@ -140,7 +140,7 @@ export const GraduationModal = (props: Props): ReactElement => {
         maxWidth="md"
         dividers={true}
       >
-        <div className="padding-x-4 padding-y-1" data-testid="graduation-modal">
+        <div data-testid="graduation-modal">
           <FormControl fullWidth={true}>
             {needsDateOfFormation ? (
               <OnboardingDateOfFormation
@@ -172,7 +172,7 @@ export const GraduationModal = (props: Props): ReactElement => {
             </div>
           </FormControl>
         </div>
-      </TwoButtonDialog>
+      </DialogTwoButton>
     </ProfileDataContext.Provider>
   );
 };
