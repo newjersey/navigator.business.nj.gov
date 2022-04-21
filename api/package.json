@@ -32,6 +32,7 @@
     "endOfLine": "auto"
   },
   "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "3.74.0",
     "@aws-sdk/client-dynamodb": "3.72.0",
     "@aws-sdk/client-s3": "3.72.0",
     "@aws-sdk/lib-dynamodb": "3.72.0",
@@ -47,7 +48,7 @@
     "serverless-http": "3.0.1",
     "simple-oauth2": "4.3.0",
     "winston": "3.7.2",
-    "winston-cloudwatch": "3.1.1",
+    "winston-cloudwatch": "5.0.0",
     "xml2js": "0.4.23"
   },
   "devDependencies": {
