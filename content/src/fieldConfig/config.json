@@ -437,7 +437,7 @@
   },
   "cannabisPriorityStatus": {
     "nextButtonText": "View Requirements",
-    "noPriortyStatusCheckboxText": "None of the above",
+    "noPriorityStatusCheckboxText": "None of the above",
     "secondTabHeaderText": "Application Needs",
     "secondTabDescriptionText": "You qualify for the following priority statuses. Diversely-owned Business will have the highest priority followed by Social Equity Businesses and Impact Zone Businesses. Having multiple priorities does not give you an additional advantage.",
     "backButtonText": "Back",

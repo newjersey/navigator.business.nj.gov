@@ -545,7 +545,7 @@ collections:
               - { label: Tab 1 - Next Button Text, name: nextButtonText, widget: string }
               - {
                   label: Tab 1 - None Of The Above Checkbox Label,
-                  name: noPriortyStatusCheckboxText,
+                  name: noPriorityStatusCheckboxText,
                   widget: string,
                 }
               - { label: Tab 2 - Header Text, name: secondTabHeaderText, widget: string }

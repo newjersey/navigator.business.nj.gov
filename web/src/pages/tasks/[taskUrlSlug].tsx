@@ -7,7 +7,7 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormation } from "@/components/tasks/BusinessFormation";
-import { CannabisPriorityStatus } from "@/components/tasks/CannabisPriorityStatus";
+import { CannabisPriorityStatus } from "@/components/tasks/cannabis/CannabisPriorityStatus";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";

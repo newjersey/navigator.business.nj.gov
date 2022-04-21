@@ -1,5 +1,6 @@
-import { CannabisPriorityStatus, priorityTypesObj } from "@/components/tasks/CannabisPriorityStatus";
+import { CannabisPriorityStatus } from "@/components/tasks/cannabis/CannabisPriorityStatus";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { CannabisPriorityStatusDisplayContent, Task } from "@/lib/types/types";
 import {
   generateCannabisPriorityStatusDisplayContent,
@@ -48,7 +49,6 @@ describe("<CannabisPriorityStatus />", () => {
     ...priorityTypesObj.impactZone,
     ...priorityTypesObj.socialEquity,
   ];
-  const noneOfTheAbovePriorityType = priorityTypesObj.noneOfTheAbove;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -75,7 +75,7 @@ describe("<CannabisPriorityStatus />", () => {
   it("renders requirements button when checkbox is selected", async () => {
     const randomPriorityType = randomElementFromArray([
       ...allPriorityTypes,
-      noneOfTheAbovePriorityType,
+      noneOfTheAbovePriorityId,
     ]) as string;
 
     const task = generateTask({
@@ -113,7 +113,7 @@ describe("<CannabisPriorityStatus />", () => {
     fireEvent.click(subject.getByTestId("none-of-the-above"));
     expect(subject.queryByTestId("nextTabButton")).toBeInTheDocument();
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(false);
-    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityType]).toBe(true);
+    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
   });
 
   it("deselect none of the above checkbox when a priority type is selected", async () => {
@@ -128,17 +128,17 @@ describe("<CannabisPriorityStatus />", () => {
 
     subject = renderPage(task);
     fireEvent.click(subject.getByTestId("none-of-the-above"));
-    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityType]).toBe(true);
+    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
     expect(subject.queryByTestId("nextTabButton")).toBeInTheDocument();
 
     fireEvent.click(subject.getAllByRole("checkbox")[0]);
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
-    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityType]).toBe(false);
+    expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
     expect(subject.queryByTestId("nextTabButton")).toBeInTheDocument();
   });
 
   it("updates task progress from not started to in progress when user navigates to the second tab", async () => {
-    const randomPriorityType = randomElementFromArray([...allPriorityTypes, noneOfTheAbovePriorityType]);
+    const randomPriorityType = randomElementFromArray([...allPriorityTypes, noneOfTheAbovePriorityId]);
 
     const task = generateTask({
       id: "123",
@@ -158,7 +158,7 @@ describe("<CannabisPriorityStatus />", () => {
   });
 
   it("navigates to and from second tab", async () => {
-    const randomPriorityType = randomElementFromArray([...allPriorityTypes, noneOfTheAbovePriorityType]);
+    const randomPriorityType = randomElementFromArray([...allPriorityTypes, noneOfTheAbovePriorityId]);
 
     const task = generateTask({
       id: "123",
@@ -185,7 +185,7 @@ describe("<CannabisPriorityStatus />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${noneOfTheAbovePriorityType}}}Random Priority Type Checkbox`,
+      contentMd: `Content\n- []{${noneOfTheAbovePriorityId}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
