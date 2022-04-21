@@ -42,6 +42,7 @@
   ],
   "name": "Notary Public",
   "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "notary service, mobile notary, signing agent, remote online notary, loan signing, ",
   "id": "notary-public",
   "description": "Serves as a witnesses to the signing of documents and verifies signers’ identities"
 }
