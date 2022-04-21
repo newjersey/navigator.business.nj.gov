@@ -4,15 +4,13 @@ import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/";
+import { advancedDateLibrary, DateObject, getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextFieldProps } from "@mui/material";
-import dayjs, { Dayjs } from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
 import React, { ReactElement, useContext } from "react";
 
-dayjs.extend(advancedFormat);
+advancedDateLibrary();
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -25,10 +23,10 @@ interface Props {
 export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const fieldName = "dateOfFormation";
   const { state, setProfileData } = useContext(ProfileDataContext);
-  const [dateValue, setDateValue] = React.useState<Dayjs | null>(null);
+  const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
 
   useMountEffectWhenDefined(() => {
-    setDateValue(dayjs(state.profileData.dateOfFormation));
+    setDateValue(parseDate(state.profileData.dateOfFormation));
   }, state.profileData.dateOfFormation);
   const [dateError, setDateError] = React.useState<boolean>(false);
   const onValidation = (): void =>
@@ -37,7 +35,7 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
       !((dateValue == null && !props.required) || (dateValue?.isValid() && !dateError))
     );
 
-  const handleChange = (date: Dayjs | null) => {
+  const handleChange = (date: DateObject | null) => {
     setDateValue(date);
     setProfileData({
       ...state.profileData,

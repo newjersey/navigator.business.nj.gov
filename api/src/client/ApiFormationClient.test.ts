@@ -1,4 +1,4 @@
-import { getCurrentDateISOString } from "@shared/dateHelpers";
+import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
 import axios from "axios";
 import {
   generateFormationData,
@@ -15,7 +15,6 @@ import {
   ApiResponse,
   ApiSubmission,
 } from "./ApiFormationClient";
-import dayjs = require("dayjs");
 
 jest.mock("axios");
 jest.mock("winston");
@@ -89,7 +88,10 @@ describe("ApiFormationClient", () => {
             Business: "DomesticLimitedLiabilityCompany",
             BusinessName: userData.profileData.businessName,
             BusinessDesignator: formationFormData.businessSuffix,
-            EffectiveFilingDate: dayjs(formationFormData.businessStartDate, "YYYY-MM-DD").toISOString(),
+            EffectiveFilingDate: parseDateWithFormat(
+              formationFormData.businessStartDate,
+              "YYYY-MM-DD"
+            ).toISOString(),
             MainAddress: {
               Address1: formationFormData.businessAddressLine1,
               Address2: formationFormData.businessAddressLine2,

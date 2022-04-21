@@ -1,6 +1,6 @@
-import { LicenseEntity, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
+import { getLicenseDate } from "@shared/dateHelpers";
+import { LicenseStatusItem, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
-import dayjs from "dayjs";
 import { inputManipulator } from "../inputManipulator";
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 
@@ -21,7 +21,7 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
       return Promise.reject("NO_MATCH");
     }
 
-    const match = allMatchingAddressesArray.reduce((a, b) => (getDate(a) > getDate(b) ? a : b));
+    const match = allMatchingAddressesArray.reduce((a, b) => (getLicenseDate(a) > getLicenseDate(b) ? a : b));
 
     const items: LicenseStatusItem[] = entities
       .filter((it) => it.applicationNumber === match.applicationNumber)
@@ -63,13 +63,3 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
 
 export const cleanAddress = (value: string): string =>
   inputManipulator(value).makeLowerCase().stripPunctuation().stripWhitespace().value;
-
-export const getDate = (entity: LicenseEntity): dayjs.Dayjs => {
-  if (entity.issueDate) {
-    return dayjs(entity.issueDate, "YYYYMMDD X");
-  } else if (entity.dateThisStatus) {
-    return dayjs(entity.dateThisStatus, "YYYYMMDD X");
-  } else {
-    return dayjs(entity.expirationDate, "YYYYMMDD X");
-  }
-};

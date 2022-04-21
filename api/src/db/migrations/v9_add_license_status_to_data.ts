@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import { parseDate } from "@shared/dateHelpers";
 import { v8UserData } from "./v8_remove_bcorp";
 
 export interface v9UserData {
@@ -18,7 +18,7 @@ export const migrate_v8_to_v9 = (v8Data: v8UserData): v9UserData => {
     licenseData = {
       nameAndAddress: v8Data.licenseSearchData.nameAndAddress,
       completedSearch: v8Data.licenseSearchData.completedSearch,
-      lastCheckedStatus: dayjs(0).toISOString(),
+      lastCheckedStatus: parseDate(0).toISOString(),
       status: "UNKNOWN",
       items: [],
     };
