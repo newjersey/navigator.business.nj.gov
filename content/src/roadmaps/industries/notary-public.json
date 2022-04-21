@@ -1,0 +1,47 @@
+{
+  "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "other-services",
+  "canBeReseller": false,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 12,
+      "task": "notary-register"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "search-licenses"
+    }
+  ],
+  "name": "Notary Public",
+  "isLiquorLicenseApplicable": false,
+  "id": "notary-public",
+  "description": "Serves as a witnesses to the signing of documents and verifies signers’ identities"
+}
