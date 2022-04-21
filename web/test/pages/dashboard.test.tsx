@@ -21,11 +21,10 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { getCurrentDate, UserData } from "@businessnjgovnavigator/shared/";
+import { getCurrentDate, parseDateWithFormat, UserData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
-import dayjs from "dayjs";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -169,7 +168,9 @@ describe("dashboard", () => {
     expect(subject.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(subject.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
     expect(
-      subject.getByText(`Annual Report ${dayjs(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`)
+      subject.getByText(
+        `Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`
+      )
     ).toBeInTheDocument();
   });
 

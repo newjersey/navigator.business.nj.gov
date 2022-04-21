@@ -7,7 +7,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import dayjs from "dayjs";
+import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import React, { ReactElement, useContext } from "react";
 
 export const ReviewSection = (): ReactElement => {
@@ -30,7 +30,9 @@ export const ReviewSection = (): ReactElement => {
         <div className="text-bold width-11rem">
           <Content>{Config.businessFormationDefaults.reviewPageBusinessStartDateLabel}</Content>
         </div>
-        <div>{dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/DD/YYYY")}</div>
+        <div>
+          {parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/DD/YYYY")}
+        </div>
       </div>
       <hr className="margin-y-205" />
     </>

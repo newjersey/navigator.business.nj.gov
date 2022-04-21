@@ -1,16 +1,15 @@
-import { getCurrentDate } from "@shared/dateHelpers";
+import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { createHmac } from "crypto";
-import dayjs from "dayjs";
 
 export const determineAnnualFilingDate = (dateOfFormation: string) => {
   const currentDate = getCurrentDate();
-  const dateOfFormationDate = dayjs(dateOfFormation);
+  const dateOfFormationDate = parseDate(dateOfFormation);
   let year = currentDate.year();
   if (dateOfFormationDate.month() < currentDate.month()) {
     year = year + 1;
   }
   const nextMonth = dateOfFormationDate.month() + 2;
-  return dayjs(`${year}-${nextMonth}-01`).add(-1, "day").format("YYYY-MM-DD");
+  return parseDate(`${year}-${nextMonth}-01`).add(-1, "day").format("YYYY-MM-DD");
 };
 
 export const generateHashedKey = (key: string) =>

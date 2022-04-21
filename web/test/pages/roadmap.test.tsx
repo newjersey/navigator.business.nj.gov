@@ -39,10 +39,10 @@ import {
   LookupSectorTypeById,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
-import dayjs from "dayjs";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -775,7 +775,9 @@ describe("roadmap page", () => {
       openGraduationModal(subject);
       expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
       expect(page.getDateOfFormationValue()).toEqual(
-        dayjs(userData.formationData.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/YYYY")
+        parseDateWithFormat(userData.formationData.formationFormData.businessStartDate, "YYYY-MM-DD").format(
+          "MM/YYYY"
+        )
       );
     });
   });

@@ -4,9 +4,8 @@ import { Icon } from "@/components/njwds/Icon";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { getCurrentDate, TaxFiling } from "@businessnjgovnavigator/shared/";
+import { getCurrentDate, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
-import dayjs from "dayjs";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 
@@ -26,8 +25,12 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     }
 
     const thisMonthFilings = props.taxFilings
-      .filter((it) => dayjs(it.dueDate, "YYYY-MM-DD").month() === date.month())
-      .sort((a, b) => (dayjs(a.dueDate, "YYYY-MM-DD").isBefore(dayjs(b.dueDate, "YYYY-MM-DD")) ? -1 : 1));
+      .filter((it) => parseDateWithFormat(it.dueDate, "YYYY-MM-DD").month() === date.month())
+      .sort((a, b) =>
+        parseDateWithFormat(a.dueDate, "YYYY-MM-DD").isBefore(parseDateWithFormat(b.dueDate, "YYYY-MM-DD"))
+          ? -1
+          : 1
+      );
 
     return (
       <div data-testid={date.format("MMM YYYY")}>
@@ -52,7 +55,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                     >
                       <span className="text-bold text-uppercase ">
                         {Config.roadmapDefaults.calendarFilingDueDateLabel}{" "}
-                        {dayjs(filing.dueDate, "YYYY-MM-DD").format("M/D")}
+                        {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("M/D")}
                       </span>
                       {" - "}
                       <span className="text-no-uppercase">
@@ -103,12 +106,14 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           <div key={`${filing.identifier}-${filing.dueDate}`} className="flex margin-bottom-2 minh-6">
             <div className="width-05 bg-primary"></div>
             <div className="margin-left-205">
-              <div className="text-bold">{dayjs(filing.dueDate, "YYYY-MM-DD").format("MMMM D, YYYY")}</div>
+              <div className="text-bold">
+                {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("MMMM D, YYYY")}
+              </div>
               <div>
                 <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
                   <a href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
                     {props.operateReferences[filing.identifier].name}{" "}
-                    {dayjs(filing.dueDate, "YYYY-MM-DD").format("YYYY")}
+                    {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("YYYY")}
                   </a>
                 </Link>
               </div>

@@ -3955,7 +3955,6 @@ __metadata:
     cypress-audit: 1.1.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
-    dayjs: 1.11.1
     dotenv: 16.0.0
     eslint: 8.13.0
     eslint-config-next: 12.1.5

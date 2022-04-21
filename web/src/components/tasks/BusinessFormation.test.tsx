@@ -33,6 +33,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
   createEmptyFormationFormData,
+  DateObject,
   FormationFormData,
   FormationMember,
   FormationSubmitResponse,
@@ -46,7 +47,6 @@ import {
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
-import { Dayjs } from "dayjs";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -1938,7 +1938,7 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(listbox.getByText(value));
   };
 
-  const selectDate = (value: Dayjs) => {
+  const selectDate = (value: DateObject) => {
     fillText("Business start date", value.format("MM/DD/YYYY"));
     fireEvent.blur(subject.getByLabelText("Business start date"));
   };

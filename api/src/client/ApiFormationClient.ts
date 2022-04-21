@@ -1,3 +1,4 @@
+import { parseDateWithFormat } from "@shared/dateHelpers";
 import {
   BusinessSuffix,
   FormationSubmitError,
@@ -6,7 +7,6 @@ import {
 } from "@shared/formationData";
 import { UserData } from "@shared/userData";
 import axios from "axios";
-import dayjs from "dayjs";
 import { FormationClient } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 import { splitErrorField } from "./splitErrorField";
@@ -151,7 +151,10 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           Business: "DomesticLimitedLiabilityCompany",
           BusinessName: userData.profileData.businessName,
           BusinessDesignator: formationFormData.businessSuffix,
-          EffectiveFilingDate: dayjs(formationFormData.businessStartDate, "YYYY-MM-DD").toISOString(),
+          EffectiveFilingDate: parseDateWithFormat(
+            formationFormData.businessStartDate,
+            "YYYY-MM-DD"
+          ).toISOString(),
           MainAddress: {
             Address1: formationFormData.businessAddressLine1,
             Address2: formationFormData.businessAddressLine2,

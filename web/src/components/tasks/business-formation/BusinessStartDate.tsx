@@ -4,14 +4,17 @@ import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/";
+import {
+  advancedDateLibrary,
+  DateObject,
+  getCurrentDate,
+  parseDateWithFormat,
+} from "@businessnjgovnavigator/shared/";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextField } from "@mui/material";
-import dayjs, { Dayjs } from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
 import React, { ReactElement, useContext, useState } from "react";
-dayjs.extend(advancedFormat);
+advancedDateLibrary();
 
 export const BusinessStartDate = (): ReactElement => {
   const [showError, setShowError] = useState<boolean>(false);
@@ -48,9 +51,9 @@ export const BusinessStartDate = (): ReactElement => {
           <Picker
             minDate={getCurrentDate()}
             maxDate={getCurrentDate().add(100, "years")}
-            value={dayjs(state.formationFormData.businessStartDate, "YYYY-MM-DD")}
+            value={parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD")}
             inputFormat={"MM/DD/YYYY"}
-            onChange={(newValue: Dayjs | null): void => {
+            onChange={(newValue: DateObject | null): void => {
               if (newValue) handleChange(newValue.format("YYYY-MM-DD"));
               if (newValue === null) handleChange("");
             }}

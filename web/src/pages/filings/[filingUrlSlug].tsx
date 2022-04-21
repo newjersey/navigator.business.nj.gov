@@ -9,7 +9,7 @@ import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Filing, OperateReference } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import dayjs from "dayjs";
+import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import React, { ReactElement } from "react";
@@ -22,7 +22,7 @@ interface Props {
 const FilingPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const matchingFiling = userData?.taxFilingData.filings.find((it) => it.identifier === props.filing.id);
-  const dueDate = matchingFiling ? dayjs(matchingFiling.dueDate).format("MM/DD/YYYY") : "";
+  const dueDate = matchingFiling ? parseDate(matchingFiling.dueDate).format("MM/DD/YYYY") : "";
 
   return (
     <>

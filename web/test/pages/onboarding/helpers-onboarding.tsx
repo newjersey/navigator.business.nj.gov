@@ -11,6 +11,7 @@ import {
   BusinessUser,
   createEmptyUser,
   createEmptyUserData,
+  DateObject,
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared/";
@@ -23,7 +24,6 @@ import {
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
-import { Dayjs } from "dayjs";
 import React from "react";
 
 const mockApi = api as jest.Mocked<typeof api>;
@@ -65,7 +65,7 @@ export const renderPage = ({
 
 export type PageHelpers = {
   fillText: (label: string, value: string) => void;
-  selectDate: (label: string, value: Dayjs) => void;
+  selectDate: (label: string, value: DateObject) => void;
   selectByValue: (label: string, value: string) => void;
   selectByText: (label: string, value: string) => void;
   chooseRadio: (value: string) => void;
@@ -96,7 +96,7 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
     fireEvent.blur(item);
   };
 
-  const selectDate = (label: string, value: Dayjs) => {
+  const selectDate = (label: string, value: DateObject) => {
     fillText(label, value.format("MM/YYYY"));
     fireEvent.blur(subject.getByLabelText("Date of formation"));
   };
