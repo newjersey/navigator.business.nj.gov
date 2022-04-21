@@ -51,7 +51,8 @@ export const CannabisPriorityStatus = (props: Props) => {
   const [displayNoPriorityType, setDisplayNoPriorityType] = useState(false);
 
   useEffect(() => {
-    if (userData && displayFirstTab) {
+    if (!userData) return;
+    if (displayFirstTab) {
       const priorityTypeSelected = priorityTypes.some((key) => userData.taskItemChecklist[key] === true);
 
       if (priorityTypeSelected || userData.taskItemChecklist[priorityTypesObj.noneOfTheAbove]) {
@@ -67,9 +68,7 @@ export const CannabisPriorityStatus = (props: Props) => {
           },
         });
       }
-    }
-
-    if (userData && userData.taskItemChecklist && !displayFirstTab) {
+    } else {
       const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some(
         (key) => userData.taskItemChecklist[key] === true
       );
@@ -85,11 +84,11 @@ export const CannabisPriorityStatus = (props: Props) => {
         (key) => userData.taskItemChecklist[key] === true
       );
 
-      setDisplayMWPriorityType(minorityOrWomenPriorityTypeSelected ? true : false);
-      setDisplayVeteranPriorityType(veteranPriorityTypeSelected ? true : false);
-      setDisplayImpactZonePriorityType(impactZonePriorityTypeSelected ? true : false);
-      setDisplaySocialEquityPriorityType(socialEquityPriorityTypeSelected ? true : false);
-      setDisplayNoPriorityType(userData.taskItemChecklist[priorityTypesObj.noneOfTheAbove] ? true : false);
+      setDisplayMWPriorityType(minorityOrWomenPriorityTypeSelected);
+      setDisplayVeteranPriorityType(veteranPriorityTypeSelected);
+      setDisplayImpactZonePriorityType(impactZonePriorityTypeSelected);
+      setDisplaySocialEquityPriorityType(socialEquityPriorityTypeSelected);
+      setDisplayNoPriorityType(!!userData.taskItemChecklist[priorityTypesObj.noneOfTheAbove]);
     }
   }, [userData, update, displayFirstTab]);
 
@@ -271,7 +270,7 @@ export const CannabisPriorityStatus = (props: Props) => {
           <Button
             style="primary"
             dataTestid="socialEquityButton"
-            noRightMargin={displayMWPriorityType || displayVeteranPriorityType ? false : true}
+            noRightMargin={!(displayMWPriorityType || displayVeteranPriorityType)}
           >
             {Config.cannabisPriorityStatus.socialEquityButtonText}
           </Button>
@@ -323,7 +322,7 @@ export const CannabisPriorityStatus = (props: Props) => {
         <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
           {Config.taskDefaults.taskProgressSuccessToastBody}
         </ToastAlert>
-        <TaskHeader task={props.task}></TaskHeader>
+        <TaskHeader task={props.task} />
         <UnlockedBy task={props.task} />
         {displayFirstTab ? renderFirstTabContent : renderSecondTabContent}
       </div>
