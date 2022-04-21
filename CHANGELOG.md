@@ -1,3 +1,14 @@
+## [3.4.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.4.0...v3.4.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* hide bad material-ui styling on CMS checkboxes ([4e76b27](https://github.com/newjersey/navigator.business.nj.gov/commit/4e76b27fdaaa8ac90118dcf2fc4a0bb9cb4fe61a))
+* updating Industry Roadmaps e-commerce ([#2457](https://github.com/newjersey/navigator.business.nj.gov/issues/2457)) ([c302ad9](https://github.com/newjersey/navigator.business.nj.gov/commit/c302ad96d7d55738298bed7f7513f65fef1e411c))
+* updating Industry Roadmaps photography ([#2472](https://github.com/newjersey/navigator.business.nj.gov/issues/2472)) ([463cb42](https://github.com/newjersey/navigator.business.nj.gov/commit/463cb42255b2eeeb41ce3b9af7f7d2e0ba993824))
+* updating Poppy Onboarding Content business-name ([#2468](https://github.com/newjersey/navigator.business.nj.gov/issues/2468)) ([da16788](https://github.com/newjersey/navigator.business.nj.gov/commit/da167881764408208d21f09c18677fc4080427fc))
+* updating Tasks apply-for-shop-license ([#2476](https://github.com/newjersey/navigator.business.nj.gov/issues/2476)) ([e4ce8c1](https://github.com/newjersey/navigator.business.nj.gov/commit/e4ce8c1d335cdd721931ee579f236d070cd7679c))
+
 # [3.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.3.0...v3.4.0) (2022-04-20)
 
 
