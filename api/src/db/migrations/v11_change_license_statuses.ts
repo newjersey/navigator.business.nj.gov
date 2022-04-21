@@ -1,4 +1,4 @@
-import { randomInt } from "./migrations";
+import { randomInt } from "@shared/intHelpers";
 import { v10UserData } from "./v10_add_mynjuserkey";
 
 export interface v11UserData {

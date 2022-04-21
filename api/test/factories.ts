@@ -17,6 +17,7 @@ import {
   GetFilingResponse,
 } from "@shared/formationData";
 import { Industries, Industry } from "@shared/industry";
+import { randomInt } from "@shared/intHelpers";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import { LicenseData, LicenseEntity, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
@@ -26,11 +27,6 @@ import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
 import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import { Preferences, UserData } from "@shared/userData";
 import { SelfRegResponse } from "../src/domain/types";
-
-export const randomInt = (length = 8): number =>
-  Math.floor(
-    Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1)
-  );
 
 export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
   return {

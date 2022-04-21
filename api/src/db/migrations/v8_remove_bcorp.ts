@@ -1,4 +1,4 @@
-import { randomInt } from "./migrations";
+import { randomInt } from "@shared/intHelpers";
 import { v7UserData } from "./v7_add_license_data";
 
 export interface v8UserData {

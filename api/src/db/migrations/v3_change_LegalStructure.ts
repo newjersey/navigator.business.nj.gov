@@ -1,4 +1,4 @@
-import { randomInt } from "./migrations";
+import { randomInt } from "@shared/intHelpers";
 import { v2LegalStructure, v2UserData } from "./v2_formData_to_onboardingData";
 
 export interface v3UserData {

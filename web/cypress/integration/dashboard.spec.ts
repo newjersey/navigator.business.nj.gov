@@ -1,9 +1,5 @@
-import { arrayOfSectors } from "@businessnjgovnavigator/shared/";
-import {
-  completeExistingBusinessOnboarding,
-  randomElementFromArray,
-  randomInt,
-} from "cypress/support/helpers";
+import { arrayOfSectors, randomInt } from "@businessnjgovnavigator/shared/";
+import { completeExistingBusinessOnboarding, randomElementFromArray } from "cypress/support/helpers";
 
 describe("existing business [feature] [all] [group2]", () => {
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { randomInt } from "./migrations";
+import { randomInt } from "@shared/intHelpers";
 
 export interface v0UserData {
   user: v0BusinessUser;
