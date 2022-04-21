@@ -1,4 +1,4 @@
-import { randomInt } from "./migrations";
+import { randomInt } from "@shared/intHelpers";
 import { v4UserData } from "./v4_add_municipality";
 
 export interface v5UserData {

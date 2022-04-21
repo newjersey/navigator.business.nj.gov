@@ -5,6 +5,7 @@ import {
   LegalStructures,
   LookupLegalStructureById,
   LookupSectorTypeById,
+  randomInt,
 } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "./page_objects/dashboardPage";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
@@ -57,11 +58,6 @@ export interface Pa11yThresholds {
   ignore?: string[];
   runners?: string[];
 }
-
-export const randomInt = (length = 8): number =>
-  Math.floor(
-    Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1)
-  );
 
 export const randomElementFromArray = (array: any[]) => {
   return array[Math.floor(Math.random() * array.length)];

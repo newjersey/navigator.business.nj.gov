@@ -1,4 +1,4 @@
-import { randomInt } from "./migrations";
+import { randomInt } from "@shared/intHelpers";
 import { v1UserData } from "./v1_addTaskProgress";
 
 export interface v2UserData {

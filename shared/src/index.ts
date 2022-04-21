@@ -2,6 +2,7 @@ export * from "./businessUser";
 export * from "./dateHelpers";
 export * from "./formationData";
 export * from "./industry";
+export * from "./intHelpers";
 export * from "./legalStructure";
 export * from "./license";
 export * from "./misc";

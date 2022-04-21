@@ -6,11 +6,12 @@ import {
   LegalStructure,
   LegalStructures,
   LookupIndustryById,
+  randomInt,
 } from "@businessnjgovnavigator/shared/";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
 import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
-import { completeNewBusinessOnboarding, randomElementFromArray, randomInt } from "../support/helpers";
+import { completeNewBusinessOnboarding, randomElementFromArray } from "../support/helpers";
 
 describe("Roadmap [feature] [all] [group2]", () => {
   beforeEach(() => {

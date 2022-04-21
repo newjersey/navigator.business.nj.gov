@@ -1,4 +1,4 @@
-import { randomInt } from "./migrations";
+import { randomInt } from "@shared/intHelpers";
 import { v6UserData } from "./v6_add_home_based_business";
 
 export interface v7UserData {

@@ -1,5 +1,5 @@
+import { randomInt } from "@shared/intHelpers";
 import axios from "axios";
-import { randomInt } from "../../test/factories";
 import { NewsletterClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 import { GovDeliveryNewsletterClient, GovDeliveryResponse } from "./GovDeliveryNewsletterClient";

@@ -50,7 +50,6 @@ import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
 export type MigrationFunction = (data: any) => any;
-export const randomInt = (): number => Math.floor(Math.random() * Math.floor(10000000));
 
 export const Migrations: MigrationFunction[] = [
   migrate_v0_to_v1,

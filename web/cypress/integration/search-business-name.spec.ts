@@ -1,10 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import {
-  completeNewBusinessOnboarding,
-  randomInt,
-  updateNewBusinessProfilePage,
-} from "cypress/support/helpers";
+import { LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
+import { completeNewBusinessOnboarding, updateNewBusinessProfilePage } from "cypress/support/helpers";
 
 describe("search business name [feature] [all] [group2]", () => {
   beforeEach(() => {

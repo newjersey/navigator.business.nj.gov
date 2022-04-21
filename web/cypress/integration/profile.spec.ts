@@ -6,6 +6,7 @@ import {
   Industry,
   LegalStructure,
   LegalStructures,
+  randomInt,
 } from "@businessnjgovnavigator/shared/";
 import {
   checkExistingBusinessProfilePage,
@@ -17,7 +18,6 @@ import {
   legalStructureWithTradeName,
   liquorLicenseIndustries,
   randomElementFromArray,
-  randomInt,
   updateExBusinessProfilePage,
   updateNewBusinessProfilePage,
 } from "../support/helpers";

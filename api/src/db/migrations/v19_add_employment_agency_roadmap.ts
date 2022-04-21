@@ -1,4 +1,4 @@
-import { randomInt } from "./migrations";
+import { randomInt } from "@shared/intHelpers";
 import { v18UserData } from "./v18_add_foodtruck_roadmap";
 
 export interface v19UserData {
