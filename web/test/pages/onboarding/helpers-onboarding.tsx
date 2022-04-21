@@ -2,7 +2,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
-import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
+import { generateProfileData, generateUser, generateUserData, randomLegalStructure } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
 import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
@@ -212,7 +212,10 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
 };
 
 export const runSelfRegPageTests = (
-  { hasExistingBusiness }: { hasExistingBusiness: boolean },
+  {
+    hasExistingBusiness,
+    requiresPublicFiling,
+  }: { hasExistingBusiness: boolean; requiresPublicFiling?: boolean },
   advanceToSelfReg: (page: PageHelpers) => Promise<void>
 ) => {
   let page: PageHelpers;
@@ -221,7 +224,10 @@ export const runSelfRegPageTests = (
   const userData = generateUserData({
     user,
     formProgress: "UNSTARTED",
-    profileData: generateProfileData({ hasExistingBusiness }),
+    profileData: generateProfileData({
+      hasExistingBusiness,
+      legalStructureId: randomLegalStructure(requiresPublicFiling)?.id,
+    }),
   });
 
   beforeEach(async () => {

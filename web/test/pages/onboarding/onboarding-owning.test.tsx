@@ -425,12 +425,25 @@ describe("onboarding - owning a business", () => {
     });
   });
 
-  describe("validates self-reg step", () => {
-    runSelfRegPageTests({ hasExistingBusiness: true }, async (page: PageHelpers) => {
-      await page.visitStep2();
-      await page.visitStep3();
-      await page.visitStep4();
-      await page.visitStep5();
-    });
+  describe("validates self-reg step for legal structures that require public filing", () => {
+    runSelfRegPageTests(
+      { hasExistingBusiness: true, requiresPublicFiling: true },
+      async (page: PageHelpers) => {
+        await page.visitStep2();
+        await page.visitStep3();
+        await page.visitStep4();
+        await page.visitStep5();
+      }
+    );
+  });
+  describe("validates self-reg step for legal structures that do not require public filing", () => {
+    runSelfRegPageTests(
+      { hasExistingBusiness: true, requiresPublicFiling: false },
+      async (page: PageHelpers) => {
+        await page.visitStep2();
+        await page.visitStep3();
+        await page.visitStep4();
+      }
+    );
   });
 });

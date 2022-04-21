@@ -548,10 +548,10 @@ export const randomCounty = (): County => {
   return AllCounties[randomIndex] as County;
 };
 
-export const randomLegalStructure = (): LegalStructure => {
-  const requiresPublicFiling = Boolean(randomInt() % 2);
+export const randomLegalStructure = (requiresPublicFiling?: boolean): LegalStructure => {
+  const _requiresPublicFiling = requiresPublicFiling ?? Boolean(randomInt() % 2);
   const LegalPublicFilings = LegalStructures.filter(
-    (item) => item.requiresPublicFiling == requiresPublicFiling
+    (item) => item.requiresPublicFiling === _requiresPublicFiling
   );
   const randomIndex = Math.floor(Math.random() * LegalPublicFilings.length);
   return LegalPublicFilings[randomIndex];
