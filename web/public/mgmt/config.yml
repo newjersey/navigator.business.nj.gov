@@ -1053,6 +1053,10 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+      - label: NAICS Codes
+        name: naicsCodes
+        widget: string
+        required: false
       - label: Id / Filename
         name: id
         widget: string

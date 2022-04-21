@@ -13,6 +13,7 @@ export interface Industry {
   defaultSectorId?: string;
   roadmapSteps: AddOn[];
   modifications?: TaskModification[];
+  naicsCodes?: string;
 }
 
 export interface AddOn {
@@ -37,6 +38,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       isMobileLocation: false,
       canBeReseller: true,
       roadmapSteps: [],
+      naicsCodes: "",
     }
   );
 };
