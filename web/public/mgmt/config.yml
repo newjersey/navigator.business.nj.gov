@@ -2,7 +2,7 @@ backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
   branch: content-repo
-  base_url: https://cubukxpyt9.execute-api.us-east-1.amazonaws.com
+  base_url: https://049fmrgtye.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
   squash_merges: true
