@@ -6,8 +6,6 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface Props {
-  // taskLinks: TaskLink[];
-  // isLoading: boolean;
   dataTestid?: string;
   task: Task;
 }
