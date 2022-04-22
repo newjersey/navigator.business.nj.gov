@@ -1,0 +1,43 @@
+{
+  "isMobileLocation": false,
+  "canBeHomeBased": true,
+  "defaultSectorId": "professional-scientific-and-technical-services",
+  "canBeReseller": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "search-licenses"
+    }
+  ],
+  "name": "HVAC Contractor",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R",
+  "id": "hvac-contractor",
+  "description": "Provides installation, maintenance, and repair services to Heating Ventilation, AC, and Refrigeration systems (HVACR)"
+}
