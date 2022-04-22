@@ -1,0 +1,43 @@
+{
+  "isMobileLocation": false,
+  "canBeHomeBased": false,
+  "defaultSectorId": "digital-and-print-media",
+  "canBeReseller": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "search-licenses"
+    }
+  ],
+  "name": "Printing Business",
+  "isLiquorLicenseApplicable": false,
+  "additionalSearchTerms": "office printing, commercial printing",
+  "id": "printing-business",
+  "description": "Offers printing services for individuals and other companies"
+}
