@@ -7,7 +7,7 @@ required: true
 issuingAgency: ""
 ---
 
-If you qualify for a priority status, your cannabis application can receive priority review and approval. There are three types of priority statuses, we list them here in the order they are expedited: Diversley-Owned Business, Social Equity Business, and Impact Zone Business. Qualifying for multiple priorities does not offer any benefit.
+If you qualify for a priority status, your cannabis application can receive priority review and approval. There are three types of priority statuses, we list them here in the order they are expedited: Diversely-Owned Business, Social Equity Business, and Impact Zone Business. Qualifying for multiple priorities does not offer any benefit.
 
 Learn more about how [priority status is reviewed and approved](https://www.nj.gov/cannabis/businesses/priority-applications/).
 
