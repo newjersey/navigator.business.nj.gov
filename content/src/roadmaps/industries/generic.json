@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "other-services",
+  "defaultSectorId": "real-estate",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -35,8 +35,9 @@
       "task": "search-licenses"
     }
   ],
-  "name": "Any Other Business Type",
+  "name": "Real Estate Investor",
   "isLiquorLicenseApplicable": false,
-  "id": "generic",
-  "description": "Select this if you don’t see your specific industry"
+  "additionalSearchTerms": "investor, property investor",
+  "id": "real-estate-investor",
+  "description": "Buys properties to rent or re-sell"
 }
