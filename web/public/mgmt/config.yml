@@ -519,6 +519,7 @@ collections:
               - { label: Signature Aid Text, name: signatureAidText, widget: string }
               - { label: Signature Delete Mobile Text, name: signatureDeleteMobileText, widget: string }
               - { label: Signature Checkbox Error Text, name: signatureCheckboxErrorText, widget: string }
+              - { label: Signature Empty Error Text, name: signersEmptyErrorText, widget: string }
               - {
                   label: Additional Signature Name Error Text,
                   name: additionalSignatureNameErrorText,

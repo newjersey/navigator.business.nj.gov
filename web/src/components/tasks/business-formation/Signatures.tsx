@@ -62,7 +62,7 @@ export const Signatures = (): ReactElement => {
     if (signerWasFilledButCheckboxWasError && event.target.checked) {
       setErrorMap({ ...state.errorMap, signer: { invalid: false } });
     } else if (!event.target.checked) {
-      setErrorMap({ ...state.errorMap, signer: { invalid: true } });
+      setErrorMap({ ...state.errorMap, signer: { invalid: true, types: ["signer-checkbox"] } });
     }
   };
 
@@ -107,10 +107,11 @@ export const Signatures = (): ReactElement => {
     index?: number;
   }) => {
     return (
-      <div className="grid-col-auto padding-left-1 display-flex flex-column flex-align-center flex-justify-center">
+      <div className="grid-col-auto width-6 display-flex flex-column flex-align-center flex-justify-center">
         <label
           htmlFor={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
           className="text-bold"
+          style={{ display: "none" }}
         >
           {Config.businessFormationDefaults.signatureColumnLabel}*
         </label>
@@ -129,7 +130,6 @@ export const Signatures = (): ReactElement => {
   const renderDeleteColumn = ({ visible, onClick }: { visible: boolean; onClick?: () => void }) => {
     return (
       <div className="grid-col-auto padding-left-1 flex-column flex-align-center flex-justify-center">
-        <div className="text-bold visibility-hidden">&nbsp;</div>
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
           {visible ? (
             <Button
@@ -154,47 +154,47 @@ export const Signatures = (): ReactElement => {
       <div className="form-input margin-bottom-2">
         <Content>{state.displayContent.signatureHeader.contentMd}</Content>
         <br />
-
         <div className="grid-row flex-align-center">
           <div className="grid-col">
-            <Content>{Config.businessFormationDefaults.signerLabel}</Content>
-            <GenericTextField
-              value={state.formationFormData.signer.name}
-              placeholder={Config.businessFormationDefaults.signerPlaceholder}
-              handleChange={handleSignerChange}
-              error={state.errorMap["signer"].invalid && !state.formationFormData.signer.name}
-              onValidation={(fieldName: string, invalid: boolean) => {
-                const isSignerInvalid = invalid || !state.formationFormData.signer.signature;
-                setErrorMap({ ...state.errorMap, signer: { invalid: isSignerInvalid } });
-              }}
-              validationText={Config.businessFormationDefaults.signerErrorText}
-              fieldName="signer"
-              required={true}
-            />
-          </div>
-          <div style={{ marginBottom: "19px" }}>
-            {renderSignatureColumn({
-              onChange: handleSignerCheckbox,
-              checked: state.formationFormData.signer.signature,
-              fieldName: "signer",
-            })}
+            <div className="fdr space-between">
+              <Content>{Config.businessFormationDefaults.signerLabel}</Content>
+              <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
+            </div>
+            <div className="grid-row flex-align-center" data-testid={`primary-signer`}>
+              <div className="grid-col">
+                <GenericTextField
+                  value={state.formationFormData.signer.name}
+                  placeholder={Config.businessFormationDefaults.signerPlaceholder}
+                  handleChange={handleSignerChange}
+                  error={state.errorMap["signer"].invalid && !state.formationFormData.signer.name}
+                  onValidation={(fieldName: string, invalid: boolean) => {
+                    const isSignerInvalid = invalid || !state.formationFormData.signer.signature;
+                    setErrorMap({ ...state.errorMap, signer: { invalid: isSignerInvalid } });
+                  }}
+                  validationText={Config.businessFormationDefaults.signerErrorText}
+                  fieldName="signer"
+                  required={true}
+                />
+              </div>
+              <div style={{ marginBottom: "19px" }}>
+                {renderSignatureColumn({
+                  onChange: handleSignerCheckbox,
+                  checked: state.formationFormData.signer.signature,
+                  fieldName: "signer",
+                })}
+              </div>
+            </div>
           </div>
           {isTabletAndUp && renderDeleteColumn({ visible: false })}
         </div>
-        {state.errorMap.signer.invalid && !state.formationFormData.signer.signature && (
-          <p className="text-error-dark">{Config.businessFormationDefaults.signatureCheckboxErrorText}</p>
-        )}
 
         {state.formationFormData.additionalSigners.map((it, index) => {
           return (
             <div className="margin-bottom-3" key={index}>
-              <div
-                className="grid-row flex-align-center margin-bottom-1"
-                data-testid={`additional-signers-${index}`}
-              >
+              <div className="grid-row margin-bottom-1 fas" data-testid={`additional-signers-${index}`}>
                 <div className="grid-col">
-                  <Content>{Config.businessFormationDefaults.signerLabel}</Content>
                   <GenericTextField
+                    noValidationMargin={true}
                     value={it.name}
                     placeholder={Config.businessFormationDefaults.signerPlaceholder ?? ""}
                     handleChange={(value: string) => handleAdditionalSignerChange(value, index)}
@@ -224,24 +224,14 @@ export const Signatures = (): ReactElement => {
                 {isTabletAndUp &&
                   renderDeleteColumn({ visible: true, onClick: () => removeAdditionalSigner(index) })}
               </div>
-              {state.errorMap.additionalSigners.invalid &&
-                !state.formationFormData.additionalSigners[index].signature && (
-                  <p className="text-error-dark">
-                    {Config.businessFormationDefaults.signatureCheckboxErrorText}
-                  </p>
-                )}
               {!isTabletAndUp && (
-                <Button style="tertiary" underline>
+                <Button style="tertiary" underline onClick={() => removeAdditionalSigner(index)}>
                   {Config.businessFormationDefaults.signatureDeleteMobileText}
                 </Button>
               )}
             </div>
           );
         })}
-
-        <p className="margin-bottom-2">
-          <i>* {Config.businessFormationDefaults.signatureAidText}</i>
-        </p>
 
         {state.formationFormData.additionalSigners.length < 9 && (
           <Button style="tertiary" onClick={addAdditionalSignerField}>
@@ -251,6 +241,9 @@ export const Signatures = (): ReactElement => {
             </span>
           </Button>
         )}
+        <p className="margin-bottom-2">
+          <i>* {Config.businessFormationDefaults.signatureAidText}</i>
+        </p>
       </div>
     </>
   );

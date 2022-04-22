@@ -11,6 +11,7 @@ export interface GenericTextFieldProps {
   valueFilter?: (value: string) => string;
   handleChange?: (value: string) => void;
   error?: boolean;
+  noValidationMargin?: boolean;
   validationText?: string;
   disabled?: boolean;
   placeholder?: string;
@@ -88,6 +89,13 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
 
   const value = visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? "";
 
+  const helperText = props.validationText
+    ? props.error
+      ? props.validationText
+      : props.noValidationMargin
+      ? ""
+      : " "
+    : "";
   return (
     <div className={`${props.formInputWide ? "form-input-wide" : "form-input"}`}>
       <TextField
@@ -97,7 +105,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
         onChange={handleChange}
         onBlur={onValidation}
         error={props.error}
-        helperText={props.error ? props.validationText ?? " " : " "}
+        helperText={helperText}
         variant="outlined"
         autoComplete={props.autoComplete ? props.autoComplete : "off"}
         placeholder={props.placeholder ?? ""}

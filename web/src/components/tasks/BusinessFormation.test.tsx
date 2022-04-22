@@ -1240,6 +1240,28 @@ describe("<BusinessFormation />", () => {
       ).not.toBeInTheDocument();
     });
 
+    it("fires validations when signers do not sign correctly", async () => {
+      renderWithData({ signer: { name: "", signature: false }, additionalSigners: [] });
+      await submitBusinessNameTab();
+      await submitBusinessTab();
+      await submitContactsTab(false);
+      expect(
+        subject.getByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false })
+      ).toBeInTheDocument();
+      fillText("Signer", "Elrond");
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false })
+      ).not.toBeInTheDocument();
+      expect(
+        subject.getByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false })
+      ).toBeInTheDocument();
+      selectCheckBox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false })
+      ).not.toBeInTheDocument();
+      await submitContactsTab(true);
+    });
+
     describe("add and manipulate members", () => {
       it("edits members", async () => {
         const members = [...Array(2)].map(() => generateFormationMember({}));
