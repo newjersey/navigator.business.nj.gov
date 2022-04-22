@@ -151,13 +151,14 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       </div>
       <div
         style={{ marginTop: "auto" }}
-        className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-bottom-neg-205"
+        className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-bottom-neg-205 flex-column mobile-lg:flex-row"
       >
         <Button style="secondary" dataTestid="backButton" onClick={props.onBack}>
           {Config.cannabisPriorityStatus.backButtonText}
         </Button>
         {displaySocialEquityPriorityType && (
           <a
+            className="mobile-lg:margin-top-0 margin-top-1"
             href={Config.cannabisPriorityStatus.socialEquityButtonLink}
             target="_blank"
             rel="noreferrer noopener"
@@ -173,6 +174,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         )}
         {(displayMWPriorityType || displayVeteranPriorityType) && (
           <a
+            className="mobile-lg:margin-top-0 margin-top-1"
             href={Config.cannabisPriorityStatus.certificationButtonLink}
             target="_blank"
             rel="noreferrer noopener"
@@ -184,6 +186,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         )}
         {showTaskCompleteButton() && (
           <Button
+            className="mobile-lg:margin-top-0 margin-top-1"
             style="primary"
             noRightMargin
             dataTestid="completeTaskProgressButton"
