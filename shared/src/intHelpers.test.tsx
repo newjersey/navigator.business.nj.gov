@@ -3,6 +3,10 @@ import { randomInt, randomIntFromInterval } from "./intHelpers";
 describe("intHelpers", () => {
   describe("randomInt", () => {
     it("has the correct number of places", () => {
+      const value = randomInt();
+      expect(value.toString().length).toBe(8);
+    });
+    it("has the correct number of places when a length is passed", () => {
       const value = randomInt(4);
       expect(value.toString().length).toBe(4);
     });
