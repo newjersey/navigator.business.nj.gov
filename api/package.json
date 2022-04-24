@@ -74,7 +74,7 @@
     "good-fences": "1.0.2",
     "jest": "27.5.1",
     "jest-dynalite": "3.4.4",
-    "jest-junit": "13.1.0",
+    "jest-junit": "13.2.0",
     "prettier": "2.6.2",
     "prettier-plugin-organize-imports": "2.3.4",
     "rimraf": "3.0.2",
