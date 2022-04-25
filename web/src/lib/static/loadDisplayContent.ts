@@ -241,6 +241,17 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
     loadFile("certification-checklist/generic-veteran-owned.md")
   );
 
+  const annualGeneralRequirements = getMarkdown(loadFile("cannabis-license/annual-general-requirements.md"));
+  const conditionalGeneralRequirements = getMarkdown(
+    loadFile("cannabis-license/conditional-general-requirements.md")
+  );
+  const divereselyOwnedRequirements = getMarkdown(
+    loadFile("cannabis-license/diversely-owned-requirements.md")
+  );
+  const impactZoneRequirements = getMarkdown(loadFile("cannabis-license/impact-zone-requirements.md"));
+  const microbusinessRequirements = getMarkdown(loadFile("cannabis-license/microbusiness-requirements.md"));
+  const socialEquityRequirements = getMarkdown(loadFile("cannabis-license/social-equity-requirements.md"));
+
   return {
     formationDisplayContent: {
       introParagraph: {
@@ -292,6 +303,14 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       genericVeteranOwned: {
         contentMd: genericVeteranOwnedChecklist.content,
       },
+    },
+    cannabisApplyForLicenseDisplayContent: {
+      annualGeneralRequirements: { contentMd: annualGeneralRequirements.content },
+      conditionalGeneralRequirements: { contentMd: conditionalGeneralRequirements.content },
+      diverselyOwnedRequirements: { contentMd: divereselyOwnedRequirements.content },
+      impactZoneRequirements: { contentMd: impactZoneRequirements.content },
+      microbusinessRequirements: { contentMd: microbusinessRequirements.content },
+      socialEquityRequirements: { contentMd: socialEquityRequirements.content },
     },
   };
 };

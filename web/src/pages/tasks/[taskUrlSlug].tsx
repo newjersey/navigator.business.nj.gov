@@ -7,7 +7,8 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormation } from "@/components/tasks/BusinessFormation";
-import { CannabisPriorityStatus } from "@/components/tasks/cannabis/CannabisPriorityStatus";
+import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
+import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -123,9 +124,21 @@ const TaskPage = (props: Props): ReactElement => {
             "license-massage-therapy": <LicenseTask task={props.task} />,
             "form-business-entity": businessFormationFeatureFlag(),
             "priority-status-cannabis": (
-              <CannabisPriorityStatus
+              <CannabisPriorityStatusTask
                 task={props.task}
                 displayContent={props.displayContent.cannabisPriorityStatusDisplayContent}
+              />
+            ),
+            "conditional-permit-cannabis": (
+              <CannabisApplyForLicenseTask
+                task={props.task}
+                displayContent={props.displayContent.cannabisApplyForLicenseDisplayContent}
+              />
+            ),
+            "annual-license-cannabis": (
+              <CannabisApplyForLicenseTask
+                task={props.task}
+                displayContent={props.displayContent.cannabisApplyForLicenseDisplayContent}
               />
             ),
             default: getTaskBody(),
