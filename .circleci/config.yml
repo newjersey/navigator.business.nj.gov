@@ -353,7 +353,7 @@ commands:
             gh pr create --fill --base main --head $CIRCLE_BRANCH
 
 jobs:
-  rebase-content:
+  merge-content:
     docker:
       - image: cimg/node:14.19.0
     steps:
@@ -362,12 +362,13 @@ jobs:
       - run:
           name: Update content-repo branch
           command: |
+            export GIT_MERGE_AUTOEDIT=no
             gh auth setup-git
             git config --global user.email "innovation-admin@nj.gov"
             git config --global user.name  "NJ Innovation CI"
             git checkout content-repo
-            git rebase origin/main
-            git push --force
+            git merge origin/main
+            git push
 
   build:
     docker:
@@ -675,7 +676,7 @@ workflows:
                 - main
           requires:
             - dev-deploy
-      - rebase-content:
+      - merge-content:
           filters:
             branches:
               only:
