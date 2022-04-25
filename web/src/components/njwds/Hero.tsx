@@ -54,7 +54,7 @@ export const Hero = (props: Props): ReactElement => {
                 </Button>
               </div>
 
-              <AuthButton position="HERO" />
+              <AuthButton position="HERO" landing />
             </div>
             <div className="desktop:grid-col-7 order-first desktop:order-last margin-auto">
               <img className="width-100" src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
