@@ -27,7 +27,12 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": "hvac-insurance-surety-bond"
+    },
+    {
+      "step": 2,
+      "weight": 18,
+      "task": "hvac-license"
     },
     {
       "step": 4,
