@@ -4,12 +4,13 @@ import analytics from "@/lib/utils/analytics";
 import { ContextualInfoContext } from "@/pages/_app";
 import React, { ReactElement, useContext, useState } from "react";
 
-export const ContextualInfoLink = ({ children }: { children: string[] }): ReactElement => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const ContextualInfoLink = (props: any): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
   const [cachedContent, setCachedContent] = useState<string>("");
 
-  const displayText = children[0].split("|")[0];
-  const contextualInfoId = children[0].split("|")[1];
+  const displayText = props.children[0].split("|")[0];
+  const contextualInfoId = props.children[0].split("|")[1];
 
   const setContext = async (event: React.MouseEvent) => {
     event.preventDefault();
