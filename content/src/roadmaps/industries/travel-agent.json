@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "technology",
+  "defaultSectorId": "other-services",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -30,9 +30,9 @@
       "task": "get-insurance"
     }
   ],
-  "name": "IT Consultant",
+  "name": "Travel Agency",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "tech support, information technology, tech services, technical services",
-  "id": "it-consultant",
-  "description": "Offers system maintenance, configuration, and troubleshooting services"
+  "additionalSearchTerms": "home-based travel agent",
+  "id": "travel-agent",
+  "description": "Coordinates the details of transportation, itinerary and accommodations for travelers"
 }

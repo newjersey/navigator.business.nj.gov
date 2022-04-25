@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "technology",
+  "defaultSectorId": "real-estate",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -30,9 +30,9 @@
       "task": "get-insurance"
     }
   ],
-  "name": "IT Consultant",
+  "name": "Real Estate Investor",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "tech support, information technology, tech services, technical services",
-  "id": "it-consultant",
-  "description": "Offers system maintenance, configuration, and troubleshooting services"
+  "additionalSearchTerms": "investor, property investor",
+  "id": "real-estate-investor",
+  "description": "Buys properties to rent or re-sell"
 }

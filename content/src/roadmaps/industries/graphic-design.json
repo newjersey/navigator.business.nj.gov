@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "technology",
+  "defaultSectorId": "digital-and-print-media",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -30,9 +30,9 @@
       "task": "get-insurance"
     }
   ],
-  "name": "IT Consultant",
+  "name": "Graphic Design",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "tech support, information technology, tech services, technical services",
-  "id": "it-consultant",
-  "description": "Offers system maintenance, configuration, and troubleshooting services"
+  "additionalSearchTerms": "media services, freelancer, freelance art",
+  "id": "graphic-design",
+  "description": "Creates visual content for print and media"
 }

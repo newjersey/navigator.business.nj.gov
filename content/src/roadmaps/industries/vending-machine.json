@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
-  "canBeHomeBased": true,
-  "defaultSectorId": "technology",
+  "canBeHomeBased": false,
+  "defaultSectorId": "other-services",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -30,9 +30,9 @@
       "task": "get-insurance"
     }
   ],
-  "name": "IT Consultant",
+  "name": "Vending Machine",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "tech support, information technology, tech services, technical services",
-  "id": "it-consultant",
-  "description": "Offers system maintenance, configuration, and troubleshooting services"
+  "additionalSearchTerms": "vending machine service, vending machine business",
+  "id": "vending-machine",
+  "description": "Offers small items for purchase through an automated machine"
 }

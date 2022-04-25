@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "technology",
+  "defaultSectorId": "other-services",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -30,9 +30,9 @@
       "task": "get-insurance"
     }
   ],
-  "name": "IT Consultant",
+  "name": "Courier Service",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "tech support, information technology, tech services, technical services",
-  "id": "it-consultant",
-  "description": "Offers system maintenance, configuration, and troubleshooting services"
+  "additionalSearchTerms": "messenger service, same day delivery service",
+  "id": "courier",
+  "description": "Offers message and package delivery services"
 }

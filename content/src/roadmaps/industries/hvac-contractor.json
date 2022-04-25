@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "technology",
+  "defaultSectorId": "professional-scientific-and-technical-services",
   "canBeReseller": true,
   "roadmapSteps": [
     {
@@ -28,11 +28,16 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 10,
+      "task": "search-licenses"
     }
   ],
-  "name": "IT Consultant",
+  "name": "HVAC Contractor",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "tech support, information technology, tech services, technical services",
-  "id": "it-consultant",
-  "description": "Offers system maintenance, configuration, and troubleshooting services"
+  "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R",
+  "id": "hvac-contractor",
+  "description": "Provides installation, maintenance, and repair services to Heating Ventilation, AC, and Refrigeration systems (HVACR)"
 }
