@@ -28,7 +28,7 @@ You or any staff providing HVACR services must be licensed as an HVACR Contracto
 ### Application Needs
 
 * College transcripts, or signed and sealed training certifications (depending on your education path)
-* W2s for every year of work experience up to 3 years
+* W2s for every year of work experience for up to 3 years
 
   \* Copy of Certificate of Insurance showing the purchase of a $3,000 `surety bond|surety-bond` and a minimum of $500,000 in liability insurance
 * Detailed information and police records if you answered “yes” to any of the questions related to moral character and criminal background
