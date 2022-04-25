@@ -291,6 +291,7 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
       const industry = LookupIndustryById("e-commerce");
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
       const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
+      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : false;
       const legalStructureId = "general-partnership";
       const townDisplayName = "Absecon";
 
@@ -299,6 +300,7 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
         homeBasedQuestion,
         liquorLicenseQuestion,
         legalStructureId,
+        requiresCpa,
         townDisplayName,
       });
 
@@ -318,6 +320,7 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
           const industry = LookupIndustryById("cosmetology");
           const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
           const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
+          const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : false;
           const legalStructureId = "general-partnership";
           const townDisplayName = "Absecon";
 
@@ -326,6 +329,7 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
             homeBasedQuestion,
             liquorLicenseQuestion,
             legalStructureId,
+            requiresCpa,
             townDisplayName,
           });
           onRoadmapPage.clickRoadmapTask(slug);

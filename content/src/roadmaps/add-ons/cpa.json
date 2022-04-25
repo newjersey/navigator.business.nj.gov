@@ -1,0 +1,15 @@
+{
+  "roadmapSteps": [
+    {
+      "step": 4,
+      "weight": 50,
+      "task": "license-accounting"
+    },
+    {
+      "step": 4,
+      "weight": 51,
+      "task": "register-firm-accounting"
+    }
+  ],
+  "modifications": []
+}

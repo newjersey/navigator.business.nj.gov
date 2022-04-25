@@ -123,6 +123,18 @@ describe("buildUserRoadmap", () => {
     };
   });
 
+  describe("cpa", () => {
+    it("adds cpa add-on and modification if is true", async () => {
+      await buildUserRoadmap(generateProfileData({ requiresCpa: true }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("cpa");
+    });
+
+    it("does not add liquor-license add-on and modification if is true", async () => {
+      await buildUserRoadmap(generateProfileData({ requiresCpa: false }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("cpa");
+    });
+  });
+
   describe("liquor license", () => {
     it("adds liquor-license add-on and modification if is true", async () => {
       await buildUserRoadmap(generateProfileData({ liquorLicense: true }));

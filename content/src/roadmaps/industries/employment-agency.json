@@ -42,6 +42,7 @@
   ],
   "name": "Employment Agency",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",
   "id": "employment-agency",
   "description": "A business that finds employment for a job seeker and employees for employers"

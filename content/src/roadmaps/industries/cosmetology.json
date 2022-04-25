@@ -42,6 +42,7 @@
   ],
   "name": "Cosmetology",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "modifications": [
     {
       "taskToReplaceFilename": "check-site-requirements",

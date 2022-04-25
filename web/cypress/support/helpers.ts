@@ -92,6 +92,7 @@ interface startingOnboardingData {
   townDisplayName: string | undefined;
   homeBasedQuestion: boolean | undefined;
   liquorLicenseQuestion: boolean | undefined;
+  requiresCpa: boolean | undefined;
 }
 
 export const completeNewBusinessOnboarding = ({
@@ -100,6 +101,7 @@ export const completeNewBusinessOnboarding = ({
   townDisplayName,
   homeBasedQuestion,
   liquorLicenseQuestion,
+  requiresCpa,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = true,
@@ -126,6 +128,15 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.getLiquorLicense(liquorLicenseQuestion).should("be.checked");
     onOnboardingPage.getLiquorLicense(!liquorLicenseQuestion).should("not.be.checked");
   }
+
+  if (requiresCpa === undefined) {
+    onOnboardingPage.getCpa().should("not.exist");
+  } else {
+    onOnboardingPage.selectCpa(requiresCpa);
+    onOnboardingPage.getCpa(requiresCpa).should("be.checked");
+    onOnboardingPage.getCpa(!requiresCpa).should("not.be.checked");
+  }
+
   onOnboardingPage.clickNext();
 
   cy.url().should("include", "onboarding?page=3");

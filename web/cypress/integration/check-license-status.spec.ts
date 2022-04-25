@@ -11,6 +11,7 @@ describe("check license status [feature] [all] [group1]", () => {
     const industry = LookupIndustryById("home-contractor");
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
     const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
+    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : false;
     const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
 
@@ -18,6 +19,7 @@ describe("check license status [feature] [all] [group1]", () => {
       industry,
       homeBasedQuestion,
       liquorLicenseQuestion,
+      requiresCpa,
       legalStructureId,
       townDisplayName,
     });

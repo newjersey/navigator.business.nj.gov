@@ -32,6 +32,7 @@
   ],
   "name": "Cleaning Service",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "cleaning lady,housekeeping,house cleaner,maid service,maid,cleaning company,cleaning crew",
   "id": "cleaning-aid",
   "description": "Providing commercial or residential cleaning services"

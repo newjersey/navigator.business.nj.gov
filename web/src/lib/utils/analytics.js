@@ -369,6 +369,13 @@ export default {
         },
       },
     },
+    onboarding_cpa_question: {
+      submit: {
+        yes: () => {
+          sendEvent("onboarding_cpa_question", "submit", "yes");
+        },
+      },
+    },
     business_formation_success_screen: {
       arrive: {
         arrive_from_NIC_formation_processing: () => {

@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
 import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
@@ -18,6 +18,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
     const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
+    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
@@ -25,6 +26,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       liquorLicenseQuestion,
       legalStructureId,
       townDisplayName,
+      requiresCpa,
     });
 
     // check roadmap
@@ -132,6 +134,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
     const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
+    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
@@ -139,6 +142,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       liquorLicenseQuestion,
       legalStructureId,
       townDisplayName,
+      requiresCpa,
     });
 
     // roadmap

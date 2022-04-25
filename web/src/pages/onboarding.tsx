@@ -249,6 +249,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         industryId: profileData.hasExistingBusiness === true ? "generic" : undefined,
         homeBasedBusiness: profileData.homeBasedBusiness,
         liquorLicense: profileData.liquorLicense,
+        requiresCpa: profileData.requiresCpa,
         municipality: profileData.municipality,
         hasExistingBusiness: profileData.hasExistingBusiness,
         legalStructureId: profileData.legalStructureId,

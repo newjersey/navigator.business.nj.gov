@@ -42,6 +42,7 @@
   ],
   "name": "Massage Therapy",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "Masseuse, Spa, Spa services",
   "id": "massage-therapy",
   "licenseType": "Massage and Bodywork Therapy",

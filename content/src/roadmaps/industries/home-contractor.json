@@ -47,6 +47,7 @@
   ],
   "name": "Home Improvement Contractor",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "renovation, home renovation",
   "id": "home-contractor",
   "licenseType": "Home Improvement Contractors",

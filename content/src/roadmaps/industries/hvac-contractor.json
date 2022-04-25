@@ -37,6 +37,7 @@
   ],
   "name": "HVAC Contractor",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R",
   "id": "hvac-contractor",
   "description": "Provides installation, maintenance, and repair services to Heating Ventilation, AC, and Refrigeration systems (HVACR)"
