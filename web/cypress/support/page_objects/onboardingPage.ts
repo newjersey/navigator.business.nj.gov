@@ -10,6 +10,10 @@ export class OnboardingPage {
     return cy.get("#businessName");
   }
 
+  getCpa(radio?: boolean) {
+    return cy.get(`input[name="cpa"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
   getIndustryDropdown() {
     return cy.get('[data-testid="industryid"]');
   }
@@ -68,6 +72,10 @@ export class OnboardingPage {
 
   typeNumberOfEmployees(number: string) {
     return this.getNumberOfEmployees().clear().type(number);
+  }
+
+  selectCpa(radio: boolean) {
+    this.getCpa(radio).check();
   }
 
   selectIndustry(industry: string) {

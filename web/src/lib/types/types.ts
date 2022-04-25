@@ -48,6 +48,7 @@ export interface IndustryFieldContent extends TextFieldContent {
   specificEmploymentAgencyMd: string;
   specificLiquorQuestion: RadioFieldContent;
   specificCannabisLicenseQuestion: CannabisRadioFieldContent;
+  specificCpaQuestion: RadioFieldContent;
 }
 
 export type StartingFlowContent = {
@@ -272,6 +273,11 @@ export const emptyStartingFlowContent: StartingFlowContent = {
       radioButtonAnnualText: "",
       radioButtonConditionalText: "",
     },
+    specificCpaQuestion: {
+      contentMd: "",
+      radioButtonYesText: "",
+      radioButtonNoText: "",
+    },
   },
 };
 
@@ -334,6 +340,11 @@ export const emptyProfileContent: ProfileContent = {
       contentMd: "",
       radioButtonAnnualText: "",
       radioButtonConditionalText: "",
+    },
+    specificCpaQuestion: {
+      contentMd: "",
+      radioButtonYesText: "",
+      radioButtonNoText: "",
     },
   },
 };

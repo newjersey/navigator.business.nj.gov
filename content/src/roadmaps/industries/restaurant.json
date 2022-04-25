@@ -42,6 +42,7 @@
   ],
   "name": "Restaurant",
   "isLiquorLicenseApplicable": true,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "cafe, grill",
   "id": "restaurant",
   "description": "Provides food to patrons"

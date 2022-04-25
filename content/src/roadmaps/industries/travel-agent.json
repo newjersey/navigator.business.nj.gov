@@ -32,6 +32,7 @@
   ],
   "name": "Travel Agency",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "home-based travel agent",
   "id": "travel-agent",
   "description": "Coordinates the details of transportation, itinerary and accommodations for travelers"

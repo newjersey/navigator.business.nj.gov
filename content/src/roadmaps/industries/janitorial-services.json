@@ -32,6 +32,7 @@
   ],
   "name": "Janitorial Services",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "commercial cleaning service",
   "id": "janitorial-services",
   "description": "Commercial or residential property cleaning, maintenance, and management services"

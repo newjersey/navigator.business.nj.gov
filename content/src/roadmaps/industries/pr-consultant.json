@@ -32,6 +32,7 @@
   ],
   "name": "PR Consulting",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "Image management, consultant, advertising, communications, media",
   "id": "pr-consultant",
   "description": "Offers services that communicate the mission and image of a business to the public"

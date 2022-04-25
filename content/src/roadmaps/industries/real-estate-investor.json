@@ -32,6 +32,7 @@
   ],
   "name": "Real Estate Investor",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "investor, property investor",
   "id": "real-estate-investor",
   "description": "Buys properties to rent or re-sell"

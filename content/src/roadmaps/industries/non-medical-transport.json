@@ -47,6 +47,7 @@
   ],
   "name": "Non-Medical Transport",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "transportation service,non-emergency transportation",
   "id": "non-medical-transport",
   "description": "The transportation of an individual with medical needs"

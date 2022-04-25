@@ -119,6 +119,7 @@ export const generateProfileData = (
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
     liquorLicense: false,
+    requiresCpa: false,
     homeBasedBusiness: false,
     cannabisLicenseType: undefined,
     cannabisMicrobusiness: undefined,

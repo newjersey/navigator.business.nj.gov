@@ -14,6 +14,7 @@ export interface ProfileData {
   legalStructureId: string | undefined;
   municipality: Municipality | undefined;
   liquorLicense: boolean;
+  requiresCpa: boolean;
   homeBasedBusiness: boolean;
   cannabisLicenseType: CannabisLicenseType;
   cannabisMicrobusiness: boolean | undefined;
@@ -38,6 +39,7 @@ export const emptyProfileData: ProfileData = {
   legalStructureId: undefined,
   municipality: undefined,
   liquorLicense: false,
+  requiresCpa: false,
   homeBasedBusiness: false,
   cannabisLicenseType: undefined,
   cannabisMicrobusiness: undefined,

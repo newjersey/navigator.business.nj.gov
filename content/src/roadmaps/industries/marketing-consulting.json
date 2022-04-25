@@ -32,6 +32,7 @@
   ],
   "name": "Marketing Consulting",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "marketing, advertising, consultant, press, communications",
   "id": "marketing-consulting",
   "description": "Expert advice to improve the client’s business exposure"

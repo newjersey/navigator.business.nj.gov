@@ -25,6 +25,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
     const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
+    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
@@ -32,6 +33,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       liquorLicenseQuestion,
       legalStructureId,
       townDisplayName,
+      requiresCpa,
     });
 
     // check roadmap
@@ -136,6 +138,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
     const legalStructureId = "general-partnership";
     const townDisplayName = "Absecon";
+    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
@@ -143,6 +146,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       liquorLicenseQuestion,
       legalStructureId,
       townDisplayName,
+      requiresCpa,
     });
 
     // roadmap
@@ -162,6 +166,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
     const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
     const townDisplayName = "Absecon";
+    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     cy.intercept("POST", "/local/api/users", (req) => req.continue()).as("new-user");
 
@@ -171,6 +176,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
       liquorLicenseQuestion,
       legalStructureId,
       townDisplayName,
+      requiresCpa,
     });
 
     cy.wait("@new-user").then((event) => {

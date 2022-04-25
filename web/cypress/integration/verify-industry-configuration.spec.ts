@@ -13,6 +13,7 @@ describe("Roadmap [all] [group4]", () => {
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = undefined;
 
@@ -20,6 +21,7 @@ describe("Roadmap [all] [group4]", () => {
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
+        requiresCpa,
         legalStructureId,
         townDisplayName,
       });

@@ -19,6 +19,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
       homeBasedQuestion: false,
       liquorLicenseQuestion: undefined,
       townDisplayName,
+      requiresCpa: undefined,
       legalStructureId,
       isContactMeChecked: true,
     });

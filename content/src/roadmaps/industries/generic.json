@@ -32,6 +32,7 @@
   ],
   "name": "Any Other Business Type",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "id": "generic",
   "description": "Select this if you don’t see your specific industry"
 }

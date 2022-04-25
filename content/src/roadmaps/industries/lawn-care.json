@@ -32,6 +32,7 @@
   ],
   "name": "Lawn Care",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "lawn maintenance, lawn mowing, yard maintenance",
   "id": "lawn-care",
   "description": "Offers lawn maintenance services"

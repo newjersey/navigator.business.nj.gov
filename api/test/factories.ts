@@ -81,6 +81,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
     liquorLicense: false,
+    requiresCpa: false,
     homeBasedBusiness: false,
     cannabisLicenseType: undefined,
     cannabisMicrobusiness: undefined,
