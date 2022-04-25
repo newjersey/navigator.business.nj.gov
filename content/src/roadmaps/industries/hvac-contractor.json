@@ -30,14 +30,9 @@
       "task": "hvac-insurance-surety-bond"
     },
     {
-      "step": 2,
+      "step": 3,
       "weight": 18,
       "task": "hvac-license"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "task": "search-licenses"
     }
   ],
   "name": "HVAC Contractor",
