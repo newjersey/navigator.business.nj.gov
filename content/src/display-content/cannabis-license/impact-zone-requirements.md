@@ -1,0 +1,1 @@
+- []{cannabis-impact-zone} Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis`

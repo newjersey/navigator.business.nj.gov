@@ -432,5 +432,22 @@ export default {
         },
       },
     },
+    cannabis_license_form_microbusiness_question: {
+      submit: {
+        yes_I_m_a_microbusiness: () => {
+          sendEvent("cannabis_license_form_microbusiness_question", "submit", "yes_I_m_a_microbusiness");
+        },
+        no_I_m_a_standard_business: () => {
+          sendEvent("cannabis_license_form_microbusiness_question", "submit", "no_I_m_a_standard_business");
+        },
+      },
+    },
+    cannabis_license_form: {
+      click: {
+        view_requirements: () => {
+          sendEvent("cannabis_license_form", "click", "view_requirements");
+        },
+      },
+    },
   },
 };

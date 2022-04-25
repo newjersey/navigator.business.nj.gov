@@ -111,7 +111,6 @@ export const generateProfileData = (
   isMobileLocation?: boolean
 ): ProfileData => {
   const id = `some-id-${randomInt()}`;
-  //console.log(getCurrentDateFormatted("YYYY-MM-DD"));
   return {
     hasExistingBusiness: false,
     initialOnboardingFlow: "STARTING",
@@ -122,6 +121,7 @@ export const generateProfileData = (
     liquorLicense: false,
     homeBasedBusiness: false,
     cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
     constructionRenovationPlan: undefined,
     dateOfFormation: getCurrentDateFormatted("YYYY-MM-DD"),
     entityId: randomInt(10).toString(),

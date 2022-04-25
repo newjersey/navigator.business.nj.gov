@@ -595,6 +595,42 @@ collections:
                   name: greenBoxSocialEquityText,
                   widget: string,
                 }
+          - label: Cannabis Apply For License
+            name: cannabisApplyForLicense
+            collapsed: true
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - { label: Application Questions Text, name: applicationQuestionsText, widget: string }
+              - { label: Business Size Header, name: businessSizeHeader, widget: string }
+              - { label: Microbusiness Radio Question, name: microbusinessRadioQuestion, widget: string }
+              - { label: Microbusiness Radio Yes, name: microbusinessRadioYes, widget: string }
+              - { label: Microbusiness Radio No, name: microbusinessRadioNo, widget: string }
+              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
+              - { label: Priority Status Text, name: priorityStatusText, widget: string }
+              - { label: Diversely Owned Label, name: diverselyOwnedLabel, widget: string }
+              - { label: Diversely Owned Helper Text, name: diverselyOwnedHelperText, widget: string }
+              - { label: Impact Zone Label, name: impactZoneLabel, widget: string }
+              - { label: SBE Label, name: sbeLabel, widget: string }
+              - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
+              - { label: Eligible Modal Body, name: eligibleModalBody, widget: string }
+              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
+              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
+              - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
+              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
+              - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
+              - {
+                  label: Microbusiness Application Needs,
+                  name: microbusinessApplicationNeeds,
+                  widget: string,
+                }
+              - {
+                  label: Priority Status Application Needs,
+                  name: priorityStatusApplicationNeeds,
+                  widget: string,
+                }
+              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
+              - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
           - label: Dashboard Defaults
             name: dashboardDefaults
             collapsed: true

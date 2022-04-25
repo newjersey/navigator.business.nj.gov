@@ -16,6 +16,7 @@ export interface ProfileData {
   liquorLicense: boolean;
   homeBasedBusiness: boolean;
   cannabisLicenseType: CannabisLicenseType;
+  cannabisMicrobusiness: boolean | undefined;
   constructionRenovationPlan: boolean | undefined;
   dateOfFormation: string | undefined;
   entityId: string | undefined;
@@ -39,6 +40,7 @@ export const emptyProfileData: ProfileData = {
   liquorLicense: false,
   homeBasedBusiness: false,
   cannabisLicenseType: undefined,
+  cannabisMicrobusiness: undefined,
   constructionRenovationPlan: undefined,
   dateOfFormation: undefined,
   entityId: undefined,

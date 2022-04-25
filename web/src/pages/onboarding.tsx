@@ -253,6 +253,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         hasExistingBusiness: profileData.hasExistingBusiness,
         legalStructureId: profileData.legalStructureId,
         cannabisLicenseType: undefined,
+        cannabisMicrobusiness: undefined,
         dateOfFormation: undefined,
         entityId: undefined,
         constructionRenovationPlan: undefined,

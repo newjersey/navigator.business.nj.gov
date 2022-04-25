@@ -15,3 +15,4 @@ export const priorityTypesObj: Record<PriorityType, string[]> = {
 export const noneOfTheAbovePriorityId = "cannabis-priority-status-none";
 
 export type PriorityType = "minorityOrWomen" | "veteran" | "impactZone" | "socialEquity";
+export type PriorityApplicationType = "diverselyOwned" | "impactZone" | "socialEquity";
