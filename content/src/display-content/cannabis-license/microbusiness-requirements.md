@@ -1,0 +1,1 @@
+- []{cannabis-microbusiness} A completed attestation (provided in your online application) that the business will comply with the `requirements for a microbusinesses|microbusiness-cannabis`

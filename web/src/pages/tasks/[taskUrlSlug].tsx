@@ -7,7 +7,8 @@ import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormation } from "@/components/tasks/BusinessFormation";
-import { CannabisPriorityStatus } from "@/components/tasks/cannabis/CannabisPriorityStatus";
+import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
+import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -49,12 +50,12 @@ const TaskPage = (props: Props): ReactElement => {
 
   const nextAndPreviousButtons = (): ReactElement => (
     <div
-      className={`flex ${isTabletAndUp ? "flex-row" : "flex-column"} margin-top-2 padding-right-1`}
+      className={`flex ${isTabletAndUp ? "flex-row padding-right-1" : "flex-column"} margin-top-2 `}
       data-testid="nextAndPreviousButtons"
     >
       <button
         className={`${
-          isTabletAndUp ? "" : "margin-bottom-2"
+          isTabletAndUp ? "" : "margin-bottom-2 margin-right-0"
         } flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105`}
         style={{ visibility: previousUrlSlug ? "visible" : "hidden" }}
         onClick={() => router.push(`/tasks/${previousUrlSlug}`)}
@@ -66,7 +67,9 @@ const TaskPage = (props: Props): ReactElement => {
         </div>
       </button>
       <button
-        className="flex-half usa-button usa-button--outline padding-y-105"
+        className={`flex-half usa-button usa-button--outline padding-y-105 ${
+          isTabletAndUp ? "" : "margin-right-0"
+        }`}
         style={{ visibility: nextUrlSlug ? "visible" : "hidden" }}
         onClick={() => router.push(`/tasks/${nextUrlSlug}`)}
       >
@@ -123,9 +126,21 @@ const TaskPage = (props: Props): ReactElement => {
             "license-massage-therapy": <LicenseTask task={props.task} />,
             "form-business-entity": businessFormationFeatureFlag(),
             "priority-status-cannabis": (
-              <CannabisPriorityStatus
+              <CannabisPriorityStatusTask
                 task={props.task}
                 displayContent={props.displayContent.cannabisPriorityStatusDisplayContent}
+              />
+            ),
+            "conditional-permit-cannabis": (
+              <CannabisApplyForLicenseTask
+                task={props.task}
+                displayContent={props.displayContent.cannabisApplyForLicenseDisplayContent}
+              />
+            ),
+            "annual-license-cannabis": (
+              <CannabisApplyForLicenseTask
+                task={props.task}
+                displayContent={props.displayContent.cannabisApplyForLicenseDisplayContent}
               />
             ),
             default: getTaskBody(),

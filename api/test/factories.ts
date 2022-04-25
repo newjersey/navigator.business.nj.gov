@@ -83,6 +83,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     liquorLicense: false,
     homeBasedBusiness: false,
     cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
     constructionRenovationPlan: undefined,
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),

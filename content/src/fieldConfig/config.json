@@ -457,5 +457,29 @@
     "greenBoxMinorityOrWomenText": "A Minority/Women-owned Business Enterprise certificate",
     "greenBoxVeteranText": "A Veteran-Owned Business certification",
     "greenBoxSocialEquityText": "A completed Social Equity Business form"
+  },
+  "cannabisApplyForLicense": {
+    "applicationQuestionsText": "Answer the two questions below to see your application requirements on the following page.",
+    "businessSizeHeader": "Business Size",
+    "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
+    "microbusinessRadioYes": " Yes, I'm a microbusiness",
+    "microbusinessRadioNo": "No, I'm a `standard business|standard-business-cannabis`",
+    "priorityStatusHeader": "Priority Status",
+    "priorityStatusText": "Based on your preferences in [Determine if You Are Eligible for Priority Status](/tasks/priority-status-cannabis), you are eligible as the following:",
+    "diverselyOwnedLabel": "`Diversely-owned business|diversely-owned-business-cannabis`",
+    "diverselyOwnedHelperText": "You are seeing this based on your [priority status](/tasks/priority-status-cannabis) selection as a Minority/Women Owned Business Enterprise / Veteran Owned Business.",
+    "impactZoneLabel": "`Impact zone business|impact-zone-business-cannabis`",
+    "sbeLabel": "`Social equity business (SBE)|social-equity-business-cannabis`",
+    "eligibleModalTitle": "Make sure you’re eligible first",
+    "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before proceeding.",
+    "eligibleModalContinueButton": "I am eligible",
+    "eligibleModalCancelButton": "I'm not sure",
+    "viewRequirementsButton": "View Requirements",
+    "applicationNeedsHeader": "Application Needs",
+    "generalApplicationNeeds": "General",
+    "microbusinessApplicationNeeds": "Microbusiness Application Needs",
+    "priorityStatusApplicationNeeds": "Priority Status Application Needs",
+    "applicationPageHelperText": "Cannabis licenses are reviewed on an ongoing basis and you can apply at any time.",
+    "backToFirstTabButton": "Back"
   }
 }

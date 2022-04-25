@@ -101,11 +101,22 @@ export interface LoadDisplayContent
   STARTING: StartingFlowContent;
   PROFILE: Partial<ProfileContent>;
 }
+
 export type CannabisPriorityStatusDisplayContent = {
   cannabisSocialEquityBusiness: { contentMd: string };
   genericMinorityAndWomenOwned: { contentMd: string };
   genericVeteranOwned: { contentMd: string };
 };
+
+export type CannabisApplyForLicenseDisplayContent = {
+  annualGeneralRequirements: { contentMd: string };
+  conditionalGeneralRequirements: { contentMd: string };
+  diverselyOwnedRequirements: { contentMd: string };
+  impactZoneRequirements: { contentMd: string };
+  microbusinessRequirements: { contentMd: string };
+  socialEquityRequirements: { contentMd: string };
+};
+
 export type FormationDisplayContent = {
   introParagraph: { contentMd: string };
   businessNameCheck: { contentMd: string };
@@ -143,6 +154,7 @@ export type FormationDisplayContent = {
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
   formationDisplayContent: createEmptyFormationDisplayContent(),
   cannabisPriorityStatusDisplayContent: createEmptyCannabisPriorityStatusDisplayContent(),
+  cannabisApplyForLicenseDisplayContent: createEmptyCannabisApplyForLicenseDisplayContent(),
 });
 
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
@@ -158,6 +170,16 @@ export const createEmptyCannabisPriorityStatusDisplayContent = (): CannabisPrior
     contentMd: "",
   },
 });
+
+export const createEmptyCannabisApplyForLicenseDisplayContent =
+  (): CannabisApplyForLicenseDisplayContent => ({
+    annualGeneralRequirements: { contentMd: "" },
+    conditionalGeneralRequirements: { contentMd: "" },
+    diverselyOwnedRequirements: { contentMd: "" },
+    impactZoneRequirements: { contentMd: "" },
+    microbusinessRequirements: { contentMd: "" },
+    socialEquityRequirements: { contentMd: "" },
+  });
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
   introParagraph: {
@@ -527,6 +549,7 @@ export type County =
 export type TasksDisplayContent = {
   formationDisplayContent: FormationDisplayContent;
   cannabisPriorityStatusDisplayContent: CannabisPriorityStatusDisplayContent;
+  cannabisApplyForLicenseDisplayContent: CannabisApplyForLicenseDisplayContent;
 };
 
 export interface Roadmap {

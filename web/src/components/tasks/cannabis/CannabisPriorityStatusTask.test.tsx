@@ -1,4 +1,4 @@
-import { CannabisPriorityStatus } from "@/components/tasks/cannabis/CannabisPriorityStatus";
+import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { CannabisPriorityStatusDisplayContent, Task } from "@/lib/types/types";
@@ -31,7 +31,7 @@ const renderPage = (
   return render(
     withAuthAlert(
       <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
-        <CannabisPriorityStatus
+        <CannabisPriorityStatusTask
           task={task}
           displayContent={generateCannabisPriorityStatusDisplayContent(displayContent ? displayContent : {})}
         />
@@ -41,7 +41,7 @@ const renderPage = (
   );
 };
 
-describe("<CannabisPriorityStatus />", () => {
+describe("<CannabisPriorityStatusTask />", () => {
   let subject: RenderResult;
   const allPriorityTypes = [
     ...priorityTypesObj.minorityOrWomen,

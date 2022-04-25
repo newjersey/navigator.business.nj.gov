@@ -535,7 +535,7 @@ describe("task page", () => {
     });
   });
 
-  it("does not render next and prevous buttons when legal structure is LLC and form-business-entity task is rendered", () => {
+  it("does not render next and previous buttons when legal structure is LLC and form-business-entity task is rendered", () => {
     subject = renderPage(
       generateTask({ id: "form-business-entity" }),
       generateUserData({

@@ -14,7 +14,7 @@ interface Props {
   displayContent: CannabisPriorityStatusDisplayContent;
 }
 
-export const CannabisPriorityStatus = (props: Props) => {
+export const CannabisPriorityStatusTask = (props: Props) => {
   const { userData, update } = useUserData();
   const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);

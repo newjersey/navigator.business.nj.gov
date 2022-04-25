@@ -19,7 +19,7 @@ export const ToastAlert = (props: Props): ReactElement => (
     anchorOrigin={{ vertical: "top", horizontal: "center" }}
     open={props.isOpen}
     onClose={props.close}
-    autoHideDuration={props.autoHideDuration !== null ? 3000 : null}
+    autoHideDuration={props.autoHideDuration !== null ? 5000 : null}
     disableWindowBlurListener={true}
     ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
     {...props.snackBarProps}
