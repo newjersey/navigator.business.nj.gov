@@ -60,7 +60,8 @@
     "Passaic",
     "Hunterdon",
     "fundings",
-    "newjersey"
+    "newjersey",
+    "HVACR"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
