@@ -1,9 +1,11 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { CannabisApplyForLicenseDisplayContent, Task } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -28,39 +30,79 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         <hr className="margin-y-3" />
         {props.task.id === "annual-license-cannabis" && (
           <div className="margin-top-2">
-            <h3 className="text-normal">{Config.cannabisApplyForLicense.generalApplicationNeeds}</h3>
-            <Content>{props.displayContent.annualGeneralRequirements.contentMd}</Content>
+            <Accordion elevation={0} defaultExpanded={true}>
+              <AccordionSummary
+                aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
+                expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
+              >
+                <h3 className="text-normal">{Config.cannabisApplyForLicense.generalApplicationNeeds}</h3>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Content>{props.displayContent.annualGeneralRequirements.contentMd}</Content>
+              </AccordionDetails>
+            </Accordion>
           </div>
         )}
         {props.task.id === "conditional-permit-cannabis" && (
           <div className="margin-top-2">
-            <h3 className="text-normal">{Config.cannabisApplyForLicense.generalApplicationNeeds}</h3>
-            <Content>{props.displayContent.conditionalGeneralRequirements.contentMd}</Content>
+            <Accordion elevation={0} defaultExpanded={true}>
+              <AccordionSummary
+                aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
+                expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
+              >
+                <h3 className="text-normal">{Config.cannabisApplyForLicense.generalApplicationNeeds}</h3>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Content>{props.displayContent.conditionalGeneralRequirements.contentMd}</Content>
+              </AccordionDetails>
+            </Accordion>
           </div>
         )}
         {userData?.profileData.cannabisMicrobusiness && (
           <div className="margin-top-2">
             <hr className="margin-y-3" />
-            <h3 className="text-normal">{Config.cannabisApplyForLicense.microbusinessApplicationNeeds}</h3>
-            <Content>{props.displayContent.microbusinessRequirements.contentMd}</Content>
+            <Accordion elevation={0} defaultExpanded={false}>
+              <AccordionSummary
+                aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
+                expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
+              >
+                <h3 className="text-normal">
+                  {Config.cannabisApplyForLicense.microbusinessApplicationNeeds}
+                </h3>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Content>{props.displayContent.microbusinessRequirements.contentMd}</Content>
+              </AccordionDetails>
+            </Accordion>
           </div>
         )}
         {hasPriorityStatus && (
           <div className="margin-top-2">
             <hr className="margin-y-3" />
-            <h3 className="text-normal">{Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}</h3>
-            {props.priorityStatusState.diverselyOwned && (
-              <Content>{props.displayContent.diverselyOwnedRequirements.contentMd}</Content>
-            )}
-            {props.priorityStatusState.impactZone && (
-              <Content>{props.displayContent.impactZoneRequirements.contentMd}</Content>
-            )}
-            {props.priorityStatusState.socialEquity && (
-              <Content>{props.displayContent.socialEquityRequirements.contentMd}</Content>
-            )}
+            <Accordion elevation={0} defaultExpanded={false}>
+              <AccordionSummary
+                aria-controls={`${Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}-content`}
+                expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
+              >
+                <h3 className="text-normal">
+                  {Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}
+                </h3>
+              </AccordionSummary>
+              <AccordionDetails>
+                {props.priorityStatusState.diverselyOwned && (
+                  <Content>{props.displayContent.diverselyOwnedRequirements.contentMd}</Content>
+                )}
+                {props.priorityStatusState.impactZone && (
+                  <Content>{props.displayContent.impactZoneRequirements.contentMd}</Content>
+                )}
+                {props.priorityStatusState.socialEquity && (
+                  <Content>{props.displayContent.socialEquityRequirements.contentMd}</Content>
+                )}
+              </AccordionDetails>
+            </Accordion>
           </div>
         )}
-        <hr className="margin-y-4" />
+        <hr className="margin-top-3 margin-bottom-4" />
         <Content>{props.task.contentMd}</Content>
       </div>
 
