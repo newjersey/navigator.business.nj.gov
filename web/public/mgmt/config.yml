@@ -608,6 +608,11 @@ collections:
               - { label: Microbusiness Radio No, name: microbusinessRadioNo, widget: string }
               - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
               - { label: Priority Status Text, name: priorityStatusText, widget: string }
+              - {
+                  label: Priority Status None Selected Text,
+                  name: priorityStatusNoneSelectedText,
+                  widget: string,
+                }
               - { label: Diversely Owned Label, name: diverselyOwnedLabel, widget: string }
               - { label: Diversely Owned Helper Text, name: diverselyOwnedHelperText, widget: string }
               - { label: Impact Zone Label, name: impactZoneLabel, widget: string }

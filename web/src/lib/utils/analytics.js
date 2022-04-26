@@ -456,5 +456,38 @@ export default {
         },
       },
     },
+    cannabis_license_form_priority_status_diversity_checkbox: {
+      submit: {
+        diversely_owned_business: () => {
+          sendEvent(
+            "cannabis_license_form_priority_status_diversity_checkbox",
+            "submit",
+            "diversely_owned_business"
+          );
+        },
+      },
+    },
+    cannabis_license_form_priority_status_impact_checkbox: {
+      submit: {
+        impact_zone_business: () => {
+          sendEvent(
+            "cannabis_license_form_priority_status_impact_checkbox",
+            "submit",
+            "impact_zone_business"
+          );
+        },
+      },
+    },
+    cannabis_license_form_priority_status_social_equity_checkbox: {
+      submit: {
+        social_equity_business: () => {
+          sendEvent(
+            "cannabis_license_form_priority_status_social_equity_checkbox",
+            "submit",
+            "social_equity_business"
+          );
+        },
+      },
+    },
   },
 };

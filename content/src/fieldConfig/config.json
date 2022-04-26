@@ -466,6 +466,7 @@
     "microbusinessRadioNo": "No, I'm a `standard business|standard-business-cannabis`",
     "priorityStatusHeader": "Priority Status",
     "priorityStatusText": "Based on your preferences in [Determine if You Are Eligible for Priority Status](/tasks/priority-status-cannabis), you are eligible as the following:",
+    "priorityStatusNoneSelectedText": "You did not select any [priority status designations](/tasks/priority-status-cannabis).",
     "diverselyOwnedLabel": "`Diversely-owned business|diversely-owned-business-cannabis`",
     "diverselyOwnedHelperText": "You are seeing this based on your [priority status](/tasks/priority-status-cannabis) selection as a Minority/Women Owned Business Enterprise / Veteran Owned Business.",
     "impactZoneLabel": "`Impact zone business|impact-zone-business-cannabis`",

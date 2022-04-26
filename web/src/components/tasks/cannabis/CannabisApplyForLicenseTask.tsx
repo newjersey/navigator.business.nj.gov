@@ -25,6 +25,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
     socialEquity: false,
     impactZone: false,
   });
+  const [noPriorityStatus, setNoPriorityStatus] = useState<boolean>(false);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -50,6 +51,12 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       impactZone: impactZonePriorityTypeSelected,
       socialEquity: socialEquityPriorityTypeSelected,
     });
+    setNoPriorityStatus(
+      !minorityOrWomenPriorityTypeSelected &&
+        !veteranPriorityTypeSelected &&
+        !impactZonePriorityTypeSelected &&
+        !socialEquityPriorityTypeSelected
+    );
   }, userData);
 
   const onCheckboxChange = (type: PriorityApplicationType, checked: boolean): void => {
@@ -64,11 +71,24 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
     scrollToTop();
   };
 
+  const sendNextTabButtonAnalytics = (): void => {
+    analytics.event.cannabis_license_form.click.view_requirements();
+    if (priorityStatusState.impactZone) {
+      analytics.event.cannabis_license_form_priority_status_impact_checkbox.submit.impact_zone_business();
+    }
+    if (priorityStatusState.socialEquity) {
+      analytics.event.cannabis_license_form_priority_status_social_equity_checkbox.submit.social_equity_business();
+    }
+    if (priorityStatusState.diverselyOwned) {
+      analytics.event.cannabis_license_form_priority_status_diversity_checkbox.submit.diversely_owned_business();
+    }
+  };
+
   const handleNextTabButtonClick = (): void => {
     if (!userData) return;
     setDisplayFirstTab(false);
     scrollToTop();
-    analytics.event.cannabis_license_form.click.view_requirements();
+    sendNextTabButtonAnalytics();
     if (
       userData.taskProgress[props.task.id] === undefined ||
       userData.taskProgress[props.task.id] === "NOT_STARTED"
@@ -96,6 +116,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
           onNextTab={handleNextTabButtonClick}
           priorityStatusState={priorityStatusState}
           onCheckboxChange={onCheckboxChange}
+          noPriorityStatus={noPriorityStatus}
         />
       ) : (
         <CannabisApplicationRequirementsTab
