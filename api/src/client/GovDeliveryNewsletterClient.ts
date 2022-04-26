@@ -34,7 +34,9 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
       })
       .then((response) => {
         config.logWriter.LogInfo(
-          `NewsletterResponse - GovDelivery - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
+          `NewsletterResponse - GovDelivery - Response Received. Status: ${response.status} : ${
+            response.statusText
+          }. Data: ${JSON.stringify(response.data)}`
         );
         let data: GovDeliveryResponse;
         let status: NewsletterStatus;
