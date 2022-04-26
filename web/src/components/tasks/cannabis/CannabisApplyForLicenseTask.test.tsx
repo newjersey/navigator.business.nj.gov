@@ -41,6 +41,11 @@ const renderPage = (
   );
 };
 
+const sbePriorityStatus = priorityTypesObj.socialEquity[0];
+const vetPriorityStatus = priorityTypesObj.veteran[0];
+const impactPriorityStatus = priorityTypesObj.impactZone[0];
+const minorityWomanPriorityStatus = priorityTypesObj.minorityOrWomen[0];
+
 describe("<CannabisApplyForLicenseTask />", () => {
   let subject: RenderResult;
 
@@ -76,8 +81,15 @@ describe("<CannabisApplyForLicenseTask />", () => {
     expect(currentUserData().profileData.cannabisMicrobusiness).toEqual(false);
   });
 
+  it("does not display Priority Status checkboxes if none checked", () => {
+    const initialUserData = generateUserData({ taskItemChecklist: {} });
+    subject = renderPage(generateTask({}), initialUserData);
+    expect(subject.queryByTestId("diversely-owned-checkbox")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("impact-zone-checkbox")).not.toBeInTheDocument();
+    expect(subject.queryByTestId("sbe-checkbox")).not.toBeInTheDocument();
+  });
+
   it("checks diversely-owned if user is minority/woman", () => {
-    const minorityWomanPriorityStatus = priorityTypesObj.minorityOrWomen[0];
     const initialUserData = generateUserData({
       taskItemChecklist: { [minorityWomanPriorityStatus]: true },
     });
@@ -88,7 +100,6 @@ describe("<CannabisApplyForLicenseTask />", () => {
   });
 
   it("checks diversely-owned if user is veteran", () => {
-    const vetPriorityStatus = priorityTypesObj.veteran[0];
     const initialUserData = generateUserData({
       taskItemChecklist: { [vetPriorityStatus]: true },
     });
@@ -99,7 +110,6 @@ describe("<CannabisApplyForLicenseTask />", () => {
   });
 
   it("checks impact-zone if user has impact-zone priority", () => {
-    const impactPriorityStatus = priorityTypesObj.impactZone[0];
     const initialUserData = generateUserData({
       taskItemChecklist: { [impactPriorityStatus]: true },
     });
@@ -110,7 +120,6 @@ describe("<CannabisApplyForLicenseTask />", () => {
   });
 
   it("checks sbe if user has sbe priority", () => {
-    const sbePriorityStatus = priorityTypesObj.socialEquity[0];
     const initialUserData = generateUserData({
       taskItemChecklist: { [sbePriorityStatus]: true },
     });
@@ -121,8 +130,6 @@ describe("<CannabisApplyForLicenseTask />", () => {
   });
 
   it("checks all priority status that apply", () => {
-    const sbePriorityStatus = priorityTypesObj.socialEquity[0];
-    const vetPriorityStatus = priorityTypesObj.veteran[0];
     const initialUserData = generateUserData({
       taskItemChecklist: {
         [sbePriorityStatus]: true,
@@ -136,7 +143,6 @@ describe("<CannabisApplyForLicenseTask />", () => {
   });
 
   it("lets user uncheck an checked priority status", () => {
-    const sbePriorityStatus = priorityTypesObj.socialEquity[0];
     const initialUserData = generateUserData({
       taskItemChecklist: {
         [sbePriorityStatus]: true,
@@ -149,9 +155,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
   });
 
   it("shows modal when user checks an unchecked priority status", () => {
-    const sbePriorityStatus = priorityTypesObj.socialEquity[0];
     const initialUserData = generateUserData({
       taskItemChecklist: {
+        [minorityWomanPriorityStatus]: true,
         [sbePriorityStatus]: false,
       },
     });
@@ -164,9 +170,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
   });
 
   it("keeps item unchecked when user cancels from modal", () => {
-    const sbePriorityStatus = priorityTypesObj.socialEquity[0];
     const initialUserData = generateUserData({
       taskItemChecklist: {
+        [minorityWomanPriorityStatus]: true,
         [sbePriorityStatus]: false,
       },
     });
@@ -260,9 +266,10 @@ describe("<CannabisApplyForLicenseTask />", () => {
     });
 
     it("shows requirements for diversely-owned when checkbox is checked", () => {
-      subject = renderPage(generateTask({}), generateUserData({}), displayContent);
-      fireEvent.click(getInputByTestId("diversely-owned-checkbox"));
-      fireEvent.click(subject.getByText(Config.cannabisApplyForLicense.eligibleModalContinueButton));
+      const initialUserData = generateUserData({
+        taskItemChecklist: { [minorityWomanPriorityStatus]: true },
+      });
+      subject = renderPage(generateTask({}), initialUserData, displayContent);
       fireEvent.click(subject.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
       expect(subject.queryByText(displayContent.diverselyOwnedRequirements.contentMd)).toBeInTheDocument();
@@ -271,9 +278,10 @@ describe("<CannabisApplyForLicenseTask />", () => {
     });
 
     it("shows requirements for SBE when checkbox is checked", () => {
-      subject = renderPage(generateTask({}), generateUserData({}), displayContent);
-      fireEvent.click(getInputByTestId("sbe-checkbox"));
-      fireEvent.click(subject.getByText(Config.cannabisApplyForLicense.eligibleModalContinueButton));
+      const initialUserData = generateUserData({
+        taskItemChecklist: { [sbePriorityStatus]: true },
+      });
+      subject = renderPage(generateTask({}), initialUserData, displayContent);
       fireEvent.click(subject.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
       expect(
@@ -283,10 +291,11 @@ describe("<CannabisApplyForLicenseTask />", () => {
       expect(subject.queryByText(displayContent.impactZoneRequirements.contentMd)).not.toBeInTheDocument();
     });
 
-    it("shows requirements for SBE when checkbox is checked", () => {
-      subject = renderPage(generateTask({}), generateUserData({}), displayContent);
-      fireEvent.click(getInputByTestId("impact-zone-checkbox"));
-      fireEvent.click(subject.getByText(Config.cannabisApplyForLicense.eligibleModalContinueButton));
+    it("shows requirements for impact zone when checkbox is checked", () => {
+      const initialUserData = generateUserData({
+        taskItemChecklist: { [impactPriorityStatus]: true },
+      });
+      subject = renderPage(generateTask({}), initialUserData, displayContent);
       fireEvent.click(subject.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
       expect(

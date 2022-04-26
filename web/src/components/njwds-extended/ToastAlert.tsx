@@ -12,6 +12,7 @@ interface Props {
   heading?: string;
   noIcon?: boolean;
   className?: string;
+  dataTestid?: string;
 }
 
 export const ToastAlert = (props: Props): ReactElement => (
@@ -32,8 +33,9 @@ export const ToastAlert = (props: Props): ReactElement => (
           variant={props.variant}
           noIcon={props.noIcon}
           rounded
+          dataTestid={props.dataTestid}
         >
-          {props.children}
+          <div className="padding-top-05">{props.children}</div>
         </Alert>
       </Paper>
     </div>

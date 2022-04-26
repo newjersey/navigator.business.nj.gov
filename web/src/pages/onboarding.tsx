@@ -402,12 +402,11 @@ const OnboardingPage = (props: Props): ReactElement => {
                 variant={OnboardingStatusLookup[alert].variant}
                 isOpen={alert !== undefined}
                 close={() => setAlert(undefined)}
+                dataTestid={`toast-alert-${alert}`}
+                heading={OnboardingStatusLookup[alert].header}
               >
-                <div data-testid={`toast-alert-${alert}`} className="h3-styling">
-                  {OnboardingStatusLookup[alert].header}
-                </div>
-                <div className="padding-top-05">
-                  {OnboardingStatusLookup[alert].body}{" "}
+                <>
+                  {OnboardingStatusLookup[alert].body}
                   {OnboardingStatusLookup[alert] && (
                     <Link href={redirectUrl}>
                       <a href={redirectUrl} data-testid={`toast-link`}>
@@ -415,7 +414,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                       </a>
                     </Link>
                   )}
-                </div>
+                </>
               </ToastAlert>
             )}
 

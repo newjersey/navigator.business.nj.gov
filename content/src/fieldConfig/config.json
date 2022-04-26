@@ -442,6 +442,7 @@
     "eligibleModalTitle": "Make sure you’re eligible first",
     "priorityStatusHeader": "Priority Status",
     "priorityStatusText": "Based on your preferences in [Determine if You Are Eligible for Priority Status](/tasks/priority-status-cannabis), you are eligible as the following:",
+    "priorityStatusNoneSelectedText": "You did not select any [priority status designations](/tasks/priority-status-cannabis).",
     "priorityStatusApplicationNeeds": "Priority Status Application Needs",
     "diverselyOwnedHelperText": "You are seeing this based on your [priority status](/tasks/priority-status-cannabis) selection as a Minority/Women Owned Business Enterprise / Veteran Owned Business.",
     "viewRequirementsButton": "View Requirements",

@@ -130,11 +130,10 @@ const DashboardPage = (props: Props): ReactElement => {
             setSuccessAlert(false);
             router.replace({ pathname: "/dashboard" }, undefined, { shallow: true });
           }}
+          dataTestid="toast-alert-SUCCESS"
+          heading={Config.profileDefaults.successTextHeader}
         >
-          <div data-testid="toast-alert-SUCCESS" className="h3-styling">
-            {Config.profileDefaults.successTextHeader}
-          </div>
-          <div className="padding-top-05">{Config.profileDefaults.successTextBody}</div>
+          {Config.profileDefaults.successTextBody}
         </ToastAlert>
       )}
     </PageSkeleton>

@@ -10,13 +10,16 @@ interface Props {
   onNextTab: () => void;
   priorityStatusState: Record<PriorityApplicationType, boolean>;
   onCheckboxChange: (checkbox: PriorityApplicationType, checked: boolean) => void;
+  noPriorityStatus: boolean;
 }
 
 export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
   return (
     <div className="flex flex-column">
       <Content>{Config.cannabisApplyForLicense.applicationQuestionsText}</Content>
-      <hr className="margin-y-3" />
+      <div>
+        <hr className="margin-y-3" />
+      </div>
       <div className="margin-top-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-2 text-normal">
           {Config.cannabisApplyForLicense.businessSizeHeader}
@@ -27,11 +30,20 @@ export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-2 text-normal">
           {Config.cannabisApplyForLicense.priorityStatusHeader}
         </div>
-        <Content>{Config.cannabisApplyForLicense.priorityStatusText}</Content>
-        <PriorityStatusCheckboxes
-          onCheckboxChange={props.onCheckboxChange}
-          priorityStatusState={props.priorityStatusState}
-        />
+        {!props.noPriorityStatus && (
+          <>
+            <Content>{Config.cannabisApplyForLicense.priorityStatusText}</Content>
+            <PriorityStatusCheckboxes
+              onCheckboxChange={props.onCheckboxChange}
+              priorityStatusState={props.priorityStatusState}
+            />
+          </>
+        )}
+        {props.noPriorityStatus && (
+          <div className="margin-bottom-3">
+            <Content>{Config.cannabisApplyForLicense.priorityStatusNoneSelectedText}</Content>
+          </div>
+        )}
       </div>
       <div
         style={{ marginTop: "auto" }}

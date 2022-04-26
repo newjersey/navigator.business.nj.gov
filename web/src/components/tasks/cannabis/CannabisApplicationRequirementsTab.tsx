@@ -61,7 +61,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         {userData?.profileData.cannabisMicrobusiness && (
           <div className="margin-top-2">
             <hr className="margin-y-3" />
-            <Accordion elevation={0} defaultExpanded={false}>
+            <Accordion elevation={0} defaultExpanded={true}>
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
@@ -79,7 +79,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         {hasPriorityStatus && (
           <div className="margin-top-2">
             <hr className="margin-y-3" />
-            <Accordion elevation={0} defaultExpanded={false}>
+            <Accordion elevation={0} defaultExpanded={true}>
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
