@@ -6,18 +6,18 @@ import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared
 import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
-  items: LicenseStatusItem[];
-  status: LicenseStatus;
-  onEdit: () => void;
+  readonly items: readonly LicenseStatusItem[];
+  readonly status: LicenseStatus;
+  readonly onEdit: () => void;
 }
 
 type PermitTheme = {
-  gradient: string;
-  bgColor: string;
-  textColor: string;
-  borderColor: string;
-  iconColor: string;
-  headerIconColor: string;
+  readonly gradient: string;
+  readonly bgColor: string;
+  readonly textColor: string;
+  readonly borderColor: string;
+  readonly iconColor: string;
+  readonly headerIconColor: string;
 };
 
 const pendingPermitTheme: PermitTheme = {

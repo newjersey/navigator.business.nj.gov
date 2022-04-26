@@ -29,10 +29,10 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useMemo, useState } from "react";
 
 interface Props {
-  open: boolean;
-  displayContent: LoadDisplayContent;
-  handleClose: () => void;
-  onSave: () => void;
+  readonly open: boolean;
+  readonly displayContent: LoadDisplayContent;
+  readonly handleClose: () => void;
+  readonly onSave: () => void;
 }
 
 export const GraduationModal = (props: Props): ReactElement => {
@@ -60,9 +60,12 @@ export const GraduationModal = (props: Props): ReactElement => {
       const userProfileData = userData.profileData;
       if (!userProfileData.sectorId && userProfileData.industryId) {
         const industry = Industries.find((i) => i.id == userProfileData.industryId);
-        userProfileData.sectorId = industry?.defaultSectorId;
+        const newProfileData = {
+          ...userProfileData,
+          sectorId: industry?.defaultSectorId,
+        };
+        setProfileData(newProfileData);
       }
-      setProfileData(userProfileData);
     }
   }, userData);
 

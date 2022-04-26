@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v33UserData } from "./v33_formation_data";
 
 export interface v34UserData {

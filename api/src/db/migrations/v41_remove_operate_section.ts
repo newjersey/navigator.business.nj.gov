@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v40UserData } from "./v40_merge_down_steps";
 
 export interface v41UserData {

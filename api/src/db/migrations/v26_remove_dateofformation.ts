@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v25UserData } from "./v25_add_intercom_hash_to_user";
 
 export interface v26UserData {

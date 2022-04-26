@@ -3,8 +3,8 @@ import { useMediaQuery } from "@mui/material";
 import React, { ReactElement } from "react";
 
 interface Props {
-  arrayOfSteps: string[];
-  currentStep: number;
+  readonly arrayOfSteps: readonly string[];
+  readonly currentStep: number;
 }
 
 export const HorizontalStepper = (props: Props): ReactElement => {

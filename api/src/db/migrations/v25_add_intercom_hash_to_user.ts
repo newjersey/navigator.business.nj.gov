@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { createHmac } from "crypto";
 import { v24UserData } from "./v24_restructure_tax_filings";
 

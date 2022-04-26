@@ -1,8 +1,8 @@
 export type NameAndAddress = {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
+  readonly name: string;
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly zipCode: string;
 };
 
 export const createEmptyNameAndAddress = (): NameAndAddress => ({

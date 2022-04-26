@@ -6,13 +6,13 @@ import { Step } from "@/lib/types/types";
 import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 interface Props {
-  step: Step;
-  isLast: boolean;
-  activeTaskId?: string;
-  isOpen?: boolean;
-  completed: boolean;
-  onTaskClick?: () => void;
-  toggleStep: (number: number, setOpen: boolean) => void;
+  readonly step: Step;
+  readonly isLast: boolean;
+  readonly activeTaskId?: string;
+  readonly isOpen?: boolean;
+  readonly completed: boolean;
+  readonly onTaskClick?: () => void;
+  readonly toggleStep: (number: number, setOpen: boolean) => void;
 }
 
 export const MiniRoadmapStep = (props: Props): ReactElement => {

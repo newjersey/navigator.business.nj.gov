@@ -7,7 +7,7 @@ import { NextSeo } from "next-seo";
 import React, { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
 interface Props {
-  envVars: string;
+  readonly envVars: string;
 }
 
 const FeatureFlagsPage = (props: Props): ReactElement => {

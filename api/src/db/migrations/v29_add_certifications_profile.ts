@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v28UserData } from "./v28_add_hasExistingBusiness_to_profile";
 
 export interface v29UserData {

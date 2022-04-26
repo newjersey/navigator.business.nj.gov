@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v13UserData } from "./v13_add_constructionRenovationPlan";
 
 export interface v14UserData {

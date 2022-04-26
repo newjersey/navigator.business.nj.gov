@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { randomInt } from "@shared/intHelpers";
 import { v18UserData } from "./v18_add_foodtruck_roadmap";
 

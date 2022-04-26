@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v29UserData } from "./v29_add_certifications_profile";
 
 export interface v30UserData {

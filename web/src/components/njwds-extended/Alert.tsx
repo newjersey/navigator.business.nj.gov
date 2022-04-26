@@ -1,13 +1,13 @@
 import React, { ReactElement, ReactNode } from "react";
 
 interface Props {
-  variant: AlertVariant;
-  children: ReactNode;
-  noIcon?: boolean;
-  heading?: string;
-  rounded?: boolean;
-  dataTestid?: string;
-  className?: string;
+  readonly variant: AlertVariant;
+  readonly children: ReactNode;
+  readonly noIcon?: boolean;
+  readonly heading?: string;
+  readonly rounded?: boolean;
+  readonly dataTestid?: string;
+  readonly className?: string;
 }
 
 export type AlertVariant = "info" | "success" | "warning" | "error";

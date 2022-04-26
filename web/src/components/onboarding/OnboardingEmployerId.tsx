@@ -7,10 +7,10 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
-  handleChangeOverride?: (value: string) => void;
+  readonly onValidation: (field: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly headerAriaLevel?: number;
+  readonly handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingEmployerId = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {

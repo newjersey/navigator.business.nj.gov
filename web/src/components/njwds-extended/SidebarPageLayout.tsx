@@ -8,13 +8,13 @@ import Link from "next/link";
 import React, { ReactElement } from "react";
 
 export interface SidebarPageLayoutProps {
-  children: React.ReactNode;
-  navChildren?: React.ReactNode;
-  stackNav?: boolean;
-  divider?: boolean;
-  outlineBox?: boolean;
-  belowBoxComponent?: React.ReactNode;
-  isWidePage?: boolean;
+  readonly children: React.ReactNode;
+  readonly navChildren?: React.ReactNode;
+  readonly stackNav?: boolean;
+  readonly divider?: boolean;
+  readonly outlineBox?: boolean;
+  readonly belowBoxComponent?: React.ReactNode;
+  readonly isWidePage?: boolean;
 }
 
 export const SidebarPageLayout = ({

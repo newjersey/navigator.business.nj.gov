@@ -111,7 +111,7 @@ describe("buildUserRoadmap", () => {
 
     const expectOnlyIndustry = (
       industry: string,
-      lastCalledWith: { industryId: string; addOns: string[] }
+      lastCalledWith: { readonly industryId: string; readonly addOns: readonly string[] }
     ): void => {
       const shouldNotContainIndustries = Industries.filter((it) => it.id !== industry);
 

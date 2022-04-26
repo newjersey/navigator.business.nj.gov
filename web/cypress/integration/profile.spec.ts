@@ -29,8 +29,8 @@ describe("Profile [feature] [all] [group1]", () => {
 
   describe("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
-      const industry = randomElementFromArray(industriesNotHomeBasedOrLiquorLicense as Industry[]);
-      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const industry = randomElementFromArray(industriesNotHomeBasedOrLiquorLicense as readonly Industry[]);
+      const legalStructureId = randomElementFromArray(LegalStructures as readonly LegalStructure[]).id;
       const townDisplayName = "Atlantic";
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
@@ -55,8 +55,8 @@ describe("Profile [feature] [all] [group1]", () => {
       });
 
       const newBusinessName = `Generic Business Name ${randomInt()}`;
-      const newIndustry = randomElementFromArray(homeBasedIndustries as Industry[]);
-      const newLegalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const newIndustry = randomElementFromArray(homeBasedIndustries as readonly Industry[]);
+      const newLegalStructureId = randomElementFromArray(LegalStructures as readonly LegalStructure[]).id;
       const newtownDisplayName = "Bass River";
       const newHomeBasedQuestion = Boolean(randomInt() % 2);
       const newEmployerId = randomInt(9).toString();
@@ -76,11 +76,11 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random homebased industry, then updates the field in profile", () => {
-      const industry = randomElementFromArray(homeBasedIndustries as Industry[]);
+      const industry = randomElementFromArray(homeBasedIndustries as readonly Industry[]);
       const homeBasedQuestion = Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const legalStructureId = randomElementFromArray(LegalStructures as readonly LegalStructure[]).id;
       const townDisplayName = "Atlantic";
       const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
@@ -107,10 +107,10 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random liquor license industry, then updates the field in profile", () => {
-      const industry = randomElementFromArray(liquorLicenseIndustries as Industry[]);
+      const industry = randomElementFromArray(liquorLicenseIndustries as readonly Industry[]);
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
-      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const legalStructureId = randomElementFromArray(LegalStructures as readonly LegalStructure[]).id;
       const townDisplayName = "Atlantic";
       const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
@@ -137,9 +137,9 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random industry with company type that enables entity id field, then updates the field in profile", () => {
-      const industry = randomElementFromArray(Industries as Industry[]);
+      const industry = randomElementFromArray(Industries as readonly Industry[]);
       const companyTypeWithTradeName = randomElementFromArray(
-        legalStructureWithTradeName as LegalStructure[]
+        legalStructureWithTradeName as readonly LegalStructure[]
       );
       const legalStructureId = companyTypeWithTradeName.id;
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);

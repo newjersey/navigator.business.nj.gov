@@ -11,11 +11,11 @@ import { NextSeo } from "next-seo";
 import React, { ReactElement } from "react";
 
 interface Props {
-  funding: Funding;
-  operateReferences: Record<string, OperateReference>;
+  readonly funding: Funding;
+  readonly operateReferences: Record<string, OperateReference>;
 }
 
-export const FundingElement = (props: { funding: Funding }): ReactElement => {
+export const FundingElement = (props: { readonly funding: Funding }): ReactElement => {
   return (
     <>
       <div className="minh-38">
@@ -61,7 +61,11 @@ export const getStaticPaths = (): GetStaticPathsResult<FundingUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = ({ params }: { params: FundingUrlSlugParam }): GetStaticPropsResult<Props> => {
+export const getStaticProps = ({
+  params,
+}: {
+  readonly params: FundingUrlSlugParam;
+}): GetStaticPropsResult<Props> => {
   return {
     props: {
       funding: loadFundingByUrlSlug(params.fundingUrlSlug),

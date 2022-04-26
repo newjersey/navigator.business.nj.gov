@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { randomInt } from "@shared/intHelpers";
 import { v4UserData } from "./v4_add_municipality";
 

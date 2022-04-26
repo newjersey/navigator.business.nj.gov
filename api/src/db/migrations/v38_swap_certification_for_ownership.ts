@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v37UserData } from "./v37_add_dateofformation";
 
 export interface v38UserData {

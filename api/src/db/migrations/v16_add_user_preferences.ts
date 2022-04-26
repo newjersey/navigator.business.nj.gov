@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v15UserData } from "./v15_add_retail_industry";
 
 export interface v16UserData {

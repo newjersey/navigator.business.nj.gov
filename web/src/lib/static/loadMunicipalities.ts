@@ -4,7 +4,7 @@ import path from "path";
 
 const recordsDir = path.join(process.cwd(), "src/lib/static/records");
 
-export const loadAllMunicipalities = async (): Promise<Municipality[]> => {
+export const loadAllMunicipalities = async (): Promise<readonly Municipality[]> => {
   const fullPath = path.join(recordsDir, "municipalities.json");
 
   const records = JSON.parse(fs.readFileSync(fullPath, "utf8")) as MunicipalityRecords;

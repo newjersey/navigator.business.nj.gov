@@ -29,5 +29,5 @@ export const guestRouterFactory = (businessNameClient: BusinessNameClient): Rout
 };
 
 type BusinessQueryParams = {
-  query: string;
+  readonly query: string;
 };

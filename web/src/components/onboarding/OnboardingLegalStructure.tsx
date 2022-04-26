@@ -9,14 +9,16 @@ import React, { ReactElement, useContext } from "react";
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const LegalStructuresOrdered: LegalStructure[] = orderBy(
+  const LegalStructuresOrdered: readonly LegalStructure[] = orderBy(
     LegalStructures,
     (legalStructure: LegalStructure) => {
       return legalStructure.onboardingOrder;
     }
   );
 
-  const handleLegalStructure = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
+  const handleLegalStructure = (
+    event: React.ChangeEvent<{ readonly name?: string; readonly value: unknown }>
+  ): void => {
     setProfileData({
       ...state.profileData,
       legalStructureId: (event.target.value as string) || undefined,

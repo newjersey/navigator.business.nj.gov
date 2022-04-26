@@ -5,12 +5,12 @@ import { ProfileDataContext } from "@/pages/onboarding";
 import React, { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  children?: ReactNode;
-  fieldStates: ProfileFieldErrorMap;
-  disabled?: boolean;
-  headerAriaLevel?: number;
-  handleChangeOverride?: (value: string) => void;
+  readonly onValidation: (field: ProfileFields, invalid: boolean) => void;
+  readonly children?: ReactNode;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly disabled?: boolean;
+  readonly headerAriaLevel?: number;
+  readonly handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingEntityId = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {

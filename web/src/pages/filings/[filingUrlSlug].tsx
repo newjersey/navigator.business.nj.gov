@@ -15,8 +15,8 @@ import { NextSeo } from "next-seo";
 import React, { ReactElement } from "react";
 
 interface Props {
-  filing: Filing;
-  operateReferences: Record<string, OperateReference>;
+  readonly filing: Filing;
+  readonly operateReferences: Record<string, OperateReference>;
 }
 
 const FilingPage = (props: Props): ReactElement => {
@@ -56,7 +56,11 @@ export const getStaticPaths = (): GetStaticPathsResult<FilingUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = ({ params }: { params: FilingUrlSlugParam }): GetStaticPropsResult<Props> => {
+export const getStaticProps = ({
+  params,
+}: {
+  readonly params: FilingUrlSlugParam;
+}): GetStaticPropsResult<Props> => {
   return {
     props: {
       filing: loadFilingByUrlSlug(params.filingUrlSlug),

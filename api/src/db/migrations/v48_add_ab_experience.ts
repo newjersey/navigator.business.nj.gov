@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v47UserData } from "./v47_add_profile_documents";
 
 export interface v48UserData {

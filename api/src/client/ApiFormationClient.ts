@@ -12,9 +12,9 @@ import { LogWriterType } from "../libs/logWriter";
 import { splitErrorField } from "./splitErrorField";
 
 type ApiConfig = {
-  account: string;
-  key: string;
-  baseUrl: string;
+  readonly account: string;
+  readonly key: string;
+  readonly baseUrl: string;
 };
 
 export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): FormationClient => {
@@ -37,7 +37,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             errors: [],
           };
         } else {
-          let errors = [] as FormationSubmitError[];
+          let errors = [] as readonly FormationSubmitError[];
           logger.LogInfo(`Formation - NICUSA - Response error received: ${JSON.stringify(response.data)}`);
           if (Array.isArray(response.data)) {
             const apiError = response.data as ApiErrorResponse;
@@ -217,103 +217,103 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
 };
 
 export type ApiSubmission = {
-  Account: string; //API User Account id
-  Key: string; //API Account Key
-  Payer: {
-    FirstName: string; // string (combined with LastName total 49), if not set will use ContactFirstName
-    LastName: string; // string (combined with FirstName total 49), if not set will use ContactLastName
-    CompanyName: string;
-    Address1: string;
-    Address2: string;
-    City: string;
-    StateAbbreviation: string; // 2 chars
-    ZipCode: string; // 5 chars
-    PhoneNumber: string; // 12 chars, if not set ContactPhoneNumber will be used
-    Email: string;
+  readonly Account: string; //API User Account id
+  readonly Key: string; //API Account Key
+  readonly Payer: {
+    readonly FirstName: string; // string (combined with LastName total 49), if not set will use ContactFirstName
+    readonly LastName: string; // string (combined with FirstName total 49), if not set will use ContactLastName
+    readonly CompanyName: string;
+    readonly Address1: string;
+    readonly Address2: string;
+    readonly City: string;
+    readonly StateAbbreviation: string; // 2 chars
+    readonly ZipCode: string; // 5 chars
+    readonly PhoneNumber: string; // 12 chars, if not set ContactPhoneNumber will be used
+    readonly Email: string;
   };
-  Formation: {
-    Gov2GoAnnualReports: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Annual Reports
-    Gov2GoCorpWatch: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Corpwatch
-    ShortGoodStanding: boolean; //Option to order Good Standing Certificate
-    Certified: boolean; //Option to order Certified Copy of the Formation
-    PayerEmail: string;
-    SelectPaymentType: "ACH" | "CC"; //Method user wishes to use to pay. Valid Values: ACH, CC
-    BusinessInformation: {
-      CompanyOrigin: "Domestic"; //Domestic if from Jersey. Valid Types: Domestic, Foreign
-      Business: BusinessType; //Business Type (DomesticLimitedLiabilityCompany)
-      BusinessName: string; //The requested business name, must be available and not contain any restricted words. Name plus designator length must be less than 100 characters in length.
-      BusinessDesignator: BusinessSuffix; //The designator - LLC. L.L.C etc
-      EffectiveFilingDate: string; // date 2021-12-14T10:03:51.0869073-04:00 (anne note: is this correct??)
-      MainAddress: ApiLocation;
+  readonly Formation: {
+    readonly Gov2GoAnnualReports: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Annual Reports
+    readonly Gov2GoCorpWatch: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Corpwatch
+    readonly ShortGoodStanding: boolean; //Option to order Good Standing Certificate
+    readonly Certified: boolean; //Option to order Certified Copy of the Formation
+    readonly PayerEmail: string;
+    readonly SelectPaymentType: "ACH" | "CC"; //Method user wishes to use to pay. Valid Values: ACH, CC
+    readonly BusinessInformation: {
+      readonly CompanyOrigin: "Domestic"; //Domestic if from Jersey. Valid Types: Domestic, Foreign
+      readonly Business: BusinessType; //Business Type (DomesticLimitedLiabilityCompany)
+      readonly BusinessName: string; //The requested business name, must be available and not contain any restricted words. Name plus designator length must be less than 100 characters in length.
+      readonly BusinessDesignator: BusinessSuffix; //The designator - LLC. L.L.C etc
+      readonly EffectiveFilingDate: string; // date 2021-12-14T10:03:51.0869073-04:00 (anne note: is this correct??)
+      readonly MainAddress: ApiLocation;
     };
-    CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
-    RegisteredAgent: {
-      Id: string | null; // 7 max, must be valid NJ registered agent number
-      Email: string | null; //50 max, must be email address
-      Name: string | null; // 50 max, required if no ID
-      Location: ApiLocation | null; // required if no ID
+    readonly CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
+    readonly RegisteredAgent: {
+      readonly Id: string | null; // 7 max, must be valid NJ registered agent number
+      readonly Email: string | null; //50 max, must be email address
+      readonly Name: string | null; // 50 max, required if no ID
+      readonly Location: ApiLocation | null; // required if no ID
     };
-    Members: Array<{
-      Name: string; // 50 max
-      Location: MemberLocation;
+    readonly Members: ReadonlyArray<{
+      readonly Name: string; // 50 max
+      readonly Location: MemberLocation;
     }>;
-    Signers: Array<{
+    readonly Signers: ReadonlyArray<{
       //This can be a list/array of items. Maximum 10
-      Name: string; // max 50
-      Title: "Authorized Representative";
-      Signed: true;
+      readonly Name: string; // max 50
+      readonly Title: "Authorized Representative";
+      readonly Signed: true;
     }>;
-    ContactFirstName: string; //Contact person for filing
-    ContactLastName: string;
-    ContactPhoneNumber: string;
+    readonly ContactFirstName: string; //Contact person for filing
+    readonly ContactLastName: string;
+    readonly ContactPhoneNumber: string;
   };
 };
 
 type ApiLocation = {
-  Address1: string; // 35 char max, Can not be left blank, if any other address field has data
-  Address2: string; // max 35 char
-  City: string; // 30 char max, Can not be left blank, if any other address field has data
-  State: "New Jersey"; // required if country = US. Must be full state name. Ex: Alabama
-  Zipcode: string; // max 5 if country=US, 11 otherwise
-  Country: "US"; //alpha-2 iban code
+  readonly Address1: string; // 35 char max, Can not be left blank, if any other address field has data
+  readonly Address2: string; // max 35 char
+  readonly City: string; // 30 char max, Can not be left blank, if any other address field has data
+  readonly State: "New Jersey"; // required if country = US. Must be full state name. Ex: Alabama
+  readonly Zipcode: string; // max 5 if country=US, 11 otherwise
+  readonly Country: "US"; //alpha-2 iban code
 };
 
 type MemberLocation = {
-  Address1: string; // 35 char max, Can not be left blank, if any other address field has data
-  Address2: string; // max 35 char
-  City: string; // 30 char max, Can not be left blank, if any other address field has data
-  State: string; // required if country = US. Must be full state name. Ex: Alabama
-  Zipcode: string; // max 5 if country=US, 11 otherwise
-  Country: "US"; //alpha-2 iban code
+  readonly Address1: string; // 35 char max, Can not be left blank, if any other address field has data
+  readonly Address2: string; // max 35 char
+  readonly City: string; // 30 char max, Can not be left blank, if any other address field has data
+  readonly State: string; // required if country = US. Must be full state name. Ex: Alabama
+  readonly Zipcode: string; // max 5 if country=US, 11 otherwise
+  readonly Country: "US"; //alpha-2 iban code
 };
 
 type BusinessType = "DomesticLimitedLiabilityCompany";
 
 export type ApiResponse = {
-  Success: boolean;
-  Id: string;
-  PayUrl: {
-    PortalPayId: string;
-    RedirectToUrl: string;
-    StatusCode: number;
+  readonly Success: boolean;
+  readonly Id: string;
+  readonly PayUrl: {
+    readonly PortalPayId: string;
+    readonly RedirectToUrl: string;
+    readonly StatusCode: number;
   };
 };
 
 export type ApiError = {
-  Valid: boolean;
-  ErrorMessage: string;
-  Name: string; // field with error
+  readonly Valid: boolean;
+  readonly ErrorMessage: string;
+  readonly Name: string; // field with error
 };
 
-export type ApiErrorResponse = ApiError[];
+export type ApiErrorResponse = readonly ApiError[];
 
 export type ApiGetFilingResponse = {
-  Success: boolean;
-  BusinessName: string;
-  EntityId: string;
-  TransactionDate: string;
-  ConfirmationNumber: string;
-  FormationDoc: string;
-  StandingDoc: string;
-  CertifiedDoc: string;
+  readonly Success: boolean;
+  readonly BusinessName: string;
+  readonly EntityId: string;
+  readonly TransactionDate: string;
+  readonly ConfirmationNumber: string;
+  readonly FormationDoc: string;
+  readonly StandingDoc: string;
+  readonly CertifiedDoc: string;
 };

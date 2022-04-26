@@ -7,8 +7,8 @@ import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
-  priorityStatusState: Record<PriorityApplicationType, boolean>;
-  onCheckboxChange: (checkbox: PriorityApplicationType, checked: boolean) => void;
+  readonly priorityStatusState: Record<PriorityApplicationType, boolean>;
+  readonly onCheckboxChange: (checkbox: PriorityApplicationType, checked: boolean) => void;
 }
 
 export const PriorityStatusCheckboxes = (props: Props): ReactElement => {

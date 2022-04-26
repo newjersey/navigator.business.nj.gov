@@ -49,21 +49,29 @@ export const formationRouterFactory = (
         const taskProgress = userData.taskProgress;
         let entityId = userData.profileData.entityId;
         let dateOfFormation = userData.profileData.dateOfFormation;
-        const documents: Partial<ProfileDocuments> = {};
+        let docs: ProfileDocuments = {
+          certifiedDoc: "",
+          formationDoc: "",
+          standingDoc: "",
+        };
 
         if (getFilingResponse.success) {
+          // eslint-disable-next-line functional/immutable-data
           taskProgress["form-business-entity"] = "COMPLETED";
           entityId = getFilingResponse.entityId;
           dateOfFormation = userData.formationData.formationFormData.businessStartDate;
 
-          documents["formationDoc"] = await saveFileFromUrl(
+          const formationDoc = await saveFileFromUrl(
             getFilingResponse.formationDoc,
             `${signedInUser["custom:identityId"]}/formationDoc-${Date.now()}.pdf`,
             process.env.DOCUMENT_S3_BUCKET as string
           );
 
+          let certifiedDoc = "";
+          let standingDoc = "";
+
           if (getFilingResponse.certifiedDoc) {
-            documents["certifiedDoc"] = await saveFileFromUrl(
+            certifiedDoc = await saveFileFromUrl(
               getFilingResponse.certifiedDoc,
               `${signedInUser["custom:identityId"]}/certifiedDoc-${Date.now()}.pdf`,
               process.env.DOCUMENT_S3_BUCKET as string
@@ -71,13 +79,20 @@ export const formationRouterFactory = (
           }
 
           if (getFilingResponse.standingDoc) {
-            documents["standingDoc"] = await saveFileFromUrl(
+            standingDoc = await saveFileFromUrl(
               getFilingResponse.standingDoc,
               `${signedInUser["custom:identityId"]}/standingDoc-${Date.now()}.pdf`,
               process.env.DOCUMENT_S3_BUCKET as string
             );
           }
+
+          docs = {
+            formationDoc,
+            certifiedDoc,
+            standingDoc,
+          };
         }
+
         const userDataWithResponse = {
           ...userData,
           taskProgress,
@@ -89,7 +104,7 @@ export const formationRouterFactory = (
             ...userData.profileData,
             entityId,
             dateOfFormation,
-            documents: { ...userData.profileData.documents, ...documents },
+            documents: { ...userData.profileData.documents, ...docs },
           },
         };
         await userDataClient.put(userDataWithResponse);

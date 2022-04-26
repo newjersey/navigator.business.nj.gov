@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 type Props = {
-  isWidePage?: boolean;
+  readonly isWidePage?: boolean;
 };
 
 export const NavBarDesktop = (props: Props): ReactElement => {

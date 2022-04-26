@@ -2,13 +2,13 @@ import { useOnWindowResize } from "@/lib/utils/helpers";
 import React, { ReactElement, useEffect } from "react";
 
 interface Props {
-  stepNumber: number;
-  last: boolean;
-  active?: boolean;
-  hideBar?: boolean;
-  small?: boolean;
-  completed?: boolean;
-  isOpen?: boolean;
+  readonly stepNumber: number;
+  readonly last: boolean;
+  readonly active?: boolean;
+  readonly hideBar?: boolean;
+  readonly small?: boolean;
+  readonly completed?: boolean;
+  readonly isOpen?: boolean;
 }
 
 export const VerticalStepIndicator = (props: Props): ReactElement => {

@@ -5,14 +5,14 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
-  h3Heading?: boolean;
-  headerAriaLevel: number;
+  readonly h3Heading?: boolean;
+  readonly headerAriaLevel: number;
 }
 
 export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleSelection = (event: React.ChangeEvent<{ readonly name?: string; readonly value: unknown }>) => {
     setProfileData({
       ...state.profileData,
       homeBasedBusiness: event.target.value === "true",

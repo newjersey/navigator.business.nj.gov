@@ -1,8 +1,8 @@
 export type TaxFilingData = {
-  filings: TaxFiling[];
+  readonly filings: readonly TaxFiling[];
 };
 
 export type TaxFiling = {
-  identifier: string;
-  dueDate: string;
+  readonly identifier: string;
+  readonly dueDate: string;
 };

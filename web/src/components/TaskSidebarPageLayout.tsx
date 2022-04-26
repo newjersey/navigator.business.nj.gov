@@ -5,8 +5,8 @@ import { OperateReference, Task } from "@/lib/types/types";
 import React, { ReactElement } from "react";
 
 interface Props extends Omit<SidebarPageLayoutProps, "navChildren"> {
-  operateReferences?: Record<string, OperateReference>;
-  task?: Task | undefined;
+  readonly operateReferences?: Record<string, OperateReference>;
+  readonly task?: Task | undefined;
 }
 
 export const TaskSidebarPageLayout = ({

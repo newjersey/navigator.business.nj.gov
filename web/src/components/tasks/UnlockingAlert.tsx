@@ -4,13 +4,13 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface Props {
-  taskLinks: TaskLink[];
-  variant: AlertVariant;
-  isLoading: boolean;
-  singularText: string;
-  pluralText: string;
-  className?: string;
-  dataTestid?: string;
+  readonly taskLinks: readonly TaskLink[];
+  readonly variant: AlertVariant;
+  readonly isLoading: boolean;
+  readonly singularText: string;
+  readonly pluralText: string;
+  readonly className?: string;
+  readonly dataTestid?: string;
 }
 
 export const UnlockingAlert = (props: Props): ReactElement => {

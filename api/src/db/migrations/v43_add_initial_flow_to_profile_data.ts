@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v42UserData } from "./v42_add_sector_to_profile_data";
 
 export interface v43UserData {

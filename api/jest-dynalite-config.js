@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+// eslint-disable-next-line functional/immutable-data
 module.exports = {
   tables: [
     {

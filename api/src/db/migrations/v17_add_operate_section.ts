@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v16UserData } from "./v16_add_user_preferences";
 
 export interface v17UserData {

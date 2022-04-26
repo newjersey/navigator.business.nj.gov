@@ -57,8 +57,8 @@ import { useRouter } from "next/router";
 import React, { FormEvent, ReactElement, ReactNode, useContext, useMemo, useState } from "react";
 
 interface Props {
-  displayContent: LoadDisplayContent;
-  municipalities: Municipality[];
+  readonly displayContent: LoadDisplayContent;
+  readonly municipalities: readonly Municipality[];
 }
 
 export type ProfileTabs = "info" | "numbers" | "documents" | "notes";
@@ -88,7 +88,7 @@ const ProfilePage = (props: Props): ReactElement => {
   ]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const redirect = (params?: { [key: string]: any }, routerType = router.push) =>
+  const redirect = (params?: { readonly [key: string]: any }, routerType = router.push) =>
     router.query.path === "businessFormation"
       ? routerType("/tasks/form-business-entity")
       : userData?.profileData.hasExistingBusiness

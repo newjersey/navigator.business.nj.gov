@@ -31,7 +31,7 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
 };
 
 export type ApiNameAvailabilityResponse = {
-  Available: boolean;
-  Reason: string;
-  Similars: string[];
+  readonly Available: boolean;
+  readonly Reason: string;
+  readonly Similars: readonly string[];
 };

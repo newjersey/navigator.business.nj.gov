@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { randomInt } from "@shared/intHelpers";
 import { v10UserData } from "./v10_add_mynjuserkey";
 

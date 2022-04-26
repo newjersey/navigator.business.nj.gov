@@ -14,7 +14,7 @@ describe("Roadmap [all] [group4]", () => {
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
       const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
-      const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+      const legalStructureId = randomElementFromArray(LegalStructures as readonly LegalStructure[]).id;
       const townDisplayName = undefined;
 
       completeNewBusinessOnboarding({

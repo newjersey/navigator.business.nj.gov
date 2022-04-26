@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v9UserData } from "./v9_add_license_status_to_data";
 
 export interface v10UserData {

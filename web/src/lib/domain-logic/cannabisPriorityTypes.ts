@@ -1,4 +1,4 @@
-export const priorityTypesObj: Record<PriorityType, string[]> = {
+export const priorityTypesObj: Record<PriorityType, readonly string[]> = {
   minorityOrWomen: ["general-minority-owned", "general-women-owned"],
   veteran: ["general-veteran-owned"],
   impactZone: [

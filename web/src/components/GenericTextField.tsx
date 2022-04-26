@@ -3,27 +3,27 @@ import { TextField, TextFieldProps } from "@mui/material";
 import React, { ChangeEvent, FocusEvent, ReactElement } from "react";
 
 export interface GenericTextFieldProps {
-  fieldName: string;
-  fieldOptions?: TextFieldProps;
-  onValidation?: (fieldName: string, invalid: boolean) => void;
-  additionalValidation?: (value: string) => boolean;
-  visualFilter?: (value: string) => string;
-  valueFilter?: (value: string) => string;
-  handleChange?: (value: string) => void;
-  error?: boolean;
-  noValidationMargin?: boolean;
-  validationText?: string;
-  disabled?: boolean;
-  placeholder?: string;
-  value?: string | number;
-  autoComplete?: string;
-  required?: boolean;
-  numericProps?: {
-    maxLength: number;
-    minLength?: number;
+  readonly fieldName: string;
+  readonly fieldOptions?: TextFieldProps;
+  readonly onValidation?: (fieldName: string, invalid: boolean) => void;
+  readonly additionalValidation?: (value: string) => boolean;
+  readonly visualFilter?: (value: string) => string;
+  readonly valueFilter?: (value: string) => string;
+  readonly handleChange?: (value: string) => void;
+  readonly error?: boolean;
+  readonly noValidationMargin?: boolean;
+  readonly validationText?: string;
+  readonly disabled?: boolean;
+  readonly placeholder?: string;
+  readonly value?: string | number;
+  readonly autoComplete?: string;
+  readonly required?: boolean;
+  readonly numericProps?: {
+    readonly maxLength: number;
+    readonly minLength?: number;
   };
-  formInputWide?: boolean;
-  ariaLabel?: string;
+  readonly formInputWide?: boolean;
+  readonly ariaLabel?: string;
 }
 
 export const GenericTextField = (props: GenericTextFieldProps): ReactElement => {

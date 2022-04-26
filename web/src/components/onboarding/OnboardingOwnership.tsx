@@ -10,12 +10,13 @@ import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEven
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
-  headerAriaLevel?: number;
+  readonly headerAriaLevel?: number;
 }
 
 export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
+  // eslint-disable-next-line functional/prefer-readonly-type
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     const value = typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value;
     setProfileData({

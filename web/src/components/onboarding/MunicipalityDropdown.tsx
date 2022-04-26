@@ -6,17 +6,17 @@ import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import React, { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
 interface Props {
-  fieldName: string;
-  municipalities: Municipality[];
-  value: Municipality | undefined;
-  onSelect: (value: Municipality | undefined) => void;
-  placeholderText: string;
-  handleChange?: () => void;
-  onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
-  error?: boolean;
-  ariaLabel?: string;
-  validationText?: string;
-  validationLabel?: string;
+  readonly fieldName: string;
+  readonly municipalities: readonly Municipality[];
+  readonly value: Municipality | undefined;
+  readonly onSelect: (value: Municipality | undefined) => void;
+  readonly placeholderText: string;
+  readonly handleChange?: () => void;
+  readonly onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
+  readonly error?: boolean;
+  readonly ariaLabel?: string;
+  readonly validationText?: string;
+  readonly validationLabel?: string;
 }
 
 export const MunicipalityDropdown = (props: Props): ReactElement => {

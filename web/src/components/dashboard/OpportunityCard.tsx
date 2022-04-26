@@ -10,16 +10,16 @@ import truncateMarkdown from "markdown-truncate";
 import React, { ReactElement } from "react";
 
 interface Opportunity {
-  id: string;
-  name: string;
-  urlSlug: string;
-  contentMd: string;
+  readonly id: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly contentMd: string;
 }
 
 interface Props {
-  opportunity: Opportunity;
-  urlPath: "funding" | "certification";
-  isLast?: boolean;
+  readonly opportunity: Opportunity;
+  readonly urlPath: "funding" | "certification";
+  readonly isLast?: boolean;
 }
 
 const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {

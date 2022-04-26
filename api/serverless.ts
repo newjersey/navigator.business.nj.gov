@@ -1,3 +1,4 @@
+/* eslint-disable functional/immutable-data */
 import type { AWS } from "@serverless/typescript";
 import { env } from "process";
 import dynamoDbSchema from "./dynamodb-schema.json";

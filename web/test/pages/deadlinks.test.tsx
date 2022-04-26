@@ -12,8 +12,8 @@ jest.mock("broken-link-checker", () => ({
     options: Options,
     handlers: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      link?: ((result: any) => void) | undefined;
-      end?: (() => void) | undefined;
+      readonly link?: ((result: any) => void) | undefined;
+      readonly end?: (() => void) | undefined;
     }
   ) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

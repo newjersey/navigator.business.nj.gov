@@ -21,8 +21,8 @@ const useStyles = makeStyles(() =>
 );
 
 interface Props {
-  onSelect: (selectedTaskProgress: TaskProgress) => void;
-  initialValue?: TaskProgress;
+  readonly onSelect: (selectedTaskProgress: TaskProgress) => void;
+  readonly initialValue?: TaskProgress;
 }
 
 export const TaskProgressDropdown = (props: Props): ReactElement => {

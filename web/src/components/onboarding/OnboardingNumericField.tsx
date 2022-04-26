@@ -4,8 +4,8 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface NumericFieldProps {
-  maxLength: number;
-  minLength?: number;
+  readonly maxLength: number;
+  readonly minLength?: number;
 }
 
 interface Props extends Omit<OnboardingProps, "numericProps">, NumericFieldProps {}

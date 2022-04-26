@@ -9,7 +9,7 @@ import React, { ReactElement, useContext } from "react";
 // eslint-disable-next-line react/display-name
 export const ContextInfoElement = React.forwardRef(
   (
-    props: { isVisible: boolean; markdown: string; close?: () => void },
+    props: { readonly isVisible: boolean; readonly markdown: string; readonly close?: () => void },
     ref?: React.LegacyRef<any>
   ): ReactElement => (
     <aside

@@ -9,44 +9,44 @@ import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosResponse } from "axios";
 
 type CognitoIdPayload = {
-  aud: string;
-  auth_time: number;
-  "cognito:username": string;
-  email: string;
-  email_verified: boolean;
-  event_id: string;
-  exp: number;
-  iat: number;
-  iss: string;
-  sub: string;
-  token_use: string;
-  "custom:myNJUserKey": string;
-  "custom:identityId": string | undefined;
-  identities: CognitoIdentityPayload[] | undefined;
+  readonly aud: string;
+  readonly auth_time: number;
+  readonly "cognito:username": string;
+  readonly email: string;
+  readonly email_verified: boolean;
+  readonly event_id: string;
+  readonly exp: number;
+  readonly iat: number;
+  readonly iss: string;
+  readonly sub: string;
+  readonly token_use: string;
+  readonly "custom:myNJUserKey": string;
+  readonly "custom:identityId": string | undefined;
+  readonly identities: readonly CognitoIdentityPayload[] | undefined;
 };
 
 type CognitoIdentityPayload = {
-  dateCreated: string;
-  issuer: string;
-  primary: string;
-  providerName: string;
-  providerType: string;
-  userId: string;
+  readonly dateCreated: string;
+  readonly issuer: string;
+  readonly primary: string;
+  readonly providerName: string;
+  readonly providerType: string;
+  readonly userId: string;
 };
 
 type CognitoRefreshAuthResult = {
-  AuthenticationResult: {
-    AccessToken: string;
-    ExpiresIn: number;
-    IdToken: string;
-    TokenType: string;
+  readonly AuthenticationResult: {
+    readonly AccessToken: string;
+    readonly ExpiresIn: number;
+    readonly IdToken: string;
+    readonly TokenType: string;
   };
 };
 
 type CognitoRefreshAuth = {
-  token: string;
-  expires_at: number;
-  identity_id: string;
+  readonly token: string;
+  readonly expires_at: number;
+  readonly identity_id: string;
 };
 
 export const configureAmplify = (): void => {

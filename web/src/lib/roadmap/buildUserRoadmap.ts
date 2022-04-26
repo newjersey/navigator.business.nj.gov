@@ -1,6 +1,6 @@
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
-import { Roadmap } from "@/lib/types/types";
+import { Roadmap, Step, Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared/";
 
@@ -83,17 +83,38 @@ const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
 };
 
 const applyMunicipalityEval = (roadmap: Roadmap, evalValues: Record<string, string>): Roadmap => {
+  // eslint-disable-next-line functional/prefer-readonly-type
+  const compiledSteps: Step[] = [];
   roadmap.steps.forEach((step) => {
+    // eslint-disable-next-line functional/prefer-readonly-type
+    const compiledTasks: Task[] = [];
     step.tasks.forEach((task) => {
+      let callToActionLink = "";
+      let callToActionText = "";
       if (task.callToActionLink) {
-        task.callToActionLink = templateEval(task.callToActionLink, evalValues);
+        callToActionLink = templateEval(task.callToActionLink, evalValues);
       }
       if (task.callToActionText) {
-        task.callToActionText = templateEval(task.callToActionText, evalValues);
+        callToActionText = templateEval(task.callToActionText, evalValues);
       }
-      task.contentMd = templateEval(task.contentMd, evalValues);
+      const contentMd = templateEval(task.contentMd, evalValues);
+
+      const newTask = {
+        ...task,
+        callToActionLink,
+        callToActionText,
+        contentMd,
+      };
+      compiledTasks.push(newTask);
     });
+    const newStep = {
+      ...step,
+      tasks: compiledTasks,
+    };
+    compiledSteps.push(newStep);
   });
 
-  return roadmap;
+  return {
+    steps: compiledSteps,
+  };
 };

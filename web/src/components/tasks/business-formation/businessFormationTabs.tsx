@@ -6,7 +6,10 @@ import { ReviewSection } from "@/components/tasks/business-formation/ReviewSecti
 import { businessFormationTabsNames } from "@/lib/types/types";
 import React, { ReactElement } from "react";
 
-export const businessFormationTabs: { component: ReactElement; section: businessFormationTabsNames }[] = [
+export const businessFormationTabs: readonly {
+  readonly component: ReactElement;
+  readonly section: businessFormationTabsNames;
+}[] = [
   {
     component: <BusinessNameSection />,
     section: "Name",

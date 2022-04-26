@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
 
 interface Props {
-  children: string;
-  className?: string;
-  label?: string;
+  readonly children: string;
+  readonly className?: string;
+  readonly label?: string;
 }
 
 export const Icon = (props: Props): ReactElement => {

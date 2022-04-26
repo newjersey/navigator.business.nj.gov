@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { randomInt } from "@shared/intHelpers";
 
 export interface v0UserData {

@@ -10,9 +10,9 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
-  displayContent: CannabisPriorityStatusDisplayContent;
-  onBack: () => void;
-  onComplete: () => void;
+  readonly displayContent: CannabisPriorityStatusDisplayContent;
+  readonly onBack: () => void;
+  readonly onComplete: () => void;
 }
 
 export const CannabisPriorityRequirements = (props: Props): ReactElement => {

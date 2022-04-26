@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v30UserData } from "./v30_add_existingEmployees";
 
 export interface v31UserData {

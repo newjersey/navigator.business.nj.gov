@@ -1,16 +1,16 @@
 import { v51UserData } from "./v51_add_cpa_field";
 
 export interface v52UserData {
-  user: v52BusinessUser;
-  profileData: v52ProfileData;
-  formProgress: v52FormProgress;
-  taskProgress: Record<string, v52TaskProgress>;
-  taskItemChecklist: Record<string, boolean>;
-  licenseData: v52LicenseData | undefined;
-  preferences: v52Preferences;
-  taxFilingData: v52TaxFilingData;
-  formationData: v52FormationData;
-  version: number;
+  readonly user: v52BusinessUser;
+  readonly profileData: v52ProfileData;
+  readonly formProgress: v52FormProgress;
+  readonly taskProgress: Record<string, v52TaskProgress>;
+  readonly taskItemChecklist: Record<string, boolean>;
+  readonly licenseData: v52LicenseData | undefined;
+  readonly preferences: v52Preferences;
+  readonly taxFilingData: v52TaxFilingData;
+  readonly formationData: v52FormationData;
+  readonly version: number;
 }
 
 export const migrate_v51_to_v52 = (v51Data: v51UserData): v52UserData => {
@@ -31,88 +31,88 @@ type v52FormProgress = "UNSTARTED" | "COMPLETED";
 export type v52ABExperience = "ExperienceA" | "ExperienceB";
 
 type v52BusinessUser = {
-  name?: string;
-  email: string;
-  id: string;
-  receiveNewsletter: boolean;
-  userTesting: boolean;
-  externalStatus: v52ExternalStatus;
-  myNJUserKey?: string;
-  intercomHash?: string;
-  abExperience: v52ABExperience;
+  readonly name?: string;
+  readonly email: string;
+  readonly id: string;
+  readonly receiveNewsletter: boolean;
+  readonly userTesting: boolean;
+  readonly externalStatus: v52ExternalStatus;
+  readonly myNJUserKey?: string;
+  readonly intercomHash?: string;
+  readonly abExperience: v52ABExperience;
 };
 
 interface v52ProfileDocuments {
-  formationDoc: string;
-  standingDoc: string;
-  certifiedDoc: string;
+  readonly formationDoc: string;
+  readonly standingDoc: string;
+  readonly certifiedDoc: string;
 }
 interface v52ProfileData {
-  hasExistingBusiness: boolean | undefined;
-  initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
-  businessName: string;
-  industryId: string | undefined;
-  legalStructureId: string | undefined;
-  municipality: v52Municipality | undefined;
-  liquorLicense: boolean;
-  requiresCpa: boolean;
-  homeBasedBusiness: boolean;
-  cannabisLicenseType: "CONDITIONAL" | "ANNUAL" | undefined;
-  constructionRenovationPlan: boolean | undefined;
-  dateOfFormation: string | undefined;
-  entityId: string | undefined;
-  employerId: string | undefined;
-  taxId: string | undefined;
-  notes: string;
-  documents: v52ProfileDocuments;
-  ownershipTypeIds: string[];
-  existingEmployees: string | undefined;
-  taxPin: string | undefined;
-  sectorId: string | undefined;
-  naicsCode: string;
+  readonly hasExistingBusiness: boolean | undefined;
+  readonly initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
+  readonly businessName: string;
+  readonly industryId: string | undefined;
+  readonly legalStructureId: string | undefined;
+  readonly municipality: v52Municipality | undefined;
+  readonly liquorLicense: boolean;
+  readonly requiresCpa: boolean;
+  readonly homeBasedBusiness: boolean;
+  readonly cannabisLicenseType: "CONDITIONAL" | "ANNUAL" | undefined;
+  readonly constructionRenovationPlan: boolean | undefined;
+  readonly dateOfFormation: string | undefined;
+  readonly entityId: string | undefined;
+  readonly employerId: string | undefined;
+  readonly taxId: string | undefined;
+  readonly notes: string;
+  readonly documents: v52ProfileDocuments;
+  readonly ownershipTypeIds: readonly string[];
+  readonly existingEmployees: string | undefined;
+  readonly taxPin: string | undefined;
+  readonly sectorId: string | undefined;
+  readonly naicsCode: string;
 }
 
 type v52Municipality = {
-  name: string;
-  displayName: string;
-  county: string;
-  id: string;
+  readonly name: string;
+  readonly displayName: string;
+  readonly county: string;
+  readonly id: string;
 };
 
 type v52TaxFilingData = {
-  filings: v52TaxFiling[];
+  readonly filings: readonly v52TaxFiling[];
 };
 
 type v52TaxFiling = {
-  identifier: string;
-  dueDate: string;
+  readonly identifier: string;
+  readonly dueDate: string;
 };
 
 type v52NameAndAddress = {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
+  readonly name: string;
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly zipCode: string;
 };
 
 type v52LicenseData = {
-  nameAndAddress: v52NameAndAddress;
-  completedSearch: boolean;
-  lastCheckedStatus: string;
-  status: v52LicenseStatus;
-  items: v52LicenseStatusItem[];
+  readonly nameAndAddress: v52NameAndAddress;
+  readonly completedSearch: boolean;
+  readonly lastCheckedStatus: string;
+  readonly status: v52LicenseStatus;
+  readonly items: readonly v52LicenseStatusItem[];
 };
 
 type v52Preferences = {
-  roadmapOpenSections: v52SectionType[];
-  roadmapOpenSteps: number[];
-  hiddenFundingIds: string[];
-  hiddenCertificationIds: string[];
+  readonly roadmapOpenSections: readonly v52SectionType[];
+  readonly roadmapOpenSteps: readonly number[];
+  readonly hiddenFundingIds: readonly string[];
+  readonly hiddenCertificationIds: readonly string[];
 };
 
 type v52LicenseStatusItem = {
-  title: string;
-  status: v52CheckoffStatus;
+  readonly title: string;
+  readonly status: v52CheckoffStatus;
 };
 
 type v52CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
@@ -134,18 +134,18 @@ type v52LicenseStatus =
 type v52SectionType = "PLAN" | "START";
 
 type v52ExternalStatus = {
-  newsletter?: v52NewsletterResponse;
-  userTesting?: v52UserTestingResponse;
+  readonly newsletter?: v52NewsletterResponse;
+  readonly userTesting?: v52UserTestingResponse;
 };
 
 interface v52NewsletterResponse {
-  success?: boolean;
-  status: v52NewsletterStatus;
+  readonly success?: boolean;
+  readonly status: v52NewsletterStatus;
 }
 
 interface v52UserTestingResponse {
-  success?: boolean;
-  status: v52UserTestingStatus;
+  readonly success?: boolean;
+  readonly status: v52UserTestingStatus;
 }
 
 type v52NewsletterStatus = typeof newsletterStatusList[number];
@@ -167,48 +167,48 @@ const newsletterStatusList = [
 ] as const;
 
 interface v52FormationData {
-  formationFormData: v52FormationFormData;
-  formationResponse: v52FormationSubmitResponse | undefined;
-  getFilingResponse: v52GetFilingResponse | undefined;
+  readonly formationFormData: v52FormationFormData;
+  readonly formationResponse: v52FormationSubmitResponse | undefined;
+  readonly getFilingResponse: v52GetFilingResponse | undefined;
 }
 
 interface v52FormationMember {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  addressCity: string;
-  addressState: string;
-  addressZipCode: string;
+  readonly name: string;
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly addressCity: string;
+  readonly addressState: string;
+  readonly addressZipCode: string;
 }
 
 interface v52FormationFormData {
-  businessSuffix: v52BusinessSuffix | undefined;
-  businessStartDate: string;
-  businessAddressLine1: string;
-  businessAddressLine2: string;
-  businessAddressState: string;
-  businessAddressZipCode: string;
-  agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
-  agentNumber: string;
-  agentName: string;
-  agentEmail: string;
-  agentOfficeAddressLine1: string;
-  agentOfficeAddressLine2: string;
-  agentOfficeAddressCity: string;
-  agentOfficeAddressState: string;
-  agentOfficeAddressZipCode: string;
-  members: v52FormationMember[];
-  signer: string;
-  additionalSigners: string[];
-  paymentType: v52PaymentType;
-  annualReportNotification: boolean;
-  corpWatchNotification: boolean;
-  officialFormationDocument: boolean;
-  certificateOfStanding: boolean;
-  certifiedCopyOfFormationDocument: boolean;
-  contactFirstName: string;
-  contactLastName: string;
-  contactPhoneNumber: string;
+  readonly businessSuffix: v52BusinessSuffix | undefined;
+  readonly businessStartDate: string;
+  readonly businessAddressLine1: string;
+  readonly businessAddressLine2: string;
+  readonly businessAddressState: string;
+  readonly businessAddressZipCode: string;
+  readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
+  readonly agentNumber: string;
+  readonly agentName: string;
+  readonly agentEmail: string;
+  readonly agentOfficeAddressLine1: string;
+  readonly agentOfficeAddressLine2: string;
+  readonly agentOfficeAddressCity: string;
+  readonly agentOfficeAddressState: string;
+  readonly agentOfficeAddressZipCode: string;
+  readonly members: readonly v52FormationMember[];
+  readonly signer: string;
+  readonly additionalSigners: readonly string[];
+  readonly paymentType: v52PaymentType;
+  readonly annualReportNotification: boolean;
+  readonly corpWatchNotification: boolean;
+  readonly officialFormationDocument: boolean;
+  readonly certificateOfStanding: boolean;
+  readonly certifiedCopyOfFormationDocument: boolean;
+  readonly contactFirstName: string;
+  readonly contactLastName: string;
+  readonly contactPhoneNumber: string;
 }
 
 type v52PaymentType = "CC" | "ACH" | undefined;
@@ -224,26 +224,26 @@ type v52BusinessSuffix =
   | "LIMITED LIABILITY COMPANY";
 
 type v52FormationSubmitResponse = {
-  success: boolean;
-  token: string | undefined;
-  formationId: string | undefined;
-  redirect: string | undefined;
-  errors: v52FormationSubmitError[];
+  readonly success: boolean;
+  readonly token: string | undefined;
+  readonly formationId: string | undefined;
+  readonly redirect: string | undefined;
+  readonly errors: readonly v52FormationSubmitError[];
 };
 
 type v52FormationSubmitError = {
-  field: string;
-  message: string;
+  readonly field: string;
+  readonly message: string;
 };
 
 type v52GetFilingResponse = {
-  success: boolean;
-  entityId: string;
-  transactionDate: string;
-  confirmationNumber: string;
-  formationDoc: string;
-  standingDoc: string;
-  certifiedDoc: string;
+  readonly success: boolean;
+  readonly entityId: string;
+  readonly transactionDate: string;
+  readonly confirmationNumber: string;
+  readonly formationDoc: string;
+  readonly standingDoc: string;
+  readonly certifiedDoc: string;
 };
 
 // ---------------- v52 factories ----------------

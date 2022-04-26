@@ -9,9 +9,9 @@ import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@m
 import React, { createContext, ReactElement, ReactNode } from "react";
 
 interface Props {
-  sectionType: SectionType;
-  children: ReactNode;
-  mini?: boolean;
+  readonly sectionType: SectionType;
+  readonly children: ReactNode;
+  readonly mini?: boolean;
 }
 
 export const SectionAccordionContext = createContext({

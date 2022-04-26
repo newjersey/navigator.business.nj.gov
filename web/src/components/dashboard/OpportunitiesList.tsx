@@ -13,9 +13,9 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
-  certifications: Certification[];
-  fundings: Funding[];
-  displayContent: DashboardDisplayContent;
+  readonly certifications: readonly Certification[];
+  readonly fundings: readonly Funding[];
+  readonly displayContent: DashboardDisplayContent;
 }
 
 export const OpportunitiesList = (props: Props): ReactElement => {
@@ -36,11 +36,13 @@ export const OpportunitiesList = (props: Props): ReactElement => {
   const hiddenSortedCertifications = sortCertifications(
     (userData?.preferences.hiddenCertificationIds || [])
       .map((id) => props.certifications.find((it) => it.id === id))
+      // eslint-disable-next-line functional/prefer-readonly-type
       .filter((it) => it !== undefined) as Certification[]
   );
   const hiddenSortedFundings = sortFundings(
     (userData?.preferences.hiddenFundingIds || [])
       .map((id) => props.fundings.find((it) => it.id === id))
+      // eslint-disable-next-line functional/prefer-readonly-type
       .filter((it) => it !== undefined) as Funding[]
   );
 

@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { randomInt } from "@shared/intHelpers";
 import { v41UserData } from "./v41_remove_operate_section";
 

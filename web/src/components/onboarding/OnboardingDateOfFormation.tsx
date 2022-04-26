@@ -13,11 +13,11 @@ import React, { ReactElement, useContext } from "react";
 advancedDateLibrary();
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-  required?: boolean;
-  disabled?: boolean;
-  headerAriaLevel?: number;
+  readonly onValidation: (field: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly required?: boolean;
+  readonly disabled?: boolean;
+  readonly headerAriaLevel?: number;
 }
 
 export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {

@@ -15,11 +15,11 @@ import { NextSeo } from "next-seo";
 import React, { ReactElement } from "react";
 
 interface Props {
-  certification: Certification;
-  operateReferences: Record<string, OperateReference>;
+  readonly certification: Certification;
+  readonly operateReferences: Record<string, OperateReference>;
 }
 
-export const CertificationElement = (props: { certification: Certification }): ReactElement => {
+export const CertificationElement = (props: { readonly certification: Certification }): ReactElement => {
   return (
     <>
       <div className="minh-38">
@@ -58,7 +58,7 @@ export const getStaticPaths = (): GetStaticPathsResult<CertificationUrlSlugParam
 export const getStaticProps = ({
   params,
 }: {
-  params: CertificationUrlSlugParam;
+  readonly params: CertificationUrlSlugParam;
 }): GetStaticPropsResult<Props> => {
   return {
     props: {

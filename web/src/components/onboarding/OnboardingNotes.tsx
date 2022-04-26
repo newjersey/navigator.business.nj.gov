@@ -2,8 +2,8 @@ import { OnboardingField } from "@/components/onboarding/OnboardingField";
 import React, { ReactElement } from "react";
 
 interface Props {
-  headerAriaLevel?: number;
-  handleChangeOverride?: (value: string) => void;
+  readonly headerAriaLevel?: number;
+  readonly handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingNotes = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {

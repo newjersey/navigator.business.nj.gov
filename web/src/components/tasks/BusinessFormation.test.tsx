@@ -92,7 +92,10 @@ describe("<BusinessFormation />", () => {
     },
   });
 
-  const renderTask = (userData: Partial<UserData>, municipalities?: Municipality[]): RenderResult => {
+  const renderTask = (
+    userData: Partial<UserData>,
+    municipalities?: readonly Municipality[]
+  ): RenderResult => {
     const genericTown = userData.profileData?.municipality
       ? userData.profileData.municipality
       : generateMunicipality({ displayName: "GenericTown" });

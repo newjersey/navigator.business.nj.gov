@@ -10,7 +10,7 @@ import {
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
-export type KeysOfType<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never }[keyof T];
+export type KeysOfType<T, V> = { readonly [K in keyof T]-?: T[K] extends V ? K : never }[keyof T];
 
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
@@ -19,133 +19,133 @@ export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS";
 
 export type TextFieldContent = {
-  contentMd: string;
-  placeholder?: string;
-  headingBolded?: string;
-  headingNotBolded?: string;
+  readonly contentMd: string;
+  readonly placeholder?: string;
+  readonly headingBolded?: string;
+  readonly headingNotBolded?: string;
 };
 
 export type RadioFieldContent = {
-  contentMd: string;
-  radioButtonYesText: string;
-  radioButtonNoText: string;
+  readonly contentMd: string;
+  readonly radioButtonYesText: string;
+  readonly radioButtonNoText: string;
 };
 
 export type CannabisRadioFieldContent = {
-  contentMd: string;
-  radioButtonAnnualText: string;
-  radioButtonConditionalText: string;
+  readonly contentMd: string;
+  readonly radioButtonAnnualText: string;
+  readonly radioButtonConditionalText: string;
 };
 
 export interface LegalFieldContent extends TextFieldContent {
-  optionContent?: Record<string, string>;
+  readonly optionContent?: Record<string, string>;
 }
 export type FlowType = "OWNING" | "STARTING";
 
 export type UserContentType = FlowType | "PROFILE";
 export interface IndustryFieldContent extends TextFieldContent {
-  specificHomeContractorMd: string;
-  specificEmploymentAgencyMd: string;
-  specificLiquorQuestion: RadioFieldContent;
-  specificCannabisLicenseQuestion: CannabisRadioFieldContent;
-  specificCpaQuestion: RadioFieldContent;
+  readonly specificHomeContractorMd: string;
+  readonly specificEmploymentAgencyMd: string;
+  readonly specificLiquorQuestion: RadioFieldContent;
+  readonly specificCannabisLicenseQuestion: CannabisRadioFieldContent;
+  readonly specificCpaQuestion: RadioFieldContent;
 }
 
 export type StartingFlowContent = {
-  hasExistingBusiness: RadioFieldContent;
-  businessName: TextFieldContent;
-  industryId: IndustryFieldContent;
-  municipality: TextFieldContent;
-  legalStructure: LegalFieldContent;
-  homeBased: RadioFieldContent;
+  readonly hasExistingBusiness: RadioFieldContent;
+  readonly businessName: TextFieldContent;
+  readonly industryId: IndustryFieldContent;
+  readonly municipality: TextFieldContent;
+  readonly legalStructure: LegalFieldContent;
+  readonly homeBased: RadioFieldContent;
 };
 
 export type ProfileContent = {
-  businessName: TextFieldContent;
-  industryId: IndustryFieldContent;
-  municipality: TextFieldContent;
-  legalStructure: LegalFieldContent;
-  notes: TextFieldContent;
-  documents: TextFieldContent;
-  taxId: TextFieldContent;
-  entityId: TextFieldContent;
-  employerId: TextFieldContent;
-  taxPin: TextFieldContent;
-  ownership: TextFieldContent;
-  existingEmployees: TextFieldContent;
-  dateOfFormation: TextFieldContent;
-  sectorId: TextFieldContent;
-  homeBased: RadioFieldContent;
+  readonly businessName: TextFieldContent;
+  readonly industryId: IndustryFieldContent;
+  readonly municipality: TextFieldContent;
+  readonly legalStructure: LegalFieldContent;
+  readonly notes: TextFieldContent;
+  readonly documents: TextFieldContent;
+  readonly taxId: TextFieldContent;
+  readonly entityId: TextFieldContent;
+  readonly employerId: TextFieldContent;
+  readonly taxPin: TextFieldContent;
+  readonly ownership: TextFieldContent;
+  readonly existingEmployees: TextFieldContent;
+  readonly dateOfFormation: TextFieldContent;
+  readonly sectorId: TextFieldContent;
+  readonly homeBased: RadioFieldContent;
 };
 
 export type OwningFlowContent = {
-  hasExistingBusiness: RadioFieldContent;
-  businessName: TextFieldContent;
-  dateOfFormation: TextFieldContent;
-  entityId: TextFieldContent;
-  ownership: TextFieldContent;
-  legalStructure: LegalFieldContent;
-  municipality: TextFieldContent;
-  existingEmployees: TextFieldContent;
-  sectorId: TextFieldContent;
-  homeBased: RadioFieldContent;
+  readonly hasExistingBusiness: RadioFieldContent;
+  readonly businessName: TextFieldContent;
+  readonly dateOfFormation: TextFieldContent;
+  readonly entityId: TextFieldContent;
+  readonly ownership: TextFieldContent;
+  readonly legalStructure: LegalFieldContent;
+  readonly municipality: TextFieldContent;
+  readonly existingEmployees: TextFieldContent;
+  readonly sectorId: TextFieldContent;
+  readonly homeBased: RadioFieldContent;
 };
 
 export interface UserDisplayContent extends StartingFlowContent, OwningFlowContent, ProfileContent {}
 
 export interface LoadDisplayContent
   extends Record<UserContentType, OwningFlowContent | StartingFlowContent | Partial<ProfileContent>> {
-  OWNING: OwningFlowContent;
-  STARTING: StartingFlowContent;
-  PROFILE: Partial<ProfileContent>;
+  readonly OWNING: OwningFlowContent;
+  readonly STARTING: StartingFlowContent;
+  readonly PROFILE: Partial<ProfileContent>;
 }
 
 export type CannabisPriorityStatusDisplayContent = {
-  cannabisSocialEquityBusiness: { contentMd: string };
-  genericMinorityAndWomenOwned: { contentMd: string };
-  genericVeteranOwned: { contentMd: string };
+  readonly cannabisSocialEquityBusiness: { readonly contentMd: string };
+  readonly genericMinorityAndWomenOwned: { readonly contentMd: string };
+  readonly genericVeteranOwned: { readonly contentMd: string };
 };
 
 export type CannabisApplyForLicenseDisplayContent = {
-  annualGeneralRequirements: { contentMd: string };
-  conditionalGeneralRequirements: { contentMd: string };
-  diverselyOwnedRequirements: { contentMd: string };
-  impactZoneRequirements: { contentMd: string };
-  microbusinessRequirements: { contentMd: string };
-  socialEquityRequirements: { contentMd: string };
+  readonly annualGeneralRequirements: { readonly contentMd: string };
+  readonly conditionalGeneralRequirements: { readonly contentMd: string };
+  readonly diverselyOwnedRequirements: { readonly contentMd: string };
+  readonly impactZoneRequirements: { readonly contentMd: string };
+  readonly microbusinessRequirements: { readonly contentMd: string };
+  readonly socialEquityRequirements: { readonly contentMd: string };
 };
 
 export type FormationDisplayContent = {
-  introParagraph: { contentMd: string };
-  businessNameCheck: { contentMd: string };
-  agentNumberOrManual: {
-    contentMd: string;
-    radioButtonNumberText: string;
-    radioButtonManualText: string;
+  readonly introParagraph: { readonly contentMd: string };
+  readonly businessNameCheck: { readonly contentMd: string };
+  readonly agentNumberOrManual: {
+    readonly contentMd: string;
+    readonly radioButtonNumberText: string;
+    readonly radioButtonManualText: string;
   };
-  members: TextFieldContent;
-  signatureHeader: {
-    contentMd: string;
+  readonly members: TextFieldContent;
+  readonly signatureHeader: {
+    readonly contentMd: string;
   };
-  services: {
-    contentMd: string;
+  readonly services: {
+    readonly contentMd: string;
   };
-  notification: {
-    contentMd: string;
+  readonly notification: {
+    readonly contentMd: string;
   };
-  officialFormationDocument: {
-    contentMd: string;
-    cost: number;
+  readonly officialFormationDocument: {
+    readonly contentMd: string;
+    readonly cost: number;
   };
-  certificateOfStanding: {
-    contentMd: string;
-    cost: number;
-    optionalLabel: string;
+  readonly certificateOfStanding: {
+    readonly contentMd: string;
+    readonly cost: number;
+    readonly optionalLabel: string;
   };
-  certifiedCopyOfFormationDocument: {
-    contentMd: string;
-    cost: number;
-    optionalLabel: string;
+  readonly certifiedCopyOfFormationDocument: {
+    readonly contentMd: string;
+    readonly cost: number;
+    readonly optionalLabel: string;
   };
 };
 
@@ -155,7 +155,7 @@ export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
   cannabisApplyForLicenseDisplayContent: createEmptyCannabisApplyForLicenseDisplayContent(),
 });
 
-export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
+export type AllPaymentTypes = readonly { readonly type: PaymentType; readonly displayText: string }[];
 
 export const createEmptyCannabisPriorityStatusDisplayContent = (): CannabisPriorityStatusDisplayContent => ({
   cannabisSocialEquityBusiness: {
@@ -389,17 +389,21 @@ export const createEmptyLoadDisplayContent = (): LoadDisplayContent => ({
 });
 export type ProfileFields = (keyof ProfileData & keyof UserDisplayContent) | keyof BusinessUser;
 
-export const profileDisplayFields = Object.keys(emptyProfileContent) as (keyof ProfileContent)[];
+export const profileDisplayFields = Object.keys(emptyProfileContent) as readonly (keyof ProfileContent)[];
 
-export const owningFlowDisplayFields = Object.keys(emptyOwningFlowContent) as (keyof OwningFlowContent)[];
+export const owningFlowDisplayFields = Object.keys(
+  emptyOwningFlowContent
+) as readonly (keyof OwningFlowContent)[];
 
-export const startFlowDisplayFields = Object.keys(emptyStartingFlowContent) as (keyof StartingFlowContent)[];
+export const startFlowDisplayFields = Object.keys(
+  emptyStartingFlowContent
+) as readonly (keyof StartingFlowContent)[];
 
-const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
+const businessUserDisplayFields = Object.keys(emptyBusinessUser) as readonly (keyof BusinessUser)[];
 
-const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
+const onboardingDataFields = Object.keys(emptyProfileData) as readonly (keyof ProfileData)[];
 
-export const profileFields: ProfileFields[] = [
+export const profileFields: readonly ProfileFields[] = [
   ...new Set([
     ...profileDisplayFields,
     ...onboardingDataFields,
@@ -407,7 +411,7 @@ export const profileFields: ProfileFields[] = [
     ...startFlowDisplayFields,
     ...businessUserDisplayFields,
   ]),
-] as ProfileFields[];
+] as readonly ProfileFields[];
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
@@ -415,8 +419,8 @@ export type FormationFields = keyof FormationFormData;
 export type FormationFieldErrorMap = Record<FormationFields, FieldStatus>;
 export type FormationErrorTypes = "generic" | "signer-checkbox" | "signer-name";
 export type FieldStatus = {
-  invalid: boolean;
-  types?: FormationErrorTypes[];
+  readonly invalid: boolean;
+  readonly types?: readonly FormationErrorTypes[];
 };
 
 export type ProfileFieldErrorMap = Record<ProfileFields, FieldStatus>;
@@ -428,49 +432,49 @@ export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
   }, {} as ProfileFieldErrorMap);
 
 export type RoadmapDisplayContent = {
-  contentMd: string;
+  readonly contentMd: string;
 };
 
 export type DashboardDisplayContent = {
-  introTextMd: string;
-  opportunityTextMd: string;
+  readonly introTextMd: string;
+  readonly opportunityTextMd: string;
 };
 
 export type Funding = {
-  id: string;
-  filename: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  contentMd: string;
-  fundingType: FundingType;
-  agency: OpportunityAgency[];
-  publishStageArchive: FundingPublishStatus | null;
-  openDate: string;
-  dueDate: string;
-  status: FundingStatus;
-  programFrequency: FundingProgramFrequency;
-  businessStage: FundingBusinessStage;
-  employeesRequired: string;
-  homeBased: FundingHomeBased;
-  mwvb: string;
-  preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
-  county: County[];
-  sector: string[];
+  readonly id: string;
+  readonly filename: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly callToActionLink: string;
+  readonly callToActionText: string;
+  readonly contentMd: string;
+  readonly fundingType: FundingType;
+  readonly agency: readonly OpportunityAgency[];
+  readonly publishStageArchive: FundingPublishStatus | null;
+  readonly openDate: string;
+  readonly dueDate: string;
+  readonly status: FundingStatus;
+  readonly programFrequency: FundingProgramFrequency;
+  readonly businessStage: FundingBusinessStage;
+  readonly employeesRequired: string;
+  readonly homeBased: FundingHomeBased;
+  readonly mwvb: string;
+  readonly preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
+  readonly county: readonly County[];
+  readonly sector: readonly string[];
 };
 
 export type Certification = {
-  id: string;
-  filename: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  contentMd: string;
-  agency: OpportunityAgency[];
-  applicableOwnershipTypes: string[];
-  isSbe: boolean;
+  readonly id: string;
+  readonly filename: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly callToActionLink: string;
+  readonly callToActionText: string;
+  readonly contentMd: string;
+  readonly agency: readonly OpportunityAgency[];
+  readonly applicableOwnershipTypes: readonly string[];
+  readonly isSbe: boolean;
 };
 
 export type OpportunityAgency = "NJEDA" | "NJDOL";
@@ -546,17 +550,17 @@ export type County =
   | "Warren";
 
 export type TasksDisplayContent = {
-  formationDisplayContent: FormationDisplayContent;
-  cannabisPriorityStatusDisplayContent: CannabisPriorityStatusDisplayContent;
-  cannabisApplyForLicenseDisplayContent: CannabisApplyForLicenseDisplayContent;
+  readonly formationDisplayContent: FormationDisplayContent;
+  readonly cannabisPriorityStatusDisplayContent: CannabisPriorityStatusDisplayContent;
+  readonly cannabisApplyForLicenseDisplayContent: CannabisApplyForLicenseDisplayContent;
 };
 
 export interface Roadmap {
-  steps: Step[];
+  readonly steps: readonly Step[];
 }
 
 export interface RoadmapStatus {
-  sectionCompletion: SectionCompletion;
+  readonly sectionCompletion: SectionCompletion;
 }
 
 export type SectionCompletion = Record<SectionType, boolean>;
@@ -565,86 +569,86 @@ export const sectionNames = ["PLAN", "START", "OPERATE"] as const;
 export type SectionType = typeof sectionNames[number];
 
 export interface Step {
-  step_number: number;
-  name: string;
-  timeEstimate: string;
-  description: string;
-  tasks: Task[];
-  section: SectionType;
+  readonly step_number: number;
+  readonly name: string;
+  readonly timeEstimate: string;
+  readonly description: string;
+  readonly tasks: readonly Task[];
+  readonly section: SectionType;
 }
 
 export interface Task {
-  id: string;
-  filename: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  contentMd: string;
-  postOnboardingQuestion?: string;
-  unlockedBy: TaskLink[];
-  required?: boolean;
-  issuingAgency?: string;
-  formName?: string;
+  readonly id: string;
+  readonly filename: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly callToActionLink: string;
+  readonly callToActionText: string;
+  readonly contentMd: string;
+  readonly postOnboardingQuestion?: string;
+  readonly unlockedBy: readonly TaskLink[];
+  readonly required?: boolean;
+  readonly issuingAgency?: string;
+  readonly formName?: string;
 }
 
 export interface TaskLink {
-  name: string;
-  id: string;
-  urlSlug: string;
-  filename: string;
+  readonly name: string;
+  readonly id: string;
+  readonly urlSlug: string;
+  readonly filename: string;
 }
 
 export type TaskDependencies = {
-  name: string;
-  dependencies: string[];
+  readonly name: string;
+  readonly dependencies: readonly string[];
 };
 
 export interface Filing {
-  id: string;
-  filename: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  contentMd: string;
+  readonly id: string;
+  readonly filename: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly callToActionLink: string;
+  readonly callToActionText: string;
+  readonly contentMd: string;
 }
 
 export type OperateReference = {
-  name: string;
-  urlSlug: string;
-  urlPath: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly urlPath: string;
 };
 
 export interface PostOnboarding {
-  question: string;
-  contentMd: string;
-  radioYes: string;
-  radioNo: string;
-  radioNoContent: string;
+  readonly question: string;
+  readonly contentMd: string;
+  readonly radioYes: string;
+  readonly radioNo: string;
+  readonly radioNoContent: string;
 }
 
 export interface SessionHelper {
-  getCurrentToken: () => Promise<string>;
-  getCurrentUser: () => Promise<BusinessUser>;
+  readonly getCurrentToken: () => Promise<string>;
+  readonly getCurrentUser: () => Promise<BusinessUser>;
 }
 
 export type NameAvailability = {
-  status: "AVAILABLE" | "UNAVAILABLE";
-  similarNames: string[];
+  readonly status: "AVAILABLE" | "UNAVAILABLE";
+  readonly similarNames: readonly string[];
 };
 
 export type SelfRegResponse = {
-  authRedirectURL: string;
-  userData: UserData;
+  readonly authRedirectURL: string;
+  readonly userData: UserData;
 };
 
 export type SelfRegRequest = {
-  name: string;
-  email: string;
-  confirmEmail: string;
-  receiveNewsletter: boolean;
-  userTesting: boolean;
+  readonly name: string;
+  readonly email: string;
+  readonly confirmEmail: string;
+  readonly receiveNewsletter: boolean;
+  readonly userTesting: boolean;
 };
 
 export type businessFormationTabsNames = "Name" | "Business" | "Contacts" | "Review" | "Billing";

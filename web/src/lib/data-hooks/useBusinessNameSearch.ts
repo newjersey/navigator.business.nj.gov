@@ -8,18 +8,18 @@ import { ChangeEvent, FocusEvent, FormEvent, useState } from "react";
 export const useBusinessNameSearch = (
   isBusinessFormation: boolean
 ): {
-  currentName: string;
-  submittedName: string;
-  isNameFieldEmpty: boolean;
-  isLoading: boolean;
-  error: SearchBusinessNameError | undefined;
-  nameAvailability: NameAvailability | undefined;
-  updateButtonClicked: boolean;
-  updateCurrentName: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlurNameField: (event: FocusEvent<HTMLInputElement>) => void;
-  searchBusinessName: (event: FormEvent<HTMLFormElement>) => Promise<void>;
-  updateNameOnProfile: () => void;
-  setCurrentName: (name: string) => void;
+  readonly currentName: string;
+  readonly submittedName: string;
+  readonly isNameFieldEmpty: boolean;
+  readonly isLoading: boolean;
+  readonly error: SearchBusinessNameError | undefined;
+  readonly nameAvailability: NameAvailability | undefined;
+  readonly updateButtonClicked: boolean;
+  readonly updateCurrentName: (event: ChangeEvent<HTMLInputElement>) => void;
+  readonly onBlurNameField: (event: FocusEvent<HTMLInputElement>) => void;
+  readonly searchBusinessName: (event: FormEvent<HTMLFormElement>) => Promise<void>;
+  readonly updateNameOnProfile: () => void;
+  readonly setCurrentName: (name: string) => void;
 } => {
   const { userData, update } = useUserData();
 

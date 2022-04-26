@@ -7,7 +7,7 @@ import React, { ReactElement, useContext } from "react";
 export const OnboardingHasExistingBusiness = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleSelection = (event: React.ChangeEvent<{ readonly name?: string; readonly value: unknown }>) => {
     setProfileData({
       ...state.profileData,
       hasExistingBusiness: event.target.value === "true",

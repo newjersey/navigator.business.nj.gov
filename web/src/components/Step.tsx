@@ -6,8 +6,8 @@ import { isStepCompleted } from "@/lib/utils/helpers";
 import React, { ReactElement } from "react";
 
 interface Props {
-  step: types.Step;
-  last: boolean;
+  readonly step: types.Step;
+  readonly last: boolean;
 }
 
 export const Step = (props: Props): ReactElement => {

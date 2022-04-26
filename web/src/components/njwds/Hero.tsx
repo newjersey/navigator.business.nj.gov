@@ -7,7 +7,7 @@ import { useMediaQuery } from "@mui/material";
 import React, { ReactElement } from "react";
 
 interface Props {
-  onClick: () => void;
+  readonly onClick: () => void;
 }
 
 export const Hero = (props: Props): ReactElement => {

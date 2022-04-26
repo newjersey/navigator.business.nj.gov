@@ -29,12 +29,14 @@ import { useRouter } from "next/router";
 import React, { createContext, ReactElement, useEffect, useState } from "react";
 
 interface Props {
-  task: Task;
-  displayContent: FormationDisplayContent;
-  municipalities: Municipality[];
+  readonly task: Task;
+  readonly displayContent: FormationDisplayContent;
+  readonly municipalities: readonly Municipality[];
 }
 
-const allFormationFormFields = Object.keys(createEmptyFormationFormData()) as (keyof FormationFormData)[];
+const allFormationFormFields = Object.keys(
+  createEmptyFormationFormData()
+) as readonly (keyof FormationFormData)[];
 
 const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
   allFormationFormFields.reduce((acc, field: FormationFields) => {
@@ -43,20 +45,20 @@ const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
   }, {} as FormationFieldErrorMap);
 
 interface FormationState {
-  tab: number;
-  formationFormData: FormationFormData;
-  displayContent: FormationDisplayContent;
-  municipalities: Municipality[];
-  errorMap: FormationFieldErrorMap;
-  showResponseAlert: boolean;
+  readonly tab: number;
+  readonly formationFormData: FormationFormData;
+  readonly displayContent: FormationDisplayContent;
+  readonly municipalities: readonly Municipality[];
+  readonly errorMap: FormationFieldErrorMap;
+  readonly showResponseAlert: boolean;
 }
 
 interface FormationContextType {
-  state: FormationState;
-  setFormationFormData: (formationFormData: FormationFormData) => void;
-  setErrorMap: (errorMap: FormationFieldErrorMap) => void;
-  setTab: React.Dispatch<React.SetStateAction<number>>;
-  setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly state: FormationState;
+  readonly setFormationFormData: (formationFormData: FormationFormData) => void;
+  readonly setErrorMap: (errorMap: FormationFieldErrorMap) => void;
+  readonly setTab: React.Dispatch<React.SetStateAction<number>>;
+  readonly setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FormationContext = createContext<FormationContextType>({

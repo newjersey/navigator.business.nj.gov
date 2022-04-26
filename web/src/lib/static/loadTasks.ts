@@ -4,13 +4,14 @@ import fs from "fs";
 import path from "path";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 
-export type PathParams<P> = { params: P; locale?: string };
+export type PathParams<P> = { readonly params: P; readonly locale?: string };
 export type TaskUrlSlugParam = {
-  taskUrlSlug: string;
+  readonly taskUrlSlug: string;
 };
 
 const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
 
+// eslint-disable-next-line functional/prefer-readonly-type
 export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
   const directory = path.join(roadmapsDir, "tasks");
   const fileNames = fs.readdirSync(directory);
@@ -34,7 +35,7 @@ const loadTaskByFileName = (fileName: string): Task => {
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const dependencies = JSON.parse(fs.readFileSync(path.join(roadmapsDir, "task-dependencies.json"), "utf8"))
-    .dependencies as TaskDependencies[];
+    .dependencies as readonly TaskDependencies[];
 
   const taskWithoutLinks = convertTaskMd(fileContents);
   const fileNameWithoutMd = fileName.split(".md")[0];

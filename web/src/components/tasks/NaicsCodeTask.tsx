@@ -11,7 +11,7 @@ import { AuthAlertContext } from "@/pages/_app";
 import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
-  task: Task;
+  readonly task: Task;
 }
 
 export const NaicsCodeTask = (props: Props): ReactElement => {

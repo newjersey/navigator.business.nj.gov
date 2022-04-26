@@ -316,31 +316,31 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
 };
 
 type FieldGrayMatter = {
-  placeholder: string;
+  readonly placeholder: string;
 };
 
 type DocumentFieldGrayMatter = {
-  cost: number;
-  optionalLabel: string;
+  readonly cost: number;
+  readonly optionalLabel: string;
 };
 
 type RadioGrayMatter = {
-  radioButtonYesText: string;
-  radioButtonNoText: string;
+  readonly radioButtonYesText: string;
+  readonly radioButtonNoText: string;
 };
 
 type CannabisRadioGrayMatter = {
-  radioButtonAnnualText: string;
-  radioButtonConditionalText: string;
+  readonly radioButtonAnnualText: string;
+  readonly radioButtonConditionalText: string;
 };
 
 type RegisteredAgentRadioGrayMatter = {
-  radioButtonNumberText: string;
-  radioButtonManualText: string;
+  readonly radioButtonNumberText: string;
+  readonly radioButtonManualText: string;
 };
 
 type MemberGrayMatter = {
-  title: string;
-  titleSubtext: string;
-  placeholder: string;
+  readonly title: string;
+  readonly titleSubtext: string;
+  readonly placeholder: string;
 };

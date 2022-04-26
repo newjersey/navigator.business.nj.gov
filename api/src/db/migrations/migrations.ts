@@ -55,7 +55,7 @@ import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
 export type MigrationFunction = (data: any) => any;
 
-export const Migrations: MigrationFunction[] = [
+export const Migrations: readonly MigrationFunction[] = [
   migrate_v0_to_v1,
   migrate_v1_to_v2,
   migrate_v2_to_v3,

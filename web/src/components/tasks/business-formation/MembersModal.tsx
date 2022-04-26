@@ -8,10 +8,10 @@ import { createEmptyFormationMember, FormationMember, Municipality } from "@busi
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 interface Props {
-  open: boolean;
-  index?: number;
-  handleClose: () => void;
-  onSave: () => void;
+  readonly open: boolean;
+  readonly index?: number;
+  readonly handleClose: () => void;
+  readonly onSave: () => void;
 }
 
 export const MembersModal = (props: Props): ReactElement => {
@@ -20,7 +20,7 @@ export const MembersModal = (props: Props): ReactElement => {
   const [memberData, setMemberData] = useState<FormationMember>(createEmptyFormationMember());
 
   type FieldStatus = {
-    invalid: boolean | undefined;
+    readonly invalid: boolean | undefined;
   };
 
   const errorFields = [
@@ -155,7 +155,7 @@ export const MembersModal = (props: Props): ReactElement => {
           <Content
             style={{ display: "inline" }}
             overrides={{
-              p: ({ children }: { children: string[] }): ReactElement => (
+              p: ({ children }: { readonly children: readonly string[] }): ReactElement => (
                 <p style={{ display: "inline" }}>{children}</p>
               ),
             }}

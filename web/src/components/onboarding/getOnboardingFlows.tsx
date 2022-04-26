@@ -15,15 +15,18 @@ import { validateEmail } from "@/lib/utils/helpers";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import React, { ReactNode } from "react";
 
-type OnboardingPage = { component: ReactNode; getErrorMap: () => ErrorFieldMap | undefined };
+type OnboardingPage = {
+  readonly component: ReactNode;
+  readonly getErrorMap: () => ErrorFieldMap | undefined;
+};
 
 export type OnboardingFlow = {
-  pages: OnboardingPage[];
+  readonly pages: readonly OnboardingPage[];
 };
 
 export type ErrorFieldMap = {
-  inline?: { name: ProfileFields; valid: boolean }[];
-  banner?: { name: ProfileError; valid: boolean }[];
+  readonly inline?: readonly { readonly name: ProfileFields; readonly valid: boolean }[];
+  readonly banner?: readonly { readonly name: ProfileError; readonly valid: boolean }[];
 };
 
 export const getOnboardingFlows = (

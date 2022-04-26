@@ -14,6 +14,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:cypress/recommended",
+    "plugin:functional/no-mutations",
     "plugin:@next/next/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
@@ -29,7 +30,14 @@
     "sourceType": "module",
     "tsconfigRootDir": "."
   },
-  "plugins": ["react", "@typescript-eslint", "@typescript-eslint/eslint-plugin", "jsx-a11y", "cypress"],
+  "plugins": [
+    "functional",
+    "react",
+    "@typescript-eslint",
+    "@typescript-eslint/eslint-plugin",
+    "jsx-a11y",
+    "cypress"
+  ],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
     "@next/next/no-img-element": "off",
@@ -37,6 +45,7 @@
     "prefer-template": "error",
     "react/jsx-uses-react": 1,
     "react/forbid-elements": [1, { "forbid": ["h5", "h6"] }],
-    "@next/next/no-document-import-in-page": 0
+    "@next/next/no-document-import-in-page": 0,
+    "functional/no-let": "off"
   }
 }

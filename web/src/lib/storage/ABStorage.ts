@@ -2,8 +2,8 @@ import { BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
 import { ABExperience } from "@businessnjgovnavigator/shared/";
 
 interface ABStorage {
-  getExperience: () => ABExperience | undefined;
-  setExperience: (abExperience: ABExperience) => void;
+  readonly getExperience: () => ABExperience | undefined;
+  readonly setExperience: (abExperience: ABExperience) => void;
 }
 
 export const abExperiencePrefix = "$navigatorABExperience$";

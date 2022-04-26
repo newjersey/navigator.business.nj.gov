@@ -6,9 +6,9 @@ import { RoadmapContext } from "@/pages/_app";
 import { useContext } from "react";
 
 export const useRoadmap = (): {
-  roadmap: Roadmap | undefined;
-  sectionCompletion: SectionCompletion | undefined;
-  updateStatus: (sectionCompletion?: SectionCompletion) => Promise<SectionCompletion>;
+  readonly roadmap: Roadmap | undefined;
+  readonly sectionCompletion: SectionCompletion | undefined;
+  readonly updateStatus: (sectionCompletion?: SectionCompletion) => Promise<SectionCompletion>;
 } => {
   const { roadmap, sectionCompletion, setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const { userData } = useUserData();

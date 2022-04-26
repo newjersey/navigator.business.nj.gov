@@ -8,16 +8,17 @@ import { getFileNameByUrlSlug } from "./helpers";
 const certificationDir = path.join(process.cwd(), "..", "content", "src", "certifications");
 
 export type CertificationUrlSlugParam = {
-  certificationUrlSlug: string;
+  readonly certificationUrlSlug: string;
 };
 
-export const loadAllCertifications = (): Certification[] => {
+export const loadAllCertifications = (): readonly Certification[] => {
   const fileNames = fs.readdirSync(certificationDir);
   return fileNames.map((fileName) => {
     return loadCertificationByFileName(fileName);
   });
 };
 
+// eslint-disable-next-line functional/prefer-readonly-type
 export const loadAllCertificationUrlSlugs = (): PathParams<CertificationUrlSlugParam>[] => {
   const fileNames = fs.readdirSync(certificationDir);
   return fileNames.map((fileName) => {

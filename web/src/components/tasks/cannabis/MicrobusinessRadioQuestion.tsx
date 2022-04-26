@@ -8,7 +8,9 @@ import React, { ReactElement } from "react";
 export const MicrobusinessRadioQuestion = (): ReactElement => {
   const { userData, update } = useUserData();
 
-  const handleRadioChange = async (event: React.ChangeEvent<{ name?: string; value: string }>) => {
+  const handleRadioChange = async (
+    event: React.ChangeEvent<{ readonly name?: string; readonly value: string }>
+  ) => {
     if (!userData) return;
     const isMicrobusiness = event.target.value === "true";
     await update({

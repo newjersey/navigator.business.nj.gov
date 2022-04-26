@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 
 interface Props {
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
 }
 
 export const SingleColumnContainer = (props: Props): ReactElement => {

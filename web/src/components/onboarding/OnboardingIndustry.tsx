@@ -13,9 +13,9 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
+  readonly onValidation: (field: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly headerAriaLevel?: number;
 }
 
 export const OnboardingIndustry = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {

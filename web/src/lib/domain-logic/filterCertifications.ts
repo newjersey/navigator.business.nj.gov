@@ -4,8 +4,9 @@ import { UserData } from "@businessnjgovnavigator/shared/";
 export const LARGE_BUSINESS_MIN_EMPLOYEE_COUNT = 120;
 
 export const filterCertifications = (
-  certifications: Certification[],
+  certifications: readonly Certification[],
   userData: UserData
+  // eslint-disable-next-line functional/prefer-readonly-type
 ): Certification[] => {
   return certifications.filter((it) => {
     let allowedCertification = true;

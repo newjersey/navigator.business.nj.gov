@@ -5,9 +5,9 @@ import { SelfRegClient, SelfRegResponse } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 
 type MyNJConfig = {
-  serviceToken: string;
-  roleName: string;
-  serviceUrl: string;
+  readonly serviceToken: string;
+  readonly roleName: string;
+  readonly serviceUrl: string;
 };
 
 export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWriterType): SelfRegClient => {

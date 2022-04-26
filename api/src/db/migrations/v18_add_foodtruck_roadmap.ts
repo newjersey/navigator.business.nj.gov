@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v17UserData } from "./v17_add_operate_section";
 
 export interface v18UserData {

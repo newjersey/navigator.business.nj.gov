@@ -4,19 +4,23 @@ import { NewsletterClient } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 
 type GovDeliveryNewsletterClientConfig = {
-  baseUrl: string;
-  topic: string;
-  apiKey: string;
-  logWriter: LogWriterType;
-  siteUrl?: string;
-  urlQuestion?: string;
+  readonly baseUrl: string;
+  readonly topic: string;
+  readonly apiKey: string;
+  readonly logWriter: LogWriterType;
+  readonly siteUrl?: string;
+  readonly urlQuestion?: string;
 };
 
 export type GovDeliveryResponse = {
-  citizen_id?: number;
-  topic_id?: string;
-  message?: string;
-  errors?: { email?: string[]; secondary_email?: string[]; wireless?: string[] };
+  readonly citizen_id?: number;
+  readonly topic_id?: string;
+  readonly message?: string;
+  readonly errors?: {
+    readonly email?: readonly string[];
+    readonly secondary_email?: readonly string[];
+    readonly wireless?: readonly string[];
+  };
 };
 
 export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientConfig): NewsletterClient => {

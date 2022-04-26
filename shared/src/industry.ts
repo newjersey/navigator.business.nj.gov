@@ -1,31 +1,31 @@
 import industryJson from "../../content/lib/industry.json";
 
 export interface Industry {
-  id: string;
-  name: string;
-  description: string;
-  canBeHomeBased: boolean;
-  isLiquorLicenseApplicable: boolean;
-  isCpaRequiredApplicable: boolean;
-  licenseType?: string;
-  isMobileLocation: boolean;
-  canBeReseller: boolean;
-  additionalSearchTerms?: string;
-  defaultSectorId?: string;
-  roadmapSteps: AddOn[];
-  modifications?: TaskModification[];
-  naicsCodes?: string;
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly canBeHomeBased: boolean;
+  readonly isLiquorLicenseApplicable: boolean;
+  readonly isCpaRequiredApplicable: boolean;
+  readonly licenseType?: string;
+  readonly isMobileLocation: boolean;
+  readonly canBeReseller: boolean;
+  readonly additionalSearchTerms?: string;
+  readonly defaultSectorId?: string;
+  readonly roadmapSteps: readonly AddOn[];
+  readonly modifications?: readonly TaskModification[];
+  readonly naicsCodes?: string;
 }
 
 export interface AddOn {
-  step: number;
-  weight: number;
-  task: string;
+  readonly step: number;
+  readonly weight: number;
+  readonly task: string;
 }
 
 export interface TaskModification {
-  taskToReplaceFilename: string;
-  replaceWithFilename: string;
+  readonly taskToReplaceFilename: string;
+  readonly replaceWithFilename: string;
 }
 
 export const LookupIndustryById = (id: string | undefined): Industry => {
@@ -45,4 +45,4 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
   );
 };
 
-export const Industries: Industry[] = industryJson.industries;
+export const Industries: readonly Industry[] = industryJson.industries;

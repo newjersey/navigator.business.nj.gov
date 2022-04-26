@@ -31,7 +31,7 @@ describe("externalEndpointRouter", () => {
     app.use(externalEndpointRouterFactory(stubUserDataClient, stubAddNewsletter, stubAddToUserTesting));
   });
 
-  const cognitoPayload = ({ id }: { id: string }) => ({
+  const cognitoPayload = ({ id }: { readonly id: string }) => ({
     sub: "some-sub",
     "custom:myNJUserKey": undefined,
     email: "some-eamail",

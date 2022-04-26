@@ -4,16 +4,16 @@ import { Breakpoint } from "@mui/material";
 import React, { ReactNode } from "react";
 
 interface Props {
-  isOpen: boolean;
-  close: () => void;
-  title: string;
-  bodyText?: string;
-  children?: ReactNode;
-  primaryButtonText: string;
-  primaryButtonOnClick: () => void;
-  secondaryButtonText: string;
-  maxWidth?: Breakpoint;
-  dividers?: boolean;
+  readonly isOpen: boolean;
+  readonly close: () => void;
+  readonly title: string;
+  readonly bodyText?: string;
+  readonly children?: ReactNode;
+  readonly primaryButtonText: string;
+  readonly primaryButtonOnClick: () => void;
+  readonly secondaryButtonText: string;
+  readonly maxWidth?: Breakpoint;
+  readonly dividers?: boolean;
 }
 
 export const DialogTwoButton = (props: Props) => {

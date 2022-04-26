@@ -10,10 +10,10 @@ import { Municipality } from "@businessnjgovnavigator/shared/";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-  h3Heading?: boolean;
-  headerAriaLevel?: number;
+  readonly onValidation: (field: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly h3Heading?: boolean;
+  readonly headerAriaLevel?: number;
 }
 
 export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {

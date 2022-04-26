@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v38UserData } from "./v38_swap_certification_for_ownership";
 
 export interface v39UserData {

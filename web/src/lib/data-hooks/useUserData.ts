@@ -40,7 +40,10 @@ export const useUserData = (): UseUserDataResponse => {
     }
   }, [userDataError, dataExists, error, setUserDataError, state.isAuthenticated]);
 
-  const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
+  const update = async (
+    newUserData: UserData | undefined,
+    config?: { readonly local?: boolean }
+  ): Promise<void> => {
     if (newUserData) {
       mutate(newUserData, false);
       if (config?.local || state.isAuthenticated != IsAuthenticated.TRUE) return;
@@ -70,9 +73,12 @@ export const useUserData = (): UseUserDataResponse => {
 };
 
 export type UseUserDataResponse = {
-  userData: UserData | undefined;
-  isLoading: boolean;
-  error: UserDataError | undefined;
-  update: (newUserData: UserData | undefined, config?: { local?: boolean }) => Promise<void>;
-  refresh: () => Promise<void>;
+  readonly userData: UserData | undefined;
+  readonly isLoading: boolean;
+  readonly error: UserDataError | undefined;
+  readonly update: (
+    newUserData: UserData | undefined,
+    config?: { readonly local?: boolean }
+  ) => Promise<void>;
+  readonly refresh: () => Promise<void>;
 };

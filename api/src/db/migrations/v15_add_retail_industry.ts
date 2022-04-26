@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v14UserData } from "./v14_add_cleaning_aid_industry";
 
 export interface v15UserData {

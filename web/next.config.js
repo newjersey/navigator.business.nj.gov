@@ -1,3 +1,4 @@
+/* eslint-disable functional/immutable-data */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const CopyPlugin = require("copy-webpack-plugin");

@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import { randomInt } from "@shared/intHelpers";
 import { v23UserData } from "./v23_rename_onboardingData_to_profileData";

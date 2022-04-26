@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 interface Props {
-  style:
+  readonly style:
     | "primary"
     | "secondary"
     | "tertiary"
@@ -15,20 +15,23 @@ interface Props {
     | "accent-cool-darker-big"
     | "accent-cooler"
     | "info";
-  children: React.ReactNode;
-  onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
-  dataTestid?: string;
-  typeSubmit?: boolean;
-  noRightMargin?: boolean;
-  underline?: boolean;
-  smallText?: boolean;
-  textBold?: boolean;
-  loading?: boolean;
-  widthAutoOnMobile?: boolean;
-  heightAutoOnMobile?: boolean;
-  intercomButton?: boolean;
-  className?: string;
-  align?: "start" | "end" | "center";
+  readonly children: React.ReactNode;
+  readonly onClick?:
+    | (() => void)
+    | ((event: React.MouseEvent) => Promise<void>)
+    | ((event: React.MouseEvent) => void);
+  readonly dataTestid?: string;
+  readonly typeSubmit?: boolean;
+  readonly noRightMargin?: boolean;
+  readonly underline?: boolean;
+  readonly smallText?: boolean;
+  readonly textBold?: boolean;
+  readonly loading?: boolean;
+  readonly widthAutoOnMobile?: boolean;
+  readonly heightAutoOnMobile?: boolean;
+  readonly intercomButton?: boolean;
+  readonly className?: string;
+  readonly align?: "start" | "end" | "center";
 }
 
 export const Button = (props: Props): ReactElement => {

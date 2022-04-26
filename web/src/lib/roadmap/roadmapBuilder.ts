@@ -5,8 +5,8 @@ export const buildRoadmap = async ({
   industryId,
   addOns,
 }: {
-  industryId: string;
-  addOns: string[];
+  readonly industryId: string;
+  readonly addOns: readonly string[];
 }): Promise<Roadmap> => {
   let roadmapBuilder: RoadmapBuilder = {
     steps: (await importGenericSteps()).map((step: GenericStep) => ({
@@ -27,7 +27,7 @@ export const buildRoadmap = async ({
 const generateIndustryRoadmap = async (
   builder: RoadmapBuilder,
   industryId: string,
-  addOns: string[]
+  addOns: readonly string[]
 ): Promise<RoadmapBuilder> => {
   const industryRoadmap: IndustryRoadmap = await importRoadmap(industryId);
 
@@ -38,7 +38,10 @@ const generateIndustryRoadmap = async (
   return builder;
 };
 
-const applyAddOns = async (builder: RoadmapBuilder, addOnFilenames: string[]): Promise<RoadmapBuilder> => {
+const applyAddOns = async (
+  builder: RoadmapBuilder,
+  addOnFilenames: readonly string[]
+): Promise<RoadmapBuilder> => {
   for (const addOnFilename of addOnFilenames) {
     const addOns = await importAddOn(addOnFilename);
     addTasksFromAddOn(builder, addOns.roadmapSteps);
@@ -56,12 +59,13 @@ const importRoadmap = async (industryId: string): Promise<IndustryRoadmap> => {
     .default as IndustryRoadmap;
 };
 
-const importGenericSteps = async (): Promise<GenericStep[]> => {
+const importGenericSteps = async (): Promise<readonly GenericStep[]> => {
   if (process.env.NODE_ENV === "test") {
-    return (await import(`@/lib/roadmap/fixtures/steps.json`)).steps as GenericStep[];
+    return (await import(`@/lib/roadmap/fixtures/steps.json`)).steps as unknown as readonly GenericStep[];
   }
 
-  return (await import(`@businessnjgovnavigator/content/roadmaps/steps.json`)).steps as GenericStep[];
+  return (await import(`@businessnjgovnavigator/content/roadmaps/steps.json`))
+    .steps as unknown as readonly GenericStep[];
 };
 
 const importAddOn = async (relativePath: string): Promise<IndustryRoadmap> => {
@@ -78,41 +82,55 @@ const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
   return taskA.weight > taskB.weight ? 1 : -1;
 };
 
-const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
-  addOns.forEach((addOn) => {
-    const step = builder.steps.find((step) => step.step_number === addOn.step);
-    if (!step) {
-      return;
+const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: readonly AddOn[]): RoadmapBuilder => {
+  // eslint-disable-next-line functional/prefer-readonly-type
+  const steps: StepBuilder[] = [];
+  builder.steps.forEach((step) => {
+    const addOn = addOns.find((a) => step.step_number === a.step);
+    if (addOn) {
+      const stepTasks = [...step.tasks, { filename: addOn.task, weight: addOn.weight }];
+      const compiledStep = {
+        ...step,
+        tasks: stepTasks,
+      };
+      steps.push(compiledStep);
+    } else {
+      steps.push(step);
     }
+  });
+  return {
+    ...builder,
+    steps,
+  };
+};
 
-    step.tasks = [...step.tasks, { filename: addOn.task, weight: addOn.weight }];
+const modifyTasks = (roadmap: RoadmapBuilder, modifications: readonly TaskModification[]): RoadmapBuilder => {
+  // eslint-disable-next-line functional/prefer-readonly-type
+  const steps: StepBuilder[] = [];
+  roadmap.steps.forEach((step) => {
+    // eslint-disable-next-line functional/prefer-readonly-type
+    const tasks: TaskBuilder[] = [];
+    step.tasks.forEach((task) => {
+      const modification = modifications.find((mod) => mod.taskToReplaceFilename == task.filename);
+      if (modification) {
+        tasks.push({
+          ...task,
+          filename: modification.replaceWithFilename,
+        });
+      } else {
+        tasks.push(task);
+      }
+    });
+    steps.push({
+      ...step,
+      tasks,
+    });
   });
 
-  return builder;
-};
-
-const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[]): RoadmapBuilder => {
-  if (modifications) {
-    modifications.forEach((modification) => {
-      const task = findTaskInRoadmapByFilename(roadmap, modification.taskToReplaceFilename);
-      if (!task) {
-        return;
-      }
-      task.filename = modification.replaceWithFilename;
-    });
-  }
-
-  return roadmap;
-};
-
-const findTaskInRoadmapByFilename = (
-  roadmapBuilder: RoadmapBuilder,
-  taskFilename: string
-): TaskBuilder | undefined => {
-  for (const step of roadmapBuilder.steps) {
-    const found = step.tasks.find((task) => task.filename === taskFilename);
-    if (found) return found;
-  }
+  return {
+    ...roadmap,
+    steps,
+  };
 };
 
 const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap> => {
@@ -128,7 +146,7 @@ const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap
   };
 
   const allFilenames = roadmap.steps.reduce(
-    (acc: string[], currStep: Step) => [...acc, ...currStep.tasks.map((task) => task.filename)],
+    (acc: readonly string[], currStep: Step) => [...acc, ...currStep.tasks.map((task) => task.filename)],
     []
   );
 
@@ -150,50 +168,53 @@ const lastStepHasNoTasks = (roadmap: RoadmapBuilder): boolean => {
 };
 
 const removeLastStep = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {
-  roadmapBuilder.steps = roadmapBuilder.steps.splice(0, roadmapBuilder.steps.length - 1);
-  return roadmapBuilder;
+  const steps = roadmapBuilder.steps.slice(0, roadmapBuilder.steps.length - 1);
+  return {
+    ...roadmapBuilder,
+    steps,
+  };
 };
 
 interface RoadmapBuilder {
-  steps: StepBuilder[];
+  readonly steps: readonly StepBuilder[];
 }
 
 interface StepBuilder {
-  step_number: number;
-  id: string;
-  name: string;
-  timeEstimate: string;
-  section: SectionType;
-  description: string;
-  tasks: TaskBuilder[];
+  readonly step_number: number;
+  readonly id: string;
+  readonly name: string;
+  readonly timeEstimate: string;
+  readonly section: SectionType;
+  readonly description: string;
+  readonly tasks: readonly TaskBuilder[];
 }
 
 interface TaskBuilder {
-  filename: string;
-  weight: number;
+  readonly filename: string;
+  readonly weight: number;
 }
 
 interface GenericStep {
-  step_number: number;
-  id: string;
-  name: string;
-  section: SectionType;
-  timeEstimate: string;
-  description: string;
+  readonly step_number: number;
+  readonly id: string;
+  readonly name: string;
+  readonly section: SectionType;
+  readonly timeEstimate: string;
+  readonly description: string;
 }
 
 export interface AddOn {
-  step: number;
-  weight: number;
-  task: string;
+  readonly step: number;
+  readonly weight: number;
+  readonly task: string;
 }
 
 export interface TaskModification {
-  taskToReplaceFilename: string;
-  replaceWithFilename: string;
+  readonly taskToReplaceFilename: string;
+  readonly replaceWithFilename: string;
 }
 
 export interface IndustryRoadmap {
-  roadmapSteps: AddOn[];
-  modifications: TaskModification[];
+  readonly roadmapSteps: readonly AddOn[];
+  readonly modifications: readonly TaskModification[];
 }

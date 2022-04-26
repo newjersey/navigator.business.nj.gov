@@ -16,18 +16,18 @@ import orderBy from "lodash.orderby";
 import React, { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
-  handleChange?: () => void;
-  onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
-  error?: boolean;
-  validationText?: string;
-  validationLabel?: string;
+  readonly handleChange?: () => void;
+  readonly onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
+  readonly error?: boolean;
+  readonly validationText?: string;
+  readonly validationLabel?: string;
 }
 
 export const IndustryDropdown = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const IndustriesOrdered: Industry[] = orderBy(Industries, (industry: Industry) => {
+  const IndustriesOrdered: readonly Industry[] = orderBy(Industries, (industry: Industry) => {
     return industry.name;
   });
 

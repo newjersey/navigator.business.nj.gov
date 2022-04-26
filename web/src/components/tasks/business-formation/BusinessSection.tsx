@@ -17,7 +17,7 @@ export const BusinessSection = (): ReactElement => {
   const { userData, update } = useUserData();
 
   const requiredFieldsWithError = useMemo(() => {
-    let requiredFields: FormationFields[] = [
+    let requiredFields: readonly FormationFields[] = [
       "businessName",
       "businessSuffix",
       "businessAddressCity",

@@ -3,14 +3,14 @@ import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui
 import React, { ReactNode } from "react";
 
 interface Props {
-  isOpen: boolean;
-  close: () => void;
-  title: string;
-  bodyText?: string;
-  children?: ReactNode;
-  maxWidth?: Breakpoint;
-  dividers?: boolean;
-  unpaddedChildren?: ReactNode;
+  readonly isOpen: boolean;
+  readonly close: () => void;
+  readonly title: string;
+  readonly bodyText?: string;
+  readonly children?: ReactNode;
+  readonly maxWidth?: Breakpoint;
+  readonly dividers?: boolean;
+  readonly unpaddedChildren?: ReactNode;
 }
 
 export const DialogZeroButton = (props: Props) => {

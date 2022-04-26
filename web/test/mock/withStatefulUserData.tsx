@@ -5,8 +5,8 @@ import React, { createContext, ReactElement, ReactNode, useContext, useState } f
 
 const updateSpy = jest.fn();
 
-export const getLastCalledWithConfig = (): { local?: boolean } => {
-  return getLastCalledWith(updateSpy)[1] as { local?: boolean };
+export const getLastCalledWithConfig = (): { readonly local?: boolean } => {
+  return getLastCalledWith(updateSpy)[1] as { readonly local?: boolean };
 };
 
 export const currentUserData = (): UserData => {
@@ -25,12 +25,15 @@ export const WithStatefulUserData = ({
   children,
   initialUserData,
 }: {
-  children: ReactNode;
-  initialUserData: UserData | undefined;
+  readonly children: ReactNode;
+  readonly initialUserData: UserData | undefined;
 }): ReactElement => {
   const [userData, setUserData] = useState<UserData | undefined>(initialUserData);
 
-  const update = (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
+  const update = (
+    newUserData: UserData | undefined,
+    config?: { readonly local?: boolean }
+  ): Promise<void> => {
     updateSpy(newUserData, config);
     setUserData(newUserData);
     return Promise.resolve();
@@ -44,8 +47,8 @@ export const WithStatefulUserData = ({
 };
 
 interface StatefulUserDataContextType {
-  userData: UserData | undefined;
-  update: (userData: UserData | undefined) => Promise<void>;
+  readonly userData: UserData | undefined;
+  readonly update: (userData: UserData | undefined) => Promise<void>;
 }
 
 export const StatefulUserDataContext = createContext<StatefulUserDataContextType>({

@@ -11,7 +11,7 @@ import React, { ReactElement, ReactNode, useContext } from "react";
 export const OnboardingLegalStructureDropdown = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const LegalStructuresOrdered: LegalStructure[] = orderBy(
+  const LegalStructuresOrdered: readonly LegalStructure[] = orderBy(
     LegalStructures,
     (legalStructure: LegalStructure) => {
       return legalStructure.name;

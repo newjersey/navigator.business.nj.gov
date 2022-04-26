@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
@@ -18,9 +19,9 @@ import React, { Dispatch, ReactElement, SetStateAction } from "react";
 export const withAuth = (
   subject: ReactElement,
   context: {
-    user?: BusinessUser;
-    dispatch?: Dispatch<AuthAction>;
-    isAuthenticated?: IsAuthenticated;
+    readonly user?: BusinessUser;
+    readonly dispatch?: Dispatch<AuthAction>;
+    readonly isAuthenticated?: IsAuthenticated;
   }
 ): ReactElement => {
   const isAuthenticated =
@@ -46,12 +47,12 @@ export const withAuthAlert = (
   subject: ReactElement,
   isAuthenticated: IsAuthenticated,
   context?: {
-    alertIsVisible?: boolean;
-    modalIsVisible?: boolean;
-    registrationAlertStatus?: RegistrationStatus;
-    setRegistrationAlertStatus?: (value: RegistrationStatus | undefined) => void;
-    setAlertIsVisible?: (value: boolean) => void;
-    setModalIsVisible?: (value: boolean) => void;
+    readonly alertIsVisible?: boolean;
+    readonly modalIsVisible?: boolean;
+    readonly registrationAlertStatus?: RegistrationStatus;
+    readonly setRegistrationAlertStatus?: (value: RegistrationStatus | undefined) => void;
+    readonly setAlertIsVisible?: (value: boolean) => void;
+    readonly setModalIsVisible?: (value: boolean) => void;
   }
 ): ReactElement => {
   return (
@@ -115,7 +116,8 @@ export const generateUseUserDataResponse = (
   ...overrides,
 });
 
-export const getLastCalledWith = <T, R>(fn: jest.MockInstance<T, R[]>): R[] => {
+// eslint-disable-next-line functional/prefer-readonly-type
+export const getLastCalledWith = <T, R>(fn: jest.MockInstance<T, R[]>): readonly R[] => {
   const lastIndex = fn.mock.calls.length - 1;
   return fn.mock.calls[lastIndex];
 };
@@ -124,7 +126,7 @@ export const getNumberOfMockCalls = <T, R>(fn: jest.MockInstance<T, R[]>): numbe
   return fn.mock.calls.length;
 };
 
-export const randomElementFromArray = <T,>(array: T[]): T => {
+export const randomElementFromArray = <T,>(array: readonly T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
 };
 

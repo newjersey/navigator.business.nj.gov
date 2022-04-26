@@ -4,7 +4,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
-  isFinal: boolean;
+  readonly isFinal: boolean;
 }
 
 export const OnboardingButtonGroup = (props: Props): ReactElement => {

@@ -3,16 +3,22 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "extends": [
+    "plugin:functional/no-mutations",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {},
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin"],
+  "plugins": ["functional", "@typescript-eslint", "@typescript-eslint/eslint-plugin"],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "functional/no-let": "off"
   }
 }

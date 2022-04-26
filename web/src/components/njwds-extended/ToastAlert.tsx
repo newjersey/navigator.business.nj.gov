@@ -3,16 +3,16 @@ import { Paper, Snackbar, SnackbarProps } from "@mui/material";
 import React, { ReactElement, ReactNode } from "react";
 
 interface Props {
-  variant: AlertVariant;
-  children: ReactNode;
-  isOpen: boolean;
-  autoHideDuration?: number | null;
-  close: () => void;
-  snackBarProps?: SnackbarProps;
-  heading?: string;
-  noIcon?: boolean;
-  className?: string;
-  dataTestid?: string;
+  readonly variant: AlertVariant;
+  readonly children: ReactNode;
+  readonly isOpen: boolean;
+  readonly autoHideDuration?: number | null;
+  readonly close: () => void;
+  readonly snackBarProps?: SnackbarProps;
+  readonly heading?: string;
+  readonly noIcon?: boolean;
+  readonly className?: string;
+  readonly dataTestid?: string;
 }
 
 export const ToastAlert = (props: Props): ReactElement => (

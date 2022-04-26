@@ -3,12 +3,12 @@ import { Certification } from "@/lib/types/types";
 import { CertificationElement } from "@/pages/certification/[certificationUrlSlug]";
 import { useEffect, useRef } from "react";
 type Props = {
-  entry?: any;
-  window: Window;
-  document: Document;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
+  readonly entry?: any;
+  readonly window: Window;
+  readonly document: Document;
+  readonly widgetsFor: (string: string) => any;
+  readonly widgetFor: (string: string) => any;
+  readonly getAsset: (string: string) => any;
 };
 
 const CertificationsPreview = (props: Props) => {

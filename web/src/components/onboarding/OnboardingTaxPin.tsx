@@ -4,11 +4,11 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, ReactNode } from "react";
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-  children?: ReactNode;
-  headerAriaLevel?: number;
-  handleChangeOverride?: (value: string) => void;
+  readonly onValidation: (field: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly children?: ReactNode;
+  readonly headerAriaLevel?: number;
+  readonly handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingTaxPin = (props: Props): ReactElement => {

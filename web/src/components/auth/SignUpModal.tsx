@@ -13,7 +13,7 @@ import { Box, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/materi
 import { useRouter } from "next/router";
 import React, { ReactElement, ReactNode, useContext } from "react";
 
-export const SignUpModalWrapper = (props: { children: ReactNode }): ReactElement => {
+export const SignUpModalWrapper = (props: { readonly children: ReactNode }): ReactElement => {
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
   useMountEffectWhenDefined(() => {
     if (isAuthenticated != IsAuthenticated.TRUE) {

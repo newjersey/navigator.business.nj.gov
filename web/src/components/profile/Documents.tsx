@@ -6,7 +6,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useMemo } from "react";
 
 interface Props {
-  displayContent: UserDisplayContent;
+  readonly displayContent: UserDisplayContent;
 }
 
 export const Documents = (props: Props): ReactElement => {

@@ -17,7 +17,7 @@ import { Box, Tab } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
-  task: Task;
+  readonly task: Task;
 }
 
 const APPLICATION_TAB_INDEX = 0;

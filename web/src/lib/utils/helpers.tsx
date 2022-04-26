@@ -54,7 +54,7 @@ export const getSectionCompletion = (
   if (!roadmap || !userData) {
     return {} as SectionCompletion;
   }
-  const taskMap = sectionsToTasksMap(roadmap) as Record<SectionType, Task[]>;
+  const taskMap = sectionsToTasksMap(roadmap) as Record<SectionType, readonly Task[]>;
   return sectionNames.reduce((accumulator, currentValue: SectionType) => {
     accumulator[currentValue] =
       taskMap[currentValue]?.every((task: Task) => userData.taskProgress[task.id] === "COMPLETED") ?? false;
@@ -62,8 +62,8 @@ export const getSectionCompletion = (
   }, {} as SectionCompletion);
 };
 interface SectionPosition {
-  current: SectionType;
-  next: SectionType | undefined;
+  readonly current: SectionType;
+  readonly next: SectionType | undefined;
 }
 
 export const getSectionPositions = (
@@ -109,7 +109,7 @@ export const getModifiedTaskBooleanUndefined = (
   return task[field] || undefined;
 };
 
-export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }): T => {
+export const rswitch = <T,>(param: string, cases: { readonly default: T; readonly [k: string]: T }): T => {
   if (cases[param]) {
     return cases[param];
   } else {
@@ -129,10 +129,10 @@ export const isStepCompleted = (step: Step, userData: UserData | undefined): boo
 };
 
 interface AlertProps {
-  variant: "success" | "warning" | "error";
-  body: string;
-  header?: string;
-  link?: string;
+  readonly variant: "success" | "warning" | "error";
+  readonly body: string;
+  readonly header?: string;
+  readonly link?: string;
 }
 
 export const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
@@ -167,10 +167,10 @@ export const validateEmail = (email: string): boolean => {
     );
 };
 
-export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
+export const getUrlSlugs = (roadmap: Roadmap | undefined): readonly string[] => {
   if (!roadmap) return [];
   const { steps } = roadmap;
-  return steps.reduce((acc: string[], currStep: Step) => {
+  return steps.reduce((acc: readonly string[], currStep: Step) => {
     const { tasks } = currStep;
     return [...acc, ...tasks.map((task) => task.urlSlug)];
   }, []);
@@ -179,8 +179,8 @@ export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
 export const setHeaderRole = (
   ariaLevel: number,
   classProperties?: string
-): (({ children }: { children: string[] }) => ReactElement) => {
-  const createElement = ({ children }: { children: string[] }): ReactElement => {
+): (({ children }: { readonly children: readonly string[] }) => ReactElement) => {
+  const createElement = ({ children }: { readonly children: readonly string[] }): ReactElement => {
     return (
       <div role="heading" aria-level={ariaLevel} className={classProperties ? classProperties : ""}>
         {children}
@@ -191,9 +191,10 @@ export const setHeaderRole = (
   return createElement;
 };
 
-export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => {
+export const getSectionNames = (roadmap: Roadmap | undefined): readonly SectionType[] => {
   if (!roadmap) return [];
   const { steps } = roadmap;
+  // eslint-disable-next-line functional/prefer-readonly-type
   const sections: SectionType[] = [];
   steps.forEach((step) => {
     sections.push(step.section);
@@ -202,10 +203,10 @@ export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => 
 };
 
 export const createRoadmapSections = (
-  roadmapSections: SectionType[],
+  roadmapSections: readonly SectionType[],
   userData: UserData | undefined,
   getSection: (sectionName: SectionType, openStatus: boolean | undefined) => JSX.Element
-): JSX.Element[] => {
+): readonly JSX.Element[] => {
   return roadmapSections.map((sectionName) => {
     const openStatus = userData?.preferences.roadmapOpenSections.includes(sectionName);
     return getSection(sectionName, openStatus);
@@ -227,11 +228,11 @@ export const camelCaseToSentence = (text: string): string => {
     .toLowerCase();
   return spacedCase.charAt(0).toUpperCase() + spacedCase.slice(1);
 };
-const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, Task[]> | undefined =>
+const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, readonly Task[]> | undefined =>
   roadmap?.steps.reduce((accumulator, currentValue: Step) => {
     accumulator[currentValue.section] = [...(accumulator[currentValue.section] || []), ...currentValue.tasks];
     return accumulator;
-  }, {} as Record<SectionType, Task[]>);
+  }, {} as Record<SectionType, readonly Task[]>);
 
 const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | undefined =>
   roadmap?.steps.find((step) => step.tasks.find((task) => task.id === taskId));

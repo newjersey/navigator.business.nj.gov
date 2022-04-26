@@ -8,6 +8,6 @@ export const splitFullName = (name: string | undefined): SplitName => {
 };
 
 export type SplitName = {
-  firstName: string;
-  lastName: string;
+  readonly firstName: string;
+  readonly lastName: string;
 };

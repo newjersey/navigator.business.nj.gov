@@ -12,7 +12,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField } from "@mui/material";
 import React, { ReactElement } from "react";
 interface Props {
-  task: Task;
+  readonly task: Task;
 }
 
 type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";

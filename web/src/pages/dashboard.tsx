@@ -23,10 +23,10 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useMemo, useState } from "react";
 
 interface Props {
-  displayContent: DashboardDisplayContent;
-  operateReferences: Record<string, OperateReference>;
-  fundings: Funding[];
-  certifications: Certification[];
+  readonly displayContent: DashboardDisplayContent;
+  readonly operateReferences: Record<string, OperateReference>;
+  readonly fundings: readonly Funding[];
+  readonly certifications: readonly Certification[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {

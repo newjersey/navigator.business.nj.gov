@@ -10,18 +10,18 @@ export enum IsAuthenticated {
 }
 
 export interface AuthState {
-  user: BusinessUser | undefined;
-  isAuthenticated: IsAuthenticated;
+  readonly user: BusinessUser | undefined;
+  readonly isAuthenticated: IsAuthenticated;
 }
 
 export interface AuthAction {
-  type: UserActionType;
-  user: BusinessUser | undefined;
+  readonly type: UserActionType;
+  readonly user: BusinessUser | undefined;
 }
 
 export interface AuthContextType {
-  state: AuthState;
-  dispatch: Dispatch<AuthAction>;
+  readonly state: AuthState;
+  readonly dispatch: Dispatch<AuthAction>;
 }
 
 export type AuthReducer = Reducer<AuthState, AuthAction>;

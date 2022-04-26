@@ -1,9 +1,9 @@
 export interface LegalStructure {
-  id: string;
-  name: string;
-  requiresPublicFiling: boolean;
-  hasTradeName: boolean;
-  onboardingOrder: number;
+  readonly id: string;
+  readonly name: string;
+  readonly requiresPublicFiling: boolean;
+  readonly hasTradeName: boolean;
+  readonly onboardingOrder: number;
 }
 
 export const LookupLegalStructureById = (id: string | undefined): LegalStructure => {
@@ -18,7 +18,7 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
   );
 };
 
-export const LegalStructures: LegalStructure[] = [
+export const LegalStructures: readonly LegalStructure[] = [
   {
     id: "sole-proprietorship",
     name: "Sole Proprietorship",

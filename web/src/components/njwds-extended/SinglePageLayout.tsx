@@ -2,8 +2,8 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import React, { ReactElement } from "react";
 
 interface Props {
-  children: React.ReactNode;
-  wrappedWithMain?: boolean;
+  readonly children: React.ReactNode;
+  readonly wrappedWithMain?: boolean;
 }
 
 export const SinglePageLayout = ({ children, wrappedWithMain = true }: Props): ReactElement => {

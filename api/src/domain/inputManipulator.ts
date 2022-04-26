@@ -1,3 +1,4 @@
+/* eslint-disable functional/immutable-data */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const inputManipulator = (initial: string): any => ({
@@ -44,7 +45,7 @@ export const inputManipulator = (initial: string): any => ({
   },
 });
 
-const removeWords = (value: string, words: string[]): string => {
+const removeWords = (value: string, words: readonly string[]): string => {
   const regexString = words.join("|");
   return value.replace(new RegExp(`\\b(${regexString})\\b`, "gi"), " ").replace(/\s{2,}/g, " ");
 };

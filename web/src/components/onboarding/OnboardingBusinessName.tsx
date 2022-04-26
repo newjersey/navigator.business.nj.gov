@@ -4,10 +4,10 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface Props {
-  onValidation?: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates?: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
-  disabled?: boolean;
+  readonly onValidation?: (field: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates?: ProfileFieldErrorMap;
+  readonly headerAriaLevel?: number;
+  readonly disabled?: boolean;
 }
 
 export const OnboardingBusinessName = (props: Props): ReactElement => {

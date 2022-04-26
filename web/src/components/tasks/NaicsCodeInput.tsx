@@ -8,8 +8,8 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
-  onSave: () => void;
-  task: Task;
+  readonly onSave: () => void;
+  readonly task: Task;
 }
 
 export const NaicsCodeInput = (props: Props): ReactElement => {

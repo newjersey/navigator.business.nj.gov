@@ -47,7 +47,9 @@ export const RegisteredAgent = (): ReactElement => {
     });
   };
 
-  const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleRadioSelection = (
+    event: React.ChangeEvent<{ readonly name?: string; readonly value: unknown }>
+  ) => {
     resetAgentFieldsInErrorMap();
     setFormationFormData({
       ...state.formationFormData,

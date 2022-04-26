@@ -1,6 +1,7 @@
 import { Funding, FundingStatusOrder } from "@/lib/types/types";
 
-export const sortFundings = (fundings: Funding[]): Funding[] => {
+// eslint-disable-next-line functional/prefer-readonly-type
+export const sortFundings = (fundings: Funding[]): readonly Funding[] => {
   return fundings.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.toUpperCase();

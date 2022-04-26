@@ -5,9 +5,9 @@ import Airtable from "airtable";
 import { UserTestingClient } from "../domain/types";
 
 type AirtableConfig = {
-  apiKey: string;
-  baseId: string;
-  baseUrl: string;
+  readonly apiKey: string;
+  readonly baseId: string;
+  readonly baseUrl: string;
 };
 
 export const AirtableUserTestingClient = (

@@ -17,6 +17,7 @@ describe("migrate_v24_to_v25", () => {
   };
   const taxFilingData = {
     entityIdStatus: "UNKNOWN" as v24EntityIdStatus,
+    // eslint-disable-next-line functional/prefer-readonly-type
     filings: [] as v24TaxFiling[],
   };
 

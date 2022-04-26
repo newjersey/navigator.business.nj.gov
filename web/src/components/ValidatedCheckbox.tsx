@@ -2,10 +2,10 @@ import { Checkbox } from "@mui/material";
 import React from "react";
 
 interface Props {
-  id: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  checked: boolean;
-  error: boolean;
+  readonly id: string;
+  readonly onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  readonly checked: boolean;
+  readonly error: boolean;
 }
 
 export const ValidatedCheckbox = (props: Props) => {

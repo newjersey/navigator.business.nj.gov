@@ -15,8 +15,8 @@ export const fetchPostOnboarding = async (id: string): Promise<PostOnboarding> =
 };
 
 type PostOnboardingGrayMatter = {
-  radioQuestion: string;
-  radioYes: string;
-  radioNo: string;
-  radioNoContent: string;
+  readonly radioQuestion: string;
+  readonly radioYes: string;
+  readonly radioNo: string;
+  readonly radioNoContent: string;
 };

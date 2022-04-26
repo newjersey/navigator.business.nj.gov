@@ -2,8 +2,8 @@ import { Icon } from "@/components/njwds/Icon";
 import React, { ReactElement, ReactNode } from "react";
 
 interface Props {
-  children: ReactNode;
-  secondaryText?: string;
+  readonly children: ReactNode;
+  readonly secondaryText?: string;
 }
 
 export const MenuOptionSelected = (props: Props): ReactElement => (

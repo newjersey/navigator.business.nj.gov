@@ -1,8 +1,8 @@
 import React, { ReactElement, ReactNode } from "react";
 
 interface Props {
-  children: ReactNode;
-  secondaryText?: ReactNode;
+  readonly children: ReactNode;
+  readonly secondaryText?: ReactNode;
 }
 
 export const MenuOptionUnselected = (props: Props): ReactElement => (

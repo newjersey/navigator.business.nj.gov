@@ -1,3 +1,4 @@
+/* eslint-disable functional/immutable-data */
 /* eslint-disable no-undef */
 require("@testing-library/jest-dom");
 

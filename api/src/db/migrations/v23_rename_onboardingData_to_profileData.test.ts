@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { generatev22OnboardingData, generatev22User, v22UserData } from "./v22_switch_legal_structure_to_id";
 import { migrate_v22_to_v23 } from "./v23_rename_onboardingData_to_profileData";
 

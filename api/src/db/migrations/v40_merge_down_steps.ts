@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v39UserData } from "./v39_add_tax_pin";
 
 export interface v40UserData {

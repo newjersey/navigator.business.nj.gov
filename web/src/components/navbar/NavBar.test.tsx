@@ -36,7 +36,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 jest.mock("next/link", () => {
-  return ({ children }: { children: ReactNode }) => {
+  return ({ children }: { readonly children: ReactNode }) => {
     return children;
   };
 });
@@ -266,7 +266,7 @@ describe("<NavBar />", () => {
 
     const renderMobileTaskNav =
       (isAuthenticated = IsAuthenticated.TRUE) =>
-      (config?: { includeOperateRef: boolean }): RenderResult => {
+      (config?: { readonly includeOperateRef: boolean }): RenderResult => {
         setLargeScreen(false);
 
         const operateRef: Record<string, OperateReference> = {

@@ -6,8 +6,8 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface Props {
-  onEdit: () => void;
-  code: string;
+  readonly onEdit: () => void;
+  readonly code: string;
 }
 
 export const NaicsCodeDisplay = (props: Props): ReactElement => {

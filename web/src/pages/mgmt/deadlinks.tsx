@@ -8,9 +8,9 @@ import { NextSeo } from "next-seo";
 import React, { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
 interface Props {
-  deadTasks: string[];
-  deadContextualInfo: string[];
-  deadLinks: Record<string, string[]>;
+  readonly deadTasks: readonly string[];
+  readonly deadContextualInfo: readonly string[];
+  readonly deadLinks: Record<string, readonly string[]>;
 }
 
 const DeadLinksPage = (props: Props): ReactElement => {

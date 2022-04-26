@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v19UserData } from "./v19_add_employment_agency_roadmap";
 
 export interface v20UserData {
@@ -14,7 +15,6 @@ export interface v20UserData {
 export const migrate_v19_to_v20 = (v19Data: v19UserData): v20UserData => {
   const updatedOnboardingData = v19Data.onboardingData;
   const industryId = v19Data.onboardingData.industry;
-  delete updatedOnboardingData.industry;
 
   return {
     ...v19Data,

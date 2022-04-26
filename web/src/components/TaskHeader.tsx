@@ -19,8 +19,8 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
-  task: Task;
-  tooltipText?: string;
+  readonly task: Task;
+  readonly tooltipText?: string;
 }
 
 export const TaskHeader = (props: Props): ReactElement => {

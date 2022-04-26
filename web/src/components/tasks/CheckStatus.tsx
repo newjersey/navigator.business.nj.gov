@@ -26,9 +26,9 @@ const useStyles = makeStyles(() =>
 );
 
 interface Props {
-  onSubmit: (nameAndAddress: NameAndAddress) => void;
-  error: LicenseSearchError | undefined;
-  isLoading: boolean;
+  readonly onSubmit: (nameAndAddress: NameAndAddress) => void;
+  readonly error: LicenseSearchError | undefined;
+  readonly isLoading: boolean;
 }
 
 const LicenseSearchErrorLookup: Record<LicenseSearchError, string> = {

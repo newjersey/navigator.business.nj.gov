@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 
 interface Props {
-  nextSectionType: SectionType | undefined;
-  open: boolean;
-  handleClose: () => void;
+  readonly nextSectionType: SectionType | undefined;
+  readonly open: boolean;
+  readonly handleClose: () => void;
 }
 
 export const CongratulatoryDialog = (props: Props): ReactElement => {

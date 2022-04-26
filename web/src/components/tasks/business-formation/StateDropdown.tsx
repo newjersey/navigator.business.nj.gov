@@ -6,17 +6,17 @@ import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import React, { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 
 interface Props {
-  value: string | undefined;
-  fieldName: string;
-  onSelect: (value: string | undefined) => void;
-  placeholder?: string;
-  onValidation?: (fieldName: string, invalid: boolean) => void;
-  error?: boolean;
-  validationText?: string;
-  validationLabel?: string;
-  autoComplete?: string;
-  disabled?: boolean;
-  required?: boolean;
+  readonly value: string | undefined;
+  readonly fieldName: string;
+  readonly onSelect: (value: string | undefined) => void;
+  readonly placeholder?: string;
+  readonly onValidation?: (fieldName: string, invalid: boolean) => void;
+  readonly error?: boolean;
+  readonly validationText?: string;
+  readonly validationLabel?: string;
+  readonly autoComplete?: string;
+  readonly disabled?: boolean;
+  readonly required?: boolean;
 }
 
 export const StateDropdown = (props: Props): ReactElement => {

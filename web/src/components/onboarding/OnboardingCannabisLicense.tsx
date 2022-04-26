@@ -6,7 +6,9 @@ import React, { ReactElement, useContext } from "react";
 export const OnboardingCannabisLicense = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const handleCannabisLicenseSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleCannabisLicenseSelection = (
+    event: React.ChangeEvent<{ readonly name?: string; readonly value: unknown }>
+  ) => {
     setProfileData({
       ...state.profileData,
       cannabisLicenseType: event.target.value as "CONDITIONAL" | "ANNUAL" | undefined,

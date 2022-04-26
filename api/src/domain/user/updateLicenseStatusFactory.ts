@@ -11,12 +11,12 @@ export const updateLicenseStatusFactory = (
   searchLicenseStatus: SearchLicenseStatus
 ): UpdateLicenseStatus => {
   const update = (args: {
-    userData: UserData;
-    nameAndAddress: NameAndAddress;
-    taskStatus: TaskProgress;
-    licenseStatus: LicenseStatus;
-    items: LicenseStatusItem[];
-    completed: boolean;
+    readonly userData: UserData;
+    readonly nameAndAddress: NameAndAddress;
+    readonly taskStatus: TaskProgress;
+    readonly licenseStatus: LicenseStatus;
+    readonly items: readonly LicenseStatusItem[];
+    readonly completed: boolean;
   }): Promise<UserData> => {
     const updatedValues = {
       taskProgress: {

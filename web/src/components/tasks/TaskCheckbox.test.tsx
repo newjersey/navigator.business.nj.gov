@@ -27,9 +27,9 @@ describe("<TaskCheckbox />", () => {
     initialUserData,
     isAuthenticated,
   }: {
-    checklistItemId: string;
-    initialUserData?: UserData;
-    isAuthenticated?: IsAuthenticated;
+    readonly checklistItemId: string;
+    readonly initialUserData?: UserData;
+    readonly isAuthenticated?: IsAuthenticated;
   }) => {
     return render(
       withAuthAlert(

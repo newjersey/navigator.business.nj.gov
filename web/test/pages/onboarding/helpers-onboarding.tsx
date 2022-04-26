@@ -35,12 +35,12 @@ export const renderPage = ({
   user,
   isAuthenticated,
 }: {
-  municipalities?: Municipality[];
-  displayContent?: LoadDisplayContent;
-  userData?: UserData | null;
-  user?: BusinessUser;
-  isAuthenticated?: IsAuthenticated;
-}): { subject: RenderResult; page: PageHelpers } => {
+  readonly municipalities?: readonly Municipality[];
+  readonly displayContent?: LoadDisplayContent;
+  readonly userData?: UserData | null;
+  readonly user?: BusinessUser;
+  readonly isAuthenticated?: IsAuthenticated;
+}): { readonly subject: RenderResult; readonly page: PageHelpers } => {
   const currentUser = user ?? userData?.user ?? generateUser({});
   const subject = render(
     withAuth(
@@ -64,29 +64,29 @@ export const renderPage = ({
 };
 
 export type PageHelpers = {
-  fillText: (label: string, value: string) => void;
-  selectDate: (label: string, value: DateObject) => void;
-  selectByValue: (label: string, value: string) => void;
-  selectByText: (label: string, value: string) => void;
-  chooseRadio: (value: string) => void;
-  clickNext: () => void;
-  clickBack: () => void;
-  getDateOfFormationValue: () => string;
-  getEntityIdValue: () => string;
-  getBusinessNameValue: () => string;
-  getLegalStructureValue: () => string;
-  getSectorIDValue: () => string;
-  getIndustryValue: () => string;
-  getRadioButtonValue: (sectionAriaLabel: string) => string;
-  getMunicipalityValue: () => string;
-  getFullNameValue: () => string;
-  getEmailValue: () => string;
-  getConfirmEmailValue: () => string;
-  visitStep2: () => Promise<void>;
-  visitStep3: () => Promise<void>;
-  visitStep4: () => Promise<void>;
-  visitStep5: () => Promise<void>;
-  visitStep6: () => Promise<void>;
+  readonly fillText: (label: string, value: string) => void;
+  readonly selectDate: (label: string, value: DateObject) => void;
+  readonly selectByValue: (label: string, value: string) => void;
+  readonly selectByText: (label: string, value: string) => void;
+  readonly chooseRadio: (value: string) => void;
+  readonly clickNext: () => void;
+  readonly clickBack: () => void;
+  readonly getDateOfFormationValue: () => string;
+  readonly getEntityIdValue: () => string;
+  readonly getBusinessNameValue: () => string;
+  readonly getLegalStructureValue: () => string;
+  readonly getSectorIDValue: () => string;
+  readonly getIndustryValue: () => string;
+  readonly getRadioButtonValue: (sectionAriaLabel: string) => string;
+  readonly getMunicipalityValue: () => string;
+  readonly getFullNameValue: () => string;
+  readonly getEmailValue: () => string;
+  readonly getConfirmEmailValue: () => string;
+  readonly visitStep2: () => Promise<void>;
+  readonly visitStep3: () => Promise<void>;
+  readonly visitStep4: () => Promise<void>;
+  readonly visitStep5: () => Promise<void>;
+  readonly visitStep6: () => Promise<void>;
 };
 
 export const createPageHelpers = (subject: RenderResult): PageHelpers => {
@@ -215,7 +215,7 @@ export const runSelfRegPageTests = (
   {
     hasExistingBusiness,
     requiresPublicFiling,
-  }: { hasExistingBusiness: boolean; requiresPublicFiling?: boolean },
+  }: { readonly hasExistingBusiness: boolean; readonly requiresPublicFiling?: boolean },
   advanceToSelfReg: (page: PageHelpers) => Promise<void>
 ) => {
   let page: PageHelpers;

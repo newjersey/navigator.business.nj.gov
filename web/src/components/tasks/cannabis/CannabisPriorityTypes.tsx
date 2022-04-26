@@ -15,8 +15,8 @@ const priorityTypes = [
 ];
 
 interface Props {
-  task: Task;
-  onNextTab: () => void;
+  readonly task: Task;
+  readonly onNextTab: () => void;
 }
 
 export const CannabisPriorityTypes = (props: Props): ReactElement => {
@@ -49,6 +49,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
 
     if (event.target.checked) {
       const unselectPriorityTasks = {} as Record<string, boolean>;
+      // eslint-disable-next-line functional/immutable-data
       priorityTypes.forEach((key) => (unselectPriorityTasks[key] = false));
 
       update({

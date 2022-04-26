@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
-  profileData: ProfileData;
+  readonly profileData: ProfileData;
 }
 
 export const MiniProfile = (props: Props): ReactElement => {

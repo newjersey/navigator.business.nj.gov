@@ -49,10 +49,10 @@ export const AuthContext = createContext<AuthContextType>({
 AuthContext.displayName = "Authentication";
 
 export interface RoadmapContextType {
-  roadmap: Roadmap | undefined;
-  sectionCompletion: SectionCompletion | undefined;
-  setRoadmap: (roadmap: Roadmap | undefined) => void;
-  setSectionCompletion: (sectionCompletion: SectionCompletion | undefined) => void;
+  readonly roadmap: Roadmap | undefined;
+  readonly sectionCompletion: SectionCompletion | undefined;
+  readonly setRoadmap: (roadmap: Roadmap | undefined) => void;
+  readonly setSectionCompletion: (sectionCompletion: SectionCompletion | undefined) => void;
 }
 
 export const RoadmapContext = createContext<RoadmapContextType>({
@@ -65,13 +65,13 @@ export const RoadmapContext = createContext<RoadmapContextType>({
 RoadmapContext.displayName = "Roadmap";
 
 export interface AuthAlertContextType {
-  isAuthenticated: IsAuthenticated;
-  registrationAlertStatus: RegistrationStatus | undefined;
-  alertIsVisible: boolean;
-  modalIsVisible: boolean;
-  setRegistrationAlertStatus: (value: RegistrationStatus | undefined) => void;
-  setAlertIsVisible: (value: boolean) => void;
-  setModalIsVisible: (value: boolean) => void;
+  readonly isAuthenticated: IsAuthenticated;
+  readonly registrationAlertStatus: RegistrationStatus | undefined;
+  readonly alertIsVisible: boolean;
+  readonly modalIsVisible: boolean;
+  readonly setRegistrationAlertStatus: (value: RegistrationStatus | undefined) => void;
+  readonly setAlertIsVisible: (value: boolean) => void;
+  readonly setModalIsVisible: (value: boolean) => void;
 }
 
 export const AuthAlertContext = createContext<AuthAlertContextType>({
@@ -87,13 +87,13 @@ export const AuthAlertContext = createContext<AuthAlertContextType>({
 AuthAlertContext.displayName = "Authentication Toast";
 
 export interface ContextualInfo {
-  isVisible: boolean;
-  markdown: string;
+  readonly isVisible: boolean;
+  readonly markdown: string;
 }
 
 export interface ContextualInfoContextType {
-  contextualInfo: ContextualInfo;
-  setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>;
+  readonly contextualInfo: ContextualInfo;
+  readonly setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>;
 }
 
 export const ContextualInfoContext = createContext<ContextualInfoContextType>({
@@ -107,8 +107,8 @@ export const ContextualInfoContext = createContext<ContextualInfoContextType>({
 ContextualInfoContext.displayName = "Contextual Info";
 
 export interface UserDataErrorContextType {
-  userDataError: UserDataError | undefined;
-  setUserDataError: (userDataError: UserDataError | undefined) => void;
+  readonly userDataError: UserDataError | undefined;
+  readonly setUserDataError: (userDataError: UserDataError | undefined) => void;
 }
 
 export const UserDataErrorContext = createContext<UserDataErrorContextType>({

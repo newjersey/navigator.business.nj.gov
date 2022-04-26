@@ -1,3 +1,5 @@
+/* eslint-disable functional/immutable-data */
+/* eslint-disable functional/prefer-readonly-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import * as Airtable from "airtable";

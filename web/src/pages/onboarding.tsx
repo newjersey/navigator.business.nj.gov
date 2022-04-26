@@ -65,24 +65,24 @@ import React, {
 import { CSSTransition } from "react-transition-group";
 
 interface Props {
-  displayContent: LoadDisplayContent;
-  municipalities: Municipality[];
+  readonly displayContent: LoadDisplayContent;
+  readonly municipalities: readonly Municipality[];
 }
 
 interface ProfileDataState {
-  page?: number;
-  profileData: ProfileData;
-  user?: BusinessUser;
-  displayContent: UserDisplayContent;
-  flow?: UserContentType;
-  municipalities: Municipality[];
+  readonly page?: number;
+  readonly profileData: ProfileData;
+  readonly user?: BusinessUser;
+  readonly displayContent: UserDisplayContent;
+  readonly flow?: UserContentType;
+  readonly municipalities: readonly Municipality[];
 }
 
 interface ProfileDataContextType {
-  state: ProfileDataState;
-  setProfileData: (profileData: ProfileData) => void;
-  setUser: (user: BusinessUser) => void;
-  onBack: () => void;
+  readonly state: ProfileDataState;
+  readonly setProfileData: (profileData: ProfileData) => void;
+  readonly setUser: (user: BusinessUser) => void;
+  readonly onBack: () => void;
 }
 
 export const ProfileDataContext = createContext<ProfileDataContextType>({
@@ -104,7 +104,10 @@ const OnboardingPage = (props: Props): ReactElement => {
   const { state } = useContext(AuthContext);
 
   const router = useRouter();
-  const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
+  const [page, setPage] = useState<{ readonly current: number; readonly previous: number }>({
+    current: 1,
+    previous: 1,
+  });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [user, setUser] = useState<BusinessUser>(createEmptyUser(ABStorageFactory().getExperience()));
   const [error, setError] = useState<ProfileError | undefined>(undefined);
@@ -130,7 +133,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     const onboardingFlows = getOnboardingFlows(profileData, user, onValidation, fieldStates);
     const requiresPublicFiling = LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling;
     if (!requiresPublicFiling) {
-      onboardingFlows["OWNING"].pages.splice(1, 1);
+      onboardingFlows["OWNING"].pages.slice(1, 1);
     }
     return onboardingFlows;
   }, [profileData, user, onValidation, fieldStates]);
@@ -195,6 +198,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             queryShallowPush(1);
           }
 
+          // eslint-disable-next-line functional/immutable-data
           hasHandledRouting.current = true;
         }
       })();

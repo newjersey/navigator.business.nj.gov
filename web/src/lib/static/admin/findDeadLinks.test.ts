@@ -98,8 +98,8 @@ jest.mock("broken-link-checker", () => ({
   HtmlUrlChecker: function SpyHtmlUrlChecker(
     options: Options,
     handlers: {
-      link?: ((result: any) => void) | undefined;
-      end?: (() => void) | undefined;
+      readonly link?: ((result: any) => void) | undefined;
+      readonly end?: (() => void) | undefined;
     }
   ) {
     const enqueue = (pageUrl: any): any => {

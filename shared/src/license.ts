@@ -1,13 +1,13 @@
 import { NameAndAddress } from "./misc";
 
 export type LicenseStatusItem = {
-  title: string;
-  status: CheckoffStatus;
+  readonly title: string;
+  readonly status: CheckoffStatus;
 };
 
 export type LicenseStatusResult = {
-  status: LicenseStatus;
-  checklistItems: LicenseStatusItem[];
+  readonly status: LicenseStatus;
+  readonly checklistItems: readonly LicenseStatusItem[];
 };
 
 export type CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
@@ -27,28 +27,28 @@ export type LicenseStatus =
   | "WITHDRAWN";
 
 export interface LicenseData {
-  nameAndAddress: NameAndAddress;
-  completedSearch: boolean;
-  lastCheckedStatus: string;
-  status: LicenseStatus;
-  items: LicenseStatusItem[];
+  readonly nameAndAddress: NameAndAddress;
+  readonly completedSearch: boolean;
+  readonly lastCheckedStatus: string;
+  readonly status: LicenseStatus;
+  readonly items: readonly LicenseStatusItem[];
 }
 
 export type LicenseEntity = {
-  fullName: string;
-  addressLine1: string;
-  addressCity: string;
-  addressState: string;
-  addressCounty: string;
-  addressZipCode: string;
-  professionName: string;
-  licenseType: string;
-  applicationNumber: string;
-  licenseNumber: string;
-  licenseStatus: string;
-  issueDate: string;
-  expirationDate: string;
-  checklistItem: string;
-  checkoffStatus: "Completed" | "Unchecked" | "Not Applicable";
-  dateThisStatus: string;
+  readonly fullName: string;
+  readonly addressLine1: string;
+  readonly addressCity: string;
+  readonly addressState: string;
+  readonly addressCounty: string;
+  readonly addressZipCode: string;
+  readonly professionName: string;
+  readonly licenseType: string;
+  readonly applicationNumber: string;
+  readonly licenseNumber: string;
+  readonly licenseStatus: string;
+  readonly issueDate: string;
+  readonly expirationDate: string;
+  readonly checklistItem: string;
+  readonly checkoffStatus: "Completed" | "Unchecked" | "Not Applicable";
+  readonly dateThisStatus: string;
 };

@@ -7,8 +7,8 @@ import { getSectionNames, isStepCompleted } from "@/lib/utils/helpers";
 import React, { ReactElement, useCallback } from "react";
 
 interface Props {
-  activeTaskId?: string | undefined;
-  onTaskClick?: () => void;
+  readonly activeTaskId?: string | undefined;
+  readonly onTaskClick?: () => void;
 }
 
 export const MiniRoadmap = (props: Props): ReactElement => {
@@ -17,6 +17,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
 
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean): Promise<void> => {
+      // eslint-disable-next-line functional/prefer-readonly-type
       const updateSteps = (openSteps: number[]) => {
         return userData
           ? {

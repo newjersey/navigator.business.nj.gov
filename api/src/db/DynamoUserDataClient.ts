@@ -39,7 +39,7 @@ const migrateUserData = (data: any): any => {
 };
 
 export const DynamoQlUserDataClient = (db: DynamoDBClient, tableName: string): UserDataQlClient => {
-  const search = async (statement: string): Promise<UserData[]> => {
+  const search = async (statement: string): Promise<readonly UserData[]> => {
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     const get = (object: any): UserData => {
       const data = unmarshall(object).data;

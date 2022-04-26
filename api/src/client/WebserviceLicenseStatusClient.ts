@@ -7,7 +7,7 @@ export const WebserviceLicenseStatusClient = (
   baseUrl: string,
   logWriter: LogWriterType
 ): LicenseStatusClient => {
-  const search = (name: string, zipCode: string, licenseType: string): Promise<LicenseEntity[]> => {
+  const search = (name: string, zipCode: string, licenseType: string): Promise<readonly LicenseEntity[]> => {
     const url = `${baseUrl}/ws/simple/queryLicenseStatus`;
     logWriter.LogInfo(
       `License Status Search - Request Sent. url: ${url}. Business Name: ${name}. License Type: ${licenseType}. ZipCode: ${zipCode}`

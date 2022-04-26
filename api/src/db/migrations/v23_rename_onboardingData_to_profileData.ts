@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v22UserData } from "./v22_switch_legal_structure_to_id";
 
 export interface v23UserData {

@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 
 interface Props {
-  operateReferences: Record<string, OperateReference>;
-  onClose?: () => void;
+  readonly operateReferences: Record<string, OperateReference>;
+  readonly onClose?: () => void;
 }
 
 export const MiniOperateSection = ({ operateReferences, onClose }: Props): ReactElement => {

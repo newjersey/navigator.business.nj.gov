@@ -10,8 +10,8 @@ import Link from "next/link";
 import React, { ReactElement } from "react";
 
 interface Props {
-  taxFilings: TaxFiling[];
-  operateReferences: Record<string, OperateReference>;
+  readonly taxFilings: readonly TaxFiling[];
+  readonly operateReferences: Record<string, OperateReference>;
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {

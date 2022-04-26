@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
-  reviewPage?: boolean;
+  readonly reviewPage?: boolean;
 }
 
 export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): ReactElement => {

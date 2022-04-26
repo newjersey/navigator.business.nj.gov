@@ -160,11 +160,11 @@ describe("Roadmap [feature] [all] [group2]", () => {
   });
 
   it("user data is updated if opted into newsletter", () => {
-    const industry = randomElementFromArray(Industries as Industry[]) as Industry;
+    const industry = randomElementFromArray(Industries as readonly Industry[]) as Industry;
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
     const liquorLicenseQuestion =
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-    const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+    const legalStructureId = randomElementFromArray(LegalStructures as readonly LegalStructure[]).id;
     const townDisplayName = "Absecon";
     const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 

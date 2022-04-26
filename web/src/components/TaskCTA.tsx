@@ -4,8 +4,8 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface Props {
-  link: string;
-  text?: string;
+  readonly link: string;
+  readonly text?: string;
 }
 
 export const TaskCTA = (props: Props): ReactElement => {

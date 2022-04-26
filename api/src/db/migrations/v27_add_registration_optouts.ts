@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v26UserData } from "./v26_remove_dateofformation";
 
 export interface v27UserData {

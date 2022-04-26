@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { AddOn, IndustryRoadmap, TaskModification } from "@/lib/roadmap/roadmapBuilder";
@@ -15,24 +16,24 @@ const addOnsDir = path.join(roadmapsDir, "add-ons");
 const contextualInfoDir = path.join(displayContentDir, "contextual-information");
 
 type Filenames = {
-  tasks: string[];
-  industries: string[];
-  filings: string[];
-  addOns: string[];
-  contextualInfos: string[];
-  displayContents: string[];
+  readonly tasks: readonly string[];
+  readonly industries: readonly string[];
+  readonly filings: readonly string[];
+  readonly addOns: readonly string[];
+  readonly contextualInfos: readonly string[];
+  readonly displayContents: readonly string[];
 };
 
 type FileContents = {
-  tasks: string[];
-  industries: Array<IndustryRoadmap>;
-  addOns: Array<AddOn[]>;
-  modifications: Array<TaskModification[]>;
-  contextualInfos: string[];
-  displayContents: string[];
+  readonly tasks: readonly string[];
+  readonly industries: ReadonlyArray<IndustryRoadmap>;
+  readonly addOns: ReadonlyArray<readonly AddOn[]>;
+  readonly modifications: ReadonlyArray<readonly TaskModification[]>;
+  readonly contextualInfos: readonly string[];
+  readonly displayContents: readonly string[];
 };
 
-const getFlattenedFilenames = (dir: string): string[] => {
+const getFlattenedFilenames = (dir: string): readonly string[] => {
   const allItems = fs.readdirSync(dir);
   let paths: string[] = [];
   for (const item of allItems) {
@@ -81,7 +82,7 @@ const getContents = (filenames: Filenames): FileContents => {
 
 const isReferencedInAMarkdown = async (
   contextualInfoFilename: string,
-  markdowns: string[]
+  markdowns: readonly string[]
 ): Promise<boolean> => {
   let contained = false;
   const contextualInfoId = contextualInfoFilename.split(".md")[0];
@@ -134,7 +135,7 @@ const isReferencedInARoadmap = async (filename: string, contents: FileContents):
   return containedInAModification || containedInAnAddOn;
 };
 
-export const findDeadTasks = async (): Promise<string[]> => {
+export const findDeadTasks = async (): Promise<readonly string[]> => {
   const deadTasks = [];
   const filenames = getFilenames();
   const contents = getContents(filenames);
@@ -160,6 +161,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
   ];
 
   const deadLinks = pages.reduce((acc, cur) => {
+    // eslint-disable-next-line functional/immutable-data
     acc[cur] = [];
     return acc;
   }, {} as Record<string, string[]>);
@@ -204,7 +206,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
   return deadLinks;
 };
 
-export const findDeadContextualInfo = async (): Promise<string[]> => {
+export const findDeadContextualInfo = async (): Promise<readonly string[]> => {
   const deadContextualInfos = [];
   const filenames = getFilenames();
   const contents = getContents(filenames);

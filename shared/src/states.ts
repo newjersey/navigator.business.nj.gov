@@ -1,8 +1,8 @@
 export type StateObject = {
-  shortCode: string;
-  name: string;
+  readonly shortCode: string;
+  readonly name: string;
 };
-export const arrayOfStateObjects: StateObject[] = [
+export const arrayOfStateObjects: readonly StateObject[] = [
   { shortCode: "AK", name: "Alaska" },
   { shortCode: "AL", name: "Alabama" },
   { shortCode: "AR", name: "Arkansas" },

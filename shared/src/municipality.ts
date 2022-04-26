@@ -1,18 +1,18 @@
 export type Municipality = {
-  name: string;
-  displayName: string;
-  county: string;
-  id: string;
+  readonly name: string;
+  readonly displayName: string;
+  readonly county: string;
+  readonly id: string;
 };
 
 export type MunicipalityDetail = {
-  id: string;
-  townName: string;
-  townDisplayName: string;
-  townWebsite: string;
-  countyId: string;
-  countyName: string;
-  countyClerkPhone: string;
-  countyClerkWebsite: string;
-  countyWebsite: string;
+  readonly id: string;
+  readonly townName: string;
+  readonly townDisplayName: string;
+  readonly townWebsite: string;
+  readonly countyId: string;
+  readonly countyName: string;
+  readonly countyClerkPhone: string;
+  readonly countyClerkWebsite: string;
+  readonly countyWebsite: string;
 };

@@ -1,16 +1,16 @@
 import { v50UserData } from "./v50_fix_annual_conditional_ids";
 
 export interface v51UserData {
-  user: v51BusinessUser;
-  profileData: v51ProfileData;
-  formProgress: v51FormProgress;
-  taskProgress: Record<string, v51TaskProgress>;
-  taskItemChecklist: Record<string, boolean>;
-  licenseData: v51LicenseData | undefined;
-  preferences: v51Preferences;
-  taxFilingData: v51TaxFilingData;
-  formationData: v51FormationData;
-  version: number;
+  readonly user: v51BusinessUser;
+  readonly profileData: v51ProfileData;
+  readonly formProgress: v51FormProgress;
+  readonly taskProgress: Record<string, v51TaskProgress>;
+  readonly taskItemChecklist: Record<string, boolean>;
+  readonly licenseData: v51LicenseData | undefined;
+  readonly preferences: v51Preferences;
+  readonly taxFilingData: v51TaxFilingData;
+  readonly formationData: v51FormationData;
+  readonly version: number;
 }
 
 export const migrate_v50_to_v51 = (v50Data: v50UserData): v51UserData => {
@@ -31,87 +31,87 @@ type v51FormProgress = "UNSTARTED" | "COMPLETED";
 export type v51ABExperience = "ExperienceA" | "ExperienceB";
 
 type v51BusinessUser = {
-  name?: string;
-  email: string;
-  id: string;
-  receiveNewsletter: boolean;
-  userTesting: boolean;
-  externalStatus: v51ExternalStatus;
-  myNJUserKey?: string;
-  intercomHash?: string;
-  abExperience: v51ABExperience;
+  readonly name?: string;
+  readonly email: string;
+  readonly id: string;
+  readonly receiveNewsletter: boolean;
+  readonly userTesting: boolean;
+  readonly externalStatus: v51ExternalStatus;
+  readonly myNJUserKey?: string;
+  readonly intercomHash?: string;
+  readonly abExperience: v51ABExperience;
 };
 
 interface v51ProfileDocuments {
-  formationDoc: string;
-  standingDoc: string;
-  certifiedDoc: string;
+  readonly formationDoc: string;
+  readonly standingDoc: string;
+  readonly certifiedDoc: string;
 }
 interface v51ProfileData {
-  hasExistingBusiness: boolean | undefined;
-  initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
-  businessName: string;
-  industryId: string | undefined;
-  legalStructureId: string | undefined;
-  municipality: v51Municipality | undefined;
-  liquorLicense: boolean;
-  requiresCpa: boolean;
-  homeBasedBusiness: boolean;
-  cannabisLicenseType: "CONDITIONAL" | "ANNUAL" | undefined;
-  constructionRenovationPlan: boolean | undefined;
-  dateOfFormation: string | undefined;
-  entityId: string | undefined;
-  employerId: string | undefined;
-  taxId: string | undefined;
-  notes: string;
-  documents: v51ProfileDocuments;
-  ownershipTypeIds: string[];
-  existingEmployees: string | undefined;
-  taxPin: string | undefined;
-  sectorId: string | undefined;
+  readonly hasExistingBusiness: boolean | undefined;
+  readonly initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
+  readonly businessName: string;
+  readonly industryId: string | undefined;
+  readonly legalStructureId: string | undefined;
+  readonly municipality: v51Municipality | undefined;
+  readonly liquorLicense: boolean;
+  readonly requiresCpa: boolean;
+  readonly homeBasedBusiness: boolean;
+  readonly cannabisLicenseType: "CONDITIONAL" | "ANNUAL" | undefined;
+  readonly constructionRenovationPlan: boolean | undefined;
+  readonly dateOfFormation: string | undefined;
+  readonly entityId: string | undefined;
+  readonly employerId: string | undefined;
+  readonly taxId: string | undefined;
+  readonly notes: string;
+  readonly documents: v51ProfileDocuments;
+  readonly ownershipTypeIds: readonly string[];
+  readonly existingEmployees: string | undefined;
+  readonly taxPin: string | undefined;
+  readonly sectorId: string | undefined;
 }
 
 type v51Municipality = {
-  name: string;
-  displayName: string;
-  county: string;
-  id: string;
+  readonly name: string;
+  readonly displayName: string;
+  readonly county: string;
+  readonly id: string;
 };
 
 type v51TaxFilingData = {
-  filings: v51TaxFiling[];
+  readonly filings: readonly v51TaxFiling[];
 };
 
 type v51TaxFiling = {
-  identifier: string;
-  dueDate: string;
+  readonly identifier: string;
+  readonly dueDate: string;
 };
 
 type v51NameAndAddress = {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
+  readonly name: string;
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly zipCode: string;
 };
 
 type v51LicenseData = {
-  nameAndAddress: v51NameAndAddress;
-  completedSearch: boolean;
-  lastCheckedStatus: string;
-  status: v51LicenseStatus;
-  items: v51LicenseStatusItem[];
+  readonly nameAndAddress: v51NameAndAddress;
+  readonly completedSearch: boolean;
+  readonly lastCheckedStatus: string;
+  readonly status: v51LicenseStatus;
+  readonly items: readonly v51LicenseStatusItem[];
 };
 
 type v51Preferences = {
-  roadmapOpenSections: v51SectionType[];
-  roadmapOpenSteps: number[];
-  hiddenFundingIds: string[];
-  hiddenCertificationIds: string[];
+  readonly roadmapOpenSections: readonly v51SectionType[];
+  readonly roadmapOpenSteps: readonly number[];
+  readonly hiddenFundingIds: readonly string[];
+  readonly hiddenCertificationIds: readonly string[];
 };
 
 type v51LicenseStatusItem = {
-  title: string;
-  status: v51CheckoffStatus;
+  readonly title: string;
+  readonly status: v51CheckoffStatus;
 };
 
 type v51CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
@@ -133,18 +133,18 @@ type v51LicenseStatus =
 type v51SectionType = "PLAN" | "START";
 
 type v51ExternalStatus = {
-  newsletter?: v51NewsletterResponse;
-  userTesting?: v51UserTestingResponse;
+  readonly newsletter?: v51NewsletterResponse;
+  readonly userTesting?: v51UserTestingResponse;
 };
 
 interface v51NewsletterResponse {
-  success?: boolean;
-  status: v51NewsletterStatus;
+  readonly success?: boolean;
+  readonly status: v51NewsletterStatus;
 }
 
 interface v51UserTestingResponse {
-  success?: boolean;
-  status: v51UserTestingStatus;
+  readonly success?: boolean;
+  readonly status: v51UserTestingStatus;
 }
 
 type v51NewsletterStatus = typeof newsletterStatusList[number];
@@ -166,48 +166,48 @@ const newsletterStatusList = [
 ] as const;
 
 interface v51FormationData {
-  formationFormData: v51FormationFormData;
-  formationResponse: v51FormationSubmitResponse | undefined;
-  getFilingResponse: v51GetFilingResponse | undefined;
+  readonly formationFormData: v51FormationFormData;
+  readonly formationResponse: v51FormationSubmitResponse | undefined;
+  readonly getFilingResponse: v51GetFilingResponse | undefined;
 }
 
 interface v51FormationMember {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  addressCity: string;
-  addressState: string;
-  addressZipCode: string;
+  readonly name: string;
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly addressCity: string;
+  readonly addressState: string;
+  readonly addressZipCode: string;
 }
 
 interface v51FormationFormData {
-  businessSuffix: v51BusinessSuffix | undefined;
-  businessStartDate: string;
-  businessAddressLine1: string;
-  businessAddressLine2: string;
-  businessAddressState: string;
-  businessAddressZipCode: string;
-  agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
-  agentNumber: string;
-  agentName: string;
-  agentEmail: string;
-  agentOfficeAddressLine1: string;
-  agentOfficeAddressLine2: string;
-  agentOfficeAddressCity: string;
-  agentOfficeAddressState: string;
-  agentOfficeAddressZipCode: string;
-  members: v51FormationMember[];
-  signer: string;
-  additionalSigners: string[];
-  paymentType: v51PaymentType;
-  annualReportNotification: boolean;
-  corpWatchNotification: boolean;
-  officialFormationDocument: boolean;
-  certificateOfStanding: boolean;
-  certifiedCopyOfFormationDocument: boolean;
-  contactFirstName: string;
-  contactLastName: string;
-  contactPhoneNumber: string;
+  readonly businessSuffix: v51BusinessSuffix | undefined;
+  readonly businessStartDate: string;
+  readonly businessAddressLine1: string;
+  readonly businessAddressLine2: string;
+  readonly businessAddressState: string;
+  readonly businessAddressZipCode: string;
+  readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
+  readonly agentNumber: string;
+  readonly agentName: string;
+  readonly agentEmail: string;
+  readonly agentOfficeAddressLine1: string;
+  readonly agentOfficeAddressLine2: string;
+  readonly agentOfficeAddressCity: string;
+  readonly agentOfficeAddressState: string;
+  readonly agentOfficeAddressZipCode: string;
+  readonly members: readonly v51FormationMember[];
+  readonly signer: string;
+  readonly additionalSigners: readonly string[];
+  readonly paymentType: v51PaymentType;
+  readonly annualReportNotification: boolean;
+  readonly corpWatchNotification: boolean;
+  readonly officialFormationDocument: boolean;
+  readonly certificateOfStanding: boolean;
+  readonly certifiedCopyOfFormationDocument: boolean;
+  readonly contactFirstName: string;
+  readonly contactLastName: string;
+  readonly contactPhoneNumber: string;
 }
 
 type v51PaymentType = "CC" | "ACH" | undefined;
@@ -223,26 +223,26 @@ type v51BusinessSuffix =
   | "LIMITED LIABILITY COMPANY";
 
 type v51FormationSubmitResponse = {
-  success: boolean;
-  token: string | undefined;
-  formationId: string | undefined;
-  redirect: string | undefined;
-  errors: v51FormationSubmitError[];
+  readonly success: boolean;
+  readonly token: string | undefined;
+  readonly formationId: string | undefined;
+  readonly redirect: string | undefined;
+  readonly errors: readonly v51FormationSubmitError[];
 };
 
 type v51FormationSubmitError = {
-  field: string;
-  message: string;
+  readonly field: string;
+  readonly message: string;
 };
 
 type v51GetFilingResponse = {
-  success: boolean;
-  entityId: string;
-  transactionDate: string;
-  confirmationNumber: string;
-  formationDoc: string;
-  standingDoc: string;
-  certifiedDoc: string;
+  readonly success: boolean;
+  readonly entityId: string;
+  readonly transactionDate: string;
+  readonly confirmationNumber: string;
+  readonly formationDoc: string;
+  readonly standingDoc: string;
+  readonly certifiedDoc: string;
 };
 
 // ---------------- v51 factories ----------------

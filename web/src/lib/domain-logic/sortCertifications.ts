@@ -1,6 +1,7 @@
 import { Certification } from "@/lib/types/types";
 
-export const sortCertifications = (certifications: Certification[]): Certification[] => {
+// eslint-disable-next-line functional/prefer-readonly-type
+export const sortCertifications = (certifications: Certification[]): readonly Certification[] => {
   return certifications.sort((a, b) => {
     const nameA = a.name.toUpperCase(); // ignore upper and lowercase
     const nameB = b.name.toUpperCase();

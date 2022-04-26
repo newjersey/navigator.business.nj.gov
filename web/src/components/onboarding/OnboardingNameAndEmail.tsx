@@ -7,9 +7,9 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
-  onValidation: (fieldName: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
+  readonly onValidation: (fieldName: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly headerAriaLevel?: number;
 }
 
 export const OnboardingNameAndEmail = (props: Props): ReactElement => {

@@ -7,7 +7,9 @@ import React, { ReactElement, useContext } from "react";
 export const OnboardingCpa = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const handleCpaSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleCpaSelection = (
+    event: React.ChangeEvent<{ readonly name?: string; readonly value: unknown }>
+  ) => {
     if (event.target.value === "true") {
       analytics.event.onboarding_cpa_question.submit.yes_i_offer_public_accounting();
     } else {

@@ -12,8 +12,8 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
-  task: Task;
-  displayContent: CannabisApplyForLicenseDisplayContent;
+  readonly task: Task;
+  readonly displayContent: CannabisApplyForLicenseDisplayContent;
 }
 
 export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {

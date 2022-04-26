@@ -101,10 +101,10 @@ export const Signatures = (): ReactElement => {
     fieldName,
     index,
   }: {
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    checked: boolean;
-    fieldName: FormationFields;
-    index?: number;
+    readonly onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    readonly checked: boolean;
+    readonly fieldName: FormationFields;
+    readonly index?: number;
   }) => {
     return (
       <div className="grid-col-auto width-6 display-flex flex-column flex-align-center flex-justify-center">
@@ -127,7 +127,13 @@ export const Signatures = (): ReactElement => {
     );
   };
 
-  const renderDeleteColumn = ({ visible, onClick }: { visible: boolean; onClick?: () => void }) => {
+  const renderDeleteColumn = ({
+    visible,
+    onClick,
+  }: {
+    readonly visible: boolean;
+    readonly onClick?: () => void;
+  }) => {
     return (
       <div className="grid-col-auto padding-left-1 flex-column flex-align-center flex-justify-center">
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">

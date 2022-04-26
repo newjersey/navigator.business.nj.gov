@@ -36,7 +36,7 @@ describe("userRouter", () => {
     app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus));
   });
 
-  const cognitoPayload = ({ id }: { id: string }) => ({
+  const cognitoPayload = ({ id }: { readonly id: string }) => ({
     sub: "some-sub",
     "custom:myNJUserKey": undefined,
     email: "some-eamail",

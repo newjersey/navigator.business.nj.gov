@@ -6,10 +6,10 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import React, { ReactElement } from "react";
 
 interface Props {
-  children: React.ReactNode;
-  home?: boolean;
-  showLegalMessage?: boolean;
-  isWidePage?: boolean;
+  readonly children: React.ReactNode;
+  readonly home?: boolean;
+  readonly showLegalMessage?: boolean;
+  readonly isWidePage?: boolean;
 }
 
 export const PageSkeleton = (props: Props): ReactElement => {

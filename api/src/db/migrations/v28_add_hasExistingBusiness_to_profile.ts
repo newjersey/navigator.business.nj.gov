@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v27UserData } from "./v27_add_registration_optouts";
 
 export interface v28UserData {

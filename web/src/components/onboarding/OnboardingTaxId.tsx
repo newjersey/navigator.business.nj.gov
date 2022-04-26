@@ -3,10 +3,10 @@ import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import React, { ReactElement } from "react";
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
-  handleChangeOverride?: (value: string) => void;
+  readonly onValidation: (field: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly headerAriaLevel?: number;
+  readonly handleChangeOverride?: (value: string) => void;
 }
 
 export const OnboardingTaxId = (props: Props): ReactElement => {

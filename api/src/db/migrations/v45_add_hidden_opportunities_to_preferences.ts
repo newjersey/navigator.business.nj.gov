@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v44UserData } from "./v44_add_cannabis_license_to_profile_data";
 
 export interface v45UserData {

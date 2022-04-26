@@ -11,16 +11,16 @@ import orderBy from "lodash.orderby";
 import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
+  readonly onValidation: (field: ProfileFields, invalid: boolean) => void;
+  readonly fieldStates: ProfileFieldErrorMap;
+  readonly headerAriaLevel?: number;
 }
 
 export const OnboardingSectors = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const SectorsOrdered: SectorType[] = orderBy(sectors, (SectorType: SectorType) => {
+  const SectorsOrdered: readonly SectorType[] = orderBy(sectors, (SectorType: SectorType) => {
     return SectorType.name;
   });
 

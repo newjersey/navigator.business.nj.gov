@@ -7,11 +7,11 @@ import { useMediaQuery } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
 
 type Props = {
-  landingPage?: boolean;
-  task?: Task;
-  sideBarPageLayout?: boolean;
-  operateReferences?: Record<string, OperateReference>;
-  isWidePage?: boolean;
+  readonly landingPage?: boolean;
+  readonly task?: Task;
+  readonly sideBarPageLayout?: boolean;
+  readonly operateReferences?: Record<string, OperateReference>;
+  readonly isWidePage?: boolean;
 };
 
 export const NavBar = (props: Props): ReactElement => {

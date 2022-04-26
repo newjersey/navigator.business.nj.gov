@@ -1,3 +1,4 @@
+/* eslint-disable functional/immutable-data */
 import path from "path";
 import slsw from "serverless-webpack";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";

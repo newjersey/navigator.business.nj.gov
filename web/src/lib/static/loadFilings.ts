@@ -4,13 +4,14 @@ import fs from "fs";
 import path from "path";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
 
-export type PathParams<P> = { params: P; locale?: string };
+export type PathParams<P> = { readonly params: P; readonly locale?: string };
 export type FilingUrlSlugParam = {
-  filingUrlSlug: string;
+  readonly filingUrlSlug: string;
 };
 
 const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
 
+// eslint-disable-next-line functional/prefer-readonly-type
 export const loadAllFilingUrlSlugs = (): PathParams<FilingUrlSlugParam>[] => {
   const fileNames = fs.readdirSync(filingsDir);
   return fileNames.map((fileName) => {

@@ -62,24 +62,24 @@ export default {
   }),
   // Function to create a text block from an instance of this component
   toBlock: (obj: {
-    preFormat: string;
-    preContext: string;
-    title: string;
-    contextId: string;
-    postContext: string;
-    postFormat: string;
+    readonly preFormat: string;
+    readonly preContext: string;
+    readonly title: string;
+    readonly contextId: string;
+    readonly postContext: string;
+    readonly postFormat: string;
   }) =>
     `${obj.preFormat || ""}${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
       obj.contextId || ""
     }\` ${(obj.postContext || "").trim()}${obj.postFormat || ""}`,
 
   toPreview: (obj: {
-    preFormat: string;
-    preContext: string;
-    title: string;
-    contextId: string;
-    postContext: string;
-    postFormat: string;
+    readonly preFormat: string;
+    readonly preContext: string;
+    readonly title: string;
+    readonly contextId: string;
+    readonly postContext: string;
+    readonly postFormat: string;
   }) =>
     `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${obj.contextId || ""}\` ${(
       obj.postContext || ""

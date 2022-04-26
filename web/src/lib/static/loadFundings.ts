@@ -8,16 +8,17 @@ import { getFileNameByUrlSlug } from "./helpers";
 const fundingDir = path.join(process.cwd(), "..", "content", "src", "fundings");
 
 export type FundingUrlSlugParam = {
-  fundingUrlSlug: string;
+  readonly fundingUrlSlug: string;
 };
 
-export const loadAllFundings = (): Funding[] => {
+export const loadAllFundings = (): readonly Funding[] => {
   const fileNames = fs.readdirSync(fundingDir);
   return fileNames.map((fileName) => {
     return loadFundingByFileName(fileName);
   });
 };
 
+// eslint-disable-next-line functional/prefer-readonly-type
 export const loadAllFundingUrlSlugs = (): PathParams<FundingUrlSlugParam>[] => {
   const fileNames = fs.readdirSync(fundingDir);
   return fileNames.map((fileName) => {

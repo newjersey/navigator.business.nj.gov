@@ -1,7 +1,7 @@
 import OwnershipTypeJSON from "../../content/src/dashboard/ownershipTypes.json";
 export interface OwnershipType {
-  id: string;
-  name: string;
+  readonly id: string;
+  readonly name: string;
 }
 
 export const LookupOwnershipTypeById = (id: string): OwnershipType => {

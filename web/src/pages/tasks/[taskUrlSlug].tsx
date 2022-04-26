@@ -30,9 +30,9 @@ import { useRouter } from "next/router";
 import React, { ReactElement, ReactNode, useMemo } from "react";
 
 interface Props {
-  task: Task;
-  displayContent: TasksDisplayContent;
-  municipalities: Municipality[];
+  readonly task: Task;
+  readonly displayContent: TasksDisplayContent;
+  readonly municipalities: readonly Municipality[];
 }
 
 const TaskPage = (props: Props): ReactElement => {
@@ -163,7 +163,10 @@ const getPostOnboardingQuestion = (task: Task): ReactElement => {
   });
 };
 
-export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }) => {
+export const TaskElement = (props: {
+  readonly task: Task;
+  readonly children?: ReactNode | readonly ReactNode[];
+}) => {
   const [beforeQuestion, afterQuestion] = props.task.contentMd.split("{postOnboardingQuestion}");
 
   return (
@@ -208,7 +211,7 @@ export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
 export const getStaticProps = async ({
   params,
 }: {
-  params: TaskUrlSlugParam;
+  readonly params: TaskUrlSlugParam;
 }): Promise<GetStaticPropsResult<Props>> => {
   const municipalities = await loadAllMunicipalities();
   return {

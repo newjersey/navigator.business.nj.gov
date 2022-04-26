@@ -3,10 +3,10 @@ import FocusTrap from "focus-trap-react";
 import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
-  children: React.ReactNode;
-  close: () => void;
-  isOpen: boolean;
-  delayTime?: number;
+  readonly children: React.ReactNode;
+  readonly close: () => void;
+  readonly isOpen: boolean;
+  readonly delayTime?: number;
 }
 
 export const FocusTrappedSidebar = ({ children, close, isOpen, delayTime = 300 }: Props): ReactElement => {

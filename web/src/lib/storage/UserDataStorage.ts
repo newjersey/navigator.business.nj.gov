@@ -2,15 +2,15 @@ import { BrowserStorageFactory } from "@/lib/storage/BrowserStorage";
 import { RegistrationStatus, UserData } from "@businessnjgovnavigator/shared/";
 
 interface UserDataStorage {
-  get: (key?: string) => UserData | undefined;
-  set: (key: string, value: UserData) => boolean;
-  delete: (key?: string) => void;
-  clear: () => void;
-  getCurrentUserData: () => UserData | undefined;
-  deleteCurrentUser: () => void;
-  getCurrentUserId: () => string | undefined;
-  setRegistrationStatus: (value: RegistrationStatus | undefined) => void;
-  getRegistrationStatus: () => RegistrationStatus | undefined;
+  readonly get: (key?: string) => UserData | undefined;
+  readonly set: (key: string, value: UserData) => boolean;
+  readonly delete: (key?: string) => void;
+  readonly clear: () => void;
+  readonly getCurrentUserData: () => UserData | undefined;
+  readonly deleteCurrentUser: () => void;
+  readonly getCurrentUserId: () => string | undefined;
+  readonly setRegistrationStatus: (value: RegistrationStatus | undefined) => void;
+  readonly getRegistrationStatus: () => RegistrationStatus | undefined;
 }
 
 export const userDataPrefix = "$swrUserData$";
@@ -79,7 +79,7 @@ export const UserDataStorageFactory = (): UserDataStorage => {
     return key ? get(key) : undefined;
   };
 
-  const getCurrentUsers = (): string[] => {
+  const getCurrentUsers = (): readonly string[] => {
     return browserStorage.keys().filter((value: string) => value.includes(userDataPrefix));
   };
 

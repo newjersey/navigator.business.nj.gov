@@ -15,12 +15,18 @@ export const ContactsSection = (): ReactElement => {
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const { userData, update } = useUserData();
 
-  type FormationFieldErrors = { name: FormationFields; types: FormationErrorTypes[] };
+  type FormationFieldErrors = {
+    readonly name: FormationFields;
+    readonly types: readonly FormationErrorTypes[];
+  };
 
-  const formationFieldErrors = useMemo((): FormationFieldErrors[] => {
+  const formationFieldErrors = useMemo((): readonly FormationFieldErrors[] => {
+    // eslint-disable-next-line functional/prefer-readonly-type
     const invalidFields: FormationFieldErrors[] = [];
 
+    // eslint-disable-next-line functional/prefer-readonly-type
     const signErrorType: FormationErrorTypes[] = [];
+    // eslint-disable-next-line functional/prefer-readonly-type
     const additionalSignersErrorType: FormationErrorTypes[] = [];
 
     if (!state.formationFormData.signer.name) signErrorType.push("signer-name");
@@ -87,8 +93,12 @@ export const ContactsSection = (): ReactElement => {
   };
 
   //0 is highest priority
-  type ErrorMessages = { type: Partial<FormationErrorTypes>; label: string; priority: number };
-  const errorMessages: ErrorMessages[] = [
+  type ErrorMessages = {
+    readonly type: Partial<FormationErrorTypes>;
+    readonly label: string;
+    readonly priority: number;
+  };
+  const errorMessages: readonly ErrorMessages[] = [
     {
       type: "signer-checkbox",
       label: Config.businessFormationDefaults.signatureCheckboxErrorText,

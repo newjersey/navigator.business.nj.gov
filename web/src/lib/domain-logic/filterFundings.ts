@@ -1,7 +1,8 @@
 import { County, Funding } from "@/lib/types/types";
 import { UserData } from "@businessnjgovnavigator/shared/";
 
-export const filterFundings = (fundings: Funding[], userData: UserData): Funding[] => {
+// eslint-disable-next-line functional/prefer-readonly-type
+export const filterFundings = (fundings: readonly Funding[], userData: UserData): Funding[] => {
   return fundings.filter((it) => {
     if (it.publishStageArchive === "Do Not Publish") return false;
 

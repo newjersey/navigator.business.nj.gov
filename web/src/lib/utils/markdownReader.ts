@@ -56,64 +56,64 @@ export const getMarkdown = (mdContents: string): MarkdownResult => {
 };
 
 type TaskGrayMatter = {
-  id: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  postOnboardingQuestion: string;
-  required?: boolean;
-  issuingAgency?: string;
-  formName?: string;
+  readonly id: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly callToActionLink: string;
+  readonly callToActionText: string;
+  readonly postOnboardingQuestion: string;
+  readonly required?: boolean;
+  readonly issuingAgency?: string;
+  readonly formName?: string;
 };
 
 type FundingGrayMatter = {
-  id: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  fundingType: FundingType;
-  agency: OpportunityAgency[];
-  publishStageArchive: FundingPublishStatus | null;
-  openDate: string;
-  dueDate: string;
-  status: FundingStatus;
-  programFrequency: FundingProgramFrequency;
-  businessStage: FundingBusinessStage;
-  employeesRequired: string;
-  homeBased: FundingHomeBased;
-  mwvb: string;
-  preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
-  county: County[];
-  sector: string[];
+  readonly id: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly callToActionLink: string;
+  readonly callToActionText: string;
+  readonly fundingType: FundingType;
+  readonly agency: readonly OpportunityAgency[];
+  readonly publishStageArchive: FundingPublishStatus | null;
+  readonly openDate: string;
+  readonly dueDate: string;
+  readonly status: FundingStatus;
+  readonly programFrequency: FundingProgramFrequency;
+  readonly businessStage: FundingBusinessStage;
+  readonly employeesRequired: string;
+  readonly homeBased: FundingHomeBased;
+  readonly mwvb: string;
+  readonly preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
+  readonly county: readonly County[];
+  readonly sector: readonly string[];
 };
 
 type CertificationGrayMatter = {
-  id: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  agency: OpportunityAgency[];
-  applicableOwnershipTypes: string[];
-  isSbe: boolean;
+  readonly id: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly callToActionLink: string;
+  readonly callToActionText: string;
+  readonly agency: readonly OpportunityAgency[];
+  readonly applicableOwnershipTypes: readonly string[];
+  readonly isSbe: boolean;
 };
 
 export type MarkdownResult = {
-  content: string;
-  grayMatter: unknown;
+  readonly content: string;
+  readonly grayMatter: unknown;
 };
 
 export type TaskWithoutLinks = {
-  id: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  postOnboardingQuestion: string;
-  contentMd: string;
-  required?: boolean;
-  issuingAgency?: string;
-  formName?: string;
+  readonly id: string;
+  readonly name: string;
+  readonly urlSlug: string;
+  readonly callToActionLink: string;
+  readonly callToActionText: string;
+  readonly postOnboardingQuestion: string;
+  readonly contentMd: string;
+  readonly required?: boolean;
+  readonly issuingAgency?: string;
+  readonly formName?: string;
 };

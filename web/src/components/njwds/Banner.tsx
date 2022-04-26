@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 
 type Props = {
-  isWidePage?: boolean;
+  readonly isWidePage?: boolean;
 };
 
 export const Banner = (props: Props): ReactElement => {

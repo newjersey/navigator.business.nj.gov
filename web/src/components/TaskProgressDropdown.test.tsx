@@ -15,10 +15,10 @@ describe("<TaskProgressDropdown />", () => {
   const onSelectCallBack = jest.fn();
 
   const renderWithAuth = (context: {
-    onSelect?: typeof onSelectCallBack;
-    initialValue?: TaskProgress;
-    isAuthenticated?: IsAuthenticated;
-    modalIsVisible?: boolean;
+    readonly onSelect?: typeof onSelectCallBack;
+    readonly initialValue?: TaskProgress;
+    readonly isAuthenticated?: IsAuthenticated;
+    readonly modalIsVisible?: boolean;
   }): RenderResult => {
     return render(
       withAuthAlert(

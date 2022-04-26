@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v12UserData } from "./v12_remove_scorp";
 
 export interface v13UserData {

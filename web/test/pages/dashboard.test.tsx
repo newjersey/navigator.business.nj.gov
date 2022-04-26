@@ -57,10 +57,10 @@ describe("dashboard", () => {
   });
 
   const renderPage = (overrides: {
-    displayContent?: DashboardDisplayContent;
-    operateRefs?: Record<string, OperateReference>;
-    fundings?: Funding[];
-    certifications?: Certification[];
+    readonly displayContent?: DashboardDisplayContent;
+    readonly operateRefs?: Record<string, OperateReference>;
+    readonly fundings?: readonly Funding[];
+    readonly certifications?: readonly Certification[];
   }): RenderResult => {
     return render(
       <ThemeProvider theme={createTheme()}>
@@ -77,8 +77,8 @@ describe("dashboard", () => {
   const renderWithUserData = (
     userData: UserData,
     overrides: {
-      fundings?: Funding[];
-      certifications?: Certification[];
+      readonly fundings?: readonly Funding[];
+      readonly certifications?: readonly Certification[];
     }
   ) => {
     return render(

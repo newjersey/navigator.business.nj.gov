@@ -1,23 +1,23 @@
 import React, { Component, createRef } from "react";
 
 type SlugProps = {
-  onChange: (e: string) => void;
-  entry?: object;
-  forID?: string;
-  default?: string;
-  value?: string;
-  classNameWrapper: string;
-  setActiveStyle: () => void;
-  setInactiveStyle: () => void;
+  readonly onChange: (e: string) => void;
+  readonly entry?: object;
+  readonly forID?: string;
+  readonly default?: string;
+  readonly value?: string;
+  readonly classNameWrapper: string;
+  readonly setActiveStyle: () => void;
+  readonly setInactiveStyle: () => void;
 };
 type SlugState = {
-  entry_object: object;
-  value: string;
-  _sel: number | null;
+  readonly entry_object: object;
+  readonly value: string;
+  readonly _sel: number | null;
 };
 
 class SlugControl extends Component<SlugProps, SlugState> {
-  private el = createRef<HTMLInputElement>();
+  private readonly el = createRef<HTMLInputElement>();
 
   constructor(props: SlugProps) {
     super(props);
@@ -29,7 +29,7 @@ class SlugControl extends Component<SlugProps, SlugState> {
     };
   }
 
-  isValid = () => {
+  readonly isValid = () => {
     return true;
   };
 
@@ -47,7 +47,7 @@ class SlugControl extends Component<SlugProps, SlugState> {
     }
   }
 
-  handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  readonly handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     this.setState({ _sel: e.target.selectionStart });
     this.props.onChange(e.target.value);
   };

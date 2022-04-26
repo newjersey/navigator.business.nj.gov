@@ -21,8 +21,8 @@ describe("useDocuments", () => {
   });
 
   const setupHook = (): {
-    documents: ProfileDocuments | undefined;
-    checkData: () => Promise<void>;
+    readonly documents: ProfileDocuments | undefined;
+    readonly checkData: () => Promise<void>;
   } => {
     const returnVal = {
       documents: undefined,

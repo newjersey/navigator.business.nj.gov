@@ -7,10 +7,10 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface Props {
-  onNextTab: () => void;
-  priorityStatusState: Record<PriorityApplicationType, boolean>;
-  onCheckboxChange: (checkbox: PriorityApplicationType, checked: boolean) => void;
-  noPriorityStatus: boolean;
+  readonly onNextTab: () => void;
+  readonly priorityStatusState: Record<PriorityApplicationType, boolean>;
+  readonly onCheckboxChange: (checkbox: PriorityApplicationType, checked: boolean) => void;
+  readonly noPriorityStatus: boolean;
 }
 
 export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {

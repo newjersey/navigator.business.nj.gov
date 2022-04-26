@@ -66,10 +66,10 @@ describe("profile", () => {
     userData,
     isAuthenticated,
   }: {
-    municipalities?: Municipality[];
-    displayContent?: LoadDisplayContent;
-    userData?: UserData;
-    isAuthenticated?: IsAuthenticated;
+    readonly municipalities?: readonly Municipality[];
+    readonly displayContent?: LoadDisplayContent;
+    readonly userData?: UserData;
+    readonly isAuthenticated?: IsAuthenticated;
   }): RenderResult => {
     const genericTown =
       userData && userData.profileData.municipality

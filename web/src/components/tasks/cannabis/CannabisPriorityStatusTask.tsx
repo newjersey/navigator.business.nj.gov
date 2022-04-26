@@ -10,8 +10,8 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { useState } from "react";
 
 interface Props {
-  task: Task;
-  displayContent: CannabisPriorityStatusDisplayContent;
+  readonly task: Task;
+  readonly displayContent: CannabisPriorityStatusDisplayContent;
 }
 
 export const CannabisPriorityStatusTask = (props: Props) => {

@@ -25,7 +25,7 @@ export const PaymentSection = (): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const requiredFieldsWithError = useMemo(() => {
-    const requiredFields: FormationFields[] = [
+    const requiredFields: readonly FormationFields[] = [
       "paymentType",
       "contactFirstName",
       "contactLastName",

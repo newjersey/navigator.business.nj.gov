@@ -1,55 +1,55 @@
 import { Municipality } from "./municipality";
 
 export interface FormationData {
-  formationFormData: FormationFormData;
-  formationResponse: FormationSubmitResponse | undefined;
-  getFilingResponse: GetFilingResponse | undefined;
+  readonly formationFormData: FormationFormData;
+  readonly formationResponse: FormationSubmitResponse | undefined;
+  readonly getFilingResponse: GetFilingResponse | undefined;
 }
 
 export interface FormationMember {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  addressCity: string;
-  addressState: string;
-  addressZipCode: string;
+  readonly name: string;
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly addressCity: string;
+  readonly addressState: string;
+  readonly addressZipCode: string;
 }
 
 export interface FormationSigner {
-  name: string;
-  signature: boolean;
+  readonly name: string;
+  readonly signature: boolean;
 }
 
 export interface FormationFormData {
-  businessName: string;
-  businessSuffix: BusinessSuffix | undefined;
-  businessStartDate: string;
-  businessAddressCity: Municipality | undefined;
-  businessAddressLine1: string;
-  businessAddressLine2: string;
-  businessAddressState: string;
-  businessAddressZipCode: string;
-  agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
-  agentNumber: string;
-  agentName: string;
-  agentEmail: string;
-  agentOfficeAddressLine1: string;
-  agentOfficeAddressLine2: string;
-  agentOfficeAddressCity: string;
-  agentOfficeAddressState: string;
-  agentOfficeAddressZipCode: string;
-  members: FormationMember[];
-  signer: FormationSigner;
-  additionalSigners: FormationSigner[];
-  paymentType: PaymentType;
-  annualReportNotification: boolean;
-  corpWatchNotification: boolean;
-  officialFormationDocument: boolean;
-  certificateOfStanding: boolean;
-  certifiedCopyOfFormationDocument: boolean;
-  contactFirstName: string;
-  contactLastName: string;
-  contactPhoneNumber: string;
+  readonly businessName: string;
+  readonly businessSuffix: BusinessSuffix | undefined;
+  readonly businessStartDate: string;
+  readonly businessAddressCity: Municipality | undefined;
+  readonly businessAddressLine1: string;
+  readonly businessAddressLine2: string;
+  readonly businessAddressState: string;
+  readonly businessAddressZipCode: string;
+  readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
+  readonly agentNumber: string;
+  readonly agentName: string;
+  readonly agentEmail: string;
+  readonly agentOfficeAddressLine1: string;
+  readonly agentOfficeAddressLine2: string;
+  readonly agentOfficeAddressCity: string;
+  readonly agentOfficeAddressState: string;
+  readonly agentOfficeAddressZipCode: string;
+  readonly members: readonly FormationMember[];
+  readonly signer: FormationSigner;
+  readonly additionalSigners: readonly FormationSigner[];
+  readonly paymentType: PaymentType;
+  readonly annualReportNotification: boolean;
+  readonly corpWatchNotification: boolean;
+  readonly officialFormationDocument: boolean;
+  readonly certificateOfStanding: boolean;
+  readonly certifiedCopyOfFormationDocument: boolean;
+  readonly contactFirstName: string;
+  readonly contactLastName: string;
+  readonly contactPhoneNumber: string;
 }
 
 export type FormationTextField = Exclude<
@@ -139,25 +139,25 @@ export const AllBusinessSuffixes = [
 ];
 
 export type FormationSubmitResponse = {
-  success: boolean;
-  token: string | undefined;
-  formationId: string | undefined;
-  redirect: string | undefined;
-  errors: FormationSubmitError[];
+  readonly success: boolean;
+  readonly token: string | undefined;
+  readonly formationId: string | undefined;
+  readonly redirect: string | undefined;
+  readonly errors: readonly FormationSubmitError[];
 };
 
 export type FormationSubmitError = {
-  field: string;
-  type: "FIELD" | "UNKNOWN" | "RESPONSE";
-  message: string;
+  readonly field: string;
+  readonly type: "FIELD" | "UNKNOWN" | "RESPONSE";
+  readonly message: string;
 };
 
 export type GetFilingResponse = {
-  success: boolean;
-  entityId: string;
-  transactionDate: string;
-  confirmationNumber: string;
-  formationDoc: string;
-  standingDoc: string;
-  certifiedDoc: string;
+  readonly success: boolean;
+  readonly entityId: string;
+  readonly transactionDate: string;
+  readonly confirmationNumber: string;
+  readonly formationDoc: string;
+  readonly standingDoc: string;
+  readonly certifiedDoc: string;
 };

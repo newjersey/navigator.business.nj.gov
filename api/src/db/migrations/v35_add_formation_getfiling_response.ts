@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v34UserData } from "./v34_add_contact_to_formation_data";
 
 export interface v35UserData {

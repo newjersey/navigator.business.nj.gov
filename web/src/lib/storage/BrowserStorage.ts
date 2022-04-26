@@ -1,11 +1,11 @@
 type StorageType = "session" | "local";
 
 export type BrowserStorage = {
-  get: (key: string, type?: StorageType) => string | undefined;
-  set: (key: string, value: string, type?: StorageType) => boolean;
-  keys: (type?: StorageType) => string[];
-  delete: (key: string, type?: StorageType) => void;
-  clear: (type?: StorageType) => void;
+  readonly get: (key: string, type?: StorageType) => string | undefined;
+  readonly set: (key: string, value: string, type?: StorageType) => boolean;
+  readonly keys: (type?: StorageType) => readonly string[];
+  readonly delete: (key: string, type?: StorageType) => void;
+  readonly clear: (type?: StorageType) => void;
 };
 
 export const BrowserStorageFactory = (type?: StorageType): BrowserStorage => {
@@ -26,7 +26,7 @@ export const BrowserStorageFactory = (type?: StorageType): BrowserStorage => {
   };
 
   const keys = () =>
-    [...Array(window[storageType].length)].map((_, i) => window[storageType].key(i)) as string[];
+    [...Array(window[storageType].length)].map((_, i) => window[storageType].key(i)) as readonly string[];
 
   const clear = () => window[storageType].clear();
 

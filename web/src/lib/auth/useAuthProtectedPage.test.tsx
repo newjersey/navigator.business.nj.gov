@@ -26,9 +26,9 @@ describe("useAuthProtectedPage", () => {
     isAuth,
     modalIsVisible,
   }: {
-    hook: () => void;
-    isAuth: IsAuthenticated;
-    modalIsVisible?: boolean;
+    readonly hook: () => void;
+    readonly isAuth: IsAuthenticated;
+    readonly modalIsVisible?: boolean;
   }): void => {
     function TestComponent() {
       hook();

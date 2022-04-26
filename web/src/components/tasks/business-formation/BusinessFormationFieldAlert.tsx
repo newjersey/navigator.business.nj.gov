@@ -5,8 +5,8 @@ import { FormationFormData } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement } from "react";
 
 interface Props {
-  showRequiredFieldsError: boolean;
-  requiredFieldsWithError: (keyof FormationFormData)[];
+  readonly showRequiredFieldsError: boolean;
+  readonly requiredFieldsWithError: readonly (keyof FormationFormData)[];
 }
 
 export const BusinessFormationFieldAlert = (props: Props): ReactElement => {

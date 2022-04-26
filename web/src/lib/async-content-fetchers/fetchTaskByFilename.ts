@@ -28,7 +28,7 @@ export const fetchTaskLinkByFilename = async (filename: string): Promise<TaskLin
   };
 };
 
-const fetchDependenciesFile = async (): Promise<TaskDependencies[]> => {
+const fetchDependenciesFile = async (): Promise<readonly TaskDependencies[]> => {
   let file;
   if (process.env.NODE_ENV === "test") {
     file = await import(`@/lib/roadmap/fixtures/task-dependencies.json`);

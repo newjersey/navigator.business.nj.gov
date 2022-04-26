@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v32UserData } from "./v32_3rd_party_status_status";
 
 export interface v33UserData {

@@ -5,8 +5,8 @@ import { Checkbox, CheckboxProps } from "@mui/material";
 import React, { useContext } from "react";
 
 interface Props {
-  checklistItemId: string;
-  checkboxProps?: CheckboxProps;
+  readonly checklistItemId: string;
+  readonly checkboxProps?: CheckboxProps;
 }
 
 export const TaskCheckbox = (props: Props) => {

@@ -14,15 +14,15 @@ type TagVariant =
   | "funding";
 
 interface Props {
-  tagVariant: TagVariant;
-  children: React.ReactNode;
-  dataTestid?: string;
-  textWrap?: boolean;
-  bold?: boolean;
-  hover?: boolean;
-  fixedWidth?: boolean;
-  hexColor?: string;
-  paddingOverrideClassName?: string;
+  readonly tagVariant: TagVariant;
+  readonly children: React.ReactNode;
+  readonly dataTestid?: string;
+  readonly textWrap?: boolean;
+  readonly bold?: boolean;
+  readonly hover?: boolean;
+  readonly fixedWidth?: boolean;
+  readonly hexColor?: string;
+  readonly paddingOverrideClassName?: string;
 }
 
 export const Tag = (props: Props): ReactElement => {

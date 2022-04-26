@@ -15,20 +15,20 @@ const getTokenFromHeader = (req: Request): string => {
 };
 
 type CognitoJWTPayload = {
-  sub: string;
-  "custom:myNJUserKey": string;
-  "custom:identityId": string | undefined;
-  email: string;
-  identities: CognitoIdentityPayload[] | undefined;
+  readonly sub: string;
+  readonly "custom:myNJUserKey": string;
+  readonly "custom:identityId": string | undefined;
+  readonly email: string;
+  readonly identities: readonly CognitoIdentityPayload[] | undefined;
 };
 
 type CognitoIdentityPayload = {
-  dateCreated: string;
-  issuer: string;
-  primary: string;
-  providerName: string;
-  providerType: string;
-  userId: string;
+  readonly dateCreated: string;
+  readonly issuer: string;
+  readonly primary: string;
+  readonly providerName: string;
+  readonly providerType: string;
+  readonly userId: string;
 };
 
 export const getSignedInUser = (req: Request): CognitoJWTPayload =>

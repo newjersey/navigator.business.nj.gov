@@ -9,18 +9,18 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import React, { ReactElement } from "react";
 
 interface Props {
-  displayContent: CannabisApplyForLicenseDisplayContent;
-  task: Task;
-  priorityStatusState: Record<PriorityApplicationType, boolean>;
-  onBack: () => void;
+  readonly displayContent: CannabisApplyForLicenseDisplayContent;
+  readonly task: Task;
+  readonly priorityStatusState: Record<PriorityApplicationType, boolean>;
+  readonly onBack: () => void;
 }
 
 export const CannabisApplicationRequirementsTab = (props: Props): ReactElement => {
   const { userData } = useUserData();
 
-  const hasPriorityStatus = (Object.keys(props.priorityStatusState) as PriorityApplicationType[]).some(
-    (key) => props.priorityStatusState[key]
-  );
+  const hasPriorityStatus = (
+    Object.keys(props.priorityStatusState) as readonly PriorityApplicationType[]
+  ).some((key) => props.priorityStatusState[key]);
 
   return (
     <div className="flex flex-column">

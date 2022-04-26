@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { randomInt } from "@shared/intHelpers";
 import { v21UserData } from "./v21_add_tax_fields";
 
@@ -15,7 +16,6 @@ export interface v22UserData {
 export const migrate_v21_to_v22 = (v21Data: v21UserData): v22UserData => {
   const updatedOnboardingData = v21Data.onboardingData;
   const legalStructureId = v21Data.onboardingData.legalStructure;
-  delete updatedOnboardingData.legalStructure;
 
   return {
     ...v21Data,

@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v46UserData } from "./v46_add_task_item_checklist";
 
 export interface v47UserData {

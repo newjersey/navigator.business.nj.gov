@@ -2,10 +2,10 @@ import { Icon } from "@/components/njwds/Icon";
 import React, { ReactElement } from "react";
 
 interface Props {
-  label: string;
-  icon: string;
-  subLabel?: string;
-  downloadLink?: string;
+  readonly label: string;
+  readonly icon: string;
+  readonly subLabel?: string;
+  readonly downloadLink?: string;
 }
 
 export const FormationSuccessDocument = (props: Props): ReactElement => {

@@ -23,7 +23,7 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
 
     const match = allMatchingAddressesArray.reduce((a, b) => (getLicenseDate(a) > getLicenseDate(b) ? a : b));
 
-    const items: LicenseStatusItem[] = entities
+    const items: readonly LicenseStatusItem[] = entities
       .filter((it) => it.applicationNumber === match.applicationNumber)
       .filter((it) => it.checkoffStatus === "Unchecked" || it.checkoffStatus === "Completed")
       .map((it) => ({

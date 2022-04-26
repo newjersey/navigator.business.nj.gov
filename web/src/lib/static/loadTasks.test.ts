@@ -119,7 +119,7 @@ describe("loadTasks", () => {
     });
   });
 
-  const mockReadDirReturn = (value: string[]) => {
+  const mockReadDirReturn = (value: readonly string[]) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     mockedFs.readdirSync.mockReturnValue(value);

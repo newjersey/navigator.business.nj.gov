@@ -540,7 +540,9 @@ describe("roadmap page", () => {
   });
 
   describe("oscar graduation modal", () => {
-    const renderPage = (userData: UserData): { subject: RenderResult; page: PageHelpers } => {
+    const renderPage = (
+      userData: UserData
+    ): { readonly subject: RenderResult; readonly page: PageHelpers } => {
       const subject = render(
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>

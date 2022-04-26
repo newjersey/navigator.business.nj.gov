@@ -5,15 +5,16 @@ import { createEmptyProfileData, ProfileData } from "./profileData";
 import { TaxFilingData } from "./taxFiling";
 
 export interface UserData {
-  user: BusinessUser;
-  profileData: ProfileData;
-  formProgress: FormProgress;
+  readonly user: BusinessUser;
+  readonly profileData: ProfileData;
+  readonly formProgress: FormProgress;
+  // eslint-disable-next-line functional/prefer-readonly-type
   taskProgress: Record<string, TaskProgress>;
-  taskItemChecklist: Record<string, boolean>;
-  licenseData: LicenseData | undefined;
-  preferences: Preferences;
-  taxFilingData: TaxFilingData;
-  formationData: FormationData;
+  readonly taskItemChecklist: Record<string, boolean>;
+  readonly licenseData: LicenseData | undefined;
+  readonly preferences: Preferences;
+  readonly taxFilingData: TaxFilingData;
+  readonly formationData: FormationData;
 }
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
@@ -44,10 +45,10 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
 export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export interface Preferences {
-  roadmapOpenSections: SectionType[];
-  roadmapOpenSteps: number[];
-  hiddenFundingIds: string[];
-  hiddenCertificationIds: string[];
+  readonly roadmapOpenSections: readonly SectionType[];
+  readonly roadmapOpenSteps: readonly number[];
+  readonly hiddenFundingIds: readonly string[];
+  readonly hiddenCertificationIds: readonly string[];
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";

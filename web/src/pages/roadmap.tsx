@@ -22,9 +22,9 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
-  displayContent: RoadmapDisplayContent;
-  profileDisplayContent: LoadDisplayContent;
-  operateReferences: Record<string, OperateReference>;
+  readonly displayContent: RoadmapDisplayContent;
+  readonly profileDisplayContent: LoadDisplayContent;
+  readonly operateReferences: Record<string, OperateReference>;
 }
 
 const RoadmapPage = (props: Props): ReactElement => {

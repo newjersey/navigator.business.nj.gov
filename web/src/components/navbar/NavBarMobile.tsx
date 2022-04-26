@@ -10,10 +10,10 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import Link from "next/link";
 import React, { ReactElement, useMemo, useState } from "react";
 interface Props {
-  scrolled: boolean;
-  task?: Task;
-  sideBarPageLayout?: boolean;
-  operateReferences?: Record<string, OperateReference>;
+  readonly scrolled: boolean;
+  readonly task?: Task;
+  readonly sideBarPageLayout?: boolean;
+  readonly operateReferences?: Record<string, OperateReference>;
 }
 
 export const NavBarMobile = ({

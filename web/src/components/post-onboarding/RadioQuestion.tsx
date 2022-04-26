@@ -7,8 +7,8 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
-  id: string;
-  onboardingKey: keyof ProfileData;
+  readonly id: string;
+  readonly onboardingKey: keyof ProfileData;
 }
 
 export const RadioQuestion = (props: Props): ReactElement => {
@@ -27,7 +27,9 @@ export const RadioQuestion = (props: Props): ReactElement => {
     });
   }, [props.id]);
 
-  const handleRadioChange = async (event: React.ChangeEvent<{ name?: string; value: string }>) => {
+  const handleRadioChange = async (
+    event: React.ChangeEvent<{ readonly name?: string; readonly value: string }>
+  ) => {
     if (!userData) return;
     await update({
       ...userData,

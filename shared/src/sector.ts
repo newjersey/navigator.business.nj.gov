@@ -1,8 +1,8 @@
 import SectorsJSON from "../../content/src/dashboard/sectors.json";
 
 export interface SectorType {
-  id: string;
-  name: string;
+  readonly id: string;
+  readonly name: string;
 }
 
 export const LookupSectorTypeById = (id: string): SectorType => {
@@ -14,4 +14,4 @@ export const LookupSectorTypeById = (id: string): SectorType => {
   );
 };
 
-export const arrayOfSectors: SectorType[] = SectorsJSON.arrayOfSectors;
+export const arrayOfSectors: readonly SectorType[] = SectorsJSON.arrayOfSectors;

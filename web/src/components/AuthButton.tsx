@@ -9,8 +9,8 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
-  position: "HERO" | "NAVBAR";
-  landing?: boolean;
+  readonly position: "HERO" | "NAVBAR";
+  readonly landing?: boolean;
 }
 
 export const AuthButton = (props?: Props): ReactElement => {

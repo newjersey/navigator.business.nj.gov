@@ -7,7 +7,7 @@ import { UserData } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement } from "react";
 
 interface Props {
-  userData: UserData;
+  readonly userData: UserData;
 }
 
 export const FormationSuccessPage = (props: Props): ReactElement => {

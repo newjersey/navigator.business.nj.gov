@@ -6,8 +6,8 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
 
 interface Props {
-  dataTestid?: string;
-  task: Task;
+  readonly dataTestid?: string;
+  readonly task: Task;
 }
 
 export const UnlockedBy = (props: Props): ReactElement => {

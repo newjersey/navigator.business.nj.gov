@@ -8,7 +8,7 @@ import { useMediaQuery } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 type Props = {
-  displayContent: LoadDisplayContent;
+  readonly displayContent: LoadDisplayContent;
 };
 
 export const GraduationBox = (props: Props): ReactElement => {

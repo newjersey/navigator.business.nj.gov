@@ -7,9 +7,9 @@ import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext } from "react";
 
 export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "onValidation" | "fieldName"> {
-  fieldName: Exclude<ProfileFields, keyof BusinessUser>;
-  onValidation?: (field: ProfileFields, invalid: boolean) => void;
-  headerAriaLevel?: number;
+  readonly fieldName: Exclude<ProfileFields, keyof BusinessUser>;
+  readonly onValidation?: (field: ProfileFields, invalid: boolean) => void;
+  readonly headerAriaLevel?: number;
 }
 
 export const OnboardingField = ({

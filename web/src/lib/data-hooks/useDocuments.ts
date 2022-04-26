@@ -5,8 +5,8 @@ import { ProfileDocuments } from "@businessnjgovnavigator/shared/";
 import React from "react";
 
 export const useDocuments = (): {
-  documents: ProfileDocuments | undefined;
-  checkData: () => Promise<void>;
+  readonly documents: ProfileDocuments | undefined;
+  readonly checkData: () => Promise<void>;
 } => {
   const { userData } = useUserData();
   const [documents, setDocuments] = React.useState<ProfileDocuments | undefined>(undefined);

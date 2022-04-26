@@ -4,8 +4,8 @@ import winston from "winston";
 import WinstonCloudWatch from "winston-cloudwatch";
 
 export interface LogWriterType {
-  LogError(message: string, details?: AxiosError): void;
-  LogInfo(message: string): void;
+  readonly LogError: (message: string, details?: AxiosError) => void;
+  readonly LogInfo: (message: string) => void;
 }
 
 export const LogWriter = (groupName: string, logStream: string, region?: string): LogWriterType => {

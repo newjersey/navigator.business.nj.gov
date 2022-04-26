@@ -6,9 +6,9 @@ import Link from "next/link";
 import React, { ReactElement } from "react";
 
 interface Props {
-  task: Task;
-  active: boolean;
-  onTaskClick?: () => void;
+  readonly task: Task;
+  readonly active: boolean;
+  readonly onTaskClick?: () => void;
 }
 
 export const MiniRoadmapTask = (props: Props): ReactElement => {

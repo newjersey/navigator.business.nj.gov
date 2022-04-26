@@ -155,7 +155,7 @@ export const Members = (): ReactElement => {
       <div className={`form-input margin-bottom-3 ${styles.membersTable}`}>
         <Content
           overrides={{
-            h3: ({ children }: { children: string[] }): ReactElement => (
+            h3: ({ children }: { readonly children: readonly string[] }): ReactElement => (
               <h3 style={{ display: "inline" }}>{children}</h3>
             ),
           }}

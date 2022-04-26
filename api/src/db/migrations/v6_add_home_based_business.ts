@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { v5UserData } from "./v5_add_liquor_license";
 
 export interface v6UserData {

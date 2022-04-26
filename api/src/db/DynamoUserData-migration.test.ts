@@ -131,27 +131,27 @@ describe("DynamoUserDataClient Migrations", () => {
 });
 
 type v0 = {
-  user: {
-    id: string;
+  readonly user: {
+    readonly id: string;
   };
-  v0Field: string;
+  readonly v0Field: string;
 };
 
 type v1 = {
-  user: {
-    id: string;
+  readonly user: {
+    readonly id: string;
   };
-  v0FieldRenamed: string;
-  version: number;
+  readonly v0FieldRenamed: string;
+  readonly version: number;
 };
 
 type v2 = {
-  user: {
-    id: string;
+  readonly user: {
+    readonly id: string;
   };
-  v0FieldRenamed: string;
-  newV2Field: string;
-  version: number;
+  readonly v0FieldRenamed: string;
+  readonly newV2Field: string;
+  readonly version: number;
 };
 
 const v0Data = {

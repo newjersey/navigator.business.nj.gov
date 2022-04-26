@@ -2,9 +2,9 @@ import { UserData } from "@shared/userData";
 import { AddNewsletter, UserDataClient, UserDataQlClient } from "../types";
 
 type AddNewsletterBatchResponse = {
-  success: number;
-  failed: number;
-  total: number;
+  readonly success: number;
+  readonly failed: number;
+  readonly total: number;
 };
 
 export const addNewsletterBatch = async (
@@ -15,6 +15,7 @@ export const addNewsletterBatch = async (
   const results = await userDataQlClient.getNeedNewsletterUsers();
   let success = 0;
   let failed = 0;
+  // eslint-disable-next-line functional/prefer-readonly-type
   const promises: Promise<void>[] = [];
   results.forEach((newUserData: UserData) => {
     promises.push(

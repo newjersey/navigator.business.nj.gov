@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-readonly-type */
 import { parseDate } from "@shared/dateHelpers";
 import { v8UserData } from "./v8_remove_bcorp";
 

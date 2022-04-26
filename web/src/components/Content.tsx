@@ -12,11 +12,13 @@ import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
 interface ContentProps {
-  children: string;
-  className?: string;
-  style?: CSSProperties;
-  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
-  onClick?: () => void;
+  readonly children: string;
+  readonly className?: string;
+  readonly style?: CSSProperties;
+  readonly overrides?: {
+    readonly [key: string]: { ({ children }: { readonly children: readonly string[] }): ReactElement };
+  };
+  readonly onClick?: () => void;
 }
 
 export const Content = (props: ContentProps): ReactElement => {
@@ -30,9 +32,11 @@ export const Content = (props: ContentProps): ReactElement => {
 };
 
 interface ContentNonProseProps {
-  children: string;
-  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
-  onClick?: () => void;
+  readonly children: string;
+  readonly overrides?: {
+    readonly [key: string]: { ({ children }: { readonly children: readonly string[] }): ReactElement };
+  };
+  readonly onClick?: () => void;
 }
 
 export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
@@ -87,9 +91,9 @@ const ExternalLink = ({
   href,
   onClick,
 }: {
-  children: string[];
-  href: string;
-  onClick?: () => void;
+  readonly children: readonly string[];
+  readonly href: string;
+  readonly onClick?: () => void;
 }): ReactElement => {
   return (
     <a

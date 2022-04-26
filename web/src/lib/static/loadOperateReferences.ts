@@ -26,7 +26,7 @@ export const loadOperateReferences = (): Record<string, OperateReference> => {
     origin: "certification" as Origin,
   }));
 
-  const allContents: FileProperties[] = [
+  const allContents: readonly FileProperties[] = [
     ...filingFileContents,
     ...fundingFileContents,
     ...certificationFileContents,
@@ -43,10 +43,10 @@ export const loadOperateReferences = (): Record<string, OperateReference> => {
 };
 
 type FileProperties = {
-  name: string;
-  id: string;
-  urlSlug: string;
-  origin: Origin;
+  readonly name: string;
+  readonly id: string;
+  readonly urlSlug: string;
+  readonly origin: Origin;
 };
 
 type Origin = "filings" | "funding" | "certification";
