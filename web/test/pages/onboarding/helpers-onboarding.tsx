@@ -17,6 +17,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
+  act,
   fireEvent,
   render,
   RenderResult,
@@ -231,10 +232,12 @@ export const runSelfRegPageTests = (
   });
 
   beforeEach(async () => {
-    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-    page = render.page;
-    subject = render.subject;
-    await advanceToSelfReg(page);
+    act(async () => {
+      const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+      page = render.page;
+      subject = render.subject;
+      await advanceToSelfReg(page);
+    });
     mockApi.postNewsletter.mockImplementation((request) =>
       Promise.resolve({
         ...request,
@@ -263,101 +266,115 @@ export const runSelfRegPageTests = (
   });
 
   it("prevents user from registering if the email is not matching", async () => {
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.co");
-    page.clickNext();
-    expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-    expect(currentUserData().user).toEqual(user);
+    act(async () => {
+      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.co");
+      page.clickNext();
+      expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+      expect(currentUserData().user).toEqual(user);
+    });
   });
 
   it("prevents user from registering if the email is not matching after changing it", async () => {
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.co");
-    page.clickNext();
-    expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-    expect(currentUserData().user).toEqual(user);
+    act(async () => {
+      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.co");
+      page.clickNext();
+      expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+      expect(currentUserData().user).toEqual(user);
+    });
   });
 
   it("prevents user from registering if the name is empty", async () => {
-    page.fillText(Config.selfRegistration.nameFieldLabel, "");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    page.clickNext();
-    expect(subject.queryByText(Config.selfRegistration.errorTextFullName)).toBeInTheDocument();
-    expect(currentUserData().user).toEqual(user);
+    act(async () => {
+      page.fillText(Config.selfRegistration.nameFieldLabel, "");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+      page.clickNext();
+      expect(subject.queryByText(Config.selfRegistration.errorTextFullName)).toBeInTheDocument();
+      expect(currentUserData().user).toEqual(user);
+    });
   });
 
   it("prevents user from registering if the email is empty", async () => {
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "");
-    page.clickNext();
-    expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-    expect(currentUserData().user).toEqual(user);
+    act(async () => {
+      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "");
+      page.clickNext();
+      expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
+      expect(currentUserData().user).toEqual(user);
+    });
   });
 
   it("allows a user to uncheck to opt out of newsletter", async () => {
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    fireEvent.click(subject.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
-    page.clickNext();
-    const businessUser = {
-      ...user,
-      email: "email@example.com",
-      name: "My Name",
-      receiveNewsletter: false,
-      userTesting: true,
-      externalStatus: { userTesting: { status: "SUCCESS", success: true } },
-    };
+    act(async () => {
+      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+      fireEvent.click(subject.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
+      page.clickNext();
+      const businessUser = {
+        ...user,
+        email: "email@example.com",
+        name: "My Name",
+        receiveNewsletter: false,
+        userTesting: true,
+        externalStatus: { userTesting: { status: "SUCCESS", success: true } },
+      };
 
-    await waitFor(() => {
-      expect(currentUserData().user).toEqual(businessUser);
+      await waitFor(() => {
+        expect(currentUserData().user).toEqual(businessUser);
+      });
     });
   });
 
   it("allows a user to uncheck to opt out of user testing", async () => {
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    fireEvent.click(subject.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
-    page.clickNext();
-    const businessUser = {
-      ...user,
-      email: "email@example.com",
-      name: "My Name",
-      receiveNewsletter: true,
-      userTesting: false,
-      externalStatus: { newsletter: { status: "SUCCESS", success: true } },
-    };
+    act(async () => {
+      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+      fireEvent.click(subject.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
+      page.clickNext();
+      const businessUser = {
+        ...user,
+        email: "email@example.com",
+        name: "My Name",
+        receiveNewsletter: true,
+        userTesting: false,
+        externalStatus: { newsletter: { status: "SUCCESS", success: true } },
+      };
 
-    await waitFor(() => {
-      expect(currentUserData().user).toEqual(businessUser);
+      await waitFor(() => {
+        expect(currentUserData().user).toEqual(businessUser);
+      });
     });
   });
 
   it("redirects the user after completion", async () => {
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    page.clickNext();
-    const businessUser = {
-      ...user,
-      email: "email@example.com",
-      name: "My Name",
-      receiveNewsletter: true,
-      userTesting: true,
-      externalStatus: {
-        newsletter: { status: "SUCCESS", success: true },
-        userTesting: { status: "SUCCESS", success: true },
-      },
-    };
-    await waitFor(() => {
-      expect(currentUserData().user).toEqual(businessUser);
-      expect(mockPush).toHaveBeenCalledWith(hasExistingBusiness ? "/dashboard" : "/roadmap");
+    act(async () => {
+      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+      page.clickNext();
+      const businessUser = {
+        ...user,
+        email: "email@example.com",
+        name: "My Name",
+        receiveNewsletter: true,
+        userTesting: true,
+        externalStatus: {
+          newsletter: { status: "SUCCESS", success: true },
+          userTesting: { status: "SUCCESS", success: true },
+        },
+      };
+      await waitFor(() => {
+        expect(currentUserData().user).toEqual(businessUser);
+        expect(mockPush).toHaveBeenCalledWith(hasExistingBusiness ? "/dashboard" : "/roadmap");
+      });
     });
   });
 };

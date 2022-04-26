@@ -397,6 +397,8 @@ export const checkExistingBusinessProfilePage = ({
   onDashboardPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
 
+  cy.wait(1000);
+
   onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   onProfilePage
     .getIndustrySectorDropdown()
@@ -529,7 +531,7 @@ export const updateNewBusinessProfilePage = ({
   cy.url().should("contain", "/roadmap");
 };
 
-export const updateExBusinessProfilePage = ({
+export const updateExistingBusinessProfilePage = ({
   businessFormationDate,
   entityId,
   businessName,
@@ -546,6 +548,7 @@ export const updateExBusinessProfilePage = ({
   cy.url().should("contain", "/dashboard");
   onDashboardPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
+  cy.wait(1000);
 
   if (businessName) {
     onProfilePage.typeBusinessName(businessName);
