@@ -3,7 +3,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import * as apiClient from "@/lib/api-client/apiClient";
 import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 import { TextField } from "@mui/material";
-import { GetStaticPropsResult } from "next";
+import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
 import React, { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
@@ -99,7 +99,7 @@ const DeadLinksPage = (props: Props): ReactElement => {
   );
 };
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
   const buildCheckDeadPages =
     (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS == "true") || false;
   if (!buildCheckDeadPages) {
