@@ -77,7 +77,7 @@
     "unified": "10.1.2",
     "uuid": "8.3.2",
     "winston": "3.7.2",
-    "winston-cloudwatch": "5.0.0",
+    "winston-cloudwatch": "6.0.0",
     "xml2js": "0.4.23"
   },
   "devDependencies": {

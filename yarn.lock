@@ -3548,7 +3548,7 @@ __metadata:
     webpack: 5.72.0
     webpack-node-externals: 3.0.0
     winston: 3.7.2
-    winston-cloudwatch: 5.0.0
+    winston-cloudwatch: 6.0.0
     wiremock: 2.33.1
     xml2js: 0.4.23
   languageName: unknown
@@ -3723,7 +3723,7 @@ __metadata:
     webpack: 5.72.0
     webpack-node-externals: 3.0.0
     winston: 3.7.2
-    winston-cloudwatch: 5.0.0
+    winston-cloudwatch: 6.0.0
     wiremock: 2.33.1
     xml2js: 0.4.23
     yarn-workspace-sync-deps: 0.3.2
@@ -35577,9 +35577,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winston-cloudwatch@npm:5.0.0":
-  version: 5.0.0
-  resolution: "winston-cloudwatch@npm:5.0.0"
+"winston-cloudwatch@npm:6.0.0":
+  version: 6.0.0
+  resolution: "winston-cloudwatch@npm:6.0.0"
   dependencies:
     async: ^3.1.0
     chalk: ^4.0.0
@@ -35592,7 +35592,7 @@ __metadata:
   peerDependencies:
     "@aws-sdk/client-cloudwatch-logs": ^3.0.0
     winston: ^3.0.0
-  checksum: ed72425d7190a283262281dd1627572500115527b1a287cf7dfca8c7b403860555b7128c4ba72f8efeff36ed4f30c1951e65f1baf6599b181583180557cdaf4f
+  checksum: cd7b448638291be3ab574aaf355717dcf4292af2bfbc46fc97091ecba21b480ab119183a8d75087d1a8214dc77060074edd03199b257f77f4914c1d4cf8aa622
   languageName: node
   linkType: hard
 
