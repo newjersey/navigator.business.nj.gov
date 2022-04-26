@@ -27,7 +27,7 @@ export class OnboardingPage {
   }
 
   getIndustrySectorDropdown() {
-    return cy.get("#sectorId");
+    return cy.get('[data-testid="sectorId"]');
   }
 
   getNumberOfEmployees() {

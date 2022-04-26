@@ -33,5 +33,11 @@ export const FocusTrappedSidebar = ({ children, close, isOpen, delayTime = 300 }
     };
   });
 
-  return showDiv ? <FocusTrap focusTrapOptions={{ allowOutsideClick: true }}>{children}</FocusTrap> : <></>;
+  return showDiv ? (
+    <FocusTrap focusTrapOptions={{ allowOutsideClick: true, tabbableOptions: { displayCheck: "none" } }}>
+      {children}
+    </FocusTrap>
+  ) : (
+    <></>
+  );
 };
