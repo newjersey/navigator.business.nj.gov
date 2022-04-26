@@ -32,6 +32,7 @@
   ],
   "name": "Printing Business",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "office printing, commercial printing",
   "id": "printing-business",
   "description": "Offers printing services for individuals and other companies"

@@ -42,6 +42,7 @@
   ],
   "name": "Auto-Body Repair",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",
   "id": "auto-body-repair",
   "description": "A facility for the repair and restoration of vehicles"

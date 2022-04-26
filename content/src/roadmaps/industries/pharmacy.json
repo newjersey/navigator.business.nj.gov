@@ -42,6 +42,7 @@
   ],
   "name": "Pharmacy",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "pharmaceutics, drugstore, apothecary, chemist medicine",
   "id": "pharmacy",
   "licenseType": "Pharmacy",

@@ -20,6 +20,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     addOns.push("liquor-license");
   }
 
+  if (profileData.requiresCpa) {
+    addOns.push("cpa");
+  }
+
   if (profileData.cannabisLicenseType === "ANNUAL") {
     addOns.push("cannabis-annual");
   }

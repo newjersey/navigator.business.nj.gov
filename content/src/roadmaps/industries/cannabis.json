@@ -37,6 +37,7 @@
   ],
   "name": "Cannabis",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "modifications": [
     {
       "taskToReplaceFilename": "zoning",

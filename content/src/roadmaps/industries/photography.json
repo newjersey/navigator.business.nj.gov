@@ -32,6 +32,7 @@
   ],
   "name": "Photography",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "freelance photographer, professional photographer, photographer",
   "id": "photography",
   "description": "Offers portrait and event photography services"

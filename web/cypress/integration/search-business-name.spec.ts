@@ -15,6 +15,7 @@ describe("search business name [feature] [all] [group2]", () => {
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
     const legalStructureId = "limited-liability-partnership";
     const townDisplayName = undefined;
+    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
@@ -22,6 +23,7 @@ describe("search business name [feature] [all] [group2]", () => {
       liquorLicenseQuestion,
       legalStructureId,
       townDisplayName,
+      requiresCpa,
     });
 
     // roadmap business name

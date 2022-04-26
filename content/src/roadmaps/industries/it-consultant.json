@@ -32,6 +32,7 @@
   ],
   "name": "IT Consultant",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "tech support, information technology, tech services, technical services",
   "id": "it-consultant",
   "description": "Offers system maintenance, configuration, and troubleshooting services"

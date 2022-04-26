@@ -35,6 +35,7 @@ describe("Profile [feature] [all] [group1]", () => {
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
       completeNewBusinessOnboarding({
         industry,
@@ -42,6 +43,7 @@ describe("Profile [feature] [all] [group1]", () => {
         liquorLicenseQuestion,
         townDisplayName,
         legalStructureId,
+        requiresCpa,
       });
 
       checkNewBusinessProfilePage({
@@ -80,6 +82,7 @@ describe("Profile [feature] [all] [group1]", () => {
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
+      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
       completeNewBusinessOnboarding({
         industry,
@@ -87,6 +90,7 @@ describe("Profile [feature] [all] [group1]", () => {
         liquorLicenseQuestion,
         legalStructureId,
         townDisplayName,
+        requiresCpa,
       });
 
       checkNewBusinessProfilePage({
@@ -108,6 +112,7 @@ describe("Profile [feature] [all] [group1]", () => {
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
+      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
       completeNewBusinessOnboarding({
         industry,
@@ -115,6 +120,7 @@ describe("Profile [feature] [all] [group1]", () => {
         liquorLicenseQuestion,
         legalStructureId,
         townDisplayName,
+        requiresCpa,
       });
 
       checkNewBusinessProfilePage({
@@ -141,6 +147,7 @@ describe("Profile [feature] [all] [group1]", () => {
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
       const townDisplayName = "Atlantic";
       const updatedEntityId = randomInt(10).toString();
+      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
       completeNewBusinessOnboarding({
         industry,
@@ -148,6 +155,7 @@ describe("Profile [feature] [all] [group1]", () => {
         homeBasedQuestion,
         liquorLicenseQuestion,
         townDisplayName,
+        requiresCpa,
       });
 
       checkNewBusinessProfilePage({

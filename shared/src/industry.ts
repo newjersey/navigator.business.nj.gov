@@ -6,6 +6,7 @@ export interface Industry {
   description: string;
   canBeHomeBased: boolean;
   isLiquorLicenseApplicable: boolean;
+  isCpaRequiredApplicable: boolean;
   licenseType?: string;
   isMobileLocation: boolean;
   canBeReseller: boolean;
@@ -35,6 +36,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       description: "",
       canBeHomeBased: false,
       isLiquorLicenseApplicable: false,
+      isCpaRequiredApplicable: false,
       isMobileLocation: false,
       canBeReseller: true,
       roadmapSteps: [],

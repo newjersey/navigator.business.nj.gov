@@ -42,6 +42,7 @@
   ],
   "name": "Home Health Aide",
   "isLiquorLicenseApplicable": false,
+  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "caregiver, care services",
   "id": "homemaker-home-health-aide",
   "description": "A business staffing licensed personnel to provide home health care services"
