@@ -20,7 +20,9 @@ export const WebserviceLicenseStatusClient = (
       })
       .then((response) => {
         logWriter.LogInfo(
-          `License Status Search - Response Received. Status: ${response.status} : ${response.statusText}. Data: ${response.data}`
+          `License Status Search - Response Received. Status: ${response.status} : ${
+            response.statusText
+          }. Data: ${JSON.stringify(response.data)}`
         );
         return response.data || [];
       })
