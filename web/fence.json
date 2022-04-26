@@ -45,8 +45,11 @@
     "react-dom",
     "react-dom/test-utils",
     "react-transition-group",
-    "remark",
-    "remark-react",
+    "rehype-react",
+    "remark-gfm",
+    "remark-parse",
+    "remark-rehype",
+    "unified",
     "storybook-addon-designs",
     "swr"
   ]

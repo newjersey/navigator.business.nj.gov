@@ -1,5 +1,7 @@
 import type { Config } from "@jest/types";
 
+const esModules = ["rehype-react", "remark-gfm", "remark-parse", "remark-rehype", "unified"];
+
 export default async (): Promise<Config.InitialOptions> => {
   return {
     coverageReporters: ["json-summary", "text", "lcov"],
@@ -16,6 +18,7 @@ export default async (): Promise<Config.InitialOptions> => {
       "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/shared/src/$1",
       "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1",
     },
+    transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules.join("|")}))`],
     transform: {
       "\\.md$": "jest-raw-loader",
       "\\.[jt]sx?$": "@swc/jest",

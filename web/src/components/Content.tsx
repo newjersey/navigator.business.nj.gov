@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import React, { CSSProperties, ReactElement } from "react";
-import remark from "remark";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import remark2react from "remark-react";
+import rehypeReact from "rehype-react";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
 
 interface ContentProps {
   children: string;
@@ -34,13 +36,18 @@ interface ContentNonProseProps {
 }
 
 export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
-  const markdown = remark()
-    .use(remark2react, {
-      remarkReactComponents: {
+  const markdown = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype)
+    .use(rehypeReact, {
+      createElement: React.createElement,
+      Fragment: React.Fragment,
+      components: {
         code: ContextualInfoLink,
         a: Link(props.onClick),
-        h5: ({ children }: { children: string[] }) => <div className="h5-styling">{children}</div>,
-        h6: ({ children }: { children: string[] }) => <div className="h6-styling">{children}</div>,
+        h5: (props: any) => <div className="h5-styling">{props.children}</div>,
+        h6: (props: any) => <div className="h6-styling">{props.children}</div>,
         blockquote: GreenBox,
         table: OutlineBox,
         li: ListOrCheckbox,
@@ -52,24 +59,23 @@ export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
         ...props.overrides,
       },
     })
-    .processSync(props.children).result as ReactElement;
-
+    .processSync(props.children).result;
   return <>{markdown}</>;
 };
 
 const Link = (onClick?: () => void) =>
   Object.assign(
-    ({ children, href }: { children: string[]; href: string }): ReactElement => {
-      if (/^https?:\/\/(.*)/.test(href)) {
+    (props: any): ReactElement => {
+      if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
-          <ExternalLink href={href} onClick={onClick}>
-            {children}
+          <ExternalLink href={props.href} onClick={onClick}>
+            {props.children}
           </ExternalLink>
         );
       }
       return (
-        <a href={href} onClick={onClick}>
-          {children[0]}
+        <a href={props.href} onClick={onClick}>
+          {props.children[0]}
         </a>
       );
     },
@@ -99,28 +105,28 @@ const ExternalLink = ({
   );
 };
 
-const Unformatted = ({ children }: { children: string[] }): ReactElement => <div>{children}</div>;
+const Unformatted = (props: any): ReactElement => <div>{props.children}</div>;
 
-const OutlineBox = ({ children }: { children: string[] }): ReactElement => {
+const OutlineBox = (props: any): ReactElement => {
   return (
     <div className="text-normal padding-2 margin-top-2 border-base-lighter border-1px font-body-2xs">
-      {children}
+      {props.children}
     </div>
   );
 };
 
-const GreenBox = ({ children }: { children: string[] }): ReactElement => {
+const GreenBox = (props: any): ReactElement => {
   return (
     <div className="green-box text-normal padding-2 margin-top-2 bg-success-lighter radius-lg">
-      {children}
+      {props.children}
     </div>
   );
 };
 
-const ListOrCheckbox = ({ children }: { children: unknown[] }): ReactElement => {
-  if (typeof children[0] === "string" && children[0].startsWith("[]")) {
-    const checklistItemId = children[0].slice("[]".length).split("{")[1].split("}")[0];
-    const checklistItemBody = [children[0].split("}")[1], ...children.slice(1)];
+const ListOrCheckbox = (props: any): ReactElement => {
+  if (typeof props.children[0] === "string" && props.children[0].startsWith("[]")) {
+    const checklistItemId = props.children[0].slice("[]".length).split("{")[1].split("}")[0];
+    const checklistItemBody = [props.children[0].split("}")[1], ...props.children.slice(1)];
 
     return (
       <div className="margin-y-2">
@@ -138,5 +144,5 @@ const ListOrCheckbox = ({ children }: { children: unknown[] }): ReactElement => 
       </div>
     );
   }
-  return <li>{children}</li>;
+  return <li>{props.children}</li>;
 };
