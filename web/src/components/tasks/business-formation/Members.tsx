@@ -142,11 +142,14 @@ export const Members = (): ReactElement => {
   return (
     <>
       {alert && (
-        <ToastAlert variant="success" isOpen={alert !== undefined} close={() => setAlert(undefined)}>
-          <div data-testid={`toast-alert-success`} className="h3-styling">
-            {Config.businessFormationDefaults.membersSuccessTextHeader}
-          </div>
-          <div className="padding-top-05">{Config.businessFormationDefaults.membersSuccessTextBody}</div>
+        <ToastAlert
+          variant="success"
+          isOpen={alert !== undefined}
+          close={() => setAlert(undefined)}
+          dataTestid="toast-alert-success"
+          heading={Config.businessFormationDefaults.membersSuccessTextHeader}
+        >
+          {Config.businessFormationDefaults.membersSuccessTextBody}
         </ToastAlert>
       )}
       <div className={`form-input margin-bottom-3 ${styles.membersTable}`}>

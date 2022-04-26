@@ -301,11 +301,10 @@ const ProfilePage = (props: Props): ReactElement => {
                 variant={OnboardingStatusLookup[alert].variant}
                 isOpen={alert !== undefined}
                 close={() => setAlert(undefined)}
+                dataTestid={`toast-alert-${alert}`}
+                heading={OnboardingStatusLookup[alert].header}
               >
-                <div data-testid={`toast-alert-${alert}`} className="h3-styling margin-bottom-0">
-                  {OnboardingStatusLookup[alert].header}
-                </div>
-                <div className="padding-top-05">{OnboardingStatusLookup[alert].body}</div>
+                {OnboardingStatusLookup[alert].body}
               </ToastAlert>
             )}
             <UserDataErrorAlert />

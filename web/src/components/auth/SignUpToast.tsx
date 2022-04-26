@@ -39,8 +39,9 @@ export const SignUpToast = (): ReactElement => {
       autoHideDuration={null}
       className={"bg-base-lightest"}
       snackBarProps={{ sx: { paddingX: 0 } }}
+      dataTestid="self-reg-toast"
     >
-      <div className="fin fac padding-y-2" data-testid={"self-reg-toast"}>
+      <div className="fin fac padding-y-2">
         {isDesktopAndUp ? (
           <img
             src={`/img/Group.svg`}

@@ -322,10 +322,10 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                       }}
                     >
                       <ContextualInfoPanel />
+                      <Component {...pageProps} />
                       <SignUpToast />
                       <SignUpModal />
                       <SelfRegToast />
-                      <Component {...pageProps} />
                     </AuthAlertContext.Provider>
                   </RoadmapContext.Provider>
                 </ContextualInfoContext.Provider>
