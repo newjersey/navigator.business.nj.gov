@@ -442,7 +442,7 @@
     "profileTabInfoTitle": "Business Information"
   },
   "cannabisApplyForLicense": {
-    "impactZoneLabel": "`Impact zone business|impact-zone-business-cannabis`",
+    "impactZoneLabel": "`Impact Zone Business|impact-zone-business-cannabis`",
     "eligibleModalCancelButton": "I'm not sure",
     "eligibleModalTitle": "Ensure Your Eligibility",
     "priorityStatusHeader": "Priority Status",
@@ -451,7 +451,7 @@
     "diverselyOwnedHelperText": "You are seeing this based on your [priority status](/tasks/priority-status-cannabis) selection as a Minority/Women Owned Business Enterprise / Disabled Veteran Owned Business.",
     "viewRequirementsButton": "View Application Needs",
     "applicationQuestionsText": "Answer the two questions below and we can highlight the information you need to prepare for you application on the following page.",
-    "diverselyOwnedLabel": "`Diversely-owned business|diversely-owned-business-cannabis`",
+    "diverselyOwnedLabel": "`Diversely-Owned Business|diversely-owned-business-cannabis`",
     "businessSizeHeader": "Business Size",
     "eligibleModalContinueButton": "I am eligible",
     "microbusinessRadioYes": " Yes, I'm a microbusiness",
@@ -464,7 +464,7 @@
     "applicationNeedsHeader": "Application Needs",
     "applicationPageHelperText": "Cannabis licenses are reviewed on an ongoing basis. You can apply at any time.",
     "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
-    "sbeLabel": "`Social equity business (SEB)|social-equity-business-cannabis`"
+    "sbeLabel": "`Social Equity Business (SEB)|social-equity-business-cannabis`"
   },
   "cannabisPriorityStatus": {
     "noPriorityStatusText": "Based on your answers, you are not eligible for any priority status. You can mark this task as completed.",
