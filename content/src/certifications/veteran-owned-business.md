@@ -24,4 +24,4 @@ VOB is a business that has its principal place of business in the State of New J
 
 > **After you complete this, you will have:**
 >
-> * Veteran-Owned Business certification
+> * Veteran-Owned Business certificate
