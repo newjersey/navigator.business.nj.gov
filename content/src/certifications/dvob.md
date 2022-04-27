@@ -12,7 +12,7 @@ A Disabled Veteran-Owned Business (DVOB) certification may provide an advantage 
 
 - - -
 
-### Application Eligibility
+### Eligibility
 
 A DVOB must either:
 
