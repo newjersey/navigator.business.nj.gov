@@ -9,13 +9,15 @@ applicableOwnershipTypes:
   - minority-owned
 isSbe: false
 ---
-*While New Jersey state government does not give special consideration to vendors that hold M/WBE certifications, some State licenses, municipal or federal contracts do give special consideration. Learn more about [government contracts](https://business.nj.gov/pages/government-contracting)*.
+
+
+*While New Jersey state government does not give special consideration to vendors that hold* `Minority|minority` *or* `Women|women` *\-owned Business Enterprise (M/WBE) certificates, some State licenses, municipal or federal contracts do give special consideration. Learn more about [government contracts](https://business.nj.gov/pages/government-contracting).*
 
 - - -
 
 ### Eligibility Criteria
 
-A `Minority|minority` or `Women|women` owned Business Enterprise (M/WBE) is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a minority AND/OR women.
+A business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a minority AND/OR women.
 
 ### Application Needs
 
