@@ -51,7 +51,7 @@ export const BetaBar = (): ReactElement => {
               {Config.betaBar.betaModalIntercomButtonText}
             </Button>
           </div>
-          <a className="margin-top-1" href={Config.betaBar.betaFormLink}>
+          <a className="margin-top-1" href={Config.betaBar.betaFormLink} target="_blank" rel="noreferrer">
             <Button className="width-100" style="narrow-accent-cool-lightest" align="start">
               {makeButtonIcon("chat-processing")}
               {Config.betaBar.betaModalFeedbackButtonText}
