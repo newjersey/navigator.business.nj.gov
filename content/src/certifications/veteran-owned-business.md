@@ -9,15 +9,13 @@ applicableOwnershipTypes:
   - disabled-veteran
 isSbe: false
 ---
-*[](https://business.nj.gov/pages/government-contracting)A* `Veteran|veteran` *\-Owned Business (DVOB) certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)*.
-
-
+*[](https://business.nj.gov/pages/government-contracting)A* `Veteran|veteran` *\-Owned Business (VOB) certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)*.
 
 - - -
 
 ### Eligibility Criteria
 
-DVOB is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a veteran.
+VOB is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a veteran.
 
 ### Application Needs
 
