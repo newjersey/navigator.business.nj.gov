@@ -11,7 +11,7 @@ isSbe: true
 
 - - -
 
-### Eligibility Critiera
+### Eligibility Criteria
 
 A Small Business Enterprise (SBE) is a business:
 
