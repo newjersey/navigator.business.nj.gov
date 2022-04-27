@@ -1,1 +1,1 @@
-- []{cannabis-impact-zone} Proof that the business meets the `requirements of an Impact Zone Business|impact-zone-business-cannabis`
+* \[]{cannabis-impact-zone} **For** `Impact Zone Business|impact-zone-business-cannabis` **Applicants:** Proof that the business meets the eligibility criteria
