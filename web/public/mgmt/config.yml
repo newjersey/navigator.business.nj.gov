@@ -31,7 +31,8 @@ collections:
             summary: "{{betaBar}}"
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
-              - { label: Beta Form Link, name: betaFormLink, widget: string }
+              - { label: Beta Form Link - Poppy, name: betaFormLinkStarting, widget: string }
+              - { label: Beta Form Link - Oscar, name: betaFormLinkOwning, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
               - { label: Beta Modal Title, name: betaModalTitle, widget: string }
               - { label: Beta Modal Body Text, name: betaModalBodyText, widget: string }

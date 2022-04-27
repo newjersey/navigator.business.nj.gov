@@ -1,10 +1,12 @@
 import { DialogZeroButton } from "@/components/DialogZeroButton";
 import { Button } from "@/components/njwds-extended/Button";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
 
 export const BetaBar = (): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const { userData } = useUserData();
 
   const openModal = (): void => {
     setModalOpen(true);
@@ -12,6 +14,19 @@ export const BetaBar = (): ReactElement => {
 
   const closeModal = (): void => {
     setModalOpen(false);
+  };
+
+  const shouldShowFeedbackButton = (): boolean =>
+    userData !== undefined && userData.formProgress === "COMPLETED";
+
+  const getFeedbackLink = (): string => {
+    if (userData?.profileData.hasExistingBusiness) {
+      return Config.betaBar.betaFormLinkOwning;
+    } else if (!userData?.profileData.hasExistingBusiness) {
+      return Config.betaBar.betaFormLinkStarting;
+    } else {
+      return "";
+    }
   };
 
   const makeButtonIcon = (svgFilename: string, size = "20px"): ReactElement => (
@@ -51,12 +66,20 @@ export const BetaBar = (): ReactElement => {
               {Config.betaBar.betaModalIntercomButtonText}
             </Button>
           </div>
-          <a className="margin-top-1" href={Config.betaBar.betaFormLink} target="_blank" rel="noreferrer">
-            <Button className="width-100" style="narrow-accent-cool-lightest" align="start">
-              {makeButtonIcon("chat-processing")}
-              {Config.betaBar.betaModalFeedbackButtonText}
-            </Button>
-          </a>
+          {shouldShowFeedbackButton() && (
+            <a
+              className="margin-top-1"
+              data-testid="feedback-link"
+              href={getFeedbackLink()}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button className="width-100" style="narrow-accent-cool-lightest" align="start">
+                {makeButtonIcon("chat-processing")}
+                {Config.betaBar.betaModalFeedbackButtonText}
+              </Button>
+            </a>
+          )}
         </div>
       </DialogZeroButton>
     </div>
