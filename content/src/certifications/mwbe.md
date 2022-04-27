@@ -13,7 +13,7 @@ isSbe: false
 
 - - -
 
-### Eligiblity Criteria
+### Eligibility Criteria
 
 A `Minority|minority` or `Women|women` owned Business Enterprise (M/WBE) is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a minority AND/OR women.
 
