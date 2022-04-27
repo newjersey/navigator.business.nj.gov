@@ -7,13 +7,13 @@ callToActionText: Apply for My SBE Certification
 applicableOwnershipTypes: []
 isSbe: true
 ---
-*Having an SBE certification may give you an advantage with [government contracts](https://business.nj.gov/pages/government-contracting)*.
+*Having an Small Business Enterprise (SBE) certificate may give you an advantage with [government contracts](https://business.nj.gov/pages/government-contracting)*.
 
 - - -
 
 ### Eligibility Criteria
 
-A Small Business Enterprise (SBE) is a business:
+A SBE is a business:
 
 1. with its primary location is in New Jersey
 2. that has 100 or fewer full-time employees
