@@ -21,7 +21,7 @@ A DVOB must either:
 
 ### Application Needs
 
-* Federal Service-Disabled Veteran-Owned Business Determination Letter, Disability Award Letter or Federal Service-Disabled Veteran Letter. Provide for Majority owner(s)
+* Federal Service-Disabled Veteran-Owned Business Determination Letter, Disability Award Letter or Federal Service-Disabled Veteran Letter. (Must be provided for Majority owners).
 * Proof of New Jersey residency for Majority owner(s)
 
 > **After you complete this, you will have:**
