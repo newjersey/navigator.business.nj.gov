@@ -422,7 +422,7 @@
   "profileDefaults": {
     "errorTextHeader": "Error",
     "backButtonText": "Cancel",
-    "pageTitle": "Business Profile",
+    "pageTitle": "### Business Profile",
     "taxPinErrorText": "Tax PIN must be 4 digits.",
     "escapeModalEscape": "Go back",
     "escapeModalBody": "You have unsaved changes that will be lost.",
@@ -434,7 +434,12 @@
     "saveButtonText": "Save",
     "escapeModalReturn": "Continue without saving",
     "successTextHeader": "Profile Updated",
-    "certificationDocFileTitle": "Certificate of Good Standing"
+    "certificationDocFileTitle": "Certificate of Good Standing",
+    "profileTabInfoTitle": "Business Information",
+    "profileTabRefTitle": "Reference Numbers",
+    "profileTabNoteTitle": "Notes",
+    "profileTabDocsTitle": "Reference Documents"
+
   },
   "cannabisApplyForLicense": {
     "impactZoneLabel": "`Impact zone business|impact-zone-business-cannabis`",

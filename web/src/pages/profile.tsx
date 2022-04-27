@@ -2,8 +2,10 @@ import { Content } from "@/components/Content";
 import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
+import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { Icon } from "@/components/njwds/Icon";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
@@ -48,16 +50,18 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { FormEvent, ReactElement, useContext, useMemo, useState } from "react";
+import React, { FormEvent, ReactElement, ReactNode, useContext, useMemo, useState } from "react";
 
 interface Props {
   displayContent: LoadDisplayContent;
   municipalities: Municipality[];
 }
+
+export type ProfileTabs = "info" | "numbers" | "documents" | "notes";
 
 const ProfilePage = (props: Props): ReactElement => {
   const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
@@ -69,6 +73,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+  const [profileTab, setProfileTab] = useState<ProfileTabs>("info");
 
   const mergeDisplayContent = (): UserDisplayContent => {
     const hasBusiness = userData?.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
@@ -143,130 +148,260 @@ const ProfilePage = (props: Props): ReactElement => {
     });
   };
 
-  const startingNewBusiness = (
-    <>
-      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingBusinessName disabled={userData?.formationData.getFilingResponse?.success} />
-      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
-      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingLegalStructureDropdown />
-      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
-      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingEmployerId
-        onValidation={onValidation}
-        fieldStates={fieldStates}
-        handleChangeOverride={showRegistrationModalForGuest()}
-      />
-      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      <OnboardingEntityId
-        onValidation={onValidation}
-        fieldStates={fieldStates}
-        disabled={userData?.formationData?.getFilingResponse?.success}
-        handleChangeOverride={showRegistrationModalForGuest()}
-      >
+  const startingNewBusiness: Record<ProfileTabs, ReactNode> = {
+    notes: (
+      <>
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      </OnboardingEntityId>
-      <OnboardingTaxId
-        onValidation={onValidation}
-        fieldStates={fieldStates}
-        handleChangeOverride={showRegistrationModalForGuest()}
-      />
-      <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-      {LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling ? (
-        <Documents displayContent={mergedDisplayContent} />
-      ) : (
-        <></>
-      )}
-      <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
-    </>
-  );
 
-  const hasExistingBusiness = (
-    <>
-      <div className="margin-top-6">
-        <Content>{mergedDisplayContent.businessInformation.contentMd}</Content>
-      </div>
-      <div className="margin-top-4">
-        <OnboardingBusinessName
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          headerAriaLevel={3}
-          disabled={userData?.formationData.getFilingResponse?.success}
-        />
-      </div>
-      <div className="margin-top-4">
-        <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
-      </div>
-      <div className="margin-top-4">
-        <OnboardingExistingEmployees
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          headerAriaLevel={3}
-        />
-      </div>
-      <div className="margin-top-4">
-        <OnboardingMunicipality
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          h3Heading={false}
-          headerAriaLevel={3}
-        />
-      </div>
-      <div className="margin-top-4">
-        <OnboardingOwnership headerAriaLevel={3} />
-      </div>
-      <hr className="margin-top-3 margin-bottom-4" />
-      <Content>{mergedDisplayContent.businessReferences.contentMd}</Content>
-      <div className="margin-top-4">
+        <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+      </>
+    ),
+    documents: (
+      <>
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        {LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling ? (
+          <Documents displayContent={mergedDisplayContent} />
+        ) : (
+          <></>
+        )}
+      </>
+    ),
+    info: (
+      <>
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
+          {" "}
+          {Config.profileDefaults.profileTabInfoTitle}
+        </h2>
+        <OnboardingBusinessName disabled={userData?.formationData.getFilingResponse?.success} />
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <OnboardingLegalStructureDropdown />
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
+      </>
+    ),
+    numbers: (
+      <>
+        <hr className="margin-top-4" aria-hidden={true} />
+        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
+          {" "}
+          {Config.profileDefaults.profileTabRefTitle}
+        </h2>
         <OnboardingEmployerId
           onValidation={onValidation}
           fieldStates={fieldStates}
-          headerAriaLevel={3}
           handleChangeOverride={showRegistrationModalForGuest()}
         />
-      </div>
-      <div className="margin-top-4">
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingEntityId
           onValidation={onValidation}
           fieldStates={fieldStates}
-          headerAriaLevel={3}
-          disabled={userData?.formationData.getFilingResponse?.success}
+          disabled={userData?.formationData?.getFilingResponse?.success}
           handleChangeOverride={showRegistrationModalForGuest()}
-        />
-      </div>
-      <div className="margin-top-4">
-        <OnboardingDateOfFormation
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          headerAriaLevel={3}
-          disabled={userData?.formationData.getFilingResponse?.success}
-        />
-      </div>
-      <div className="margin-top-4">
+        ></OnboardingEntityId>
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingTaxId
           onValidation={onValidation}
           fieldStates={fieldStates}
-          headerAriaLevel={3}
           handleChangeOverride={showRegistrationModalForGuest()}
         />
-      </div>
-      <div className="margin-top-4">
-        <OnboardingTaxPin
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          headerAriaLevel={3}
-          handleChangeOverride={showRegistrationModalForGuest()}
-        />
-      </div>
-      {userData?.formationData.getFilingResponse?.success ? (
+      </>
+    ),
+  };
+
+  const hasExistingBusiness: Record<ProfileTabs, ReactNode> = {
+    notes: (
+      <>
+        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
+        <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
+      </>
+    ),
+    documents: (
+      <>
+        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
+        {/* {userData?.formationData.getFilingResponse?.success ? ( */}
         <Documents displayContent={mergedDisplayContent} />
+      </>
+    ),
+    info: (
+      <>
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
+          {Config.profileDefaults.profileTabInfoTitle}
+        </h2>
+        <div className="margin-top-4">
+          <OnboardingBusinessName
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+            disabled={userData?.formationData.getFilingResponse?.success}
+          />
+        </div>
+        <div className="margin-top-4">
+          <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+        </div>
+        <div className="margin-top-4">
+          <OnboardingExistingEmployees
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+          />
+        </div>
+        <div className="margin-top-4">
+          <OnboardingMunicipality
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            h3Heading={false}
+            headerAriaLevel={3}
+          />
+        </div>
+        <div className="margin-top-4">
+          <OnboardingOwnership headerAriaLevel={3} />
+        </div>
+      </>
+    ),
+    numbers: (
+      <>
+        <hr className="margin-top-4 margin-bottom-2" />{" "}
+        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
+          {" "}
+          {Config.profileDefaults.profileTabRefTitle}
+        </h2>
+        <div className="margin-top-4">
+          <OnboardingEmployerId
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+            handleChangeOverride={showRegistrationModalForGuest()}
+          />
+        </div>
+        <div className="margin-top-4">
+          <OnboardingEntityId
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+            disabled={userData?.formationData.getFilingResponse?.success}
+            handleChangeOverride={showRegistrationModalForGuest()}
+          />
+        </div>
+        <div className="margin-top-4">
+          <OnboardingDateOfFormation
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+            disabled={userData?.formationData.getFilingResponse?.success}
+          />
+        </div>
+        <div className="margin-top-4">
+          <OnboardingTaxId
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+            handleChangeOverride={showRegistrationModalForGuest()}
+          />
+        </div>
+        <div className="margin-top-4">
+          <OnboardingTaxPin
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+            handleChangeOverride={showRegistrationModalForGuest()}
+          />
+        </div>
+      </>
+    ),
+  };
+
+  const border = "2px #e6e6e6";
+  const profileNav = (
+    <Box sx={{ fontSize: 18, fontWeight: 500 }}>
+      <Box className="bg-base-lightest padding-y-2 padding-x-3" sx={{ border, borderStyle: "solid" }}>
+        <Content>{Config.profileDefaults.pageTitle}</Content>
+      </Box>
+      <Box
+        className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
+        sx={{
+          "&:hover, & .selected": {
+            color: "primary.dark",
+            fontWeight: "bold",
+            opacity: [0.8],
+          },
+          border,
+          borderStyle: "none solid solid solid",
+        }}
+        data-testid="info"
+        onClick={() => setProfileTab("info")}
+      >
+        <span className={profileTab == "info" ? "selected" : ""}>
+          {Config.profileDefaults.profileTabInfoTitle}
+        </span>
+        <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
+      </Box>
+      <Box
+        className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
+        sx={{
+          "&:hover, & .selected": {
+            color: "primary.dark",
+            fontWeight: "bold",
+            opacity: [0.8],
+          },
+          border,
+          borderStyle: "none solid solid solid",
+        }}
+        data-testid="numbers"
+        onClick={() => setProfileTab("numbers")}
+      >
+        <span className={profileTab == "numbers" ? "selected" : ""}>
+          {Config.profileDefaults.profileTabRefTitle}
+        </span>
+        <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
+      </Box>
+      {userData?.formationData.getFilingResponse?.success ||
+      userData?.profileData.hasExistingBusiness == false ? (
+        <Box
+          className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
+          sx={{
+            "&:hover, & .selected": {
+              color: "primary.dark",
+              fontWeight: "bold",
+              opacity: [0.8],
+            },
+            border,
+            borderStyle: "none solid solid solid",
+          }}
+          data-testid="documents"
+          onClick={() => setProfileTab("documents")}
+        >
+          <span className={profileTab == "documents" ? "selected" : ""}>
+            {Config.profileDefaults.profileTabDocsTitle}
+          </span>
+          <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
+        </Box>
       ) : (
         <></>
       )}
-      <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
-    </>
+      <Box
+        className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
+        sx={{
+          "&:hover, & .selected": {
+            color: "primary.dark",
+            fontWeight: "bold",
+            opacity: [0.8],
+          },
+          border,
+          borderStyle: "none solid solid solid",
+        }}
+        data-testid="notes"
+        onClick={() => setProfileTab("notes")}
+      >
+        <span className={profileTab == "notes" ? "selected" : ""}>
+          {Config.profileDefaults.profileTabNoteTitle}
+        </span>
+        <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
+      </Box>
+    </Box>
   );
 
   return (
@@ -311,7 +446,13 @@ const ProfilePage = (props: Props): ReactElement => {
           </SingleColumnContainer>
 
           <div className="margin-top-6 desktop:margin-top-0">
-            <SinglePageLayout wrappedWithMain={false}>
+            <SidebarPageLayout
+              isWidePage={true}
+              navChildren={profileNav}
+              divider={false}
+              outlineBox={false}
+              stackNav={true}
+            >
               <SingleColumnContainer>
                 {userData === undefined ? (
                   <SinglePageLayout>
@@ -326,11 +467,10 @@ const ProfilePage = (props: Props): ReactElement => {
                   </SinglePageLayout>
                 ) : (
                   <>
-                    <Content>{mergedDisplayContent.businessProfile.contentMd}</Content>
                     <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                       {userData?.profileData.hasExistingBusiness === true
-                        ? hasExistingBusiness
-                        : startingNewBusiness}
+                        ? hasExistingBusiness[profileTab]
+                        : startingNewBusiness[profileTab]}
 
                       <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
                       <div className="float-right fdr">
@@ -352,7 +492,7 @@ const ProfilePage = (props: Props): ReactElement => {
                   </>
                 )}
               </SingleColumnContainer>
-            </SinglePageLayout>
+            </SidebarPageLayout>
           </div>
         </main>
       </PageSkeleton>

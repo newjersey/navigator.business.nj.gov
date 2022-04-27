@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
-import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { Icon } from "@/components/njwds/Icon";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
@@ -12,6 +11,7 @@ import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/Cannabis
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -116,7 +116,7 @@ const TaskPage = (props: Props): ReactElement => {
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
       <PageSkeleton>
         <NavBar task={props.task} sideBarPageLayout={true} />
-        <SidebarPageLayout task={props.task} belowOutlineBoxComponent={renderNextAndPreviousButtons()}>
+        <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
           {rswitch(props.task.id, {
             "search-business-name": <SearchBusinessName task={props.task} />,
             "apply-for-shop-license": <LicenseTask task={props.task} />,
@@ -145,7 +145,7 @@ const TaskPage = (props: Props): ReactElement => {
             ),
             default: getTaskBody(),
           })}
-        </SidebarPageLayout>
+        </TaskSidebarPageLayout>
       </PageSkeleton>
     </>
   );

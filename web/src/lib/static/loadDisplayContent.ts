@@ -118,9 +118,6 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   const ownership = (type: UserContentType) => getTextFieldContent("ownership.md", type);
   const existingEmployees = (type: UserContentType) => getTextFieldContent("existing-employees.md", type);
   const taxPin = (type: UserContentType) => getTextFieldContent("tax-pin.md", type);
-  const businessProfile = (type: UserContentType) => getTextFieldContent("business-profile.md", type);
-  const businessInformation = (type: UserContentType) => getTextFieldContent("business-information.md", type);
-  const businessReferences = (type: UserContentType) => getTextFieldContent("business-references.md", type);
   const sectorId = (type: UserContentType) => getTextFieldContent("sector-id.md", type);
   const homeBased = (type: UserContentType) =>
     getTextFieldContent("municipality-home-based-business.md", type);
@@ -143,9 +140,6 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
     industryId,
     legalStructure,
     taxPin,
-    businessProfile,
-    businessInformation,
-    businessReferences,
     sectorId,
     homeBased,
   };

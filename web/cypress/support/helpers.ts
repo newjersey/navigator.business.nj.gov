@@ -328,10 +328,10 @@ export const checkNewBusinessProfilePage = ({
   cy.url().should("contain", "/profile");
 
   if (businessName) {
-    onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
+    onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   }
 
-  onOnboardingPage
+  onProfilePage
     .getIndustryDropdown()
     .invoke("prop", "value")
     .should("contain", (industry as Industry).name);
@@ -344,16 +344,16 @@ export const checkNewBusinessProfilePage = ({
   }
 
   if (townDisplayName) {
-    onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+    onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
   } else {
-    onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
+    onProfilePage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
   }
 
   if (homeBasedQuestion === undefined) {
-    onOnboardingPage.getHomeBased().should("not.exist");
+    onProfilePage.getHomeBased().should("not.exist");
   } else {
-    onOnboardingPage.getHomeBased(homeBasedQuestion).should("be.checked");
-    onOnboardingPage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
+    onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
+    onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   }
 
   onProfilePage

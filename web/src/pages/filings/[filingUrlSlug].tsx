@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
-import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
@@ -29,7 +29,7 @@ const FilingPage = (props: Props): ReactElement => {
       <NextSeo title={`Business.NJ.gov Navigator - ${props.filing.name}`} />
       <PageSkeleton isWidePage>
         <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} isWidePage />
-        <SidebarPageLayout operateReferences={props.operateReferences} isWidePage>
+        <TaskSidebarPageLayout operateReferences={props.operateReferences} isWidePage>
           <div className="minh-38">
             <div className="margin-bottom-2">
               <h1>{props.filing.name}</h1>
@@ -42,7 +42,7 @@ const FilingPage = (props: Props): ReactElement => {
             <Content>{props.filing.contentMd}</Content>
           </div>
           <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
-        </SidebarPageLayout>
+        </TaskSidebarPageLayout>
       </PageSkeleton>
     </>
   );

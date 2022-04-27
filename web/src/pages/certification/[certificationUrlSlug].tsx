@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
-import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import {
   CertificationUrlSlugParam,
   loadAllCertificationUrlSlugs,
@@ -39,9 +39,9 @@ const CertificationPage = (props: Props): ReactElement => {
       <NextSeo title={`Business.NJ.gov Navigator - ${props.certification.name}`} />
       <PageSkeleton isWidePage>
         <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} isWidePage />
-        <SidebarPageLayout operateReferences={props.operateReferences} isWidePage>
+        <TaskSidebarPageLayout operateReferences={props.operateReferences} isWidePage>
           <CertificationElement certification={props.certification} />
-        </SidebarPageLayout>
+        </TaskSidebarPageLayout>
       </PageSkeleton>
     </>
   );

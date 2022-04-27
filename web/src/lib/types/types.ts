@@ -71,9 +71,6 @@ export type ProfileContent = {
   entityId: TextFieldContent;
   employerId: TextFieldContent;
   taxPin: TextFieldContent;
-  businessProfile: TextFieldContent;
-  businessInformation: TextFieldContent;
-  businessReferences: TextFieldContent;
   ownership: TextFieldContent;
   existingEmployees: TextFieldContent;
   dateOfFormation: TextFieldContent;
@@ -300,15 +297,6 @@ export const emptyProfileContent: ProfileContent = {
     contentMd: "",
   },
   taxPin: {
-    contentMd: "",
-  },
-  businessProfile: {
-    contentMd: "",
-  },
-  businessInformation: {
-    contentMd: "",
-  },
-  businessReferences: {
     contentMd: "",
   },
   businessName: {

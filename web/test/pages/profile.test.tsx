@@ -2,7 +2,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import Profile from "@/pages/profile";
+import Profile, { ProfileTabs } from "@/pages/profile";
 import {
   generateFormationData,
   generateGetFilingResponse,
@@ -131,6 +131,7 @@ describe("profile", () => {
       opensModalWhenEditingNonGuestModeProfileFields();
 
       it("opens registration modal when user tries to change Tax PIN", async () => {
+        chooseTab("numbers");
         fireEvent.change(subject.getByLabelText("Tax pin"), { target: { value: "123456789" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
@@ -144,21 +145,25 @@ describe("profile", () => {
       });
 
       it("opens registration modal when user tries to change EIN", async () => {
+        chooseTab("numbers");
         fireEvent.change(subject.getByLabelText("Employer id"), { target: { value: "123456789" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
 
       it("opens registration modal when user tries to change entity ID", async () => {
+        chooseTab("numbers");
         fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "123456789" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
 
       it("opens registration modal when user tries to change NJ Tax ID", async () => {
+        chooseTab("numbers");
         fireEvent.change(subject.getByLabelText("Tax id"), { target: { value: "123456789" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
 
       it("opens registration modal when user tries to change Notes", async () => {
+        chooseTab("notes");
         fireEvent.change(subject.getByLabelText("Notes"), { target: { value: "some note" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
@@ -212,11 +217,13 @@ describe("profile", () => {
       selectByText("Location", newark.displayName);
       selectByValue("Industry", "e-commerce");
       selectByValue("Legal structure", "c-corporation");
+      chooseRadio("home-based-business-true");
+      chooseTab("numbers");
       fillText("Entity id", "0234567890");
       fillText("Tax id", "023456790");
       fillText("Employer id", "02-3456780");
+      chooseTab("notes");
       fillText("Notes", "whats appppppp");
-      chooseRadio("home-based-business-true");
       clickSave();
 
       await waitFor(() => {
@@ -279,12 +286,12 @@ describe("profile", () => {
           });
         });
 
-        it("disables entityID", () => {
-          expect(subject.getByLabelText("Entity id")).toHaveAttribute("disabled");
-        });
-
         it("disables businessName", () => {
           expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
+        });
+        it("disables entityID", () => {
+          chooseTab("numbers");
+          expect(subject.getByLabelText("Entity id")).toHaveAttribute("disabled");
         });
       });
 
@@ -307,15 +314,16 @@ describe("profile", () => {
           });
         });
 
-        it("disables entityID", () => {
-          expect(subject.getByLabelText("Entity id")).toHaveAttribute("disabled");
-        });
-
         it("disables businessName", () => {
           expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
         });
+        it("disables entityID", () => {
+          chooseTab("numbers");
+          expect(subject.getByLabelText("Entity id")).toHaveAttribute("disabled");
+        });
 
         it("disables dateOfFormation", () => {
+          chooseTab("numbers");
           expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
         });
       });
@@ -346,11 +354,13 @@ describe("profile", () => {
         }),
       });
       subject = renderPage({ userData });
+      chooseTab("numbers");
       expect(subject.queryByLabelText("Entity id")).not.toBeInTheDocument();
     });
 
     it("prevents user from saving if they partially entered Employer Id", async () => {
       subject = renderPage({});
+      chooseTab("numbers");
       fillText("Employer id", "123490");
       fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
       clickSave();
@@ -394,9 +404,11 @@ describe("profile", () => {
       expect(getLegalStructureValue()).toEqual("c-corporation");
 
       expect(getMunicipalityValue()).toEqual("Newark");
+      chooseTab("numbers");
       expect(getEmployerIdValue()).toEqual("12-3456789");
       expect(getEntityIdValue()).toEqual("1234567890");
       expect(getTaxIdValue()).toEqual("123456790");
+      chooseTab("notes");
       expect(getNotesValue()).toEqual("whats appppppp");
     });
 
@@ -481,13 +493,15 @@ describe("profile", () => {
       selectByText("Location", newark.displayName);
       selectByValue("Ownership", "veteran-owned");
       selectByValue("Ownership", "woman-owned");
+      chooseRadio("home-based-business-true");
+      chooseTab("numbers");
       fillText("Employer id", "02-3456780");
       fillText("Entity id", "0234567890");
       fillText("Date of formation", date.format("MM/YYYY"));
       fillText("Tax id", "023456790");
-      fillText("Notes", "whats appppppp");
       fillText("Tax pin", "6666");
-      chooseRadio("home-based-business-true");
+      chooseTab("notes");
+      fillText("Notes", "whats appppppp");
       clickSave();
 
       await waitFor(() => {
@@ -541,17 +555,19 @@ describe("profile", () => {
       subject = renderPage({ userData });
 
       expect(getBusinessNameValue()).toEqual("Applebees");
+      expect(getMunicipalityValue()).toEqual("Newark");
       expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
+      expect(subject.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
+      expect(getRadioButtonFromFormControlLabel("home-based-business-false")).toBeChecked();
+      expect(getExistingEmployeesValue()).toEqual("123");
+      chooseTab("numbers");
       expect(getEmployerIdValue()).toEqual("12-3456789");
       expect(getEntityIdValue()).toEqual("1234567890");
       expect(getTaxIdValue()).toEqual("123456790");
       expect(getDateOfFormation()).toEqual(date.format("MM/YYYY"));
-      expect(getNotesValue()).toEqual("whats appppppp");
-      expect(getMunicipalityValue()).toEqual("Newark");
-      expect(subject.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
-      expect(getExistingEmployeesValue()).toEqual("123");
       expect(getTaxPinValue()).toEqual("6666");
-      expect(getRadioButtonFromFormControlLabel("home-based-business-false")).toBeChecked();
+      chooseTab("notes");
+      expect(getNotesValue()).toEqual("whats appppppp");
     });
 
     it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
@@ -559,6 +575,7 @@ describe("profile", () => {
         profileData: generateProfileData({ hasExistingBusiness: true }),
       });
       subject = renderPage({ userData: userData });
+      chooseTab("numbers");
 
       fillText("Tax pin", "");
       fireEvent.blur(subject.getByLabelText("Tax pin"));
@@ -582,6 +599,7 @@ describe("profile", () => {
         profileData: generateProfileData({ hasExistingBusiness: true }),
       });
       subject = renderPage({ userData: userData });
+      chooseTab("numbers");
 
       fillText("Employer id", "123490");
       fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
@@ -682,6 +700,7 @@ describe("profile", () => {
           }),
         });
         subject = renderPage({ userData });
+        chooseTab("documents");
         expect(subject.getByTestId("profileContent-documents")).toBeInTheDocument();
       });
 
@@ -693,6 +712,7 @@ describe("profile", () => {
           }),
         });
         subject = renderPage({ userData });
+        chooseTab("documents");
         expect(subject.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
       });
     });
@@ -708,6 +728,7 @@ describe("profile", () => {
           }),
         });
         subject = renderPage({ userData });
+        chooseTab("documents");
         expect(subject.getByTestId("profileContent-documents")).toBeInTheDocument();
       });
 
@@ -721,6 +742,7 @@ describe("profile", () => {
           }),
         });
         subject = renderPage({ userData });
+        expect(subject.queryByTestId("documents")).not.toBeInTheDocument();
         expect(subject.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
       });
     });
@@ -744,6 +766,7 @@ describe("profile", () => {
           PROFILE: { ...content.PROFILE, documents: { contentMd: "", placeholder: "test12345" } },
         },
       });
+      chooseTab("documents");
       expect(subject.getByText("test12345")).toBeInTheDocument();
     });
 
@@ -766,7 +789,7 @@ describe("profile", () => {
           PROFILE: { ...content.PROFILE, documents: { contentMd: "", placeholder: "test12345" } },
         },
       });
-
+      chooseTab("documents");
       expect(subject.queryByText("test12345")).not.toBeInTheDocument();
       expect(subject.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
       expect(subject.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
@@ -792,6 +815,7 @@ describe("profile", () => {
       subject = renderPage({
         userData,
       });
+      chooseTab("documents");
 
       expect(subject.getByText(Config.profileDefaults.formationDocFileTitle).getAttribute("href")).toEqual(
         "testForm.pdf"
@@ -824,6 +848,7 @@ describe("profile", () => {
           PROFILE: { ...content.PROFILE, documents: { contentMd: "zpiasd", placeholder: "test12345" } },
         },
       });
+      chooseTab("documents");
 
       expect(subject.queryByText("test12345")).not.toBeInTheDocument();
       expect(subject.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
@@ -891,6 +916,10 @@ describe("profile", () => {
     within(subject.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
 
   const chooseRadio = (value: string) => {
+    fireEvent.click(subject.getByTestId(value));
+  };
+
+  const chooseTab = (value: ProfileTabs) => {
     fireEvent.click(subject.getByTestId(value));
   };
 });

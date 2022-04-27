@@ -1,30 +1,31 @@
 import { Icon } from "@/components/njwds/Icon";
-import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
-import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 
-interface Props {
+export interface SidebarPageLayoutProps {
   children: React.ReactNode;
-  task?: Task | undefined;
-  belowOutlineBoxComponent?: React.ReactNode;
-  operateReferences?: Record<string, OperateReference>;
+  navChildren?: React.ReactNode;
+  stackNav?: boolean;
+  divider?: boolean;
+  outlineBox?: boolean;
+  belowBoxComponent?: React.ReactNode;
   isWidePage?: boolean;
 }
 
 export const SidebarPageLayout = ({
   children,
-  task,
-  belowOutlineBoxComponent,
-  operateReferences,
+  navChildren,
+  divider = true,
+  outlineBox = true,
+  stackNav,
+  belowBoxComponent,
   isWidePage,
-}: Props): ReactElement => {
+}: SidebarPageLayoutProps): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { userData } = useUserData();
 
@@ -59,9 +60,20 @@ export const SidebarPageLayout = ({
               } usa-layout-docs`}
               id="main"
             >
-              {!isLargeScreen && <div>{backButton}</div>}
-              <div className="border-1px border-base-light usa-prose minh-40 padding-205">{children}</div>
-              {belowOutlineBoxComponent}
+              {!isLargeScreen && (
+                <div>
+                  {backButton}
+                  {stackNav && navChildren}
+                </div>
+              )}
+              <div
+                className={
+                  outlineBox ? "border-1px border-base-light usa-prose" : "" + " minh-40 padding-205"
+                }
+              >
+                {children}
+              </div>
+              {belowBoxComponent}
             </main>
             <div
               className={`usa-layout-docs__sidenav ${
@@ -72,12 +84,8 @@ export const SidebarPageLayout = ({
                 <nav aria-label="Secondary">
                   {" "}
                   {backButton}
-                  <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />
-                  {operateReferences != null && Object.keys(operateReferences).length > 0 ? (
-                    <MiniOperateSection operateReferences={operateReferences} />
-                  ) : (
-                    <MiniRoadmap activeTaskId={task?.id} />
-                  )}
+                  {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
+                  {navChildren}
                 </nav>
               )}
             </div>

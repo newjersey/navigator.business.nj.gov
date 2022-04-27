@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
-import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
+import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Funding, OperateReference } from "@/lib/types/types";
@@ -45,9 +45,9 @@ const FundingPage = (props: Props): ReactElement => {
       <NextSeo title={`Business.NJ.gov Navigator - ${props.funding.name}`} />
       <PageSkeleton isWidePage>
         <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} isWidePage />
-        <SidebarPageLayout operateReferences={props.operateReferences} isWidePage>
+        <TaskSidebarPageLayout operateReferences={props.operateReferences} isWidePage>
           <FundingElement funding={props.funding} />
-        </SidebarPageLayout>
+        </TaskSidebarPageLayout>
       </PageSkeleton>
     </>
   );
