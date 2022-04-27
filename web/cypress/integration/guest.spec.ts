@@ -86,6 +86,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.get('input[aria-label="Business name"]').clear().type("Applebee's");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
 
+    cy.get(`[data-testid="numbers"]`).click({ force: true });
     cy.get('input[aria-label="Employer id"]').clear().type("123456789");
     cy.get('[data-testid="self-reg-modal"]').should("be.visible");
 
