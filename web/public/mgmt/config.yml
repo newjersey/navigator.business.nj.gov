@@ -860,6 +860,10 @@ collections:
               - { label: Formation Document Link Text, name: formationDocFileTitle, widget: string }
               - { label: Certification Document Link Text, name: certificationDocFileTitle, widget: string }
               - { label: Standing Document Link Text, name: standingDocFileTitle, widget: string }
+              - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }
+              - { label: Reference Tab Title, name: profileTabRefTitle, widget: string }
+              - { label: Note Tab Title, name: profileTabNoteTitle, widget: string }
+              - { label: Documents Tab Title, name: profileTabDocsTitle, widget: string }
 
           - label: Roadmap Defaults
             name: roadmapDefaults
