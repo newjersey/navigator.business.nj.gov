@@ -370,9 +370,12 @@ export default {
       },
     },
     onboarding_cpa_question: {
-      selected: {
-        offering_public_accounting_services: () => {
-          sendEvent("onboarding_cpa_question", "selected", "offering_public_accounting_services");
+      submit: {
+        yes_i_offer_public_accounting: () => {
+          sendEvent("onboarding_cpa_question", "submit", "yes_i_offer_public_accounting");
+        },
+        no_i_dont_offer_public_accounting: () => {
+          sendEvent("onboarding_cpa_question", "submit", "no_i_dont_offer_public_accounting");
         },
       },
     },

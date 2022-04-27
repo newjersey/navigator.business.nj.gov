@@ -9,7 +9,9 @@ export const OnboardingCpa = (): ReactElement => {
 
   const handleCpaSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     if (event.target.value === "true") {
-      analytics.event.onboarding_cpa_question.selected.offering_public_accounting_services();
+      analytics.event.onboarding_cpa_question.submit.yes_i_offer_public_accounting();
+    } else {
+      analytics.event.onboarding_cpa_question.submit.no_i_dont_offer_public_accounting();
     }
     setProfileData({
       ...state.profileData,
