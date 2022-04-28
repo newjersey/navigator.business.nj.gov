@@ -100,6 +100,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     existingEmployees: randomInt(7).toString(),
     taxPin: randomInt(4).toString(),
     sectorId: randomSector().id,
+    naicsCode: randomInt(6).toString(),
     ...overrides,
   };
 };

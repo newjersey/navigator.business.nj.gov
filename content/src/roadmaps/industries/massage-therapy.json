@@ -10,6 +10,11 @@
       "task": "business-plan"
     },
     {
+      "step": 1,
+      "weight": 30,
+      "task": "determine-naics-code"
+    },
+    {
       "step": 2,
       "weight": 31,
       "task": "register-for-ein"

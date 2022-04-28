@@ -1,0 +1,75 @@
+import { Content } from "@/components/Content";
+import { TaskHeader } from "@/components/TaskHeader";
+import { NaicsCodeDisplay } from "@/components/tasks/NaicsCodeDisplay";
+import { NaicsCodeInput } from "@/components/tasks/NaicsCodeInput";
+import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Task, TaskProgress } from "@/lib/types/types";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { AuthAlertContext } from "@/pages/_app";
+import React, { ReactElement, useContext, useState } from "react";
+
+interface Props {
+  task: Task;
+}
+
+export const NaicsCodeTask = (props: Props): ReactElement => {
+  const [showInput, setShowInput] = useState<boolean>(true);
+  const { userData, update } = useUserData();
+  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+
+  useMountEffectWhenDefined(() => {
+    if (!userData) return;
+    if (isAuthenticated === IsAuthenticated.FALSE) return;
+    setShowInput(!userData.profileData.naicsCode);
+  }, userData);
+
+  const onEdit = () => {
+    setShowInput(true);
+    setTaskProgress("IN_PROGRESS");
+  };
+
+  const onSave = () => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      setModalIsVisible(true);
+      return;
+    }
+
+    setShowInput(false);
+    setTaskProgress("COMPLETED");
+  };
+
+  const setTaskProgress = (status: TaskProgress): void => {
+    if (!userData) return;
+    update({
+      ...userData,
+      taskProgress: {
+        ...userData.taskProgress,
+        [props.task.id]: status,
+      },
+    });
+  };
+
+  const preLookupContent = props.task.contentMd.split("${naicsCodeLookupComponent}")[0];
+  const postLookupContent = props.task.contentMd.split("${naicsCodeLookupComponent}")[1];
+
+  return (
+    <div className="minh-38">
+      <TaskHeader task={props.task} />
+      <UnlockedBy task={props.task} />
+      <Content>{preLookupContent}</Content>
+      {showInput && (
+        <div className="margin-y-4 bg-base-extra-light padding-2 radius-lg">
+          <NaicsCodeInput onSave={onSave} />
+        </div>
+      )}
+      {!showInput && (
+        <div className="margin-y-4 bg-base-extra-light padding-2 radius-lg">
+          <NaicsCodeDisplay onEdit={onEdit} code={userData?.profileData.naicsCode || ""} />
+        </div>
+      )}
+      <Content>{postLookupContent}</Content>
+    </div>
+  );
+};

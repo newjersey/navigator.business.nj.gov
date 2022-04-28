@@ -266,6 +266,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         existingEmployees: undefined,
         taxPin: undefined,
         sectorId: undefined,
+        naicsCode: "",
       };
 
       setProfileData(newProfileData);

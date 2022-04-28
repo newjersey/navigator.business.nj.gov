@@ -487,5 +487,18 @@
     "minorityOrWomenHeaderText": "Diversely-Owned Business: M/WBE Certification",
     "socialEquityButtonLink": "https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf",
     "impactZoneText": "Nothing else to do here, you’re ready to start applying for your Cannabis Permit."
+  },
+  "determineNaicsCode": {
+    "findCodeHeader": "Find your NAICS code",
+    "findCodeBodyText": "Use the resources listed below to search and find your NAICS code for your primary business.",
+    "sicCodeLink": "[Siccode.com](https://siccode.com/)",
+    "naicsLink": "[Naics.com](https://www.naics.com/)",
+    "inputLabel": "When you’re done, **save your NAICS code here**:",
+    "inputPlaceholder": "6-digit NAICS Code",
+    "saveButtonText": "Save NAICS code",
+    "validationErrorText": "NAICS code must be 6 digits",
+    "hasSavedCodeHeader": "Your NAICS code",
+    "successMessage": "NAICS Code ${code} has been saved. You can use this NAICS code to [register for state taxes](/tasks/register-for-taxes).",
+    "editText": "Edit"
   }
 }
