@@ -1,2 +1,2 @@
-- []{general-veteran-honorable-discharge}Proof of Honorable Discharge from the US Military form DD-214 for the majority of owner(s)
-- []{general-veteran-nj-residency}Proof of New Jersey residency for majority owner(s)
+* \[]{general-veteran-honorable-discharge}Federal Service-Disabled Veteran-Owned Business Determination Letter, Disability Award Letter or Federal Service-Disabled Veteran Letter. (Must be provided for Majority owners).
+* \[]{general-veteran-nj-residency}Proof of New Jersey residency for Majority owner(s)
