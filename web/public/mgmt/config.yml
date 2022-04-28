@@ -596,6 +596,23 @@ collections:
                   name: greenBoxSocialEquityText,
                   widget: string,
                 }
+          - label: Determine NAICS Code Task
+            name: determineNaicsCode
+            collapsed: true
+            widget: object
+            summary: "{{determineNaicsCode}}"
+            fields:
+              - { label: Find Code Header, name: findCodeHeader, widget: string }
+              - { label: Find Code Body Text, name: findCodeBodyText, widget: string }
+              - { label: siccode.com Link, name: sicCodeLink, widget: string }
+              - { label: naics.com Link, name: naicsLink, widget: string }
+              - { label: Input Label, name: inputLabel, widget: string }
+              - { label: Input Placeholder, name: inputPlaceholder, widget: string }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Validation Error Text, name: validationErrorText, widget: string }
+              - { label: Has Saved Code Header, name: hasSavedCodeHeader, widget: string }
+              - { label: Success Message, name: successMessage, widget: string }
+              - { label: Edit Text, name: editText, widget: string }
           - label: Cannabis Apply For License
             name: cannabisApplyForLicense
             collapsed: true

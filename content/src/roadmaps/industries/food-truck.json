@@ -15,6 +15,11 @@
       "task": "evaluate-your-location"
     },
     {
+      "step": 1,
+      "weight": 30,
+      "task": "determine-naics-code"
+    },
+    {
       "step": 2,
       "weight": 20,
       "task": "register-for-ein"

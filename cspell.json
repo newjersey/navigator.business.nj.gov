@@ -61,7 +61,8 @@
     "Hunterdon",
     "fundings",
     "newjersey",
-    "HVACR"
+    "HVACR",
+    "siccode"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

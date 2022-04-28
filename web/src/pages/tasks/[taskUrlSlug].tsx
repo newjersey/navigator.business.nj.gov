@@ -9,6 +9,7 @@ import { BusinessFormation } from "@/components/tasks/BusinessFormation";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
+import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
@@ -125,6 +126,7 @@ const TaskPage = (props: Props): ReactElement => {
             "license-accounting": <LicenseTask task={props.task} />,
             "license-massage-therapy": <LicenseTask task={props.task} />,
             "form-business-entity": businessFormationFeatureFlag(),
+            "determine-naics-code": <NaicsCodeTask task={props.task} />,
             "priority-status-cannabis": (
               <CannabisPriorityStatusTask
                 task={props.task}

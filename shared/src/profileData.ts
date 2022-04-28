@@ -29,6 +29,7 @@ export interface ProfileData {
   existingEmployees: string | undefined;
   taxPin: string | undefined;
   sectorId: string | undefined;
+  naicsCode: string;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -54,6 +55,7 @@ export const emptyProfileData: ProfileData = {
   existingEmployees: undefined,
   taxPin: undefined,
   sectorId: undefined,
+  naicsCode: "",
 };
 
 export const createEmptyProfileData = (): ProfileData => {
