@@ -9,7 +9,7 @@ applicableOwnershipTypes:
   - disabled-veteran
 isSbe: false
 ---
-*[](https://business.nj.gov/pages/government-contracting)A* `Veteran|veteran` *\-Owned Business (VOB) certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)*.
+*[Government Contracting](https://business.nj.gov/pages/government-contracting)A* `Veteran|veteran` *\-Owned Business (VOB) certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)*.
 
 - - -
 
