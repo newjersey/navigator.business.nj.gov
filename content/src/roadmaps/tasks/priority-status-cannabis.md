@@ -18,10 +18,8 @@ We can help you find out if you qualify for any priority status. Which of the fo
 
 * []{general-minority-owned}50% or more of your business is owned by a `minority|minority` 
 * []{general-women-owned}50% or more of your business is owned by a `woman|women` 
-
-
-* 50% or more of your business is owned by a disabled veteran
-*   []{cannabis-criminal-offense-social-equity}Is owned by people with `convictions for cannabis-related offenses|social-equity-business-cannabis` (expunged or not)
-* []{cannabis-business-in-impact-zone}My business is located in an `Impact Zone|impact-zone-business-cannabis` 
+* \[]{cannabis-disabled-veteran} 50% or more of your business is owned by a disabled veteran
+* []{cannabis-criminal-offense-social-equity}Is owned by people with `convictions for cannabis-related offenses|social-equity-business-cannabis` (expunged or not)
+*   []{cannabis-business-in-impact-zone}My business is located in an `Impact Zone|impact-zone-business-cannabis` 
 * []{cannabis-owner-in-impact-zone}My business is owned by people who live in an `Impact Zone|impact-zone-business-cannabis` 
 * []{cannabis-employee-in-impact-zone}My business has employees who are residents of an `Impact Zone|impact-zone-business-cannabis`
