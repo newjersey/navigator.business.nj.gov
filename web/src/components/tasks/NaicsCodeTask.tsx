@@ -5,7 +5,7 @@ import { NaicsCodeInput } from "@/components/tasks/NaicsCodeInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task, TaskProgress } from "@/lib/types/types";
+import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { AuthAlertContext } from "@/pages/_app";
 import React, { ReactElement, useContext, useState } from "react";
@@ -26,8 +26,15 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
   }, userData);
 
   const onEdit = () => {
+    if (!userData) return;
     setShowInput(true);
-    setTaskProgress("IN_PROGRESS");
+    update({
+      ...userData,
+      taskProgress: {
+        ...userData.taskProgress,
+        [props.task.id]: "IN_PROGRESS",
+      },
+    });
   };
 
   const onSave = () => {
@@ -35,20 +42,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
       setModalIsVisible(true);
       return;
     }
-
     setShowInput(false);
-    setTaskProgress("COMPLETED");
-  };
-
-  const setTaskProgress = (status: TaskProgress): void => {
-    if (!userData) return;
-    update({
-      ...userData,
-      taskProgress: {
-        ...userData.taskProgress,
-        [props.task.id]: status,
-      },
-    });
   };
 
   const preLookupContent = props.task.contentMd.split("${naicsCodeLookupComponent}")[0];
@@ -61,7 +55,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
       <Content>{preLookupContent}</Content>
       {showInput && (
         <div className="margin-y-4 bg-base-extra-light padding-2 radius-lg">
-          <NaicsCodeInput onSave={onSave} />
+          <NaicsCodeInput onSave={onSave} task={props.task} />
         </div>
       )}
       {!showInput && (

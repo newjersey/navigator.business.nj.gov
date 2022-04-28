@@ -2,12 +2,14 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
   onSave: () => void;
+  task: Task;
 }
 
 export const NaicsCodeInput = (props: Props): ReactElement => {
@@ -35,6 +37,10 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       profileData: {
         ...userData.profileData,
         naicsCode: naicsCode,
+      },
+      taskProgress: {
+        ...userData.taskProgress,
+        [props.task.id]: "COMPLETED",
       },
     });
     props.onSave();
