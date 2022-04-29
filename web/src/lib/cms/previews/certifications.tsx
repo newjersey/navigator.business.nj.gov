@@ -22,7 +22,7 @@ const CertificationsPreview = (props: Props) => {
   const certification: Certification = { contentMd: body, ...data };
 
   return (
-    <div ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
       <CertificationElement certification={certification} />
     </div>
   );

@@ -22,7 +22,7 @@ const FundingsPreview = (props: Props) => {
   const funding: Funding = { contentMd: body ?? "", ...data };
 
   return (
-    <div ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
       <FundingElement funding={funding} />
     </div>
   );

@@ -20,7 +20,7 @@ const ContentPreview = (props: Props) => {
   const { body } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
 
   return (
-    <div ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
       <Content>{body}</Content>
     </div>
   );

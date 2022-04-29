@@ -22,7 +22,7 @@ const TaskPreview = (props: Props) => {
   const task: Task = { contentMd: body ?? "", ...data };
 
   return (
-    <div ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+    <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
       <TaskElement task={task} />
     </div>
   );
