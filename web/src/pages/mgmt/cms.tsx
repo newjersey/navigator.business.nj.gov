@@ -24,11 +24,7 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerWidget("slug", SlugControl);
       // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("tasks", (props) => (
-        <div className="cms">
-          <TaskPreview {...props} />
-        </div>
-      ));
+      CMS.registerPreviewTemplate("tasks", TaskPreview);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("funding-opportunities", FundingsPreview);
       // @ts-expect-error: No type definition available
