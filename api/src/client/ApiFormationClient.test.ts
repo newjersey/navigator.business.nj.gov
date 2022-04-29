@@ -4,6 +4,7 @@ import {
   generateFormationData,
   generateFormationFormData,
   generateFormationMember,
+  generateProfileData,
   generateUserData,
 } from "../../test/factories";
 import { FormationClient } from "../domain/types";
@@ -88,6 +89,7 @@ describe("ApiFormationClient", () => {
             Business: "DomesticLimitedLiabilityCompany",
             BusinessName: userData.profileData.businessName,
             BusinessDesignator: formationFormData.businessSuffix,
+            Naic: userData.profileData.naicsCode,
             EffectiveFilingDate: parseDateWithFormat(
               formationFormData.businessStartDate,
               "YYYY-MM-DD"
@@ -170,6 +172,26 @@ describe("ApiFormationClient", () => {
       expect(postBody.Formation.RegisteredAgent.Email).toEqual(null);
       expect(postBody.Formation.RegisteredAgent.Name).toEqual(null);
       expect(postBody.Formation.RegisteredAgent.Location).toEqual(null);
+    });
+
+    it("sends with empty NAICS code if profile data NAICS is not 6 digits", async () => {
+      const stubResponse = generateApiResponse({});
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+      const formationFormData = generateFormationFormData({
+        agentNumberOrManual: "NUMBER",
+      });
+
+      const userData = generateUserData({
+        formationData: generateFormationData({ formationFormData }),
+        profileData: generateProfileData({
+          naicsCode: "12345",
+        }),
+      });
+
+      await client.form(userData, "some-url");
+      const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+      expect(postBody.Formation.BusinessInformation.Naic).toEqual("");
     });
 
     it("responds with success, token, and redirect url", async () => {

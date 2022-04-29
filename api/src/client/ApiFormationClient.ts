@@ -125,6 +125,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
   const makePostBody = (userData: UserData, returnUrl: string, config: ApiConfig) => {
     const formationFormData = userData.formationData.formationFormData;
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
+    const naicsCode = userData.profileData.naicsCode.length === 6 ? userData.profileData.naicsCode : "";
 
     return {
       Account: config.account,
@@ -151,6 +152,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           Business: "DomesticLimitedLiabilityCompany",
           BusinessName: userData.profileData.businessName,
           BusinessDesignator: formationFormData.businessSuffix,
+          Naic: naicsCode,
           EffectiveFilingDate: parseDateWithFormat(
             formationFormData.businessStartDate,
             "YYYY-MM-DD"
@@ -243,6 +245,7 @@ export type ApiSubmission = {
       Business: BusinessType; //Business Type (DomesticLimitedLiabilityCompany)
       BusinessName: string; //The requested business name, must be available and not contain any restricted words. Name plus designator length must be less than 100 characters in length.
       BusinessDesignator: BusinessSuffix; //The designator - LLC. L.L.C etc
+      Naic: string; // If supplied must be 6 digits
       EffectiveFilingDate: string; // date 2021-12-14T10:03:51.0869073-04:00 (anne note: is this correct??)
       MainAddress: ApiLocation;
     };
