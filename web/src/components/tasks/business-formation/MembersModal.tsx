@@ -59,7 +59,7 @@ export const MembersModal = (props: Props): ReactElement => {
       setMemberData({
         ...memberData,
         name: `${state.formationFormData.contactFirstName.trim()} ${state.formationFormData.contactLastName.trim()}`,
-        addressCity: (state.formationFormData.businessAddressCity as Municipality)?.displayName,
+        addressCity: (state.formationFormData.businessAddressCity as Municipality)?.name,
         addressLine1: state.formationFormData.businessAddressLine1,
         addressLine2: state.formationFormData.businessAddressLine2,
         addressState: state.formationFormData.businessAddressState,
