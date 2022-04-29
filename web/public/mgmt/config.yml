@@ -623,88 +623,6 @@ collections:
                   hint: This field supports Markdown,
                 }
               - { label: Edit Text, name: editText, widget: string }
-          - label: Cannabis Apply For License
-            name: cannabisApplyForLicense
-            collapsed: true
-            widget: object
-            summary: "{{cannabisApplyForLicense}}"
-            fields:
-              - { label: Application Questions Text, name: applicationQuestionsText, widget: text }
-              - { label: Business Size Header, name: businessSizeHeader, widget: string }
-              - {
-                  label: Microbusiness Radio Question,
-                  name: microbusinessRadioQuestion,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Microbusiness Radio Yes,
-                  name: microbusinessRadioYes,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Microbusiness Radio No,
-                  name: microbusinessRadioNo,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
-              - {
-                  label: Priority Status Text,
-                  name: priorityStatusText,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Priority Status None Selected Text,
-                  name: priorityStatusNoneSelectedText,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Diversely Owned Label,
-                  name: diverselyOwnedLabel,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Diversely Owned Helper Text,
-                  name: diverselyOwnedHelperText,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Impact Zone Label,
-                  name: impactZoneLabel,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: SBE Label, name: sbeLabel, widget: string, hint: This field supports Markdown }
-              - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
-              - {
-                  label: Eligible Modal Body,
-                  name: eligibleModalBody,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
-              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
-              - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
-              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
-              - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
-              - {
-                  label: Microbusiness Application Needs,
-                  name: microbusinessApplicationNeeds,
-                  widget: string,
-                }
-              - {
-                  label: Priority Status Application Needs,
-                  name: priorityStatusApplicationNeeds,
-                  widget: string,
-                }
-              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
-              - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
           - label: Dashboard Defaults
             name: dashboardDefaults
             collapsed: true
@@ -1878,13 +1796,166 @@ collections:
 
   - label: "Cannabis License"
     name: "cannabis-license"
-    folder: "content/src/display-content/cannabis-license"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
     delete: false
     create: false
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
+    files:
+      - label: "Annual - Bottom-of-Task text"
+        name: "annual-bottom-of-task"
+        file: "content/src/display-content/cannabis-license/annual-bottom-of-task.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Annual - General Requirements"
+        name: "annual-general-requirements"
+        file: "content/src/display-content/cannabis-license/annual-general-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Conditional - Bottom-of-Task text"
+        name: "conditional-bottom-of-task"
+        file: "content/src/display-content/cannabis-license/conditional-bottom-of-task.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Conditional - General Requirements"
+        name: "conditional-general-requirements"
+        file: "content/src/display-content/cannabis-license/conditional-general-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Diversely-Owned Requirements"
+        name: "diversely-owned-requirements"
+        file: "content/src/display-content/cannabis-license/diversely-owned-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Impact-Zone Requirements"
+        name: "impact-zone-requirements"
+        file: "content/src/display-content/cannabis-license/impact-zone-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Microbusiness Requirements"
+        name: "microbusiness-requirements"
+        file: "content/src/display-content/cannabis-license/microbusines-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Social Equity Requirements"
+        name: "social-equity-requirements"
+        file: "content/src/display-content/cannabis-license/social-equity-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Config"
+        name: "config"
+        file: "content/src/fieldConfig/config.json"
+        editor:
+          preview: false
+        fields:
+          - label: Cannabis Apply For License
+            name: cannabisApplyForLicense
+            collapsed: true
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - { label: Application Questions Text, name: applicationQuestionsText, widget: text }
+              - { label: Business Size Header, name: businessSizeHeader, widget: string }
+              - {
+                  label: Microbusiness Radio Question,
+                  name: microbusinessRadioQuestion,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio Yes,
+                  name: microbusinessRadioYes,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio No,
+                  name: microbusinessRadioNo,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
+              - {
+                  label: Priority Status Text,
+                  name: priorityStatusText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Priority Status None Selected Text,
+                  name: priorityStatusNoneSelectedText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Diversely Owned Label,
+                  name: diverselyOwnedLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Diversely Owned Helper Text,
+                  name: diverselyOwnedHelperText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Impact Zone Label,
+                  name: impactZoneLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: SBE Label, name: sbeLabel, widget: string, hint: This field supports Markdown }
+              - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
+              - {
+                  label: Eligible Modal Body,
+                  name: eligibleModalBody,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
+              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
+              - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
+              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
+              - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
+              - {
+                  label: Microbusiness Application Needs,
+                  name: microbusinessApplicationNeeds,
+                  widget: string,
+                }
+              - {
+                  label: Priority Status Application Needs,
+                  name: priorityStatusApplicationNeeds,
+                  widget: string,
+                }
+              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
+              - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }

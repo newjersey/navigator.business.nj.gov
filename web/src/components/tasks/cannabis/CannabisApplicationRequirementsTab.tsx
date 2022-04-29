@@ -103,7 +103,12 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
           </div>
         )}
         <hr className="margin-top-3 margin-bottom-4" />
-        <Content>{props.task.contentMd}</Content>
+        {props.task.id === "conditional-permit-cannabis" && (
+          <Content>{props.displayContent.conditionalBottomOfTask.contentMd}</Content>
+        )}
+        {props.task.id === "annual-license-cannabis" && (
+          <Content>{props.displayContent.annualBottomOfTask.contentMd}</Content>
+        )}
       </div>
 
       <div

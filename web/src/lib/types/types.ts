@@ -113,6 +113,8 @@ export type CannabisApplyForLicenseDisplayContent = {
   impactZoneRequirements: { contentMd: string };
   microbusinessRequirements: { contentMd: string };
   socialEquityRequirements: { contentMd: string };
+  conditionalBottomOfTask: { contentMd: string };
+  annualBottomOfTask: { contentMd: string };
 };
 
 export type FormationDisplayContent = {
@@ -177,6 +179,8 @@ export const createEmptyCannabisApplyForLicenseDisplayContent =
     impactZoneRequirements: { contentMd: "" },
     microbusinessRequirements: { contentMd: "" },
     socialEquityRequirements: { contentMd: "" },
+    conditionalBottomOfTask: { contentMd: "" },
+    annualBottomOfTask: { contentMd: "" },
   });
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
