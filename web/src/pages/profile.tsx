@@ -3,7 +3,6 @@ import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
-import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
@@ -420,16 +419,16 @@ const ProfilePage = (props: Props): ReactElement => {
     >
       <PageSkeleton showLegalMessage={true}>
         <NavBar />
-        <DialogTwoButton
-          isOpen={escapeModal}
-          close={() => setEscapeModal(false)}
-          title={Config.profileDefaults.escapeModalHeader}
-          bodyText={Config.profileDefaults.escapeModalBody}
-          primaryButtonText={Config.profileDefaults.escapeModalReturn}
-          primaryButtonOnClick={() => redirect()}
-          secondaryButtonText={Config.profileDefaults.escapeModalEscape}
-        />
-        <main className="usa-section padding-top-0 desktop:padding-top-3" id="main">
+        <div className="usa-section padding-top-0 desktop:padding-top-3">
+          <DialogTwoButton
+            isOpen={escapeModal}
+            close={() => setEscapeModal(false)}
+            title={Config.profileDefaults.escapeModalHeader}
+            bodyText={Config.profileDefaults.escapeModalBody}
+            primaryButtonText={Config.profileDefaults.escapeModalReturn}
+            primaryButtonOnClick={() => redirect()}
+            secondaryButtonText={Config.profileDefaults.escapeModalEscape}
+          />
           <SingleColumnContainer>
             {alert && (
               <ToastAlert
@@ -455,16 +454,14 @@ const ProfilePage = (props: Props): ReactElement => {
             >
               <SingleColumnContainer>
                 {userData === undefined ? (
-                  <SinglePageLayout>
-                    <div className="flex flex-justify-center flex-align-center">
-                      <CircularProgress
-                        id="profilePage"
-                        aria-label="profile page progress bar"
-                        aria-busy={true}
-                      />
-                      <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
-                    </div>
-                  </SinglePageLayout>
+                  <div className="flex flex-justify-center flex-align-center padding-top-0 desktop:padding-top-6 padding-bottom-15">
+                    <CircularProgress
+                      id="profilePage"
+                      aria-label="profile page progress bar"
+                      aria-busy={true}
+                    />
+                    <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
+                  </div>
                 ) : (
                   <>
                     <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
@@ -494,7 +491,7 @@ const ProfilePage = (props: Props): ReactElement => {
               </SingleColumnContainer>
             </SidebarPageLayout>
           </div>
-        </main>
+        </div>
       </PageSkeleton>
     </ProfileDataContext.Provider>
   );
