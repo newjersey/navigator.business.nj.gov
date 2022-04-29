@@ -8,11 +8,23 @@ if (typeof userHash === "undefined") {
   userHash = undefined;
 }
 
+var userName = document.currentScript.getAttribute("data-user-name");
+if (typeof userName === "undefined") {
+  userName = undefined;
+}
+
+var userEmail = document.currentScript.getAttribute("data-user-email");
+if (typeof userEmail === "undefined") {
+  userEmail = undefined;
+}
+
 window.intercomSettings = {
   app_id: "ozxx8n5h",
   custom_launcher_selector: ".intercom-button",
   user_id: userId,
   user_hash: userHash,
+  name: userName,
+  email: userEmail,
 };
 
 // re-init

@@ -298,6 +298,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           src="/intercom/identity.js"
           data-user-id={state.user?.myNJUserKey}
           data-user-hash={state.user?.intercomHash}
+          data-user-name={state.user?.name}
+          data-user-email={state.user?.email}
         />
       )}
       <DefaultSeo {...SEO} />
