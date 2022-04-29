@@ -1,4 +1,17 @@
 {
+  "determineNaicsCode": {
+    "naicsLink": "[Naics.com](https://www.naics.com/)",
+    "successMessage": "NAICS Code ${code} has been saved. You can use this NAICS code to [register for state taxes](/tasks/register-for-taxes).",
+    "hasSavedCodeHeader": "Your NAICS code",
+    "inputPlaceholder": "6-digit NAICS Code",
+    "inputLabel": "When you’re done, **save your NAICS code here**:",
+    "findCodeHeader": "Find your NAICS code",
+    "sicCodeLink": "[Siccode.com](https://siccode.com/)",
+    "findCodeBodyText": "Use the resources listed below to search and find your NAICS code for your primary business.",
+    "editText": "Edit",
+    "saveButtonText": "Save NAICS code",
+    "validationErrorText": "NAICS code must be 6 digits"
+  },
   "legalMessageDefaults": {
     "legalMessageTextOne": "This information is supplied as a guide and is not a substitute for legal or professional advice. It is the responsibility of the business owner to comply with all local, county, and state regulations even if they are not listed here. For no-cost assistance with your business, use the ",
     "legalMessageLegalChat": "live chat",
@@ -197,14 +210,14 @@
     "guestAlertBody": "Now that you've filled out your business information, you can save your progress and come back later by [creating an account](#). ",
     "guestSuccessTitle": "### You are Now Registered!",
     "guestSuccessBody": "You can now save your progress, access more features, and edit your profile.",
-    "navBarGuestRegistrationText": "Register now",
+    "navBarGuestRegistrationText": "Complete Registration",
     "profileLinkText": "Business Profile",
     "myNJAccountText": "myNewJersey account",
     "guestModalButtonText": "Complete My Registration",
-    "guestAlertTitle": "### Register to Save Your Progress",
+    "guestAlertTitle": "### Complete Registration to Save Your Progress",
     "navBarGuestText": "Guest",
-    "registerButton": "Register",
-    "guestModalBody": "To use this feature, you need to create a free account with the State of New Jersey's secure login system, MyNJ. This will ensure your privacy, and allow you to come back any time.",
+    "registerButton": "Get Started",
+    "guestModalBody": "To use this feature, you need to complete your registration with the State of New Jersey's secure login system, MyNewJersey. This will ensure your privacy, and allow you to come back any time.",
     "guestModalSubText": "Already have an account? [Log In](#)",
     "logInButton": "Log in",
     "logoutButton": "Log out",
@@ -487,18 +500,5 @@
     "minorityOrWomenHeaderText": "Diversely-Owned Business: M/WBE Certification",
     "socialEquityButtonLink": "https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf",
     "impactZoneText": "Nothing else to do here, you’re ready to start applying for your Cannabis Permit."
-  },
-  "determineNaicsCode": {
-    "findCodeHeader": "Find your NAICS code",
-    "findCodeBodyText": "Use the resources listed below to search and find your NAICS code for your primary business.",
-    "sicCodeLink": "[Siccode.com](https://siccode.com/)",
-    "naicsLink": "[Naics.com](https://www.naics.com/)",
-    "inputLabel": "When you’re done, **save your NAICS code here**:",
-    "inputPlaceholder": "6-digit NAICS Code",
-    "saveButtonText": "Save NAICS code",
-    "validationErrorText": "NAICS code must be 6 digits",
-    "hasSavedCodeHeader": "Your NAICS code",
-    "successMessage": "NAICS Code ${code} has been saved. You can use this NAICS code to [register for state taxes](/tasks/register-for-taxes).",
-    "editText": "Edit"
   }
 }
