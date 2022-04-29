@@ -16,6 +16,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const LENGTH = 6;
   const [naicsCode, setNaicsCode] = useState<string>("");
   const [isInvalid, setIsInvalid] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
 
   useMountEffectWhenDefined(() => {
@@ -23,7 +24,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     setNaicsCode(userData.profileData.naicsCode);
   }, userData);
 
-  const saveNaicsCode = async (): Promise<void> => {
+  const saveNaicsCode = (): void => {
     if (!userData) return;
 
     if (naicsCode.length !== LENGTH) {
@@ -32,7 +33,8 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     }
 
     setIsInvalid(false);
-    await update({
+    setIsLoading(true);
+    update({
       ...userData,
       profileData: {
         ...userData.profileData,
@@ -42,8 +44,14 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
         ...userData.taskProgress,
         [props.task.id]: "COMPLETED",
       },
-    });
-    props.onSave();
+    })
+      .then(() => {
+        setIsLoading(false);
+        props.onSave();
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleChange = (value: string): void => {
@@ -84,7 +92,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
         />
         <hr className="margin-y-2" />
         <div className="flex flex-row">
-          <Button style="secondary" className="margin-left-auto" onClick={saveNaicsCode}>
+          <Button style="secondary" className="margin-left-auto" onClick={saveNaicsCode} loading={isLoading}>
             {Config.determineNaicsCode.saveButtonText}
           </Button>
         </div>
