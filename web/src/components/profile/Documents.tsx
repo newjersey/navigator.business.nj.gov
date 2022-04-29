@@ -58,9 +58,7 @@ export const Documents = (props: Props): ReactElement => {
           )}
         </ol>
       ) : (
-        <ul>
-          <li>{props.displayContent.documents.placeholder}</li>
-        </ul>
+        <Content>{props.displayContent.documents.placeholder || ""}</Content>
       )}
     </div>
   );

@@ -1699,7 +1699,7 @@ collections:
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "Placeholder", name: "placeholder", widget: "text", required: false }
       - { label: "Yes Button Copy", name: "radioButtonYesText", widget: "string", required: false }
       - { label: "No Button Copy", name: "radioButtonNoText", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
