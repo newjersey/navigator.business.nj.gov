@@ -30,14 +30,15 @@ export const PageSkeleton = (props: Props): ReactElement => {
       <footer>
         {props.showLegalMessage && (
           <div className="bg-base-lightest text-justify">
-            <SingleColumnContainer>
+            <hr className="margin-0" />
+            <SingleColumnContainer isWidePage={props.isWidePage}>
               <div className="padding-y-2 line-height-body-2">
                 <LegalMessage />
               </div>
             </SingleColumnContainer>
           </div>
         )}
-        <InnovFooter />
+        <InnovFooter isWidePage={props.isWidePage} />
       </footer>
     </>
   );

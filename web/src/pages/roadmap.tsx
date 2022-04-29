@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
-import { SinglePageLayout } from "@/components/njwds-extended/SinglePageLayout";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { GraduationBox } from "@/components/roadmap/GraduationBox";
 import { MiniProfile } from "@/components/roadmap/MiniProfile";
@@ -73,72 +73,74 @@ const RoadmapPage = (props: Props): ReactElement => {
   return (
     <PageSkeleton showLegalMessage={true}>
       <NavBar />
-      {!userData || userData?.formProgress !== "COMPLETED" ? (
-        <SinglePageLayout>
-          <div className="flex flex-justify-center flex-align-center margin-top-3 desktop:margin-top-0">
-            <CircularProgress id="roadmapPage" aria-label="roadmap page progress bar" aria-busy={true} />
-            <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
-          </div>
-        </SinglePageLayout>
-      ) : (
-        <div className="margin-top-6 desktop:margin-top-0">
-          <SinglePageLayout>
-            <div className="margin-bottom-205">
-              <h1 className="h1-styling-large">{getHeader()}</h1>
+      <main id="main">
+        {!userData || userData?.formProgress !== "COMPLETED" ? (
+          <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
+            <div className="flex flex-justify-center flex-align-center margin-top-3 desktop:margin-top-0">
+              <CircularProgress id="roadmapPage" aria-label="roadmap page progress bar" aria-busy={true} />
+              <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
             </div>
-            <UserDataErrorAlert />
-            {(!error || error !== "NO_DATA") && (
-              <>
-                <div className="allow-long usa-intro">
-                  <Content>{props.displayContent.contentMd}</Content>
-                </div>
-                <MiniProfile profileData={userData.profileData} />
-              </>
-            )}
-            <div className="margin-top-3">
-              {!roadmap ? (
-                <div className="flex flex-justify-center flex-align-center">
-                  <CircularProgress
-                    id="roadmapSection"
-                    aria-label="roadmap section progress bar"
-                    aria-busy={true}
-                  />
-                  <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
-                </div>
-              ) : (
+          </div>
+        ) : (
+          <SingleColumnContainer>
+            <div className="padding-top-6 padding-bottom-15">
+              <div className="margin-bottom-205">
+                <h1 className="h1-styling-large">{getHeader()}</h1>
+              </div>
+              <UserDataErrorAlert />
+              {(!error || error !== "NO_DATA") && (
                 <>
-                  {getSectionNames(roadmap).map((section) => (
-                    <SectionAccordion key={section} sectionType={section}>
-                      {roadmap.steps
-                        .filter((step) => step.section === section)
-                        .map((step, index, array) => (
-                          <Step key={step.step_number} step={step} last={index === array.length - 1} />
-                        ))}
-                    </SectionAccordion>
-                  ))}
-                  <div className="margin-top-6">
-                    <GraduationBox displayContent={props.profileDisplayContent} />
+                  <div className="allow-long usa-intro">
+                    <Content>{props.displayContent.contentMd}</Content>
                   </div>
+                  <MiniProfile profileData={userData.profileData} />
                 </>
               )}
+              <div className="margin-top-3">
+                {!roadmap ? (
+                  <div className="flex flex-justify-center flex-align-center">
+                    <CircularProgress
+                      id="roadmapSection"
+                      aria-label="roadmap section progress bar"
+                      aria-busy={true}
+                    />
+                    <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
+                  </div>
+                ) : (
+                  <>
+                    {getSectionNames(roadmap).map((section) => (
+                      <SectionAccordion key={section} sectionType={section}>
+                        {roadmap.steps
+                          .filter((step) => step.section === section)
+                          .map((step, index, array) => (
+                            <Step key={step.step_number} step={step} last={index === array.length - 1} />
+                          ))}
+                      </SectionAccordion>
+                    ))}
+                    <div className="margin-top-6">
+                      <GraduationBox displayContent={props.profileDisplayContent} />
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-          </SinglePageLayout>
-        </div>
-      )}
-      {successAlert && (
-        <ToastAlert
-          variant="success"
-          isOpen={successAlert}
-          close={() => {
-            setSuccessAlert(false);
-            router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
-          }}
-          heading={Config.profileDefaults.successTextHeader}
-          dataTestid="toast-alert-SUCCESS"
-        >
-          {Config.profileDefaults.successTextBody}
-        </ToastAlert>
-      )}
+          </SingleColumnContainer>
+        )}
+        {successAlert && (
+          <ToastAlert
+            variant="success"
+            isOpen={successAlert}
+            close={() => {
+              setSuccessAlert(false);
+              router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
+            }}
+            heading={Config.profileDefaults.successTextHeader}
+            dataTestid="toast-alert-SUCCESS"
+          >
+            {Config.profileDefaults.successTextBody}
+          </ToastAlert>
+        )}
+      </main>
     </PageSkeleton>
   );
 };

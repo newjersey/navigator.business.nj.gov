@@ -141,50 +141,55 @@ export const NavBarDesktop = (props: Props): ReactElement => {
     </MenuList>
   );
   return (
-    <nav
-      aria-label="Primary"
-      className={props.isWidePage ? "grid-container-widescreen desktop:padding-x-7" : "grid-container"}
-    >
-      <div className="display-flex flex-row flex-justify flex-align-center height-8">
-        <Link href={redirectUrl} passHref>
-          <a href={redirectUrl}>
-            <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
-          </a>
-        </Link>
-        <div className="z-100">
-          <button
-            className="clear-button"
-            ref={anchorRef}
-            aria-controls={open ? "menu-list-grow" : undefined}
-            aria-haspopup="true"
-            onClick={toggleDropdown}
-          >
-            <div className={`text-bold text-${textColor} flex flex-align-center`}>
-              <Icon className={`${isAuthenticated ? "usa-icon--size-4" : "usa-icon--size-3"} margin-right-1`}>
-                {accountIcon}
-              </Icon>
-              <div>{accountString}</div>
-              <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
-            </div>
-          </button>
-          <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{
-                  transformOrigin: placement === "bottom" ? "center top" : "center bottom",
-                }}
-              >
-                <Paper>
-                  <ClickAwayListener onClickAway={handleClose}>
-                    {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper>
+    <>
+      <nav
+        aria-label="Primary"
+        className={props.isWidePage ? "grid-container-widescreen desktop:padding-x-7" : "grid-container"}
+      >
+        <div className="display-flex flex-row flex-justify flex-align-center height-8">
+          <Link href={redirectUrl} passHref>
+            <a href={redirectUrl}>
+              <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
+            </a>
+          </Link>
+          <div className="z-100">
+            <button
+              className="clear-button"
+              ref={anchorRef}
+              aria-controls={open ? "menu-list-grow" : undefined}
+              aria-haspopup="true"
+              onClick={toggleDropdown}
+            >
+              <div className={`text-bold text-${textColor} flex flex-align-center`}>
+                <Icon
+                  className={`${isAuthenticated ? "usa-icon--size-4" : "usa-icon--size-3"} margin-right-1`}
+                >
+                  {accountIcon}
+                </Icon>
+                <div>{accountString}</div>
+                <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
+              </div>
+            </button>
+            <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{
+                    transformOrigin: placement === "bottom" ? "center top" : "center bottom",
+                  }}
+                >
+                  <Paper>
+                    <ClickAwayListener onClickAway={handleClose}>
+                      {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+      <hr className="margin-0" />
+    </>
   );
 };
