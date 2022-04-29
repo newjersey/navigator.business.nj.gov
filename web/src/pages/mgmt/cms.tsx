@@ -41,9 +41,29 @@ const CMS = dynamic(
       CMS.registerEditorComponent(ContextEditor);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("contextual-information", ContextInfoPreview);
+
+      // ----- Cannabis License -----
+      registerAsContent(CMS, [
+        "annual-general-requirements",
+        "conditional-general-requirements",
+        "diversely-owned-requirements",
+        "impact-zone-requirements",
+        "microbusiness-requirements",
+        "social-equity-requirements",
+        "annual-bottom-of-task",
+        "conditional-bottom-of-task",
+        "test-thing",
+      ]);
     }),
   { ssr: false, loading: Loading }
 );
+
+const registerAsContent = (CMS: typeof import("netlify-cms-app"), names: string[]) => {
+  for (const name of names) {
+    // @ts-expect-error: No type definition available
+    CMS.registerPreviewTemplate(name, ContentPreview);
+  }
+};
 
 const Admin = () => (
   <>

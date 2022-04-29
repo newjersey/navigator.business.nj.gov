@@ -251,6 +251,8 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const impactZoneRequirements = getMarkdown(loadFile("cannabis-license/impact-zone-requirements.md"));
   const microbusinessRequirements = getMarkdown(loadFile("cannabis-license/microbusiness-requirements.md"));
   const socialEquityRequirements = getMarkdown(loadFile("cannabis-license/social-equity-requirements.md"));
+  const conditionalBottomOfTask = getMarkdown(loadFile("cannabis-license/conditional-bottom-of-task.md"));
+  const annualBottomOfTask = getMarkdown(loadFile("cannabis-license/annual-bottom-of-task.md"));
 
   return {
     formationDisplayContent: {
@@ -311,6 +313,8 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       impactZoneRequirements: { contentMd: impactZoneRequirements.content },
       microbusinessRequirements: { contentMd: microbusinessRequirements.content },
       socialEquityRequirements: { contentMd: socialEquityRequirements.content },
+      conditionalBottomOfTask: { contentMd: conditionalBottomOfTask.content },
+      annualBottomOfTask: { contentMd: annualBottomOfTask.content },
     },
   };
 };
