@@ -1330,7 +1330,7 @@ describe("<BusinessFormation />", () => {
             businessAddressState: "NJ",
             businessAddressZipCode: `07601`,
           },
-          { municipality: generateMunicipality({ displayName: "Newark" }) }
+          { municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }) }
         );
 
         await submitBusinessNameTab();
@@ -1340,7 +1340,7 @@ describe("<BusinessFormation />", () => {
         expect(getInputElementByLabel("Member name").value).toBe("John Smith");
         expect(getInputElementByLabel("Member address line1").value).toBe("123 business address");
         expect(getInputElementByLabel("Member address line2").value).toBe("business suite 201");
-        expect(getInputElementByLabel("Member address city").value).toBe("Newark");
+        expect(getInputElementByLabel("Member address city").value).toBe("Hampton");
         expect(getInputElementByLabel("Member address state").value).toBe("NJ");
         expect(getInputElementByLabel("Member address zip code").value).toBe("07601");
       });
