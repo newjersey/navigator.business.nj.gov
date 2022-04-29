@@ -1,5 +1,6 @@
 ---
-placeholder: "You need to form your business. Complete this step in your Roadmap"
+placeholder: "Once you form your business we will automatically save any related
+  documents here. "
 ---
 
 ### Reference Documents
