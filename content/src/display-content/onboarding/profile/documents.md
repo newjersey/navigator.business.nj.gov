@@ -1,6 +1,6 @@
 ---
 placeholder: If you are an LLC, we will automatically add your formation
-  documents once you [Form Your Business]((/tasks/form-business-entity) on our
+  documents once you [Form Your Business](/tasks/form-business-entity) on our
   site.
 ---
 
