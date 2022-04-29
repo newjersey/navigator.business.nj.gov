@@ -69,7 +69,7 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - { label: Business Start Date Tooltip, name: businessStartDateTooltip, widget: string }
+              - { label: Business Start Date Tooltip, name: businessStartDateTooltip, widget: text }
               - {
                   label: Business Address - Header,
                   name: businessAddressHeader,
@@ -234,7 +234,7 @@ collections:
               - {
                   label: Legal Structure Warning Modal Body,
                   name: legalStructureWarningModalBody,
-                  widget: string,
+                  widget: text,
                 }
               - {
                   label: Legal Structure Warning Modal Continue Button Text,
@@ -312,8 +312,8 @@ collections:
                 }
               - { label: Name Check Placeholder Text, name: nameCheckPlaceholderText, widget: string }
               - { label: Name Check Validation Text, name: nameCheckValidationErrorText, widget: string }
-              - { label: Name Check Unavailable Text, name: nameCheckUnavailableText, widget: string }
-              - { label: Name Check Available Text, name: nameCheckAvailableText, widget: string }
+              - { label: Name Check Unavailable Text, name: nameCheckUnavailableText, widget: text }
+              - { label: Name Check Available Text, name: nameCheckAvailableText, widget: text }
               - { label: Name Check Field Label, name: nameCheckFieldLabel, widget: string }
               - { label: Next Button Text, name: nextButtonText, widget: string }
               - {
@@ -325,13 +325,13 @@ collections:
               - {
                   label: Opt In - Corp Watch Text,
                   name: optInCorpWatchText,
-                  widget: string,
+                  widget: text,
                   hint: This field supports Markdown,
                 }
               - {
                   label: Payment Disclaimer Text,
                   name: paymentDisclaimerText,
-                  widget: string,
+                  widget: text,
                   hint: This field supports Markdown,
                 }
               - { label: Payment Type - Error, name: paymentTypeErrorText, widget: string }
@@ -551,7 +551,7 @@ collections:
                   widget: string,
                 }
               - { label: Tab 2 - Header Text, name: secondTabHeaderText, widget: string }
-              - { label: Tab 2 - Text Before Header, name: secondTabDescriptionText, widget: string }
+              - { label: Tab 2 - Text Before Header, name: secondTabDescriptionText, widget: text }
               - { label: Tab 2 - Back Button Text, name: backButtonText, widget: string }
               - {
                   label: Tab 2 - Complete Task Progress Button Text,
@@ -561,7 +561,7 @@ collections:
               - {
                   label: Tab 2 - Text For None Of The Above Checkbox Selection,
                   name: noPriorityStatusText,
-                  widget: string,
+                  widget: text,
                 }
               - { label: Tab 2 - Social Equity Header Text, name: socialEquityHeaderText, widget: string }
               - { label: Tab 2 - Social Equity Button Text, name: socialEquityButtonText, widget: string }
@@ -604,14 +604,24 @@ collections:
             fields:
               - { label: Find Code Header, name: findCodeHeader, widget: string }
               - { label: Find Code Body Text, name: findCodeBodyText, widget: string }
-              - { label: siccode.com Link, name: sicCodeLink, widget: string }
-              - { label: naics.com Link, name: naicsLink, widget: string }
-              - { label: Input Label, name: inputLabel, widget: string }
+              - {
+                  label: siccode.com Link,
+                  name: sicCodeLink,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: naics.com Link, name: naicsLink, widget: string, hint: This field supports Markdown }
+              - { label: Input Label, name: inputLabel, widget: string, hint: This field supports Markdown }
               - { label: Input Placeholder, name: inputPlaceholder, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - { label: Validation Error Text, name: validationErrorText, widget: string }
               - { label: Has Saved Code Header, name: hasSavedCodeHeader, widget: string }
-              - { label: Success Message, name: successMessage, widget: string }
+              - {
+                  label: Success Message,
+                  name: successMessage,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
               - { label: Edit Text, name: editText, widget: string }
           - label: Cannabis Apply For License
             name: cannabisApplyForLicense
@@ -619,24 +629,65 @@ collections:
             widget: object
             summary: "{{cannabisApplyForLicense}}"
             fields:
-              - { label: Application Questions Text, name: applicationQuestionsText, widget: string }
+              - { label: Application Questions Text, name: applicationQuestionsText, widget: text }
               - { label: Business Size Header, name: businessSizeHeader, widget: string }
-              - { label: Microbusiness Radio Question, name: microbusinessRadioQuestion, widget: string }
-              - { label: Microbusiness Radio Yes, name: microbusinessRadioYes, widget: string }
-              - { label: Microbusiness Radio No, name: microbusinessRadioNo, widget: string }
+              - {
+                  label: Microbusiness Radio Question,
+                  name: microbusinessRadioQuestion,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio Yes,
+                  name: microbusinessRadioYes,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio No,
+                  name: microbusinessRadioNo,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
-              - { label: Priority Status Text, name: priorityStatusText, widget: string }
+              - {
+                  label: Priority Status Text,
+                  name: priorityStatusText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
               - {
                   label: Priority Status None Selected Text,
                   name: priorityStatusNoneSelectedText,
                   widget: string,
+                  hint: This field supports Markdown,
                 }
-              - { label: Diversely Owned Label, name: diverselyOwnedLabel, widget: string }
-              - { label: Diversely Owned Helper Text, name: diverselyOwnedHelperText, widget: string }
-              - { label: Impact Zone Label, name: impactZoneLabel, widget: string }
-              - { label: SBE Label, name: sbeLabel, widget: string }
+              - {
+                  label: Diversely Owned Label,
+                  name: diverselyOwnedLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Diversely Owned Helper Text,
+                  name: diverselyOwnedHelperText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Impact Zone Label,
+                  name: impactZoneLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: SBE Label, name: sbeLabel, widget: string, hint: This field supports Markdown }
               - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
-              - { label: Eligible Modal Body, name: eligibleModalBody, widget: string }
+              - {
+                  label: Eligible Modal Body,
+                  name: eligibleModalBody,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
               - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
               - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
               - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
@@ -670,13 +721,18 @@ collections:
               - { label: Unhide Opportunity Text, name: unHideOpportunityText, widget: string }
               - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: string }
               - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
-              - { label: Empty Calendar Title Text, name: emptyCalendarTitleText, widget: string }
-              - { label: Empty Calendar Body Text, name: emptyCalendarBodyText, widget: string }
+              - {
+                  label: Empty Calendar Title Text,
+                  name: emptyCalendarTitleText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Empty Calendar Body Text, name: emptyCalendarBodyText, widget: text }
               - { label: Funding Tag Text, name: fundingTagText, widget: string }
               - { label: Certification Tag Text, name: certificationTagText, widget: string }
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
-              - { label: Calendar Tooltip, name: calendarTooltip, widget: string }
+              - { label: Calendar Tooltip, name: calendarTooltip, widget: text }
               - { label: Back To Roadmap Header, name: backToRoadmapHeader, widget: string }
               - { label: Back To Roadmap Text, name: backToRoadmapText, widget: string }
               - { label: Back To Roadmap Link Text, name: backToRoadmapLinkText, widget: string }
@@ -698,7 +754,7 @@ collections:
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
               - { label: Hero - Call to Action, name: heroCallToActionText, widget: string }
               - { label: Section 2 - Header, name: section2HeaderText, widget: string }
-              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: string }
+              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
               - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
               - { label: Section 3 - Header, name: section3HeaderText, widget: string }
               - { label: Section 3 - Supporting Text, name: section3SupportingText, widget: string }
@@ -708,23 +764,15 @@ collections:
               - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
               - { label: Section 4 - Third Icon Text, name: section4ThirdIconText, widget: string }
               - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
-              - {
-                  label: Section 5 - First Supporting Text,
-                  name: section5FirstSupportingText,
-                  widget: string,
-                }
+              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
               - { label: Section 5 - Second Header Text, name: section5SecondHeaderText, widget: string }
               - {
                   label: Section 5 - Second Supporting Text,
                   name: section5SecondSupportingText,
-                  widget: string,
+                  widget: text,
                 }
               - { label: Section 5 - Third Header Text, name: section5ThirdHeaderText, widget: string }
-              - {
-                  label: Section 5 - Third Supporting Text,
-                  name: section5ThirdSupportingText,
-                  widget: string,
-                }
+              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
               - { label: Section 6 - Header Text, name: section6Header, widget: string }
               - { label: Card 1 - Header Line 1, name: card1HeaderLine1, widget: string }
               - { label: Card 1 - Header Line 2, name: card1HeaderLine2, widget: string }
@@ -733,12 +781,12 @@ collections:
               - { label: Card 1 - Button Link, name: card1ButtonLink, widget: string }
               - { label: Card 2 - Header Line 2, name: card2HeaderLine1, widget: string }
               - { label: Card 2 - Header Line 2, name: card2HeaderLine2, widget: string }
-              - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: string }
+              - { label: Card 2 - Supporting Text, name: card2SupportingText, widget: text }
               - { label: Card 2 - Button Text, name: card2Button, widget: string }
               - { label: Card 2 - Button Link, name: card2ButtonLink, widget: string }
               - { label: Card 3 - Header Line 3, name: card3HeaderLine1, widget: string }
               - { label: Card 3 - Header Line 3, name: card3HeaderLine2, widget: string }
-              - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: string }
+              - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
               - { label: Card 3 - Button Text, name: card3Button, widget: string }
           - label: Landing Page Experience B
             name: landingPageExperienceB
@@ -748,16 +796,8 @@ collections:
             fields:
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
               - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
-              - {
-                  label: Section 5 - First Supporting Text,
-                  name: section5FirstSupportingText,
-                  widget: string,
-                }
-              - {
-                  label: Section 5 - Third Supporting Text,
-                  name: section5ThirdSupportingText,
-                  widget: string,
-                }
+              - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
+              - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
               - { label: Section 5 - First Header Text, name: section5FirstHeaderText, widget: string }
           - label: Legal Messages
             name: legalMessageDefaults
@@ -765,7 +805,7 @@ collections:
             widget: object
             summary: "{{legalMessageDefaults}}"
             fields:
-              - { label: Line 1, name: legalMessageTextOne, widget: string }
+              - { label: Line 1, name: legalMessageTextOne, widget: text }
               - { label: Chat Label, name: legalMessageLegalChat, widget: string }
               - { label: Line 2, name: legalMessageTextTwo, widget: string }
           - label: Navigation Defaults
@@ -787,11 +827,11 @@ collections:
                   widget: string,
                 }
               - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
-              - { label: Guest Alert Body, name: guestAlertBody, widget: string }
+              - { label: Guest Alert Body, name: guestAlertBody, widget: text }
               - { label: Guest Success Toast Title, name: guestSuccessTitle, widget: string }
               - { label: Guest Success Toast Body, name: guestSuccessBody, widget: string }
               - { label: Guest Alert Modal Title, name: guestModalTitle, widget: string }
-              - { label: Guest Alert Modal Body, name: guestModalBody, widget: string }
+              - { label: Guest Alert Modal Body, name: guestModalBody, widget: text }
               - { label: Guest Alert Button, name: guestModalButtonText, widget: string }
               - { label: Guest Alert Sub Button text, name: guestModalSubText, widget: string }
           - label: Onboarding Defaults
@@ -920,7 +960,7 @@ collections:
               - { label: Congratulatory Modal - Body, name: congratulatorModalBody, widget: string }
               - { label: Congratulatory Modal - Link Text, name: congratulatorModalLinkText, widget: string }
               - { label: Graduation Header, name: graduationHeader, widget: string }
-              - { label: Graduation Body, name: graduationBodyText, widget: string }
+              - { label: Graduation Body, name: graduationBodyText, widget: text }
               - { label: Graduation Button, name: graduationButtonText, widget: string }
               - {
                   label: Graduation Modal Continue Button Text,
@@ -1017,12 +1057,12 @@ collections:
                   name: similarUnavailableNamesText,
                   widget: string,
                 }
-              - { label: Available Name Message, name: availableText, widget: string }
+              - { label: Available Name Message, name: availableText, widget: text }
               - { label: Update Button Text, name: updateButtonText, widget: string }
               - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
               - { label: Official Check Button, name: officialCheckButtonText, widget: string }
               - { label: Official Check Link, name: officialCheckButtonLink, widget: string }
-              - { label: Official Check Text, name: officialCheckText, widget: string }
+              - { label: Official Check Text, name: officialCheckText, widget: text }
               - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
           - label: Task - License Search
@@ -1037,7 +1077,7 @@ collections:
               - { label: Secondary CTA - Line 2, name: secondaryCTASecondLineText, widget: string }
               - { label: Tab 1 Label, name: tab1Text, widget: string }
               - { label: Tab 2 Label, name: tab2Text, widget: string }
-              - { label: Check Status Text, name: checkStatusText, widget: string }
+              - { label: Check Status Text, name: checkStatusText, widget: text }
               - { label: Business Name Label, name: businessNameLabel, widget: string }
               - { label: Business Name Placeholder, name: businessNamePlaceholder, widget: string }
               - { label: Address 1 Label, name: address1Label, widget: string }
@@ -1074,7 +1114,7 @@ collections:
                   widget: string,
                 }
               - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
-              - { label: Tooltip Text, name: tooltipText, widget: string }
+              - { label: Tooltip Text, name: tooltipText, widget: text }
 
   - name: addons
     label: Roadmap Add-ons
