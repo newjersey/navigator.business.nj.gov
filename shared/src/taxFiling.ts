@@ -3,6 +3,6 @@ export type TaxFilingData = {
 };
 
 export type TaxFiling = {
-  identifier: string;
-  dueDate: string;
+  readonly identifier: string;
+  readonly dueDate: string;
 };

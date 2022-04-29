@@ -1,18 +1,18 @@
 import { Municipality } from "./municipality";
 
 export interface FormationData {
-  formationFormData: FormationFormData;
-  formationResponse: FormationSubmitResponse | undefined;
-  getFilingResponse: GetFilingResponse | undefined;
+  readonly formationFormData: FormationFormData;
+  readonly formationResponse: FormationSubmitResponse | undefined;
+  readonly getFilingResponse: GetFilingResponse | undefined;
 }
 
 export interface FormationMember {
-  name: string;
-  addressLine1: string;
-  addressLine2: string;
-  addressCity: string;
-  addressState: string;
-  addressZipCode: string;
+  readonly name: string;
+  readonly addressLine1: string;
+  readonly addressLine2: string;
+  readonly addressCity: string;
+  readonly addressState: string;
+  readonly addressZipCode: string;
 }
 
 export interface FormationSigner {
@@ -21,35 +21,35 @@ export interface FormationSigner {
 }
 
 export interface FormationFormData {
-  businessName: string;
-  businessSuffix: BusinessSuffix | undefined;
-  businessStartDate: string;
-  businessAddressCity: Municipality | undefined;
-  businessAddressLine1: string;
-  businessAddressLine2: string;
-  businessAddressState: string;
-  businessAddressZipCode: string;
-  agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
-  agentNumber: string;
-  agentName: string;
-  agentEmail: string;
-  agentOfficeAddressLine1: string;
-  agentOfficeAddressLine2: string;
-  agentOfficeAddressCity: string;
-  agentOfficeAddressState: string;
-  agentOfficeAddressZipCode: string;
+  readonly businessName: string;
+  readonly businessSuffix: BusinessSuffix | undefined;
+  readonly businessStartDate: string;
+  readonly businessAddressCity: Municipality | undefined;
+  readonly businessAddressLine1: string;
+  readonly businessAddressLine2: string;
+  readonly businessAddressState: string;
+  readonly businessAddressZipCode: string;
+  readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
+  readonly agentNumber: string;
+  readonly agentName: string;
+  readonly agentEmail: string;
+  readonly agentOfficeAddressLine1: string;
+  readonly agentOfficeAddressLine2: string;
+  readonly agentOfficeAddressCity: string;
+  readonly agentOfficeAddressState: string;
+  readonly agentOfficeAddressZipCode: string;
   members: FormationMember[];
-  signer: FormationSigner;
+  readonly signer: FormationSigner;
   additionalSigners: FormationSigner[];
-  paymentType: PaymentType;
-  annualReportNotification: boolean;
-  corpWatchNotification: boolean;
-  officialFormationDocument: boolean;
-  certificateOfStanding: boolean;
-  certifiedCopyOfFormationDocument: boolean;
-  contactFirstName: string;
-  contactLastName: string;
-  contactPhoneNumber: string;
+  readonly paymentType: PaymentType;
+  readonly annualReportNotification: boolean;
+  readonly corpWatchNotification: boolean;
+  readonly officialFormationDocument: boolean;
+  readonly certificateOfStanding: boolean;
+  readonly certifiedCopyOfFormationDocument: boolean;
+  readonly contactFirstName: string;
+  readonly contactLastName: string;
+  readonly contactPhoneNumber: string;
 }
 
 export type FormationTextField = Exclude<
