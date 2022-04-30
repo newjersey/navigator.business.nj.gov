@@ -192,6 +192,8 @@ describe("<CannabisApplyForLicenseTask />", () => {
       impactZoneRequirements: { contentMd: "impactZoneRequirements-content" },
       microbusinessRequirements: { contentMd: "microbusinessRequirements-content" },
       socialEquityRequirements: { contentMd: "socialEquityRequirements-content" },
+      conditionalBottomOfTask: { contentMd: "conditionalBottomOfTask-content" },
+      annualBottomOfTask: { contentMd: "annualBottomOfTask-content" },
     };
 
     it("updates taskProgress to from not_started to in-progress when View Requirements is clicked", () => {
