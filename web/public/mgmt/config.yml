@@ -1855,7 +1855,7 @@ collections:
           - { label: "Content", name: "body", widget: "markdown" }
       - label: "Microbusiness Requirements"
         name: "microbusiness-requirements"
-        file: "content/src/display-content/cannabis-license/microbusines-requirements.md"
+        file: "content/src/display-content/cannabis-license/microbusiness-requirements.md"
         identifier_field: "{{fields.slug}}"
         slug: "{{fields.slug}}"
         editor:
