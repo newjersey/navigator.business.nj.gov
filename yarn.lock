@@ -3524,7 +3524,7 @@ __metadata:
     express: 4.18.0
     good-fences: 1.0.2
     jest: 27.5.1
-    jest-dynalite: 3.4.4
+    jest-dynalite: 3.5.1
     jest-junit: 13.2.0
     jsonwebtoken: 8.5.1
     prettier: 2.6.2
@@ -3672,7 +3672,7 @@ __metadata:
     husky: 7.0.4
     identity-obj-proxy: 3.0.0
     jest: 27.5.1
-    jest-dynalite: 3.4.4
+    jest-dynalite: 3.5.1
     jest-junit: 13.2.0
     jest-raw-loader: 1.0.1
     jsonwebtoken: 8.5.1
@@ -21083,9 +21083,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-dynalite@npm:3.4.4":
-  version: 3.4.4
-  resolution: "jest-dynalite@npm:3.4.4"
+"jest-dynalite@npm:3.5.1":
+  version: 3.5.1
+  resolution: "jest-dynalite@npm:3.5.1"
   dependencies:
     "@aws/dynamodb-auto-marshaller": ^0.7.1
     dynalite: ^3.2.1
@@ -21099,7 +21099,7 @@ __metadata:
       optional: true
     aws-sdk:
       optional: true
-  checksum: 587a7671db206cd5991ee2b2bf8a061d4d23fc419cb0a50509584c5c24ec6b0682d84cee2a23ac4358601d517b0ba92b680dbb005f159e6d4f83693c7a476fa9
+  checksum: da06ca7ba635f9d691af35a4ae1cb4bc713b3942c8ba7fb8eddcbc8d52b85030666693777ca471cf76257d787d07877365df997588d6e434dea94f66fa379507
   languageName: node
   linkType: hard
 
