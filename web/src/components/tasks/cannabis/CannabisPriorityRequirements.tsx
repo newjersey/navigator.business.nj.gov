@@ -78,7 +78,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 <h3 className="margin-y-4">{Config.cannabisPriorityStatus.minorityOrWomenHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{props.displayContent.genericMinorityAndWomenOwned.contentMd}</Content>
+                <Content>{props.displayContent.minorityAndWomenOwned.contentMd}</Content>
               </AccordionDetails>
             </Accordion>
           </>
@@ -94,7 +94,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 <h3 className="margin-y-4">{Config.cannabisPriorityStatus.veteranHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{props.displayContent.genericVeteranOwned.contentMd}</Content>
+                <Content>{props.displayContent.veteranOwned.contentMd}</Content>
               </AccordionDetails>
             </Accordion>
           </>
@@ -110,7 +110,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 <h3 className="margin-y-4">{Config.cannabisPriorityStatus.socialEquityHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{props.displayContent.cannabisSocialEquityBusiness.contentMd}</Content>
+                <Content>{props.displayContent.socialEquityBusiness.contentMd}</Content>
               </AccordionDetails>
             </Accordion>
           </>

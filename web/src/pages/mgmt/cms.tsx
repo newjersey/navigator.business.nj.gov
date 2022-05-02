@@ -52,7 +52,13 @@ const CMS = dynamic(
         "social-equity-requirements",
         "annual-bottom-of-task",
         "conditional-bottom-of-task",
-        "test-thing",
+      ]);
+
+      // ----- Cannabis Priority Status -----
+      registerAsContent(CMS, [
+        "cannabis-minority-and-women-owned",
+        "cannabis-social-equity",
+        "cannabis-veteran-owned",
       ]);
     }),
   { ssr: false, loading: Loading }
