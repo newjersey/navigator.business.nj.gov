@@ -1,4 +1,4 @@
-import { FormationSuccessDocument } from "@/components/tasks/business-formation/FormationSuccessDocument";
+import { FormationSuccessDocument } from "@/components/tasks/business-formation/success/FormationSuccessDocument";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";

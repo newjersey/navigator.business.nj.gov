@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FormationFields } from "@/lib/types/types";

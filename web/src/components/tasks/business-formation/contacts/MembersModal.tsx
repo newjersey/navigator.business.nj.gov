@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { GenericTextField } from "@/components/GenericTextField";
-import { StateDropdown } from "@/components/tasks/business-formation/StateDropdown";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { StateDropdown } from "@/components/StateDropdown";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyFormationMember, FormationMember, Municipality } from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";

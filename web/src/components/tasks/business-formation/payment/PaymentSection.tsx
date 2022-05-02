@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationDocuments } from "@/components/tasks/business-formation/BusinessFormationDocuments";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
-import { BusinessFormationNotifications } from "@/components/tasks/business-formation/BusinessFormationNotifications";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { PaymentTypeTable } from "@/components/tasks/business-formation/PaymentTypeTable";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { FormationChooseDocuments } from "@/components/tasks/business-formation/payment/FormationChooseDocuments";
+import { FormationChooseNotifications } from "@/components/tasks/business-formation/payment/FormationChooseNotifications";
+import { PaymentTypeTable } from "@/components/tasks/business-formation/payment/PaymentTypeTable";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
@@ -121,9 +121,9 @@ export const PaymentSection = (): ReactElement => {
       </div>
       <hr className="margin-bottom-2" />
       <Content>{state.displayContent.services.contentMd}</Content>
-      <BusinessFormationDocuments />
+      <FormationChooseDocuments />
       <PaymentTypeTable />
-      <BusinessFormationNotifications />
+      <FormationChooseNotifications />
       <div className="margin-top-3">
         <Content>{Config.businessFormationDefaults.paymentDisclaimerText}</Content>
       </div>

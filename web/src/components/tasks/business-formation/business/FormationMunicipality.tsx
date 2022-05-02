@@ -1,10 +1,10 @@
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Municipality } from "@businessnjgovnavigator/shared/";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
-export const BusinessFormationMunicipality = (): ReactElement => {
+export const FormationMunicipality = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
 
   const onValidation = (event: FocusEvent<HTMLInputElement>) => {

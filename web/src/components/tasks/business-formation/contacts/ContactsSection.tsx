@@ -1,8 +1,8 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { Members } from "@/components/tasks/business-formation/Members";
-import { Signatures } from "@/components/tasks/business-formation/Signatures";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { Members } from "@/components/tasks/business-formation/contacts/Members";
+import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationErrorTypes, FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";

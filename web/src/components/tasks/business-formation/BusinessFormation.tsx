@@ -3,7 +3,7 @@ import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
-import { FormationSuccessPage } from "@/components/tasks/business-formation/FormationSuccessPage";
+import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";

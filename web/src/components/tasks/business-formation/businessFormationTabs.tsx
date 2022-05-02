@@ -1,8 +1,8 @@
-import { BusinessNameSection } from "@/components/tasks/business-formation/BusinessNameSection";
-import { BusinessSection } from "@/components/tasks/business-formation/BusinessSection";
-import { ContactsSection } from "@/components/tasks/business-formation/ContactsSection";
-import { PaymentSection } from "@/components/tasks/business-formation/PaymentSection";
-import { ReviewSection } from "@/components/tasks/business-formation/ReviewSection";
+import { BusinessSection } from "@/components/tasks/business-formation/business/BusinessSection";
+import { ContactsSection } from "@/components/tasks/business-formation/contacts/ContactsSection";
+import { BusinessNameSection } from "@/components/tasks/business-formation/name/BusinessNameSection";
+import { PaymentSection } from "@/components/tasks/business-formation/payment/PaymentSection";
+import { ReviewSection } from "@/components/tasks/business-formation/review/ReviewSection";
 import { businessFormationTabsNames } from "@/lib/types/types";
 import React, { ReactElement } from "react";
 
