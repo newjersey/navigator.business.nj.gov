@@ -54,7 +54,7 @@ describe("migrate_v50_to_v51", () => {
         formationResponse: undefined,
         getFilingResponse: undefined,
       },
-      version: 42,
+      version: 50,
     };
   };
 });
