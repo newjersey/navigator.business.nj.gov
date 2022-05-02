@@ -38,7 +38,7 @@ const myNJServiceUrl = process.env.MYNJ_SERVICE_URL || "";
 const useFakeSelfReg = process.env.USE_FAKE_SELF_REG || "";
 const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 
-const documentS3Bucket = `nj-bfs-user-documents-${ssmLocation}`;
+const documentS3Bucket = `nj-bfs-user-documents-${stage}`;
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
