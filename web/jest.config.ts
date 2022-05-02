@@ -18,9 +18,10 @@ export default async (): Promise<Config.InitialOptions> => {
       "@businessnjgovnavigator/shared/(.*)": "<rootDir>/../shared/lib/shared/src/$1",
       "@businessnjgovnavigator/content/(.*)": "<rootDir>/../content/src/$1",
     },
+    resolver: `${__dirname}/test/resolver.js`,
     transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules.join("|")}))`],
     transform: {
-      "\\.md$": "jest-raw-loader",
+      "\\.md$": "<rootDir>/test/jest-raw-loader.js",
       "\\.[jt]sx?$": "@swc/jest",
     },
   };
