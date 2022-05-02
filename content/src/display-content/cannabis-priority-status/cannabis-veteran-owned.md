@@ -1,0 +1,2 @@
+- \[]{general-veteran-honorable-discharge}Federal Service-Disabled Veteran-Owned Business Determination Letter, Disability Award Letter or Federal Service-Disabled Veteran Letter. (Must be provided for Majority owners).
+- \[]{general-veteran-nj-residency}Proof of New Jersey residency for Majority owner(s)

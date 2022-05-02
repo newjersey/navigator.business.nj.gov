@@ -287,13 +287,13 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
 export const generateCannabisPriorityStatusDisplayContent = (
   overrides: Partial<CannabisPriorityStatusDisplayContent>
 ): CannabisPriorityStatusDisplayContent => ({
-  cannabisSocialEquityBusiness: {
+  socialEquityBusiness: {
     contentMd: `Content\n- []{some-social-equity-business-id${randomInt()}}}some-social-equity-business-content`,
   },
-  genericMinorityAndWomenOwned: {
+  minorityAndWomenOwned: {
     contentMd: `Content\n- []{some-minority-and-women-id${randomInt()}}}some-minority-and-women-content`,
   },
-  genericVeteranOwned: {
+  veteranOwned: {
     contentMd: `Content\n- []{some-veteran-id${randomInt()}}}some-veteran-content`,
   },
   ...overrides,

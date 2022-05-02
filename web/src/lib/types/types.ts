@@ -101,9 +101,9 @@ export interface LoadDisplayContent
 }
 
 export type CannabisPriorityStatusDisplayContent = {
-  cannabisSocialEquityBusiness: { contentMd: string };
-  genericMinorityAndWomenOwned: { contentMd: string };
-  genericVeteranOwned: { contentMd: string };
+  socialEquityBusiness: { contentMd: string };
+  minorityAndWomenOwned: { contentMd: string };
+  veteranOwned: { contentMd: string };
 };
 
 export type CannabisApplyForLicenseDisplayContent = {
@@ -160,15 +160,9 @@ export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
 export const createEmptyCannabisPriorityStatusDisplayContent = (): CannabisPriorityStatusDisplayContent => ({
-  cannabisSocialEquityBusiness: {
-    contentMd: "",
-  },
-  genericMinorityAndWomenOwned: {
-    contentMd: "",
-  },
-  genericVeteranOwned: {
-    contentMd: "",
-  },
+  socialEquityBusiness: { contentMd: "" },
+  minorityAndWomenOwned: { contentMd: "" },
+  veteranOwned: { contentMd: "" },
 });
 
 export const createEmptyCannabisApplyForLicenseDisplayContent =

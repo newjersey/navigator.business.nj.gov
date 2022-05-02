@@ -538,64 +538,6 @@ collections:
               - { label: Success Page - Header, name: successPageHeader, widget: string }
               - { label: Success Page - Subheader, name: successPageSubheader, widget: string }
               - { label: Update your Profile text, name: updateYourProfileLinkText, widget: string }
-          - label: Cannabis Priority Status
-            name: cannabisPriorityStatus
-            collapsed: true
-            widget: object
-            summary: "{{cannabisPriorityStatus}}"
-            fields:
-              - { label: Tab 1 - Next Button Text, name: nextButtonText, widget: string }
-              - {
-                  label: Tab 1 - None Of The Above Checkbox Label,
-                  name: noPriorityStatusCheckboxText,
-                  widget: string,
-                }
-              - { label: Tab 2 - Header Text, name: secondTabHeaderText, widget: string }
-              - { label: Tab 2 - Text Before Header, name: secondTabDescriptionText, widget: text }
-              - { label: Tab 2 - Back Button Text, name: backButtonText, widget: string }
-              - {
-                  label: Tab 2 - Complete Task Progress Button Text,
-                  name: completeTaskProgressButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Tab 2 - Text For None Of The Above Checkbox Selection,
-                  name: noPriorityStatusText,
-                  widget: text,
-                }
-              - { label: Tab 2 - Social Equity Header Text, name: socialEquityHeaderText, widget: string }
-              - { label: Tab 2 - Social Equity Button Text, name: socialEquityButtonText, widget: string }
-              - { label: Tab 2 - Social Equity Button Link, name: socialEquityButtonLink, widget: string }
-              - { label: Tab 2 - Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
-              - { label: Tab 2 - Impact Zone Text, name: impactZoneText, widget: string }
-              - { label: Tab 2 - Veteran Header Text, name: veteranHeaderText, widget: string }
-              - {
-                  label: Tab 2 - Minority Or Women Header Text,
-                  name: minorityOrWomenHeaderText,
-                  widget: string,
-                }
-              - {
-                  label: Tab 2 - Veteran Minority Or Women Button Text,
-                  name: certificationButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Tab 2 - Veteran Minority Or Women Button Link,
-                  name: certificationButtonLink,
-                  widget: string,
-                }
-              - { label: Tab 2 - Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
-              - {
-                  label: Tab 2 - Green Box Minority Or Women Text,
-                  name: greenBoxMinorityOrWomenText,
-                  widget: string,
-                }
-              - { label: Tab 2 - Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
-              - {
-                  label: Tab 2 - Green Box Social Equity Text,
-                  name: greenBoxSocialEquityText,
-                  widget: string,
-                }
           - label: Determine NAICS Code Task
             name: determineNaicsCode
             collapsed: true
@@ -712,7 +654,14 @@ collections:
             widget: object
             summary: "{{landingPageExperienceB}}"
             fields:
+              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
+              - { label: Hero - Second Line, name: heroCallOutSecondLineText, widget: string }
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Hero - Call to Action, name: heroCallToActionText, widget: string }
+              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
+              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
+              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
+              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
               - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
               - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
               - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
@@ -1780,19 +1729,102 @@ collections:
                 display_fields: ["{{filename}}"]
                 multiple: true
 
-  - name: "certification-checklist"
-    label: "Certification Checklist"
-    folder: "content/src/display-content/certification-checklist"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
+  - name: "cannabis-priority-status"
+    label: "Cannabis Priority Status"
     delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
+    create: false
+    files:
+      - label: "Minority and Women Owned Checklist"
+        name: "cannabis-minority-and-women-owned"
+        file: "content/src/display-content/cannabis-priority-status/cannabis-minority-and-women-owned.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Social Equity Checklist"
+        name: "cannabis-social-equity"
+        file: "content/src/display-content/cannabis-priority-status/cannabis-social-equity-business.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Veteran-Owned Checklist"
+        name: "cannabis-veteran-owned"
+        file: "content/src/display-content/cannabis-priority-status/cannabis-veteran-owned.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Config"
+        name: "config"
+        file: "content/src/fieldConfig/config.json"
+        editor:
+          preview: false
+        fields:
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: false
+            widget: object
+            summary: "{{cannabisPriorityStatus}}"
+            fields:
+              - { label: Tab 1 - Next Button Text, name: nextButtonText, widget: string }
+              - {
+                  label: Tab 1 - None Of The Above Checkbox Label,
+                  name: noPriorityStatusCheckboxText,
+                  widget: string,
+                }
+              - { label: Tab 2 - Header Text, name: secondTabHeaderText, widget: string }
+              - { label: Tab 2 - Text Before Header, name: secondTabDescriptionText, widget: text }
+              - { label: Tab 2 - Back Button Text, name: backButtonText, widget: string }
+              - {
+                  label: Tab 2 - Complete Task Progress Button Text,
+                  name: completeTaskProgressButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Text For None Of The Above Checkbox Selection,
+                  name: noPriorityStatusText,
+                  widget: text,
+                }
+              - { label: Tab 2 - Social Equity Header Text, name: socialEquityHeaderText, widget: string }
+              - { label: Tab 2 - Social Equity Button Text, name: socialEquityButtonText, widget: string }
+              - { label: Tab 2 - Social Equity Button Link, name: socialEquityButtonLink, widget: string }
+              - { label: Tab 2 - Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
+              - { label: Tab 2 - Impact Zone Text, name: impactZoneText, widget: string }
+              - { label: Tab 2 - Veteran Header Text, name: veteranHeaderText, widget: string }
+              - {
+                  label: Tab 2 - Minority Or Women Header Text,
+                  name: minorityOrWomenHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Veteran Minority Or Women Button Text,
+                  name: certificationButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Veteran Minority Or Women Button Link,
+                  name: certificationButtonLink,
+                  widget: string,
+                }
+              - { label: Tab 2 - Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
+              - {
+                  label: Tab 2 - Green Box Minority Or Women Text,
+                  name: greenBoxMinorityOrWomenText,
+                  widget: string,
+                }
+              - { label: Tab 2 - Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
+              - {
+                  label: Tab 2 - Green Box Social Equity Text,
+                  name: greenBoxSocialEquityText,
+                  widget: string,
+                }
 
   - label: "Cannabis License"
     name: "cannabis-license"
@@ -1879,7 +1911,7 @@ collections:
         fields:
           - label: Cannabis Apply For License
             name: cannabisApplyForLicense
-            collapsed: true
+            collapsed: false
             widget: object
             summary: "{{cannabisApplyForLicense}}"
             fields:

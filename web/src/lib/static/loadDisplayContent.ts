@@ -231,15 +231,13 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
 
   const signatureHeader = getMarkdown(loadFile("business-formation/signatures.md"));
 
-  const cannabisSocialEquityBusinessChecklist = getMarkdown(
-    loadFile("certification-checklist/cannabis-social-equity-business.md")
+  const socialEquityPriority = getMarkdown(
+    loadFile("cannabis-priority-status/cannabis-social-equity-business.md")
   );
-  const genericMinorityAndWomenOwnedChecklist = getMarkdown(
-    loadFile("certification-checklist/generic-minority-and-women-owned.md")
+  const minorityWomenOwnedPriority = getMarkdown(
+    loadFile("cannabis-priority-status/cannabis-minority-and-women-owned.md")
   );
-  const genericVeteranOwnedChecklist = getMarkdown(
-    loadFile("certification-checklist/generic-veteran-owned.md")
-  );
+  const veteranOwnedPriority = getMarkdown(loadFile("cannabis-priority-status/cannabis-veteran-owned.md"));
 
   const annualGeneralRequirements = getMarkdown(loadFile("cannabis-license/annual-general-requirements.md"));
   const conditionalGeneralRequirements = getMarkdown(
@@ -296,15 +294,9 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       },
     },
     cannabisPriorityStatusDisplayContent: {
-      cannabisSocialEquityBusiness: {
-        contentMd: cannabisSocialEquityBusinessChecklist.content,
-      },
-      genericMinorityAndWomenOwned: {
-        contentMd: genericMinorityAndWomenOwnedChecklist.content,
-      },
-      genericVeteranOwned: {
-        contentMd: genericVeteranOwnedChecklist.content,
-      },
+      socialEquityBusiness: { contentMd: socialEquityPriority.content },
+      minorityAndWomenOwned: { contentMd: minorityWomenOwnedPriority.content },
+      veteranOwned: { contentMd: veteranOwnedPriority.content },
     },
     cannabisApplyForLicenseDisplayContent: {
       annualGeneralRequirements: { contentMd: annualGeneralRequirements.content },
