@@ -5,15 +5,15 @@ import { createEmptyProfileData, ProfileData } from "./profileData";
 import { TaxFilingData } from "./taxFiling";
 
 export interface UserData {
-  user: BusinessUser;
-  profileData: ProfileData;
-  formProgress: FormProgress;
-  taskProgress: Record<string, TaskProgress>;
-  taskItemChecklist: Record<string, boolean>;
-  licenseData: LicenseData | undefined;
-  preferences: Preferences;
-  taxFilingData: TaxFilingData;
-  formationData: FormationData;
+  readonly user: BusinessUser;
+  readonly profileData: ProfileData;
+  readonly formProgress: FormProgress;
+  readonly taskProgress: Record<string, TaskProgress>;
+  readonly taskItemChecklist: Record<string, boolean>;
+  readonly licenseData: LicenseData | undefined;
+  readonly preferences: Preferences;
+  readonly taxFilingData: TaxFilingData;
+  readonly formationData: FormationData;
 }
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {

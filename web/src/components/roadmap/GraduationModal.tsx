@@ -60,9 +60,14 @@ export const GraduationModal = (props: Props): ReactElement => {
       const userProfileData = userData.profileData;
       if (!userProfileData.sectorId && userProfileData.industryId) {
         const industry = Industries.find((i) => i.id == userProfileData.industryId);
-        userProfileData.sectorId = industry?.defaultSectorId;
+        const newProfileData = {
+          ...userProfileData,
+          sectorId: industry?.defaultSectorId,
+        };
+        setProfileData(newProfileData);
+      } else {
+        setProfileData(userData.profileData);
       }
-      setProfileData(userProfileData);
     }
   }, userData);
 

@@ -11,15 +11,15 @@ export type RegistrationStatus = typeof registrationStatusList[number];
 export type ABExperience = "ExperienceA" | "ExperienceB";
 
 export type BusinessUser = {
-  name?: string;
-  email: string;
-  id: string;
-  externalStatus: ExternalStatus;
-  receiveNewsletter: boolean;
-  userTesting: boolean;
-  myNJUserKey?: string;
-  intercomHash?: string;
-  abExperience: ABExperience;
+  readonly name?: string;
+  readonly email: string;
+  readonly id: string;
+  readonly externalStatus: ExternalStatus;
+  readonly receiveNewsletter: boolean;
+  readonly userTesting: boolean;
+  readonly myNJUserKey?: string;
+  readonly intercomHash?: string;
+  readonly abExperience: ABExperience;
 };
 
 export const decideABExperience = (): ABExperience => {

@@ -7,6 +7,7 @@ import {
   generateFormationData,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
+  generateProfileData,
   generateUserData,
 } from "../../test/factories";
 import { saveFileFromUrl } from "../domain/s3Writer";
@@ -135,6 +136,13 @@ describe("formationRouter", () => {
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
         }),
+        profileData: generateProfileData({
+          documents: {
+            certifiedDoc: "",
+            formationDoc: "",
+            standingDoc: "",
+          },
+        }),
       });
       stubUserDataClient.get.mockResolvedValue(userData);
       const response = await request(app).get(`/completed-filing`).send();
@@ -181,6 +189,13 @@ describe("formationRouter", () => {
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
         }),
+        profileData: generateProfileData({
+          documents: {
+            certifiedDoc: "",
+            formationDoc: "",
+            standingDoc: "",
+          },
+        }),
       });
       stubUserDataClient.get.mockResolvedValue(userData);
       await request(app).get(`/completed-filing`).send();
@@ -201,6 +216,13 @@ describe("formationRouter", () => {
       const userData = generateUserData({
         formationData: generateFormationData({
           formationResponse: generateFormationSubmitResponse({ formationId: "some-formation-id" }),
+        }),
+        profileData: generateProfileData({
+          documents: {
+            certifiedDoc: "",
+            formationDoc: "",
+            standingDoc: "",
+          },
         }),
       });
       stubUserDataClient.get.mockResolvedValue(userData);
