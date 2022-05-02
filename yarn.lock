@@ -3498,7 +3498,7 @@ __metadata:
     "@aws-sdk/util-dynamodb": 3.76.0
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 27.5.1
-    "@serverless/typescript": 3.8.0
+    "@serverless/typescript": 3.15.2
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
@@ -3530,7 +3530,7 @@ __metadata:
     prettier: 2.6.2
     prettier-plugin-organize-imports: 2.3.4
     rimraf: 3.0.2
-    serverless: 3.15.2
+    serverless: 3.16.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.7.0
@@ -3598,7 +3598,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.1.5
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 3.8.0
+    "@serverless/typescript": 3.15.2
     "@storybook/addon-a11y": 6.4.22
     "@storybook/addon-actions": 6.4.22
     "@storybook/addon-docs": 6.4.22
@@ -3700,7 +3700,7 @@ __metadata:
     sass: 1.51.0
     sass-loader: 12.6.0
     semantic-release: 19.0.2
-    serverless: 3.15.2
+    serverless: 3.16.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.7.0
@@ -7533,10 +7533,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:3.8.0":
-  version: 3.8.0
-  resolution: "@serverless/typescript@npm:3.8.0"
-  checksum: 9dd2df51721ead0e9dfe29c2384e8b7f1ac02503f86f3b1572b0b54f853c186857507956cf196231e3b1baf94f5fb7542a1686c0f2acb4c18060487bff45326d
+"@serverless/typescript@npm:3.15.2":
+  version: 3.15.2
+  resolution: "@serverless/typescript@npm:3.15.2"
+  checksum: 22e424917edcbb30c647955e54775d96cd63a73d3b68fc567007c7cf299e1c1a46d1e135977f9eb08eb2f4594f092cab7de81c6e6cbec386cf2cde23878b0a7d
   languageName: node
   linkType: hard
 
@@ -11664,9 +11664,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1097.0, aws-sdk@npm:^2.1119.0, aws-sdk@npm:^2.7.0":
-  version: 2.1121.0
-  resolution: "aws-sdk@npm:2.1121.0"
+"aws-sdk@npm:^2.1097.0, aws-sdk@npm:^2.1124.0, aws-sdk@npm:^2.7.0":
+  version: 2.1125.0
+  resolution: "aws-sdk@npm:2.1125.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -11677,7 +11677,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: ab85098e8dc3cfc5eb6486e9a04131d3fb411f472d5bd8a52c35021d4e871338cc2f4455983c6abdaefc18838381ef433d85fdcd7d2561c9c483a64bc1636229
+  checksum: 78bffeea24ac47b9159dbf14aa405fb6c12ba1c749464e42a97b07d806a6290a9490f1453386afd7835166290dbfebf6561082c6b166e1353ccf2b4da482c6e7
   languageName: node
   linkType: hard
 
@@ -31347,9 +31347,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.15.2":
-  version: 3.15.2
-  resolution: "serverless@npm:3.15.2"
+"serverless@npm:3.16.0":
+  version: 3.16.0
+  resolution: "serverless@npm:3.16.0"
   dependencies:
     "@serverless/dashboard-plugin": ^6.2.2
     "@serverless/platform-client": ^4.3.2
@@ -31357,7 +31357,7 @@ __metadata:
     ajv: ^8.11.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.1
-    aws-sdk: ^2.1119.0
+    aws-sdk: ^2.1124.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
@@ -31407,7 +31407,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 9a2d439b8dccb7d1551b5a7b78c9272b76b744626843118ff447d014c15f0105379869adcdd6112aae61fe3f09fc333cbf2bbf045ef293e2214ce97ad445633d
+  checksum: 039a91e7e278ac3769f5bfda3e0dbebbec7c0714280d7e3f7b804ab963c69b4aa8e71ef62a41bd3a1e9b090598f5813991a71557ba40774ca874c67384b463d0
   languageName: node
   linkType: hard
 
