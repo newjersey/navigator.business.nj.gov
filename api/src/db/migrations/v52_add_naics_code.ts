@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v51UserData } from "./v51_add_cpa_field";
 
 export interface v52UserData {
@@ -47,7 +48,8 @@ interface v52ProfileDocuments {
   standingDoc: string;
   certifiedDoc: string;
 }
-interface v52ProfileData {
+
+export interface v52ProfileData {
   hasExistingBusiness: boolean | undefined;
   initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
   businessName: string;
@@ -247,3 +249,83 @@ type v52GetFilingResponse = {
 };
 
 // ---------------- v52 factories ----------------
+export const generatev52User = (overrides: Partial<v52BusinessUser>): v52BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    abExperience: "ExperienceA",
+    ...overrides,
+  };
+};
+
+export const generatev52ProfileData = (overrides: Partial<v52ProfileData>): v52ProfileData => {
+  return {
+    hasExistingBusiness: false,
+    initialOnboardingFlow: "STARTING",
+    cannabisLicenseType: undefined,
+    documents: { formationDoc: "", standingDoc: "", certifiedDoc: "" },
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    requiresCpa: false,
+    homeBasedBusiness: true,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    ownershipTypeIds: [],
+    existingEmployees: undefined,
+    taxPin: undefined,
+    sectorId: undefined,
+    naicsCode: "",
+    ...overrides,
+  };
+};
+
+export const generatev52FormationFormData = (
+  overrides: Partial<v52FormationFormData>
+): v52FormationFormData => {
+  return {
+    businessSuffix: undefined,
+    businessStartDate: "",
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "",
+    businessAddressZipCode: "",
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "",
+    agentOfficeAddressZipCode: "",
+    members: [],
+    signer: "",
+    additionalSigners: [],
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
+    officialFormationDocument: false,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    ...overrides,
+  };
+};

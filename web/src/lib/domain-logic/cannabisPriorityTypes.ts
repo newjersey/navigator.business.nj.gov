@@ -1,6 +1,6 @@
 export const priorityTypesObj: Record<PriorityType, string[]> = {
   minorityOrWomen: ["general-minority-owned", "general-women-owned"],
-  veteran: ["general-veteran-owned"],
+  veteran: ["general-dvob"],
   impactZone: [
     "cannabis-business-in-impact-zone",
     "cannabis-owner-in-impact-zone",
