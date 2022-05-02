@@ -70,7 +70,7 @@
     "unified": "10.1.2"
   },
   "devDependencies": {
-    "@babel/core": "7.17.9",
+    "@babel/core": "7.17.10",
     "@jest/types": "27.5.1",
     "@mdx-js/react": "2.1.1",
     "@next/bundle-analyzer": "12.1.5",
