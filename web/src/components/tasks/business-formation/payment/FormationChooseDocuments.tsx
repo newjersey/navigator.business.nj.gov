@@ -1,11 +1,11 @@
 import { Content } from "@/components/Content";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { getDollarValue } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 
-export const BusinessFormationDocuments = (): ReactElement => {
+export const FormationChooseDocuments = (): ReactElement => {
   const { state, setFormationFormData } = useContext(FormationContext);
   const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
 

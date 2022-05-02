@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
-import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/BusinessNameAndLegalStructure";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";

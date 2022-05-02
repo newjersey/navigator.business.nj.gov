@@ -1,4 +1,4 @@
-import { BusinessFormation } from "@/components/tasks/BusinessFormation";
+import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { NameAvailability } from "@/lib/types/types";

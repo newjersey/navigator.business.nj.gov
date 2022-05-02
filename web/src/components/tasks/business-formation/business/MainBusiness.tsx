@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
-import { BusinessFormationMunicipality } from "@/components/tasks/business-formation/BusinessFormationMunicipality";
+import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
+import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
+import { FormationStartDate } from "@/components/tasks/business-formation/business/FormationStartDate";
+import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/BusinessNameAndLegalStructure";
-import { BusinessStartDate } from "@/components/tasks/business-formation/BusinessStartDate";
-import { BusinessSuffixDropdown } from "@/components/tasks/business-formation/BusinessSuffixDropdown";
 import { zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
@@ -14,10 +14,10 @@ export const MainBusiness = (): ReactElement => {
       <BusinessNameAndLegalStructure />
       <div className="grid-row grid-gap-2">
         <div className="tablet:grid-col-6">
-          <BusinessSuffixDropdown />
+          <SuffixDropdown />
         </div>
         <div className="tablet:grid-col-6 margin-bottom-2">
-          <BusinessStartDate />
+          <FormationStartDate />
         </div>
       </div>
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
@@ -39,7 +39,7 @@ export const MainBusiness = (): ReactElement => {
       <div className="grid-row grid-gap-2">
         <div className="margin-bottom-2 grid-col-12 tablet:grid-col-6">
           <span className="text-bold">{Config.businessFormationDefaults.businessAddressCityLabel}</span>
-          <BusinessFormationMunicipality />
+          <FormationMunicipality />
         </div>
         <div className="margin-bottom-2 form-input grid-col-5 tablet:grid-col-2">
           <BusinessFormationTextField

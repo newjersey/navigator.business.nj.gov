@@ -1,8 +1,8 @@
 import { Button } from "@/components/njwds-extended/Button";
+import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
+import { RegisteredAgent } from "@/components/tasks/business-formation/business/RegisteredAgent";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
-import { MainBusiness } from "@/components/tasks/business-formation/MainBusiness";
-import { RegisteredAgent } from "@/components/tasks/business-formation/RegisteredAgent";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";

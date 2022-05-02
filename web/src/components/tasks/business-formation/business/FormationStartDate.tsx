@@ -1,7 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import { FormationContext } from "@/components/tasks/BusinessFormation";
+import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
@@ -16,7 +16,7 @@ import { TextField } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
 advancedDateLibrary();
 
-export const BusinessStartDate = (): ReactElement => {
+export const FormationStartDate = (): ReactElement => {
   const [showError, setShowError] = useState<boolean>(false);
 
   const { state, setFormationFormData } = useContext(FormationContext);
