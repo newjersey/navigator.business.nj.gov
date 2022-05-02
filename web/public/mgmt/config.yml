@@ -654,7 +654,14 @@ collections:
             widget: object
             summary: "{{landingPageExperienceB}}"
             fields:
+              - { label: Hero - First Line, name: heroCallOutFirstLineText, widget: string }
+              - { label: Hero - Second Line, name: heroCallOutSecondLineText, widget: string }
               - { label: Hero - Supporting Text, name: heroSupportingText, widget: string }
+              - { label: Hero - Call to Action, name: heroCallToActionText, widget: string }
+              - { label: Section 2 - Header, name: section2HeaderText, widget: string }
+              - { label: Section 2 - Supporting Text, name: section2SupportingText, widget: text }
+              - { label: Section 2 - Call to Action, name: section2CallToActionText, widget: string }
+              - { label: Section 3 - Call to Action, name: section3CallToActionText, widget: string }
               - { label: Section 4 - Second Icon Text, name: section4SecondIconText, widget: string }
               - { label: Section 5 - First Supporting Text, name: section5FirstSupportingText, widget: text }
               - { label: Section 5 - Third Supporting Text, name: section5ThirdSupportingText, widget: text }
