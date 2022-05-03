@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@businessnjgovnavigator/shared": "*",
-    "@jest/types": "27.5.1",
+    "@jest/types": "28.0.2",
     "@serverless/typescript": "3.15.2",
     "@types/cors": "2.8.12",
     "@types/dedent": "0.7.0",
@@ -72,7 +72,7 @@
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
     "good-fences": "1.0.2",
-    "jest": "27.5.1",
+    "jest": "28.0.3",
     "jest-dynalite": "3.5.1",
     "jest-junit": "13.2.0",
     "prettier": "2.6.2",
