@@ -115,7 +115,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const [currentContent, setCurrentContent] = useState<UserDisplayContent>(
-    props.displayContent["STARTING"] as UserDisplayContent
+    props.displayContent[currentFlow] as UserDisplayContent
   );
   const hasHandledRouting = useRef<boolean>(false);
 
@@ -164,7 +164,9 @@ const OnboardingPage = (props: Props): ReactElement => {
     if (currentUserData) {
       setProfileData(currentUserData.profileData);
       setUser(currentUserData.user);
-      setCurrentFlow(currentUserData.profileData.hasExistingBusiness ? "OWNING" : "STARTING");
+      const flow = currentUserData.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+      setCurrentFlow(flow);
+      setCurrentContent(props.displayContent[flow] as UserDisplayContent);
     } else if (state.isAuthenticated == IsAuthenticated.FALSE) {
       currentUserData = createEmptyUserData(state.user);
       setRegistrationDimension("Began Onboarding");
@@ -182,11 +184,8 @@ const OnboardingPage = (props: Props): ReactElement => {
           const queryPage = Number(router.query.page);
 
           const hasAnsweredExistingBusiness = currentUserData?.profileData.hasExistingBusiness !== undefined;
-          const currentFlowInUserData = currentUserData?.profileData.hasExistingBusiness
-            ? "OWNING"
-            : "STARTING";
           const requestedPageIsInRange =
-            queryPage <= onboardingFlows[currentFlowInUserData].pages.length && queryPage > 0;
+            queryPage <= onboardingFlows[currentFlow].pages.length && queryPage > 0;
 
           if (hasAnsweredExistingBusiness && requestedPageIsInRange) {
             setPage({ current: queryPage, previous: queryPage - 1 });
@@ -199,6 +198,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         }
       })();
   }, [
+    props.displayContent,
+    currentFlow,
     router,
     router.isReady,
     router.query.page,

@@ -10,6 +10,7 @@ import {
   createEmptyUser,
   createEmptyUserData,
   LookupIndustryById,
+  ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { waitFor, within } from "@testing-library/react";
@@ -24,6 +25,14 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
+
+const generateTestUserData = (overrides: Partial<ProfileData>) =>
+  generateUserData({
+    profileData: generateProfileData({
+      ...overrides,
+    }),
+    formProgress: "UNSTARTED",
+  });
 
 describe("onboarding - starting a business", () => {
   beforeEach(() => {
@@ -57,19 +66,104 @@ describe("onboarding - starting a business", () => {
       })
     );
   });
+  describe("page 1", () => {
+    it("uses special template eval for step 1 label", async () => {
+      const { subject, page } = renderPage({});
+      expect(
+        subject.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
+      ).toBeInTheDocument();
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+      expect(
+        subject.getByText(
+          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "5" })
+        )
+      ).toBeInTheDocument();
+    });
 
-  it("uses special template eval for step 1 label", async () => {
-    const { subject, page } = renderPage({});
-    expect(
-      subject.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
-    ).toBeInTheDocument();
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    expect(
-      subject.getByText(
-        templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "5" })
-      )
-    ).toBeInTheDocument();
+    it("does not display the legal structure dropdown", async () => {
+      const { subject, page } = renderPage({});
+      page.chooseRadio("has-existing-business-false");
+      expect(subject.queryByLabelText("Legal structure")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("page 2", () => {
+    it("prevents user from moving after Step 2 if you have not selected an industry", async () => {
+      const userData = generateTestUserData({ hasExistingBusiness: false, industryId: undefined });
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { subject, page } = renderPage({ userData });
+      page.clickNext();
+      expect(subject.getByTestId("step-2")).toBeInTheDocument();
+      expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
+      expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    });
+
+    it("allows user to move past Step 2 if you have selected an industry", async () => {
+      const userData = generateTestUserData({ hasExistingBusiness: false, industryId: undefined });
+      useMockRouter({ isReady: true, query: { page: "2" } });
+      const { subject, page } = renderPage({ userData });
+      page.selectByText("Industry", "Any Other Business Type");
+      await page.visitStep3();
+      expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(subject.getByTestId("step-3")).toBeInTheDocument();
+      expect(subject.queryByTestId("step-2")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("page 3", () => {
+    it("prevents user from moving after Step 3 if you have not selected a legal structure", async () => {
+      const userData = generateTestUserData({ hasExistingBusiness: false, legalStructureId: undefined });
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      const { subject, page } = renderPage({ userData });
+      page.clickNext();
+      expect(subject.getByTestId("step-3")).toBeInTheDocument();
+      expect(subject.queryByTestId("step-4")).not.toBeInTheDocument();
+      expect(subject.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
+    });
+
+    it("allows user to move past Step 3 if you have selected a legal structure", async () => {
+      const userData = generateTestUserData({ hasExistingBusiness: false, legalStructureId: undefined });
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      const { subject, page } = renderPage({ userData });
+      page.chooseRadio("general-partnership");
+      await page.visitStep4();
+      expect(subject.queryByTestId("error-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
+      expect(subject.getByTestId("step-4")).toBeInTheDocument();
+      expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("page 4", () => {
+    it("prevents user from moving after Step 4 if you have not selected a location", async () => {
+      const userData = generateTestUserData({ hasExistingBusiness: false, municipality: undefined });
+      useMockRouter({ isReady: true, query: { page: "4" } });
+      const newark = generateMunicipality({ displayName: "Newark" });
+      const { subject, page } = renderPage({ municipalities: [newark], userData });
+      page.clickNext();
+      await waitFor(() => {
+        expect(subject.getByTestId("step-4")).toBeInTheDocument();
+        expect(
+          subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
+        ).toBeInTheDocument();
+        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      });
+    });
+
+    it("allows user to move past Step 4 if you have selected a location", async () => {
+      const userData = generateTestUserData({ hasExistingBusiness: false, municipality: undefined });
+      useMockRouter({ isReady: true, query: { page: "4" } });
+      const newark = generateMunicipality({ displayName: "Newark" });
+      const { subject, page } = renderPage({ municipalities: [newark], userData });
+      page.selectByText("Location", "Newark");
+      page.clickNext();
+      await waitFor(() => {
+        expect(
+          subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
+        ).not.toBeInTheDocument();
+        expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      });
+    });
   });
 
   it("changes url pathname every time a user goes to a different page", async () => {
@@ -128,12 +222,6 @@ describe("onboarding - starting a business", () => {
     const page5 = within(subject.getByTestId("page-5-form"));
     expect(page5.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
     expect(page5.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
-  });
-
-  it("does not display the legal structure dropdown", async () => {
-    const { subject, page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
-    expect(subject.queryByLabelText("Legal structure")).not.toBeInTheDocument();
   });
 
   it("prefills form from existing user data", async () => {
@@ -243,65 +331,6 @@ describe("onboarding - starting a business", () => {
           },
         },
       });
-    });
-  });
-
-  it("prevents user from moving after Step 2 if you have not selected an industry", async () => {
-    const { subject, page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    page.clickNext();
-    expect(subject.getByTestId("step-2")).toBeInTheDocument();
-    expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
-    expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
-    page.selectByText("Industry", "Any Other Business Type");
-    await page.visitStep3();
-    expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
-    expect(subject.getByTestId("step-3")).toBeInTheDocument();
-    expect(subject.queryByTestId("step-2")).not.toBeInTheDocument();
-  });
-
-  it("prevents user from moving after Step 3 if you have not selected a legal structure", async () => {
-    const { subject, page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    page.selectByText("Industry", "Any Other Business Type");
-    await page.visitStep3();
-    page.clickNext();
-    expect(subject.getByTestId("step-3")).toBeInTheDocument();
-    expect(subject.queryByTestId("step-4")).not.toBeInTheDocument();
-    expect(subject.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
-    page.chooseRadio("general-partnership");
-    await page.visitStep4();
-    expect(subject.queryByTestId("error-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
-    expect(subject.getByTestId("step-4")).toBeInTheDocument();
-    expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
-  });
-
-  it("prevents user from moving after Step 4 if you have not selected a location", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
-    const { subject, page } = renderPage({ municipalities: [newark] });
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    page.selectByText("Industry", "Any Other Business Type");
-    await page.visitStep3();
-    page.chooseRadio("general-partnership");
-    await page.visitStep4();
-    page.clickNext();
-    await waitFor(() => {
-      expect(subject.getByTestId("step-4")).toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
-      ).toBeInTheDocument();
-      expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
-    });
-    page.selectByText("Location", "Newark");
-    page.clickNext();
-    await waitFor(() => {
-      expect(
-        subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
-      ).not.toBeInTheDocument();
-      expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
     });
   });
 
