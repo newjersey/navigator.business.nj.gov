@@ -253,7 +253,7 @@
   "resolutions": {
     "@types/react": "^17.0.44",
     "trim@0.0.1": "0.0.3",
-    "postcss": "8.4.12",
+    "postcss": "8.4.13",
     "glob-parent": "6.0.2",
     "tar": "6.1.11",
     "ansi-regex": "5.0.1"
