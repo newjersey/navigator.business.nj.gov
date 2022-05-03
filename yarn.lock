@@ -3540,7 +3540,7 @@ __metadata:
     simple-oauth2: 4.3.0
     supertest: 6.2.3
     ts-jest: 28.0.0
-    ts-loader: 9.2.8
+    ts-loader: 9.3.0
     ts-node: 10.7.0
     tsconfig-paths: 3.14.1
     tsconfig-paths-webpack-plugin: 3.5.2
@@ -3714,7 +3714,7 @@ __metadata:
     supertest: 6.2.3
     swr: 1.3.0
     ts-jest: 28.0.0
-    ts-loader: 9.2.8
+    ts-loader: 9.3.0
     ts-node: 10.7.0
     tsconfig-paths: 3.14.1
     tsconfig-paths-webpack-plugin: 3.5.2
@@ -3858,7 +3858,7 @@ __metadata:
     style-loader: 3.3.1
     swr: 1.3.0
     ts-jest: 28.0.0
-    ts-loader: 9.2.8
+    ts-loader: 9.3.0
     ts-node: 10.7.0
     typescript: 4.6.4
     unified: 10.1.2
@@ -5560,17 +5560,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/trace-mapping@npm:^0.3.0":
-  version: 0.3.4
-  resolution: "@jridgewell/trace-mapping@npm:0.3.4"
-  dependencies:
-    "@jridgewell/resolve-uri": ^3.0.3
-    "@jridgewell/sourcemap-codec": ^1.4.10
-  checksum: ab8bce84bbbc8c34f3ba8325ed926f8f2d3098983c10442a80c55764c4eb6e47d5b92d8ff20a0dd868c3e76a3535651fd8a0138182c290dbfc8396195685c37b
-  languageName: node
-  linkType: hard
-
-"@jridgewell/trace-mapping@npm:^0.3.7":
+"@jridgewell/trace-mapping@npm:^0.3.0, @jridgewell/trace-mapping@npm:^0.3.7":
   version: 0.3.9
   resolution: "@jridgewell/trace-mapping@npm:0.3.9"
   dependencies:
@@ -9586,17 +9576,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*":
-  version: 27.4.1
-  resolution: "@types/jest@npm:27.4.1"
-  dependencies:
-    jest-matcher-utils: ^27.0.0
-    pretty-format: ^27.0.0
-  checksum: 5184f3eef4832d01ee8f59bed15eec45ccc8e29c724a5e6ce37bf74396b37bdf04f557000f45ba4fc38ae6075cf9cfcce3d7a75abc981023c61ceb27230a93e4
-  languageName: node
-  linkType: hard
-
-"@types/jest@npm:27.5.0":
+"@types/jest@npm:*, @types/jest@npm:27.5.0":
   version: 27.5.0
   resolution: "@types/jest@npm:27.5.0"
   dependencies:
@@ -33891,9 +33871,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:9.2.8":
-  version: 9.2.8
-  resolution: "ts-loader@npm:9.2.8"
+"ts-loader@npm:9.3.0":
+  version: 9.3.0
+  resolution: "ts-loader@npm:9.3.0"
   dependencies:
     chalk: ^4.1.0
     enhanced-resolve: ^5.0.0
@@ -33902,7 +33882,7 @@ __metadata:
   peerDependencies:
     typescript: "*"
     webpack: ^5.0.0
-  checksum: 3afd9a4cc1d46738ac3f2decc7dfa655e0183d4d2d48c7a113ea9f3ac313304f54be59252cde2ef04757c791e28cfcfc63323d3dd1f2f949485242c1ea4835e5
+  checksum: 90755ac5850890ff433f2f8c7186d57ae4e172d389342d874b50ab233675f06c47c69043c517e2a2eeaf2251637ecfac607ac6190c89340f246ceff8c7f4af7a
   languageName: node
   linkType: hard
 
