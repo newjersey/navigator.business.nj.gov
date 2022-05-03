@@ -5,7 +5,7 @@
     "hasSavedCodeHeader": "Your NAICS Code",
     "inputPlaceholder": "6-digit NAICS Code",
     "inputLabel": "**Save your NAICS code here so you can reference it later:**",
-    "findCodeHeader": "Find Your NAICS code",
+    "findCodeHeader": "Find Your NAICS Code",
     "sicCodeLink": "[Siccode.com](https://siccode.com/)",
     "findCodeBodyText": "Use the resources listed below to search and find your NAICS code.  **If you can’t decide the right code,** remember, there are no benefits or disadvantages to use one NAICS code over another. ",
     "editText": "Edit",
@@ -381,13 +381,13 @@
     "section4SecondIconText": "Your Starter Kit",
     "section2CallToActionText": "Get Started",
     "section3CallToActionText": "Find Funding",
-    "heroCallOutSecondLineText": "Your Way",
+    "heroCallOutSecondLineText": "New Jersey Business Today",
     "section2SupportingText": "See the forms and licenses specific to starting your business and avoiding fines. Be prepared to tell us your legal structure, industry, and business location.",
     "heroCallToActionText": "Get Started",
     "section5ThirdSupportingText": "The Navigator is a one-stop-shop for all your New Jersey business needs. You can track your progress, check the status of applications, speak to NJ-based business advocates, and more!",
     "heroSupportingText": "Create your free, personalized checklist to launch and grow your New Jersey business.",
     "section5FirstHeaderText": "Starter Kit",
-    "heroCallOutFirstLineText": "Your Business,"
+    "heroCallOutFirstLineText": "Start and Grow Your"
   },
   "taskDefaults": {
     "backToRoadmapText": "Go Back",
