@@ -3,6 +3,7 @@
   "canBeHomeBased": false,
   "defaultSectorId": "other-services",
   "canBeReseller": true,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -47,7 +48,6 @@
   ],
   "name": "Cosmetology",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "modifications": [
     {
       "taskToReplaceFilename": "check-site-requirements",
@@ -62,7 +62,7 @@
       "replaceWithFilename": "evaluate-your-location-cosmetology"
     }
   ],
-  "additionalSearchTerms": "cosmetics,beautician,aesthetician",
+  "additionalSearchTerms": "cosmetics, beautician, aesthetician, hair salon, barber shop, hair stylist, nail salon, skin care",
   "id": "cosmetology",
   "licenseType": "Cosmetology and Hairstyling",
   "description": "Offering hair, nail, or skin related services"
