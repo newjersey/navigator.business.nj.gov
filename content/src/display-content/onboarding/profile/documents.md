@@ -1,5 +1,7 @@
 ---
-placeholder: "You need to form your business. Complete this step in your Roadmap"
+placeholder: If you are an LLC, we will automatically add your formation
+  documents once you [Form Your Business](/tasks/form-business-entity) on our
+  site.
 ---
 
 ### Reference Documents
