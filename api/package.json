@@ -86,7 +86,7 @@
     "serverless-webpack": "5.7.0",
     "supertest": "6.2.3",
     "ts-jest": "28.0.0",
-    "ts-loader": "9.2.8",
+    "ts-loader": "9.3.0",
     "ts-node": "10.7.0",
     "tsconfig-paths": "3.14.1",
     "tsconfig-paths-webpack-plugin": "3.5.2",
