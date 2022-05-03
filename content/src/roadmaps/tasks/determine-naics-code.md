@@ -12,6 +12,6 @@ To complete your New Jersey tax registration, you must identify a 6-digit code t
 
 ${naicsCodeLookupComponent}
 
-> **Why do I need a NAICS Code?**
+> **Why do I need a NAICS code?**
 >
 > - To [Register for NJ State Taxes and Employer Purposes](/tasks/register-for-taxes)
