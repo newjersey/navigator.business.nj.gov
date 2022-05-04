@@ -353,6 +353,7 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     businessAddressLine2: `some-address-2-${randomInt()}`,
     businessAddressState: "NJ",
     businessAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
+    businessPurpose: `some-purpose-${randomInt()}`,
     agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
     agentNumber: `some-agent-number-${randomInt()}`,
     agentName: `some-agent-name-${randomInt()}`,

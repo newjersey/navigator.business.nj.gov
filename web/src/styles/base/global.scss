@@ -331,3 +331,9 @@ hr {
     display: none;
   }
 }
+
+.override-padding {
+  .MuiInputBase-root {
+    padding: 0 !important;
+  }
+}

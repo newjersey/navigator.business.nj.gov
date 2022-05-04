@@ -182,7 +182,13 @@
     "reviewPageEmailLabel": "**Email:**",
     "reviewPageMembersHeader": "### Members",
     "nameCheckValidationErrorText": "You need to enter a business name to check availability.",
-    "successPageHeader": "Hooray!"
+    "successPageHeader": "Hooray!",
+    "businessPurposeTitle": "Business Purpose",
+    "businessPurposeOptionalLabel": "(Optional)",
+    "businessPurposeAddButtonText": "Add Business Purpose",
+    "businessPurposeLabel": "**Business Purpose**",
+    "businessPurposePlaceholderText": "Describe your business purpose",
+    "reviewPageBusinessPurposeHeader": "### Business Purpose"
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",

@@ -73,9 +73,15 @@ describe("Formation - ReviewSection", () => {
     expect(subject.queryByTestId("business-section")).toBeInTheDocument();
   });
 
-  it("displays the second tab when the edit button in the registered agent section is clicked", async () => {
+  it("displays the first tab when the edit button in the registered agent section is clicked", async () => {
     const { subject } = await renderSection({}, {});
     fireEvent.click(subject.getByTestId("edit-registered-agent-section"));
+    expect(subject.queryByTestId("business-section")).toBeInTheDocument();
+  });
+
+  it("displays the first tab when the edit button in the business purpose section is clicked", async () => {
+    const { subject } = await renderSection({}, { businessPurpose: "some purpose" });
+    fireEvent.click(subject.getByTestId("edit-business-purpose"));
     expect(subject.queryByTestId("business-section")).toBeInTheDocument();
   });
 
@@ -106,5 +112,16 @@ describe("Formation - ReviewSection", () => {
   it("does not display members section within review tab when members do not exist", async () => {
     const { subject } = await renderSection({}, { members: [] });
     expect(subject.queryByTestId("edit-members-section")).not.toBeInTheDocument();
+  });
+
+  it("displays business purpose on review tab", async () => {
+    const { subject } = await renderSection({}, { businessPurpose: "some cool purpose" });
+    expect(subject.getByTestId("business-purpose")).toBeInTheDocument();
+    expect(subject.getByText("some cool purpose")).toBeInTheDocument();
+  });
+
+  it("does not display business purpose within review tab when purpose does not exist", async () => {
+    const { subject } = await renderSection({}, { businessPurpose: "" });
+    expect(subject.queryByTestId("business-purpose")).not.toBeInTheDocument();
   });
 });

@@ -153,6 +153,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           BusinessName: userData.profileData.businessName,
           BusinessDesignator: formationFormData.businessSuffix,
           Naic: naicsCode,
+          BusinessPurpose: formationFormData.businessPurpose || undefined,
           EffectiveFilingDate: parseDateWithFormat(
             formationFormData.businessStartDate,
             "YYYY-MM-DD"
@@ -246,6 +247,7 @@ export type ApiSubmission = {
       BusinessName: string; //The requested business name, must be available and not contain any restricted words. Name plus designator length must be less than 100 characters in length.
       BusinessDesignator: BusinessSuffix; //The designator - LLC. L.L.C etc
       Naic: string; // If supplied must be 6 digits
+      BusinessPurpose: string; // Max 300 chars
       EffectiveFilingDate: string; // date 2021-12-14T10:03:51.0869073-04:00 (anne note: is this correct??)
       MainAddress: ApiLocation;
     };
