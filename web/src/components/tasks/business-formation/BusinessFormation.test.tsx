@@ -112,6 +112,9 @@ describe("<BusinessFormation />", () => {
       page.fillText("Agent office address city", "Newark");
       page.fillText("Agent office address zip code", "08002");
 
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+      page.fillText("Business purpose", "to take over the world");
+
       await page.submitBusinessTab();
 
       const member: FormationMember = {
@@ -169,6 +172,7 @@ describe("<BusinessFormation />", () => {
         expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
         expect(formationFormData.agentOfficeAddressState).toEqual("NJ");
         expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
+        expect(formationFormData.businessPurpose).toEqual("to take over the world");
         expect(formationFormData.members[0].name).toEqual(member.name);
         expect(formationFormData.members[0].addressLine1).toEqual(member.addressLine1);
         expect(formationFormData.members[0].addressLine2).toEqual(member.addressLine2);

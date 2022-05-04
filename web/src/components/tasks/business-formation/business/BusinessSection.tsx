@@ -1,4 +1,5 @@
 import { Button } from "@/components/njwds-extended/Button";
+import { BusinessPurpose } from "@/components/tasks/business-formation/business/BusinessPurpose";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
 import { RegisteredAgent } from "@/components/tasks/business-formation/business/RegisteredAgent";
 import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
@@ -139,6 +140,8 @@ export const BusinessSection = (): ReactElement => {
       <MainBusiness />
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <RegisteredAgent />
+      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+      <BusinessPurpose />
       <BusinessFormationFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
         requiredFieldsWithError={requiredFieldsWithError}
