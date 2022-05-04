@@ -103,6 +103,7 @@ describe("Formation - BusinessSection", () => {
       businessAddressLine2: "suite 102",
       businessAddressState: "NJ",
       businessAddressZipCode: "07601",
+      businessPurpose: "some cool purpose",
     });
 
     const { subject, page } = await renderSection({}, formationData);
@@ -115,6 +116,7 @@ describe("Formation - BusinessSection", () => {
     expect(page.getInputElementByLabel("Business address line2").value).toBe("suite 102");
     expect(page.getInputElementByLabel("Business address state").value).toBe("NJ");
     expect(page.getInputElementByLabel("Business address zip code").value).toBe("07601");
+    expect(page.getInputElementByLabel("Business purpose").value).toBe("some cool purpose");
   });
 
   it("saves business address city to profile after clicking continue", async () => {
@@ -184,6 +186,54 @@ describe("Formation - BusinessSection", () => {
     expect(
       subject.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
     ).not.toBeInTheDocument();
+  });
+
+  describe("Business purpose", () => {
+    it("keeps business purpose closed by default", async () => {
+      const { subject } = await renderSection({}, { businessPurpose: "" });
+      expect(subject.queryByText(Config.businessFormationDefaults.businessPurposeTitle)).toBeInTheDocument();
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
+      ).toBeInTheDocument();
+      expect(subject.queryByLabelText("remove business purpose")).not.toBeInTheDocument();
+      expect(subject.queryByLabelText("Business purpose")).not.toBeInTheDocument();
+    });
+
+    it("shows business purpose open if exists", async () => {
+      const { subject } = await renderSection({}, { businessPurpose: "some purpose" });
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
+      ).not.toBeInTheDocument();
+      expect(subject.queryByLabelText("remove business purpose")).toBeInTheDocument();
+      expect(subject.queryByLabelText("Business purpose")).toBeInTheDocument();
+    });
+
+    it("opens business purpose when Add button clicked", async () => {
+      const { subject } = await renderSection({}, { businessPurpose: "" });
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
+      ).not.toBeInTheDocument();
+      expect(subject.queryByLabelText("remove business purpose")).toBeInTheDocument();
+      expect(subject.queryByLabelText("Business purpose")).toBeInTheDocument();
+    });
+
+    it("removes business purpose when Remove button clicked", async () => {
+      const { subject, page } = await renderSection({}, { businessPurpose: "some purpose" });
+      fireEvent.click(subject.getByLabelText("remove business purpose"));
+      await page.submitBusinessTab();
+      expect(currentUserData().formationData.formationFormData.businessPurpose).toEqual("");
+    });
+
+    it("updates char count in real time", async () => {
+      const { subject, page } = await renderSection({}, { businessPurpose: "" });
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+      expect(subject.getByText("0 / 300", { exact: false })).toBeInTheDocument();
+      page.fillText("Business purpose", "some purpose");
+      const charLength = "some purpose".length;
+      expect(subject.getByText(`${charLength} / 300`, { exact: false })).toBeInTheDocument();
+    });
   });
 
   describe("NJ zipcode validation", () => {

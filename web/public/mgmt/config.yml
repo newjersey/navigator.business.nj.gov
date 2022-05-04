@@ -135,6 +135,20 @@ collections:
                 }
               - { label: Business Suffix Tooltip, name: businessSuffixTooltip, widget: string }
               - { label: Business Suffix Placeholder, name: businessSuffixPlaceholder, widget: string }
+              - { label: Business Purpose Title, name: businessPurposeTitle, widget: string }
+              - { label: Business Purpose Optional Label, name: businessPurposeOptionalLabel, widget: string }
+              - {
+                  label: Business Purpose Add Button Text,
+                  name: businessPurposeAddButtonText,
+                  widget: string,
+                }
+              - { label: Business Purpose Label, name: businessPurposeLabel, widget: string }
+              - {
+                  label: Business Purpose Placeholder Text,
+                  name: businessPurposePlaceholderText,
+                  widget: string,
+                }
+              - { label: Characters Label, name: charactersLabel, widget: string }
               - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
               - {
                   label: Contact Section Header,
@@ -445,6 +459,12 @@ collections:
               - {
                   label: Review Page - Business Start Date Label,
                   name: reviewPageBusinessStartDateLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page Business Purpose Header,
+                  name: reviewPageBusinessPurposeHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }

@@ -90,6 +90,7 @@ describe("ApiFormationClient", () => {
             BusinessName: userData.profileData.businessName,
             BusinessDesignator: formationFormData.businessSuffix,
             Naic: userData.profileData.naicsCode,
+            BusinessPurpose: formationFormData.businessPurpose,
             EffectiveFilingDate: parseDateWithFormat(
               formationFormData.businessStartDate,
               "YYYY-MM-DD"
@@ -192,6 +193,23 @@ describe("ApiFormationClient", () => {
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
       expect(postBody.Formation.BusinessInformation.Naic).toEqual("");
+    });
+
+    it("does not send business purpose if it is empty", async () => {
+      const stubResponse = generateApiResponse({});
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+      const formationFormData = generateFormationFormData({
+        businessPurpose: "",
+      });
+
+      const userData = generateUserData({
+        formationData: generateFormationData({ formationFormData }),
+      });
+
+      await client.form(userData, "some-url");
+      const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+      expect(postBody.Formation.BusinessInformation.BusinessPurpose).toBeUndefined();
     });
 
     it("responds with success, token, and redirect url", async () => {

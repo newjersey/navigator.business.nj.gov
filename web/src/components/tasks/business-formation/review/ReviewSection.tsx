@@ -78,6 +78,37 @@ export const ReviewSection = (): ReactElement => {
     </>
   );
 
+  const getBusinessPurpose = state.formationFormData.businessPurpose ? (
+    <>
+      <div className="flex space-between">
+        <div className="maxw-mobile-lg margin-bottom-2">
+          <Content overrides={{ h3: headerLevelTwo }}>
+            {Config.businessFormationDefaults.reviewPageBusinessPurposeHeader}
+          </Content>
+        </div>
+        <div className="margin-left-2">
+          <Button
+            style="tertiary"
+            onClick={() => {
+              setTab(businessFormationTabs.findIndex((obj) => obj.section === "Business"));
+              scrollToTop();
+            }}
+            underline
+            dataTestid="edit-business-purpose"
+          >
+            {Config.businessFormationDefaults.editButtonText}
+          </Button>
+        </div>
+      </div>
+      <div className="display-block tablet:display-flex" data-testid="business-purpose">
+        <div>{state.formationFormData.businessPurpose}</div>
+      </div>
+      <hr className="margin-y-205" />
+    </>
+  ) : (
+    <></>
+  );
+
   const getRegisteredAgent = (
     <>
       <div className="flex space-between">
@@ -222,6 +253,7 @@ export const ReviewSection = (): ReactElement => {
         <BusinessNameAndLegalStructure reviewPage />
         {getBusinessSuffixAndStartDate}
         {getMainBusinessLocation}
+        {getBusinessPurpose}
         {getRegisteredAgent}
         {state.formationFormData.members.length ? getMembers : null}
         {getSignatures}
