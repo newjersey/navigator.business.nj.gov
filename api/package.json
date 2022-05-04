@@ -93,7 +93,7 @@
     "typescript": "4.6.4",
     "webpack": "5.72.0",
     "webpack-node-externals": "3.0.0",
-    "wiremock": "2.33.1"
+    "wiremock": "2.33.2"
   },
   "jest-junit": {
     "outputDirectory": "../coverage/test_results",

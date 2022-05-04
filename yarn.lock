@@ -1524,7 +1524,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/types@npm:3.78.0":
+"@aws-sdk/types@npm:3.78.0, @aws-sdk/types@npm:^3.1.0":
   version: 3.78.0
   resolution: "@aws-sdk/types@npm:3.78.0"
   checksum: dd69607fb67a7e8ca934b486ee61caa290b9d65b71507168d1d03abc34fbb61c10468e9b29ec7d3dd1c5a6a0b6bbcbc0a269928c2e4b3e377d2d7ab41e1e5350
@@ -1535,13 +1535,6 @@ __metadata:
   version: 1.0.0-rc.10
   resolution: "@aws-sdk/types@npm:1.0.0-rc.10"
   checksum: 46e5ce8937a3abac4dfbff91a8aee980631ec847373b32635f2e1541849ae724ee736ab5a3d8a259352099b7851a71d72c63231b2fcb85b7742bcd1ae59c299b
-  languageName: node
-  linkType: hard
-
-"@aws-sdk/types@npm:^3.1.0":
-  version: 3.55.0
-  resolution: "@aws-sdk/types@npm:3.55.0"
-  checksum: 99400abe556aadd851b2be0487389b9828303d9d5a3992847e0d2bcf69bfe78afc8792d67cb653b51737372d1a4568ba9b9e141b61f45b73c2bcab39e11cc2e3
   languageName: node
   linkType: hard
 
@@ -3556,7 +3549,7 @@ __metadata:
     webpack-node-externals: 3.0.0
     winston: 3.7.2
     winston-cloudwatch: 6.0.0
-    wiremock: 2.33.1
+    wiremock: 2.33.2
     xml2js: 0.4.23
   languageName: unknown
   linkType: soft
@@ -3732,7 +3725,7 @@ __metadata:
     webpack-node-externals: 3.0.0
     winston: 3.7.2
     winston-cloudwatch: 6.0.0
-    wiremock: 2.33.1
+    wiremock: 2.33.2
     xml2js: 0.4.23
     yarn-workspace-sync-deps: 0.3.2
   languageName: unknown
@@ -35741,14 +35734,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wiremock@npm:2.33.1":
-  version: 2.33.1
-  resolution: "wiremock@npm:2.33.1"
+"wiremock@npm:2.33.2":
+  version: 2.33.2
+  resolution: "wiremock@npm:2.33.2"
   dependencies:
     npm-java-runner: ^0.0.17
   bin:
     wiremock: index.js
-  checksum: ab4a6d49a7db3ed0c6f34a187cc6e086a94edab9035bb63c819bb07b76b6524e21822b8d1280616f558628de57132318987bbc2f034a7b7164088a21a5bf3b93
+  checksum: ec239d38f131dd246fce13fab6433698c1e31b19de669d22d331920b5dbbde9ece78de8d00cb471a18c7374bcb131c30001fd17982840911cf2b819b64d3eff7
   languageName: node
   linkType: hard
 
