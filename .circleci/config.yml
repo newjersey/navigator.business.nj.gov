@@ -266,7 +266,7 @@ commands:
     steps:
       - configure-and-build
       - setup_remote_docker:
-          version: 20.10.11
+          version: 20.10.14
           docker_layer_caching: true
       - package-webapp-docker:
           image-name: bfs-navigator-content
@@ -278,7 +278,7 @@ commands:
     steps:
       - configure-and-build
       - setup_remote_docker:
-          version: 20.10.11
+          version: 20.10.14
           docker_layer_caching: true
       - package-webapp-docker:
           image-name: bfs-navigator
