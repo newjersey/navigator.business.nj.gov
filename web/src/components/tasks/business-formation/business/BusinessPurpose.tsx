@@ -74,7 +74,8 @@ export const BusinessPurpose = (): ReactElement => {
             </div>
           </div>
           <div className="text-base-dark margin-top-1">
-            {state.formationFormData.businessPurpose.length} / {MAX_CHARS}
+            {state.formationFormData.businessPurpose.length} / {MAX_CHARS}{" "}
+            {Config.businessFormationDefaults.charactersLabel}
           </div>
         </>
       )}

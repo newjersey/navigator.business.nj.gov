@@ -148,6 +148,7 @@ collections:
                   name: businessPurposePlaceholderText,
                   widget: string,
                 }
+              - { label: Characters Label, name: charactersLabel, widget: string }
               - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
               - {
                   label: Contact Section Header,

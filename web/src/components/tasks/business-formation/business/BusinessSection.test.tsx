@@ -229,10 +229,10 @@ describe("Formation - BusinessSection", () => {
     it("updates char count in real time", async () => {
       const { subject, page } = await renderSection({}, { businessPurpose: "" });
       fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
-      expect(subject.getByText("0 / 300")).toBeInTheDocument();
+      expect(subject.getByText("0 / 300", { exact: false })).toBeInTheDocument();
       page.fillText("Business purpose", "some purpose");
       const charLength = "some purpose".length;
-      expect(subject.getByText(`${charLength} / 300`)).toBeInTheDocument();
+      expect(subject.getByText(`${charLength} / 300`, { exact: false })).toBeInTheDocument();
     });
   });
 

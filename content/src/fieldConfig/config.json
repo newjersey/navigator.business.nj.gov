@@ -188,7 +188,8 @@
     "businessPurposeAddButtonText": "Add Business Purpose",
     "businessPurposeLabel": "**Business Purpose**",
     "businessPurposePlaceholderText": "Describe your business purpose",
-    "reviewPageBusinessPurposeHeader": "### Business Purpose"
+    "reviewPageBusinessPurposeHeader": "### Business Purpose",
+    "charactersLabel": "characters"
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
