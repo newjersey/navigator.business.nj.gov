@@ -1,6 +1,7 @@
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createEmptyLoadDisplayContent } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import Onboarding from "@/pages/onboarding";
 import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import { withAuth, withRoadmap } from "@/test/helpers";
@@ -13,6 +14,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyProfileData, getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { render, RenderResult, waitFor } from "@testing-library/react";
 import React from "react";
@@ -42,6 +44,20 @@ describe("onboarding - shared", () => {
     useMockRouter({ isReady: true, query: { page: "3" } });
     const { subject } = renderPage({});
     expect(subject.getByTestId("step-1")).toBeInTheDocument();
+  });
+
+  it("routes to the second onboarding page when they have answered the first question and we route them to page 2", async () => {
+    useMockRouter({ isReady: true, query: { page: "2" } });
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        hasExistingBusiness: true,
+        legalStructureId: "c-corporation",
+      }),
+      formProgress: "UNSTARTED",
+    });
+
+    const { subject } = renderPage({ userData });
+    expect(subject.getByTestId("step-2")).toBeInTheDocument();
   });
 
   it("displays page one when a user goes to /onboarding", async () => {
@@ -166,7 +182,7 @@ describe("onboarding - shared", () => {
       formProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
+    const { subject, page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("has-existing-business-false");
     await page.visitStep2();
@@ -180,6 +196,11 @@ describe("onboarding - shared", () => {
     page.clickBack();
     page.clickBack();
 
+    expect(subject.getByTestId("step-1")).toBeInTheDocument();
+    expect(subject.getByTestId("has-existing-business-true")).toBeInTheDocument();
+    expect(
+      subject.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
+    ).toBeInTheDocument();
     page.chooseRadio("has-existing-business-true");
     page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep2();
@@ -439,7 +460,7 @@ describe("onboarding - shared", () => {
         expect(currentUserData().profileData.cannabisLicenseType).toEqual("ANNUAL");
       });
 
-      it("sets cannabis license type to back undefined when switching back to non-cannabis industru", async () => {
+      it("sets cannabis license type to back undefined when switching back to non-cannabis industry", async () => {
         expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
         page.selectByValue("Industry", "cannabis");
         await page.visitStep3();
@@ -526,14 +547,17 @@ describe("onboarding - shared", () => {
   });
 
   it("displays error message when @ is missing in email input field", async () => {
-    const { page, subject } = renderPage({
-      userData: generateUserData({ user: generateUser({ email: `some-emailexample.com` }) }),
+    useMockRouter({ isReady: true, query: { page: "5" } });
+    const { subject, page } = renderPage({
+      userData: generateUserData({
+        user: generateUser({ email: `some-emailexample.com` }),
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "c-corporation",
+        }),
+        formProgress: "UNSTARTED",
+      }),
     });
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    await page.visitStep3();
-    await page.visitStep4();
-    await page.visitStep5();
     page.clickNext();
     await waitFor(() => {
       expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
@@ -541,14 +565,17 @@ describe("onboarding - shared", () => {
   });
 
   it("displays error message when . is missing in email input field", async () => {
-    const { page, subject } = renderPage({
-      userData: generateUserData({ user: generateUser({ email: `some-email@examplecom` }) }),
+    useMockRouter({ isReady: true, query: { page: "5" } });
+    const { subject, page } = renderPage({
+      userData: generateUserData({
+        user: generateUser({ email: `some-email@examplecom` }),
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          legalStructureId: "c-corporation",
+        }),
+        formProgress: "UNSTARTED",
+      }),
     });
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    await page.visitStep3();
-    await page.visitStep4();
-    await page.visitStep5();
     page.clickNext();
     await waitFor(() => {
       expect(subject.getByTestId("toast-alert-ERROR")).toBeInTheDocument();

@@ -1,3 +1,35 @@
+# [3.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.5.0...v3.6.0) (2022-05-03)
+
+
+### Bug Fixes
+
+* [[#2463](https://github.com/newjersey/navigator.business.nj.gov/issues/2463)] add spinner button to NAICS save button ([3761a19](https://github.com/newjersey/navigator.business.nj.gov/commit/3761a19778173f557c8e04a6227144fd0e46489b))
+* [[#2463](https://github.com/newjersey/navigator.business.nj.gov/issues/2463)] handle naics update race condition ([3d2e6cb](https://github.com/newjersey/navigator.business.nj.gov/commit/3d2e6cb8872a9140a5efab489c7a7388366056cc))
+* [[#2636](https://github.com/newjersey/navigator.business.nj.gov/issues/2636)] submit Members modal with municipality name (not displayname) ([968604d](https://github.com/newjersey/navigator.business.nj.gov/commit/968604db9f5c7455868a57d4edce3bf21877f711))
+* checkbox styling on CMS ([e5f9af9](https://github.com/newjersey/navigator.business.nj.gov/commit/e5f9af9c37859878d677ad5e788f2d5eb1f5e659))
+* compile error ([059a04d](https://github.com/newjersey/navigator.business.nj.gov/commit/059a04d9224b86df436606a08355956abea3c4e8))
+* **deps:** update dependency axios to v0.27.2 ([13bbc8d](https://github.com/newjersey/navigator.business.nj.gov/commit/13bbc8d525564230d26a32fa8171654a0b0b676c))
+* **deps:** update dependency express to v4.18.0 ([07bd322](https://github.com/newjersey/navigator.business.nj.gov/commit/07bd3221c3769b3e711ef5c453a51b7d26212dd1))
+* **deps:** update dependency express to v4.18.1 ([095f647](https://github.com/newjersey/navigator.business.nj.gov/commit/095f647147596447b99331f2efd931aa345b9b1b))
+* **deps:** update material-ui ([97a909f](https://github.com/newjersey/navigator.business.nj.gov/commit/97a909f0312cb01682fdcf9fb2a6012c5cb6a12b))
+* updating General Config config ([#2625](https://github.com/newjersey/navigator.business.nj.gov/issues/2625)) ([0422c7d](https://github.com/newjersey/navigator.business.nj.gov/commit/0422c7d737ab7b03c1293d7236757792ee1bd116))
+* updating General Config config ([#2626](https://github.com/newjersey/navigator.business.nj.gov/issues/2626)) ([31f31bf](https://github.com/newjersey/navigator.business.nj.gov/commit/31f31bf3f37fd43190d8bf1b649ed4b0dbf32ff3))
+* updating General Config config ([#2628](https://github.com/newjersey/navigator.business.nj.gov/issues/2628)) ([5d9cfc9](https://github.com/newjersey/navigator.business.nj.gov/commit/5d9cfc9785ba87c83770c367b716e36875ff2477))
+* updating General Config config ([#2658](https://github.com/newjersey/navigator.business.nj.gov/issues/2658)) ([3488abb](https://github.com/newjersey/navigator.business.nj.gov/commit/3488abbf6ed75420bb468b7a2ffc90be8d8bb398))
+* updating General Config config ([#2661](https://github.com/newjersey/navigator.business.nj.gov/issues/2661)) ([ffb233e](https://github.com/newjersey/navigator.business.nj.gov/commit/ffb233e6ee24d1bf5faeefd9bd8dbebf71c78648))
+* updating Profile Content documents ([#2627](https://github.com/newjersey/navigator.business.nj.gov/issues/2627)) ([8f059e8](https://github.com/newjersey/navigator.business.nj.gov/commit/8f059e841efaca6a86eda9adf58508e911760d82))
+* updating Profile Content documents ([#2629](https://github.com/newjersey/navigator.business.nj.gov/issues/2629)) ([2c24387](https://github.com/newjersey/navigator.business.nj.gov/commit/2c243874497f1334c6aa5c193c9fe66ebb71340c))
+* updating Profile Content documents ([#2633](https://github.com/newjersey/navigator.business.nj.gov/issues/2633)) ([77e8257](https://github.com/newjersey/navigator.business.nj.gov/commit/77e82570b16fb1a6a13018c76e2b55ee6b6d3d17))
+* updating Tasks determine-naics-code ([#2648](https://github.com/newjersey/navigator.business.nj.gov/issues/2648)) ([b2d7df8](https://github.com/newjersey/navigator.business.nj.gov/commit/b2d7df8d0bc8bd4838f4dd37e0e45939f2d4ca97))
+* updating Tasks determine-naics-code ([#2662](https://github.com/newjersey/navigator.business.nj.gov/issues/2662)) ([b162c12](https://github.com/newjersey/navigator.business.nj.gov/commit/b162c12bf4b3d7f5f6b63fcc6b3eb98b10b348a3))
+
+
+### Features
+
+* [[#2320](https://github.com/newjersey/navigator.business.nj.gov/issues/2320)] pass user name and email to intercom ([dafbda7](https://github.com/newjersey/navigator.business.nj.gov/commit/dafbda7201f7f1bf9c727f20136e1449a1e1ff27))
+* [[#2444](https://github.com/newjersey/navigator.business.nj.gov/issues/2444)] pass naics code to treasury ([acffe15](https://github.com/newjersey/navigator.business.nj.gov/commit/acffe155e7671e803ca15915b42dba6dbd498891))
+* [[#2463](https://github.com/newjersey/navigator.business.nj.gov/issues/2463)] add task to determine and save NAICS code ([52bdae5](https://github.com/newjersey/navigator.business.nj.gov/commit/52bdae5ea619930170bec5004ec5460b56f804b7))
+
 # [3.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.4.1...v3.5.0) (2022-04-28)
 
 
