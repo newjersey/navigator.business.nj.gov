@@ -236,6 +236,96 @@ describe("Formation - BusinessSection", () => {
     });
   });
 
+  describe("provisions", () => {
+    it("keeps provisions closed by default", async () => {
+      const { subject } = await renderSection({}, { provisions: [] });
+      expect(subject.queryByText(Config.businessFormationDefaults.provisionsTitle)).toBeInTheDocument();
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
+      ).toBeInTheDocument();
+      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(0);
+      expect(subject.queryByLabelText("provision 0")).not.toBeInTheDocument();
+    });
+
+    it("shows provisions open if exists", async () => {
+      const { subject } = await renderSection({}, { provisions: ["provision1", "provision2"] });
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
+      ).not.toBeInTheDocument();
+      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(2);
+      expect(subject.queryByLabelText("Provisions 0")).toBeInTheDocument();
+      expect(subject.queryByLabelText("Provisions 1")).toBeInTheDocument();
+    });
+
+    it("opens provisions when Add button clicked", async () => {
+      const { subject } = await renderSection({}, { provisions: [] });
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
+
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
+      ).not.toBeInTheDocument();
+      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(1);
+      expect(subject.queryByLabelText("Provisions 0")).toBeInTheDocument();
+    });
+
+    it("adds more provisions when Add More button clicked", async () => {
+      const { subject } = await renderSection({}, { provisions: [] });
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(2);
+      expect(subject.queryByLabelText("Provisions 0")).toBeInTheDocument();
+      expect(subject.queryByLabelText("Provisions 1")).toBeInTheDocument();
+    });
+
+    it("removes correct provision when Remove button clicked", async () => {
+      const { subject, page } = await renderSection(
+        {},
+        {
+          provisions: ["provision1", "provision2", "provision3"],
+        }
+      );
+      const removeProvision2Button = subject.getAllByLabelText("remove provision")[1];
+      fireEvent.click(removeProvision2Button);
+      await page.submitBusinessTab();
+      expect(currentUserData().formationData.formationFormData.provisions).toEqual([
+        "provision1",
+        "provision3",
+      ]);
+    });
+
+    it("removes empty provisions when moving to next tab", async () => {
+      const { subject, page } = await renderSection({}, { provisions: ["provision0"] });
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+      page.fillText("Provisions 2", "provision2");
+      await page.submitBusinessTab();
+      expect(currentUserData().formationData.formationFormData.provisions).toEqual([
+        "provision0",
+        "provision2",
+      ]);
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
+      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(2);
+    });
+
+    it("updates char count in real time", async () => {
+      const { subject, page } = await renderSection({}, { provisions: [] });
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
+      expect(subject.getByText("0 / 400", { exact: false })).toBeInTheDocument();
+      page.fillText("Provisions 0", "some provision");
+      const charLength = "some provision".length;
+      expect(subject.getByText(`${charLength} / 400`, { exact: false })).toBeInTheDocument();
+    });
+
+    it("does not allow adding more than 10 provisions", async () => {
+      const nineProvisions = Array(9).fill("some provision");
+      const { subject } = await renderSection({}, { provisions: nineProvisions });
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+      expect(
+        subject.queryByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText)
+      ).not.toBeInTheDocument();
+    });
+  });
+
   describe("NJ zipcode validation", () => {
     it("displays error message when non-NJ zipcode is entered in main business address", async () => {
       const { subject, page } = await renderSection({}, { businessAddressZipCode: "" });

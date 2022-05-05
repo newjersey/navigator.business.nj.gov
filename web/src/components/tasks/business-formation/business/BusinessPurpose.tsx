@@ -41,7 +41,7 @@ export const BusinessPurpose = (): ReactElement => {
         </div>
       </div>
       {isExpanded && (
-        <>
+        <div style={{ maxWidth: "41rem" }}>
           <Content className="margin-bottom-2">
             {Config.businessFormationDefaults.businessPurposeBodyText}
           </Content>
@@ -54,7 +54,7 @@ export const BusinessPurpose = (): ReactElement => {
                 required={false}
                 fieldOptions={{
                   multiline: true,
-                  rows: 5,
+                  rows: 3,
                   className: "override-padding",
                   inputProps: {
                     maxLength: MAX_CHARS,
@@ -77,11 +77,11 @@ export const BusinessPurpose = (): ReactElement => {
               </Button>
             </div>
           </div>
-          <div className="text-base-dark margin-top-1">
+          <div className="text-base-dark margin-top-1 margin-bottom-2">
             {state.formationFormData.businessPurpose.length} / {MAX_CHARS}{" "}
             {Config.businessFormationDefaults.charactersLabel}
           </div>
-        </>
+        </div>
       )}
     </>
   );

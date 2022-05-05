@@ -362,6 +362,22 @@ collections:
                   widget: string,
                 }
               - { label: Previous Button Text, name: previousButtonText, widget: string }
+              - { label: ProvisionsTitle, name: provisionsTitle, widget: string }
+              - { label: ProvisionsOptionalLabel, name: provisionsOptionalLabel, widget: string }
+              - {
+                  label: Provisions Body Text,
+                  name: provisionsBodyText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - { label: Provisions Add Button Text, name: provisionsAddButtonText, widget: string }
+              - {
+                  label: Provisions Add Another Button Text,
+                  name: provisionsAddAnotherButtonText,
+                  widget: string,
+                }
+              - { label: Provisions Label, name: provisionsLabel, widget: string }
+              - { label: Provisions Placeholder Text, name: provisionsPlaceholderText, widget: string }
               - {
                   label: Registered Agent - Number Label,
                   name: registeredAgentNumberLabel,
@@ -509,6 +525,17 @@ collections:
                   name: reviewPageMemberNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Provisions Header,
+                  name: reviewPageProvisionsHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Provisions Subheader,
+                  name: reviewPageProvisionsSubheader,
+                  widget: string,
                 }
               - {
                   label: Review Page - Registered Agent Header,

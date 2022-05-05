@@ -5,7 +5,7 @@ import { FormationTextField } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"> {
-  fieldName: Exclude<FormationTextField, "businessName">;
+  fieldName: Exclude<FormationTextField, "businessName" | "provisions">;
   label: string;
 }
 
