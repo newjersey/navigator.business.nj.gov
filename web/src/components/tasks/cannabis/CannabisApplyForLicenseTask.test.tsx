@@ -196,6 +196,23 @@ describe("<CannabisApplyForLicenseTask />", () => {
       annualBottomOfTask: { contentMd: "annualBottomOfTask-content" },
     };
 
+    it("does not show unlocked-by alert on requirements tab", async () => {
+      const initialUserData = generateUserData({
+        taskProgress: {
+          "annual-license-cannabis": "NOT_STARTED",
+        },
+      });
+      const task = generateTask({
+        id: "annual-license-cannabis",
+        name: "Header",
+        unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })],
+      });
+
+      subject = renderPage(task, initialUserData, displayContent);
+      fireEvent.click(subject.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
+      expect(subject).not.toContain("Do this first");
+    });
+
     it("updates taskProgress to from not_started to in-progress when View Requirements is clicked", () => {
       const initialUserData = generateUserData({
         taskProgress: {
