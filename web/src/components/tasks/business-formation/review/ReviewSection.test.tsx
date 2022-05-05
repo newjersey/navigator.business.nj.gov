@@ -9,6 +9,7 @@ import {
   renderTask,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFormData, ProfileData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent } from "@testing-library/react";
@@ -85,6 +86,12 @@ describe("Formation - ReviewSection", () => {
     expect(subject.queryByTestId("business-section")).toBeInTheDocument();
   });
 
+  it("displays the first tab when the edit button in the provisions section is clicked", async () => {
+    const { subject } = await renderSection({}, { provisions: ["some provision"] });
+    fireEvent.click(subject.getByTestId("edit-provisions"));
+    expect(subject.queryByTestId("business-section")).toBeInTheDocument();
+  });
+
   it("displays the second tab when the edit button in the signatures section is clicked", async () => {
     const { subject } = await renderSection({}, {});
     fireEvent.click(subject.getByTestId("edit-signature-section"));
@@ -123,5 +130,20 @@ describe("Formation - ReviewSection", () => {
   it("does not display business purpose within review tab when purpose does not exist", async () => {
     const { subject } = await renderSection({}, { businessPurpose: "" });
     expect(subject.queryByTestId("business-purpose")).not.toBeInTheDocument();
+  });
+
+  it("displays provisions on review tab", async () => {
+    const { subject } = await renderSection({}, { provisions: ["provision1", "provision2"] });
+    expect(subject.getByTestId("provisions")).toBeInTheDocument();
+    expect(subject.getByText("provision1")).toBeInTheDocument();
+    expect(subject.getByText("provision2")).toBeInTheDocument();
+    expect(
+      subject.getAllByText(Config.businessFormationDefaults.reviewPageProvisionsSubheader, { exact: false })
+    ).toHaveLength(2);
+  });
+
+  it("does not display provisions within review tab when they are empty", async () => {
+    const { subject } = await renderSection({}, { provisions: [] });
+    expect(subject.queryByTestId("provisions")).not.toBeInTheDocument();
   });
 });

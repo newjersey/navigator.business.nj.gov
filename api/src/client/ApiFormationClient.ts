@@ -126,6 +126,12 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     const formationFormData = userData.formationData.formationFormData;
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
     const naicsCode = userData.profileData.naicsCode.length === 6 ? userData.profileData.naicsCode : "";
+    const additionalProvisions =
+      formationFormData.provisions.length > 0
+        ? {
+            OtherProvisions: formationFormData.provisions.map((it: string) => ({ Provision: it })),
+          }
+        : undefined;
 
     return {
       Account: config.account,
@@ -167,6 +173,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             Country: "US",
           },
         },
+        AdditionalLimitedLiabilityCompany: additionalProvisions,
         CompanyProfit: "Profit",
         RegisteredAgent: {
           Id: isManual ? null : formationFormData.agentNumber,
@@ -251,6 +258,9 @@ export type ApiSubmission = {
       EffectiveFilingDate: string; // date 2021-12-14T10:03:51.0869073-04:00 (anne note: is this correct??)
       MainAddress: ApiLocation;
     };
+    AdditionalLimitedLiabilityCompany: {
+      OtherProvisions: AdditionalProvision[];
+    };
     CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
     RegisteredAgent: {
       Id: string | null; // 7 max, must be valid NJ registered agent number
@@ -272,6 +282,10 @@ export type ApiSubmission = {
     ContactLastName: string;
     ContactPhoneNumber: string;
   };
+};
+
+type AdditionalProvision = {
+  Provision: string; // max 400 chars
 };
 
 type ApiLocation = {

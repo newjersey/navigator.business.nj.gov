@@ -30,6 +30,7 @@ export interface FormationFormData {
   readonly businessAddressState: string;
   readonly businessAddressZipCode: string;
   readonly businessPurpose: string;
+  provisions: readonly string[];
   readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
   readonly agentNumber: string;
   readonly agentName: string;
@@ -90,6 +91,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     businessAddressState: "NJ",
     businessAddressZipCode: "",
     businessPurpose: "",
+    provisions: [],
     agentNumberOrManual: "NUMBER",
     agentNumber: "",
     agentName: "",

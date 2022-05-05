@@ -190,7 +190,16 @@
     "businessPurposeLabel": "**Business Purpose**",
     "businessPurposePlaceholderText": "Describe your business purpose",
     "reviewPageBusinessPurposeHeader": "### Business Purpose",
-    "charactersLabel": "characters"
+    "charactersLabel": "characters",
+    "provisionsTitle": "Provisions/Articles",
+    "provisionsOptionalLabel": "(Optional)",
+    "provisionsBodyText": "Describe your business' operations, partners and board member rights, duties, or other key information. This can be referenced to resolve conflict with individuals. You can list up to 10.",
+    "provisionsAddButtonText": "Add Provisions/Articles",
+    "provisionsAddAnotherButtonText": "Add a Provision",
+    "provisionsLabel": "**Provision/Article** (Optional)",
+    "provisionsPlaceholderText": "Enter your provision or article",
+    "reviewPageProvisionsHeader": "### Provisions/Articles",
+    "reviewPageProvisionsSubheader": "Provision/Article"
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
