@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v54UserData } from "./v54_add_business_purpose";
 
 export interface v55UserData {
@@ -255,3 +256,85 @@ type v55GetFilingResponse = {
 };
 
 // ---------------- v55 factories ----------------
+export const generatev55User = (overrides: Partial<v55BusinessUser>): v55BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    abExperience: "ExperienceA",
+    ...overrides,
+  };
+};
+
+export const generatev55ProfileData = (overrides: Partial<v55ProfileData>): v55ProfileData => {
+  return {
+    hasExistingBusiness: false,
+    initialOnboardingFlow: "STARTING",
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    documents: { formationDoc: "", standingDoc: "", certifiedDoc: "" },
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    requiresCpa: false,
+    homeBasedBusiness: true,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    ownershipTypeIds: [],
+    existingEmployees: undefined,
+    taxPin: undefined,
+    sectorId: undefined,
+    naicsCode: "",
+    ...overrides,
+  };
+};
+
+export const generatev55FormationFormData = (
+  overrides: Partial<v55FormationFormData>
+): v55FormationFormData => {
+  return {
+    businessSuffix: undefined,
+    businessStartDate: "",
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "",
+    businessAddressZipCode: "",
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "",
+    agentOfficeAddressZipCode: "",
+    members: [],
+    signer: "",
+    additionalSigners: [],
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
+    officialFormationDocument: false,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    businessPurpose: "",
+    ...overrides,
+  };
+};
