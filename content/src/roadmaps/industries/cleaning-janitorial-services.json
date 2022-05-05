@@ -35,10 +35,10 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Janitorial Services",
+  "name": "Cleaning and Janitorial Services",
   "isLiquorLicenseApplicable": false,
   "isCpaRequiredApplicable": false,
-  "additionalSearchTerms": "commercial cleaning service",
-  "id": "janitorial-services",
-  "description": "Commercial or residential property cleaning, maintenance, and management services"
+  "additionalSearchTerms": "cleaning lady,housekeeping,house cleaner,maid service,maid,cleaning company,cleaning crew,commercial cleaning service",
+  "id": "cleaning-janitorial-services",
+  "description": "Providing commercial or residential cleaning services"
 }
