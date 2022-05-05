@@ -50,6 +50,7 @@ import { migrate_v51_to_v52 } from "./v52_add_naics_code";
 import { migrate_v52_to_v53 } from "./v53_migrate_cannabis_dvob";
 import { migrate_v53_to_v54 } from "./v54_add_business_purpose";
 import { migrate_v54_to_v55 } from "./v55_marketing-and-pr";
+import { migrate_v55_to_v56 } from "./v56_cleaning_janatorial";
 import { migrate_v4_to_v5 } from "./v5_add_liquor_license";
 import { migrate_v5_to_v6 } from "./v6_add_home_based_business";
 import { migrate_v6_to_v7 } from "./v7_add_license_data";
@@ -114,6 +115,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v52_to_v53,
   migrate_v53_to_v54,
   migrate_v54_to_v55,
+  migrate_v55_to_v56,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

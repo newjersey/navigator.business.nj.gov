@@ -11,6 +11,6 @@ describe("isHomeBasedBusinessApplicable", () => {
     expect(isHomeBasedBusinessApplicable("fake-industry")).toEqual(false);
   });
   it("returns true when industry has a home based option", () => {
-    expect(isHomeBasedBusinessApplicable("cleaning-aid")).toEqual(true);
+    expect(isHomeBasedBusinessApplicable("cleaning-janitorial-services")).toEqual(true);
   });
 });
