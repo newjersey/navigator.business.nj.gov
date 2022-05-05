@@ -61,21 +61,23 @@ describe("useDocuments", () => {
   });
 
   it("regenerates documents every 15 minutes", async () => {
-    jest.useFakeTimers();
-    useMockUserData({
-      profileData: generateProfileData({
-        documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
-      }),
+    act(async () => {
+      jest.useFakeTimers();
+      useMockUserData({
+        profileData: generateProfileData({
+          documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol.pdf" },
+        }),
+      });
+      setupHook();
+      await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3));
+      act(() => {
+        jest.advanceTimersByTime(900000);
+      });
+      await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(6));
+      act(() => {
+        jest.advanceTimersByTime(900000);
+      });
+      await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(9));
     });
-    setupHook();
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3));
-    act(() => {
-      jest.advanceTimersByTime(900000);
-    });
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(6));
-    act(() => {
-      jest.advanceTimersByTime(900000);
-    });
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(9));
   });
 });

@@ -17,7 +17,14 @@ import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, RenderResult, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  RenderResult,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { ReactNode } from "react";
 
@@ -53,56 +60,66 @@ describe("<NavBar />", () => {
 
   describe("navbar - used when user is on landing page", () => {
     it("displays landing page navbar when prop is passed", () => {
-      setLargeScreen(true);
+      act(async () => {
+        setLargeScreen(true);
 
-      const subject = render(
-        <NavBar
-          landingPage={true}
-          task={undefined}
-          sideBarPageLayout={false}
-          operateReferences={{}}
-          isWidePage={false}
-        />
-      );
-      expect(subject.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
+        const subject = render(
+          <NavBar
+            landingPage={true}
+            task={undefined}
+            sideBarPageLayout={false}
+            operateReferences={{}}
+            isWidePage={false}
+          />
+        );
+        expect(subject.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
+      });
     });
 
     it("goes to onboarding when signup is clicked", () => {
-      setLargeScreen(true);
+      act(async () => {
+        setLargeScreen(true);
 
-      const subject = render(
-        <NavBar
-          landingPage={true}
-          task={undefined}
-          sideBarPageLayout={false}
-          operateReferences={{}}
-          isWidePage={false}
-        />
-      );
+        const subject = render(
+          <NavBar
+            landingPage={true}
+            task={undefined}
+            sideBarPageLayout={false}
+            operateReferences={{}}
+            isWidePage={false}
+          />
+        );
 
-      fireEvent.click(subject.getByText(Config.navigationDefaults.registerButton));
-      expect(mockPush).toHaveBeenCalledWith("/onboarding");
+        fireEvent.click(subject.getByText(Config.navigationDefaults.registerButton));
+        expect(mockPush).toHaveBeenCalledWith("/onboarding");
+      });
     });
   });
 
   const displaysUserNameOrEmail = (renderFunc: () => RenderResult) => {
     it("displays name of user if available", () => {
-      useMockUserData({ user: generateUser({ name: "John Smith", email: "test@example.com" }) });
-      const subject = renderFunc();
-      expect(subject.getByText("John Smith")).toBeInTheDocument();
-      expect(subject.queryByText("test@example.com")).not.toBeInTheDocument();
+      act(async () => {
+        useMockUserData({ user: generateUser({ name: "John Smith", email: "test@example.com" }) });
+        const subject = renderFunc();
+        expect(subject.getByText("John Smith")).toBeInTheDocument();
+        expect(subject.queryByText("test@example.com")).not.toBeInTheDocument();
+      });
     });
 
     it("displays email of user if no name available", () => {
-      useMockUserData({ user: generateUser({ name: undefined, email: "test@example.com" }) });
-      const subject = renderFunc();
-      expect(subject.getByText("test@example.com")).toBeInTheDocument();
+      act(async () => {
+        useMockUserData({ user: generateUser({ name: undefined, email: "test@example.com" }) });
+        const subject = renderFunc();
+        expect(subject.getByText("test@example.com")).toBeInTheDocument();
+      });
     });
 
     it("displays default text if no user data", () => {
-      useUndefinedUserData();
-      const subject = renderFunc();
-      expect(subject.getAllByText(Config.navigationDefaults.myNJAccountText).length).toBeGreaterThan(0);
+      act(async () => {
+        useUndefinedUserData();
+        const subject = renderFunc();
+        expect(subject.getAllByText(Config.navigationDefaults.myNJAccountText).length).toBeGreaterThan(0);
+      });
     });
   };
 
@@ -120,36 +137,40 @@ describe("<NavBar />", () => {
     displaysUserNameOrEmail(renderDesktopNav);
 
     it("displays a closed dropdown menu on the NavBar", () => {
-      const user = { name: "John Smith", email: "test@example.com" };
+      act(async () => {
+        const user = { name: "John Smith", email: "test@example.com" };
 
-      useMockUserData({
-        user: generateUser(user),
+        useMockUserData({
+          user: generateUser(user),
+        });
+        const subject = renderDesktopNav();
+        const menuEl = subject.getByText(user.name);
+        expect(menuEl).toBeInTheDocument();
+        expect(subject.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
+        expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
       });
-      const subject = renderDesktopNav();
-      const menuEl = subject.getByText(user.name);
-      expect(menuEl).toBeInTheDocument();
-      expect(subject.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
-      expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
-      const user = { name: "John Smith", email: "test@example.com" };
+      act(async () => {
+        const user = { name: "John Smith", email: "test@example.com" };
 
-      useMockUserData({
-        user: generateUser(user),
-      });
+        useMockUserData({
+          user: generateUser(user),
+        });
 
-      const subject = renderDesktopNav();
-      const menuEl = subject.getByText(user.name);
+        const subject = renderDesktopNav();
+        const menuEl = subject.getByText(user.name);
 
-      userEvent.click(menuEl);
-      expect(subject.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
-      expect(subject.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
+        userEvent.click(menuEl);
+        expect(subject.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
+        expect(subject.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
 
-      userEvent.click(menuEl);
-      await waitFor(() => {
-        expect(subject.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
-        expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
+        userEvent.click(menuEl);
+        await waitFor(() => {
+          expect(subject.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
+          expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();
+        });
       });
     });
   });
@@ -166,64 +187,70 @@ describe("<NavBar />", () => {
     };
 
     it("displays a closed dropdown menu on the NavBar", () => {
-      useMockUserData({});
-      const subject = renderDesktopNav();
-      const menuEl = subject.getByText(Config.navigationDefaults.navBarGuestText);
-      expect(menuEl).toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
-      ).not.toBeInTheDocument();
-    });
-
-    it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
-      useMockUserData({});
-      const subject = renderDesktopNav();
-      const menuEl = subject.getByText(Config.navigationDefaults.navBarGuestText);
-
-      userEvent.click(menuEl);
-      expect(subject.getByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeInTheDocument();
-
-      userEvent.click(menuEl);
-      await waitFor(() => {
+      act(async () => {
+        useMockUserData({});
+        const subject = renderDesktopNav();
+        const menuEl = subject.getByText(Config.navigationDefaults.navBarGuestText);
+        expect(menuEl).toBeInTheDocument();
         expect(
           subject.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
         ).not.toBeInTheDocument();
       });
     });
 
-    it("sends user to selfRegistration when registration button is clicked", async () => {
-      setLargeScreen(true);
-      setupStatefulUserDataContext();
-      const user = generateUser({ name: "John Smith", email: "test@example.com" });
-      const userData = generateUserData({ user });
-      const subject = render(
-        withAuth(
-          <WithStatefulUserData initialUserData={userData}>
-            <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
-          </WithStatefulUserData>,
-          { user, isAuthenticated: IsAuthenticated.FALSE }
-        )
-      );
-      fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestText));
+    it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
+      act(async () => {
+        useMockUserData({});
+        const subject = renderDesktopNav();
+        const menuEl = subject.getByText(Config.navigationDefaults.navBarGuestText);
 
-      const businessUser = {
-        ...user,
-        email: "email@example.com",
-        name: "My Name",
-        receiveNewsletter: false,
-        userTesting: true,
-      };
+        userEvent.click(menuEl);
+        expect(subject.getByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeInTheDocument();
 
-      mockApi.postSelfReg.mockResolvedValue({
-        authRedirectURL: "www.example.com",
-        userData: { ...userData, user: businessUser },
+        userEvent.click(menuEl);
+        await waitFor(() => {
+          expect(
+            subject.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
+          ).not.toBeInTheDocument();
+        });
       });
+    });
 
-      fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
+    it("sends user to selfRegistration when registration button is clicked", async () => {
+      act(async () => {
+        setLargeScreen(true);
+        setupStatefulUserDataContext();
+        const user = generateUser({ name: "John Smith", email: "test@example.com" });
+        const userData = generateUserData({ user });
+        const subject = render(
+          withAuth(
+            <WithStatefulUserData initialUserData={userData}>
+              <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
+            </WithStatefulUserData>,
+            { user, isAuthenticated: IsAuthenticated.FALSE }
+          )
+        );
+        fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestText));
 
-      await waitFor(() => {
-        expect(mockApi.postSelfReg).toHaveBeenCalledWith(userData);
-        expect(mockPush).toHaveBeenCalled();
+        const businessUser = {
+          ...user,
+          email: "email@example.com",
+          name: "My Name",
+          receiveNewsletter: false,
+          userTesting: true,
+        };
+
+        mockApi.postSelfReg.mockResolvedValue({
+          authRedirectURL: "www.example.com",
+          userData: { ...userData, user: businessUser },
+        });
+
+        fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
+
+        await waitFor(() => {
+          expect(mockApi.postSelfReg).toHaveBeenCalledWith(userData);
+          expect(mockPush).toHaveBeenCalled();
+        });
       });
     });
   });
@@ -244,17 +271,21 @@ describe("<NavBar />", () => {
     displaysUserNameOrEmail(renderMobileRoadmapNav);
 
     it("does not display mini-roadmap", () => {
-      useMockUserData({});
-      useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
-      const subject = renderMobileRoadmapNav();
-      expect(subject.queryByText("step1")).not.toBeInTheDocument();
+      act(async () => {
+        useMockUserData({});
+        useMockRoadmap(generateRoadmap({ steps: [generateStep({ name: "step1" })] }));
+        const subject = renderMobileRoadmapNav();
+        expect(subject.queryByText("step1")).not.toBeInTheDocument();
+      });
     });
 
     it("does not display operate section", () => {
-      useMockUserData({});
-      const subject = renderMobileRoadmapNav();
-      const sectionName = Config.sectionHeaders.OPERATE.toLowerCase();
-      expect(subject.queryByTestId(`section-${sectionName}`)).not.toBeInTheDocument();
+      act(async () => {
+        useMockUserData({});
+        const subject = renderMobileRoadmapNav();
+        const sectionName = Config.sectionHeaders.OPERATE.toLowerCase();
+        expect(subject.queryByTestId(`section-${sectionName}`)).not.toBeInTheDocument();
+      });
     });
   });
 
@@ -295,137 +326,153 @@ describe("<NavBar />", () => {
     describe("authenticated mobile navbar - renders roadmap within drawer", () => {
       displaysUserNameOrEmail(renderMobileTaskNav(IsAuthenticated.TRUE));
       it("opens and closes user profile links", async () => {
-        useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
-        const subject = renderMobileTaskNav(IsAuthenticated.TRUE)();
-        expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeVisible();
-        expect(subject.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeVisible();
-
-        fireEvent.click(subject.getByText("Grace Hopper"));
-        expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).toBeVisible();
-        expect(subject.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
-
-        fireEvent.click(subject.getByText("Grace Hopper"));
-        await waitFor(() => {
+        act(async () => {
+          useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
+          const subject = renderMobileTaskNav(IsAuthenticated.TRUE)();
           expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeVisible();
           expect(subject.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeVisible();
+
+          fireEvent.click(subject.getByText("Grace Hopper"));
+          expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).toBeVisible();
+          expect(subject.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
+
+          fireEvent.click(subject.getByText("Grace Hopper"));
+          await waitFor(() => {
+            expect(subject.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeVisible();
+            expect(subject.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeVisible();
+          });
         });
       });
     });
     describe("guest mode mobile navbar - renders roadmap within drawer", () => {
       it("opens and closes user registration links", async () => {
-        useMockUserData({});
-        const subject = renderMobileTaskNav(IsAuthenticated.FALSE)();
-        expect(subject.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).not.toBeVisible();
-
-        fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestText));
-        expect(subject.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeVisible();
-
-        fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestText));
-        await waitFor(() => {
+        act(async () => {
+          useMockUserData({});
+          const subject = renderMobileTaskNav(IsAuthenticated.FALSE)();
           expect(
             subject.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
           ).not.toBeVisible();
+
+          fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestText));
+          expect(subject.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeVisible();
+
+          fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestText));
+          await waitFor(() => {
+            expect(
+              subject.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
+            ).not.toBeVisible();
+          });
         });
       });
 
       it("sends user to selfRegistration when registration button is clicked", async () => {
-        setLargeScreen(false);
-        setupStatefulUserDataContext();
-        const user = generateUser({ name: "John Smith", email: "test@example.com" });
-        const userData = generateUserData({ user });
-        const subject = render(
-          withAuth(
-            <WithStatefulUserData initialUserData={userData}>
-              <NavBar landingPage={false} task={generateTask({})} sideBarPageLayout={true} />
-            </WithStatefulUserData>,
-            { user, isAuthenticated: IsAuthenticated.FALSE }
-          )
-        );
-        fireEvent.click(subject.getByTestId("nav-menu-open"));
-        fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestText));
+        act(async () => {
+          setLargeScreen(false);
+          setupStatefulUserDataContext();
+          const user = generateUser({ name: "John Smith", email: "test@example.com" });
+          const userData = generateUserData({ user });
+          const subject = render(
+            withAuth(
+              <WithStatefulUserData initialUserData={userData}>
+                <NavBar landingPage={false} task={generateTask({})} sideBarPageLayout={true} />
+              </WithStatefulUserData>,
+              { user, isAuthenticated: IsAuthenticated.FALSE }
+            )
+          );
+          fireEvent.click(subject.getByTestId("nav-menu-open"));
+          fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestText));
 
-        const businessUser = {
-          ...user,
-          email: "email@example.com",
-          name: "My Name",
-          receiveNewsletter: false,
-          userTesting: true,
-        };
+          const businessUser = {
+            ...user,
+            email: "email@example.com",
+            name: "My Name",
+            receiveNewsletter: false,
+            userTesting: true,
+          };
 
-        mockApi.postSelfReg.mockResolvedValue({
-          authRedirectURL: "www.example.com",
-          userData: { ...userData, user: businessUser },
-        });
+          mockApi.postSelfReg.mockResolvedValue({
+            authRedirectURL: "www.example.com",
+            userData: { ...userData, user: businessUser },
+          });
 
-        fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
+          fireEvent.click(subject.getByText(Config.navigationDefaults.navBarGuestRegistrationText));
 
-        await waitFor(() => {
-          expect(mockApi.postSelfReg).toHaveBeenCalledWith(userData);
-          expect(mockPush).toHaveBeenCalled();
+          await waitFor(() => {
+            expect(mockApi.postSelfReg).toHaveBeenCalledWith(userData);
+            expect(mockPush).toHaveBeenCalled();
+          });
         });
       });
     });
 
     it("displays mini-roadmap with PLAN/START when operateReferences does not exist", () => {
-      useMockUserData({});
-      useMockRoadmap(
-        generateRoadmap({
-          steps: [
-            generateStep({ name: "step1", section: "PLAN" }),
-            generateStep({ name: "step2", section: "START" }),
-          ],
-        })
-      );
-      const subject = renderMobileTaskNav()();
-      expect(subject.queryByText("step1")).toBeInTheDocument();
-      expect(subject.queryByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
-      expect(subject.queryByText(Config.sectionHeaders.START)).toBeInTheDocument();
-      expect(subject.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
+      act(async () => {
+        useMockUserData({});
+        useMockRoadmap(
+          generateRoadmap({
+            steps: [
+              generateStep({ name: "step1", section: "PLAN" }),
+              generateStep({ name: "step2", section: "START" }),
+            ],
+          })
+        );
+        const subject = renderMobileTaskNav()();
+        expect(subject.queryByText("step1")).toBeInTheDocument();
+        expect(subject.queryByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
+        expect(subject.queryByText(Config.sectionHeaders.START)).toBeInTheDocument();
+        expect(subject.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
+      });
     });
 
     it("displays mini-roadmap with OPERATE when operateReferences does exists", () => {
-      useMockUserData({});
-      useMockRoadmap(
-        generateRoadmap({
-          steps: [
-            generateStep({ name: "step1", section: "PLAN" }),
-            generateStep({ name: "step2", section: "START" }),
-          ],
-        })
-      );
+      act(async () => {
+        useMockUserData({});
+        useMockRoadmap(
+          generateRoadmap({
+            steps: [
+              generateStep({ name: "step1", section: "PLAN" }),
+              generateStep({ name: "step2", section: "START" }),
+            ],
+          })
+        );
 
-      const subject = renderMobileTaskNav()({ includeOperateRef: true });
-      expect(subject.queryByText(Config.sectionHeaders.OPERATE)).toBeInTheDocument();
-      expect(subject.queryByText("step1")).not.toBeInTheDocument();
-      expect(subject.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
-      expect(subject.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
+        const subject = renderMobileTaskNav()({ includeOperateRef: true });
+        expect(subject.queryByText(Config.sectionHeaders.OPERATE)).toBeInTheDocument();
+        expect(subject.queryByText("step1")).not.toBeInTheDocument();
+        expect(subject.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
+        expect(subject.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
+      });
     });
 
     it("hide drawer when mini-roadmap task is clicked", async () => {
-      useMockUserData({});
-      useMockRoadmap(
-        generateRoadmap({
-          steps: [generateStep({ name: "step1", tasks: [generateTask({ name: "task1" })] })],
-        })
-      );
-      const subject = renderMobileTaskNav()();
-      fireEvent.click(subject.getByText("step1"));
-      fireEvent.click(subject.getByText("task1"));
+      act(async () => {
+        useMockUserData({});
+        useMockRoadmap(
+          generateRoadmap({
+            steps: [generateStep({ name: "step1", tasks: [generateTask({ name: "task1" })] })],
+          })
+        );
+        const subject = renderMobileTaskNav()();
+        fireEvent.click(subject.getByText("step1"));
+        fireEvent.click(subject.getByText("task1"));
 
-      await waitForElementToBeRemoved(() => subject.queryByTestId("nav-sidebar-menu"));
-      expect(subject.queryByText("task1")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
+        await waitForElementToBeRemoved(() => subject.queryByTestId("nav-sidebar-menu"));
+        expect(subject.queryByText("task1")).not.toBeInTheDocument();
+        expect(subject.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
+      });
     });
 
     it("hide drawer when filings task is clicked when operate refs exist", async () => {
-      useMockUserData({});
+      act(async () => {
+        useMockUserData({});
 
-      const subject = renderMobileTaskNav()({ includeOperateRef: true });
-      fireEvent.click(subject.getByTestId("some-filing-name-1"));
+        const subject = renderMobileTaskNav()({ includeOperateRef: true });
+        fireEvent.click(subject.getByTestId("some-filing-name-1"));
 
-      await waitForElementToBeRemoved(() => subject.queryByTestId("nav-sidebar-menu"));
-      expect(subject.queryByText("some-filing-name-1")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
+        await waitForElementToBeRemoved(() => subject.queryByTestId("nav-sidebar-menu"));
+        expect(subject.queryByText("some-filing-name-1")).not.toBeInTheDocument();
+        expect(subject.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
+      });
     });
   });
 });

@@ -18,7 +18,7 @@ import {
   legalStructureWithTradeName,
   liquorLicenseIndustries,
   randomElementFromArray,
-  updateExBusinessProfilePage,
+  updateExistingBusinessProfilePage,
   updateNewBusinessProfilePage,
 } from "../support/helpers";
 
@@ -216,7 +216,7 @@ describe("Profile [feature] [all] [group1]", () => {
     const notes = `Notes ${randomInt()}`;
     const taxPin = randomInt(4).toString();
 
-    updateExBusinessProfilePage({
+    updateExistingBusinessProfilePage({
       businessFormationDate: updatedBusinessFormationDate,
       entityId: updatedEntityId,
       businessName: updatedBusinessName,

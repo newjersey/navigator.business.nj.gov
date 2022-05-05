@@ -14,6 +14,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { waitFor, within } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -167,184 +168,194 @@ describe("onboarding - starting a business", () => {
   });
 
   it("changes url pathname every time a user goes to a different page", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
-    const { subject, page } = renderPage({ municipalities: [newark] });
-    expect(subject.getByTestId("step-1")).toBeInTheDocument();
-    page.chooseRadio("has-existing-business-false");
+    act(async () => {
+      const newark = generateMunicipality({ displayName: "Newark" });
+      const { subject, page } = renderPage({ municipalities: [newark] });
+      expect(subject.getByTestId("step-1")).toBeInTheDocument();
+      page.chooseRadio("has-existing-business-false");
 
-    await page.visitStep2();
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-2")).toBeInTheDocument();
-    page.selectByText("Industry", "Any Other Business Type");
+      await page.visitStep2();
+      expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
+      expect(subject.getByTestId("step-2")).toBeInTheDocument();
+      page.selectByText("Industry", "Any Other Business Type");
 
-    await page.visitStep3();
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-3")).toBeInTheDocument();
-    page.chooseRadio("general-partnership");
+      await page.visitStep3();
+      expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
+      expect(subject.getByTestId("step-3")).toBeInTheDocument();
+      page.chooseRadio("general-partnership");
 
-    await page.visitStep4();
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-4")).toBeInTheDocument();
-    page.selectByText("Location", "Newark");
+      await page.visitStep4();
+      expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
+      expect(subject.getByTestId("step-4")).toBeInTheDocument();
+      page.selectByText("Location", "Newark");
 
-    await page.visitStep5();
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 5 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-5")).toBeInTheDocument();
+      await page.visitStep5();
+      expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 5 } }, undefined, { shallow: true });
+      expect(subject.getByTestId("step-5")).toBeInTheDocument();
+    });
   });
 
   it("shows correct next-button text on each page", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
-    const { subject, page } = renderPage({ municipalities: [newark] });
-    page.chooseRadio("has-existing-business-false");
-    const page1 = within(subject.getByTestId("page-1-form"));
-    expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+    act(async () => {
+      const newark = generateMunicipality({ displayName: "Newark" });
+      const { subject, page } = renderPage({ municipalities: [newark] });
+      page.chooseRadio("has-existing-business-false");
+      const page1 = within(subject.getByTestId("page-1-form"));
+      expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+      expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
-    await page.visitStep2();
-    const page2 = within(subject.getByTestId("page-2-form"));
-    expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.selectByText("Industry", "Any Other Business Type");
+      await page.visitStep2();
+      const page2 = within(subject.getByTestId("page-2-form"));
+      expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+      expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+      page.selectByText("Industry", "Any Other Business Type");
 
-    await page.visitStep3();
-    const page3 = within(subject.getByTestId("page-3-form"));
-    expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.chooseRadio("general-partnership");
+      await page.visitStep3();
+      const page3 = within(subject.getByTestId("page-3-form"));
+      expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+      expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+      page.chooseRadio("general-partnership");
 
-    await page.visitStep4();
-    const page4 = within(subject.getByTestId("page-4-form"));
-    expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.selectByText("Location", "Newark");
+      await page.visitStep4();
+      const page4 = within(subject.getByTestId("page-4-form"));
+      expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+      expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
+      page.selectByText("Location", "Newark");
 
-    await page.visitStep5();
-    const page5 = within(subject.getByTestId("page-5-form"));
-    expect(page5.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page5.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+      await page.visitStep5();
+      const page5 = within(subject.getByTestId("page-5-form"));
+      expect(page5.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+      expect(page5.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    });
   });
 
   it("prefills form from existing user data", async () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        hasExistingBusiness: false,
-        businessName: "Applebees",
-        industryId: "cosmetology",
-        legalStructureId: "c-corporation",
-        municipality: generateMunicipality({
-          displayName: "Newark",
+    act(async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          businessName: "Applebees",
+          industryId: "cosmetology",
+          legalStructureId: "c-corporation",
+          municipality: generateMunicipality({
+            displayName: "Newark",
+          }),
         }),
-      }),
-      user: generateUser({
-        name: "Michael Deeb",
-        email: "mdeeb@example.com",
-      }),
+        user: generateUser({
+          name: "Michael Deeb",
+          email: "mdeeb@example.com",
+        }),
+      });
+
+      const { page } = renderPage({ userData });
+      expect(page.getRadioButtonValue("Has Existing Business")).toEqual("false");
+
+      await page.visitStep2();
+      expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
+
+      await page.visitStep3();
+      expect(page.getRadioButtonValue("Legal structure")).toEqual("c-corporation");
+
+      await page.visitStep4();
+      expect(page.getMunicipalityValue()).toEqual("Newark");
+
+      await page.visitStep5();
+      expect(page.getFullNameValue()).toEqual("Michael Deeb");
+      expect(page.getEmailValue()).toEqual("mdeeb@example.com");
+      expect(page.getConfirmEmailValue()).toEqual("mdeeb@example.com");
     });
-
-    const { page } = renderPage({ userData });
-    expect(page.getRadioButtonValue("Has Existing Business")).toEqual("false");
-
-    await page.visitStep2();
-    expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
-
-    await page.visitStep3();
-    expect(page.getRadioButtonValue("Legal structure")).toEqual("c-corporation");
-
-    await page.visitStep4();
-    expect(page.getMunicipalityValue()).toEqual("Newark");
-
-    await page.visitStep5();
-    expect(page.getFullNameValue()).toEqual("Michael Deeb");
-    expect(page.getEmailValue()).toEqual("mdeeb@example.com");
-    expect(page.getConfirmEmailValue()).toEqual("mdeeb@example.com");
   });
 
   it("updates the user data after each form page", async () => {
-    const initialUserData = createEmptyUserData(createEmptyUser());
-    const newark = generateMunicipality({ displayName: "Newark" });
-    const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
+    act(async () => {
+      const initialUserData = createEmptyUserData(createEmptyUser());
+      const newark = generateMunicipality({ displayName: "Newark" });
+      const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
 
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    expect(currentUserData().profileData.hasExistingBusiness).toEqual(false);
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+      expect(currentUserData().profileData.hasExistingBusiness).toEqual(false);
 
-    page.selectByValue("Industry", "e-commerce");
-    await page.visitStep3();
-    expect(currentUserData().profileData.industryId).toEqual("e-commerce");
-    expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
+      page.selectByValue("Industry", "e-commerce");
+      await page.visitStep3();
+      expect(currentUserData().profileData.industryId).toEqual("e-commerce");
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
 
-    page.chooseRadio("general-partnership");
-    await page.visitStep4();
-    expect(currentUserData().profileData.legalStructureId).toEqual("general-partnership");
+      page.chooseRadio("general-partnership");
+      await page.visitStep4();
+      expect(currentUserData().profileData.legalStructureId).toEqual("general-partnership");
 
-    page.selectByText("Location", "Newark");
-    await page.visitStep5();
-    expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
+      page.selectByText("Location", "Newark");
+      await page.visitStep5();
+      expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
 
-    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    page.clickNext();
+      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+      page.clickNext();
 
-    await waitFor(() => {
-      const expectedUserData: UserData = {
-        ...initialUserData,
-        formProgress: "COMPLETED",
-        profileData: {
-          ...initialUserData.profileData,
-          initialOnboardingFlow: "STARTING",
-          hasExistingBusiness: false,
-          businessName: "",
-          industryId: "e-commerce",
-          sectorId: "retail-trade-and-ecommerce",
-          homeBasedBusiness: true,
-          legalStructureId: "general-partnership",
-          municipality: newark,
-        },
-        user: {
-          ...initialUserData.user,
-          name: "My Name",
-          email: "email@example.com",
-        },
-      };
-
-      expect(mockApi.postNewsletter).toHaveBeenCalledWith({
-        ...expectedUserData,
-        user: { ...expectedUserData.user, externalStatus: {} },
-      });
-
-      expect(mockApi.postUserTesting).toHaveBeenCalledWith({
-        ...expectedUserData,
-        user: {
-          ...expectedUserData.user,
-          externalStatus: { newsletter: { status: "SUCCESS", success: true } },
-        },
-      });
-
-      expect(currentUserData()).toEqual({
-        ...expectedUserData,
-        user: {
-          ...expectedUserData.user,
-          externalStatus: {
-            newsletter: { status: "SUCCESS", success: true },
-            userTesting: { status: "SUCCESS", success: true },
+      await waitFor(() => {
+        const expectedUserData: UserData = {
+          ...initialUserData,
+          formProgress: "COMPLETED",
+          profileData: {
+            ...initialUserData.profileData,
+            initialOnboardingFlow: "STARTING",
+            hasExistingBusiness: false,
+            businessName: "",
+            industryId: "e-commerce",
+            sectorId: "retail-trade-and-ecommerce",
+            homeBasedBusiness: true,
+            legalStructureId: "general-partnership",
+            municipality: newark,
           },
-        },
+          user: {
+            ...initialUserData.user,
+            name: "My Name",
+            email: "email@example.com",
+          },
+        };
+
+        expect(mockApi.postNewsletter).toHaveBeenCalledWith({
+          ...expectedUserData,
+          user: { ...expectedUserData.user, externalStatus: {} },
+        });
+
+        expect(mockApi.postUserTesting).toHaveBeenCalledWith({
+          ...expectedUserData,
+          user: {
+            ...expectedUserData.user,
+            externalStatus: { newsletter: { status: "SUCCESS", success: true } },
+          },
+        });
+
+        expect(currentUserData()).toEqual({
+          ...expectedUserData,
+          user: {
+            ...expectedUserData.user,
+            externalStatus: {
+              newsletter: { status: "SUCCESS", success: true },
+              userTesting: { status: "SUCCESS", success: true },
+            },
+          },
+        });
       });
     });
   });
 
   it("removes required fields error when user goes back", async () => {
-    const { subject, page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
-    await page.visitStep2();
-    page.selectByText("Industry", "Any Other Business Type");
-    await page.visitStep3();
-    page.clickNext();
-    expect(subject.getByTestId("step-3")).toBeInTheDocument();
-    expect(subject.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
-    page.clickBack();
-    expect(subject.queryByTestId("error-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
+    act(async () => {
+      const { subject, page } = renderPage({});
+      page.chooseRadio("has-existing-business-false");
+      await page.visitStep2();
+      page.selectByText("Industry", "Any Other Business Type");
+      await page.visitStep3();
+      page.clickNext();
+      expect(subject.getByTestId("step-3")).toBeInTheDocument();
+      expect(subject.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
+      page.clickBack();
+      expect(subject.queryByTestId("error-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
+    });
   });
 
   describe("validates self-reg step", () => {

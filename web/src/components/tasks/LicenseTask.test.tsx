@@ -166,19 +166,23 @@ describe("<LicenseTask />", () => {
     });
 
     it("displays error alert when license status cannot be found", async () => {
-      subject = renderTask();
-      expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
+      act(async () => {
+        subject = renderTask();
+        expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument();
 
-      mockApi.checkLicenseStatus.mockRejectedValue(404);
-      fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await waitFor(() => expect(subject.queryByTestId("error-alert-NOT_FOUND")).toBeInTheDocument());
+        mockApi.checkLicenseStatus.mockRejectedValue(404);
+        fireEvent.submit(subject.getByTestId("check-status-submit"));
+        await waitFor(() => expect(subject.queryByTestId("error-alert-NOT_FOUND")).toBeInTheDocument());
 
-      mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
-      fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await waitFor(() => expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument());
+        mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
+        fireEvent.submit(subject.getByTestId("check-status-submit"));
+        await waitFor(() => expect(subject.queryByTestId("error-alert-NOT_FOUND")).not.toBeInTheDocument());
+      });
     });
+  });
 
-    it("displays error alert when license status search fails", async () => {
+  it("displays error alert when license status search fails", async () => {
+    act(async () => {
       subject = renderTask();
       expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
 
@@ -190,8 +194,10 @@ describe("<LicenseTask />", () => {
       fireEvent.submit(subject.getByTestId("check-status-submit"));
       await waitFor(() => expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument());
     });
+  });
 
-    it("displays error alert when some information is missing", async () => {
+  it("displays error alert when some information is missing", async () => {
+    act(async () => {
       subject = renderTask();
       expect(subject.queryByTestId("error-alert-FIELDS_REQUIRED")).not.toBeInTheDocument();
 
@@ -209,8 +215,10 @@ describe("<LicenseTask />", () => {
       await waitForElementToBeRemoved(() => subject.queryByTestId("error-alert-FIELDS_REQUIRED"));
       expect(mockApi.checkLicenseStatus).toHaveBeenCalled();
     });
+  });
 
-    it("displays the loading spinner while request is being made", async () => {
+  it("displays the loading spinner while request is being made", async () => {
+    act(async () => {
       const returnedPromise = Promise.resolve(generateUserData({}));
       mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
       subject = renderTask();
@@ -227,8 +235,10 @@ describe("<LicenseTask />", () => {
         expect(subject.queryByTestId("loading-spinner")).not.toBeInTheDocument();
       });
     });
+  });
 
-    it("displays the loading spinner while failed request is being made", async () => {
+  it("displays the loading spinner while failed request is being made", async () => {
+    act(async () => {
       const returnedPromise = Promise.reject(404);
       mockApi.checkLicenseStatus.mockReturnValue(returnedPromise);
       subject = renderTask();
@@ -248,55 +258,61 @@ describe("<LicenseTask />", () => {
 
   describe("receipt screen", () => {
     it("displays license status results when it is found", async () => {
-      subject = renderTask();
+      act(async () => {
+        subject = renderTask();
 
-      mockApi.checkLicenseStatus.mockResolvedValue(
-        generateUserData({
-          licenseData: generateLicenseData({
-            items: [
-              generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
-              generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
-            ],
-          }),
-        })
-      );
+        mockApi.checkLicenseStatus.mockResolvedValue(
+          generateUserData({
+            licenseData: generateLicenseData({
+              items: [
+                generateLicenseStatusItem({ title: "application fee", status: "PENDING" }),
+                generateLicenseStatusItem({ title: "board approval", status: "ACTIVE" }),
+              ],
+            }),
+          })
+        );
 
-      fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await waitFor(() => expect(subject.getByText("application fee")).toBeInTheDocument());
-      expect(subject.getByText("board approval")).toBeInTheDocument();
-      expect(subject.getByTestId("permit-PENDING")).toBeInTheDocument();
-      expect(subject.getByTestId("item-PENDING")).toBeInTheDocument();
-      expect(subject.getByTestId("item-ACTIVE")).toBeInTheDocument();
+        fireEvent.submit(subject.getByTestId("check-status-submit"));
+        await waitFor(() => expect(subject.getByText("application fee")).toBeInTheDocument());
+        expect(subject.getByText("board approval")).toBeInTheDocument();
+        expect(subject.getByTestId("permit-PENDING")).toBeInTheDocument();
+        expect(subject.getByTestId("item-PENDING")).toBeInTheDocument();
+        expect(subject.getByTestId("item-ACTIVE")).toBeInTheDocument();
+      });
     });
 
     it("displays name and address on receipt screen", async () => {
-      useMockUserData({
-        licenseData: generateLicenseData({
-          completedSearch: true,
-          nameAndAddress: generateNameAndAddress({
-            name: "My Cool Nail Salon",
-            addressLine1: "123 Main St",
-            addressLine2: "Suite 1",
-            zipCode: "12345",
+      act(async () => {
+        useMockUserData({
+          licenseData: generateLicenseData({
+            completedSearch: true,
+            nameAndAddress: generateNameAndAddress({
+              name: "My Cool Nail Salon",
+              addressLine1: "123 Main St",
+              addressLine2: "Suite 1",
+              zipCode: "12345",
+            }),
           }),
-        }),
+        });
+
+        subject = renderTask();
+
+        expect(subject.getByText("My Cool Nail Salon")).toBeInTheDocument();
+        expect(subject.getByText("123 Main St Suite 1, 12345 NJ")).toBeInTheDocument();
       });
-
-      subject = renderTask();
-
-      expect(subject.getByText("My Cool Nail Salon")).toBeInTheDocument();
-      expect(subject.getByText("123 Main St Suite 1, 12345 NJ")).toBeInTheDocument();
     });
 
     it("edits info on receipt screen", async () => {
-      subject = renderTask();
+      act(async () => {
+        subject = renderTask();
 
-      fillText("business-name", "Some business");
-      mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
+        fillText("business-name", "Some business");
+        mockApi.checkLicenseStatus.mockResolvedValue(generateUserData({}));
 
-      fireEvent.submit(subject.getByTestId("check-status-submit"));
-      await waitFor(() => fireEvent.click(subject.getByTestId("edit-button")));
-      fillText("business-name", "Some Other Business");
+        fireEvent.submit(subject.getByTestId("check-status-submit"));
+        await waitFor(() => fireEvent.click(subject.getByTestId("edit-button")));
+        fillText("business-name", "Some Other Business");
+      });
     });
   });
 
