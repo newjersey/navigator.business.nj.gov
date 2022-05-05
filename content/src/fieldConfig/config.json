@@ -184,6 +184,7 @@
     "nameCheckValidationErrorText": "You need to enter a business name to check availability.",
     "successPageHeader": "Hooray!",
     "businessPurposeTitle": "Business Purpose",
+    "businessPurposeBodyText": "Describe your business' primary activities. (Businesses do this to make their business purpose searchable on the Public Record.)",
     "businessPurposeOptionalLabel": "(Optional)",
     "businessPurposeAddButtonText": "Add Business Purpose",
     "businessPurposeLabel": "**Business Purpose**",
