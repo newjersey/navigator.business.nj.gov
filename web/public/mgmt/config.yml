@@ -136,6 +136,12 @@ collections:
               - { label: Business Suffix Tooltip, name: businessSuffixTooltip, widget: string }
               - { label: Business Suffix Placeholder, name: businessSuffixPlaceholder, widget: string }
               - { label: Business Purpose Title, name: businessPurposeTitle, widget: string }
+              - {
+                  label: Business Purpose Body Text,
+                  name: businessPurposeBodyText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
               - { label: Business Purpose Optional Label, name: businessPurposeOptionalLabel, widget: string }
               - {
                   label: Business Purpose Add Button Text,

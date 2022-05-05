@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
@@ -25,13 +26,13 @@ export const BusinessPurpose = (): ReactElement => {
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
-        <h2 className="margin-bottom-0">
+        <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
           {Config.businessFormationDefaults.businessPurposeTitle}
           <span className="text-normal font-body-lg margin-left-1">
             {Config.businessFormationDefaults.businessPurposeOptionalLabel}
           </span>
-        </h2>
-        <div className="mobile-lg:margin-left-auto flex flex-justify-center">
+        </div>
+        <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <Button style="tertiary" onClick={handleButtonClick}>
               {Config.businessFormationDefaults.businessPurposeAddButtonText}
@@ -41,6 +42,9 @@ export const BusinessPurpose = (): ReactElement => {
       </div>
       {isExpanded && (
         <>
+          <Content className="margin-bottom-2">
+            {Config.businessFormationDefaults.businessPurposeBodyText}
+          </Content>
           <div className="grid-row">
             <div className="grid-col">
               <BusinessFormationTextField
