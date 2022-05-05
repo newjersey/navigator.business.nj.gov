@@ -358,7 +358,8 @@ const ProfilePage = (props: Props): ReactElement => {
         <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
       </Box>
       {userData?.formationData.getFilingResponse?.success ||
-      userData?.profileData.hasExistingBusiness == false ? (
+      (userData?.profileData.hasExistingBusiness == false &&
+        LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling) ? (
         <Box
           className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
           sx={{

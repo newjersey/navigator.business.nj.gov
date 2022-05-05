@@ -712,7 +712,7 @@ describe("profile", () => {
           }),
         });
         subject = renderPage({ userData });
-        chooseTab("documents");
+        expect(subject.queryByTestId("documents")).not.toBeInTheDocument();
         expect(subject.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
       });
     });
