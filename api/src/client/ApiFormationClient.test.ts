@@ -45,6 +45,7 @@ describe("ApiFormationClient", () => {
           name: "faraz",
           signature: true,
         },
+        provisions: ["provision1", "provision2"],
         members: [generateFormationMember({})],
         additionalSigners: [
           {
@@ -103,6 +104,9 @@ describe("ApiFormationClient", () => {
               Zipcode: formationFormData.businessAddressZipCode,
               Country: "US",
             },
+          },
+          AdditionalLimitedLiabilityCompany: {
+            OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
           },
           CompanyProfit: "Profit",
           RegisteredAgent: {
@@ -210,6 +214,23 @@ describe("ApiFormationClient", () => {
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
       expect(postBody.Formation.BusinessInformation.BusinessPurpose).toBeUndefined();
+    });
+
+    it("does not send AdditionalLimitedLiabilityCompany if provisions is empty", async () => {
+      const stubResponse = generateApiResponse({});
+      mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+      const formationFormData = generateFormationFormData({
+        provisions: [],
+      });
+
+      const userData = generateUserData({
+        formationData: generateFormationData({ formationFormData }),
+      });
+
+      await client.form(userData, "some-url");
+      const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+      expect(postBody.Formation.AdditionalLimitedLiabilityCompany).toBeUndefined();
     });
 
     it("responds with success, token, and redirect url", async () => {

@@ -1,6 +1,7 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { BusinessPurpose } from "@/components/tasks/business-formation/business/BusinessPurpose";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
+import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
 import { RegisteredAgent } from "@/components/tasks/business-formation/business/RegisteredAgent";
 import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
@@ -13,7 +14,7 @@ import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 export const BusinessSection = (): ReactElement => {
-  const { state, setErrorMap, setTab } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap, setTab } = useContext(FormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const { userData, update } = useUserData();
 
@@ -101,11 +102,17 @@ export const BusinessSection = (): ReactElement => {
   const submitBusinessData = async () => {
     if (!userData) return;
 
+    const filteredProvisions = state.formationFormData.provisions.filter((it) => it !== "");
+    setFormationFormData({ ...state.formationFormData, provisions: filteredProvisions });
+
     const finalUserData = {
       ...userData,
       formationData: {
         ...userData.formationData,
-        formationFormData: state.formationFormData,
+        formationFormData: {
+          ...state.formationFormData,
+          provisions: filteredProvisions,
+        },
       },
     };
 
@@ -142,6 +149,8 @@ export const BusinessSection = (): ReactElement => {
       <RegisteredAgent />
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <BusinessPurpose />
+      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+      <Provisions />
       <BusinessFormationFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
         requiredFieldsWithError={requiredFieldsWithError}
