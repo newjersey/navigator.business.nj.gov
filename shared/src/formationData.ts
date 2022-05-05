@@ -39,9 +39,9 @@ export interface FormationFormData {
   readonly agentOfficeAddressCity: string;
   readonly agentOfficeAddressState: string;
   readonly agentOfficeAddressZipCode: string;
-  members: FormationMember[];
+  readonly members: FormationMember[];
   readonly signer: FormationSigner;
-  additionalSigners: FormationSigner[];
+  readonly additionalSigners: FormationSigner[];
   readonly paymentType: PaymentType;
   readonly annualReportNotification: boolean;
   readonly corpWatchNotification: boolean;
