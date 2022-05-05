@@ -648,3 +648,75 @@ export type SelfRegRequest = {
 export type businessFormationTabsNames = "Name" | "Business" | "Contacts" | "Review" | "Billing";
 
 export type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
+
+export type RoadmapSideBarContent = {
+  welcomeCard: {
+    contentMd: string;
+    id: string;
+    header: string;
+    imgPath: string;
+    color: string;
+    shadowColor: string;
+  };
+  welcomeCardGpOrSpCard: {
+    contentMd: string;
+    id: string;
+    header: string;
+    imgPath: string;
+    color: string;
+    shadowColor: string;
+  };
+  guestSuccessfullyRegisteredCard: {
+    contentMd: string;
+    id: string;
+    header: string;
+    imgPath: string;
+    color: string;
+    shadowColor: string;
+  };
+  guestNotRegisteredCard: {
+    contentMd: string;
+    id: string;
+    header: string;
+    imgPath: string;
+    color: string;
+    shadowColor: string;
+  };
+};
+
+const emptySideBarContent = {
+  welcomeCard: {
+    contentMd: "",
+    id: "",
+    header: "",
+    imgPath: "",
+    color: "",
+    shadowColor: "",
+  },
+  welcomeCardGpOrSpCard: {
+    contentMd: "",
+    id: "",
+    header: "",
+    imgPath: "",
+    color: "",
+    shadowColor: "",
+  },
+  guestSuccessfullyRegisteredCard: {
+    contentMd: "",
+    id: "",
+    header: "",
+    imgPath: "",
+    color: "",
+    shadowColor: "",
+  },
+  guestNotRegisteredCard: {
+    contentMd: "",
+    id: "",
+    header: "",
+    imgPath: "",
+    color: "",
+    shadowColor: "",
+  },
+};
+
+export const createEmptySideBarDisplayContent = (): RoadmapSideBarContent => emptySideBarContent;

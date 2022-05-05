@@ -1,19 +1,29 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
-import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
+import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { GraduationBox } from "@/components/roadmap/GraduationBox";
 import { MiniProfile } from "@/components/roadmap/MiniProfile";
+import { RoadmapSidebarList } from "@/components/roadmap/RoadmapSidebarList";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { loadRoadmapDisplayContent, loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
+import {
+  loadRoadmapDisplayContent,
+  loadRoadmapSidebarDisplayContent,
+  loadUserDisplayContent,
+} from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { LoadDisplayContent, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
+import {
+  LoadDisplayContent,
+  OperateReference,
+  RoadmapDisplayContent,
+  RoadmapSideBarContent,
+} from "@/lib/types/types";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
@@ -25,6 +35,7 @@ interface Props {
   displayContent: RoadmapDisplayContent;
   profileDisplayContent: LoadDisplayContent;
   operateReferences: Record<string, OperateReference>;
+  sideBarDisplayContent: RoadmapSideBarContent;
 }
 
 const RoadmapPage = (props: Props): ReactElement => {
@@ -70,61 +81,76 @@ const RoadmapPage = (props: Props): ReactElement => {
     }
   };
 
-  return (
-    <PageSkeleton showLegalMessage={true}>
-      <NavBar />
-      <main id="main">
-        {!userData || userData?.formProgress !== "COMPLETED" ? (
-          <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
-            <div className="flex flex-justify-center flex-align-center margin-top-3 desktop:margin-top-0">
-              <CircularProgress id="roadmapPage" aria-label="roadmap page progress bar" aria-busy={true} />
+  const renderRoadmap = (
+    <div className="margin-top-6 desktop:margin-top-0">
+      <div className="margin-bottom-205 bg-white">
+        <h1 className="h1-styling-large">{getHeader()}</h1>
+      </div>
+      <UserDataErrorAlert />
+      {(!error || error !== "NO_DATA") && (
+        <>
+          <div className="allow-long usa-intro bg-white">
+            <Content>{props.displayContent.contentMd}</Content>
+          </div>
+          {!userData ? (
+            <div className="flex flex-justify-center flex-align-center">
+              <CircularProgress
+                id="roadmapSection"
+                aria-label="roadmap section progress bar"
+                aria-busy={true}
+              />
               <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
             </div>
+          ) : (
+            <MiniProfile profileData={userData.profileData} />
+          )}
+        </>
+      )}
+      <div className="margin-top-3">
+        {!roadmap ? (
+          <div className="flex flex-justify-center flex-align-center">
+            <CircularProgress
+              id="roadmapSection"
+              aria-label="roadmap section progress bar"
+              aria-busy={true}
+            />
+            <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
           </div>
         ) : (
-          <SingleColumnContainer>
-            <div className="padding-top-6 padding-bottom-15">
-              <div className="margin-bottom-205">
-                <h1 className="h1-styling-large">{getHeader()}</h1>
-              </div>
-              <UserDataErrorAlert />
-              {(!error || error !== "NO_DATA") && (
-                <>
-                  <div className="allow-long usa-intro">
-                    <Content>{props.displayContent.contentMd}</Content>
-                  </div>
-                  <MiniProfile profileData={userData.profileData} />
-                </>
-              )}
-              <div className="margin-top-3">
-                {!roadmap ? (
-                  <div className="flex flex-justify-center flex-align-center">
-                    <CircularProgress
-                      id="roadmapSection"
-                      aria-label="roadmap section progress bar"
-                      aria-busy={true}
-                    />
-                    <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
-                  </div>
-                ) : (
-                  <>
-                    {getSectionNames(roadmap).map((section) => (
-                      <SectionAccordion key={section} sectionType={section}>
-                        {roadmap.steps
-                          .filter((step) => step.section === section)
-                          .map((step, index, array) => (
-                            <Step key={step.step_number} step={step} last={index === array.length - 1} />
-                          ))}
-                      </SectionAccordion>
-                    ))}
-                    <div className="margin-top-6">
-                      <GraduationBox displayContent={props.profileDisplayContent} />
-                    </div>
-                  </>
-                )}
-              </div>
+          <>
+            {getSectionNames(roadmap).map((section) => (
+              <SectionAccordion key={section} sectionType={section}>
+                {roadmap.steps
+                  .filter((step) => step.section === section)
+                  .map((step, index, array) => (
+                    <Step key={step.step_number} step={step} last={index === array.length - 1} />
+                  ))}
+              </SectionAccordion>
+            ))}
+            <div className="margin-top-6">
+              <GraduationBox displayContent={props.profileDisplayContent} />
             </div>
-          </SingleColumnContainer>
+          </>
+        )}
+      </div>
+    </div>
+  );
+
+  return (
+    <PageSkeleton isWidePage showLegalMessage>
+      <NavBar isWidePage />
+      <main id="main">
+        {!userData || userData?.formProgress !== "COMPLETED" ? (
+          <div className="flex flex-justify-center flex-align-center margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
+            <CircularProgress id="roadmapPage" aria-label="roadmap page progress bar" aria-busy={true} />
+            <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
+          </div>
+        ) : (
+          <RightSidebarPageLayout
+            color="blue"
+            mainContent={renderRoadmap}
+            sidebarContent={<RoadmapSidebarList sideBarDisplayContent={props.sideBarDisplayContent} />}
+          />
         )}
         {successAlert && (
           <ToastAlert
@@ -151,6 +177,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       displayContent: loadRoadmapDisplayContent(),
       profileDisplayContent: loadUserDisplayContent(),
       operateReferences: loadOperateReferences(),
+      sideBarDisplayContent: loadRoadmapSidebarDisplayContent(),
     },
   };
 };

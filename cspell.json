@@ -62,7 +62,8 @@
     "fundings",
     "newjersey",
     "HVACR",
-    "siccode"
+    "siccode",
+    "checkmark"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

@@ -29,6 +29,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
+      hiddenRoadmapSidebarCards: ["successful-registration", "not-registered"],
     },
     taxFilingData: {
       filings: [],
@@ -48,6 +49,7 @@ export interface Preferences {
   roadmapOpenSteps: number[];
   hiddenFundingIds: string[];
   hiddenCertificationIds: string[];
+  hiddenRoadmapSidebarCards: string[];
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
