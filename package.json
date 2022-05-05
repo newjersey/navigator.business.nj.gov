@@ -252,7 +252,7 @@
   },
   "packageManager": "yarn@3.2.0",
   "resolutions": {
-    "@types/react": "^17.0.44",
+    "@types/react": "^18.0.0",
     "trim@0.0.1": "0.0.3",
     "postcss": "8.4.13",
     "glob-parent": "6.0.2",
