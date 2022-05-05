@@ -35,10 +35,10 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Marketing Consulting",
+  "name": "Marketing and PR Consulting",
   "isLiquorLicenseApplicable": false,
   "isCpaRequiredApplicable": false,
-  "additionalSearchTerms": "marketing, advertising, consultant, press, communications",
-  "id": "marketing-consulting",
+  "additionalSearchTerms": "marketing, advertising, consultant, press, communications, Image management, consultant, advertising, communications, media",
+  "id": "marketing-pr-consulting",
   "description": "Expert advice to improve the client’s business exposure"
 }
