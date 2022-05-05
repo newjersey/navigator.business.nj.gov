@@ -3,6 +3,7 @@ import { AlertVariant } from "@/components/njwds-extended/Alert";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -13,13 +14,24 @@ import React, { ReactElement, useContext, useEffect } from "react";
 export const SelfRegToast = (): ReactElement => {
   const { isAuthenticated, registrationAlertStatus, setRegistrationAlertStatus } =
     useContext(AuthAlertContext);
+  const { userData, update } = useUserData();
 
   useEffect(() => {
     if (registrationAlertStatus == "IN_PROGRESS" && isAuthenticated == IsAuthenticated.TRUE) {
       analytics.event.roadmap_dashboard.arrive.arrive_from_myNJ_registration();
       setRegistrationAlertStatus("SUCCESS");
+
+      if (userData && userData.preferences.hiddenRoadmapSidebarCards.includes("successful-registration")) {
+        const showAccountRegisteredCard = userData.preferences.hiddenRoadmapSidebarCards.filter(
+          (id: string) => id !== "successful-registration"
+        );
+        update({
+          ...userData,
+          preferences: { ...userData.preferences, hiddenRoadmapSidebarCards: showAccountRegisteredCard },
+        });
+      }
     }
-  }, [isAuthenticated, registrationAlertStatus, setRegistrationAlertStatus]);
+  }, [isAuthenticated, registrationAlertStatus, setRegistrationAlertStatus, update, userData]);
 
   type AlertStatus = Exclude<RegistrationStatus, "IN_PROGRESS">;
   const alertMap: Record<AlertStatus, AlertVariant> = {

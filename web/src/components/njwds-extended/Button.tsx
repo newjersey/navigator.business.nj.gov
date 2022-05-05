@@ -29,6 +29,7 @@ interface Props {
   intercomButton?: boolean;
   className?: string;
   align?: "start" | "end" | "center";
+  ariaLabel?: string;
 }
 
 export const Button = (props: Props): ReactElement => {
@@ -125,6 +126,7 @@ export const Button = (props: Props): ReactElement => {
       onClick={props.onClick}
       {...(props.typeSubmit ? { type: "submit" } : { type: "button" })}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
+      {...(props.ariaLabel ? { "aria-label": props.ariaLabel } : {})}
     >
       {props.loading ? (
         <div style={{ width: width, height: height }} data-testid="loading-spinner">

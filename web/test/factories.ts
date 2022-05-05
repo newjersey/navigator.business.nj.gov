@@ -13,6 +13,7 @@ import {
   NameAvailability,
   OperateReference,
   Roadmap,
+  RoadmapSideBarContent,
   SectionCompletion,
   SectionType,
   Step,
@@ -174,6 +175,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     roadmapOpenSteps: [randomInt()],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
+    hiddenRoadmapSidebarCards: ["successful-registration", "not-registered"],
     ...overrides,
   };
 };
@@ -376,6 +378,44 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
     contactFirstName: `some-contact-first-name-${randomInt()}`,
     contactLastName: `some-contact-last-name-${randomInt()}`,
     contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateSideBarContent = (overrides: Partial<RoadmapSideBarContent>): RoadmapSideBarContent => {
+  return {
+    welcomeCard: {
+      contentMd: `some-welcome-content-${randomInt()}`,
+      id: `some-welcome-id-${randomInt()}`,
+      header: `some-welcome-header-${randomInt()}`,
+      imgPath: `some-welcome-img-path-${randomInt()}`,
+      color: `some-welcome-color-${randomInt()}`,
+      shadowColor: `some-welcome-shadow-color-${randomInt()}`,
+    },
+    welcomeCardGpOrSpCard: {
+      contentMd: `some-welcome-gp-or-sp-content-${randomInt()}`,
+      id: `some-welcome-gp-or-sp-id-${randomInt()}`,
+      header: `some-welcome-gp-or-sp-header-${randomInt()}`,
+      imgPath: `some-welcome-gp-or-sp-img-path-${randomInt()}`,
+      color: `some-welcome-gp-or-sp-color-${randomInt()}`,
+      shadowColor: `some-welcome-gp-or-sp-shadow-color-${randomInt()}`,
+    },
+    guestSuccessfullyRegisteredCard: {
+      contentMd: `some-successfully-registered-guest-content-${randomInt()}`,
+      id: `some-successfully-registered-guest-id-${randomInt()}`,
+      header: `some-successfully-registered-guest-header-${randomInt()}`,
+      imgPath: `some-successfully-registered-guest-img-path-${randomInt()}`,
+      color: `some-successfully-registered-guest-color-${randomInt()}`,
+      shadowColor: `some-successfully-registered-guest-shadow-color-${randomInt()}`,
+    },
+    guestNotRegisteredCard: {
+      contentMd: `some-not-regestered-guest-content-${randomInt()}`,
+      id: `some-not-regestered-guest-id-${randomInt()}`,
+      header: `some-not-regestered-guest-header-${randomInt()}`,
+      imgPath: `some-not-regestered-guest-img-path-${randomInt()}`,
+      color: `some-not-registered-guest-color-${randomInt()}`,
+      shadowColor: `some-not-registered-guest-shadow-color-${randomInt()}`,
+    },
     ...overrides,
   };
 };

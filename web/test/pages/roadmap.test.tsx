@@ -1,6 +1,8 @@
+import { SelfRegToast } from "@/components/auth/SelfRegToast";
+import { SignUpToast } from "@/components/auth/SignUpToast";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { createEmptyLoadDisplayContent } from "@/lib/types/types";
+import { createEmptyLoadDisplayContent, createEmptySideBarDisplayContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import RoadmapPage from "@/pages/roadmap";
 import {
@@ -9,13 +11,14 @@ import {
   generateMunicipality,
   generatePreferences,
   generateProfileData,
+  generateSideBarContent,
   generateStep,
   generateTask,
   generateTaxFilingData,
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers";
+import { randomElementFromArray, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -37,6 +40,7 @@ import {
   LookupIndustryById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
+  randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -86,6 +90,7 @@ describe("roadmap page", () => {
           operateReferences={{}}
           displayContent={emptyDisplayContent}
           profileDisplayContent={createEmptyLoadDisplayContent()}
+          sideBarDisplayContent={createEmptySideBarDisplayContent()}
         />
       </ThemeProvider>
     );
@@ -136,6 +141,7 @@ describe("roadmap page", () => {
             operateReferences={{}}
             displayContent={emptyDisplayContent}
             profileDisplayContent={createEmptyLoadDisplayContent()}
+            sideBarDisplayContent={createEmptySideBarDisplayContent()}
           />
         </ThemeProvider>,
         IsAuthenticated.FALSE,
@@ -157,6 +163,7 @@ describe("roadmap page", () => {
             operateReferences={{}}
             displayContent={emptyDisplayContent}
             profileDisplayContent={createEmptyLoadDisplayContent()}
+            sideBarDisplayContent={createEmptySideBarDisplayContent()}
           />
         </ThemeProvider>,
         IsAuthenticated.TRUE,
@@ -548,6 +555,7 @@ describe("roadmap page", () => {
               operateReferences={{}}
               displayContent={emptyDisplayContent}
               profileDisplayContent={createEmptyLoadDisplayContent()}
+              sideBarDisplayContent={createEmptySideBarDisplayContent()}
             />
           </ThemeProvider>
         </WithStatefulUserData>
@@ -779,6 +787,224 @@ describe("roadmap page", () => {
           "MM/YYYY"
         )
       );
+    });
+  });
+
+  it("renders welcome card for SP and GP users", () => {
+    const legalStructureId = randomInt() % 2 ? "sole-proprietorship" : "general-partnership";
+
+    useMockUserData({
+      profileData: generateProfileData({ legalStructureId: legalStructureId }),
+    });
+
+    const subject = render(
+      withAuthAlert(
+        <ThemeProvider theme={createTheme()}>
+          <SelfRegToast />
+          <RoadmapPage
+            operateReferences={{}}
+            displayContent={emptyDisplayContent}
+            profileDisplayContent={createEmptyLoadDisplayContent()}
+            sideBarDisplayContent={generateSideBarContent({
+              welcomeCard: {
+                id: "456",
+                header: "altHeader",
+                contentMd: "altContent",
+                imgPath: "",
+                color: "",
+                shadowColor: "",
+              },
+              welcomeCardGpOrSpCard: {
+                id: "123",
+                header: "header",
+                contentMd: "GpSp-Content",
+                imgPath: "",
+                color: "",
+                shadowColor: "",
+              },
+            })}
+          />
+        </ThemeProvider>,
+        IsAuthenticated.TRUE,
+        { registrationAlertStatus: "SUCCESS" }
+      )
+    );
+
+    expect(subject.getByText("GpSp-Content")).toBeInTheDocument();
+    expect(subject.queryByText("altContent")).not.toBeInTheDocument();
+  });
+
+  it("renders welcome card for users that are not SP or GP", () => {
+    const legalStructureId = randomElementFromArray([
+      "limited-partnership",
+      "limited-liability-partnership",
+      "limited-liability-company",
+      "c-corporation",
+      "s-corporation",
+    ]);
+
+    useMockUserData({
+      profileData: generateProfileData({ legalStructureId: legalStructureId }),
+    });
+
+    const subject = render(
+      withAuthAlert(
+        <ThemeProvider theme={createTheme()}>
+          <SelfRegToast />
+          <RoadmapPage
+            operateReferences={{}}
+            displayContent={emptyDisplayContent}
+            profileDisplayContent={createEmptyLoadDisplayContent()}
+            sideBarDisplayContent={generateSideBarContent({
+              welcomeCard: {
+                id: "456",
+                header: "altHeader",
+                contentMd: "altContent",
+                imgPath: "",
+                color: "",
+                shadowColor: "",
+              },
+              welcomeCardGpOrSpCard: {
+                id: "123",
+                header: "header",
+                contentMd: "content",
+                imgPath: "",
+                color: "",
+                shadowColor: "",
+              },
+            })}
+          />
+        </ThemeProvider>,
+        IsAuthenticated.TRUE,
+        { registrationAlertStatus: "SUCCESS" }
+      )
+    );
+
+    expect(subject.queryByText("content")).not.toBeInTheDocument();
+    expect(subject.getByText("altContent")).toBeInTheDocument();
+  });
+
+  it("renders registration card when SignUpToast is closed", async () => {
+    setupStatefulUserDataContext();
+
+    const userData = generateUserData({});
+
+    const subject = render(
+      withAuthAlert(
+        <WithStatefulUserData initialUserData={userData}>
+          <ThemeProvider theme={createTheme()}>
+            <SignUpToast />
+            <RoadmapPage
+              operateReferences={{}}
+              displayContent={emptyDisplayContent}
+              profileDisplayContent={createEmptyLoadDisplayContent()}
+              sideBarDisplayContent={generateSideBarContent({
+                guestNotRegisteredCard: {
+                  id: "not-registered",
+                  contentMd: "content",
+                  header: "",
+                  imgPath: "",
+                  color: "",
+                  shadowColor: "",
+                },
+              })}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>,
+
+        IsAuthenticated.FALSE,
+        { alertIsVisible: true }
+      )
+    );
+
+    expect(subject.queryByText("content")).not.toBeInTheDocument();
+
+    fireEvent.click(within(subject.queryByTestId("self-reg-toast") as HTMLElement).getByLabelText("close"));
+
+    await waitFor(() => {
+      expect(subject.getByText("content")).toBeInTheDocument();
+    });
+  });
+
+  it("renders successful registration card when user is authenicated and registration status is in progress", async () => {
+    const setRegistrationAlertStatus = jest.fn();
+
+    setupStatefulUserDataContext();
+    const userData = generateUserData({});
+
+    const subject = render(
+      withAuthAlert(
+        <WithStatefulUserData initialUserData={userData}>
+          <ThemeProvider theme={createTheme()}>
+            <SelfRegToast />
+            <RoadmapPage
+              operateReferences={{}}
+              displayContent={emptyDisplayContent}
+              profileDisplayContent={createEmptyLoadDisplayContent()}
+              sideBarDisplayContent={generateSideBarContent({
+                guestSuccessfullyRegisteredCard: {
+                  id: "successful-registration",
+                  contentMd: "content",
+                  header: "header",
+                  imgPath: "",
+                  color: "",
+                  shadowColor: "",
+                },
+              })}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>,
+        IsAuthenticated.TRUE,
+        { registrationAlertStatus: "IN_PROGRESS", setRegistrationAlertStatus }
+      )
+    );
+
+    expect(setRegistrationAlertStatus).toBeCalledWith("SUCCESS");
+
+    await waitFor(() => {
+      expect(subject.queryByText("content")).toBeInTheDocument();
+    });
+  });
+
+  it("successful registration card is removed when the close button is clicked", async () => {
+    setupStatefulUserDataContext();
+    const userData = generateUserData({
+      preferences: generatePreferences({ hiddenRoadmapSidebarCards: ["not-registered"] }),
+    });
+
+    const subject = render(
+      <WithStatefulUserData initialUserData={userData}>
+        <ThemeProvider theme={createTheme()}>
+          <SelfRegToast />
+          <RoadmapPage
+            operateReferences={{}}
+            displayContent={emptyDisplayContent}
+            profileDisplayContent={createEmptyLoadDisplayContent()}
+            sideBarDisplayContent={generateSideBarContent({
+              guestSuccessfullyRegisteredCard: {
+                id: "successful-registration",
+                contentMd: "content",
+                header: "header",
+                imgPath: "",
+                color: "",
+                shadowColor: "",
+              },
+            })}
+          />
+        </ThemeProvider>
+      </WithStatefulUserData>
+    );
+
+    await waitFor(() => {
+      expect(subject.queryByText("content")).toBeInTheDocument();
+    });
+
+    fireEvent.click(
+      within(subject.queryByTestId("successful-registeration-card") as HTMLElement).getByLabelText("Close")
+    );
+
+    await waitFor(() => {
+      expect(subject.queryByText("content")).not.toBeInTheDocument();
     });
   });
 });

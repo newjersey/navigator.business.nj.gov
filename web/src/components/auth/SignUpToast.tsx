@@ -55,7 +55,22 @@ export const SignUpToast = (): ReactElement => {
           <Content className="padding-right-2">{Config.navigationDefaults.guestAlertTitle}</Content>
           <IconButton
             aria-label="close"
-            onClick={() => setAlertIsVisible(false)}
+            onClick={() => {
+              setAlertIsVisible(false);
+
+              if (userData && userData.preferences.hiddenRoadmapSidebarCards.includes("not-registered")) {
+                const showRegistrationCard = userData.preferences.hiddenRoadmapSidebarCards.filter(
+                  (id: string) => id !== "not-registered"
+                );
+                update({
+                  ...userData,
+                  preferences: {
+                    ...userData.preferences,
+                    hiddenRoadmapSidebarCards: showRegistrationCard,
+                  },
+                });
+              }
+            }}
             sx={{
               position: "absolute",
               right: 0,
