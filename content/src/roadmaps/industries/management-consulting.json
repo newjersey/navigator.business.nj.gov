@@ -1,8 +1,10 @@
 {
+  "naicsCodes": "541611,541618",
   "isMobileLocation": false,
   "canBeHomeBased": true,
   "defaultSectorId": "organizational-or-financial-management",
   "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -37,7 +39,6 @@
   ],
   "name": "Management Consulting",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "operations, consultant, manager consulting, business consulting",
   "id": "management-consulting",
   "description": "Expert advice to improve the client’s business operations"

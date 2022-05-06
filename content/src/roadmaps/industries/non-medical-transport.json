@@ -1,8 +1,10 @@
 {
+  "naicsCodes": "485999",
   "isMobileLocation": false,
   "canBeHomeBased": true,
   "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -52,7 +54,6 @@
   ],
   "name": "Non-Medical Transport",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "transportation service,non-emergency transportation",
   "id": "non-medical-transport",
   "description": "The transportation of an individual with medical needs"

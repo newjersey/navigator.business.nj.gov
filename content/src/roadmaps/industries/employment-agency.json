@@ -1,8 +1,10 @@
 {
+  "naicsCodes": "561311",
   "isMobileLocation": false,
   "canBeHomeBased": true,
   "defaultSectorId": "administrative-and-employment-services",
   "canBeReseller": true,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -47,7 +49,6 @@
   ],
   "name": "Employment Agency",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",
   "id": "employment-agency",
   "description": "A business that finds employment for a job seeker and employees for employers"
