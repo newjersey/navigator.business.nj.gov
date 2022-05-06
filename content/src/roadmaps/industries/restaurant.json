@@ -1,8 +1,10 @@
 {
+  "naicsCodes": "722511,722310,722320,722410,722513,722514,722515",
   "isMobileLocation": false,
   "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -47,7 +49,6 @@
   ],
   "name": "Restaurant",
   "isLiquorLicenseApplicable": true,
-  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "cafe, grill",
   "id": "restaurant",
   "description": "Provides food to patrons"
