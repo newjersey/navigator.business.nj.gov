@@ -1,8 +1,10 @@
 {
+  "naicsCodes": "541211",
   "isMobileLocation": false,
   "canBeHomeBased": true,
   "defaultSectorId": "finance-and-insurance",
   "canBeReseller": false,
+  "isCpaRequiredApplicable": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -37,7 +39,6 @@
   ],
   "name": "Accounting, Bookkeeping, and Tax Preparation",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": true,
   "modifications": [],
   "additionalSearchTerms": "CPA, accountant, accounting",
   "id": "certified-public-accountant",
