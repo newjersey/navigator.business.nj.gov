@@ -1352,14 +1352,7 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
-      - {
-          label: "Due Date",
-          name: "dueDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
+      - { label: "Due Date", name: "dueDate", widget: "string", required: false, default: "" }
 
   - name: "archived-funding-opportunities"
     label: "Archived Funding Opportunities Content"
