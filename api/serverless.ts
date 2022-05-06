@@ -116,8 +116,8 @@ const serverlessConfiguration: AWS = {
       },
     },
     apiGateway: {
-      minimumCompressionSize: 1024,
-      shouldStartNameWithService: true,
+      restApiId: "${self:custom.config.application.API_GATEWEAY_ID}",
+      restApiRootResourceId: "${self:custom.config.application.API_GATEWEAY_ROOT_RESOURCE_ID}",
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
