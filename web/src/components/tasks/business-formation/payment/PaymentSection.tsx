@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
-import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationChooseDocuments } from "@/components/tasks/business-formation/payment/FormationChooseDocuments";
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/payment/FormationChooseNotifications";
@@ -128,7 +128,7 @@ export const PaymentSection = (): ReactElement => {
       <div className="margin-top-3">
         <Content>{Config.businessFormationDefaults.paymentDisclaimerText}</Content>
       </div>
-      <BusinessFormationFieldAlert
+      <BusinessFormationEmptyFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
         requiredFieldsWithError={requiredFieldsWithError}
       />
