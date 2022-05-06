@@ -1,8 +1,10 @@
 {
+  "naicsCodes": "541690",
   "isMobileLocation": false,
   "canBeHomeBased": true,
   "defaultSectorId": "technology",
   "canBeReseller": true,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -37,7 +39,6 @@
   ],
   "name": "IT Consultant",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "tech support, information technology, tech services, technical services",
   "id": "it-consultant",
   "description": "Offers system maintenance, configuration, and troubleshooting services"
