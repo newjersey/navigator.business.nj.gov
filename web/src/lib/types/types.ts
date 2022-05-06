@@ -412,6 +412,7 @@ export type OnboardingStatus = "SUCCESS" | "ERROR";
 export type FormationFields = keyof FormationFormData;
 export type FormationFieldErrorMap = Record<FormationFields, FieldStatus>;
 export type FormationErrorTypes = "generic" | "signer-checkbox" | "signer-name";
+export type FormationFieldErrors = { name: FormationFields; types: FormationErrorTypes[] };
 export type FieldStatus = {
   invalid: boolean;
   types?: FormationErrorTypes[];

@@ -2,13 +2,12 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessPurpose } from "@/components/tasks/business-formation/business/BusinessPurpose";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
 import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
-import { RegisteredAgent } from "@/components/tasks/business-formation/business/RegisteredAgent";
 import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
-import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
+import { scrollToTop, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -19,28 +18,13 @@ export const BusinessSection = (): ReactElement => {
   const { userData, update } = useUserData();
 
   const requiredFieldsWithError = useMemo(() => {
-    let requiredFields: FormationFields[] = [
+    const requiredFields: FormationFields[] = [
       "businessName",
       "businessSuffix",
       "businessAddressCity",
       "businessAddressLine1",
       "businessAddressZipCode",
     ];
-
-    if (state.formationFormData.agentNumberOrManual === "NUMBER") {
-      requiredFields = [...requiredFields, "agentNumber"];
-    }
-
-    if (state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
-      requiredFields = [
-        ...requiredFields,
-        "agentName",
-        "agentEmail",
-        "agentOfficeAddressLine1",
-        "agentOfficeAddressCity",
-        "agentOfficeAddressZipCode",
-      ];
-    }
 
     const isStartDateValid = (): boolean => {
       if (!state.formationFormData.businessStartDate) return false;
@@ -68,32 +52,6 @@ export const BusinessSection = (): ReactElement => {
 
     if (!isValidBusinessAddressZipCode() && !invalidFields.includes("businessAddressZipCode")) {
       invalidFields.push("businessAddressZipCode");
-    }
-
-    const isValidAgentOfficeAddressZipCode = (): boolean => {
-      if (!state.formationFormData.agentOfficeAddressZipCode) return false;
-      return zipCodeRange(state.formationFormData.agentOfficeAddressZipCode);
-    };
-
-    if (
-      !isValidAgentOfficeAddressZipCode() &&
-      !invalidFields.includes("agentOfficeAddressZipCode") &&
-      state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY"
-    ) {
-      invalidFields.push("agentOfficeAddressZipCode");
-    }
-
-    const isValidAgentEmail = (): boolean => {
-      if (!state.formationFormData.agentEmail) return false;
-      return validateEmail(state.formationFormData.agentEmail);
-    };
-
-    if (
-      !isValidAgentEmail() &&
-      !invalidFields.includes("agentEmail") &&
-      state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY"
-    ) {
-      invalidFields.push("agentEmail");
     }
 
     return invalidFields;
@@ -145,8 +103,6 @@ export const BusinessSection = (): ReactElement => {
   return (
     <div data-testid="business-section">
       <MainBusiness />
-      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-      <RegisteredAgent />
       {process.env.FEATURE_BUSINESS_PURPOSE && process.env.FEATURE_BUSINESS_PURPOSE == "true" ? (
         <>
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
@@ -157,7 +113,7 @@ export const BusinessSection = (): ReactElement => {
       ) : (
         <></>
       )}
-      <BusinessFormationFieldAlert
+      <BusinessFormationEmptyFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
         requiredFieldsWithError={requiredFieldsWithError}
       />

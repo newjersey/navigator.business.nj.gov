@@ -105,6 +105,11 @@ describe("<BusinessFormation />", () => {
       page.fillText("Business address line2", "Suite 304");
       page.fillText("Business address zip code", "08001");
 
+      fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+      page.fillText("Business purpose", "to take over the world");
+
+      await page.submitBusinessTab();
+
       page.chooseRadio("registered-agent-manual");
       page.fillText("Agent name", "Hugo Weaving");
       page.fillText("Agent email", "name@example.com");
@@ -112,11 +117,6 @@ describe("<BusinessFormation />", () => {
       page.fillText("Agent office address line2", "Suite 101");
       page.fillText("Agent office address city", "Newark");
       page.fillText("Agent office address zip code", "08002");
-
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
-      page.fillText("Business purpose", "to take over the world");
-
-      await page.submitBusinessTab();
 
       const member: FormationMember = {
         name: "Joe Biden",

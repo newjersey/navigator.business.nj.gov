@@ -1,21 +1,79 @@
-import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
+import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
+import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormationErrorTypes, FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import {
+  FormationErrorTypes,
+  FormationFieldErrorMap,
+  FormationFieldErrors,
+  FormationFields,
+} from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { camelCaseToSentence, scrollToTop } from "@/lib/utils/helpers";
+import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const ContactsSection = (): ReactElement => {
   const { state, setErrorMap, setTab } = useContext(FormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
+  const [showSignatureError, setShowSignatureError] = useState<boolean>(false);
+
   const { userData, update } = useUserData();
 
-  type FormationFieldErrors = { name: FormationFields; types: FormationErrorTypes[] };
+  const requiredFieldsWithError = useMemo(() => {
+    let requiredFields: FormationFields[] = [];
+
+    if (state.formationFormData.agentNumberOrManual === "NUMBER") {
+      requiredFields = [...requiredFields, "agentNumber"];
+    }
+
+    if (state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
+      requiredFields = [
+        ...requiredFields,
+        "agentName",
+        "agentEmail",
+        "agentOfficeAddressLine1",
+        "agentOfficeAddressCity",
+        "agentOfficeAddressZipCode",
+      ];
+    }
+
+    const invalidFields = requiredFields.filter(
+      (it) => state.errorMap[it].invalid || !state.formationFormData[it]
+    );
+
+    const isValidAgentOfficeAddressZipCode = (): boolean => {
+      if (!state.formationFormData.agentOfficeAddressZipCode) return false;
+      return zipCodeRange(state.formationFormData.agentOfficeAddressZipCode);
+    };
+
+    if (
+      !isValidAgentOfficeAddressZipCode() &&
+      !invalidFields.includes("agentOfficeAddressZipCode") &&
+      state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY"
+    ) {
+      invalidFields.push("agentOfficeAddressZipCode");
+    }
+
+    const isValidAgentEmail = (): boolean => {
+      if (!state.formationFormData.agentEmail) return false;
+      return validateEmail(state.formationFormData.agentEmail);
+    };
+
+    if (
+      !isValidAgentEmail() &&
+      !invalidFields.includes("agentEmail") &&
+      state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY"
+    ) {
+      invalidFields.push("agentEmail");
+    }
+
+    return invalidFields;
+  }, [state.formationFormData, state.errorMap]);
 
   const formationFieldErrors = useMemo((): FormationFieldErrors[] => {
     const invalidFields: FormationFieldErrors[] = [];
@@ -45,16 +103,15 @@ export const ContactsSection = (): ReactElement => {
   }, [state.formationFormData]);
 
   useEffect(() => {
-    if (formationFieldErrors.length === 0) {
-      setShowRequiredFieldsError(false);
-    }
-  }, [state.formationFormData, formationFieldErrors]);
+    if (formationFieldErrors.length === 0) setShowSignatureError(false);
+    if (requiredFieldsWithError.length === 0) setShowRequiredFieldsError(false);
+  }, [state.formationFormData, formationFieldErrors, requiredFieldsWithError]);
 
   const submitContactData = async () => {
     if (!userData) return;
 
     if (formationFieldErrors.length > 0) {
-      setShowRequiredFieldsError(true);
+      setShowSignatureError(true);
       const newErrorMappedFields = formationFieldErrors.reduce(
         (acc: FormationFieldErrorMap, cur: FormationFieldErrors) => ({
           ...acc,
@@ -63,10 +120,21 @@ export const ContactsSection = (): ReactElement => {
         {} as FormationFieldErrorMap
       );
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
-      return;
     }
 
+    if (requiredFieldsWithError.length > 0) {
+      setShowRequiredFieldsError(true);
+      const newErrorMappedFields = requiredFieldsWithError.reduce(
+        (acc: FormationFieldErrorMap, cur: FormationFields) => ({ ...acc, [cur]: { invalid: true } }),
+        {} as FormationFieldErrorMap
+      );
+      setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
+    }
+
+    if (formationFieldErrors.length > 0 || requiredFieldsWithError.length > 0) return;
+
     setShowRequiredFieldsError(false);
+    setShowSignatureError(false);
 
     const formationFormDataWithEmptySignersRemoved = {
       ...state.formationFormData,
@@ -86,38 +154,22 @@ export const ContactsSection = (): ReactElement => {
     scrollToTop();
   };
 
-  //0 is highest priority
-  type ErrorMessages = { type: Partial<FormationErrorTypes>; label: string; priority: number };
-  const errorMessages: ErrorMessages[] = [
-    {
-      type: "signer-checkbox",
-      label: Config.businessFormationDefaults.signatureCheckboxErrorText,
-      priority: 1,
-    },
-    { type: "signer-name", label: Config.businessFormationDefaults.signersEmptyErrorText, priority: 0 },
-  ];
-
-  const getErrorText = (): string => {
-    const currentErrorTypes = [
-      ...formationFieldErrors.reduce((acc, curr) => {
-        curr.types.map((item) => {
-          const message = errorMessages.find((message) => message.type == item);
-          if (message) acc.add(message);
-        });
-        return acc;
-      }, new Set<ErrorMessages>()),
-    ];
-    currentErrorTypes.sort((a, b) => a.priority - b.priority);
-    return camelCaseToSentence(currentErrorTypes[0]?.label ?? "");
-  };
-
   return (
     <>
       <div data-testid="contacts-section">
+        <RegisteredAgent />
+        <hr className="margin-top-0 margin-bottom-3" />
         <Members />
         <hr className="margin-top-0 margin-bottom-3" />
         <Signatures />
-        {showRequiredFieldsError ? <Alert variant="error">{getErrorText()}</Alert> : <></>}
+        <BusinessFormationFieldAlert
+          showFieldsError={showSignatureError}
+          fieldsWithError={formationFieldErrors}
+        />
+        <BusinessFormationEmptyFieldAlert
+          showRequiredFieldsError={showRequiredFieldsError}
+          requiredFieldsWithError={requiredFieldsWithError}
+        />
       </div>
       <div className="margin-top-2">
         <div className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205">
