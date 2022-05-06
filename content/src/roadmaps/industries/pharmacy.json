@@ -1,8 +1,10 @@
 {
+  "naicsCodes": "456110",
   "isMobileLocation": false,
   "canBeHomeBased": false,
   "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -47,7 +49,6 @@
   ],
   "name": "Pharmacy",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "pharmaceutics, drugstore, apothecary, chemist medicine",
   "id": "pharmacy",
   "licenseType": "Pharmacy",
