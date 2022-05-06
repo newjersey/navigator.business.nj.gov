@@ -7,7 +7,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 
 export const Provisions = (): ReactElement => {
-  const MAX_CHARS = 400;
+  const MAX_CHARS = 3000;
   const { state, setFormationFormData } = useContext(FormationContext);
   const isExpanded = state.formationFormData.provisions.length > 0;
 
