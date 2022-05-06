@@ -310,10 +310,10 @@ describe("Formation - BusinessSection", () => {
     it("updates char count in real time", async () => {
       const { subject, page } = await renderSection({}, { provisions: [] });
       fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
-      expect(subject.getByText("0 / 400", { exact: false })).toBeInTheDocument();
+      expect(subject.getByText("0 / 3000", { exact: false })).toBeInTheDocument();
       page.fillText("Provisions 0", "some provision");
       const charLength = "some provision".length;
-      expect(subject.getByText(`${charLength} / 400`, { exact: false })).toBeInTheDocument();
+      expect(subject.getByText(`${charLength} / 3000`, { exact: false })).toBeInTheDocument();
     });
 
     it("does not allow adding more than 10 provisions", async () => {

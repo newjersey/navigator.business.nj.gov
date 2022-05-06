@@ -110,14 +110,16 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
         {Config.taskDefaults.taskProgressSuccessToastBody}
       </ToastAlert>
       <TaskHeader task={props.task} />
-      <UnlockedBy task={props.task} />
       {displayFirstTab ? (
-        <CannabisApplicationQuestionsTab
-          onNextTab={handleNextTabButtonClick}
-          priorityStatusState={priorityStatusState}
-          onCheckboxChange={onCheckboxChange}
-          noPriorityStatus={noPriorityStatus}
-        />
+        <>
+          <UnlockedBy task={props.task} />
+          <CannabisApplicationQuestionsTab
+            onNextTab={handleNextTabButtonClick}
+            priorityStatusState={priorityStatusState}
+            onCheckboxChange={onCheckboxChange}
+            noPriorityStatus={noPriorityStatus}
+          />
+        </>
       ) : (
         <CannabisApplicationRequirementsTab
           onBack={onBack}
