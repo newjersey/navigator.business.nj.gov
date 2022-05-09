@@ -3,9 +3,11 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { MediaQueries } from "@/lib/PageSizes";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Funding, OperateReference } from "@/lib/types/types";
+import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import React, { ReactElement } from "react";
@@ -16,6 +18,8 @@ interface Props {
 }
 
 export const FundingElement = (props: { funding: Funding }): ReactElement => {
+  const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+
   return (
     <>
       <div className="minh-38">
@@ -29,7 +33,11 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
             ) : (
               <></>
             )}
-            <span className="text-base">{props.funding.status.toUpperCase()}</span>
+            {isLargeScreen ? (
+              <span className="text-base">{props.funding.status.toUpperCase()}</span>
+            ) : (
+              <div className="text-base margin-top-1">{props.funding.status.toUpperCase()}</div>
+            )}
           </div>
         </div>
         <Content>{props.funding.contentMd}</Content>
