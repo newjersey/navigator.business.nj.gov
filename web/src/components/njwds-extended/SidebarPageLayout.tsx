@@ -14,7 +14,6 @@ export interface SidebarPageLayoutProps {
   divider?: boolean;
   outlineBox?: boolean;
   belowBoxComponent?: React.ReactNode;
-  isWidePage?: boolean;
 }
 
 export const SidebarPageLayout = ({
@@ -24,7 +23,6 @@ export const SidebarPageLayout = ({
   outlineBox = true,
   stackNav,
   belowBoxComponent,
-  isWidePage,
 }: SidebarPageLayoutProps): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { userData } = useUserData();
@@ -52,14 +50,9 @@ export const SidebarPageLayout = ({
   return (
     <>
       <div className={`usa-section padding-top-0 desktop:padding-top-6`}>
-        <div className={`grid-container${isWidePage ? "-widescreen desktop:padding-x-7" : ""}`}>
+        <div className="grid-container-widescreen desktop:padding-x-7">
           <div className="grid-row grid-gap">
-            <main
-              className={`usa-layout-docs__main ${
-                isWidePage ? "desktop:grid-col-9" : "desktop:grid-col-8"
-              } usa-layout-docs`}
-              id="main"
-            >
+            <div className="desktop:grid-col-9">
               {!isLargeScreen && (
                 <div>
                   {backButton}
@@ -70,21 +63,16 @@ export const SidebarPageLayout = ({
                 className={
                   outlineBox
                     ? "border-1px border-base-light usa-prose minh-40 padding-205"
-                    : "minh-40 padding-205"
+                    : "minh-40 padding-y-205"
                 }
               >
                 {children}
               </div>
               {belowBoxComponent}
-            </main>
-            <div
-              className={`usa-layout-docs__sidenav ${
-                isWidePage ? "desktop:grid-col-3" : "desktop:grid-col-4"
-              } order-first`}
-            >
+            </div>
+            <div className="desktop:grid-col-3 order-first">
               {isLargeScreen && (
                 <nav aria-label="Secondary">
-                  {" "}
                   {backButton}
                   {divider && <hr className="margin-bottom-1 margin-top-0" aria-hidden={true} />}
                   {navChildren}

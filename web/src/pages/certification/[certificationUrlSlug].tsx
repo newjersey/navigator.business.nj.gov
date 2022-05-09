@@ -39,7 +39,7 @@ const CertificationPage = (props: Props): ReactElement => {
       <NextSeo title={`Business.NJ.gov Navigator - ${props.certification.name}`} />
       <PageSkeleton>
         <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} />
-        <TaskSidebarPageLayout operateReferences={props.operateReferences} isWidePage>
+        <TaskSidebarPageLayout operateReferences={props.operateReferences}>
           <CertificationElement certification={props.certification} />
         </TaskSidebarPageLayout>
       </PageSkeleton>

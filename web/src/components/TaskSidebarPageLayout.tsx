@@ -22,8 +22,10 @@ export const TaskSidebarPageLayout = ({
       <MiniRoadmap activeTaskId={task?.id} />
     );
   return (
-    <SidebarPageLayout navChildren={navChildren} {...props}>
-      {children}
-    </SidebarPageLayout>
+    <main id="main">
+      <SidebarPageLayout navChildren={navChildren} {...props}>
+        {children}
+      </SidebarPageLayout>
+    </main>
   );
 };
