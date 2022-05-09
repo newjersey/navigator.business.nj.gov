@@ -129,7 +129,7 @@
     "businessAddressAddressLine2Label": "**Address Line 2** (Optional)",
     "memberModalNameLabel": "**Full Name**",
     "businessAddressStatePlaceholder": "NJ",
-    "entityIdLabel": "Entity ID",
+    "entityIdLabel": "`Entity ID|entity-id`",
     "memberModalCityLabel": "**City**",
     "memberModalStateLabel": "**State**",
     "confirmationNumberLabel": "Confirmation Number:",
