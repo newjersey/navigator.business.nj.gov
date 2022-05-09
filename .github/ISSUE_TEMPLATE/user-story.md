@@ -8,7 +8,7 @@ assignees: ""
 
 As <PERSONA>, I need <SOLUTION>, so that <VALUE/OUTCOME>
 
-## Acceptance criteria
+## Acceptance Criteria
 
 ## Additional Acceptance Criteria
 
