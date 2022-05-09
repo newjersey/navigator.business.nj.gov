@@ -15,6 +15,7 @@ interface Opportunity {
   urlSlug: string;
   contentMd: string;
   dueDate?: string;
+  status?: string;
 }
 
 interface Props {
@@ -97,13 +98,16 @@ export const OpportunityCard = (props: Props): ReactElement => {
           {props.opportunity.name}
         </a>
       </div>
-      {props.opportunity.dueDate ? (
+      {props.opportunity.dueDate && props.opportunity.status !== "first-come, first-served" ? (
         <div className="dashboard-opportunity-card-due-date">
-          <span className="dashboard-opportunity-card-due-date-header">
-            {props.opportunity.dueDate === "First Come First Serve" ? <></> : <>Due: </>}
-          </span>
+          <span className="dashboard-opportunity-card-due-date-header">Due:</span>
           {props.opportunity.dueDate}{" "}
         </div>
+      ) : (
+        <></>
+      )}
+      {props.opportunity.status === "first-come, first-served" ? (
+        <div className="dashboard-opportunity-card-due-date">First Come, First Serve</div>
       ) : (
         <></>
       )}

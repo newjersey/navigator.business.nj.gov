@@ -153,13 +153,7 @@ exports[`OpportunityCard matches the layout when first come first serve 1`] = `
       <div
         class="dashboard-opportunity-card-due-date"
       >
-        <span
-          class="dashboard-opportunity-card-due-date-header"
-        >
-          Due: 
-        </span>
-        09/01/2030
-         
+        First Come, First Serve
       </div>
       <div
         class="override-p-2xs"
@@ -249,8 +243,10 @@ exports[`OpportunityCard matches the layout with a due date 1`] = `
       >
         <span
           class="dashboard-opportunity-card-due-date-header"
-        />
-        First Come First Serve
+        >
+          Due:
+        </span>
+        09/01/2030
          
       </div>
       <div

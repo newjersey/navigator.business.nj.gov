@@ -13,7 +13,7 @@ describe("OpportunityCard", () => {
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).toMatchSnapshot();
   });
-  it("matches the layout when first come first serve", () => {
+  it("matches the layout with a due date", () => {
     const opportunity = {
       id: "test",
       name: "test",
@@ -24,13 +24,14 @@ describe("OpportunityCard", () => {
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).toMatchSnapshot();
   });
-  it("matches the layout with a due date", () => {
+  it("matches the layout when first come first serve", () => {
     const opportunity = {
       id: "test",
       name: "test",
       contentMd: "**Test Content",
       urlSlug: "",
-      dueDate: "First Come First Serve",
+      dueDate: "",
+      status: "first-come, first-served",
     };
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).toMatchSnapshot();
@@ -67,15 +68,29 @@ describe("OpportunityCard", () => {
     expect(subject).toHaveTextContent("Due:");
     expect(subject).toHaveTextContent("09/01/2030");
   });
-  it("renders with due date of First Come First Serve correctly", () => {
+  it("renders with text of First Come First Serve correctly", () => {
     const opportunity = {
       id: "test",
       name: "Test Name for Card",
       contentMd: "*Test Content*",
       urlSlug: "",
-      dueDate: "First Come First Serve",
+      dueDate: "",
+      status: "first-come, first-served",
     };
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toContainHTML("First Come First Serve");
+    expect(subject).toContainHTML("First Come, First Serve");
+  });
+  it("does not render due date if status is first-come, first-served", () => {
+    const opportunity = {
+      id: "test",
+      name: "Test Name for Card",
+      contentMd: "*Test Content*",
+      urlSlug: "",
+      dueDate: "09/03/30",
+      status: "first-come, first-served",
+    };
+    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(subject).not.toHaveTextContent("Due:");
+    expect(subject).toContainHTML("First Come, First Serve");
   });
 });
