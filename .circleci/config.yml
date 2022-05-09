@@ -235,7 +235,7 @@ commands:
       - run:
           name: Set Production Environment Variables
           command: |
-            echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD_NEW' >> $BASH_ENV
+            echo 'export API_BASE_URL=$API_BASE_URL_AWS_PROD' >> $BASH_ENV
             echo 'export AUTH_DOMAIN=$COGNITO_AUTH_DOMAIN_PROD_NEW' >> $BASH_ENV
             echo 'export BUSINESS_NAME_BASE_URL=$BUSINESS_NAME_BASE_URL_PROD' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_PROD_NEW' >> $BASH_ENV
