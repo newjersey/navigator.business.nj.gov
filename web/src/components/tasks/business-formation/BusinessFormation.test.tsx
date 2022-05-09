@@ -43,6 +43,7 @@ describe("<BusinessFormation />", () => {
   const displayContent = generateFormationDisplayContent({});
 
   beforeEach(() => {
+    process.env.FEATURE_BUSINESS_PURPOSE = "true";
     jest.resetAllMocks();
     useSetupInitialMocks();
   });

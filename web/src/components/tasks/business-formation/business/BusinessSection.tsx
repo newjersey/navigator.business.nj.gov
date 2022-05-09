@@ -147,10 +147,16 @@ export const BusinessSection = (): ReactElement => {
       <MainBusiness />
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <RegisteredAgent />
-      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-      <BusinessPurpose />
-      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-      <Provisions />
+      {process.env.FEATURE_BUSINESS_PURPOSE && process.env.FEATURE_BUSINESS_PURPOSE == "true" ? (
+        <>
+          <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+          <BusinessPurpose />
+          <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+          <Provisions />
+        </>
+      ) : (
+        <></>
+      )}
       <BusinessFormationFieldAlert
         showRequiredFieldsError={showRequiredFieldsError}
         requiredFieldsWithError={requiredFieldsWithError}

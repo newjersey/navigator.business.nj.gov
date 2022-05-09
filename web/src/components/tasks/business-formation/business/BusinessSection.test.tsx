@@ -47,6 +47,7 @@ describe("Formation - BusinessSection", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useSetupInitialMocks();
+    process.env.FEATURE_BUSINESS_PURPOSE = "true";
   });
 
   const renderSection = async (
