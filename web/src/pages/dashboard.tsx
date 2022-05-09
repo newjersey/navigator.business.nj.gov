@@ -54,15 +54,16 @@ const DashboardPage = (props: Props): ReactElement => {
   );
 
   return (
-    <PageSkeleton isWidePage={true}>
-      <NavBar isWidePage={true} />
-      <hr className="margin-0" />
-      <div className={`desktop:margin-top-4 desktop:margin-top-0 ${isDesktopAndUp ? "grayRightGutter" : ""}`}>
-        <main id="main" data-testid="SPL-main-ele">
-          <div data-testid="SPL-div-ele" className="usa-section padding-0">
+    <PageSkeleton>
+      <NavBar />
+      <main id="main">
+        <div
+          className={`desktop:margin-top-4 desktop:margin-top-0 ${isDesktopAndUp ? "grayRightGutter" : ""}`}
+        >
+          <div className="usa-section padding-0">
             <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
               <div className="grid-row">
-                <div className="padding-x-2 desktop:grid-col-7 usa-prose margin-top-6 padding-bottom-7 desktop:padding-bottom-15 desktop:padding-right-5">
+                <div className="padding-x-2 desktop:grid-col-7 usa-prose margin-top-6 padding-bottom-7 desktop:padding-bottom-15 desktop:padding-right-5 desktop:padding-left-0">
                   <h1>
                     {userData?.user.name
                       ? templateEval(Config.dashboardDefaults.headerText, { name: userData.user.name })
@@ -120,22 +121,22 @@ const DashboardPage = (props: Props): ReactElement => {
               </div>
             </div>
           </div>
-        </main>
-      </div>
-      {successAlert && (
-        <ToastAlert
-          variant="success"
-          isOpen={successAlert}
-          close={() => {
-            setSuccessAlert(false);
-            router.replace({ pathname: "/dashboard" }, undefined, { shallow: true });
-          }}
-          dataTestid="toast-alert-SUCCESS"
-          heading={Config.profileDefaults.successTextHeader}
-        >
-          {Config.profileDefaults.successTextBody}
-        </ToastAlert>
-      )}
+        </div>
+        {successAlert && (
+          <ToastAlert
+            variant="success"
+            isOpen={successAlert}
+            close={() => {
+              setSuccessAlert(false);
+              router.replace({ pathname: "/dashboard" }, undefined, { shallow: true });
+            }}
+            dataTestid="toast-alert-SUCCESS"
+            heading={Config.profileDefaults.successTextHeader}
+          >
+            {Config.profileDefaults.successTextBody}
+          </ToastAlert>
+        )}
+      </main>
     </PageSkeleton>
   );
 };

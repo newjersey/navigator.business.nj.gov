@@ -11,7 +11,6 @@ type Props = {
   task?: Task;
   sideBarPageLayout?: boolean;
   operateReferences?: Record<string, OperateReference>;
-  isWidePage?: boolean;
 };
 
 export const NavBar = (props: Props): ReactElement => {
@@ -40,7 +39,7 @@ export const NavBar = (props: Props): ReactElement => {
     <>
       {landingPage && isTabletScreen && <NavBarLanding />}
 
-      {!landingPage && isLargeScreen && <NavBarDesktop isWidePage={props.isWidePage} />}
+      {!landingPage && isLargeScreen && <NavBarDesktop />}
 
       {!landingPage && !isLargeScreen && (
         <>

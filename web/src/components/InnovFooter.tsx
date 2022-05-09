@@ -4,18 +4,12 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import React, { ReactElement } from "react";
 
-type Props = {
-  isWidePage?: boolean;
-};
-
-export const InnovFooter = (props: Props): ReactElement => {
+export const InnovFooter = (): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
 
   return (
     <div className="usa-identifier">
-      <div
-        className={`${props.isWidePage ? "grid-container-widescreen desktop:padding-x-7" : "grid-container"}`}
-      >
+      <div className="grid-container-widescreen desktop:padding-x-7">
         <div className={`${isLargeScreen ? "flex flex-align-center fjb" : ""} margin-x-auto padding-top-105`}>
           <section
             className="usa-identifier__section usa-identifier__section--usagov"

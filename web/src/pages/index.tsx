@@ -140,7 +140,7 @@ const Home = (): ReactElement => {
   );
 
   return (
-    <PageSkeleton home={true} isWidePage>
+    <PageSkeleton landingPage={true}>
       <NavBar landingPage={true} />
       <main data-testid="main">
         <Hero
