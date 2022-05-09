@@ -185,7 +185,7 @@ export const RegisteredAgent = (): ReactElement => {
                 fieldName="agentOfficeAddressLine2"
                 disabled={useBusinessAddress}
               />
-              <div className="grid-row grid-gap-2">
+              <div className="grid-row grid-gap-2 margin-top-2">
                 <div className="grid-col-12 tablet:grid-col-6">
                   <BusinessFormationTextField
                     label={Config.businessFormationDefaults.registeredAgentCityLabel}

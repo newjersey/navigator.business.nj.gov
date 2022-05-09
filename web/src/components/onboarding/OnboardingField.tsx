@@ -48,18 +48,16 @@ export const OnboardingField = ({
           <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent[fieldName].contentMd}</Content>
         </div>
       )}
-      <div className="form-input">
-        <GenericTextField
-          value={state.profileData[fieldName] as string | undefined}
-          fieldName={fieldName as string}
-          placeholder={
-            (state.displayContent[fieldName] as Record<string, string | undefined>).placeholder ?? ""
-          }
-          {...props}
-          handleChange={handleChange}
-          onValidation={onValidation}
-        />
-      </div>
+      <GenericTextField
+        value={state.profileData[fieldName] as string | undefined}
+        fieldName={fieldName as string}
+        placeholder={
+          (state.displayContent[fieldName] as Record<string, string | undefined>).placeholder ?? ""
+        }
+        {...props}
+        handleChange={handleChange}
+        onValidation={onValidation}
+      />
     </div>
   );
 };

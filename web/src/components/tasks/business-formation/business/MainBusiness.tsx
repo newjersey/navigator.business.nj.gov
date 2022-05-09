@@ -21,24 +21,26 @@ export const MainBusiness = (): ReactElement => {
         </div>
       </div>
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-      <div className="form-input margin-bottom-2">
+      <div className="margin-bottom-2">
         <Content>{Config.businessFormationDefaults.businessAddressHeader}</Content>
-        <BusinessFormationTextField
-          label={Config.businessFormationDefaults.businessAddressAddressLine1Label}
-          placeholder={Config.businessFormationDefaults.businessAddressAddressLine1Placeholder}
-          fieldName="businessAddressLine1"
-          required={true}
-          validationText={Config.businessFormationDefaults.businessAddressLine1ErrorText}
-        />
       </div>
+      <BusinessFormationTextField
+        label={Config.businessFormationDefaults.businessAddressAddressLine1Label}
+        placeholder={Config.businessFormationDefaults.businessAddressAddressLine1Placeholder}
+        fieldName="businessAddressLine1"
+        required={true}
+        validationText={Config.businessFormationDefaults.businessAddressLine1ErrorText}
+      />
       <BusinessFormationTextField
         label={Config.businessFormationDefaults.businessAddressAddressLine2Label}
         placeholder={Config.businessFormationDefaults.businessAddressAddressLine2Placeholder}
         fieldName="businessAddressLine2"
       />
-      <div className="grid-row grid-gap-2">
+      <div className="grid-row grid-gap-2 margin-top-2">
         <div className="margin-bottom-2 grid-col-12 tablet:grid-col-6">
-          <span className="text-bold">{Config.businessFormationDefaults.businessAddressCityLabel}</span>
+          <span className="text-bold margin-bottom-2">
+            {Config.businessFormationDefaults.businessAddressCityLabel}
+          </span>
           <FormationMunicipality />
         </div>
         <div className="margin-bottom-2 form-input grid-col-5 tablet:grid-col-2">

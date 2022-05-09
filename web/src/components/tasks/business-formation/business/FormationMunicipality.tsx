@@ -21,17 +21,19 @@ export const FormationMunicipality = (): ReactElement => {
   };
 
   return (
-    <MunicipalityDropdown
-      municipalities={state.municipalities}
-      onValidation={onValidation}
-      fieldName={"businessAddressCity"}
-      error={state.errorMap.businessAddressCity.invalid}
-      validationLabel="Error"
-      validationText={Config.onboardingDefaults.errorTextRequiredMunicipality}
-      handleChange={() => setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: false } })}
-      value={state.formationFormData.businessAddressCity}
-      onSelect={onSelect}
-      placeholderText={Config.businessFormationDefaults.notSetBusinessAddressCityLabel}
-    />
+    <div className="margin-top-2">
+      <MunicipalityDropdown
+        municipalities={state.municipalities}
+        onValidation={onValidation}
+        fieldName={"businessAddressCity"}
+        error={state.errorMap.businessAddressCity.invalid}
+        validationLabel="Error"
+        validationText={Config.onboardingDefaults.errorTextRequiredMunicipality}
+        handleChange={() => setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: false } })}
+        value={state.formationFormData.businessAddressCity}
+        onSelect={onSelect}
+        placeholderText={Config.businessFormationDefaults.notSetBusinessAddressCityLabel}
+      />
+    </div>
   );
 };
