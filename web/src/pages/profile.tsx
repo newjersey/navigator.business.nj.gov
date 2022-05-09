@@ -418,7 +418,7 @@ const ProfilePage = (props: Props): ReactElement => {
         onBack,
       }}
     >
-      <PageSkeleton showLegalMessage={true}>
+      <PageSkeleton>
         <NavBar />
         <div className="usa-section padding-top-0 desktop:padding-top-3">
           <DialogTwoButton

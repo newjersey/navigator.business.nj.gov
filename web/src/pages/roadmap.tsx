@@ -71,7 +71,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   };
 
   return (
-    <PageSkeleton showLegalMessage={true}>
+    <PageSkeleton>
       <NavBar />
       <main id="main">
         {!userData || userData?.formProgress !== "COMPLETED" ? (

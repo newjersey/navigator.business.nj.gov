@@ -64,13 +64,7 @@ describe("<NavBar />", () => {
         setLargeScreen(true);
 
         const subject = render(
-          <NavBar
-            landingPage={true}
-            task={undefined}
-            sideBarPageLayout={false}
-            operateReferences={{}}
-            isWidePage={false}
-          />
+          <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
         );
         expect(subject.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
       });
@@ -81,13 +75,7 @@ describe("<NavBar />", () => {
         setLargeScreen(true);
 
         const subject = render(
-          <NavBar
-            landingPage={true}
-            task={undefined}
-            sideBarPageLayout={false}
-            operateReferences={{}}
-            isWidePage={false}
-          />
+          <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
         );
 
         fireEvent.click(subject.getByText(Config.navigationDefaults.registerButton));
