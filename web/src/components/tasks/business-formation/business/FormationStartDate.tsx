@@ -38,7 +38,7 @@ export const FormationStartDate = (): ReactElement => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex margin-bottom-2">
         <Content key="dateOfFormationMd">{Config.businessFormationDefaults.businessStartDateLabel}</Content>
         <ArrowTooltip title={Config.businessFormationDefaults.businessStartDateTooltip}>
           <div className="fdr fac margin-left-05" data-testid="automatic-status-info-tooltip">

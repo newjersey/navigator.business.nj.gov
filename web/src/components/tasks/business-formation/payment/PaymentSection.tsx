@@ -123,6 +123,7 @@ export const PaymentSection = (): ReactElement => {
       <Content>{state.displayContent.services.contentMd}</Content>
       <FormationChooseDocuments />
       <PaymentTypeTable />
+      <hr className="margin-top-4" />
       <FormationChooseNotifications />
       <div className="margin-top-3">
         <Content>{Config.businessFormationDefaults.paymentDisclaimerText}</Content>

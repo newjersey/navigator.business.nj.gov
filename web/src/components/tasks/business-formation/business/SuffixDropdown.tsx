@@ -29,7 +29,7 @@ export const SuffixDropdown = (): ReactElement => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex margin-bottom-2">
         <Content>{Config.businessFormationDefaults.businessSuffixLabel}</Content>
         <ArrowTooltip title={Config.businessFormationDefaults.businessSuffixTooltip}>
           <div className="fdr fac margin-left-05" data-testid="automatic-status-info-tooltip">

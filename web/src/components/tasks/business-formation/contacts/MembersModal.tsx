@@ -171,7 +171,7 @@ export const MembersModal = (props: Props): ReactElement => {
             autoComplete="address-line2"
             handleChange={(value: string) => setMemberData({ ...memberData, addressLine2: value })}
           />
-          <div className="grid-row grid-gap-2">
+          <div className="grid-row grid-gap-2 margin-top-2">
             <div className="grid-col-12 tablet:grid-col-6">
               <Content>{Config.businessFormationDefaults.memberModalCityLabel}</Content>
               <GenericTextField
@@ -188,7 +188,9 @@ export const MembersModal = (props: Props): ReactElement => {
               />
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
-              <Content>{Config.businessFormationDefaults.memberModalStateLabel}</Content>
+              <div className="margin-bottom-2">
+                <Content>{Config.businessFormationDefaults.memberModalStateLabel}</Content>
+              </div>
               <StateDropdown
                 fieldName="memberAddressState"
                 value={memberData.addressState}

@@ -70,19 +70,17 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
                 </Content>
               </div>
             )}
-            <div className="form-input">
-              <GenericTextField
-                fieldName={fieldName}
-                onValidation={onValidation}
-                validationText={Config.onboardingDefaults.dateOfFormationErrorText}
-                error={props.fieldStates[fieldName].invalid}
-                fieldOptions={{
-                  ...params,
-                  sx: { width: "50%", ...params.sx },
-                  error: props.fieldStates[fieldName].invalid,
-                }}
-              />
-            </div>
+            <GenericTextField
+              fieldName={fieldName}
+              onValidation={onValidation}
+              validationText={Config.onboardingDefaults.dateOfFormationErrorText}
+              error={props.fieldStates[fieldName].invalid}
+              fieldOptions={{
+                ...params,
+                sx: { width: "50%", ...params.sx },
+                error: props.fieldStates[fieldName].invalid,
+              }}
+            />
           </div>
         )}
       />

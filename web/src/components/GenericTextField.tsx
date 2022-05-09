@@ -97,7 +97,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
       : " "
     : "";
   return (
-    <div className={`${props.formInputWide ? "form-input-wide" : "form-input"}`}>
+    <div className={`${props.formInputWide ? "form-input-wide" : "form-input"} margin-top-2`}>
       <TextField
         value={value ?? ""}
         id={props.fieldName}
