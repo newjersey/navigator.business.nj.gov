@@ -19,6 +19,25 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
 }
 
+export const FilingElement = (props: { filing: Filing; dueDate: string }): ReactElement => {
+  return (
+    <>
+      <div className="minh-38">
+        <div className="margin-bottom-2">
+          <h1>{props.filing.name}</h1>
+        </div>
+        <div className="display-inline-flex margin-bottom-4" data-testid="due-date">
+          <Tag tagVariant="baseDark" bold={true}>
+            {Config.filingDefaults.tagContentBeforeDueDate} {props.dueDate}
+          </Tag>
+        </div>
+        <Content>{props.filing.contentMd}</Content>
+      </div>
+      <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
+    </>
+  );
+};
+
 const FilingPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const matchingFiling = userData?.taxFilingData.filings.find((it) => it.identifier === props.filing.id);
@@ -30,18 +49,7 @@ const FilingPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} />
         <TaskSidebarPageLayout operateReferences={props.operateReferences} isWidePage>
-          <div className="minh-38">
-            <div className="margin-bottom-2">
-              <h1>{props.filing.name}</h1>
-            </div>
-            <div className="display-inline-flex margin-bottom-4" data-testid="due-date">
-              <Tag tagVariant="baseDark" bold={true}>
-                {Config.filingDefaults.tagContentBeforeDueDate} {dueDate}
-              </Tag>
-            </div>
-            <Content>{props.filing.contentMd}</Content>
-          </div>
-          <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
+          <FilingElement filing={props.filing} dueDate={dueDate} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
     </>
