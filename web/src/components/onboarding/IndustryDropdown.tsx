@@ -1,6 +1,7 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
+import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { splitAndBoldSearchText } from "@/lib/utils/helpers";
@@ -60,6 +61,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     setProfileData({
       ...state.profileData,
       liquorLicense: isLiquorLicenseApplicable(industryId) ? state.profileData.liquorLicense : false,
+      requiresCpa: isCpaRequiredApplicable(industryId) ? state.profileData.requiresCpa : false,
       homeBasedBusiness,
       cannabisLicenseType,
       industryId: industryId,
