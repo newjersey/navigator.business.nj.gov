@@ -92,9 +92,9 @@ const DeadLinksPage = (props: Props): ReactElement => {
   return (
     <PageSkeleton>
       <NextSeo noindex={true} />
-      <SingleColumnContainer>
-        <main>{isAuthed ? authedView : unauthedView}</main>
-      </SingleColumnContainer>
+      <main>
+        <SingleColumnContainer>{isAuthed ? authedView : unauthedView}</SingleColumnContainer>
+      </main>
     </PageSkeleton>
   );
 };

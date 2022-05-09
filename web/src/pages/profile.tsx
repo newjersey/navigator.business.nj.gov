@@ -420,40 +420,33 @@ const ProfilePage = (props: Props): ReactElement => {
     >
       <PageSkeleton>
         <NavBar />
-        <div className="usa-section padding-top-0 desktop:padding-top-3">
-          <DialogTwoButton
-            isOpen={escapeModal}
-            close={() => setEscapeModal(false)}
-            title={Config.profileDefaults.escapeModalHeader}
-            bodyText={Config.profileDefaults.escapeModalBody}
-            primaryButtonText={Config.profileDefaults.escapeModalReturn}
-            primaryButtonOnClick={() => redirect()}
-            secondaryButtonText={Config.profileDefaults.escapeModalEscape}
-          />
-          <SingleColumnContainer>
-            {alert && (
-              <ToastAlert
-                variant={OnboardingStatusLookup[alert].variant}
-                isOpen={alert !== undefined}
-                close={() => setAlert(undefined)}
-                dataTestid={`toast-alert-${alert}`}
-                heading={OnboardingStatusLookup[alert].header}
-              >
-                {OnboardingStatusLookup[alert].body}
-              </ToastAlert>
-            )}
-            <UserDataErrorAlert />
-          </SingleColumnContainer>
-
-          <div className="margin-top-6 desktop:margin-top-0">
-            <SidebarPageLayout
-              isWidePage={true}
-              navChildren={profileNav}
-              divider={false}
-              outlineBox={false}
-              stackNav={true}
-            >
-              <SingleColumnContainer>
+        <main id="main">
+          <div className="usa-section padding-top-0 desktop:padding-top-3">
+            <DialogTwoButton
+              isOpen={escapeModal}
+              close={() => setEscapeModal(false)}
+              title={Config.profileDefaults.escapeModalHeader}
+              bodyText={Config.profileDefaults.escapeModalBody}
+              primaryButtonText={Config.profileDefaults.escapeModalReturn}
+              primaryButtonOnClick={() => redirect()}
+              secondaryButtonText={Config.profileDefaults.escapeModalEscape}
+            />
+            <SingleColumnContainer>
+              {alert && (
+                <ToastAlert
+                  variant={OnboardingStatusLookup[alert].variant}
+                  isOpen={alert !== undefined}
+                  close={() => setAlert(undefined)}
+                  dataTestid={`toast-alert-${alert}`}
+                  heading={OnboardingStatusLookup[alert].header}
+                >
+                  {OnboardingStatusLookup[alert].body}
+                </ToastAlert>
+              )}
+              <UserDataErrorAlert />
+            </SingleColumnContainer>
+            <div className="margin-top-6 desktop:margin-top-0">
+              <SidebarPageLayout navChildren={profileNav} divider={false} outlineBox={false} stackNav={true}>
                 {userData === undefined ? (
                   <div className="flex flex-justify-center flex-align-center padding-top-0 desktop:padding-top-6 padding-bottom-15">
                     <CircularProgress
@@ -486,13 +479,13 @@ const ProfilePage = (props: Props): ReactElement => {
                           {Config.profileDefaults.saveButtonText}
                         </Button>
                       </div>
-                    </form>{" "}
+                    </form>
                   </>
                 )}
-              </SingleColumnContainer>
-            </SidebarPageLayout>
+              </SidebarPageLayout>
+            </div>
           </div>
-        </div>
+        </main>
       </PageSkeleton>
     </ProfileDataContext.Provider>
   );

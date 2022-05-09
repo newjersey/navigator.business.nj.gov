@@ -53,7 +53,7 @@ const FundingPage = (props: Props): ReactElement => {
       <NextSeo title={`Business.NJ.gov Navigator - ${props.funding.name}`} />
       <PageSkeleton>
         <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} />
-        <TaskSidebarPageLayout operateReferences={props.operateReferences} isWidePage>
+        <TaskSidebarPageLayout operateReferences={props.operateReferences}>
           <FundingElement funding={props.funding} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
