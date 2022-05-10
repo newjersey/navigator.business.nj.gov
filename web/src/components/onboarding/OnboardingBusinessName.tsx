@@ -20,6 +20,9 @@ export const OnboardingBusinessName = (props: Props): ReactElement => {
       validationText={Config.onboardingDefaults.errorTextRequiredBusinessName}
       headerAriaLevel={props.headerAriaLevel}
       disabled={props.disabled}
+      fieldOptions={{
+        inputProps: { "data-testid": "businessName" },
+      }}
     />
   );
 };
