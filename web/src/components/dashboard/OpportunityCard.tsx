@@ -100,7 +100,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
       </div>
       {props.opportunity.dueDate && props.opportunity.status !== "first-come, first-served" ? (
         <div className="dashboard-opportunity-card-due-date">
-          <span className="dashboard-opportunity-card-due-date-header">Due:</span>
+          <span className="dashboard-opportunity-card-due-date-header">Due: </span>
           {props.opportunity.dueDate}{" "}
         </div>
       ) : (
