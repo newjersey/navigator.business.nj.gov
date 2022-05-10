@@ -180,6 +180,7 @@ export const generatePreferences = (): Preferences => {
     roadmapOpenSteps: [],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
+    visibleRoadmapSidebarCards: [],
   };
 };
 

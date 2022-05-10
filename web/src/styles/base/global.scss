@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-hr {
-  background-color: $base-lighter;
-}
-
 .vl {
   border-right: 2px solid $base-lighter;
 }
@@ -78,11 +74,6 @@ ol {
   margin: auto;
   white-space: nowrap;
   width: 1px;
-}
-
-.border-primary,
-.hover\:border-primary:hover {
-  border-color: $primary !important;
 }
 
 .usa-link:visited,
@@ -220,11 +211,6 @@ ol {
   color: $primary-darker !important;
 }
 
-hr {
-  height: 1px !important;
-  border: none !important;
-}
-
 @media all and (min-width: $xs) {
   .form-input {
     max-width: 30rem;
@@ -245,6 +231,10 @@ hr {
 
 .grayRightGutter {
   background: linear-gradient(to right, $white 70%, $base-lightest 70% 100%);
+}
+
+.blueRightGutter {
+  background: linear-gradient(to right, $white 70%, $roadmap-blue 70% 100%);
 }
 
 .arrow {

@@ -5,6 +5,7 @@ import ContentPreview from "@/lib/cms/previews/content";
 import ContextInfoPreview from "@/lib/cms/previews/context-info";
 import FilingsPreview from "@/lib/cms/previews/filings";
 import FundingsPreview from "@/lib/cms/previews/fundings";
+import RoadmapSidebarCardPreview from "@/lib/cms/previews/roadmap-sidebar-card";
 import TaskPreview from "@/lib/cms/previews/task";
 import dynamic from "next/dynamic";
 
@@ -44,6 +45,10 @@ const CMS = dynamic(
       CMS.registerPreviewTemplate("contextual-information", ContextInfoPreview);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("filings", FilingsPreview);
+
+      // ----- Roadmap Sidebar Card -----
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("roadmap-sidebar-card", RoadmapSidebarCardPreview);
 
       // ----- Cannabis License -----
       registerAsContent(CMS, [

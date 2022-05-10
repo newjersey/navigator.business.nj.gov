@@ -1,3 +1,11 @@
+.bg-white-transparent {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.bg-white {
+  background-color: $white;
+}
+
 .bg-beta {
   background-color: $beta !important;
 }
@@ -102,6 +110,18 @@
   background-color: #80def1 !important;
 }
 
-.border-accent-cooler {
-  border-color: $accent-cooler !important;
+.bg-roadmap-blue {
+  background-color: $roadmap-blue !important;
+}
+
+.bg-roadmap-blue-dark {
+  background-color: $roadmap-blue-dark !important;
+}
+
+.bg-roadmap-purple-light {
+  background-color: $roadmap-purple-light !important;
+}
+
+.bg-roadmap-blue-light {
+  background-color: $roadmap-blue-light !important;
 }

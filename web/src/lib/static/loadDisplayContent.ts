@@ -11,6 +11,7 @@ import {
   profileDisplayFields,
   RadioFieldContent,
   RoadmapDisplayContent,
+  RoadmapSideBarContent,
   startFlowDisplayFields,
   StartingFlowContent,
   TasksDisplayContent,
@@ -186,6 +187,36 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   return { OWNING: owningFlowContent, STARTING: startingFlowContent, PROFILE: profileContent };
 };
 
+export const loadRoadmapSidebarDisplayContent = (): RoadmapSideBarContent => {
+  const loadFile = (filename: string): string =>
+    fs.readFileSync(path.join(displayContentDir, "roadmap-sidebar-cards", filename), "utf8");
+
+  const welcomeCardContent = getMarkdown(loadFile("welcome.md"));
+  const welcomeCardGpOrSpContent = getMarkdown(loadFile("welcome-gp-or-sp.md"));
+
+  const guestSuccessfullyRegisteredContent = getMarkdown(loadFile("successful-registration.md"));
+  const guestNotRegisteredContent = getMarkdown(loadFile("not-registered.md"));
+
+  return {
+    welcomeCard: {
+      contentMd: welcomeCardContent.content,
+      ...(welcomeCardContent.grayMatter as RoadmapCardGrayMatter),
+    },
+    welcomeCardGpOrSpCard: {
+      contentMd: welcomeCardGpOrSpContent.content,
+      ...(welcomeCardGpOrSpContent.grayMatter as RoadmapCardGrayMatter),
+    },
+    guestSuccessfullyRegisteredCard: {
+      contentMd: guestSuccessfullyRegisteredContent.content,
+      ...(guestSuccessfullyRegisteredContent.grayMatter as RoadmapCardGrayMatter),
+    },
+    guestNotRegisteredCard: {
+      contentMd: guestNotRegisteredContent.content,
+      ...(guestNotRegisteredContent.grayMatter as RoadmapCardGrayMatter),
+    },
+  };
+};
+
 export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
   const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
 
@@ -340,3 +371,15 @@ type MemberGrayMatter = {
   titleSubtext: string;
   placeholder: string;
 };
+
+type RoadmapCardGrayMatter = {
+  id: string;
+  header: string;
+  imgPath: string;
+  color: string;
+  shadowColor: string;
+};
+
+export interface RoadmapSidebarCardContent extends RoadmapCardGrayMatter {
+  contentMd: string;
+}
