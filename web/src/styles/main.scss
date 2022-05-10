@@ -1,6 +1,7 @@
 @import "base/variables.scss";
 @import "base/typography";
 @import "base/background-colors";
+@import "base/border-colors";
 @import "base/global";
 @import "base/flex";
 
@@ -12,6 +13,8 @@
 @import "components/tabs.scss";
 @import "components/tags.scss";
 @import "components/errors.scss";
+@import "components/hr.scss";
+@import "components/card.scss";
 
 @import "sections/innov-footer.scss";
 @import "sections/landing.scss";

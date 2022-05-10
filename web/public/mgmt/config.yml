@@ -893,6 +893,7 @@ collections:
                   widget: string,
                 }
               - { label: Graduation Modal Title, name: graduationModalTitle, widget: string }
+              - { label: Sidebar Heading, name: sideBarHeading, widget: string }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true
@@ -1520,6 +1521,40 @@ collections:
         value_field: "arrayOfOwnershipTypes.*.id"
         display_fields: ["arrayOfOwnershipTypes.*.name"]
       - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
+
+  - name: "roadmap-sidebar-card"
+    label: "Roadmap Sidebar Cards Content"
+    folder: "content/src/display-content/roadmap-sidebar-cards"
+    summary: "{{id}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Header", name: "header", widget: "string", required: false }
+      - {
+          label: "Image (header required)",
+          name: "imgPath",
+          widget: "select",
+          required: false,
+          options: ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg"],
+        }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - {
+          label: "Color",
+          name: "color",
+          widget: "select",
+          options: ["primary", "accent-cool-darker", "roadmap-purple"],
+        }
+      - {
+          label: "Shadow Color",
+          name: "shadowColor",
+          widget: "select",
+          options: ["roadmap-purple-light", "primary-light", "roadmap-blue-light"],
+        }
 
   - name: "archived-certification-opportunities"
     label: "Archived Certification Opportunities Content"
