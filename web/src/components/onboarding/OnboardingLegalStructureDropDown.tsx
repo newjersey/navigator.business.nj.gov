@@ -8,7 +8,11 @@ import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material"
 import orderBy from "lodash.orderby";
 import React, { ReactElement, ReactNode, useContext } from "react";
 
-export const OnboardingLegalStructureDropdown = (): ReactElement => {
+interface Props {
+  disabled?: boolean;
+}
+
+export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
@@ -67,6 +71,7 @@ export const OnboardingLegalStructureDropdown = (): ReactElement => {
               "data-testid": "legal-structure",
             }}
             renderValue={renderValue}
+            disabled={props.disabled}
           >
             {LegalStructuresOrdered.map((legalStructure) => (
               <MenuItem key={legalStructure.id} value={legalStructure.id} data-testid={legalStructure.id}>

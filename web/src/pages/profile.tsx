@@ -176,7 +176,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <OnboardingLegalStructureDropdown />
+        <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
       </>

@@ -690,6 +690,20 @@ describe("profile", () => {
     expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
   });
 
+  it("disables legal structure field if formation getFiling success", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({ hasExistingBusiness: false }),
+      formationData: generateFormationData({
+        getFilingResponse: generateGetFilingResponse({
+          success: true,
+        }),
+      }),
+    });
+
+    subject = renderPage({ userData });
+    expect((subject.queryByTestId("legal-structure") as HTMLInputElement)?.disabled).toEqual(true);
+  });
+
   describe("Document Section", () => {
     describe("if Poppy", () => {
       it("shows document section if user's legal structure requires public filing", () => {
