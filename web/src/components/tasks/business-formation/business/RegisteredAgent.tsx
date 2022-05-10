@@ -98,32 +98,33 @@ export const RegisteredAgent = (): ReactElement => {
   return (
     <>
       <Content>{state.displayContent.agentNumberOrManual.contentMd}</Content>
-      <div className="form-input margin-bottom-2 margin-top-105" id="registeredAgent">
-        <FormControl fullWidth>
-          <RadioGroup
-            aria-label="Registered Agent"
-            name="registered-agent"
-            value={state.formationFormData.agentNumberOrManual}
-            onChange={handleRadioSelection}
-            row
-          >
-            <FormControlLabel
-              labelPlacement="end"
-              data-testid="registered-agent-number"
-              value="NUMBER"
-              control={<Radio color="primary" />}
-              label={state.displayContent.agentNumberOrManual.radioButtonNumberText}
-            />
-            <FormControlLabel
-              labelPlacement="end"
-              data-testid="registered-agent-manual"
-              value="MANUAL_ENTRY"
-              control={<Radio color="primary" />}
-              label={state.displayContent.agentNumberOrManual.radioButtonManualText}
-            />
-          </RadioGroup>
-        </FormControl>
-
+      <div className="margin-bottom-2 margin-top-105" id="registeredAgent">
+        <div className="form-input">
+          <FormControl fullWidth>
+            <RadioGroup
+              aria-label="Registered Agent"
+              name="registered-agent"
+              value={state.formationFormData.agentNumberOrManual}
+              onChange={handleRadioSelection}
+              row
+            >
+              <FormControlLabel
+                labelPlacement="end"
+                data-testid="registered-agent-number"
+                value="NUMBER"
+                control={<Radio color="primary" />}
+                label={state.displayContent.agentNumberOrManual.radioButtonNumberText}
+              />
+              <FormControlLabel
+                labelPlacement="end"
+                data-testid="registered-agent-manual"
+                value="MANUAL_ENTRY"
+                control={<Radio color="primary" />}
+                label={state.displayContent.agentNumberOrManual.radioButtonManualText}
+              />
+            </RadioGroup>
+          </FormControl>
+        </div>
         <div className="margin-top-1">
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
@@ -136,35 +137,44 @@ export const RegisteredAgent = (): ReactElement => {
                 }}
                 fieldName="agentNumber"
                 validationText={Config.businessFormationDefaults.agentNumberErrorText}
+                formInputFull
               />
             </div>
           )}
 
           {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
             <div data-testid="agent-name">
-              <div className="margin-bottom-1">
+              <div className="margin-top-3 margin-bottom-1">
                 <FormControlLabel
                   label={Config.businessFormationDefaults.sameAgentInfoAsAccount}
                   control={<Checkbox checked={useAccountInfo} onChange={toggleUseAccountInfo} />}
                 />
               </div>
-              <BusinessFormationTextField
-                label={Config.businessFormationDefaults.registeredAgentNameLabel}
-                placeholder={Config.businessFormationDefaults.registeredAgentNamePlaceholder}
-                required={true}
-                validationText={Config.businessFormationDefaults.agentNameErrorText}
-                fieldName="agentName"
-                disabled={useAccountInfo}
-              />
-              <BusinessFormationTextField
-                label={Config.businessFormationDefaults.registeredAgentEmailLabel}
-                placeholder={Config.businessFormationDefaults.registeredAgentEmailPlaceholder}
-                fieldName="agentEmail"
-                additionalValidation={validateEmail}
-                required={true}
-                validationText={Config.businessFormationDefaults.agentEmailErrorText}
-                disabled={useAccountInfo}
-              />
+              <div className="grid-row grid-gap-2">
+                <div className="tablet:grid-col-6">
+                  <BusinessFormationTextField
+                    label={Config.businessFormationDefaults.registeredAgentNameLabel}
+                    placeholder={Config.businessFormationDefaults.registeredAgentNamePlaceholder}
+                    required={true}
+                    validationText={Config.businessFormationDefaults.agentNameErrorText}
+                    fieldName="agentName"
+                    disabled={useAccountInfo}
+                    formInputFull
+                  />
+                </div>
+                <div className="tablet:grid-col-6 margin-bottom-2">
+                  <BusinessFormationTextField
+                    label={Config.businessFormationDefaults.registeredAgentEmailLabel}
+                    placeholder={Config.businessFormationDefaults.registeredAgentEmailPlaceholder}
+                    fieldName="agentEmail"
+                    additionalValidation={validateEmail}
+                    required={true}
+                    validationText={Config.businessFormationDefaults.agentEmailErrorText}
+                    disabled={useAccountInfo}
+                    formInputFull
+                  />
+                </div>
+              </div>
               <div className="margin-bottom-1">
                 <FormControlLabel
                   label={Config.businessFormationDefaults.sameAgentAddressAsBusiness}
@@ -178,12 +188,14 @@ export const RegisteredAgent = (): ReactElement => {
                 required={true}
                 validationText={Config.businessFormationDefaults.agentOfficeAddressLine1ErrorText}
                 disabled={useBusinessAddress}
+                formInputFull
               />
               <BusinessFormationTextField
                 label={Config.businessFormationDefaults.registeredAgentAddressLine2Label}
                 placeholder={Config.businessFormationDefaults.registeredAgentAddressLine2Placeholder}
                 fieldName="agentOfficeAddressLine2"
                 disabled={useBusinessAddress}
+                formInputFull
               />
               <div className="grid-row grid-gap-2 margin-top-2">
                 <div className="grid-col-12 tablet:grid-col-6">
@@ -194,6 +206,7 @@ export const RegisteredAgent = (): ReactElement => {
                     required={true}
                     validationText={Config.businessFormationDefaults.agentOfficeAddressCityErrorText}
                     disabled={useBusinessAddress}
+                    formInputFull
                   />
                 </div>
                 <div className="grid-col-5 tablet:grid-col-2">
