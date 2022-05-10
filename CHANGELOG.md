@@ -1,3 +1,51 @@
+# [3.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.6.0...v3.7.0) (2022-05-10)
+
+
+### Bug Fixes
+
+* [[#2393](https://github.com/newjersey/navigator.business.nj.gov/issues/2393)] add due date to opportunity cards on the dashboard ([9b9757b](https://github.com/newjersey/navigator.business.nj.gov/commit/9b9757b31d53f955550682d7fae481ea594cb567))
+* [[#2442](https://github.com/newjersey/navigator.business.nj.gov/issues/2442)] add characters label ([d3144da](https://github.com/newjersey/navigator.business.nj.gov/commit/d3144daad6aefa0d9d792cde5cd0c70d952b1e09))
+* [[#2442](https://github.com/newjersey/navigator.business.nj.gov/issues/2442)] business purpose header styling & content ([2bcbc85](https://github.com/newjersey/navigator.business.nj.gov/commit/2bcbc8557e42e2a80b13b2bddc384736e45fc208))
+* [[#2456](https://github.com/newjersey/navigator.business.nj.gov/issues/2456)] add provisions migration ([c628eb7](https://github.com/newjersey/navigator.business.nj.gov/commit/c628eb7d6f688d23d0f80f60afdef37f8ab39cee))
+* [[#2456](https://github.com/newjersey/navigator.business.nj.gov/issues/2456)] increase provisions char limit to 3000 ([872a47c](https://github.com/newjersey/navigator.business.nj.gov/commit/872a47cb1c0726c909fc8fefa47d91b30cc2945d))
+* [[#2581](https://github.com/newjersey/navigator.business.nj.gov/issues/2581)] merge janatorial and cleaning industries ([a7837b4](https://github.com/newjersey/navigator.business.nj.gov/commit/a7837b4a64f0a3ddf1009aa2a6de97ede47847bd))
+* [[#2600](https://github.com/newjersey/navigator.business.nj.gov/issues/2600)] merge pr and marketing industries ([aea7244](https://github.com/newjersey/navigator.business.nj.gov/commit/aea72447262b2b2bb4eb96083be377c4c9cf6e77))
+* [[#2617](https://github.com/newjersey/navigator.business.nj.gov/issues/2617)] remove unlocked by dependencies from application needs task ([d00411c](https://github.com/newjersey/navigator.business.nj.gov/commit/d00411c4403d9489911e84693b2b374fef25015a))
+* [[#2649](https://github.com/newjersey/navigator.business.nj.gov/issues/2649)] hide the profile documents tab if the legal structure does not require public filing ([a43a997](https://github.com/newjersey/navigator.business.nj.gov/commit/a43a9978496e6ac390b808e9bfbeafc8bd6e485d))
+* clear the requiresCpa flag when changing to an industry where cpa is not applicable ([32ba9c2](https://github.com/newjersey/navigator.business.nj.gov/commit/32ba9c294299b032be0e711774dcc187136a948f))
+* **deps:** update aws-amplify to v4.5.3 ([e1e7db6](https://github.com/newjersey/navigator.business.nj.gov/commit/e1e7db6bbc989abe07742fa89575710813da6d81))
+* **deps:** update dependency dayjs to v1.11.2 ([16f5bdd](https://github.com/newjersey/navigator.business.nj.gov/commit/16f5bdd1903a8b7028599186c7c493b08590b1cb))
+* **deps:** update material-ui ([f3e7e13](https://github.com/newjersey/navigator.business.nj.gov/commit/f3e7e136bbc03cba73300e70f9e8bcfca69ce5ec))
+* **deps:** upgrade react to v18 ([77cb7c7](https://github.com/newjersey/navigator.business.nj.gov/commit/77cb7c71d5c3df4b80a11125ec6640c180cd5033))
+* feature flag for business purpose ([262022b](https://github.com/newjersey/navigator.business.nj.gov/commit/262022b40d5008048d8f84eb11f5a4c8ab1cfad6))
+* updating General Config config ([#2667](https://github.com/newjersey/navigator.business.nj.gov/issues/2667)) ([293ef84](https://github.com/newjersey/navigator.business.nj.gov/commit/293ef84aa861d73461259d0b649915768aac6984))
+* updating General Config config ([#2669](https://github.com/newjersey/navigator.business.nj.gov/issues/2669)) ([1cbb3e4](https://github.com/newjersey/navigator.business.nj.gov/commit/1cbb3e443e681176a1114869217467d6130ff6bd))
+* updating Industry Roadmaps auto-body-repair ([#2691](https://github.com/newjersey/navigator.business.nj.gov/issues/2691)) ([0e25be3](https://github.com/newjersey/navigator.business.nj.gov/commit/0e25be3cab889c0a32b44f5a77938942b807efc0))
+* updating Industry Roadmaps certified-public-accountant ([#2704](https://github.com/newjersey/navigator.business.nj.gov/issues/2704)) ([12261d2](https://github.com/newjersey/navigator.business.nj.gov/commit/12261d2becef2cf9e89b1540cf45ec57f77046b5))
+* updating Industry Roadmaps cleaning-janitorial-services ([#2697](https://github.com/newjersey/navigator.business.nj.gov/issues/2697)) ([7fd1bb5](https://github.com/newjersey/navigator.business.nj.gov/commit/7fd1bb5ca2b181cd7384e429910535f30ad3f2a1))
+* updating Industry Roadmaps cosmetology ([#2668](https://github.com/newjersey/navigator.business.nj.gov/issues/2668)) ([31400b4](https://github.com/newjersey/navigator.business.nj.gov/commit/31400b49e3c8c0abe567af4712e58049a6456b75))
+* updating Industry Roadmaps cosmetology ([#2693](https://github.com/newjersey/navigator.business.nj.gov/issues/2693)) ([535cb72](https://github.com/newjersey/navigator.business.nj.gov/commit/535cb72d2388dd762920c7fca3343a7909177481))
+* updating Industry Roadmaps e-commerce ([#2696](https://github.com/newjersey/navigator.business.nj.gov/issues/2696)) ([780a569](https://github.com/newjersey/navigator.business.nj.gov/commit/780a5691a38f7a677da3bf29fc9a7cfb89cd2a06))
+* updating Industry Roadmaps employment-agency ([#2702](https://github.com/newjersey/navigator.business.nj.gov/issues/2702)) ([4cc8a4c](https://github.com/newjersey/navigator.business.nj.gov/commit/4cc8a4c4506cbcde6b4076a6749c47ddb9450d8e))
+* updating Industry Roadmaps food-truck ([#2699](https://github.com/newjersey/navigator.business.nj.gov/issues/2699)) ([e2f92e1](https://github.com/newjersey/navigator.business.nj.gov/commit/e2f92e131c2640cf97d1c0944fe81e03a5cb5812))
+* updating Industry Roadmaps home-contractor ([#2692](https://github.com/newjersey/navigator.business.nj.gov/issues/2692)) ([76dcb5c](https://github.com/newjersey/navigator.business.nj.gov/commit/76dcb5ceba6faeb0d96420b1b11b3e9cb563d8be))
+* updating Industry Roadmaps homemaker-home-health-aide ([#2703](https://github.com/newjersey/navigator.business.nj.gov/issues/2703)) ([a149394](https://github.com/newjersey/navigator.business.nj.gov/commit/a1493940bcc23fbb7d01461a0f154f81faf18390))
+* updating Industry Roadmaps it-consultant ([#2707](https://github.com/newjersey/navigator.business.nj.gov/issues/2707)) ([63e954f](https://github.com/newjersey/navigator.business.nj.gov/commit/63e954fb22fae5358112f98da7435bff87613ca5))
+* updating Industry Roadmaps management-consulting ([#2698](https://github.com/newjersey/navigator.business.nj.gov/issues/2698)) ([51d1ae1](https://github.com/newjersey/navigator.business.nj.gov/commit/51d1ae1aaf2647a5ae5e7d617f75e29625b5a239))
+* updating Industry Roadmaps marketing-pr-consulting ([#2700](https://github.com/newjersey/navigator.business.nj.gov/issues/2700)) ([bb75bc6](https://github.com/newjersey/navigator.business.nj.gov/commit/bb75bc65d9eba2624f679bf4ee94e3b4c9b75d6b))
+* updating Industry Roadmaps massage-therapy ([#2705](https://github.com/newjersey/navigator.business.nj.gov/issues/2705)) ([f809923](https://github.com/newjersey/navigator.business.nj.gov/commit/f80992371bb146ad71a14a62e128f7a0736cd2c7))
+* updating Industry Roadmaps non-medical-transport ([#2701](https://github.com/newjersey/navigator.business.nj.gov/issues/2701)) ([71445e7](https://github.com/newjersey/navigator.business.nj.gov/commit/71445e718f45f4b26a28b1cb350eef8debfbcee1))
+* updating Industry Roadmaps pharmacy ([#2706](https://github.com/newjersey/navigator.business.nj.gov/issues/2706)) ([e1f1a06](https://github.com/newjersey/navigator.business.nj.gov/commit/e1f1a069f24910e712de7405aef7ec8650a4ae00))
+* updating Industry Roadmaps restaurant ([#2694](https://github.com/newjersey/navigator.business.nj.gov/issues/2694)) ([d3b44b9](https://github.com/newjersey/navigator.business.nj.gov/commit/d3b44b921cc40151e8258d3f12f0ca97bc197092))
+* updating Industry Roadmaps retail ([#2695](https://github.com/newjersey/navigator.business.nj.gov/issues/2695)) ([f374dcf](https://github.com/newjersey/navigator.business.nj.gov/commit/f374dcfdf5e38656464d540d189abe07ae12096f))
+* use the first come, first served status for determine when to display first come, first served ([4b47f7c](https://github.com/newjersey/navigator.business.nj.gov/commit/4b47f7cf79c6ddb6a90215bbc53db6af487298f9))
+
+
+### Features
+
+* [[#2442](https://github.com/newjersey/navigator.business.nj.gov/issues/2442)] add Business Purpose to business formation ([a60f409](https://github.com/newjersey/navigator.business.nj.gov/commit/a60f409d3af0b354cd901265dee3784b8c7640c5))
+* [[#2456](https://github.com/newjersey/navigator.business.nj.gov/issues/2456)] add provisions to business formation ([b43a30f](https://github.com/newjersey/navigator.business.nj.gov/commit/b43a30f20e2b3e7edc47df4d586ee298ad642b6d))
+
 # [3.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.5.0...v3.6.0) (2022-05-03)
 
 
