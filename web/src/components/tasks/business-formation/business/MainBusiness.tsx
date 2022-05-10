@@ -30,11 +30,13 @@ export const MainBusiness = (): ReactElement => {
         fieldName="businessAddressLine1"
         required={true}
         validationText={Config.businessFormationDefaults.businessAddressLine1ErrorText}
+        formInputFull
       />
       <BusinessFormationTextField
         label={Config.businessFormationDefaults.businessAddressAddressLine2Label}
         placeholder={Config.businessFormationDefaults.businessAddressAddressLine2Placeholder}
         fieldName="businessAddressLine2"
+        formInputFull
       />
       <div className="grid-row grid-gap-2 margin-top-2">
         <div className="margin-bottom-2 grid-col-12 tablet:grid-col-6">

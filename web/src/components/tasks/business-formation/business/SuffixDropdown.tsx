@@ -37,7 +37,7 @@ export const SuffixDropdown = (): ReactElement => {
           </div>
         </ArrowTooltip>
       </div>
-      <div className="form-input margin-bottom-2">
+      <div className="margin-bottom-2">
         <FormControl fullWidth error={state.errorMap.businessSuffix.invalid}>
           <InputLabel id="business-suffix-label" className="visibility-hidden">
             {camelCaseToSentence("businessSuffix")}

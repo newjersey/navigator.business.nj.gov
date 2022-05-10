@@ -151,7 +151,7 @@ export const Signatures = (): ReactElement => {
 
   return (
     <>
-      <div className="form-input margin-bottom-2">
+      <div className="margin-bottom-2">
         <Content>{state.displayContent.signatureHeader.contentMd}</Content>
         <br />
         <div className="grid-row flex-align-center">
@@ -174,6 +174,7 @@ export const Signatures = (): ReactElement => {
                   validationText={Config.businessFormationDefaults.signerErrorText}
                   fieldName="signer"
                   required={true}
+                  formInputFull
                 />
               </div>
               <div style={{ marginBottom: "19px" }}>
@@ -213,6 +214,7 @@ export const Signatures = (): ReactElement => {
                     validationText={Config.businessFormationDefaults.additionalSignatureNameErrorText}
                     fieldName="additionalSigners"
                     ariaLabel={`Additional signers ${index}`}
+                    formInputFull
                   />
                 </div>
                 {renderSignatureColumn({
