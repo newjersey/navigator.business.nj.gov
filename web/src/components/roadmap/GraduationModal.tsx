@@ -1,4 +1,5 @@
 import { DialogTwoButton } from "@/components/DialogTwoButton";
+import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
@@ -111,6 +112,7 @@ export const GraduationModal = (props: Props): ReactElement => {
     if (!userData) return;
     const errorMap = {
       ...fieldStates,
+      businessName: { invalid: !profileData.businessName },
       sectorId: { invalid: !profileData.sectorId },
       existingEmployees: { invalid: !profileData.existingEmployees },
       dateOfFormation: { invalid: !!(needsDateOfFormation && !profileData.dateOfFormation) },
@@ -147,6 +149,13 @@ export const GraduationModal = (props: Props): ReactElement => {
       >
         <div data-testid="graduation-modal">
           <FormControl fullWidth={true}>
+            {!userData?.formationData.getFilingResponse?.success ? (
+              <OnboardingBusinessName
+                onValidation={onValidation}
+                fieldStates={fieldStates}
+                headerAriaLevel={3}
+              />
+            ) : undefined}
             {needsDateOfFormation ? (
               <OnboardingDateOfFormation
                 onValidation={onValidation}

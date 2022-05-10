@@ -589,6 +589,7 @@ describe("roadmap page", () => {
 
       openGraduationModal(subject);
       expect(subject.getByTestId("graduation-modal")).toBeInTheDocument();
+      page.fillText("Business name", "A Clean Business");
       page.selectDate("Date of formation", date);
       page.selectByValue("Sector", "clean-energy");
       page.selectByValue("Ownership", "veteran-owned");
@@ -600,6 +601,7 @@ describe("roadmap page", () => {
           ...userData,
           profileData: {
             ...userData.profileData,
+            businessName: "A Clean Business",
             dateOfFormation,
             sectorId: "clean-energy",
             ownershipTypeIds: ["veteran-owned"],
@@ -618,6 +620,7 @@ describe("roadmap page", () => {
         profileData: generateProfileData({
           hasExistingBusiness: false,
           legalStructureId: "limited-liability-partnership",
+          businessName: "A Test Business",
           dateOfFormation,
           sectorId: "clean-energy",
           industryId: "generic",
@@ -629,6 +632,7 @@ describe("roadmap page", () => {
       const { subject, page } = renderPage(userData);
 
       openGraduationModal(subject);
+      expect((subject.getByLabelText("Business name") as HTMLInputElement).value).toEqual("A Test Business");
       expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
       expect(page.getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
       expect(subject.queryByLabelText("Ownership")).toHaveTextContent(
@@ -644,6 +648,7 @@ describe("roadmap page", () => {
           profileData: {
             ...userData.profileData,
             dateOfFormation,
+            businessName: "A Test Business",
             sectorId: "clean-energy",
             ownershipTypeIds: ["veteran-owned"],
             existingEmployees: "1234567",
@@ -779,6 +784,42 @@ describe("roadmap page", () => {
           "MM/YYYY"
         )
       );
+    });
+
+    it("does not display businessName if formation getFiling success", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          businessName: "A Test Business 2",
+          legalStructureId: "limited-liability-partnership",
+          dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
+        }),
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({
+            success: true,
+          }),
+        }),
+      });
+
+      const { subject } = renderPage(userData);
+      openGraduationModal(subject);
+      expect(subject.queryByTestId("businessName")).toBeNull();
+    });
+
+    it("display businessName if formation is not set", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          hasExistingBusiness: false,
+          businessName: "A Test Business 2",
+          legalStructureId: "limited-liability-partnership",
+          dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
+        }),
+      });
+
+      const { subject } = renderPage(userData);
+      openGraduationModal(subject);
+      expect(subject.getByTestId("businessName")).not.toBeNull();
+      expect(subject.getByLabelText("Business name")).not.toBeNull();
     });
   });
 });
