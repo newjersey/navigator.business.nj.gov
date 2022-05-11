@@ -29,7 +29,7 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@jest/types": "28.0.2",
+    "@jest/types": "28.1.0",
     "@types/jest": "27.5.0",
     "@types/node": "14.18.16",
     "@typescript-eslint/eslint-plugin": "5.22.0",
@@ -37,11 +37,11 @@
     "cross-env": "7.0.3",
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
-    "jest": "28.0.3",
+    "jest": "28.1.0",
     "jest-junit": "13.2.0",
     "prettier": "2.6.2",
     "rimraf": "3.0.2",
-    "ts-jest": "28.0.1",
+    "ts-jest": "28.0.2",
     "ts-node": "10.7.0",
     "tsconfig-paths": "4.0.0",
     "typescript": "4.6.4"
