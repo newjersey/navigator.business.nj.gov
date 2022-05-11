@@ -27,6 +27,6 @@ You must register your business name and form your `legal structure|legal-struct
 >
 > - `Entity ID|entity-id`
 > - `Certificate of Formation|certificate-formation`, Incorporation or Authorization as applicable
-
-- `Certified copy|certified-copy` of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
-- `Certificate of Good Standing|good-standing` (optional with additional fee)
+>
+> - `Certified copy|certified-copy` of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
+> - `Certificate of Good Standing|good-standing` (optional with additional fee)
