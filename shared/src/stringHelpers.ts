@@ -1,4 +1,4 @@
-export const toProperCase = (value: string | undefined) => {
+export const toProperCase = (value: string | undefined): string | undefined => {
   if (!value) return undefined;
 
   return value.replace(/\w\S*/g, (txt) => {
