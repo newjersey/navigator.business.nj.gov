@@ -15,12 +15,13 @@ You must register your business name and form your `legal structure|legal-struct
 ### Application Needs
 
 * Business name (as registered in foreign location)
+* Business designator (as registered in foreign location)
 * Legal structure
 *  `NAICS code|naics` (optional)
 *  `EIN|ein` (optional)
 * State of Incorporation
 * Date of Incorporation
-* Foreign Certificate of Good Standing (Only required for C corp)
+* Certificate of `Good Standing|good-standing` from location of origin (only required for C corp)
 * Business description
 * Business address (this may be a home address if you are a home-based business)
 *  `Registered agent|registered-agent` 
