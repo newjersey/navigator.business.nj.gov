@@ -41,6 +41,7 @@ import {
   createEmptyProfileData,
   createEmptyUser,
   createEmptyUserData,
+  LookupIndustryById,
   LookupLegalStructureById,
   Municipality,
   ProfileData,
@@ -151,43 +152,42 @@ const OnboardingPage = (props: Props): ReactElement => {
   }, [profileData.hasExistingBusiness, props.displayContent]);
 
   useEffect(() => {
-    if (
-      !router.isReady ||
-      hasHandledRouting.current ||
-      !state.user ||
-      state.isAuthenticated === IsAuthenticated.UNKNOWN
-    )
-      return;
+    (async () => {
+      if (
+        !router.isReady ||
+        hasHandledRouting.current ||
+        !state.user ||
+        state.isAuthenticated === IsAuthenticated.UNKNOWN
+      )
+        return;
 
-    let currentUserData = userData;
+      let currentUserData = userData;
 
-    if (currentUserData) {
-      setProfileData(currentUserData.profileData);
-      setUser(currentUserData.user);
-      const flow = currentUserData.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
-      setCurrentFlow(flow);
-      setCurrentContent(props.displayContent[flow] as UserDisplayContent);
-    } else if (state.isAuthenticated == IsAuthenticated.FALSE) {
-      currentUserData = createEmptyUserData(state.user);
-      setRegistrationDimension("Began Onboarding");
-      update(currentUserData);
-      setProfileData(currentUserData.profileData);
-      setUser(currentUserData.user);
-    }
+      if (currentUserData) {
+        setProfileData(currentUserData.profileData);
+        setUser(currentUserData.user);
+        const flow = currentUserData.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+        setCurrentFlow(flow);
+        setCurrentContent(props.displayContent[flow] as UserDisplayContent);
+      } else if (state.isAuthenticated == IsAuthenticated.FALSE) {
+        currentUserData = createEmptyUserData(state.user);
+        setRegistrationDimension("Began Onboarding");
+        await update(currentUserData);
+        setProfileData(currentUserData.profileData);
+        setUser(currentUserData.user);
+      }
 
-    if (currentUserData)
-      (async () => {
+      if (currentUserData) {
         if (currentUserData?.formProgress === "COMPLETED") {
           await router.replace("/profile");
           return;
         } else {
           const queryPage = Number(router.query.page);
+          const queryIndustryId = router.query.industry as string | undefined;
 
-          const hasAnsweredExistingBusiness = currentUserData?.profileData.hasExistingBusiness !== undefined;
-          const requestedPageIsInRange =
-            queryPage <= onboardingFlows[currentFlow].pages.length && queryPage > 0;
-
-          if (hasAnsweredExistingBusiness && requestedPageIsInRange) {
+          if (industryQueryParamIsValid(queryIndustryId)) {
+            await setIndustryAndRouteToPage2(currentUserData, queryIndustryId);
+          } else if (pageQueryParamisValid(currentUserData, queryPage)) {
             setPage({ current: queryPage, previous: queryPage - 1 });
           } else {
             setPage({ current: 1, previous: 1 });
@@ -196,21 +196,37 @@ const OnboardingPage = (props: Props): ReactElement => {
 
           hasHandledRouting.current = true;
         }
-      })();
-  }, [
-    props.displayContent,
-    currentFlow,
-    router,
-    router.isReady,
-    router.query.page,
-    userData,
-    onboardingFlows,
-    queryShallowPush,
-    hasHandledRouting,
-    state.user,
-    state.isAuthenticated,
-    update,
-  ]);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady, state.user, state.isAuthenticated]);
+
+  const pageQueryParamisValid = (userData: UserData, page: number): boolean => {
+    const hasAnsweredExistingBusiness = userData?.profileData.hasExistingBusiness !== undefined;
+    const requestedPageIsInRange = page <= onboardingFlows[currentFlow].pages.length && page > 0;
+
+    return hasAnsweredExistingBusiness && requestedPageIsInRange;
+  };
+
+  const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
+    return !!LookupIndustryById(industryId).id;
+  };
+
+  const setIndustryAndRouteToPage2 = async (
+    userData: UserData,
+    industryId: string | undefined
+  ): Promise<void> => {
+    setPage({ current: 2, previous: 1 });
+    await update({
+      ...userData,
+      profileData: {
+        ...userData.profileData,
+        hasExistingBusiness: false,
+        initialOnboardingFlow: "STARTING",
+        industryId: industryId,
+      },
+    });
+  };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();

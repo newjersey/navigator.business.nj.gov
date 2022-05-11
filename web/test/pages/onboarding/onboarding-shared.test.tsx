@@ -31,6 +31,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const mockApi = api as jest.Mocked<typeof api>;
 const date = getCurrentDate().subtract(1, "month").date(1);
+
 describe("onboarding - shared", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -78,6 +79,23 @@ describe("onboarding - shared", () => {
     expect(subject.getByTestId("step-1")).toBeInTheDocument();
   });
 
+  it("routes to the second page with industry set when using industry query string", async () => {
+    useMockRouter({ isReady: true, query: { industry: "cannabis" } });
+    const { subject } = renderPage({});
+    await waitFor(() => {
+      expect(subject.getByTestId("step-2")).toBeInTheDocument();
+      expect(currentUserData().profileData.hasExistingBusiness).toEqual(false);
+      expect(currentUserData().profileData.initialOnboardingFlow).toEqual("STARTING");
+      expect(currentUserData().profileData.industryId).toEqual("cannabis");
+    });
+  });
+
+  it("routes to the first page when using industry query string is invalid", async () => {
+    useMockRouter({ isReady: true, query: { industry: "something-nonexistent" } });
+    const { subject } = renderPage({});
+    expect(subject.getByTestId("step-1")).toBeInTheDocument();
+  });
+
   it("builds and sets roadmap after each step", async () => {
     const profileData = generateProfileData({ hasExistingBusiness: false });
     const mockSetRoadmap = jest.fn();
@@ -112,7 +130,7 @@ describe("onboarding - shared", () => {
 
   it("generates a new empty userData object during guest checkout", async () => {
     renderPage({ userData: null, user: generateUser({}), isAuthenticated: IsAuthenticated.FALSE });
-    expect(currentUserData().user);
+    await waitFor(() => expect(currentUserData().user));
   });
 
   it("updates locally for each step", async () => {
@@ -129,8 +147,6 @@ describe("onboarding - shared", () => {
     expect(getLastCalledWithConfig().local).toEqual(true);
     await page.visitStep5();
     expect(getLastCalledWithConfig().local).toEqual(true);
-    page.clickNext();
-    await waitFor(() => expect(getLastCalledWithConfig().local).toEqual(true));
   });
 
   it("prevents user from moving after Step 1 if you have not selected whether you own a business", async () => {
