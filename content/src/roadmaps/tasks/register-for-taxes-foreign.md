@@ -22,7 +22,7 @@ You are seeing this task because your foreign business either has operations in 
 *  `EIN|ein` 
 * Estimated start date
 * Description of your business activity
-* Estimated number of employees
+* Estimated number of employees (if applicable)
 * Anticipated first payroll withholding date for employees (if applicable)
 * Information on if and when you expect to report and collect sales tax
 * Owner information
