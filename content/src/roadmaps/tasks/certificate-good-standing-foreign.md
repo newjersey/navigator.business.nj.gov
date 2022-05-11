@@ -6,7 +6,7 @@ id: certificate-good-standing-foreign
 required: true
 formName: ""
 ---
-You will need to obtain upload a `Certificate of Good Standing|good-standing` from your State of incorporation to
+You will need to obtain upload a `Certificate of Good Standing|good-standing` from your State of incorporation to [Form Your Business](form-business-entity-foreign)
 
 The Certificate from the business entity's home state cannot be dated more than 30 days prior to the date in which you submit your formation application.
 
