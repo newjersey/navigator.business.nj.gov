@@ -913,7 +913,7 @@ describe("roadmap page", () => {
       });
     });
 
-    it("renders successful registration card when user is authenicated", async () => {
+    it("renders successful registration card when user is authenticated", async () => {
       const sideBarDisplayContent = generateSideBarContent({
         guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
           contentMd: "successful-registration-content",
@@ -936,7 +936,7 @@ describe("roadmap page", () => {
       });
     });
 
-    it("renders successful registration card when not registered card is visible, then user is authenicated", async () => {
+    it("renders successful registration card when not registered card is visible, then user is authenticated", async () => {
       const userData = generateUserData({
         preferences: generatePreferences({
           visibleRoadmapSidebarCards: ["not-registered"],
@@ -989,7 +989,7 @@ describe("roadmap page", () => {
       });
 
       fireEvent.click(
-        within(subject.queryByTestId("successful-registeration-card") as HTMLElement).getByLabelText("Close")
+        within(subject.queryByTestId("successful-registration-card") as HTMLElement).getByLabelText("Close")
       );
 
       await waitFor(() => {

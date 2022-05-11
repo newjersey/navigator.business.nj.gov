@@ -3,6 +3,7 @@ import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
+import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
@@ -15,6 +16,7 @@ import React, { ReactElement, useContext } from "react";
 
 export const SignUpToast = (): ReactElement => {
   const { userData, update } = useUserData();
+  const { showCard } = useRoadmapSidebarCards();
   const { isAuthenticated, alertIsVisible, setAlertIsVisible, setRegistrationAlertStatus } =
     useContext(AuthAlertContext);
   const router = useRouter();
@@ -30,21 +32,9 @@ export const SignUpToast = (): ReactElement => {
     return <></>;
   }
 
-  const handleClose = () => {
+  const handleClose = async () => {
     setAlertIsVisible(false);
-
-    if (userData) {
-      const showRegistrationCard = userData.preferences.visibleRoadmapSidebarCards.filter(
-        (id: string) => id !== "not-registered"
-      );
-      update({
-        ...userData,
-        preferences: {
-          ...userData.preferences,
-          visibleRoadmapSidebarCards: [...showRegistrationCard, "not-registered"],
-        },
-      });
-    }
+    await showCard("not-registered");
   };
 
   return (
