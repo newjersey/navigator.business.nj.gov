@@ -190,7 +190,7 @@ describe("dashboard", () => {
       generateFunding({ name: "Funding 2", sector: ["construction"], status: "rolling application" }),
       generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "rolling application" }), // Filtered out
       generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
-      generateFunding({ name: "Funding 5", sector: [], status: "first-come, first-served" }),
+      generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" }),
     ];
     const certifications = [
       generateCertification({ name: "Cert 1", applicableOwnershipTypes: ["disabled-veteran"] }),
@@ -236,7 +236,7 @@ describe("dashboard", () => {
       generateFunding({ name: "Funding 2", sector: ["construction"], status: "rolling application" }),
       generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "rolling application" }),
       generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
-      generateFunding({ name: "Funding 5", sector: [], status: "first-come, first-served" }),
+      generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" }),
     ];
 
     const subject = renderPage({ fundings });

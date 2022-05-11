@@ -132,8 +132,8 @@ const convertProgramFrequency = (value) => {
 const convertStatus = (value) => {
   if (value === "deadline\n") {
     return "deadline";
-  } else if (value === "first-come, first-served\n") {
-    return "first-come, first-served";
+  } else if (value === "first come, first serve\n") {
+    return "first come, first serve";
   } else if (value === "Open") {
     return "open";
   } else if (value === "Opening Soon") {
@@ -143,7 +143,7 @@ const convertStatus = (value) => {
   } else if (value === "open\n") {
     return "open";
   } else if (value === "first-come, first served") {
-    return "first-come, first-served";
+    return "first come, first serve";
   } else {
     return value;
   }

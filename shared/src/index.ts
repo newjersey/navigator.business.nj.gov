@@ -11,5 +11,6 @@ export * from "./ownership";
 export * from "./profileData";
 export * from "./sector";
 export * from "./states";
+export * from "./stringHelpers";
 export * from "./taxFiling";
 export * from "./userData";
