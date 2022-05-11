@@ -11,6 +11,7 @@ import {
   FundingProgramFrequency,
   FundingStatus,
   FundingType,
+  NaicsCodeObject,
   NameAvailability,
   OperateReference,
   Roadmap,
@@ -151,6 +152,23 @@ export const generateMunicipality = (overrides: Partial<Municipality>): Municipa
     name: `some-name-${randomInt()}`,
     county: `some-county-${randomInt()}`,
     id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateNaicsObject = (
+  overrides: Partial<NaicsCodeObject>,
+  SixDigitNaicsCode?: number
+): NaicsCodeObject => {
+  const sixNaicsCode = SixDigitNaicsCode ?? randomInt(6);
+  return {
+    SixDigitDescription: `some-six-digit-description-${randomInt()}`,
+    SixDigitCode: sixNaicsCode,
+    FourDigitDescription: `some-four-digit-description-${randomInt()}`,
+    FourDigitCode: parseInt(sixNaicsCode.toString().substring(0, 4)),
+    TwoDigitDescription: `some-two-digit-description-${randomInt()}`,
+    TwoDigitCode: [parseInt(sixNaicsCode.toString().substring(0, 2))],
+    industryIds: [randomIndustry().name],
     ...overrides,
   };
 };

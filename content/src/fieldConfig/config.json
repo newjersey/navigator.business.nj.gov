@@ -10,7 +10,8 @@
     "findCodeBodyText": "Use the resources listed below to search and find your NAICS code.  **If you can’t decide the right code,** remember, there are no benefits or disadvantages to use one NAICS code over another. ",
     "editText": "Edit",
     "saveButtonText": "Save NAICS Code",
-    "validationErrorText": "Your NAICS code must be 6 digits"
+    "lengthValidationErrorText": "Your NAICS code must be 6 digits",
+    "invalidValidationErrorText": "Your NAICS code is invalid"
   },
   "legalMessageDefaults": {
     "legalMessageTextOne": "This information is supplied as a guide and is not a substitute for legal or professional advice. It is the responsibility of the business owner to comply with all local, county, and state regulations even if they are not listed here. For no-cost assistance with your business, use the ",

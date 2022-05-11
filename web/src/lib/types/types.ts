@@ -718,3 +718,13 @@ const emptySideBarContent = {
 };
 
 export const createEmptySideBarDisplayContent = (): RoadmapSideBarContent => emptySideBarContent;
+
+export type NaicsCodeObject = {
+  SixDigitDescription?: string;
+  SixDigitCode?: number;
+  FourDigitDescription?: string;
+  FourDigitCode?: number;
+  TwoDigitDescription?: string;
+  TwoDigitCode?: number[];
+  industryIds?: string[];
+};
