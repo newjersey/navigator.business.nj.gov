@@ -6,6 +6,6 @@ color: roadmap-purple
 shadowColor: roadmap-purple-light
 ---
 
-Welcome to the Navigator, your personalized step-by-step guide to running your business in New Jersey.
+Welcome to the Navigator, your personalized guide to launch and grow your New Jersey business.
 
-As soon as you form your business and register for taxes, you will see opportunities here including funding, certifications, and much more.
+Once you have completed **all required tasks**, you can apply for State certifications, get funding, and more.

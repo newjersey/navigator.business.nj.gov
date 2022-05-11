@@ -8,4 +8,4 @@ shadowColor: primary-light
 
 ### Register to Save Your Progress
 
-**Don't lose your progress.** [Create an account now](#).
+Don’t lose your progress. Complete your registration by [creating a free myNewJersey account now](#).
