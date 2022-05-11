@@ -81,9 +81,10 @@ describe("onboarding - shared", () => {
 
   it("routes to the second page with industry set when using industry query string", async () => {
     useMockRouter({ isReady: true, query: { industry: "cannabis" } });
-    const { subject } = renderPage({});
+    const { subject, page } = renderPage({});
+    expect(subject.getByTestId("step-2")).toBeInTheDocument();
+    await page.visitStep3();
     await waitFor(() => {
-      expect(subject.getByTestId("step-2")).toBeInTheDocument();
       expect(currentUserData().profileData.hasExistingBusiness).toEqual(false);
       expect(currentUserData().profileData.initialOnboardingFlow).toEqual("STARTING");
       expect(currentUserData().profileData.industryId).toEqual("cannabis");
