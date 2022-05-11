@@ -24,7 +24,7 @@ describe("OpportunityCard", () => {
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).toMatchSnapshot();
   });
-  it("matches the layout when first come first serve", () => {
+  it("matches the layout when status is first come first serve", () => {
     const opportunity = {
       id: "test",
       name: "test",
@@ -32,6 +32,18 @@ describe("OpportunityCard", () => {
       urlSlug: "",
       dueDate: "",
       status: "first-come, first-served",
+    };
+    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(subject).toMatchSnapshot();
+  });
+  it("matches the layout when status is rolling application", () => {
+    const opportunity = {
+      id: "test",
+      name: "test",
+      contentMd: "**Test Content",
+      urlSlug: "",
+      dueDate: "",
+      status: "rolling application",
     };
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).toMatchSnapshot();
@@ -92,5 +104,30 @@ describe("OpportunityCard", () => {
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).not.toHaveTextContent("Due:");
     expect(subject).toContainHTML("First Come, First Serve");
+  });
+  it("renders with text of Rolling Application correctly", () => {
+    const opportunity = {
+      id: "test",
+      name: "Test Name for Card",
+      contentMd: "*Test Content*",
+      urlSlug: "",
+      dueDate: "",
+      status: "rolling application",
+    };
+    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(subject).toContainHTML("Rolling Application");
+  });
+  it("does not render due date if status is rolling application", () => {
+    const opportunity = {
+      id: "test",
+      name: "Test Name for Card",
+      contentMd: "*Test Content*",
+      urlSlug: "",
+      dueDate: "09/03/30",
+      status: "rolling application",
+    };
+    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(subject).not.toHaveTextContent("Due:");
+    expect(subject).toContainHTML("Rolling Application");
   });
 });

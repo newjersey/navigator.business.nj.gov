@@ -1279,7 +1279,7 @@ collections:
         name: "status"
         widget: "select"
         required: true
-        options: ["open", "opening soon", "deadline", "first-come, first-served", "closed"]
+        options: ["rolling application", "opening soon", "deadline", "first-come, first-served", "closed"]
       - label: "Program Frequency"
         name: "programFrequency"
         widget: "select"

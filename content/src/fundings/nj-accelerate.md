@@ -8,7 +8,7 @@ fundingType: loan
 agency:
   - NJEDA
 publishStageArchive: ""
-status: open
+status: rolling application
 programFrequency: ongoing
 businessStage: early-stage
 employeesRequired: n/a
@@ -28,9 +28,12 @@ dueDate: ""
 NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to locate and grow in New Jersey.
 
 ---
-### Eligibility
-* Businesses in accelerator programs and graduates of approved accelerators
 
->**Benefits** 
->* 1:1 matching event sponsorship up to $100,000 for accelerator programs
->* 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies
+### Eligibility
+
+- Businesses in accelerator programs and graduates of approved accelerators
+
+> **Benefits**
+>
+> - 1:1 matching event sponsorship up to $100,000 for accelerator programs
+> - 1:1 matching loan funding up to $250,000 and rent support for up to 6 months for graduate companies

@@ -8,7 +8,7 @@ fundingType: hiring and employee training support
 agency:
   - NJDOL
 publishStageArchive: ""
-status: open
+status: rolling application
 programFrequency: ongoing
 businessStage: both
 employeesRequired: yes
@@ -27,12 +27,11 @@ Work First NJ provides skills, training, and education opportunities to SNAP and
 Interested individuals should contact Ahmad McDougle at wfnj@dol.nj.gov
 
 ---
+
 ### Eligibility
-* The business must be registered in New Jersey
 
->**Benefits** 
->* Help businesses find employees by providing guidance on job matching or occupation-specific training programs
+- The business must be registered in New Jersey
 
-
-
-
+> **Benefits**
+>
+> - Help businesses find employees by providing guidance on job matching or occupation-specific training programs
