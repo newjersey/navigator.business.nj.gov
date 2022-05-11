@@ -485,13 +485,13 @@ export type FundingPublishStatus = "Do Not Publish";
 export type FundingStatus =
   | "rolling application"
   | "deadline"
-  | "first-come, first-served"
+  | "first come, first serve"
   | "closed"
   | "opening soon";
 export const FundingStatusOrder: Record<FundingStatus, number> = {
   "rolling application": 2,
   deadline: 0,
-  "first-come, first-served": 1,
+  "first come, first serve": 1,
   closed: 4,
   "opening soon": 4,
 };

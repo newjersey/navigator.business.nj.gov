@@ -6,7 +6,7 @@ describe("sortFundings", () => {
     const funding1 = generateFunding({ name: "Bca", status: "deadline" });
     const funding2 = generateFunding({ name: "Abc", status: "deadline" });
     const funding3 = generateFunding({ name: "cba", status: "deadline" });
-    const funding4 = generateFunding({ name: "abc", status: "first-come, first-served" });
+    const funding4 = generateFunding({ name: "abc", status: "first come, first serve" });
     const funding5 = generateFunding({ name: "bca", status: "rolling application" });
     const fundings = [funding5, funding2, funding3, funding1, funding4];
 

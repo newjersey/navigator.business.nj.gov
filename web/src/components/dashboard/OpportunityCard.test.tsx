@@ -31,7 +31,7 @@ describe("OpportunityCard", () => {
       contentMd: "**Test Content",
       urlSlug: "",
       dueDate: "",
-      status: "first-come, first-served",
+      status: "first come, first serve",
     };
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).toMatchSnapshot();
@@ -87,19 +87,19 @@ describe("OpportunityCard", () => {
       contentMd: "*Test Content*",
       urlSlug: "",
       dueDate: "",
-      status: "first-come, first-served",
+      status: "first come, first serve",
     };
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).toContainHTML("First Come, First Serve");
   });
-  it("does not render due date if status is first-come, first-served", () => {
+  it("does not render due date if status is first come, first serve", () => {
     const opportunity = {
       id: "test",
       name: "Test Name for Card",
       contentMd: "*Test Content*",
       urlSlug: "",
       dueDate: "09/03/30",
-      status: "first-come, first-served",
+      status: "first come, first serve",
     };
     const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
     expect(subject).not.toHaveTextContent("Due:");

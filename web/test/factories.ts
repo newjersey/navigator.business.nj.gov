@@ -566,7 +566,7 @@ export const randomBusinessSuffix = (): BusinessSuffix => {
 };
 
 export const randomFundingStatus = (): FundingStatus => {
-  const all = ["rolling application", "deadline", "first-come, first-served", "closed"];
+  const all = ["rolling application", "deadline", "first come, first serve", "closed"];
   const randomIndex = Math.floor(Math.random() * all.length);
   return all[randomIndex] as FundingStatus;
 };

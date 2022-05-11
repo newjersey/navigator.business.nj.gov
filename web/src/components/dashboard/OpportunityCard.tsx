@@ -8,6 +8,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
 import React, { ReactElement } from "react";
+import { OpportunityCardStatus } from "./OpportunityCardStatus";
 
 interface Opportunity {
   id: string;
@@ -98,26 +99,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
           {props.opportunity.name}
         </a>
       </div>
-      {props.opportunity.dueDate &&
-      props.opportunity.status !== "first-come, first-served" &&
-      props.opportunity.status !== "rolling application" ? (
-        <div className="dashboard-opportunity-card-due-date">
-          <span className="dashboard-opportunity-card-due-date-header">Due: </span>
-          {props.opportunity.dueDate}{" "}
-        </div>
-      ) : (
-        <></>
-      )}
-      {props.opportunity.status === "first-come, first-served" ? (
-        <div className="dashboard-opportunity-card-due-date">First Come, First Serve</div>
-      ) : (
-        <></>
-      )}
-      {props.opportunity.status === "rolling application" ? (
-        <div className="dashboard-opportunity-card-due-date">Rolling Application</div>
-      ) : (
-        <></>
-      )}
+      <OpportunityCardStatus dueDate={props.opportunity.dueDate} status={props.opportunity.status} />
       <div className="override-p-2xs">
         <Content>{truncatedMd}</Content>
       </div>

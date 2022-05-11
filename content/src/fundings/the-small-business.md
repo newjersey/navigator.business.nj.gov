@@ -8,7 +8,7 @@ fundingType: technical assistance
 agency:
   - NJEDA
 publishStageArchive: null
-status: first-come, first-served
+status: first come, first serve
 programFrequency: reoccuring
 businessStage: operating
 employeesRequired: n/a
@@ -25,8 +25,11 @@ dueDate: ""
 The Small Business Bonding Readiness Assistance Program prepares small, minority-, and women-owned businesses to obtain surety bonds, which will make them more competitive when applying for state and federal government contracts.
 
 ---
-### Eligibility 
-* Small businesses, with particular emphasis on minority- and women-owned businesses
 
->**Benefits**
->* A comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors
+### Eligibility
+
+- Small businesses, with particular emphasis on minority- and women-owned businesses
+
+> **Benefits**
+>
+> - A comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors

@@ -8,7 +8,7 @@ fundingType: tax credit
 agency:
   - NJEDA
 publishStageArchive: ""
-status: first-come, first-served
+status: first come, first serve
 programFrequency: reoccuring
 businessStage: operating
 employeesRequired: n/a
@@ -32,11 +32,12 @@ dueDate: ""
 The Digital Media Tax Credit Program provides a transferable credit against the corporate business tax and the gross income tax to incentivize companies to produce content in New Jersey.
 
 ---
+
 ### Eligibility
-* Companies must produce content in New Jersey
 
->**Benefits**
->* A tax credit equal to 20% of qualified digital media production expenses, or 
->* 25% of qualified digital media production expenses for services performed and tangible personal property purchased through vendors located in specific New Jersey counties
+- Companies must produce content in New Jersey
 
-
+> **Benefits**
+>
+> - A tax credit equal to 20% of qualified digital media production expenses, or
+> - 25% of qualified digital media production expenses for services performed and tangible personal property purchased through vendors located in specific New Jersey counties
