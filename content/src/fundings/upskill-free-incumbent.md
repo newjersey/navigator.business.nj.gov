@@ -8,7 +8,7 @@ fundingType: grant
 agency:
   - NJDOL
 publishStageArchive: ""
-status: open
+status: rolling application
 programFrequency: reoccuring
 businessStage: both
 employeesRequired: Yes
@@ -35,8 +35,11 @@ dueDate: ""
 Upskill offers grants to New Jersey businesses of any size grants to improve existing employees’ skills. Training may be provided by employers at their business or by an eligible training provider. These should be group-based trainings, not unique to one employee.
 
 ---
-### Eligibility
-* Businesses with existing employees who can be trained in a new skill for current and future workforce demands
 
->**Benefits**
->* Employers can receive grants of up to $100,000
+### Eligibility
+
+- Businesses with existing employees who can be trained in a new skill for current and future workforce demands
+
+> **Benefits**
+>
+> - Employers can receive grants of up to $100,000

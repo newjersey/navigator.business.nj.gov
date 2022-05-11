@@ -8,7 +8,7 @@ fundingType: technical assistance
 agency:
   - NJEDA
 publishStageArchive: Do Not Publish
-status: open
+status: rolling application
 programFrequency: reoccuring
 businessStage: early-stage
 employeesRequired: n/a
@@ -30,9 +30,12 @@ Founders & Funders enables early-stage New Jersey technology and life sciences c
 To register for this opportunity, contact: NJFoundersFunders@njeda.com
 
 ---
-**Eligibility:** 
-* Company must be registered to do business in New Jersey and located in New Jersey
-* Company is able to demonstrate some signs of financial or operational traction
 
->**Benefits** 
->* Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities
+**Eligibility:**
+
+- Company must be registered to do business in New Jersey and located in New Jersey
+- Company is able to demonstrate some signs of financial or operational traction
+
+> **Benefits**
+>
+> - Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities

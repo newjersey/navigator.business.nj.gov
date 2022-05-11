@@ -98,7 +98,9 @@ export const OpportunityCard = (props: Props): ReactElement => {
           {props.opportunity.name}
         </a>
       </div>
-      {props.opportunity.dueDate && props.opportunity.status !== "first-come, first-served" ? (
+      {props.opportunity.dueDate &&
+      props.opportunity.status !== "first-come, first-served" &&
+      props.opportunity.status !== "rolling application" ? (
         <div className="dashboard-opportunity-card-due-date">
           <span className="dashboard-opportunity-card-due-date-header">Due: </span>
           {props.opportunity.dueDate}{" "}
@@ -108,6 +110,11 @@ export const OpportunityCard = (props: Props): ReactElement => {
       )}
       {props.opportunity.status === "first-come, first-served" ? (
         <div className="dashboard-opportunity-card-due-date">First Come, First Serve</div>
+      ) : (
+        <></>
+      )}
+      {props.opportunity.status === "rolling application" ? (
+        <div className="dashboard-opportunity-card-due-date">Rolling Application</div>
       ) : (
         <></>
       )}

@@ -30,7 +30,7 @@ describe("loadFundings", () => {
         "publishStageArchive: null\n" +
         'openDate: ""\n' +
         'dueDate: ""\n' +
-        "status: open\n" +
+        "status: rolling application\n" +
         "programFrequency: ongoing\n" +
         "businessStage: operating\n" +
         "employeesRequired: n/a\n" +
@@ -74,7 +74,7 @@ describe("loadFundings", () => {
             publishStageArchive: null,
             openDate: "",
             dueDate: "",
-            status: "open",
+            status: "rolling application",
             programFrequency: "ongoing",
             businessStage: "operating",
             employeesRequired: "n/a",

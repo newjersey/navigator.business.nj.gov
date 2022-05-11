@@ -481,9 +481,14 @@ export type FundingType =
   | "hiring and employee training support"
   | "tax exemption";
 export type FundingPublishStatus = "Do Not Publish";
-export type FundingStatus = "open" | "deadline" | "first-come, first-served" | "closed" | "opening soon";
+export type FundingStatus =
+  | "rolling application"
+  | "deadline"
+  | "first-come, first-served"
+  | "closed"
+  | "opening soon";
 export const FundingStatusOrder: Record<FundingStatus, number> = {
-  open: 2,
+  "rolling application": 2,
   deadline: 0,
   "first-come, first-served": 1,
   closed: 4,

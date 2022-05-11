@@ -522,7 +522,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     publishStageArchive: null,
     openDate: getCurrentDateISOString(),
     dueDate: getCurrentDateISOString(),
-    status: "open",
+    status: "rolling application",
     programFrequency: randomFundingProgramFrequency(),
     businessStage: randomFundingBusinessStage(),
     employeesRequired: ">200",
@@ -566,7 +566,7 @@ export const randomBusinessSuffix = (): BusinessSuffix => {
 };
 
 export const randomFundingStatus = (): FundingStatus => {
-  const all = ["open", "deadline", "first-come, first-served", "closed"];
+  const all = ["rolling application", "deadline", "first-come, first-served", "closed"];
   const randomIndex = Math.floor(Math.random() * all.length);
   return all[randomIndex] as FundingStatus;
 };

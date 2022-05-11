@@ -187,8 +187,8 @@ describe("dashboard", () => {
 
     const fundings = [
       generateFunding({ name: "Funding 1", sector: ["construction"], status: "closed" }), // Filtered out
-      generateFunding({ name: "Funding 2", sector: ["construction"], status: "open" }),
-      generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "open" }), // Filtered out
+      generateFunding({ name: "Funding 2", sector: ["construction"], status: "rolling application" }),
+      generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "rolling application" }), // Filtered out
       generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
       generateFunding({ name: "Funding 5", sector: [], status: "first-come, first-served" }),
     ];
@@ -233,8 +233,8 @@ describe("dashboard", () => {
 
     const fundings = [
       generateFunding({ name: "Funding 1", sector: ["construction"], status: "closed" }),
-      generateFunding({ name: "Funding 2", sector: ["construction"], status: "open" }),
-      generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "open" }),
+      generateFunding({ name: "Funding 2", sector: ["construction"], status: "rolling application" }),
+      generateFunding({ name: "Funding 3", sector: ["cannabis"], status: "rolling application" }),
       generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
       generateFunding({ name: "Funding 5", sector: [], status: "first-come, first-served" }),
     ];
@@ -255,7 +255,9 @@ describe("dashboard", () => {
 
   it("links to task page for fundings", () => {
     useMockProfileData(profileDataForUnfilteredOpportunities);
-    const fundings = [generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "open" })];
+    const fundings = [
+      generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" }),
+    ];
     const subject = renderPage({ fundings });
     expect(subject.getByText("Funding Opp").getAttribute("href")).toEqual("/funding/opp");
   });
@@ -276,8 +278,8 @@ describe("dashboard", () => {
     const opp2ExpectedTextOnPage = `${Array(150).fill("b").join("")}`;
 
     const fundings = [
-      generateFunding({ contentMd: opp1Characters, status: "open" }),
-      generateFunding({ contentMd: opp2Characters, status: "open" }),
+      generateFunding({ contentMd: opp1Characters, status: "rolling application" }),
+      generateFunding({ contentMd: opp2Characters, status: "rolling application" }),
     ];
     const subject = renderPage({ fundings });
     expect(subject.getByText(opp1ExpectedTextOnPage)).toBeInTheDocument();
@@ -291,8 +293,8 @@ describe("dashboard", () => {
     const linkContent = `${characters} [a link text](www.example.com)`;
 
     const fundings = [
-      generateFunding({ contentMd: boldContent, status: "open" }),
-      generateFunding({ contentMd: linkContent, status: "open" }),
+      generateFunding({ contentMd: boldContent, status: "rolling application" }),
+      generateFunding({ contentMd: linkContent, status: "rolling application" }),
     ];
     const subject = renderPage({ fundings });
     expect(subject.getByText("a bo")).toBeInTheDocument();
