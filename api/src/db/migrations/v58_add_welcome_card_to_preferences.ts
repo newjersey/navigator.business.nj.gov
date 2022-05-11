@@ -18,7 +18,7 @@ export const migrate_v57_to_v58 = (v57Data: v57UserData): v58UserData => {
     ...v57Data,
     preferences: {
       ...v57Data.preferences,
-      visibleRoadmapSidebarCards: [],
+      visibleRoadmapSidebarCards: ["welcome"],
     },
     version: 58,
   };

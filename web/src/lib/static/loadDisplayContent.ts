@@ -192,7 +192,6 @@ export const loadRoadmapSidebarDisplayContent = (): RoadmapSideBarContent => {
     fs.readFileSync(path.join(displayContentDir, "roadmap-sidebar-cards", filename), "utf8");
 
   const welcomeCardContent = getMarkdown(loadFile("welcome.md"));
-  const welcomeCardGpOrSpContent = getMarkdown(loadFile("welcome-gp-or-sp.md"));
 
   const guestSuccessfullyRegisteredContent = getMarkdown(loadFile("successful-registration.md"));
   const guestNotRegisteredContent = getMarkdown(loadFile("not-registered.md"));
@@ -201,10 +200,6 @@ export const loadRoadmapSidebarDisplayContent = (): RoadmapSideBarContent => {
     welcomeCard: {
       contentMd: welcomeCardContent.content,
       ...(welcomeCardContent.grayMatter as RoadmapCardGrayMatter),
-    },
-    welcomeCardGpOrSpCard: {
-      contentMd: welcomeCardGpOrSpContent.content,
-      ...(welcomeCardGpOrSpContent.grayMatter as RoadmapCardGrayMatter),
     },
     guestSuccessfullyRegisteredCard: {
       contentMd: guestSuccessfullyRegisteredContent.content,

@@ -22,7 +22,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { randomElementFromArray, withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -44,7 +44,6 @@ import {
   LookupIndustryById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
-  randomInt,
   RegistrationStatus,
   UserData,
 } from "@businessnjgovnavigator/shared/";
@@ -879,60 +878,22 @@ describe("roadmap page", () => {
   });
 
   describe("sidebar", () => {
-    it("renders welcome card for SP and GP legal structure", () => {
-      const legalStructureId = randomInt() % 2 ? "sole-proprietorship" : "general-partnership";
-
+    it("renders welcome card", () => {
       const sideBarDisplayContent = generateSideBarContent({
         welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
-        welcomeCardGpOrSpCard: generateRoadmapSidebarCard({
-          header: "header",
-          contentMd: "WelcomeCard-GpSp-Content",
-        }),
-      });
-
-      useMockUserData({
-        profileData: generateProfileData({ legalStructureId: legalStructureId }),
       });
 
       const subject = renderRoadmapPage({ sideBarDisplayContent });
 
-      expect(subject.getByText("WelcomeCard-GpSp-Content")).toBeInTheDocument();
-      expect(subject.queryByText("WelcomeCardContent")).not.toBeInTheDocument();
-    });
-
-    it("renders welcome card for users that are not SP or GP legal structure", () => {
-      const legalStructureId = randomElementFromArray([
-        "limited-partnership",
-        "limited-liability-partnership",
-        "limited-liability-company",
-        "c-corporation",
-        "s-corporation",
-      ]);
-
-      const sideBarDisplayContent = generateSideBarContent({
-        welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
-        welcomeCardGpOrSpCard: generateRoadmapSidebarCard({
-          header: "header",
-          contentMd: "WelcomeCard-GpSp-Content",
-        }),
-      });
-
-      useMockUserData({
-        profileData: generateProfileData({ legalStructureId: legalStructureId }),
-      });
-
-      const subject = renderRoadmapPage({ sideBarDisplayContent });
-
-      expect(subject.queryByText("WelcomeCard-GpSp-Content")).not.toBeInTheDocument();
       expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
 
     it("renders registration card when SignUpToast is closed", async () => {
       const sideBarDisplayContent = generateSideBarContent({
         guestNotRegisteredCard: generateRoadmapSidebarCard({
-          id: "not-registered",
           contentMd: "not-registered-content",
         }),
+        welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
       });
 
       const subject = renderPageWithAuth({
@@ -942,35 +903,28 @@ describe("roadmap page", () => {
       });
 
       expect(subject.queryByText("not-registered-content")).not.toBeInTheDocument();
+      expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
 
       fireEvent.click(within(subject.queryByTestId("self-reg-toast") as HTMLElement).getByLabelText("close"));
 
       await waitFor(() => {
         expect(subject.getByText("not-registered-content")).toBeInTheDocument();
+        expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
       });
     });
 
     it("renders successful registration card when user is authenicated", async () => {
-      const userData = generateUserData({
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: [],
-        }),
-      });
-
       const sideBarDisplayContent = generateSideBarContent({
         guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
-          id: "successful-registration",
           contentMd: "successful-registration-content",
-          header: "successful-registration-header",
         }),
         guestNotRegisteredCard: generateRoadmapSidebarCard({
-          id: "not-registered",
           contentMd: "not-registered-content",
         }),
+        welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
       });
 
       const subject = renderPageWithAuth({
-        userData,
         registrationAlertStatus: "SUCCESS",
         sideBarDisplayContent,
       });
@@ -978,10 +932,11 @@ describe("roadmap page", () => {
       await waitFor(() => {
         expect(subject.getByText("successful-registration-content")).toBeInTheDocument();
         expect(subject.queryByText("not-registered-content")).not.toBeInTheDocument();
+        expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
       });
     });
 
-    it("renders successful registration card when user is authenicated when not registered card is visible", async () => {
+    it("renders successful registration card when not registered card is visible, then user is authenicated", async () => {
       const userData = generateUserData({
         preferences: generatePreferences({
           visibleRoadmapSidebarCards: ["not-registered"],
@@ -990,12 +945,9 @@ describe("roadmap page", () => {
 
       const sideBarDisplayContent = generateSideBarContent({
         guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
-          id: "successful-registration",
           contentMd: "successful-registration-content",
-          header: "successful-registration-header",
         }),
         guestNotRegisteredCard: generateRoadmapSidebarCard({
-          id: "not-registered",
           contentMd: "not-registered-content",
         }),
       });
@@ -1014,15 +966,17 @@ describe("roadmap page", () => {
 
     it("removes successful registration card when it's closed", async () => {
       const userData = generateUserData({
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: ["successful-registration"] }),
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["successful-registration"],
+        }),
       });
 
       const sideBarDisplayContent = generateSideBarContent({
         guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
-          id: "successful-registration",
           contentMd: "successful-registration-content",
           header: "successful-registration-header",
         }),
+        welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
       });
 
       const subject = renderPageWithAuth({
