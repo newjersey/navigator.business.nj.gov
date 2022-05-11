@@ -9,9 +9,9 @@ required: true
 issuingAgency: New Jersey Division of Revenue and Enterprise Services
 formName: NJ-Reg
 ---
-Foreign businesses must register for State taxes. 
+Out-of-state also known as foreign businesses must register for State taxes. 
 
-You are seeing this task because your foreign business either has operations in New Jersey, remote workers in New Jersey, or is a remote seller in New Jersey.
+You are seeing this task because your foreign business either has a `nexus|nexus` in New Jersey, remote workers in New Jersey, or is a `remote seller|remote-seller` in New Jersey.
 
 - - -
 
