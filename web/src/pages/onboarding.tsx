@@ -216,16 +216,13 @@ const OnboardingPage = (props: Props): ReactElement => {
     userData: UserData,
     industryId: string | undefined
   ): Promise<void> => {
-    setPage({ current: 2, previous: 1 });
-    await update({
-      ...userData,
-      profileData: {
-        ...userData.profileData,
-        hasExistingBusiness: false,
-        initialOnboardingFlow: "STARTING",
-        industryId: industryId,
-      },
+    setProfileData({
+      ...profileData,
+      hasExistingBusiness: false,
+      initialOnboardingFlow: "STARTING",
+      industryId: industryId,
     });
+    setPage({ current: 2, previous: 1 });
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
