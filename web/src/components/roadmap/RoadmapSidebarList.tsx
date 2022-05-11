@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { RoadmapSidebarCard } from "@/components/roadmap/RoadmapSidebarCard";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
+import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { RoadmapSideBarContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -20,6 +21,7 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
   const { setRegistrationAlertStatus, registrationAlertStatus, isAuthenticated } =
     useContext(AuthAlertContext);
   const router = useRouter();
+  const { showCard, hideCard } = useRoadmapSidebarCards();
 
   useEffect(() => {
     if (
@@ -28,18 +30,12 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
       userData &&
       userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration") === false
     ) {
-      const showAccountRegisteredCard = userData.preferences.visibleRoadmapSidebarCards.filter(
-        (id: string) => id !== "successful-registration" && id !== "not-registered"
-      );
-      update({
-        ...userData,
-        preferences: {
-          ...userData.preferences,
-          visibleRoadmapSidebarCards: [...showAccountRegisteredCard, "successful-registration"],
-        },
-      });
+      (async () => {
+        await showCard("successful-registration");
+        await hideCard("not-registered");
+      })();
     }
-  }, [isAuthenticated, registrationAlertStatus, update, userData]);
+  }, [isAuthenticated, registrationAlertStatus, userData, hideCard, showCard]);
 
   return (
     <>
@@ -57,21 +53,11 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
             <RoadmapSidebarCard
               color={props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.color}
               shadowColor={props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.shadowColor}
-              dataTestid="successful-registeration-card"
+              dataTestid="successful-registration-card"
               headerText={props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.header}
               imagePath={props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.imgPath}
-              onClose={() => {
-                const hideRegistrationCard = userData.preferences.visibleRoadmapSidebarCards.filter(
-                  (id: string) => id !== "successful-registration"
-                );
-
-                update({
-                  ...userData,
-                  preferences: {
-                    ...userData.preferences,
-                    visibleRoadmapSidebarCards: hideRegistrationCard,
-                  },
-                });
+              onClose={async () => {
+                await hideCard("successful-registration");
               }}
             >
               <Content>{props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.contentMd}</Content>
