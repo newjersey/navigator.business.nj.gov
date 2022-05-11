@@ -11,6 +11,7 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "rimraf lib",
+    "dev": "yarn build",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
