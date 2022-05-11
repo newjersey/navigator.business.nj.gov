@@ -78,8 +78,7 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
             </RoadmapSidebarCard>
           )}
 
-          {userData.profileData.legalStructureId !== "sole-proprietorship" &&
-          userData.profileData.legalStructureId !== "general-partnership" ? (
+          {userData.preferences.visibleRoadmapSidebarCards.includes("welcome") && (
             <RoadmapSidebarCard
               color={props.sideBarDisplayContent.welcomeCard.color}
               shadowColor={props.sideBarDisplayContent.welcomeCard.shadowColor}
@@ -87,15 +86,6 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
               imagePath={props.sideBarDisplayContent.welcomeCard.imgPath}
             >
               <Content>{props.sideBarDisplayContent.welcomeCard.contentMd}</Content>
-            </RoadmapSidebarCard>
-          ) : (
-            <RoadmapSidebarCard
-              color={props.sideBarDisplayContent.welcomeCardGpOrSpCard.color}
-              shadowColor={props.sideBarDisplayContent.welcomeCardGpOrSpCard.shadowColor}
-              headerText={props.sideBarDisplayContent.welcomeCardGpOrSpCard.header}
-              imagePath={props.sideBarDisplayContent.welcomeCardGpOrSpCard.imgPath}
-            >
-              <Content>{props.sideBarDisplayContent.welcomeCardGpOrSpCard.contentMd}</Content>
             </RoadmapSidebarCard>
           )}
 

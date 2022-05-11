@@ -664,14 +664,6 @@ export type RoadmapSideBarContent = {
     color: string;
     shadowColor: string;
   };
-  welcomeCardGpOrSpCard: {
-    contentMd: string;
-    id: string;
-    header: string;
-    imgPath: string;
-    color: string;
-    shadowColor: string;
-  };
   guestSuccessfullyRegisteredCard: {
     contentMd: string;
     id: string;

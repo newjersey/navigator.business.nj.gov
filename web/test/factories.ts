@@ -176,7 +176,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     roadmapOpenSteps: [randomInt()],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
-    visibleRoadmapSidebarCards: [],
+    visibleRoadmapSidebarCards: ["welcome"],
     ...overrides,
   };
 };
@@ -392,14 +392,6 @@ export const generateSideBarContent = (overrides: Partial<RoadmapSideBarContent>
       imgPath: `some-welcome-img-path-${randomInt()}`,
       color: `some-welcome-color-${randomInt()}`,
       shadowColor: `some-welcome-shadow-color-${randomInt()}`,
-    },
-    welcomeCardGpOrSpCard: {
-      contentMd: `some-welcome-gp-or-sp-content-${randomInt()}`,
-      id: `some-welcome-gp-or-sp-id-${randomInt()}`,
-      header: `some-welcome-gp-or-sp-header-${randomInt()}`,
-      imgPath: `some-welcome-gp-or-sp-img-path-${randomInt()}`,
-      color: `some-welcome-gp-or-sp-color-${randomInt()}`,
-      shadowColor: `some-welcome-gp-or-sp-shadow-color-${randomInt()}`,
     },
     guestSuccessfullyRegisteredCard: {
       contentMd: `some-successfully-registered-guest-content-${randomInt()}`,
