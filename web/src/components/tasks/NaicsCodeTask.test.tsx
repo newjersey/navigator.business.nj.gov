@@ -17,6 +17,13 @@ import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/static/records/naics2022.json", () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { generateNaicsObject } = require("@/test/factories");
+  const thing = generateNaicsObject({ SixDigitDescription: "test1234" }, 123456);
+  return [thing];
+});
 
 describe("<NaicsCodeTask />", () => {
   let subject: RenderResult;
@@ -50,7 +57,7 @@ describe("<NaicsCodeTask />", () => {
       subject = render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
-            <NaicsCodeTask task={task} />)
+            <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
         )
@@ -67,13 +74,36 @@ describe("<NaicsCodeTask />", () => {
       });
     });
 
-    it("shows error on validation failure", () => {
+    it("shows error on length validation failure", () => {
       fireEvent.change(subject.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
         target: { value: "12345" },
       });
       fireEvent.click(subject.getByText(Config.determineNaicsCode.saveButtonText));
-      expect(subject.getByText(Config.determineNaicsCode.validationErrorText)).toBeInTheDocument();
+      expect(subject.getByText(Config.determineNaicsCode.lengthValidationErrorText)).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
+    });
+
+    it("shows error on invalid code failure on input", () => {
+      fireEvent.change(subject.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+        target: { value: "123457" },
+      });
+      expect(subject.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
+      fireEvent.click(subject.getByText(Config.determineNaicsCode.saveButtonText));
+      expect(subject.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
+      expect(userDataWasNotUpdated()).toBe(true);
+    });
+
+    it("hides error for invalid code failure on input", () => {
+      fireEvent.change(subject.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+        target: { value: "123457" },
+      });
+      expect(subject.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
+      fireEvent.change(subject.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+        target: { value: "12345" },
+      });
+      expect(
+        subject.queryByText(Config.determineNaicsCode.invalidValidationErrorText)
+      ).not.toBeInTheDocument();
     });
 
     it("displays code with success message on save", async () => {
@@ -109,16 +139,20 @@ describe("<NaicsCodeTask />", () => {
       subject = render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
-            <NaicsCodeTask task={task} />)
+            <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.TRUE
         )
       );
     });
 
-    it("displays code immediately when NAICS code exists in data", () => {
+    it("displays code when NAICS code exists in data", () => {
       expect(subject.queryByText(Config.determineNaicsCode.inputPlaceholder)).not.toBeInTheDocument();
       expect(subject.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)).toBeInTheDocument();
+    });
+
+    it("displays description when NAICS code exists in data", () => {
+      expect(subject.getByText("test1234")).toBeInTheDocument();
     });
 
     it("navigates back to input on edit button", () => {

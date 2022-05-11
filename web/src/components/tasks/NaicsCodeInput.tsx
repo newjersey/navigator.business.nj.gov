@@ -2,7 +2,8 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
+import NaicsCodes from "@/lib/static/records/naics2022.json";
+import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useState } from "react";
@@ -13,11 +14,19 @@ interface Props {
 }
 
 export const NaicsCodeInput = (props: Props): ReactElement => {
+  type NaicsErrorTypes = "length" | "invalid";
+  const errorMessages: Record<NaicsErrorTypes, string> = {
+    invalid: Config.determineNaicsCode.invalidValidationErrorText,
+    length: Config.determineNaicsCode.lengthValidationErrorText,
+  };
   const LENGTH = 6;
   const [naicsCode, setNaicsCode] = useState<string>("");
-  const [isInvalid, setIsInvalid] = useState<boolean>(false);
+  const [isInvalid, setIsInvalid] = useState<NaicsErrorTypes | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, update } = useUserData();
+
+  const getCode = (code: string) =>
+    (NaicsCodes as NaicsCodeObject[]).find((element) => element?.SixDigitCode?.toString() == code);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -28,11 +37,16 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     if (!userData) return;
 
     if (naicsCode.length !== LENGTH) {
-      setIsInvalid(true);
+      setIsInvalid("length");
       return;
     }
 
-    setIsInvalid(false);
+    if (!getCode(naicsCode)) {
+      setIsInvalid("invalid");
+      return;
+    }
+
+    setIsInvalid(undefined);
     setIsLoading(true);
     update({
       ...userData,
@@ -57,7 +71,13 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const handleChange = (value: string): void => {
     setNaicsCode(value);
     if (value.length === LENGTH) {
-      setIsInvalid(false);
+      if (!getCode(value)) {
+        setIsInvalid("invalid");
+      } else {
+        setIsInvalid(undefined);
+      }
+    } else {
+      setIsInvalid(undefined);
     }
   };
 
@@ -86,9 +106,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               maxWidth: "350px",
             },
           }}
-          error={isInvalid}
+          error={isInvalid != undefined}
           handleChange={handleChange}
-          validationText={Config.determineNaicsCode.validationErrorText}
+          validationText={errorMessages[isInvalid ?? "length"]}
         />
         <hr className="margin-y-2" />
         <div className="flex flex-row">

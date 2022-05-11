@@ -609,7 +609,8 @@ collections:
               - { label: Input Label, name: inputLabel, widget: string, hint: This field supports Markdown }
               - { label: Input Placeholder, name: inputPlaceholder, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
-              - { label: Validation Error Text, name: validationErrorText, widget: string }
+              - { label: Invalid Validation Error Text, name: invalidValidationErrorText, widget: string }
+              - { label: Length Validation Error Text, name: lengthValidationErrorText, widget: string }
               - { label: Has Saved Code Header, name: hasSavedCodeHeader, widget: string }
               - {
                   label: Success Message,
