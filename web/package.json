@@ -109,7 +109,7 @@
     "cross-env": "7.0.3",
     "cspell": "5.20.0",
     "css-loader": "6.7.1",
-    "cypress": "9.6.0",
+    "cypress": "9.6.1",
     "cypress-audit": "1.1.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "1.7.2",
