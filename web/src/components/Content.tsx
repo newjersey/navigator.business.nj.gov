@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
+import { onSelfRegister } from "@/lib/auth/signinHelper";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
+import { AuthAlertContext } from "@/pages/_app";
 import { FormControlLabel } from "@mui/material";
-import React, { CSSProperties, ReactElement } from "react";
+import { useRouter } from "next/router";
+import React, { CSSProperties, ReactElement, useContext } from "react";
 import rehypeReact from "rehype-react";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
@@ -63,14 +68,30 @@ export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
   return <>{markdown}</>;
 };
 
-const Link = (onClick?: () => void) =>
-  Object.assign(
+const Link = (onClick?: () => void) => {
+  const router = useRouter();
+  const { userData, update } = useUserData();
+  const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
+
+  return Object.assign(
     (props: any): ReactElement => {
       if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
           <ExternalLink href={props.href} onClick={onClick}>
             {props.children}
           </ExternalLink>
+        );
+      } else if (props.href.startsWith("/self-register")) {
+        return (
+          <a
+            href={props.href}
+            onClick={() => {
+              parseAndSendAnalyticsEvent(props.href);
+              onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
+            }}
+          >
+            {props.children[0]}
+          </a>
         );
       }
       return (
@@ -81,6 +102,7 @@ const Link = (onClick?: () => void) =>
     },
     { displayName: "Link" }
   );
+};
 
 const ExternalLink = ({
   children,
@@ -145,4 +167,25 @@ const ListOrCheckbox = (props: any): ReactElement => {
     );
   }
   return <li>{props.children}</li>;
+};
+
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+const parseAndSendAnalyticsEvent = (href: string): void => {
+  const urlParts = href.split("/self-register");
+  if (urlParts.length === 2) {
+    const secondHalfOfUrl = urlParts[1].slice(1);
+    const possibleAnalyticsEvents = Object.keys(analytics.event);
+
+    // @ts-ignore
+    if (possibleAnalyticsEvents.includes(secondHalfOfUrl)) {
+      // @ts-ignore
+      if (Object.keys(analytics.event[secondHalfOfUrl]).includes("click")) {
+        // @ts-ignore
+        if (Object.keys(analytics.event[secondHalfOfUrl].click).includes("go_to_myNJ_registration")) {
+          // @ts-ignore
+          analytics.event[secondHalfOfUrl].click.go_to_myNJ_registration();
+        }
+      }
+    }
+  }
 };
