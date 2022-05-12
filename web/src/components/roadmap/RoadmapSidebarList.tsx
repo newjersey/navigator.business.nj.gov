@@ -5,7 +5,6 @@ import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { RoadmapSideBarContent } from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
 import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
@@ -82,7 +81,6 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
             >
               <Content
                 onClick={() => {
-                  analytics.event.guest_menu.click.go_to_myNJ_registration();
                   onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
                 }}
               >
