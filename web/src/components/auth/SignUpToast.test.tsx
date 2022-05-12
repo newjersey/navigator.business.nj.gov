@@ -1,5 +1,4 @@
 import { SignUpToast } from "@/components/auth/SignUpToast";
-import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { markdownToText, withAuthAlert } from "@/test/helpers";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -26,7 +25,6 @@ jest.mock("@mui/material", () => mockMaterialUI());
 const setLargeScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
-const mockApi = api as jest.Mocked<typeof api>;
 
 describe("SignUpToast", () => {
   beforeEach(() => {
