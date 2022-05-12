@@ -28,6 +28,7 @@ export const OnboardingHasExistingBusiness = (): ReactElement => {
           row
         >
           <FormControlLabel
+            aria-label="Has Existing Business - True"
             style={{ marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="has-existing-business-true"
@@ -36,6 +37,7 @@ export const OnboardingHasExistingBusiness = (): ReactElement => {
             label={state.displayContent.hasExistingBusiness.radioButtonYesText}
           />
           <FormControlLabel
+            aria-label="Has Existing Business - False"
             style={{ marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="has-existing-business-false"

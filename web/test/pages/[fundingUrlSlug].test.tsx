@@ -1,11 +1,9 @@
 import FundingPage from "@/pages/funding/[fundingUrlSlug]";
 import { generateFunding } from "@/test/factories";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 describe("funding page", () => {
-  let subject;
-
   it("shows the funding details", () => {
     const funding = generateFunding({
       name: "Some Funding Name",
@@ -15,12 +13,12 @@ describe("funding page", () => {
       status: "deadline",
     });
 
-    subject = render(<FundingPage funding={funding} operateReferences={{}} />);
+    render(<FundingPage funding={funding} operateReferences={{}} />);
 
-    expect(subject.getByText("Some Funding Name")).toBeInTheDocument();
-    expect(subject.getByText("DUE: 07/01/2025")).toBeInTheDocument();
-    expect(subject.getByText("DEADLINE")).toBeInTheDocument();
-    expect(subject.getByText("Click here")).toBeInTheDocument();
-    expect(subject.getByText("Some content description")).toBeInTheDocument();
+    expect(screen.getByText("Some Funding Name")).toBeInTheDocument();
+    expect(screen.getByText("DUE: 07/01/2025")).toBeInTheDocument();
+    expect(screen.getByText("DEADLINE")).toBeInTheDocument();
+    expect(screen.getByText("Click here")).toBeInTheDocument();
+    expect(screen.getByText("Some content description")).toBeInTheDocument();
   });
 });

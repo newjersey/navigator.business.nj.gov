@@ -7,10 +7,10 @@ import {
   generateUserData,
 } from "@/test/factories";
 import {
+  FormationPageHelpers,
   generateLLCProfileData,
   mockApiResponse,
-  RenderedTask,
-  renderTask,
+  preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
 import { mockPush } from "@/test/mock/mockRouter";
@@ -18,7 +18,7 @@ import { userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { BusinessUser, FormationFormData, ProfileData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -61,11 +61,11 @@ describe("Formation - PaymentSection", () => {
     useSetupInitialMocks();
   });
 
-  const renderSection = async (
+  const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
     formationFormData: Partial<FormationFormData>,
     initialUser?: Partial<BusinessUser>
-  ): Promise<RenderedTask> => {
+  ): Promise<FormationPageHelpers> => {
     const profileData = generateLLCProfileData(initialProfileData);
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData),
@@ -73,7 +73,8 @@ describe("Formation - PaymentSection", () => {
       getFilingResponse: undefined,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
-    const renderedTask = renderTask(
+    // eslint-disable-next-line testing-library/render-result-naming-convention
+    const page = preparePage(
       generateUserData({
         profileData,
         formationData,
@@ -82,11 +83,11 @@ describe("Formation - PaymentSection", () => {
       displayContent
     );
 
-    await renderedTask.page.submitBusinessNameTab();
-    await renderedTask.page.submitBusinessTab();
-    await renderedTask.page.submitContactsTab();
-    await renderedTask.page.submitReviewTab();
-    return renderedTask;
+    await page.submitBusinessNameTab();
+    await page.submitBusinessTab();
+    await page.submitContactsTab();
+    await page.submitReviewTab();
+    return page;
   };
 
   it("auto-fills fields from userData if it exists", async () => {
@@ -102,11 +103,9 @@ describe("Formation - PaymentSection", () => {
       certifiedCopyOfFormationDocument: true,
     });
 
-    const { subject, page } = await renderSection({}, formationFormData);
+    const page = await getPageHelper({}, formationFormData);
 
-    expect(
-      subject.getByText(Config.businessFormationDefaults.creditCardPaymentTypeLabel)
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.businessFormationDefaults.creditCardPaymentTypeLabel)).toBeInTheDocument();
     expect(page.getInputElementByLabel("Contact first name").value).toBe("John");
     expect(page.getInputElementByLabel("Contact last name").value).toBe("Smith");
     expect(page.getInputElementByLabel("Contact phone number").value).toBe("(602) 415-3214");
@@ -124,7 +123,7 @@ describe("Formation - PaymentSection", () => {
   });
 
   it("updates total and subtotals correctly", async () => {
-    const { subject, page } = await renderSection(
+    const page = await getPageHelper(
       {},
       {
         paymentType: undefined,
@@ -134,32 +133,32 @@ describe("Formation - PaymentSection", () => {
       }
     );
 
-    expect(subject.getByLabelText("Subtotal")).toHaveTextContent("125");
+    expect(screen.getByLabelText("Subtotal")).toHaveTextContent("125");
     page.selectCheckbox("Certificate of standing");
-    expect(subject.getByLabelText("Subtotal")).toHaveTextContent("175");
+    expect(screen.getByLabelText("Subtotal")).toHaveTextContent("175");
     page.selectCheckbox("Certified copy of formation document");
-    expect(subject.getByLabelText("Subtotal")).toHaveTextContent("200");
-    expect(subject.getByLabelText("Total")).toHaveTextContent("200");
+    expect(screen.getByLabelText("Subtotal")).toHaveTextContent("200");
+    expect(screen.getByLabelText("Total")).toHaveTextContent("200");
     page.selectCheckbox("Certificate of standing");
-    expect(subject.getByLabelText("Subtotal")).toHaveTextContent("150");
-    expect(subject.getByLabelText("Total")).toHaveTextContent("150");
-    fireEvent.click(subject.getByLabelText("Credit card"));
-    expect(subject.getByLabelText("Total")).toHaveTextContent(
+    expect(screen.getByLabelText("Subtotal")).toHaveTextContent("150");
+    expect(screen.getByLabelText("Total")).toHaveTextContent("150");
+    fireEvent.click(screen.getByLabelText("Credit card"));
+    expect(screen.getByLabelText("Total")).toHaveTextContent(
       (
         150 +
         parseFloat(Config.businessFormationDefaults.creditCardPaymentCostInitial) +
         parseFloat(Config.businessFormationDefaults.creditCardPaymentCostExtra)
       ).toString()
     );
-    fireEvent.click(subject.getByLabelText("E check"));
+    fireEvent.click(screen.getByLabelText("E check"));
     const numberOfDocuments = 2;
-    expect(subject.getByLabelText("Total")).toHaveTextContent(
+    expect(screen.getByLabelText("Total")).toHaveTextContent(
       (150 + parseFloat(Config.businessFormationDefaults.achPaymentCost) * numberOfDocuments).toString()
     );
   });
 
   it("uses name from profile when business formation data is not set", async () => {
-    const { page } = await renderSection(
+    const page = await getPageHelper(
       {},
       {
         contactFirstName: "",
@@ -173,7 +172,7 @@ describe("Formation - PaymentSection", () => {
   });
 
   it("uses name from formation data when it exists", async () => {
-    const { page } = await renderSection(
+    const page = await getPageHelper(
       {},
       {
         contactFirstName: "Actual",
@@ -194,7 +193,7 @@ describe("Formation - PaymentSection", () => {
       })
     );
 
-    const { page } = await renderSection({}, {});
+    const page = await getPageHelper({}, {});
     await page.clickSubmit();
     expect(mockPush).toHaveBeenCalledWith("www.example.com");
   });
@@ -218,51 +217,51 @@ describe("Formation - PaymentSection", () => {
       })
     );
 
-    const { subject, page } = await renderSection({}, {});
+    const page = await getPageHelper({}, {});
     await page.clickSubmit();
     expect(mockPush).not.toHaveBeenCalled();
-    expect(subject.getByText("some field 1")).toBeInTheDocument();
-    expect(subject.getByText("very bad input")).toBeInTheDocument();
-    expect(subject.getByText("some field 2")).toBeInTheDocument();
-    expect(subject.getByText("must be nj zipcode")).toBeInTheDocument();
+    expect(screen.getByText("some field 1")).toBeInTheDocument();
+    expect(screen.getByText("very bad input")).toBeInTheDocument();
+    expect(screen.getByText("some field 2")).toBeInTheDocument();
+    expect(screen.getByText("must be nj zipcode")).toBeInTheDocument();
 
-    fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
 
     await waitFor(() => {
-      expect(subject.getByTestId("review-section")).toBeInTheDocument();
+      expect(screen.getByTestId("review-section")).toBeInTheDocument();
     });
 
     await page.submitReviewTab();
 
-    expect(subject.queryByText("some field 1")).not.toBeInTheDocument();
-    expect(subject.queryByText("very bad input")).not.toBeInTheDocument();
-    expect(subject.queryByText("some field 2")).not.toBeInTheDocument();
-    expect(subject.queryByText("must be nj zipcode")).not.toBeInTheDocument();
+    expect(screen.queryByText("some field 1")).not.toBeInTheDocument();
+    expect(screen.queryByText("very bad input")).not.toBeInTheDocument();
+    expect(screen.queryByText("some field 2")).not.toBeInTheDocument();
+    expect(screen.queryByText("must be nj zipcode")).not.toBeInTheDocument();
   });
 
   describe("required fields", () => {
     it("Contact first name", async () => {
-      const { page } = await renderSection({}, { contactFirstName: "" }, { name: "" });
+      const page = await getPageHelper({}, { contactFirstName: "" }, { name: "" });
       await page.clickSubmit();
       expect(userDataUpdatedNTimes()).toEqual(3);
     });
 
     it("Contact last name", async () => {
-      const { page } = await renderSection({}, { contactLastName: "" }, { name: "" });
+      const page = await getPageHelper({}, { contactLastName: "" }, { name: "" });
       await page.clickSubmit();
       expect(userDataUpdatedNTimes()).toEqual(3);
     });
 
     it("Contact phone number", async () => {
-      const { page } = await renderSection({}, { contactPhoneNumber: "" });
+      const page = await getPageHelper({}, { contactPhoneNumber: "" });
       await page.clickSubmit();
       expect(userDataUpdatedNTimes()).toEqual(3);
     });
 
     it("Payment type", async () => {
-      const { subject, page } = await renderSection({}, { paymentType: undefined });
+      const page = await getPageHelper({}, { paymentType: undefined });
       await page.clickSubmit();
-      expect(subject.getByText(Config.businessFormationDefaults.paymentTypeErrorText)).toBeInTheDocument();
+      expect(screen.getByText(Config.businessFormationDefaults.paymentTypeErrorText)).toBeInTheDocument();
       expect(userDataUpdatedNTimes()).toEqual(3);
     });
   });

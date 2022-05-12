@@ -8,7 +8,7 @@ import {
   generateProfileData,
   generateUserData,
 } from "@/test/factories";
-import { generateLLCProfileData, renderTask, useSetupInitialMocks } from "@/test/helpers-formation";
+import { generateLLCProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -18,7 +18,7 @@ import {
   getCurrentDate,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -50,15 +50,15 @@ describe("<BusinessFormation />", () => {
 
   it("does not show form for non-LLC legal structure", () => {
     const profileData = generateProfileData({ legalStructureId: "limited-liability-partnership" });
-    const { subject } = renderTask({ profileData }, displayContent);
-    expect(subject.queryByTestId("formation-form")).not.toBeInTheDocument();
+    preparePage({ profileData }, displayContent);
+    expect(screen.queryByTestId("formation-form")).not.toBeInTheDocument();
   });
 
   it("shows form only for LLC legal structure", () => {
     const profileData = generateLLCProfileData({});
-    const { subject } = renderTask({ profileData }, displayContent);
-    expect(subject.queryByTestId("formation-form")).toBeInTheDocument();
-    expect(subject.queryByTestId("business-name-section")).toBeInTheDocument();
+    preparePage({ profileData }, displayContent);
+    expect(screen.getByTestId("formation-form")).toBeInTheDocument();
+    expect(screen.getByTestId("business-name-section")).toBeInTheDocument();
   });
 
   describe("when LLC", () => {
@@ -71,7 +71,7 @@ describe("<BusinessFormation />", () => {
       const newUserData = generateUserData({});
       mockApi.getCompletedFiling.mockResolvedValue(newUserData);
 
-      renderTask({ profileData, formationData }, displayContent);
+      preparePage({ profileData, formationData }, displayContent);
       expect(mockApi.getCompletedFiling).toHaveBeenCalled();
       await waitFor(() => expect(currentUserData()).toEqual(newUserData));
       expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/form-business-entity" }, undefined, {
@@ -83,8 +83,8 @@ describe("<BusinessFormation />", () => {
       const getFilingResponse = generateGetFilingResponse({ success: true });
       const profileData = generateLLCProfileData({});
       const formationData = generateFormationData({ getFilingResponse });
-      const { subject } = renderTask({ profileData, formationData }, displayContent);
-      expect(subject.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
+      preparePage({ profileData, formationData }, displayContent);
+      expect(screen.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
     });
 
     it("fills multi-tab form, submits, and updates userData", async () => {
@@ -94,7 +94,7 @@ describe("<BusinessFormation />", () => {
         formationResponse: undefined,
         getFilingResponse: undefined,
       };
-      const { subject, page } = renderTask({ profileData, formationData }, displayContent);
+      const page = preparePage({ profileData, formationData }, displayContent);
 
       await page.submitBusinessNameTab("Pizza Joint");
 
@@ -105,7 +105,7 @@ describe("<BusinessFormation />", () => {
       page.fillText("Business address line2", "Suite 304");
       page.fillText("Business address zip code", "08001");
 
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
       page.fillText("Business purpose", "to take over the world");
 
       await page.submitBusinessTab();
@@ -126,7 +126,7 @@ describe("<BusinessFormation />", () => {
         addressState: "DC",
         addressZipCode: "20500",
       };
-      expect(subject.getByText(displayContent.members.placeholder as string)).toBeInTheDocument();
+      expect(screen.getByText(displayContent.members.placeholder as string)).toBeInTheDocument();
 
       await page.fillAndSubmitMemberModal(member);
 
@@ -138,7 +138,7 @@ describe("<BusinessFormation />", () => {
       page.fillText("Contact first name", "John");
       page.fillText("Contact last name", "Smith");
       page.fillText("Contact phone number", "123A45a678 90");
-      fireEvent.click(subject.getByLabelText("Credit card"));
+      fireEvent.click(screen.getByLabelText("Credit card"));
       page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
       page.selectCheckbox(
         `${displayContent.certificateOfStanding.contentMd} ${displayContent.certificateOfStanding.optionalLabel}`
@@ -152,76 +152,76 @@ describe("<BusinessFormation />", () => {
         displayContent.certifiedCopyOfFormationDocument.cost +
         displayContent.officialFormationDocument.cost;
 
-      expect(subject.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+      expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
       await page.clickSubmit();
 
+      const formationFormData = currentUserData().formationData.formationFormData;
       await waitFor(() => {
-        const formationFormData = currentUserData().formationData.formationFormData;
         expect(formationFormData.businessName).toEqual("Pizza Joint");
-        expect(formationFormData.businessSuffix).toEqual("LLC");
-        expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format("YYYY-MM-DD"));
-        expect(formationFormData.businessAddressLine1).toEqual("1234 main street");
-        expect(formationFormData.businessAddressLine2).toEqual("Suite 304");
-        expect(formationFormData.businessAddressState).toEqual("NJ");
-        expect(formationFormData.businessAddressZipCode).toEqual("08001");
-        expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
-        expect(formationFormData.agentNumber).toEqual("");
-        expect(formationFormData.agentName).toEqual("Hugo Weaving");
-        expect(formationFormData.agentEmail).toEqual("name@example.com");
-        expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
-        expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
-        expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
-        expect(formationFormData.agentOfficeAddressState).toEqual("NJ");
-        expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
-        expect(formationFormData.businessPurpose).toEqual("to take over the world");
-        expect(formationFormData.members[0].name).toEqual(member.name);
-        expect(formationFormData.members[0].addressLine1).toEqual(member.addressLine1);
-        expect(formationFormData.members[0].addressLine2).toEqual(member.addressLine2);
-        expect(formationFormData.members[0].addressCity).toEqual(member.addressCity);
-        expect(formationFormData.members[0].addressState).toEqual("DC");
-        expect(formationFormData.members[0].addressZipCode).toEqual("20500");
-        expect(formationFormData.signer).toEqual({
-          name: "Elrond",
-          signature: true,
-        });
-        expect(formationFormData.additionalSigners).toEqual([]);
-        expect(formationFormData.contactFirstName).toEqual("John");
-        expect(formationFormData.contactLastName).toEqual("Smith");
-        expect(formationFormData.contactPhoneNumber).toEqual("1234567890");
-        expect(formationFormData.paymentType).toEqual("CC");
-        expect(formationFormData.officialFormationDocument).toEqual(true);
-        expect(formationFormData.certificateOfStanding).toEqual(true);
-        expect(formationFormData.certifiedCopyOfFormationDocument).toEqual(true);
-        expect(formationFormData.annualReportNotification).toEqual(true);
-        expect(formationFormData.corpWatchNotification).toEqual(false);
       });
+      expect(formationFormData.businessSuffix).toEqual("LLC");
+      expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format("YYYY-MM-DD"));
+      expect(formationFormData.businessAddressLine1).toEqual("1234 main street");
+      expect(formationFormData.businessAddressLine2).toEqual("Suite 304");
+      expect(formationFormData.businessAddressState).toEqual("NJ");
+      expect(formationFormData.businessAddressZipCode).toEqual("08001");
+      expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+      expect(formationFormData.agentNumber).toEqual("");
+      expect(formationFormData.agentName).toEqual("Hugo Weaving");
+      expect(formationFormData.agentEmail).toEqual("name@example.com");
+      expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
+      expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
+      expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
+      expect(formationFormData.agentOfficeAddressState).toEqual("NJ");
+      expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
+      expect(formationFormData.businessPurpose).toEqual("to take over the world");
+      expect(formationFormData.members[0].name).toEqual(member.name);
+      expect(formationFormData.members[0].addressLine1).toEqual(member.addressLine1);
+      expect(formationFormData.members[0].addressLine2).toEqual(member.addressLine2);
+      expect(formationFormData.members[0].addressCity).toEqual(member.addressCity);
+      expect(formationFormData.members[0].addressState).toEqual("DC");
+      expect(formationFormData.members[0].addressZipCode).toEqual("20500");
+      expect(formationFormData.signer).toEqual({
+        name: "Elrond",
+        signature: true,
+      });
+      expect(formationFormData.additionalSigners).toEqual([]);
+      expect(formationFormData.contactFirstName).toEqual("John");
+      expect(formationFormData.contactLastName).toEqual("Smith");
+      expect(formationFormData.contactPhoneNumber).toEqual("1234567890");
+      expect(formationFormData.paymentType).toEqual("CC");
+      expect(formationFormData.officialFormationDocument).toEqual(true);
+      expect(formationFormData.certificateOfStanding).toEqual(true);
+      expect(formationFormData.certifiedCopyOfFormationDocument).toEqual(true);
+      expect(formationFormData.annualReportNotification).toEqual(true);
+      expect(formationFormData.corpWatchNotification).toEqual(false);
     });
 
     it("navigates from business tab to payment tab and back to business tab", async () => {
-      const { subject, page } = await renderTask({ profileData: generateLLCProfileData({}) }, displayContent);
+      const page = preparePage({ profileData: generateLLCProfileData({}) }, displayContent);
       await page.submitBusinessNameTab();
       await page.submitBusinessTab();
       await page.submitContactsTab();
       await page.submitReviewTab();
 
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
       await waitFor(() => {
-        expect(subject.getByTestId("review-section")).toBeInTheDocument();
+        expect(screen.getByTestId("review-section")).toBeInTheDocument();
       });
 
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
       await waitFor(() => {
-        expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+        expect(screen.getByTestId("contacts-section")).toBeInTheDocument();
       });
 
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
       await waitFor(() => {
-        expect(subject.queryByTestId("business-section")).toBeInTheDocument();
+        expect(screen.getByTestId("business-section")).toBeInTheDocument();
       });
 
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
       await waitFor(() => {
-        expect(subject.queryByTestId("business-name-section")).toBeInTheDocument();
+        expect(screen.getByTestId("business-name-section")).toBeInTheDocument();
       });
     });
   });

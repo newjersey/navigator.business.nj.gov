@@ -5,7 +5,7 @@ import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 
 jest.mock("next/router");
@@ -20,8 +20,8 @@ describe("HomePage", () => {
 
   it("sends to onboarding when Get Started button clicked", () => {
     useMockUserData({});
-    const subject = render(withAuth(<Home />, { user: generateUser({}) }));
-    fireEvent.click(subject.getAllByText(Config.landingPage.heroCallToActionText)[0]);
+    render(withAuth(<Home />, { user: generateUser({}) }));
+    fireEvent.click(screen.getAllByText(Config.landingPage.heroCallToActionText)[0]);
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 

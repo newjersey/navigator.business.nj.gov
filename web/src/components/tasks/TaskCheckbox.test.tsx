@@ -8,7 +8,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { UserData } from "@businessnjgovnavigator/shared/";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -43,7 +43,7 @@ describe("<TaskCheckbox />", () => {
   };
 
   it("sets checked property from userData for task", () => {
-    const subject = renderTaskCheckbox({
+    renderTaskCheckbox({
       checklistItemId: "some-id",
       initialUserData: generateUserData({
         taskItemChecklist: {
@@ -52,11 +52,11 @@ describe("<TaskCheckbox />", () => {
         },
       }),
     });
-    expect((subject.getByRole("checkbox") as HTMLInputElement).checked).toBe(true);
+    expect((screen.getByRole("checkbox") as HTMLInputElement).checked).toBe(true);
   });
 
   it("updates userData when item is checked off", () => {
-    const subject = renderTaskCheckbox({
+    renderTaskCheckbox({
       checklistItemId: "some-id",
       initialUserData: generateUserData({
         taskItemChecklist: {
@@ -64,17 +64,17 @@ describe("<TaskCheckbox />", () => {
         },
       }),
     });
-    fireEvent.click(subject.getByRole("checkbox"));
-    expect((subject.getByRole("checkbox") as HTMLInputElement).checked).toBe(true);
+    fireEvent.click(screen.getByRole("checkbox"));
+    expect((screen.getByRole("checkbox") as HTMLInputElement).checked).toBe(true);
     expect(currentUserData().taskItemChecklist["some-id"]).toBe(true);
   });
 
   it("opens registration modal when guest mode user tries to change state", () => {
-    const subject = renderTaskCheckbox({
+    renderTaskCheckbox({
       checklistItemId: "some-id",
       isAuthenticated: IsAuthenticated.FALSE,
     });
-    fireEvent.click(subject.getByRole("checkbox"));
+    fireEvent.click(screen.getByRole("checkbox"));
     expect(setModalIsVisible).toHaveBeenCalledWith(true);
   });
 });

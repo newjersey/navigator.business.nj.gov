@@ -24,7 +24,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { getCurrentDate, parseDateWithFormat, UserData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -61,8 +61,8 @@ describe("dashboard", () => {
     operateRefs?: Record<string, OperateReference>;
     fundings?: Funding[];
     certifications?: Certification[];
-  }): RenderResult => {
-    return render(
+  }) => {
+    render(
       <ThemeProvider theme={createTheme()}>
         <DashboardPage
           displayContent={overrides.displayContent ?? emptyDisplayContent}
@@ -97,15 +97,15 @@ describe("dashboard", () => {
 
   it("includes user full name in header", () => {
     useMockUserData({ user: generateUser({ name: "Ada Lovelace" }) });
-    const subject = renderPage({});
+    renderPage({});
     const expectedHeaderText = templateEval(Config.dashboardDefaults.headerText, { name: "Ada Lovelace" });
-    expect(subject.getByText(expectedHeaderText)).toBeInTheDocument();
+    expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
   });
 
   it("greets user when name is undefined", () => {
     useMockUserData({ user: generateUser({ name: undefined }) });
-    const subject = renderPage({});
-    expect(subject.getByText(Config.dashboardDefaults.missingNameHeaderText)).toBeInTheDocument();
+    renderPage({});
+    expect(screen.getByText(Config.dashboardDefaults.missingNameHeaderText)).toBeInTheDocument();
   });
 
   it("displays intro content", () => {
@@ -113,8 +113,8 @@ describe("dashboard", () => {
       introTextMd: "*some cool text here*",
       opportunityTextMd: "",
     };
-    const subject = renderPage({ displayContent: content });
-    expect(subject.getByText("some cool text here")).toBeInTheDocument();
+    renderPage({ displayContent: content });
+    expect(screen.getByText("some cool text here")).toBeInTheDocument();
   });
 
   it("displays filings calendar with annual report date", () => {
@@ -132,18 +132,18 @@ describe("dashboard", () => {
       },
     };
 
-    const subject = renderPage({ operateRefs });
-    expect(subject.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
-    expect(subject.getByText(dueDate.format("M/D"), { exact: false })).toBeInTheDocument();
-    expect(subject.getByText("Annual Report")).toBeInTheDocument();
+    renderPage({ operateRefs });
+    expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
+    expect(screen.getByText(dueDate.format("M/D"), { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("Annual Report")).toBeInTheDocument();
   });
 
   it("displays empty calendar content when there are no filings", () => {
     useMockUserData({ taxFilingData: generateTaxFilingData({ filings: [] }) });
-    const subject = renderPage({});
-    expect(subject.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
+    renderPage({});
+    expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
     expect(
-      subject.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+      screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
     ).toBeInTheDocument();
   });
 
@@ -164,11 +164,11 @@ describe("dashboard", () => {
       },
     };
 
-    const subject = renderPage({ operateRefs });
-    expect(subject.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
-    expect(subject.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    renderPage({ operateRefs });
+    expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
+    expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
     expect(
-      subject.getByText(
+      screen.getByText(
         `Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`
       )
     ).toBeInTheDocument();
@@ -199,10 +199,10 @@ describe("dashboard", () => {
     ];
 
     setupStatefulUserDataContext();
-    const subject = renderWithUserData(initialUserData, { fundings, certifications });
+    renderWithUserData(initialUserData, { fundings, certifications });
 
     const label = templateEval(Config.dashboardDefaults.opportunitiesCount, { count: "5" });
-    expect(subject.getByText(label)).toBeInTheDocument();
+    expect(screen.getByText(label)).toBeInTheDocument();
   });
 
   it("displays certifications filtered from user data", () => {
@@ -216,11 +216,11 @@ describe("dashboard", () => {
       generateCertification({ name: "Cert 3", applicableOwnershipTypes: ["minority-owned"] }),
     ];
 
-    const subject = renderPage({ certifications });
+    renderPage({ certifications });
 
-    expect(subject.getByText("Cert 1")).toBeInTheDocument();
-    expect(subject.getByText("Cert 2")).toBeInTheDocument();
-    expect(subject.queryByText("Cert 3")).not.toBeInTheDocument();
+    expect(screen.getByText("Cert 1")).toBeInTheDocument();
+    expect(screen.getByText("Cert 2")).toBeInTheDocument();
+    expect(screen.queryByText("Cert 3")).not.toBeInTheDocument();
   });
 
   it("displays fundings filtered & sorted from user data", () => {
@@ -239,15 +239,15 @@ describe("dashboard", () => {
       generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" }),
     ];
 
-    const subject = renderPage({ fundings });
+    renderPage({ fundings });
 
-    expect(subject.queryByText("Funding 1")).not.toBeInTheDocument();
-    expect(subject.getByText("Funding 2")).toBeInTheDocument();
-    expect(subject.queryByText("Funding 3")).not.toBeInTheDocument();
-    expect(subject.getByText("Funding 4")).toBeInTheDocument();
-    expect(subject.getByText("Funding 5")).toBeInTheDocument();
+    expect(screen.queryByText("Funding 1")).not.toBeInTheDocument();
+    expect(screen.getByText("Funding 2")).toBeInTheDocument();
+    expect(screen.queryByText("Funding 3")).not.toBeInTheDocument();
+    expect(screen.getByText("Funding 4")).toBeInTheDocument();
+    expect(screen.getByText("Funding 5")).toBeInTheDocument();
 
-    const visualFundings = subject.getAllByText(new RegExp(/^Funding [0-9]/));
+    const visualFundings = screen.getAllByText(new RegExp(/^Funding [0-9]/));
     expect(visualFundings[0]).toHaveTextContent("Funding 4");
     expect(visualFundings[1]).toHaveTextContent("Funding 5");
     expect(visualFundings[2]).toHaveTextContent("Funding 2");
@@ -258,15 +258,15 @@ describe("dashboard", () => {
     const fundings = [
       generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" }),
     ];
-    const subject = renderPage({ fundings });
-    expect(subject.getByText("Funding Opp").getAttribute("href")).toEqual("/funding/opp");
+    renderPage({ fundings });
+    expect(screen.getByText("Funding Opp").getAttribute("href")).toEqual("/funding/opp");
   });
 
   it("links to task page for certifications", () => {
     useMockProfileData(profileDataForUnfilteredOpportunities);
     const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1" })];
-    const subject = renderPage({ certifications });
-    expect(subject.getByText("Cert 1").getAttribute("href")).toEqual("/certification/cert1");
+    renderPage({ certifications });
+    expect(screen.getByText("Cert 1").getAttribute("href")).toEqual("/certification/cert1");
   });
 
   it("displays first 150 characters of funding description", () => {
@@ -281,9 +281,9 @@ describe("dashboard", () => {
       generateFunding({ contentMd: opp1Characters, status: "rolling application" }),
       generateFunding({ contentMd: opp2Characters, status: "rolling application" }),
     ];
-    const subject = renderPage({ fundings });
-    expect(subject.getByText(opp1ExpectedTextOnPage)).toBeInTheDocument();
-    expect(subject.getByText(opp2ExpectedTextOnPage)).toBeInTheDocument();
+    renderPage({ fundings });
+    expect(screen.getByText(opp1ExpectedTextOnPage)).toBeInTheDocument();
+    expect(screen.getByText(opp2ExpectedTextOnPage)).toBeInTheDocument();
   });
 
   it("truncates markdown without showing characters on page", () => {
@@ -296,14 +296,14 @@ describe("dashboard", () => {
       generateFunding({ contentMd: boldContent, status: "rolling application" }),
       generateFunding({ contentMd: linkContent, status: "rolling application" }),
     ];
-    const subject = renderPage({ fundings });
-    expect(subject.getByText("a bo")).toBeInTheDocument();
-    expect(subject.getByText("a li")).toBeInTheDocument();
+    renderPage({ fundings });
+    expect(screen.getByText("a bo")).toBeInTheDocument();
+    expect(screen.getByText("a li")).toBeInTheDocument();
   });
 
   it("directs guest-mode user to profile when profile edit button is clicked", async () => {
     const setModalIsVisible = jest.fn();
-    const subject = render(
+    render(
       withAuthAlert(
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
@@ -317,14 +317,14 @@ describe("dashboard", () => {
         { modalIsVisible: false, setModalIsVisible }
       )
     );
-    fireEvent.click(subject.getByTestId("grey-callout-link"));
+    fireEvent.click(screen.getByTestId("grey-callout-link"));
     expect(mockPush).toHaveBeenCalled();
     expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
   it("directs authenticated user to profile when profile edit button is clicked", async () => {
     const setModalIsVisible = jest.fn();
-    const subject = render(
+    render(
       withAuthAlert(
         <ThemeProvider theme={createTheme()}>
           <DashboardPage
@@ -338,17 +338,15 @@ describe("dashboard", () => {
         { modalIsVisible: false, setModalIsVisible }
       )
     );
-    fireEvent.click(subject.getByTestId("grey-callout-link"));
+    fireEvent.click(screen.getByTestId("grey-callout-link"));
     expect(mockPush).toHaveBeenCalled();
     expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
-  it("shows toast alert when success query is true", async () => {
+  it("shows toast alert when success query is true", () => {
     useMockRouter({ isReady: true, query: { success: "true" } });
-    const subject = renderPage({});
-    await waitFor(() =>
-      expect(subject.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument()
-    );
+    renderPage({});
+    expect(screen.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument();
   });
 
   it("can un-graduate users who were previously starting a business", async () => {
@@ -359,10 +357,10 @@ describe("dashboard", () => {
       }),
     });
     setupStatefulUserDataContext();
-    const subject = renderWithUserData(initialUserData, {});
-    expect(subject.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).toBeInTheDocument();
+    renderWithUserData(initialUserData, {});
+    expect(screen.getByText(Config.dashboardDefaults.backToRoadmapHeader)).toBeInTheDocument();
 
-    fireEvent.click(subject.getByText(Config.dashboardDefaults.backToRoadmapLinkText));
+    fireEvent.click(screen.getByText(Config.dashboardDefaults.backToRoadmapLinkText));
     expect(currentUserData()).toEqual({
       ...initialUserData,
       profileData: {
@@ -375,12 +373,11 @@ describe("dashboard", () => {
 
   it("does not show un-graduation box for users who have only used the owning-a-business flow", () => {
     useMockProfileData({ initialOnboardingFlow: "OWNING" });
-    const subject = renderPage({});
-    expect(subject.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).not.toBeInTheDocument();
+    renderPage({});
+    expect(screen.queryByText(Config.dashboardDefaults.backToRoadmapHeader)).not.toBeInTheDocument();
   });
 
   describe("hiding opportunities", () => {
-    let subject: RenderResult;
     const headerWithCount = (count: number): string =>
       templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: `${count}` });
     const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1", id: "cert1-id" })];
@@ -391,45 +388,45 @@ describe("dashboard", () => {
     });
 
     it("moves an opportunity to/from Hidden accordion when hide/unhide is clicked", () => {
-      subject = renderWithUserData(generateUserData({ profileData: profileDataForUnfilteredOpportunities }), {
+      renderWithUserData(generateUserData({ profileData: profileDataForUnfilteredOpportunities }), {
         certifications,
         fundings,
       });
 
-      let funding1 = within(subject.getByTestId("fund1-id"));
-      let visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
-      let hiddenOpportunities = within(subject.getByTestId("hidden-opportunities"));
+      let funding1 = within(screen.getByTestId("fund1-id"));
+      let visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
+      let hiddenOpportunities = within(screen.getByTestId("hidden-opportunities"));
 
-      expect(subject.queryByText(headerWithCount(0))).toBeInTheDocument();
-      expect(subject.queryByText(headerWithCount(1))).not.toBeInTheDocument();
+      expect(screen.getByText(headerWithCount(0))).toBeInTheDocument();
+      expect(screen.queryByText(headerWithCount(1))).not.toBeInTheDocument();
 
-      expect(visibleOpportunities.queryByText("Fund 1")).toBeInTheDocument();
-      expect(visibleOpportunities.queryByText("Cert 1")).toBeInTheDocument();
+      expect(visibleOpportunities.getByText("Fund 1")).toBeInTheDocument();
+      expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
       expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
       expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
 
       fireEvent.click(funding1.getByText(Config.dashboardDefaults.hideOpportunityText));
-      funding1 = within(subject.getByTestId("fund1-id"));
-      visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
-      hiddenOpportunities = within(subject.getByTestId("hidden-opportunities"));
+      funding1 = within(screen.getByTestId("fund1-id"));
+      visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
+      hiddenOpportunities = within(screen.getByTestId("hidden-opportunities"));
 
-      expect(subject.queryByText(headerWithCount(0))).not.toBeInTheDocument();
-      expect(subject.queryByText(headerWithCount(1))).toBeInTheDocument();
+      expect(screen.queryByText(headerWithCount(0))).not.toBeInTheDocument();
+      expect(screen.getByText(headerWithCount(1))).toBeInTheDocument();
 
       expect(visibleOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
-      expect(visibleOpportunities.queryByText("Cert 1")).toBeInTheDocument();
-      expect(hiddenOpportunities.queryByText("Fund 1")).toBeInTheDocument();
+      expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
+      expect(hiddenOpportunities.getByText("Fund 1")).toBeInTheDocument();
       expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
 
       fireEvent.click(funding1.getByText(Config.dashboardDefaults.unHideOpportunityText));
-      visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
-      hiddenOpportunities = within(subject.getByTestId("hidden-opportunities"));
+      visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
+      hiddenOpportunities = within(screen.getByTestId("hidden-opportunities"));
 
-      expect(subject.queryByText(headerWithCount(0))).toBeInTheDocument();
-      expect(subject.queryByText(headerWithCount(1))).not.toBeInTheDocument();
+      expect(screen.getByText(headerWithCount(0))).toBeInTheDocument();
+      expect(screen.queryByText(headerWithCount(1))).not.toBeInTheDocument();
 
-      expect(visibleOpportunities.queryByText("Fund 1")).toBeInTheDocument();
-      expect(visibleOpportunities.queryByText("Cert 1")).toBeInTheDocument();
+      expect(visibleOpportunities.getByText("Fund 1")).toBeInTheDocument();
+      expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
       expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
       expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
     });
@@ -443,8 +440,8 @@ describe("dashboard", () => {
         }),
       });
 
-      subject = renderWithUserData(initialUserData, { certifications, fundings });
-      const funding1 = within(subject.getByTestId("fund1-id"));
+      renderWithUserData(initialUserData, { certifications, fundings });
+      const funding1 = within(screen.getByTestId("fund1-id"));
 
       fireEvent.click(funding1.getByText(Config.dashboardDefaults.hideOpportunityText));
       expect(currentUserData()).toEqual({
@@ -465,13 +462,13 @@ describe("dashboard", () => {
         }),
       });
 
-      subject = renderWithUserData(initialUserData, { certifications, fundings });
-      const visibleOpportunities = within(subject.getByTestId("visible-opportunities"));
+      renderWithUserData(initialUserData, { certifications, fundings });
+      const visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
 
-      expect(subject.queryByText(headerWithCount(0))).not.toBeInTheDocument();
-      expect(subject.queryByText(headerWithCount(1))).toBeInTheDocument();
+      expect(screen.queryByText(headerWithCount(0))).not.toBeInTheDocument();
+      expect(screen.getByText(headerWithCount(1))).toBeInTheDocument();
       expect(visibleOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
-      expect(visibleOpportunities.queryByText("Cert 1")).toBeInTheDocument();
+      expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
     });
 
     it("displays empty state when all opportunities are hidden", () => {
@@ -483,8 +480,8 @@ describe("dashboard", () => {
         }),
       });
 
-      subject = renderWithUserData(initialUserData, { certifications, fundings });
-      expect(subject.queryByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).toBeInTheDocument();
+      renderWithUserData(initialUserData, { certifications, fundings });
+      expect(screen.getByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).toBeInTheDocument();
     });
   });
 

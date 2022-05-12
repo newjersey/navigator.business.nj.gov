@@ -49,6 +49,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
           >
             {LegalStructuresOrdered.map((legalStructure) => (
               <FormControlLabel
+                aria-label={legalStructure.id}
                 style={{ alignItems: "flex-start" }}
                 labelPlacement="end"
                 key={legalStructure.id}

@@ -20,7 +20,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -39,7 +39,7 @@ const setLargeScreen = (): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => true);
 };
 
-const renderPage = (task: Task, initialUserData?: UserData): RenderResult =>
+const renderPage = (task: Task, initialUserData?: UserData) =>
   render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
@@ -49,8 +49,6 @@ const renderPage = (task: Task, initialUserData?: UserData): RenderResult =>
   );
 
 describe("task page", () => {
-  let subject: RenderResult;
-
   beforeEach(() => {
     jest.resetAllMocks();
     setLargeScreen();
@@ -74,14 +72,14 @@ describe("task page", () => {
       callToActionText: "Submit The Form Here",
     });
 
-    subject = renderPage(task);
-    expect(subject.getByText("complete a tax form")).toBeInTheDocument();
-    expect(subject.getByText("fill out your tax form")).toBeInTheDocument();
-    expect(subject.getByText("it has to get done")).toBeInTheDocument();
-    expect(subject.getByText("destination: city clerk")).toBeInTheDocument();
-    expect(subject.getByText("Submit The Form Here")).toBeInTheDocument();
+    renderPage(task);
+    expect(screen.getByText("complete a tax form")).toBeInTheDocument();
+    expect(screen.getByText("fill out your tax form")).toBeInTheDocument();
+    expect(screen.getByText("it has to get done")).toBeInTheDocument();
+    expect(screen.getByText("destination: city clerk")).toBeInTheDocument();
+    expect(screen.getByText("Submit The Form Here")).toBeInTheDocument();
 
-    expect(subject.queryByText(Config.taskDefaults.backToRoadmapText, { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(Config.taskDefaults.backToRoadmapText, { exact: false })).toBeInTheDocument();
   });
 
   it("does not show button if no link available", () => {
@@ -90,8 +88,8 @@ describe("task page", () => {
       callToActionLink: "",
     });
 
-    subject = renderPage(task);
-    expect(subject.queryByText("Submit it Here")).not.toBeInTheDocument();
+    renderPage(task);
+    expect(screen.queryByText("Submit it Here")).not.toBeInTheDocument();
   });
 
   it("shows default text if call to action has link but no text", () => {
@@ -100,8 +98,8 @@ describe("task page", () => {
       callToActionLink: "www.example.com",
     });
 
-    subject = renderPage(task);
-    expect(subject.getByText("Start Application")).toBeInTheDocument();
+    renderPage(task);
+    expect(screen.getByText("Start Application")).toBeInTheDocument();
   });
 
   it("shows updated content if different from static content", () => {
@@ -119,21 +117,21 @@ describe("task page", () => {
       callToActionText: "a whole brand new call to action",
     });
 
-    subject = renderPage(task);
-    expect(subject.queryByText("original description")).not.toBeInTheDocument();
-    expect(subject.queryByText("a whole brand new description")).toBeInTheDocument();
+    renderPage(task);
+    expect(screen.queryByText("original description")).not.toBeInTheDocument();
+    expect(screen.getByText("a whole brand new description")).toBeInTheDocument();
 
-    expect(subject.queryByText("original call to action")).not.toBeInTheDocument();
-    expect(subject.queryByText("a whole brand new call to action")).toBeInTheDocument();
+    expect(screen.queryByText("original call to action")).not.toBeInTheDocument();
+    expect(screen.getByText("a whole brand new call to action")).toBeInTheDocument();
 
-    expect(subject.queryByText("original name")).not.toBeInTheDocument();
-    expect(subject.queryAllByText("a whole brand new name")).toHaveLength(2);
+    expect(screen.queryByText("original name")).not.toBeInTheDocument();
+    expect(screen.queryAllByText("a whole brand new name")).toHaveLength(2);
   });
 
   it("displays Not Started status when user data does not contain status", () => {
-    subject = renderPage(generateTask({}), generateUserData({ taskProgress: {} }));
+    renderPage(generateTask({}), generateUserData({ taskProgress: {} }));
 
-    expect(subject.getAllByText("Not started")[0]).toBeVisible();
+    expect(screen.getAllByText("Not started")[0]).toBeVisible();
   });
 
   it("displays task status from user data", () => {
@@ -142,8 +140,8 @@ describe("task page", () => {
       "some-id": "COMPLETED",
       [taskId]: "IN_PROGRESS",
     };
-    subject = renderPage(generateTask({ id: taskId }), generateUserData({ taskProgress }));
-    expect(subject.getAllByText("In progress")[0]).toBeVisible();
+    renderPage(generateTask({ id: taskId }), generateUserData({ taskProgress }));
+    expect(screen.getAllByText("In progress")[0]).toBeVisible();
   });
 
   it("updates task status when progress is selected", () => {
@@ -152,11 +150,11 @@ describe("task page", () => {
       "some-id": "COMPLETED",
     };
 
-    subject = renderPage(generateTask({ id: taskId }), generateUserData({ taskProgress }));
+    renderPage(generateTask({ id: taskId }), generateUserData({ taskProgress }));
 
-    fireEvent.click(subject.getAllByText("Not started")[0]);
-    fireEvent.click(subject.getByText("In progress"));
-    expect(subject.getAllByText("In progress")[0]).toBeVisible();
+    fireEvent.click(screen.getAllByText("Not started")[0]);
+    fireEvent.click(screen.getByText("In progress"));
+    expect(screen.getAllByText("In progress")[0]).toBeVisible();
     expect(currentUserData().taskProgress).toEqual({
       "some-id": "COMPLETED",
       [taskId]: "IN_PROGRESS",
@@ -185,7 +183,7 @@ describe("task page", () => {
       ],
     });
 
-    subject = renderPage(planTask, userData);
+    renderPage(planTask, userData);
     changeTaskNotStartedToCompleted();
 
     expect(currentUserData().taskProgress).toEqual({
@@ -194,7 +192,7 @@ describe("task page", () => {
     });
 
     expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
-    const link = subject.queryByText(
+    const link = screen.queryByText(
       `${Config.sectionHeaders["START"]} ${Config.roadmapDefaults.congratulatorModalLinkText}`
     );
     expect(link).toBeInTheDocument();
@@ -203,13 +201,13 @@ describe("task page", () => {
   });
 
   it("displays required tag in header if task is required", () => {
-    const subject = renderPage(generateTask({ required: true }));
-    expect(subject.getByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
+    renderPage(generateTask({ required: true }));
+    expect(screen.getByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
   });
 
   it("does not display required tag in header if task is not required", () => {
-    const subject = renderPage(generateTask({ required: false }));
-    expect(subject.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
+    renderPage(generateTask({ required: false }));
+    expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
   });
 
   it("overrides required tag in header from task in roadmap", () => {
@@ -219,41 +217,41 @@ describe("task page", () => {
     useMockRoadmap({
       steps: [generateStep({ tasks: [taskInRoadmap], section: "PLAN" })],
     });
-    const subject = renderPage(taskStaticGeneration);
-    expect(subject.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
+    renderPage(taskStaticGeneration);
+    expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
   });
 
   it("displays issuing form and agency in task footer when they are defined values", () => {
     const issuingAgency = "NJ Dept of Treasury";
     const formName = "xY39";
-    const subject = renderPage(generateTask({ issuingAgency, formName }));
+    renderPage(generateTask({ issuingAgency, formName }));
 
-    expect(subject.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
-    expect(subject.getByText(issuingAgency)).toBeInTheDocument();
+    expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    expect(screen.getByText(issuingAgency)).toBeInTheDocument();
 
-    expect(subject.getByText(`${Config.taskDefaults.formNameText}:`)).toBeInTheDocument();
-    expect(subject.getByText(formName)).toBeInTheDocument();
+    expect(screen.getByText(`${Config.taskDefaults.formNameText}:`)).toBeInTheDocument();
+    expect(screen.getByText(formName)).toBeInTheDocument();
   });
 
   it("does not display issuing agency in task footer when it is undefined value", () => {
-    const subject = renderPage(generateTask({ issuingAgency: undefined }));
+    renderPage(generateTask({ issuingAgency: undefined }));
 
-    expect(subject.queryByText(`${Config.taskDefaults.formNameText}:`)).toBeInTheDocument();
-    expect(subject.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
+    expect(screen.getByText(`${Config.taskDefaults.formNameText}:`)).toBeInTheDocument();
+    expect(screen.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
   });
 
   it("does not display form name in task footer when it is undefined value", () => {
-    const subject = renderPage(generateTask({ formName: undefined }));
+    renderPage(generateTask({ formName: undefined }));
 
-    expect(subject.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
-    expect(subject.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
+    expect(screen.getByText(`${Config.taskDefaults.issuingAgencyText}:`)).toBeInTheDocument();
+    expect(screen.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
   });
 
   it("does not display form name or agency in task footer when both are undefined", () => {
-    const subject = renderPage(generateTask({ formName: undefined, issuingAgency: undefined }));
+    renderPage(generateTask({ formName: undefined, issuingAgency: undefined }));
 
-    expect(subject.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
-    expect(subject.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
+    expect(screen.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
+    expect(screen.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
   });
 
   it("shows congratulatory modal without link when START section completed", () => {
@@ -278,7 +276,7 @@ describe("task page", () => {
       ],
     });
 
-    subject = renderPage(startTask, userData);
+    renderPage(startTask, userData);
     changeTaskNotStartedToCompleted();
 
     expect(currentUserData().taskProgress).toEqual({
@@ -288,104 +286,95 @@ describe("task page", () => {
 
     expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
     expect(
-      subject.queryByText(Config.roadmapDefaults.congratulatorModalLinkText, { exact: false })
+      screen.queryByText(Config.roadmapDefaults.congratulatorModalLinkText, { exact: false })
     ).not.toBeInTheDocument();
   });
 
   it("loads Search Business Names task screen for search-available-names", () => {
-    subject = renderPage(generateTask({ id: "search-business-name" }));
-    const searchInputField = subject.getByLabelText("Search business name") as HTMLInputElement;
+    renderPage(generateTask({ id: "search-business-name" }));
+    const searchInputField = screen.getByLabelText("Search business name") as HTMLInputElement;
     expect(searchInputField).toBeInTheDocument();
   });
 
   it("loads License task screen for apply-for-shop-license", () => {
-    subject = renderPage(
-      generateTask({ id: "apply-for-shop-license" }),
-      generateUserData({ licenseData: undefined })
-    );
-    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+    renderPage(generateTask({ id: "apply-for-shop-license" }), generateUserData({ licenseData: undefined }));
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for register-consumer-affairs", () => {
-    subject = renderPage(
+    renderPage(
       generateTask({ id: "register-consumer-affairs" }),
       generateUserData({ licenseData: undefined })
     );
-    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for pharmacy-license", () => {
-    subject = renderPage(
-      generateTask({ id: "pharmacy-license" }),
-      generateUserData({ licenseData: undefined })
-    );
-    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+    renderPage(generateTask({ id: "pharmacy-license" }), generateUserData({ licenseData: undefined }));
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for license-accounting", () => {
-    subject = renderPage(
-      generateTask({ id: "license-accounting" }),
-      generateUserData({ licenseData: undefined })
-    );
-    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+    renderPage(generateTask({ id: "license-accounting" }), generateUserData({ licenseData: undefined }));
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads License task screen for license-massage-therapy", () => {
-    subject = renderPage(
-      generateTask({ id: "license-massage-therapy" }),
-      generateUserData({ licenseData: undefined })
-    );
-    expect(subject.getByTestId("cta-secondary")).toBeInTheDocument();
+    renderPage(generateTask({ id: "license-massage-therapy" }), generateUserData({ licenseData: undefined }));
+    expect(screen.getByTestId("cta-secondary")).toBeInTheDocument();
   });
 
   it("loads construction post-onboarding question for task in template body", async () => {
-    subject = renderPage(
+    renderPage(
       generateTask({
         postOnboardingQuestion: "construction-renovation",
         contentMd: "some content\n\n${postOnboardingQuestion}\n\nmore content",
       })
     );
-    await waitFor(() => expect(subject.getByTestId("construction-renovation")).toBeInTheDocument());
-    expect(subject.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
-    expect(subject.getByText("some content")).toBeInTheDocument();
-    expect(subject.getByText("more content")).toBeInTheDocument();
-    expect(subject.queryByText("${postOnboardingQuestion}")).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
+    });
+    expect(screen.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
+    expect(screen.getByText("some content")).toBeInTheDocument();
+    expect(screen.getByText("more content")).toBeInTheDocument();
+    expect(screen.queryByText("${postOnboardingQuestion}")).not.toBeInTheDocument();
   });
 
   it("loads post-onboarding question for task at the bottom if not in template body", async () => {
-    subject = renderPage(
+    renderPage(
       generateTask({
         postOnboardingQuestion: "construction-renovation",
         contentMd: "some content\n\nmore content",
       })
     );
-    await waitFor(() => expect(subject.getByTestId("construction-renovation")).toBeInTheDocument());
-    expect(subject.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
-    expect(subject.getByText("some content")).toBeInTheDocument();
-    expect(subject.getByText("more content")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
+    });
+    expect(screen.getByTestId("post-onboarding-radio-btn")).toBeInTheDocument();
+    expect(screen.getByText("some content")).toBeInTheDocument();
+    expect(screen.getByText("more content")).toBeInTheDocument();
   });
 
   it("toggles radio button for post-onboarding question", async () => {
     const initialUserData = generateUserData({
       profileData: generateProfileData({ constructionRenovationPlan: undefined }),
     });
-    subject = renderPage(
-      generateTask({ postOnboardingQuestion: "construction-renovation" }),
-      initialUserData
-    );
+    renderPage(generateTask({ postOnboardingQuestion: "construction-renovation" }), initialUserData);
 
-    await waitFor(() => expect(subject.getByTestId("construction-renovation")).toBeInTheDocument());
-    expect(subject.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
-    expect(subject.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
+    });
+    expect(screen.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
 
-    fireEvent.click(subject.getByTestId("post-onboarding-radio-true"));
-    expect(subject.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
-    expect(subject.queryByTestId("post-onboarding-true-content")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("post-onboarding-radio-true"));
+    expect(screen.queryByTestId("post-onboarding-false-content")).not.toBeInTheDocument();
+    expect(screen.getByTestId("post-onboarding-true-content")).toBeInTheDocument();
     expect(currentUserData().profileData.constructionRenovationPlan).toBe(true);
 
-    fireEvent.click(subject.getByTestId("post-onboarding-radio-false"));
-    expect(subject.queryByTestId("post-onboarding-false-content")).toBeInTheDocument();
-    expect(subject.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("post-onboarding-radio-false"));
+    expect(screen.getByTestId("post-onboarding-false-content")).toBeInTheDocument();
+    expect(screen.queryByTestId("post-onboarding-true-content")).not.toBeInTheDocument();
     expect(currentUserData().profileData.constructionRenovationPlan).toBe(false);
   });
 
@@ -404,30 +393,30 @@ describe("task page", () => {
       });
     });
 
-    it("renders only Next Task button for first task", async () => {
-      subject = renderPage(taskOne);
-      expect(subject.getByText(Config.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
-      expect(subject.queryByText(Config.taskDefaults.previousTaskButtonText)).not.toBeVisible();
+    it("renders only Next Task button for first task", () => {
+      renderPage(taskOne);
+      expect(screen.getByText(Config.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
+      expect(screen.queryByText(Config.taskDefaults.previousTaskButtonText)).not.toBeVisible();
     });
 
-    it("renders only Previous Task button at last task", async () => {
-      subject = renderPage(taskThree);
-      expect(subject.queryByText(Config.taskDefaults.nextTaskButtonText)).not.toBeVisible();
-      expect(subject.getByText(Config.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
+    it("renders only Previous Task button at last task", () => {
+      renderPage(taskThree);
+      expect(screen.queryByText(Config.taskDefaults.nextTaskButtonText)).not.toBeVisible();
+      expect(screen.getByText(Config.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
     });
 
-    it("renders both Next and Previous buttons for task in the middle", async () => {
-      subject = renderPage(taskTwo);
-      expect(subject.getByText(Config.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
-      expect(subject.getByText(Config.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
+    it("renders both Next and Previous buttons for task in the middle", () => {
+      renderPage(taskTwo);
+      expect(screen.getByText(Config.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
+      expect(screen.getByText(Config.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
     });
 
     it("links to next and previous tasks", () => {
-      subject = renderPage(taskTwo);
-      fireEvent.click(subject.getByText(Config.taskDefaults.nextTaskButtonText));
+      renderPage(taskTwo);
+      fireEvent.click(screen.getByText(Config.taskDefaults.nextTaskButtonText));
       expect(mockPush).toHaveBeenCalledWith("/tasks/task-3");
 
-      fireEvent.click(subject.getByText(Config.taskDefaults.previousTaskButtonText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.previousTaskButtonText));
       expect(mockPush).toHaveBeenCalledWith("/tasks/task-1");
     });
   });
@@ -449,12 +438,12 @@ describe("task page", () => {
     it("does not show an alert when this task has nothing that it is unlocked by", () => {
       const task = generateTask({ unlockedBy: [] });
       useMockRoadmapWithTask(task);
-      subject = renderPage(task);
+      renderPage(task);
       expect(
-        subject.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
       ).not.toBeInTheDocument();
     });
 
@@ -463,15 +452,13 @@ describe("task page", () => {
         unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })],
       });
       useMockRoadmapWithTask(task);
-      subject = renderPage(task);
+      renderPage(task);
       expect(
-        subject.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
       ).not.toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
-      ).toBeInTheDocument();
-      expect(subject.queryByText("Do this first", { exact: false })).toBeInTheDocument();
-      expect(subject.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
+      expect(screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Do this first", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
         "do-this-first"
       );
     });
@@ -485,31 +472,31 @@ describe("task page", () => {
       });
 
       useMockRoadmapWithTask(task);
-      subject = renderPage(task);
+      renderPage(task);
 
-      expect(subject.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(Config.taskDefaults.unlockedByPlural, { exact: false })).toBeInTheDocument();
       expect(
-        subject.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
       ).not.toBeInTheDocument();
-      expect(subject.queryByText("Do this first", { exact: false })).toBeInTheDocument();
-      expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();
-      expect(subject.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
+      expect(screen.getByText("Do this first", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Also this one", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
         "do-this-first"
       );
-      expect(subject.getByText("Also this one", { exact: false }).getAttribute("href")).toEqual(
+      expect(screen.getByText("Also this one", { exact: false }).getAttribute("href")).toEqual(
         "also-this-one"
       );
     });
 
     it("ignores unlocked-by tasks on the page's default task", () => {
-      subject = renderPage(
+      renderPage(
         generateTask({
           id: "this-task",
           unlockedBy: [generateTaskLink({ name: "NOT ON ROADMAP TASK" })],
         })
       );
 
-      expect(subject.queryByText("NOT ON ROADMAP TASK", { exact: false })).not.toBeInTheDocument();
+      expect(screen.queryByText("NOT ON ROADMAP TASK", { exact: false })).not.toBeInTheDocument();
     });
 
     it("removes a task from the unlocked-by alert when its status is completed", () => {
@@ -522,21 +509,19 @@ describe("task page", () => {
 
       useMockUserData(generateUserData({ taskProgress: { "do-this-first": "COMPLETED" } }));
       useMockRoadmapWithTask(task);
-      subject = renderPage(task);
+      renderPage(task);
 
       expect(
-        subject.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
+        screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
       ).not.toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.taskDefaults.unlockedBySingular, { exact: false })
-      ).toBeInTheDocument();
-      expect(subject.queryByText("Do this first", { exact: false })).not.toBeInTheDocument();
-      expect(subject.queryByText("Also this one", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
+      expect(screen.queryByText("Do this first", { exact: false })).not.toBeInTheDocument();
+      expect(screen.getByText("Also this one", { exact: false })).toBeInTheDocument();
     });
   });
 
   it("does not render next and previous buttons when legal structure is LLC and form-business-entity task is rendered", () => {
-    subject = renderPage(
+    renderPage(
       generateTask({ id: "form-business-entity" }),
       generateUserData({
         taskProgress: {},
@@ -544,12 +529,12 @@ describe("task page", () => {
       })
     );
 
-    expect(subject.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
   });
 
   const changeTaskNotStartedToCompleted = (): void => {
-    fireEvent.click(subject.getAllByText("Not started")[0]);
-    fireEvent.click(subject.getByText("Completed"));
-    expect(subject.getAllByText("Completed")[0]).toBeVisible();
+    fireEvent.click(screen.getAllByText("Not started")[0]);
+    fireEvent.click(screen.getByText("Completed"));
+    expect(screen.getAllByText("Completed")[0]).toBeVisible();
   };
 });

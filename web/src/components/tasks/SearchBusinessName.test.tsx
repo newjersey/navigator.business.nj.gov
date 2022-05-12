@@ -14,7 +14,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { act, fireEvent, render, RenderResult } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -25,8 +25,6 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<SearchBusinessName />", () => {
-  let subject: RenderResult;
-
   beforeEach(() => {
     jest.resetAllMocks();
     useMockUserData({});
@@ -35,26 +33,26 @@ describe("<SearchBusinessName />", () => {
 
   it("pre-fills the text field with the business name entered in onboarding", () => {
     useMockProfileData({ businessName: "Best Pizza" });
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     expect(getSearchValue()).toEqual("Best Pizza");
   });
 
   it("types a new potential name", () => {
     useMockProfileData({ businessName: "Best Pizza" });
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("My other new name");
     expect(getSearchValue()).toEqual("My other new name");
   });
 
   it("checks availability of typed name", async () => {
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({});
     expect(mockApi.searchBusinessName).toHaveBeenCalledWith("Pizza Joint");
   });
 
   it("shows available text if name is available", async () => {
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
     expect(availableTextExists()).toBe(true);
@@ -67,7 +65,7 @@ describe("<SearchBusinessName />", () => {
     });
 
     setupStatefulUserDataContext();
-    subject = render(
+    render(
       <WithStatefulUserData initialUserData={userData}>
         <SearchBusinessName task={generateTask({})} />)
       </WithStatefulUserData>
@@ -81,7 +79,7 @@ describe("<SearchBusinessName />", () => {
   });
 
   it("removes the update button when clicked and resets when new search is performed", async () => {
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "AVAILABLE" });
     fireEvent.click(updateNameButton());
@@ -97,7 +95,7 @@ describe("<SearchBusinessName />", () => {
   });
 
   it("shows unavailable text if name is not available", async () => {
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(availableTextExists()).toBe(false);
@@ -105,41 +103,41 @@ describe("<SearchBusinessName />", () => {
   });
 
   it("shows similar unavailable names when not available", async () => {
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("Pizza Joint");
     await searchAndGetValue({ status: "UNAVAILABLE", similarNames: ["Rusty's Pizza", "Pizzapizza"] });
-    expect(subject.queryByText("Rusty's Pizza")).toBeInTheDocument();
-    expect(subject.queryByText("Pizzapizza")).toBeInTheDocument();
+    expect(screen.getByText("Rusty's Pizza")).toBeInTheDocument();
+    expect(screen.getByText("Pizzapizza")).toBeInTheDocument();
   });
 
   it("shows message if user searches empty name", async () => {
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("");
     fireEvent.click(searchButton());
-    expect(subject.queryByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
+    expect(screen.getByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
     fillText("anything");
     await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
-    expect(subject.queryByTestId("error-alert-BAD_INPUT")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("error-alert-BAD_INPUT")).not.toBeInTheDocument();
   });
 
   it("shows message if search returns 400", async () => {
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("LLC");
     await searchAndReject();
-    expect(subject.queryByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
+    expect(screen.getByTestId("error-alert-BAD_INPUT")).toBeInTheDocument();
     fillText("anything");
     await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
-    expect(subject.queryByTestId("error-alert-BAD_INPUT")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("error-alert-BAD_INPUT")).not.toBeInTheDocument();
   });
 
   it("shows error if search fails", async () => {
-    subject = render(<SearchBusinessName task={generateTask({})} />);
+    render(<SearchBusinessName task={generateTask({})} />);
     fillText("whatever");
     await searchAndFail();
-    expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
+    expect(screen.getByTestId("error-alert-SEARCH_FAILED")).toBeInTheDocument();
     fillText("anything");
     await searchAndGetValue({ status: "AVAILABLE", similarNames: [] });
-    expect(subject.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
   });
 
   const getSearchValue = (): string => (inputField() as HTMLInputElement)?.value;
@@ -169,11 +167,11 @@ describe("<SearchBusinessName />", () => {
     await act(() => returnedPromise.catch(() => {}));
   };
 
-  const searchButton = () => subject.getByTestId("search-availability");
-  const inputField = () => subject.getByLabelText("Search business name");
-  const updateNameButton = () => subject.getByTestId("update-name");
-  const availableTextExists = () => subject.queryByTestId("available-text") !== null;
-  const unavailableTextExists = () => subject.queryByTestId("unavailable-text") !== null;
-  const updateNameButtonExists = () => subject.queryByTestId("update-name") !== null;
-  const nameHasBeenUpdatedTextExists = () => subject.queryByTestId("name-has-been-updated") !== null;
+  const searchButton = () => screen.getByTestId("search-availability");
+  const inputField = () => screen.getByLabelText("Search business name");
+  const updateNameButton = () => screen.getByTestId("update-name");
+  const availableTextExists = () => screen.queryByTestId("available-text") !== null;
+  const unavailableTextExists = () => screen.queryByTestId("unavailable-text") !== null;
+  const updateNameButtonExists = () => screen.queryByTestId("update-name") !== null;
+  const nameHasBeenUpdatedTextExists = () => screen.queryByTestId("name-has-been-updated") !== null;
 });

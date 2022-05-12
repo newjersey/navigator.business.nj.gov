@@ -43,6 +43,7 @@ describe("check license status [feature] [all] [group1]", () => {
     cy.get('button[data-testid="check-status-submit"]').click();
 
     cy.get('[data-testid="error-alert-NOT_FOUND"]').should("exist");
+    // eslint-disable-next-line testing-library/await-async-utils
     cy.wait("@userAPI");
     // re-load page, come back to same page
     cy.visit("/tasks/register-consumer-affairs");
