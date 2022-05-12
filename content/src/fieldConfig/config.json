@@ -7,6 +7,7 @@
     "inputLabel": "**Save your NAICS code here so you can reference it later:**",
     "findCodeHeader": "Find Your NAICS Code",
     "sicCodeLink": "[Siccode.com](https://siccode.com/)",
+    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **There are no benefits or disadvantages to use one NAICS code over another.**\n\nPlease select one that best represents your primary business activity.",
     "findCodeBodyText": "Use the resources listed below to search and find your NAICS code.  **If you can’t decide the right code,** remember, there are no benefits or disadvantages to use one NAICS code over another. ",
     "editText": "Edit",
     "saveButtonText": "Save NAICS Code",
