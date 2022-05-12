@@ -33,7 +33,7 @@ export const RightSidebarPageLayout = ({
   return (
     <div
       className={`desktop:margin-top-4 desktop:margin-top-0 ${isDesktopAndUp ? selectedColor.gutter : ""}`}
-      data-testid="rightSideBarPageLayout"
+      data-testid="rightSidebarPageLayout"
     >
       <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
         <div className="grid-row">

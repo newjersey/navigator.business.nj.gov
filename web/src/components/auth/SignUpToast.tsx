@@ -2,24 +2,17 @@ import { Content } from "@/components/Content";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { IconButton, useMediaQuery } from "@mui/material";
-import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";
 
 export const SignUpToast = (): ReactElement => {
-  const { userData, update } = useUserData();
   const { showCard } = useRoadmapSidebarCards();
-  const { isAuthenticated, alertIsVisible, setAlertIsVisible, setRegistrationAlertStatus } =
-    useContext(AuthAlertContext);
-  const router = useRouter();
+  const { isAuthenticated, alertIsVisible, setAlertIsVisible } = useContext(AuthAlertContext);
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   useMountEffectWhenDefined(() => {
@@ -72,15 +65,7 @@ export const SignUpToast = (): ReactElement => {
           >
             <Icon className="usa-icon--size-4">close</Icon>
           </IconButton>
-          <Content
-            className="padding-top-105"
-            onClick={() => {
-              analytics.event.guest_toast.click.go_to_myNJ_registration();
-              onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
-            }}
-          >
-            {Config.navigationDefaults.guestAlertBody}
-          </Content>
+          <Content className="padding-top-105">{Config.navigationDefaults.guestAlertBody}</Content>
         </div>
       </div>
     </ToastAlert>

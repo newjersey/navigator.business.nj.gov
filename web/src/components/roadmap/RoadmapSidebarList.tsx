@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { RoadmapSideBarContent } from "@/lib/types/types";
+import { SidebarDisplayContent } from "@/lib/types/types";
 import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect } from "react";
 
 interface Props {
-  sideBarDisplayContent: RoadmapSideBarContent;
+  sidebarDisplayContent: SidebarDisplayContent;
 }
 
 export const RoadmapSidebarList = (props: Props): ReactElement => {
@@ -38,7 +38,7 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
 
   return (
     <>
-      <h2>{Config.roadmapDefaults.sideBarHeading}</h2>
+      <h2>{Config.roadmapDefaults.sidebarHeading}</h2>
       <hr className="bg-roadmap-blue-dark hr-2px margin-bottom-4" />
 
       {!userData ? (
@@ -50,41 +50,41 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
         <>
           {userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration") && (
             <RoadmapSidebarCard
-              color={props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.color}
-              shadowColor={props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.shadowColor}
+              color={props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.color}
+              shadowColor={props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.shadowColor}
               dataTestid="successful-registration-card"
-              headerText={props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.header}
-              imagePath={props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.imgPath}
+              headerText={props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.header}
+              imagePath={props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.imgPath}
               onClose={async () => {
                 await hideCard("successful-registration");
               }}
             >
-              <Content>{props.sideBarDisplayContent.guestSuccessfullyRegisteredCard.contentMd}</Content>
+              <Content>{props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.contentMd}</Content>
             </RoadmapSidebarCard>
           )}
 
           {userData.preferences.visibleRoadmapSidebarCards.includes("welcome") && (
             <RoadmapSidebarCard
-              color={props.sideBarDisplayContent.welcomeCard.color}
-              shadowColor={props.sideBarDisplayContent.welcomeCard.shadowColor}
-              headerText={props.sideBarDisplayContent.welcomeCard.header}
-              imagePath={props.sideBarDisplayContent.welcomeCard.imgPath}
+              color={props.sidebarDisplayContent.welcomeCard.color}
+              shadowColor={props.sidebarDisplayContent.welcomeCard.shadowColor}
+              headerText={props.sidebarDisplayContent.welcomeCard.header}
+              imagePath={props.sidebarDisplayContent.welcomeCard.imgPath}
             >
-              <Content>{props.sideBarDisplayContent.welcomeCard.contentMd}</Content>
+              <Content>{props.sidebarDisplayContent.welcomeCard.contentMd}</Content>
             </RoadmapSidebarCard>
           )}
 
           {userData.preferences.visibleRoadmapSidebarCards.includes("not-registered") && (
             <RoadmapSidebarCard
-              color={props.sideBarDisplayContent.guestNotRegisteredCard.color}
-              shadowColor={props.sideBarDisplayContent.guestNotRegisteredCard.shadowColor}
+              color={props.sidebarDisplayContent.guestNotRegisteredCard.color}
+              shadowColor={props.sidebarDisplayContent.guestNotRegisteredCard.shadowColor}
             >
               <Content
                 onClick={() => {
                   onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
                 }}
               >
-                {props.sideBarDisplayContent.guestNotRegisteredCard.contentMd}
+                {props.sidebarDisplayContent.guestNotRegisteredCard.contentMd}
               </Content>
             </RoadmapSidebarCard>
           )}

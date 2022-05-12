@@ -895,7 +895,7 @@ collections:
                   widget: string,
                 }
               - { label: Graduation Modal Title, name: graduationModalTitle, widget: string }
-              - { label: Sidebar Heading, name: sideBarHeading, widget: string }
+              - { label: Sidebar Heading, name: sidebarHeading, widget: string }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true

@@ -1,5 +1,5 @@
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
-import { NavSideBarUserSettings } from "@/components/navbar/NavSideBarUserSettings";
+import { NavSidebarUserSettings } from "@/components/navbar/NavSidebarUserSettings";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
@@ -12,14 +12,14 @@ import React, { ReactElement, useMemo, useState } from "react";
 interface Props {
   scrolled: boolean;
   task?: Task;
-  sideBarPageLayout?: boolean;
+  sidebarPageLayout?: boolean;
   operateReferences?: Record<string, OperateReference>;
 }
 
 export const NavBarMobile = ({
   scrolled,
   task,
-  sideBarPageLayout,
+  sidebarPageLayout,
   operateReferences,
 }: Props): ReactElement => {
   const { userData } = useUserData();
@@ -60,7 +60,7 @@ export const NavBarMobile = ({
           <Icon className="font-sans-xl">menu</Icon>
         </button>
         <div className={`usa-logo ${scrolled ? "bg-white" : ""}`}>
-          {sideBarPageLayout ? (
+          {sidebarPageLayout ? (
             <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
           ) : (
             <Link href={redirectUrl} passHref>
@@ -87,13 +87,13 @@ export const NavBarMobile = ({
           >
             <Icon className="font-sans-xl">close</Icon>
           </button>
-          {sideBarPageLayout &&
+          {sidebarPageLayout &&
             (operateReferences != null && Object.keys(operateReferences).length > 0 ? (
               <MiniOperateSection operateReferences={operateReferences} onClose={close} />
             ) : (
               <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />
             ))}
-          <NavSideBarUserSettings />
+          <NavSidebarUserSettings />
         </nav>
       </FocusTrappedSidebar>
     </>

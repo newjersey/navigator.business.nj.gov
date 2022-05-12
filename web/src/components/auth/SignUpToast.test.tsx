@@ -1,9 +1,7 @@
 import { SignUpToast } from "@/components/auth/SignUpToast";
-import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { generateUser, generateUserData } from "@/test/factories";
 import { markdownToText, withAuthAlert } from "@/test/helpers";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as materialUi from "@mui/material";
@@ -27,7 +25,6 @@ jest.mock("@mui/material", () => mockMaterialUI());
 const setLargeScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
-const mockApi = api as jest.Mocked<typeof api>;
 
 describe("SignUpToast", () => {
   beforeEach(() => {
@@ -69,23 +66,6 @@ describe("SignUpToast", () => {
         subject.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
       ).not.toBeInTheDocument()
     );
-  });
-
-  it("goes to self-reg when link is clicked", async () => {
-    const user = generateUser({ name: undefined, email: "test@example.com" });
-    const userData = generateUserData({ user });
-    useMockUserData(userData);
-    mockApi.postSelfReg.mockResolvedValue({
-      authRedirectURL: "www.example.com",
-      userData,
-    });
-    const subject = setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(subject.getByText(markdownToText(Config.navigationDefaults.guestAlertBody)));
-
-    await waitFor(() => {
-      expect(mockApi.postSelfReg).toHaveBeenCalled();
-      expect(mockPush).toHaveBeenCalled();
-    });
   });
 
   it("icon logo on mobile", async () => {

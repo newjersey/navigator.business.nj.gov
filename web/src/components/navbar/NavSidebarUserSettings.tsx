@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 
-export const NavSideBarUserSettings = (): ReactElement => {
+export const NavSidebarUserSettings = (): ReactElement => {
   const { userData, update } = useUserData();
   const userName = getUserNameOrEmail(userData);
   const { state } = useContext(AuthContext);

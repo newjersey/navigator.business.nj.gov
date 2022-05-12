@@ -3,8 +3,8 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   createEmptyLoadDisplayContent,
-  createEmptySideBarDisplayContent,
-  RoadmapSideBarContent,
+  createEmptySidebarDisplayContent,
+  SidebarDisplayContent,
 } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import RoadmapPage from "@/pages/roadmap";
@@ -15,7 +15,7 @@ import {
   generatePreferences,
   generateProfileData,
   generateRoadmapSidebarCard,
-  generateSideBarContent,
+  generateSidebarDisplayContent,
   generateStep,
   generateTask,
   generateTaxFilingData,
@@ -74,9 +74,10 @@ const setMobileScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
-const emptyDisplayContent = {
+const createDisplayContent = (sidebar?: SidebarDisplayContent) => ({
   contentMd: "",
-};
+  sidebarDisplayContent: sidebar ?? createEmptySidebarDisplayContent(),
+});
 
 describe("roadmap page", () => {
   beforeEach(() => {
@@ -88,19 +89,16 @@ describe("roadmap page", () => {
   });
 
   const renderRoadmapPage = ({
-    sideBarDisplayContent,
+    sidebarDisplayContent,
   }: {
-    sideBarDisplayContent?: RoadmapSideBarContent;
+    sidebarDisplayContent?: SidebarDisplayContent;
   }): RenderResult => {
     return render(
       <ThemeProvider theme={createTheme()}>
         <RoadmapPage
           operateReferences={{}}
-          displayContent={emptyDisplayContent}
+          displayContent={createDisplayContent(sidebarDisplayContent)}
           profileDisplayContent={createEmptyLoadDisplayContent()}
-          sideBarDisplayContent={
-            sideBarDisplayContent ? sideBarDisplayContent : createEmptySideBarDisplayContent()
-          }
         />
       </ThemeProvider>
     );
@@ -109,13 +107,13 @@ describe("roadmap page", () => {
   const renderPageWithAuth = ({
     userData,
     isAuthenticated,
-    sideBarDisplayContent,
+    sidebarDisplayContent,
     alertIsVisible,
     registrationAlertStatus,
   }: {
     userData?: UserData;
     isAuthenticated?: IsAuthenticated;
-    sideBarDisplayContent?: RoadmapSideBarContent;
+    sidebarDisplayContent?: SidebarDisplayContent;
     alertIsVisible?: boolean;
     registrationAlertStatus?: RegistrationStatus;
   }): RenderResult => {
@@ -128,11 +126,8 @@ describe("roadmap page", () => {
             <SignUpToast />
             <RoadmapPage
               operateReferences={{}}
-              displayContent={emptyDisplayContent}
+              displayContent={createDisplayContent(sidebarDisplayContent)}
               profileDisplayContent={createEmptyLoadDisplayContent()}
-              sideBarDisplayContent={
-                sideBarDisplayContent ? sideBarDisplayContent : createEmptySideBarDisplayContent()
-              }
             />
           </ThemeProvider>
         </WithStatefulUserData>,
@@ -185,9 +180,8 @@ describe("roadmap page", () => {
         <ThemeProvider theme={createTheme()}>
           <RoadmapPage
             operateReferences={{}}
-            displayContent={emptyDisplayContent}
+            displayContent={createDisplayContent()}
             profileDisplayContent={createEmptyLoadDisplayContent()}
-            sideBarDisplayContent={createEmptySideBarDisplayContent()}
           />
         </ThemeProvider>,
         IsAuthenticated.FALSE,
@@ -207,9 +201,8 @@ describe("roadmap page", () => {
         <ThemeProvider theme={createTheme()}>
           <RoadmapPage
             operateReferences={{}}
-            displayContent={emptyDisplayContent}
+            displayContent={createDisplayContent()}
             profileDisplayContent={createEmptyLoadDisplayContent()}
-            sideBarDisplayContent={createEmptySideBarDisplayContent()}
           />
         </ThemeProvider>,
         IsAuthenticated.TRUE,
@@ -599,9 +592,8 @@ describe("roadmap page", () => {
           <ThemeProvider theme={createTheme()}>
             <RoadmapPage
               operateReferences={{}}
-              displayContent={emptyDisplayContent}
+              displayContent={createDisplayContent()}
               profileDisplayContent={createEmptyLoadDisplayContent()}
-              sideBarDisplayContent={createEmptySideBarDisplayContent()}
             />
           </ThemeProvider>
         </WithStatefulUserData>
@@ -879,17 +871,17 @@ describe("roadmap page", () => {
 
   describe("sidebar", () => {
     it("renders welcome card", () => {
-      const sideBarDisplayContent = generateSideBarContent({
+      const sidebarDisplayContent = generateSidebarDisplayContent({
         welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
       });
 
-      const subject = renderRoadmapPage({ sideBarDisplayContent });
+      const subject = renderRoadmapPage({ sidebarDisplayContent });
 
       expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
 
     it("renders registration card when SignUpToast is closed", async () => {
-      const sideBarDisplayContent = generateSideBarContent({
+      const sidebarDisplayContent = generateSidebarDisplayContent({
         guestNotRegisteredCard: generateRoadmapSidebarCard({
           contentMd: "not-registered-content",
         }),
@@ -898,7 +890,7 @@ describe("roadmap page", () => {
 
       const subject = renderPageWithAuth({
         alertIsVisible: true,
-        sideBarDisplayContent,
+        sidebarDisplayContent,
         isAuthenticated: IsAuthenticated.FALSE,
       });
 
@@ -915,7 +907,7 @@ describe("roadmap page", () => {
 
     // TODO: unskip me when async issues fixed
     xit("renders successful registration card when user is authenticated", async () => {
-      const sideBarDisplayContent = generateSideBarContent({
+      const sidebarDisplayContent = generateSidebarDisplayContent({
         guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
           contentMd: "successful-registration-content",
         }),
@@ -927,7 +919,7 @@ describe("roadmap page", () => {
 
       const subject = renderPageWithAuth({
         registrationAlertStatus: "SUCCESS",
-        sideBarDisplayContent,
+        sidebarDisplayContent,
       });
 
       await waitFor(() => {
@@ -944,7 +936,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const sideBarDisplayContent = generateSideBarContent({
+      const sidebarDisplayContent = generateSidebarDisplayContent({
         guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
           contentMd: "successful-registration-content",
         }),
@@ -956,7 +948,7 @@ describe("roadmap page", () => {
       const subject = renderPageWithAuth({
         userData,
         registrationAlertStatus: "SUCCESS",
-        sideBarDisplayContent,
+        sidebarDisplayContent,
       });
 
       await waitFor(() => {
@@ -972,7 +964,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const sideBarDisplayContent = generateSideBarContent({
+      const sidebarDisplayContent = generateSidebarDisplayContent({
         guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
           contentMd: "successful-registration-content",
           header: "successful-registration-header",
@@ -982,7 +974,7 @@ describe("roadmap page", () => {
 
       const subject = renderPageWithAuth({
         userData,
-        sideBarDisplayContent,
+        sidebarDisplayContent,
       });
 
       await waitFor(() => {

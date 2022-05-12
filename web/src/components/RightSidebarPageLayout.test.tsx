@@ -28,8 +28,8 @@ describe("<RightSidebarPageLayout />", () => {
       />
     );
 
-    expect(subject.getByTestId("rightSideBarPageLayout")).toHaveClass("grayRightGutter");
-    expect(subject.getByTestId("rightSideBarPageLayout")).not.toHaveClass("blueRightGutter");
+    expect(subject.getByTestId("rightSidebarPageLayout")).toHaveClass("grayRightGutter");
+    expect(subject.getByTestId("rightSidebarPageLayout")).not.toHaveClass("blueRightGutter");
   });
 
   it("renders with blue color", () => {
@@ -41,7 +41,7 @@ describe("<RightSidebarPageLayout />", () => {
       />
     );
 
-    expect(subject.getByTestId("rightSideBarPageLayout")).not.toHaveClass("grayRightGutter");
-    expect(subject.getByTestId("rightSideBarPageLayout")).toHaveClass("blueRightGutter");
+    expect(subject.getByTestId("rightSidebarPageLayout")).not.toHaveClass("grayRightGutter");
+    expect(subject.getByTestId("rightSidebarPageLayout")).toHaveClass("blueRightGutter");
   });
 });
