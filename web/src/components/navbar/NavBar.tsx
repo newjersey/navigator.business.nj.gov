@@ -9,7 +9,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 type Props = {
   landingPage?: boolean;
   task?: Task;
-  sideBarPageLayout?: boolean;
+  sidebarPageLayout?: boolean;
   operateReferences?: Record<string, OperateReference>;
 };
 
@@ -46,7 +46,7 @@ export const NavBar = (props: Props): ReactElement => {
           <NavBarMobile
             scrolled={scrolled}
             task={task}
-            sideBarPageLayout={props.sideBarPageLayout}
+            sidebarPageLayout={props.sidebarPageLayout}
             operateReferences={props.operateReferences}
           />
           <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />

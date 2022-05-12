@@ -4,7 +4,6 @@ import fs from "fs";
 import {
   loadDashboardDisplayContent,
   loadRoadmapDisplayContent,
-  loadRoadmapSidebarDisplayContent,
   loadTasksDisplayContent,
   loadUserDisplayContent,
 } from "./loadDisplayContent";
@@ -65,6 +64,16 @@ describe("loadDisplayContent", () => {
       mockedFs.readFileSync.mockReturnValue(roadmapContentMd);
       expect(loadRoadmapDisplayContent().contentMd).toEqual("### I am a header\n\nI am a description");
     });
+
+    it("returns sidebar card content from markdown", () => {
+      const welcomeCard = "### I am a header\n\nI am a description";
+
+      mockedFs.readFileSync.mockReturnValue(welcomeCard);
+
+      expect(loadRoadmapDisplayContent().sidebarDisplayContent.welcomeCard.contentMd).toEqual(
+        "### I am a header\n\nI am a description"
+      );
+    });
   });
 
   describe("loadDashboardDisplayContent", () => {
@@ -85,18 +94,6 @@ describe("loadDisplayContent", () => {
 
       mockedFs.readFileSync.mockReturnValue(introParagraph);
       expect(loadTasksDisplayContent().formationDisplayContent.introParagraph.contentMd).toEqual(
-        "### I am a header\n\nI am a description"
-      );
-    });
-  });
-
-  describe("loadRoadmapSidebarDisplayContent", () => {
-    it("returns task display content from markdown", () => {
-      const welcomeCard = "### I am a header\n\nI am a description";
-
-      mockedFs.readFileSync.mockReturnValue(welcomeCard);
-
-      expect(loadRoadmapSidebarDisplayContent().welcomeCard.contentMd).toEqual(
         "### I am a header\n\nI am a description"
       );
     });

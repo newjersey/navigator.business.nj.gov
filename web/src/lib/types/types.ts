@@ -428,6 +428,7 @@ export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
 
 export type RoadmapDisplayContent = {
   contentMd: string;
+  sidebarDisplayContent: SidebarDisplayContent;
 };
 
 export type DashboardDisplayContent = {
@@ -655,69 +656,35 @@ export type businessFormationTabsNames = "Name" | "Business" | "Contacts" | "Rev
 
 export type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
 
-export type RoadmapSideBarContent = {
-  welcomeCard: {
-    contentMd: string;
-    id: string;
-    header: string;
-    imgPath: string;
-    color: string;
-    shadowColor: string;
-  };
-  guestSuccessfullyRegisteredCard: {
-    contentMd: string;
-    id: string;
-    header: string;
-    imgPath: string;
-    color: string;
-    shadowColor: string;
-  };
-  guestNotRegisteredCard: {
-    contentMd: string;
-    id: string;
-    header: string;
-    imgPath: string;
-    color: string;
-    shadowColor: string;
-  };
+export type SidebarDisplayContent = {
+  welcomeCard: SidebarCardContent;
+  guestSuccessfullyRegisteredCard: SidebarCardContent;
+  guestNotRegisteredCard: SidebarCardContent;
 };
 
-const emptySideBarContent = {
-  welcomeCard: {
-    contentMd: "",
-    id: "",
-    header: "",
-    imgPath: "",
-    color: "",
-    shadowColor: "",
-  },
-  welcomeCardGpOrSpCard: {
-    contentMd: "",
-    id: "",
-    header: "",
-    imgPath: "",
-    color: "",
-    shadowColor: "",
-  },
-  guestSuccessfullyRegisteredCard: {
-    contentMd: "",
-    id: "",
-    header: "",
-    imgPath: "",
-    color: "",
-    shadowColor: "",
-  },
-  guestNotRegisteredCard: {
-    contentMd: "",
-    id: "",
-    header: "",
-    imgPath: "",
-    color: "",
-    shadowColor: "",
-  },
+type SidebarCardContent = {
+  contentMd: string;
+  id: string;
+  header: string;
+  imgPath: string;
+  color: string;
+  shadowColor: string;
 };
 
-export const createEmptySideBarDisplayContent = (): RoadmapSideBarContent => emptySideBarContent;
+const createEmptySidebarCardContent = () => ({
+  contentMd: "",
+  id: "",
+  header: "",
+  imgPath: "",
+  color: "",
+  shadowColor: "",
+});
+
+export const createEmptySidebarDisplayContent = (): SidebarDisplayContent => ({
+  welcomeCard: createEmptySidebarCardContent(),
+  guestSuccessfullyRegisteredCard: createEmptySidebarCardContent(),
+  guestNotRegisteredCard: createEmptySidebarCardContent(),
+});
 
 export type NaicsCodeObject = {
   SixDigitDescription?: string;

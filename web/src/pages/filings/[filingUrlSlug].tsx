@@ -47,7 +47,7 @@ const FilingPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.filing.name}`} />
       <PageSkeleton>
-        <NavBar sideBarPageLayout={true} operateReferences={props.operateReferences} />
+        <NavBar sidebarPageLayout={true} operateReferences={props.operateReferences} />
         <TaskSidebarPageLayout operateReferences={props.operateReferences}>
           <FilingElement filing={props.filing} dueDate={dueDate} />
         </TaskSidebarPageLayout>

@@ -15,9 +15,9 @@ import {
   NameAvailability,
   OperateReference,
   Roadmap,
-  RoadmapSideBarContent,
   SectionCompletion,
   SectionType,
+  SidebarDisplayContent,
   Step,
   Task,
   TaskLink,
@@ -401,7 +401,9 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
   };
 };
 
-export const generateSideBarContent = (overrides: Partial<RoadmapSideBarContent>): RoadmapSideBarContent => {
+export const generateSidebarDisplayContent = (
+  overrides: Partial<SidebarDisplayContent>
+): SidebarDisplayContent => {
   return {
     welcomeCard: {
       contentMd: `some-welcome-content-${randomInt()}`,

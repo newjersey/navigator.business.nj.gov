@@ -64,7 +64,7 @@ describe("<NavBar />", () => {
         setLargeScreen(true);
 
         const subject = render(
-          <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
+          <NavBar landingPage={true} task={undefined} sidebarPageLayout={false} operateReferences={{}} />
         );
         expect(subject.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
       });
@@ -75,7 +75,7 @@ describe("<NavBar />", () => {
         setLargeScreen(true);
 
         const subject = render(
-          <NavBar landingPage={true} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
+          <NavBar landingPage={true} task={undefined} sidebarPageLayout={false} operateReferences={{}} />
         );
 
         fireEvent.click(subject.getByText(Config.navigationDefaults.registerButton));
@@ -116,7 +116,7 @@ describe("<NavBar />", () => {
       setLargeScreen(true);
       return render(
         withAuth(
-          <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} operateReferences={{}} />,
+          <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
           { isAuthenticated: IsAuthenticated.TRUE }
         )
       );
@@ -168,7 +168,7 @@ describe("<NavBar />", () => {
       setLargeScreen(true);
       return render(
         withAuth(
-          <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} operateReferences={{}} />,
+          <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
           { isAuthenticated: IsAuthenticated.FALSE }
         )
       );
@@ -213,7 +213,7 @@ describe("<NavBar />", () => {
         const subject = render(
           withAuth(
             <WithStatefulUserData initialUserData={userData}>
-              <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} operateReferences={{}} />
+              <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />
             </WithStatefulUserData>,
             { user, isAuthenticated: IsAuthenticated.FALSE }
           )
@@ -248,7 +248,7 @@ describe("<NavBar />", () => {
       setLargeScreen(false);
       const subject = render(
         withAuth(
-          <NavBar landingPage={false} task={undefined} sideBarPageLayout={false} operateReferences={{}} />,
+          <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
           { isAuthenticated: IsAuthenticated.TRUE }
         )
       );
@@ -301,7 +301,7 @@ describe("<NavBar />", () => {
             <NavBar
               landingPage={false}
               task={generateTask({})}
-              sideBarPageLayout={true}
+              sidebarPageLayout={true}
               operateReferences={config?.includeOperateRef ? operateRef : undefined}
             />,
             { isAuthenticated }
@@ -362,7 +362,7 @@ describe("<NavBar />", () => {
           const subject = render(
             withAuth(
               <WithStatefulUserData initialUserData={userData}>
-                <NavBar landingPage={false} task={generateTask({})} sideBarPageLayout={true} />
+                <NavBar landingPage={false} task={generateTask({})} sidebarPageLayout={true} />
               </WithStatefulUserData>,
               { user, isAuthenticated: IsAuthenticated.FALSE }
             )

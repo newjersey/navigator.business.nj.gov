@@ -12,18 +12,9 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  loadRoadmapDisplayContent,
-  loadRoadmapSidebarDisplayContent,
-  loadUserDisplayContent,
-} from "@/lib/static/loadDisplayContent";
+import { loadRoadmapDisplayContent, loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import {
-  LoadDisplayContent,
-  OperateReference,
-  RoadmapDisplayContent,
-  RoadmapSideBarContent,
-} from "@/lib/types/types";
+import { LoadDisplayContent, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
@@ -35,7 +26,6 @@ interface Props {
   displayContent: RoadmapDisplayContent;
   profileDisplayContent: LoadDisplayContent;
   operateReferences: Record<string, OperateReference>;
-  sideBarDisplayContent: RoadmapSideBarContent;
 }
 
 const RoadmapPage = (props: Props): ReactElement => {
@@ -149,7 +139,9 @@ const RoadmapPage = (props: Props): ReactElement => {
           <RightSidebarPageLayout
             color="blue"
             mainContent={renderRoadmap}
-            sidebarContent={<RoadmapSidebarList sideBarDisplayContent={props.sideBarDisplayContent} />}
+            sidebarContent={
+              <RoadmapSidebarList sidebarDisplayContent={props.displayContent.sidebarDisplayContent} />
+            }
           />
         )}
         {successAlert && (
@@ -177,7 +169,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       displayContent: loadRoadmapDisplayContent(),
       profileDisplayContent: loadUserDisplayContent(),
       operateReferences: loadOperateReferences(),
-      sideBarDisplayContent: loadRoadmapSidebarDisplayContent(),
     },
   };
 };

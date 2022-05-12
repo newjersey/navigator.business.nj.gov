@@ -11,7 +11,7 @@ import {
   profileDisplayFields,
   RadioFieldContent,
   RoadmapDisplayContent,
-  RoadmapSideBarContent,
+  SidebarDisplayContent,
   startFlowDisplayFields,
   StartingFlowContent,
   TasksDisplayContent,
@@ -187,7 +187,16 @@ export const loadUserDisplayContent = (): LoadDisplayContent => {
   return { OWNING: owningFlowContent, STARTING: startingFlowContent, PROFILE: profileContent };
 };
 
-export const loadRoadmapSidebarDisplayContent = (): RoadmapSideBarContent => {
+export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
+  const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
+
+  return {
+    contentMd: getMarkdown(roadmapContents).content,
+    sidebarDisplayContent: loadSidebarDisplayContent(),
+  };
+};
+
+const loadSidebarDisplayContent = (): SidebarDisplayContent => {
   const loadFile = (filename: string): string =>
     fs.readFileSync(path.join(displayContentDir, "roadmap-sidebar-cards", filename), "utf8");
 
@@ -209,14 +218,6 @@ export const loadRoadmapSidebarDisplayContent = (): RoadmapSideBarContent => {
       contentMd: guestNotRegisteredContent.content,
       ...(guestNotRegisteredContent.grayMatter as RoadmapCardGrayMatter),
     },
-  };
-};
-
-export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
-  const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
-
-  return {
-    contentMd: getMarkdown(roadmapContents).content,
   };
 };
 
