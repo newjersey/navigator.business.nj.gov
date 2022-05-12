@@ -5,148 +5,148 @@ import React from "react";
 describe("Button", () => {
   describe("Styles", () => {
     it("primary displays correctly", () => {
-      const subject = render(<Button style="primary">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="primary">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("secondary displays correctly", () => {
-      const subject = render(<Button style="secondary">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="secondary">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("tertiary displays correctly", () => {
-      const subject = render(<Button style="tertiary">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="tertiary">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("primary-big displays correctly", () => {
-      const subject = render(<Button style="primary-big">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="primary-big">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("secondary-big displays correctly", () => {
-      const subject = render(<Button style="secondary-big">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="secondary-big">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("secondary-input-field-height displays correctly", () => {
-      const subject = render(<Button style="secondary-input-field-height">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="secondary-input-field-height">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("primary-input-field-height displays correctly", () => {
-      const subject = render(<Button style="primary-input-field-height">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="primary-input-field-height">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("narrow-light displays correctly", () => {
-      const subject = render(<Button style="narrow-light">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="narrow-light">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("accent-cool-darker-big displays correctly", () => {
-      const subject = render(<Button style="accent-cool-darker-big">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="accent-cool-darker-big">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("accent-cooler displays correctly", () => {
-      const subject = render(<Button style="accent-cooler">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="accent-cooler">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
 
     it("info displays correctly", () => {
-      const subject = render(<Button style="info">Test Button</Button>).baseElement;
-      expect(subject).toMatchSnapshot();
+      const view = render(<Button style="info">Test Button</Button>).baseElement;
+      expect(view).toMatchSnapshot();
     });
   });
 
   it("submit button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button typeSubmit style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("loading button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button loading style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("with underline button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button underline style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("with textBold button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button textBold style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("with noRightMargin button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button noRightMargin style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("with smallText button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button smallText style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("with dataTestid displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button dataTestid="test-button-1" style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("with widthAutoOnMobile button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button widthAutoOnMobile style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("with heightAutoOnMobile button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button heightAutoOnMobile style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it("with intercomButton button displays correctly", () => {
-    const subject = render(
+    const view = render(
       <Button intercomButton style="primary">
         Test Button
       </Button>
     ).baseElement;
-    expect(subject).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 });

@@ -11,7 +11,6 @@ import {
 } from "@/pages/_app";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
-import { RenderResult } from "@testing-library/react";
 import os from "os";
 import React, { Dispatch, ReactElement, SetStateAction } from "react";
 
@@ -135,24 +134,6 @@ export const getPathSeparator = (): string => {
   }
 
   return "/";
-};
-
-export const getByTextAcrossElements = (subject: RenderResult, text: string): HTMLElement => {
-  return subject.getByText((content, node) => {
-    if (!node) throw "html node does not exist";
-    const hasText = (node: Element) => node.textContent === text;
-    const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as HTMLElement));
-    return hasText(node) && childrenDontHaveText;
-  });
-};
-
-export const queryByTextAcrossElements = (subject: RenderResult, text: string): HTMLElement | null => {
-  return subject.queryByText((content, node) => {
-    if (!node) throw "html node does not exist";
-    const hasText = (node: Element) => node.textContent === text;
-    const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as HTMLElement));
-    return hasText(node) && childrenDontHaveText;
-  });
 };
 
 export const markdownToText = (text: string): string => {

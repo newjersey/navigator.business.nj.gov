@@ -7,14 +7,14 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
-const renderMiniRoadMap = (taskId: string): RenderResult => {
-  return render(<MiniRoadmap activeTaskId={taskId} />);
+const renderMiniRoadMap = (taskId: string) => {
+  render(<MiniRoadmap activeTaskId={taskId} />);
 };
 
 describe("<MiniRoadmap />", () => {
@@ -36,25 +36,25 @@ describe("<MiniRoadmap />", () => {
 
   it("expands the step that you are in by default", () => {
     useMockUserData({});
-    const subject = renderMiniRoadMap("task2");
-    expect(subject.queryByText("task2")).toBeInTheDocument();
-    expect(subject.queryByText("task1")).not.toBeInTheDocument();
+    renderMiniRoadMap("task2");
+    expect(screen.getByText("task2")).toBeInTheDocument();
+    expect(screen.queryByText("task1")).not.toBeInTheDocument();
   });
 
   it("expands another step when clicked, keeping your step open", () => {
     useMockUserData({});
-    const subject = renderMiniRoadMap("task2");
-    fireEvent.click(subject.getByText("step1"));
-    expect(subject.queryByText("task2")).toBeInTheDocument();
-    expect(subject.queryByText("task1")).toBeInTheDocument();
+    renderMiniRoadMap("task2");
+    fireEvent.click(screen.getByText("step1"));
+    expect(screen.getByText("task2")).toBeInTheDocument();
+    expect(screen.getByText("task1")).toBeInTheDocument();
   });
 
   it("closes an open step when clicked", () => {
     useMockUserData({});
-    const subject = renderMiniRoadMap("task2");
-    fireEvent.click(subject.getByText("step2"));
-    expect(subject.queryByText("task2")).not.toBeInTheDocument();
-    expect(subject.queryByText("task1")).not.toBeInTheDocument();
+    renderMiniRoadMap("task2");
+    fireEvent.click(screen.getByText("step2"));
+    expect(screen.queryByText("task2")).not.toBeInTheDocument();
+    expect(screen.queryByText("task1")).not.toBeInTheDocument();
   });
 
   it("displays each step under associated section", () => {
@@ -73,16 +73,16 @@ describe("<MiniRoadmap />", () => {
       ],
     });
 
-    const subject = renderMiniRoadMap("task1");
+    renderMiniRoadMap("task1");
 
-    const sectionPlan = subject.getByTestId("section-plan");
+    const sectionPlan = screen.getByTestId("section-plan");
 
     expect(within(sectionPlan).getByText("step1")).toBeInTheDocument();
     expect(within(sectionPlan).getByText("step3")).toBeInTheDocument();
     expect(within(sectionPlan).queryByText("step2")).not.toBeInTheDocument();
     expect(within(sectionPlan).queryByText("step4")).not.toBeInTheDocument();
 
-    const sectionStart = subject.getByTestId("section-start");
+    const sectionStart = screen.getByTestId("section-start");
 
     expect(within(sectionStart).queryByText("step1")).not.toBeInTheDocument();
     expect(within(sectionStart).queryByText("step3")).not.toBeInTheDocument();
@@ -104,18 +104,18 @@ describe("<MiniRoadmap />", () => {
       }),
     });
 
-    const subject = renderMiniRoadMap("task3");
+    renderMiniRoadMap("task3");
 
-    const sectionStart = subject.getByTestId("section-start");
-    const sectionPlan = subject.getByTestId("section-plan");
+    const sectionStart = screen.getByTestId("section-start");
+    const sectionPlan = screen.getByTestId("section-plan");
 
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  const renderStatefulMiniRoadMap = (taskId: string, userData = generateUserData({})): RenderResult => {
+  const renderStatefulMiniRoadMap = (taskId: string, userData = generateUserData({})) => {
     setupStatefulUserDataContext();
-    return render(
+    render(
       <WithStatefulUserData initialUserData={userData}>
         <MiniRoadmap activeTaskId={taskId} />;
       </WithStatefulUserData>
@@ -148,40 +148,40 @@ describe("<MiniRoadmap />", () => {
       });
     });
 
-    it("display open step based on userData preferences", async () => {
+    it("display open step based on userData preferences", () => {
       useMockUserData(userData);
-      const subject = renderMiniRoadMap("task1");
-      expect(subject.getByText("task2")).toBeInTheDocument();
+      renderMiniRoadMap("task1");
+      expect(screen.getByText("task2")).toBeInTheDocument();
     });
 
-    it("display closed step based on userData preferences", async () => {
+    it("display closed step based on userData preferences", () => {
       useMockUserData(userData);
-      const subject = renderMiniRoadMap("task2");
-      expect(subject.queryByText("task1")).not.toBeInTheDocument();
+      renderMiniRoadMap("task2");
+      expect(screen.queryByText("task1")).not.toBeInTheDocument();
     });
 
     it("adds step to userData openSteps when step is active", async () => {
-      const subject = renderStatefulMiniRoadMap("task1", userData);
-      expect(subject.getByText("task1")).toBeInTheDocument();
+      renderStatefulMiniRoadMap("task1", userData);
+      expect(screen.getByText("task1")).toBeInTheDocument();
       await waitFor(() =>
         expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]))
       );
     });
 
     it("adds step to userData openSteps when step is clicked", async () => {
-      const subject = renderStatefulMiniRoadMap("task2", userData);
-      expect(subject.queryByText("task1")).not.toBeInTheDocument();
-      fireEvent.click(subject.getByText("step1"));
-      expect(subject.getByText("task1")).toBeInTheDocument();
-      expect(subject.getByText("task2")).toBeInTheDocument();
+      renderStatefulMiniRoadMap("task2", userData);
+      expect(screen.queryByText("task1")).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText("step1"));
+      expect(screen.getByText("task1")).toBeInTheDocument();
+      expect(screen.getByText("task2")).toBeInTheDocument();
       await waitFor(() =>
         expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]))
       );
     });
     it("removes active step from userData openSteps when active step is clicked", async () => {
-      const subject = renderStatefulMiniRoadMap("task1", userData);
-      fireEvent.click(subject.getByText("step1"));
-      expect(subject.queryByText("task1")).not.toBeInTheDocument();
+      renderStatefulMiniRoadMap("task1", userData);
+      fireEvent.click(screen.getByText("step1"));
+      expect(screen.queryByText("task1")).not.toBeInTheDocument();
       await waitFor(() =>
         expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([2]))
       );

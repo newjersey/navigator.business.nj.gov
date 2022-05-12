@@ -31,7 +31,7 @@ import {
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import React from "react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -48,7 +48,6 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   postGetAnnualFilings: jest.fn(),
 }));
 describe("profile", () => {
-  let subject: RenderResult;
   let setModalIsVisible: jest.Mock;
 
   beforeEach(() => {
@@ -70,12 +69,12 @@ describe("profile", () => {
     displayContent?: LoadDisplayContent;
     userData?: UserData;
     isAuthenticated?: IsAuthenticated;
-  }): RenderResult => {
+  }) => {
     const genericTown =
       userData && userData.profileData.municipality
         ? userData.profileData.municipality
         : generateMunicipality({ displayName: "GenericTown" });
-    return render(
+    render(
       withAuthAlert(
         <WithStatefulUserData
           initialUserData={
@@ -94,27 +93,27 @@ describe("profile", () => {
   };
 
   it("shows loading page if page has not loaded yet", () => {
-    const subject = render(
+    render(
       <WithStatefulUserData initialUserData={undefined}>
         <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
       </WithStatefulUserData>
     );
 
-    expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText(Config.profileDefaults.pageTitle)).not.toBeInTheDocument();
-    expect(subject.queryByText(Config.profileDefaults.pageTitle)).not.toBeInTheDocument();
+    expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
+    expect(screen.queryByText(Config.profileDefaults.pageTitle)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.profileDefaults.pageTitle)).not.toBeInTheDocument();
   });
 
   describe("guest mode", () => {
+    let initialUserData: UserData;
     describe("when prospective business owner", () => {
       beforeEach(() => {
-        const initialUserData = generateUserData({
+        initialUserData = generateUserData({
           profileData: generateProfileData({
             hasExistingBusiness: false,
             legalStructureId: "limited-liability-company",
           }),
         });
-        subject = renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
       });
 
       opensModalWhenEditingNonGuestModeProfileFields();
@@ -122,49 +121,54 @@ describe("profile", () => {
 
     describe("when has existing business", () => {
       beforeEach(() => {
-        const initialUserData = generateUserData({
+        initialUserData = generateUserData({
           profileData: generateProfileData({ hasExistingBusiness: true }),
         });
-        subject = renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
       });
 
       opensModalWhenEditingNonGuestModeProfileFields();
 
-      it("opens registration modal when user tries to change Tax PIN", async () => {
+      it("opens registration modal when user tries to change Tax PIN", () => {
+        renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("numbers");
-        fireEvent.change(subject.getByLabelText("Tax pin"), { target: { value: "123456789" } });
+        fireEvent.change(screen.getByLabelText("Tax pin"), { target: { value: "123456789" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
     });
 
     function opensModalWhenEditingNonGuestModeProfileFields() {
       it("user is able to edit name and save", async () => {
+        renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         fillText("Business name", "Cool Computers");
         clickSave();
         await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalled());
       });
 
-      it("opens registration modal when user tries to change EIN", async () => {
+      it("opens registration modal when user tries to change EIN", () => {
+        renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("numbers");
-        fireEvent.change(subject.getByLabelText("Employer id"), { target: { value: "123456789" } });
+        fireEvent.change(screen.getByLabelText("Employer id"), { target: { value: "123456789" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
 
-      it("opens registration modal when user tries to change entity ID", async () => {
+      it("opens registration modal when user tries to change entity ID", () => {
+        renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("numbers");
-        fireEvent.change(subject.getByLabelText("Entity id"), { target: { value: "123456789" } });
+        fireEvent.change(screen.getByLabelText("Entity id"), { target: { value: "123456789" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
 
-      it("opens registration modal when user tries to change NJ Tax ID", async () => {
+      it("opens registration modal when user tries to change NJ Tax ID", () => {
+        renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("numbers");
-        fireEvent.change(subject.getByLabelText("Tax id"), { target: { value: "123456789" } });
+        fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
 
-      it("opens registration modal when user tries to change Notes", async () => {
+      it("opens registration modal when user tries to change Notes", () => {
+        renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("notes");
-        fireEvent.change(subject.getByLabelText("Notes"), { target: { value: "some note" } });
+        fireEvent.change(screen.getByLabelText("Notes"), { target: { value: "some note" } });
         expect(setModalIsVisible).toHaveBeenCalledWith(true);
       });
     }
@@ -172,7 +176,7 @@ describe("profile", () => {
 
   describe("starting new business", () => {
     it("user is able to save and is redirected to roadmap", async () => {
-      subject = renderPage({});
+      renderPage({});
       fillText("Business name", "Cool Computers");
       clickSave();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap?success=true"));
@@ -180,7 +184,7 @@ describe("profile", () => {
 
     it("user is able to save and is redirected back to Business Formation", async () => {
       useMockRouter({ query: { path: "businessFormation" } });
-      subject = renderPage({});
+      renderPage({});
       fillText("Business name", "Cool Computers");
       clickSave();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/form-business-entity"));
@@ -189,30 +193,30 @@ describe("profile", () => {
     it("user is able to go back to Business Formation", async () => {
       useMockRouter({ query: { path: "businessFormation" } });
 
-      subject = renderPage({});
+      renderPage({});
       clickBack();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/form-business-entity"));
     });
 
-    it("prevents user from going back to roadmap if there are unsaved changes", async () => {
-      subject = renderPage({});
+    it("prevents user from going back to roadmap if there are unsaved changes", () => {
+      renderPage({});
       fillText("Business name", "Cool Computers");
       clickBack();
-      expect(subject.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
     });
 
-    it("returns user to profile page from un-saved changes modal", async () => {
-      subject = renderPage({});
+    it("returns user to profile page from un-saved changes modal", () => {
+      renderPage({});
       fillText("Business name", "Cool Computers");
       clickBack();
-      fireEvent.click(subject.getByText(Config.profileDefaults.escapeModalEscape));
+      fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
       fillText("Business name", "Cool Computers2");
     });
 
     it("updates the user data on save", async () => {
       const initialUserData = createEmptyUserData(generateUser({}));
       const newark = generateMunicipality({ displayName: "Newark" });
-      subject = renderPage({ userData: initialUserData, municipalities: [newark] });
+      renderPage({ userData: initialUserData, municipalities: [newark] });
       fillText("Business name", "Cool Computers");
       selectByText("Location", newark.displayName);
       selectByValue("Industry", "e-commerce");
@@ -227,24 +231,24 @@ describe("profile", () => {
       clickSave();
 
       await waitFor(() => {
-        expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
-        expect(currentUserData()).toEqual({
-          ...initialUserData,
-          formProgress: "COMPLETED",
-          profileData: {
-            ...initialUserData.profileData,
-            businessName: "Cool Computers",
-            industryId: "e-commerce",
-            sectorId: "retail-trade-and-ecommerce",
-            homeBasedBusiness: true,
-            legalStructureId: "c-corporation",
-            municipality: newark,
-            taxId: "023456790",
-            entityId: "0234567890",
-            employerId: "023456780",
-            notes: "whats appppppp",
-          },
-        });
+        expect(screen.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+      });
+      expect(currentUserData()).toEqual({
+        ...initialUserData,
+        formProgress: "COMPLETED",
+        profileData: {
+          ...initialUserData.profileData,
+          businessName: "Cool Computers",
+          industryId: "e-commerce",
+          sectorId: "retail-trade-and-ecommerce",
+          homeBasedBusiness: true,
+          legalStructureId: "c-corporation",
+          municipality: newark,
+          taxId: "023456790",
+          entityId: "0234567890",
+          employerId: "023456780",
+          notes: "whats appppppp",
+        },
       });
     });
 
@@ -254,133 +258,131 @@ describe("profile", () => {
         Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
       );
       const initialUserData = generateUserData({ taxFilingData: taxData });
-      subject = renderPage({ userData: initialUserData });
+      renderPage({ userData: initialUserData });
       clickSave();
 
       await waitFor(() => {
-        expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
-        expect(currentUserData()).toEqual({
-          ...initialUserData,
-          taxFilingData: { ...taxData, filings: [] },
-        });
+        expect(screen.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+      });
+      expect(currentUserData()).toEqual({
+        ...initialUserData,
+        taxFilingData: { ...taxData, filings: [] },
       });
     });
 
     describe("disables fields when formation getFiling success", () => {
       describe("starting a business", () => {
-        beforeEach(() => {
-          subject = renderPage({
-            userData: generateUserData({
-              formationData: generateFormationData({
-                getFilingResponse: generateGetFilingResponse({
-                  success: true,
-                }),
-              }),
-              profileData: generateProfileData({
-                hasExistingBusiness: false,
-                legalStructureId: "limited-liability-company",
-                entityId: "some-id",
-                businessName: "some-name",
+        const userData = {
+          userData: generateUserData({
+            formationData: generateFormationData({
+              getFilingResponse: generateGetFilingResponse({
+                success: true,
               }),
             }),
-          });
-        });
-
+            profileData: generateProfileData({
+              hasExistingBusiness: false,
+              legalStructureId: "limited-liability-company",
+              entityId: "some-id",
+              businessName: "some-name",
+            }),
+          }),
+        };
         it("disables businessName", () => {
-          expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
+          renderPage(userData);
+          expect(screen.getByLabelText("Business name")).toHaveAttribute("disabled");
         });
         it("disables entityID", () => {
+          renderPage(userData);
           chooseTab("numbers");
-          expect(subject.getByLabelText("Entity id")).toHaveAttribute("disabled");
+          expect(screen.getByLabelText("Entity id")).toHaveAttribute("disabled");
         });
       });
 
       describe("owning a business", () => {
-        beforeEach(() => {
-          subject = renderPage({
-            userData: generateUserData({
-              formationData: generateFormationData({
-                getFilingResponse: generateGetFilingResponse({
-                  success: true,
-                }),
-              }),
-              profileData: generateProfileData({
-                hasExistingBusiness: true,
-                legalStructureId: "limited-liability-company",
-                entityId: "some-id",
-                businessName: "some-name",
+        const userData = {
+          userData: generateUserData({
+            formationData: generateFormationData({
+              getFilingResponse: generateGetFilingResponse({
+                success: true,
               }),
             }),
-          });
-        });
+            profileData: generateProfileData({
+              hasExistingBusiness: true,
+              legalStructureId: "limited-liability-company",
+              entityId: "some-id",
+              businessName: "some-name",
+            }),
+          }),
+        };
 
         it("disables businessName", () => {
-          expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
+          renderPage(userData);
+          expect(screen.getByLabelText("Business name")).toHaveAttribute("disabled");
         });
         it("disables entityID", () => {
+          renderPage(userData);
           chooseTab("numbers");
-          expect(subject.getByLabelText("Entity id")).toHaveAttribute("disabled");
+          expect(screen.getByLabelText("Entity id")).toHaveAttribute("disabled");
         });
 
         it("disables dateOfFormation", () => {
+          renderPage(userData);
           chooseTab("numbers");
-          expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
+          expect(screen.getByLabelText("Date of formation")).toHaveAttribute("disabled");
         });
       });
     });
 
     it("prevents user from saving if they have not selected a location", async () => {
       const newark = generateMunicipality({ displayName: "Newark" });
-      subject = renderPage({ municipalities: [newark] });
+      renderPage({ municipalities: [newark] });
       fillText("Location", "");
-      fireEvent.blur(subject.getByLabelText("Location"));
+      fireEvent.blur(screen.getByLabelText("Location"));
       clickSave();
-      expect(
-        subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
-      ).toBeInTheDocument();
-      await waitFor(() => expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument());
+      expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
       selectByText("Location", newark.displayName);
       await waitFor(() =>
         expect(
-          subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
+          screen.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
         ).not.toBeInTheDocument()
       );
     });
 
-    it("entity-id field existing depends on legal structure", async () => {
+    it("entity-id field existing depends on legal structure", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           legalStructureId: "general-partnership",
         }),
       });
-      subject = renderPage({ userData });
+      renderPage({ userData });
       chooseTab("numbers");
-      expect(subject.queryByLabelText("Entity id")).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
     });
 
     it("prevents user from saving if they partially entered Employer Id", async () => {
-      subject = renderPage({});
+      renderPage({});
       chooseTab("numbers");
       fillText("Employer id", "123490");
-      fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
+      fireEvent.blur(screen.queryByLabelText("Employer id") as HTMLElement);
       clickSave();
       await waitFor(() => {
         expect(
-          subject.queryByText(
+          screen.getByText(
             templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" })
           )
         ).toBeInTheDocument();
-        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 
     it("user is able to go back to roadmap", async () => {
-      subject = renderPage({});
+      renderPage({});
       clickBack();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
     });
 
-    it("prefills form from existing user data", async () => {
+    it("prefills form from existing user data", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessName: "Applebees",
@@ -396,7 +398,7 @@ describe("profile", () => {
         }),
       });
 
-      subject = renderPage({ userData });
+      renderPage({ userData });
       expect(getBusinessNameValue()).toEqual("Applebees");
 
       expect(getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);
@@ -416,7 +418,7 @@ describe("profile", () => {
       const profileData = generateProfileData({});
       const mockSetRoadmap = jest.fn();
 
-      subject = render(
+      render(
         withRoadmap(
           <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
             <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
@@ -434,10 +436,10 @@ describe("profile", () => {
     it("returns user to roadmap from un-saved changes modal", async () => {
       const initialUserData = createEmptyUserData(generateUser({}));
       const newark = generateMunicipality({ displayName: "Newark" });
-      subject = renderPage({ userData: initialUserData, municipalities: [newark] });
+      renderPage({ userData: initialUserData, municipalities: [newark] });
       selectByText("Location", newark.displayName);
       clickBack();
-      fireEvent.click(subject.getByText(Config.profileDefaults.escapeModalReturn));
+      fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
       await waitFor(() => expect(() => currentUserData()).toThrowError());
     });
@@ -447,7 +449,7 @@ describe("profile", () => {
     it("user is able to save and is redirected to dashboard", async () => {
       const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
 
-      subject = renderPage({
+      renderPage({
         userData: userData,
       });
 
@@ -456,26 +458,26 @@ describe("profile", () => {
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true"));
     });
 
-    it("prevents user from going back to dashboard if there are unsaved changes", async () => {
+    it("prevents user from going back to dashboard if there are unsaved changes", () => {
       const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
 
-      subject = renderPage({
+      renderPage({
         userData: userData,
       });
       fillText("Business name", "Cool Computers");
       clickBack();
-      expect(subject.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
     });
 
-    it("returns user to profile page from un-saved changes modal", async () => {
+    it("returns user to profile page from un-saved changes modal", () => {
       const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
 
-      subject = renderPage({
+      renderPage({
         userData: userData,
       });
       fillText("Business name", "Cool Computers");
       clickBack();
-      fireEvent.click(subject.getByText(Config.profileDefaults.escapeModalEscape));
+      fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
       fillText("Business name", "Cool Computers2");
     });
 
@@ -485,7 +487,7 @@ describe("profile", () => {
       });
       const newark = generateMunicipality({ displayName: "Newark" });
 
-      subject = renderPage({ userData: userData, municipalities: [newark] });
+      renderPage({ userData: userData, municipalities: [newark] });
 
       fillText("Business name", "Cool Computers");
       selectByValue("Sector", "clean-energy");
@@ -505,30 +507,30 @@ describe("profile", () => {
       clickSave();
 
       await waitFor(() => {
-        expect(subject.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
-        expect(currentUserData()).toEqual({
-          ...userData,
-          formProgress: "COMPLETED",
-          profileData: {
-            ...userData.profileData,
-            businessName: "Cool Computers",
-            homeBasedBusiness: true,
-            existingEmployees: "123",
-            ownershipTypeIds: ["veteran-owned", "woman-owned"],
-            municipality: newark,
-            dateOfFormation,
-            taxId: "023456790",
-            entityId: "0234567890",
-            employerId: "023456780",
-            notes: "whats appppppp",
-            taxPin: "6666",
-            sectorId: "clean-energy",
-          },
-        });
+        expect(screen.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+      });
+      expect(currentUserData()).toEqual({
+        ...userData,
+        formProgress: "COMPLETED",
+        profileData: {
+          ...userData.profileData,
+          businessName: "Cool Computers",
+          homeBasedBusiness: true,
+          existingEmployees: "123",
+          ownershipTypeIds: ["veteran-owned", "woman-owned"],
+          municipality: newark,
+          dateOfFormation,
+          taxId: "023456790",
+          entityId: "0234567890",
+          employerId: "023456780",
+          notes: "whats appppppp",
+          taxPin: "6666",
+          sectorId: "clean-energy",
+        },
       });
     });
 
-    it("prefills form from existing user data", async () => {
+    it("prefills form from existing user data", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: true,
@@ -552,12 +554,12 @@ describe("profile", () => {
       const veteran = LookupOwnershipTypeById("veteran-owned").name;
       const woman = LookupOwnershipTypeById("woman-owned").name;
 
-      subject = renderPage({ userData });
+      renderPage({ userData });
 
       expect(getBusinessNameValue()).toEqual("Applebees");
       expect(getMunicipalityValue()).toEqual("Newark");
       expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
-      expect(subject.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
+      expect(screen.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
       expect(getRadioButtonFromFormControlLabel("home-based-business-false")).toBeChecked();
       expect(getExistingEmployeesValue()).toEqual("123");
       chooseTab("numbers");
@@ -574,23 +576,23 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({ hasExistingBusiness: true }),
       });
-      subject = renderPage({ userData: userData });
+      renderPage({ userData: userData });
       chooseTab("numbers");
 
       fillText("Tax pin", "");
-      fireEvent.blur(subject.getByLabelText("Tax pin"));
-      expect(subject.queryByText(Config.profileDefaults.taxPinErrorText)).not.toBeInTheDocument();
+      fireEvent.blur(screen.getByLabelText("Tax pin"));
+      expect(screen.queryByText(Config.profileDefaults.taxPinErrorText)).not.toBeInTheDocument();
 
       fillText("Tax pin", "123");
-      fireEvent.blur(subject.getByLabelText("Tax pin"));
+      fireEvent.blur(screen.getByLabelText("Tax pin"));
       await waitFor(() => {
-        expect(subject.queryByText(Config.profileDefaults.taxPinErrorText)).toBeInTheDocument();
+        expect(screen.getByText(Config.profileDefaults.taxPinErrorText)).toBeInTheDocument();
       });
 
       fillText("Tax pin", "1234");
-      fireEvent.blur(subject.getByLabelText("Tax pin"));
+      fireEvent.blur(screen.getByLabelText("Tax pin"));
       await waitFor(() => {
-        expect(subject.queryByText(Config.profileDefaults.taxPinErrorText)).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.profileDefaults.taxPinErrorText)).not.toBeInTheDocument();
       });
     });
 
@@ -598,41 +600,41 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({ hasExistingBusiness: true }),
       });
-      subject = renderPage({ userData: userData });
+      renderPage({ userData: userData });
       chooseTab("numbers");
 
       fillText("Employer id", "123490");
-      fireEvent.blur(subject.queryByLabelText("Employer id") as HTMLElement);
+      fireEvent.blur(screen.queryByLabelText("Employer id") as HTMLElement);
       clickSave();
       await waitFor(() => {
         expect(
-          subject.queryByText(
+          screen.getByText(
             templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "9" })
           )
         ).toBeInTheDocument();
-        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 
     it("prevents user from saving if sector is not selected", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({ hasExistingBusiness: true, sectorId: "" }),
       });
-      subject = renderPage({ userData: userData });
-      fireEvent.blur(subject.queryByLabelText("Sector") as HTMLElement);
+      renderPage({ userData: userData });
+      fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
 
       clickSave();
       await waitFor(() => {
-        expect(subject.queryByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
-        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+        expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
       });
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 
     it("user is able to go back to dashboard", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({ hasExistingBusiness: true }),
       });
-      subject = renderPage({ userData: userData });
+      renderPage({ userData: userData });
 
       clickBack();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard"));
@@ -642,7 +644,7 @@ describe("profile", () => {
       const profileData = generateProfileData({ hasExistingBusiness: true });
       const mockSetRoadmap = jest.fn();
 
-      subject = render(
+      render(
         withRoadmap(
           <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
             <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
@@ -655,8 +657,8 @@ describe("profile", () => {
       clickSave();
       await waitFor(() => {
         expect(currentUserData());
-        expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
       });
+      expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
     });
 
     it("returns user to dashboard from un-saved changes modal", async () => {
@@ -665,14 +667,14 @@ describe("profile", () => {
       });
 
       const newark = generateMunicipality({ displayName: "Newark" });
-      subject = renderPage({ userData: userData, municipalities: [newark] });
+      renderPage({ userData: userData, municipalities: [newark] });
       selectByText("Location", newark.displayName);
       clickBack();
-      fireEvent.click(subject.getByText(Config.profileDefaults.escapeModalReturn));
+      fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
       await waitFor(() => {
         expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard");
-        expect(() => currentUserData()).toThrowError();
       });
+      expect(() => currentUserData()).toThrowError();
     });
   });
 
@@ -686,8 +688,8 @@ describe("profile", () => {
       }),
     });
 
-    subject = renderPage({ userData });
-    expect(subject.getByLabelText("Business name")).toHaveAttribute("disabled");
+    renderPage({ userData });
+    expect(screen.getByLabelText("Business name")).toHaveAttribute("disabled");
   });
 
   it("disables legal structure field if formation getFiling success", () => {
@@ -700,8 +702,8 @@ describe("profile", () => {
       }),
     });
 
-    subject = renderPage({ userData });
-    expect((subject.queryByTestId("legal-structure") as HTMLInputElement)?.disabled).toEqual(true);
+    renderPage({ userData });
+    expect((screen.queryByTestId("legal-structure") as HTMLInputElement)?.disabled).toEqual(true);
   });
 
   describe("Document Section", () => {
@@ -713,9 +715,9 @@ describe("profile", () => {
             legalStructureId: "limited-liability-company",
           }),
         });
-        subject = renderPage({ userData });
+        renderPage({ userData });
         chooseTab("documents");
-        expect(subject.getByTestId("profileContent-documents")).toBeInTheDocument();
+        expect(screen.getByTestId("profileContent-documents")).toBeInTheDocument();
       });
 
       it("disables document section if user's legal structure does not require public filing", () => {
@@ -725,9 +727,9 @@ describe("profile", () => {
             legalStructureId: "sole-proprietorship",
           }),
         });
-        subject = renderPage({ userData });
-        expect(subject.queryByTestId("documents")).not.toBeInTheDocument();
-        expect(subject.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
+        renderPage({ userData });
+        expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
       });
     });
 
@@ -741,9 +743,9 @@ describe("profile", () => {
             hasExistingBusiness: true,
           }),
         });
-        subject = renderPage({ userData });
+        renderPage({ userData });
         chooseTab("documents");
-        expect(subject.getByTestId("profileContent-documents")).toBeInTheDocument();
+        expect(screen.getByTestId("profileContent-documents")).toBeInTheDocument();
       });
 
       it("disables document section if user has not completed business formation", () => {
@@ -755,9 +757,9 @@ describe("profile", () => {
             hasExistingBusiness: true,
           }),
         });
-        subject = renderPage({ userData });
-        expect(subject.queryByTestId("documents")).not.toBeInTheDocument();
-        expect(subject.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
+        renderPage({ userData });
+        expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
       });
     });
 
@@ -773,7 +775,7 @@ describe("profile", () => {
           documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
         }),
       });
-      subject = renderPage({
+      renderPage({
         userData,
         displayContent: {
           ...content,
@@ -781,7 +783,7 @@ describe("profile", () => {
         },
       });
       chooseTab("documents");
-      expect(subject.getByText("test12345")).toBeInTheDocument();
+      expect(screen.getByText("test12345")).toBeInTheDocument();
     });
 
     it("shows document links", () => {
@@ -796,7 +798,7 @@ describe("profile", () => {
           documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
         }),
       });
-      subject = renderPage({
+      renderPage({
         userData,
         displayContent: {
           ...content,
@@ -804,10 +806,10 @@ describe("profile", () => {
         },
       });
       chooseTab("documents");
-      expect(subject.queryByText("test12345")).not.toBeInTheDocument();
-      expect(subject.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
-      expect(subject.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
-      expect(subject.getByText(Config.profileDefaults.standingDocFileTitle)).toBeInTheDocument();
+      expect(screen.queryByText("test12345")).not.toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.standingDocFileTitle)).toBeInTheDocument();
     });
 
     it("uses links from useDocuments hook", () => {
@@ -826,20 +828,20 @@ describe("profile", () => {
           documents: { certifiedDoc: "pz.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
         }),
       });
-      subject = renderPage({
+      renderPage({
         userData,
       });
       chooseTab("documents");
 
-      expect(subject.getByText(Config.profileDefaults.formationDocFileTitle).getAttribute("href")).toEqual(
+      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle).getAttribute("href")).toEqual(
         "testForm.pdf"
       );
-      expect(subject.getByText(Config.profileDefaults.standingDocFileTitle).getAttribute("href")).toEqual(
+      expect(screen.getByText(Config.profileDefaults.standingDocFileTitle).getAttribute("href")).toEqual(
         "testStand.pdf"
       );
-      expect(
-        subject.getByText(Config.profileDefaults.certificationDocFileTitle).getAttribute("href")
-      ).toEqual("testCert.pdf");
+      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle).getAttribute("href")).toEqual(
+        "testCert.pdf"
+      );
     });
 
     it("hides document links if they do not exist", () => {
@@ -855,7 +857,7 @@ describe("profile", () => {
         }),
       });
 
-      subject = renderPage({
+      renderPage({
         userData,
         displayContent: {
           ...content,
@@ -864,76 +866,76 @@ describe("profile", () => {
       });
       chooseTab("documents");
 
-      expect(subject.queryByText("test12345")).not.toBeInTheDocument();
-      expect(subject.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
-      expect(subject.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
-      expect(subject.queryByText(Config.profileDefaults.standingDocFileTitle)).not.toBeInTheDocument();
+      expect(screen.queryByText("test12345")).not.toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
+      expect(screen.queryByText(Config.profileDefaults.standingDocFileTitle)).not.toBeInTheDocument();
     });
   });
 
   const fillText = (label: string, value: string) => {
-    fireEvent.change(subject.getByLabelText(label), { target: { value: value } });
-    fireEvent.blur(subject.getByLabelText(label));
+    fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
+    fireEvent.blur(screen.getByLabelText(label));
   };
 
   const selectByValue = (label: string, value: string) => {
-    fireEvent.mouseDown(subject.getByLabelText(label));
-    const listbox = within(subject.getByRole("listbox"));
+    fireEvent.mouseDown(screen.getByLabelText(label));
+    const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByTestId(value));
   };
 
   const selectByText = (label: string, value: string) => {
-    fireEvent.mouseDown(subject.getByLabelText(label));
-    const listbox = within(subject.getByRole("listbox"));
+    fireEvent.mouseDown(screen.getByLabelText(label));
+    const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByText(value));
   };
 
   const clickSave = (): void => {
-    fireEvent.click(subject.getAllByTestId("save")[0]);
+    fireEvent.click(screen.getAllByTestId("save")[0]);
   };
 
   const clickBack = (): void => {
-    fireEvent.click(subject.getAllByTestId("back")[0]);
+    fireEvent.click(screen.getAllByTestId("back")[0]);
   };
 
   const getBusinessNameValue = (): string =>
-    (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
+    (screen.queryByLabelText("Business name") as HTMLInputElement)?.value;
 
-  const getSectorIDValue = (): string => (subject.queryByLabelText("Sector") as HTMLInputElement)?.value;
+  const getSectorIDValue = (): string => (screen.queryByLabelText("Sector") as HTMLInputElement)?.value;
 
-  const getEntityIdValue = (): string => (subject.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+  const getEntityIdValue = (): string => (screen.queryByLabelText("Entity id") as HTMLInputElement)?.value;
 
   const getDateOfFormation = (): string =>
-    (subject.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+    (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
 
-  const getNotesValue = (): string => (subject.queryByLabelText("Notes") as HTMLInputElement)?.value;
+  const getNotesValue = (): string => (screen.queryByLabelText("Notes") as HTMLInputElement)?.value;
 
-  const getTaxIdValue = (): string => (subject.queryByLabelText("Tax id") as HTMLInputElement)?.value;
+  const getTaxIdValue = (): string => (screen.queryByLabelText("Tax id") as HTMLInputElement)?.value;
 
   const getEmployerIdValue = (): string =>
-    (subject.queryByLabelText("Employer id") as HTMLInputElement)?.value;
+    (screen.queryByLabelText("Employer id") as HTMLInputElement)?.value;
 
-  const getIndustryValue = (): string => (subject.queryByTestId("industryid") as HTMLInputElement)?.value;
+  const getIndustryValue = (): string => (screen.queryByTestId("industryid") as HTMLInputElement)?.value;
 
   const getMunicipalityValue = (): string =>
-    (subject.queryByTestId("municipality") as HTMLInputElement)?.value;
+    (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
 
   const getLegalStructureValue = (): string =>
-    (subject.queryByTestId("legal-structure") as HTMLInputElement)?.value;
+    (screen.queryByTestId("legal-structure") as HTMLInputElement)?.value;
 
   const getExistingEmployeesValue = (): string =>
-    (subject.getByLabelText("Existing employees") as HTMLInputElement).value;
+    (screen.getByLabelText("Existing employees") as HTMLInputElement).value;
 
-  const getTaxPinValue = (): string => (subject.getByLabelText("Tax pin") as HTMLInputElement).value;
+  const getTaxPinValue = (): string => (screen.getByLabelText("Tax pin") as HTMLInputElement).value;
 
   const getRadioButtonFromFormControlLabel = (dataTestId: string): HTMLInputElement =>
-    within(subject.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
+    within(screen.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
 
   const chooseRadio = (value: string) => {
-    fireEvent.click(subject.getByTestId(value));
+    fireEvent.click(screen.getByTestId(value));
   };
 
   const chooseTab = (value: ProfileTabs) => {
-    fireEvent.click(subject.getByTestId(value));
+    fireEvent.click(screen.getByTestId(value));
   };
 });

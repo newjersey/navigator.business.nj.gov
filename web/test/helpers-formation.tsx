@@ -24,7 +24,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { act, fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import React from "react";
 
 function flushPromises() {
@@ -47,16 +47,11 @@ export const useSetupInitialMocks = () => {
   setDesktopScreen(true);
 };
 
-export type RenderedTask = {
-  subject: RenderResult;
-  page: FormationPageHelpers;
-};
-
-export const renderTask = (
+export const preparePage = (
   userData: Partial<UserData>,
   displayContent: FormationDisplayContent,
   municipalities?: Municipality[]
-): RenderedTask => {
+): FormationPageHelpers => {
   const genericTown = userData.profileData?.municipality
     ? userData.profileData.municipality
     : generateMunicipality({ displayName: "GenericTown" });
@@ -64,7 +59,7 @@ export const renderTask = (
     ...userData,
     profileData: generateProfileData({ ...userData.profileData, municipality: genericTown }),
   });
-  const subject = render(
+  render(
     <WithStatefulUserData initialUserData={initialUserData}>
       <ThemeProvider theme={createTheme()}>
         <BusinessFormation
@@ -75,10 +70,7 @@ export const renderTask = (
       </ThemeProvider>
     </WithStatefulUserData>
   );
-  return {
-    subject,
-    page: createFormationPageHelpers(subject),
-  };
+  return createFormationPageHelpers();
 };
 
 export const mockApiResponse = (response?: FormationSubmitResponse) => {
@@ -120,10 +112,10 @@ export type FormationPageHelpers = {
   selectDate: (value: DateObject) => void;
 };
 
-export const createFormationPageHelpers = (subject: RenderResult): FormationPageHelpers => {
+export const createFormationPageHelpers = (): FormationPageHelpers => {
   const mockApi = api as jest.Mocked<typeof api>;
   const fillText = (label: string, value: string) => {
-    const item = subject.getByLabelText(label);
+    const item = screen.getByLabelText(label);
     fireEvent.change(item, { target: { value: value } });
     fireEvent.blur(item);
   };
@@ -132,98 +124,98 @@ export const createFormationPageHelpers = (subject: RenderResult): FormationPage
     fillText("Search business name", businessName);
     await searchBusinessName({ status: "AVAILABLE" });
 
-    fireEvent.click(subject.getByText(Config.businessFormationDefaults.initialNextButtonText));
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
 
     await waitFor(() => {
-      expect(subject.queryByTestId("business-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("business-section")).toBeInTheDocument();
     });
   };
 
   const submitBusinessTab = async (completed = true): Promise<void> => {
-    fireEvent.click(subject.getByText(Config.businessFormationDefaults.nextButtonText));
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
     if (completed) {
       await waitFor(() => {
-        expect(subject.queryByTestId("contacts-section")).toBeInTheDocument();
+        expect(screen.queryByTestId("contacts-section")).toBeInTheDocument();
       });
     } else {
       await waitFor(() => {
-        expect(subject.queryByTestId("contacts-section")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("contacts-section")).not.toBeInTheDocument();
       });
     }
   };
 
   const submitContactsTab = async (completed = true): Promise<void> => {
-    fireEvent.click(subject.getByText(Config.businessFormationDefaults.nextButtonText));
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
     if (completed)
       await waitFor(() => {
-        expect(subject.queryByTestId("review-section")).toBeInTheDocument();
+        expect(screen.queryByTestId("review-section")).toBeInTheDocument();
       });
   };
 
   const submitReviewTab = async (): Promise<void> => {
-    fireEvent.click(subject.getByText(Config.businessFormationDefaults.nextButtonText));
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
     await waitFor(() => {
-      expect(subject.queryByTestId("payment-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("payment-section")).toBeInTheDocument();
     });
   };
 
   const searchBusinessName = async (nameAvailability: Partial<NameAvailability>): Promise<void> => {
     const returnedPromise = Promise.resolve(generateNameAvailability(nameAvailability));
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
-    fireEvent.click(subject.getByText(Config.searchBusinessNameTask.searchButtonText));
+    fireEvent.click(screen.getByText(Config.searchBusinessNameTask.searchButtonText));
     await act(() => returnedPromise.then());
   };
 
   const searchBusinessNameAndGetError = async (errorCode = 500): Promise<void> => {
     const returnedPromise = Promise.reject(errorCode);
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
-    fireEvent.click(subject.getByText(Config.searchBusinessNameTask.searchButtonText));
+    fireEvent.click(screen.getByText(Config.searchBusinessNameTask.searchButtonText));
     await act(() => returnedPromise.catch(() => {}));
   };
 
   const chooseRadio = (value: string): void => {
-    fireEvent.click(subject.getByTestId(value));
+    fireEvent.click(screen.getByTestId(value));
   };
 
   const getInputElementByLabel = (label: string): HTMLInputElement => {
-    return subject.getByLabelText(label) as HTMLInputElement;
+    return screen.getByLabelText(label) as HTMLInputElement;
   };
 
   const selectByText = (label: string, value: string) => {
-    fireEvent.mouseDown(subject.getByLabelText(label));
-    const listbox = within(subject.getByRole("listbox"));
+    fireEvent.mouseDown(screen.getByLabelText(label));
+    const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByText(value));
   };
 
   const selectCheckbox = (label: string): void => {
-    fireEvent.click(subject.getByLabelText(label));
+    fireEvent.click(screen.getByLabelText(label));
   };
 
   const clickAddNewSigner = (): void => {
     fireEvent.click(
-      subject.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+      screen.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
     );
   };
 
   const checkSignerBox = (index: number): void => {
-    const additionalSigner = within(subject.getByTestId(`additional-signers-${index}`));
+    const additionalSigner = within(screen.getByTestId(`additional-signers-${index}`));
     fireEvent.click(
       additionalSigner.getByLabelText(`${Config.businessFormationDefaults.signatureColumnLabel}*`)
     );
   };
 
   const clickMemberSubmit = (): void => {
-    fireEvent.click(subject.getByText(Config.businessFormationDefaults.membersModalNextButtonText));
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.membersModalNextButtonText));
   };
 
   const openMemberModal = async (): Promise<void> => {
-    fireEvent.click(subject.getByText(Config.businessFormationDefaults.membersNewButtonText));
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.membersNewButtonText));
     await waitFor(() => {
       expect(
-        subject.getByText(Config.businessFormationDefaults.membersModalNextButtonText)
+        screen.getByText(Config.businessFormationDefaults.membersModalNextButtonText)
       ).toBeInTheDocument();
     });
   };
@@ -234,7 +226,7 @@ export const createFormationPageHelpers = (subject: RenderResult): FormationPage
     clickMemberSubmit();
     await waitFor(() => {
       expect(
-        subject.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+        screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
       ).toBeInTheDocument();
     });
   };
@@ -250,7 +242,7 @@ export const createFormationPageHelpers = (subject: RenderResult): FormationPage
   };
 
   const clickSubmit = async (): Promise<void> => {
-    fireEvent.click(subject.getByText(Config.businessFormationDefaults.submitButtonText));
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.submitButtonText));
     await act(async () => {
       await flushPromises();
     });
@@ -258,7 +250,7 @@ export const createFormationPageHelpers = (subject: RenderResult): FormationPage
 
   const selectDate = (value: DateObject) => {
     fillText("Business start date", value.format("MM/DD/YYYY"));
-    fireEvent.blur(subject.getByLabelText("Business start date"));
+    fireEvent.blur(screen.getByLabelText("Business start date"));
   };
 
   return {

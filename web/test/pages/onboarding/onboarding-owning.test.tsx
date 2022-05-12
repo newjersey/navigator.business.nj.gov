@@ -10,10 +10,10 @@ import {
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { PageHelpers, renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
+import { renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyUserData, getCurrentDate, ProfileData } from "@businessnjgovnavigator/shared/";
-import { act, fireEvent, waitFor, within } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -56,9 +56,9 @@ describe("onboarding - owning a business", () => {
 
   describe("page 1", () => {
     it("uses special template eval for step 1 label", () => {
-      const { subject } = renderPage({});
+      renderPage({});
       expect(
-        subject.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
+        screen.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
       ).toBeInTheDocument();
     });
 
@@ -68,36 +68,36 @@ describe("onboarding - owning a business", () => {
         legalStructureId: "sole-proprietorship",
       });
       useMockRouter({ isReady: true, query: { page: "2" } });
-      const { subject } = renderPage({ userData });
+      renderPage({ userData });
       expect(
-        subject.getByText(
+        screen.getByText(
           templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "4" })
         )
       ).toBeInTheDocument();
     });
 
     it("displays the legal structure dropdown", () => {
-      const { subject, page } = renderPage({});
+      const { page } = renderPage({});
       page.chooseRadio("has-existing-business-true");
-      expect(subject.getByLabelText("Legal structure")).toBeInTheDocument();
+      expect(screen.getByLabelText("Legal structure")).toBeInTheDocument();
     });
 
     it("prevents user from moving after Step 1 if you have not selected whether you own a business", () => {
-      const { subject, page } = renderPage({});
+      const { page } = renderPage({});
       page.clickNext();
-      expect(subject.getByTestId("step-1")).toBeInTheDocument();
-      expect(subject.queryByTestId("step-2")).not.toBeInTheDocument();
-      expect(subject.getByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).toBeInTheDocument();
+      expect(screen.getByTestId("step-1")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
+      expect(screen.getByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).toBeInTheDocument();
     });
 
     it("allows user to move from Step 1 if you have selected whether you own a business", async () => {
-      const { subject, page } = renderPage({});
+      const { page } = renderPage({});
       page.chooseRadio("has-existing-business-true");
       page.selectByValue("Legal structure", "c-corporation");
       act(() => page.clickNext());
-      await waitFor(() => expect(subject.queryByTestId("step-1")).not.toBeInTheDocument());
-      expect(subject.queryByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("step-2")).toBeInTheDocument();
+      await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
+      expect(screen.queryByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).not.toBeInTheDocument();
+      expect(screen.getByTestId("step-2")).toBeInTheDocument();
     });
   });
 
@@ -108,115 +108,113 @@ describe("onboarding - owning a business", () => {
         legalStructureId: "sole-proprietorship",
       });
       useMockRouter({ isReady: true, query: { page: "2" } });
-      const { subject } = renderPage({ userData });
-      expect(subject.queryByLabelText("Date of formation")).not.toBeInTheDocument();
-      expect(subject.queryByLabelText("Entity id")).not.toBeInTheDocument();
-      expect(subject.getByLabelText("Business name")).toBeInTheDocument();
+      renderPage({ userData });
+      expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
+      expect(screen.getByLabelText("Business name")).toBeInTheDocument();
     });
 
     it("prevents user from moving past Step 2 if your entity id is invalid", async () => {
       const userData = generateCCorpTestUserData({});
       useMockRouter({ isReady: true, query: { page: "2" } });
-      const { subject, page } = renderPage({ userData });
+      const { page } = renderPage({ userData });
 
       page.selectDate("Date of formation", date);
       page.fillText("Entity id", "123");
-      fireEvent.blur(subject.getByLabelText("Entity id"));
+      fireEvent.blur(screen.getByLabelText("Entity id"));
       act(() => page.clickNext());
 
       await waitFor(() => {
-        expect(subject.getByTestId("step-2")).toBeInTheDocument();
-        expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
-        expect(
-          subject.getByText(
-            templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
-          )
-        ).toBeInTheDocument();
-        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+        expect(screen.getByTestId("step-2")).toBeInTheDocument();
       });
+      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
+      expect(
+        screen.getByText(
+          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
+        )
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 2 if your entity id is valid", async () => {
       const userData = generateCCorpTestUserData({});
       useMockRouter({ isReady: true, query: { page: "2" } });
-      const { subject, page } = renderPage({ userData });
+      const { page } = renderPage({ userData });
       page.fillText("Entity id", "1234567890");
       act(() => page.clickNext());
-      await waitFor(() => expect(subject.queryByTestId("step-2")).not.toBeInTheDocument());
+      await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
 
       await waitFor(() => {
         expect(
-          subject.queryByText(
+          screen.queryByText(
             templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
           )
         ).not.toBeInTheDocument();
-        expect(subject.getByTestId("step-3")).toBeInTheDocument();
-        expect(subject.queryByTestId("step-2")).not.toBeInTheDocument();
-        expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
       });
+      expect(screen.getByTestId("step-3")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
     });
 
     describe("page 3", () => {
       it("prevents user from moving after Step 3 if you have not entered a business name", async () => {
         const userData = generateCCorpTestUserData({ businessName: undefined });
         useMockRouter({ isReady: true, query: { page: "3" } });
-        const { subject, page } = renderPage({ userData });
+        const { page } = renderPage({ userData });
         act(() => page.clickNext());
         await waitFor(() => {
-          expect(subject.getByTestId("step-3")).toBeInTheDocument();
-          expect(subject.queryByTestId("step-4")).not.toBeInTheDocument();
-          expect(
-            subject.queryByText(Config.onboardingDefaults.errorTextRequiredBusinessName)
-          ).toBeInTheDocument();
-          expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+          expect(screen.getByTestId("step-3")).toBeInTheDocument();
         });
+        expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
+        expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredBusinessName)).toBeInTheDocument();
+        expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
 
       it("allows user to move past Step 3 if you have entered a business name", async () => {
         const userData = generateCCorpTestUserData({ businessName: undefined });
         useMockRouter({ isReady: true, query: { page: "3" } });
-        const { subject, page } = renderPage({ userData });
+        const { page } = renderPage({ userData });
         page.fillText("Business name", "A business");
         act(() => page.clickNext());
-        await waitFor(() => expect(subject.queryByTestId("step-3")).not.toBeInTheDocument());
+        await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
 
         await waitFor(() => {
           expect(
-            subject.queryByText(Config.onboardingDefaults.errorTextRequiredBusinessName)
+            screen.queryByText(Config.onboardingDefaults.errorTextRequiredBusinessName)
           ).not.toBeInTheDocument();
-          expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
-          expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
         });
+        expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
       });
 
       it("prevents user from moving after Step 3 if you have not entered a sector", async () => {
         const userData = generateCCorpTestUserData({ sectorId: undefined });
         useMockRouter({ isReady: true, query: { page: "3" } });
-        const { subject, page } = renderPage({ userData });
+        const { page } = renderPage({ userData });
         act(() => page.clickNext());
         await waitFor(() => {
-          expect(subject.getByTestId("step-3")).toBeInTheDocument();
-          expect(subject.queryByTestId("step-4")).not.toBeInTheDocument();
-          expect(subject.queryByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
-          expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+          expect(screen.getByTestId("step-3")).toBeInTheDocument();
         });
+        expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
+        expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
+        expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
 
       it("allows user to move past Step 3 if you have entered a sector", async () => {
         const userData = generateCCorpTestUserData({ sectorId: undefined });
         useMockRouter({ isReady: true, query: { page: "3" } });
-        const { subject, page } = renderPage({ userData });
+        const { page } = renderPage({ userData });
         page.selectByValue("Sector", "clean-energy");
         act(() => page.clickNext());
-        await waitFor(() => expect(subject.queryByTestId("step-3")).not.toBeInTheDocument());
+        await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
 
         await waitFor(() => {
           expect(
-            subject.queryByText(Config.onboardingDefaults.errorTextRequiredSector)
+            screen.queryByText(Config.onboardingDefaults.errorTextRequiredSector)
           ).not.toBeInTheDocument();
-          expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
-          expect(subject.queryByTestId("step-3")).not.toBeInTheDocument();
         });
+        expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
       });
     });
 
@@ -225,132 +223,130 @@ describe("onboarding - owning a business", () => {
         const userData = generateCCorpTestUserData({ existingEmployees: undefined, municipality: undefined });
         useMockRouter({ isReady: true, query: { page: "4" } });
         const newark = generateMunicipality({ displayName: "Newark" });
-        const { subject, page } = renderPage({
+        const { page } = renderPage({
           municipalities: [newark],
           userData,
         });
-        expect(subject.getByTestId("step-4")).toBeInTheDocument();
+        expect(screen.getByTestId("step-4")).toBeInTheDocument();
         page.selectByText("Location", "Newark");
         act(() => page.clickNext());
 
         await waitFor(() => {
-          subject.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees);
-          expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+          screen.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees);
         });
+        expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
 
       it("allows user to move past Step 4 if you have entered number of employees", async () => {
         const userData = generateCCorpTestUserData({ existingEmployees: undefined, municipality: undefined });
         useMockRouter({ isReady: true, query: { page: "4" } });
         const newark = generateMunicipality({ displayName: "Newark" });
-        const { subject, page } = renderPage({
+        const { page } = renderPage({
           municipalities: [newark],
           userData,
         });
-        expect(subject.getByTestId("step-4")).toBeInTheDocument();
+        expect(screen.getByTestId("step-4")).toBeInTheDocument();
         page.fillText("Existing employees", "123");
         page.selectByText("Location", "Newark");
         act(() => page.clickNext());
-        await waitFor(() => expect(subject.queryByTestId("step-4")).not.toBeInTheDocument());
+        await waitFor(() => expect(screen.queryByTestId("step-4")).not.toBeInTheDocument());
 
         await waitFor(() => {
           expect(
-            subject.queryByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
+            screen.queryByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
           ).not.toBeInTheDocument();
-          expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
-          expect(subject.queryByTestId("step-4")).not.toBeInTheDocument();
         });
+        expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
       });
     });
     it("prevents user from moving after Step 4 if you have not selected a location", async () => {
       const userData = generateCCorpTestUserData({ municipality: undefined });
       useMockRouter({ isReady: true, query: { page: "4" } });
       const newark = generateMunicipality({ displayName: "Newark" });
-      const { subject, page } = renderPage({ municipalities: [newark], userData });
+      const { page } = renderPage({ municipalities: [newark], userData });
       act(() => page.clickNext());
       await waitFor(() => {
-        expect(subject.getByTestId("step-4")).toBeInTheDocument();
-        expect(
-          subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
-        ).toBeInTheDocument();
-        expect(subject.queryByTestId("toast-alert-ERROR")).toBeInTheDocument();
+        expect(screen.getByTestId("step-4")).toBeInTheDocument();
       });
+      expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 4 if you have selected a location", async () => {
       const userData = generateCCorpTestUserData({ municipality: undefined });
       useMockRouter({ isReady: true, query: { page: "4" } });
       const newark = generateMunicipality({ displayName: "Newark" });
-      const { subject, page } = renderPage({ municipalities: [newark], userData });
+      const { page } = renderPage({ municipalities: [newark], userData });
       page.selectByText("Location", "Newark");
       act(() => page.clickNext());
-      await waitFor(() => expect(subject.queryByTestId("step-4")).not.toBeInTheDocument());
+      await waitFor(() => expect(screen.queryByTestId("step-4")).not.toBeInTheDocument());
       await waitFor(() => {
         expect(
-          subject.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
+          screen.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
         ).not.toBeInTheDocument();
-        expect(subject.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
       });
+      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
     });
   });
 
   it("changes url pathname every time a user goes to a different page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const { subject, page } = renderPage({ municipalities: [newark] });
+    const { page } = renderPage({ municipalities: [newark] });
 
     page.chooseRadio("has-existing-business-true");
     page.selectByValue("Legal structure", "c-corporation");
-    expect(subject.getByTestId("step-1")).toBeInTheDocument();
+    expect(screen.getByTestId("step-1")).toBeInTheDocument();
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-1")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-2")).toBeInTheDocument();
+    expect(screen.getByTestId("step-2")).toBeInTheDocument();
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-2")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-3")).toBeInTheDocument();
+    expect(screen.getByTestId("step-3")).toBeInTheDocument();
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-3")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
     page.selectByText("Location", "Newark");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
-    expect(subject.getByTestId("step-4")).toBeInTheDocument();
+    expect(screen.getByTestId("step-4")).toBeInTheDocument();
   });
 
   it("shows correct next-button text on each page if user requires legal filings", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const { subject, page } = renderPage({ municipalities: [newark] });
+    const { page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("has-existing-business-true");
     page.selectByValue("Legal structure", "c-corporation");
-    const page1 = within(subject.getByTestId("page-1-form"));
-    expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    const page1 = within(screen.getByTestId("page-1-form"));
+    expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-1")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
     page.selectDate("Date of formation", date);
-    const page2 = within(subject.getByTestId("page-2-form"));
-    expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    const page2 = within(screen.getByTestId("page-2-form"));
+    expect(page2.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-2")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
-    const page3 = within(subject.getByTestId("page-3-form"));
-    expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    const page3 = within(screen.getByTestId("page-3-form"));
+    expect(page3.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-3")).not.toBeInTheDocument());
-    const page4 = within(subject.getByTestId("page-4-form"));
-    expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+    const page4 = within(screen.getByTestId("page-4-form"));
+    expect(page4.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
@@ -359,33 +355,33 @@ describe("onboarding - owning a business", () => {
     page.chooseRadio("home-based-business-true");
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-4")).not.toBeInTheDocument());
-    const page5 = within(subject.getByTestId("page-5-form"));
+    await waitFor(() => expect(screen.queryByTestId("step-4")).not.toBeInTheDocument());
+    const page5 = within(screen.getByTestId("page-5-form"));
     expect(page5.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page5.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page5.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("shows correct next-button text on each page if legal structure  does not require Public Filing", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
-    const { subject, page } = renderPage({ municipalities: [newark] });
+    const { page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("has-existing-business-true");
     page.selectByValue("Legal structure", "sole-proprietorship");
-    const page1 = within(subject.getByTestId("page-1-form"));
-    expect(page1.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    const page1 = within(screen.getByTestId("page-1-form"));
+    expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-1")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
-    const page2 = within(subject.getByTestId("page-2-form"));
-    expect(page2.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    const page2 = within(screen.getByTestId("page-2-form"));
+    expect(page2.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-2")).not.toBeInTheDocument());
-    const page3 = within(subject.getByTestId("page-3-form"));
-    expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
+    const page3 = within(screen.getByTestId("page-3-form"));
+    expect(page3.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
@@ -394,32 +390,32 @@ describe("onboarding - owning a business", () => {
     page.chooseRadio("home-based-business-true");
 
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-3")).not.toBeInTheDocument());
-    const page4 = within(subject.getByTestId("page-4-form"));
+    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+    const page4 = within(screen.getByTestId("page-4-form"));
     expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page4.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("updates the user data after each form page", async () => {
     const initialUserData = createEmptyUserData(generateUser({}));
     const newark = generateMunicipality({ displayName: "Newark" });
-    const { subject, page } = renderPage({ userData: initialUserData, municipalities: [newark] });
+    const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
 
     page.chooseRadio("has-existing-business-true");
     page.selectByValue("Legal structure", "c-corporation");
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-1")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
     expect(currentUserData().profileData.hasExistingBusiness).toEqual(true);
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-2")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
     expect(currentUserData().profileData.dateOfFormation).toEqual(dateOfFormation);
     expect(currentUserData().profileData.entityId).toEqual("1234567890");
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-3")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
     expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
@@ -427,7 +423,7 @@ describe("onboarding - owning a business", () => {
     page.selectByValue("Ownership", "disabled-veteran");
     page.chooseRadio("home-based-business-true");
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-4")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-4")).not.toBeInTheDocument());
     expect(currentUserData()).toEqual({
       ...initialUserData,
       formProgress: "UNSTARTED",
@@ -464,72 +460,55 @@ describe("onboarding - owning a business", () => {
       }),
     });
 
-    const { subject, page } = renderPage({ userData });
-    expect(page.getRadioButtonValue("Has Existing Business")).toEqual("true");
+    const { page } = renderPage({ userData });
+    expect(page.getRadioButton("Has Existing Business - True")).toBeChecked();
 
     expect(page.getLegalStructureValue()).toEqual("c-corporation");
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-1")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
     expect(page.getEntityIdValue()).toEqual("0123456789");
     expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-2")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
     expect(page.getBusinessNameValue()).toEqual("Applebees");
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
     act(() => page.clickNext());
-    await waitFor(() => expect(subject.queryByTestId("step-3")).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
     expect(page.getMunicipalityValue()).toEqual("Newark");
   });
 
   it("updates tax filing data on save", async () => {
-    act(async () => {
-      const taxData = generateTaxFilingData({});
-      mockApi.postGetAnnualFilings.mockImplementation((userData) =>
-        Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
-      );
-      const initialUserData = generateUserData({
-        taxFilingData: taxData,
-        profileData: generateProfileData({
-          legalStructureId: "c-corporation",
-          hasExistingBusiness: true,
-        }),
-      });
-      const { page } = renderPage({ userData: initialUserData });
-      expect(page.getRadioButtonValue("Has Existing Business")).toEqual("true");
-      await page.visitStep2();
-      await page.visitStep3();
-      await page.visitStep4();
-      await page.visitStep5();
-      page.clickNext();
+    const taxData = generateTaxFilingData({});
+    mockApi.postGetAnnualFilings.mockImplementation((userData) =>
+      Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
+    );
+    const initialUserData = generateUserData({
+      taxFilingData: taxData,
+      profileData: generateProfileData({
+        legalStructureId: "c-corporation",
+        hasExistingBusiness: true,
+      }),
+    });
+    const { page } = renderPage({ userData: initialUserData });
+    expect(page.getRadioButton("Has Existing Business - True")).toBeChecked();
+    await page.visitStep2();
+    await page.visitStep3();
+    await page.visitStep4();
+    await page.visitStep5();
+    page.clickNext();
 
-      await waitFor(() => {
-        expect(currentUserData()).toEqual({
-          ...initialUserData,
-          taxFilingData: { ...taxData, filings: [] },
-        });
+    await waitFor(() => {
+      expect(currentUserData()).toEqual({
+        ...initialUserData,
+        taxFilingData: { ...taxData, filings: [] },
       });
     });
   });
 
   describe("validates self-reg step for legal structures that require public filing", () => {
-    runSelfRegPageTests(
-      { hasExistingBusiness: true, requiresPublicFiling: true },
-      async (page: PageHelpers) => {
-        await page.visitStep2();
-        await page.visitStep3();
-        await page.visitStep4();
-        await page.visitStep5();
-      }
-    );
+    runSelfRegPageTests({ hasExistingBusiness: true, requiresPublicFiling: true, selfRegPage: "5" });
   });
   describe("validates self-reg step for legal structures that do not require public filing", () => {
-    runSelfRegPageTests(
-      { hasExistingBusiness: true, requiresPublicFiling: false },
-      async (page: PageHelpers) => {
-        await page.visitStep2();
-        await page.visitStep3();
-        await page.visitStep4();
-      }
-    );
+    runSelfRegPageTests({ hasExistingBusiness: true, requiresPublicFiling: false, selfRegPage: "4" });
   });
 });

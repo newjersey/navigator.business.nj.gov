@@ -1,14 +1,12 @@
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("filing page", () => {
-  let subject;
-
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -34,11 +32,11 @@ describe("filing page", () => {
       contentMd: "content-1",
     };
 
-    subject = render(<FilingPage filing={filing} operateReferences={{}} />);
+    render(<FilingPage filing={filing} operateReferences={{}} />);
 
-    expect(subject.getByText("filing-name-1")).toBeInTheDocument();
-    expect(subject.getByText("cta-text-1")).toBeInTheDocument();
-    expect(subject.getByText("content-1")).toBeInTheDocument();
-    expect(subject.getByTestId("due-date")).toHaveTextContent("04/30/2022");
+    expect(screen.getByText("filing-name-1")).toBeInTheDocument();
+    expect(screen.getByText("cta-text-1")).toBeInTheDocument();
+    expect(screen.getByText("content-1")).toBeInTheDocument();
+    expect(screen.getByTestId("due-date")).toHaveTextContent("04/30/2022");
   });
 });

@@ -3,7 +3,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { TaskProgress } from "@/lib/types/types";
 import { withAuthAlert } from "@/test/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 
 describe("<TaskProgressDropdown />", () => {
@@ -19,8 +19,8 @@ describe("<TaskProgressDropdown />", () => {
     initialValue?: TaskProgress;
     isAuthenticated?: IsAuthenticated;
     modalIsVisible?: boolean;
-  }): RenderResult => {
-    return render(
+  }) => {
+    render(
       withAuthAlert(
         <TaskProgressDropdown
           onSelect={context.onSelect ?? onSelectCallBack}
@@ -32,55 +32,53 @@ describe("<TaskProgressDropdown />", () => {
     );
   };
 
-  let subject: RenderResult;
-
   beforeEach(() => {
     jest.restoreAllMocks();
   });
 
   it("displays Not Started as the default", () => {
-    subject = renderWithAuth({});
-    expect(subject.getAllByText(notStartedText)[0]).toBeVisible();
+    renderWithAuth({});
+    expect(screen.getAllByText(notStartedText)[0]).toBeVisible();
   });
 
   it("displays the selected tag when closed", () => {
-    subject = renderWithAuth({});
-    fireEvent.click(subject.getAllByText(notStartedText)[0]);
+    renderWithAuth({});
+    fireEvent.click(screen.getAllByText(notStartedText)[0]);
 
-    expect(subject.getByText(inProgressText)).toBeVisible();
-    expect(subject.getByText(completedText)).toBeVisible();
-    fireEvent.click(subject.getByText(inProgressText));
+    expect(screen.getByText(inProgressText)).toBeVisible();
+    expect(screen.getByText(completedText)).toBeVisible();
+    fireEvent.click(screen.getByText(inProgressText));
 
-    expect(subject.getAllByText(inProgressText)[0]).toBeVisible();
-    expect(subject.getByText(completedText)).not.toBeVisible();
-    expect(subject.getByText(notStartedText)).not.toBeVisible();
+    expect(screen.getAllByText(inProgressText)[0]).toBeVisible();
+    expect(screen.getByText(completedText)).not.toBeVisible();
+    expect(screen.getByText(notStartedText)).not.toBeVisible();
   });
 
   it("calls the prop callback when an option is selected", () => {
-    subject = renderWithAuth({});
-    fireEvent.click(subject.getAllByText(notStartedText)[0]);
-    fireEvent.click(subject.getByText(inProgressText));
+    renderWithAuth({});
+    fireEvent.click(screen.getAllByText(notStartedText)[0]);
+    fireEvent.click(screen.getByText(inProgressText));
     expect(onSelectCallBack).toHaveBeenCalledWith("IN_PROGRESS");
   });
 
-  it("uses initialValue prop as initial value", async () => {
-    subject = renderWithAuth({ initialValue: "COMPLETED" });
-    await waitFor(() => expect(subject.getAllByText(completedText)[0]).toBeVisible());
+  it("uses initialValue prop as initial value", () => {
+    renderWithAuth({ initialValue: "COMPLETED" });
+    expect(screen.getAllByText(completedText)[0]).toBeVisible();
   });
 
   it("shows a success toast when an option is selected", () => {
-    subject = renderWithAuth({});
-    fireEvent.click(subject.getAllByText(notStartedText)[0]);
+    renderWithAuth({});
+    fireEvent.click(screen.getAllByText(notStartedText)[0]);
 
-    expect(subject.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
-    fireEvent.click(subject.getByText(inProgressText));
-    expect(subject.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
+    expect(screen.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText(inProgressText));
+    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
   });
 
   it("opens registration modal when guest mode user tries to change state", () => {
-    subject = renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
-    fireEvent.click(subject.getAllByText(notStartedText)[0]);
-    fireEvent.click(subject.getByText(inProgressText));
+    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
+    fireEvent.click(screen.getAllByText(notStartedText)[0]);
+    fireEvent.click(screen.getByText(inProgressText));
     expect(setModalIsVisible).toHaveBeenCalledWith(true);
   });
 });

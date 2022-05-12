@@ -17,7 +17,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared/";
-import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -27,8 +27,8 @@ const renderPage = (
   task: Task,
   initialUserData?: UserData,
   displayContent?: CannabisPriorityStatusDisplayContent
-): RenderResult => {
-  return render(
+) => {
+  render(
     withAuthAlert(
       <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
         <CannabisPriorityStatusTask
@@ -42,7 +42,6 @@ const renderPage = (
 };
 
 describe("<CannabisPriorityStatusTask />", () => {
-  let subject: RenderResult;
   const allPriorityTypes = [
     ...priorityTypesObj.minorityOrWomen,
     ...priorityTypesObj.veteran,
@@ -64,12 +63,12 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    expect(subject.getByText("Header")).toBeInTheDocument();
+    renderPage(task);
+    expect(screen.getByText("Header")).toBeInTheDocument();
     await waitFor(() => {
-      expect(subject.getByText("Do this first")).toBeInTheDocument();
+      expect(screen.getByText("Do this first")).toBeInTheDocument();
     });
-    expect(subject.getByText("Content")).toBeInTheDocument();
+    expect(screen.getByText("Content")).toBeInTheDocument();
   });
 
   it("renders requirements button when checkbox is selected", async () => {
@@ -84,15 +83,15 @@ describe("<CannabisPriorityStatusTask />", () => {
       contentMd: `Content\n- []{${randomPriorityType}}Content`,
     });
     useMockRoadmapTask(task);
-    subject = renderPage(task);
+    renderPage(task);
 
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
-    expect(subject.getByTestId("nextTabButton")).toBeInTheDocument();
+    expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
 
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(false);
-    expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
   });
 
   it("unselects all priority types when none of the above checkbox is selected", async () => {
@@ -104,14 +103,14 @@ describe("<CannabisPriorityStatusTask />", () => {
       contentMd: `Content\n- []{${randomPriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
-    subject = renderPage(task);
+    renderPage(task);
 
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
-    expect(subject.getByTestId("nextTabButton")).toBeInTheDocument();
+    expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
 
-    fireEvent.click(subject.getByTestId("none-of-the-above"));
-    expect(subject.queryByTestId("nextTabButton")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("none-of-the-above"));
+    expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(false);
     expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
   });
@@ -126,15 +125,15 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getByTestId("none-of-the-above"));
+    renderPage(task);
+    fireEvent.click(screen.getByTestId("none-of-the-above"));
     expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
-    expect(subject.queryByTestId("nextTabButton")).toBeInTheDocument();
+    expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
 
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
     expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
-    expect(subject.queryByTestId("nextTabButton")).toBeInTheDocument();
+    expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
   });
 
   it("updates task progress from not started to in progress when user navigates to the second tab", async () => {
@@ -147,14 +146,14 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(within(subject.getByTestId("taskProgress")).getByTestId("IN_PROGRESS")).toBeInTheDocument();
-      expect(subject.getByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
+      expect(within(screen.getByTestId("taskProgress")).getByTestId("IN_PROGRESS")).toBeInTheDocument();
     });
+    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
   });
 
   it("navigates to and from second tab", async () => {
@@ -167,18 +166,18 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(subject.getByTestId("backButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+      expect(screen.getByTestId("backButton")).toBeInTheDocument();
     });
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
 
-    fireEvent.click(subject.getByTestId("backButton"));
-    expect(subject.getByTestId("nextTabButton")).toBeInTheDocument();
-    expect(subject.queryByTestId("backButton")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("backButton"));
+    expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("backButton")).not.toBeInTheDocument();
   });
 
   it("selects no priority status checkbox and clicks complete task button", async () => {
@@ -189,24 +188,24 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(subject.getByText(Config.cannabisPriorityStatus.noPriorityStatusText)).toBeInTheDocument();
-      expect(subject.getByTestId("backButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
-      expect(subject.getByTestId("completeTaskProgressButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("socialEquityButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("certificationButton")).not.toBeInTheDocument();
+      expect(screen.getByText(Config.cannabisPriorityStatus.noPriorityStatusText)).toBeInTheDocument();
     });
+    expect(screen.getByTestId("backButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+    expect(screen.getByTestId("completeTaskProgressButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("socialEquityButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("certificationButton")).not.toBeInTheDocument();
 
-    fireEvent.click(subject.getByTestId("completeTaskProgressButton"));
+    fireEvent.click(screen.getByTestId("completeTaskProgressButton"));
     await waitFor(() => {
-      expect(within(subject.getByTestId("taskProgress")).getByTestId("COMPLETED")).toBeInTheDocument();
-      expect(subject.getByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
+      expect(within(screen.getByTestId("taskProgress")).getByTestId("COMPLETED")).toBeInTheDocument();
     });
+    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
   });
 
   it("displays complete button when impact zone priority type is the only type selected", async () => {
@@ -219,18 +218,18 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(subject.getByText(Config.cannabisPriorityStatus.impactZoneHeaderText)).toBeInTheDocument();
-      expect(subject.getByTestId("completeTaskProgressButton")).toBeInTheDocument();
-      expect(subject.getByTestId("backButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("socialEquityButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("certificationButton")).not.toBeInTheDocument();
+      expect(screen.getByText(Config.cannabisPriorityStatus.impactZoneHeaderText)).toBeInTheDocument();
     });
+    expect(screen.getByTestId("completeTaskProgressButton")).toBeInTheDocument();
+    expect(screen.getByTestId("backButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("socialEquityButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("certificationButton")).not.toBeInTheDocument();
   });
 
   it("does not display complete button when impact zone and another priority type are selected", async () => {
@@ -248,17 +247,17 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getAllByRole("checkbox")[1]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getAllByRole("checkbox")[1]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(subject.getByText(Config.cannabisPriorityStatus.impactZoneHeaderText)).toBeInTheDocument();
-      expect(subject.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
-      expect(subject.getByTestId("backButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+      expect(screen.getByText(Config.cannabisPriorityStatus.impactZoneHeaderText)).toBeInTheDocument();
     });
+    expect(screen.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
+    expect(screen.getByTestId("backButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
   });
 
   it("displays social equity content and cta when social equity checkbox is selected", async () => {
@@ -271,23 +270,23 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(subject.getByText(Config.cannabisPriorityStatus.socialEquityHeaderText)).toBeInTheDocument();
-      expect(subject.getByTestId("backButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("socialEquityButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("certificationButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)
-      ).not.toBeInTheDocument();
-      expect(subject.queryByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).not.toBeInTheDocument();
-      expect(subject.queryByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)).toBeInTheDocument();
+      expect(screen.getByText(Config.cannabisPriorityStatus.socialEquityHeaderText)).toBeInTheDocument();
     });
+    expect(screen.getByTestId("backButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+    expect(screen.getByTestId("socialEquityButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("certificationButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).not.toBeInTheDocument();
+    expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)).toBeInTheDocument();
   });
 
   it("displays veterans content and cta when veteran checkbox is selected", async () => {
@@ -300,25 +299,25 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(subject.getByText(Config.cannabisPriorityStatus.veteranHeaderText)).toBeInTheDocument();
-      expect(subject.queryByTestId("certificationButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("backButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("socialEquityButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)
-      ).not.toBeInTheDocument();
-      expect(subject.queryByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)
-      ).not.toBeInTheDocument();
+      expect(screen.getByText(Config.cannabisPriorityStatus.veteranHeaderText)).toBeInTheDocument();
     });
+    expect(screen.getByTestId("certificationButton")).toBeInTheDocument();
+    expect(screen.getByTestId("backButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("socialEquityButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)
+    ).not.toBeInTheDocument();
+    expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)
+    ).not.toBeInTheDocument();
   });
 
   it("displays minority/women content and cta when minority/women checkbox is selected", async () => {
@@ -331,25 +330,23 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(subject.getByText(Config.cannabisPriorityStatus.minorityOrWomenHeaderText)).toBeInTheDocument();
-      expect(subject.queryByTestId("certificationButton")).toBeInTheDocument();
-      expect(subject.getByTestId("backButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("socialEquityButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)
-      ).toBeInTheDocument();
-      expect(subject.queryByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).not.toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)
-      ).not.toBeInTheDocument();
+      expect(screen.getByText(Config.cannabisPriorityStatus.minorityOrWomenHeaderText)).toBeInTheDocument();
     });
+    expect(screen.getByTestId("certificationButton")).toBeInTheDocument();
+    expect(screen.getByTestId("backButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("socialEquityButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
+    expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)).toBeInTheDocument();
+    expect(screen.queryByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)
+    ).not.toBeInTheDocument();
   });
 
   it("displays social equity and minority/women checkbox when once checkbox from each priority types is selected", async () => {
@@ -365,29 +362,27 @@ describe("<CannabisPriorityStatusTask />", () => {
     });
     useMockRoadmapTask(task);
 
-    subject = renderPage(task);
-    fireEvent.click(subject.getAllByRole("checkbox")[0]);
-    fireEvent.click(subject.getAllByRole("checkbox")[1]);
-    fireEvent.click(subject.getAllByRole("checkbox")[2]);
-    fireEvent.click(subject.getAllByRole("checkbox")[3]);
-    fireEvent.click(subject.getByTestId("nextTabButton"));
+    renderPage(task);
+    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getAllByRole("checkbox")[1]);
+    fireEvent.click(screen.getAllByRole("checkbox")[2]);
+    fireEvent.click(screen.getAllByRole("checkbox")[3]);
+    fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(subject.getByText(Config.cannabisPriorityStatus.minorityOrWomenHeaderText)).toBeInTheDocument();
-      expect(subject.getByText(Config.cannabisPriorityStatus.veteranHeaderText)).toBeInTheDocument();
-      expect(subject.getByText(Config.cannabisPriorityStatus.impactZoneHeaderText)).toBeInTheDocument();
-      expect(subject.getByText(Config.cannabisPriorityStatus.socialEquityHeaderText)).toBeInTheDocument();
-
-      expect(subject.queryByTestId("certificationButton")).toBeInTheDocument();
-      expect(subject.getByTestId("backButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("socialEquityButton")).toBeInTheDocument();
-      expect(subject.queryByTestId("nextTabButton")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)
-      ).toBeInTheDocument();
-      expect(subject.queryByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).toBeInTheDocument();
-      expect(subject.queryByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)).toBeInTheDocument();
+      expect(screen.getByText(Config.cannabisPriorityStatus.minorityOrWomenHeaderText)).toBeInTheDocument();
     });
+    expect(screen.getByText(Config.cannabisPriorityStatus.veteranHeaderText)).toBeInTheDocument();
+    expect(screen.getByText(Config.cannabisPriorityStatus.impactZoneHeaderText)).toBeInTheDocument();
+    expect(screen.getByText(Config.cannabisPriorityStatus.socialEquityHeaderText)).toBeInTheDocument();
+
+    expect(screen.getByTestId("certificationButton")).toBeInTheDocument();
+    expect(screen.getByTestId("backButton")).toBeInTheDocument();
+    expect(screen.getByTestId("socialEquityButton")).toBeInTheDocument();
+    expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("completeTaskProgressButton")).not.toBeInTheDocument();
+    expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)).toBeInTheDocument();
+    expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).toBeInTheDocument();
+    expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)).toBeInTheDocument();
   });
 });

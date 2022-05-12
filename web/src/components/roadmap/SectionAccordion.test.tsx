@@ -14,7 +14,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { UserData } from "@businessnjgovnavigator/shared/";
-import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -26,9 +26,9 @@ describe("<SectionAccordion />", () => {
     useMockRoadmap({});
   });
 
-  const statefulRender = (type: SectionType, userData: UserData): RenderResult => {
+  const statefulRender = (type: SectionType, userData: UserData) => {
     setupStatefulUserDataContext();
-    return render(
+    render(
       <WithStatefulUserData initialUserData={userData}>
         <SectionAccordion sectionType={type}>BODY CONTENT</SectionAccordion>
       </WithStatefulUserData>
@@ -36,7 +36,7 @@ describe("<SectionAccordion />", () => {
   };
 
   it("expands and collapses the accordion", async () => {
-    const subject = statefulRender(
+    statefulRender(
       "PLAN",
       generateUserData({
         preferences: generatePreferences({
@@ -45,21 +45,21 @@ describe("<SectionAccordion />", () => {
       })
     );
 
-    expect(within(subject.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
+    expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
 
-    fireEvent.click(subject.getByTestId("plan-header"));
+    fireEvent.click(screen.getByTestId("plan-header"));
     await waitFor(() =>
-      expect(within(subject.getByTestId("section-plan")).getByText("BODY CONTENT")).toBeVisible()
+      expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).toBeVisible()
     );
 
-    fireEvent.click(subject.getByTestId("plan-header"));
+    fireEvent.click(screen.getByTestId("plan-header"));
     await waitFor(() =>
-      expect(within(subject.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible()
+      expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible()
     );
   });
 
-  it("adds and removes section from preferences on accordion open/close", async () => {
-    const subject = statefulRender(
+  it("adds and removes section from preferences on accordion open/close", () => {
+    statefulRender(
       "PLAN",
       generateUserData({
         preferences: generatePreferences({
@@ -68,7 +68,7 @@ describe("<SectionAccordion />", () => {
       })
     );
 
-    const sectionPlan = subject.getByTestId("plan-header");
+    const sectionPlan = screen.getByTestId("plan-header");
 
     expect(sectionPlan).toBeInTheDocument();
     fireEvent.click(sectionPlan);
@@ -79,11 +79,11 @@ describe("<SectionAccordion />", () => {
     );
   });
 
-  it("checks completed section logo given section status", async () => {
+  it("checks completed section logo given section status", () => {
     const roadmap = generateRoadmap({ steps: [generateStep({ section: "PLAN" })] });
     const sectionCompletion = generateSectionCompletion(roadmap, { PLAN: true });
     useMockRoadmap(roadmap, sectionCompletion);
-    const subject = statefulRender("PLAN", generateUserData({}));
-    expect(subject.getByTestId("completed-plan-section-img")).toBeVisible();
+    statefulRender("PLAN", generateUserData({}));
+    expect(screen.getByTestId("completed-plan-section-img")).toBeVisible();
   });
 });

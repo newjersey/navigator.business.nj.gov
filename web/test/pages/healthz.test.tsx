@@ -4,7 +4,7 @@ import React from "react";
 
 describe("HealthzPage", () => {
   it("renders correctly", () => {
-    const subject = render(<HealthCheck />).baseElement;
-    expect(subject).toMatchSnapshot();
+    const view = render(<HealthCheck />).baseElement;
+    expect(view).toMatchSnapshot();
   });
 });

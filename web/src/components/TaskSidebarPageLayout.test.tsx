@@ -6,7 +6,7 @@ import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -34,18 +34,16 @@ describe("<TaskSidebarPageLayout />", () => {
 
   it("shows only operate section when there are operateReferences", () => {
     const operateReferences = { "some-id": generateOperateReference({}) };
-    const subject = render(
-      <TaskSidebarPageLayout operateReferences={operateReferences}>stuff</TaskSidebarPageLayout>
-    );
-    expect(subject.queryByText(Config.sectionHeaders.OPERATE)).toBeInTheDocument();
-    expect(subject.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
-    expect(subject.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
+    render(<TaskSidebarPageLayout operateReferences={operateReferences}>stuff</TaskSidebarPageLayout>);
+    expect(screen.getByText(Config.sectionHeaders.OPERATE)).toBeInTheDocument();
+    expect(screen.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
   });
 
   it("shows only plan/start sections when there are no operateReferences", () => {
-    const subject = render(<TaskSidebarPageLayout>stuff</TaskSidebarPageLayout>);
-    expect(subject.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
-    expect(subject.queryByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
-    expect(subject.queryByText(Config.sectionHeaders.START)).toBeInTheDocument();
+    render(<TaskSidebarPageLayout>stuff</TaskSidebarPageLayout>);
+    expect(screen.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
+    expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
+    expect(screen.getByText(Config.sectionHeaders.START)).toBeInTheDocument();
   });
 });

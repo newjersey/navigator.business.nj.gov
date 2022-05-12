@@ -8,9 +8,9 @@ import {
   generateUserData,
 } from "@/test/factories";
 import {
+  FormationPageHelpers,
   generateLLCProfileData,
-  RenderedTask,
-  renderTask,
+  preparePage,
   setDesktopScreen,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
@@ -18,7 +18,7 @@ import { currentUserData, userDataUpdatedNTimes } from "@/test/mock/withStateful
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { BusinessUser, FormationFormData, ProfileData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -46,11 +46,11 @@ describe("Formation - ContactsSection", () => {
     useSetupInitialMocks();
   });
 
-  const renderSection = async (
+  const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
     formationFormData: Partial<FormationFormData>,
     initialUser?: Partial<BusinessUser>
-  ): Promise<RenderedTask> => {
+  ): Promise<FormationPageHelpers> => {
     const profileData = generateLLCProfileData(initialProfileData);
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData),
@@ -58,7 +58,7 @@ describe("Formation - ContactsSection", () => {
       getFilingResponse: undefined,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
-    const renderedTask = renderTask(
+    const page = preparePage(
       generateUserData({
         profileData,
         formationData,
@@ -67,9 +67,9 @@ describe("Formation - ContactsSection", () => {
       displayContent
     );
 
-    await renderedTask.page.submitBusinessNameTab();
-    await renderedTask.page.submitBusinessTab();
-    return renderedTask;
+    await page.submitBusinessNameTab();
+    await page.submitBusinessTab();
+    return page;
   };
 
   it("auto-fills fields from userData if it exists", async () => {
@@ -100,22 +100,16 @@ describe("Formation - ContactsSection", () => {
       ],
     });
 
-    const { subject, page } = await renderSection({}, formationFormData);
+    const page = await getPageHelper({}, formationFormData);
 
-    expect(subject.queryByText(displayContent.members.placeholder as string)).not.toBeInTheDocument();
-    expect(subject.getByText(formationFormData.members[0].name)).toBeInTheDocument();
+    expect(screen.queryByText(displayContent.members.placeholder as string)).not.toBeInTheDocument();
+    expect(screen.getByText(formationFormData.members[0].name)).toBeInTheDocument();
+    expect(screen.getByText(formationFormData.members[0].addressLine1, { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(formationFormData.members[0].addressLine2, { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(formationFormData.members[0].addressCity, { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(formationFormData.members[0].addressState, { exact: false })).toBeInTheDocument();
     expect(
-      subject.getByText(formationFormData.members[0].addressLine1, { exact: false })
-    ).toBeInTheDocument();
-    expect(
-      subject.getByText(formationFormData.members[0].addressLine2, { exact: false })
-    ).toBeInTheDocument();
-    expect(subject.getByText(formationFormData.members[0].addressCity, { exact: false })).toBeInTheDocument();
-    expect(
-      subject.getByText(formationFormData.members[0].addressState, { exact: false })
-    ).toBeInTheDocument();
-    expect(
-      subject.getByText(formationFormData.members[0].addressZipCode, { exact: false })
+      screen.getByText(formationFormData.members[0].addressZipCode, { exact: false })
     ).toBeInTheDocument();
     expect(page.getInputElementByLabel("Signer").value).toBe("signer 1");
     expect(page.getInputElementByLabel("Additional signers 0").value).toBe("signer 2");
@@ -124,7 +118,7 @@ describe("Formation - ContactsSection", () => {
 
   describe("signers", () => {
     it("adds additional signers", async () => {
-      const { page } = await renderSection({}, { additionalSigners: [] });
+      const page = await getPageHelper({}, { additionalSigners: [] });
       page.clickAddNewSigner();
       page.fillText("Additional signers 0", "Red Skull");
       page.checkSignerBox(0);
@@ -141,7 +135,7 @@ describe("Formation - ContactsSection", () => {
     });
 
     it("deletes an additional signer", async () => {
-      const { subject, page } = await renderSection({}, { additionalSigners: [] });
+      const page = await getPageHelper({}, { additionalSigners: [] });
       page.clickAddNewSigner();
       page.fillText("Additional signers 0", "Red Skull");
       page.checkSignerBox(0);
@@ -150,7 +144,7 @@ describe("Formation - ContactsSection", () => {
       page.fillText("Additional signers 1", "V");
       page.checkSignerBox(1);
 
-      fireEvent.click(subject.getAllByLabelText("delete additional signer")[0]);
+      fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
 
       await page.submitContactsTab();
       expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual([
@@ -163,10 +157,10 @@ describe("Formation - ContactsSection", () => {
 
     it("does not add more than 9 additional signers", async () => {
       const eightSigners = Array(8).fill(generateFormationSigner({}));
-      const { subject, page } = await renderSection({}, { additionalSigners: eightSigners });
+      const page = await getPageHelper({}, { additionalSigners: eightSigners });
 
       const addNewSignerButton = () =>
-        subject.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false });
+        screen.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false });
 
       expect(addNewSignerButton()).toBeInTheDocument();
       page.clickAddNewSigner();
@@ -174,15 +168,12 @@ describe("Formation - ContactsSection", () => {
     });
 
     it("fires validations when signers do not sign correctly", async () => {
-      const { subject, page } = await renderSection(
-        {},
-        { signer: { name: "", signature: false }, additionalSigners: [] }
-      );
+      const page = await getPageHelper({}, { signer: { name: "", signature: false }, additionalSigners: [] });
       await page.submitContactsTab(false);
       const signerErrorText = () =>
-        subject.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
+        screen.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
       const signerCheckboxErrorText = () =>
-        subject.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
+        screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
 
       expect(signerErrorText()).toBeInTheDocument();
       page.fillText("Signer", "Elrond");
@@ -195,31 +186,31 @@ describe("Formation - ContactsSection", () => {
 
     describe("required fields", () => {
       it("signer name", async () => {
-        const { page } = await renderSection({}, { signer: { name: "", signature: true } });
+        const page = await getPageHelper({}, { signer: { name: "", signature: true } });
         await page.submitContactsTab(false);
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
 
       it("signer signature", async () => {
-        const { page } = await renderSection({}, { signer: { name: "asdf", signature: false } });
+        const page = await getPageHelper({}, { signer: { name: "asdf", signature: false } });
         await page.submitContactsTab(false);
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
 
       it("additional signer signature", async () => {
-        const { page } = await renderSection({}, { additionalSigners: [{ name: "asdf", signature: false }] });
+        const page = await getPageHelper({}, { additionalSigners: [{ name: "asdf", signature: false }] });
         await page.submitContactsTab(false);
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
 
       it("additional signer name", async () => {
-        const { page } = await renderSection({}, { additionalSigners: [{ name: "", signature: true }] });
+        const page = await getPageHelper({}, { additionalSigners: [{ name: "", signature: true }] });
         await page.submitContactsTab(false);
         expect(userDataUpdatedNTimes()).toEqual(2);
       });
 
       it("does not require additional signer", async () => {
-        const { page } = await renderSection({}, { additionalSigners: [] });
+        const page = await getPageHelper({}, { additionalSigners: [] });
         await page.submitContactsTab();
         expect(userDataUpdatedNTimes()).toEqual(3);
       });
@@ -229,19 +220,20 @@ describe("Formation - ContactsSection", () => {
   describe("members", () => {
     it("edits members", async () => {
       const members = [...Array(2)].map(() => generateFormationMember({}));
-      const { subject, page } = await renderSection({}, { members });
+      const page = await getPageHelper({}, { members });
 
       expect(
-        subject.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
+        screen.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
       ).toBeInTheDocument();
-      const nameTd = subject.getByText(members[1].name, { exact: false });
+      const nameTd = screen.getByText(members[1].name, { exact: false });
       expect(nameTd).toBeInTheDocument();
       expect(
-        subject.getByText(
+        screen.getByText(
           `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState} ${members[1].addressZipCode}`,
           { exact: false }
         )
       ).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
       fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
       expect(page.getInputElementByLabel("Member name").value).toBe(members[1].name);
       expect(page.getInputElementByLabel("Member address line1").value).toBe(members[1].addressLine1);
@@ -254,10 +246,10 @@ describe("Formation - ContactsSection", () => {
       page.clickMemberSubmit();
       await waitFor(() => {
         expect(
-          subject.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+          screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
         ).toBeInTheDocument();
       });
-      expect(subject.getByText(newName, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
       await page.submitContactsTab();
       const newMembers = currentUserData().formationData.formationFormData.members;
       expect(newMembers.length).toEqual(2);
@@ -266,10 +258,11 @@ describe("Formation - ContactsSection", () => {
 
     it("is able to delete members", async () => {
       const members = [...Array(2)].map(() => generateFormationMember({}));
-      const { subject, page } = await renderSection({}, { members });
+      const page = await getPageHelper({}, { members });
 
-      const nameTd = subject.getByText(members[1].name, { exact: false });
+      const nameTd = screen.getByText(members[1].name, { exact: false });
       expect(nameTd).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
       fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
       await page.submitContactsTab();
       const newMembers = currentUserData().formationData.formationFormData.members;
@@ -278,7 +271,7 @@ describe("Formation - ContactsSection", () => {
     });
 
     it("adds members using business data using checkbox", async () => {
-      const { page } = await renderSection(
+      const page = await getPageHelper(
         { municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }) },
         {
           contactFirstName: "John",
@@ -301,51 +294,51 @@ describe("Formation - ContactsSection", () => {
     });
 
     it("shows validation on submit", async () => {
-      const { subject, page } = await renderSection({}, {});
+      const page = await getPageHelper({}, {});
       await page.openMemberModal();
       page.clickMemberSubmit();
 
       expect(
-        subject.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
+        screen.getByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
       ).toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
+        screen.getByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
       ).toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
+        screen.getByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
       ).toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
+        screen.getByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
       ).toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
+        screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
       ).toBeInTheDocument();
       await page.fillMemberModal({});
       expect(
-        subject.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
+        screen.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
+        screen.queryByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
+        screen.queryByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
+        screen.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
       ).not.toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
+        screen.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
       ).not.toBeInTheDocument();
       page.clickMemberSubmit();
       await waitFor(() => {
         expect(
-          subject.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+          screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
         ).toBeInTheDocument();
       });
     });
 
     it("resets form on cancel", async () => {
-      const { subject, page } = await renderSection(
+      const page = await getPageHelper(
         {},
         {
           contactFirstName: "John",
@@ -356,10 +349,10 @@ describe("Formation - ContactsSection", () => {
 
       page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
       expect(page.getInputElementByLabel("Member name").value).toBe("John Smith");
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.membersModalBackButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.membersModalBackButtonText));
       await waitFor(() =>
         expect(
-          subject.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
+          screen.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
         ).not.toBeInTheDocument()
       );
       await page.openMemberModal();
@@ -368,7 +361,7 @@ describe("Formation - ContactsSection", () => {
 
     it("does not add more than 10 members", async () => {
       const nineMembers = Array(9).fill(generateFormationMember({}));
-      const { subject, page } = await renderSection(
+      const page = await getPageHelper(
         {},
         {
           members: nineMembers,
@@ -376,7 +369,7 @@ describe("Formation - ContactsSection", () => {
       );
 
       expect(
-        subject.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
+        screen.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
       ).toBeInTheDocument();
 
       await page.openMemberModal();
@@ -385,11 +378,11 @@ describe("Formation - ContactsSection", () => {
 
       await waitFor(() =>
         expect(
-          subject.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
+          screen.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
         ).not.toBeInTheDocument()
       );
       expect(
-        subject.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
+        screen.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
       ).not.toBeInTheDocument();
       await page.submitContactsTab();
       expect(currentUserData().formationData.formationFormData.members.length).toEqual(10);
@@ -397,9 +390,9 @@ describe("Formation - ContactsSection", () => {
 
     it("renders mobile view of members table", async () => {
       setDesktopScreen(false);
-      const { subject, page } = await renderSection({}, { members: [] });
+      const page = await getPageHelper({}, { members: [] });
       await page.fillAndSubmitMemberModal({});
-      expect(subject.getByTestId("members-table-mobile")).toBeInTheDocument();
+      expect(screen.getByTestId("members-table-mobile")).toBeInTheDocument();
     });
   });
   describe("registered agent", () => {
@@ -409,7 +402,7 @@ describe("Formation - ContactsSection", () => {
         agentNumberOrManual: "NUMBER",
       });
 
-      const { page } = await renderSection({}, formationData);
+      const page = await getPageHelper({}, formationData);
       expect(page.getInputElementByLabel("Agent number").value).toBe("123465798");
     });
 
@@ -425,38 +418,38 @@ describe("Formation - ContactsSection", () => {
         agentOfficeAddressZipCode: "99887",
       });
 
-      const { page } = await renderSection({}, formationData);
+      const page = await getPageHelper({}, formationData);
 
       await waitFor(() => {
         expect(page.getInputElementByLabel("Agent name").value).toEqual("agent 1");
-        expect(page.getInputElementByLabel("Agent email").value).toEqual("agent@email.com");
-        expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("123 agent address");
-        expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("agent suite 201");
-        expect(page.getInputElementByLabel("Agent office address city").value).toEqual("agent-city-402");
-        expect(page.getInputElementByLabel("Agent office address state").value).toEqual("DC");
-        expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("99887");
       });
+      expect(page.getInputElementByLabel("Agent email").value).toEqual("agent@email.com");
+      expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("123 agent address");
+      expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("agent suite 201");
+      expect(page.getInputElementByLabel("Agent office address city").value).toEqual("agent-city-402");
+      expect(page.getInputElementByLabel("Agent office address state").value).toEqual("DC");
+      expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("99887");
     });
 
     it("defaults to registered agent number and toggles to manual with radio button", async () => {
-      const { subject, page } = await renderSection({}, { agentNumberOrManual: "NUMBER" });
+      const page = await getPageHelper({}, { agentNumberOrManual: "NUMBER" });
 
-      expect(subject.queryByTestId("agent-number")).toBeInTheDocument();
-      expect(subject.queryByTestId("agent-name")).not.toBeInTheDocument();
+      expect(screen.getByTestId("agent-number")).toBeInTheDocument();
+      expect(screen.queryByTestId("agent-name")).not.toBeInTheDocument();
 
       page.chooseRadio("registered-agent-manual");
 
-      expect(subject.queryByTestId("agent-number")).not.toBeInTheDocument();
-      expect(subject.queryByTestId("agent-name")).toBeInTheDocument();
+      expect(screen.queryByTestId("agent-number")).not.toBeInTheDocument();
+      expect(screen.getByTestId("agent-name")).toBeInTheDocument();
 
       page.chooseRadio("registered-agent-number");
 
-      expect(subject.queryByTestId("agent-number")).toBeInTheDocument();
-      expect(subject.queryByTestId("agent-name")).not.toBeInTheDocument();
+      expect(screen.getByTestId("agent-number")).toBeInTheDocument();
+      expect(screen.queryByTestId("agent-name")).not.toBeInTheDocument();
     });
 
     it("auto-fills and disables agent name and email from user account when box checked", async () => {
-      const { page } = await renderSection(
+      const page = await getPageHelper(
         {},
         {
           agentNumberOrManual: "MANUAL_ENTRY",
@@ -483,7 +476,7 @@ describe("Formation - ContactsSection", () => {
     });
 
     it("un-disables but leaves values for agent name and email when user unchecks", async () => {
-      const { page } = await renderSection(
+      const page = await getPageHelper(
         {},
         {
           agentNumberOrManual: "MANUAL_ENTRY",
@@ -506,7 +499,7 @@ describe("Formation - ContactsSection", () => {
     });
 
     it("auto-fills and disables (excl. state) agent address from business address when box checked", async () => {
-      const { page } = await renderSection(
+      const page = await getPageHelper(
         { municipality: generateMunicipality({ name: "New Test City" }) },
         {
           agentNumberOrManual: "MANUAL_ENTRY",
@@ -546,7 +539,7 @@ describe("Formation - ContactsSection", () => {
     });
 
     it("un-disables fields but leaves values when user unchecks same business address box", async () => {
-      const { page } = await renderSection(
+      const page = await getPageHelper(
         { municipality: generateMunicipality({ name: "New Test City" }) },
         {
           agentNumberOrManual: "MANUAL_ENTRY",
@@ -575,7 +568,7 @@ describe("Formation - ContactsSection", () => {
     });
 
     it("displays error message due to non-NJ zipcode is entered in registered agent address", async () => {
-      const { subject, page } = await renderSection(
+      const page = await getPageHelper(
         {},
         {
           agentOfficeAddressZipCode: "",
@@ -588,17 +581,17 @@ describe("Formation - ContactsSection", () => {
       await page.submitContactsTab(false);
       await waitFor(() => {
         expect(
-          subject.getByText(Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText)
-        ).toBeInTheDocument();
-        expect(
-          subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+          screen.getByText(Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText)
         ).toBeInTheDocument();
       });
+      expect(
+        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+      ).toBeInTheDocument();
     });
 
     describe("email validation", () => {
       it("displays error message when @ is missing in email input field", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentNumberOrManual: "MANUAL_ENTRY",
@@ -610,17 +603,15 @@ describe("Formation - ContactsSection", () => {
 
         await page.submitContactsTab(false);
         await waitFor(() => {
-          expect(
-            subject.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
-          ).toBeInTheDocument();
-          expect(
-            subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-          ).toBeInTheDocument();
+          expect(screen.getByText(Config.businessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
         });
+        expect(
+          screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+        ).toBeInTheDocument();
       });
 
       it("displays error message when email domain is missing in email input field", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentNumberOrManual: "MANUAL_ENTRY",
@@ -632,17 +623,15 @@ describe("Formation - ContactsSection", () => {
 
         await page.submitContactsTab(false);
         await waitFor(() => {
-          expect(
-            subject.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
-          ).toBeInTheDocument();
-          expect(
-            subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-          ).toBeInTheDocument();
+          expect(screen.getByText(Config.businessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
         });
+        expect(
+          screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+        ).toBeInTheDocument();
       });
 
       it("passes email validation", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentNumberOrManual: "MANUAL_ENTRY",
@@ -654,14 +643,14 @@ describe("Formation - ContactsSection", () => {
 
         await page.submitContactsTab();
         expect(
-          subject.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
+          screen.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
         ).not.toBeInTheDocument();
       });
     });
 
     describe("required fields - when agent number selected", () => {
       it("agent number", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentNumber: "",
@@ -669,13 +658,13 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(subject.getByRole("alert")).toHaveTextContent(/Agent number/);
+        expect(screen.getByRole("alert")).toHaveTextContent(/Agent number/);
       });
     });
 
     describe("required fields - when agent manual selected", () => {
       it("agent name", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentName: "",
@@ -683,11 +672,11 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(subject.getByRole("alert")).toHaveTextContent(/Agent name/);
+        expect(screen.getByRole("alert")).toHaveTextContent(/Agent name/);
       });
 
       it("agent email", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentEmail: "",
@@ -695,11 +684,11 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(subject.getByRole("alert")).toHaveTextContent(/Agent email/);
+        expect(screen.getByRole("alert")).toHaveTextContent(/Agent email/);
       });
 
       it("agent address line 1", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentOfficeAddressLine1: "",
@@ -707,11 +696,11 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(subject.getByRole("alert")).toHaveTextContent(/Agent office address line1/);
+        expect(screen.getByRole("alert")).toHaveTextContent(/Agent office address line1/);
       });
 
       it("Agent office address city", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentOfficeAddressCity: "",
@@ -719,11 +708,11 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(subject.getByRole("alert")).toHaveTextContent(/Agent office address city/);
+        expect(screen.getByRole("alert")).toHaveTextContent(/Agent office address city/);
       });
 
       it("Agent office address zip code", async () => {
-        const { subject, page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentOfficeAddressZipCode: "",
@@ -731,13 +720,13 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(subject.getByRole("alert")).toHaveTextContent(/Agent office address zip code/);
+        expect(screen.getByRole("alert")).toHaveTextContent(/Agent office address zip code/);
       });
     });
 
     describe("optional fields - submits successfully", () => {
       it("agent address line 2", async () => {
-        const { page } = await renderSection(
+        const page = await getPageHelper(
           {},
           {
             agentOfficeAddressLine2: "",
