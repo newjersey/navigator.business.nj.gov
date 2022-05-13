@@ -140,7 +140,7 @@
     "cypress-audit": "1.1.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "1.7.2",
-    "dotenv": "16.0.0",
+    "dotenv": "16.0.1",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "8.5.0",
