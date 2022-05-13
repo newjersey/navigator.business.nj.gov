@@ -1,25 +1,20 @@
-import { Content } from "@/components/Content";
 import { RoadmapSidebarCard } from "@/components/roadmap/RoadmapSidebarCard";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { SidebarDisplayContent } from "@/lib/types/types";
+import { SidebarCardContent } from "@/lib/types/types";
 import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
-import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect } from "react";
 
 interface Props {
-  sidebarDisplayContent: SidebarDisplayContent;
+  sidebarDisplayContent: Record<string, SidebarCardContent>;
 }
 
 export const RoadmapSidebarList = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
-  const { setRegistrationAlertStatus, registrationAlertStatus, isAuthenticated } =
-    useContext(AuthAlertContext);
-  const router = useRouter();
+  const { userData } = useUserData();
+  const { registrationAlertStatus, isAuthenticated } = useContext(AuthAlertContext);
   const { showCard, hideCard } = useRoadmapSidebarCards();
 
   useEffect(() => {
@@ -36,6 +31,14 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
     }
   }, [isAuthenticated, registrationAlertStatus, userData, hideCard, showCard]);
 
+  const visibleCardsOrderedByWeight = userData
+    ? userData.preferences.visibleRoadmapSidebarCards
+        .map((id: string) => props.sidebarDisplayContent[id])
+        .sort((cardA: SidebarCardContent, cardB: SidebarCardContent): number => {
+          return cardA.weight > cardB.weight ? -1 : 1;
+        })
+    : [];
+
   return (
     <>
       <h2>{Config.roadmapDefaults.sidebarHeading}</h2>
@@ -48,46 +51,9 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
         </div>
       ) : (
         <>
-          {userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration") && (
-            <RoadmapSidebarCard
-              color={props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.color}
-              shadowColor={props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.shadowColor}
-              dataTestid="successful-registration-card"
-              headerText={props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.header}
-              imagePath={props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.imgPath}
-              onClose={async () => {
-                await hideCard("successful-registration");
-              }}
-            >
-              <Content>{props.sidebarDisplayContent.guestSuccessfullyRegisteredCard.contentMd}</Content>
-            </RoadmapSidebarCard>
-          )}
-
-          {userData.preferences.visibleRoadmapSidebarCards.includes("welcome") && (
-            <RoadmapSidebarCard
-              color={props.sidebarDisplayContent.welcomeCard.color}
-              shadowColor={props.sidebarDisplayContent.welcomeCard.shadowColor}
-              headerText={props.sidebarDisplayContent.welcomeCard.header}
-              imagePath={props.sidebarDisplayContent.welcomeCard.imgPath}
-            >
-              <Content>{props.sidebarDisplayContent.welcomeCard.contentMd}</Content>
-            </RoadmapSidebarCard>
-          )}
-
-          {userData.preferences.visibleRoadmapSidebarCards.includes("not-registered") && (
-            <RoadmapSidebarCard
-              color={props.sidebarDisplayContent.guestNotRegisteredCard.color}
-              shadowColor={props.sidebarDisplayContent.guestNotRegisteredCard.shadowColor}
-            >
-              <Content
-                onClick={() => {
-                  onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
-                }}
-              >
-                {props.sidebarDisplayContent.guestNotRegisteredCard.contentMd}
-              </Content>
-            </RoadmapSidebarCard>
-          )}
+          {visibleCardsOrderedByWeight.map((card: SidebarCardContent) => (
+            <RoadmapSidebarCard card={card} key={card.id} />
+          ))}
         </>
       )}
     </>

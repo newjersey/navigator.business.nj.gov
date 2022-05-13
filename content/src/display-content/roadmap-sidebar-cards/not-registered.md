@@ -4,6 +4,8 @@ header: ""
 imgPath: ""
 color: primary
 shadowColor: primary-light
+hasCloseButton: false
+weight: 2
 ---
 
 ### Register to Save Your Progress

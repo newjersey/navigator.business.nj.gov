@@ -61,18 +61,37 @@ describe("loadDisplayContent", () => {
     it("returns roadmap content from markdown", () => {
       const roadmapContentMd = "### I am a header\n\nI am a description";
 
+      mockReadDirReturn([]);
       mockedFs.readFileSync.mockReturnValue(roadmapContentMd);
       expect(loadRoadmapDisplayContent().contentMd).toEqual("### I am a header\n\nI am a description");
     });
 
     it("returns sidebar card content from markdown", () => {
-      const welcomeCard = "### I am a header\n\nI am a description";
+      const welcomeCard =
+        "---\n" +
+        "id: welcome-id\n" +
+        "header: Welcome!\n" +
+        "imgPath: /img/congratulations-purple.svg\n" +
+        "color: roadmap-purple\n" +
+        "shadowColor: roadmap-purple-light\n" +
+        "hasCloseButton: false\n" +
+        "weight: 1\n" +
+        "---\n" +
+        "**Welcome!**";
 
+      mockReadDirReturn(["welcome.md"]);
       mockedFs.readFileSync.mockReturnValue(welcomeCard);
 
-      expect(loadRoadmapDisplayContent().sidebarDisplayContent.welcomeCard.contentMd).toEqual(
-        "### I am a header\n\nI am a description"
-      );
+      expect(loadRoadmapDisplayContent().sidebarDisplayContent["welcome-id"]).toEqual({
+        id: "welcome-id",
+        header: "Welcome!",
+        imgPath: "/img/congratulations-purple.svg",
+        color: "roadmap-purple",
+        shadowColor: "roadmap-purple-light",
+        hasCloseButton: false,
+        weight: 1,
+        contentMd: "**Welcome!**",
+      });
     });
   });
 
@@ -98,4 +117,10 @@ describe("loadDisplayContent", () => {
       );
     });
   });
+
+  const mockReadDirReturn = (value: string[]) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    mockedFs.readdirSync.mockReturnValue(value);
+  };
 });
