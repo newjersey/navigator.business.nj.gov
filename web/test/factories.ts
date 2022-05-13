@@ -1,4 +1,3 @@
-import { RoadmapSidebarCardContent } from "@/lib/static/loadDisplayContent";
 import {
   AllCounties,
   CannabisPriorityStatusDisplayContent,
@@ -17,7 +16,7 @@ import {
   Roadmap,
   SectionCompletion,
   SectionType,
-  SidebarDisplayContent,
+  SidebarCardContent,
   Step,
   Task,
   TaskLink,
@@ -401,41 +400,7 @@ export const generateFormationFormData = (overrides: Partial<FormationFormData>)
   };
 };
 
-export const generateSidebarDisplayContent = (
-  overrides: Partial<SidebarDisplayContent>
-): SidebarDisplayContent => {
-  return {
-    welcomeCard: {
-      contentMd: `some-welcome-content-${randomInt()}`,
-      id: `some-welcome-id-${randomInt()}`,
-      header: `some-welcome-header-${randomInt()}`,
-      imgPath: `some-welcome-img-path-${randomInt()}`,
-      color: `some-welcome-color-${randomInt()}`,
-      shadowColor: `some-welcome-shadow-color-${randomInt()}`,
-    },
-    guestSuccessfullyRegisteredCard: {
-      contentMd: `some-successfully-registered-guest-content-${randomInt()}`,
-      id: `some-successfully-registered-guest-id-${randomInt()}`,
-      header: `some-successfully-registered-guest-header-${randomInt()}`,
-      imgPath: `some-successfully-registered-guest-img-path-${randomInt()}`,
-      color: `some-successfully-registered-guest-color-${randomInt()}`,
-      shadowColor: `some-successfully-registered-guest-shadow-color-${randomInt()}`,
-    },
-    guestNotRegisteredCard: {
-      contentMd: `some-not-registered-guest-content-${randomInt()}`,
-      id: `some-not-registered-guest-id-${randomInt()}`,
-      header: `some-not-registered-guest-header-${randomInt()}`,
-      imgPath: `some-not-registered-guest-img-path-${randomInt()}`,
-      color: `some-not-registered-guest-color-${randomInt()}`,
-      shadowColor: `some-not-registered-guest-shadow-color-${randomInt()}`,
-    },
-    ...overrides,
-  };
-};
-
-export const generateRoadmapSidebarCard = (
-  overrides: Partial<RoadmapSidebarCardContent>
-): RoadmapSidebarCardContent => {
+export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent>): SidebarCardContent => {
   return {
     contentMd: `some-content-${randomInt()}`,
     id: `some-id-${randomInt()}`,
@@ -443,6 +408,8 @@ export const generateRoadmapSidebarCard = (
     imgPath: `some-img-path-${randomInt()}`,
     color: `some--color-${randomInt()}`,
     shadowColor: `some--shadow-color-${randomInt()}`,
+    hasCloseButton: !!(randomInt() % 2),
+    weight: randomInt() % 2,
     ...overrides,
   };
 };
