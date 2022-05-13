@@ -1,11 +1,7 @@
 import { SignUpToast } from "@/components/auth/SignUpToast";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import {
-  createEmptyLoadDisplayContent,
-  createEmptySidebarDisplayContent,
-  SidebarDisplayContent,
-} from "@/lib/types/types";
+import { createEmptyLoadDisplayContent, SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import RoadmapPage from "@/pages/roadmap";
 import {
@@ -14,8 +10,7 @@ import {
   generateMunicipality,
   generatePreferences,
   generateProfileData,
-  generateRoadmapSidebarCard,
-  generateSidebarDisplayContent,
+  generateSidebarCardContent,
   generateStep,
   generateTask,
   generateTaxFilingData,
@@ -74,9 +69,9 @@ const setMobileScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
-const createDisplayContent = (sidebar?: SidebarDisplayContent) => ({
+const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => ({
   contentMd: "",
-  sidebarDisplayContent: sidebar ?? createEmptySidebarDisplayContent(),
+  sidebarDisplayContent: sidebar ?? { welcome: generateSidebarCardContent({}) },
 });
 
 describe("roadmap page", () => {
@@ -91,7 +86,7 @@ describe("roadmap page", () => {
   const renderRoadmapPage = ({
     sidebarDisplayContent,
   }: {
-    sidebarDisplayContent?: SidebarDisplayContent;
+    sidebarDisplayContent?: Record<string, SidebarCardContent>;
   }): RenderResult => {
     return render(
       <ThemeProvider theme={createTheme()}>
@@ -113,7 +108,7 @@ describe("roadmap page", () => {
   }: {
     userData?: UserData;
     isAuthenticated?: IsAuthenticated;
-    sidebarDisplayContent?: SidebarDisplayContent;
+    sidebarDisplayContent?: Record<string, SidebarCardContent>;
     alertIsVisible?: boolean;
     registrationAlertStatus?: RegistrationStatus;
   }): RenderResult => {
@@ -871,51 +866,49 @@ describe("roadmap page", () => {
 
   describe("sidebar", () => {
     it("renders welcome card", () => {
-      const sidebarDisplayContent = generateSidebarDisplayContent({
-        welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
+      const userData = generateUserData({
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["welcome"],
+        }),
       });
 
-      const subject = renderRoadmapPage({ sidebarDisplayContent });
+      const sidebarDisplayContent = {
+        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+      };
 
+      const subject = renderPageWithAuth({ userData, sidebarDisplayContent });
       expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
 
     it("renders registration card when SignUpToast is closed", async () => {
-      const sidebarDisplayContent = generateSidebarDisplayContent({
-        guestNotRegisteredCard: generateRoadmapSidebarCard({
-          contentMd: "not-registered-content",
-        }),
-        welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
-      });
-
+      const sidebarDisplayContent = {
+        "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
+        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+      };
       const subject = renderPageWithAuth({
         alertIsVisible: true,
         sidebarDisplayContent,
         isAuthenticated: IsAuthenticated.FALSE,
       });
 
-      expect(subject.queryByText("not-registered-content")).not.toBeInTheDocument();
+      expect(subject.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
       expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
 
       fireEvent.click(within(subject.queryByTestId("self-reg-toast") as HTMLElement).getByLabelText("close"));
 
       await waitFor(() => {
-        expect(subject.getByText("not-registered-content")).toBeInTheDocument();
+        expect(subject.getByText("NotRegisteredContent")).toBeInTheDocument();
         expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
       });
     });
 
     // TODO: unskip me when async issues fixed
     xit("renders successful registration card when user is authenticated", async () => {
-      const sidebarDisplayContent = generateSidebarDisplayContent({
-        guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
-          contentMd: "successful-registration-content",
-        }),
-        guestNotRegisteredCard: generateRoadmapSidebarCard({
-          contentMd: "not-registered-content",
-        }),
-        welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
-      });
+      const sidebarDisplayContent = {
+        "successful-registration": generateSidebarCardContent({ contentMd: "SuccessContent" }),
+        "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
+        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+      };
 
       const subject = renderPageWithAuth({
         registrationAlertStatus: "SUCCESS",
@@ -923,8 +916,8 @@ describe("roadmap page", () => {
       });
 
       await waitFor(() => {
-        expect(subject.getByText("successful-registration-content")).toBeInTheDocument();
-        expect(subject.queryByText("not-registered-content")).not.toBeInTheDocument();
+        expect(subject.getByText("SuccessContent")).toBeInTheDocument();
+        expect(subject.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
         expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
       });
     });
@@ -936,14 +929,10 @@ describe("roadmap page", () => {
         }),
       });
 
-      const sidebarDisplayContent = generateSidebarDisplayContent({
-        guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
-          contentMd: "successful-registration-content",
-        }),
-        guestNotRegisteredCard: generateRoadmapSidebarCard({
-          contentMd: "not-registered-content",
-        }),
-      });
+      const sidebarDisplayContent = {
+        "successful-registration": generateSidebarCardContent({ contentMd: "SuccessContent" }),
+        "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
+      };
 
       const subject = renderPageWithAuth({
         userData,
@@ -952,8 +941,8 @@ describe("roadmap page", () => {
       });
 
       await waitFor(() => {
-        expect(subject.getByText("successful-registration-content")).toBeInTheDocument();
-        expect(subject.queryByText("not-registered-content")).not.toBeInTheDocument();
+        expect(subject.getByText("SuccessContent")).toBeInTheDocument();
+        expect(subject.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
       });
     });
 
@@ -964,13 +953,13 @@ describe("roadmap page", () => {
         }),
       });
 
-      const sidebarDisplayContent = generateSidebarDisplayContent({
-        guestSuccessfullyRegisteredCard: generateRoadmapSidebarCard({
-          contentMd: "successful-registration-content",
-          header: "successful-registration-header",
+      const sidebarDisplayContent = {
+        "successful-registration": generateSidebarCardContent({
+          id: "successful-registration",
+          contentMd: "SuccessContent",
+          hasCloseButton: true,
         }),
-        welcomeCard: generateRoadmapSidebarCard({ contentMd: "WelcomeCardContent" }),
-      });
+      };
 
       const subject = renderPageWithAuth({
         userData,
@@ -978,15 +967,15 @@ describe("roadmap page", () => {
       });
 
       await waitFor(() => {
-        expect(subject.getByText("successful-registration-content")).toBeInTheDocument();
+        expect(subject.getByText("SuccessContent")).toBeInTheDocument();
       });
 
       fireEvent.click(
-        within(subject.queryByTestId("successful-registration-card") as HTMLElement).getByLabelText("Close")
+        within(subject.getByTestId("successful-registration") as HTMLElement).getByLabelText("Close")
       );
 
       await waitFor(() => {
-        expect(subject.queryByText("successful-registration-content")).not.toBeInTheDocument();
+        expect(subject.queryByText("SuccessContent")).not.toBeInTheDocument();
       });
     });
   });

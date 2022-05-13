@@ -1537,6 +1537,8 @@ collections:
     fields:
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Header", name: "header", widget: "string", required: false }
+      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: true }
+      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
       - {
           label: "Image (header required)",
           name: "imgPath",

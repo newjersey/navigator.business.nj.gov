@@ -11,7 +11,7 @@ import {
   profileDisplayFields,
   RadioFieldContent,
   RoadmapDisplayContent,
-  SidebarDisplayContent,
+  SidebarCardContent,
   startFlowDisplayFields,
   StartingFlowContent,
   TasksDisplayContent,
@@ -196,29 +196,21 @@ export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
   };
 };
 
-const loadSidebarDisplayContent = (): SidebarDisplayContent => {
-  const loadFile = (filename: string): string =>
-    fs.readFileSync(path.join(displayContentDir, "roadmap-sidebar-cards", filename), "utf8");
+const loadSidebarDisplayContent = (): Record<string, SidebarCardContent> => {
+  const fileNames = fs.readdirSync(path.join(displayContentDir, "roadmap-sidebar-cards"));
 
-  const welcomeCardContent = getMarkdown(loadFile("welcome.md"));
-
-  const guestSuccessfullyRegisteredContent = getMarkdown(loadFile("successful-registration.md"));
-  const guestNotRegisteredContent = getMarkdown(loadFile("not-registered.md"));
-
-  return {
-    welcomeCard: {
-      contentMd: welcomeCardContent.content,
-      ...(welcomeCardContent.grayMatter as RoadmapCardGrayMatter),
-    },
-    guestSuccessfullyRegisteredCard: {
-      contentMd: guestSuccessfullyRegisteredContent.content,
-      ...(guestSuccessfullyRegisteredContent.grayMatter as RoadmapCardGrayMatter),
-    },
-    guestNotRegisteredCard: {
-      contentMd: guestNotRegisteredContent.content,
-      ...(guestNotRegisteredContent.grayMatter as RoadmapCardGrayMatter),
-    },
-  };
+  return fileNames.reduce((acc, cur) => {
+    const fileContents: string = fs.readFileSync(
+      path.join(displayContentDir, "roadmap-sidebar-cards", cur),
+      "utf8"
+    );
+    const markdownContents = getMarkdown(fileContents);
+    const displayContent: SidebarCardContent = {
+      contentMd: markdownContents.content,
+      ...(markdownContents.grayMatter as RoadmapCardGrayMatter),
+    };
+    return { ...acc, [displayContent.id]: displayContent };
+  }, {} as Record<string, SidebarCardContent>);
 };
 
 export const loadDashboardDisplayContent = (): DashboardDisplayContent => {
@@ -374,8 +366,6 @@ type RoadmapCardGrayMatter = {
   imgPath: string;
   color: string;
   shadowColor: string;
+  hasCloseButton: boolean;
+  weight: number;
 };
-
-export interface RoadmapSidebarCardContent extends RoadmapCardGrayMatter {
-  contentMd: string;
-}

@@ -428,7 +428,7 @@ export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
 
 export type RoadmapDisplayContent = {
   contentMd: string;
-  sidebarDisplayContent: SidebarDisplayContent;
+  sidebarDisplayContent: Record<string, SidebarCardContent>;
 };
 
 export type DashboardDisplayContent = {
@@ -656,35 +656,16 @@ export type businessFormationTabsNames = "Name" | "Business" | "Contacts" | "Rev
 
 export type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
 
-export type SidebarDisplayContent = {
-  welcomeCard: SidebarCardContent;
-  guestSuccessfullyRegisteredCard: SidebarCardContent;
-  guestNotRegisteredCard: SidebarCardContent;
-};
-
-type SidebarCardContent = {
+export type SidebarCardContent = {
   contentMd: string;
   id: string;
   header: string;
   imgPath: string;
   color: string;
   shadowColor: string;
+  hasCloseButton: boolean;
+  weight: number;
 };
-
-const createEmptySidebarCardContent = () => ({
-  contentMd: "",
-  id: "",
-  header: "",
-  imgPath: "",
-  color: "",
-  shadowColor: "",
-});
-
-export const createEmptySidebarDisplayContent = (): SidebarDisplayContent => ({
-  welcomeCard: createEmptySidebarCardContent(),
-  guestSuccessfullyRegisteredCard: createEmptySidebarCardContent(),
-  guestNotRegisteredCard: createEmptySidebarCardContent(),
-});
 
 export type NaicsCodeObject = {
   SixDigitDescription?: string;
