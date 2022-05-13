@@ -598,8 +598,18 @@ collections:
             summary: "{{determineNaicsCode}}"
             fields:
               - { label: Find Code Header, name: findCodeHeader, widget: string }
-              - { label: Find Code Body Text, name: findCodeBodyText, widget: string }
-              - { label: Suggested Code Body Text, name: suggestedCodeBodyText, widget: string }
+              - {
+                  label: Find Code Body Text,
+                  name: findCodeBodyText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Suggested Code Body Text,
+                  name: suggestedCodeBodyText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
               - {
                   label: siccode.com Link,
                   name: sicCodeLink,
