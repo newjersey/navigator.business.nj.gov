@@ -3499,7 +3499,7 @@ __metadata:
     "@aws-sdk/util-dynamodb": 3.82.0
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 28.1.0
-    "@serverless/typescript": 3.15.2
+    "@serverless/typescript": 3.17.0
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
@@ -3531,13 +3531,13 @@ __metadata:
     prettier: 2.6.2
     prettier-plugin-organize-imports: 2.3.4
     rimraf: 3.0.2
-    serverless: 3.16.0
+    serverless: 3.17.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.7.0
     serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
-    serverless-webpack: 5.7.0
+    serverless-webpack: 5.7.1
     simple-oauth2: 4.3.0
     supertest: 6.2.3
     ts-jest: 28.0.2
@@ -3546,7 +3546,7 @@ __metadata:
     tsconfig-paths: 4.0.0
     tsconfig-paths-webpack-plugin: 3.5.2
     typescript: 4.6.4
-    webpack: 5.72.0
+    webpack: 5.72.1
     webpack-node-externals: 3.0.0
     winston: 3.7.2
     winston-cloudwatch: 6.0.0
@@ -3599,7 +3599,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.1.6
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 3.15.2
+    "@serverless/typescript": 3.17.0
     "@storybook/addon-a11y": 6.4.22
     "@storybook/addon-actions": 6.4.22
     "@storybook/addon-docs": 6.4.22
@@ -3701,13 +3701,13 @@ __metadata:
     sass: 1.51.0
     sass-loader: 12.6.0
     semantic-release: 19.0.2
-    serverless: 3.16.0
+    serverless: 3.17.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.7.0
     serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
-    serverless-webpack: 5.7.0
+    serverless-webpack: 5.7.1
     simple-oauth2: 4.3.0
     storybook-addon-designs: 6.2.1
     style-loader: 3.3.1
@@ -3721,7 +3721,7 @@ __metadata:
     typescript: 4.6.4
     unified: 10.1.2
     uuid: 8.3.2
-    webpack: 5.72.0
+    webpack: 5.72.1
     webpack-node-externals: 3.0.0
     winston: 3.7.2
     winston-cloudwatch: 6.0.0
@@ -3861,7 +3861,7 @@ __metadata:
     ts-node: 10.7.0
     typescript: 4.6.4
     unified: 10.1.2
-    webpack: 5.72.0
+    webpack: 5.72.1
   languageName: unknown
   linkType: soft
 
@@ -7593,16 +7593,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:3.15.2":
-  version: 3.15.2
-  resolution: "@serverless/typescript@npm:3.15.2"
-  checksum: 22e424917edcbb30c647955e54775d96cd63a73d3b68fc567007c7cf299e1c1a46d1e135977f9eb08eb2f4594f092cab7de81c6e6cbec386cf2cde23878b0a7d
+"@serverless/typescript@npm:3.17.0":
+  version: 3.17.0
+  resolution: "@serverless/typescript@npm:3.17.0"
+  checksum: 397c846e1af232c82cff21430968b06fbfeb6b933c5c92f94396962dd1a1895a5384d5fe960fc37dd5e235c86e99d3b7e06e756185119bf693f40a76a5fe38cd
   languageName: node
   linkType: hard
 
-"@serverless/utils@npm:^6.0.3":
-  version: 6.3.0
-  resolution: "@serverless/utils@npm:6.3.0"
+"@serverless/utils@npm:^6.0.3, @serverless/utils@npm:^6.3.0":
+  version: 6.4.0
+  resolution: "@serverless/utils@npm:6.4.0"
   dependencies:
     archive-type: ^4.0.0
     chalk: ^4.1.2
@@ -7636,7 +7636,7 @@ __metadata:
     uni-global: ^1.0.0
     uuid: ^8.3.2
     write-file-atomic: ^4.0.1
-  checksum: 3d29c3ad12f3fdeae0160f902e549a8316637bcd9f55b34e8c67e9cdd90bddaa42f27b1f51a845ae1716369b835557ff60e053bc39aa86c67e3bd21857761b94
+  checksum: 4dbac502fc4337dae1e162ccc40650a8e7923d01905e5d2cde7474160d9539f0374b2a55c6de7d90726d936e119e12c92589700b28d0af097deb36efb14f52fb
   languageName: node
   linkType: hard
 
@@ -11704,9 +11704,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1097.0, aws-sdk@npm:^2.1124.0, aws-sdk@npm:^2.7.0":
-  version: 2.1130.0
-  resolution: "aws-sdk@npm:2.1130.0"
+"aws-sdk@npm:^2.1097.0, aws-sdk@npm:^2.1131.0, aws-sdk@npm:^2.7.0":
+  version: 2.1135.0
+  resolution: "aws-sdk@npm:2.1135.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -11717,7 +11717,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: 141a2f43a2391bf9f6a7dc69c288d97a71bcd41b467524958b16e0f4e62cea48703d764eff0694daeb99a8dda59754267c36cb62a364d643f78c2a2c38196ec2
+  checksum: 20a5bdd3dc68b59dc4275916c458987520e1b4fbcab4cce9d0de1222d30ac3e58b1eb21079859b9d150a52419f69fe7c5db8a3375591fd1464388ecc74ee5e19
   languageName: node
   linkType: hard
 
@@ -14960,7 +14960,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:1.11.2, dayjs@npm:^1.10.4, dayjs@npm:^1.11.1":
+"dayjs@npm:1.11.2, dayjs@npm:^1.10.4, dayjs@npm:^1.11.2":
   version: 1.11.2
   resolution: "dayjs@npm:1.11.2"
   checksum: 78f8bd04a9e5f5554aa06eacda65a7d59e162d39f621a46fd34fb3b51367c3662426d86b4e2f4ac535f81e0c4d5af3e8a83b37e672412eb556267d726c61f8f3
@@ -16049,7 +16049,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.7.0, enhanced-resolve@npm:^5.9.2":
+"enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.7.0, enhanced-resolve@npm:^5.9.3":
   version: 5.9.3
   resolution: "enhanced-resolve@npm:5.9.3"
   dependencies:
@@ -31194,7 +31194,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.3.7, semver@npm:7.x, semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.1.2, semver@npm:^7.1.3, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.6, semver@npm:^7.3.7, semver@npm:~7.3.5":
+"semver@npm:7.3.7, semver@npm:7.x, semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.1.2, semver@npm:^7.1.3, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:~7.3.5":
   version: 7.3.7
   resolution: "semver@npm:7.3.7"
   dependencies:
@@ -31371,17 +31371,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-webpack@npm:5.7.0":
-  version: 5.7.0
-  resolution: "serverless-webpack@npm:5.7.0"
+"serverless-webpack@npm:5.7.1":
+  version: 5.7.1
+  resolution: "serverless-webpack@npm:5.7.1"
   dependencies:
-    archiver: ^5.3.0
+    archiver: ^5.3.1
     bluebird: ^3.7.2
     fs-extra: ^9.1.0
     glob: ^7.2.0
     is-builtin-module: ^3.1.0
     lodash: ^4.17.21
-    semver: ^7.3.6
+    semver: ^7.3.7
     ts-node: ">= 8.3.0"
   peerDependencies:
     serverless: 1 || 2 || 3
@@ -31389,21 +31389,21 @@ __metadata:
   dependenciesMeta:
     ts-node:
       optional: true
-  checksum: 0af550cdfcd5d71640e6d4c8d0d92ead085aa633e1a67b81155bdde93a3e961bd1ab7ef18cf3312cc315372f9ac9eca126db97dbffdb3040616a037bcfa6b736
+  checksum: b6287cb36dcd943ccd80eae61ff50c4ddd263cb3a73c29260a182006c5d33b6212be26abb347c95ee76d63afaa0abc8c2396822edaff66032c0cf73c25d262ae
   languageName: node
   linkType: hard
 
-"serverless@npm:3.16.0":
-  version: 3.16.0
-  resolution: "serverless@npm:3.16.0"
+"serverless@npm:3.17.0":
+  version: 3.17.0
+  resolution: "serverless@npm:3.17.0"
   dependencies:
     "@serverless/dashboard-plugin": ^6.2.2
     "@serverless/platform-client": ^4.3.2
-    "@serverless/utils": ^6.0.3
+    "@serverless/utils": ^6.3.0
     ajv: ^8.11.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.1
-    aws-sdk: ^2.1124.0
+    aws-sdk: ^2.1131.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
@@ -31411,7 +31411,7 @@ __metadata:
     ci-info: ^3.3.0
     cli-progress-footer: ^2.3.1
     d: ^1.0.1
-    dayjs: ^1.11.1
+    dayjs: ^1.11.2
     decompress: ^4.2.1
     dotenv: ^10.0.0
     dotenv-expand: ^5.1.0
@@ -31453,7 +31453,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 039a91e7e278ac3769f5bfda3e0dbebbec7c0714280d7e3f7b804ab963c69b4aa8e71ef62a41bd3a1e9b090598f5813991a71557ba40774ca874c67384b463d0
+  checksum: 9968a8e11d074713b693ea197af722521be307ff709b07ab1d6fc575757b9af8cc5e437bc5b7631dbadc3b9321f0dc3204bd01b50ddf17a2e1f83ad0ac61ab3e
   languageName: node
   linkType: hard
 
@@ -35439,9 +35439,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.72.0, webpack@npm:^5, webpack@npm:^5.9.0":
-  version: 5.72.0
-  resolution: "webpack@npm:5.72.0"
+"webpack@npm:5.72.1, webpack@npm:^5, webpack@npm:^5.9.0":
+  version: 5.72.1
+  resolution: "webpack@npm:5.72.1"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^0.0.51
@@ -35452,13 +35452,13 @@ __metadata:
     acorn-import-assertions: ^1.7.6
     browserslist: ^4.14.5
     chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.9.2
+    enhanced-resolve: ^5.9.3
     es-module-lexer: ^0.9.0
     eslint-scope: 5.1.1
     events: ^3.2.0
     glob-to-regexp: ^0.4.1
     graceful-fs: ^4.2.9
-    json-parse-better-errors: ^1.0.2
+    json-parse-even-better-errors: ^2.3.1
     loader-runner: ^4.2.0
     mime-types: ^2.1.27
     neo-async: ^2.6.2
@@ -35472,7 +35472,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 8365f1466d0f7adbf80ebc9b780f263a28eeeabcd5fb515249bfd9a56ab7fe8d29ea53df3d9364d0732ab39ae774445eb28abce694ed375b13882a6b2fe93ffc
+  checksum: d1eff085eee1c67a68f7bf1d077ea202c1e68a0de0e0866274984769838c3f224fbc64e847e1a1bbc6eba9fb6a9965098809cc0be9292b573767bb5d8d2df96e
   languageName: node
   linkType: hard
 
