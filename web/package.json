@@ -89,7 +89,7 @@
     "@testing-library/dom": "8.13.0",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.2.0",
-    "@testing-library/user-event": "14.1.1",
+    "@testing-library/user-event": "14.2.0",
     "@types/broken-link-checker": "0.7.1",
     "@types/jest": "27.5.0",
     "@types/lodash.orderby": "4.6.7",
