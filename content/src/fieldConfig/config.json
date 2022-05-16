@@ -2,19 +2,19 @@
   "determineNaicsCode": {
     "naicsLink": "[Naics.com](https://www.naics.com/)",
     "successMessage": "NAICS Code ${code} has been saved. You can use this NAICS code to [register for state taxes](/tasks/register-for-taxes).",
+    "invalidValidationErrorText": "Your NAICS code is invalid",
     "hasSavedCodeHeader": "Your NAICS Code",
     "inputPlaceholder": "6-digit NAICS Code",
     "inputLabel": "**Save your NAICS code here so you can reference it later:**",
+    "registerForTaxesMissingNAICSCodePlaceholder": "(You have not saved a NAICS Code yet)",
     "findCodeHeader": "Find Your NAICS Code",
+    "registerForTaxesNAICSCodePlaceholder": "(Your NAICS Code is ${naicsCode})",
     "sicCodeLink": "[Siccode.com](https://siccode.com/)",
-    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **There are no benefits or disadvantages to use one NAICS code over another.**\n\nPlease select one that best represents your primary business activity.",
     "findCodeBodyText": "Use the resources listed below to search and find your NAICS code.  **If you can’t decide the right code,** remember, there are no benefits or disadvantages to use one NAICS code over another. ",
+    "lengthValidationErrorText": "Your NAICS code must be 6 digits",
     "editText": "Edit",
     "saveButtonText": "Save NAICS Code",
-    "lengthValidationErrorText": "Your NAICS code must be 6 digits",
-    "invalidValidationErrorText": "Your NAICS code is invalid",
-    "registerForTaxesNAICSCodePlaceholder": "(Your NAICS Code is ${naicsCode})",
-    "registerForTaxesMissingNAICSCodePlaceholder": "(You have not saved a NAICS Code yet)"
+    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **There are no benefits or disadvantages to use one NAICS code over another.**\n\nPlease select one that best represents your primary business activity."
   },
   "legalMessageDefaults": {
     "legalMessageTextOne": "This information is supplied as a guide and is not a substitute for legal or professional advice. It is the responsibility of the business owner to comply with all local, county, and state regulations even if they are not listed here. For no-cost assistance with your business, use the ",
@@ -44,7 +44,11 @@
     "addressErrorText": "Enter an address",
     "businessAddressHeader": "### Business Address",
     "reviewPageBusinessNameLabel": "**Business Name**",
+    "businessPurposePlaceholderText": "Describe your business purpose",
+    "provisionsAddButtonText": "Add Provisions/Articles",
     "businessSuffixPlaceholder": "Select Business Designator",
+    "businessPurposeAddButtonText": "Add Business Purpose",
+    "provisionsPlaceholderText": "Enter your provision or article",
     "businessSuffixLabel": "**Business Designator**",
     "nameCheckPlaceholderText": "Enter a business name",
     "certifiedDocLabel": "Certified Copy of Formation (PDF)",
@@ -52,6 +56,7 @@
     "legalStructureWarningModalCancelButtonText": "Cancel",
     "businessStartDateLabel": "**Effective Date**",
     "membersModalTitle": "Add New Member",
+    "reviewPageBusinessPurposeHeader": "### Business Purpose",
     "notSetBusinessAddressCityLabel": "Not set",
     "membersSuccessTextHeader": "Member Added",
     "missingFieldsOnSubmitModalText": "Review before submitting. The following fields are missing or invalid:",
@@ -81,6 +86,7 @@
     "standingDocLabel": "Certificate of Good Standing (PDF)",
     "addNewSignerButtonText": "Add New Signer",
     "registeredAgentAddressLine1Label": "**Office Address Line 1**",
+    "reviewPageProvisionsSubheader": "Provision/Article",
     "registeredAgentZipCodePlaceholder": "Office Zip Code",
     "registeredAgentNumberLabel": "**Registered Agent ID Number**",
     "registeredAgentZipCodeLabel": "**Zip Code**",
@@ -92,6 +98,7 @@
     "documentTableColumn3Label": "Cost",
     "nameErrorText": "Enter a name",
     "signerLabel": "**Signer Full Name**",
+    "charactersLabel": "characters",
     "reviewPageBusinessStartDateLabel": "**Business Start Date**",
     "membersTableColumn": "Name,Address,Actions",
     "agentOfficeAddressLine1ErrorText": "Enter the agent's office address",
@@ -100,7 +107,9 @@
     "businessAddressLine1ErrorText": "Enter an address",
     "formationDocLabel": "Official Formation Document (PDF)",
     "legalStructureWarningModalBody": "If you change your proposed legal structure in the Navigator profile, you may be required to complete a different form. Don't worry: once you update your profile, we will tell you which form you need to complete and where you can complete it.",
+    "businessPurposeBodyText": "Describe your business' primary activities. (Businesses do this to make their business purpose searchable on the Public Record.)",
     "reviewPageRegisteredAgentNameLabel": "**Name:**",
+    "provisionsBodyText": "Describe your business' operations, partners and board member rights, duties, or other key information. This can be referenced to resolve conflict with individuals. You can list up to 10.",
     "achPaymentCost": "1",
     "sameAgentInfoAsAccount": "The agent information is the same as the account holder",
     "paymentDisclaimerText": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
@@ -114,6 +123,7 @@
     "signersEmptyErrorText": "A signature is missing above",
     "contactLastNamePlaceholder": "Last Name",
     "signatureDeleteMobileText": "Delete Signer",
+    "reviewPageProvisionsHeader": "### Provisions/Articles",
     "nextButtonText": "Save & Continue",
     "submitErrorHeading": "Form cannot be submitted. Review the errors found in the following fields:",
     "businessSuffixTooltip": "A business designator is how your legal structure is displayed after your business name.",
@@ -132,15 +142,19 @@
     "businessAddressCityLabel": "City",
     "businessAddressAddressLine2Label": "**Address Line 2** (Optional)",
     "memberModalNameLabel": "**Full Name**",
+    "businessPurposeLabel": "**Business Purpose**",
     "businessAddressStatePlaceholder": "NJ",
     "entityIdLabel": "`Entity ID|entity-id`",
     "memberModalCityLabel": "**City**",
     "memberModalStateLabel": "**State**",
     "confirmationNumberLabel": "Confirmation Number:",
     "previousButtonText": "Back",
+    "provisionsOptionalLabel": "(Optional)",
     "memberModalAddressLine2Placeholder": "Address Line 2",
     "addressCityErrorText": "Enter a city",
+    "businessPurposeOptionalLabel": "(Optional)",
     "initialNextButtonText": "Continue Forming My Business",
+    "provisionsLabel": "**Provision/Article** (Optional)",
     "businessAddressAddressLine1Placeholder": "Address Line 1",
     "businessAddressStateLabel": "**State**",
     "memberModalAddressLine1Placeholder": "Address Line 1",
@@ -170,7 +184,9 @@
     "optInCorpWatchText": "I want to sign up for CorpWatch Alerts to notify me when any charter document filing is performed for my business.",
     "membersModalBackButtonText": "Cancel",
     "creditCardPaymentCostInitial": "3.5",
+    "provisionsTitle": "Provisions/Articles",
     "agentOfficeAddressZipCodeErrorText": "Enter a NJ Zip Code between 07001 and 08999",
+    "businessPurposeTitle": "Business Purpose",
     "registeredAgentEmailPlaceholder": "Registered Agent Email",
     "addressZipCodeErrorText": "Enter a valid 5 digit Zip Code",
     "businessAddressZipCodeErrorText": "Enter a NJ Zip Code between 07001 and 08999",
@@ -187,23 +203,7 @@
     "reviewPageMembersHeader": "### Members",
     "nameCheckValidationErrorText": "You need to enter a business name to check availability.",
     "successPageHeader": "Hooray!",
-    "businessPurposeTitle": "Business Purpose",
-    "businessPurposeBodyText": "Describe your business' primary activities. (Businesses do this to make their business purpose searchable on the Public Record.)",
-    "businessPurposeOptionalLabel": "(Optional)",
-    "businessPurposeAddButtonText": "Add Business Purpose",
-    "businessPurposeLabel": "**Business Purpose**",
-    "businessPurposePlaceholderText": "Describe your business purpose",
-    "reviewPageBusinessPurposeHeader": "### Business Purpose",
-    "charactersLabel": "characters",
-    "provisionsTitle": "Provisions/Articles",
-    "provisionsOptionalLabel": "(Optional)",
-    "provisionsBodyText": "Describe your business' operations, partners and board member rights, duties, or other key information. This can be referenced to resolve conflict with individuals. You can list up to 10.",
-    "provisionsAddButtonText": "Add Provisions/Articles",
-    "provisionsAddAnotherButtonText": "Add a Provision",
-    "provisionsLabel": "**Provision/Article** (Optional)",
-    "provisionsPlaceholderText": "Enter your provision or article",
-    "reviewPageProvisionsHeader": "### Provisions/Articles",
-    "reviewPageProvisionsSubheader": "Provision/Article"
+    "provisionsAddAnotherButtonText": "Add a Provision"
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
@@ -303,6 +303,13 @@
     "section5SecondHeaderText": "Funding & Certifications",
     "section6Header": "Looking for More Support?"
   },
+  "profileDocumentsTab": {
+    "standingDocFileTitle": "Certified Copy of Formation",
+    "profileTabDocsTitle": "Reference Documents",
+    "profileTabRefTitle": "Reference Numbers",
+    "formationDocFileTitle": "Official Formation Document",
+    "certificationDocFileTitle": "Certificate of Good Standing"
+  },
   "filingDefaults": {
     "tagContentBeforeDueDate": "Next Due:"
   },
@@ -331,6 +338,7 @@
     "greyBoxBusinessNameText": "Business Name",
     "graduationModalContinueButtonText": "Continue",
     "greyBoxHeaderText": "Business Profile",
+    "sidebarHeading": "For You",
     "greyBoxTaxIdText": "NJ Tax ID",
     "congratulatorModalLinkText": "tasks.",
     "greyBoxNotSetText": "Not set",
@@ -351,8 +359,7 @@
     "graduationModalTitle": "Tell us more about your business",
     "graduationHeader": "Finished setting up your business?",
     "graduationBodyText": "If your business is up and running, you can now also use the Navigator to learn about filings, certifications, funding opportunities, and more.",
-    "greyBoxNotEnteredText": "Not entered",
-    "sidebarHeading": "For You"
+    "greyBoxNotEnteredText": "Not entered"
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
@@ -392,6 +399,19 @@
     "outOfBusinessPermitStatusText": "Out of Business",
     "expiredPermitStatusText": "Expired"
   },
+  "profileShared": {
+    "errorTextHeader": "Error",
+    "backButtonText": "Cancel",
+    "pageTitle": "### Business Profile",
+    "escapeModalEscape": "Go back",
+    "escapeModalBody": "You have unsaved changes that will be lost.",
+    "successTextBody": "Your profile has been updated.",
+    "errorTextBody": "There are errors with some entries, please try again.",
+    "escapeModalHeader": "Are you sure you want to continue?",
+    "saveButtonText": "Save",
+    "escapeModalReturn": "Continue without saving.",
+    "successTextHeader": "Profile Updated"
+  },
   "taskProgress": {
     "NOT_STARTED": "Not started",
     "IN_PROGRESS": "In progress",
@@ -410,6 +430,9 @@
     "heroSupportingText": "Create your free, personalized guide to register and find funding for your New Jersey business.",
     "section5FirstHeaderText": "Starter Kit",
     "heroCallOutFirstLineText": "Start and Grow Your"
+  },
+  "profileNumbersTab": {
+    "taxPinErrorText": "Tax PIN must be 4 digits."
   },
   "taskDefaults": {
     "backToRoadmapText": "Go Back",
@@ -483,40 +506,6 @@
     "certificationDocFileTitle": "Certificate of Good Standing",
     "profileTabInfoTitle": "Business Information"
   },
-  "profileShared": {
-    "errorTextHeader": "Error",
-    "backButtonText": "Cancel",
-    "pageTitle": "### Business Profile",
-    "successTextBody": "Your profile has been updated.",
-    "escapeModalEscape": "Go back",
-    "escapeModalBody": "You have unsaved changes that will be lost.",
-    "errorTextBody": "There are errors with some entries, please try again.",
-    "escapeModalHeader": "Are you sure you want to continue?",
-    "saveButtonText": "Save",
-    "escapeModalReturn": "Continue without saving.",
-    "successTextHeader": "Profile Updated"
-  },
-  "profileInfoTab": {
-    "profileTabInfoTitle": "Business Information",
-    "businessName": {
-      "placeholder": "Type Your Business Name",
-      "header": "## Business Name",
-      "description": "What is your business' name?"
-    }
-  },
-  "profileNumbersTab": {
-    "taxPinErrorText": "Tax PIN must be 4 digits."
-  },
-  "profileDocumentsTab": {
-    "standingDocFileTitle": "Certified Copy of Formation",
-    "profileTabDocsTitle": "Reference Documents",
-    "profileTabRefTitle": "Reference Numbers",
-    "formationDocFileTitle": "Official Formation Document",
-    "certificationDocFileTitle": "Certificate of Good Standing"
-  },
-  "profileNotesTab": {
-    "profileTabNoteTitle": "Notes"
-  },
   "cannabisApplyForLicense": {
     "impactZoneLabel": "`Impact Zone Business|impact-zone-business-cannabis`",
     "eligibleModalCancelButton": "I'm not sure",
@@ -541,6 +530,17 @@
     "applicationPageHelperText": "Cannabis licenses are reviewed on an ongoing basis. You can apply at any time.",
     "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
     "sbeLabel": "`Social Equity Business (SEB)|social-equity-business-cannabis`"
+  },
+  "profileNotesTab": {
+    "profileTabNoteTitle": "Notes"
+  },
+  "profileInfoTab": {
+    "profileTabInfoTitle": "Business Informationasdfasdf",
+    "businessName": {
+      "placeholder": "Type Your Business Name",
+      "header": "## Business Name",
+      "description": "What is your business' name?"
+    }
   },
   "cannabisPriorityStatus": {
     "noPriorityStatusText": "Based on your answers, you are not eligible for any priority status. You can mark this task as completed.",
