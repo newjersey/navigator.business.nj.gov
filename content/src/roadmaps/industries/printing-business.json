@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
   "canBeReseller": true,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -37,8 +38,7 @@
   ],
   "name": "Printing Business",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
-  "additionalSearchTerms": "office printing, commercial printing",
+  "additionalSearchTerms": "office printing, commercial printing, printing services",
   "id": "printing-business",
   "description": "Offers printing services for individuals and other companies"
 }
