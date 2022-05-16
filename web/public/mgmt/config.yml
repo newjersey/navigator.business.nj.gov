@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
-  branch: content-repo
+  branch: cms-profile-refactor
   base_url: https://0szgd6wmlk.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
@@ -1703,6 +1703,36 @@ collections:
       - { label: "No Button Content", name: "radioNoContent", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+
+
+  - name: "profile-content-test"
+    label: "Profile Content (test)"
+    delete: false
+    create: false
+    files:
+      - label: "Info Tab"
+        name: "profile-info-tab"
+        file: "content/src/fieldConfig/config.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Info Tab
+            name: profileInfoTab
+            collapsed: false
+            widget: object
+            summary: "{{profileInfoTab}}"
+            fields:
+              - { name: "profileTab", widget: "hidden", default: "info" }
+              - { label: "Info Tab Title", name: "profileTabInfoTitle", widget: "string" }
+              - label: Business Name
+                name: businessName
+                collapsed: false
+                widget: object
+                summary: "{{businessName}}"
+                fields:
+                  - { label: "Placeholder", name: "placeholder", widget: "string" }
+                  - { label: "Header", name: "header", widget: "string" }
+                  - { label: "Description", name: "description", widget: "string" }
 
   - name: "business-formation"
     label: "Business Formation"

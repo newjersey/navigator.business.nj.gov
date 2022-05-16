@@ -483,6 +483,40 @@
     "certificationDocFileTitle": "Certificate of Good Standing",
     "profileTabInfoTitle": "Business Information"
   },
+  "profileShared": {
+    "errorTextHeader": "Error",
+    "backButtonText": "Cancel",
+    "pageTitle": "### Business Profile",
+    "successTextBody": "Your profile has been updated.",
+    "escapeModalEscape": "Go back",
+    "escapeModalBody": "You have unsaved changes that will be lost.",
+    "errorTextBody": "There are errors with some entries, please try again.",
+    "escapeModalHeader": "Are you sure you want to continue?",
+    "saveButtonText": "Save",
+    "escapeModalReturn": "Continue without saving.",
+    "successTextHeader": "Profile Updated"
+  },
+  "profileInfoTab": {
+    "profileTabInfoTitle": "Business Information",
+    "businessName": {
+      "placeholder": "Type Your Business Name",
+      "header": "## Business Name",
+      "description": "What is your business' name?"
+    }
+  },
+  "profileNumbersTab": {
+    "taxPinErrorText": "Tax PIN must be 4 digits."
+  },
+  "profileDocumentsTab": {
+    "standingDocFileTitle": "Certified Copy of Formation",
+    "profileTabDocsTitle": "Reference Documents",
+    "profileTabRefTitle": "Reference Numbers",
+    "formationDocFileTitle": "Official Formation Document",
+    "certificationDocFileTitle": "Certificate of Good Standing"
+  },
+  "profileNotesTab": {
+    "profileTabNoteTitle": "Notes"
+  },
   "cannabisApplyForLicense": {
     "impactZoneLabel": "`Impact Zone Business|impact-zone-business-cannabis`",
     "eligibleModalCancelButton": "I'm not sure",
