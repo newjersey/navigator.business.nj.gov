@@ -8,6 +8,7 @@ import FundingsPreview from "@/lib/cms/previews/fundings";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/roadmap-sidebar-card";
 import TaskPreview from "@/lib/cms/previews/task";
 import dynamic from "next/dynamic";
+import ProfilePreview from "@/lib/cms/previews/profile";
 
 const CMS_CONFIG = {};
 const Loading = () => (
@@ -49,6 +50,9 @@ const CMS = dynamic(
       // ----- Roadmap Sidebar Card -----
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("roadmap-sidebar-card", RoadmapSidebarCardPreview);
+
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("profile-info-tab", ProfilePreview);
 
       // ----- Cannabis License -----
       registerAsContent(CMS, [

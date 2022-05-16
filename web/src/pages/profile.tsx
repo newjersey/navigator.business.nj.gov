@@ -58,6 +58,8 @@ import React, { FormEvent, ReactElement, ReactNode, useContext, useMemo, useStat
 interface Props {
   displayContent: LoadDisplayContent;
   municipalities: Municipality[];
+  hasExistingBusiness?: boolean; // for CMS only
+  tab?: ProfileTabs; // for CMS only
 }
 
 export type ProfileTabs = "info" | "numbers" | "documents" | "notes";
@@ -74,8 +76,11 @@ const ProfilePage = (props: Props): ReactElement => {
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
   const [profileTab, setProfileTab] = useState<ProfileTabs>("info");
 
+  const hasExistingBusiness = props.hasExistingBusiness ?? userData?.profileData.hasExistingBusiness
+  console.log(props.tab)
+
   const mergeDisplayContent = (): UserDisplayContent => {
-    const hasBusiness = userData?.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+    const hasBusiness = hasExistingBusiness ? "OWNING" : "STARTING";
     return {
       ...props.displayContent[hasBusiness],
       ...props.displayContent["PROFILE"],
@@ -83,14 +88,14 @@ const ProfilePage = (props: Props): ReactElement => {
   };
   const mergedDisplayContent = useMemo(mergeDisplayContent, [
     props.displayContent,
-    userData?.profileData.hasExistingBusiness,
+    hasExistingBusiness,
   ]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push) =>
     router.query.path === "businessFormation"
       ? routerType("/tasks/form-business-entity")
-      : userData?.profileData.hasExistingBusiness
+      : hasExistingBusiness
       ? routerType(`/dashboard${params ? `?${new URLSearchParams(params).toString()}` : ""}`)
       : routerType(`/roadmap${params ? `?${new URLSearchParams(params).toString()}` : ""}`);
 
@@ -106,7 +111,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const onBack = () => {
     if (!userData) return;
-    if (!userData?.profileData.hasExistingBusiness) {
+    if (!hasExistingBusiness) {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
     if (!deepEqual(profileData, userData.profileData)) {
@@ -147,7 +152,7 @@ const ProfilePage = (props: Props): ReactElement => {
     });
   };
 
-  const startingNewBusiness: Record<ProfileTabs, ReactNode> = {
+  const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
@@ -199,7 +204,7 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldStates={fieldStates}
           disabled={userData?.formationData?.getFilingResponse?.success}
           handleChangeOverride={showRegistrationModalForGuest()}
-        ></OnboardingEntityId>
+        />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingTaxId
           onValidation={onValidation}
@@ -210,7 +215,7 @@ const ProfilePage = (props: Props): ReactElement => {
     ),
   };
 
-  const hasExistingBusiness: Record<ProfileTabs, ReactNode> = {
+  const hasExistingBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
@@ -334,7 +339,7 @@ const ProfilePage = (props: Props): ReactElement => {
         onClick={() => setProfileTab("info")}
       >
         <span className={profileTab == "info" ? "selected" : ""}>
-          {Config.profileDefaults.profileTabInfoTitle}
+          {Config.profileInfoTab.profileTabInfoTitle}
         </span>
         <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
       </Box>
@@ -358,7 +363,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
       </Box>
       {userData?.formationData.getFilingResponse?.success ||
-      (userData?.profileData.hasExistingBusiness == false &&
+      (hasExistingBusiness == false &&
         LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling) ? (
         <Box
           className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
@@ -459,9 +464,9 @@ const ProfilePage = (props: Props): ReactElement => {
                 ) : (
                   <>
                     <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
-                      {userData?.profileData.hasExistingBusiness === true
-                        ? hasExistingBusiness[profileTab]
-                        : startingNewBusiness[profileTab]}
+                      {hasExistingBusiness === true
+                        ? hasExistingBusinessElements[profileTab]
+                        : startingNewBusinessElements[profileTab]}
 
                       <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
                       <div className="float-right fdr">
