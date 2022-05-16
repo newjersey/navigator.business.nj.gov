@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
   "canBeReseller": true,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -37,8 +38,7 @@
   ],
   "name": "Graphic Design",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
-  "additionalSearchTerms": "media services, freelancer, freelance art",
+  "additionalSearchTerms": "media services, freelancer, freelance art, visual design, illustrator",
   "id": "graphic-design",
   "description": "Creates visual content for print and media"
 }
