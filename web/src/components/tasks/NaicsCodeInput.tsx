@@ -115,7 +115,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       {industryCodes.length > 0 ? (
         <>
           <Content>{Config.determineNaicsCode.suggestedCodeBodyText}</Content>
-          <FormControl variant="outlined" fullWidth>
+          <FormControl variant="outlined" fullWidth className="tablet:margin-left-205">
             <RadioGroup
               aria-label={"Recommended NAICS codes"}
               name={"naics-radio-group"}
@@ -130,16 +130,16 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               {industryCodes?.map((code) => (
                 <FormControlLabel
                   key={code}
-                  style={{ marginRight: "3rem" }}
+                  style={{ marginRight: "0", alignItems: "flex-start" }}
                   labelPlacement="end"
                   className="text-bold"
                   data-testid={`naics-radio-${code}`}
                   value={code}
                   control={<Radio color="primary" />}
                   label={
-                    <div className="flex">
+                    <div className="flex padding-y-1">
                       <div className="text-bold margin-right-1 width-8">{code}</div>-{" "}
-                      <div className="margin-left-205">
+                      <div className="margin-left-105">
                         {
                           descriptions.find((obj) => obj.SixDigitCode?.toString() == code)
                             ?.SixDigitDescription
@@ -151,7 +151,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               ))}
             </RadioGroup>
             <FormControlLabel
-              style={{ marginRight: "3rem" }}
+              style={{ marginRight: "0", paddingTop: "1em", paddingBottom: "1em" }}
               labelPlacement="end"
               data-testid="naics-radio-input"
               onChange={() => {
@@ -170,7 +170,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
         <> </>
       )}
       {displayInput ? (
-        <>
+        <div className="tablet:margin-left-6">
           <Content>{Config.determineNaicsCode.findCodeBodyText}</Content>
           <ul>
             <li>
@@ -180,7 +180,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               <Content>{Config.determineNaicsCode.naicsLink}</Content>
             </li>
           </ul>
-          <div className="padding-left-4">
+          <div>
             <Content>{Config.determineNaicsCode.inputLabel}</Content>
             <GenericTextField
               fieldName="naicsCode"
@@ -198,7 +198,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               validationText={errorMessages[isInvalid ?? "length"]}
             />
           </div>
-        </>
+        </div>
       ) : (
         <></>
       )}
