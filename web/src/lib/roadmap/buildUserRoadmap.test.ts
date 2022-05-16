@@ -1,6 +1,7 @@
 import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
+import { templateEval } from "@/lib/utils/helpers";
 import {
   generateMunicipality,
   generateMunicipalityDetail,
@@ -10,6 +11,7 @@ import {
   generateTask,
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Industries } from "@businessnjgovnavigator/shared/";
 
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
@@ -24,6 +26,7 @@ const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMuni
 describe("buildUserRoadmap", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    mockRoadmapBuilder.mockResolvedValue(generateRoadmap({}));
   });
 
   describe("home-based business", () => {
@@ -242,6 +245,82 @@ describe("buildUserRoadmap", () => {
         "You can find your city or town clerk through either " +
           "the [ website]() or by contacting " +
           "your [county clerk]() at ."
+      );
+    });
+  });
+
+  describe("NAICS code", () => {
+    it("replaces placeholder with user NAICS code", async () => {
+      mockRoadmapBuilder.mockResolvedValue(
+        generateRoadmap({
+          steps: [
+            generateStep({
+              tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })],
+            }),
+          ],
+        })
+      );
+
+      const profileData = generateProfileData({ naicsCode: "123456" });
+      const roadmap = await buildUserRoadmap(profileData);
+
+      const task = roadmap.steps[0].tasks[0];
+      const expectedTemplate = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
+        naicsCode: "123456",
+      });
+      expect(task.contentMd).toEqual(`NAICS code ${expectedTemplate}`);
+    });
+
+    it("replaces tasks with NAICS code and tasks with municipality", async () => {
+      mockFetchMunicipality.mockResolvedValue(
+        generateMunicipalityDetail({ id: "1234", townName: "Cool Town" })
+      );
+
+      mockRoadmapBuilder.mockResolvedValue(
+        generateRoadmap({
+          steps: [
+            generateStep({
+              tasks: [
+                generateTask({ contentMd: "NAICS code ${naicsCode}" }),
+                generateTask({ contentMd: "Visit the ${municipality} Website" }),
+              ],
+            }),
+          ],
+        })
+      );
+
+      const profileData = generateProfileData({
+        naicsCode: "123456",
+        municipality: generateMunicipality({ id: "1234" }),
+      });
+      const roadmap = await buildUserRoadmap(profileData);
+
+      const naicsTask = roadmap.steps[0].tasks[0];
+      const municipalityTask = roadmap.steps[0].tasks[1];
+      const expectedTemplate = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
+        naicsCode: "123456",
+      });
+      expect(naicsTask.contentMd).toEqual(`NAICS code ${expectedTemplate}`);
+      expect(municipalityTask.contentMd).toEqual("Visit the Cool Town Website");
+    });
+
+    it("replaces placeholder with empty text if user has no NAICS code", async () => {
+      mockRoadmapBuilder.mockResolvedValue(
+        generateRoadmap({
+          steps: [
+            generateStep({
+              tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })],
+            }),
+          ],
+        })
+      );
+
+      const profileData = generateProfileData({ naicsCode: "" });
+      const roadmap = await buildUserRoadmap(profileData);
+
+      const task = roadmap.steps[0].tasks[0];
+      expect(task.contentMd).toEqual(
+        `NAICS code ${Config.determineNaicsCode.registerForTaxesMissingNAICSCodePlaceholder}`
       );
     });
   });

@@ -2,6 +2,7 @@ import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicip
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared/";
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
@@ -56,6 +57,8 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     roadmap = cleanupMunicipalitySpecificData(roadmap);
   }
 
+  roadmap = addNaicsCodeData(roadmap, profileData.naicsCode);
+
   return roadmap;
 };
 
@@ -63,7 +66,7 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
   const municipality = await fetchMunicipalityById(municipalityId);
   if (!municipality) return roadmap;
 
-  return applyMunicipalityEval(roadmap, {
+  return applyTemplateEvalForAllTasks(roadmap, {
     municipalityWebsite: municipality.townWebsite,
     municipality: municipality.townName,
     county: municipality.countyName,
@@ -72,8 +75,19 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
   });
 };
 
+const addNaicsCodeData = (roadmap: Roadmap, naicsCode: string): Roadmap => {
+  let naicsTemplateValue = Config.determineNaicsCode.registerForTaxesMissingNAICSCodePlaceholder;
+  if (naicsCode) {
+    naicsTemplateValue = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
+      naicsCode,
+    });
+  }
+
+  return applyTemplateEvalForAllTasks(roadmap, { naicsCode: naicsTemplateValue });
+};
+
 const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
-  return applyMunicipalityEval(roadmap, {
+  return applyTemplateEvalForAllTasks(roadmap, {
     municipalityWebsite: "",
     municipality: "",
     county: "",
@@ -82,7 +96,7 @@ const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
   });
 };
 
-const applyMunicipalityEval = (roadmap: Roadmap, evalValues: Record<string, string>): Roadmap => {
+const applyTemplateEvalForAllTasks = (roadmap: Roadmap, evalValues: Record<string, string>): Roadmap => {
   roadmap.steps.forEach((step) => {
     step.tasks.forEach((task) => {
       if (task.callToActionLink) {
