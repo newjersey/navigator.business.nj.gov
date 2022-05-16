@@ -83,8 +83,9 @@ const Link = (onClick?: () => void) => {
         );
       } else if (props.href.startsWith("/self-register")) {
         return (
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
           <a
-            href={props.href}
+            href="#"
             onClick={() => {
               parseAndSendAnalyticsEvent(props.href);
               onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
