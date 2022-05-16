@@ -12,7 +12,9 @@
     "editText": "Edit",
     "saveButtonText": "Save NAICS Code",
     "lengthValidationErrorText": "Your NAICS code must be 6 digits",
-    "invalidValidationErrorText": "Your NAICS code is invalid"
+    "invalidValidationErrorText": "Your NAICS code is invalid",
+    "registerForTaxesNAICSCodePlaceholder": "(Your NAICS Code is ${naicsCode})",
+    "registerForTaxesMissingNAICSCodePlaceholder": "(You have not saved a NAICS Code yet)"
   },
   "legalMessageDefaults": {
     "legalMessageTextOne": "This information is supplied as a guide and is not a substitute for legal or professional advice. It is the responsibility of the business owner to comply with all local, county, and state regulations even if they are not listed here. For no-cost assistance with your business, use the ",

@@ -41,8 +41,14 @@ export const onEscape = (e: KeyboardEvent, handler: () => void): void => {
   }
 };
 
-export const templateEval = (template: string, args: Record<string, string>): string =>
-  template.replace(/\${(\w+)}/g, (_, v) => args[v]);
+export const templateEval = (template: string, args: Record<string, string>): string => {
+  let newTemplate = template;
+  for (const key of Object.keys(args)) {
+    const pattern = `\\\${${key}}`;
+    newTemplate = newTemplate.replace(new RegExp(pattern, "g"), args[key]);
+  }
+  return newTemplate;
+};
 
 export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined =>
   stepInRoadmap(roadmap, taskId)?.tasks.find((task) => task.id === taskId);

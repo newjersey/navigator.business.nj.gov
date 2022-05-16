@@ -630,6 +630,16 @@ collections:
                   hint: This field supports Markdown,
                 }
               - { label: Edit Text, name: editText, widget: string }
+              - {
+                  label: Register for Taxes - NAICS Display Text,
+                  name: registerForTaxesNAICSCodePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Register for Taxes - Placeholder Text When NAICS Missing,
+                  name: registerForTaxesMissingNAICSCodePlaceholder,
+                  widget: string,
+                }
           - label: Dashboard Defaults
             name: dashboardDefaults
             collapsed: true
