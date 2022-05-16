@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "professional-scientific-and-technical-services",
   "canBeReseller": true,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -42,8 +43,7 @@
   ],
   "name": "HVAC Contractor",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
-  "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R",
+  "additionalSearchTerms": "Heating, cooling, AC, Refrigeration, HVAC, HVAC-R, contractor",
   "id": "hvac-contractor",
   "description": "Provides installation, maintenance, and repair services to Heating Ventilation, AC, and Refrigeration systems (HVACR)"
 }
