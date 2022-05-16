@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -37,8 +38,7 @@
   ],
   "name": "Event Planning",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
-  "additionalSearchTerms": "planner, organizer, coordinator",
+  "additionalSearchTerms": "planner, organizer, coordinator, party planner",
   "id": "event-planning",
   "description": "Offers coordination services for different types of events"
 }
