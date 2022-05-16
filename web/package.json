@@ -36,8 +36,8 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@aws-amplify/auth": "4.5.3",
-    "@aws-amplify/core": "4.5.3",
+    "@aws-amplify/auth": "4.5.4",
+    "@aws-amplify/core": "4.5.4",
     "@aws-crypto/sha256-browser": "2.0.1",
     "@aws-sdk/protocol-http": "3.78.0",
     "@aws-sdk/s3-request-presigner": "3.88.0",
@@ -93,7 +93,7 @@
     "@types/broken-link-checker": "0.7.1",
     "@types/jest": "27.5.1",
     "@types/lodash.orderby": "4.6.7",
-    "@types/node": "14.18.16",
+    "@types/node": "14.18.18",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.4",
     "@types/react-swipeable-views": "0.13.1",
@@ -101,7 +101,7 @@
     "@types/testing-library__jest-dom": "5.14.3",
     "@typescript-eslint/eslint-plugin": "5.22.0",
     "@typescript-eslint/parser": "5.22.0",
-    "airtable": "0.11.3",
+    "airtable": "0.11.4",
     "babel-jest": "28.1.0",
     "babel-loader": "8.2.5",
     "clean-webpack-plugin": "4.0.0",
@@ -113,7 +113,7 @@
     "cypress-audit": "1.1.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "1.7.2",
-    "dotenv": "16.0.0",
+    "dotenv": "16.0.1",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "8.5.0",
@@ -138,7 +138,7 @@
     "ts-loader": "9.3.0",
     "ts-node": "10.7.0",
     "typescript": "4.6.4",
-    "webpack": "5.72.0"
+    "webpack": "5.72.1"
   },
   "napa": {
     "njwds": "newjersey/njwds#gh-pages"
