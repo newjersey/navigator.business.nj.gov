@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RoadmapSidebarCard } from "@/components/roadmap/RoadmapSidebarCard";
+import { SidebarCardContent } from "@/lib/types/types";
 import { useEffect, useRef } from "react";
 
 type Props = {
@@ -18,7 +19,8 @@ const RoadmapSidebarCardPreview = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
-  const card = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
+  const { body, ...data } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
+  const card: SidebarCardContent = { ...data, contentMd: body };
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
