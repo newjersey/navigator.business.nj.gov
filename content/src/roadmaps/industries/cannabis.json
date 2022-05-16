@@ -3,6 +3,7 @@
   "canBeHomeBased": false,
   "defaultSectorId": "cannabis",
   "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -42,14 +43,13 @@
   ],
   "name": "Cannabis",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "modifications": [
     {
       "taskToReplaceFilename": "zoning",
       "replaceWithFilename": "zoning-cannabis"
     }
   ],
-  "additionalSearchTerms": "marijuana",
+  "additionalSearchTerms": "marijuana, ACT, cannabis business, micro license, cultivation, dispensary, grow, retail, cannibis",
   "id": "cannabis",
   "description": "A business that manufacturers, delivers, or sells cannabis"
 }
