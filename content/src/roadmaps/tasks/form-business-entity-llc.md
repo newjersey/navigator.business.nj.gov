@@ -12,7 +12,7 @@ You must register your business name and form your `legal structure|legal-struct
 
 ---
 
-### Application Needs
+### Application Requirements
 
 - Available business name
 - Legal structure
