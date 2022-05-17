@@ -12,7 +12,7 @@ You must register your business name and form your `legal structure|legal-struct
 
 - - -
 
-### Application Needs
+### Application Requirements
 
 * Business name (as registered in foreign location)
 * Business designator (as registered in foreign location)
