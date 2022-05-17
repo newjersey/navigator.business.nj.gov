@@ -13,7 +13,7 @@ You cannot legally run your business until your conversion license is approved. 
 
 ---
 
-### Application Needs
+### Application Requirements
 
 - []{cannabis-updates} Share any updates or changes since the original application
 - []{cannabis-site-plan} A site plan of the proposed location including a floor plan
