@@ -1,12 +1,9 @@
 import { RoadmapSidebarCard } from "@/components/roadmap/RoadmapSidebarCard";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SidebarCardContent } from "@/lib/types/types";
-import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
-import React, { ReactElement, useContext, useEffect } from "react";
+import React, { ReactElement } from "react";
 
 interface Props {
   sidebarDisplayContent: Record<string, SidebarCardContent>;
@@ -14,23 +11,6 @@ interface Props {
 
 export const RoadmapSidebarList = (props: Props): ReactElement => {
   const { userData } = useUserData();
-  const { registrationAlertStatus, isAuthenticated } = useContext(AuthAlertContext);
-  const { showCard, hideCard } = useRoadmapSidebarCards();
-
-  useEffect(() => {
-    if (
-      registrationAlertStatus == "SUCCESS" &&
-      isAuthenticated == IsAuthenticated.TRUE &&
-      userData &&
-      userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration") === false
-    ) {
-      (async () => {
-        await showCard("successful-registration");
-        await hideCard("not-registered");
-      })();
-    }
-  }, [isAuthenticated, registrationAlertStatus, userData, hideCard, showCard]);
-
   const visibleCardsOrderedByWeight = userData
     ? userData.preferences.visibleRoadmapSidebarCards
         .map((id: string) => props.sidebarDisplayContent[id])

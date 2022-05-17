@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import request from "supertest";
 import {
   generateLicenseData,
+  generatePreferences,
   generateProfileData,
   generateUser,
   generateUserData,
@@ -181,6 +182,30 @@ describe("userRouter", () => {
         taxFilingData: {
           ...postedUserData.taxFilingData,
           filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
+        },
+      });
+    });
+
+    it("removes not registered card", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const postedUserData = generateUserData({
+        user: generateUser({ id: "123" }),
+        profileData: generateProfileData({}),
+        taxFilingData: { filings: [] },
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["not-registered"],
+        }),
+      });
+
+      stubUserDataClient.put.mockResolvedValue(postedUserData);
+
+      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...postedUserData,
+        preferences: {
+          ...postedUserData.preferences,
+          visibleRoadmapSidebarCards: ["successful-registration"],
         },
       });
     });

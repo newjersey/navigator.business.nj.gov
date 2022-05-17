@@ -863,7 +863,7 @@ describe("roadmap page", () => {
   });
 
   describe("sidebar", () => {
-    it("renders welcome card", () => {
+    it("renders welcome card", async () => {
       const userData = generateUserData({
         preferences: generatePreferences({
           visibleRoadmapSidebarCards: ["welcome"],
@@ -875,7 +875,9 @@ describe("roadmap page", () => {
       };
 
       renderPageWithAuth({ userData, sidebarDisplayContent });
-      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
+      });
     });
 
     it("renders registration card when SignUpToast is closed", async () => {
@@ -898,55 +900,6 @@ describe("roadmap page", () => {
         expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
       });
       expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
-    });
-
-    it("renders successful registration card when user is authenticated", async () => {
-      const sidebarDisplayContent = {
-        "successful-registration": generateSidebarCardContent({ contentMd: "SuccessContent" }),
-        "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
-        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
-      };
-
-      renderPageWithAuth({
-        registrationAlertStatus: "SUCCESS",
-        sidebarDisplayContent,
-      });
-
-      await waitFor(() => {
-        expect(screen.getByText("SuccessContent")).toBeInTheDocument();
-      });
-      expect(screen.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
-      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
-    });
-
-    it("renders successful registration card when not registered card is visible, then user is authenticated", async () => {
-      const userData = generateUserData({
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["not-registered"],
-        }),
-      });
-
-      const sidebarDisplayContent = {
-        "successful-registration": generateSidebarCardContent({ contentMd: "SuccessContent" }),
-        "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
-      };
-
-      renderPageWithAuth({
-        userData,
-        registrationAlertStatus: "SUCCESS",
-        sidebarDisplayContent,
-      });
-
-      await waitFor(() => {
-        expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
-      });
-
-      await waitFor(() => {
-        expect(screen.getByText("SuccessContent")).toBeInTheDocument();
-      });
-      await waitFor(() => {
-        expect(screen.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
-      });
     });
 
     it("removes successful registration card when it's closed", async () => {

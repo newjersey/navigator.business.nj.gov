@@ -87,6 +87,10 @@ export const userRouterFactory = (
       userData = clearTaskItemChecklists(userData);
     }
 
+    if (!userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration")) {
+      userData = updateRoadmapSidecards(userData);
+    }
+
     userData = getAnnualFilings(userData);
 
     userDataClient
@@ -116,6 +120,22 @@ export const userRouterFactory = (
       .catch(() => {
         return false;
       });
+  };
+
+  const updateRoadmapSidecards = (userData: UserData): UserData => {
+    const initialVisibleRoadmapSidebarCards = userData.preferences.visibleRoadmapSidebarCards;
+    initialVisibleRoadmapSidebarCards.push("successful-registration");
+    const visibleRoadmapSidebarCards = initialVisibleRoadmapSidebarCards.filter((element) => {
+      return element != "not-registered";
+    });
+
+    return {
+      ...userData,
+      preferences: {
+        ...userData.preferences,
+        visibleRoadmapSidebarCards,
+      },
+    };
   };
 
   const clearTaskItemChecklists = (userData: UserData): UserData => {
