@@ -11,7 +11,7 @@ Certified Home Health Aide (CHHA) licenses are required for any of your staff of
 
 - - -
 
-### Application Needs
+### Application Requirements
 
 * Pass a criminal background check
 
