@@ -5,7 +5,7 @@ id: sign-lease
 callToActionLink: ""
 callToActionText: ""
 ---
-You can sign a lease under your official business name and legal structure. Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location. Have an attorney review the terms prior to signing. 
+Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location. Have an attorney review the terms prior to signing. 
 
 - - -
 
