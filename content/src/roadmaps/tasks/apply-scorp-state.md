@@ -7,7 +7,7 @@ callToActionText: Apply for My S Corporation Status
 required: true
 issuingAgency: New Jersey Department of Treasury
 ---
-Filing for an `S corporation|s-corp` designation at the state level is a separate process from requesting the designation at a federal level. For the election to apply in the current tax year, you must file the application within 3 ½ months of the start of your fiscal year.
+Filing for an `S corporation|s-corp` designation at the state level is a process separate from requesting the designation at a federal level. For the designation to apply in the current tax year, you must file the application within 3 ½ months of the start of your fiscal year.
 
 ---
 
