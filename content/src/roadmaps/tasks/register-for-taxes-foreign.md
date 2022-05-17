@@ -15,7 +15,7 @@ You are seeing this task because your foreign business either has a `nexus|nexus
 
 - - -
 
-### Application Needs
+### Application Requirements
 
 *  `Entity ID|entity-id` (not required for general partnership or sole proprietorship)
 *  `NAICS code|naics` 
