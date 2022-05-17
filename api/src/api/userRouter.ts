@@ -59,6 +59,12 @@ export const userRouterFactory = (
         if (userData.licenseData && shouldCheckLicense(userData)) {
           updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
         }
+        if (
+          !userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration") &&
+          userData.preferences.visibleRoadmapSidebarCards.includes("not-registered")
+        ) {
+          userData = updateRoadmapSidecards(userData);
+        }
         res.json(userData);
       })
       .catch((error) => {
@@ -85,13 +91,6 @@ export const userRouterFactory = (
 
     if (await industryHasChanged(userData)) {
       userData = clearTaskItemChecklists(userData);
-    }
-
-    if (
-      !userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration") &&
-      userData.preferences.visibleRoadmapSidebarCards.includes("not-registered")
-    ) {
-      userData = updateRoadmapSidecards(userData);
     }
 
     userData = getAnnualFilings(userData);
@@ -132,13 +131,17 @@ export const userRouterFactory = (
       return element != "not-registered";
     });
 
-    return {
+    const updatedUserData = {
       ...userData,
       preferences: {
         ...userData.preferences,
         visibleRoadmapSidebarCards,
       },
     };
+
+    userDataClient.put(updatedUserData);
+
+    return updatedUserData;
   };
 
   const clearTaskItemChecklists = (userData: UserData): UserData => {

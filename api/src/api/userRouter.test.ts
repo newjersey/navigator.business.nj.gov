@@ -96,6 +96,78 @@ describe("userRouter", () => {
       expect(response.body).toEqual({ error: "error" });
     });
 
+    describe("update registration card", () => {
+      it("does not add successful registration card if not registered card does not exist", async () => {
+        const userData = generateUserData({
+          user: generateUser({ id: "123" }),
+          profileData: generateProfileData({}),
+          taxFilingData: { filings: [] },
+          preferences: generatePreferences({
+            visibleRoadmapSidebarCards: ["welcome"],
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+
+        expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
+        expect(response.status).toEqual(200);
+        expect(response.body).toEqual(userData);
+      });
+
+      it("removes not registered card and adds successful registration card", async () => {
+        const userData = generateUserData({
+          user: generateUser({ id: "123" }),
+          profileData: generateProfileData({}),
+          taxFilingData: { filings: [] },
+          preferences: generatePreferences({
+            visibleRoadmapSidebarCards: ["not-registered"],
+          }),
+        });
+
+        stubUserDataClient.get.mockResolvedValue(userData);
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+
+        expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
+        expect(response.status).toEqual(200);
+
+        expect(response.body).toEqual({
+          ...userData,
+          preferences: {
+            ...userData.preferences,
+            visibleRoadmapSidebarCards: ["successful-registration"],
+          },
+        });
+      });
+
+      it("leaves existing cards besides not registered when adding successful registration card", async () => {
+        const userData = generateUserData({
+          user: generateUser({ id: "123" }),
+          profileData: generateProfileData({}),
+          taxFilingData: { filings: [] },
+          preferences: generatePreferences({
+            visibleRoadmapSidebarCards: ["welcome", "not-registered"],
+          }),
+        });
+
+        stubUserDataClient.get.mockResolvedValue(userData);
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+
+        expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
+        expect(response.status).toEqual(200);
+
+        expect(response.body).toEqual({
+          ...userData,
+          preferences: {
+            ...userData.preferences,
+            visibleRoadmapSidebarCards: ["welcome", "successful-registration"],
+          },
+        });
+      });
+    });
+
     describe("updating license status", () => {
       beforeEach(async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
@@ -182,78 +254,6 @@ describe("userRouter", () => {
         taxFilingData: {
           ...postedUserData.taxFilingData,
           filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
-        },
-      });
-    });
-
-    it("does not add successful registration card if not registered card does not exist", async () => {
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const postedUserData = generateUserData({
-        user: generateUser({ id: "123" }),
-        profileData: generateProfileData({}),
-        taxFilingData: { filings: [] },
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["welcome"],
-        }),
-      });
-
-      stubUserDataClient.put.mockResolvedValue(postedUserData);
-
-      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
-
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...postedUserData,
-        preferences: {
-          ...postedUserData.preferences,
-          visibleRoadmapSidebarCards: ["welcome"],
-        },
-      });
-    });
-
-    it("removes not registered card and adds successful registration card", async () => {
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const postedUserData = generateUserData({
-        user: generateUser({ id: "123" }),
-        profileData: generateProfileData({}),
-        taxFilingData: { filings: [] },
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["not-registered"],
-        }),
-      });
-
-      stubUserDataClient.put.mockResolvedValue(postedUserData);
-
-      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
-
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...postedUserData,
-        preferences: {
-          ...postedUserData.preferences,
-          visibleRoadmapSidebarCards: ["successful-registration"],
-        },
-      });
-    });
-
-    it("leaves existing cards besides not registered when adding successful registration card", async () => {
-      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-      const postedUserData = generateUserData({
-        user: generateUser({ id: "123" }),
-        profileData: generateProfileData({}),
-        taxFilingData: { filings: [] },
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["welcome", "not-registered"],
-        }),
-      });
-
-      stubUserDataClient.put.mockResolvedValue(postedUserData);
-
-      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
-
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...postedUserData,
-        preferences: {
-          ...postedUserData.preferences,
-          visibleRoadmapSidebarCards: ["welcome", "successful-registration"],
         },
       });
     });
