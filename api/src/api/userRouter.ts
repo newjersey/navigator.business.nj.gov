@@ -87,7 +87,10 @@ export const userRouterFactory = (
       userData = clearTaskItemChecklists(userData);
     }
 
-    if (!userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration")) {
+    if (
+      !userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration") &&
+      userData.preferences.visibleRoadmapSidebarCards.includes("not-registered")
+    ) {
       userData = updateRoadmapSidecards(userData);
     }
 

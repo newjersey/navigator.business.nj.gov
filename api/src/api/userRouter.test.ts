@@ -186,7 +186,31 @@ describe("userRouter", () => {
       });
     });
 
-    it("removes not registered card", async () => {
+    it("does not add successful registration card if not registered card does not exist", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const postedUserData = generateUserData({
+        user: generateUser({ id: "123" }),
+        profileData: generateProfileData({}),
+        taxFilingData: { filings: [] },
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["welcome"],
+        }),
+      });
+
+      stubUserDataClient.put.mockResolvedValue(postedUserData);
+
+      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...postedUserData,
+        preferences: {
+          ...postedUserData.preferences,
+          visibleRoadmapSidebarCards: ["welcome"],
+        },
+      });
+    });
+
+    it("removes not registered card and adds successful registration card", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
@@ -206,6 +230,30 @@ describe("userRouter", () => {
         preferences: {
           ...postedUserData.preferences,
           visibleRoadmapSidebarCards: ["successful-registration"],
+        },
+      });
+    });
+
+    it("leaves existing cards besides not registered when adding successful registration card", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const postedUserData = generateUserData({
+        user: generateUser({ id: "123" }),
+        profileData: generateProfileData({}),
+        taxFilingData: { filings: [] },
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["welcome", "not-registered"],
+        }),
+      });
+
+      stubUserDataClient.put.mockResolvedValue(postedUserData);
+
+      await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
+
+      expect(stubUserDataClient.put).toHaveBeenCalledWith({
+        ...postedUserData,
+        preferences: {
+          ...postedUserData.preferences,
+          visibleRoadmapSidebarCards: ["welcome", "successful-registration"],
         },
       });
     });

@@ -180,7 +180,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     roadmapOpenSteps: [],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
-    visibleRoadmapSidebarCards: ["welcome", "successful-registration"],
+    visibleRoadmapSidebarCards: ["welcome"],
     ...overrides,
   };
 };
