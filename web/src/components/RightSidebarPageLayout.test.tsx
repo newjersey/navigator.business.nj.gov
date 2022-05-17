@@ -1,7 +1,7 @@
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -20,7 +20,7 @@ describe("<RightSidebarPageLayout />", () => {
   });
 
   it("renders with default color", () => {
-    const subject = render(
+    render(
       <RightSidebarPageLayout
         mainContent={<div>Left Side</div>}
         sidebarContent={<div>Right Side</div>}
@@ -28,12 +28,12 @@ describe("<RightSidebarPageLayout />", () => {
       />
     );
 
-    expect(subject.getByTestId("rightSidebarPageLayout")).toHaveClass("grayRightGutter");
-    expect(subject.getByTestId("rightSidebarPageLayout")).not.toHaveClass("blueRightGutter");
+    expect(screen.getByTestId("rightSidebarPageLayout")).toHaveClass("grayRightGutter");
+    expect(screen.getByTestId("rightSidebarPageLayout")).not.toHaveClass("blueRightGutter");
   });
 
   it("renders with blue color", () => {
-    const subject = render(
+    render(
       <RightSidebarPageLayout
         mainContent={<div>Left Side</div>}
         sidebarContent={<div>Right Side</div>}
@@ -41,7 +41,7 @@ describe("<RightSidebarPageLayout />", () => {
       />
     );
 
-    expect(subject.getByTestId("rightSidebarPageLayout")).not.toHaveClass("grayRightGutter");
-    expect(subject.getByTestId("rightSidebarPageLayout")).toHaveClass("blueRightGutter");
+    expect(screen.getByTestId("rightSidebarPageLayout")).not.toHaveClass("grayRightGutter");
+    expect(screen.getByTestId("rightSidebarPageLayout")).toHaveClass("blueRightGutter");
   });
 });

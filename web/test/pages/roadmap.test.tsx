@@ -45,7 +45,7 @@ import {
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, RenderResult, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -81,14 +81,15 @@ describe("roadmap page", () => {
     useMockRoadmap({});
     useMockRouter({});
     setMobileScreen(false);
+    jest.useFakeTimers();
   });
 
   const renderRoadmapPage = ({
     sidebarDisplayContent,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
-  }): RenderResult => {
-    return render(
+  }) => {
+    render(
       <ThemeProvider theme={createTheme()}>
         <RoadmapPage
           operateReferences={{}}
@@ -111,10 +112,10 @@ describe("roadmap page", () => {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     alertIsVisible?: boolean;
     registrationAlertStatus?: RegistrationStatus;
-  }): RenderResult => {
+  }) => {
     setupStatefulUserDataContext();
 
-    return render(
+    render(
       withAuthAlert(
         <WithStatefulUserData initialUserData={userData || generateUserData({})}>
           <ThemeProvider theme={createTheme()}>
@@ -134,22 +135,22 @@ describe("roadmap page", () => {
 
   it("shows loading page if page has not loaded yet", () => {
     setMockUserDataResponse({ userData: undefined });
-    const subject = renderRoadmapPage({});
-    expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
+    renderRoadmapPage({});
+    expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
   it("shows loading page if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
-    const subject = renderRoadmapPage({});
-    expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
+    renderRoadmapPage({});
+    expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
   it("shows user data and loading spinner when user data loaded but not roadmap", () => {
     useMockProfileData({ businessName: "Some Cool Name" });
     setMockRoadmapResponse(undefined);
-    const subject = renderRoadmapPage({});
-    expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent("Some Cool Name");
-    expect(subject.getByText("Loading", { exact: false })).toBeInTheDocument();
+    renderRoadmapPage({});
+    expect(screen.getByTestId("mini-profile-businessName")).toHaveTextContent("Some Cool Name");
+    expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
   it("redirects to onboarding if user not finished onboarding", () => {
@@ -158,19 +159,17 @@ describe("roadmap page", () => {
     expect(mockPush).toHaveBeenCalledWith("/onboarding");
   });
 
-  it("shows toast alert when success query is true", async () => {
+  it("shows toast alert when success query is true", () => {
     useMockProfileData({});
     useMockRouter({ isReady: true, query: { success: "true" } });
-    const subject = renderRoadmapPage({});
-    await waitFor(() =>
-      expect(subject.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument()
-    );
+    renderRoadmapPage({});
+    expect(screen.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument();
   });
 
-  it("directs guest-mode user to profile when profile edit button is clicked", async () => {
+  it("directs guest-mode user to profile when profile edit button is clicked", () => {
     useMockProfileData({});
     const setModalIsVisible = jest.fn();
-    const subject = render(
+    render(
       withAuthAlert(
         <ThemeProvider theme={createTheme()}>
           <RoadmapPage
@@ -183,15 +182,15 @@ describe("roadmap page", () => {
         { modalIsVisible: false, setModalIsVisible }
       )
     );
-    fireEvent.click(subject.getByTestId("grey-callout-link"));
+    fireEvent.click(screen.getByTestId("grey-callout-link"));
     expect(mockPush).toHaveBeenCalled();
     expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
-  it("directs authenticated user to profile when profile edit button is clicked", async () => {
+  it("directs authenticated user to profile when profile edit button is clicked", () => {
     useMockProfileData({});
     const setModalIsVisible = jest.fn();
-    const subject = render(
+    render(
       withAuthAlert(
         <ThemeProvider theme={createTheme()}>
           <RoadmapPage
@@ -204,13 +203,13 @@ describe("roadmap page", () => {
         { modalIsVisible: false, setModalIsVisible }
       )
     );
-    fireEvent.click(subject.getByTestId("grey-callout-link"));
+    fireEvent.click(screen.getByTestId("grey-callout-link"));
     expect(mockPush).toHaveBeenCalled();
     expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
   describe("business information", () => {
-    it("shows template with user name as header", async () => {
+    it("shows template with user name as header", () => {
       useMockUserData({
         profileData: generateProfileData({
           businessName: "some business",
@@ -219,14 +218,14 @@ describe("roadmap page", () => {
         }),
         user: generateUser({ name: "Ada Lovelace" }),
       });
-      const subject = renderRoadmapPage({});
+      renderRoadmapPage({});
       const expectedHeaderText = templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
         name: "Ada Lovelace",
       });
-      expect(subject.getByText(expectedHeaderText)).toBeInTheDocument();
+      expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
     });
 
-    it("shows header placeholder if no user name present", async () => {
+    it("shows header placeholder if no user name present", () => {
       useMockUserData({
         profileData: generateProfileData({
           businessName: "",
@@ -235,51 +234,49 @@ describe("roadmap page", () => {
         }),
         user: generateUser({ name: undefined }),
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-businessName")).toHaveTextContent(
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-businessName")).toHaveTextContent(
         Config.roadmapDefaults.greyBoxNotSetText
       );
-      expect(
-        subject.getByText(Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing)).toBeInTheDocument();
     });
 
     it("shows the human-readable industry from onboarding data", () => {
       useMockProfileData({ industryId: "home-contractor" });
-      const subject = renderRoadmapPage({});
+      renderRoadmapPage({});
       const expectedValue = LookupIndustryById("home-contractor").name;
-      expect(subject.getByTestId("mini-profile-industryId")).toHaveTextContent(expectedValue);
+      expect(screen.getByTestId("mini-profile-industryId")).toHaveTextContent(expectedValue);
     });
 
-    it("shows placeholder if no industry present", async () => {
+    it("shows placeholder if no industry present", () => {
       useMockProfileData({
         industryId: "generic",
         legalStructureId: "c-corporation",
         municipality: generateMunicipality({}),
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-industryId")).toHaveTextContent(
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-industryId")).toHaveTextContent(
         Config.roadmapDefaults.greyBoxNotSetText
       );
     });
 
     it("shows the human-readable legal structure from onboarding data", () => {
       useMockProfileData({ legalStructureId: "limited-liability-company" });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
         "Limited Liability Company (LLC)"
       );
     });
 
-    it("shows placeholder if no business structure present", async () => {
+    it("shows placeholder if no business structure present", () => {
       useMockProfileData({
         legalStructureId: undefined,
         industryId: "restaurant",
         municipality: generateMunicipality({}),
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByText("Not set")).toBeInTheDocument();
-      expect(subject.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
+      renderRoadmapPage({});
+      expect(screen.getByText("Not set")).toBeInTheDocument();
+      expect(screen.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
         Config.roadmapDefaults.greyBoxNotSetText
       );
     });
@@ -288,18 +285,18 @@ describe("roadmap page", () => {
       useMockProfileData({
         municipality: generateMunicipality({ displayName: "Franklin (Hunterdon County)" }),
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-location")).toHaveTextContent("Franklin (Hunterdon County)");
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-location")).toHaveTextContent("Franklin (Hunterdon County)");
     });
 
-    it("shows placeholder if no municipality present", async () => {
+    it("shows placeholder if no municipality present", () => {
       useMockProfileData({
         legalStructureId: "c-corporation",
         industryId: "restaurant",
         municipality: undefined,
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-location")).toHaveTextContent(
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-location")).toHaveTextContent(
         Config.roadmapDefaults.greyBoxNotSetText
       );
     });
@@ -309,8 +306,8 @@ describe("roadmap page", () => {
         entityId: "1234567890",
         legalStructureId: "limited-liability-company",
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-entityId")).toHaveTextContent("1234567890");
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-entityId")).toHaveTextContent("1234567890");
     });
 
     it("does not show entity id for Trade Name legal structure even if present", () => {
@@ -318,32 +315,32 @@ describe("roadmap page", () => {
         legalStructureId: "sole-proprietorship",
         entityId: "1234567890",
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.queryByTestId("mini-profile-entityId")).not.toBeInTheDocument();
+      renderRoadmapPage({});
+      expect(screen.queryByTestId("mini-profile-entityId")).not.toBeInTheDocument();
     });
 
     it("shows EIN with hyphen if present", () => {
       useMockProfileData({
         employerId: "123456789",
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-employerId")).toHaveTextContent("12-3456789");
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-employerId")).toHaveTextContent("12-3456789");
     });
 
     it("shows new jersey tax id if present", () => {
       useMockProfileData({
         taxId: "123456789",
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-taxId")).toHaveTextContent("123456789");
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-taxId")).toHaveTextContent("123456789");
     });
 
     it("shows notes if present", () => {
       useMockProfileData({
         notes: "some notes",
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.getByTestId("mini-profile-notes")).toHaveTextContent("some notes");
+      renderRoadmapPage({});
+      expect(screen.getByTestId("mini-profile-notes")).toHaveTextContent("some notes");
     });
 
     it("shows placeholder for ein, nj tax id, notes", () => {
@@ -353,15 +350,15 @@ describe("roadmap page", () => {
         taxId: undefined,
         notes: undefined,
       });
-      const subject = renderRoadmapPage({});
+      renderRoadmapPage({});
 
-      expect(subject.getByTestId("mini-profile-employerId")).toHaveTextContent(
+      expect(screen.getByTestId("mini-profile-employerId")).toHaveTextContent(
         Config.roadmapDefaults.greyBoxNotEnteredText
       );
-      expect(subject.getByTestId("mini-profile-taxId")).toHaveTextContent(
+      expect(screen.getByTestId("mini-profile-taxId")).toHaveTextContent(
         Config.roadmapDefaults.greyBoxNotEnteredText
       );
-      expect(subject.getByTestId("mini-profile-notes")).toHaveTextContent(
+      expect(screen.getByTestId("mini-profile-notes")).toHaveTextContent(
         Config.roadmapDefaults.greyBoxNotEnteredText
       );
     });
@@ -378,43 +375,44 @@ describe("roadmap page", () => {
         taxId: "111111111",
         notes: "some notes",
       });
-      const subject = renderRoadmapPage({});
-      expect(subject.queryByText("some name")).toBeInTheDocument();
-      expect(subject.queryByText("Corporation")).toBeInTheDocument();
-      expect(subject.queryByText("Franklin")).toBeInTheDocument();
-      expect(subject.queryByText("Restaurant")).toBeInTheDocument();
-      expect(subject.queryByText("123456790")).not.toBeInTheDocument();
-      expect(subject.queryByText("98-76543210")).not.toBeInTheDocument();
-      expect(subject.queryByText("111111111")).not.toBeInTheDocument();
-      expect(subject.queryByText("some notes")).not.toBeInTheDocument();
+      renderRoadmapPage({});
+      expect(screen.getByText("some name")).toBeInTheDocument();
+      expect(screen.getByText("Corporation")).toBeInTheDocument();
+      expect(screen.getByText("Franklin")).toBeInTheDocument();
+      expect(screen.getByText("Restaurant")).toBeInTheDocument();
+      expect(screen.queryByText("123456790")).not.toBeInTheDocument();
+      expect(screen.queryByText("98-76543210")).not.toBeInTheDocument();
+      expect(screen.queryByText("111111111")).not.toBeInTheDocument();
+      expect(screen.queryByText("some notes")).not.toBeInTheDocument();
 
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.greyBoxViewMoreText));
-      expect(subject.queryByText("some name")).toBeInTheDocument();
-      expect(subject.queryByText("Corporation")).toBeInTheDocument();
-      expect(subject.queryByText("Franklin")).toBeInTheDocument();
-      expect(subject.queryByText("Restaurant")).toBeInTheDocument();
-      expect(subject.queryByText("123456790")).toBeInTheDocument();
-      expect(subject.queryByText("98-76543210")).toBeInTheDocument();
-      expect(subject.queryByText("111111111")).toBeInTheDocument();
-      expect(subject.queryByText("some notes")).toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.roadmapDefaults.greyBoxViewMoreText));
+      expect(screen.getByText("some name")).toBeInTheDocument();
+      expect(screen.getByText("Corporation")).toBeInTheDocument();
+      expect(screen.getByText("Franklin")).toBeInTheDocument();
+      expect(screen.getByText("Restaurant")).toBeInTheDocument();
+      expect(screen.getByText("123456790")).toBeInTheDocument();
+      expect(screen.getByText("98-76543210")).toBeInTheDocument();
+      expect(screen.getByText("111111111")).toBeInTheDocument();
+      expect(screen.getByText("some notes")).toBeInTheDocument();
 
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.greyBoxViewLessText));
-      expect(subject.queryByText("123456790")).not.toBeInTheDocument();
-      expect(subject.queryByText("98-76543210")).not.toBeInTheDocument();
-      expect(subject.queryByText("111111111")).not.toBeInTheDocument();
-      expect(subject.queryByText("some notes")).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.roadmapDefaults.greyBoxViewLessText));
+      expect(screen.queryByText("123456790")).not.toBeInTheDocument();
+      expect(screen.queryByText("98-76543210")).not.toBeInTheDocument();
+      expect(screen.queryByText("111111111")).not.toBeInTheDocument();
+      expect(screen.queryByText("some notes")).not.toBeInTheDocument();
     });
 
     it("shows business info box if error is CACHED_ONLY", () => {
       useMockUserDataError("CACHED_ONLY");
-      const subject = renderRoadmapPage({});
-      expect(subject.queryByTestId("grey-callout-link")).toBeInTheDocument();
+      renderRoadmapPage({});
+      expect(screen.getByTestId("error-alert-CACHED_ONLY")).toBeInTheDocument();
     });
 
     it("does not show business info box if error is NO_DATA", () => {
       useMockUserDataError("NO_DATA");
-      const subject = renderRoadmapPage({});
-      expect(subject.queryByTestId("grey-callout-link")).not.toBeInTheDocument();
+      renderRoadmapPage({});
+      expect(screen.queryByTestId("grey-callout-link")).not.toBeInTheDocument();
+      expect(screen.getByTestId("error-alert-NO_DATA")).toBeInTheDocument();
     });
   });
 
@@ -433,15 +431,15 @@ describe("roadmap page", () => {
       ],
     });
 
-    const subject = renderRoadmapPage({});
+    renderRoadmapPage({});
 
-    expect(subject.queryByText("step1", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText("1-2 weeks")).toBeInTheDocument();
-    expect(subject.queryByText("task1")).toBeInTheDocument();
-    expect(subject.queryByText("task2")).toBeInTheDocument();
+    expect(screen.getByText("step1", { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("1-2 weeks")).toBeInTheDocument();
+    expect(screen.getByText("task1")).toBeInTheDocument();
+    expect(screen.getByText("task2")).toBeInTheDocument();
 
-    expect(subject.queryByText("step2", { exact: false })).toBeInTheDocument();
-    expect(subject.queryByText("task3")).toBeInTheDocument();
+    expect(screen.getByText("step2", { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("task3")).toBeInTheDocument();
   });
 
   it("shows task progress tag", () => {
@@ -466,11 +464,11 @@ describe("roadmap page", () => {
       },
     });
 
-    const subject = renderRoadmapPage({});
+    renderRoadmapPage({});
 
-    expect(subject.queryByText("In progress")).toBeInTheDocument();
-    expect(subject.queryByText("Completed")).toBeInTheDocument();
-    expect(subject.queryByText("Not started")).toBeInTheDocument();
+    expect(screen.getByText("In progress")).toBeInTheDocument();
+    expect(screen.getByText("Completed")).toBeInTheDocument();
+    expect(screen.getByText("Not started")).toBeInTheDocument();
   });
 
   it("displays each step under associated section", () => {
@@ -495,16 +493,16 @@ describe("roadmap page", () => {
       ],
     });
 
-    const subject = renderRoadmapPage({});
+    renderRoadmapPage({});
 
-    const sectionPlan = subject.getByTestId("section-plan");
+    const sectionPlan = screen.getByTestId("section-plan");
 
     expect(within(sectionPlan).getByText("step1")).toBeInTheDocument();
     expect(within(sectionPlan).getByText("step3")).toBeInTheDocument();
     expect(within(sectionPlan).queryByText("step2")).not.toBeInTheDocument();
     expect(within(sectionPlan).queryByText("step4")).not.toBeInTheDocument();
 
-    const sectionStart = subject.getByTestId("section-start");
+    const sectionStart = screen.getByTestId("section-start");
 
     expect(within(sectionStart).queryByText("step1")).not.toBeInTheDocument();
     expect(within(sectionStart).queryByText("step3")).not.toBeInTheDocument();
@@ -527,10 +525,10 @@ describe("roadmap page", () => {
       taxFilingData: generateTaxFilingData({}),
     });
 
-    const subject = renderRoadmapPage({});
+    renderRoadmapPage({});
 
-    const sectionStart = subject.getByTestId("section-start");
-    const sectionPlan = subject.getByTestId("section-plan");
+    const sectionStart = screen.getByTestId("section-start");
+    const sectionPlan = screen.getByTestId("section-plan");
 
     expect(within(sectionStart).getByText("step2")).toBeVisible();
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
@@ -546,8 +544,8 @@ describe("roadmap page", () => {
       ],
     });
 
-    const subject = renderRoadmapPage({});
-    const sectionPlan = subject.getByTestId("section-plan");
+    renderRoadmapPage({});
+    const sectionPlan = screen.getByTestId("section-plan");
     const allTasks = within(sectionPlan).getAllByRole("listitem");
 
     expect(allTasks.length).toEqual(2);
@@ -566,23 +564,23 @@ describe("roadmap page", () => {
       ],
     });
 
-    const subject = renderRoadmapPage({});
+    renderRoadmapPage({});
     await waitFor(() =>
-      expect(subject.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument()
+      expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument()
     );
 
-    const requiredIcon = subject.getByLabelText(Config.taskDefaults.requiredTagText);
+    const requiredIcon = screen.getByLabelText(Config.taskDefaults.requiredTagText);
     fireEvent.mouseOver(requiredIcon);
 
     await waitFor(() => {
-      expect(subject.queryByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
-      expect(subject.queryByText(Config.taskDefaults.requiredTagText)).toBeVisible();
+      expect(screen.getByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
     });
+    expect(screen.queryByText(Config.taskDefaults.requiredTagText)).toBeVisible();
   });
 
   describe("oscar graduation modal", () => {
-    const renderPage = (userData: UserData): { subject: RenderResult; page: PageHelpers } => {
-      const subject = render(
+    const renderPage = (userData: UserData): { page: PageHelpers } => {
+      render(
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
             <RoadmapPage
@@ -593,16 +591,16 @@ describe("roadmap page", () => {
           </ThemeProvider>
         </WithStatefulUserData>
       );
-      const page = createPageHelpers(subject);
-      return { subject, page };
+      const page = createPageHelpers();
+      return { page };
     };
 
-    const openGraduationModal = (subject: RenderResult): void => {
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationButtonText));
+    const openGraduationModal = (): void => {
+      fireEvent.click(screen.getByText(Config.roadmapDefaults.graduationButtonText));
     };
 
-    const submitGraduationModal = (subject: RenderResult): void => {
-      fireEvent.click(subject.getByText(Config.roadmapDefaults.graduationModalContinueButtonText));
+    const submitGraduationModal = (): void => {
+      fireEvent.click(screen.getByText(Config.roadmapDefaults.graduationModalContinueButtonText));
     };
 
     beforeEach(() => {
@@ -623,19 +621,19 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject, page } = renderPage(userData);
+      const { page } = renderPage(userData);
 
       const date = getCurrentDate().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
 
-      openGraduationModal(subject);
-      expect(subject.getByTestId("graduation-modal")).toBeInTheDocument();
+      openGraduationModal();
+      expect(screen.getByTestId("graduation-modal")).toBeInTheDocument();
       page.fillText("Business name", "A Clean Business");
       page.selectDate("Date of formation", date);
       page.selectByValue("Sector", "clean-energy");
       page.selectByValue("Ownership", "veteran-owned");
       page.fillText("Existing employees", "1234567");
-      submitGraduationModal(subject);
+      submitGraduationModal();
 
       await waitFor(() => {
         expect(currentUserData()).toEqual({
@@ -650,8 +648,8 @@ describe("roadmap page", () => {
             hasExistingBusiness: true,
           },
         });
-        expect(mockPush).toHaveBeenCalledWith("/dashboard");
       });
+      expect(mockPush).toHaveBeenCalledWith("/dashboard");
     });
 
     it("pre-populates fields with data from profile", async () => {
@@ -670,18 +668,18 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject, page } = renderPage(userData);
+      const { page } = renderPage(userData);
 
-      openGraduationModal(subject);
-      expect((subject.getByLabelText("Business name") as HTMLInputElement).value).toEqual("A Test Business");
+      openGraduationModal();
+      expect((screen.getByLabelText("Business name") as HTMLInputElement).value).toEqual("A Test Business");
       expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
       expect(page.getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
-      expect(subject.queryByLabelText("Ownership")).toHaveTextContent(
+      expect(screen.queryByLabelText("Ownership")).toHaveTextContent(
         `${LookupOwnershipTypeById("veteran-owned").name}`
       );
-      expect((subject.getByLabelText("Existing employees") as HTMLInputElement).value).toEqual("1234567");
+      expect((screen.getByLabelText("Existing employees") as HTMLInputElement).value).toEqual("1234567");
 
-      submitGraduationModal(subject);
+      submitGraduationModal();
 
       await waitFor(() => {
         expect(currentUserData()).toEqual({
@@ -696,8 +694,8 @@ describe("roadmap page", () => {
             hasExistingBusiness: true,
           },
         });
-        expect(mockPush).toHaveBeenCalledWith("/dashboard");
       });
+      expect(mockPush).toHaveBeenCalledWith("/dashboard");
     });
 
     it("updates filing data", async () => {
@@ -720,20 +718,20 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject } = renderPage(userData);
-      openGraduationModal(subject);
-      submitGraduationModal(subject);
+      renderPage(userData);
+      openGraduationModal();
+      submitGraduationModal();
 
       await waitFor(() => {
         expect(currentUserData()).toEqual({
           ...userData,
           taxFilingData: { ...taxData, filings: [] },
         });
-        expect(mockPush).toHaveBeenCalledWith("/dashboard");
       });
+      expect(mockPush).toHaveBeenCalledWith("/dashboard");
     });
 
-    it("shows sector for generic industry", async () => {
+    it("shows sector for generic industry", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           industryId: "generic",
@@ -742,13 +740,13 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject } = renderPage(userData);
+      renderPage(userData);
 
-      openGraduationModal(subject);
-      expect((subject.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual("Other Services");
+      openGraduationModal();
+      expect((screen.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual("Other Services");
     });
 
-    it("does not show sector for non-generic industry", async () => {
+    it("does not show sector for non-generic industry", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           industryId: "restaurant",
@@ -757,13 +755,13 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject } = renderPage(userData);
+      renderPage(userData);
 
-      openGraduationModal(subject);
-      expect(subject.queryByLabelText("Sector")).not.toBeInTheDocument();
+      openGraduationModal();
+      expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
     });
 
-    it("fires validations when clicking submit", async () => {
+    it("fires validations when clicking submit", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
@@ -776,19 +774,19 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject } = renderPage(userData);
-      openGraduationModal(subject);
-      submitGraduationModal(subject);
+      renderPage(userData);
+      openGraduationModal();
+      submitGraduationModal();
       expect(userDataWasNotUpdated()).toEqual(true);
       expect(mockPush).not.toHaveBeenCalledWith("/dashboard");
-      expect(subject.getByText(Config.onboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
-      expect(subject.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
+      expect(screen.getByText(Config.onboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
+      expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
       expect(
-        subject.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
+        screen.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
       ).toBeInTheDocument();
     });
 
-    it("hides date of formation if legal structure does not require public filing ", async () => {
+    it("hides date of formation if legal structure does not require public filing ", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,
@@ -796,11 +794,11 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject } = renderPage(userData);
+      renderPage(userData);
 
-      openGraduationModal(subject);
-      expect(subject.getByTestId("graduation-modal")).toBeInTheDocument();
-      expect(subject.queryByLabelText("Date of formation")).not.toBeInTheDocument();
+      openGraduationModal();
+      expect(screen.getByTestId("graduation-modal")).toBeInTheDocument();
+      expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
     });
 
     it("disables date of formation if formation getFiling success", () => {
@@ -817,9 +815,9 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject, page } = renderPage(userData);
-      openGraduationModal(subject);
-      expect(subject.getByLabelText("Date of formation")).toHaveAttribute("disabled");
+      const { page } = renderPage(userData);
+      openGraduationModal();
+      expect(screen.getByLabelText("Date of formation")).toHaveAttribute("disabled");
       expect(page.getDateOfFormationValue()).toEqual(
         parseDateWithFormat(userData.formationData.formationFormData.businessStartDate, "YYYY-MM-DD").format(
           "MM/YYYY"
@@ -842,9 +840,9 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject } = renderPage(userData);
-      openGraduationModal(subject);
-      expect(subject.queryByTestId("businessName")).toBeNull();
+      renderPage(userData);
+      openGraduationModal();
+      expect(screen.queryByTestId("businessName")).toBeNull();
     });
 
     it("display businessName if formation is not set", () => {
@@ -857,10 +855,10 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { subject } = renderPage(userData);
-      openGraduationModal(subject);
-      expect(subject.getByTestId("businessName")).not.toBeNull();
-      expect(subject.getByLabelText("Business name")).not.toBeNull();
+      renderPage(userData);
+      openGraduationModal();
+      expect(screen.getByTestId("businessName")).not.toBeNull();
+      expect(screen.getByLabelText("Business name")).not.toBeNull();
     });
   });
 
@@ -876,8 +874,8 @@ describe("roadmap page", () => {
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
       };
 
-      const subject = renderPageWithAuth({ userData, sidebarDisplayContent });
-      expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
+      renderPageWithAuth({ userData, sidebarDisplayContent });
+      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
 
     it("renders registration card when SignUpToast is closed", async () => {
@@ -885,41 +883,40 @@ describe("roadmap page", () => {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
       };
-      const subject = renderPageWithAuth({
+      renderPageWithAuth({
         alertIsVisible: true,
         sidebarDisplayContent,
         isAuthenticated: IsAuthenticated.FALSE,
       });
 
-      expect(subject.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
-      expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
+      expect(screen.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
+      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
 
-      fireEvent.click(within(subject.queryByTestId("self-reg-toast") as HTMLElement).getByLabelText("close"));
+      fireEvent.click(within(screen.queryByTestId("self-reg-toast") as HTMLElement).getByLabelText("close"));
 
       await waitFor(() => {
-        expect(subject.getByText("NotRegisteredContent")).toBeInTheDocument();
-        expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
+        expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
       });
+      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
 
-    // TODO: unskip me when async issues fixed
-    xit("renders successful registration card when user is authenticated", async () => {
+    it("renders successful registration card when user is authenticated", async () => {
       const sidebarDisplayContent = {
         "successful-registration": generateSidebarCardContent({ contentMd: "SuccessContent" }),
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
       };
 
-      const subject = renderPageWithAuth({
+      renderPageWithAuth({
         registrationAlertStatus: "SUCCESS",
         sidebarDisplayContent,
       });
 
       await waitFor(() => {
-        expect(subject.getByText("SuccessContent")).toBeInTheDocument();
-        expect(subject.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
-        expect(subject.getByText("WelcomeCardContent")).toBeInTheDocument();
+        expect(screen.getByText("SuccessContent")).toBeInTheDocument();
       });
+      expect(screen.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
+      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
 
     it("renders successful registration card when not registered card is visible, then user is authenticated", async () => {
@@ -934,15 +931,21 @@ describe("roadmap page", () => {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
       };
 
-      const subject = renderPageWithAuth({
+      renderPageWithAuth({
         userData,
         registrationAlertStatus: "SUCCESS",
         sidebarDisplayContent,
       });
 
       await waitFor(() => {
-        expect(subject.getByText("SuccessContent")).toBeInTheDocument();
-        expect(subject.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
+        expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
+      });
+
+      await waitFor(() => {
+        expect(screen.getByText("SuccessContent")).toBeInTheDocument();
+      });
+      await waitFor(() => {
+        expect(screen.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
       });
     });
 
@@ -961,21 +964,21 @@ describe("roadmap page", () => {
         }),
       };
 
-      const subject = renderPageWithAuth({
+      renderPageWithAuth({
         userData,
         sidebarDisplayContent,
       });
 
       await waitFor(() => {
-        expect(subject.getByText("SuccessContent")).toBeInTheDocument();
+        expect(screen.getByText("SuccessContent")).toBeInTheDocument();
       });
 
       fireEvent.click(
-        within(subject.getByTestId("successful-registration") as HTMLElement).getByLabelText("Close")
+        within(screen.getByTestId("successful-registration") as HTMLElement).getByLabelText("Close")
       );
 
       await waitFor(() => {
-        expect(subject.queryByText("SuccessContent")).not.toBeInTheDocument();
+        expect(screen.queryByText("SuccessContent")).not.toBeInTheDocument();
       });
     });
   });

@@ -4,7 +4,7 @@ import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/t
 import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData, randomLegalStructure } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
-import { mockPush } from "@/test/mock/mockRouter";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
@@ -20,7 +20,7 @@ import {
   act,
   fireEvent,
   render,
-  RenderResult,
+  screen,
   waitFor,
   waitForElementToBeRemoved,
   within,
@@ -41,9 +41,9 @@ export const renderPage = ({
   userData?: UserData | null;
   user?: BusinessUser;
   isAuthenticated?: IsAuthenticated;
-}): { subject: RenderResult; page: PageHelpers } => {
+}): { page: PageHelpers } => {
   const currentUser = user ?? userData?.user ?? generateUser({});
-  const subject = render(
+  render(
     withAuth(
       <WithStatefulUserData
         initialUserData={
@@ -60,8 +60,8 @@ export const renderPage = ({
       { user: currentUser, isAuthenticated }
     )
   );
-  const page = createPageHelpers(subject);
-  return { subject, page };
+  const page = createPageHelpers();
+  return { page };
 };
 
 export type PageHelpers = {
@@ -78,7 +78,8 @@ export type PageHelpers = {
   getLegalStructureValue: () => string;
   getSectorIDValue: () => string;
   getIndustryValue: () => string;
-  getRadioButtonValue: (sectionAriaLabel: string) => string;
+  getRadioGroup: (sectionAriaLabel: string) => HTMLElement;
+  getRadioButton: (sectionAriaLabel: string) => HTMLElement;
   getMunicipalityValue: () => string;
   getFullNameValue: () => string;
   getEmailValue: () => string;
@@ -87,102 +88,99 @@ export type PageHelpers = {
   visitStep3: () => Promise<void>;
   visitStep4: () => Promise<void>;
   visitStep5: () => Promise<void>;
-  visitStep6: () => Promise<void>;
 };
 
-export const createPageHelpers = (subject: RenderResult): PageHelpers => {
+export const createPageHelpers = (): PageHelpers => {
   const fillText = (label: string, value: string) => {
-    const item = subject.getByLabelText(label);
+    const item = screen.getByLabelText(label);
     fireEvent.change(item, { target: { value: value } });
     fireEvent.blur(item);
   };
 
   const selectDate = (label: string, value: DateObject) => {
     fillText(label, value.format("MM/YYYY"));
-    fireEvent.blur(subject.getByLabelText("Date of formation"));
+    fireEvent.blur(screen.getByLabelText("Date of formation"));
   };
 
   const selectByValue = (label: string, value: string) => {
-    fireEvent.mouseDown(subject.getByLabelText(label));
-    const listbox = within(subject.getByRole("listbox"));
+    fireEvent.mouseDown(screen.getByLabelText(label));
+    const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByTestId(value));
   };
 
   const selectByText = (label: string, value: string) => {
-    fireEvent.mouseDown(subject.getByLabelText(label));
-    const listbox = within(subject.getByRole("listbox"));
+    fireEvent.mouseDown(screen.getByLabelText(label));
+    const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByText(value));
   };
 
   const chooseRadio = (value: string) => {
-    fireEvent.click(subject.getByTestId(value));
+    fireEvent.click(screen.getByTestId(value));
   };
 
   const clickNext = (): void => {
-    fireEvent.click(subject.getAllByTestId("next")[0]);
+    fireEvent.click(screen.getAllByTestId("next")[0]);
   };
 
   const clickBack = (): void => {
-    fireEvent.click(subject.getAllByTestId("back")[0]);
+    fireEvent.click(screen.getAllByTestId("back")[0]);
   };
 
-  const getEntityIdValue = (): string => (subject.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+  const getEntityIdValue = (): string => (screen.queryByLabelText("Entity id") as HTMLInputElement)?.value;
 
   const getDateOfFormationValue = (): string =>
-    (subject.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+    (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
 
   const getBusinessNameValue = (): string =>
-    (subject.queryByLabelText("Business name") as HTMLInputElement)?.value;
+    (screen.queryByLabelText("Business name") as HTMLInputElement)?.value;
 
-  const getSectorIDValue = (): string => (subject.queryByLabelText("Sector") as HTMLInputElement)?.value;
+  const getSectorIDValue = (): string => (screen.queryByLabelText("Sector") as HTMLInputElement)?.value;
 
-  const getIndustryValue = (): string => (subject.queryByTestId("industryid") as HTMLInputElement)?.value;
+  const getIndustryValue = (): string => (screen.queryByTestId("industryid") as HTMLInputElement)?.value;
 
-  const getRadioButtonValue = (sectionAriaLabel: string): string => {
-    const checked = subject.container.querySelector(
-      `[aria-label="${sectionAriaLabel}"] .Mui-checked input`
-    ) as HTMLInputElement;
-    return checked.value as string;
+  const getRadioGroup = (sectionAriaLabel: string): HTMLElement => {
+    const radiogroup = screen.getByRole("radiogroup", { name: sectionAriaLabel });
+    return radiogroup;
+  };
+
+  const getRadioButton = (sectionAriaLabel: string): HTMLElement => {
+    const radio = screen.getByRole("radio", { name: sectionAriaLabel });
+    return radio;
   };
 
   const getMunicipalityValue = (): string =>
-    (subject.queryByTestId("municipality") as HTMLInputElement)?.value;
+    (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
 
   const getLegalStructureValue = (): string =>
-    (subject.queryByTestId("legal-structure") as HTMLInputElement)?.value;
+    (screen.queryByTestId("legal-structure") as HTMLInputElement)?.value;
 
   const getFullNameValue = (): string =>
-    (subject.queryByLabelText(Config.selfRegistration.nameFieldLabel) as HTMLInputElement)?.value;
+    (screen.queryByLabelText(Config.selfRegistration.nameFieldLabel) as HTMLInputElement)?.value;
 
   const getEmailValue = (): string =>
-    (subject.queryByLabelText(Config.selfRegistration.emailFieldLabel) as HTMLInputElement)?.value;
+    (screen.queryByLabelText(Config.selfRegistration.emailFieldLabel) as HTMLInputElement)?.value;
 
   const getConfirmEmailValue = (): string =>
-    (subject.queryByLabelText(Config.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)?.value;
+    (screen.queryByLabelText(Config.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)?.value;
 
   const visitStep2 = async () => {
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByTestId("step-1"));
+    await waitForElementToBeRemoved(() => screen.getByTestId("step-1"));
   };
 
   const visitStep3 = async () => {
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByTestId("step-2"));
+    await waitForElementToBeRemoved(() => screen.getByTestId("step-2"));
   };
 
   const visitStep4 = async () => {
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByTestId("step-3"));
+    await waitForElementToBeRemoved(() => screen.getByTestId("step-3"));
   };
 
   const visitStep5 = async () => {
     clickNext();
-    await waitForElementToBeRemoved(() => subject.getByTestId("step-4"));
-  };
-
-  const visitStep6 = async () => {
-    clickNext();
-    await waitForElementToBeRemoved(() => subject.getByTestId("step-5"));
+    await waitForElementToBeRemoved(() => screen.getByTestId("step-4"));
   };
 
   return {
@@ -198,7 +196,8 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
     getBusinessNameValue,
     getLegalStructureValue,
     getIndustryValue,
-    getRadioButtonValue,
+    getRadioGroup,
+    getRadioButton,
     getMunicipalityValue,
     getSectorIDValue,
     getFullNameValue,
@@ -208,19 +207,18 @@ export const createPageHelpers = (subject: RenderResult): PageHelpers => {
     visitStep3,
     visitStep4,
     visitStep5,
-    visitStep6,
   };
 };
 
-export const runSelfRegPageTests = (
-  {
-    hasExistingBusiness,
-    requiresPublicFiling,
-  }: { hasExistingBusiness: boolean; requiresPublicFiling?: boolean },
-  advanceToSelfReg: (page: PageHelpers) => Promise<void>
-) => {
-  let page: PageHelpers;
-  let subject: RenderResult;
+export const runSelfRegPageTests = ({
+  hasExistingBusiness,
+  requiresPublicFiling,
+  selfRegPage,
+}: {
+  hasExistingBusiness: boolean;
+  requiresPublicFiling?: boolean;
+  selfRegPage: string;
+}) => {
   const user = createEmptyUser();
   const userData = generateUserData({
     user,
@@ -231,13 +229,7 @@ export const runSelfRegPageTests = (
     }),
   });
 
-  beforeEach(async () => {
-    act(async () => {
-      const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
-      page = render.page;
-      subject = render.subject;
-      await advanceToSelfReg(page);
-    });
+  beforeEach(() => {
     mockApi.postNewsletter.mockImplementation((request) =>
       Promise.resolve({
         ...request,
@@ -265,116 +257,122 @@ export const runSelfRegPageTests = (
     );
   });
 
-  it("prevents user from registering if the email is not matching", async () => {
-    act(async () => {
-      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.co");
-      page.clickNext();
-      expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-      expect(currentUserData().user).toEqual(user);
-    });
+  it("prevents user from registering if the email is not matching", () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.co");
+    act(() => page.clickNext());
+    expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
   });
 
-  it("prevents user from registering if the email is not matching after changing it", async () => {
-    act(async () => {
-      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.co");
-      page.clickNext();
-      expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-      expect(currentUserData().user).toEqual(user);
-    });
+  it("prevents user from registering if the email is not matching after changing it", () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.co");
+    act(() => page.clickNext());
+    expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
   });
 
-  it("prevents user from registering if the name is empty", async () => {
-    act(async () => {
-      page.fillText(Config.selfRegistration.nameFieldLabel, "");
-      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-      page.clickNext();
-      expect(subject.queryByText(Config.selfRegistration.errorTextFullName)).toBeInTheDocument();
-      expect(currentUserData().user).toEqual(user);
-    });
+  it("prevents user from registering if the name is empty", () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    page.fillText(Config.selfRegistration.nameFieldLabel, "");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    act(() => page.clickNext());
+    expect(screen.queryByText(Config.selfRegistration.errorTextFullName)).toBeInTheDocument();
   });
 
-  it("prevents user from registering if the email is empty", async () => {
-    act(async () => {
-      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-      page.fillText(Config.selfRegistration.emailFieldLabel, "");
-      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "");
-      page.clickNext();
-      expect(subject.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
-      expect(currentUserData().user).toEqual(user);
-    });
+  it("prevents user from registering if the email is empty", () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "");
+    act(() => page.clickNext());
+    expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
   });
 
   it("allows a user to uncheck to opt out of newsletter", async () => {
-    act(async () => {
-      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-      fireEvent.click(subject.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
-      page.clickNext();
-      const businessUser = {
-        ...user,
-        email: "email@example.com",
-        name: "My Name",
-        receiveNewsletter: false,
-        userTesting: true,
-        externalStatus: { userTesting: { status: "SUCCESS", success: true } },
-      };
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    fireEvent.click(screen.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
+    act(() => page.clickNext());
+    const businessUser = {
+      ...user,
+      email: "email@example.com",
+      name: "My Name",
+      receiveNewsletter: false,
+      userTesting: true,
+      externalStatus: { userTesting: { status: "SUCCESS", success: true } },
+    };
 
-      await waitFor(() => {
-        expect(currentUserData().user).toEqual(businessUser);
-      });
+    await waitFor(() => {
+      expect(currentUserData().user).toEqual(businessUser);
     });
   });
 
   it("allows a user to uncheck to opt out of user testing", async () => {
-    act(async () => {
-      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-      fireEvent.click(subject.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
-      page.clickNext();
-      const businessUser = {
-        ...user,
-        email: "email@example.com",
-        name: "My Name",
-        receiveNewsletter: true,
-        userTesting: false,
-        externalStatus: { newsletter: { status: "SUCCESS", success: true } },
-      };
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    fireEvent.click(screen.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
+    act(() => page.clickNext());
+    const businessUser = {
+      ...user,
+      email: "email@example.com",
+      name: "My Name",
+      receiveNewsletter: true,
+      userTesting: false,
+      externalStatus: { newsletter: { status: "SUCCESS", success: true } },
+    };
 
-      await waitFor(() => {
-        expect(currentUserData().user).toEqual(businessUser);
-      });
+    await waitFor(() => {
+      expect(currentUserData().user).toEqual(businessUser);
     });
   });
 
   it("redirects the user after completion", async () => {
-    act(async () => {
-      page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
-      page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
-      page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-      page.clickNext();
-      const businessUser = {
-        ...user,
-        email: "email@example.com",
-        name: "My Name",
-        receiveNewsletter: true,
-        userTesting: true,
-        externalStatus: {
-          newsletter: { status: "SUCCESS", success: true },
-          userTesting: { status: "SUCCESS", success: true },
-        },
-      };
-      await waitFor(() => {
-        expect(currentUserData().user).toEqual(businessUser);
-        expect(mockPush).toHaveBeenCalledWith(hasExistingBusiness ? "/dashboard" : "/roadmap");
-      });
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    /*await waitFor(() => {
+      expect(screen.findByLabelText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument()
+    })*/
+    page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    act(() => page.clickNext());
+    const businessUser = {
+      ...user,
+      email: "email@example.com",
+      name: "My Name",
+      receiveNewsletter: true,
+      userTesting: true,
+      externalStatus: {
+        newsletter: { status: "SUCCESS", success: true },
+        userTesting: { status: "SUCCESS", success: true },
+      },
+    };
+    await waitFor(() => {
+      expect(currentUserData().user).toEqual(businessUser);
+      expect(mockPush).toHaveBeenCalledWith(hasExistingBusiness ? "/dashboard" : "/roadmap");
     });
   });
 };

@@ -10,8 +10,8 @@ describe("OpportunityCard", () => {
       contentMd: "**Test Content",
       urlSlug: "",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toMatchSnapshot();
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toMatchSnapshot();
   });
   it("matches the layout with a due date", () => {
     const opportunity = {
@@ -21,8 +21,8 @@ describe("OpportunityCard", () => {
       urlSlug: "",
       dueDate: "09/01/2030",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toMatchSnapshot();
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toMatchSnapshot();
   });
   it("matches the layout when status is first come first serve", () => {
     const opportunity = {
@@ -33,8 +33,8 @@ describe("OpportunityCard", () => {
       dueDate: "",
       status: "first come, first serve",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toMatchSnapshot();
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toMatchSnapshot();
   });
   it("matches the layout when status is rolling application", () => {
     const opportunity = {
@@ -45,8 +45,8 @@ describe("OpportunityCard", () => {
       dueDate: "",
       status: "rolling application",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toMatchSnapshot();
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toMatchSnapshot();
   });
   it("contains the correct name", () => {
     const opportunity = {
@@ -55,8 +55,8 @@ describe("OpportunityCard", () => {
       contentMd: "**Test Content",
       urlSlug: "",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toHaveTextContent("Test Name for Card");
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toHaveTextContent("Test Name for Card");
   });
   it("renders the content correctly", () => {
     const opportunity = {
@@ -65,8 +65,8 @@ describe("OpportunityCard", () => {
       contentMd: "*Test Content*",
       urlSlug: "",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toContainHTML("<em>Test Content</em>");
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toContainHTML("<em>Test Content</em>");
   });
   it("renders with due date correctly", () => {
     const opportunity = {
@@ -76,9 +76,9 @@ describe("OpportunityCard", () => {
       urlSlug: "",
       dueDate: "09/01/2030",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toHaveTextContent("Due:");
-    expect(subject).toHaveTextContent("09/01/2030");
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toHaveTextContent("Due:");
+    expect(view).toHaveTextContent("09/01/2030");
   });
   it("renders with text of First Come First Serve correctly", () => {
     const opportunity = {
@@ -89,8 +89,8 @@ describe("OpportunityCard", () => {
       dueDate: "",
       status: "first come, first serve",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toContainHTML("First Come, First Serve");
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toContainHTML("First Come, First Serve");
   });
   it("does not render due date if status is first come, first serve", () => {
     const opportunity = {
@@ -101,9 +101,9 @@ describe("OpportunityCard", () => {
       dueDate: "09/03/30",
       status: "first come, first serve",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).not.toHaveTextContent("Due:");
-    expect(subject).toContainHTML("First Come, First Serve");
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).not.toHaveTextContent("Due:");
+    expect(view).toContainHTML("First Come, First Serve");
   });
   it("renders with text of Rolling Application correctly", () => {
     const opportunity = {
@@ -114,8 +114,8 @@ describe("OpportunityCard", () => {
       dueDate: "",
       status: "rolling application",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).toContainHTML("Rolling Application");
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).toContainHTML("Rolling Application");
   });
   it("does not render due date if status is rolling application", () => {
     const opportunity = {
@@ -126,8 +126,8 @@ describe("OpportunityCard", () => {
       dueDate: "09/03/30",
       status: "rolling application",
     };
-    const subject = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
-    expect(subject).not.toHaveTextContent("Due:");
-    expect(subject).toContainHTML("Rolling Application");
+    const view = render(<OpportunityCard opportunity={opportunity} urlPath="funding" />).baseElement;
+    expect(view).not.toHaveTextContent("Due:");
+    expect(view).toContainHTML("Rolling Application");
   });
 });

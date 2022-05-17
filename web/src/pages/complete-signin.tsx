@@ -9,8 +9,8 @@ import React, { ReactElement } from "react";
 const CompleteSignin = (): ReactElement => {
   useUnauthedOnlyPage();
 
-  useMountEffect(async () => {
-    await triggerSignIn();
+  useMountEffect(() => {
+    triggerSignIn();
   });
 
   return (

@@ -4,14 +4,13 @@ import { generateLLCProfileData } from "@/test/helpers-formation";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { GetFilingResponse, ProfileData } from "@businessnjgovnavigator/shared";
-import { render, RenderResult } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/data-hooks/useDocuments");
 
 describe("Formation - <FormationSuccessPage />", () => {
   let getFilingResponse: GetFilingResponse;
-  let subject: RenderResult;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -27,28 +26,28 @@ describe("Formation - <FormationSuccessPage />", () => {
       profileData: generateLLCProfileData(profileOverrides),
       formationData: generateFormationData({ getFilingResponse }),
     });
-    subject = render(<FormationSuccessPage userData={userData} />);
+    render(<FormationSuccessPage userData={userData} />);
   };
 
-  it("displays success page, documents, entity id, confirmation id", async () => {
+  it("displays success page, documents, entity id, confirmation id", () => {
     setMockDocumentsResponse({
       formationDoc: "testForm.pdf",
       certifiedDoc: "testCert.pdf",
       standingDoc: "testStand.pdf",
     });
     renderSuccessPage({});
-    expect(subject.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
-    expect(subject.getByText(Config.businessFormationDefaults.successPageSubheader)).toBeInTheDocument();
-    expect(subject.getByText(getFilingResponse.entityId)).toBeInTheDocument();
-    expect(subject.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
+    expect(screen.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
+    expect(screen.getByText(Config.businessFormationDefaults.successPageSubheader)).toBeInTheDocument();
+    expect(screen.getByText(getFilingResponse.entityId)).toBeInTheDocument();
+    expect(screen.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
     expect(
-      subject.getByTestId(Config.businessFormationDefaults.formationDocLabel).getAttribute("href")
+      screen.getByTestId(Config.businessFormationDefaults.formationDocLabel).getAttribute("href")
     ).toEqual("testForm.pdf");
     expect(
-      subject.getByTestId(Config.businessFormationDefaults.standingDocLabel).getAttribute("href")
+      screen.getByTestId(Config.businessFormationDefaults.standingDocLabel).getAttribute("href")
     ).toEqual("testStand.pdf");
     expect(
-      subject.getByTestId(Config.businessFormationDefaults.certifiedDocLabel).getAttribute("href")
+      screen.getByTestId(Config.businessFormationDefaults.certifiedDocLabel).getAttribute("href")
     ).toEqual("testCert.pdf");
   });
 
@@ -57,6 +56,6 @@ describe("Formation - <FormationSuccessPage />", () => {
       { certifiedDoc: "" },
       { documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" } }
     );
-    expect(subject.queryByTestId(Config.businessFormationDefaults.certifiedDocLabel)).not.toBeInTheDocument();
+    expect(screen.queryByTestId(Config.businessFormationDefaults.certifiedDocLabel)).not.toBeInTheDocument();
   });
 });

@@ -1,42 +1,32 @@
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { withContextualInfo } from "@/test/helpers";
-import { render, RenderResult } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 describe("<ContextualInfoPanel />", () => {
   it("is closed when contextual info is empty", () => {
-    const subject = render(
-      withContextualInfo(<ContextualInfoPanel />, { isVisible: false, markdown: "" }, jest.fn())
-    );
-    expectToBeClosed(subject);
+    render(withContextualInfo(<ContextualInfoPanel />, { isVisible: false, markdown: "" }, jest.fn()));
+    expect(screen.getByTestId("overlay").className).not.toContain("is-visible");
+    expect(screen.queryByTestId("info-panel")).not.toBeInTheDocument();
   });
 
   it("is open when the content is set", () => {
-    const subject = render(
+    render(
       withContextualInfo(<ContextualInfoPanel />, { isVisible: true, markdown: "some content" }, jest.fn())
     );
-    expectToBeOpen(subject);
+    expect(screen.getByTestId("overlay").className).toContain("is-visible");
+    expect(screen.getByTestId("info-panel").className).toContain("is-visible");
   });
 
   it("displays the content as markdown", () => {
-    const subject = render(
+    render(
       withContextualInfo(
         <ContextualInfoPanel />,
         { isVisible: true, markdown: "a header\n\na paragraph" },
         jest.fn()
       )
     );
-    expect(subject.getByText("a header")).toBeInTheDocument();
-    expect(subject.getByText("a paragraph")).toBeInTheDocument();
+    expect(screen.getByText("a header")).toBeInTheDocument();
+    expect(screen.getByText("a paragraph")).toBeInTheDocument();
   });
-
-  const expectToBeClosed = (subject: RenderResult) => {
-    expect(subject.getByTestId("overlay").className).not.toContain("is-visible");
-    expect(subject.queryByTestId("info-panel")).not.toBeInTheDocument();
-  };
-
-  const expectToBeOpen = (subject: RenderResult) => {
-    expect(subject.getByTestId("overlay").className).toContain("is-visible");
-    expect(subject.getByTestId("info-panel").className).toContain("is-visible");
-  };
 });

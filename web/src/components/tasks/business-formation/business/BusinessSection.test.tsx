@@ -6,9 +6,9 @@ import {
   generateUserData,
 } from "@/test/factories";
 import {
+  FormationPageHelpers,
   generateLLCProfileData,
-  RenderedTask,
-  renderTask,
+  preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
 import { mockPush } from "@/test/mock/mockRouter";
@@ -23,7 +23,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, waitFor, within } from "@testing-library/react";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -50,12 +50,12 @@ describe("Formation - BusinessSection", () => {
     process.env.FEATURE_BUSINESS_PURPOSE = "true";
   });
 
-  const renderSection = async (
+  const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
     formationFormData: Partial<FormationFormData>,
     municipalities?: Municipality[],
     initialUser?: Partial<BusinessUser>
-  ): Promise<RenderedTask> => {
+  ): Promise<FormationPageHelpers> => {
     const profileData = generateLLCProfileData(initialProfileData);
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData),
@@ -63,32 +63,32 @@ describe("Formation - BusinessSection", () => {
       getFilingResponse: undefined,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
-    const renderedTask = renderTask(
+    const page = preparePage(
       generateUserData({ profileData, formationData, user }),
       generateFormationDisplayContent({}),
       municipalities
     );
-    await renderedTask.page.submitBusinessNameTab();
-    return renderedTask;
+    await page.submitBusinessNameTab();
+    return page;
   };
 
   it("displays modal when legal structure Edit button clicked", async () => {
-    const { subject } = await renderSection({}, {});
+    await getPageHelper({}, {});
     expect(
-      subject.queryByText(Config.businessFormationDefaults.legalStructureWarningModalHeader)
+      screen.queryByText(Config.businessFormationDefaults.legalStructureWarningModalHeader)
     ).not.toBeInTheDocument();
-    fireEvent.click(subject.getByTestId("edit-legal-structure"));
+    fireEvent.click(screen.getByTestId("edit-legal-structure"));
     expect(
-      subject.queryByText(Config.businessFormationDefaults.legalStructureWarningModalHeader)
+      screen.getByText(Config.businessFormationDefaults.legalStructureWarningModalHeader)
     ).toBeInTheDocument();
   });
 
   it("routes to profile page when edit legal structure button is clicked", async () => {
-    const { subject } = await renderSection({}, {});
+    await getPageHelper({}, {});
 
-    fireEvent.click(subject.getByTestId("edit-legal-structure"));
+    fireEvent.click(screen.getByTestId("edit-legal-structure"));
     fireEvent.click(
-      within(subject.getByTestId("modal-content")).getByText(
+      within(screen.getByTestId("modal-content")).getByText(
         Config.businessFormationDefaults.legalStructureWarningModalContinueButtonText
       )
     );
@@ -107,9 +107,9 @@ describe("Formation - BusinessSection", () => {
       businessPurpose: "some cool purpose",
     });
 
-    const { subject, page } = await renderSection({}, formationData);
+    const page = await getPageHelper({}, formationData);
 
-    expect(subject.getByText("LTD LIABILITY CO")).toBeInTheDocument();
+    expect(screen.getByText("LTD LIABILITY CO")).toBeInTheDocument();
     expect(page.getInputElementByLabel("Business start date").value).toBe(
       getCurrentDateFormatted("MM/DD/YYYY")
     );
@@ -121,171 +121,165 @@ describe("Formation - BusinessSection", () => {
   });
 
   it("saves business address city to profile after clicking continue", async () => {
-    const { subject, page } = await renderSection(
-      { municipality: generateMunicipality({ displayName: "Newark" }) },
-      {},
-      [generateMunicipality({ displayName: "Whatever Town" })]
-    );
+    const page = await getPageHelper({ municipality: generateMunicipality({ displayName: "Newark" }) }, {}, [
+      generateMunicipality({ displayName: "Whatever Town" }),
+    ]);
 
-    expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
+    expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
     page.selectByText("Business address city", "Whatever Town");
-    expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
+    expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
       "Whatever Town"
     );
     await page.submitBusinessTab();
     await waitFor(() => {
       expect(currentUserData().profileData.municipality?.displayName).toEqual("Whatever Town");
-      expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
-        "Whatever Town"
-      );
     });
+    expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
+      "Whatever Town"
+    );
   });
 
   it("does not save business address city to profile when page is invalid", async () => {
-    const { page } = await renderSection(
-      { municipality: generateMunicipality({ displayName: "Newark" }) },
-      {},
-      [generateMunicipality({ displayName: "Whatever Town" })]
-    );
+    const page = await getPageHelper({ municipality: generateMunicipality({ displayName: "Newark" }) }, {}, [
+      generateMunicipality({ displayName: "Whatever Town" }),
+    ]);
     page.selectByText("Business address city", "Whatever Town");
     page.fillText("Business address zip code", "AAAAA");
     await page.submitBusinessTab(false);
 
     await waitFor(() => {
       expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
-      expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
-        "Whatever Town"
-      );
     });
+    expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
+      "Whatever Town"
+    );
   });
 
   it("does not display dependency alert", async () => {
-    const { subject } = await renderSection({}, {});
-    expect(subject.queryByTestId("dependency-alert")).not.toBeInTheDocument();
+    await getPageHelper({}, {});
+    expect(screen.queryByTestId("dependency-alert")).not.toBeInTheDocument();
   });
 
   it("goes back to name tab when edit business name button is clicked", async () => {
-    const { subject } = await renderSection({}, {});
-    fireEvent.click(subject.getByTestId("edit-business-name"));
-    expect(subject.queryByTestId("business-name-section")).toBeInTheDocument();
+    await getPageHelper({}, {});
+    fireEvent.click(screen.getByTestId("edit-business-name"));
+    expect(screen.getByTestId("business-name-section")).toBeInTheDocument();
   });
 
   it("displays alert and highlights fields when submitting with missing fields", async () => {
-    const { subject, page } = await renderSection({}, { businessAddressLine1: "" });
+    const page = await getPageHelper({}, { businessAddressLine1: "" });
     await page.submitBusinessTab(false);
     expect(
-      subject.getByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
+      screen.getByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
     ).toBeInTheDocument();
     expect(
-      subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+      screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
     ).toBeInTheDocument();
     page.fillText("Business address line1", "1234 main street");
     await page.submitBusinessTab();
     expect(
-      subject.queryByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
+      screen.queryByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
     ).not.toBeInTheDocument();
     expect(
-      subject.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+      screen.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
     ).not.toBeInTheDocument();
   });
 
   describe("Business purpose", () => {
     it("keeps business purpose closed by default", async () => {
-      const { subject } = await renderSection({}, { businessPurpose: "" });
-      expect(subject.queryByText(Config.businessFormationDefaults.businessPurposeTitle)).toBeInTheDocument();
+      await getPageHelper({}, { businessPurpose: "" });
+      expect(screen.getByText(Config.businessFormationDefaults.businessPurposeTitle)).toBeInTheDocument();
       expect(
-        subject.queryByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
+        screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
       ).toBeInTheDocument();
-      expect(subject.queryByLabelText("remove business purpose")).not.toBeInTheDocument();
-      expect(subject.queryByLabelText("Business purpose")).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("remove business purpose")).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Business purpose")).not.toBeInTheDocument();
     });
 
     it("shows business purpose open if exists", async () => {
-      const { subject } = await renderSection({}, { businessPurpose: "some purpose" });
+      await getPageHelper({}, { businessPurpose: "some purpose" });
       expect(
-        subject.queryByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
+        screen.queryByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
       ).not.toBeInTheDocument();
-      expect(subject.queryByLabelText("remove business purpose")).toBeInTheDocument();
-      expect(subject.queryByLabelText("Business purpose")).toBeInTheDocument();
+      expect(screen.getByLabelText("remove business purpose")).toBeInTheDocument();
+      expect(screen.getByLabelText("Business purpose")).toBeInTheDocument();
     });
 
     it("opens business purpose when Add button clicked", async () => {
-      const { subject } = await renderSection({}, { businessPurpose: "" });
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+      await getPageHelper({}, { businessPurpose: "" });
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
 
       expect(
-        subject.queryByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
+        screen.queryByText(Config.businessFormationDefaults.businessPurposeAddButtonText)
       ).not.toBeInTheDocument();
-      expect(subject.queryByLabelText("remove business purpose")).toBeInTheDocument();
-      expect(subject.queryByLabelText("Business purpose")).toBeInTheDocument();
+      expect(screen.getByLabelText("remove business purpose")).toBeInTheDocument();
+      expect(screen.getByLabelText("Business purpose")).toBeInTheDocument();
     });
 
     it("removes business purpose when Remove button clicked", async () => {
-      const { subject, page } = await renderSection({}, { businessPurpose: "some purpose" });
-      fireEvent.click(subject.getByLabelText("remove business purpose"));
+      const page = await getPageHelper({}, { businessPurpose: "some purpose" });
+      fireEvent.click(screen.getByLabelText("remove business purpose"));
       await page.submitBusinessTab();
       expect(currentUserData().formationData.formationFormData.businessPurpose).toEqual("");
     });
 
     it("updates char count in real time", async () => {
-      const { subject, page } = await renderSection({}, { businessPurpose: "" });
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
-      expect(subject.getByText("0 / 300", { exact: false })).toBeInTheDocument();
+      const page = await getPageHelper({}, { businessPurpose: "" });
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+      expect(screen.getByText("0 / 300", { exact: false })).toBeInTheDocument();
       page.fillText("Business purpose", "some purpose");
       const charLength = "some purpose".length;
-      expect(subject.getByText(`${charLength} / 300`, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(`${charLength} / 300`, { exact: false })).toBeInTheDocument();
     });
   });
 
   describe("provisions", () => {
     it("keeps provisions closed by default", async () => {
-      const { subject } = await renderSection({}, { provisions: [] });
-      expect(subject.queryByText(Config.businessFormationDefaults.provisionsTitle)).toBeInTheDocument();
-      expect(
-        subject.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
-      ).toBeInTheDocument();
-      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(0);
-      expect(subject.queryByLabelText("provision 0")).not.toBeInTheDocument();
+      await getPageHelper({}, { provisions: [] });
+      expect(screen.getByText(Config.businessFormationDefaults.provisionsTitle)).toBeInTheDocument();
+      expect(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText)).toBeInTheDocument();
+      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(0);
+      expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
     });
 
     it("shows provisions open if exists", async () => {
-      const { subject } = await renderSection({}, { provisions: ["provision1", "provision2"] });
+      await getPageHelper({}, { provisions: ["provision1", "provision2"] });
       expect(
-        subject.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
+        screen.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
       ).not.toBeInTheDocument();
-      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(2);
-      expect(subject.queryByLabelText("Provisions 0")).toBeInTheDocument();
-      expect(subject.queryByLabelText("Provisions 1")).toBeInTheDocument();
+      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
+      expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
+      expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
     });
 
     it("opens provisions when Add button clicked", async () => {
-      const { subject } = await renderSection({}, { provisions: [] });
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
+      await getPageHelper({}, { provisions: [] });
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
 
       expect(
-        subject.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
+        screen.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
       ).not.toBeInTheDocument();
-      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(1);
-      expect(subject.queryByLabelText("Provisions 0")).toBeInTheDocument();
+      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(1);
+      expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
     });
 
     it("adds more provisions when Add More button clicked", async () => {
-      const { subject } = await renderSection({}, { provisions: [] });
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
-      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(2);
-      expect(subject.queryByLabelText("Provisions 0")).toBeInTheDocument();
-      expect(subject.queryByLabelText("Provisions 1")).toBeInTheDocument();
+      await getPageHelper({}, { provisions: [] });
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
+      expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
+      expect(screen.getByLabelText("Provisions 1")).toBeInTheDocument();
     });
 
     it("removes correct provision when Remove button clicked", async () => {
-      const { subject, page } = await renderSection(
+      const page = await getPageHelper(
         {},
         {
           provisions: ["provision1", "provision2", "provision3"],
         }
       );
-      const removeProvision2Button = subject.getAllByLabelText("remove provision")[1];
+      const removeProvision2Button = screen.getAllByLabelText("remove provision")[1];
       fireEvent.click(removeProvision2Button);
       await page.submitBusinessTab();
       expect(currentUserData().formationData.formationFormData.provisions).toEqual([
@@ -295,70 +289,70 @@ describe("Formation - BusinessSection", () => {
     });
 
     it("removes empty provisions when moving to next tab", async () => {
-      const { subject, page } = await renderSection({}, { provisions: ["provision0"] });
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+      const page = await getPageHelper({}, { provisions: ["provision0"] });
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
       page.fillText("Provisions 2", "provision2");
       await page.submitBusinessTab();
       expect(currentUserData().formationData.formationFormData.provisions).toEqual([
         "provision0",
         "provision2",
       ]);
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
-      expect(subject.queryAllByLabelText("remove provision")).toHaveLength(2);
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
+      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
     });
 
     it("updates char count in real time", async () => {
-      const { subject, page } = await renderSection({}, { provisions: [] });
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
-      expect(subject.getByText("0 / 3000", { exact: false })).toBeInTheDocument();
+      const page = await getPageHelper({}, { provisions: [] });
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
+      expect(screen.getByText("0 / 3000", { exact: false })).toBeInTheDocument();
       page.fillText("Provisions 0", "some provision");
       const charLength = "some provision".length;
-      expect(subject.getByText(`${charLength} / 3000`, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(`${charLength} / 3000`, { exact: false })).toBeInTheDocument();
     });
 
     it("does not allow adding more than 10 provisions", async () => {
       const nineProvisions = Array(9).fill("some provision");
-      const { subject } = await renderSection({}, { provisions: nineProvisions });
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+      await getPageHelper({}, { provisions: nineProvisions });
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
       expect(
-        subject.queryByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText)
+        screen.queryByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText)
       ).not.toBeInTheDocument();
     });
   });
 
   describe("NJ zipcode validation", () => {
     it("displays error message when non-NJ zipcode is entered in main business address", async () => {
-      const { subject, page } = await renderSection({}, { businessAddressZipCode: "" });
+      const page = await getPageHelper({}, { businessAddressZipCode: "" });
       page.fillText("Business address zip code", "22222");
 
       await page.submitBusinessTab(false);
       await waitFor(() => {
         expect(
-          subject.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
-        ).toBeInTheDocument();
-        expect(
-          subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+          screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
         ).toBeInTheDocument();
       });
+      expect(
+        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+      ).toBeInTheDocument();
     });
 
     it("displays error message when alphabetical zipcode is entered in main business address", async () => {
-      const { subject, page } = await renderSection({}, { businessAddressZipCode: "" });
+      const page = await getPageHelper({}, { businessAddressZipCode: "" });
       page.fillText("Business address zip code", "AAAAA");
       await page.submitBusinessTab(false);
       await waitFor(() => {
         expect(
-          subject.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
-        ).toBeInTheDocument();
-        expect(
-          subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+          screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
         ).toBeInTheDocument();
       });
+      expect(
+        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+      ).toBeInTheDocument();
     });
 
     it("passes zipcode validation in main business address", async () => {
-      const { page } = await renderSection({}, { businessAddressZipCode: "" });
+      const page = await getPageHelper({}, { businessAddressZipCode: "" });
       page.fillText("Business address zip code", "07001");
       await page.submitBusinessTab(true);
     });
@@ -366,8 +360,8 @@ describe("Formation - BusinessSection", () => {
 
   describe("business start date", () => {
     it("defaults date picker to current date when it has no value", async () => {
-      const { subject, page } = await renderSection({}, { businessStartDate: "" });
-      expect(subject.getByLabelText("Business start date")).toBeInTheDocument();
+      const page = await getPageHelper({}, { businessStartDate: "" });
+      expect(screen.getByLabelText("Business start date")).toBeInTheDocument();
       await page.submitBusinessTab();
       expect(currentUserData().formationData.formationFormData.businessStartDate).toEqual(
         getCurrentDateFormatted("YYYY-MM-DD")
@@ -375,59 +369,54 @@ describe("Formation - BusinessSection", () => {
     });
 
     it("resets date on initial load", async () => {
-      const { subject } = await renderSection(
+      await getPageHelper(
         {},
         {
           businessStartDate: getCurrentDate().subtract(1, "day").format("YYYY-MM-DD"),
         }
       );
 
-      expect(subject.getByLabelText("Business start date")).toHaveValue(
-        getCurrentDateFormatted("MM/DD/YYYY")
-      );
+      expect(screen.getByLabelText("Business start date")).toHaveValue(getCurrentDateFormatted("MM/DD/YYYY"));
     });
 
     it("validates date on submit", async () => {
-      const { subject, page } = await renderSection({}, {});
+      const page = await getPageHelper({}, {});
       page.selectDate(getCurrentDate().subtract(4, "day"));
       await page.submitBusinessTab(false);
-      expect(subject.getByText(Config.businessFormationDefaults.startDateErrorText)).toBeInTheDocument();
+      expect(screen.getByText(Config.businessFormationDefaults.startDateErrorText)).toBeInTheDocument();
       expect(
-        subject.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
       ).toBeInTheDocument();
     });
   });
 
   describe("profile data information", () => {
     it("displays legal structure from profile data", async () => {
-      const { subject } = await renderSection({}, {});
-      const displayLegalStructure = subject.getByTestId("legal-structure");
+      await getPageHelper({}, {});
+      const displayLegalStructure = screen.getByTestId("legal-structure");
       expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.llcText);
     });
 
     it("displays business name from name check section and overrides profile", async () => {
-      const { subject, page } = await renderSection({ businessName: "some cool name" }, {});
+      const page = await getPageHelper({ businessName: "some cool name" }, {});
 
-      fireEvent.click(subject.getByText(Config.businessFormationDefaults.previousButtonText));
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
       await page.submitBusinessNameTab("another cool name");
 
-      expect(subject.getByText("another cool name", { exact: false })).toBeInTheDocument();
-      expect(subject.queryByText("some cool name", { exact: false })).not.toBeInTheDocument();
+      expect(screen.getByText("another cool name", { exact: false })).toBeInTheDocument();
+      expect(screen.queryByText("some cool name", { exact: false })).not.toBeInTheDocument();
 
       expect(
-        subject.queryByText(Config.businessFormationDefaults.notSetBusinessNameText, { exact: false })
+        screen.queryByText(Config.businessFormationDefaults.notSetBusinessNameText, { exact: false })
       ).not.toBeInTheDocument();
     });
 
     it("displays City (Main Business Address) from profile data", async () => {
-      const { subject } = await renderSection(
-        { municipality: generateMunicipality({ displayName: "Newark" }) },
-        {}
-      );
-      expect((subject.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
+      await getPageHelper({ municipality: generateMunicipality({ displayName: "Newark" }) }, {});
+      expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
 
       expect(
-        subject.queryByText(Config.businessFormationDefaults.notSetBusinessAddressCityLabel, {
+        screen.queryByText(Config.businessFormationDefaults.notSetBusinessAddressCityLabel, {
           exact: false,
         })
       ).not.toBeInTheDocument();
@@ -436,25 +425,25 @@ describe("Formation - BusinessSection", () => {
 
   describe("required fields", () => {
     it("Business suffix", async () => {
-      const { subject, page } = await renderSection({}, { businessSuffix: undefined });
+      const page = await getPageHelper({}, { businessSuffix: undefined });
       await page.submitBusinessTab(false);
-      expect(subject.getByRole("alert")).toHaveTextContent(/Business suffix/);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Business suffix/);
     });
 
     it("Business address line1", async () => {
-      const { subject, page } = await renderSection({}, { businessAddressLine1: "" });
+      const page = await getPageHelper({}, { businessAddressLine1: "" });
       await page.submitBusinessTab(false);
-      expect(subject.getByRole("alert")).toHaveTextContent(/Business address line1/);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Business address line1/);
     });
 
     it("Business address zip code", async () => {
-      const { subject, page } = await renderSection({}, { businessAddressZipCode: "" });
+      const page = await getPageHelper({}, { businessAddressZipCode: "" });
       await page.submitBusinessTab(false);
-      expect(subject.getByRole("alert")).toHaveTextContent(/Business address zip code/);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Business address zip code/);
     });
 
     it("does not require business address line 2", async () => {
-      const { page } = await renderSection({}, { businessAddressLine2: "" });
+      const page = await getPageHelper({}, { businessAddressLine2: "" });
       await page.submitBusinessTab();
       expect(userDataUpdatedNTimes()).toEqual(2);
     });

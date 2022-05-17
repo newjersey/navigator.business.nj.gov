@@ -7,7 +7,7 @@ import { markdownToText, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { fireEvent, render, RenderResult, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 
 jest.mock("next/router");
@@ -28,37 +28,29 @@ describe("SignUpModal", () => {
 
   const setModalIsVisible = jest.fn();
 
-  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, modalIsVisible = true): RenderResult => {
-    return render(withAuthAlert(<SignUpModal />, isAuthenticated, { modalIsVisible, setModalIsVisible }));
+  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, modalIsVisible = true) => {
+    render(withAuthAlert(<SignUpModal />, isAuthenticated, { modalIsVisible, setModalIsVisible }));
   };
 
-  it("shows registration alert when user is in guest mode", async () => {
-    const subject = setupHookWithAuth(IsAuthenticated.FALSE);
-    await waitFor(() =>
-      expect(subject.getByText(Config.navigationDefaults.guestModalBody)).toBeInTheDocument()
-    );
+  it("shows registration alert when user is in guest mode", () => {
+    setupHookWithAuth(IsAuthenticated.FALSE);
+    expect(screen.getByText(Config.navigationDefaults.guestModalBody)).toBeInTheDocument();
   });
 
-  it("does not show registration modal when user is in guest mode and it's disabled", async () => {
-    const subject = setupHookWithAuth(IsAuthenticated.FALSE, false);
-    await waitFor(() =>
-      expect(subject.queryByText(Config.navigationDefaults.guestModalBody)).not.toBeInTheDocument()
-    );
+  it("does not show registration modal when user is in guest mode and it's disabled", () => {
+    setupHookWithAuth(IsAuthenticated.FALSE, false);
+    expect(screen.queryByText(Config.navigationDefaults.guestModalBody)).not.toBeInTheDocument();
   });
 
-  it("returns user to previous page when modal is closed", async () => {
-    const subject = setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(subject.getByLabelText("close"));
-    await waitFor(() => {
-      expect(setModalIsVisible).toHaveBeenCalledWith(false);
-    });
+  it("returns user to previous page when modal is closed", () => {
+    setupHookWithAuth(IsAuthenticated.FALSE);
+    fireEvent.click(screen.getByLabelText("close"));
+    expect(setModalIsVisible).toHaveBeenCalledWith(false);
   });
 
-  it("does not show registration alert when user is in authenticated", async () => {
-    const subject = setupHookWithAuth(IsAuthenticated.TRUE);
-    await waitFor(() =>
-      expect(subject.queryByText(Config.navigationDefaults.guestModalBody)).not.toBeInTheDocument()
-    );
+  it("does not show registration alert when user is in authenticated", () => {
+    setupHookWithAuth(IsAuthenticated.TRUE);
+    expect(screen.queryByText(Config.navigationDefaults.guestModalBody)).not.toBeInTheDocument();
   });
 
   it("goes to self-reg when link is clicked", async () => {
@@ -69,20 +61,17 @@ describe("SignUpModal", () => {
       authRedirectURL: "www.example.com",
       userData,
     });
-    const subject = setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(subject.getByText(Config.navigationDefaults.guestModalButtonText));
-
+    setupHookWithAuth(IsAuthenticated.FALSE);
+    fireEvent.click(screen.getByText(Config.navigationDefaults.guestModalButtonText));
     await waitFor(() => {
       expect(mockApi.postSelfReg).toHaveBeenCalled();
-      expect(mockPush).toHaveBeenCalled();
     });
+    expect(mockPush).toHaveBeenCalled();
   });
 
-  it("goes to myNJ when Log-in link is clicked", async () => {
-    const subject = setupHookWithAuth(IsAuthenticated.FALSE);
-    fireEvent.click(subject.getByText(markdownToText(Config.navigationDefaults.guestModalSubText)));
-    await waitFor(() => {
-      expect(mockSession.triggerSignIn).toHaveBeenCalled();
-    });
+  it("goes to myNJ when Log-in link is clicked", () => {
+    setupHookWithAuth(IsAuthenticated.FALSE);
+    fireEvent.click(screen.getByText(markdownToText(Config.navigationDefaults.guestModalSubText)));
+    expect(mockSession.triggerSignIn).toHaveBeenCalled();
   });
 });

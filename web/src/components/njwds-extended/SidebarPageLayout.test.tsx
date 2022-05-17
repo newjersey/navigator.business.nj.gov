@@ -3,7 +3,7 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
@@ -28,21 +28,19 @@ describe("<SidebarPageLayout />", () => {
 
   it("links back to /roadmap when user is starting a business", () => {
     useMockProfileData({ hasExistingBusiness: false });
-    const subject = render(<SidebarPageLayout>stuff</SidebarPageLayout>);
-    expect(subject.queryByText("stuff")).toBeInTheDocument();
-    expect(subject.getByTestId("back-to-roadmap").getAttribute("href")).toEqual("/roadmap");
+    render(<SidebarPageLayout>stuff</SidebarPageLayout>);
+    expect(screen.getByText("stuff")).toBeInTheDocument();
+    expect(screen.getByTestId("back-to-roadmap").getAttribute("href")).toEqual("/roadmap");
   });
 
   it("links back to /dashboard when user owns a business", () => {
     useMockProfileData({ hasExistingBusiness: true });
-    const subject = render(<SidebarPageLayout>stuff</SidebarPageLayout>);
-    expect(subject.getByTestId("back-to-roadmap").getAttribute("href")).toEqual("/dashboard");
+    render(<SidebarPageLayout>stuff</SidebarPageLayout>);
+    expect(screen.getByTestId("back-to-roadmap").getAttribute("href")).toEqual("/dashboard");
   });
 
   it("shows content in sidebar", () => {
-    const subject = render(
-      <SidebarPageLayout navChildren={<div>{"roflcopter"}</div>}>stuff</SidebarPageLayout>
-    );
-    expect(subject.queryByText("roflcopter")).toBeInTheDocument();
+    render(<SidebarPageLayout navChildren={<div>{"roflcopter"}</div>}>stuff</SidebarPageLayout>);
+    expect(screen.getByText("roflcopter")).toBeInTheDocument();
   });
 });

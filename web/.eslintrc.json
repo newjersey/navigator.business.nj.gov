@@ -29,7 +29,14 @@
     "sourceType": "module",
     "tsconfigRootDir": "."
   },
-  "plugins": ["react", "@typescript-eslint", "@typescript-eslint/eslint-plugin", "jsx-a11y", "cypress"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "@typescript-eslint/eslint-plugin",
+    "jsx-a11y",
+    "cypress",
+    "testing-library"
+  ],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
     "@next/next/no-img-element": "off",
@@ -38,5 +45,11 @@
     "react/jsx-uses-react": 1,
     "react/forbid-elements": [1, { "forbid": ["h5", "h6"] }],
     "@next/next/no-document-import-in-page": 0
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchContextualInfo";
 import { withContextualInfo } from "@/test/helpers";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 
 jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({
@@ -16,22 +16,22 @@ describe("<ContextualInfoLink />", () => {
   });
 
   it("splits the text on a | and displays the first half as a label", () => {
-    const subject = render(<ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>);
-    expect(subject.queryByText("legal structure")).toBeInTheDocument();
-    expect(subject.queryByText("legal-structure")).not.toBeInTheDocument();
+    render(<ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>);
+    expect(screen.getByText("legal structure")).toBeInTheDocument();
+    expect(screen.queryByText("legal-structure")).not.toBeInTheDocument();
   });
 
   it("sets the contextual info context when clicked", async () => {
     mockFetchContextualInfo.mockResolvedValue("some markdown content");
     const setContent = jest.fn();
-    const subject = render(
+    render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
         { isVisible: false, markdown: "" },
         setContent
       )
     );
-    fireEvent.click(subject.getByText("legal structure"));
+    fireEvent.click(screen.getByText("legal structure"));
     await waitFor(() =>
       expect(setContent).toHaveBeenCalledWith({ isVisible: true, markdown: "some markdown content" })
     );
@@ -40,18 +40,18 @@ describe("<ContextualInfoLink />", () => {
   it("caches the content so it does not fetch again", async () => {
     mockFetchContextualInfo.mockResolvedValue("some markdown content");
     const setContent = jest.fn();
-    const subject = render(
+    render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
         { isVisible: false, markdown: "" },
         setContent
       )
     );
-    fireEvent.click(subject.getByText("legal structure"));
+    fireEvent.click(screen.getByText("legal structure"));
     await waitFor(() =>
       expect(setContent).toHaveBeenCalledWith({ isVisible: true, markdown: "some markdown content" })
     );
-    fireEvent.click(subject.getByText("legal structure"));
+    fireEvent.click(screen.getByText("legal structure"));
     expect(mockFetchContextualInfo).toHaveBeenCalledTimes(1);
   });
 });

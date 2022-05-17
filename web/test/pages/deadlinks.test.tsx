@@ -1,6 +1,6 @@
 import * as api from "@/lib/api-client/apiClient";
 import DeadLinksPage from "@/pages/mgmt/deadlinks";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Options } from "broken-link-checker";
 import React from "react";
 
@@ -38,7 +38,7 @@ jest.mock("broken-link-checker", () => ({
 
 describe("Deadlinks page", () => {
   it("displays content when password is successful", async () => {
-    const subject = render(
+    render(
       <DeadLinksPage
         deadTasks={["task1"]}
         deadContextualInfo={["info1"]}
@@ -47,23 +47,23 @@ describe("Deadlinks page", () => {
         }}
       />
     );
-    expect(subject.queryByText("task1")).not.toBeInTheDocument();
-    expect(subject.queryByText("info1")).not.toBeInTheDocument();
-    expect(subject.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
+    expect(screen.queryByText("task1")).not.toBeInTheDocument();
+    expect(screen.queryByText("info1")).not.toBeInTheDocument();
+    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
 
     mockApi.post.mockResolvedValue({});
 
-    fireEvent.change(subject.getByLabelText("Password"), { target: { value: "ADMIN_PASSWORD" } });
-    fireEvent.click(subject.getByText("Submit"));
+    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "ADMIN_PASSWORD" } });
+    fireEvent.click(screen.getByText("Submit"));
 
-    await waitFor(() => expect(subject.queryByText("task1")).toBeInTheDocument());
-    expect(subject.queryByText("info1")).toBeInTheDocument();
-    expect(subject.queryByText("http://www.deadlink.com")).toBeInTheDocument();
-    expect(subject.queryByLabelText("Password")).not.toBeInTheDocument();
+    await screen.findByText("task1");
+    expect(screen.getByText("info1")).toBeInTheDocument();
+    expect(screen.getByText("http://www.deadlink.com")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Password")).not.toBeInTheDocument();
   });
 
   it("hides content when password is unsuccessful", () => {
-    const subject = render(
+    render(
       <DeadLinksPage
         deadTasks={["task1"]}
         deadContextualInfo={["info1"]}
@@ -72,18 +72,18 @@ describe("Deadlinks page", () => {
         }}
       />
     );
-    expect(subject.queryByText("task1")).not.toBeInTheDocument();
-    expect(subject.queryByText("info1")).not.toBeInTheDocument();
-    expect(subject.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
+    expect(screen.queryByText("task1")).not.toBeInTheDocument();
+    expect(screen.queryByText("info1")).not.toBeInTheDocument();
+    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
 
     mockApi.post.mockRejectedValue({});
 
-    fireEvent.change(subject.getByLabelText("Password"), { target: { value: "bad password" } });
-    fireEvent.click(subject.getByText("Submit"));
+    fireEvent.change(screen.getByLabelText("Password"), { target: { value: "bad password" } });
+    fireEvent.click(screen.getByText("Submit"));
 
-    expect(subject.queryByText("task1")).not.toBeInTheDocument();
-    expect(subject.queryByText("info1")).not.toBeInTheDocument();
-    expect(subject.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
-    expect(subject.queryByLabelText("Password")).toBeInTheDocument();
+    expect(screen.queryByText("task1")).not.toBeInTheDocument();
+    expect(screen.queryByText("info1")).not.toBeInTheDocument();
+    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Password")).toBeInTheDocument();
   });
 });
