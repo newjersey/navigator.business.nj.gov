@@ -17,4 +17,4 @@ Your employment agency will need to register and obtain a license from the New J
 * **Fees:** Determine the party responsible for the cost of the placement fee
 
 >**Once completed, you will have**
->* A clear understanding of the requirements for your employment agency
+>* Determined the requirements for your employment agency
