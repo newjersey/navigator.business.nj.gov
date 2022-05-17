@@ -1,17 +1,17 @@
 ---
 urlSlug: apply-for-scorp-state
-name: Apply for an S Corporation Status With the State
+name: Apply for an S Corporation Status with the State
 id: apply-scorp-state
 callToActionLink: https://www.njportal.com/dor/scorp
 callToActionText: Apply for My S Corporation Status
 required: true
 issuingAgency: New Jersey Department of Treasury
 ---
-Filing for an `S corporation|s-corp` designation at the state level is a separate process from requesting the designation at a federal level. For the election to be in effect for the current tax year, you must file the application within 3 ½ months of the start of your fiscal year.
+Filing for an `S corporation|s-corp` designation at the state level is a process separate from requesting the designation at a federal level. For the designation to apply in the current tax year, you must file the application within 3 ½ months of the start of your fiscal year.
 
 ---
 
-### Application Needs
+### Application Requirements
 
 * Signatures from all company shareholders granting permission to file for an S corp designation
 * An existing S corp designation with the IRS
