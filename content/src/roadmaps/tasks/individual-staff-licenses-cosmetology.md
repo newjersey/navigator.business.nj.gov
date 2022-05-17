@@ -15,7 +15,7 @@ Licenses are required for cosmetologists, hairstylists, manicurists, skincare sp
 ### Application Requirements
 - Name and address of the training school
 
->** Once completed, you will have:**
+> **Once completed, you will have:**
 >
 >- Your individual license or a manager with a license
 >- Confirmed your staff have their cosmetology license
