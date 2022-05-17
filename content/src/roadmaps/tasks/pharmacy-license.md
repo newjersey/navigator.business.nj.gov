@@ -12,7 +12,7 @@ Your pharmacy business needs a permit in order to operate. The permit applicatio
 
 ---
 
-### Application Needs
+### Application Requirements
 
 - []{general-business-name} Pharmacy Name (This is usually your registered businesses name)
 - []{general-register-name-county-clerk} Have your name registered with the county clerk
@@ -31,7 +31,7 @@ Your pharmacy business needs a permit in order to operate. The permit applicatio
 - []{pharmacist-signage} Picture of any exterior signage (if available at the time of your application)
 - []{pharmacist-inspection} Identified a site inspection date
 
-> ** Once completed, you will have:**
+> **Once completed, you will have:**
 >
 > - A permit number
 > - A pharmacy permit
