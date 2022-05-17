@@ -49,7 +49,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     taskProgress: {},
     taskItemChecklist: {},
     licenseData: generateLicenseData({}),
-    preferences: generatePreferences(),
+    preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
     formationData: generateFormationData({}),
     ...overrides,
@@ -174,13 +174,14 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
   };
 };
 
-export const generatePreferences = (): Preferences => {
+export const generatePreferences = (overrides: Partial<Preferences>): Preferences => {
   return {
     roadmapOpenSections: ["PLAN", "START"],
     roadmapOpenSteps: [],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
-    visibleRoadmapSidebarCards: ["welcome"],
+    visibleRoadmapSidebarCards: ["welcome", "successful-registration"],
+    ...overrides,
   };
 };
 
