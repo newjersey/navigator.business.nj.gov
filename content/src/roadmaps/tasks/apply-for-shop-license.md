@@ -8,11 +8,11 @@ required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Cosmetology and Hairstyling
 ---
 
-New shops, relocated shops, or shops that have transferred ownership are required to obtain a license. Once you submit your application, it will be reviewed, and a site inspection will be conducted.
+New shops, relocated shops, or shops that have transferred ownership are required to obtain a license. After your application is submitted and reviewed, your shop will be inspected. 
 
 ---
 
-### Application Needs
+### Application Requirements
 
 - []{general-business-address} Business address
 - []{cosmo-open-date} Opening date
