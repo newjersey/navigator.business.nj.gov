@@ -12,7 +12,7 @@ You or any staff providing HVACR services must be licensed as an HVACR Contracto
 
 - - -
 
-### Application Requirements
+### Eligibility Criteria
 
 * 21 years of age at a minimum
 * Education or training in HVACR or related field
@@ -25,7 +25,7 @@ You or any staff providing HVACR services must be licensed as an HVACR Contracto
 * HVACR training program +2 years of experience
 * Four-year long apprenticeship program +1 year of work experience
 
-### Application Needs
+### Application Requirements
 
 * College transcripts, or signed and sealed training certifications (depending on your education path)
 * W2s for every year of work experience for up to 3 years
