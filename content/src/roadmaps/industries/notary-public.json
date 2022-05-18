@@ -1,8 +1,10 @@
 {
+  "naicsCodes": "541120",
   "isMobileLocation": false,
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -47,7 +49,6 @@
   ],
   "name": "Notary Public",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "additionalSearchTerms": "signing agent, mobile notary, notary service, loan signing, remote online notary",
   "id": "notary-public",
   "description": "Serves as a witnesses to the signing of documents and verifies signers’ identities"
