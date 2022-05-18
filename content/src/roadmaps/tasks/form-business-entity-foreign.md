@@ -14,7 +14,7 @@ You must register your business name and form your `legal structure|legal-struct
 
 ### Application Requirements
 
-* Business name (as registered in foreign location)
+* Business name
 
   When submitting the registration document, you need indicate the business name exactly as it was established in the home state followed by the name to be used in New Jersey. **Example**: The Deli Incorporated, a Delaware business determined that its name was already taken in this state. The business found that the name The Delicious Inc. was available in New Jersey. When registering, the foreign business will indicate its exact formation name followed by the business name to be used in New Jersey as follows:
 
@@ -33,8 +33,6 @@ You must register your business name and form your `legal structure|legal-struct
 * Business description
 * Business address (this may be a home address if you are a home-based business)
 *  `Registered agent|registered-agent` 
-
-
 
 > **Once completed, you will have:**
 >
