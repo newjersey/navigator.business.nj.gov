@@ -25,7 +25,7 @@
     "typecheck": "tsc --noemit"
   },
   "engines": {
-    "node": ">=14.19.1"
+    "node": ">=16.15.0"
   },
   "prettier": {
     "printWidth": 110,
@@ -60,7 +60,7 @@
     "@types/express": "4.17.13",
     "@types/jest": "27.5.1",
     "@types/jsonwebtoken": "8.5.8",
-    "@types/node": "14.18.18",
+    "@types/node": "16.11.7",
     "@types/simple-oauth2": "4.1.1",
     "@types/supertest": "2.0.12",
     "@types/webpack-node-externals": "2.5.3",
@@ -80,7 +80,7 @@
     "rimraf": "3.0.2",
     "serverless": "3.17.0",
     "serverless-dynamodb-local": "0.2.40",
-    "serverless-offline": "8.7.0",
+    "serverless-offline": "8.8.0",
     "serverless-offline-ssm": "6.2.0",
     "serverless-plugin-monorepo": "0.11.0",
     "serverless-webpack": "5.7.1",

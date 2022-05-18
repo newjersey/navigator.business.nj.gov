@@ -359,7 +359,7 @@ commands:
 jobs:
   merge-content:
     docker:
-      - image: cimg/node:14.19.0
+      - image: cimg/node:16.15.0
     steps:
       - checkout
       - install-github-cli
@@ -376,7 +376,7 @@ jobs:
 
   build:
     docker:
-      - image: cimg/node:14.19.1
+      - image: cimg/node:16.15.0
     steps:
       - set-dev-env-vars
       - configure-and-build
@@ -388,7 +388,7 @@ jobs:
 
   lint-and-test:
     docker:
-      - image: cimg/node:14.19.1
+      - image: cimg/node:16.15.0
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -403,7 +403,7 @@ jobs:
 
   prepare-release:
     docker:
-      - image: cimg/node:14.19.1
+      - image: cimg/node:16.15.0
     resource_class: small
     steps:
       - set-prod-env-vars
@@ -412,7 +412,7 @@ jobs:
 
   deploy-content:
     docker:
-      - image: cimg/node:14.19.1
+      - image: cimg/node:16.15.0
     steps:
       - set-dev-env-vars
       - set-content-env-vars
@@ -425,7 +425,7 @@ jobs:
 
   deploy-dev:
     docker:
-      - image: cimg/node:14.19.1
+      - image: cimg/node:16.15.0
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -439,7 +439,7 @@ jobs:
 
   deploy-staging:
     docker:
-      - image: cimg/node:14.19.1
+      - image: cimg/node:16.15.0
     steps:
       - set-staging-env-vars
       - deploy
@@ -449,7 +449,7 @@ jobs:
 
   deploy-production:
     docker:
-      - image: cimg/node:14.19.1
+      - image: cimg/node:16.15.0
     steps:
       - set-prod-env-vars
       - deploy
@@ -468,7 +468,7 @@ jobs:
         type: string
         default: "chrome"
     docker:
-      - image: cimg/node:14.19.1-browsers
+      - image: cimg/node:16.15.0-browsers
     steps:
       - set-cypress-env-vars
       - attach_workspace:
@@ -493,7 +493,7 @@ jobs:
       suite:
         type: string
     docker:
-      - image: cimg/node:14.19.1-browsers
+      - image: cimg/node:16.15.0-browsers
     steps:
       - attach_workspace:
           at: .
