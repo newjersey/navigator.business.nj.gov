@@ -4,7 +4,7 @@ describe("check login page [smoke]", () => {
   beforeEach((done) => {
     // disable uncaught exceptions just for this test
     cy.on("uncaught:exception", (err) => {
-      expect(err.message).to.include("something about the error");
+      expect(err.message).to.include("Minified React error #425");
       done();
       return false;
     });
