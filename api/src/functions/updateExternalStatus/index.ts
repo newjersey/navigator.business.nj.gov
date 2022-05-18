@@ -1,4 +1,4 @@
-import { FnType } from "@functions/index";
+import { FnType } from "@functions/fnType";
 import { handlerPath } from "@libs/handlerResolver";
 
 export default (vpcConfig: FnType["vpc"]): FnType => ({

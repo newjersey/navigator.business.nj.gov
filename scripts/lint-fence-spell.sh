@@ -15,8 +15,8 @@ yarn prettier
 
 yarn spellcheck
 
-yarn workspace @businessnjgovnavigator/web fences
-yarn workspace @businessnjgovnavigator/api fences
+yarn workspace @businessnjgovnavigator/web dependency-check
+yarn workspace @businessnjgovnavigator/api dependency-check
 
 # run tests, feature tests, and push
 yarn workspace @businessnjgovnavigator/shared lint
