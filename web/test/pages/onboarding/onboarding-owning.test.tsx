@@ -94,10 +94,8 @@ describe("onboarding - owning a business", () => {
       const { page } = renderPage({});
       page.chooseRadio("has-existing-business-true");
       page.selectByValue("Legal structure", "c-corporation");
-      act(() => page.clickNext());
-      await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
+      await page.visitStep(2);
       expect(screen.queryByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).not.toBeInTheDocument();
-      expect(screen.getByTestId("step-2")).toBeInTheDocument();
     });
   });
 
@@ -141,8 +139,7 @@ describe("onboarding - owning a business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       page.fillText("Entity id", "1234567890");
-      act(() => page.clickNext());
-      await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
+      await page.visitStep(3);
 
       await waitFor(() => {
         expect(
@@ -175,8 +172,7 @@ describe("onboarding - owning a business", () => {
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
         page.fillText("Business name", "A business");
-        act(() => page.clickNext());
-        await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+        await page.visitStep(4);
 
         await waitFor(() => {
           expect(
@@ -205,8 +201,7 @@ describe("onboarding - owning a business", () => {
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
         page.selectByValue("Sector", "clean-energy");
-        act(() => page.clickNext());
-        await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+        await page.visitStep(4);
 
         await waitFor(() => {
           expect(
@@ -248,8 +243,7 @@ describe("onboarding - owning a business", () => {
         expect(screen.getByTestId("step-4")).toBeInTheDocument();
         page.fillText("Existing employees", "123");
         page.selectByText("Location", "Newark");
-        act(() => page.clickNext());
-        await waitFor(() => expect(screen.queryByTestId("step-4")).not.toBeInTheDocument());
+        await page.visitStep(5);
 
         await waitFor(() => {
           expect(
@@ -279,8 +273,7 @@ describe("onboarding - owning a business", () => {
       const newark = generateMunicipality({ displayName: "Newark" });
       const { page } = renderPage({ municipalities: [newark], userData });
       page.selectByText("Location", "Newark");
-      act(() => page.clickNext());
-      await waitFor(() => expect(screen.queryByTestId("step-4")).not.toBeInTheDocument());
+      await page.visitStep(5);
       await waitFor(() => {
         expect(
           screen.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
@@ -298,22 +291,19 @@ describe("onboarding - owning a business", () => {
     page.selectByValue("Legal structure", "c-corporation");
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
+    await page.visitStep(2);
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
+    await page.visitStep(3);
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-3")).toBeInTheDocument();
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+    await page.visitStep(4);
     page.selectByText("Location", "Newark");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-4")).toBeInTheDocument();
@@ -328,23 +318,20 @@ describe("onboarding - owning a business", () => {
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
+    await page.visitStep(2);
     page.selectDate("Date of formation", date);
     const page2 = within(screen.getByTestId("page-2-form"));
     expect(page2.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
+    await page.visitStep(3);
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     const page3 = within(screen.getByTestId("page-3-form"));
     expect(page3.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+    await page.visitStep(4);
     const page4 = within(screen.getByTestId("page-4-form"));
     expect(page4.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
@@ -354,8 +341,7 @@ describe("onboarding - owning a business", () => {
     page.selectByValue("Ownership", "disabled-veteran");
     page.chooseRadio("home-based-business-true");
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-4")).not.toBeInTheDocument());
+    await page.visitStep(5);
     const page5 = within(screen.getByTestId("page-5-form"));
     expect(page5.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
     expect(page5.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
@@ -370,16 +356,14 @@ describe("onboarding - owning a business", () => {
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
+    await page.visitStep(2);
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     const page2 = within(screen.getByTestId("page-2-form"));
     expect(page2.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
+    await page.visitStep(3);
     const page3 = within(screen.getByTestId("page-3-form"));
     expect(page3.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
@@ -389,8 +373,7 @@ describe("onboarding - owning a business", () => {
     page.selectByValue("Ownership", "disabled-veteran");
     page.chooseRadio("home-based-business-true");
 
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+    await page.visitStep(4);
     const page4 = within(screen.getByTestId("page-4-form"));
     expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
     expect(page4.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
@@ -403,27 +386,23 @@ describe("onboarding - owning a business", () => {
 
     page.chooseRadio("has-existing-business-true");
     page.selectByValue("Legal structure", "c-corporation");
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
+    await page.visitStep(2);
     expect(currentUserData().profileData.hasExistingBusiness).toEqual(true);
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
+    await page.visitStep(3);
     expect(currentUserData().profileData.dateOfFormation).toEqual(dateOfFormation);
     expect(currentUserData().profileData.entityId).toEqual("1234567890");
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+    await page.visitStep(4);
     expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
     page.chooseRadio("home-based-business-true");
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-4")).not.toBeInTheDocument());
+    await page.visitStep(5);
     expect(currentUserData()).toEqual({
       ...initialUserData,
       formProgress: "UNSTARTED",
@@ -464,16 +443,13 @@ describe("onboarding - owning a business", () => {
     expect(page.getRadioButton("Has Existing Business - True")).toBeChecked();
 
     expect(page.getLegalStructureValue()).toEqual("c-corporation");
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-1")).not.toBeInTheDocument());
+    await page.visitStep(2);
     expect(page.getEntityIdValue()).toEqual("0123456789");
     expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-2")).not.toBeInTheDocument());
+    await page.visitStep(3);
     expect(page.getBusinessNameValue()).toEqual("Applebees");
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
-    act(() => page.clickNext());
-    await waitFor(() => expect(screen.queryByTestId("step-3")).not.toBeInTheDocument());
+    await page.visitStep(4);
     expect(page.getMunicipalityValue()).toEqual("Newark");
   });
 
@@ -491,10 +467,10 @@ describe("onboarding - owning a business", () => {
     });
     const { page } = renderPage({ userData: initialUserData });
     expect(page.getRadioButton("Has Existing Business - True")).toBeChecked();
-    await page.visitStep2();
-    await page.visitStep3();
-    await page.visitStep4();
-    await page.visitStep5();
+    await page.visitStep(2);
+    await page.visitStep(3);
+    await page.visitStep(4);
+    await page.visitStep(5);
     page.clickNext();
 
     await waitFor(() => {
