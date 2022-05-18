@@ -15,6 +15,14 @@ You must register your business name and form your `legal structure|legal-struct
 ### Application Requirements
 
 * Business name (as registered in foreign location)
+
+  When submitting the registration document, you need indicate the business name exactly as it was established in the home state followed by the name to be used in New Jersey. **Example**: The Deli Incorporated, a Delaware business determined that its name was already taken in this state. The business found that the name The Delicious Inc. was available in New Jersey. When registering, the foreign business will indicate its exact formation name followed by the business name to be used in New Jersey as follows:
+
+  **Correct**: A. B. C. Incorporated dba C B A Inc.
+
+  **Incorrect:** ABC Inc. dba C B A Inc.
+
+  The incorrect version illustrates that the formation name does not match exactly as a result of spacing of letters, punctuation and abbreviation of a word. As a result, filing using the incorrect formation name would be rejected and authorization to do business in New Jersey delayed.
 * Business designator (as registered in foreign location)
 * Legal structure
 *  `NAICS code|naics` (optional)
@@ -25,12 +33,12 @@ You must register your business name and form your `legal structure|legal-struct
 * Business description
 * Business address (this may be a home address if you are a home-based business)
 *  `Registered agent|registered-agent` 
-* Credit card or E-check payment
+
+
 
 > **Once completed, you will have:**
 >
 > *  `Entity ID|entity-id` 
 > *  `Certificate of Formation|certificate-formation` , Incorporation or Authorization as applicable
->
 > *  `Certified copy|certified-copy` of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
 > *  `Certificate of Good Standing|good-standing` (optional with additional fee)
