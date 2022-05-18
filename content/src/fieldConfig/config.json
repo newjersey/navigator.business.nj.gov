@@ -1,7 +1,7 @@
 {
   "determineNaicsCode": {
     "naicsLink": "[Naics.com](https://www.naics.com/)",
-    "successMessage": "NAICS Code ${code} has been saved. You can use this NAICS code to [register for state taxes](/tasks/register-for-taxes).",
+    "successMessage": "NAICS code ${code} has been saved.",
     "invalidValidationErrorText": "Your NAICS code is invalid",
     "hasSavedCodeHeader": "Your NAICS Code",
     "inputPlaceholder": "6-digit NAICS Code",
@@ -10,7 +10,7 @@
     "findCodeHeader": "Find Your NAICS Code",
     "registerForTaxesNAICSCodePlaceholder": "(Your NAICS Code is ${naicsCode})",
     "sicCodeLink": "[Siccode.com](https://siccode.com/)",
-    "findCodeBodyText": "Use the resources listed below to search and find your NAICS code.  **If you can’t decide the right code,** remember, there are no benefits or disadvantages to use one NAICS code over another. ",
+    "findCodeBodyText": "Use the resources listed below to search and find your NAICS code. **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**",
     "lengthValidationErrorText": "Your NAICS code must be 6 digits",
     "editText": "Edit",
     "saveButtonText": "Save NAICS Code",
