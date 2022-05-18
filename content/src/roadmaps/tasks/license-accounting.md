@@ -11,7 +11,7 @@ You or any staff providing accounting services must be licensed as a Certified P
 
 - - -
 
-### Requirements
+### Eligibility Criteria
 
 * At least 150 credit hours (24 semester credits in Accounting courses and 24 semester credits in Business courses)
 * 1 year of full-time public accounting experience under the supervision of an active CPA

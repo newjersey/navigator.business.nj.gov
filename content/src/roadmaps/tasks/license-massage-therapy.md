@@ -12,11 +12,11 @@ You or any staff offering massage therapy services must register and apply for a
 
 - - -
 
-### Requirements
+### Eligibility Criteria
 
 * A minimum of 500 hours from an approved massage therapy program
 
-### Application Needs
+### Application Requirements
 
 - []{massage-school-transcript} An official transcript sent by your school in a sealed envelope
 - []{massage-supervisor-certification} A [Supervision Certification](https://www.njconsumeraffairs.gov/mbt/Applications/Supervising-Faculty-Member-Certification.pdf) form completed by a licensed massage and bodywork therapist who has supervised the required 100 hours of clinical practice

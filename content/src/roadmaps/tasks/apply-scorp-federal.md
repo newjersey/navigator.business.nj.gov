@@ -1,6 +1,6 @@
 ---
 urlSlug: apply-for-scorp-federal-government
-name: Obtain an S Corporation Designation With the Federal Government
+name: Obtain an S Corporation Designation with the Federal Government
 id: apply-scorp-federal
 callToActionLink: https://www.irs.gov/forms-pubs/about-form-2553
 callToActionText: Apply for My Federal S Corp Designation
@@ -12,7 +12,7 @@ The process to apply for an `S corporation|s-corp` designation starts at the fed
 
 ---
 
-### Application Needs
+### Application Requirements
 
 * `EIN|ein`
 * `Registered agent|registered-agent`

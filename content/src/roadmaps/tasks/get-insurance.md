@@ -5,7 +5,9 @@ id: research-insurance-needs
 callToActionLink: ""
 callToActionText: ""
 ---
-Insurance will protect your business assets should you be held liable for an incident. To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
+Insurance will protect your business assets should you be held liable for an incident. 
+
+To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
 
 ---
 ### Common Types of Business Insurance

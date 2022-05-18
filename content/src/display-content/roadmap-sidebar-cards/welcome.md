@@ -10,4 +10,4 @@ weight: 1
 
 Welcome to the Navigator, your personalized guide to launch and grow your New Jersey business.
 
-Once you have completed **all required tasks**, you can apply for State certifications, get funding, and more.
+Once you complete **all required tasks**, you can apply for State certifications, get funding, and more.

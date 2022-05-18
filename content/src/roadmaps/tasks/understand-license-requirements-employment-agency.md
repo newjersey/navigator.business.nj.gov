@@ -15,3 +15,6 @@ Your employment agency will need to register and obtain a license from the New J
 * **Staff:** Identify which industries will receive employee placement from your business (i.e., administrative, accountants, etc.)
 * **Placement Terms:** Determine if your business will offer a one-time placement or temporary placement services
 * **Fees:** Determine the party responsible for the cost of the placement fee
+
+>**Once completed, you will have**
+>* Determined the requirements for your employment agency

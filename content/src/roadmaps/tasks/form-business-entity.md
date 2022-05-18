@@ -10,7 +10,7 @@ issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enter
 You must register your business name and form your `legal structure|legal-structure-learn-more` with the State.
 
 ---
-### Application Needs
+### Application Requirements
 
 - Available business name
 - Legal structure
@@ -24,6 +24,6 @@ You must register your business name and form your `legal structure|legal-struct
 > **Once completed, you will have:**
 > 
 > - `Entity ID|entity-id`
-> - `Certificate of Formation|certificate-formation`, Incorporation or Authorization as applicable
-- `Certified copy|certified-copy` of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
-- `Certificate of Good Standing|good-standing` (optional with additional fee)
+> - `Certificate of Formation|certificate-formation`, Incorporation or >Authorization as applicable
+>- `Certified copy|certified-copy` of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
+>- `Certificate of Good Standing|good-standing` (optional with additional fee)

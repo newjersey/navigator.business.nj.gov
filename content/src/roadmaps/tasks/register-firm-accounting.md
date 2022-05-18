@@ -11,7 +11,7 @@ issuingAgency: New Jersey Division of Consumer Affairs' Board of Accountancy
 New accounting firms must register and obtain certification.
 
 ---
-### Application Needs 
+### Application Requirements
 
 - []{accountant-manager} A designated resident Manager-In-Charge, a Manager-In-Charge must be a certified public accountant of the practice unit
 - []{accountant-fee} Payment for the required application and registration fees

@@ -11,7 +11,7 @@ formName: BA-49
 You should ensure your vehicle is properly registered as a passenger vehicle prior to offering transportation services.
 
 ---
-### Application Needs
+### Application Requirements
 
 - [An appointment](https://telegov.njportal.com/njmvc/AppointmentWizard) with the NJ Motor Vehicle Commission
 - Vehicle Title
@@ -22,6 +22,6 @@ You should ensure your vehicle is properly registered as a passenger vehicle pri
 - Lien holder information and financing statement if the vehicle is leased or financed.
 - [Application for Certificate of Ownership](https://www.state.nj.us/mvc/pdf/vehicles/luxtaxapp.pdf), if the vehicle is registered in another state
 
->** Once completed, you will have:**
+>**Once completed, you will have:**
 >
 >- A current and valid vehicle registration

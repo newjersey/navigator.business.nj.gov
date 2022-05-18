@@ -69,7 +69,7 @@
   ],
   "name": "Food Truck",
   "isLiquorLicenseApplicable": false,
-  "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart",
+  "additionalSearchTerms": "lunch wagon,food service truck,street food,food cart,fast food cart, food vendor",
   "id": "food-truck",
   "description": "A vehicle where food or beverages are transported, stored, or prepared for sale at temporary locations"
 }

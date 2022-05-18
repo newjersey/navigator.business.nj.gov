@@ -8,7 +8,7 @@ callToActionText: Become a Transportation Provider with Logisticare
 If you are considering billing Medicaid for your non-medical transportation services, you will need to become a transportation provider with New Jersey’s non-medical transportation broker, `Logisticare|logisticare`.
 
 ---
-### Application Needs
+### Application Requirements
 
 - Business name
 - `NJ Tax ID|tax-id`

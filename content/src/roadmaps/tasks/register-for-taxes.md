@@ -13,14 +13,14 @@ It's time to register your business for State taxes. Doing so will tell the Stat
 
 ---
 
-### Application Needs
+### Application Requirements
 
 - `Entity ID|entity-id` (not required for general partnership or sole proprietorship)
 - [NAICS code](/tasks/determine-naics-code) ${naicsCode}
 - `EIN|ein`
 - Estimated start date
 - Description of your business activity
-- Estimated number of employees
+- Estimated number of employees (if applicable)
 - Anticipated first payroll withholding date for employees (if applicable)
 - Information on if and when you expect to report and collect sales tax
 - Owner information

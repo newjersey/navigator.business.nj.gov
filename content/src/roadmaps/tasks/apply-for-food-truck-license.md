@@ -7,7 +7,7 @@ callToActionText: Contact Your Area’s Board of Health
 issuingAgency: ""
 ---
 
-Food trucks need to be cleaned and sanitized according to your local Department of Health's guidelines. The regulation and licensing of food trucks varies by location. In every county you plan to sell goods in, you need to check license requirements with the county and/or local Department of Health.
+Food trucks need to be cleaned and sanitized according to the guidelines from your local Department of Health. The regulation and licensing of food trucks varies by location. You'll need to check license requirements with the county and/or local Department of Health for every county where you plan to sell goods.
 
 ---
 

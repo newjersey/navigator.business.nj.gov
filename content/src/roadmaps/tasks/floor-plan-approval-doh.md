@@ -9,7 +9,7 @@ required: true
 Contact your local Department of Health to have your floor plan and kitchen approved. You will need to schedule periodic follow-ups.
 
 ---
-### Application Needs
+### Application Requirements
 
 - Your business' floor plan
 

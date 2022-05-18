@@ -9,11 +9,11 @@ issuingAgency: "New Jersey Motor Vehicle Commission "
 formName: BLC-25
 ---
 
-Auto-body repair businesses are required to obtain a license. To apply for a license you must be 18 years or older, have the legal capacity to contract and be liable for all debt incurred, and have no criminal record.
+Auto-body repair businesses are required to obtain a license. To apply for a license you must be 18 years old at minimum, have the legal capacity to contract and be responsible for all debt incurred, and have no criminal record.
 
 ---
 
-### Application Needs
+### Application Requirements
 
 - A `Certificate of Occupancy|certificate-occupancy`
 - Written approval by the local clerk or Zoning Office confirming that the location has been approved
