@@ -1,7 +1,14 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 describe("check login page [smoke]", () => {
-  beforeEach(() => {
+  beforeEach((done) => {
+    // disable uncaught exceptions just for this test
+    cy.on("uncaught:exception", (err) => {
+      expect(err.message).to.include("something about the error");
+      done();
+      return false;
+    });
+
     cy.visit("/")
       // eslint-disable-next-line testing-library/await-async-utils
       .wait(5000);
