@@ -1,4 +1,0 @@
-{
-  "tags": ["client"],
-  "imports": ["domain", "libs"]
-}

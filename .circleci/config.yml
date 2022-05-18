@@ -79,8 +79,8 @@ commands:
           name: Run Spell Checker
           command: yarn run spellcheck
       - run:
-          name: Run Fences
-          command: yarn fences
+          name: Run Dependency Check
+          command: yarn dependency-check
       - run:
           name: Run Unit Tests
           command: yarn test:ci

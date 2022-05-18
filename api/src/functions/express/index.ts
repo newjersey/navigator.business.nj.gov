@@ -1,4 +1,4 @@
-import { FnType } from "@functions/index";
+import { FnType } from "@functions/fnType";
 import { handlerPath } from "@libs/handlerResolver";
 
 export default (cognitoArn: string, vpcConfig: FnType["vpc"]): FnType => ({
