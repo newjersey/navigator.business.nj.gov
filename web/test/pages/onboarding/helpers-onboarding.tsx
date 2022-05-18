@@ -84,10 +84,7 @@ export type PageHelpers = {
   getFullNameValue: () => string;
   getEmailValue: () => string;
   getConfirmEmailValue: () => string;
-  visitStep2: () => Promise<void>;
-  visitStep3: () => Promise<void>;
-  visitStep4: () => Promise<void>;
-  visitStep5: () => Promise<void>;
+  visitStep: (step: number) => Promise<void>;
 };
 
 export const createPageHelpers = (): PageHelpers => {
@@ -163,24 +160,11 @@ export const createPageHelpers = (): PageHelpers => {
   const getConfirmEmailValue = (): string =>
     (screen.queryByLabelText(Config.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)?.value;
 
-  const visitStep2 = async () => {
-    clickNext();
-    await waitForElementToBeRemoved(() => screen.getByTestId("step-1"));
-  };
-
-  const visitStep3 = async () => {
-    clickNext();
-    await waitForElementToBeRemoved(() => screen.getByTestId("step-2"));
-  };
-
-  const visitStep4 = async () => {
-    clickNext();
-    await waitForElementToBeRemoved(() => screen.getByTestId("step-3"));
-  };
-
-  const visitStep5 = async () => {
-    clickNext();
-    await waitForElementToBeRemoved(() => screen.getByTestId("step-4"));
+  const visitStep = async (step: number) => {
+    act(() => clickNext());
+    const currentStep = step - 1;
+    await waitForElementToBeRemoved(() => screen.getByTestId(`step-${currentStep}`));
+    expect(screen.getByTestId(`step-${step}`)).toBeInTheDocument();
   };
 
   return {
@@ -203,10 +187,7 @@ export const createPageHelpers = (): PageHelpers => {
     getFullNameValue,
     getEmailValue,
     getConfirmEmailValue,
-    visitStep2,
-    visitStep3,
-    visitStep4,
-    visitStep5,
+    visitStep,
   };
 };
 
