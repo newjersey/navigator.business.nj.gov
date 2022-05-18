@@ -3505,7 +3505,7 @@ __metadata:
     "@types/express": 4.17.13
     "@types/jest": 27.5.1
     "@types/jsonwebtoken": 8.5.8
-    "@types/node": 14.18.18
+    "@types/node": 16.11.7
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
     "@types/webpack-node-externals": 2.5.3
@@ -3534,7 +3534,7 @@ __metadata:
     serverless: 3.17.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
-    serverless-offline: 8.7.0
+    serverless-offline: 8.8.0
     serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.7.1
@@ -3559,7 +3559,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 14.18.18
+    "@types/node": 16.11.7
     cross-env: 7.0.3
     cspell: 5.20.0
     prettier: 2.6.2
@@ -3624,7 +3624,7 @@ __metadata:
     "@types/jest": 27.5.1
     "@types/jsonwebtoken": 8.5.8
     "@types/lodash.orderby": 4.6.7
-    "@types/node": 14.18.18
+    "@types/node": 16.11.7
     "@types/react": 18.0.9
     "@types/react-dom": 18.0.4
     "@types/react-swipeable-views": 0.13.1
@@ -3705,7 +3705,7 @@ __metadata:
     serverless: 3.17.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
-    serverless-offline: 8.7.0
+    serverless-offline: 8.8.0
     serverless-offline-ssm: 6.2.0
     serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.7.1
@@ -3739,7 +3739,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 28.1.0
     "@types/jest": 27.5.1
-    "@types/node": 14.18.18
+    "@types/node": 16.11.7
     "@typescript-eslint/eslint-plugin": 5.23.0
     "@typescript-eslint/parser": 5.23.0
     cross-env: 7.0.3
@@ -3798,7 +3798,7 @@ __metadata:
     "@types/broken-link-checker": 0.7.1
     "@types/jest": 27.5.1
     "@types/lodash.orderby": 4.6.7
-    "@types/node": 14.18.18
+    "@types/node": 16.11.7
     "@types/react": 18.0.9
     "@types/react-dom": 18.0.4
     "@types/react-swipeable-views": 0.13.1
@@ -4978,7 +4978,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/hapi@npm:^20.2.1":
+"@hapi/hapi@npm:^20.2.2":
   version: 20.2.2
   resolution: "@hapi/hapi@npm:20.2.2"
   dependencies:
@@ -9725,7 +9725,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.18.18, @types/node@npm:>=8.0.0 <15, @types/node@npm:^14.0.10, @types/node@npm:^14.14.31":
+"@types/node@npm:16.11.7":
+  version: 16.11.7
+  resolution: "@types/node@npm:16.11.7"
+  checksum: 2706403e6efc4aa40fdce8f0b5d9884d5600c3c8610aedc7fa5e7e298d30366f7e8b7296028d52898dca3edef4c3e827b03bf20952c4780f13fa4e79864f7a86
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:>=8.0.0 <15, @types/node@npm:^14.0.10, @types/node@npm:^14.14.31":
   version: 14.18.18
   resolution: "@types/node@npm:14.18.18"
   checksum: a165225cd2603f6e62af8407449e4a4407305e03b41c1adf6b186fdf546e1a03c8214217659b5b36c556947c0c06234993ac880d4db6378136a7a810d47e0742
@@ -11724,7 +11731,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1097.0, aws-sdk@npm:^2.1131.0, aws-sdk@npm:^2.7.0":
+"aws-sdk@npm:^2.1131.0, aws-sdk@npm:^2.7.0":
   version: 2.1135.0
   resolution: "aws-sdk@npm:2.1135.0"
   dependencies:
@@ -11738,6 +11745,23 @@ __metadata:
     uuid: 3.3.2
     xml2js: 0.4.19
   checksum: 20a5bdd3dc68b59dc4275916c458987520e1b4fbcab4cce9d0de1222d30ac3e58b1eb21079859b9d150a52419f69fe7c5db8a3375591fd1464388ecc74ee5e19
+  languageName: node
+  linkType: hard
+
+"aws-sdk@npm:^2.1136.0":
+  version: 2.1137.0
+  resolution: "aws-sdk@npm:2.1137.0"
+  dependencies:
+    buffer: 4.9.2
+    events: 1.1.1
+    ieee754: 1.1.13
+    jmespath: 0.16.0
+    querystring: 0.2.0
+    sax: 1.2.1
+    url: 0.10.3
+    uuid: 3.3.2
+    xml2js: 0.4.19
+  checksum: 13d3cac045a3e7c250ca17bd3a09059b85c12355cb8051f69b0942fd92ce99cac654901434d33b944cd79622460d5b34bf02cdefabb04b87fded504f5cc95f80
   languageName: node
   linkType: hard
 
@@ -14437,13 +14461,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cron-parser@npm:^2.18.0":
-  version: 2.18.0
-  resolution: "cron-parser@npm:2.18.0"
+"cron-parser@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "cron-parser@npm:3.5.0"
   dependencies:
-    is-nan: ^1.3.0
-    moment-timezone: ^0.5.31
-  checksum: c0fcb3922ca19a649d779abca1aad3302fb5bfc9c95da9ea19176a006a1225ea92f29e06f54a64ce9f9b8add7668af9ff865522922e66ddbc37017c226d16e70
+    is-nan: ^1.3.2
+    luxon: ^1.26.0
+  checksum: 80096ac1c30fa4017648ad2fa062ae002e6c0d7775b96a00dbadf1e2d7f9e01b3db0324eef2a33fe6136363be3ffb0d6065cf1b91e6a13fd5ed4d3c168abbc69
   languageName: node
   linkType: hard
 
@@ -17048,7 +17072,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"extend@npm:^3.0.0, extend@npm:^3.0.1, extend@npm:^3.0.2, extend@npm:~3.0.2":
+"extend@npm:^3.0.0, extend@npm:^3.0.1, extend@npm:~3.0.2":
   version: 3.0.2
   resolution: "extend@npm:3.0.2"
   checksum: a50a8309ca65ea5d426382ff09f33586527882cf532931cb08ca786ea3146c0553310bda688710ff61d7668eba9f96b923fe1420cdf56a2c3eaf30fcab87b515
@@ -20409,7 +20433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-nan@npm:^1.3.0":
+"is-nan@npm:^1.3.2":
   version: 1.3.2
   resolution: "is-nan@npm:1.3.2"
   dependencies:
@@ -22030,7 +22054,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jszip@npm:^3.7.1, jszip@npm:^3.9.1":
+"jszip@npm:^3.9.1":
   version: 3.9.1
   resolution: "jszip@npm:3.9.1"
   dependencies:
@@ -23354,10 +23378,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:^1.28.0":
+"luxon@npm:^1.26.0":
   version: 1.28.0
   resolution: "luxon@npm:1.28.0"
   checksum: 5250cb9f138b6048eeb0b3a9044a4ac994d0058f680c72a0da4b6aeaec8612460385639cba2b1052ef6d5564879e9ed144d686f26d9d97b38ab920d82e18281c
+  languageName: node
+  linkType: hard
+
+"luxon@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "luxon@npm:2.4.0"
+  checksum: 6071028d65cc3d3bdab5e6a3995dd97411c92bb3b3163a02deb7b7014318ad3a6fd750ae77131c42141b717c14aef8880d3130f265281d500ef2365f7265b3f3
   languageName: node
   linkType: hard
 
@@ -25006,16 +25037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment-timezone@npm:^0.5.31":
-  version: 0.5.34
-  resolution: "moment-timezone@npm:0.5.34"
-  dependencies:
-    moment: ">= 2.9.0"
-  checksum: 12a1d3d52e4ba509cf1fa36bbda59d898a08fa80ab35f6c358747e93aec1f07e617cec647eaf2e8acf5f9132e581d4704d34a9edffa9a80c5cd04bf23b277595
-  languageName: node
-  linkType: hard
-
-"moment@npm:>= 2.9.0, moment@npm:^2.24.0":
+"moment@npm:^2.24.0":
   version: 2.29.3
   resolution: "moment@npm:2.29.3"
   checksum: 2e780e36d9a1823c08a1b6313cbb08bd01ecbb2a9062095820a34f42c878991ccba53abaa6abb103fd5c01e763724f295162a8c50b7e95b4f1c992ef0772d3f0
@@ -26142,14 +26164,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-schedule@npm:^1.3.3":
-  version: 1.3.3
-  resolution: "node-schedule@npm:1.3.3"
+"node-schedule@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "node-schedule@npm:2.1.0"
   dependencies:
-    cron-parser: ^2.18.0
+    cron-parser: ^3.5.0
     long-timeout: 0.1.1
     sorted-array-functions: ^1.3.0
-  checksum: f7c5b4a6de95a379868d89b88a1f420e394ee5d023c6ecdb2de00ffd60756cea21069bbcf0190c80fc394411a99e51f5f1ba3ff120643a9b5ba5b13812e61e26
+  checksum: e457e76e633ed551e384ab2404628f0980bd3263057665dd3166a72b0eaca093cd57e42e144f9241b913383c1c58c633d3c782580009cbd51b1b9e2623193d52
   languageName: node
   linkType: hard
 
@@ -27295,7 +27317,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-retry@npm:^4.0.0, p-retry@npm:^4.6.1":
+"p-retry@npm:^4.0.0, p-retry@npm:^4.6.2":
   version: 4.6.2
   resolution: "p-retry@npm:4.6.2"
   dependencies:
@@ -28009,15 +28031,6 @@ __metadata:
   dependencies:
     find-up: ^5.0.0
   checksum: b167bb8dac7bbf22b1d5e30ec223e6b064b84b63010c9d49384619a36734caf95ed23ad23d4f9bd975e8e8082b60a83395f43a89bb192df53a7c25a38ecb57d9
-  languageName: node
-  linkType: hard
-
-"please-upgrade-node@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "please-upgrade-node@npm:3.2.0"
-  dependencies:
-    semver-compare: ^1.0.0
-  checksum: d87c41581a2a022fbe25965a97006238cd9b8cbbf49b39f78d262548149a9d30bd2bdf35fec3d810e0001e630cd46ef13c7e19c389dea8de7e64db271a2381bb
   languageName: node
   linkType: hard
 
@@ -31021,13 +31034,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver-compare@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "semver-compare@npm:1.0.0"
-  checksum: dd1d7e2909744cf2cf71864ac718efc990297f9de2913b68e41a214319e70174b1d1793ac16e31183b128c2b9812541300cb324db8168e6cf6b570703b171c68
-  languageName: node
-  linkType: hard
-
 "semver-diff@npm:^3.1.1":
   version: 3.1.1
   resolution: "semver-diff@npm:3.1.1"
@@ -31199,41 +31205,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:8.7.0":
-  version: 8.7.0
-  resolution: "serverless-offline@npm:8.7.0"
+"serverless-offline@npm:8.8.0":
+  version: 8.8.0
+  resolution: "serverless-offline@npm:8.8.0"
   dependencies:
     "@hapi/boom": ^9.1.4
     "@hapi/h2o2": ^9.1.0
-    "@hapi/hapi": ^20.2.1
-    aws-sdk: ^2.1097.0
+    "@hapi/hapi": ^20.2.2
+    aws-sdk: ^2.1136.0
     boxen: ^5.1.2
     chalk: ^4.1.2
     cuid: ^2.1.8
     execa: ^5.1.1
-    extend: ^3.0.2
-    fs-extra: ^9.1.0
+    fs-extra: ^10.1.0
     java-invoke-local: 0.0.6
     js-string-escape: ^1.0.1
     jsonpath-plus: ^5.1.0
     jsonschema: ^1.4.0
     jsonwebtoken: ^8.5.1
-    jszip: ^3.7.1
-    luxon: ^1.28.0
+    jszip: ^3.9.1
+    luxon: ^2.4.0
     node-fetch: ^2.6.7
-    node-schedule: ^1.3.3
-    object.fromentries: ^2.0.5
+    node-schedule: ^2.1.0
     p-memoize: ^4.0.4
     p-queue: ^6.6.2
-    p-retry: ^4.6.1
-    please-upgrade-node: ^3.2.0
-    semver: ^7.3.5
+    p-retry: ^4.6.2
+    semver: ^7.3.7
     update-notifier: ^5.1.0
     velocityjs: ^2.0.6
     ws: ^7.5.7
   peerDependencies:
     serverless: ^1.60.0 || 2 || 3
-  checksum: 8c5bc7209e449019e521e4810d36bdc1765db96bbe565a16afbd07eafe8db5c12859eebf1e91b02da1a0519028b17a64a1f4f6302288ad489c2affa8b40e66d2
+  checksum: cc9ebc201662f3b358bb910d9a8d3fc0c330ce6b2424ff425c5d713a882a35e16e41b999297b0190fde6361f5136421e368b3375be87e5a041056deb6e8c2aee
   languageName: node
   linkType: hard
 
