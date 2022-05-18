@@ -3678,7 +3678,7 @@ __metadata:
     jest-environment-jsdom: 28.1.0
     jest-junit: 13.2.0
     jsonwebtoken: 8.5.1
-    kill-port: 1.6.1
+    kill-port: 2.0.0
     lerna: 4.0.0
     lint-staged: 12.4.1
     lodash.orderby: 4.6.0
@@ -22174,15 +22174,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kill-port@npm:1.6.1":
-  version: 1.6.1
-  resolution: "kill-port@npm:1.6.1"
+"kill-port@npm:2.0.0":
+  version: 2.0.0
+  resolution: "kill-port@npm:2.0.0"
   dependencies:
     get-them-args: 1.3.2
     shell-exec: 1.0.2
   bin:
     kill-port: cli.js
-  checksum: fda3b20954002ed83c8d7e9d2ae64f5f9861c259ec0d80bb8480f46285cf44db15ae79d748c0c26d41ad55fc66e12ea4ba0355341971acd01c3c1d11886b9f11
+  checksum: ca939cff5a01798cf05be6dde5d925454e3c8de2ea9f82ab38b477b59e190575fc4f2b8b786b9bf6e30905ba7781e1d5d1b4e3a415f3be542a2faf0a540626c5
   languageName: node
   linkType: hard
 
