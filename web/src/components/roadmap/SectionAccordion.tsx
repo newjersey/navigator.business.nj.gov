@@ -14,7 +14,7 @@ interface Props {
   mini?: boolean;
 }
 
-export const SectionAccordionContext = createContext({
+const SectionAccordionContext = createContext({
   isOpen: false,
 });
 

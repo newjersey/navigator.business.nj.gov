@@ -11,25 +11,7 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Box, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { ReactElement, ReactNode, useContext } from "react";
-
-export const SignUpModalWrapper = (props: { children: ReactNode }): ReactElement => {
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
-  useMountEffectWhenDefined(() => {
-    if (isAuthenticated != IsAuthenticated.TRUE) {
-      setModalIsVisible(true);
-    }
-  }, isAuthenticated);
-
-  if (isAuthenticated != IsAuthenticated.TRUE) {
-    return (
-      <div className="disabled-overlay">
-        <div className="cursor-wrapper">{props.children}</div>
-      </div>
-    );
-  }
-  return <>{props.children}</>;
-};
+import React, { ReactElement, useContext } from "react";
 
 export const SignUpModal = (): ReactElement => {
   const { userData, update } = useUserData();

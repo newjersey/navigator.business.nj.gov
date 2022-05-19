@@ -40,7 +40,7 @@ interface ContentNonProseProps {
   onClick?: () => void;
 }
 
-export const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
+const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
   const markdown = unified()
     .use(remarkParse)
     .use(remarkGfm)
