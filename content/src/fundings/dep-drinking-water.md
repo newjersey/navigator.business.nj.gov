@@ -23,6 +23,7 @@ Drinking Water State Revolving Fund Program provides low-interest loans to finan
 Nonprofit non-community water systems in New Jersey may receive funds for the following construction projects: water treatment facilities to address the correction of a system's non-compliance with Surface Water Treatment requirements, acute violations, maximum contaminant levels, lead and copper rule exceedances or secondary drinking water regulation exceedances; for consolidation of water systems to comply with the SDWA; for rehabilitation of existing water treatment facilities, water mains, pump stations or water storage facilities, or for new water storage facilities to maintain compliance with the SDWA and wells. Allowances for planning and design are also available.
 
 >**Benefits**
->*Provides short-term loans at 0.337% Interest to replace and update drinking water infrastructure
+>
+>* Provides short-term loans at 0.337% Interest to replace and update drinking water infrastructure
 
 
