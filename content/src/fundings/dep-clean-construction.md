@@ -2,7 +2,7 @@
 urlSlug: dep-clean-construction
 name: NJ Clean Construction Program
 id: dep-clean-construction
-callToActionLink: NJDEP New Jersey Department of Environmental Protection Grant & Loan Programs
+callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm
 callToActionText: Learn More
 fundingType: grant
 agency: null
