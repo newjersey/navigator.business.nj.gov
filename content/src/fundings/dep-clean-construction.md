@@ -5,6 +5,7 @@ id: dep-clean-construction
 callToActionLink: NJDEP New Jersey Department of Environmental Protection Grant & Loan Programs
 callToActionText: Learn More
 fundingType: grant
+agency: null
 publishStageArchive: ""
 status: first come, first serve
 programFrequency: reoccuring
