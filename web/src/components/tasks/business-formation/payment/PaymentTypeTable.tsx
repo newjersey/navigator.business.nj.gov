@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { getDollarValue } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { PaymentType } from "@businessnjgovnavigator/shared/";
@@ -13,7 +13,7 @@ export const PaymentTypeTable = (): ReactElement => {
     Config.businessFormationDefaults.creditCardPaymentCostInitial
   );
 
-  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
   const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
   const [creditCardCost, setCreditCardCost] = useState<number>(creditCardPaymentCostInitial);
   const [achCost, setAchCost] = useState<number>(achPaymentCost);

@@ -1,7 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { AllBusinessSuffixes, BusinessSuffix } from "@businessnjgovnavigator/shared/";
@@ -9,7 +9,7 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChange
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
 export const SuffixDropdown = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     setErrorMap({ ...state.errorMap, businessSuffix: { invalid: false } });

@@ -1,7 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
@@ -19,7 +19,7 @@ advancedDateLibrary();
 export const FormationStartDate = (): ReactElement => {
   const [showError, setShowError] = useState<boolean>(false);
 
-  const { state, setFormationFormData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
 
   useMountEffect(() => {
     if (!state.formationFormData.businessStartDate) {

@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -8,7 +8,7 @@ import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
   const [useAccountInfo, setUseAccountInfo] = useState<boolean>(false);
   const [useBusinessAddress, setUseBusinessAddress] = useState<boolean>(false);

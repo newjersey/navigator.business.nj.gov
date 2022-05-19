@@ -3,12 +3,12 @@ import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingCannabisLicense } from "@/components/onboarding/OnboardingCannabisLicense";
 import { OnboardingCpa } from "@/components/onboarding/OnboardingCpa";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 

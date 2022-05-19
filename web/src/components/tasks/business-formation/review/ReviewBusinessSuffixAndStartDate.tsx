@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import React, { ReactElement, useContext } from "react";
 
 export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
-  const { state } = useContext(FormationContext);
+  const { state } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
 
   return (

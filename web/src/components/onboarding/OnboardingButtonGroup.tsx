@@ -1,5 +1,5 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { ProfileDataContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 

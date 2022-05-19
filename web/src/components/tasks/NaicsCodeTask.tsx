@@ -3,11 +3,11 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { NaicsCodeDisplay } from "@/components/tasks/NaicsCodeDisplay";
 import { NaicsCodeInput } from "@/components/tasks/NaicsCodeInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { AuthAlertContext } from "@/pages/_app";
 import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {

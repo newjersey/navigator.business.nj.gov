@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { FormationTextField } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext } from "react";
 
@@ -10,7 +10,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
 }
 
 export const BusinessFormationTextField = (props: Props): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
 
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);

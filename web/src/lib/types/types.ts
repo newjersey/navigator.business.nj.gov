@@ -676,3 +676,5 @@ export type NaicsCodeObject = {
   TwoDigitCode?: number[];
   industryIds?: string[];
 };
+
+export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";

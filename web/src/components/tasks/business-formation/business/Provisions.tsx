@@ -2,13 +2,13 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 
 export const Provisions = (): ReactElement => {
   const MAX_CHARS = 3000;
-  const { state, setFormationFormData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const isExpanded = state.formationFormData.provisions.length > 0;
 
   const handleAddButtonClick = (): void => {

@@ -2,8 +2,8 @@
 import { Content } from "@/components/Content";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { Icon } from "@/components/njwds/Icon";
+import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import analytics from "@/lib/utils/analytics";
-import { ContextualInfo, ContextualInfoContext } from "@/pages/_app";
 import React, { ReactElement, useContext } from "react";
 
 // eslint-disable-next-line react/display-name

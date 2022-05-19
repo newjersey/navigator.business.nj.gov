@@ -1,7 +1,7 @@
 import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { ProfileDataContext } from "@/pages/onboarding";
 import React, { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {

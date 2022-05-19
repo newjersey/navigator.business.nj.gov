@@ -1,8 +1,7 @@
 import { Content } from "@/components/Content";
 import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { Button } from "@/components/njwds-extended/Button";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
-import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
@@ -11,6 +10,7 @@ import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useState } from "react";
+import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
 interface Props {
   reviewPage?: boolean;
@@ -18,7 +18,7 @@ interface Props {
 
 export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): ReactElement => {
   const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
-  const { state, setTab } = useContext(FormationContext);
+  const { state, setTab } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
   const router = useRouter();
 
@@ -56,7 +56,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
               style="tertiary"
               onClick={() => {
                 analytics.event.business_formation_business_name_edit.click.go_to_name_search_step();
-                setTab(businessFormationTabs.findIndex((obj) => obj.section === "Business"));
+                setTab(LookupBusinessFormationTabByName("Business"));
                 scrollToTop();
               }}
               underline
@@ -83,7 +83,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
               style="tertiary"
               widthAutoOnMobile
               onClick={() => {
-                setTab(businessFormationTabs.findIndex((obj) => obj.section === "Name"));
+                setTab(LookupBusinessFormationTabByName("Name"));
               }}
               underline
               dataTestid="edit-business-name"

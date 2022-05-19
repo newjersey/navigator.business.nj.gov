@@ -219,12 +219,12 @@ module.exports = {
       to: { path: "lib" },
     },
     {
-      from: { path: "components" },
-      to: { path: "components" },
+      from: { path: "lib/cms/previews" },
+      to: { path: "pages" },
     },
     {
       from: { path: "components" },
-      to: { path: "pages" },
+      to: { path: "components" },
     },
     {
       from: { path: "components" },
@@ -233,10 +233,6 @@ module.exports = {
     {
       from: { path: "lib" },
       to: { path: "lib" },
-    },
-    {
-      from: { path: "lib" },
-      to: { path: "pages" },
     },
     {
       from: { path: "lib" },
@@ -278,12 +274,24 @@ module.exports = {
       from: { path: "../shared" },
       to: { path: "dayjs" },
     },
+    {
+      from: { path: "../shared" },
+      to: { path: "uuid" },
+    },
+    {
+      from: { path: "" },
+      to: { path: "contexts" },
+    },
+    {
+      from: { path: "context" },
+      to: { path: "lib" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */
     {
       name: "no-circular",
-      severity: "warn",
+      severity: "error",
       comment:
         "This dependency is part of a circular relationship. You might want to revise " +
         "your solution (i.e. use dependency inversion, make sure the modules have a single responsibility) ",

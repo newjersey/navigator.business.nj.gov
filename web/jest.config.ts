@@ -11,6 +11,7 @@ export default async (): Promise<Config.InitialOptions> => {
     moduleNameMapper: {
       "\\.(scss|sass|css)$": "identity-obj-proxy",
       "@/components/(.*)": "<rootDir>/src/components/$1",
+      "@/contexts/(.*)": "<rootDir>/src/contexts/$1",
       "@/lib/(.*)": "<rootDir>/src/lib/$1",
       "@/test/(.*)": "<rootDir>/test/$1",
       "@/pages/(.*)": "<rootDir>/src/pages/$1",

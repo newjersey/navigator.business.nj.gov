@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { ProfileDataContext } from "@/pages/onboarding";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import orderBy from "lodash.orderby";

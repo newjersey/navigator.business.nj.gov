@@ -1,11 +1,12 @@
 import { AuthButton } from "@/components/AuthButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { AuthContext } from "@/contexts/authContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import { AuthAlertContext, AuthContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import Link from "next/link";

@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { ProfileDataContext } from "@/pages/onboarding";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 

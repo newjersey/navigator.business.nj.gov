@@ -1,13 +1,13 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
-import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { useContext } from "react";
+import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
 export const ReviewBusinessPurpose = () => {
-  const { state, setTab } = useContext(FormationContext);
+  const { state, setTab } = useContext(BusinessFormationContext);
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (
@@ -22,7 +22,7 @@ export const ReviewBusinessPurpose = () => {
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(businessFormationTabs.findIndex((obj) => obj.section === "Business"));
+              setTab(LookupBusinessFormationTabByName("Business"));
               scrollToTop();
             }}
             underline

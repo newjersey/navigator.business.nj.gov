@@ -1,7 +1,7 @@
 // organize-imports-ignore
 import "../styles/main.scss";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
-import { AuthContextType, AuthReducer, authReducer, IsAuthenticated } from "@/lib/auth/AuthContext";
+import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
 import { getCurrentUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
@@ -14,15 +14,7 @@ import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import "njwds/dist/css/styles.css";
-import React, {
-  createContext,
-  Dispatch,
-  ReactElement,
-  SetStateAction,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import React, { ReactElement, useEffect, useReducer, useState } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
@@ -30,92 +22,21 @@ import { SignUpToast } from "@/components/auth/SignUpToast";
 import { SignUpModal } from "@/components/auth/SignUpModal";
 import { SelfRegToast } from "@/components/auth/SelfRegToast";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
+import { RoadmapContext } from "@/contexts/roadmapContext";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
+import { AuthContext, initialState } from "@/contexts/authContext";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
 
-const initialState = {
-  user: undefined,
-  isAuthenticated: IsAuthenticated.UNKNOWN,
-};
-
-export const AuthContext = createContext<AuthContextType>({
-  dispatch: () => {},
-  state: initialState,
-});
-
 AuthContext.displayName = "Authentication";
-
-export interface RoadmapContextType {
-  roadmap: Roadmap | undefined;
-  sectionCompletion: SectionCompletion | undefined;
-  setRoadmap: (roadmap: Roadmap | undefined) => void;
-  setSectionCompletion: (sectionCompletion: SectionCompletion | undefined) => void;
-}
-
-export const RoadmapContext = createContext<RoadmapContextType>({
-  roadmap: undefined,
-  sectionCompletion: undefined,
-  setRoadmap: () => {},
-  setSectionCompletion: () => {},
-});
-
 RoadmapContext.displayName = "Roadmap";
-
-export interface AuthAlertContextType {
-  isAuthenticated: IsAuthenticated;
-  registrationAlertStatus: RegistrationStatus | undefined;
-  alertIsVisible: boolean;
-  modalIsVisible: boolean;
-  setRegistrationAlertStatus: (value: RegistrationStatus | undefined) => void;
-  setAlertIsVisible: (value: boolean) => void;
-  setModalIsVisible: (value: boolean) => void;
-}
-
-export const AuthAlertContext = createContext<AuthAlertContextType>({
-  isAuthenticated: IsAuthenticated.UNKNOWN,
-  registrationAlertStatus: undefined,
-  alertIsVisible: false,
-  setRegistrationAlertStatus: () => {},
-  setAlertIsVisible: () => {},
-  modalIsVisible: false,
-  setModalIsVisible: () => {},
-});
-
 AuthAlertContext.displayName = "Authentication Toast";
-
-export interface ContextualInfo {
-  isVisible: boolean;
-  markdown: string;
-}
-
-export interface ContextualInfoContextType {
-  contextualInfo: ContextualInfo;
-  setContextualInfo: Dispatch<SetStateAction<ContextualInfo>>;
-}
-
-export const ContextualInfoContext = createContext<ContextualInfoContextType>({
-  contextualInfo: {
-    isVisible: false,
-    markdown: "",
-  },
-  setContextualInfo: () => {},
-});
-
 ContextualInfoContext.displayName = "Contextual Info";
-
-export interface UserDataErrorContextType {
-  userDataError: UserDataError | undefined;
-  setUserDataError: (userDataError: UserDataError | undefined) => void;
-}
-
-export const UserDataErrorContext = createContext<UserDataErrorContextType>({
-  userDataError: undefined,
-  setUserDataError: () => {},
-});
-
 UserDataErrorContext.displayName = "User Data Error";
 
 const theme = createTheme({

@@ -1,7 +1,8 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -9,7 +10,6 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
-import { AuthAlertContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField, useMediaQuery } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
@@ -20,7 +20,7 @@ const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
 };
 
 export const BusinessNameSection = (): ReactElement => {
-  const { state, setTab, setFormationFormData } = useContext(FormationContext);
+  const { state, setTab, setFormationFormData } = useContext(BusinessFormationContext);
   const { userData, update } = useUserData();
   const isMobile = useMediaQuery(MediaQueries.isMobile);
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);

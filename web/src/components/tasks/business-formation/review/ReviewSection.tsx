@@ -1,6 +1,5 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { ReviewBusinessPurpose } from "@/components/tasks/business-formation/review/ReviewBusinessPurpose";
 import { ReviewBusinessSuffixAndStartDate } from "@/components/tasks/business-formation/review/ReviewBusinessSuffixAndStartDate";
 import { ReviewMainBusinessLocation } from "@/components/tasks/business-formation/review/ReviewMainBusinessLocation";
@@ -8,13 +7,14 @@ import { ReviewMembers } from "@/components/tasks/business-formation/review/Revi
 import { ReviewProvisions } from "@/components/tasks/business-formation/review/ReviewProvisions";
 import { ReviewRegisteredAgent } from "@/components/tasks/business-formation/review/ReviewRegisteredAgent";
 import { ReviewSignatures } from "@/components/tasks/business-formation/review/ReviewSignatures";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 
 export const ReviewSection = (): ReactElement => {
-  const { state, setTab } = useContext(FormationContext);
+  const { state, setTab } = useContext(BusinessFormationContext);
 
   return (
     <>
