@@ -3,7 +3,7 @@ urlSlug: register-firm-accounting
 filename: register-firm-accounting
 name: Register Your Accounting Firm With the State
 id: register-firm-accounting
-callToActionLink: https://www.njconsumeraffairs.gov/acc/Applications/Firm-Registration-Application.pdf
+callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Firm-Registration-Application.pdf
 callToActionText: Register My Accounting Firm
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs' Board of Accountancy
