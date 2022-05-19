@@ -355,6 +355,7 @@ describe("Formation - BusinessSection", () => {
       const page = await getPageHelper({}, { businessAddressZipCode: "" });
       page.fillText("Business address zip code", "07001");
       await page.submitBusinessTab(true);
+      expect(currentUserData().formationData.formationFormData.businessAddressZipCode).toEqual("07001");
     });
   });
 

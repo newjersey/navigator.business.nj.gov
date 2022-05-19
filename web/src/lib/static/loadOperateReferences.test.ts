@@ -15,7 +15,7 @@ describe("loadOperateReferences", () => {
     mockedFs = fs as jest.Mocked<typeof fs>;
   });
 
-  it("it returns all filings and fundings and certifications as references", () => {
+  it("returns all filings and fundings and certifications as references", () => {
     const filingMd1 =
       "---\n" +
       'id: "some-filing-id-1"\n' +

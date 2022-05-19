@@ -10,9 +10,17 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin"],
+  "plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin", "jest"],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
     "prefer-template": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.*"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"],
+      "rules": { "jest/expect-expect": "error" }
+    }
+  ]
 }

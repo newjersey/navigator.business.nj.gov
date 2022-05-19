@@ -786,7 +786,7 @@ describe("roadmap page", () => {
       ).toBeInTheDocument();
     });
 
-    it("hides date of formation if legal structure does not require public filing ", () => {
+    it("hides date of formation if legal structure does not require public filing", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           hasExistingBusiness: false,

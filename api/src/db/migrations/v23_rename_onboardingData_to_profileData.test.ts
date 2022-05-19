@@ -22,11 +22,11 @@ describe("migrate_v22_to_v23", () => {
       version: 22,
     };
 
-    expect(v22.onboardingData.businessName).toBeDefined;
+    expect(v22.onboardingData.businessName).toBeDefined();
 
     const v23 = migrate_v22_to_v23(v22);
 
-    expect(v23.profileData.businessName).toBeDefined;
+    expect(v23.profileData.businessName).toBeDefined();
     expect(v23).not.toContain("onboardingData");
   });
 });
