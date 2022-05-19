@@ -7,9 +7,10 @@ required: true
 ---
 To form your business in New Jersey, you need to obatin a resolution adopting your Doing Business As (DBA) name.
 
-How you get a resolution depends on your legal structures. 
+How you get a resolution depends on your legal structure: 
 
-* Corporations need board approval
-* LLCs need
+* LLCs needCorporations need board approval
+* LLPs
+* LPs
 
 You will need to share the resolution.
