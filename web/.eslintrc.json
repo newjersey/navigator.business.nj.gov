@@ -35,7 +35,8 @@
     "@typescript-eslint/eslint-plugin",
     "jsx-a11y",
     "cypress",
-    "testing-library"
+    "testing-library",
+    "jest"
   ],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
@@ -50,6 +51,12 @@
     {
       "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
       "extends": ["plugin:testing-library/react"]
+    },
+    {
+      "files": ["**/*.test.*"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"],
+      "rules": { "jest/expect-expect": "error" }
     }
   ]
 }

@@ -88,7 +88,7 @@ describe("GovDeliveryNewsletterClient", () => {
     expect(await client.add("testuser@xyz.com")).toEqual({ success: false, status: "TOPIC_ERROR" });
   });
 
-  it("it returns QUESTION_WARNING if the user request is successful, they were created, and added to a topic, but their question is not updated", async () => {
+  it("returns QUESTION_WARNING if the user request is successful, they were created, and added to a topic, but their question is not updated", async () => {
     const response = {
       errors: { email: ["Unable update responses for test@sink.govdelivery.com"] },
       topic_id: "NJTHING",

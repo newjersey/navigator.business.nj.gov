@@ -102,7 +102,7 @@ describe("useUserData", () => {
       expect(mockApi.getUserData).toHaveBeenCalled();
     });
 
-    it("update auth state when data is initially loaded ", async () => {
+    it("update auth state when data is initially loaded", async () => {
       const currentUser = generateUser({});
       const currentUserData = generateUserData({ user: { ...currentUser, myNJUserKey: "1234" } });
       mockApi.getUserData.mockResolvedValue(currentUserData);
@@ -165,7 +165,7 @@ describe("useUserData", () => {
       expect(userDataStorage.getCurrentUserData()).toEqual(currentUserData);
     });
 
-    it("does not update auth state when data is initially loaded ", async () => {
+    it("does not update auth state when data is initially loaded", async () => {
       const currentUser = generateUser({});
       const currentUserData = generateUserData({ user: currentUser });
       userDataStorage.set(currentUser.id, currentUserData);

@@ -108,22 +108,14 @@ describe("buildUserRoadmap", () => {
     Industries.filter((x) => x.id !== "generic").forEach((industry) => {
       it(`adds ${industry.name} industry and modifications`, async () => {
         await buildUserRoadmap(generateProfileData({ industryId: industry.id }));
-        expectOnlyIndustry(industry.id, getLastCalledWith(mockRoadmapBuilder)[0]);
+        const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+        const shouldNotContainIndustries = Industries.filter((it) => it.id !== industry.id);
+        expect(lastCalledWith.industryId).toBe(industry.id);
+        for (const shouldNotContainIndustry of shouldNotContainIndustries) {
+          expect(lastCalledWith.addOns).not.toContain(shouldNotContainIndustry);
+        }
       });
     });
-
-    const expectOnlyIndustry = (
-      industry: string,
-      lastCalledWith: { industryId: string; addOns: string[] }
-    ): void => {
-      const shouldNotContainIndustries = Industries.filter((it) => it.id !== industry);
-
-      expect(lastCalledWith.industryId).toBe(industry);
-
-      for (const shouldNotContainIndustry of shouldNotContainIndustries) {
-        expect(lastCalledWith.addOns).not.toContain(shouldNotContainIndustry);
-      }
-    };
   });
 
   describe("cpa", () => {

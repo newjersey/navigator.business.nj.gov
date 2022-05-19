@@ -211,6 +211,7 @@ describe("profile", () => {
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
       fillText("Business name", "Cool Computers2");
+      expect(screen.getByLabelText("Business name")).toBeInTheDocument();
     });
 
     it("updates the user data on save", async () => {
@@ -478,7 +479,7 @@ describe("profile", () => {
       fillText("Business name", "Cool Computers");
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
-      fillText("Business name", "Cool Computers2");
+      expect(screen.getByLabelText("Business name")).toBeInTheDocument();
     });
 
     it("updates the user data on save", async () => {
@@ -656,7 +657,7 @@ describe("profile", () => {
       );
       clickSave();
       await waitFor(() => {
-        expect(currentUserData());
+        expect(currentUserData()).not.toBeUndefined();
       });
       expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
     });

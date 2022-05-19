@@ -32,7 +32,7 @@ describe("splitFullName", () => {
     });
   });
 
-  it("is empty if name is empty", () => {
+  it("is empty if name is undefined", () => {
     expect(splitFullName(undefined)).toEqual({
       firstName: "",
       lastName: "",

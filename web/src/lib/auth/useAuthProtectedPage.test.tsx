@@ -55,7 +55,7 @@ describe("useAuthProtectedPage", () => {
       });
     });
 
-    it("redirects to homepage when user is not authed", () => {
+    it("redirects to homepage when user has signin error", () => {
       useMockRouter({ isReady: true, asPath: signInSamlError });
       setupHookWithAuth({ hook: useAuthProtectedPage, isAuth: IsAuthenticated.FALSE });
       expect(mockPush).toHaveBeenCalledWith({
