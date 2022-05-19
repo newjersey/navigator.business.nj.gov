@@ -14,15 +14,16 @@ You must register your business name and form your `legal structure|legal-struct
 
 ### Application Requirements
 
-* Business name
+* Business name and *Doing Business As* name
 
-  When submitting the registration document, you need indicate the business name exactly as it was established in the home state followed by the name to be used in New Jersey. **Example**: The Deli Incorporated, a Delaware business determined that its name was already taken in this state. The business found that the name The Delicious Inc. was available in New Jersey. When registering, the foreign business will indicate its exact formation name followed by the business name to be used in New Jersey as follows:
+    When submitting the registration document, you need indicate the business name exactly as it was established in the home state followed by the name to be used in New Jersey. 
+  **Example**: The Deli Incorporated, a Delaware business determined that its name was already taken in this state. The business found that the name The Delicious Inc. was available in New Jersey. When registering, the foreign business will indicate its exact formation name followed by the business name to be used in New Jersey as follows:
 
-  **Correct**: A. B. C. Incorporated dba C B A Inc.
+    **Correct**: A. B. C. Incorporated dba C B A Inc.
 
-  **Incorrect:** ABC Inc. dba C B A Inc.
+    **Incorrect:** ABC Inc. dba C B A Inc.
 
-  The incorrect version illustrates that the formation name does not match exactly as a result of spacing of letters, punctuation and abbreviation of a word. As a result, filing using the incorrect formation name would be rejected and authorization to do business in New Jersey delayed.
+    The incorrect version illustrates that the formation name does not match exactly as a result of spacing of letters, punctuation and abbreviation of a word. As a result, filing using the incorrect formation name would be rejected and authorization to do business in New Jersey delayed.
 * Business designator (as registered in foreign location)
 * Legal structure
 *  `NAICS code|naics` (optional)
