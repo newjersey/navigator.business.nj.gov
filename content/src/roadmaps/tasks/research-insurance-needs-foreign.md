@@ -1,5 +1,5 @@
 ---
-urlSlug: get-insurance
+urlSlug: expand-insurance
 filename: research-insurance-needs-foreign
 name: Expand Your Insurance Policy
 id: expand-insurance-policy-foreign
