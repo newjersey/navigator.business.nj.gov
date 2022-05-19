@@ -1,7 +1,7 @@
 {
   "recCtEDDEAkDb41xd": {
     "id": "recCtEDDEAkDb41xd",
-    "townName": "Aberdeen",
+    "townName": "Aberdeen Township",
     "townDisplayName": "Aberdeen Township",
     "townWebsite": "http://www.aberdeennj.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -23,7 +23,7 @@
   },
   "recPF3IrYjDYphShj": {
     "id": "recPF3IrYjDYphShj",
-    "townName": "Alexandria",
+    "townName": "Alexandria Township",
     "townDisplayName": "Alexandria Township",
     "townWebsite": "https://www.alexandrianj.gov/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -34,7 +34,7 @@
   },
   "recSp8zywpIEbo7Df": {
     "id": "recSp8zywpIEbo7Df",
-    "townName": "Allamuchy",
+    "townName": "Allamuchy Township",
     "townDisplayName": "Allamuchy Township",
     "townWebsite": "http://www.allamuchynj.org/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -89,7 +89,7 @@
   },
   "recqlYDIfSRnmnG9H": {
     "id": "recqlYDIfSRnmnG9H",
-    "townName": "Alpha",
+    "townName": "Alpha Borough",
     "townDisplayName": "Alpha Borough",
     "townWebsite": "http://www.alphaboro.org/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -100,7 +100,7 @@
   },
   "rec91GPBej5TK4kgv": {
     "id": "rec91GPBej5TK4kgv",
-    "townName": "Alpine",
+    "townName": "Alpine Borough",
     "townDisplayName": "Alpine Borough",
     "townWebsite": "http://www.alpinenj07620.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -111,7 +111,7 @@
   },
   "recASEZQd4Xgh6Dk2": {
     "id": "recASEZQd4Xgh6Dk2",
-    "townName": "Andover borough",
+    "townName": "Andover Borough",
     "townDisplayName": "Andover Borough",
     "townWebsite": "http://www.andoverboroughnj.org/",
     "countyId": "recyYafT88fSnCICb",
@@ -122,7 +122,7 @@
   },
   "recVR74OFBChxTbRs": {
     "id": "recVR74OFBChxTbRs",
-    "townName": "Andover township",
+    "townName": "Andover Township",
     "townDisplayName": "Andover Township",
     "townWebsite": "http://www.andovertwp.org/",
     "countyId": "recyYafT88fSnCICb",
@@ -177,7 +177,7 @@
   },
   "reccfAxPBCMpwsXn5": {
     "id": "reccfAxPBCMpwsXn5",
-    "townName": "Audubon Park",
+    "townName": "Audubon Park Borough",
     "townDisplayName": "Audubon Park Borough",
     "townWebsite": "http://www.audubonparknj.org/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -199,7 +199,7 @@
   },
   "rech1FR0ZjQb4TRff": {
     "id": "rech1FR0ZjQb4TRff",
-    "townName": "Avon-by-the-Sea",
+    "townName": "Avon",
     "townDisplayName": "Avon",
     "townWebsite": "http://www.avon-by-the-sea.com/index.html",
     "countyId": "recCxjeByEuyaV3ap",
@@ -232,7 +232,7 @@
   },
   "recs5tsN90Ul4IXEe": {
     "id": "recs5tsN90Ul4IXEe",
-    "townName": "Barrington",
+    "townName": "Barrington Borough",
     "townDisplayName": "Barrington Borough",
     "townWebsite": "http://www.barringtonboro.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -243,7 +243,7 @@
   },
   "recFn5p6cpf86zack": {
     "id": "recFn5p6cpf86zack",
-    "townName": "Bass River",
+    "townName": "Bass River Township",
     "townDisplayName": "Bass River Township",
     "townWebsite": "http://bassriver-nj.org/index.php",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -254,7 +254,7 @@
   },
   "recrU94py8az8jJaM": {
     "id": "recrU94py8az8jJaM",
-    "townName": "Bay Head",
+    "townName": "Bay Head Borough",
     "townDisplayName": "Bay Head Borough",
     "townWebsite": "http://www.bayheadnj.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -276,7 +276,7 @@
   },
   "rec6eSCiZKBMmac5V": {
     "id": "rec6eSCiZKBMmac5V",
-    "townName": "Beach Haven",
+    "townName": "Beach Haven Borough",
     "townDisplayName": "Beach Haven Borough",
     "townWebsite": "http://www.beachhaven-nj.gov/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -287,7 +287,7 @@
   },
   "rectQIfKn6Rezn0iq": {
     "id": "rectQIfKn6Rezn0iq",
-    "townName": "Beachwood",
+    "townName": "Beachwood Borough",
     "townDisplayName": "Beachwood Borough",
     "townWebsite": "http://www.beachwoodusa.com/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -342,7 +342,7 @@
   },
   "recO2hVaqjdUBu9xJ": {
     "id": "recO2hVaqjdUBu9xJ",
-    "townName": "Belvidere",
+    "townName": "Belvidere Town",
     "townDisplayName": "Belvidere Town",
     "townWebsite": "http://www.belviderenj.com/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -364,7 +364,7 @@
   },
   "recg8t1KBDPLJXdYO": {
     "id": "recg8t1KBDPLJXdYO",
-    "townName": "Berkeley",
+    "townName": "Berkeley Township",
     "townDisplayName": "Berkeley Township",
     "townWebsite": "http://twp.berkeley.nj.us/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -375,7 +375,7 @@
   },
   "recl8Y2r7Pnxy4Oft": {
     "id": "recl8Y2r7Pnxy4Oft",
-    "townName": "Berkeley Heights",
+    "townName": "Berkeley Heights Township",
     "townDisplayName": "Berkeley Heights Township",
     "townWebsite": "http://www.berkeleyheightstwp.com/",
     "countyId": "recz11YLnT3zufGyO",
@@ -386,7 +386,7 @@
   },
   "recN9G5ov6r1RhBW6": {
     "id": "recN9G5ov6r1RhBW6",
-    "townName": "Berlin borough",
+    "townName": "Berlin Borough",
     "townDisplayName": "Berlin Borough",
     "townWebsite": "http://www.berlinnj.org/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -397,7 +397,7 @@
   },
   "recBDjjTTXihw7oR0": {
     "id": "recBDjjTTXihw7oR0",
-    "townName": "Berlin township",
+    "townName": "Berlin Township",
     "townDisplayName": "Berlin Township",
     "townWebsite": "https://berlintwp.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -408,7 +408,7 @@
   },
   "rec3uJJ3QWjlQ5Z7f": {
     "id": "rec3uJJ3QWjlQ5Z7f",
-    "townName": "Bernards",
+    "townName": "Bernards Township",
     "townDisplayName": "Bernards Township",
     "townWebsite": "http://www.bernards.org/",
     "countyId": "receKwTMDenuBZXUW",
@@ -430,7 +430,7 @@
   },
   "recgwGI99lUxaSaaP": {
     "id": "recgwGI99lUxaSaaP",
-    "townName": "Bethlehem",
+    "townName": "Bethlehem Township",
     "townDisplayName": "Bethlehem Township",
     "townWebsite": "http://www.bethlehem-twp.org/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -452,7 +452,7 @@
   },
   "recd3NRscfkxcrgh9": {
     "id": "recd3NRscfkxcrgh9",
-    "townName": "Blairstown",
+    "townName": "Blairstown Township",
     "townDisplayName": "Blairstown Township",
     "townWebsite": "http://www.blairstown-nj.org/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -463,7 +463,7 @@
   },
   "recQCeoL2xjxSO8lg": {
     "id": "recQCeoL2xjxSO8lg",
-    "townName": "Bloomfield",
+    "townName": "Bloomfield Township",
     "townDisplayName": "Bloomfield Township",
     "townWebsite": "http://www.bloomfieldtwpnj.com/",
     "countyId": "reckfVGbomFZozxeG",
@@ -474,7 +474,7 @@
   },
   "rechdIRnmMboIVOvJ": {
     "id": "rechdIRnmMboIVOvJ",
-    "townName": "Bloomingdale",
+    "townName": "Bloomingdale Borough",
     "townDisplayName": "Bloomingdale Borough",
     "townWebsite": "http://www.bloomingdalenj.org/",
     "countyId": "rec400qca7WIdFiI8",
@@ -485,7 +485,7 @@
   },
   "recUeYkrG1lyMXveX": {
     "id": "recUeYkrG1lyMXveX",
-    "townName": "Bloomsbury",
+    "townName": "Bloomsbury Borough",
     "townDisplayName": "Bloomsbury Borough",
     "townWebsite": "http://www.bloomsburynewjersey.com/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -507,7 +507,7 @@
   },
   "recaIh227ydjTsnAa": {
     "id": "recaIh227ydjTsnAa",
-    "townName": "Boonton town",
+    "townName": "Boonton",
     "townDisplayName": "Boonton",
     "townWebsite": "http://www.boonton.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -518,7 +518,7 @@
   },
   "reckpEWZGJUCsYFvl": {
     "id": "reckpEWZGJUCsYFvl",
-    "townName": "Boonton township",
+    "townName": "Boonton Township",
     "townDisplayName": "Boonton Township",
     "townWebsite": "http://www.boontontownship.com/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -529,7 +529,7 @@
   },
   "recG1T47YND45hp5t": {
     "id": "recG1T47YND45hp5t",
-    "townName": "Bordentown City",
+    "townName": "Bordentown, City of",
     "townDisplayName": "City of Bordentown",
     "townWebsite": "https://cityofbordentown.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -540,7 +540,7 @@
   },
   "recb2WilCrE49VhdT": {
     "id": "recb2WilCrE49VhdT",
-    "townName": "Bordentown township",
+    "townName": "Bordentown Township",
     "townDisplayName": "Bordentown Township",
     "townWebsite": "http://www.bordentowntownship.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -551,7 +551,7 @@
   },
   "recCgqNgc0siXwk97": {
     "id": "recCgqNgc0siXwk97",
-    "townName": "Bound Brook",
+    "townName": "Bound Brook Borough",
     "townDisplayName": "Bound Brook Borough",
     "townWebsite": "http://www.boundbrooknj.net/",
     "countyId": "receKwTMDenuBZXUW",
@@ -584,7 +584,7 @@
   },
   "recCzwBSqoAAENl95": {
     "id": "recCzwBSqoAAENl95",
-    "townName": "Branchville",
+    "townName": "Branchville Borough",
     "townDisplayName": "Branchville Borough",
     "townWebsite": "http://www.sussex.nj.us/Cit-e-Access/webpage.cfm?TID=7&TPID=4533",
     "countyId": "recyYafT88fSnCICb",
@@ -595,7 +595,7 @@
   },
   "recQs1r6n37mSkFbz": {
     "id": "recQs1r6n37mSkFbz",
-    "townName": "Brick",
+    "townName": "Brick Township",
     "townDisplayName": "Brick Township",
     "townWebsite": "http://www.twp.brick.nj.us/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -617,7 +617,7 @@
   },
   "recY9CX2LoQxPiBKH": {
     "id": "recY9CX2LoQxPiBKH",
-    "townName": "Bridgewater",
+    "townName": "Bridgewater Township",
     "townDisplayName": "Bridgewater Township",
     "townWebsite": "http://www.bridgewaternj.gov/",
     "countyId": "receKwTMDenuBZXUW",
@@ -628,7 +628,7 @@
   },
   "recA066HyO1Bz1sHi": {
     "id": "recA066HyO1Bz1sHi",
-    "townName": "Brielle",
+    "townName": "Brielle Borough",
     "townDisplayName": "Brielle Borough",
     "townWebsite": "http://www.briellenj.com/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -661,7 +661,7 @@
   },
   "recVAnaGFWa462p5w": {
     "id": "recVAnaGFWa462p5w",
-    "townName": "Buena",
+    "townName": "Buena Borough",
     "townDisplayName": "Buena Borough",
     "townWebsite": "http://www.buenaboro.org/",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -672,7 +672,7 @@
   },
   "recKKUlYMdQS2MFSr": {
     "id": "recKKUlYMdQS2MFSr",
-    "townName": "Buena Vista",
+    "townName": "Buena Vista Township",
     "townDisplayName": "Buena Vista Township",
     "townWebsite": "http://www.buenavistatownship.org/",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -683,7 +683,7 @@
   },
   "recxh5ADTjR4oPTg5": {
     "id": "recxh5ADTjR4oPTg5",
-    "townName": "Burlington city",
+    "townName": "Burlington City",
     "townDisplayName": "Burlington City",
     "townWebsite": "http://www.burlingtonnj.us/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -694,7 +694,7 @@
   },
   "recIGNlUHA3v3aikf": {
     "id": "recIGNlUHA3v3aikf",
-    "townName": "Burlington township",
+    "townName": "Burlington Township",
     "townDisplayName": "Burlington Township",
     "townWebsite": "http://www.twp.burlington.nj.us/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -705,7 +705,7 @@
   },
   "recodyRr21YrvtlMi": {
     "id": "recodyRr21YrvtlMi",
-    "townName": "Butler",
+    "townName": "Butler Borough",
     "townDisplayName": "Butler Borough",
     "townWebsite": "http://www.butlerborough.com/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -716,7 +716,7 @@
   },
   "recNAuB9joM28yzH3": {
     "id": "recNAuB9joM28yzH3",
-    "townName": "Byram",
+    "townName": "Byram Township",
     "townDisplayName": "Byram Township",
     "townWebsite": "http://www.byramtwp.org/",
     "countyId": "recyYafT88fSnCICb",
@@ -727,7 +727,7 @@
   },
   "recm9hDCNDpqR9Cd7": {
     "id": "recm9hDCNDpqR9Cd7",
-    "townName": "Caldwell Borough",
+    "townName": "Caldwell",
     "townDisplayName": "Caldwell",
     "townWebsite": "http://www.caldwell-nj.com/",
     "countyId": "reckfVGbomFZozxeG",
@@ -826,7 +826,7 @@
   },
   "recEbOnpwjzDnCVD9": {
     "id": "recEbOnpwjzDnCVD9",
-    "townName": "Chatham borough",
+    "townName": "Chatham Borough",
     "townDisplayName": "Chatham Borough",
     "townWebsite": "http://www.chathamborough.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -837,7 +837,7 @@
   },
   "rectaOVT4XDfSZ9QC": {
     "id": "rectaOVT4XDfSZ9QC",
-    "townName": "Chatham township",
+    "townName": "Chatham Township",
     "townDisplayName": "Chatham Township",
     "townWebsite": "http://www.chathamtownship.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -870,7 +870,7 @@
   },
   "rec3O7AsZxisAoowl": {
     "id": "rec3O7AsZxisAoowl",
-    "townName": "Chester borough",
+    "townName": "Chester Borough",
     "townDisplayName": "Chester Borough",
     "townWebsite": "http://www.chesterborough.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -881,7 +881,7 @@
   },
   "reckGat8F8RwAZ52W": {
     "id": "reckGat8F8RwAZ52W",
-    "townName": "Chester township",
+    "townName": "Chester Township",
     "townDisplayName": "Chester Township",
     "townWebsite": "http://www.chestertownship.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -892,7 +892,7 @@
   },
   "recdpZu5CDzHDDxnU": {
     "id": "recdpZu5CDzHDDxnU",
-    "townName": "Chesterfield",
+    "townName": "Chesterfield Township",
     "townDisplayName": "Chesterfield Township",
     "townWebsite": "http://www.chesterfieldtwp.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -903,7 +903,7 @@
   },
   "recjO4OenqWOz2tol": {
     "id": "recjO4OenqWOz2tol",
-    "townName": "Cinnaminson",
+    "townName": "Cinnaminson Township",
     "townDisplayName": "Cinnaminson Township",
     "townWebsite": "http://www.cinnaminsonnj.org/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -936,7 +936,7 @@
   },
   "recwwLyyXfPFLG3z0": {
     "id": "recwwLyyXfPFLG3z0",
-    "townName": "Clayton",
+    "townName": "Clayton Borough",
     "townDisplayName": "Clayton Borough",
     "townWebsite": "http://www.claytonnj.com/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -947,7 +947,7 @@
   },
   "rec56pTzCeFBuqO6R": {
     "id": "rec56pTzCeFBuqO6R",
-    "townName": "Clementon",
+    "townName": "Clementon Borough",
     "townDisplayName": "Clementon Borough",
     "townWebsite": "http://www.clementonborough.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -958,7 +958,7 @@
   },
   "rec14lJFK7yIQY8bT": {
     "id": "rec14lJFK7yIQY8bT",
-    "townName": "Cliffside Park",
+    "townName": "Cliffside Park Borough",
     "townDisplayName": "Cliffside Park Borough",
     "townWebsite": "http://www.cliffsideparknj.gov/",
     "countyId": "recMOGXjnbBPXilei",
@@ -980,7 +980,7 @@
   },
   "recZAkvxK90X7F44Y": {
     "id": "recZAkvxK90X7F44Y",
-    "townName": "Clinton town",
+    "townName": "Clinton",
     "townDisplayName": "Clinton",
     "townWebsite": "http://www.clintonnj.gov/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -991,7 +991,7 @@
   },
   "recq3kQkcNQvWYr6D": {
     "id": "recq3kQkcNQvWYr6D",
-    "townName": "Clinton township",
+    "townName": "Clinton Township",
     "townDisplayName": "Clinton Township",
     "townWebsite": "http://www.township.clinton.nj.us/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -1002,7 +1002,7 @@
   },
   "reczhL0fVKra1LoNi": {
     "id": "reczhL0fVKra1LoNi",
-    "townName": "Closter",
+    "townName": "Closter Borough",
     "townDisplayName": "Closter Borough",
     "townWebsite": "http://www.closterboro.com/",
     "countyId": "recMOGXjnbBPXilei",
@@ -1013,7 +1013,7 @@
   },
   "recMfdUifIZfcaTrV": {
     "id": "recMfdUifIZfcaTrV",
-    "townName": "Collingswood",
+    "townName": "Collingswood Borough",
     "townDisplayName": "Collingswood Borough",
     "townWebsite": "http://www.collingswood.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -1035,7 +1035,7 @@
   },
   "recQmQtF1DoKgSsE2": {
     "id": "recQmQtF1DoKgSsE2",
-    "townName": "Commercial",
+    "townName": "Commercial Township",
     "townDisplayName": "Commercial Township",
     "townWebsite": "http://www.commercialtwp.com/",
     "countyId": "recC95w1IwzEQlAun",
@@ -1101,7 +1101,7 @@
   },
   "recXuuaHdMqTy5x82": {
     "id": "recXuuaHdMqTy5x82",
-    "townName": "Deerfield",
+    "townName": "Deerfield Township",
     "townDisplayName": "Deerfield Township",
     "townWebsite": "http://www.deerfieldtownship.org/",
     "countyId": "recC95w1IwzEQlAun",
@@ -1112,7 +1112,7 @@
   },
   "recgNZtsLUFplNeWy": {
     "id": "recgNZtsLUFplNeWy",
-    "townName": "Delanco",
+    "townName": "Delanco Township",
     "townDisplayName": "Delanco Township",
     "townWebsite": "http://www.delancotownship.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -1134,7 +1134,7 @@
   },
   "recvK3rejbiHcluaQ": {
     "id": "recvK3rejbiHcluaQ",
-    "townName": "Delran",
+    "townName": "Delran Township",
     "townDisplayName": "Delran Township",
     "townWebsite": "http://www.delrantownship.org/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -1145,7 +1145,7 @@
   },
   "rec9NGWValTvMgs0u": {
     "id": "rec9NGWValTvMgs0u",
-    "townName": "Demarest",
+    "townName": "Demarest Borough",
     "townDisplayName": "Demarest Borough",
     "townWebsite": "http://www.demarestnj.net/",
     "countyId": "recMOGXjnbBPXilei",
@@ -1156,7 +1156,7 @@
   },
   "recF05vavTHhOp3oy": {
     "id": "recF05vavTHhOp3oy",
-    "townName": "Dennis",
+    "townName": "Dennis Township",
     "townDisplayName": "Dennis Township",
     "townWebsite": "http://www.dennistwp.org/",
     "countyId": "recRpUZyjLdCqyQhW",
@@ -1167,7 +1167,7 @@
   },
   "recOP1DKNxpJkR4rA": {
     "id": "recOP1DKNxpJkR4rA",
-    "townName": "Denville",
+    "townName": "Denville Township",
     "townDisplayName": "Denville Township",
     "townWebsite": "http://www.denvillenj.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -1178,7 +1178,7 @@
   },
   "rec83hjQCvWLOBBuc": {
     "id": "rec83hjQCvWLOBBuc",
-    "townName": "Deptford",
+    "townName": "Deptford Township",
     "townDisplayName": "Deptford Township",
     "townWebsite": "http://www.deptford-nj.org/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -1189,7 +1189,7 @@
   },
   "recoeLvijibMcKsn5": {
     "id": "recoeLvijibMcKsn5",
-    "townName": "Dover",
+    "townName": "Dover Township",
     "townDisplayName": "Dover Township (Toms River) (Ocean County)",
     "townWebsite": "https://www.tomsrivertownship.com/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -1211,7 +1211,7 @@
   },
   "rec9gFgTKim3gCTAe": {
     "id": "rec9gFgTKim3gCTAe",
-    "townName": "Downe",
+    "townName": "Downe Township",
     "townDisplayName": "Downe Township",
     "townWebsite": "http://www.downetwpnj.org/",
     "countyId": "recC95w1IwzEQlAun",
@@ -1255,7 +1255,7 @@
   },
   "recfIdf7ddaYN42f0": {
     "id": "recfIdf7ddaYN42f0",
-    "townName": "East Amwell",
+    "townName": "East Amwell Township",
     "townDisplayName": "East Amwell Township",
     "townWebsite": "http://www.eastamwelltownship.com/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -1277,7 +1277,7 @@
   },
   "rec5UWnGRrgXRMlVb": {
     "id": "rec5UWnGRrgXRMlVb",
-    "townName": "East Greenwich",
+    "townName": "East Greenwich Township",
     "townDisplayName": "East Greenwich Township",
     "townWebsite": "http://www.gloucester.lib.nj.us/eastgreenwich/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -1299,7 +1299,7 @@
   },
   "recCzdP9AdP5PFpd1": {
     "id": "recCzdP9AdP5PFpd1",
-    "townName": "East Newark",
+    "townName": "East Newark Borough",
     "townDisplayName": "East Newark Borough",
     "townWebsite": "http://www.boroughofeastnewark.com/",
     "countyId": "recf6TSyzjC4UpLoF",
@@ -1321,7 +1321,7 @@
   },
   "recvHGlsgtvibEZSD": {
     "id": "recvHGlsgtvibEZSD",
-    "townName": "East Rutherford",
+    "townName": "East Rutherford Borough",
     "townDisplayName": "East Rutherford Borough",
     "townWebsite": "http://www.eastrutherfordnj.net/",
     "countyId": "recMOGXjnbBPXilei",
@@ -1376,7 +1376,7 @@
   },
   "recRvEaxrtheI6ugb": {
     "id": "recRvEaxrtheI6ugb",
-    "townName": "Edgewater Park",
+    "townName": "Edgewater Park Township",
     "townDisplayName": "Edgewater Park Township",
     "townWebsite": "http://edgewaterpark-nj.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -1398,7 +1398,7 @@
   },
   "recwUAQFj7t8g4ILw": {
     "id": "recwUAQFj7t8g4ILw",
-    "townName": "Egg Harbor",
+    "townName": "Egg Harbor City",
     "townDisplayName": "Egg Harbor City",
     "townWebsite": "http://www.eggharborcity.org/",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -1409,7 +1409,7 @@
   },
   "recW0assDtloLB0xU": {
     "id": "recW0assDtloLB0xU",
-    "townName": "Egg Harbor City",
+    "townName": "Egg Harbor Township",
     "townDisplayName": "Egg Harbor Township",
     "townWebsite": "http://www.ehtgov.org/",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -1431,7 +1431,7 @@
   },
   "recnrVDHcw8lDkTgP": {
     "id": "recnrVDHcw8lDkTgP",
-    "townName": "Elk",
+    "townName": "Elk Township",
     "townDisplayName": "Elk Township",
     "townWebsite": "http://www.elktownshipnj.gov/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -1442,7 +1442,7 @@
   },
   "recdkXBzhK7KQxFga": {
     "id": "recdkXBzhK7KQxFga",
-    "townName": "Elmer",
+    "townName": "Elmer Borough",
     "townDisplayName": "Elmer Borough",
     "townWebsite": "http://www.elmerboroughnj.com/",
     "countyId": "reck22XFkSQShI3w4",
@@ -1475,7 +1475,7 @@
   },
   "recv2WaUgLZHYx9JL": {
     "id": "recv2WaUgLZHYx9JL",
-    "townName": "Emerson",
+    "townName": "Emerson Borough",
     "townDisplayName": "Emerson Borough",
     "townWebsite": "http://www.emersonnj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -1497,7 +1497,7 @@
   },
   "recbmfyooEfqkyl2T": {
     "id": "recbmfyooEfqkyl2T",
-    "townName": "Englewood Cliffs",
+    "townName": "Englewood Cliffs Borough",
     "townDisplayName": "Englewood Cliffs Borough",
     "townWebsite": "http://www.englewoodcliffsnj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -1519,7 +1519,7 @@
   },
   "rechlMudUBUpdAJrs": {
     "id": "rechlMudUBUpdAJrs",
-    "townName": "Essex Fells",
+    "townName": "Essex Fells Borough",
     "townDisplayName": "Essex Fells Borough",
     "townWebsite": "http://essexfellsboro.com/",
     "countyId": "reckfVGbomFZozxeG",
@@ -1530,7 +1530,7 @@
   },
   "recso8ExZtYtxvEKT": {
     "id": "recso8ExZtYtxvEKT",
-    "townName": "Estell Manor",
+    "townName": "Estell Manor City",
     "townDisplayName": "Estell Manor City",
     "townWebsite": "http://www.aclink.org/Admin/Main/Municipal.asp",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -1541,7 +1541,7 @@
   },
   "recmO3F8bKj2PsmXV": {
     "id": "recmO3F8bKj2PsmXV",
-    "townName": "Evesham",
+    "townName": "Evesham Township",
     "townDisplayName": "Evesham Township",
     "townWebsite": "http://www.twp.evesham.nj.us/index.htm",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -1552,7 +1552,7 @@
   },
   "rectVOztXHgqvEPK6": {
     "id": "rectVOztXHgqvEPK6",
-    "townName": "Ewing",
+    "townName": "Ewing Township",
     "townDisplayName": "Ewing Township",
     "townWebsite": "http://www.ewingtwp.net/",
     "countyId": "recm53ItGGbVqjp93",
@@ -1563,7 +1563,7 @@
   },
   "recbTfzU6cEFOeCZq": {
     "id": "recbTfzU6cEFOeCZq",
-    "townName": "Fair Haven",
+    "townName": "Fair Haven Borough",
     "townDisplayName": "Fair Haven Borough",
     "townWebsite": "http://www.fairhavennj.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -1596,7 +1596,7 @@
   },
   "recJkpujHcAe0kDvh": {
     "id": "recJkpujHcAe0kDvh",
-    "townName": "Fairfield",
+    "townName": "Fairfield Township",
     "townDisplayName": "Fairfield Township (Cumberland County)",
     "townWebsite": "http://www.fairfieldtwp-nj.com/",
     "countyId": "recC95w1IwzEQlAun",
@@ -1618,7 +1618,7 @@
   },
   "rec8YCwKPhjUMLbDk": {
     "id": "rec8YCwKPhjUMLbDk",
-    "townName": "Fanwood",
+    "townName": "Fanwood Borough",
     "townDisplayName": "Fanwood Borough",
     "townWebsite": "http://www.visitfanwood.com/borough/govhome.htm",
     "countyId": "recz11YLnT3zufGyO",
@@ -1695,7 +1695,7 @@
   },
   "recdVR2E1aCp4RyGJ": {
     "id": "recdVR2E1aCp4RyGJ",
-    "townName": "Folsom",
+    "townName": "Folsom Borough",
     "townDisplayName": "Folsom Borough",
     "townWebsite": "http://www.aclink.org/Admin/Main/Municipal.asp",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -1717,7 +1717,7 @@
   },
   "recWiLsh2aKvNGpEF": {
     "id": "recWiLsh2aKvNGpEF",
-    "townName": "Frankford",
+    "townName": "Frankford Township",
     "townDisplayName": "Frankford Township (Sussex County)",
     "townWebsite": "http://www.frankfordtownship.com/",
     "countyId": "recyYafT88fSnCICb",
@@ -1739,7 +1739,7 @@
   },
   "recoqhyRZ1pQ9ZtTE": {
     "id": "recoqhyRZ1pQ9ZtTE",
-    "townName": "Franklin",
+    "townName": "Franklin Township",
     "townDisplayName": "Franklin Township (Hunterdon County)",
     "townWebsite": "https://franklin-twp.org/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -1750,7 +1750,7 @@
   },
   "recDKcZ1mf1NfREvm": {
     "id": "recDKcZ1mf1NfREvm",
-    "townName": "Franklin",
+    "townName": "Franklin Township",
     "townDisplayName": "Franklin Township (Warren County)",
     "townWebsite": "http://www.franklintwpwarren.org/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -1761,7 +1761,7 @@
   },
   "recMfXpIAzb67cvzy": {
     "id": "recMfXpIAzb67cvzy",
-    "townName": "Franklin",
+    "townName": "Franklin Township",
     "townDisplayName": "Franklin Township (Somerset County)",
     "townWebsite": "http://www.franklintwpnj.org/",
     "countyId": "receKwTMDenuBZXUW",
@@ -1772,7 +1772,7 @@
   },
   "recl7zu1wqFgP1sPc": {
     "id": "recl7zu1wqFgP1sPc",
-    "townName": "Franklin",
+    "townName": "Franklin Township",
     "townDisplayName": "Franklin Township (Gloucester County)",
     "townWebsite": "http://www.franklintownship.com/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -1794,7 +1794,7 @@
   },
   "recLw7AXqxbGrckJL": {
     "id": "recLw7AXqxbGrckJL",
-    "townName": "Fredon",
+    "townName": "Fredon Township",
     "townDisplayName": "Fredon Township",
     "townWebsite": "http://www.twp.fredon.nj.us/",
     "countyId": "recyYafT88fSnCICb",
@@ -1805,7 +1805,7 @@
   },
   "recJEeZvBxOAGZPrj": {
     "id": "recJEeZvBxOAGZPrj",
-    "townName": "Freehold borough",
+    "townName": "Freehold Borough",
     "townDisplayName": "Freehold Borough",
     "townWebsite": "http://www.freeholdboroughnj.gov/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -1816,7 +1816,7 @@
   },
   "recRlD9nm7ZID5TqC": {
     "id": "recRlD9nm7ZID5TqC",
-    "townName": "Freehold township",
+    "townName": "Freehold Township",
     "townDisplayName": "Freehold Township",
     "townWebsite": "http://www.twp.freehold.nj.us/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -1827,7 +1827,7 @@
   },
   "rec045hngtcFWHZTl": {
     "id": "rec045hngtcFWHZTl",
-    "townName": "Frelinghuysen",
+    "townName": "Frelinghuysen Township",
     "townDisplayName": "Frelinghuysen Township",
     "townWebsite": "http://www.frelinghuysen-nj.us/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -1849,7 +1849,7 @@
   },
   "rec15SDu0UDHapPAX": {
     "id": "rec15SDu0UDHapPAX",
-    "townName": "Galloway",
+    "townName": "Galloway Township",
     "townDisplayName": "Galloway Township",
     "townWebsite": "http://www.gallowaytwp-nj.gov/",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -1904,7 +1904,7 @@
   },
   "recCeTOaa6NekblLh": {
     "id": "recCeTOaa6NekblLh",
-    "townName": "Glen Gardner",
+    "townName": "Glen Gardner Borough",
     "townDisplayName": "Glen Gardner Borough",
     "townWebsite": "http://www.glengardnernj.org/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -1915,7 +1915,7 @@
   },
   "rec4wfAKIW4yOLnAV": {
     "id": "rec4wfAKIW4yOLnAV",
-    "townName": "Glen Ridge",
+    "townName": "Glen Ridge Borough",
     "townDisplayName": "Glen Ridge Borough",
     "townWebsite": "http://glenridgenj.org/",
     "countyId": "reckfVGbomFZozxeG",
@@ -1937,7 +1937,7 @@
   },
   "recRwzXAu2XI2moQp": {
     "id": "recRwzXAu2XI2moQp",
-    "townName": "Gloucester City",
+    "townName": "Gloucester",
     "townDisplayName": "Gloucester",
     "townWebsite": "http://www.cityofgloucester.org/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -1948,7 +1948,7 @@
   },
   "recqpeOl9OCp0QPdj": {
     "id": "recqpeOl9OCp0QPdj",
-    "townName": "Gloucester township",
+    "townName": "Gloucester Township",
     "townDisplayName": "Gloucester Township",
     "townWebsite": "http://www.glotwp.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -1959,7 +1959,7 @@
   },
   "rec4S548mPkhArbPa": {
     "id": "rec4S548mPkhArbPa",
-    "townName": "Green",
+    "townName": "Green Township",
     "townDisplayName": "Green Township",
     "townWebsite": "http://www.greentwp.com/",
     "countyId": "recyYafT88fSnCICb",
@@ -1970,7 +1970,7 @@
   },
   "recORhNC7icLxVlg8": {
     "id": "recORhNC7icLxVlg8",
-    "townName": "Green Brook",
+    "townName": "Green Brook Township",
     "townDisplayName": "Green Brook Township",
     "townWebsite": "http://www.greenbrooktwp.org/products/initial.htm",
     "countyId": "receKwTMDenuBZXUW",
@@ -1981,7 +1981,7 @@
   },
   "rec2bwanrm32u46kL": {
     "id": "rec2bwanrm32u46kL",
-    "townName": "Greenwich",
+    "townName": "Greenwich Township",
     "townDisplayName": "Greenwich Township (Cumberland County)",
     "townWebsite": "http://www.co.cumberland.nj.us/content/173/211/807.aspx",
     "countyId": "recC95w1IwzEQlAun",
@@ -1992,7 +1992,7 @@
   },
   "rec7oSHMhlxWcDdkf": {
     "id": "rec7oSHMhlxWcDdkf",
-    "townName": "Greenwich",
+    "townName": "Greenwich Township",
     "townDisplayName": "Greenwich Township (Gloucester County)",
     "townWebsite": "http://www.greenwichtwp.com/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -2003,7 +2003,7 @@
   },
   "rech1Mo0Y5MHkqEHx": {
     "id": "rech1Mo0Y5MHkqEHx",
-    "townName": "Greenwich",
+    "townName": "Greenwich Township",
     "townDisplayName": "Greenwich Township (Warren County)",
     "townWebsite": "http://www.greenwichtownship.com/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -2014,7 +2014,7 @@
   },
   "recJwQ2kh1fJu8UaW": {
     "id": "recJwQ2kh1fJu8UaW",
-    "townName": "Guttenberg",
+    "townName": "Guttenberg Town",
     "townDisplayName": "Guttenberg Town",
     "townWebsite": "http://www.guttenbergnj.org/",
     "countyId": "recf6TSyzjC4UpLoF",
@@ -2047,7 +2047,7 @@
   },
   "recPYc7IFRKsQ9Zlw": {
     "id": "recPYc7IFRKsQ9Zlw",
-    "townName": "Haddon",
+    "townName": "Haddon Township",
     "townDisplayName": "Haddon Township",
     "townWebsite": "http://www.haddontwp.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -2058,7 +2058,7 @@
   },
   "recWsuCY2g0keTsov": {
     "id": "recWsuCY2g0keTsov",
-    "townName": "Haddon Heights",
+    "townName": "Haddon Heights Borough",
     "townDisplayName": "Haddon Heights Borough",
     "townWebsite": "http://www.haddonhts.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -2091,7 +2091,7 @@
   },
   "recRdWQCSmE4UXVTc": {
     "id": "recRdWQCSmE4UXVTc",
-    "townName": "Haledon",
+    "townName": "Haledon Borough",
     "townDisplayName": "Haledon Borough",
     "townWebsite": "http://www.haledonboronj.com/",
     "countyId": "rec400qca7WIdFiI8",
@@ -2102,7 +2102,7 @@
   },
   "recWaimCad9RqXUh7": {
     "id": "recWaimCad9RqXUh7",
-    "townName": "Hamburg",
+    "townName": "Hamburg Borough",
     "townDisplayName": "Hamburg Borough",
     "townWebsite": "http://www.hamburgnj.org/",
     "countyId": "recyYafT88fSnCICb",
@@ -2124,7 +2124,7 @@
   },
   "rec66s8xVAMrSpmdc": {
     "id": "rec66s8xVAMrSpmdc",
-    "townName": "Hamilton",
+    "townName": "Hamilton Township",
     "townDisplayName": "Hamilton Township (Atlantic County)",
     "townWebsite": "http://www.townshipofhamilton.com/",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -2146,7 +2146,7 @@
   },
   "recMzL51eh5Lb0MTM": {
     "id": "recMzL51eh5Lb0MTM",
-    "townName": "Hampton",
+    "townName": "Hampton Borough",
     "townDisplayName": "Hampton Borough (Hunterdon County)",
     "townWebsite": "http://www.hamptonboro.com/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -2157,7 +2157,7 @@
   },
   "recd9Gkl5VgRq6ByK": {
     "id": "recd9Gkl5VgRq6ByK",
-    "townName": "Hampton",
+    "townName": "Hampton Township",
     "townDisplayName": "Hampton Township (Sussex County)",
     "townWebsite": "http://www.hamptontownshipnj.info/",
     "countyId": "recyYafT88fSnCICb",
@@ -2168,7 +2168,7 @@
   },
   "recQGIC8CofZQFEuh": {
     "id": "recQGIC8CofZQFEuh",
-    "townName": "Hanover",
+    "townName": "Hanover Township",
     "townDisplayName": "Hanover Township",
     "townWebsite": "http://www.hanovertownship.com/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -2179,7 +2179,7 @@
   },
   "recv23L9MWD89KA0J": {
     "id": "recv23L9MWD89KA0J",
-    "townName": "Harding",
+    "townName": "Harding Township",
     "townDisplayName": "Harding Township",
     "townWebsite": "http://www.hardingnj.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -2190,7 +2190,7 @@
   },
   "recyU4qvCBKXHLI3S": {
     "id": "recyU4qvCBKXHLI3S",
-    "townName": "Hardwick",
+    "townName": "Hardwick Township",
     "townDisplayName": "Hardwick Township",
     "townWebsite": "http://www.hardwick-nj.us/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -2201,7 +2201,7 @@
   },
   "recITxGGShQkQl1MS": {
     "id": "recITxGGShQkQl1MS",
-    "townName": "Hardyston",
+    "townName": "Hardyston Township",
     "townDisplayName": "Hardyston Township",
     "townWebsite": "http://www.hardyston.com/",
     "countyId": "recyYafT88fSnCICb",
@@ -2212,7 +2212,7 @@
   },
   "recNuuKDKFkvURuqW": {
     "id": "recNuuKDKFkvURuqW",
-    "townName": "Harmony",
+    "townName": "Harmony Township",
     "townDisplayName": "Harmony Township",
     "townWebsite": "http://www.harmonytwp-nj.gov/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -2245,7 +2245,7 @@
   },
   "rec2NfsEgEHj0Ltj4": {
     "id": "rec2NfsEgEHj0Ltj4",
-    "townName": "Harrison",
+    "townName": "Harrison Town",
     "townDisplayName": "Harrison Town (Gloucester County)",
     "townWebsite": "https://harrisontwp.us/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -2278,7 +2278,7 @@
   },
   "recj1qDRhOwE84Qei": {
     "id": "recj1qDRhOwE84Qei",
-    "townName": "Haworth",
+    "townName": "Haworth Borough",
     "townDisplayName": "Haworth Borough",
     "townWebsite": "http://www.haworthnj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -2289,7 +2289,7 @@
   },
   "recE8m22kvvzsqrFQ": {
     "id": "recE8m22kvvzsqrFQ",
-    "townName": "Hawthorne",
+    "townName": "Hawthorne Borough",
     "townDisplayName": "Hawthorne Borough",
     "townWebsite": "http://www.hawthornenj.org/",
     "countyId": "rec400qca7WIdFiI8",
@@ -2322,7 +2322,7 @@
   },
   "recITJo5aweZz5NBP": {
     "id": "recITJo5aweZz5NBP",
-    "townName": "Hi-Nella",
+    "townName": "Hi-nella",
     "townDisplayName": "Hi-nella",
     "townWebsite": "http://www.co.camden.nj.us/government/municip.html",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -2366,7 +2366,7 @@
   },
   "recHwcECehbu10pmd": {
     "id": "recHwcECehbu10pmd",
-    "townName": "Hightstown",
+    "townName": "Hightstown Borough",
     "townDisplayName": "Hightstown Borough",
     "townWebsite": "http://www.hightstownborough.com/",
     "countyId": "recm53ItGGbVqjp93",
@@ -2399,7 +2399,7 @@
   },
   "rechAXpaxKDgBgNd3": {
     "id": "rechAXpaxKDgBgNd3",
-    "townName": "Hillside",
+    "townName": "Hillside Township",
     "townDisplayName": "Hillside Township",
     "townWebsite": "http://www.townshipofhillside.org/",
     "countyId": "recz11YLnT3zufGyO",
@@ -2432,7 +2432,7 @@
   },
   "recFsfRsYhKehellF": {
     "id": "recFsfRsYhKehellF",
-    "townName": "Holland",
+    "townName": "Holland Township",
     "townDisplayName": "Holland Township",
     "townWebsite": "http://www.hollandtownship.org/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -2465,7 +2465,7 @@
   },
   "recawbDthrwZssVuo": {
     "id": "recawbDthrwZssVuo",
-    "townName": "Hope",
+    "townName": "Hope Township",
     "townDisplayName": "Hope Township",
     "townWebsite": "http://www.hopetownship.com/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -2476,7 +2476,7 @@
   },
   "recShXqBi4wtld8sJ": {
     "id": "recShXqBi4wtld8sJ",
-    "townName": "Hopewell",
+    "townName": "Hopewell Township",
     "townDisplayName": "Hopewell Township (Cumberland County)",
     "townWebsite": "http://www.hopewelltwp-nj.com/",
     "countyId": "recC95w1IwzEQlAun",
@@ -2487,7 +2487,7 @@
   },
   "recyUZbclngLvnlUL": {
     "id": "recyUZbclngLvnlUL",
-    "townName": "Hopewell borough",
+    "townName": "Hopewell Borough",
     "townDisplayName": "Hopewell Borough (Mercer County)",
     "townWebsite": "http://www.hopewellboro-nj.us/",
     "countyId": "recm53ItGGbVqjp93",
@@ -2498,7 +2498,7 @@
   },
   "recfwmHxMWCBJs5Rl": {
     "id": "recfwmHxMWCBJs5Rl",
-    "townName": "Hopewell township",
+    "townName": "Hopewell Township",
     "townDisplayName": "Hopewell Township (Mercer County)",
     "townWebsite": "http://www.hopewelltwp.org/",
     "countyId": "recm53ItGGbVqjp93",
@@ -2520,7 +2520,7 @@
   },
   "recAqvnDpN5E4VgAB": {
     "id": "recAqvnDpN5E4VgAB",
-    "townName": "Independence",
+    "townName": "Independence Township",
     "townDisplayName": "Independence Township",
     "townWebsite": "http://www.independencenj.com/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -2542,7 +2542,7 @@
   },
   "rec5HrN1RzdcwKaaS": {
     "id": "rec5HrN1RzdcwKaaS",
-    "townName": "Irvington",
+    "townName": "Irvington Township",
     "townDisplayName": "Irvington Township",
     "townWebsite": "http://www.irvington.net/",
     "countyId": "reckfVGbomFZozxeG",
@@ -2564,7 +2564,7 @@
   },
   "reco2sFVHiIgwURFh": {
     "id": "reco2sFVHiIgwURFh",
-    "townName": "Jackson",
+    "townName": "Jackson Township",
     "townDisplayName": "Jackson Township",
     "townWebsite": "http://www.jacksontwpnj.net/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -2586,7 +2586,7 @@
   },
   "rec6943R5D2CSe2l7": {
     "id": "rec6943R5D2CSe2l7",
-    "townName": "Jefferson",
+    "townName": "Jefferson Township",
     "townDisplayName": "Jefferson Township",
     "townWebsite": "http://www.jeffersontownship.net/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -2641,7 +2641,7 @@
   },
   "recj2HfxUGzVbOSS2": {
     "id": "recj2HfxUGzVbOSS2",
-    "townName": "Keyport",
+    "townName": "Keyport Borough",
     "townDisplayName": "Keyport Borough",
     "townWebsite": "http://www.keyportonline.com/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -2652,7 +2652,7 @@
   },
   "reczGhj60T0I0zfP0": {
     "id": "reczGhj60T0I0zfP0",
-    "townName": "Kingwood",
+    "townName": "Kingwood Township",
     "townDisplayName": "Kingwood Township",
     "townWebsite": "https://www.kingwoodtownship.com/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -2674,7 +2674,7 @@
   },
   "rec6hYAV8QyLHasPH": {
     "id": "rec6hYAV8QyLHasPH",
-    "townName": "Knowlton",
+    "townName": "Knowlton Township",
     "townDisplayName": "Knowlton Township",
     "townWebsite": "http://knowlton-nj.com/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -2685,7 +2685,7 @@
   },
   "recFNCQkZyl678AP5": {
     "id": "recFNCQkZyl678AP5",
-    "townName": "Lacey",
+    "townName": "Lacey Township",
     "townDisplayName": "Lacey Township",
     "townWebsite": "http://www.laceytownship.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -2696,7 +2696,7 @@
   },
   "recQziVx2X8B0Fh6L": {
     "id": "recQziVx2X8B0Fh6L",
-    "townName": "Lafayette",
+    "townName": "Lafayette Township",
     "townDisplayName": "Lafayette Township",
     "townWebsite": "https://www.lafayettetwp.org/",
     "countyId": "recyYafT88fSnCICb",
@@ -2707,7 +2707,7 @@
   },
   "rec5HuGFxu6m81lC5": {
     "id": "rec5HuGFxu6m81lC5",
-    "townName": "Lake Como",
+    "townName": "Lake Como ",
     "townDisplayName": "Lake Como ",
     "townWebsite": "http://lakecomonj.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -2729,7 +2729,7 @@
   },
   "rec2caxbZ9P5kWX9O": {
     "id": "rec2caxbZ9P5kWX9O",
-    "townName": "Lakewood",
+    "townName": "Lakewood Township",
     "townDisplayName": "Lakewood Township",
     "townWebsite": "http://twp.lakewood.nj.us/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -2762,7 +2762,7 @@
   },
   "recmdUrpXWEp28mco": {
     "id": "recmdUrpXWEp28mco",
-    "townName": "Lavallette",
+    "townName": "Lavallette Borough",
     "townDisplayName": "Lavallette Borough",
     "townWebsite": "https://www.lavallette.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -2784,7 +2784,7 @@
   },
   "recCfC68jHJkE51cu": {
     "id": "recCfC68jHJkE51cu",
-    "townName": "Lawrence",
+    "townName": "Lawrence Township",
     "townDisplayName": "Lawrence Township (Cumberland County)",
     "townWebsite": "http://www.lawrencetwpcumberlandnj.com/",
     "countyId": "recC95w1IwzEQlAun",
@@ -2795,7 +2795,7 @@
   },
   "rece01EzOsJ3CsKFe": {
     "id": "rece01EzOsJ3CsKFe",
-    "townName": "Lawrence",
+    "townName": "Lawrence Township",
     "townDisplayName": "Lawrence Township (Mercer County)",
     "townWebsite": "http://www.lawrencetwp.com/",
     "countyId": "recm53ItGGbVqjp93",
@@ -2806,7 +2806,7 @@
   },
   "rec1LBzYMaeeQXjic": {
     "id": "rec1LBzYMaeeQXjic",
-    "townName": "Lebanon borough",
+    "townName": "Lebanon Borough",
     "townDisplayName": "Lebanon Borough",
     "townWebsite": "https://www.lebanonboro.com/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -2817,7 +2817,7 @@
   },
   "recRNrwpC69yOGB7k": {
     "id": "recRNrwpC69yOGB7k",
-    "townName": "Lebanon township",
+    "townName": "Lebanon Township",
     "townDisplayName": "Lebanon Township",
     "townWebsite": "http://www.lebanontownship.net/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -2828,7 +2828,7 @@
   },
   "recljouezB5QPPdGH": {
     "id": "recljouezB5QPPdGH",
-    "townName": "Leonia",
+    "townName": "Leonia Borough",
     "townDisplayName": "Leonia Borough",
     "townWebsite": "http://www.leonianj.gov/",
     "countyId": "recMOGXjnbBPXilei",
@@ -2839,7 +2839,7 @@
   },
   "rec8DKqAMsGeJMhSD": {
     "id": "rec8DKqAMsGeJMhSD",
-    "townName": "Liberty",
+    "townName": "Liberty Township",
     "townDisplayName": "Liberty Township",
     "townWebsite": "http://www.libertytownship.org/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -2883,7 +2883,7 @@
   },
   "rec87fykZf15o8nGO": {
     "id": "rec87fykZf15o8nGO",
-    "townName": "Linwood",
+    "townName": "Linwood City",
     "townDisplayName": "Linwood City",
     "townWebsite": "http://www.linwoodcity.org/",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -2894,7 +2894,7 @@
   },
   "recyuxltQHH5a45bg": {
     "id": "recyuxltQHH5a45bg",
-    "townName": "Little Egg Harbor",
+    "townName": "Little Egg Harbor Township",
     "townDisplayName": "Little Egg Harbor Township",
     "townWebsite": "http://www.leht.com/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -2916,7 +2916,7 @@
   },
   "rec1JuZGhASTdzUlX": {
     "id": "rec1JuZGhASTdzUlX",
-    "townName": "Little Ferry",
+    "townName": "Little Ferry Borough",
     "townDisplayName": "Little Ferry Borough",
     "townWebsite": "http://www.littleferrynj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -2927,7 +2927,7 @@
   },
   "reco0EhaRMMl2aIRF": {
     "id": "reco0EhaRMMl2aIRF",
-    "townName": "Little Silver",
+    "townName": "Little Silver Borough",
     "townDisplayName": "Little Silver Borough",
     "townWebsite": "http://www.littlesilver.org/ls",
     "countyId": "recCxjeByEuyaV3ap",
@@ -2949,7 +2949,7 @@
   },
   "recULRT0tx3gNSKx7": {
     "id": "recULRT0tx3gNSKx7",
-    "townName": "Loch Arbour",
+    "townName": "Loch Arbor Borough",
     "townDisplayName": "Loch Arbor Borough",
     "townWebsite": "http://www.locharbournj.us/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -2960,7 +2960,7 @@
   },
   "recjErXFA4bwKJOe4": {
     "id": "recjErXFA4bwKJOe4",
-    "townName": "Lodi",
+    "townName": "Lodi Borough",
     "townDisplayName": "Lodi Borough",
     "townWebsite": "http://www.lodi-nj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -2982,7 +2982,7 @@
   },
   "recYMCoMC2y3DMdoO": {
     "id": "recYMCoMC2y3DMdoO",
-    "townName": "Long Beach",
+    "townName": "Long Beach Township",
     "townDisplayName": "Long Beach Township",
     "townWebsite": "http://longbeachtownship.com/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -3004,7 +3004,7 @@
   },
   "recIRQbnSOIUuP6TP": {
     "id": "recIRQbnSOIUuP6TP",
-    "townName": "Long Hill",
+    "townName": "Long Hill Township",
     "townDisplayName": "Long Hill Township",
     "townWebsite": "http://www.longhillnj.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -3026,7 +3026,7 @@
   },
   "recdgeYqnXT34KpYY": {
     "id": "recdgeYqnXT34KpYY",
-    "townName": "Lopatcong",
+    "townName": "Lopatcong Township",
     "townDisplayName": "Lopatcong Township",
     "townWebsite": "http://www.lopatcongtwp.com/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -3037,7 +3037,7 @@
   },
   "recMAkhDauxOGDGyQ": {
     "id": "recMAkhDauxOGDGyQ",
-    "townName": "Lower",
+    "townName": "Lower Township",
     "townDisplayName": "Lower Township",
     "townWebsite": "http://www.townshipoflower.org/",
     "countyId": "recRpUZyjLdCqyQhW",
@@ -3158,7 +3158,7 @@
   },
   "recFPfWfGmlCgJCLz": {
     "id": "recFPfWfGmlCgJCLz",
-    "townName": "Mansfield",
+    "townName": "Mansfield Township",
     "townDisplayName": "Mansfield Township (Burlington County)",
     "townWebsite": "http://www.mansfieldtwp-nj.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -3169,7 +3169,7 @@
   },
   "rec8lEONpl4mMGtrs": {
     "id": "rec8lEONpl4mMGtrs",
-    "townName": "Mansfield",
+    "townName": "Mansfield Township",
     "townDisplayName": "Mansfield Township (Warren County)",
     "townWebsite": "http://www.mansfieldtownship-nj.gov/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -3180,7 +3180,7 @@
   },
   "recd0Ki0HWWUK2Sj5": {
     "id": "recd0Ki0HWWUK2Sj5",
-    "townName": "Mantoloking",
+    "townName": "Mantoloking Borough",
     "townDisplayName": "Mantoloking Borough",
     "townWebsite": "http://www.mantoloking.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -3191,7 +3191,7 @@
   },
   "recHm2aKfW9ZE0ynh": {
     "id": "recHm2aKfW9ZE0ynh",
-    "townName": "Mantua",
+    "townName": "Mantua Township",
     "townDisplayName": "Mantua Township",
     "townWebsite": "http://www.mantuatownship.com/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -3202,7 +3202,7 @@
   },
   "recq0OfoihHQa8WbZ": {
     "id": "recq0OfoihHQa8WbZ",
-    "townName": "Manville",
+    "townName": "Manville Borough",
     "townDisplayName": "Manville Borough",
     "townWebsite": "http://www.manvillenj.org/",
     "countyId": "receKwTMDenuBZXUW",
@@ -3213,7 +3213,7 @@
   },
   "rec5gep6fJWv7vMlj": {
     "id": "rec5gep6fJWv7vMlj",
-    "townName": "Maple Shade",
+    "townName": "Maple Shade Township",
     "townDisplayName": "Maple Shade Township",
     "townWebsite": "http://www.mapleshade.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -3235,7 +3235,7 @@
   },
   "recbiLvKQCq15ZeLN": {
     "id": "recbiLvKQCq15ZeLN",
-    "townName": "Margate City",
+    "townName": "Margate",
     "townDisplayName": "Margate",
     "townWebsite": "http://www.margate-nj.com/index.cfm",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -3246,7 +3246,7 @@
   },
   "recniFEih517j89Dt": {
     "id": "recniFEih517j89Dt",
-    "townName": "Marlboro",
+    "townName": "Marlboro Township",
     "townDisplayName": "Marlboro Township",
     "townWebsite": "http://www.marlboro-nj.gov/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -3268,7 +3268,7 @@
   },
   "recwzjOCNvUkp7m7F": {
     "id": "recwzjOCNvUkp7m7F",
-    "townName": "Maurice River",
+    "townName": "Maurice River Township",
     "townDisplayName": "Maurice River Township",
     "townWebsite": "http://www.mauricerivertwp.org/",
     "countyId": "recC95w1IwzEQlAun",
@@ -3312,7 +3312,7 @@
   },
   "recuEX3PxJNME6mGx": {
     "id": "recuEX3PxJNME6mGx",
-    "townName": "Mendham borough",
+    "townName": "Mendham Borough",
     "townDisplayName": "Mendham Borough",
     "townWebsite": "http://mendhamnj.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -3323,7 +3323,7 @@
   },
   "recHUaKEvkepoV5FM": {
     "id": "recHUaKEvkepoV5FM",
-    "townName": "Mendham township",
+    "townName": "Mendham Township",
     "townDisplayName": "Mendham Township",
     "townWebsite": "http://www.mendhamtownship.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -3356,7 +3356,7 @@
   },
   "recN4qIeTZ0JT4Lbo": {
     "id": "recN4qIeTZ0JT4Lbo",
-    "townName": "Middle",
+    "townName": "Middle Township",
     "townDisplayName": "Middle Township",
     "townWebsite": "http://www.middletownship.com/",
     "countyId": "recRpUZyjLdCqyQhW",
@@ -3367,7 +3367,7 @@
   },
   "rec6adXsKQe5yHL33": {
     "id": "rec6adXsKQe5yHL33",
-    "townName": "Middlesex",
+    "townName": "Middlesex Borough",
     "townDisplayName": "Middlesex Borough (Middlesex County)",
     "townWebsite": "http://www.middlesexboro.com/",
     "countyId": "recdajeMj87TeTI46",
@@ -3378,7 +3378,7 @@
   },
   "recuOWg1FZ75d8Dt5": {
     "id": "recuOWg1FZ75d8Dt5",
-    "townName": "Middletown",
+    "townName": "Middletown Township",
     "townDisplayName": "Middletown Township (Monmouth County)",
     "townWebsite": "http://www.middletownnj.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -3400,7 +3400,7 @@
   },
   "recJQDA9BUWRSC9xX": {
     "id": "recJQDA9BUWRSC9xX",
-    "townName": "Milford",
+    "townName": "Milford Borough",
     "townDisplayName": "Milford Borough",
     "townWebsite": "http://www.milfordnj.org/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -3422,7 +3422,7 @@
   },
   "recOkQWY6wHtmRwPi": {
     "id": "recOkQWY6wHtmRwPi",
-    "townName": "Millstone",
+    "townName": "Millstone Township",
     "townDisplayName": "Millstone Township (Somerset County)",
     "townWebsite": "http://www.millstone.nj.us/",
     "countyId": "receKwTMDenuBZXUW",
@@ -3433,7 +3433,7 @@
   },
   "recWK8TDlqUt6ZHQf": {
     "id": "recWK8TDlqUt6ZHQf",
-    "townName": "Millstone",
+    "townName": "Millstone Borough",
     "townDisplayName": "Millstone Borough (Monmouth County)",
     "townWebsite": "http://www.millstoneboro.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -3477,7 +3477,7 @@
   },
   "recF9de0ThtyNvXcp": {
     "id": "recF9de0ThtyNvXcp",
-    "townName": "Monmouth Beach",
+    "townName": "Monmouth Beach Borough",
     "townDisplayName": "Monmouth Beach Borough",
     "townWebsite": "http://www.monmouthbeach.us/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -3488,7 +3488,7 @@
   },
   "recEeJoDx5dnh2k3H": {
     "id": "recEeJoDx5dnh2k3H",
-    "townName": "Monroe",
+    "townName": "Monroe Township",
     "townDisplayName": "Monroe Township (Middlesex County)",
     "townWebsite": "http://www.monroetwp.com/",
     "countyId": "recdajeMj87TeTI46",
@@ -3499,7 +3499,7 @@
   },
   "reciwWURbSxP1e1oI": {
     "id": "reciwWURbSxP1e1oI",
-    "townName": "Monroe",
+    "townName": "Monroe Township",
     "townDisplayName": "Monroe Township (Gloucester County)",
     "townWebsite": "http://www.monroetownshipnj.org/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -3532,7 +3532,7 @@
   },
   "rec8BuSqvHMmkp18i": {
     "id": "rec8BuSqvHMmkp18i",
-    "townName": "Montgomery",
+    "townName": "Montgomery Township",
     "townDisplayName": "Montgomery Township",
     "townWebsite": "http://www.montgomery.nj.us/",
     "countyId": "receKwTMDenuBZXUW",
@@ -3554,7 +3554,7 @@
   },
   "reciyfGgzEBBDeC7v": {
     "id": "reciyfGgzEBBDeC7v",
-    "townName": "Montville",
+    "townName": "Montville Township",
     "townDisplayName": "Montville Township",
     "townWebsite": "http://www.montvillenj.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -3565,7 +3565,7 @@
   },
   "reccbM5LRn8aH6Yfk": {
     "id": "reccbM5LRn8aH6Yfk",
-    "townName": "Moonachie",
+    "townName": "Moonachie Borough",
     "townDisplayName": "Moonachie Borough",
     "townWebsite": "http://www.moonachie.us/",
     "countyId": "recMOGXjnbBPXilei",
@@ -3587,7 +3587,7 @@
   },
   "recRykCNvgHmauhD3": {
     "id": "recRykCNvgHmauhD3",
-    "townName": "Morris",
+    "townName": "Morris Township",
     "townDisplayName": "Morris Township",
     "townWebsite": "http://www.morristwp.com/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -3598,7 +3598,7 @@
   },
   "rec9JfLRU8qZu8AGv": {
     "id": "rec9JfLRU8qZu8AGv",
-    "townName": "Morris Plains",
+    "townName": "Morris Plains Borough",
     "townDisplayName": "Morris Plains Borough",
     "townWebsite": "http://www.morrisplainsboro.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -3631,7 +3631,7 @@
   },
   "reclpu7AoAvhEVYF2": {
     "id": "reclpu7AoAvhEVYF2",
-    "townName": "Mount Ephraim",
+    "townName": "Mount Ephraim Borough",
     "townDisplayName": "Mount Ephraim Borough",
     "townWebsite": "http://www.mountephraim-nj.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -3664,7 +3664,7 @@
   },
   "rec58KRZDQbaKh9Jp": {
     "id": "rec58KRZDQbaKh9Jp",
-    "townName": "Mount Olive",
+    "townName": "Mount Olive Township",
     "townDisplayName": "Mount Olive Township",
     "townWebsite": "http://www.mtolivetwp.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -3697,7 +3697,7 @@
   },
   "recVV3xELkyoiHCfq": {
     "id": "recVV3xELkyoiHCfq",
-    "townName": "Mullica",
+    "townName": "Mullica Township",
     "townDisplayName": "Mullica Township",
     "townWebsite": "http://www.mullicatownship.org/",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -3708,7 +3708,7 @@
   },
   "rec9PAX1ITQVXHt1B": {
     "id": "rec9PAX1ITQVXHt1B",
-    "townName": "National Park",
+    "townName": "National Park Borough",
     "townDisplayName": "National Park Borough",
     "townWebsite": "http://www.nationalparkboro.com/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -3719,7 +3719,7 @@
   },
   "recKExgtk9XRxXW9l": {
     "id": "recKExgtk9XRxXW9l",
-    "townName": "Neptune",
+    "townName": "Neptune Township",
     "townDisplayName": "Neptune Township",
     "townWebsite": "http://www.neptunetownship.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -3774,7 +3774,7 @@
   },
   "recsyFV4iCLrEH8xo": {
     "id": "recsyFV4iCLrEH8xo",
-    "townName": "New Milford",
+    "townName": "New Milford Borough",
     "townDisplayName": "New Milford Borough",
     "townWebsite": "http://www.newmilfordboro.com/",
     "countyId": "recMOGXjnbBPXilei",
@@ -3829,7 +3829,7 @@
   },
   "recucXtdlL2JPb8sn": {
     "id": "recucXtdlL2JPb8sn",
-    "townName": "North Arlington",
+    "townName": "North Arlington Borough",
     "townDisplayName": "North Arlington Borough",
     "townWebsite": "http://www.northarlington.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -3851,7 +3851,7 @@
   },
   "recYkzOn3D2NBC76E": {
     "id": "recYkzOn3D2NBC76E",
-    "townName": "North Brunswick",
+    "townName": "North Brunswick Township",
     "townDisplayName": "North Brunswick Township",
     "townWebsite": "http://www.northbrunswickonline.com/",
     "countyId": "recdajeMj87TeTI46",
@@ -3862,7 +3862,7 @@
   },
   "recq7ml8fjzIOp8y4": {
     "id": "recq7ml8fjzIOp8y4",
-    "townName": "North Caldwell",
+    "townName": "North Caldwell Borough",
     "townDisplayName": "North Caldwell Borough",
     "townWebsite": "http://www.northcaldwell.org/home/",
     "countyId": "reckfVGbomFZozxeG",
@@ -3884,7 +3884,7 @@
   },
   "receuwokwo5qzFzHC": {
     "id": "receuwokwo5qzFzHC",
-    "townName": "North Hanover",
+    "townName": "North Hanover Township",
     "townDisplayName": "North Hanover Township",
     "townWebsite": "http://www.northhanover.us/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -3895,7 +3895,7 @@
   },
   "recbZyj8xK7x0MQsz": {
     "id": "recbZyj8xK7x0MQsz",
-    "townName": "North Plainfield",
+    "townName": "North Plainfield Borough",
     "townDisplayName": "North Plainfield Borough",
     "townWebsite": "http://www.northplainfield.org/",
     "countyId": "receKwTMDenuBZXUW",
@@ -3928,7 +3928,7 @@
   },
   "recZ4eUFK4NHAtmoq": {
     "id": "recZ4eUFK4NHAtmoq",
-    "townName": "Northvale",
+    "townName": "Northvale Borough",
     "townDisplayName": "Northvale Borough",
     "townWebsite": "http://www.boroughofnorthvale.com/",
     "countyId": "recMOGXjnbBPXilei",
@@ -3939,7 +3939,7 @@
   },
   "recN7tH173PgUobdH": {
     "id": "recN7tH173PgUobdH",
-    "townName": "Norwood",
+    "townName": "Norwood Borough",
     "townDisplayName": "Norwood Borough",
     "townWebsite": "http://www.norwoodboro.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -3972,7 +3972,7 @@
   },
   "recFkEIkxvQGLtZXr": {
     "id": "recFkEIkxvQGLtZXr",
-    "townName": "Oaklyn borough",
+    "townName": "Oaklyn",
     "townDisplayName": "Oaklyn",
     "townWebsite": "http://oaklyn-nj.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -3983,7 +3983,7 @@
   },
   "recaUbyd6r0WWbeol": {
     "id": "recaUbyd6r0WWbeol",
-    "townName": "Ocean",
+    "townName": "Ocean Township",
     "townDisplayName": "Ocean Township (Ocean County)",
     "townWebsite": "http://www.townshipofocean.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -3994,7 +3994,7 @@
   },
   "receTqH9bwDqrtHUI": {
     "id": "receTqH9bwDqrtHUI",
-    "townName": "Ocean",
+    "townName": "Ocean Township",
     "townDisplayName": "Ocean Township (Monmouth County)",
     "townWebsite": "http://www.oceantwp.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -4027,7 +4027,7 @@
   },
   "rec4InkkRQUW71ygI": {
     "id": "rec4InkkRQUW71ygI",
-    "townName": "Oceanport",
+    "townName": "Oceanport Borough",
     "townDisplayName": "Oceanport Borough",
     "townWebsite": "http://www.oceanportboro.com/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -4049,7 +4049,7 @@
   },
   "recqoWY5AdCehp3tn": {
     "id": "recqoWY5AdCehp3tn",
-    "townName": "Old Bridge",
+    "townName": "Old Bridge Township",
     "townDisplayName": "Old Bridge Township",
     "townWebsite": "http://www.oldbridge.com/",
     "countyId": "recdajeMj87TeTI46",
@@ -4071,7 +4071,7 @@
   },
   "recXr0GZOfW3nP1cx": {
     "id": "recXr0GZOfW3nP1cx",
-    "townName": "Oldmans",
+    "townName": "Oldmans Township",
     "townDisplayName": "Oldmans Township",
     "townWebsite": "http://www.oldmanstownship.com/",
     "countyId": "reck22XFkSQShI3w4",
@@ -4115,7 +4115,7 @@
   },
   "recpHTtb19zl98SUj": {
     "id": "recpHTtb19zl98SUj",
-    "townName": "Palmyra",
+    "townName": "Palmyra Borough",
     "townDisplayName": "Palmyra Borough",
     "townWebsite": "http://www.boroughofpalmyra.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -4148,7 +4148,7 @@
   },
   "recuxiVMorV4Hr3wz": {
     "id": "recuxiVMorV4Hr3wz",
-    "townName": "Parsippany-Troy Hills",
+    "townName": "Parsippany",
     "townDisplayName": "Parsippany",
     "townWebsite": "http://www.parsippany.net/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -4192,7 +4192,7 @@
   },
   "recNoTerI13Xnq3kG": {
     "id": "recNoTerI13Xnq3kG",
-    "townName": "Peapack & Gladstone",
+    "townName": "Peapack-Gladstone Borough",
     "townDisplayName": "Peapack-Gladstone Borough",
     "townWebsite": "http://www.peapack-gladstone-nj.gov/",
     "countyId": "receKwTMDenuBZXUW",
@@ -4203,7 +4203,7 @@
   },
   "recwFdGqKtfebie6C": {
     "id": "recwFdGqKtfebie6C",
-    "townName": "Pemberton borough",
+    "townName": "Pemberton Borough",
     "townDisplayName": "Pemberton Borough",
     "townWebsite": "http://www.pemberton-twp.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -4214,7 +4214,7 @@
   },
   "recF1D4JvC7cntbLp": {
     "id": "recF1D4JvC7cntbLp",
-    "townName": "Pemberton township",
+    "townName": "Pemberton Township",
     "townDisplayName": "Pemberton Township",
     "townWebsite": "https://www.pembertonborough.us/index.html",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -4225,7 +4225,7 @@
   },
   "recpEb4JoKFBlww4q": {
     "id": "recpEb4JoKFBlww4q",
-    "townName": "Pennington",
+    "townName": "Pennington Borough",
     "townDisplayName": "Pennington Borough",
     "townWebsite": "http://www.penningtonboro.org/",
     "countyId": "recm53ItGGbVqjp93",
@@ -4236,7 +4236,7 @@
   },
   "recm3pdDsXWf3xLUu": {
     "id": "recm3pdDsXWf3xLUu",
-    "townName": "Penns Grove",
+    "townName": "Penns Grove Borough",
     "townDisplayName": "Penns Grove Borough",
     "townWebsite": "http://www.boroughofpennsgrove.org/",
     "countyId": "reck22XFkSQShI3w4",
@@ -4247,7 +4247,7 @@
   },
   "recXIU2KevHY1ROVc": {
     "id": "recXIU2KevHY1ROVc",
-    "townName": "Pennsauken",
+    "townName": "Pennsauken Township",
     "townDisplayName": "Pennsauken Township",
     "townWebsite": "http://www.twp.pennsauken.nj.us/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -4302,7 +4302,7 @@
   },
   "recZxVCDLBN80Y4Ro": {
     "id": "recZxVCDLBN80Y4Ro",
-    "townName": "Pilesgrove",
+    "townName": "Pilesgrove Township",
     "townDisplayName": "Pilesgrove Township",
     "townWebsite": "http://www.pilesgrovenj.org/",
     "countyId": "reck22XFkSQShI3w4",
@@ -4313,7 +4313,7 @@
   },
   "recdp5QTJ08eCFPVu": {
     "id": "recdp5QTJ08eCFPVu",
-    "townName": "Pine Beach",
+    "townName": "Pine Beach Borough",
     "townDisplayName": "Pine Beach Borough",
     "townWebsite": "http://www.pinebeachborough.us/pinebeach.htm",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -4324,7 +4324,7 @@
   },
   "recivbyIQK42fDB8j": {
     "id": "recivbyIQK42fDB8j",
-    "townName": "Pine Hill",
+    "townName": "Pine Hill Borough",
     "townDisplayName": "Pine Hill Borough",
     "townWebsite": "http://www.pinehillboronj.com/default.htm",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -4335,7 +4335,7 @@
   },
   "recTqe4QJ5M5M0eLx": {
     "id": "recTqe4QJ5M5M0eLx",
-    "townName": "Pine Valley",
+    "townName": "Pine Valley Borough",
     "townDisplayName": "Pine Valley Borough",
     "townWebsite": "https://www.pvnj.org/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -4346,7 +4346,7 @@
   },
   "rec5Vhambjv9kpDNr": {
     "id": "rec5Vhambjv9kpDNr",
-    "townName": "Piscataway",
+    "townName": "Piscataway Township",
     "townDisplayName": "Piscataway Township",
     "townWebsite": "http://www.piscatawaynj.org/",
     "countyId": "recdajeMj87TeTI46",
@@ -4412,7 +4412,7 @@
   },
   "recdqSgNqWotUPJyW": {
     "id": "recdqSgNqWotUPJyW",
-    "townName": "Plumsted",
+    "townName": "Plumsted Township",
     "townDisplayName": "Plumsted Township",
     "townWebsite": "http://www.plumsted.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -4434,7 +4434,7 @@
   },
   "recpMioqfaqwLCMC6": {
     "id": "recpMioqfaqwLCMC6",
-    "townName": "Point Pleasant",
+    "townName": "Point Pleasant Beach",
     "townDisplayName": "Point Pleasant Beach",
     "townWebsite": "http://www.pointpleasantbeach.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -4445,7 +4445,7 @@
   },
   "recKoONCwGMSQIIIs": {
     "id": "recKoONCwGMSQIIIs",
-    "townName": "Point Pleasant Beach",
+    "townName": "Point Pleasant Borough",
     "townDisplayName": "Point Pleasant Borough",
     "townWebsite": "http://www.ptboro.com/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -4467,7 +4467,7 @@
   },
   "recs0MmThEEwzpJ1M": {
     "id": "recs0MmThEEwzpJ1M",
-    "townName": "Port Republic",
+    "townName": "Port Republic Borough",
     "townDisplayName": "Port Republic Borough",
     "townWebsite": "http://www.aclink.org/Admin/Main/Municipal.asp",
     "countyId": "rec7V2sr8kIdW8Rgi",
@@ -4489,7 +4489,7 @@
   },
   "rechhDWSyKJ0xxcNK": {
     "id": "rechhDWSyKJ0xxcNK",
-    "townName": "Prospect Park",
+    "townName": "Prospect Park Borough",
     "townDisplayName": "Prospect Park Borough",
     "townWebsite": "http://www.prospectpark.net/",
     "countyId": "rec400qca7WIdFiI8",
@@ -4544,7 +4544,7 @@
   },
   "recUNEdOoTzbuC05l": {
     "id": "recUNEdOoTzbuC05l",
-    "townName": "Raritan",
+    "townName": "Raritan Township",
     "townDisplayName": "Raritan Township",
     "townWebsite": "http://www.raritan-township.com/",
     "countyId": "receKwTMDenuBZXUW",
@@ -4555,7 +4555,7 @@
   },
   "rec9eX10AV4wrvxGT": {
     "id": "rec9eX10AV4wrvxGT",
-    "townName": "Raritan",
+    "townName": "Raritan Borough",
     "townDisplayName": "Raritan Borough",
     "townWebsite": "http://www.raritanboro.com/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -4566,7 +4566,7 @@
   },
   "recXPvG7l5b1l5L61": {
     "id": "recXPvG7l5b1l5L61",
-    "townName": "Readington",
+    "townName": "Readington Township",
     "townDisplayName": "Readington Township",
     "townWebsite": "http://www.readingtontwp.org/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -4588,7 +4588,7 @@
   },
   "recDlCboSaWeBLT3v": {
     "id": "recDlCboSaWeBLT3v",
-    "townName": "Ridgefield",
+    "townName": "Ridgefield Borough",
     "townDisplayName": "Ridgefield Borough",
     "townWebsite": "http://ridgefieldboro.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -4632,7 +4632,7 @@
   },
   "rec69wrOXa3Fl6FUj": {
     "id": "rec69wrOXa3Fl6FUj",
-    "townName": "River Edge",
+    "townName": "River Edge Borough",
     "townDisplayName": "River Edge Borough",
     "townWebsite": "http://www.riveredgenj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -4643,7 +4643,7 @@
   },
   "recUmom421EXKNimB": {
     "id": "recUmom421EXKNimB",
-    "townName": "River Vale",
+    "townName": "River Vale Township",
     "townDisplayName": "River Vale Township",
     "townWebsite": "http://www.rivervalenj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -4654,7 +4654,7 @@
   },
   "recM8W8HUe2PQZguk": {
     "id": "recM8W8HUe2PQZguk",
-    "townName": "Riverdale",
+    "townName": "Riverdale Borough",
     "townDisplayName": "Riverdale Borough",
     "townWebsite": "http://www.riverdalenj.gov/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -4665,7 +4665,7 @@
   },
   "recKGkQ0BhdHur2mT": {
     "id": "recKGkQ0BhdHur2mT",
-    "townName": "Riverside",
+    "townName": "Riverside Township",
     "townDisplayName": "Riverside Township",
     "townWebsite": "http://www.riversidetwp.org/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -4687,7 +4687,7 @@
   },
   "rectVgjVTI1BiAH8D": {
     "id": "rectVgjVTI1BiAH8D",
-    "townName": "Rochelle Park",
+    "townName": "Rochelle Park Township",
     "townDisplayName": "Rochelle Park Township",
     "townWebsite": "http://www.rochelleparknj.gov/",
     "countyId": "recMOGXjnbBPXilei",
@@ -4698,7 +4698,7 @@
   },
   "rec2LUdrLah81iT9j": {
     "id": "rec2LUdrLah81iT9j",
-    "townName": "Rockaway borough",
+    "townName": "Rockaway Borough",
     "townDisplayName": "Rockaway Borough",
     "townWebsite": "http://www.rockawayborough.com/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -4709,7 +4709,7 @@
   },
   "reckdxzTdoWQUkEGT": {
     "id": "reckdxzTdoWQUkEGT",
-    "townName": "Rockaway township",
+    "townName": "Rockaway Township",
     "townDisplayName": "Rockaway Township",
     "townWebsite": "http://www.rockawaytownship.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -4764,7 +4764,7 @@
   },
   "recJhZpPAlTesJeJw": {
     "id": "recJhZpPAlTesJeJw",
-    "townName": "Roselle",
+    "townName": "Roselle Borough",
     "townDisplayName": "Roselle Borough",
     "townWebsite": "http://www.boroughofroselle.com/",
     "countyId": "recz11YLnT3zufGyO",
@@ -4775,7 +4775,7 @@
   },
   "recLwy9sSFWbhyKoP": {
     "id": "recLwy9sSFWbhyKoP",
-    "townName": "Roselle Park",
+    "townName": "Roselle Park Borough",
     "townDisplayName": "Roselle Park Borough",
     "townWebsite": "http://www.rosellepark.net/",
     "countyId": "recz11YLnT3zufGyO",
@@ -4786,7 +4786,7 @@
   },
   "rec9KLKrLmAA2X8nz": {
     "id": "rec9KLKrLmAA2X8nz",
-    "townName": "Roxbury",
+    "townName": "Roxbury Township",
     "townDisplayName": "Roxbury Township",
     "townWebsite": "http://www.roxburynj.us/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -4808,7 +4808,7 @@
   },
   "recQQPLIOr0i3oHZv": {
     "id": "recQQPLIOr0i3oHZv",
-    "townName": "Runnemede",
+    "townName": "Runnemede Borough",
     "townDisplayName": "Runnemede Borough",
     "townWebsite": "http://www.runnemedenj.org/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -4852,7 +4852,7 @@
   },
   "recWUz0TSe1vhBld8": {
     "id": "recWUz0TSe1vhBld8",
-    "townName": "Salem",
+    "townName": "Salem City",
     "townDisplayName": "Salem City",
     "townWebsite": "http://www.salemcitynj.com/",
     "countyId": "reck22XFkSQShI3w4",
@@ -4896,7 +4896,7 @@
   },
   "recKL5BDCyTZGPTwc": {
     "id": "recKL5BDCyTZGPTwc",
-    "townName": "Sea Bright",
+    "townName": "Sea Bright Borough",
     "townDisplayName": "Sea Bright Borough",
     "townWebsite": "http://www.seabrightnj.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -4907,7 +4907,7 @@
   },
   "rec4GATXIwpuerXMy": {
     "id": "rec4GATXIwpuerXMy",
-    "townName": "Sea Girt",
+    "townName": "Sea Girt Borough",
     "townDisplayName": "Sea Girt Borough",
     "townWebsite": "http://www.seagirtboro.com/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -4962,7 +4962,7 @@
   },
   "rec4a5n0BodLvUOOF": {
     "id": "rec4a5n0BodLvUOOF",
-    "townName": "Shamong",
+    "townName": "Shamong Township",
     "townDisplayName": "Shamong Township",
     "townWebsite": "http://www.shamong.net/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -4973,7 +4973,7 @@
   },
   "recNPgS3qvned2Vr6": {
     "id": "recNPgS3qvned2Vr6",
-    "townName": "Shiloh",
+    "townName": "Shiloh Borough",
     "townDisplayName": "Shiloh Borough",
     "townWebsite": "http://www.co.cumberland.nj.us/content/173/211/809.aspx",
     "countyId": "recC95w1IwzEQlAun",
@@ -4984,7 +4984,7 @@
   },
   "recFNObyt5mqQCkhv": {
     "id": "recFNObyt5mqQCkhv",
-    "townName": "Ship Bottom",
+    "townName": "Ship Bottom Borough",
     "townDisplayName": "Ship Bottom Borough",
     "townWebsite": "http://www.shipbottom.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -4995,7 +4995,7 @@
   },
   "recZhQVxj4vCdsyng": {
     "id": "recZhQVxj4vCdsyng",
-    "townName": "Shrewsbury borough",
+    "townName": "Shrewsbury Borough",
     "townDisplayName": "Shrewsbury Borough",
     "townWebsite": "http://www.shrewsburyboro.com/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -5006,7 +5006,7 @@
   },
   "recuLtZt05oi5cpWF": {
     "id": "recuLtZt05oi5cpWF",
-    "townName": "Shrewsbury township",
+    "townName": "Shrewsbury Township",
     "townDisplayName": "Shrewsbury Township",
     "townWebsite": "https://www.townshipofshrewsbury.com/index.html",
     "countyId": "recCxjeByEuyaV3ap",
@@ -5017,7 +5017,7 @@
   },
   "recqc7q3kgDWYDmpN": {
     "id": "recqc7q3kgDWYDmpN",
-    "townName": "Somerdale",
+    "townName": "Somerdale Borough",
     "townDisplayName": "Somerdale Borough",
     "townWebsite": "http://www.somerdale-nj.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -5061,7 +5061,7 @@
   },
   "recnNoDpoGKlNDJ38": {
     "id": "recnNoDpoGKlNDJ38",
-    "townName": "South Bound Brook",
+    "townName": "South Bound Brook Borough",
     "townDisplayName": "South Bound Brook Borough",
     "townWebsite": "https://sbbnj.com/",
     "countyId": "receKwTMDenuBZXUW",
@@ -5083,7 +5083,7 @@
   },
   "recPkcd6cl5nB0dMH": {
     "id": "recPkcd6cl5nB0dMH",
-    "townName": "South Hackensack",
+    "townName": "South Hackensack Township",
     "townDisplayName": "South Hackensack Township",
     "townWebsite": "http://www.southhackensacknj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -5094,7 +5094,7 @@
   },
   "recsrowFNTcDqfIb3": {
     "id": "recsrowFNTcDqfIb3",
-    "townName": "South Harrison",
+    "townName": "South Harrison Township",
     "townDisplayName": "South Harrison Township",
     "townWebsite": "http://www.southharrison-nj.org/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -5116,7 +5116,7 @@
   },
   "recJPYNqBbUBfBRTA": {
     "id": "recJPYNqBbUBfBRTA",
-    "townName": "South River",
+    "townName": "South River Borough",
     "townDisplayName": "South River Borough",
     "townWebsite": "http://www.southrivernj.org/",
     "countyId": "recdajeMj87TeTI46",
@@ -5127,7 +5127,7 @@
   },
   "recPvWAEzpNW18TzO": {
     "id": "recPvWAEzpNW18TzO",
-    "townName": "Southampton",
+    "townName": "Southampton Township",
     "townDisplayName": "Southampton Township",
     "townWebsite": "http://www.southamptonnj.org./",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -5138,7 +5138,7 @@
   },
   "rec0xeEp7agrRGxw8": {
     "id": "rec0xeEp7agrRGxw8",
-    "townName": "Sparta",
+    "townName": "Sparta Township",
     "townDisplayName": "Sparta Township",
     "townWebsite": "http://www.spartanj.org/",
     "countyId": "recyYafT88fSnCICb",
@@ -5160,7 +5160,7 @@
   },
   "rec66L0kjwNkTW84L": {
     "id": "rec66L0kjwNkTW84L",
-    "townName": "Spring Lake Boro",
+    "townName": "Spring Lake",
     "townDisplayName": "Spring Lake",
     "townWebsite": "http://www.springlakeboro.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -5171,7 +5171,7 @@
   },
   "recpjL81eL6KvPXuP": {
     "id": "recpjL81eL6KvPXuP",
-    "townName": "Spring Lake Heights",
+    "townName": "Spring Lake Heights Borough",
     "townDisplayName": "Spring Lake Heights Borough",
     "townWebsite": "http://www.springlakehts.com/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -5204,7 +5204,7 @@
   },
   "recNLrKKVVD1ycAXG": {
     "id": "recNLrKKVVD1ycAXG",
-    "townName": "Stafford",
+    "townName": "Stafford Township",
     "townDisplayName": "Stafford Township",
     "townWebsite": "http://twp.stafford.nj.us/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -5215,7 +5215,7 @@
   },
   "reccVnpVXwBzykl7F": {
     "id": "reccVnpVXwBzykl7F",
-    "townName": "Stanhope",
+    "townName": "Stanhope Borough",
     "townDisplayName": "Stanhope Borough",
     "townWebsite": "http://stanhopenj.gov/",
     "countyId": "recyYafT88fSnCICb",
@@ -5226,7 +5226,7 @@
   },
   "recL2rU68Wyn8YqV1": {
     "id": "recL2rU68Wyn8YqV1",
-    "townName": "Stillwater",
+    "townName": "Stillwater Township",
     "townDisplayName": "Stillwater Township",
     "townWebsite": "http://www.stillwaternj.us/",
     "countyId": "recyYafT88fSnCICb",
@@ -5237,7 +5237,7 @@
   },
   "recbrzexzs8UOnJu2": {
     "id": "recbrzexzs8UOnJu2",
-    "townName": "Stockton",
+    "townName": "Stockton Borough",
     "townDisplayName": "Stockton Borough",
     "townWebsite": "http://www.stocktonboronj.us/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -5259,7 +5259,7 @@
   },
   "recCnlLf72gAGAwFH": {
     "id": "recCnlLf72gAGAwFH",
-    "townName": "Stow Creek",
+    "townName": "Stow Creek Township",
     "townDisplayName": "Stow Creek Township",
     "townWebsite": "http://www.stowcreektwp.com/",
     "countyId": "recC95w1IwzEQlAun",
@@ -5292,7 +5292,7 @@
   },
   "receZjCqizLw0LPqD": {
     "id": "receZjCqizLw0LPqD",
-    "townName": "Surf City",
+    "townName": "Sussex Borough",
     "townDisplayName": "Sussex Borough",
     "townWebsite": "https://surfcitynj.org/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -5303,7 +5303,7 @@
   },
   "recM1xfb7HdfY5QPU": {
     "id": "recM1xfb7HdfY5QPU",
-    "townName": "Sussex",
+    "townName": "Sussex County",
     "townDisplayName": "Sussex County",
     "townWebsite": "https://www.sussexboro.com/",
     "countyId": "recyYafT88fSnCICb",
@@ -5336,7 +5336,7 @@
   },
   "recgyUBNVRZYTAuAj": {
     "id": "recgyUBNVRZYTAuAj",
-    "townName": "Tavistock",
+    "townName": "Tavistock Borough",
     "townDisplayName": "Tavistock Borough",
     "townWebsite": "http://www.tavistocknj.org/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -5358,7 +5358,7 @@
   },
   "recoOA9aNgGRyOKMf": {
     "id": "recoOA9aNgGRyOKMf",
-    "townName": "Tenafly",
+    "townName": "Tenafly Borough",
     "townDisplayName": "Tenafly Borough",
     "townWebsite": "http://www.tenaflynj.org/",
     "countyId": "recMOGXjnbBPXilei",
@@ -5402,7 +5402,7 @@
   },
   "recQBYNm6QRgGfql4": {
     "id": "recQBYNm6QRgGfql4",
-    "townName": "Toms River South",
+    "townName": "Toms River",
     "townDisplayName": "Toms River",
     "townWebsite": "https://www.tomsrivertownship.com/",
     "countyId": "rec20ALIBtvKBu5yq",
@@ -5413,7 +5413,7 @@
   },
   "recQqepckhfNQRtVy": {
     "id": "recQqepckhfNQRtVy",
-    "townName": "Totowa",
+    "townName": "Totowa Borough",
     "townDisplayName": "Totowa Borough",
     "townWebsite": "http://www.totowanj.org/",
     "countyId": "rec400qca7WIdFiI8",
@@ -5446,7 +5446,7 @@
   },
   "recfmuLXdLZ8AXCfD": {
     "id": "recfmuLXdLZ8AXCfD",
-    "townName": "Union",
+    "townName": "Union Township",
     "townDisplayName": "Union Township (Hunterdon County)",
     "townWebsite": "http://www.uniontwp-hcnj.org/",
     "countyId": "recdEPnkwHpOqxZMQ",
@@ -5457,7 +5457,7 @@
   },
   "recgqogL6BCJGMBrx": {
     "id": "recgqogL6BCJGMBrx",
-    "townName": "Union",
+    "townName": "Union Township",
     "townDisplayName": "Union Township (Union County)",
     "townWebsite": "http://www.uniontownship.com/",
     "countyId": "recz11YLnT3zufGyO",
@@ -5468,7 +5468,7 @@
   },
   "recN7cDZB1X1dIXHX": {
     "id": "recN7cDZB1X1dIXHX",
-    "townName": "Union Beach",
+    "townName": "Union Beach Borough",
     "townDisplayName": "Union Beach Borough",
     "townWebsite": "http://www.unionbeach.net/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -5490,7 +5490,7 @@
   },
   "recyHFgs9yC3Acq8N": {
     "id": "recyHFgs9yC3Acq8N",
-    "townName": "Upper",
+    "townName": "Upper Township",
     "townDisplayName": "Upper Township",
     "townWebsite": "http://www.uppertownship.com/",
     "countyId": "recRpUZyjLdCqyQhW",
@@ -5501,7 +5501,7 @@
   },
   "recHwiXtHOcHQZ07Z": {
     "id": "recHwiXtHOcHQZ07Z",
-    "townName": "Upper Deerfield",
+    "townName": "Upper Deerfield Township",
     "townDisplayName": "Upper Deerfield Township",
     "townWebsite": "http://www.upperdeerfield.org/",
     "countyId": "recC95w1IwzEQlAun",
@@ -5512,7 +5512,7 @@
   },
   "recrXO7qlllGL6oKl": {
     "id": "recrXO7qlllGL6oKl",
-    "townName": "Upper Freehold",
+    "townName": "Upper Freehold Township",
     "townDisplayName": "Upper Freehold Township",
     "townWebsite": "http://www.uftnj.com/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -5523,7 +5523,7 @@
   },
   "recXCS62beedQBLLu": {
     "id": "recXCS62beedQBLLu",
-    "townName": "Upper Pittsgrove",
+    "townName": "Upper Pittsgrove Township",
     "townDisplayName": "Upper Pittsgrove Township",
     "townWebsite": "http://www.upperpittsgrovenj.org/",
     "countyId": "reck22XFkSQShI3w4",
@@ -5556,7 +5556,7 @@
   },
   "recPdoDVxlkTbnJTg": {
     "id": "recPdoDVxlkTbnJTg",
-    "townName": "Vernon",
+    "townName": "Vernon Township",
     "townDisplayName": "Vernon Township",
     "townWebsite": "http://www.vernontwp.com/",
     "countyId": "recyYafT88fSnCICb",
@@ -5633,7 +5633,7 @@
   },
   "recZj5MjmaSj5osdc": {
     "id": "recZj5MjmaSj5osdc",
-    "townName": "Wall",
+    "townName": "Wall Township",
     "townDisplayName": "Wall Township",
     "townWebsite": "http://www.wallnj.com/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -5655,7 +5655,7 @@
   },
   "recJ17h90WaCkphJL": {
     "id": "recJ17h90WaCkphJL",
-    "townName": "Walpack",
+    "townName": "Walpack Township",
     "townDisplayName": "Walpack Township",
     "townWebsite": "http://www.sussex.nj.us/Cit-e-Access/webpage.cfm?TID=7&TPID=1113",
     "countyId": "recyYafT88fSnCICb",
@@ -5666,7 +5666,7 @@
   },
   "recCv7wqenFw27X9h": {
     "id": "recCv7wqenFw27X9h",
-    "townName": "Wanaque",
+    "townName": "Wanaque Borough",
     "townDisplayName": "Wanaque Borough",
     "townWebsite": "http://www.wanaqueborough.com/",
     "countyId": "rec400qca7WIdFiI8",
@@ -5677,7 +5677,7 @@
   },
   "recsH13LsF6IugY1T": {
     "id": "recsH13LsF6IugY1T",
-    "townName": "Wantage",
+    "townName": "Wantage Township",
     "townDisplayName": "Wantage Township",
     "townWebsite": "http://wantagetwp.com/",
     "countyId": "recyYafT88fSnCICb",
@@ -5688,7 +5688,7 @@
   },
   "reczNQcZrrf7ZHTUL": {
     "id": "reczNQcZrrf7ZHTUL",
-    "townName": "Warren",
+    "townName": "Warren Township",
     "townDisplayName": "Warren Township",
     "townWebsite": "http://www.warrennj.org/",
     "countyId": "receKwTMDenuBZXUW",
@@ -5699,7 +5699,7 @@
   },
   "recbXhDMwcYfpFEFa": {
     "id": "recbXhDMwcYfpFEFa",
-    "townName": "Washington",
+    "townName": "Washington Township",
     "townDisplayName": "Washington Township (Mercer County)",
     "townWebsite": "http://www.robbinsville-twp.org/",
     "countyId": "recm53ItGGbVqjp93",
@@ -5710,7 +5710,7 @@
   },
   "rech9DeAKrXkowYCe": {
     "id": "rech9DeAKrXkowYCe",
-    "townName": "Washington",
+    "townName": "Washington Township",
     "townDisplayName": "Washington Township (Morris County)",
     "townWebsite": "http://www.washtwpmorris.org/",
     "countyId": "reclibuBTBhD9pUOV",
@@ -5721,7 +5721,7 @@
   },
   "reclyC6xNgMl4dHzy": {
     "id": "reclyC6xNgMl4dHzy",
-    "townName": "Washington",
+    "townName": "Washington Township",
     "townDisplayName": "Washington Township (Bergen County)",
     "townWebsite": "http://www.twpofwashington.us/",
     "countyId": "recMOGXjnbBPXilei",
@@ -5743,7 +5743,7 @@
   },
   "recmOP1671npCLk10": {
     "id": "recmOP1671npCLk10",
-    "townName": "Washington",
+    "townName": "Washington Township",
     "townDisplayName": "Washington Township (Gloucester County)",
     "townWebsite": "http://www.twp.washington.nj.us/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -5754,7 +5754,7 @@
   },
   "recoUNYHLwPt5yLqY": {
     "id": "recoUNYHLwPt5yLqY",
-    "townName": "Washington borough",
+    "townName": "Washington Borough",
     "townDisplayName": "Washington Borough (Warren County)",
     "townWebsite": "http://www.washingtonboro-nj.org/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -5765,7 +5765,7 @@
   },
   "rec2jhzY8m9wjZIYr": {
     "id": "rec2jhzY8m9wjZIYr",
-    "townName": "Washington township",
+    "townName": "Washington Township",
     "townDisplayName": "Washington Township (Warren County)",
     "townWebsite": "http://www.washington-twp-warren.org/",
     "countyId": "recFYqvDa9djnEtqd",
@@ -5787,7 +5787,7 @@
   },
   "recRXbj79V6Ol1aCs": {
     "id": "recRXbj79V6Ol1aCs",
-    "townName": "Waterford",
+    "townName": "Waterford Township",
     "townDisplayName": "Waterford Township",
     "townWebsite": "http://www.waterfordtwp.org/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -5798,7 +5798,7 @@
   },
   "recPGszoMU5eVc9Jf": {
     "id": "recPGszoMU5eVc9Jf",
-    "townName": "Wayne",
+    "townName": "Wayne Township",
     "townDisplayName": "Wayne Township",
     "townWebsite": "http://www.waynetownship.com/",
     "countyId": "rec400qca7WIdFiI8",
@@ -5820,7 +5820,7 @@
   },
   "reciSDKH4asQWIUh7": {
     "id": "reciSDKH4asQWIUh7",
-    "townName": "Wenonah",
+    "townName": "Wenonah Borough",
     "townDisplayName": "Wenonah Borough",
     "townWebsite": "http://www.wenonahnj.us/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -5853,7 +5853,7 @@
   },
   "recOmvXVGr00qyHmy": {
     "id": "recOmvXVGr00qyHmy",
-    "townName": "West Cape May",
+    "townName": "West Cape May Borough",
     "townDisplayName": "West Cape May Borough",
     "townWebsite": "http://www.westcapemay.us/",
     "countyId": "recRpUZyjLdCqyQhW",
@@ -5864,7 +5864,7 @@
   },
   "recnCcuqsMe82qQPa": {
     "id": "recnCcuqsMe82qQPa",
-    "townName": "West Deptford",
+    "townName": "West Deptford Township",
     "townDisplayName": "West Deptford Township",
     "townWebsite": "http://www.westdeptford.com/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -5875,7 +5875,7 @@
   },
   "recSkDZKmvRY6LGDd": {
     "id": "recSkDZKmvRY6LGDd",
-    "townName": "West Long Branch",
+    "townName": "West Long Branch Borough",
     "townDisplayName": "West Long Branch Borough",
     "townWebsite": "http://www.westlongbranch.org/",
     "countyId": "recCxjeByEuyaV3ap",
@@ -5886,7 +5886,7 @@
   },
   "rec1f2sjzJOmnez5w": {
     "id": "rec1f2sjzJOmnez5w",
-    "townName": "West Milford",
+    "townName": "West Milford Township",
     "townDisplayName": "West Milford Township",
     "townWebsite": "http://www.township.west-milford.nj.us/",
     "countyId": "rec400qca7WIdFiI8",
@@ -5919,7 +5919,7 @@
   },
   "recSRH4q9TlgNrg07": {
     "id": "recSRH4q9TlgNrg07",
-    "townName": "West Paterson",
+    "townName": "West Paterson Borough",
     "townDisplayName": "West Paterson Borough",
     "townWebsite": "http://www.westpaterson.com/",
     "countyId": "rec400qca7WIdFiI8",
@@ -5952,7 +5952,7 @@
   },
   "recnvLmArKHglNDbx": {
     "id": "recnvLmArKHglNDbx",
-    "townName": "Westampton",
+    "townName": "Westampton Township",
     "townDisplayName": "Westampton Township",
     "townWebsite": "http://www.westampton.com/",
     "countyId": "recEa5NUoM4oUc7jZ",
@@ -6018,7 +6018,7 @@
   },
   "recueHpvMiWlTSO8K": {
     "id": "recueHpvMiWlTSO8K",
-    "townName": "White",
+    "townName": "White Township",
     "townDisplayName": "White Township",
     "townWebsite": "http://www.co.warren.nj.us/mun/white.html",
     "countyId": "recFYqvDa9djnEtqd",
@@ -6040,7 +6040,7 @@
   },
   "recNSJ2eF6JGKUN4t": {
     "id": "recNSJ2eF6JGKUN4t",
-    "townName": "Wildwood Crest",
+    "townName": "Wildwood Crest Borough",
     "townDisplayName": "Wildwood Crest Borough",
     "townWebsite": "http://www.wildwoodcrest.org/",
     "countyId": "recRpUZyjLdCqyQhW",
@@ -6062,7 +6062,7 @@
   },
   "rec3uCG2Gdr6AGRfJ": {
     "id": "rec3uCG2Gdr6AGRfJ",
-    "townName": "Winfield",
+    "townName": "Winfield Township",
     "townDisplayName": "Winfield Township",
     "townWebsite": "http://www.winfield-nj.org/",
     "countyId": "recz11YLnT3zufGyO",
@@ -6073,7 +6073,7 @@
   },
   "rec4iPUHXZ1oP2rJV": {
     "id": "rec4iPUHXZ1oP2rJV",
-    "townName": "Winslow",
+    "townName": "Winslow Township",
     "townDisplayName": "Winslow Township (Camden County)",
     "townWebsite": "http://www.winslowtownship.com/",
     "countyId": "rec1zXKZ80Uh2RILs",
@@ -6095,7 +6095,7 @@
   },
   "rec104ZjWmkwh8oW1": {
     "id": "rec104ZjWmkwh8oW1",
-    "townName": "Woodbine",
+    "townName": "Woodbine Borough",
     "townDisplayName": "Woodbine Borough",
     "townWebsite": "http://www.boroughofwoodbine.net/",
     "countyId": "recRpUZyjLdCqyQhW",
@@ -6106,7 +6106,7 @@
   },
   "recCLqgUpvSRXHook": {
     "id": "recCLqgUpvSRXHook",
-    "townName": "Woodbridge",
+    "townName": "Woodbridge Township",
     "townDisplayName": "Woodbridge Township",
     "townWebsite": "http://www.twp.woodbridge.nj.us/",
     "countyId": "recdajeMj87TeTI46",
@@ -6128,7 +6128,7 @@
   },
   "recQ3MaNp26WnnesM": {
     "id": "recQ3MaNp26WnnesM",
-    "townName": "Woodbury Heights",
+    "townName": "Woodbury Heights Borough",
     "townDisplayName": "Woodbury Heights Borough",
     "townWebsite": "http://www.bwhnj.com/",
     "countyId": "recR39QqhSoQRE4iG",
@@ -6172,7 +6172,7 @@
   },
   "recv4B1Cfy6fsmhTq": {
     "id": "recv4B1Cfy6fsmhTq",
-    "townName": "Woodstown",
+    "townName": "Woodstown Borough",
     "townDisplayName": "Woodstown Borough",
     "townWebsite": "http://www.historicwoodstown.org/",
     "countyId": "reck22XFkSQShI3w4",
@@ -6183,7 +6183,7 @@
   },
   "recVTLfdvdZJGibeI": {
     "id": "recVTLfdvdZJGibeI",
-    "townName": "Woolwich",
+    "townName": "Woolwich Township",
     "townDisplayName": "Woolwich Township",
     "townWebsite": "http://www.woolwichtwp.org/",
     "countyId": "recR39QqhSoQRE4iG",

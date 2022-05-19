@@ -16,7 +16,7 @@ Airtable.configure({
 
 const base = Airtable.base(airtableBaseId);
 
-const outPath = `${process.cwd()}/lib/static/records/municipalities.json`;
+const outPath = `${process.cwd()}/src/lib/static/records/municipalities.json`;
 
 const saveRecords = async () => {
   const records = (await airtableSelectAll())
