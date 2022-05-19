@@ -1,4 +1,4 @@
-import { SignUpModalWrapper } from "@/components/auth/SignUpModal";
+import { SignUpModalWrapper } from "@/components/auth/SignUpModalWrapper";
 import { Content } from "@/components/Content";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CheckStatus } from "@/components/tasks/CheckStatus";

@@ -29,6 +29,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 const generateTestUserData = (overrides: Partial<ProfileData>) =>
   generateUserData({
     profileData: generateProfileData({
+      hasExistingBusiness: false,
       ...overrides,
     }),
     formProgress: "UNSTARTED",
@@ -91,7 +92,7 @@ describe("onboarding - starting a business", () => {
 
   describe("page 2", () => {
     it("prevents user from moving after Step 2 if you have not selected an industry", async () => {
-      const userData = generateTestUserData({ hasExistingBusiness: false, industryId: undefined });
+      const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       act(() => page.clickNext());
@@ -101,7 +102,7 @@ describe("onboarding - starting a business", () => {
     });
 
     it("allows user to move past Step 2 if you have selected an industry", async () => {
-      const userData = generateTestUserData({ hasExistingBusiness: false, industryId: undefined });
+      const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       page.selectByText("Industry", "Any Other Business Type");
@@ -113,7 +114,7 @@ describe("onboarding - starting a business", () => {
 
   describe("page 3", () => {
     it("prevents user from moving after Step 3 if you have not selected a legal structure", async () => {
-      const userData = generateTestUserData({ hasExistingBusiness: false, legalStructureId: undefined });
+      const userData = generateTestUserData({ legalStructureId: undefined });
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
       act(() => page.clickNext());
@@ -123,7 +124,7 @@ describe("onboarding - starting a business", () => {
     });
 
     it("allows user to move past Step 3 if you have selected a legal structure", async () => {
-      const userData = generateTestUserData({ hasExistingBusiness: false, legalStructureId: undefined });
+      const userData = generateTestUserData({ legalStructureId: undefined });
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
       page.chooseRadio("general-partnership");
@@ -134,7 +135,7 @@ describe("onboarding - starting a business", () => {
 
   describe("page 4", () => {
     it("prevents user from moving after Step 4 if you have not selected a location", async () => {
-      const userData = generateTestUserData({ hasExistingBusiness: false, municipality: undefined });
+      const userData = generateTestUserData({ municipality: undefined });
       useMockRouter({ isReady: true, query: { page: "4" } });
       const newark = generateMunicipality({ displayName: "Newark" });
       const { page } = renderPage({ municipalities: [newark], userData });
@@ -147,7 +148,7 @@ describe("onboarding - starting a business", () => {
     });
 
     it("allows user to move past Step 4 if you have selected a location", async () => {
-      const userData = generateTestUserData({ hasExistingBusiness: false, municipality: undefined });
+      const userData = generateTestUserData({ municipality: undefined });
       useMockRouter({ isReady: true, query: { page: "4" } });
       const newark = generateMunicipality({ displayName: "Newark" });
       const { page } = renderPage({ municipalities: [newark], userData });

@@ -6,7 +6,7 @@ interface ABStorage {
   setExperience: (abExperience: ABExperience) => void;
 }
 
-export const abExperiencePrefix = "$navigatorABExperience$";
+const abExperiencePrefix = "$navigatorABExperience$";
 
 export const ABStorageFactory = (): ABStorage => {
   const browserStorage = BrowserStorageFactory("local");

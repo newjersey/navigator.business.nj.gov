@@ -1,4 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
+import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -6,17 +7,13 @@ import { SectionType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
-import React, { createContext, ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 
 interface Props {
   sectionType: SectionType;
   children: ReactNode;
   mini?: boolean;
 }
-
-export const SectionAccordionContext = createContext({
-  isOpen: false,
-});
 
 export const SectionAccordion = (props: Props): ReactElement => {
   const { userData, update } = useUserData();

@@ -11,7 +11,7 @@ import { FormationMember } from "@businessnjgovnavigator/shared/";
 import { IconButton, useMediaQuery } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
 
-export const formatAddress = (member: FormationMember) =>
+const formatAddress = (member: FormationMember) =>
   `${member.addressLine1}, ${member.addressLine2 ? `${member.addressLine2},` : ""} ${member.addressCity}, ${
     member.addressState
   } ${member.addressZipCode}`;
