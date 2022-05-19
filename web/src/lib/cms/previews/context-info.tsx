@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ContextInfoElement } from "@/components/ContextualInfoPanel";
+import { ContextInfoElement } from "@/components/ContextInfoElement";
 import { useEffect, useRef } from "react";
+
 type Props = {
   entry?: any;
   window: Window;
