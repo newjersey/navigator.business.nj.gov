@@ -5,6 +5,9 @@ import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { AuthContext } from "@/contexts/authContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -14,7 +17,6 @@ import { loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import {
-  createEmptyUserDisplayContent,
   createProfileFieldErrorMap,
   FlowType,
   LoadDisplayContent,
@@ -22,7 +24,6 @@ import {
   ProfileError,
   ProfileFieldErrorMap,
   ProfileFields,
-  UserContentType,
   UserDisplayContent,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -34,7 +35,6 @@ import {
   scrollToTop,
   templateEval,
 } from "@/lib/utils/helpers";
-import { AuthContext, RoadmapContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
@@ -53,7 +53,6 @@ import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, {
-  createContext,
   FormEvent,
   ReactElement,
   useCallback,
@@ -69,36 +68,6 @@ interface Props {
   displayContent: LoadDisplayContent;
   municipalities: Municipality[];
 }
-
-interface ProfileDataState {
-  page?: number;
-  profileData: ProfileData;
-  user?: BusinessUser;
-  displayContent: UserDisplayContent;
-  flow?: UserContentType;
-  municipalities: Municipality[];
-}
-
-interface ProfileDataContextType {
-  state: ProfileDataState;
-  setProfileData: (profileData: ProfileData) => void;
-  setUser: (user: BusinessUser) => void;
-  onBack: () => void;
-}
-
-export const ProfileDataContext = createContext<ProfileDataContextType>({
-  state: {
-    page: 1,
-    profileData: createEmptyProfileData(),
-    user: createEmptyUser(ABStorageFactory().getExperience()),
-    flow: "STARTING",
-    displayContent: createEmptyUserDisplayContent(),
-    municipalities: [],
-  },
-  setProfileData: () => {},
-  setUser: () => {},
-  onBack: () => {},
-});
 
 const OnboardingPage = (props: Props): ReactElement => {
   const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);

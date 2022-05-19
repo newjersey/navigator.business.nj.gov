@@ -3,10 +3,10 @@
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { AuthAlertContext } from "@/pages/_app";
 import { FormControlLabel } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { CSSProperties, ReactElement, useContext } from "react";

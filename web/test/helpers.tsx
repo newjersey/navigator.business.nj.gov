@@ -1,14 +1,11 @@
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { AuthContext } from "@/contexts/authContext";
+import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
+import { RoadmapContext } from "@/contexts/roadmapContext";
+import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
-import {
-  AuthAlertContext,
-  AuthContext,
-  ContextualInfo,
-  ContextualInfoContext,
-  RoadmapContext,
-  UserDataErrorContext,
-} from "@/pages/_app";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import os from "os";

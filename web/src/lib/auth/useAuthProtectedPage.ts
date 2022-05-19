@@ -1,6 +1,7 @@
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { AuthAlertContext, AuthContext } from "@/pages/_app";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 

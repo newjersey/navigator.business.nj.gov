@@ -1,14 +1,14 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext, useState } from "react";
 
 export const BusinessPurpose = (): ReactElement => {
   const MAX_CHARS = 300;
-  const { state, setFormationFormData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [isExpanded, setIsExpanded] = useState<boolean>(!!state.formationFormData.businessPurpose);
 
   const handleButtonClick = (): void => {

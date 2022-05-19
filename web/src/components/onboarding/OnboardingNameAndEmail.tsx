@@ -1,7 +1,7 @@
 import { GenericTextField } from "@/components/GenericTextField";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
-import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";

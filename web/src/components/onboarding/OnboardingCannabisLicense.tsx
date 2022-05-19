@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { ProfileDataContext } from "@/pages/onboarding";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 

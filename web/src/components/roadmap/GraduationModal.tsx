@@ -4,6 +4,7 @@ import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDat
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
@@ -16,7 +17,6 @@ import {
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { ProfileDataContext } from "@/pages/onboarding";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   createEmptyProfileData,

@@ -1,6 +1,6 @@
+import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { AuthAlertContext } from "@/pages/_app";
 import { Checkbox, CheckboxProps } from "@mui/material";
 import React, { useContext } from "react";
 

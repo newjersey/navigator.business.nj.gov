@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationChooseDocuments } from "@/components/tasks/business-formation/payment/FormationChooseDocuments";
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/payment/FormationChooseNotifications";
 import { PaymentTypeTable } from "@/components/tasks/business-formation/payment/PaymentTypeTable";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 export const PaymentSection = (): ReactElement => {
-  const { state, setErrorMap, setTab, setShowResponseAlert } = useContext(FormationContext);
+  const { state, setErrorMap, setTab, setShowResponseAlert } = useContext(BusinessFormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const { userData, update } = useUserData();
   const router = useRouter();

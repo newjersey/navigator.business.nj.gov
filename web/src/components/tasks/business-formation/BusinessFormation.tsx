@@ -2,20 +2,15 @@ import { Content } from "@/components/Content";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
-import { businessFormationTabs } from "@/components/tasks/business-formation/businessFormationTabs";
+import { BusinessFormationTabs } from "@/components/tasks/business-formation/BusinessFormationTabs";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
-import {
-  createEmptyFormationDisplayContent,
-  FormationDisplayContent,
-  FormationFieldErrorMap,
-  FormationFields,
-  Task,
-} from "@/lib/types/types";
+import { FormationDisplayContent, FormationFieldErrorMap, FormationFields, Task } from "@/lib/types/types";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyFormationFormData,
@@ -26,7 +21,8 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { useRouter } from "next/router";
-import React, { createContext, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
+import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
 interface Props {
   task: Task;
@@ -41,38 +37,6 @@ const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
     acc[field] = { invalid: false };
     return acc;
   }, {} as FormationFieldErrorMap);
-
-interface FormationState {
-  tab: number;
-  formationFormData: FormationFormData;
-  displayContent: FormationDisplayContent;
-  municipalities: Municipality[];
-  errorMap: FormationFieldErrorMap;
-  showResponseAlert: boolean;
-}
-
-interface FormationContextType {
-  state: FormationState;
-  setFormationFormData: (formationFormData: FormationFormData) => void;
-  setErrorMap: (errorMap: FormationFieldErrorMap) => void;
-  setTab: React.Dispatch<React.SetStateAction<number>>;
-  setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const FormationContext = createContext<FormationContextType>({
-  state: {
-    tab: 0,
-    formationFormData: createEmptyFormationFormData(),
-    displayContent: createEmptyFormationDisplayContent(),
-    municipalities: [],
-    errorMap: createFormationFieldErrorMap(),
-    showResponseAlert: false,
-  },
-  setFormationFormData: () => {},
-  setErrorMap: () => {},
-  setTab: () => {},
-  setShowResponseAlert: () => {},
-});
 
 export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
@@ -92,7 +56,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
       ? getCurrentDateFormatted("YYYY-MM-DD")
       : date;
-  const stepNames = businessFormationTabs.map((value) => value.section);
+  const stepNames = BusinessFormationTabsConfiguration.map((value) => value.name);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -142,7 +106,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   }
 
   return (
-    <FormationContext.Provider
+    <BusinessFormationContext.Provider
       value={{
         state: {
           tab: tab,
@@ -177,9 +141,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
           <hr className="margin-bottom-4" />
         </div>
         <div data-testid="formation-form" className="fg1 flex flex-column space-between">
-          {businessFormationTabs[tab].component}
+          {BusinessFormationTabs[tab].component}
         </div>
       </div>
-    </FormationContext.Provider>
+    </BusinessFormationContext.Provider>
   );
 };

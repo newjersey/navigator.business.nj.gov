@@ -1,7 +1,7 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { LicenseSearchError } from "@/components/tasks/LicenseTask";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { LicenseSearchError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";

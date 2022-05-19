@@ -1,10 +1,10 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
   FormationErrorTypes,
@@ -18,7 +18,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const ContactsSection = (): ReactElement => {
-  const { state, setErrorMap, setTab } = useContext(FormationContext);
+  const { state, setErrorMap, setTab } = useContext(BusinessFormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const [showSignatureError, setShowSignatureError] = useState<boolean>(false);
 

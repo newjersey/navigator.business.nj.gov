@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import { ProfileDataContext } from "@/pages/onboarding";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import { TextFieldProps } from "@mui/material";
 import React, { ReactElement, useContext } from "react";

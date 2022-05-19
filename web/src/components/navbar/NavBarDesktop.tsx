@@ -1,11 +1,12 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { AuthContext } from "@/contexts/authContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
-import { AuthAlertContext, AuthContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import Link from "next/link";

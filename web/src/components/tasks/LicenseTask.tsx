@@ -7,7 +7,7 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
+import { LicenseSearchError, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -22,8 +22,6 @@ interface Props {
 
 const APPLICATION_TAB_INDEX = 0;
 const STATUS_TAB_INDEX = 1;
-
-export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
 export const LicenseTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();

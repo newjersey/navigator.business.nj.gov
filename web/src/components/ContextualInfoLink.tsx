@@ -1,7 +1,7 @@
 import { Button } from "@/components/njwds-extended/Button";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
 import analytics from "@/lib/utils/analytics";
-import { ContextualInfoContext } from "@/pages/_app";
 import React, { ReactElement, useContext, useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

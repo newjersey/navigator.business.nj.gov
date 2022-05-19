@@ -2,8 +2,8 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FormationFields } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -11,7 +11,7 @@ import { useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useContext } from "react";
 
 export const Signatures = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const addAdditionalSignerField = () => {

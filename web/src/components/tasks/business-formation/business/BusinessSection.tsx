@@ -2,8 +2,8 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessPurpose } from "@/components/tasks/business-formation/business/BusinessPurpose";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
 import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -13,7 +13,7 @@ import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 export const BusinessSection = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap, setTab } = useContext(FormationContext);
+  const { state, setFormationFormData, setErrorMap, setTab } = useContext(BusinessFormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const { userData, update } = useUserData();
 

@@ -1,9 +1,9 @@
 import { Button } from "@/components/njwds-extended/Button";
+import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSignOut } from "@/lib/auth/signinHelper";
 import analytics from "@/lib/utils/analytics";
-import { AuthContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext } from "react";

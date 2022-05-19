@@ -22,6 +22,9 @@ import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { RoadmapContext } from "@/contexts/roadmapContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -39,8 +42,6 @@ import {
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getSectionCompletion, OnboardingStatusLookup, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { ProfileDataContext } from "@/pages/onboarding";
-import { AuthAlertContext, RoadmapContext } from "@/pages/_app";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   createEmptyProfileData,

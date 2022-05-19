@@ -1,8 +1,9 @@
+import { AuthContext } from "@/contexts/authContext";
+import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import * as api from "@/lib/api-client/apiClient";
 import { postUserData } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { UserDataError } from "@/lib/types/types";
-import { AuthContext, UserDataErrorContext } from "@/pages/_app";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import { useContext, useEffect } from "react";
 import useSWR from "swr";

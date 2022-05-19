@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { GenericTextField } from "@/components/GenericTextField";
 import { StateDropdown } from "@/components/StateDropdown";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyFormationMember, FormationMember, Municipality } from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const MembersModal = (props: Props): ReactElement => {
-  const { state, setFormationFormData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [useAgentAddress, setUseAgentAddress] = useState<boolean>(false);
   const [memberData, setMemberData] = useState<FormationMember>(createEmptyFormationMember());
 

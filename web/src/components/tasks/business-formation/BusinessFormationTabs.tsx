@@ -3,22 +3,22 @@ import { ContactsSection } from "@/components/tasks/business-formation/contacts/
 import { BusinessNameSection } from "@/components/tasks/business-formation/name/BusinessNameSection";
 import { PaymentSection } from "@/components/tasks/business-formation/payment/PaymentSection";
 import { ReviewSection } from "@/components/tasks/business-formation/review/ReviewSection";
-import { businessFormationTabsNames } from "@/lib/types/types";
 import React, { ReactElement } from "react";
+import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
-export const businessFormationTabs: { component: ReactElement; section: businessFormationTabsNames }[] = [
+export const BusinessFormationTabs: { component: ReactElement; section: string }[] = [
   {
     component: <BusinessNameSection />,
-    section: "Name",
+    section: BusinessFormationTabsConfiguration[0].name,
   },
   {
     component: <BusinessSection />,
-    section: "Business",
+    section: BusinessFormationTabsConfiguration[1].name,
   },
   {
     component: <ContactsSection />,
-    section: "Contacts",
+    section: BusinessFormationTabsConfiguration[2].name,
   },
-  { component: <ReviewSection />, section: "Review" },
-  { component: <PaymentSection />, section: "Billing" },
+  { component: <ReviewSection />, section: BusinessFormationTabsConfiguration[3].name },
+  { component: <PaymentSection />, section: BusinessFormationTabsConfiguration[4].name },
 ];

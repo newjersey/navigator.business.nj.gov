@@ -2,8 +2,8 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
-import { FormationContext } from "@/components/tasks/business-formation/BusinessFormation";
 import { MembersModal } from "@/components/tasks/business-formation/contacts/MembersModal";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -17,7 +17,7 @@ export const formatAddress = (member: FormationMember) =>
   } ${member.addressZipCode}`;
 
 export const Members = (): ReactElement => {
-  const { state, setFormationFormData } = useContext(FormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [editIndex, setEditIndex] = useState<number | undefined>(undefined);
   const [alert, setAlert] = useState<boolean | undefined>(undefined);
