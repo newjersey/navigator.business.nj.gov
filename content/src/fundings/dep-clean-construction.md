@@ -22,7 +22,7 @@ NJ Clean Construction Program installs pollution control devices or replaces qua
 
 ---
 ### Eligibility
-* Businesses or non-profits must own non-road construction equipment
+* Businesses or non-profits must own the non-road construction equipment
 * Equipment must be used a minimum of 50% of the time in New Jersey for a current or future construction project in New Jersey
 * Equipment cannot be planned to go out of use in the next 5 years
 * Priority is given to urban areas, high frequency of use, and older models
