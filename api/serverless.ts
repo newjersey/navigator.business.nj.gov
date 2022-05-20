@@ -25,6 +25,7 @@ const formationApiBaseUrl = process.env.FORMATION_API_BASE_URL || "";
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
 const airtableUserResearchBaseId = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
 const airtableBaseUrl = process.env.AIRTABLE_BASE_URL || "";
+const airtableFeedbackBaseId = process.env.AIRTABLE_FEEDBACK_BASE_ID || "";
 
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
@@ -133,6 +134,7 @@ const serverlessConfiguration: AWS = {
       GOV_DELIVERY_URL_QUESTION_ID: govDeliveryQuestionId,
       AIRTABLE_API_KEY: airtableApiKey,
       AIRTABLE_USER_RESEARCH_BASE_ID: airtableUserResearchBaseId,
+      AIRTABLE_FEEDBACK_BASE_ID: airtableFeedbackBaseId,
       AIRTABLE_BASE_URL: airtableBaseUrl,
       FORMATION_API_ACCOUNT: formationApiAccount,
       FORMATION_API_KEY: formationApiKey,

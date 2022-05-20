@@ -286,6 +286,10 @@ module.exports = {
       from: { path: "context" },
       to: { path: "lib" },
     },
+    {
+      from: {},
+      to: { path: "ua-parser-js" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */

@@ -36,7 +36,18 @@
     "betaModalFeatureRequestButtonText": "Request a Feature",
     "betaMainText": "This site is in beta.",
     "betaModalTitle": "Let us know what you think",
-    "betaModalButtonText": "Share your feedback!"
+    "betaModalButtonText": "Share your feedback!",
+    "featureRequestModalHeadingText": "Request a Feature",
+    "featureRequestModalBodyText": "**How can we improve the Navigator?**",
+    "featureRequestModalSecondBodyText": "Describe below the information or feature you are looking for.",
+    "featureRequestModalPlaceholderText": "Start typing here...",
+    "featureRequestModalInlineErrorText": "This field is required.",
+    "featureRequestModalSubmitButtonText": "Submit",
+    "featureRequestModalCancelButtonText": "Cancel",
+    "successfulSubmissionModalHeadingText": "Thank you!",
+    "successfulSubmissionModalBodyText": "Your request has been submitted.",
+    "successfulSubmissionModalButtonText": "Submit another request",
+    "unsuccessfulSubmissionAlertText": "There was an error. Please try again or email your issue to xyz@xyz.gov."
   },
   "businessFormationDefaults": {
     "membersExpandText": "Expand",

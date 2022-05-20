@@ -1,4 +1,5 @@
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
+import { FeedbackRequest } from "@shared/feedbackRequest";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
@@ -39,6 +40,10 @@ export interface LicenseStatusClient {
 
 export interface UserTestingClient {
   add: (user: BusinessUser) => Promise<UserTestingResponse>;
+}
+
+export interface FeedbackClient {
+  create: (feedbackRequest: FeedbackRequest, userData: UserData) => Promise<boolean>;
 }
 
 export interface SelfRegClient {

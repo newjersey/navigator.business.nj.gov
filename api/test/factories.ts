@@ -7,6 +7,7 @@ import {
   UserTestingResponse,
 } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "@shared/dateHelpers";
+import { FeedbackRequest } from "@shared/feedbackRequest";
 import {
   AllBusinessSuffixes,
   BusinessSuffix,
@@ -329,4 +330,15 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
 export const randomBusinessSuffix = (): BusinessSuffix => {
   const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);
   return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
+};
+
+export const generateFeedbackRequest = (overrides: Partial<FeedbackRequest>): FeedbackRequest => {
+  return {
+    detail: `some-detail-${randomInt()}`,
+    pageOfRequest: `some-page-of-request-${randomInt()}`,
+    device: `some-device-${randomInt()}`,
+    browser: `some-browser-${randomInt()}`,
+    screenWidth: `some-screen-width-${randomInt()}`,
+    ...overrides,
+  };
 };
