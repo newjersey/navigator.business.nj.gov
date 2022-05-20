@@ -1,3 +1,10 @@
+## [3.8.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.8.0...v3.8.1) (2022-05-20)
+
+
+### Bug Fixes
+
+* enable business purpose and provisions for llc formation ([90b8151](https://github.com/newjersey/navigator.business.nj.gov/commit/90b81512888b296252d62e3e90423e96ac5a00a9))
+
 # [3.8.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.7.0...v3.8.0) (2022-05-19)
 
 
