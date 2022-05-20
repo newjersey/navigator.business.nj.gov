@@ -27,4 +27,4 @@ The UST Fund provides financial assistance in the form of loans and grants to el
 
 >**Benefits**
 >* Grant recipients can receive up to $500,000 per site in a Metropolitan area and up to $1 million per site if the project is located in a Suburban area
->* Loan recipients will not exceed $2 million in an urban area, or not exceeding $3 million if the project site is located in suburban area
+>* Loan recipients will not exceed $2 million in an urban area, or not exceed $3 million if the project site is located in a suburban area
