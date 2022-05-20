@@ -48,6 +48,59 @@ collections:
                   name: betaModalFeatureRequestButtonText,
                   widget: string,
                 }
+
+              - { label: Feature Request Modal - Title, name: featureRequestModalHeadingText, widget: string }
+              - {
+                  label: Feature Request Modal - First Question,
+                  name: featureRequestModalBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Feature Request Modal - Additional Text,
+                  name: featureRequestModalSecondBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Feature Request Modal - Input Placeholder Text,
+                  name: featureRequestModalPlaceholderText,
+                  widget: string,
+                }
+              - {
+                  label: Feature Request Modal - Input Error Text,
+                  name: featureRequestModalInlineErrorText,
+                  widget: string,
+                }
+              - {
+                  label: Feature Request Modal - Submit Button Text,
+                  name: featureRequestModalSubmitButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Feature Request Modal - Cancel Button Text,
+                  name: featureRequestModalCancelButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Successful Submission Modal - Title,
+                  name: successfulSubmissionModalHeadingText,
+                  widget: string,
+                }
+              - {
+                  label: Successful Submission Modal - Body Text,
+                  name: successfulSubmissionModalBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Successful Submission Modal - Back To Beta Modal Button Text,
+                  name: successfulSubmissionModalButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Unsuccessful Submission Alert Text,
+                  name: unsuccessfulSubmissionAlertText,
+                  widget: string,
+                }
+
           - label: Business Formation Defaults
             name: businessFormationDefaults
             collapsed: true

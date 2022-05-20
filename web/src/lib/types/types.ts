@@ -678,3 +678,5 @@ export type NaicsCodeObject = {
 };
 
 export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
+
+export type FeedbackRequestDialogNames = "Select Feedback" | "Feature Request" | "Request Submitted";

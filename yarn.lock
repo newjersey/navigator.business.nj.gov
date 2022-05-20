@@ -3634,6 +3634,7 @@ __metadata:
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
     "@types/testing-library__jest-dom": 5.14.3
+    "@types/ua-parser-js": ^0.7.36
     "@types/uuid": 8.3.4
     "@types/webpack-node-externals": 2.5.3
     "@types/xml2js": 0.4.11
@@ -3722,6 +3723,7 @@ __metadata:
     tsconfig-paths: 4.0.0
     tsconfig-paths-webpack-plugin: 3.5.2
     typescript: 4.6.4
+    ua-parser-js: 1.0.2
     unified: 10.1.2
     uuid: 8.3.2
     webpack: 5.72.1
@@ -3807,6 +3809,7 @@ __metadata:
     "@types/react-swipeable-views": 0.13.1
     "@types/react-transition-group": 4.4.4
     "@types/testing-library__jest-dom": 5.14.3
+    "@types/ua-parser-js": ^0.7.36
     "@typescript-eslint/eslint-plugin": 5.25.0
     "@typescript-eslint/parser": 5.25.0
     airtable: 0.11.4
@@ -3866,6 +3869,7 @@ __metadata:
     ts-loader: 9.3.0
     ts-node: 10.7.0
     typescript: 4.6.4
+    ua-parser-js: 1.0.2
     unified: 10.1.2
     webpack: 5.72.1
   languageName: unknown
@@ -6753,8 +6757,8 @@ __metadata:
   linkType: hard
 
 "@serverless/utils@npm:^6.0.3, @serverless/utils@npm:^6.3.0":
-  version: 6.5.0
-  resolution: "@serverless/utils@npm:6.5.0"
+  version: 6.6.0
+  resolution: "@serverless/utils@npm:6.6.0"
   dependencies:
     archive-type: ^4.0.0
     chalk: ^4.1.2
@@ -6788,7 +6792,7 @@ __metadata:
     uni-global: ^1.0.0
     uuid: ^8.3.2
     write-file-atomic: ^4.0.1
-  checksum: 8a35da5f95167106409fde7fef0a28d73168e23fa2db3b2b3ee39bf9de5a634a9b62fce79ea147667780f6640d2a6089e4a9e87613429cebba173a265b837c71
+  checksum: 659154f2053fa15afecaab8e71aaee345884623126f907652155ee849e05f9ddd254b53473867e79c6a0441a47e5561f922fdcaba8e42976e66cce0e814c8d40
   languageName: node
   linkType: hard
 
@@ -8799,9 +8803,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*, @types/node@npm:>=12, @types/node@npm:>=6":
-  version: 17.0.34
-  resolution: "@types/node@npm:17.0.34"
-  checksum: eb9a640ab85b62e8f7b9db1f19b674cc4ff49b94d55085ab6c28c997dbe90356631c4df484fe686082c938bfc6fb02c9e85eb805d1415dfe6de7e31f47a09a70
+  version: 17.0.35
+  resolution: "@types/node@npm:17.0.35"
+  checksum: 7a24946ae7fd20267ed92466384f594e448bfb151081158d565cc635d406ecb29ea8fb85fcd2a1f71efccf26fb5bd3c6f509bde56077eb8b832b847a6664bc62
   languageName: node
   linkType: hard
 
@@ -9074,6 +9078,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ua-parser-js@npm:^0.7.36":
+  version: 0.7.36
+  resolution: "@types/ua-parser-js@npm:0.7.36"
+  checksum: 8c24d4dc12ed1b8b98195838093391c358c81bf75e9cae0ecec8f7824b441e069daaa17b974a3e257172caddb671439f0c0b44bf43bfcf409b7a574a25aab948
+  languageName: node
+  linkType: hard
+
 "@types/uglify-js@npm:*":
   version: 3.13.2
   resolution: "@types/uglify-js@npm:3.13.2"
@@ -9119,9 +9130,9 @@ __metadata:
   linkType: hard
 
 "@types/webpack-env@npm:^1.16.0":
-  version: 1.16.4
-  resolution: "@types/webpack-env@npm:1.16.4"
-  checksum: 97554238364dae6b7369f9e6d409c7eab4b0235f99b16c69e7458afbb9c29cde128b3fd3a79a14b9bbb8b09d9f0ba377b51cc040f0a2bd2c8eddaf22657136be
+  version: 1.17.0
+  resolution: "@types/webpack-env@npm:1.17.0"
+  checksum: 9ad4d208c4429c9427191d1f4c92e4c43e530384c17a6bc298acb89003fc47fcde1d8372e50acefa3061e9100e57fd9d616e96def875afd06c0c2afe508f298e
   languageName: node
   linkType: hard
 
@@ -22498,13 +22509,13 @@ __metadata:
   linkType: hard
 
 "mdast-util-find-and-replace@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "mdast-util-find-and-replace@npm:2.1.0"
+  version: 2.2.0
+  resolution: "mdast-util-find-and-replace@npm:2.2.0"
   dependencies:
     escape-string-regexp: ^5.0.0
     unist-util-is: ^5.0.0
-    unist-util-visit-parents: ^4.0.0
-  checksum: 2df955899edb71fdd9f09a639572b281ec6e9be1533469cdbd7f1f16232a576adbd423f914182684f9516897143a5a797c45182848c0f83807d2c30a582a3c03
+    unist-util-visit-parents: ^5.0.0
+  checksum: 1ca772fcecc07a1c61c115df1185b4454c830f7f5c7c5bcf34957af58af6b93c355c6d324afa8f6de33c4ad1a338e426ff391ffb7e4686a6deeae091a4c0eeaa
   languageName: node
   linkType: hard
 
@@ -23948,7 +23959,7 @@ __metadata:
 
 "nc@git+https://github.com/dsueltenfuss/nc.git":
   version: 1.0.4
-  resolution: "nc@https://github.com/dsueltenfuss/nc.git#commit=c1b8baf157cbd94a3142dc90c0d530bd2ee5f0a0"
+  resolution: "nc@git+ssh://git@github.com/dsueltenfuss/nc.git#commit=c1b8baf157cbd94a3142dc90c0d530bd2ee5f0a0"
   dependencies:
     debug: ^4.3.3
     netcat: "git+https://github.com/dsueltenfuss/netcat.git"
@@ -24005,7 +24016,7 @@ __metadata:
 
 "netcat@git+https://github.com/dsueltenfuss/netcat.git":
   version: 1.5.1
-  resolution: "netcat@https://github.com/dsueltenfuss/netcat.git#commit=d24823a031f3da36d383945f5bfa354b41006fff"
+  resolution: "netcat@git+ssh://git@github.com/dsueltenfuss/netcat.git#commit=d24823a031f3da36d383945f5bfa354b41006fff"
   dependencies:
     async-each-series: ^1.1.0
     datagram-stream: ^1.1.1
@@ -30522,11 +30533,11 @@ __metadata:
   linkType: hard
 
 "ssri@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "ssri@npm:9.0.0"
+  version: 9.0.1
+  resolution: "ssri@npm:9.0.1"
   dependencies:
     minipass: ^3.1.1
-  checksum: bf33174232d07cc64e77ab1c51b55d28352273380c503d35642a19627e88a2c5f160039bb0a28608a353485075dda084dbf0390c7070f9f284559eb71d01b84b
+  checksum: fb58f5e46b6923ae67b87ad5ef1c5ab6d427a17db0bead84570c2df3cd50b4ceb880ebdba2d60726588272890bae842a744e1ecce5bd2a2a582fccd5068309eb
   languageName: node
   linkType: hard
 
@@ -32323,6 +32334,13 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 1cb434fbc637d347be90e3a0c6cd05e33c38f941713c8786d3031faf1842c2c148ba91d2fac01e7276b0ae3249b8633f1660e32686cc7a8c6a8fd5361dc52c66
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:1.0.2":
+  version: 1.0.2
+  resolution: "ua-parser-js@npm:1.0.2"
+  checksum: ff7f6d79a9c1a38aa85a0e751040fc7e17a0b621bda876838d14ebe55aca4e50e68da0350f181e58801c2d8a35e7db4e12473776e558910c4b7cabcec96aa3bf
   languageName: node
   linkType: hard
 
