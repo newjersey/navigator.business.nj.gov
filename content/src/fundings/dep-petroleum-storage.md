@@ -17,6 +17,7 @@ sector:
   - construction
   - real-estate
   - mining-quarrying-and-oil-and-gas-extraction
+  - utilities
 openDate: ""
 dueDate: ""
 ---
