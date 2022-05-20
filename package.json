@@ -15,7 +15,7 @@
     "postinstall": "yarn workspace @businessnjgovnavigator/web run:napa",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier --check . --ignore-path=./.eslintignore",
-    "start:dev": "yarn workspaces foreach -v run dev",
+    "start:dev": "yarn workspaces foreach -ptv run dev",
     "invokeNewsletter": "yarn workspace @businessnjgovnavigator/api invokeNewsletter",
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
