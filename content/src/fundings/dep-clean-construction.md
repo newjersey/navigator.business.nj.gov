@@ -16,6 +16,7 @@ county:
   - All
 sector:
   - construction
+  - utilities
 openDate: ""
 dueDate: ""
 ---
