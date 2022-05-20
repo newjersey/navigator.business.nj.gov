@@ -37,6 +37,7 @@
     "@aws-sdk/client-s3": "3.94.0",
     "@aws-sdk/lib-dynamodb": "3.94.0",
     "@aws-sdk/util-dynamodb": "3.94.0",
+    "@businessnjgovnavigator/shared": "*",
     "@serverless/typescript": "3.17.0",
     "airtable": "0.11.4",
     "axios": "0.27.2",
