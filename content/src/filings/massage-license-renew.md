@@ -14,6 +14,6 @@ Your massage and bodywork license will expire every two years on November 30th. 
 * Professional liability insurance in a minimum amount of $1M per occurrence and $3M aggregate per policy year
 * 20 required hours of continuing education, two of which must be in ethics
 
-**Once completed, you will have:**
+>**Once completed, you will have:**
 >
 >* A renewed license valid for two years
