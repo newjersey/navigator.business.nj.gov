@@ -281,3 +281,13 @@ export const getStringifiedAddress = (
 ) => {
   return `${addressLine1}, ${addressLine2 ? `${addressLine2}, ` : ""}${city}, ${state}, ${zipcode}`;
 };
+
+export const makeButtonIcon = (svgFilename: string, size = "20px"): ReactElement => (
+  <img
+    className="margin-right-05 margin-left-neg-1"
+    width={size}
+    height={size}
+    src={`/img/${svgFilename}.svg`}
+    alt=""
+  />
+);

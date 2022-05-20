@@ -1,3 +1,5 @@
+import { Content } from "@/components/Content";
+import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import React, { ReactNode } from "react";
@@ -11,6 +13,9 @@ interface Props {
   maxWidth?: Breakpoint;
   dividers?: boolean;
   unpaddedChildren?: ReactNode;
+  alertText?: string;
+  showAlert?: boolean;
+  alertVariant?: AlertVariant;
 }
 
 export const DialogZeroButton = (props: Props) => {
@@ -36,8 +41,17 @@ export const DialogZeroButton = (props: Props) => {
         </IconButton>
       </DialogTitle>
       <DialogContent sx={{ padding: 0 }} dividers={props.dividers}>
-        <div className="padding-x-4 padding-y-1">
-          {props.bodyText && <p className="font-body-xs">{props.bodyText}</p>}
+        <div className="padding-x-4 padding-bottom-1">
+          {props.showAlert && props.alertVariant && props.alertText && (
+            <Alert dataTestid="dialog-alert" variant={props.alertVariant} className="margin-top-0">
+              <Content>{props.alertText}</Content>
+            </Alert>
+          )}
+          {props.bodyText && (
+            <div className="font-body-xs margin-bottom-2 text-base">
+              <Content>{props.bodyText}</Content>
+            </div>
+          )}
           {props.children && <>{props.children}</>}
         </div>
         {props.unpaddedChildren && <>{props.unpaddedChildren}</>}

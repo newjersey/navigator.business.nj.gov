@@ -1,5 +1,6 @@
 export * from "./businessUser";
 export * from "./dateHelpers";
+export * from "./feedbackRequest";
 export * from "./formationData";
 export * from "./industry";
 export * from "./intHelpers";

@@ -1,14 +1,15 @@
 import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { shouldAddToNewsletter } from "../domain/newsletter/shouldAddToNewsletter";
-import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
+import { AddNewsletter, AddToUserTesting, FeedbackClient, UserDataClient } from "../domain/types";
 import { shouldAddToUserTesting } from "../domain/user-testing/shouldAddToUserTesting";
 import { getSignedInUserId } from "./userRouter";
 
 export const externalEndpointRouterFactory = (
   userDataClient: UserDataClient,
   addNewsletter: AddNewsletter,
-  addToUserTesting: AddToUserTesting
+  addToUserTesting: AddToUserTesting,
+  feedbackClient: FeedbackClient
 ): Router => {
   const router = Router();
 
@@ -54,6 +55,18 @@ export const externalEndpointRouterFactory = (
       }
     }
     res.json(userData);
+  });
+
+  router.post("/feedback", (req, res) => {
+    const { userData, feedbackRequest } = req.body;
+    feedbackClient
+      .create(feedbackRequest, userData)
+      .then(() => {
+        res.status(200).send();
+      })
+      .catch(() => {
+        res.status(500).send();
+      });
   });
 
   return router;

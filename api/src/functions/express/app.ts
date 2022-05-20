@@ -7,6 +7,7 @@ import express from "express";
 import serverless from "serverless-http";
 import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
+import { AirtableFeedbackClient } from "src/client/AirtableFeedbackClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { formationRouterFactory } from "../../api/formationRouter";
 import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
@@ -73,6 +74,7 @@ const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID;
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || "AIRTABLE_API_KEY";
 const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "TEST_BASE_ID";
+const AIRTABLE_FEEDBACK_BASE_ID = process.env.AIRTABLE_FEEDBACK_BASE_ID || "TEST_BASE_ID";
 const AIRTABLE_BASE_URL =
   process.env.AIRTABLE_BASE_URL ||
   (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
@@ -94,6 +96,15 @@ const airtableUserTestingClient = AirtableUserTestingClient(
   {
     apiKey: AIRTABLE_API_KEY,
     baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
+    baseUrl: AIRTABLE_BASE_URL,
+  },
+  logger
+);
+
+const airtableFeedbackClient = AirtableFeedbackClient(
+  {
+    apiKey: AIRTABLE_API_KEY,
+    baseId: AIRTABLE_FEEDBACK_BASE_ID,
     baseUrl: AIRTABLE_BASE_URL,
   },
   logger
@@ -131,7 +142,12 @@ app.use(bodyParser.json({ strict: false }));
 app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus));
 app.use(
   "/api/external",
-  externalEndpointRouterFactory(userDataClient, addGovDeliveryNewsletter, addToAirtableUserTesting)
+  externalEndpointRouterFactory(
+    userDataClient,
+    addGovDeliveryNewsletter,
+    addToAirtableUserTesting,
+    airtableFeedbackClient
+  )
 );
 app.use("/api/guest", guestRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));

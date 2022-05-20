@@ -2,8 +2,8 @@ import bodyParser from "body-parser";
 import express, { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
-import { generateUser, generateUserData } from "../../test/factories";
-import { AddNewsletter, AddToUserTesting, UserDataClient } from "../domain/types";
+import { generateFeedbackRequest, generateUser, generateUserData } from "../../test/factories";
+import { AddNewsletter, AddToUserTesting, FeedbackClient, UserDataClient } from "../domain/types";
 import { externalEndpointRouterFactory } from "./externalEndpointRouter";
 
 jest.mock("jsonwebtoken", () => ({
@@ -15,6 +15,7 @@ describe("externalEndpointRouter", () => {
   let app: Express;
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
+  let stubFeedbackClient: jest.Mocked<FeedbackClient>;
   let stubAddNewsletter: jest.MockedFunction<AddNewsletter>;
   let stubAddToUserTesting: jest.MockedFunction<AddToUserTesting>;
 
@@ -24,11 +25,21 @@ describe("externalEndpointRouter", () => {
       put: jest.fn(),
       findByEmail: jest.fn(),
     };
+    stubFeedbackClient = {
+      create: jest.fn(),
+    };
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
     app = express();
     app.use(bodyParser.json());
-    app.use(externalEndpointRouterFactory(stubUserDataClient, stubAddNewsletter, stubAddToUserTesting));
+    app.use(
+      externalEndpointRouterFactory(
+        stubUserDataClient,
+        stubAddNewsletter,
+        stubAddToUserTesting,
+        stubFeedbackClient
+      )
+    );
   });
 
   const cognitoPayload = ({ id }: { id: string }) => ({
@@ -136,6 +147,15 @@ describe("externalEndpointRouter", () => {
         await request(app).post(`/userTesting`).send(userData).set("Authorization", "Bearer user-123-token");
         expect(stubAddToUserTesting).toHaveBeenCalled();
         expect(stubUserDataClient.put).toHaveBeenCalled();
+      });
+    });
+
+    describe("feedback request", () => {
+      it("sends feedback request to Feedback Client", async () => {
+        const userData = generateUserData({});
+        const feedbackRequest = generateFeedbackRequest({});
+        await request(app).post("/feedback").send({ feedbackRequest, userData });
+        expect(stubFeedbackClient.create).toHaveBeenCalledWith(feedbackRequest, userData);
       });
     });
   });

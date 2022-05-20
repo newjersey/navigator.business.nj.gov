@@ -12,7 +12,6 @@ interface Props {
   children?: ReactNode;
   primaryButtonText: string;
   primaryButtonOnClick: () => void;
-  secondaryButtonText: string;
   maxWidth?: Breakpoint;
   dividers?: boolean;
   alertText?: string;
@@ -21,20 +20,13 @@ interface Props {
   isLoading?: boolean;
 }
 
-export const DialogTwoButton = (props: Props) => {
+export const DialogOneButton = (props: Props) => {
   const buttonNode = (
     <div
       className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"
       data-testid="modal-content"
     >
       <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
-        <Button
-          style="secondary"
-          onClick={props.close}
-          className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1"
-        >
-          {props.secondaryButtonText}
-        </Button>
         <Button style="primary" noRightMargin loading={props.isLoading} onClick={props.primaryButtonOnClick}>
           {props.primaryButtonText}
         </Button>

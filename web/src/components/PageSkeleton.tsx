@@ -1,4 +1,4 @@
-import { BetaBar } from "@/components/BetaBar";
+import { BetaBar } from "@/components/betaBar/BetaBar";
 import { InnovFooter } from "@/components/InnovFooter";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";

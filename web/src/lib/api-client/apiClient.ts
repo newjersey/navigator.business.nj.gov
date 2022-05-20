@@ -1,6 +1,6 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { NameAvailability, SelfRegResponse } from "@/lib/types/types";
-import { NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
+import { FeedbackRequest, NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -24,20 +24,24 @@ export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
 };
 
-export const postNewsletter = async (userData: UserData): Promise<UserData> => {
+export const postNewsletter = (userData: UserData): Promise<UserData> => {
   return post(`/external/newsletter`, userData, false);
 };
 
-export const postUserTesting = async (userData: UserData): Promise<UserData> => {
+export const postUserTesting = (userData: UserData): Promise<UserData> => {
   return post(`/external/userTesting`, userData, false);
 };
 
-export const postGetAnnualFilings = async (userData: UserData): Promise<UserData> => {
+export const postGetAnnualFilings = (userData: UserData): Promise<UserData> => {
   return post(`/guest/annualFilings`, userData, false);
 };
 
 export const searchBusinessName = (name: string): Promise<NameAvailability> => {
   return get(`/guest/business-name-availability?query=${encodeURIComponent(name)}`, false);
+};
+
+export const postFeedback = (feedbackRequest: FeedbackRequest, userData: UserData): Promise<void> => {
+  return post("/external/feedback", { feedbackRequest, userData }, false);
 };
 
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
