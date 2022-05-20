@@ -1,3 +1,3 @@
-### Failure to Pay Taxes on Time
+## Failure to Pay Taxes on Time
 
-If you do not pay taxes on time...
+Not paying taxes on time may result in late fees, fines, and interest on the tax amount owed.
