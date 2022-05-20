@@ -1,4 +1,4 @@
-### ADA Compliant Property
+## ADA Compliant Property
 
 Depending on the specific site and your renovation plans, you may need to make accessibility upgrades from widening aisles to changing bathroom fixtures. 
 
