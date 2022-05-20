@@ -13,7 +13,7 @@ Your massage business registration will expire every two years on November 30th.
 * Business Name
 * License Number
 * Registration Code (in the notice received by mail) 
-* Professional liability insurance in a minimum amount of $1,000,000.00 per occurrence and $3,000,000.00 aggregate per policy year
+* Professional liability insurance in a minimum amount of $1M per occurrence and $3M aggregate per policy year
 
 >**Once completed, you will have:**
 >
