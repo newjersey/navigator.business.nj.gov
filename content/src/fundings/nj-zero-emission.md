@@ -35,4 +35,4 @@ NJ ZIP is a pilot program that provides vouchers to businesses and institutions 
 
 > **Benefits**
 >
-> - Vouchers up to $100,000 plus bonuses
+> Vouchers up to $100,000 plus bonuses
