@@ -15,6 +15,9 @@ mwvb: None
 preferenceForOpportunityZone: no
 county:
   - All
+sector:
+  - construction
+  - utilities
 openDate: ""
 dueDate: ""
 ---
