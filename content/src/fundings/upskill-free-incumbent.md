@@ -42,4 +42,4 @@ Upskill offers grants to New Jersey businesses of any size grants to improve exi
 
 > **Benefits**
 >
-> - Employers can receive grants of up to $100,000
+> Employers can receive grants of up to $100,000
