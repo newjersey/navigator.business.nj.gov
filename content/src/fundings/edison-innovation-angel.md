@@ -35,4 +35,4 @@ Edison Innovation Angel Growth Fund provides funding to early-stage, emerging te
 
 > **Benefits**
 >
-> - Up to $250,000 in growth capital matched with outside investors on a 1 to 2 basis
+> Up to $250,000 in growth capital matched with outside investors on a 1 to 2 basis
