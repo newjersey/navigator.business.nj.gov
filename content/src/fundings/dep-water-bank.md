@@ -28,4 +28,4 @@ This program provides low-cost financing for the design, construction, and imple
 
 >**Benefits:**
 >
->A total of $100M to $200M available per year. Funding comes from NJDEP (0% interest) and New Jersey Environmental Infrastructure Trust (NJEIT) (~Market Rate Interest) for a loan that is effectively half the market rate.
+>Funding from $100M to $200M available per year. Funding comes from NJDEP (0% interest) and New Jersey Environmental Infrastructure Trust (NJEIT) (~Market Rate Interest) for a loan that is effectively half the market rate.
