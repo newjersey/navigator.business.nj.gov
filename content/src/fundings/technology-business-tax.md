@@ -38,4 +38,5 @@ The Net Operating Loss Program enables qualified, unprofitable New Jersey-based 
 * Technology or life sciences companies with up to 225 employees in the United States with an operating loss for at least the last 2 years
 
 >**Benefits** 
->* Ability to sell NOL and unused R&D tax credits for up to 80% of their value up to a total amount of $20M
+>
+> Ability to sell NOL and unused R&D tax credits for up to 80% of their value up to a total amount of $20M
