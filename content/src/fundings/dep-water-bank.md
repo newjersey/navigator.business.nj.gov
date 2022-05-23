@@ -27,4 +27,5 @@ This program provides low-cost financing for the design, construction, and imple
 * Applicants must also satisfy the Water Bank's creditworthiness standards
 
 >**Benefits:**
->A total of $100M to $200M is available per year. Combined funding sources from NJDEP (0% interest) and New Jersey Environmental Infrastructure Trust (NJEIT) (~Market Rate Interest) for a loan that is effectively half the market rate.
+>
+>A total of $100M to $200M available per year. Funding comes from NJDEP (0% interest) and New Jersey Environmental Infrastructure Trust (NJEIT) (~Market Rate Interest) for a loan that is effectively half the market rate.
