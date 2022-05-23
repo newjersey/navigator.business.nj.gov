@@ -63,7 +63,9 @@
     "newjersey",
     "HVACR",
     "siccode",
-    "SDWA"
+    "SDWA",
+    "NJEIT",
+    "exceedance"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
