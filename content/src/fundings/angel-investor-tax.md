@@ -40,4 +40,4 @@ The New Jersey Angel Investor Tax Credit Program establishes refundable tax cred
 
 > **Benefits**
 >
-> - Tax credits equal to 20% of a qualified investment with a potential 5% bonus
+> Tax credits equal to 20% of a qualified investment with a potential 5% bonus
