@@ -32,4 +32,4 @@ The Brownfield Assessment Grant Program provides grant money to support site ass
 
 > **Benefits**
 >
-> - Free environmental site assessment to evaluate contamination at brownfield sites
+> Free environmental site assessment to evaluate contamination at brownfield sites
