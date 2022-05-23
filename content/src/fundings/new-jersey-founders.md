@@ -38,4 +38,4 @@ To register for this opportunity, contact: NJFoundersFunders@njeda.com
 
 > **Benefits**
 >
-> - Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities
+> Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities
