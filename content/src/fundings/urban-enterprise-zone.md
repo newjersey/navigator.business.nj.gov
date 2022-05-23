@@ -35,4 +35,4 @@ The Urban Enterprise Zone (UEZ) Manufacturers Energy Sales Tax Exemption provide
 
 > **Benefits**
 >
-> - Sales tax exemption for the purchase of electricity and natural gas for use at the facility
+> Sales tax exemption for the purchase of electricity and natural gas for use at the facility
