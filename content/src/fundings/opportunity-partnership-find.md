@@ -39,4 +39,5 @@ Opportunity Partnership helps employers identify an appropriate educational inst
 * Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses
 
 >**Benefits** 
->* Company-tailored training to ensure an appropriate pipeline of employees
+>
+> Company-tailored training to ensure an appropriate pipeline of employees
