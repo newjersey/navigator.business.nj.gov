@@ -25,7 +25,7 @@ dueDate: ""
 This program offers a tax credit for historic, income-producing properties within the state of New Jersey. It's administered by the New Jersey Economic Development Authority in coordination with the New Jersey Historic Preservation Office and the New Jersey Division of Taxation in the Department of the Treasury.
 
 ---
-### Elegibility
+### Eligibility
 - Be a rehabilitation project
 - Demonstrate that without the tax credit award, the rehabilitation project is not economically feasible.
 - Prove there is a financing gap for a project and the tax credit award being considered is equal to, or less than the project financing gap
