@@ -32,4 +32,4 @@ The Premier Lender Program provides New Jersey-based businesses and not-for-prof
 
 > **Benefits**
 >
-> - Loan participation of up to $2 million or line of credit guarantees up to $750,000
+> Loan participation of up to $2 million or line of credit guarantees up to $750,000
