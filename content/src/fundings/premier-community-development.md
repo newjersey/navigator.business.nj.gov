@@ -34,4 +34,4 @@ The Premier Community Development Financial Institutions (CDFI) Program provides
 
 > **Benefits:**
 >
-> - Loan participation of up to $500,000 or line of credit guarantee
+> Loan participation of up to $500,000 or line of credit guarantee
