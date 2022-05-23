@@ -17,7 +17,20 @@ mwvb: None
 preferenceForOpportunityZone: no
 county:
   - All
-sector: []
+sector:
+  - accommodation-and-food-services
+  - arts-entertainment-and-recreation
+  - clean-energy
+  - construction
+  - digital-and-print-media
+  - educational-services
+  - finance-and-insurance
+  - health-care-and-social-assistance
+  - life-sciences
+  - manufacturing
+  - other-services
+  - professional-scientific-and-technical-services
+  - technology
 openDate: ""
 dueDate: ""
 ---
