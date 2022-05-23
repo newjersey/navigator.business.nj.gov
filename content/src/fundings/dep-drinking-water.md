@@ -36,4 +36,4 @@ Must be a nonprofit, non-community water systems in New Jersey and use the funds
 
 > **Benefits**
 >
-> * Provides short-term loans at 0.337% Interest to replace and update drinking water infrastructure
+> Provides short-term loans at 0.337% Interest to replace and update drinking water infrastructure
