@@ -27,6 +27,6 @@ This program provides grants to offset the cost of purchasing and installing ele
 
 >**Benefits:**
 >
->* Businesses and others can be reimbursed for 100% of the costs if on government property and 80% of costs if on private property, up to a maximum of:
- 1. $750 per Level 1 charging port (provides 120 VAC up to 12 A)
- 2. $4,000 per Level 2 charging port (provides 240 VAC from 12 A to 80 A)
+>* Businesses and others can be reimbursed for 100% of the costs if on government property and 80% of costs if on private property, up to a maximum of:  
+> 1. $750 per Level 1 charging port (provides 120 VAC up to 12 A)  
+> 2. $4,000 per Level 2 charging port (provides 240 VAC from 12 A to 80 A)
