@@ -3500,7 +3500,7 @@ __metadata:
     "@aws-sdk/util-dynamodb": 3.94.0
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 28.1.0
-    "@serverless/typescript": 3.17.0
+    "@serverless/typescript": 3.18.0
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
@@ -3533,7 +3533,7 @@ __metadata:
     prettier: 2.6.2
     prettier-plugin-organize-imports: 2.3.4
     rimraf: 3.0.2
-    serverless: 3.17.0
+    serverless: 3.18.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.8.0
@@ -3601,7 +3601,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.1.6
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 3.17.0
+    "@serverless/typescript": 3.18.0
     "@storybook/addon-a11y": 6.5.0
     "@storybook/addon-actions": 6.5.0
     "@storybook/addon-docs": 6.5.0
@@ -3705,7 +3705,7 @@ __metadata:
     sass: 1.51.0
     sass-loader: 13.0.0
     semantic-release: 19.0.2
-    serverless: 3.17.0
+    serverless: 3.18.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.8.0
@@ -6749,14 +6749,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:3.17.0":
-  version: 3.17.0
-  resolution: "@serverless/typescript@npm:3.17.0"
-  checksum: 397c846e1af232c82cff21430968b06fbfeb6b933c5c92f94396962dd1a1895a5384d5fe960fc37dd5e235c86e99d3b7e06e756185119bf693f40a76a5fe38cd
+"@serverless/typescript@npm:3.18.0":
+  version: 3.18.0
+  resolution: "@serverless/typescript@npm:3.18.0"
+  checksum: a4925ab90be6544692697326889ae4f67c02df796d273894c6e6efeda5c4a2309a159eeacd005f8c567e8796e0222dee470ab58dd0f3c398e1ecc5b099a7451b
   languageName: node
   linkType: hard
 
-"@serverless/utils@npm:^6.0.3, @serverless/utils@npm:^6.3.0":
+"@serverless/utils@npm:^6.0.3, @serverless/utils@npm:^6.6.0":
   version: 6.6.0
   resolution: "@serverless/utils@npm:6.6.0"
   dependencies:
@@ -10801,9 +10801,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1131.0, aws-sdk@npm:^2.1136.0, aws-sdk@npm:^2.7.0":
-  version: 2.1138.0
-  resolution: "aws-sdk@npm:2.1138.0"
+"aws-sdk@npm:^2.1136.0, aws-sdk@npm:^2.1139.0, aws-sdk@npm:^2.7.0":
+  version: 2.1140.0
+  resolution: "aws-sdk@npm:2.1140.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -10814,7 +10814,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: ec0b8b1e6f2990315ee78e7e05be904adaeb83a6343ca0a46c1ef0c1b2fc3db8f1c7d7330ab70916eb7f763ca091d0ab4ef17c8d5ba4bc3b07502897f84234ab
+  checksum: 5c81ff6486e818b21b56b117bc3aede6b74f2844c9485a25963b0b960e998bf5348a48f0dfc2ed0ad1d9479c8e3ca793a1eb5a30e360944ce3cfec47a5631ee5
   languageName: node
   linkType: hard
 
@@ -12384,7 +12384,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.2.0, ci-info@npm:^3.3.0, ci-info@npm:^3.3.1":
+"ci-info@npm:^3.2.0, ci-info@npm:^3.3.1":
   version: 3.3.1
   resolution: "ci-info@npm:3.3.1"
   checksum: 244546317cca96955860d2cb8d0bf47dd66d9078bbe83a215fa87464ab24b352c6fc6f56027d1c82f002e3f833be253f1320d35ed7199bd81134f7788c657f3a
@@ -29691,22 +29691,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.17.0":
-  version: 3.17.0
-  resolution: "serverless@npm:3.17.0"
+"serverless@npm:3.18.1":
+  version: 3.18.1
+  resolution: "serverless@npm:3.18.1"
   dependencies:
     "@serverless/dashboard-plugin": ^6.2.2
     "@serverless/platform-client": ^4.3.2
-    "@serverless/utils": ^6.3.0
+    "@serverless/utils": ^6.6.0
     ajv: ^8.11.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.1
-    aws-sdk: ^2.1131.0
+    aws-sdk: ^2.1139.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
     child-process-ext: ^2.1.1
-    ci-info: ^3.3.0
+    ci-info: ^3.3.1
     cli-progress-footer: ^2.3.1
     d: ^1.0.1
     dayjs: ^1.11.2
@@ -29751,7 +29751,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 9968a8e11d074713b693ea197af722521be307ff709b07ab1d6fc575757b9af8cc5e437bc5b7631dbadc3b9321f0dc3204bd01b50ddf17a2e1f83ad0ac61ab3e
+  checksum: daf808e2130b6361bc5a5285f294a6e45c771d4719951ee044fafc0a2c4822709beef3a587d8a988295f20bbc728df8c892bc88c235732818d6c7887de3cdb82
   languageName: node
   linkType: hard
 
