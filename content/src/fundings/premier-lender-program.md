@@ -28,7 +28,7 @@ The Premier Lender Program provides New Jersey-based businesses and not-for-prof
 
 ### Eligibility
 
-- Businesses and nonprofits must commit to create or retain 1 new full-time job for every $65,000 in NJEDA exposure. There is an application fee of $1,000
+- Businesses and nonprofits must commit to create or retain 1 new full-time job for every $65,000. There is an application fee of $1,000
 
 > **Benefits**
 >
