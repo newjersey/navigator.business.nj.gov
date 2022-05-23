@@ -34,4 +34,4 @@ This is a pilot program, funded by the federal Environmental Protection Agency's
 
 > **Benefits**
 >
-> - Addresses funding gaps to make the remediation phase of a project financially viable for remedial actions and other eligible activities
+> Addresses funding gaps to make the remediation phase of a project financially viable for remedial actions and other eligible activities
