@@ -37,4 +37,4 @@ The Offshore Wind Tax Credit Program is a financial tool that spurs private capi
 
 > **Benefits**
 >
-> - Tax credits up to 100% of qualified investments
+> Tax credits up to 100% of qualified investments
