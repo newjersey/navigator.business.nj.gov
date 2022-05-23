@@ -26,8 +26,8 @@ This program provides low-cost financing for the design, construction, and imple
 
 * **Clean water applicants:** Private entities, such as developers, are eligible through public conduit borrowers
 * **Drinking water applicants:** Public community water systems privately and publicly owned, and nonprofit non-community water systems (as defined by the National Primary Drinking Water Regulations) 
-* Applicants must also satisfy the Water Bank's creditworthiness standards
+* **All applicants** must also satisfy the Water Bank's creditworthiness standards
 
 > **Benefits:**
 >
-> Funding from $100M to $200M available per year. Funding comes from New Jersey Department of Environmental Protection (NJDEP) at 0% interes and New Jersey Environmental Infrastructure Trust (NJEIT)  at ~Market Rate Interest for a loan that is effectively half the market rate
+> Funding from $100M to $200M available per year. Funding comes from New Jersey Department of Environmental Protection (NJDEP) at 0% interest and New Jersey Environmental Infrastructure Trust (NJEIT)  at ~Market Rate Interest for a loan that is effectively half the market rate
