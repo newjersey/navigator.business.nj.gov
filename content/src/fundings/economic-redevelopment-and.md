@@ -7,7 +7,7 @@ callToActionText: Learn more
 fundingType: tax credit
 agency:
   - NJEDA
-publishStageArchive: ""
+publishStageArchive: Do Not Publish
 status: closed
 programFrequency: one-time
 businessStage: operating
@@ -31,4 +31,5 @@ The Economic Redevelopment and Growth (ERG) Program is an incentive for develope
 * Residential or commercial projects must be located in a qualifying incentive area that meet all other program eligibility criteria
 
 >**Benefits**
->* Tax credits or grant reimbursements up to 20% of eligible project costs plus bonuses
+>
+> Tax credits or grant reimbursements up to 20% of eligible project costs plus bonuses
