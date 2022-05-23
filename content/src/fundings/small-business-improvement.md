@@ -30,4 +30,5 @@ The Small Business Improvement Grant offers reimbursement for costs associated w
 * Small businesses and nonprofits in the process of making improvements to their business with a minimum expense of $5,000
 
 >**Benefits** 
->* Grants are equal to 50% of eligible total project costs up to $50,000
+>
+> Grants are equal to 50% of eligible total project costs up to $50,000
