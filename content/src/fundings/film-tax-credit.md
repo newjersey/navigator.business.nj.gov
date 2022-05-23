@@ -41,4 +41,4 @@ The Film Tax Credit Program provides a transferable credit against the corporati
 
 > **Benefits**
 >
-> - Tax credits up to 35% of qualified film production expenses
+> Tax credits up to 35% of qualified film production expenses
