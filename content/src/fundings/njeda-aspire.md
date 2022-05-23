@@ -25,22 +25,25 @@ dueDate: ""
 ---
 Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).
 
----
+- - -
+
 ### Eligibility
-- The project must demonstrate through NJEDA analysis that without the incentive award, the redevelopment project is not economically feasible
-- Must demonstrate that a project financing gap exists and/or the redevelopment project will generate a below-market rate of return
-- Be located in a designated Incentive Area
-- Include a developer with equity participation of at least 20% of the total cost
-- The project must in a net positive benefit to the State
-- Must meet specific cost thresholds, depending on where the project is located
 
->**Benefits:**
+* The project must demonstrate through New Jersey Economic Development Authoirty analysis that without the incentive award, the redevelopment project is not economically feasible
+* Must demonstrate that a project financing gap exists and/or the redevelopment project will generate a below-market rate of return
+* Be located in a designated [Incentive Area](https://njeda.maps.arcgis.com/apps/webappviewer/index.html?id=b32ea4347e6a4403a36859e6ee6e5c0a)
+* Include a developer with equity participation of at least 20% of the total cost
+* The project must in a net positive benefit to the State
+* Must meet specific cost thresholds, depending on where the project is located
+
+> **Benefits:**
 >
->* Total award cap of $42 million, but residential projects also receiving LIHTC, or projects located in certain economically disadvantaged locations may receive up to $60 million
->* Baseline tax credits available
->* Tax credits equal to 45 percent of project costs up to $42 million
-
->**Bonuses:**
->* Commercial projects in a GRM can receive tax credits up to 50% of costs in project support
->* Newly constructed residential projects that are also utilizing 4% LIHTCs can receive tax credits for up to 60% of project costs
->* Projects using LIHTC or any other project in a Qualified Incentive Track (QIT), GRM, or municipality with a Municipal Revitalization Index (MRI) distress score of at least 50, can receive tax credits up to $60M
+> * Total award cap of $42M, but residential projects also receiving LIHTC, or projects located in certain economically disadvantaged locations may receive up to $60M
+> * Baseline tax credits available
+> * Tax credits equal to 45% of project costs up to $42M
+>
+> **Bonuses:**
+>
+> * Commercial projects in a Government Restricted Municipalities (GRM) can receive tax credits up to 50% of costs in project support
+> * Newly constructed residential projects that are also utilizing 4% LIHTCs can receive tax credits for up to 60% of project costs
+> * Projects using LIHTC or any other project in a Qualified Incentive Track (QIT), GRM, or municipality with a Municipal Revitalization Index (MRI) distress score of at least 50, can receive tax credits up to $60M
