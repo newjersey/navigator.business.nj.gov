@@ -35,4 +35,4 @@ New Jersey Clean Construction Program installs pollution control devices or repl
 
 > **Benefits**
 >
-> * Award of up to $100,000 per piece of equipment purchased or replaced
+> Award of up to $100,000 per piece of equipment purchased or replaced
