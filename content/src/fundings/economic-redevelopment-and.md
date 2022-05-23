@@ -7,7 +7,7 @@ callToActionText: Learn more
 fundingType: tax credit
 agency:
   - NJEDA
-publishStageArchive: ""
+publishStageArchive: Do Not Publish
 status: closed
 programFrequency: one-time
 businessStage: operating
