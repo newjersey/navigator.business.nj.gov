@@ -26,7 +26,7 @@ This program provides low-interest loans to finance the costs of infrastructure 
 
 Must be a nonprofit, non-community water systems in New Jersey and use the funds for the following construction projects: 
 
-* Water treatment facilities correcting a system's non-compliance with Surface Water Treatment requirements, acute violations, maximum contaminant levels, lead, and copper rule exceedances, or secondary drinking water regulation exceedances 
+* Water treatment facilities correcting a system's non-compliance with Surface Water Treatment requirements, acute violations, maximum contaminant levels, lead, and copper rule exceedance, or secondary drinking water regulation exceedance 
 * Consolidation of water systems to comply with the SDWA 
 * Rehabilitation of existing water treatment facilities, water mains, pump stations, water storage facilities, or new water storage facilities to maintain compliance with the SDWA and wells 
 * Allowances for planning and design are also available
