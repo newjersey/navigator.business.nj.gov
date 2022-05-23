@@ -36,4 +36,4 @@ Edison Innovation VC Growth Fund provides funding to early-stage, emerging techn
 
 > **Benefits**
 >
-> - Funding of up to $500,000
+> Funding of up to $500,000
