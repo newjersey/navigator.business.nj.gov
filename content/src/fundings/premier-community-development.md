@@ -29,7 +29,7 @@ The Premier Community Development Financial Institutions (CDFI) Program provides
 
 ### Eligibility
 
-- Businesses must commit to creating or retaining 1 new full-time job for every $65,000 in NJEDA exposure within 2 years
+- Businesses must commit to creating or retaining 1 new full-time job for every $65,000 within 2 years
 - Must be in operation for at least 1 year (3 if a non-profit)
 
 > **Benefits:**
