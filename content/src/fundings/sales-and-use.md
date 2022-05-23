@@ -33,4 +33,4 @@ The Sales and Use Tax Exemption Program allows qualified businesses to receive a
 
 > **Benefits:**
 >
-> - Ability to purchase machinery, equipment, furniture, fixtures, and building materials without New Jersey sales tax
+> Ability to purchase machinery, equipment, furniture, fixtures, and building materials without New Jersey sales tax
