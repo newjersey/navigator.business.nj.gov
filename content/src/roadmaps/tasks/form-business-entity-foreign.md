@@ -1,14 +1,14 @@
 ---
-urlSlug: form-business-entity-foreign
+urlSlug: authorize-business-entity-foreign
 filename: form-business-entity-foreign
-name: Form Your Business Entity
+name: Authorize Your Business Entity
 id: form-business-entity-foreign
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
-callToActionText: Form My Business
+callToActionText: Authorize My Business
 required: true
 issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
 ---
-You must register your business name and form your `legal structure|legal-structure-learn-more` with the State.
+You must register your business name and authorize your `legal structure|legal-structure-learn-more` with the State.
 
 - - -
 
@@ -39,6 +39,6 @@ You must register your business name and form your `legal structure|legal-struct
 > **Once completed, you will have:**
 >
 > *  `Entity ID|entity-id` 
-> *  `Certificate of Formation|certificate-formation` , Incorporation or Authorization as applicable
-> *  `Certified copy|certified-copy` of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
+> *  `Certificate of Authorization|certificate-formation`,
+> *  `Certified copy|certified-copy` of Certificate of Authorization (optional with additional fee)
 > *  `Certificate of Good Standing|good-standing` (optional with additional fee)
