@@ -1,3 +1,16 @@
+# [3.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.8.1...v3.9.0) (2022-05-24)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency @types/ua-parser-js to 0.7.36 ([955ac5a](https://github.com/newjersey/navigator.business.nj.gov/commit/955ac5aa94062b27312a81af3e6b42d1c7586415))
+* **deps:** update aws-sdk ([0c5bd4b](https://github.com/newjersey/navigator.business.nj.gov/commit/0c5bd4b981d00e41868bbac14748d1c3fc3dcbc7))
+
+
+### Features
+
+* [[#2247](https://github.com/newjersey/navigator.business.nj.gov/issues/2247)] request a feature feedback modal ([d422076](https://github.com/newjersey/navigator.business.nj.gov/commit/d422076a1ba5e0b297662df2ac16f67b32a1e397))
+
 ## [3.8.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.8.0...v3.8.1) (2022-05-20)
 
 
