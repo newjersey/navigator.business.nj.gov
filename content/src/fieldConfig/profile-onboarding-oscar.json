@@ -1,0 +1,25 @@
+{
+  "profileDefaults": {
+    "OWNING": {
+      "hasExistingBusiness": {
+        "header": "## Business Status",
+        "radioButtonYesText": "Yes, my business is operating",
+        "radioButtonNoText": "No, I still need to register my business",
+        "errorTextRequired": "Please select whether you have an existing business.",
+        "description": "Have you already `formed and registered|form-and-register-business` your business?"
+      },
+      "legalStructureId": {
+        "errorTextRequired": "",
+        "optionContent": {
+          "general-partnership": "",
+          "c-corporation": "",
+          "limited-liability-company": "",
+          "limited-liability-partnership": "",
+          "limited-partnership": "",
+          "s-corporation": "",
+          "sole-proprietorship": ""
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { templateEval } from "@/lib/utils/helpers";
+import { getFlow, templateEval } from "@/lib/utils/helpers";
 import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   createEmptyUser,
   createEmptyUserData,
@@ -25,6 +25,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
+const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>) =>
   generateUserData({
@@ -143,7 +144,9 @@ describe("onboarding - starting a business", () => {
       await waitFor(() => {
         expect(screen.getByTestId("step-4")).toBeInTheDocument();
       });
-      expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
+      ).toBeInTheDocument();
       expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 
@@ -155,7 +158,7 @@ describe("onboarding - starting a business", () => {
       page.selectByText("Location", "Newark");
       await page.visitStep(5);
       expect(
-        screen.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
       ).not.toBeInTheDocument();
       expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
     });

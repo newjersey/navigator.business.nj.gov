@@ -2,9 +2,9 @@ import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, TextField } from "@mui/material";
 import orderBy from "lodash.orderby";
@@ -19,6 +19,7 @@ interface Props {
 export const OnboardingSectors = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
 
   const SectorsOrdered: SectorType[] = orderBy(sectors, (SectorType: SectorType) => {
     return SectorType.name;
@@ -50,7 +51,12 @@ export const OnboardingSectors = ({ headerAriaLevel = 2, ...props }: Props): Rea
 
   return (
     <>
-      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.sectorId.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>
+        {Config.profileDefaults[state.flow].sectorId.header}
+      </Content>
+      <Content overrides={{ h2: headerLevelTwo }}>
+        {Config.profileDefaults[state.flow].sectorId.description}
+      </Content>
       <div className="form-input margin-top-2">
         <Autocomplete
           id="sectorId"
@@ -85,11 +91,11 @@ export const OnboardingSectors = ({ headerAriaLevel = 2, ...props }: Props): Rea
               value={searchText}
               onChange={handleChange}
               variant="outlined"
-              placeholder={state.displayContent.sectorId.placeholder}
+              placeholder={Config.profileDefaults[state.flow].sectorId.placeholder}
               error={props.fieldStates.sectorId.invalid}
               helperText={
                 props.fieldStates.sectorId.invalid
-                  ? Config.onboardingDefaults.errorTextRequiredSector ?? " "
+                  ? Config.profileDefaults[state.flow].sectorId.errorTextRequired
                   : " "
               }
             />

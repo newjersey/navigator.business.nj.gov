@@ -1,12 +1,11 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
 import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData, randomLegalStructure } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
   createEmptyUser,
@@ -28,16 +27,15 @@ import {
 import React from "react";
 
 const mockApi = api as jest.Mocked<typeof api>;
+const Config = getMergedConfig();
 
 export const renderPage = ({
   municipalities,
-  displayContent,
   userData,
   user,
   isAuthenticated,
 }: {
   municipalities?: Municipality[];
-  displayContent?: LoadDisplayContent;
   userData?: UserData | null;
   user?: BusinessUser;
   isAuthenticated?: IsAuthenticated;
@@ -51,10 +49,7 @@ export const renderPage = ({
         }
       >
         <ThemeProvider theme={createTheme()}>
-          <Onboarding
-            displayContent={displayContent || createEmptyLoadDisplayContent()}
-            municipalities={municipalities || []}
-          />
+          <Onboarding municipalities={municipalities || []} />
         </ThemeProvider>
       </WithStatefulUserData>,
       { user: currentUser, isAuthenticated }

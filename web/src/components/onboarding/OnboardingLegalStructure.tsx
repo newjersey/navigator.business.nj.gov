@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -8,6 +11,7 @@ import React, { ReactElement, useContext } from "react";
 
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
@@ -27,9 +31,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
     <div className="margin-bottom-2 margin-top-1" data-value={legalStructureId}>
       <b>{LookupLegalStructureById(legalStructureId).name}</b>
       <Content>
-        {state.displayContent.legalStructure.optionContent
-          ? state.displayContent.legalStructure.optionContent[legalStructureId]
-          : ""}
+        {(Config.profileDefaults[state.flow].legalStructureId.optionContent as any)[legalStructureId] ?? ""}
       </Content>
     </div>
   );
@@ -38,7 +40,12 @@ export const OnboardingLegalStructure = (): ReactElement => {
 
   return (
     <>
-      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.legalStructure.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>
+        {Config.profileDefaults[state.flow].legalStructureId.header}
+      </Content>
+      <Content overrides={{ h2: headerLevelTwo }}>
+        {Config.profileDefaults[state.flow].legalStructureId.description}
+      </Content>
       <div className="form-input-wide margin-top-3">
         <FormControl variant="outlined" fullWidth>
           <RadioGroup

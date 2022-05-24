@@ -1,4 +1,6 @@
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { getMergedConfig } from "@/contexts/configContext";
 import fs from "fs";
 import path from "path";
 
@@ -9,19 +11,29 @@ describe("cms", () => {
         path.join(process.cwd(), "web", "public", "mgmt", "config.yml"),
         "utf8"
       );
-      const defaults = Object.keys(Config);
+      const mergedConfig = getMergedConfig();
 
-      for (const defaultGroup of defaults) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const fields = Object.keys(Config[defaultGroup]);
+      const flattenObject = (obj: any) => {
+        const flattened: any = {};
 
-        for (const field of fields) {
-          try {
-            expect(cmsConfig.includes(field)).toBe(true);
-          } catch {
-            console.error(`Missing field ${field} in ${defaultGroup}`);
+        Object.keys(obj).forEach((key) => {
+          const value = obj[key];
+
+          if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+            Object.assign(flattened, flattenObject(value));
+          } else {
+            flattened[key] = value;
           }
+        });
+
+        return flattened;
+      };
+
+      for (const field of Object.keys(flattenObject(mergedConfig))) {
+        try {
+          expect(cmsConfig.includes(field)).toBe(true);
+        } catch {
+          console.error(`Missing field ${field}`);
         }
       }
     });

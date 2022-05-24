@@ -320,6 +320,14 @@ ol {
   svg.MuiSvgIcon-root {
     display: none;
   }
+
+  .css-zzms1-MuiSnackbar-root {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    transform: unset;
+  }
 }
 
 .override-padding {

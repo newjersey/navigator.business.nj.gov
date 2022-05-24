@@ -1,17 +1,12 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { GraduationModal } from "@/components/roadmap/GraduationModal";
 import { MediaQueries } from "@/lib/PageSizes";
-import { LoadDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
-type Props = {
-  displayContent: LoadDisplayContent;
-};
-
-export const GraduationBox = (props: Props): ReactElement => {
+export const GraduationBox = (): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
@@ -44,12 +39,7 @@ export const GraduationBox = (props: Props): ReactElement => {
 
   return (
     <>
-      <GraduationModal
-        displayContent={props.displayContent}
-        open={modalOpen}
-        handleClose={() => setModalOpen(false)}
-        onSave={() => undefined}
-      />
+      <GraduationModal open={modalOpen} handleClose={() => setModalOpen(false)} onSave={() => undefined} />
       <div
         className={`padding-3 bg-base-lightest radius-md ${
           isTabletAndUp

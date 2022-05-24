@@ -1,0 +1,38 @@
+{
+  "profileDefaults": {
+    "STARTING": {
+      "cannabisLicense": {
+        "description": "Which type of license do you plan to get?\n\nLearn more about the `Conditional & Conversion License|cannabis-conditional-license` or the `Annual License|cannabis-annual-license`.",
+        "header": "### Cannabis License",
+        "radioButtonAnnualText": "Annual",
+        "radioButtonConditionalText": "Conditional"
+      },
+      "cpa": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Public Accounting Services",
+        "description": "Will you provide Certified Public Accounting Services?"
+      },
+      "employmentAgency": {
+        "header": "",
+        "description": "Learn about other `employment and personnel industries|employment-agency-types`."
+      },
+      "homeContractor": {
+        "header": "",
+        "description": "`Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
+      },
+      "liquorLicense": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Liquor",
+        "description": "Do you plan to serve liquor, including beer or wine?"
+      },
+      "homeBased": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Home-based business",
+        "description": "Do you plan to be a `home-based business|home-based-business`?"
+      }
+    }
+  }
+}

@@ -318,21 +318,13 @@
     "tagContentBeforeDueDate": "Next Due:"
   },
   "onboardingDefaults": {
-    "errorTextRequiredLegal": "Please select a legal structure.",
-    "errorTextRequiredExistingEmployees": "Please enter number of employees.",
     "errorTextMinimumNumericField": "Must be ${length} digits long.",
     "backButtonText": "Back",
     "finalNextButtonText": "Submit",
-    "dateOfFormationErrorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
     "pageTitle": "Tell Us About Your Business",
-    "errorTextRequiredMunicipality": "Please select a location.",
     "stepXofYTemplate": "(Step ${currentPage} of ${totalPages})",
-    "errorTextRequiredIndustry": "Industry is a required field.",
     "nextButtonText": "Next",
-    "stepOneTemplate": "(Step ${currentPage})",
-    "errorTextRequiredSector": "Please select a sector.",
-    "errorTextRequiredExistingBusiness": "Please select whether you have an existing business.",
-    "errorTextRequiredBusinessName": "Please enter your business name."
+    "stepOneTemplate": "(Step ${currentPage})"
   },
   "roadmapDefaults": {
     "roadmapTitleBusinessAndUserMissing": "Hello!",
@@ -477,22 +469,14 @@
     "errorTextHeader": "Error",
     "backButtonText": "Cancel",
     "pageTitle": "### Business Profile",
-    "taxPinErrorText": "Tax PIN must be 4 digits.",
     "escapeModalEscape": "Go back",
     "escapeModalBody": "You have unsaved changes that will be lost.",
-    "standingDocFileTitle": "Certified Copy of Formation",
-    "profileTabDocsTitle": "Reference Documents",
-    "profileTabRefTitle": "Reference Numbers",
     "successTextBody": "Your profile has been updated.",
-    "formationDocFileTitle": "Official Formation Document",
     "errorTextBody": "There are errors with some entries, please try again.",
     "escapeModalHeader": "Are you sure you want to continue?",
-    "profileTabNoteTitle": "Notes",
     "saveButtonText": "Save",
     "escapeModalReturn": "Continue without saving.",
-    "successTextHeader": "Profile Updated",
-    "certificationDocFileTitle": "Certificate of Good Standing",
-    "profileTabInfoTitle": "Business Information"
+    "successTextHeader": "Profile Updated"
   },
   "cannabisApplyForLicense": {
     "impactZoneLabel": "`Impact Zone Business|impact-zone-business-cannabis`",

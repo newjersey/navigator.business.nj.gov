@@ -1,8 +1,9 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { createEmptyLoadDisplayContent, LoadDisplayContent } from "@/lib/types/types";
-import { templateEval } from "@/lib/utils/helpers";
-import Profile, { ProfileTabs } from "@/pages/profile";
+import { ProfileTabs } from "@/lib/types/types";
+import { getFlow, templateEval } from "@/lib/utils/helpers";
+import Profile from "@/pages/profile";
 import {
   generateFormationData,
   generateGetFilingResponse,
@@ -21,7 +22,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   createEmptyUserData,
   getCurrentDate,
@@ -35,6 +35,7 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 import React from "react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
+const Config = getMergedConfig();
 
 const dateOfFormation = date.format("YYYY-MM-DD");
 const mockApi = api as jest.Mocked<typeof api>;
@@ -61,12 +62,10 @@ describe("profile", () => {
 
   const renderPage = ({
     municipalities,
-    displayContent,
     userData,
     isAuthenticated,
   }: {
     municipalities?: Municipality[];
-    displayContent?: LoadDisplayContent;
     userData?: UserData;
     isAuthenticated?: IsAuthenticated;
   }) => {
@@ -81,10 +80,7 @@ describe("profile", () => {
             userData || generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
           }
         >
-          <Profile
-            displayContent={displayContent || createEmptyLoadDisplayContent()}
-            municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]}
-          />
+          <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
         { modalIsVisible: false, setModalIsVisible }
@@ -95,7 +91,7 @@ describe("profile", () => {
   it("shows loading page if page has not loaded yet", () => {
     render(
       <WithStatefulUserData initialUserData={undefined}>
-        <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
+        <Profile municipalities={[]} />
       </WithStatefulUserData>
     );
 
@@ -336,16 +332,19 @@ describe("profile", () => {
 
     it("prevents user from saving if they have not selected a location", async () => {
       const newark = generateMunicipality({ displayName: "Newark" });
-      renderPage({ municipalities: [newark] });
+      const userData = generateUserData({});
+      renderPage({ municipalities: [newark], userData });
       fillText("Location", "");
       fireEvent.blur(screen.getByLabelText("Location"));
       clickSave();
-      expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
+      ).toBeInTheDocument();
       expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
       selectByText("Location", newark.displayName);
       await waitFor(() =>
         expect(
-          screen.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
+          screen.queryByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
         ).not.toBeInTheDocument()
       );
     });
@@ -422,7 +421,7 @@ describe("profile", () => {
       render(
         withRoadmap(
           <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
-            <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
+            <Profile municipalities={[]} />
           </WithStatefulUserData>,
           undefined,
           undefined,
@@ -582,18 +581,24 @@ describe("profile", () => {
 
       fillText("Tax pin", "");
       fireEvent.blur(screen.getByLabelText("Tax pin"));
-      expect(screen.queryByText(Config.profileDefaults.taxPinErrorText)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].taxPin.errorText)
+      ).not.toBeInTheDocument();
 
       fillText("Tax pin", "123");
       fireEvent.blur(screen.getByLabelText("Tax pin"));
       await waitFor(() => {
-        expect(screen.getByText(Config.profileDefaults.taxPinErrorText)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults[getFlow(userData)].taxPin.errorText)
+        ).toBeInTheDocument();
       });
 
       fillText("Tax pin", "1234");
       fireEvent.blur(screen.getByLabelText("Tax pin"));
       await waitFor(() => {
-        expect(screen.queryByText(Config.profileDefaults.taxPinErrorText)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.profileDefaults[getFlow(userData)].taxPin.errorText)
+        ).not.toBeInTheDocument();
       });
     });
 
@@ -626,7 +631,9 @@ describe("profile", () => {
 
       clickSave();
       await waitFor(() => {
-        expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+        ).toBeInTheDocument();
       });
       expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
@@ -648,7 +655,7 @@ describe("profile", () => {
       render(
         withRoadmap(
           <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
-            <Profile displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
+            <Profile municipalities={[]} />
           </WithStatefulUserData>,
           undefined,
           undefined,
@@ -765,7 +772,6 @@ describe("profile", () => {
     });
 
     it("shows placeholder text if there are no documents", () => {
-      const content = createEmptyLoadDisplayContent();
       const userData = generateUserData({
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({ success: true }),
@@ -776,19 +782,16 @@ describe("profile", () => {
           documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
         }),
       });
-      renderPage({
-        userData,
-        displayContent: {
-          ...content,
-          PROFILE: { ...content.PROFILE, documents: { contentMd: "", placeholder: "test12345" } },
-        },
-      });
+      renderPage({ userData });
       chooseTab("documents");
-      expect(screen.getByText("test12345")).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults[getFlow(userData)].documents.placeholder.split("[")[0], {
+          exact: false,
+        })
+      ).toBeInTheDocument();
     });
 
     it("shows document links", () => {
-      const content = createEmptyLoadDisplayContent();
       const userData = generateUserData({
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({ success: true }),
@@ -799,13 +802,7 @@ describe("profile", () => {
           documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
         }),
       });
-      renderPage({
-        userData,
-        displayContent: {
-          ...content,
-          PROFILE: { ...content.PROFILE, documents: { contentMd: "", placeholder: "test12345" } },
-        },
-      });
+      renderPage({ userData });
       chooseTab("documents");
       expect(screen.queryByText("test12345")).not.toBeInTheDocument();
       expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
@@ -846,7 +843,6 @@ describe("profile", () => {
     });
 
     it("hides document links if they do not exist", () => {
-      const content = createEmptyLoadDisplayContent();
       const userData = generateUserData({
         formationData: generateFormationData({
           getFilingResponse: generateGetFilingResponse({ success: true }),
@@ -858,16 +854,9 @@ describe("profile", () => {
         }),
       });
 
-      renderPage({
-        userData,
-        displayContent: {
-          ...content,
-          PROFILE: { ...content.PROFILE, documents: { contentMd: "zpiasd", placeholder: "test12345" } },
-        },
-      });
+      renderPage({ userData });
       chooseTab("documents");
 
-      expect(screen.queryByText("test12345")).not.toBeInTheDocument();
       expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
       expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
       expect(screen.queryByText(Config.profileDefaults.standingDocFileTitle)).not.toBeInTheDocument();

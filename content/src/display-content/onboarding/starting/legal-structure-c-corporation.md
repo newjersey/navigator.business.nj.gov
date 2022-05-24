@@ -1,1 +1,0 @@
-A traditional Corporation (C Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. [Learn more](https://business.nj.gov/pages/c-corporation-c-corp)

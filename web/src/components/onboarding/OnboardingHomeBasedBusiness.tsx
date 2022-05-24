@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
@@ -11,6 +12,7 @@ interface Props {
 
 export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
 
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     setProfileData({
@@ -23,8 +25,9 @@ export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
   const header = setHeaderRole(props.headerAriaLevel + 1, eleSize);
 
   return (
-    <>
-      <Content overrides={{ h3: header }}>{state.displayContent.homeBased.contentMd}</Content>
+    <div data-testid="home-based-business-section">
+      <Content overrides={{ h3: header }}>{Config.profileDefaults[state.flow].homeBased.header}</Content>
+      <Content overrides={{ h3: header }}>{Config.profileDefaults[state.flow].homeBased.description}</Content>
       <FormControl fullWidth>
         <RadioGroup
           aria-label="Home-based Business"
@@ -39,7 +42,7 @@ export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
             data-testid="home-based-business-true"
             value={true}
             control={<Radio color="primary" />}
-            label={state.displayContent.homeBased.radioButtonYesText}
+            label={Config.profileDefaults[state.flow].homeBased.radioButtonYesText}
           />
           <FormControlLabel
             style={{ marginRight: "3rem" }}
@@ -47,10 +50,10 @@ export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
             data-testid="home-based-business-false"
             value={false}
             control={<Radio color="primary" />}
-            label={state.displayContent.homeBased.radioButtonNoText}
+            label={Config.profileDefaults[state.flow].homeBased.radioButtonNoText}
           />
         </RadioGroup>
       </FormControl>
-    </>
+    </div>
   );
 };

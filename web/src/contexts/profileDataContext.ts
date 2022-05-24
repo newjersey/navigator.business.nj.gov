@@ -1,5 +1,5 @@
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
-import { createEmptyUserDisplayContent, UserContentType, UserDisplayContent } from "@/lib/types/types";
+import { FlowType } from "@/lib/types/types";
 import {
   BusinessUser,
   createEmptyProfileData,
@@ -13,8 +13,7 @@ interface ProfileDataState {
   page?: number;
   profileData: ProfileData;
   user?: BusinessUser;
-  displayContent: UserDisplayContent;
-  flow?: UserContentType;
+  flow: FlowType;
   municipalities: Municipality[];
 }
 
@@ -31,7 +30,6 @@ export const ProfileDataContext = createContext<ProfileDataContextType>({
     profileData: createEmptyProfileData(),
     user: createEmptyUser(ABStorageFactory().getExperience()),
     flow: "STARTING",
-    displayContent: createEmptyUserDisplayContent(),
     municipalities: [],
   },
   setProfileData: () => {},

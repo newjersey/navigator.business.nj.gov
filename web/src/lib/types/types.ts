@@ -1,12 +1,14 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import {
   BusinessUser,
-  emptyBusinessUser,
-  emptyProfileData,
   FormationFormData,
   PaymentType,
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { emptyBusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import merge from "lodash.merge";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -18,87 +20,7 @@ export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
 export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS";
 
-export type TextFieldContent = {
-  contentMd: string;
-  placeholder?: string;
-  headingBolded?: string;
-  headingNotBolded?: string;
-};
-
-export type RadioFieldContent = {
-  contentMd: string;
-  radioButtonYesText: string;
-  radioButtonNoText: string;
-};
-
-export type CannabisRadioFieldContent = {
-  contentMd: string;
-  radioButtonAnnualText: string;
-  radioButtonConditionalText: string;
-};
-
-export interface LegalFieldContent extends TextFieldContent {
-  optionContent?: Record<string, string>;
-}
 export type FlowType = "OWNING" | "STARTING";
-
-export type UserContentType = FlowType | "PROFILE";
-export interface IndustryFieldContent extends TextFieldContent {
-  specificHomeContractorMd: string;
-  specificEmploymentAgencyMd: string;
-  specificLiquorQuestion: RadioFieldContent;
-  specificCannabisLicenseQuestion: CannabisRadioFieldContent;
-  specificCpaQuestion: RadioFieldContent;
-}
-
-export type StartingFlowContent = {
-  hasExistingBusiness: RadioFieldContent;
-  businessName: TextFieldContent;
-  industryId: IndustryFieldContent;
-  municipality: TextFieldContent;
-  legalStructure: LegalFieldContent;
-  homeBased: RadioFieldContent;
-};
-
-export type ProfileContent = {
-  businessName: TextFieldContent;
-  industryId: IndustryFieldContent;
-  municipality: TextFieldContent;
-  legalStructure: LegalFieldContent;
-  notes: TextFieldContent;
-  documents: TextFieldContent;
-  taxId: TextFieldContent;
-  entityId: TextFieldContent;
-  employerId: TextFieldContent;
-  taxPin: TextFieldContent;
-  ownership: TextFieldContent;
-  existingEmployees: TextFieldContent;
-  dateOfFormation: TextFieldContent;
-  sectorId: TextFieldContent;
-  homeBased: RadioFieldContent;
-};
-
-export type OwningFlowContent = {
-  hasExistingBusiness: RadioFieldContent;
-  businessName: TextFieldContent;
-  dateOfFormation: TextFieldContent;
-  entityId: TextFieldContent;
-  ownership: TextFieldContent;
-  legalStructure: LegalFieldContent;
-  municipality: TextFieldContent;
-  existingEmployees: TextFieldContent;
-  sectorId: TextFieldContent;
-  homeBased: RadioFieldContent;
-};
-
-export interface UserDisplayContent extends StartingFlowContent, OwningFlowContent, ProfileContent {}
-
-export interface LoadDisplayContent
-  extends Record<UserContentType, OwningFlowContent | StartingFlowContent | Partial<ProfileContent>> {
-  OWNING: OwningFlowContent;
-  STARTING: StartingFlowContent;
-  PROFILE: Partial<ProfileContent>;
-}
 
 export type CannabisPriorityStatusDisplayContent = {
   socialEquityBusiness: { contentMd: string };
@@ -125,7 +47,12 @@ export type FormationDisplayContent = {
     radioButtonNumberText: string;
     radioButtonManualText: string;
   };
-  members: TextFieldContent;
+  members: {
+    contentMd: string;
+    placeholder?: string;
+    headingBolded?: string;
+    headingNotBolded?: string;
+  };
   signatureHeader: {
     contentMd: string;
   };
@@ -218,195 +145,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
   },
 });
 
-const coreContent = {
-  businessName: {
-    contentMd: "",
-    placeholder: "",
-  },
-  legalStructure: {
-    contentMd: "",
-    optionContent: {
-      "sole-proprietorship": "",
-      "general-partnership": "",
-      "limited-partnership": "",
-      "limited-liability-partnership": "",
-      "limited-liability-company": "",
-      "c-corporation": "",
-      "s-corporation": "",
-    },
-  },
-  municipality: {
-    contentMd: "",
-    placeholder: "",
-  },
-  homeBased: {
-    contentMd: "",
-    radioButtonYesText: "",
-    radioButtonNoText: "",
-  },
-};
-
-export const emptyStartingFlowContent: StartingFlowContent = {
-  ...coreContent,
-  hasExistingBusiness: {
-    contentMd: "",
-    radioButtonYesText: "",
-    radioButtonNoText: "",
-  },
-  industryId: {
-    contentMd: "",
-    placeholder: "",
-    specificHomeContractorMd: "",
-    specificEmploymentAgencyMd: "",
-    specificLiquorQuestion: {
-      contentMd: "",
-      radioButtonYesText: "",
-      radioButtonNoText: "",
-    },
-    specificCannabisLicenseQuestion: {
-      contentMd: "",
-      radioButtonAnnualText: "",
-      radioButtonConditionalText: "",
-    },
-    specificCpaQuestion: {
-      contentMd: "",
-      radioButtonYesText: "",
-      radioButtonNoText: "",
-    },
-  },
-};
-
-export const emptyProfileContent: ProfileContent = {
-  ...coreContent,
-  notes: {
-    contentMd: "",
-  },
-  documents: {
-    contentMd: "",
-    placeholder: "",
-  },
-  taxId: {
-    contentMd: "",
-  },
-  employerId: {
-    contentMd: "",
-  },
-  entityId: {
-    contentMd: "",
-  },
-  taxPin: {
-    contentMd: "",
-  },
-  businessName: {
-    contentMd: "",
-  },
-  ownership: {
-    contentMd: "",
-  },
-  existingEmployees: {
-    contentMd: "",
-  },
-  dateOfFormation: {
-    contentMd: "",
-  },
-  sectorId: {
-    contentMd: "",
-  },
-  industryId: {
-    contentMd: "",
-    placeholder: "",
-    specificHomeContractorMd: "",
-    specificEmploymentAgencyMd: "",
-    specificLiquorQuestion: {
-      contentMd: "",
-      radioButtonYesText: "",
-      radioButtonNoText: "",
-    },
-    specificCannabisLicenseQuestion: {
-      contentMd: "",
-      radioButtonAnnualText: "",
-      radioButtonConditionalText: "",
-    },
-    specificCpaQuestion: {
-      contentMd: "",
-      radioButtonYesText: "",
-      radioButtonNoText: "",
-    },
-  },
-};
-
-export const emptyOwningFlowContent: OwningFlowContent = {
-  businessName: coreContent.businessName,
-  municipality: coreContent.municipality,
-  homeBased: coreContent.homeBased,
-  hasExistingBusiness: { contentMd: "", radioButtonYesText: "", radioButtonNoText: "" },
-  entityId: {
-    contentMd: "",
-  },
-  ownership: {
-    contentMd: "",
-    placeholder: "",
-  },
-  dateOfFormation: {
-    contentMd: "",
-    placeholder: "",
-  },
-  existingEmployees: {
-    contentMd: "",
-    placeholder: "",
-  },
-  sectorId: {
-    contentMd: "",
-    placeholder: "",
-  },
-  legalStructure: {
-    contentMd: "",
-    placeholder: "",
-    optionContent: {
-      "sole-proprietorship": "",
-      "general-partnership": "",
-      "limited-partnership": "",
-      "limited-liability-partnership": "",
-      "limited-liability-company": "",
-      "c-corporation": "",
-      "s-corporation": "",
-    },
-  },
-};
-
-export const createEmptyUserDisplayContent = (): UserDisplayContent => ({
-  ...emptyOwningFlowContent,
-  ...emptyStartingFlowContent,
-  ...emptyProfileContent,
-});
-
-export const createEmptyLoadDisplayContent = (): LoadDisplayContent => ({
-  STARTING: emptyStartingFlowContent,
-  OWNING: emptyOwningFlowContent,
-  PROFILE: emptyProfileContent,
-});
-export type ProfileFields = (keyof ProfileData & keyof UserDisplayContent) | keyof BusinessUser;
-
-export const profileDisplayFields = Object.keys(emptyProfileContent) as (keyof ProfileContent)[];
-
-export const owningFlowDisplayFields = Object.keys(emptyOwningFlowContent) as (keyof OwningFlowContent)[];
-
-export const startFlowDisplayFields = Object.keys(emptyStartingFlowContent) as (keyof StartingFlowContent)[];
-
-const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
-
-const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
-
-export const profileFields: ProfileFields[] = [
-  ...new Set([
-    ...profileDisplayFields,
-    ...onboardingDataFields,
-    ...owningFlowDisplayFields,
-    ...startFlowDisplayFields,
-    ...businessUserDisplayFields,
-  ]),
-] as ProfileFields[];
-
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
 export type FormationFields = keyof FormationFormData;
@@ -418,7 +156,23 @@ export type FieldStatus = {
   types?: FormationErrorTypes[];
 };
 
+const profileFieldsFromConfig = merge(
+  getMergedConfig().profileDefaults["STARTING"],
+  getMergedConfig().profileDefaults["OWNING"]
+);
+
+export type ProfileFields = (keyof ProfileData & keyof typeof profileFieldsFromConfig) | keyof BusinessUser;
+
 export type ProfileFieldErrorMap = Record<ProfileFields, FieldStatus>;
+
+const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
+
+const businessUserDisplayFields = Object.keys(emptyBusinessUser) as (keyof BusinessUser)[];
+const onboardingDataFields = Object.keys(emptyProfileData) as (keyof ProfileData)[];
+
+export const profileFields: ProfileFields[] = [
+  ...new Set([...allProfileFields, ...onboardingDataFields, ...businessUserDisplayFields]),
+] as ProfileFields[];
 
 export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
   profileFields.reduce((p, c: ProfileFields) => {
@@ -680,3 +434,5 @@ export type NaicsCodeObject = {
 export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
 export type FeedbackRequestDialogNames = "Select Feedback" | "Feature Request" | "Request Submitted";
+
+export type ProfileTabs = "info" | "numbers" | "documents" | "notes";
