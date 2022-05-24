@@ -11,6 +11,22 @@ jest.mock("jsonwebtoken", () => ({
 }));
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
 
+const cognitoPayload = ({ id }: { id: string }) => ({
+  sub: "some-sub",
+  "custom:myNJUserKey": undefined,
+  email: "some-eamail",
+  identities: [
+    {
+      dateCreated: "some-date",
+      issuer: "some-issuer",
+      primary: "some-primary",
+      providerName: "myNJ",
+      providerType: "some-provider-type",
+      userId: id,
+    },
+  ],
+});
+
 describe("externalEndpointRouter", () => {
   let app: Express;
 
@@ -40,22 +56,6 @@ describe("externalEndpointRouter", () => {
         stubFeedbackClient
       )
     );
-  });
-
-  const cognitoPayload = ({ id }: { id: string }) => ({
-    sub: "some-sub",
-    "custom:myNJUserKey": undefined,
-    email: "some-eamail",
-    identities: [
-      {
-        dateCreated: "some-date",
-        issuer: "some-issuer",
-        primary: "some-primary",
-        providerName: "myNJ",
-        providerType: "some-provider-type",
-        userId: id,
-      },
-    ],
   });
 
   afterAll(async () => {

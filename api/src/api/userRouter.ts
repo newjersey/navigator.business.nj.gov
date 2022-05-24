@@ -31,6 +31,21 @@ type CognitoIdentityPayload = {
   userId: string;
 };
 
+const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>
+  parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
+
+const clearTaskItemChecklists = (userData: UserData): UserData => {
+  return {
+    ...userData,
+    taskItemChecklist: {},
+  };
+};
+
+const shouldCheckLicense = (userData: UserData): boolean =>
+  userData.licenseData !== undefined &&
+  industryHasALicenseType(userData.profileData.industryId) &&
+  hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus);
+
 export const getSignedInUser = (req: Request): CognitoJWTPayload =>
   jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
 
@@ -105,23 +120,13 @@ export const userRouterFactory = (
       });
   });
 
-  const shouldCheckLicense = (userData: UserData): boolean =>
-    userData.licenseData !== undefined &&
-    industryHasALicenseType(userData.profileData.industryId) &&
-    hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus);
-
-  const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>
-    parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
-
-  const industryHasChanged = (userData: UserData): Promise<boolean> => {
-    return userDataClient
-      .get(userData.user.id)
-      .then((oldUserData) => {
-        return oldUserData.profileData.industryId !== userData.profileData.industryId;
-      })
-      .catch(() => {
-        return false;
-      });
+  const industryHasChanged = async (userData: UserData): Promise<boolean> => {
+    try {
+      const oldUserData = await userDataClient.get(userData.user.id);
+      return oldUserData.profileData.industryId !== userData.profileData.industryId;
+    } catch {
+      return false;
+    }
   };
 
   const updateRoadmapSidecards = (userData: UserData): UserData => {
@@ -142,13 +147,6 @@ export const userRouterFactory = (
     userDataClient.put(updatedUserData);
 
     return updatedUserData;
-  };
-
-  const clearTaskItemChecklists = (userData: UserData): UserData => {
-    return {
-      ...userData,
-      taskItemChecklist: {},
-    };
   };
 
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {

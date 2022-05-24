@@ -28,7 +28,7 @@ export const WebserviceLicenseStatusClient = (
       })
       .catch((error: AxiosError) => {
         logWriter.LogError("License Status Search - Error", error);
-        return Promise.reject(error.response?.status);
+        throw error.response?.status;
       });
   };
 

@@ -1,6 +1,6 @@
 import { PutObjectCommand, PutObjectCommandOutput, S3Client } from "@aws-sdk/client-s3";
 import axios, { AxiosResponse } from "axios";
-import { createHash } from "crypto";
+import { createHash } from "node:crypto";
 
 export const uploadFile = async function (
   fullName: string,
@@ -36,8 +36,8 @@ export const getFileFromURL = async function (URI: string): Promise<AxiosRespons
         .then((response) => {
           resolve(response);
         });
-    } catch (err) {
-      reject(err);
+    } catch (error) {
+      reject(error);
     }
   });
 };
@@ -65,12 +65,12 @@ export const saveFileFromUrl = async function (
               resolve(escapeColons(`https://${bucket}.s3.us-east-1.amazonaws.com/${fullName}`));
             else reject(s3response.$metadata.httpStatusCode);
           })
-          .catch((err) => {
-            reject(err);
+          .catch((error) => {
+            reject(error);
           });
       })
-      .catch((err) => {
-        reject(err);
+      .catch((error) => {
+        reject(error);
       });
   });
 };

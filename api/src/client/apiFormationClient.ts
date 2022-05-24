@@ -176,9 +176,9 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         AdditionalLimitedLiabilityCompany: additionalProvisions,
         CompanyProfit: "Profit",
         RegisteredAgent: {
-          Id: isManual ? null : formationFormData.agentNumber,
-          Email: isManual ? formationFormData.agentEmail : null,
-          Name: isManual ? formationFormData.agentName : null,
+          Id: isManual ? undefined : formationFormData.agentNumber,
+          Email: isManual ? formationFormData.agentEmail : undefined,
+          Name: isManual ? formationFormData.agentName : undefined,
           Location: isManual
             ? {
                 Address1: formationFormData.agentOfficeAddressLine1,
@@ -188,7 +188,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                 Zipcode: formationFormData.agentOfficeAddressZipCode,
                 Country: "US",
               }
-            : null,
+            : undefined,
         },
         Members: formationFormData.members.map((member) => ({
           Name: member.name,

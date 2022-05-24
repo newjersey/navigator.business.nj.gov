@@ -5,7 +5,7 @@ import {
   v54ProfileData,
   v54UserData,
 } from "./v54_add_business_purpose";
-import { migrate_v54_to_v55 } from "./v55_marketing-and-pr";
+import { migrate_v54_to_v55 } from "./v55_marketing_and_pr";
 
 describe("migrate_v54_to_v55", () => {
   const user = generatev54User({});

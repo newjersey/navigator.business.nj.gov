@@ -4,7 +4,7 @@ export const splitErrorField = (errorField: string): string => {
     return splitToSpaces(fields[1]);
   } else {
     fields.shift();
-    return fields.map(splitToSpaces).join(" - ");
+    return fields.map((element) => splitToSpaces(element)).join(" - ");
   }
 };
 

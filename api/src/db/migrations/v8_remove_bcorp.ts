@@ -11,12 +11,10 @@ export interface v8UserData {
 }
 
 export const migrate_v7_to_v8 = (v7Data: v7UserData): v8UserData => {
-  let newLegalStructure;
-  if (v7Data.onboardingData.legalStructure === "b-corporation") {
-    newLegalStructure = undefined;
-  } else {
-    newLegalStructure = v7Data.onboardingData.legalStructure;
-  }
+  const newLegalStructure =
+    v7Data.onboardingData.legalStructure === "b-corporation"
+      ? undefined
+      : v7Data.onboardingData.legalStructure;
 
   return {
     ...v7Data,

@@ -15,11 +15,47 @@ import {
   ApiGetFilingResponse,
   ApiResponse,
   ApiSubmission,
-} from "./ApiFormationClient";
+} from "./apiFormationClient";
 
 jest.mock("axios");
 jest.mock("winston");
 const mockAxios = axios as jest.Mocked<typeof axios>;
+
+const generateApiResponse = (overrides: Partial<ApiResponse>): ApiResponse => {
+  return {
+    Success: true,
+    Id: `some-id-${Math.random()}`,
+    PayUrl: {
+      PortalPayId: `some-pay-id-${Math.random()}`,
+      RedirectToUrl: `some-redirect-url-${Math.random()}`,
+      StatusCode: 1,
+    },
+    ...overrides,
+  };
+};
+
+const generateApiError = (overrides: Partial<ApiError>): ApiError => {
+  return {
+    Valid: false,
+    ErrorMessage: `some-error-message-${Math.random()}`,
+    Name: `some-error-name-${Math.random()}`,
+    ...overrides,
+  };
+};
+
+const stubGenerateApiResponse = (overrides: Partial<ApiGetFilingResponse>): ApiGetFilingResponse => {
+  return {
+    Success: true,
+    BusinessName: `some-BusinessName-${Math.random()}`,
+    EntityId: `some-EntityId-${Math.random()}`,
+    TransactionDate: getCurrentDateISOString(),
+    ConfirmationNumber: `some-ConfirmationNumber-${Math.random()}`,
+    FormationDoc: `some-FormationDoc-${Math.random()}`,
+    StandingDoc: `some-StandingDoc-${Math.random()}`,
+    CertifiedDoc: `some-CertifiedDoc-${Math.random()}`,
+    ...overrides,
+  };
+};
 
 describe("ApiFormationClient", () => {
   let client: FormationClient;
@@ -110,7 +146,7 @@ describe("ApiFormationClient", () => {
           },
           CompanyProfit: "Profit",
           RegisteredAgent: {
-            Id: null,
+            Id: undefined,
             Email: formationFormData.agentEmail,
             Name: formationFormData.agentName,
             Location: {
@@ -174,9 +210,9 @@ describe("ApiFormationClient", () => {
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
       expect(postBody.Formation.RegisteredAgent.Id).toEqual(formationFormData.agentNumber);
-      expect(postBody.Formation.RegisteredAgent.Email).toEqual(null);
-      expect(postBody.Formation.RegisteredAgent.Name).toEqual(null);
-      expect(postBody.Formation.RegisteredAgent.Location).toEqual(null);
+      expect(postBody.Formation.RegisteredAgent.Email).toEqual(undefined);
+      expect(postBody.Formation.RegisteredAgent.Name).toEqual(undefined);
+      expect(postBody.Formation.RegisteredAgent.Location).toEqual(undefined);
     });
 
     it("sends with empty NAICS code if profile data NAICS is not 6 digits", async () => {
@@ -292,33 +328,11 @@ describe("ApiFormationClient", () => {
         errors: [{ field: "", message: "Unknown Error", type: "UNKNOWN" }],
       });
     });
-
-    const generateApiResponse = (overrides: Partial<ApiResponse>): ApiResponse => {
-      return {
-        Success: true,
-        Id: `some-id-${Math.random()}`,
-        PayUrl: {
-          PortalPayId: `some-pay-id-${Math.random()}`,
-          RedirectToUrl: `some-redirect-url-${Math.random()}`,
-          StatusCode: 1,
-        },
-        ...overrides,
-      };
-    };
-
-    const generateApiError = (overrides: Partial<ApiError>): ApiError => {
-      return {
-        Valid: false,
-        ErrorMessage: `some-error-message-${Math.random()}`,
-        Name: `some-error-name-${Math.random()}`,
-        ...overrides,
-      };
-    };
   });
 
   describe("getCompletedFiling", () => {
     it("posts to the endpoint with formationId token", async () => {
-      const stubResponse = generateApiResponse({});
+      const stubResponse = stubGenerateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
       const response = await client.getCompletedFiling("formation-id-123");
@@ -339,19 +353,5 @@ describe("ApiFormationClient", () => {
         certifiedDoc: stubResponse.CertifiedDoc,
       });
     });
-
-    const generateApiResponse = (overrides: Partial<ApiGetFilingResponse>): ApiGetFilingResponse => {
-      return {
-        Success: true,
-        BusinessName: `some-BusinessName-${Math.random()}`,
-        EntityId: `some-EntityId-${Math.random()}`,
-        TransactionDate: getCurrentDateISOString(),
-        ConfirmationNumber: `some-ConfirmationNumber-${Math.random()}`,
-        FormationDoc: `some-FormationDoc-${Math.random()}`,
-        StandingDoc: `some-StandingDoc-${Math.random()}`,
-        CertifiedDoc: `some-CertifiedDoc-${Math.random()}`,
-        ...overrides,
-      };
-    };
   });
 });

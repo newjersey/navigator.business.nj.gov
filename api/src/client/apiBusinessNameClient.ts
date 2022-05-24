@@ -21,7 +21,7 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
       })
       .catch((error: AxiosError) => {
         logWriter.LogError("Business Name Search - NICUSA - Error", error);
-        return Promise.reject(error.response?.status);
+        throw error.response?.status;
       });
   };
 

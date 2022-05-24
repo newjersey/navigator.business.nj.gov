@@ -3,7 +3,12 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:unicorn/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {},
@@ -13,7 +18,21 @@
   "plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin", "jest"],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "kebabCase": true,
+          "camelCase": true,
+          "snakeCase": true
+        }
+      }
+    ],
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/numeric-separators-style": "off",
+    "unicorn/prefer-module": "off",
+    "unicorn/no-array-reduce": "off"
   },
   "overrides": [
     {

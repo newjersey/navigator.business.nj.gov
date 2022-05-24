@@ -6,12 +6,20 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { UserDataClient } from "../domain/types";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./dynamoUserDataClient";
 
 // references jest-dynalite-config values
 const dbConfig = {
   tableName: "users-table-test",
 };
+
+const makeParams = (data: any) => ({
+  TableName: dbConfig.tableName,
+  Item: {
+    userId: data.user.id,
+    data: { ...data },
+  },
+});
 
 jest.mock("./migrations/migrations", () => ({
   Migrations: [migrate_v0_to_v1, migrate_v1_to_v2],
@@ -105,14 +113,6 @@ describe("DynamoUserDataClient Migrations", () => {
   });
 
   const insertOldData = async () => {
-    const makeParams = (data: any) => ({
-      TableName: dbConfig.tableName,
-      Item: {
-        userId: data.user.id,
-        data: { ...data },
-      },
-    });
-
     await client.send(new PutCommand(makeParams(v0Data)));
     await client.send(new PutCommand(makeParams(v1Data)));
     await client.send(new PutCommand(makeParams(v2Data)));
@@ -182,7 +182,7 @@ function migrate_v0_to_v1(data: v0): v1 {
   const { v0Field, ...rest } = data;
   return {
     ...rest,
-    v0FieldRenamed: data.v0Field,
+    v0FieldRenamed: v0Field,
     version: 1,
   };
 }

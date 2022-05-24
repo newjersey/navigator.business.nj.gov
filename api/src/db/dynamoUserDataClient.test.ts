@@ -3,7 +3,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { generateUser, generateUserData } from "../../test/factories";
 import { UserDataClient } from "../domain/types";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./dynamoUserDataClient";
 
 // references jest-dynalite-config values
 const dbConfig = {

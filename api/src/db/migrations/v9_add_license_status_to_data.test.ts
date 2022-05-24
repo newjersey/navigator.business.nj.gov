@@ -14,12 +14,12 @@ describe("migrate_v8_to_v9", () => {
   const taskProgress = {};
   const onboardingData = generateV8OnboardingData({});
 
-  const makeV8 = (licenseSearchData: v8LicenseSearchData | undefined): v8UserData => {
+  const makeV8 = (licenseSearchData?: v8LicenseSearchData | undefined): v8UserData => {
     return { user, onboardingData, formProgress, taskProgress, licenseSearchData, version: 8 };
   };
 
   describe("when user has no license data", () => {
-    const v8 = makeV8(undefined);
+    const v8 = makeV8();
 
     it("continues to be undefined", () => {
       expect(migrate_v8_to_v9(v8)).toEqual({

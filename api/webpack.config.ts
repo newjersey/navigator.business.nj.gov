@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import slsw from "serverless-webpack";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import nodeExternals from "webpack-node-externals";
@@ -8,7 +8,7 @@ This line is only required if you are specifying `TS_NODE_PROJECT` for whatever 
  */
 // delete process.env.TS_NODE_PROJECT;
 
-module.exports = {
+export default {
   context: __dirname,
   mode: slsw.lib.webpack.isLocal ? "development" : "production",
   entry: slsw.lib.entries,

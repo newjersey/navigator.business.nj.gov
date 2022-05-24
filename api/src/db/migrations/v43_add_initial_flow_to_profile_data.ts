@@ -12,17 +12,17 @@ export interface v43UserData {
   version: number;
 }
 
-export const migrate_v42_to_v43 = (v42Data: v42UserData): v43UserData => {
-  const getOnboardingFlow = (hasExistingBusiness: boolean | undefined): "STARTING" | "OWNING" | undefined => {
-    if (hasExistingBusiness === true) {
-      return "OWNING";
-    } else if (hasExistingBusiness === false) {
-      return "STARTING";
-    } else {
-      return undefined;
-    }
-  };
+const getOnboardingFlow = (hasExistingBusiness: boolean | undefined): "STARTING" | "OWNING" | undefined => {
+  if (hasExistingBusiness === true) {
+    return "OWNING";
+  } else if (hasExistingBusiness === false) {
+    return "STARTING";
+  } else {
+    return undefined;
+  }
+};
 
+export const migrate_v42_to_v43 = (v42Data: v42UserData): v43UserData => {
   return {
     ...v42Data,
     profileData: {

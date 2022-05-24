@@ -87,13 +87,13 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       .send(new QueryCommand(params))
       .then(async (result) => {
         if (!result.Items || result.Items.length !== 1) {
-          return Promise.resolve(undefined);
+          return;
         }
         return await doMigration(unmarshall(result.Items[0], unmarshallOptions).data);
       })
       .catch((error) => {
         console.log(error);
-        return Promise.reject("Not found");
+        throw "Not found";
       });
   };
 
@@ -109,12 +109,12 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
 
       .then(async (result) => {
         if (!result.Item) {
-          return Promise.reject("Not found");
+          throw "Not found";
         }
         return await doMigration(result.Item.data);
       })
       .catch((error) => {
-        return Promise.reject(error);
+        throw error;
       });
   };
 
@@ -137,7 +137,7 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
         return userData;
       })
       .catch((error) => {
-        return Promise.reject(error);
+        throw error;
       });
   };
 

@@ -12,15 +12,24 @@ export interface v40UserData {
   version: number;
 }
 
+const determineOpenSteps = (value: number) => {
+  switch (value) {
+    case 2:
+      return 1;
+    case 5:
+      return 4;
+    default:
+      return value;
+  }
+};
+
 export const migrate_v39_to_v40 = (v39Data: v39UserData): v40UserData => {
   return {
     ...v39Data,
     preferences: {
       ...v39Data.preferences,
       roadmapOpenSteps: [
-        ...new Set(
-          v39Data.preferences.roadmapOpenSteps.map((value) => (value === 2 ? 1 : value === 5 ? 4 : value))
-        ),
+        ...new Set(v39Data.preferences.roadmapOpenSteps.map((value) => determineOpenSteps(value))),
       ],
     },
     version: 40,

@@ -11,12 +11,10 @@ export interface v12UserData {
 }
 
 export const migrate_v11_to_v12 = (v11Data: v11UserData): v12UserData => {
-  let newLegalStructure;
-  if (v11Data.onboardingData.legalStructure === "s-corporation") {
-    newLegalStructure = undefined;
-  } else {
-    newLegalStructure = v11Data.onboardingData.legalStructure;
-  }
+  const newLegalStructure =
+    v11Data.onboardingData.legalStructure === "s-corporation"
+      ? undefined
+      : v11Data.onboardingData.legalStructure;
 
   return {
     ...v11Data,

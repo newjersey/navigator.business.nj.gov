@@ -3,7 +3,7 @@ import * as Airtable from "airtable";
 import { generateFeedbackRequest, generateUserData } from "../../test/factories";
 import { FeedbackClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
-import { AirtableFeedbackClient } from "./AirtableFeedbackClient";
+import { AirtableFeedbackClient } from "./airtableFeedbackClient";
 
 type MockAirtableType = {
   baseIdCalledWith: string;
@@ -69,9 +69,10 @@ jest.mock(
       this.baseIdCalledWith = baseId;
       return (tableId: string) => {
         this.tableIdCalledWith = tableId;
-        const create = (newData: any, callback: (err: any, results: any) => void) => {
+        // eslint-disable-next-line unicorn/consistent-function-scoping
+        const create = (newData: any, callback: (err?: any, results?: any) => void) => {
           this.dataCalledWith = newData;
-          callback(undefined, undefined);
+          callback();
         };
 
         return { create };

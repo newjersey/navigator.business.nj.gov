@@ -18,7 +18,7 @@ export const externalEndpointRouterFactory = (
     let isAnonymous;
     try {
       isAnonymous = getSignedInUserId(req) != userData.user.id;
-    } catch (e) {
+    } catch {
       isAnonymous = true;
     }
 
@@ -40,7 +40,7 @@ export const externalEndpointRouterFactory = (
     let isAnonymous;
     try {
       isAnonymous = getSignedInUserId(req) != userData.user.id;
-    } catch (e) {
+    } catch {
       isAnonymous = true;
     }
 
