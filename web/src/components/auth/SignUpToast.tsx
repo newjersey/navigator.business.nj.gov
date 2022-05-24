@@ -2,26 +2,18 @@ import { Content } from "@/components/Content";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { MediaQueries } from "@/lib/PageSizes";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { IconButton, useMediaQuery } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 export const SignUpToast = (): ReactElement => {
   const { showCard } = useRoadmapSidebarCards();
-  const { isAuthenticated, alertIsVisible, setAlertIsVisible } = useContext(AuthAlertContext);
+  const { alertIsVisible, setAlertIsVisible } = useContext(AuthAlertContext);
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
-  useMountEffectWhenDefined(() => {
-    if (isAuthenticated == IsAuthenticated.TRUE) {
-      setAlertIsVisible(false);
-    }
-  }, isAuthenticated);
-
-  if (isAuthenticated == IsAuthenticated.TRUE) {
+  if (!alertIsVisible) {
     return <></>;
   }
 

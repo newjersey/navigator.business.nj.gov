@@ -62,9 +62,8 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-testid="self-reg-toast"]').should("not.exist");
 
     // go back to roadmap
+    cy.log("go back to roadmap");
     cy.get(`[data-testid="back-to-roadmap"]`).click({ force: true });
-    cy.get('[data-testid="self-reg-toast"]').should("be.visible");
-    cy.get('[aria-label="close"]').click({ force: true });
     cy.get('[data-testid="self-reg-toast"]').should("not.exist");
 
     // go to auth blocked task
@@ -77,10 +76,9 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     // go back to roadmap
     cy.get(`[data-testid="back-to-roadmap"]`).click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
-    cy.get('[data-testid="self-reg-toast"]').should("be.visible");
+    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
 
     // try editing data in the Profile page
-    cy.get('[aria-label="close"]').click({ force: true });
     onRoadmapPage.clickEditProfileLink();
 
     cy.get('input[aria-label="Business name"]').clear().type("Applebee's");

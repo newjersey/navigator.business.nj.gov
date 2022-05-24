@@ -281,7 +281,10 @@ const OnboardingPage = (props: Props): ReactElement => {
       newUserData = await api.postGetAnnualFilings(newUserData);
 
       await update(newUserData);
-      await router.push(newUserData.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap");
+      await router.push({
+        pathname: newUserData.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap",
+        query: { fromOnboarding: "true" },
+      });
     }
   };
 

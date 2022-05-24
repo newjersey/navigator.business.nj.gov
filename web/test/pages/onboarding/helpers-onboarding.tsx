@@ -348,7 +348,10 @@ export const runSelfRegPageTests = ({
     };
     await waitFor(() => {
       expect(currentUserData().user).toEqual(businessUser);
-      expect(mockPush).toHaveBeenCalledWith(hasExistingBusiness ? "/dashboard" : "/roadmap");
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: hasExistingBusiness ? "/dashboard" : "/roadmap",
+        query: { fromOnboarding: "true" },
+      });
     });
   });
 };

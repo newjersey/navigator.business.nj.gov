@@ -103,12 +103,14 @@ describe("roadmap page", () => {
     sidebarDisplayContent,
     alertIsVisible,
     registrationAlertStatus,
+    setAlertIsVisible,
   }: {
     userData?: UserData;
     isAuthenticated?: IsAuthenticated;
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     alertIsVisible?: boolean;
     registrationAlertStatus?: RegistrationStatus;
+    setAlertIsVisible?: jest.Mock<() => void>;
   }) => {
     setupStatefulUserDataContext();
 
@@ -124,7 +126,7 @@ describe("roadmap page", () => {
           </ThemeProvider>
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
-        { alertIsVisible: alertIsVisible ?? false, registrationAlertStatus }
+        { alertIsVisible: alertIsVisible ?? false, registrationAlertStatus, setAlertIsVisible }
       )
     );
   };
@@ -865,6 +867,8 @@ describe("roadmap page", () => {
     });
 
     it("renders registration card when SignUpToast is closed", async () => {
+      useMockRouter({ query: { fromOnboarding: "true" } });
+
       const sidebarDisplayContent = {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
@@ -884,6 +888,29 @@ describe("roadmap page", () => {
         expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
       });
       expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
+    });
+
+    it("renders registration card when SignUpToast is removed", async () => {
+      const setAlertIsVisible = jest.fn();
+      useMockRouter({});
+
+      const sidebarDisplayContent = {
+        "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
+        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+      };
+      renderPageWithAuth({
+        alertIsVisible: true,
+        sidebarDisplayContent,
+        isAuthenticated: IsAuthenticated.FALSE,
+        setAlertIsVisible,
+      });
+
+      expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
+
+      await waitFor(() => {
+        expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
+      });
+      expect(setAlertIsVisible).toHaveBeenCalledWith(false);
     });
 
     it("removes successful registration card when it's closed", async () => {
