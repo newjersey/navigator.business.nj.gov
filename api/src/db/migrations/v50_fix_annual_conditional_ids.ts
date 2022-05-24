@@ -19,22 +19,20 @@ export const migrate_v49_to_v50 = (v49Data: v49UserData): v50UserData => {
     v49Data.profileData.industryId === "cannabis" && v49Data.profileData.cannabisLicenseType === "ANNUAL";
   const cannabisTaskStatus = v49Data.taskProgress["conditional-permit-cannabis"];
 
-  if (isAnnualCannabis) {
-    return {
-      ...v49Data,
-      taskProgress: {
-        ...v49Data.taskProgress,
-        "annual-license-cannabis": cannabisTaskStatus,
-        "conditional-permit-cannabis": "NOT_STARTED",
-      },
-      version: 50,
-    };
-  } else {
-    return {
-      ...v49Data,
-      version: 50,
-    };
-  }
+  return isAnnualCannabis
+    ? {
+        ...v49Data,
+        taskProgress: {
+          ...v49Data.taskProgress,
+          "annual-license-cannabis": cannabisTaskStatus,
+          "conditional-permit-cannabis": "NOT_STARTED",
+        },
+        version: 50,
+      }
+    : {
+        ...v49Data,
+        version: 50,
+      };
 };
 
 // ---------------- v50 types ----------------

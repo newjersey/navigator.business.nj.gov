@@ -57,7 +57,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
         );
 
         if (!success || success[0] !== "true") {
-          return Promise.reject(errors);
+          throw errors;
         }
 
         return {
@@ -73,7 +73,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
 
         const myNJDuplicateErrors = ["E1048", "E1017", "E1059", "E2109"];
         if (error.length > 0 && myNJDuplicateErrors.includes(error[0].split(" ")[0])) {
-          return Promise.reject("DUPLICATE_SIGNUP");
+          throw "DUPLICATE_SIGNUP";
         }
 
         return error;

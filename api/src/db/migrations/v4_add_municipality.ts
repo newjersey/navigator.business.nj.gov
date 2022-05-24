@@ -1,5 +1,5 @@
 import { randomInt } from "@shared/intHelpers";
-import { v3UserData } from "./v3_change_LegalStructure";
+import { v3UserData } from "./v3_change_legal_structure";
 
 export interface v4UserData {
   user: v4BusinessUser;

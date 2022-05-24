@@ -80,7 +80,7 @@ export const updateLicenseStatusFactory = (
             items: [],
             completed: false,
           });
-          return Promise.reject(error);
+          throw error;
         }
       });
   };

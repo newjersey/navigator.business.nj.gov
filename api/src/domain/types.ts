@@ -4,7 +4,7 @@ import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationDat
 import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { NameAndAddress } from "@shared/misc";
 import { UserData } from "@shared/userData";
-import * as https from "https";
+import * as https from "node:https";
 
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { generateV3OnboardingData, generateV3User, v3UserData } from "./v3_change_LegalStructure";
+import { generateV3OnboardingData, generateV3User, v3UserData } from "./v3_change_legal_structure";
 import { migrate_v3_to_v4 } from "./v4_add_municipality";
 
 describe("migrate_v3_to_v4", () => {

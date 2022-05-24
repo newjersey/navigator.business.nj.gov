@@ -3,6 +3,13 @@ import { generateLicenseEntity, generateNameAndAddress } from "../../../test/fac
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 import { searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
 
+const entityWithAddress = (address: string) =>
+  generateLicenseEntity({
+    checkoffStatus: "Completed",
+    licenseStatus: "Active",
+    addressLine1: address,
+  });
+
 describe("searchLicenseStatus", () => {
   let stubLicenseStatusClient: jest.Mocked<LicenseStatusClient>;
   let searchLicenseStatus: SearchLicenseStatus;
@@ -199,38 +206,34 @@ describe("searchLicenseStatus", () => {
     );
   });
 
-  describe("detailed address matching logic", () => {
-    const entityWithAddress = (address: string) =>
-      generateLicenseEntity({
-        checkoffStatus: "Completed",
-        licenseStatus: "Active",
+  const queryWithAddress = async (address: string): Promise<LicenseStatusResult> =>
+    await searchLicenseStatus(
+      generateNameAndAddress({
         addressLine1: address,
-      });
+      }),
+      "Home improvement"
+    );
 
-    const queryWithAddress = async (address: string): Promise<LicenseStatusResult> =>
-      await searchLicenseStatus(
-        generateNameAndAddress({
-          addressLine1: address,
-        }),
-        "Home improvement"
-      );
-
+  describe("detailed address matching logic", () => {
     it("matches on address ignoring spaces and non-alphanumeric characters", async () => {
       stubLicenseStatusClient.search.mockResolvedValue([entityWithAddress(" 123    Main St.  ! ")]);
 
-      expect((await queryWithAddress("123 Main St")).status).toEqual("ACTIVE");
+      const result = await queryWithAddress("123 Main St");
+      expect(result.status).toEqual("ACTIVE");
     });
 
     it("matches on address ignoring casing", async () => {
       stubLicenseStatusClient.search.mockResolvedValue([entityWithAddress(" 123 MAIN ST ")]);
 
-      expect((await queryWithAddress("123 Main st")).status).toEqual("ACTIVE");
+      const result = await queryWithAddress("123 main st");
+      expect(result.status).toEqual("ACTIVE");
     });
 
     it("matches on address*", async () => {
       stubLicenseStatusClient.search.mockResolvedValue([entityWithAddress("123 MAIN ST, UNIT C")]);
 
-      expect((await queryWithAddress("123 main st")).status).toEqual("ACTIVE");
+      const result = await queryWithAddress("123 main st");
+      expect(result.status).toEqual("ACTIVE");
     });
   });
 

@@ -25,9 +25,9 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
       console.error(`${message} - ${JSON.stringify(details?.toJSON())}`);
       winston.error(message, details);
       await FlushLog();
-    } catch (ex) {
+    } catch (error) {
       if (process.env.NODE_ENV !== "test") {
-        console.error(`Error with LogInfo:${ex}`);
+        console.error(`Error with LogInfo:${error}`);
       }
     }
   };
@@ -37,9 +37,9 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
       console.info(message);
       winston.info(message);
       await FlushLog();
-    } catch (ex) {
+    } catch (error) {
       if (process.env.NODE_ENV !== "test") {
-        console.error(`Error with LogInfo:${ex}`);
+        console.error(`Error with LogInfo:${error}`);
       }
     }
   };

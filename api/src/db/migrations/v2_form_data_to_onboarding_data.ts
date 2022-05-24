@@ -1,5 +1,5 @@
 import { randomInt } from "@shared/intHelpers";
-import { v1UserData } from "./v1_addTaskProgress";
+import { v1UserData } from "./v1_add_task_progress";
 
 export interface v2UserData {
   user: v2BusinessUser;
@@ -19,7 +19,7 @@ export const migrate_v1_to_v2 = (v1Data: v1UserData): v2UserData => {
   if (formData.businessType && formData.businessType.businessType) {
     industry = formData.businessType.businessType;
   }
-  let legalStructure = undefined;
+  let legalStructure;
   if (formData.businessStructure && formData.businessStructure.businessStructure) {
     legalStructure = formData.businessStructure.businessStructure;
   }

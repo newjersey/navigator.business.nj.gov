@@ -3,11 +3,11 @@
 export const inputManipulator = (initial: string): any => ({
   value: initial,
   stripPunctuation: function () {
-    this.value = this.value.replace(/[@?.",/#!$%^*;:{}+<>=\-_`~()]/g, "");
+    this.value = this.value.replace(/[!"#$%()*+,./:;<=>?@^_`{}~-]/g, "");
     return this;
   },
   trimPunctuation: function () {
-    const startsOrEndsWithPunctuation = /^[\s@?.",#!$%^*;:{}+<>=-_`~()]+|[\s@?.",#!$%^*;:{}+<>=-_`~()]+$/g;
+    const startsOrEndsWithPunctuation = /^[\s!"#$%()*+,.:;<=-_`{}~]+|[\s!"#$%()*+,.:;<=-_`{}~]+$/g;
     this.value = this.value.replace(startsOrEndsWithPunctuation, "");
     return this;
   },
