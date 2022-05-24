@@ -1,8 +1,8 @@
 import bodyParser from "body-parser";
 import cors from "cors";
-import { randomBytes } from "crypto";
 import dedent from "dedent";
 import express from "express";
+import { randomBytes } from "node:crypto";
 import serverless from "serverless-http";
 import { AuthorizationCode, ModuleOptions } from "simple-oauth2";
 
@@ -65,9 +65,9 @@ app.get("/api/cms/callback", async (req, res) => {
         provider: "github",
       })
     );
-  } catch (e) {
-    console.error(JSON.stringify(e));
-    res.status(200).send(renderResponse("error", e));
+  } catch (error) {
+    console.error(JSON.stringify(error));
+    res.status(200).send(renderResponse("error", error));
   }
 });
 
@@ -81,36 +81,36 @@ function randomState() {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function renderResponse(status: "success" | "error", content: any) {
   return dedent`
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <title>Authorizing ...</title>
-    </head>
-    <body>
-      <p id="message"></p>
-      <script>
-        // Output a message to the user
-        function sendMessage(message) {
-          document.getElementById("message").innerText = message;
-          document.title = message
-        }
-        // Handle a window message by sending the auth to the "opener"
-        function receiveMessage(message) {
-          console.debug("receiveMessage", message);
-          window.opener.postMessage(
-            'authorization:github:${status}:${JSON.stringify(content)}',
-            message.origin
-          );
-          window.removeEventListener("message", receiveMessage, false);
-          sendMessage("Authorized, closing ...");
-        }
-        sendMessage("Authorizing ...");
-        window.addEventListener("message", receiveMessage, false);
-        console.debug("postMessage", "authorizing:github", "*")
-        window.opener.postMessage("authorizing:github", "*");
-      </script>
-    </body>
-  </html>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Authorizing ...</title>
+      </head>
+      <body>
+        <p id="message"></p>
+        <script>
+          // Output a message to the user
+          function sendMessage(message) {
+            document.getElementById("message").innerText = message;
+            document.title = message
+          }
+          // Handle a window message by sending the auth to the "opener"
+          function receiveMessage(message) {
+            console.debug("receiveMessage", message);
+            window.opener.postMessage(
+              'authorization:github:${status}:${JSON.stringify(content)}',
+              message.origin
+            );
+            window.removeEventListener("message", receiveMessage, false);
+            sendMessage("Authorized, closing ...");
+          }
+          sendMessage("Authorizing ...");
+          window.addEventListener("message", receiveMessage, false);
+          console.debug("postMessage", "authorizing:github", "*")
+          window.opener.postMessage("authorizing:github", "*");
+        </script>
+      </body>
+    </html>
   `;
 }

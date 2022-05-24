@@ -1,5 +1,5 @@
 import type { AWS } from "@serverless/typescript";
-import { env } from "process";
+import { env } from "node:process";
 import dynamoDbSchema from "./dynamodb-schema.json";
 import express from "./src/functions/express";
 import githubOauth2 from "./src/functions/githubOauth2";

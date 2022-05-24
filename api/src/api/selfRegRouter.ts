@@ -1,6 +1,6 @@
 import { UserData } from "@shared/userData";
-import { createHmac } from "crypto";
 import { Router } from "express";
+import { createHmac } from "node:crypto";
 import { SelfRegClient, UserDataClient } from "../domain/types";
 
 export const selfRegRouterFactory = (
@@ -13,12 +13,9 @@ export const selfRegRouterFactory = (
     const userData = req.body as UserData;
 
     try {
-      let selfRegResponse;
-      if (!userData.user.myNJUserKey) {
-        selfRegResponse = await selfRegClient.grant(userData.user);
-      } else {
-        selfRegResponse = await selfRegClient.resume(userData.user.myNJUserKey);
-      }
+      const selfRegResponse = await (!userData.user.myNJUserKey
+        ? selfRegClient.grant(userData.user)
+        : selfRegClient.resume(userData.user.myNJUserKey));
       const updatedUserData = await updateMyNJKey(userData, selfRegResponse.myNJUserKey);
       res.json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
     } catch (error) {

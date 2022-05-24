@@ -1,4 +1,3 @@
-import { UserData } from "@shared/userData";
 import { AddNewsletter, UserDataClient, UserDataQlClient } from "../types";
 
 type AddNewsletterBatchResponse = {
@@ -16,7 +15,7 @@ export const addNewsletterBatch = async (
   let success = 0;
   let failed = 0;
   const promises: Promise<void>[] = [];
-  results.forEach((newUserData: UserData) => {
+  for (const newUserData of results) {
     promises.push(
       addNewsletter(newUserData)
         .then((result) => {
@@ -31,7 +30,7 @@ export const addNewsletterBatch = async (
           failed += 1;
         })
     );
-  });
+  }
 
   await Promise.all(promises);
 

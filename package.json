@@ -1,6 +1,6 @@
 {
   "name": "@businessnjgovnavigator/root",
-  "version": "3.8.1",
+  "version": "3.9.0",
   "description": "This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
@@ -153,6 +153,7 @@
     "eslint-plugin-react": "7.30.0",
     "eslint-plugin-react-hooks": "4.5.0",
     "eslint-plugin-testing-library": "5.5.0",
+    "eslint-plugin-unicorn": "42.0.0",
     "husky": "8.0.1",
     "identity-obj-proxy": "3.0.0",
     "jest": "28.1.0",

@@ -38,17 +38,13 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
             response.statusText
           }. Data: ${JSON.stringify(response.data)}`
         );
-        let data: GovDeliveryResponse;
         let status: NewsletterStatus;
-        if (
+        const data: GovDeliveryResponse =
           typeof response.data === "string" &&
           response.data.trim().charAt(0) === "(" &&
           response.data.trim().charAt(response.data.trim().length - 1) === ")"
-        ) {
-          data = JSON.parse(response.data.trim().substring(1, response.data.trim().length - 1));
-        } else {
-          data = response.data;
-        }
+            ? JSON.parse(response.data.trim().slice(1, response.data.trim().length - 1))
+            : response.data;
 
         const success = !!(
           !!data.citizen_id &&

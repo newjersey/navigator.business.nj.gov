@@ -1,5 +1,5 @@
 import { randomInt } from "@shared/intHelpers";
-import { v2LegalStructure, v2UserData } from "./v2_formData_to_onboardingData";
+import { v2LegalStructure, v2UserData } from "./v2_form_data_to_onboarding_data";
 
 export interface v3UserData {
   user: v3BusinessUser;

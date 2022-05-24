@@ -4,7 +4,7 @@ import * as Airtable from "airtable";
 import { generateUser } from "../../test/factories";
 import { UserTestingClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
-import { AirtableUserTestingClient } from "./AirtableUserTestingClient";
+import { AirtableUserTestingClient } from "./airtableUserTestingClient";
 
 type MockAirtableType = {
   baseIdCalledWith: string;
@@ -63,9 +63,10 @@ jest.mock(
       this.baseIdCalledWith = baseId;
       return (tableId: string) => {
         this.tableIdCalledWith = tableId;
-        const create = (newData: any, callback: (err: any, results: any) => void) => {
+        // eslint-disable-next-line unicorn/consistent-function-scoping
+        const create = (newData: any, callback: (err?: any, results?: any) => void) => {
           this.dataCalledWith = newData;
-          callback(undefined, undefined);
+          callback();
         };
 
         return { create };
