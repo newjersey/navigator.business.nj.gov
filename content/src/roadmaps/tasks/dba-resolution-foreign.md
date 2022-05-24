@@ -7,11 +7,6 @@ required: true
 ---
 To form your business in New Jersey, you need to obtain a resolution adopting your Doing Business As (DBA) name.
 
-Follow your operating agreement or bylaws should address How you get a resolution depends on your legal structure: 
+Your operating agreement or bylaws should tell you how to get a resolution. For LLCs, this might mean creating a statement of intent and having it signed by all members, for Corporations, this might mean getting board approval.
 
-* LLCs this could be a statement of intent signed by members
-* Corporations need board approval
-* LLPs
-* LPs
-
-You will need to share a copy of the resolution.
+You will need to share a copy of the resolution with the New Jersey Department of Treasury when you form your business.
