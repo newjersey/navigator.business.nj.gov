@@ -41,12 +41,11 @@ The Catalyst Research and Development (R&D) Voucher Pilot Program supports New J
 ### Eligibility
 
 * Must be registered to conduct business in New Jersey at the time of application
-* Cannnot have more than 25 full-time employees (35hrs per week) at the time of application and throughout the voucher duration
+* Cannot have more than 25 full-time employees (35hrs per week) at the time of application and throughout the voucher duration
 * 100% of the project work has to be conducted in NJ
 * Minimum of one full-time employee working in NJ at the time of application and throughout the voucher duration
 * 50% or more of the work is conducted in NJ 
-* Applicant must obtain a signed approval letter from a participating university/college, Federal lab, or non-profit organization confirming that the facility is capable and willing to provide the services that will be supported by the voucher
-* Company must be developing or testing technologies in the following target areas: Advanced Manufacturing, Advanced Transportation and Logistics, Film and Digital Media, Life Sciences, Therapeutic Drug Development, Life Sciences, Non-Retail Food and Beverage, Professional and Financial Services, Technology
+* Applicant must obtain a signed approval letter from a participating university/college, Federal lab, or non-profit organization confirming that the facility is capable and willing to provide the services that will be supported by the voucher (current list of [participating facilities](https://www.google.com/maps/d/u/0/viewer?mid=1GcLO30HifmkWSqbI8UEBH7vS0lLOHNq1&ll=40.19013658561744%2C-74.98789639237287&z=17))
 
 **Participating facilities must meet the following criteria:**
 
