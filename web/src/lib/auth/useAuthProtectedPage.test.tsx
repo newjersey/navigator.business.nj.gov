@@ -17,7 +17,7 @@ describe("useAuthProtectedPage", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    useMockRouter({ isReady: true, asPath: "" });
+    useMockRouter({ isReady: true, asPath: "", query: { fromOnboarding: "true" } });
     setAlertIsVisible = jest.fn();
   });
 
@@ -86,20 +86,26 @@ describe("useAuthProtectedPage", () => {
       expect(setAlertIsVisible).toHaveBeenCalledWith(true);
     });
 
-    it("closes alert when user is not authed but page query route is success=true", () => {
-      useMockRouter({ isReady: true, query: { success: "true" } });
+    it("closes alert when user is not authed and is not routed from onboarding", () => {
+      useMockRouter({ isReady: true, query: {} });
       setupHookWithAuth({ hook: useAuthAlertPage, isAuth: IsAuthenticated.FALSE, modalIsVisible: true });
       expect(setAlertIsVisible).toHaveBeenCalledWith(false);
     });
 
+    it("closes alert when user is not authed and is routed from onboarding", () => {
+      useMockRouter({ isReady: true, query: { fromOnboarding: "true" } });
+      setupHookWithAuth({ hook: useAuthAlertPage, isAuth: IsAuthenticated.FALSE, modalIsVisible: false });
+      expect(setAlertIsVisible).toHaveBeenCalledWith(true);
+    });
+
     it("does not show alert when user auth is unknown", () => {
       setupHookWithAuth({ hook: useAuthAlertPage, isAuth: IsAuthenticated.UNKNOWN, modalIsVisible: false });
-      expect(setAlertIsVisible).not.toHaveBeenCalled();
+      expect(setAlertIsVisible).toHaveBeenCalledWith(false);
     });
 
     it("does not show alert when user is authed", () => {
       setupHookWithAuth({ hook: useAuthAlertPage, isAuth: IsAuthenticated.TRUE, modalIsVisible: false });
-      expect(setAlertIsVisible).not.toHaveBeenCalled();
+      expect(setAlertIsVisible).toHaveBeenCalledWith(false);
     });
   });
 
