@@ -13,22 +13,20 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import {
   createProfileFieldErrorMap,
   FlowType,
-  LoadDisplayContent,
   OnboardingStatus,
   ProfileError,
   ProfileFieldErrorMap,
   ProfileFields,
-  UserDisplayContent,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions, setRegistrationDimension } from "@/lib/utils/analytics-helpers";
 import {
+  getFlow,
   getSectionCompletion,
   OnboardingErrorLookup,
   OnboardingStatusLookup,
@@ -65,7 +63,6 @@ import React, {
 import { CSSTransition } from "react-transition-group";
 
 interface Props {
-  displayContent: LoadDisplayContent;
   municipalities: Municipality[];
 }
 
@@ -84,9 +81,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
-  const [currentContent, setCurrentContent] = useState<UserDisplayContent>(
-    props.displayContent[currentFlow] as UserDisplayContent
-  );
   const hasHandledRouting = useRef<boolean>(false);
 
   const onValidation = useCallback(
@@ -111,14 +105,8 @@ const OnboardingPage = (props: Props): ReactElement => {
   );
 
   useEffect(() => {
-    setCurrentContent(props.displayContent[currentFlow] as UserDisplayContent);
-  }, [currentFlow, props.displayContent]);
-
-  useEffect(() => {
-    const flow = profileData.hasExistingBusiness ? "OWNING" : "STARTING";
-    setCurrentContent(props.displayContent[flow] as UserDisplayContent);
-    setCurrentFlow(flow);
-  }, [profileData.hasExistingBusiness, props.displayContent]);
+    setCurrentFlow(getFlow(profileData));
+  }, [profileData]);
 
   useEffect(() => {
     (async () => {
@@ -135,9 +123,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       if (currentUserData) {
         setProfileData(currentUserData.profileData);
         setUser(currentUserData.user);
-        const flow = currentUserData.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
-        setCurrentFlow(flow);
-        setCurrentContent(props.displayContent[flow] as UserDisplayContent);
+        setCurrentFlow(getFlow(currentUserData));
       } else if (state.isAuthenticated == IsAuthenticated.FALSE) {
         currentUserData = createEmptyUserData(state.user);
         setRegistrationDimension("Began Onboarding");
@@ -223,7 +209,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     if (page.current === 1 && hasExistingBusinessChanged) {
       let initialOnboardingFlow = profileData.initialOnboardingFlow;
       if (currentUserData.formProgress !== "COMPLETED") {
-        initialOnboardingFlow = profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+        initialOnboardingFlow = getFlow(profileData);
       }
 
       newProfileData = {
@@ -253,7 +239,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       };
 
       setProfileData(newProfileData);
-      setCurrentFlow(profileData.hasExistingBusiness ? "OWNING" : "STARTING");
+      setCurrentFlow(getFlow(profileData));
     }
 
     setAnalyticsDimensions(newProfileData);
@@ -358,7 +344,6 @@ const OnboardingPage = (props: Props): ReactElement => {
           profileData: profileData,
           user: user,
           flow: currentFlow,
-          displayContent: currentContent,
           municipalities: props.municipalities,
         },
         setProfileData,
@@ -383,18 +368,18 @@ const OnboardingPage = (props: Props): ReactElement => {
             )}
             {alert && (
               <ToastAlert
-                variant={OnboardingStatusLookup[alert].variant}
+                variant={OnboardingStatusLookup()[alert].variant}
                 isOpen={alert !== undefined}
                 close={() => setAlert(undefined)}
                 dataTestid={`toast-alert-${alert}`}
-                heading={OnboardingStatusLookup[alert].header}
+                heading={OnboardingStatusLookup()[alert].header}
               >
                 <>
-                  {OnboardingStatusLookup[alert].body}
-                  {OnboardingStatusLookup[alert] && (
+                  {OnboardingStatusLookup()[alert].body}
+                  {OnboardingStatusLookup()[alert] && (
                     <Link href={redirectUrl}>
                       <a href={redirectUrl} data-testid={`toast-link`}>
-                        {OnboardingStatusLookup[alert].link}
+                        {OnboardingStatusLookup()[alert].link}
                       </a>
                     </Link>
                   )}
@@ -440,7 +425,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
 
   return {
     props: {
-      displayContent: loadUserDisplayContent(),
       municipalities,
     },
   };

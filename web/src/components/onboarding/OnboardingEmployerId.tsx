@@ -1,9 +1,9 @@
 import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 
 interface Props {
@@ -15,13 +15,14 @@ interface Props {
 
 export const OnboardingEmployerId = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
   const fieldName = "employerId";
 
   return (
     <>
       <div role="heading" aria-level={headerAriaLevel} className="h3-styling margin-bottom-2">
-        {state.displayContent.employerId.headingBolded}{" "}
-        <span className="text-light">{state.displayContent.employerId.headingNotBolded}</span>
+        {Config.profileDefaults[state.flow].employerId.header}{" "}
+        <span className="text-light">{Config.profileDefaults[state.flow].employerId.headerNotBolded}</span>
       </div>
       <OnboardingNumericField
         fieldName={fieldName}

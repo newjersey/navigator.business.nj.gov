@@ -1,4 +1,6 @@
+import { ConfigType, getMergedConfig } from "@/contexts/configContext";
 import {
+  FlowType,
   KeysOfType,
   OnboardingStatus,
   ProfileError,
@@ -9,8 +11,8 @@ import {
   Step,
   Task,
 } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Preferences, UserData } from "@businessnjgovnavigator/shared/";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import React, { ReactElement, useEffect, useRef } from "react";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -141,28 +143,34 @@ interface AlertProps {
   link?: string;
 }
 
-export const OnboardingStatusLookup: Record<OnboardingStatus, AlertProps> = {
-  SUCCESS: {
-    body: Config.profileDefaults.successTextBody,
-    header: Config.profileDefaults.successTextHeader,
-    variant: "success",
-  },
-  ERROR: {
-    body: Config.profileDefaults.errorTextBody,
-    header: Config.profileDefaults.errorTextHeader,
-    variant: "error",
-  },
+export const OnboardingStatusLookup = (
+  configOverrides?: ConfigType
+): Record<OnboardingStatus, AlertProps> => {
+  const config = configOverrides ?? getMergedConfig();
+  return {
+    SUCCESS: {
+      body: config.profileDefaults.successTextBody,
+      header: config.profileDefaults.successTextHeader,
+      variant: "success",
+    },
+    ERROR: {
+      body: config.profileDefaults.errorTextBody,
+      header: config.profileDefaults.errorTextHeader,
+      variant: "error",
+    },
+  };
 };
 
 export const OnboardingErrorLookup: Record<ProfileError, string> = {
-  REQUIRED_LEGAL: Config.onboardingDefaults.errorTextRequiredLegal,
-  REQUIRED_EXISTING_BUSINESS: Config.onboardingDefaults.errorTextRequiredExistingBusiness,
+  REQUIRED_LEGAL: getMergedConfig().profileDefaults["STARTING"].legalStructureId.errorTextRequired,
+  REQUIRED_EXISTING_BUSINESS:
+    getMergedConfig().profileDefaults["STARTING"].hasExistingBusiness.errorTextRequired,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {
   if (userData?.user.name) return userData.user.name;
   else if (userData?.user.email) return userData.user.email;
-  else return Config.navigationDefaults.myNJAccountText;
+  else return getMergedConfig().navigationDefaults.myNJAccountText;
 };
 
 export const validateEmail = (email: string): boolean => {
@@ -281,6 +289,18 @@ export const getStringifiedAddress = (
 ) => {
   return `${addressLine1}, ${addressLine2 ? `${addressLine2}, ` : ""}${city}, ${state}, ${zipcode}`;
 };
+
+export const getFlow = (data: UserData | ProfileData): FlowType => {
+  if (isUserData(data)) {
+    return data.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
+  } else {
+    return data.hasExistingBusiness ? "OWNING" : "STARTING";
+  }
+};
+
+function isUserData(data: UserData | ProfileData): data is UserData {
+  return (data as UserData).user !== undefined;
+}
 
 export const makeButtonIcon = (svgFilename: string, size = "20px"): ReactElement => (
   <img

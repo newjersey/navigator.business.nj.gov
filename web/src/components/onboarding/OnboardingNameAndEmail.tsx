@@ -1,8 +1,8 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useContext, useState } from "react";
 
@@ -16,6 +16,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
   const { state, setUser } = useContext(ProfileDataContext);
   const [email, setEmail] = useState<string>(state.user?.email || "");
   const [confirmEmail, setConfirmEmail] = useState<string | undefined>(state.user?.email || undefined);
+  const { Config } = useConfig();
 
   const updateEmailState = (value: string) => {
     state.user && setUser({ ...state.user, email: value });

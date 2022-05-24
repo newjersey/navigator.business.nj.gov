@@ -3626,6 +3626,7 @@ __metadata:
     "@types/express": 4.17.13
     "@types/jest": 27.5.1
     "@types/jsonwebtoken": 8.5.8
+    "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
     "@types/node": 16.11.36
     "@types/react": 18.0.9
@@ -3686,6 +3687,7 @@ __metadata:
     jsonwebtoken: 8.5.1
     kill-port: 2.0.0
     lint-staged: 12.4.1
+    lodash.merge: 4.6.2
     lodash.orderby: 4.6.0
     markdown-truncate: 1.0.4
     napa: 3.0.0
@@ -3804,6 +3806,7 @@ __metadata:
     "@testing-library/user-event": 14.2.0
     "@types/broken-link-checker": 0.7.1
     "@types/jest": 27.5.1
+    "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
     "@types/node": 16.11.36
     "@types/react": 18.0.9
@@ -3846,6 +3849,7 @@ __metadata:
     jest: 28.1.0
     jest-environment-jsdom: 28.1.0
     jest-junit: 13.2.0
+    lodash.merge: 4.6.2
     lodash.orderby: 4.6.0
     markdown-truncate: 1.0.4
     napa: 3.0.0
@@ -8724,6 +8728,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: e009a2bfb50e90ca9b7c6e8f648f8464067271fd99116f881073fa6fa76dc8d0133181dd65e6614d5fb1220d671d67b0124aef7d97dc02d7e342ab143a47779d
+  languageName: node
+  linkType: hard
+
+"@types/lodash.merge@npm:4.6.7":
+  version: 4.6.7
+  resolution: "@types/lodash.merge@npm:4.6.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 94cd6fb8e606756a28f45d63c658aacfbce11a151f7fa322c4a3e87aa50d8bf26e0ae8cba0250070a7c5a6792fc51f79abf4c648bbb1850692be386cd76cd0ca
   languageName: node
   linkType: hard
 
@@ -21947,7 +21960,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.merge@npm:^4.6.2":
+"lodash.merge@npm:4.6.2, lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: ad580b4bdbb7ca1f7abf7e1bce63a9a0b98e370cf40194b03380a46b4ed799c9573029599caebc1b14e3f24b111aef72b96674a56cfa105e0f5ac70546cdc005

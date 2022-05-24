@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Content } from "@/components/Content";
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
@@ -20,6 +23,8 @@ export const OnboardingField = ({
   ...props
 }: OnboardingProps): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+
+  const { Config } = useConfig();
 
   const onValidation = (fieldName: string, invalid: boolean): void => {
     props.onValidation && props.onValidation(fieldName as ProfileFields, invalid);
@@ -45,17 +50,18 @@ export const OnboardingField = ({
 
   return (
     <div>
-      {state.displayContent[fieldName].contentMd && (
+      <Content overrides={{ h2: headerLevelTwo }}>
+        {Config.profileDefaults[state.flow][fieldName].header}
+      </Content>
+      {Object.keys(Config.profileDefaults[state.flow][fieldName]).includes("description") && (
         <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${fieldName}`}>
-          <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent[fieldName].contentMd}</Content>
+          <Content>{(Config.profileDefaults[state.flow][fieldName] as any).description}</Content>
         </div>
       )}
       <GenericTextField
         value={state.profileData[fieldName] as string | undefined}
         fieldName={fieldName as string}
-        placeholder={
-          (state.displayContent[fieldName] as Record<string, string | undefined>).placeholder ?? ""
-        }
+        placeholder={(Config.profileDefaults[state.flow][fieldName] as any).placeholder ?? ""}
         {...props}
         handleChange={handleChange}
         onValidation={onValidation}

@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { advancedDateLibrary, DateObject, getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
@@ -22,6 +22,7 @@ interface Props {
 
 export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const fieldName = "dateOfFormation";
+  const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
 
@@ -63,17 +64,16 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
         onError={(hasError: string | null) => setDateError(!!hasError)}
         renderInput={(params: TextFieldProps) => (
           <div>
-            {state.displayContent[fieldName].contentMd && (
-              <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${fieldName}`}>
-                <Content overrides={{ h2: headerLevelTwo }}>
-                  {state.displayContent[fieldName].contentMd}
-                </Content>
-              </div>
-            )}
+            <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${fieldName}`}>
+              <Content overrides={{ h2: headerLevelTwo }}>
+                {Config.profileDefaults[state.flow].dateOfFormation.header}
+              </Content>
+              <Content>{Config.profileDefaults[state.flow].dateOfFormation.description}</Content>
+            </div>
             <GenericTextField
               fieldName={fieldName}
               onValidation={onValidation}
-              validationText={Config.onboardingDefaults.dateOfFormationErrorText}
+              validationText={Config.profileDefaults[state.flow].dateOfFormation.errorText}
               error={props.fieldStates[fieldName].invalid}
               fieldOptions={{
                 ...params,

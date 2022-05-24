@@ -1,0 +1,25 @@
+{
+  "profileDefaults": {
+    "STARTING": {
+      "legalStructureId": {
+        "errorTextRequired": "Please select a legal structure.",
+        "optionContent": {
+          "general-partnership": "In a general partnership two or more people share ownership of a single business and are jointly responsible for its assets and liabilities. [Learn more](https://business.nj.gov/pages/general-partnership)",
+          "c-corporation": "A traditional Corporation (C Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. [Learn more](https://business.nj.gov/pages/c-corporation-c-corp)",
+          "limited-liability-company": "An LLC is one of the most common legal structures. In an LLC, there can be one or multiple owners, and they are not personally liable for company debts. [Learn more](https://business.nj.gov/pages/limited-liability-company-llc)",
+          "limited-liability-partnership": "Limited Liability Partnerships have general partners who own and operate the business, and limited partners who invest in the business, both types of partners have limited liability. [Learn more](https://business.nj.gov/pages/llp-lp)",
+          "limited-partnership": "Limited Partnerships have general partners who own and operate the business, and limited partners who invest in the business but have limited liability and oversight. [Learn more](https://business.nj.gov/pages/llp-lp)",
+          "s-corporation": "A Corporation with an S Corporation Tax Designation (S Corp) is similar to a C Corporation except that the business is not taxed separately from the owners. S Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. You may elect S Corp status separately after you form and register for tax and employer purposes. [Learn more](https://business.nj.gov/pages/s-corporation-s-corp)",
+          "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more](https://business.nj.gov/pages/sole-proprietorship)"
+        }
+      },
+      "hasExistingBusiness": {
+        "header": "## Business Status",
+        "radioButtonYesText": "Yes, my business is operating",
+        "radioButtonNoText": "No, I still need to register my business",
+        "errorTextRequired": "Please select whether you have an existing business.",
+        "description": "Have you already `formed and registered|form-and-register-business` your business?"
+      }
+    }
+  }
+}

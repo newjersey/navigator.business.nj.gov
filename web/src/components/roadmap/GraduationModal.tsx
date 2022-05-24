@@ -7,13 +7,7 @@ import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  createProfileFieldErrorMap,
-  LoadDisplayContent,
-  ProfileFieldErrorMap,
-  ProfileFields,
-  UserDisplayContent,
-} from "@/lib/types/types";
+import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -31,7 +25,6 @@ import React, { ReactElement, useMemo, useState } from "react";
 
 interface Props {
   open: boolean;
-  displayContent: LoadDisplayContent;
   handleClose: () => void;
   onSave: () => void;
 }
@@ -41,15 +34,6 @@ export const GraduationModal = (props: Props): ReactElement => {
   const router = useRouter();
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const { userData, update } = useUserData();
-
-  const mergeDisplayContent = (): UserDisplayContent => {
-    return {
-      ...props.displayContent["OWNING"],
-      ...props.displayContent["PROFILE"],
-    } as UserDisplayContent;
-  };
-
-  const mergedDisplayContent = useMemo(mergeDisplayContent, [props.displayContent]);
 
   const needsDateOfFormation = useMemo(
     () => LegalStructures.find((x) => x.id === userData?.profileData.legalStructureId)?.requiresPublicFiling,
@@ -128,7 +112,6 @@ export const GraduationModal = (props: Props): ReactElement => {
       value={{
         state: {
           profileData: profileData,
-          displayContent: mergedDisplayContent,
           flow: "OWNING",
           municipalities: [],
         },

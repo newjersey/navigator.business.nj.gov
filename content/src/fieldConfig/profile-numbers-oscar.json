@@ -1,0 +1,34 @@
+{
+  "profileDefaults": {
+    "OWNING": {
+      "dateOfFormation": {
+        "header": "## Business Formation",
+        "description": "When did you form your business? Find your formation date on your `Certificate of Formation|certificate-formation`.\n\n**This field is required for LLCs, C Corps, LPs, and LLPs.**",
+        "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY."
+      },
+      "taxPin": {
+        "header": "## Tax PIN",
+        "placeholder": "Enter Tax PIN number",
+        "description": "What is your `Tax PIN|tax-pin`?",
+        "errorText": "Tax PIN must be 4 digits."
+      },
+      "taxId": {
+        "placeholder": "Enter Tax ID number",
+        "header": "## New Jersey Tax ID",
+        "description": "What is your `Tax ID?|tax-id`"
+      },
+      "entityId": {
+        "placeholder": "Enter Entity ID",
+        "header": "Entity ID",
+        "headerNotBolded": "(If You Have One)",
+        "description": "If your business has a 10-digit New Jersey Entity ID, enter it here. If you aren't sure if you have one or what it is, don't worry! You can leave this blank for now. (You can also get help finding your `Entity ID|entity-id`.)"
+      },
+      "employerId": {
+        "placeholder": "Enter Employer ID Number",
+        "header": "Employer Identification Number",
+        "headerNotBolded": "(EIN)",
+        "description": "What is your `EIN|ein`?"
+      }
+    }
+  }
+}

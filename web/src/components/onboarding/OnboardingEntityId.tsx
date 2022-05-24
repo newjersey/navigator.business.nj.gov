@@ -1,5 +1,6 @@
 import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import React, { ReactElement, ReactNode, useContext } from "react";
@@ -16,6 +17,7 @@ interface Props {
 export const OnboardingEntityId = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const fieldName = "entityId";
+  const { Config } = useConfig();
 
   if (!isEntityIdApplicable(state.profileData.legalStructureId) && !state.profileData.hasExistingBusiness) {
     return <></>;
@@ -24,8 +26,8 @@ export const OnboardingEntityId = ({ headerAriaLevel = 2, ...props }: Props): Re
   return (
     <>
       <div role="heading" aria-level={headerAriaLevel} className="h3-styling margin-bottom-2">
-        {state.displayContent.entityId.headingBolded}{" "}
-        <span className="text-light">{state.displayContent.entityId.headingNotBolded}</span>
+        {Config.profileDefaults[state.flow].entityId.header}{" "}
+        <span className="text-light">{Config.profileDefaults[state.flow].entityId.headerNotBolded}</span>
       </div>
       <OnboardingNumericField
         onValidation={props.onValidation}
