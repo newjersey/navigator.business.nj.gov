@@ -17,3 +17,6 @@ Your cosmetology shop license will expire every two years, on the even-numbered 
 > **Once completed, you will have:**
 >
 > * A renewed cosmetology shop registration valid for two years. It will be mailed to your business mailing address on file
+
+>**What if don't renew my registration?
+>If you don't renew your registration 3 months after its expiration, you will have to contact your licensing board for reinstatement procedures and associated fees.
