@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
-  branch: cms-profile-refactor
+  branch: content-repo
   base_url: https://0szgd6wmlk.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
