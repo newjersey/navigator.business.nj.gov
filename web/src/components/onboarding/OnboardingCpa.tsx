@@ -1,11 +1,13 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 export const OnboardingCpa = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
 
   const handleCpaSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     if (event.target.value === "true") {
@@ -21,7 +23,8 @@ export const OnboardingCpa = (): ReactElement => {
 
   return (
     <>
-      <Content>{state.displayContent.industryId.specificCpaQuestion.contentMd}</Content>
+      <Content>{Config.profileDefaults[state.flow].cpa.header}</Content>
+      <Content>{Config.profileDefaults[state.flow].cpa.description}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label="Certified Public Accountant"
@@ -36,7 +39,7 @@ export const OnboardingCpa = (): ReactElement => {
             data-testid="cpa-true"
             value={true}
             control={<Radio color="primary" />}
-            label={state.displayContent.industryId.specificCpaQuestion.radioButtonYesText}
+            label={Config.profileDefaults[state.flow].cpa.radioButtonYesText}
           />
           <FormControlLabel
             style={{ marginRight: "3rem" }}
@@ -44,7 +47,7 @@ export const OnboardingCpa = (): ReactElement => {
             data-testid="cpa-false"
             value={false}
             control={<Radio color="primary" />}
-            label={state.displayContent.industryId.specificCpaQuestion.radioButtonNoText}
+            label={Config.profileDefaults[state.flow].cpa.radioButtonNoText}
           />
         </RadioGroup>
       </FormControl>

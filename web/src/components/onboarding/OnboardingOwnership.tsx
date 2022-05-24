@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import {
   arrayOfOwnershipTypes,
@@ -15,6 +16,7 @@ interface Props {
 
 export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     const value = typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value;
@@ -28,10 +30,12 @@ export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElemen
   return (
     <>
       <div role="heading" aria-level={headerAriaLevel} className="h3-styling margin-bottom-2">
-        {state.displayContent.ownership.headingBolded}{" "}
-        <span className="text-light">{state.displayContent.ownership.headingNotBolded}</span>
+        {Config.profileDefaults[state.flow].ownership.header}{" "}
+        <span className="text-light">{Config.profileDefaults[state.flow].ownership.headerNotBolded}</span>
       </div>
-      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.ownership.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>
+        {Config.profileDefaults[state.flow].ownership.description}
+      </Content>
       <div className="form-input margin-top-3">
         <FormControl variant="outlined" fullWidth>
           <Select
@@ -41,7 +45,9 @@ export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElemen
             onChange={handleChange}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return <div className="text-base">{state.displayContent.ownership.placeholder}</div>;
+                return (
+                  <div className="text-base">{Config.profileDefaults[state.flow].ownership.placeholder}</div>
+                );
               }
 
               return selected.map((it) => LookupOwnershipTypeById(it).name).join(", ");

@@ -1,7 +1,7 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { createEmptyLoadDisplayContent } from "@/lib/types/types";
-import { templateEval } from "@/lib/utils/helpers";
+import { getFlow, templateEval } from "@/lib/utils/helpers";
 import Onboarding from "@/pages/onboarding";
 import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import { withAuth, withRoadmap } from "@/test/helpers";
@@ -14,8 +14,8 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyProfileData, getCurrentDate, ProfileData } from "@businessnjgovnavigator/shared/";
+import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 
@@ -31,6 +31,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const mockApi = api as jest.Mocked<typeof api>;
 const date = getCurrentDate().subtract(1, "month").date(1);
+const Config = getMergedConfig();
 
 const generateTestUserData = (overrides: Partial<ProfileData>) =>
   generateUserData({
@@ -114,7 +115,7 @@ describe("onboarding - shared", () => {
       withRoadmap(
         withAuth(
           <WithStatefulUserData initialUserData={userData}>
-            <Onboarding displayContent={createEmptyLoadDisplayContent()} municipalities={[]} />
+            <Onboarding municipalities={[]} />
           </WithStatefulUserData>,
           { user: user, isAuthenticated: IsAuthenticated.TRUE }
         ),
@@ -391,56 +392,48 @@ describe("onboarding - shared", () => {
 
   describe("when industry changes", () => {
     it("displays industry-specific content for home contractors when selected", async () => {
-      const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-      displayContent.industryId.specificHomeContractorMd = "Learn more about home contractors!";
-
       const { page } = renderPage({});
 
       page.chooseRadio("has-existing-business-false");
       await page.visitStep(2);
-      expect(screen.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("industry-specific-home-contractor")).not.toBeInTheDocument();
       page.selectByValue("Industry", "home-contractor");
-      expect(screen.getByText("Learn more about home contractors!")).toBeInTheDocument();
+      expect(screen.getByTestId("industry-specific-home-contractor")).toBeInTheDocument();
 
       await waitFor(() => {
         page.selectByValue("Industry", "e-commerce");
-        expect(screen.queryByText("Learn more about home contractors!")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("industry-specific-home-contractor")).not.toBeInTheDocument();
       });
     });
 
     it("displays industry-specific content for employment agency when selected", async () => {
-      const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-      displayContent.industryId.specificEmploymentAgencyMd = "Learn more about employment agencies!";
-
       const { page } = renderPage({});
       page.chooseRadio("has-existing-business-false");
       await page.visitStep(2);
 
-      expect(screen.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("industry-specific-employment-agency")).not.toBeInTheDocument();
       page.selectByValue("Industry", "employment-agency");
-      expect(screen.getByText("Learn more about employment agencies!")).toBeInTheDocument();
+      expect(screen.getByTestId("industry-specific-employment-agency")).toBeInTheDocument();
 
       await waitFor(() => {
         page.selectByValue("Industry", "e-commerce");
-        expect(screen.queryByText("Learn more about employment agencies!")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("industry-specific-employment-agency")).not.toBeInTheDocument();
       });
     });
 
     it("displays liquor license question for restaurants when selected", async () => {
-      const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-      displayContent.industryId.specificLiquorQuestion = {
-        contentMd: "Do you need a liquor license?",
-        radioButtonYesText: "Yeah",
-        radioButtonNoText: "Nah",
-      };
-
-      const { page } = renderPage({});
+      const userData = createEmptyUserData(generateUser({}));
+      const { page } = renderPage({ userData });
       page.chooseRadio("has-existing-business-false");
       await page.visitStep(2);
 
-      expect(screen.queryByText("Do you need a liquor license?")).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].liquorLicense.description)
+      ).not.toBeInTheDocument();
       page.selectByValue("Industry", "restaurant");
-      expect(screen.getByText("Do you need a liquor license?")).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults[getFlow(userData)].liquorLicense.description)
+      ).toBeInTheDocument();
       page.chooseRadio("liquor-license-true");
       await page.visitStep(3);
 
@@ -455,15 +448,9 @@ describe("onboarding - shared", () => {
         municipality: newark,
       });
       useMockRouter({ isReady: true, query: { page: "4" } });
-      const displayContent = createEmptyLoadDisplayContent();
-      displayContent.STARTING.homeBased = {
-        contentMd: "Are you a home-based business?",
-        radioButtonYesText: "Yeah",
-        radioButtonNoText: "Nah",
-      };
 
-      const { page } = renderPage({ userData, displayContent, municipalities: [newark] });
-      expect(screen.getByText("Are you a home-based business?")).toBeInTheDocument();
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      expect(screen.getByTestId("home-based-business-section")).toBeInTheDocument();
       page.selectByText("Location", "Newark");
       page.chooseRadio("home-based-business-true");
       await page.visitStep(5);
@@ -473,12 +460,12 @@ describe("onboarding - shared", () => {
     it("does not display home-based business question for non-applicable industries", async () => {
       const userData = generateTestUserData({ hasExistingBusiness: false, industryId: "restaurant" });
       useMockRouter({ isReady: true, query: { page: "4" } });
-      const displayContent = createEmptyLoadDisplayContent();
-      displayContent.STARTING.homeBased.contentMd = "Are you a home-based business?";
 
-      renderPage({ userData, displayContent });
+      renderPage({ userData });
 
-      expect(screen.queryByText("Are you a home-based business?")).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBased.description)
+      ).not.toBeInTheDocument();
     });
 
     it("sets liquor license back to false if they select a different industry", async () => {
@@ -513,26 +500,17 @@ describe("onboarding - shared", () => {
     });
 
     describe("cannabis license type question", () => {
-      beforeEach(() => {
-        const displayContent = createEmptyLoadDisplayContent()["STARTING"];
-        displayContent.industryId.specificCannabisLicenseQuestion = {
-          contentMd: "What type of cannabis license?",
-          radioButtonConditionalText: "Conditional",
-          radioButtonAnnualText: "Annual",
-        };
-      });
-
       it("displays cannabis license type question for cannabis only", async () => {
         const { page } = renderPage({});
 
         fireEvent.click(screen.getByRole("radio", { name: "Has Existing Business - False" }));
         await page.visitStep(2);
-        expect(screen.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("industry-specific-cannabis")).not.toBeInTheDocument();
         page.selectByValue("Industry", "cannabis");
-        expect(screen.getByText("What type of cannabis license?")).toBeInTheDocument();
+        expect(screen.getByTestId("industry-specific-cannabis")).toBeInTheDocument();
 
         page.selectByValue("Industry", "generic");
-        expect(screen.queryByText("What type of cannabis license?")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("industry-specific-cannabis")).not.toBeInTheDocument();
       });
 
       it("defaults cannabis license type to CONDITIONAL", async () => {

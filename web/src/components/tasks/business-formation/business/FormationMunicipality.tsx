@@ -1,11 +1,12 @@
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Municipality } from "@businessnjgovnavigator/shared/";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
 export const FormationMunicipality = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const { Config } = useConfig();
 
   const onValidation = (event: FocusEvent<HTMLInputElement>) => {
     if (!event.target.value.trim()) {
@@ -28,11 +29,11 @@ export const FormationMunicipality = (): ReactElement => {
         fieldName={"businessAddressCity"}
         error={state.errorMap.businessAddressCity.invalid}
         validationLabel="Error"
-        validationText={Config.onboardingDefaults.errorTextRequiredMunicipality}
         handleChange={() => setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: false } })}
         value={state.formationFormData.businessAddressCity}
         onSelect={onSelect}
         placeholderText={Config.businessFormationDefaults.notSetBusinessAddressCityLabel}
+        helperText={Config.profileDefaults.STARTING.municipality.errorTextRequired ?? " "}
       />
     </div>
   );

@@ -124,6 +124,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "lodash.merge" },
+    },
+    {
+      from: {},
       to: { path: "markdown-truncate" },
     },
     {

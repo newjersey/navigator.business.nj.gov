@@ -1,7 +1,8 @@
 import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -12,6 +13,8 @@ interface Props {
 
 export const OnboardingExistingEmployees = (props: Props): ReactElement => {
   const fieldName = "existingEmployees";
+  const { Config } = useConfig();
+  const { state } = useContext(ProfileDataContext);
 
   return (
     <>
@@ -21,7 +24,7 @@ export const OnboardingExistingEmployees = (props: Props): ReactElement => {
         fieldName={fieldName}
         maxLength={7}
         minLength={1}
-        validationText={Config.onboardingDefaults.errorTextRequiredExistingEmployees}
+        validationText={Config.profileDefaults[state.flow].existingEmployees.errorTextRequired}
         required={true}
         headerAriaLevel={props.headerAriaLevel}
       />

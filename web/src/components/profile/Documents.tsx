@@ -1,17 +1,23 @@
 import { Content } from "@/components/Content";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { UserDisplayContent } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, useMemo } from "react";
+import { UserData } from "@businessnjgovnavigator/shared";
+import React, { ReactElement, useContext, useMemo } from "react";
 
 interface Props {
-  displayContent: UserDisplayContent;
+  CMS_ONLY_fakeUserData?: UserData; // for CMS only
 }
 
 export const Documents = (props: Props): ReactElement => {
-  const { userData } = useUserData();
+  const userDataFromHook = useUserData();
+  const { Config } = useConfig();
   const { documents } = useDocuments();
+  const { state } = useContext(ProfileDataContext);
+
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+
   const listOfDocuments = useMemo(
     () => Object.values(userData?.profileData.documents ?? {}),
     [userData?.profileData.documents]
@@ -20,7 +26,7 @@ export const Documents = (props: Props): ReactElement => {
   return (
     <div className="margin-top-4 margin-bottom-6">
       <div className="margin-bottom-2" data-testid={`profileContent-documents`}>
-        <Content>{props.displayContent.documents.contentMd}</Content>
+        <Content>{Config.profileDefaults[state.flow].documents.header}</Content>
       </div>
       {listOfDocuments.some((value) => !!value) ? (
         <ol className="padding-left-3 padding-top-1">
@@ -58,7 +64,7 @@ export const Documents = (props: Props): ReactElement => {
           )}
         </ol>
       ) : (
-        <Content>{props.displayContent.documents.placeholder || ""}</Content>
+        <Content>{Config.profileDefaults[state.flow].documents.placeholder}</Content>
       )}
     </div>
   );

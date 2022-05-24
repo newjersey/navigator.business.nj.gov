@@ -1,5 +1,6 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { templateEval } from "@/lib/utils/helpers";
+import { getFlow, templateEval } from "@/lib/utils/helpers";
 import {
   generateMunicipality,
   generateProfileData,
@@ -11,7 +12,6 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import { renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyUserData, getCurrentDate, ProfileData } from "@businessnjgovnavigator/shared/";
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 
@@ -25,6 +25,8 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
+
+const Config = getMergedConfig();
 
 const date = getCurrentDate().subtract(1, "month").date(1);
 const dateOfFormation = date.format("YYYY-MM-DD");
@@ -163,7 +165,9 @@ describe("onboarding - owning a business", () => {
           expect(screen.getByTestId("step-3")).toBeInTheDocument();
         });
         expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
-        expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredBusinessName)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults[getFlow(userData)].businessName.errorTextRequired)
+        ).toBeInTheDocument();
         expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
 
@@ -176,7 +180,7 @@ describe("onboarding - owning a business", () => {
 
         await waitFor(() => {
           expect(
-            screen.queryByText(Config.onboardingDefaults.errorTextRequiredBusinessName)
+            screen.queryByText(Config.profileDefaults[getFlow(userData)].businessName.errorTextRequired)
           ).not.toBeInTheDocument();
         });
         expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
@@ -192,7 +196,9 @@ describe("onboarding - owning a business", () => {
           expect(screen.getByTestId("step-3")).toBeInTheDocument();
         });
         expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
-        expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+        ).toBeInTheDocument();
         expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
 
@@ -205,7 +211,7 @@ describe("onboarding - owning a business", () => {
 
         await waitFor(() => {
           expect(
-            screen.queryByText(Config.onboardingDefaults.errorTextRequiredSector)
+            screen.queryByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
           ).not.toBeInTheDocument();
         });
         expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
@@ -227,7 +233,7 @@ describe("onboarding - owning a business", () => {
         act(() => page.clickNext());
 
         await waitFor(() => {
-          screen.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees);
+          screen.getByText(Config.profileDefaults[getFlow(userData)].existingEmployees.errorTextRequired);
         });
         expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
       });
@@ -247,7 +253,7 @@ describe("onboarding - owning a business", () => {
 
         await waitFor(() => {
           expect(
-            screen.queryByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
+            screen.queryByText(Config.profileDefaults[getFlow(userData)].existingEmployees.errorTextRequired)
           ).not.toBeInTheDocument();
         });
         expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
@@ -263,7 +269,9 @@ describe("onboarding - owning a business", () => {
       await waitFor(() => {
         expect(screen.getByTestId("step-4")).toBeInTheDocument();
       });
-      expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredMunicipality)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
+      ).toBeInTheDocument();
       expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 
@@ -276,7 +284,7 @@ describe("onboarding - owning a business", () => {
       await page.visitStep(5);
       await waitFor(() => {
         expect(
-          screen.queryByText(Config.onboardingDefaults.errorTextRequiredMunicipality)
+          screen.queryByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
         ).not.toBeInTheDocument();
       });
       expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();

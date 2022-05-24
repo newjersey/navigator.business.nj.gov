@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
@@ -14,6 +15,7 @@ interface Props {
 
 export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
@@ -47,7 +49,9 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
 
   const renderValue = (value: unknown): ReactNode => {
     if (value === "") {
-      return <span className="text-base">{state.displayContent.legalStructure.placeholder}</span>;
+      return (
+        <span className="text-base">{Config.profileDefaults[state.flow].legalStructureId.placeholder}</span>
+      );
     }
 
     return <>{LookupLegalStructureById(value as string).name}</>;
@@ -57,7 +61,12 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
 
   return (
     <>
-      <Content overrides={{ h2: headerLevelTwo }}>{state.displayContent.legalStructure.contentMd}</Content>
+      <Content overrides={{ h2: headerLevelTwo }}>
+        {Config.profileDefaults[state.flow].legalStructureId.header}
+      </Content>
+      <Content overrides={{ h2: headerLevelTwo }}>
+        {Config.profileDefaults[state.flow].legalStructureId.description}
+      </Content>
       <div className="form-input margin-top-2">
         <FormControl variant="outlined" fullWidth>
           <Select

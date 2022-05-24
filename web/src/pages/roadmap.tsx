@@ -12,9 +12,9 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { loadRoadmapDisplayContent, loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { LoadDisplayContent, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
+import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
@@ -24,7 +24,6 @@ import React, { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
-  profileDisplayContent: LoadDisplayContent;
   operateReferences: Record<string, OperateReference>;
 }
 
@@ -118,7 +117,7 @@ const RoadmapPage = (props: Props): ReactElement => {
               </SectionAccordion>
             ))}
             <div className="margin-top-6">
-              <GraduationBox displayContent={props.profileDisplayContent} />
+              <GraduationBox />
             </div>
           </>
         )}
@@ -167,7 +166,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
   return {
     props: {
       displayContent: loadRoadmapDisplayContent(),
-      profileDisplayContent: loadUserDisplayContent(),
       operateReferences: loadOperateReferences(),
     },
   };

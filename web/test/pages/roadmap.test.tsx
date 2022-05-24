@@ -1,7 +1,8 @@
 import { SignUpToast } from "@/components/auth/SignUpToast";
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { createEmptyLoadDisplayContent, SidebarCardContent } from "@/lib/types/types";
+import { SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import RoadmapPage from "@/pages/roadmap";
 import {
@@ -33,7 +34,6 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   getCurrentDate,
   LookupIndustryById,
@@ -64,6 +64,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
+const Config = getMergedConfig();
 
 const setMobileScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
@@ -91,11 +92,7 @@ describe("roadmap page", () => {
   }) => {
     render(
       <ThemeProvider theme={createTheme()}>
-        <RoadmapPage
-          operateReferences={{}}
-          displayContent={createDisplayContent(sidebarDisplayContent)}
-          profileDisplayContent={createEmptyLoadDisplayContent()}
-        />
+        <RoadmapPage operateReferences={{}} displayContent={createDisplayContent(sidebarDisplayContent)} />
       </ThemeProvider>
     );
   };
@@ -123,7 +120,6 @@ describe("roadmap page", () => {
             <RoadmapPage
               operateReferences={{}}
               displayContent={createDisplayContent(sidebarDisplayContent)}
-              profileDisplayContent={createEmptyLoadDisplayContent()}
             />
           </ThemeProvider>
         </WithStatefulUserData>,
@@ -172,11 +168,7 @@ describe("roadmap page", () => {
     render(
       withAuthAlert(
         <ThemeProvider theme={createTheme()}>
-          <RoadmapPage
-            operateReferences={{}}
-            displayContent={createDisplayContent()}
-            profileDisplayContent={createEmptyLoadDisplayContent()}
-          />
+          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent()} />
         </ThemeProvider>,
         IsAuthenticated.FALSE,
         { modalIsVisible: false, setModalIsVisible }
@@ -193,11 +185,7 @@ describe("roadmap page", () => {
     render(
       withAuthAlert(
         <ThemeProvider theme={createTheme()}>
-          <RoadmapPage
-            operateReferences={{}}
-            displayContent={createDisplayContent()}
-            profileDisplayContent={createEmptyLoadDisplayContent()}
-          />
+          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent()} />
         </ThemeProvider>,
         IsAuthenticated.TRUE,
         { modalIsVisible: false, setModalIsVisible }
@@ -583,11 +571,7 @@ describe("roadmap page", () => {
       render(
         <WithStatefulUserData initialUserData={userData}>
           <ThemeProvider theme={createTheme()}>
-            <RoadmapPage
-              operateReferences={{}}
-              displayContent={createDisplayContent()}
-              profileDisplayContent={createEmptyLoadDisplayContent()}
-            />
+            <RoadmapPage operateReferences={{}} displayContent={createDisplayContent()} />
           </ThemeProvider>
         </WithStatefulUserData>
       );
@@ -779,10 +763,10 @@ describe("roadmap page", () => {
       submitGraduationModal();
       expect(userDataWasNotUpdated()).toEqual(true);
       expect(mockPush).not.toHaveBeenCalledWith("/dashboard");
-      expect(screen.getByText(Config.onboardingDefaults.dateOfFormationErrorText)).toBeInTheDocument();
-      expect(screen.getByText(Config.onboardingDefaults.errorTextRequiredSector)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.OWNING.dateOfFormation.errorText)).toBeInTheDocument();
+      expect(screen.getByText(Config.profileDefaults.OWNING.sectorId.errorTextRequired)).toBeInTheDocument();
       expect(
-        screen.getByText(Config.onboardingDefaults.errorTextRequiredExistingEmployees)
+        screen.getByText(Config.profileDefaults.OWNING.existingEmployees.errorTextRequired)
       ).toBeInTheDocument();
     });
 

@@ -1,9 +1,7 @@
 import { Content } from "@/components/Content";
-import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
@@ -21,28 +19,28 @@ import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
+import { EscapeModal } from "@/components/profile/EscapeModal";
+import { ProfileToastAlert } from "@/components/profile/ProfileToastAlert";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { loadUserDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
   createProfileFieldErrorMap,
-  LoadDisplayContent,
   OnboardingStatus,
   ProfileFieldErrorMap,
   ProfileFields,
-  UserDisplayContent,
+  ProfileTabs,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { getSectionCompletion, OnboardingStatusLookup, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getFlow, getSectionCompletion, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyProfileData,
   LookupLegalStructureById,
@@ -54,14 +52,17 @@ import { Box, CircularProgress } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { FormEvent, ReactElement, ReactNode, useContext, useMemo, useState } from "react";
+import React, { FormEvent, ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
-  displayContent: LoadDisplayContent;
   municipalities: Municipality[];
+  CMS_ONLY_hasExistingBusiness?: boolean; // for CMS only
+  CMS_ONLY_tab?: ProfileTabs; // for CMS only
+  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_showEscapeModal?: boolean; // for CMS only
+  CMS_ONLY_showSuccessAlert?: boolean; // for CMS only
+  CMS_ONLY_showErrorAlert?: boolean; // for CMS only
 }
-
-export type ProfileTabs = "info" | "numbers" | "documents" | "notes";
 
 const ProfilePage = (props: Props): ReactElement => {
   const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
@@ -71,27 +72,20 @@ const ProfilePage = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { userData, update } = useUserData();
+  const userDataFromHook = useUserData();
+  const update = userDataFromHook.update;
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
-  const [profileTab, setProfileTab] = useState<ProfileTabs>("info");
+  const [profileTab, setProfileTab] = useState<ProfileTabs>(props.CMS_ONLY_tab ?? "info");
+  const { Config } = useConfig();
 
-  const mergeDisplayContent = (): UserDisplayContent => {
-    const hasBusiness = userData?.profileData.hasExistingBusiness ? "OWNING" : "STARTING";
-    return {
-      ...props.displayContent[hasBusiness],
-      ...props.displayContent["PROFILE"],
-    } as UserDisplayContent;
-  };
-  const mergedDisplayContent = useMemo(mergeDisplayContent, [
-    props.displayContent,
-    userData?.profileData.hasExistingBusiness,
-  ]);
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const hasExistingBusiness = props.CMS_ONLY_hasExistingBusiness ?? userData?.profileData.hasExistingBusiness;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push) =>
     router.query.path === "businessFormation"
       ? routerType("/tasks/form-business-entity")
-      : userData?.profileData.hasExistingBusiness
+      : hasExistingBusiness
       ? routerType(`/dashboard${params ? `?${new URLSearchParams(params).toString()}` : ""}`)
       : routerType(`/roadmap${params ? `?${new URLSearchParams(params).toString()}` : ""}`);
 
@@ -107,7 +101,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const onBack = () => {
     if (!userData) return;
-    if (!userData?.profileData.hasExistingBusiness) {
+    if (!hasExistingBusiness) {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
     if (!deepEqual(profileData, userData.profileData)) {
@@ -148,11 +142,10 @@ const ProfilePage = (props: Props): ReactElement => {
     });
   };
 
-  const startingNewBusiness: Record<ProfileTabs, ReactNode> = {
+  const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-
         <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
       </>
     ),
@@ -160,7 +153,7 @@ const ProfilePage = (props: Props): ReactElement => {
       <>
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         {LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling ? (
-          <Documents displayContent={mergedDisplayContent} />
+          <Documents />
         ) : (
           <></>
         )}
@@ -200,7 +193,7 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldStates={fieldStates}
           disabled={userData?.formationData?.getFilingResponse?.success}
           handleChangeOverride={showRegistrationModalForGuest()}
-        ></OnboardingEntityId>
+        />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingTaxId
           onValidation={onValidation}
@@ -211,7 +204,7 @@ const ProfilePage = (props: Props): ReactElement => {
     ),
   };
 
-  const hasExistingBusiness: Record<ProfileTabs, ReactNode> = {
+  const hasExistingBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
@@ -221,8 +214,7 @@ const ProfilePage = (props: Props): ReactElement => {
     documents: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        {/* {userData?.formationData.getFilingResponse?.success ? ( */}
-        <Documents displayContent={mergedDisplayContent} />
+        <Documents />
       </>
     ),
     info: (
@@ -359,7 +351,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
       </Box>
       {userData?.formationData.getFilingResponse?.success ||
-      (userData?.profileData.hasExistingBusiness == false &&
+      (hasExistingBusiness == false &&
         LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling) ? (
         <Box
           className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
@@ -410,8 +402,7 @@ const ProfilePage = (props: Props): ReactElement => {
       value={{
         state: {
           profileData: profileData,
-          displayContent: mergedDisplayContent,
-          flow: "PROFILE",
+          flow: getFlow(profileData),
           municipalities: props.municipalities,
         },
         setUser: () => {},
@@ -423,27 +414,13 @@ const ProfilePage = (props: Props): ReactElement => {
         <NavBar />
         <main id="main">
           <div className="usa-section padding-top-0 desktop:padding-top-3">
-            <DialogTwoButton
+            <EscapeModal
               isOpen={escapeModal}
               close={() => setEscapeModal(false)}
-              title={Config.profileDefaults.escapeModalHeader}
-              bodyText={Config.profileDefaults.escapeModalBody}
-              primaryButtonText={Config.profileDefaults.escapeModalReturn}
               primaryButtonOnClick={() => redirect()}
-              secondaryButtonText={Config.profileDefaults.escapeModalEscape}
             />
             <SingleColumnContainer>
-              {alert && (
-                <ToastAlert
-                  variant={OnboardingStatusLookup[alert].variant}
-                  isOpen={alert !== undefined}
-                  close={() => setAlert(undefined)}
-                  dataTestid={`toast-alert-${alert}`}
-                  heading={OnboardingStatusLookup[alert].header}
-                >
-                  {OnboardingStatusLookup[alert].body}
-                </ToastAlert>
-              )}
+              {alert && <ProfileToastAlert alert={alert} close={() => setAlert(undefined)} />}
               <UserDataErrorAlert />
             </SingleColumnContainer>
             <div className="margin-top-6 desktop:margin-top-0">
@@ -460,9 +437,9 @@ const ProfilePage = (props: Props): ReactElement => {
                 ) : (
                   <>
                     <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
-                      {userData?.profileData.hasExistingBusiness === true
-                        ? hasExistingBusiness[profileTab]
-                        : startingNewBusiness[profileTab]}
+                      {hasExistingBusiness === true
+                        ? hasExistingBusinessElements[profileTab]
+                        : startingNewBusinessElements[profileTab]}
 
                       <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
                       <div className="float-right fdr">
@@ -497,7 +474,6 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
 
   return {
     props: {
-      displayContent: loadUserDisplayContent(),
       municipalities,
     },
   };

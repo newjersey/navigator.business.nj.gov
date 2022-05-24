@@ -1,7 +1,8 @@
 import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -13,6 +14,8 @@ interface Props {
 
 export const OnboardingTaxPin = (props: Props): ReactElement => {
   const fieldName = "taxPin";
+  const { Config } = useConfig();
+  const { state } = useContext(ProfileDataContext);
 
   return (
     <>
@@ -22,7 +25,7 @@ export const OnboardingTaxPin = (props: Props): ReactElement => {
         fieldName={fieldName}
         maxLength={4}
         minLength={4}
-        validationText={Config.profileDefaults.taxPinErrorText}
+        validationText={Config.profileDefaults[state.flow].taxPin.errorText}
         headerAriaLevel={props.headerAriaLevel}
         handleChange={props.handleChangeOverride}
       />

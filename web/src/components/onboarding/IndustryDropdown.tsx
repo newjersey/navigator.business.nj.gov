@@ -1,6 +1,7 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
@@ -27,6 +28,7 @@ interface Props {
 export const IndustryDropdown = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { Config } = useConfig();
 
   const IndustriesOrdered: Industry[] = orderBy(Industries, (industry: Industry) => {
     return industry.name;
@@ -123,7 +125,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
           onChange={handleSearchBoxChange}
           onSubmit={props.onValidation}
           variant="outlined"
-          placeholder={state.displayContent.industryId.placeholder}
+          placeholder={Config.profileDefaults[state.flow].industryId.placeholder}
           error={props.error}
           helperText={props.error ? props.validationText ?? " " : " "}
         />

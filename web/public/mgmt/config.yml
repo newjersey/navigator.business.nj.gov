@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
-  branch: content-repo
+  branch: cms-profile-refactor
   base_url: https://0szgd6wmlk.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
@@ -9,7 +9,7 @@ backend:
   commit_messages:
     create: "chore: creating {{collection}} {{slug}}"
     update: "fix: updating {{collection}} {{slug}}"
-# local_backend: true
+#local_backend: true
 publish_mode: editorial_workflow
 media_folder: web/public/img
 logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
@@ -841,35 +841,11 @@ collections:
               - { label: Back Button Test, name: backButtonText, widget: string }
               - { label: Step X of Y Template, name: stepXofYTemplate, widget: string }
               - { label: Step One Template, name: stepOneTemplate, widget: string }
-              - { label: Error Text - Required Legal, name: errorTextRequiredLegal, widget: string }
-              - {
-                  label: Error Text - Required Business Name,
-                  name: errorTextRequiredBusinessName,
-                  widget: string,
-                }
-              - { label: Error Text - Required Industry, name: errorTextRequiredIndustry, widget: string }
-              - {
-                  label: Error Text - Required Municipality,
-                  name: errorTextRequiredMunicipality,
-                  widget: string,
-                }
-              - {
-                  label: Error Text - Required Existing Business,
-                  name: errorTextRequiredExistingBusiness,
-                  widget: string,
-                }
               - {
                   label: Error Text - Minimum Numeric Field,
                   name: errorTextMinimumNumericField,
                   widget: string,
                 }
-              - {
-                  label: Error Text - Required Existing Employees,
-                  name: errorTextRequiredExistingEmployees,
-                  widget: string,
-                }
-              - { label: Error Text - Date of Formation, name: dateOfFormationErrorText, widget: string }
-              - { label: Error Text - Required Sector, name: errorTextRequiredSector, widget: string }
           - label: Page Footer
             name: footer
             collapsed: true
@@ -892,31 +868,6 @@ collections:
               - { label: Office External Text, name: officeExternalText, widget: string }
               - { label: Github Link, name: gitHubLink, widget: string }
               - { label: Twitter Link, name: twitterLink, widget: string }
-          - label: Profile Defaults
-            name: profileDefaults
-            collapsed: true
-            widget: object
-            summary: "{{profileDefaults}}"
-            fields:
-              - { label: Page Title, name: pageTitle, widget: string }
-              - { label: Save Button Text, name: saveButtonText, widget: string }
-              - { label: Back Button Text, name: backButtonText, widget: string }
-              - { label: Success Text - Header, name: successTextHeader, widget: string }
-              - { label: Success Text - Body, name: successTextBody, widget: string }
-              - { label: Error Text - Header, name: errorTextHeader, widget: string }
-              - { label: Error Text - Body, name: errorTextBody, widget: string }
-              - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
-              - { label: Escape Model - Return, name: escapeModalBody, widget: string }
-              - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
-              - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
-              - { label: Tax PIN Error Text, name: taxPinErrorText, widget: string }
-              - { label: Formation Document Link Text, name: formationDocFileTitle, widget: string }
-              - { label: Certification Document Link Text, name: certificationDocFileTitle, widget: string }
-              - { label: Standing Document Link Text, name: standingDocFileTitle, widget: string }
-              - { label: Info Tab Title, name: profileTabInfoTitle, widget: string }
-              - { label: Reference Tab Title, name: profileTabRefTitle, widget: string }
-              - { label: Note Tab Title, name: profileTabNoteTitle, widget: string }
-              - { label: Documents Tab Title, name: profileTabDocsTitle, widget: string }
 
           - label: Roadmap Defaults
             name: roadmapDefaults
@@ -1756,6 +1707,558 @@ collections:
       - { label: "No Button Content", name: "radioNoContent", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+
+  - name: "profile-onboarding-test"
+    label: "Profile / Onboarding (test)"
+    delete: false
+    create: false
+    files:
+      - label: "Info Tab (Poppy)"
+        name: "profile-info-poppy"
+        file: "content/src/fieldConfig/profile-info-poppy.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Info Tab", name: "profileTabInfoTitle", widget: "string" }
+              - label: Fields
+                name: "STARTING"
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Business Name
+                    name: "businessName"
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - {
+                          label: "Error Text (Oscar Onboarding Only)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Industry
+                    name: industryId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Legal Structure
+                    name: legalStructureId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Municipality
+                    name: "municipality"
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Info Tab (Oscar)"
+        name: "profile-info-oscar"
+        file: "content/src/fieldConfig/profile-info-oscar.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - label: Fields
+                name: OWNING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Business Name
+                    name: "businessName"
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - {
+                          label: "Error Text (Oscar Onboarding Only)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Sector ID
+                    name: sectorId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - {
+                          label: "Error Text (when not provided)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Existing Employees
+                    name: existingEmployees
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - {
+                          label: "Error Text (when not provided)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Ownership
+                    name: ownership
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Municipality
+                    name: "municipality"
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Home-Based Business
+                    name: "homeBased"
+                    collapsed: true
+                    widget: object
+                    summary: "{{homeBased}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Numbers Tab (Poppy)"
+        name: "profile-numbers-poppy"
+        file: "content/src/fieldConfig/profile-numbers-poppy.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Numbers Tab", name: "profileTabRefTitle", widget: "string" }
+              - label: Fields
+                name: STARTING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Employer ID
+                    name: employerId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Entity ID
+                    name: entityId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Tax ID
+                    name: taxId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Numbers Tab (Oscar)"
+        name: "profile-numbers-oscar"
+        file: "content/src/fieldConfig/profile-numbers-oscar.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - label: Fields
+                name: OWNING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Employer ID
+                    name: employerId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Entity ID
+                    name: entityId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Date of Formation
+                    name: dateOfFormation
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Error Text", name: "errorText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Tax ID
+                    name: taxId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Tax PIN
+                    name: taxPin
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Error Text", name: "errorText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+
+      - label: "Documents Tab (Poppy)"
+        name: "profile-documents-poppy"
+        file: "content/src/fieldConfig/profile-documents-poppy.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Documents Tab", name: "profileTabDocsTitle", widget: "string" }
+              - { label: "Good Standing Doc Title", name: "standingDocFileTitle", widget: "string" }
+              - { label: "Formation Doc Title", name: "formationDocFileTitle", widget: "string" }
+              - {
+                  label: "Certified Copy of Formation Doc Title",
+                  name: "certificationDocFileTitle",
+                  widget: "string",
+                }
+              - label: Fields
+                name: STARTING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Documents Component
+                    name: documents
+                    collapsed: true
+                    widget: object
+                    summary: "{{documents}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "markdown" }
+      - label: "Documents Tab (Oscar)"
+        name: "profile-documents-oscar"
+        file: "content/src/fieldConfig/profile-documents-oscar.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Documents Tab", name: "profileTabDocsTitle", widget: "string" }
+              - { label: "Good Standing Doc Title", name: "standingDocFileTitle", widget: "string" }
+              - { label: "Formation Doc Title", name: "formationDocFileTitle", widget: "string" }
+              - {
+                  label: "Certified Copy of Formation Doc Title",
+                  name: "certificationDocFileTitle",
+                  widget: "string",
+                }
+              - label: Fields
+                name: OWNING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Documents Component
+                    name: documents
+                    collapsed: true
+                    widget: object
+                    summary: "{{documents}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "markdown" }
+      - label: "Notes Tab (Poppy)"
+        name: "profile-notes-poppy"
+        file: "content/src/fieldConfig/profile-notes-poppy.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Notes Tab", name: "profileTabNoteTitle", widget: "string" }
+              - label: Fields
+                name: STARTING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Notes
+                    name: notes
+                    collapsed: true
+                    widget: object
+                    summary: "{{notes}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Notes Tab (Oscar)"
+        name: "profile-notes-oscar"
+        file: "content/src/fieldConfig/profile-notes-oscar.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Notes Tab", name: "profileTabNoteTitle", widget: "string" }
+              - label: Fields
+                name: OWNING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Notes
+                    name: notes
+                    collapsed: true
+                    widget: object
+                    summary: "{{notes}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Industry-Specific Questions (Poppy)"
+        name: "profile-industries-poppy"
+        file: "content/src/fieldConfig/profile-industries-poppy.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            summary: "{{profileDefaults}}"
+            fields:
+              - label: Fields
+                name: STARTING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Home-Based Business
+                    name: "homeBased"
+                    collapsed: true
+                    widget: object
+                    summary: "{{homeBased}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Cannabis License
+                    name: cannabisLicense
+                    collapsed: true
+                    widget: object
+                    summary: "{{cannabisLicense}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Annual Text", name: "radioButtonAnnualText", widget: "string" }
+                      - {
+                          label: "Radio Button Conditional Text",
+                          name: "radioButtonConditionalText",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: CPA
+                    name: cpa
+                    collapsed: true
+                    widget: object
+                    summary: "{{cpa}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Employment Agency
+                    name: employmentAgency
+                    collapsed: true
+                    widget: object
+                    summary: "{{employmentAgency}}"
+                    fields:
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Home Contractor
+                    name: homeContractor
+                    collapsed: true
+                    widget: object
+                    summary: "{{homeContractor}}"
+                    fields:
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Liquor License
+                    name: liquorLicense
+                    collapsed: true
+                    widget: object
+                    summary: "{{liquorLicense}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Industry-Specific Questions (Oscar)"
+        name: "profile-industries-oscar"
+        file: "content/src/fieldConfig/profile-industries-oscar.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            summary: "{{profileDefaults}}"
+            fields:
+              - label: Fields
+                name: OWNING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Legal Structure
+                    name: legalStructureId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Profile Page Misc"
+        name: "profile-misc"
+        file: "content/src/fieldConfig/config.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            summary: "{{profileDefaults}}"
+            fields:
+              - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
+              - { label: Escape Model - Body, name: escapeModalBody, widget: string }
+              - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
+              - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
+              - { label: Success Alert - Header, name: successTextHeader, widget: string }
+              - { label: Success Alert - Body, name: successTextBody, widget: string }
+              - { label: Error Alert - Header, name: errorTextHeader, widget: string }
+              - { label: Error Alert - Body, name: errorTextBody, widget: string }
+              - { label: Page Title, name: pageTitle, widget: string }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Back Button Text, name: backButtonText, widget: string }
+      - label: "Onboarding-Only Questions"
+        name: "profile-onboarding-poppy"
+        file: "content/src/fieldConfig/profile-onboarding-poppy.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            summary: "{{profileDefaults}}"
+            fields:
+              - label: Fields
+                name: STARTING
+                collapsed: false
+                widget: object
+                summary: "{{profileFields}}"
+                fields:
+                  - label: Has Existing Business
+                    name: hasExistingBusiness
+                    collapsed: true
+                    widget: object
+                    summary: "{{hasExistingBusiness}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - {
+                          label: "Error Text (when not selected)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Legal Structure
+                    name: legalStructureId
+                    collapsed: true
+                    widget: object
+                    summary: "{{legalStructure}}"
+                    fields:
+                      - {
+                          label: "Error Text (when not selected)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - label: Option Content
+                        name: optionContent
+                        collapsed: false
+                        widget: object
+                        summary: "{{optionContent}}"
+                        fields:
+                          - {
+                              label: "limited-liability-company",
+                              name: "limited-liability-company",
+                              widget: "markdown",
+                            }
+                          - { label: "general-partnership", name: "general-partnership", widget: "markdown" }
+                          - { label: "sole-proprietorship", name: "sole-proprietorship", widget: "markdown" }
+                          - { label: "c-corporation", name: "c-corporation", widget: "markdown" }
+                          - { label: "s-corporation", name: "s-corporation", widget: "markdown" }
+                          - {
+                              label: "limited-liability-partnership",
+                              name: "limited-liability-partnership",
+                              widget: "markdown",
+                            }
+                          - { label: "limited-partnership", name: "limited-partnership", widget: "markdown" }
 
   - name: "business-formation"
     label: "Business Formation"
