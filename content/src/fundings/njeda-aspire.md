@@ -20,6 +20,7 @@ county:
 sector:
   - construction
   - manufacturing
+  - real-estate
 openDate: ""
 dueDate: ""
 ---
