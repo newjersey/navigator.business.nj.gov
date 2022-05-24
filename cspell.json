@@ -65,7 +65,8 @@
     "siccode",
     "SDWA",
     "NJEIT",
-    "exceedance"
+    "exceedance",
+    "Transformative"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
