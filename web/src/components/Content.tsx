@@ -2,6 +2,7 @@
 
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { Icon } from "@/components/njwds/Icon";
+import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
@@ -10,11 +11,6 @@ import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { CSSProperties, ReactElement, useContext } from "react";
-import rehypeReact from "rehype-react";
-import remarkGfm from "remark-gfm";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
 
 interface ContentProps {
   children: string;
@@ -25,47 +21,27 @@ interface ContentProps {
 }
 
 export const Content = (props: ContentProps): ReactElement => {
+  const components = {
+    code: ContextualInfoLink,
+    a: Link(props.onClick),
+    h5: (props: any) => <div className="h5-styling">{props.children}</div>,
+    h6: (props: any) => <div className="h6-styling">{props.children}</div>,
+    blockquote: GreenBox,
+    table: OutlineBox,
+    li: ListOrCheckbox,
+    thead: Unformatted,
+    tr: Unformatted,
+    th: Unformatted,
+    td: Unformatted,
+    tbody: Unformatted,
+    ...props.overrides,
+  };
+
   return (
     <div className={`usa-prose ${props.className ?? ""}`} style={props.style}>
-      <ContentNonProse overrides={props.overrides} onClick={props.onClick}>
-        {props.children}
-      </ContentNonProse>
+      <PureMarkdownContent components={components}>{props.children}</PureMarkdownContent>
     </div>
   );
-};
-
-interface ContentNonProseProps {
-  children: string;
-  overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
-  onClick?: () => void;
-}
-
-const ContentNonProse = (props: ContentNonProseProps): ReactElement => {
-  const markdown = unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkRehype)
-    .use(rehypeReact, {
-      createElement: React.createElement,
-      Fragment: React.Fragment,
-      components: {
-        code: ContextualInfoLink,
-        a: Link(props.onClick),
-        h5: (props: any) => <div className="h5-styling">{props.children}</div>,
-        h6: (props: any) => <div className="h6-styling">{props.children}</div>,
-        blockquote: GreenBox,
-        table: OutlineBox,
-        li: ListOrCheckbox,
-        thead: Unformatted,
-        tr: Unformatted,
-        th: Unformatted,
-        td: Unformatted,
-        tbody: Unformatted,
-        ...props.overrides,
-      },
-    })
-    .processSync(props.children).result;
-  return <>{markdown}</>;
 };
 
 const Link = (onClick?: () => void) => {

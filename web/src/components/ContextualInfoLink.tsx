@@ -1,4 +1,5 @@
 import { Button } from "@/components/njwds-extended/Button";
+import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
 import analytics from "@/lib/utils/analytics";
@@ -27,7 +28,9 @@ export const ContextualInfoLink = (props: any): ReactElement => {
 
   return (
     <Button style="tertiary" dataTestid={contextualInfoId} onClick={setContext}>
-      <span className="dashed-underline line-height-body-5">{displayText}</span>
+      <span className="dashed-underline line-height-body-5">
+        <PureMarkdownContent>{displayText}</PureMarkdownContent>
+      </span>
     </Button>
   );
 };
