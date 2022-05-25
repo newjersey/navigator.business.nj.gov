@@ -3633,6 +3633,7 @@ __metadata:
     "@types/react-dom": 18.0.4
     "@types/react-swipeable-views": 0.13.1
     "@types/react-transition-group": 4.4.4
+    "@types/remove-markdown": 0.3.1
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
     "@types/testing-library__jest-dom": 5.14.3
@@ -3705,6 +3706,7 @@ __metadata:
     remark-gfm: 3.0.1
     remark-parse: 10.0.1
     remark-rehype: 10.1.0
+    remove-markdown: 0.5.0
     rimraf: 3.0.2
     sass: 1.52.1
     sass-loader: 13.0.0
@@ -3813,6 +3815,7 @@ __metadata:
     "@types/react-dom": 18.0.4
     "@types/react-swipeable-views": 0.13.1
     "@types/react-transition-group": 4.4.4
+    "@types/remove-markdown": 0.3.1
     "@types/testing-library__jest-dom": 5.14.3
     "@types/ua-parser-js": 0.7.36
     "@typescript-eslint/eslint-plugin": 5.25.0
@@ -3866,6 +3869,7 @@ __metadata:
     remark-gfm: 3.0.1
     remark-parse: 10.0.1
     remark-rehype: 10.1.0
+    remove-markdown: 0.5.0
     rimraf: 3.0.2
     sass: 1.52.1
     sass-loader: 13.0.0
@@ -8976,6 +8980,13 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 162364dad716d9017ee34aabf2ea37499709ebbdef70392ae1b39225985971e1a46f121efb9c5c7da92144ee1d96d4525df806a7c1c03a5db7fd31dd034ddc7a
+  languageName: node
+  linkType: hard
+
+"@types/remove-markdown@npm:0.3.1":
+  version: 0.3.1
+  resolution: "@types/remove-markdown@npm:0.3.1"
+  checksum: a673aafa3a3722d959b4ad1d4e95b33f04f037a8bb95a82e843d6005b12b51f9b1bfd5954cd5c8707fbbb2f1d8865f7e632f02f99389ab83d0dcfd2cb1920dbb
   languageName: node
   linkType: hard
 
@@ -28774,6 +28785,13 @@ __metadata:
     unherit: ^1.0.4
     xtend: ^4.0.1
   checksum: 177bf04062c4c2cf6d207e7a57b0fc19200a20b2a36f8a61a54b3df98c547353597bcc8a7ed2f249f41876559f19c8a1476627870babecce2f5b7ab768d6ca79
+  languageName: node
+  linkType: hard
+
+"remove-markdown@npm:0.5.0":
+  version: 0.5.0
+  resolution: "remove-markdown@npm:0.5.0"
+  checksum: c3c9051e7e7d7c5560e7d70a5093704d868fa57d244eb89533fe7bf960bce68e7901197616c6b296cb22f47af6c15a6bce693467f35709fe399379ea1125e536
   languageName: node
   linkType: hard
 

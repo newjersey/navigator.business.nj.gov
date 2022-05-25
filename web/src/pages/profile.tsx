@@ -17,6 +17,7 @@ import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
+import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
@@ -200,6 +201,8 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldStates={fieldStates}
           handleChangeOverride={showRegistrationModalForGuest()}
         />
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <ProfileNaicsCode />
       </>
     ),
   };

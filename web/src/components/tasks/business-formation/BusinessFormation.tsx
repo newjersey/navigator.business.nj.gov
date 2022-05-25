@@ -10,11 +10,14 @@ import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
-import { FormationDisplayContent, FormationFieldErrorMap, FormationFields, Task } from "@/lib/types/types";
+import { FormationDisplayContentMap, FormationFieldErrorMap, FormationFields, Task } from "@/lib/types/types";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyFormationFormData,
+  defaultFormationLegalType,
   FormationFormData,
+  FormationLegalType,
+  FormationLegalTypes,
   getCurrentDate,
   getCurrentDateFormatted,
   Municipality,
@@ -24,9 +27,19 @@ import { useRouter } from "next/router";
 import React, { ReactElement, useEffect, useState } from "react";
 import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
+export const allowFormation = (legalStructureId: string | undefined) => {
+  const featureFlagMap: Partial<Record<FormationLegalType, boolean>> = {
+    "limited-liability-partnership": process.env.FEATURE_BUSINESS_LLP == "true",
+  };
+  if (FormationLegalTypes.includes(legalStructureId as FormationLegalType)) {
+    return featureFlagMap[legalStructureId as FormationLegalType] ?? true;
+  }
+  return false;
+};
+
 interface Props {
   task: Task;
-  displayContent: FormationDisplayContent;
+  displayContent: FormationDisplayContentMap;
   municipalities: Municipality[];
 }
 
@@ -50,7 +63,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
 
-  const isLLC = userData?.profileData.legalStructureId === "limited-liability-company";
+  const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
 
   const getDate = (date?: string): string =>
     !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
@@ -80,7 +93,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     }
   }, [router.isReady, router.query.completeFiling, update, router]);
 
-  if (!isLLC) {
+  if (!isValidLegalStructure) {
     return (
       <div className="flex flex-column space-between minh-38">
         <div>
@@ -111,7 +124,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
         state: {
           tab: tab,
           formationFormData: formationFormData,
-          displayContent: props.displayContent,
+          displayContent:
+            props.displayContent[
+              (userData?.profileData.legalStructureId as FormationLegalType) ?? defaultFormationLegalType
+            ],
           municipalities: props.municipalities,
           errorMap: errorMap,
           showResponseAlert: showResponseAlert,
@@ -129,7 +145,14 @@ export const BusinessFormation = (props: Props): ReactElement => {
             <>
               <UnlockedBy task={props.task} dataTestid="dependency-alert" />
               <div className="margin-bottom-2">
-                <Content>{props.displayContent.introParagraph.contentMd}</Content>
+                <Content>
+                  {
+                    props.displayContent[
+                      (userData?.profileData.legalStructureId as FormationLegalType) ??
+                        defaultFormationLegalType
+                    ].introParagraph.contentMd
+                  }
+                </Content>
               </div>
             </>
           )}

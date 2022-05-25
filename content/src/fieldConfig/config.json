@@ -127,6 +127,7 @@
     "reviewPageSignaturesHeader": "### Signatures",
     "reviewPageRegisteredAgentNumberLabel": "**Number:**",
     "llcText": "LLC",
+    "llpText": "LLP",
     "documentTableSubTotalCostLabel": "Subtotal",
     "signatureAidText": "Checking this box indicates your intent to formally execute the filing.",
     "paymentTypeTableTotalCostLabel": "Total",

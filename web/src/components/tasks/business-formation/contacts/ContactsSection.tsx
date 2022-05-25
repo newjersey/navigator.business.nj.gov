@@ -158,8 +158,14 @@ export const ContactsSection = (): ReactElement => {
     <>
       <div data-testid="contacts-section">
         <RegisteredAgent />
-        <hr className="margin-top-0 margin-bottom-3" />
-        <Members />
+        {["limited-liability-company"].includes(userData?.profileData.legalStructureId ?? "") ? (
+          <>
+            <hr className="margin-top-0 margin-bottom-3" />
+            <Members />
+          </>
+        ) : (
+          <></>
+        )}
         <hr className="margin-top-0 margin-bottom-3" />
         <Signatures />
         <BusinessFormationFieldAlert

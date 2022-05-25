@@ -4,6 +4,7 @@ import {
   Certification,
   County,
   FormationDisplayContent,
+  FormationDisplayContentMap,
   Funding,
   FundingBusinessStage,
   FundingHomeBased,
@@ -28,9 +29,12 @@ import {
   arrayOfSectors as sectors,
   arrayOfStateObjects as states,
   BusinessSuffix,
+  BusinessSuffixMap,
   BusinessUser,
   FormationData,
   FormationFormData,
+  FormationLegalType,
+  FormationLegalTypes,
   FormationMember,
   FormationSigner,
   FormationSubmitError,
@@ -320,53 +324,60 @@ export const generateCannabisPriorityStatusDisplayContent = (
 });
 
 export const generateFormationDisplayContent = (
-  overrides: Partial<FormationDisplayContent>
-): FormationDisplayContent => ({
-  introParagraph: {
-    contentMd: `some-intro-content-${randomInt()}`,
-  },
-  businessNameCheck: {
-    contentMd: `some-business-name-check-content-${randomInt()}`,
-  },
-  agentNumberOrManual: {
-    contentMd: `some-agent-number-or-manual-content-${randomInt()}`,
-    radioButtonNumberText: `some-agent-number-or-manual-radio-number-text-${randomInt()}`,
-    radioButtonManualText: `some-agent-number-or-manual-radio-manual-text-${randomInt()}`,
-  },
-  members: {
-    contentMd: `some-members-content-${randomInt()}`,
-    placeholder: `some-members-placeholder-${randomInt()}`,
-  },
-  signatureHeader: {
-    contentMd: `some-signer-content- ${randomInt()}`,
-  },
-  services: {
-    contentMd: `some-payment-type-content-${randomInt()}`,
-  },
-  notification: {
-    contentMd: `some-notification-${randomInt()}`,
-  },
-  officialFormationDocument: {
-    contentMd: `some-official-formation-document-content-${randomInt()}`,
-    cost: randomInt(),
-  },
-  certificateOfStanding: {
-    contentMd: `some-certificate-of-standing-content-${randomInt()}`,
-    cost: randomInt(),
-    optionalLabel: `some-certificate-of-standing-optional-label-${randomInt()}`,
-  },
-  certifiedCopyOfFormationDocument: {
-    contentMd: `some-certified-copy-of-formation-document-content-${randomInt()}`,
-    cost: randomInt(),
-    optionalLabel: `some-certified-copy-of-formation-document-optional-label-${randomInt()}`,
-  },
-  ...overrides,
-});
+  overrides: Partial<Record<FormationLegalType, Partial<FormationDisplayContent>>>
+): FormationDisplayContentMap =>
+  FormationLegalTypes.reduce((accumulator, curr) => {
+    accumulator[curr] = {
+      introParagraph: {
+        contentMd: `some-intro-content-${curr}-${randomInt()}`,
+      },
+      businessNameCheck: {
+        contentMd: `some-business-name-check-${curr}--content-${randomInt()}`,
+      },
+      agentNumberOrManual: {
+        contentMd: `some-agent-number-or-manual-${curr}--content-${randomInt()}`,
+        radioButtonNumberText: `some-agent-number-or-manual-radio-number-${curr}--text-${randomInt()}`,
+        radioButtonManualText: `some-agent-number-or-manual-radio-manual-${curr}--text-${randomInt()}`,
+      },
+      members: {
+        contentMd: `some-members-${curr}--content-${randomInt()}`,
+        placeholder: `some-members-${curr}--placeholder-${randomInt()}`,
+      },
+      signatureHeader: {
+        contentMd: `some-signer-${curr}--content- ${randomInt()}`,
+      },
+      services: {
+        contentMd: `some-payment-${curr}--type-content-${randomInt()}`,
+      },
+      notification: {
+        contentMd: `some-${curr}--notification-${randomInt()}`,
+      },
+      officialFormationDocument: {
+        contentMd: `some-official-formation-document-${curr}--content-${randomInt()}`,
+        cost: randomInt(),
+      },
+      certificateOfStanding: {
+        contentMd: `some-certificate-of-standing-${curr}--content-${randomInt()}`,
+        cost: randomInt(),
+        optionalLabel: `some-certificate-of-standing-optional-${curr}--label-${randomInt()}`,
+      },
+      certifiedCopyOfFormationDocument: {
+        contentMd: `some-certified-copy-of-formation-document-${curr}--content-${randomInt()}`,
+        cost: randomInt(),
+        optionalLabel: `some-certified-copy-of-formation-document-optional-${curr}--label-${randomInt()}`,
+      },
+      ...overrides[curr],
+    };
+    return accumulator;
+  }, {} as FormationDisplayContentMap);
 
-export const generateFormationFormData = (overrides: Partial<FormationFormData>): FormationFormData => {
+export const generateFormationFormData = (
+  overrides: Partial<FormationFormData>,
+  legalStructureId?: FormationLegalType
+): FormationFormData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
-    businessSuffix: randomBusinessSuffix(),
+    businessSuffix: randomBusinessSuffix(legalStructureId),
     businessStartDate: getCurrentDate().add(1, "days").format("YYYY-MM-DD"),
     businessAddressCity: generateMunicipality({}),
     businessAddressLine1: `some-address-1-${randomInt()}`,
@@ -441,9 +452,12 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
   ...overrides,
 });
 
-export const generateFormationData = (overrides: Partial<FormationData>): FormationData => {
+export const generateFormationData = (
+  overrides: Partial<FormationData>,
+  legalStructureId?: FormationLegalType
+): FormationData => {
   return {
-    formationFormData: generateFormationFormData({}),
+    formationFormData: generateFormationFormData({}, legalStructureId),
     formationResponse: undefined,
     getFilingResponse: undefined,
     ...overrides,
@@ -539,9 +553,16 @@ export const generateOperateReference = (overrides: Partial<OperateReference>): 
   };
 };
 
-export const randomBusinessSuffix = (): BusinessSuffix => {
-  const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);
-  return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
+export const randomFormationLegalType = (): FormationLegalType => {
+  const randomIndex = Math.floor(Math.random() * FormationLegalTypes.length);
+  return FormationLegalTypes[randomIndex] as FormationLegalType;
+};
+
+export const randomBusinessSuffix = (legalStructureId?: FormationLegalType): BusinessSuffix => {
+  const legalSuffix = legalStructureId ? BusinessSuffixMap[legalStructureId] : undefined;
+  const suffixes = legalSuffix ? legalSuffix : AllBusinessSuffixes;
+  const randomIndex = Math.floor(Math.random() * suffixes.length);
+  return suffixes[randomIndex] as BusinessSuffix;
 };
 
 export const randomFundingStatus = (): FundingStatus => {

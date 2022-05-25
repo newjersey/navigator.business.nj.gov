@@ -5,7 +5,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
-import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
+import { allowFormation, BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
@@ -104,11 +104,8 @@ const TaskPage = (props: Props): ReactElement => {
   };
 
   const renderNextAndPreviousButtons = () => {
-    if (
-      props.task.id === "form-business-entity" &&
-      userData?.profileData.legalStructureId === "limited-liability-company"
-    )
-      return;
+    const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
+    if (props.task.id === "form-business-entity" && isValidLegalStructure) return;
     return nextAndPreviousButtons();
   };
 
