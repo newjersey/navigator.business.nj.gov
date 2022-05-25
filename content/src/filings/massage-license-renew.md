@@ -5,7 +5,7 @@ id: massage-license-renew
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx
 callToActionText: Renew My Massage Therapy License
 ---
-Your massage and bodywork license will expire every two years on November 30th. You will receive a renewal notice in the mail at the address you registered with the Board at least 60 days prior to the expiration of your license.
+Your massage and bodywork license will expire every two years. You will receive a renewal notice in the mail at the address you registered with the Board at least 60 days prior to the expiration of your license.
 
 ---
 ### Application Requirements
