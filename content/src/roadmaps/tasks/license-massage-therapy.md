@@ -1,15 +1,14 @@
 ---
 urlSlug: license-massage-therapy
 filename: license-massage-therapy
-name: Register as a Massage Therapy Business
+name: Get Your Massage Therapy Business License
 id: license-massage-therapy
 callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx?Facility=Y
-callToActionText: Register as a Massage Therapy Business
+callToActionText: Get My Business License
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Massage and Bodywork Therapy
 ---
 If you will employ others to offer massage therapy services, you need to register your business as a massage therapy employer.
-
 
 - - -
 ### Application Requirements
