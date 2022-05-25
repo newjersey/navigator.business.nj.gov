@@ -15,7 +15,7 @@ Your accounting firm registration will expire every three years. You will receiv
 - License Number 
 - Registration Code
 - Current Mailing and Business address
-- Current information for the Resident Manager
+- Current information for the Resident Manager-in-Charge, this must be the Certified Public Accountant in the firm
 - Pay the associated fees for the registration renewal
 
 > **Once completed, you will have:**  
