@@ -7,7 +7,7 @@ import {
 } from "@/test/factories";
 import {
   FormationPageHelpers,
-  generateLLCProfileData,
+  generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
@@ -17,6 +17,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
   FormationFormData,
+  FormationLegalType,
   getCurrentDate,
   getCurrentDateFormatted,
   Municipality,
@@ -55,9 +56,12 @@ describe("Formation - BusinessSection", () => {
     municipalities?: Municipality[],
     initialUser?: Partial<BusinessUser>
   ): Promise<FormationPageHelpers> => {
-    const profileData = generateLLCProfileData(initialProfileData);
+    const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
-      formationFormData: generateFormationFormData(formationFormData),
+      formationFormData: generateFormationFormData(
+        formationFormData,
+        profileData.legalStructureId as FormationLegalType
+      ),
       formationResponse: undefined,
       getFilingResponse: undefined,
     };
@@ -95,18 +99,21 @@ describe("Formation - BusinessSection", () => {
   });
 
   it("auto-fills fields from userData if it exists", async () => {
-    const formationData = generateFormationFormData({
-      businessSuffix: "LTD LIABILITY CO",
-      businessStartDate: getCurrentDateFormatted("YYYY-MM-DD"),
-      businessAddressCity: generateMunicipality({ displayName: "Newark" }),
-      businessAddressLine1: "123 main street",
-      businessAddressLine2: "suite 102",
-      businessAddressState: "NJ",
-      businessAddressZipCode: "07601",
-      businessPurpose: "some cool purpose",
-    });
-
-    const page = await getPageHelper({}, formationData);
+    const page = await getPageHelper(
+      { legalStructureId: "limited-liability-company" },
+      {
+        businessSuffix: "LTD LIABILITY CO",
+        businessStartDate: getCurrentDateFormatted("YYYY-MM-DD"),
+        businessAddressCity: generateMunicipality({ displayName: "Newark" }),
+        businessAddressLine1: "123 main street",
+        businessAddressLine2: "suite 102",
+        businessAddressState: "NJ",
+        businessAddressZipCode: "07601",
+        businessPurpose: "some cool purpose",
+      },
+      undefined,
+      {}
+    );
 
     expect(screen.getByText("LTD LIABILITY CO")).toBeInTheDocument();
     expect(page.getInputElementByLabel("Business start date").value).toBe(
@@ -391,10 +398,15 @@ describe("Formation - BusinessSection", () => {
   });
 
   describe("profile data information", () => {
-    it("displays legal structure from profile data", async () => {
-      await getPageHelper({}, {});
+    it("displays llc legal structure from profile data", async () => {
+      await getPageHelper({ legalStructureId: "limited-liability-company" }, {});
       const displayLegalStructure = screen.getByTestId("legal-structure");
       expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.llcText);
+    });
+    it("displays llp legal structure from profile data", async () => {
+      await getPageHelper({ legalStructureId: "limited-liability-partnership" }, {});
+      const displayLegalStructure = screen.getByTestId("legal-structure");
+      expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.llpText);
     });
 
     it("displays business name from name check section and overrides profile", async () => {

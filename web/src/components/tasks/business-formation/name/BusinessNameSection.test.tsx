@@ -5,7 +5,7 @@ import { withAuthAlert } from "@/test/helpers";
 import {
   createFormationPageHelpers,
   FormationPageHelpers,
-  generateLLCProfileData,
+  generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
@@ -43,8 +43,8 @@ describe("Formation - BusinessNameSection", () => {
 
   const getPageHelper = (initialBusinessName?: string): FormationPageHelpers => {
     const profileData = initialBusinessName
-      ? generateLLCProfileData({ businessName: initialBusinessName })
-      : generateLLCProfileData({});
+      ? generateFormationProfileData({ businessName: initialBusinessName })
+      : generateFormationProfileData({});
     const formationData = {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
@@ -192,7 +192,7 @@ describe("Formation - BusinessNameSection", () => {
         formationResponse: undefined,
         getFilingResponse: undefined,
       },
-      profileData: generateLLCProfileData({}),
+      profileData: generateFormationProfileData({}),
     });
 
     const setModalIsVisible = jest.fn();

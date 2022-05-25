@@ -1,7 +1,8 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import * as api from "@/lib/api-client/apiClient";
-import { FormationDisplayContent, NameAvailability } from "@/lib/types/types";
+import { FormationDisplayContentMap, NameAvailability } from "@/lib/types/types";
 import {
+  generateFormationData,
   generateFormationMember,
   generateMunicipality,
   generateNameAvailability,
@@ -17,6 +18,8 @@ import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   DateObject,
+  FormationLegalType,
+  FormationLegalTypes,
   FormationMember,
   FormationSubmitResponse,
   Municipality,
@@ -31,9 +34,14 @@ function flushPromises() {
   return new Promise((resolve) => process.nextTick(resolve));
 }
 
-export const generateLLCProfileData = (data: Partial<ProfileData>): ProfileData => {
+export const generateFormationLegalType = (): FormationLegalType => {
+  const randomIndex = Math.floor(Math.random() * FormationLegalTypes.length);
+  return FormationLegalTypes[randomIndex] as FormationLegalType;
+};
+
+export const generateFormationProfileData = (data: Partial<ProfileData>): ProfileData => {
   return generateProfileData({
-    legalStructureId: "limited-liability-company",
+    legalStructureId: generateFormationLegalType(),
     ...data,
   });
 };
@@ -49,15 +57,20 @@ export const useSetupInitialMocks = () => {
 
 export const preparePage = (
   userData: Partial<UserData>,
-  displayContent: FormationDisplayContent,
+  displayContent: FormationDisplayContentMap,
   municipalities?: Municipality[]
 ): FormationPageHelpers => {
   const genericTown = userData.profileData?.municipality
     ? userData.profileData.municipality
     : generateMunicipality({ displayName: "GenericTown" });
+  const profileData = generateFormationProfileData({ ...userData.profileData, municipality: genericTown });
   const initialUserData = generateUserData({
     ...userData,
-    profileData: generateProfileData({ ...userData.profileData, municipality: genericTown }),
+    profileData,
+    formationData: generateFormationData(
+      { ...userData.formationData },
+      profileData.legalStructureId as FormationLegalType
+    ),
   });
   render(
     <WithStatefulUserData initialUserData={initialUserData}>

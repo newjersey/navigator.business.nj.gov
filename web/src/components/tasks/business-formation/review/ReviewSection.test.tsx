@@ -3,9 +3,9 @@ import {
   generateFormationFormData,
   generateUserData,
 } from "@/test/factories";
-import { generateLLCProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
+import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormationFormData, ProfileData } from "@businessnjgovnavigator/shared";
+import { FormationFormData, FormationLegalType, ProfileData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
 
@@ -37,9 +37,12 @@ describe("Formation - ReviewSection", () => {
     initialProfileData: Partial<ProfileData>,
     formationFormData: Partial<FormationFormData>
   ) => {
-    const profileData = generateLLCProfileData(initialProfileData);
+    const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
-      formationFormData: generateFormationFormData(formationFormData),
+      formationFormData: generateFormationFormData(
+        formationFormData,
+        profileData.legalStructureId as FormationLegalType
+      ),
       formationResponse: undefined,
       getFilingResponse: undefined,
     };

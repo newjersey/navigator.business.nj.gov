@@ -299,6 +299,7 @@ collections:
               - { label: Error - Suffix, name: suffixErrorText, widget: string }
               - { label: Initial Next Button Text, name: initialNextButtonText, widget: string }
               - { label: LLC Label, name: llcText, widget: string }
+              - { label: LLP Label, name: llpText, widget: string }
               - {
                   label: Legal Structure Warning Modal Header,
                   name: legalStructureWarningModalHeader,

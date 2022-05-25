@@ -13,7 +13,7 @@ describe("search business name [feature] [all] [group2]", () => {
     const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
     const liquorLicenseQuestion =
       industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-    const legalStructureId = "limited-liability-partnership";
+    const legalStructureId = "limited-partnership";
     const townDisplayName = undefined;
     const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 

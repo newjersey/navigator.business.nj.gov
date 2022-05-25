@@ -11,8 +11,12 @@ import { FeedbackRequest } from "@shared/feedbackRequest";
 import {
   AllBusinessSuffixes,
   BusinessSuffix,
+  BusinessSuffixMap,
+  createEmptyFormationFormData,
   FormationData,
   FormationFormData,
+  FormationLegalType,
+  FormationLegalTypes,
   FormationMember,
   FormationSubmitResponse,
   GetFilingResponse,
@@ -42,17 +46,45 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
   };
 };
 
+export const generateFormationUserData = (
+  profileData: Partial<ProfileData>,
+  formationData: Partial<FormationData>,
+  formationFormData: Partial<FormationFormData>
+): UserData => {
+  const legalStructureId = randomFormationLegalType();
+  const _profileData = generateProfileData({ legalStructureId, ...profileData });
+  const _formationData = generateFormationData(
+    {
+      formationFormData: generateFormationFormData(
+        formationFormData,
+        _profileData.legalStructureId as FormationLegalType
+      ),
+      ...formationData,
+    },
+    _profileData.legalStructureId as FormationLegalType
+  );
+  return generateUserData({ formationData: _formationData, profileData: _profileData });
+};
+
 export const generateUserData = (overrides: Partial<UserData>): UserData => {
+  const profileData = overrides.profileData ?? generateProfileData({});
+  const formationData = FormationLegalTypes.includes(profileData.legalStructureId as FormationLegalType)
+    ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
+    : {
+        formationFormData: createEmptyFormationFormData(),
+        formationResponse: undefined,
+        getFilingResponse: undefined,
+      };
   return {
     user: generateUser({}),
-    profileData: generateProfileData({}),
     formProgress: "UNSTARTED",
     taskProgress: {},
     taskItemChecklist: {},
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
-    formationData: generateFormationData({}),
+    profileData,
+    formationData,
     ...overrides,
   };
 };
@@ -225,9 +257,12 @@ export const generateExternalStatus = (overrides: Partial<ExternalStatus>): Exte
   };
 };
 
-export const generateFormationData = (overrides: Partial<FormationData>): FormationData => {
+export const generateFormationData = (
+  overrides: Partial<FormationData>,
+  legalStructureId?: FormationLegalType
+): FormationData => {
   return {
-    formationFormData: generateFormationFormData({}),
+    formationFormData: generateFormationFormData({}, legalStructureId),
     formationResponse: undefined,
     getFilingResponse: undefined,
     ...overrides,
@@ -252,10 +287,13 @@ export const generateUserTestingResponse = (overrides: Partial<UserTestingRespon
   };
 };
 
-export const generateFormationFormData = (overrides: Partial<FormationFormData>): FormationFormData => {
+export const generateFormationFormData = (
+  overrides: Partial<FormationFormData>,
+  legalStructureId?: FormationLegalType
+): FormationFormData => {
   return {
     businessName: `some-business-name-${randomInt()}`,
-    businessSuffix: randomBusinessSuffix(),
+    businessSuffix: randomBusinessSuffix(legalStructureId),
     businessStartDate: getCurrentDate().add(1, "days").format("YYYY-MM-DD"),
     businessAddressCity: generateMunicipality({}),
     businessAddressLine1: `some-address-1-${randomInt()}`,
@@ -327,9 +365,16 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
   ...overrides,
 });
 
-export const randomBusinessSuffix = (): BusinessSuffix => {
-  const randomIndex = Math.floor(Math.random() * AllBusinessSuffixes.length);
-  return AllBusinessSuffixes[randomIndex] as BusinessSuffix;
+export const randomFormationLegalType = (): FormationLegalType => {
+  const randomIndex = Math.floor(Math.random() * FormationLegalTypes.length);
+  return FormationLegalTypes[randomIndex] as FormationLegalType;
+};
+
+export const randomBusinessSuffix = (legalStructureId?: FormationLegalType): BusinessSuffix => {
+  const legalSuffix = legalStructureId ? BusinessSuffixMap[legalStructureId] : undefined;
+  const suffixes = legalSuffix ? legalSuffix : AllBusinessSuffixes;
+  const randomIndex = Math.floor(Math.random() * suffixes.length);
+  return suffixes[randomIndex] as BusinessSuffix;
 };
 
 export const generateFeedbackRequest = (overrides: Partial<FeedbackRequest>): FeedbackRequest => {

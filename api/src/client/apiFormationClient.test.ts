@@ -4,6 +4,7 @@ import {
   generateFormationData,
   generateFormationFormData,
   generateFormationMember,
+  generateFormationUserData,
   generateProfileData,
   generateUserData,
 } from "../../test/factories";
@@ -71,127 +72,242 @@ describe("ApiFormationClient", () => {
   });
 
   describe("form", () => {
-    it("posts to the endpoint with the api formation object", async () => {
-      const stubResponse = generateApiResponse({});
-      mockAxios.post.mockResolvedValue({ data: stubResponse });
+    describe("when LLC", () => {
+      it("posts to the endpoint with the qapi formation object", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-      const formationFormData = generateFormationFormData({
-        agentNumberOrManual: "MANUAL_ENTRY",
-        signer: {
-          name: "faraz",
-          signature: true,
-        },
-        provisions: ["provision1", "provision2"],
-        members: [generateFormationMember({})],
-        additionalSigners: [
-          {
-            name: "anne",
+        const formationFormData = generateFormationFormData({
+          agentNumberOrManual: "MANUAL_ENTRY",
+          signer: {
+            name: "faraz",
             signature: true,
           },
-          {
-            name: "mike",
-            signature: false,
-          },
-        ],
-      });
-
-      const userData = generateUserData({
-        formationData: generateFormationData({ formationFormData }),
-      });
-
-      await client.form(userData, "hostname.com/form-business");
-
-      expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
-        Account: "12345",
-        Key: "abcdef",
-        ReturnUrl: "hostname.com/form-business?completeFiling=true",
-        Payer: {
-          CompanyName: userData.profileData.businessName,
-          Address1: formationFormData.businessAddressLine1,
-          Address2: formationFormData.businessAddressLine2,
-          City: formationFormData.businessAddressCity?.name,
-          StateAbbreviation: "NJ",
-          ZipCode: formationFormData.businessAddressZipCode,
-          Email: userData.user.email,
-        },
-        Formation: {
-          Gov2GoAnnualReports: formationFormData.annualReportNotification,
-          Gov2GoCorpWatch: formationFormData.corpWatchNotification,
-          ShortGoodStanding: formationFormData.certificateOfStanding,
-          Certified: formationFormData.certifiedCopyOfFormationDocument,
-          PayerEmail: "",
-          SelectPaymentType: formationFormData.paymentType,
-          BusinessInformation: {
-            CompanyOrigin: "Domestic",
-            Business: "DomesticLimitedLiabilityCompany",
-            BusinessName: userData.profileData.businessName,
-            BusinessDesignator: formationFormData.businessSuffix,
-            Naic: userData.profileData.naicsCode,
-            BusinessPurpose: formationFormData.businessPurpose,
-            EffectiveFilingDate: parseDateWithFormat(
-              formationFormData.businessStartDate,
-              "YYYY-MM-DD"
-            ).toISOString(),
-            MainAddress: {
-              Address1: formationFormData.businessAddressLine1,
-              Address2: formationFormData.businessAddressLine2,
-              City: userData.profileData.municipality?.name,
-              State: "New Jersey",
-              Zipcode: formationFormData.businessAddressZipCode,
-              Country: "US",
-            },
-          },
-          AdditionalLimitedLiabilityCompany: {
-            OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
-          },
-          CompanyProfit: "Profit",
-          RegisteredAgent: {
-            Id: undefined,
-            Email: formationFormData.agentEmail,
-            Name: formationFormData.agentName,
-            Location: {
-              Address1: formationFormData.agentOfficeAddressLine1,
-              Address2: formationFormData.agentOfficeAddressLine2,
-              City: formationFormData.agentOfficeAddressCity,
-              State: "New Jersey",
-              Zipcode: formationFormData.agentOfficeAddressZipCode,
-              Country: "US",
-            },
-          },
-          Members: [
+          provisions: ["provision1", "provision2"],
+          members: [generateFormationMember({})],
+          additionalSigners: [
             {
-              Name: formationFormData.members[0].name,
-              Location: {
-                Address1: formationFormData.members[0].addressLine1,
-                Address2: formationFormData.members[0].addressLine2,
-                City: formationFormData.members[0].addressCity,
-                State: formationFormData.members[0].addressState,
-                Zipcode: formationFormData.members[0].addressZipCode,
+              name: "anne",
+              signature: true,
+            },
+            {
+              name: "mike",
+              signature: false,
+            },
+          ],
+        });
+
+        const userData = generateUserData({
+          profileData: generateProfileData({ legalStructureId: "limited-liability-company" }),
+          formationData: generateFormationData({ formationFormData }),
+        });
+
+        await client.form(userData, "hostname.com/form-business");
+
+        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
+          Account: "12345",
+          Key: "abcdef",
+          ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          Payer: {
+            CompanyName: userData.profileData.businessName,
+            Address1: formationFormData.businessAddressLine1,
+            Address2: formationFormData.businessAddressLine2,
+            City: formationFormData.businessAddressCity?.name,
+            StateAbbreviation: "NJ",
+            ZipCode: formationFormData.businessAddressZipCode,
+            Email: userData.user.email,
+          },
+          Formation: {
+            Gov2GoAnnualReports: formationFormData.annualReportNotification,
+            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+            ShortGoodStanding: formationFormData.certificateOfStanding,
+            Certified: formationFormData.certifiedCopyOfFormationDocument,
+            PayerEmail: "",
+            SelectPaymentType: formationFormData.paymentType,
+            BusinessInformation: {
+              CompanyOrigin: "Domestic",
+              Business: "DomesticLimitedLiabilityCompany",
+              BusinessName: userData.profileData.businessName,
+              BusinessDesignator: formationFormData.businessSuffix,
+              Naic: userData.profileData.naicsCode,
+              BusinessPurpose: formationFormData.businessPurpose,
+              EffectiveFilingDate: parseDateWithFormat(
+                formationFormData.businessStartDate,
+                "YYYY-MM-DD"
+              ).toISOString(),
+              MainAddress: {
+                Address1: formationFormData.businessAddressLine1,
+                Address2: formationFormData.businessAddressLine2,
+                City: userData.profileData.municipality?.name,
+                State: "New Jersey",
+                Zipcode: formationFormData.businessAddressZipCode,
                 Country: "US",
               },
             },
+            AdditionalLimitedLiabilityCompany: {
+              OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
+            },
+            CompanyProfit: "Profit",
+            RegisteredAgent: {
+              Id: undefined,
+              Email: formationFormData.agentEmail,
+              Name: formationFormData.agentName,
+              Location: {
+                Address1: formationFormData.agentOfficeAddressLine1,
+                Address2: formationFormData.agentOfficeAddressLine2,
+                City: formationFormData.agentOfficeAddressCity,
+                State: "New Jersey",
+                Zipcode: formationFormData.agentOfficeAddressZipCode,
+                Country: "US",
+              },
+            },
+            Members: [
+              {
+                Name: formationFormData.members[0].name,
+                Location: {
+                  Address1: formationFormData.members[0].addressLine1,
+                  Address2: formationFormData.members[0].addressLine2,
+                  City: formationFormData.members[0].addressCity,
+                  State: formationFormData.members[0].addressState,
+                  Zipcode: formationFormData.members[0].addressZipCode,
+                  Country: "US",
+                },
+              },
+            ],
+            Signers: [
+              {
+                Name: "faraz",
+                Title: "Authorized Representative",
+                Signed: true,
+              },
+              {
+                Name: "anne",
+                Title: "Authorized Representative",
+                Signed: true,
+              },
+              {
+                Name: "mike",
+                Title: "Authorized Representative",
+                Signed: false,
+              },
+            ],
+            ContactFirstName: formationFormData.contactFirstName,
+            ContactLastName: formationFormData.contactLastName,
+            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+          },
+        });
+      });
+    });
+
+    describe("when LLP", () => {
+      it("posts to the endpoint with the api formation object", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+        const formationFormData = generateFormationFormData({
+          agentNumberOrManual: "MANUAL_ENTRY",
+          signer: {
+            name: "faraz",
+            signature: true,
+          },
+          provisions: [],
+          members: [],
+          additionalSigners: [
+            {
+              name: "anne",
+              signature: true,
+            },
+            {
+              name: "mike",
+              signature: false,
+            },
           ],
-          Signers: [
-            {
-              Name: "faraz",
-              Title: "Authorized Representative",
-              Signed: true,
+        });
+
+        const userData = generateUserData({
+          profileData: generateProfileData({ legalStructureId: "limited-liability-partnership" }),
+          formationData: generateFormationData({ formationFormData }),
+        });
+
+        await client.form(userData, "hostname.com/form-business");
+
+        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
+          Account: "12345",
+          Key: "abcdef",
+          ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          Payer: {
+            CompanyName: userData.profileData.businessName,
+            Address1: formationFormData.businessAddressLine1,
+            Address2: formationFormData.businessAddressLine2,
+            City: formationFormData.businessAddressCity?.name,
+            StateAbbreviation: "NJ",
+            ZipCode: formationFormData.businessAddressZipCode,
+            Email: userData.user.email,
+          },
+          Formation: {
+            Gov2GoAnnualReports: formationFormData.annualReportNotification,
+            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+            ShortGoodStanding: formationFormData.certificateOfStanding,
+            Certified: formationFormData.certifiedCopyOfFormationDocument,
+            PayerEmail: "",
+            SelectPaymentType: formationFormData.paymentType,
+            BusinessInformation: {
+              CompanyOrigin: "Domestic",
+              Business: "DomesticLimitedLiabilityPartnership",
+              BusinessName: userData.profileData.businessName,
+              BusinessDesignator: formationFormData.businessSuffix,
+              Naic: userData.profileData.naicsCode,
+              BusinessPurpose: formationFormData.businessPurpose,
+              EffectiveFilingDate: parseDateWithFormat(
+                formationFormData.businessStartDate,
+                "YYYY-MM-DD"
+              ).toISOString(),
+              MainAddress: {
+                Address1: formationFormData.businessAddressLine1,
+                Address2: formationFormData.businessAddressLine2,
+                City: userData.profileData.municipality?.name,
+                State: "New Jersey",
+                Zipcode: formationFormData.businessAddressZipCode,
+                Country: "US",
+              },
             },
-            {
-              Name: "anne",
-              Title: "Authorized Representative",
-              Signed: true,
+            CompanyProfit: "Profit",
+            RegisteredAgent: {
+              Id: undefined,
+              Email: formationFormData.agentEmail,
+              Name: formationFormData.agentName,
+              Location: {
+                Address1: formationFormData.agentOfficeAddressLine1,
+                Address2: formationFormData.agentOfficeAddressLine2,
+                City: formationFormData.agentOfficeAddressCity,
+                State: "New Jersey",
+                Zipcode: formationFormData.agentOfficeAddressZipCode,
+                Country: "US",
+              },
             },
-            {
-              Name: "mike",
-              Title: "Authorized Representative",
-              Signed: false,
-            },
-          ],
-          ContactFirstName: formationFormData.contactFirstName,
-          ContactLastName: formationFormData.contactLastName,
-          ContactPhoneNumber: formationFormData.contactPhoneNumber,
-        },
+            Members: [],
+            Signers: [
+              {
+                Name: "faraz",
+                Title: "Authorized Partner",
+                Signed: true,
+              },
+              {
+                Name: "anne",
+                Title: "Authorized Partner",
+                Signed: true,
+              },
+              {
+                Name: "mike",
+                Title: "Authorized Partner",
+                Signed: false,
+              },
+            ],
+            ContactFirstName: formationFormData.contactFirstName,
+            ContactLastName: formationFormData.contactLastName,
+            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+          },
+        });
       });
     });
 
@@ -199,17 +315,13 @@ describe("ApiFormationClient", () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-      const formationFormData = generateFormationFormData({
-        agentNumberOrManual: "NUMBER",
-      });
-
-      const userData = generateUserData({
-        formationData: generateFormationData({ formationFormData }),
-      });
+      const userData = generateFormationUserData({}, {}, { agentNumberOrManual: "NUMBER" });
 
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
-      expect(postBody.Formation.RegisteredAgent.Id).toEqual(formationFormData.agentNumber);
+      expect(postBody.Formation.RegisteredAgent.Id).toEqual(
+        userData.formationData.formationFormData.agentNumber
+      );
       expect(postBody.Formation.RegisteredAgent.Email).toEqual(undefined);
       expect(postBody.Formation.RegisteredAgent.Name).toEqual(undefined);
       expect(postBody.Formation.RegisteredAgent.Location).toEqual(undefined);
@@ -219,16 +331,11 @@ describe("ApiFormationClient", () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-      const formationFormData = generateFormationFormData({
-        agentNumberOrManual: "NUMBER",
-      });
-
-      const userData = generateUserData({
-        formationData: generateFormationData({ formationFormData }),
-        profileData: generateProfileData({
-          naicsCode: "12345",
-        }),
-      });
+      const userData = generateFormationUserData(
+        { naicsCode: "12345" },
+        {},
+        { agentNumberOrManual: "NUMBER" }
+      );
 
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
@@ -239,13 +346,7 @@ describe("ApiFormationClient", () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-      const formationFormData = generateFormationFormData({
-        businessPurpose: "",
-      });
-
-      const userData = generateUserData({
-        formationData: generateFormationData({ formationFormData }),
-      });
+      const userData = generateFormationUserData({}, {}, { businessPurpose: "" });
 
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
@@ -256,13 +357,7 @@ describe("ApiFormationClient", () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-      const formationFormData = generateFormationFormData({
-        provisions: [],
-      });
-
-      const userData = generateUserData({
-        formationData: generateFormationData({ formationFormData }),
-      });
+      const userData = generateFormationUserData({}, {}, { provisions: [] });
 
       await client.form(userData, "some-url");
       const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
@@ -273,7 +368,7 @@ describe("ApiFormationClient", () => {
       const stubResponse = generateApiResponse({ Success: true });
       mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-      const userData = generateUserData({});
+      const userData = generateFormationUserData({}, {}, {});
 
       expect(await client.form(userData, "some-url")).toEqual({
         success: stubResponse.Success,
@@ -289,7 +384,7 @@ describe("ApiFormationClient", () => {
       const stubError2 = generateApiError({ Name: "Formation.RegisteredAgent" });
       mockAxios.post.mockResolvedValue({ data: [stubError1, stubError2] });
 
-      const userData = generateUserData({});
+      const userData = generateFormationUserData({}, {}, {});
 
       expect(await client.form(userData, "some-url")).toEqual({
         success: false,
@@ -307,7 +402,7 @@ describe("ApiFormationClient", () => {
         data: "Unexpected error: An error occurred while updating the entries.",
       });
 
-      const userData = generateUserData({});
+      const userData = generateFormationUserData({}, {}, {});
 
       expect(await client.form(userData, "some-url")).toEqual({
         success: false,
@@ -319,7 +414,7 @@ describe("ApiFormationClient", () => {
 
     it("responds with generic error message when connection error", async () => {
       mockAxios.post.mockRejectedValue({});
-      const userData = generateUserData({});
+      const userData = generateFormationUserData({}, {}, {});
 
       expect(await client.form(userData, "some-url")).toEqual({
         success: false,

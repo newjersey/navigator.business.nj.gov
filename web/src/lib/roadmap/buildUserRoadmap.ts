@@ -3,7 +3,13 @@ import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  FormationLegalType,
+  FormationLegalTypes,
+  LookupIndustryById,
+  LookupLegalStructureById,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/";
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   const addOns = [];
@@ -38,8 +44,8 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
   }
 
   if (profileData.legalStructureId) {
-    if (profileData.legalStructureId === "limited-liability-company") {
-      addOns.push("llc");
+    if (FormationLegalTypes.includes(profileData.legalStructureId as FormationLegalType)) {
+      addOns.push("formation");
     } else if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing");
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
