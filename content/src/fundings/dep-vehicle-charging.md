@@ -15,8 +15,7 @@ mwvb: None
 preferenceForOpportunityZone: no
 county:
   - All
-sector:
-  - accommodation-and-food-services
+sector: []
 openDate: ""
 dueDate: ""
 ---
