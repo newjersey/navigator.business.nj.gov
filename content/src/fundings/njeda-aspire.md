@@ -30,7 +30,7 @@ Aspire is a gap financing tool to support commercial, mixed-use, and residential
 
 ### Eligibility
 
-* The project must demonstrate through New Jersey Economic Development Authoirty analysis that without the incentive award, the redevelopment project is not economically feasible
+* The project must demonstrate through New Jersey Economic Development Authority analysis that without the incentive award, the redevelopment project is not economically feasible
 * Must demonstrate that a project financing gap exists and/or the redevelopment project will generate a below-market rate of return
 * Be located in a designated [Incentive Area](https://njeda.maps.arcgis.com/apps/webappviewer/index.html?id=b32ea4347e6a4403a36859e6ee6e5c0a)
 * Include a developer with equity participation of at least 20% of the total cost
@@ -44,6 +44,6 @@ Aspire is a gap financing tool to support commercial, mixed-use, and residential
 >
 > **Bonuses:**
 >
-> * Commercial projects in a Government Restricted Municipalities (GRM) (These muncipalities include: Atlantic City, Paterson and Trenton) can receive tax credits up to 50% of costs in project support
+> * Commercial projects in a Government Restricted Municipalities (GRM) (These municipalities include: Atlantic City, Paterson and Trenton) can receive tax credits up to 50% of costs in project support
 > * Newly constructed residential projects that are also utilizing 4% Low-Income Housing Tax Credits (LIHTCs) can receive tax credits for up to 60% of project costs
 > * Projects using LIHTC or any other project in a `Qualified Incentive Track|qit-njeda` (QIT), GRM, or municipality with a [Municipal Revitalization Index](https://nj.gov/dca/home/MuniRevitIndex.html) (MRI) distress score of at least 50, can receive tax credits up to $60M
