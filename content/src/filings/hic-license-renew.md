@@ -16,8 +16,8 @@ Your Home Improvement Contractor license will expire every year. You will receiv
 * Professional Liability Insurance with a minimum of 500,000 per occurrence
 * Pay the associated fees for the registration renewal
 
->**Once completed you will have:**
-*An updated Home Improvement Contractor license valid for a year
+>**Once completed you will have:**  
+>* An updated Home Improvement Contractor license valid for a year
 
->**What if I don't renew my registration?**
+>**What if I don't renew my registration?**  
 If you don’t renew your license within 30 days of its expiration date your license will be moved to “expired” status and you will need to contact your licensing board for reinstatement procedures and associated fees
