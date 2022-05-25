@@ -7,6 +7,8 @@ callToActionText: Renew My License
 ---
 Your Home Improvement Contractor license will expire every year. You will receive a renewal notice in the mail at least 2 weeks prior to the start of the renewal period.
 
+**Please note:** you will only see the option to renew online once the renewal period opens for your Home Improvement Contractor license. 
+
 ---
 ### Application Requirements
 * Business Name
