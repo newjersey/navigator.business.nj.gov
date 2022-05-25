@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import * as Airtable from "airtable";
-import { generateUser } from "../../test/factories";
-import { UserTestingClient } from "../domain/types";
+import { generateFeedbackRequest, generateUserData } from "../../test/factories";
+import { FeedbackClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
-import { AirtableUserTestingClient } from "./airtableUserTestingClient";
+import { AirtableFeedbackClient } from "./AirtableFeedbackClient";
 
 type MockAirtableType = {
   baseIdCalledWith: string;
@@ -17,14 +16,14 @@ type MockAirtableType = {
 jest.mock("winston");
 const mockAirtable = Airtable as unknown as jest.Mocked<MockAirtableType>;
 
-describe("AirtableUserTestingClient", () => {
-  let client: UserTestingClient;
+describe("AirtableFeedbackClient", () => {
+  let client: FeedbackClient;
   let logger: LogWriterType;
 
   beforeEach(() => {
     jest.resetAllMocks();
     logger = LogWriter("NavigatorWebService", "SearchApis", "us-test-1");
-    client = AirtableUserTestingClient(
+    client = AirtableFeedbackClient(
       {
         apiKey: "some-api-key",
         baseId: "some-base-id",
@@ -35,18 +34,25 @@ describe("AirtableUserTestingClient", () => {
   });
 
   it("sends user data to airtable", async () => {
-    const user = generateUser({});
-    const result = await client.add(user);
-    expect(result).toEqual({ success: true, status: "SUCCESS" });
+    const userData = generateUserData({});
+    const feedbackRequest = generateFeedbackRequest({});
+    const result = await client.create(feedbackRequest, userData);
+
+    expect(result).toEqual(true);
+
     expect(mockAirtable.baseIdCalledWith).toEqual("some-base-id");
-    expect(mockAirtable.tableIdCalledWith).toEqual("Users");
+    expect(mockAirtable.tableIdCalledWith).toEqual("User Feature Requests");
     expect(mockAirtable.dataCalledWith).toEqual([
       {
         fields: {
-          "Email Address": user.email,
-          "First Name": user.name,
-          "Registration Date": getCurrentDateFormatted("YYYY-MM-DD"),
-          Source: "Opted In Navigator",
+          Detail: feedbackRequest.detail,
+          Email: userData.user.email,
+          Industry: userData.profileData.industryId,
+          Persona: userData.profileData.hasExistingBusiness ? "owning" : "starting",
+          "Page Report Was Initiated On": feedbackRequest.pageOfRequest,
+          Device: feedbackRequest.device,
+          Browser: feedbackRequest.browser,
+          "Screen Width": feedbackRequest.screenWidth,
         },
       },
     ]);

@@ -16,7 +16,7 @@ import {
   ApiGetFilingResponse,
   ApiResponse,
   ApiSubmission,
-} from "./apiFormationClient";
+} from "./ApiFormationClient";
 
 jest.mock("axios");
 jest.mock("winston");
