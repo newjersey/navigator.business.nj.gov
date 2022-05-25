@@ -1,10 +1,17 @@
 import {
   DashboardDisplayContent,
+  FormationDisplayContent,
+  FormationDisplayContentMap,
   RoadmapDisplayContent,
   SidebarCardContent,
   TasksDisplayContent,
 } from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
+import {
+  defaultFormationLegalType,
+  FormationLegalType,
+  FormationLegalTypes,
+} from "@businessnjgovnavigator/shared/";
 import fs from "fs";
 import path from "path";
 
@@ -52,26 +59,88 @@ export const loadDashboardDisplayContent = (): DashboardDisplayContent => {
   };
 };
 
+const getFormationFields = (
+  legalId: FormationLegalType,
+  defaultStore?: FormationDisplayContent
+): FormationDisplayContent => {
+  const getPath = (filename: string, type?: FormationLegalType): string =>
+    path.join(displayContentDir, "business-formation", type ?? "", filename);
+
+  const loadFile = (filename: string, type?: FormationLegalType): string =>
+    fs.readFileSync(getPath(filename, type), "utf8");
+
+  const getTextFieldContent = (filename: string, type: FormationLegalType) => {
+    const markdown = getMarkdown(loadFile(filename, type));
+    return {
+      contentMd: markdown.content,
+      ...(markdown.grayMatter as Record<string, string>),
+    };
+  };
+
+  const introParagraph = (type: FormationLegalType) =>
+    getTextFieldContent("form-business-entity-intro.md", type);
+  const businessNameCheck = (type: FormationLegalType) => getTextFieldContent("business-name-check.md", type);
+  const services = (type: FormationLegalType) => getTextFieldContent(`services.md`, type);
+  const officialFormationDocument = (type: FormationLegalType) =>
+    getTextFieldContent(`doc-official-formation.md`, type);
+  const certificateOfStanding = (type: FormationLegalType) =>
+    getTextFieldContent(`doc-certificate-of-standing.md`, type);
+  const certifiedCopyOfFormationDocument = (type: FormationLegalType) =>
+    getTextFieldContent(`doc-certified-copy-of-formation-document.md`, type);
+  const notification = (type: FormationLegalType) => getTextFieldContent(`notification.md`, type);
+  const agentNumberOrManual = (type: FormationLegalType) => getTextFieldContent(`registered-agent.md`, type);
+  const members = (type: FormationLegalType) => getTextFieldContent(`members.md`, type);
+  const signatureHeader = (type: FormationLegalType) => getTextFieldContent(`signatures.md`, type);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fieldFunctions: Record<keyof FormationDisplayContent, (type: FormationLegalType) => any> = {
+    introParagraph,
+    businessNameCheck,
+    services,
+    officialFormationDocument,
+    certificateOfStanding,
+    certifiedCopyOfFormationDocument,
+    notification,
+    agentNumberOrManual,
+    members,
+    signatureHeader,
+  };
+
+  return Object.keys(fieldFunctions).reduce((content, name) => {
+    try {
+      return {
+        ...content,
+        [name as keyof FormationDisplayContent]:
+          fieldFunctions[name as keyof FormationDisplayContent](legalId),
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      if (error.code !== "ENOENT") {
+        throw error;
+      }
+      if (defaultStore && name in defaultStore) {
+        return {
+          ...content,
+          [name as keyof FormationDisplayContent]: defaultStore[name as keyof FormationDisplayContent],
+        };
+      }
+      return content;
+    }
+  }, {} as FormationDisplayContent);
+};
+
 export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const loadFile = (filename: string): string =>
     fs.readFileSync(path.join(displayContentDir, filename), "utf8");
 
-  const introParagraph = getMarkdown(loadFile("business-formation/form-business-entity-intro.md"));
-  const businessNameCheck = getMarkdown(loadFile("business-formation/business-name-check.md"));
-  const services = getMarkdown(loadFile("business-formation/services.md"));
-  const officialFormationDocument = getMarkdown(loadFile("business-formation/doc-official-formation.md"));
-  const certificateOfStanding = getMarkdown(loadFile("business-formation/doc-certificate-of-standing.md"));
-  const certifiedCopyOfFormationDocument = getMarkdown(
-    loadFile("business-formation/doc-certified-copy-of-formation-document.md")
-  );
+  const defaultFormationDisplayContent = getFormationFields(defaultFormationLegalType);
 
-  const notification = getMarkdown(loadFile("business-formation/notification.md"));
-
-  const agentNumberOrManual = getMarkdown(loadFile("business-formation/registered-agent.md"));
-
-  const members = getMarkdown(loadFile("business-formation/members.md"));
-
-  const signatureHeader = getMarkdown(loadFile("business-formation/signatures.md"));
+  const formationDisplayContent = FormationLegalTypes.filter(
+    (val) => val != defaultFormationLegalType
+  ).reduce((accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
+    accumulator[legalId] = getFormationFields(legalId, defaultFormationDisplayContent);
+    return accumulator;
+  }, {} as FormationDisplayContentMap);
 
   const socialEquityPriority = getMarkdown(
     loadFile("cannabis-priority-status/cannabis-social-equity-business.md")
@@ -95,46 +164,7 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const annualBottomOfTask = getMarkdown(loadFile("cannabis-license/annual-bottom-of-task.md"));
 
   return {
-    formationDisplayContent: {
-      introParagraph: {
-        contentMd: introParagraph.content,
-      },
-      businessNameCheck: {
-        contentMd: businessNameCheck.content,
-      },
-      agentNumberOrManual: {
-        contentMd: agentNumberOrManual.content,
-        radioButtonNumberText: (agentNumberOrManual.grayMatter as RegisteredAgentRadioGrayMatter)
-          .radioButtonNumberText,
-        radioButtonManualText: (agentNumberOrManual.grayMatter as RegisteredAgentRadioGrayMatter)
-          .radioButtonManualText,
-      },
-      members: {
-        contentMd: members.content,
-        ...(members.grayMatter as MemberGrayMatter),
-      },
-      signatureHeader: {
-        contentMd: signatureHeader.content,
-      },
-      services: {
-        contentMd: services.content,
-      },
-      notification: {
-        contentMd: notification.content,
-      },
-      officialFormationDocument: {
-        contentMd: officialFormationDocument.content,
-        ...(officialFormationDocument.grayMatter as DocumentFieldGrayMatter),
-      },
-      certificateOfStanding: {
-        contentMd: certificateOfStanding.content,
-        ...(certificateOfStanding.grayMatter as DocumentFieldGrayMatter),
-      },
-      certifiedCopyOfFormationDocument: {
-        contentMd: certifiedCopyOfFormationDocument.content,
-        ...(certifiedCopyOfFormationDocument.grayMatter as DocumentFieldGrayMatter),
-      },
-    },
+    formationDisplayContent,
     cannabisPriorityStatusDisplayContent: {
       socialEquityBusiness: { contentMd: socialEquityPriority.content },
       minorityAndWomenOwned: { contentMd: minorityWomenOwnedPriority.content },
@@ -151,22 +181,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
       annualBottomOfTask: { contentMd: annualBottomOfTask.content },
     },
   };
-};
-
-type DocumentFieldGrayMatter = {
-  cost: number;
-  optionalLabel: string;
-};
-
-type RegisteredAgentRadioGrayMatter = {
-  radioButtonNumberText: string;
-  radioButtonManualText: string;
-};
-
-type MemberGrayMatter = {
-  title: string;
-  titleSubtext: string;
-  placeholder: string;
 };
 
 type RoadmapCardGrayMatter = {

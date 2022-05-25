@@ -40,7 +40,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
   state: {
     tab: 0,
     formationFormData: createEmptyFormationFormData(),
-    displayContent: createEmptyFormationDisplayContent(),
+    displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
     municipalities: [],
     errorMap: createFormationFieldErrorMap(),
     showResponseAlert: false,

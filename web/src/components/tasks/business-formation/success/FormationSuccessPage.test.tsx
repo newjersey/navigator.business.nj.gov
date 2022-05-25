@@ -1,9 +1,9 @@
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { generateFormationData, generateGetFilingResponse, generateUserData } from "@/test/factories";
-import { generateLLCProfileData } from "@/test/helpers-formation";
+import { generateFormationProfileData } from "@/test/helpers-formation";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { GetFilingResponse, ProfileData } from "@businessnjgovnavigator/shared";
+import { FormationLegalType, GetFilingResponse, ProfileData } from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";
 import React from "react";
 
@@ -22,9 +22,14 @@ describe("Formation - <FormationSuccessPage />", () => {
     profileOverrides: Partial<ProfileData> = {}
   ) => {
     getFilingResponse = generateGetFilingResponse({ success: true, ...overrides });
+    const profileData = generateFormationProfileData(profileOverrides);
+
     const userData = generateUserData({
-      profileData: generateLLCProfileData(profileOverrides),
-      formationData: generateFormationData({ getFilingResponse }),
+      profileData,
+      formationData: generateFormationData(
+        { getFilingResponse },
+        profileData.legalStructureId as FormationLegalType
+      ),
     });
     render(<FormationSuccessPage userData={userData} />);
   };

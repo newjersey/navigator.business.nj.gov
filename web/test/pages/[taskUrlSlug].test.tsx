@@ -8,6 +8,7 @@ import {
   generateTaskLink,
   generateUserData,
 } from "@/test/factories";
+import { generateFormationLegalType } from "@/test/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
@@ -520,12 +521,12 @@ describe("task page", () => {
     });
   });
 
-  it("does not render next and previous buttons when legal structure is LLC and form-business-entity task is rendered", () => {
+  it("does not render next and previous buttons when legal structure allows for business formation and form-business-entity task is rendered", () => {
     renderPage(
       generateTask({ id: "form-business-entity" }),
       generateUserData({
         taskProgress: {},
-        profileData: generateProfileData({ legalStructureId: "limited-liability-company" }),
+        profileData: generateProfileData({ legalStructureId: generateFormationLegalType() }),
       })
     );
 

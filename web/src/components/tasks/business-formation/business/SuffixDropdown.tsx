@@ -1,13 +1,15 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { AllBusinessSuffixes, BusinessSuffix } from "@businessnjgovnavigator/shared/";
+import { BusinessSuffix, BusinessSuffixMap, FormationLegalType } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React, { FocusEvent, ReactElement, useContext } from "react";
 
 export const SuffixDropdown = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const { userData } = useUserData();
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     setErrorMap({ ...state.errorMap, businessSuffix: { invalid: false } });
@@ -55,7 +57,7 @@ export const SuffixDropdown = (): ReactElement => {
               return selected;
             }}
           >
-            {AllBusinessSuffixes.map((suffix) => (
+            {BusinessSuffixMap[userData?.profileData.legalStructureId as FormationLegalType].map((suffix) => (
               <MenuItem key={suffix} value={suffix} data-testid={suffix}>
                 {suffix}
               </MenuItem>

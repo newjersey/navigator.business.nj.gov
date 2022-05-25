@@ -152,7 +152,7 @@ export const Members = (): ReactElement => {
           {Config.businessFormationDefaults.membersSuccessTextBody}
         </ToastAlert>
       )}
-      <div className={`margin-bottom-3 ${styles.membersTable}`}>
+      <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid="members">
         <Content
           overrides={{
             h3: ({ children }: { children: string[] }): ReactElement => (

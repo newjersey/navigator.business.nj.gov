@@ -2,4 +2,5 @@
 cost: 50
 optionalLabel: (Optional)
 ---
- `Certificate of Standing|good-standing`
+
+`Certificate of Standing|good-standing`

@@ -1,5 +1,9 @@
 import { Municipality } from "./municipality";
 
+export const defaultFormationLegalType: FormationLegalType = "limited-liability-company";
+export const FormationLegalTypes = ["limited-liability-partnership", "limited-liability-company"] as const;
+export type FormationLegalType = typeof FormationLegalTypes[number];
+
 export interface FormationData {
   readonly formationFormData: FormationFormData;
   readonly formationResponse: FormationSubmitResponse | undefined;
@@ -30,7 +34,7 @@ export interface FormationFormData {
   readonly businessAddressState: string;
   readonly businessAddressZipCode: string;
   readonly businessPurpose: string;
-  provisions: readonly string[];
+  readonly provisions: string[];
   readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
   readonly agentNumber: string;
   readonly agentName: string;
@@ -121,17 +125,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
 
 export type PaymentType = "CC" | "ACH" | undefined;
 
-export type BusinessSuffix =
-  | "LLC"
-  | "L.L.C."
-  | "LTD LIABILITY CO"
-  | "LTD LIABILITY CO."
-  | "LTD LIABILITY COMPANY"
-  | "LIMITED LIABILITY CO"
-  | "LIMITED LIABILITY CO."
-  | "LIMITED LIABILITY COMPANY";
-
-export const AllBusinessSuffixes = [
+export const llcBusinessSuffix = [
   "LLC",
   "L.L.C.",
   "LTD LIABILITY CO",
@@ -140,7 +134,29 @@ export const AllBusinessSuffixes = [
   "LIMITED LIABILITY CO",
   "LIMITED LIABILITY CO.",
   "LIMITED LIABILITY COMPANY",
-];
+] as const;
+
+export type LlcBusinessSuffix = typeof llcBusinessSuffix[number];
+
+export const llpBusinessSuffix = [
+  "Limited Liability Partnership",
+  "LLP",
+  "L.L.P.",
+  "Registered Limited Liability Partnership",
+  "RLLP",
+  "R.L.L.P.",
+] as const;
+
+export type LlpBusinessSuffix = typeof llpBusinessSuffix[number];
+
+export const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix] as const;
+
+export type BusinessSuffix = typeof AllBusinessSuffixes[number];
+
+export const BusinessSuffixMap: Record<FormationLegalType, LlpBusinessSuffix[] | LlcBusinessSuffix[]> = {
+  "limited-liability-company": llcBusinessSuffix as unknown as LlcBusinessSuffix[],
+  "limited-liability-partnership": llpBusinessSuffix as unknown as LlpBusinessSuffix[],
+};
 
 export type FormationSubmitResponse = {
   success: boolean;

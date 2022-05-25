@@ -6,7 +6,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
+import { FormationLegalType, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useState } from "react";
@@ -34,11 +34,13 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
-  let legalStructureName;
   const legalStructure = LookupLegalStructureById(userData?.profileData.legalStructureId);
-  legalStructure.name === "Limited Liability Company (LLC)"
-    ? (legalStructureName = Config.businessFormationDefaults.llcText)
-    : (legalStructureName = legalStructure.name);
+  const legalStructureName = (
+    {
+      "limited-liability-company": Config.businessFormationDefaults.llcText,
+      "limited-liability-partnership": Config.businessFormationDefaults.llpText,
+    } as Record<FormationLegalType, string>
+  )[legalStructure.id as FormationLegalType];
 
   if (!userData) return <></>;
 

@@ -9,14 +9,19 @@ import {
 } from "@/test/factories";
 import {
   FormationPageHelpers,
-  generateLLCProfileData,
+  generateFormationProfileData,
   preparePage,
   setDesktopScreen,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
 import { currentUserData, userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { BusinessUser, FormationFormData, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  BusinessUser,
+  FormationFormData,
+  FormationLegalType,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
@@ -51,9 +56,12 @@ describe("Formation - ContactsSection", () => {
     formationFormData: Partial<FormationFormData>,
     initialUser?: Partial<BusinessUser>
   ): Promise<FormationPageHelpers> => {
-    const profileData = generateLLCProfileData(initialProfileData);
+    const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
-      formationFormData: generateFormationFormData(formationFormData),
+      formationFormData: generateFormationFormData(
+        formationFormData,
+        profileData.legalStructureId as FormationLegalType
+      ),
       formationResponse: undefined,
       getFilingResponse: undefined,
     };
@@ -72,50 +80,283 @@ describe("Formation - ContactsSection", () => {
     return page;
   };
 
-  it("auto-fills fields from userData if it exists", async () => {
-    const formationFormData = generateFormationFormData({
-      members: [
+  describe("when llp", () => {
+    const legalStructureId: FormationLegalType = "limited-liability-partnership";
+
+    it("auto-fills fields from userData if it exists", async () => {
+      const formationFormData = generateFormationFormData(
         {
-          name: "Joe Biden",
-          addressCity: "Washington",
-          addressLine1: "1600 Pennsylvania Ave NW",
-          addressLine2: "Office of the President",
-          addressState: "District of Columbia",
-          addressZipCode: "20500",
+          members: [],
+          signer: {
+            name: `signer 1`,
+            signature: true,
+          },
+          additionalSigners: [
+            {
+              name: `signer 2`,
+              signature: true,
+            },
+            {
+              name: `signer 3`,
+              signature: true,
+            },
+          ],
         },
-      ],
-      signer: {
-        name: `signer 1`,
-        signature: true,
-      },
-      additionalSigners: [
-        {
-          name: `signer 2`,
-          signature: true,
-        },
-        {
-          name: `signer 3`,
-          signature: true,
-        },
-      ],
+        legalStructureId
+      );
+
+      const page = await getPageHelper({ legalStructureId }, formationFormData);
+
+      expect(screen.queryByTestId("members")).not.toBeInTheDocument();
+      expect(page.getInputElementByLabel("Signer").value).toBe("signer 1");
+      expect(page.getInputElementByLabel("Additional signers 0").value).toBe("signer 2");
+      expect(page.getInputElementByLabel("Additional signers 1").value).toBe("signer 3");
     });
-
-    const page = await getPageHelper({}, formationFormData);
-
-    expect(screen.queryByText(displayContent.members.placeholder as string)).not.toBeInTheDocument();
-    expect(screen.getByText(formationFormData.members[0].name)).toBeInTheDocument();
-    expect(screen.getByText(formationFormData.members[0].addressLine1, { exact: false })).toBeInTheDocument();
-    expect(screen.getByText(formationFormData.members[0].addressLine2, { exact: false })).toBeInTheDocument();
-    expect(screen.getByText(formationFormData.members[0].addressCity, { exact: false })).toBeInTheDocument();
-    expect(screen.getByText(formationFormData.members[0].addressState, { exact: false })).toBeInTheDocument();
-    expect(
-      screen.getByText(formationFormData.members[0].addressZipCode, { exact: false })
-    ).toBeInTheDocument();
-    expect(page.getInputElementByLabel("Signer").value).toBe("signer 1");
-    expect(page.getInputElementByLabel("Additional signers 0").value).toBe("signer 2");
-    expect(page.getInputElementByLabel("Additional signers 1").value).toBe("signer 3");
   });
 
+  describe("when llc", () => {
+    const legalStructureId = "limited-liability-company";
+
+    it("auto-fills fields from userData if it exists", async () => {
+      const formationFormData = generateFormationFormData(
+        {
+          members: [
+            {
+              name: "Joe Biden",
+              addressCity: "Washington",
+              addressLine1: "1600 Pennsylvania Ave NW",
+              addressLine2: "Office of the President",
+              addressState: "District of Columbia",
+              addressZipCode: "20500",
+            },
+          ],
+          signer: {
+            name: `signer 1`,
+            signature: true,
+          },
+          additionalSigners: [
+            {
+              name: `signer 2`,
+              signature: true,
+            },
+            {
+              name: `signer 3`,
+              signature: true,
+            },
+          ],
+        },
+        legalStructureId
+      );
+
+      const page = await getPageHelper({ legalStructureId }, formationFormData);
+
+      expect(screen.getByTestId("members")).toBeInTheDocument();
+      expect(
+        screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+      ).not.toBeInTheDocument();
+      expect(screen.getByText(formationFormData.members[0].name)).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressLine1, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressLine2, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressCity, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressState, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressZipCode, { exact: false })
+      ).toBeInTheDocument();
+      expect(page.getInputElementByLabel("Signer").value).toBe("signer 1");
+      expect(page.getInputElementByLabel("Additional signers 0").value).toBe("signer 2");
+      expect(page.getInputElementByLabel("Additional signers 1").value).toBe("signer 3");
+    });
+
+    describe(`members for ${legalStructureId}`, () => {
+      it("edits members", async () => {
+        const members = [...Array(2)].map(() => generateFormationMember({}));
+        const page = await getPageHelper({ legalStructureId }, { members });
+
+        expect(
+          screen.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
+        ).toBeInTheDocument();
+        const nameTd = screen.getByText(members[1].name, { exact: false });
+        expect(nameTd).toBeInTheDocument();
+        expect(
+          screen.getByText(
+            `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState} ${members[1].addressZipCode}`,
+            { exact: false }
+          )
+        ).toBeInTheDocument();
+        // eslint-disable-next-line testing-library/no-node-access
+        fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
+        expect(page.getInputElementByLabel("Member name").value).toBe(members[1].name);
+        expect(page.getInputElementByLabel("Member address line1").value).toBe(members[1].addressLine1);
+        expect(page.getInputElementByLabel("Member address line2").value).toBe(members[1].addressLine2);
+        expect(page.getInputElementByLabel("Member address city").value).toBe(members[1].addressCity);
+        expect(page.getInputElementByLabel("Member address state").value).toBe(members[1].addressState);
+        expect(page.getInputElementByLabel("Member address zip code").value).toBe(members[1].addressZipCode);
+        const newName = "Joe Biden";
+        page.fillText("Member name", newName);
+        page.clickMemberSubmit();
+        await waitFor(() => {
+          expect(
+            screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+          ).toBeInTheDocument();
+        });
+        expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
+        await page.submitContactsTab();
+        const newMembers = currentUserData().formationData.formationFormData.members;
+        expect(newMembers.length).toEqual(2);
+        expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
+      });
+
+      it("is able to delete members", async () => {
+        const members = [...Array(2)].map(() => generateFormationMember({}));
+        const page = await getPageHelper({ legalStructureId }, { members });
+
+        const nameTd = screen.getByText(members[1].name, { exact: false });
+        expect(nameTd).toBeInTheDocument();
+        // eslint-disable-next-line testing-library/no-node-access
+        fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
+        await page.submitContactsTab();
+        const newMembers = currentUserData().formationData.formationFormData.members;
+        expect(newMembers.length).toEqual(1);
+        expect(newMembers.find((member) => member == members[1])).toBeFalsy();
+      });
+
+      it("adds members using business data using checkbox", async () => {
+        const page = await getPageHelper(
+          {
+            legalStructureId,
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
+          },
+          {
+            contactFirstName: "John",
+            contactLastName: "Smith",
+            businessAddressLine1: "123 business address",
+            businessAddressLine2: "business suite 201",
+            businessAddressState: "NJ",
+            businessAddressZipCode: "07601",
+          }
+        );
+        await page.openMemberModal();
+
+        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        expect(page.getInputElementByLabel("Member name").value).toBe("John Smith");
+        expect(page.getInputElementByLabel("Member address line1").value).toBe("123 business address");
+        expect(page.getInputElementByLabel("Member address line2").value).toBe("business suite 201");
+        expect(page.getInputElementByLabel("Member address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Member address state").value).toBe("NJ");
+        expect(page.getInputElementByLabel("Member address zip code").value).toBe("07601");
+      });
+
+      it("shows validation on submit", async () => {
+        const page = await getPageHelper({ legalStructureId }, {});
+        await page.openMemberModal();
+        page.clickMemberSubmit();
+
+        expect(
+          screen.getByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
+        ).toBeInTheDocument();
+        await page.fillMemberModal({});
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
+        ).not.toBeInTheDocument();
+        page.clickMemberSubmit();
+        await waitFor(() => {
+          expect(
+            screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+          ).toBeInTheDocument();
+        });
+      });
+
+      it("resets form on cancel", async () => {
+        const page = await getPageHelper(
+          { legalStructureId },
+          {
+            contactFirstName: "John",
+            contactLastName: "Smith",
+          }
+        );
+        await page.openMemberModal();
+
+        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        expect(page.getInputElementByLabel("Member name").value).toBe("John Smith");
+        fireEvent.click(screen.getByText(Config.businessFormationDefaults.membersModalBackButtonText));
+        await waitFor(() =>
+          expect(
+            screen.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
+          ).not.toBeInTheDocument()
+        );
+        await page.openMemberModal();
+        expect(page.getInputElementByLabel("Member name").value).toBe("");
+      });
+
+      it("does not add more than 10 members", async () => {
+        const nineMembers = Array(9).fill(generateFormationMember({}));
+        const page = await getPageHelper(
+          { legalStructureId },
+          {
+            members: nineMembers,
+          }
+        );
+
+        expect(
+          screen.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
+        ).toBeInTheDocument();
+
+        await page.openMemberModal();
+        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        page.clickMemberSubmit();
+
+        await waitFor(() =>
+          expect(
+            screen.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
+          ).not.toBeInTheDocument()
+        );
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
+        ).not.toBeInTheDocument();
+        await page.submitContactsTab();
+        expect(currentUserData().formationData.formationFormData.members.length).toEqual(10);
+      });
+
+      it("renders mobile view of members table", async () => {
+        setDesktopScreen(false);
+        const page = await getPageHelper({ legalStructureId }, { members: [] });
+        await page.fillAndSubmitMemberModal({});
+        expect(screen.getByTestId("members-table-mobile")).toBeInTheDocument();
+      });
+    });
+  });
   describe("signers", () => {
     it("adds additional signers", async () => {
       const page = await getPageHelper({}, { additionalSigners: [] });
@@ -217,208 +458,32 @@ describe("Formation - ContactsSection", () => {
     });
   });
 
-  describe("members", () => {
-    it("edits members", async () => {
-      const members = [...Array(2)].map(() => generateFormationMember({}));
-      const page = await getPageHelper({}, { members });
-
-      expect(
-        screen.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
-      ).toBeInTheDocument();
-      const nameTd = screen.getByText(members[1].name, { exact: false });
-      expect(nameTd).toBeInTheDocument();
-      expect(
-        screen.getByText(
-          `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState} ${members[1].addressZipCode}`,
-          { exact: false }
-        )
-      ).toBeInTheDocument();
-      // eslint-disable-next-line testing-library/no-node-access
-      fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
-      expect(page.getInputElementByLabel("Member name").value).toBe(members[1].name);
-      expect(page.getInputElementByLabel("Member address line1").value).toBe(members[1].addressLine1);
-      expect(page.getInputElementByLabel("Member address line2").value).toBe(members[1].addressLine2);
-      expect(page.getInputElementByLabel("Member address city").value).toBe(members[1].addressCity);
-      expect(page.getInputElementByLabel("Member address state").value).toBe(members[1].addressState);
-      expect(page.getInputElementByLabel("Member address zip code").value).toBe(members[1].addressZipCode);
-      const newName = "Joe Biden";
-      page.fillText("Member name", newName);
-      page.clickMemberSubmit();
-      await waitFor(() => {
-        expect(
-          screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
-        ).toBeInTheDocument();
-      });
-      expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
-      await page.submitContactsTab();
-      const newMembers = currentUserData().formationData.formationFormData.members;
-      expect(newMembers.length).toEqual(2);
-      expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
-    });
-
-    it("is able to delete members", async () => {
-      const members = [...Array(2)].map(() => generateFormationMember({}));
-      const page = await getPageHelper({}, { members });
-
-      const nameTd = screen.getByText(members[1].name, { exact: false });
-      expect(nameTd).toBeInTheDocument();
-      // eslint-disable-next-line testing-library/no-node-access
-      fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
-      await page.submitContactsTab();
-      const newMembers = currentUserData().formationData.formationFormData.members;
-      expect(newMembers.length).toEqual(1);
-      expect(newMembers.find((member) => member == members[1])).toBeFalsy();
-    });
-
-    it("adds members using business data using checkbox", async () => {
-      const page = await getPageHelper(
-        { municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }) },
-        {
-          contactFirstName: "John",
-          contactLastName: "Smith",
-          businessAddressLine1: "123 business address",
-          businessAddressLine2: "business suite 201",
-          businessAddressState: "NJ",
-          businessAddressZipCode: "07601",
-        }
-      );
-      await page.openMemberModal();
-
-      page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-      expect(page.getInputElementByLabel("Member name").value).toBe("John Smith");
-      expect(page.getInputElementByLabel("Member address line1").value).toBe("123 business address");
-      expect(page.getInputElementByLabel("Member address line2").value).toBe("business suite 201");
-      expect(page.getInputElementByLabel("Member address city").value).toBe("Hampton");
-      expect(page.getInputElementByLabel("Member address state").value).toBe("NJ");
-      expect(page.getInputElementByLabel("Member address zip code").value).toBe("07601");
-    });
-
-    it("shows validation on submit", async () => {
-      const page = await getPageHelper({}, {});
-      await page.openMemberModal();
-      page.clickMemberSubmit();
-
-      expect(
-        screen.getByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
-      ).toBeInTheDocument();
-      await page.fillMemberModal({});
-      expect(
-        screen.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
-      ).not.toBeInTheDocument();
-      page.clickMemberSubmit();
-      await waitFor(() => {
-        expect(
-          screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
-        ).toBeInTheDocument();
-      });
-    });
-
-    it("resets form on cancel", async () => {
-      const page = await getPageHelper(
-        {},
-        {
-          contactFirstName: "John",
-          contactLastName: "Smith",
-        }
-      );
-      await page.openMemberModal();
-
-      page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-      expect(page.getInputElementByLabel("Member name").value).toBe("John Smith");
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.membersModalBackButtonText));
-      await waitFor(() =>
-        expect(
-          screen.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
-        ).not.toBeInTheDocument()
-      );
-      await page.openMemberModal();
-      expect(page.getInputElementByLabel("Member name").value).toBe("");
-    });
-
-    it("does not add more than 10 members", async () => {
-      const nineMembers = Array(9).fill(generateFormationMember({}));
-      const page = await getPageHelper(
-        {},
-        {
-          members: nineMembers,
-        }
-      );
-
-      expect(
-        screen.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
-      ).toBeInTheDocument();
-
-      await page.openMemberModal();
-      page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-      page.clickMemberSubmit();
-
-      await waitFor(() =>
-        expect(
-          screen.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
-        ).not.toBeInTheDocument()
-      );
-      expect(
-        screen.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
-      ).not.toBeInTheDocument();
-      await page.submitContactsTab();
-      expect(currentUserData().formationData.formationFormData.members.length).toEqual(10);
-    });
-
-    it("renders mobile view of members table", async () => {
-      setDesktopScreen(false);
-      const page = await getPageHelper({}, { members: [] });
-      await page.fillAndSubmitMemberModal({});
-      expect(screen.getByTestId("members-table-mobile")).toBeInTheDocument();
-    });
-  });
   describe("registered agent", () => {
     it("auto-fills fields when agent number is selected", async () => {
-      const formationData = generateFormationFormData({
-        agentNumber: "123465798",
-        agentNumberOrManual: "NUMBER",
-      });
-
-      const page = await getPageHelper({}, formationData);
+      const page = await getPageHelper(
+        {},
+        {
+          agentNumber: "123465798",
+          agentNumberOrManual: "NUMBER",
+        }
+      );
       expect(page.getInputElementByLabel("Agent number").value).toBe("123465798");
     });
 
     it("auto-fills fields when agent is manual entry", async () => {
-      const formationData = generateFormationFormData({
-        agentNumberOrManual: "MANUAL_ENTRY",
-        agentName: "agent 1",
-        agentEmail: "agent@email.com",
-        agentOfficeAddressLine1: "123 agent address",
-        agentOfficeAddressLine2: "agent suite 201",
-        agentOfficeAddressCity: "agent-city-402",
-        agentOfficeAddressState: "DC",
-        agentOfficeAddressZipCode: "99887",
-      });
-
-      const page = await getPageHelper({}, formationData);
+      const page = await getPageHelper(
+        {},
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentName: "agent 1",
+          agentEmail: "agent@email.com",
+          agentOfficeAddressLine1: "123 agent address",
+          agentOfficeAddressLine2: "agent suite 201",
+          agentOfficeAddressCity: "agent-city-402",
+          agentOfficeAddressState: "DC",
+          agentOfficeAddressZipCode: "99887",
+        }
+      );
 
       await waitFor(() => {
         expect(page.getInputElementByLabel("Agent name").value).toEqual("agent 1");

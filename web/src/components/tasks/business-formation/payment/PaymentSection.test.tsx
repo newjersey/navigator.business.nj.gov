@@ -8,7 +8,7 @@ import {
 } from "@/test/factories";
 import {
   FormationPageHelpers,
-  generateLLCProfileData,
+  generateFormationProfileData,
   mockApiResponse,
   preparePage,
   useSetupInitialMocks,
@@ -16,7 +16,12 @@ import {
 import { mockPush } from "@/test/mock/mockRouter";
 import { userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { BusinessUser, FormationFormData, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  BusinessUser,
+  FormationFormData,
+  FormationLegalType,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 
@@ -39,7 +44,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 describe("Formation - PaymentSection", () => {
-  const displayContent = generateFormationDisplayContent({
+  const defaultContent = {
     officialFormationDocument: {
       contentMd: "Official formation document",
       cost: 125,
@@ -54,6 +59,10 @@ describe("Formation - PaymentSection", () => {
       cost: 25,
       optionalLabel: "",
     },
+  };
+  const displayContent = generateFormationDisplayContent({
+    "limited-liability-company": defaultContent,
+    "limited-liability-partnership": defaultContent,
   });
 
   beforeEach(() => {
@@ -66,9 +75,12 @@ describe("Formation - PaymentSection", () => {
     formationFormData: Partial<FormationFormData>,
     initialUser?: Partial<BusinessUser>
   ): Promise<FormationPageHelpers> => {
-    const profileData = generateLLCProfileData(initialProfileData);
+    const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
-      formationFormData: generateFormationFormData(formationFormData),
+      formationFormData: generateFormationFormData(
+        formationFormData,
+        profileData.legalStructureId as FormationLegalType
+      ),
       formationResponse: undefined,
       getFilingResponse: undefined,
     };
@@ -91,19 +103,20 @@ describe("Formation - PaymentSection", () => {
   };
 
   it("auto-fills fields from userData if it exists", async () => {
-    const formationFormData = generateFormationFormData({
-      paymentType: "CC",
-      contactFirstName: `John`,
-      contactLastName: `Smith`,
-      contactPhoneNumber: `6024153214`,
-      annualReportNotification: true,
-      corpWatchNotification: true,
-      officialFormationDocument: true,
-      certificateOfStanding: false,
-      certifiedCopyOfFormationDocument: true,
-    });
-
-    const page = await getPageHelper({}, formationFormData);
+    const page = await getPageHelper(
+      {},
+      {
+        paymentType: "CC",
+        contactFirstName: `John`,
+        contactLastName: `Smith`,
+        contactPhoneNumber: `6024153214`,
+        annualReportNotification: true,
+        corpWatchNotification: true,
+        officialFormationDocument: true,
+        certificateOfStanding: false,
+        certifiedCopyOfFormationDocument: true,
+      }
+    );
 
     expect(screen.getByText(Config.businessFormationDefaults.creditCardPaymentTypeLabel)).toBeInTheDocument();
     expect(page.getInputElementByLabel("Contact first name").value).toBe("John");

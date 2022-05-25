@@ -1,6 +1,7 @@
 import { parseDateWithFormat } from "@shared/dateHelpers";
 import {
   BusinessSuffix,
+  FormationLegalType,
   FormationSubmitError,
   FormationSubmitResponse,
   GetFilingResponse,
@@ -155,7 +156,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         SelectPaymentType: formationFormData.paymentType,
         BusinessInformation: {
           CompanyOrigin: "Domestic",
-          Business: "DomesticLimitedLiabilityCompany",
+          Business: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].businessType,
           BusinessName: userData.profileData.businessName,
           BusinessDesignator: formationFormData.businessSuffix,
           Naic: naicsCode,
@@ -173,7 +174,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             Country: "US",
           },
         },
-        AdditionalLimitedLiabilityCompany: additionalProvisions,
+        [BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].additionalDataKey]:
+          additionalProvisions,
         CompanyProfit: "Profit",
         RegisteredAgent: {
           Id: isManual ? undefined : formationFormData.agentNumber,
@@ -204,15 +206,16 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         Signers: [
           {
             Name: formationFormData.signer.name,
-            Title: "Authorized Representative",
+            Title: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].signerTitle,
             Signed: formationFormData.signer.signature,
           },
           ...formationFormData.additionalSigners.map((additionalSigner) => ({
             Name: additionalSigner.name,
-            Title: "Authorized Representative",
+            Title: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].signerTitle,
             Signed: additionalSigner.signature,
           })),
         ],
+
         ContactFirstName: formationFormData.contactFirstName,
         ContactLastName: formationFormData.contactLastName,
         ContactPhoneNumber: formationFormData.contactPhoneNumber,
@@ -257,8 +260,12 @@ export type ApiSubmission = {
       BusinessPurpose: string; // Max 300 chars
       EffectiveFilingDate: string; // date 2021-12-14T10:03:51.0869073-04:00 (anne note: is this correct??)
       MainAddress: ApiLocation;
+      TotalShares: string | undefined;
     };
-    AdditionalLimitedLiabilityCompany: {
+    AdditionalLimitedLiabilityCompany?: {
+      OtherProvisions: AdditionalProvision[];
+    };
+    AdditionalLimitedLiabilityPartnership?: {
       OtherProvisions: AdditionalProvision[];
     };
     CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
@@ -275,7 +282,7 @@ export type ApiSubmission = {
     Signers: Array<{
       //This can be a list/array of items. Maximum 10
       Name: string; // max 50
-      Title: "Authorized Representative";
+      Title: SignerTitle;
       Signed: true;
     }>;
     ContactFirstName: string; //Contact person for filing
@@ -306,7 +313,32 @@ type MemberLocation = {
   Country: "US"; //alpha-2 iban code
 };
 
-type BusinessType = "DomesticLimitedLiabilityCompany";
+type BusinessType = "DomesticLimitedLiabilityCompany" | "DomesticLimitedLiabilityPartnership";
+
+type SignerTitle = "Authorized Representative" | "Authorized Partner";
+
+type AdditionalDataKey = "AdditionalLimitedLiabilityCompany" | "AdditionalLimitedLiabilityPartnership";
+type FormationFields = {
+  businessType: BusinessType;
+  shortDescription: string;
+  signerTitle: SignerTitle;
+  additionalDataKey: AdditionalDataKey;
+};
+
+const BusinessTypeMap: Record<FormationLegalType, FormationFields> = {
+  "limited-liability-company": {
+    businessType: "DomesticLimitedLiabilityCompany",
+    shortDescription: "LLC",
+    signerTitle: "Authorized Representative",
+    additionalDataKey: "AdditionalLimitedLiabilityCompany",
+  },
+  "limited-liability-partnership": {
+    businessType: "DomesticLimitedLiabilityPartnership",
+    shortDescription: "LLP",
+    signerTitle: "Authorized Partner",
+    additionalDataKey: "AdditionalLimitedLiabilityPartnership",
+  },
+};
 
 export type ApiResponse = {
   Success: boolean;

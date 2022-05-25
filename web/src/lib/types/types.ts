@@ -2,6 +2,8 @@ import { getMergedConfig } from "@/contexts/configContext";
 import {
   BusinessUser,
   FormationFormData,
+  FormationLegalType,
+  FormationLegalTypes,
   PaymentType,
   ProfileData,
   UserData,
@@ -104,46 +106,50 @@ export const createEmptyCannabisApplyForLicenseDisplayContent =
     annualBottomOfTask: { contentMd: "" },
   });
 
-export const createEmptyFormationDisplayContent = (): FormationDisplayContent => ({
-  introParagraph: {
-    contentMd: "",
-  },
-  businessNameCheck: {
-    contentMd: "",
-  },
-  agentNumberOrManual: {
-    contentMd: "",
-    radioButtonNumberText: "",
-    radioButtonManualText: "",
-  },
-  members: {
-    contentMd: "",
-    placeholder: "",
-  },
-  signatureHeader: {
-    contentMd: "",
-  },
-  services: {
-    contentMd: "",
-  },
-  notification: {
-    contentMd: "",
-  },
-  officialFormationDocument: {
-    contentMd: "",
-    cost: 0,
-  },
-  certificateOfStanding: {
-    contentMd: "",
-    cost: 0,
-    optionalLabel: "",
-  },
-  certifiedCopyOfFormationDocument: {
-    contentMd: "",
-    cost: 0,
-    optionalLabel: "",
-  },
-});
+export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap =>
+  FormationLegalTypes.reduce((accumulator, curr) => {
+    accumulator[curr] = {
+      introParagraph: {
+        contentMd: "",
+      },
+      businessNameCheck: {
+        contentMd: "",
+      },
+      agentNumberOrManual: {
+        contentMd: "",
+        radioButtonNumberText: "",
+        radioButtonManualText: "",
+      },
+      members: {
+        contentMd: "",
+        placeholder: "",
+      },
+      signatureHeader: {
+        contentMd: "",
+      },
+      services: {
+        contentMd: "",
+      },
+      notification: {
+        contentMd: "",
+      },
+      officialFormationDocument: {
+        contentMd: "",
+        cost: 0,
+      },
+      certificateOfStanding: {
+        contentMd: "",
+        cost: 0,
+        optionalLabel: "",
+      },
+      certifiedCopyOfFormationDocument: {
+        contentMd: "",
+        cost: 0,
+        optionalLabel: "",
+      },
+    };
+    return accumulator;
+  }, {} as FormationDisplayContentMap);
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
@@ -304,8 +310,9 @@ export type County =
   | "Union"
   | "Warren";
 
+export type FormationDisplayContentMap = Record<FormationLegalType, FormationDisplayContent>;
 export type TasksDisplayContent = {
-  formationDisplayContent: FormationDisplayContent;
+  formationDisplayContent: FormationDisplayContentMap;
   cannabisPriorityStatusDisplayContent: CannabisPriorityStatusDisplayContent;
   cannabisApplyForLicenseDisplayContent: CannabisApplyForLicenseDisplayContent;
 };
