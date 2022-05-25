@@ -6,7 +6,7 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { UserDataClient } from "../domain/types";
-import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./dynamoUserDataClient";
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
 
 // references jest-dynalite-config values
 const dbConfig = {
