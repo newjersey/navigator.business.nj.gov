@@ -7,6 +7,8 @@ callToActionText: Renew My Massage Therapy License
 ---
 Your massage and bodywork license will expire every two years. You will receive a renewal notice in the mail at the address you registered with the Board at least 60 days prior to the expiration of your license.
 
+**Please note:** you will only see the option to renew online once the renewal period opens for your Massage Therapy License. 
+
 ---
 ### Application Requirements
 * License number and registration code (from the renewal notice received in the mail)
