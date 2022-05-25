@@ -1839,6 +1839,24 @@ collections:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+                  - label: NAICS Code
+                    name: naicsCode
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - {
+                          label: "Header",
+                          name: "header",
+                          widget: "string",
+                          hint: This field supports Markdown,
+                        }
+                      - { label: "Edit Text", name: "editText", widget: "string" }
+                      - {
+                          label: "Not Entered Text",
+                          name: "notEnteredText",
+                          widget: "string",
+                          hint: This field supports Markdown,
+                        }
       - label: "Numbers Tab (Oscar)"
         name: "profile-numbers-oscar"
         file: "content/src/fieldConfig/profile-numbers-oscar.json"

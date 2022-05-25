@@ -28,6 +28,11 @@
         "header": "Employer Identification Number",
         "headerNotBolded": "(EIN)",
         "description": "What is your `EIN|ein`?"
+      },
+      "naicsCode": {
+        "header": "",
+        "editText": "",
+        "notEnteredText": ""
       }
     }
   }

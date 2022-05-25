@@ -1,8 +1,7 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import NaicsCodes from "@/lib/static/records/naics2022.json";
-import { NaicsCodeObject } from "@/lib/types/types";
+import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement } from "react";
@@ -13,9 +12,6 @@ interface Props {
 }
 
 export const NaicsCodeDisplay = (props: Props): ReactElement => {
-  const codeObject = (NaicsCodes as NaicsCodeObject[]).find(
-    (element) => element?.SixDigitCode?.toString() == props.code
-  );
   return (
     <>
       <h2 className="text-normal">{Config.determineNaicsCode.hasSavedCodeHeader}</h2>
@@ -24,7 +20,7 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
       </Alert>
       <div className="margin-left-3">
         <span className="text-bold margin-right-2">{props.code}</span>
-        <span className="margin-right-2">{codeObject?.SixDigitDescription}</span>
+        <span className="margin-right-2">{lookupNaicsCode(props.code)?.SixDigitDescription}</span>
         <Button style="tertiary" onClick={props.onEdit}>
           {Config.determineNaicsCode.editText}
         </Button>

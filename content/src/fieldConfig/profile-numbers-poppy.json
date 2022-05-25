@@ -19,6 +19,11 @@
         "headerNotBolded": "(EIN)",
         "description": "What is your `EIN|ein`?"
       },
+      "naicsCode": {
+        "header": "## Naics Code",
+        "editText": "Edit",
+        "notEnteredText": "*Not entered*"
+      },
       "dateOfFormation": {
         "header": "",
         "description": "",
