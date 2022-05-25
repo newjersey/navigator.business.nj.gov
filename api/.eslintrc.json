@@ -23,9 +23,7 @@
       "error",
       {
         "cases": {
-          "kebabCase": true,
-          "camelCase": true,
-          "snakeCase": true
+          "camelCase": true
         }
       }
     ],
@@ -39,7 +37,46 @@
       "files": ["**/*.test.*"],
       "plugins": ["jest"],
       "extends": ["plugin:jest/recommended"],
-      "rules": { "jest/expect-expect": "error" }
+      "rules": {
+        "jest/expect-expect": "error"
+      }
+    },
+    {
+      "files": ["src/client/*", "src/db/*"],
+      "extends": ["plugin:unicorn/recommended"],
+      "rules": {
+        "unicorn/filename-case": [
+          "error",
+          {
+            "cases": {
+              "camelCase": true,
+              "pascalCase": true
+            }
+          }
+        ],
+        "unicorn/prevent-abbreviations": "off",
+        "unicorn/numeric-separators-style": "off",
+        "unicorn/prefer-module": "off",
+        "unicorn/no-array-reduce": "off"
+      }
+    },
+    {
+      "files": ["src/db/migrations/*"],
+      "extends": ["plugin:unicorn/recommended"],
+      "rules": {
+        "unicorn/filename-case": [
+          "error",
+          {
+            "cases": {
+              "snakeCase": true
+            }
+          }
+        ],
+        "unicorn/prevent-abbreviations": "off",
+        "unicorn/numeric-separators-style": "off",
+        "unicorn/prefer-module": "off",
+        "unicorn/no-array-reduce": "off"
+      }
     }
   ]
 }

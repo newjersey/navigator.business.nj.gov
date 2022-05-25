@@ -2,7 +2,7 @@ import { randomInt } from "@shared/intHelpers";
 import axios from "axios";
 import { NewsletterClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
-import { GovDeliveryNewsletterClient, GovDeliveryResponse } from "./govDeliveryNewsletterClient";
+import { GovDeliveryNewsletterClient, GovDeliveryResponse } from "./GovDeliveryNewsletterClient";
 
 const generateGovDeliveryResponse = (
   overrides: Partial<GovDeliveryResponse>,

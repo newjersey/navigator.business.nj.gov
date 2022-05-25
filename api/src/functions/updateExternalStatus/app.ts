@@ -1,15 +1,15 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { LogWriter } from "@libs/logWriter";
-import { GovDeliveryNewsletterClient } from "src/client/govDeliveryNewsletterClient";
+import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
 import {
   dynamoDbTranslateConfig,
   DynamoQlUserDataClient,
   DynamoUserDataClient,
-} from "src/db/dynamoUserDataClient";
+} from "src/db/DynamoUserDataClient";
 import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
-import { AirtableUserTestingClient } from "../../client/airtableUserTestingClient";
+import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
 import { addToUserTestingBatch } from "../../domain/user-testing/addToUserTestingBatch";
 import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
 

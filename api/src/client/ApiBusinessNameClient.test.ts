@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BusinessNameClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
-import { ApiBusinessNameClient, ApiNameAvailabilityResponse } from "./apiBusinessNameClient";
+import { ApiBusinessNameClient, ApiNameAvailabilityResponse } from "./ApiBusinessNameClient";
 
 jest.mock("axios");
 jest.mock("winston");
