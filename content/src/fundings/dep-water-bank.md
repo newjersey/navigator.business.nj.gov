@@ -15,6 +15,7 @@ mwvb: None
 preferenceForOpportunityZone: no
 county:
   - All
+sector: []
 openDate: ""
 dueDate: ""
 ---
