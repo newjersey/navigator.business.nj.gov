@@ -33,4 +33,4 @@ The Work Opportunity tax credit program is a Federal tax credit for businesses w
 
 > **Benefits**
 >
-> - The tax credit ranges from $2,400 to up to $9,600 per employee hired
+> The tax credit ranges from $2,400 to up to $9,600 per employee hired

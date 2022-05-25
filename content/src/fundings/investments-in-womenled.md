@@ -38,4 +38,4 @@ Golden Seeds is a nationwide angel investor network dedicated to investing in wo
 
 > **Benefits**
 >
-> - Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities
+> Ability to meet one-on-one with seasoned investors for feedback and possible funding opportunities

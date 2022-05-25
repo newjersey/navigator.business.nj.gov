@@ -34,4 +34,4 @@ Interested individuals should contact Ahmad McDougle at wfnj@dol.nj.gov
 
 > **Benefits**
 >
-> - Help businesses find employees by providing guidance on job matching or occupation-specific training programs
+> Help businesses find employees by providing guidance on job matching or occupation-specific training programs

@@ -32,4 +32,4 @@ The Small Business Bonding Readiness Assistance Program prepares small, minority
 
 > **Benefits**
 >
-> - A comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors
+> A comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors

@@ -29,25 +29,25 @@
   "betaBar": {
     "betaModalIntercomButtonText": "Speak with a NJ-Based Business Expert",
     "betaModalFeedbackButtonText": "Share Feedback",
+    "featureRequestModalBodyText": "**How can we improve the Navigator?**",
+    "successfulSubmissionModalButtonText": "Submit Another Request",
+    "featureRequestModalInlineErrorText": "This field is required.",
+    "successfulSubmissionModalHeadingText": "Thank you!",
     "betaModalBugReportButtonText": "Report an Issue",
     "betaFormLinkOwning": "https://forms.business.nj.gov/feedback/owning",
+    "unsuccessfulSubmissionAlertText": "There was an error. Please try again or email your issue to xyz@xyz.gov.",
+    "featureRequestModalSubmitButtonText": "Submit",
+    "featureRequestModalPlaceholderText": "Start typing here...",
     "betaModalBodyText": "Get in contact, report a bug, or share your feedback.",
+    "featureRequestModalCancelButtonText": "Cancel",
     "betaFormLinkStarting": "https://forms.business.nj.gov/feedback/starting",
     "betaModalFeatureRequestButtonText": "Request a Feature",
     "betaMainText": "This site is in beta.",
-    "betaModalTitle": "Let us know what you think",
-    "betaModalButtonText": "Share your feedback!",
-    "featureRequestModalHeadingText": "Request a Feature",
-    "featureRequestModalBodyText": "**How can we improve the Navigator?**",
-    "featureRequestModalSecondBodyText": "Describe below the information or feature you are looking for.",
-    "featureRequestModalPlaceholderText": "Start typing here...",
-    "featureRequestModalInlineErrorText": "This field is required.",
-    "featureRequestModalSubmitButtonText": "Submit",
-    "featureRequestModalCancelButtonText": "Cancel",
-    "successfulSubmissionModalHeadingText": "Thank you!",
     "successfulSubmissionModalBodyText": "Your request has been submitted.",
-    "successfulSubmissionModalButtonText": "Submit another request",
-    "unsuccessfulSubmissionAlertText": "There was an error. Please try again or email your issue to xyz@xyz.gov."
+    "featureRequestModalSecondBodyText": "Describe below the information or feature you are looking for.",
+    "betaModalTitle": "Let us know what you think",
+    "featureRequestModalHeadingText": "Request a Feature",
+    "betaModalButtonText": "Share your feedback!"
   },
   "businessFormationDefaults": {
     "membersExpandText": "Expand",
@@ -410,7 +410,7 @@
     "section5ThirdSupportingText": "The Navigator is a one-stop-shop for all your New Jersey business needs. You can track your progress, check the status of applications, speak to NJ-based business advocates, and more!",
     "heroSupportingText": "Create your free, personalized guide to register and find funding for your New Jersey business.",
     "section5FirstHeaderText": "Starter Kit",
-    "heroCallOutFirstLineText": "Start and Grow Your"
+    "heroCallOutFirstLineText": "Build Your"
   },
   "taskDefaults": {
     "backToRoadmapText": "Go Back",

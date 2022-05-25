@@ -38,4 +38,4 @@ The Clean Tech Research & Development (R&D) Voucher Program helps New Jersey ear
 
 > **Benefits**
 >
-> - Vouchers totaling up to $15,000 per year
+> Vouchers totaling up to $15,000 per year
