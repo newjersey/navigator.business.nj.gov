@@ -6,6 +6,7 @@ import {
   generateFormationSubmitResponse,
   generateGetFilingResponse,
   generateProfileData,
+  generateTask,
   generateUserData,
 } from "@/test/factories";
 import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
@@ -81,10 +82,12 @@ describe("<BusinessFormation />", () => {
     const newUserData = generateUserData({});
     mockApi.getCompletedFiling.mockResolvedValue(newUserData);
 
-    preparePage({ formationData }, displayContent);
+    const task = generateTask({ urlSlug: "some-formation-url" });
+
+    preparePage({ formationData }, displayContent, undefined, task);
     expect(mockApi.getCompletedFiling).toHaveBeenCalled();
     await waitFor(() => expect(currentUserData()).toEqual(newUserData));
-    expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/form-business-entity" }, undefined, {
+    expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
       shallow: true,
     });
   });

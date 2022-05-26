@@ -29,6 +29,7 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
@@ -42,7 +43,12 @@ import {
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { getFlow, getSectionCompletion, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import {
+  getFlow,
+  getSectionCompletion,
+  getTaskFromRoadmap,
+  useMountEffectWhenDefined,
+} from "@/lib/utils/helpers";
 import { BusinessPersona } from "@businessnjgovnavigator/shared";
 import {
   createEmptyFormationFormData,
@@ -70,6 +76,7 @@ interface Props {
 
 const ProfilePage = (props: Props): ReactElement => {
   const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
+  const { roadmap } = useRoadmap();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
@@ -88,7 +95,8 @@ const ProfilePage = (props: Props): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
     if (router.query.path === "businessFormation") {
-      return routerType("/tasks/form-business-entity");
+      const formationUrlSlug = getTaskFromRoadmap(roadmap, "form-business-entity")?.urlSlug ?? "";
+      return routerType(`/tasks/${formationUrlSlug}`);
     }
 
     const route = routeForPersona(businessPersona);
