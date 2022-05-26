@@ -28,4 +28,8 @@
   th:nth-child(3) {
     width: 100px;
   }
+  table > thead,
+  th:nth-child(4) {
+    width: 100px;
+  }
 }

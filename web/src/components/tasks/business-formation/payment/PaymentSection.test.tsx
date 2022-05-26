@@ -62,7 +62,6 @@ describe("Formation - PaymentSection", () => {
   };
   const displayContent = generateFormationDisplayContent({
     "limited-liability-company": defaultContent,
-    "limited-liability-partnership": defaultContent,
   });
 
   beforeEach(() => {

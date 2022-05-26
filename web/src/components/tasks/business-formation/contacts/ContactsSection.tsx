@@ -1,6 +1,7 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
@@ -15,10 +16,11 @@ import {
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const ContactsSection = (): ReactElement => {
-  const { state, setErrorMap, setTab } = useContext(BusinessFormationContext);
+  const { state, setErrorMap, setTab, setFormationFormData } = useContext(BusinessFormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const [showSignatureError, setShowSignatureError] = useState<boolean>(false);
 
@@ -77,26 +79,16 @@ export const ContactsSection = (): ReactElement => {
 
   const formationFieldErrors = useMemo((): FormationFieldErrors[] => {
     const invalidFields: FormationFieldErrors[] = [];
-
     const signErrorType: FormationErrorTypes[] = [];
-    const additionalSignersErrorType: FormationErrorTypes[] = [];
 
-    if (!state.formationFormData.signer.name) signErrorType.push("signer-name");
-    if (!state.formationFormData.signer.signature) signErrorType.push("signer-checkbox");
+    if (!state.formationFormData.signers.every((it) => it.name)) signErrorType.push("signer-name");
 
-    if (signErrorType.length > 0)
-      invalidFields.push({
-        name: "signer",
-        types: signErrorType,
-      });
+    if (!state.formationFormData.signers.every((it) => it.signature)) signErrorType.push("signer-checkbox");
 
-    if (!state.formationFormData.additionalSigners.every((it) => it.name))
-      additionalSignersErrorType.push("signer-name");
-    if (!state.formationFormData.additionalSigners.every((it) => it.signature))
-      additionalSignersErrorType.push("signer-checkbox");
+    if (state.formationFormData.signers.length == 0) signErrorType.push("signer-minimum");
 
-    if (additionalSignersErrorType.length > 0) {
-      invalidFields.push({ name: "additionalSigners", types: additionalSignersErrorType });
+    if (signErrorType.length > 0) {
+      invalidFields.push({ name: "signers", types: signErrorType });
     }
 
     return invalidFields;
@@ -138,7 +130,7 @@ export const ContactsSection = (): ReactElement => {
 
     const formationFormDataWithEmptySignersRemoved = {
       ...state.formationFormData,
-      additionalSigners: state.formationFormData.additionalSigners.filter((it) => !!it),
+      signers: state.formationFormData.signers.filter((it) => !!it),
     };
 
     update({
@@ -158,7 +150,9 @@ export const ContactsSection = (): ReactElement => {
     <>
       <div data-testid="contacts-section">
         <RegisteredAgent />
-        {["limited-liability-company"].includes(userData?.profileData.legalStructureId ?? "") ? (
+        {["limited-liability-company", "c-corporation", "s-corporation"].includes(
+          userData?.profileData.legalStructureId ?? ""
+        ) ? (
           <>
             <hr className="margin-top-0 margin-bottom-3" />
             <Members />
@@ -167,7 +161,30 @@ export const ContactsSection = (): ReactElement => {
           <></>
         )}
         <hr className="margin-top-0 margin-bottom-3" />
-        <Signatures />
+        {corpLegalStructures.includes(state.legalStructureId) ? (
+          <Addresses
+            fieldName={"signers"}
+            addressData={state.formationFormData.signers}
+            setData={(signers) => {
+              setFormationFormData({ ...state.formationFormData, signers });
+              if (state.formationFormData.signers.every((it) => it.signature && it.name)) {
+                setErrorMap({ ...state.errorMap, signers: { invalid: false } });
+              }
+            }}
+            needSignature={true}
+            displayContent={{
+              contentMd: state.displayContent.signatureHeader.contentMd,
+              placeholder: state.displayContent.signatureHeader.placeholder ?? "",
+              newButtonText: Config.businessFormationDefaults.addNewSignerButtonText,
+              alertHeader: Config.businessFormationDefaults.incorporatorsSuccessTextHeader,
+              alertBody: Config.businessFormationDefaults.incorporatorsSuccessTextBody,
+              title: Config.businessFormationDefaults.incorporatorsModalTitle,
+              saveButton: Config.businessFormationDefaults.incorporatorsModalNextButtonText,
+            }}
+          />
+        ) : (
+          <Signatures />
+        )}
         <BusinessFormationFieldAlert
           showFieldsError={showSignatureError}
           fieldsWithError={formationFieldErrors}

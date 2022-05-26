@@ -326,6 +326,27 @@ describe("Formation - BusinessSection", () => {
       ).not.toBeInTheDocument();
     });
   });
+  describe("Business total stock", () => {
+    it("saves data to formationData", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "c-corporation" },
+        { businessTotalStock: undefined }
+      );
+      page.fillText("Business total stock", "123");
+      await page.submitBusinessTab(true);
+      expect(currentUserData().formationData.formationFormData.businessTotalStock).toEqual("123");
+    });
+
+    it("trims leading zeroe", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "c-corporation" },
+        { businessTotalStock: undefined }
+      );
+      page.fillText("Business total stock", "0123");
+      await page.submitBusinessTab(true);
+      expect(currentUserData().formationData.formationFormData.businessTotalStock).toEqual("123");
+    });
+  });
 
   describe("NJ zipcode validation", () => {
     it("displays error message when non-NJ zipcode is entered in main business address", async () => {
@@ -408,6 +429,17 @@ describe("Formation - BusinessSection", () => {
       const displayLegalStructure = screen.getByTestId("legal-structure");
       expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.llpText);
     });
+    it("displays sCorp legal structure from profile data", async () => {
+      await getPageHelper({ legalStructureId: "s-corporation" }, {});
+      const displayLegalStructure = screen.getByTestId("legal-structure");
+      expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.sCorpText);
+    });
+
+    it("displays cCorp legal structure from profile data", async () => {
+      await getPageHelper({ legalStructureId: "c-corporation" }, {});
+      const displayLegalStructure = screen.getByTestId("legal-structure");
+      expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.cCorpText);
+    });
 
     it("displays business name from name check section and overrides profile", async () => {
       const page = await getPageHelper({ businessName: "some cool name" }, {});
@@ -440,6 +472,18 @@ describe("Formation - BusinessSection", () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await page.submitBusinessTab(false);
       expect(screen.getByRole("alert")).toHaveTextContent(/Business suffix/);
+    });
+
+    it("Total Shares", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "c-corporation" },
+        { businessTotalStock: undefined }
+      );
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Business total stock/);
+      expect(
+        screen.getByText(Config.businessFormationDefaults.businessTotalStockErrorText)
+      ).toBeInTheDocument();
     });
 
     it("Business address line1", async () => {

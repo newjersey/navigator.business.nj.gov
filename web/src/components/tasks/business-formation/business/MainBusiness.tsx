@@ -4,11 +4,15 @@ import { FormationMunicipality } from "@/components/tasks/business-formation/bus
 import { FormationStartDate } from "@/components/tasks/business-formation/business/FormationStartDate";
 import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement } from "react";
+import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
+import React, { ReactElement, useContext } from "react";
 
 export const MainBusiness = (): ReactElement => {
+  const { state } = useContext(BusinessFormationContext);
+
   return (
     <>
       <BusinessNameAndLegalStructure />
@@ -20,6 +24,27 @@ export const MainBusiness = (): ReactElement => {
           <FormationStartDate />
         </div>
       </div>
+      {corpLegalStructures.includes(state.legalStructureId) ? (
+        <div className="grid-row grid-gap-2">
+          <div className="tablet:grid-col-6">
+            <BusinessFormationTextField
+              label={Config.businessFormationDefaults.businessTotalStockLabel}
+              placeholder={Config.businessFormationDefaults.businessTotalStockPlaceholder}
+              numericProps={{
+                minLength: 1,
+                trimLeadingZeroes: true,
+                maxLength: 11,
+              }}
+              required={true}
+              fieldName={"businessTotalStock"}
+              validationText={Config.businessFormationDefaults.businessTotalStockErrorText}
+            />{" "}
+          </div>
+          <div className="tablet:grid-col-6 margin-bottom-2"></div>
+        </div>
+      ) : (
+        <></>
+      )}
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <div className="margin-bottom-2">
         <Content>{Config.businessFormationDefaults.businessAddressHeader}</Content>

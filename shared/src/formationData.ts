@@ -1,7 +1,14 @@
 import { Municipality } from "./municipality";
 
 export const defaultFormationLegalType: FormationLegalType = "limited-liability-company";
-export const FormationLegalTypes = ["limited-liability-partnership", "limited-liability-company"] as const;
+
+export const FormationLegalTypes = [
+  "limited-liability-partnership",
+  "limited-liability-company",
+  "c-corporation",
+  "s-corporation",
+] as const;
+
 export type FormationLegalType = typeof FormationLegalTypes[number];
 
 export interface FormationData {
@@ -10,23 +17,20 @@ export interface FormationData {
   readonly getFilingResponse: GetFilingResponse | undefined;
 }
 
-export interface FormationMember {
+export interface FormationAddress {
   readonly name: string;
   readonly addressLine1: string;
   readonly addressLine2: string;
   readonly addressCity: string;
   readonly addressState: string;
   readonly addressZipCode: string;
-}
-
-export interface FormationSigner {
-  name: string;
-  signature: boolean;
+  readonly signature: boolean;
 }
 
 export interface FormationFormData {
   readonly businessName: string;
   readonly businessSuffix: BusinessSuffix | undefined;
+  readonly businessTotalStock: string;
   readonly businessStartDate: string;
   readonly businessAddressCity: Municipality | undefined;
   readonly businessAddressLine1: string;
@@ -44,9 +48,8 @@ export interface FormationFormData {
   readonly agentOfficeAddressCity: string;
   readonly agentOfficeAddressState: string;
   readonly agentOfficeAddressZipCode: string;
-  readonly members: FormationMember[];
-  readonly signer: FormationSigner;
-  readonly additionalSigners: FormationSigner[];
+  readonly members: FormationAddress[];
+  readonly signers: FormationAddress[];
   readonly paymentType: PaymentType;
   readonly annualReportNotification: boolean;
   readonly corpWatchNotification: boolean;
@@ -64,8 +67,7 @@ export type FormationTextField = Exclude<
   | "businessAddressCity"
   | "businessStartDate"
   | "agentNumberOrManual"
-  | "signer"
-  | "additionalSigners"
+  | "signers"
   | "paymentType"
   | "annualReportNotification"
   | "corpWatchNotification"
@@ -75,19 +77,21 @@ export type FormationTextField = Exclude<
   | "members"
 >;
 
-export const createEmptyFormationMember = (): FormationMember => ({
+export const createEmptyFormationAddress = (): FormationAddress => ({
   name: "",
   addressLine1: "",
   addressLine2: "",
   addressCity: "",
   addressState: "",
   addressZipCode: "",
+  signature: false,
 });
 
 export const createEmptyFormationFormData = (): FormationFormData => {
   return {
     businessName: "",
     businessSuffix: undefined,
+    businessTotalStock: "",
     businessStartDate: "",
     businessAddressCity: undefined,
     businessAddressLine1: "",
@@ -106,11 +110,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: "",
     members: [],
-    signer: {
-      name: "",
-      signature: false,
-    },
-    additionalSigners: [],
+    signers: [],
     paymentType: undefined,
     annualReportNotification: true,
     corpWatchNotification: true,
@@ -139,24 +139,50 @@ export const llcBusinessSuffix = [
 export type LlcBusinessSuffix = typeof llcBusinessSuffix[number];
 
 export const llpBusinessSuffix = [
-  "Limited Liability Partnership",
+  "LIMITED LIABILITY PARTNERSHIP",
   "LLP",
   "L.L.P.",
-  "Registered Limited Liability Partnership",
+  "REGISTERED LIMITED LIABILITY PARTNERSHIP",
   "RLLP",
   "R.L.L.P.",
 ] as const;
 
+export const corpBusinessSuffix = [
+  "Corporation",
+  "Incorporated",
+  "Company",
+  "LTD",
+  "CO",
+  "CO.",
+  "CORP",
+  "CORP.",
+  "INC",
+  "INC.",
+] as const;
+
+export type CorpBusinessSuffix = typeof corpBusinessSuffix[number];
+
 export type LlpBusinessSuffix = typeof llpBusinessSuffix[number];
 
-export const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix] as const;
+export const AllBusinessSuffixes = [
+  ...llcBusinessSuffix,
+  ...llpBusinessSuffix,
+  ...corpBusinessSuffix,
+] as const;
 
 export type BusinessSuffix = typeof AllBusinessSuffixes[number];
 
-export const BusinessSuffixMap: Record<FormationLegalType, LlpBusinessSuffix[] | LlcBusinessSuffix[]> = {
+export const BusinessSuffixMap: Record<
+  FormationLegalType,
+  LlpBusinessSuffix[] | LlcBusinessSuffix[] | CorpBusinessSuffix[]
+> = {
   "limited-liability-company": llcBusinessSuffix as unknown as LlcBusinessSuffix[],
   "limited-liability-partnership": llpBusinessSuffix as unknown as LlpBusinessSuffix[],
+  "c-corporation": corpBusinessSuffix as unknown as CorpBusinessSuffix[],
+  "s-corporation": corpBusinessSuffix as unknown as CorpBusinessSuffix[],
 };
+
+export const corpLegalStructures: FormationLegalType[] = ["s-corporation", "c-corporation"];
 
 export type FormationSubmitResponse = {
   success: boolean;

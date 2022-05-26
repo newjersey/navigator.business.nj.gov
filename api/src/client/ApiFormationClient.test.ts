@@ -1,9 +1,9 @@
 import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
 import axios from "axios";
 import {
+  generateFormationAddress,
   generateFormationData,
   generateFormationFormData,
-  generateFormationMember,
   generateFormationUserData,
   generateProfileData,
   generateUserData,
@@ -77,30 +77,34 @@ describe("ApiFormationClient", () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-        const formationFormData = generateFormationFormData({
-          agentNumberOrManual: "MANUAL_ENTRY",
-          signer: {
-            name: "faraz",
-            signature: true,
+        const formationFormData = generateFormationFormData(
+          {
+            agentNumberOrManual: "MANUAL_ENTRY",
+            provisions: ["provision1", "provision2"],
+            members: [generateFormationAddress({})],
+            signers: [
+              generateFormationAddress({
+                name: "faraz",
+                signature: true,
+              }),
+              generateFormationAddress({
+                name: "anne",
+                signature: true,
+              }),
+              generateFormationAddress({
+                name: "mike",
+                signature: false,
+              }),
+            ],
           },
-          provisions: ["provision1", "provision2"],
-          members: [generateFormationMember({})],
-          additionalSigners: [
-            {
-              name: "anne",
-              signature: true,
-            },
-            {
-              name: "mike",
-              signature: false,
-            },
-          ],
-        });
+          "limited-liability-company"
+        );
 
-        const userData = generateUserData({
-          profileData: generateProfileData({ legalStructureId: "limited-liability-company" }),
-          formationData: generateFormationData({ formationFormData }),
-        });
+        const userData = generateFormationUserData(
+          { legalStructureId: "limited-liability-company" },
+          {},
+          formationFormData
+        );
 
         await client.form(userData, "hostname.com/form-business");
 
@@ -199,30 +203,176 @@ describe("ApiFormationClient", () => {
       });
     });
 
+    describe("when CORP", () => {
+      it("posts to the endpoint with the api formation object", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+        const formationFormData = generateFormationFormData(
+          {
+            businessTotalStock: "1234",
+            agentNumberOrManual: "MANUAL_ENTRY",
+            provisions: ["provision1", "provision2"],
+            members: [generateFormationAddress({})],
+            signers: [
+              generateFormationAddress({ name: "faraz", signature: true }),
+              generateFormationAddress({ name: "anne", signature: false }),
+            ],
+          },
+          "s-corporation"
+        );
+
+        const userData = generateFormationUserData(
+          { legalStructureId: "s-corporation" },
+          {},
+          formationFormData
+        );
+
+        await client.form(userData, "hostname.com/form-business");
+
+        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
+          Account: "12345",
+          Key: "abcdef",
+          ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          Payer: {
+            CompanyName: userData.profileData.businessName,
+            Address1: formationFormData.businessAddressLine1,
+            Address2: formationFormData.businessAddressLine2,
+            City: formationFormData.businessAddressCity?.name,
+            StateAbbreviation: "NJ",
+            ZipCode: formationFormData.businessAddressZipCode,
+            Email: userData.user.email,
+          },
+          Formation: {
+            Gov2GoAnnualReports: formationFormData.annualReportNotification,
+            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+            ShortGoodStanding: formationFormData.certificateOfStanding,
+            Certified: formationFormData.certifiedCopyOfFormationDocument,
+            PayerEmail: "",
+            SelectPaymentType: formationFormData.paymentType,
+            BusinessInformation: {
+              CompanyOrigin: "Domestic",
+              Business: "DomesticForProfitCorporation",
+              BusinessName: userData.profileData.businessName,
+              BusinessDesignator: formationFormData.businessSuffix,
+              Naic: userData.profileData.naicsCode,
+              TotalShares: "1234",
+              BusinessPurpose: formationFormData.businessPurpose,
+              EffectiveFilingDate: parseDateWithFormat(
+                formationFormData.businessStartDate,
+                "YYYY-MM-DD"
+              ).toISOString(),
+              MainAddress: {
+                Address1: formationFormData.businessAddressLine1,
+                Address2: formationFormData.businessAddressLine2,
+                City: userData.profileData.municipality?.name,
+                State: "New Jersey",
+                Zipcode: formationFormData.businessAddressZipCode,
+                Country: "US",
+              },
+            },
+            AdditionalCCorpOrProfessionalCorp: {
+              OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
+            },
+            CompanyProfit: "Profit",
+            MemberAttestation: true,
+            RegisteredAgent: {
+              Id: undefined,
+              Email: formationFormData.agentEmail,
+              Name: formationFormData.agentName,
+              Location: {
+                Address1: formationFormData.agentOfficeAddressLine1,
+                Address2: formationFormData.agentOfficeAddressLine2,
+                City: formationFormData.agentOfficeAddressCity,
+                State: "New Jersey",
+                Zipcode: formationFormData.agentOfficeAddressZipCode,
+                Country: "US",
+              },
+            },
+            Members: [
+              {
+                Name: formationFormData.members[0].name,
+                Location: {
+                  Address1: formationFormData.members[0].addressLine1,
+                  Address2: formationFormData.members[0].addressLine2,
+                  City: formationFormData.members[0].addressCity,
+                  State: formationFormData.members[0].addressState,
+                  Zipcode: formationFormData.members[0].addressZipCode,
+                  Country: "US",
+                },
+              },
+            ],
+            Incorporators: [
+              {
+                Name: "faraz",
+                Location: {
+                  Address1: formationFormData.signers[0].addressLine1,
+                  Address2: formationFormData.signers[0].addressLine2,
+                  City: formationFormData.signers[0].addressCity,
+                  State: formationFormData.signers[0].addressState,
+                  Zipcode: formationFormData.signers[0].addressZipCode,
+                  Country: "US",
+                },
+              },
+              {
+                Name: "anne",
+                Location: {
+                  Address1: formationFormData.signers[1].addressLine1,
+                  Address2: formationFormData.signers[1].addressLine2,
+                  City: formationFormData.signers[1].addressCity,
+                  State: formationFormData.signers[1].addressState,
+                  Zipcode: formationFormData.signers[1].addressZipCode,
+                  Country: "US",
+                },
+              },
+            ],
+            Signers: [
+              {
+                Name: "faraz",
+                Title: "Incorporator",
+                Signed: true,
+              },
+              {
+                Name: "anne",
+                Title: "Incorporator",
+                Signed: false,
+              },
+            ],
+            ContactFirstName: formationFormData.contactFirstName,
+            ContactLastName: formationFormData.contactLastName,
+            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+          },
+        });
+      });
+    });
+
     describe("when LLP", () => {
       it("posts to the endpoint with the api formation object", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
 
-        const formationFormData = generateFormationFormData({
-          agentNumberOrManual: "MANUAL_ENTRY",
-          signer: {
-            name: "faraz",
-            signature: true,
+        const formationFormData = generateFormationFormData(
+          {
+            agentNumberOrManual: "MANUAL_ENTRY",
+            provisions: ["provision1", "provision2"],
+            members: [],
+            signers: [
+              generateFormationAddress({
+                name: "faraz",
+                signature: true,
+              }),
+              generateFormationAddress({
+                name: "anne",
+                signature: true,
+              }),
+              generateFormationAddress({
+                name: "mike",
+                signature: false,
+              }),
+            ],
           },
-          provisions: [],
-          members: [],
-          additionalSigners: [
-            {
-              name: "anne",
-              signature: true,
-            },
-            {
-              name: "mike",
-              signature: false,
-            },
-          ],
-        });
+          "limited-liability-partnership"
+        );
 
         const userData = generateUserData({
           profileData: generateProfileData({ legalStructureId: "limited-liability-partnership" }),
@@ -271,6 +421,9 @@ describe("ApiFormationClient", () => {
                 Country: "US",
               },
             },
+            AdditionalLimitedLiabilityPartnership: {
+              OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
+            },
             CompanyProfit: "Profit",
             RegisteredAgent: {
               Id: undefined,
@@ -310,7 +463,6 @@ describe("ApiFormationClient", () => {
         });
       });
     });
-
     it("fills only registered agent number when NUMBER is selected", async () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
