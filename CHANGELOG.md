@@ -1,3 +1,10 @@
+## [3.9.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.9.0...v3.9.1) (2022-05-26)
+
+
+### Bug Fixes
+
+* correct issue with NAICS code descriptions not properly displaying ([c8e7d34](https://github.com/newjersey/navigator.business.nj.gov/commit/c8e7d3478e889252df89aad6e437a0406635ed9e))
+
 # [3.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.8.1...v3.9.0) (2022-05-24)
 
 
