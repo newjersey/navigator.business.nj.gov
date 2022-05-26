@@ -21,7 +21,6 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
       townDisplayName,
       requiresCpa: undefined,
       legalStructureId,
-      isContactMeChecked: true,
     });
   });
 
