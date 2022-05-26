@@ -12,6 +12,7 @@ import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { BusinessPersona } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
   Industries,
@@ -74,7 +75,7 @@ export const GraduationModal = (props: Props): ReactElement => {
 
     const newProfileData = {
       ...profileData,
-      hasExistingBusiness: true,
+      businessPersona: "OWNING" as BusinessPersona,
     };
 
     setAnalyticsDimensions(newProfileData);

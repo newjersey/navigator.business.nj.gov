@@ -107,9 +107,10 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
 
 export const generateProfileData = (overrides: Partial<ProfileData>): ProfileData => {
   const id = `some-id-${randomInt()}`;
+  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
   return {
-    hasExistingBusiness: false,
-    initialOnboardingFlow: "STARTING",
+    businessPersona: persona,
+    initialOnboardingFlow: persona,
     businessName: `some-business-name-${randomInt()}`,
     industryId: randomIndustry().id,
     legalStructureId: randomLegalStructure().id,

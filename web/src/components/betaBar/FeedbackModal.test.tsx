@@ -56,7 +56,7 @@ describe("<BetaBar />", () => {
     it("links to correct feedback form when completed onboarding and owns a business", () => {
       useMockUserData({
         formProgress: "COMPLETED",
-        profileData: generateProfileData({ hasExistingBusiness: true }),
+        profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
       renderFeedbackModal();
 
@@ -69,7 +69,7 @@ describe("<BetaBar />", () => {
     it("links to correct feedback form when completed onboarding and starting a business", () => {
       useMockUserData({
         formProgress: "COMPLETED",
-        profileData: generateProfileData({ hasExistingBusiness: false }),
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
       });
       renderFeedbackModal();
 

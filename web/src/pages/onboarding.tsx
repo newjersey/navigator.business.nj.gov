@@ -11,6 +11,7 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -157,10 +158,10 @@ const OnboardingPage = (props: Props): ReactElement => {
   }, [router.isReady, state.user, state.isAuthenticated]);
 
   const pageQueryParamisValid = (userData: UserData, page: number): boolean => {
-    const hasAnsweredExistingBusiness = userData?.profileData.hasExistingBusiness !== undefined;
+    const hasAnsweredBusinessPersona = userData?.profileData.businessPersona !== undefined;
     const requestedPageIsInRange = page <= onboardingFlows[currentFlow].pages.length && page > 0;
 
-    return hasAnsweredExistingBusiness && requestedPageIsInRange;
+    return hasAnsweredBusinessPersona && requestedPageIsInRange;
   };
 
   const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
@@ -173,7 +174,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   ): Promise<void> => {
     setProfileData({
       ...profileData,
-      hasExistingBusiness: false,
+      businessPersona: "STARTING",
       initialOnboardingFlow: "STARTING",
       industryId: industryId,
     });
@@ -203,10 +204,10 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     let newProfileData = profileData;
 
-    const hasExistingBusinessChanged =
-      profileData.hasExistingBusiness !== currentUserData.profileData.hasExistingBusiness;
+    const hasBusinessPersonaChanged =
+      profileData.businessPersona !== currentUserData.profileData.businessPersona;
 
-    if (page.current === 1 && hasExistingBusinessChanged) {
+    if (page.current === 1 && hasBusinessPersonaChanged) {
       let initialOnboardingFlow = profileData.initialOnboardingFlow;
       if (currentUserData.formProgress !== "COMPLETED") {
         initialOnboardingFlow = getFlow(profileData);
@@ -215,12 +216,12 @@ const OnboardingPage = (props: Props): ReactElement => {
       newProfileData = {
         initialOnboardingFlow: initialOnboardingFlow,
         businessName: profileData.businessName,
-        industryId: profileData.hasExistingBusiness === true ? "generic" : undefined,
+        industryId: profileData.businessPersona === "OWNING" ? "generic" : undefined,
         homeBasedBusiness: profileData.homeBasedBusiness,
         liquorLicense: profileData.liquorLicense,
         requiresCpa: profileData.requiresCpa,
         municipality: profileData.municipality,
-        hasExistingBusiness: profileData.hasExistingBusiness,
+        businessPersona: profileData.businessPersona,
         legalStructureId: profileData.legalStructureId,
         cannabisLicenseType: undefined,
         cannabisMicrobusiness: undefined,
@@ -282,7 +283,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       await update(newUserData);
       await router.push({
-        pathname: newUserData.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap",
+        pathname: routeForPersona(newUserData.profileData.businessPersona),
         query: { fromOnboarding: "true" },
       });
     }
@@ -335,8 +336,8 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   const redirectUrl = useMemo(
-    () => (userData?.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap"),
-    [userData?.profileData.hasExistingBusiness]
+    () => routeForPersona(userData?.profileData.businessPersona),
+    [userData?.profileData.businessPersona]
   );
 
   return (

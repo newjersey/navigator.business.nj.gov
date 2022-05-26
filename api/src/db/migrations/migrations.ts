@@ -57,6 +57,7 @@ import { migrate_v58_to_v59 } from "./v59_fix_welcome_card_to_preferences";
 import { migrate_v4_to_v5 } from "./v5_add_liquor_license";
 import { migrate_v59_to_v60 } from "./v60_add_llp_suffix";
 import { migrate_v60_to_v61 } from "./v61_add_corp_formation";
+import { migrate_v61_to_v62 } from "./v62_rename_has_existing_business";
 import { migrate_v5_to_v6 } from "./v6_add_home_based_business";
 import { migrate_v6_to_v7 } from "./v7_add_license_data";
 import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
@@ -126,6 +127,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v58_to_v59,
   migrate_v59_to_v60,
   migrate_v60_to_v61,
+  migrate_v61_to_v62,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

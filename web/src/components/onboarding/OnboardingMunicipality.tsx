@@ -40,7 +40,7 @@ export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props)
 
   const renderHomeBasedBusinessQuestion =
     isHomeBasedBusinessApplicable(state.profileData.industryId) ||
-    state.profileData.hasExistingBusiness === true;
+    state.profileData.businessPersona === "OWNING";
 
   return (
     <>

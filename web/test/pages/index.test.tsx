@@ -1,6 +1,6 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import Home from "@/pages/index";
-import { generateUser } from "@/test/factories";
+import { generateProfileData, generateUser } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
@@ -26,7 +26,10 @@ describe("HomePage", () => {
   });
 
   it("redirects to roadmap page when user has completed onboarding flow", () => {
-    useMockUserData({ formProgress: "COMPLETED" });
+    useMockUserData({
+      formProgress: "COMPLETED",
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
+    });
     render(withAuth(<Home />, { user: generateUser({}) }));
     expect(mockPush).toHaveBeenCalledWith("/roadmap");
   });

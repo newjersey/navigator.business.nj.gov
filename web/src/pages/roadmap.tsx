@@ -12,6 +12,7 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
@@ -46,13 +47,13 @@ const RoadmapPage = (props: Props): ReactElement => {
     if (!router.isReady) return;
     if (
       (router.query.error === "true" || (router.query?.code && router.query?.state)) &&
-      userData?.profileData.hasExistingBusiness
+      userData?.profileData.businessPersona === "OWNING"
     ) {
-      router.replace("/dashboard");
+      router.replace(routeForPersona(userData?.profileData.businessPersona));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, router.query.error, userData?.profileData.hasExistingBusiness]);
+  }, [router.isReady, router.query.error, userData?.profileData.businessPersona]);
 
   useEffect(() => {
     if (!router.isReady) return;

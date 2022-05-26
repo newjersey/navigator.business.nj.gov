@@ -3,6 +3,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
@@ -44,11 +45,8 @@ const Home = (): ReactElement => {
 
   useEffect(() => {
     if (userData?.formProgress === "COMPLETED") {
-      if (userData?.profileData.hasExistingBusiness) {
-        router.replace("/dashboard");
-      } else {
-        router.replace("/roadmap");
-      }
+      const route = routeForPersona(userData?.profileData.businessPersona);
+      router.replace(route);
     } else if (userData?.formProgress === "UNSTARTED") {
       router.replace("/onboarding");
     } else if (userData === undefined && error != undefined) {

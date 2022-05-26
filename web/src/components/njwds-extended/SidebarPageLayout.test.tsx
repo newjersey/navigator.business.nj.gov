@@ -27,14 +27,14 @@ describe("<SidebarPageLayout />", () => {
   });
 
   it("links back to /roadmap when user is starting a business", () => {
-    useMockProfileData({ hasExistingBusiness: false });
+    useMockProfileData({ businessPersona: "STARTING" });
     render(<SidebarPageLayout>stuff</SidebarPageLayout>);
     expect(screen.getByText("stuff")).toBeInTheDocument();
     expect(screen.getByTestId("back-to-roadmap").getAttribute("href")).toEqual("/roadmap");
   });
 
   it("links back to /dashboard when user owns a business", () => {
-    useMockProfileData({ hasExistingBusiness: true });
+    useMockProfileData({ businessPersona: "OWNING" });
     render(<SidebarPageLayout>stuff</SidebarPageLayout>);
     expect(screen.getByTestId("back-to-roadmap").getAttribute("href")).toEqual("/dashboard");
   });

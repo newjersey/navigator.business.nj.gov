@@ -118,9 +118,10 @@ export const generateProfileData = (
   isMobileLocation?: boolean
 ): ProfileData => {
   const id = `some-id-${randomInt()}`;
+  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
   return {
-    hasExistingBusiness: false,
-    initialOnboardingFlow: "STARTING",
+    businessPersona: persona,
+    initialOnboardingFlow: persona,
     businessName: `some-business-name-${randomInt()}`,
     industryId: randomIndustry(isMobileLocation).id,
     legalStructureId: randomLegalStructure().id,

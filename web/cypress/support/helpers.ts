@@ -108,9 +108,9 @@ export const completeNewBusinessOnboarding = ({
   isContactMeChecked = false,
 }: startingOnboardingData & Partial<registration>): void => {
   cy.url().should("include", "onboarding?page=1");
-  onOnboardingPage.selectNewBusiness(false);
-  onOnboardingPage.getHasExistingBusiness(true).should("not.be.checked");
-  onOnboardingPage.getHasExistingBusiness(false).should("be.checked");
+  onOnboardingPage.selectBusinessPersona("STARTING");
+  onOnboardingPage.getBusinessPersona("OWNING").should("not.be.checked");
+  onOnboardingPage.getBusinessPersona("STARTING").should("be.checked");
   onOnboardingPage.clickNext();
 
   cy.url().should("include", "onboarding?page=2");
@@ -216,9 +216,9 @@ export const completeExistingBusinessOnboarding = ({
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
-  onOnboardingPage.selectNewBusiness(true);
-  onOnboardingPage.getHasExistingBusiness(true).should("be.checked");
-  onOnboardingPage.getHasExistingBusiness(false).should("not.be.checked");
+  onOnboardingPage.selectBusinessPersona("OWNING");
+  onOnboardingPage.getBusinessPersona("OWNING").should("be.checked");
+  onOnboardingPage.getBusinessPersona("STARTING").should("not.be.checked");
   const companyType = LookupLegalStructureById(legalStructureId);
   onOnboardingPage.selectLegalStructureDropDown(companyType.name);
   onOnboardingPage

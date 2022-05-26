@@ -1,8 +1,8 @@
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
+import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
-import { OnboardingHasExistingBusiness } from "@/components/onboarding/OnboardingHasExistingBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
@@ -37,7 +37,7 @@ export const getOnboardingFlows = (
       {
         component: (
           <>
-            <OnboardingHasExistingBusiness />
+            <OnboardingBusinessPersona />
             <div className="padding-top-3">
               <OnboardingLegalStructureDropdown />
             </div>
@@ -45,7 +45,7 @@ export const getOnboardingFlows = (
         ),
         getErrorMap: () => ({
           banner: [
-            { name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.hasExistingBusiness !== undefined },
+            { name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.businessPersona !== undefined },
             { name: "REQUIRED_LEGAL", valid: profileData.legalStructureId !== undefined },
           ],
         }),
@@ -130,11 +130,9 @@ export const getOnboardingFlows = (
   STARTING: {
     pages: [
       {
-        component: <OnboardingHasExistingBusiness />,
+        component: <OnboardingBusinessPersona />,
         getErrorMap: () => ({
-          banner: [
-            { name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.hasExistingBusiness !== undefined },
-          ],
+          banner: [{ name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.businessPersona !== undefined }],
         }),
       },
       {

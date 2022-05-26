@@ -1,7 +1,7 @@
 {
   "profileDefaults": {
     "OWNING": {
-      "hasExistingBusiness": {
+      "businessPersona": {
         "header": "## Business Status",
         "radioButtonYesText": "Yes, my business is operating",
         "radioButtonNoText": "No, I still need to register my business",
