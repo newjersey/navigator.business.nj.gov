@@ -4,6 +4,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { corpLegalStructures, FormationLegalType } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext } from "react";
 import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
@@ -12,13 +13,18 @@ export const ReviewMembers = (): ReactElement => {
   const { userData } = useUserData();
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const isCorp = userData?.profileData.legalStructureId
+    ? corpLegalStructures.includes(userData?.profileData.legalStructureId as FormationLegalType)
+    : false;
 
   return (
     <>
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {Config.businessFormationDefaults.reviewPageMembersHeader}
+            {isCorp
+              ? Config.businessFormationDefaults.reviewPageDirectorsHeader
+              : Config.businessFormationDefaults.reviewPageMembersHeader}
           </Content>
         </div>
         <div className="margin-left-2">
@@ -38,7 +44,11 @@ export const ReviewMembers = (): ReactElement => {
       {userData?.formationData.formationFormData.members.map((member, index) => (
         <div className="display-block tablet:display-flex" key={`${member.name}-${index}`}>
           <div className={`text-bold width-11rem ${index !== 0 ? "margin-top-1" : ""}`}>
-            <Content>{Config.businessFormationDefaults.reviewPageMemberNameLabel}</Content>
+            <Content>
+              {isCorp
+                ? Config.businessFormationDefaults.reviewPageDirectorNameLabel
+                : Config.businessFormationDefaults.reviewPageMemberNameLabel}
+            </Content>
           </div>
           <div className={index !== 0 ? "tablet:margin-top-1" : ""}>{member.name}</div>
         </div>

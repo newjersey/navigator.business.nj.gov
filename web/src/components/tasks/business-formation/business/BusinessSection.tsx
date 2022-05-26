@@ -9,7 +9,7 @@ import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
+import { corpLegalStructures, getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 export const BusinessSection = (): ReactElement => {
@@ -37,6 +37,10 @@ export const BusinessSection = (): ReactElement => {
       );
     };
 
+    const isCorp = corpLegalStructures.includes(state.legalStructureId);
+
+    if (isCorp) requiredFields.push("businessTotalStock");
+
     const invalidFields = requiredFields.filter(
       (it) => state.errorMap[it].invalid || !state.formationFormData[it]
     );
@@ -55,7 +59,7 @@ export const BusinessSection = (): ReactElement => {
     }
 
     return invalidFields;
-  }, [state.formationFormData, state.errorMap]);
+  }, [state.formationFormData, state.errorMap, state.legalStructureId]);
 
   const submitBusinessData = async () => {
     if (!userData) return;

@@ -1,6 +1,7 @@
 import { parseDateWithFormat } from "@shared/dateHelpers";
 import {
   BusinessSuffix,
+  corpLegalStructures,
   FormationLegalType,
   FormationSubmitError,
   FormationSubmitResponse,
@@ -127,12 +128,38 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     const formationFormData = userData.formationData.formationFormData;
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
     const naicsCode = userData.profileData.naicsCode.length === 6 ? userData.profileData.naicsCode : "";
+    const isCorp = userData.profileData.legalStructureId
+      ? corpLegalStructures.includes(userData.profileData.legalStructureId as FormationLegalType)
+      : false;
     const additionalProvisions =
       formationFormData.provisions.length > 0
         ? {
             OtherProvisions: formationFormData.provisions.map((it: string) => ({ Provision: it })),
           }
         : undefined;
+
+    let Incorporators:
+      | Array<{
+          Name: string;
+          Location: MemberLocation;
+        }>
+      | undefined;
+
+    if (isCorp) {
+      Incorporators = formationFormData.signers.map((signer) => {
+        return {
+          Name: signer.name,
+          Location: {
+            Address1: signer.addressLine1,
+            Address2: signer.addressLine2,
+            City: signer.addressCity,
+            State: signer.addressState,
+            Zipcode: signer.addressZipCode,
+            Country: "US",
+          } as MemberLocation,
+        };
+      });
+    }
 
     return {
       Account: config.account,
@@ -173,6 +200,10 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             Zipcode: formationFormData.businessAddressZipCode,
             Country: "US",
           },
+          TotalShares:
+            formationFormData.businessTotalStock.length > 0
+              ? formationFormData.businessTotalStock
+              : undefined,
         },
         [BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].additionalDataKey]:
           additionalProvisions,
@@ -192,6 +223,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
               }
             : undefined,
         },
+        MemberAttestation: isCorp ? true : undefined,
         Members: formationFormData.members.map((member) => ({
           Name: member.name,
           Location: {
@@ -203,18 +235,12 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             Country: "US",
           },
         })),
-        Signers: [
-          {
-            Name: formationFormData.signer.name,
-            Title: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].signerTitle,
-            Signed: formationFormData.signer.signature,
-          },
-          ...formationFormData.additionalSigners.map((additionalSigner) => ({
-            Name: additionalSigner.name,
-            Title: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].signerTitle,
-            Signed: additionalSigner.signature,
-          })),
-        ],
+        Incorporators,
+        Signers: formationFormData.signers.map((signer) => ({
+          Name: signer.name,
+          Title: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].signerTitle,
+          Signed: signer.signature,
+        })),
 
         ContactFirstName: formationFormData.contactFirstName,
         ContactLastName: formationFormData.contactLastName,
@@ -268,6 +294,9 @@ export type ApiSubmission = {
     AdditionalLimitedLiabilityPartnership?: {
       OtherProvisions: AdditionalProvision[];
     };
+    AdditionalCCorpOrProfessionalCorp?: {
+      OtherProvisions: AdditionalProvision[];
+    };
     CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
     RegisteredAgent: {
       Id: string | null; // 7 max, must be valid NJ registered agent number
@@ -275,6 +304,11 @@ export type ApiSubmission = {
       Name: string | null; // 50 max, required if no ID
       Location: ApiLocation | null; // required if no ID
     };
+    MemberAttestation: boolean | undefined;
+    Incorporators: Array<{
+      Name: string; // 50 max
+      Location: MemberLocation;
+    }>;
     Members: Array<{
       Name: string; // 50 max
       Location: MemberLocation;
@@ -313,11 +347,17 @@ type MemberLocation = {
   Country: "US"; //alpha-2 iban code
 };
 
-type BusinessType = "DomesticLimitedLiabilityCompany" | "DomesticLimitedLiabilityPartnership";
+type BusinessType =
+  | "DomesticLimitedLiabilityCompany"
+  | "DomesticLimitedLiabilityPartnership"
+  | "DomesticForProfitCorporation";
 
-type SignerTitle = "Authorized Representative" | "Authorized Partner";
+type SignerTitle = "Authorized Representative" | "Authorized Partner" | "Incorporator";
 
-type AdditionalDataKey = "AdditionalLimitedLiabilityCompany" | "AdditionalLimitedLiabilityPartnership";
+type AdditionalDataKey =
+  | "AdditionalCCorpOrProfessionalCorp"
+  | "AdditionalLimitedLiabilityCompany"
+  | "AdditionalLimitedLiabilityPartnership";
 type FormationFields = {
   businessType: BusinessType;
   shortDescription: string;
@@ -337,6 +377,18 @@ const BusinessTypeMap: Record<FormationLegalType, FormationFields> = {
     shortDescription: "LLP",
     signerTitle: "Authorized Partner",
     additionalDataKey: "AdditionalLimitedLiabilityPartnership",
+  },
+  "c-corporation": {
+    businessType: "DomesticForProfitCorporation",
+    shortDescription: "DP",
+    signerTitle: "Incorporator",
+    additionalDataKey: "AdditionalCCorpOrProfessionalCorp",
+  },
+  "s-corporation": {
+    businessType: "DomesticForProfitCorporation",
+    shortDescription: "DP",
+    signerTitle: "Incorporator",
+    additionalDataKey: "AdditionalCCorpOrProfessionalCorp",
   },
 };
 

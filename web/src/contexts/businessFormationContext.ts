@@ -7,6 +7,7 @@ import {
 import {
   createEmptyFormationFormData,
   FormationFormData,
+  FormationLegalType,
   Municipality,
 } from "@businessnjgovnavigator/shared/";
 import { createContext } from "react";
@@ -22,6 +23,7 @@ const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
 interface BusinessFormationState {
   tab: number;
   formationFormData: FormationFormData;
+  legalStructureId: FormationLegalType;
   displayContent: FormationDisplayContent;
   municipalities: Municipality[];
   errorMap: FormationFieldErrorMap;
@@ -39,6 +41,7 @@ interface BusinessFormationContextType {
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
   state: {
     tab: 0,
+    legalStructureId: "limited-liability-company",
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
     municipalities: [],

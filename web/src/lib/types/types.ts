@@ -52,11 +52,10 @@ export type FormationDisplayContent = {
   members: {
     contentMd: string;
     placeholder?: string;
-    headingBolded?: string;
-    headingNotBolded?: string;
   };
   signatureHeader: {
     contentMd: string;
+    placeholder?: string;
   };
   services: {
     contentMd: string;
@@ -126,6 +125,7 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap
       },
       signatureHeader: {
         contentMd: "",
+        placeholder: "",
       },
       services: {
         contentMd: "",
@@ -155,7 +155,7 @@ export type OnboardingStatus = "SUCCESS" | "ERROR";
 
 export type FormationFields = keyof FormationFormData;
 export type FormationFieldErrorMap = Record<FormationFields, FieldStatus>;
-export type FormationErrorTypes = "generic" | "signer-checkbox" | "signer-name";
+export type FormationErrorTypes = "generic" | "signer-checkbox" | "signer-name" | "signer-minimum";
 export type FormationFieldErrors = { name: FormationFields; types: FormationErrorTypes[] };
 export type FieldStatus = {
   invalid: boolean;

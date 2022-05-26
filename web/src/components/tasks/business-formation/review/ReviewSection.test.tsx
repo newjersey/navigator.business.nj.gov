@@ -3,6 +3,7 @@ import {
   generateFormationFormData,
   generateUserData,
 } from "@/test/factories";
+import { markdownToText } from "@/test/helpers";
 import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFormData, FormationLegalType, ProfileData } from "@businessnjgovnavigator/shared";
@@ -142,5 +143,25 @@ describe("Formation - ReviewSection", () => {
   it("does not display provisions within review tab when they are empty", async () => {
     await renderSection({}, { provisions: [] });
     expect(screen.queryByTestId("provisions")).not.toBeInTheDocument();
+  });
+
+  it("displays different titles when legalStructure is a ForProfit Corporation", async () => {
+    await renderSection({ legalStructureId: "c-corporation" }, {});
+    expect(
+      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPageDirectorsHeader))
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPageIncorporatorsHeader))
+    ).toBeInTheDocument();
+  });
+
+  it("displays different titles when legalStructure is an llc", async () => {
+    await renderSection({ legalStructureId: "limited-liability-company" }, {});
+    expect(
+      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPageMembersHeader))
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPageSignaturesHeader))
+    ).toBeInTheDocument();
   });
 });

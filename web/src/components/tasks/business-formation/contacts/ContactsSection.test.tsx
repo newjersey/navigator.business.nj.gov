@@ -1,8 +1,7 @@
 import {
+  generateFormationAddress,
   generateFormationDisplayContent,
   generateFormationFormData,
-  generateFormationMember,
-  generateFormationSigner,
   generateMunicipality,
   generateUser,
   generateUserData,
@@ -18,6 +17,7 @@ import { currentUserData, userDataUpdatedNTimes } from "@/test/mock/withStateful
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
+  createEmptyFormationAddress,
   FormationFormData,
   FormationLegalType,
   ProfileData,
@@ -87,35 +87,35 @@ describe("Formation - ContactsSection", () => {
       const formationFormData = generateFormationFormData(
         {
           members: [],
-          signer: {
-            name: `signer 1`,
-            signature: true,
-          },
-          additionalSigners: [
-            {
+          signers: [
+            generateFormationAddress({
+              name: `signer 1`,
+              signature: true,
+            }),
+            generateFormationAddress({
               name: `signer 2`,
               signature: true,
-            },
-            {
+            }),
+            generateFormationAddress({
               name: `signer 3`,
               signature: true,
-            },
+            }),
           ],
         },
         legalStructureId
       );
 
       const page = await getPageHelper({ legalStructureId }, formationFormData);
+      expect(screen.queryByTestId("addresses-members")).not.toBeInTheDocument();
 
-      expect(screen.queryByTestId("members")).not.toBeInTheDocument();
-      expect(page.getInputElementByLabel("Signer").value).toBe("signer 1");
-      expect(page.getInputElementByLabel("Additional signers 0").value).toBe("signer 2");
-      expect(page.getInputElementByLabel("Additional signers 1").value).toBe("signer 3");
+      expect(page.getInputElementByLabel("Signer 0").value).toBe("signer 1");
+      expect(page.getInputElementByLabel("Signer 1").value).toBe("signer 2");
+      expect(page.getInputElementByLabel("Signer 2").value).toBe("signer 3");
     });
   });
 
-  describe("when llc", () => {
-    const legalStructureId = "limited-liability-company";
+  describe("when corp", () => {
+    const legalStructureId = "s-corporation";
 
     it("auto-fills fields from userData if it exists", async () => {
       const formationFormData = generateFormationFormData(
@@ -128,21 +128,20 @@ describe("Formation - ContactsSection", () => {
               addressLine2: "Office of the President",
               addressState: "District of Columbia",
               addressZipCode: "20500",
+              signature: false,
             },
           ],
-          signer: {
-            name: `signer 1`,
-            signature: true,
-          },
-          additionalSigners: [
+          signers: [
             {
-              name: `signer 2`,
+              name: "Donald Trump",
+              addressCity: "Miami",
+              addressLine1: "160 Redneck Ave NW",
+              addressLine2: "Office of Whatever",
+              addressState: "Florida",
+              addressZipCode: "20501",
               signature: true,
             },
-            {
-              name: `signer 3`,
-              signature: true,
-            },
+            generateFormationAddress({ signature: false }),
           ],
         },
         legalStructureId
@@ -150,7 +149,7 @@ describe("Formation - ContactsSection", () => {
 
       const page = await getPageHelper({ legalStructureId }, formationFormData);
 
-      expect(screen.getByTestId("members")).toBeInTheDocument();
+      expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
       expect(
         screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
       ).not.toBeInTheDocument();
@@ -170,14 +169,232 @@ describe("Formation - ContactsSection", () => {
       expect(
         screen.getByText(formationFormData.members[0].addressZipCode, { exact: false })
       ).toBeInTheDocument();
-      expect(page.getInputElementByLabel("Signer").value).toBe("signer 1");
-      expect(page.getInputElementByLabel("Additional signers 0").value).toBe("signer 2");
-      expect(page.getInputElementByLabel("Additional signers 1").value).toBe("signer 3");
+
+      expect(screen.getByTestId("addresses-signers")).toBeInTheDocument();
+
+      expect(
+        screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+      ).not.toBeInTheDocument();
+      expect(screen.getByText(formationFormData.signers[0].name)).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressLine1, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressLine2, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressCity, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressState, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressZipCode, { exact: false })
+      ).toBeInTheDocument();
+      expect(page.getSignerBox(0)).toEqual(true);
+      expect(page.getSignerBox(1)).toEqual(false);
+    });
+
+    it("edits members", async () => {
+      const members = [...Array(2)].map(() => generateFormationAddress({}));
+      const page = await getPageHelper({ legalStructureId }, { members });
+
+      expect(
+        screen.getByText(Config.businessFormationDefaults.directorsNewButtonText, { exact: false })
+      ).toBeInTheDocument();
+      const nameTd = screen.getByText(members[1].name, { exact: false });
+      expect(nameTd).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState} ${members[1].addressZipCode}`,
+          { exact: false }
+        )
+      ).toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
+      expect(page.getInputElementByLabel("Address name").value).toBe(members[1].name);
+      expect(page.getInputElementByLabel("Address line1").value).toBe(members[1].addressLine1);
+      expect(page.getInputElementByLabel("Address line2").value).toBe(members[1].addressLine2);
+      expect(page.getInputElementByLabel("Address city").value).toBe(members[1].addressCity);
+      expect(page.getInputElementByLabel("Address state").value).toBe(members[1].addressState);
+      expect(page.getInputElementByLabel("Address zip code").value).toBe(members[1].addressZipCode);
+      const newName = "Joe Biden";
+      page.fillText("Address name", newName);
+      page.clickAddressSubmit();
+      await waitFor(() => {
+        expect(
+          screen.getByText(Config.businessFormationDefaults.directorsSuccessTextBody, { exact: false })
+        ).toBeInTheDocument();
+      });
+      expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
+      await page.submitContactsTab();
+      const newMembers = currentUserData().formationData.formationFormData.members;
+      expect(newMembers.length).toEqual(2);
+      expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
+    });
+
+    describe(`signers for ${legalStructureId}`, () => {
+      it("adds signer", async () => {
+        const page = await getPageHelper({ legalStructureId }, { signers: [] });
+        expect(
+          screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
+        ).toBeInTheDocument();
+        page.clickAddNewSigner();
+        const signer = generateFormationAddress({ name: "Red Skull" });
+        page.fillText("Address name", signer.name);
+        page.fillText("Address line1", signer.addressLine1);
+        page.fillText("Address line2", signer.addressLine2);
+        page.fillText("Address city", signer.addressCity);
+        page.fillText("Address state", signer.addressState);
+        page.fillText("Address zip code", signer.addressZipCode);
+        page.clickAddressSubmit();
+        page.checkSignerBox(0);
+        await page.submitContactsTab();
+        expect(currentUserData().formationData.formationFormData.signers).toEqual([
+          { ...signer, signature: true },
+        ]);
+      });
+
+      it("edits signers", async () => {
+        const signers = [...Array(2)].map(() => generateFormationAddress({ signature: true }));
+        const page = await getPageHelper({ legalStructureId }, { signers });
+        const nameTd = screen.getByText(signers[1].name, { exact: false });
+        expect(nameTd).toBeInTheDocument();
+        expect(
+          screen.getByText(
+            `${signers[1].addressLine1}, ${signers[1].addressLine2}, ${signers[1].addressCity}, ${signers[1].addressState} ${signers[1].addressZipCode}`,
+            { exact: false }
+          )
+        ).toBeInTheDocument();
+        // eslint-disable-next-line testing-library/no-node-access
+        fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
+        expect(page.getInputElementByLabel("Address name").value).toBe(signers[1].name);
+        expect(page.getInputElementByLabel("Address line1").value).toBe(signers[1].addressLine1);
+        expect(page.getInputElementByLabel("Address line2").value).toBe(signers[1].addressLine2);
+        expect(page.getInputElementByLabel("Address city").value).toBe(signers[1].addressCity);
+        expect(page.getInputElementByLabel("Address state").value).toBe(signers[1].addressState);
+        expect(page.getInputElementByLabel("Address zip code").value).toBe(signers[1].addressZipCode);
+        const newName = "Joe Biden";
+        page.fillText("Address name", newName);
+        page.clickAddressSubmit();
+        await waitFor(() => {
+          expect(
+            screen.getByText(Config.businessFormationDefaults.incorporatorsSuccessTextBody, { exact: false })
+          ).toBeInTheDocument();
+        });
+        expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
+        await page.submitContactsTab();
+        const newSigners = currentUserData().formationData.formationFormData.signers;
+        expect(newSigners.length).toEqual(2);
+        expect(newSigners.findIndex((signer) => signer.name == newName)).toEqual(1);
+      });
+
+      it("deletes an additional signer", async () => {
+        const signers = [...Array(2)].map(() => generateFormationAddress({ signature: true }));
+        const page = await getPageHelper({ legalStructureId }, { signers });
+        const nameTd = screen.getByText(signers[1].name, { exact: false });
+        // eslint-disable-next-line testing-library/no-node-access
+        fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
+        await page.submitContactsTab();
+        expect(currentUserData().formationData.formationFormData.signers).toEqual([signers[0]]);
+      });
+
+      it("does not allow more than 10 signers", async () => {
+        const signers = Array(10).fill(generateFormationAddress({}));
+        await getPageHelper({ legalStructureId }, { signers });
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        ).not.toBeInTheDocument();
+      });
+
+      it("fires validations when signers do not sign correctly", async () => {
+        const signers = [generateFormationAddress({ name: "" })];
+        const page = await getPageHelper({ legalStructureId }, { signers });
+        await page.submitContactsTab(false);
+        const signerErrorText = () =>
+          screen.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
+        const signerCheckboxErrorText = () =>
+          screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
+        expect(signerErrorText()).toBeInTheDocument();
+        const nameTd = screen.getByText(signers[0].addressLine1, { exact: false });
+        // eslint-disable-next-line testing-library/no-node-access
+        fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
+        page.fillText("Address name", "Elrond");
+        page.clickAddressSubmit();
+        expect(signerErrorText()).not.toBeInTheDocument();
+        expect(signerCheckboxErrorText()).toBeInTheDocument();
+        page.checkSignerBox(0);
+        expect(signerCheckboxErrorText()).not.toBeInTheDocument();
+        await page.submitContactsTab();
+      });
+    });
+  });
+
+  describe("when llc", () => {
+    const legalStructureId = "limited-liability-company";
+
+    it("auto-fills fields from userData if it exists", async () => {
+      const formationFormData = generateFormationFormData(
+        {
+          members: [
+            {
+              name: "Joe Biden",
+              addressCity: "Washington",
+              addressLine1: "1600 Pennsylvania Ave NW",
+              addressLine2: "Office of the President",
+              addressState: "District of Columbia",
+              addressZipCode: "20500",
+              signature: false,
+            },
+          ],
+          signers: [
+            generateFormationAddress({
+              name: `signer 1`,
+              signature: true,
+            }),
+            generateFormationAddress({
+              name: `signer 2`,
+              signature: true,
+            }),
+            generateFormationAddress({
+              name: `signer 3`,
+              signature: true,
+            }),
+          ],
+        },
+        legalStructureId
+      );
+
+      const page = await getPageHelper({ legalStructureId }, formationFormData);
+
+      expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
+      expect(
+        screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+      ).not.toBeInTheDocument();
+      expect(screen.getByText(formationFormData.members[0].name)).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressLine1, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressLine2, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressCity, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressState, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.members[0].addressZipCode, { exact: false })
+      ).toBeInTheDocument();
+      expect(page.getInputElementByLabel("Signer 0").value).toBe("signer 1");
+      expect(page.getInputElementByLabel("Signer 1").value).toBe("signer 2");
+      expect(page.getInputElementByLabel("Signer 2").value).toBe("signer 3");
     });
 
     describe(`members for ${legalStructureId}`, () => {
       it("edits members", async () => {
-        const members = [...Array(2)].map(() => generateFormationMember({}));
+        const members = [...Array(2)].map(() => generateFormationAddress({}));
         const page = await getPageHelper({ legalStructureId }, { members });
 
         expect(
@@ -193,15 +410,15 @@ describe("Formation - ContactsSection", () => {
         ).toBeInTheDocument();
         // eslint-disable-next-line testing-library/no-node-access
         fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
-        expect(page.getInputElementByLabel("Member name").value).toBe(members[1].name);
-        expect(page.getInputElementByLabel("Member address line1").value).toBe(members[1].addressLine1);
-        expect(page.getInputElementByLabel("Member address line2").value).toBe(members[1].addressLine2);
-        expect(page.getInputElementByLabel("Member address city").value).toBe(members[1].addressCity);
-        expect(page.getInputElementByLabel("Member address state").value).toBe(members[1].addressState);
-        expect(page.getInputElementByLabel("Member address zip code").value).toBe(members[1].addressZipCode);
+        expect(page.getInputElementByLabel("Address name").value).toBe(members[1].name);
+        expect(page.getInputElementByLabel("Address line1").value).toBe(members[1].addressLine1);
+        expect(page.getInputElementByLabel("Address line2").value).toBe(members[1].addressLine2);
+        expect(page.getInputElementByLabel("Address city").value).toBe(members[1].addressCity);
+        expect(page.getInputElementByLabel("Address state").value).toBe(members[1].addressState);
+        expect(page.getInputElementByLabel("Address zip code").value).toBe(members[1].addressZipCode);
         const newName = "Joe Biden";
-        page.fillText("Member name", newName);
-        page.clickMemberSubmit();
+        page.fillText("Address name", newName);
+        page.clickAddressSubmit();
         await waitFor(() => {
           expect(
             screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
@@ -215,7 +432,7 @@ describe("Formation - ContactsSection", () => {
       });
 
       it("is able to delete members", async () => {
-        const members = [...Array(2)].map(() => generateFormationMember({}));
+        const members = [...Array(2)].map(() => generateFormationAddress({}));
         const page = await getPageHelper({ legalStructureId }, { members });
 
         const nameTd = screen.getByText(members[1].name, { exact: false });
@@ -243,21 +460,21 @@ describe("Formation - ContactsSection", () => {
             businessAddressZipCode: "07601",
           }
         );
-        await page.openMemberModal();
+        await page.openAddressModal("members");
 
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-        expect(page.getInputElementByLabel("Member name").value).toBe("John Smith");
-        expect(page.getInputElementByLabel("Member address line1").value).toBe("123 business address");
-        expect(page.getInputElementByLabel("Member address line2").value).toBe("business suite 201");
-        expect(page.getInputElementByLabel("Member address city").value).toBe("Hampton");
-        expect(page.getInputElementByLabel("Member address state").value).toBe("NJ");
-        expect(page.getInputElementByLabel("Member address zip code").value).toBe("07601");
+        expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
+        expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
+        expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
+        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
+        expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       });
 
       it("shows validation on submit", async () => {
         const page = await getPageHelper({ legalStructureId }, {});
-        await page.openMemberModal();
-        page.clickMemberSubmit();
+        await page.openAddressModal("members");
+        page.clickAddressSubmit();
 
         expect(
           screen.getByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
@@ -274,7 +491,7 @@ describe("Formation - ContactsSection", () => {
         expect(
           screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
         ).toBeInTheDocument();
-        await page.fillMemberModal({});
+        await page.fillAddressModal({});
         expect(
           screen.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
         ).not.toBeInTheDocument();
@@ -290,7 +507,7 @@ describe("Formation - ContactsSection", () => {
         expect(
           screen.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
         ).not.toBeInTheDocument();
-        page.clickMemberSubmit();
+        page.clickAddressSubmit();
         await waitFor(() => {
           expect(
             screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
@@ -306,22 +523,22 @@ describe("Formation - ContactsSection", () => {
             contactLastName: "Smith",
           }
         );
-        await page.openMemberModal();
+        await page.openAddressModal("members");
 
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-        expect(page.getInputElementByLabel("Member name").value).toBe("John Smith");
-        fireEvent.click(screen.getByText(Config.businessFormationDefaults.membersModalBackButtonText));
+        expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
+        fireEvent.click(screen.getByText(Config.businessFormationDefaults.addressModalBackButtonText));
         await waitFor(() =>
           expect(
-            screen.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
+            screen.queryByText(Config.businessFormationDefaults.addressModalBackButtonText)
           ).not.toBeInTheDocument()
         );
-        await page.openMemberModal();
-        expect(page.getInputElementByLabel("Member name").value).toBe("");
+        await page.openAddressModal("members");
+        expect(page.getInputElementByLabel("Address name").value).toBe("");
       });
 
       it("does not add more than 10 members", async () => {
-        const nineMembers = Array(9).fill(generateFormationMember({}));
+        const nineMembers = Array(9).fill(generateFormationAddress({}));
         const page = await getPageHelper(
           { legalStructureId },
           {
@@ -333,13 +550,13 @@ describe("Formation - ContactsSection", () => {
           screen.getByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).toBeInTheDocument();
 
-        await page.openMemberModal();
+        await page.openAddressModal("members");
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-        page.clickMemberSubmit();
+        page.clickAddressSubmit();
 
         await waitFor(() =>
           expect(
-            screen.queryByText(Config.businessFormationDefaults.membersModalBackButtonText)
+            screen.queryByText(Config.businessFormationDefaults.addressModalBackButtonText)
           ).not.toBeInTheDocument()
         );
         expect(
@@ -352,108 +569,127 @@ describe("Formation - ContactsSection", () => {
       it("renders mobile view of members table", async () => {
         setDesktopScreen(false);
         const page = await getPageHelper({ legalStructureId }, { members: [] });
-        await page.fillAndSubmitMemberModal({});
-        expect(screen.getByTestId("members-table-mobile")).toBeInTheDocument();
+        await page.fillAndSubmitAddressModal({}, "members");
+        expect(screen.getByTestId("addresses-members-table-mobile")).toBeInTheDocument();
       });
     });
-  });
-  describe("signers", () => {
-    it("adds additional signers", async () => {
-      const page = await getPageHelper({}, { additionalSigners: [] });
-      page.clickAddNewSigner();
-      page.fillText("Additional signers 0", "Red Skull");
-      page.checkSignerBox(0);
+    describe(`signers for ${legalStructureId}`, () => {
+      it("adds additional signer", async () => {
+        const page = await getPageHelper({ legalStructureId }, { signers: [] });
+        expect(
+          screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
+        ).toBeInTheDocument();
+        page.clickAddNewSigner();
+        page.fillText("Signer 0", "Red Skull");
+        page.checkSignerBox(0);
 
-      page.clickAddNewSigner();
-      page.fillText("Additional signers 1", "V");
-      page.checkSignerBox(1);
+        page.clickAddNewSigner();
+        page.fillText("Signer 1", "V");
+        page.checkSignerBox(1);
 
-      await page.submitContactsTab();
-      expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual([
-        { name: "Red Skull", signature: true },
-        { name: "V", signature: true },
-      ]);
-    });
-
-    it("deletes an additional signer", async () => {
-      const page = await getPageHelper({}, { additionalSigners: [] });
-      page.clickAddNewSigner();
-      page.fillText("Additional signers 0", "Red Skull");
-      page.checkSignerBox(0);
-
-      page.clickAddNewSigner();
-      page.fillText("Additional signers 1", "V");
-      page.checkSignerBox(1);
-
-      fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
-
-      await page.submitContactsTab();
-      expect(currentUserData().formationData.formationFormData.additionalSigners).toEqual([
-        {
-          name: "V",
-          signature: true,
-        },
-      ]);
-    });
-
-    it("does not add more than 9 additional signers", async () => {
-      const eightSigners = Array(8).fill(generateFormationSigner({}));
-      const page = await getPageHelper({}, { additionalSigners: eightSigners });
-
-      const addNewSignerButton = () =>
-        screen.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false });
-
-      expect(addNewSignerButton()).toBeInTheDocument();
-      page.clickAddNewSigner();
-      expect(addNewSignerButton()).not.toBeInTheDocument();
-    });
-
-    it("fires validations when signers do not sign correctly", async () => {
-      const page = await getPageHelper({}, { signer: { name: "", signature: false }, additionalSigners: [] });
-      await page.submitContactsTab(false);
-      const signerErrorText = () =>
-        screen.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
-      const signerCheckboxErrorText = () =>
-        screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
-
-      expect(signerErrorText()).toBeInTheDocument();
-      page.fillText("Signer", "Elrond");
-      expect(signerErrorText()).not.toBeInTheDocument();
-      expect(signerCheckboxErrorText()).toBeInTheDocument();
-      page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
-      expect(signerCheckboxErrorText()).not.toBeInTheDocument();
-      await page.submitContactsTab();
-    });
-
-    describe("required fields", () => {
-      it("signer name", async () => {
-        const page = await getPageHelper({}, { signer: { name: "", signature: true } });
-        await page.submitContactsTab(false);
-        expect(userDataUpdatedNTimes()).toEqual(2);
-      });
-
-      it("signer signature", async () => {
-        const page = await getPageHelper({}, { signer: { name: "asdf", signature: false } });
-        await page.submitContactsTab(false);
-        expect(userDataUpdatedNTimes()).toEqual(2);
-      });
-
-      it("additional signer signature", async () => {
-        const page = await getPageHelper({}, { additionalSigners: [{ name: "asdf", signature: false }] });
-        await page.submitContactsTab(false);
-        expect(userDataUpdatedNTimes()).toEqual(2);
-      });
-
-      it("additional signer name", async () => {
-        const page = await getPageHelper({}, { additionalSigners: [{ name: "", signature: true }] });
-        await page.submitContactsTab(false);
-        expect(userDataUpdatedNTimes()).toEqual(2);
-      });
-
-      it("does not require additional signer", async () => {
-        const page = await getPageHelper({}, { additionalSigners: [] });
         await page.submitContactsTab();
-        expect(userDataUpdatedNTimes()).toEqual(3);
+        expect(currentUserData().formationData.formationFormData.signers).toEqual([
+          { ...createEmptyFormationAddress(), name: "Red Skull", signature: true },
+          { ...createEmptyFormationAddress(), name: "V", signature: true },
+        ]);
+      });
+
+      it("deletes an additional signer", async () => {
+        const page = await getPageHelper({ legalStructureId }, { signers: [] });
+        page.clickAddNewSigner();
+        page.fillText("Signer 0", "Red Skull");
+        page.checkSignerBox(0);
+
+        page.clickAddNewSigner();
+        page.fillText("Signer 1", "V");
+        page.checkSignerBox(1);
+
+        fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
+
+        await page.submitContactsTab();
+        expect(currentUserData().formationData.formationFormData.signers).toEqual([
+          { ...createEmptyFormationAddress(), name: "Red Skull", signature: true },
+        ]);
+      });
+
+      it("does not add more than 9 additional signers", async () => {
+        const signers = Array(9).fill(generateFormationAddress({}));
+        const page = await getPageHelper({ legalStructureId }, { signers });
+
+        expect(
+          screen.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        ).toBeInTheDocument();
+        page.clickAddNewSigner();
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
+        ).not.toBeInTheDocument();
+      });
+
+      it("fires validations when signers do not sign correctly", async () => {
+        const page = await getPageHelper(
+          { legalStructureId },
+          { signers: [generateFormationAddress({ name: "" })] }
+        );
+        await page.submitContactsTab(false);
+        const signerErrorText = () =>
+          screen.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
+        const signerCheckboxErrorText = () =>
+          screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
+
+        expect(signerErrorText()).toBeInTheDocument();
+        page.fillText("Signer 0", "Elrond");
+        expect(signerErrorText()).not.toBeInTheDocument();
+        expect(signerCheckboxErrorText()).toBeInTheDocument();
+        page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
+        expect(signerCheckboxErrorText()).not.toBeInTheDocument();
+        await page.submitContactsTab();
+      });
+
+      describe("required fields", () => {
+        it("signer name", async () => {
+          const page = await getPageHelper(
+            { legalStructureId },
+            { signers: [generateFormationAddress({ name: "", signature: true })] }
+          );
+          await page.submitContactsTab(false);
+          expect(userDataUpdatedNTimes()).toEqual(2);
+        });
+
+        it("signer signature", async () => {
+          const page = await getPageHelper(
+            { legalStructureId },
+            { signers: [generateFormationAddress({ name: "asdf", signature: false })] }
+          );
+          await page.submitContactsTab(false);
+          expect(userDataUpdatedNTimes()).toEqual(2);
+        });
+
+        it("additional signer signature", async () => {
+          const page = await getPageHelper(
+            { legalStructureId },
+            { signers: [generateFormationAddress({ name: "asdf", signature: false })] }
+          );
+          await page.submitContactsTab(false);
+          expect(userDataUpdatedNTimes()).toEqual(2);
+        });
+
+        it("additional signer name", async () => {
+          const page = await getPageHelper(
+            { legalStructureId },
+            { signers: [generateFormationAddress({ name: "", signature: true })] }
+          );
+          await page.submitContactsTab(false);
+          expect(userDataUpdatedNTimes()).toEqual(2);
+        });
+
+        it("does not require additional signer", async () => {
+          const page = await getPageHelper(
+            { legalStructureId },
+            { signers: [generateFormationAddress({ signature: true })] }
+          );
+          await page.submitContactsTab();
+          expect(userDataUpdatedNTimes()).toEqual(3);
+        });
       });
     });
   });

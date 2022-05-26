@@ -2,8 +2,8 @@ import { BusinessFormation } from "@/components/tasks/business-formation/Busines
 import * as api from "@/lib/api-client/apiClient";
 import { FormationDisplayContentMap, NameAvailability } from "@/lib/types/types";
 import {
+  generateFormationAddress,
   generateFormationData,
-  generateFormationMember,
   generateMunicipality,
   generateNameAvailability,
   generateProfileData,
@@ -18,9 +18,9 @@ import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   DateObject,
+  FormationAddress,
   FormationLegalType,
   FormationLegalTypes,
-  FormationMember,
   FormationSubmitResponse,
   Municipality,
   ProfileData,
@@ -116,17 +116,19 @@ export type FormationPageHelpers = {
   selectByText: (label: string, value: string) => void;
   selectCheckbox: (label: string) => void;
   clickAddNewSigner: () => void;
+  getSignerBox: (index: number) => boolean;
   checkSignerBox: (index: number) => void;
-  clickMemberSubmit: () => void;
-  openMemberModal: () => Promise<void>;
-  fillMemberModal: (overrides: Partial<FormationMember>) => Promise<void>;
-  fillAndSubmitMemberModal: (overrides: Partial<FormationMember>) => Promise<void>;
+  clickAddressSubmit: () => void;
+  openAddressModal: (fieldName: string) => Promise<void>;
+  fillAddressModal: (overrides: Partial<FormationAddress>) => Promise<void>;
+  fillAndSubmitAddressModal: (overrides: Partial<FormationAddress>, fieldName: string) => Promise<void>;
   clickSubmit: () => Promise<void>;
   selectDate: (value: DateObject) => void;
 };
 
 export const createFormationPageHelpers = (): FormationPageHelpers => {
   const mockApi = api as jest.Mocked<typeof api>;
+
   const fillText = (label: string, value: string) => {
     const item = screen.getByLabelText(label);
     fireEvent.change(item, { target: { value: value } });
@@ -213,45 +215,50 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     );
   };
 
+  const getSignerBox = (index: number): boolean => {
+    const additionalSigner = within(screen.getByTestId(`signers-${index}`));
+    return (
+      additionalSigner.getByLabelText(
+        `${Config.businessFormationDefaults.signatureColumnLabel}*`
+      ) as HTMLInputElement
+    ).checked;
+  };
+
   const checkSignerBox = (index: number): void => {
-    const additionalSigner = within(screen.getByTestId(`additional-signers-${index}`));
+    const additionalSigner = within(screen.getByTestId(`signers-${index}`));
     fireEvent.click(
       additionalSigner.getByLabelText(`${Config.businessFormationDefaults.signatureColumnLabel}*`)
     );
   };
 
-  const clickMemberSubmit = (): void => {
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.membersModalNextButtonText));
+  const clickAddressSubmit = (): void => {
+    fireEvent.click(screen.getByTestId("modal-button-primary"));
   };
 
-  const openMemberModal = async (): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.membersNewButtonText));
+  const openAddressModal = async (fieldName = "members"): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`addresses-${fieldName}-newButtonText`));
     await waitFor(() => {
-      expect(
-        screen.getByText(Config.businessFormationDefaults.membersModalNextButtonText)
-      ).toBeInTheDocument();
+      expect(screen.getByTestId(`${fieldName}-address-modal`)).toBeInTheDocument();
     });
   };
 
-  const fillAndSubmitMemberModal = async (overrides: Partial<FormationMember>) => {
-    await openMemberModal();
-    await fillMemberModal(overrides);
-    clickMemberSubmit();
+  const fillAndSubmitAddressModal = async (overrides: Partial<FormationAddress>, fieldName: string) => {
+    await openAddressModal(fieldName);
+    await fillAddressModal(overrides);
+    clickAddressSubmit();
     await waitFor(() => {
-      expect(
-        screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
-      ).toBeInTheDocument();
+      expect(screen.queryByTestId(`${fieldName}-address-modal`)).not.toBeInTheDocument();
     });
   };
 
-  const fillMemberModal = async (overrides: Partial<FormationMember>): Promise<void> => {
-    const member = generateFormationMember({ addressState: generateStateInput(), ...overrides });
-    fillText("Member name", member.name);
-    fillText("Member address line1", member.addressLine1);
-    fillText("Member address line2", member.addressLine2);
-    fillText("Member address city", member.addressCity);
-    fillText("Member address state", member.addressState);
-    fillText("Member address zip code", member.addressZipCode);
+  const fillAddressModal = async (overrides: Partial<FormationAddress>): Promise<void> => {
+    const member = generateFormationAddress({ addressState: generateStateInput(), ...overrides });
+    fillText("Address name", member.name);
+    fillText("Address line1", member.addressLine1);
+    fillText("Address line2", member.addressLine2);
+    fillText("Address city", member.addressCity);
+    fillText("Address state", member.addressState);
+    fillText("Address zip code", member.addressZipCode);
   };
 
   const clickSubmit = async (): Promise<void> => {
@@ -280,10 +287,11 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     selectCheckbox,
     clickAddNewSigner,
     checkSignerBox,
-    clickMemberSubmit,
-    openMemberModal,
-    fillMemberModal,
-    fillAndSubmitMemberModal,
+    getSignerBox,
+    clickAddressSubmit,
+    openAddressModal,
+    fillAddressModal,
+    fillAndSubmitAddressModal,
     clickSubmit,
     selectDate,
   };

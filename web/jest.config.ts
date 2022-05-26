@@ -30,4 +30,6 @@ export default async (): Promise<Config.InitialOptions> => {
 
 process.env = Object.assign(process.env, {
   FEATURE_BUSINESS_LLP: "true",
+  FEATURE_BUSINESS_SCORP: "true",
+  FEATURE_BUSINESS_CCORP: "true",
 });
