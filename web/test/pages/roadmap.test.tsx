@@ -304,6 +304,7 @@ describe("roadmap page", () => {
       useMockProfileData({
         legalStructureId: "sole-proprietorship",
         entityId: "1234567890",
+        businessPersona: "STARTING",
       });
       renderRoadmapPage({});
       expect(screen.queryByTestId("mini-profile-entityId")).not.toBeInTheDocument();
@@ -597,7 +598,7 @@ describe("roadmap page", () => {
     it("switches user to oscar and sends to dashboard", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "limited-liability-partnership",
           dateOfFormation: undefined,
           sectorId: undefined,
@@ -631,7 +632,7 @@ describe("roadmap page", () => {
             sectorId: "clean-energy",
             ownershipTypeIds: ["veteran-owned"],
             existingEmployees: "1234567",
-            hasExistingBusiness: true,
+            businessPersona: "OWNING",
           },
         });
       });
@@ -643,7 +644,7 @@ describe("roadmap page", () => {
       const dateOfFormation = date.format("YYYY-MM-DD");
       const userData = generateUserData({
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "limited-liability-partnership",
           businessName: "A Test Business",
           dateOfFormation,
@@ -677,7 +678,7 @@ describe("roadmap page", () => {
             sectorId: "clean-energy",
             ownershipTypeIds: ["veteran-owned"],
             existingEmployees: "1234567",
-            hasExistingBusiness: true,
+            businessPersona: "OWNING",
           },
         });
       });
@@ -694,7 +695,7 @@ describe("roadmap page", () => {
       const userData = generateUserData({
         taxFilingData: taxData,
         profileData: generateProfileData({
-          hasExistingBusiness: true,
+          businessPersona: "OWNING",
           legalStructureId: "limited-liability-partnership",
           dateOfFormation,
           sectorId: "clean-energy",
@@ -721,7 +722,7 @@ describe("roadmap page", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           industryId: "generic",
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           sectorId: undefined,
         }),
       });
@@ -736,7 +737,7 @@ describe("roadmap page", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           industryId: "restaurant",
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           sectorId: undefined,
         }),
       });
@@ -750,7 +751,7 @@ describe("roadmap page", () => {
     it("fires validations when clicking submit", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "limited-liability-partnership",
           dateOfFormation: undefined,
           sectorId: undefined,
@@ -775,7 +776,7 @@ describe("roadmap page", () => {
     it("hides date of formation if legal structure does not require public filing", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "general-partnership",
         }),
       });
@@ -790,7 +791,7 @@ describe("roadmap page", () => {
     it("disables date of formation if formation getFiling success", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "limited-liability-partnership",
           dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
         }),
@@ -814,7 +815,7 @@ describe("roadmap page", () => {
     it("does not display businessName if formation getFiling success", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           businessName: "A Test Business 2",
           legalStructureId: "limited-liability-partnership",
           dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
@@ -834,7 +835,7 @@ describe("roadmap page", () => {
     it("display businessName if formation is not set", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           businessName: "A Test Business 2",
           legalStructureId: "limited-liability-partnership",
           dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),

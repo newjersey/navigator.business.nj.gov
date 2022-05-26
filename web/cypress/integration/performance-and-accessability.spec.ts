@@ -43,7 +43,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
     describe("Step 1", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
-        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.selectBusinessPersona("STARTING");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -53,7 +53,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.selectBusinessPersona("STARTING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -67,7 +67,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.selectBusinessPersona("STARTING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -85,7 +85,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.selectBusinessPersona("STARTING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -107,7 +107,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.selectBusinessPersona("STARTING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -135,7 +135,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(false);
+        onOnboardingPage.selectBusinessPersona("STARTING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -173,7 +173,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.selectBusinessPersona("OWNING");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -184,7 +184,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.selectBusinessPersona("OWNING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -200,7 +200,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.selectBusinessPersona("OWNING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -220,7 +220,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.selectBusinessPersona("OWNING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
@@ -248,7 +248,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
-        onOnboardingPage.selectNewBusiness(true);
+        onOnboardingPage.selectBusinessPersona("OWNING");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");

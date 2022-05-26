@@ -30,7 +30,7 @@ const Config = getMergedConfig();
 const generateTestUserData = (overrides: Partial<ProfileData>) =>
   generateUserData({
     profileData: generateProfileData({
-      hasExistingBusiness: false,
+      businessPersona: "STARTING",
       ...overrides,
     }),
     formProgress: "UNSTARTED",
@@ -75,7 +75,7 @@ describe("onboarding - starting a business", () => {
       expect(
         screen.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
       ).toBeInTheDocument();
-      page.chooseRadio("has-existing-business-false");
+      page.chooseRadio("business-persona-starting");
       await page.visitStep(2);
       expect(
         screen.getByText(
@@ -86,7 +86,7 @@ describe("onboarding - starting a business", () => {
 
     it("does not display the legal structure dropdown", async () => {
       const { page } = renderPage({});
-      page.chooseRadio("has-existing-business-false");
+      page.chooseRadio("business-persona-starting");
       expect(screen.queryByLabelText("Legal structure")).not.toBeInTheDocument();
     });
   });
@@ -168,7 +168,7 @@ describe("onboarding - starting a business", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
 
     await page.visitStep(2);
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
@@ -193,7 +193,7 @@ describe("onboarding - starting a business", () => {
   it("shows correct next-button text on each page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
@@ -225,7 +225,7 @@ describe("onboarding - starting a business", () => {
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({
       profileData: generateProfileData({
-        hasExistingBusiness: false,
+        businessPersona: "STARTING",
         businessName: "Applebees",
         industryId: "cosmetology",
         legalStructureId: "c-corporation",
@@ -262,9 +262,9 @@ describe("onboarding - starting a business", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
 
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
-    expect(currentUserData().profileData.hasExistingBusiness).toEqual(false);
+    expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
 
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep(3);
@@ -290,7 +290,7 @@ describe("onboarding - starting a business", () => {
       profileData: {
         ...initialUserData.profileData,
         initialOnboardingFlow: "STARTING",
-        hasExistingBusiness: false,
+        businessPersona: "STARTING",
         businessName: "",
         industryId: "e-commerce",
         sectorId: "retail-trade-and-ecommerce",
@@ -332,7 +332,7 @@ describe("onboarding - starting a business", () => {
 
   it("removes required fields error when user goes back", async () => {
     const { page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     page.selectByText("Industry", "Any Other Business Type");
     await page.visitStep(3);
@@ -344,6 +344,6 @@ describe("onboarding - starting a business", () => {
   });
 
   describe("validates self-reg step", () => {
-    runSelfRegPageTests({ hasExistingBusiness: false, selfRegPage: "5" });
+    runSelfRegPageTests({ businessPersona: "STARTING", selfRegPage: "5" });
   });
 });

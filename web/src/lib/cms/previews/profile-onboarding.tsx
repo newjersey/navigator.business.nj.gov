@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { OnboardingHasExistingBusiness } from "@/components/onboarding/OnboardingHasExistingBusiness";
+import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import merge from "lodash.merge";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -32,21 +33,13 @@ const ProfilePreviewOnboarding = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 
-  const getMetadataFromSlug = (slug: string): { profileTab: string; hasExistingBusiness: boolean } => {
-    const [, tab, persona] = slug.split("-");
-    return {
-      profileTab: tab,
-      hasExistingBusiness: persona === "oscar",
-    };
-  };
-
-  const { hasExistingBusiness } = getMetadataFromSlug(props.entry.toJS().slug);
+  const { businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <OnboardingHasExistingBusiness />
-        {!hasExistingBusiness && (
+        <OnboardingBusinessPersona />
+        {businessPersona === "STARTING" && (
           <>
             <hr className="margin-y-4" />
             <OnboardingLegalStructure />

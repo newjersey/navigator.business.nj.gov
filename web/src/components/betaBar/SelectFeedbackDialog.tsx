@@ -16,12 +16,13 @@ export const SelectFeedbackDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
   const { userData } = useUserData();
 
   const getFeedbackLink = (): string => {
-    if (userData?.profileData.hasExistingBusiness) {
-      return Config.betaBar.betaFormLinkOwning;
-    } else if (!userData?.profileData.hasExistingBusiness) {
-      return Config.betaBar.betaFormLinkStarting;
-    } else {
-      return "";
+    switch (userData?.profileData.businessPersona) {
+      case "OWNING":
+        return Config.betaBar.betaFormLinkOwning;
+      case "STARTING":
+        return Config.betaBar.betaFormLinkStarting;
+      default:
+        return "";
     }
   };
 

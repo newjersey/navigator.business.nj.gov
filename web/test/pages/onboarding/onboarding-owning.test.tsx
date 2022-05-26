@@ -41,7 +41,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>) =>
 const generateCCorpTestUserData = (overrides: Partial<ProfileData>) =>
   generateTestUserData({
     ...overrides,
-    hasExistingBusiness: true,
+    businessPersona: "OWNING",
     legalStructureId: "c-corporation",
   });
 
@@ -66,7 +66,7 @@ describe("onboarding - owning a business", () => {
 
     it("uses standard template eval for step 2 label", () => {
       const userData = generateTestUserData({
-        hasExistingBusiness: true,
+        businessPersona: "OWNING",
         legalStructureId: "sole-proprietorship",
       });
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -80,7 +80,7 @@ describe("onboarding - owning a business", () => {
 
     it("displays the legal structure dropdown", () => {
       const { page } = renderPage({});
-      page.chooseRadio("has-existing-business-true");
+      page.chooseRadio("business-persona-owning");
       expect(screen.getByLabelText("Legal structure")).toBeInTheDocument();
     });
 
@@ -94,7 +94,7 @@ describe("onboarding - owning a business", () => {
 
     it("allows user to move from Step 1 if you have selected whether you own a business", async () => {
       const { page } = renderPage({});
-      page.chooseRadio("has-existing-business-true");
+      page.chooseRadio("business-persona-owning");
       page.selectByValue("Legal structure", "c-corporation");
       await page.visitStep(2);
       expect(screen.queryByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).not.toBeInTheDocument();
@@ -104,7 +104,7 @@ describe("onboarding - owning a business", () => {
   describe("page 2", () => {
     it("hides date of formation and entity id if legal structure  does not require Public Filing", () => {
       const userData = generateTestUserData({
-        hasExistingBusiness: true,
+        businessPersona: "OWNING",
         legalStructureId: "sole-proprietorship",
       });
       useMockRouter({ isReady: true, query: { page: "2" } });
@@ -295,7 +295,7 @@ describe("onboarding - owning a business", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
 
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "c-corporation");
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
 
@@ -320,7 +320,7 @@ describe("onboarding - owning a business", () => {
   it("shows correct next-button text on each page if user requires legal filings", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "c-corporation");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
@@ -358,7 +358,7 @@ describe("onboarding - owning a business", () => {
   it("shows correct next-button text on each page if legal structure  does not require Public Filing", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "sole-proprietorship");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
@@ -392,10 +392,10 @@ describe("onboarding - owning a business", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
 
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep(2);
-    expect(currentUserData().profileData.hasExistingBusiness).toEqual(true);
+    expect(currentUserData().profileData.businessPersona).toEqual("OWNING");
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
     await page.visitStep(3);
@@ -416,7 +416,7 @@ describe("onboarding - owning a business", () => {
       formProgress: "UNSTARTED",
       profileData: {
         ...initialUserData.profileData,
-        hasExistingBusiness: true,
+        businessPersona: "OWNING",
         initialOnboardingFlow: "OWNING",
         businessName: "Cool Computers",
         homeBasedBusiness: true,
@@ -435,7 +435,7 @@ describe("onboarding - owning a business", () => {
   it("prefills form from existing user data", async () => {
     const userData = generateUserData({
       profileData: generateProfileData({
-        hasExistingBusiness: true,
+        businessPersona: "OWNING",
         legalStructureId: "c-corporation",
         entityId: "0123456789",
         dateOfFormation,
@@ -470,7 +470,7 @@ describe("onboarding - owning a business", () => {
       taxFilingData: taxData,
       profileData: generateProfileData({
         legalStructureId: "c-corporation",
-        hasExistingBusiness: true,
+        businessPersona: "OWNING",
       }),
     });
     const { page } = renderPage({ userData: initialUserData });
@@ -490,9 +490,9 @@ describe("onboarding - owning a business", () => {
   });
 
   describe("validates self-reg step for legal structures that require public filing", () => {
-    runSelfRegPageTests({ hasExistingBusiness: true, requiresPublicFiling: true, selfRegPage: "5" });
+    runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: true, selfRegPage: "5" });
   });
   describe("validates self-reg step for legal structures that do not require public filing", () => {
-    runSelfRegPageTests({ hasExistingBusiness: true, requiresPublicFiling: false, selfRegPage: "4" });
+    runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: false, selfRegPage: "4" });
   });
 });

@@ -353,7 +353,7 @@ describe("dashboard", () => {
     const initialUserData = generateUserData({
       profileData: generateProfileData({
         initialOnboardingFlow: "STARTING",
-        hasExistingBusiness: true,
+        businessPersona: "OWNING",
       }),
     });
     setupStatefulUserDataContext();
@@ -365,7 +365,7 @@ describe("dashboard", () => {
       ...initialUserData,
       profileData: {
         ...initialUserData.profileData,
-        hasExistingBusiness: false,
+        businessPersona: "STARTING",
       },
     });
     await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/roadmap"));

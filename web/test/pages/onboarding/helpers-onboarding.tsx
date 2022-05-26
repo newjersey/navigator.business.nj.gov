@@ -7,6 +7,7 @@ import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {
+  BusinessPersona,
   BusinessUser,
   createEmptyUser,
   createEmptyUserData,
@@ -187,11 +188,11 @@ export const createPageHelpers = (): PageHelpers => {
 };
 
 export const runSelfRegPageTests = ({
-  hasExistingBusiness,
+  businessPersona,
   requiresPublicFiling,
   selfRegPage,
 }: {
-  hasExistingBusiness: boolean;
+  businessPersona: BusinessPersona;
   requiresPublicFiling?: boolean;
   selfRegPage: string;
 }) => {
@@ -200,7 +201,7 @@ export const runSelfRegPageTests = ({
     user,
     formProgress: "UNSTARTED",
     profileData: generateProfileData({
-      hasExistingBusiness,
+      businessPersona,
       legalStructureId: randomLegalStructure(requiresPublicFiling)?.id,
     }),
   });
@@ -349,7 +350,7 @@ export const runSelfRegPageTests = ({
     await waitFor(() => {
       expect(currentUserData().user).toEqual(businessUser);
       expect(mockPush).toHaveBeenCalledWith({
-        pathname: hasExistingBusiness ? "/dashboard" : "/roadmap",
+        pathname: businessPersona === "OWNING" ? "/dashboard" : "/roadmap",
         query: { fromOnboarding: "true" },
       });
     });

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Documents } from "@/components/profile/Documents";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import { ProfileTabs } from "@/lib/types/types";
 import Profile from "@/pages/profile";
 import { generateProfileData, generateUserData } from "@/test/factories";
@@ -34,16 +35,7 @@ const ProfilePreviewDocuments = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 
-  // slug in the form profiletab-info-poppy
-  const getMetadataFromSlug = (slug: string): { profileTab: string; hasExistingBusiness: boolean } => {
-    const [, tab, persona] = slug.split("-");
-    return {
-      profileTab: tab,
-      hasExistingBusiness: persona === "oscar",
-    };
-  };
-
-  const { profileTab, hasExistingBusiness } = getMetadataFromSlug(props.entry.toJS().slug);
+  const { profileTab, businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
 
   const llcUserDataNoDocs = generateUserData({
     profileData: generateProfileData({
@@ -72,7 +64,7 @@ const ProfilePreviewDocuments = (props: Props) => {
         <Profile
           municipalities={[]}
           CMS_ONLY_tab={profileTab as ProfileTabs}
-          CMS_ONLY_hasExistingBusiness={hasExistingBusiness}
+          CMS_ONLY_businessPersona={businessPersona}
           CMS_ONLY_fakeUserData={llcUserDataNoDocs}
         />
       </div>

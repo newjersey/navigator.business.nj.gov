@@ -4,6 +4,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -28,8 +29,8 @@ export const NavBarMobile = ({
   const close = () => setSidebarIsOpen(false);
 
   const redirectUrl = useMemo(
-    () => (userData?.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap"),
-    [userData?.profileData.hasExistingBusiness]
+    () => routeForPersona(userData?.profileData.businessPersona),
+    [userData?.profileData.businessPersona]
   );
 
   return (

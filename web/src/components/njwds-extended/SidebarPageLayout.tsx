@@ -1,5 +1,6 @@
 import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -27,7 +28,7 @@ export const SidebarPageLayout = ({
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const { userData } = useUserData();
 
-  const mainPageLink = userData?.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap";
+  const mainPageLink = routeForPersona(userData?.profileData.businessPersona);
 
   const backButton = (
     <Link href={mainPageLink} passHref>

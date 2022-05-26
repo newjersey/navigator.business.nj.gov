@@ -3,6 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 
@@ -12,9 +13,9 @@ export const UnGraduationBox = (): ReactElement => {
 
   const ungraduateToStarting = async (): Promise<void> => {
     if (!userData) return;
-    const newProfileData = {
+    const newProfileData: ProfileData = {
       ...userData.profileData,
-      hasExistingBusiness: false,
+      businessPersona: "STARTING",
     };
     setAnalyticsDimensions(newProfileData);
     analytics.event.dashboard_ungraduate_button.click.existing_dashboard_to_prospective_roadmap();

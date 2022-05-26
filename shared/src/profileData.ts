@@ -7,8 +7,8 @@ export interface ProfileDocuments {
 }
 
 export interface ProfileData {
-  readonly hasExistingBusiness: boolean | undefined;
-  readonly initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
+  readonly businessPersona: BusinessPersona;
+  readonly initialOnboardingFlow: BusinessPersona;
   readonly businessName: string;
   readonly industryId: string | undefined;
   readonly legalStructureId: string | undefined;
@@ -33,7 +33,7 @@ export interface ProfileData {
 }
 
 export const emptyProfileData: ProfileData = {
-  hasExistingBusiness: undefined,
+  businessPersona: undefined,
   initialOnboardingFlow: undefined,
   businessName: "",
   industryId: undefined,
@@ -63,3 +63,5 @@ export const createEmptyProfileData = (): ProfileData => {
 };
 
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
+
+export type BusinessPersona = "STARTING" | "OWNING" | undefined;

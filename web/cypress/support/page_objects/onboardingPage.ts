@@ -2,8 +2,8 @@ import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigato
 import { random } from "lodash";
 
 export class OnboardingPage {
-  getHasExistingBusiness(radio: boolean) {
-    return cy.get(`input[name="has-existing-business"][value="${radio}"]`);
+  getBusinessPersona(radio: string) {
+    return cy.get(`input[name="business-persona"][value="${radio}"]`);
   }
 
   getBusinessName() {
@@ -54,8 +54,8 @@ export class OnboardingPage {
     return cy.get('[data-testid="ownership"]');
   }
 
-  selectNewBusiness(radio: boolean) {
-    this.getHasExistingBusiness(radio).check();
+  selectBusinessPersona(radio: string) {
+    this.getBusinessPersona(radio).check();
   }
 
   typeBusinessName(businessName: string) {

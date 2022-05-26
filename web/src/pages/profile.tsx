@@ -30,6 +30,7 @@ import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
@@ -42,6 +43,7 @@ import {
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getFlow, getSectionCompletion, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { BusinessPersona } from "@businessnjgovnavigator/shared";
 import {
   createEmptyFormationFormData,
   createEmptyProfileData,
@@ -58,7 +60,7 @@ import React, { FormEvent, ReactElement, ReactNode, useContext, useState } from 
 
 interface Props {
   municipalities: Municipality[];
-  CMS_ONLY_hasExistingBusiness?: boolean; // for CMS only
+  CMS_ONLY_businessPersona?: BusinessPersona; // for CMS only
   CMS_ONLY_tab?: ProfileTabs; // for CMS only
   CMS_ONLY_fakeUserData?: UserData; // for CMS only
   CMS_ONLY_showEscapeModal?: boolean; // for CMS only
@@ -81,15 +83,18 @@ const ProfilePage = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
-  const hasExistingBusiness = props.CMS_ONLY_hasExistingBusiness ?? userData?.profileData.hasExistingBusiness;
+  const businessPersona = props.CMS_ONLY_businessPersona ?? userData?.profileData.businessPersona;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const redirect = (params?: { [key: string]: any }, routerType = router.push) =>
-    router.query.path === "businessFormation"
-      ? routerType("/tasks/form-business-entity")
-      : hasExistingBusiness
-      ? routerType(`/dashboard${params ? `?${new URLSearchParams(params).toString()}` : ""}`)
-      : routerType(`/roadmap${params ? `?${new URLSearchParams(params).toString()}` : ""}`);
+  const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
+    if (router.query.path === "businessFormation") {
+      return routerType("/tasks/form-business-entity");
+    }
+
+    const route = routeForPersona(businessPersona);
+    const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
+    return routerType(`${route}${urlParams}`);
+  };
 
   useMountEffectWhenDefined(() => {
     if (userData) {
@@ -103,7 +108,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const onBack = () => {
     if (!userData) return;
-    if (!hasExistingBusiness) {
+    if (businessPersona === "STARTING") {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
     if (!deepEqual(profileData, userData.profileData)) {
@@ -216,7 +221,7 @@ const ProfilePage = (props: Props): ReactElement => {
     ),
   };
 
-  const hasExistingBusinessElements: Record<ProfileTabs, ReactNode> = {
+  const owningBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
@@ -363,7 +368,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
       </Box>
       {userData?.formationData.getFilingResponse?.success ||
-      (hasExistingBusiness == false &&
+      (businessPersona == "STARTING" &&
         LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling) ? (
         <Box
           className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
@@ -449,8 +454,8 @@ const ProfilePage = (props: Props): ReactElement => {
                 ) : (
                   <>
                     <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
-                      {hasExistingBusiness === true
-                        ? hasExistingBusinessElements[profileTab]
+                      {businessPersona === "OWNING"
+                        ? owningBusinessElements[profileTab]
                         : startingNewBusinessElements[profileTab]}
 
                       <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />

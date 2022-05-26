@@ -98,7 +98,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
 
   it("open and closes contextual info panel on onboarding screens", () => {
     cy.url().should("include", "onboarding?page=1");
-    onOnboardingPage.selectNewBusiness(false);
+    onOnboardingPage.selectBusinessPersona("STARTING");
     onOnboardingPage.clickNext();
 
     cy.url().should("include", "onboarding?page=2");

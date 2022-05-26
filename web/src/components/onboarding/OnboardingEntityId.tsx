@@ -19,7 +19,10 @@ export const OnboardingEntityId = ({ headerAriaLevel = 2, ...props }: Props): Re
   const fieldName = "entityId";
   const { Config } = useConfig();
 
-  if (!isEntityIdApplicable(state.profileData.legalStructureId) && !state.profileData.hasExistingBusiness) {
+  if (
+    state.profileData.businessPersona === "STARTING" &&
+    !isEntityIdApplicable(state.profileData.legalStructureId)
+  ) {
     return <></>;
   }
 

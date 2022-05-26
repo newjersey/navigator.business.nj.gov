@@ -5,6 +5,7 @@ import { AuthContext } from "@/contexts/authContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -68,8 +69,8 @@ export const NavBarDesktop = (): ReactElement => {
   }, [open]);
 
   const redirectUrl = useMemo(
-    () => (userData?.profileData.hasExistingBusiness ? "/dashboard" : "/roadmap"),
-    [userData?.profileData.hasExistingBusiness]
+    () => routeForPersona(userData?.profileData.businessPersona),
+    [userData?.profileData.businessPersona]
   );
 
   const isAuthenticated = useMemo(() => state.isAuthenticated == "TRUE", [state.isAuthenticated]);

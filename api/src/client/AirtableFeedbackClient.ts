@@ -26,7 +26,7 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
         Detail: feedbackRequest.detail,
         Email: userData.user.email,
         Industry: userData.profileData.industryId,
-        Persona: userData.profileData.hasExistingBusiness ? "owning" : "starting",
+        Persona: userData.profileData.businessPersona,
         "Page Report Was Initiated On": feedbackRequest.pageOfRequest,
         Device: feedbackRequest.device,
         Browser: feedbackRequest.browser,

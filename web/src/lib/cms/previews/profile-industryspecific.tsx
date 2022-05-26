@@ -7,6 +7,7 @@ import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHome
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import merge from "lodash.merge";
 import React, { useEffect, useRef, useState } from "react";
@@ -38,15 +39,7 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 
-  const getMetadataFromSlug = (slug: string): { profileTab: string; hasExistingBusiness: boolean } => {
-    const [, tab, persona] = slug.split("-");
-    return {
-      profileTab: tab,
-      hasExistingBusiness: persona === "oscar",
-    };
-  };
-
-  const { hasExistingBusiness } = getMetadataFromSlug(props.entry.toJS().slug);
+  const { businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
@@ -55,7 +48,7 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
           value={{
             state: {
               profileData: createEmptyProfileData(),
-              flow: hasExistingBusiness ? "OWNING" : "STARTING",
+              flow: businessPersona === "OWNING" ? "OWNING" : "STARTING",
               municipalities: [],
             },
             setUser: () => {},
@@ -64,7 +57,7 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
           }}
         >
           <OnboardingHomeBasedBusiness headerAriaLevel={2} h3Heading={true} />
-          {!hasExistingBusiness && (
+          {businessPersona === "STARTING" && (
             <>
               <hr className="margin-y-4" />
               <OnboardingCannabisLicense />

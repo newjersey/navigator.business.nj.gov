@@ -2245,11 +2245,11 @@ collections:
                 widget: object
                 summary: "{{profileFields}}"
                 fields:
-                  - label: Has Existing Business
-                    name: hasExistingBusiness
+                  - label: Business Persona
+                    name: businessPersona
                     collapsed: true
                     widget: object
-                    summary: "{{hasExistingBusiness}}"
+                    summary: "{{businessPersona}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }

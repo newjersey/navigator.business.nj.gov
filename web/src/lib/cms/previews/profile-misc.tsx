@@ -51,7 +51,7 @@ const ProfilePreviewMisc = (props: Props) => {
         <Profile
           municipalities={[]}
           CMS_ONLY_tab="notes"
-          CMS_ONLY_hasExistingBusiness={true}
+          CMS_ONLY_businessPersona="STARTING"
           CMS_ONLY_fakeUserData={emptyUserData}
         />
       </div>

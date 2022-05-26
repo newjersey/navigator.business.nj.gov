@@ -14,7 +14,7 @@ const Config = getMergedConfig();
 
 const renderComponent = (profileData: Partial<ProfileData>) => {
   const data = generateProfileData({
-    hasExistingBusiness: false,
+    businessPersona: "STARTING",
     ...profileData,
   });
   render(

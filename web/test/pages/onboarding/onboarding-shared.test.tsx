@@ -60,7 +60,7 @@ describe("onboarding - shared", () => {
     useMockRouter({ isReady: true, query: { page: "2" } });
     const userData = generateUserData({
       profileData: generateProfileData({
-        hasExistingBusiness: true,
+        businessPersona: "STARTING",
         legalStructureId: "c-corporation",
       }),
       formProgress: "UNSTARTED",
@@ -94,7 +94,7 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
     await page.visitStep(3);
     await waitFor(() => {
-      expect(currentUserData().profileData.hasExistingBusiness).toEqual(false);
+      expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
     });
     expect(currentUserData().profileData.initialOnboardingFlow).toEqual("STARTING");
     expect(currentUserData().profileData.industryId).toEqual("cannabis");
@@ -107,7 +107,7 @@ describe("onboarding - shared", () => {
   });
 
   it("builds and sets roadmap after each step", async () => {
-    const profileData = generateProfileData({ hasExistingBusiness: false });
+    const profileData = generateProfileData({ businessPersona: "STARTING" });
     const mockSetRoadmap = jest.fn();
     const user = generateUser({});
     const userData = generateUserData({ profileData: profileData, user });
@@ -144,11 +144,10 @@ describe("onboarding - shared", () => {
   });
 
   it("updates locally for each step", async () => {
-    const userData = generateUserData({});
+    const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) });
     const { page } = renderPage({ userData });
     mockApi.postNewsletter.mockImplementation((request) => Promise.resolve(request));
     mockApi.postUserTesting.mockImplementation((request) => Promise.resolve(request));
-    page.chooseRadio("has-existing-business-false");
     await page.visitStep(2);
     expect(getLastCalledWithConfig().local).toEqual(true);
     await page.visitStep(3);
@@ -168,7 +167,7 @@ describe("onboarding - shared", () => {
 
   it("allows user to move past Step 1 if you have selected whether you own a business", async () => {
     const { page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
   });
@@ -176,11 +175,14 @@ describe("onboarding - shared", () => {
   it("sets initialOnboardingFlow if formProgress is not COMPLETED", async () => {
     const initialUserData = generateUserData({
       formProgress: "UNSTARTED",
-      profileData: generateProfileData({ initialOnboardingFlow: "STARTING" }),
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        initialOnboardingFlow: "STARTING",
+      }),
     });
 
     const { page } = renderPage({ userData: initialUserData });
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     await page.visitStep(2);
     expect(currentUserData().profileData.initialOnboardingFlow).toEqual("OWNING");
   });
@@ -188,18 +190,21 @@ describe("onboarding - shared", () => {
   it("preserves initialOnboardingFlow value if formProgress is COMPLETED", async () => {
     const initialUserData = generateUserData({
       formProgress: "COMPLETED",
-      profileData: generateProfileData({ initialOnboardingFlow: "STARTING" }),
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        initialOnboardingFlow: "STARTING",
+      }),
     });
 
     const { page } = renderPage({ userData: initialUserData });
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     await page.visitStep(2);
     expect(currentUserData().profileData.initialOnboardingFlow).toEqual("STARTING");
   });
 
   it("is able to go back", async () => {
     const { page } = renderPage({});
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
     page.clickBack();
@@ -214,7 +219,7 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep(3);
@@ -227,16 +232,16 @@ describe("onboarding - shared", () => {
     page.clickBack();
 
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
-    expect(screen.getByTestId("has-existing-business-true")).toBeInTheDocument();
+    expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
     expect(
       screen.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
     ).toBeInTheDocument();
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep(2);
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
-      hasExistingBusiness: true,
+      businessPersona: "OWNING",
       entityId: undefined,
       businessName: "",
       initialOnboardingFlow: "OWNING",
@@ -261,7 +266,7 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "sole-proprietorship");
     await page.visitStep(2);
     page.fillText("Business name", "Cool Computers");
@@ -274,11 +279,11 @@ describe("onboarding - shared", () => {
     page.clickBack();
     page.clickBack();
 
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
-      hasExistingBusiness: false,
+      businessPersona: "STARTING",
       entityId: undefined,
       businessName: "Cool Computers",
       initialOnboardingFlow: "STARTING",
@@ -304,7 +309,7 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep(2);
     page.selectDate("Date of formation", date);
@@ -321,11 +326,11 @@ describe("onboarding - shared", () => {
     page.clickBack();
     page.clickBack();
 
-    page.chooseRadio("has-existing-business-false");
+    page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
-      hasExistingBusiness: false,
+      businessPersona: "STARTING",
       entityId: undefined,
       businessName: "Cool Computers",
       initialOnboardingFlow: "STARTING",
@@ -351,7 +356,7 @@ describe("onboarding - shared", () => {
     });
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
-    page.chooseRadio("has-existing-business-true");
+    page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "c-corporation");
     await page.visitStep(2);
     page.selectDate("Date of formation", date);
@@ -371,7 +376,7 @@ describe("onboarding - shared", () => {
     await page.visitStep(2);
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
-      hasExistingBusiness: true,
+      businessPersona: "OWNING",
       entityId: "1234567890",
       legalStructureId: "c-corporation",
       businessName: "Cool Computers",
@@ -394,7 +399,7 @@ describe("onboarding - shared", () => {
     it("displays industry-specific content for home contractors when selected", async () => {
       const { page } = renderPage({});
 
-      page.chooseRadio("has-existing-business-false");
+      page.chooseRadio("business-persona-starting");
       await page.visitStep(2);
       expect(screen.queryByTestId("industry-specific-home-contractor")).not.toBeInTheDocument();
       page.selectByValue("Industry", "home-contractor");
@@ -408,7 +413,7 @@ describe("onboarding - shared", () => {
 
     it("displays industry-specific content for employment agency when selected", async () => {
       const { page } = renderPage({});
-      page.chooseRadio("has-existing-business-false");
+      page.chooseRadio("business-persona-starting");
       await page.visitStep(2);
 
       expect(screen.queryByTestId("industry-specific-employment-agency")).not.toBeInTheDocument();
@@ -424,7 +429,7 @@ describe("onboarding - shared", () => {
     it("displays liquor license question for restaurants when selected", async () => {
       const userData = createEmptyUserData(generateUser({}));
       const { page } = renderPage({ userData });
-      page.chooseRadio("has-existing-business-false");
+      page.chooseRadio("business-persona-starting");
       await page.visitStep(2);
 
       expect(
@@ -443,7 +448,7 @@ describe("onboarding - shared", () => {
     it("displays home-based business question for applicable industries on municipality page", async () => {
       const newark = generateMunicipality({ displayName: "Newark" });
       const userData = generateTestUserData({
-        hasExistingBusiness: false,
+        businessPersona: "STARTING",
         industryId: "home-contractor",
         municipality: newark,
       });
@@ -458,7 +463,7 @@ describe("onboarding - shared", () => {
     });
 
     it("does not display home-based business question for non-applicable industries", async () => {
-      const userData = generateTestUserData({ hasExistingBusiness: false, industryId: "restaurant" });
+      const userData = generateTestUserData({ businessPersona: "STARTING", industryId: "restaurant" });
       useMockRouter({ isReady: true, query: { page: "4" } });
 
       renderPage({ userData });
@@ -470,7 +475,7 @@ describe("onboarding - shared", () => {
 
     it("sets liquor license back to false if they select a different industry", async () => {
       const { page } = renderPage({});
-      page.chooseRadio("has-existing-business-false");
+      page.chooseRadio("business-persona-starting");
       await page.visitStep(2);
 
       page.selectByValue("Industry", "restaurant");
@@ -486,7 +491,7 @@ describe("onboarding - shared", () => {
 
     it("sets sector for industry", async () => {
       const { page } = renderPage({});
-      page.chooseRadio("has-existing-business-false");
+      page.chooseRadio("business-persona-starting");
       await page.visitStep(2);
 
       page.selectByValue("Industry", "restaurant");
@@ -557,7 +562,7 @@ describe("onboarding - shared", () => {
       userData: generateUserData({
         user: generateUser({ email: `some-emailexample.com` }),
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "c-corporation",
         }),
         formProgress: "UNSTARTED",
@@ -575,7 +580,7 @@ describe("onboarding - shared", () => {
       userData: generateUserData({
         user: generateUser({ email: `some-email@examplecom` }),
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "c-corporation",
         }),
         formProgress: "UNSTARTED",
@@ -614,7 +619,7 @@ describe("onboarding - shared", () => {
     });
 
     const selectInitialIndustry = async (industry: string, page: PageHelpers): Promise<void> => {
-      page.chooseRadio("has-existing-business-false");
+      page.chooseRadio("business-persona-starting");
       await page.visitStep(2);
       page.selectByValue("Industry", industry);
 

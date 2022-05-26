@@ -45,9 +45,8 @@ jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postGetAnnualFilings: jest.fn(),
-}));
+jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
+
 describe("profile", () => {
   let setModalIsVisible: jest.Mock;
 
@@ -106,7 +105,7 @@ describe("profile", () => {
       beforeEach(() => {
         initialUserData = generateUserData({
           profileData: generateProfileData({
-            hasExistingBusiness: false,
+            businessPersona: "STARTING",
             legalStructureId: "limited-liability-company",
           }),
         });
@@ -118,7 +117,7 @@ describe("profile", () => {
     describe("when has existing business", () => {
       beforeEach(() => {
         initialUserData = generateUserData({
-          profileData: generateProfileData({ hasExistingBusiness: true }),
+          profileData: generateProfileData({ businessPersona: "OWNING" }),
         });
       });
 
@@ -171,8 +170,16 @@ describe("profile", () => {
   });
 
   describe("starting new business", () => {
+    let userData: UserData;
+
+    beforeEach(() => {
+      userData = generateUserData({
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
+      });
+    });
+
     it("user is able to save and is redirected to roadmap", async () => {
-      renderPage({});
+      renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickSave();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap?success=true"));
@@ -180,7 +187,7 @@ describe("profile", () => {
 
     it("user is able to save and is redirected back to Business Formation", async () => {
       useMockRouter({ query: { path: "businessFormation" } });
-      renderPage({});
+      renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickSave();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/form-business-entity"));
@@ -189,20 +196,20 @@ describe("profile", () => {
     it("user is able to go back to Business Formation", async () => {
       useMockRouter({ query: { path: "businessFormation" } });
 
-      renderPage({});
+      renderPage({ userData });
       clickBack();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/form-business-entity"));
     });
 
     it("prevents user from going back to roadmap if there are unsaved changes", () => {
-      renderPage({});
+      renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickBack();
       expect(screen.getByText(Config.profileDefaults.escapeModalReturn)).toBeInTheDocument();
     });
 
     it("returns user to profile page from un-saved changes modal", () => {
-      renderPage({});
+      renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalEscape));
@@ -210,8 +217,15 @@ describe("profile", () => {
       expect(screen.getByLabelText("Business name")).toBeInTheDocument();
     });
 
-    it("updates the user data on save", async () => {
-      const initialUserData = createEmptyUserData(generateUser({}));
+    it("|updates the user data on save", async () => {
+      const emptyData = createEmptyUserData(generateUser({}));
+      const initialUserData: UserData = {
+        ...emptyData,
+        profileData: {
+          ...emptyData.profileData,
+          businessPersona: "STARTING",
+        },
+      };
       const newark = generateMunicipality({ displayName: "Newark" });
       renderPage({ userData: initialUserData, municipalities: [newark] });
       fillText("Business name", "Cool Computers");
@@ -219,6 +233,7 @@ describe("profile", () => {
       selectByValue("Industry", "e-commerce");
       selectByValue("Legal structure", "c-corporation");
       chooseRadio("home-based-business-true");
+
       chooseTab("numbers");
       fillText("Entity id", "0234567890");
       fillText("Tax id", "023456790");
@@ -277,17 +292,19 @@ describe("profile", () => {
               }),
             }),
             profileData: generateProfileData({
-              hasExistingBusiness: false,
+              businessPersona: "STARTING",
               legalStructureId: "limited-liability-company",
               entityId: "some-id",
               businessName: "some-name",
             }),
           }),
         };
+
         it("disables businessName", () => {
           renderPage(userData);
           expect(screen.getByLabelText("Business name")).toHaveAttribute("disabled");
         });
+
         it("disables entityID", () => {
           renderPage(userData);
           chooseTab("numbers");
@@ -304,7 +321,7 @@ describe("profile", () => {
               }),
             }),
             profileData: generateProfileData({
-              hasExistingBusiness: true,
+              businessPersona: "OWNING",
               legalStructureId: "limited-liability-company",
               entityId: "some-id",
               businessName: "some-name",
@@ -316,6 +333,7 @@ describe("profile", () => {
           renderPage(userData);
           expect(screen.getByLabelText("Business name")).toHaveAttribute("disabled");
         });
+
         it("disables entityID", () => {
           renderPage(userData);
           chooseTab("numbers");
@@ -349,10 +367,11 @@ describe("profile", () => {
       );
     });
 
-    it("entity-id field existing depends on legal structure", () => {
+    it("entity-id field existing depends on legal structure when starting", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           legalStructureId: "general-partnership",
+          businessPersona: "STARTING",
         }),
       });
       renderPage({ userData });
@@ -377,7 +396,10 @@ describe("profile", () => {
     });
 
     it("user is able to go back to roadmap", async () => {
-      renderPage({});
+      const userData = generateUserData({
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
+      });
+      renderPage({ userData });
       clickBack();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
     });
@@ -385,6 +407,7 @@ describe("profile", () => {
     it("prefills form from existing user data", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           businessName: "Applebees",
           industryId: "cosmetology",
           legalStructureId: "c-corporation",
@@ -447,7 +470,7 @@ describe("profile", () => {
 
   describe("has existing business", () => {
     it("user is able to save and is redirected to dashboard", async () => {
-      const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
+      const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
 
       renderPage({
         userData: userData,
@@ -459,7 +482,7 @@ describe("profile", () => {
     });
 
     it("prevents user from going back to dashboard if there are unsaved changes", () => {
-      const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
+      const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
 
       renderPage({
         userData: userData,
@@ -470,7 +493,7 @@ describe("profile", () => {
     });
 
     it("returns user to profile page from un-saved changes modal", () => {
-      const userData = generateUserData({ profileData: generateProfileData({ hasExistingBusiness: true }) });
+      const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
 
       renderPage({
         userData: userData,
@@ -483,7 +506,7 @@ describe("profile", () => {
 
     it("updates the user data on save", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ hasExistingBusiness: true, industryId: undefined }),
+        profileData: generateProfileData({ businessPersona: "OWNING", industryId: undefined }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
 
@@ -533,7 +556,7 @@ describe("profile", () => {
     it("prefills form from existing user data", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          hasExistingBusiness: true,
+          businessPersona: "OWNING",
           businessName: "Applebees",
           entityId: "1234567890",
           employerId: "123456789",
@@ -574,7 +597,7 @@ describe("profile", () => {
 
     it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ hasExistingBusiness: true }),
+        profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
       renderPage({ userData: userData });
       chooseTab("numbers");
@@ -604,7 +627,7 @@ describe("profile", () => {
 
     it("prevents user from saving if they partially entered Employer Id", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ hasExistingBusiness: true }),
+        profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
       renderPage({ userData: userData });
       chooseTab("numbers");
@@ -624,7 +647,7 @@ describe("profile", () => {
 
     it("prevents user from saving if sector is not selected", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ hasExistingBusiness: true, sectorId: "" }),
+        profileData: generateProfileData({ businessPersona: "OWNING", sectorId: "" }),
       });
       renderPage({ userData: userData });
       fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
@@ -640,7 +663,7 @@ describe("profile", () => {
 
     it("user is able to go back to dashboard", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ hasExistingBusiness: true }),
+        profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
       renderPage({ userData: userData });
 
@@ -649,7 +672,7 @@ describe("profile", () => {
     });
 
     it("builds and sets roadmap on save", async () => {
-      const profileData = generateProfileData({ hasExistingBusiness: true });
+      const profileData = generateProfileData({ businessPersona: "OWNING" });
       const mockSetRoadmap = jest.fn();
 
       render(
@@ -671,7 +694,7 @@ describe("profile", () => {
 
     it("returns user to dashboard from un-saved changes modal", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ hasExistingBusiness: true }),
+        profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
 
       const newark = generateMunicipality({ displayName: "Newark" });
@@ -688,7 +711,7 @@ describe("profile", () => {
 
   it("disables business name field if formation getFiling success", () => {
     const userData = generateUserData({
-      profileData: generateProfileData({ hasExistingBusiness: true }),
+      profileData: generateProfileData({ businessPersona: "OWNING" }),
       formationData: generateFormationData({
         getFilingResponse: generateGetFilingResponse({
           success: true,
@@ -702,7 +725,7 @@ describe("profile", () => {
 
   it("disables legal structure field if formation getFiling success", () => {
     const userData = generateUserData({
-      profileData: generateProfileData({ hasExistingBusiness: false }),
+      profileData: generateProfileData({ businessPersona: "STARTING" }),
       formationData: generateFormationData({
         getFilingResponse: generateGetFilingResponse({
           success: true,
@@ -719,7 +742,7 @@ describe("profile", () => {
       it("shows document section if user's legal structure requires public filing", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
-            hasExistingBusiness: false,
+            businessPersona: "STARTING",
             legalStructureId: "limited-liability-company",
           }),
         });
@@ -731,7 +754,7 @@ describe("profile", () => {
       it("disables document section if user's legal structure does not require public filing", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
-            hasExistingBusiness: false,
+            businessPersona: "STARTING",
             legalStructureId: "sole-proprietorship",
           }),
         });
@@ -748,7 +771,7 @@ describe("profile", () => {
             getFilingResponse: generateGetFilingResponse({ success: true }),
           }),
           profileData: generateProfileData({
-            hasExistingBusiness: true,
+            businessPersona: "OWNING",
           }),
         });
         renderPage({ userData });
@@ -762,7 +785,7 @@ describe("profile", () => {
             getFilingResponse: generateGetFilingResponse({ success: false }),
           }),
           profileData: generateProfileData({
-            hasExistingBusiness: true,
+            businessPersona: "OWNING",
           }),
         });
         renderPage({ userData });
@@ -777,7 +800,7 @@ describe("profile", () => {
           getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
           documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
         }),
@@ -797,7 +820,7 @@ describe("profile", () => {
           getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
           documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
         }),
@@ -821,7 +844,7 @@ describe("profile", () => {
           getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
           documents: { certifiedDoc: "pz.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
         }),
@@ -848,7 +871,7 @@ describe("profile", () => {
           getFilingResponse: generateGetFilingResponse({ success: true }),
         }),
         profileData: generateProfileData({
-          hasExistingBusiness: false,
+          businessPersona: "STARTING",
           legalStructureId: "limited-liability-company",
           documents: { certifiedDoc: "pp.zip", formationDoc: "whatever.pdf", standingDoc: "" },
         }),
