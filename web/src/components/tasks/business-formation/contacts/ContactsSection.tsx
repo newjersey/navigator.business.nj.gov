@@ -26,6 +26,8 @@ export const ContactsSection = (): ReactElement => {
 
   const { userData, update } = useUserData();
 
+  const isCorp = corpLegalStructures.includes(state.legalStructureId);
+
   const requiredFieldsWithError = useMemo(() => {
     let requiredFields: FormationFields[] = [];
 
@@ -87,12 +89,13 @@ export const ContactsSection = (): ReactElement => {
 
     if (state.formationFormData.signers.length == 0) signErrorType.push("signer-minimum");
 
-    if (signErrorType.length > 0) {
-      invalidFields.push({ name: "signers", types: signErrorType });
-    }
+    if (signErrorType.length > 0) invalidFields.push({ name: "signers", types: signErrorType });
+
+    if (state.formationFormData.members.length == 0 && isCorp)
+      invalidFields.push({ name: "members", types: ["director-minimum"] });
 
     return invalidFields;
-  }, [state.formationFormData]);
+  }, [state.formationFormData, isCorp]);
 
   useEffect(() => {
     if (formationFieldErrors.length === 0) setShowSignatureError(false);

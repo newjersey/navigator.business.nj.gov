@@ -144,6 +144,7 @@
     "paymentTypeTableTotalCostLabel": "Total",
     "legalStructureWarningModalContinueButtonText": "Continue",
     "signersMinimumErrorText": "A minimum of one signer required",
+    "directorsMinimumErrorText": "A minimum of one director required",
     "signersEmptyErrorText": "A signature is missing above",
     "contactLastNamePlaceholder": "Last Name",
     "signatureDeleteMobileText": "Delete Signer",

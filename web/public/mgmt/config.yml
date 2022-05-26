@@ -338,6 +338,7 @@ collections:
                 }
               - { label: Members Modal - Title, name: membersModalTitle, widget: string }
               - { label: Director Modal - Title, name: directorsModalTitle, widget: string }
+              - { label: Director Minimum Error Text, name: directorsMinimumErrorText, widget: string }
               - { label: Signer (Incorporator) Modal - Title, name: incorporatorsModalTitle, widget: string }
               - { label: Members Modal - Next Button, name: membersModalNextButtonText, widget: string }
               - { label: Address Modal - Back Button, name: addressModalBackButtonText, widget: string }
@@ -694,6 +695,7 @@ collections:
               - { label: Signature Checkbox Error Text, name: signatureCheckboxErrorText, widget: string }
               - { label: Signature Empty Error Text, name: signersEmptyErrorText, widget: string }
               - { label: Signature Minimum Error Text, name: signersMinimumErrorText, widget: string }
+
               - {
                   label: Additional Signature Name Error Text,
                   name: additionalSignatureNameErrorText,
