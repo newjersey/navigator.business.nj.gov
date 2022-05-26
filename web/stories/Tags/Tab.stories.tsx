@@ -15,40 +15,44 @@ export default {
   },
 } as ComponentMeta<typeof Tag>;
 
-const Template: ComponentStory<typeof Tag> = ({ children, ...args }) => <Tag {...args}>{children}</Tag>;
+const Template: ComponentStory<typeof Tag> = ({ children, ...args }) => (
+  <div>
+    <div>
+      <div>Tag Component - Select tagVariant To View Different Variations</div>
+      <div className="width-card-lg height-10 border margin-2 padding-1 border-gray-30">
+        <Tag {...args}>No Styling Applied To This Tag</Tag>
+      </div>
+      <div className="width-card-lg height-10 border margin-2 padding-1 border-gray-30">
+        <Tag {...args} bold={true}>
+          Bolded
+        </Tag>
+      </div>
+      <div className="width-card-lg height-10 border margin-2 padding-1 border-gray-30">
+        <Tag {...args} textWrap={true}>
+          Text Wrap Applied To This Tag
+        </Tag>
+      </div>
+      <div className="width-card-lg height-10 border margin-2 padding-1 border-gray-30">
+        <Tag {...args} fixedWidth={true}>
+          Fixed Width
+        </Tag>
+      </div>
+    </div>
+    <div>
+      <div>Hover State</div>
+      <div className="width-card-lg height-10 border margin-2 padding-1 border-gray-30">
+        <Tag {...args} hover={true}>
+          Hover styling applied
+        </Tag>
+      </div>
+    </div>
+  </div>
+);
 
 export const Standard = Template.bind({});
 
 Standard.args = {
   tagVariant: "info",
-  children: "Tag Content",
 };
 
-export const Bold = Template.bind({});
-Bold.args = {
-  tagVariant: "info",
-  bold: true,
-  children: "Tag Content",
-};
-
-export const FixedWidth = Template.bind({});
-FixedWidth.args = {
-  tagVariant: "info",
-  fixedWidth: true,
-  children: "Tag Content",
-};
-
-export const Hover = Template.bind({});
-Hover.args = {
-  tagVariant: "info",
-  hover: true,
-  children: "Tag Content",
-};
-
-export const TextWrap = Template.bind({});
-TextWrap.args = {
-  tagVariant: "info",
-  textWrap: true,
-  children:
-    "This component is used within the annual filings calendar, reduce the browser width to see how it would look",
-};
+Standard.parameters = { pseudo: { hover: true } };

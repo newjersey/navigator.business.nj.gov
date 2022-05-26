@@ -100,7 +100,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
         </a>
       </div>
       <OpportunityCardStatus dueDate={props.opportunity.dueDate} status={props.opportunity.status} />
-      <div className="override-p-2xs">
+      <div className="override-p-2xs text-base-dark">
         <Content>{truncatedMd}</Content>
       </div>
     </div>

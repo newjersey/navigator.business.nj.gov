@@ -120,7 +120,7 @@ export const AddressModal = (props: Props): ReactElement => {
     >
       <>
         {props.defaultAddress ? (
-          <FormGroup className="padding-left-105 padding-bottom-1">
+          <FormGroup className="padding-y-1">
             <FormControlLabel
               label={props.displayContent.defaultCheckbox ?? "Use Default Address"}
               control={

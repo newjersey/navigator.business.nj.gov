@@ -28,9 +28,9 @@ export const ProfileNaicsCode = (): ReactElement => {
       </div>
       {state.profileData.naicsCode && (
         <>
-          <span className="text-bold margin-right-2">{state.profileData.naicsCode}</span>
-          <span>-</span>
-          <span className="margin-left-2">
+          <span className="text-bold margin-right-">{state.profileData.naicsCode}</span>
+          {" - "}
+          <span className="margin-left-">
             {lookupNaicsCode(state.profileData.naicsCode)?.SixDigitDescription}
           </span>
         </>

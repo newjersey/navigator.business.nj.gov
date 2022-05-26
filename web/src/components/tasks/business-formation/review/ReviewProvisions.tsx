@@ -35,10 +35,10 @@ export const ReviewProvisions = () => {
       <div className="" data-testid="provisions">
         {state.formationFormData.provisions.map((provision, index) => (
           <div className="grid-row margin-bottom-2" key={index}>
-            <div className="grid-col-4 text-bold">
+            <div className="tablet:grid-col-4 text-bold">
               {index + 1}. {Config.businessFormationDefaults.reviewPageProvisionsSubheader}
             </div>
-            <div className="grid-col-8">{provision}</div>
+            <div className="tablet:grid-col-8">{provision}</div>
           </div>
         ))}
       </div>
