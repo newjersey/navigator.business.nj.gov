@@ -202,7 +202,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           },
           TotalShares:
             formationFormData.businessTotalStock.length > 0
-              ? formationFormData.businessTotalStock
+              ? Number.parseInt(formationFormData.businessTotalStock)
               : undefined,
         },
         [BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].additionalDataKey]:
@@ -286,7 +286,7 @@ export type ApiSubmission = {
       BusinessPurpose: string; // Max 300 chars
       EffectiveFilingDate: string; // date 2021-12-14T10:03:51.0869073-04:00 (anne note: is this correct??)
       MainAddress: ApiLocation;
-      TotalShares: string | undefined;
+      TotalShares: number | undefined;
     };
     AdditionalLimitedLiabilityCompany?: {
       OtherProvisions: AdditionalProvision[];

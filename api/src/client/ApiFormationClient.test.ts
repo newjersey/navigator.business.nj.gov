@@ -256,7 +256,7 @@ describe("ApiFormationClient", () => {
               BusinessName: userData.profileData.businessName,
               BusinessDesignator: formationFormData.businessSuffix,
               Naic: userData.profileData.naicsCode,
-              TotalShares: "1234",
+              TotalShares: 1234,
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
