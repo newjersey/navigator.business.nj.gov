@@ -31,12 +31,13 @@ import {
   BusinessSuffix,
   BusinessSuffixMap,
   BusinessUser,
+  corpLegalStructures,
+  defaultFormationLegalType,
+  FormationAddress,
   FormationData,
   FormationFormData,
   FormationLegalType,
   FormationLegalTypes,
-  FormationMember,
-  FormationSigner,
   FormationSubmitError,
   FormationSubmitResponse,
   getCurrentDate,
@@ -345,6 +346,7 @@ export const generateFormationDisplayContent = (
       },
       signatureHeader: {
         contentMd: `some-signer-${curr}--content- ${randomInt()}`,
+        placeholder: `some-signer-${curr}--placeholder- ${randomInt()}`,
       },
       services: {
         contentMd: `some-payment-${curr}--type-content-${randomInt()}`,
@@ -366,6 +368,7 @@ export const generateFormationDisplayContent = (
         cost: randomInt(),
         optionalLabel: `some-certified-copy-of-formation-document-optional-${curr}--label-${randomInt()}`,
       },
+      ...(overrides[defaultFormationLegalType] ?? {}),
       ...overrides[curr],
     };
     return accumulator;
@@ -375,6 +378,7 @@ export const generateFormationFormData = (
   overrides: Partial<FormationFormData>,
   legalStructureId?: FormationLegalType
 ): FormationFormData => {
+  const isCorp = legalStructureId ? corpLegalStructures.includes(legalStructureId) : false;
   return {
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(legalStructureId),
@@ -384,6 +388,7 @@ export const generateFormationFormData = (
     businessAddressLine2: `some-address-2-${randomInt()}`,
     businessAddressState: "NJ",
     businessAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
+    businessTotalStock: isCorp ? randomInt().toString() ?? "" : "",
     businessPurpose: `some-purpose-${randomInt()}`,
     provisions: [`some-provision-${randomInt()}`],
     agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
@@ -395,9 +400,8 @@ export const generateFormationFormData = (
     agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
-    members: [generateFormationMember({})],
-    signer: generateFormationSigner({}),
-    additionalSigners: [generateFormationSigner({ name: `some-additional-signer-${randomInt()}` })],
+    members: [generateFormationAddress({})],
+    signers: [generateFormationAddress({ signature: true }), generateFormationAddress({ signature: true })],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -425,14 +429,6 @@ export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent
   };
 };
 
-export const generateFormationSigner = (overrides: Partial<FormationSigner>): FormationSigner => {
-  return {
-    name: `some-signer-${randomInt()}`,
-    signature: true,
-    ...overrides,
-  };
-};
-
 const generateZipCode = () => {
   const zip = randomIntFromInterval("1", "99999").toString();
   return "0".repeat(5 - zip.length) + zip;
@@ -442,13 +438,14 @@ const generateStateItem = () => states[randomIntFromInterval("0", (states.length
 
 export const generateStateInput = () => generateStateItem()[randomInt() % 2 ? "shortCode" : "name"];
 
-export const generateFormationMember = (overrides: Partial<FormationMember>): FormationMember => ({
+export const generateFormationAddress = (overrides: Partial<FormationAddress>): FormationAddress => ({
   name: `some-members-name-${randomInt()}`,
   addressLine1: `some-members-address-1-${randomInt()}`,
   addressLine2: `some-members-address-2-${randomInt()}`,
   addressCity: `some-members-address-city-${randomInt()}`,
   addressState: generateStateItem().shortCode,
   addressZipCode: generateZipCode(),
+  signature: false,
   ...overrides,
 });
 

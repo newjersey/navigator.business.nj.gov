@@ -24,12 +24,14 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useMemo, useState } from "react";
 import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
 export const allowFormation = (legalStructureId: string | undefined) => {
   const featureFlagMap: Partial<Record<FormationLegalType, boolean>> = {
     "limited-liability-partnership": process.env.FEATURE_BUSINESS_LLP == "true",
+    "c-corporation": process.env.FEATURE_BUSINESS_CCORP == "true",
+    "s-corporation": process.env.FEATURE_BUSINESS_SCORP == "true",
   };
   if (FormationLegalTypes.includes(legalStructureId as FormationLegalType)) {
     return featureFlagMap[legalStructureId as FormationLegalType] ?? true;
@@ -93,6 +95,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
     }
   }, [router.isReady, router.query.completeFiling, update, router]);
 
+  const legalStructureId = useMemo(
+    () => (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType,
+    [userData?.profileData.legalStructureId]
+  );
+
   if (!isValidLegalStructure) {
     return (
       <div className="flex flex-column space-between minh-38">
@@ -123,11 +130,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
       value={{
         state: {
           tab: tab,
+          legalStructureId: legalStructureId,
           formationFormData: formationFormData,
-          displayContent:
-            props.displayContent[
-              (userData?.profileData.legalStructureId as FormationLegalType) ?? defaultFormationLegalType
-            ],
+          displayContent: props.displayContent[legalStructureId],
           municipalities: props.municipalities,
           errorMap: errorMap,
           showResponseAlert: showResponseAlert,
@@ -145,14 +150,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
             <>
               <UnlockedBy task={props.task} dataTestid="dependency-alert" />
               <div className="margin-bottom-2">
-                <Content>
-                  {
-                    props.displayContent[
-                      (userData?.profileData.legalStructureId as FormationLegalType) ??
-                        defaultFormationLegalType
-                    ].introParagraph.contentMd
-                  }
-                </Content>
+                <Content>{props.displayContent[legalStructureId].introParagraph.contentMd}</Content>
               </div>
             </>
           )}

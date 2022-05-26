@@ -43,6 +43,7 @@ import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getFlow, getSectionCompletion, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
+  createEmptyFormationFormData,
   createEmptyProfileData,
   LookupLegalStructureById,
   Municipality,
@@ -135,7 +136,15 @@ const ProfilePage = (props: Props): ReactElement => {
     let newUserData: UserData = { ...userData, profileData: profileData, formProgress: "COMPLETED" };
     setSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
     newUserData = await postGetAnnualFilings(newUserData);
-
+    if (
+      profileData.legalStructureId != userData.profileData.legalStructureId &&
+      !newUserData.formationData.formationResponse?.success
+    ) {
+      newUserData = {
+        ...newUserData,
+        formationData: { ...newUserData.formationData, formationFormData: createEmptyFormationFormData() },
+      };
+    }
     update(newUserData).then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");

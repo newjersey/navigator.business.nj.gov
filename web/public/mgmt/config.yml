@@ -117,6 +117,22 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Business Total Stock Header,
+                  name: businessTotalStockLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Business Total Stock Placeholder,
+                  name: businessTotalStockPlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Business Total Stock Validation Text,
+                  name: businessTotalStockErrorText,
+                  widget: string,
+                }
+              - {
                   label: Business Start Date Label,
                   name: businessStartDateLabel,
                   widget: string,
@@ -298,6 +314,8 @@ collections:
               - { label: Initial Next Button Text, name: initialNextButtonText, widget: string }
               - { label: LLC Label, name: llcText, widget: string }
               - { label: LLP Label, name: llpText, widget: string }
+              - { label: S-Corp Label, name: sCorpText, widget: string }
+              - { label: C-Corp Label, name: cCorpText, widget: string }
               - {
                   label: Legal Structure Warning Modal Header,
                   name: legalStructureWarningModalHeader,
@@ -319,67 +337,92 @@ collections:
                   widget: string,
                 }
               - { label: Members Modal - Title, name: membersModalTitle, widget: string }
+              - { label: Director Modal - Title, name: directorsModalTitle, widget: string }
+              - { label: Signer (Incorporator) Modal - Title, name: incorporatorsModalTitle, widget: string }
               - { label: Members Modal - Next Button, name: membersModalNextButtonText, widget: string }
-              - { label: Members Modal - Back Button, name: membersModalBackButtonText, widget: string }
+              - { label: Address Modal - Back Button, name: addressModalBackButtonText, widget: string }
+              - {
+                  label: Signer (Incorporator) Modal - Next Button,
+                  name: incorporatorsModalNextButtonText,
+                  widget: string,
+                }
+              - { label: Director Modal - Next Button, name: directorsModalNextButtonText, widget: string }
               - { label: Members - Checkbox Text, name: membersCheckboxText, widget: string }
-              - { label: Member - Address Line 2 Optional, name: membersAddressLine2Optional, widget: string }
+              - { label: Member - Address Line 2 Optional, name: addressModalLine2Optional, widget: string }
               - { label: Member - Expand Link, name: membersExpandText, widget: string }
               - { label: Member - Success Message Body, name: membersSuccessTextBody, widget: string }
+              - { label: Director - Success Message Body, name: directorsSuccessTextBody, widget: string }
+              - {
+                  label: Signer (Incorporator) - Success Message Body,
+                  name: incorporatorsSuccessTextBody,
+                  widget: string,
+                }
               - { label: Member - Success Message Header, name: membersSuccessTextHeader, widget: string }
-              - { label: Member - Table Column Headers, name: membersTableColumn, widget: string }
+              - {
+                  label: Signer (Incorporator) - Success Message Header,
+                  name: incorporatorsSuccessTextHeader,
+                  widget: string,
+                }
+              - { label: Director - Success Message Header, name: directorsSuccessTextHeader, widget: string }
+              - { label: Address - Table Column Headers, name: addressesTableColumn, widget: string }
               - { label: Member - Add Member Button, name: membersNewButtonText, widget: string }
+              - { label: Director - Add Director Button, name: directorsNewButtonText, widget: string }
               - {
-                  label: Member Modal - Name Label,
-                  name: memberModalNameLabel,
+                  label: Address Modal - Name Label,
+                  name: addressModalNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - { label: Member Modal - Name Placeholder, name: memberModalNamePlaceholder, widget: string }
+              - { label: Address Modal - Name Placeholder, name: addressModalNamePlaceholder, widget: string }
               - {
-                  label: Member Modal - Address Line 1 Label,
-                  name: memberModalAddressLine1Label,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Member Modal - Address Line 1 Placeholder,
-                  name: memberModalAddressLine1Placeholder,
-                  widget: string,
-                }
-              - {
-                  label: Member Modal - Address Line 2 Label,
-                  name: memberModalAddressLine2Label,
+                  label: Address Modal - Address Line 1 Label,
+                  name: addressModalAddressLine1Label,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Member Modal - Address Line 2 Placeholder,
-                  name: memberModalAddressLine2Placeholder,
+                  label: Address Modal - Address Line 1 Placeholder,
+                  name: addressModalAddressLine1Placeholder,
                   widget: string,
                 }
               - {
-                  label: Member Modal - City Label,
-                  name: memberModalCityLabel,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Member Modal - City Placeholder, name: memberModalCityPlaceholder, widget: string }
-              - {
-                  label: Member Modal - State Label,
-                  name: memberModalStateLabel,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Member Modal - State Placeholder, name: memberModalStatePlaceholder, widget: string }
-              - {
-                  label: Member Modal - Zip Code Label,
-                  name: memberModalZipCodeLabel,
+                  label: Address Modal - Address Line 2 Label,
+                  name: addressModalAddressLine2Label,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Member Modal - Zip Code Placeholder,
-                  name: memberModalZipCodePlaceholder,
+                  label: Address Modal - Address Line 2 Placeholder,
+                  name: addressModalAddressLine2Placeholder,
+                  widget: string,
+                }
+              - {
+                  label: Address Modal - City Label,
+                  name: addressModalCityLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Address Modal - City Placeholder, name: addressModalCityPlaceholder, widget: string }
+              - {
+                  label: Address Modal - State Label,
+                  name: addressModalStateLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Address Modal - State Placeholder,
+                  name: addressModalStatePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Address Modal - Zip Code Label,
+                  name: addressModalZipCodeLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Address Modal - Zip Code Placeholder,
+                  name: addressModalZipCodePlaceholder,
                   widget: string,
                 }
               - { label: Name Check Placeholder Text, name: nameCheckPlaceholderText, widget: string }
@@ -579,6 +622,18 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Review Page - Directors Header,
+                  name: reviewPageDirectorsHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Director Name Label,
+                  name: reviewPageDirectorNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
                   label: Review Page - Provisions Header,
                   name: reviewPageProvisionsHeader,
                   widget: string,
@@ -614,8 +669,20 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Review Page - Signers (Incorporators) Header,
+                  name: reviewPageIncorporatorsHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
                   label: Review Page - Signer Name Label,
                   name: reviewPageSignerNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Signer (Incorporator) Label,
+                  name: reviewPageIncorporatorNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
@@ -626,6 +693,7 @@ collections:
               - { label: Signature Delete Mobile Text, name: signatureDeleteMobileText, widget: string }
               - { label: Signature Checkbox Error Text, name: signatureCheckboxErrorText, widget: string }
               - { label: Signature Empty Error Text, name: signersEmptyErrorText, widget: string }
+              - { label: Signature Minimum Error Text, name: signersMinimumErrorText, widget: string }
               - {
                   label: Additional Signature Name Error Text,
                   name: additionalSignatureNameErrorText,

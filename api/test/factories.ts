@@ -12,12 +12,13 @@ import {
   AllBusinessSuffixes,
   BusinessSuffix,
   BusinessSuffixMap,
+  corpLegalStructures,
   createEmptyFormationFormData,
+  FormationAddress,
   FormationData,
   FormationFormData,
   FormationLegalType,
   FormationLegalTypes,
-  FormationMember,
   FormationSubmitResponse,
   GetFilingResponse,
 } from "@shared/formationData";
@@ -289,8 +290,10 @@ export const generateUserTestingResponse = (overrides: Partial<UserTestingRespon
 
 export const generateFormationFormData = (
   overrides: Partial<FormationFormData>,
-  legalStructureId?: FormationLegalType
+  legalStructureId = randomFormationLegalType()
 ): FormationFormData => {
+  const isCorp = legalStructureId ? corpLegalStructures.includes(legalStructureId) : false;
+
   return {
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(legalStructureId),
@@ -300,6 +303,7 @@ export const generateFormationFormData = (
     businessAddressLine2: `some-address-2-${randomInt()}`,
     businessAddressState: "NJ",
     businessAddressZipCode: `some-zipcode-${randomInt()}`,
+    businessTotalStock: isCorp ? randomInt().toString() : "",
     businessPurpose: `some-purpose-${randomInt()}`,
     provisions: [`some-provision-${randomInt()}`],
     agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
@@ -311,12 +315,8 @@ export const generateFormationFormData = (
     agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: `some-agent-office-zipcode-${randomInt()}`,
-    signer: {
-      name: `some-signer-${randomInt()}`,
-      signature: true,
-    },
-    additionalSigners: [{ name: `some-additional-signer-${randomInt()}`, signature: true }],
-    members: [generateFormationMember({})],
+    signers: [generateFormationAddress({ signature: true }), generateFormationAddress({ signature: true })],
+    members: [generateFormationAddress({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),
@@ -355,13 +355,15 @@ export const generateFormationSubmitResponse = (
     ...overrides,
   };
 };
-export const generateFormationMember = (overrides: Partial<FormationMember>): FormationMember => ({
+
+export const generateFormationAddress = (overrides: Partial<FormationAddress>): FormationAddress => ({
   name: `some-members-name-${randomInt()}`,
   addressLine1: `some-members-address-1-${randomInt()}`,
   addressLine2: `some-members-address-2-${randomInt()}`,
   addressCity: `some-members-address-city-${randomInt()}`,
   addressState: `New Jersey`,
   addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+  signature: false,
   ...overrides,
 });
 

@@ -39,6 +39,8 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
     {
       "limited-liability-company": Config.businessFormationDefaults.llcText,
       "limited-liability-partnership": Config.businessFormationDefaults.llpText,
+      "c-corporation": Config.businessFormationDefaults.cCorpText,
+      "s-corporation": Config.businessFormationDefaults.sCorpText,
     } as Record<FormationLegalType, string>
   )[legalStructure.id as FormationLegalType];
 

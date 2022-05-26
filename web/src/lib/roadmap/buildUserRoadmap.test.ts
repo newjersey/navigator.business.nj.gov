@@ -64,11 +64,6 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
-
-      await buildUserRoadmap(generateProfileData({ legalStructureId: "c-corporation" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
     });
 
     it("adds formation for formation legal types", async () => {
@@ -78,6 +73,11 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
 
       await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-partnership" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
+
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "c-corporation" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");

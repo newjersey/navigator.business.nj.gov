@@ -30,12 +30,19 @@ export const DialogTwoButton = (props: Props) => {
       <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
         <Button
           style="secondary"
+          dataTestid="modal-button-secondary"
           onClick={props.close}
           className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1"
         >
           {props.secondaryButtonText}
         </Button>
-        <Button style="primary" noRightMargin loading={props.isLoading} onClick={props.primaryButtonOnClick}>
+        <Button
+          style="primary"
+          noRightMargin
+          loading={props.isLoading}
+          onClick={props.primaryButtonOnClick}
+          dataTestid="modal-button-primary"
+        >
           {props.primaryButtonText}
         </Button>
       </div>

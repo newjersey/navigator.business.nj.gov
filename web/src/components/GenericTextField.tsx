@@ -19,7 +19,8 @@ export interface GenericTextFieldProps {
   autoComplete?: string;
   required?: boolean;
   numericProps?: {
-    maxLength: number;
+    trimLeadingZeroes?: boolean;
+    maxLength?: number;
     minLength?: number;
   };
   formInputWide?: boolean;
@@ -34,12 +35,13 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
   let fieldOptions = props.fieldOptions;
 
   if (props.numericProps) {
-    const regex = (value: string): string => value.replace(/[^0-9]/g, "");
+    const regex = (value: string): string =>
+      value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|[^0-9]/g : /[^0-9]/g, "");
 
     visualFilter = (value: string): string =>
       props.visualFilter ? props.visualFilter(regex(value)) : regex(value);
 
-    const maxLength = props.numericProps?.maxLength as number;
+    const maxLength = props.numericProps?.maxLength;
 
     valueFilter = (value) => (maxLength ? regex(value).slice(0, maxLength) : regex(value));
 
@@ -59,7 +61,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
     additionalValidation = (returnedValue: string): boolean =>
       ![
         validMinimumValue(returnedValue),
-        returnedValue.length <= maxLength,
+        returnedValue.length <= (maxLength ?? Infinity),
         props.additionalValidation ? props.additionalValidation(returnedValue) : true,
       ].some((i) => !i);
     fieldOptions = {

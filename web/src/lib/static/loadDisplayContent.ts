@@ -141,6 +141,7 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
     accumulator[legalId] = getFormationFields(legalId, defaultFormationDisplayContent);
     return accumulator;
   }, {} as FormationDisplayContentMap);
+  formationDisplayContent[defaultFormationLegalType] = defaultFormationDisplayContent;
 
   const socialEquityPriority = getMarkdown(
     loadFile("cannabis-priority-status/cannabis-social-equity-business.md")
