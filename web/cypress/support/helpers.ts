@@ -104,7 +104,7 @@ export const completeNewBusinessOnboarding = ({
   requiresCpa,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
-  isNewsletterChecked = true,
+  isNewsletterChecked = false,
   isContactMeChecked = false,
 }: startingOnboardingData & Partial<registration>): void => {
   cy.url().should("include", "onboarding?page=1");
@@ -175,10 +175,10 @@ export const completeNewBusinessOnboarding = ({
   onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
   onOnboardingPage.typeConfirmEmail(email);
   onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
+  onOnboardingPage.toggleNewsletterCheckbox(isNewsletterChecked);
+  onOnboardingPage.toggleContactMeCheckbox(isContactMeChecked);
   onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
   onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
-  onOnboardingPage.toggleContactMeCheckbox(!isContactMeChecked);
-  onOnboardingPage.getContactMeCheckbox().should(`${!isContactMeChecked ? "be" : "not.be"}.checked`);
 
   onOnboardingPage.clickNext();
   cy.url().should("include", `roadmap`);
@@ -210,7 +210,7 @@ export const completeExistingBusinessOnboarding = ({
     : "sole-proprietorship",
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
-  isNewsletterChecked = true,
+  isNewsletterChecked = false,
   isContactMeChecked = false,
 }: existingOnboardingData & Partial<registration>): void => {
   let pageIndex = 1;
@@ -288,10 +288,10 @@ export const completeExistingBusinessOnboarding = ({
   onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
   onOnboardingPage.typeConfirmEmail(email);
   onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
+  onOnboardingPage.toggleNewsletterCheckbox(isNewsletterChecked);
+  onOnboardingPage.toggleContactMeCheckbox(isContactMeChecked);
   onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
   onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
-  onOnboardingPage.toggleContactMeCheckbox(!isContactMeChecked);
-  onOnboardingPage.getContactMeCheckbox().should(`${!isContactMeChecked ? "be" : "not.be"}.checked`);
 
   onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);
