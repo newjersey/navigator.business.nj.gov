@@ -27,6 +27,16 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
           {parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/DD/YYYY")}
         </div>
       </div>
+      {state.formationFormData.businessTotalStock.length > 0 && (
+        <>
+          <div className="display-block tablet:display-flex margin-top-1">
+            <div className="text-bold width-11rem">
+              <Content>{Config.businessFormationDefaults.reviewBusinessTotalStockLabel}</Content>
+            </div>
+            <div>{state.formationFormData.businessTotalStock}</div>
+          </div>
+        </>
+      )}
       <hr className="margin-y-205" />
     </>
   );
