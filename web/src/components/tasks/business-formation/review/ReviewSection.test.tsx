@@ -115,7 +115,7 @@ describe("Formation - ReviewSection", () => {
   });
 
   it("does not display members section within review tab when members do not exist", async () => {
-    await renderSection({}, { members: [] });
+    await renderSection({ legalStructureId: "limited-liability-company" }, { members: [] });
     expect(screen.queryByTestId("edit-members-section")).not.toBeInTheDocument();
   });
 
