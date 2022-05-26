@@ -195,7 +195,7 @@ describe("Formation - ContactsSection", () => {
       expect(page.getSignerBox(1)).toEqual(false);
     });
 
-    it("edits members", async () => {
+    it("edits directors", async () => {
       const members = [...Array(2)].map(() => generateFormationAddress({}));
       const page = await getPageHelper({ legalStructureId }, { members });
 
@@ -231,6 +231,14 @@ describe("Formation - ContactsSection", () => {
       const newMembers = currentUserData().formationData.formationFormData.members;
       expect(newMembers.length).toEqual(2);
       expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
+    });
+
+    it("fires validations when directors are empty", async () => {
+      const page = await getPageHelper({ legalStructureId }, { members: [] });
+      await page.submitContactsTab(false);
+      expect(
+        screen.getByText(Config.businessFormationDefaults.directorsMinimumErrorText, { exact: false })
+      ).toBeInTheDocument();
     });
 
     describe(`signers for ${legalStructureId}`, () => {

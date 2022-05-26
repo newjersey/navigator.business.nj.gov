@@ -21,6 +21,11 @@ export const BusinessFormationFieldAlert = (props: Props): ReactElement => {
     },
     { type: "signer-name", label: Config.businessFormationDefaults.signersEmptyErrorText, priority: 0 },
     { type: "signer-minimum", label: Config.businessFormationDefaults.signersMinimumErrorText, priority: 0 },
+    {
+      type: "director-minimum",
+      label: Config.businessFormationDefaults.directorsMinimumErrorText,
+      priority: 0,
+    },
   ];
 
   const getErrorText = (fieldsWithError: FormationFieldErrors[]): string => {
