@@ -43,7 +43,8 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     setNaicsCode(userData.profileData.naicsCode);
     const naicsCodes =
       LookupIndustryById(userData.profileData.industryId)
-        .naicsCodes?.split(",")
+        .naicsCodes?.replace(/\s/g, "")
+        .split(",")
         .filter((value) => value.length > 0) ?? [];
     setIndustryCodes(naicsCodes);
     if (naicsCodes.length == 0) setDisplayInput(true);
@@ -109,6 +110,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   };
 
   const descriptions = useMemo(() => getDescriptions(industryCodes ?? []), [industryCodes]);
+
   return (
     <>
       <h2 className="text-normal">{Config.determineNaicsCode.findCodeHeader}</h2>
