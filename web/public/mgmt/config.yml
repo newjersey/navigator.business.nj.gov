@@ -587,6 +587,12 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Review Page - Business Total Stock Label,
+                  name: reviewBusinessTotalStockLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
                   label: Review Page - Business Suffix Label,
                   name: reviewPageBusinessSuffixLabel,
                   widget: string,
