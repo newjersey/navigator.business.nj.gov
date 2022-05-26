@@ -11,7 +11,7 @@ issuingAgency: New Jersey Division of Consumer Affairs Board of Massage and Body
 You or any of your staff providing massage therapy services will need to have individual massage therapy licenses. It is the responsibility of the business owner to ensure all staff providing massage therapy services have a current license.
 
 ---
-### Eligibility
+### License Eligibility
 
 * A minimum of 500 hours from an approved massage therapy program
 
