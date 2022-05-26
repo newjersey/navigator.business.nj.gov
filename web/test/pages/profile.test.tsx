@@ -17,6 +17,7 @@ import { withAuthAlert, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
+import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -46,6 +47,7 @@ jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("profile", () => {
   let setModalIsVisible: jest.Mock;
@@ -54,6 +56,7 @@ describe("profile", () => {
     jest.resetAllMocks();
     setModalIsVisible = jest.fn();
     useMockRouter({});
+    useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
     mockApi.postGetAnnualFilings.mockImplementation((userData) => Promise.resolve(userData));
@@ -178,27 +181,30 @@ describe("profile", () => {
       });
     });
 
-    it("user is able to save and is redirected to roadmap", async () => {
+    it("redirects user to roadmap with success query string on save", async () => {
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickSave();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap?success=true"));
     });
 
-    it("user is able to save and is redirected back to Business Formation", async () => {
+    it("returns user to Business Formation after save using query string", async () => {
       useMockRouter({ query: { path: "businessFormation" } });
+      useMockRoadmapTask({ id: "form-business-entity", urlSlug: "some-formation-url" });
+
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickSave();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/form-business-entity"));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url"));
     });
 
-    it("user is able to go back to Business Formation", async () => {
+    it("returns user to Business Formation on back using query string", async () => {
       useMockRouter({ query: { path: "businessFormation" } });
+      useMockRoadmapTask({ id: "form-business-entity", urlSlug: "some-formation-url" });
 
       renderPage({ userData });
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/form-business-entity"));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url"));
     });
 
     it("prevents user from going back to roadmap if there are unsaved changes", () => {

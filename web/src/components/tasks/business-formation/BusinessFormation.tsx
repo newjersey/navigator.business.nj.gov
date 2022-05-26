@@ -90,10 +90,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
     if (!router.isReady) return;
     const completeFiling = router.query.completeFiling;
     if (completeFiling === "true") {
-      router.replace({ pathname: "/tasks/form-business-entity" }, undefined, { shallow: true });
+      router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
       api.getCompletedFiling().then((newUserData) => update(newUserData));
     }
-  }, [router.isReady, router.query.completeFiling, update, router]);
+  }, [router.isReady, router.query.completeFiling, update, router, props.task.urlSlug]);
 
   const legalStructureId = useMemo(
     () => (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType,

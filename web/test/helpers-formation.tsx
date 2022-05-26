@@ -1,6 +1,6 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import * as api from "@/lib/api-client/apiClient";
-import { FormationDisplayContentMap, NameAvailability } from "@/lib/types/types";
+import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
 import {
   generateFormationAddress,
   generateFormationData,
@@ -58,7 +58,8 @@ export const useSetupInitialMocks = () => {
 export const preparePage = (
   userData: Partial<UserData>,
   displayContent: FormationDisplayContentMap,
-  municipalities?: Municipality[]
+  municipalities?: Municipality[],
+  task?: Task
 ): FormationPageHelpers => {
   const genericTown = userData.profileData?.municipality
     ? userData.profileData.municipality
@@ -76,7 +77,7 @@ export const preparePage = (
     <WithStatefulUserData initialUserData={initialUserData}>
       <ThemeProvider theme={createTheme()}>
         <BusinessFormation
-          task={generateTask({})}
+          task={task ?? generateTask({})}
           displayContent={displayContent}
           municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]}
         />
