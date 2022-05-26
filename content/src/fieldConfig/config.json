@@ -233,7 +233,8 @@
     "reviewPageDirectorsHeader": "### Board of Directors",
     "nameCheckValidationErrorText": "You need to enter a business name to check availability.",
     "successPageHeader": "Hooray!",
-    "provisionsAddAnotherButtonText": "Add a Provision"
+    "provisionsAddAnotherButtonText": "Add a Provision",
+    "reviewBusinessTotalStockLabel": "**Total Shares of Stock**"
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
