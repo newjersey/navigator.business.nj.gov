@@ -35,12 +35,17 @@ export const SelectFeedbackDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
       maxWidth="md"
     >
       <div className="display-flex flex-column padding-bottom-2">
-        <div className="intercom-button">
-          <Button className="width-100" style="narrow-accent-cool-lightest" align="start" onClick={onClose}>
-            {makeButtonIcon("help-circle")}
-            {Config.betaBar.betaModalIntercomButtonText}
-          </Button>
-        </div>
+        <Button
+          className="width-100"
+          style="narrow-accent-cool-lightest"
+          align="start"
+          onClick={onClose}
+          intercomButton
+        >
+          {makeButtonIcon("help-circle")}
+          <span className="text-left">{Config.betaBar.betaModalIntercomButtonText}</span>
+        </Button>
+
         {userData?.formProgress === "COMPLETED" && (
           <>
             <a
@@ -52,7 +57,7 @@ export const SelectFeedbackDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
             >
               <Button className="width-100" style="narrow-accent-cool-lightest" align="start">
                 {makeButtonIcon("chat-processing")}
-                {Config.betaBar.betaModalFeedbackButtonText}
+                <span className="text-left">{Config.betaBar.betaModalFeedbackButtonText}</span>
               </Button>
             </a>
 
@@ -63,7 +68,7 @@ export const SelectFeedbackDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
               onClick={() => setCurrentFeedback("Feature Request")}
             >
               {makeButtonIcon("lightbulb-on")}
-              {Config.betaBar.betaModalFeatureRequestButtonText}
+              <span className="text-left">{Config.betaBar.betaModalFeatureRequestButtonText}</span>
             </Button>
           </>
         )}

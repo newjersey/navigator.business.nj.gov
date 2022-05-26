@@ -48,12 +48,12 @@ export const Provisions = (): ReactElement => {
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
-          {Config.businessFormationDefaults.provisionsTitle}
-          <span className="text-normal font-body-lg margin-left-1">
+          {Config.businessFormationDefaults.provisionsTitle}{" "}
+          <span className="text-normal font-body-lg">
             {Config.businessFormationDefaults.provisionsOptionalLabel}
           </span>
         </div>
-        <div className="mobile-lg:margin-left-auto flex flex-justify-center">
+        <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <Button style="tertiary" onClick={handleAddButtonClick}>
               {Config.businessFormationDefaults.provisionsAddButtonText}

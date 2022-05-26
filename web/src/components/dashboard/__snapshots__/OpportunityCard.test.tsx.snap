@@ -68,7 +68,7 @@ exports[`OpportunityCard matches the layout 1`] = `
         </a>
       </div>
       <div
-        class="override-p-2xs"
+        class="override-p-2xs text-base-dark"
       >
         <div
           class="usa-prose "
@@ -151,12 +151,12 @@ exports[`OpportunityCard matches the layout when status is first come first serv
         </a>
       </div>
       <div
-        class="dashboard-opportunity-card-due-date"
+        class="dashboard-opportunity-card-due-date text-bold"
       >
         First Come, First Serve
       </div>
       <div
-        class="override-p-2xs"
+        class="override-p-2xs text-base-dark"
       >
         <div
           class="usa-prose "
@@ -239,12 +239,12 @@ exports[`OpportunityCard matches the layout when status is rolling application 1
         </a>
       </div>
       <div
-        class="dashboard-opportunity-card-due-date"
+        class="dashboard-opportunity-card-due-date text-bold"
       >
         Rolling Application
       </div>
       <div
-        class="override-p-2xs"
+        class="override-p-2xs text-base-dark"
       >
         <div
           class="usa-prose "
@@ -338,7 +338,7 @@ exports[`OpportunityCard matches the layout with a due date 1`] = `
          
       </div>
       <div
-        class="override-p-2xs"
+        class="override-p-2xs text-base-dark"
       >
         <div
           class="usa-prose "

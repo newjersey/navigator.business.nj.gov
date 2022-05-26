@@ -117,7 +117,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       {industryCodes.length > 0 ? (
         <>
           <Content>{Config.determineNaicsCode.suggestedCodeBodyText}</Content>
-          <FormControl variant="outlined" fullWidth className="tablet:margin-left-205">
+          <FormControl variant="outlined" fullWidth className="tablet:margin-left-205 margin-top-2">
             <RadioGroup
               aria-label={"Recommended NAICS codes"}
               name={"naics-radio-group"}
@@ -139,21 +139,21 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                   value={code}
                   control={<Radio color="primary" />}
                   label={
-                    <div className="flex padding-y-1">
-                      <div className="text-bold margin-right-1 width-8">{code}</div>-{" "}
-                      <div className="margin-left-105">
+                    <div className="padding-y-1">
+                      <span className="text-bold margin-right-05">{code}</span>-{" "}
+                      <span className="margin-left-05">
                         {
                           descriptions.find((obj) => obj.SixDigitCode?.toString() == code)
                             ?.SixDigitDescription
                         }
-                      </div>
+                      </span>
                     </div>
                   }
                 />
               ))}
             </RadioGroup>
             <FormControlLabel
-              style={{ marginRight: "0", paddingTop: "1em", paddingBottom: "1em" }}
+              style={{ marginRight: "0", paddingTop: "0em", paddingBottom: "1em" }}
               labelPlacement="end"
               data-testid="naics-radio-input"
               onChange={() => {

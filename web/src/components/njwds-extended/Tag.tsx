@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 
-type TagVariant =
+export type TagVariant =
   | "primary"
   | "base"
   | "info"

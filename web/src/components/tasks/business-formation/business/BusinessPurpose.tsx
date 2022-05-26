@@ -27,8 +27,8 @@ export const BusinessPurpose = (): ReactElement => {
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
-          {Config.businessFormationDefaults.businessPurposeTitle}
-          <span className="text-normal font-body-lg margin-left-1">
+          {Config.businessFormationDefaults.businessPurposeTitle}{" "}
+          <span className="text-normal font-body-lg">
             {Config.businessFormationDefaults.businessPurposeOptionalLabel}
           </span>
         </div>
