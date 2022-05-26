@@ -56,7 +56,14 @@ describe("SignUpToast", () => {
   });
 
   it("does not show registration alert when user is authenticated", () => {
-    setupHookWithAuth(IsAuthenticated.TRUE);
+    setupHookWithAuth(IsAuthenticated.TRUE, false);
+    expect(
+      screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not show registration alert when user is unknown", () => {
+    setupHookWithAuth(IsAuthenticated.UNKNOWN, false);
     expect(
       screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
     ).not.toBeInTheDocument();
