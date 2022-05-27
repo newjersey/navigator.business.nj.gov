@@ -1,5 +1,11 @@
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
+import {
+  corpLegalStructures,
+  createEmptyFormationAddress,
+  createEmptyFormationFormData,
+  FormationLegalType,
+} from "@shared/formationData";
 import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
@@ -108,6 +114,7 @@ export const userRouterFactory = (
       userData = clearTaskItemChecklists(userData);
     }
 
+    userData = await updateLegalStructureIfNeeded(userData);
     userData = getAnnualFilings(userData);
 
     userDataClient
@@ -127,6 +134,54 @@ export const userRouterFactory = (
     } catch {
       return false;
     }
+  };
+
+  const legalStructureHasChanged = async (userData: UserData): Promise<boolean> => {
+    try {
+      const oldUserData = await userDataClient.get(userData.user.id);
+      return oldUserData.profileData.legalStructureId !== userData.profileData.legalStructureId;
+    } catch {
+      return false;
+    }
+  };
+
+  const businessHasFormed = async (userData: UserData): Promise<boolean> => {
+    try {
+      const oldUserData = await userDataClient.get(userData.user.id);
+      return oldUserData.formationData.formationResponse?.success ?? false;
+    } catch {
+      return false;
+    }
+  };
+
+  const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
+    if (await legalStructureHasChanged(userData)) {
+      // prevent legal structure from changing is business has been formed
+      if (await businessHasFormed(userData)) {
+        const oldUserData = await userDataClient.get(userData.user.id);
+        userData = {
+          ...userData,
+          profileData: {
+            ...userData.profileData,
+            legalStructureId: oldUserData.profileData.legalStructureId,
+          },
+        };
+      } else {
+        userData = {
+          ...userData,
+          formationData: { ...userData.formationData, formationFormData: createEmptyFormationFormData() },
+        };
+
+        if (
+          !corpLegalStructures.includes(userData.profileData.legalStructureId as FormationLegalType) &&
+          userData.formationData.formationFormData.signers.length === 0
+        ) {
+          userData.formationData.formationFormData.signers.push(createEmptyFormationAddress());
+        }
+      }
+    }
+
+    return userData;
   };
 
   const updateRoadmapSidecards = (userData: UserData): UserData => {
