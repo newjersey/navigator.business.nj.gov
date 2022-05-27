@@ -11,6 +11,7 @@ import {
   CannabisLicenseType,
   Industries,
   Industry,
+  isIndustryIdGeneric,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
@@ -30,9 +31,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const IndustriesOrdered: Industry[] = orderBy(Industries, (industry: Industry) => {
-    return industry.name;
-  });
+  const IndustriesOrdered: Industry[] = orderBy(Industries, [isIndustryIdGeneric, "name"], ["desc", "asc"]);
 
   const onIndustryIdChange = (industryId: string | undefined) => {
     let homeBasedBusiness = true;

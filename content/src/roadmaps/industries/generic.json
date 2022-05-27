@@ -35,7 +35,7 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Any Other Business Type",
+  "name": "All Other Businesses",
   "isLiquorLicenseApplicable": false,
   "isCpaRequiredApplicable": false,
   "id": "generic",
