@@ -65,30 +65,73 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
     });
+    describe("formation tasks", () => {
+      it("adds formation for llc legal type", async () => {
+        await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
+      });
 
-    it("adds formation for formation legal types", async () => {
-      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
+      describe("feature flaged structures", () => {
+        it("adds formation for llp legal type when enabled", async () => {
+          await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-partnership" }));
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
+        });
 
-      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-partnership" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
+        it("adds formation for ccorp legal type when enabled", async () => {
+          await buildUserRoadmap(generateProfileData({ legalStructureId: "c-corporation" }));
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
+        });
 
-      await buildUserRoadmap(generateProfileData({ legalStructureId: "c-corporation" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
+        it("adds formation for scorp legal type when enabled", async () => {
+          await buildUserRoadmap(generateProfileData({ legalStructureId: "s-corporation" }));
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
+        });
+
+        it("does not add formation for llp legal type when feature flag is disabled", async () => {
+          process.env.FEATURE_BUSINESS_LLP = "false";
+          await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-partnership" }));
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
+          process.env.FEATURE_BUSINESS_LLP = "true";
+        });
+
+        it("does notadd formation for ccorp legal type when feature flag is disabled", async () => {
+          process.env.FEATURE_BUSINESS_CCORP = "false";
+          await buildUserRoadmap(generateProfileData({ legalStructureId: "c-corporation" }));
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
+          process.env.FEATURE_BUSINESS_CCORP = "true";
+        });
+
+        it("does not add formation for scorp legal type when feature flag is disabled", async () => {
+          process.env.FEATURE_BUSINESS_SCORP = "false";
+          await buildUserRoadmap(generateProfileData({ legalStructureId: "s-corporation" }));
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
+          process.env.FEATURE_BUSINESS_SCORP = "true";
+        });
+      });
     });
 
-    it("adds trade-name for Trade Name legal structures", async () => {
+    it("adds trade-name for general partnership legal structure", async () => {
       await buildUserRoadmap(generateProfileData({ legalStructureId: "general-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
+    });
 
+    it("adds trade-name for sole proprietorship legal structure", async () => {
       await buildUserRoadmap(generateProfileData({ legalStructureId: "sole-proprietorship" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
