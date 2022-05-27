@@ -3,7 +3,7 @@ urlSlug: register-firm-accounting
 filename: register-firm-accounting
 name: Apply for a Certified Public Accounting License
 id: register-firm-accounting
-callToActionLink: ""
+callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 callToActionText: Apply for My License
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Accountancy
