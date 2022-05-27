@@ -106,7 +106,7 @@ describe("onboarding - starting a business", () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
-      page.selectByText("Industry", "Any Other Business Type");
+      page.selectByText("Industry", "All Other Businesses");
       await page.visitStep(3);
       expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
       expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
@@ -173,7 +173,7 @@ describe("onboarding - starting a business", () => {
     await page.visitStep(2);
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
-    page.selectByText("Industry", "Any Other Business Type");
+    page.selectByText("Industry", "All Other Businesses");
 
     await page.visitStep(3);
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
@@ -202,7 +202,7 @@ describe("onboarding - starting a business", () => {
     const page2 = within(screen.getByTestId("page-2-form"));
     expect(page2.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.selectByText("Industry", "Any Other Business Type");
+    page.selectByText("Industry", "All Other Businesses");
 
     await page.visitStep(3);
     const page3 = within(screen.getByTestId("page-3-form"));
@@ -334,7 +334,7 @@ describe("onboarding - starting a business", () => {
     const { page } = renderPage({});
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
-    page.selectByText("Industry", "Any Other Business Type");
+    page.selectByText("Industry", "All Other Businesses");
     await page.visitStep(3);
     act(() => page.clickNext());
     expect(screen.getByTestId("step-3")).toBeInTheDocument();
