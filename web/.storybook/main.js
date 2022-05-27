@@ -8,6 +8,7 @@ module.exports = {
     "@storybook/preset-scss",
     "storybook-addon-designs",
     "@storybook/addon-a11y",
+    "storybook-addon-pseudo-states",
   ],
   core: {
     builder: "webpack5",

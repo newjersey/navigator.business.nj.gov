@@ -19,8 +19,11 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
         <Content>{templateEval(Config.determineNaicsCode.successMessage, { code: props.code })}</Content>
       </Alert>
       <div className="margin-left-3">
-        <span className="text-bold margin-right-2">{props.code}</span>
-        <span className="margin-right-2">{lookupNaicsCode(props.code)?.SixDigitDescription}</span>
+        <span className="text-bold margin-right-05">{props.code}</span>
+        {"-"}
+        <span className="margin-left-05 margin-right-2">
+          {lookupNaicsCode(props.code)?.SixDigitDescription}
+        </span>
         <Button style="tertiary" onClick={props.onEdit}>
           {Config.determineNaicsCode.editText}
         </Button>
