@@ -13,6 +13,7 @@ import {
   BusinessSuffix,
   BusinessSuffixMap,
   corpLegalStructures,
+  createEmptyFormationAddress,
   createEmptyFormationFormData,
   FormationAddress,
   FormationData,
@@ -76,6 +77,14 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
         formationResponse: undefined,
         getFilingResponse: undefined,
       };
+
+  if (
+    !corpLegalStructures.includes(profileData.legalStructureId as FormationLegalType) &&
+    formationData.formationFormData.signers.length === 0
+  ) {
+    formationData.formationFormData.signers.push(createEmptyFormationAddress());
+  }
+
   return {
     user: generateUser({}),
     formProgress: "UNSTARTED",
