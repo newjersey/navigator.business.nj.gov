@@ -11,6 +11,22 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
 
+const enableFormation = (legalStructureId: string): boolean => {
+  switch (legalStructureId) {
+    case "limited-liability-partnership": {
+      return process.env.FEATURE_BUSINESS_LLP === "true" ? true : false;
+    }
+    case "c-corporation": {
+      return process.env.FEATURE_BUSINESS_CCORP === "true" ? true : false;
+    }
+    case "s-corporation": {
+      return process.env.FEATURE_BUSINESS_SCORP === "true" ? true : false;
+    }
+    default:
+      return true;
+  }
+};
+
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   const addOns = [];
   const industry = LookupIndustryById(profileData.industryId);
@@ -44,7 +60,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
   }
 
   if (profileData.legalStructureId) {
-    if (FormationLegalTypes.includes(profileData.legalStructureId as FormationLegalType)) {
+    if (
+      FormationLegalTypes.includes(profileData.legalStructureId as FormationLegalType) &&
+      enableFormation(profileData.legalStructureId)
+    ) {
       addOns.push("formation");
     } else if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing");
