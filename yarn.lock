@@ -3534,7 +3534,7 @@ __metadata:
     prettier: 2.6.2
     prettier-plugin-organize-imports: 2.3.4
     rimraf: 3.0.2
-    serverless: 3.18.1
+    serverless: 3.18.2
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.8.0
@@ -3711,7 +3711,7 @@ __metadata:
     sass: 1.52.1
     sass-loader: 13.0.0
     semantic-release: 19.0.2
-    serverless: 3.18.1
+    serverless: 3.18.2
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.8.0
@@ -10839,9 +10839,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1136.0, aws-sdk@npm:^2.1139.0, aws-sdk@npm:^2.7.0":
-  version: 2.1140.0
-  resolution: "aws-sdk@npm:2.1140.0"
+"aws-sdk@npm:^2.1136.0, aws-sdk@npm:^2.1140.0, aws-sdk@npm:^2.7.0":
+  version: 2.1144.0
+  resolution: "aws-sdk@npm:2.1144.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -10852,7 +10852,7 @@ __metadata:
     url: 0.10.3
     uuid: 3.3.2
     xml2js: 0.4.19
-  checksum: 5c81ff6486e818b21b56b117bc3aede6b74f2844c9485a25963b0b960e998bf5348a48f0dfc2ed0ad1d9479c8e3ca793a1eb5a30e360944ce3cfec47a5631ee5
+  checksum: 3e9c2f54ee4e8791fb1d343a2ba6089bb423663ade47814c86875ce2ff40fb2eec9200cd3cee7e0862835c0d0869573725fda5fd693311d1e4e58a0e7931bc47
   languageName: node
   linkType: hard
 
@@ -29776,9 +29776,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.18.1":
-  version: 3.18.1
-  resolution: "serverless@npm:3.18.1"
+"serverless@npm:3.18.2":
+  version: 3.18.2
+  resolution: "serverless@npm:3.18.2"
   dependencies:
     "@serverless/dashboard-plugin": ^6.2.2
     "@serverless/platform-client": ^4.3.2
@@ -29786,7 +29786,7 @@ __metadata:
     ajv: ^8.11.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.1
-    aws-sdk: ^2.1139.0
+    aws-sdk: ^2.1140.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
@@ -29836,7 +29836,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: daf808e2130b6361bc5a5285f294a6e45c771d4719951ee044fafc0a2c4822709beef3a587d8a988295f20bbc728df8c892bc88c235732818d6c7887de3cdb82
+  checksum: b1d828bf32f587ae5b89069f3642c8b7cc2cd5cb40da5dd635c4c68441184f09d4525ad85729a70fb7f197f358609e267219092b37ca923d5cf3e3dc5b0e1ae2
   languageName: node
   linkType: hard
 
