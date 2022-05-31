@@ -11,14 +11,15 @@ Your pharmacy permit will expire every year. You will receive a renewal notice i
 
 ---
 ### Application Requirements
-* Business Name
-* Permit Number 
-* Registration Code
-* Current Mailing and Business address
-* Pay the associated fees for the registration renewal
+- Business name
+- Permit number 
+- Registration code from your renewal notice
+- Current mailing address
+- Current business address
+- Pay the associated fees for the registration renewal
 
 > **Once completed, you will have:**  
->* A renewed pharmacy permit valid for one year. It will be mailed to your business mailing address on file
+>- A renewed pharmacy permit valid for one year. It will be mailed to your business mailing address on file
 
 >**What if don't renew my registration?**  
 >If you don't renew your registration after its expiration, your permit will be suspended and you won't be able to legally operate your business. You will have to contact your licensing board for reinstatement procedures and associated fees.
