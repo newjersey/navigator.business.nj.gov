@@ -148,9 +148,9 @@ export const llpBusinessSuffix = [
 ] as const;
 
 export const corpBusinessSuffix = [
-  "Corporation",
-  "Incorporated",
-  "Company",
+  "CORPORATION",
+  "INCORPORATED",
+  "COMPANY",
   "LTD",
   "CO",
   "CO.",

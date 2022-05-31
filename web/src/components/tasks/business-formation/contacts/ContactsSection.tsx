@@ -83,6 +83,9 @@ export const ContactsSection = (): ReactElement => {
     const invalidFields: FormationFieldErrors[] = [];
     const signErrorType: FormationErrorTypes[] = [];
 
+    if (state.formationFormData.members.length == 0 && isCorp)
+      invalidFields.push({ name: "members", types: ["director-minimum"] });
+
     if (!state.formationFormData.signers.every((it) => it.name)) signErrorType.push("signer-name");
 
     if (!state.formationFormData.signers.every((it) => it.signature)) signErrorType.push("signer-checkbox");
@@ -90,9 +93,6 @@ export const ContactsSection = (): ReactElement => {
     if (state.formationFormData.signers.length == 0) signErrorType.push("signer-minimum");
 
     if (signErrorType.length > 0) invalidFields.push({ name: "signers", types: signErrorType });
-
-    if (state.formationFormData.members.length == 0 && isCorp)
-      invalidFields.push({ name: "members", types: ["director-minimum"] });
 
     return invalidFields;
   }, [state.formationFormData, isCorp]);
@@ -188,13 +188,13 @@ export const ContactsSection = (): ReactElement => {
         ) : (
           <Signatures />
         )}
-        <BusinessFormationFieldAlert
-          showFieldsError={showSignatureError}
-          fieldsWithError={formationFieldErrors}
-        />
         <BusinessFormationEmptyFieldAlert
           showRequiredFieldsError={showRequiredFieldsError}
           requiredFieldsWithError={requiredFieldsWithError}
+        />
+        <BusinessFormationFieldAlert
+          showFieldsError={showSignatureError}
+          fieldsWithError={formationFieldErrors}
         />
       </div>
       <div className="margin-top-2">
