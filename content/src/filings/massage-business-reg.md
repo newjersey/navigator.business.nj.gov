@@ -13,7 +13,7 @@ Your massage business registration will expire every two years. You will receive
 ### Application Requirements
 * Business Name
 * License Number
-* Registration Code (in the notice received by mail) 
+* Registration code from your renewal notice
 * Professional liability insurance in a minimum amount of $1M per occurrence and $3M aggregate per policy year
 * Pay the associated fees for the registration renewal
 
