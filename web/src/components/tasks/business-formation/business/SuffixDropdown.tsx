@@ -38,6 +38,7 @@ export const SuffixDropdown = (): ReactElement => {
             {camelCaseToSentence("businessSuffix")}
           </InputLabel>
           <Select
+            autoComplete="off"
             labelId="business-suffix-label"
             id="business-suffix"
             displayEmpty
