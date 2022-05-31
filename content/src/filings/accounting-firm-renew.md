@@ -3,7 +3,7 @@ urlSlug: accounting-firm-renew
 name: Renew Your Accounting Firm Registration
 id: accounting-firm-renew
 callToActionLink: "https://newjersey.mylicense.com/eGov/Login "
-callToActionText: Renew My Accounting Firm Registration
+callToActionText: Renew My Registration
 ---
 Your accounting firm registration will expire every three years. You will receive a renewal notice in the mail 60 days prior to your registration's expiration date.
 
