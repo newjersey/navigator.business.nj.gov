@@ -334,7 +334,7 @@ describe("<BusinessFormation />", () => {
 
     await page.submitBusinessNameTab("Pizza Joint");
 
-    page.selectByText("Business suffix", "Corporation");
+    page.selectByText("Business suffix", "CORPORATION");
     page.fillText("Business total stock", "123");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
     page.selectDate(threeDaysFromNow);
