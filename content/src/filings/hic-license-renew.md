@@ -11,11 +11,11 @@ Your Home Improvement Contractor license will expire every year. You will receiv
 
 ---
 ### Application Requirements
-- Business Name
-- License Number 
+- Business name
+- License number 
 - Registration code from your renewal notice
-- Current Mailing address
-- Current Business address
+- Current mailing address
+- Current business address
 - Professional Liability Insurance with a minimum of 500,000 per occurrence
 - Pay the associated fees for the registration renewal
 
