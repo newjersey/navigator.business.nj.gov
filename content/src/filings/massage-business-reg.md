@@ -17,6 +17,8 @@ Your massage business registration will expire every two years. You will receive
 * Professional liability insurance in a minimum amount of $1M per occurrence and $3M aggregate per policy year
 * Pay the associated fees for the registration renewal
 
-> **Once completed, you will have:**
->
+> **Once completed, you will have:**  
 > * A renewed business registration valid for two years
+
+>**What if don't renew my registration?**  
+>If you don't renew your registration, your license will be suspended and you won't be able to legally run your business. You will need to contact your licensing board for reinstatement procedures and associated fees.
