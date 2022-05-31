@@ -393,7 +393,7 @@ describe("<BusinessFormation />", () => {
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
-    expect(formationFormData.businessSuffix).toEqual("Corporation");
+    expect(formationFormData.businessSuffix).toEqual("CORPORATION");
     expect(formationFormData.businessTotalStock).toEqual("123");
     expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format("YYYY-MM-DD"));
     expect(formationFormData.businessAddressLine1).toEqual("1234 main street");
