@@ -42,8 +42,8 @@ export const ReviewMembers = (): ReactElement => {
         </div>
       </div>
       {userData?.formationData.formationFormData.members.map((member, index) => (
-        <>
-          <div className="display-block tablet:display-flex" key={`${member.name}-${index}`}>
+        <div key={`${member.name}-${index}`}>
+          <div className="display-block tablet:display-flex">
             <div className={`text-bold width-11rem ${index !== 0 ? "margin-top-1" : ""}`}>
               <Content>
                 {isCorp
@@ -55,7 +55,7 @@ export const ReviewMembers = (): ReactElement => {
           </div>
           {isCorp && (
             <>
-              <div className="display-block tablet:display-flex" key={`${member.name}-${index}`}>
+              <div className="display-block tablet:display-flex">
                 <div className="text-bold width-11rem margin-top-1">
                   <Content>{Config.businessFormationDefaults.reviewPageDirectorAddressLabel}</Content>
                 </div>
@@ -71,7 +71,7 @@ export const ReviewMembers = (): ReactElement => {
               </div>
             </>
           )}
-        </>
+        </div>
       ))}
       <hr className="margin-y-205" />
     </>
