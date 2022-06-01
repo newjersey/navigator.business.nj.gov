@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
+import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures, FormationLegalType } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
@@ -42,16 +42,36 @@ export const ReviewMembers = (): ReactElement => {
         </div>
       </div>
       {userData?.formationData.formationFormData.members.map((member, index) => (
-        <div className="display-block tablet:display-flex" key={`${member.name}-${index}`}>
-          <div className={`text-bold width-11rem ${index !== 0 ? "margin-top-1" : ""}`}>
-            <Content>
-              {isCorp
-                ? Config.businessFormationDefaults.reviewPageDirectorNameLabel
-                : Config.businessFormationDefaults.reviewPageMemberNameLabel}
-            </Content>
+        <>
+          <div className="display-block tablet:display-flex" key={`${member.name}-${index}`}>
+            <div className={`text-bold width-11rem ${index !== 0 ? "margin-top-1" : ""}`}>
+              <Content>
+                {isCorp
+                  ? Config.businessFormationDefaults.reviewPageDirectorNameLabel
+                  : Config.businessFormationDefaults.reviewPageMemberNameLabel}
+              </Content>
+            </div>
+            <div className={index !== 0 ? "tablet:margin-top-1" : ""}>{member.name}</div>
           </div>
-          <div className={index !== 0 ? "tablet:margin-top-1" : ""}>{member.name}</div>
-        </div>
+          {isCorp && (
+            <>
+              <div className="display-block tablet:display-flex" key={`${member.name}-${index}`}>
+                <div className="text-bold width-11rem margin-top-1">
+                  <Content>{Config.businessFormationDefaults.reviewPageDirectorAddressLabel}</Content>
+                </div>
+                <div className="tablet:margin-top-1">
+                  {getStringifiedAddress(
+                    member.addressLine1,
+                    member.addressCity,
+                    member.addressState,
+                    member.addressZipCode,
+                    member.addressLine2
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </>
       ))}
       <hr className="margin-y-205" />
     </>
