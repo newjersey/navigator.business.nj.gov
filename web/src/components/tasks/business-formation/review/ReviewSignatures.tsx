@@ -39,8 +39,8 @@ export const ReviewSignatures = (): ReactElement => {
         </div>
       </div>
       {state.formationFormData.signers.map((signer, index) => (
-        <>
-          <div className="display-block tablet:display-flex" key={`${signer}-${index}`}>
+        <div key={`${signer}-${index}`}>
+          <div className="display-block tablet:display-flex">
             <div className="text-bold width-11rem">
               <Content>
                 {isCorp
@@ -52,7 +52,7 @@ export const ReviewSignatures = (): ReactElement => {
           </div>
           {isCorp && (
             <>
-              <div className="display-block tablet:display-flex" key={`${signer.name}-${index}`}>
+              <div className="display-block tablet:display-flex">
                 <div className="text-bold width-11rem margin-top-1">
                   <Content>{Config.businessFormationDefaults.reviewPageIncorporatorAddressLabel}</Content>
                 </div>
@@ -68,7 +68,7 @@ export const ReviewSignatures = (): ReactElement => {
               </div>
             </>
           )}
-        </>
+        </div>
       ))}
     </>
   );
