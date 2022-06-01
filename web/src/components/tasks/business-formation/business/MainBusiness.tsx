@@ -8,7 +8,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const MainBusiness = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);

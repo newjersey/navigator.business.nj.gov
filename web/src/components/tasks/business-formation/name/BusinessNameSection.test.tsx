@@ -15,7 +15,6 @@ import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

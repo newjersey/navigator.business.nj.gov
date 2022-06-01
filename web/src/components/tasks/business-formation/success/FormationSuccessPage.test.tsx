@@ -5,7 +5,6 @@ import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseD
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationLegalType, GetFilingResponse, ProfileData } from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 
 jest.mock("@/lib/data-hooks/useDocuments");
 

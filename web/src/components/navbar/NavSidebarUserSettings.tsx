@@ -11,7 +11,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext, useMemo, useState } from "react";
+import { ReactElement, useContext, useMemo, useState } from "react";
 
 export const NavSidebarUserSettings = (): ReactElement => {
   const { userData, update } = useUserData();

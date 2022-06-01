@@ -3,7 +3,7 @@ import { Task } from "@/components/Task";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import * as types from "@/lib/types/types";
 import { isStepCompleted } from "@/lib/utils/helpers";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   step: types.Step;

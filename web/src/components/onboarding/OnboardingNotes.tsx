@@ -1,5 +1,5 @@
 import { OnboardingField } from "@/components/onboarding/OnboardingField";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   headerAriaLevel?: number;

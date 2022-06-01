@@ -7,7 +7,7 @@ import { SectionType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
-import React, { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   sectionType: SectionType;

@@ -7,7 +7,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { CannabisPriorityStatusDisplayContent, Task } from "@/lib/types/types";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface Props {
   task: Task;

@@ -4,7 +4,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FeedbackRequestDialogNames } from "@/lib/types/types";
 import { makeButtonIcon } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 type Props = {
   onClose: () => void;

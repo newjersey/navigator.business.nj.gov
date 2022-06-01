@@ -62,7 +62,7 @@ import { Box, CircularProgress } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { FormEvent, ReactElement, ReactNode, useContext, useState } from "react";
+import { FormEvent, ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   municipalities: Municipality[];

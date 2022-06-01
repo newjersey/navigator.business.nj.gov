@@ -28,7 +28,6 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import React from "react";
 
 function flushPromises() {
   return new Promise((resolve) => process.nextTick(resolve));

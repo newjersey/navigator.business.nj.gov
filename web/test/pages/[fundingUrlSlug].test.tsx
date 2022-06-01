@@ -1,7 +1,6 @@
 import FundingPage from "@/pages/funding/[fundingUrlSlug]";
 import { generateFunding } from "@/test/factories";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 
 describe("funding page", () => {
   it("shows the funding details", () => {

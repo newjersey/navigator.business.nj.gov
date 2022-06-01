@@ -17,7 +17,6 @@ import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboard
 import { createEmptyProfileData, getCurrentDate, ProfileData } from "@businessnjgovnavigator/shared/";
 import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
-import React from "react";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

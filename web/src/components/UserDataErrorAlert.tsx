@@ -2,7 +2,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { UserDataError } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const UserDataErrorLookup: Record<UserDataError, string> = {
   NO_DATA: Config.siteWideErrorMessages.errorTextNoData,

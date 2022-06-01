@@ -3,7 +3,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export const NavBarLanding = (): ReactElement => {
   const router = useRouter();

@@ -5,7 +5,7 @@ import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { BusinessSuffix, BusinessSuffixMap, FormationLegalType } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import React, { FocusEvent, ReactElement, useContext } from "react";
+import { FocusEvent, ReactElement, useContext } from "react";
 
 export const SuffixDropdown = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);

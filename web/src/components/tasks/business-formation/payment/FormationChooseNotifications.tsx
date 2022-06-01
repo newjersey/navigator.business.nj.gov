@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const FormationChooseNotifications = (): ReactElement => {
   const { state, setFormationFormData } = useContext(BusinessFormationContext);

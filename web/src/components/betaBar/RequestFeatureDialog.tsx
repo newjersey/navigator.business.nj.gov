@@ -8,7 +8,7 @@ import { FeedbackRequestDialogNames } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 
 const createFeedbackModalErrorMap = () => ({

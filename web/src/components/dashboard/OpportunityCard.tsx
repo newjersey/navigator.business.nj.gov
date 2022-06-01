@@ -7,7 +7,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { OpportunityCardStatus } from "./OpportunityCardStatus";
 
 interface Opportunity {

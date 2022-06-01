@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/njwds/Icon";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   label: string;

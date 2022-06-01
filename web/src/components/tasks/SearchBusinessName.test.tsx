@@ -15,7 +15,6 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

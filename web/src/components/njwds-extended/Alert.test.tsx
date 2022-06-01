@@ -1,6 +1,5 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { render } from "@testing-library/react";
-import React from "react";
 
 describe("Alert", () => {
   describe("Variants", () => {

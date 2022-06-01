@@ -3,7 +3,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { getDollarValue } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox } from "@mui/material";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const FormationChooseDocuments = (): ReactElement => {
   const { state, setFormationFormData } = useContext(BusinessFormationContext);

@@ -8,7 +8,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   profileData: ProfileData;

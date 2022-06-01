@@ -5,7 +5,7 @@ import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/stat
 import { TextField } from "@mui/material";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
-import React, { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
+import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
 interface Props {
   deadTasks: string[];

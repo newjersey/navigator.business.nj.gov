@@ -1,6 +1,5 @@
 import { Tag } from "@/components/njwds-extended/Tag";
 import { render } from "@testing-library/react";
-import React from "react";
 
 describe("Tag", () => {
   describe("Variants", () => {

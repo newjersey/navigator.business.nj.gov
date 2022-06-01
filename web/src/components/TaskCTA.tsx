@@ -1,7 +1,7 @@
 import { Button } from "@/components/njwds-extended/Button";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   link: string;

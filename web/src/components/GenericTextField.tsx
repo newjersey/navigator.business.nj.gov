@@ -1,6 +1,6 @@
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import { TextField, TextFieldProps } from "@mui/material";
-import React, { ChangeEvent, FocusEvent, ReactElement } from "react";
+import { ChangeEvent, FocusEvent, ReactElement } from "react";
 
 export interface GenericTextFieldProps {
   fieldName: string;

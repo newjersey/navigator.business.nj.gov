@@ -5,7 +5,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures, FormationLegalType } from "@businessnjgovnavigator/shared/";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
 export const ReviewMembers = (): ReactElement => {

@@ -4,7 +4,7 @@ import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared/";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   userData: UserData;

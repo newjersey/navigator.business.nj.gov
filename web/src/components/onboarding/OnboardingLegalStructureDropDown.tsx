@@ -7,7 +7,7 @@ import { setHeaderRole } from "@/lib/utils/helpers";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import orderBy from "lodash.orderby";
-import React, { ReactElement, ReactNode, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   disabled?: boolean;

@@ -1,7 +1,7 @@
 import { DialogOneButton } from "@/components/DialogOneButton";
 import { FeedbackRequestDialogNames } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 type Props = {
   onClose: () => void;

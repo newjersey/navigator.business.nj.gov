@@ -1,6 +1,6 @@
 import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
 import { Paper, Snackbar, SnackbarProps } from "@mui/material";
-import React, { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   variant: AlertVariant;

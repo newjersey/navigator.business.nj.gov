@@ -4,7 +4,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 export const GraduationBox = (): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);

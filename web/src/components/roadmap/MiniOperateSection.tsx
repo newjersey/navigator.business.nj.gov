@@ -2,7 +2,7 @@ import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { OperateReference, SectionType } from "@/lib/types/types";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;

@@ -24,7 +24,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
+import { ReactElement, useEffect, useMemo, useState } from "react";
 import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
 export const allowFormation = (legalStructureId: string | undefined) => {

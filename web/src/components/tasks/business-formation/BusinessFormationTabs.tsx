@@ -3,7 +3,7 @@ import { ContactsSection } from "@/components/tasks/business-formation/contacts/
 import { BusinessNameSection } from "@/components/tasks/business-formation/name/BusinessNameSection";
 import { PaymentSection } from "@/components/tasks/business-formation/payment/PaymentSection";
 import { ReviewSection } from "@/components/tasks/business-formation/review/ReviewSection";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
 export const BusinessFormationTabs: { component: ReactElement; section: string }[] = [

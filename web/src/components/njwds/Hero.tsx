@@ -4,7 +4,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   onClick: () => void;

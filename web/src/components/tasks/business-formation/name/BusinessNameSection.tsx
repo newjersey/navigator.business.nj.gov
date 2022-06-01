@@ -12,7 +12,7 @@ import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField, useMediaQuery } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
   BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,

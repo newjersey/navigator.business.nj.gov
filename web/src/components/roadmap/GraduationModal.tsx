@@ -22,7 +22,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { FormControl } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useMemo, useState } from "react";
 
 interface Props {
   open: boolean;

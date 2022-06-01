@@ -9,7 +9,7 @@ import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import os from "os";
-import React, { Dispatch, ReactElement, SetStateAction } from "react";
+import { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
   subject: ReactElement,

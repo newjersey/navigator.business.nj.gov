@@ -13,7 +13,7 @@ import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 type OnboardingPage = { component: ReactNode; getErrorMap: () => ErrorFieldMap | undefined };
 

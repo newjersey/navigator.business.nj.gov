@@ -3,7 +3,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);

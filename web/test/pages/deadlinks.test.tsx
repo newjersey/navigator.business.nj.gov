@@ -2,7 +2,6 @@ import * as api from "@/lib/api-client/apiClient";
 import DeadLinksPage from "@/pages/mgmt/deadlinks";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Options } from "broken-link-checker";
-import React from "react";
 
 jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;

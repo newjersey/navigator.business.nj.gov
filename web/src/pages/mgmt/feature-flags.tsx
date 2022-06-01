@@ -4,7 +4,7 @@ import * as apiClient from "@/lib/api-client/apiClient";
 import { TextField } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import React, { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
+import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
 interface Props {
   envVars: string;

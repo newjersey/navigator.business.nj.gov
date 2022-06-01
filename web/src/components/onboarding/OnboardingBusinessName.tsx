@@ -2,7 +2,7 @@ import { OnboardingField } from "@/components/onboarding/OnboardingField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   onValidation?: (field: ProfileFields, invalid: boolean) => void;

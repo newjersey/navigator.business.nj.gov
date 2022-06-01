@@ -19,7 +19,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useMemo, useState } from "react";
+import { ReactElement, useEffect, useMemo, useState } from "react";
 
 interface Props {
   displayContent: DashboardDisplayContent;

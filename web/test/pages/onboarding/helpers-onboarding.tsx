@@ -25,7 +25,6 @@ import {
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";
-import React from "react";
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();

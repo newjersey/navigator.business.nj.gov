@@ -14,7 +14,7 @@ import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import "njwds/dist/css/styles.css";
-import React, { ReactElement, useEffect, useReducer, useState } from "react";
+import { ReactElement, useEffect, useReducer, useState } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";

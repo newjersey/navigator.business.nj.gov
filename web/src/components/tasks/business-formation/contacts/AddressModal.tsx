@@ -5,7 +5,7 @@ import { StateDropdown } from "@/components/StateDropdown";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyFormationAddress, FormationAddress } from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface DisplayContent {
   title: string;
