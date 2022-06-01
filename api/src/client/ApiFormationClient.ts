@@ -134,7 +134,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
     const additionalProvisions =
       formationFormData.provisions.length > 0
         ? {
-            OtherProvisions: formationFormData.provisions.map((it: string) => ({ Provision: it })),
+            [BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType]
+              .provisionsFieldName]: formationFormData.provisions.map((it: string) => ({ Provision: it })),
           }
         : undefined;
 
@@ -363,6 +364,7 @@ type FormationFields = {
   shortDescription: string;
   signerTitle: SignerTitle;
   additionalDataKey: AdditionalDataKey;
+  provisionsFieldName: string;
 };
 
 const BusinessTypeMap: Record<FormationLegalType, FormationFields> = {
@@ -371,24 +373,28 @@ const BusinessTypeMap: Record<FormationLegalType, FormationFields> = {
     shortDescription: "LLC",
     signerTitle: "Authorized Representative",
     additionalDataKey: "AdditionalLimitedLiabilityCompany",
+    provisionsFieldName: "OtherProvisions",
   },
   "limited-liability-partnership": {
     businessType: "DomesticLimitedLiabilityPartnership",
     shortDescription: "LLP",
     signerTitle: "Authorized Partner",
     additionalDataKey: "AdditionalLimitedLiabilityPartnership",
+    provisionsFieldName: "OtherProvisions",
   },
   "c-corporation": {
     businessType: "DomesticForProfitCorporation",
     shortDescription: "DP",
     signerTitle: "Incorporator",
     additionalDataKey: "AdditionalCCorpOrProfessionalCorp",
+    provisionsFieldName: "AdditionalProvisions",
   },
   "s-corporation": {
     businessType: "DomesticForProfitCorporation",
     shortDescription: "DP",
     signerTitle: "Incorporator",
     additionalDataKey: "AdditionalCCorpOrProfessionalCorp",
+    provisionsFieldName: "AdditionalProvisions",
   },
 };
 
