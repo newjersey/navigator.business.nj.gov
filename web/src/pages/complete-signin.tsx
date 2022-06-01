@@ -4,7 +4,7 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import Home from "@/pages/index";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const CompleteSignin = (): ReactElement => {
   useUnauthedOnlyPage();

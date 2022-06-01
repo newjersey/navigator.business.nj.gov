@@ -10,7 +10,7 @@ import { Funding, OperateReference } from "@/lib/types/types";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   funding: Funding;

@@ -1,7 +1,7 @@
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import React, { ReactElement, ReactNode, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 export const SignUpModalWrapper = (props: { children: ReactNode }): ReactElement => {
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);

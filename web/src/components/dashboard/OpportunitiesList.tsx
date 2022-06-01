@@ -10,7 +10,7 @@ import { Certification, DashboardDisplayContent, Funding } from "@/lib/types/typ
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   certifications: Certification[];

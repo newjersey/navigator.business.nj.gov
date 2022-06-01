@@ -8,7 +8,6 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import React from "react";
 
 jest.mock("next/router");
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));

@@ -13,7 +13,7 @@ import {
 } from "@/lib/types/types";
 import { Preferences, UserData } from "@businessnjgovnavigator/shared/";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import React, { ReactElement, useEffect, useRef } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 export const useMountEffect = (fun: () => void): void => useEffect(fun, []);

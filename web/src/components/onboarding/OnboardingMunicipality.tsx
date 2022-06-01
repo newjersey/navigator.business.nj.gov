@@ -7,7 +7,7 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { Municipality } from "@businessnjgovnavigator/shared/";
-import React, { FocusEvent, ReactElement, useContext } from "react";
+import { FocusEvent, ReactElement, useContext } from "react";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

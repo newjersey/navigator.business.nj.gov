@@ -12,7 +12,7 @@ import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, OperateReference } from "@/lib/types/types";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   certification: Certification;

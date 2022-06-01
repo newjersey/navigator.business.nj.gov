@@ -4,7 +4,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const Provisions = (): ReactElement => {
   const MAX_CHARS = 3000;

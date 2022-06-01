@@ -2,7 +2,7 @@ import { FeedbackSubmittedDialog } from "@/components/betaBar/FeedbackSubmittedD
 import { RequestFeatureDialog } from "@/components/betaBar/RequestFeatureDialog";
 import { SelectFeedbackDialog } from "@/components/betaBar/SelectFeedbackDialog";
 import { FeedbackRequestDialogNames } from "@/lib/types/types";
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 type Props = {
   handleClose: () => void;

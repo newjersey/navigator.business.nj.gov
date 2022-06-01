@@ -10,7 +10,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import merge from "lodash.merge";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   entry?: any;

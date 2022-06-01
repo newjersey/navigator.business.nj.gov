@@ -6,7 +6,6 @@ import { generateProfileData } from "@/test/factories";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 import removeMd from "remove-markdown";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

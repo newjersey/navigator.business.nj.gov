@@ -6,7 +6,7 @@ import { onSignOut } from "@/lib/auth/signinHelper";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   position: "HERO" | "NAVBAR";

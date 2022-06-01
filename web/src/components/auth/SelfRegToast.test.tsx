@@ -6,7 +6,6 @@ import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 
 jest.mock("next/router");
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));

@@ -16,7 +16,7 @@ import {
   setPreferencesCloseSection,
 } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;

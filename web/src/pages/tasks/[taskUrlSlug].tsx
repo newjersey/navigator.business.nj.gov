@@ -27,7 +27,7 @@ import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import React, { ReactElement, ReactNode, useMemo } from "react";
+import { ReactElement, ReactNode, useMemo } from "react";
 
 interface Props {
   task: Task;

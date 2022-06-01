@@ -9,7 +9,7 @@ import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import Link from "next/link";
-import React, { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useMemo, useState } from "react";
 interface Props {
   scrolled: boolean;
   task?: Task;

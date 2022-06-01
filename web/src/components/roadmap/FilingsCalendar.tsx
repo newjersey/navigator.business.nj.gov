@@ -7,7 +7,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { getCurrentDate, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   taxFilings: TaxFiling[];

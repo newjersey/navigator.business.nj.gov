@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { FormationTextField } from "@businessnjgovnavigator/shared/";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"> {
   fieldName: Exclude<FormationTextField, "businessName" | "provisions">;

@@ -2,7 +2,6 @@ import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

@@ -9,7 +9,7 @@ import { createEmptyNameAndAddress, NameAndAddress } from "@businessnjgovnavigat
 import { TextField } from "@mui/material";
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
-import React, { ChangeEvent, FormEvent, ReactElement, useState } from "react";
+import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 
 const useStyles = makeStyles(() =>
   createStyles({

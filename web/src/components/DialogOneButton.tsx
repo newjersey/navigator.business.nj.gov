@@ -2,7 +2,7 @@ import { DialogZeroButton } from "@/components/DialogZeroButton";
 import { AlertVariant } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { Breakpoint } from "@mui/material";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface Props {
   isOpen: boolean;

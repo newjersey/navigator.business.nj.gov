@@ -46,7 +46,6 @@ import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers"
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
   return {

@@ -1,5 +1,4 @@
 import { toProperCase } from "@businessnjgovnavigator/shared/";
-import React from "react";
 
 interface Props {
   dueDate?: string;

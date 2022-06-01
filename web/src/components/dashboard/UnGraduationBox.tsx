@@ -5,7 +5,7 @@ import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useRouter } from "next/router";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export const UnGraduationBox = (): ReactElement => {
   const { userData, update } = useUserData();

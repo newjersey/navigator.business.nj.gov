@@ -3,7 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   task: Task;

@@ -17,7 +17,7 @@ import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
-import React, { ReactElement, useContext, useEffect, useMemo, useState } from "react";
+import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const ContactsSection = (): ReactElement => {
   const { state, setErrorMap, setTab, setFormationFormData } = useContext(BusinessFormationContext);

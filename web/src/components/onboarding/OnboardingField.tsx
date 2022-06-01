@@ -8,7 +8,7 @@ import { ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import { TextFieldProps } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "onValidation" | "fieldName"> {
   fieldName: Exclude<ProfileFields, keyof BusinessUser>;

@@ -6,7 +6,7 @@ import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards"
 import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { IconButton, useMediaQuery } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const SignUpToast = (): ReactElement => {
   const { showCard } = useRoadmapSidebarCards();

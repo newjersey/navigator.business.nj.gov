@@ -2,7 +2,6 @@ import { BetaBar } from "@/components/betaBar/BetaBar";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

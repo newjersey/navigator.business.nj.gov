@@ -12,7 +12,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   filing: Filing;

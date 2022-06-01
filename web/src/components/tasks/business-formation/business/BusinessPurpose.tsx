@@ -4,7 +4,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 export const BusinessPurpose = (): ReactElement => {
   const MAX_CHARS = 300;

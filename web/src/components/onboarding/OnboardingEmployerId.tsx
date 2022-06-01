@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval } from "@/lib/utils/helpers";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

@@ -2,7 +2,7 @@ import { SidebarPageLayout, SidebarPageLayoutProps } from "@/components/njwds-ex
 import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { OperateReference, Task } from "@/lib/types/types";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props extends Omit<SidebarPageLayoutProps, "navChildren"> {
   operateReferences?: Record<string, OperateReference>;

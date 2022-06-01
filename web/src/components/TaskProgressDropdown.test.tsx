@@ -4,7 +4,6 @@ import { TaskProgress } from "@/lib/types/types";
 import { withAuthAlert } from "@/test/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
 
 describe("<TaskProgressDropdown />", () => {
   const notStartedText = Config.taskProgress.NOT_STARTED;

@@ -33,7 +33,6 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import React from "react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();

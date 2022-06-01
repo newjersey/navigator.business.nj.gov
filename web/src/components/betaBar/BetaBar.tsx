@@ -2,7 +2,7 @@ import { FeedbackModal } from "@/components/betaBar/FeedbackModal";
 import { Button } from "@/components/njwds-extended/Button";
 import { makeButtonIcon } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 export const BetaBar = (): ReactElement => {
   const [showModal, setShowModal] = useState<boolean>(false);

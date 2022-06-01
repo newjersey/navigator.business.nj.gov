@@ -5,7 +5,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const ReviewMainBusinessLocation = (): ReactElement => {
   const { state, setTab } = useContext(BusinessFormationContext);

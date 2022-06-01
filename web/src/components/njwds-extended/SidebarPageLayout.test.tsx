@@ -4,7 +4,6 @@ import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
