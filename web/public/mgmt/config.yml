@@ -641,6 +641,12 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Review Page - Director Address Label,
+                  name: reviewPageDirectorAddressLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
                   label: Review Page - Provisions Header,
                   name: reviewPageProvisionsHeader,
                   widget: string,
@@ -690,6 +696,12 @@ collections:
               - {
                   label: Review Page - Signer (Incorporator) Label,
                   name: reviewPageIncorporatorNameLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Signer (Incorporator) Name Label,
+                  name: reviewPageIncorporatorAddressLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
