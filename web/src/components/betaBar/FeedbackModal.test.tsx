@@ -5,7 +5,6 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router");

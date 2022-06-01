@@ -10,7 +10,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { CSSProperties, ReactElement, useContext } from "react";
+import { CSSProperties, ReactElement, useContext } from "react";
 
 interface ContentProps {
   children: string;

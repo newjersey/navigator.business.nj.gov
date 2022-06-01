@@ -21,7 +21,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   displayContent: RoadmapDisplayContent;

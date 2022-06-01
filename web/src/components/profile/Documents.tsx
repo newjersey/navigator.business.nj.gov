@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { UserData } from "@businessnjgovnavigator/shared";
-import React, { ReactElement, useContext, useMemo } from "react";
+import { ReactElement, useContext, useMemo } from "react";
 
 interface Props {
   CMS_ONLY_fakeUserData?: UserData; // for CMS only

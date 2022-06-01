@@ -3,7 +3,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
 export const ReviewBusinessPurpose = () => {

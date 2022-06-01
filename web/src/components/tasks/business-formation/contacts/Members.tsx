@@ -2,7 +2,7 @@ import { Addresses } from "@/components/tasks/business-formation/contacts/Addres
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const Members = (): ReactElement => {
   const { state, setFormationFormData } = useContext(BusinessFormationContext);

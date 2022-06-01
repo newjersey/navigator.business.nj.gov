@@ -4,7 +4,7 @@ import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLega
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import merge from "lodash.merge";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   entry?: any;

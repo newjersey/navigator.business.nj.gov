@@ -1,6 +1,6 @@
 import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   isOpen: boolean;

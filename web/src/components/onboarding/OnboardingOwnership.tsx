@@ -8,7 +8,7 @@ import {
   OwnershipType,
 } from "@businessnjgovnavigator/shared/";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   headerAriaLevel?: number;

@@ -11,7 +11,7 @@ import {
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextField } from "@mui/material";
-import React, { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 advancedDateLibrary();
 
 export const FormationStartDate = (): ReactElement => {

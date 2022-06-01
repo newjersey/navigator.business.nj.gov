@@ -1,6 +1,5 @@
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { render } from "@testing-library/react";
-import React from "react";
 
 describe("OpportunityCard", () => {
   it("matches the layout", () => {

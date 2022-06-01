@@ -1,7 +1,6 @@
 import CertificationPage from "@/pages/certification/[certificationUrlSlug]";
 import { generateCertification } from "@/test/factories";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 
 describe("certification page", () => {
   it("shows the certification details", () => {

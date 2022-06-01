@@ -14,7 +14,7 @@ import analytics from "@/lib/utils/analytics";
 import { getPhoneNumberFormat, scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext, useMemo, useState } from "react";
+import { ReactElement, useContext, useMemo, useState } from "react";
 
 export const PaymentSection = (): ReactElement => {
   const { state, setErrorMap, setTab, setShowResponseAlert } = useContext(BusinessFormationContext);

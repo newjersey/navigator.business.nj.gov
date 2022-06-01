@@ -3,7 +3,7 @@ import { ContextInfoElement } from "@/components/ContextInfoElement";
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import analytics from "@/lib/utils/analytics";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const ContextualInfoPanel = (): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);

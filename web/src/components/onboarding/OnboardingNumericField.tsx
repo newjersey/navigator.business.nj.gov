@@ -1,7 +1,7 @@
 import { OnboardingField, OnboardingProps } from "@/components/onboarding/OnboardingField";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface NumericFieldProps {
   maxLength: number;

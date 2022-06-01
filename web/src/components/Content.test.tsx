@@ -3,7 +3,6 @@ import * as signinHelper from "@/lib/auth/signinHelper";
 import analytics from "@/lib/utils/analytics";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
 
 function setupMockAnalytics(): typeof analytics {
   return {

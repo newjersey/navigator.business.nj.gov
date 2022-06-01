@@ -2,7 +2,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 export const InnovFooter = (): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);

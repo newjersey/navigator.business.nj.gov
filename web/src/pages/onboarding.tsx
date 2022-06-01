@@ -51,7 +51,7 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, {
+import {
   FormEvent,
   ReactElement,
   useCallback,

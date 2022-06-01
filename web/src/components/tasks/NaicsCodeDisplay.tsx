@@ -4,7 +4,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   onEdit: () => void;

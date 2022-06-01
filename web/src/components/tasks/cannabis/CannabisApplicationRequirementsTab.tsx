@@ -6,7 +6,7 @@ import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityType
 import { CannabisApplyForLicenseDisplayContent, Task } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   displayContent: CannabisApplyForLicenseDisplayContent;

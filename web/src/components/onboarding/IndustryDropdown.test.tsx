@@ -1,6 +1,5 @@
 import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import React from "react";
 
 describe("Industry Dropdown", () => {
   it("displays the Generic Industry as the first item in the dropdown list", () => {

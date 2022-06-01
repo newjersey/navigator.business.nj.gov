@@ -3,7 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LicenseStatus, LicenseStatusItem } from "@businessnjgovnavigator/shared/";
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   items: LicenseStatusItem[];

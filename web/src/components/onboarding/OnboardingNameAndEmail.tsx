@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import React, { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   onValidation: (fieldName: ProfileFields, invalid: boolean) => void;

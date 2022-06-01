@@ -2,7 +2,6 @@ import { Task } from "@/components/Task";
 import { generateTask } from "@/test/factories";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 
 describe("<Task />", () => {
   it("links to the task page by url slug", () => {

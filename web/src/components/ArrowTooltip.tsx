@@ -1,7 +1,7 @@
 import analytics from "@/lib/utils/analytics";
 import { Theme, Tooltip, TooltipProps } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const useStylesBootstrap = makeStyles((theme: Theme) => ({
   arrow: {

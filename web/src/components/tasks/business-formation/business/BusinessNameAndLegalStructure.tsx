@@ -9,7 +9,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationLegalType, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
 interface Props {

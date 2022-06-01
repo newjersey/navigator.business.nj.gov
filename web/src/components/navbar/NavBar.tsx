@@ -4,7 +4,7 @@ import { NavBarMobile } from "@/components/navbar/NavBarMobile";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference, Task } from "@/lib/types/types";
 import { useMediaQuery } from "@mui/material";
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 type Props = {
   landingPage?: boolean;

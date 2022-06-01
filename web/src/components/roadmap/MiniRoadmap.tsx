@@ -4,7 +4,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getSectionNames, isStepCompleted } from "@/lib/utils/helpers";
-import React, { ReactElement, useCallback } from "react";
+import { ReactElement, useCallback } from "react";
 
 interface Props {
   activeTaskId?: string | undefined;

@@ -8,7 +8,7 @@ import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { IconButton } from "@mui/material";
-import React, { ReactElement, useContext, useEffect } from "react";
+import { ReactElement, useContext, useEffect } from "react";
 
 export const SelfRegToast = (): ReactElement => {
   const { isAuthenticated, registrationAlertStatus, setRegistrationAlertStatus } =

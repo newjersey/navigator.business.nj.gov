@@ -9,7 +9,6 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 

@@ -2,7 +2,7 @@ import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdo
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Municipality } from "@businessnjgovnavigator/shared/";
-import React, { FocusEvent, ReactElement, useContext } from "react";
+import { FocusEvent, ReactElement, useContext } from "react";
 
 export const FormationMunicipality = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);

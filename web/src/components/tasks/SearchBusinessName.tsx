@@ -10,7 +10,7 @@ import { Task } from "@/lib/types/types";
 import { getModifiedTaskContent, templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField } from "@mui/material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 interface Props {
   task: Task;
 }

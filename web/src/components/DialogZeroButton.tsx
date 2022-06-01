@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface Props {
   isOpen: boolean;

@@ -11,7 +11,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const ReviewSection = (): ReactElement => {
   const { state, setTab } = useContext(BusinessFormationContext);

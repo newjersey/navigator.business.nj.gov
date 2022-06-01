@@ -11,7 +11,7 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Box, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const SignUpModal = (): ReactElement => {
   const { userData, update } = useUserData();

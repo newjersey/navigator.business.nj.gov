@@ -8,7 +8,6 @@ import {
 import { withAuth, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
-import React from "react";
 
 jest.mock("next/router");
 

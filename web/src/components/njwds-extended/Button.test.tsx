@@ -1,6 +1,5 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { render } from "@testing-library/react";
-import React from "react";
 
 describe("Button", () => {
   describe("Styles", () => {

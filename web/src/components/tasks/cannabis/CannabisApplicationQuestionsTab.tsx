@@ -4,7 +4,7 @@ import { MicrobusinessRadioQuestion } from "@/components/tasks/cannabis/Microbus
 import { PriorityStatusCheckboxes } from "@/components/tasks/cannabis/PriorityStatusCheckboxes";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   onNextTab: () => void;

@@ -2,7 +2,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFormData } from "@businessnjgovnavigator/shared/";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   showRequiredFieldsError: boolean;

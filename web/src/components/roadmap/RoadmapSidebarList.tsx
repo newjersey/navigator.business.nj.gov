@@ -3,7 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SidebarCardContent } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { CircularProgress } from "@mui/material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   sidebarDisplayContent: Record<string, SidebarCardContent>;

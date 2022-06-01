@@ -10,7 +10,7 @@ import analytics from "@/lib/utils/analytics";
 import { scrollToTop, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures, getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
-import React, { ReactElement, useContext, useMemo, useState } from "react";
+import { ReactElement, useContext, useMemo, useState } from "react";
 
 export const BusinessSection = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap, setTab } = useContext(BusinessFormationContext);

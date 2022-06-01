@@ -3,7 +3,6 @@ import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { SidebarCardContent } from "@/lib/types/types";
-import React from "react";
 
 type Props = {
   card: SidebarCardContent;
