@@ -272,7 +272,7 @@ describe("ApiFormationClient", () => {
               },
             },
             AdditionalCCorpOrProfessionalCorp: {
-              OtherProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
+              AdditionalProvisions: [{ Provision: "provision1" }, { Provision: "provision2" }],
             },
             CompanyProfit: "Profit",
             MemberAttestation: true,
