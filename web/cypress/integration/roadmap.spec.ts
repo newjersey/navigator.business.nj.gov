@@ -177,6 +177,8 @@ describe("Roadmap [feature] [all] [group2]", () => {
       legalStructureId,
       townDisplayName,
       requiresCpa,
+      isNewsletterChecked: true,
+      isContactMeChecked: true,
     });
 
     cy.wait("@new-user").then((event) => {

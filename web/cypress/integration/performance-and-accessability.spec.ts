@@ -159,8 +159,8 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.typeFullName("Michael Smith");
         onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
         onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
-        onOnboardingPage.toggleNewsletterCheckbox(true);
-        onOnboardingPage.toggleContactMeCheckbox(true);
+        onOnboardingPage.toggleNewsletterCheckbox(false);
+        onOnboardingPage.toggleContactMeCheckbox(false);
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
