@@ -1,22 +1,28 @@
-import { FeedbackSubmittedDialog } from "@/components/betaBar/FeedbackSubmittedDialog";
-import { RequestFeatureDialog } from "@/components/betaBar/RequestFeatureDialog";
-import { SelectFeedbackDialog } from "@/components/betaBar/SelectFeedbackDialog";
+import { FeedbackSubmittedDialog } from "@/components/FeedbackModal/FeedbackSubmittedDialog";
+import { ReportIssueDialog } from "@/components/FeedbackModal/ReportIssueDialog";
+import { RequestFeatureDialog } from "@/components/FeedbackModal/RequestFeatureDialog";
+import { SelectFeedbackDialog } from "@/components/FeedbackModal/SelectFeedbackDialog";
 import { FeedbackRequestDialogNames } from "@/lib/types/types";
 import { ReactElement, useEffect, useState } from "react";
 
 type Props = {
   handleClose: () => void;
   isOpen: boolean;
+  isReportAnIssueBar?: boolean;
 };
 
-export const FeedbackModal = ({ handleClose, isOpen }: Props): ReactElement => {
+export const FeedbackModal = ({ handleClose, isOpen, isReportAnIssueBar }: Props): ReactElement => {
   const [currentFeedback, setCurrentFeedback] = useState<FeedbackRequestDialogNames>("Select Feedback");
 
   useEffect(() => {
     if (!isOpen) {
       setCurrentFeedback("Select Feedback");
     }
-  }, [isOpen]);
+
+    if (isReportAnIssueBar) {
+      setCurrentFeedback("Report Issue");
+    }
+  }, [isOpen, isReportAnIssueBar]);
 
   if (!isOpen) return <></>;
 
@@ -34,6 +40,9 @@ export const FeedbackModal = ({ handleClose, isOpen }: Props): ReactElement => {
           onClose={handleClose}
           setCurrentFeedback={setCurrentFeedback}
         />
+      )}
+      {currentFeedback === "Report Issue" && (
+        <ReportIssueDialog isOpen={isOpen} onClose={handleClose} setCurrentFeedback={setCurrentFeedback} />
       )}
     </>
   );

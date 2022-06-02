@@ -24,28 +24,41 @@ collections:
         name: "config"
         file: "content/src/fieldConfig/config.json"
         fields:
-          - label: Beta Bar
-            name: betaBar
+          - label: Bug Bar
+            name: bugBar
             collapsed: true
             widget: object
-            summary: "{{betaBar}}"
+            summary: "{{bugBar}}"
             fields:
-              - { label: Beta Main Text, name: betaMainText, widget: string }
-              - { label: Beta Form Link - Poppy, name: betaFormLinkStarting, widget: string }
-              - { label: Beta Form Link - Oscar, name: betaFormLinkOwning, widget: string }
-              - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
-              - { label: Beta Modal Title, name: betaModalTitle, widget: string }
-              - { label: Beta Modal Body Text, name: betaModalBodyText, widget: string }
-              - { label: Beta Modal Intercom Button Text, name: betaModalIntercomButtonText, widget: string }
-              - { label: Beta Modal Feedback Button Text, name: betaModalFeedbackButtonText, widget: string }
+              - { label: Bug Bar Text, name: bugBarText, widget: string }
+          - label: Feedback Modal
+            name: feedbackModal
+            collapsed: true
+            widget: object
+            summary: "{{feedbackModal}}"
+            fields:
+              - { label: Beta Form Link - Poppy, name: feedbackModalLinkStarting, widget: string }
+              - { label: Beta Form Link - Oscar, name: feedbackModalLinkOwning, widget: string }
+              - { label: Beta Modal Title, name: feedbackModalTitle, widget: string }
+              - { label: Beta Modal Body Text, name: feedbackModalBodyText, widget: string }
+              - {
+                  label: Beta Modal Intercom Button Text,
+                  name: feedbackModalIntercomButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Beta Modal Feedback Button Text,
+                  name: feedbackModalShareFeedbackButtonText,
+                  widget: string,
+                }
               - {
                   label: Beta Modal Bug Report Button Text,
-                  name: betaModalBugReportButtonText,
+                  name: feedbackModalReportIssueButtonText,
                   widget: string,
                 }
               - {
                   label: Beta Modal Feature Request Button Text,
-                  name: betaModalFeatureRequestButtonText,
+                  name: feedbackModalFeatureRequestButtonText,
                   widget: string,
                 }
 
@@ -61,28 +74,49 @@ collections:
                   widget: string,
                 }
               - {
-                  label: Feature Request Modal - Input Placeholder Text,
-                  name: featureRequestModalPlaceholderText,
+                  label: Feedback Modals - Generic Input Placeholder Text,
+                  name: feedbackPlaceholderText,
                   widget: string,
                 }
               - {
-                  label: Feature Request Modal - Input Error Text,
-                  name: featureRequestModalInlineErrorText,
+                  label: Feedback Modals - Generic Input Error Text,
+                  name: feedbackInlineErrorText,
                   widget: string,
                 }
               - {
-                  label: Feature Request Modal - Submit Button Text,
-                  name: featureRequestModalSubmitButtonText,
+                  label: Feedback Modals - Generic Submit Button Text,
+                  name: feedbackSubmitButtonText,
                   widget: string,
                 }
               - {
-                  label: Feature Request Modal - Cancel Button Text,
-                  name: featureRequestModalCancelButtonText,
+                  label: Feedback Modals - Generic Cancel Button Text,
+                  name: feedbackCancelButtonText,
                   widget: string,
                 }
               - {
                   label: Successful Submission Modal - Title,
                   name: successfulSubmissionModalHeadingText,
+                  widget: string,
+                }
+              - { label: Report An Issue Modal - Title, name: reportIssueModalHeadingText, widget: string }
+              - {
+                  label: Report An Issue Modal - First Question,
+                  name: reportIssueModalSummaryBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Report An Issue Modal - First Question Additional Text,
+                  name: reportIssueModalSummaryAdditionalBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Report An Issue Modal - Second Question,
+                  name: reportIssueModalDetailBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Report An Issue Modal - Second Question Additional Text,
+                  name: reportIssueModalDetailAdditionalBodyText,
                   widget: string,
                 }
               - {
@@ -100,6 +134,14 @@ collections:
                   name: unsuccessfulSubmissionAlertText,
                   widget: string,
                 }
+          - label: Beta Bar
+            name: betaBar
+            collapsed: true
+            widget: object
+            summary: "{{betaBar}}"
+            fields:
+              - { label: Beta Main Text, name: betaMainText, widget: string }
+              - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
 
           - label: Business Formation Defaults
             name: businessFormationDefaults

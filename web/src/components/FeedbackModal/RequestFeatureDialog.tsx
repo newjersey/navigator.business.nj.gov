@@ -2,10 +2,10 @@ import { Content } from "@/components/Content";
 import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { GenericTextField } from "@/components/GenericTextField";
 import * as api from "@/lib/api-client/apiClient";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FeedbackRequestDialogNames } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
@@ -24,6 +24,7 @@ type Props = {
 export const RequestFeatureDialog = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
   const MAX_CHARS = 1000;
   const { userData } = useUserData();
+  const { Config } = useConfig();
   const [displayAlert, setDisplayAlert] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [featureRequest, setFeatureRequest] = useState<string>("");
@@ -81,31 +82,31 @@ export const RequestFeatureDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
         maxWidth="md"
         isOpen={isOpen}
         close={onClose}
-        title={Config.betaBar.featureRequestModalHeadingText}
-        primaryButtonText={Config.betaBar.featureRequestModalSubmitButtonText}
+        title={Config.feedbackModal.featureRequestModalHeadingText}
+        primaryButtonText={Config.feedbackModal.feedbackSubmitButtonText}
         primaryButtonOnClick={handleFeedbackRequestSubmission}
-        secondaryButtonText={Config.betaBar.featureRequestModalCancelButtonText}
+        secondaryButtonText={Config.feedbackModal.feedbackCancelButtonText}
         showAlert={displayAlert}
-        alertText={Config.betaBar.unsuccessfulSubmissionAlertText}
+        alertText={Config.feedbackModal.unsuccessfulSubmissionAlertText}
         alertVariant={"error"}
         isLoading={isLoading}
       >
-        <div className="text-base">
+        <div className={`text-base ${isTabletAndUp && "width-tablet"}`}>
           <div className="text-base-darkest">
-            <Content>{Config.betaBar.featureRequestModalBodyText}</Content>
+            <Content>{Config.feedbackModal.featureRequestModalBodyText}</Content>
           </div>
           <div className="margin-top-1">
-            <Content>{Config.betaBar.featureRequestModalSecondBodyText}</Content>
+            <Content>{Config.feedbackModal.featureRequestModalSecondBodyText}</Content>
           </div>
-          <div className={`${isTabletAndUp && "width-tablet"} margin-bottom-3`}>
+          <div className="margin-bottom-2">
             <GenericTextField
               required
               onValidation={onValidation}
-              validationText={Config.betaBar.featureRequestModalInlineErrorText}
+              validationText={Config.feedbackModal.feedbackInlineErrorText}
               error={errorMap.featureRequest.invalid}
               formInputFull
               fieldName="featureRequest"
-              placeholder={Config.betaBar.featureRequestModalPlaceholderText}
+              placeholder={Config.feedbackModal.feedbackPlaceholderText}
               value={featureRequest}
               handleChange={(value: string) => {
                 setFeatureRequest(value);

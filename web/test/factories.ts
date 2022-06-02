@@ -63,6 +63,8 @@ import {
   TaxFiling,
   TaxFilingData,
   UserData,
+  UserFeedbackRequest,
+  UserIssueRequest,
 } from "@businessnjgovnavigator/shared/";
 
 export const generateSectionType = (): SectionType => {
@@ -645,4 +647,27 @@ export const randomIndustry = (isMobileLocation = false): Industry => {
   const filteredIndustries = Industries.filter((x: Industry) => x.isMobileLocation === isMobileLocation);
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
+};
+
+export const generateFeedbackRequest = (overrides: Partial<UserFeedbackRequest>): UserFeedbackRequest => {
+  return {
+    detail: `some-detail-${randomInt()}`,
+    pageOfRequest: `some-page-of-request-${randomInt()}`,
+    device: `some-device-${randomInt()}`,
+    browser: `some-browser-${randomInt()}`,
+    screenWidth: `some-screen-width-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateIssueRequest = (overrides: Partial<UserIssueRequest>): UserIssueRequest => {
+  return {
+    context: `some-summary-${randomInt()}`,
+    detail: `some-detail-${randomInt()}`,
+    pageOfRequest: `some-page-of-request-${randomInt()}`,
+    device: `some-device-${randomInt()}`,
+    browser: `some-browser-${randomInt()}`,
+    screenWidth: `some-screen-width-${randomInt()}`,
+    ...overrides,
+  };
 };
