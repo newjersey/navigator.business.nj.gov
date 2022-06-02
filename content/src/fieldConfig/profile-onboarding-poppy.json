@@ -15,10 +15,26 @@
       },
       "businessPersona": {
         "header": "## Business Status",
-        "radioButtonYesText": "Yes, my business is operating",
-        "radioButtonNoText": "No, I still need to register my business",
+        "radioButtonStartingText": "Starting a New Jersey-based business",
+        "radioButtonOwningText": "A New Jersey business already up and running",
+        "radioButtonForeignText": "An out-of-state business starting in New Jersey",
         "errorTextRequired": "Please select whether you have an existing business.",
-        "description": "Have you already `formed and registered|form-and-register-business` your business?"
+        "description": "Are you:"
+      },
+      "foreignBusinessType": {
+        "header": "",
+        "description": "",
+        "errorTextRequired": "",
+        "optionContent": {
+          "operationsInNJ": "",
+          "employeesInNJ": "",
+          "transactionsInNJ": "",
+          "revenueInNJ": "",
+          "none": ""
+        },
+        "REMOTE_WORKER": "",
+        "REMOTE_SELLER": "",
+        "NEXUS": ""
       }
     }
   }

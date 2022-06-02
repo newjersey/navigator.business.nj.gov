@@ -3,8 +3,21 @@ export class RoadmapPage {
     return cy.get('[data-testid="grey-callout-link"]');
   };
 
+  getDropdown = () => {
+    return cy.get('[data-testid="profile-dropdown"]');
+  };
+
+  getProfileLinkInDropdown = () => {
+    return cy.get('[data-testid="profile-link"]');
+  };
+
   clickEditProfileLink = () => {
     this.getEditProfileLink().click();
+  };
+
+  clickEditProfileInDropdown = () => {
+    this.getDropdown().click();
+    this.getProfileLinkInDropdown().click();
   };
 
   clickRoadmapTask = (taskId: string) => {

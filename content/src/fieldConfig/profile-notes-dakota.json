@@ -1,6 +1,6 @@
 {
   "profileDefaults": {
-    "OWNING": {
+    "FOREIGN": {
       "notes": {
         "placeholder": "Enter notes",
         "header": "## Notes",

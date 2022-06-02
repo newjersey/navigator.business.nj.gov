@@ -14,13 +14,13 @@ import {
 const enableFormation = (legalStructureId: string): boolean => {
   switch (legalStructureId) {
     case "limited-liability-partnership": {
-      return process.env.FEATURE_BUSINESS_LLP === "true" ? true : false;
+      return process.env.FEATURE_BUSINESS_LLP === "true";
     }
     case "c-corporation": {
-      return process.env.FEATURE_BUSINESS_CCORP === "true" ? true : false;
+      return process.env.FEATURE_BUSINESS_CCORP === "true";
     }
     case "s-corporation": {
-      return process.env.FEATURE_BUSINESS_SCORP === "true" ? true : false;
+      return process.env.FEATURE_BUSINESS_SCORP === "true";
     }
     default:
       return true;
@@ -28,6 +28,37 @@ const enableFormation = (legalStructureId: string): boolean => {
 };
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
+  let addOns: string[];
+  if (profileData.businessPersona === "FOREIGN") {
+    addOns = getForeignAddOns(profileData);
+  } else {
+    addOns = getIndustryBasedAddOns(profileData);
+  }
+
+  let roadmap = await buildRoadmap({ industryId: profileData.industryId, addOns });
+
+  if (profileData.municipality) {
+    roadmap = await addMunicipalitySpecificData(roadmap, profileData.municipality.id);
+  } else {
+    roadmap = cleanupMunicipalitySpecificData(roadmap);
+  }
+
+  roadmap = addNaicsCodeData(roadmap, profileData.naicsCode);
+
+  return roadmap;
+};
+
+const getForeignAddOns = (profileData: ProfileData): string[] => {
+  const addOns = [];
+
+  if (profileData.foreignBusinessType === "REMOTE_SELLER") {
+    addOns.push("foreign-remote-seller");
+  }
+
+  return addOns;
+};
+
+const getIndustryBasedAddOns = (profileData: ProfileData): string[] => {
   const addOns = [];
   const industry = LookupIndustryById(profileData.industryId);
 
@@ -72,19 +103,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     }
   }
 
-  const industryId = profileData.industryId ?? "generic";
-
-  let roadmap = await buildRoadmap({ industryId, addOns });
-
-  if (profileData.municipality) {
-    roadmap = await addMunicipalitySpecificData(roadmap, profileData.municipality.id);
-  } else {
-    roadmap = cleanupMunicipalitySpecificData(roadmap);
-  }
-
-  roadmap = addNaicsCodeData(roadmap, profileData.naicsCode);
-
-  return roadmap;
+  return addOns;
 };
 
 const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: string): Promise<Roadmap> => {

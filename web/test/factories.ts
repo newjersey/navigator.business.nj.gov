@@ -147,6 +147,8 @@ export const generateProfileData = (
     taxPin: randomInt(4).toString(),
     sectorId: randomSector().id,
     naicsCode: randomInt(6).toString(),
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
     ...overrides,
   };
 };

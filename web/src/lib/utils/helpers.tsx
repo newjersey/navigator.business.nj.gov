@@ -12,7 +12,7 @@ import {
   Task,
 } from "@/lib/types/types";
 import { Preferences, UserData } from "@businessnjgovnavigator/shared/";
-import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { BusinessPersona, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useEffect, useRef } from "react";
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -164,6 +164,8 @@ export const OnboardingStatusLookup = (
 export const OnboardingErrorLookup: Record<ProfileError, string> = {
   REQUIRED_LEGAL: getMergedConfig().profileDefaults["STARTING"].legalStructureId.errorTextRequired,
   REQUIRED_EXISTING_BUSINESS: getMergedConfig().profileDefaults["STARTING"].businessPersona.errorTextRequired,
+  REQUIRE_FOREIGN_BUSINESS_TYPE:
+    getMergedConfig().profileDefaults["FOREIGN"].foreignBusinessType.errorTextRequired,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {
@@ -290,11 +292,14 @@ export const getStringifiedAddress = (
 };
 
 export const getFlow = (data: UserData | ProfileData): FlowType => {
+  let persona: BusinessPersona;
   if (isUserData(data)) {
-    return data.profileData.businessPersona === "OWNING" ? "OWNING" : "STARTING";
+    persona = data.profileData.businessPersona;
   } else {
-    return data.businessPersona === "OWNING" ? "OWNING" : "STARTING";
+    persona = data.businessPersona;
   }
+
+  return persona || "STARTING";
 };
 
 function isUserData(data: UserData | ProfileData): data is UserData {

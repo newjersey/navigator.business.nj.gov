@@ -5,19 +5,25 @@ export const buildRoadmap = async ({
   industryId,
   addOns,
 }: {
-  industryId: string;
+  industryId: string | undefined;
   addOns: string[];
 }): Promise<Roadmap> => {
+  const stepImporter: () => Promise<GenericStep[]> = industryId ? importGenericSteps : importForeignSteps;
+
   let roadmapBuilder: RoadmapBuilder = {
-    steps: (await importGenericSteps()).map((step: GenericStep) => ({
+    steps: (await stepImporter()).map((step: GenericStep) => ({
       ...step,
       tasks: [],
     })),
   };
 
-  roadmapBuilder = await generateIndustryRoadmap(roadmapBuilder, industryId, addOns);
+  if (industryId) {
+    roadmapBuilder = await generateIndustryRoadmap(roadmapBuilder, industryId, addOns);
+  } else {
+    roadmapBuilder = await applyAddOns(roadmapBuilder, addOns);
+  }
 
-  if (lastStepHasNoTasks(roadmapBuilder)) {
+  while (hasSteps(roadmapBuilder) && lastStepHasNoTasks(roadmapBuilder)) {
     roadmapBuilder = removeLastStep(roadmapBuilder);
   }
 
@@ -62,6 +68,14 @@ const importGenericSteps = async (): Promise<GenericStep[]> => {
   }
 
   return (await import(`@businessnjgovnavigator/content/roadmaps/steps.json`)).steps as GenericStep[];
+};
+
+const importForeignSteps = async (): Promise<GenericStep[]> => {
+  if (process.env.NODE_ENV === "test") {
+    return (await import(`@/lib/roadmap/fixtures/steps-foreign.json`)).steps as GenericStep[];
+  }
+
+  return (await import(`@businessnjgovnavigator/content/roadmaps/steps-foreign.json`)).steps as GenericStep[];
 };
 
 const importAddOn = async (relativePath: string): Promise<IndustryRoadmap> => {
@@ -142,6 +156,10 @@ const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap
       })),
     })),
   };
+};
+
+const hasSteps = (roadmap: RoadmapBuilder): boolean => {
+  return roadmap.steps.length > 0;
 };
 
 const lastStepHasNoTasks = (roadmap: RoadmapBuilder): boolean => {

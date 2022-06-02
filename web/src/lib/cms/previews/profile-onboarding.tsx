@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
+import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
+import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import merge from "lodash.merge";
 import { useEffect, useRef, useState } from "react";
 
@@ -37,15 +42,42 @@ const ProfilePreviewOnboarding = (props: Props) => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <OnboardingBusinessPersona />
-        {businessPersona === "STARTING" && (
-          <>
-            <hr className="margin-y-4" />
-            <OnboardingLegalStructure />
-          </>
-        )}
-      </div>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            profileData: createEmptyProfileData(),
+            flow: businessPersona || "STARTING",
+            municipalities: [],
+          },
+          setUser: () => {},
+          setProfileData: () => {},
+          onBack: () => {},
+        }}
+      >
+        <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+          {businessPersona === "STARTING" && (
+            <>
+              <OnboardingBusinessPersona />
+              <hr className="margin-y-4" />
+              <OnboardingLegalStructure />
+            </>
+          )}
+          {businessPersona === "FOREIGN" && (
+            <>
+              <OnboardingForeignBusinessType />
+              <Alert variant="info">
+                <Content>{config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER}</Content>
+              </Alert>
+              <Alert variant="info">
+                <Content>{config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER}</Content>
+              </Alert>
+              <Alert variant="info">
+                <Content>{config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS}</Content>
+              </Alert>
+            </>
+          )}
+        </div>
+      </ProfileDataContext.Provider>
     </ConfigContext.Provider>
   );
 };

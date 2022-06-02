@@ -12,6 +12,7 @@ import {
   checkExistingBusinessProfilePage,
   checkNewBusinessProfilePage,
   completeExistingBusinessOnboarding,
+  completeForeignBusinessOnboarding,
   completeNewBusinessOnboarding,
   homeBasedIndustries,
   industriesNotHomeBasedOrLiquorLicense,
@@ -19,6 +20,7 @@ import {
   liquorLicenseIndustries,
   randomElementFromArray,
   updateExistingBusinessProfilePage,
+  updateForeignBusinessProfilePage,
   updateNewBusinessProfilePage,
 } from "../support/helpers";
 
@@ -229,6 +231,17 @@ describe("Profile [feature] [all] [group1]", () => {
       taxId,
       notes,
       taxPin,
+    });
+  });
+
+  it("onboards REMOTE_SELLER foreign business and updates profile data", () => {
+    completeForeignBusinessOnboarding({
+      foreignBusinessTypeIds: ["revenueInNJ"],
+    });
+
+    updateForeignBusinessProfilePage({
+      taxId: randomInt(9).toString(),
+      notes: `Notes ${randomInt()}`,
     });
   });
 });

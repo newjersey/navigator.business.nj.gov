@@ -237,6 +237,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         taxPin: undefined,
         sectorId: undefined,
         naicsCode: "",
+        foreignBusinessType: undefined,
+        foreignBusinessTypeIds: [],
       };
 
       setProfileData(newProfileData);
@@ -305,7 +307,11 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const evalHeaderStepsTemplate = (): string => {
     if (page.current === 1) {
-      return templateEval(Config.onboardingDefaults.stepOneTemplate, {
+      return templateEval(Config.onboardingDefaults.stepXTemplate, {
+        currentPage: page.current.toString(),
+      });
+    } else if (page.current === 2 && profileData.businessPersona === "FOREIGN") {
+      return templateEval(Config.onboardingDefaults.stepXTemplate, {
         currentPage: page.current.toString(),
       });
     } else {

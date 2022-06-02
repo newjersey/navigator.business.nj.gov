@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -18,7 +19,6 @@ import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { CircularProgress } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
@@ -71,6 +71,10 @@ const RoadmapPage = (props: Props): ReactElement => {
     }
   };
 
+  const isForeign = (): boolean => {
+    return userData?.profileData.businessPersona === "FOREIGN";
+  };
+
   const renderRoadmap = (
     <div className="margin-top-6 desktop:margin-top-0">
       <div className="margin-bottom-205 bg-white">
@@ -83,29 +87,15 @@ const RoadmapPage = (props: Props): ReactElement => {
             <Content>{props.displayContent.contentMd}</Content>
           </div>
           {!userData ? (
-            <div className="flex flex-justify-center flex-align-center">
-              <CircularProgress
-                id="roadmapSection"
-                aria-label="roadmap section progress bar"
-                aria-busy={true}
-              />
-              <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
-            </div>
+            <LoadingIndicator />
           ) : (
-            <MiniProfile profileData={userData.profileData} />
+            !isForeign() && <MiniProfile profileData={userData.profileData} />
           )}
         </>
       )}
       <div className="margin-top-3">
         {!roadmap ? (
-          <div className="flex flex-justify-center flex-align-center">
-            <CircularProgress
-              id="roadmapSection"
-              aria-label="roadmap section progress bar"
-              aria-busy={true}
-            />
-            <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
-          </div>
+          <LoadingIndicator />
         ) : (
           <>
             {getSectionNames(roadmap).map((section) => (
@@ -117,9 +107,11 @@ const RoadmapPage = (props: Props): ReactElement => {
                   ))}
               </SectionAccordion>
             ))}
-            <div className="margin-top-6">
-              <GraduationBox />
-            </div>
+            {!isForeign() && (
+              <div className="margin-top-6">
+                <GraduationBox />
+              </div>
+            )}
           </>
         )}
       </div>
@@ -131,9 +123,8 @@ const RoadmapPage = (props: Props): ReactElement => {
       <NavBar />
       <main id="main">
         {!userData || userData?.formProgress !== "COMPLETED" ? (
-          <div className="flex flex-justify-center flex-align-center margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
-            <CircularProgress id="roadmapPage" aria-label="roadmap page progress bar" aria-busy={true} />
-            <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
+          <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
+            <LoadingIndicator />
           </div>
         ) : (
           <RightSidebarPageLayout

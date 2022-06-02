@@ -127,7 +127,7 @@ export const NavBarDesktop = (): ReactElement => {
           router.push("/profile");
         }}
       >
-        <Button style="tertiary" textBold smallText>
+        <Button style="tertiary" textBold smallText dataTestid="profile-link">
           {Config.navigationDefaults.profileLinkText}
         </Button>
       </MenuItem>
@@ -149,6 +149,7 @@ export const NavBarDesktop = (): ReactElement => {
           </Link>
           <div className="z-100">
             <button
+              data-testid="profile-dropdown"
               className="clear-button"
               ref={anchorRef}
               aria-controls={open ? "menu-list-grow" : undefined}

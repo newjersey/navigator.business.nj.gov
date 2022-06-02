@@ -1,0 +1,39 @@
+{
+  "profileDefaults": {
+    "FOREIGN": {
+      "taxId": {
+        "placeholder": "Enter Tax ID number",
+        "header": "## New Jersey Tax ID",
+        "description": "What is your `Tax ID?|tax-id`"
+      },
+      "dateOfFormation": {
+        "header": "",
+        "description": "",
+        "errorText": ""
+      },
+      "taxPin": {
+        "header": "",
+        "placeholder": "",
+        "description": "",
+        "errorText": ""
+      },
+      "entityId": {
+        "placeholder": "",
+        "header": "",
+        "headerNotBolded": "",
+        "description": ""
+      },
+      "employerId": {
+        "placeholder": "",
+        "header": "",
+        "headerNotBolded": "",
+        "description": ""
+      },
+      "naicsCode": {
+        "header": "",
+        "editText": "",
+        "notEnteredText": ""
+      }
+    }
+  }
+}

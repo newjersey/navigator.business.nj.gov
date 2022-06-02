@@ -30,6 +30,8 @@ export interface ProfileData {
   readonly taxPin: string | undefined;
   readonly sectorId: string | undefined;
   readonly naicsCode: string;
+  readonly foreignBusinessType: ForeignBusinessType | undefined;
+  readonly foreignBusinessTypeIds: string[];
 }
 
 export const emptyProfileData: ProfileData = {
@@ -56,6 +58,8 @@ export const emptyProfileData: ProfileData = {
   taxPin: undefined,
   sectorId: undefined,
   naicsCode: "",
+  foreignBusinessType: undefined,
+  foreignBusinessTypeIds: [],
 };
 
 export const createEmptyProfileData = (): ProfileData => {
@@ -64,4 +68,5 @@ export const createEmptyProfileData = (): ProfileData => {
 
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 
-export type BusinessPersona = "STARTING" | "OWNING" | undefined;
+export type BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
+export type ForeignBusinessType = "REMOTE_SELLER" | undefined;

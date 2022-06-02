@@ -64,6 +64,8 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-numbers-oscar", ProfilePreview);
       // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("profile-numbers-dakota", ProfilePreview);
+      // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-documents-oscar", ProfilePreviewDocuments);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-documents-poppy", ProfilePreviewDocuments);
@@ -72,13 +74,15 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-notes-oscar", ProfilePreview);
       // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("profile-notes-dakota", ProfilePreview);
+      // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-industries-poppy", ProfilePreviewIndustrySpecific);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-industries-oscar", ProfilePreviewIndustrySpecific);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-onboarding-poppy", ProfilePreviewOnboarding);
       // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-onboarding-oscar", ProfilePreviewOnboarding);
+      CMS.registerPreviewTemplate("profile-onboarding-dakota", ProfilePreviewOnboarding);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-misc", ProfilePreviewMisc);
 

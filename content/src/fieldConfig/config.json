@@ -345,8 +345,8 @@
     "finalNextButtonText": "Submit",
     "pageTitle": "Tell Us About Your Business",
     "stepXofYTemplate": "(Step ${currentPage} of ${totalPages})",
-    "nextButtonText": "Next",
-    "stepOneTemplate": "(Step ${currentPage})"
+    "stepXTemplate": "(Step ${currentPage})",
+    "nextButtonText": "Next"
   },
   "roadmapDefaults": {
     "roadmapTitleBusinessAndUserMissing": "Hello!",
