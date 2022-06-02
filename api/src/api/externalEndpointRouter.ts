@@ -60,7 +60,19 @@ export const externalEndpointRouterFactory = (
   router.post("/feedback", (req, res) => {
     const { userData, feedbackRequest } = req.body;
     feedbackClient
-      .create(feedbackRequest, userData)
+      .createUserFeedback(feedbackRequest, userData)
+      .then(() => {
+        res.status(200).send();
+      })
+      .catch(() => {
+        res.status(500).send();
+      });
+  });
+
+  router.post("/issue", (req, res) => {
+    const { userData, issueRequest } = req.body;
+    feedbackClient
+      .createUserIssue(issueRequest, userData)
       .then(() => {
         res.status(200).send();
       })

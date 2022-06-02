@@ -1,7 +1,9 @@
-import { BetaBar } from "@/components/betaBar/BetaBar";
+import { BetaBar } from "@/components/BetaBar";
+import { ReportAnIssueBar } from "@/components/FeedbackModal/ReportAnIssueBar";
 import { InnovFooter } from "@/components/InnovFooter";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -10,6 +12,8 @@ interface Props {
 }
 
 export const PageSkeleton = (props: Props): ReactElement => {
+  const { userData } = useUserData();
+
   return (
     <>
       <section aria-label="Official government website">
@@ -25,6 +29,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
       </section>
       <div className="fit-screen-content">{props.children}</div>
       <footer>
+        {userData?.formProgress === "COMPLETED" && <ReportAnIssueBar />}
         {!props.landingPage && <LegalMessage />}
         <InnovFooter />
       </footer>

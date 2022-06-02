@@ -2,7 +2,12 @@ import bodyParser from "body-parser";
 import express, { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
-import { generateFeedbackRequest, generateUser, generateUserData } from "../../test/factories";
+import {
+  generateFeedbackRequest,
+  generateIssueRequest,
+  generateUser,
+  generateUserData,
+} from "../../test/factories";
 import { AddNewsletter, AddToUserTesting, FeedbackClient, UserDataClient } from "../domain/types";
 import { externalEndpointRouterFactory } from "./externalEndpointRouter";
 
@@ -42,7 +47,8 @@ describe("externalEndpointRouter", () => {
       findByEmail: jest.fn(),
     };
     stubFeedbackClient = {
-      create: jest.fn(),
+      createUserFeedback: jest.fn(),
+      createUserIssue: jest.fn(),
     };
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
@@ -155,7 +161,14 @@ describe("externalEndpointRouter", () => {
         const userData = generateUserData({});
         const feedbackRequest = generateFeedbackRequest({});
         await request(app).post("/feedback").send({ feedbackRequest, userData });
-        expect(stubFeedbackClient.create).toHaveBeenCalledWith(feedbackRequest, userData);
+        expect(stubFeedbackClient.createUserFeedback).toHaveBeenCalledWith(feedbackRequest, userData);
+      });
+
+      it("sends issue request to Feedback Client", async () => {
+        const userData = generateUserData({});
+        const issueRequest = generateIssueRequest({});
+        await request(app).post("/issue").send({ issueRequest, userData });
+        expect(stubFeedbackClient.createUserIssue).toHaveBeenCalledWith(issueRequest, userData);
       });
     });
   });

@@ -1,5 +1,5 @@
 import { LogWriterType } from "@libs/logWriter";
-import { FeedbackRequest } from "@shared/feedbackRequest";
+import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import { UserData } from "@shared/userData";
 import Airtable from "airtable";
 import { FeedbackClient } from "../domain/types";
@@ -11,7 +11,8 @@ type AirtableConfig = {
 };
 
 export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWriterType): FeedbackClient => {
-  const table = "User Feature Requests";
+  const userFeedbackTable = "User Feature Requests";
+  const userIssuesTable = process.env.AIRTABLE_FEEDBACK_ISSUES_TABLE_NAME || "Navigator Bugs - DEV";
 
   Airtable.configure({
     endpointUrl: config.baseUrl,
@@ -20,7 +21,7 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
 
   const base = Airtable.base(config.baseId);
 
-  const create = (feedbackRequest: FeedbackRequest, userData: UserData): Promise<boolean> => {
+  const createUserFeedback = (feedbackRequest: UserFeedbackRequest, userData: UserData): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       const fields = {
         Detail: feedbackRequest.detail,
@@ -33,20 +34,53 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
         "Screen Width": feedbackRequest.screenWidth,
       };
       logWriter.LogInfo(
-        `Feedback - Airtable - Request Sent to base ${config.baseId} table ${table}. data: ${JSON.stringify(
-          fields
-        )}`
+        `Feedback - Airtable - Request Sent to base ${
+          config.baseId
+        } table ${userFeedbackTable}. data: ${JSON.stringify(fields)}`
       );
-      base(table).create([{ fields }], (err: unknown, res: unknown) => {
+      base(userFeedbackTable).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
-          logWriter.LogInfo(`FeedbackClient - Airtable - Error Received: ${err}`);
+          logWriter.LogInfo(
+            `FeedbackClient - Airtable - Table ${userFeedbackTable} - Error Received: ${err}`
+          );
           return reject();
         }
-        logWriter.LogInfo(`FeedbackClient - Airtable - Response Received: ${res}`);
+        logWriter.LogInfo(
+          `FeedbackClient - Airtable - Table ${userFeedbackTable} - Response Received: ${res}`
+        );
         return resolve(true);
       });
     });
   };
 
-  return { create };
+  const createUserIssue = (issueRequest: UserIssueRequest, userData: UserData): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      const fields = {
+        Context: issueRequest.context,
+        Detail: issueRequest.detail,
+        Email: userData.user.email,
+        Industry: userData.profileData.industryId,
+        Persona: userData.profileData.businessPersona,
+        "Page Report Was Initiated On": issueRequest.pageOfRequest,
+        Device: issueRequest.device,
+        Browser: issueRequest.browser,
+        "Screen Width": issueRequest.screenWidth,
+      };
+      logWriter.LogInfo(
+        `Feedback - Airtable - Request Sent to base ${
+          config.baseId
+        } table ${userIssuesTable}. data: ${JSON.stringify(fields)}`
+      );
+      base(userIssuesTable).create([{ fields }], (err: unknown, res: unknown) => {
+        if (err) {
+          logWriter.LogInfo(`FeedbackClient - Airtable - Table ${userIssuesTable} - Error Received: ${err}`);
+          return reject();
+        }
+        logWriter.LogInfo(`FeedbackClient - Airtable - Table ${userIssuesTable} - Response Received: ${res}`);
+        return resolve(true);
+      });
+    });
+  };
+
+  return { createUserFeedback, createUserIssue };
 };

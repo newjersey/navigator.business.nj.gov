@@ -445,6 +445,10 @@ export type NaicsCodeObject = {
 
 export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
-export type FeedbackRequestDialogNames = "Select Feedback" | "Feature Request" | "Request Submitted";
+export type FeedbackRequestDialogNames =
+  | "Select Feedback"
+  | "Feature Request"
+  | "Request Submitted"
+  | "Report Issue";
 
 export type ProfileTabs = "info" | "numbers" | "documents" | "notes";
