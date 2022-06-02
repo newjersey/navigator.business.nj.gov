@@ -1,11 +1,15 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { getFlow, templateEval } from "@/lib/utils/helpers";
+import { getFlow } from "@/lib/utils/helpers";
 import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
-import { renderPage, runSelfRegPageTests } from "@/test/pages/onboarding/helpers-onboarding";
+import {
+  mockSuccessfulApiSignups,
+  renderPage,
+  runSelfRegPageTests,
+} from "@/test/pages/onboarding/helpers-onboarding";
 import {
   createEmptyUser,
   createEmptyUserData,
@@ -41,54 +45,8 @@ describe("onboarding - starting a business", () => {
     jest.resetAllMocks();
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
-    mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
-    mockApi.postNewsletter.mockImplementation((request) =>
-      Promise.resolve({
-        ...request,
-        user: {
-          ...request.user,
-          externalStatus: {
-            ...request.user.externalStatus,
-            newsletter: { status: "SUCCESS", success: true },
-          },
-        },
-      })
-    );
-
-    mockApi.postUserTesting.mockImplementation((request) =>
-      Promise.resolve({
-        ...request,
-        user: {
-          ...request.user,
-          externalStatus: {
-            ...request.user.externalStatus,
-            userTesting: { status: "SUCCESS", success: true },
-          },
-        },
-      })
-    );
+    mockSuccessfulApiSignups();
     jest.useFakeTimers();
-  });
-  describe("page 1", () => {
-    it("uses special template eval for step 1 label", async () => {
-      const { page } = renderPage({});
-      expect(
-        screen.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
-      ).toBeInTheDocument();
-      page.chooseRadio("business-persona-starting");
-      await page.visitStep(2);
-      expect(
-        screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "5" })
-        )
-      ).toBeInTheDocument();
-    });
-
-    it("does not display the legal structure dropdown", async () => {
-      const { page } = renderPage({});
-      page.chooseRadio("business-persona-starting");
-      expect(screen.queryByLabelText("Legal structure")).not.toBeInTheDocument();
-    });
   });
 
   describe("page 2", () => {
@@ -240,7 +198,7 @@ describe("onboarding - starting a business", () => {
     });
 
     const { page } = renderPage({ userData });
-    expect(page.getRadioButton("Has Existing Business - False")).toBeChecked();
+    expect(page.getRadioButton("Business Status - Starting")).toBeChecked();
 
     await page.visitStep(2);
     expect(page.getIndustryValue()).toEqual(LookupIndustryById("cosmetology").name);

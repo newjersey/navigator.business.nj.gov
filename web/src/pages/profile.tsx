@@ -1,8 +1,7 @@
-import { Content } from "@/components/Content";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
-import { Icon } from "@/components/njwds/Icon";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
@@ -21,6 +20,7 @@ import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
+import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
 import { ProfileToastAlert } from "@/components/profile/ProfileToastAlert";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -57,7 +57,6 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { Box, CircularProgress } from "@mui/material";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -73,6 +72,12 @@ interface Props {
   CMS_ONLY_showErrorAlert?: boolean; // for CMS only
 }
 
+const defaultTabForPersona: Record<string, ProfileTabs> = {
+  STARTING: "info",
+  OWNING: "info",
+  FOREIGN: "numbers",
+};
+
 const ProfilePage = (props: Props): ReactElement => {
   const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const { roadmap } = useRoadmap();
@@ -85,11 +90,14 @@ const ProfilePage = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
   const update = userDataFromHook.update;
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
-  const [profileTab, setProfileTab] = useState<ProfileTabs>(props.CMS_ONLY_tab ?? "info");
   const { Config } = useConfig();
 
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
-  const businessPersona = props.CMS_ONLY_businessPersona ?? userData?.profileData.businessPersona;
+  const businessPersona: BusinessPersona =
+    props.CMS_ONLY_businessPersona ?? userData?.profileData.businessPersona;
+
+  const defaultTab = businessPersona ? defaultTabForPersona[businessPersona] : "info";
+  const [profileTab, setProfileTab] = useState<ProfileTabs>(props.CMS_ONLY_tab ?? defaultTab);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
@@ -153,6 +161,45 @@ const ProfilePage = (props: Props): ReactElement => {
       setAlert("SUCCESS");
       redirect({ success: true });
     });
+  };
+
+  const getElements = (): ReactNode => {
+    switch (businessPersona) {
+      case "STARTING":
+        return startingNewBusinessElements[profileTab];
+      case "OWNING":
+        return owningBusinessElements[profileTab];
+      case "FOREIGN":
+        return foreignBusinessElements[profileTab];
+    }
+  };
+
+  const foreignBusinessElements: Record<ProfileTabs, ReactNode> = {
+    info: <></>,
+    documents: <></>,
+    notes: (
+      <>
+        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
+        <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
+      </>
+    ),
+    numbers: (
+      <>
+        <hr className="margin-top-4 margin-bottom-2" />{" "}
+        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
+          {" "}
+          {Config.profileDefaults.profileTabRefTitle}
+        </h2>
+        <div className="margin-top-4">
+          <OnboardingTaxId
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+            handleChangeOverride={showRegistrationModalForGuest()}
+          />
+        </div>
+      </>
+    ),
   };
 
   const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -321,97 +368,6 @@ const ProfilePage = (props: Props): ReactElement => {
     ),
   };
 
-  const border = "2px #e6e6e6";
-  const profileNav = (
-    <Box sx={{ fontSize: 18, fontWeight: 500 }}>
-      <Box className="bg-base-lightest padding-y-2 padding-x-3" sx={{ border, borderStyle: "solid" }}>
-        <Content>{Config.profileDefaults.pageTitle}</Content>
-      </Box>
-      <Box
-        className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
-        sx={{
-          "&:hover, & .selected": {
-            color: "primary.dark",
-            fontWeight: "bold",
-            opacity: [0.8],
-          },
-          border,
-          borderStyle: "none solid solid solid",
-        }}
-        data-testid="info"
-        onClick={() => setProfileTab("info")}
-      >
-        <span className={profileTab == "info" ? "selected" : ""}>
-          {Config.profileDefaults.profileTabInfoTitle}
-        </span>
-        <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
-      </Box>
-      <Box
-        className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
-        sx={{
-          "&:hover, & .selected": {
-            color: "primary.dark",
-            fontWeight: "bold",
-            opacity: [0.8],
-          },
-          border,
-          borderStyle: "none solid solid solid",
-        }}
-        data-testid="numbers"
-        onClick={() => setProfileTab("numbers")}
-      >
-        <span className={profileTab == "numbers" ? "selected" : ""}>
-          {Config.profileDefaults.profileTabRefTitle}
-        </span>
-        <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
-      </Box>
-      {userData?.formationData.getFilingResponse?.success ||
-      (businessPersona == "STARTING" &&
-        LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling) ? (
-        <Box
-          className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
-          sx={{
-            "&:hover, & .selected": {
-              color: "primary.dark",
-              fontWeight: "bold",
-              opacity: [0.8],
-            },
-            border,
-            borderStyle: "none solid solid solid",
-          }}
-          data-testid="documents"
-          onClick={() => setProfileTab("documents")}
-        >
-          <span className={profileTab == "documents" ? "selected" : ""}>
-            {Config.profileDefaults.profileTabDocsTitle}
-          </span>
-          <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
-        </Box>
-      ) : (
-        <></>
-      )}
-      <Box
-        className="bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3"
-        sx={{
-          "&:hover, & .selected": {
-            color: "primary.dark",
-            fontWeight: "bold",
-            opacity: [0.8],
-          },
-          border,
-          borderStyle: "none solid solid solid",
-        }}
-        data-testid="notes"
-        onClick={() => setProfileTab("notes")}
-      >
-        <span className={profileTab == "notes" ? "selected" : ""}>
-          {Config.profileDefaults.profileTabNoteTitle}
-        </span>
-        <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>
-      </Box>
-    </Box>
-  );
-
   return (
     <ProfileDataContext.Provider
       value={{
@@ -439,22 +395,27 @@ const ProfilePage = (props: Props): ReactElement => {
               <UserDataErrorAlert />
             </SingleColumnContainer>
             <div className="margin-top-6 desktop:margin-top-0">
-              <SidebarPageLayout navChildren={profileNav} divider={false} outlineBox={false} stackNav={true}>
+              <SidebarPageLayout
+                divider={false}
+                outlineBox={false}
+                stackNav={true}
+                navChildren={
+                  <ProfileTabNav
+                    userData={userData}
+                    businessPersona={businessPersona}
+                    activeTab={profileTab}
+                    setProfileTab={setProfileTab}
+                  />
+                }
+              >
                 {userData === undefined ? (
-                  <div className="flex flex-justify-center flex-align-center padding-top-0 desktop:padding-top-6 padding-bottom-15">
-                    <CircularProgress
-                      id="profilePage"
-                      aria-label="profile page progress bar"
-                      aria-busy={true}
-                    />
-                    <div className="margin-left-2 h3-styling margin-bottom-0">Loading...</div>
+                  <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
+                    <LoadingIndicator />
                   </div>
                 ) : (
                   <>
                     <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
-                      {businessPersona === "OWNING"
-                        ? owningBusinessElements[profileTab]
-                        : startingNewBusinessElements[profileTab]}
+                      {getElements()}
 
                       <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
                       <div className="float-right fdr">

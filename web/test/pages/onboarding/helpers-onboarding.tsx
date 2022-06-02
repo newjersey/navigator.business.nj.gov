@@ -64,6 +64,7 @@ export type PageHelpers = {
   selectDate: (label: string, value: DateObject) => void;
   selectByValue: (label: string, value: string) => void;
   selectByText: (label: string, value: string) => void;
+  checkByLabelText: (label: string) => void;
   chooseRadio: (value: string) => void;
   clickNext: () => void;
   clickBack: () => void;
@@ -162,6 +163,10 @@ export const createPageHelpers = (): PageHelpers => {
     expect(screen.getByTestId(`step-${step}`)).toBeInTheDocument();
   };
 
+  const checkByLabelText = (label: string) => {
+    fireEvent.click(screen.getByLabelText(label));
+  };
+
   return {
     fillText,
     selectByValue,
@@ -183,6 +188,7 @@ export const createPageHelpers = (): PageHelpers => {
     getEmailValue,
     getConfirmEmailValue,
     visitStep,
+    checkByLabelText,
   };
 };
 
@@ -206,31 +212,7 @@ export const runSelfRegPageTests = ({
   });
 
   beforeEach(() => {
-    mockApi.postNewsletter.mockImplementation((request) =>
-      Promise.resolve({
-        ...request,
-        user: {
-          ...request.user,
-          externalStatus: {
-            ...request.user.externalStatus,
-            newsletter: { status: "SUCCESS", success: true },
-          },
-        },
-      })
-    );
-
-    mockApi.postUserTesting.mockImplementation((request) =>
-      Promise.resolve({
-        ...request,
-        user: {
-          ...request.user,
-          externalStatus: {
-            ...request.user.externalStatus,
-            userTesting: { status: "SUCCESS", success: true },
-          },
-        },
-      })
-    );
+    mockSuccessfulApiSignups();
   });
 
   it("prevents user from registering if the email is not matching", () => {
@@ -354,4 +336,39 @@ export const runSelfRegPageTests = ({
       });
     });
   });
+};
+
+export const mockEmptyApiSignups = (): void => {
+  mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
+  mockApi.postNewsletter.mockImplementation((request) => Promise.resolve(request));
+  mockApi.postUserTesting.mockImplementation((request) => Promise.resolve(request));
+};
+
+export const mockSuccessfulApiSignups = (): void => {
+  mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
+  mockApi.postNewsletter.mockImplementation((request) =>
+    Promise.resolve({
+      ...request,
+      user: {
+        ...request.user,
+        externalStatus: {
+          ...request.user.externalStatus,
+          newsletter: { status: "SUCCESS", success: true },
+        },
+      },
+    })
+  );
+
+  mockApi.postUserTesting.mockImplementation((request) =>
+    Promise.resolve({
+      ...request,
+      user: {
+        ...request.user,
+        externalStatus: {
+          ...request.user.externalStatus,
+          userTesting: { status: "SUCCESS", success: true },
+        },
+      },
+    })
+  );
 };

@@ -1,0 +1,48 @@
+{
+  "profileDefaults": {
+    "FOREIGN": {
+      "sectorId": {
+        "placeholder": "",
+        "header": "",
+        "description": "",
+        "errorTextRequired": ""
+      },
+      "existingEmployees": {
+        "placeholder": "",
+        "header": "",
+        "description": "",
+        "errorTextRequired": ""
+      },
+      "ownership": {
+        "placeholder": "",
+        "header": "",
+        "headerNotBolded": "",
+        "description": ""
+      },
+      "businessName": {
+        "placeholder": "",
+        "header": "",
+        "errorTextRequired": "",
+        "description": ""
+      },
+      "municipality": {
+        "placeholder": "",
+        "header": "",
+        "description": "",
+        "errorTextRequired": ""
+      },
+      "homeBased": {
+        "radioButtonYesText": "",
+        "radioButtonNoText": "",
+        "header": "",
+        "description": ""
+      },
+      "industryId": {
+        "placeholder": "",
+        "header": "",
+        "description": "",
+        "errorTextRequired": ""
+      }
+    }
+  }
+}

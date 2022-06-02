@@ -96,6 +96,18 @@ describe("roadmap page", () => {
     );
   };
 
+  const renderPageWithUserData = (userData: UserData): { page: PageHelpers } => {
+    render(
+      <WithStatefulUserData initialUserData={userData}>
+        <ThemeProvider theme={createTheme()}>
+          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent()} />
+        </ThemeProvider>
+      </WithStatefulUserData>
+    );
+    const page = createPageHelpers();
+    return { page };
+  };
+
   const renderPageWithAuth = ({
     userData,
     isAuthenticated,
@@ -197,7 +209,7 @@ describe("roadmap page", () => {
     expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
-  describe("business information", () => {
+  describe("mini-profile business information", () => {
     it("shows template with user name as header", () => {
       useMockUserData({
         profileData: generateProfileData({
@@ -569,18 +581,6 @@ describe("roadmap page", () => {
   });
 
   describe("oscar graduation modal", () => {
-    const renderPage = (userData: UserData): { page: PageHelpers } => {
-      render(
-        <WithStatefulUserData initialUserData={userData}>
-          <ThemeProvider theme={createTheme()}>
-            <RoadmapPage operateReferences={{}} displayContent={createDisplayContent()} />
-          </ThemeProvider>
-        </WithStatefulUserData>
-      );
-      const page = createPageHelpers();
-      return { page };
-    };
-
     const openGraduationModal = (): void => {
       fireEvent.click(screen.getByText(Config.roadmapDefaults.graduationButtonText));
     };
@@ -607,7 +607,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { page } = renderPage(userData);
+      const { page } = renderPageWithUserData(userData);
 
       const date = getCurrentDate().subtract(1, "month").date(1);
       const dateOfFormation = date.format("YYYY-MM-DD");
@@ -654,7 +654,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { page } = renderPage(userData);
+      const { page } = renderPageWithUserData(userData);
 
       openGraduationModal();
       expect((screen.getByLabelText("Business name") as HTMLInputElement).value).toEqual("A Test Business");
@@ -704,7 +704,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      renderPage(userData);
+      renderPageWithUserData(userData);
       openGraduationModal();
       submitGraduationModal();
 
@@ -726,7 +726,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      renderPage(userData);
+      renderPageWithUserData(userData);
 
       openGraduationModal();
       expect((screen.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual("Other Services");
@@ -741,7 +741,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      renderPage(userData);
+      renderPageWithUserData(userData);
 
       openGraduationModal();
       expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
@@ -760,7 +760,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      renderPage(userData);
+      renderPageWithUserData(userData);
       openGraduationModal();
       submitGraduationModal();
       expect(userDataWasNotUpdated()).toEqual(true);
@@ -780,7 +780,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      renderPage(userData);
+      renderPageWithUserData(userData);
 
       openGraduationModal();
       expect(screen.getByTestId("graduation-modal")).toBeInTheDocument();
@@ -801,7 +801,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      const { page } = renderPage(userData);
+      const { page } = renderPageWithUserData(userData);
       openGraduationModal();
       expect(screen.getByLabelText("Date of formation")).toHaveAttribute("disabled");
       expect(page.getDateOfFormationValue()).toEqual(
@@ -826,7 +826,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      renderPage(userData);
+      renderPageWithUserData(userData);
       openGraduationModal();
       expect(screen.queryByTestId("businessName")).toBeNull();
     });
@@ -841,7 +841,7 @@ describe("roadmap page", () => {
         }),
       });
 
-      renderPage(userData);
+      renderPageWithUserData(userData);
       openGraduationModal();
       expect(screen.getByTestId("businessName")).not.toBeNull();
       expect(screen.getByLabelText("Business name")).not.toBeNull();
@@ -944,6 +944,20 @@ describe("roadmap page", () => {
       await waitFor(() => {
         expect(screen.queryByText("SuccessContent")).not.toBeInTheDocument();
       });
+    });
+  });
+
+  describe("foreign business", () => {
+    it("does not display graduation box for foreign business", () => {
+      useMockProfileData({ businessPersona: "FOREIGN" });
+      renderRoadmapPage({});
+      expect(screen.queryByText(Config.roadmapDefaults.graduationButtonText)).not.toBeInTheDocument();
+    });
+
+    it("does not display mini-profile box for foreign business", () => {
+      useMockProfileData({ businessPersona: "FOREIGN" });
+      renderRoadmapPage({});
+      expect(screen.queryByText(Config.roadmapDefaults.greyBoxHeaderText)).not.toBeInTheDocument();
     });
   });
 });

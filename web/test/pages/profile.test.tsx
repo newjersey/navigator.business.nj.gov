@@ -13,7 +13,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { withAuthAlert, withRoadmap } from "@/test/helpers";
+import { markdownToText, withAuthAlert, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
@@ -116,7 +116,7 @@ describe("profile", () => {
       opensModalWhenEditingNonGuestModeProfileFields();
     });
 
-    describe("when has existing business", () => {
+    describe("when owning a business", () => {
       beforeEach(() => {
         initialUserData = generateUserData({
           profileData: generateProfileData({ businessPersona: "OWNING" }),
@@ -222,7 +222,7 @@ describe("profile", () => {
       expect(screen.getByLabelText("Business name")).toBeInTheDocument();
     });
 
-    it("|updates the user data on save", async () => {
+    it("updates the user data on save", async () => {
       const emptyData = createEmptyUserData(generateUser({}));
       const initialUserData: UserData = {
         ...emptyData,
@@ -462,7 +462,9 @@ describe("profile", () => {
     });
 
     it("returns user to roadmap from un-saved changes modal", async () => {
-      const initialUserData = createEmptyUserData(generateUser({}));
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
+      });
       const newark = generateMunicipality({ displayName: "Newark" });
       renderPage({ userData: initialUserData, municipalities: [newark] });
       selectByText("Location", newark.displayName);
@@ -473,7 +475,7 @@ describe("profile", () => {
     });
   });
 
-  describe("has existing business", () => {
+  describe("owning existing business", () => {
     it("user is able to save and is redirected to dashboard", async () => {
       const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "OWNING" }) });
 
@@ -666,7 +668,7 @@ describe("profile", () => {
       expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
     });
 
-    it("user is able to go back to dashboard", async () => {
+    it("returns user back to dashboard", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
@@ -711,6 +713,37 @@ describe("profile", () => {
         expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard");
       });
       expect(() => currentUserData()).toThrowError();
+    });
+  });
+
+  describe("foreign business", () => {
+    let userData: UserData;
+
+    beforeEach(() => {
+      userData = generateUserData({
+        profileData: generateProfileData({ businessPersona: "FOREIGN" }),
+      });
+    });
+
+    it("sends user back to roadmap", async () => {
+      renderPage({ userData: userData });
+      clickBack();
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+    });
+
+    it("displays only the numbers and notes tabs", () => {
+      renderPage({ userData: userData });
+      expect(screen.getAllByText(Config.profileDefaults.profileTabRefTitle).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(Config.profileDefaults.profileTabNoteTitle).length).toBeGreaterThan(0);
+      expect(screen.queryByText(Config.profileDefaults.profileTabInfoTitle)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.profileDefaults.profileTabDocsTitle)).not.toBeInTheDocument();
+    });
+
+    it("defaults to numbers tab", () => {
+      renderPage({ userData: userData });
+      expect(
+        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.taxId.header))
+      ).toBeInTheDocument();
     });
   });
 

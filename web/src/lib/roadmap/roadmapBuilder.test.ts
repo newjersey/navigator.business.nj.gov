@@ -3,6 +3,42 @@ import { Roadmap } from "@/lib/types/types";
 import { EOL } from "os";
 
 describe("roadmapBuilder", () => {
+  it("uses foreign steps when industry is undefined", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: undefined,
+      addOns: ["tea"],
+    });
+
+    expect(roadmap.steps[0].name).toEqual("Foreign Step 1 Name");
+  });
+
+  it("does not break with empty roadmap", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: undefined,
+      addOns: [],
+    });
+
+    expect(roadmap.steps).toHaveLength(0);
+  });
+
+  it("builds a roadmap with add-ons only when industry is undefined", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: undefined,
+      addOns: ["tea"],
+    });
+
+    expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["tea-task-1-id"]));
+  });
+
+  it("removes any steps that have no tasks", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: undefined,
+      addOns: ["tea"],
+    });
+
+    expect(roadmap.steps).toHaveLength(2);
+  });
+
   it("builds a generic roadmap with generic tasks only, and removes empty step 5", async () => {
     const roadmap = await buildRoadmap({
       industryId: "standard",

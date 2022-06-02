@@ -79,20 +79,36 @@ export const legalStructureWithTradeName = LegalStructures.filter((legalStructur
   return !legalStructure.hasTradeName;
 });
 
-type registration = {
+type Registration = {
   fullName: string;
   email: string;
   isNewsletterChecked: boolean;
   isContactMeChecked: boolean;
 };
 
-interface startingOnboardingData {
+interface StartingOnboardingData {
   industry: Industry;
   legalStructureId: string;
   townDisplayName: string | undefined;
   homeBasedQuestion: boolean | undefined;
   liquorLicenseQuestion: boolean | undefined;
   requiresCpa: boolean | undefined;
+}
+
+interface ExistingOnboardingData {
+  businessFormationDate?: string;
+  entityId?: string;
+  businessName: string;
+  sectorId: string;
+  legalStructureId?: string;
+  numberOfEmployees: string;
+  townDisplayName: string;
+  homeBasedQuestion: boolean;
+  ownershipDataValues?: string[];
+}
+
+interface ForeignOnboardingData {
+  foreignBusinessTypeIds: string[];
 }
 
 export const completeNewBusinessOnboarding = ({
@@ -106,11 +122,12 @@ export const completeNewBusinessOnboarding = ({
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
   isContactMeChecked = false,
-}: startingOnboardingData & Partial<registration>): void => {
+}: StartingOnboardingData & Partial<Registration>): void => {
   cy.url().should("include", "onboarding?page=1");
   onOnboardingPage.selectBusinessPersona("STARTING");
-  onOnboardingPage.getBusinessPersona("OWNING").should("not.be.checked");
   onOnboardingPage.getBusinessPersona("STARTING").should("be.checked");
+  onOnboardingPage.getBusinessPersona("OWNING").should("not.be.checked");
+  onOnboardingPage.getBusinessPersona("FOREIGN").should("not.be.checked");
   onOnboardingPage.clickNext();
 
   cy.url().should("include", "onboarding?page=2");
@@ -184,18 +201,6 @@ export const completeNewBusinessOnboarding = ({
   cy.url().should("include", `roadmap`);
 };
 
-interface existingOnboardingData {
-  businessFormationDate?: string;
-  entityId?: string;
-  businessName: string;
-  sectorId: string;
-  legalStructureId?: string;
-  numberOfEmployees: string;
-  townDisplayName: string;
-  homeBasedQuestion: boolean;
-  ownershipDataValues?: string[];
-}
-
 export const completeExistingBusinessOnboarding = ({
   businessFormationDate,
   entityId,
@@ -212,13 +217,14 @@ export const completeExistingBusinessOnboarding = ({
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
   isContactMeChecked = false,
-}: existingOnboardingData & Partial<registration>): void => {
+}: ExistingOnboardingData & Partial<Registration>): void => {
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
   onOnboardingPage.selectBusinessPersona("OWNING");
   onOnboardingPage.getBusinessPersona("OWNING").should("be.checked");
   onOnboardingPage.getBusinessPersona("STARTING").should("not.be.checked");
+  onOnboardingPage.getBusinessPersona("FOREIGN").should("not.be.checked");
   const companyType = LookupLegalStructureById(legalStructureId);
   onOnboardingPage.selectLegalStructureDropDown(companyType.name);
   onOnboardingPage
@@ -296,19 +302,68 @@ export const completeExistingBusinessOnboarding = ({
   onOnboardingPage.clickNext();
   cy.url().should("include", `dashboard`);
 };
-interface startingProfileData extends startingOnboardingData {
+
+export const completeForeignBusinessOnboarding = ({
+  foreignBusinessTypeIds,
+  fullName = `Michael Smith ${randomInt()}`,
+  email = `MichaelSmith${randomInt()}@gmail.com`,
+  isNewsletterChecked = false,
+  isContactMeChecked = false,
+}: ForeignOnboardingData & Partial<Registration>): void => {
+  let pageIndex = 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
+
+  onOnboardingPage.selectBusinessPersona("FOREIGN");
+  onOnboardingPage.getBusinessPersona("FOREIGN").should("be.checked");
+  onOnboardingPage.getBusinessPersona("STARTING").should("not.be.checked");
+  onOnboardingPage.getBusinessPersona("OWNING").should("not.be.checked");
+  onOnboardingPage.clickNext();
+
+  pageIndex += 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
+
+  for (const id of foreignBusinessTypeIds) {
+    onOnboardingPage.checkForeignBusinessType(id);
+  }
+
+  onOnboardingPage.clickNext();
+
+  pageIndex += 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
+
+  onOnboardingPage.typeFullName(fullName);
+  onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
+  onOnboardingPage.typeEmail(email);
+  onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
+  onOnboardingPage.typeConfirmEmail(email);
+  onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
+  onOnboardingPage.toggleNewsletterCheckbox(isNewsletterChecked);
+  onOnboardingPage.toggleContactMeCheckbox(isContactMeChecked);
+  onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
+  onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
+
+  onOnboardingPage.clickNext();
+  cy.url().should("include", `roadmap`);
+};
+
+interface StartingProfileData extends StartingOnboardingData {
   employerId: string;
   taxId: string;
   notes: string;
   entityId: string;
 }
 
-interface existingProfileData extends existingOnboardingData {
+interface ExistingProfileData extends ExistingOnboardingData {
   employerId: string;
   taxId: string;
   notes: string;
   entityId: string;
   taxPin: string;
+}
+
+interface ForeignProfileData {
+  taxId: string;
+  notes: string;
 }
 
 export const checkNewBusinessProfilePage = ({
@@ -322,7 +377,7 @@ export const checkNewBusinessProfilePage = ({
   taxId = "",
   notes = "",
   entityId = "",
-}: Partial<startingProfileData & { businessName: string }>): void => {
+}: Partial<StartingProfileData & { businessName: string }>): void => {
   cy.url().should("contain", "/roadmap");
   onRoadmapPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
@@ -392,7 +447,7 @@ export const checkExistingBusinessProfilePage = ({
   taxId = "",
   notes = "",
   taxPin = "",
-}: Partial<existingProfileData>): void => {
+}: Partial<ExistingProfileData>): void => {
   cy.url().should("contain", "/dashboard");
   onDashboardPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
@@ -447,7 +502,7 @@ export const updateNewBusinessProfilePage = ({
   taxId,
   notes,
   entityId,
-}: Partial<startingProfileData & { businessName: string }>): void => {
+}: Partial<StartingProfileData & { businessName: string }>): void => {
   cy.url().should("contain", "/roadmap");
   onRoadmapPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
@@ -544,7 +599,7 @@ export const updateExistingBusinessProfilePage = ({
   taxId,
   notes,
   taxPin,
-}: Partial<existingProfileData>): void => {
+}: Partial<ExistingProfileData>): void => {
   cy.url().should("contain", "/dashboard");
   onDashboardPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
@@ -624,4 +679,24 @@ export const updateExistingBusinessProfilePage = ({
 
   onProfilePage.clickSaveButton();
   cy.url().should("contain", "/dashboard");
+};
+
+export const updateForeignBusinessProfilePage = ({ taxId, notes }: Partial<ForeignProfileData>): void => {
+  cy.url().should("contain", "/roadmap");
+  onRoadmapPage.clickEditProfileInDropdown();
+  cy.url().should("contain", "/profile");
+  cy.wait(1000);
+
+  if (taxId) {
+    onProfilePage.typeTaxId(taxId);
+    onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
+  }
+
+  if (notes) {
+    onProfilePage.typeNotes(notes);
+    onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
+  }
+
+  onProfilePage.clickSaveButton();
+  cy.url().should("contain", "/roadmap");
 };
