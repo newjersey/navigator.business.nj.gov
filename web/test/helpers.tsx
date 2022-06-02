@@ -8,6 +8,7 @@ import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { Screen } from "@testing-library/dom";
 import os from "os";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
@@ -141,4 +142,16 @@ export const markdownToText = (text: string): string => {
     return text.split("#").join("").trim();
   }
   return text;
+};
+
+export const expectContent = (content: string, { exists }: { exists: boolean }, screen: Screen) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [before, _, after] = content.split(content);
+  if (exists) {
+    if (before.trim()) expect(screen.getByText(before, { exact: false })).toBeInTheDocument();
+    if (after && after.trim()) expect(screen.getByText(after, { exact: false })).toBeInTheDocument();
+  } else {
+    if (before.trim()) expect(screen.queryByText(before, { exact: false })).not.toBeInTheDocument();
+    if (after && after.trim()) expect(screen.queryByText(after, { exact: false })).not.toBeInTheDocument();
+  }
 };

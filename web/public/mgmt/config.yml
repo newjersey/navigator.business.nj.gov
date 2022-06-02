@@ -927,7 +927,7 @@ collections:
               - { label: Final Next Button Text, name: finalNextButtonText, widget: string }
               - { label: Back Button Test, name: backButtonText, widget: string }
               - { label: Step X of Y Template, name: stepXofYTemplate, widget: string }
-              - { label: Step One Template, name: stepOneTemplate, widget: string }
+              - { label: Step X Template, name: stepXTemplate, widget: string }
               - {
                   label: Error Text - Minimum Numeric Field,
                   name: errorTextMinimumNumericField,
@@ -2005,6 +2005,30 @@ collections:
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Error Text", name: "errorText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Numbers Tab (Dakota)"
+        name: "profile-numbers-dakota"
+        file: "content/src/fieldConfig/profile-numbers-dakota.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - label: Fields
+                name: FOREIGN
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Tax ID
+                    name: taxId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
 
       - label: "Documents Tab (Poppy)"
         name: "profile-documents-poppy"
@@ -2049,14 +2073,6 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Documents Tab", name: "profileTabDocsTitle", widget: "string" }
-              - { label: "Good Standing Doc Title", name: "standingDocFileTitle", widget: "string" }
-              - { label: "Formation Doc Title", name: "formationDocFileTitle", widget: "string" }
-              - {
-                  label: "Certified Copy of Formation Doc Title",
-                  name: "certificationDocFileTitle",
-                  widget: "string",
-                }
               - label: Fields
                 name: OWNING
                 collapsed: false
@@ -2107,9 +2123,33 @@ collections:
             collapsed: false
             widget: object
             fields:
-              - { label: "Notes Tab", name: "profileTabNoteTitle", widget: "string" }
               - label: Fields
                 name: OWNING
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Notes
+                    name: notes
+                    collapsed: true
+                    widget: object
+                    summary: "{{notes}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Notes Tab (Dakota)"
+        name: "profile-notes-dakota"
+        file: "content/src/fieldConfig/profile-notes-dakota.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - label: Fields
+                name: FOREIGN
                 collapsed: false
                 widget: object
                 fields:
@@ -2245,7 +2285,7 @@ collections:
               - { label: Page Title, name: pageTitle, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - { label: Back Button Text, name: backButtonText, widget: string }
-      - label: "Onboarding-Only Questions"
+      - label: "Onboarding-Only Questions (Poppy & Shared)"
         name: "profile-onboarding-poppy"
         file: "content/src/fieldConfig/profile-onboarding-poppy.json"
         editor:
@@ -2270,8 +2310,17 @@ collections:
                     summary: "{{businessPersona}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - {
+                          label: "Radio Button Starting Text",
+                          name: "radioButtonStartingText",
+                          widget: "string",
+                        }
+                      - { label: "Radio Button Owning Text", name: "radioButtonOwningText", widget: "string" }
+                      - {
+                          label: "Radio Button Foreign Text",
+                          name: "radioButtonForeignText",
+                          widget: "string",
+                        }
                       - {
                           label: "Error Text (when not selected)",
                           name: "errorTextRequired",
@@ -2310,7 +2359,51 @@ collections:
                               widget: "markdown",
                             }
                           - { label: "limited-partnership", name: "limited-partnership", widget: "markdown" }
-
+      - label: "Onboarding-Only Questions (Dakota)"
+        name: "profile-onboarding-dakota"
+        file: "content/src/fieldConfig/profile-onboarding-dakota.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            summary: "{{profileDefaults}}"
+            fields:
+              - label: Fields
+                name: FOREIGN
+                collapsed: false
+                widget: object
+                summary: "{{profileFields}}"
+                fields:
+                  - label: Foreign Business Type
+                    name: foreignBusinessType
+                    collapsed: true
+                    widget: object
+                    summary: "{{foreignBusinessType}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - {
+                          label: "Error Text (when not selected)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                      - label: Option Content
+                        name: optionContent
+                        collapsed: false
+                        widget: object
+                        summary: "{{optionContent}}"
+                        fields:
+                          - { label: "operationsInNJ", name: "operationsInNJ", widget: "string" }
+                          - { label: "employeesInNJ", name: "employeesInNJ", widget: "string" }
+                          - { label: "transactionsInNJ", name: "transactionsInNJ", widget: "string" }
+                          - { label: "revenueInNJ", name: "revenueInNJ", widget: "string" }
+                          - { label: "none", name: "none", widget: "string" }
+                      - { label: "Remote Seller Alert", name: "REMOTE_SELLER", widget: "markdown" }
+                      - { label: "Remote Worker Alert", name: "REMOTE_WORKER", widget: "markdown" }
+                      - { label: "Nexus Alert", name: "NEXUS", widget: "markdown" }
   - name: "business-formation"
     label: "Business Formation"
     folder: "content/src/display-content/business-formation"

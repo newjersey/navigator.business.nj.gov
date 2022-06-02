@@ -233,7 +233,7 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
     expect(screen.getByTestId("business-persona-owning")).toBeInTheDocument();
     expect(
-      screen.getByText(templateEval(Config.onboardingDefaults.stepOneTemplate, { currentPage: "1" }))
+      screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
     ).toBeInTheDocument();
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Legal structure", "c-corporation");
@@ -507,7 +507,7 @@ describe("onboarding - shared", () => {
       it("displays cannabis license type question for cannabis only", async () => {
         const { page } = renderPage({});
 
-        fireEvent.click(screen.getByRole("radio", { name: "Has Existing Business - False" }));
+        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
         await page.visitStep(2);
         expect(screen.queryByTestId("industry-specific-cannabis")).not.toBeInTheDocument();
         page.selectByValue("Industry", "cannabis");
@@ -520,7 +520,7 @@ describe("onboarding - shared", () => {
       it("defaults cannabis license type to CONDITIONAL", async () => {
         const { page } = renderPage({});
 
-        fireEvent.click(screen.getByRole("radio", { name: "Has Existing Business - False" }));
+        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
         await page.visitStep(2);
         page.selectByValue("Industry", "cannabis");
         await page.visitStep(3);
@@ -530,7 +530,7 @@ describe("onboarding - shared", () => {
       it("allows switching cannabis license type to ANNUAL", async () => {
         const { page } = renderPage({});
 
-        fireEvent.click(screen.getByRole("radio", { name: "Has Existing Business - False" }));
+        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
         await page.visitStep(2);
         page.selectByValue("Industry", "cannabis");
         page.chooseRadio("cannabis-license-annual");
@@ -541,7 +541,7 @@ describe("onboarding - shared", () => {
       it("sets cannabis license type to back undefined when switching back to non-cannabis industry", async () => {
         const { page } = renderPage({});
 
-        fireEvent.click(screen.getByRole("radio", { name: "Has Existing Business - False" }));
+        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
         await page.visitStep(2);
         expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
         page.selectByValue("Industry", "cannabis");

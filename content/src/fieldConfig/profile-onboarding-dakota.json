@@ -1,6 +1,6 @@
 {
   "profileDefaults": {
-    "OWNING": {
+    "FOREIGN": {
       "businessPersona": {
         "header": "## Business Status",
         "radioButtonStartingText": "Starting a New Jersey-based business",
@@ -22,19 +22,19 @@
         }
       },
       "foreignBusinessType": {
-        "header": "",
-        "description": "",
-        "errorTextRequired": "",
+        "header": "## Out-of-state Businesses",
+        "description": "Which of the following are **true** about your business? **Select all that apply**",
+        "errorTextRequired": "Please make a selection",
         "optionContent": {
-          "operationsInNJ": "",
-          "employeesInNJ": "",
-          "transactionsInNJ": "",
-          "revenueInNJ": "",
-          "none": ""
+          "operationsInNJ": "Part of my business operations (storefront, delivery, manufacturing) takes place in New Jersey",
+          "employeesInNJ": "I have employees who work in New Jersey",
+          "transactionsInNJ": "I have done more than 200 separate transactions (products or services sold) to New Jersey",
+          "revenueInNJ": "My gross revenue from sales delivered into NJ exceeds $100K",
+          "none": "None of the above"
         },
-        "REMOTE_WORKER": "",
-        "REMOTE_SELLER": "",
-        "NEXUS": ""
+        "REMOTE_WORKER": "It sounds like you have **Remote Workers**",
+        "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller`",
+        "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business`"
       }
     }
   }

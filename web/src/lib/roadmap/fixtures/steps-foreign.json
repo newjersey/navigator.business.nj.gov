@@ -1,0 +1,25 @@
+{
+  "steps": [
+    {
+      "step_number": 1,
+      "name": "Foreign Step 1 Name",
+      "section": "START",
+      "timeEstimate": "1 month",
+      "description": "Foreign Step 1 description"
+    },
+    {
+      "step_number": 2,
+      "name": "Foreign Step 2 Name",
+      "section": "START",
+      "timeEstimate": "1 month",
+      "description": "Foreign Step 2 description"
+    },
+    {
+      "step_number": 3,
+      "name": "Foreign Step 3 Name",
+      "section": "START",
+      "timeEstimate": "1 month",
+      "description": "Foreign Step 3 description"
+    }
+  ]
+}

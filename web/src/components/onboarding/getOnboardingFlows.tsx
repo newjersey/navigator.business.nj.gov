@@ -3,6 +3,7 @@ import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBus
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
+import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
@@ -151,6 +152,52 @@ export const getOnboardingFlows = (
         component: <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />,
         getErrorMap: () => ({
           inline: [{ name: "municipality", valid: profileData.municipality !== undefined }],
+        }),
+      },
+      {
+        component: <OnboardingNameAndEmail onValidation={onValidation} fieldStates={fieldStates} />,
+        getErrorMap: () => {
+          return {
+            inline: [
+              {
+                name: "name",
+                valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
+              },
+              {
+                name: "email",
+                valid:
+                  businessUser.email.length > 0 &&
+                  !fieldStates.email.invalid &&
+                  validateEmail(businessUser.email),
+              },
+            ],
+          };
+        },
+      },
+    ],
+  },
+  FOREIGN: {
+    pages: [
+      {
+        component: (
+          <>
+            <OnboardingBusinessPersona />
+          </>
+        ),
+        getErrorMap: () => ({
+          banner: [{ name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.businessPersona !== undefined }],
+        }),
+      },
+      {
+        component: (
+          <>
+            <OnboardingForeignBusinessType />
+          </>
+        ),
+        getErrorMap: () => ({
+          banner: [
+            { name: "REQUIRE_FOREIGN_BUSINESS_TYPE", valid: profileData.foreignBusinessType !== undefined },
+          ],
         }),
       },
       {

@@ -33,25 +33,33 @@ export const OnboardingBusinessPersona = (): ReactElement => {
           name="business-persona"
           value={state.profileData.businessPersona ?? ""}
           onChange={handleSelection}
-          row
         >
           <FormControlLabel
-            aria-label="Has Existing Business - True"
-            style={{ marginRight: "3rem" }}
-            labelPlacement="end"
-            data-testid="business-persona-owning"
-            value="OWNING"
-            control={<Radio color="primary" />}
-            label={Config.profileDefaults[state.flow].businessPersona.radioButtonYesText}
-          />
-          <FormControlLabel
-            aria-label="Has Existing Business - False"
+            aria-label="Business Status - Starting"
             style={{ marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="business-persona-starting"
             value="STARTING"
             control={<Radio color="primary" />}
-            label={Config.profileDefaults[state.flow].businessPersona.radioButtonNoText}
+            label={Config.profileDefaults[state.flow].businessPersona.radioButtonStartingText}
+          />
+          <FormControlLabel
+            aria-label="Business Status - Owning"
+            style={{ marginRight: "3rem" }}
+            labelPlacement="end"
+            data-testid="business-persona-owning"
+            value="OWNING"
+            control={<Radio color="primary" />}
+            label={Config.profileDefaults[state.flow].businessPersona.radioButtonOwningText}
+          />
+          <FormControlLabel
+            aria-label="Business Status - Foreign"
+            style={{ marginRight: "3rem" }}
+            labelPlacement="end"
+            data-testid="business-persona-foreign"
+            value="FOREIGN"
+            control={<Radio color="primary" />}
+            label={Config.profileDefaults[state.flow].businessPersona.radioButtonForeignText}
           />
         </RadioGroup>
       </FormControl>

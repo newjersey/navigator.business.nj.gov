@@ -48,7 +48,7 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
           value={{
             state: {
               profileData: createEmptyProfileData(),
-              flow: businessPersona === "OWNING" ? "OWNING" : "STARTING",
+              flow: businessPersona || "STARTING",
               municipalities: [],
             },
             setUser: () => {},
