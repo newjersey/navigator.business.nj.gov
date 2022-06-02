@@ -7,7 +7,7 @@ import {
   UserTestingResponse,
 } from "@shared/businessUser";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "@shared/dateHelpers";
-import { FeedbackRequest } from "@shared/feedbackRequest";
+import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import {
   AllBusinessSuffixes,
   BusinessSuffix,
@@ -391,8 +391,20 @@ export const randomBusinessSuffix = (legalStructureId?: FormationLegalType): Bus
   return suffixes[randomIndex] as BusinessSuffix;
 };
 
-export const generateFeedbackRequest = (overrides: Partial<FeedbackRequest>): FeedbackRequest => {
+export const generateFeedbackRequest = (overrides: Partial<UserFeedbackRequest>): UserFeedbackRequest => {
   return {
+    detail: `some-detail-${randomInt()}`,
+    pageOfRequest: `some-page-of-request-${randomInt()}`,
+    device: `some-device-${randomInt()}`,
+    browser: `some-browser-${randomInt()}`,
+    screenWidth: `some-screen-width-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateIssueRequest = (overrides: Partial<UserIssueRequest>): UserIssueRequest => {
+  return {
+    context: `some-summary-${randomInt()}`,
     detail: `some-detail-${randomInt()}`,
     pageOfRequest: `some-page-of-request-${randomInt()}`,
     device: `some-device-${randomInt()}`,

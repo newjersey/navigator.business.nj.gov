@@ -26,28 +26,38 @@
     "START": "Start",
     "OPERATE": "Operate"
   },
-  "betaBar": {
-    "betaModalIntercomButtonText": "Speak with a NJ-Based Business Expert",
-    "betaModalFeedbackButtonText": "Share Feedback",
+  "feedbackModal": {
+    "feedbackModalIntercomButtonText": "Speak with a NJ-Based Business Expert",
+    "feedbackModalReportIssueButtonText": "Report an Issue",
+    "feedbackModalBodyText": "Get in contact, report a bug, or share your feedback.",
+    "feedbackModalTitle": "Let us know what you think",
+    "feedbackModalShareFeedbackButtonText": "Share Feedback",
+    "feedbackModalFeatureRequestButtonText": "Request a Feature",
+    "feedbackModalLinkOwning": "https://forms.business.nj.gov/feedback/owning",
+    "feedbackModalLinkStarting": "https://forms.business.nj.gov/feedback/starting",
+    "feedbackInlineErrorText": "This field is required.",
+    "feedbackPlaceholderText": "Start typing here...",
+    "feedbackCancelButtonText": "Cancel",
+    "feedbackSubmitButtonText": "Submit",
     "featureRequestModalBodyText": "**How can we improve the Navigator?**",
-    "successfulSubmissionModalButtonText": "Submit Another Request",
-    "featureRequestModalInlineErrorText": "This field is required.",
-    "successfulSubmissionModalHeadingText": "Thank you!",
-    "betaModalBugReportButtonText": "Report an Issue",
-    "betaFormLinkOwning": "https://forms.business.nj.gov/feedback/owning",
-    "unsuccessfulSubmissionAlertText": "There was an error. Please try again or email your issue to xyz@xyz.gov.",
-    "featureRequestModalSubmitButtonText": "Submit",
-    "featureRequestModalPlaceholderText": "Start typing here...",
-    "betaModalBodyText": "Get in contact, report a bug, or share your feedback.",
-    "featureRequestModalCancelButtonText": "Cancel",
-    "betaFormLinkStarting": "https://forms.business.nj.gov/feedback/starting",
-    "betaModalFeatureRequestButtonText": "Request a Feature",
-    "betaMainText": "This site is in beta.",
-    "successfulSubmissionModalBodyText": "Your request has been submitted.",
-    "featureRequestModalSecondBodyText": "Describe below the information or feature you are looking for.",
-    "betaModalTitle": "Let us know what you think",
     "featureRequestModalHeadingText": "Request a Feature",
-    "betaModalButtonText": "Share your feedback!"
+    "featureRequestModalSecondBodyText": "Describe below the information or feature you are looking for.",
+
+    "reportIssueModalHeadingText": "Report an Issue",
+    "reportIssueModalSummaryBodyText": "**What were you trying to do?**",
+    "reportIssueModalSummaryAdditionalBodyText": "What is the issue you experienced? (i.e. I was not able to log in.)",
+    "reportIssueModalDetailBodyText": "**What was the issue you encountered?**",
+    "reportIssueModalDetailAdditionalBodyText": "Walk us through, step-by-step what happened. (i.e. This is my first time trying to create an account. When I was on the landing page I clicked “Get Started” but then nothing happened.)",
+
+    "successfulSubmissionModalBodyText": "Your request has been submitted.",
+    "successfulSubmissionModalButtonText": "Submit Another Request",
+    "successfulSubmissionModalHeadingText": "Thank you!",
+    "unsuccessfulSubmissionAlertText": "There was an error. Please try again or email your issue to xyz@xyz.gov."
+  },
+  "bugBar": { "bugBarText": "Report an issue." },
+  "betaBar": {
+    "betaModalButtonText": "Share your feedback!",
+    "betaMainText": "This site is in beta."
   },
   "businessFormationDefaults": {
     "membersExpandText": "Expand",

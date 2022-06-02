@@ -1,6 +1,14 @@
 import { generateNameAndAddress, generateUser, generateUserData } from "@/test/factories";
 import axios from "axios";
-import { checkLicenseStatus, get, getUserData, postNewsletter, postUserData } from "./apiClient";
+import {
+  checkLicenseStatus,
+  get,
+  getUserData,
+  postFeedback,
+  postIssue,
+  postNewsletter,
+  postUserData,
+} from "./apiClient";
 
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -54,5 +62,36 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: userData });
     expect(await postNewsletter(userData)).toEqual(userData);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/external/newsletter", userData, {});
+  });
+
+  it("posts feedback request", async () => {
+    const userData = generateUserData({});
+    const feedbackRequest = {
+      browser: "Firefox v.6.5",
+      device: "Mac OS 10 Google Pixel Mobile",
+      screenWidth: "500 px",
+      detail: "random text",
+      pageOfRequest: "roadmap/test",
+    };
+
+    mockAxios.post.mockResolvedValue({ data: true });
+    expect(await postFeedback(feedbackRequest, userData)).toEqual(true);
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/external/feedback", { feedbackRequest, userData }, {});
+  });
+
+  it("posts issue request", async () => {
+    const userData = generateUserData({});
+    const issueRequest = {
+      context: "some context",
+      browser: "Firefox v.6.5",
+      device: "Mac OS 10 Google Pixel Mobile",
+      screenWidth: "500 px",
+      detail: "random text",
+      pageOfRequest: "roadmap/test",
+    };
+
+    mockAxios.post.mockResolvedValue({ data: true });
+    expect(await postIssue(issueRequest, userData)).toEqual(true);
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/external/issue", { issueRequest, userData }, {});
   });
 });

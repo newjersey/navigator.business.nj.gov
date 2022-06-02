@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Airtable from "airtable";
-import { generateFeedbackRequest, generateUserData } from "../../test/factories";
+import { generateFeedbackRequest, generateIssueRequest, generateUserData } from "../../test/factories";
 import { FeedbackClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 import { AirtableFeedbackClient } from "./AirtableFeedbackClient";
@@ -33,10 +33,10 @@ describe("AirtableFeedbackClient", () => {
     );
   });
 
-  it("sends user data to airtable", async () => {
+  it("sends user data and feedback request to airtable", async () => {
     const userData = generateUserData({});
     const feedbackRequest = generateFeedbackRequest({});
-    const result = await client.create(feedbackRequest, userData);
+    const result = await client.createUserFeedback(feedbackRequest, userData);
 
     expect(result).toEqual(true);
 
@@ -53,6 +53,32 @@ describe("AirtableFeedbackClient", () => {
           Device: feedbackRequest.device,
           Browser: feedbackRequest.browser,
           "Screen Width": feedbackRequest.screenWidth,
+        },
+      },
+    ]);
+  });
+
+  it("sends user data and issue request to airtable", async () => {
+    const userData = generateUserData({});
+    const issue = generateIssueRequest({});
+    const result = await client.createUserIssue(issue, userData);
+
+    expect(result).toEqual(true);
+
+    expect(mockAirtable.baseIdCalledWith).toEqual("some-base-id");
+    expect(mockAirtable.tableIdCalledWith).toEqual("Navigator Bugs - DEV");
+    expect(mockAirtable.dataCalledWith).toEqual([
+      {
+        fields: {
+          Context: issue.context,
+          Detail: issue.detail,
+          Email: userData.user.email,
+          Industry: userData.profileData.industryId,
+          Persona: userData.profileData.businessPersona,
+          "Page Report Was Initiated On": issue.pageOfRequest,
+          Device: issue.device,
+          Browser: issue.browser,
+          "Screen Width": issue.screenWidth,
         },
       },
     ]);

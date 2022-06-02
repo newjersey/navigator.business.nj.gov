@@ -1,6 +1,11 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { NameAvailability, SelfRegResponse } from "@/lib/types/types";
-import { FeedbackRequest, NameAndAddress, UserData } from "@businessnjgovnavigator/shared/";
+import {
+  NameAndAddress,
+  UserData,
+  UserFeedbackRequest,
+  UserIssueRequest,
+} from "@businessnjgovnavigator/shared/";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
@@ -40,8 +45,12 @@ export const searchBusinessName = (name: string): Promise<NameAvailability> => {
   return get(`/guest/business-name-availability?query=${encodeURIComponent(name)}`, false);
 };
 
-export const postFeedback = (feedbackRequest: FeedbackRequest, userData: UserData): Promise<void> => {
+export const postFeedback = (feedbackRequest: UserFeedbackRequest, userData: UserData): Promise<void> => {
   return post("/external/feedback", { feedbackRequest, userData }, false);
+};
+
+export const postIssue = (issueRequest: UserIssueRequest, userData: UserData): Promise<void> => {
+  return post("/external/issue", { issueRequest, userData }, false);
 };
 
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
