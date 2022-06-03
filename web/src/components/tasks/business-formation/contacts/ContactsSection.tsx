@@ -195,6 +195,12 @@ export const ContactsSection = (): ReactElement => {
         <BusinessFormationFieldAlert
           showFieldsError={showSignatureError}
           fieldsWithError={formationFieldErrors}
+          errorType="director"
+        />
+        <BusinessFormationFieldAlert
+          showFieldsError={showSignatureError}
+          fieldsWithError={formationFieldErrors}
+          errorType="signature"
         />
       </div>
       <div className="margin-top-2">
