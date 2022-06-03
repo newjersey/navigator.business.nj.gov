@@ -59,7 +59,7 @@ export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElemen
           >
             {arrayOfOwnershipTypes.map((ownership: OwnershipType) => (
               <MenuItem key={ownership.id} value={ownership.id} data-testid={ownership.id}>
-                <Checkbox checked={state.profileData.ownershipTypeIds.indexOf(ownership.id) > -1} />
+                <Checkbox checked={state.profileData.ownershipTypeIds.includes(ownership.id)} />
                 <ListItemText className="text-wrap" primary={ownership.name} />
               </MenuItem>
             ))}

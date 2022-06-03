@@ -27,7 +27,7 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
 
     if (props.last) {
       const marginStyle = getComputedStyle(content);
-      const newHeight = height - parseInt(marginStyle.marginTop);
+      const newHeight = height - Number.parseInt(marginStyle.marginTop);
       verticalBar.style.height = `${newHeight}px`;
     } else {
       verticalBar.style.height = props.small ? `${height + 16}px` : `${height}px`;

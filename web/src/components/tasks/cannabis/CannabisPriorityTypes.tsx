@@ -49,7 +49,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
 
     if (event.target.checked) {
       const unselectPriorityTasks = {} as Record<string, boolean>;
-      priorityTypes.forEach((key) => (unselectPriorityTasks[key] = false));
+      for (const key of priorityTypes) unselectPriorityTasks[key] = false;
 
       update({
         ...userData,

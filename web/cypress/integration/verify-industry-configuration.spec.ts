@@ -8,7 +8,7 @@ describe("Roadmap [all] [group4]", () => {
     cy.loginByCognitoApi();
   });
 
-  Industries.forEach((industry) => {
+  for (const industry of Industries) {
     it(` ${industry.name} completes onboarding and shows the roadmap`, () => {
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
@@ -33,5 +33,5 @@ describe("Roadmap [all] [group4]", () => {
         .invoke("attr", "data-municipality")
         .should("not.eq", "");
     });
-  });
+  }
 });

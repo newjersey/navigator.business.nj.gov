@@ -316,7 +316,7 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
 
     describe("Tasks", () => {
       const urlSlugs = ["identify-potential-lease", "check-site-requirements", "reseller", "business-plan"];
-      urlSlugs.forEach((slug) => {
+      for (const slug of urlSlugs) {
         it(`should pass the audits on ${slug}`, () => {
           const industry = LookupIndustryById("cosmetology");
           const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
@@ -338,7 +338,7 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
           cy.lighthouse(undefined, lighthouseDesktopConfig);
           cy.pa11y(defaultPa11yThresholds);
         });
-      });
+      }
     });
   });
 });

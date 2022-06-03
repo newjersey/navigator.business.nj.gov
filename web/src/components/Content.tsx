@@ -154,15 +154,13 @@ const parseAndSendAnalyticsEvent = (href: string): void => {
     const possibleAnalyticsEvents = Object.keys(analytics.event);
 
     // @ts-ignore
-    if (possibleAnalyticsEvents.includes(secondHalfOfUrl)) {
+    if (
+      possibleAnalyticsEvents.includes(secondHalfOfUrl) && // @ts-ignore
+      Object.keys(analytics.event[secondHalfOfUrl]).includes("click") && // @ts-ignore
+      Object.keys(analytics.event[secondHalfOfUrl].click).includes("go_to_myNJ_registration")
+    ) {
       // @ts-ignore
-      if (Object.keys(analytics.event[secondHalfOfUrl]).includes("click")) {
-        // @ts-ignore
-        if (Object.keys(analytics.event[secondHalfOfUrl].click).includes("go_to_myNJ_registration")) {
-          // @ts-ignore
-          analytics.event[secondHalfOfUrl].click.go_to_myNJ_registration();
-        }
-      }
+      analytics.event[secondHalfOfUrl].click.go_to_myNJ_registration();
     }
   }
 };

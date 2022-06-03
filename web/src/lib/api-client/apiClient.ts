@@ -58,7 +58,7 @@ export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
     .post(`${apiBaseUrl}/api/self-reg`, userData)
     .then((response) => response.data)
     .catch((error: AxiosError) => {
-      return Promise.reject(error.response?.status);
+      throw error.response?.status;
     });
 };
 
@@ -68,7 +68,7 @@ export const get = async <T>(url: string, auth = true): Promise<T> => {
     .get(`${apiBaseUrl}/api${url}`, authHeader)
     .then((response) => response.data)
     .catch((error: AxiosError) => {
-      return Promise.reject(error.response?.status || 500);
+      throw error.response?.status || 500;
     });
 };
 
@@ -78,7 +78,7 @@ export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> 
     .post(`${apiBaseUrl}/api${url}`, data, authHeader)
     .then((response) => response.data)
     .catch((error: AxiosError) => {
-      return Promise.reject(error.response?.status);
+      throw error.response?.status;
     });
 };
 

@@ -18,6 +18,7 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:unicorn/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -45,7 +46,33 @@
     "prefer-template": "error",
     "react/jsx-uses-react": "off",
     "react/forbid-elements": [1, { "forbid": ["h5", "h6"] }],
-    "@next/next/no-document-import-in-page": 0
+    "@next/next/no-document-import-in-page": 0,
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "kebabCase": true,
+          "camelCase": true,
+          "pascalCase": true
+        }
+      }
+    ],
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/numeric-separators-style": "off",
+    "unicorn/prefer-module": "off",
+    "unicorn/no-array-reduce": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "unicorn/prefer-node-protocol": "off",
+    "unicorn/no-array-callback-reference": "off",
+    "unicorn/no-useless-undefined": "off",
+    "unicorn/prefer-query-selector": "off",
+    "unicorn/new-for-builtins": "off",
+    "unicorn/no-null": "off",
+    "unicorn/no-await-expression-member": "off",
+    "unicorn/no-array-method-this-argument": "off",
+    "unicorn/prefer-spread": "off",
+    "unicorn/prefer-array-some": "off",
+    "unicorn/no-array-push-push": "off"
   },
   "overrides": [
     {

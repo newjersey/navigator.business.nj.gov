@@ -17,11 +17,9 @@ export const buildRoadmap = async ({
     })),
   };
 
-  if (industryId) {
-    roadmapBuilder = await generateIndustryRoadmap(roadmapBuilder, industryId, addOns);
-  } else {
-    roadmapBuilder = await applyAddOns(roadmapBuilder, addOns);
-  }
+  roadmapBuilder = await (industryId
+    ? generateIndustryRoadmap(roadmapBuilder, industryId, addOns)
+    : applyAddOns(roadmapBuilder, addOns));
 
   while (hasSteps(roadmapBuilder) && lastStepHasNoTasks(roadmapBuilder)) {
     roadmapBuilder = removeLastStep(roadmapBuilder);
@@ -93,27 +91,27 @@ const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
 };
 
 const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
-  addOns.forEach((addOn) => {
+  for (const addOn of addOns) {
     const step = builder.steps.find((step) => step.step_number === addOn.step);
     if (!step) {
-      return;
+      continue;
     }
 
     step.tasks = [...step.tasks, { filename: addOn.task, weight: addOn.weight }];
-  });
+  }
 
   return builder;
 };
 
 const modifyTasks = (roadmap: RoadmapBuilder, modifications: TaskModification[]): RoadmapBuilder => {
   if (modifications) {
-    modifications.forEach((modification) => {
+    for (const modification of modifications) {
       const task = findTaskInRoadmapByFilename(roadmap, modification.taskToReplaceFilename);
       if (!task) {
-        return;
+        continue;
       }
       task.filename = modification.replaceWithFilename;
-    });
+    }
   }
 
   return roadmap;

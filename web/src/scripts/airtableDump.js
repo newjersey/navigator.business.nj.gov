@@ -55,12 +55,12 @@ const airtableSelectAll = () => {
       .select({ view: "Grid view" })
       .eachPage(
         function page(records, fetchNextPage) {
-          records.forEach((record) => {
+          for (const record of records) {
             all.push({
               id: record._rawJson.id,
               ...record._rawJson.fields,
             });
-          });
+          }
           fetchNextPage();
         },
         function done(err) {

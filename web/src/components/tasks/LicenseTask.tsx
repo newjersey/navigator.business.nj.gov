@@ -50,7 +50,7 @@ export const LicenseTask = (props: Props): ReactElement => {
   }, userData);
 
   const onSelectTab = (event: React.SyntheticEvent, newValue: string): void => {
-    const index = parseInt(newValue);
+    const index = Number.parseInt(newValue);
     if (index === APPLICATION_TAB_INDEX) {
       analytics.event.task_tab_start_application.click.view_application_tab();
     } else if (index === STATUS_TAB_INDEX) {
@@ -84,8 +84,8 @@ export const LicenseTask = (props: Props): ReactElement => {
         });
         setError(undefined);
       })
-      .catch((errorCode) => {
-        if (errorCode === 404) {
+      .catch((error_) => {
+        if (error_ === 404) {
           analytics.event.task_address_form.response.fail_application_not_found();
           setError("NOT_FOUND");
         } else {

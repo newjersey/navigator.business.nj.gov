@@ -1,5 +1,4 @@
-/* eslint-disable */
-
+// eslint-disable-next-line no-undef
 const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || "";
 
 const sendEvent = (category, action, label) => {

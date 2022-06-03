@@ -7,9 +7,11 @@ import { FormHelperText, Radio } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 
 export const PaymentTypeTable = (): ReactElement => {
-  const achPaymentCost = parseFloat(Config.businessFormationDefaults.achPaymentCost);
-  const creditCardPaymentCostExtra = parseFloat(Config.businessFormationDefaults.creditCardPaymentCostExtra);
-  const creditCardPaymentCostInitial = parseFloat(
+  const achPaymentCost = Number.parseFloat(Config.businessFormationDefaults.achPaymentCost);
+  const creditCardPaymentCostExtra = Number.parseFloat(
+    Config.businessFormationDefaults.creditCardPaymentCostExtra
+  );
+  const creditCardPaymentCostInitial = Number.parseFloat(
     Config.businessFormationDefaults.creditCardPaymentCostInitial
   );
 

@@ -1,4 +1,4 @@
-import { ABStorageFactory } from "@/lib/storage/ABStorage";
+import { ABStorageFactory } from "@/lib/storage/AbStorage";
 import { Auth } from "@aws-amplify/auth";
 import { Sha256 } from "@aws-crypto/sha256-browser";
 import { HttpRequest } from "@aws-sdk/protocol-http";

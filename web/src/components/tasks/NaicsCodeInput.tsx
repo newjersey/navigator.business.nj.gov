@@ -47,7 +47,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
         .split(",")
         .filter((value) => value.length > 0) ?? [];
     setIndustryCodes(naicsCodes);
-    if (naicsCodes.length == 0) setDisplayInput(true);
+    if (naicsCodes.length === 0) setDisplayInput(true);
   }, userData);
 
   const saveNaicsCode = (): void => {

@@ -72,7 +72,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   };
 
   const renderCalendar = (): ReactElement => {
-    const monthIndices = Array.from(Array(12).keys());
+    const monthIndices = [...Array(12).keys()];
 
     const monthsPerRow = 4;
 

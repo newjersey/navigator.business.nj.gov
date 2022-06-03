@@ -36,7 +36,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
 
   if (props.numericProps) {
     const regex = (value: string): string =>
-      value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|[^0-9]/g : /[^0-9]/g, "");
+      value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /\D/g, "");
 
     visualFilter = (value: string): string =>
       props.visualFilter ? props.visualFilter(regex(value)) : regex(value);
@@ -46,7 +46,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
     valueFilter = (value) => (maxLength ? regex(value).slice(0, maxLength) : regex(value));
 
     const validMinimumValue = (value: string): boolean => {
-      if (!props.required && value.length == 0) {
+      if (!props.required && value.length === 0) {
         return true;
       }
       if (props.numericProps?.minLength) {
@@ -61,7 +61,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
     additionalValidation = (returnedValue: string): boolean =>
       ![
         validMinimumValue(returnedValue),
-        returnedValue.length <= (maxLength ?? Infinity),
+        returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
         props.additionalValidation ? props.additionalValidation(returnedValue) : true,
       ].some((i) => !i);
     fieldOptions = {

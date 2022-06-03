@@ -149,15 +149,13 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const submitBusinessTab = async (completed = true): Promise<void> => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
-    if (completed) {
-      await waitFor(() => {
-        expect(screen.queryByTestId("contacts-section")).toBeInTheDocument();
-      });
-    } else {
-      await waitFor(() => {
-        expect(screen.queryByTestId("contacts-section")).not.toBeInTheDocument();
-      });
-    }
+    await (completed
+      ? waitFor(() => {
+          expect(screen.queryByTestId("contacts-section")).toBeInTheDocument();
+        })
+      : waitFor(() => {
+          expect(screen.queryByTestId("contacts-section")).not.toBeInTheDocument();
+        }));
   };
 
   const submitContactsTab = async (completed = true): Promise<void> => {

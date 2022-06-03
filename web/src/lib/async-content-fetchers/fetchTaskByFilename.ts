@@ -29,21 +29,15 @@ export const fetchTaskLinkByFilename = async (filename: string): Promise<TaskLin
 };
 
 const fetchDependenciesFile = async (): Promise<TaskDependencies[]> => {
-  let file;
-  if (process.env.NODE_ENV === "test") {
-    file = await import(`@/lib/roadmap/fixtures/task-dependencies.json`);
-  } else {
-    file = await import(`@businessnjgovnavigator/content/roadmaps/task-dependencies.json`);
-  }
+  const file = await (process.env.NODE_ENV === "test"
+    ? import(`@/lib/roadmap/fixtures/task-dependencies.json`)
+    : import(`@businessnjgovnavigator/content/roadmaps/task-dependencies.json`));
   return file.default.dependencies;
 };
 
 const fetchTaskFile = async (filename: string): Promise<string> => {
-  let file;
-  if (process.env.NODE_ENV === "test") {
-    file = await import(`@/lib/roadmap/fixtures/tasks/${filename}.md`);
-  } else {
-    file = await import(`@businessnjgovnavigator/content/roadmaps/tasks/${filename}.md`);
-  }
+  const file = await (process.env.NODE_ENV === "test"
+    ? import(`@/lib/roadmap/fixtures/tasks/${filename}.md`)
+    : import(`@businessnjgovnavigator/content/roadmaps/tasks/${filename}.md`));
   return file.default;
 };

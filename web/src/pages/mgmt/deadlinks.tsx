@@ -102,17 +102,15 @@ const DeadLinksPage = (props: Props): ReactElement => {
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
   const buildCheckDeadPages =
     (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS == "true") || false;
-  if (!buildCheckDeadPages) {
-    return { notFound: true };
-  } else {
-    return {
-      props: {
-        deadTasks: await findDeadTasks(),
-        deadContextualInfo: await findDeadContextualInfo(),
-        deadLinks: await findDeadLinks(),
-      },
-    };
-  }
+  return !buildCheckDeadPages
+    ? { notFound: true }
+    : {
+        props: {
+          deadTasks: await findDeadTasks(),
+          deadContextualInfo: await findDeadContextualInfo(),
+          deadLinks: await findDeadLinks(),
+        },
+      };
 };
 
 export default DeadLinksPage;

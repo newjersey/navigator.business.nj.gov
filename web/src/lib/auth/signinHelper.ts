@@ -1,7 +1,7 @@
 import { AuthAlertContextType } from "@/contexts/authAlertContext";
 import * as api from "@/lib/api-client/apiClient";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
-import { ABStorageFactory } from "@/lib/storage/ABStorage";
+import { ABStorageFactory } from "@/lib/storage/AbStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -45,8 +45,8 @@ export const onSelfRegister = (
       await update(response.userData);
       await replace(response.authRedirectURL);
     })
-    .catch((errorCode) => {
-      if (errorCode === 409) {
+    .catch((error) => {
+      if (error === 409) {
         setRegistrationAlertStatus("DUPLICATE_ERROR");
       } else {
         setRegistrationAlertStatus("RESPONSE_ERROR");

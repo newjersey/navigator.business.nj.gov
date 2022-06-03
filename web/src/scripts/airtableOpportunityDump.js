@@ -79,20 +79,28 @@ const convertHomeBasedValues = (value) => {
 };
 
 const convertFundingType = (value) => {
-  if (value === "Tax Credit") {
-    return "tax credit";
-  } else if (value === "Loan") {
-    return "loan";
-  } else if (value === "Grant") {
-    return "grant";
-  } else if (value === "Technical Assistance") {
-    return "technical assistance";
-  } else if (value === "Tax Exemption") {
-    return "tax exemption";
-  } else if (value === "hiring and employee support") {
-    return "hiring and employee training support";
-  } else {
-    return value;
+  switch (value) {
+    case "Tax Credit": {
+      return "tax credit";
+    }
+    case "Loan": {
+      return "loan";
+    }
+    case "Grant": {
+      return "grant";
+    }
+    case "Technical Assistance": {
+      return "technical assistance";
+    }
+    case "Tax Exemption": {
+      return "tax exemption";
+    }
+    case "hiring and employee support": {
+      return "hiring and employee training support";
+    }
+    default: {
+      return value;
+    }
   }
 };
 
@@ -114,47 +122,59 @@ const convertBusinessStage = (value) => {
 };
 
 const convertProgramFrequency = (value) => {
-  if (value === "Annual") {
-    return "annual";
-  } else if (value === "ongoning") {
-    return "ongoing";
-  } else if (value === "Ongoing") {
-    return "ongoing";
-  } else if (value === "ongoing with annual cap") {
-    return "reoccuring";
-  } else if (value === "ongoing with cap") {
-    return "ongoing";
-  } else {
-    return value;
+  switch (value) {
+    case "Annual": {
+      return "annual";
+    }
+    case "ongoning": {
+      return "ongoing";
+    }
+    case "Ongoing": {
+      return "ongoing";
+    }
+    case "ongoing with annual cap": {
+      return "reoccuring";
+    }
+    case "ongoing with cap": {
+      return "ongoing";
+    }
+    default: {
+      return value;
+    }
   }
 };
 
 const convertStatus = (value) => {
-  if (value === "deadline\n") {
-    return "deadline";
-  } else if (value === "first come, first serve\n") {
-    return "first come, first serve";
-  } else if (value === "Open") {
-    return "open";
-  } else if (value === "Opening Soon") {
-    return "opening soon";
-  } else if (value === "closed\n") {
-    return "closed";
-  } else if (value === "open\n") {
-    return "open";
-  } else if (value === "first-come, first served") {
-    return "first come, first serve";
-  } else {
-    return value;
+  switch (value) {
+    case "deadline\n": {
+      return "deadline";
+    }
+    case "first come, first serve\n": {
+      return "first come, first serve";
+    }
+    case "Open": {
+      return "open";
+    }
+    case "Opening Soon": {
+      return "opening soon";
+    }
+    case "closed\n": {
+      return "closed";
+    }
+    case "open\n": {
+      return "open";
+    }
+    case "first-come, first served": {
+      return "first come, first serve";
+    }
+    default: {
+      return value;
+    }
   }
 };
 
 const convertemployeesRequired = (value) => {
-  if (value === "N/A") {
-    return "n/a";
-  } else {
-    return value;
-  }
+  return value === "N/A" ? "n/a" : value;
 };
 
 const convertMWVB = (value) => {
@@ -216,7 +236,7 @@ const writeMarkdownString = (opportunity) => {
 const toPipeCase = (str) => {
   return str
     .trim()
-    .replace(/[@?.",/#!$%&^*;:{}+<>=\-_`~()]/g, "")
+    .replace(/[!"#$%&()*+,./:;<=>?@^_`{}~-]/g, "")
     .replace("  ", " ")
     .toLowerCase()
     .split(" ")
@@ -231,12 +251,12 @@ const airtableSelectAll = () => {
       .select({ view: "Public View" })
       .eachPage(
         function page(records, fetchNextPage) {
-          records.forEach((record) => {
+          for (const record of records) {
             all.push({
               id: record._rawJson.id,
               ...record._rawJson.fields,
             });
-          });
+          }
           fetchNextPage();
         },
         function done(err) {

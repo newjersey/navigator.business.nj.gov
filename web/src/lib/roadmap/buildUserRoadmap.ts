@@ -28,20 +28,16 @@ const enableFormation = (legalStructureId: string): boolean => {
 };
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
-  let addOns: string[];
-  if (profileData.businessPersona === "FOREIGN") {
-    addOns = getForeignAddOns(profileData);
-  } else {
-    addOns = getIndustryBasedAddOns(profileData);
-  }
+  const addOns: string[] =
+    profileData.businessPersona === "FOREIGN"
+      ? getForeignAddOns(profileData)
+      : getIndustryBasedAddOns(profileData);
 
   let roadmap = await buildRoadmap({ industryId: profileData.industryId, addOns });
 
-  if (profileData.municipality) {
-    roadmap = await addMunicipalitySpecificData(roadmap, profileData.municipality.id);
-  } else {
-    roadmap = cleanupMunicipalitySpecificData(roadmap);
-  }
+  roadmap = profileData.municipality
+    ? await addMunicipalitySpecificData(roadmap, profileData.municipality.id)
+    : cleanupMunicipalitySpecificData(roadmap);
 
   roadmap = addNaicsCodeData(roadmap, profileData.naicsCode);
 
@@ -141,8 +137,8 @@ const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
 };
 
 const applyTemplateEvalForAllTasks = (roadmap: Roadmap, evalValues: Record<string, string>): Roadmap => {
-  roadmap.steps.forEach((step) => {
-    step.tasks.forEach((task) => {
+  for (const step of roadmap.steps) {
+    for (const task of step.tasks) {
       if (task.callToActionLink) {
         task.callToActionLink = templateEval(task.callToActionLink, evalValues);
       }
@@ -150,8 +146,8 @@ const applyTemplateEvalForAllTasks = (roadmap: Roadmap, evalValues: Record<strin
         task.callToActionText = templateEval(task.callToActionText, evalValues);
       }
       task.contentMd = templateEval(task.contentMd, evalValues);
-    });
-  });
+    }
+  }
 
   return roadmap;
 };

@@ -62,13 +62,11 @@ const RoadmapPage = (props: Props): ReactElement => {
   }, [router.isReady, router.query.success]);
 
   const getHeader = (): string => {
-    if (userData?.user.name) {
-      return templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
-        name: userData.user.name,
-      });
-    } else {
-      return Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing;
-    }
+    return userData?.user.name
+      ? templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
+          name: userData.user.name,
+        })
+      : Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing;
   };
 
   const isForeign = (): boolean => {

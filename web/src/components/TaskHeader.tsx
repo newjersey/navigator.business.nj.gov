@@ -66,20 +66,18 @@ export const TaskHeader = (props: Props): ReactElement => {
       currentTaskProgress = userData.taskProgress[props.task.id];
     }
 
-    if (props.tooltipText) {
-      return (
-        <div className="fdr">
-          {TaskProgressTagLookup[currentTaskProgress]}
-          <ArrowTooltip title={props.tooltipText}>
-            <div className="fdr fac margin-left-05" data-testid="automatic-status-info-tooltip">
-              <Icon>help_outline</Icon>
-            </div>
-          </ArrowTooltip>
-        </div>
-      );
-    } else {
-      return <TaskProgressDropdown onSelect={updateTaskProgress} initialValue={currentTaskProgress} />;
-    }
+    return props.tooltipText ? (
+      <div className="fdr">
+        {TaskProgressTagLookup[currentTaskProgress]}
+        <ArrowTooltip title={props.tooltipText}>
+          <div className="fdr fac margin-left-05" data-testid="automatic-status-info-tooltip">
+            <Icon>help_outline</Icon>
+          </div>
+        </ArrowTooltip>
+      </div>
+    ) : (
+      <TaskProgressDropdown onSelect={updateTaskProgress} initialValue={currentTaskProgress} />
+    );
   };
 
   return (
