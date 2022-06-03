@@ -35,7 +35,7 @@ export const SelectFeedbackDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
       bodyText={Config.feedbackModal.feedbackModalBodyText}
       maxWidth="md"
     >
-      <div className="display-flex flex-column padding-bottom-2">
+      <div className="display-flex flex-column">
         <Button
           className="width-100"
           style="narrow-accent-cool-lightest"

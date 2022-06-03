@@ -44,7 +44,7 @@ export const ReviewMembers = (): ReactElement => {
       {userData?.formationData.formationFormData.members.map((member, index) => (
         <div key={`${member.name}-${index}`}>
           <div className="display-block tablet:display-flex">
-            <div className={`text-bold width-11rem ${index !== 0 ? "margin-top-1" : ""}`}>
+            <div className={`text-bold width-11rem ${index !== 0 ? "margin-top-2" : ""}`}>
               <Content>
                 {isCorp
                   ? Config.businessFormationDefaults.reviewPageDirectorNameLabel

@@ -3,7 +3,7 @@ import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
 interface Props {
@@ -34,45 +34,47 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
   return (
     <>
       <ul>
-        <FormControl variant="outlined" fullWidth>
-          <FormControlLabel
-            className="margin-y-1"
-            label={<Content>{Config.cannabisApplyForLicense.diverselyOwnedLabel}</Content>}
-            control={
-              <Checkbox
-                name="diversely-owned-checkbox"
-                onChange={(event) => handleCheckbox(event, "diverselyOwned")}
-                checked={props.priorityStatusState.diverselyOwned}
-                sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px" }}
-                data-testid="diversely-owned-checkbox"
-              />
-            }
-          />
-          <FormControlLabel
-            className="margin-y-1"
-            label={<Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>}
-            control={
-              <Checkbox
-                onChange={(event) => handleCheckbox(event, "impactZone")}
-                checked={props.priorityStatusState.impactZone}
-                sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px" }}
-                data-testid="impact-zone-checkbox"
-              />
-            }
-          />
-          <FormControlLabel
-            className="margin-y-1"
-            label={<Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>}
-            control={
-              <Checkbox
-                onChange={(event) => handleCheckbox(event, "socialEquity")}
-                checked={props.priorityStatusState.socialEquity}
-                sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px" }}
-                data-testid="sbe-checkbox"
-              />
-            }
-          />
-        </FormControl>
+        <FormGroup>
+          <FormControl variant="outlined" fullWidth>
+            <FormControlLabel
+              className="margin-y-1"
+              label={<Content>{Config.cannabisApplyForLicense.diverselyOwnedLabel}</Content>}
+              control={
+                <Checkbox
+                  name="diversely-owned-checkbox"
+                  onChange={(event) => handleCheckbox(event, "diverselyOwned")}
+                  checked={props.priorityStatusState.diverselyOwned}
+                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
+                  data-testid="diversely-owned-checkbox"
+                />
+              }
+            />
+            <FormControlLabel
+              className="margin-y-1"
+              label={<Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>}
+              control={
+                <Checkbox
+                  onChange={(event) => handleCheckbox(event, "impactZone")}
+                  checked={props.priorityStatusState.impactZone}
+                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
+                  data-testid="impact-zone-checkbox"
+                />
+              }
+            />
+            <FormControlLabel
+              className="margin-y-1"
+              label={<Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>}
+              control={
+                <Checkbox
+                  onChange={(event) => handleCheckbox(event, "socialEquity")}
+                  checked={props.priorityStatusState.socialEquity}
+                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
+                  data-testid="sbe-checkbox"
+                />
+              }
+            />
+          </FormControl>{" "}
+        </FormGroup>
       </ul>
 
       <DialogTwoButton

@@ -39,7 +39,7 @@ export const ReviewSignatures = (): ReactElement => {
         </div>
       </div>
       {state.formationFormData.signers.map((signer, index) => (
-        <div key={`${signer}-${index}`}>
+        <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
           <div className="display-block tablet:display-flex">
             <div className="text-bold width-11rem">
               <Content>

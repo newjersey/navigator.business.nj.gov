@@ -78,7 +78,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   const renderRoadmap = (
     <div className="margin-top-6 desktop:margin-top-0">
       <div className="margin-bottom-205 bg-white">
-        <h1 className="h1-styling-large">{getHeader()}</h1>
+        <h1 className="h1-styling-large break-word">{getHeader()}</h1>
       </div>
       <UserDataErrorAlert />
       {(!error || error !== "NO_DATA") && (

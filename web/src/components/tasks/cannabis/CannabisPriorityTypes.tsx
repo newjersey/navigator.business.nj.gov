@@ -82,7 +82,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
                 <Checkbox
                   onChange={handleNoneOfTheAboveCheckboxChange}
                   checked={!!userData?.taskItemChecklist[noneOfTheAbovePriorityId]}
-                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px" }}
+                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
                   data-testid="none-of-the-above"
                 />
               }

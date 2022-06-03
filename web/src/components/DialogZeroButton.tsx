@@ -27,7 +27,7 @@ export const DialogZeroButton = (props: Props) => {
       onClose={props.close}
       aria-labelledby="modal"
     >
-      <DialogTitle id="modal" className="display-flex flex-row flex-align-center">
+      <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1">
         <div className="h2-styling padding-x-1 margin-bottom-0">{props.title}</div>
         <IconButton
           aria-label="close"
@@ -41,7 +41,7 @@ export const DialogZeroButton = (props: Props) => {
         </IconButton>
       </DialogTitle>
       <DialogContent sx={{ padding: 0 }} dividers={props.dividers}>
-        <div className="padding-x-4 padding-bottom-1">
+        <div className="padding-x-4 margin-bottom-4">
           {props.showAlert && props.alertVariant && props.alertText && (
             <Alert dataTestid="dialog-alert" variant={props.alertVariant} className="margin-top-0">
               <Content>{props.alertText}</Content>

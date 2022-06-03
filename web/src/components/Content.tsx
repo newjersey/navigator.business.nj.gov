@@ -135,7 +135,12 @@ const ListOrCheckbox = (props: any): ReactElement => {
             <TaskCheckbox
               checklistItemId={checklistItemId}
               checkboxProps={{
-                sx: { alignSelf: "start", paddingTop: "1px", paddingBottom: "0px" },
+                sx: {
+                  alignSelf: "start",
+                  paddingTop: "1px",
+                  paddingBottom: "0px",
+                  paddingLeft: "0px",
+                },
               }}
             />
           }
