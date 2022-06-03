@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import request from "supertest";
 import {
   generateFormationData,
-  generateFormationSubmitResponse,
+  generateGetFilingResponse,
   generateLicenseData,
   generatePreferences,
   generateProfileData,
@@ -343,7 +343,7 @@ describe("userRouter", () => {
         const formationData = generateFormationData({});
         const updatedFormationData = {
           ...formationData,
-          formationResponse: generateFormationSubmitResponse({ success: true }),
+          getFilingResponse: generateGetFilingResponse({ success: true }),
         };
         const newLegalStructureUserData = generateUserData({
           user: generateUser({ id: "123" }),
@@ -377,7 +377,7 @@ describe("userRouter", () => {
         const formationData = generateFormationData({});
         const updatedFormationData = {
           ...formationData,
-          formationResponse: generateFormationSubmitResponse({ success: false }),
+          getFilingResponse: generateGetFilingResponse({ success: false }),
         };
         const existingProfileUserData = generateUserData({
           user: generateUser({ id: "123" }),
@@ -416,7 +416,7 @@ describe("userRouter", () => {
         const formationData = generateFormationData({});
         const updatedFormationData = {
           ...formationData,
-          formationResponse: generateFormationSubmitResponse({ success: false }),
+          getFilingResponse: generateGetFilingResponse({ success: false }),
         };
         const existingProfileUserData = generateUserData({
           user: generateUser({ id: "123" }),
@@ -455,7 +455,7 @@ describe("userRouter", () => {
         const formationData = generateFormationData({});
         const updatedFormationData = {
           ...formationData,
-          formationResponse: generateFormationSubmitResponse({ success: false }),
+          getFilingResponse: generateGetFilingResponse({ success: false }),
         };
         const existingProfileUserData = generateUserData({
           user: generateUser({ id: "123" }),

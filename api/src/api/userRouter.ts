@@ -148,7 +148,7 @@ export const userRouterFactory = (
   const businessHasFormed = async (userData: UserData): Promise<boolean> => {
     try {
       const oldUserData = await userDataClient.get(userData.user.id);
-      return oldUserData.formationData.formationResponse?.success ?? false;
+      return oldUserData.formationData.getFilingResponse?.success ?? false;
     } catch {
       return false;
     }
