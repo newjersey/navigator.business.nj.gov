@@ -18,7 +18,7 @@ describe("<RightSidebarPageLayout />", () => {
       </PageSkeleton>
     );
 
-    expect(screen.queryByTestId("bugBar")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("reportAnIssueBar")).not.toBeInTheDocument();
   });
 
   it("renders report an issues bar after onboarding is completed", () => {
@@ -30,6 +30,6 @@ describe("<RightSidebarPageLayout />", () => {
       </PageSkeleton>
     );
 
-    expect(screen.getByTestId("bugBar")).toBeInTheDocument();
+    expect(screen.getByTestId("reportAnIssueBar")).toBeInTheDocument();
   });
 });

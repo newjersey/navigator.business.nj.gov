@@ -9,7 +9,10 @@ export const ReportAnIssueBar = (): ReactElement => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
-    <div className="bg-beta height-5 flex flex-align-center flex-justify-center" data-testid="bugBar">
+    <div
+      className="bg-beta height-5 flex flex-align-center flex-justify-center"
+      data-testid="reportAnIssueBar"
+    >
       <Button
         style="tertiary"
         onClick={() => {
@@ -18,7 +21,7 @@ export const ReportAnIssueBar = (): ReactElement => {
       >
         <div className="text-base-darkest flex flex-align-center flex-justify-center">
           {makeButtonIcon("bug-error-dark")}
-          <span className="text-left text-bold">{Config.bugBar.bugBarText}</span>
+          <span className="text-left text-bold">{Config.reportAnIssueBar.reportAnIssueBarText}</span>
         </div>
       </Button>
 

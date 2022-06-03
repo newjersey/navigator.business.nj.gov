@@ -54,7 +54,7 @@
     "successfulSubmissionModalHeadingText": "Thank you!",
     "unsuccessfulSubmissionAlertText": "There was an error. Please try again or email your issue to xyz@xyz.gov."
   },
-  "bugBar": { "bugBarText": "Report an issue." },
+  "reportAnIssueBar": { "reportAnIssueBarText": "Report an issue." },
   "betaBar": {
     "betaModalButtonText": "Share your feedback!",
     "betaMainText": "This site is in beta."
