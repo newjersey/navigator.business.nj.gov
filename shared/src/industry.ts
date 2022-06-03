@@ -47,6 +47,6 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
 
 export const Industries: Industry[] = industryJson.industries;
 
-export const isIndustryIdGeneric = (industry: Industry) => {
+export const isIndustryIdGeneric = (industry: Industry): boolean => {
   return industry.id === "generic";
 };

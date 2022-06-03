@@ -3636,6 +3636,7 @@ __metadata:
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
     "@types/jest": 27.5.1
+    "@types/js-yaml": ^4.0.5
     "@types/jsonwebtoken": 8.5.8
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
@@ -3696,6 +3697,7 @@ __metadata:
     jest-dynalite: 3.5.1
     jest-environment-jsdom: 28.1.0
     jest-junit: 13.2.0
+    js-yaml: ^4.1.0
     jsonwebtoken: 8.5.1
     kill-port: 2.0.0
     lint-staged: 12.5.0
@@ -3820,6 +3822,7 @@ __metadata:
     "@testing-library/user-event": 14.2.0
     "@types/broken-link-checker": 0.7.1
     "@types/jest": 27.5.1
+    "@types/js-yaml": ^4.0.5
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
     "@types/node": 16.11.36
@@ -3864,6 +3867,7 @@ __metadata:
     jest: 28.1.0
     jest-environment-jsdom: 28.1.0
     jest-junit: 13.2.0
+    js-yaml: ^4.1.0
     lodash.merge: 4.6.2
     lodash.orderby: 4.6.0
     markdown-truncate: 1.0.4
@@ -8716,6 +8720,13 @@ __metadata:
     jest-matcher-utils: ^27.0.0
     pretty-format: ^27.0.0
   checksum: be20e39f7aaf17179109c0060d0a0489cec2034d4e2e28a631284c7ecd13c5ae52f62697a33a0e89b03b6cfe54e9d5e8c2bd387ab2bd90d6071d68c63b86d1e3
+  languageName: node
+  linkType: hard
+
+"@types/js-yaml@npm:^4.0.5":
+  version: 4.0.5
+  resolution: "@types/js-yaml@npm:4.0.5"
+  checksum: 7dcac8c50fec31643cc9d6444b5503239a861414cdfaa7ae9a38bc22597c4d850c4b8cec3d82d73b3fbca408348ce223b0408d598b32e094470dfffc6d486b4d
   languageName: node
   linkType: hard
 

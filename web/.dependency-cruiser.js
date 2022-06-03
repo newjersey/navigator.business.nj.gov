@@ -56,6 +56,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "js-yaml" },
+    },
+    {
+      from: {},
       to: { path: "@mui/lab" },
     },
     {

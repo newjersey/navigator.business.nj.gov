@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { getMergedConfig } from "@/contexts/configContext";
+import { flattenObject } from "@/lib/utils/helpers";
 import fs from "fs";
 import path from "path";
 
@@ -12,22 +13,6 @@ describe("cms", () => {
         "utf8"
       );
       const mergedConfig = getMergedConfig();
-
-      const flattenObject = (obj: any) => {
-        const flattened: any = {};
-
-        Object.keys(obj).forEach((key) => {
-          const value = obj[key];
-
-          if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-            Object.assign(flattened, flattenObject(value));
-          } else {
-            flattened[key] = value;
-          }
-        });
-
-        return flattened;
-      };
 
       for (const field of Object.keys(flattenObject(mergedConfig))) {
         try {

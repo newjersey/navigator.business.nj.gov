@@ -315,3 +315,25 @@ export const makeButtonIcon = (svgFilename: string, size = "20px"): ReactElement
     alt=""
   />
 );
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const flattenObject = (obj: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const flattened: any = {};
+
+  if (typeof obj === "object" && obj !== null && !Array.isArray(obj)) {
+    Object.keys(obj).forEach((key) => {
+      const value = obj[key];
+
+      if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+        Object.assign(flattened, flattenObject(value));
+      } else {
+        flattened[key] = value;
+      }
+    });
+
+    return flattened;
+  } else {
+    return obj;
+  }
+};
