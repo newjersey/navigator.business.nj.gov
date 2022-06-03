@@ -13,7 +13,13 @@ export const BetaBar = (): ReactElement => {
       data-testid="beta-bar"
     >
       <span className="margin-left-1 margin-right-1">{Config.betaBar.betaMainText}</span>
-      <Button className="padding-y-0" style="secondary-blue" smallText onClick={() => setShowModal(true)}>
+      <Button
+        className="padding-y-0"
+        style="secondary-blue"
+        smallText
+        onClick={() => setShowModal(true)}
+        widthAutoOnMobile
+      >
         {makeButtonIcon("lightbulb-on-warning-light", "16px")}
         {Config.betaBar.betaModalButtonText}
       </Button>

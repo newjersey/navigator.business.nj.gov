@@ -17,7 +17,9 @@ export const OnboardingLiquorLicense = (): ReactElement => {
 
   return (
     <>
-      <Content>{Config.profileDefaults[state.flow].liquorLicense.header}</Content>
+      <div className="margin-bottom-2">
+        <Content>{Config.profileDefaults[state.flow].liquorLicense.header}</Content>
+      </div>
       <Content>{Config.profileDefaults[state.flow].liquorLicense.description}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup

@@ -23,7 +23,9 @@ export const OnboardingCpa = (): ReactElement => {
 
   return (
     <>
-      <Content>{Config.profileDefaults[state.flow].cpa.header}</Content>
+      <div className="margin-bottom-2">
+        <Content>{Config.profileDefaults[state.flow].cpa.header}</Content>
+      </div>
       <Content>{Config.profileDefaults[state.flow].cpa.description}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
