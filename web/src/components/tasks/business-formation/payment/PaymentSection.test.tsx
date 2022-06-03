@@ -158,14 +158,17 @@ describe("Formation - PaymentSection", () => {
     expect(screen.getByLabelText("Total")).toHaveTextContent(
       (
         150 +
-        parseFloat(Config.businessFormationDefaults.creditCardPaymentCostInitial) +
-        parseFloat(Config.businessFormationDefaults.creditCardPaymentCostExtra)
+        Number.parseFloat(Config.businessFormationDefaults.creditCardPaymentCostInitial) +
+        Number.parseFloat(Config.businessFormationDefaults.creditCardPaymentCostExtra)
       ).toString()
     );
     fireEvent.click(screen.getByLabelText("E check"));
     const numberOfDocuments = 2;
     expect(screen.getByLabelText("Total")).toHaveTextContent(
-      (150 + parseFloat(Config.businessFormationDefaults.achPaymentCost) * numberOfDocuments).toString()
+      (
+        150 +
+        Number.parseFloat(Config.businessFormationDefaults.achPaymentCost) * numberOfDocuments
+      ).toString()
     );
   });
 

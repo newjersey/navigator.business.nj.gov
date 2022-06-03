@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
-import { TaskCTA } from "@/components/TaskCTA";
+import { TaskCTA } from "@/components/TaskCta";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormationTabs } from "@/components/tasks/business-formation/BusinessFormationTabs";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";

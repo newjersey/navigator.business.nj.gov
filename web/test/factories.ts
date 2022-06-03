@@ -172,9 +172,9 @@ export const generateNaicsObject = (
     SixDigitDescription: `some-six-digit-description-${randomInt()}`,
     SixDigitCode: sixNaicsCode,
     FourDigitDescription: `some-four-digit-description-${randomInt()}`,
-    FourDigitCode: parseInt(sixNaicsCode.toString().substring(0, 4)),
+    FourDigitCode: Number.parseInt(sixNaicsCode.toString().slice(0, 4)),
     TwoDigitDescription: `some-two-digit-description-${randomInt()}`,
-    TwoDigitCode: [parseInt(sixNaicsCode.toString().substring(0, 2))],
+    TwoDigitCode: [Number.parseInt(sixNaicsCode.toString().slice(0, 2))],
     industryIds: [randomIndustry().name],
     ...overrides,
   };
@@ -371,7 +371,7 @@ export const generateFormationDisplayContent = (
         cost: randomInt(),
         optionalLabel: `some-certified-copy-of-formation-document-optional-${curr}--label-${randomInt()}`,
       },
-      ...(overrides[defaultFormationLegalType] ?? {}),
+      ...overrides[defaultFormationLegalType],
       ...overrides[curr],
     };
     return accumulator;

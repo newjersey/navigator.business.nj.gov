@@ -25,7 +25,7 @@ export const ReviewSection = (): ReactElement => {
         {state.formationFormData.businessPurpose ? <ReviewBusinessPurpose /> : null}
         {state.formationFormData.provisions.length > 0 ? <ReviewProvisions /> : null}
         <ReviewRegisteredAgent />
-        {state.formationFormData.members.length ? <ReviewMembers /> : null}
+        {state.formationFormData.members.length > 0 ? <ReviewMembers /> : null}
         <ReviewSignatures />
       </div>
 

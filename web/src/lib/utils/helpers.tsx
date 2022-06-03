@@ -118,11 +118,7 @@ export const getModifiedTaskBooleanUndefined = (
 };
 
 export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }): T => {
-  if (cases[param]) {
-    return cases[param];
-  } else {
-    return cases.default;
-  }
+  return cases[param] ? cases[param] : cases.default;
 };
 
 export const scrollToTop = (): void => {
@@ -175,11 +171,9 @@ export const getUserNameOrEmail = (userData: UserData | undefined): string => {
 };
 
 export const validateEmail = (email: string): boolean => {
-  return !!String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+  return !!/^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Za-z-]+\.)+[A-Za-z]{2,}))$/.test(
+    String(email).toLowerCase()
+  );
 };
 
 export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
@@ -210,9 +204,9 @@ export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => 
   if (!roadmap) return [];
   const { steps } = roadmap;
   const sections: SectionType[] = [];
-  steps.forEach((step) => {
+  for (const step of steps) {
     sections.push(step.section);
-  });
+  }
   return [...new Set(sections)];
 };
 
@@ -254,9 +248,9 @@ const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | und
 export const splitAndBoldSearchText = (displayText: string, searchText: string): ReactElement => {
   const index = displayText.toLowerCase().indexOf(searchText.toLowerCase());
   if (index >= 0) {
-    const prefixText = displayText.substr(0, index);
-    const toBold = displayText.substr(index, searchText.length);
-    const afterText = displayText.substr(index + searchText.length);
+    const prefixText = displayText.slice(0, Math.max(0, index));
+    const toBold = displayText.slice(index, searchText.length);
+    const afterText = displayText.slice(index + searchText.length);
     return (
       <span style={{ whiteSpace: "pre-wrap" }}>
         {prefixText}
@@ -271,12 +265,12 @@ export const splitAndBoldSearchText = (displayText: string, searchText: string):
 
 export const getDollarValue = (currVal: string | number): string => {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
-    parseFloat(currVal.toString())
+    Number.parseFloat(currVal.toString())
   );
 };
 
 export const zipCodeRange = (value: string) => {
-  const parsedValue = parseInt(value);
+  const parsedValue = Number.parseInt(value);
   if (typeof parsedValue !== "number") return false;
   return parsedValue >= 7001 && parsedValue <= 8999;
 };
@@ -292,12 +286,7 @@ export const getStringifiedAddress = (
 };
 
 export const getFlow = (data: UserData | ProfileData): FlowType => {
-  let persona: BusinessPersona;
-  if (isUserData(data)) {
-    persona = data.profileData.businessPersona;
-  } else {
-    persona = data.businessPersona;
-  }
+  const persona: BusinessPersona = isUserData(data) ? data.profileData.businessPersona : data.businessPersona;
 
   return persona || "STARTING";
 };
@@ -322,7 +311,7 @@ export const flattenObject = (obj: any) => {
   const flattened: any = {};
 
   if (typeof obj === "object" && obj !== null && !Array.isArray(obj)) {
-    Object.keys(obj).forEach((key) => {
+    for (const key of Object.keys(obj)) {
       const value = obj[key];
 
       if (typeof value === "object" && value !== null && !Array.isArray(value)) {
@@ -330,7 +319,7 @@ export const flattenObject = (obj: any) => {
       } else {
         flattened[key] = value;
       }
-    });
+    }
 
     return flattened;
   } else {

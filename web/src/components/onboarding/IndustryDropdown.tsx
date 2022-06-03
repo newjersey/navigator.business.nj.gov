@@ -50,11 +50,9 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
     if (isCannabisLicenseApplicable(industryId)) {
       const wasCannabisPreviouslyApplicable = isCannabisLicenseApplicable(state.profileData.industryId);
-      if (wasCannabisPreviouslyApplicable) {
-        cannabisLicenseType = state.profileData.cannabisLicenseType;
-      } else {
-        cannabisLicenseType = "CONDITIONAL" as CannabisLicenseType;
-      }
+      cannabisLicenseType = wasCannabisPreviouslyApplicable
+        ? state.profileData.cannabisLicenseType
+        : ("CONDITIONAL" as CannabisLicenseType);
     }
 
     const newSector = LookupIndustryById(industryId).defaultSectorId;

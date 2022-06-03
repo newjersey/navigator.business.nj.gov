@@ -173,7 +173,7 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("industry", () => {
-    Industries.filter((x) => x.id !== "generic").forEach((industry) => {
+    for (const industry of Industries.filter((x) => x.id !== "generic")) {
       it(`adds ${industry.name} industry and modifications`, async () => {
         await buildUserRoadmap(generateStartingProfile({ industryId: industry.id }));
         const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
@@ -183,7 +183,7 @@ describe("buildUserRoadmap", () => {
           expect(lastCalledWith.addOns).not.toContain(shouldNotContainIndustry);
         }
       });
-    });
+    }
   });
 
   describe("cpa", () => {

@@ -129,7 +129,7 @@ export const Signatures = (): ReactElement => {
               <Content>{Config.businessFormationDefaults.signerLabel}</Content>
               <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
             </div>
-            {state.formationFormData.signers.length == 0 ? (
+            {state.formationFormData.signers.length === 0 ? (
               <div className="padding-2">
                 <hr />
                 <Content>{state.displayContent.signatureHeader.placeholder ?? ""}</Content>

@@ -61,9 +61,11 @@ export const UserDataStorageFactory = (): UserDataStorage => {
 
   const getCurrentUserId = (): string | undefined => {
     const keys = getCurrentUsers();
-    if (keys.length == 0) return undefined;
+    if (keys.length === 0) return undefined;
     if (keys.length > 1) {
-      keys.forEach((key: string) => _delete(key));
+      for (const key of keys) {
+        _delete(key);
+      }
       return undefined;
     }
     return keys[0].split(userDataPrefix)[1];

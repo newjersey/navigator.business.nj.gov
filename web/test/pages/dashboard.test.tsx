@@ -246,7 +246,7 @@ describe("dashboard", () => {
     expect(screen.getByText("Funding 4")).toBeInTheDocument();
     expect(screen.getByText("Funding 5")).toBeInTheDocument();
 
-    const visualFundings = screen.getAllByText(new RegExp(/^Funding [0-9]/));
+    const visualFundings = screen.getAllByText(new RegExp(/^Funding \d/));
     expect(visualFundings[0]).toHaveTextContent("Funding 4");
     expect(visualFundings[1]).toHaveTextContent("Funding 5");
     expect(visualFundings[2]).toHaveTextContent("Funding 2");

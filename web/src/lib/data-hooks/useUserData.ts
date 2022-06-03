@@ -52,7 +52,7 @@ export const useUserData = (): UseUserDataResponse => {
         })
         .catch(() => {
           setUserDataError("UPDATE_FAILED");
-          return Promise.reject();
+          throw undefined;
         });
     }
   };

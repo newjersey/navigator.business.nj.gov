@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const NavBar = (props: Props): ReactElement => {
-  const { landingPage, task } = props;
+  const { landingPage, task, operateReferences, sidebarPageLayout } = props;
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const isTabletScreen = useMediaQuery(MediaQueries.tabletAndUp);
   const [scrolled, setScrolled] = useState(false);
@@ -46,8 +46,8 @@ export const NavBar = (props: Props): ReactElement => {
           <NavBarMobile
             scrolled={scrolled}
             task={task}
-            sidebarPageLayout={props.sidebarPageLayout}
-            operateReferences={props.operateReferences}
+            sidebarPageLayout={sidebarPageLayout}
+            operateReferences={operateReferences}
           />
           <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />
         </>

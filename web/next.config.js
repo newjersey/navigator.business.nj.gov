@@ -24,24 +24,25 @@ module.exports = withBundleAnalyzer({
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {
-    config.module.rules.push({
-      test: /\.md$/,
-      use: "raw-loader",
-    });
-
-    config.module.rules.push({
-      test: /\.(ts)x?$/,
-      use: [
-        {
-          loader: "ts-loader",
-          options: {
-            transpileOnly: true,
-            experimentalWatchApi: true,
-            onlyCompileBundledFiles: true,
+    config.module.rules.push(
+      {
+        test: /\.md$/,
+        use: "raw-loader",
+      },
+      {
+        test: /\.(ts)x?$/,
+        use: [
+          {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+              experimentalWatchApi: true,
+              onlyCompileBundledFiles: true,
+            },
           },
-        },
-      ],
-    });
+        ],
+      }
+    );
 
     config.plugins.push(
       new CleanWebpackPlugin({

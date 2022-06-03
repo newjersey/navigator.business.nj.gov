@@ -19,11 +19,7 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     let ids = state.profileData.foreignBusinessTypeIds;
-    if (event.target.checked) {
-      ids = [...ids, event.target.value];
-    } else {
-      ids = ids.filter((it) => it !== event.target.value);
-    }
+    ids = event.target.checked ? [...ids, event.target.value] : ids.filter((it) => it !== event.target.value);
 
     const foreignBusinessType = determineForeignBusinessType(ids);
 
@@ -57,7 +53,7 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
                     value={id}
                     style={{ paddingTop: 0, paddingBottom: 0 }}
                     onChange={handleChange}
-                    checked={state.profileData.foreignBusinessTypeIds.indexOf(id) > -1}
+                    checked={state.profileData.foreignBusinessTypeIds.includes(id)}
                   />
                 </div>
               }
