@@ -678,16 +678,16 @@ workflows:
           requires:
             - build
 
-      - smoke-tests:
-          name: Deployment Smoke Tests
-          enable-dashboard: true
-          suite: smoke
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - dev-deploy
+      #- smoke-tests:
+      #    name: Deployment Smoke Tests
+      #    enable-dashboard: true
+      #    suite: smoke
+      #    filters:
+      #      branches:
+      #        only:
+      #          - main
+      #    requires:
+      #      - dev-deploy
       - merge-content:
           filters:
             branches:
