@@ -1,21 +1,20 @@
 ---
 urlSlug: register-firm-accounting
 filename: register-firm-accounting
-name: Register Your Accounting Firm With the State
+name: Apply for a Certified Public Accounting License
 id: register-firm-accounting
-callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Firm-Registration-Application.pdf
-callToActionText: Register My Accounting Firm
+callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
+callToActionText: Apply for My License
 required: true
-issuingAgency: New Jersey Division of Consumer Affairs' Board of Accountancy
+issuingAgency: New Jersey Division of Consumer Affairs Board of Accountancy
 ---
-New accounting firms must register and obtain certification.
+You or any staff providing accounting services must be licensed as a Certified Public Accountant.
 
 ---
-### Application Requirements
+### Eligibility Criteria
+- At least 150 credit hours (24 semester credits in Accounting courses and 24 semester credits in Business courses)
+- 1 year of full-time public accounting experience under the supervision of an active CPA
+- Passing scores on the Uniform CPA Exam 
 
-- []{accountant-manager} A designated resident Manager-In-Charge, a Manager-In-Charge must be a certified public accountant of the practice unit
-- []{accountant-fee} Payment for the required application and registration fees
-
->**Once completed, you will have:**
->
->* A certificate indicating your firm has been successfully registered
+>**Once completed, you will have:**  
+>- A copy of your license (sent via postal mail) with your certified public accountant license number
