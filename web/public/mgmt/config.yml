@@ -24,13 +24,13 @@ collections:
         name: "config"
         file: "content/src/fieldConfig/config.json"
         fields:
-          - label: Bug Bar
-            name: bugBar
+          - label: Report An Issue Bar
+            name: reportAnIssueBar
             collapsed: true
             widget: object
-            summary: "{{bugBar}}"
+            summary: "{{reportAnIssueBar}}"
             fields:
-              - { label: Bug Bar Text, name: bugBarText, widget: string }
+              - { label: Report An Issue Bar Text, name: reportAnIssueBarText, widget: string }
           - label: Feedback Modal
             name: feedbackModal
             collapsed: true
