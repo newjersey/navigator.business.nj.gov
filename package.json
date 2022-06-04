@@ -88,8 +88,8 @@
   "devDependencies": {
     "@babel/core": "7.18.2",
     "@businessnjgovnavigator/shared": "*",
-    "@commitlint/cli": "17.0.1",
-    "@commitlint/config-conventional": "17.0.0",
+    "@commitlint/cli": "17.0.2",
+    "@commitlint/config-conventional": "17.0.2",
     "@jest/types": "28.1.0",
     "@mdx-js/react": "2.1.1",
     "@next/bundle-analyzer": "12.1.6",
