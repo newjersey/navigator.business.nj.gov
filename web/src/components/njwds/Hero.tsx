@@ -1,7 +1,7 @@
 import { AuthButton } from "@/components/AuthButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { MediaQueries } from "@/lib/PageSizes";
-import { ABStorageFactory } from "@/lib/storage/AbStorage";
+import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";

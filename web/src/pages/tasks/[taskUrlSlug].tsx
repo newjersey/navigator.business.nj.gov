@@ -3,7 +3,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { Icon } from "@/components/njwds/Icon";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
-import { TaskCTA } from "@/components/TaskCta";
+import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { allowFormation, BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
