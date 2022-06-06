@@ -225,6 +225,16 @@ describe("<feedbackModal />", () => {
       expect(mockApi.postIssue).not.toHaveBeenCalled();
     });
 
+    it("does not submit reported issue when issue detail inputs are empty and shows two inline validation errors", () => {
+      renderFeedbackModal({});
+
+      fireEvent.click(screen.getByText(Config.feedbackModal.feedbackModalReportIssueButtonText));
+      fireEvent.click(screen.getByText(Config.feedbackModal.feedbackSubmitButtonText));
+
+      expect(screen.getAllByText(Config.feedbackModal.feedbackInlineErrorText)[0]).toBeInTheDocument();
+      expect(screen.getAllByText(Config.feedbackModal.feedbackInlineErrorText)[1]).toBeInTheDocument();
+    });
+
     it("opens issues dialog when isBug prop is used and then returns to feedback selection dialog after issue submission", async () => {
       renderFeedbackModal({ isReportAnIssueBar: true });
 
