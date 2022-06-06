@@ -180,12 +180,6 @@
       ]
     },
     {
-      "name": "register-firm-accounting",
-      "dependencies": [
-        "license-accounting"
-      ]
-    },
-    {
       "name": "conversion-license-cannabis",
       "dependencies": [
         "zoning-cannabis",
