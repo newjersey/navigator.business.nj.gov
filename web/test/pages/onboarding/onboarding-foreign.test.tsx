@@ -88,6 +88,25 @@ describe("onboarding - foreign business", () => {
       expect(screen.getByLabelText("Out of state business")).toBeInTheDocument();
     });
 
+    it("sets user as Remote Workers (and displays alert) when employeesInNJ checkbox checked", async () => {
+      const { page } = renderPage({ userData });
+      expectContent(
+        Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER,
+        { exists: false },
+        screen
+      );
+      page.checkByLabelText(Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent.employeesInNJ);
+      expectContent(
+        Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER,
+        { exists: true },
+        screen
+      );
+
+      await page.visitStep(3);
+      expect(currentUserData().profileData.foreignBusinessType).toEqual("REMOTE_WORKER");
+      expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["employeesInNJ"]);
+    });
+
     it("sets user as Remote Seller (and displays alert) when revenueInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expectContent(

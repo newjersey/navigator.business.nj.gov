@@ -11,7 +11,7 @@ interface Props {
   headerAriaLevel?: number;
 }
 
-const allForeignBusinessTypeIds = ["transactionsInNJ", "revenueInNJ"];
+const allForeignBusinessTypeIds = ["employeesInNJ", "transactionsInNJ", "revenueInNJ"];
 
 export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
