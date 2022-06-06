@@ -47,6 +47,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
 const getForeignAddOns = (profileData: ProfileData): string[] => {
   const addOns = [];
 
+  if (profileData.foreignBusinessType === "REMOTE_WORKER") {
+    addOns.push("foreign-remote-worker");
+  }
+
   if (profileData.foreignBusinessType === "REMOTE_SELLER") {
     addOns.push("foreign-remote-seller");
   }

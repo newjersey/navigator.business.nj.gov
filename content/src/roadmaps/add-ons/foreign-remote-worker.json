@@ -1,0 +1,14 @@
+{
+    "roadmapSteps": [
+      {
+        "step": 1,
+        "weight": 1,
+        "task": "register-for-taxes-foreign"
+      },
+      {
+        "step": 1,
+        "weight": 2,
+        "task": "research-insurance-needs-foreign"
+      }
+    ]
+  }
