@@ -3515,7 +3515,7 @@ __metadata:
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
-    "@types/jest": 27.5.1
+    "@types/jest": 27.5.2
     "@types/jsonwebtoken": 8.5.8
     "@types/node": 16.11.38
     "@types/simple-oauth2": 4.1.1
@@ -3539,7 +3539,7 @@ __metadata:
     eslint-plugin-unicorn: 42.0.0
     express: 4.18.1
     jest: 28.1.0
-    jest-dynalite: 3.5.1
+    jest-dynalite: 3.6.0
     jest-junit: 13.2.0
     jsonwebtoken: 8.5.1
     prettier: 2.6.2
@@ -3553,7 +3553,7 @@ __metadata:
     serverless-webpack: 5.7.1
     simple-oauth2: 4.3.0
     supertest: 6.2.3
-    ts-jest: 28.0.3
+    ts-jest: 28.0.4
     ts-loader: 9.3.0
     ts-node: 10.8.0
     tsconfig-paths: 4.0.0
@@ -3634,7 +3634,7 @@ __metadata:
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
-    "@types/jest": 27.5.1
+    "@types/jest": 27.5.2
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 8.5.8
     "@types/lodash.merge": 4.6.7
@@ -3693,7 +3693,7 @@ __metadata:
     husky: 8.0.1
     identity-obj-proxy: 3.0.0
     jest: 28.1.0
-    jest-dynalite: 3.5.1
+    jest-dynalite: 3.6.0
     jest-environment-jsdom: 28.1.0
     jest-junit: 13.2.0
     js-yaml: 4.1.0
@@ -3735,7 +3735,7 @@ __metadata:
     style-loader: 3.3.1
     supertest: 6.2.3
     swr: 1.3.0
-    ts-jest: 28.0.3
+    ts-jest: 28.0.4
     ts-loader: 9.3.0
     ts-node: 10.8.0
     tsconfig-paths: 4.0.0
@@ -3760,7 +3760,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 28.1.0
-    "@types/jest": 27.5.1
+    "@types/jest": 27.5.2
     "@types/node": 16.11.38
     "@typescript-eslint/eslint-plugin": 5.27.0
     "@typescript-eslint/parser": 5.27.0
@@ -3773,7 +3773,7 @@ __metadata:
     jest-junit: 13.2.0
     prettier: 2.6.2
     rimraf: 3.0.2
-    ts-jest: 28.0.3
+    ts-jest: 28.0.4
     ts-node: 10.8.0
     tsconfig-paths: 4.0.0
     typescript: 4.7.2
@@ -3819,7 +3819,7 @@ __metadata:
     "@testing-library/react": 13.3.0
     "@testing-library/user-event": 14.2.0
     "@types/broken-link-checker": 0.7.1
-    "@types/jest": 27.5.1
+    "@types/jest": 27.5.2
     "@types/js-yaml": 4.0.5
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
@@ -3891,7 +3891,7 @@ __metadata:
     storybook-addon-pseudo-states: 1.14.0
     style-loader: 3.3.1
     swr: 1.3.0
-    ts-jest: 28.0.3
+    ts-jest: 28.0.4
     ts-loader: 9.3.0
     ts-node: 10.8.0
     typescript: 4.7.2
@@ -8730,13 +8730,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:27.5.1":
-  version: 27.5.1
-  resolution: "@types/jest@npm:27.5.1"
+"@types/jest@npm:27.5.2":
+  version: 27.5.2
+  resolution: "@types/jest@npm:27.5.2"
   dependencies:
     jest-matcher-utils: ^27.0.0
     pretty-format: ^27.0.0
-  checksum: be20e39f7aaf17179109c0060d0a0489cec2034d4e2e28a631284c7ecd13c5ae52f62697a33a0e89b03b6cfe54e9d5e8c2bd387ab2bd90d6071d68c63b86d1e3
+  checksum: 7e11c6826aa429ad990dc262e4e4b54aa36573287fddf15773e4137f07d11d3105f0dd9f1baff73252160a057df23f5529bb83b1bf83cd3f45f9460a5ca5c22e
   languageName: node
   linkType: hard
 
@@ -20209,9 +20209,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-dynalite@npm:3.5.1":
-  version: 3.5.1
-  resolution: "jest-dynalite@npm:3.5.1"
+"jest-dynalite@npm:3.6.0":
+  version: 3.6.0
+  resolution: "jest-dynalite@npm:3.6.0"
   dependencies:
     "@aws/dynamodb-auto-marshaller": ^0.7.1
     dynalite: ^3.2.1
@@ -20225,7 +20225,7 @@ __metadata:
       optional: true
     aws-sdk:
       optional: true
-  checksum: da06ca7ba635f9d691af35a4ae1cb4bc713b3942c8ba7fb8eddcbc8d52b85030666693777ca471cf76257d787d07877365df997588d6e434dea94f66fa379507
+  checksum: b24424ef6f75751afe2aeeee4638b75c23507a730c79bac3d9040023647578b8019f03b203731abcc9bcfade13f23bf34c1afef0f0c89af2a0939e21c26b08f7
   languageName: node
   linkType: hard
 
@@ -32294,9 +32294,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:28.0.3":
-  version: 28.0.3
-  resolution: "ts-jest@npm:28.0.3"
+"ts-jest@npm:28.0.4":
+  version: 28.0.4
+  resolution: "ts-jest@npm:28.0.4"
   dependencies:
     bs-logger: 0.x
     fast-json-stable-stringify: 2.x
@@ -32308,14 +32308,11 @@ __metadata:
     yargs-parser: ^20.x
   peerDependencies:
     "@babel/core": ">=7.0.0-beta.0 <8"
-    "@types/jest": ^27.0.0
     babel-jest: ^28.0.0
     jest: ^28.0.0
     typescript: ">=4.3"
   peerDependenciesMeta:
     "@babel/core":
-      optional: true
-    "@types/jest":
       optional: true
     babel-jest:
       optional: true
@@ -32323,7 +32320,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: dc6f49507cef996abb75d5870f6ce09c9f191d135a5bb2c38c46adac890f10fd4610b7697a0045b9b37315ce4e075f39d5578da8034d6791952eebc7951475c2
+  checksum: 21028e1917f60f086e0af6d057039f31385ca0f5b85736dc19bdd670ccbb5675c7ecde2eb30a5d01fcccdc7a59054498db0c4419306fc5fab0a596e3cf001023
   languageName: node
   linkType: hard
 
