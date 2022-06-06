@@ -1,5 +1,5 @@
 ---
-urlSlug: get-insurance
+urlSlug: get-insurance-for-nj
 filename: research-insurance-needs-foreign
 name: Get an Insurance Policy
 id: expand-insurance-policy-foreign
