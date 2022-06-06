@@ -3550,7 +3550,6 @@ __metadata:
     serverless-http: 3.0.1
     serverless-offline: 8.8.0
     serverless-offline-ssm: 6.2.0
-    serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.7.1
     simple-oauth2: 4.3.0
     supertest: 6.2.3
@@ -3729,7 +3728,6 @@ __metadata:
     serverless-http: 3.0.1
     serverless-offline: 8.8.0
     serverless-offline-ssm: 6.2.0
-    serverless-plugin-monorepo: 0.11.0
     serverless-webpack: 5.7.1
     simple-oauth2: 4.3.0
     storybook-addon-designs: 6.2.1
@@ -29938,17 +29936,6 @@ __metadata:
   peerDependencies:
     serverless: ^1.60.0 || 2 || 3
   checksum: cc9ebc201662f3b358bb910d9a8d3fc0c330ce6b2424ff425c5d713a882a35e16e41b999297b0190fde6361f5136421e368b3375be87e5a041056deb6e8c2aee
-  languageName: node
-  linkType: hard
-
-"serverless-plugin-monorepo@npm:0.11.0":
-  version: 0.11.0
-  resolution: "serverless-plugin-monorepo@npm:0.11.0"
-  dependencies:
-    fs-extra: ^9.0.1
-  peerDependencies:
-    serverless: 1 || 2 || 3
-  checksum: 420198ef282babc105461d83c898f6704024d6a951145c3e51468218a3c1452a6ab07f75b0a99a47a132ed3edb0741b5dc814a07ae7689b4b300c2d3ed16c0b7
   languageName: node
   linkType: hard
 

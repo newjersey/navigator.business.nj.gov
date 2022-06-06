@@ -48,7 +48,9 @@ const serverlessConfiguration: AWS = {
   custom: {
     webpack: {
       webpackConfig: "./webpack.config.ts",
-      includeModules: true,
+      includeModules: {
+        nodeModulesRelativeDir: "../",
+      },
     },
     dynamodb: {
       start: {
@@ -68,7 +70,6 @@ const serverlessConfiguration: AWS = {
     ssmLocation: ssmLocation,
   },
   plugins: [
-    "serverless-plugin-monorepo",
     "serverless-webpack",
     ...(isDocker ? [] : ["serverless-dynamodb-local"]),
     "serverless-offline-ssm",
