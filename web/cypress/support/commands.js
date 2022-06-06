@@ -25,10 +25,11 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import { Auth } from "@aws-amplify/auth";
-import "cypress-audit/commands";
+import "@cypress-audit/lighthouse/commands";
+import "@cypress-audit/pa11y/commands";
 import "cypress-wait-until";
 import { createEmptyUserData } from "../../../shared/src/userData";
-import { testUserEmail, testUserPassword } from "./index";
+import { testUserEmail, testUserPassword } from "./e2e";
 Auth.configure({
   identityPoolRegion: "us-east-1",
   identityPoolId: Cypress.env("COGNITO_IDENTITY_POOL_ID"),
