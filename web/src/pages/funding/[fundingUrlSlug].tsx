@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { TaskCTA } from "@/components/TaskCta";
+import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";

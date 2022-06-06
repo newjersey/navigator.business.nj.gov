@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/filename-case */
 import { Button } from "@/components/njwds-extended/Button";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
