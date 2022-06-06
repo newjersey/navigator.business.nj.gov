@@ -44,7 +44,9 @@ export const ReportIssueDialog = ({ onClose, isOpen, setCurrentFeedback }: Props
   }, [isOpen]);
 
   const onValidation = (fieldName: string, invalid: boolean) => {
-    setErrorMap({ ...errorMap, [fieldName]: { invalid } });
+    setErrorMap((errorMap) => {
+      return { ...errorMap, [fieldName]: { invalid } };
+    });
   };
 
   const handleReportIssueSubmission = () => {
@@ -70,12 +72,10 @@ export const ReportIssueDialog = ({ onClose, isOpen, setCurrentFeedback }: Props
 
     if (issueSummary.trim().length === 0) {
       onValidation("issueSummary", true);
-      return;
     }
 
     if (issueDetails.trim().length === 0) {
       onValidation("issueDetails", true);
-      return;
     }
 
     if (issueSummary.trim().length > 0 && issueDetails.trim().length > 0) {
@@ -86,7 +86,6 @@ export const ReportIssueDialog = ({ onClose, isOpen, setCurrentFeedback }: Props
           setCurrentFeedback("Request Submitted");
         })
         .catch(() => {
-          console.log("catch statement");
           setDisplayAlert(true);
           setIsLoading(false);
         });
