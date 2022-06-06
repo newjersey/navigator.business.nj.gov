@@ -177,7 +177,7 @@
     "sass": "1.52.1",
     "sass-loader": "13.0.0",
     "semantic-release": "19.0.2",
-    "serverless": "3.18.2",
+    "serverless": "3.19.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "6.2.0",
     "serverless-plugin-monorepo": "0.11.0",
@@ -192,7 +192,7 @@
     "tsconfig-paths": "4.0.0",
     "tsconfig-paths-webpack-plugin": "3.5.2",
     "typescript": "4.7.2",
-    "webpack": "5.72.1",
+    "webpack": "5.73.0",
     "webpack-node-externals": "3.0.0",
     "wiremock": "2.33.2",
     "yarn-workspace-sync-deps": "0.3.2"
