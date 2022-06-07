@@ -10,6 +10,11 @@
   "ignoreDeps": ["node", "cimg/node"],
   "packageRules": [
     {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeStrategy": "rebase"
+    },
+    {
       "matchPackagePrefixes": ["cypress"],
       "groupName": "cypress"
     },
