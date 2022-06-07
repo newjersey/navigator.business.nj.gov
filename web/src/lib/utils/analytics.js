@@ -40,6 +40,9 @@ export default {
     abExperience: (value) => {
       window.gtag("set", "dimension8", value);
     },
+    naicsCode: (value) => {
+      window.gtag("set", "dimension9", value);
+    },
   },
 
   event: {
@@ -484,7 +487,7 @@ export default {
     },
     business_formation_registered_agent_manual_name: {
       submit: {
-        entered_agent_ID: () => {
+        name_is_same_as_account_holder: () => {
           sendEvent(
             "business_formation_registered_agent_manual_name",
             "submit",
@@ -500,17 +503,6 @@ export default {
             "business_formation_registered_agent_manual_address",
             "submit",
             "address_is_same_as_account_holder"
-          );
-        },
-      },
-    },
-    business_formation_add_member_same_as_business_address_checkbox: {
-      submit: {
-        member_address_is_same_as_business: () => {
-          sendEvent(
-            "business_formation_add_member_same_as_business_address_checkbox",
-            "submit",
-            "member_address_is_same_as_business"
           );
         },
       },

@@ -157,6 +157,12 @@ export const ContactsSection = (): ReactElement => {
       analytics.event.business_formation_registered_agent_identification.submit.entered_agent_ID();
     } else if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
       analytics.event.business_formation_registered_agent_identification.submit.identified_agent_manually();
+      if (formationFormData.agentUseBusinessAddress) {
+        analytics.event.business_formation_registered_agent_manual_address.submit.address_is_same_as_account_holder();
+      }
+      if (formationFormData.agentUseAccountInfo) {
+        analytics.event.business_formation_registered_agent_manual_name.submit.name_is_same_as_account_holder();
+      }
     }
   };
 
