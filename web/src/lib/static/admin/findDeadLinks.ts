@@ -70,7 +70,7 @@ const getContents = (filenames: Filenames): FileContents => {
     ),
     industries,
     addOns: addOns.map((i) => i.roadmapSteps),
-    modifications: industries.map((i) => i.modifications).concat(addOns.map((i) => i.modifications)),
+    modifications: [...industries.map((i) => i.modifications), ...addOns.map((i) => i.modifications)],
     contextualInfos: filenames.contextualInfos.map(
       (it) =>
         matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8")).content
