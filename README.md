@@ -10,7 +10,7 @@ This is the development repository for the work-in-progress business navigator f
 
 Everything is **TypeScript**.
 
-The frontend is **React** with **next.js**, deployed on **AWS Amplify**.
+The frontend is **React** with **next.js**, deployed in **Docker containers** on an **AWS Elastic Container Service Cluster**.
 
 The backend is an **Express** Node app deployed as an **AWS Lambda** function using **Serverless framework**. It connects to an **AWS DynamoDB** instance that is also configured through Terraform.
 
@@ -24,26 +24,22 @@ You will need `yarn`, `npm` and Node installed, and also Java (for `serverless-d
 
 ### Software Requirement
 
-- [Node 14](https://nodejs.org/en/download/)
+- [Node 16](https://nodejs.org/en/download/)
 - [Java 16 JDK](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html)
 - [Python 3.9](https://www.python.org/downloads/)
 - [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) using "Visual C++ build tools" workload - **Windows Only**
 
-Clone the code and navigate to the root of this repository. Running **yarn** at the root will install all yarn packages for both the frontend
+Clone the code and navigate to the root of this repository. There is an install script that will install all yarn packages for both the frontend
 and backend. It will also set up serverless's local DynamoDB.
 
 ```shell
-yarn
+./scripts/install.sh
 ```
+
+You will also need to setup your AWS credentials
 
 ```shell
 aws configure
-```
-
-Additionally, serverless needs to be configured with our AWS account. Run this with our AWS access credentials:
-
-```shell
-sls config credentials --provider aws --key AWS_KEY --secret AWS_SECRET_KEY
 ```
 
 ### Local env
@@ -55,17 +51,19 @@ Before you can run locally, you will need to:
 
 ### Run tests
 
-We use jest for unit tests, on both the frontend. Run all tests with:
+We use jest for unit tests, in all of our projects. Run all tests with:
 
 ```shell
-./scripts/test.sh
+yarn test
 ```
 
-Run Cypress feature tests using:
+We use Cypress for end to end (e2e) testing. You can run these tests locally with:
 
 ```shell
 ./scripts/feature-tests.sh
 ```
+
+Some of the Cypress tests only run in the CI environment
 
 ### Running locally
 
@@ -83,7 +81,7 @@ Use ship-it to run prettier, linting, and tests before pushing:
 ./scripts/ship-it.sh
 ```
 
-The CircleCI CI/CD (which is configured in `.circleci/config.yml`) will pick up the job and deploy to Amplify for commits to the main branch.
+The CircleCI CI/CD (which is configured in `.circleci/config.yml`) will pick up the job and deploy to the development environment for commits to the main branch.
 
 ## Frontend deep-dive
 
@@ -95,13 +93,12 @@ all our pages and pre-render what it can. The export puts the final files in `./
 
 ### Styles
 
-We depend on the compiled version of [NJ Web Design Standards](https://github.com/newjersey/njwds), which lives in `./web/public`
-and pulls these styles into our code (configured via a line in `_app.tsx`). Ideally in the future, this would be a library to import
-instead of a manual copying process.
+We depend on the compiled version of [NJ Web Design Standards](https://github.com/newjersey/njwds), which is included via napa as a node_module
+and then imports these styles into our code (configured via a line in `_app.tsx`).
 
 ### Environment variables
 
-For Nextjs, environment variables are inserted at build time. In `./web/next.config.js`, the environment variables that the code will have access to are set up for the Next framework by pulling them in from the environment. This works because the system that is building the Nextjs code (GitHub Actions workflow) has access to these variables via GitHub secrets during that build step.
+For Nextjs, environment variables are inserted at build time. In `./web/next.config.js`, the environment variables that the code will have access to are set up for the Next framework by pulling them in from the .env file. This works because the system that is building the Nextjs code (CircleCI workflow) has access to these variables via Environement Variables set during that build step.
 
 **Important** - this means that any time you build the app, the system building it (your local terminal, say) needs to have these environment variables set as well, or else they will not get set for the build app.
 
@@ -111,15 +108,7 @@ For running (and testing) the app locally in development mode, it needs environm
 
 ### Roadmaps
 
-In the `./web/roadmaps` directory, we have JSON files containing the static content defining tasks and steps for different roadmaps.
-
-### Static Rendering
-
-We try to statically render the pages as much as possible, to take advantage of SEO. Right now, the `/tasks/[taskId]` pages
-get their content through fully server-side rendering at build time. The methods used for static rendering are in `./web/lib/static` -
-because they cannot be used for dynamic rendering.
-
-The roadmap is not static, and is generated on-the-fly based on user data in the app.
+In the `./content/src/roadmaps` directory, we have JSON files containing the static content defining tasks and steps for different roadmaps. Each industry has its own roadmap definition, located in `./content/src/roadmaps/industries`.
 
 ### Authentication
 
