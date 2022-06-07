@@ -8,7 +8,7 @@ describe("Roadmap [all] [group4]", () => {
     cy.loginByCognitoApi();
   });
 
-  for (const industry of Industries) {
+  for (const industry of Industries.filter((x) => x.isEnabled)) {
     it(` ${industry.name} completes onboarding and shows the roadmap`, () => {
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =

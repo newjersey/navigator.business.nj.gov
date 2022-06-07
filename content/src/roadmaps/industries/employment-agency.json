@@ -5,6 +5,7 @@
   "defaultSectorId": "administrative-and-employment-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,

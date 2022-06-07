@@ -1263,6 +1263,11 @@ collections:
         name: description
         widget: string
         required: false
+      - label: Enabled
+        name: isEnabled
+        widget: boolean
+        default: false
+        hint: This field should not be changed if already set to true
       - label: Home Based
         name: canBeHomeBased
         widget: boolean

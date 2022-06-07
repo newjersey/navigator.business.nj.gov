@@ -273,6 +273,7 @@ commands:
           name: Set Content Environment Variables
           command: |
             echo 'export REDIRECT_URL=$REDIRECT_URL_CONTENT' >> $BASH_ENV
+            echo 'export SHOW_DISABLED_INDUSTRIES=true' >> $BASH_ENV
 
   deploy-content:
     steps:

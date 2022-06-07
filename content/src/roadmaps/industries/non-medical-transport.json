@@ -5,6 +5,7 @@
   "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,

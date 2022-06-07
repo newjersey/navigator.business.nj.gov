@@ -5,6 +5,7 @@
   "defaultSectorId": "finance-and-insurance",
   "canBeReseller": false,
   "isCpaRequiredApplicable": true,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,
