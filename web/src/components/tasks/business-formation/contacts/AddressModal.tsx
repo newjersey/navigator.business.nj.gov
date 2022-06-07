@@ -132,7 +132,7 @@ export const AddressModal = (props: Props): ReactElement => {
             />
           </FormGroup>
         ) : (
-          <div className={"padding-top-2"}></div>
+          <div className={"padding-top-2"} />
         )}
         <div data-testid={`${props.fieldName}-address-modal`}>
           <Content>{Config.businessFormationDefaults.addressModalNameLabel}</Content>

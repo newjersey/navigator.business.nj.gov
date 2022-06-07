@@ -5,32 +5,40 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
-  const [useAccountInfo, setUseAccountInfo] = useState<boolean>(false);
-  const [useBusinessAddress, setUseBusinessAddress] = useState<boolean>(false);
+  // const [useAccountInfo, setUseAccountInfo] = useState<boolean>(false);
+  // const [useBusinessAddress, setUseBusinessAddress] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (
-      useBusinessAddress &&
-      (state.formationFormData.agentOfficeAddressLine1 !== state.formationFormData.businessAddressLine1 ||
-        state.formationFormData.agentOfficeAddressLine2 !== state.formationFormData.businessAddressLine2 ||
-        state.formationFormData.agentOfficeAddressZipCode !== state.formationFormData.businessAddressZipCode)
-    ) {
-      setUseBusinessAddress(false);
-    }
-  }, [
-    state.formationFormData.agentOfficeAddressLine1,
-    state.formationFormData.agentOfficeAddressLine2,
-    state.formationFormData.agentOfficeAddressZipCode,
-    state.formationFormData.businessAddressLine1,
-    state.formationFormData.businessAddressLine2,
-    state.formationFormData.businessAddressZipCode,
-    useBusinessAddress,
-  ]);
+  useEffect(
+    function setAgentCheckboxFalseWhenAddressChanged() {
+      const {
+        agentUseBusinessAddress,
+        agentOfficeAddressLine1,
+        agentOfficeAddressLine2,
+        agentOfficeAddressZipCode,
+        businessAddressLine1,
+        businessAddressLine2,
+        businessAddressZipCode,
+      } = state.formationFormData;
+
+      if (
+        agentUseBusinessAddress &&
+        (agentOfficeAddressLine1 !== businessAddressLine1 ||
+          agentOfficeAddressLine2 !== businessAddressLine2 ||
+          agentOfficeAddressZipCode !== businessAddressZipCode)
+      ) {
+        setFormationFormData({
+          ...state.formationFormData,
+          agentUseBusinessAddress: false,
+        });
+      }
+    },
+    [state.formationFormData, setFormationFormData]
+  );
 
   const resetAgentFieldsInErrorMap = (): void => {
     setErrorMap({
@@ -57,24 +65,29 @@ export const RegisteredAgent = (): ReactElement => {
 
   const toggleUseAccountInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked;
-    setUseAccountInfo(checked);
     if (checked) {
       setFormationFormData({
         ...state.formationFormData,
         agentName: userData?.user.name ?? "",
         agentEmail: userData?.user.email ?? "",
+        agentUseAccountInfo: checked,
       });
       setErrorMap({
         ...state.errorMap,
         agentName: { invalid: false },
         agentEmail: { invalid: false },
       });
+    } else {
+      setFormationFormData({
+        ...state.formationFormData,
+        agentUseAccountInfo: checked,
+      });
     }
   };
 
   const toggleUseBusinessAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked;
-    setUseBusinessAddress(checked);
+    // setUseBusinessAddress(checked);
     if (checked) {
       setFormationFormData({
         ...state.formationFormData,
@@ -83,6 +96,7 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressCity: userData?.profileData.municipality?.name ?? "",
         agentOfficeAddressState: state.formationFormData.businessAddressState,
         agentOfficeAddressZipCode: state.formationFormData.businessAddressZipCode,
+        agentUseBusinessAddress: checked,
       });
       setErrorMap({
         ...state.errorMap,
@@ -91,6 +105,11 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressCity: { invalid: false },
         agentOfficeAddressState: { invalid: false },
         agentOfficeAddressZipCode: { invalid: false },
+      });
+    } else {
+      setFormationFormData({
+        ...state.formationFormData,
+        agentUseBusinessAddress: checked,
       });
     }
   };
@@ -147,7 +166,12 @@ export const RegisteredAgent = (): ReactElement => {
               <div className="margin-top-3 margin-bottom-1">
                 <FormControlLabel
                   label={Config.businessFormationDefaults.sameAgentInfoAsAccount}
-                  control={<Checkbox checked={useAccountInfo} onChange={toggleUseAccountInfo} />}
+                  control={
+                    <Checkbox
+                      checked={state.formationFormData.agentUseAccountInfo}
+                      onChange={toggleUseAccountInfo}
+                    />
+                  }
                 />
               </div>
               <div className="grid-row grid-gap-2">
@@ -158,7 +182,7 @@ export const RegisteredAgent = (): ReactElement => {
                     required={true}
                     validationText={Config.businessFormationDefaults.agentNameErrorText}
                     fieldName="agentName"
-                    disabled={useAccountInfo}
+                    disabled={state.formationFormData.agentUseAccountInfo}
                     formInputFull
                   />
                 </div>
@@ -170,7 +194,7 @@ export const RegisteredAgent = (): ReactElement => {
                     additionalValidation={validateEmail}
                     required={true}
                     validationText={Config.businessFormationDefaults.agentEmailErrorText}
-                    disabled={useAccountInfo}
+                    disabled={state.formationFormData.agentUseAccountInfo}
                     formInputFull
                   />
                 </div>
@@ -178,7 +202,12 @@ export const RegisteredAgent = (): ReactElement => {
               <div className="margin-bottom-1">
                 <FormControlLabel
                   label={Config.businessFormationDefaults.sameAgentAddressAsBusiness}
-                  control={<Checkbox checked={useBusinessAddress} onChange={toggleUseBusinessAddress} />}
+                  control={
+                    <Checkbox
+                      checked={state.formationFormData.agentUseBusinessAddress}
+                      onChange={toggleUseBusinessAddress}
+                    />
+                  }
                 />
               </div>
               <BusinessFormationTextField
@@ -187,14 +216,14 @@ export const RegisteredAgent = (): ReactElement => {
                 fieldName="agentOfficeAddressLine1"
                 required={true}
                 validationText={Config.businessFormationDefaults.agentOfficeAddressLine1ErrorText}
-                disabled={useBusinessAddress}
+                disabled={state.formationFormData.agentUseBusinessAddress}
                 formInputFull
               />
               <BusinessFormationTextField
                 label={Config.businessFormationDefaults.registeredAgentAddressLine2Label}
                 placeholder={Config.businessFormationDefaults.registeredAgentAddressLine2Placeholder}
                 fieldName="agentOfficeAddressLine2"
-                disabled={useBusinessAddress}
+                disabled={state.formationFormData.agentUseBusinessAddress}
                 formInputFull
               />
               <div className="grid-row grid-gap-2 margin-top-2">
@@ -205,7 +234,7 @@ export const RegisteredAgent = (): ReactElement => {
                     fieldName="agentOfficeAddressCity"
                     required={true}
                     validationText={Config.businessFormationDefaults.agentOfficeAddressCityErrorText}
-                    disabled={useBusinessAddress}
+                    disabled={state.formationFormData.agentUseBusinessAddress}
                     formInputFull
                   />
                 </div>
@@ -228,7 +257,7 @@ export const RegisteredAgent = (): ReactElement => {
                     validationText={Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText}
                     additionalValidation={zipCodeRange}
                     required={true}
-                    disabled={useBusinessAddress}
+                    disabled={state.formationFormData.agentUseBusinessAddress}
                   />
                 </div>
               </div>

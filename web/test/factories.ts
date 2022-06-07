@@ -403,6 +403,8 @@ export const generateFormationFormData = (
     agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
+    agentUseAccountInfo: !!(randomInt() % 2),
+    agentUseBusinessAddress: !!(randomInt() % 2),
     members: [generateFormationAddress({})],
     signers: [generateFormationAddress({ signature: true }), generateFormationAddress({ signature: true })],
     paymentType: randomInt() % 2 ? "ACH" : "CC",

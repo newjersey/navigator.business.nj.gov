@@ -764,6 +764,7 @@ describe("Formation - ContactsSection", () => {
           agentNumberOrManual: "MANUAL_ENTRY",
           agentEmail: "original@example.com",
           agentName: "Original Name",
+          agentUseAccountInfo: false,
         },
         {
           name: "New Name",
@@ -791,6 +792,7 @@ describe("Formation - ContactsSection", () => {
           agentNumberOrManual: "MANUAL_ENTRY",
           agentEmail: "original@example.com",
           agentName: "Original Name",
+          agentUseAccountInfo: false,
         },
         {
           name: "New Name",
@@ -821,6 +823,7 @@ describe("Formation - ContactsSection", () => {
           businessAddressLine2: "New Add 456",
           businessAddressZipCode: "07002",
           businessAddressState: "NJ",
+          agentUseAccountInfo: false,
         }
       );
 
@@ -856,6 +859,7 @@ describe("Formation - ContactsSection", () => {
           businessAddressLine2: "New Add 456",
           businessAddressZipCode: "07002",
           businessAddressState: "NJ",
+          agentUseBusinessAddress: false,
         }
       );
 
