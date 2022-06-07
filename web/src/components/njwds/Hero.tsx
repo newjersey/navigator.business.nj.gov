@@ -2,17 +2,16 @@ import { AuthButton } from "@/components/AuthButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
+import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
+import { useRouter } from "next/router";
 import { ReactElement } from "react";
 
-interface Props {
-  onClick: () => void;
-}
-
-export const Hero = (props: Props): ReactElement => {
+export const Hero = (): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const router = useRouter();
 
   let landingPageConfig = Config.landingPage;
   if (ABStorageFactory().getExperience() === "ExperienceB") {
@@ -21,6 +20,21 @@ export const Hero = (props: Props): ReactElement => {
       ...Config.landingPageExperienceB,
     };
   }
+
+  const primaryCTAOnClick = () => {
+    router.push("/onboarding");
+    analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
+  };
+
+  const section2CTAOnClick = () => {
+    router.push("/onboarding");
+    analytics.event.landing_page_second_get_started.click.go_to_onboarding();
+  };
+
+  const section3CTAOnClick = () => {
+    router.push("/onboarding");
+    analytics.event.landing_page_find_funding.click.go_to_onboarding();
+  };
 
   return (
     <section aria-label="Introduction">
@@ -45,7 +59,7 @@ export const Hero = (props: Props): ReactElement => {
               <div className="desktop:display-inline margin-bottom-2 desktop-margin-bottom-0 desktop:margin-right-2">
                 <Button
                   style="primary-big"
-                  onClick={props.onClick}
+                  onClick={primaryCTAOnClick}
                   dataTestid="hero"
                   widthAutoOnMobile
                   noRightMargin
@@ -80,14 +94,14 @@ export const Hero = (props: Props): ReactElement => {
                   isDesktopAndUp ? "text-left" : "text-center"
                 }`}
               >
-                <div className="border-top-1 border-primary"></div>
+                <div className="border-top-1 border-primary" />
                 <h2 className="h1-styling margin-y-4 desktop:margin-y-3">
                   {landingPageConfig.section2HeaderText}
                 </h2>
                 <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
                   {landingPageConfig.section2SupportingText}
                 </div>
-                <Button style="primary-big" onClick={props.onClick} widthAutoOnMobile noRightMargin>
+                <Button style="primary-big" onClick={section2CTAOnClick} widthAutoOnMobile noRightMargin>
                   {landingPageConfig.section2CallToActionText}
                 </Button>
               </div>
@@ -98,8 +112,8 @@ export const Hero = (props: Props): ReactElement => {
           <div
             className={`hero-gradient-bg-bottom-mobile ${
               isTabletAndUp ? "margin-top-neg-15 padding-15" : "margin-top-neg-5 padding-8"
-            } `}
-          ></div>
+            }`}
+          />
         )}
       </div>
       <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100 desktop:margin-bottom-15">
@@ -117,7 +131,12 @@ export const Hero = (props: Props): ReactElement => {
               <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
                 {landingPageConfig.section3SupportingText}
               </div>
-              <Button style="accent-cool-darker-big" onClick={props.onClick} widthAutoOnMobile noRightMargin>
+              <Button
+                style="accent-cool-darker-big"
+                onClick={section3CTAOnClick}
+                widthAutoOnMobile
+                noRightMargin
+              >
                 {landingPageConfig.section3CallToActionText}
               </Button>
             </div>

@@ -6,7 +6,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
-import analytics from "@/lib/utils/analytics";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
@@ -106,7 +105,6 @@ const Home = (): ReactElement => {
 
   const renderCard = (
     color: string,
-
     headerLine1: string,
     headerLine2: string,
     supportingText: string,
@@ -141,13 +139,7 @@ const Home = (): ReactElement => {
     <PageSkeleton landingPage={true}>
       <NavBar landingPage={true} />
       <main data-testid="main">
-        <Hero
-          onClick={() => {
-            router.push("/onboarding");
-            analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
-          }}
-        />
-
+        <Hero />
         <section aria-label="How it works">
           <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
             <h2 className="text-accent-cool-darker h1-styling margin-bottom-6 padding-top-6">
@@ -167,8 +159,8 @@ const Home = (): ReactElement => {
               <div
                 className={`arrow ${
                   isDesktopAndUp ? "right width-15 height-10" : "down height-5 margin-y-3"
-                } `}
-              ></div>
+                }`}
+              />
               <div className="margin-x-3">
                 <img className="" src="/img/Landing-checkmarks.svg" alt="checklist" />
                 <div className="text-accent-cool-darker width-card margin-top-2">
@@ -177,7 +169,7 @@ const Home = (): ReactElement => {
               </div>
               <div
                 className={`arrow ${isDesktopAndUp ? "left width-15 height-10" : "up height-5 margin-y-3"} `}
-              ></div>{" "}
+              />{" "}
               <div className="margin-x-3">
                 <img className="" src="/img/Landing-building.svg" alt="government building" />
                 <div className="text-accent-cool-darker width-card margin-top-2">

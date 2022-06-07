@@ -1,3 +1,5 @@
+import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
+import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import analytics from "@/lib/utils/analytics";
 import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
 
@@ -18,4 +20,24 @@ export const setAnalyticsDimensions = (profileData: ProfileData): void => {
   analytics.dimensions.liquorLicense(profileData.liquorLicense ? "true" : "false");
   analytics.dimensions.homeBasedBusiness(profileData.homeBasedBusiness ? "true" : "false");
   analytics.dimensions.persona(profileData.businessPersona === "OWNING" ? "Existing" : "Prospective");
+};
+
+export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageName?: string): void => {
+  if (pageName === "industry-page-starting") {
+    if (isCannabisLicenseApplicable(newProfileData.industryId)) {
+      if (newProfileData.cannabisLicenseType === "CONDITIONAL") {
+        analytics.event.onboarding_cannabis_question.submit.conditional_cannabis_license();
+      } else if (newProfileData.cannabisLicenseType === "ANNUAL") {
+        analytics.event.onboarding_cannabis_question.submit.annual_cannabis_license();
+      }
+    }
+
+    if (isCpaRequiredApplicable(newProfileData.industryId)) {
+      if (newProfileData.requiresCpa) {
+        analytics.event.onboarding_cpa_question.submit.yes_i_offer_public_accounting();
+      } else {
+        analytics.event.onboarding_cpa_question.submit.no_i_dont_offer_public_accounting();
+      }
+    }
+  }
 };

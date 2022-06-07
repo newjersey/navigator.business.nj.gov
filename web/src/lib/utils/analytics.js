@@ -71,6 +71,20 @@ export default {
         },
       },
     },
+    landing_page_second_get_started: {
+      click: {
+        go_to_onboarding: () => {
+          sendEvent("landing_page_second_get_started", "click", "go_to_onboarding");
+        },
+      },
+    },
+    landing_page_find_funding: {
+      click: {
+        go_to_onboarding: () => {
+          sendEvent("landing_page_find_funding", "click", "go_to_onboarding");
+        },
+      },
+    },
     guest_toast: {
       click: {
         go_to_myNJ_registration: () => {
@@ -378,6 +392,26 @@ export default {
         },
       },
     },
+    onboarding_cannabis_question: {
+      submit: {
+        conditional_cannabis_license: () => {
+          sendEvent("onboarding_cannabis_question", "submit", "conditional_cannabis_license");
+        },
+        annual_cannabis_license: () => {
+          sendEvent("onboarding_cannabis_question", "submit", "annual_cannabis_license");
+        },
+      },
+    },
+    business_formation: {
+      submit: {
+        go_to_NIC_formation_processing: () => {
+          sendEvent("business_formation", "submit", "go_to_NIC_formation_processing");
+        },
+        error_remain_at_formation: () => {
+          sendEvent("business_formation", "submit", "error_remain_at_formation");
+        },
+      },
+    },
     business_formation_success_screen: {
       arrive: {
         arrive_from_NIC_formation_processing: () => {
@@ -431,6 +465,53 @@ export default {
       click: {
         go_to_next_formation_step: () => {
           sendEvent("business_formation_billing_step_continue_button", "click", "go_to_next_formation_step");
+        },
+      },
+    },
+    business_formation_registered_agent_identification: {
+      submit: {
+        entered_agent_ID: () => {
+          sendEvent("business_formation_registered_agent_identification", "submit", "entered_agent_ID");
+        },
+        identified_agent_manually: () => {
+          sendEvent(
+            "business_formation_registered_agent_identification",
+            "submit",
+            "identified_agent_manually"
+          );
+        },
+      },
+    },
+    business_formation_registered_agent_manual_name: {
+      submit: {
+        entered_agent_ID: () => {
+          sendEvent(
+            "business_formation_registered_agent_manual_name",
+            "submit",
+            "name_is_same_as_account_holder"
+          );
+        },
+      },
+    },
+    business_formation_registered_agent_manual_address: {
+      submit: {
+        address_is_same_as_account_holder: () => {
+          sendEvent(
+            "business_formation_registered_agent_manual_address",
+            "submit",
+            "address_is_same_as_account_holder"
+          );
+        },
+      },
+    },
+    business_formation_add_member_same_as_business_address_checkbox: {
+      submit: {
+        member_address_is_same_as_business: () => {
+          sendEvent(
+            "business_formation_add_member_same_as_business_address_checkbox",
+            "submit",
+            "member_address_is_same_as_business"
+          );
         },
       },
     },

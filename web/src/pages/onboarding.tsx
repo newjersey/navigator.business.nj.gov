@@ -25,7 +25,11 @@ import {
   ProfileFields,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { setAnalyticsDimensions, setRegistrationDimension } from "@/lib/utils/analytics-helpers";
+import {
+  sendOnboardingOnSubmitEvents,
+  setAnalyticsDimensions,
+  setRegistrationDimension,
+} from "@/lib/utils/analytics-helpers";
 import {
   getFlow,
   getSectionCompletion,
@@ -245,6 +249,8 @@ const OnboardingPage = (props: Props): ReactElement => {
       setCurrentFlow(getFlow(profileData));
     }
 
+    const currentPage = onboardingFlows[currentFlow].pages[page.current];
+    sendOnboardingOnSubmitEvents(newProfileData, currentPage.name);
     setAnalyticsDimensions(newProfileData);
     setAlert(undefined);
     setError(undefined);

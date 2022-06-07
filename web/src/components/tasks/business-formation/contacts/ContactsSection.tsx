@@ -17,6 +17,7 @@ import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
+import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const ContactsSection = (): ReactElement => {
@@ -136,6 +137,8 @@ export const ContactsSection = (): ReactElement => {
       signers: state.formationFormData.signers.filter((it) => !!it),
     };
 
+    sendSubmitAnalytics(formationFormDataWithEmptySignersRemoved);
+
     update({
       ...userData,
       formationData: {
@@ -147,6 +150,14 @@ export const ContactsSection = (): ReactElement => {
     analytics.event.business_formation_contacts_step_continue_button.click.go_to_next_formation_step();
     setTab(state.tab + 1);
     scrollToTop();
+  };
+
+  const sendSubmitAnalytics = (formationFormData: FormationFormData): void => {
+    if (formationFormData.agentNumberOrManual === "NUMBER") {
+      analytics.event.business_formation_registered_agent_identification.submit.entered_agent_ID();
+    } else if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
+      analytics.event.business_formation_registered_agent_identification.submit.identified_agent_manually();
+    }
   };
 
   return (

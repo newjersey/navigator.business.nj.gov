@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import analytics from "@/lib/utils/analytics";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
@@ -10,11 +9,6 @@ export const OnboardingCpa = (): ReactElement => {
   const { Config } = useConfig();
 
   const handleCpaSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    if (event.target.value === "true") {
-      analytics.event.onboarding_cpa_question.submit.yes_i_offer_public_accounting();
-    } else {
-      analytics.event.onboarding_cpa_question.submit.no_i_dont_offer_public_accounting();
-    }
     setProfileData({
       ...state.profileData,
       requiresCpa: event.target.value === "true",

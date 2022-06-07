@@ -73,8 +73,10 @@ export const PaymentSection = (): ReactElement => {
       newUserData.formationData.formationResponse?.success &&
       newUserData.formationData.formationResponse?.redirect
     ) {
+      analytics.event.business_formation.submit.go_to_NIC_formation_processing();
       await router.replace(newUserData.formationData.formationResponse.redirect);
     } else {
+      analytics.event.business_formation.submit.error_remain_at_formation();
       setIsLoading(false);
       setShowResponseAlert(true);
     }

@@ -16,7 +16,11 @@ import { validateEmail } from "@/lib/utils/helpers";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import { ReactNode } from "react";
 
-type OnboardingPage = { component: ReactNode; getErrorMap: () => ErrorFieldMap | undefined };
+type OnboardingPage = {
+  component: ReactNode;
+  getErrorMap: () => ErrorFieldMap | undefined;
+  name?: string;
+};
 
 export type OnboardingFlow = {
   pages: OnboardingPage[];
@@ -137,6 +141,7 @@ export const getOnboardingFlows = (
         }),
       },
       {
+        name: "industry-page-starting",
         component: <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />,
         getErrorMap: () => ({
           inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
