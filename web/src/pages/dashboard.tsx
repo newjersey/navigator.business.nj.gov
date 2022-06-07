@@ -35,7 +35,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
 
   const editOnClick = () => {
-    analytics.event.roadmap_profile_edit_button.click.return_to_onboarding();
+    analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
     router.push("/profile");
   };
 

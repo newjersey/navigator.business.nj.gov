@@ -137,7 +137,9 @@ export const Button = (props: Props): ReactElement => {
       ) : (
         <div
           ref={widthRef}
-          className={`display-flex flex-row flex-justify-${props.align || "center"} flex-align-center`}
+          className={`display-flex flex-row flex-justify-${props.align || "center"} flex-align-center ${
+            underline || ""
+          }`}
         >
           {props.children}
         </div>

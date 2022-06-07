@@ -28,9 +28,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.url().should("contain", "/roadmap");
 
     // check roadmap
-    cy.get(`[data-industry='${industry.id}']`).should("exist");
-    cy.get(`[data-legal-structure='${legalStructureId}']`).should("exist");
-    cy.get(`[data-municipality='${townDisplayName}']`).should("exist");
+    onRoadmapPage.getEditProfileLink().should("exist");
 
     cy.get('[data-testid="self-reg-toast"]').should("be.visible");
     cy.get('[aria-label="close"]').click({ force: true });

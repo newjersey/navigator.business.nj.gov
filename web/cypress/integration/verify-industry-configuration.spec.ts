@@ -1,6 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { Industries, LegalStructure, LegalStructures, randomInt } from "@businessnjgovnavigator/shared/";
+import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
 import { completeNewBusinessOnboarding, randomElementFromArray } from "../support/helpers";
 
 describe("Roadmap [all] [group4]", () => {
@@ -27,11 +28,7 @@ describe("Roadmap [all] [group4]", () => {
       });
 
       // check roadmap
-      cy.get(`[data-industry="${industry.id}"]`).should("exist");
-      cy.get(`[data-legal-structure="${legalStructureId}"]`).should("exist");
-      cy.get(`[data-testid="mini-profile-location"]`)
-        .invoke("attr", "data-municipality")
-        .should("not.eq", "");
+      onRoadmapPage.getEditProfileLink().should("exist");
     });
   }
 });

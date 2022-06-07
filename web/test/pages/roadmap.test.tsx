@@ -3,30 +3,22 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { SidebarCardContent } from "@/lib/types/types";
-import { templateEval } from "@/lib/utils/helpers";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generateFormationData,
   generateGetFilingResponse,
-  generateMunicipality,
   generatePreferences,
   generateProfileData,
   generateSidebarCardContent,
   generateStep,
   generateTask,
   generateTaxFilingData,
-  generateUser,
   generateUserData,
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import {
-  setMockUserDataResponse,
-  useMockProfileData,
-  useMockUserData,
-  useMockUserDataError,
-} from "@/test/mock/mockUseUserData";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -36,7 +28,6 @@ import {
 import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   getCurrentDate,
-  LookupIndustryById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   RegistrationStatus,
@@ -108,7 +99,7 @@ describe("roadmap page", () => {
     return { page };
   };
 
-  const renderPageWithAuth = ({
+  const renderPageWithAuthAlert = ({
     userData,
     isAuthenticated,
     sidebarDisplayContent,
@@ -154,14 +145,6 @@ describe("roadmap page", () => {
     expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
-  it("shows user data and loading spinner when user data loaded but not roadmap", () => {
-    useMockProfileData({ businessName: "Some Cool Name" });
-    setMockRoadmapResponse(undefined);
-    renderRoadmapPage({});
-    expect(screen.getByTestId("mini-profile-businessName")).toHaveTextContent("Some Cool Name");
-    expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
-  });
-
   it("redirects to onboarding if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     renderRoadmapPage({});
@@ -173,249 +156,6 @@ describe("roadmap page", () => {
     useMockRouter({ isReady: true, query: { success: "true" } });
     renderRoadmapPage({});
     expect(screen.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument();
-  });
-
-  it("directs guest-mode user to profile when profile edit button is clicked", () => {
-    useMockProfileData({});
-    const setModalIsVisible = jest.fn();
-    render(
-      withAuthAlert(
-        <ThemeProvider theme={createTheme()}>
-          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent()} />
-        </ThemeProvider>,
-        IsAuthenticated.FALSE,
-        { modalIsVisible: false, setModalIsVisible }
-      )
-    );
-    fireEvent.click(screen.getByTestId("grey-callout-link"));
-    expect(mockPush).toHaveBeenCalled();
-    expect(setModalIsVisible).not.toHaveBeenCalled();
-  });
-
-  it("directs authenticated user to profile when profile edit button is clicked", () => {
-    useMockProfileData({});
-    const setModalIsVisible = jest.fn();
-    render(
-      withAuthAlert(
-        <ThemeProvider theme={createTheme()}>
-          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent()} />
-        </ThemeProvider>,
-        IsAuthenticated.TRUE,
-        { modalIsVisible: false, setModalIsVisible }
-      )
-    );
-    fireEvent.click(screen.getByTestId("grey-callout-link"));
-    expect(mockPush).toHaveBeenCalled();
-    expect(setModalIsVisible).not.toHaveBeenCalled();
-  });
-
-  describe("mini-profile business information", () => {
-    it("shows template with user name as header", () => {
-      useMockUserData({
-        profileData: generateProfileData({
-          businessName: "some business",
-          industryId: "restaurant",
-          legalStructureId: "c-corporation",
-        }),
-        user: generateUser({ name: "Ada Lovelace" }),
-      });
-      renderRoadmapPage({});
-      const expectedHeaderText = templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
-        name: "Ada Lovelace",
-      });
-      expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
-    });
-
-    it("shows header placeholder if no user name present", () => {
-      useMockUserData({
-        profileData: generateProfileData({
-          businessName: "",
-          industryId: "restaurant",
-          legalStructureId: "c-corporation",
-        }),
-        user: generateUser({ name: undefined }),
-      });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-businessName")).toHaveTextContent(
-        Config.roadmapDefaults.greyBoxNotSetText
-      );
-      expect(screen.getByText(Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing)).toBeInTheDocument();
-    });
-
-    it("shows the human-readable industry from onboarding data", () => {
-      useMockProfileData({ industryId: "home-contractor" });
-      renderRoadmapPage({});
-      const expectedValue = LookupIndustryById("home-contractor").name;
-      expect(screen.getByTestId("mini-profile-industryId")).toHaveTextContent(expectedValue);
-    });
-
-    it("shows placeholder if no industry present", () => {
-      useMockProfileData({
-        industryId: "generic",
-        legalStructureId: "c-corporation",
-        municipality: generateMunicipality({}),
-      });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-industryId")).toHaveTextContent(
-        Config.roadmapDefaults.greyBoxNotSetText
-      );
-    });
-
-    it("shows the human-readable legal structure from onboarding data", () => {
-      useMockProfileData({ legalStructureId: "limited-liability-company" });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
-        "Limited Liability Company (LLC)"
-      );
-    });
-
-    it("shows placeholder if no business structure present", () => {
-      useMockProfileData({
-        legalStructureId: undefined,
-        industryId: "restaurant",
-        municipality: generateMunicipality({}),
-      });
-      renderRoadmapPage({});
-      expect(screen.getByText("Not set")).toBeInTheDocument();
-      expect(screen.getByTestId("mini-profile-legal-structure")).toHaveTextContent(
-        Config.roadmapDefaults.greyBoxNotSetText
-      );
-    });
-
-    it("shows the display municipality from onboarding data", () => {
-      useMockProfileData({
-        municipality: generateMunicipality({ displayName: "Franklin (Hunterdon County)" }),
-      });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-location")).toHaveTextContent("Franklin (Hunterdon County)");
-    });
-
-    it("shows placeholder if no municipality present", () => {
-      useMockProfileData({
-        legalStructureId: "c-corporation",
-        industryId: "restaurant",
-        municipality: undefined,
-      });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-location")).toHaveTextContent(
-        Config.roadmapDefaults.greyBoxNotSetText
-      );
-    });
-
-    it("shows entity id if present", () => {
-      useMockProfileData({
-        entityId: "1234567890",
-        legalStructureId: "limited-liability-company",
-      });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-entityId")).toHaveTextContent("1234567890");
-    });
-
-    it("does not show entity id for Trade Name legal structure even if present", () => {
-      useMockProfileData({
-        legalStructureId: "sole-proprietorship",
-        entityId: "1234567890",
-        businessPersona: "STARTING",
-      });
-      renderRoadmapPage({});
-      expect(screen.queryByTestId("mini-profile-entityId")).not.toBeInTheDocument();
-    });
-
-    it("shows EIN with hyphen if present", () => {
-      useMockProfileData({
-        employerId: "123456789",
-      });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-employerId")).toHaveTextContent("12-3456789");
-    });
-
-    it("shows new jersey tax id if present", () => {
-      useMockProfileData({
-        taxId: "123456789",
-      });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-taxId")).toHaveTextContent("123456789");
-    });
-
-    it("shows notes if present", () => {
-      useMockProfileData({
-        notes: "some notes",
-      });
-      renderRoadmapPage({});
-      expect(screen.getByTestId("mini-profile-notes")).toHaveTextContent("some notes");
-    });
-
-    it("shows placeholder for ein, nj tax id, notes", () => {
-      useMockProfileData({
-        entityId: undefined,
-        employerId: undefined,
-        taxId: undefined,
-        notes: undefined,
-      });
-      renderRoadmapPage({});
-
-      expect(screen.getByTestId("mini-profile-employerId")).toHaveTextContent(
-        Config.roadmapDefaults.greyBoxNotEnteredText
-      );
-      expect(screen.getByTestId("mini-profile-taxId")).toHaveTextContent(
-        Config.roadmapDefaults.greyBoxNotEnteredText
-      );
-      expect(screen.getByTestId("mini-profile-notes")).toHaveTextContent(
-        Config.roadmapDefaults.greyBoxNotEnteredText
-      );
-    });
-
-    it("shows more/less for mobile", () => {
-      setMobileScreen(true);
-      useMockProfileData({
-        businessName: "some name",
-        legalStructureId: "c-corporation",
-        industryId: "restaurant",
-        municipality: generateMunicipality({ displayName: "Franklin" }),
-        entityId: "123456790",
-        employerId: "9876543210",
-        taxId: "111111111",
-        notes: "some notes",
-      });
-      renderRoadmapPage({});
-      expect(screen.getByText("some name")).toBeInTheDocument();
-      expect(screen.getByText("Corporation")).toBeInTheDocument();
-      expect(screen.getByText("Franklin")).toBeInTheDocument();
-      expect(screen.getByText("Restaurant")).toBeInTheDocument();
-      expect(screen.queryByText("123456790")).not.toBeInTheDocument();
-      expect(screen.queryByText("98-76543210")).not.toBeInTheDocument();
-      expect(screen.queryByText("111111111")).not.toBeInTheDocument();
-      expect(screen.queryByText("some notes")).not.toBeInTheDocument();
-
-      fireEvent.click(screen.getByText(Config.roadmapDefaults.greyBoxViewMoreText));
-      expect(screen.getByText("some name")).toBeInTheDocument();
-      expect(screen.getByText("Corporation")).toBeInTheDocument();
-      expect(screen.getByText("Franklin")).toBeInTheDocument();
-      expect(screen.getByText("Restaurant")).toBeInTheDocument();
-      expect(screen.getByText("123456790")).toBeInTheDocument();
-      expect(screen.getByText("98-76543210")).toBeInTheDocument();
-      expect(screen.getByText("111111111")).toBeInTheDocument();
-      expect(screen.getByText("some notes")).toBeInTheDocument();
-
-      fireEvent.click(screen.getByText(Config.roadmapDefaults.greyBoxViewLessText));
-      expect(screen.queryByText("123456790")).not.toBeInTheDocument();
-      expect(screen.queryByText("98-76543210")).not.toBeInTheDocument();
-      expect(screen.queryByText("111111111")).not.toBeInTheDocument();
-      expect(screen.queryByText("some notes")).not.toBeInTheDocument();
-    });
-
-    it("shows business info box if error is CACHED_ONLY", () => {
-      useMockUserDataError("CACHED_ONLY");
-      renderRoadmapPage({});
-      expect(screen.getByTestId("error-alert-CACHED_ONLY")).toBeInTheDocument();
-    });
-
-    it("does not show business info box if error is NO_DATA", () => {
-      useMockUserDataError("NO_DATA");
-      renderRoadmapPage({});
-      expect(screen.queryByTestId("grey-callout-link")).not.toBeInTheDocument();
-      expect(screen.getByTestId("error-alert-NO_DATA")).toBeInTheDocument();
-    });
   });
 
   it("shows steps and tasks from roadmap", () => {
@@ -860,7 +600,7 @@ describe("roadmap page", () => {
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
       };
 
-      renderPageWithAuth({ userData, sidebarDisplayContent });
+      renderPageWithAuthAlert({ userData, sidebarDisplayContent });
       await waitFor(() => {
         expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
       });
@@ -873,7 +613,7 @@ describe("roadmap page", () => {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
       };
-      renderPageWithAuth({
+      renderPageWithAuthAlert({
         alertIsVisible: true,
         sidebarDisplayContent,
         isAuthenticated: IsAuthenticated.FALSE,
@@ -898,7 +638,7 @@ describe("roadmap page", () => {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
       };
-      renderPageWithAuth({
+      renderPageWithAuthAlert({
         alertIsVisible: true,
         sidebarDisplayContent,
         isAuthenticated: IsAuthenticated.FALSE,
@@ -928,7 +668,7 @@ describe("roadmap page", () => {
         }),
       };
 
-      renderPageWithAuth({
+      renderPageWithAuthAlert({
         userData,
         sidebarDisplayContent,
       });
@@ -952,12 +692,6 @@ describe("roadmap page", () => {
       useMockProfileData({ businessPersona: "FOREIGN" });
       renderRoadmapPage({});
       expect(screen.queryByText(Config.roadmapDefaults.graduationButtonText)).not.toBeInTheDocument();
-    });
-
-    it("does not display mini-profile box for foreign business", () => {
-      useMockProfileData({ businessPersona: "FOREIGN" });
-      renderRoadmapPage({});
-      expect(screen.queryByText(Config.roadmapDefaults.greyBoxHeaderText)).not.toBeInTheDocument();
     });
   });
 });
