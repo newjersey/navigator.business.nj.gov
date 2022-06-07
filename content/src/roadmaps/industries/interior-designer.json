@@ -34,6 +34,11 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "certified-interior-designer"
     }
   ],
   "name": "Interior Designer",
