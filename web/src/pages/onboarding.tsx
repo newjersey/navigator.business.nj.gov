@@ -105,6 +105,10 @@ const OnboardingPage = (props: Props): ReactElement => {
     [router]
   );
 
+  const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
+    return !!LookupIndustryById(industryId).id;
+  };
+
   useEffect(() => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
@@ -162,10 +166,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     const requestedPageIsInRange = page <= onboardingFlows[currentFlow].pages.length && page > 0;
 
     return hasAnsweredBusinessPersona && requestedPageIsInRange;
-  };
-
-  const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
-    return !!LookupIndustryById(industryId).id;
   };
 
   const setIndustryAndRouteToPage2 = async (
