@@ -27,7 +27,8 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 - Anticipated first payroll withholding date for employees (if applicable)
 - Information on if and when you expect to report and collect sales tax
 - Owner information
-- Mail to address and business location(s)
+- Mailing Address
+- Business Addresses
 - Other taxes you may collect (i.e. motor fuels and cigarette/tobacco taxes), a list will be provided
 
 > **Once completed, you will have:**
