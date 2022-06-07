@@ -22,7 +22,7 @@ In New Jersey, you can only legally use the title of Certified Interior Designer
 * One professional reference
 * Two personal references
 * Supporting documentation if answered “Yes” to any questions of moral or professional character
-* CLARB examination records sent directly to the Interior Design Committee
+* CLARB examination records (sent directly to the Committee)
 * Pay any fees associated with the certification
 
 > **Once completed, you will have:** 
