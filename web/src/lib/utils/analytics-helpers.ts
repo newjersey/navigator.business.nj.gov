@@ -2,6 +2,7 @@ import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicens
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import analytics from "@/lib/utils/analytics";
 import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
+import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
@@ -19,7 +20,21 @@ export const setAnalyticsDimensions = (profileData: ProfileData): void => {
   analytics.dimensions.legalStructure(profileData.legalStructureId);
   analytics.dimensions.liquorLicense(profileData.liquorLicense ? "true" : "false");
   analytics.dimensions.homeBasedBusiness(profileData.homeBasedBusiness ? "true" : "false");
-  analytics.dimensions.persona(profileData.businessPersona === "OWNING" ? "Existing" : "Prospective");
+  analytics.dimensions.persona(getPersonaDimension(profileData.businessPersona));
+  analytics.dimensions.naicsCode(profileData.naicsCode);
+};
+
+const getPersonaDimension = (persona: BusinessPersona): string => {
+  switch (persona) {
+    case "STARTING":
+      return "Prospective";
+    case "OWNING":
+      return "Existing";
+    case "FOREIGN":
+      return "Foreign Prospective";
+    default:
+      return "";
+  }
 };
 
 export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageName?: string): void => {

@@ -204,7 +204,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           'dimension5': 'Home-Based Business',
           'dimension6': 'Persona',
           'dimension7': 'Registration Process',
-          'dimension8': 'AB Experience'
+          'dimension8': 'AB Experience',
+          'dimension9': 'Six Digit NAICS Code'
         }
       });`,
         }}
