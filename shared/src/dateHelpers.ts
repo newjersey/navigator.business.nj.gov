@@ -1,10 +1,18 @@
 import dayjs, { Dayjs } from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import { LicenseEntity } from "./license";
 
 export type DateObject = Dayjs;
 
 export const getCurrentDate = (): Dayjs => dayjs();
+
+export const getCurrentDateInNewJersey = (): Dayjs => {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  return dayjs().tz("America/New_York");
+};
 
 export const getCurrentDateFormatted = (format: string): string => dayjs().format(format);
 

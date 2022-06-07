@@ -8,7 +8,7 @@ exports[`Button Styles accent-cool-darker-big displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -25,7 +25,7 @@ exports[`Button Styles accent-cooler displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -42,7 +42,7 @@ exports[`Button Styles info displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -59,7 +59,7 @@ exports[`Button Styles narrow-light displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -76,7 +76,7 @@ exports[`Button Styles primary displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -93,7 +93,7 @@ exports[`Button Styles primary-big displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -110,7 +110,7 @@ exports[`Button Styles primary-input-field-height displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -127,7 +127,7 @@ exports[`Button Styles secondary displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -144,7 +144,7 @@ exports[`Button Styles secondary-big displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -161,7 +161,7 @@ exports[`Button Styles secondary-input-field-height displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -178,7 +178,7 @@ exports[`Button Styles tertiary displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -234,7 +234,7 @@ exports[`Button submit button displays correctly 1`] = `
       type="submit"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -252,7 +252,7 @@ exports[`Button with dataTestid displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -269,7 +269,7 @@ exports[`Button with heightAutoOnMobile button displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -286,7 +286,7 @@ exports[`Button with intercomButton button displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -303,7 +303,7 @@ exports[`Button with noRightMargin button displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -320,7 +320,7 @@ exports[`Button with smallText button displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -337,7 +337,7 @@ exports[`Button with textBold button displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>
@@ -354,7 +354,7 @@ exports[`Button with underline button displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center underline"
       >
         Test Button
       </div>
@@ -371,7 +371,7 @@ exports[`Button with widthAutoOnMobile button displays correctly 1`] = `
       type="button"
     >
       <div
-        class="display-flex flex-row flex-justify-center flex-align-center"
+        class="display-flex flex-row flex-justify-center flex-align-center "
       >
         Test Button
       </div>

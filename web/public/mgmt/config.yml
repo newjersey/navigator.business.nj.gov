@@ -1004,20 +1004,6 @@ collections:
             widget: object
             summary: "{{roadmapDefaults}}"
             fields:
-              - { label: Grey Box - Business Name Label, name: greyBoxBusinessNameText, widget: string }
-              - { label: Grey Box - Industry Label, name: greyBoxIndustryText, widget: string }
-              - { label: Grey Box - Legal Structure Label, name: greyBoxLegalStructureText, widget: string }
-              - { label: Grey Box - Municipality Label, name: greyBoxMunicipalityText, widget: string }
-              - { label: Grey Box - EIN Label, name: greyBoxEINText, widget: string }
-              - { label: Grey Box - Entity ID Label, name: greyBoxEntityIdText, widget: string }
-              - { label: Grey Box - Tax ID Label, name: greyBoxTaxIdText, widget: string }
-              - { label: Grey Box - Notes Label, name: greyBoxNotesText, widget: string }
-              - { label: Grey Box - Edit Link, name: greyBoxEditText, widget: string }
-              - { label: Grey Box - Header, name: greyBoxHeaderText, widget: string }
-              - { label: Grey Box - Not Set Placeholder, name: greyBoxNotSetText, widget: string }
-              - { label: Grey Box - Not Entered Placeholder, name: greyBoxNotEnteredText, widget: string }
-              - { label: Grey Box - View More Text, name: greyBoxViewMoreText, widget: string }
-              - { label: Grey Box - View Less Text, name: greyBoxViewLessText, widget: string }
               - {
                   label: Roadmap Title - No Business Name nor User Name,
                   name: roadmapTitleBusinessAndUserMissing,
@@ -1049,6 +1035,13 @@ collections:
                 }
               - { label: Graduation Modal Title, name: graduationModalTitle, widget: string }
               - { label: Sidebar Heading, name: sidebarHeading, widget: string }
+              - { label: NJ Date Text, name: newJerseyDateBodyText, widget: string }
+              - {
+                  label: Guest Mode - To Profile Button Text,
+                  name: guestModeToProfileButtonText,
+                  widget: string,
+                }
+              - { label: Generic - To Profile Button Text, name: genericToProfileButtonText, widget: string }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true

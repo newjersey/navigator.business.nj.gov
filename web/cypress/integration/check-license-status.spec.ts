@@ -1,5 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
 import { completeNewBusinessOnboarding, updateNewBusinessProfilePage } from "../support/helpers";
 
 describe("check license status [feature] [all] [group1]", () => {
@@ -26,7 +27,7 @@ describe("check license status [feature] [all] [group1]", () => {
 
     // roadmap business name
     updateNewBusinessProfilePage({ businessName: "Aculyst" });
-    cy.get('[data-business-name="Aculyst"]').should("exist");
+    onRoadmapPage.getEditProfileLink().should("exist");
 
     // application tab
     cy.get('[data-task="register-consumer-affairs"]').click();

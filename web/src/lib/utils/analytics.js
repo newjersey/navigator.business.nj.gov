@@ -135,8 +135,8 @@ export default {
     },
     roadmap_profile_edit_button: {
       click: {
-        return_to_onboarding: () => {
-          sendEvent("roadmap_profile_edit_button", "click", "return_to_onboarding");
+        go_to_profile_screen: () => {
+          sendEvent("roadmap_profile_edit_button", "click", "go_to_profile_screen");
         },
       },
     },

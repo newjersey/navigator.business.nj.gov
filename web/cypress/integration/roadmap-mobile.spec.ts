@@ -30,10 +30,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     });
 
     // check roadmap
-    cy.get('[data-business-name=""]').should("exist");
-    cy.get('[data-industry="e-commerce"]').should("exist");
-    cy.get('[data-legal-structure="general-partnership"]').should("exist");
-    cy.get('[data-municipality="Absecon"]').should("exist");
+    onRoadmapPage.getEditProfileLink().should("exist");
 
     // step 1
     cy.get('[id="plan-content"]').should("be.visible");
@@ -87,10 +84,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.url().should("contain", "/roadmap");
 
     // check roadmap
-    cy.get('[data-business-name="Applebee\'s"]').should("exist");
-    cy.get('[data-industry="restaurant"]').should("exist");
-    cy.get('[data-legal-structure="general-partnership"]').should("exist");
-    cy.get('[data-municipality="Absecon"]').should("exist");
+    onRoadmapPage.getEditProfileLink().should("exist");
 
     cy.get('[data-task="check-site-requirements"]').should("exist");
     cy.get('[data-task="food-safety-course"]').should("exist");

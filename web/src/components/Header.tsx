@@ -1,0 +1,65 @@
+import { Button } from "@/components/njwds-extended/Button";
+import { AuthContext } from "@/contexts/authContext";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
+import { templateEval } from "@/lib/utils/helpers";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+
+export const Header = () => {
+  const { state } = useContext(AuthContext);
+
+  const { userData } = useUserData();
+  const router = useRouter();
+
+  const editOnClick = () => {
+    analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
+    router.push("/profile");
+  };
+
+  const getHeader = (): string => {
+    return userData?.user.name
+      ? templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
+          name: userData.user.name,
+        })
+      : Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing;
+  };
+
+  const getButtonText = () => {
+    if (state.isAuthenticated === "FALSE" || state.isAuthenticated === "UNKNOWN") {
+      return Config.roadmapDefaults.guestModeToProfileButtonText;
+    }
+
+    if (
+      (userData?.profileData.businessName === undefined || userData?.profileData.businessName === "") &&
+      state.isAuthenticated === "TRUE"
+    ) {
+      return Config.roadmapDefaults.genericToProfileButtonText;
+    }
+
+    if (userData?.profileData.businessName && state.isAuthenticated === "TRUE") {
+      return userData.profileData.businessName;
+    }
+  };
+
+  return (
+    <div className="bg-white margin-bottom-7">
+      <h1 className="h2-styling break-word">{getHeader()}</h1>
+      <Button
+        style="tertiary"
+        underline
+        textBold
+        onClick={editOnClick}
+        dataTestid="header-link-to-profile"
+        ariaLabel="Link To Business Profile"
+      >
+        {getButtonText()}
+      </Button>
+      <span className="vl margin-x-105 border-right-base" />
+      <span className="text-base">{getCurrentDateInNewJersey().format("MMMM DD YYYY")}</span>{" "}
+      <span className="text-base">{Config.roadmapDefaults.newJerseyDateBodyText}</span>
+    </div>
+  );
+};
