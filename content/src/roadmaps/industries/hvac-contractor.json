@@ -5,6 +5,7 @@
   "defaultSectorId": "professional-scientific-and-technical-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,

@@ -5,6 +5,7 @@
   "defaultSectorId": "other-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,

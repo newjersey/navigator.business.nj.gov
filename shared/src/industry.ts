@@ -15,6 +15,7 @@ export interface Industry {
   readonly roadmapSteps: AddOn[];
   readonly modifications?: TaskModification[];
   readonly naicsCodes?: string;
+  readonly isEnabled: boolean;
 }
 
 export interface AddOn {
@@ -41,6 +42,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       canBeReseller: true,
       roadmapSteps: [],
       naicsCodes: "",
+      isEnabled: false,
     }
   );
 };

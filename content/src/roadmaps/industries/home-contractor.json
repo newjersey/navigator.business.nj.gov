@@ -5,6 +5,7 @@
   "defaultSectorId": "construction",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,

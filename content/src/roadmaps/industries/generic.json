@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,
