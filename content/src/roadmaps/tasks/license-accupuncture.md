@@ -7,7 +7,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
 callToActionText: Apply for My License
 required: false
 ---
-You will need an Acupuncturist license **if** you plan to offer services as an acupuncturist. 
+You will need an Acupuncturist license **if you** plan to offer services as an acupuncturist. 
 
 - - -
 ### Eligibility Criteria
