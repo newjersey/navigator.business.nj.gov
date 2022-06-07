@@ -7,6 +7,7 @@ COPY .yarn .yarn
 COPY .yarnrc.yml .yarnrc.yml
 COPY yarn.lock yarn.lock
 COPY ./content/package.json ./content/package.json
+COPY ./content/src ./content/src
 COPY ./shared/package.json ./shared/package.json
 COPY ./api/package.json ./api/package.json
 COPY ./web/package.json ./web/package.json
@@ -21,7 +22,6 @@ RUN apk --no-cache add curl
 RUN rm -rf ./.yarn/cache
 RUN rm -rf ./shared
 RUN rm -rf ./api
-RUN rm -rf ./content
 COPY ./web/public ./web/public
 COPY ./web/.next ./web/.next
 WORKDIR /app/web
