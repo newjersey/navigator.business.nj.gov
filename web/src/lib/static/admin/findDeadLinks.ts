@@ -13,6 +13,7 @@ const tasksDir = path.join(roadmapsDir, "tasks");
 const industriesDir = path.join(roadmapsDir, "industries");
 const addOnsDir = path.join(roadmapsDir, "add-ons");
 const contextualInfoDir = path.join(displayContentDir, "contextual-information");
+const fieldConfigDir = path.join(process.cwd(), "..", "content", "src", "fieldConfig");
 
 type Filenames = {
   tasks: string[];
@@ -21,6 +22,7 @@ type Filenames = {
   addOns: string[];
   contextualInfos: string[];
   displayContents: string[];
+  fieldConfigs: string[];
 };
 
 type FileContents = {
@@ -30,6 +32,7 @@ type FileContents = {
   modifications: Array<TaskModification[]>;
   contextualInfos: string[];
   displayContents: string[];
+  fieldConfigs: string[];
 };
 
 const getFlattenedFilenames = (dir: string): string[] => {
@@ -54,6 +57,7 @@ const getFilenames = (): Filenames => ({
   addOns: fs.readdirSync(addOnsDir),
   contextualInfos: fs.readdirSync(contextualInfoDir),
   displayContents: getFlattenedFilenames(displayContentDir).filter((it) => it.endsWith(".md")),
+  fieldConfigs: fs.readdirSync(fieldConfigDir),
 });
 
 const getContents = (filenames: Filenames): FileContents => {
@@ -62,6 +66,9 @@ const getContents = (filenames: Filenames): FileContents => {
   );
   const addOns = filenames.addOns.map(
     (it) => JSON.parse(fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")) as IndustryRoadmap
+  );
+  const fieldConfigs = filenames.fieldConfigs.map((it) =>
+    fs.readFileSync(path.join(fieldConfigDir, it), "utf8")
   );
 
   return {
@@ -76,6 +83,7 @@ const getContents = (filenames: Filenames): FileContents => {
         matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8")).content
     ),
     displayContents: filenames.displayContents.map((it) => matter(fs.readFileSync(it, "utf8")).content),
+    fieldConfigs,
   };
 };
 
@@ -86,6 +94,19 @@ const isReferencedInAMarkdown = async (
   let contained = false;
   const contextualInfoId = contextualInfoFilename.split(".md")[0];
   for (const content of markdowns) {
+    const regexStr = `\`.*\\|${contextualInfoId}\``;
+    if (new RegExp(regexStr).test(content)) {
+      contained = true;
+      break;
+    }
+  }
+  return contained;
+};
+
+const isReferencedInConfig = async (contextualInfoFilename: string, configs: string[]): Promise<boolean> => {
+  let contained = false;
+  const contextualInfoId = contextualInfoFilename.split(".md")[0];
+  for (const content of configs) {
     const regexStr = `\`.*\\|${contextualInfoId}\``;
     if (new RegExp(regexStr).test(content)) {
       contained = true;
@@ -213,7 +234,8 @@ export const findDeadContextualInfo = async (): Promise<string[]> => {
       !(
         (await isReferencedInAMarkdown(contextualInfo, contents.tasks)) ||
         (await isReferencedInAMarkdown(contextualInfo, contents.displayContents)) ||
-        (await isReferencedInAMarkdown(contextualInfo, contents.contextualInfos))
+        (await isReferencedInAMarkdown(contextualInfo, contents.contextualInfos)) ||
+        (await isReferencedInConfig(contextualInfo, contents.fieldConfigs))
       )
     ) {
       deadContextualInfos.push(contextualInfo);
