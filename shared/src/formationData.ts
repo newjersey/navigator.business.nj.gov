@@ -48,6 +48,8 @@ export interface FormationFormData {
   readonly agentOfficeAddressCity: string;
   readonly agentOfficeAddressState: string;
   readonly agentOfficeAddressZipCode: string;
+  readonly agentUseAccountInfo: boolean;
+  readonly agentUseBusinessAddress: boolean;
   readonly members: FormationAddress[];
   readonly signers: FormationAddress[];
   readonly paymentType: PaymentType;
@@ -75,6 +77,10 @@ export type FormationTextField = Exclude<
   | "certificateOfStanding"
   | "certifiedCopyOfFormationDocument"
   | "members"
+  | "agentUseAccountInfo"
+  | "agentUseBusinessAddress"
+  | "provisions"
+  | "businessName"
 >;
 
 export const createEmptyFormationAddress = (): FormationAddress => ({
@@ -109,6 +115,8 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     agentOfficeAddressCity: "",
     agentOfficeAddressState: "NJ",
     agentOfficeAddressZipCode: "",
+    agentUseAccountInfo: false,
+    agentUseBusinessAddress: false,
     members: [],
     signers: [],
     paymentType: undefined,
