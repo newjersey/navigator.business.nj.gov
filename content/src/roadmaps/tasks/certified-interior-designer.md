@@ -6,7 +6,7 @@ id: certified-interior-designer
 callToActionLink: https://www.njconsumeraffairs.gov/int/Pages/applications.aspx
 callToActionText: Apply for My Certification
 ---
-In New Jersey, you can only legally use the title of Certified Interior Designer if you’ve been certified by the Interior Design Examination and Evaluaiton Committee.
+In New Jersey, you can only legally use the title of Certified Interior Designer if you’ve been certified by the Interior Design Examination and Evaluation Committee.
 
 ---
 ### Eligibility Criteria
