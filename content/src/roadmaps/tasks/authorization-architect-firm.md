@@ -8,7 +8,7 @@ callToActionText: Obtain My Certificate of Authorization
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 ---
-New Architect firms must obtain a certificate of authorization from the State Board prior to operating.
+New architecture firms must obtain a certificate of authorization from the State Board prior to operating.
 
 ---
 ### Eligibility Criteria
