@@ -27,14 +27,14 @@
         "errorTextRequired": "Please make a selection",
         "optionContent": {
           "operationsInNJ": "Part of my business operations (storefront, delivery, manufacturing) takes place in New Jersey",
-          "employeesInNJ": "I have employees who work in New Jersey",
+          "employeesInNJ": "I have employees who live in New Jersey",
           "transactionsInNJ": "I have more than 200 separate taxable transactions in New Jersey in the current or prior calendar year",
           "revenueInNJ": "My taxable transactions in New Jersey exceeded $100,000 in the last calendar year",
           "none": "None of the above"
         },
         "REMOTE_WORKER": "It sounds like you have **Remote Workers**.",
-        "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller`.",
-        "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business`."
+        "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller` .",
+        "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
       }
     }
   }
