@@ -1,7 +1,7 @@
 ---
 urlSlug: license-accupuncture
 filename: license-accupuncture
-name: Apply for an Accupuncturist License
+name: Apply for an Acupuncturist License
 id: license-accupuncture
 callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
 callToActionText: Apply for My License
