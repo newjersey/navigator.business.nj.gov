@@ -67,7 +67,8 @@
     "NJEIT",
     "exceedance",
     "Transformative",
-    "LIHTC"
+    "LIHTC",
+    "NCCAOM"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
