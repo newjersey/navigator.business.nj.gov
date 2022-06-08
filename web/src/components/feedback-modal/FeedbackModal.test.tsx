@@ -1,4 +1,4 @@
-import { FeedbackModal } from "@/components/FeedbackModal/FeedbackModal";
+import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import * as api from "@/lib/api-client/apiClient";
 import { generateParsedUserAgent, generateProfileData, generateUserData } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";

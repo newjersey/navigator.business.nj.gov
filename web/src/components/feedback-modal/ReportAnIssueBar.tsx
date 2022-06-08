@@ -1,4 +1,4 @@
-import { FeedbackModal } from "@/components/FeedbackModal/FeedbackModal";
+import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import { Button } from "@/components/njwds-extended/Button";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { makeButtonIcon } from "@/lib/utils/helpers";

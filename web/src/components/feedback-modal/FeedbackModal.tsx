@@ -1,7 +1,7 @@
-import { FeedbackSubmittedDialog } from "@/components/FeedbackModal/FeedbackSubmittedDialog";
-import { ReportIssueDialog } from "@/components/FeedbackModal/ReportIssueDialog";
-import { RequestFeatureDialog } from "@/components/FeedbackModal/RequestFeatureDialog";
-import { SelectFeedbackDialog } from "@/components/FeedbackModal/SelectFeedbackDialog";
+import { FeedbackSubmittedDialog } from "@/components/feedback-modal/FeedbackSubmittedDialog";
+import { ReportIssueDialog } from "@/components/feedback-modal/ReportIssueDialog";
+import { RequestFeatureDialog } from "@/components/feedback-modal/RequestFeatureDialog";
+import { SelectFeedbackDialog } from "@/components/feedback-modal/SelectFeedbackDialog";
 import { FeedbackRequestDialogNames } from "@/lib/types/types";
 import { ReactElement, useEffect, useState } from "react";
 

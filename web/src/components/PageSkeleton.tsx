@@ -1,5 +1,5 @@
 import { BetaBar } from "@/components/BetaBar";
-import { ReportAnIssueBar } from "@/components/FeedbackModal/ReportAnIssueBar";
+import { ReportAnIssueBar } from "@/components/feedback-modal/ReportAnIssueBar";
 import { InnovFooter } from "@/components/InnovFooter";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";

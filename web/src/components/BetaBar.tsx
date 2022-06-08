@@ -1,4 +1,4 @@
-import { FeedbackModal } from "@/components/FeedbackModal/FeedbackModal";
+import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import { Button } from "@/components/njwds-extended/Button";
 import { makeButtonIcon } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
