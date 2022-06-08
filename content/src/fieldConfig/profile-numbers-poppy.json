@@ -20,7 +20,7 @@
         "description": "What is your `EIN|ein`?"
       },
       "naicsCode": {
-        "header": "## Naics Code",
+        "header": "## NAICS Code",
         "editText": "Edit",
         "notEnteredText": "*Not entered*"
       },
