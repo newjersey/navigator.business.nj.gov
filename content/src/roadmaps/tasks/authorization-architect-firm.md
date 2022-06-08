@@ -14,13 +14,15 @@ New architecture firms must obtain a certificate of authorization prior to opera
 
 ### Eligibility Criteria
 
-* The firm must be a sole proprietorship of a licensed architect, or
-* A partnership of licensed architects, or
-* A partnership of closely `allied professionals|allied-professionals` including at least one licensed architect, a professional service corporation
+* The firm must be the Sole Proprietorship of a licensed architect, or
+* A General Partnership of licensed architects, or
+* A General Partnership of closely `allied professionals|allied-professionals` including at least one licensed architect,or
+- A Corporation
 
 ### Application Requirements
 
-* Business name and address
+* Business name
+- Business address
 * Business address of any satellite office
 * Name and license number of the architect in charge of the principal office
 * Name and license number of the architects in charge of each additional office
