@@ -15,6 +15,7 @@
     "deploy:storybook": "storybook-to-aws-s3 --out=.storybook/build",
     "dev": "next dev",
     "eslint": "eslint",
+    "export:funding": "ts-node ./src/scripts/fundingExport.mjs",
     "dependency-check": "yarn depcruise --config .dependency-cruiser.js src",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
