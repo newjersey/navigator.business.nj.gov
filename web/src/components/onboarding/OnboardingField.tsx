@@ -11,7 +11,7 @@ import { TextFieldProps } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "onValidation" | "fieldName"> {
-  fieldName: Exclude<ProfileFields, keyof BusinessUser>;
+  fieldName: Exclude<ProfileFields, keyof BusinessUser | "businessPersona">;
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
   headerAriaLevel?: number;
   fieldOptions?: TextFieldProps;

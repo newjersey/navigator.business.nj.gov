@@ -21,12 +21,8 @@ export const OnboardingBusinessPersona = (): ReactElement => {
 
   return (
     <>
-      <Content overrides={{ h2: header }}>
-        {Config.profileDefaults[state.flow].businessPersona.header}
-      </Content>
-      <Content overrides={{ h2: header }}>
-        {Config.profileDefaults[state.flow].businessPersona.description}
-      </Content>
+      <Content overrides={{ h2: header }}>{Config.profileDefaults.businessPersona.header}</Content>
+      <Content overrides={{ h2: header }}>{Config.profileDefaults.businessPersona.description}</Content>
       <FormControl fullWidth>
         <RadioGroup
           aria-label="Business Persona"
@@ -41,7 +37,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-starting"
             value="STARTING"
             control={<Radio color="primary" />}
-            label={Config.profileDefaults[state.flow].businessPersona.radioButtonStartingText}
+            label={Config.profileDefaults.businessPersona.radioButtonStartingText}
           />
           <FormControlLabel
             aria-label="Business Status - Owning"
@@ -50,7 +46,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-owning"
             value="OWNING"
             control={<Radio color="primary" />}
-            label={Config.profileDefaults[state.flow].businessPersona.radioButtonOwningText}
+            label={Config.profileDefaults.businessPersona.radioButtonOwningText}
           />
           <FormControlLabel
             aria-label="Business Status - Foreign"
@@ -59,7 +55,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-foreign"
             value="FOREIGN"
             control={<Radio color="primary" />}
-            label={Config.profileDefaults[state.flow].businessPersona.radioButtonForeignText}
+            label={Config.profileDefaults.businessPersona.radioButtonForeignText}
           />
         </RadioGroup>
       </FormControl>

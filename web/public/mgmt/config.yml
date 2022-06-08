@@ -2338,36 +2338,24 @@ collections:
             widget: object
             summary: "{{profileDefaults}}"
             fields:
+              - label: Business Persona
+                name: businessPersona
+                collapsed: true
+                widget: object
+                summary: "{{businessPersona}}"
+                fields:
+                  - { label: "Header", name: "header", widget: "string" }
+                  - { label: "Radio Button Starting Text", name: "radioButtonStartingText", widget: "string" }
+                  - { label: "Radio Button Owning Text", name: "radioButtonOwningText", widget: "string" }
+                  - { label: "Radio Button Foreign Text", name: "radioButtonForeignText", widget: "string" }
+                  - { label: "Error Text (when not selected)", name: "errorTextRequired", widget: "string" }
+                  - { label: "Description", name: "description", widget: "markdown" }
               - label: Fields
                 name: STARTING
                 collapsed: false
                 widget: object
                 summary: "{{profileFields}}"
                 fields:
-                  - label: Business Persona
-                    name: businessPersona
-                    collapsed: true
-                    widget: object
-                    summary: "{{businessPersona}}"
-                    fields:
-                      - { label: "Header", name: "header", widget: "string" }
-                      - {
-                          label: "Radio Button Starting Text",
-                          name: "radioButtonStartingText",
-                          widget: "string",
-                        }
-                      - { label: "Radio Button Owning Text", name: "radioButtonOwningText", widget: "string" }
-                      - {
-                          label: "Radio Button Foreign Text",
-                          name: "radioButtonForeignText",
-                          widget: "string",
-                        }
-                      - {
-                          label: "Error Text (when not selected)",
-                          name: "errorTextRequired",
-                          widget: "string",
-                        }
-                      - { label: "Description", name: "description", widget: "markdown" }
                   - label: Legal Structure
                     name: legalStructureId
                     collapsed: true
