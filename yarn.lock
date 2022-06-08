@@ -3515,7 +3515,7 @@ __metadata:
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
-    "@types/jest": 27.5.2
+    "@types/jest": 28.1.1
     "@types/jsonwebtoken": 8.5.8
     "@types/node": 16.11.38
     "@types/simple-oauth2": 4.1.1
@@ -3634,7 +3634,7 @@ __metadata:
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
-    "@types/jest": 27.5.2
+    "@types/jest": 28.1.1
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 8.5.8
     "@types/lodash.merge": 4.6.7
@@ -3760,7 +3760,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 28.1.0
-    "@types/jest": 27.5.2
+    "@types/jest": 28.1.1
     "@types/node": 16.11.38
     "@typescript-eslint/eslint-plugin": 5.27.0
     "@typescript-eslint/parser": 5.27.0
@@ -3819,7 +3819,7 @@ __metadata:
     "@testing-library/react": 13.3.0
     "@testing-library/user-event": 14.2.0
     "@types/broken-link-checker": 0.7.1
-    "@types/jest": 27.5.2
+    "@types/jest": 28.1.1
     "@types/js-yaml": 4.0.5
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
@@ -8720,23 +8720,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*":
+"@types/jest@npm:*, @types/jest@npm:28.1.1":
   version: 28.1.1
   resolution: "@types/jest@npm:28.1.1"
   dependencies:
     jest-matcher-utils: ^27.0.0
     pretty-format: ^27.0.0
   checksum: 0a8b045a7b660372decc807c390d3f99a2b12bb1659a1cd593afe04557f4b7c235b0576a5e35b1577710d20e42759d3d8755eb8bed6edc8733f47007e75a5509
-  languageName: node
-  linkType: hard
-
-"@types/jest@npm:27.5.2":
-  version: 27.5.2
-  resolution: "@types/jest@npm:27.5.2"
-  dependencies:
-    jest-matcher-utils: ^27.0.0
-    pretty-format: ^27.0.0
-  checksum: 7e11c6826aa429ad990dc262e4e4b54aa36573287fddf15773e4137f07d11d3105f0dd9f1baff73252160a057df23f5529bb83b1bf83cd3f45f9460a5ca5c22e
   languageName: node
   linkType: hard
 
