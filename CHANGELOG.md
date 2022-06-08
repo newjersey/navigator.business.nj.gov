@@ -1,3 +1,55 @@
+# [3.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.10.0...v3.11.0) (2022-06-08)
+
+
+### Bug Fixes
+
+* [[#2246](https://github.com/newjersey/navigator.business.nj.gov/issues/2246)] both validations fire on report an issue modal ([b0426f9](https://github.com/newjersey/navigator.business.nj.gov/commit/b0426f9690f003b3052e73c5280c88172b7279cc))
+* [[#2761](https://github.com/newjersey/navigator.business.nj.gov/issues/2761)] check for undefined in onboarding ([7e7069b](https://github.com/newjersey/navigator.business.nj.gov/commit/7e7069b4991536bbf32a2d7e06fe9080f2f6324b))
+* [[#2913](https://github.com/newjersey/navigator.business.nj.gov/issues/2913)] adjust content for remote seller ([bee6727](https://github.com/newjersey/navigator.business.nj.gov/commit/bee67272ae045bff8341b4041d7656c4a92e8aeb))
+* [[#2913](https://github.com/newjersey/navigator.business.nj.gov/issues/2913)] adjust content for remote seller ([9bc394b](https://github.com/newjersey/navigator.business.nj.gov/commit/9bc394bbb7c0e0ef16278c1b8e9346767746e1b7))
+* [[#2913](https://github.com/newjersey/navigator.business.nj.gov/issues/2913)] change insurance task url ([eb419ca](https://github.com/newjersey/navigator.business.nj.gov/commit/eb419ca98da9b9cbf33da3da4fd1d441afb31e11))
+* [[#2913](https://github.com/newjersey/navigator.business.nj.gov/issues/2913)] remove duplicated businessPersona content for each flow ([fc35488](https://github.com/newjersey/navigator.business.nj.gov/commit/fc35488f0dad5d7e109e053a023ad9310fb39252))
+* add the ability to set industries as disabled ([6f4b447](https://github.com/newjersey/navigator.business.nj.gov/commit/6f4b44741c4d577b313f964174d55b6e97e9e3f9))
+* correct the collection we are looking at to determine if the business has formed ([7abe186](https://github.com/newjersey/navigator.business.nj.gov/commit/7abe18631ab75939c883babec37c892e537e045d))
+* **deps:** update material-ui ([93ec26f](https://github.com/newjersey/navigator.business.nj.gov/commit/93ec26f207f0a35f5f4ddd3151ef1feab876acab))
+* updating Contextual Information form-and-register-business ([#3131](https://github.com/newjersey/navigator.business.nj.gov/issues/3131)) ([fce0787](https://github.com/newjersey/navigator.business.nj.gov/commit/fce07871e3720fcb2f6892883d6f17f76cf13ff5))
+* updating Contextual Information legal-structure-learn-more ([#3132](https://github.com/newjersey/navigator.business.nj.gov/issues/3132)) ([5dfa578](https://github.com/newjersey/navigator.business.nj.gov/commit/5dfa578977cd308915962c8717eee8fab69b5d46))
+* updating Contextual Information remote-seller ([#3108](https://github.com/newjersey/navigator.business.nj.gov/issues/3108)) ([01e0768](https://github.com/newjersey/navigator.business.nj.gov/commit/01e0768f5a41ba01a08cd66040d8105d4f9a9ca3))
+* updating Filings Content massage-business-reg ([#3020](https://github.com/newjersey/navigator.business.nj.gov/issues/3020)) ([3f64e48](https://github.com/newjersey/navigator.business.nj.gov/commit/3f64e48926560817473d0759c710bef4f3bde0f8))
+* updating Filings Content massage-license-renew ([#3026](https://github.com/newjersey/navigator.business.nj.gov/issues/3026)) ([715c67d](https://github.com/newjersey/navigator.business.nj.gov/commit/715c67d7ab4ded8a2dd270db3107fc3d20a77787))
+* updating General Config config ([#3142](https://github.com/newjersey/navigator.business.nj.gov/issues/3142)) ([302f1c1](https://github.com/newjersey/navigator.business.nj.gov/commit/302f1c1b54a58bcd35bf2516a8ec49e4705fe346))
+* updating General Config config ([#3144](https://github.com/newjersey/navigator.business.nj.gov/issues/3144)) ([e95b288](https://github.com/newjersey/navigator.business.nj.gov/commit/e95b288259ed925cbf622a34bf26674b51250747))
+* updating Profile / Onboarding profile-numbers-poppy ([#3149](https://github.com/newjersey/navigator.business.nj.gov/issues/3149)) ([fe6df24](https://github.com/newjersey/navigator.business.nj.gov/commit/fe6df24beadf12a2110834407156431a0a8a9a9d))
+* updating Profile / Onboarding profile-onboarding-dakota ([#3107](https://github.com/newjersey/navigator.business.nj.gov/issues/3107)) ([3f5e209](https://github.com/newjersey/navigator.business.nj.gov/commit/3f5e209caead996ddd9c2b08bf0e2020feac3601))
+* updating Profile / Onboarding profile-onboarding-dakota ([#3120](https://github.com/newjersey/navigator.business.nj.gov/issues/3120)) ([7d8b52c](https://github.com/newjersey/navigator.business.nj.gov/commit/7d8b52cd4fb49453a5110e8ea92df330ca08d159))
+* updating Profile / Onboarding profile-onboarding-poppy ([#3122](https://github.com/newjersey/navigator.business.nj.gov/issues/3122)) ([912d6f8](https://github.com/newjersey/navigator.business.nj.gov/commit/912d6f8340679aa8ae6b2e5c5f3b27ba5010db32))
+* updating Roadmap Add-ons cpa ([#3078](https://github.com/newjersey/navigator.business.nj.gov/issues/3078)) ([5fd5583](https://github.com/newjersey/navigator.business.nj.gov/commit/5fd5583d5c5610edb32b9b496fdc200576826726))
+* updating Tasks authorization-architect-firm ([#3137](https://github.com/newjersey/navigator.business.nj.gov/issues/3137)) ([fa9df79](https://github.com/newjersey/navigator.business.nj.gov/commit/fa9df7962f49394189e55835d004846697fc3b6c))
+* updating Tasks certified-interior-designer ([#3138](https://github.com/newjersey/navigator.business.nj.gov/issues/3138)) ([790e29f](https://github.com/newjersey/navigator.business.nj.gov/commit/790e29f638020bb27a6fe53d68295203170d93f4))
+* updating Tasks certified-interior-designer ([#3143](https://github.com/newjersey/navigator.business.nj.gov/issues/3143)) ([c63db39](https://github.com/newjersey/navigator.business.nj.gov/commit/c63db398cfe0a823e8f7c1fea16f2fcc15bcb7fd))
+* updating Tasks license-accounting ([#3065](https://github.com/newjersey/navigator.business.nj.gov/issues/3065)) ([7da86f9](https://github.com/newjersey/navigator.business.nj.gov/commit/7da86f91e5df053a946dc6fcb8b55617f6598042))
+* updating Tasks license-accupuncture ([#3126](https://github.com/newjersey/navigator.business.nj.gov/issues/3126)) ([47fae1a](https://github.com/newjersey/navigator.business.nj.gov/commit/47fae1af64e281491924bf3dda0ef283ab671855))
+* updating Tasks license-accupuncture ([#3127](https://github.com/newjersey/navigator.business.nj.gov/issues/3127)) ([caa46a4](https://github.com/newjersey/navigator.business.nj.gov/commit/caa46a44b6be64bef015959fd3904627356a7b14))
+* updating Tasks license-massage-therapy ([#3042](https://github.com/newjersey/navigator.business.nj.gov/issues/3042)) ([341d6a7](https://github.com/newjersey/navigator.business.nj.gov/commit/341d6a711157c9a36e1a35c1249269d59d3e276e))
+* updating Tasks register-firm-accounting ([#3044](https://github.com/newjersey/navigator.business.nj.gov/issues/3044)) ([69722c5](https://github.com/newjersey/navigator.business.nj.gov/commit/69722c574b1bb6f2aa2c66fbf04f11f9ec4e6cbd))
+* updating Tasks register-firm-accounting ([#3066](https://github.com/newjersey/navigator.business.nj.gov/issues/3066)) ([2ee1d8a](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee1d8a0fa72dd5cf32c8746aa440a1cf0e045cb))
+* updating Tasks register-for-taxes-foreign ([#3110](https://github.com/newjersey/navigator.business.nj.gov/issues/3110)) ([60ab0af](https://github.com/newjersey/navigator.business.nj.gov/commit/60ab0afa1342338a029580021d81f6a7a5db8f43))
+* updating Tasks research-insurance-needs-foreign ([#3121](https://github.com/newjersey/navigator.business.nj.gov/issues/3121)) ([f866d02](https://github.com/newjersey/navigator.business.nj.gov/commit/f866d0297678577b7402b3932fc67b27d266ea42))
+* updating Tasks verify-license-massage-therapy ([#3041](https://github.com/newjersey/navigator.business.nj.gov/issues/3041)) ([3aa3246](https://github.com/newjersey/navigator.business.nj.gov/commit/3aa3246a52a74c6f94b20ed8f7ec6d4dc9209269))
+* updating Tasks verify-license-massage-therapy ([#3047](https://github.com/newjersey/navigator.business.nj.gov/issues/3047)) ([97416c1](https://github.com/newjersey/navigator.business.nj.gov/commit/97416c17e480c619fa7597d7a8c4f794239d689d))
+* yarnlock for js-yaml ([f62f1d5](https://github.com/newjersey/navigator.business.nj.gov/commit/f62f1d5518ffee9913ef702a3398d557c509ddaa))
+
+
+### Features
+
+* [[#2246](https://github.com/newjersey/navigator.business.nj.gov/issues/2246)] report an issue modal ([c14bd40](https://github.com/newjersey/navigator.business.nj.gov/commit/c14bd40519a2c06ef0ef8fae983ea044defddd46))
+* [[#2761](https://github.com/newjersey/navigator.business.nj.gov/issues/2761)] add analytics for formation checkboxes and new dimensions ([d094252](https://github.com/newjersey/navigator.business.nj.gov/commit/d094252e2187828dd7f4c4ace7c0bfb299cfbbe8))
+* [[#2761](https://github.com/newjersey/navigator.business.nj.gov/issues/2761)] google analytics updates ([36b91ab](https://github.com/newjersey/navigator.business.nj.gov/commit/36b91ab08f758e8d0cfa42055fac7867c8c8331c))
+* [[#2761](https://github.com/newjersey/navigator.business.nj.gov/issues/2761)] save registered agent checkbox selections in formation data ([fc9316f](https://github.com/newjersey/navigator.business.nj.gov/commit/fc9316f9440604c9e72ccd2ac6d5a3cef167042a))
+* [[#2818](https://github.com/newjersey/navigator.business.nj.gov/issues/2818)] remove profile box from roadmap ([e6730eb](https://github.com/newjersey/navigator.business.nj.gov/commit/e6730ebf2a86ab9c4ea0c6b1be8aa46640917c0a))
+* [[#2913](https://github.com/newjersey/navigator.business.nj.gov/issues/2913)] add foreign business and remote seller ([32ceea5](https://github.com/newjersey/navigator.business.nj.gov/commit/32ceea5fbed8a0f78b2a81bddce90040e80ac62b))
+* [[#2916](https://github.com/newjersey/navigator.business.nj.gov/issues/2916)] add remote workers option for forgien businesses ([a696ef9](https://github.com/newjersey/navigator.business.nj.gov/commit/a696ef942869577ad6ae7c7f7bd55d5e8e545eed))
+
 # [3.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.9.1...v3.10.0) (2022-06-01)
 
 
