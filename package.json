@@ -265,6 +265,7 @@
     "postcss": "8.4.14",
     "glob-parent": "6.0.2",
     "tar": "6.1.11",
-    "ansi-regex": "5.0.1"
+    "ansi-regex": "5.0.1",
+    "trim-newlines": "3.0.1"
   }
 }
