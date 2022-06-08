@@ -30,7 +30,7 @@ New architecture firms must obtain a certificate of authorization prior to opera
 * Name, address, license number (if any), and signature of every officer, director, manager, and stockholder in your firm
 * Number of shares issued (if any)
 * The form will require a signature from the CEO
-*Pay any fees associated with the application
+* Pay any fees associated with the application
 
 > **Once completed, you will have:**
 >
