@@ -21,34 +21,50 @@ describe("<ContextualInfoLink />", () => {
   });
 
   it("sets the contextual info context when clicked", async () => {
-    mockFetchContextualInfo.mockResolvedValue("some markdown content");
+    mockFetchContextualInfo.mockResolvedValue({
+      isVisible: false,
+      header: "some header content",
+      markdown: "some markdown content",
+    });
     const setContent = jest.fn();
     render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
-        { isVisible: false, markdown: "" },
+        { isVisible: false, header: "", markdown: "" },
         setContent
       )
     );
     fireEvent.click(screen.getByText("legal structure"));
     await waitFor(() =>
-      expect(setContent).toHaveBeenCalledWith({ isVisible: true, markdown: "some markdown content" })
+      expect(setContent).toHaveBeenCalledWith({
+        isVisible: true,
+        header: "some header content",
+        markdown: "some markdown content",
+      })
     );
   });
 
   it("caches the content so it does not fetch again", async () => {
-    mockFetchContextualInfo.mockResolvedValue("some markdown content");
+    mockFetchContextualInfo.mockResolvedValue({
+      isVisible: false,
+      header: "some header content",
+      markdown: "some markdown content",
+    });
     const setContent = jest.fn();
     render(
       withContextualInfo(
         <ContextualInfoLink>{["legal structure|legal-structure"]}</ContextualInfoLink>,
-        { isVisible: false, markdown: "" },
+        { isVisible: false, header: "", markdown: "" },
         setContent
       )
     );
     fireEvent.click(screen.getByText("legal structure"));
     await waitFor(() =>
-      expect(setContent).toHaveBeenCalledWith({ isVisible: true, markdown: "some markdown content" })
+      expect(setContent).toHaveBeenCalledWith({
+        isVisible: true,
+        header: "some header content",
+        markdown: "some markdown content",
+      })
     );
     fireEvent.click(screen.getByText("legal structure"));
     expect(mockFetchContextualInfo).toHaveBeenCalledTimes(1);

@@ -34,6 +34,7 @@ export const ContextualInfoPanel = (): ReactElement => {
       <FocusTrappedSidebar close={close} isOpen={contextualInfo.isVisible}>
         <ContextInfoElement
           isVisible={contextualInfo.isVisible}
+          header={contextualInfo.header}
           markdown={contextualInfo.markdown}
           close={close}
         />

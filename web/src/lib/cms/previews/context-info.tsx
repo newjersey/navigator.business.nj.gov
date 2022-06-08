@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ContextInfoElement } from "@/components/ContextInfoElement";
+import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import { useEffect, useRef } from "react";
 
 type Props = {
@@ -18,11 +19,16 @@ const ContextInfoPreview = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
-  const { body } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
+  const { body, ...data } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
+  const contextualInfo: ContextualInfo = { markdown: body ?? "", ...data };
 
   return (
     <div ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <ContextInfoElement markdown={body ?? ""} isVisible={true} />
+      <ContextInfoElement
+        header={contextualInfo.header ?? ""}
+        markdown={contextualInfo.markdown}
+        isVisible={true}
+      />
     </div>
   );
 };

@@ -1,4 +1,6 @@
-## Location Contract
+---
+header: Location Contract
+---
 
 A location contract is a written, signed agreement between you and the owner of the property where you’ll park your food truck.
 

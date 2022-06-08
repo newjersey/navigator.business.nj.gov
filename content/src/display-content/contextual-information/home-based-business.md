@@ -1,4 +1,6 @@
-## Home-based Business
+---
+header: Home-based Business
+---
 
 A home-based business operates from your home and does not have a brick and mortar presence anywhere else. Not all businesses can be a home-based business, check with your local government Zoning Office.
 
