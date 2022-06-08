@@ -23,4 +23,4 @@ You need an Architect license prior to offering professional services.
 - Pay any fees associated with the license
 
 >**Once completed, you will have:**
->- Upon approval, you will receive a notification indicating you can sign up to take the Architect’s Registration Exam - the last step before obtaining your license
+>- UUpon approval, you will receive a notification indicating you can sign up to take the Architect’s Registration Exam - the last step before obtaining your license
