@@ -37,13 +37,18 @@
     },
     {
       "step": 3,
+      "weight": 20,
+      "task": "architect-license"
+    },
+    {
+      "step": 3,
       "weight": 30,
       "task": "authorization-architect-firm"
     },
     {
       "step": 3,
       "weight": 25,
-      "task": "architect-license"
+      "task": "architect-are-exam"
     }
   ],
   "name": "Architecture",
