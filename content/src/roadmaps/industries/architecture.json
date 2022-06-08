@@ -37,12 +37,18 @@
     },
     {
       "step": 3,
-      "weight": 20,
+      "weight": 30,
       "task": "authorization-architect-firm"
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "architect-license"
     }
   ],
   "name": "Architecture",
   "isLiquorLicenseApplicable": false,
+  "isEnabled": true,
   "additionalSearchTerms": "architect, engineer",
   "id": "architecture",
   "description": "Plans, designs, and oversees the construction of buildings"
