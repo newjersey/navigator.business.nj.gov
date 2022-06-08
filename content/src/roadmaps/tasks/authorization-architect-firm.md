@@ -22,15 +22,15 @@ New architecture firms must obtain a certificate of authorization prior to opera
 ### Application Requirements
 
 * Business name
-* Business addresses (including any satellite office)
+* Business addresses (including any satellite offices)
 * Name and license number of the architect in charge of the principal office
 * Name and license number of the architects in charge of each additional office
-* Name, license number, address, and signature of every `Responsible Charge|responsible-charge` 
+* Name, license number, and address of every `Responsible Charge|responsible-charge` 
 * Name, address, license number of every officer, director, manager, and stockholder in your firm
 * Number of shares issued (if the firm is a Corporation)
 * Pay any fees associated with the application
 
-**Note:** The application will require a signature from every officer, director, manager, and stockholder in your firm and the CEO.
+**Note:** The application will require signatures from every officer, director, manager, and stockholder in your firm, Responsbile Charge, and the CEO.
 
 > **Once completed, you will have:**
 >
