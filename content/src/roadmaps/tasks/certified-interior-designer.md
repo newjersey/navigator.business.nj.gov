@@ -13,15 +13,15 @@ In New Jersey, you can only legally use the title of Certified Interior Designer
 ### Eligibility Criteria
 
 * Degree in Interior Design
-* Passing grades on the Landscape Architect Registration Examination from [CLARB](www.https://www.clarb.org)
+* Passing grades on the Landscape Architect Registration Examination from the [Council of Landscape Architectural Registration Boards (CLARB)](www.https://www.clarb.org)
 
 ### Application Requirements
 
 * College transcripts (sent directly to the Committee)
 * Course description form (if your degree is not from an accredited program)
-* One professional reference
-* Two personal references
-* Supporting documentation if answered “Yes” to any questions of moral or professional character
+* Name and contact information for one professional reference
+* Name and contact information for two personal references
+* Supporting documentation if you answered “Yes” to any questions of moral or professional character
 * CLARB examination records (sent directly to the Committee)
 * Pay any fees associated with the certification
 
