@@ -1,3 +1,4 @@
+import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
   Certification,
   County,
@@ -13,6 +14,17 @@ import {
   OpportunityAgency,
 } from "@/lib/types/types";
 import matter from "gray-matter";
+
+export const convertContextualInfoMd = (contentMdContents: string): ContextualInfo => {
+  const matterResult = matter(contentMdContents);
+  const contentGrayMatter = matterResult.data as ContextualInfoGrayMatter;
+
+  return {
+    isVisible: false,
+    markdown: matterResult.content,
+    ...contentGrayMatter,
+  };
+};
 
 export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks | Filing => {
   const matterResult = matter(taskMdContents);
@@ -53,6 +65,10 @@ export const getMarkdown = (mdContents: string): MarkdownResult => {
     content: matterResult.content,
     grayMatter: matterResult.data,
   };
+};
+
+type ContextualInfoGrayMatter = {
+  header: string;
 };
 
 type TaskGrayMatter = {

@@ -1,12 +1,17 @@
-import { getMarkdown } from "@/lib/utils/markdownReader";
+import { ContextualInfo } from "@/contexts/contextualInfoContext";
+import { convertContextualInfoMd } from "@/lib/utils/markdownReader";
 
-export const fetchContextualInfo = async (id: string): Promise<string> => {
+export const fetchContextualInfo = async (id: string): Promise<ContextualInfo> => {
   try {
     const fileContent = await import(
       `@businessnjgovnavigator/content/display-content/contextual-information/${id}.md`
     );
-    return getMarkdown(fileContent.default).content;
+    return convertContextualInfoMd(fileContent.default);
   } catch {
-    return "Content Not Found";
+    return {
+      isVisible: false,
+      header: "Content Not Found",
+      markdown: "",
+    };
   }
 };

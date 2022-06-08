@@ -1,4 +1,6 @@
-## Certificate of Good Standing
+---
+header: Certificate of Good Standing
+---
 
 This document certifies that you are properly registered for taxes with the state and are able to operate as a business. If you are a foreign business, you may have multiple certificates from different states.
 
