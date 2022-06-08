@@ -68,7 +68,8 @@
     "exceedance",
     "Transformative",
     "LIHTC",
-    "NCCAOM"
+    "NCCAOM",
+    "CLARB"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

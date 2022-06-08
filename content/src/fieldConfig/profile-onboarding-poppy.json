@@ -17,7 +17,7 @@
         "header": "## Business Status",
         "radioButtonStartingText": "Starting a New Jersey-based business",
         "radioButtonOwningText": "A New Jersey business already up and running",
-        "radioButtonForeignText": "An out-of-state business starting in New Jersey",
+        "radioButtonForeignText": "An out-of-state business",
         "errorTextRequired": "Please select whether you have an existing business.",
         "description": "Are you:"
       },
