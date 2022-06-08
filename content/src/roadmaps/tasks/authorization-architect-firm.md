@@ -16,20 +16,21 @@ New architecture firms must obtain a certificate of authorization prior to opera
 
 * The firm must be the Sole Proprietorship of a licensed architect, or
 * A General Partnership of licensed architects, or
-* A General Partnership of closely `allied professionals|allied-professionals` including at least one licensed architect,or
-- A Corporation
+* A General Partnership of closely `allied professionals|allied-professionals` including at least one licensed architect, or
+* A Corporation
 
 ### Application Requirements
 
 * Business name
-- Business address
+* Business address
 * Business address of any satellite office
 * Name and license number of the architect in charge of the principal office
 * Name and license number of the architects in charge of each additional office
 * Name, license number, address, and signature of every `Responsible Charge|responsible-charge` 
-* Name and signature of the CEO
 * Name, address, license number (if any), and signature of every officer, director, manager, and stockholder in your firm
 * Number of shares issued (if any)
+* The form will require a signature from the CEO
+*Pay any fees associated with the application
 
 > **Once completed, you will have:**
 >
