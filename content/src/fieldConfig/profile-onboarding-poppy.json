@@ -1,5 +1,13 @@
 {
   "profileDefaults": {
+    "businessPersona": {
+      "header": "## Business Status",
+      "radioButtonStartingText": "Starting a New Jersey-based business",
+      "radioButtonOwningText": "A New Jersey business already up and running",
+      "radioButtonForeignText": "An out-of-state business",
+      "errorTextRequired": "Please select whether you have an existing business.",
+      "description": "Are you:"
+    },
     "STARTING": {
       "legalStructureId": {
         "errorTextRequired": "Please select a legal structure.",
@@ -12,14 +20,6 @@
           "s-corporation": "A Corporation with an S Corporation Tax Designation (S Corp) is similar to a C Corporation except that the business is not taxed separately from the owners. S Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. You may elect S Corp status separately after you form and register for tax and employer purposes. [Learn more](https://business.nj.gov/pages/s-corporation-s-corp)",
           "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more](https://business.nj.gov/pages/sole-proprietorship)"
         }
-      },
-      "businessPersona": {
-        "header": "## Business Status",
-        "radioButtonStartingText": "Starting a New Jersey-based business",
-        "radioButtonOwningText": "A New Jersey business already up and running",
-        "radioButtonForeignText": "An out-of-state business",
-        "errorTextRequired": "Please select whether you have an existing business.",
-        "description": "Are you:"
       },
       "foreignBusinessType": {
         "header": "",
