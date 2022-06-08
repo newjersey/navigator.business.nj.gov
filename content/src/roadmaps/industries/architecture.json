@@ -42,13 +42,13 @@
     },
     {
       "step": 3,
-      "weight": 30,
-      "task": "authorization-architect-firm"
+      "weight": 25,
+      "task": "architect-are-exam"
     },
     {
       "step": 3,
-      "weight": 25,
-      "task": "architect-are-exam"
+      "weight": 30,
+      "task": "authorization-architect-firm"
     }
   ],
   "name": "Architecture",
