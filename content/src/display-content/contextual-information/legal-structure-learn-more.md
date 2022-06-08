@@ -1,4 +1,6 @@
-### Legal Structures
+---
+header: Legal Structures
+---
 
 Your business' legal structure (also known as business structure) defines your taxes, personal liability, partnerships, and registration requirements. Below is a list of common legal structures, it is not an exhaustive list and it does not serve as legal or tax advice.
 

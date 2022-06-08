@@ -1,4 +1,6 @@
-## Construction Permits
+---
+header: Construction Permits
+---
 
 If you're planning to do any construction, alteration, or repair work, you may need a building permit. Building permits are issued by your local government's Building/Construction Department and help ensure any work done in your area conforms with building code and zoning requirements that protect everyone's safety.
 

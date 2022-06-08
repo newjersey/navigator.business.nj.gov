@@ -1,7 +1,6 @@
 ---
+header: Are You a Home Improvement Contractor?
 ---
-
-## Are You a Home Improvement Contractor?
 
 Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing residential or noncommercial properties.
 

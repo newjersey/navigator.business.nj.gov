@@ -1760,6 +1760,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
 

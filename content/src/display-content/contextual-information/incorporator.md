@@ -1,5 +1,6 @@
 ---
 slug: incorporator
+header: Incorporator
 ---
-### Incorporator
-An incorporator is any person with permission from the business owner(s)  to complete and submit the business formation form.
+
+An incorporator is any person with permission from the business owner(s) to complete and submit the business formation form.

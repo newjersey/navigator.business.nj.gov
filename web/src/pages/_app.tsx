@@ -135,6 +135,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [sectionCompletion, setSectionCompletion] = useState<SectionCompletion | undefined>(undefined);
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
+    header: "",
     markdown: "",
   });
   const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);

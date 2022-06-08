@@ -6,7 +6,7 @@ import React, { forwardRef, ReactElement } from "react";
 // eslint-disable-next-line react/display-name
 export const ContextInfoElement = forwardRef(
   (
-    props: { isVisible: boolean; markdown: string; close?: () => void },
+    props: { isVisible: boolean; header: string; markdown: string; close?: () => void },
     ref?: React.LegacyRef<any>
   ): ReactElement => (
     <aside
@@ -22,6 +22,7 @@ export const ContextInfoElement = forwardRef(
       >
         <Icon className="font-sans-xl">close</Icon>
       </button>
+      <h3>{props.header}</h3>
       <Content>{props.markdown}</Content>
     </aside>
   )

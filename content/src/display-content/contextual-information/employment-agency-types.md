@@ -1,7 +1,6 @@
 ---
+header: Employment and Personnel Services
 ---
-
-## Employment and Personnel Services
 
 New Jersey’s Division of Consumer Affairs regulates employment agency services and divides them into several categories:
 

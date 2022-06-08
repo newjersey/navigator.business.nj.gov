@@ -1,8 +1,7 @@
 ---
 slug: socialequitybusiness-cannabis
+header: Social Equity Business or a Legacy Cannabis Application
 ---
-
-### Social Equity Business or a Legacy Cannabis Application
 
 A Social Equity Business (SEB) must have more than 50% of its ownership meet one of two criteria:
 

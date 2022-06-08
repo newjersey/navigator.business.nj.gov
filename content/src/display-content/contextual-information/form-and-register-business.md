@@ -1,10 +1,12 @@
-### Form and Register Your Business
+---
+header: Form and Register Your Business
+---
 
-All businesses need to form and register with the State of New Jersey to legally operate in the State. 
+All businesses need to form and register with the State of New Jersey to legally operate in the State.
 
 If you've fully [registered your business](https://business.nj.gov/pages/register-your-business) you should have:
 
-- `EIN|ein` 
+- `EIN|ein`
 - `Entity ID|entity-id` (Only required for LLC, C corp, LP and LLP)
 - `NJ Tax ID|tax-id`
 
