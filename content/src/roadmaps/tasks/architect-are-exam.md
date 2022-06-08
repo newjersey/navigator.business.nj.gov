@@ -17,7 +17,7 @@ You can only practice as an architect once you have passed the Architect’s Reg
 - An approved Architect License application
 
 ### Application Requirements
-Pay any associated fees
+- Pay any associated fees
 
 >**Once completed, you will have:**
-- A license approval letter, a registration wall certificate, and seal press form
+>- A license approval letter, a registration wall certificate, and seal press form
