@@ -31,7 +31,11 @@ export const IndustryDropdown = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const IndustriesOrdered: Industry[] = orderBy(Industries, [isIndustryIdGeneric, "name"], ["desc", "asc"]);
+  const IndustriesOrdered: Industry[] = orderBy(
+    Industries,
+    [isIndustryIdGeneric, "name"],
+    ["desc", "asc"]
+  ).filter((x) => x.isEnabled || process.env.SHOW_DISABLED_INDUSTRIES == "true");
 
   const onIndustryIdChange = (industryId: string | undefined) => {
     let homeBasedBusiness = true;

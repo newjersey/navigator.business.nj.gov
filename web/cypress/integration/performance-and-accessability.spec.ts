@@ -306,9 +306,7 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
       });
 
       // check roadmap
-      cy.get('[data-industry="e-commerce"]').should("exist");
-      cy.get('[data-legal-structure="general-partnership"]').should("exist");
-      cy.get('[data-municipality="Absecon"]').should("exist");
+      onRoadmapPage.getEditProfileLink().should("exist");
 
       cy.lighthouse(undefined, lighthouseDesktopConfig);
       cy.pa11y(defaultPa11yThresholds);

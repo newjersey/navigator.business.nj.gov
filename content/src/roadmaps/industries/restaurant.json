@@ -5,6 +5,7 @@
   "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,

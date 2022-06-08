@@ -5,6 +5,7 @@
   "defaultSectorId": "cannabis",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,

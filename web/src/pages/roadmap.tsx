@@ -1,11 +1,10 @@
-import { Content } from "@/components/Content";
+import { Header } from "@/components/Header";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { GraduationBox } from "@/components/roadmap/GraduationBox";
-import { MiniProfile } from "@/components/roadmap/MiniProfile";
 import { RoadmapSidebarList } from "@/components/roadmap/RoadmapSidebarList";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
@@ -17,7 +16,7 @@ import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
-import { getSectionNames, templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getSectionNames, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -30,7 +29,7 @@ interface Props {
 
 const RoadmapPage = (props: Props): ReactElement => {
   useAuthAlertPage();
-  const { userData, error } = useUserData();
+  const { userData } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
@@ -61,36 +60,14 @@ const RoadmapPage = (props: Props): ReactElement => {
     setSuccessAlert(success === "true");
   }, [router.isReady, router.query.success]);
 
-  const getHeader = (): string => {
-    return userData?.user.name
-      ? templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
-          name: userData.user.name,
-        })
-      : Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing;
-  };
-
   const isForeign = (): boolean => {
     return userData?.profileData.businessPersona === "FOREIGN";
   };
 
   const renderRoadmap = (
     <div className="margin-top-6 desktop:margin-top-0">
-      <div className="margin-bottom-205 bg-white">
-        <h1 className="h1-styling-large break-word">{getHeader()}</h1>
-      </div>
       <UserDataErrorAlert />
-      {(!error || error !== "NO_DATA") && (
-        <>
-          <div className="allow-long usa-intro bg-white">
-            <Content>{props.displayContent.contentMd}</Content>
-          </div>
-          {!userData ? (
-            <LoadingIndicator />
-          ) : (
-            !isForeign() && <MiniProfile profileData={userData.profileData} />
-          )}
-        </>
-      )}
+      <Header />
       <div className="margin-top-3">
         {!roadmap ? (
           <LoadingIndicator />

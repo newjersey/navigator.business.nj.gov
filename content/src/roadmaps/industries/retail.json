@@ -5,6 +5,7 @@
   "defaultSectorId": "retail-trade-and-ecommerce",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "isEnabled": true,
   "roadmapSteps": [
     {
       "step": 1,

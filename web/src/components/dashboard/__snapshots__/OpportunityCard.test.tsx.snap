@@ -32,7 +32,7 @@ exports[`OpportunityCard matches the layout 1`] = `
             type="button"
           >
             <div
-              class="display-flex flex-row flex-justify-center flex-align-center"
+              class="display-flex flex-row flex-justify-center flex-align-center "
             >
               <div
                 class="fdr fac"
@@ -115,7 +115,7 @@ exports[`OpportunityCard matches the layout when status is first come first serv
             type="button"
           >
             <div
-              class="display-flex flex-row flex-justify-center flex-align-center"
+              class="display-flex flex-row flex-justify-center flex-align-center "
             >
               <div
                 class="fdr fac"
@@ -203,7 +203,7 @@ exports[`OpportunityCard matches the layout when status is rolling application 1
             type="button"
           >
             <div
-              class="display-flex flex-row flex-justify-center flex-align-center"
+              class="display-flex flex-row flex-justify-center flex-align-center "
             >
               <div
                 class="fdr fac"
@@ -291,7 +291,7 @@ exports[`OpportunityCard matches the layout with a due date 1`] = `
             type="button"
           >
             <div
-              class="display-flex flex-row flex-justify-center flex-align-center"
+              class="display-flex flex-row flex-justify-center flex-align-center "
             >
               <div
                 class="fdr fac"

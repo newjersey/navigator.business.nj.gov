@@ -21,6 +21,7 @@ module.exports = withBundleAnalyzer({
     MYNJ_PROFILE_LINK: process.env.MYNJ_PROFILE_LINK,
     CHECK_DEAD_LINKS: process.env.CHECK_DEAD_LINKS,
     AB_TESTING_EXPERIENCE_B_PERCENTAGE: process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE,
+    SHOW_DISABLED_INDUSTRIES: process.env.SHOW_DISABLED_INDUSTRIES ?? "false",
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {
