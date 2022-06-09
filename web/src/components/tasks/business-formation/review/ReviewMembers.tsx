@@ -51,7 +51,7 @@ export const ReviewMembers = (): ReactElement => {
                   : Config.businessFormationDefaults.reviewPageMemberNameLabel}
               </Content>
             </div>
-            <div className={index !== 0 ? "tablet:margin-top-1" : ""}>{member.name}</div>
+            <div className={index !== 0 ? "tablet:margin-top-2" : ""}>{member.name}</div>
           </div>
           {isCorp && (
             <>

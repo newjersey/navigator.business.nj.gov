@@ -30,19 +30,19 @@ export const OnboardingCannabisLicense = (): ReactElement => {
           row
         >
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="cannabis-license-conditional"
             value="CONDITIONAL"
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].cannabisLicense.radioButtonConditionalText}
           />
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="cannabis-license-annual"
             value="ANNUAL"
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].cannabisLicense.radioButtonAnnualText}
           />
         </RadioGroup>

@@ -21,7 +21,9 @@ export const ReportAnIssueBar = (): ReactElement => {
       >
         <div className="text-base-darkest flex flex-align-center flex-justify-center">
           {makeButtonIcon("bug-error-dark")}
-          <span className="text-left text-bold">{Config.reportAnIssueBar.reportAnIssueBarText}</span>
+          <span className="text-left text-bold underline">
+            {Config.reportAnIssueBar.reportAnIssueBarText}
+          </span>
         </div>
       </Button>
 

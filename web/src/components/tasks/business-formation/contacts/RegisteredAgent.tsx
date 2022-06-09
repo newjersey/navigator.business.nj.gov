@@ -117,7 +117,7 @@ export const RegisteredAgent = (): ReactElement => {
   return (
     <>
       <Content>{state.displayContent.agentNumberOrManual.contentMd}</Content>
-      <div className="margin-bottom-2 margin-top-105" id="registeredAgent">
+      <div className="margin-bottom-2" id="registeredAgent">
         <div className="form-input">
           <FormControl fullWidth>
             <RadioGroup
@@ -129,22 +129,24 @@ export const RegisteredAgent = (): ReactElement => {
             >
               <FormControlLabel
                 labelPlacement="end"
+                style={{ marginTop: ".75rem", alignItems: "flex-start" }}
                 data-testid="registered-agent-number"
                 value="NUMBER"
-                control={<Radio color="primary" />}
+                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
                 label={state.displayContent.agentNumberOrManual.radioButtonNumberText}
               />
               <FormControlLabel
                 labelPlacement="end"
                 data-testid="registered-agent-manual"
+                style={{ marginTop: ".75rem", alignItems: "flex-start" }}
                 value="MANUAL_ENTRY"
-                control={<Radio color="primary" />}
+                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
                 label={state.displayContent.agentNumberOrManual.radioButtonManualText}
               />
             </RadioGroup>
           </FormControl>
         </div>
-        <div className="margin-top-1">
+        <div className="margin-top-2">
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
               <BusinessFormationTextField
