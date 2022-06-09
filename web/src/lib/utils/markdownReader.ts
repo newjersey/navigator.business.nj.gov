@@ -103,6 +103,8 @@ type FundingGrayMatter = {
   preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];
+  programPurpose: string;
+  agencyContact: string;
 };
 
 type CertificationGrayMatter = {

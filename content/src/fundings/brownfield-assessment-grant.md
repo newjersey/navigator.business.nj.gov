@@ -1,4 +1,5 @@
 ---
+fileName: brownfield-assessment-grant
 urlSlug: brownfield-assessment-grant
 name: Brownfield Assessment Grant
 id: brownfield-assessment-grant
@@ -20,6 +21,8 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Brownfield Assessment Grant Program provides grant money to support site assessment at any eligible brownfield site in NJ.

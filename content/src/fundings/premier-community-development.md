@@ -1,4 +1,5 @@
 ---
+fileName: premier-community-development
 urlSlug: premier-community-development
 name: Premier Community Development Financial Institution (CDFI) Program
 id: premier-community-development-financial-institution-cdfi-program
@@ -21,6 +22,8 @@ sector:
   - digital-and-print-media
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Premier Community Development Financial Institutions (CDFI) Program provides qualified small businesses and not-for-profit organizations loan participation, loan guarantees, and a line of credit guaranteed in partnership with designated Premier CDFIs.

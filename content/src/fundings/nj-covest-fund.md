@@ -1,4 +1,5 @@
 ---
+fileName: nj-covest-fund
 urlSlug: nj-covest-fund
 name: NJ CoVest Fund
 id: nj-covest-fund
@@ -22,6 +23,8 @@ sector:
   - Life Sciences
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The NJ CoVest Fund provides seed funding to New Jersey technology and life science companies to help bridge the funding gap between product development and commercialization.

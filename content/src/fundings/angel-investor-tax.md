@@ -1,4 +1,5 @@
 ---
+fileName: angel-investor-tax
 urlSlug: angel-investor-tax
 name: Angel Investor Tax Credit Program
 id: angel-investor-tax-credit-program
@@ -25,6 +26,8 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The New Jersey Angel Investor Tax Credit Program establishes refundable tax credits for qualified investments in New Jersey emerging technology businesses to stimulate investment in the innovation economy.

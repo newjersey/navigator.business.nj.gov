@@ -1,4 +1,5 @@
 ---
+fileName: small-business-improvement
 urlSlug: small-business-improvement
 name: Small Business Improvement Grant
 id: small-business-improvement-grant
@@ -21,14 +22,18 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Small Business Improvement Grant offers reimbursement for costs associated with completed building improvements or purchased new furniture, fixtures and equipment made since March 9th, 2020.
 
 ---
-### Eligibility
-* Small businesses and nonprofits in the process of making improvements to their business with a minimum expense of $5,000
 
->**Benefits** 
+### Eligibility
+
+- Small businesses and nonprofits in the process of making improvements to their business with a minimum expense of $5,000
+
+> **Benefits**
 >
 > Grants are equal to 50% of eligible total project costs up to $50,000

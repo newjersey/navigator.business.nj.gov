@@ -223,6 +223,8 @@ export type Funding = {
   preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];
+  programPurpose: string;
+  agencyContact: string;
 };
 
 export type Certification = {

@@ -1,4 +1,5 @@
 ---
+fileName: new-jersey-founders
 urlSlug: new-jersey-founders
 name: New Jersey Founders & Funders
 id: new-jersey-founders-funders
@@ -23,6 +24,8 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 Founders & Funders enables early-stage New Jersey technology and life sciences companies to meet potential investors in 10-minute, one-on-one “speed dating” sessions to discuss strategy, business models, and funding opportunities.
@@ -31,7 +34,7 @@ To register for this opportunity, contact: NJFoundersFunders@njeda.com
 
 ---
 
-**Eligibility:**
+### Eligibility
 
 - Company must be registered to do business in New Jersey and located in New Jersey
 - Company is able to demonstrate some signs of financial or operational traction
