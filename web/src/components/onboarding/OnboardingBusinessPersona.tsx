@@ -32,29 +32,29 @@ export const OnboardingBusinessPersona = (): ReactElement => {
         >
           <FormControlLabel
             aria-label="Business Status - Starting"
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="business-persona-starting"
             value="STARTING"
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults.businessPersona.radioButtonStartingText}
           />
           <FormControlLabel
             aria-label="Business Status - Owning"
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="business-persona-owning"
             value="OWNING"
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults.businessPersona.radioButtonOwningText}
           />
           <FormControlLabel
             aria-label="Business Status - Foreign"
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="business-persona-foreign"
             value="FOREIGN"
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults.businessPersona.radioButtonForeignText}
           />
         </RadioGroup>

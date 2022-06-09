@@ -40,19 +40,19 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
           row
         >
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="microbusiness-radio-true"
             value={true}
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={<Content>{Config.cannabisApplyForLicense.microbusinessRadioYes}</Content>}
           />
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="microbusiness-radio-false"
             value={false}
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={<Content>{Config.cannabisApplyForLicense.microbusinessRadioNo}</Content>}
           />
         </RadioGroup>

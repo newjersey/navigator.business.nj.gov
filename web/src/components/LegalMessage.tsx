@@ -5,7 +5,7 @@ import { ReactElement } from "react";
 
 export const LegalMessage = (): ReactElement => {
   return (
-    <div className="bg-base-lightest text-justify">
+    <div className="bg-base-lightest">
       <div className="grid-container-widescreen desktop:padding-x-7">
         <hr className="margin-0" />
         <p className="line-height-body-2 padding-y-2 margin-top-0">

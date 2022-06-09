@@ -37,19 +37,19 @@ export const OnboardingHomeBasedBusiness = (props: Props): ReactElement => {
           row
         >
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="home-based-business-true"
             value={true}
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].homeBased.radioButtonYesText}
           />
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="home-based-business-false"
             value={false}
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].homeBased.radioButtonNoText}
           />
         </RadioGroup>
