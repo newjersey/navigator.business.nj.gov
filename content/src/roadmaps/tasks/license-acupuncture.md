@@ -25,4 +25,4 @@ You will need an Acupuncturist license **if you** plan to offer services as an a
 
 > **Once completed, you will have:**
 >
-> - An acupuncturist license number sent to you via mail at the address in your application
+> - An acupuncturist license number
