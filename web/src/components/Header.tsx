@@ -21,22 +21,22 @@ export const Header = () => {
 
   const getHeader = (): string => {
     return userData?.user.name
-      ? templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
+      ? templateEval(Config.headerDefaults.defaultHeaderText, {
           name: userData.user.name,
         })
-      : Config.roadmapDefaults.roadmapTitleBusinessAndUserMissing;
+      : Config.headerDefaults.noUserNameHeaderText;
   };
 
   const getButtonText = () => {
     if (state.isAuthenticated === "FALSE" || state.isAuthenticated === "UNKNOWN") {
-      return Config.roadmapDefaults.guestModeToProfileButtonText;
+      return Config.headerDefaults.guestModeToProfileButtonText;
     }
 
     if (
       (userData?.profileData.businessName === undefined || userData?.profileData.businessName === "") &&
       state.isAuthenticated === "TRUE"
     ) {
-      return Config.roadmapDefaults.genericToProfileButtonText;
+      return Config.headerDefaults.genericToProfileButtonText;
     }
 
     if (userData?.profileData.businessName && state.isAuthenticated === "TRUE") {
@@ -59,7 +59,7 @@ export const Header = () => {
       </Button>
       <span className="vl margin-x-105 border-right-base" />
       <span className="text-base">{getCurrentDateInNewJersey().format("MMMM DD YYYY")}</span>{" "}
-      <span className="text-base">{Config.roadmapDefaults.newJerseyDateBodyText}</span>
+      <span className="text-base">{Config.headerDefaults.newJerseyDateBodyText}</span>
     </div>
   );
 };

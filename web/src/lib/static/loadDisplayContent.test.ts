@@ -59,10 +59,9 @@ describe("loadDisplayContent", () => {
 
   describe("loadDashboardDisplayContent", () => {
     it("returns dashboard content from markdown", () => {
-      const introTextContent = "### I am a header\n\nI am a description";
+      const opportunityTextContent = "### I am a header\n\nI am a description";
 
-      mockedFs.readFileSync.mockReturnValue(introTextContent);
-      expect(loadDashboardDisplayContent().introTextMd).toEqual("### I am a header\n\nI am a description");
+      mockedFs.readFileSync.mockReturnValue(opportunityTextContent);
       expect(loadDashboardDisplayContent().opportunityTextMd).toEqual(
         "### I am a header\n\nI am a description"
       );
