@@ -1,4 +1,3 @@
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
@@ -9,10 +8,9 @@ import {
   generateProfileData,
   generateTaxFiling,
   generateTaxFilingData,
-  generateUser,
   generateUserData,
 } from "@/test/factories";
-import { markdownToText, withAuthAlert } from "@/test/helpers";
+import { markdownToText } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -43,7 +41,6 @@ const setMobileScreen = (value: boolean): void => {
 
 describe("dashboard", () => {
   const emptyDisplayContent: DashboardDisplayContent = {
-    introTextMd: "",
     opportunityTextMd: "",
   };
   const emptyOperateRef = {};
@@ -93,28 +90,6 @@ describe("dashboard", () => {
       </WithStatefulUserData>
     );
   };
-
-  it("includes user full name in header", () => {
-    useMockUserData({ user: generateUser({ name: "Ada Lovelace" }) });
-    renderPage({});
-    const expectedHeaderText = templateEval(Config.dashboardDefaults.headerText, { name: "Ada Lovelace" });
-    expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
-  });
-
-  it("greets user when name is undefined", () => {
-    useMockUserData({ user: generateUser({ name: undefined }) });
-    renderPage({});
-    expect(screen.getByText(Config.dashboardDefaults.missingNameHeaderText)).toBeInTheDocument();
-  });
-
-  it("displays intro content", () => {
-    const content: DashboardDisplayContent = {
-      introTextMd: "*some cool text here*",
-      opportunityTextMd: "",
-    };
-    renderPage({ displayContent: content });
-    expect(screen.getByText("some cool text here")).toBeInTheDocument();
-  });
 
   it("displays filings calendar with annual report date", () => {
     const dueDate = getCurrentDate().add(2, "months");
@@ -298,48 +273,6 @@ describe("dashboard", () => {
     renderPage({ fundings });
     expect(screen.getByText("a bo")).toBeInTheDocument();
     expect(screen.getByText("a li")).toBeInTheDocument();
-  });
-
-  it("directs guest-mode user to profile when profile edit button is clicked", async () => {
-    const setModalIsVisible = jest.fn();
-    render(
-      withAuthAlert(
-        <ThemeProvider theme={createTheme()}>
-          <DashboardPage
-            displayContent={emptyDisplayContent}
-            operateReferences={emptyOperateRef}
-            fundings={[]}
-            certifications={[]}
-          />
-        </ThemeProvider>,
-        IsAuthenticated.FALSE,
-        { modalIsVisible: false, setModalIsVisible }
-      )
-    );
-    fireEvent.click(screen.getByTestId("grey-callout-link"));
-    expect(mockPush).toHaveBeenCalled();
-    expect(setModalIsVisible).not.toHaveBeenCalled();
-  });
-
-  it("directs authenticated user to profile when profile edit button is clicked", async () => {
-    const setModalIsVisible = jest.fn();
-    render(
-      withAuthAlert(
-        <ThemeProvider theme={createTheme()}>
-          <DashboardPage
-            displayContent={emptyDisplayContent}
-            operateReferences={emptyOperateRef}
-            fundings={[]}
-            certifications={[]}
-          />
-        </ThemeProvider>,
-        IsAuthenticated.TRUE,
-        { modalIsVisible: false, setModalIsVisible }
-      )
-    );
-    fireEvent.click(screen.getByTestId("grey-callout-link"));
-    expect(mockPush).toHaveBeenCalled();
-    expect(setModalIsVisible).not.toHaveBeenCalled();
   });
 
   it("shows toast alert when success query is true", () => {

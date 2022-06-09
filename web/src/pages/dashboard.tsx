@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { OpportunitiesList } from "@/components/dashboard/OpportunitiesList";
 import { UnGraduationBox } from "@/components/dashboard/UnGraduationBox";
+import { Header } from "@/components/Header";
 import { NavBar } from "@/components/navbar/NavBar";
-import { Button } from "@/components/njwds-extended/Button";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
@@ -15,7 +15,6 @@ import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -53,21 +52,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
   const mainContent = (
     <>
-      <h1>
-        {userData?.user.name
-          ? templateEval(Config.dashboardDefaults.headerText, { name: userData.user.name })
-          : Config.dashboardDefaults.missingNameHeaderText}
-      </h1>
-      <Content>{props.displayContent.introTextMd}</Content>
-      <Button
-        style="tertiary"
-        className="margin-y-2"
-        underline={true}
-        onClick={editOnClick}
-        dataTestid="grey-callout-link"
-      >
-        {Config.dashboardDefaults.editProfileText}
-      </Button>
+      <Header />
       {taxFilings.length > 0 ? (
         <>
           <FilingsCalendar taxFilings={taxFilings} operateReferences={props.operateReferences} />
