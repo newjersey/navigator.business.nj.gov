@@ -43,6 +43,7 @@
   ],
   "name": "Acupuncturist",
   "isLiquorLicenseApplicable": false,
+  "isEnabled": true,
   "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
   "id": "acupuncture",
   "description": "Complimentary therapy services involving the insertion of needles on the body"
