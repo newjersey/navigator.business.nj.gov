@@ -1,4 +1,5 @@
 ---
+fileName: sales-and-use
 urlSlug: sales-and-use
 name: Sales and Use Tax Exemption Program
 id: sales-and-use-tax-exemption-program
@@ -20,6 +21,8 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption certificate for purchases related to the construction and renovation of a new business location.

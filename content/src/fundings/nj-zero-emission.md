@@ -1,4 +1,5 @@
 ---
+fileName: nj-zero-emission
 urlSlug: nj-zero-emission
 name: NJ Zero Emission Incentive Program (NJZIP)
 id: nj-zero-emission-incentive-program-njzip
@@ -23,6 +24,8 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 NJ ZIP is a pilot program that provides vouchers to businesses and institutions in the greater Newark, Camden, New Brunswick, and Shore areas to support purchases of new, medium-duty zero-emission vehicles.

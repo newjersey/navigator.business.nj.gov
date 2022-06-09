@@ -1,4 +1,5 @@
 ---
+fileName: hazardous-discharge-site
 urlSlug: hazardous-discharge-site
 name: Hazardous Discharge Site Remediation Fund
 id: hazardous-discharge-site-remediation-fund
@@ -25,6 +26,8 @@ sector:
   - Waste Management
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Hazardous Discharge Site Remediation Fund (HDSRF) provides funding for the investigation, remediation, and cleanup of contaminated and underutilized sites.

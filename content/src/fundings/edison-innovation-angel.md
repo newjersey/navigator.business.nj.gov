@@ -1,4 +1,5 @@
 ---
+fileName: edison-innovation-angel
 urlSlug: edison-innovation-angel
 name: Edison Innovation Angel Growth Fund
 id: edison-innovation-angel-growth-fund
@@ -22,6 +23,8 @@ sector:
   - Life Sciences
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 Edison Innovation Angel Growth Fund provides funding to early-stage, emerging technology businesses matched with an outside equity investor within the last 90 days.

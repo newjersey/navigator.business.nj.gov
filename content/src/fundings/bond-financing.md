@@ -1,4 +1,5 @@
 ---
+fileName: bond-financing
 urlSlug: bond-financing
 name: Bond Financing
 id: bond-financing
@@ -20,6 +21,8 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Bond Financing program provides bond financing to qualified manufacturing companies, 501(c)(3) nonprofit organizations, and other facilities in New Jersey.

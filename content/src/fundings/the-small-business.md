@@ -1,4 +1,5 @@
 ---
+fileName: the-small-business
 urlSlug: the-small-business
 name: The Small Business Bonding Readiness Assistance Program
 id: the-small-business-bonding-readiness-assistance-program
@@ -20,6 +21,8 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Small Business Bonding Readiness Assistance Program prepares small, minority-, and women-owned businesses to obtain surety bonds, which will make them more competitive when applying for state and federal government contracts.

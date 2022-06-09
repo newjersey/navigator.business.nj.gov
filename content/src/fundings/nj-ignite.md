@@ -1,4 +1,5 @@
 ---
+fileName: nj-ignite
 urlSlug: nj-ignite
 name: NJ Ignite
 id: nj-ignite
@@ -27,6 +28,8 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.

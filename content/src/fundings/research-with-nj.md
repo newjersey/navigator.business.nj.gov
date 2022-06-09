@@ -1,4 +1,5 @@
 ---
+fileName: research-with-nj
 urlSlug: research-with-nj
 name: Research with NJ
 id: research-with-nj
@@ -27,6 +28,8 @@ sector:
   - "Transportation and Warehousing "
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 Research with NJ is a free online portal that showcases New Jersey’s experts in science, technology, engineering, and mathematics (STEM). It provides local, national, and international commercial enterprises, ranging from entrepreneurs and start-ups to global businesses, with insight into groundbreaking research taking place within the state’s network of research universities.

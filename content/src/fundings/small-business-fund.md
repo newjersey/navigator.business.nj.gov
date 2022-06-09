@@ -1,4 +1,5 @@
 ---
+fileName: small-business-fund
 urlSlug: small-business-fund
 name: Small Business  Fund
 id: small-business-fund
@@ -20,6 +21,8 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Small Business Fund provides access to financing to credit-worthy small, minority-owned, and women-owned businesses and nonprofits in New Jersey.
