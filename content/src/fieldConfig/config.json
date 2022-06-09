@@ -266,7 +266,6 @@
     "backToRoadmapText": "Go back to your personalized ${link}.",
     "calendarLegalText": "This calendar is not a complete list of your obligations as a business.",
     "fundingTagText": "Funding",
-    "missingNameHeaderText": "Hello!",
     "calendarHeader": "Upcoming Filings",
     "editProfileText": "Edit My Profile",
     "certificationTagText": "Certification",
@@ -274,7 +273,6 @@
     "emptyOpportunitiesHeader": "No matching opportunities yet.",
     "hiddenOpportunitiesHeader": "View Hidden Opportunities (${count})",
     "emptyCalendarTitleText": "### Looks like you do not have any filings due!",
-    "headerText": "Hello, ${name}",
     "emptyCalendarBodyText": "If you are an LLC, C Corp, L,P, or LLP, you need to tell us your business formation date so we can tell you when your next filing is due. You can do this by [updating your profile](#).",
     "opportunitiesHeader": "Opportunities",
     "opportunitiesCount": "${count} Total",
@@ -355,14 +353,19 @@
     "stepXTemplate": "(Step ${currentPage})",
     "nextButtonText": "Next"
   },
+  "headerDefaults": {
+    "noUserNameHeaderText": "Hello!",
+    "defaultHeaderText": "Hello, ${name}",
+    "newJerseyDateBodyText": "ET",
+    "guestModeToProfileButtonText": "Guest Account",
+    "genericToProfileButtonText": "Business Profile"
+  },
   "roadmapDefaults": {
-    "roadmapTitleBusinessAndUserMissing": "Hello!",
     "congratulatorModalBody": "You can now start your",
     "graduationModalContinueButtonText": "Continue",
     "sidebarHeading": "For You",
     "congratulatorModalLinkText": "tasks.",
     "loadingText": "Loading...",
-    "roadmapTitleTemplateForUserName": "Hello, ${name}",
     "calendarFilingDueDateLabel": "Due",
     "graduationButtonText": "Show Me Funding Opportunities",
     "congratulatorModalHeader": "You reached a crucial milestone as a business.",
@@ -370,10 +373,7 @@
     "graduationModalCancelButtonText": "Cancel",
     "graduationModalTitle": "Tell us more about your business",
     "graduationHeader": "Finished setting up your business?",
-    "graduationBodyText": "If your business is up and running, you can now also use the Navigator to learn about filings, certifications, funding opportunities, and more.",
-    "newJerseyDateBodyText": "ET",
-    "guestModeToProfileButtonText": "Guest Account",
-    "genericToProfileButtonText": "Business Profile"
+    "graduationBodyText": "If your business is up and running, you can now also use the Navigator to learn about filings, certifications, funding opportunities, and more."
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",

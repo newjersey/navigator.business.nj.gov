@@ -1,6 +1,6 @@
 export class DashboardPage {
   getEditProfileLink = () => {
-    return cy.get('[data-testid="grey-callout-link"]');
+    return cy.get('[data-testid="header-link-to-profile"]');
   };
 
   clickEditProfileLink = () => {

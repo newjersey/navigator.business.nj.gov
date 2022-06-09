@@ -53,7 +53,7 @@ describe("<Header />", () => {
     useMockProfileData({ businessName: "Business Name" });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
 
-    fireEvent.click(screen.getByText(Config.roadmapDefaults.guestModeToProfileButtonText));
+    fireEvent.click(screen.getByText(Config.headerDefaults.guestModeToProfileButtonText));
 
     expect(mockPush).toHaveBeenCalledWith("/profile");
   });
@@ -62,7 +62,7 @@ describe("<Header />", () => {
     useMockProfileData({ businessName: "" });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
 
-    fireEvent.click(screen.getByText(Config.roadmapDefaults.genericToProfileButtonText));
+    fireEvent.click(screen.getByText(Config.headerDefaults.genericToProfileButtonText));
 
     expect(mockPush).toHaveBeenCalledWith("/profile");
   });
@@ -71,7 +71,7 @@ describe("<Header />", () => {
     useMockProfileData({ businessName: undefined });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
 
-    fireEvent.click(screen.getByText(Config.roadmapDefaults.genericToProfileButtonText));
+    fireEvent.click(screen.getByText(Config.headerDefaults.genericToProfileButtonText));
 
     expect(mockPush).toHaveBeenCalledWith("/profile");
   });
@@ -97,7 +97,21 @@ describe("<Header />", () => {
     });
     renderHeader();
 
-    const expectedHeaderText = templateEval(Config.roadmapDefaults.roadmapTitleTemplateForUserName, {
+    const expectedHeaderText = templateEval(Config.headerDefaults.defaultHeaderText, {
+      name: "Ada Lovelace",
+    });
+    expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
+  });
+  it("greets user when name is undefined", () => {
+    useMockUserData({ user: generateUser({ name: undefined }) });
+    renderHeader();
+    expect(screen.getByText(Config.headerDefaults.noUserNameHeaderText)).toBeInTheDocument();
+  });
+
+  it("includes user full name in header", () => {
+    useMockUserData({ user: generateUser({ name: "Ada Lovelace" }) });
+    renderHeader();
+    const expectedHeaderText = templateEval(Config.headerDefaults.defaultHeaderText, {
       name: "Ada Lovelace",
     });
     expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();

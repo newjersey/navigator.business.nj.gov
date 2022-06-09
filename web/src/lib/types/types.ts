@@ -197,7 +197,6 @@ export type RoadmapDisplayContent = {
 };
 
 export type DashboardDisplayContent = {
-  introTextMd: string;
   opportunityTextMd: string;
 };
 
