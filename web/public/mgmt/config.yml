@@ -15,6 +15,795 @@ media_folder: web/public/img
 logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
 public_folder: web/public
 collections:
+  - name: "business-formation-c-corp"
+    label: "Business Formation - Corporation"
+    folder: "content/src/display-content/business-formation/c-corporation"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - {
+          label: "Radio Button Number Text",
+          name: "radioButtonNumberText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Radio Button Manual Text",
+          name: "radioButtonManualText",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "cost", name: "cost", widget: "string", required: false }
+      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+  - name: "business-formation-llc"
+    label: "Business Formation - LLC"
+    folder: "content/src/display-content/business-formation/limited-liability-company"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - {
+          label: "Radio Button Number Text",
+          name: "radioButtonNumberText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Radio Button Manual Text",
+          name: "radioButtonManualText",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "cost", name: "cost", widget: "string", required: false }
+      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+  - name: "business-formation-llp"
+    label: "Business Formation - LLP"
+    folder: "content/src/display-content/business-formation/limited-liability-partnership"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - {
+          label: "Radio Button Number Text",
+          name: "radioButtonNumberText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Radio Button Manual Text",
+          name: "radioButtonManualText",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "cost", name: "cost", widget: "string", required: false }
+      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+  - name: "business-formation-s-corp"
+    label: "Business Formation - S Corp"
+    folder: "content/src/display-content/business-formation/s-corporation"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - {
+          label: "Radio Button Number Text",
+          name: "radioButtonNumberText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Radio Button Manual Text",
+          name: "radioButtonManualText",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "cost", name: "cost", widget: "string", required: false }
+      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+  - label: "Cannabis License"
+    name: "cannabis-license"
+    delete: false
+    create: false
+    files:
+      - label: "Annual - Bottom-of-Task text"
+        name: "annual-bottom-of-task"
+        file: "content/src/display-content/cannabis-license/annual-bottom-of-task.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Annual - General Requirements"
+        name: "annual-general-requirements"
+        file: "content/src/display-content/cannabis-license/annual-general-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Conditional - Bottom-of-Task text"
+        name: "conditional-bottom-of-task"
+        file: "content/src/display-content/cannabis-license/conditional-bottom-of-task.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Conditional - General Requirements"
+        name: "conditional-general-requirements"
+        file: "content/src/display-content/cannabis-license/conditional-general-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Diversely-Owned Requirements"
+        name: "diversely-owned-requirements"
+        file: "content/src/display-content/cannabis-license/diversely-owned-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Impact-Zone Requirements"
+        name: "impact-zone-requirements"
+        file: "content/src/display-content/cannabis-license/impact-zone-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Microbusiness Requirements"
+        name: "microbusiness-requirements"
+        file: "content/src/display-content/cannabis-license/microbusiness-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Social Equity Requirements"
+        name: "social-equity-requirements"
+        file: "content/src/display-content/cannabis-license/social-equity-requirements.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Config"
+        name: "config"
+        file: "content/src/fieldConfig/config.json"
+        editor:
+          preview: false
+        fields:
+          - label: Cannabis Apply For License
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - { label: Application Questions Text, name: applicationQuestionsText, widget: text }
+              - { label: Business Size Header, name: businessSizeHeader, widget: string }
+              - {
+                  label: Microbusiness Radio Question,
+                  name: microbusinessRadioQuestion,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio Yes,
+                  name: microbusinessRadioYes,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio No,
+                  name: microbusinessRadioNo,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
+              - {
+                  label: Priority Status Text,
+                  name: priorityStatusText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Priority Status None Selected Text,
+                  name: priorityStatusNoneSelectedText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Diversely Owned Label,
+                  name: diverselyOwnedLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Diversely Owned Helper Text,
+                  name: diverselyOwnedHelperText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Impact Zone Label,
+                  name: impactZoneLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: SBE Label, name: sbeLabel, widget: string, hint: This field supports Markdown }
+              - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
+              - {
+                  label: Eligible Modal Body,
+                  name: eligibleModalBody,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
+              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
+              - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
+              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
+              - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
+              - {
+                  label: Microbusiness Application Needs,
+                  name: microbusinessApplicationNeeds,
+                  widget: string,
+                }
+              - {
+                  label: Priority Status Application Needs,
+                  name: priorityStatusApplicationNeeds,
+                  widget: string,
+                }
+              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
+              - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
+
+  - name: "cannabis-priority-status"
+    label: "Cannabis Priority Status"
+    delete: false
+    create: false
+    files:
+      - label: "Minority and Women Owned Checklist"
+        name: "cannabis-minority-and-women-owned"
+        file: "content/src/display-content/cannabis-priority-status/cannabis-minority-and-women-owned.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Social Equity Checklist"
+        name: "cannabis-social-equity"
+        file: "content/src/display-content/cannabis-priority-status/cannabis-social-equity-business.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Veteran-Owned Checklist"
+        name: "cannabis-veteran-owned"
+        file: "content/src/display-content/cannabis-priority-status/cannabis-veteran-owned.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+      - label: "Config"
+        name: "config"
+        file: "content/src/fieldConfig/config.json"
+        editor:
+          preview: false
+        fields:
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: false
+            widget: object
+            summary: "{{cannabisPriorityStatus}}"
+            fields:
+              - { label: Tab 1 - Next Button Text, name: nextButtonText, widget: string }
+              - {
+                  label: Tab 1 - None Of The Above Checkbox Label,
+                  name: noPriorityStatusCheckboxText,
+                  widget: string,
+                }
+              - { label: Tab 2 - Header Text, name: secondTabHeaderText, widget: string }
+              - { label: Tab 2 - Text Before Header, name: secondTabDescriptionText, widget: text }
+              - { label: Tab 2 - Back Button Text, name: backButtonText, widget: string }
+              - {
+                  label: Tab 2 - Complete Task Progress Button Text,
+                  name: completeTaskProgressButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Text For None Of The Above Checkbox Selection,
+                  name: noPriorityStatusText,
+                  widget: text,
+                }
+              - { label: Tab 2 - Social Equity Header Text, name: socialEquityHeaderText, widget: string }
+              - { label: Tab 2 - Social Equity Button Text, name: socialEquityButtonText, widget: string }
+              - { label: Tab 2 - Social Equity Button Link, name: socialEquityButtonLink, widget: string }
+              - { label: Tab 2 - Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
+              - { label: Tab 2 - Impact Zone Text, name: impactZoneText, widget: string }
+              - { label: Tab 2 - Veteran Header Text, name: veteranHeaderText, widget: string }
+              - {
+                  label: Tab 2 - Minority Or Women Header Text,
+                  name: minorityOrWomenHeaderText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Veteran Minority Or Women Button Text,
+                  name: certificationButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Tab 2 - Veteran Minority Or Women Button Link,
+                  name: certificationButtonLink,
+                  widget: string,
+                }
+              - { label: Tab 2 - Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
+              - {
+                  label: Tab 2 - Green Box Minority Or Women Text,
+                  name: greenBoxMinorityOrWomenText,
+                  widget: string,
+                }
+              - { label: Tab 2 - Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
+              - {
+                  label: Tab 2 - Green Box Social Equity Text,
+                  name: greenBoxSocialEquityText,
+                  widget: string,
+                }
+
+  - name: "certification-opportunities"
+    label: "Certification Opportunities Content"
+    folder: "content/src/certifications"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        multiple: true
+        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
+        required: false
+      - label: "Applicable Ownership Types"
+        name: applicableOwnershipTypes
+        widget: relation
+        multiple: true
+        required: false
+        collection: "dashboard-settings"
+        search_fields: ["arrayOfOwnershipTypes.*.name"]
+        value_field: "arrayOfOwnershipTypes.*.id"
+        display_fields: ["arrayOfOwnershipTypes.*.name"]
+      - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
+
+  - name: "archived-certification-opportunities"
+    label: "Certification Opportunities Content - Archived"
+    folder: "content/src/archived-certifications"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        multiple: true
+        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
+        required: false
+      - label: "Applicable Ownership Types"
+        name: applicableOwnershipTypes
+        widget: relation
+        multiple: true
+        required: false
+        collection: "dashboard-settings"
+        search_fields: ["arrayOfOwnershipTypes.*.name"]
+        value_field: "arrayOfOwnershipTypes.*.id"
+        display_fields: ["arrayOfOwnershipTypes.*.name"]
+      - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
+
+  - name: "contextual-information"
+    label: "Contextual Information"
+    folder: "content/src/display-content/contextual-information"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Header", name: "header", widget: "string" }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+
+  - name: "dashboard-settings"
+    label: "Dashboard Settings"
+    editor:
+      preview: false
+    files:
+      - label: "Industry Sectors"
+        name: "arrayOfSectors"
+        file: "content/src/dashboard/sectors.json"
+        fields:
+          - label: Sectors
+            name: arrayOfSectors
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Ownership Types"
+        name: "arrayOfOwnershipTypes"
+        file: "content/src/dashboard/ownershipTypes.json"
+        fields:
+          - label: Ownership Types
+            name: arrayOfOwnershipTypes
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+
+  - name: "filings"
+    label: "Filings Content"
+    folder: "content/src/filings"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+
+  - name: "funding-opportunities"
+    label: "Funding Opportunities Content"
+    folder: "content/src/fundings"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{filename}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "File Name", name: "filename", widget: "slug" }
+      - { label: "Url Slug", name: "urlSlug", widget: "string" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: "Funding Type"
+        name: "fundingType"
+        widget: "select"
+        options:
+          [
+            "tax credit",
+            "loan",
+            "grant",
+            "technical assistance",
+            "hiring and employee training support",
+            "tax exemption",
+          ]
+      - label: "Program Purpose"
+        name: "programPurpose"
+        widget: "select"
+        options: ["Retention", "Attraction", "Action Related Reward"]
+        required: false
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        multiple: true
+        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
+        required: false
+      - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
+      - label: "Publish/Stage/Archive"
+        name: "publishStageArchive"
+        widget: "select"
+        options: ["Do Not Publish"]
+        default: ""
+        required: false
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        required: true
+        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+      - label: "Program Frequency"
+        name: "programFrequency"
+        widget: "select"
+        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
+      - label: "Business Stage"
+        name: "businessStage"
+        widget: "select"
+        options: ["early-stage", "operating", "both"]
+      - {
+          label: "Employees Required",
+          name: "employeesRequired",
+          widget: "select",
+          required: true,
+          options: ["yes", "n/a"],
+        }
+      - label: "Home Based"
+        name: "homeBased"
+        widget: "select"
+        options: ["yes", "no", "unknown"]
+        default: "unknown"
+      - { label: "MWVB", name: "mwvb", widget: "string", required: false }
+      - label: "Preference for Opportunity Zone"
+        name: "preferenceForOpportunityZone"
+        widget: "select"
+        options: ["yes", "no"]
+        required: false
+      - label: "County"
+        name: "county"
+        widget: "select"
+        multiple: true
+        min: 0
+        options:
+          [
+            "All",
+            "Atlantic",
+            "Bergen",
+            "Burlington",
+            "Camden",
+            "Cape May",
+            "Cumberland",
+            "Essex",
+            "Gloucester",
+            "Hudson",
+            "Hunterdon",
+            "Mercer",
+            "Middlesex",
+            "Monmouth",
+            "Morris",
+            "Ocean",
+            "Passaic",
+            "Salem",
+            "Somerset",
+            "Sussex",
+            "Union",
+            "Warren",
+          ]
+      - label: Industry Sector
+        name: sector
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "dashboard-settings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
+      - {
+          label: "Open Date",
+          name: "openDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+      - {
+          label: "Due Date",
+          name: "dueDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+
+  - name: "archived-funding-opportunities"
+    label: "Funding Opportunities Content - Archived"
+    folder: "content/src/archived-fundings"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: "Funding Type"
+        name: "fundingType"
+        widget: "select"
+        options:
+          [
+            "tax credit",
+            "loan",
+            "grant",
+            "technical assistance",
+            "hiring and employee training support",
+            "tax exemption",
+          ]
+      - label: "Program Purpose"
+        name: "programPurpose"
+        widget: "select"
+        options: ["Retention", "Attraction", "Action Related Reward"]
+        required: false
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        multiple: true
+        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
+        required: false
+      - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
+      - label: "Publish/Stage/Archive"
+        name: "publishStageArchive"
+        widget: "select"
+        options: ["Do Not Publish"]
+        required: false
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        required: true
+        options: ["open", "opening soon", "deadline", "first come, first serve", "closed"]
+      - label: "Program Frequency"
+        name: "programFrequency"
+        widget: "select"
+        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
+      - label: "Business Stage"
+        name: "businessStage"
+        widget: "select"
+        options: ["early-stage", "operating", "both"]
+      - {
+          label: "Employees Required",
+          name: "employeesRequired",
+          widget: "select",
+          required: true,
+          options: ["yes", "n/a"],
+        }
+      - label: "Home Based"
+        name: "homeBased"
+        widget: "select"
+        options: ["yes", "no", "unknown"]
+        default: "unknown"
+      - { label: "MWVB", name: "mwvb", widget: "string", required: false }
+      - label: "Preference for Opportunity Zone"
+        name: "preferenceForOpportunityZone"
+        widget: "select"
+        options: ["yes", "no"]
+        required: false
+      - label: "County"
+        name: "county"
+        widget: "select"
+        multiple: true
+        min: 0
+        options:
+          [
+            "Atlantic",
+            "Bergen",
+            "Burlington",
+            "Camden",
+            "Cape May",
+            "Cumberland",
+            "Essex",
+            "Gloucester",
+            "Hudson",
+            "Hunterdon",
+            "Mercer",
+            "Middlesex",
+            "Monmouth",
+            "Morris",
+            "Ocean",
+            "Passaic",
+            "Salem",
+            "Somerset",
+            "Sussex",
+            "Union",
+            "Warren",
+          ]
+      - label: Industry Sector
+        name: sector
+        widget: relation
+        multiple: true
+        required: false
+        default: []
+        collection: "dashboard-settings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
+      - {
+          label: "Open Date",
+          name: "openDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+      - {
+          label: "Due Date",
+          name: "dueDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+
   - name: "config"
     label: "General Config"
     editor:
@@ -1185,57 +1974,6 @@ collections:
               - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
               - { label: Tooltip Text, name: tooltipText, widget: text }
 
-  - name: addons
-    label: Roadmap Add-ons
-    folder: "content/src/roadmaps/add-ons"
-    extension: "json"
-    identifier_field: "{{filename}}"
-    summary: "{{filename}}"
-    editor:
-      preview: false
-    fields:
-      - label: Roadmap Steps
-        name: roadmapSteps
-        widget: list
-        summary: "Step {{step}} - {{task}}"
-        fields:
-          - label: Roadmap Step
-            name: step
-            widget: relation
-            collection: "settings"
-            search_fields: ["steps.*.name"]
-            value_field: "steps.*.step_number"
-            display_fields: ["steps.*.name"]
-          - label: Weight
-            name: weight
-            widget: number
-          - label: Task
-            name: task
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
-      - label: Task Overrides
-        name: modifications
-        widget: list
-        summary: "{{taskToReplaceFilename}}"
-        fields:
-          - label: Task To Replace
-            name: taskToReplaceFilename
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
-          - label: Modified Task
-            name: replaceWithFilename
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
-
   - name: "roadmaps"
     label: "Industry Roadmaps"
     folder: "content/src/roadmaps/industries"
@@ -1337,443 +2075,6 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
-
-  - name: "tasks"
-    label: "Tasks"
-    folder: "content/src/roadmaps/tasks"
-    summary: "{{filename}} - [{{id}}] - {{name}} - {{industryId}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
-    delete: true
-    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug", name: "urlSlug", widget: "string" }
-      - { label: "Filename", name: "filename", widget: "slug", required: false }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: Industry
-        name: industryId
-        widget: "relation"
-        collection: "roadmaps"
-        search_fields: ["{{id}}"]
-        value_field: "{{id}}"
-        display_fields: ["{{id}}"]
-        required: false
-      - { label: "Required", name: "required", widget: "boolean", required: false }
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Form Name", name: "formName", widget: "string", required: false }
-
-  - name: "filings"
-    label: "Filings Content"
-    folder: "content/src/filings"
-    summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-
-  - name: "funding-opportunities"
-    label: "Funding Opportunities Content"
-    folder: "content/src/fundings"
-    summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{filename}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "File Name", name: "filename", widget: "slug" }
-      - { label: "Url Slug", name: "urlSlug", widget: "string" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: "Funding Type"
-        name: "fundingType"
-        widget: "select"
-        options:
-          [
-            "tax credit",
-            "loan",
-            "grant",
-            "technical assistance",
-            "hiring and employee training support",
-            "tax exemption",
-          ]
-      - label: "Program Purpose"
-        name: "programPurpose"
-        widget: "select"
-        options: ["Retention", "Attraction", "Action Related Reward"]
-        required: false
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
-        multiple: true
-        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
-        required: false
-      - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
-      - label: "Publish/Stage/Archive"
-        name: "publishStageArchive"
-        widget: "select"
-        options: ["Do Not Publish"]
-        default: ""
-        required: false
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        required: true
-        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
-      - label: "Program Frequency"
-        name: "programFrequency"
-        widget: "select"
-        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
-      - label: "Business Stage"
-        name: "businessStage"
-        widget: "select"
-        options: ["early-stage", "operating", "both"]
-      - {
-          label: "Employees Required",
-          name: "employeesRequired",
-          widget: "select",
-          required: true,
-          options: ["yes", "n/a"],
-        }
-      - label: "Home Based"
-        name: "homeBased"
-        widget: "select"
-        options: ["yes", "no", "unknown"]
-        default: "unknown"
-      - { label: "MWVB", name: "mwvb", widget: "string", required: false }
-      - label: "Preference for Opportunity Zone"
-        name: "preferenceForOpportunityZone"
-        widget: "select"
-        options: ["yes", "no"]
-        required: false
-      - label: "County"
-        name: "county"
-        widget: "select"
-        multiple: true
-        min: 0
-        options:
-          [
-            "All",
-            "Atlantic",
-            "Bergen",
-            "Burlington",
-            "Camden",
-            "Cape May",
-            "Cumberland",
-            "Essex",
-            "Gloucester",
-            "Hudson",
-            "Hunterdon",
-            "Mercer",
-            "Middlesex",
-            "Monmouth",
-            "Morris",
-            "Ocean",
-            "Passaic",
-            "Salem",
-            "Somerset",
-            "Sussex",
-            "Union",
-            "Warren",
-          ]
-      - label: Industry Sector
-        name: sector
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "dashboard-settings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-      - {
-          label: "Open Date",
-          name: "openDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
-      - {
-          label: "Due Date",
-          name: "dueDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
-
-  - name: "archived-funding-opportunities"
-    label: "Archived Funding Opportunities Content"
-    folder: "content/src/archived-fundings"
-    summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: "Funding Type"
-        name: "fundingType"
-        widget: "select"
-        options:
-          [
-            "tax credit",
-            "loan",
-            "grant",
-            "technical assistance",
-            "hiring and employee training support",
-            "tax exemption",
-          ]
-      - label: "Program Purpose"
-        name: "programPurpose"
-        widget: "select"
-        options: ["Retention", "Attraction", "Action Related Reward"]
-        required: false
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
-        multiple: true
-        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
-        required: false
-      - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
-      - label: "Publish/Stage/Archive"
-        name: "publishStageArchive"
-        widget: "select"
-        options: ["Do Not Publish"]
-        required: false
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        required: true
-        options: ["open", "opening soon", "deadline", "first come, first serve", "closed"]
-      - label: "Program Frequency"
-        name: "programFrequency"
-        widget: "select"
-        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
-      - label: "Business Stage"
-        name: "businessStage"
-        widget: "select"
-        options: ["early-stage", "operating", "both"]
-      - {
-          label: "Employees Required",
-          name: "employeesRequired",
-          widget: "select",
-          required: true,
-          options: ["yes", "n/a"],
-        }
-      - label: "Home Based"
-        name: "homeBased"
-        widget: "select"
-        options: ["yes", "no", "unknown"]
-        default: "unknown"
-      - { label: "MWVB", name: "mwvb", widget: "string", required: false }
-      - label: "Preference for Opportunity Zone"
-        name: "preferenceForOpportunityZone"
-        widget: "select"
-        options: ["yes", "no"]
-        required: false
-      - label: "County"
-        name: "county"
-        widget: "select"
-        multiple: true
-        min: 0
-        options:
-          [
-            "Atlantic",
-            "Bergen",
-            "Burlington",
-            "Camden",
-            "Cape May",
-            "Cumberland",
-            "Essex",
-            "Gloucester",
-            "Hudson",
-            "Hunterdon",
-            "Mercer",
-            "Middlesex",
-            "Monmouth",
-            "Morris",
-            "Ocean",
-            "Passaic",
-            "Salem",
-            "Somerset",
-            "Sussex",
-            "Union",
-            "Warren",
-          ]
-      - label: Industry Sector
-        name: sector
-        widget: relation
-        multiple: true
-        required: false
-        default: []
-        collection: "dashboard-settings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-      - {
-          label: "Open Date",
-          name: "openDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
-      - {
-          label: "Due Date",
-          name: "dueDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
-
-  - name: "certification-opportunities"
-    label: "Certification Opportunities Content"
-    folder: "content/src/certifications"
-    summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
-        multiple: true
-        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
-        required: false
-      - label: "Applicable Ownership Types"
-        name: applicableOwnershipTypes
-        widget: relation
-        multiple: true
-        required: false
-        collection: "dashboard-settings"
-        search_fields: ["arrayOfOwnershipTypes.*.name"]
-        value_field: "arrayOfOwnershipTypes.*.id"
-        display_fields: ["arrayOfOwnershipTypes.*.name"]
-      - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
-
-  - name: "roadmap-sidebar-card"
-    label: "Roadmap Sidebar Cards Content"
-    folder: "content/src/display-content/roadmap-sidebar-cards"
-    summary: "{{id}}"
-    identifier_field: "{{id}}"
-    slug: "{{id}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Header", name: "header", widget: "string", required: false }
-      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: true }
-      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
-      - {
-          label: "Image (header required)",
-          name: "imgPath",
-          widget: "select",
-          required: false,
-          options: ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg"],
-        }
-      - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Color",
-          name: "color",
-          widget: "select",
-          options: ["primary", "accent-cool-darker", "roadmap-purple"],
-        }
-      - {
-          label: "Shadow Color",
-          name: "shadowColor",
-          widget: "select",
-          options: ["roadmap-purple-light", "primary-light", "roadmap-blue-light"],
-        }
-
-  - name: "archived-certification-opportunities"
-    label: "Archived Certification Opportunities Content"
-    folder: "content/src/archived-certifications"
-    summary: "/{{urlSlug}} - [{{id}}] - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
-        multiple: true
-        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
-        required: false
-      - label: "Applicable Ownership Types"
-        name: applicableOwnershipTypes
-        widget: relation
-        multiple: true
-        required: false
-        collection: "dashboard-settings"
-        search_fields: ["arrayOfOwnershipTypes.*.name"]
-        value_field: "arrayOfOwnershipTypes.*.id"
-        display_fields: ["arrayOfOwnershipTypes.*.name"]
-      - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
-
-  - name: "contextual-information"
-    label: "Contextual Information"
-    folder: "content/src/display-content/contextual-information"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Header", name: "header", widget: "string" }
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"
@@ -2446,126 +2747,57 @@ collections:
                       - { label: "Remote Seller Alert", name: "REMOTE_SELLER", widget: "markdown" }
                       - { label: "Remote Worker Alert", name: "REMOTE_WORKER", widget: "markdown" }
                       - { label: "Nexus Alert", name: "NEXUS", widget: "markdown" }
-  - name: "business-formation-c-corp"
-    label: "Business Formation - Corporation"
-    folder: "content/src/display-content/business-formation/c-corporation"
+
+  - name: addons
+    label: Roadmap Add-ons
+    folder: "content/src/roadmaps/add-ons"
+    extension: "json"
+    identifier_field: "{{filename}}"
     summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
     editor:
-      preview: true
+      preview: false
     fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - name: "business-formation-llc"
-    label: "Business Formation - LLC"
-    folder: "content/src/display-content/business-formation/limited-liability-company"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - name: "business-formation-llp"
-    label: "Business Formation - LLP"
-    folder: "content/src/display-content/business-formation/limited-liability-partnership"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - name: "business-formation-s-corp"
-    label: "Business Formation - S Corp"
-    folder: "content/src/display-content/business-formation/s-corporation"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+      - label: Roadmap Steps
+        name: roadmapSteps
+        widget: list
+        summary: "Step {{step}} - {{task}}"
+        fields:
+          - label: Roadmap Step
+            name: step
+            widget: relation
+            collection: "settings"
+            search_fields: ["steps.*.name"]
+            value_field: "steps.*.step_number"
+            display_fields: ["steps.*.name"]
+          - label: Weight
+            name: weight
+            widget: number
+          - label: Task
+            name: task
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+      - label: Task Overrides
+        name: modifications
+        widget: list
+        summary: "{{taskToReplaceFilename}}"
+        fields:
+          - label: Task To Replace
+            name: taskToReplaceFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+          - label: Modified Task
+            name: replaceWithFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
 
   - name: "roadmap-content"
     label: "Roadmap Content"
@@ -2581,41 +2813,41 @@ collections:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
 
-  - name: "dashboard-settings"
-    label: "Dashboard Settings"
+  - name: "roadmap-sidebar-card"
+    label: "Roadmap Sidebar Cards Content"
+    folder: "content/src/display-content/roadmap-sidebar-cards"
+    summary: "{{id}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
+    delete: true
+    create: true
     editor:
-      preview: false
-    files:
-      - label: "Industry Sectors"
-        name: "arrayOfSectors"
-        file: "content/src/dashboard/sectors.json"
-        fields:
-          - label: Sectors
-            name: arrayOfSectors
-            widget: list
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Id
-                name: id
-                widget: hidden
-      - label: "Ownership Types"
-        name: "arrayOfOwnershipTypes"
-        file: "content/src/dashboard/ownershipTypes.json"
-        fields:
-          - label: Ownership Types
-            name: arrayOfOwnershipTypes
-            widget: list
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Id
-                name: id
-                widget: hidden
+      preview: true
+    fields:
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Header", name: "header", widget: "string", required: false }
+      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: true }
+      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
+      - {
+          label: "Image (header required)",
+          name: "imgPath",
+          widget: "select",
+          required: false,
+          options: ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg"],
+        }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - {
+          label: "Color",
+          name: "color",
+          widget: "select",
+          options: ["primary", "accent-cool-darker", "roadmap-purple"],
+        }
+      - {
+          label: "Shadow Color",
+          name: "shadowColor",
+          widget: "select",
+          options: ["roadmap-purple-light", "primary-light", "roadmap-blue-light"],
+        }
 
   - name: "settings"
     label: "Roadmap Settings"
@@ -2673,265 +2905,33 @@ collections:
                 display_fields: ["{{filename}}"]
                 multiple: true
 
-  - name: "cannabis-priority-status"
-    label: "Cannabis Priority Status"
-    delete: false
-    create: false
-    files:
-      - label: "Minority and Women Owned Checklist"
-        name: "cannabis-minority-and-women-owned"
-        file: "content/src/display-content/cannabis-priority-status/cannabis-minority-and-women-owned.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Social Equity Checklist"
-        name: "cannabis-social-equity"
-        file: "content/src/display-content/cannabis-priority-status/cannabis-social-equity-business.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Veteran-Owned Checklist"
-        name: "cannabis-veteran-owned"
-        file: "content/src/display-content/cannabis-priority-status/cannabis-veteran-owned.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Config"
-        name: "config"
-        file: "content/src/fieldConfig/config.json"
-        editor:
-          preview: false
-        fields:
-          - label: Cannabis Priority Status
-            name: cannabisPriorityStatus
-            collapsed: false
-            widget: object
-            summary: "{{cannabisPriorityStatus}}"
-            fields:
-              - { label: Tab 1 - Next Button Text, name: nextButtonText, widget: string }
-              - {
-                  label: Tab 1 - None Of The Above Checkbox Label,
-                  name: noPriorityStatusCheckboxText,
-                  widget: string,
-                }
-              - { label: Tab 2 - Header Text, name: secondTabHeaderText, widget: string }
-              - { label: Tab 2 - Text Before Header, name: secondTabDescriptionText, widget: text }
-              - { label: Tab 2 - Back Button Text, name: backButtonText, widget: string }
-              - {
-                  label: Tab 2 - Complete Task Progress Button Text,
-                  name: completeTaskProgressButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Tab 2 - Text For None Of The Above Checkbox Selection,
-                  name: noPriorityStatusText,
-                  widget: text,
-                }
-              - { label: Tab 2 - Social Equity Header Text, name: socialEquityHeaderText, widget: string }
-              - { label: Tab 2 - Social Equity Button Text, name: socialEquityButtonText, widget: string }
-              - { label: Tab 2 - Social Equity Button Link, name: socialEquityButtonLink, widget: string }
-              - { label: Tab 2 - Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
-              - { label: Tab 2 - Impact Zone Text, name: impactZoneText, widget: string }
-              - { label: Tab 2 - Veteran Header Text, name: veteranHeaderText, widget: string }
-              - {
-                  label: Tab 2 - Minority Or Women Header Text,
-                  name: minorityOrWomenHeaderText,
-                  widget: string,
-                }
-              - {
-                  label: Tab 2 - Veteran Minority Or Women Button Text,
-                  name: certificationButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Tab 2 - Veteran Minority Or Women Button Link,
-                  name: certificationButtonLink,
-                  widget: string,
-                }
-              - { label: Tab 2 - Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
-              - {
-                  label: Tab 2 - Green Box Minority Or Women Text,
-                  name: greenBoxMinorityOrWomenText,
-                  widget: string,
-                }
-              - { label: Tab 2 - Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
-              - {
-                  label: Tab 2 - Green Box Social Equity Text,
-                  name: greenBoxSocialEquityText,
-                  widget: string,
-                }
-
-  - label: "Cannabis License"
-    name: "cannabis-license"
-    delete: false
-    create: false
-    files:
-      - label: "Annual - Bottom-of-Task text"
-        name: "annual-bottom-of-task"
-        file: "content/src/display-content/cannabis-license/annual-bottom-of-task.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Annual - General Requirements"
-        name: "annual-general-requirements"
-        file: "content/src/display-content/cannabis-license/annual-general-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Conditional - Bottom-of-Task text"
-        name: "conditional-bottom-of-task"
-        file: "content/src/display-content/cannabis-license/conditional-bottom-of-task.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Conditional - General Requirements"
-        name: "conditional-general-requirements"
-        file: "content/src/display-content/cannabis-license/conditional-general-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Diversely-Owned Requirements"
-        name: "diversely-owned-requirements"
-        file: "content/src/display-content/cannabis-license/diversely-owned-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Impact-Zone Requirements"
-        name: "impact-zone-requirements"
-        file: "content/src/display-content/cannabis-license/impact-zone-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Microbusiness Requirements"
-        name: "microbusiness-requirements"
-        file: "content/src/display-content/cannabis-license/microbusiness-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Social Equity Requirements"
-        name: "social-equity-requirements"
-        file: "content/src/display-content/cannabis-license/social-equity-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Config"
-        name: "config"
-        file: "content/src/fieldConfig/config.json"
-        editor:
-          preview: false
-        fields:
-          - label: Cannabis Apply For License
-            name: cannabisApplyForLicense
-            collapsed: false
-            widget: object
-            summary: "{{cannabisApplyForLicense}}"
-            fields:
-              - { label: Application Questions Text, name: applicationQuestionsText, widget: text }
-              - { label: Business Size Header, name: businessSizeHeader, widget: string }
-              - {
-                  label: Microbusiness Radio Question,
-                  name: microbusinessRadioQuestion,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Microbusiness Radio Yes,
-                  name: microbusinessRadioYes,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Microbusiness Radio No,
-                  name: microbusinessRadioNo,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
-              - {
-                  label: Priority Status Text,
-                  name: priorityStatusText,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Priority Status None Selected Text,
-                  name: priorityStatusNoneSelectedText,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Diversely Owned Label,
-                  name: diverselyOwnedLabel,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Diversely Owned Helper Text,
-                  name: diverselyOwnedHelperText,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Impact Zone Label,
-                  name: impactZoneLabel,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: SBE Label, name: sbeLabel, widget: string, hint: This field supports Markdown }
-              - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
-              - {
-                  label: Eligible Modal Body,
-                  name: eligibleModalBody,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
-              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
-              - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
-              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
-              - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
-              - {
-                  label: Microbusiness Application Needs,
-                  name: microbusinessApplicationNeeds,
-                  widget: string,
-                }
-              - {
-                  label: Priority Status Application Needs,
-                  name: priorityStatusApplicationNeeds,
-                  widget: string,
-                }
-              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
-              - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
+  - name: "tasks"
+    label: "Tasks"
+    folder: "content/src/roadmaps/tasks"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug", name: "urlSlug", widget: "string" }
+      - { label: "Filename", name: "filename", widget: "slug", required: false }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: Industry
+        name: industryId
+        widget: "relation"
+        collection: "roadmaps"
+        search_fields: ["{{id}}"]
+        value_field: "{{id}}"
+        display_fields: ["{{id}}"]
+        required: false
+      - { label: "Required", name: "required", widget: "boolean", required: false }
+      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+      - { label: "Form Name", name: "formName", widget: "string", required: false }
