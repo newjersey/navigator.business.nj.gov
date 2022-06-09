@@ -1,7 +1,7 @@
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import * as apiClient from "@/lib/api-client/apiClient";
-import { findDeadContextualInfo, findDeadLinks, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
 import { TextField } from "@mui/material";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -10,7 +10,6 @@ import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 interface Props {
   deadTasks: string[];
   deadContextualInfo: string[];
-  deadLinks: Record<string, string[]>;
 }
 
 const DeadLinksPage = (props: Props): ReactElement => {
@@ -71,21 +70,6 @@ const DeadLinksPage = (props: Props): ReactElement => {
           <li key={i}>{info}</li>
         ))}
       </ul>
-      <h2>Potentially broken links:</h2>
-      {Object.keys(props.deadLinks).map((page, i) => (
-        <div key={i}>
-          {props.deadLinks[page].length > 0 && (
-            <>
-              <div className="h4-styling">Page: {page}</div>
-              <ul>
-                {props.deadLinks[page].map((link, i) => (
-                  <li key={i}>{link}</li>
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
-      ))}
     </>
   );
 
@@ -108,7 +92,6 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
         props: {
           deadTasks: await findDeadTasks(),
           deadContextualInfo: await findDeadContextualInfo(),
-          deadLinks: await findDeadLinks(),
         },
       };
 };

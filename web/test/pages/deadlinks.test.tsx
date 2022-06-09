@@ -37,18 +37,9 @@ jest.mock("broken-link-checker", () => ({
 
 describe("Deadlinks page", () => {
   it("displays content when password is successful", async () => {
-    render(
-      <DeadLinksPage
-        deadTasks={["task1"]}
-        deadContextualInfo={["info1"]}
-        deadLinks={{
-          deadLink1: ["http://www.deadlink.com"],
-        }}
-      />
-    );
+    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} />);
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
-    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
 
     mockApi.post.mockResolvedValue({});
 
@@ -57,23 +48,13 @@ describe("Deadlinks page", () => {
 
     await screen.findByText("task1");
     expect(screen.getByText("info1")).toBeInTheDocument();
-    expect(screen.getByText("http://www.deadlink.com")).toBeInTheDocument();
     expect(screen.queryByLabelText("Password")).not.toBeInTheDocument();
   });
 
   it("hides content when password is unsuccessful", () => {
-    render(
-      <DeadLinksPage
-        deadTasks={["task1"]}
-        deadContextualInfo={["info1"]}
-        deadLinks={{
-          deadLink1: ["http://www.deadlink.com"],
-        }}
-      />
-    );
+    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} />);
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
-    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
 
     mockApi.post.mockRejectedValue({});
 
@@ -82,7 +63,6 @@ describe("Deadlinks page", () => {
 
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
-    expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
     expect(screen.getByLabelText("Password")).toBeInTheDocument();
   });
 });
