@@ -1400,7 +1400,7 @@ collections:
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "File Name", name: "filename", widget: "slug" }
-      - { label: "Url Slug", name: "urlSlug", widget: "slug" }
+      - { label: "Url Slug", name: "urlSlug", widget: "string" }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
@@ -1417,12 +1417,17 @@ collections:
             "hiring and employee training support",
             "tax exemption",
           ]
+      - label: "Program Purpose"
+        name: "programPurpose"
+        widget: "select"
+        options: ["Retention", "Attraction", "Action Related Reward"]
       - label: "Agency"
         name: "agency"
         widget: "select"
         multiple: true
         options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
+      - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
       - label: "Publish/Stage/Archive"
         name: "publishStageArchive"
         widget: "select"
