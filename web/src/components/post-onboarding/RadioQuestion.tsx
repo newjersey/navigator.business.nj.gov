@@ -55,19 +55,19 @@ export const RadioQuestion = (props: Props): ReactElement => {
               data-testid="post-onboarding-radio-btn"
             >
               <FormControlLabel
-                style={{ marginRight: "3rem" }}
+                style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
                 labelPlacement="end"
                 data-testid="post-onboarding-radio-true"
                 value={true}
-                control={<Radio color="primary" />}
+                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
                 label={onboardingQuestion.radioYes}
               />
               <FormControlLabel
-                style={{ marginRight: "3rem" }}
+                style={{ marginTop: ".75rem", alignItems: "flex-start" }}
                 labelPlacement="end"
                 data-testid="post-onboarding-radio-false"
                 value={false}
-                control={<Radio color="primary" />}
+                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
                 label={onboardingQuestion.radioNo}
               />
             </RadioGroup>

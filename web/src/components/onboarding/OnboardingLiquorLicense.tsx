@@ -30,19 +30,19 @@ export const OnboardingLiquorLicense = (): ReactElement => {
           row
         >
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="liquor-license-true"
             value={true}
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].liquorLicense.radioButtonYesText}
           />
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="liquor-license-false"
             value={false}
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].liquorLicense.radioButtonNoText}
           />
         </RadioGroup>

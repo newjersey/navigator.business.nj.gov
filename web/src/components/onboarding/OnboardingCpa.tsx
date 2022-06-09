@@ -30,19 +30,19 @@ export const OnboardingCpa = (): ReactElement => {
           row
         >
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="cpa-true"
             value={true}
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].cpa.radioButtonYesText}
           />
           <FormControlLabel
-            style={{ marginRight: "3rem" }}
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
             data-testid="cpa-false"
             value={false}
-            control={<Radio color="primary" />}
+            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].cpa.radioButtonNoText}
           />
         </RadioGroup>
