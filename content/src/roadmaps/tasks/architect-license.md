@@ -13,14 +13,14 @@ You need an Architect license prior to offering professional services.
 ---
 ### Eligibility Criteria
 - Bachelor’s or Master’s Degree in architecture from an institution accredited by the National Architecture Accrediting Board
-- A minimum of three (3) years in the Architectural Experience Program (AXP) administered by the National Council of Architectural Registration Boards (NCARB)
+- A minimum of three years in the Architectural Experience Program (AXP) administered by the National Council of Architectural Registration Boards (NCARB)
 
 ### Application Requirements
 - A 2x2 passport photo in color taken within the last six months 
-- Supporting documentation if you answered ‘Yes” to any of the questions #6 through #15 in the application 
+- Supporting documentation (like police records) if you answered "Yes” to any of the questions #6 through #15 in the application 
 - College transcripts must be sent directly from the college(s) to the Board
-- Names and addresses of three architects who are personally acquainted with your professional abilities. The Board will contact your references.
+- Names and addresses of three architects who are personally acquainted with your professional abilities.
 - Pay any fees associated with the license
 
 >**Once completed, you will have:**
->- UUpon approval, you will receive a notification indicating you can sign up to take the Architect’s Registration Exam - the last step before obtaining your license
+>- Approval to sign up to take the Architect’s Registration Exam, the last step before obtaining your license
