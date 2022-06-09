@@ -1,4 +1,5 @@
 ---
+fileName: return-and-earn
 urlSlug: return-and-earn
 name: "Return and Earn: Employer Grants for Hiring Unemployed"
 id: return-and-earn-employer-grants-for-hiring-unemployed
@@ -20,6 +21,8 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Return and Earn program is a grant for employers who hire unemployed workers, train them, and provide those workers with a new skill required for the job.

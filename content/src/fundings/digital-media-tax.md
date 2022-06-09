@@ -1,4 +1,5 @@
 ---
+fileName: digital-media-tax
 urlSlug: digital-media-tax
 name: Digital Media Tax Credit
 id: digital-media-tax-credit
@@ -27,6 +28,8 @@ sector:
   - Arts, Entertainment, and Recreation
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Digital Media Tax Credit Program provides a transferable credit against the corporate business tax and the gross income tax to incentivize companies to produce content in New Jersey.

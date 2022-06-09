@@ -1,4 +1,5 @@
 ---
+fileName: clean-tech-research
 urlSlug: clean-tech-research
 name: Clean Tech Research & Development (R&D) Voucher Program
 id: clean-tech-research-development-rd-voucher-program
@@ -25,6 +26,8 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Clean Tech Research & Development (R&D) Voucher Program helps New Jersey early-stage clean tech and clean energy companies offset the cost of accessing equipment at participating New Jersey universities or federal labs for R&D.

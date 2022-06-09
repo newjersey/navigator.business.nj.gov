@@ -1,4 +1,5 @@
 ---
+fileName: venture-fund-investments
 urlSlug: venture-fund-investments
 name: Venture Fund Investments
 id: venture-fund-investments
@@ -21,6 +22,8 @@ sector:
   - technology
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The New Jersey Economic Development Authority (NJEDA) invests in venture capital funds active in New Jersey. Venture partners leverage NJEDA investment to increase funds available for emerging innovative companies to grow and create jobs in the State.

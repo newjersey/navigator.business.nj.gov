@@ -1,4 +1,5 @@
 ---
+fileName: nj-accelerate
 urlSlug: nj-accelerate
 name: NJ Accelerate
 id: nj-accelerate
@@ -23,6 +24,8 @@ sector:
   - Life Sciences
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to locate and grow in New Jersey.

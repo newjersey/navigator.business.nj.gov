@@ -1,4 +1,5 @@
 ---
+fileName: edison-innovation-growth
 urlSlug: edison-innovation-growth
 name: Edison Innovation Growth Stars Fund
 id: edison-innovation-growth-stars-fund
@@ -22,6 +23,8 @@ sector:
   - Life Sciences
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 Edison Innovation VC Growth Fund provides funding to early-stage, emerging technology businesses matched with an outside equity investor within the last 90 days.

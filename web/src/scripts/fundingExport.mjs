@@ -35,19 +35,21 @@ const exportFundings = () => {
   ///  console.log(fundings);
   const writeStream = fs.createWriteStream("fundings.csv");
   writeStream.write(
-    `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,agency,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,mwvb,preferenceForOpportunityZone,county,sector,contentMd\n`
+    `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,mwvb,preferenceForOpportunityZone,county,sector,contentMd\n`
   );
   for (const funding of fundings) {
     writeStream.write(
       `"${funding.id}","${funding.name}","${funding.filename}","${funding.urlSlug}","${
         funding.callToActionLink
-      }","${funding.callToActionText}","${funding.fundingType}","${funding.agency}","${
-        funding.publishStageArchive
-      }","${funding.openDate}","${funding.dueDate}","${funding.status}","${funding.programFrequency}","${
-        funding.businessStage
-      }","${funding.employeesRequired}","${funding.homeBased}","${funding.mwvb}","${
-        funding.preferenceForOpportunityZone
-      }","${funding.county}","${funding.sector}","${funding.contentMd.trim()}"\n`
+      }","${funding.callToActionText}","${funding.fundingType}","${funding.programPurpose}","${
+        funding.agency
+      }","${funding.agencyContact}","${funding.publishStageArchive}","${funding.openDate}","${
+        funding.dueDate
+      }","${funding.status}","${funding.programFrequency}","${funding.businessStage}","${
+        funding.employeesRequired
+      }","${funding.homeBased}","${funding.mwvb}","${funding.preferenceForOpportunityZone}","${
+        funding.county
+      }","${funding.sector}","${funding.contentMd.trim()}"\n`
     );
   }
 };

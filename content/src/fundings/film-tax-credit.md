@@ -1,4 +1,5 @@
 ---
+fileName: film-tax-credit
 urlSlug: film-tax-credit
 name: Film Tax Credit Program
 id: film-tax-credit-program
@@ -21,6 +22,8 @@ sector:
   - Arts, Entertainment, and Recreation
 openDate: ""
 dueDate: ""
+programPurpose: ""
+agencyContact: ""
 ---
 
 The Film Tax Credit Program provides a transferable credit against the corporation business tax and the gross income tax to incentivize production companies to film content in New Jersey.
