@@ -1,18 +1,17 @@
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import * as apiClient from "@/lib/api-client/apiClient";
-import { findDeadContextualInfo, findDeadTasks } from "@/lib/static/admin/findDeadLinks";
+import { findDeadLinks } from "@/lib/static/admin/findDeadLinks";
 import { TextField } from "@mui/material";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
 interface Props {
-  deadTasks: string[];
-  deadContextualInfo: string[];
+  deadLinks: Record<string, string[]>;
 }
 
-const DeadLinksPage = (props: Props): ReactElement => {
+const DeadUrlsPage = (props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
 
@@ -57,19 +56,22 @@ const DeadLinksPage = (props: Props): ReactElement => {
 
   const authedView = (
     <>
-      <h1>Dead Content</h1>
-      <h2>Tasks not referenced in any roadmap:</h2>
-      <ul>
-        {props.deadTasks.map((task, i) => (
-          <li key={i}>{task}</li>
-        ))}
-      </ul>
-      <h2>Contextual infos not referenced anywhere:</h2>
-      <ul>
-        {props.deadContextualInfo.map((info, i) => (
-          <li key={i}>{info}</li>
-        ))}
-      </ul>
+      <h1>Dead URLs</h1>
+      <h2>Potentially broken links:</h2>
+      {Object.keys(props.deadLinks).map((page, i) => (
+        <div key={i}>
+          {props.deadLinks[page].length > 0 && (
+            <>
+              <div className="h4-styling">Page: {page}</div>
+              <ul>
+                {props.deadLinks[page].map((link, i) => (
+                  <li key={i}>{link}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      ))}
     </>
   );
 
@@ -90,10 +92,9 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
     ? { notFound: true }
     : {
         props: {
-          deadTasks: await findDeadTasks(),
-          deadContextualInfo: await findDeadContextualInfo(),
+          deadLinks: await findDeadLinks(),
         },
       };
 };
 
-export default DeadLinksPage;
+export default DeadUrlsPage;
