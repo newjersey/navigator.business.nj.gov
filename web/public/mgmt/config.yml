@@ -1421,6 +1421,7 @@ collections:
         name: "programPurpose"
         widget: "select"
         options: ["Retention", "Attraction", "Action Related Reward"]
+        required: false
       - label: "Agency"
         name: "agency"
         widget: "select"
@@ -1555,6 +1556,7 @@ collections:
         name: "programPurpose"
         widget: "select"
         options: ["Retention", "Attraction", "Action Related Reward"]
+        required: false
       - label: "Agency"
         name: "agency"
         widget: "select"
