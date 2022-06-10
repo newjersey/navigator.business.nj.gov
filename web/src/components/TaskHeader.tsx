@@ -90,7 +90,7 @@ export const TaskHeader = (props: Props): ReactElement => {
         {renderProgress()}
         {getModifiedTaskBooleanUndefined(roadmap, props.task, "required") === true && (
           <div className="flex flex-align-center tablet:margin-left-05">
-            <Tag tagVariant="required" paddingOverrideClassName="padding-y-0 padding-left-0">
+            <Tag tagVariant="required">
               <img
                 className="margin-right-05 margin-left-neg-1px margin-y-neg-1px"
                 width="20px"
