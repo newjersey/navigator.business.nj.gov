@@ -27,4 +27,4 @@ function print_success {
 }
 
 # run tests, feature tests, and push
- ./scripts/test.sh && ./scripts/feature-tests.sh && git push "$@" && print_success
+ ./scripts/test.sh  && git push "$@" && print_success
