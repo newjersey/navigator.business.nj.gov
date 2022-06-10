@@ -1,5 +1,5 @@
 ---
-fileName: bond-financing
+filename: bond-financing
 urlSlug: bond-financing
 name: Bond Financing
 id: bond-financing

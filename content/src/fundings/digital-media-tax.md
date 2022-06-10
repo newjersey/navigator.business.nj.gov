@@ -1,5 +1,5 @@
 ---
-fileName: digital-media-tax
+filename: digital-media-tax
 urlSlug: digital-media-tax
 name: Digital Media Tax Credit
 id: digital-media-tax-credit

@@ -1,5 +1,5 @@
 ---
-fileName: brownfield-impact-fund
+filename: brownfield-impact-fund
 urlSlug: brownfield-impact-fund
 name: Brownfield Impact Fund (USEPA RLF)
 id: brownfield-impact-fund-usepa-rlf

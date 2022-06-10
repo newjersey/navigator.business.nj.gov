@@ -1,5 +1,5 @@
 ---
-fileName: sales-and-use
+filename: sales-and-use
 urlSlug: sales-and-use
 name: Sales and Use Tax Exemption Program
 id: sales-and-use-tax-exemption-program

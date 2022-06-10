@@ -1,5 +1,5 @@
 ---
-fileName: nj-covest-fund
+filename: nj-covest-fund
 urlSlug: nj-covest-fund
 name: NJ CoVest Fund
 id: nj-covest-fund

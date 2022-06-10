@@ -1,5 +1,5 @@
 ---
-fileName: edison-innovation-vc
+filename: edison-innovation-vc
 urlSlug: edison-innovation-vc
 name: Edison Innovation VC Growth
 id: edison-innovation-vc-growth

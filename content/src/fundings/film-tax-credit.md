@@ -1,5 +1,5 @@
 ---
-fileName: film-tax-credit
+filename: film-tax-credit
 urlSlug: film-tax-credit
 name: Film Tax Credit Program
 id: film-tax-credit-program

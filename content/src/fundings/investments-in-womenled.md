@@ -1,5 +1,5 @@
 ---
-fileName: investments-in-women-led
+filename: investments-in-women-led
 urlSlug: investments-in-women-led
 name: Investments in Women-Led Start-ups
 id: investments-in-women-led-startups

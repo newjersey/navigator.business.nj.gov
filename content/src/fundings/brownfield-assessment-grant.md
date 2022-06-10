@@ -1,5 +1,5 @@
 ---
-fileName: brownfield-assessment-grant
+filename: brownfield-assessment-grant
 urlSlug: brownfield-assessment-grant
 name: Brownfield Assessment Grant
 id: brownfield-assessment-grant

@@ -1,5 +1,5 @@
 ---
-fileName: premier-community-development
+filename: premier-community-development
 urlSlug: premier-community-development
 name: Premier Community Development Financial Institution (CDFI) Program
 id: premier-community-development-financial-institution-cdfi-program

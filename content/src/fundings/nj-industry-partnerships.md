@@ -1,5 +1,5 @@
 ---
-fileName: nj-industry-partnerships
+filename: nj-industry-partnerships
 urlSlug: nj-industry-partnerships
 name: NJ Industry Partnerships
 id: nj-industry-partnerships

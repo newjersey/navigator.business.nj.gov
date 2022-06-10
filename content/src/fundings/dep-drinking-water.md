@@ -1,5 +1,5 @@
 ---
-fileName: dep-drinking-water
+filename: dep-drinking-water
 urlSlug: dep-drinking-water
 name: Drinking Water State Revolving Fund Program
 id: dep-drinking-water

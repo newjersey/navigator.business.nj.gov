@@ -1,5 +1,5 @@
 ---
-fileName: clean-tech-research
+filename: clean-tech-research
 urlSlug: clean-tech-research
 name: Clean Tech Research & Development (R&D) Voucher Program
 id: clean-tech-research-development-rd-voucher-program

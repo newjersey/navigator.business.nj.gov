@@ -1,5 +1,5 @@
 ---
-fileName: edison-innovation-growth
+filename: edison-innovation-growth
 urlSlug: edison-innovation-growth
 name: Edison Innovation Growth Stars Fund
 id: edison-innovation-growth-stars-fund

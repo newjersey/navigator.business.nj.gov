@@ -1,5 +1,5 @@
 ---
-fileName: edison-innovation-angel
+filename: edison-innovation-angel
 urlSlug: edison-innovation-angel
 name: Edison Innovation Angel Growth Fund
 id: edison-innovation-angel-growth-fund

@@ -1,5 +1,5 @@
 ---
-fileName: hazardous-discharge-site
+filename: hazardous-discharge-site
 urlSlug: hazardous-discharge-site
 name: Hazardous Discharge Site Remediation Fund
 id: hazardous-discharge-site-remediation-fund

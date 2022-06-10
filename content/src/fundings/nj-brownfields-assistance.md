@@ -1,5 +1,5 @@
 ---
-fileName: nj-brownfields-assistance
+filename: nj-brownfields-assistance
 urlSlug: nj-brownfields-assistance
 name: NJ Brownfields Assistance Center @ NJIT
 id: nj-brownfields-assistance-center-njit

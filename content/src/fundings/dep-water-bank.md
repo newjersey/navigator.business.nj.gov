@@ -1,5 +1,5 @@
 ---
-fileName: dep-water-bank
+filename: dep-water-bank
 urlSlug: dep-water-bank
 name: New Jersey Water Bank Program
 id: dep-water-bank

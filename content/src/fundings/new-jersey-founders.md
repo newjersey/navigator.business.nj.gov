@@ -1,5 +1,5 @@
 ---
-fileName: new-jersey-founders
+filename: new-jersey-founders
 urlSlug: new-jersey-founders
 name: New Jersey Founders & Funders
 id: new-jersey-founders-funders

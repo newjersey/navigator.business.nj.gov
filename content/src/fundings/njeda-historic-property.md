@@ -1,5 +1,5 @@
 ---
-fileName: njeda-historic-property
+filename: njeda-historic-property
 urlSlug: njeda-historic-property
 name: Historic Property Reinvestment Program
 id: njeda-historic-property

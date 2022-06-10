@@ -1,5 +1,5 @@
 ---
-fileName: small-business-improvement
+filename: small-business-improvement
 urlSlug: small-business-improvement
 name: Small Business Improvement Grant
 id: small-business-improvement-grant

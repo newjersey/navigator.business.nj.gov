@@ -1,5 +1,5 @@
 ---
-fileName: njeda-aspire
+filename: njeda-aspire
 urlSlug: njeda-aspire
 name: Aspire
 id: njeda-aspire
