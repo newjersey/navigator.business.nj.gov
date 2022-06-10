@@ -9,6 +9,7 @@ import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
 interface Props {
   deadLinks: Record<string, string[]>;
+  noAuth: boolean;
 }
 
 const DeadUrlsPage = (props: Props): ReactElement => {
@@ -93,6 +94,7 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
     : {
         props: {
           deadLinks: await findDeadLinks(),
+          noAuth: true,
         },
       };
 };

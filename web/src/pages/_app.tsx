@@ -171,16 +171,18 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   Hub.listen("auth", listener);
 
   useMountEffect(() => {
-    getCurrentUser()
-      .then((currentUser) => {
-        dispatch({
-          type: "LOGIN",
-          user: currentUser,
+    if (!pageProps.noAuth) {
+      getCurrentUser()
+        .then((currentUser) => {
+          dispatch({
+            type: "LOGIN",
+            user: currentUser,
+          });
+        })
+        .catch(() => {
+          onGuestSignIn(router.push, router.pathname, dispatch);
         });
-      })
-      .catch(() => {
-        onGuestSignIn(router.push, router.pathname, dispatch);
-      });
+    }
   });
 
   useEffect(() => {

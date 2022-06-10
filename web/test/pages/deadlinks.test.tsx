@@ -37,7 +37,7 @@ jest.mock("broken-link-checker", () => ({
 
 describe("Deadlinks page", () => {
   it("displays content when password is successful", async () => {
-    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} />);
+    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} noAuth={true} />);
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
 
@@ -52,7 +52,7 @@ describe("Deadlinks page", () => {
   });
 
   it("hides content when password is unsuccessful", () => {
-    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} />);
+    render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} noAuth={true} />);
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
 
