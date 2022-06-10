@@ -12,13 +12,12 @@ exports[`OpportunityCard matches the layout 1`] = `
       >
         <div>
           <span
-            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
+            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
         text-no-wrap
         bg-white text-base-darkest bg-certification
         
         
         
-        padding-y-2px
       "
           >
             Funding
@@ -95,13 +94,12 @@ exports[`OpportunityCard matches the layout when status is first come first serv
       >
         <div>
           <span
-            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
+            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
         text-no-wrap
         bg-white text-base-darkest bg-certification
         
         
         
-        padding-y-2px
       "
           >
             Funding
@@ -183,13 +181,12 @@ exports[`OpportunityCard matches the layout when status is rolling application 1
       >
         <div>
           <span
-            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
+            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
         text-no-wrap
         bg-white text-base-darkest bg-certification
         
         
         
-        padding-y-2px
       "
           >
             Funding
@@ -271,13 +268,12 @@ exports[`OpportunityCard matches the layout with a due date 1`] = `
       >
         <div>
           <span
-            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
+            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
         text-no-wrap
         bg-white text-base-darkest bg-certification
         
         
         
-        padding-y-2px
       "
           >
             Funding
