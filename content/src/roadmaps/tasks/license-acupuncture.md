@@ -8,7 +8,7 @@ callToActionText: Apply for My License
 required: false
 ---
 
-You will need an Acupuncturist license **if you** plan to offer services as an acupuncturist.
+This is an optional application. You will need an Acupuncturist license **if you** plan to offer services as an acupuncturist.
 
 ---
 
