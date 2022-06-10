@@ -124,12 +124,7 @@ const TaskPage = (props: Props): ReactElement => {
             "license-massage-therapy": <LicenseTask task={props.task} />,
             "form-business-entity": businessFormationFeatureFlag(),
             "determine-naics-code": <NaicsCodeTask task={props.task} />,
-            "priority-status-cannabis": (
-              <CannabisPriorityStatusTask
-                task={props.task}
-                displayContent={props.displayContent.cannabisPriorityStatusDisplayContent}
-              />
-            ),
+            "priority-status-cannabis": <CannabisPriorityStatusTask task={props.task} />,
             "conditional-permit-cannabis": (
               <CannabisApplyForLicenseTask
                 task={props.task}

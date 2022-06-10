@@ -34,7 +34,14 @@ export const TaskCheckbox = (props: Props) => {
 
   return (
     <>
-      <Checkbox onChange={handleChange} checked={checklistItemStatus} {...props.checkboxProps} />
+      <Checkbox
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        inputProps={{ "data-testid": props.checklistItemId }}
+        onChange={handleChange}
+        checked={checklistItemStatus}
+        {...props.checkboxProps}
+      />
     </>
   );
 };

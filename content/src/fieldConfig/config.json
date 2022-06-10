@@ -523,27 +523,5 @@
     "applicationPageHelperText": "Cannabis licenses are reviewed on an ongoing basis. You can apply at any time.",
     "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
     "sbeLabel": "`Social Equity Business (SEB)|social-equity-business-cannabis`"
-  },
-  "cannabisPriorityStatus": {
-    "noPriorityStatusText": "Based on your answers, you are not eligible for any priority status. You can mark this task as completed.",
-    "greenBoxVeteranText": "A Disabled Veteran-Owned Business certificate",
-    "certificationButtonLink": "https://www.njportal.com/DOR/SBERegistry/",
-    "backButtonText": "Back",
-    "noPriorityStatusCheckboxText": "None of the above",
-    "greenBoxMinorityOrWomenText": "A Minority/Women-Owned Business Enterprise certificate",
-    "greenBoxSocialEquityText": "A completed Social Equity Business form",
-    "secondTabDescriptionText": "You qualify for the following priority statuses. Diversely-Owned Business will have the highest priority followed by Social Equity Businesses and Impact Zone Businesses. Having multiple priorities does not give you an additional advantage.",
-    "completeTaskProgressButtonText": "Mark as Completed",
-    "impactZoneHeaderText": "Impact Zone Business",
-    "socialEquityHeaderText": "Social Equity Business (SEB)",
-    "socialEquityButtonText": "Get My SEB Form",
-    "nextButtonText": "View Application Needs",
-    "veteranHeaderText": "Diversely-Owned Business: DVOB Certification",
-    "greenBoxBoldedText": "Once completed, you will have:",
-    "certificationButtonText": "Apply for My Certification",
-    "secondTabHeaderText": "Application Needs",
-    "minorityOrWomenHeaderText": "Diversely-Owned Business: M/WBE Certification",
-    "socialEquityButtonLink": "https://www.nj.gov/cannabis/documents/businesses/personal-use/Certification%20of%20SEB%20FINAL%2012.13.21.pdf",
-    "impactZoneText": "Nothing else to do here, you’re ready to start applying for your Cannabis license."
   }
 }

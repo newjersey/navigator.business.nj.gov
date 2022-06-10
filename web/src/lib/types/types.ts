@@ -24,12 +24,6 @@ export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS" | "RE
 
 export type FlowType = "OWNING" | "STARTING" | "FOREIGN";
 
-export type CannabisPriorityStatusDisplayContent = {
-  socialEquityBusiness: { contentMd: string };
-  minorityAndWomenOwned: { contentMd: string };
-  veteranOwned: { contentMd: string };
-};
-
 export type CannabisApplyForLicenseDisplayContent = {
   annualGeneralRequirements: { contentMd: string };
   conditionalGeneralRequirements: { contentMd: string };
@@ -81,17 +75,10 @@ export type FormationDisplayContent = {
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
   formationDisplayContent: createEmptyFormationDisplayContent(),
-  cannabisPriorityStatusDisplayContent: createEmptyCannabisPriorityStatusDisplayContent(),
   cannabisApplyForLicenseDisplayContent: createEmptyCannabisApplyForLicenseDisplayContent(),
 });
 
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
-
-export const createEmptyCannabisPriorityStatusDisplayContent = (): CannabisPriorityStatusDisplayContent => ({
-  socialEquityBusiness: { contentMd: "" },
-  minorityAndWomenOwned: { contentMd: "" },
-  veteranOwned: { contentMd: "" },
-});
 
 export const createEmptyCannabisApplyForLicenseDisplayContent =
   (): CannabisApplyForLicenseDisplayContent => ({
@@ -319,7 +306,6 @@ export type County =
 export type FormationDisplayContentMap = Record<FormationLegalType, FormationDisplayContent>;
 export type TasksDisplayContent = {
   formationDisplayContent: FormationDisplayContentMap;
-  cannabisPriorityStatusDisplayContent: CannabisPriorityStatusDisplayContent;
   cannabisApplyForLicenseDisplayContent: CannabisApplyForLicenseDisplayContent;
 };
 

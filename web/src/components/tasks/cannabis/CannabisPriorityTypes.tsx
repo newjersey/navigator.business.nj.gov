@@ -1,9 +1,10 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useMountEffect } from "@/lib/utils/helpers";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
 
@@ -17,11 +18,19 @@ const priorityTypes = [
 interface Props {
   task: Task;
   onNextTab: () => void;
+  CMS_ONLY_tab?: string; // for CMS only
 }
 
 export const CannabisPriorityTypes = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const [displayNextTabButton, setDisplayNextTabButton] = useState(false);
+  const { Config } = useConfig();
+
+  useMountEffect(() => {
+    if (props.CMS_ONLY_tab) {
+      setDisplayNextTabButton(true);
+    }
+  });
 
   useEffect(() => {
     if (!userData) return;
@@ -72,7 +81,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
 
   return (
     <>
-      <Content>{props.task.contentMd}</Content>
+      <Content>{Config.cannabisPriorityStatus.tab1Content}</Content>
       <div className="usa-prose margin-bottom-3">
         <ul style={{ marginTop: 0 }}>
           <div className="margin-bottom-2">
@@ -83,7 +92,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
                   onChange={handleNoneOfTheAboveCheckboxChange}
                   checked={!!userData?.taskItemChecklist[noneOfTheAbovePriorityId]}
                   sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
-                  data-testid="none-of-the-above"
+                  data-testid="cannabis-priority-status-none"
                 />
               }
             />

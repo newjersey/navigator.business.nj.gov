@@ -1,3 +1,5 @@
+import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
+import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as ProfileTabDocumentsDakota from "@businessnjgovnavigator/content/fieldConfig/profile-documents-dakota.json";
 import * as ProfileTabDocumentsOscar from "@businessnjgovnavigator/content/fieldConfig/profile-documents-oscar.json";
@@ -41,7 +43,9 @@ const merged = JSON.parse(
       ProfileTabIndustrySpecificDakota,
       ProfileOnboardingOscar,
       ProfileOnboardingPoppy,
-      ProfileOnboardingDakota
+      ProfileOnboardingDakota,
+      CannabisPriorityStatusTab1,
+      CannabisPriorityStatusTab2
     )
   )
 );
@@ -64,7 +68,9 @@ export type ConfigType = typeof ConfigOriginal &
   typeof ProfileTabIndustrySpecificDakota &
   typeof ProfileOnboardingOscar &
   typeof ProfileOnboardingPoppy &
-  typeof ProfileOnboardingDakota;
+  typeof ProfileOnboardingDakota &
+  typeof CannabisPriorityStatusTab1 &
+  typeof CannabisPriorityStatusTab2;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -86,7 +92,9 @@ export const getMergedConfig = (): ConfigType => {
     ProfileTabIndustrySpecificDakota,
     ProfileOnboardingOscar,
     ProfileOnboardingPoppy,
-    ProfileOnboardingDakota
+    ProfileOnboardingDakota,
+    CannabisPriorityStatusTab1,
+    CannabisPriorityStatusTab2
   );
 };
 

@@ -1,10 +1,10 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { CannabisApplyForLicenseDisplayContent, Task } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -17,6 +17,7 @@ interface Props {
 
 export const CannabisApplicationRequirementsTab = (props: Props): ReactElement => {
   const { userData } = useUserData();
+  const { Config } = useConfig();
 
   const hasPriorityStatus = (Object.keys(props.priorityStatusState) as PriorityApplicationType[]).some(
     (key) => props.priorityStatusState[key]

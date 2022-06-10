@@ -1,18 +1,17 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { CannabisPriorityStatusDisplayContent } from "@/lib/types/types";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, useState } from "react";
 
 interface Props {
-  displayContent: CannabisPriorityStatusDisplayContent;
   onBack: () => void;
   onComplete: () => void;
+  CMS_ONLY_tab?: string; // for CMS only
 }
 
 export const CannabisPriorityRequirements = (props: Props): ReactElement => {
@@ -22,6 +21,16 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   const [displaySocialEquityPriorityType, setDisplaySocialEquityPriorityType] = useState(false);
   const [displayNoPriorityType, setDisplayNoPriorityType] = useState(false);
   const { userData } = useUserData();
+  const { Config } = useConfig();
+
+  useMountEffect(() => {
+    if (props.CMS_ONLY_tab) {
+      setDisplayMWPriorityType(true);
+      setDisplayVeteranPriorityType(true);
+      setDisplayImpactZonePriorityType(true);
+      setDisplaySocialEquityPriorityType(true);
+    }
+  });
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -78,7 +87,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 <h3 className="margin-y-4">{Config.cannabisPriorityStatus.minorityOrWomenHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{props.displayContent.minorityAndWomenOwned.contentMd}</Content>
+                <Content>{Config.cannabisPriorityStatus.minorityWomenOwnedRequirements}</Content>
               </AccordionDetails>
             </Accordion>
           </>
@@ -94,7 +103,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 <h3 className="margin-y-4">{Config.cannabisPriorityStatus.veteranHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{props.displayContent.veteranOwned.contentMd}</Content>
+                <Content>{Config.cannabisPriorityStatus.veteranOwnedRequirements}</Content>
               </AccordionDetails>
             </Accordion>
           </>
@@ -110,7 +119,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
                 <h3 className="margin-y-4">{Config.cannabisPriorityStatus.socialEquityHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
-                <Content>{props.displayContent.socialEquityBusiness.contentMd}</Content>
+                <Content>{Config.cannabisPriorityStatus.socialEquityRequirements}</Content>
               </AccordionDetails>
             </Accordion>
           </>

@@ -138,14 +138,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   }, {} as FormationDisplayContentMap);
   formationDisplayContent[defaultFormationLegalType] = defaultFormationDisplayContent;
 
-  const socialEquityPriority = getMarkdown(
-    loadFile("cannabis-priority-status/cannabis-social-equity-business.md")
-  );
-  const minorityWomenOwnedPriority = getMarkdown(
-    loadFile("cannabis-priority-status/cannabis-minority-and-women-owned.md")
-  );
-  const veteranOwnedPriority = getMarkdown(loadFile("cannabis-priority-status/cannabis-veteran-owned.md"));
-
   const annualGeneralRequirements = getMarkdown(loadFile("cannabis-license/annual-general-requirements.md"));
   const conditionalGeneralRequirements = getMarkdown(
     loadFile("cannabis-license/conditional-general-requirements.md")
@@ -161,11 +153,6 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
 
   return {
     formationDisplayContent,
-    cannabisPriorityStatusDisplayContent: {
-      socialEquityBusiness: { contentMd: socialEquityPriority.content },
-      minorityAndWomenOwned: { contentMd: minorityWomenOwnedPriority.content },
-      veteranOwned: { contentMd: veteranOwnedPriority.content },
-    },
     cannabisApplyForLicenseDisplayContent: {
       annualGeneralRequirements: { contentMd: annualGeneralRequirements.content },
       conditionalGeneralRequirements: { contentMd: conditionalGeneralRequirements.content },

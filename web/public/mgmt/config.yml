@@ -306,38 +306,38 @@ collections:
     delete: false
     create: false
     files:
-      - label: "Minority and Women Owned Checklist"
-        name: "cannabis-minority-and-women-owned"
-        file: "content/src/display-content/cannabis-priority-status/cannabis-minority-and-women-owned.md"
+      - label: "Task Metadata"
+        name: "cannabisPriority-task"
+        file: "content/src/roadmaps/tasks/priority-status-cannabis.md"
         identifier_field: "{{fields.slug}}"
         slug: "{{fields.slug}}"
         editor:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Social Equity Checklist"
-        name: "cannabis-social-equity"
-        file: "content/src/display-content/cannabis-priority-status/cannabis-social-equity-business.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
+          - { label: "Url Slug", name: "urlSlug", widget: "string" }
+          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+
+      - label: "Tab 1 (Statuses)"
+        name: "cannabisPriority-1"
+        file: "content/src/fieldConfig/cannabis-priority-status-tab1.json"
         editor:
           preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Veteran-Owned Checklist"
-        name: "cannabis-veteran-owned"
-        file: "content/src/display-content/cannabis-priority-status/cannabis-veteran-owned.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Config"
-        name: "config"
-        file: "content/src/fieldConfig/config.json"
-        editor:
-          preview: false
         fields:
           - label: Cannabis Priority Status
             name: cannabisPriorityStatus
@@ -345,56 +345,66 @@ collections:
             widget: object
             summary: "{{cannabisPriorityStatus}}"
             fields:
-              - { label: Tab 1 - Next Button Text, name: nextButtonText, widget: string }
+              - { label: Next Button Text, name: nextButtonText, widget: string }
               - {
-                  label: Tab 1 - None Of The Above Checkbox Label,
+                  label: None Of The Above Checkbox Label,
                   name: noPriorityStatusCheckboxText,
                   widget: string,
                 }
-              - { label: Tab 2 - Header Text, name: secondTabHeaderText, widget: string }
-              - { label: Tab 2 - Text Before Header, name: secondTabDescriptionText, widget: text }
-              - { label: Tab 2 - Back Button Text, name: backButtonText, widget: string }
+              - { label: Content Body, name: tab1Content, widget: markdown }
+
+      - label: "Tab 2 (Requirements)"
+        name: "cannabisPriority-2"
+        file: "content/src/fieldConfig/cannabis-priority-status-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: false
+            widget: object
+            summary: "{{cannabisPriorityStatus}}"
+            fields:
+              - { label: Text Before Header, name: secondTabDescriptionText, widget: text }
+              - { label: Header Text, name: secondTabHeaderText, widget: string }
+              - { label: Minority / Women Header Text, name: minorityOrWomenHeaderText, widget: string }
               - {
-                  label: Tab 2 - Complete Task Progress Button Text,
-                  name: completeTaskProgressButtonText,
-                  widget: string,
+                  label: Minority / Women Requirements,
+                  name: minorityWomenOwnedRequirements,
+                  widget: markdown,
                 }
+              - { label: Veteran Header Text, name: veteranHeaderText, widget: string }
+              - { label: Veteran Owned Requirements, name: veteranOwnedRequirements, widget: markdown }
+              - { label: Social Equity Header Text, name: socialEquityHeaderText, widget: string }
+              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
+              - { label: Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
+              - { label: Impact Zone Text, name: impactZoneText, widget: string }
+
+              - { label: Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
+              - { label: Green Box Minority Or Women Text, name: greenBoxMinorityOrWomenText, widget: string }
+              - { label: Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
+              - { label: Green Box Social Equity Text, name: greenBoxSocialEquityText, widget: string }
+              - { label: Back Button Text, name: backButtonText, widget: string }
+              - { label: Social Equity Button Text, name: socialEquityButtonText, widget: string }
+              - { label: Social Equity Button Link, name: socialEquityButtonLink, widget: string }
               - {
-                  label: Tab 2 - Text For None Of The Above Checkbox Selection,
-                  name: noPriorityStatusText,
-                  widget: text,
-                }
-              - { label: Tab 2 - Social Equity Header Text, name: socialEquityHeaderText, widget: string }
-              - { label: Tab 2 - Social Equity Button Text, name: socialEquityButtonText, widget: string }
-              - { label: Tab 2 - Social Equity Button Link, name: socialEquityButtonLink, widget: string }
-              - { label: Tab 2 - Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
-              - { label: Tab 2 - Impact Zone Text, name: impactZoneText, widget: string }
-              - { label: Tab 2 - Veteran Header Text, name: veteranHeaderText, widget: string }
-              - {
-                  label: Tab 2 - Minority Or Women Header Text,
-                  name: minorityOrWomenHeaderText,
-                  widget: string,
-                }
-              - {
-                  label: Tab 2 - Veteran Minority Or Women Button Text,
+                  label: Veteran Minority Or Women Button Text,
                   name: certificationButtonText,
                   widget: string,
                 }
               - {
-                  label: Tab 2 - Veteran Minority Or Women Button Link,
+                  label: Veteran Minority Or Women Button Link,
                   name: certificationButtonLink,
                   widget: string,
                 }
-              - { label: Tab 2 - Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
               - {
-                  label: Tab 2 - Green Box Minority Or Women Text,
-                  name: greenBoxMinorityOrWomenText,
-                  widget: string,
+                  label: Text For None Of The Above Checkbox Selection,
+                  name: noPriorityStatusText,
+                  widget: text,
                 }
-              - { label: Tab 2 - Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
               - {
-                  label: Tab 2 - Green Box Social Equity Text,
-                  name: greenBoxSocialEquityText,
+                  label: Complete Task Progress Button Text,
+                  name: completeTaskProgressButtonText,
                   widget: string,
                 }
 

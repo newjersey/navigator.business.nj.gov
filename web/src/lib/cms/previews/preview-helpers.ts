@@ -1,9 +1,7 @@
 import { BusinessPersona } from "@businessnjgovnavigator/shared";
 
-// slug in the form profiletab-info-poppy
-export const getMetadataFromSlug = (
-  slug: string
-): { profileTab: string; businessPersona: BusinessPersona } => {
+// slug in the form anyLabel-info-poppy
+export const getMetadataFromSlug = (slug: string): { tab: string; businessPersona: BusinessPersona } => {
   const [, tab, persona] = slug.split("-");
   const businessPersona = (() => {
     switch (persona) {
@@ -18,7 +16,7 @@ export const getMetadataFromSlug = (
     }
   })();
   return {
-    profileTab: tab,
+    tab: tab,
     businessPersona,
   };
 };

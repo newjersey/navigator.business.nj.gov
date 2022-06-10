@@ -35,7 +35,7 @@ const ProfilePreviewDocuments = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 
-  const { profileTab, businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
+  const { tab, businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
 
   const llcUserDataNoDocs = generateUserData({
     profileData: generateProfileData({
@@ -63,7 +63,7 @@ const ProfilePreviewDocuments = (props: Props) => {
         <h2 className="margin-bottom-4">Formation not completed (or non-LLC) state:</h2>
         <Profile
           municipalities={[]}
-          CMS_ONLY_tab={profileTab as ProfileTabs}
+          CMS_ONLY_tab={tab as ProfileTabs}
           CMS_ONLY_businessPersona={businessPersona}
           CMS_ONLY_fakeUserData={llcUserDataNoDocs}
         />

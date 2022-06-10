@@ -1,5 +1,6 @@
 import ContextEditor from "@/lib/cms/editors/context-info";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
+import CannabisPriorityStatusPreview from "@/lib/cms/previews/cannabis-priority-status";
 import CertificationsPreview from "@/lib/cms/previews/certifications";
 import ContentPreview from "@/lib/cms/previews/content";
 import ContextInfoPreview from "@/lib/cms/previews/context-info";
@@ -85,6 +86,13 @@ const CMS = dynamic(
       CMS.registerPreviewTemplate("profile-onboarding-dakota", ProfilePreviewOnboarding);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-misc", ProfilePreviewMisc);
+
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("cannabisPriority-task", TaskPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("cannabisPriority-1", CannabisPriorityStatusPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("cannabisPriority-2", CannabisPriorityStatusPreview);
 
       // ----- Cannabis License -----
       registerAsContent(CMS, [

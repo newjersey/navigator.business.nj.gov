@@ -3,21 +3,30 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { CannabisPriorityRequirements } from "@/components/tasks/cannabis/CannabisPriorityRequirements";
 import { CannabisPriorityTypes } from "@/components/tasks/cannabis/CannabisPriorityTypes";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { CannabisPriorityStatusDisplayContent, Task } from "@/lib/types/types";
-import { scrollToTop } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { Task } from "@/lib/types/types";
+import { scrollToTop, useMountEffect } from "@/lib/utils/helpers";
 import { useState } from "react";
 
 interface Props {
   task: Task;
-  displayContent: CannabisPriorityStatusDisplayContent;
+  CMS_ONLY_tab?: string; // for CMS only
 }
 
 export const CannabisPriorityStatusTask = (props: Props) => {
   const { userData, update } = useUserData();
   const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);
+  const { Config } = useConfig();
+
+  useMountEffect(() => {
+    if (props.CMS_ONLY_tab === "1") {
+      setDisplayFirstTab(true);
+    } else if (props.CMS_ONLY_tab === "2") {
+      setDisplayFirstTab(false);
+    }
+  });
 
   const handleNextTabButtonClick = () => {
     if (!userData) return;
@@ -65,12 +74,16 @@ export const CannabisPriorityStatusTask = (props: Props) => {
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
       {displayFirstTab ? (
-        <CannabisPriorityTypes task={props.task} onNextTab={handleNextTabButtonClick} />
+        <CannabisPriorityTypes
+          task={props.task}
+          onNextTab={handleNextTabButtonClick}
+          CMS_ONLY_tab={props.CMS_ONLY_tab}
+        />
       ) : (
         <CannabisPriorityRequirements
-          displayContent={props.displayContent}
           onBack={handleBackButtonClick}
           onComplete={handleCompleteTaskButtonClick}
+          CMS_ONLY_tab={props.CMS_ONLY_tab}
         />
       )}
     </div>

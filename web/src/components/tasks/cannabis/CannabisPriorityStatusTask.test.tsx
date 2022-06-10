@@ -1,39 +1,29 @@
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
+import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { CannabisPriorityStatusDisplayContent, Task } from "@/lib/types/types";
-import {
-  generateCannabisPriorityStatusDisplayContent,
-  generateTask,
-  generateTaskLink,
-  generateUserData,
-} from "@/test/factories";
-import { randomElementFromArray, withAuthAlert } from "@/test/helpers";
+import { Task } from "@/lib/types/types";
+import { generateTask, generateTaskLink, generateUserData } from "@/test/factories";
+import { markdownToText, randomElementFromArray, withAuthAlert } from "@/test/helpers";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-const renderPage = (
-  task: Task,
-  initialUserData?: UserData,
-  displayContent?: CannabisPriorityStatusDisplayContent
-) => {
+const Config = getMergedConfig();
+
+const renderPage = (task: Task, initialUserData?: UserData) => {
   render(
     withAuthAlert(
       <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
-        <CannabisPriorityStatusTask
-          task={task}
-          displayContent={generateCannabisPriorityStatusDisplayContent(displayContent ? displayContent : {})}
-        />
+        <CannabisPriorityStatusTask task={task} />
       </WithStatefulUserData>,
       IsAuthenticated.TRUE
     )
@@ -57,7 +47,6 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: "Content",
       unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })],
     });
     useMockRoadmapTask(task);
@@ -67,7 +56,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     await waitFor(() => {
       expect(screen.getByText("Do this first")).toBeInTheDocument();
     });
-    expect(screen.getByText("Content")).toBeInTheDocument();
+    expect(screen.getByText(markdownToText(Config.cannabisPriorityStatus.tab1Content))).toBeInTheDocument();
   });
 
   it("renders requirements button when checkbox is selected", async () => {
@@ -79,16 +68,15 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomPriorityType}}Content`,
     });
     useMockRoadmapTask(task);
     renderPage(task);
 
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomPriorityType));
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
     expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
 
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomPriorityType));
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(false);
     expect(screen.queryByTestId("nextTabButton")).not.toBeInTheDocument();
   });
@@ -99,16 +87,15 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomPriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
     renderPage(task);
 
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomPriorityType));
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
     expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByTestId("none-of-the-above"));
+    fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
     expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(false);
     expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
@@ -120,16 +107,15 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomPriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getByTestId("none-of-the-above"));
+    fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
     expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(true);
     expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
 
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomPriorityType));
     expect(currentUserData().taskItemChecklist[randomPriorityType]).toBe(true);
     expect(currentUserData().taskItemChecklist[noneOfTheAbovePriorityId]).toBe(false);
     expect(screen.getByTestId("nextTabButton")).toBeInTheDocument();
@@ -141,12 +127,11 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomPriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomPriorityType));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
@@ -161,12 +146,11 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomPriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomPriorityType));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
@@ -183,12 +167,11 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${noneOfTheAbovePriorityId}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(noneOfTheAbovePriorityId));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
@@ -213,12 +196,11 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomImpactZonePriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
@@ -242,13 +224,12 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomImpactZonePriorityType}}}Random Priority Type Checkbox\n- []{${randomPriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
-    fireEvent.click(screen.getAllByRole("checkbox")[1]);
+    fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
+    fireEvent.click(screen.getByTestId(randomPriorityType));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
@@ -270,7 +251,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomSocialEquityPriorityType));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
@@ -294,12 +275,11 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomVeteranPriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomVeteranPriorityType));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
@@ -325,12 +305,11 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomMinorityOrWomentPriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
+    fireEvent.click(screen.getByTestId(randomMinorityOrWomentPriorityType));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
@@ -357,15 +336,14 @@ describe("<CannabisPriorityStatusTask />", () => {
     const task = generateTask({
       id: "123",
       name: "Header",
-      contentMd: `Content\n- []{${randomMinorityOrWomentPriorityType}}}Random Priority Type Checkbox\n- []{${randomVeteranPriorityType}}}Random Priority Type Checkbox\n- []{${randomSocialEquityPriorityType}}}Random Priority Type Checkbox\n- []{${randomImpactZonePriorityType}}}Random Priority Type Checkbox`,
     });
     useMockRoadmapTask(task);
 
     renderPage(task);
-    fireEvent.click(screen.getAllByRole("checkbox")[0]);
-    fireEvent.click(screen.getAllByRole("checkbox")[1]);
-    fireEvent.click(screen.getAllByRole("checkbox")[2]);
-    fireEvent.click(screen.getAllByRole("checkbox")[3]);
+    fireEvent.click(screen.getByTestId(randomMinorityOrWomentPriorityType));
+    fireEvent.click(screen.getByTestId(randomVeteranPriorityType));
+    fireEvent.click(screen.getByTestId(randomSocialEquityPriorityType));
+    fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {

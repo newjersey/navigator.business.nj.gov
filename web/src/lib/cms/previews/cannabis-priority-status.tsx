@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
-import { ProfileTabs } from "@/lib/types/types";
-import Profile from "@/pages/profile";
-import { generateUser } from "@/test/factories";
-import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
+import { generateTask } from "@/test/factories";
 import merge from "lodash.merge";
 import { useEffect, useRef, useState } from "react";
 
@@ -18,7 +16,7 @@ type Props = {
   getAsset: (string: string) => any;
 };
 
-const ProfilePreview = (props: Props) => {
+const CannabisPriorityStatusPreview = (props: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
@@ -35,30 +33,18 @@ const ProfilePreview = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 
-  const { tab, businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
-  const emptyUserData = createEmptyUserData(generateUser({}));
-
-  const userData = {
-    ...emptyUserData,
-    profileData: {
-      ...emptyUserData.profileData,
-      legalStructureId: tab === "numbers" ? "limited-liability-company" : undefined,
-      businessPersona,
-    },
-  };
+  const { tab } = getMetadataFromSlug(props.entry.toJS().slug);
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <Profile
-          municipalities={[]}
-          CMS_ONLY_tab={tab as ProfileTabs}
-          CMS_ONLY_businessPersona={businessPersona}
-          CMS_ONLY_fakeUserData={userData}
+        <CannabisPriorityStatusTask
+          task={generateTask({ name: "Name is controlled by Task Metadata" })}
+          CMS_ONLY_tab={tab}
         />
       </div>
     </ConfigContext.Provider>
   );
 };
 
-export default ProfilePreview;
+export default CannabisPriorityStatusPreview;
