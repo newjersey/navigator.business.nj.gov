@@ -1,5 +1,5 @@
 ---
-fileName: nj-zero-emission
+filename: nj-zero-emission
 urlSlug: nj-zero-emission
 name: NJ Zero Emission Incentive Program (NJZIP)
 id: nj-zero-emission-incentive-program-njzip

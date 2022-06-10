@@ -1,5 +1,5 @@
 ---
-fileName: research-with-nj
+filename: research-with-nj
 urlSlug: research-with-nj
 name: Research with NJ
 id: research-with-nj

@@ -1,5 +1,5 @@
 ---
-fileName: offshore-wind-tax
+filename: offshore-wind-tax
 urlSlug: offshore-wind-tax
 name: Offshore Wind Tax Credit Program
 id: offshore-wind-tax-credit-program

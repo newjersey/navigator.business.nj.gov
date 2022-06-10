@@ -1,5 +1,5 @@
 ---
-fileName: direct-loans
+filename: direct-loans
 urlSlug: direct-loans
 name: Direct Loans
 id: direct-loans

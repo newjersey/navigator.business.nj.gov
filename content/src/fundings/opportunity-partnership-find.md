@@ -1,5 +1,5 @@
 ---
-fileName: opportunity-partnership-find
+filename: opportunity-partnership-find
 urlSlug: opportunity-partnership-find
 name: "Opportunity Partnership: Find Skilled Employees"
 id: opportunity-partnership-find-skilled-employees

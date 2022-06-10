@@ -1,5 +1,5 @@
 ---
-fileName: premier-lender-program
+filename: premier-lender-program
 urlSlug: premier-lender-program
 name: Premier Lender Program
 id: premier-lender-program

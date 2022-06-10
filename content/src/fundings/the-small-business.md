@@ -1,5 +1,5 @@
 ---
-fileName: the-small-business
+filename: the-small-business
 urlSlug: the-small-business
 name: The Small Business Bonding Readiness Assistance Program
 id: the-small-business-bonding-readiness-assistance-program

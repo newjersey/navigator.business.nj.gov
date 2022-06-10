@@ -1,5 +1,5 @@
 ---
-fileName: nj-ignite
+filename: nj-ignite
 urlSlug: nj-ignite
 name: NJ Ignite
 id: nj-ignite

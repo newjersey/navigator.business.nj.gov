@@ -1,5 +1,5 @@
 ---
-fileName: economic-redevelopment-and
+filename: economic-redevelopment-and
 urlSlug: economic-redevelopment-and
 name: Economic Redevelopment and Growth (ERG) Program
 id: economic-redevelopment-and-growth-erg-program

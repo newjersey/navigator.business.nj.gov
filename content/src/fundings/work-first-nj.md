@@ -1,5 +1,5 @@
 ---
-fileName: work-first-nj
+filename: work-first-nj
 urlSlug: work-first-nj
 name: Work First NJ (TANF + SNAP) Employment and Training
 id: work-first-nj-tanf-snap-employment-and-training

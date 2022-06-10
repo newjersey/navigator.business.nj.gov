@@ -1,5 +1,5 @@
 ---
-fileName: urban-enterprise-zone
+filename: urban-enterprise-zone
 urlSlug: urban-enterprise-zone
 name: Urban Enterprise Zone Manufacturers Energy Sales Tax Exemption
 id: urban-enterprise-zone-manufacturers-energy-sales-tax-exemption

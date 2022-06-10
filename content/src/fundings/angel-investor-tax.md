@@ -1,5 +1,5 @@
 ---
-fileName: angel-investor-tax
+filename: angel-investor-tax
 urlSlug: angel-investor-tax
 name: Angel Investor Tax Credit Program
 id: angel-investor-tax-credit-program

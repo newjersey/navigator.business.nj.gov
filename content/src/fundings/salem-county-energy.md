@@ -1,5 +1,5 @@
 ---
-fileName: salem-county-energy
+filename: salem-county-energy
 urlSlug: salem-county-energy
 name: Salem County Energy Sales Tax Exemption
 id: salem-county-energy-sales-tax-exemption
