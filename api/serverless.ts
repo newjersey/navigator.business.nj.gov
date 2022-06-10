@@ -26,6 +26,9 @@ const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
 const airtableUserResearchBaseId = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
 const airtableBaseUrl = process.env.AIRTABLE_BASE_URL || "";
 const airtableFeedbackBaseId = process.env.AIRTABLE_FEEDBACK_BASE_ID || "";
+const airtableFeedbackTable = process.env.AIRTABLE_FEEDBACK_TABLE || "";
+const airtableIssuesTable = process.env.AIRTABLE_ISSUES_TABLE || "";
+const airtableUsersTable = process.env.AIRTABLE_USERS_TABLE || "";
 
 const region = "us-east-1";
 const usersTable = `users-table-${stage}`;
@@ -137,6 +140,9 @@ const serverlessConfiguration: AWS = {
       AIRTABLE_USER_RESEARCH_BASE_ID: airtableUserResearchBaseId,
       AIRTABLE_FEEDBACK_BASE_ID: airtableFeedbackBaseId,
       AIRTABLE_BASE_URL: airtableBaseUrl,
+      AIRTABLE_FEEDBACK_TABLE: airtableFeedbackTable,
+      AIRTABLE_ISSUES_TABLE: airtableIssuesTable,
+      AIRTABLE_USERS_TABLE: airtableUsersTable,
       FORMATION_API_ACCOUNT: formationApiAccount,
       FORMATION_API_KEY: formationApiKey,
       FORMATION_API_BASE_URL: formationApiBaseUrl,

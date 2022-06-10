@@ -75,6 +75,9 @@ const GOV_DELIVERY_URL_QUESTION_ID = process.env.GOV_DELIVERY_URL_QUESTION_ID;
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || "AIRTABLE_API_KEY";
 const AIRTABLE_USER_RESEARCH_BASE_ID = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "TEST_BASE_ID";
 const AIRTABLE_FEEDBACK_BASE_ID = process.env.AIRTABLE_FEEDBACK_BASE_ID || "TEST_BASE_ID";
+const AIRTABLE_FEEDBACK_TABLE = process.env.AIRTABLE_FEEDBACK_TABLE || "User Feature Requests - DEV";
+const AIRTABLE_ISSUES_TABLE = process.env.AIRTABLE_ISSUES_TABLE || "Navigator Bugs - DEV";
+const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
 const AIRTABLE_BASE_URL =
   process.env.AIRTABLE_BASE_URL ||
   (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
@@ -97,6 +100,7 @@ const airtableUserTestingClient = AirtableUserTestingClient(
     apiKey: AIRTABLE_API_KEY,
     baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
     baseUrl: AIRTABLE_BASE_URL,
+    usersTableName: AIRTABLE_USERS_TABLE,
   },
   logger
 );
@@ -106,6 +110,8 @@ const airtableFeedbackClient = AirtableFeedbackClient(
     apiKey: AIRTABLE_API_KEY,
     baseId: AIRTABLE_FEEDBACK_BASE_ID,
     baseUrl: AIRTABLE_BASE_URL,
+    feedbackTableName: AIRTABLE_FEEDBACK_TABLE,
+    issuesTableName: AIRTABLE_ISSUES_TABLE,
   },
   logger
 );

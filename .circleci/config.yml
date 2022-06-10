@@ -190,6 +190,9 @@ commands:
             echo 'export SMOKE_TEST_ENV=$SMOKE_TEST_ENV_DEV' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_DEV' >> $BASH_ENV
             echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_DEV' >> $BASH_ENV
+            echo 'export AIRTABLE_FEEDBACK_TABLE=$AIRTABLE_FEEDBACK_TABLE_DEV' >> $BASH_ENV
+            echo 'export AIRTABLE_ISSUES_TABLE=$AIRTABLE_ISSUES_TABLE_DEV' >> $BASH_ENV
+            echo 'export AIRTABLE_USERS_TABLE=$AIRTABLE_USERS_TABLE_DEV' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -238,6 +241,9 @@ commands:
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_STAGING' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_STAGING' >> $BASH_ENV
             echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_STAGING' >> $BASH_ENV
+            echo 'export AIRTABLE_FEEDBACK_TABLE=$AIRTABLE_FEEDBACK_TABLE_DEV' >> $BASH_ENV
+            echo 'export AIRTABLE_ISSUES_TABLE=$AIRTABLE_ISSUES_TABLE_DEV' >> $BASH_ENV
+            echo 'export AIRTABLE_USERS_TABLE=$AIRTABLE_USERS_TABLE_DEV' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -266,6 +272,9 @@ commands:
             echo 'export AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID_PROD' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_PROD' >> $BASH_ENV
             echo 'export AB_TESTING_EXPERIENCE_B_PERCENTAGE=$AB_TESTING_EXPERIENCE_B_PERCENTAGE_PROD' >> $BASH_ENV
+            echo 'export AIRTABLE_FEEDBACK_TABLE=$AIRTABLE_FEEDBACK_TABLE_PROD' >> $BASH_ENV
+            echo 'export AIRTABLE_ISSUES_TABLE=$AIRTABLE_ISSUES_TABLE_PROD' >> $BASH_ENV
+            echo 'export AIRTABLE_USERS_TABLE=$AIRTABLE_USERS_TABLE_PROD' >> $BASH_ENV
 
   set-content-env-vars:
     steps:

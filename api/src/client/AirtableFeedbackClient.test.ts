@@ -28,6 +28,8 @@ describe("AirtableFeedbackClient", () => {
         apiKey: "some-api-key",
         baseId: "some-base-id",
         baseUrl: "some-base-url",
+        feedbackTableName: "some-feedback-table",
+        issuesTableName: "some-issues-table",
       },
       logger
     );
@@ -41,7 +43,7 @@ describe("AirtableFeedbackClient", () => {
     expect(result).toEqual(true);
 
     expect(mockAirtable.baseIdCalledWith).toEqual("some-base-id");
-    expect(mockAirtable.tableIdCalledWith).toEqual("User Feature Requests");
+    expect(mockAirtable.tableIdCalledWith).toEqual("some-feedback-table");
     expect(mockAirtable.dataCalledWith).toEqual([
       {
         fields: {
@@ -66,7 +68,7 @@ describe("AirtableFeedbackClient", () => {
     expect(result).toEqual(true);
 
     expect(mockAirtable.baseIdCalledWith).toEqual("some-base-id");
-    expect(mockAirtable.tableIdCalledWith).toEqual("Navigator Bugs - DEV");
+    expect(mockAirtable.tableIdCalledWith).toEqual("some-issues-table");
     expect(mockAirtable.dataCalledWith).toEqual([
       {
         fields: {

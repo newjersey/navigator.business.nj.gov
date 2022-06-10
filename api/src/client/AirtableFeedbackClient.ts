@@ -8,12 +8,11 @@ type AirtableConfig = {
   apiKey: string;
   baseId: string;
   baseUrl: string;
+  feedbackTableName: string;
+  issuesTableName: string;
 };
 
 export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWriterType): FeedbackClient => {
-  const userFeedbackTable = "User Feature Requests";
-  const userIssuesTable = process.env.AIRTABLE_FEEDBACK_ISSUES_TABLE_NAME || "Navigator Bugs - DEV";
-
   Airtable.configure({
     endpointUrl: config.baseUrl,
     apiKey: config.apiKey,
@@ -34,19 +33,19 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
         "Screen Width": feedbackRequest.screenWidth,
       };
       logWriter.LogInfo(
-        `Feedback - Airtable - Request Sent to base ${
-          config.baseId
-        } table ${userFeedbackTable}. data: ${JSON.stringify(fields)}`
+        `Feedback - Airtable - Request Sent to base ${config.baseId} table ${
+          config.feedbackTableName
+        }. data: ${JSON.stringify(fields)}`
       );
-      base(userFeedbackTable).create([{ fields }], (err: unknown, res: unknown) => {
+      base(config.feedbackTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
           logWriter.LogInfo(
-            `FeedbackClient - Airtable - Table ${userFeedbackTable} - Error Received: ${err}`
+            `FeedbackClient - Airtable - Table ${config.feedbackTableName} - Error Received: ${err}`
           );
           return reject();
         }
         logWriter.LogInfo(
-          `FeedbackClient - Airtable - Table ${userFeedbackTable} - Response Received: ${res}`
+          `FeedbackClient - Airtable - Table ${config.feedbackTableName} - Response Received: ${res}`
         );
         return resolve(true);
       });
@@ -67,16 +66,20 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
         "Screen Width": issueRequest.screenWidth,
       };
       logWriter.LogInfo(
-        `Feedback - Airtable - Request Sent to base ${
-          config.baseId
-        } table ${userIssuesTable}. data: ${JSON.stringify(fields)}`
+        `Feedback - Airtable - Request Sent to base ${config.baseId} table ${
+          config.issuesTableName
+        }. data: ${JSON.stringify(fields)}`
       );
-      base(userIssuesTable).create([{ fields }], (err: unknown, res: unknown) => {
+      base(config.issuesTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
-          logWriter.LogInfo(`FeedbackClient - Airtable - Table ${userIssuesTable} - Error Received: ${err}`);
+          logWriter.LogInfo(
+            `FeedbackClient - Airtable - Table ${config.issuesTableName} - Error Received: ${err}`
+          );
           return reject();
         }
-        logWriter.LogInfo(`FeedbackClient - Airtable - Table ${userIssuesTable} - Response Received: ${res}`);
+        logWriter.LogInfo(
+          `FeedbackClient - Airtable - Table ${config.issuesTableName} - Response Received: ${res}`
+        );
         return resolve(true);
       });
     });

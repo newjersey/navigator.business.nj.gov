@@ -29,6 +29,7 @@ describe("AirtableUserTestingClient", () => {
         apiKey: "some-api-key",
         baseId: "some-base-id",
         baseUrl: "some-base-url",
+        usersTableName: "some-users-table",
       },
       logger
     );
@@ -39,7 +40,7 @@ describe("AirtableUserTestingClient", () => {
     const result = await client.add(user);
     expect(result).toEqual({ success: true, status: "SUCCESS" });
     expect(mockAirtable.baseIdCalledWith).toEqual("some-base-id");
-    expect(mockAirtable.tableIdCalledWith).toEqual("Users");
+    expect(mockAirtable.tableIdCalledWith).toEqual("some-users-table");
     expect(mockAirtable.dataCalledWith).toEqual([
       {
         fields: {
