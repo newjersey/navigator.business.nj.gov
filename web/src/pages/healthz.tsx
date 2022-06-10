@@ -3,3 +3,9 @@ const HealthCheck = () => {
 };
 
 export default HealthCheck;
+
+export async function getStaticProps() {
+  return {
+    props: { noAuth: true },
+  };
+}

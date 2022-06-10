@@ -121,4 +121,10 @@ const Admin = () => (
   </>
 );
 
+export async function getStaticProps() {
+  return {
+    props: { noAuth: true },
+  };
+}
+
 export default Admin;

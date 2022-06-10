@@ -13,6 +13,7 @@ import { ChangeEvent, KeyboardEvent, ReactElement, useMemo, useState } from "rea
 
 interface Props {
   netlifyConfig: any;
+  noAuth: boolean;
 }
 
 type ConfigMatch = {
@@ -191,6 +192,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
   return {
     props: {
       netlifyConfig: getNetlifyConfig(),
+      noAuth: true,
     },
   };
 };

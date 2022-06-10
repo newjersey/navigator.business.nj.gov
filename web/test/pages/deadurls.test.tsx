@@ -42,6 +42,7 @@ describe("DeadUrls page", () => {
         deadLinks={{
           deadLink1: ["http://www.deadlink.com"],
         }}
+        noAuth={true}
       />
     );
     expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
@@ -62,6 +63,7 @@ describe("DeadUrls page", () => {
         deadLinks={{
           deadLink1: ["http://www.deadlink.com"],
         }}
+        noAuth={true}
       />
     );
     expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();

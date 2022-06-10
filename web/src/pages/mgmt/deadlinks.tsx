@@ -10,6 +10,7 @@ import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 interface Props {
   deadTasks: string[];
   deadContextualInfo: string[];
+  noAuth: boolean;
 }
 
 const DeadLinksPage = (props: Props): ReactElement => {
@@ -92,6 +93,7 @@ export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Pro
         props: {
           deadTasks: await findDeadTasks(),
           deadContextualInfo: await findDeadContextualInfo(),
+          noAuth: true,
         },
       };
 };

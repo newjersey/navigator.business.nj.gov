@@ -8,6 +8,7 @@ import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
 interface Props {
   envVars: string;
+  noAuth: boolean;
 }
 
 const FeatureFlagsPage = (props: Props): ReactElement => {
@@ -99,6 +100,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
   return {
     props: {
       envVars: JSON.stringify(process.env),
+      noAuth: true,
     },
   };
 };
