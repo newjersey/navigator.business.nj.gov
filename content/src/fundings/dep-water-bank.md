@@ -7,6 +7,8 @@ callToActionLink: https://nj.gov/dep/wiip/water-bank.html
 callToActionText: Learn More
 fundingType: loan
 programPurpose: ""
+agency:
+  - NJDEP
 agencyContact: ""
 publishStageArchive: ""
 status: rolling application
