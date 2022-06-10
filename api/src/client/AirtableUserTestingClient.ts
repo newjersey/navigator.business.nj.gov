@@ -8,14 +8,13 @@ type AirtableConfig = {
   apiKey: string;
   baseId: string;
   baseUrl: string;
+  usersTableName: string;
 };
 
 export const AirtableUserTestingClient = (
   config: AirtableConfig,
   logWriter: LogWriterType
 ): UserTestingClient => {
-  const table = "Users";
-
   Airtable.configure({
     endpointUrl: config.baseUrl,
     apiKey: config.apiKey,
@@ -32,9 +31,9 @@ export const AirtableUserTestingClient = (
         Source: "Opted In Navigator",
       };
       logWriter.LogInfo(
-        `UserResearch - Airtable - Request Sent to base ${config.baseId} table ${table}. data: ${fields}`
+        `UserResearch - Airtable - Request Sent to base ${config.baseId} table ${config.usersTableName}. data: ${fields}`
       );
-      base(table).create([{ fields }], (err: unknown, res: unknown) => {
+      base(config.usersTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
           logWriter.LogInfo(`UserResearchClient - Airtable - Error Received: ${err}`);
           return resolve({ success: false, status: "RESPONSE_ERROR" });

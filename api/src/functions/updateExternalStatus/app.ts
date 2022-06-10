@@ -53,6 +53,7 @@ export default async function handler() {
   const AIRTABLE_BASE_URL =
     process.env.AIRTABLE_BASE_URL ||
     (IS_OFFLINE ? `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000` : "https://api.airtable.com");
+  const AIRTABLE_USERS_TABLE = process.env.AIRTABLE_USERS_TABLE || "Users Dev";
 
   const newsletterGovDeliveryClient = GovDeliveryNewsletterClient({
     baseUrl: GOV_DELIVERY_BASE_URL,
@@ -68,6 +69,7 @@ export default async function handler() {
       apiKey: AIRTABLE_API_KEY,
       baseId: AIRTABLE_USER_RESEARCH_BASE_ID,
       baseUrl: AIRTABLE_BASE_URL,
+      usersTableName: AIRTABLE_USERS_TABLE,
     },
     logger
   );
