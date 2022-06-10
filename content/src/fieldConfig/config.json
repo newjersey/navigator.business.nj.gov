@@ -435,7 +435,7 @@
   "taskDefaults": {
     "backToRoadmapText": "Go Back",
     "issuingAgencyText": "Issuing Agency",
-    "requiredTagText": "Required",
+    "requiredLabelText": "**Required**",
     "pageTitle": "Business Roadmap",
     "loadingTaskDependencies": "Loading task dependencies…",
     "unlockedBySingular": "Before starting this task, we recommend that you take a look at:",

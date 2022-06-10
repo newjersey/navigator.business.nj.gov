@@ -1,10 +1,10 @@
-import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { Content } from "@/components/Content";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import * as types from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { ReactElement } from "react";
@@ -15,39 +15,51 @@ interface Props {
 
 export const Task = (props: Props): ReactElement => {
   const { userData } = useUserData();
+  const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-
   const taskProgress = (userData?.taskProgress && userData.taskProgress[props.task.id]) || "NOT_STARTED";
+
+  const renderRequiredLabel = () => {
+    if (!props.task.required) return <></>;
+    return (
+      <span className="text-base text-no-underline display-inline-block" data-testid="required task">
+        <Content>{Config.taskDefaults.requiredLabelText}</Content>
+      </span>
+    );
+  };
 
   return (
     <li className="margin-0">
       <div
-        className={`line-height-sans-2 flex flex-align-center ${
+        className={`line-height-sans-2 flex flex-align-start ${
           isTabletAndUp ? "margin-bottom-2" : "margin-bottom-1"
         }`}
       >
-        <ArrowTooltip title={Config.taskDefaults.requiredTagText}>
-          <img
-            src="/img/required-task-icon.svg"
-            alt=""
-            className="margin-right-2"
-            style={{ visibility: props.task.required === true ? "visible" : "hidden" }}
-          />
-        </ArrowTooltip>
-        {isTabletAndUp && <span className="margin-right-205">{TaskProgressTagLookup[taskProgress]}</span>}
-        <Link href={`/tasks/${props.task.urlSlug}`} passHref>
-          <a
-            onClick={() => analytics.event.roadmap_task_title.click.go_to_task()}
-            href={`/tasks/${props.task.urlSlug}`}
-            className="usa-link"
-            data-task={props.task.id}
-          >
-            {props.task.name}
-          </a>
-        </Link>
+        {isTabletAndUp && (
+          <span className="margin-right-205 margin-top-05 padding-top-2px">
+            {TaskProgressTagLookup[taskProgress]}
+          </span>
+        )}
+        <div>
+          <Link href={`/tasks/${props.task.urlSlug}`} passHref>
+            <a
+              onClick={() => analytics.event.roadmap_task_title.click.go_to_task()}
+              href={`/tasks/${props.task.urlSlug}`}
+              className="usa-link margin-right-105"
+              data-task={props.task.id}
+            >
+              {props.task.name}
+            </a>
+          </Link>
+
+          {isTabletAndUp && renderRequiredLabel()}
+        </div>
       </div>
+
       {!isTabletAndUp && (
-        <div className="margin-bottom-2 margin-left-4">{TaskProgressTagLookup[taskProgress]}</div>
+        <div className="margin-bottom-2">
+          {TaskProgressTagLookup[taskProgress]} <span className="margin-left-1">{renderRequiredLabel()}</span>
+        </div>
       )}
     </li>
   );

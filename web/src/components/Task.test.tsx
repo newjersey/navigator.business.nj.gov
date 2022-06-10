@@ -13,4 +13,16 @@ describe("<Task />", () => {
     );
     expect(screen.getByText("task 1").getAttribute("href")).toEqual("/tasks/url-slug-1");
   });
+
+  it("renders required content when task is required", () => {
+    const task = generateTask({ urlSlug: "url-slug-1", name: "task 1", required: true });
+
+    render(
+      <ThemeProvider theme={createTheme()}>
+        <Task task={task} />
+      </ThemeProvider>
+    );
+
+    expect(screen.getByTestId("required task")).toBeInTheDocument();
+  });
 });
