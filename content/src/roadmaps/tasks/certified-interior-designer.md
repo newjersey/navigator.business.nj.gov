@@ -1,13 +1,14 @@
 ---
 urlSlug: certified-interior-designer
 filename: certified-interior-designer
-name: Become a Certified Interior Designer if Applicable
+name: Become a Certified Interior Designer
 id: certified-interior-designer
 callToActionLink: https://www.njconsumeraffairs.gov/int/Pages/applications.aspx
 callToActionText: Apply for My Certification
+issuingAgency: New Jersey Division of Consumer Affairs Interior Design
+  Examination and Evaluation Committee
 ---
-
-In New Jersey, you can only legally use the title of Certified Interior Designer if you’ve been certified by the Interior Design Examination and Evaluation Committee.
+In New Jersey, you can only legally use the title of Certified Interior Designer if you’ve been certified by the New Jersey Interior Design Examination and Evaluation Committee.
 
 ---
 
@@ -18,13 +19,13 @@ In New Jersey, you can only legally use the title of Certified Interior Designer
 
 ### Application Requirements
 
-- College transcripts (sent directly to the Committee)
-- Course description form (if your degree is not from an accredited program)
-- Name and contact information for one professional reference
-- Name and contact information for two personal references
-- Supporting documentation if you answered “Yes” to any questions of moral or professional character
-- CLARB examination records (sent directly to the Committee)
-- Pay any fees associated with the certification
+* College transcripts (sent directly to the Committee)
+* Course description form (if your degree is not from an accredited program)
+* Name and contact information for one professional reference
+* Name and contact information for two personal references
+* CLARB examination records (sent directly to the Committee)
+* Supporting documentation (like police records) if you answered "Yes” to any questions of criminal history or moral character
+* Pay any fees associated with the certification
 
 > **Once completed, you will have:**
 >

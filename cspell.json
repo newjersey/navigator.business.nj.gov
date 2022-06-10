@@ -69,7 +69,8 @@
     "Transformative",
     "LIHTC",
     "NCCAOM",
-    "CLARB"
+    "CLARB",
+    "NCARB"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

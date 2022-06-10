@@ -1,11 +1,15 @@
 ---
 filename: dep-water-bank
-urlSlug: dep-water-bank
+urlSlug: water-bank
 name: New Jersey Water Bank Program
 id: dep-water-bank
 callToActionLink: https://nj.gov/dep/wiip/water-bank.html
 callToActionText: Learn More
 fundingType: loan
+programPurpose: ""
+agency:
+  - NJDEP
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -19,8 +23,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 This program provides low-cost financing for the design, construction, and implementation of projects that help protect and improve water quality, and help ensure safe and adequate drinking water.

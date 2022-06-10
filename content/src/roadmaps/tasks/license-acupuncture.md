@@ -1,13 +1,12 @@
 ---
 urlSlug: license-acupuncture
 filename: license-acupuncture
-name: Apply for an Acupuncturist License
+name: Apply for an Acupuncturist License, if Applicable
 id: license-acupuncture
 callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
 callToActionText: Apply for My License
 required: false
 ---
-
 You will need an Acupuncturist license **if you** plan to offer services as an acupuncturist.
 
 ---
@@ -25,4 +24,4 @@ You will need an Acupuncturist license **if you** plan to offer services as an a
 
 > **Once completed, you will have:**
 >
-> - An acupuncturist license number sent to you via mail at the address in your application
+> - An acupuncturist license number

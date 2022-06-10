@@ -1,11 +1,15 @@
 ---
 filename: dep-petroleum-storage
-urlSlug: dep-petroleum-storage
+urlSlug: petroleum-storage
 name: Petroleum Underground Storage Tank  Remediation, Upgrade and Closure Fund
 id: dep-petroleum-storage
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/sr_ustru.htm
 callToActionText: Learn More
 fundingType: grant
+programPurpose: ""
+agency:
+  - NJDEP
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -23,8 +27,6 @@ sector:
   - utilities
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Underground Storage Tank Fund (UST) provides financial assistance in the form of loans and grants to eligible owners and operators for the closure and remediation of discharges from unregulated petroleum underground storage tanks, and for the closure and remediation of State-regulated petroleum underground storage tanks.
