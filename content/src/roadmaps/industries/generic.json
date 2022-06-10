@@ -1,9 +1,9 @@
 {
   "isMobileLocation": false,
-  "canBeHomeBased": true,
-  "defaultSectorId": "other-services",
-  "canBeReseller": true,
-  "isEnabled": true,
+  "canBeHomeBased": false,
+  "defaultSectorId": "construction",
+  "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -34,11 +34,22 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "license-engineer"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "firm-engineer"
     }
   ],
-  "name": "All Other Businesses",
+  "name": "Professional Engineer",
   "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
-  "id": "generic",
-  "description": "Select this if you don’t see your specific industry"
+  "isEnabled": false,
+  "additionalSearchTerms": "engineer, consultant, ",
+  "id": "engineer",
+  "description": "Designs and plans the building of systems and structures"
 }
