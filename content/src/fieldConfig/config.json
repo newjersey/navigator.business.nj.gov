@@ -323,7 +323,7 @@
     "reportIssueModalHeadingText": "Report an Issue",
     "reportIssueModalDetailBodyText": "**What was the issue you encountered?**",
     "successfulSubmissionModalHeadingText": "Thank you!",
-    "unsuccessfulSubmissionAlertText": "There was an error. Please try again or email your issue to xyz@xyz.gov.",
+    "unsuccessfulSubmissionAlertText": "There was an error. Please try again or email your issue to jessica@business.nj.gov.",
     "feedbackModalIntercomButtonText": "Speak with a NJ-Based Business Expert",
     "reportIssueModalSummaryBodyText": "**What were you trying to do?**",
     "reportIssueModalDetailAdditionalBodyText": "Walk us through, step-by-step what happened. (i.e. This is my first time trying to create an account. When I was on the landing page I clicked “Get Started” but then nothing happened.)",
