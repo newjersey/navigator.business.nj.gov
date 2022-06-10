@@ -21,8 +21,6 @@ interface Props {
   bold?: boolean;
   hover?: boolean;
   fixedWidth?: boolean;
-  hexColor?: string;
-  paddingOverrideClassName?: string;
 }
 
 export const Tag = (props: Props): ReactElement => {
@@ -58,7 +56,8 @@ export const Tag = (props: Props): ReactElement => {
       styling = "bg-white text-base-darkest bg-funding";
       break;
     case "required":
-      styling = "bg-white text-accent-cool-darker border-1px border-accent-cool-darker";
+      styling =
+        "bg-white text-accent-cool-darker border-1px border-accent-cool-darker padding-y-0 padding-left-0";
       break;
   }
 
@@ -70,15 +69,13 @@ export const Tag = (props: Props): ReactElement => {
 
   return (
     <span
-      className={`flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2
+      className={`flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
         ${props.textWrap ? "text-wrap display-block" : "text-no-wrap"}
         ${styling}
         ${hoverStyling}
         ${props.bold ? "text-bold" : ""}
         ${props.fixedWidth ? "tag-fixed-width display-inline-block" : ""}
-        ${props.paddingOverrideClassName ?? "padding-y-2px"}
       `}
-      style={props.hexColor ? { backgroundColor: props.hexColor } : {}}
       {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
     >
       {props.children}

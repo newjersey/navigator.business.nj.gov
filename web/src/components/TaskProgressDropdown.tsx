@@ -8,17 +8,7 @@ import { TaskProgress } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
-import createStyles from "@mui/styles/createStyles";
-import makeStyles from "@mui/styles/makeStyles";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    menuItem: {
-      letterSpacing: "0.02857em",
-    },
-  })
-);
 
 interface Props {
   onSelect: (selectedTaskProgress: TaskProgress) => void;
@@ -26,7 +16,6 @@ interface Props {
 }
 
 export const TaskProgressDropdown = (props: Props): ReactElement => {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [value, setValue] = useState<TaskProgress>(props.initialValue || "NOT_STARTED");
   const [successToastIsOpen, setSuccessToastIsOpen] = useState<boolean>(false);
@@ -99,7 +88,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         }}
       >
         <MenuItem
-          className={`margin-left-neg-1 ${classes.menuItem}`}
+          className="margin-left-neg-1"
           onClick={() => handleSelect("NOT_STARTED")}
           selected={value === "NOT_STARTED"}
         >
@@ -108,7 +97,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           </Tag>
         </MenuItem>
         <MenuItem
-          className={`margin-left-neg-1 ${classes.menuItem}`}
+          className="margin-left-neg-1"
           onClick={() => handleSelect("IN_PROGRESS")}
           selected={value === "IN_PROGRESS"}
         >
@@ -117,7 +106,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
           </Tag>
         </MenuItem>
         <MenuItem
-          className={`margin-left-neg-1 ${classes.menuItem}`}
+          className="margin-left-neg-1"
           onClick={() => handleSelect("COMPLETED")}
           selected={value === "COMPLETED"}
         >
