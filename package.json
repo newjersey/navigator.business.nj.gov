@@ -1,7 +1,7 @@
 {
   "name": "@businessnjgovnavigator/root",
   "version": "3.11.0",
-  "description": "This is the development repository for the work-in-progress business dashboard from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
+  "description": "This is the development repository for the work-in-progress business navigator from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -232,16 +232,18 @@
   "release": {
     "baseBranch": "main",
     "plugins": [
-      "@semantic-release/commit-analyzer",
-      {
-        "preset": "angular",
-        "parserOpts": {
-          "noteKeywords": [
-            "BREAKING CHANGE",
-            "BREAKING CHANGES"
-          ]
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          }
         }
-      },
+      ],
       [
         "@semantic-release/release-notes-generator",
         {
