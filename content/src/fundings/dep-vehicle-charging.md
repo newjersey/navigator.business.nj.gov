@@ -1,11 +1,13 @@
 ---
 filename: dep-vehicle-charging
-urlSlug: dep-vehicle-charging
+urlSlug: vehicle-charging-grant
 name: "It Pays to Plug: Electric Vehicle Workplace Charging Grant Program"
 id: dep-vehicle-charging
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-evcharge.htm
 callToActionText: Learn More
 fundingType: grant
+programPurpose: ""
+agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve
 programFrequency: ongoing
@@ -19,8 +21,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 This program provides grants to offset the cost of purchasing and installing electric vehicle charging stations. The program expands New Jersey’s growing network of electric vehicle infrastructure, allowing residents, businesses, and government agencies to purchase and drive electric vehicles.
