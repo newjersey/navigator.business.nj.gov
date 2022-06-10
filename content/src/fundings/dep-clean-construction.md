@@ -7,7 +7,8 @@ callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm
 callToActionText: Learn More
 fundingType: grant
 programPurpose: ""
-agency: null
+agency:
+  - NJDEP
 agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve
