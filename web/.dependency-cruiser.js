@@ -332,6 +332,7 @@ module.exports = {
           "\\.d\\.ts$", // TypeScript declaration files
           "(^|/)tsconfig\\.json$", // TypeScript config
           "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$", // other configs
+          "src/pages/healthz.tsx", // healthcheck page
         ],
       },
       to: {},
