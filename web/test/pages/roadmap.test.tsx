@@ -276,50 +276,6 @@ describe("roadmap page", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  it("renders icon next to task status only if task is required", () => {
-    useMockRoadmap({
-      steps: [
-        generateStep({
-          section: "PLAN",
-          tasks: [generateTask({ required: true }), generateTask({ required: false })],
-        }),
-      ],
-    });
-
-    renderRoadmapPage({});
-    const sectionPlan = screen.getByTestId("section-plan");
-    const allTasks = within(sectionPlan).getAllByRole("listitem");
-
-    expect(allTasks.length).toEqual(2);
-
-    expect(within(allTasks[0]).getByLabelText(Config.taskDefaults.requiredTagText)).toBeVisible();
-    expect(within(allTasks[1]).queryByLabelText(Config.taskDefaults.requiredTagText)).not.toBeVisible();
-  });
-
-  it("renders tooltip when hovering over a required task's icon", async () => {
-    useMockRoadmap({
-      steps: [
-        generateStep({
-          name: "step1",
-          tasks: [generateTask({ required: true })],
-        }),
-      ],
-    });
-
-    renderRoadmapPage({});
-    await waitFor(() =>
-      expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument()
-    );
-
-    const requiredIcon = screen.getByLabelText(Config.taskDefaults.requiredTagText);
-    fireEvent.mouseOver(requiredIcon);
-
-    await waitFor(() => {
-      expect(screen.getByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
-    });
-    expect(screen.queryByText(Config.taskDefaults.requiredTagText)).toBeVisible();
-  });
-
   describe("oscar graduation modal", () => {
     const openGraduationModal = (): void => {
       fireEvent.click(screen.getByText(Config.roadmapDefaults.graduationButtonText));
