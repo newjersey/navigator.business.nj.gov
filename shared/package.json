@@ -30,7 +30,7 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@jest/types": "28.1.0",
+    "@jest/types": "28.1.1",
     "@types/jest": "28.1.1",
     "@types/node": "16.11.39",
     "@types/uuid": "8.3.4",
@@ -40,7 +40,7 @@
     "eslint": "8.17.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-jest": "26.5.3",
-    "jest": "28.1.0",
+    "jest": "28.1.1",
     "jest-junit": "13.2.0",
     "prettier": "2.6.2",
     "rimraf": "3.0.2",
