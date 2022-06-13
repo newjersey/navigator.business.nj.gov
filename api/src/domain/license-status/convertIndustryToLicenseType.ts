@@ -6,9 +6,9 @@ export const convertIndustryToLicenseType = (industryId: string | undefined): st
     return industry.licenseType;
   }
 
-  throw `${industry} does not have a license type`;
+  throw `${industry.id} does not have a license type`;
 };
 
 export const industryHasALicenseType = (industryId: string | undefined): boolean => {
-  return LookupIndustryById(industryId)?.licenseType !== undefined ?? false;
+  return LookupIndustryById(industryId)?.licenseType !== undefined;
 };
