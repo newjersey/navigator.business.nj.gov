@@ -1,3 +1,33 @@
+# [3.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.11.0...v3.12.0) (2022-06-13)
+
+
+### Bug Fixes
+
+* [[#3038](https://github.com/newjersey/navigator.business.nj.gov/issues/3038)] add new fields to funding objects ([29bf9ab](https://github.com/newjersey/navigator.business.nj.gov/commit/29bf9abfd5315724a718d6c50c431517528402f7))
+* **deps:** update aws-sdk ([b097a76](https://github.com/newjersey/navigator.business.nj.gov/commit/b097a761d3f9c9d17b93ec05845e8cab86e8749c))
+* **deps:** update dependency dayjs to v1.11.3 ([f23b28c](https://github.com/newjersey/navigator.business.nj.gov/commit/f23b28c8f0f21f56c5aedb9de87af40a948d0b0c))
+* **deps:** update dependency focus-trap-react to v8.11.3 ([af23909](https://github.com/newjersey/navigator.business.nj.gov/commit/af239098b031b036845e8190b2b0f2234264dd9a))
+* update user feedback email ([e93b48b](https://github.com/newjersey/navigator.business.nj.gov/commit/e93b48bc43d29916eeaf5a29305ab738cd5f81d1))
+* updating Funding Opportunities Content dep-drinking-water ([#3189](https://github.com/newjersey/navigator.business.nj.gov/issues/3189)) ([24729af](https://github.com/newjersey/navigator.business.nj.gov/commit/24729af34e76041c64af4f764101aec36381728b))
+* updating Funding Opportunities Content dep-petroleum-storage ([#3188](https://github.com/newjersey/navigator.business.nj.gov/issues/3188)) ([d356737](https://github.com/newjersey/navigator.business.nj.gov/commit/d35673772ee78864ef0b0943293c34f813eb62fd))
+* updating Funding Opportunities Content dep-vehicle-charging ([#3186](https://github.com/newjersey/navigator.business.nj.gov/issues/3186)) ([6341d0b](https://github.com/newjersey/navigator.business.nj.gov/commit/6341d0b74554137f6cd5728dc79aff003b8d4f45))
+* updating Funding Opportunities Content dep-water-bank ([#3187](https://github.com/newjersey/navigator.business.nj.gov/issues/3187)) ([e8bd558](https://github.com/newjersey/navigator.business.nj.gov/commit/e8bd5585a5bdef085bd8eb1476cc63a0e8b77577))
+* updating Industry Roadmaps acupuncture ([#3194](https://github.com/newjersey/navigator.business.nj.gov/issues/3194)) ([715d65c](https://github.com/newjersey/navigator.business.nj.gov/commit/715d65c5454d44a904764e6b684f6f17e6c2943e))
+* updating Tasks architect-license ([#3171](https://github.com/newjersey/navigator.business.nj.gov/issues/3171)) ([ad03076](https://github.com/newjersey/navigator.business.nj.gov/commit/ad03076a6356028881e5ac89e794e95a6acd9a90))
+* updating Tasks architect-license ([#3173](https://github.com/newjersey/navigator.business.nj.gov/issues/3173)) ([f745a86](https://github.com/newjersey/navigator.business.nj.gov/commit/f745a86b1d34b6d538402a2792682996019499ce))
+* updating Tasks architect-license ([#3176](https://github.com/newjersey/navigator.business.nj.gov/issues/3176)) ([8a575f8](https://github.com/newjersey/navigator.business.nj.gov/commit/8a575f8119f18e2e6e67e281eb72b6cf87d229c9))
+* updating Tasks certified-interior-designer ([#3145](https://github.com/newjersey/navigator.business.nj.gov/issues/3145)) ([8abe444](https://github.com/newjersey/navigator.business.nj.gov/commit/8abe44476df6f276181b183d627200c80c07c0ec))
+* updating Tasks license-acupuncture ([#3169](https://github.com/newjersey/navigator.business.nj.gov/issues/3169)) ([e68864d](https://github.com/newjersey/navigator.business.nj.gov/commit/e68864d4e0c064c88655cfbb1a016a86e276dc41))
+* updating Tasks license-acupuncture ([#3180](https://github.com/newjersey/navigator.business.nj.gov/issues/3180)) ([cc0c44c](https://github.com/newjersey/navigator.business.nj.gov/commit/cc0c44cbbf055e3ff4ed1f90976634cef8b13418))
+* updating Tasks license-acupuncture ([#3190](https://github.com/newjersey/navigator.business.nj.gov/issues/3190)) ([ca5987f](https://github.com/newjersey/navigator.business.nj.gov/commit/ca5987f2479df64d208dfa76806f8f181c83e0c6))
+* updating Tasks license-acupuncture ([#3191](https://github.com/newjersey/navigator.business.nj.gov/issues/3191)) ([598bc8a](https://github.com/newjersey/navigator.business.nj.gov/commit/598bc8a92cb37ea898c10d2e204e2d932cb2ffc5))
+
+
+### Features
+
+* [[#3001](https://github.com/newjersey/navigator.business.nj.gov/issues/3001)] update required label on roadmap ([d654731](https://github.com/newjersey/navigator.business.nj.gov/commit/d6547318f0f56d9fc66fa555ea1e775edfbde66a))
+* [[#3015](https://github.com/newjersey/navigator.business.nj.gov/issues/3015)] remove profile box from dashboard ([16b1e07](https://github.com/newjersey/navigator.business.nj.gov/commit/16b1e07ba4c4c8bf0d012e336f623824973ae9bc))
+
 # [3.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.10.0...v3.11.0) (2022-06-08)
 
 
