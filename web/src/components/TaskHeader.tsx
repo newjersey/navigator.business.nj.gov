@@ -98,7 +98,7 @@ export const TaskHeader = (props: Props): ReactElement => {
                 src="/img/required-task-icon.svg"
                 alt=""
               />
-              {Config.taskDefaults.requiredLabelText}
+              {Config.taskDefaults.requiredTagText}
             </Tag>
           </div>
         )}

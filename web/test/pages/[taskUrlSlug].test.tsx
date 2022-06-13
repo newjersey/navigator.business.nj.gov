@@ -202,12 +202,12 @@ describe("task page", () => {
 
   it("displays required tag in header if task is required", () => {
     renderPage(generateTask({ required: true }));
-    expect(screen.getByText(Config.taskDefaults.requiredLabelText)).toBeInTheDocument();
+    expect(screen.getByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
   });
 
   it("does not display required tag in header if task is not required", () => {
     renderPage(generateTask({ required: false }));
-    expect(screen.queryByText(Config.taskDefaults.requiredLabelText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
   });
 
   it("overrides required tag in header from task in roadmap", () => {
@@ -218,7 +218,7 @@ describe("task page", () => {
       steps: [generateStep({ tasks: [taskInRoadmap], section: "PLAN" })],
     });
     renderPage(taskStaticGeneration);
-    expect(screen.queryByText(Config.taskDefaults.requiredLabelText)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
   });
 
   it("displays issuing form and agency in task footer when they are defined values", () => {
