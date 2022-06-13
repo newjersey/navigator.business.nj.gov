@@ -9,7 +9,8 @@ You will need to draft and sign a location agreement with the proprietor of the 
 ---
 ### Agreement Considerations
 - Payment: How and how often will the site proprietor be paid
-- Start Date and Length of the Agreement
+- Start date
+- Length of the agreement
 - Liability: Who will be the responsible party for damages to the vending machine
 
 >**Once completed, you will have**
