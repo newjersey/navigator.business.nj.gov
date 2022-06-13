@@ -1,3 +1,10 @@
+## [3.12.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.12.0...v3.12.1) (2022-06-13)
+
+
+### Bug Fixes
+
+* correct field for business formation name ([e5257d5](https://github.com/newjersey/navigator.business.nj.gov/commit/e5257d55b9716efa6fb8adfd0f0319f43d7ae0bd))
+
 # [3.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.11.0...v3.12.0) (2022-06-13)
 
 

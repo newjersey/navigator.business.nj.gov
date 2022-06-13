@@ -49,6 +49,7 @@ export const formationRouterFactory = (
         const taskProgress = userData.taskProgress;
         let entityId = userData.profileData.entityId;
         let dateOfFormation = userData.profileData.dateOfFormation;
+        let businessName = userData.profileData.businessName;
         let documents: ProfileDocuments = {
           certifiedDoc: "",
           formationDoc: "",
@@ -59,6 +60,7 @@ export const formationRouterFactory = (
           taskProgress["form-business-entity"] = "COMPLETED";
           entityId = getFilingResponse.entityId;
           dateOfFormation = userData.formationData.formationFormData.businessStartDate;
+          businessName = userData.formationData.formationFormData.businessName;
 
           const formationDoc = await saveFileFromUrl(
             getFilingResponse.formationDoc,
@@ -103,6 +105,7 @@ export const formationRouterFactory = (
             ...userData.profileData,
             entityId,
             dateOfFormation,
+            businessName,
             documents: { ...userData.profileData.documents, ...documents },
           },
         };

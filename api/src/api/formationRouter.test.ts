@@ -163,6 +163,7 @@ describe("formationRouter", () => {
           ...userData.profileData,
           entityId: getFilingResponse.entityId,
           dateOfFormation: userData.formationData.formationFormData.businessStartDate,
+          businessName: userData.formationData.formationFormData.businessName,
           documents: {
             ...userData.profileData.documents,
             formationDoc: `http://us-east-1:identityId/formationDoc-1487076708000.pdf`,
@@ -242,6 +243,7 @@ describe("formationRouter", () => {
           ...userData.profileData,
           entityId: getFilingResponse.entityId,
           dateOfFormation: userData.formationData.formationFormData.businessStartDate,
+          businessName: userData.formationData.formationFormData.businessName,
           documents: {
             ...userData.profileData.documents,
             formationDoc: `http://us-east-1:identityId/formationDoc-1487076708000.pdf`,
