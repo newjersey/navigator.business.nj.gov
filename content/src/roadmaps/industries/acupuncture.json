@@ -1,6 +1,6 @@
 {
   "isMobileLocation": false,
-  "canBeHomeBased": false,
+  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
