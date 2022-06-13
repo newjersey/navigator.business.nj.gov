@@ -113,7 +113,7 @@ describe("ApiFormationClient", () => {
           Key: "abcdef",
           ReturnUrl: "hostname.com/form-business?completeFiling=true",
           Payer: {
-            CompanyName: userData.profileData.businessName,
+            CompanyName: formationFormData.businessName,
             Address1: formationFormData.businessAddressLine1,
             Address2: formationFormData.businessAddressLine2,
             City: formationFormData.businessAddressCity?.name,
@@ -131,7 +131,7 @@ describe("ApiFormationClient", () => {
             BusinessInformation: {
               CompanyOrigin: "Domestic",
               Business: "DomesticLimitedLiabilityCompany",
-              BusinessName: userData.profileData.businessName,
+              BusinessName: formationFormData.businessName,
               BusinessDesignator: formationFormData.businessSuffix,
               Naic: userData.profileData.naicsCode,
               BusinessPurpose: formationFormData.businessPurpose,
@@ -235,7 +235,7 @@ describe("ApiFormationClient", () => {
           Key: "abcdef",
           ReturnUrl: "hostname.com/form-business?completeFiling=true",
           Payer: {
-            CompanyName: userData.profileData.businessName,
+            CompanyName: formationFormData.businessName,
             Address1: formationFormData.businessAddressLine1,
             Address2: formationFormData.businessAddressLine2,
             City: formationFormData.businessAddressCity?.name,
@@ -253,7 +253,7 @@ describe("ApiFormationClient", () => {
             BusinessInformation: {
               CompanyOrigin: "Domestic",
               Business: "DomesticForProfitCorporation",
-              BusinessName: userData.profileData.businessName,
+              BusinessName: formationFormData.businessName,
               BusinessDesignator: formationFormData.businessSuffix,
               Naic: userData.profileData.naicsCode,
               TotalShares: 1234,
@@ -386,7 +386,7 @@ describe("ApiFormationClient", () => {
           Key: "abcdef",
           ReturnUrl: "hostname.com/form-business?completeFiling=true",
           Payer: {
-            CompanyName: userData.profileData.businessName,
+            CompanyName: formationFormData.businessName,
             Address1: formationFormData.businessAddressLine1,
             Address2: formationFormData.businessAddressLine2,
             City: formationFormData.businessAddressCity?.name,
@@ -404,7 +404,7 @@ describe("ApiFormationClient", () => {
             BusinessInformation: {
               CompanyOrigin: "Domestic",
               Business: "DomesticLimitedLiabilityPartnership",
-              BusinessName: userData.profileData.businessName,
+              BusinessName: formationFormData.businessName,
               BusinessDesignator: formationFormData.businessSuffix,
               Naic: userData.profileData.naicsCode,
               BusinessPurpose: formationFormData.businessPurpose,

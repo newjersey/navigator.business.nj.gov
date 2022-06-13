@@ -78,7 +78,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
     const splitName = splitFullName(userData.user.name);
     setFormationFormData({
       ...userData.formationData.formationFormData,
-      businessName: userData.profileData.businessName,
+      businessName:
+        userData.formationData.formationFormData.businessName ?? userData.profileData.businessName,
       businessStartDate: getDate(userData.formationData.formationFormData.businessStartDate),
       businessAddressCity: userData.profileData.municipality,
       contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,

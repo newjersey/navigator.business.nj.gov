@@ -167,7 +167,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       Key: config.key,
       ReturnUrl: `${returnUrl}?completeFiling=true`,
       Payer: {
-        CompanyName: userData.profileData.businessName,
+        CompanyName: formationFormData.businessName,
         Address1: formationFormData.businessAddressLine1,
         Address2: formationFormData.businessAddressLine2,
         City: formationFormData.businessAddressCity?.name,
@@ -185,7 +185,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         BusinessInformation: {
           CompanyOrigin: "Domestic",
           Business: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].businessType,
-          BusinessName: userData.profileData.businessName,
+          BusinessName: formationFormData.businessName,
           BusinessDesignator: formationFormData.businessSuffix,
           Naic: naicsCode,
           BusinessPurpose: formationFormData.businessPurpose || undefined,
