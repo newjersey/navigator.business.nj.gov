@@ -525,13 +525,6 @@ jobs:
 workflows:
   release-pipeline:
     jobs:
-      - staging-hold:
-          type: approval
-          filters:
-            branches:
-              only:
-                - /^release-.*/
-                - /^staging-.*/
       - deploy-staging:
           name: staging-deploy
           filters:
@@ -539,8 +532,6 @@ workflows:
               only:
                 - /^release-.*/
                 - /^staging-.*/
-          requires:
-            - staging-hold
       - production-hold:
           type: approval
           filters:
