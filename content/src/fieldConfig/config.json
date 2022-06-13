@@ -428,7 +428,7 @@
   "taskDefaults": {
     "backToRoadmapText": "Go Back",
     "issuingAgencyText": "Issuing Agency",
-    "requiredLabelText": "**Required**",
+    "requiredLabelText": "Required",
     "requiredTagText": "Required",
     "pageTitle": "Business Roadmap",
     "loadingTaskDependencies": "Loading task dependencies…",
