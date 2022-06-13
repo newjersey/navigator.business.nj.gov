@@ -1,6 +1,6 @@
 {
   "isMobileLocation": false,
-  "canBeHomeBased": false,
+  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
@@ -46,5 +46,5 @@
   "isEnabled": true,
   "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
   "id": "acupuncture",
-  "description": "Complimentary therapy services involving the insertion of needles on the body"
+  "description": "A traditional Chinese medicine involving the insertion of needles into the body"
 }
