@@ -80,7 +80,8 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         <div className="padding-205 flex-half">
           <Content>{Config.businessFormationDefaults.reviewPageBusinessNameLabel}</Content>
           <span className="text-accent-cool-darker">
-            {userData.profileData.businessName || Config.businessFormationDefaults.notSetBusinessNameText}
+            {userData.formationData.formationFormData.businessName ||
+              Config.businessFormationDefaults.notSetBusinessNameText}
           </span>{" "}
           {!reviewPage && (
             <Button
