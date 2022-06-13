@@ -45,7 +45,7 @@ export const Task = (props: Props): ReactElement => {
             <a
               onClick={() => analytics.event.roadmap_task_title.click.go_to_task()}
               href={`/tasks/${props.task.urlSlug}`}
-              className="usa-link margin-right-105"
+              className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
               data-task={props.task.id}
             >
               {props.task.name}
