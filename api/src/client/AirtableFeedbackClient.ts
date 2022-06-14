@@ -19,6 +19,7 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
   });
 
   const base = Airtable.base(config.baseId);
+  const logId = logWriter.GetId();
 
   const createUserFeedback = (feedbackRequest: UserFeedbackRequest, userData: UserData): Promise<boolean> => {
     return new Promise((resolve, reject) => {
@@ -33,19 +34,19 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
         "Screen Width": feedbackRequest.screenWidth,
       };
       logWriter.LogInfo(
-        `Feedback - Airtable - Request Sent to base ${config.baseId} table ${
+        `Feedback - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${
           config.feedbackTableName
         }. data: ${JSON.stringify(fields)}`
       );
       base(config.feedbackTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
           logWriter.LogInfo(
-            `FeedbackClient - Airtable - Table ${config.feedbackTableName} - Error Received: ${err}`
+            `FeedbackClient - Airtable - Id:${logId} - Table ${config.feedbackTableName} - Error Received: ${err}`
           );
           return reject();
         }
         logWriter.LogInfo(
-          `FeedbackClient - Airtable - Table ${config.feedbackTableName} - Response Received: ${res}`
+          `FeedbackClient - Airtable - Id:${logId} - Table ${config.feedbackTableName} - Response Received: ${res}`
         );
         return resolve(true);
       });
@@ -66,19 +67,19 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
         "Screen Width": issueRequest.screenWidth,
       };
       logWriter.LogInfo(
-        `Feedback - Airtable - Request Sent to base ${config.baseId} table ${
+        `Feedback - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${
           config.issuesTableName
         }. data: ${JSON.stringify(fields)}`
       );
       base(config.issuesTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
           logWriter.LogInfo(
-            `FeedbackClient - Airtable - Table ${config.issuesTableName} - Error Received: ${err}`
+            `FeedbackClient - Airtable - Id:${logId} - Table ${config.issuesTableName} - Error Received: ${err}`
           );
           return reject();
         }
         logWriter.LogInfo(
-          `FeedbackClient - Airtable - Table ${config.issuesTableName} - Response Received: ${res}`
+          `FeedbackClient - Airtable - Id:${logId} - Table ${config.issuesTableName} - Response Received: ${res}`
         );
         return resolve(true);
       });

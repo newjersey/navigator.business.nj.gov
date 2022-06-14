@@ -20,15 +20,20 @@ type ApiConfig = {
 };
 
 export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): FormationClient => {
+  const logId = logger.GetId();
   const form = (userData: UserData, returnUrl: string): Promise<FormationSubmitResponse> => {
     const postBody = makePostBody(userData, returnUrl, config);
     logger.LogInfo(
-      `Formation - NICUSA - Request Sent to ${config.baseUrl}/PrepareFiling data: ${JSON.stringify(postBody)}`
+      `Formation - NICUSA - Id:${logId} - Request Sent to ${
+        config.baseUrl
+      }/PrepareFiling data: ${JSON.stringify(postBody)}`
     );
     return axios
       .post(`${config.baseUrl}/PrepareFiling`, postBody)
       .then((response) => {
-        logger.LogInfo(`Formation - NICUSA - Response received: ${JSON.stringify(response.data)}`);
+        logger.LogInfo(
+          `Formation - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
+        );
         if (response.data.Success && response.data.Success === true) {
           const successResponse = response.data as ApiResponse;
           return {
@@ -40,7 +45,9 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           };
         } else {
           let errors = [] as FormationSubmitError[];
-          logger.LogInfo(`Formation - NICUSA - Response error received: ${JSON.stringify(response.data)}`);
+          logger.LogInfo(
+            `Formation - NICUSA - Id:${logId} - Response error received: ${JSON.stringify(response.data)}`
+          );
           if (Array.isArray(response.data)) {
             const apiError = response.data as ApiErrorResponse;
             errors = apiError.map((error) => ({
@@ -61,7 +68,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         }
       })
       .catch((error) => {
-        logger.LogInfo(`Formation - NICUSA - Unknown error received: ${JSON.stringify(error)}`);
+        logger.LogInfo(`Formation - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`);
         return {
           success: false,
           token: undefined,
@@ -79,14 +86,16 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       FormationId: formationId,
     };
     logger.LogInfo(
-      `GetFiling - NICUSA - Request Sent to ${config.baseUrl}/GetCompletedFiling data: ${JSON.stringify(
-        postBody
-      )}`
+      `GetFiling - NICUSA - Id:${logId} - Request Sent to ${
+        config.baseUrl
+      }/GetCompletedFiling data: ${JSON.stringify(postBody)}`
     );
     return axios
       .post(`${config.baseUrl}/GetCompletedFiling`, postBody)
       .then((response) => {
-        logger.LogInfo(`GetFiling - NICUSA - Response received: ${JSON.stringify(response.data)}`);
+        logger.LogInfo(
+          `GetFiling - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
+        );
         if (response.data.Success && response.data.Success === true) {
           const successResponse = response.data as ApiGetFilingResponse;
           return {
@@ -111,7 +120,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         }
       })
       .catch((error) => {
-        logger.LogInfo(`GetFiling - NICUSA - Unknown error received: ${JSON.stringify(error)}`);
+        logger.LogInfo(`GetFiling - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`);
         return {
           success: false,
           entityId: "",

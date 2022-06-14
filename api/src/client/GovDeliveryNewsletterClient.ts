@@ -20,9 +20,12 @@ export type GovDeliveryResponse = {
 };
 
 export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientConfig): NewsletterClient => {
+  const logId = config.logWriter.GetId();
   const add = (email: string): Promise<NewsletterResponse> => {
     const url = `${config.baseUrl}/api/add_script_subscription`;
-    config.logWriter.LogInfo(`NewsletterResponse - GovDelivery - Request Sent. url: ${url}. email: ${email}`);
+    config.logWriter.LogInfo(
+      `NewsletterResponse - GovDelivery - Id:${logId} - Request Sent. url: ${url}. email: ${email}`
+    );
     return axios
       .get(url, {
         params: {
@@ -34,7 +37,7 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
       })
       .then((response) => {
         config.logWriter.LogInfo(
-          `NewsletterResponse - GovDelivery - Response Received. Status: ${response.status} : ${
+          `NewsletterResponse - GovDelivery - - Id:${logId} Response Received. Status: ${response.status} : ${
             response.statusText
           }. Data: ${JSON.stringify(response.data)}`
         );
@@ -76,7 +79,7 @@ export const GovDeliveryNewsletterClient = (config: GovDeliveryNewsletterClientC
         };
       })
       .catch((error: AxiosError) => {
-        config.logWriter.LogError("NewsletterResponse - GovDelivery - Error", error);
+        config.logWriter.LogError(`NewsletterResponse - GovDelivery - Id:${logId} - Error`, error);
         return {
           success: false,
           status: "CONNECTION_ERROR",

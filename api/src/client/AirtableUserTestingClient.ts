@@ -20,6 +20,7 @@ export const AirtableUserTestingClient = (
     apiKey: config.apiKey,
   });
 
+  const logId = logWriter.GetId();
   const base = Airtable.base(config.baseId);
 
   const add = (user: BusinessUser): Promise<UserTestingResponse> => {
@@ -31,14 +32,14 @@ export const AirtableUserTestingClient = (
         Source: "Opted In Navigator",
       };
       logWriter.LogInfo(
-        `UserResearch - Airtable - Request Sent to base ${config.baseId} table ${config.usersTableName}. data: ${fields}`
+        `UserResearch - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${config.usersTableName}. data: ${fields}`
       );
       base(config.usersTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
-          logWriter.LogInfo(`UserResearchClient - Airtable - Error Received: ${err}`);
+          logWriter.LogInfo(`UserResearchClient - Airtable - Id:${logId} - Error Received: ${err}`);
           return resolve({ success: false, status: "RESPONSE_ERROR" });
         }
-        logWriter.LogInfo(`UserResearchClient - Airtable - Response Received: ${res}`);
+        logWriter.LogInfo(`UserResearchClient - Airtable - Id:${logId} - Response Received: ${res}`);
         return resolve({ success: true, status: "SUCCESS" });
       });
     });

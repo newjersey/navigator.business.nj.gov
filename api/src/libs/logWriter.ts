@@ -1,12 +1,18 @@
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import { AxiosError } from "axios";
+import { randomUUID } from "node:crypto";
 import winston from "winston";
 import WinstonCloudWatch from "winston-cloudwatch";
 
 export interface LogWriterType {
   LogError(message: string, details?: AxiosError): void;
   LogInfo(message: string): void;
+  GetId(): string;
 }
+
+const GetId = (): string => {
+  return randomUUID();
+};
 
 export const LogWriter = (groupName: string, logStream: string, region?: string): LogWriterType => {
   const logger = winston.add(
@@ -58,5 +64,6 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
   return {
     LogError,
     LogInfo,
+    GetId,
   };
 };
