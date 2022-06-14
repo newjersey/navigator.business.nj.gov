@@ -184,6 +184,42 @@ describe("Formation - BusinessNameSection", () => {
     expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
   });
 
+  it("prepends register to the next button when in guest mode", async () => {
+    const initialUserData = generateUserData({
+      formationData: {
+        formationFormData: createEmptyFormationFormData(),
+        formationResponse: undefined,
+        getFilingResponse: undefined,
+      },
+      profileData: generateFormationProfileData({}),
+    });
+
+    const setModalIsVisible = jest.fn();
+
+    render(
+      withAuthAlert(
+        <WithStatefulUserData initialUserData={initialUserData}>
+          <ThemeProvider theme={createTheme()}>
+            <BusinessFormation
+              task={generateTask({})}
+              displayContent={generateFormationDisplayContent({})}
+              municipalities={[]}
+            />
+          </ThemeProvider>
+        </WithStatefulUserData>,
+        IsAuthenticated.FALSE,
+        { modalIsVisible: false, setModalIsVisible }
+      )
+    );
+    const page = createFormationPageHelpers();
+
+    page.fillText("Search business name", "My test business");
+    await page.searchBusinessName({ status: "AVAILABLE" });
+    expect(
+      screen.getByText(`Register & ${Config.businessFormationDefaults.initialNextButtonText}`)
+    ).toBeInTheDocument();
+  });
+
   it("opens registration modal when guest mode user tries to continue", async () => {
     const initialUserData = generateUserData({
       formationData: {
@@ -216,7 +252,7 @@ describe("Formation - BusinessNameSection", () => {
     page.fillText("Search business name", "My test business");
     await page.searchBusinessName({ status: "AVAILABLE" });
     expect(setModalIsVisible).not.toHaveBeenCalled();
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
+    fireEvent.click(screen.getByText(`Register & ${Config.businessFormationDefaults.initialNextButtonText}`));
     expect(setModalIsVisible).toHaveBeenCalledWith(true);
   });
 

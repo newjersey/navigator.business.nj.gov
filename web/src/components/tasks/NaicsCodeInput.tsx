@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
@@ -13,6 +14,7 @@ import React, { ReactElement, useMemo, useState } from "react";
 interface Props {
   onSave: () => void;
   task: Task;
+  isAuthenticated: IsAuthenticated;
 }
 
 export const NaicsCodeInput = (props: Props): ReactElement => {
@@ -108,6 +110,11 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       },
     });
   };
+
+  let saveButtonText = Config.determineNaicsCode.saveButtonText;
+  if (props.isAuthenticated === IsAuthenticated.FALSE) {
+    saveButtonText = `Register & ${saveButtonText}`;
+  }
 
   const descriptions = useMemo(() => getDescriptions(industryCodes ?? []), [industryCodes]);
 
@@ -214,7 +221,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               onClick={saveNaicsCode}
               loading={isLoading}
             >
-              {Config.determineNaicsCode.saveButtonText}
+              {saveButtonText}
             </Button>
           </div>
         </>

@@ -55,7 +55,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
       <Content>{preLookupContent}</Content>
       {showInput && (
         <div className="margin-y-4 bg-base-extra-light padding-2 radius-lg">
-          <NaicsCodeInput onSave={onSave} task={props.task} />
+          <NaicsCodeInput onSave={onSave} task={props.task} isAuthenticated={isAuthenticated} />
         </div>
       )}
       {!showInput && (

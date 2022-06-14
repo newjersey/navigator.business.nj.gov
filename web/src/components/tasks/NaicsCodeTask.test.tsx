@@ -168,6 +168,15 @@ describe("<NaicsCodeTask />", () => {
       expect(screen.queryByLabelText("Recommended NAICS codes")).not.toBeInTheDocument();
     });
 
+    it("shows the correct save button text", async () => {
+      renderPage();
+      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+        target: { value: "12345" },
+      });
+
+      expect(screen.getByText(`${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
+    });
+
     it("enters and saves NAICS code", async () => {
       renderPage();
       fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
@@ -281,6 +290,39 @@ describe("<NaicsCodeTask />", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.determineNaicsCode.editText));
       expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+    });
+  });
+
+  describe("guest mode", () => {
+    let initialUserData: UserData;
+    const setModalIsVisible = jest.fn();
+
+    const renderPage = () => {
+      render(
+        withAuthAlert(
+          <WithStatefulUserData initialUserData={initialUserData}>
+            <NaicsCodeTask task={task} />
+          </WithStatefulUserData>,
+          IsAuthenticated.FALSE,
+          { modalIsVisible: false, setModalIsVisible }
+        )
+      );
+    };
+
+    beforeEach(() => {
+      initialUserData = generateUserData({
+        profileData: generateProfileData({ naicsCode: "", industryId: "" }),
+        taskProgress: { [taskId]: "NOT_STARTED" },
+      });
+    });
+
+    it("prepends register to the next button", async () => {
+      renderPage();
+      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+        target: { value: "12345" },
+      });
+
+      expect(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
     });
   });
 });
