@@ -64,6 +64,11 @@ export const BusinessNameSection = (): ReactElement => {
     setTab(state.tab + 1);
   };
 
+  let initialNextButtonText = Config.businessFormationDefaults.initialNextButtonText;
+  if (isAuthenticated === IsAuthenticated.FALSE) {
+    initialNextButtonText = `Register & ${initialNextButtonText}`;
+  }
+
   return (
     <div data-testid="business-name-section">
       <form onSubmit={searchBusinessName} className="usa-prose grid-container padding-0">
@@ -155,7 +160,7 @@ export const BusinessNameSection = (): ReactElement => {
           widthAutoOnMobile
           heightAutoOnMobile={isMobile}
         >
-          {Config.businessFormationDefaults.initialNextButtonText}
+          {initialNextButtonText}
         </Button>
       </div>
     </div>

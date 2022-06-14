@@ -25,21 +25,22 @@ You will need `yarn`, `npm` and Node installed, and also Java (for `serverless-d
 ### Software Requirement
 
 - [Node 16](https://nodejs.org/en/download/)
-- [Java 16 JDK](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html)
-- [Python 3.9](https://www.python.org/downloads/)
+- [AWS CLI](https://aws.amazon.com/cli/)
+- [Java 17 JDK](https://www.oracle.com/java/technologies/downloads/#java17)
+- [Python 3.10](https://www.python.org/downloads/)
 - [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) using "Visual C++ build tools" workload - **Windows Only**
+
+You will then setup your AWS credentials
+
+```shell
+aws configure
+```
 
 Clone the code and navigate to the root of this repository. There is an install script that will install all yarn packages for both the frontend
 and backend. It will also set up serverless's local DynamoDB.
 
 ```shell
 ./scripts/install.sh
-```
-
-You will also need to setup your AWS credentials
-
-```shell
-aws configure
 ```
 
 ### Local env
