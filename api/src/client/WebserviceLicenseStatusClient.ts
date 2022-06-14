@@ -9,8 +9,9 @@ export const WebserviceLicenseStatusClient = (
 ): LicenseStatusClient => {
   const search = (name: string, zipCode: string, licenseType: string): Promise<LicenseEntity[]> => {
     const url = `${baseUrl}/ws/simple/queryLicenseStatus`;
+    const logId = logWriter.GetId();
     logWriter.LogInfo(
-      `License Status Search - Request Sent. url: ${url}. Business Name: ${name}. License Type: ${licenseType}. ZipCode: ${zipCode}`
+      `License Status Search - Request Sent.- Id:${logId}  url: ${url}. Business Name: ${name}. License Type: ${licenseType}. ZipCode: ${zipCode}`
     );
     return axios
       .post(url, {
@@ -20,14 +21,14 @@ export const WebserviceLicenseStatusClient = (
       })
       .then((response) => {
         logWriter.LogInfo(
-          `License Status Search - Response Received. Status: ${response.status} : ${
+          `License Status Search - Response Received.- Id:${logId}  Status: ${response.status} : ${
             response.statusText
           }. Data: ${JSON.stringify(response.data)}`
         );
         return response.data || [];
       })
       .catch((error: AxiosError) => {
-        logWriter.LogError("License Status Search - Error", error);
+        logWriter.LogError(`License Status Search - Id:${logId} - Error:`, error);
         throw error.response?.status;
       });
   };
