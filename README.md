@@ -74,6 +74,12 @@ Start the services:
 yarn start:dev
 ```
 
+#### Troubleshooting
+
+If you get an error from serverless that looks like: `Inaccessible host: localhost at port 8000`
+
+This is likely a permissions error. To solve, grant the `api/.dynamodb` folder write permissions on your machine.
+
 ### Deploying
 
 Use ship-it to run prettier, linting, and tests before pushing:
