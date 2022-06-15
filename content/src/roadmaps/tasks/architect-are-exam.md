@@ -12,8 +12,6 @@ You can only practice as an architect once you passed the Architect’s Registra
 
 ---
 ### Eligibility Criteria
-- A Bachelor’s or Master’s degree in Architecture from a college or university accredited by the National Architectural Accrediting Board
-- Successful completion of at least three years in the Architectural Experience Program (AXP)
 - An approved Architect License application
 
 ### Application Requirements
