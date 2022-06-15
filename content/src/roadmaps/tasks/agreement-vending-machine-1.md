@@ -4,7 +4,7 @@ filename: agreement-vending-machine
 name: Sign a Location Agreement
 id: agreement-vending-machine
 ---
-You will need to draft and sign a location agreement with the proprietor of the site for your vending machine. Signing your agrements under your registered business name may protect you from liabilities and any associated costs.
+You will need to draft and sign a location agreement with the proprietor of the site for your vending machine. Signing your agreements under your registered business name may protect you from liabilities and any associated costs.
 
 ---
 ### Agreement Considerations
