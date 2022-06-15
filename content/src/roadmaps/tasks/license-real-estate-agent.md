@@ -18,5 +18,5 @@ You need a Real Estate Agent license before you can offer services as a real est
 ### Application Requirements
 - Applicant ID (found in the licensure exam results form)
 
->**After you complete this task, you will have:**
+>**Once completed, you will have:**
 >- A Real Estate Agent license number
