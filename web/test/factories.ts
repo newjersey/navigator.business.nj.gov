@@ -632,7 +632,9 @@ export const randomOwnershipType = (): OwnershipType => {
 };
 
 export const randomIndustry = (isMobileLocation = false): Industry => {
-  const filteredIndustries = Industries.filter((x: Industry) => x.isMobileLocation === isMobileLocation);
+  const filteredIndustries = Industries.filter(
+    (x: Industry) => x.isMobileLocation === isMobileLocation && x.isEnabled
+  );
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
 };
