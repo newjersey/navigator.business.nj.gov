@@ -3571,7 +3571,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.3
     dedent: 0.7.0
-    dependency-cruiser: 11.9.0
+    dependency-cruiser: 11.10.0
     eslint: 8.17.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 26.5.3
@@ -3713,7 +3713,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.3
     dedent: 0.7.0
-    dependency-cruiser: 11.9.0
+    dependency-cruiser: 11.10.0
     dotenv: 16.0.1
     eslint: 8.17.0
     eslint-config-next: 12.1.6
@@ -3887,7 +3887,7 @@ __metadata:
     cypress-audit: 1.1.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
-    dependency-cruiser: 11.9.0
+    dependency-cruiser: 11.10.0
     dotenv: 16.0.1
     eslint: 8.17.0
     eslint-config-next: 12.1.6
@@ -14523,9 +14523,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:11.9.0":
-  version: 11.9.0
-  resolution: "dependency-cruiser@npm:11.9.0"
+"dependency-cruiser@npm:11.10.0":
+  version: 11.10.0
+  resolution: "dependency-cruiser@npm:11.10.0"
   dependencies:
     acorn: 8.7.1
     acorn-jsx: 5.3.2
@@ -14557,7 +14557,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: 8219c4f14dbe65d6fb33173fc97345ac3e2a9c548294b47bddb63facbaa7831533a6a4ff44864e560959fe2e0d2fd23deedeb48f5f443dcb5ed5c7f40148d453
+  checksum: 6dbabc6b19c799f7cfd8d0144edb2f0012c551d67d4cc75d91951b95f706d5ee8b2974cafcefc362606a93492e00965d9c96a1a222e190f6d42d3a5433685e49
   languageName: node
   linkType: hard
 
