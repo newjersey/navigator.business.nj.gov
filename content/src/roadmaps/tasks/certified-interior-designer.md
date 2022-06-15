@@ -31,5 +31,4 @@ In New Jersey, you can only legally use the title of Certified Interior Designer
 * Pay any fees associated with the certification
 
 > **Once completed, you will have:**
->
 > - An interior designer certification mailed to the address provided in your application
