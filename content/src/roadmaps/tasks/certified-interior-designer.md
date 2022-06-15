@@ -14,7 +14,10 @@ In New Jersey, you can only legally use the title of Certified Interior Designer
 
 ### Eligibility Criteria
 
-- Degree in Interior Design
+- Graduate of a five-year program with one year of related work experience, or
+- Graduate of a four-year program with two years of related work experience, or
+- Student of a three-year interior design approved curriculum and three years of related work experience, or 
+- Graduate of a two-year program with four years of related work experience, and
 - Passing grades on the Landscape Architect Registration Examination from the [Council of Landscape Architectural Registration Boards (CLARB)](https://www.clarb.org)
 
 ### Application Requirements
@@ -28,5 +31,4 @@ In New Jersey, you can only legally use the title of Certified Interior Designer
 * Pay any fees associated with the certification
 
 > **Once completed, you will have:**
->
 > - An interior designer certification mailed to the address provided in your application
