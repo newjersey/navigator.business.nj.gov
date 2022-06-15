@@ -32,6 +32,7 @@
   },
   "businessFormationDefaults": {
     "membersExpandText": "Expand",
+    "nameCheckDesignatorText": "It appears you have included a designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",
     "nameCheckUnavailableText": "Sorry, \"${name}\" isn’t available. Try another name. Once you have found an available name you then can officially form your business.",
     "businessTotalStockPlaceholder": "Enter number of shares ",
     "addressErrorText": "Enter an address",
@@ -459,7 +460,8 @@
     "errorTextBadInput": "Sorry, that isn't a valid company name. Try being more specific.",
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
     "officialCheckButtonText": "Official Name Check",
-    "unavailableText": "Sorry, \"${name}\" isn’t available. Try another name."
+    "unavailableText": "Sorry, \"${name}\" isn’t available. Try another name.",
+    "designatorText": "It appears you have included a designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business."
   },
   "siteWideErrorMessages": {
     "errorTextNoData": "Something went wrong and we can't access your data. Please try again later.",

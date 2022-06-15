@@ -118,6 +118,14 @@ export const SearchBusinessName = (props: Props): ReactElement => {
     );
   };
 
+  const showDesignator = (): ReactElement => {
+    return (
+      <div data-testid="designator-text">
+        <p className="font-body-2xs text-red">{Config.searchBusinessNameTask.designatorText}</p>
+      </div>
+    );
+  };
+
   return (
     <>
       <TaskHeader task={props.task} />
@@ -159,6 +167,7 @@ export const SearchBusinessName = (props: Props): ReactElement => {
       <div className="margin-top-2">
         {showBadInputError()}
         {nameAvailability?.status === "AVAILABLE" && showAvailable()}
+        {nameAvailability?.status === "DESIGNATOR" && showDesignator()}
         {nameAvailability?.status === "UNAVAILABLE" && showUnavailable()}
       </div>
     </>

@@ -31,6 +31,20 @@ describe("ApiBusinessNameClient", () => {
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
 
+  it("returns a designator resason in the response", async () => {
+    const mockResponse: ApiNameAvailabilityResponse = {
+      Available: false,
+      Reason: "contains business designators",
+      Similars: [],
+    };
+    mockAxios.get.mockResolvedValue({ data: mockResponse });
+    expect(await client.search("name")).toEqual({
+      status: "DESIGNATOR",
+      similarNames: [],
+    });
+    expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
+  });
+
   it("returns a non-available response", async () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: false,

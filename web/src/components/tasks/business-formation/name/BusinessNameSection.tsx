@@ -114,6 +114,11 @@ export const BusinessNameSection = (): ReactElement => {
           {SearchBusinessNameErrorLookup[error]}
         </Alert>
       )}
+      {nameAvailability != null && nameAvailability.status === "DESIGNATOR" && (
+        <Alert variant="error" dataTestid="designator-text">
+          <p className="font-sans-xs">{Config.businessFormationDefaults.nameCheckDesignatorText}</p>
+        </Alert>
+      )}
       {nameAvailability != null && nameAvailability.status === "UNAVAILABLE" && (
         <Alert variant="error" dataTestid="unavailable-text">
           <p className="font-sans-xs">
