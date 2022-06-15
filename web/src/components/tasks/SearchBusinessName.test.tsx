@@ -99,6 +99,16 @@ describe("<SearchBusinessName />", () => {
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(availableTextExists()).toBe(false);
     expect(unavailableTextExists()).toBe(true);
+    expect(designatorTextExists()).toBe(false);
+  });
+
+  it("shows designator text if name includes the designator", async () => {
+    render(<SearchBusinessName task={generateTask({})} />);
+    fillText("Pizza Joint LLC");
+    await searchAndGetValue({ status: "DESIGNATOR" });
+    expect(availableTextExists()).toBe(false);
+    expect(unavailableTextExists()).toBe(false);
+    expect(designatorTextExists()).toBe(true);
   });
 
   it("shows similar unavailable names when not available", async () => {
@@ -171,6 +181,7 @@ describe("<SearchBusinessName />", () => {
   const updateNameButton = () => screen.getByTestId("update-name");
   const availableTextExists = () => screen.queryByTestId("available-text") !== null;
   const unavailableTextExists = () => screen.queryByTestId("unavailable-text") !== null;
+  const designatorTextExists = () => screen.queryByTestId("designator-text") !== null;
   const updateNameButtonExists = () => screen.queryByTestId("update-name") !== null;
   const nameHasBeenUpdatedTextExists = () => screen.queryByTestId("name-has-been-updated") !== null;
 });

@@ -71,17 +71,36 @@ describe("Formation - BusinessNameSection", () => {
     );
   });
 
-  it("displays continue button on business name tab only once name is available", async () => {
+  it("does not display continue button on business name tab if name is unavailable", async () => {
     const page = getPageHelper();
     expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
 
     page.fillText("Search business name", "My taken test business");
     await page.searchBusinessName({ status: "UNAVAILABLE" });
     expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
+  });
+
+  it("does not display continue button on business name tab if the designator is included in the name", async () => {
+    const page = getPageHelper();
+    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
+
+    page.fillText("Search business name", "My taken test business LLC");
+    await page.searchBusinessName({ status: "UNAVAILABLE" });
+    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
+  });
+
+  it("displays continue button on business name tab only once name is available", async () => {
+    const page = getPageHelper();
+    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
 
     page.fillText("Search business name", "My test business");
     await page.searchBusinessName({ status: "AVAILABLE" });
     expect(screen.getByText(Config.businessFormationDefaults.initialNextButtonText)).toBeVisible();
+  });
+
+  it("does not display the continue button on business name tab if there is an error", async () => {
+    const page = getPageHelper();
+    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
 
     page.fillText("Search business name", "Anything");
     await page.searchBusinessNameAndGetError();
