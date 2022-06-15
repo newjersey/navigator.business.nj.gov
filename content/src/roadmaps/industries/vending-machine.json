@@ -2,7 +2,7 @@
   "isMobileLocation": false,
   "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
-  "canBeReseller": false,
+  "canBeReseller": true,
   "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
