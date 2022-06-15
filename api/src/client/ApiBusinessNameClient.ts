@@ -15,8 +15,16 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
             response.statusText
           }. Data: ${JSON.stringify(response.data)}`
         );
+        let responseStatus = "";
+        if (response.data.Available) {
+          responseStatus = "AVAILABLE";
+        } else if (response.data.Reason.indexOf("business designators") > 0) {
+          responseStatus = "DESIGNATOR";
+        } else {
+          responseStatus = "UNAVAILABLE";
+        }
         return {
-          status: response.data.Available ? "AVAILABLE" : ("UNAVAILABLE" as "AVAILABLE" | "UNAVAILABLE"),
+          status: responseStatus as "AVAILABLE" | "DESIGNATOR" | "UNAVAILABLE",
           similarNames: response.data.Similars,
         };
       })

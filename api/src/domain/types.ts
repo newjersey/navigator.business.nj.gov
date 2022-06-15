@@ -65,6 +65,6 @@ export type UpdateLicenseStatus = (userId: string, nameAndAddress: NameAndAddres
 export type GetCertHttpsAgent = () => Promise<https.Agent>;
 
 export type NameAvailability = {
-  status: "AVAILABLE" | "UNAVAILABLE";
+  status: "AVAILABLE" | "DESIGNATOR" | "UNAVAILABLE";
   similarNames: string[];
 };

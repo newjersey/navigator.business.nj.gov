@@ -388,7 +388,7 @@ export interface SessionHelper {
 }
 
 export type NameAvailability = {
-  status: "AVAILABLE" | "UNAVAILABLE";
+  status: "AVAILABLE" | "DESIGNATOR" | "UNAVAILABLE";
   similarNames: string[];
 };
 

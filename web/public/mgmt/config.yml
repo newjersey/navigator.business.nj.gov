@@ -1270,6 +1270,7 @@ collections:
               - { label: Name Check Placeholder Text, name: nameCheckPlaceholderText, widget: string }
               - { label: Name Check Validation Text, name: nameCheckValidationErrorText, widget: string }
               - { label: Name Check Unavailable Text, name: nameCheckUnavailableText, widget: text }
+              - { label: Name Check Designator Text, name: nameCheckDesignatorText, widget: text }
               - { label: Name Check Available Text, name: nameCheckAvailableText, widget: text }
               - { label: Name Check Field Label, name: nameCheckFieldLabel, widget: string }
               - { label: Next Button Text, name: nextButtonText, widget: string }
@@ -1923,6 +1924,7 @@ collections:
                   widget: string,
                 }
               - { label: Available Name Message, name: availableText, widget: text }
+              - { label: Designator Name Message, name: designatorText, widget: text }
               - { label: Update Button Text, name: updateButtonText, widget: string }
               - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
               - { label: Official Check Button, name: officialCheckButtonText, widget: string }
