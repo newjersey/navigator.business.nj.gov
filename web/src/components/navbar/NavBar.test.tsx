@@ -286,6 +286,7 @@ describe("<NavBar />", () => {
 
     describe("authenticated mobile navbar - renders roadmap within drawer", () => {
       displaysUserNameOrEmail(renderMobileTaskNav(IsAuthenticated.TRUE));
+
       it("opens and closes user profile links", async () => {
         useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
         renderMobileTaskNav(IsAuthenticated.TRUE)();
@@ -303,6 +304,7 @@ describe("<NavBar />", () => {
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeVisible();
       });
     });
+
     describe("guest mode mobile navbar - renders roadmap within drawer", () => {
       it("opens and closes user registration links", async () => {
         useMockUserData({});

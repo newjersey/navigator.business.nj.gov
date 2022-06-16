@@ -10,6 +10,7 @@ jest.mock("process", () => ({
 
 describe("loadOperateReferences", () => {
   let mockedFs: jest.Mocked<typeof fs>;
+
   beforeEach(() => {
     jest.resetAllMocks();
     mockedFs = fs as jest.Mocked<typeof fs>;

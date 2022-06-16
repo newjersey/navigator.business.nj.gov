@@ -326,6 +326,7 @@ describe("Formation - BusinessSection", () => {
       ).not.toBeInTheDocument();
     });
   });
+
   describe("Business total stock", () => {
     it("saves data to formationData", async () => {
       const page = await getPageHelper(
@@ -424,11 +425,13 @@ describe("Formation - BusinessSection", () => {
       const displayLegalStructure = screen.getByTestId("legal-structure");
       expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.llcText);
     });
+
     it("displays llp legal structure from profile data", async () => {
       await getPageHelper({ legalStructureId: "limited-liability-partnership" }, {});
       const displayLegalStructure = screen.getByTestId("legal-structure");
       expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.llpText);
     });
+
     it("displays sCorp legal structure from profile data", async () => {
       await getPageHelper({ legalStructureId: "s-corporation" }, {});
       const displayLegalStructure = screen.getByTestId("legal-structure");

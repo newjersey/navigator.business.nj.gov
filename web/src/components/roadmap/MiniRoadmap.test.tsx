@@ -128,6 +128,7 @@ describe("<MiniRoadmap />", () => {
         roadmapOpenSteps: [2],
       }),
     });
+
     beforeEach(() => {
       useMockRoadmap({
         steps: [
@@ -177,6 +178,7 @@ describe("<MiniRoadmap />", () => {
         expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]))
       );
     });
+
     it("removes active step from userData openSteps when active step is clicked", async () => {
       renderStatefulMiniRoadMap("task1", userData);
       fireEvent.click(screen.getByText("step1"));

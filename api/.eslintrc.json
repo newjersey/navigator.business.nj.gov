@@ -15,7 +15,10 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin", "jest"],
+  "plugins": [
+    "@typescript-eslint",
+    "@typescript-eslint/eslint-plugin"
+  ],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
     "prefer-template": "error",
@@ -34,16 +37,29 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.*"],
-      "plugins": ["jest"],
-      "extends": ["plugin:jest/recommended"],
+      "files": [
+        "**/*.test.*"
+      ],
+      "plugins": [
+        "jest",
+        "jest-formatting"
+      ],
+      "extends": [
+        "plugin:jest/recommended",
+        "plugin:jest-formatting/recommended"
+      ],
       "rules": {
         "jest/expect-expect": "error"
       }
     },
     {
-      "files": ["src/client/*", "src/db/*"],
-      "extends": ["plugin:unicorn/recommended"],
+      "files": [
+        "src/client/*",
+        "src/db/*"
+      ],
+      "extends": [
+        "plugin:unicorn/recommended"
+      ],
       "rules": {
         "unicorn/filename-case": [
           "error",
@@ -61,8 +77,12 @@
       }
     },
     {
-      "files": ["src/db/migrations/*"],
-      "extends": ["plugin:unicorn/recommended"],
+      "files": [
+        "src/db/migrations/*"
+      ],
+      "extends": [
+        "plugin:unicorn/recommended"
+      ],
       "rules": {
         "unicorn/filename-case": [
           "error",

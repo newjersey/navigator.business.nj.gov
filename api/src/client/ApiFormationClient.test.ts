@@ -463,6 +463,7 @@ describe("ApiFormationClient", () => {
         });
       });
     });
+
     it("fills only registered agent number when NUMBER is selected", async () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
