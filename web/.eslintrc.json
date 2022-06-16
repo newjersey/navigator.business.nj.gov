@@ -36,8 +36,7 @@
     "@typescript-eslint/eslint-plugin",
     "jsx-a11y",
     "cypress",
-    "testing-library",
-    "jest"
+    "testing-library"
   ],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
@@ -80,8 +79,8 @@
     },
     {
       "files": ["**/*.test.*"],
-      "plugins": ["jest"],
-      "extends": ["plugin:jest/recommended"],
+      "plugins": ["jest",  "jest-formatting"],
+      "extends": ["plugin:jest/recommended", "plugin:jest-formatting/recommended"],
       "rules": { "jest/expect-expect": "error" }
     }
   ]

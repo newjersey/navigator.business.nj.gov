@@ -59,6 +59,7 @@ describe("useUserData", () => {
     await act(() => update(generateUserData({}), { local: true }));
     expect(mockApi.postUserData).not.toHaveBeenCalled();
   });
+
   it("does not post update when user is unauthenticated", async () => {
     const currentUser = generateUser({});
     const { update } = setupHook(currentUser, IsAuthenticated.FALSE);

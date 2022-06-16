@@ -31,6 +31,7 @@ describe("SignUpToast", () => {
     useMockRouter({});
     useMockUserData({});
   });
+
   const setAlertIsVisible = jest.fn();
   const setupHookWithAuth = (isAuthenticated: IsAuthenticated, alertIsVisible = true) => {
     render(withAuthAlert(<SignUpToast />, isAuthenticated, { alertIsVisible, setAlertIsVisible }));

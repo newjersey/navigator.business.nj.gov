@@ -112,6 +112,7 @@ describe("externalEndpointRouter", () => {
         expect(stubUserDataClient.put).toHaveBeenCalled();
       });
     });
+
     describe("userTesting", () => {
       it("adds to userTesting if userTesting is set to true and externalStatus is empty", async () => {
         const userData = generateUserData({

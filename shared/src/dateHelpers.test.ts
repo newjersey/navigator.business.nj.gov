@@ -8,6 +8,7 @@ describe("dateHelpers", () => {
       expect(value).toStrictEqual(dayjs("2001-01-01"));
     });
   });
+
   describe("parseDateWithFormat", () => {
     it("correctly parses the date", () => {
       const value = parseDateWithFormat("01-02-2010", "MM-DD-YYYY");

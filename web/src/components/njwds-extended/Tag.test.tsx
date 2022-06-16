@@ -7,14 +7,17 @@ describe("Tag", () => {
       const view = render(<Tag tagVariant="primary">Primary Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
+
     it("base displays correctly", () => {
       const view = render(<Tag tagVariant="base">Base Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
+
     it("info displays correctly", () => {
       const view = render(<Tag tagVariant="info">Info Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
+
     it("info with hover displays correctly", () => {
       const view = render(
         <Tag tagVariant="info" hover>
@@ -23,23 +26,28 @@ describe("Tag", () => {
       ).baseElement;
       expect(view).toMatchSnapshot();
     });
+
     it("error displays correctly", () => {
       const view = render(<Tag tagVariant="error">Error Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
+
     it("accent displays correctly", () => {
       const view = render(<Tag tagVariant="accent">Accent Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
+
     it("noBg displays correctly", () => {
       const view = render(<Tag tagVariant="noBg">NoBg Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
+
     it("baseDark displays correctly", () => {
       const view = render(<Tag tagVariant="baseDark">BaseDark Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
   });
+
   it("Primary Bold displays correctly", () => {
     const view = render(
       <Tag tagVariant="primary" bold>
@@ -48,6 +56,7 @@ describe("Tag", () => {
     ).baseElement;
     expect(view).toMatchSnapshot();
   });
+
   it("Primary textWrap displays correctly", () => {
     const view = render(
       <Tag tagVariant="primary" textWrap>

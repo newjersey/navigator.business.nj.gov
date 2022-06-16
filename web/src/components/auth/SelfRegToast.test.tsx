@@ -19,6 +19,7 @@ describe("SelfRegToast", () => {
     useMockRouter({});
     useMockUserData({});
   });
+
   const setRegistrationAlertStatus = jest.fn();
   const setupHookWithAuth = (
     isAuthenticated: IsAuthenticated,

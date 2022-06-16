@@ -588,6 +588,7 @@ describe("Formation - ContactsSection", () => {
         expect(screen.getByTestId("addresses-members-table-mobile")).toBeInTheDocument();
       });
     });
+
     describe(`signers for ${legalStructureId}`, () => {
       it("adds additional signer", async () => {
         const page = await getPageHelper({ legalStructureId }, { signers: [] });

@@ -102,6 +102,7 @@ describe("<Header />", () => {
     });
     expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
   });
+
   it("greets user when name is undefined", () => {
     useMockUserData({ user: generateUser({ name: undefined }) });
     renderHeader();

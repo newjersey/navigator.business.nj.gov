@@ -117,6 +117,7 @@ describe("formationRouter", () => {
 
   describe("/completed-filing", () => {
     let dateNowSpy: jest.SpyInstance;
+
     beforeEach(() => {
       dateNowSpy = jest.spyOn(Date, "now").mockImplementation(() => 1_487_076_708_000);
       fakeSaveFileFromUrl.mockReset();
@@ -124,6 +125,7 @@ describe("formationRouter", () => {
         Promise.resolve(`http://${location}`)
       );
     });
+
     afterAll(() => {
       dateNowSpy.mockRestore();
     });

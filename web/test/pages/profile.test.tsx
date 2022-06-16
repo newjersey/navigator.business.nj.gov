@@ -103,6 +103,7 @@ describe("profile", () => {
 
   describe("guest mode", () => {
     let initialUserData: UserData;
+
     describe("when prospective business owner", () => {
       beforeEach(() => {
         initialUserData = generateUserData({

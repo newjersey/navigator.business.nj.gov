@@ -48,6 +48,7 @@ describe("buildUserRoadmap", () => {
       await buildUserRoadmap(profileData);
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toEqual(["foreign-remote-worker"]);
     });
+
     it("adds roadmap for REMOTE_SELLER type", async () => {
       const profileData: ProfileData = {
         ...createEmptyProfileData(),
@@ -96,6 +97,7 @@ describe("buildUserRoadmap", () => {
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
     });
+
     describe("formation tasks", () => {
       it("adds formation for llc legal type", async () => {
         await buildUserRoadmap(generateStartingProfile({ legalStructureId: "limited-liability-company" }));

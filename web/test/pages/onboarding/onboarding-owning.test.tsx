@@ -480,6 +480,7 @@ describe("onboarding - owning a business", () => {
   describe("validates self-reg step for legal structures that require public filing", () => {
     runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: true, selfRegPage: "5" });
   });
+
   describe("validates self-reg step for legal structures that do not require public filing", () => {
     runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: false, selfRegPage: "4" });
   });
