@@ -5,7 +5,7 @@ name: Apply for an Engineer License
 id: license-engineer
 callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
 callToActionText: Apply for My License
-required: true
+required: false
 issuingAgency: New Jersey Division of Consumer Affairs Board of Professional
   Engineers and Land Surveyors
 ---
