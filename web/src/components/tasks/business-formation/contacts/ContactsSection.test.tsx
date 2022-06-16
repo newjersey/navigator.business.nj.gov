@@ -315,14 +315,13 @@ describe("Formation - ContactsSection", () => {
         ).not.toBeInTheDocument();
       });
 
-      it("fires validations when signers do not sign correctly", async () => {
+      it("fires validations when signers do not fill out all the fields", async () => {
         const signers = [generateFormationAddress({ name: "" })];
         const page = await getPageHelper({ legalStructureId }, { signers });
         await page.submitContactsTab(false);
         const signerErrorText = () =>
           screen.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
-        const signerCheckboxErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
+
         expect(signerErrorText()).toBeInTheDocument();
         const nameTd = screen.getByText(signers[0].addressLine1, { exact: false });
         // eslint-disable-next-line testing-library/no-node-access
@@ -330,6 +329,14 @@ describe("Formation - ContactsSection", () => {
         page.fillText("Address name", "Elrond");
         page.clickAddressSubmit();
         expect(signerErrorText()).not.toBeInTheDocument();
+      });
+
+      it("fires validations when signers do not check the sign checkbox", async () => {
+        const signers = [generateFormationAddress({})];
+        const page = await getPageHelper({ legalStructureId }, { signers });
+        await page.submitContactsTab(false);
+        const signerCheckboxErrorText = () =>
+          screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.checkSignerBox(0);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
@@ -633,7 +640,7 @@ describe("Formation - ContactsSection", () => {
         ).not.toBeInTheDocument();
       });
 
-      it("fires validations when signers do not sign correctly", async () => {
+      it("fires validations when signers do not fill out the signature field", async () => {
         const page = await getPageHelper(
           { legalStructureId },
           { signers: [generateFormationAddress({ name: "" })] }
@@ -641,12 +648,17 @@ describe("Formation - ContactsSection", () => {
         await page.submitContactsTab(false);
         const signerErrorText = () =>
           screen.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
-        const signerCheckboxErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
 
         expect(signerErrorText()).toBeInTheDocument();
         page.fillText("Signer 0", "Elrond");
         expect(signerErrorText()).not.toBeInTheDocument();
+      });
+
+      it("fires validations when signers do not check the sign checkbox", async () => {
+        const page = await getPageHelper({ legalStructureId }, { signers: [generateFormationAddress({})] });
+        await page.submitContactsTab(false);
+        const signerCheckboxErrorText = () =>
+          screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
