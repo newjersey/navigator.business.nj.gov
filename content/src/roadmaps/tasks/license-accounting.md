@@ -5,6 +5,7 @@ name: Register Your Accounting Firm
 id: license-accounting
 callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Firm-Registration-Application.pdf
 callToActionText: Register My Firm
+required: true
 issuingAgency: New Jersey Division of Consumer Affairs' Board of Accountancy
 ---
 
