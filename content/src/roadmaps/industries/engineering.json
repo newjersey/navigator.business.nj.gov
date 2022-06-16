@@ -1,0 +1,55 @@
+{
+  "isMobileLocation": false,
+  "canBeHomeBased": false,
+  "defaultSectorId": "construction",
+  "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 30,
+      "task": "determine-naics-code"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "license-engineer"
+    },
+    {
+      "step": 3,
+      "weight": 22,
+      "task": "firm-engineer"
+    }
+  ],
+  "name": "Engineering Firm",
+  "isLiquorLicenseApplicable": false,
+  "isEnabled": false,
+  "additionalSearchTerms": "consultant, firm",
+  "id": "engineering",
+  "description": "Designs and plans the building of systems and structures"
+}
