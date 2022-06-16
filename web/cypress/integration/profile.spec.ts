@@ -31,7 +31,9 @@ describe("Profile [feature] [all] [group1]", () => {
 
   describe("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
-      const industry = randomElementFromArray(industriesNotHomeBasedOrLiquorLicense as Industry[]);
+      const industry = randomElementFromArray(
+        industriesNotHomeBasedOrLiquorLicense.filter((x) => x.isEnabled) as Industry[]
+      );
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
@@ -57,7 +59,9 @@ describe("Profile [feature] [all] [group1]", () => {
       });
 
       const newBusinessName = `Generic Business Name ${randomInt()}`;
-      const newIndustry = randomElementFromArray(homeBasedIndustries as Industry[]);
+      const newIndustry = randomElementFromArray(
+        homeBasedIndustries.filter((x) => x.isEnabled) as Industry[]
+      );
       const newLegalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const newtownDisplayName = "Bass River";
       const newHomeBasedQuestion = Boolean(randomInt() % 2);
@@ -78,7 +82,7 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random homebased industry, then updates the field in profile", () => {
-      const industry = randomElementFromArray(homeBasedIndustries as Industry[]);
+      const industry = randomElementFromArray(homeBasedIndustries.filter((x) => x.isEnabled) as Industry[]);
       const homeBasedQuestion = Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
@@ -109,7 +113,9 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random liquor license industry, then updates the field in profile", () => {
-      const industry = randomElementFromArray(liquorLicenseIndustries as Industry[]);
+      const industry = randomElementFromArray(
+        liquorLicenseIndustries.filter((x) => x.isEnabled) as Industry[]
+      );
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
