@@ -19,7 +19,7 @@
     {
       "files": ["**/*.test.*"],
       "plugins": ["jest", "jest-formatting"],
-      "extends": ["plugin:jest/recommended",  "plugin:jest-formatting/recommended"],
+      "extends": ["plugin:jest/recommended", "plugin:jest-formatting/recommended"],
       "rules": { "jest/expect-expect": "error" }
     }
   ]
