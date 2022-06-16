@@ -1,8 +1,8 @@
 {
   "isMobileLocation": false,
-  "canBeHomeBased": true,
-  "defaultSectorId": "other-services",
-  "canBeReseller": true,
+  "canBeHomeBased": false,
+  "defaultSectorId": "construction",
+  "canBeReseller": false,
   "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
@@ -38,13 +38,23 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "license-acupuncture"
+      "task": "architect-license"
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "architect-are-exam"
+    },
+    {
+      "step": 3,
+      "weight": 30,
+      "task": "authorization-architect-firm"
     }
   ],
-  "name": "Acupuncturist",
+  "name": "Architecture",
   "isLiquorLicenseApplicable": false,
   "isEnabled": true,
-  "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
-  "id": "acupuncture",
-  "description": "A traditional Chinese medicine involving the insertion of needles into the body"
+  "additionalSearchTerms": "architect, engineer",
+  "id": "architecture",
+  "description": "Plans, designs, and oversees the construction of buildings"
 }

@@ -10,8 +10,6 @@ issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 ---
 New architecture firms must obtain a certificate of authorization prior to operating.
 
-**Note:** The application will require a signature from the CEO.
-
 - - -
 
 ### Eligibility Criteria
@@ -24,14 +22,15 @@ New architecture firms must obtain a certificate of authorization prior to opera
 ### Application Requirements
 
 * Business name
-* Business address
-* Business address of any satellite office
+* Business addresses (and the address of any satellite office)
 * Name and license number of the architect in charge of the principal office
 * Name and license number of the architects in charge of each additional office
-* Name, license number, address, and signature of every `Responsible Charge|responsible-charge` 
-* Name, address, license number (if any), and signature of every officer, director, manager, and stockholder in your firm
+* Name, license number, and address of every `Responsible Charge|responsible-charge` 
+* Name, address, and license number of every officer, director, manager, and stockholder in your firm
 * Number of shares issued (if the firm is a Corporation)
 * Pay any fees associated with the application
+
+**Note:** The application will require signatures from every officer, director, manager, and stockholder in your firm, Responsible Charge, and the CEO.
 
 > **Once completed, you will have:**
 >

@@ -354,13 +354,6 @@
     "stepXTemplate": "(Step ${currentPage})",
     "nextButtonText": "Next"
   },
-  "headerDefaults": {
-    "noUserNameHeaderText": "Hello!",
-    "defaultHeaderText": "Hello, ${name}",
-    "newJerseyDateBodyText": "ET",
-    "guestModeToProfileButtonText": "Guest Account",
-    "genericToProfileButtonText": "Business Profile"
-  },
   "roadmapDefaults": {
     "congratulatorModalBody": "You can now start your",
     "graduationModalContinueButtonText": "Continue",
@@ -526,5 +519,12 @@
     "applicationPageHelperText": "Cannabis licenses are reviewed on an ongoing basis. You can apply at any time.",
     "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
     "sbeLabel": "`Social Equity Business (SEB)|social-equity-business-cannabis`"
+  },
+  "headerDefaults": {
+    "noUserNameHeaderText": "Hello!",
+    "defaultHeaderText": "Hello, ${name}",
+    "newJerseyDateBodyText": "ET",
+    "guestModeToProfileButtonText": "Guest Account",
+    "genericToProfileButtonText": "Business Profile"
   }
 }

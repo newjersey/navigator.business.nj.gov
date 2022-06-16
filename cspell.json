@@ -70,7 +70,8 @@
     "LIHTC",
     "NCCAOM",
     "CLARB",
-    "NCARB"
+    "NCARB",
+    "NCEES"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

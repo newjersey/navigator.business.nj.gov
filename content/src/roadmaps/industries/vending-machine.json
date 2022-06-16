@@ -1,7 +1,7 @@
 {
   "isMobileLocation": false,
-  "canBeHomeBased": true,
-  "defaultSectorId": "other-services",
+  "canBeHomeBased": false,
+  "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
   "roadmapSteps": [
@@ -38,13 +38,18 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "license-acupuncture"
+      "task": "certificate-vending-machine"
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "agreement-vending-machine-1"
     }
   ],
-  "name": "Acupuncturist",
+  "name": "Vending Machine",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": true,
-  "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
-  "id": "acupuncture",
-  "description": "A traditional Chinese medicine involving the insertion of needles into the body"
+  "isEnabled": false,
+  "additionalSearchTerms": "vending machine service, vending machine business, snack machine",
+  "id": "vending-machine",
+  "description": "Offers small items for purchase through an automated machine"
 }

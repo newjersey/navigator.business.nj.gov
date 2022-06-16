@@ -1,8 +1,8 @@
 {
   "isMobileLocation": false,
   "canBeHomeBased": true,
-  "defaultSectorId": "other-services",
-  "canBeReseller": true,
+  "defaultSectorId": "construction",
+  "canBeReseller": false,
   "isCpaRequiredApplicable": false,
   "roadmapSteps": [
     {
@@ -38,13 +38,13 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "license-acupuncture"
+      "task": "certified-interior-designer"
     }
   ],
-  "name": "Acupuncturist",
+  "name": "Interior Designer",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": true,
-  "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
-  "id": "acupuncture",
-  "description": "A traditional Chinese medicine involving the insertion of needles into the body"
+  "additionalSearchTerms": "architect, landscape,",
+  "id": "interior-designer",
+  "description": "Plans and execute designs for architectural interiors",
+  "isEnabled": true
 }
