@@ -13,5 +13,5 @@ yarn prettier
 yarn spellcheck
 yarn dependency-check
 
-# run tests, feature tests, and push
-yarn lint
+# run linting and fix any fixable errors
+yarn lint:fix
