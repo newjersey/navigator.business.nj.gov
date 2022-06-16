@@ -139,7 +139,7 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random industry with company type that enables entity id field, then updates the field in profile", () => {
-      const industry = randomElementFromArray(Industries as Industry[]);
+      const industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]);
       const companyTypeWithTradeName = randomElementFromArray(
         legalStructureWithTradeName as LegalStructure[]
       );
