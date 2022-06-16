@@ -45,5 +45,6 @@
   "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "architect, landscape,",
   "id": "interior-designer",
-  "description": "Plans and execute designs for architectural interiors"
+  "description": "Plans and execute designs for architectural interiors",
+  "isEnabled": true
 }
