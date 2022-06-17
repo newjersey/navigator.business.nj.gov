@@ -3748,7 +3748,7 @@ __metadata:
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.7.1
     simple-oauth2: 4.3.0
-    storybook-addon-designs: 6.2.1
+    storybook-addon-designs: 6.3.1
     storybook-addon-pseudo-states: 1.14.0
     style-loader: 3.3.1
     supertest: 6.2.3
@@ -30875,12 +30875,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-designs@npm:6.2.1":
-  version: 6.2.1
-  resolution: "storybook-addon-designs@npm:6.2.1"
+"storybook-addon-designs@npm:6.3.1":
+  version: 6.3.1
+  resolution: "storybook-addon-designs@npm:6.3.1"
   dependencies:
     "@figspec/react": ^1.0.0
-  checksum: 0ea3ef4d1b08b5604ac0592697793a5e30eac33fae8499bd772a1568bc21bb2ea67ed638d9b4c2f4e94713ceb5321e23fb4985d381e3c9c61094abe3a6b58063
+  checksum: 63d91358540a59801028b4fe2fe61a2cad52ac2354efde0959f081379045230af4ea6dea6a8abddae2a7eb14699fd04024dec44b6fd396065e0e585d31980635
   languageName: node
   linkType: hard
 
