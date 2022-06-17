@@ -182,7 +182,7 @@
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.7.1",
-    "storybook-addon-designs": "6.2.1",
+    "storybook-addon-designs": "6.3.1",
     "storybook-addon-pseudo-states": "1.14.0",
     "style-loader": "3.3.1",
     "supertest": "6.2.3",
