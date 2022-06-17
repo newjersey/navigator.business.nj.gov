@@ -823,6 +823,16 @@ collections:
         name: "config"
         file: "content/src/fieldConfig/config.json"
         fields:
+          - label: Task Progress Card
+            name: taskProgressCard
+            collapsed: true
+            widget: object
+            summary: "{{taskProgressCard}}"
+            fields:
+              - { label: Optional Tasks Remaining (singular), name: optionalTasksSingular, widget: string }
+              - { label: Optional Tasks Remaining (plural), name: optionalTasksPlural, widget: string }
+              - { label: Required Tasks Remaining (singular), name: requiredTasksSingular, widget: string }
+              - { label: Required Tasks Remaining (plural), name: requiredTasksPlural, widget: string }
           - label: Report An Issue Bar
             name: reportAnIssueBar
             collapsed: true

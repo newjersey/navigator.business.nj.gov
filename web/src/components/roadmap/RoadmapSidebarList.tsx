@@ -14,7 +14,7 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
     ? userData.preferences.visibleRoadmapSidebarCards
         .map((id: string) => props.sidebarDisplayContent[id])
         .sort((cardA: SidebarCardContent, cardB: SidebarCardContent): number => {
-          return cardA.weight > cardB.weight ? -1 : 1;
+          return cardA.weight < cardB.weight ? -1 : 1;
         })
     : [];
 
