@@ -3560,7 +3560,7 @@ __metadata:
     jest-junit: 13.2.0
     jsonwebtoken: 8.5.1
     prettier: 2.7.1
-    prettier-plugin-organize-imports: 2.3.4
+    prettier-plugin-organize-imports: 3.0.0
     rimraf: 3.0.2
     serverless: 3.19.0
     serverless-dynamodb-local: 0.2.40
@@ -3727,7 +3727,7 @@ __metadata:
     next: 12.1.6
     next-seo: 5.4.0
     prettier: 2.7.1
-    prettier-plugin-organize-imports: 2.3.4
+    prettier-plugin-organize-imports: 3.0.0
     raw-loader: 4.0.2
     react: 18.1.0
     react-dom: 18.1.0
@@ -3896,7 +3896,7 @@ __metadata:
     next: 12.1.6
     next-seo: 5.4.0
     prettier: 2.7.1
-    prettier-plugin-organize-imports: 2.3.4
+    prettier-plugin-organize-imports: 3.0.0
     raw-loader: 4.0.2
     react: 18.1.0
     react-dom: 18.1.0
@@ -27058,13 +27058,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-organize-imports@npm:2.3.4":
-  version: 2.3.4
-  resolution: "prettier-plugin-organize-imports@npm:2.3.4"
+"prettier-plugin-organize-imports@npm:3.0.0":
+  version: 3.0.0
+  resolution: "prettier-plugin-organize-imports@npm:3.0.0"
   peerDependencies:
     prettier: ">=2.0"
     typescript: ">=2.9"
-  checksum: 2298fcae0f16fd1a095cc3a33ba5d51b679b291518d404ad5eaca56fdcfbd55d35e26c5adffcb8664bfb45c2339b551b385cf03f48888c46d0348843d96024e1
+  checksum: 6ff49f5532b9c33e0574c9dc10ba9fd990801efb207b640126a0c136dbcb673d2ca131fd5ffd0007a56c2c08d80c0a4b11a179ac5ca86e54445f18df5188c6ca
   languageName: node
   linkType: hard
 
