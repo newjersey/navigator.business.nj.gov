@@ -168,7 +168,7 @@
     "jest-environment-jsdom": "28.1.1",
     "jest-junit": "13.2.0",
     "kill-port": "2.0.0",
-    "lint-staged": "13.0.1",
+    "lint-staged": "13.0.2",
     "napa": "3.0.0",
     "nc": "git+https://github.com/dsueltenfuss/nc.git",
     "prettier": "2.7.1",
