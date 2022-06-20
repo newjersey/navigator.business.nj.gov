@@ -14,7 +14,7 @@ Now that you have employees, you must comply with New Jersey's Labor Laws, inclu
 - Unpaid or withheld wages
 - Fringe benefits
 - Worker compensation
-- Disability insurnace
+- Disability insurance
 - Health or life insurance
 - Unemployment
 - Required workplace notices
