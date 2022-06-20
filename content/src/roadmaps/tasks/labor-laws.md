@@ -7,7 +7,7 @@ callToActionLink: https://business.nj.gov/pages/employer-requirements
 callToActionText: Comply with New Jersey's Labor Laws
 issuingAgency: " New Jersey Department of Labor's Division of Wage and Hour Compliance"
 ---
-Now that you have employees, you must comply with New Jersey State Labor Laws, including but not limited to:
+Now that you have employees, you must comply with New Jersey's Labor Laws, including but not limited to:
 - Minimum wage and overtime wage rates
 - Earned sick leave
 - Family leave
