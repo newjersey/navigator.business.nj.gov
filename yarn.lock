@@ -3768,7 +3768,7 @@ __metadata:
     winston-cloudwatch: 6.0.1
     wiremock: 2.33.2
     xml2js: 0.4.23
-    yarn-workspace-sync-deps: 0.3.2
+    yarn-workspace-sync-deps: 0.3.3
   languageName: unknown
   linkType: soft
 
@@ -34561,15 +34561,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yarn-workspace-sync-deps@npm:0.3.2":
-  version: 0.3.2
-  resolution: "yarn-workspace-sync-deps@npm:0.3.2"
+"yarn-workspace-sync-deps@npm:0.3.3":
+  version: 0.3.3
+  resolution: "yarn-workspace-sync-deps@npm:0.3.3"
   dependencies:
     minimist: ^1.2.0
   bin:
     yarn-workspace-sync-deps: index.js
     yarnw-sync-deps: index.js
-  checksum: 4f248855181f65ceda9af661f9aa92b6c044db4ecd891f1e3a64b8af66db4c06e83143ed29078968486d645c318c3af0959fdcc7209a9946fa2e097e24e838f7
+  checksum: df2aecca5dcd36300551f90f56f22b2ab69ac4dcf828870c4ea2b2339695ba6d0bbb61a084b82c839df81dadffd2d1a5164f712e30f73268fddfd8d50d0cd8e7
   languageName: node
   linkType: hard
 
