@@ -17,6 +17,7 @@ If you will employ others to offer massage therapy services, you need to registe
 - Name and physical address of your business  
 - Mailing address (if different from your business address)  
 - Professional liability insurance in a minimum amount of $1M per occurrence and $3M aggregate per policy year
+- Pay any associated fees
 
 > **Once completed, you will have:**  
 > - A Massage Therapy Employer License Number mailed to the address provided
