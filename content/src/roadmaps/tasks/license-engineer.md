@@ -1,7 +1,7 @@
 ---
 urlSlug: license-engineer
 filename: license-engineer
-name: Apply for an Engineer License
+name: Apply for an Engineer License, if Applicable
 id: license-engineer
 callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
 callToActionText: Apply for My License
@@ -9,7 +9,7 @@ required: false
 issuingAgency: New Jersey Division of Consumer Affairs Board of Professional
   Engineers and Land Surveyors
 ---
-You need an Engineer license prior to offering professional services.
+You need an Engineer license if you plan to provide services as an engineer inside your firm.
 
 ---
 ### Eligibility
