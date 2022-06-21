@@ -38,23 +38,18 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "architect-license"
+      "task": "license-engineer"
     },
     {
       "step": 3,
-      "weight": 25,
-      "task": "architect-are-exam"
-    },
-    {
-      "step": 3,
-      "weight": 30,
-      "task": "authorization-architect-firm"
+      "weight": 22,
+      "task": "firm-engineer"
     }
   ],
-  "name": "Architecture Firm",
+  "name": "Engineering Firm",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": true,
-  "additionalSearchTerms": "architect, engineer",
-  "id": "architecture",
-  "description": "Plans, designs, and oversees the construction of buildings"
+  "isEnabled": false,
+  "additionalSearchTerms": "consultant, firm",
+  "id": "engineering",
+  "description": "Designs and plans the building of systems and structures"
 }
