@@ -56,10 +56,10 @@ export const ReviewMembers = (): ReactElement => {
           {isCorp && (
             <>
               <div className="display-block tablet:display-flex">
-                <div className="text-bold width-11rem margin-top-1">
+                <div className="text-bold width-11rem">
                   <Content>{Config.businessFormationDefaults.reviewPageDirectorAddressLabel}</Content>
                 </div>
-                <div className="tablet:margin-top-1">
+                <div>
                   {getStringifiedAddress(
                     member.addressLine1,
                     member.addressCity,

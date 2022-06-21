@@ -37,7 +37,7 @@ export const RightSidebarPageLayout = ({
     >
       <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
         <div className="grid-row">
-          <div className="padding-x-2 desktop:padding-left-0 desktop:grid-col-7 usa-prose margin-top-6 padding-bottom-7 desktop:padding-bottom-15 desktop:padding-right-5">
+          <div className="padding-x-2 desktop:padding-left-0 desktop:grid-col-7 usa-prose margin-top-2 tablet:margin-top-6 padding-bottom-7 desktop:padding-bottom-15 desktop:padding-right-5">
             {mainContent}
           </div>
           <div
