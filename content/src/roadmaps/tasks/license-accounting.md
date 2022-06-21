@@ -16,7 +16,7 @@ New accounting firms must register and obtain certification.
 ### Application Requirements
 
 - []{accountant-manager} A designated Resident Manager-In-Charge. This must be a certified public accountant in the firm
-- []{accountant-fee} Payment for the required application and registration fees
+- []{accountant-fee} Payment any associated fees
 
 > **Once completed, you will have:**
 >
