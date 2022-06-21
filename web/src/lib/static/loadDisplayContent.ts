@@ -125,9 +125,6 @@ const getFormationFields = (
 };
 
 export const loadTasksDisplayContent = (): TasksDisplayContent => {
-  const loadFile = (filename: string): string =>
-    fs.readFileSync(path.join(displayContentDir, filename), "utf8");
-
   const defaultFormationDisplayContent = getFormationFields(defaultFormationLegalType);
 
   const formationDisplayContent = FormationLegalTypes.filter(
@@ -138,31 +135,8 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
   }, {} as FormationDisplayContentMap);
   formationDisplayContent[defaultFormationLegalType] = defaultFormationDisplayContent;
 
-  const annualGeneralRequirements = getMarkdown(loadFile("cannabis-license/annual-general-requirements.md"));
-  const conditionalGeneralRequirements = getMarkdown(
-    loadFile("cannabis-license/conditional-general-requirements.md")
-  );
-  const divereselyOwnedRequirements = getMarkdown(
-    loadFile("cannabis-license/diversely-owned-requirements.md")
-  );
-  const impactZoneRequirements = getMarkdown(loadFile("cannabis-license/impact-zone-requirements.md"));
-  const microbusinessRequirements = getMarkdown(loadFile("cannabis-license/microbusiness-requirements.md"));
-  const socialEquityRequirements = getMarkdown(loadFile("cannabis-license/social-equity-requirements.md"));
-  const conditionalBottomOfTask = getMarkdown(loadFile("cannabis-license/conditional-bottom-of-task.md"));
-  const annualBottomOfTask = getMarkdown(loadFile("cannabis-license/annual-bottom-of-task.md"));
-
   return {
     formationDisplayContent,
-    cannabisApplyForLicenseDisplayContent: {
-      annualGeneralRequirements: { contentMd: annualGeneralRequirements.content },
-      conditionalGeneralRequirements: { contentMd: conditionalGeneralRequirements.content },
-      diverselyOwnedRequirements: { contentMd: divereselyOwnedRequirements.content },
-      impactZoneRequirements: { contentMd: impactZoneRequirements.content },
-      microbusinessRequirements: { contentMd: microbusinessRequirements.content },
-      socialEquityRequirements: { contentMd: socialEquityRequirements.content },
-      conditionalBottomOfTask: { contentMd: conditionalBottomOfTask.content },
-      annualBottomOfTask: { contentMd: annualBottomOfTask.content },
-    },
   };
 };
 

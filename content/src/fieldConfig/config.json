@@ -495,30 +495,11 @@
     "escapeModalReturn": "Continue without saving.",
     "successTextHeader": "Profile Updated"
   },
-  "cannabisApplyForLicense": {
-    "impactZoneLabel": "`Impact Zone Business|impact-zone-business-cannabis`",
+  "cannabisEligibilityModal": {
     "eligibleModalCancelButton": "I'm not sure",
     "eligibleModalTitle": "Ensure Your Eligibility",
-    "priorityStatusHeader": "Priority Status",
-    "priorityStatusText": "Based on your preferences in [Determine if You Are Eligible for Priority Status](/tasks/priority-status-cannabis), you are eligible as the following:",
-    "priorityStatusApplicationNeeds": "Priority Status Application Needs",
-    "diverselyOwnedHelperText": "You are seeing this based on your [priority status](/tasks/priority-status-cannabis) selection as a Minority/Women Owned Business Enterprise / Disabled Veteran Owned Business.",
-    "viewRequirementsButton": "View Application Needs",
-    "applicationQuestionsText": "Answer the two questions below and we can highlight the information you need to prepare for you application on the following page.",
-    "diverselyOwnedLabel": "`Diversely-Owned Business|diversely-owned-business-cannabis`",
-    "businessSizeHeader": "Business Size",
     "eligibleModalContinueButton": "I am eligible",
-    "microbusinessRadioYes": " Yes, I'm a microbusiness",
-    "microbusinessApplicationNeeds": "Microbusiness Application Needs",
-    "generalApplicationNeeds": "General",
-    "priorityStatusNoneSelectedText": "You did not select any [priority status designations](/tasks/priority-status-cannabis).",
-    "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before proceeding.",
-    "microbusinessRadioNo": "No, I'm a `standard business|standard-business-cannabis`",
-    "backToFirstTabButton": "Back",
-    "applicationNeedsHeader": "Application Needs",
-    "applicationPageHelperText": "Cannabis licenses are reviewed on an ongoing basis. You can apply at any time.",
-    "microbusinessRadioQuestion": "Are you a `microbusiness|microbusiness-cannabis`?",
-    "sbeLabel": "`Social Equity Business (SEB)|social-equity-business-cannabis`"
+    "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before proceeding."
   },
   "headerDefaults": {
     "noUserNameHeaderText": "Hello!",
