@@ -526,5 +526,11 @@
     "newJerseyDateBodyText": "ET",
     "guestModeToProfileButtonText": "Guest Account",
     "genericToProfileButtonText": "Business Profile"
+  },
+  "taskProgressCard": {
+    "optionalTasksSingular": "${numTasks} optional task",
+    "optionalTasksPlural": "${numTasks} optional tasks",
+    "requiredTasksSingular": "${numTasks} required task",
+    "requiredTasksPlural": "${numTasks} required tasks"
   }
 }
