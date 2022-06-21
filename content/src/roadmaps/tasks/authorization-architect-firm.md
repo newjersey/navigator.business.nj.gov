@@ -8,7 +8,7 @@ callToActionText: Obtain My Certificate of Authorization
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 ---
-New architecture firms must obtain a certificate of authorization prior to operating.
+New architecture firms must obtain a Certificate of Authorization prior to operating.
 
 - - -
 
@@ -23,8 +23,8 @@ New architecture firms must obtain a certificate of authorization prior to opera
 
 * Business name
 * Business address (and the address of any satellite office)
-* Name and license number of the `Architect in Charge|architect-in-charge` of the principal office
-* Name and license number of the Architects in Charge of each additional office
+* Name and license number of the `Architect-in-Charge|architect-in-charge` of the principal office
+* Name and license number of the Architects-in-Charge of each additional office
 * Name, license number, and address of every `Responsible Charge|responsible-charge` 
 * Name, address, and license number of every officer, director, manager, and stockholder in your firm
 * Number of shares issued (if the firm is a Corporation)
@@ -33,5 +33,4 @@ New architecture firms must obtain a certificate of authorization prior to opera
 **Note:** The application will require signatures from every officer, director, manager, and stockholder in your firm, Responsible Charge, and the CEO.
 
 > **Once approved, you will have:**
->
 > * You will receive a notice in the mail with your Certificate of Authorization number
