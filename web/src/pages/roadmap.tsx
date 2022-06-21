@@ -65,7 +65,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   };
 
   const renderRoadmap = (
-    <div className="margin-top-6 desktop:margin-top-0">
+    <div className="margin-top-0 desktop:margin-top-0">
       <UserDataErrorAlert />
       <Header />
       <div className="margin-top-3">
