@@ -20,7 +20,7 @@ You need an Architect license prior to offering professional services.
 - Supporting documentation (like police records) if you answered "Yes” to any of the questions #6 through #15 in the application 
 - College transcripts must be sent directly from the college(s) to the Board
 - Names and addresses of three architects who are personally acquainted with your professional abilities.
-- Pay any fees associated with the license
+- Pay any associated fees
 
 >**Once completed, you will have:**
 >- Approval to sign up to take the Architect’s Registration Exam, the last step before obtaining your license
