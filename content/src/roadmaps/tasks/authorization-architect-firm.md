@@ -1,7 +1,7 @@
 ---
 urlSlug: authorization-firm
 filename: authorization-architect-firm
-name: Obtain a Certificate of Authorization for your Firm
+name: Obtain a Certificate of Authorization for Your Firm
 id: authorization-architect-firm
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 callToActionText: Obtain My Certificate of Authorization
@@ -22,7 +22,7 @@ New architecture firms must obtain a certificate of authorization prior to opera
 ### Application Requirements
 
 * Business name
-* Business addresses (and the address of any satellite office)
+* Business address (and the address of any satellite office)
 * Name and license number of the `Architect in Charge|architect-in-charge` of the principal office
 * Name and license number of the Architects in Charge of each additional office
 * Name, license number, and address of every `Responsible Charge|responsible-charge` 
@@ -32,6 +32,6 @@ New architecture firms must obtain a certificate of authorization prior to opera
 
 **Note:** The application will require signatures from every officer, director, manager, and stockholder in your firm, Responsible Charge, and the CEO.
 
-> **Once completed, you will have:**
+> **Once approved, you will have:**
 >
-> * Once approved, you will receive a notice in the mail with your Certificate of Authorization number
+> * You will receive a notice in the mail with your Certificate of Authorization number
