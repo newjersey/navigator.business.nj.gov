@@ -195,7 +195,7 @@
     "webpack": "5.73.0",
     "webpack-node-externals": "3.0.0",
     "wiremock": "2.33.2",
-    "yarn-workspace-sync-deps": "0.3.2"
+    "yarn-workspace-sync-deps": "0.3.3"
   },
   "workspaces": {
     "packages": [
