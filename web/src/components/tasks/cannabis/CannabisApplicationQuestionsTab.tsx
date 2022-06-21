@@ -2,8 +2,8 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { MicrobusinessRadioQuestion } from "@/components/tasks/cannabis/MicrobusinessRadioQuestion";
 import { PriorityStatusCheckboxes } from "@/components/tasks/cannabis/PriorityStatusCheckboxes";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement } from "react";
 
 interface Props {
@@ -14,6 +14,8 @@ interface Props {
 }
 
 export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+
   return (
     <div className="flex flex-column">
       <Content>{Config.cannabisApplyForLicense.applicationQuestionsText}</Content>

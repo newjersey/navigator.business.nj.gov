@@ -5,19 +5,26 @@ import { CannabisApplicationRequirementsTab } from "@/components/tasks/cannabis/
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
-import { CannabisApplyForLicenseDisplayContent, Task } from "@/lib/types/types";
+import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
-  displayContent: CannabisApplyForLicenseDisplayContent;
+  CMS_ONLY_tab?: string; // for CMS only
+  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_isAnnual?: boolean; // for CMS only
+  CMS_ONLY_isConditional?: boolean; // for CMS only
 }
 
 export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
+  const userDataFromHook = useUserData();
+  const update = userDataFromHook.update;
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+
   const [displayFirstTab, setDisplayFirstTab] = useState<boolean>(true);
   const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
   const [priorityStatusState, setPriorityStatusState] = useState<Record<PriorityApplicationType, boolean>>({
@@ -28,6 +35,13 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   const [noPriorityStatus, setNoPriorityStatus] = useState<boolean>(false);
 
   useMountEffectWhenDefined(() => {
+    if (props.CMS_ONLY_tab === "1") {
+      setDisplayFirstTab(true);
+    }
+    if (props.CMS_ONLY_tab === "2") {
+      setDisplayFirstTab(false);
+    }
+
     if (!userData) return;
 
     const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some(
@@ -125,7 +139,8 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
           onBack={onBack}
           priorityStatusState={priorityStatusState}
           task={props.task}
-          displayContent={props.displayContent}
+          CMS_ONLY_isAnnual={props.CMS_ONLY_isAnnual}
+          CMS_ONLY_isConditional={props.CMS_ONLY_isConditional}
         />
       )}
     </>

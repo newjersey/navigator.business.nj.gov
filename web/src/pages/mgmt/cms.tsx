@@ -1,5 +1,6 @@
 import ContextEditor from "@/lib/cms/editors/context-info";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
+import CannabisLicensePreview from "@/lib/cms/previews/cannabis-license/cannabis-license";
 import CannabisPriorityStatusPreview from "@/lib/cms/previews/cannabis-priority-status";
 import CertificationsPreview from "@/lib/cms/previews/certifications";
 import ContentPreview from "@/lib/cms/previews/content";
@@ -95,15 +96,11 @@ const CMS = dynamic(
       CMS.registerPreviewTemplate("cannabisPriority-2", CannabisPriorityStatusPreview);
 
       // ----- Cannabis License -----
-      registerAsContent(CMS, [
-        "annual-general-requirements",
-        "conditional-general-requirements",
-        "diversely-owned-requirements",
-        "impact-zone-requirements",
-        "microbusiness-requirements",
-        "social-equity-requirements",
-        "annual-bottom-of-task",
-        "conditional-bottom-of-task",
+      registerAsTask(CMS, ["applyForAnnualLicense-task", "applyForConditionalLicense-task"]);
+      registerAsCannabisLicensePreview(CMS, [
+        "cannabisLicense-1",
+        "cannabisLicenseAnnual-2",
+        "cannabisLicenseConditional-2",
       ]);
 
       // ----- Cannabis Priority Status -----
@@ -120,6 +117,20 @@ const registerAsContent = (CMS: typeof import("netlify-cms-app"), names: string[
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, ContentPreview);
+  }
+};
+
+const registerAsTask = (CMS: typeof import("netlify-cms-app"), names: string[]) => {
+  for (const name of names) {
+    // @ts-expect-error: No type definition available
+    CMS.registerPreviewTemplate(name, TaskPreview);
+  }
+};
+
+const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"), names: string[]) => {
+  for (const name of names) {
+    // @ts-expect-error: No type definition available
+    CMS.registerPreviewTemplate(name, CannabisLicensePreview);
   }
 };
 

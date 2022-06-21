@@ -1,12 +1,13 @@
 import { Content } from "@/components/Content";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement } from "react";
 
 export const MicrobusinessRadioQuestion = (): ReactElement => {
   const { userData, update } = useUserData();
+  const { Config } = useConfig();
 
   const handleRadioChange = async (event: React.ChangeEvent<{ name?: string; value: string }>) => {
     if (!userData) return;

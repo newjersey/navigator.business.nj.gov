@@ -1,3 +1,6 @@
+import * as CannabisLicenseAnnualTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-annual-tab2.json";
+import * as CannabisLicenseConditionalTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-conditional-tab2.json";
+import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-tab1.json";
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -45,7 +48,10 @@ const merged = JSON.parse(
       ProfileOnboardingPoppy,
       ProfileOnboardingDakota,
       CannabisPriorityStatusTab1,
-      CannabisPriorityStatusTab2
+      CannabisPriorityStatusTab2,
+      CannabisLicenseTab1,
+      CannabisLicenseAnnualTab2,
+      CannabisLicenseConditionalTab2
     )
   )
 );
@@ -70,7 +76,10 @@ export type ConfigType = typeof ConfigOriginal &
   typeof ProfileOnboardingPoppy &
   typeof ProfileOnboardingDakota &
   typeof CannabisPriorityStatusTab1 &
-  typeof CannabisPriorityStatusTab2;
+  typeof CannabisPriorityStatusTab2 &
+  typeof CannabisLicenseTab1 &
+  typeof CannabisLicenseAnnualTab2 &
+  typeof CannabisLicenseConditionalTab2;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -94,7 +103,10 @@ export const getMergedConfig = (): ConfigType => {
     ProfileOnboardingPoppy,
     ProfileOnboardingDakota,
     CannabisPriorityStatusTab1,
-    CannabisPriorityStatusTab2
+    CannabisPriorityStatusTab2,
+    CannabisLicenseTab1,
+    CannabisLicenseAnnualTab2,
+    CannabisLicenseConditionalTab2
   );
 };
 
