@@ -22,14 +22,14 @@ Engineering firms must obtain a certificate of authorization from the State Boar
 * Certified copy of your `Certificate of Formation or Incorporation|certificate-formation`, if applicable
 * Business name
 * Business addresses (and the address of any satellite office)
-* Name and license number of the engineer in charge of the principal office
-* Name and license number of the engineers in charge of each additional office
+* Name and license number of the `Engineer-in-Charge|engineer-in-charge` of the principal office
+* Name and license number of the Engineers-in-Charge of each additional office
 * Name, address, and license number of every officer, director, manager, and stockholder in your firm
 * Number of shares issued (if the firm is a Corporation)
 * Pay any fees associated with the application  
 
 **​​Note:** The application will need to be notarized.
 
-> **Once completed, you will have:**
+> **Once approved, you will have:**
 >
-> * Once approved, you will receive a Certificate of Authorization number
+> * You will receive a Certificate of Authorization number
