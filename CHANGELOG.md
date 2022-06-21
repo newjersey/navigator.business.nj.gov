@@ -1,3 +1,27 @@
+## [3.12.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.12.1...v3.12.2) (2022-06-21)
+
+
+### Bug Fixes
+
+* add register text to forms that show the register modal ([b37def5](https://github.com/newjersey/navigator.business.nj.gov/commit/b37def5d7d44fe5f7533b8a69f3a81c4efe8ae0a))
+* **deps:** update aws-sdk ([db06245](https://github.com/newjersey/navigator.business.nj.gov/commit/db06245b7fc2b3794341c75d60616e043d2ba7b7))
+* **deps:** update dependency focus-trap-react to v9 ([43c758c](https://github.com/newjersey/navigator.business.nj.gov/commit/43c758c663a45c173c8fe9e57b002f600573d114))
+* **deps:** update emotion monorepo to v11.9.3 ([d6aa140](https://github.com/newjersey/navigator.business.nj.gov/commit/d6aa140dd22ec512d27f2adfcea2b206cd5584b7))
+* improved error messaging for business name search when searching with designators ([2c04811](https://github.com/newjersey/navigator.business.nj.gov/commit/2c048116180b97a302fb9ed3af7a954e2c22df99))
+* updating Funding Opportunities Content dep-clean-construction ([#3185](https://github.com/newjersey/navigator.business.nj.gov/issues/3185)) ([00ccbbb](https://github.com/newjersey/navigator.business.nj.gov/commit/00ccbbbe3bb1c6ba0361720f7e650bb5874a53ee))
+* updating General Config config ([#3214](https://github.com/newjersey/navigator.business.nj.gov/issues/3214)) ([fdcb120](https://github.com/newjersey/navigator.business.nj.gov/commit/fdcb120b2d55c3baa4124caf63f7edd968989cc8))
+* updating Industry Roadmaps acupuncture ([#3221](https://github.com/newjersey/navigator.business.nj.gov/issues/3221)) ([4ffbcbe](https://github.com/newjersey/navigator.business.nj.gov/commit/4ffbcbe96004e65aaec6218f345fbbfc34448730))
+* updating Industry Roadmaps architecture ([#3242](https://github.com/newjersey/navigator.business.nj.gov/issues/3242)) ([ad6b665](https://github.com/newjersey/navigator.business.nj.gov/commit/ad6b665950c340d716a11a605b830d710ddcc941))
+* updating Industry Roadmaps vending-machine ([#3229](https://github.com/newjersey/navigator.business.nj.gov/issues/3229)) ([dda2717](https://github.com/newjersey/navigator.business.nj.gov/commit/dda2717c2d6af5ea0fc6057112e699c04c9b0986))
+* updating Tasks architect-are-exam ([#3175](https://github.com/newjersey/navigator.business.nj.gov/issues/3175)) ([bf69b7c](https://github.com/newjersey/navigator.business.nj.gov/commit/bf69b7cb0033d9d1c559332abe38744b03d499c2))
+* updating Tasks authorization-architect-firm ([#3146](https://github.com/newjersey/navigator.business.nj.gov/issues/3146)) ([7d5aeb5](https://github.com/newjersey/navigator.business.nj.gov/commit/7d5aeb555eabdc33a7e66330d9ee55c0bd960f8e))
+* updating Tasks certified-interior-designer ([#3233](https://github.com/newjersey/navigator.business.nj.gov/issues/3233)) ([53bc1cc](https://github.com/newjersey/navigator.business.nj.gov/commit/53bc1ccc5cf037c0394bfef6c2b0c63c7f5c5793))
+* updating Tasks certified-interior-designer ([#3234](https://github.com/newjersey/navigator.business.nj.gov/issues/3234)) ([1bee81b](https://github.com/newjersey/navigator.business.nj.gov/commit/1bee81bf85db57d1c6cc793f6343c84db1002a71))
+* updating Tasks license-accounting ([#3240](https://github.com/newjersey/navigator.business.nj.gov/issues/3240)) ([3528517](https://github.com/newjersey/navigator.business.nj.gov/commit/35285170d6b96fb7aac906d6a7bcc9ca7f817fb0))
+* updating Tasks license-engineer ([#3244](https://github.com/newjersey/navigator.business.nj.gov/issues/3244)) ([e0b6523](https://github.com/newjersey/navigator.business.nj.gov/commit/e0b652375cc2cc6df54e14ec84082deb111a51b9))
+* updating Tasks license-real-estate-agent ([#3231](https://github.com/newjersey/navigator.business.nj.gov/issues/3231)) ([9410e60](https://github.com/newjersey/navigator.business.nj.gov/commit/9410e60600883183c3b196e50a26817d44c9a738))
+* updating Tasks register-firm-accounting ([#3241](https://github.com/newjersey/navigator.business.nj.gov/issues/3241)) ([1caa61f](https://github.com/newjersey/navigator.business.nj.gov/commit/1caa61f3b1f9db723a6d6038f1e6c646a6d206da))
+
 ## [3.12.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.12.0...v3.12.1) (2022-06-13)
 
 
