@@ -1,11 +1,8 @@
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
+import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
-import {
-  CannabisApplyForLicenseDisplayContent,
-  createEmptyCannabisApplyForLicenseDisplayContent,
-  Task,
-} from "@/lib/types/types";
+import { Task } from "@/lib/types/types";
 import { generateTask, generateTaskLink, generateUserData } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
@@ -15,25 +12,19 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
+const Config = getMergedConfig();
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-const renderPage = (
-  task: Task,
-  initialUserData?: UserData,
-  displayContent?: CannabisApplyForLicenseDisplayContent
-) => {
+const renderPage = (task: Task, initialUserData?: UserData) => {
   render(
     withAuthAlert(
       <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
-        <CannabisApplyForLicenseTask
-          task={task}
-          displayContent={displayContent || createEmptyCannabisApplyForLicenseDisplayContent()}
-        />
+        <CannabisApplyForLicenseTask task={task} />
       </WithStatefulUserData>,
       IsAuthenticated.TRUE
     )
@@ -161,10 +152,10 @@ describe("<CannabisApplyForLicenseTask />", () => {
     renderPage(generateTask({}), initialUserData);
     expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
     fireEvent.click(getInputByName("Social Equity Business (SEB)"));
-    expect(screen.getByText(Config.cannabisApplyForLicense.eligibleModalTitle)).toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.eligibleModalContinueButton));
+    expect(screen.getByText(Config.cannabisEligibilityModal.eligibleModalTitle)).toBeInTheDocument();
+    fireEvent.click(screen.getByText(Config.cannabisEligibilityModal.eligibleModalContinueButton));
     await waitFor(() => {
-      expect(screen.queryByText(Config.cannabisApplyForLicense.eligibleModalTitle)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.cannabisEligibilityModal.eligibleModalTitle)).not.toBeInTheDocument();
     });
     expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(true);
   });
@@ -179,26 +170,15 @@ describe("<CannabisApplyForLicenseTask />", () => {
     renderPage(generateTask({}), initialUserData);
     expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
     fireEvent.click(getInputByName("Social Equity Business (SEB)"));
-    expect(screen.getByText(Config.cannabisApplyForLicense.eligibleModalTitle)).toBeInTheDocument();
-    fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.eligibleModalCancelButton));
+    expect(screen.getByText(Config.cannabisEligibilityModal.eligibleModalTitle)).toBeInTheDocument();
+    fireEvent.click(screen.getByText(Config.cannabisEligibilityModal.eligibleModalCancelButton));
     await waitFor(() => {
-      expect(screen.queryByText(Config.cannabisApplyForLicense.eligibleModalTitle)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.cannabisEligibilityModal.eligibleModalTitle)).not.toBeInTheDocument();
     });
     expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
   });
 
   describe("requirements tab", () => {
-    const displayContent = {
-      annualGeneralRequirements: { contentMd: "annualGeneralRequirements-content" },
-      conditionalGeneralRequirements: { contentMd: "conditionalGeneralRequirements-content" },
-      diverselyOwnedRequirements: { contentMd: "diverselyOwnedRequirements-content" },
-      impactZoneRequirements: { contentMd: "impactZoneRequirements-content" },
-      microbusinessRequirements: { contentMd: "microbusinessRequirements-content" },
-      socialEquityRequirements: { contentMd: "socialEquityRequirements-content" },
-      conditionalBottomOfTask: { contentMd: "conditionalBottomOfTask-content" },
-      annualBottomOfTask: { contentMd: "annualBottomOfTask-content" },
-    };
-
     it("does not show unlocked-by alert on requirements tab", async () => {
       const initialUserData = generateUserData({
         taskProgress: {
@@ -211,7 +191,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
         unlockedBy: [generateTaskLink({ name: "Do this first", urlSlug: "do-this-first" })],
       });
 
-      renderPage(task, initialUserData, displayContent);
+      renderPage(task, initialUserData);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
       expect(screen).not.toContain("Do this first");
     });
@@ -222,7 +202,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
           "annual-license-cannabis": "NOT_STARTED",
         },
       });
-      renderPage(generateTask({ id: "annual-license-cannabis" }), initialUserData, displayContent);
+      renderPage(generateTask({ id: "annual-license-cannabis" }), initialUserData);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
       expect(currentUserData().taskProgress).toEqual({
         "annual-license-cannabis": "IN_PROGRESS",
@@ -235,82 +215,74 @@ describe("<CannabisApplyForLicenseTask />", () => {
           "annual-license-cannabis": "COMPLETED",
         },
       });
-      renderPage(generateTask({ id: "annual-license-cannabis" }), initialUserData, displayContent);
+      renderPage(generateTask({ id: "annual-license-cannabis" }), initialUserData);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
       expect(userDataWasNotUpdated()).toEqual(true);
     });
 
     it("shows annual requirements for annual license", () => {
-      renderPage(generateTask({ id: "annual-license-cannabis" }), generateUserData({}), displayContent);
+      renderPage(generateTask({ id: "annual-license-cannabis" }), generateUserData({}));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
-      expect(screen.getByText(displayContent.annualGeneralRequirements.contentMd)).toBeInTheDocument();
-      expect(
-        screen.queryByText(displayContent.conditionalGeneralRequirements.contentMd)
-      ).not.toBeInTheDocument();
+      expect(screen.getByTestId("annualGeneralRequirements")).toBeInTheDocument();
+      expect(screen.queryByTestId("conditionalGeneralRequirements")).not.toBeInTheDocument();
     });
 
     it("shows conditional requirements for conditional license", () => {
-      renderPage(generateTask({ id: "conditional-permit-cannabis" }), generateUserData({}), displayContent);
+      renderPage(generateTask({ id: "conditional-permit-cannabis" }), generateUserData({}));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
-      expect(screen.queryByText(displayContent.annualGeneralRequirements.contentMd)).not.toBeInTheDocument();
-      expect(screen.getByText(displayContent.conditionalGeneralRequirements.contentMd)).toBeInTheDocument();
+      expect(screen.queryByTestId("annualGeneralRequirements")).not.toBeInTheDocument();
+      expect(screen.getByTestId("conditionalGeneralRequirements")).toBeInTheDocument();
     });
 
     it("shows requirements for microbusiness", () => {
-      renderPage(generateTask({}), generateUserData({}), displayContent);
+      renderPage(generateTask({}), generateUserData({}));
       fireEvent.click(screen.getByTestId("microbusiness-radio-true"));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
-      expect(
-        screen.getByText(Config.cannabisApplyForLicense.microbusinessApplicationNeeds)
-      ).toBeInTheDocument();
-      expect(screen.getByText(displayContent.microbusinessRequirements.contentMd)).toBeInTheDocument();
+      expect(screen.getByTestId("microbusinessRequirements")).toBeInTheDocument();
     });
 
     it("does not show requirements for microbusiness when standard is selected", () => {
-      renderPage(generateTask({}), generateUserData({}), displayContent);
+      renderPage(generateTask({}), generateUserData({}));
       fireEvent.click(screen.getByTestId("microbusiness-radio-false"));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
-      expect(
-        screen.queryByText(Config.cannabisApplyForLicense.microbusinessApplicationNeeds)
-      ).not.toBeInTheDocument();
-      expect(screen.queryByText(displayContent.microbusinessRequirements.contentMd)).not.toBeInTheDocument();
+      expect(screen.queryByTestId("microbusinessRequirements")).not.toBeInTheDocument();
     });
 
     it("shows requirements for diversely-owned when checkbox is checked", () => {
       const initialUserData = generateUserData({
         taskItemChecklist: { [minorityWomanPriorityStatus]: true },
       });
-      renderPage(generateTask({}), initialUserData, displayContent);
+      renderPage(generateTask({}), initialUserData);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
-      expect(screen.getByText(displayContent.diverselyOwnedRequirements.contentMd)).toBeInTheDocument();
-      expect(screen.queryByText(displayContent.socialEquityRequirements.contentMd)).not.toBeInTheDocument();
-      expect(screen.queryByText(displayContent.impactZoneRequirements.contentMd)).not.toBeInTheDocument();
+      expect(screen.getByTestId("diverselyOwnedRequirements")).toBeInTheDocument();
+      expect(screen.queryByTestId("socialEquityRequirements")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("impactZoneRequirements")).not.toBeInTheDocument();
     });
 
     it("shows requirements for SBE when checkbox is checked", () => {
       const initialUserData = generateUserData({
         taskItemChecklist: { [sbePriorityStatus]: true },
       });
-      renderPage(generateTask({}), initialUserData, displayContent);
+      renderPage(generateTask({}), initialUserData);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
-      expect(screen.queryByText(displayContent.diverselyOwnedRequirements.contentMd)).not.toBeInTheDocument();
-      expect(screen.getByText(displayContent.socialEquityRequirements.contentMd)).toBeInTheDocument();
-      expect(screen.queryByText(displayContent.impactZoneRequirements.contentMd)).not.toBeInTheDocument();
+      expect(screen.queryByTestId("diverselyOwnedRequirements")).not.toBeInTheDocument();
+      expect(screen.getByTestId("socialEquityRequirements")).toBeInTheDocument();
+      expect(screen.queryByTestId("impactZoneRequirements")).not.toBeInTheDocument();
     });
 
     it("shows requirements for impact zone when checkbox is checked", () => {
       const initialUserData = generateUserData({
         taskItemChecklist: { [impactPriorityStatus]: true },
       });
-      renderPage(generateTask({}), initialUserData, displayContent);
+      renderPage(generateTask({}), initialUserData);
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
-      expect(screen.queryByText(displayContent.diverselyOwnedRequirements.contentMd)).not.toBeInTheDocument();
-      expect(screen.queryByText(displayContent.socialEquityRequirements.contentMd)).not.toBeInTheDocument();
-      expect(screen.getByText(displayContent.impactZoneRequirements.contentMd)).toBeInTheDocument();
+      expect(screen.queryByTestId("diverselyOwnedRequirements")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("socialEquityRequirements")).not.toBeInTheDocument();
+      expect(screen.getByTestId("impactZoneRequirements")).toBeInTheDocument();
     });
 
     it("shows CTA for task", () => {
@@ -318,8 +290,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
         generateTask({
           callToActionText: "do the application here",
         }),
-        generateUserData({}),
-        displayContent
+        generateUserData({})
       );
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
 
@@ -331,8 +302,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
         generateTask({
           callToActionText: "do the application here",
         }),
-        generateUserData({}),
-        displayContent
+        generateUserData({})
       );
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.viewRequirementsButton));
       fireEvent.click(screen.getByText(Config.cannabisApplyForLicense.backToFirstTabButton));

@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { DialogTwoButton } from "@/components/DialogTwoButton";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControl, FormControlLabel, FormGroup } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 
@@ -15,6 +15,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
   const [eligibleModalIsOpenWith, setEligibleModalIsOpenWith] = useState<PriorityApplicationType | "">("");
 
   const { userData } = useUserData();
+  const { Config } = useConfig();
 
   const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>, type: PriorityApplicationType) => {
     if (!userData) return;
@@ -80,13 +81,12 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
       <DialogTwoButton
         isOpen={eligibleModalIsOpenWith !== ""}
         close={() => setEligibleModalIsOpenWith("")}
-        title={Config.cannabisApplyForLicense.eligibleModalTitle}
-        primaryButtonText={Config.cannabisApplyForLicense.eligibleModalContinueButton}
+        title={Config.cannabisEligibilityModal.eligibleModalTitle}
+        primaryButtonText={Config.cannabisEligibilityModal.eligibleModalContinueButton}
         primaryButtonOnClick={setEligibilityChecked}
-        // primaryButtonOnClick={eligibleModalSetter ? () => eligibleModalSetter() : () => {}}
-        secondaryButtonText={Config.cannabisApplyForLicense.eligibleModalCancelButton}
+        secondaryButtonText={Config.cannabisEligibilityModal.eligibleModalCancelButton}
       >
-        <Content>{Config.cannabisApplyForLicense.eligibleModalBody}</Content>
+        <Content>{Config.cannabisEligibilityModal.eligibleModalBody}</Content>
       </DialogTwoButton>
     </>
   );

@@ -135,147 +135,24 @@ collections:
       - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - label: "Cannabis License"
-    name: "cannabis-license"
+
+  - name: "cannabis-license"
+    label: "Cannabis License"
     delete: false
     create: false
     files:
-      - label: "Annual - Bottom-of-Task text"
-        name: "annual-bottom-of-task"
-        file: "content/src/display-content/cannabis-license/annual-bottom-of-task.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Annual - General Requirements"
-        name: "annual-general-requirements"
-        file: "content/src/display-content/cannabis-license/annual-general-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Conditional - Bottom-of-Task text"
-        name: "conditional-bottom-of-task"
-        file: "content/src/display-content/cannabis-license/conditional-bottom-of-task.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Conditional - General Requirements"
-        name: "conditional-general-requirements"
-        file: "content/src/display-content/cannabis-license/conditional-general-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Diversely-Owned Requirements"
-        name: "diversely-owned-requirements"
-        file: "content/src/display-content/cannabis-license/diversely-owned-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Impact-Zone Requirements"
-        name: "impact-zone-requirements"
-        file: "content/src/display-content/cannabis-license/impact-zone-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Microbusiness Requirements"
-        name: "microbusiness-requirements"
-        file: "content/src/display-content/cannabis-license/microbusiness-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Social Equity Requirements"
-        name: "social-equity-requirements"
-        file: "content/src/display-content/cannabis-license/social-equity-requirements.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-      - label: "Config"
-        name: "config"
-        file: "content/src/fieldConfig/config.json"
+      - label: Cannabis Eligibility Modal
+        name: cannabis-eligibility-modal
+        file: content/src/fieldConfig/config.json
         editor:
           preview: false
         fields:
-          - label: Cannabis Apply For License
-            name: cannabisApplyForLicense
+          - label: Cannabis Eligibility Modal
+            name: cannabisEligibilityModal
             collapsed: false
             widget: object
-            summary: "{{cannabisApplyForLicense}}"
+            summary: "{{cannabisEligibilityModal}}"
             fields:
-              - { label: Application Questions Text, name: applicationQuestionsText, widget: text }
-              - { label: Business Size Header, name: businessSizeHeader, widget: string }
-              - {
-                  label: Microbusiness Radio Question,
-                  name: microbusinessRadioQuestion,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Microbusiness Radio Yes,
-                  name: microbusinessRadioYes,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Microbusiness Radio No,
-                  name: microbusinessRadioNo,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
-              - {
-                  label: Priority Status Text,
-                  name: priorityStatusText,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Priority Status None Selected Text,
-                  name: priorityStatusNoneSelectedText,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Diversely Owned Label,
-                  name: diverselyOwnedLabel,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Diversely Owned Helper Text,
-                  name: diverselyOwnedHelperText,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Impact Zone Label,
-                  name: impactZoneLabel,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: SBE Label, name: sbeLabel, widget: string, hint: This field supports Markdown }
               - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
               - {
                   label: Eligible Modal Body,
@@ -285,21 +162,175 @@ collections:
                 }
               - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
               - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
+      - label: "Conditional License Task Metadata"
+        name: "applyForConditionalLicense-task"
+        file: "content/src/roadmaps/tasks/conditional-permit-cannabis.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "string" }
+          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: "Annual License Task Metadata"
+        name: "applyForAnnualLicense-task"
+        file: "content/src/roadmaps/tasks/annual-license-cannabis.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "string" }
+          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+
+      - label: "Tab 1 (Business Size and Priority Status)"
+        name: "cannabisLicense-1"
+        file: "content/src/fieldConfig/cannabis-license-tab1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Business Size and Priority Status
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - {
+                  label: Priority Status None Selected Text,
+                  name: priorityStatusNoneSelectedText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Application Questions Text,
+                  name: applicationQuestionsText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: Business Size Header, name: businessSizeHeader, widget: string }
+              - {
+                  label: Microbusiness Radio Question,
+                  name: microbusinessRadioQuestion,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio Yes,
+                  name: microbusinessRadioYes,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio No,
+                  name: microbusinessRadioNo,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
+              - {
+                  label: Priority Status Text,
+                  name: priorityStatusText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Diversely Owned Label,
+                  name: diverselyOwnedLabel,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Impact Zone Label,
+                  name: impactZoneLabel,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: SBE Label, name: sbeLabel, widget: markdown, hint: This field supports Markdown }
               - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
+
+      - label: "Tab 2 Annual (Defaults + Requirements)"
+        name: "cannabisLicenseAnnual-2"
+        file: "content/src/fieldConfig/cannabis-license-annual-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Annual Requirements
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
               - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
               - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
+              - { label: General Annual Requirements, name: annualGeneralRequirements, widget: markdown }
               - {
                   label: Microbusiness Application Needs,
                   name: microbusinessApplicationNeeds,
                   widget: string,
                 }
+              - { label: Microbusiness Requirements, name: microbusinessRequirements, widget: markdown }
               - {
                   label: Priority Status Application Needs,
                   name: priorityStatusApplicationNeeds,
                   widget: string,
                 }
-              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
+              - { label: Diversely Owned Requirements, name: diverselyOwnedRequirements, widget: markdown }
+              - { label: Impact Zone Requirements, name: impactZoneRequirements, widget: markdown }
+              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
               - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
+              - { label: Annual - After Requirements, name: annualBottomOfTask, widget: markdown }
+
+      - label: "Tab 2 Conditional (Conditional Specific Requirements)"
+        name: "cannabisLicenseConditional-2"
+        file: "content/src/fieldConfig/cannabis-license-conditional-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Conditional Requirements
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - {
+                  label: General Conditional Requirements,
+                  name: conditionalGeneralRequirements,
+                  widget: markdown,
+                }
+              - { label: Conditional - After Requirements, name: conditionalBottomOfTask, widget: markdown }
 
   - name: "cannabis-priority-status"
     label: "Cannabis Priority Status"
@@ -823,126 +854,6 @@ collections:
         name: "config"
         file: "content/src/fieldConfig/config.json"
         fields:
-          - label: Task Progress Card
-            name: taskProgressCard
-            collapsed: true
-            widget: object
-            summary: "{{taskProgressCard}}"
-            fields:
-              - { label: Optional Tasks Remaining (singular), name: optionalTasksSingular, widget: string }
-              - { label: Optional Tasks Remaining (plural), name: optionalTasksPlural, widget: string }
-              - { label: Required Tasks Remaining (singular), name: requiredTasksSingular, widget: string }
-              - { label: Required Tasks Remaining (plural), name: requiredTasksPlural, widget: string }
-          - label: Report An Issue Bar
-            name: reportAnIssueBar
-            collapsed: true
-            widget: object
-            summary: "{{reportAnIssueBar}}"
-            fields:
-              - { label: Report An Issue Bar Text, name: reportAnIssueBarText, widget: string }
-          - label: Feedback Modal
-            name: feedbackModal
-            collapsed: true
-            widget: object
-            summary: "{{feedbackModal}}"
-            fields:
-              - { label: Beta Form Link - Poppy, name: feedbackModalLinkStarting, widget: string }
-              - { label: Beta Form Link - Oscar, name: feedbackModalLinkOwning, widget: string }
-              - { label: Beta Modal Title, name: feedbackModalTitle, widget: string }
-              - { label: Beta Modal Body Text, name: feedbackModalBodyText, widget: string }
-              - {
-                  label: Beta Modal Intercom Button Text,
-                  name: feedbackModalIntercomButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Beta Modal Feedback Button Text,
-                  name: feedbackModalShareFeedbackButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Beta Modal Bug Report Button Text,
-                  name: feedbackModalReportIssueButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Beta Modal Feature Request Button Text,
-                  name: feedbackModalFeatureRequestButtonText,
-                  widget: string,
-                }
-
-              - { label: Feature Request Modal - Title, name: featureRequestModalHeadingText, widget: string }
-              - {
-                  label: Feature Request Modal - First Question,
-                  name: featureRequestModalBodyText,
-                  widget: string,
-                }
-              - {
-                  label: Feature Request Modal - Additional Text,
-                  name: featureRequestModalSecondBodyText,
-                  widget: string,
-                }
-              - {
-                  label: Feedback Modals - Generic Input Placeholder Text,
-                  name: feedbackPlaceholderText,
-                  widget: string,
-                }
-              - {
-                  label: Feedback Modals - Generic Input Error Text,
-                  name: feedbackInlineErrorText,
-                  widget: string,
-                }
-              - {
-                  label: Feedback Modals - Generic Submit Button Text,
-                  name: feedbackSubmitButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Feedback Modals - Generic Cancel Button Text,
-                  name: feedbackCancelButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Successful Submission Modal - Title,
-                  name: successfulSubmissionModalHeadingText,
-                  widget: string,
-                }
-              - { label: Report An Issue Modal - Title, name: reportIssueModalHeadingText, widget: string }
-              - {
-                  label: Report An Issue Modal - First Question,
-                  name: reportIssueModalSummaryBodyText,
-                  widget: string,
-                }
-              - {
-                  label: Report An Issue Modal - First Question Additional Text,
-                  name: reportIssueModalSummaryAdditionalBodyText,
-                  widget: string,
-                }
-              - {
-                  label: Report An Issue Modal - Second Question,
-                  name: reportIssueModalDetailBodyText,
-                  widget: string,
-                }
-              - {
-                  label: Report An Issue Modal - Second Question Additional Text,
-                  name: reportIssueModalDetailAdditionalBodyText,
-                  widget: string,
-                }
-              - {
-                  label: Successful Submission Modal - Body Text,
-                  name: successfulSubmissionModalBodyText,
-                  widget: string,
-                }
-              - {
-                  label: Successful Submission Modal - Back To Beta Modal Button Text,
-                  name: successfulSubmissionModalButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Unsuccessful Submission Alert Text,
-                  name: unsuccessfulSubmissionAlertText,
-                  widget: string,
-                }
           - label: Beta Bar
             name: betaBar
             collapsed: true
@@ -951,7 +862,6 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
-
           - label: Business Formation Defaults
             name: businessFormationDefaults
             collapsed: true
@@ -1661,6 +1571,109 @@ collections:
               - { label: Back To Roadmap Header, name: backToRoadmapHeader, widget: string }
               - { label: Back To Roadmap Text, name: backToRoadmapText, widget: string }
               - { label: Back To Roadmap Link Text, name: backToRoadmapLinkText, widget: string }
+          - label: Feedback Modal
+            name: feedbackModal
+            collapsed: true
+            widget: object
+            summary: "{{feedbackModal}}"
+            fields:
+              - { label: Beta Form Link - Poppy, name: feedbackModalLinkStarting, widget: string }
+              - { label: Beta Form Link - Oscar, name: feedbackModalLinkOwning, widget: string }
+              - { label: Beta Modal Title, name: feedbackModalTitle, widget: string }
+              - { label: Beta Modal Body Text, name: feedbackModalBodyText, widget: string }
+              - {
+                  label: Beta Modal Intercom Button Text,
+                  name: feedbackModalIntercomButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Beta Modal Feedback Button Text,
+                  name: feedbackModalShareFeedbackButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Beta Modal Bug Report Button Text,
+                  name: feedbackModalReportIssueButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Beta Modal Feature Request Button Text,
+                  name: feedbackModalFeatureRequestButtonText,
+                  widget: string,
+                }
+
+              - { label: Feature Request Modal - Title, name: featureRequestModalHeadingText, widget: string }
+              - {
+                  label: Feature Request Modal - First Question,
+                  name: featureRequestModalBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Feature Request Modal - Additional Text,
+                  name: featureRequestModalSecondBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Feedback Modals - Generic Input Placeholder Text,
+                  name: feedbackPlaceholderText,
+                  widget: string,
+                }
+              - {
+                  label: Feedback Modals - Generic Input Error Text,
+                  name: feedbackInlineErrorText,
+                  widget: string,
+                }
+              - {
+                  label: Feedback Modals - Generic Submit Button Text,
+                  name: feedbackSubmitButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Feedback Modals - Generic Cancel Button Text,
+                  name: feedbackCancelButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Successful Submission Modal - Title,
+                  name: successfulSubmissionModalHeadingText,
+                  widget: string,
+                }
+              - { label: Report An Issue Modal - Title, name: reportIssueModalHeadingText, widget: string }
+              - {
+                  label: Report An Issue Modal - First Question,
+                  name: reportIssueModalSummaryBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Report An Issue Modal - First Question Additional Text,
+                  name: reportIssueModalSummaryAdditionalBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Report An Issue Modal - Second Question,
+                  name: reportIssueModalDetailBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Report An Issue Modal - Second Question Additional Text,
+                  name: reportIssueModalDetailAdditionalBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Successful Submission Modal - Body Text,
+                  name: successfulSubmissionModalBodyText,
+                  widget: string,
+                }
+              - {
+                  label: Successful Submission Modal - Back To Beta Modal Button Text,
+                  name: successfulSubmissionModalButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Unsuccessful Submission Alert Text,
+                  name: unsuccessfulSubmissionAlertText,
+                  widget: string,
+                }
           - label: Filing Defaults
             name: filingDefaults
             collapsed: true
@@ -1805,7 +1818,13 @@ collections:
               - { label: Office External Text, name: officeExternalText, widget: string }
               - { label: Github Link, name: gitHubLink, widget: string }
               - { label: Twitter Link, name: twitterLink, widget: string }
-
+          - label: Report An Issue Bar
+            name: reportAnIssueBar
+            collapsed: true
+            widget: object
+            summary: "{{reportAnIssueBar}}"
+            fields:
+              - { label: Report An Issue Bar Text, name: reportAnIssueBarText, widget: string }
           - label: Roadmap Defaults
             name: roadmapDefaults
             collapsed: true
@@ -1910,15 +1929,6 @@ collections:
               - { label: Required Tag Text, name: requiredTagText, widget: string }
               - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
               - { label: Form Label, name: formNameText, widget: string }
-          - label: Task Progress
-            name: taskProgress
-            collapsed: true
-            widget: object
-            summary: "{{taskProgress}}"
-            fields:
-              - { label: Not Started Text, name: NOT_STARTED, widget: string }
-              - { label: In Progress Text, name: IN_PROGRESS, widget: string }
-              - { label: Completed Text, name: COMPLETED, widget: string }
           - label: Task - Business Name Search
             name: searchBusinessNameTask
             collapsed: true
@@ -1992,7 +2002,25 @@ collections:
                 }
               - { label: Status - Withdrawn, name: withdrawnPermitStatusText, widget: string }
               - { label: Tooltip Text, name: tooltipText, widget: text }
-
+          - label: Task Progress
+            name: taskProgress
+            collapsed: true
+            widget: object
+            summary: "{{taskProgress}}"
+            fields:
+              - { label: Not Started Text, name: NOT_STARTED, widget: string }
+              - { label: In Progress Text, name: IN_PROGRESS, widget: string }
+              - { label: Completed Text, name: COMPLETED, widget: string }
+          - label: Task Progress Card
+            name: taskProgressCard
+            collapsed: true
+            widget: object
+            summary: "{{taskProgressCard}}"
+            fields:
+              - { label: Optional Tasks Remaining (singular), name: optionalTasksSingular, widget: string }
+              - { label: Optional Tasks Remaining (plural), name: optionalTasksPlural, widget: string }
+              - { label: Required Tasks Remaining (singular), name: requiredTasksSingular, widget: string }
+              - { label: Required Tasks Remaining (plural), name: requiredTasksPlural, widget: string }
   - name: "roadmaps"
     label: "Industry Roadmaps"
     folder: "content/src/roadmaps/industries"

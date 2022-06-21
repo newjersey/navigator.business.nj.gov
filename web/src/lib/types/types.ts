@@ -24,17 +24,6 @@ export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS" | "RE
 
 export type FlowType = "OWNING" | "STARTING" | "FOREIGN";
 
-export type CannabisApplyForLicenseDisplayContent = {
-  annualGeneralRequirements: { contentMd: string };
-  conditionalGeneralRequirements: { contentMd: string };
-  diverselyOwnedRequirements: { contentMd: string };
-  impactZoneRequirements: { contentMd: string };
-  microbusinessRequirements: { contentMd: string };
-  socialEquityRequirements: { contentMd: string };
-  conditionalBottomOfTask: { contentMd: string };
-  annualBottomOfTask: { contentMd: string };
-};
-
 export type FormationDisplayContent = {
   introParagraph: { contentMd: string };
   businessNameCheck: { contentMd: string };
@@ -75,22 +64,9 @@ export type FormationDisplayContent = {
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
   formationDisplayContent: createEmptyFormationDisplayContent(),
-  cannabisApplyForLicenseDisplayContent: createEmptyCannabisApplyForLicenseDisplayContent(),
 });
 
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
-
-export const createEmptyCannabisApplyForLicenseDisplayContent =
-  (): CannabisApplyForLicenseDisplayContent => ({
-    annualGeneralRequirements: { contentMd: "" },
-    conditionalGeneralRequirements: { contentMd: "" },
-    diverselyOwnedRequirements: { contentMd: "" },
-    impactZoneRequirements: { contentMd: "" },
-    microbusinessRequirements: { contentMd: "" },
-    socialEquityRequirements: { contentMd: "" },
-    conditionalBottomOfTask: { contentMd: "" },
-    annualBottomOfTask: { contentMd: "" },
-  });
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap =>
   FormationLegalTypes.reduce((accumulator, curr) => {
@@ -306,7 +282,6 @@ export type County =
 export type FormationDisplayContentMap = Record<FormationLegalType, FormationDisplayContent>;
 export type TasksDisplayContent = {
   formationDisplayContent: FormationDisplayContentMap;
-  cannabisApplyForLicenseDisplayContent: CannabisApplyForLicenseDisplayContent;
 };
 
 export interface Roadmap {

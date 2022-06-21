@@ -125,18 +125,8 @@ const TaskPage = (props: Props): ReactElement => {
             "form-business-entity": businessFormationFeatureFlag(),
             "determine-naics-code": <NaicsCodeTask task={props.task} />,
             "priority-status-cannabis": <CannabisPriorityStatusTask task={props.task} />,
-            "conditional-permit-cannabis": (
-              <CannabisApplyForLicenseTask
-                task={props.task}
-                displayContent={props.displayContent.cannabisApplyForLicenseDisplayContent}
-              />
-            ),
-            "annual-license-cannabis": (
-              <CannabisApplyForLicenseTask
-                task={props.task}
-                displayContent={props.displayContent.cannabisApplyForLicenseDisplayContent}
-              />
-            ),
+            "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
+            "annual-license-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             default: getTaskBody(),
           })}
         </TaskSidebarPageLayout>
