@@ -175,7 +175,12 @@ export const RoadmapSidebarCard = (props: Props) => {
       >
         {props.card.id === "task-progress" && (
           <div className={`padding-bottom-205`}>
-            <BorderLinearProgress variant="determinate" color="secondary" value={progressBarValue()} />
+            <BorderLinearProgress
+              variant="determinate"
+              color="secondary"
+              value={progressBarValue()}
+              aria-label="Task progress bar"
+            />
           </div>
         )}
         <Content>{getContent()}</Content>
