@@ -4,6 +4,7 @@ header: ""
 imgPath: ""
 color: primary
 shadowColor: primary-light
+borderColor: primary
 hasCloseButton: false
 weight: 2
 ---

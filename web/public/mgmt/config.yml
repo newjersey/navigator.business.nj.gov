@@ -2887,13 +2887,22 @@ collections:
           label: "Color",
           name: "color",
           widget: "select",
+          required: true,
           options: ["primary", "accent-cool-darker", "roadmap-purple"],
         }
       - {
           label: "Shadow Color",
           name: "shadowColor",
           widget: "select",
+          required: false,
           options: ["roadmap-purple-light", "primary-light", "roadmap-blue-light"],
+        }
+      - {
+          label: "Border Color",
+          name: "borderColor",
+          widget: "select",
+          required: true,
+          options: ["accent-cool", "roadmap-purple", "primary", "accent-cool-darker"],
         }
 
   - name: "settings"

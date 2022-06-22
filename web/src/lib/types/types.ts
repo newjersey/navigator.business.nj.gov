@@ -391,6 +391,7 @@ export type SidebarCardContent = {
   imgPath: string;
   color: string;
   shadowColor: string;
+  borderColor: string;
   hasCloseButton: boolean;
   weight: number;
 };
