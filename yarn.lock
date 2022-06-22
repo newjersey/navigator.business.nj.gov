@@ -3610,7 +3610,7 @@ __metadata:
     "@emotion/react": 11.9.3
     "@emotion/styled": 11.9.3
     "@jest/types": 28.1.1
-    "@mdx-js/react": 2.1.1
+    "@mdx-js/react": 2.1.2
     "@mui/lab": 5.0.0-alpha.84
     "@mui/material": 5.8.2
     "@mui/styles": 5.8.0
@@ -3806,7 +3806,7 @@ __metadata:
     "@emotion/react": 11.9.3
     "@emotion/styled": 11.9.3
     "@jest/types": 28.1.1
-    "@mdx-js/react": 2.1.1
+    "@mdx-js/react": 2.1.2
     "@mui/lab": 5.0.0-alpha.84
     "@mui/material": 5.8.2
     "@mui/styles": 5.8.0
@@ -5751,15 +5751,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@mdx-js/react@npm:2.1.1"
+"@mdx-js/react@npm:2.1.2":
+  version: 2.1.2
+  resolution: "@mdx-js/react@npm:2.1.2"
   dependencies:
     "@types/mdx": ^2.0.0
     "@types/react": ">=16"
   peerDependencies:
     react: ">=16"
-  checksum: e6f1f0a3a7afa893c107744309a5d2a8654a0643c119bbe3d5ec3ad2ba31cf371e94f3dfe7331eb3aa9f3f4582594ec3f7dd11fc909560e512f95b35335ed34e
+  checksum: c1114c683403565f45366f43b3e71cd41f4f1c3f73147f447ba2517906400760139f315fe23220a3d633433d77d9a0a95753bb256b2cec392fb5c4a02947f25e
   languageName: node
   linkType: hard
 
