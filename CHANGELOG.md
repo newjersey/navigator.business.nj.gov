@@ -1,3 +1,10 @@
+## [3.12.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.12.2...v3.12.3) (2022-06-22)
+
+
+### Bug Fixes
+
+* enable formation for ccorp, scorp and llp ([f80847d](https://github.com/newjersey/navigator.business.nj.gov/commit/f80847d62c96c1f4687f36ac5af5410d20e25afe))
+
 ## [3.12.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.12.1...v3.12.2) (2022-06-21)
 
 
