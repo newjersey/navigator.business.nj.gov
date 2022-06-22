@@ -412,6 +412,7 @@ export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent
     imgPath: `some-img-path-${randomInt()}`,
     color: `some--color-${randomInt()}`,
     shadowColor: `some--shadow-color-${randomInt()}`,
+    borderColor: `some--border-color-${randomInt()}`,
     hasCloseButton: !!(randomInt() % 2),
     weight: randomInt() % 2,
     ...overrides,

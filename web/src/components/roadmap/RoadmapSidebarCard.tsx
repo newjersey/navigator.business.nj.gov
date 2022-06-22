@@ -17,7 +17,7 @@ type Props = {
 const BorderLinearProgress = styled(LinearProgress)(() => ({
   height: 11,
   borderRadius: 5,
-  border: "1px solid #2C608A",
+  border: "1px solid #0076D6",
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: "#D9E8F6",
   },
@@ -125,7 +125,7 @@ export const RoadmapSidebarCard = (props: Props) => {
 
   return (
     <div
-      className={`border radius-md border-${props.card.color} box-shadow-${props.card.shadowColor} margin-left-05 margin-bottom-3`}
+      className={`border radius-md border-${props.card.borderColor} box-shadow-${props.card.shadowColor} margin-left-05 margin-bottom-3`}
       {...{ "data-testid": props.card.id }}
     >
       {props.card.header && (
