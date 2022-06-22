@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd $(git rev-parse --show-toplevel)
+cd "$(git rev-parse --show-toplevel)"
 
 set -e
 
