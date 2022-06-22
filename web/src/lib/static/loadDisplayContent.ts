@@ -146,6 +146,7 @@ type RoadmapCardGrayMatter = {
   imgPath: string;
   color: string;
   shadowColor: string;
+  borderColor: string;
   hasCloseButton: boolean;
   weight: number;
 };
