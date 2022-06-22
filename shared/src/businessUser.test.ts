@@ -1,6 +1,34 @@
-import { decideABExperience } from "./businessUser";
+import { createEmptyUser, decideABExperience } from "./businessUser";
 
 describe("businessUser", () => {
+  describe("createEmptyUser", () => {
+    let mathRandom: jest.SpyInstance;
+
+    beforeEach(() => {
+      delete process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE;
+      mathRandom = jest.spyOn(global.Math, "random");
+    });
+
+    afterEach(() => {
+      delete process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE;
+      mathRandom.mockRestore();
+    });
+
+    it("returns the passed in AB Experience", () => {
+      process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE = "0";
+
+      const user = createEmptyUser("ExperienceB");
+      expect(user.abExperience).toBe("ExperienceB");
+    });
+
+    it("returns a determined AB Experience", () => {
+      process.env.AB_TESTING_EXPERIENCE_B_PERCENTAGE = "0";
+
+      const user = createEmptyUser();
+      expect(user.abExperience).toBe("ExperienceA");
+    });
+  });
+
   describe("decideABExperience", () => {
     let mathRandom: jest.SpyInstance;
 
