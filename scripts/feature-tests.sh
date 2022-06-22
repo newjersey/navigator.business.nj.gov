@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd $(git rev-parse --show-toplevel)
+cd "$(git rev-parse --show-toplevel)"
 
 shopt -s expand_aliases
 alias nc='npx nc'
