@@ -90,7 +90,7 @@
     "@storybook/preset-scss": "1.0.3",
     "@storybook/react": "6.5.9",
     "@storybook/storybook-deployer": "2.8.11",
-    "@swc/core": "1.2.203",
+    "@swc/core": "1.2.204",
     "@swc/jest": "0.2.21",
     "@testing-library/dom": "8.13.0",
     "@testing-library/jest-dom": "5.16.4",
