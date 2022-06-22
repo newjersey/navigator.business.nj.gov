@@ -9,7 +9,6 @@ import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { Screen } from "@testing-library/dom";
-import os from "os";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
@@ -123,15 +122,6 @@ export const getNumberOfMockCalls = <T, R>(fn: jest.MockInstance<T, R[]>): numbe
 
 export const randomElementFromArray = <T,>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
-};
-
-export const getPathSeparator = (): string => {
-  const isWin = os.platform() === "win32";
-  if (isWin) {
-    return "\\";
-  }
-
-  return "/";
 };
 
 export const markdownToText = (text: string): string => {

@@ -1,4 +1,4 @@
-import { Industries, LookupIndustryById } from "./industry";
+import { Industries, isIndustryIdGeneric, LookupIndustryById } from "./industry";
 
 describe("Industry Tests", () => {
   it("has industry records", () => {
@@ -26,6 +26,16 @@ describe("Industry Tests", () => {
 
     it("returns industry record when a valid id is supplied", () => {
       expect(LookupIndustryById("restaurant")?.id).toEqual("restaurant");
+    });
+  });
+
+  describe("isIndustryIdGeneric", () => {
+    it("returns true for generic industry", () => {
+      expect(isIndustryIdGeneric(LookupIndustryById("generic"))).toBe(true);
+    });
+
+    it("returns false for non-generic industry", () => {
+      expect(isIndustryIdGeneric(LookupIndustryById("restaurant"))).toBe(false);
     });
   });
 });
