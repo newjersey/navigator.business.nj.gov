@@ -2,7 +2,7 @@
 header: Uniform Bar Examination (UBE)
 slug: ube-attorney
 ---
-The UBE is a standardized test drafted by the National Conference of Bar Examiners (NCBE) and is uniformly administered, graded, and scored in all participating states.  
+The UBE is a standardized test drafted by the National Conference of Bar Examiners (NCBE). It's uniformly administered, graded, and scored in all participating states.  
 
 The UBE has three parts:
 - The Multistate Bar Examination (MBE)
