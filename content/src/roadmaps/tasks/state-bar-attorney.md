@@ -12,7 +12,7 @@ Only a member of the New Jersey Bar may legally practice law in New Jersey.
 ---
 ### Eligibility Criteria:
 - 18 years old at a minimum
-- Must have Juris Doctor degree in law from an accredited school
+- Must have a Juris Doctor degree in law from an accredited school
  
 ### Application Requirements
 - Passing grade on the New Jersey bar examination, or 
