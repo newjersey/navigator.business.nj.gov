@@ -3618,7 +3618,7 @@ __metadata:
     "@mui/lab": 5.0.0-alpha.87
     "@mui/material": 5.8.5
     "@mui/styles": 5.8.4
-    "@mui/system": ^5.8.5
+    "@mui/system": 5.8.5
     "@mui/x-date-pickers": 5.0.0-alpha.1
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
@@ -3822,7 +3822,7 @@ __metadata:
     "@mui/lab": 5.0.0-alpha.87
     "@mui/material": 5.8.5
     "@mui/styles": 5.8.4
-    "@mui/system": ^5.8.5
+    "@mui/system": 5.8.5
     "@mui/x-date-pickers": 5.0.0-alpha.1
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
@@ -5976,7 +5976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/system@npm:^5.8.5":
+"@mui/system@npm:5.8.5, @mui/system@npm:^5.8.5":
   version: 5.8.5
   resolution: "@mui/system@npm:5.8.5"
   dependencies:
