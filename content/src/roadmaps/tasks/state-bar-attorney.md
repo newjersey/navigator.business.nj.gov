@@ -1,7 +1,7 @@
 ---
 urlSlug: state-bar-attorney
 filename: state-bar-attorney
-name: "Apply for Admission to the State Bar "
+name: Apply for Admission to the State Bar Association
 id: state-bar-attorney
 callToActionLink: https://www.njbarexams.org/information-and-applications
 callToActionText: Apply to the State Bar
