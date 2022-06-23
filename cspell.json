@@ -73,7 +73,7 @@
     "NCARB",
     "NCEES",
     "Multistate",
-    "NCBE",
+    "NCBE"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
