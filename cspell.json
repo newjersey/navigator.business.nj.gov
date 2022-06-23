@@ -73,7 +73,9 @@
     "NCARB",
     "NCEES",
     "Multistate",
-    "NCBE"
+    "NCBE",
+    "Juris",
+    "MBRE"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
