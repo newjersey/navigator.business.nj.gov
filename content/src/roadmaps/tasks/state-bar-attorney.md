@@ -26,4 +26,4 @@ Only a member of the New Jersey Bar may legally practice law in New Jersey.
 - Pay any associated fees
  
 >**Once approved, you will have:**
->- The Bar will notify you via email with instructions on when to attend the ceremony to swear the Oath of Admission and sign the attorney’s roll. 
+>- The State Bar will notify you via email with instructions on when to attend the ceremony to swear the Oath of Admission and sign the attorney’s roll. 
