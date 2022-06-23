@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formationData createEmptyFormationAddress returns the correct object 1`] = `
+Object {
+  "addressCity": "",
+  "addressLine1": "",
+  "addressLine2": "",
+  "addressState": "",
+  "addressZipCode": "",
+  "name": "",
+  "signature": false,
+}
+`;
+
+exports[`formationData createEmptyFormationFormData returns the correct object 1`] = `
+Object {
+  "agentEmail": "",
+  "agentName": "",
+  "agentNumber": "",
+  "agentNumberOrManual": "NUMBER",
+  "agentOfficeAddressCity": "",
+  "agentOfficeAddressLine1": "",
+  "agentOfficeAddressLine2": "",
+  "agentOfficeAddressState": "NJ",
+  "agentOfficeAddressZipCode": "",
+  "agentUseAccountInfo": false,
+  "agentUseBusinessAddress": false,
+  "annualReportNotification": true,
+  "businessAddressCity": undefined,
+  "businessAddressLine1": "",
+  "businessAddressLine2": "",
+  "businessAddressState": "NJ",
+  "businessAddressZipCode": "",
+  "businessName": "",
+  "businessPurpose": "",
+  "businessStartDate": "",
+  "businessSuffix": undefined,
+  "businessTotalStock": "",
+  "certificateOfStanding": false,
+  "certifiedCopyOfFormationDocument": false,
+  "contactFirstName": "",
+  "contactLastName": "",
+  "contactPhoneNumber": "",
+  "corpWatchNotification": true,
+  "members": Array [],
+  "officialFormationDocument": true,
+  "paymentType": undefined,
+  "provisions": Array [],
+  "signers": Array [],
+}
+`;

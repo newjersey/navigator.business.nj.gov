@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
-import { parseDate, parseDateWithFormat } from "./dateHelpers";
+import { getCurrentDateFormatted, getLicenseDate, parseDate, parseDateWithFormat } from "./dateHelpers";
+import { randomInt } from "./intHelpers";
+import { LicenseEntity } from "./license";
 
 describe("dateHelpers", () => {
   describe("parseDate", () => {
@@ -13,6 +15,57 @@ describe("dateHelpers", () => {
     it("correctly parses the date", () => {
       const value = parseDateWithFormat("01-02-2010", "MM-DD-YYYY");
       expect(value).toStrictEqual(dayjs("2010-01-02"));
+    });
+  });
+
+  describe("getCurrentDateFormatted", () => {
+    it("returns the correctedly formatted date", () => {
+      const value = getCurrentDateFormatted("MM-DD-YYYY");
+      expect(value).toEqual(dayjs().format("MM-DD-YYYY"));
+    });
+  });
+
+  describe("getLicenseDate", () => {
+    let licenceData: LicenseEntity;
+
+    beforeEach(() => {
+      licenceData = {
+        fullName: `some-name-${randomInt()}`,
+        addressLine1: `some-address-${randomInt()}`,
+        addressCity: `some-city-${randomInt()}`,
+        addressState: `some-state-${randomInt()}`,
+        addressCounty: `some-county-${randomInt()}`,
+        addressZipCode: `some-zipcode-${randomInt()}`,
+        professionName: `some-profession-${randomInt()}`,
+        licenseType: `some-license-type${randomInt()}`,
+        applicationNumber: `some-application-number-${randomInt()}`,
+        licenseNumber: `some-license-number-${randomInt()}`,
+        licenseStatus: "Active",
+        issueDate: `20080404 000000.000${randomInt()}`,
+        expirationDate: `20091231 000000.000${randomInt()}`,
+        checklistItem: `some-item-${randomInt()}`,
+        checkoffStatus: "Completed",
+        dateThisStatus: `20100430 000000.000${randomInt()}`,
+      };
+    });
+
+    it("returns issue date when populated", () => {
+      expect(getLicenseDate(licenceData)).toEqual(parseDateWithFormat(licenceData.issueDate, "YYYYMMDD X"));
+    });
+
+    it("returns date this status when issue date is not populated", () => {
+      licenceData.issueDate = "";
+      expect(getLicenseDate(licenceData)).toEqual(
+        parseDateWithFormat(licenceData.dateThisStatus, "YYYYMMDD X")
+      );
+    });
+
+    it("returns expiration date when issue date is not populated", () => {
+      licenceData.issueDate = "";
+      licenceData.dateThisStatus = "";
+      expect(getLicenseDate(licenceData)).toEqual(
+        parseDateWithFormat(licenceData.expirationDate, "YYYYMMDD X")
+      );
     });
   });
 });
