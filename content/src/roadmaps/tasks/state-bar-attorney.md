@@ -16,7 +16,7 @@ Only a member of the New Jersey Bar may legally practice law in New Jersey.
  
 ### Application Requirements
 - Passing grade on the New Jersey bar examination, or 
-- Passing grade on the `Uniform Bar Examination (UBE)|ube-attorney` score, and
+- Passing grade on the Uniform Bar Examination (UBE) score, and
 - Passing grade on the Multistate Professional Responsibility Examination (MPRE)
 - Supplemental documentation (like police records or school transcripts) if you answered “Yes” to any questions related to moral character, criminal background, or education 
 - Criminal background check
