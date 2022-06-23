@@ -27,7 +27,6 @@ import { ReactElement, useMemo, useState } from "react";
 interface Props {
   open: boolean;
   handleClose: () => void;
-  onSave: () => void;
 }
 
 export const GraduationModal = (props: Props): ReactElement => {

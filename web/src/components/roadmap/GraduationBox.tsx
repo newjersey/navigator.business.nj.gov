@@ -39,7 +39,7 @@ export const GraduationBox = (): ReactElement => {
 
   return (
     <>
-      <GraduationModal open={modalOpen} handleClose={() => setModalOpen(false)} onSave={() => undefined} />
+      <GraduationModal open={modalOpen} handleClose={() => setModalOpen(false)} />
       <div
         className={`padding-3 bg-base-lightest radius-md ${
           isTabletAndUp
