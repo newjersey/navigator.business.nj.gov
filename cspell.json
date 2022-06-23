@@ -71,7 +71,9 @@
     "NCCAOM",
     "CLARB",
     "NCARB",
-    "NCEES"
+    "NCEES",
+    "Multistate",
+    "NCBE",
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
