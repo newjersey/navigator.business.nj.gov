@@ -76,6 +76,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@mui/x-date-pickers" },
+    },
+    {
+      from: {},
       to: { path: "@storybook/react" },
     },
     {
