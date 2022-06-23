@@ -36,6 +36,7 @@
     "@aws-sdk/client-dynamodb": "3.113.0",
     "@aws-sdk/client-s3": "3.113.0",
     "@aws-sdk/lib-dynamodb": "3.113.0",
+    "@aws-sdk/smithy-client": "3.110.0",
     "@aws-sdk/util-dynamodb": "3.113.0",
     "@businessnjgovnavigator/shared": "*",
     "@serverless/typescript": "3.19.0",
@@ -54,6 +55,7 @@
     "xml2js": "0.4.23"
   },
   "devDependencies": {
+    "@aws-sdk/types": "3.110.0",
     "@businessnjgovnavigator/shared": "*",
     "@jest/types": "28.1.1",
     "@types/cors": "2.8.12",
