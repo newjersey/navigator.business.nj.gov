@@ -3614,6 +3614,7 @@ __metadata:
     "@mui/lab": 5.0.0-alpha.87
     "@mui/material": 5.8.5
     "@mui/styles": 5.8.4
+    "@mui/x-date-pickers": 5.0.0-alpha.1
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
     "@semantic-release/changelog": 6.0.1
@@ -3810,6 +3811,7 @@ __metadata:
     "@mui/lab": 5.0.0-alpha.87
     "@mui/material": 5.8.5
     "@mui/styles": 5.8.4
+    "@mui/x-date-pickers": 5.0.0-alpha.1
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
     "@storybook/addon-actions": 6.5.9
