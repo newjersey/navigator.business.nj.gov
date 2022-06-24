@@ -62,19 +62,19 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("home-based business", () => {
-    it("adds non-home-based-business add-on if home-based business is false", async () => {
-      await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: false }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("non-home-based-business");
+    it("adds permanent-location-business add-on if home-based business is false", async () => {
+      await buildUserRoadmap(generateStartingProfile({ industryId: "generic", homeBasedBusiness: false }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
     });
 
-    it("does not add non-home-based-business add-on if home-based business is true", async () => {
+    it("does not add permanent-location-business add-on if home-based business is true", async () => {
       await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: true }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("non-home-based-business");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
     });
 
-    it("does not add non-home-based-business add-on if industry is food-truck", async () => {
+    it("does not add permanent-location-business add-on if industry does not allow permanent location", async () => {
       await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("non-home-based-business");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
     });
   });
 

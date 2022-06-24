@@ -1,6 +1,6 @@
 {
   "naicsCodes": "621399",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": true,

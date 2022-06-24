@@ -1,6 +1,6 @@
 {
   "naicsCodes": "323111, 323117, 323113",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
   "canBeReseller": true,

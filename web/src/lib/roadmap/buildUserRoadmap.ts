@@ -62,8 +62,8 @@ const getIndustryBasedAddOns = (profileData: ProfileData): string[] => {
   const addOns = [];
   const industry = LookupIndustryById(profileData.industryId);
 
-  if (!profileData.homeBasedBusiness && !industry.isMobileLocation) {
-    addOns.push("non-home-based-business");
+  if (industry.canHavePermanentLocation && !profileData.homeBasedBusiness) {
+    addOns.push("permanent-location-business");
   }
 
   if (profileData.legalStructureId === "s-corporation") {

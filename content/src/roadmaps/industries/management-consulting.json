@@ -1,6 +1,6 @@
 {
   "naicsCodes": "541611,541618",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "organizational-or-financial-management",
   "canBeReseller": false,

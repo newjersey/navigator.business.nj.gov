@@ -114,7 +114,7 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
 
 export const generateProfileData = (
   overrides: Partial<ProfileData>,
-  isMobileLocation?: boolean
+  canHavePermanentLocation?: boolean
 ): ProfileData => {
   const id = `some-id-${randomInt()}`;
   const persona = randomInt() % 2 ? "STARTING" : "OWNING";
@@ -122,7 +122,7 @@ export const generateProfileData = (
     businessPersona: persona,
     initialOnboardingFlow: persona,
     businessName: `some-business-name-${randomInt()}`,
-    industryId: randomIndustry(isMobileLocation).id,
+    industryId: randomIndustry(canHavePermanentLocation).id,
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
     liquorLicense: false,
@@ -632,9 +632,9 @@ export const randomOwnershipType = (): OwnershipType => {
   return ownershipTypes[randomIndex];
 };
 
-export const randomIndustry = (isMobileLocation = false): Industry => {
+export const randomIndustry = (canHavePermanentLocation = false): Industry => {
   const filteredIndustries = Industries.filter(
-    (x: Industry) => x.isMobileLocation === isMobileLocation && x.isEnabled
+    (x: Industry) => x.canHavePermanentLocation === canHavePermanentLocation && x.isEnabled
   );
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];

@@ -1,6 +1,6 @@
 {
   "naicsCodes": "531390, 523999",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "real-estate",
   "canBeReseller": true,

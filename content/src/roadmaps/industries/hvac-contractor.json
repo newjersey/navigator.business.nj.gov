@@ -1,6 +1,6 @@
 {
   "naicsCodes": "238220",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "professional-scientific-and-technical-services",
   "canBeReseller": true,

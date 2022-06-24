@@ -1,6 +1,6 @@
 {
   "naicsCodes": "541613,541820",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
   "canBeReseller": false,

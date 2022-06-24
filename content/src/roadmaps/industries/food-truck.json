@@ -1,6 +1,6 @@
 {
   "naicsCodes": "722330",
-  "isMobileLocation": true,
+  "canHavePermanentLocation": false,
   "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,

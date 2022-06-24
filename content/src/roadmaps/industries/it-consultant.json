@@ -1,6 +1,6 @@
 {
   "naicsCodes": "541690",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "technology",
   "canBeReseller": true,
