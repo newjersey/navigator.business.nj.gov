@@ -38,7 +38,7 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
   };
 };
 
-const determineLicenseStatus = (value: string): LicenseStatus => {
+export const determineLicenseStatus = (value: string): LicenseStatus => {
   switch (value) {
     case "Active":
       return "ACTIVE";
