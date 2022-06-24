@@ -14,4 +14,14 @@ describe("sortFundings", () => {
     expect(result.length).toEqual(5);
     expect(result).toEqual([funding2, funding1, funding3, funding4, funding5]);
   });
+
+  it("does not change the sorting if the names are the same", () => {
+    const funding1 = generateFunding({ name: "bca", status: "deadline" });
+    const funding2 = generateFunding({ name: "bca", status: "first come, first serve" });
+    const fundings = [funding1, funding2];
+
+    const result = sortFundings(fundings);
+    expect(result.length).toEqual(2);
+    expect(result).toEqual([funding1, funding2]);
+  });
 });
