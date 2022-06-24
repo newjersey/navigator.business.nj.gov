@@ -1,6 +1,6 @@
 {
   "naicsCodes": "456110",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": false,
   "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": false,

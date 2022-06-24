@@ -1,6 +1,6 @@
 {
   "naicsCodes": "541211",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "finance-and-insurance",
   "canBeReseller": false,

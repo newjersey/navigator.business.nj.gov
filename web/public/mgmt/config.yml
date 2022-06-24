@@ -2055,9 +2055,9 @@ collections:
         widget: boolean
         default: false
       - label: Mobile Location
-        name: isMobileLocation
+        name: canHavePermanentLocation
         widget: boolean
-        default: false
+        default: true
       - label: Reseller
         name: canBeReseller
         widget: boolean

@@ -8,7 +8,7 @@ export interface Industry {
   readonly isLiquorLicenseApplicable: boolean;
   readonly isCpaRequiredApplicable: boolean;
   readonly licenseType?: string;
-  readonly isMobileLocation: boolean;
+  readonly canHavePermanentLocation: boolean;
   readonly canBeReseller: boolean;
   readonly additionalSearchTerms?: string;
   readonly defaultSectorId?: string;
@@ -38,7 +38,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       canBeHomeBased: false,
       isLiquorLicenseApplicable: false,
       isCpaRequiredApplicable: false,
-      isMobileLocation: false,
+      canHavePermanentLocation: true,
       canBeReseller: true,
       roadmapSteps: [],
       naicsCodes: "",

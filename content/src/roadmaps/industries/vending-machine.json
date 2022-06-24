@@ -1,5 +1,5 @@
 {
-  "isMobileLocation": false,
+  "canHavePermanentLocation": false,
   "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,

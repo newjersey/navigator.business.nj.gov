@@ -1,6 +1,6 @@
 {
   "naicsCodes": "541120",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": false,

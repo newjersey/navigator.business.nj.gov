@@ -1,6 +1,6 @@
 {
   "naicsCodes": "492110, 491110, 492210",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,
