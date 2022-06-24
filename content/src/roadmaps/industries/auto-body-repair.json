@@ -1,6 +1,6 @@
 {
   "naicsCodes": "811121, 811111, 811198, 811114",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": false,
   "defaultSectorId": "other-services",
   "canBeReseller": true,

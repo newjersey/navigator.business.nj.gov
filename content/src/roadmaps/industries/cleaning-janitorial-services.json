@@ -1,6 +1,6 @@
 {
   "naicsCodes": "561720",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,

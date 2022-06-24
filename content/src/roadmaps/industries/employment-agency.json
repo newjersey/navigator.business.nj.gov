@@ -1,6 +1,6 @@
 {
   "naicsCodes": "561311",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "administrative-and-employment-services",
   "canBeReseller": true,

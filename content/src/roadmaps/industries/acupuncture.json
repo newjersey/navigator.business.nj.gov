@@ -1,5 +1,5 @@
 {
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,

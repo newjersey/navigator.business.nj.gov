@@ -1,5 +1,5 @@
 {
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": false,
   "defaultSectorId": "construction",
   "canBeReseller": false,

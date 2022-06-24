@@ -1,6 +1,6 @@
 {
   "naicsCodes": "459991",
-  "isMobileLocation": false,
+  "canHavePermanentLocation": true,
   "canBeHomeBased": false,
   "defaultSectorId": "cannabis",
   "canBeReseller": false,
