@@ -1,15 +1,17 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
+import { RoadmapContext } from "@/contexts/roadmapContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { LookupIndustryById } from "@businessnjgovnavigator/shared";
+import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useMemo, useState } from "react";
+import React, { ReactElement, useContext, useMemo, useState } from "react";
 
 interface Props {
   onSave: () => void;
@@ -18,6 +20,7 @@ interface Props {
 }
 
 export const NaicsCodeInput = (props: Props): ReactElement => {
+  const { setRoadmap } = useContext(RoadmapContext);
   type NaicsErrorTypes = "length" | "invalid";
   const errorMessages: Record<NaicsErrorTypes, string> = {
     invalid: Config.determineNaicsCode.invalidValidationErrorText,
@@ -52,7 +55,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     if (naicsCodes.length === 0) setDisplayInput(true);
   }, userData);
 
-  const saveNaicsCode = (): void => {
+  const saveNaicsCode = async (): Promise<void> => {
     if (!userData) return;
 
     if (naicsCode?.length !== LENGTH) {
@@ -67,7 +70,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
 
     setIsInvalid(undefined);
     setIsLoading(true);
-    update({
+    const updatedUserData: UserData = {
       ...userData,
       profileData: {
         ...userData.profileData,
@@ -77,14 +80,17 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
         ...userData.taskProgress,
         [props.task.id]: "COMPLETED",
       },
-    })
-      .then(() => {
-        setIsLoading(false);
-        props.onSave();
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
+    };
+    try {
+      await update(updatedUserData);
+
+      setIsLoading(false);
+      props.onSave();
+      const newRoadmap = await buildUserRoadmap(updatedUserData.profileData);
+      setRoadmap(newRoadmap);
+    } catch {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (value: string): void => {
