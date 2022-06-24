@@ -42,16 +42,18 @@ export const RoadmapSidebarCard = (props: Props) => {
     for (const step of roadmap.steps) {
       totalSumOfTasks += step.tasks.length;
     }
-
     return totalSumOfTasks;
   };
 
   const tasksCompleted = (): number => {
     if (!userData) return 0;
+    if (!roadmap) return 1;
     let totalTasksCompleted = 0;
-    for (const status of Object.values(userData.taskProgress)) {
-      if (status === "COMPLETED") {
-        totalTasksCompleted += 1;
+    for (const step of roadmap.steps) {
+      for (const task of step.tasks) {
+        if (userData.taskProgress[task.id] === "COMPLETED") {
+          totalTasksCompleted += 1;
+        }
       }
     }
     return totalTasksCompleted;
